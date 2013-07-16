@@ -1,0 +1,8 @@
+*.so
+*.o
+*~
+*.swp
+*.pyc
+/scene_import/build
+/scene_import/data
+deprecated
