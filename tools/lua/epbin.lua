@@ -232,7 +232,9 @@ local function _load(filename, func)
 end
 
 local function load_png(filename)
-	return _load(filename..".png", png.read)
+	return _load(filename..".png", function (name)
+		return png.read(name, model)
+		end)
 end
 
 local function load_ppm(filename)
@@ -266,7 +268,7 @@ local gm_filename, gm_load = nil, nil
 if model == "-ppm" then
 	gm_load = load_ppm
 	gm_filename = filename.."."
-elseif model =="-png" then
+elseif model =="-png8"  or model=="-png4" then
 	gm_load = load_png
 	gm_filename = filename
 else

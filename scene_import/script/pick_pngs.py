@@ -26,7 +26,8 @@ def handler(sheet_name, line_tokens, results):
         name = tokens[5]
         if not name:
             continue
-        results.append(name)
+        pack_index = tokens[6]
+        results.append((name, pack_index))
 
 def do_pick_pngs(raw_png_root, xls_filepath, output_root):
     raw_data_map = {}
@@ -61,13 +62,17 @@ def do_pick_pngs(raw_png_root, xls_filepath, output_root):
     run_cmd(u'mkdir "%s"' % output_root)
 
 
-    for name in all_files:
+    for name, pack_index in all_files:
         key = name.lower() + ".png"
         # print name
         # print raw_data_map[key]
 
+        pack_dir = os.path.join(output_root, 'pack_%d' % pack_index)
+        if not os.path.isdir(pack_dir):
+            run_cmd(u'mkdir "%s"' % pack_dir)
+
         src = raw_data_map[key]
-        dst = os.path.join(output_root, name+".png")
+        dst = os.path.join(pack_dir, name+".png")
         # print "src:", src
         # print "dst:", dst
 

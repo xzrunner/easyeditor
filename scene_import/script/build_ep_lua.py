@@ -2,7 +2,7 @@
 
 import os, sys
 from xls_loader import load_xls
-from tpack import frames, indexes
+from tpack import tex_count, frames, indexes
 from id_service import set_last_id
 from output import open_output, close_output, out
 from part_collections import register_part, get_part
@@ -19,7 +19,7 @@ from picture import Picture
 def do_build_ep_lua(output_filename, comp_cfg_xls, anim_cfg_xls):
     open_output(output_filename)
 
-    out("texture(1)")
+    out("texture(%d)" % tex_count)
 
     # ======================================================================
     #

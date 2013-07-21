@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os
+import os, sys
 
 root = ur'D:\dev_coco\coco-tools\scene_import'
 share_root = ur'e:\share\coc'
@@ -9,7 +9,7 @@ comp_cfg_xls = os.path.join(root, ur'data\xls\场景建筑-图素表.xls')
 anim_cfg_xls = os.path.join(root, ur'data\xls\场景建筑-动画表.xls')
 picked_png_root = os.path.join(root, ur'build\pngs')
 
-tpack_png = os.path.join(root, ur"build\tex_lua_for_ep\buildings21.png")
+tpack_png = os.path.join(root, ur"build\tex_lua_for_ep\buildings2.png")
 tpack_lua = os.path.join(root, ur"build\tex_lua_for_ep\tpack.lua")
 
 epgen_lua = os.path.join(root, ur"build\tex_lua_for_ep\buildings2.lua")
@@ -35,7 +35,10 @@ print "============================================================"
 print
 
 from pack_pngs import do_pack_pngs
-do_pack_pngs(tpack_png, tpack_lua, picked_png_root)
+ok, lua_list = do_pack_pngs(tpack_png, tpack_lua, picked_png_root)
+if not ok:
+    print "pack_pngs error!"
+    sys.exit(1)
 
 print
 print "============================================================"
@@ -43,7 +46,8 @@ print "generate: tpack.py"
 print "============================================================"
 print
 
-os.system('%s build_tpack_py.lua "%s" tpack.py' % (lua_exe, tpack_lua))
+os.system('%s build_tpack_py.lua tpack.py %s' % (lua_exe,
+    ' '.join(['"%s"' % n for n in lua_list])))
 
 print
 print "============================================================"
@@ -63,7 +67,7 @@ print
 if os.path.isfile(epgen_ep):
     os.system('del /Q/F "%s"' % epgen_ep)
 
-os.system('%s "%s" -png "%s"' % (lua_exe, epgen_script, epgen_lua))
+os.system('%s "%s" -png8 "%s"' % (lua_exe, epgen_script, epgen_lua))
 
 print
 print "============================================================"

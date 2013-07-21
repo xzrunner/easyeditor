@@ -11,9 +11,9 @@ OUT_SCALE = 10.0
 
 class Picture(object):
     def __init__(self, name, index, frame):
+        self.tex = frame['tex']
         self.name = name
         self.index = index
-        self.tex = 0
 
         x, y, w, h = frame['x'], frame['y'], frame['width'], frame['height']
         self.src = (x, y, x+w, y+h)

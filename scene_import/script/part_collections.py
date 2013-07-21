@@ -8,5 +8,6 @@ def register_part(name, ap):
     d[name] = ap
 
 def get_part(name):
-    assert(name in d)
+    if name not in d:
+        raise Exception("part '%s' not found" % name)
     return d[name]
