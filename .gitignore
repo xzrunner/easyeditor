@@ -3,6 +3,7 @@
 *~
 *.swp
 *.pyc
+/characters_import/characters2*
 /scene_import/build
 /scene_import/data
 /scene_import/script/tpack.py
