@@ -7,4 +7,5 @@
 /scene_import/build
 /scene_import/data
 /scene_import/script/tpack.py
+/background_import/data/*.ep
 deprecated
