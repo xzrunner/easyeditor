@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from id_service import alloc_id
 from tpack import frames, indexes
 from part_collections import get_part
+from picture import Picture
 
 class AnimationProto(object):
     def __init__(self):
@@ -14,8 +16,27 @@ class AnimationProto(object):
     def __repr__(self):
         return "[AnimationProto %d - %s]" % ((self.id or 0), (self.export or "?"))
 
+    def extract_pic(self, all_pictures, pic_map):
+        for comp in self.components:
+            if comp['type'] != u'图片':
+                continue
+            pic_name = comp['name']
+            pic_mirror = comp['mirror']
+            pic_key = "%s:%s" % (pic_name, pic_mirror)
+            if pic_key in pic_map:
+                comp['pic'] = pic_map[pic_key]
+            else:
+                p = Picture(pic_name, pic_mirror)
+                comp['pic'] = p
+                pic_map[pic_key] = p
+                all_pictures.append(p)
+
+    def alloc_id(self):
+        self.id = alloc_id()
+
     def output(self, out):
         # print self
+        assert(self.id)
 
         out("animation {")
 
@@ -58,9 +79,10 @@ class AnimationProto(object):
         comp_name = comp['name']
 
         if comp_type == u'图片':
-            assert(comp_name in indexes)
-            comp_id = indexes[comp_name]
-            return None, comp_id
+            return None, comp['pic'].id
+            # assert(comp_name in indexes)
+            # comp_id = indexes[comp_name]
+            # return None, comp_id
         elif comp_type == u'turret部件':
             ref_ap = get_part(comp_name)
             return "turret", ref_ap.id

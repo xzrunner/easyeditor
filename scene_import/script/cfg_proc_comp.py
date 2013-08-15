@@ -1,60 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from id_service import alloc_id
 from animation_proto import AnimationProto
-
-# def parser1(line_tokens):
-#     COL_ID = 0
-#     COL_NAME = 1
-#     COL_DISABLE = 2
-#     COL_LEVEL = 3
-#     COL_COMP_INDEX = 4
-#     COL_COMP_TYPE = 5
-#     COL_COMP_NAME = 6
-# 
-#     data = type("Data", (object,), dict
-#             ( id = None
-#             , disable = None
-#             , level = None
-#             , components = []
-#             , results = []
-#             ))
-# 
-#     def resolve(data):
-#         if data.level and data.disable != u'是':
-#             ap = AnimationProto()
-#             ap.id = alloc_id()
-#             ap.export = "building_%d_lv%d" % (data.id, data.level)
-#             ap.components = data.components
-#             data.results.append(ap)
-#             id_animation_map[ap.id] = ap
-#         data.level = None
-#         data.components = []
-# 
-#     line_tokens = line_tokens[2:] # skip header
-#     for row, tokens in enumerate(line_tokens):
-#         if tokens[COL_LEVEL]:
-#             resolve(data)
-#             data.level = tokens[COL_LEVEL]
-# 
-#         if tokens[COL_ID]:
-#             data.id = tokens[COL_ID]
-#             data.disable = tokens[COL_DISABLE]
-# 
-#         if tokens[COL_COMP_NAME]:
-#             data.components.append({
-#                 'index': int(tokens[COL_COMP_INDEX]) - 1,
-#                 'type':  tokens[COL_COMP_TYPE],
-#                 'name':  tokens[COL_COMP_NAME],
-#                 })
-# 
-#     return data.results
-# 
-# def handler1(sheet_name, line_tokens, all_animations):
-#     results = parser1(line_tokens)
-#     from pprint import pprint
-#     pprint(results)
-#     all_animations.extend(results)
 
 def parser(line_tokens):
     COL_TYPENAME = 0
@@ -62,6 +8,7 @@ def parser(line_tokens):
     COL_INDEX = 3
     COL_TYPE = 4
     COL_NAME = 5
+    COL_MIRROR = 7
 
     data = type("Data", (object,), dict
             ( typename = None
@@ -73,7 +20,6 @@ def parser(line_tokens):
     def resolve(data):
         if data.typename and data.status != u'禁用':
             ap = AnimationProto()
-            ap.id = alloc_id()
             if data.status == u'导出':
                 ap.export = data.typename
             ap.typename = data.typename
@@ -97,6 +43,8 @@ def parser(line_tokens):
                 'index': int(tokens[COL_INDEX]) - 1,
                 'type': tokens[COL_TYPE],
                 'name': tokens[COL_NAME],
+                'mirror': tokens[COL_MIRROR] == 1,
+                'pic': None,
                 })
     resolve(data)
 

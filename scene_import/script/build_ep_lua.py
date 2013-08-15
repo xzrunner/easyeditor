@@ -6,7 +6,7 @@ from tpack import tex_count, frames, indexes
 from id_service import set_last_id
 from output import open_output, close_output, out
 from part_collections import register_part, get_part
-from picture import Picture
+# from picture import Picture
 
 # CFG_ROOT = ur'..\data\xls'
 # COMP_FILE = u'场景建筑-图素表.xls'
@@ -27,14 +27,14 @@ def do_build_ep_lua(output_filename, comp_cfg_xls, anim_cfg_xls):
     #
     # ======================================================================
 
-    pic_index_name_map = {}
-    for name, index in indexes.iteritems():
-        pic_index_name_map[index] = name
+    # pic_index_name_map = {}
+    # for name, index in indexes.iteritems():
+    #     pic_index_name_map[index] = name
 
-    for i, frame in enumerate(frames):
-        name = pic_index_name_map[i]
-        set_last_id(i)
-        Picture(name, i, frame).output(out)
+    # for i, frame in enumerate(frames):
+    #     name = pic_index_name_map[i]
+    #     set_last_id(i)
+    #     Picture(name, i, frame).output(out)
 
     # ======================================================================
     #
@@ -65,6 +65,21 @@ def do_build_ep_lua(output_filename, comp_cfg_xls, anim_cfg_xls):
             print("====", info['typename'])
             ap = get_part(info['typename'])
             ap.actions = info['actions']
+
+    all_pictures = []
+    pic_map = {}
+
+    for ap in all_animations:
+        ap.extract_pic(all_pictures, pic_map)
+
+    for pic in all_pictures:
+        pic.alloc_id()
+
+    for ap in all_animations:
+        ap.alloc_id()
+
+    for pic in all_pictures:
+        pic.output(out)
 
     for ap in all_animations:
         ap.output(out)
