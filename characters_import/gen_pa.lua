@@ -1,6 +1,7 @@
 local animation = require 'animation'
+local texture = require 'gen_texture'
 local fd = io.open(arg[1]..'.lua', 'w')
-local multiple = 10 
+local multiple = 8 
 local _sf = string.format
 
 local function _str2id(sheetInfo_list, str)
@@ -68,36 +69,12 @@ local function write_animation(sheetInfo_list, fd, ani_name, ani_table, id)
 	fd:write('}')
 end
 
-
-local function get_texture_number()
-	local ret = 1
-	local file = arg[1]..'1.lua'
-	local  _fd=io.open(file)
-	if not _fd then
-		error('not find '..file)
-	end
-
-	_fd:close()
-	while true do
-	 	_fd=io.open(file) 
-		if not _fd then
-			break
-		end
-		_fd:close()
-		ret = ret+1
-		file = arg[1]..ret..'.lua'
-	end
-
-	return ret-1 
-end
-
 local function gen_texture_list()
 	local sheetInfo_list = {}
-	local texture_number = get_texture_number()
 	local count = 0
-	for i=1,texture_number do
-		local st = require(arg[1]..i)
-		st.name = arg[1]..i..'.lua'
+	for i=1,#texture do
+		local st = require(texture[i])
+		st.name = texture[i]..'.lua'
 		st.pic_begin_id = count
 		sheetInfo_list[i] = st
 		count = count + #(st.sheet.frames)

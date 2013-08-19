@@ -99,7 +99,7 @@ require 'characters_sc'
 
 
 local  ct = {
-	-- {name = '2001dashi', lv_count = 1, action = {'run', 'work'}},
+	{name = '2001dashi', m_name = 'worker', lv_count = 1, action = {'run', 'build1', 'build2', 'idle1', 'idle2', 'idle3'}},
 	-- {name = '2002jumin', lv_count = 1, action  = {'stand', 'run'}},
 	--	{name = '2011dapeng', m_name = 'dragon3', lv_count = 3, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
 	{name = '2003daoke', m_name ='barbarian6', lv_count = 6, action = {'stand', 'run', 'attack1','attack2',  'cheer', }},

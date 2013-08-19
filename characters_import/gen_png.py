@@ -4,7 +4,7 @@ import shutil
 import time
 from hashlib import md5
 
-ani_page = 3
+ani_page = 4
 target_path = sys.argv[1]
 
 
@@ -38,6 +38,15 @@ def gen_md5_luafile(target_path):
 	print("gen md5 luafile")
 	file.close()
 
+def gen_texture_luafile(file_list):
+	file = open('gen_texture.lua', "w")
+	file.write('return {\n')
+	for texture_file in file_list:
+		file.write('\t "%s",\n' % (texture_file))
+	file.write('\n}')
+	print('gen texture luafile')
+	file.close()
+
 def _gen_ani(target_path):
 	cmd = 'lua52 gen_fl.lua %s' % (target_path)
 	print(cmd)
@@ -45,17 +54,17 @@ def _gen_ani(target_path):
 
 def _gen_dir(target_path):
 	ret_list = []
-	_i = 1
+	_i = 0
 	os.mkdir(tmp_dir)
-	_gen_path = '%s/tc%d/' % (tmp_dir, _i)
-	ret_list.append(_gen_path)		
+	# _gen_path = '%s/tc%d/' % (tmp_dir, _i)
+	# ret_list.append(_gen_path)		
 	# os.mkdir(_gen_path)
 
 	count = 1
 	for _dir in os.listdir(target_path):
 		p_dir = target_path + '/' + _dir
 		if os.path.isdir(p_dir):
-			if count%(ani_page+1) == 0:
+			if count%(ani_page) == 0:
 				_i = _i + 1
 				_gen_path = '%s/tc%d/' % (tmp_dir, _i)
 				ret_list.append(_gen_path)
@@ -74,11 +83,14 @@ def  _gen_png(tc_list):
 	ret_list = []
 	count = 1
 	for tc in tc_list:
-		cmd = 'TexturePacker --width 2048 --height 2048 --algorithm MaxRects --maxrects-heuristics Best --pack-mode Best --premultiply-alpha  --sheet ./characters2%d.png --texture-format png  --data ./characters2%d.lua  --format  corona-imagesheet --scale 0.5  %s' % (count, count, tc)
-		ret_list.append('./characters2%d.png' % (count))
-		count = count + 1
+		cmd = 'TexturePacker  --algorithm MaxRects --maxrects-heuristics Best --pack-mode Best --premultiply-alpha  --sheet ./characters2%d.png --texture-format png  --data ./characters2%d.lua  --format  corona-imagesheet --scale 0.7  %s' % (count, count, tc)
+		l_file = './characters2%d.lua' %(count)
 		print(cmd)
 		os.system(cmd)
+		if os.path.isfile(l_file):
+			print('append %s file.' % (l_file))
+			ret_list.append('characters2%d' %(count))
+			count = count + 1
 	return ret_list
 
 def _gen_lua():
@@ -104,7 +116,10 @@ _gen_ani(target_path)
 tc_list = _gen_dir(target_path)
 
 # gen png file
-png_list = _gen_png(tc_list)
+texture_list = _gen_png(tc_list)
+
+# gen texture lua file
+gen_texture_luafile(texture_list)
 
 #gen lua file
 _gen_lua()
