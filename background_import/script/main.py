@@ -13,12 +13,23 @@ raw_png_root = os.path.join(root, ur'data\rawpngs')
 # tpack_lua = os.path.join(root, ur"build\tex_lua_for_ep\tpack.lua")
 
 # src_epgen_lua = os.path.join(root, ur"data\lua_for_ep\background_player2.lua")
-epgen_lua = os.path.join(root, ur"data\background_player2.lua")
-epgen_ep  = os.path.join(root, ur"data\background_player2.ep")
+# epgen_lua = 
+# epgen_ep  = 
 epgen_script = os.path.join(root, ur"..\tools\lua\epbin.lua")
 epgen_share_dir = os.path.join(share_root, ur"ep")
 
 lua_exe = os.path.join(root, ur"..\tools\lua\lua52.exe")
+
+work_items = [
+    {
+        'lua': os.path.join(root, ur"data\background_player2.lua"),
+        'ep': os.path.join(root, ur"data\background_player2.ep"),
+    },
+    {
+        'lua': os.path.join(root, ur"data\background_player3.lua"),
+        'ep': os.path.join(root, ur"data\background_player3.ep"),
+    },
+]
 
 # print
 # print "============================================================"
@@ -59,22 +70,27 @@ lua_exe = os.path.join(root, ur"..\tools\lua\lua52.exe")
 # 
 # os.sysmte('copy /Y "%s" "%s"' % (src_epgen_lua, epgen_lua))
 
-print
-print "============================================================"
-print "generate: buildings2.ep"
-print "============================================================"
-print
 
-if os.path.isfile(epgen_ep):
-    os.system('del /Q/F "%s"' % epgen_ep)
+for item in work_items:
+    epgen_ep = item['ep']
+    epgen_lua = item['lua']
 
-os.system('%s "%s" -png8 "%s"' % (lua_exe, epgen_script, epgen_lua))
+    print
+    print "============================================================"
+    print "generate: %s" % epgen_ep
+    print "============================================================"
+    print
 
-print
-print "============================================================"
-print "copy: buildings2.ep to share folder"
-print "============================================================"
-print
+    if os.path.isfile(epgen_ep):
+        os.system('del /Q/F "%s"' % epgen_ep)
 
-os.system('copy "%s" "%s"' % (epgen_ep, epgen_share_dir))
+    os.system('%s "%s" -png8 "%s"' % (lua_exe, epgen_script, epgen_lua))
+
+    print
+    print "============================================================"
+    print "copy: %s to %s" % (epgen_ep, epgen_share_dir)
+    print "============================================================"
+    print
+
+    os.system('copy "%s" "%s"' % (epgen_ep, epgen_share_dir))
 

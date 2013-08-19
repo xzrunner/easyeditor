@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from id_service import alloc_id
+from tpack import tex_count, frames, indexes
+
 PACK_SCALE = 0.5
 OUT_SCALE = 8.0
 
@@ -10,10 +13,15 @@ OUT_SCALE = 8.0
 # ======================================================================
 
 class Picture(object):
-    def __init__(self, name, index, frame):
-        self.tex = frame['tex']
+    def __init__(self, name, mirror):
         self.name = name
-        self.index = index
+        self.id = None
+        self.mirror = mirror
+
+        assert(name in indexes)
+
+        frame = frames[indexes[name]]
+        self.tex = frame['tex']
 
         x, y, w, h = frame['x'], frame['y'], frame['width'], frame['height']
         self.src = (x, y, x+w, y+h)
@@ -36,13 +44,20 @@ class Picture(object):
         assert(xx2 % 1 == 0)
         assert(yy2 % 1 == 0)
 
-        self.screen = (xx1, yy1, xx2, yy2)
+        if mirror:
+            self.screen = (xx2, yy1, xx1, yy2)
+        else:
+            self.screen = (xx1, yy1, xx2, yy2)
+
+    def alloc_id(self):
+        self.id = alloc_id()
 
     def output(self, out):
+        assert(self.id)
         x11, y11, x12, y12 = self.src
         x21, y21, x22, y22 = self.screen
         out('picture { -- %s' % self.name)
-        out("id = %d," % self.index, 1)
+        out("id = %d," % self.id, 1)
         out("{ tex = %d, src = { %d,%d, %d,%d, %d,%d, %d,%d }, screen = { %d,%d, %d,%d, %d,%d, %d,%d }}," % (self.tex,
                 x11,y11, x12,y11, x12,y12, x11,y12,
                 x21,y21, x22,y21, x22,y22, x21,y22), 1)
