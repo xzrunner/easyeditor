@@ -26,8 +26,20 @@ ani_page_list = [
 
 ]
 
+ani_map = {}
+for l in ani_page_list:
+	for k in l:
+		ani_map[k] = True
 
 tmp_dir = './tmp_gen'
+
+def rm_ani(target_path):
+	dir_list = os.listdir(target_path)
+	for f in dir_list:
+		path = target_path + '/'+f
+		if os.path.isdir(path) and (not (f in ani_map.keys())):
+			print('rm  ani', path)
+			shutil.rmtree(path)
 
 def md5_file(file_name):
 	m = md5()
@@ -115,12 +127,15 @@ def _gen_ep():
 	print(cmd)
 	os.system(cmd)
 
+#del ani
+rm_ani(target_path)
 
 # gen md5 lua file
 gen_md5_luafile(target_path)
 
 # gen animation lua file
 _gen_ani(target_path)
+
 
 # gen temp dir & copy png
 tc_list = _gen_dir(target_path)

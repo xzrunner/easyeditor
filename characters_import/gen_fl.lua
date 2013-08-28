@@ -170,7 +170,9 @@ fd:close()
 
 -- del repeat pic
 for i,v in ipairs(re) do
-	local cmd = 'rm -rf '..v[2]
+	-- local cmd = 'rm -rf '..v[2]
+	local file = string.gsub(v[2], '/', '\\')
+	local cmd = _sf('del /Q/F "%s"', file)
 	print(cmd)
 	os.execute(cmd)
 end
