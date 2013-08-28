@@ -1,7 +1,7 @@
 local animation = require 'animation'
 local texture = require 'gen_texture'
 local fd = io.open(arg[1]..'.lua', 'w')
-local multiple = 8 
+local multiple = 10 
 local _sf = string.format
 
 local function _str2id(sheetInfo_list, str)
