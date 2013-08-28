@@ -3,7 +3,7 @@ local md5 = require 'gen_md5'
 local gf =  require 'gen_frame'
 local _sf = string.format
 
-local shadow = 'shadow.tga'
+local shadow = 'shadow'
 -- local export_path = './export_characters/tc'
 local export_path = arg[1]
 
