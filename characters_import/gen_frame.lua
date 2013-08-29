@@ -99,18 +99,18 @@ require 'characters_sc'
 
 
 local  ct = {
-	{name = '2001dashi', m_name = 'worker', lv_count = 1, action = {'run', 'build1', 'build2', 'idle1', 'idle2', 'idle3'}},
-	-- {name = '2002jumin', lv_count = 1, action  = {'stand', 'run'}},
+	{name = '2001dashi', m_name = 'worker', lv_count = 1, action = {'run', 'build1', 'build2', 'idle1', 'idle2', 'idle3'}, shadow_scale = 0.7},
+	{name = '2002jumin', m_name = 'villagergirl', lv_count = 1, action  = {'stand', 'run', 'cheer'}, shadow_scale = 0.7},
 	--	{name = '2011dapeng', m_name = 'dragon3', lv_count = 3, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
-	{name = '2003daoke', m_name ='barbarian6', lv_count = 6, action = {'stand', 'run', 'attack1','attack2',  'cheer', }},
-	{name = '2004shenshe', m_name = 'archer6', lv_count = 6,  action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
-	{name = '2005mojin', m_name = 'goblin3', lv_count = 5,  action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
-	{name = '2006jiabing', m_name = 'giant6', lv_count = 6, action = {'stand', 'run', 'attack1','attack2', 'cheer', }, shadow_scale = 1.5},
-	{name = '2007sishi', m_name = 'skeleton3', lv_count = 5, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
-	{name = '2008tianzai', m_name = 'balloon3',lv_count = 6, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
+	{name = '2003daoke', m_name ='barbarian6', lv_count = 6, action = {'stand', 'run', 'attack1','attack2',  'cheer', }, shadow_scale = 0.7},
+	{name = '2004shenshe', m_name = 'archer6', lv_count = 6,  action = {'stand', 'run', 'attack1','attack2', 'cheer', }, shadow_scale = 0.7},
+	{name = '2005mojin', m_name = 'goblin3', lv_count = 5,  action = {'stand', 'run', 'attack1','attack2', 'cheer', }, shadow_scale = 0.7},
+	{name = '2006jiabing', m_name = 'giant6', lv_count = 6, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
+	{name = '2007sishi', m_name = 'skeleton3', lv_count = 5, action = {'stand', 'run', 'attack1','attack2', 'cheer', }, shadow_scale = 0.7},
+	{name = '2008tianzai', m_name = 'balloon3',lv_count = 6, action = {'stand', 'run', 'attack1','attack2', 'cheer', }, shadow_scale = 0.7},
 	{name = '2009daoshi', m_name = 'wizard3', lv_count = 5, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
 	{name = '2010shennv', m_name = 'healer2', lv_count = 3, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
-	{name = '2012bingyong', m_name = 'pekka2', lv_count = 2, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
+	-- {name = '2012bingyong', m_name = 'pekka2', lv_count = 2, action = {'stand', 'run', 'attack1','attack2', 'cheer', }},
 	{name = '2013baji', m_name = 'barbKing_lvl3', lv_count = 1, action = {'stand', 'run', 'attack1','attack2', 'cheer', 'reset', 'stunned'}, shadow_scale = 1.5},
 	{name = '2014yingyan', m_name = 'archerQueen_lvl3', lv_count = 1, action = {'stand', 'run', 'attack1','attack2', 'cheer', 'reset', 'stunned'}, shadow_scale = 1.5},
 }
