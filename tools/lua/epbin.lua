@@ -1,6 +1,5 @@
 local bit32 = require "bit32"
 local ppm = require "ppm"
-local png = require "png"
 local epconv = require "epconv"
 local lzma = require "lzma"
 
@@ -45,6 +44,7 @@ local DATA = 2
 local COMPONENT = 0
 local SWITCH = 1
 local LABEL = 2
+local MOUNT = 3
 
 local FID = 0
 local FCOLOR = 1
@@ -95,16 +95,44 @@ local function wmat(f,mat)
 	end
 end
 
-local function waction(f,t)
+local function waction(f,ani,t)
+	local ncomp = #ani.component
+	local ani_id = assert(ani.id)
+
 	wstring(f, t.action)
 	wshort(f, #t)
 	for _,frame in ipairs(t) do
 		wshort(f,#frame)
 		for _,v in ipairs(frame) do
 			if type(v) == "number" then
+				assert(0 <= v and (v % 1) == 0 and v < ncomp, ani_id)
 				wchar(f, FID)
 				wshort(f, v)
 			else
+				local i = v.index
+				assert(0 <= i and (i % 1) == 0 and i < ncomp, ani_id)
+
+				if v.mat then
+					assert(not (v.scale or v.trans))
+				elseif v.scale or v.trans then
+					local m = {1024,0,0,1024,0,0}
+					if v.scale then
+						local sx, sy = v.scale[1], v.scale[2]
+						m[1] = m[1] * sx
+						m[2] = m[2] * sy
+						m[3] = m[3] * sx
+						m[4] = m[4] * sy
+						m[5] = m[5] * sx
+						m[6] = m[6] * sy
+					end
+					if v.trans then
+						local tx, ty = v.trans[1], v.trans[2]
+						m[5] = m[5] + tx
+						m[6] = m[6] + ty
+					end
+					v.mat = m
+				end
+
 				local type = FID
 				if v.clip then
 					type = type + FCLIP
@@ -116,7 +144,7 @@ local function waction(f,t)
 					type = type + FMAT
 				end
 				wchar(f, type)
-				wshort(f, v.index)
+				wshort(f, i)
 				if v.color then
 					wlong(f, v.color)
 					wlong(f, v.add)
@@ -140,6 +168,7 @@ local function wlabel(f,v)
 end
 
 local function wanimation(f,t)
+	assert(t.id)
 	if #t.component == 0 then
 		print(t.export , t.id, "is empty")
 	end
@@ -160,8 +189,13 @@ local function wanimation(f,t)
 	wshort(f,#t.component)
 	for _,v in ipairs(t.component) do
 		if v.id == nil then
-			wchar(f,LABEL)
-			wlabel(f,v)
+			if v.font then
+				wchar(f,LABEL)
+				wlabel(f,v)
+			elseif v.name then
+				wchar(f, MOUNT)
+				wstring(f, v.name)
+			end
 		elseif v.name then
 			wchar(f,SWITCH)
 			wshort(f, v.id)
@@ -175,7 +209,7 @@ local function wanimation(f,t)
 	-- action
 	wshort(f,#t)
 	for _,v in ipairs(t) do
-		waction(f,v)
+		waction(f,t,v)
 	end
 end
 
@@ -232,6 +266,7 @@ local function _load(filename, func)
 end
 
 local function load_png(filename)
+	local png = require "png"
 	return _load(filename..".png", function (name)
 		return png.read(name, model)
 		end)

@@ -92,6 +92,9 @@ class AnimationProto(object):
         elif comp_type == u'resource部件':
             ref_ap = get_part(comp_name)
             return "resource", ref_ap.id
+        elif comp_type == u'部件':
+            ref_ap = get_part(comp_name)
+            return None, ref_ap.id
         else:
             print comp['type']
             raise Exception(u"unknown component type: " + comp['type'])

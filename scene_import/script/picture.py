@@ -4,7 +4,7 @@ from id_service import alloc_id
 from tpack import tex_count, frames, indexes
 
 PACK_SCALE = 0.5
-OUT_SCALE = 8.0
+OUT_SCALE = 10.0
 
 # ======================================================================
 #

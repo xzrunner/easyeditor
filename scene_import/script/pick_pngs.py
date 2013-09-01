@@ -27,6 +27,8 @@ def handler(sheet_name, line_tokens, results):
         if not name:
             continue
         pack_index = tokens[6]
+        if not pack_index:
+            raise Exception("PIC INDEX ERROR: (%d) %s" % (row, name))
         results.append((name, pack_index))
 
 def do_pick_pngs(raw_png_root, xls_filepath, output_root):
