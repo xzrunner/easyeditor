@@ -14,6 +14,7 @@
 #define PART_SWITCH 1
 #define PART_LABEL 2
 #define PART_MOUNT 3
+#define PART_LABEL_V2 4
 
 #define FRAME_ID 0
 #define FRAME_COLOR 1
@@ -187,6 +188,18 @@ decode_part(struct ejoypic *ep, struct datastream *ds, struct animation_part *pa
     part->id = ~0;
     part->name = readstring(ep,ds);
     part->text = NULL;
+    break;
+  case PART_LABEL_V2:
+    part->id = ~0;
+    part->name = readstring(ep,ds);
+    part->text = alloc(ep->alloc, sizeof(struct label));
+    part->text->font = readstring(ep,ds);
+    part->text->color = readuint32(ds);
+    part->text->size = readbyte(ds);
+    part->text->align = readbyte(ds);
+    part->text->width = readuint16(ds);
+    part->text->height = readuint16(ds);
+    part->text->edge = readbyte(ds);
     break;
   default:
     assert(0);
