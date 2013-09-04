@@ -17,7 +17,7 @@ ani_page_list = [
 '2009daoshi1', '2009daoshi3', '2009daoshi5',
 '2014yingyan1'],
 
-['2008tianzai1', 
+['2008tianzai1', '2008tianzai3', '2008tianzai5',
 '2010shennv1', '2010shennv2', '2010shennv3',
 '2011dapeng1'],
 
