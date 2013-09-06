@@ -1,0 +1,37 @@
+提取coc的部分图片
+
+(1)从excel copy名字到文件中
+同一套图，但是不同的数据文件，需要分开
+如building的图既有粒子又有character，但他们属于不同的lua文件
+
+(2)格式化名字成lua能读入的格式
+format.lua 参数：1 输入文件；2 输出文件
+
+(3)从原始lua文件中找出用到的数据，并得到所有图片矩形框位置
+split.lua 参数：1 原始lua文件；2 在（2）生成的文件
+输出两个文件：1 用到的部分数据；2 矩形框位置
+
+(4)抠出用到的图片，并合图
+用coeditor导入（3）的第二个文件，生成一堆小图片，命名方式为：大图名＋id＋picture中的index
+用texture packer合图
+
+（5）用合图后新的矩形框替换老的
+relocation.lua 参数：1 原始的文件；2 packer输出的json文件；3 输出文件；4 过滤原图名（building和character）
+lua relocation.lua building.txt tot.json building_new.txt building
+lua relocation.lua character.txt tot.json character_new.txt character
+lua relocation.lua character2.txt tot.json character2_new.txt character
+
+（6）手工合并来自同一原图的结果
+合并在（1）分开的但属于同一份数据文件的结果，如character中building图中的部分和character图中的部分
+如character_new.txt和character2_new.txt合并到character_manual.txt
+
+（7）重新设置id保证唯一
+merge.lua 参数：1 原文件1；2 原文件2；3 输出文件
+lua merge.lua building_new.txt character_manual.txt final.txt
+
+（8）手工修复
+删除重复的texture(1)
+
+ps：默认合并到一张大图里，即picture中的tex都是0
+
+todo：简化步骤，减少人工参与
