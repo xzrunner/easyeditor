@@ -21,7 +21,6 @@ struct label {
 	int align;
 	int width;
 	int height;
-	int edge;
 };
 
 struct animation_part {

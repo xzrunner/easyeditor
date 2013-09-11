@@ -105,7 +105,7 @@ def  _gen_png(tc_list):
 	ret_list = []
 	count = 1
 	for tc in tc_list:
-		cmd = 'TexturePacker  --algorithm MaxRects --maxrects-heuristics Best --pack-mode Best --premultiply-alpha  --sheet ./characters2%d.png --texture-format png  --data ./characters2%d.lua  --format  corona-imagesheet  %s' % (count, count, tc)
+		cmd = 'TexturePacker  --algorithm MaxRects --maxrects-heuristics Best --pack-mode Best --premultiply-alpha  --sheet ./characters2%d.pvr --texture-format pvr2 --opt PVRTC4  --data ./characters2%d.lua  --format  corona-imagesheet  %s' % (count, count, tc)
 		l_file = './characters2%d.lua' %(count)
 		print(cmd)
 		os.system(cmd)
@@ -123,7 +123,7 @@ def _gen_lua():
 	os.system(cmd)
 
 def _gen_ep():
-	cmd = 'lua52 ../tools/lua/epbin.lua -png8 ./characters2.lua'
+	cmd = 'lua52 ../tools/lua/epbin.lua -pvr ./characters2.lua'
 	print(cmd)
 	os.system(cmd)
 

@@ -45,7 +45,6 @@ local COMPONENT = 0
 local SWITCH = 1
 local LABEL = 2
 local MOUNT = 3
-local LABEL_V2 = 4
 
 local FID = 0
 local FCOLOR = 1
@@ -168,15 +167,6 @@ local function wlabel(f,v)
 	wshort(f, v.height)
 end
 
-local function wlabel_v2(f,v)
-	wlabel(f,v)
-	if v.edge then
-		wchar(f, 1)
-	else
-		wchar(f, 0)
-	end
-end
-
 local function wanimation(f,t)
 	assert(t.id)
 	if #t.component == 0 then
@@ -199,12 +189,9 @@ local function wanimation(f,t)
 	wshort(f,#t.component)
 	for _,v in ipairs(t.component) do
 		if v.id == nil then
-			if v.font and (v.edge==nil) then
+			if v.font then
 				wchar(f,LABEL)
 				wlabel(f,v)
-			elseif v.font and v.edge~= nil then
-				wchar(f,LABEL_V2)
-				wlabel_v2(f,v)
 			elseif v.name then
 				wchar(f, MOUNT)
 				wstring(f, v.name)
