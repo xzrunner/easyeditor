@@ -17,7 +17,7 @@ else
 	EFLAG = $(CFLAG)
 endif
 
-all : png epconv scexport ppm lzma.$(SO_EXT) checkep
+all : png pvr epconv scexport ppm lzma.$(SO_EXT) checkep
 
 LZMADEC = \
 7zCrc.c \
@@ -60,6 +60,9 @@ checkep : checkep.c eploader.c $(addprefix lzma/,$(LZMA))
 
 png: png.c
 	cc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) -lpng -lz
+
+pvr: pvr.c
+	cc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
 
 ppm : ppmloader.c
 	gcc --shared -g -Wall -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
