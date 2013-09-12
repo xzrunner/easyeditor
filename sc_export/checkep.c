@@ -9,6 +9,7 @@
 #define TEXTURE4 0
 #define TEXTURE8 1
 #define DETAIL 2
+#define PVRTC 3
 
 #define LZMA_PROPS_SIZE 5
 
@@ -31,12 +32,32 @@ struct block {
 };
 
 static void
+check_pvrtc(uint8_t* buffer, size_t sz){
+	int internal_format = buffer[0];
+	int w = buffer[1] | buffer[2]<<8;
+	int h = buffer[3] | buffer[4]<<8;
+	printf("----Texure PVRTC format: %d  %dx%d\n", internal_format, w,h);
+	int i;
+	uint8_t* data = buffer+5;
+	uint8_t* head = data;
+	for(i=0; head-data < sz-5; i++){
+		int size = head[0] | head[1]<<8 | head[2]<<16 | head[3]<<24;
+		printf("image data[%d] size:%d\n", i, size);
+		head += 4+size;
+	}
+
+	if(head-data != sz-5){
+		printf("error image data!\n");
+	}
+}
+
+static void
 check_tex4(uint8_t *buffer, size_t sz) {
 	int w = buffer[0] | buffer[1]<<8;
 	int h = buffer[2] | buffer[3]<<8;
 	printf("Texure 4444 %dx%d\n",w,h);
 	if (sz-4 != w*h*2) {
-		printf("Invalid size %d\n",sz-4);
+		printf("Invalid size %lu\n",sz-4);
 	}
 }
 
@@ -46,7 +67,7 @@ check_tex8(uint8_t *buffer, size_t sz) {
 	int h = buffer[2] | buffer[3]<<8;
 	printf("Texure 8888 %dx%d\n",w,h);
 	if (sz-4 != w*h*4) {
-		printf("Invalid size %d\n",sz-4);
+		printf("Invalid size %lu\n",sz-4);
 	}
 }
 
@@ -70,6 +91,9 @@ checkbuffer(uint8_t * buffer, size_t sz) {
 		break;
 	case TEXTURE8:
 		check_tex8(buffer+1, sz-1);
+		break;
+	case PVRTC:
+		check_pvrtc(buffer+1, sz-1);
 		break;
 	case DETAIL:
 		check_pack(buffer+1, sz-1);

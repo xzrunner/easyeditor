@@ -2,6 +2,7 @@ local bit32 = require "bit32"
 local ppm = require "ppm"
 local epconv = require "epconv"
 local lzma = require "lzma"
+local pvr = require "pvr"
 
 local model, filename, compress = ...
 local max_id = 0
@@ -39,6 +40,7 @@ local CLIPUI = 2
 local TEXTURE4 = 0
 local TEXTURE8 = 1
 local DATA = 2
+local PVRTC = 3
 
 
 local COMPONENT = 0
@@ -248,6 +250,23 @@ local function detail()
 	return table.concat(f.result)
 end
 
+
+local function load_pvr(filename)
+	memfile.result = {}
+	local w,h,internal_format,data_table = pvr.load(filename..".pvr")
+	print("Gen pvr image",w,h,internal_format)
+	wchar(memfile, PVRTC)
+	assert(internal_format == 4 or internal_format == 2)
+	wchar(memfile, internal_format)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	for i=1,#data_table do
+		wlong(memfile, string.len(data_table[i]))
+		table.insert(memfile.result, data_table[i])
+	end
+	return table.concat(memfile.result)
+end
+
 local function _load(filename, func)
 	memfile.result = {}
 	local w,h,depth,data = func(filename)
@@ -305,6 +324,9 @@ if model == "-ppm" then
 	gm_filename = filename.."."
 elseif model =="-png8"  or model=="-png4" then
 	gm_load = load_png
+	gm_filename = filename
+elseif model =="-pvr" then
+	gm_load = load_pvr
 	gm_filename = filename
 else
 	error("not match ppm or png  model.")
