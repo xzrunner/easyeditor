@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+from config import config
 
 TMP_FILE = 'pack_pngs.output.txt'
 PREFIX = 'TexturePacker:: warning: '
@@ -8,21 +9,21 @@ PREFIX = 'TexturePacker:: warning: '
 def _run_cmd(cmd):
     os.system(cmd.encode('cp936'))
 
-def _pack_aux(tpack_png, tpack_lua, png_root):
+def _pack_aux(out_image_filename, tpack_lua, png_root):
     cmd = ' '.join([
         'TexturePacker',
-        '--width 2048',
-        '--height 2048',
+        '--max-width 2048',
+        '--max-height 2048',
         '--algorithm MaxRects',
         '--maxrects-heuristics Best',
         '--pack-mode Best',
         '--premultiply-alpha',
-        '--sheet "%s"' % tpack_png,
-        '--texture-format png',
+        '--sheet "%s"' % out_image_filename,
         '--data "%s"' % tpack_lua,
         '--format corona-imagesheet',
-        '--scale 0.5',
+        '--scale %s' % config.PACK_SCALE,
         '--scale-mode Smooth',
+        config.TEX_PACKER_FLAGS,
         '"%s"' % png_root,
         '2> %s' % TMP_FILE
         ])
@@ -45,8 +46,8 @@ def _pack_aux(tpack_png, tpack_lua, png_root):
     assert(not lines)
     return True
 
-def do_pack_pngs(tpack_png, tpack_lua, png_root):
-    assert(tpack_png.lower().endswith('.png'))
+def do_pack_pngs(basename, tpack_lua, png_root):
+    assert(basename.lower().endswith(config.IMAGE_EXT))
     assert(tpack_lua.lower().endswith('.lua'))
 
     lua_list = []
@@ -59,10 +60,10 @@ def do_pack_pngs(tpack_png, tpack_lua, png_root):
         if not os.path.isdir(path):
             continue
         pack_index = int(name[5:])
-        png = tpack_png[:-4] + str(pack_index) + ".png"
+        filename = basename[:-4] + str(pack_index) + config.IMAGE_EXT
         lua = tpack_lua[:-4] + str(pack_index) + ".lua"
         lua_list.append(lua)
-        if not _pack_aux(png, lua, path):
+        if not _pack_aux(filename, lua, path):
             return False, []
 
     return True, lua_list

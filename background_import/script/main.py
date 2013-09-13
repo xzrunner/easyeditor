@@ -4,7 +4,7 @@ import os, sys
 
 root = ur'..'
 share_root = ur'e:\share\coc'
-raw_png_root = os.path.join(root, ur'data\rawpngs')
+# raw_png_root = os.path.join(root, ur'data\rawpngs')
 # comp_cfg_xls = os.path.join(root, ur'data\xls\场景建筑-图素表.xls')
 # anim_cfg_xls = os.path.join(root, ur'data\xls\场景建筑-动画表.xls')
 # picked_png_root = os.path.join(root, ur'build\pngs')
@@ -84,7 +84,7 @@ for item in work_items:
     if os.path.isfile(epgen_ep):
         os.system('del /Q/F "%s"' % epgen_ep)
 
-    os.system('%s "%s" -png8 "%s"' % (lua_exe, epgen_script, epgen_lua))
+    os.system('%s "%s" -pvr "%s"' % (lua_exe, epgen_script, epgen_lua))
 
     print
     print "============================================================"
