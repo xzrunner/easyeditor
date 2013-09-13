@@ -1,6 +1,20 @@
 # -*- coding: utf-8 -*-
 
 import os, sys
+from config import config
+
+config.PACK_SCALE = 1.0
+config.OUT_SCALE = 10.0
+
+# USE PNG
+# config.IMAGE_EXT = '.png'
+# config.EPBIN_FLAGS = '-png8'
+# config.TEX_PACKER_FLAGS = '--texture-format png'
+
+# USE PVR
+config.IMAGE_EXT = '.pvr'
+config.EPBIN_FLAGS = '-pvr'
+config.TEX_PACKER_FLAGS = '--texture-format pvr2 --opt PVRTC4'
 
 root = ur'D:\dev_coco\coco-tools\scene_import'
 share_root = ur'e:\share\coc'
@@ -9,7 +23,7 @@ comp_cfg_xls = os.path.join(root, ur'data\xls\场景建筑-图素表.xls')
 anim_cfg_xls = os.path.join(root, ur'data\xls\场景建筑-动画表.xls')
 picked_png_root = os.path.join(root, ur'build\pngs')
 
-tpack_png = os.path.join(root, ur"build\tex_lua_for_ep\buildings2.png")
+tpack_image = os.path.join(root, ur"build\tex_lua_for_ep\buildings2" + config.IMAGE_EXT)
 tpack_lua = os.path.join(root, ur"build\tex_lua_for_ep\tpack.lua")
 
 epgen_lua = os.path.join(root, ur"build\tex_lua_for_ep\buildings2.lua")
@@ -35,7 +49,7 @@ print "============================================================"
 print
 
 from pack_pngs import do_pack_pngs
-ok, lua_list = do_pack_pngs(tpack_png, tpack_lua, picked_png_root)
+ok, lua_list = do_pack_pngs(tpack_image, tpack_lua, picked_png_root)
 if not ok:
     print "pack_pngs error!"
     sys.exit(1)
@@ -67,7 +81,7 @@ print
 if os.path.isfile(epgen_ep):
     os.system('del /Q/F "%s"' % epgen_ep)
 
-os.system('%s "%s" -png8 "%s"' % (lua_exe, epgen_script, epgen_lua))
+os.system('%s "%s" %s "%s"' % (lua_exe, epgen_script, config.EPBIN_FLAGS, epgen_lua))
 
 print
 print "============================================================"

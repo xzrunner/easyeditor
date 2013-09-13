@@ -3,9 +3,16 @@
 *~
 *.swp
 *.pyc
+deprecated
+
 /characters_import/characters2*
 /scene_import/build
 /scene_import/data
 /scene_import/script/tpack.py
+
 /background_import/data
-deprecated
+
+/checker/data
+/checker/output
+
+/misc_import/data

@@ -2,9 +2,9 @@
 
 from id_service import alloc_id
 from tpack import tex_count, frames, indexes
+from config import config
 
-PACK_SCALE = 0.5
-OUT_SCALE = 10.0
+k = config.OUT_SCALE/config.PACK_SCALE
 
 # ======================================================================
 #
@@ -14,11 +14,13 @@ OUT_SCALE = 10.0
 
 class Picture(object):
     def __init__(self, name, mirror):
+        global k
+
         self.name = name
         self.id = None
         self.mirror = mirror
 
-        assert(name in indexes)
+        assert name in indexes, name
 
         frame = frames[indexes[name]]
         self.tex = frame['tex']
@@ -33,7 +35,6 @@ class Picture(object):
         xx2 = xx1 + w
         yy2 = yy1 + h
 
-        k = OUT_SCALE/PACK_SCALE
         xx1 *= k
         yy1 *= k
         xx2 *= k

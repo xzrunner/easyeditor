@@ -19,7 +19,7 @@ ani_page_list = [
 
 ['2008tianzai1', '2008tianzai3', '2008tianzai5',
 '2010shennv1', '2010shennv2', '2010shennv3',
-'2011dapeng1'],
+'2011dapeng1', '2022xueying1'],
 
 ['2011dapeng2','2011dapeng3',
 '2013baji1']
@@ -105,7 +105,7 @@ def  _gen_png(tc_list):
 	ret_list = []
 	count = 1
 	for tc in tc_list:
-		cmd = 'TexturePacker  --algorithm MaxRects --maxrects-heuristics Best --pack-mode Best --premultiply-alpha  --sheet ./characters2%d.pvr --texture-format pvr2 --opt PVRTC4  --data ./characters2%d.lua  --format  corona-imagesheet  %s' % (count, count, tc)
+		cmd = 'TexturePacker  --algorithm MaxRects --maxrects-heuristics Best --pack-mode Best --premultiply-alpha  --sheet ./characters2%d.pvr --texture-format pvr2 --opt PVRTC2  --data ./characters2%d.lua  --format  corona-imagesheet  %s' % (count, count, tc)
 		l_file = './characters2%d.lua' %(count)
 		print(cmd)
 		os.system(cmd)
