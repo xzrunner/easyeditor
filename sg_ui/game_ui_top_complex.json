@@ -1,0 +1,35 @@
+
+{
+	"name" : "ui_top",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_worker_complex.json",
+			"name" : "worker",
+			"position" : 
+			{
+				"x" : -110.0,
+				"y" : -40.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_shield_complex.json",
+			"name" : "shield",
+			"position" : 
+			{
+				"x" : 110.0,
+				"y" : -40.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}

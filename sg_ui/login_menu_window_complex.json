@@ -1,0 +1,35 @@
+
+{
+	"name" : "login_menu_window",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "blue_button_complex.json",
+			"name" : "new_game",
+			"position" : 
+			{
+				"x" : -328.0,
+				"y" : -265.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "blue_button_complex.json",
+			"name" : "re_login",
+			"position" : 
+			{
+				"x" : 281.0,
+				"y" : -265.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}

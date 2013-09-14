@@ -1,0 +1,49 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6002-anniu-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6160-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 1.0,
+				"y" : 6.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "title_fontblank.json",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -37.50
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}
