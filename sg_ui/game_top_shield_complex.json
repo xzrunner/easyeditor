@@ -1,0 +1,77 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_background_bar_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6001-anniu-1.png",
+			"name" : "button",
+			"position" : 
+			{
+				"x" : 62.0,
+				"y" : 0.750
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6158-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -70.0,
+				"y" : -0.250
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "TID_BUILDER_fontblank.json",
+			"name" : "TID_SHIELD_TITLE",
+			"position" : 
+			{
+				"x" : -4.50,
+				"y" : 24.750
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "Text_fontblank.json",
+			"name" : "Text",
+			"position" : 
+			{
+				"x" : -7.0,
+				"y" : 0.250
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}
