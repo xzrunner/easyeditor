@@ -13,7 +13,7 @@
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 1.0,
+			"scale" : 0.50,
 			"x mirror" : false,
 			"y mirror" : false
 		},
@@ -27,7 +27,7 @@
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 1.0,
+			"scale" : 0.50,
 			"x mirror" : false,
 			"y mirror" : false
 		}
