@@ -1,0 +1,119 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_right_background_bar_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_bar_yellow_anim.json",
+			"name" : "bar",
+			"position" : 
+			{
+				"x" : 115.0758972167969,
+				"y" : 0.0
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_right_bar_gradient_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 9.50
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "TID_CONTAINER_MAX_fontblank.json",
+			"name" : "TID_CONTAINER_MAX",
+			"position" : 
+			{
+				"x" : -98.46884918212891,
+				"y" : 19.8044433593750
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "max_amount_fontblank.json",
+			"name" : "max_amount",
+			"position" : 
+			{
+				"x" : 18.68658447265625,
+				"y" : -5.50
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "bar_Text_fontblank.json",
+			"name" : "text",
+			"position" : 
+			{
+				"x" : 13.0,
+				"y" : 19.8044433593750
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6118-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 109.1865997314453,
+				"y" : 0.8044433593750
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6105-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 109.1865921020508,
+				"y" : 0.8044433593750
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}

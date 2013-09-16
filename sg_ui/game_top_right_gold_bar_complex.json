@@ -1,0 +1,119 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_right_background_bar_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_bar_gary_anim.json",
+			"name" : "bar",
+			"position" : 
+			{
+				"x" : 106.1865997314453,
+				"y" : 1.250003814697266
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_right_bar_gradient_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 8.499998092651367
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "TID_CONTAINER_MAX_fontblank.json",
+			"name" : "TID_CONTAINER_MAX",
+			"position" : 
+			{
+				"x" : -94.0,
+				"y" : 18.50
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "max_amount_fontblank.json",
+			"name" : "max_amount",
+			"position" : 
+			{
+				"x" : 20.0,
+				"y" : -4.50
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "bar_Text_fontblank.json",
+			"name" : "text",
+			"position" : 
+			{
+				"x" : 12.0,
+				"y" : 19.80447006225586
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6118-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 107.1865997314453,
+				"y" : -0.4999980926513672
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6106-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 110.50,
+				"y" : -0.4999961853027344
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}

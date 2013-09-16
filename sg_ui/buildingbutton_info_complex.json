@@ -1,6 +1,6 @@
 
 {
-	"name" : "",
+	"name" : "buildingbutton_info",
 	"sprite" : 
 	[
 		
@@ -13,18 +13,18 @@
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.50,
+			"scale" : 0.4499999880790710,
 			"x mirror" : false,
 			"y mirror" : false
 		},
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6160-tongyong-1.png",
+			"filepath" : "6180-tongyong-1.png",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 1.0,
+				"x" : 0.0,
 				"y" : 6.0
 			},
 			"scale" : 0.50,
@@ -34,12 +34,12 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "title_fontblank.json",
-			"name" : "title",
+			"filepath" : "TID_BUTTON_INFO_fontblank.json",
+			"name" : "TID_BUTTON_INFO",
 			"position" : 
 			{
-				"x" : 0.750,
-				"y" : -36.250
+				"x" : 0.2250061035156250,
+				"y" : -35.50
 			},
 			"scale" : 1.0,
 			"x mirror" : false,

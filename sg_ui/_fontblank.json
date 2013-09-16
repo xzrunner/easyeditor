@@ -1,10 +1,10 @@
 
 {
-	"align" : 1.0,
-	"color" : "0xffffffff",
+	"align" : 0.0,
+	"color" : "",
 	"font" : "",
 	"height" : 100.0,
 	"name" : "",
-	"size" : 18.0,
+	"size" : 0.0,
 	"width" : 100.0
 }
