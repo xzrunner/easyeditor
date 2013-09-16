@@ -1,0 +1,77 @@
+
+{
+	"name" : "button_energize",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6002-anniu-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"scale" : 0.4499999880790710,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6103-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 40.79999923706055,
+				"y" : 40.80000305175781
+			},
+			"scale" : 0.3000000119209290,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6191-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4.0
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "buildingbutton_amount_fontblank.json",
+			"name" : "amount",
+			"position" : 
+			{
+				"x" : -2.274993896484375,
+				"y" : 33.27499771118164
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "TID_BUTTON_INFO_fontblank.json",
+			"name" : "TID_BUTTON_ENERGIZE",
+			"position" : 
+			{
+				"x" : 0.2250061035156250,
+				"y" : -35.50
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}
