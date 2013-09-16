@@ -1,0 +1,63 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_background_bar_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 42.0,
+				"y" : 39.0
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6118-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 118.2039566040039,
+				"y" : 39.16052627563477
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6103-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 118.2039337158203,
+				"y" : 39.16052246093750
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "top_right3_text_fontblank.json",
+			"name" : "text",
+			"position" : 
+			{
+				"x" : 47.70388793945313,
+				"y" : 38.59605789184570
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}

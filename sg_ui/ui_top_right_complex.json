@@ -1,0 +1,63 @@
+
+{
+	"name" : "ui_top_right",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_right_elixir_bar_complex.json",
+			"name" : "elixir_bar",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : -103.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_right_diamond_complex.json",
+			"name" : "diamond_bar",
+			"position" : 
+			{
+				"x" : -171.0,
+				"y" : -199.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_right_gold_bar_complex.json",
+			"name" : "gold_bar",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : -40.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "game_top_diamond_button_complex.json",
+			"name" : "add_diamonds_button",
+			"position" : 
+			{
+				"x" : -192.0,
+				"y" : -160.0
+			},
+			"scale" : 0.50,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}

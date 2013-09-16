@@ -1,0 +1,135 @@
+
+{
+	"fps" : 24,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "6401-jindutiao-h3-1.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -23.00000953674316,
+								"y" : 1.335144042968750e-005
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "6401-jindutiao-h3-2.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -11.50000572204590,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "6401-jindutiao-h3-1.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 1.907348632812500e-006
+							},
+							"x mirror" : true,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 1,
+					"tween" : true
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "6401-jindutiao-h3-1.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -498.9999389648438,
+								"y" : 1.907348632812500e-006
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "6401-jindutiao-h3-2.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -249.50,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 120.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "6401-jindutiao-h3-1.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : true,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 200,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : "game_bar_red_anim"
+}
