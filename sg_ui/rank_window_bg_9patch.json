@@ -1,12 +1,12 @@
 
 {
-	"height" : 664.0,
+	"height" : 1328.0,
 	"sprite" : 
 	[
 		
 		{
 			"angle" : 1.570796251296997,
-			"filepath" : "6310-diban-9-1.PNG",
+			"filepath" : "6302-diban-9-1.png",
 			"name" : "",
 			"position" : 
 			{
@@ -20,7 +20,7 @@
 		
 		{
 			"angle" : 3.141592502593994,
-			"filepath" : "6310-diban-9-2.PNG",
+			"filepath" : "6302-diban-9-2.png",
 			"name" : "",
 			"position" : 
 			{
@@ -33,8 +33,8 @@
 		},
 		
 		{
-			"angle" : 4.712388992309570,
-			"filepath" : "6310-diban-9-3.PNG",
+			"angle" : 3.141592502593994,
+			"filepath" : "6302-diban-9-1.png",
 			"name" : "",
 			"position" : 
 			{
@@ -48,7 +48,7 @@
 		
 		{
 			"angle" : 1.570796251296997,
-			"filepath" : "6310-diban-9-2.PNG",
+			"filepath" : "6302-diban-9-2.png",
 			"name" : "",
 			"position" : 
 			{
@@ -62,7 +62,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6310-diban-9-4.PNG",
+			"filepath" : "6302-diban-9-5.png",
 			"name" : "",
 			"position" : 
 			{
@@ -76,7 +76,7 @@
 		
 		{
 			"angle" : 4.712388992309570,
-			"filepath" : "6310-diban-9-2.PNG",
+			"filepath" : "6302-diban-9-2.png",
 			"name" : "",
 			"position" : 
 			{
@@ -90,7 +90,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6310-diban-9-1.PNG",
+			"filepath" : "6302-diban-9-1 (2).png",
 			"name" : "",
 			"position" : 
 			{
@@ -104,7 +104,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6310-diban-9-2.PNG",
+			"filepath" : "6302-diban-9-2 (2).png",
 			"name" : "",
 			"position" : 
 			{
@@ -118,7 +118,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6310-diban-9-3.PNG",
+			"filepath" : "6302-diban-9-3.png",
 			"name" : "",
 			"position" : 
 			{
@@ -131,5 +131,5 @@
 		}
 	],
 	"type" : 1,
-	"width" : 786.0
+	"width" : 1572.0
 }
