@@ -1,0 +1,58 @@
+
+{
+	"name" : "ranking_window",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "rank_window_bg_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "rank_window_bg2_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -34.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6008-anniu-1.png",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 351.0,
+				"y" : 292.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		}
+	]
+}
