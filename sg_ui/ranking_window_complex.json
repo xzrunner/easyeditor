@@ -14,10 +14,10 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
@@ -28,13 +28,13 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -34.0
+				"y" : -27.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
@@ -44,14 +44,14 @@
 			"name" : "close_button",
 			"position" : 
 			{
-				"x" : 351.0,
-				"y" : 292.0
+				"x" : 356.7999877929688,
+				"y" : 297.4545593261719
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		}
 	]
