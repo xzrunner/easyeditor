@@ -10,8 +10,8 @@
 			"name" : "xp_bar",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 125.0,
+				"y" : -40.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -27,8 +27,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -99.0,
-				"y" : 1.0
+				"x" : 26.0,
+				"y" : -37.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -44,42 +44,8 @@
 			"name" : "xp",
 			"position" : 
 			{
-				"x" : -99.50,
-				"y" : 0.50
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"angle" : 0.0,
-			"filepath" : "TID_CONTAINER_MAX_fontblank.json",
-			"name" : "Name",
-			"position" : 
-			{
-				"x" : -37.0,
-				"y" : 22.50
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"angle" : 0.0,
-			"filepath" : "max_amount_fontblank.json",
-			"name" : "points",
-			"position" : 
-			{
-				"x" : 19.0,
-				"y" : -0.50
+				"x" : 25.50,
+				"y" : -37.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -95,14 +61,48 @@
 			"name" : "achievements",
 			"position" : 
 			{
-				"x" : -88.14999389648438,
-				"y" : -83.0
+				"x" : 36.85000610351563,
+				"y" : -121.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "xp_name_fontblank.json",
+			"name" : "Name",
+			"position" : 
+			{
+				"x" : 119.0,
+				"y" : -16.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "xp_points_fontblank.json",
+			"name" : "points",
+			"position" : 
+			{
+				"x" : 133.9090881347656,
+				"y" : -39.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]
