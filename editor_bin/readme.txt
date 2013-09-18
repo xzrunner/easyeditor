@@ -24,3 +24,5 @@ easy9patch：做9宫格的UI界面。
 点右边面板的resize即可预览并编辑资源。
 
 coceditor：打包成lua文件。（只在最后程序这边用到）
+
+cocpackage: 命令行方式，打包成lua文件。参数：1.<资源文件夹路径>；2.<texture packer 的json文件路径>；3.<缩放>（可选）
