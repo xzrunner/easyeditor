@@ -1,6 +1,6 @@
 
 {
-	"fps" : 24,
+	"fps" : 30,
 	"layer" : 
 	[
 		
@@ -18,8 +18,8 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -23.00000953674316,
-								"y" : 1.335144042968750e-005
+								"x" : -411.0,
+								"y" : 1.907348632812500e-006
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -35,11 +35,11 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -11.50000572204590,
-								"y" : 0.0
+								"x" : -205.50,
+								"y" : 1.907348632812500e-006
 							},
 							"x mirror" : false,
-							"x scale" : 1.0,
+							"x scale" : 98.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -78,8 +78,8 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -498.9999389648438,
-								"y" : 1.907348632812500e-006
+								"x" : -19.0,
+								"y" : -1.907348632812500e-006
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -95,11 +95,11 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -249.50,
-								"y" : 0.0
+								"x" : -7.50,
+								"y" : -3.814697265625000e-006
 							},
 							"x mirror" : false,
-							"x scale" : 120.0,
+							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -131,5 +131,5 @@
 			"name" : "Layer0"
 		}
 	],
-	"name" : "game_bar_red_anim"
+	"name" : "game_bar_gary_anim"
 }
