@@ -40,12 +40,12 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6008-anniu-1.png",
+			"filepath" : "close_button_complex.json",
 			"name" : "close_button",
 			"position" : 
 			{
-				"x" : 356.7999877929688,
-				"y" : 297.4545593261719
+				"x" : 394.2999877929688,
+				"y" : 297.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.4000000059604645,
