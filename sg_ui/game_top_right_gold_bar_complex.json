@@ -13,9 +13,12 @@
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
@@ -25,11 +28,14 @@
 			"position" : 
 			{
 				"x" : 106.1865997314453,
-				"y" : 1.250003814697266
+				"y" : 0.2500038146972656
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
@@ -41,9 +47,12 @@
 				"x" : 0.0,
 				"y" : 8.499998092651367
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
@@ -52,12 +61,15 @@
 			"name" : "TID_CONTAINER_MAX",
 			"position" : 
 			{
-				"x" : -94.0,
+				"x" : -93.0,
 				"y" : 18.50
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
@@ -69,9 +81,12 @@
 				"x" : 20.0,
 				"y" : -4.50
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
@@ -83,9 +98,12 @@
 				"x" : 12.0,
 				"y" : 19.80447006225586
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
@@ -97,9 +115,12 @@
 				"x" : 107.1865997314453,
 				"y" : -0.4999980926513672
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
@@ -111,9 +132,12 @@
 				"x" : 110.50,
 				"y" : -0.4999961853027344
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		}
 	]
 }
