@@ -42,7 +42,7 @@ if len(sys.argv) != 2:
     print "           4 - copy EP to share dir"
     print ""
 
-    options = raw_input("Please enter options: ")
+    options = raw_input("Please enter options(1234): ") or "1234"
 else:
     options = sys.argv[1]
 

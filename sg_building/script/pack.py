@@ -7,12 +7,26 @@ LUA = r'..\..\tools\lua\lua52.exe'
 EPBIN = r'..\..\tools\lua\epbin.lua'
 CONV = r'..\data\lua\building_convert.lua'
 
-PATH_EDITOR_JSON = r'..\data\json'
-PATH_TPACK_JSON = r'..\data\pack\buildings2'
-PATH_EP_LUA_TMP = r'..\data\pack\buildings2.tmp.lua'
-PATH_EP_LUA = r'..\data\pack\buildings2.lua'
-PATH_EP = r'..\data\pack\buildings2.ep'
 PATH_SHARE_EP = r'd:\share\coc\ep\ '
+
+WORK_ITEMS = [
+        (
+            r'..\data\json',
+            r'..\data\pack\buildings2',
+            r'..\data\pack\buildings2.tmp.lua',
+            '1.0',
+            r'..\data\pack\buildings2.lua',
+            r'..\data\pack\buildings2.ep',
+        ),
+        (
+            r'..\data\json',
+            r'..\data\pack\buildings2_lowres',
+            r'..\data\pack\buildings2_lowres.tmp.lua',
+            '0.5',
+            r'..\data\pack\buildings2_lowres.lua',
+            r'..\data\pack\buildings2_lowres.ep',
+        ),
+    ]
 
 def run_cmd(cmd):
     print cmd
@@ -27,21 +41,22 @@ if len(sys.argv) != 2:
     print "           4 - copy EP to share dir"
     print ""
 
-    options = raw_input("Please enter options: ")
+    options = raw_input("Please enter options(1234): ") or "1234"
 else:
     options = sys.argv[1]
 
-if '1' in options:
-    run_cmd('%s %s %s %s' % (COCPACK, PATH_EDITOR_JSON, PATH_TPACK_JSON, PATH_EP_LUA_TMP))
+for ed_json, tp_json, tmp_lua, scale, lua, ep in WORK_ITEMS:
+    if '1' in options:
+        run_cmd('%s %s %s %s %s' % (COCPACK, ed_json, tp_json, tmp_lua, scale))
 
-if '2' in options:
-    run_cmd('%s %s %s %s' % (LUA, CONV, PATH_EP_LUA_TMP, PATH_EP_LUA))
+    if '2' in options:
+        run_cmd('%s %s %s %s' % (LUA, CONV, tmp_lua, lua))
 
-if '3' in options:
-    run_cmd('%s %s -pvr %s' % (LUA, EPBIN, PATH_EP_LUA))
+    if '3' in options:
+        run_cmd('%s %s -pvr %s' % (LUA, EPBIN, lua))
 
-if '4' in options:
-    run_cmd('copy /Y %s %s' % (PATH_EP, PATH_SHARE_EP))
+    if '4' in options:
+        run_cmd('copy /Y %s %s' % (ep, PATH_SHARE_EP))
 
 print ""
 print "================================================="
