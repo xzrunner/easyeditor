@@ -2,6 +2,7 @@
 
 import os, sys
 from xls_loader import load_xls
+from global_state import png_map
 
 # RAW_DATA_ROOT = ur'D:\dev_coco\tmp_building_import\data\场景建筑'
 # CFG_ROOT = ur'D:\dev_coco\tmp_building_import\data\场景建筑配置'
@@ -29,9 +30,12 @@ def handler(sheet_name, line_tokens, results):
         pack_index = tokens[6]
         if not pack_index:
             raise Exception("PIC INDEX ERROR: (%d) %s" % (row, name))
-        results.append((name, pack_index))
+        # results.append((name, pack_index))
+        results.add(name)
 
 def do_pick_pngs(raw_png_root, xls_filepath, output_root):
+    global png_map
+
     raw_data_map = {}
     for root, dirs, names in os.walk(raw_png_root):
         if 'ignore' in dirs:
@@ -53,7 +57,7 @@ def do_pick_pngs(raw_png_root, xls_filepath, output_root):
 
     sheets = load_xls(xls_filepath)
 
-    all_files = []
+    all_files = set([])
 
     for sheet_name, line_tokens in sheets:
         print sheet_name
@@ -64,19 +68,24 @@ def do_pick_pngs(raw_png_root, xls_filepath, output_root):
     run_cmd(u'mkdir "%s"' % output_root)
 
 
-    for name, pack_index in all_files:
+    # for name, pack_index in all_files:
+    for name in all_files:
         key = name.lower() + ".png"
         # print name
         # print raw_data_map[key]
 
-        pack_dir = os.path.join(output_root, 'pack_%d' % pack_index)
-        if not os.path.isdir(pack_dir):
-            run_cmd(u'mkdir "%s"' % pack_dir)
+        # pack_dir = os.path.join(output_root, 'pack_%d' % pack_index)
+        # if not os.path.isdir(pack_dir):
+        #     run_cmd(u'mkdir "%s"' % pack_dir)
 
         src = raw_data_map[key]
-        dst = os.path.join(pack_dir, name+".png")
+        # dst = os.path.join(pack_dir, name+".png")
+        dst = os.path.join(output_root, name+".png")
         # print "src:", src
         # print "dst:", dst
 
         cmd = u'copy /Y "%s" "%s" > NUL' % (src, dst)
         run_cmd(cmd)
+
+        assert name not in png_map, name
+        png_map[name] = dst

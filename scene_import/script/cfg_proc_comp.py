@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from animation_proto import AnimationProto
+# from animation_proto import AnimationProto
+from json_animation import JsonAnimation
 
 def parser(line_tokens):
     COL_TYPENAME = 0
@@ -19,14 +20,12 @@ def parser(line_tokens):
 
     def resolve(data):
         if data.typename and data.status != u'禁用':
-            ap = AnimationProto()
+            ani = JsonAnimation()
             if data.status == u'导出':
-                ap.export = data.typename
-            ap.typename = data.typename
-            ap.components = data.components
-            data.results.append(ap)
-            # id_animation_map[ap.id] = ap
-            # name_part_map[ap.typename] = ap
+                ani.export = data.typename
+            ani.typename = data.typename
+            ani.components = data.components
+            data.results.append(ani)
         data.typename = None
         data.status = None
         data.components = []
