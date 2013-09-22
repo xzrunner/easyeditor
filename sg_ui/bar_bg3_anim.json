@@ -22,7 +22,7 @@
 								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 0.0,
+							"x scale" : 0.1000000014901161,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -125,7 +125,7 @@
 								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 19,
+							"x scale" : 19.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
