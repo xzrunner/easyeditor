@@ -1,5 +1,8 @@
 UNAME = $(shell uname)
 
+DEP_INC = ../depends/include
+DEP_LIB = ../depends/lib
+
 ifeq ($(UNAME), Linux)
 	SO_EXT = so
 	EXE_EXT =
@@ -13,7 +16,7 @@ else ifeq ($(UNAME), Darwin)
 else
 	SO_EXT = dll
 	EXE_EXT = .exe
-	CFLAG = -llua52 -L/usr/local/bin
+	CFLAG = -L/usr/local/bin -I$(DEP_INC) -L$(DEP_LIB) -llua52
 	EFLAG = $(CFLAG)
 endif
 
@@ -59,10 +62,10 @@ checkep : checkep.c eploader.c $(addprefix lzma/,$(LZMA))
 	gcc $(ST_LZMA) -O3 -Wall -o $@ $^ -Ilzma
 
 png: png.c
-	cc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) -lpng -lz
+	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) -llibpng16-16 -lz
 
 pvr: pvr.c
-	cc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
+	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
 
 ppm : ppmloader.c
 	gcc --shared -g -Wall -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
