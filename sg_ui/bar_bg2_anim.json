@@ -22,7 +22,7 @@
 								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 0.1000000014901161,
+							"x scale" : 0.009999999776482582,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -121,11 +121,11 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : 226.2000122070313,
+								"x" : 325.750,
 								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 19.0,
+							"x scale" : 27.50,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -138,7 +138,7 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : 452.4000244140625,
+								"x" : 652.0,
 								"y" : 0.0
 							},
 							"x mirror" : false,

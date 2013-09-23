@@ -27,7 +27,7 @@
 			"name" : "extra_bar",
 			"position" : 
 			{
-				"x" : -229.0,
+				"x" : -329.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
@@ -44,7 +44,7 @@
 			"name" : "green_bar",
 			"position" : 
 			{
-				"x" : -229.0,
+				"x" : -328.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,

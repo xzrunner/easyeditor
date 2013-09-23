@@ -6,7 +6,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "..\\editor_bin\\ach_completed_fontblank.json",
+			"filepath" : "ach_completed_fontblank.json",
 			"name" : "TID_ACHIEVEMENT_COMPLETED",
 			"position" : 
 			{
