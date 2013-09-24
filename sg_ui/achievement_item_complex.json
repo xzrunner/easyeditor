@@ -214,8 +214,8 @@
 			"name" : "bar",
 			"position" : 
 			{
-				"x" : 123.750,
-				"y" : -27.50
+				"x" : 165.750,
+				"y" : -28.50
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -231,8 +231,8 @@
 			"name" : "achievement_progress",
 			"position" : 
 			{
-				"x" : 123.250,
-				"y" : -27.0
+				"x" : 165.250,
+				"y" : -29.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

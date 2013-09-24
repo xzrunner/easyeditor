@@ -18,3 +18,9 @@ deprecated
 /misc_import/data
 
 /sg_building/data
+
+/cloud_import/data
+
+
+# temporary
+/tools-src/depends/src

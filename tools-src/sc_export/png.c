@@ -15,7 +15,7 @@ static inline int
 }
 
 static void*
-gen4(u_int8_t* buffer, size_t size){
+gen4(uint8_t* buffer, size_t size){
 	size_t i;
 	assert(size%4 == 0);
 	int r, g, b, a;
