@@ -1,13 +1,13 @@
 
 {
-	"name" : "achievements_window",
+	"name" : "building_info_gold_rph_bar",
 	"sprite" : 
 	[
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
-			"name" : "",
+			"filepath" : "info_bar_complex.json",
+			"name" : "bar",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -23,12 +23,12 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "achievement_window_bg2_9patch.json",
+			"filepath" : "6116-tongyong-1.png",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -35.0
+				"x" : -195.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -40,29 +40,12 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "ach_window_title_fontblank.json",
-			"name" : "TID_POPUP_ACHIEVEMENTS_TITLE",
+			"filepath" : "bar_info_text_fontblank.json",
+			"name" : "text",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 301.6000061035156
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
-			"name" : "close_button",
-			"position" : 
-			{
-				"x" : 390.0,
-				"y" : 298.3500061035156
+				"x" : 1.50,
+				"y" : 13.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

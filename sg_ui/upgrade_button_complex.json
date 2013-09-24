@@ -1,12 +1,12 @@
 
 {
-	"name" : "achievements_window",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "6007-anniu-1.png",
 			"name" : "",
 			"position" : 
 			{
@@ -14,38 +14,21 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.6999999880790710,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.6999999880790710,
 			"y shear" : 0.0
 		},
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "achievement_window_bg2_9patch.json",
-			"name" : "",
+			"filepath" : "upgrade_button_text_fontblank.json",
+			"name" : "Text",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -35.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"angle" : 0.0,
-			"filepath" : "ach_window_title_fontblank.json",
-			"name" : "TID_POPUP_ACHIEVEMENTS_TITLE",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 301.6000061035156
+				"x" : -20.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -57,18 +40,35 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
-			"name" : "close_button",
+			"filepath" : "6105-tongyong-1.png",
+			"name" : "elixir",
 			"position" : 
 			{
-				"x" : 390.0,
-				"y" : 298.3500061035156
+				"x" : 67.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6106-tongyong-1.png",
+			"name" : "gold",
+			"position" : 
+			{
+				"x" : 67.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		}
 	]

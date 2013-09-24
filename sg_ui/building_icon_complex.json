@@ -6,18 +6,18 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6008-anniu-1.png",
-			"name" : "",
+			"filepath" : "upgrade_icon_fontblank.json",
+			"name" : "icon",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.4000000059604645,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4000000059604645,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]

@@ -1,0 +1,177 @@
+
+{
+	"name" : "upgrade_building_info_window",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "building_info_window_bg_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "building_info_window_bg2_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -36.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "info_title_fontblank.json",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 225.250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "close_button_complex.json",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 319.0,
+				"y" : 224.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "building_info_window_bg3_9patch.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -133.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6154-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -220.0,
+				"y" : 71.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "upgrade_button_complex.json",
+			"name" : "upgrade_button",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -192.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "upgrade_icon_fontblank.json",
+			"name" : "item_icon",
+			"position" : 
+			{
+				"x" : -180.0,
+				"y" : 25.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "info_item_name_fontblank.json",
+			"name" : "item_name",
+			"position" : 
+			{
+				"x" : -221.50,
+				"y" : 148.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "ex_upgrade_time_box_complex.json",
+			"name" : "time_box",
+			"position" : 
+			{
+				"x" : -246.750,
+				"y" : 1.3750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}
