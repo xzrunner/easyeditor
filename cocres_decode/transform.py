@@ -52,6 +52,40 @@ def format_dquad(squad, dquad):
 		assert(0)
 
 
+def decode_img(src, squad):
+	src_data = src["src"]
+	if squad[0] == 0:
+		minx = src_data[0]
+		miny = src_data[1]
+		maxx = src_data[4]
+		maxy = src_data[5]
+	elif squad[1] == 0:
+		minx = src_data[2]
+		miny = src_data[3]
+		maxx = src_data[6]
+		maxy = src_data[7]
+	elif squad[2] == 0:
+		minx = src_data[4]
+		miny = src_data[5]
+		maxx = src_data[0]
+		maxy = src_data[1]
+	elif squad[3] == 0:
+		minx = src_data[6]
+		miny = src_data[7]
+		maxx = src_data[2]
+		maxy = src_data[3]
+	else:
+		assert(0)
+	filepath = output_dir+'/'
+	filepath += str(minx)+str(miny)+str(maxx)+str(maxy)
+	filepath += '.png'
+
+	if not os.path.isfile(filepath):
+		images[src["tex"]].crop((minx, miny, maxx, maxy)).save(filepath)
+
+	return filepath
+
+
 def decode_pic(pic):
 	json_file = open(tmp_dir+'/'+pic)
 	json_data = json.load(json_file)
@@ -64,8 +98,7 @@ def decode_pic(pic):
 		if item.isdigit():
 			src = json_data[item]
 			dst = {}
-			dst["filepath"] = str(json_data["id"])+'_'+item+'.png'
-
+			
 			src_data = src["src"]
 			squad = [
 				quad_type(src_data[0], src_data[1], src_data),
@@ -83,12 +116,7 @@ def decode_pic(pic):
 			dquad = format_dquad(squad, dquad)
 #			print squad, dquad
 
-			max_x = max(src_data[0], src_data[2], src_data[4])
-			min_x = min(src_data[0], src_data[2], src_data[4])
-			max_y = max(src_data[1], src_data[3], src_data[5])
-			min_y = min(src_data[1], src_data[3], src_data[5])
-			images[src["tex"]].crop((min_x, min_y, max_x, max_y)).save(output_dir+'/'+dst["filepath"])
-
+			dst["filepath"] = decode_img(src, squad)
 			dst["name"] = ''
 			dst["position"] = {}
 			dst["position"]["x"] = (screen_data[0]+screen_data[2]+screen_data[4]+screen_data[6])/4/16.0
