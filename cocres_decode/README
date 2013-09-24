@@ -1,0 +1,8 @@
+运行transform.py把coc的资源转换成我们编辑器的格式
+
+demo：
+假设图片是buildings.sc.1.png buildings.sc.2.png buildings.sc.3.png buildings.sc.4.png
+lua文件是buildings.sc.lua
+需要解析的export名字是xmas_spell
+
+运行：python transform.py buildings.sc.lua xmas_spell buildings.sc.
