@@ -65,10 +65,10 @@
 				"y" : 223.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
@@ -164,7 +164,24 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -179.0
+				"y" : -195.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "defense_info_complex.json",
+			"name" : "defense",
+			"position" : 
+			{
+				"x" : 12.0,
+				"y" : -143.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
