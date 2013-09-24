@@ -17,7 +17,7 @@ print(cmd)
 os.system(cmd)
 
 # package
-cmd = "cocpackage.exe %s %s %s" % (res, tex2, out)
+cmd = "cocpackage_load.exe %s %s %s" % (res, tex2, out)
 print("\n"+cmd)
 os.system(cmd) 
 
