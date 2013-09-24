@@ -143,11 +143,14 @@ def decode_pic(pic):
 
 
 def decode_name(id):
-	sid = str(id)
-	if os.path.isfile(tmp_dir+'/'+sid+'_ani.tmp'):
-		return sid+'_anim.json'
+	if type(id) == int:
+		sid = str(id)
+		if os.path.isfile(tmp_dir+'/'+sid+'_ani.tmp'):
+			return sid+'_anim.json'
+		else:
+			return sid+'_complex.json'	
 	else:
-		return sid+'_complex.json'	
+		return id+'_fontblank.json'
 
 def decode_sprite(components, src):
 	dst = {}
@@ -186,10 +189,33 @@ def decode_sprite(components, src):
 	return dst
 
 
+def decode_fontblank(font):
+	out = {}
+	out["name"] = font["name"]
+	out["font"] = font["font"]
+	out["color"] = hex(font["color"])
+	out["align"] = font["align"]
+	out["size"] = font["size"]
+	out["width"] = font["width"]
+	out["height"] = font["height"]
+
+	filepath = output_dir+'/'+font["name"]+'_fontblank.json'
+	with open(filepath, 'w') as fp:
+		json.dump(out, fp, sort_keys=True, indent = 2)	
+
+
+def decode_component(component, components):
+	if 'id' in component:
+		components.append(component["id"])
+	else:
+		components.append(component["name"])
+		decode_fontblank(component)
+
+
 def decode_ani2complex(src, dst):
 	components = []
 	for c in src["component"]:
-		components.append(c["id"])
+		decode_component(c, components)
 
 	dst["sprite"] = []
 	for s in src["1"][0]:
@@ -199,7 +225,7 @@ def decode_ani2complex(src, dst):
 def decode_ani2animation(src, dst):
 	components = []
 	for c in src["component"]:
-		components.append(c["id"])
+		decode_component(c, components)
 
 	dst["fps"] = 30
 	dst["layer"] = []
