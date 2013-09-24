@@ -131,8 +131,8 @@ local function write_pic(pic)
 		local screen4 = quad_type(v.screen[7], v.screen[8], v.screen)
 		
 		local ox, oy
-		ox = (v.screen[1]+v.screen[3]+v.screen[5]+v.screen[7])*0.5*0.5*0.1
-		oy = (v.screen[2]+v.screen[4]+v.screen[6]+v.screen[8])*0.5*0.5*0.1
+		ox = (v.screen[1]+v.screen[3]+v.screen[5]+v.screen[7])*0.5*0.5/16.0
+		oy = (v.screen[2]+v.screen[4]+v.screen[6]+v.screen[8])*0.5*0.5/16.0
 
 		local t0, t1, t2, t3
 		if src4 == 0 then
@@ -176,8 +176,8 @@ local function write_pic(pic)
 		local sx, sy
 		local src_x = math.max(math.abs(v.src[1]-v.src[3]), math.abs(v.src[1]-v.src[7]))
 		local src_y = math.max(math.abs(v.src[2]-v.src[4]), math.abs(v.src[2]-v.src[8]))
-		local screen_x = math.max(math.abs(v.screen[1]-v.screen[3]), math.abs(v.screen[1]-v.screen[7])) * 0.1
-		local screen_y = math.max(math.abs(v.screen[2]-v.screen[4]), math.abs(v.screen[2]-v.screen[8])) * 0.1
+		local screen_x = math.max(math.abs(v.screen[1]-v.screen[3]), math.abs(v.screen[1]-v.screen[7])) / 16.0
+		local screen_y = math.max(math.abs(v.screen[2]-v.screen[4]), math.abs(v.screen[2]-v.screen[8])) / 16.0
 		if rotate then
 			sx = screen_y/src_x
 			sy = screen_x/src_y			
