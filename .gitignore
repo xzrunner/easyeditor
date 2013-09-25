@@ -21,6 +21,9 @@ deprecated
 
 /cloud_import/data
 
+/editor_bin/ui2.ori.lua
+/editor_bin/ui21.png
+/editor_bin/ui21.json
 
 # temporary
 /tools-src/depends/src
