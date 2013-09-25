@@ -2,6 +2,7 @@ import os, sys
 import json
 import math
 import Image
+import shutil
 
 tmp_dir = './tmp_gen'
 output_dir = './output'
@@ -76,12 +77,11 @@ def decode_img(src, squad):
 		maxy = src_data[3]
 	else:
 		assert(0)
-	filepath = output_dir+'/'
-	filepath += str(minx)+str(miny)+str(maxx)+str(maxy)
+	filepath = str(minx)+str(miny)+str(maxx)+str(maxy)
 	filepath += '.png'
 
 	if not os.path.isfile(filepath):
-		images[src["tex"]].crop((minx, miny, maxx, maxy)).save(filepath)
+		images[src["tex"]].crop((minx, miny, maxx, maxy)).save(output_dir+'/'+filepath)
 
 	return filepath
 
@@ -307,6 +307,7 @@ for files in os.listdir(tmp_dir):
 	if files.endswith('_cmp.tmp'):
 		decode_ani(files)		
 
+shutil.rmtree(tmp_dir)
 
 
 
