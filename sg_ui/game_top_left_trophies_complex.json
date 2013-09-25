@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6460-gaoguang-1.png",
+			"filepath" : "game_top_background_bar_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -26,12 +26,31 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "xp_level_fontblank.json",
+			"filepath" : "6107-tongyong-1.png",
 			"multi color" : "",
-			"name" : "xp_level",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -60.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "bar_text_fontblank.json",
+			"multi color" : "",
+			"name" : "text",
+			"position" : 
+			{
+				"x" : 17.50,
 				"y" : 0.0
 			},
 			"x mirror" : false,
