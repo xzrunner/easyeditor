@@ -5,31 +5,41 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6003-anniu-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6113-tongyong-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		}
 	]
 }
