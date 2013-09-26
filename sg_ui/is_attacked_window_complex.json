@@ -5,101 +5,136 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "is_attacked_background_9patch.json",
+			"filepath" : "building_info_window_bg_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.8000000119209290,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "is_attacked_background2_9patch.json",
+			"filepath" : "building_info_window_bg2_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 1.473342895507813,
-				"y" : -40.89997863769531
+				"x" : 0.0,
+				"y" : -35.79998779296875
 			},
-			"scale" : 0.750,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
-			"angle" : 0.0,
-			"filepath" : "6162-tongyong-1.PNG",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -227.5617675781250,
-				"y" : -0.9999847412109375
-			},
-			"scale" : 0.6000000238418579,
-			"x mirror" : false,
-			"y mirror" : false
-		},
-		
-		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "warning_title_fontblank.json",
+			"multi color" : "",
 			"name" : "title",
 			"position" : 
 			{
 				"x" : 18.4382324218750,
 				"y" : 47.97502136230469
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "_fontblank.json",
+			"multi color" : "",
 			"name" : "info",
 			"position" : 
 			{
 				"x" : 65.80001831054688,
 				"y" : -39.52497863769531
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "time_title_fontblank.json",
+			"multi color" : "",
 			"name" : "time_title",
 			"position" : 
 			{
 				"x" : 68.4382324218750,
 				"y" : -133.5249786376953
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "time_fontblank.json",
+			"multi color" : "",
 			"name" : "time",
 			"position" : 
 			{
 				"x" : -31.5617675781250,
 				"y" : -186.5249786376953
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6162-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -236.5617675781250,
+				"y" : -10.99998474121094
+			},
+			"x mirror" : false,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
 		}
 	]
 }

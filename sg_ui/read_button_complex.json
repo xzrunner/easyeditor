@@ -7,32 +7,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6137-tongyong-1.png",
+			"filepath" : "6005-anniu-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 1.0,
-				"y" : 11.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "change_up_fontblank.json",
+			"filepath" : "title_fontblank.json",
 			"multi color" : "",
-			"name" : "position_up",
+			"name" : "title",
 			"position" : 
 			{
-				"x" : 1.0,
-				"y" : -15.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
