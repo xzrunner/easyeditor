@@ -1,0 +1,45 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "hero_icon_anim.json",
+			"multi color" : "",
+			"name" : "hero",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ex_hero_level_complex.json",
+			"multi color" : "",
+			"name" : "xp",
+			"position" : 
+			{
+				"x" : -78.0,
+				"y" : -49.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		}
+	]
+}

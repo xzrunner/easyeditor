@@ -1,25 +1,25 @@
 
 {
-	"name" : "rank_line",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "6130-tongyong-1.png",
+			"angle" : 1.570796370506287,
+			"filepath" : "36817684391863.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 35.50,
+				"y" : 21.750
 			},
 			"x mirror" : false,
-			"x scale" : 200.0,
+			"x scale" : 1.521126747131348,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 1.515789508819580,
 			"y shear" : 0.0
 		}
 	]
