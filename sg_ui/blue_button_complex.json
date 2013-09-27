@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6007-anniu-1.png",
+			"filepath" : "blue_button_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -14,16 +16,18 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.4499999880790710,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4499999880790710,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "title_fontblank.json",
+			"multi color" : "",
 			"name" : "title",
 			"position" : 
 			{

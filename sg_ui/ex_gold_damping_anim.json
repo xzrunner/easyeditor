@@ -1,0 +1,560 @@
+{
+  "fps": 30, 
+  "layer": [
+    {
+      "frame": [
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 1.0, 
+                "y": -16.0
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 1, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.8, 
+                "y": -15.9
+              }, 
+              "x mirror": false, 
+              "x scale": 1.099609375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.099609375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 2, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.5, 
+                "y": -15.75
+              }, 
+              "x mirror": false, 
+              "x scale": 1.19921875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.19921875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 3, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.7, 
+                "y": -16.05
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0830078125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0830078125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 4, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.35
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9658203125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9658203125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 5, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 1.1, 
+                "y": -16.6
+              }, 
+              "x mirror": false, 
+              "x scale": 0.849609375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.849609375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 6, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 1.0, 
+                "y": -16.4
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9326171875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9326171875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 7, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.2
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0166015625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0166015625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 8, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.7, 
+                "y": -16.0
+              }, 
+              "x mirror": false, 
+              "x scale": 1.099609375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.099609375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 9, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.75, 
+                "y": -16.1
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0498046875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0498046875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 10, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.8, 
+                "y": -16.3
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9990234375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9990234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 11, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.4
+              }, 
+              "x mirror": false, 
+              "x scale": 0.94921875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.94921875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 12, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.35
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9794921875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9794921875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 13, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.25
+              }, 
+              "x mirror": false, 
+              "x scale": 1.009765625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.009765625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 14, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.15
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0390625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0390625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 15, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.8, 
+                "y": -16.1
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0693359375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0693359375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 16, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.75, 
+                "y": -16.1
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0556640625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0556640625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 17, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.85, 
+                "y": -16.2
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0419921875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0419921875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 18, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.2
+              }, 
+              "x mirror": false, 
+              "x scale": 1.02734375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.02734375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 19, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.85, 
+                "y": -16.25
+              }, 
+              "x mirror": false, 
+              "x scale": 1.013671875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.013671875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 20, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.3
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 21, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.25
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 22, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.15
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 23, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.1
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 24, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0.0, 
+              "filepath": "bar_gold_icon_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0.9, 
+                "y": -16.0
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 25, 
+          "tween": false
+        }
+      ]
+    }
+  ], 
+  "name": "ex_gold_damping"
+}
