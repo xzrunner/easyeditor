@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "game_top_right_background_bar_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "game_bar_gary_anim.json",
+			"multi color" : "",
 			"name" : "bar",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "game_top_right_bar_gradient_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -56,13 +62,15 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "TID_CONTAINER_MAX_fontblank.json",
+			"filepath" : "tid_container_max_fontblank.json",
+			"multi color" : "",
 			"name" : "TID_CONTAINER_MAX",
 			"position" : 
 			{
-				"x" : -93.0,
-				"y" : 18.50
+				"x" : -84.0,
+				"y" : 26.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -73,13 +81,15 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "max_amount_fontblank.json",
+			"multi color" : "",
 			"name" : "max_amount",
 			"position" : 
 			{
-				"x" : 20.0,
-				"y" : -4.50
+				"x" : 13.0,
+				"y" : 26.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -90,13 +100,15 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "bar_Text_fontblank.json",
+			"filepath" : "bar_text_fontblank.json",
+			"multi color" : "",
 			"name" : "text",
 			"position" : 
 			{
-				"x" : 12.0,
-				"y" : 19.80447006225586
+				"x" : 18.0,
+				"y" : -0.4999961853027344
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -107,8 +119,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6118-tongyong-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -124,19 +138,21 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6106-tongyong-1.png",
-			"name" : "",
+			"filepath" : "ex_gold_damping_anim.json",
+			"multi color" : "",
+			"name" : "icon",
 			"position" : 
 			{
-				"x" : 110.50,
-				"y" : -0.4999961853027344
+				"x" : 109.0,
+				"y" : 17.50
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]
