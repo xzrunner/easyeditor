@@ -43,7 +43,7 @@
 			},
 			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"y mirror" : true
 		}
 	],
 	"type" : 2,

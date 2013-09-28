@@ -13,8 +13,10 @@
 					[
 						
 						{
+							"add color" : "",
 							"angle" : 0.0,
 							"filepath" : "6412-gaoguang-h3-1.png",
+							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
@@ -39,8 +41,10 @@
 					[
 						
 						{
+							"add color" : "",
 							"angle" : 0.0,
 							"filepath" : "6412-gaoguang-h3-1.png",
+							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
@@ -56,12 +60,14 @@
 						},
 						
 						{
+							"add color" : "",
 							"angle" : 0.0,
 							"filepath" : "6412-gaoguang-h3-2.png",
+							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 21.50,
+								"x" : 11.50,
 								"y" : 0.0
 							},
 							"x mirror" : false,
@@ -73,12 +79,14 @@
 						},
 						
 						{
+							"add color" : "",
 							"angle" : 0.0,
 							"filepath" : "6412-gaoguang-h3-3.png",
+							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 43.0,
+								"x" : 23.50,
 								"y" : 0.0
 							},
 							"x mirror" : false,
@@ -99,8 +107,10 @@
 					[
 						
 						{
+							"add color" : "",
 							"angle" : 0.0,
 							"filepath" : "6412-gaoguang-h3-1.png",
+							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
@@ -116,8 +126,10 @@
 						},
 						
 						{
+							"add color" : "",
 							"angle" : 0.0,
 							"filepath" : "6412-gaoguang-h3-2.png",
+							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
@@ -125,7 +137,7 @@
 								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 27.50,
+							"x scale" : 158.1000061035156,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -133,8 +145,10 @@
 						},
 						
 						{
+							"add color" : "",
 							"angle" : 0.0,
 							"filepath" : "6412-gaoguang-h3-3.png",
+							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
