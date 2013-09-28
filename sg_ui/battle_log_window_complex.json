@@ -116,6 +116,44 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tab_complex.json",
+			"multi color" : "",
+			"name" : "tab1",
+			"position" : 
+			{
+				"x" : -308.50,
+				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tab_complex.json",
+			"multi color" : "",
+			"name" : "tab2",
+			"position" : 
+			{
+				"x" : -120.0,
+				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }

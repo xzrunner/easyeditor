@@ -7,6 +7,25 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
+			"filepath" : "6205-biankuang-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : 57.40000534057617
+			},
+			"x mirror" : false,
+			"x scale" : 13.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 18.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
 			"filepath" : "characters_icon_complex.json",
 			"multi color" : "",
 			"name" : "icon",
@@ -31,7 +50,7 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -4.50,
+				"x" : -1.649993896484375,
 				"y" : 57.0
 			},
 			"x mirror" : false,
