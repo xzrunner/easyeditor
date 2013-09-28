@@ -1,0 +1,34 @@
+#include "Context.h"
+
+//#include <stdio.h>
+
+namespace e9patch
+{
+
+Context* Context::m_instance = NULL;
+
+Context::Context() 
+{
+	property = NULL;
+	library = NULL;
+	stage = NULL;
+	toolbar = NULL;
+
+	isComposeOP = true;
+
+	resizeCMPT = NULL;
+
+	width = 600;
+	height = 400;
+}
+
+Context* Context::Instance()
+{
+	if (!m_instance)
+	{
+		m_instance = new Context();
+	}
+	return m_instance;
+}
+
+} // e9patch
