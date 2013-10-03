@@ -1,0 +1,26 @@
+
+{
+	"name" : "shop_icon_gem_5",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "jy-1000-diamonds-6.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 1.0,
+				"y" : 26.50
+			},
+			"x mirror" : false,
+			"x scale" : 0.6499999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6499999761581421,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,27 @@
+
+{
+	"name" : "shop_icon_shield_2",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "jy-1001-yuanbao-4.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -0.200012207031250,
+				"y" : 19.19999694824219
+			},
+			"x mirror" : false,
+			"x scale" : 0.3,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.3,
+			"y shear" : 0.0
+		}
+
+    ]
+}
