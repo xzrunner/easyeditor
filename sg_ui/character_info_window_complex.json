@@ -1,0 +1,216 @@
+
+{
+	"name" : "character_info_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "char_info_anim.json",
+			"multi color" : "",
+			"name" : "icon",
+			"position" : 
+			{
+				"x" : -288.0,
+				"y" : 71.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -278.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci__fontblank.json",
+			"multi color" : "",
+			"name" : "TID_INFO_PREFERRED_TARGET",
+			"position" : 
+			{
+				"x" : -358.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci_type_fontblank.json",
+			"multi color" : "",
+			"name" : "prefered_target",
+			"position" : 
+			{
+				"x" : -266.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci__fontblank.json",
+			"multi color" : "",
+			"name" : "TID_INFO_DAMAGE_TYPE",
+			"position" : 
+			{
+				"x" : -158.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci_type_fontblank.json",
+			"multi color" : "",
+			"name" : "damage_type",
+			"position" : 
+			{
+				"x" : -66.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci__fontblank.json",
+			"multi color" : "",
+			"name" : "TID_INFO_TARGET_TYPE",
+			"position" : 
+			{
+				"x" : 47.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci_type_fontblank.json",
+			"multi color" : "",
+			"name" : "target_type",
+			"position" : 
+			{
+				"x" : 139.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci__fontblank.json",
+			"multi color" : "",
+			"name" : "TID_INFO_HOUSING",
+			"position" : 
+			{
+				"x" : 256.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci_type_fontblank.json",
+			"multi color" : "",
+			"name" : "housing",
+			"position" : 
+			{
+				"x" : 349.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "char_info_attribute_complex.json",
+			"multi color" : "",
+			"name" : "attribute",
+			"position" : 
+			{
+				"x" : 148.0499877929688,
+				"y" : 2.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}
