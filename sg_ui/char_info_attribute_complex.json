@@ -16,10 +16,10 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.6000000238418579,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.6000000238418579,
 			"y shear" : 0.0
 		},
 		
@@ -32,7 +32,7 @@
 			"position" : 
 			{
 				"x" : 40.0,
-				"y" : 63.0
+				"y" : 76.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -50,7 +50,7 @@
 			"name" : "hitpoints",
 			"position" : 
 			{
-				"x" : -159.0,
+				"x" : -162.0,
 				"y" : -44.0
 			},
 			"x mirror" : false,
@@ -69,8 +69,8 @@
 			"name" : "train_cost",
 			"position" : 
 			{
-				"x" : -83.0,
-				"y" : -236.0
+				"x" : -122.0,
+				"y" : -207.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -88,8 +88,8 @@
 			"name" : "train_time",
 			"position" : 
 			{
-				"x" : 147.0,
-				"y" : -231.0
+				"x" : 198.0,
+				"y" : -207.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -107,7 +107,7 @@
 			"name" : "speed",
 			"position" : 
 			{
-				"x" : 227.9500122070313,
+				"x" : 239.9500122070313,
 				"y" : -35.0
 			},
 			"x mirror" : false,

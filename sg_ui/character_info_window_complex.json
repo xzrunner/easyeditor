@@ -50,7 +50,7 @@
 			"name" : "TID_INFO_PREFERRED_TARGET",
 			"position" : 
 			{
-				"x" : -358.0,
+				"x" : -364.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -88,7 +88,7 @@
 			"name" : "TID_INFO_DAMAGE_TYPE",
 			"position" : 
 			{
-				"x" : -158.0,
+				"x" : -161.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -107,7 +107,7 @@
 			"name" : "damage_type",
 			"position" : 
 			{
-				"x" : -66.0,
+				"x" : -62.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -126,7 +126,7 @@
 			"name" : "TID_INFO_TARGET_TYPE",
 			"position" : 
 			{
-				"x" : 47.0,
+				"x" : 43.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -145,7 +145,7 @@
 			"name" : "target_type",
 			"position" : 
 			{
-				"x" : 139.0,
+				"x" : 142.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -164,7 +164,7 @@
 			"name" : "TID_INFO_HOUSING",
 			"position" : 
 			{
-				"x" : 256.0,
+				"x" : 248.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -183,7 +183,7 @@
 			"name" : "housing",
 			"position" : 
 			{
-				"x" : 349.0,
+				"x" : 346.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,

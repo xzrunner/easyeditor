@@ -19,7 +19,7 @@
 			"x scale" : 0.6000000238418579,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 5.0,
+			"y scale" : 7.0,
 			"y shear" : 0.0
 		},
 		
@@ -50,8 +50,8 @@
 			"name" : "cur_info",
 			"position" : 
 			{
-				"x" : -29.55000305175781,
-				"y" : 90.50
+				"x" : -30.10000610351563,
+				"y" : 88.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -69,8 +69,8 @@
 			"name" : "next_info",
 			"position" : 
 			{
-				"x" : -31.10000610351563,
-				"y" : 109.50
+				"x" : -35.10000610351563,
+				"y" : 111.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
