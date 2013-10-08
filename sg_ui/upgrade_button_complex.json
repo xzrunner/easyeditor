@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "blue_button_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "upgrade_button_text_fontblank.json",
+			"multi color" : "",
 			"name" : "Text",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6105-tongyong-1.png",
+			"multi color" : "",
 			"name" : "elixir",
 			"position" : 
 			{
@@ -56,8 +62,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6106-tongyong-1.png",
+			"multi color" : "",
 			"name" : "gold",
 			"position" : 
 			{

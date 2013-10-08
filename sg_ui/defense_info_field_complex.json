@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6130-tongyong-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "defense_info_title_fontblank.json",
+			"multi color" : "",
 			"name" : "info_title",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "defense_info_value_fontblank.json",
+			"multi color" : "",
 			"name" : "info_value",
 			"position" : 
 			{

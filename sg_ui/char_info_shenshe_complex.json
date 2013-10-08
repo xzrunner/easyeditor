@@ -1,0 +1,96 @@
+{
+    "name" : "char_info_shenshe",
+    "sprite" : 
+    [
+        {
+            "add color" : "",
+            "angle" : 0.0,
+            "filepath" : "6175-tongyong-1.png",
+            "multi color" : "",
+            "name" : "",
+            "position" : 
+            {
+                "x" : 0.0,
+                "y" : 0.0
+            },
+            "x mirror" : false,
+            "x scale" : 0.7,
+            "x shear" : 0.0,
+            "y mirror" : false,
+            "y scale" : 0.7,
+            "y shear" : 0.0
+        },
+        {
+            "add color" : "",
+            "angle" : 0.0,
+            "filepath" : "6164-tongyong-1.png",
+            "multi color" : "",
+            "name" : "",
+            "position" : 
+            {
+                "x" : 0.0,
+                "y" : 0.0
+            },
+            "x mirror" : false,
+            "x scale" : 0.7,
+            "x shear" : 0.0,
+            "y mirror" : false,
+            "y scale" : 0.7,
+            "y shear" : 0.0
+        },
+        {
+            "add color" : "",
+            "angle" : 0.0,
+            "filepath" : "6164-tongyong-2.png",
+            "multi color" : "",
+            "name" : "",
+            "position" : 
+            {
+                "x" : 0.0,
+                "y" : 0.0
+            },
+            "x mirror" : false,
+            "x scale" : 0.7,
+            "x shear" : 0.0,
+            "y mirror" : false,
+            "y scale" : 0.7,
+            "y shear" : 0.0
+        },
+        {
+            "add color" : "",
+            "angle" : 0.0,
+            "filepath" : "6164-tongyong-3.png",
+            "multi color" : "",
+            "name" : "",
+            "position" : 
+            {
+                "x" : 0.0,
+                "y" : 0.0
+            },
+            "x mirror" : false,
+            "x scale" : 0.7,
+            "x shear" : 0.0,
+            "y mirror" : false,
+            "y scale" : 0.7,
+            "y shear" : 0.0
+        },
+        {
+            "add color" : "",
+            "angle" : 0.0,
+            "filepath" : "6164-tongyong-4.png",
+            "multi color" : "",
+            "name" : "",
+            "position" : 
+            {
+                "x" : 0.0,
+                "y" : 0.0
+            },
+            "x mirror" : false,
+            "x scale" : 0.7,
+            "x shear" : 0.0,
+            "y mirror" : false,
+            "y scale" : 0.7,
+            "y shear" : 0.0
+        }
+    ]
+}

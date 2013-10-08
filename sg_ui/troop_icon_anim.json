@@ -1331,12 +1331,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6166-tongyong-1.PNG",
+							"filepath" : "6163-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -41.000000,
-								"y" : 43.000000
+								"x" : -20.000000,
+								"y" : 92.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -1400,22 +1400,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -1464,22 +1448,6 @@
 							"position":
 							{
 								"x": -26.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -1552,22 +1520,6 @@
 							"position":
 							{
 								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 30.500000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -1656,22 +1608,6 @@
 							"position":
 							{
 								"x": 30.500000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 55.250000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -1784,22 +1720,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 83.750000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -1811,12 +1731,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6167-tongyong-1.PNG",
+							"filepath" : "6166-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -34.000000,
-								"y" : 162.000000
+								"x" : -41.000000,
+								"y" : 43.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -1832,6 +1752,86 @@
 							"position":
 							{
 								"x": -55.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 30.500000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 55.250000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 83.750000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -1872,22 +1872,6 @@
 							"position":
 							{
 								"x": -55.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -1944,22 +1928,6 @@
 							"position":
 							{
 								"x": -26.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2032,22 +2000,6 @@
 							"position":
 							{
 								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 30.500000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2144,22 +2096,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 55.250000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -2171,12 +2107,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6163-tongyong-1.PNG",
+							"filepath" : "6167-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -20.000000,
-								"y" : 92.000000
+								"x" : -34.000000,
+								"y" : 162.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -2200,6 +2136,70 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 30.500000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 55.250000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -2211,12 +2211,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6168-tongyong-1.PNG",
+							"filepath" : "6163-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -1.000000,
-								"y" : 88.000000
+								"x" : -20.000000,
+								"y" : 92.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -2280,22 +2280,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -2344,22 +2328,6 @@
 							"position":
 							{
 								"x": -26.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2432,22 +2400,6 @@
 							"position":
 							{
 								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 30.500000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2536,22 +2488,6 @@
 							"position":
 							{
 								"x": 30.500000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 55.250000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2664,22 +2600,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 83.750000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -2691,12 +2611,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6169-tongyong-1.PNG",
+							"filepath" : "6168-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -16.000000,
-								"y" : -31.000000
+								"x" : -1.000000,
+								"y" : 88.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -2712,6 +2632,86 @@
 							"position":
 							{
 								"x": -55.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 30.500000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 55.250000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 83.750000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2752,22 +2752,6 @@
 							"position":
 							{
 								"x": -55.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2824,22 +2808,6 @@
 							"position":
 							{
 								"x": -26.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -2912,22 +2880,6 @@
 							"position":
 							{
 								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 30.500000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3024,22 +2976,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 55.250000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -3051,12 +2987,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6163-tongyong-1.PNG",
+							"filepath" : "6169-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -20.000000,
-								"y" : 92.000000
+								"x" : -16.000000,
+								"y" : -31.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -3080,6 +3016,70 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 30.500000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 55.250000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -3091,12 +3091,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6170-tongyong-1.PNG",
+							"filepath" : "6163-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -43.000000,
-								"y" : 29.000000
+								"x" : -20.000000,
+								"y" : 92.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -3152,22 +3152,6 @@
 							"position":
 							{
 								"x": -55.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3232,22 +3216,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -3259,12 +3227,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6171-tongyong-1.PNG",
+							"filepath" : "6170-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : 42.000000,
-								"y" : 69.000000
+								"x" : -43.000000,
+								"y" : 29.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -3280,6 +3248,38 @@
 							"position":
 							{
 								"x": -55.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3320,22 +3320,6 @@
 							"position":
 							{
 								"x": -55.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3400,22 +3384,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -3427,12 +3395,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6163-tongyong-1.PNG",
+							"filepath" : "6171-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -20.000000,
-								"y" : 92.000000
+								"x" : 42.000000,
+								"y" : 69.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -3448,6 +3416,38 @@
 							"position":
 							{
 								"x": -55.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3488,22 +3488,6 @@
 							"position":
 							{
 								"x": -55.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3568,22 +3552,6 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
@@ -3595,12 +3563,12 @@
 					[
 						{
 							"angle" : 0.0,
-							"filepath" : "6196-tongyong-1.PNG",
+							"filepath" : "6163-tongyong-1.PNG",
 							"name" : "",
 							"position" :
 							{
-								"x" : -9.000000,
-								"y" : -48.000000
+								"x" : -20.000000,
+								"y" : 92.000000
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -3616,6 +3584,38 @@
 							"position":
 							{
 								"x": -55.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3656,22 +3656,6 @@
 							"position":
 							{
 								"x": -55.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": -26.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3728,22 +3712,6 @@
 							"position":
 							{
 								"x": -26.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 2.000000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3816,22 +3784,6 @@
 							"position":
 							{
 								"x": 2.000000,
-								"y": -68.000000
-							},
-							"x mirror" : false,
-							"x scale" : 0.3,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 0.3,
-							"y shear" : 0.0
-						},
-						{
-							"angle": 0.0,
-							"filepath": "6101-tongyong-1.png",
-							"name": "",
-							"position":
-							{
-								"x": 30.500000,
 								"y": -68.000000
 							},
 							"x mirror" : false,
@@ -3928,6 +3880,94 @@
 							"y mirror" : false,
 							"y scale" : 0.3,
 							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 55,
+					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "6196-tongyong-1.PNG",
+							"name" : "",
+							"position" :
+							{
+								"x" : -9.000000,
+								"y" : -48.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -55.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -26.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 2.000000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 30.500000,
+								"y": -68.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
 						},
 						{
 							"angle": 0.0,
@@ -3947,7 +3987,7 @@
 						}
 					],
 					"id" : 0,
-					"time" : 55,
+					"time" : 56,
 					"tween" : false
 				}
 			],

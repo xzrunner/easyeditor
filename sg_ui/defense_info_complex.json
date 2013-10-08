@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "defense_info_field_complex.json",
+			"multi color" : "",
 			"name" : "targets_info",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "defense_info_field_complex.json",
+			"multi color" : "",
 			"name" : "damage_info",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "defense_info_field_complex.json",
+			"multi color" : "",
 			"name" : "favorite_info",
 			"position" : 
 			{
@@ -56,8 +62,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "defense_info_field_complex.json",
+			"multi color" : "",
 			"name" : "range_info",
 			"position" : 
 			{

@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "building_info_window_bg_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "building_info_window_bg2_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "info_title_fontblank.json",
+			"multi color" : "",
 			"name" : "title",
 			"position" : 
 			{
@@ -56,8 +62,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "close_button_complex.json",
+			"multi color" : "",
 			"name" : "close_button",
 			"position" : 
 			{
@@ -73,8 +81,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "building_info_window_bg3_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -90,8 +100,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6154-tongyong-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -107,8 +119,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "info_item_name_fontblank.json",
+			"multi color" : "",
 			"name" : "item_name",
 			"position" : 
 			{
@@ -124,8 +138,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "info_text_area_fontblank.json",
+			"multi color" : "",
 			"name" : "text_area",
 			"position" : 
 			{
@@ -141,8 +157,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "info_title2_fontblank.json",
+			"multi color" : "",
 			"name" : "title2",
 			"position" : 
 			{
@@ -158,8 +176,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "info_text_area2_fontblank.json",
+			"multi color" : "",
 			"name" : "text_area2",
 			"position" : 
 			{
@@ -175,8 +195,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "defense_info_complex.json",
+			"multi color" : "",
 			"name" : "defense",
 			"position" : 
 			{
@@ -192,13 +214,72 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "upgrade_icon_fontblank.json",
+			"multi color" : "",
 			"name" : "icon",
 			"position" : 
 			{
 				"x" : -180.0,
 				"y" : 25.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_building_info_bar_fontblank.json",
+			"multi color" : "",
+			"name" : "bar1",
+			"position" : 
+			{
+				"x" : 123.0,
+				"y" : 130.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_building_info_bar_fontblank.json",
+			"multi color" : "",
+			"name" : "bar2",
+			"position" : 
+			{
+				"x" : 123.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_building_info_bar_fontblank.json",
+			"multi color" : "",
+			"name" : "bar3",
+			"position" : 
+			{
+				"x" : 123.0,
+				"y" : 30.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
