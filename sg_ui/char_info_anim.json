@@ -1,0 +1,338 @@
+{
+    "fps" : 30,
+    "layer" : 
+    [
+        
+        {
+            "frame" : 
+            [
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_daoke_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 1,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_shenshe_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 2,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "cha_info_mojin_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 3,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_jiabing_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 4,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_sishi_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 5,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_tianzai_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 6,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_daoshi_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 7,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_shennv_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 8,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_dapeng_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 9,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_xueying_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 10,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_baji_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 11,
+                    "tween" : false
+                },
+                {
+                    "actor" : 
+                    [
+                        
+                        {
+                            "add color" : "",
+                            "angle" : 0.0,
+                            "filepath" : "char_info_yingyan_complex.json",
+                            "multi color" : "",
+                            "name" : "",
+                            "position" : 
+                            {
+                                "x" : 0.0,
+                                "y" : 0.0
+                            },
+                            "x mirror" : false,
+                            "x scale" : 1.0,
+                            "x shear" : 0.0,
+                            "y mirror" : false,
+                            "y scale" : 1.0,
+                            "y shear" : 0.0
+                        }
+                    ],
+                    "id" : 0,
+                    "time" : 12,
+                    "tween" : false
+                }
+            ],
+            "name" : "Layer0"
+        }
+    ],
+    "name" : "char_info"
+}
