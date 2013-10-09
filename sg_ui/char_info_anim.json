@@ -1,338 +1,463 @@
+
 {
-    "fps" : 30,
-    "layer" : 
-    [
-        
-        {
-            "frame" : 
-            [
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_daoke_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 1,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_shenshe_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 2,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "cha_info_mojin_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 3,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_jiabing_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 4,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_sishi_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 5,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_tianzai_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 6,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_daoshi_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 7,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_shennv_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 8,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_dapeng_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 9,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_xueying_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 10,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_baji_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 11,
-                    "tween" : false
-                },
-                {
-                    "actor" : 
-                    [
-                        
-                        {
-                            "add color" : "",
-                            "angle" : 0.0,
-                            "filepath" : "char_info_yingyan_complex.json",
-                            "multi color" : "",
-                            "name" : "",
-                            "position" : 
-                            {
-                                "x" : 0.0,
-                                "y" : 0.0
-                            },
-                            "x mirror" : false,
-                            "x scale" : 1.0,
-                            "x shear" : 0.0,
-                            "y mirror" : false,
-                            "y scale" : 1.0,
-                            "y shear" : 0.0
-                        }
-                    ],
-                    "id" : 0,
-                    "time" : 12,
-                    "tween" : false
-                }
-            ],
-            "name" : "Layer0"
-        }
-    ],
-    "name" : "char_info"
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_daoke_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_shenshe_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 2,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "cha_info_mojin_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_jiabing_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 4,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_sishi_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 5,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_tianzai_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -14.0,
+								"y" : 229.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 6,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_daoshi_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 7,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_shennv_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -26.0,
+								"y" : 235.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 8,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_dapeng_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -17.0,
+								"y" : 203.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 9,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_xueying_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -16.0,
+								"y" : 134.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 10,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_baji_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 11,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "char_info_yingyan_complex.json",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.0,
+								"y" : 226.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 12,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "6290-tongyong-1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 120.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 13,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "6291-tongyong-1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 120.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 14,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "6292-tongyong-1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 120.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 15,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "6293-tongyong-1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 120.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 16,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : "char_info"
 }
