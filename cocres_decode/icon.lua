@@ -18,8 +18,8 @@ local troop_cfg = {
 
 	{name = '6163-tongyong-1.PNG', x = -20, y = 92, level = 1}, -- fill nil
 
-	{name = '6170-tongyong-1.PNG', x = -43, y = 29, level = 3}, -- shennv
-	{name = '6171-tongyong-1.PNG', x = 42, y = 69, level = 3}, -- dapeng
+	{name = '6170-tongyong-1.PNG', x = -21, y = 35, level = 3}, -- shennv
+	{name = '6171-tongyong-1.PNG', x = 50, y = 69, level = 3}, -- dapeng
 
 	{name = '6163-tongyong-1.PNG', x = -20, y = 92, level = 3}, -- fill nil
 
