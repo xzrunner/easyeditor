@@ -1,0 +1,159 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "lab_info_bg_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 101.4750061035156
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "finishnow_button",
+			"position" : 
+			{
+				"x" : 318.0,
+				"y" : 87.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_finishnow_title_fontblank.json",
+			"multi color" : "",
+			"name" : "finishnow_title",
+			"position" : 
+			{
+				"x" : 315.0,
+				"y" : 131.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "icon",
+			"position" : 
+			{
+				"x" : -307.0,
+				"y" : 108.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "lab_upgrade_fontblank.json",
+			"multi color" : "",
+			"name" : "upgrade",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 169.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "lab_name_fontblank.json",
+			"multi color" : "",
+			"name" : "name",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 134.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "lab_time_title_fontblank.json",
+			"multi color" : "",
+			"name" : "time_title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 69.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "lab_time_fontblank.json",
+			"multi color" : "",
+			"name" : "time",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 33.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}
