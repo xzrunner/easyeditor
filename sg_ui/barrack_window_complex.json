@@ -1,0 +1,254 @@
+
+{
+	"name" : "barrack_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_window_bg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 390.0,
+				"y" : 292.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6458-gaoguang-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -39.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "back_button_complex.json",
+			"multi color" : "",
+			"name" : "back_button",
+			"position" : 
+			{
+				"x" : -384.1499938964844,
+				"y" : 293.8000183105469
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 250.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_itemarea_bg_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -100.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ach_window_title_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 293.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_housing_space_fontblank.json",
+			"multi color" : "",
+			"name" : "housing_space",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 71.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_housing_full_fontblank.json",
+			"multi color" : "",
+			"name" : "housing_full",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_tip_fontblank.json",
+			"multi color" : "",
+			"name" : "tip",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "finishnow_button",
+			"position" : 
+			{
+				"x" : 331.0,
+				"y" : 137.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_finishnow_title_fontblank.json",
+			"multi color" : "",
+			"name" : "finishnow_title",
+			"position" : 
+			{
+				"x" : 320.0,
+				"y" : 180.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_timepart_complex.json",
+			"multi color" : "",
+			"name" : "timepart",
+			"position" : 
+			{
+				"x" : 180.0,
+				"y" : 137.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,102 @@
+
+{
+	"name" : "m_barrack_active_slot",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "characters_icon_complex.json",
+			"multi color" : "",
+			"name" : "icon",
+			"position" : 
+			{
+				"x" : 4.0,
+				"y" : -28.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6202-biankuang-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_count_fontblank.json",
+			"multi color" : "",
+			"name" : "count",
+			"position" : 
+			{
+				"x" : -12.750,
+				"y" : 50.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_bar_anim.json",
+			"multi color" : "",
+			"name" : "bar",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -35.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.2000000029802322,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_time_fontblank.json",
+			"multi color" : "",
+			"name" : "time",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}
