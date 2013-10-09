@@ -1,15 +1,15 @@
 
 {
-	"name" : "troop_info_icon_cell",
+	"name" : "spell_info_icon_cell",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "troop_icon_anim.json",
+			"filepath" : "spell_icon_anim.json",
 			"multi color" : "",
-			"name" : "troop",
+			"name" : "spell",
 			"position" : 
 			{
 				"x" : -8.50,

@@ -4,7 +4,7 @@
 	"color" : "0xffffffff",
 	"font" : "",
 	"height" : 24.0,
-	"name" : "barrack_slot_count",
+	"name" : "barrack_housing_space",
 	"size" : 16.0,
-	"width" : 64.0
+	"width" : 600.0
 }

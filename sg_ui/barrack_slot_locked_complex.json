@@ -12,8 +12,8 @@
 			"name" : "icon",
 			"position" : 
 			{
-				"x" : 4.0,
-				"y" : -28.0
+				"x" : 1.0,
+				"y" : -26.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -50,7 +50,7 @@
 			"name" : "hint",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -8.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,

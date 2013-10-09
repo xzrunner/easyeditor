@@ -1,57 +1,19 @@
 
 {
-	"name" : "m_shop_item_res_pack",
+	"name" : "spellforge_working",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "shop_item_bg_9patch.json",
+			"filepath" : "barrack_yellow_button_complex.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "finishnow_button",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "6154-tongyong-1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 0.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.750,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.750,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "mount_icon_fontblank.json",
-			"multi color" : "",
-			"name" : "icon",
-			"position" : 
-			{
-				"x" : -2.0,
-				"y" : 2.0
+				"x" : 331.0,
+				"y" : 137.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "shop_item_title3_fontblank.json",
+			"filepath" : "barrack_finishnow_title_fontblank.json",
 			"multi color" : "",
-			"name" : "title",
+			"name" : "finishnow_title",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 102.50
+				"x" : 320.0,
+				"y" : 180.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -83,13 +45,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "shop_item_amount2_fontblank.json",
+			"filepath" : "barrack_timepart_complex.json",
 			"multi color" : "",
-			"name" : "amount",
+			"name" : "timepart",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 64.0
+				"x" : 180.0,
+				"y" : 137.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -102,57 +64,95 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "shop_item_title_bar2_9patch.json",
+			"filepath" : "barrack_active_item_complex.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "slot_5",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -90.0
+				"x" : -338.0,
+				"y" : 140.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.8000000119209290,
+			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.8000000119209290,
+			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "res_icon_all_complex.json",
+			"filepath" : "barrack_active_item_complex.json",
 			"multi color" : "",
-			"name" : "res_icon",
+			"name" : "slot_4",
 			"position" : 
 			{
-				"x" : -103.50,
-				"y" : -92.0
+				"x" : -241.0,
+				"y" : 140.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.750,
+			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.750,
+			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "shop_item_price_fontblank.json",
+			"filepath" : "barrack_active_item_complex.json",
 			"multi color" : "",
-			"name" : "price",
+			"name" : "slot_3",
 			"position" : 
 			{
-				"x" : 36.0,
-				"y" : -81.0
+				"x" : -144.0,
+				"y" : 140.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "",
+			"name" : "slot_2",
+			"position" : 
+			{
+				"x" : -47.0,
+				"y" : 140.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "",
+			"name" : "slot_1",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 140.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		}
 	]
