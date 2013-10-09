@@ -64,25 +64,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "mount_icon_fontblank.json",
-			"multi color" : "",
-			"name" : "icon",
-			"position" : 
-			{
-				"x" : -307.0,
-				"y" : 108.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "lab_upgrade_fontblank.json",
 			"multi color" : "",
 			"name" : "upgrade",
@@ -153,6 +134,25 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "char_info_anim.json",
+			"multi color" : "",
+			"name" : "icon",
+			"position" : 
+			{
+				"x" : -293.8299865722656,
+				"y" : 31.03500366210938
+			},
+			"x mirror" : false,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
 			"y shear" : 0.0
 		}
 	]
