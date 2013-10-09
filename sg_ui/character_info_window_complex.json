@@ -50,26 +50,7 @@
 			"name" : "TID_INFO_PREFERRED_TARGET",
 			"position" : 
 			{
-				"x" : -364.0,
-				"y" : -256.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ci_type_fontblank.json",
-			"multi color" : "",
-			"name" : "prefered_target",
-			"position" : 
-			{
-				"x" : -266.0,
+				"x" : -363.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -88,7 +69,7 @@
 			"name" : "TID_INFO_DAMAGE_TYPE",
 			"position" : 
 			{
-				"x" : -161.0,
+				"x" : -126.4000244140625,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -107,7 +88,7 @@
 			"name" : "damage_type",
 			"position" : 
 			{
-				"x" : -62.0,
+				"x" : -28.40002441406250,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -126,7 +107,7 @@
 			"name" : "TID_INFO_TARGET_TYPE",
 			"position" : 
 			{
-				"x" : 43.0,
+				"x" : 91.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -145,7 +126,7 @@
 			"name" : "target_type",
 			"position" : 
 			{
-				"x" : 142.0,
+				"x" : 189.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -164,26 +145,7 @@
 			"name" : "TID_INFO_HOUSING",
 			"position" : 
 			{
-				"x" : 248.0,
-				"y" : -256.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ci_type_fontblank.json",
-			"multi color" : "",
-			"name" : "housing",
-			"position" : 
-			{
-				"x" : 346.0,
+				"x" : 307.0,
 				"y" : -256.0
 			},
 			"x mirror" : false,
@@ -202,8 +164,46 @@
 			"name" : "attribute",
 			"position" : 
 			{
-				"x" : 148.0499877929688,
-				"y" : 2.0
+				"x" : 140.5499877929688,
+				"y" : -53.20167541503906
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci_type1_fontblank.json",
+			"multi color" : "",
+			"name" : "prefered_target",
+			"position" : 
+			{
+				"x" : -250.0,
+				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ci_type2_fontblank.json",
+			"multi color" : "",
+			"name" : "housing",
+			"position" : 
+			{
+				"x" : 375.0,
+				"y" : -256.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

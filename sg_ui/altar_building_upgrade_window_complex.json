@@ -1,57 +1,38 @@
 
 {
-	"name" : "character_window",
+	"name" : "altar_building_upgrade_window",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "character_info_bg_window_complex.json",
+			"filepath" : "rank_window_bg_9patch.json",
 			"multi color" : "",
-			"name" : "window",
+			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "character_info_window_complex.json",
+			"filepath" : "close_button_complex.json",
 			"multi color" : "",
-			"name" : "attribute",
+			"name" : "close_button",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 69.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "upgrade_button_complex.json",
-			"multi color" : "",
-			"name" : "upgrade_button",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -269.0
+				"x" : 394.2999877929688,
+				"y" : 297.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -70,7 +51,64 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 298.0
+				"y" : 295.3999938964844
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "character_info_window_complex.json",
+			"multi color" : "",
+			"name" : "attribute",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 103.1508331298828
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "upgrade_button_complex.json",
+			"multi color" : "",
+			"name" : "upgrade_button",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -250.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ex_upgrade_time_box_complex.json",
+			"multi color" : "",
+			"name" : "time_box",
+			"position" : 
+			{
+				"x" : -339.0,
+				"y" : -86.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
