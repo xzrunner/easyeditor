@@ -116,6 +116,25 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "char_info_attack_speed_complex.json",
+			"multi color" : "",
+			"name" : "attack_speed",
+			"position" : 
+			{
+				"x" : -122.0,
+				"y" : -207.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }

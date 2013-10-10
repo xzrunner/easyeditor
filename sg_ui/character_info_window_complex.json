@@ -12,8 +12,8 @@
 			"name" : "icon",
 			"position" : 
 			{
-				"x" : -308.3500366210938,
-				"y" : -120.0
+				"x" : -238.3500366210938,
+				"y" : -172.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -204,6 +204,44 @@
 			{
 				"x" : 375.0,
 				"y" : -256.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "ex_pentagon",
+			"position" : 
+			{
+				"x" : 141.0,
+				"y" : -55.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "pentagon",
+			"position" : 
+			{
+				"x" : 141.0,
+				"y" : -55.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
