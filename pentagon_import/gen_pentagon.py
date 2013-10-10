@@ -1,14 +1,20 @@
 import os
 import math
+import sys
 
+SRC_POS = sys.argv[1]
+TEX = int(sys.argv[2])
+FILE_NAME = sys.argv[3]
+OUTPUT = sys.argv[4]
+INDEX = int(sys.argv[5])
+START_ID = int(sys.argv[6])
 
-SRC_POS = '46,562, 82,562, 82,526, 46,526'
-FILE_NAME = '角色5围表.csv'
-OUTPUT = 'pentagon.lua'
-EDGE = 300
-INDEX = 19
-START_ID = 0
-
+# SRC_POS = '46,562, 82,562, 82,526, 46,526'
+# OUTPUT = 'pentagon.lua'
+EDGE = 250*0.6
+# INDEX = 19
+# START_ID = 0
+# TEX = 0
 
 def rotate(src, rad, dst):
 	dst[0] = src[0] * math.cos(rad) - src[1] * math.sin(rad)
@@ -38,7 +44,7 @@ def write2file(files, vertex):
 
 	i = 0
 	while i < 5:
-		files.write('\t{ tex = 0, src = { '+SRC_POS+' }, screen = { ')
+		files.write('\t{ tex = %d, src = { %s }, screen = { ' % (TEX, SRC_POS))
 		files.write('%d, %d, %d, %d, %d, %d, %d, %d' % (vertex[i*2]*16, vertex[i*2+1]*16, vertex[((i+1)%5)*2]*16, vertex[((i+1)%5)*2+1]*16, 0, 0, 0, 0))
 		files.write(" } },\n")
 		i += 1
@@ -104,5 +110,6 @@ def gen_pentagon():
 		gen_vertex(EDGE, data, vertex)
 		write2file(files, vertex)
 
+	write_anim(files, name, start_id, START_ID-start_id)
 
 gen_pentagon()
