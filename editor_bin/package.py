@@ -9,6 +9,8 @@ _pjoin = os.path.join
 
 pwd = os.getcwd()
 
+PYTHON = _pjoin(pwd, '..', 'tools', 'Python27', 'python.exe')
+
 tex_json = {}
 
 res = _abspath(_pjoin(pwd, '..', 'sg_ui'))
@@ -139,10 +141,10 @@ def get_pentagon():
 def run_pentagon():
     src_pos, tex = get_pentagon()
     # gen char
-    cmd = "python ../pentagon_import/gen_pentagon.py %s %d ../pentagon_import/character.csv ../pentagon_import/pt_char.lua 19 %d"  % (src_pos, tex, 10527)
+    cmd = '%s ../pentagon_import/gen_pentagon.py %s %d ../pentagon_import/character.csv ../pentagon_import/pt_char.lua 19 %d'  % (PYTHON, src_pos, tex, 10527)
     _run_cmd(cmd)
     # gen hero
-    cmd = "python ../pentagon_import/gen_pentagon.py %s %d ../pentagon_import/hero.csv ../pentagon_import/pt_hero.lua 7 %d" % (src_pos, tex, 11527)
+    cmd = '%s ../pentagon_import/gen_pentagon.py %s %d ../pentagon_import/hero.csv ../pentagon_import/pt_hero.lua 7 %d' % (PYTHON, src_pos, tex, 11527)
     _run_cmd(cmd)
 
 # texturepacker
