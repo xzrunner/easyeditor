@@ -7,50 +7,69 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "characters_icon_complex.json",
-			"multi color" : "",
-			"name" : "icon",
-			"position" : 
-			{
-				"x" : 1.0,
-				"y" : -26.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "dotted_frame_complex.json",
+			"filepath" : "6204-biankuang-4.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -80.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "barrack_slot_locked_hint_fontblank.json",
+			"filepath" : "6204-biankuang-3.png",
 			"multi color" : "",
-			"name" : "hint",
+			"name" : "",
 			"position" : 
 			{
-				"x" : -8.0,
+				"x" : 1.0,
+				"y" : 125.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6204-biankuang-3.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -7.0,
+				"y" : -127.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 3.141592502593994,
+			"filepath" : "6204-biankuang-4.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 80.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,

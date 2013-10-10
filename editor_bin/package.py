@@ -24,6 +24,10 @@ def _run_cmd(cmd):
     print "_run_cmd -------------::", cmd
     os.system(cmd.encode('cp936'))
 
+def _del_file(name):
+    if os.path.isfile(name):
+        _run_cmd('DEL /Q/F "%s"' % name)
+
 # texture packer
 def call_tex_pack(png, tex, res, redundant_files):
     TMP_FILE = _pjoin(pwd, 'texturepacker.output.log')
@@ -82,6 +86,8 @@ def pack_textures():
     redundant_files = []
     tex_json[0] = tex1
     if call_tex_pack(png1, tex1, res, redundant_files):
+        _del_file('ui22.png')
+        _del_file('ui22.json')
         return
 
     print "redundant_files:", redundant_files
