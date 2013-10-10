@@ -1,0 +1,64 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "next_match_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "res_shurukuang_gold_complex.json",
+			"multi color" : "",
+			"name" : "cost",
+			"position" : 
+			{
+				"x" : 7.0,
+				"y" : -23.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "next_match_fontblank.json",
+			"multi color" : "",
+			"name" : "next",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 24.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}
