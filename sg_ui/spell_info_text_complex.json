@@ -1,19 +1,19 @@
 
 {
-	"name" : "character_window",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "character_info_bg_window_complex.json",
+			"filepath" : "defense_info_field_complex.json",
 			"multi color" : "",
-			"name" : "window",
+			"name" : "attack_traget",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 0.0
+				"y" : 20.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -26,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "character_info_window_complex.json",
+			"filepath" : "defense_info_field_complex.json",
 			"multi color" : "",
-			"name" : "attribute",
+			"name" : "cost_time",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 85.0
+				"y" : 48.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -45,32 +45,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ach_window_title_fontblank.json",
+			"filepath" : "defense_info_field_complex.json",
 			"multi color" : "",
-			"name" : "title",
+			"name" : "attack_type",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 298.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "altar_text_area_fontblank.json",
-			"multi color" : "",
-			"name" : "text_area",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -257.0
+				"y" : 76.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

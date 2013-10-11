@@ -402,8 +402,8 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
-
-        {
+		
+		{
 			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "spellforge_working_complex.json",
@@ -420,6 +420,25 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-        }
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "spell_info",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
 	]
 }
