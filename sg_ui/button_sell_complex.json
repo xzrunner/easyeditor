@@ -1,57 +1,57 @@
 
 {
-	"name" : "troop_info_icon_cell",
+	"name" : "buildingbutton_sell",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "troop_spell_anim.json",
-			"multi color" : "",
-			"name" : "troop",
-			"position" : 
-			{
-				"x" : -8.50,
-				"y" : -19.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.3000000119209290,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.3000000119209290,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "info_icon_bg_9patch.json",
+			"filepath" : "6002-anniu-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -3.0,
-				"y" : -8.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.3000000119209290,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.3000000119209290,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "troop_icon_amount_fontblank.json",
+			"filepath" : "6197-tongyong-1.png",
 			"multi color" : "",
-			"name" : "amount",
+			"name" : "",
 			"position" : 
 			{
-				"x" : -10.84999847412109,
-				"y" : 19.90000152587891
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tid_button_info_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_BUTTON_SELL",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -39.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

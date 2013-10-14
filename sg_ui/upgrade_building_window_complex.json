@@ -249,6 +249,25 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "troop_spell_show_icon_complex.json",
+			"multi color" : "",
+			"name" : "show_icon",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -104.0500030517578
+			},
+			"x mirror" : false,
+			"x scale" : 0.3499999940395355,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.3499999940395355,
+			"y shear" : 0.0
 		}
 	]
 }
