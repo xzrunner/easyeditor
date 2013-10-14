@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_item_bg_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6118-tongyong-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_rank_fontblank.json",
+			"multi color" : "",
 			"name" : "rank",
 			"position" : 
 			{
@@ -56,8 +62,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6459-gaoguang-1.png",
+			"multi color" : "",
 			"name" : "line",
 			"position" : 
 			{
@@ -73,8 +81,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_player_name_fontblank.json",
+			"multi color" : "",
 			"name" : "player_name",
 			"position" : 
 			{
@@ -90,8 +100,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_attack_defend_fontblank.json",
+			"multi color" : "",
 			"name" : "attack_defend",
 			"position" : 
 			{
@@ -107,8 +119,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_scorce_fontblank.json",
+			"multi color" : "",
 			"name" : "score",
 			"position" : 
 			{
@@ -124,8 +138,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -141,8 +157,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "level_indicator_complex.json",
+			"multi color" : "",
 			"name" : "level_indicator",
 			"position" : 
 			{
@@ -158,8 +176,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_change_down_complex.json",
+			"multi color" : "",
 			"name" : "down",
 			"position" : 
 			{
@@ -175,8 +195,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_change_static_complex.json",
+			"multi color" : "",
 			"name" : "static",
 			"position" : 
 			{
@@ -192,8 +214,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "rank_change_up_complex.json",
+			"multi color" : "",
 			"name" : "up",
 			"position" : 
 			{
