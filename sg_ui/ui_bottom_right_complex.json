@@ -12,25 +12,6 @@
 			"name" : "button_settings",
 			"position" : 
 			{
-				"x" : -49.0,
-				"y" : 333.50
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "game_friend_button_complex.json",
-			"multi color" : "",
-			"name" : "friends",
-			"position" : 
-			{
 				"x" : -48.50,
 				"y" : 254.0
 			},
