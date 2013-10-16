@@ -15,13 +15,13 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6174-tongyong-1.png",
+							"filepath" : "6173-tongyong-1.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -44.0,
-								"y" : -17.0
+								"y" : -13.0
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -43,13 +43,13 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6173-tongyong-1.png",
+							"filepath" : "6174-tongyong-1.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -44.0,
-								"y" : -13.0
+								"y" : -17.0
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -63,6 +63,7 @@
 					"time" : 2,
 					"tween" : false
 				}
+
 			],
 			"name" : "Layer0"
 		}
