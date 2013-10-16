@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "game_top_right_elixir_bar_complex.json",
+			"multi color" : "",
 			"name" : "elixir_bar",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "game_top_right_diamond_complex.json",
+			"multi color" : "",
 			"name" : "diamond_bar",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "game_top_right_gold_bar_complex.json",
+			"multi color" : "",
 			"name" : "gold_bar",
 			"position" : 
 			{
@@ -52,23 +58,6 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"angle" : 0.0,
-			"filepath" : "game_top_diamond_button_complex.json",
-			"name" : "add_diamonds_button",
-			"position" : 
-			{
-				"x" : -192.0,
-				"y" : -160.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
 			"y shear" : 0.0
 		}
 	]

@@ -5,73 +5,79 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "game_top_background_bar_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.50,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6001-anniu-1.png",
-			"name" : "button",
-			"position" : 
-			{
-				"x" : 62.0,
-				"y" : 0.750
-			},
-			"scale" : 0.50,
-			"x mirror" : false,
-			"y mirror" : false
-		},
-		
-		{
-			"angle" : 0.0,
-			"filepath" : "6110-tongyong-1.png",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -79.0,
-				"y" : 2.750
-			},
-			"scale" : 0.50,
-			"x mirror" : false,
-			"y mirror" : false
-		},
-		
-		{
-			"angle" : 0.0,
-			"filepath" : "TID_BUILDER_fontblank.json",
+			"filepath" : "tid_builder_fontblank.json",
+			"multi color" : "",
 			"name" : "TID_BUILDER",
 			"position" : 
 			{
 				"x" : -4.50,
 				"y" : 24.750
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "Text_fontblank.json",
+			"filepath" : "text_fontblank.json",
+			"multi color" : "",
 			"name" : "Text",
 			"position" : 
 			{
 				"x" : -11.0,
 				"y" : 0.250
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "worker_button_complex.json",
+			"multi color" : "",
+			"name" : "button",
+			"position" : 
+			{
+				"x" : -79.0,
+				"y" : 2.800003051757813
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		}
 	]
 }
