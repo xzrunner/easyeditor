@@ -3,8 +3,8 @@
 	"align" : 1.0,
 	"color" : "0xffffffff",
 	"font" : "",
-	"height" : 18.0,
+	"height" : 28.0,
 	"name" : "barrack_slot_price",
-	"size" : 14.0,
-	"width" : 64.0
+	"size" : 20.0,
+	"width" : 128.0
 }
