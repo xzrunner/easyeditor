@@ -1,0 +1,83 @@
+
+{
+	"name" : "br_img",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0",
+			"angle" : 0.0,
+			"filepath" : "jy-0003-1.png",
+			"multi color" : "0xD0",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 5.0,
+				"y" : -22.0
+			},
+			"x mirror" : true,
+			"x scale" : 1.100000023841858,
+			"x shear" : 0.0,
+			"y mirror" : true,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0",
+			"angle" : 0.0,
+			"filepath" : "jy-0003-2.png",
+			"multi color" : "0xd0",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -322.50,
+				"y" : -21.0
+			},
+			"x mirror" : false,
+			"x scale" : 150.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 15.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0",
+			"angle" : 0.0,
+			"filepath" : "jy-0003-2.png",
+			"multi color" : "0xD0",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 392.50,
+				"y" : -82.0
+			},
+			"x mirror" : false,
+			"x scale" : 180.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 15.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0",
+			"angle" : 0.0,
+			"filepath" : "jy-0003-2.png",
+			"multi color" : "0xD0",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -295.0,
+				"y" : -82.0
+			},
+			"x mirror" : false,
+			"x scale" : 163.750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 15.0,
+			"y shear" : 0.0
+		}
+	]
+}

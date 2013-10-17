@@ -1,0 +1,197 @@
+
+{
+	"name" : "br_loot",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 8.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.299999952316284,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_tid_what_you_got_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_WHAT_YOU_GOT",
+			"position" : 
+			{
+				"x" : -6.0,
+				"y" : 58.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6106-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -248.0,
+				"y" : 28.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_loot_text_complex.json",
+			"multi color" : "",
+			"name" : "loot_gold",
+			"position" : 
+			{
+				"x" : -43.0,
+				"y" : 26.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -35.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.299999952316284,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6105-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -246.0,
+				"y" : -13.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_loot_text_complex.json",
+			"multi color" : "",
+			"name" : "loot_elixir",
+			"position" : 
+			{
+				"x" : -43.0,
+				"y" : -15.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.299999952316284,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -242.0,
+				"y" : -58.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_loot_text_complex.json",
+			"multi color" : "",
+			"name" : "loot_trophy_position2",
+			"position" : 
+			{
+				"x" : -43.0,
+				"y" : -61.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

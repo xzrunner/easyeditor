@@ -1,0 +1,311 @@
+
+{
+	"name" : "end_of_battle_screen_new",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : -0.001504983985796571,
+			"filepath" : "br_screen_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_img2_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 504.43847656250,
+				"y" : 253.4179992675781
+			},
+			"x mirror" : false,
+			"x scale" : 1.299999952316284,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.299999952316284,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : -0.0003452669770922512,
+			"filepath" : "br_img_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 76.13585662841797,
+				"y" : 273.6300659179688
+			},
+			"x mirror" : true,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : true,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_role_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -357.4841308593750,
+				"y" : 68.15609741210938
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_tid_defeat_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_DEFEAT",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 73.5778808593750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_tid_victory_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_VICTORY",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 73.5778808593750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_loot_complex.json",
+			"multi color" : "",
+			"name" : "loot",
+			"position" : 
+			{
+				"x" : 153.4866943359375,
+				"y" : -29.42208862304688
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_tid_troops_used_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_TROOPS_USED",
+			"position" : 
+			{
+				"x" : 5.0,
+				"y" : -132.0820159912109
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_troop_complex.json",
+			"multi color" : "",
+			"name" : "troop_area",
+			"position" : 
+			{
+				"x" : -395.0,
+				"y" : -211.8439331054688
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_tid_total_damage_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_TOTAL_DAMAGE",
+			"position" : 
+			{
+				"x" : 150.50,
+				"y" : 146.8278503417969
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "br_damage_fontblank.json",
+			"multi color" : "",
+			"name" : "damage",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 115.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "star_icon_anim.json",
+			"multi color" : "",
+			"name" : "star1",
+			"position" : 
+			{
+				"x" : 37.041503906250,
+				"y" : 229.0
+			},
+			"x mirror" : false,
+			"x scale" : 3.329999923706055,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 3.329999923706055,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : -0.0003452669770922512,
+			"filepath" : "br_img_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -59.01983642578125,
+				"y" : -271.6312866210938
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "home_button_complex.json",
+			"multi color" : "",
+			"name" : "home_button",
+			"position" : 
+			{
+				"x" : 339.0,
+				"y" : -297.4939270019531
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "star_icon_anim.json",
+			"multi color" : "",
+			"name" : "star2",
+			"position" : 
+			{
+				"x" : 154.708496093750,
+				"y" : 229.0
+			},
+			"x mirror" : false,
+			"x scale" : 3.329999923706055,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 3.329999923706055,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "star_icon_anim.json",
+			"multi color" : "",
+			"name" : "star3",
+			"position" : 
+			{
+				"x" : 279.708496093750,
+				"y" : 224.0
+			},
+			"x mirror" : false,
+			"x scale" : 3.329999923706055,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 3.329999923706055,
+			"y shear" : 0.0
+		}
+	]
+}

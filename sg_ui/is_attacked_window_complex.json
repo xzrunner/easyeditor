@@ -64,25 +64,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "_fontblank.json",
-			"multi color" : "",
-			"name" : "info",
-			"position" : 
-			{
-				"x" : 65.80001831054688,
-				"y" : -39.52497863769531
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "time_title_fontblank.json",
 			"multi color" : "",
 			"name" : "time_title",
@@ -134,6 +115,25 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "is_attack_info_fontblank.json",
+			"multi color" : "",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : 68.4382324218750,
+				"y" : -47.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]
