@@ -1,6 +1,23 @@
 
 local _sf = string.format
 
+local show_icon_cfg = {
+	{name = '6163-tongyong-1.PNG', x = -20, y = 92}, -- daoke
+	{name = '6164-tongyong-1.PNG', x = -24, y = 106}, -- shenshe
+	{name = '6165-tongyong-1.PNG', x = -45, y = 148}, -- mojin
+	{name = '6166-tongyong-1.PNG', x = -41, y = 43}, -- jiabing
+	{name = '6167-tongyong-1.PNG', x = -34, y = 162}, -- sishi
+	{name = '6168-tongyong-1.PNG', x = -1, y = 88}, -- tianzai
+	{name = '6169-tongyong-1.PNG', x = -16, y = -31}, -- daoshi
+	{name = '6170-tongyong-1.PNG', x = -21, y = 35}, -- shennv
+	{name = '6171-tongyong-1.PNG', x = 50, y = 69}, -- dapeng
+	{name = '6196-tongyong-1.PNG', x = -9, y = -48}, -- fixme xueying
+	{name = "6290-tongyong-1.PNG", x = 19, y = 38}, -- light
+	{name = "6291-tongyong-1.PNG", x = 19, y = 38}, -- healing
+	{name = "6292-tongyong-1.PNG", x = 19, y = 38}, -- rage
+	{name = "6293-tongyong-1.PNG", x = 19, y = 38}, -- jump
+}
+
 local troop_cfg = {
 	{name = '6163-tongyong-1.PNG', x = -20, y = 92, level = 6}, -- daoke
 	{name = '6164-tongyong-1.PNG', x = -24, y = 106, level = 6}, -- shenshe
@@ -153,11 +170,15 @@ local function _gen(cfg)
 	local ret = ""
 	for i=1,#cfg do
 		local info = cfg[i]
-		for i=1,info.level do
-			ret = ret.._gen_frame(info, i) -- gen start icon
-            if i~= info.level then
-                ret = ret..",\n"
-            end
+		if info.level then
+			for i=1,info.level do
+				ret = ret.._gen_frame(info, i) -- gen start icon
+	            if i~= info.level then
+	                ret = ret..",\n"
+	            end
+			end
+		else
+			ret = ret.._gen_frame(info)
 		end
         if i ~= #cfg then
             ret = ret..",\n"
@@ -176,12 +197,14 @@ end
 
 
 -- gen troop
-_gen_json(troop_cfg, "../sg_ui/troop_icon_anim.json")
+-- _gen_json(troop_cfg, "../sg_ui/troop_icon_anim.json")
 
 -- gen spell
-_gen_json(spell_cfg, "../sg_ui/spell_icon_anim.json")
+-- _gen_json(spell_cfg, "../sg_ui/spell_icon_anim.json")
 
 
+-- gen show icon
+ _gen_json(show_icon_cfg, "../sg_ui/troop_spell_show_icon_anim.json")
 
 
 
