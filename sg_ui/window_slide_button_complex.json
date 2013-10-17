@@ -1,18 +1,18 @@
 
 {
-	"name" : "m_matching",
+	"name" : "m_window_slide_button",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "matching_anim.json",
+			"filepath" : "slide_button_complex.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "next_button",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : 420.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
@@ -26,15 +26,15 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "matching_fontblank.json",
+			"filepath" : "slide_button_complex.json",
 			"multi color" : "",
-			"name" : "hint",
+			"name" : "prev_button",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -420.0,
 				"y" : 0.0
 			},
-			"x mirror" : false,
+			"x mirror" : true,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
