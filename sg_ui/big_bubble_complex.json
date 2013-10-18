@@ -1,0 +1,83 @@
+
+{
+	"name" : "big_bubble",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "big_bubble_bg_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 20.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.65917968750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.65917968750,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "big_bubble_fontblank.json",
+			"multi color" : "",
+			"name" : "Text",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 29.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6106-tongyong-1.png",
+			"multi color" : "",
+			"name" : "Gold",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 27.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6105-tongyong-1.png",
+			"multi color" : "",
+			"name" : "Elixir",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		}
+	]
+}
