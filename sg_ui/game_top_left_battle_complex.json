@@ -1,19 +1,19 @@
 
 {
-	"name" : "",
+	"name" : "ui_top_left_battle",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_top_right_background_bar_9patch.json",
+			"filepath" : "6118-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 26.0,
+				"y" : -37.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -26,51 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_bar_gary_anim.json",
+			"filepath" : "level_indicator_complex.json",
 			"multi color" : "",
-			"name" : "bar",
+			"name" : "xp",
 			"position" : 
 			{
-				"x" : 106.1865997314453,
-				"y" : 0.2500038146972656
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "game_top_right_bar_gradient_9patch.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 8.499998092651367
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tid_container_max_fontblank.json",
-			"multi color" : "",
-			"name" : "TID_CONTAINER_MAX",
-			"position" : 
-			{
-				"x" : -84.0,
-				"y" : 26.50
+				"x" : 25.50,
+				"y" : -37.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -83,13 +45,146 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "max_amount_fontblank.json",
+			"filepath" : "xp_name_fontblank.json",
 			"multi color" : "",
-			"name" : "max_amount",
+			"name" : "Name",
 			"position" : 
 			{
-				"x" : 13.0,
-				"y" : 26.50
+				"x" : 126.0,
+				"y" : -35.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 26.0,
+				"y" : -197.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "bar_text_fontblank.json",
+			"multi color" : "",
+			"name" : "WinTrophy",
+			"position" : 
+			{
+				"x" : 111.9999847412109,
+				"y" : -195.8394775390625
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 26.0,
+				"y" : -297.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "bar_text_fontblank.json",
+			"multi color" : "",
+			"name" : "LoseTrophy",
+			"position" : 
+			{
+				"x" : 111.9999923706055,
+				"y" : -296.2236938476563
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6106-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 26.0,
+				"y" : -97.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6105-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 26.0,
+				"y" : -147.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "bar_text_fontblank.json",
+			"multi color" : "",
+			"name" : "Gold",
+			"position" : 
+			{
+				"x" : 111.9999847412109,
+				"y" : -98.98289489746094
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -104,11 +199,11 @@
 			"angle" : 0.0,
 			"filepath" : "bar_text_fontblank.json",
 			"multi color" : "",
-			"name" : "text",
+			"name" : "Elixir",
 			"position" : 
 			{
-				"x" : 18.0,
-				"y" : -0.4999961853027344
+				"x" : 111.9999694824219,
+				"y" : -146.7315979003906
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -121,57 +216,19 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "bar_text_fontblank.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "Defeat",
 			"position" : 
 			{
-				"x" : 107.1865997314453,
-				"y" : -0.4999980926513672
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ex_gold_damping_anim.json",
-			"multi color" : "",
-			"name" : "icon",
-			"position" : 
-			{
-				"x" : 109.0,
-				"y" : 17.50
+				"x" : 57.0,
+				"y" : -247.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "6001-anniu-1.png",
-			"multi color" : "",
-			"name" : "add_button",
-			"position" : 
-			{
-				"x" : 126.0,
-				"y" : 18.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.3000000119209290,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		}
 	]

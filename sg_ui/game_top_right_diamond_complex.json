@@ -78,6 +78,25 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6001-anniu-1.png",
+			"multi color" : "",
+			"name" : "add_button",
+			"position" : 
+			{
+				"x" : 135.5589141845703,
+				"y" : 56.94606018066406
+			},
+			"x mirror" : false,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
 		}
 	]
 }
