@@ -1,6 +1,6 @@
 
 {
-	"name" : "spell_info_window",
+	"name" : "spell_upgrade_window",
 	"sprite" : 
 	[
 		
@@ -33,25 +33,6 @@
 			{
 				"x" : 394.2999877929688,
 				"y" : 297.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "back_button_complex.json",
-			"multi color" : "",
-			"name" : "back",
-			"position" : 
-			{
-				"x" : -381.0,
-				"y" : 296.8000183105469
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -159,25 +140,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "altar_text_area_fontblank.json",
-			"multi color" : "",
-			"name" : "text_area",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -233.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "spell_info_text_complex.json",
 			"multi color" : "",
 			"name" : "spell_info",
@@ -197,13 +159,70 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
+			"filepath" : "back_button_complex.json",
+			"multi color" : "",
+			"name" : "back",
+			"position" : 
+			{
+				"x" : -381.0,
+				"y" : 296.8000183105469
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
 			"filepath" : "rank_line_complex.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -163.0
+				"y" : -193.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "upgrade_button_complex.json",
+			"multi color" : "",
+			"name" : "upgrade_button",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -257.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ex_upgrade_time_box_complex.json",
+			"multi color" : "",
+			"name" : "timebox",
+			"position" : 
+			{
+				"x" : -255.0,
+				"y" : -92.8750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

@@ -1,114 +1,122 @@
+
 {
-    "name" : "char_info_yingyan",
-    "sprite" : 
-    [
-        {
-            "add color" : "",
-            "angle" : 0.0,
-            "filepath" : "6175-tongyong-1.png",
-            "multi color" : "",
-            "name" : "",
-            "position" : 
-            {
-                "x" : 0.0,
-                "y" : 0.0
-            },
-            "x mirror" : false,
-            "x scale" : 0.7,
-            "x shear" : 0.0,
-            "y mirror" : false,
-            "y scale" : 0.7,
-            "y shear" : 0.0
-        },
-        {
-            "add color" : "",
-            "angle" : 0.0,
-            "filepath" : "6174-tongyong-1.PNG",
-            "multi color" : "",
-            "name" : "",
-            "position" : 
-            {
-                "x" : 0.0,
-                "y" : 0.0
-            },
-            "x mirror" : false,
-            "x scale" : 0.7,
-            "x shear" : 0.0,
-            "y mirror" : false,
-            "y scale" : 0.7,
-            "y shear" : 0.0
-        },
-        {
-            "add color" : "",
-            "angle" : 0.0,
-            "filepath" : "6174-tongyong-2.PNG",
-            "multi color" : "",
-            "name" : "",
-            "position" : 
-            {
-                "x" : 0.0,
-                "y" : 0.0
-            },
-            "x mirror" : false,
-            "x scale" : 0.7,
-            "x shear" : 0.0,
-            "y mirror" : false,
-            "y scale" : 0.7,
-            "y shear" : 0.0
-        },
-        {
-            "add color" : "",
-            "angle" : 0.0,
-            "filepath" : "6174-tongyong-3.PNG",
-            "multi color" : "",
-            "name" : "",
-            "position" : 
-            {
-                "x" : 0.0,
-                "y" : 0.0
-            },
-            "x mirror" : false,
-            "x scale" : 0.7,
-            "x shear" : 0.0,
-            "y mirror" : false,
-            "y scale" : 0.7,
-            "y shear" : 0.0
-        },
-        {
-            "add color" : "",
-            "angle" : 0.0,
-            "filepath" : "6174-tongyong-4.PNG",
-            "multi color" : "",
-            "name" : "",
-            "position" : 
-            {
-                "x" : 0.0,
-                "y" : 0.0
-            },
-            "x mirror" : false,
-            "x scale" : 0.7,
-            "x shear" : 0.0,
-            "y mirror" : false,
-            "y scale" : 0.7,
-            "y shear" : 0.0
-        },
-        {
-            "add color" : "",
-            "angle" : 0.0,
-            "filepath" : "6174-tongyong-5.PNG",
-            "multi color" : "",
-            "name" : "",
-            "position" : 
-            {
-                "x" : 0.0,
-                "y" : 0.0
-            },
-            "x mirror" : false,
-            "x scale" : 0.7,
-            "x shear" : 0.0,
-            "y mirror" : false,
-            "y scale" : 0.7,
-            "y shear" : 0.0
-        }
-    ]
+	"name" : "char_info_yingyan",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6175-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 36.050,
+				"y" : -227.50
+			},
+			"x mirror" : false,
+			"x scale" : 0.70,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.70,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6174-tongyong-1.PNG",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 27.650,
+				"y" : 52.84999999999999
+			},
+			"x mirror" : false,
+			"x scale" : 0.70,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.70,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6174-tongyong-2.PNG",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 98.0,
+				"y" : 109.550
+			},
+			"x mirror" : false,
+			"x scale" : 0.70,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.70,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6174-tongyong-3.PNG",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 164.50,
+				"y" : -96.250
+			},
+			"x mirror" : false,
+			"x scale" : 0.70,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.70,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6174-tongyong-4.PNG",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -89.250,
+				"y" : -14.70
+			},
+			"x mirror" : false,
+			"x scale" : 0.70,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.70,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6174-tongyong-5.PNG",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 21.0,
+				"y" : -104.650
+			},
+			"x mirror" : false,
+			"x scale" : 0.70,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.70,
+			"y shear" : 0.0
+		},
+		null
+	]
 }
