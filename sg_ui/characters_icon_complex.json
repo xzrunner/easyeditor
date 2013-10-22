@@ -12,8 +12,8 @@
 			"name" : "hero",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -9.0
+				"x" : 1.0,
+				"y" : -11.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -31,8 +31,8 @@
 			"name" : "troop",
 			"position" : 
 			{
-				"x" : -1.0,
-				"y" : 47.0
+				"x" : -23.0,
+				"y" : 17.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

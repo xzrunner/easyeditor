@@ -1,18 +1,18 @@
 
 {
-	"name" : "troop_spell_show_icon",
+	"name" : "flag_item",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "troop_spell_show_icon_anim.json",
+			"filepath" : "flag_anim.json",
 			"multi color" : "",
-			"name" : "icon",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -46.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
@@ -26,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "info_icon_bg_9patch.json",
+			"filepath" : "title_fontblank.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "title",
 			"position" : 
 			{
-				"x" : 20.0,
-				"y" : 34.0
+				"x" : 78.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

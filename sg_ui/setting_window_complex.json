@@ -69,8 +69,8 @@
 			"name" : "platform_title",
 			"position" : 
 			{
-				"x" : -85.0,
-				"y" : 78.0
+				"x" : -104.0,
+				"y" : -76.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -88,27 +88,8 @@
 			"name" : "login",
 			"position" : 
 			{
-				"x" : 84.34997558593750,
-				"y" : 78.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "blue_button_complex.json",
-			"multi color" : "",
-			"name" : "logout",
-			"position" : 
-			{
-				"x" : -5.0,
-				"y" : -40.0
+				"x" : 46.250,
+				"y" : -75.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -126,8 +107,198 @@
 			"name" : "account",
 			"position" : 
 			{
-				"x" : 77.0,
-				"y" : 78.0
+				"x" : 67.0,
+				"y" : -76.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "read_button_complex.json",
+			"multi color" : "",
+			"name" : "logout",
+			"position" : 
+			{
+				"x" : 114.3499755859375,
+				"y" : -204.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "st_ejoy_fontblank.json",
+			"multi color" : "",
+			"name" : "music_title",
+			"position" : 
+			{
+				"x" : -104.0,
+				"y" : 159.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "st_ejoy_fontblank.json",
+			"multi color" : "",
+			"name" : "sound_title",
+			"position" : 
+			{
+				"x" : -104.0,
+				"y" : 91.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "st_ejoy_fontblank.json",
+			"multi color" : "",
+			"name" : "language_title",
+			"position" : 
+			{
+				"x" : -104.0,
+				"y" : 4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "setting_button_anim.json",
+			"multi color" : "",
+			"name" : "music",
+			"position" : 
+			{
+				"x" : 46.250,
+				"y" : 159.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "language",
+			"position" : 
+			{
+				"x" : 46.09997558593750,
+				"y" : 3.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "",
+			"name" : "about",
+			"position" : 
+			{
+				"x" : -116.250,
+				"y" : -204.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "setting_title_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 219.3999938964844
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "setting_button_anim.json",
+			"multi color" : "",
+			"name" : "sound",
+			"position" : 
+			{
+				"x" : 46.250,
+				"y" : 87.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "setting_language",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

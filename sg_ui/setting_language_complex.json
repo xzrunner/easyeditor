@@ -1,19 +1,57 @@
 
 {
-	"name" : "ui_bottom_right",
+	"name" : "setting_language",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_setting_button_complex.json",
+			"filepath" : "setting_bg_9patch.json",
 			"multi color" : "",
-			"name" : "button_settings",
+			"name" : "",
 			"position" : 
 			{
-				"x" : -48.50,
-				"y" : 254.0
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "setting_bg2_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : -24.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 169.7999877929688,
+				"y" : 221.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -26,13 +64,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_ranking_button_complex.json",
+			"filepath" : "mount_icon_fontblank.json",
 			"multi color" : "",
-			"name" : "ranking",
+			"name" : "language",
 			"position" : 
 			{
-				"x" : -49.0,
-				"y" : 172.50
+				"x" : 46.09997558593750,
+				"y" : 3.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -45,13 +83,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_shop_button_complex.json",
+			"filepath" : "setting_title_fontblank.json",
 			"multi color" : "",
-			"name" : "shop",
+			"name" : "title",
 			"position" : 
 			{
-				"x" : -188.0,
-				"y" : 73.0
+				"x" : 0.0,
+				"y" : 219.3999938964844
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,51 +102,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_fight_button_complex.json",
+			"filepath" : "back_button_complex.json",
 			"multi color" : "",
-			"name" : "fight",
+			"name" : "back",
 			"position" : 
 			{
-				"x" : -308.50,
-				"y" : 73.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "game_battle_log_button_complex.json",
-			"multi color" : "",
-			"name" : "log",
-			"position" : 
-			{
-				"x" : -50.250,
-				"y" : 332.250
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "game_menu_button_complex.json",
-			"multi color" : "",
-			"name" : "menu",
-			"position" : 
-			{
-				"x" : -67.0,
-				"y" : 73.750
+				"x" : -165.0,
+				"y" : 220.8000030517578
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
