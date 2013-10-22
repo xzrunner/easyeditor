@@ -29,4 +29,4 @@ cocpackage: 命令行方式，打包成lua文件。参数：1.<资源文件夹路径>；2.<texture pack
 
 easydb_cl:命令行方式,检查资源
 比如要检查particle/目录下的图片和json文件,运行:
-$ ./easydb_cl.exe vertify particle/ -jsons -images
+$ ./easydb_cl.exe verify particle/ -jsons -images
