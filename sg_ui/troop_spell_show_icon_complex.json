@@ -7,13 +7,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
+			"filepath" : "jy-0003-2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 20.0,
+				"y" : 35.0
+			},
+			"x mirror" : false,
+			"x scale" : 43.750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 60.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
 			"filepath" : "troop_spell_show_icon_anim.json",
 			"multi color" : "",
 			"name" : "icon",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 0.0
+				"y" : 2.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -31,8 +50,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : 20.0,
-				"y" : 34.0
+				"x" : 21.0,
+				"y" : 34.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

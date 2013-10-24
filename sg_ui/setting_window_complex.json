@@ -70,7 +70,7 @@
 			"position" : 
 			{
 				"x" : -104.0,
-				"y" : -76.0
+				"y" : -47.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -89,7 +89,7 @@
 			"position" : 
 			{
 				"x" : 46.250,
-				"y" : -75.750
+				"y" : -46.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -107,8 +107,8 @@
 			"name" : "account",
 			"position" : 
 			{
-				"x" : 67.0,
-				"y" : -76.0
+				"x" : 68.0,
+				"y" : -47.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -184,7 +184,7 @@
 			"position" : 
 			{
 				"x" : -104.0,
-				"y" : 4.0
+				"y" : 18.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -222,7 +222,7 @@
 			"position" : 
 			{
 				"x" : 46.09997558593750,
-				"y" : 3.0
+				"y" : 12.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -295,6 +295,63 @@
 			"filepath" : "mount_icon_fontblank.json",
 			"multi color" : "",
 			"name" : "setting_language",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "share",
+			"position" : 
+			{
+				"x" : -116.250,
+				"y" : -133.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "",
+			"name" : "club",
+			"position" : 
+			{
+				"x" : 114.3499755859375,
+				"y" : -133.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "setting_share",
 			"position" : 
 			{
 				"x" : 0.0,
