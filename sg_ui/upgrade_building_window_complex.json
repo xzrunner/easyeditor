@@ -197,63 +197,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "mount_building_info_bar_fontblank.json",
-			"multi color" : "",
-			"name" : "bar1",
-			"position" : 
-			{
-				"x" : 123.0,
-				"y" : 130.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "mount_building_info_bar_fontblank.json",
-			"multi color" : "",
-			"name" : "bar2",
-			"position" : 
-			{
-				"x" : 123.0,
-				"y" : 80.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "mount_building_info_bar_fontblank.json",
-			"multi color" : "",
-			"name" : "bar3",
-			"position" : 
-			{
-				"x" : 123.0,
-				"y" : 30.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "defense_info_complex.json",
 			"multi color" : "",
 			"name" : "defense",
@@ -318,6 +261,63 @@
 			{
 				"x" : 206.0,
 				"y" : -193.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_info_bar_anim.json",
+			"multi color" : "",
+			"name" : "bar1",
+			"position" : 
+			{
+				"x" : 123.0,
+				"y" : 130.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_info_bar_anim.json",
+			"multi color" : "",
+			"name" : "bar2",
+			"position" : 
+			{
+				"x" : 123.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_info_bar_anim.json",
+			"multi color" : "",
+			"name" : "bar3",
+			"position" : 
+			{
+				"x" : 123.0,
+				"y" : 30.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

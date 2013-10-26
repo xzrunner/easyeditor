@@ -235,7 +235,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "mount_building_info_bar_fontblank.json",
+			"filepath" : "building_info_bar_anim.json",
 			"multi color" : "",
 			"name" : "bar1",
 			"position" : 
@@ -254,7 +254,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "mount_building_info_bar_fontblank.json",
+			"filepath" : "building_info_bar_anim.json",
 			"multi color" : "",
 			"name" : "bar2",
 			"position" : 
@@ -273,7 +273,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "mount_building_info_bar_fontblank.json",
+			"filepath" : "building_info_bar_anim.json",
 			"multi color" : "",
 			"name" : "bar3",
 			"position" : 
