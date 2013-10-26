@@ -7,19 +7,19 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "jy-1000-diamonds-5.png",
+			"filepath" : "shop_icon_gem_4_imp_complex.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 6.0,
-				"y" : 90.50
+				"x" : -2.0,
+				"y" : 42.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.6999999880790710,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.6999999880790710,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		}
 	]

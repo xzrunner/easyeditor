@@ -1,25 +1,25 @@
 
 {
-	"name" : "shop_icon_liangshi_1",
+	"name" : "shop_icon_cat_2",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "jy-1003-liangshi.png",
+			"filepath" : "jy-1005-shopcat-2.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -8.0,
-				"y" : -3.0
+				"x" : 0.0,
+				"y" : 9.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.5500000119209290,
+			"x scale" : 0.40,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.5500000119209290,
+			"y scale" : 0.40,
 			"y shear" : 0.0
 		}
 	]

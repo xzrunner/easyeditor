@@ -1,25 +1,25 @@
 
 {
-	"name" : "shop_icon_gem_5",
+	"name" : "shop_icon_cat_6",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "jy-1000-diamonds-6.png",
+			"filepath" : "jy-1004-shield-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 1.0,
-				"y" : 26.50
+				"x" : 0.0,
+				"y" : 15.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.6499999761581421,
+			"x scale" : 0.45,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.6499999761581421,
+			"y scale" : 0.45,
 			"y shear" : 0.0
 		}
 	]
