@@ -1,15 +1,15 @@
 
 {
-	"name" : "building_info_housing_bar",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "info_bar_complex.json",
+			"filepath" : "blue_long_button_9patch.json",
 			"multi color" : "",
-			"name" : "bar",
+			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -26,32 +26,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6464-gaoguang-1.png",
+			"filepath" : "6103-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -195.0,
-				"y" : 0.0
+				"x" : 63.30000305175781,
+				"y" : -0.7000026702880859
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "bar_info_text_fontblank.json",
+			"filepath" : "d_text_fontblank.json",
 			"multi color" : "",
-			"name" : "text",
+			"name" : "title",
 			"position" : 
 			{
-				"x" : 1.50,
-				"y" : 13.0
+				"x" : -17.0,
+				"y" : -0.3000030517578125
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

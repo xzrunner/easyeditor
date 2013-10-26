@@ -5,8 +5,10 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "bar_bg_9patch.json",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -22,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "bar_bg2_anim.json",
+			"multi color" : "",
 			"name" : "extra_bar",
 			"position" : 
 			{
@@ -39,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "bar_bg3_anim.json",
+			"multi color" : "",
 			"name" : "green_bar",
 			"position" : 
 			{
