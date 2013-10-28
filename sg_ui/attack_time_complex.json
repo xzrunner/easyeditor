@@ -1,0 +1,64 @@
+
+{
+	"name" : "m_attack_time",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "red_long_button_complex.json",
+			"multi color" : "",
+			"name" : "end_battle",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -56.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "attack_time_title_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -95.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "attack_time_fontblank.json",
+			"multi color" : "",
+			"name" : "time",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -125.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}
