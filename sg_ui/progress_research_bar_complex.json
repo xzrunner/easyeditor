@@ -12,14 +12,14 @@
 			"name" : "bar",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 12.0,
+				"y" : 3.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.1500000059604645,
+			"x scale" : 0.1800000071525574,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4000000059604645,
+			"y scale" : 0.5500000119209290,
 			"y shear" : 0.0
 		},
 		
@@ -31,8 +31,8 @@
 			"name" : "title",
 			"position" : 
 			{
-				"x" : -1.0,
-				"y" : 10.0
+				"x" : 11.20000076293945,
+				"y" : 19.20000076293945
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
