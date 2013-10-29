@@ -114,8 +114,8 @@ def pack_textures():
     assert call_tex_pack(png2, tex2, tmpdir2, redundant_files)
     assert not redundant_files
 
-    # _run_cmd('RD /Q/S "%s"' % tmpdir1)
-    # _run_cmd('RD /Q/S "%s"' % tmpdir2)
+    _run_cmd('RD /Q/S "%s"' % tmpdir1)
+    _run_cmd('RD /Q/S "%s"' % tmpdir2)
 
 
 def _get_pentagon_src(json_file):
