@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "yellow_button_9patch.json",
+			"filepath" : "barrack_finishnow_button_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -31,8 +31,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : 45.0,
-				"y" : 0.0
+				"x" : 31.0,
+				"y" : -1.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -52,6 +52,44 @@
 			{
 				"x" : -14.0,
 				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_finishnow_times_fontblank.json",
+			"multi color" : "",
+			"name" : "times",
+			"position" : 
+			{
+				"x" : 80.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_finishnow_title_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -3.0,
+				"y" : 43.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
