@@ -121,13 +121,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "warning_title2_fontblank.json",
+			"filepath" : "up_warning_title_fontblank.json",
 			"multi color" : "",
 			"name" : "warning_title",
 			"position" : 
 			{
-				"x" : 242.0,
-				"y" : -251.0
+				"x" : 233.0,
+				"y" : -250.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

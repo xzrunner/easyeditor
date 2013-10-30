@@ -254,25 +254,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "warning_title_fontblank.json",
-			"multi color" : "",
-			"name" : "warning_title",
-			"position" : 
-			{
-				"x" : 206.0,
-				"y" : -193.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "building_info_bar_anim.json",
 			"multi color" : "",
 			"name" : "bar1",
@@ -318,6 +299,25 @@
 			{
 				"x" : 123.0,
 				"y" : 30.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "up_warning_title_fontblank.json",
+			"multi color" : "",
+			"name" : "warning_title",
+			"position" : 
+			{
+				"x" : 206.50,
+				"y" : -195.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
