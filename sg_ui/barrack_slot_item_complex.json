@@ -178,19 +178,19 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "barrack_slot_price_hint_fontblank.json",
+			"filepath" : "barrack_slot_price_hint_complex.json",
 			"multi color" : "",
 			"name" : "price_hint",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -33.0
+				"y" : -24.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.5,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.5,
 			"y shear" : 0.0
 		},
 		

@@ -5,6 +5,6 @@
 	"font" : "",
 	"height" : 28.0,
 	"name" : "barrack_slot_price_hint",
-	"size" : 20.0,
-	"width" : 180.0
+	"size" : 24.0,
+	"width" : 360.0
 }
