@@ -5,6 +5,18 @@ import os
 import re
 import json
 
+# USE PNG
+#EXT = 'png'
+#MODE = '-png8'
+#TEX_FORMAT = 'png'
+#EXTRA_OPT = '--opt RGBA8888 --size-constraints AnySize'
+
+# USE PVR
+EXT = 'pvr'
+MODE = '-pvr'
+TEX_FORMAT = 'pvr2'
+EXTRA_OPT = '--opt PVRTC4'
+
 _abspath = os.path.abspath
 _pjoin = os.path.join
 
@@ -26,7 +38,7 @@ LUA = _pjoin(pwd, '..', 'tools', 'lua', 'lua52.exe')
 EPBIN = _pjoin(pwd, '..', 'tools', 'lua', 'epbin.lua')
 
 res = _abspath(_pjoin(pwd, '..', 'sg_loading'))
-png = _pjoin(build, 'loading%d.pvr')
+png = _pjoin(build, 'loading%d.'+EXT)
 tex = _pjoin(build, 'loading%d.json')
 tex2 = _pjoin(build, "loading")
 loading_lua = _pjoin(build, "loading.lua")
@@ -44,14 +56,15 @@ def call_tex_pack(png, tex, res, redundant_files):
         '--pack-mode Best',
         '--premultiply-alpha',
         '--sheet %s' % png,
-        '--texture-format pvr2',
-        '--opt PVRTC4',
+        '--texture-format %s' % TEX_FORMAT,
+        '%s' % EXTRA_OPT,
         '--data %s' % tex,
         '--format json-array',
         '--enable-rotation',
         '--shape-padding 2',
         '--border-padding 0',
         '--inner-padding 0',
+        '--extrude 1',
         '"%s"' % res,
         '2> %s' % TMP_FILE,
         ])
@@ -95,4 +108,4 @@ cmd = "cocpackage_load.exe %s %s %s" % (res, tex2, loading_lua)
 _run_cmd(cmd) 
 
 # build ep
-_run_cmd('%s %s -pvr %s' % (LUA, EPBIN, loading_lua))
+_run_cmd('%s %s %s %s' % (LUA, EPBIN, MODE, loading_lua))
