@@ -85,7 +85,7 @@
 			"angle" : 0.0,
 			"filepath" : "barrack_slot_price_bg_9patch.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "resbar_bg",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -166,6 +166,44 @@
 			{
 				"x" : 31.0,
 				"y" : 47.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_price_hint_fontblank.json",
+			"multi color" : "",
+			"name" : "price_hint",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -33.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_locked_hint_fontblank.json",
+			"multi color" : "",
+			"name" : "hint",
+			"position" : 
+			{
+				"x" : -8.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
