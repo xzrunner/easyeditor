@@ -44,7 +44,7 @@ def call_tex_pack(png, tex, res, redundant_files):
         '--premultiply-alpha',
         '--sheet %s' % png,
         '--texture-format png',
-        ' --extrude 1',
+        '--extrude 1',
         '--data %s' % tex,
         '--format json-array',
         '"%s"' % res,
