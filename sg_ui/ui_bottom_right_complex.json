@@ -12,8 +12,8 @@
 			"name" : "button_settings",
 			"position" : 
 			{
-				"x" : -48.50,
-				"y" : 254.0
+				"x" : -54.0,
+				"y" : 325.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -31,8 +31,8 @@
 			"name" : "ranking",
 			"position" : 
 			{
-				"x" : -49.0,
-				"y" : 172.50
+				"x" : -54.0,
+				"y" : 247.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -88,8 +88,8 @@
 			"name" : "log",
 			"position" : 
 			{
-				"x" : -50.250,
-				"y" : 332.250
+				"x" : -51.250,
+				"y" : 169.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
