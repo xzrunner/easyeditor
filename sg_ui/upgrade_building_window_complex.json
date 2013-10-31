@@ -140,25 +140,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "upgrade_icon_fontblank.json",
-			"multi color" : "",
-			"name" : "item_icon",
-			"position" : 
-			{
-				"x" : -180.0,
-				"y" : 25.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "info_item_name_fontblank.json",
 			"multi color" : "",
 			"name" : "item_name",
@@ -166,25 +147,6 @@
 			{
 				"x" : -221.50,
 				"y" : 148.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ex_upgrade_time_box_complex.json",
-			"multi color" : "",
-			"name" : "time_box",
-			"position" : 
-			{
-				"x" : -246.750,
-				"y" : 1.3750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -235,13 +197,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "info_title2_fontblank.json",
+			"filepath" : "building_info_bar_anim.json",
 			"multi color" : "",
-			"name" : "title2",
+			"name" : "bar1",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -13.50
+				"x" : 123.0,
+				"y" : 130.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -254,13 +216,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "building_info_bar_anim.json",
+			"filepath" : "info_title2_fontblank.json",
 			"multi color" : "",
-			"name" : "bar1",
+			"name" : "title2",
 			"position" : 
 			{
-				"x" : 123.0,
-				"y" : 130.0
+				"x" : 0.0,
+				"y" : -13.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -318,6 +280,44 @@
 			{
 				"x" : 206.50,
 				"y" : -195.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "item_icon",
+			"position" : 
+			{
+				"x" : -219.0,
+				"y" : 66.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ex_upgrade_time_box_complex.json",
+			"multi color" : "",
+			"name" : "time_box",
+			"position" : 
+			{
+				"x" : -246.750,
+				"y" : 1.3750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
