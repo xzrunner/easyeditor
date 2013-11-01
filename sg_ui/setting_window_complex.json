@@ -64,6 +64,25 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
+			"filepath" : "st_ejoy_uid_fontblank.json",
+			"multi color" : "",
+			"name" : "uid",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 170.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
 			"filepath" : "st_ejoy_fontblank.json",
 			"multi color" : "",
 			"name" : "platform_title",
@@ -375,25 +394,6 @@
 			{
 				"x" : 0.0,
 				"y" : 0.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "st_ejoy_uid_fontblank.json",
-			"multi color" : "",
-			"name" : "uid",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 170.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
