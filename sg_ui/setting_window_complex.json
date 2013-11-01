@@ -70,7 +70,7 @@
 			"position" : 
 			{
 				"x" : -104.0,
-				"y" : -47.0
+				"y" : -70.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -88,8 +88,8 @@
 			"name" : "login",
 			"position" : 
 			{
-				"x" : 46.250,
-				"y" : -46.750
+				"x" : 50.0,
+				"y" : -70.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -108,7 +108,7 @@
 			"position" : 
 			{
 				"x" : 68.0,
-				"y" : -47.0
+				"y" : -70.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -126,8 +126,8 @@
 			"name" : "logout",
 			"position" : 
 			{
-				"x" : 114.3499755859375,
-				"y" : -204.750
+				"x" : 115.0,
+				"y" : -205.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -146,7 +146,7 @@
 			"position" : 
 			{
 				"x" : -104.0,
-				"y" : 159.0
+				"y" : 110.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -165,7 +165,7 @@
 			"position" : 
 			{
 				"x" : -104.0,
-				"y" : 91.0
+				"y" : 50.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -184,7 +184,7 @@
 			"position" : 
 			{
 				"x" : -104.0,
-				"y" : 18.0
+				"y" : -10.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -202,8 +202,8 @@
 			"name" : "music",
 			"position" : 
 			{
-				"x" : 46.250,
-				"y" : 159.0
+				"x" : 50.0,
+				"y" : 110.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -221,8 +221,8 @@
 			"name" : "language",
 			"position" : 
 			{
-				"x" : 46.09997558593750,
-				"y" : 12.0
+				"x" : 50.0,
+				"y" : -10.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -240,8 +240,8 @@
 			"name" : "about",
 			"position" : 
 			{
-				"x" : -116.250,
-				"y" : -204.750
+				"x" : -115.0,
+				"y" : -205.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -278,8 +278,8 @@
 			"name" : "sound",
 			"position" : 
 			{
-				"x" : 46.250,
-				"y" : 87.0
+				"x" : 50.0,
+				"y" : 50.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -297,8 +297,8 @@
 			"name" : "share",
 			"position" : 
 			{
-				"x" : -116.250,
-				"y" : -133.0
+				"x" : -115.0,
+				"y" : -140.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -316,8 +316,8 @@
 			"name" : "club",
 			"position" : 
 			{
-				"x" : 114.3499755859375,
-				"y" : -133.0
+				"x" : 115.0,
+				"y" : -140.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -375,6 +375,25 @@
 			{
 				"x" : 0.0,
 				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "st_ejoy_uid_fontblank.json",
+			"multi color" : "",
+			"name" : "uid",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 170.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
