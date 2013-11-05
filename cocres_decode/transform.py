@@ -120,7 +120,7 @@ def decode_pic(pic):
 			dst["name"] = ''
 			dst["position"] = {}
 			dst["position"]["x"] = (screen_data[0]+screen_data[2]+screen_data[4]+screen_data[6])/4/16.0
-			dst["position"]["y"] = (screen_data[1]+screen_data[3]+screen_data[5]+screen_data[7])/4/16.0
+			dst["position"]["y"] = -(screen_data[1]+screen_data[3]+screen_data[5]+screen_data[7])/4/16.0
 			dst["x shear"] = 0
 			dst["y shear"] = 0
 
