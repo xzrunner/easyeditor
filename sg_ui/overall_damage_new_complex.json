@@ -1,0 +1,121 @@
+
+{
+	"name" : "overall_damage_new",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "od_bg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 133.0,
+				"y" : 237.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "od_tid_overall_damage_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_OVERALL_DAMAGE",
+			"position" : 
+			{
+				"x" : 131.0,
+				"y" : 280.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "od_damage_text_fontblank.json",
+			"multi color" : "",
+			"name" : "damage_text",
+			"position" : 
+			{
+				"x" : 131.0,
+				"y" : 198.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6150-tongyong-2.png",
+			"multi color" : "",
+			"name" : "star1",
+			"position" : 
+			{
+				"x" : 67.250,
+				"y" : 239.1250
+			},
+			"x mirror" : false,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6150-tongyong-2.png",
+			"multi color" : "",
+			"name" : "star2",
+			"position" : 
+			{
+				"x" : 126.250,
+				"y" : 238.1250
+			},
+			"x mirror" : false,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6150-tongyong-2.png",
+			"multi color" : "",
+			"name" : "star3",
+			"position" : 
+			{
+				"x" : 186.750,
+				"y" : 240.1250
+			},
+			"x mirror" : false,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		}
+	]
+}

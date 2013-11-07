@@ -1,13 +1,13 @@
 
 {
-	"name" : "blue_button",
+	"name" : "e_684",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "blue_button_9patch.json",
+			"filepath" : "672_complex.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -16,23 +16,23 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "title_fontblank.json",
+			"filepath" : "e_level_fontblank.json",
 			"multi color" : "",
-			"name" : "title",
+			"name" : "level",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 0.0
+				"y" : -1.050000190734863
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

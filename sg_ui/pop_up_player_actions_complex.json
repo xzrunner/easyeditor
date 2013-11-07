@@ -1,0 +1,159 @@
+
+{
+	"name" : "pop_up_player_actions",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "841203410852043.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 100.50,
+				"y" : -4.475006103515625
+			},
+			"x mirror" : false,
+			"x scale" : 0.6680327653884888,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 26.10555648803711,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "1803124320471281.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 100.50,
+				"y" : 125.50
+			},
+			"x mirror" : false,
+			"x scale" : 0.6680327653884888,
+			"x shear" : 0.0,
+			"y mirror" : true,
+			"y scale" : 0.6578947305679321,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "889399927484.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 4.0,
+				"y" : -2.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "Button1",
+			"position" : 
+			{
+				"x" : 101.0,
+				"y" : 68.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "player_name_fontblank.json",
+			"multi color" : "",
+			"name" : "player_name",
+			"position" : 
+			{
+				"x" : 101.0,
+				"y" : 113.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "Button2",
+			"position" : 
+			{
+				"x" : 101.0,
+				"y" : 4.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "Button3",
+			"position" : 
+			{
+				"x" : 101.0,
+				"y" : -60.250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 4.710000038146973,
+			"filepath" : "14663271495571.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 100.0,
+				"y" : -128.6798400878906
+			},
+			"x mirror" : false,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6600000262260437,
+			"y shear" : 0.0
+		}
+	]
+}

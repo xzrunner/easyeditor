@@ -1,0 +1,83 @@
+
+{
+	"name" : "button_inactive_load",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "load_bg_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.9499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.9499999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0",
+			"angle" : 0.0,
+			"filepath" : "6002-anniu-1.png",
+			"multi color" : "1701143935",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6195-tongyong-11.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tid_fully_loaded_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_FULLY_LOADED",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 33.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

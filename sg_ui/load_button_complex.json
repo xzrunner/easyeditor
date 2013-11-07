@@ -1,0 +1,140 @@
+
+{
+	"name" : "load_button",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6002-anniu-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6195-tongyong-11.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "clear_amount_fontblank.json",
+			"multi color" : "",
+			"name" : "amount",
+			"position" : 
+			{
+				"x" : 1.0,
+				"y" : 39.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6105-tongyong-1.png",
+			"multi color" : "",
+			"name" : "elixir",
+			"position" : 
+			{
+				"x" : 43.39999389648438,
+				"y" : 41.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6106-tongyong-1.png",
+			"multi color" : "",
+			"name" : "gold",
+			"position" : 
+			{
+				"x" : 48.50,
+				"y" : 40.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_bar_complex.json",
+			"multi color" : "",
+			"name" : "filling",
+			"position" : 
+			{
+				"x" : 0.50,
+				"y" : -37.50
+			},
+			"x mirror" : false,
+			"x scale" : 0.1500000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tid_button_load_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_BUTTON_LOAD",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : -20.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

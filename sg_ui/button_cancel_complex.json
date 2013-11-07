@@ -1,25 +1,25 @@
 
 {
-	"name" : "screen_mask_1",
+	"name" : "button_cancel",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "jy-0001-screen-mask.png",
+			"filepath" : "6001-anniu-3.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 1.0,
+				"x" : 0.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 300.0,
+			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 300.0,
+			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		}
 	]
