@@ -6,16 +6,16 @@ import re
 import json
 
 # USE PNG
-#EXT = 'png'
-#MODE = '-png8'
-#TEX_FORMAT = 'png'
-#EXTRA_OPT = '--opt RGBA8888 --size-constraints AnySize'
+EXT = 'png'
+MODE = '-png8'
+TEX_FORMAT = 'png'
+EXTRA_OPT = '--opt RGBA8888 --size-constraints AnySize'
 
 # USE PVR
-EXT = 'pvr'
-MODE = '-pvr'
-TEX_FORMAT = 'pvr2'
-EXTRA_OPT = '--opt PVRTC4'
+#EXT = 'pvr'
+#MODE = '-pvr'
+#TEX_FORMAT = 'pvr2'
+#EXTRA_OPT = '--opt PVRTC4'
 
 _abspath = os.path.abspath
 _pjoin = os.path.join
