@@ -1,17 +1,17 @@
 
 {
-	"height" : 105.0,
+	"height" : 40.0,
 	"sprite" : 
 	[
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6463-gaoguang-h3_1.png",
+			"filepath" : "6410-gaoguang-h3-1.png",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 50.0,
-				"y" : 150.0
+				"x" : -100.0,
+				"y" : 0.0
 			},
 			"scale" : 1.0,
 			"x mirror" : false,
@@ -20,12 +20,12 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6463-gaoguang-h3_2.png",
+			"filepath" : "6410-gaoguang-h3-2.png",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 150.0,
-				"y" : 150.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"scale" : 1.0,
 			"x mirror" : false,
@@ -34,12 +34,12 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6463-gaoguang-h3_1.png",
+			"filepath" : "6410-gaoguang-h3-1.png",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 250.0,
-				"y" : 150.0
+				"x" : 100.0,
+				"y" : 0.0
 			},
 			"scale" : 1.0,
 			"x mirror" : true,
@@ -47,5 +47,5 @@
 		}
 	],
 	"type" : 2,
-	"width" : 265.0
+	"width" : 940.0
 }

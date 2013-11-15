@@ -1,13 +1,13 @@
 
 {
-	"name" : "",
+	"name" : "m_black_bg",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "launch_message_bg_9patch.json",
+			"filepath" : "black4x4.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -16,10 +16,10 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 300.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 300.0,
 			"y shear" : 0.0
 		}
 	]

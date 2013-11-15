@@ -1,6 +1,6 @@
 
 {
-	"name" : "m_loading",
+	"name" : "m_loading_iphone5",
 	"sprite" : 
 	[
 		
@@ -26,7 +26,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6474-gaoguang-1.png",
+			"filepath" : "loading_center.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -35,10 +35,10 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.08105468750,
+			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.081690192222595,
+			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		},
 		
@@ -51,7 +51,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -256.0
+				"y" : -260.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -89,13 +89,51 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -297.0
+				"y" : -260.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "loading_left.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -485.5500183105469,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "loading_right.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 485.5500183105469,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		}
 	]
