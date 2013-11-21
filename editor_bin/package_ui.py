@@ -7,6 +7,19 @@ import json
 _abspath = os.path.abspath
 _pjoin = os.path.join
 
+modle = sys.argv[1]
+
+def _run_cmd(cmd):
+    print "_run_cmd -------------::", cmd
+    os.system(cmd.encode('cp936'))
+
+def _mkdir(name):
+    path = _pjoin(pwd, name)
+    if not os.path.isdir(path):
+        _run_cmd('MKDIR "%s"' % path)
+    return path
+
+
 pwd = os.getcwd()
 
 PYTHON = _pjoin(pwd, '..', 'tools', 'Python27', 'python.exe')
@@ -15,16 +28,11 @@ tex_json = {}
 
 res = _abspath(_pjoin(pwd, '..', 'sg_ui'))
 
-png = _pjoin(pwd, "ui2%d.png")
-tex = _pjoin(pwd, "ui2%d.json")
-
-tex2 = _pjoin(pwd, "ui2")
-
-out = _pjoin(pwd, "ui2.ori.lua")
-
-def _run_cmd(cmd):
-    print "_run_cmd -------------::", cmd
-    os.system(cmd.encode('cp936'))
+_mkdir('ui_output')
+png = _pjoin(pwd, 'ui_output', "ui2%d.png")
+tex = _pjoin(pwd, 'ui_output', "ui2%d.json")
+tex2 = _pjoin(pwd, 'ui_output', "ui2")
+out = _pjoin(pwd, 'ui_output', "ui2.ori.lua")
 
 def _del_file(name):
     if os.path.isfile(name):
@@ -32,7 +40,7 @@ def _del_file(name):
 
 # texture packer
 def call_tex_pack(png, tex, res, redundant_files):
-    TMP_FILE = _pjoin(pwd, 'texturepacker.output.log')
+    TMP_FILE = _pjoin(pwd, 'ui_output', 'texturepacker.output.log')
     if os.path.isfile(TMP_FILE):
         _run_cmd('del /Q/F "%s"' % TMP_FILE)
 
@@ -76,7 +84,7 @@ def call_tex_pack(png, tex, res, redundant_files):
     return True
 
 def _tmpdir(name):
-    path = _pjoin(pwd, name)
+    path = _pjoin(pwd, 'ui_output', name)
     if os.path.isdir(path):
         _run_cmd('RD /Q/S "%s"' % path)
     _run_cmd('MKDIR "%s"' % path)
@@ -148,18 +156,25 @@ def run_pentagon():
     cmd = '%s ../pentagon_import/gen_pentagon.py %s %d ../pentagon_import/hero.csv ../pentagon_import/pt_hero.lua 7 %d' % (PYTHON, src_pos, tex, 11527)
     _run_cmd(cmd)
 
-# texturepacker
-pack_textures()
-
-# pentagon
-run_pentagon()
-
 # package
-cmd = "cocpackage_load.exe %s %s %s" % (res, tex2, out)
-_run_cmd(cmd) 
+def pack_load():
+    cmd = "cocpackage_load.exe %s %s %s" % (res, tex2, out)
+    _run_cmd(cmd) 
 
 # merge 
-cmd = "type ..\\pentagon_import\\pt_char.lua >> %s" % out
-_run_cmd(cmd)
-cmd = " type ..\\pentagon_import\\pt_hero.lua >> %s" % out
-_run_cmd(cmd)
+def pack_merge():
+    cmd = "type ..\\pentagon_import\\pt_char.lua >> %s" % out
+    _run_cmd(cmd)
+    cmd = " type ..\\pentagon_import\\pt_hero.lua >> %s" % out
+    _run_cmd(cmd)
+
+
+if modle == '-load':
+    run_pentagon()
+    pack_load()
+    pack_merge()
+elif modle == '-pack':
+    pack_textures()
+    run_pentagon()
+    pack_load()
+    pack_merge
