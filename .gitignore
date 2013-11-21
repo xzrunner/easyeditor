@@ -26,6 +26,7 @@ deprecated
 /editor_bin/arnan_*
 /editor_bin/build_loading
 /editor_bin/build_loading_p91
+/editor_bin/ui_output
 
 /pentagon_import/pt_char.lua
 /pentagon_import/pt_hero.lua
