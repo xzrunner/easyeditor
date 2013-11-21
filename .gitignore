@@ -11,7 +11,7 @@ deprecated
 /scene_import/script/tpack.py
 
 /background_import/data
-
+/coc_png
 /checker/data
 /checker/output
 
@@ -21,10 +21,8 @@ deprecated
 /sg_building/other
 
 /cloud_import/data
-
+/mac_share_file
 /editor_bin/ui2.ori.lua
-/editor_bin/ui2*.png
-/editor_bin/ui2*.json
 /editor_bin/arnan_*
 /editor_bin/build_loading
 /editor_bin/build_loading_p91
