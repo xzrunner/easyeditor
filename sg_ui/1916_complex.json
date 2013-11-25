@@ -1,38 +1,57 @@
 
 {
-	"name" : "buildingbutton_train",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6002-anniu-1.png",
+			"filepath" : "11608591321948.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : -35.6250,
+				"y" : 62.50
 			},
 			"x mirror" : false,
-			"x scale" : 0.4499999880790710,
+			"x scale" : 0.8299689292907715,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4499999880790710,
+			"y scale" : 0.8342696428298950,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tid_button_info_fontblank.json",
+			"filepath" : "11608591321948.png",
 			"multi color" : "",
-			"name" : "TID_BUTTON_TRAIN",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 0.2250061035156250,
-				"y" : -35.50
+				"x" : 35.6250,
+				"y" : 62.50
+			},
+			"x mirror" : true,
+			"x scale" : 0.8299689292907715,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8342696428298950,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ar_text1_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_TOUCH",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 84.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -45,32 +64,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6184-tongyong-1.png",
+			"filepath" : "ar_text2_fontblank.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "train_info",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 7.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ta_arrow_anim.json",
-			"multi color" : "",
-			"name" : "stage",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 62.83847045898438
+				"y" : 45.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

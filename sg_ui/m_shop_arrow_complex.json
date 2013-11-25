@@ -1,25 +1,25 @@
 
 {
-	"name" : "shop_icon_cat_4",
+	"name" : "m_shop_arrow",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "jy-1005-shopcat-4.png",
+			"filepath" : "ta_arrow_anim.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 25.0
+				"x" : 4.0,
+				"y" : 88.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.4000000059604645,
+			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4000000059604645,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		}
 	]

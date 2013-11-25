@@ -230,6 +230,44 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage",
+			"position" : 
+			{
+				"x" : -264.0,
+				"y" : 52.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage2",
+			"position" : 
+			{
+				"x" : 312.6863403320313,
+				"y" : 176.7135009765625
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }

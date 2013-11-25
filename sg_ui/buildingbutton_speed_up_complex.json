@@ -5,59 +5,98 @@
 	[
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6002-anniu-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.4499999880790710,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.4499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4499999880790710,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "6103-tongyong-1.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"scale" : 0.6000000238418579,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "clear_amount_fontblank.json",
+			"multi color" : "",
 			"name" : "amount",
 			"position" : 
 			{
 				"x" : 0.7250061035156250,
 				"y" : 36.77499771118164
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "TID_BUTTON_INFO_fontblank.json",
+			"filepath" : "tid_button_info_fontblank.json",
+			"multi color" : "",
 			"name" : "TID_BUTTON_SPEEDUP",
 			"position" : 
 			{
 				"x" : 0.2250061035156250,
 				"y" : -35.50
 			},
-			"scale" : 1.0,
 			"x mirror" : false,
-			"y mirror" : false
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : 63.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }

@@ -1,25 +1,25 @@
 
 {
-	"name" : "shop_icon_cat_4",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "jy-1005-shopcat-4.png",
+			"filepath" : "6162-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 25.0
+				"x" : -41.0,
+				"y" : -56.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.4000000059604645,
+			"x scale" : 0.6999999880790710,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4000000059604645,
+			"y scale" : 0.6999999880790710,
 			"y shear" : 0.0
 		}
 	]

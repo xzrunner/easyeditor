@@ -1,0 +1,26 @@
+
+{
+	"name" : "tutorial_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0",
+			"angle" : 0.0,
+			"filepath" : "screen_mask_1_complex.json",
+			"multi color" : "0x70",
+			"name" : "mask_screen",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

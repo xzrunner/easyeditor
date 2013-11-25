@@ -170,6 +170,8 @@ def pack_merge():
 
 
 if modle == '-load':
+    tex_json[0] = tex % 1
+    tex_json[1] = tex % 2
     run_pentagon()
     pack_load()
     pack_merge()

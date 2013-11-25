@@ -1,0 +1,80 @@
+{
+  "name": "", 
+  "sprite": [
+    {
+      "angle": 0, 
+      "filepath": "149802042167.png", 
+      "name": "", 
+      "position": {
+        "x": 224.375, 
+        "y": 69.4375
+      }, 
+      "x mirror": true, 
+      "x scale": 0.8250229779411765, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.8300898203592815, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 1.5707963267948966, 
+      "filepath": "45016394601658.png", 
+      "name": "", 
+      "position": {
+        "x": 426.25, 
+        "y": 26.25
+      }, 
+      "x mirror": false, 
+      "x scale": 1.25, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.25, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 1.5707963267948966, 
+      "filepath": "45016394601658.png", 
+      "name": "", 
+      "position": {
+        "x": 416.25, 
+        "y": 26.25
+      }, 
+      "x mirror": false, 
+      "x scale": 1.25, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.25, 
+      "y shear": 0
+    }, 
+    {
+      "angle": -1.5707963267948966, 
+      "filepath": "45016394601658.png", 
+      "name": "", 
+      "position": {
+        "x": 24.375, 
+        "y": 117.5
+      }, 
+      "x mirror": false, 
+      "x scale": 1.25, 
+      "x shear": 0, 
+      "y mirror": true, 
+      "y scale": 1.25, 
+      "y shear": 0
+    }, 
+    {
+      "angle": -1.5707963267948966, 
+      "filepath": "45016394601658.png", 
+      "name": "", 
+      "position": {
+        "x": 25.625, 
+        "y": 123.75
+      }, 
+      "x mirror": false, 
+      "x scale": 1.25, 
+      "x shear": 0, 
+      "y mirror": true, 
+      "y scale": 1.25, 
+      "y shear": 0
+    }
+  ]
+}

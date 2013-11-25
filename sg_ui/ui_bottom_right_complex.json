@@ -116,6 +116,63 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage_menu",
+			"position" : 
+			{
+				"x" : -62.00140380859375,
+				"y" : 148.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage_shop",
+			"position" : 
+			{
+				"x" : -192.9985961914063,
+				"y" : 148.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage_fight",
+			"position" : 
+			{
+				"x" : -313.8136596679688,
+				"y" : 148.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }
