@@ -20,6 +20,7 @@ deprecated
 /sg_building/data
 /sg_building/other
 
+/cocres_decode/output
 /cloud_import/data
 /mac_share_file
 /editor_bin/ui2.ori.lua
