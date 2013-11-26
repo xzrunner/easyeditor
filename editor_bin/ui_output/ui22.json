@@ -33,7 +33,7 @@
 	"sourceSize": {"w":376,"h":759}
 },
 {
-	"filename": "6162-tongyong-1.png",
+	"filename": "6162-tongyong-1.PNG",
 	"frame": {"x":746,"y":1076,"w":452,"h":424},
 	"rotated": true,
 	"trimmed": true,
@@ -42,11 +42,19 @@
 },
 {
 	"filename": "6171-tongyong-3.PNG",
-	"frame": {"x":383,"y":1736,"w":302,"h":299},
-	"rotated": false,
+	"frame": {"x":1626,"y":1165,"w":302,"h":299},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":302,"h":299},
 	"sourceSize": {"w":302,"h":299}
+},
+{
+	"filename": "6452-gaoguang-1.png",
+	"frame": {"x":383,"y":1736,"w":354,"h":250},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":93,"y":269,"w":354,"h":250},
+	"sourceSize": {"w":540,"h":540}
 },
 {
 	"filename": "6458-gaoguang-1.png",
@@ -66,8 +74,8 @@
 },
 {
 	"filename": "jy-1003-liangshi.png",
-	"frame": {"x":1626,"y":1165,"w":274,"h":270},
-	"rotated": true,
+	"frame": {"x":1679,"y":767,"w":274,"h":270},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":121,"y":104,"w":274,"h":270},
 	"sourceSize": {"w":512,"h":512}
@@ -143,6 +151,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a59fc63aa97db94a2e14db8786015bc3$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a0626de676e05d1dbda13b82ca33a23f$"
 }
 }
