@@ -179,4 +179,4 @@ elif modle == '-pack':
     pack_textures()
     run_pentagon()
     pack_load()
-    pack_merge
+    pack_merge()

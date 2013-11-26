@@ -1,6 +1,6 @@
 
 {
-	"name" : "buildingbutton_train",
+	"name" : "",
 	"sprite" : 
 	[
 		
@@ -16,29 +16,10 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.4499999880790710,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4499999880790710,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tid_button_info_fontblank.json",
-			"multi color" : "",
-			"name" : "TID_BUTTON_TRAIN",
-			"position" : 
-			{
-				"x" : 0.2250061035156250,
-				"y" : -35.50
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
@@ -51,7 +32,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 7.0
+				"y" : 5.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -64,13 +45,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ta_arrow_anim.json",
+			"filepath" : "title_fontblank.json",
 			"multi color" : "",
-			"name" : "stage",
+			"name" : "TID_BUTTON_TRAIN",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 58.33847045898438
+				"x" : -1.50,
+				"y" : -36.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
