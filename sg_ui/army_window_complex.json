@@ -88,8 +88,8 @@
 			"name" : "fight",
 			"position" : 
 			{
-				"x" : -348.0,
-				"y" : -144.0
+				"x" : 339.1000061035156,
+				"y" : -146.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -107,8 +107,8 @@
 			"name" : "train",
 			"position" : 
 			{
-				"x" : 353.7000122070313,
-				"y" : -144.0
+				"x" : -339.1000061035156,
+				"y" : -146.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -145,8 +145,8 @@
 			"name" : "gold",
 			"position" : 
 			{
-				"x" : -190.0,
-				"y" : -154.0
+				"x" : 144.0726928710938,
+				"y" : -175.8000030517578
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -161,11 +161,11 @@
 			"angle" : 0.0,
 			"filepath" : "res_icon_gold_complex.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "icon_gold",
 			"position" : 
 			{
-				"x" : -87.59999847412109,
-				"y" : -154.50
+				"x" : 252.2000122070313,
+				"y" : -171.6999969482422
 			},
 			"x mirror" : false,
 			"x scale" : 0.6000000238418579,

@@ -82,14 +82,14 @@
 		
 		{
 			"add color" : "",
-			"angle" : 0.0,
+			"angle" : -0.8750,
 			"filepath" : "ta_arrow_anim.json",
 			"multi color" : "",
 			"name" : "stage",
 			"position" : 
 			{
-				"x" : -1.0,
-				"y" : 63.0
+				"x" : 64.0,
+				"y" : 53.93846893310547
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
