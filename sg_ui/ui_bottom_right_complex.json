@@ -12,8 +12,8 @@
 			"name" : "button_settings",
 			"position" : 
 			{
-				"x" : -54.0,
-				"y" : 325.0
+				"x" : -324.50,
+				"y" : 55.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -31,8 +31,8 @@
 			"name" : "ranking",
 			"position" : 
 			{
-				"x" : -54.0,
-				"y" : 247.0
+				"x" : -246.50,
+				"y" : 55.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -50,8 +50,8 @@
 			"name" : "shop",
 			"position" : 
 			{
-				"x" : -188.0,
-				"y" : 73.0
+				"x" : -67.0,
+				"y" : 187.5884704589844
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -69,8 +69,8 @@
 			"name" : "fight",
 			"position" : 
 			{
-				"x" : -308.50,
-				"y" : 73.0
+				"x" : -67.0,
+				"y" : 303.6615295410156
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -88,8 +88,8 @@
 			"name" : "log",
 			"position" : 
 			{
-				"x" : -51.250,
-				"y" : 169.750
+				"x" : -165.750,
+				"y" : 54.97499847412109
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -126,8 +126,8 @@
 			"name" : "stage_menu",
 			"position" : 
 			{
-				"x" : -62.00140380859375,
-				"y" : 148.0
+				"x" : -63.68634033203125,
+				"y" : 143.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -139,14 +139,33 @@
 		
 		{
 			"add color" : "",
-			"angle" : 0.0,
+			"angle" : 1.570000052452087,
 			"filepath" : "ta_arrow_anim.json",
 			"multi color" : "",
 			"name" : "stage_shop",
 			"position" : 
 			{
-				"x" : -192.9985961914063,
-				"y" : 148.0
+				"x" : -138.6863403320313,
+				"y" : 191.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 1.570000052452087,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage_fight",
+			"position" : 
+			{
+				"x" : -138.6863250732422,
+				"y" : 310.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -159,13 +178,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ta_arrow_anim.json",
+			"filepath" : "achievement_complex.json",
 			"multi color" : "",
-			"name" : "stage_fight",
+			"name" : "achievements",
 			"position" : 
 			{
-				"x" : -313.8136596679688,
-				"y" : 148.0
+				"x" : -405.250,
+				"y" : 54.47499847412109
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "gift_button_complex.json",
+			"multi color" : "",
+			"name" : "gift",
+			"position" : 
+			{
+				"x" : -486.0,
+				"y" : 55.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
