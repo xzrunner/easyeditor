@@ -51,7 +51,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 191.0
+				"y" : 215.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -69,8 +69,8 @@
 			"name" : "close_button",
 			"position" : 
 			{
-				"x" : 389.0,
-				"y" : 192.6000061035156
+				"x" : 388.0,
+				"y" : 216.6000061035156
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -83,19 +83,19 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_fight_button_complex.json",
+			"filepath" : "br_role_complex.json",
 			"multi color" : "",
-			"name" : "fight",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 339.1000061035156,
-				"y" : -146.0
+				"x" : -272.0,
+				"y" : 97.54998779296875
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.3000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
 		
@@ -107,27 +107,27 @@
 			"name" : "train",
 			"position" : 
 			{
-				"x" : -339.1000061035156,
-				"y" : -146.0
+				"x" : 345.0,
+				"y" : 108.8000183105469
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
-			"angle" : 0.0,
+			"angle" : 2.384185791015625e-007,
 			"filepath" : "attackmenu_window_complex.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -45.0
+				"y" : -160.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.8000000119209290,
@@ -140,13 +140,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "upgrade_button_text_fontblank.json",
+			"filepath" : "info_bar_complex.json",
 			"multi color" : "",
-			"name" : "gold",
+			"name" : "bar",
 			"position" : 
 			{
-				"x" : 144.0726928710938,
-				"y" : -175.8000030517578
+				"x" : 121.6000061035156,
+				"y" : 37.20001220703125
+			},
+			"x mirror" : false,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "army_text_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_TOTAL_ARMY",
+			"position" : 
+			{
+				"x" : -50.39999389648438,
+				"y" : 80.20001220703125
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -159,19 +178,38 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "res_icon_gold_complex.json",
+			"filepath" : "next_match_button_complex.json",
 			"multi color" : "",
-			"name" : "icon_gold",
+			"name" : "fight",
 			"position" : 
 			{
-				"x" : 252.2000122070313,
-				"y" : -171.6999969482422
+				"x" : 0.0,
+				"y" : -188.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.6000000238418579,
+			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.6000000238418579,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "army_prog_text_fontblank.json",
+			"multi color" : "",
+			"name" : "progress_text",
+			"position" : 
+			{
+				"x" : 121.7999877929688,
+				"y" : 40.20001220703125
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]
