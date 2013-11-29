@@ -15,40 +15,12 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6411-gaoguang-h3-1.png",
+							"filepath" : "6401-jindutiao-h3-1.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 0.0,
-								"y" : 0.0
-							},
-							"x mirror" : false,
-							"x scale" : 0.009999999776482582,
-							"x shear" : 0.0,
-							"y mirror" : false,
-							"y scale" : 1.0,
-							"y shear" : 0.0
-						}
-					],
-					"id" : 0,
-					"time" : 1,
-					"tween" : false
-				},
-				
-				{
-					"actor" : 
-					[
-						
-						{
-							"add color" : "",
-							"angle" : 0.0,
-							"filepath" : "6411-gaoguang-h3-1.png",
-							"multi color" : "",
-							"name" : "",
-							"position" : 
-							{
-								"x" : 0.0,
+								"x" : -1680.0,
 								"y" : 0.0
 							},
 							"x mirror" : false,
@@ -62,16 +34,16 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6411-gaoguang-h3-2.png",
+							"filepath" : "6401-jindutiao-h3-2.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 12.0,
-								"y" : 0.0
+								"x" : -1670.50,
+								"y" : 9.536743164062500e-006
 							},
 							"x mirror" : false,
-							"x scale" : 1.0,
+							"x scale" : 2.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -81,13 +53,13 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6411-gaoguang-h3-1.png",
+							"filepath" : "6401-jindutiao-h3-1.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 24.0,
-								"y" : 0.0
+								"x" : -1657.0,
+								"y" : 2.098083496093750e-005
 							},
 							"x mirror" : true,
 							"x scale" : 1.0,
@@ -98,7 +70,7 @@
 						}
 					],
 					"id" : 0,
-					"time" : 2,
+					"time" : 1,
 					"tween" : true
 				},
 				
@@ -109,13 +81,13 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6411-gaoguang-h3-1.png",
+							"filepath" : "6401-jindutiao-h3-1.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 0.0,
-								"y" : 9.536743164062500e-006
+								"x" : -1680.0,
+								"y" : 0.0
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -128,16 +100,16 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6411-gaoguang-h3-2.png",
+							"filepath" : "6401-jindutiao-h3-2.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 461.50,
-								"y" : 9.536743164062500e-006
+								"x" : 0.0,
+								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 225.0,
+							"x scale" : 835.250,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -147,13 +119,13 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "6411-gaoguang-h3-1.png",
+							"filepath" : "6401-jindutiao-h3-1.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 923.0,
-								"y" : 9.536743164062500e-006
+								"x" : 1680.0,
+								"y" : 0.0
 							},
 							"x mirror" : true,
 							"x scale" : 1.0,

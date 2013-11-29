@@ -27,6 +27,7 @@ deprecated
 /editor_bin/arnan_*
 /editor_bin/build_loading
 /editor_bin/build_loading_p91
+/editor_bin/build_loading_mmzb
 /editor_bin/ui_output/ui2.ori.lua
 
 /pentagon_import/pt_char.lua

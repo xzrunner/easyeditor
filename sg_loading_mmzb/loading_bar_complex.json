@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "loading_bar_9patch.json",
+			"filepath" : "loading_bar_bg_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -16,10 +16,10 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.250,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.250,
 			"y shear" : 0.0
 		},
 		
@@ -31,14 +31,33 @@
 			"name" : "bar",
 			"position" : 
 			{
-				"x" : -459.0,
+				"x" : 0.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.250,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "loading_bar_fg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 4.750
+			},
+			"x mirror" : false,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.250,
 			"y shear" : 0.0
 		}
 	]
