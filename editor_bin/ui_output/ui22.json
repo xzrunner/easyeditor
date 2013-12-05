@@ -18,7 +18,7 @@
 },
 {
 	"filename": "6154-tongyong-1.png",
-	"frame": {"x":746,"y":1532,"w":391,"h":380},
+	"frame": {"x":746,"y":1528,"w":391,"h":380},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":380},
@@ -33,16 +33,16 @@
 	"sourceSize": {"w":376,"h":759}
 },
 {
-	"filename": "6162-tongyong-1.PNG",
-	"frame": {"x":746,"y":1076,"w":452,"h":424},
+	"filename": "6162-tongyong-1.png",
+	"frame": {"x":746,"y":1076,"w":448,"h":422},
 	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":231,"y":355,"w":452,"h":424},
+	"spriteSourceSize": {"x":235,"y":357,"w":448,"h":422},
 	"sourceSize": {"w":920,"h":920}
 },
 {
 	"filename": "6171-tongyong-3.PNG",
-	"frame": {"x":1626,"y":1165,"w":302,"h":299},
+	"frame": {"x":1624,"y":1165,"w":302,"h":299},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":302,"h":299},
@@ -122,7 +122,7 @@
 },
 {
 	"filename": "jy-1005-shopcat-3.png",
-	"frame": {"x":1174,"y":1165,"w":400,"h":448},
+	"frame": {"x":1172,"y":1165,"w":400,"h":448},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":48,"y":6,"w":400,"h":448},
@@ -151,6 +151,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:a0626de676e05d1dbda13b82ca33a23f$"
+	"smartupdate": "$TexturePacker:SmartUpdate:123e19340cf75b3822f69aaa22efea3b$"
 }
 }

@@ -1,6 +1,6 @@
 
 {
-	"name" : "battle_log_window",
+	"name" : "ranking_momo_window",
 	"sprite" : 
 	[
 		
@@ -64,69 +64,12 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_line_complex.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 218.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "log_column_fontblank.json",
-			"multi color" : "",
-			"name" : "Column_1",
-			"position" : 
-			{
-				"x" : -266.0,
-				"y" : 234.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "log_column_2_fontblank.json",
-			"multi color" : "",
-			"name" : "Column_2",
-			"position" : 
-			{
-				"x" : 261.0,
-				"y" : 234.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "tab_complex.json",
 			"multi color" : "",
 			"name" : "tab1",
 			"position" : 
 			{
-				"x" : -308.50,
+				"x" : -312.0,
 				"y" : 276.0
 			},
 			"x mirror" : false,
@@ -145,8 +88,84 @@
 			"name" : "tab2",
 			"position" : 
 			{
-				"x" : -130.0,
+				"x" : -134.0,
 				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tab_complex.json",
+			"multi color" : "",
+			"name" : "tab3",
+			"position" : 
+			{
+				"x" : 44.0,
+				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tab_complex.json",
+			"multi color" : "",
+			"name" : "tab4",
+			"position" : 
+			{
+				"x" : 222.0,
+				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -210.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "momo_rank_item_complex.json",
+			"multi color" : "",
+			"name" : "self_item",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -266.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

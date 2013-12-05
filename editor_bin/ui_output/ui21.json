@@ -257,7 +257,7 @@
 	"sourceSize": {"w":146,"h":146}
 },
 {
-	"filename": "6112-tongyong-1.PNG",
+	"filename": "6112-tongyong-1.png",
 	"frame": {"x":801,"y":288,"w":94,"h":90},
 	"rotated": false,
 	"trimmed": true,
@@ -329,7 +329,7 @@
 	"sourceSize": {"w":44,"h":5}
 },
 {
-	"filename": "6125-tongyong-1.PNG",
+	"filename": "6125-tongyong-1.png",
 	"frame": {"x":512,"y":1205,"w":126,"h":188},
 	"rotated": true,
 	"trimmed": true,
@@ -337,7 +337,7 @@
 	"sourceSize": {"w":130,"h":190}
 },
 {
-	"filename": "6126-tongyong-1.PNG",
+	"filename": "6126-tongyong-1.png",
 	"frame": {"x":775,"y":472,"w":120,"h":160},
 	"rotated": false,
 	"trimmed": true,
@@ -345,7 +345,7 @@
 	"sourceSize": {"w":130,"h":190}
 },
 {
-	"filename": "6127-tongyong-1.PNG",
+	"filename": "6127-tongyong-1.png",
 	"frame": {"x":1229,"y":1296,"w":112,"h":160},
 	"rotated": true,
 	"trimmed": true,
@@ -1066,7 +1066,7 @@
 },
 {
 	"filename": "6202-biankuang-9-5.PNG",
-	"frame": {"x":895,"y":11,"w":-1,"h":-1},
+	"frame": {"x":895,"y":14,"w":-1,"h":-1},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":-1,"h":-1},
@@ -1074,7 +1074,7 @@
 },
 {
 	"filename": "6203-biankuang-9-5.png",
-	"frame": {"x":895,"y":11,"w":-1,"h":-1},
+	"frame": {"x":895,"y":14,"w":-1,"h":-1},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":0,"w":-1,"h":-1},
@@ -1185,7 +1185,7 @@
 	"sourceSize": {"w":8,"h":8}
 },
 {
-	"filename": "6310-diban-9-1.PNG",
+	"filename": "6310-diban-9-1.png",
 	"frame": {"x":363,"y":1959,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -1193,7 +1193,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "6310-diban-9-2.PNG",
+	"filename": "6310-diban-9-2.png",
 	"frame": {"x":704,"y":1241,"w":4,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -1201,7 +1201,7 @@
 	"sourceSize": {"w":4,"h":32}
 },
 {
-	"filename": "6310-diban-9-3.PNG",
+	"filename": "6310-diban-9-3.png",
 	"frame": {"x":354,"y":1923,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
@@ -1209,7 +1209,7 @@
 	"sourceSize": {"w":32,"h":32}
 },
 {
-	"filename": "6310-diban-9-4.PNG",
+	"filename": "6310-diban-9-4.png",
 	"frame": {"x":704,"y":1277,"w":32,"h":4},
 	"rotated": true,
 	"trimmed": false,
@@ -1313,7 +1313,7 @@
 	"sourceSize": {"w":4,"h":4}
 },
 {
-	"filename": "6315-diban-h3-1.PNG",
+	"filename": "6315-diban-h3-1.png",
 	"frame": {"x":1393,"y":1409,"w":44,"h":64},
 	"rotated": false,
 	"trimmed": false,
@@ -1321,7 +1321,7 @@
 	"sourceSize": {"w":44,"h":64}
 },
 {
-	"filename": "6315-diban-h3-2.PNG",
+	"filename": "6315-diban-h3-2.png",
 	"frame": {"x":1440,"y":917,"w":4,"h":64},
 	"rotated": false,
 	"trimmed": false,
@@ -1329,7 +1329,7 @@
 	"sourceSize": {"w":4,"h":64}
 },
 {
-	"filename": "6315-diban-h3-3.PNG",
+	"filename": "6315-diban-h3-3.png",
 	"frame": {"x":1393,"y":1341,"w":44,"h":64},
 	"rotated": false,
 	"trimmed": false,
@@ -1593,7 +1593,7 @@
 	"sourceSize": {"w":27,"h":64}
 },
 {
-	"filename": "6409-gaoguang-h3-1.PNG",
+	"filename": "6409-gaoguang-h3-1.png",
 	"frame": {"x":340,"y":1686,"w":19,"h":26},
 	"rotated": false,
 	"trimmed": false,
@@ -1601,7 +1601,7 @@
 	"sourceSize": {"w":19,"h":26}
 },
 {
-	"filename": "6409-gaoguang-h3-2.PNG",
+	"filename": "6409-gaoguang-h3-2.png",
 	"frame": {"x":704,"y":1313,"w":4,"h":26},
 	"rotated": false,
 	"trimmed": false,
@@ -1609,7 +1609,7 @@
 	"sourceSize": {"w":4,"h":26}
 },
 {
-	"filename": "6409-gaoguang-h3-3.PNG",
+	"filename": "6409-gaoguang-h3-3.png",
 	"frame": {"x":246,"y":1170,"w":19,"h":26},
 	"rotated": false,
 	"trimmed": false,
@@ -1657,7 +1657,7 @@
 	"sourceSize": {"w":23,"h":40}
 },
 {
-	"filename": "6412-gaoguang-h3-1.PNG",
+	"filename": "6412-gaoguang-h3-1.png",
 	"frame": {"x":1206,"y":443,"w":19,"h":36},
 	"rotated": false,
 	"trimmed": true,
@@ -1673,7 +1673,7 @@
 	"sourceSize": {"w":4,"h":40}
 },
 {
-	"filename": "6412-gaoguang-h3-3.PNG",
+	"filename": "6412-gaoguang-h3-3.png",
 	"frame": {"x":686,"y":1645,"w":21,"h":36},
 	"rotated": false,
 	"trimmed": true,
@@ -1929,7 +1929,7 @@
 	"sourceSize": {"w":74,"h":74}
 },
 {
-	"filename": "6465-gaoguang-1.PNG",
+	"filename": "6465-gaoguang-1.png",
 	"frame": {"x":110,"y":1864,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
@@ -2415,6 +2415,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:50b934223bf8a63cfb9210d80a510ee5$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f5ac7aa8fff9f6d5d5372cbee6f14d59$"
 }
 }

@@ -1,21 +1,173 @@
 
 {
-	"name" : "battle_log_window",
+	"name" : "momo_rank_item_3rd",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "rank_item_bg_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -1.525878906250000e-005,
+				"y" : -3.051757812500000e-005
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6118-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -323.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_rank_fontblank.json",
+			"multi color" : "",
+			"name" : "rank",
+			"position" : 
+			{
+				"x" : -321.50,
+				"y" : -3.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6459-gaoguang-1.png",
+			"multi color" : "",
+			"name" : "line",
+			"position" : 
+			{
+				"x" : -233.8512268066406,
+				"y" : -0.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 11.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -92.47930908203125,
+				"y" : -19.10002899169922
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rr_play_name2_fontblank.json",
+			"multi color" : "",
+			"name" : "player_name",
+			"position" : 
+			{
+				"x" : -65.0,
+				"y" : 17.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rr_score_fontblank.json",
+			"multi color" : "",
+			"name" : "score",
+			"position" : 
+			{
+				"x" : -165.0,
+				"y" : -17.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "visit",
+			"position" : 
+			{
+				"x" : 285.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6127-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -386.0,
+				"y" : 11.0
+			},
+			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
@@ -26,133 +178,19 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg2_9patch.json",
+			"filepath" : "6127-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -27.0
+				"x" : 385.0,
+				"y" : 12.0
 			},
-			"x mirror" : false,
+			"x mirror" : true,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
-			"multi color" : "",
-			"name" : "close_button",
-			"position" : 
-			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "rank_line_complex.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 218.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "log_column_fontblank.json",
-			"multi color" : "",
-			"name" : "Column_1",
-			"position" : 
-			{
-				"x" : -266.0,
-				"y" : 234.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "log_column_2_fontblank.json",
-			"multi color" : "",
-			"name" : "Column_2",
-			"position" : 
-			{
-				"x" : 261.0,
-				"y" : 234.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab1",
-			"position" : 
-			{
-				"x" : -308.50,
-				"y" : 276.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab2",
-			"position" : 
-			{
-				"x" : -130.0,
-				"y" : 276.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]

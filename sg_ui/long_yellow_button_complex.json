@@ -1,13 +1,13 @@
 
 {
-	"name" : "zz_test",
+	"name" : "long_yellow_button",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tab_nosel_9patch.json",
+			"filepath" : "long_yellow_button_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -26,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tab_title_fontblank.json",
+			"filepath" : "long_text_fontblank.json",
 			"multi color" : "",
 			"name" : "title",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 10.0
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
