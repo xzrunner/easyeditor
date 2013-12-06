@@ -31,7 +31,7 @@
 			"name" : "title",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -10.0,
 				"y" : 108.0
 			},
 			"x mirror" : false,
@@ -50,8 +50,8 @@
 			"name" : "body",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -10.0
+				"x" : -10.0,
+				"y" : -14.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
