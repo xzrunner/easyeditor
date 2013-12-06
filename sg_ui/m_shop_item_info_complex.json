@@ -26,51 +26,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6154-tongyong-1.png",
+			"filepath" : "shop_item_info_title_fontblank.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "title",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 0.0
+				"y" : 108.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.750,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.750,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "shop_item_title_bar_complex.json",
+			"filepath" : "shop_item_info_body_fontblank.json",
 			"multi color" : "",
-			"name" : "title_bar",
+			"name" : "body",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -72.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "mount_icon_fontblank.json",
-			"multi color" : "",
-			"name" : "icon",
-			"position" : 
-			{
-				"x" : 2.0,
-				"y" : -2.0
+				"y" : -10.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
