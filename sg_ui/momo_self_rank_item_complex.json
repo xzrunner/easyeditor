@@ -1,19 +1,19 @@
 
 {
-	"name" : "deco_info_window",
+	"name" : "momo_self_rank_item",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "setting_bg_9patch.json",
+			"filepath" : "rank_item_bg_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : -1.525878906250000e-005,
+				"y" : -3.051757812500000e-005
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -26,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "setting_bg2_9patch.json",
+			"filepath" : "6118-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -1.0,
-				"y" : -24.60000610351563
+				"x" : -323.0,
+				"y" : -4.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -45,13 +45,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
+			"filepath" : "rank_rank_fontblank.json",
 			"multi color" : "",
-			"name" : "close_button",
+			"name" : "rank",
 			"position" : 
 			{
-				"x" : 169.7999877929688,
-				"y" : 221.0
+				"x" : -321.50,
+				"y" : -3.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,51 +64,51 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "setting_title_fontblank.json",
+			"filepath" : "6459-gaoguang-1.png",
 			"multi color" : "",
-			"name" : "title",
+			"name" : "line",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 219.3999938964844
+				"x" : -233.8512268066406,
+				"y" : -0.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 11.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6154-tongyong-1.png",
+			"filepath" : "6107-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 79.0
+				"x" : -197.0,
+				"y" : -16.10002899169922
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "mount_icon_fontblank.json",
+			"filepath" : "rr_play_name2_fontblank.json",
 			"multi color" : "",
-			"name" : "icon",
+			"name" : "player_name",
 			"position" : 
 			{
-				"x" : -2.0,
-				"y" : 62.0
+				"x" : -65.0,
+				"y" : 22.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -121,32 +121,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "deco_info_bg3_9patch.json",
+			"filepath" : "rr_score_fontblank.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "score",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -130.50
+				"x" : -120.0,
+				"y" : -17.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.4625000059604645,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "deco_info_text_fontblank.json",
+			"filepath" : "city_fontblank.json",
 			"multi color" : "",
-			"name" : "text_info",
+			"name" : "city",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -126.0
+				"x" : 188.0,
+				"y" : -15.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

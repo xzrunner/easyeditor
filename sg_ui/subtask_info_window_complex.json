@@ -1,13 +1,13 @@
 
 {
-	"name" : "ranking_momo_window",
+	"name" : "subtask_info_window",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "building_info_window_bg_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -26,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg2_9patch.json",
+			"filepath" : "building_info_window_bg2_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -27.0
+				"y" : -36.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -45,13 +45,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
+			"filepath" : "info_title_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 225.250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
 			"filepath" : "close_button_complex.json",
 			"multi color" : "",
 			"name" : "close_button",
 			"position" : 
 			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
+				"x" : 317.0,
+				"y" : 223.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,89 +83,51 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab1",
-			"position" : 
-			{
-				"x" : -312.0,
-				"y" : 276.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab2",
-			"position" : 
-			{
-				"x" : -134.0,
-				"y" : 276.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab3",
-			"position" : 
-			{
-				"x" : 44.0,
-				"y" : 276.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab4",
-			"position" : 
-			{
-				"x" : 222.0,
-				"y" : 276.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "rank_line_complex.json",
+			"filepath" : "building_info_window_bg3_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -210.0
+				"y" : -133.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6154-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -220.0,
+				"y" : 71.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "icon",
+			"position" : 
+			{
+				"x" : -215.0,
+				"y" : 57.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -159,13 +140,108 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "momo_self_rank_item_complex.json",
+			"filepath" : "info_title2_fontblank.json",
 			"multi color" : "",
-			"name" : "self_item",
+			"name" : "task_status",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -264.0
+				"y" : -72.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "claim",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -184.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "res_icon_anim.json",
+			"multi color" : "",
+			"name" : "res_icon",
+			"position" : 
+			{
+				"x" : 19.50,
+				"y" : -128.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "task_info_fontblank.json",
+			"multi color" : "",
+			"name" : "task_info",
+			"position" : 
+			{
+				"x" : 102.0,
+				"y" : 72.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "icon2",
+			"position" : 
+			{
+				"x" : -215.0,
+				"y" : 57.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "task_amount_fontblank.json",
+			"multi color" : "",
+			"name" : "amount",
+			"position" : 
+			{
+				"x" : -78.250,
+				"y" : -129.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
