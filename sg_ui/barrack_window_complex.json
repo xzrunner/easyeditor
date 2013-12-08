@@ -275,7 +275,7 @@
 			"angle" : 0.0,
 			"filepath" : "barrack_slot_complex.json",
 			"multi color" : "",
-			"name" : "troop_2",
+			"name" : "troop_3",
 			"position" : 
 			{
 				"x" : -160.0,
@@ -294,29 +294,10 @@
 			"angle" : 0.0,
 			"filepath" : "barrack_slot_complex.json",
 			"multi color" : "",
-			"name" : "troop_3",
+			"name" : "troop_5",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -4.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.200000047683716,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.200000047683716,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "barrack_slot_complex.json",
-			"multi color" : "",
-			"name" : "troop_4",
-			"position" : 
-			{
-				"x" : 160.0,
 				"y" : -4.0
 			},
 			"x mirror" : false,
@@ -335,6 +316,25 @@
 			"name" : "troop_7",
 			"position" : 
 			{
+				"x" : 160.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_4",
+			"position" : 
+			{
 				"x" : -160.0,
 				"y" : -182.0
 			},
@@ -351,7 +351,7 @@
 			"angle" : 0.0,
 			"filepath" : "barrack_slot_complex.json",
 			"multi color" : "",
-			"name" : "troop_5",
+			"name" : "troop_9",
 			"position" : 
 			{
 				"x" : 320.0,
@@ -370,7 +370,7 @@
 			"angle" : 0.0,
 			"filepath" : "barrack_slot_complex.json",
 			"multi color" : "",
-			"name" : "troop_6",
+			"name" : "troop_2",
 			"position" : 
 			{
 				"x" : -320.0,
@@ -389,7 +389,7 @@
 			"angle" : 0.0,
 			"filepath" : "barrack_slot_complex.json",
 			"multi color" : "",
-			"name" : "troop_8",
+			"name" : "troop_6",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -408,7 +408,7 @@
 			"angle" : 0.0,
 			"filepath" : "barrack_slot_complex.json",
 			"multi color" : "",
-			"name" : "troop_9",
+			"name" : "troop_8",
 			"position" : 
 			{
 				"x" : 160.0,
