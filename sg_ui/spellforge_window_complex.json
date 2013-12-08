@@ -64,25 +64,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "back_button_complex.json",
-			"multi color" : "",
-			"name" : "back_button",
-			"position" : 
-			{
-				"x" : -384.1499938964844,
-				"y" : 293.8000183105469
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "rank_line_complex.json",
 			"multi color" : "",
 			"name" : "",
@@ -165,13 +146,13 @@
 			"position" : 
 			{
 				"x" : -225.0,
-				"y" : -30.0
+				"y" : -4.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 1.299999952316284,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 1.299999952316284,
 			"y shear" : 0.0
 		},
 		
@@ -184,13 +165,13 @@
 			"position" : 
 			{
 				"x" : -75.0,
-				"y" : -30.0
+				"y" : -4.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 1.299999952316284,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 1.299999952316284,
 			"y shear" : 0.0
 		},
 		
@@ -203,13 +184,13 @@
 			"position" : 
 			{
 				"x" : 75.0,
-				"y" : -30.0
+				"y" : -4.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 1.299999952316284,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 1.299999952316284,
 			"y shear" : 0.0
 		},
 		
@@ -222,13 +203,13 @@
 			"position" : 
 			{
 				"x" : 225.0,
-				"y" : -30.0
+				"y" : -4.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 1.299999952316284,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 1.299999952316284,
 			"y shear" : 0.0
 		},
 		
@@ -412,7 +393,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 0.0
+				"y" : 8.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -440,7 +421,7 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
-
+		
 		{
 			"add color" : "",
 			"angle" : 0.0,

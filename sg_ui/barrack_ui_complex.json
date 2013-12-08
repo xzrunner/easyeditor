@@ -1,15 +1,15 @@
 
 {
-	"name" : "m_barrack_slot",
+	"name" : "m_barrack",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "barrack_slot_item_complex.json",
+			"filepath" : "barrack_window_complex.json",
 			"multi color" : "",
-			"name" : "item",
+			"name" : "window",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -26,9 +26,9 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "barrack_slot_locked_complex.json",
+			"filepath" : "character_info_window_complex.json",
 			"multi color" : "",
-			"name" : "locked",
+			"name" : "char_info_window",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -45,9 +45,9 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "barrack_slot_info_complex.json",
+			"filepath" : "window_slide_button_complex.json",
 			"multi color" : "",
-			"name" : "info",
+			"name" : "slide",
 			"position" : 
 			{
 				"x" : 0.0,

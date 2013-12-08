@@ -111,10 +111,10 @@
 				"y" : -100.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 1.200000047683716,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 1.200000047683716,
 			"y shear" : 0.0
 		},
 		
@@ -146,7 +146,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 71.0
+				"y" : 96.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -165,7 +165,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -276.0
+				"y" : -300.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -184,7 +184,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -276.0
+				"y" : -300.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -202,7 +202,7 @@
 			"name" : "timepart",
 			"position" : 
 			{
-				"x" : 180.0,
+				"x" : 188.0,
 				"y" : 137.0
 			},
 			"x mirror" : false,
@@ -221,27 +221,8 @@
 			"name" : "finishnow_button",
 			"position" : 
 			{
-				"x" : 305.0,
+				"x" : 313.0,
 				"y" : 137.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ta_arrow_anim.json",
-			"multi color" : "",
-			"name" : "stage",
-			"position" : 
-			{
-				"x" : -264.0,
-				"y" : 52.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -259,8 +240,312 @@
 			"name" : "stage2",
 			"position" : 
 			{
-				"x" : 312.6863403320313,
+				"x" : 272.6863403320313,
 				"y" : 176.7135009765625
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_1",
+			"position" : 
+			{
+				"x" : -320.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_2",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_3",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_4",
+			"position" : 
+			{
+				"x" : 160.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_7",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : -182.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_5",
+			"position" : 
+			{
+				"x" : 320.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_6",
+			"position" : 
+			{
+				"x" : -320.0,
+				"y" : -182.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_8",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -182.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_9",
+			"position" : 
+			{
+				"x" : 160.0,
+				"y" : -182.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "",
+			"name" : "troop_10",
+			"position" : 
+			{
+				"x" : 320.0,
+				"y" : -182.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "",
+			"name" : "slot_1",
+			"position" : 
+			{
+				"x" : 83.0,
+				"y" : 180.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "",
+			"name" : "slot_2",
+			"position" : 
+			{
+				"x" : -17.0,
+				"y" : 180.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "",
+			"name" : "slot_3",
+			"position" : 
+			{
+				"x" : -117.0,
+				"y" : 180.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "",
+			"name" : "slot_4",
+			"position" : 
+			{
+				"x" : -217.0,
+				"y" : 180.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "",
+			"name" : "slot_5",
+			"position" : 
+			{
+				"x" : -317.0,
+				"y" : 180.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage",
+			"position" : 
+			{
+				"x" : -318.6863708496094,
+				"y" : 67.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
