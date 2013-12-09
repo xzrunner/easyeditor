@@ -4,7 +4,7 @@ local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
 
-local model, filename, compress = ...
+local gen_model, model, filename, compress = ...
 local max_id = 0
 local export = 0
 
@@ -30,7 +30,11 @@ local function texture(n)
 	tex = n
 end
 
-f = assert(loadfile (filename , "t", { picture = picture , animation = animation , texture = texture }))
+local _env = _ENV
+_env.picture = picture
+_env.animation = animation
+_env.texture = texture
+f = assert(loadfile (filename , "t", _env))
 f()
 
 local ANIMATION = 0
@@ -314,9 +318,9 @@ end
 
 end
 
+
 filename = string.match(filename, "(.*)%..*$")
 
-local f = io.open(filename .. ".ep", "wb")
 local gm_filename, gm_load = nil, nil
 
 if model == "-ppm" then
@@ -332,11 +336,34 @@ else
 	error("not match ppm or png  model.")
 end
 
-for i = 1,tex do
-	local t = gm_load(gm_filename..tostring(i))
-	write_block(f, t)
+-- gen pic data
+local function gen_epp(f_epp)
+	for i = 1,tex do
+		local t = gm_load(gm_filename..tostring(i))
+		write_block(f_epp, t)
+	end
 end
 
-write_block(f, detail())
+-- gen animation data
+local function gen_epd(f_epd)
+	write_block(f_epd, detail())
+end
 
-f:close()
+
+if gen_model == "-ep" then
+	local f = io.open(filename.. ".ep", "wb")
+	gen_epp(f)
+	gen_epd(f)
+	f:close()
+elseif gen_model == "-pd" then
+	local f_epp = io.open(filename .. ".epp", "wb")
+	local f_epd = io.open(filename..".epd", "wb")
+	gen_epp(f_epp)
+	gen_epd(f_epd)
+	f_epp:close()
+	f_epd:close()
+else
+	error("not match ep or pd model.")
+end
+
+
