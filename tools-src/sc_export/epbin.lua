@@ -1,3 +1,21 @@
+local READ_ME = [[
+	usepage:
+		lua epbin.lua <gen_model> <model> <filename>
+	gen_model:
+		-ep : 生成单个的ep文件
+		-pd : 生成pic 和animation分离的两个文件(xx.epp: 图片打包文件 xx.epd animation打包文件)
+	model: 
+		-ppm:       使用的贴图为ppm文件  
+		-png8:      使用的贴图为png8文件
+		-png4:      使用的贴图为png4文件
+		-pvr:       使用的贴图文件为pvr压缩文件
+	filename:
+		导出的lua文件名
+
+	PS:
+		贴图的文件命名方式为filename<1..8>.<ext> 其中filename为lua的filename相同(无后缀名)
+]]
+
 local bit32 = require "bit32"
 local ppm = require "ppm"
 local epconv = require "epconv"
@@ -333,6 +351,7 @@ elseif model =="-pvr" then
 	gm_load = load_pvr
 	gm_filename = filename
 else
+	print(READ_ME)
 	error("not match ppm or png  model.")
 end
 
@@ -363,6 +382,7 @@ elseif gen_model == "-pd" then
 	f_epp:close()
 	f_epd:close()
 else
+	print(READ_ME)
 	error("not match ep or pd model.")
 end
 
