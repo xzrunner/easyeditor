@@ -1,6 +1,6 @@
 
 {
-	"name" : "ranking_momo_window",
+	"name" : "momo_activities_info_window",
 	"sprite" : 
 	[
 		
@@ -121,13 +121,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_line_complex.json",
+			"filepath" : "yellow_button_complex.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "active1",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -210.0
+				"x" : -333.250,
+				"y" : 203.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -140,13 +140,51 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "momo_self_rank_item_complex.json",
+			"filepath" : "yellow_button_complex.json",
 			"multi color" : "",
-			"name" : "self_item",
+			"name" : "active2",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -264.0
+				"x" : -333.250,
+				"y" : 132.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "active3",
+			"position" : 
+			{
+				"x" : -333.250,
+				"y" : 62.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "active4",
+			"position" : 
+			{
+				"x" : -333.250,
+				"y" : -6.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
