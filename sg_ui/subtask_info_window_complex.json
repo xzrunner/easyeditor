@@ -140,25 +140,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "info_title2_fontblank.json",
-			"multi color" : "",
-			"name" : "task_status",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -72.50
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "yellow_button_complex.json",
 			"multi color" : "",
 			"name" : "claim",
@@ -242,6 +223,25 @@
 			{
 				"x" : -78.250,
 				"y" : -129.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "task_status2_fontblank.json",
+			"multi color" : "",
+			"name" : "task_status",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -62.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
