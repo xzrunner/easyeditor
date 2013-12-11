@@ -85,7 +85,9 @@ zfread(void *buf, int sz, int count, struct ZFILE *zf) {
 	if (r > count) {
 		r = count;
 	}
-	memcpy(buf, zf->ptr, r * sz);
+	if (buf) {
+		memcpy(buf, zf->ptr, r * sz);
+	}
 	zf->ptr += r*sz;
 	return r;
 }
@@ -401,6 +403,79 @@ decode_picture(struct ZFILE *f, int sz, struct sc_decode *decode) {
 	}
 }
 
+/*
+static void
+dump_bytes(void *buffer, int sz) {
+	uint8_t *buf = buffer;
+	int i;
+	for (i=0;i<sz;i++) {
+		printf("%02x ", buf[i]);
+		if (i%16 == 15) {
+			printf("\n");
+		}
+	}
+	printf("\n");
+	for (i=0;i<sz;i++) {
+		printf("%c", buf[i]);
+	}
+	printf("\n");
+}
+*/
+
+static int
+decode_poly(struct ZFILE *f, struct fragment *frag, int tbase) {
+	int texid = read_byte(f);
+	// todo: why mod 16 ?
+	texid %= 16;
+	frag->texid = texid + tbase;
+	int sz = read_dword(f);
+	char buf[sz];
+	read_bytes(f,buf,sz);
+	int pn = buf[1];
+	int i;
+	for (i=0;i<4;i++) {
+		memcpy(&frag->dest[i].x, buf+2+8*i,4);
+		memcpy(&frag->dest[i].y, buf+2+8*i+4,4);
+		memcpy(&frag->src[i].x, buf+2+pn*8+4*i,2);
+		memcpy(&frag->src[i].y, buf+2+pn*8+4*i+2,2);
+	}
+	return sz+5;
+}
+
+
+static void
+decode_picture_new(struct ZFILE *f, int sz, struct sc_decode *decode) {
+	int id = read_word(f);
+	if (id > decode->max_sprite) {
+		decode->max_sprite = id;
+	}
+	id += decode->sprite_base;
+	if (id >=MAX_SPRITE || Sprite[id] != NULL) {
+		fault("invalid id (base %d : %d) picture\n",decode->sprite_base , id-decode->sprite_base);
+	}
+	Sprite[id] = malloc(sizeof(struct sprite_res));
+	Sprite[id]->type = SPRITE_PICTURE;
+	struct picture * pic = &Sprite[id]->u.p;
+
+	pic->n = read_word(f);
+	pic->f = malloc(pic->n * sizeof(struct fragment));
+
+	// point count : 4/6/8
+	read_word(f);
+	sz-=6;
+
+	int i;
+	for (i=0;i<pic->n;i++) {
+		sz -= decode_poly(f,&pic->f[i],decode->texture_base);
+	}
+	if (sz !=5 ) {
+		fault("invalid new picture");
+	}
+
+	// skip 5 zero
+	read_bytes(f, NULL, 5);
+}
+
 static void
 decode_animation(struct ZFILE *f, int sz, struct sc_decode *decode) {
 	int id = read_word(f);
@@ -538,7 +613,9 @@ decode_text(struct ZFILE *f,int sz,struct sc_decode *decode) {
 
 	int slen = read_byte(f);
 	if (slen == 0xff) {
-		fault("invalid font name \n");
+//		fault("invalid font name \n");
+		t->font = malloc(1);
+		t->font[0] = '\0';
 	} else {
 		t->font = malloc(slen+1);
 		read_bytes(f, t->font, slen);
@@ -553,7 +630,7 @@ decode_text(struct ZFILE *f,int sz,struct sc_decode *decode) {
 	t->height = t->res[12] + t->res[13] * 256;
 }
 
-static void
+static int
 decode_segment(struct ZFILE *f, struct sc_decode *decode) {
 	int type = read_byte(f);
 	uint32_t sz = read_dword(f) - decode->magic;
@@ -567,7 +644,12 @@ decode_segment(struct ZFILE *f, struct sc_decode *decode) {
 		decode_texture(f, sz, decode);
 		break;
 	case 0:
-		return;
+		return 1;
+	case 18: {
+		++decode->picture;
+		decode_picture_new(f,sz, decode);
+		break;
+	}
 	case 2: {
 		++decode->picture;
 		decode_picture(f,sz, decode);
@@ -589,10 +671,18 @@ decode_segment(struct ZFILE *f, struct sc_decode *decode) {
 	case 7:
 		decode_text(f, sz, decode);
 		break;
-	default:
-		printf("Unknown type %d\n", type);
+	case 15: {
+		decode_text(f, sz, decode);
+		// todo: skip one byte, must be 1
+		read_byte(f);
 		break;
 	}
+	default:
+		printf("Unknown type %d\n", type);
+		read_bytes(f, NULL, sz);
+		break;
+	}
+	return 0;
 }
 
 static int
@@ -672,7 +762,13 @@ sprite_load(const char * filename) {
 		if (zfeof(f)) {
 			fault("Invalid file %s\n", filename);
 		}
-		decode_segment(f,&decode);
+		int end = decode_segment(f,&decode);
+		if (end) {
+			printf("decode.tex = %d tex = %d\n", decode.texture , tex);
+			printf("decode.ani = %d ani = %d\n", decode.animation , ani);
+			printf("decode.pic = %d pic = %d\n", decode.picture , pic);
+			break;
+		}
 	} while (!(decode.texture == tex && decode.animation == ani && decode.picture == pic));
 
 	SpriteNumber += decode.max_sprite + 1;
