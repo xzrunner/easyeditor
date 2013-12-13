@@ -7,6 +7,25 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
+			"filepath" : "6322-diban-9-5.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -2.349998474121094,
+				"y" : -7.599998474121094
+			},
+			"x mirror" : false,
+			"x scale" : 6.750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 9.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
 			"filepath" : "troop_spell_anim.json",
 			"multi color" : "",
 			"name" : "troop",
