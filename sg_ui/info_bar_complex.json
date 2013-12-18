@@ -12,11 +12,11 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -1.0,
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.9970588088035584,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
