@@ -3,6 +3,7 @@ local ppm = require "ppm"
 local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
+local ktx = require "ktx"
 
 local model, filename, compress = ...
 local max_id = 0
@@ -41,7 +42,7 @@ local TEXTURE4 = 0
 local TEXTURE8 = 1
 local DATA = 2
 local PVRTC = 3
-
+local KTX = 4
 
 local COMPONENT = 0
 local SWITCH = 1
@@ -267,6 +268,18 @@ local function load_pvr(filename)
 	return table.concat(memfile.result)
 end
 
+local function load_ktx(filename)
+	print("load_ktx :" .. filename..".ktx")
+	memfile.reault = {}
+	local w,h,data = ktx.read(filename..".ktx")
+	print("Gen ktx image",w,h)
+	wchar(memfile, KTX)
+	wchar(memfile, w)
+	wchar(memfile, h)
+	table.insert(memfile.result, data)
+	return table.concat(memfile.result)
+end
+
 local function _load(filename, func)
 	memfile.result = {}
 	local w,h,depth,data = func(filename)
@@ -327,6 +340,9 @@ elseif model =="-png8"  or model=="-png4" then
 	gm_filename = filename
 elseif model =="-pvr" then
 	gm_load = load_pvr
+	gm_filename = filename
+elseif model == "-ktx" then
+	gm_load = load_ktx
 	gm_filename = filename
 else
 	error("not match ppm or png  model.")
