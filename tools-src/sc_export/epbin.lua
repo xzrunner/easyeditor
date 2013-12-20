@@ -292,13 +292,13 @@ local function load_pvr(filename)
 end
 
 local function load_ktx(filename)
-	print("load_ktx :" .. filename..".ktx")
-	memfile.reault = {}
-	local w,h,data = ktx.read(filename..".ktx")
-	print("Gen ktx image",w,h)
+	memfile.result = {}
+	local w,h,size,data = ktx.read(filename..".ktx")
+	print("Gen ktx image",w,h,filename)
 	wchar(memfile, KTX)
-	wchar(memfile, w)
-	wchar(memfile, h)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	wlong(memfile, size)
 	table.insert(memfile.result, data)
 	return table.concat(memfile.result)
 end
