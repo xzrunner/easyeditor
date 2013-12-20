@@ -5,12 +5,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-// #include <stdint.h>
+#include <stdint.h>
 
 #define KTX_IDENTIFIER_REF  { 0xAB, 0x4B, 0x54, 0x58, 0x20, 0x31, 0x31, 0xBB, 0x0D, 0x0A, 0x1A, 0x0A }
 #define KTX_ENDIAN_REF      (0x04030201)
 #define KTX_ENDIAN_REF_REV  (0x01020304)
-#define KTX_HEADER_SIZE		(64)
+
 
 typedef struct KTX_header_t {
 	uint8_t  identifier[12];
@@ -29,6 +29,8 @@ typedef struct KTX_header_t {
 	uint32_t bytesOfKeyValueData;
 } KTX_header;
 
+#define KTX_HEADER_SIZE   (sizeof(struct KTX_header_t))
+
 static int
 lread(lua_State* L) {
   const char * filename = luaL_checkstring(L,1);
@@ -38,17 +40,17 @@ lread(lua_State* L) {
   	KTX_header header;
     fread(&header, KTX_HEADER_SIZE, 1, file);
 
-    uint32_t size = header.bytesOfKeyValueData;
-    luaL_error(L, "size %d", size);
+    int width = header.pixelWidth;
+    int height = header.pixelHeight;
+    unsigned int size;
+    fread(&size, sizeof(unsigned int), 1, file);
+
     unsigned char* data = (unsigned char*)malloc(size);
-    if (data == NULL) {
-    	luaL_error(L, "out of memory");
-    	return 0;
-    }
     fread(data, size, 1, file);
 
-    lua_pushinteger(L, header.pixelWidth);
-    lua_pushinteger(L, header.pixelHeight);
+    lua_pushinteger(L, width);
+    lua_pushinteger(L, height);
+    lua_pushinteger(L, size);
     lua_pushlstring(L, (void*)data, size);
     free(data);
 
@@ -57,7 +59,7 @@ lread(lua_State* L) {
   	luaL_error(L, "read %s fail", filename);
   }
 
-  return 3;
+  return 4;
 }
 
 int
