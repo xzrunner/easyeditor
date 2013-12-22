@@ -1,0 +1,45 @@
+
+{
+	"name" : "momo_ui_visit_bottom_right",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "game_ranking_button_complex.json",
+			"multi color" : "",
+			"name" : "ranking",
+			"position" : 
+			{
+				"x" : -198.50,
+				"y" : 61.19999694824219
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "friend",
+			"position" : 
+			{
+				"x" : -84.0,
+				"y" : 50.94999694824219
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

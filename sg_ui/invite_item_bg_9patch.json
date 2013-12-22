@@ -1,0 +1,51 @@
+
+{
+	"height" : 154.0,
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6413-gaoguang-h3-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6413-gaoguang-h3-2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6413-gaoguang-h3-3.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 250.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	],
+	"type" : 2,
+	"width" : 720.0
+}
