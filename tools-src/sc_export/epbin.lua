@@ -10,6 +10,8 @@ local READ_ME = [[
 		-png4:      使用的贴图为png4文件
 		-pvr:       使用的贴图文件为pvr压缩文件
 		-ktx:		使用的贴图文件为ktx压缩文件
+		-pkm:		使用的贴图文件为pkm压缩文件
+		-dds:		使用的贴图文件为dds压缩文件
 	filename:
 		导出的lua文件名
 
@@ -23,6 +25,8 @@ local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
 local ktx = require "ktx"
+local pkm = require "pkm"
+local dds = require "dds"
 
 local gen_model, model, filename, compress = ...
 local max_id = 0
@@ -66,6 +70,9 @@ local TEXTURE8 = 1
 local DATA = 2
 local PVRTC = 3
 local KTX = 4
+local PKM = 5
+local DDS = 6
+
 
 local COMPONENT = 0
 local SWITCH = 1
@@ -303,6 +310,29 @@ local function load_ktx(filename)
 	return table.concat(memfile.result)
 end
 
+local function load_pkm(filename)
+	memfile.result = {}
+	local w,h,rgb,alpha = pkm.read(filename)
+	print("Gen pkm image",w,h,filename)
+	wchar(memfile, PKM)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, rgb)
+	table.insert(memfile.result, alpha)
+	return table.concat(memfile.result)
+end
+
+local function load_dds(filename)
+	memfile.result = {}
+	local w,h,data = dds.read(filename..".dds")
+	print("Gen dds image",w,h,filename)
+	wchar(memfile, DDS)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, data)
+	return table.concat(memfile.result)
+end
+
 local function _load(filename, func)
 	memfile.result = {}
 	local w,h,depth,data = func(filename)
@@ -366,6 +396,12 @@ elseif model =="-pvr" then
 	gm_filename = filename
 elseif model == "-ktx" then
 	gm_load = load_ktx
+	gm_filename = filename		
+elseif model == "-pkm" then
+	gm_load = load_pkm
+	gm_filename = filename	
+elseif model == "-dds" then
+	gm_load = load_dds
 	gm_filename = filename
 else
 	print(READ_ME)

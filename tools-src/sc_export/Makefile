@@ -67,6 +67,12 @@ png: png.c
 pvr: pvr.c
 	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
 
+ktx: ktx.c
+	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) 
+
+pkm: pkm.c
+	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) 
+
 ppm : ppmloader.c
 	gcc --shared -g -Wall -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
 
