@@ -1,0 +1,1134 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 1.0,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8000000119209290,
+								"y" : -15.89999961853027
+							},
+							"x mirror" : false,
+							"x scale" : 1.0996093750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0996093750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 2,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.50,
+								"y" : -15.750
+							},
+							"x mirror" : false,
+							"x scale" : 1.199218750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.199218750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.6999999880790710,
+								"y" : -16.04999923706055
+							},
+							"x mirror" : false,
+							"x scale" : 1.08300781250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.08300781250,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 4,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.35000038146973
+							},
+							"x mirror" : false,
+							"x scale" : 0.96582031250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.96582031250,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 5,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 1.100000023841858,
+								"y" : -16.60000038146973
+							},
+							"x mirror" : false,
+							"x scale" : 0.8496093750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.8496093750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 6,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 1.0,
+								"y" : -16.39999961853027
+							},
+							"x mirror" : false,
+							"x scale" : 0.93261718750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.93261718750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 7,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.20000076293945
+							},
+							"x mirror" : false,
+							"x scale" : 1.01660156250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.01660156250,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 8,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.6999999880790710,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0996093750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0996093750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 9,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.750,
+								"y" : -16.10000038146973
+							},
+							"x mirror" : false,
+							"x scale" : 1.04980468750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.04980468750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 10,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8000000119209290,
+								"y" : -16.29999923706055
+							},
+							"x mirror" : false,
+							"x scale" : 0.99902343750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.99902343750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 11,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.39999961853027
+							},
+							"x mirror" : false,
+							"x scale" : 0.949218750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.949218750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 12,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.35000038146973
+							},
+							"x mirror" : false,
+							"x scale" : 0.97949218750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.97949218750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 13,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.250
+							},
+							"x mirror" : false,
+							"x scale" : 1.0097656250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0097656250,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 14,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.14999961853027
+							},
+							"x mirror" : false,
+							"x scale" : 1.03906250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.03906250,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 15,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8000000119209290,
+								"y" : -16.10000038146973
+							},
+							"x mirror" : false,
+							"x scale" : 1.06933593750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.06933593750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 16,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.750,
+								"y" : -16.10000038146973
+							},
+							"x mirror" : false,
+							"x scale" : 1.05566406250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.05566406250,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 17,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8500000238418579,
+								"y" : -16.20000076293945
+							},
+							"x mirror" : false,
+							"x scale" : 1.04199218750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.04199218750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 18,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.20000076293945
+							},
+							"x mirror" : false,
+							"x scale" : 1.027343750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.027343750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 19,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8500000238418579,
+								"y" : -16.250
+							},
+							"x mirror" : false,
+							"x scale" : 1.0136718750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0136718750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 20,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.29999923706055
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 21,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.250
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 22,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.14999961853027
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 23,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.10000038146973
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 24,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 25,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 26,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 27,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 28,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 29,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 30,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 31,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 32,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 33,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 34,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 35,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 36,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 37,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 38,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 39,
+					"tween" : false
+				},
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "subtask_button_complex.json",
+							"multi color" : "",
+							"name" : "task",
+							"position" : 
+							{
+								"x" : 0.8999999761581421,
+								"y" : -16.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 40,
+					"tween" : false
+				}
+			]
+		}
+	],
+	"name" : "subtask_button_damping"
+}
