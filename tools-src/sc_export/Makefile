@@ -20,7 +20,7 @@ else
 	EFLAG = $(CFLAG)
 endif
 
-all : png ktx pvr epconv scexport ppm lzma.$(SO_EXT) checkep
+all : pkm png ktx pvr epconv scexport ppm lzma.$(SO_EXT) checkep
 
 LZMADEC = \
 7zCrc.c \
@@ -69,9 +69,6 @@ pvr: pvr.c
 	
 ktx: ktx.c
 	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
-
-ktx: ktx.c
-	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) 
 
 pkm: pkm.c
 	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) 

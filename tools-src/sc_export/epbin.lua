@@ -11,7 +11,6 @@ local READ_ME = [[
 		-pvr:       使用的贴图文件为pvr压缩文件
 		-ktx:		使用的贴图文件为ktx压缩文件
 		-pkm:		使用的贴图文件为pkm压缩文件
-		-dds:		使用的贴图文件为dds压缩文件
 	filename:
 		导出的lua文件名
 
@@ -26,7 +25,6 @@ local lzma = require "lzma"
 local pvr = require "pvr"
 local ktx = require "ktx"
 local pkm = require "pkm"
-local dds = require "dds"
 
 local gen_model, model, filename, compress = ...
 local max_id = 0
