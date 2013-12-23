@@ -73,6 +73,9 @@ ktx: ktx.c
 pkm: pkm.c
 	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) 
 
+pkmc: pkmc.c
+	gcc -g -Wall --shared -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG) 
+
 ppm : ppmloader.c
 	gcc --shared -g -Wall -o $@.$(SO_EXT) $^ -I/usr/local/include $(CFLAG)
 

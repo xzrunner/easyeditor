@@ -25,6 +25,7 @@ local lzma = require "lzma"
 local pvr = require "pvr"
 local ktx = require "ktx"
 local pkm = require "pkm"
+local pkmc = require "pkmc"
 
 local gen_model, model, filename, compress = ...
 local max_id = 0
@@ -69,7 +70,7 @@ local DATA = 2
 local PVRTC = 3
 local KTX = 4
 local PKM = 5
-local DDS = 6
+local PKMC = 6
 
 
 local COMPONENT = 0
@@ -320,6 +321,18 @@ local function load_pkm(filename)
 	return table.concat(memfile.result)
 end
 
+local function load_pkmc(filename)
+	memfile.result = {}
+	local w,h,rgb,alpha = pkmc.read(filename)
+	print("Gen pkm image",w,h,filename)
+	wchar(memfile, PKMC)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, rgb)
+	table.insert(memfile.result, alpha)
+	return table.concat(memfile.result)
+end
+
 local function load_dds(filename)
 	memfile.result = {}
 	local w,h,data = dds.read(filename..".dds")
@@ -398,9 +411,12 @@ elseif model == "-ktx" then
 elseif model == "-pkm" then
 	gm_load = load_pkm
 	gm_filename = filename	
-elseif model == "-dds" then
-	gm_load = load_dds
-	gm_filename = filename
+elseif model == "-pkmc" then
+	gm_load = load_pkmc
+	gm_filename = filename		
+-- elseif model == "-dds" then
+-- 	gm_load = load_dds
+-- 	gm_filename = filename
 else
 	print(READ_ME)
 	error("not match ppm or png  model.")
