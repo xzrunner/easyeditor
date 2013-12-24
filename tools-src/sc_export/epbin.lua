@@ -9,6 +9,8 @@ local READ_ME = [[
 		-png8:      使用的贴图为png8文件
 		-png4:      使用的贴图为png4文件
 		-pvr:       使用的贴图文件为pvr压缩文件
+		-ktx:		使用的贴图文件为ktx压缩文件
+		-pkm:		使用的贴图文件为pkm压缩文件
 	filename:
 		导出的lua文件名
 
@@ -21,6 +23,9 @@ local ppm = require "ppm"
 local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
+local ktx = require "ktx"
+local pkm = require "pkm"
+local pkmc = require "pkmc"
 
 local gen_model, model, filename, compress = ...
 local max_id = 0
@@ -63,6 +68,9 @@ local TEXTURE4 = 0
 local TEXTURE8 = 1
 local DATA = 2
 local PVRTC = 3
+local KTX = 4
+local PKM = 5
+local PKMC = 6
 
 
 local COMPONENT = 0
@@ -289,6 +297,53 @@ local function load_pvr(filename)
 	return table.concat(memfile.result)
 end
 
+local function load_ktx(filename)
+	memfile.result = {}
+	local w,h,size,data = ktx.read(filename..".ktx")
+	print("Gen ktx image",w,h,filename)
+	wchar(memfile, KTX)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	wlong(memfile, size)
+	table.insert(memfile.result, data)
+	return table.concat(memfile.result)
+end
+
+local function load_pkm(filename)
+	memfile.result = {}
+	local w,h,rgb,alpha = pkm.read(filename)
+	print("Gen pkm image",w,h,filename)
+	wchar(memfile, PKM)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, rgb)
+	table.insert(memfile.result, alpha)
+	return table.concat(memfile.result)
+end
+
+local function load_pkmc(filename)
+	memfile.result = {}
+	local w,h,rgb,alpha = pkmc.read(filename)
+	print("Gen pkm image",w,h,filename)
+	wchar(memfile, PKMC)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, rgb)
+	table.insert(memfile.result, alpha)
+	return table.concat(memfile.result)
+end
+
+local function load_dds(filename)
+	memfile.result = {}
+	local w,h,data = dds.read(filename..".dds")
+	print("Gen dds image",w,h,filename)
+	wchar(memfile, DDS)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, data)
+	return table.concat(memfile.result)
+end
+
 local function _load(filename, func)
 	memfile.result = {}
 	local w,h,depth,data = func(filename)
@@ -350,6 +405,18 @@ elseif model =="-png8"  or model=="-png4" then
 elseif model =="-pvr" then
 	gm_load = load_pvr
 	gm_filename = filename
+elseif model == "-ktx" then
+	gm_load = load_ktx
+	gm_filename = filename		
+elseif model == "-pkm" then
+	gm_load = load_pkm
+	gm_filename = filename	
+elseif model == "-pkmc" then
+	gm_load = load_pkmc
+	gm_filename = filename		
+-- elseif model == "-dds" then
+-- 	gm_load = load_dds
+-- 	gm_filename = filename
 else
 	print(READ_ME)
 	error("not match ppm or png  model.")

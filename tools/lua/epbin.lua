@@ -1,10 +1,30 @@
+local READ_ME = [[
+	usepage:
+		lua epbin.lua <gen_model> <model> <filename>
+	gen_model:
+		-ep : 生成单个的ep文件
+		-pd : 生成pic 和animation分离的两个文件(xx.epp: 图片打包文件 xx.epd animation打包文件)
+	model: 
+		-ppm:       使用的贴图为ppm文件  
+		-png8:      使用的贴图为png8文件
+		-png4:      使用的贴图为png4文件
+		-pvr:       使用的贴图文件为pvr压缩文件
+		-ktx:		使用的贴图文件为ktx压缩文件
+	filename:
+		导出的lua文件名
+
+	PS:
+		贴图的文件命名方式为filename<1..8>.<ext> 其中filename为lua的filename相同(无后缀名)
+]]
+
 local bit32 = require "bit32"
 local ppm = require "ppm"
 local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
+local ktx = require "ktx"
 
-local model, filename, compress = ...
+local gen_model, model, filename, compress = ...
 local max_id = 0
 local export = 0
 
@@ -30,7 +50,11 @@ local function texture(n)
 	tex = n
 end
 
-f = assert(loadfile (filename , "t", { picture = picture , animation = animation , texture = texture }))
+local _env = _ENV
+_env.picture = picture
+_env.animation = animation
+_env.texture = texture
+f = assert(loadfile (filename , "t", _env))
 f()
 
 local ANIMATION = 0
@@ -41,7 +65,7 @@ local TEXTURE4 = 0
 local TEXTURE8 = 1
 local DATA = 2
 local PVRTC = 3
-
+local KTX = 4
 
 local COMPONENT = 0
 local SWITCH = 1
@@ -267,6 +291,18 @@ local function load_pvr(filename)
 	return table.concat(memfile.result)
 end
 
+local function load_ktx(filename)
+	memfile.result = {}
+	local w,h,size,data = ktx.read(filename..".ktx")
+	print("Gen ktx image",w,h,filename)
+	wchar(memfile, KTX)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	wlong(memfile, size)
+	table.insert(memfile.result, data)
+	return table.concat(memfile.result)
+end
+
 local function _load(filename, func)
 	memfile.result = {}
 	local w,h,depth,data = func(filename)
@@ -314,9 +350,9 @@ end
 
 end
 
+
 filename = string.match(filename, "(.*)%..*$")
 
-local f = io.open(filename .. ".ep", "wb")
 local gm_filename, gm_load = nil, nil
 
 if model == "-ppm" then
@@ -328,15 +364,43 @@ elseif model =="-png8"  or model=="-png4" then
 elseif model =="-pvr" then
 	gm_load = load_pvr
 	gm_filename = filename
+elseif model == "-ktx" then
+	gm_load = load_ktx
+	gm_filename = filename
 else
+	print(READ_ME)
 	error("not match ppm or png  model.")
 end
 
-for i = 1,tex do
-	local t = gm_load(gm_filename..tostring(i))
-	write_block(f, t)
+-- gen pic data
+local function gen_epp(f_epp)
+	for i = 1,tex do
+		local t = gm_load(gm_filename..tostring(i))
+		write_block(f_epp, t)
+	end
 end
 
-write_block(f, detail())
+-- gen animation data
+local function gen_epd(f_epd)
+	write_block(f_epd, detail())
+end
 
-f:close()
+
+if gen_model == "-ep" then
+	local f = io.open(filename.. ".ep", "wb")
+	gen_epp(f)
+	gen_epd(f)
+	f:close()
+elseif gen_model == "-pd" then
+	local f_epp = io.open(filename .. ".epp", "wb")
+	local f_epd = io.open(filename..".epd", "wb")
+	gen_epp(f_epp)
+	gen_epd(f_epd)
+	f_epp:close()
+	f_epd:close()
+else
+	print(READ_ME)
+	error("not match ep or pd model.")
+end
+
+

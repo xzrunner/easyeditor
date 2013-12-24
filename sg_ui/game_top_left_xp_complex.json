@@ -121,13 +121,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "subtask_button_complex.json",
+			"filepath" : "subtask_button_damping_anim.json",
 			"multi color" : "",
 			"name" : "subtask_button",
 			"position" : 
 			{
-				"x" : 48.39999389648438,
-				"y" : -176.0
+				"x" : 47.750,
+				"y" : -158.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
