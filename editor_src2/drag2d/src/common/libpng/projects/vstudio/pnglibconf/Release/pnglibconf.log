@@ -1,0 +1,16 @@
+﻿Build started 2012/8/30 22:58:07.
+     1>Project "D:\MyProject\Editor\Include\libpng\projects\vstudio\pnglibconf\pnglibconf.vcxproj" on node 3 (build target(s)).
+     1>PrepareForBuild:
+         Creating directory "D:\MyProject\Editor\Include\libpng\projects\vstudio\Release\".
+       InitializeBuildStatus:
+         Creating "Release\pnglibconf.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       FinalizeBuildStatus:
+         Deleting file "Release\pnglibconf.unsuccessfulbuild".
+         Touching "Release\pnglibconf.lastbuildstate".
+       CustomBuildStep:
+       Skipping target "CustomBuildStep" because all output files are up-to-date with respect to the input files.
+     1>Done Building Project "D:\MyProject\Editor\Include\libpng\projects\vstudio\pnglibconf\pnglibconf.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.11
