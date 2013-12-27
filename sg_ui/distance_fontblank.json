@@ -1,10 +1,10 @@
 
 {
 	"align" : 1.0,
-	"color" : "0xffffffff",
+	"color" : "0xff333333",
 	"font" : "",
 	"height" : 22.0,
 	"name" : "distance",
-	"size" : 18.0,
-	"width" : 180.0
+	"size" : 14.0,
+	"width" : 230.0
 }

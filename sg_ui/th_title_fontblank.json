@@ -3,8 +3,8 @@
 	"align" : 0.0,
 	"color" : "0xffffffff",
 	"font" : "",
-	"height" : 19.0,
-	"name" : "xp_name",
+	"height" : 22.0,
+	"name" : "th_title",
 	"size" : 16.0,
-	"width" : 300.0
+	"width" : 130.0
 }

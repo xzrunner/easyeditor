@@ -1,19 +1,19 @@
 
 {
-	"name" : "momo_rank_item_2nd",
+	"name" : "momo_member_window",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_item_bg_9patch.json",
+			"filepath" : "building_info_window_bg_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -1.525878906250000e-005,
-				"y" : -3.051757812500000e-005
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -26,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "building_info_window_bg2_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -323.0,
-				"y" : -4.0
+				"x" : 1.0,
+				"y" : -36.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -45,13 +45,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_rank_fontblank.json",
+			"filepath" : "info_title_fontblank.json",
 			"multi color" : "",
-			"name" : "rank",
+			"name" : "title",
 			"position" : 
 			{
-				"x" : -321.50,
-				"y" : -3.0
+				"x" : 0.0,
+				"y" : 225.250
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,51 +64,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6459-gaoguang-1.png",
+			"filepath" : "close_button_complex.json",
 			"multi color" : "",
-			"name" : "line",
+			"name" : "close_button",
 			"position" : 
 			{
-				"x" : -233.8512268066406,
-				"y" : -0.50
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 11.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "6107-tongyong-1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -145.0,
-				"y" : -17.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.4000000059604645,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.4000000059604645,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "rr_play_name2_fontblank.json",
-			"multi color" : "",
-			"name" : "player_name",
-			"position" : 
-			{
-				"x" : -65.0,
-				"y" : 20.0
+				"x" : 317.0,
+				"y" : 223.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -121,13 +83,70 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rr_score_fontblank.json",
+			"filepath" : "mount_icon_fontblank.json",
 			"multi color" : "",
-			"name" : "score",
+			"name" : "town_hall_icon1",
 			"position" : 
 			{
-				"x" : -77.0,
-				"y" : -17.0
+				"x" : -242.0,
+				"y" : -18.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "th_title_fontblank.json",
+			"multi color" : "",
+			"name" : "th_title1",
+			"position" : 
+			{
+				"x" : -233.0,
+				"y" : -66.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "mount_icon_fontblank.json",
+			"multi color" : "",
+			"name" : "town_hall_icon2",
+			"position" : 
+			{
+				"x" : -240.0,
+				"y" : -170.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "th_title_fontblank.json",
+			"multi color" : "",
+			"name" : "th_title2",
+			"position" : 
+			{
+				"x" : -233.0,
+				"y" : -218.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -142,11 +161,11 @@
 			"angle" : 0.0,
 			"filepath" : "yellow_button_complex.json",
 			"multi color" : "",
-			"name" : "visit",
+			"name" : "claim1",
 			"position" : 
 			{
-				"x" : 285.0,
-				"y" : 0.0
+				"x" : 231.5499877929688,
+				"y" : -27.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -159,51 +178,51 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6126-tongyong-1.png",
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "claim2",
+			"position" : 
+			{
+				"x" : 233.750,
+				"y" : -173.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "momo_vip7.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -385.0,
-				"y" : 9.750
+				"x" : 36.0,
+				"y" : -18.19999694824219
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6126-tongyong-1.png",
+			"filepath" : "vip_arrow.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 385.250,
-				"y" : 9.750
-			},
-			"x mirror" : true,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "distance_fontblank.json",
-			"multi color" : "",
-			"name" : "distance",
-			"position" : 
-			{
-				"x" : 102.0,
-				"y" : -17.0
+				"x" : -91.0,
+				"y" : -18.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -216,19 +235,57 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "sex_anim.json",
+			"filepath" : "vip_arrow.png",
 			"multi color" : "",
-			"name" : "sex",
+			"name" : "",
 			"position" : 
 			{
-				"x" : -196.0,
-				"y" : -14.0
+				"x" : -91.0,
+				"y" : -174.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "vip_info_fontblank.json",
+			"multi color" : "",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 101.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "momo_vip_30.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 36.0,
+				"y" : -167.1000061035156
+			},
+			"x mirror" : false,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		}
 	]

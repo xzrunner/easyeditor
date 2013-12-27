@@ -1,38 +1,19 @@
 
 {
-	"name" : "ui_top_left",
+	"name" : "share_window",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "xp_bar_complex.json",
-			"multi color" : "",
-			"name" : "xp_bar",
-			"position" : 
-			{
-				"x" : 125.0,
-				"y" : -40.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "cancel_window_bg_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 26.0,
-				"y" : -37.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -45,13 +26,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "level_indicator_complex.json",
+			"filepath" : "cancel_window_bg2_9patch.json",
 			"multi color" : "",
-			"name" : "xp",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 25.50,
-				"y" : -37.50
+				"x" : 0.0,
+				"y" : -25.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "red_button_complex.json",
+			"multi color" : "",
+			"name" : "cancel",
+			"position" : 
+			{
+				"x" : 145.0,
+				"y" : -125.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,13 +64,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "xp_name_fontblank.json",
+			"filepath" : "cancel_text_area_fontblank.json",
 			"multi color" : "",
-			"name" : "Name",
+			"name" : "text_area",
 			"position" : 
 			{
-				"x" : 190.250,
-				"y" : -14.50
+				"x" : 0.0,
+				"y" : -46.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -83,13 +83,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "xp_points_fontblank.json",
+			"filepath" : "cancel_title_fontblank.json",
 			"multi color" : "",
-			"name" : "points",
+			"name" : "title",
 			"position" : 
 			{
-				"x" : 133.9090881347656,
-				"y" : -39.50
+				"x" : 0.0,
+				"y" : 144.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -102,13 +102,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_top_left_trophies_complex.json",
+			"filepath" : "yellow_button_complex.json",
 			"multi color" : "",
-			"name" : "trophies",
+			"name" : "share",
 			"position" : 
 			{
-				"x" : 89.0,
-				"y" : -98.0
+				"x" : -149.0,
+				"y" : -125.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -121,13 +121,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "subtask_button_damping_anim.json",
+			"filepath" : "mount_icon_fontblank.json",
 			"multi color" : "",
-			"name" : "subtask_button",
+			"name" : "image",
 			"position" : 
 			{
-				"x" : 47.750,
-				"y" : -158.0
+				"x" : 0.0,
+				"y" : 51.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 218.2999877929688,
+				"y" : 145.6000061035156
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
