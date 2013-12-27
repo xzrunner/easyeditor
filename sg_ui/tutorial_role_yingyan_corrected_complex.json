@@ -1,19 +1,19 @@
 
 {
-	"name" : "tutorial_skip",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tutorial_skip_button_complex.json",
+			"filepath" : "tutorial_role_yingyan_complex.json",
 			"multi color" : "",
-			"name" : "skip_button",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 89.250,
-				"y" : -29.250
+				"x" : -10.0,
+				"y" : -74.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
