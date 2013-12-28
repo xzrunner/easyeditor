@@ -88,14 +88,14 @@
 			"name" : "number_of_entrys",
 			"position" : 
 			{
-				"x" : 99.50,
-				"y" : 83.0
+				"x" : 120.0,
+				"y" : 101.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.50,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]

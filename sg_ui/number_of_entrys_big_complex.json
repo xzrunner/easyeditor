@@ -16,22 +16,22 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 1.299999952316284,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.8999999761581421,
+			"y scale" : 1.299999952316284,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "entry_number_fontblank.json",
+			"filepath" : "entry_number_big_fontblank.json",
 			"multi color" : "",
 			"name" : "entry_number",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -1.0,
 				"y" : 4.0
 			},
 			"x mirror" : false,
