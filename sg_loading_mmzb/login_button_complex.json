@@ -12,8 +12,8 @@
 			"name" : "login_button",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -108.0
+				"x" : 284.0,
+				"y" : -85.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
