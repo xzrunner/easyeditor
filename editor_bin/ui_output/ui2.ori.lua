@@ -18428,7 +18428,7 @@ animation {
 		{id = 1105},
 		{name = "icon"},
 		{name = "title", font = "", color = 0xffffffff, align = 0, size = 16, width = 160, height = 24},
-		{id = 653},
+		{name = "res_bar", id = 653},
 		{name = "limit", font = "", color = 0xffffffff, align = 1, size = 16, width = 100, height = 22},
 		{name = "time", font = "", color = 0xffffffff, align = 0, size = 16, width = 200, height = 22},
 		{name = "res_icon", id = 1104},
