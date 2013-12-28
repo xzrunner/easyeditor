@@ -1,19 +1,19 @@
 
 {
-	"name" : "",
+	"name" : "m_login_menu_mmzb",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "login_button.png",
+			"filepath" : "login_button_complex.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "login_button",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 284.0,
+				"y" : -85.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
