@@ -90,7 +90,7 @@
 },
 {
 	"filename": "20195152040675.png",
-	"frame": {"x":1094,"y":1234,"w":21,"h":160},
+	"frame": {"x":1096,"y":1234,"w":21,"h":160},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":21,"h":160},
@@ -98,7 +98,7 @@
 },
 {
 	"filename": "251445379607.png",
-	"frame": {"x":1754,"y":1554,"w":128,"h":162},
+	"frame": {"x":1753,"y":1554,"w":128,"h":162},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":162},
@@ -114,8 +114,8 @@
 },
 {
 	"filename": "36817684391863.png",
-	"frame": {"x":129,"y":1667,"w":71,"h":95},
-	"rotated": true,
+	"frame": {"x":98,"y":1653,"w":71,"h":95},
+	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":95},
 	"sourceSize": {"w":71,"h":95}
@@ -130,7 +130,7 @@
 },
 {
 	"filename": "6001-anniu-1.png",
-	"frame": {"x":911,"y":1871,"w":79,"h":79},
+	"frame": {"x":633,"y":1664,"w":79,"h":79},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":79},
@@ -138,7 +138,7 @@
 },
 {
 	"filename": "6001-anniu-2.PNG",
-	"frame": {"x":884,"y":1957,"w":79,"h":79},
+	"frame": {"x":550,"y":1664,"w":79,"h":79},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":79},
@@ -162,7 +162,7 @@
 },
 {
 	"filename": "6003-anniu-1.png",
-	"frame": {"x":1723,"y":1686,"w":146,"h":146},
+	"frame": {"x":1871,"y":1743,"w":146,"h":146},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":146,"h":146},
@@ -178,7 +178,7 @@
 },
 {
 	"filename": "6101-tongyong-1.png",
-	"frame": {"x":644,"y":1871,"w":95,"h":91},
+	"frame": {"x":3,"y":1653,"w":95,"h":91},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":91},
@@ -186,7 +186,7 @@
 },
 {
 	"filename": "6102-tongyong-1.png",
-	"frame": {"x":549,"y":1871,"w":95,"h":91},
+	"frame": {"x":1318,"y":1455,"w":95,"h":91},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":91},
@@ -202,8 +202,8 @@
 },
 {
 	"filename": "6105-tongyong-1.png",
-	"frame": {"x":549,"y":1970,"w":74,"h":90},
-	"rotated": true,
+	"frame": {"x":628,"y":1893,"w":74,"h":90},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":8,"w":74,"h":90},
 	"sourceSize": {"w":110,"h":110}
@@ -218,7 +218,7 @@
 },
 {
 	"filename": "6107-tongyong-1.png",
-	"frame": {"x":556,"y":1490,"w":90,"h":97},
+	"frame": {"x":370,"y":1651,"w":90,"h":97},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":90,"h":97},
@@ -242,7 +242,7 @@
 },
 {
 	"filename": "6110-tongyong-1.png",
-	"frame": {"x":321,"y":1871,"w":122,"h":104},
+	"frame": {"x":215,"y":1893,"w":122,"h":104},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":9,"w":122,"h":104},
@@ -250,16 +250,16 @@
 },
 {
 	"filename": "6111-tongyong-1.png",
-	"frame": {"x":1316,"y":1463,"w":94,"h":86},
-	"rotated": false,
+	"frame": {"x":686,"y":1525,"w":94,"h":86},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":27,"y":33,"w":94,"h":86},
 	"sourceSize": {"w":146,"h":146}
 },
 {
 	"filename": "6112-tongyong-1.png",
-	"frame": {"x":1316,"y":1369,"w":94,"h":90},
-	"rotated": false,
+	"frame": {"x":597,"y":1752,"w":94,"h":90},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":26,"y":31,"w":94,"h":90},
 	"sourceSize": {"w":146,"h":146}
@@ -274,7 +274,7 @@
 },
 {
 	"filename": "6114-tongyong-1.png",
-	"frame": {"x":323,"y":1742,"w":122,"h":88},
+	"frame": {"x":265,"y":1752,"w":122,"h":88},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":12,"y":32,"w":122,"h":88},
@@ -282,15 +282,15 @@
 },
 {
 	"filename": "6115-tongyong-1.PNG",
-	"frame": {"x":501,"y":1667,"w":70,"h":72},
-	"rotated": true,
+	"frame": {"x":1023,"y":1969,"w":70,"h":72},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":2,"w":70,"h":72},
 	"sourceSize": {"w":74,"h":74}
 },
 {
 	"filename": "6116-tongyong-1.PNG",
-	"frame": {"x":1058,"y":1566,"w":72,"h":72},
+	"frame": {"x":1001,"y":1893,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":72,"h":72},
@@ -298,7 +298,7 @@
 },
 {
 	"filename": "6117-tongyong-1.PNG",
-	"frame": {"x":630,"y":1591,"w":70,"h":70},
+	"frame": {"x":1077,"y":1893,"w":70,"h":70},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":2,"y":2,"w":70,"h":70},
@@ -306,7 +306,7 @@
 },
 {
 	"filename": "6118-tongyong-1.png",
-	"frame": {"x":650,"y":1490,"w":96,"h":96},
+	"frame": {"x":593,"y":1425,"w":96,"h":96},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":7,"y":6,"w":96,"h":96},
@@ -314,7 +314,7 @@
 },
 {
 	"filename": "6119-tongyong-1.png",
-	"frame": {"x":139,"y":1742,"w":54,"h":123},
+	"frame": {"x":1063,"y":1398,"w":54,"h":123},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":54,"h":123},
@@ -450,7 +450,7 @@
 },
 {
 	"filename": "6158-tongyong-1.png",
-	"frame": {"x":226,"y":1495,"w":106,"h":106},
+	"frame": {"x":1302,"y":1554,"w":106,"h":106},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":106,"h":106},
@@ -490,8 +490,8 @@
 },
 {
 	"filename": "6163-tongyong-4.PNG",
-	"frame": {"x":623,"y":1425,"w":61,"h":96},
-	"rotated": true,
+	"frame": {"x":563,"y":1893,"w":61,"h":96},
+	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":61,"h":96},
 	"sourceSize": {"w":61,"h":96}
@@ -506,8 +506,8 @@
 },
 {
 	"filename": "6164-tongyong-2.PNG",
-	"frame": {"x":404,"y":1667,"w":93,"h":71},
-	"rotated": false,
+	"frame": {"x":693,"y":1425,"w":93,"h":71},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":93,"h":71},
 	"sourceSize": {"w":93,"h":71}
@@ -522,7 +522,7 @@
 },
 {
 	"filename": "6164-tongyong-4.PNG",
-	"frame": {"x":1414,"y":1605,"w":133,"h":151},
+	"frame": {"x":1412,"y":1605,"w":133,"h":151},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":151},
@@ -594,8 +594,8 @@
 },
 {
 	"filename": "6166-tongyong-5.png",
-	"frame": {"x":317,"y":1606,"w":83,"h":132},
-	"rotated": false,
+	"frame": {"x":234,"y":1664,"w":83,"h":132},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":132},
 	"sourceSize": {"w":83,"h":132}
@@ -666,7 +666,7 @@
 },
 {
 	"filename": "6168-tongyong-5.PNG",
-	"frame": {"x":1586,"y":1492,"w":164,"h":119},
+	"frame": {"x":1585,"y":1492,"w":164,"h":119},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":164,"h":119},
@@ -722,7 +722,7 @@
 },
 {
 	"filename": "6171-tongyong-2.PNG",
-	"frame": {"x":226,"y":1606,"w":87,"h":57},
+	"frame": {"x":628,"y":1987,"w":87,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":87,"h":57},
@@ -794,7 +794,7 @@
 },
 {
 	"filename": "6174-tongyong-2.PNG",
-	"frame": {"x":3,"y":1871,"w":80,"h":138},
+	"frame": {"x":131,"y":1893,"w":80,"h":138},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":80,"h":138},
@@ -802,8 +802,8 @@
 },
 {
 	"filename": "6174-tongyong-3.PNG",
-	"frame": {"x":898,"y":1191,"w":192,"h":147},
-	"rotated": false,
+	"frame": {"x":746,"y":1215,"w":192,"h":147},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":192,"h":147},
 	"sourceSize": {"w":192,"h":147}
@@ -874,15 +874,15 @@
 },
 {
 	"filename": "6180-tongyong-1.png",
-	"frame": {"x":1873,"y":1743,"w":142,"h":124},
-	"rotated": false,
+	"frame": {"x":3,"y":1893,"w":142,"h":124},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":28,"y":41,"w":142,"h":124},
 	"sourceSize": {"w":200,"h":200}
 },
 {
 	"filename": "6181-tongyong-1.png",
-	"frame": {"x":1920,"y":1593,"w":146,"h":124},
+	"frame": {"x":1919,"y":1593,"w":146,"h":124},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":25,"y":41,"w":146,"h":124},
@@ -898,7 +898,7 @@
 },
 {
 	"filename": "6182-tongyong-1.png",
-	"frame": {"x":1414,"y":1487,"w":168,"h":114},
+	"frame": {"x":1413,"y":1487,"w":168,"h":114},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":13,"y":46,"w":168,"h":114},
@@ -914,7 +914,7 @@
 },
 {
 	"filename": "6185-tongyong-1.png",
-	"frame": {"x":1142,"y":1470,"w":132,"h":154},
+	"frame": {"x":1144,"y":1470,"w":132,"h":154},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":25,"y":15,"w":132,"h":154},
@@ -922,7 +922,7 @@
 },
 {
 	"filename": "6188-tongyong-1.png",
-	"frame": {"x":1142,"y":1310,"w":170,"h":156},
+	"frame": {"x":1144,"y":1310,"w":170,"h":156},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":15,"y":22,"w":170,"h":156},
@@ -930,7 +930,7 @@
 },
 {
 	"filename": "6189-tongyong-1.png",
-	"frame": {"x":746,"y":1215,"w":146,"h":146},
+	"frame": {"x":1721,"y":1686,"w":146,"h":146},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":23,"y":29,"w":146,"h":146},
@@ -938,7 +938,7 @@
 },
 {
 	"filename": "6191-tongyong-1.png",
-	"frame": {"x":87,"y":1871,"w":136,"h":130},
+	"frame": {"x":3,"y":1752,"w":136,"h":130},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":35,"y":21,"w":136,"h":130},
@@ -954,7 +954,7 @@
 },
 {
 	"filename": "6195-tongyong-1.png",
-	"frame": {"x":197,"y":1742,"w":122,"h":122},
+	"frame": {"x":326,"y":1525,"w":122,"h":122},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":122,"h":122},
@@ -962,8 +962,8 @@
 },
 {
 	"filename": "6195-tongyong-11.png",
-	"frame": {"x":3,"y":1742,"w":132,"h":124},
-	"rotated": false,
+	"frame": {"x":137,"y":1752,"w":132,"h":124},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":33,"y":38,"w":132,"h":124},
 	"sourceSize": {"w":200,"h":200}
@@ -1010,7 +1010,7 @@
 },
 {
 	"filename": "6196-tongyong-6.png",
-	"frame": {"x":1569,"y":1615,"w":133,"h":150},
+	"frame": {"x":1567,"y":1615,"w":133,"h":150},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":133,"h":150},
@@ -1018,7 +1018,7 @@
 },
 {
 	"filename": "6197-tongyong-1.png",
-	"frame": {"x":450,"y":1490,"w":102,"h":102},
+	"frame": {"x":506,"y":1305,"w":102,"h":102},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":49,"y":49,"w":102,"h":102},
@@ -1026,15 +1026,15 @@
 },
 {
 	"filename": "6197-tongyong-11.png",
-	"frame": {"x":498,"y":1350,"w":68,"h":59},
-	"rotated": false,
+	"frame": {"x":1151,"y":1893,"w":68,"h":59},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":59},
 	"sourceSize": {"w":68,"h":59}
 },
 {
 	"filename": "6197-tongyong-12.png",
-	"frame": {"x":228,"y":1667,"w":71,"h":56},
+	"frame": {"x":1001,"y":1478,"w":71,"h":56},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":56},
@@ -1050,7 +1050,7 @@
 },
 {
 	"filename": "6199-tongyong-1.png",
-	"frame": {"x":565,"y":1606,"w":61,"h":56},
+	"frame": {"x":1077,"y":1584,"w":61,"h":56},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":0,"w":61,"h":56},
@@ -1154,7 +1154,7 @@
 },
 {
 	"filename": "6302-diban-9-1.png",
-	"frame": {"x":994,"y":1871,"w":60,"h":60},
+	"frame": {"x":1342,"y":1728,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -1394,7 +1394,7 @@
 },
 {
 	"filename": "6324-diban-9-1.png",
-	"frame": {"x":967,"y":1954,"w":60,"h":60},
+	"frame": {"x":1342,"y":1664,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -1410,7 +1410,7 @@
 },
 {
 	"filename": "6324-diban-9-3.png",
-	"frame": {"x":994,"y":1638,"w":60,"h":60},
+	"frame": {"x":1278,"y":1893,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -1434,7 +1434,7 @@
 },
 {
 	"filename": "6324-diban-9-7.png",
-	"frame": {"x":994,"y":1574,"w":60,"h":60},
+	"frame": {"x":1224,"y":1957,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -1442,7 +1442,7 @@
 },
 {
 	"filename": "6325-diban-9-1.png",
-	"frame": {"x":994,"y":1510,"w":60,"h":60},
+	"frame": {"x":1214,"y":1893,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -1474,7 +1474,7 @@
 },
 {
 	"filename": "6325-diban-9-7.png",
-	"frame": {"x":994,"y":1446,"w":60,"h":60},
+	"frame": {"x":1160,"y":1965,"w":60,"h":60},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":60,"h":60},
@@ -1490,7 +1490,7 @@
 },
 {
 	"filename": "6401-jindutiao-h3-1.png",
-	"frame": {"x":1062,"y":1342,"w":19,"h":57},
+	"frame": {"x":1121,"y":1417,"w":19,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":57},
@@ -1506,7 +1506,7 @@
 },
 {
 	"filename": "6402-jindutiao-h3-1.png",
-	"frame": {"x":1119,"y":1356,"w":19,"h":57},
+	"frame": {"x":1121,"y":1356,"w":19,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":57},
@@ -1522,7 +1522,7 @@
 },
 {
 	"filename": "6403-jindutiao-h3-1.png",
-	"frame": {"x":1119,"y":1295,"w":19,"h":57},
+	"frame": {"x":1121,"y":1295,"w":19,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":57},
@@ -1530,7 +1530,7 @@
 },
 {
 	"filename": "6403-jindutiao-h3-2.png",
-	"frame": {"x":1119,"y":1234,"w":19,"h":57},
+	"frame": {"x":1121,"y":1234,"w":19,"h":57},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":57},
@@ -1874,7 +1874,7 @@
 },
 {
 	"filename": "6457-gaoguang-1.png",
-	"frame": {"x":221,"y":1871,"w":130,"h":96},
+	"frame": {"x":226,"y":1525,"w":130,"h":96},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":96},
@@ -1890,7 +1890,7 @@
 },
 {
 	"filename": "6460-gaoguang-1.png",
-	"frame": {"x":825,"y":1871,"w":82,"h":82},
+	"frame": {"x":464,"y":1664,"w":82,"h":82},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":82},
@@ -1938,7 +1938,7 @@
 },
 {
 	"filename": "6465-gaoguang-1.png",
-	"frame": {"x":1058,"y":1490,"w":72,"h":72},
+	"frame": {"x":947,"y":1969,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":2,"w":72,"h":72},
@@ -1946,7 +1946,7 @@
 },
 {
 	"filename": "6466-gaoguang-1.PNG",
-	"frame": {"x":713,"y":1970,"w":72,"h":72},
+	"frame": {"x":925,"y":1893,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":2,"w":72,"h":72},
@@ -1954,7 +1954,7 @@
 },
 {
 	"filename": "6467-gaoguang-1.PNG",
-	"frame": {"x":653,"y":1665,"w":72,"h":72},
+	"frame": {"x":871,"y":1969,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":2,"w":72,"h":72},
@@ -1962,7 +1962,7 @@
 },
 {
 	"filename": "6468-gaoguang-1.PNG",
-	"frame": {"x":577,"y":1666,"w":72,"h":72},
+	"frame": {"x":849,"y":1893,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":2,"w":72,"h":72},
@@ -2002,7 +2002,7 @@
 },
 {
 	"filename": "6472-gaoguang-1.PNG",
-	"frame": {"x":547,"y":1413,"w":72,"h":72},
+	"frame": {"x":795,"y":1971,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":2,"w":72,"h":72},
@@ -2010,7 +2010,7 @@
 },
 {
 	"filename": "6473-gaoguang-1.PNG",
-	"frame": {"x":471,"y":1413,"w":72,"h":72},
+	"frame": {"x":719,"y":1973,"w":72,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":2,"w":72,"h":72},
@@ -2106,7 +2106,7 @@
 },
 {
 	"filename": "7115-tongyong-1.PNG",
-	"frame": {"x":643,"y":1970,"w":74,"h":66},
+	"frame": {"x":779,"y":1893,"w":74,"h":66},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":3,"w":74,"h":66},
@@ -2122,8 +2122,8 @@
 },
 {
 	"filename": "857_1.png",
-	"frame": {"x":477,"y":1606,"w":84,"h":57},
-	"rotated": false,
+	"frame": {"x":173,"y":1664,"w":84,"h":57},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":57},
 	"sourceSize": {"w":84,"h":57}
@@ -2186,11 +2186,11 @@
 },
 {
 	"filename": "finger.png",
-	"frame": {"x":3,"y":1653,"w":85,"h":122},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":5,"y":5,"w":85,"h":122},
-	"sourceSize": {"w":99,"h":130}
+	"frame": {"x":898,"y":1191,"w":194,"h":179},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":194,"h":179},
+	"sourceSize": {"w":194,"h":179}
 },
 {
 	"filename": "jy-0001-screen-mask.png",
@@ -2226,7 +2226,7 @@
 },
 {
 	"filename": "jy-0003-1.png",
-	"frame": {"x":704,"y":1606,"w":55,"h":62},
+	"frame": {"x":1077,"y":1525,"w":55,"h":62},
 	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":55,"h":62},
@@ -2258,7 +2258,7 @@
 },
 {
 	"filename": "jy-1000-diamonds-1.png",
-	"frame": {"x":896,"y":1342,"w":162,"h":100},
+	"frame": {"x":897,"y":1374,"w":162,"h":100},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":425,"y":605,"w":162,"h":100},
@@ -2314,16 +2314,16 @@
 },
 {
 	"filename": "jy-1002-4-1.png",
-	"frame": {"x":739,"y":1871,"w":92,"h":82},
-	"rotated": true,
+	"frame": {"x":1318,"y":1369,"w":92,"h":82},
+	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":92,"h":82},
 	"sourceSize": {"w":92,"h":82}
 },
 {
 	"filename": "jy-1002-4-2.png",
-	"frame": {"x":789,"y":1967,"w":77,"h":91},
-	"rotated": true,
+	"frame": {"x":768,"y":1411,"w":77,"h":91},
+	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":77,"h":91},
 	"sourceSize": {"w":77,"h":91}
@@ -2338,16 +2338,16 @@
 },
 {
 	"filename": "jy-1002-6-1.png",
-	"frame": {"x":404,"y":1604,"w":69,"h":59},
-	"rotated": false,
+	"frame": {"x":1097,"y":1967,"w":69,"h":59},
+	"rotated": true,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":59},
 	"sourceSize": {"w":69,"h":59}
 },
 {
 	"filename": "jy-1002-6-2.png",
-	"frame": {"x":1062,"y":1417,"w":69,"h":76},
-	"rotated": true,
+	"frame": {"x":706,"y":1893,"w":69,"h":76},
+	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":76},
 	"sourceSize": {"w":69,"h":76}
@@ -2394,7 +2394,7 @@
 },
 {
 	"filename": "momo_vip7.png",
-	"frame": {"x":336,"y":1490,"w":110,"h":110},
+	"frame": {"x":572,"y":1525,"w":110,"h":110},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":110,"h":110},
@@ -2402,7 +2402,7 @@
 },
 {
 	"filename": "momo_vip_30.png",
-	"frame": {"x":1300,"y":1553,"w":110,"h":110},
+	"frame": {"x":479,"y":1411,"w":110,"h":110},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":110,"h":110},
@@ -2410,7 +2410,7 @@
 },
 {
 	"filename": "sns_icon_19@2x.png",
-	"frame": {"x":750,"y":1485,"w":116,"h":116},
+	"frame": {"x":477,"y":1752,"w":116,"h":116},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":116},
@@ -2418,7 +2418,7 @@
 },
 {
 	"filename": "sns_icon_1@2x.png",
-	"frame": {"x":535,"y":1742,"w":116,"h":116},
+	"frame": {"x":443,"y":1893,"w":116,"h":116},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":116},
@@ -2426,7 +2426,7 @@
 },
 {
 	"filename": "sns_icon_22@2x.png",
-	"frame": {"x":429,"y":1871,"w":116,"h":116},
+	"frame": {"x":612,"y":1305,"w":116,"h":116},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":116},
@@ -2434,7 +2434,7 @@
 },
 {
 	"filename": "sns_icon_23@2x.png",
-	"frame": {"x":743,"y":1365,"w":116,"h":116},
+	"frame": {"x":452,"y":1525,"w":116,"h":116},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":116},
@@ -2442,7 +2442,7 @@
 },
 {
 	"filename": "sns_icon_24@2x.png",
-	"frame": {"x":415,"y":1742,"w":116,"h":116},
+	"frame": {"x":357,"y":1752,"w":116,"h":116},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":116},
@@ -2450,7 +2450,7 @@
 },
 {
 	"filename": "sns_icon_6@2x.png",
-	"frame": {"x":623,"y":1305,"w":116,"h":116},
+	"frame": {"x":323,"y":1893,"w":116,"h":116},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":116,"h":116},
@@ -2471,6 +2471,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:86a69751fd3123b5bdf92c68af979a8f$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1f475d1a52d643f50365e1b8d82531b9$"
 }
 }
