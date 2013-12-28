@@ -45,25 +45,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6103-tongyong-1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 46.0,
-				"y" : -29.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "gift_get_fontblank.json",
 			"multi color" : "",
 			"name" : "amount",
@@ -115,6 +96,25 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "res_icon_anim.json",
+			"multi color" : "",
+			"name" : "res_icon",
+			"position" : 
+			{
+				"x" : 53.750,
+				"y" : -28.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		}
 	]
