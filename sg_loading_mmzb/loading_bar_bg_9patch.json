@@ -1,6 +1,6 @@
 
 {
-	"height" : 64.0,
+	"height" : 40.0,
 	"sprite" : 
 	[
 		
@@ -34,7 +34,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6408-jindutiaokuong-h3-3.png",
+			"filepath" : "6408-jindutiaokuong-h3-1.png",
 			"name" : "",
 			"position" : 
 			{
@@ -42,10 +42,10 @@
 				"y" : 150.0
 			},
 			"scale" : 1.0,
-			"x mirror" : false,
+			"x mirror" : true,
 			"y mirror" : false
 		}
 	],
 	"type" : 2,
-	"width" : 3384.0
+	"width" : 1692.0
 }

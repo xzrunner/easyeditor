@@ -16,10 +16,10 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.250,
+			"x scale" : 0.5,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.250,
+			"y scale" : 0.5,
 			"y shear" : 0.0
 		},
 		
