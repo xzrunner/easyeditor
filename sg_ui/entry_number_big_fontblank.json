@@ -1,0 +1,9 @@
+{
+  "align": 2, 
+  "color": "0xffffffff", 
+  "font": "CCBackBeat", 
+  "height": 24,
+  "name": "entry_number", 
+  "size": 18, 
+  "width": 60
+}

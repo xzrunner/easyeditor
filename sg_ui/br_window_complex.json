@@ -69,14 +69,14 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -357.4841308593750,
+				"x" : -387.5999755859375,
 				"y" : 68.15609741210938
 			},
 			"x mirror" : false,
-			"x scale" : 0.4000000059604645,
+			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.4000000059604645,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		},
 		
@@ -305,6 +305,44 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 3.329999923706055,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "share_button",
+			"position" : 
+			{
+				"x" : -132.1341552734375,
+				"y" : -288.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "provoke",
+			"position" : 
+			{
+				"x" : -324.0,
+				"y" : -288.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	]

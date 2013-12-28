@@ -22,7 +22,6 @@ local ppm = require "ppm"
 local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
-local ktx = require "ktx"
 
 local gen_model, model, filename, compress = ...
 local max_id = 0
@@ -292,6 +291,7 @@ local function load_pvr(filename)
 end
 
 local function load_ktx(filename)
+	local ktx = require "ktx"
 	memfile.result = {}
 	local w,h,size,data = ktx.read(filename..".ktx")
 	print("Gen ktx image",w,h,filename)

@@ -88,8 +88,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -197.0,
-				"y" : -17.10002899169922
+				"x" : -145.0,
+				"y" : -17.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.4000000059604645,
@@ -126,8 +126,8 @@
 			"name" : "score",
 			"position" : 
 			{
-				"x" : -119.0,
-				"y" : -17.250
+				"x" : -77.0,
+				"y" : -17.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -202,8 +202,27 @@
 			"name" : "distance",
 			"position" : 
 			{
-				"x" : 117.0,
+				"x" : 102.0,
 				"y" : -17.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "sex_anim.json",
+			"multi color" : "",
+			"name" : "sex",
+			"position" : 
+			{
+				"x" : -196.0,
+				"y" : -14.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

@@ -7,13 +7,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "home_button_complex.json",
+			"filepath" : "tutorial_skip_button_complex.json",
 			"multi color" : "",
 			"name" : "skip_button",
 			"position" : 
 			{
-				"x" : 121.250,
-				"y" : -54.250
+				"x" : 89.250,
+				"y" : -29.250
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

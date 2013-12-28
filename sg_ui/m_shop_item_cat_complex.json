@@ -78,6 +78,25 @@
 			"y mirror" : false,
 			"y scale" : 0.50,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "number_of_entrys_big_complex.json",
+			"multi color" : "",
+			"name" : "number_of_entrys",
+			"position" : 
+			{
+				"x" : 120.0,
+				"y" : 101.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }
