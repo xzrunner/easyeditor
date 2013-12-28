@@ -20,7 +20,7 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -1680.0,
+								"x" : -408.50,
 								"y" : 0.0
 							},
 							"x mirror" : false,
@@ -39,11 +39,11 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -1670.50,
+								"x" : -394.0,
 								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 2.0,
+							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -58,7 +58,7 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -1657.0,
+								"x" : -379.50,
 								"y" : 0.0
 							},
 							"x mirror" : true,
@@ -86,7 +86,7 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : -1680.0,
+								"x" : -408.50,
 								"y" : 0.0
 							},
 							"x mirror" : false,
@@ -109,7 +109,7 @@
 								"y" : 0.0
 							},
 							"x mirror" : false,
-							"x scale" : 835.250,
+							"x scale" : 64.30769348144531,
 							"x shear" : 0.0,
 							"y mirror" : false,
 							"y scale" : 1.0,
@@ -124,7 +124,7 @@
 							"name" : "",
 							"position" : 
 							{
-								"x" : 1679.0,
+								"x" : 408.50,
 								"y" : 0.0
 							},
 							"x mirror" : true,
