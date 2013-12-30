@@ -25,7 +25,7 @@
 	"sourceSize": {"w":376,"h":759}
 },
 {
-	"filename": "6162-tongyong-1.png",
+	"filename": "6162-tongyong-1.PNG",
 	"frame": {"x":778,"y":757,"w":448,"h":422},
 	"rotated": true,
 	"trimmed": true,
@@ -151,6 +151,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:69533207543bae700c6c0157d1e0a239$"
+	"smartupdate": "$TexturePacker:SmartUpdate:775f0368f8f22d7d3b37f1763748b48d$"
 }
 }
