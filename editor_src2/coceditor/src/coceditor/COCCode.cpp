@@ -984,6 +984,13 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		mat[1] *= sprite->getScaleY();
 		mat[2] *= sprite->getScaleX();
 
+		// shear
+		float m0 = mat[0], m1 = mat[1], m2 = mat[2], m3 = mat[3];
+		mat[0] = m0 + m1 * sprite->getShearY();
+		mat[1] = m0 * sprite->getShearX() + m1;
+		mat[2] = m2 + m3 * sprite->getShearY();
+		mat[3] = m2 * sprite->getShearX() + m3;
+
 		// mirror
 		bool xMirror, yMirror;
 		sprite->getMirror(xMirror, yMirror);

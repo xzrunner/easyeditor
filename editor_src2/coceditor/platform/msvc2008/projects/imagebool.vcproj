@@ -5,10 +5,6 @@
 	Name="imagebool"
 	ProjectGUID="{0F701648-BF4B-4848-A39E-74B56B22163A}"
 	RootNamespace="imagebool"
-	SccProjectName="Svn"
-	SccAuxPath="Svn"
-	SccLocalPath="Svn"
-	SccProvider="SubversionScc"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
