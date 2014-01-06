@@ -1,6 +1,7 @@
 #include "SpritePropertySetting.h"
 #include "PropertySettingPanel.h"
 
+#include "history/ArrangeSpriteAtomicOP.h"
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
@@ -107,40 +108,42 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Add Color"))
 		m_sprite->addColor = wxANY_AS(value, wxString);
 	else if (name == wxT("X"))
-		m_sprite->setTransform(Vector(wxANY_AS(value, float), m_sprite->getPosition().y), m_sprite->getAngle());
+		translate(wxANY_AS(value, float), m_sprite->getPosition().y);
 	else if (name == wxT("Y"))
-		m_sprite->setTransform(Vector(m_sprite->getPosition().x, wxANY_AS(value, float)), m_sprite->getAngle());
+		translate(m_sprite->getPosition().x, wxANY_AS(value, float));
 	else if (name == wxT("Angle"))
-		m_sprite->setTransform(m_sprite->getPosition(), wxANY_AS(value, float) * TRANS_DEG_TO_RAD);
+		rotate(wxANY_AS(value, float) * TRANS_DEG_TO_RAD);
 	else if (name == wxT("Scale X"))
-		m_sprite->setScale(wxANY_AS(value, float), m_sprite->getScaleY());
+		scale(wxANY_AS(value, float), m_sprite->getScaleY());
 	else if (name == wxT("Scale Y"))
-		m_sprite->setScale(m_sprite->getScaleX(), wxANY_AS(value, float));
+		scale(m_sprite->getScaleX(), wxANY_AS(value, float));
 	else if (name == wxT("Width"))
 	{
 		const float width = wxANY_AS(value, float);
-		m_sprite->setScale(width/m_sprite->getSymbol().getWidth(), m_sprite->getScaleY());
+		scale(width/m_sprite->getSymbol().getWidth(), m_sprite->getScaleY());
 	}
 	else if (name == wxT("Height"))
 	{
 		const float height = wxANY_AS(value, float);
-		m_sprite->setScale(m_sprite->getScaleX(), height/m_sprite->getSymbol().getHeight());
+		scale(m_sprite->getScaleX(), height/m_sprite->getSymbol().getHeight());
 	}
 	else if (name == wxT("Shear X"))
-		m_sprite->setShear(wxANY_AS(value, float), m_sprite->getShearY());
+		shear(wxANY_AS(value, float), m_sprite->getShearY());
 	else if (name == wxT("Shear Y"))
-		m_sprite->setShear(m_sprite->getShearX(), wxANY_AS(value, float));
+		shear(m_sprite->getShearX(), wxANY_AS(value, float));
 	else if (name == wxT("Horizontal Mirror"))
 	{
 		bool xMirror, yMirror;
 		m_sprite->getMirror(xMirror, yMirror);
-		m_sprite->setMirror(wxANY_AS(value, bool), yMirror);
+//		m_sprite->setMirror(wxANY_AS(value, bool), yMirror);
+		mirror(wxANY_AS(value, bool), yMirror);
 	}
 	else if (name == wxT("Vertical Mirror"))
 	{
 		bool xMirror, yMirror;
 		m_sprite->getMirror(xMirror, yMirror);
-		m_sprite->setMirror(xMirror, wxANY_AS(value, bool));
+//		m_sprite->setMirror(xMirror, wxANY_AS(value, bool));
+		mirror(xMirror, wxANY_AS(value, bool));
 	}
 
 	m_editPanel->Refresh();
@@ -223,6 +226,55 @@ void SpritePropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool
 	pg->GetProperty(wxT("Shear Y"))->Enable(bEnable);
 	pg->GetProperty(wxT("Horizontal Mirror"))->Enable(bEnable);
 	pg->GetProperty(wxT("Vertical Mirror"))->Enable(bEnable);
+}
+
+void SpritePropertySetting::translate(float x, float y) 
+{
+	Vector new_pos(x, y);
+
+	std::vector<ISprite*> sprites;
+	sprites.push_back(m_sprite);
+	m_editPanel->addHistoryOP(new arrange_sprite::MoveSpritesAOP(sprites, new_pos - m_sprite->getPosition()));
+
+	m_sprite->setTransform(new_pos, m_sprite->getAngle());
+}
+
+void SpritePropertySetting::rotate(float angle)
+{
+	float offset_angle = angle - m_sprite->getAngle();
+
+	std::vector<ISprite*> sprites;
+	sprites.push_back(m_sprite);
+	m_editPanel->addHistoryOP(new arrange_sprite::RotateSpritesAOP(sprites, offset_angle));
+
+	m_sprite->setTransform(m_sprite->getPosition(), angle);	
+}
+
+void SpritePropertySetting::scale(float sx, float sy)
+{
+	std::vector<ISprite*> sprites;
+	sprites.push_back(m_sprite);
+	m_editPanel->addHistoryOP(new arrange_sprite::ScaleSpritesAOP(sprites, sx, sy));
+
+	m_sprite->setScale(sx, sy);
+}
+
+void SpritePropertySetting::shear(float kx, float ky)
+{
+	std::vector<ISprite*> sprites;
+	sprites.push_back(m_sprite);
+	m_editPanel->addHistoryOP(new arrange_sprite::ShearSpritesAOP(sprites, kx, ky));
+
+	m_sprite->setShear(kx, ky);
+}
+
+void SpritePropertySetting::mirror(bool mx, bool my)
+{
+	std::vector<ISprite*> sprites;
+	sprites.push_back(m_sprite);
+	m_editPanel->addHistoryOP(new arrange_sprite::MirrorSpritesAOP(sprites, mx, my));
+
+	m_sprite->setMirror(mx, my);
 }
 
 } // d2d

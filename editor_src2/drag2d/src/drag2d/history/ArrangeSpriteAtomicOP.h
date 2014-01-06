@@ -42,12 +42,15 @@ namespace d2d
 		public:
 			RotateSpritesAOP(const SpriteSelection& selection, const Vector& start, const Vector& end);
 			RotateSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& start, const Vector& end);
+			RotateSpritesAOP(const std::vector<ISprite*>& sprites, float angle);
 
 			virtual void undo();
 			virtual void redo();
 
 		private:
 			Vector m_start, m_end;
+
+			float m_angle; // in rad
 
 		}; // RotateSpritesAOP
 
@@ -64,6 +67,48 @@ namespace d2d
 			MultiSpritesImpl* m_spritesImpl;
 
 		}; // DeleteSpritesAOP
+
+		class ScaleSpritesAOP : public SpritesAOP
+		{
+		public:
+			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale);
+
+			virtual void undo();
+			virtual void redo();
+
+		private:
+			float m_xScale, m_yScale;
+			std::vector<std::pair<float, float> > m_oldScales;
+
+		}; // ScaleSpritesAOP
+
+		class ShearSpritesAOP : public SpritesAOP
+		{
+		public:
+			ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear);
+
+			virtual void undo();
+			virtual void redo();
+
+		private:
+			float m_xShear, m_yShear;
+			std::vector<std::pair<float, float> > m_oldShears;
+
+		}; // ShearSpritesAOP
+
+		class MirrorSpritesAOP : public SpritesAOP
+		{
+		public:
+			MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror);
+
+			virtual void undo();
+			virtual void redo();
+
+		private:
+			bool m_xMirror, m_yMirror;
+			std::vector<std::pair<bool, bool> > m_oldMirrors;
+
+		}; // MirrorSpritesAOP
 	}
 }
 

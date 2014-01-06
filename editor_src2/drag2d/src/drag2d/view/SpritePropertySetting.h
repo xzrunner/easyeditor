@@ -18,6 +18,13 @@ namespace d2d
 		virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
 
 	private:
+		void translate(float x, float y);
+		void rotate(float angle);
+		void scale(float sx, float sy);
+		void shear(float kx, float ky);
+		void mirror(bool mx, bool my);
+
+	private:
 		ISprite* m_sprite;
 
 	}; // SpritePropertySetting
