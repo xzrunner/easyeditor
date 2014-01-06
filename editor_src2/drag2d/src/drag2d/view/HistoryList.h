@@ -1,9 +1,11 @@
 #pragma once
 
 #include <stack>
+#include <JSON/json.h>
 
 namespace d2d
 {
+	class ISprite;
 	class AbstractAtomicOP;
 
 	class HistoryList
@@ -25,8 +27,16 @@ namespace d2d
 
 		void onSave();
 
+		void store(Json::Value& value, const std::vector<ISprite*>& sprites);
+		void load(const Json::Value& value, const std::vector<ISprite*>& sprites);
+
 	private:
 		void clear(std::stack<AbstractAtomicOP*>& stack);
+
+		void store(std::stack<AbstractAtomicOP*>& stack, Json::Value& val, 
+			const std::vector<ISprite*>& sprites);
+		void load(std::stack<AbstractAtomicOP*>& stack, const Json::Value& val, 
+			const std::vector<ISprite*>& sprites);
 
 	private:
 		std::stack<AbstractAtomicOP*> m_undoStack, m_redoStack;

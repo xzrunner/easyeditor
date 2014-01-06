@@ -457,6 +457,18 @@
 				RelativePath="..\..\..\src\drag2d\history\AbstractAtomicOP.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\history\AtomicFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\history\AtomicFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\history\AtomicType.h"
+				>
+			</File>
 			<Filter
 				Name="arrange"
 				>

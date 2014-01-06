@@ -1,6 +1,9 @@
 #include "ArrangeSpriteAtomicOP.h"
+#include "AtomicType.h"
 
 #include "common/Math.h"
+#include "common/FileNameTools.h"
+#include "dataset/ISymbol.h"
 #include "view/MultiSpritesImpl.h"
 
 namespace d2d
@@ -31,6 +34,26 @@ SpritesAOP::~SpritesAOP()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		m_sprites[i]->release();
+}
+
+Json::Value SpritesAOP::store(const std::vector<ISprite*>& sprites)
+{
+	Json::Value ret;
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+	{
+		int ptr = -1;
+		for (size_t j = 0, m = sprites.size(); j < m; ++j) {
+			if (sprites[j] == m_sprites[i]) {
+				ptr = j;
+				break;
+			}
+		}
+		ret["sprites"][i] = ptr;
+	}
+
+	ret["val"] = storeValues();
+
+	return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -65,6 +88,15 @@ void MoveSpritesAOP::redo()
 		ISprite* sprite = m_sprites[i];
 		sprite->translate(m_offset);
 	}
+}
+
+Json::Value MoveSpritesAOP::storeValues()
+{
+	Json::Value val;
+	val["type"] = AT_MOVE;
+	val["dx"] = m_offset.x;
+	val["dy"] = m_offset.y;
+	return val;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -131,6 +163,18 @@ void RotateSpritesAOP::redo()
 	}
 }
 
+Json::Value RotateSpritesAOP::storeValues()
+{
+	Json::Value val;
+	val["type"] = AT_ROTATE;
+	val["xstart"] = m_start.x;
+	val["ystart"] = m_start.y;
+	val["xend"] = m_end.x;
+	val["yend"] = m_end.y;
+	val["angle"] = m_angle;
+	return val;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class DeleteSpritesAOP
 //////////////////////////////////////////////////////////////////////////
@@ -159,6 +203,13 @@ void DeleteSpritesAOP::redo()
 		m_spritesImpl->removeSprite(m_sprites[i]);
 }
 
+Json::Value DeleteSpritesAOP::storeValues()
+{
+	Json::Value val;
+	val["type"] = AT_DELETE;
+	return val;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class ScaleSpritesAOP
 //////////////////////////////////////////////////////////////////////////
@@ -173,6 +224,15 @@ ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xSc
 		ISprite* sprite = sprites[i];
 		m_oldScales.push_back(std::make_pair(sprite->getScaleX(), sprite->getScaleY()));
 	}
+}
+
+ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale,
+				const std::vector<std::pair<float, float> >& oldScales)
+	: SpritesAOP(sprites)
+	, m_xScale(xScale)
+	, m_yScale(yScale)
+	, m_oldScales(oldScales)
+{
 }
 
 void ScaleSpritesAOP::undo()
@@ -191,6 +251,19 @@ void ScaleSpritesAOP::redo()
 	} 
 }
 
+Json::Value ScaleSpritesAOP::storeValues()
+{
+	Json::Value val;
+	val["type"] = AT_SCALE;
+	val["xscale"] = m_xScale;
+	val["yscale"] = m_yScale;
+	for (size_t i = 0, n = m_oldScales.size(); i < n; ++i) {
+		val["old"][i]["x"] = m_oldScales[i].first;
+		val["old"][i]["y"] = m_oldScales[i].second;
+	}
+	return val;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class ShearSpritesAOP
 //////////////////////////////////////////////////////////////////////////
@@ -205,6 +278,15 @@ ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xSh
 		ISprite* sprite = sprites[i];
 		m_oldShears.push_back(std::make_pair(sprite->getShearX(), sprite->getShearY()));
 	}
+}
+
+ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear,
+								 const std::vector<std::pair<float, float> >& oldShears)
+	: SpritesAOP(sprites)
+	, m_xShear(xShear)
+	, m_yShear(yShear)
+	, m_oldShears(oldShears)
+{
 }
 
 void ShearSpritesAOP::undo()
@@ -223,8 +305,21 @@ void ShearSpritesAOP::redo()
 	} 
 }
 
+Json::Value ShearSpritesAOP::storeValues()
+{
+	Json::Value val;
+	val["type"] = AT_SHEAR;
+	val["xshear"] = m_xShear;
+	val["yshear"] = m_yShear;
+	for (size_t i = 0, n = m_oldShears.size(); i < n; ++i) {
+		val["old"][i]["x"] = m_oldShears[i].first;
+		val["old"][i]["y"] = m_oldShears[i].second;
+	}
+	return val;
+}
+
 //////////////////////////////////////////////////////////////////////////
-// class ShearSpritesAOP
+// class MirrorSpritesAOP
 //////////////////////////////////////////////////////////////////////////
 
 MirrorSpritesAOP::MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror)
@@ -239,6 +334,15 @@ MirrorSpritesAOP::MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xM
 		sprite->getMirror(mx, my);
 		m_oldMirrors.push_back(std::make_pair(mx, my));
 	}
+}
+
+MirrorSpritesAOP::MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror,
+								   const std::vector<std::pair<bool, bool> >& oldMirrors)
+	: SpritesAOP(sprites)
+	, m_xMirror(xMirror)
+	, m_yMirror(yMirror)
+	, m_oldMirrors(oldMirrors)
+{
 }
 
 void MirrorSpritesAOP::undo()
@@ -257,6 +361,18 @@ void MirrorSpritesAOP::redo()
 	} 
 }
 
+Json::Value MirrorSpritesAOP::storeValues()
+{
+	Json::Value val;
+	val["type"] = AT_SHEAR;
+	val["xmirror"] = m_xMirror;
+	val["ymirror"] = m_yMirror;
+	for (size_t i = 0, n = m_oldMirrors.size(); i < n; ++i) {
+		val["old"][i]["x"] = m_oldMirrors[i].first;
+		val["old"][i]["y"] = m_oldMirrors[i].second;
+	}
+	return val;
+}
 
 } // arrange_sprite
 } // d2d

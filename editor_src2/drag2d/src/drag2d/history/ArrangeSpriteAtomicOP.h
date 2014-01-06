@@ -18,6 +18,11 @@ namespace d2d
 			SpritesAOP(const std::vector<ISprite*>& sprites);
 			virtual ~SpritesAOP();
 
+			virtual Json::Value store(const std::vector<ISprite*>& sprites);
+
+		protected:
+			virtual Json::Value storeValues() = 0;
+
 		protected:
 			std::vector<ISprite*> m_sprites;
 
@@ -31,6 +36,9 @@ namespace d2d
 
 			virtual void undo();
 			virtual void redo();
+
+		protected:
+			virtual Json::Value storeValues();
 
 		private:
 			Vector m_offset;
@@ -46,6 +54,9 @@ namespace d2d
 
 			virtual void undo();
 			virtual void redo();
+
+		protected:
+			virtual Json::Value storeValues();
 
 		private:
 			Vector m_start, m_end;
@@ -63,6 +74,9 @@ namespace d2d
 			virtual void undo();
 			virtual void redo();
 
+		protected:
+			virtual Json::Value storeValues();
+
 		private:
 			MultiSpritesImpl* m_spritesImpl;
 
@@ -72,9 +86,14 @@ namespace d2d
 		{
 		public:
 			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale);
+			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale,
+				const std::vector<std::pair<float, float> >& oldScales);
 
 			virtual void undo();
 			virtual void redo();
+
+		protected:
+			virtual Json::Value storeValues();
 
 		private:
 			float m_xScale, m_yScale;
@@ -86,9 +105,14 @@ namespace d2d
 		{
 		public:
 			ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear);
+			ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear,
+				const std::vector<std::pair<float, float> >& oldShears);
 
 			virtual void undo();
 			virtual void redo();
+
+		protected:
+			virtual Json::Value storeValues();
 
 		private:
 			float m_xShear, m_yShear;
@@ -100,9 +124,14 @@ namespace d2d
 		{
 		public:
 			MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror);
+			MirrorSpritesAOP(const std::vector<ISprite*>& sprites, bool xMirror, bool yMirror,
+				const std::vector<std::pair<bool, bool> >& oldMirrors);
 
 			virtual void undo();
 			virtual void redo();
+
+		protected:
+			virtual Json::Value storeValues();
 
 		private:
 			bool m_xMirror, m_yMirror;

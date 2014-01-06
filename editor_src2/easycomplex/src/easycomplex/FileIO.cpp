@@ -15,6 +15,14 @@ namespace ecomplex
 		task->m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 		for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 			task->m_viewlist->insert(symbol->m_sprites[i]);
+
+		// history op list
+		Json::Value value;
+		Json::Reader reader;
+		std::ifstream fin(filename);
+		reader.parse(fin, value);
+		fin.close();
+		task->m_stage->loadHistoryList(value, symbol->m_sprites);
 	}
 
 	void FileIO::store(const Task* task, const char* filename)
@@ -22,7 +30,7 @@ namespace ecomplex
 //		libcomplex::FileSaver::store(filename, Context::Instance()->stage->getSymbol());
 
 		d2d::ComplexSymbol* root = task->m_stage->getSymbol();
-		libcomplex::FileSaver::store(filename, root);
+		libcomplex::FileSaver::storeWithHistory(filename, root, task->m_stage);
 		std::queue<const d2d::ComplexSymbol*> buffer;
 		for (size_t i = 0, n = root->m_sprites.size(); i < n ;++i)
 			if (d2d::ComplexSprite* complex = dynamic_cast<d2d::ComplexSprite*>(root->m_sprites[i]))

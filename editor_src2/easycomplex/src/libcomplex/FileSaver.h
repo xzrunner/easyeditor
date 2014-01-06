@@ -8,6 +8,8 @@ namespace libcomplex
 	{
 	public:
 		static void store(const char* filepath, const d2d::ComplexSymbol* symbol);
+		static void storeWithHistory(const char* filepath, const d2d::ComplexSymbol* symbol,
+			d2d::EditPanel* editpanel);
 
 	private:
 		static void centerSymbol(d2d::ComplexSymbol* symbol);

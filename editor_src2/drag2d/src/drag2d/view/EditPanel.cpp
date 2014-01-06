@@ -179,6 +179,16 @@ void EditPanel::addHistoryOP(AbstractAtomicOP* op)
 	setTitleStatus(true);
 }
 
+void EditPanel::saveHistoryList(Json::Value& value, const std::vector<ISprite*>& sprites)
+{
+	m_historyList.store(value, sprites);
+}
+
+void EditPanel::loadHistoryList(const Json::Value& value, const std::vector<ISprite*>& sprites)
+{
+	m_historyList.load(value, sprites);
+}
+
 void EditPanel::onSave()
 {
 	m_historyList.onSave();
