@@ -1,8 +1,8 @@
 #include "EditPanel.h"
+#include "HistoryList.h"
 
 #include "common/Context.h"
 #include "operator/AbstractEditOP.h"
-#include "history/AbstractAtomicOP.h"
 #include "view/Camera.h"
 #include "view/GLCanvas.h"
 
@@ -31,7 +31,6 @@ std::string EditPanel::menu_entries[] =
 EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
 	, m_frame(frame)
-	, m_savedOP(NULL)
 {
 	RegisterHotKey(Hot_UpOneLayer, 0, VK_ADD);
 	RegisterHotKey(Hot_DownOneLayer, 0, VK_SUBTRACT);
@@ -63,8 +62,7 @@ void EditPanel::clear()
 {
 	m_editOP->clear();
 
-	clearAtomicOPStack(m_undoStack);
-	clearAtomicOPStack(m_redoStack);
+	m_historyList.clear();
 }
 
 Vector EditPanel::transPosScreenToProject(int x, int y) const
@@ -153,53 +151,37 @@ void EditPanel::resetCanvas()
 
 void EditPanel::undo()
 {
-	if (!m_undoStack.empty())
-	{
-		AbstractAtomicOP* op = m_undoStack.top();
-		m_undoStack.pop();
-		op->undo();
-		m_redoStack.push(op);
+	HistoryList::Type type = m_historyList.undo();
+	if (type != HistoryList::NO_CHANGE) {
 		Refresh();
-
-		if (!m_savedOP && m_undoStack.empty())
-			setTitleStatus(false);
-		else if (m_savedOP && !m_undoStack.empty() && m_savedOP == m_undoStack.top())
-			setTitleStatus(false);
-		else
+		if (type == HistoryList::FIXED)
 			setTitleStatus(true);
+		else
+			setTitleStatus(false);
 	}
 }
 
 void EditPanel::redo()
 {
-	if (!m_redoStack.empty())
-	{
-		AbstractAtomicOP* op = m_redoStack.top();
-		m_redoStack.pop();
-		op->redo();
-		m_undoStack.push(op);
+	HistoryList::Type type = m_historyList.redo();
+	if (type != HistoryList::NO_CHANGE) {
 		Refresh();
-
-		if (!m_savedOP && m_undoStack.empty())
-			setTitleStatus(false);
-		else if (m_savedOP && !m_undoStack.empty() && m_savedOP == m_undoStack.top())
-			setTitleStatus(false);
-		else
+		if (type == HistoryList::FIXED)
 			setTitleStatus(true);
+		else
+			setTitleStatus(false);
 	}
 }
 
 void EditPanel::addHistoryOP(AbstractAtomicOP* op)
 {
-	m_undoStack.push(op);
-	clearAtomicOPStack(m_redoStack);
+	m_historyList.insert(op);
 	setTitleStatus(true);
 }
 
 void EditPanel::onSave()
 {
-	if (!m_undoStack.empty())
-		m_savedOP = m_undoStack.top();
+	m_historyList.onSave();
 	setTitleStatus(false);
 }
 
@@ -247,15 +229,6 @@ void EditPanel::onSize(wxSizeEvent& event)
 		m_canvas->SetSize(event.GetSize());
 	m_camera->setCenter(Vector(0.0f, 0.0f));
 	Refresh();	// no refresh when change window size
-}
-
-void EditPanel::clearAtomicOPStack(std::stack<AbstractAtomicOP*>& stack)
-{
-	while (!stack.empty())
-	{
-		delete stack.top();
-		stack.pop();
-	}
 }
 
 void EditPanel::setTitleStatus(bool fixed)

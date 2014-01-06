@@ -1,17 +1,17 @@
 #pragma once
 
 #include <wx/wx.h>
-#include <stack>
 
 #include "interfaces.h"
+#include "HistoryList.h"
 #include "common/Vector.h"
 
 namespace d2d
 {
+	class AbstractAtomicOP;
 	class AbstractEditOP;
 	class GLCanvas;
 	class Camera;
-	class AbstractAtomicOP;
 
 	class EditPanel : public wxPanel, public ICameraObserver
 	{
@@ -80,8 +80,6 @@ namespace d2d
 		void onSize(wxSizeEvent& event);
 
 	private:
-		void clearAtomicOPStack(std::stack<AbstractAtomicOP*>& stack);
-
 		void setTitleStatus(bool fixed);
 
 	protected:
@@ -90,8 +88,7 @@ namespace d2d
 		GLCanvas* m_canvas;
 		Camera* m_camera;
 
-		std::stack<AbstractAtomicOP*> m_undoStack, m_redoStack;
-		AbstractAtomicOP* m_savedOP;
+		HistoryList m_historyList;
 
 		wxTopLevelWindow* m_frame;
 

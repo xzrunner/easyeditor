@@ -1800,6 +1800,14 @@
 					RelativePath="..\..\..\src\drag2d\view\EditPanelDefs.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\HistoryList.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\HistoryList.h"
+					>
+				</File>
 				<Filter
 					Name="physics"
 					>
