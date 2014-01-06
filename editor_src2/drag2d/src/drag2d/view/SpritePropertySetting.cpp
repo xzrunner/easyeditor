@@ -4,6 +4,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
+#include "common/Math.h"
 
 namespace d2d
 {
@@ -27,7 +28,7 @@ void SpritePropertySetting::updatePanel(PropertySettingPanel* panel)
 
  		pg->GetProperty(wxT("X"))->SetValue(m_sprite->getPosition().x);
  		pg->GetProperty(wxT("Y"))->SetValue(m_sprite->getPosition().y);
- 		pg->GetProperty(wxT("Angle"))->SetValue(m_sprite->getAngle());
+ 		pg->GetProperty(wxT("Angle"))->SetValue(m_sprite->getAngle() * TRANS_RAD_TO_DEG);
  		pg->GetProperty(wxT("Scale X"))->SetValue(m_sprite->getScaleX());
 		pg->GetProperty(wxT("Scale Y"))->SetValue(m_sprite->getScaleY());
 		pg->GetProperty(wxT("Width"))->SetValue(m_sprite->getSymbol().getWidth() * m_sprite->getScaleX());
@@ -59,9 +60,9 @@ void SpritePropertySetting::updatePanel(PropertySettingPanel* panel)
 		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-		pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, m_sprite->getAngle()));
-		pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("rad"));
-		pg->SetPropertyAttribute(wxT("Angle"), "Precision", 2);
+		pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, m_sprite->getAngle() * TRANS_RAD_TO_DEG));
+		pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("deg"));
+		pg->SetPropertyAttribute(wxT("Angle"), "Precision", 1);
 
 		pg->Append(new wxFloatProperty(wxT("Scale X"), wxPG_LABEL, m_sprite->getScaleX()));
 		pg->SetPropertyAttribute(wxT("Scale X"), wxPG_ATTR_UNITS, wxT("multiple"));
@@ -110,7 +111,7 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Y"))
 		m_sprite->setTransform(Vector(m_sprite->getPosition().x, wxANY_AS(value, float)), m_sprite->getAngle());
 	else if (name == wxT("Angle"))
-		m_sprite->setTransform(m_sprite->getPosition(), wxANY_AS(value, float));
+		m_sprite->setTransform(m_sprite->getPosition(), wxANY_AS(value, float) * TRANS_DEG_TO_RAD);
 	else if (name == wxT("Scale X"))
 		m_sprite->setScale(wxANY_AS(value, float), m_sprite->getScaleY());
 	else if (name == wxT("Scale Y"))
@@ -173,9 +174,9 @@ void SpritePropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool
 		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-		pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, m_sprite->getAngle()));
-		pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("rad"));
-		pg->SetPropertyAttribute(wxT("Angle"), "Precision", 2);
+		pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, m_sprite->getAngle() * TRANS_RAD_TO_DEG));
+		pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("deg"));
+		pg->SetPropertyAttribute(wxT("Angle"), "Precision", 1);
 
 		pg->Append(new wxFloatProperty(wxT("Scale X"), wxPG_LABEL, m_sprite->getScaleX()));
 		pg->SetPropertyAttribute(wxT("Scale X"), wxPG_ATTR_UNITS, wxT("multiple"));
