@@ -18,7 +18,7 @@ namespace eanim
 		//
 		// d2d::ICloneable interface
 		//
-		virtual Sprite* clone() { return NULL; }
+		virtual Sprite* clone() const { return NULL; }
 
 		virtual void loadFromTextFile(std::ifstream& fin) = 0;
 		virtual void storeToTextFile(std::ofstream& fout) const = 0;

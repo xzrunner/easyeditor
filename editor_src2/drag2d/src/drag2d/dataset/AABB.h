@@ -15,7 +15,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual AABB* clone();
+		virtual AABB* clone() const;
 
 		//
 		// ISerializable interface

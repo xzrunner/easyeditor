@@ -195,7 +195,6 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dlg)
 	int time = frameValue["time"].asInt();
 
 	KeyFrame* frame = new KeyFrame(time);
-	std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
 
 	frame->m_id = frameValue["id"].asInt();
 
@@ -205,7 +204,7 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dlg)
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
 		d2d::ISprite* actor = loadActor(actorValue, dlg);
-		sprites.push_back(actor);
+		frame->insert(actor);
 		actorValue = frameValue["actor"][i++];
 	}
 
@@ -297,13 +296,11 @@ KeyFrame* FileIO::loadFrame(rapidxml::xml_node<>* frameNode,
 	int time = StringTools::stringToInt(frameNode->first_attribute("index")->value()) + 1;
 
 	KeyFrame* frame = new KeyFrame(time);
-	std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
-
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
 		d2d::ISprite* actor = loadActor(actorNode, mapNamePath);
-		sprites.push_back(actor);
+		frame->insert(actor);
 		actorNode = actorNode->next_sibling();
 	}
 
@@ -361,14 +358,13 @@ Json::Value FileIO::store(KeyFrame* frame, const wxString& dlg)
 
 	value["tween"] = frame->hasClassicTween();
 
-	const std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["actor"][i] = store(sprites[i], dlg);
+	for (size_t i = 0, n = frame->size(); i < n; ++i)
+		value["actor"][i] = store(frame->getSprite(i), dlg);
 
 	return value;
 }
 
-Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dlg)
+Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dlg)
 {
 	Json::Value value;
 

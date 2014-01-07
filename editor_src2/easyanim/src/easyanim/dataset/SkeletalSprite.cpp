@@ -33,7 +33,7 @@ SkeletalSprite::~SkeletalSprite()
 	delete m_skeleton;
 }
 
-SkeletalSprite* SkeletalSprite::clone()
+SkeletalSprite* SkeletalSprite::clone() const
 {
 	return new SkeletalSprite(*this);
 }

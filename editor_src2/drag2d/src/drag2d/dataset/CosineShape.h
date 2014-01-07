@@ -14,7 +14,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual CosineShape* clone();
+		virtual CosineShape* clone() const;
 
 		//
 		// IShape interface

@@ -232,4 +232,35 @@ void AnimSymbol::refreshThumbnail()
 
 	memDC.SelectObject(wxNullBitmap);
 }
+
+//////////////////////////////////////////////////////////////////////////
+// class AnimSymbol::Layer
+//////////////////////////////////////////////////////////////////////////
+
+AnimSymbol::Frame* AnimSymbol::Layer::getCurrFrame(int index) const
+{
+	d2d::AnimSymbol::Frame* ret = NULL;
+
+	for (size_t i = 0, n = frames.size(); i < n; ++i)
+	{
+		d2d::AnimSymbol::Frame* frame = frames[i];
+		if (frame->index <= index)
+			ret = frame;
+		else
+			break;
+	}
+	return ret;
+}
+
+AnimSymbol::Frame* AnimSymbol::Layer::getNextFrame(int index) const
+{
+	for (size_t i = 0, n = frames.size(); i < n; ++i)
+	{
+		d2d::AnimSymbol::Frame* frame = frames[i];
+		if (frame->index > index)
+			return frame;
+	}
+	return NULL;
+}
+
 } // d2d

@@ -47,7 +47,7 @@ PartSkeleton::~PartSkeleton()
 	clear();
 }
 
-PartSkeleton* PartSkeleton::clone()
+PartSkeleton* PartSkeleton::clone() const
 {
 	return new PartSkeleton(*this);
 }

@@ -23,7 +23,7 @@ ShapeSymbol::~ShapeSymbol()
 	clear();
 }
 
-ShapeSymbol* ShapeSymbol::clone()
+ShapeSymbol* ShapeSymbol::clone() const
 {
 	return new ShapeSymbol(*this); 
 }

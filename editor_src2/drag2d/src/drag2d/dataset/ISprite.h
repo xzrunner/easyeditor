@@ -23,7 +23,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual ISprite* clone();
+		virtual ISprite* clone() const;
 
 		//
 		// UserDataImpl interface

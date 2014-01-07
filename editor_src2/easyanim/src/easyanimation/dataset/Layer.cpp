@@ -105,13 +105,7 @@ void Layer::insertKeyFrame(int time)
 		if (itr->first < time)
 		{
 			KeyFrame* frame = new KeyFrame(time);
-
-			// copy previous frame's sprites
-			const std::vector<d2d::ISprite*>& src = itr->second->getAllSprites();
-			std::vector<d2d::ISprite*>& dst = frame->getAllSprites();
-			for (size_t i = 0, n = src.size(); i < n; ++i)
-				dst.push_back(src[i]->clone());
-
+			frame->copySprites(itr->second);
 			m_frames.insert(std::make_pair(time, frame));
 
 			if (time > Context::Instance()->maxFrame)

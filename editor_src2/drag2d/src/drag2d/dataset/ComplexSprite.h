@@ -17,7 +17,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual ComplexSprite* clone();
+		virtual ComplexSprite* clone() const;
 
 		//
 		// ISprite interface

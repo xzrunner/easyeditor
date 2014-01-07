@@ -16,7 +16,7 @@ namespace d2d
 		//
 		// IObject interface
 		//	
-		virtual ImageSymbol* clone();
+		virtual ImageSymbol* clone() const;
 
 		//
 		// ISerializable interface

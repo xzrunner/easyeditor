@@ -24,7 +24,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual IShape* clone() { return NULL; }
+		virtual IShape* clone() const { return NULL; }
 
 		virtual bool isContain(const Vector& pos) const = 0;
 		virtual bool isIntersect(const Rect& rect) const = 0;

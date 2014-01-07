@@ -19,7 +19,7 @@ namespace eanim
 		//
 		// d2d::ICloneable interface
 		//
-		virtual MorphingSprite* clone();
+		virtual MorphingSprite* clone() const;
 
 		virtual void loadFromTextFile(std::ifstream& fin);
 		virtual void storeToTextFile(std::ofstream& fout) const;

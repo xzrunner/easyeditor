@@ -21,6 +21,8 @@ namespace d2d
 			virtual void undo();
 			virtual void redo();
 
+			virtual Json::Value store(const std::vector<ISprite*>& sprites) { return NULL; }
+
 		private:
 			std::vector<ChainShape*> m_chains;
 			std::vector<std::vector<Vector> > m_src, m_dst;

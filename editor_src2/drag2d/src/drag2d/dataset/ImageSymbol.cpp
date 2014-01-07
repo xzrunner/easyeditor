@@ -14,7 +14,7 @@ ImageSymbol::~ImageSymbol()
 
 }
 
-ImageSymbol* ImageSymbol::clone()
+ImageSymbol* ImageSymbol::clone() const
 {
 	return NULL;
 }

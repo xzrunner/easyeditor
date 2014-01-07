@@ -31,7 +31,7 @@ ImageSprite::ImageSprite(ImageSymbol* symbol)
 	buildBounding();
 }
 
-ImageSprite* ImageSprite::clone()
+ImageSprite* ImageSprite::clone() const
 {
 	ImageSprite* sprite = new ImageSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

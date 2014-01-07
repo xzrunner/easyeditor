@@ -47,7 +47,7 @@ ISprite::~ISprite()
 	SpriteFactory::Instance()->remove(this);
 }
 
-ISprite* ISprite::clone()
+ISprite* ISprite::clone() const
 {
 	return NULL;
 }

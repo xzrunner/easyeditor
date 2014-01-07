@@ -17,7 +17,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual Patch9Sprite* clone();
+		virtual Patch9Sprite* clone() const;
 
 		//
 		// ISprite interface

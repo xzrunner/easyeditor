@@ -33,7 +33,7 @@ ShapeSprite::~ShapeSprite()
 {
 }
 
-ShapeSprite* ShapeSprite::clone()
+ShapeSprite* ShapeSprite::clone() const
 {
 	ShapeSprite* sprite = new ShapeSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

@@ -34,7 +34,7 @@ PolygonShape::~PolygonShape()
 	clearUserData(true);
 }
 
-PolygonShape* PolygonShape::clone()
+PolygonShape* PolygonShape::clone() const
 {
 	return new PolygonShape(*this);
 }

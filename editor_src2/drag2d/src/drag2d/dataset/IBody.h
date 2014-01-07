@@ -21,7 +21,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual IBody* clone();
+		virtual IBody* clone() const;
 
 		virtual void getRect(Rect& rect, const Vector& position, float angle) const = 0;
 

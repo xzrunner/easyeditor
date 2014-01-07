@@ -87,7 +87,7 @@ void ToolbarPanel::onLoadAllFrameImages(wxCommandEvent& event)
 	{
 		KeyFrame* frame = new KeyFrame(i+1);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbols[i]);
-		frame->getAllSprites().push_back(sprite);
+		frame->insert(sprite);
 		layer->insertKeyFrame(frame);
 	}
 	context->layers.insertLayer(layer);

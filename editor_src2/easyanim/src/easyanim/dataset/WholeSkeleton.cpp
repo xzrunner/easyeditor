@@ -27,7 +27,7 @@ WholeSkeleton::~WholeSkeleton()
 	clear();
 }
 
-WholeSkeleton* WholeSkeleton::clone()
+WholeSkeleton* WholeSkeleton::clone() const
 {
 	return new WholeSkeleton(*this);
 }
@@ -254,7 +254,7 @@ WholeSkeleton::Sprite::~Sprite()
 	clear();
 }
 
-WholeSkeleton::Sprite* WholeSkeleton::Sprite::clone()
+WholeSkeleton::Sprite* WholeSkeleton::Sprite::clone() const
 {
 	return new WholeSkeleton::Sprite(*this);
 }

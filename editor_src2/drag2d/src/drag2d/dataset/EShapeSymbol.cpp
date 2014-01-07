@@ -31,7 +31,7 @@ EShapeSymbol::~EShapeSymbol()
 	clear();
 }
 
-EShapeSymbol* EShapeSymbol::clone()
+EShapeSymbol* EShapeSymbol::clone() const
 {
 	return new EShapeSymbol(*this); 
 }

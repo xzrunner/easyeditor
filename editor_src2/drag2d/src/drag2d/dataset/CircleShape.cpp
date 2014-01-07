@@ -27,7 +27,7 @@ CircleShape::CircleShape(const Vector& center, float radius)
 {
 }
 
-CircleShape* CircleShape::clone()
+CircleShape* CircleShape::clone() const
 {
 	return new CircleShape(*this);
 }

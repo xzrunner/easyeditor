@@ -28,7 +28,7 @@ ComplexSprite::~ComplexSprite()
 {
 }
 
-ComplexSprite* ComplexSprite::clone()
+ComplexSprite* ComplexSprite::clone() const
 {
 	ComplexSprite* sprite = new ComplexSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

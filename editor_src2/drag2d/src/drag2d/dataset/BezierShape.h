@@ -15,7 +15,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual BezierShape* clone();
+		virtual BezierShape* clone() const;
 
 		//
 		// IShape interface

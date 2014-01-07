@@ -45,24 +45,19 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 		KeyFrame* frame = layers[i]->getCurrKeyFrame(context->currFrame);
 		if (!frame) continue;
 
-		const std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
 		if (order)
 		{
-			std::vector<d2d::ISprite*>::const_iterator itr = sprites.begin();
-			for ( ; itr != sprites.end(); ++itr)
-			{
+			for (int i = 0, n = frame->size(); i < n; ++i) {
 				bool hasNext;
-				visitor.visit(*itr, hasNext);
+				visitor.visit(const_cast<d2d::ISprite*>(frame->getSprite(i)), hasNext);
 				if (!hasNext) break;
 			}
 		}
 		else
 		{
-			std::vector<d2d::ISprite*>::const_reverse_iterator itr = sprites.rbegin();
-			for ( ; itr != sprites.rend(); ++itr)
-			{
+			for (int i = frame->size() - 1; i >= 0; --i) {
 				bool hasNext;
-				visitor.visit(*itr, hasNext);
+				visitor.visit(const_cast<d2d::ISprite*>(frame->getSprite(i)), hasNext);
 				if (!hasNext) break;
 			}
 		}
@@ -73,26 +68,17 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	Context* context = Context::Instance();
 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
-	std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
 
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-	{
-		if (sprites[i] == sprite)
-		{
-			sprites[i]->release();
-			sprites.erase(sprites.begin() + i);
-			context->keysPanel->Refresh();
-			break;
-		}
-	}
+	bool success = frame->remove(sprite);
+	if (success)
+		context->keysPanel->Refresh();
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	Context* context = Context::Instance();
 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
-	std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
-	sprites.push_back(sprite);
+	frame->insert(sprite);
 	Refresh();
 	context->keysPanel->Refresh();
 }
@@ -113,26 +99,7 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	Context* context = Context::Instance();
 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
-	std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
-
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-	{
-		if (sprites[i] == sprite)
-		{
-			if (up && i != n - 1)
-			{
-				d2d::ISprite* tmp = sprites[i];
-				sprites[i] = sprites[i+1];
-				sprites[i+1] = tmp;
-			}
-			else if (!up && i != 0)
-			{
-				d2d::ISprite* tmp = sprites[i];
-				sprites[i] = sprites[i-1];
-				sprites[i-1] = tmp;
-			}
-		}
-	}
+	frame->reorder(sprite, up);
 }
 
 //////////////////////////////////////////////////////////////////////////

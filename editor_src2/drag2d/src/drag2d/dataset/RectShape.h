@@ -17,7 +17,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual RectShape* clone();
+		virtual RectShape* clone() const;
 
 		//
 		// ISerializable interface

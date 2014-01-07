@@ -32,7 +32,7 @@ MeshSprite::~MeshSprite()
 {
 }
 
-MeshSprite* MeshSprite::clone()
+MeshSprite* MeshSprite::clone() const
 {
 	MeshSprite* sprite = new MeshSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

@@ -26,7 +26,7 @@ RectShape::RectShape(const Vector& center, float hWidth, float hHeight)
 {
 }
 
-RectShape* RectShape::clone()
+RectShape* RectShape::clone() const
 {
 	return new RectShape(*this);
 }

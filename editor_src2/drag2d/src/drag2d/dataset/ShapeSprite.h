@@ -19,7 +19,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual ShapeSprite* clone();
+		virtual ShapeSprite* clone() const;
 
 		//
 		// ISprite interface

@@ -21,7 +21,7 @@ FontSymbol::~FontSymbol()
 {
 }
 
-FontSymbol* FontSymbol::clone()
+FontSymbol* FontSymbol::clone() const
 {
 	return NULL;
 }

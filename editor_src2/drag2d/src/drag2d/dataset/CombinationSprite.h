@@ -19,7 +19,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual CombinationSprite* clone();
+		virtual CombinationSprite* clone() const;
 
 		//
 		// ISprite interface

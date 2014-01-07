@@ -26,7 +26,7 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 
 	EVT_MENU(wxID_EXIT, Frame::onQuit)
 	EVT_MENU(ID_PREVIEW, Frame::onPreview)
-	EVT_MENU(wxID_HELP, Frame::onAbout)
+//	EVT_MENU(wxID_HELP, Frame::onAbout)
 
 	EVT_MENU(ID_CODESETTING, Frame::onCodeSetting)
 	EVT_MENU(ID_LOVE2D, Frame::onCodeLove2d)

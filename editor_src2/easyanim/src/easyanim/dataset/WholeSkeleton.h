@@ -23,7 +23,7 @@ namespace eanim
 		//
 		// d2d::ICloneable interface
 		//
-		virtual WholeSkeleton* clone();
+		virtual WholeSkeleton* clone() const;
 
 		void loadFromTextFile(std::ifstream& fin, const std::vector<Node*>& nodes,
 			const std::vector<Body*>& bodies);
@@ -104,7 +104,7 @@ namespace eanim
 			//
 			// d2d::ICloneable interface
 			//
-			virtual Sprite* clone();
+			virtual Sprite* clone() const;
 
 			void loadFromTextFile(std::ifstream& fin, const std::vector<Node*>& nodes,
 				const std::vector<Body*>& bodies, const std::vector<Sprite*>& sprites);

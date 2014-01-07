@@ -29,7 +29,7 @@ FontBlankSprite::~FontBlankSprite()
 {
 }
 
-FontBlankSprite* FontBlankSprite::clone()
+FontBlankSprite* FontBlankSprite::clone() const
 {
 	FontBlankSprite* sprite = new FontBlankSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

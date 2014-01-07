@@ -39,7 +39,7 @@ namespace eanim
 
 		static Json::Value store(Layer* layer, const wxString& dlg);
 		static Json::Value store(KeyFrame* frame, const wxString& dlg);
-		static Json::Value store(d2d::ISprite* sprite, const wxString& dlg);
+		static Json::Value store(const d2d::ISprite* sprite, const wxString& dlg);
 
 	private:
 		static std::string filepath;

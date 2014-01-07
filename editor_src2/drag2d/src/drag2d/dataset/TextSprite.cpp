@@ -32,7 +32,7 @@ TextSprite::TextSprite(FontSymbol* symbol)
 	buildBounding();
 }
 
-TextSprite* TextSprite::clone()
+TextSprite* TextSprite::clone() const
 {
 	TextSprite* sprite = new TextSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

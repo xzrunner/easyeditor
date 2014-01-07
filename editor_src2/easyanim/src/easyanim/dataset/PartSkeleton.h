@@ -18,7 +18,7 @@ namespace eanim
 		//
 		// d2d::ICloneable interface
 		//
-		virtual PartSkeleton* clone();
+		virtual PartSkeleton* clone() const;
 
 		//
 		// d2d::ISerializable interface

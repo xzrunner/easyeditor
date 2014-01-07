@@ -19,7 +19,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual MeshSprite* clone();
+		virtual MeshSprite* clone() const;
 
 		//
 		// Sprite interface

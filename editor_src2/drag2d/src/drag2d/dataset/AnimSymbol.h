@@ -23,6 +23,9 @@ namespace d2d
 		{
 			std::string name;
 			std::vector<Frame*> frames;
+
+			Frame* getCurrFrame(int index) const;
+			Frame* getNextFrame(int index) const;
 		};
 
 	public:
@@ -32,7 +35,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual AnimSymbol* clone() { return NULL; }
+		virtual AnimSymbol* clone() const { return NULL; }
 
 		//
 		// ISerializable interface

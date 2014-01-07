@@ -18,7 +18,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual ChainShape* clone();
+		virtual ChainShape* clone() const;
 
 		//
 		// ISerializable interface

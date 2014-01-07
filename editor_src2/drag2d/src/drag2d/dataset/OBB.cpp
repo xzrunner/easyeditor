@@ -16,7 +16,7 @@ OBB::OBB(const OBB& obb)
 	m_angle = obb.m_angle;
 }
 
-OBB* OBB::clone()
+OBB* OBB::clone() const
 {
 	return new OBB(*this);
 }

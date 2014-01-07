@@ -14,7 +14,7 @@ AABB::AABB(const AABB& aabb)
 	m_rect = aabb.m_rect;	
 }
 
-AABB* AABB::clone()
+AABB* AABB::clone() const
 {
 	return new AABB(*this);
 }

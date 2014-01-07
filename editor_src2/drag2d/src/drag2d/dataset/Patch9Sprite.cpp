@@ -33,7 +33,7 @@ Patch9Sprite::~Patch9Sprite()
 {
 }
 
-Patch9Sprite* Patch9Sprite::clone()
+Patch9Sprite* Patch9Sprite::clone() const
 {
 	Patch9Sprite* sprite = new Patch9Sprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

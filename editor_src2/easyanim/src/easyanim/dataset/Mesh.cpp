@@ -30,7 +30,7 @@ Mesh::~Mesh()
 	clear();
 }
 
-Mesh* Mesh::clone()
+Mesh* Mesh::clone() const
 {
 	return new Mesh(*this);
 }
@@ -262,7 +262,7 @@ MeshTri::~MeshTri()
 			m_nodes[i]->release();
 }
 
-MeshTri* MeshTri::clone()
+MeshTri* MeshTri::clone() const
 {
 	return new MeshTri(*this);
 }

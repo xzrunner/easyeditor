@@ -27,7 +27,7 @@ CombinationSymbol::~CombinationSymbol()
 		m_sprites[i]->release();
 }
 
-CombinationSymbol* CombinationSymbol::clone()
+CombinationSymbol* CombinationSymbol::clone() const
 {
 	return NULL;
 }

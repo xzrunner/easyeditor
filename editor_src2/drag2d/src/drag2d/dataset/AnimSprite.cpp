@@ -28,7 +28,7 @@ AnimSprite::~AnimSprite()
 {
 }
 
-AnimSprite* AnimSprite::clone()
+AnimSprite* AnimSprite::clone() const
 {
 	AnimSprite* sprite = new AnimSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

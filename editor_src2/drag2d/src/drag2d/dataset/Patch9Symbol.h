@@ -27,7 +27,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual Patch9Symbol* clone() { return NULL; }
+		virtual Patch9Symbol* clone() const { return NULL; }
 
 		//
 		// ISerializable interface

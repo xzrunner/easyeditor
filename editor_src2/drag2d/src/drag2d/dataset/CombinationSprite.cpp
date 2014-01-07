@@ -34,7 +34,7 @@ CombinationSprite::~CombinationSprite()
 {
 }
 
-CombinationSprite* CombinationSprite::clone()
+CombinationSprite* CombinationSprite::clone() const
 {
 	CombinationSprite* sprite = new CombinationSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

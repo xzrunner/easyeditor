@@ -43,7 +43,7 @@ namespace eanim
 		//
 		// d2d::ICloneable interface
 		//
-		virtual MeshTri* clone();
+		virtual MeshTri* clone() const;
 
 		void getNodes(std::vector<MeshNode*>& nodes);
 
@@ -65,7 +65,7 @@ namespace eanim
 		//
 		// d2d::ICloneable interface
 		//
-		virtual Mesh* clone();
+		virtual Mesh* clone() const;
 
 		//
 		// d2d::ISerializable interface

@@ -17,7 +17,7 @@ MeshSymbol::~MeshSymbol()
 
 }
 
-MeshSymbol* MeshSymbol::clone() 
+MeshSymbol* MeshSymbol::clone() const 
 { 
 	return NULL; 
 }

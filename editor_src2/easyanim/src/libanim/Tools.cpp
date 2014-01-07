@@ -109,8 +109,12 @@ void Tools::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite*
 	float delta = (end->getAngle() - start->getAngle()) * process;
 	float xscale = (end->getScaleX() - start->getScaleX()) * process + start->getScaleX(),
 		yscale = (end->getScaleY() - start->getScaleY()) * process + start->getScaleY();
+	float xshear = (end->getShearX() - start->getShearX()) * process + start->getShearX(),
+		yshear = (end->getShearY() - start->getShearY()) * process + start->getShearY();
 	tween->translate(offset);
 	tween->rotate(delta);
 	tween->setScale(xscale, yscale);
+	tween->setShear(xshear, yshear);
 }
+
 } // libanim

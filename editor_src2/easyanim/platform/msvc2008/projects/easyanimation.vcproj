@@ -215,6 +215,14 @@
 					RelativePath="..\..\..\src\easyanimation\dataset\LayersMgr.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\Sprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\Sprite.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

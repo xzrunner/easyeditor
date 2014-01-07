@@ -25,7 +25,7 @@ IBody::~IBody()
 	}
 }
 
-IBody* IBody::clone()
+IBody* IBody::clone() const
 {
 	if (m_filename == "") return NULL;
 

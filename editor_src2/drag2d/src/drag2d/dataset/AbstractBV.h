@@ -16,7 +16,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual AbstractBV* clone() { return NULL; }
+		virtual AbstractBV* clone() const { return NULL; }
 
 		virtual void initFromRect(const Rect& rect) = 0;
 

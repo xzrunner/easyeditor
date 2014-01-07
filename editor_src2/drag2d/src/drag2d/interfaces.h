@@ -43,7 +43,7 @@ namespace d2d
 	class ICloneable 
 	{
 	public:
-		virtual ICloneable* clone() = 0;
+		virtual ICloneable* clone() const = 0;
 		virtual ~ICloneable() {}
 	}; // ICloneable
 

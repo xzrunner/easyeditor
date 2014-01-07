@@ -79,15 +79,17 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 
 		if (!currFrame->hasClassicTween() || !nextFrame)
 		{
-			const std::vector<d2d::ISprite*>& all = currFrame->getAllSprites();
-			for (size_t i = 0, n = all.size(); i < n; ++i)
-				sprites.push_back(all[i]->clone());
+			for (int i = 0, n = currFrame->size(); i < n; ++i) {
+				sprites.push_back(currFrame->getSprite(i)->clone());
+			}
 		}
 		else
 		{
 			assert(m_currFrame >= currFrame->getTime() && m_currFrame < nextFrame->getTime());
 			float process = (float) (m_currFrame - currFrame->getTime()) / (nextFrame->getTime() - currFrame->getTime());
-			libanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
+//			libanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
+
+			KeyFrame::getTweenSprites(currFrame, nextFrame, sprites, process);
 		}
 	}
 }

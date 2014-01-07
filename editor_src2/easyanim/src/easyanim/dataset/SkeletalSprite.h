@@ -17,7 +17,7 @@ namespace eanim
 		//
 		// d2d::ICloneable interface
 		//
-		virtual SkeletalSprite* clone();
+		virtual SkeletalSprite* clone() const;
 
 		void loadFromTextFile(std::ifstream& fin);
 		void storeToTextFile(std::ofstream& fout) const;

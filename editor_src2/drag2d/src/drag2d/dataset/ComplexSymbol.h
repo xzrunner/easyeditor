@@ -17,7 +17,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual ComplexSymbol* clone() { return NULL; }
+		virtual ComplexSymbol* clone() const { return NULL; }
 
 		//
 		// ISerializable interface

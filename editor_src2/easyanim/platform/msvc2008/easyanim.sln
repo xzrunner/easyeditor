@@ -10,13 +10,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdrag2d", "..\..\..\drag2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyanimation", "projects\easyanimation.vcproj", "{BBF6F009-A0EB-4F62-9579-5FC05DECCBE7}"
 	ProjectSection(ProjectDependencies) = postProject
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038} = {E1CFC0B9-F8A8-4F14-930A-E88A436FC038}
 		{11082ADE-13CA-49C7-9F6D-C82F69333AD7} = {11082ADE-13CA-49C7-9F6D-C82F69333AD7}
 		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbuilder", "..\..\..\easybuilder\platform\msvc2008\projects\libbuilder.vcproj", "{11082ADE-13CA-49C7-9F6D-C82F69333AD7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libanim", "projects\libanim.vcproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libanim", "projects\libanim.vcproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libshape", "..\..\..\easyshape\platform\msvc2008\projects\libshape.vcproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +44,10 @@ Global
 		{11082ADE-13CA-49C7-9F6D-C82F69333AD7}.Debug|Win32.Build.0 = Debug|Win32
 		{11082ADE-13CA-49C7-9F6D-C82F69333AD7}.Release|Win32.ActiveCfg = Release|Win32
 		{11082ADE-13CA-49C7-9F6D-C82F69333AD7}.Release|Win32.Build.0 = Release|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Debug|Win32.Build.0 = Debug|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Release|Win32.ActiveCfg = Release|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Release|Win32.Build.0 = Release|Win32
 		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Debug|Win32.Build.0 = Debug|Win32
 		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Release|Win32.ActiveCfg = Release|Win32

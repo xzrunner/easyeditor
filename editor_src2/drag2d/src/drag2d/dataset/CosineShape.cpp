@@ -29,7 +29,7 @@ CosineShape::~CosineShape()
 	
 }
 
-CosineShape* CosineShape::clone()
+CosineShape* CosineShape::clone() const
 {
 	return new CosineShape(*this);	
 }

@@ -13,7 +13,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual FontBlankSymbol* clone() { return NULL; }
+		virtual FontBlankSymbol* clone() const { return NULL; }
 
 		//
 		// ISerializable interface

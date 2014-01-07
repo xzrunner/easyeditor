@@ -17,7 +17,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual AnimSprite* clone();
+		virtual AnimSprite* clone() const;
 
 		//
 		// ISprite interface

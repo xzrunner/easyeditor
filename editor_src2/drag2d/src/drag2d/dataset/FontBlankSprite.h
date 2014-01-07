@@ -17,7 +17,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual FontBlankSprite* clone();
+		virtual FontBlankSprite* clone() const;
 
 		//
 		// ISprite interface

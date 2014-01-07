@@ -55,7 +55,7 @@ MorphingSprite::~MorphingSprite()
 	clear();
 }
 
-MorphingSprite* MorphingSprite::clone()
+MorphingSprite* MorphingSprite::clone() const
 {
 	return new MorphingSprite(*this);
 }

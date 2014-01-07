@@ -20,7 +20,7 @@ namespace d2d
 		//
 		// IObject interface
 		//	
-		virtual CombinationSymbol* clone();
+		virtual CombinationSymbol* clone() const;
 
 		//
 		// ISerializable interface

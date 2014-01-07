@@ -25,7 +25,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual PolygonShape* clone();
+		virtual PolygonShape* clone() const;
 
 		//
 		// IShape interface

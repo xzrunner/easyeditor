@@ -27,10 +27,9 @@ void Love2dCode::resolve()
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
 		{
 			KeyFrame* frame = itr->second;			
-			const std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
-			if (!sprites.empty())
+			if (frame->size() != 0)
 			{
-				d2d::ISprite* sprite = sprites[0];
+				const d2d::ISprite* sprite = frame->getSprite(0);
 				int index = query(sprite->getSymbol().getFilepath().ToStdString());
 				if (index != -1)
 				{

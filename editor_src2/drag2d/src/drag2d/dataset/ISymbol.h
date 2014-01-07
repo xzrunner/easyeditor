@@ -15,7 +15,7 @@ namespace d2d
 		//
 		// IObject interface
 		//	
-		virtual ISymbol* clone() { return NULL; }
+		virtual ISymbol* clone() const { return NULL; }
 
 		virtual void reloadTexture() const = 0;
 		virtual void draw(const ISprite* sprite = NULL) const = 0;

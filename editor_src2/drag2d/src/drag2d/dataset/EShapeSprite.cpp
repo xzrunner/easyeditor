@@ -33,7 +33,7 @@ EShapeSprite::~EShapeSprite()
 {
 }
 
-EShapeSprite* EShapeSprite::clone()
+EShapeSprite* EShapeSprite::clone() const
 {
 	EShapeSprite* sprite = new EShapeSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);
