@@ -223,6 +223,14 @@
 					RelativePath="..\..\..\src\easyanimation\dataset\Sprite.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\SpriteObserver.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\SpriteObserver.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

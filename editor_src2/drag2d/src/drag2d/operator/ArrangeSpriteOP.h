@@ -96,6 +96,8 @@ namespace d2d
 		bool m_autoAlignOpen;
 		Vector m_autoAlignHor[2], m_autoAlignVer[2];
 
+		friend class SpritePropertySetting;
+
 	}; // ArrangeSpriteOP
 }
 

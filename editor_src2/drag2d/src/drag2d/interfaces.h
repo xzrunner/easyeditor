@@ -53,4 +53,15 @@ namespace d2d
 		virtual void onCameraChanged() = 0;
 		virtual ~ICameraObserver() {}
 	}; // ICameraObserver
+
+	class ISprite;
+	class Vector;
+
+	class ISpriteObserver
+	{
+	public:
+		virtual void translate(ISprite* sprite, const Vector& offset) = 0;
+		virtual void rotate(ISprite* sprite, float delta) = 0;
+		virtual ~ISpriteObserver() {}
+	}; // ISpriteObserver
 }

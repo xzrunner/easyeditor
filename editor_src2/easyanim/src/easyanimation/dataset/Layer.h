@@ -2,6 +2,8 @@
 
 #include <drag2d.h>
 
+#include "SpriteObserver.h"
+
 namespace eanim
 {
 	class KeyFrame;
@@ -39,8 +41,15 @@ namespace eanim
 	private:
 		void clear();
 
+		std::pair<std::map<int, KeyFrame*>::iterator, bool> 
+			insert(int index, KeyFrame* frame);
+
 	private:
 		std::map<int, KeyFrame*> m_frames;
+
+		SpriteObserver m_spriteObserver;
+
+		friend class KeyFrame;
 
 	}; // Layer
 }

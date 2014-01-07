@@ -4,11 +4,17 @@
 
 namespace eanim
 {
+	class Layer;
+
 	class KeyFrame
 	{
 	public:
 		KeyFrame(int time);
 		~KeyFrame();
+
+		void setLayer(Layer* layer) {
+			m_layer = layer;
+		}
 
 		void copySprites(const KeyFrame* src);
 
@@ -53,6 +59,8 @@ namespace eanim
 		std::vector<Sprite*> m_sprites;
 
 		bool m_bClassicTween;
+
+		Layer* m_layer;
 
 	public:
 		int m_id;

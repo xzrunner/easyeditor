@@ -64,4 +64,5 @@ bool ArrangeSpriteOP::onDraw() const
 
 	return false;
 }
+
 } // eanim

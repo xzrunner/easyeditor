@@ -1,9 +1,11 @@
 #include "KeyFrame.h"
+#include "Layer.h"
 
 namespace eanim
 {
 
 KeyFrame::KeyFrame(int time)
+	: m_layer(NULL)
 {
 	m_time = time;
 	m_bClassicTween = false;
@@ -17,18 +19,33 @@ KeyFrame::~KeyFrame()
 
 void KeyFrame::copySprites(const KeyFrame* src)
 {
-	clear();
+//	clear();
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
-		m_sprites.push_back(new Sprite(src->m_sprites[i]));
+	{
+		Sprite* item = new Sprite(src->m_sprites[i]);
+		m_sprites.push_back(item);
+		if (m_layer) {
+			item->curr->setObserver(&m_layer->m_spriteObserver);
+			m_layer->m_spriteObserver.insert(item);
+		}
+	}
 }
 
 void KeyFrame::insert(d2d::ISprite* sprite) 
 {
-	m_sprites.push_back(new Sprite(sprite));
+	Sprite* item = new Sprite(sprite);
+	m_sprites.push_back(item);
+	if (m_layer) {
+		item->curr->setObserver(&m_layer->m_spriteObserver);
+		m_layer->m_spriteObserver.insert(item);
+	}
 }
 
 bool KeyFrame::remove(const d2d::ISprite* sprite) 
 {
+	if (m_layer) {
+		m_layer->m_spriteObserver.remove(sprite);
+	}
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		if (m_sprites[i]->curr == sprite) {
@@ -64,6 +81,10 @@ void KeyFrame::reorder(const d2d::ISprite* sprite, bool up)
 
 void KeyFrame::clear()
 {
+	if (m_layer) {
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+			m_layer->m_spriteObserver.remove(m_sprites[i]->curr);
+	}
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		delete m_sprites[i];
 	m_sprites.clear();

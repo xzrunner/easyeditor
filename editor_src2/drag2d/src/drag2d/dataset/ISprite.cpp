@@ -13,6 +13,7 @@ namespace d2d
 
 ISprite::ISprite()
 	: m_body(NULL)
+	, m_observer(NULL)
 {
 	m_pos.set(0.0f, 0.0f);
 	m_angle = 0.0f;
@@ -23,6 +24,7 @@ ISprite::ISprite()
 }
 
 ISprite::ISprite(const ISprite& sprite)
+	: m_observer(NULL)
 {
 	name = sprite.name;
 	multiColor = sprite.multiColor;
@@ -99,12 +101,18 @@ bool ISprite::isIntersect(const Rect& rect) const
 
 void ISprite::translate(const Vector& offset)
 {
+	if (m_observer)
+		m_observer->translate(this, offset);
+
 	m_pos += offset;
 	m_bounding->translate(offset);
 }
 
 void ISprite::rotate(float delta)
 {
+	if (m_observer)
+		m_observer->rotate(this, delta);
+
 	m_angle += delta;
 
 	m_bounding->rotate(delta);

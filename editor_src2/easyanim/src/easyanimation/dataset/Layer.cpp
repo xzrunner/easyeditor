@@ -44,7 +44,7 @@ void Layer::insertFrame(int time)
 	{
 		KeyFrame* frame = frames[i];
 		frame->setTime(frame->getTime() + 1);
-		m_frames.insert(std::make_pair(frame->getTime(), frame));
+		insert(frame->getTime(), frame);
 	}
 }
 
@@ -70,14 +70,14 @@ void Layer::removeFrame(int time)
 	{
 		KeyFrame* frame = frames[i];
 		frame->setTime(frame->getTime() - 1);
-		m_frames.insert(std::make_pair(frame->getTime(), frame));
+		insert(frame->getTime(), frame);
 	}
 }
 
 void Layer::insertKeyFrame(KeyFrame* frame)
 {
 	std::pair<std::map<int, KeyFrame*>::iterator, bool> status 
-		= m_frames.insert(std::make_pair(frame->getTime(), frame));
+		= insert(frame->getTime(), frame);
 	if (!status.second)
 	{
 		if (frame != status.first->second)
@@ -105,8 +105,8 @@ void Layer::insertKeyFrame(int time)
 		if (itr->first < time)
 		{
 			KeyFrame* frame = new KeyFrame(time);
+			insert(time, frame);
 			frame->copySprites(itr->second);
-			m_frames.insert(std::make_pair(time, frame));
 
 			if (time > Context::Instance()->maxFrame)
 				Context::Instance()->maxFrame = time;
@@ -114,10 +114,10 @@ void Layer::insertKeyFrame(int time)
 			Context::Instance()->currFrame = time;
 		}
 		else
-			m_frames.insert(std::make_pair(time, new KeyFrame(time)));
+			insert(time, new KeyFrame(time));
 	}
 	else
-		m_frames.insert(std::make_pair(1, new KeyFrame(1)));
+		insert(1, new KeyFrame(1));
 }
 
 void Layer::removeKeyFrame(int time)
@@ -194,6 +194,13 @@ void Layer::clear()
 	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
 	for ( ; itr != m_frames.end(); ++itr) delete itr->second;
 	m_frames.clear();
+}
+
+std::pair<std::map<int, KeyFrame*>::iterator, bool> 
+Layer::insert(int index, KeyFrame* frame)
+{
+	frame->setLayer(this);
+	return m_frames.insert(std::make_pair(index, frame));
 }
 
 } // eanim

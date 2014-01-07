@@ -60,6 +60,10 @@ namespace d2d
 		void updateEachFrame();
 		IBody* getBody() const;
 
+		void setObserver(ISpriteObserver* observer) {
+			m_observer = observer;
+		}
+
 		virtual void buildBounding() = 0;
 
 	private:
@@ -81,6 +85,8 @@ namespace d2d
 		AbstractBV* m_bounding;
 
 		IBody* m_body;
+
+		ISpriteObserver* m_observer;
 
 	}; // ISprite
 
