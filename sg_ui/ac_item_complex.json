@@ -1,13 +1,13 @@
 
 {
-	"name" : "notify_info_window",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "achievement_item_gb_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -16,61 +16,61 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.3815789520740509,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.2399999946355820,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg2_9patch.json",
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "claim",
+			"position" : 
+			{
+				"x" : 220.750,
+				"y" : -0.250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6103-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -26.1250
+				"x" : 132.0,
+				"y" : -1.899999618530273
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
+			"filepath" : "gift_get_fontblank.json",
 			"multi color" : "",
-			"name" : "close_button",
+			"name" : "amount",
 			"position" : 
 			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab1",
-			"position" : 
-			{
-				"x" : -312.0,
-				"y" : 277.0
+				"x" : 54.80000305175781,
+				"y" : -0.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -83,32 +83,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
+			"filepath" : "at_item_title4_fontblank.json",
 			"multi color" : "",
-			"name" : "tab2",
+			"name" : "item_title",
 			"position" : 
 			{
-				"x" : -134.0,
-				"y" : 277.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab3",
-			"position" : 
-			{
-				"x" : 44.0,
-				"y" : 277.0
+				"x" : -161.0,
+				"y" : -1.799999237060547
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

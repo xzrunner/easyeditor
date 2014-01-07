@@ -1,57 +1,95 @@
 
 {
-	"name" : "notify_info_window",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "fight_comps.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : -97.0,
+				"y" : 18.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg2_9patch.json",
+			"filepath" : "fight_comps.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -26.1250
+				"x" : -4.0,
+				"y" : 18.0
 			},
-			"x mirror" : false,
-			"x scale" : 0.50,
+			"x mirror" : true,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
+			"filepath" : "6106-tongyong-1.png",
 			"multi color" : "",
-			"name" : "close_button",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
+				"x" : -99.30001831054688,
+				"y" : 27.50
+			},
+			"x mirror" : false,
+			"x scale" : 0.4499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4499999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6105-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -99.65000915527344,
+				"y" : -34.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.4499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4499999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tttt2_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -54.0,
+				"y" : 90.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,13 +102,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
+			"filepath" : "ttttt3_fontblank.json",
 			"multi color" : "",
-			"name" : "tab1",
+			"name" : "gold_amount",
 			"position" : 
 			{
-				"x" : -312.0,
-				"y" : 277.0
+				"x" : -15.00001525878906,
+				"y" : 26.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -83,32 +121,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
+			"filepath" : "ttttt3_fontblank.json",
 			"multi color" : "",
-			"name" : "tab2",
+			"name" : "elixir_amount",
 			"position" : 
 			{
-				"x" : -134.0,
-				"y" : 277.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab3",
-			"position" : 
-			{
-				"x" : 44.0,
-				"y" : 277.0
+				"x" : -17.50,
+				"y" : -36.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

@@ -1,6 +1,6 @@
 
 {
-	"name" : "active_login",
+	"name" : "active_tuangou",
 	"sprite" : 
 	[
 		
@@ -26,13 +26,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "at_text2_fontblank.json",
+			"filepath" : "at_title_fontblank.json",
 			"multi color" : "",
-			"name" : "text2",
+			"name" : "title1",
 			"position" : 
 			{
-				"x" : -8.0,
-				"y" : 202.0
+				"x" : 0.0,
+				"y" : 221.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -45,13 +45,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ac_qaindao_item2_complex.json",
+			"filepath" : "at_text2_fontblank.json",
+			"multi color" : "",
+			"name" : "text1",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 143.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ac_item_complex.json",
 			"multi color" : "",
 			"name" : "item1",
 			"position" : 
 			{
-				"x" : -221.0,
-				"y" : 90.0
+				"x" : -1.0,
+				"y" : 65.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,13 +83,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ac_qaindao_item2_complex.json",
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "",
+			"name" : "recharge",
+			"position" : 
+			{
+				"x" : 216.750,
+				"y" : 212.250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ac_item_complex.json",
 			"multi color" : "",
 			"name" : "item2",
 			"position" : 
 			{
-				"x" : -74.0,
-				"y" : 89.99998474121094
+				"x" : -1.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -83,13 +121,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ac_qaindao_item2_complex.json",
+			"filepath" : "ac_item_complex.json",
 			"multi color" : "",
 			"name" : "item3",
 			"position" : 
 			{
-				"x" : 73.0,
-				"y" : 89.99998474121094
+				"x" : -1.0,
+				"y" : -67.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -102,13 +140,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ac_qaindao_item2_complex.json",
+			"filepath" : "ac_item_complex.json",
 			"multi color" : "",
 			"name" : "item4",
 			"position" : 
 			{
-				"x" : 227.0,
-				"y" : 89.99998474121094
+				"x" : -1.0,
+				"y" : -134.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -121,70 +159,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "ac_qaindao_item2_complex.json",
+			"filepath" : "at_time_fontblank.json",
 			"multi color" : "",
-			"name" : "item5",
+			"name" : "text2",
 			"position" : 
 			{
-				"x" : -157.0,
-				"y" : -59.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ac_qaindao_item2_complex.json",
-			"multi color" : "",
-			"name" : "item6",
-			"position" : 
-			{
-				"x" : -10.0,
-				"y" : -59.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ac_qaindao_item2_complex.json",
-			"multi color" : "",
-			"name" : "item7",
-			"position" : 
-			{
-				"x" : 145.0,
-				"y" : -59.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "claim",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -212.0
+				"x" : 189.0,
+				"y" : -193.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

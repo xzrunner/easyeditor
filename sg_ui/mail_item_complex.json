@@ -1,13 +1,13 @@
 
 {
-	"name" : "notify_info_window",
+	"name" : "mail_item",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "mail_item_bg_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -16,7 +16,7 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.4499999880790710,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.50,
@@ -26,13 +26,70 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg2_9patch.json",
+			"filepath" : "gift_get_fontblank.json",
+			"multi color" : "",
+			"name" : "amount",
+			"position" : 
+			{
+				"x" : 110.0,
+				"y" : -34.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_button_complex.json",
+			"multi color" : "",
+			"name" : "claim_button",
+			"position" : 
+			{
+				"x" : 303.750,
+				"y" : -28.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "gift.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -26.1250
+				"x" : -319.0,
+				"y" : 7.1250
+			},
+			"x mirror" : false,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "res_icon_anim.json",
+			"multi color" : "",
+			"name" : "res_icon",
+			"position" : 
+			{
+				"x" : 199.750,
+				"y" : -34.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -45,70 +102,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
+			"filepath" : "mi_info_fontblank.json",
 			"multi color" : "",
-			"name" : "close_button",
+			"name" : "text_info",
 			"position" : 
 			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab1",
-			"position" : 
-			{
-				"x" : -312.0,
-				"y" : 277.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab2",
-			"position" : 
-			{
-				"x" : -134.0,
-				"y" : 277.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab3",
-			"position" : 
-			{
-				"x" : 44.0,
-				"y" : 277.0
+				"x" : -18.0,
+				"y" : 30.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

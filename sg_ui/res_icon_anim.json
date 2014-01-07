@@ -90,6 +90,53 @@
 					"id" : 0,
 					"time" : 3,
 					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.50,
+							"filepath" : "6106-tongyong-1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -32.92838287353516,
+								"y" : 3.843852996826172
+							},
+							"x mirror" : false,
+							"x scale" : 0.8000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.8000000119209290,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "",
+							"angle" : -0.6999999880790710,
+							"filepath" : "6105-tongyong-1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 17.0,
+								"y" : 5.0
+							},
+							"x mirror" : false,
+							"x scale" : 0.8034699559211731,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.8034699559211731,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 4,
+					"tween" : false
 				}
 			],
 			"name" : "Layer0"

@@ -344,6 +344,25 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "figt_cps_complex.json",
+			"multi color" : "",
+			"name" : "cps",
+			"position" : 
+			{
+				"x" : 464.0,
+				"y" : 64.32785034179688
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }

@@ -1,13 +1,13 @@
 
 {
-	"name" : "notify_info_window",
+	"name" : "active_eval",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "active_bg3_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -16,7 +16,7 @@
 				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.4615384638309479,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.50,
@@ -26,32 +26,70 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg2_9patch.json",
+			"filepath" : "at_title_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 229.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "at_text11_fontblank.json",
+			"multi color" : "",
+			"name" : "text",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 21.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_line_complex.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -26.1250
+				"y" : -187.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.50,
+			"x scale" : 0.7200000286102295,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "close_button_complex.json",
+			"filepath" : "prg_bar_complex.json",
 			"multi color" : "",
-			"name" : "close_button",
+			"name" : "prg_bar",
 			"position" : 
 			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
+				"x" : -96.0,
+				"y" : -218.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -64,51 +102,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
+			"filepath" : "at_time_fontblank.json",
 			"multi color" : "",
-			"name" : "tab1",
+			"name" : "time",
 			"position" : 
 			{
-				"x" : -312.0,
-				"y" : 277.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab2",
-			"position" : 
-			{
-				"x" : -134.0,
-				"y" : 277.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab3",
-			"position" : 
-			{
-				"x" : 44.0,
-				"y" : 277.0
+				"x" : 190.0,
+				"y" : -219.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
