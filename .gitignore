@@ -15,6 +15,11 @@
 deprecated
 .svn
 
+/sg_characters/data
+/sg_lowlow/data
+/sg_other/data
+/sg_loading_mmzb/data
+/sg_particle/data
 /characters_import/characters2*
 /scene_import/build
 /scene_import/data
