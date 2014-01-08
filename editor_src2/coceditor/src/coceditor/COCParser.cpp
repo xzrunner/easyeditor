@@ -251,11 +251,21 @@ void COCParser::prepareMapSymbolPic()
 				const d2d::ISymbol* s = m_outList[k];
 				std::string filepath = s->getFilepath();
 				d2d::FilenameTools::formatSeparators(filepath);
- 				if (filepath.find(entry.filename) != std::string::npos)
- 				{
- 					symbol = s;
- 					break;
- 				}
+
+				bool find = false;
+				if (entry.filename.find("/") == std::string::npos) {
+					if (filepath.find("/"+entry.filename) != std::string::npos)
+						find = true;
+				} else {
+					if (filepath.find(entry.filename) != std::string::npos)
+						find = true;
+				}
+
+				if (find)
+				{
+					symbol = s;
+					break;
+				}
 			}
 			if (!symbol) continue;
 
