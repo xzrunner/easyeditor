@@ -1,6 +1,7 @@
 
 {
 	"name" : "ac_info",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -28,11 +29,11 @@
 			"angle" : 0.0,
 			"filepath" : "ac_text_area_fontblank.json",
 			"multi color" : "",
-			"name" : "ac_text_area",
+			"name" : "text_area",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : -4.0,
+				"y" : 1.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -41,5 +42,6 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"undo" : null
 }

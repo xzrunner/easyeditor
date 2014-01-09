@@ -1,6 +1,7 @@
 
 {
 	"name" : "active_eval",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -50,7 +51,7 @@
 			"name" : "text",
 			"position" : 
 			{
-				"x" : 0.0,
+				"x" : -4.0,
 				"y" : 21.0
 			},
 			"x mirror" : false,
@@ -107,7 +108,7 @@
 			"name" : "time",
 			"position" : 
 			{
-				"x" : 190.0,
+				"x" : 180.0,
 				"y" : -219.0
 			},
 			"x mirror" : false,
@@ -117,5 +118,6 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"undo" : null
 }

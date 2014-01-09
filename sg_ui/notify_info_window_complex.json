@@ -1,6 +1,7 @@
 
 {
 	"name" : "notify_info_window",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -116,6 +117,48 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "number_of_entrys_complex.json",
+			"multi color" : "",
+			"name" : "number",
+			"position" : 
+			{
+				"x" : 123.0,
+				"y" : 302.9499816894531
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 769.0,
+				"dy" : 16.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 5.0,
+				"type" : 0
+			}
 		}
 	]
 }

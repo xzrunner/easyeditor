@@ -1,6 +1,7 @@
 
 {
 	"name" : "",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -9,7 +10,7 @@
 			"angle" : 0.0,
 			"filepath" : "info_bar_complex.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "bar",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -41,5 +42,6 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"undo" : null
 }
