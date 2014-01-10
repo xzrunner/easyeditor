@@ -7,38 +7,19 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "fight_comps.png",
+			"filepath" : "6205-biankuang-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -97.0,
-				"y" : 18.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 47.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "fight_comps.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -4.0,
-				"y" : 18.0
-			},
-			"x mirror" : true,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 52.50,
 			"y shear" : 0.0
 		},
 		
@@ -50,8 +31,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -99.30001831054688,
-				"y" : 27.50
+				"x" : -66.30001831054688,
+				"y" : 10.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.4499999880790710,
@@ -69,8 +50,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -99.65000915527344,
-				"y" : -34.0
+				"x" : -63.65001678466797,
+				"y" : -57.250
 			},
 			"x mirror" : false,
 			"x scale" : 0.4499999880790710,
@@ -88,8 +69,8 @@
 			"name" : "title",
 			"position" : 
 			{
-				"x" : -54.0,
-				"y" : 90.0
+				"x" : -3.000015258789063,
+				"y" : 72.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -107,8 +88,8 @@
 			"name" : "gold_amount",
 			"position" : 
 			{
-				"x" : -15.00001525878906,
-				"y" : 26.750
+				"x" : 17.99998474121094,
+				"y" : 11.250
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -126,14 +107,33 @@
 			"name" : "elixir_amount",
 			"position" : 
 			{
-				"x" : -17.50,
-				"y" : -36.0
+				"x" : 17.99998474121094,
+				"y" : -60.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_icon_bg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.058201074600220,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8593750,
 			"y shear" : 0.0
 		}
 	]

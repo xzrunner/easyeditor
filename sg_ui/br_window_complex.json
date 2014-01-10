@@ -1,6 +1,7 @@
 
 {
 	"name" : "end_of_battle_screen_new",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -354,8 +355,8 @@
 			"name" : "cps",
 			"position" : 
 			{
-				"x" : 464.0,
-				"y" : 64.32785034179688
+				"x" : 387.1610107421875,
+				"y" : -11.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -363,6 +364,59 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 18 ],
+			"val" : 
+			{
+				"dx" : -11.0,
+				"dy" : -49.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 18 ],
+			"val" : 
+			{
+				"dx" : -22.0,
+				"dy" : -2.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 18 ],
+			"val" : 
+			{
+				"dx" : -36.0,
+				"dy" : -9.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 18 ],
+			"val" : 
+			{
+				"dx" : -3.0,
+				"dy" : -6.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 18 ],
+			"val" : 
+			{
+				"dx" : -1.0,
+				"dy" : -9.0,
+				"type" : 0
+			}
 		}
 	]
 }
