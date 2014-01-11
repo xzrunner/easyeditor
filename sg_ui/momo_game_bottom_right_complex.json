@@ -1,6 +1,7 @@
 
 {
 	"name" : "momo_ui_bottom_right",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -230,6 +231,48 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "button_ps_complex.json",
+			"multi color" : "",
+			"name" : "ps",
+			"position" : 
+			{
+				"x" : -641.250,
+				"y" : 54.81250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : -51.0,
+				"dy" : 147.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -2.0,
+				"type" : 0
+			}
 		}
 	]
 }

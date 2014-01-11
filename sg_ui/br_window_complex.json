@@ -312,44 +312,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "share_button",
-			"position" : 
-			{
-				"x" : -132.1341552734375,
-				"y" : -288.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "provoke",
-			"position" : 
-			{
-				"x" : -324.0,
-				"y" : -288.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "figt_cps_complex.json",
 			"multi color" : "",
 			"name" : "cps",
@@ -364,13 +326,51 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_big_button_complex.json",
+			"multi color" : "",
+			"name" : "provoke",
+			"position" : 
+			{
+				"x" : -245.6341552734375,
+				"y" : -297.4939270019531
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "yellow_big_button_complex.json",
+			"multi color" : "",
+			"name" : "share_button",
+			"position" : 
+			{
+				"x" : 23.250,
+				"y" : -297.4939270019531
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"undo" : 
 	[
 		
 		{
-			"sprites" : [ 18 ],
+			"sprites" : [ 16 ],
 			"val" : 
 			{
 				"dx" : -11.0,
@@ -380,7 +380,7 @@
 		},
 		
 		{
-			"sprites" : [ 18 ],
+			"sprites" : [ 16 ],
 			"val" : 
 			{
 				"dx" : -22.0,
@@ -390,7 +390,7 @@
 		},
 		
 		{
-			"sprites" : [ 18 ],
+			"sprites" : [ 16 ],
 			"val" : 
 			{
 				"dx" : -36.0,
@@ -400,7 +400,7 @@
 		},
 		
 		{
-			"sprites" : [ 18 ],
+			"sprites" : [ 16 ],
 			"val" : 
 			{
 				"dx" : -3.0,
@@ -410,11 +410,77 @@
 		},
 		
 		{
-			"sprites" : [ 18 ],
+			"sprites" : [ 16 ],
 			"val" : 
 			{
 				"dx" : -1.0,
 				"dy" : -9.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 52.0,
+				"dy" : 21.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ -1 ],
+			"val" : 
+			{
+				"type" : 2
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 27.0,
+				"dy" : 95.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ -1 ],
+			"val" : 
+			{
+				"type" : 2
+			}
+		},
+		
+		{
+			"sprites" : [ 18 ],
+			"val" : 
+			{
+				"dx" : -60.0,
+				"dy" : 101.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 18 ],
+			"val" : 
+			{
+				"dx" : 28.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 45.0,
+				"dy" : 1.0,
 				"type" : 0
 			}
 		}
