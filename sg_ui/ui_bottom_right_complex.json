@@ -1,6 +1,7 @@
 
 {
 	"name" : "ui_bottom_right",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -211,6 +212,27 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ -1 ],
+			"val" : 
+			{
+				"dx" : -42.0,
+				"dy" : 132.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ -1 ],
+			"val" : 
+			{
+				"type" : 2
+			}
 		}
 	]
 }
