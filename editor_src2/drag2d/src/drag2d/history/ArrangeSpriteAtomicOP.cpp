@@ -39,6 +39,7 @@ SpritesAOP::~SpritesAOP()
 Json::Value SpritesAOP::store(const std::vector<ISprite*>& sprites)
 {
 	Json::Value ret;
+	int count = 0;
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		int ptr = -1;
@@ -48,10 +49,13 @@ Json::Value SpritesAOP::store(const std::vector<ISprite*>& sprites)
 				break;
 			}
 		}
-		ret["sprites"][i] = ptr;
+		if (ptr != -1) {
+			ret["sprites"][count++] = ptr;
+		}
 	}
 
-	ret["val"] = storeValues();
+	if (count != 0)
+		ret["val"] = storeValues();
 
 	return ret;
 }
