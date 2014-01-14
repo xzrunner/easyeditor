@@ -26,31 +26,12 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "claim",
-			"position" : 
-			{
-				"x" : 220.750,
-				"y" : -0.250
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "6103-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 132.0,
+				"x" : 102.0,
 				"y" : -1.899999618530273
 			},
 			"x mirror" : false,
@@ -69,7 +50,7 @@
 			"name" : "amount",
 			"position" : 
 			{
-				"x" : 54.80000305175781,
+				"x" : 22.80000305175781,
 				"y" : -0.50
 			},
 			"x mirror" : false,
@@ -88,8 +69,27 @@
 			"name" : "item_title",
 			"position" : 
 			{
-				"x" : -161.0,
+				"x" : -168.0,
 				"y" : -1.799999237060547
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "title_fontblank.json",
+			"multi color" : "",
+			"name" : "status",
+			"position" : 
+			{
+				"x" : 231.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

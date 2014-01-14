@@ -1,6 +1,7 @@
 
 {
 	"name" : "active_tuangou",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -45,32 +46,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "at_text2_fontblank.json",
-			"multi color" : "",
-			"name" : "text1",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 143.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "ac_item_complex.json",
 			"multi color" : "",
 			"name" : "item1",
 			"position" : 
 			{
 				"x" : -1.0,
-				"y" : 65.0
+				"y" : 19.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -108,7 +90,7 @@
 			"position" : 
 			{
 				"x" : -1.0,
-				"y" : 0.0
+				"y" : -45.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -127,7 +109,7 @@
 			"position" : 
 			{
 				"x" : -1.0,
-				"y" : -67.0
+				"y" : -108.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -146,7 +128,7 @@
 			"position" : 
 			{
 				"x" : -1.0,
-				"y" : -134.0
+				"y" : -171.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -164,8 +146,46 @@
 			"name" : "text2",
 			"position" : 
 			{
-				"x" : 189.0,
-				"y" : -193.0
+				"x" : 180.0,
+				"y" : -238.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -211.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "at_text3_fontblank.json",
+			"multi color" : "",
+			"name" : "text1",
+			"position" : 
+			{
+				"x" : -5.0,
+				"y" : 124.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -174,5 +194,6 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"undo" : null
 }
