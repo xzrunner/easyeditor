@@ -1,6 +1,14 @@
 {"frames": [
 
 {
+	"filename": "0536239772.png",
+	"frame": {"x":1009,"y":503,"w":239,"h":236},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":239,"h":236},
+	"sourceSize": {"w":239,"h":236}
+},
+{
 	"filename": "6151-tongyong-h3-2.png",
 	"frame": {"x":3,"y":766,"w":357,"h":609},
 	"rotated": false,
@@ -10,8 +18,8 @@
 },
 {
 	"filename": "6154-tongyong-1.png",
-	"frame": {"x":1204,"y":789,"w":391,"h":380},
-	"rotated": true,
+	"frame": {"x":1637,"y":318,"w":391,"h":380},
+	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":391,"h":380},
 	"sourceSize": {"w":391,"h":380}
@@ -26,7 +34,7 @@
 },
 {
 	"filename": "6162-tongyong-1.PNG",
-	"frame": {"x":778,"y":757,"w":448,"h":422},
+	"frame": {"x":917,"y":1217,"w":448,"h":422},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":235,"y":357,"w":448,"h":422},
@@ -49,6 +57,22 @@
 	"sourceSize": {"w":302,"h":299}
 },
 {
+	"filename": "6174-tongyong-5.PNG",
+	"frame": {"x":1773,"y":3,"w":218,"h":311},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":218,"h":311},
+	"sourceSize": {"w":218,"h":311}
+},
+{
+	"filename": "6181-vip.png",
+	"frame": {"x":778,"y":757,"w":456,"h":216},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":24,"y":143,"w":456,"h":216},
+	"sourceSize": {"w":500,"h":500}
+},
+{
 	"filename": "6452-gaoguang-1.png",
 	"frame": {"x":651,"y":503,"w":354,"h":250},
 	"rotated": false,
@@ -66,8 +90,8 @@
 },
 {
 	"filename": "gift.png",
-	"frame": {"x":1588,"y":789,"w":362,"h":364},
-	"rotated": true,
+	"frame": {"x":1038,"y":1669,"w":362,"h":364},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":14,"y":22,"w":362,"h":364},
 	"sourceSize": {"w":400,"h":400}
@@ -82,24 +106,24 @@
 },
 {
 	"filename": "jy-1004-shield-1.png",
-	"frame": {"x":1476,"y":433,"w":392,"h":352},
-	"rotated": false,
+	"frame": {"x":1404,"y":1651,"w":392,"h":352},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":55,"y":75,"w":392,"h":352},
 	"sourceSize": {"w":500,"h":500}
 },
 {
 	"filename": "jy-1004-shield-2.png",
-	"frame": {"x":1038,"y":1661,"w":434,"h":384},
-	"rotated": false,
+	"frame": {"x":1249,"y":318,"w":434,"h":384},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":32,"y":43,"w":434,"h":384},
 	"sourceSize": {"w":500,"h":500}
 },
 {
 	"filename": "jy-1004-shield-3.png",
-	"frame": {"x":1476,"y":3,"w":438,"h":426},
-	"rotated": false,
+	"frame": {"x":1343,"y":1209,"w":438,"h":426},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":23,"y":1,"w":438,"h":426},
 	"sourceSize": {"w":500,"h":500}
@@ -122,7 +146,7 @@
 },
 {
 	"filename": "jy-1005-shopcat-3.png",
-	"frame": {"x":917,"y":1209,"w":400,"h":448},
+	"frame": {"x":998,"y":757,"w":400,"h":448},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":48,"y":6,"w":400,"h":448},
@@ -151,6 +175,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:775f0368f8f22d7d3b37f1763748b48d$"
+	"smartupdate": "$TexturePacker:SmartUpdate:a286586a2f97aee9b04efbb2d40a0e38$"
 }
 }
