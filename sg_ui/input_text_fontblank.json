@@ -4,7 +4,7 @@
 	"color" : "0xff3d3a5a",
 	"font" : "",
 	"height" : 25.0,
-	"name" : "se_ejoy_account",
+	"name" : "input_text",
 	"size" : 15.0,
-	"width" : 180.0
+	"width" : 200.0
 }

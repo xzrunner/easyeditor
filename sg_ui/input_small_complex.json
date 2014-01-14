@@ -1,15 +1,15 @@
 
 {
-	"name" : "",
+	"name" : "input_small",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "yellow_button_9patch.json",
+			"filepath" : "input_bg_small_9patch.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "frame",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -19,20 +19,20 @@
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.6000000238418579,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "title2_fontblank.json",
+			"filepath" : "input_text_fontblank.json",
 			"multi color" : "",
 			"name" : "title",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : -4.0,
+				"y" : 0.5000009536743164
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
