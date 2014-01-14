@@ -1,6 +1,7 @@
 
 {
 	"name" : "",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -26,7 +27,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "title_fontblank.json",
+			"filepath" : "title2_fontblank.json",
 			"multi color" : "",
 			"name" : "title",
 			"position" : 
@@ -40,6 +41,27 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ -1 ],
+			"val" : 
+			{
+				"type" : 2
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 246.0,
+				"dy" : -210.0,
+				"type" : 0
+			}
 		}
 	]
 }
