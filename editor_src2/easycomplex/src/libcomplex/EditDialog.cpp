@@ -43,7 +43,7 @@ namespace libcomplex
 
 		StagePanel* stage = new StagePanel(leftVerticalSplitter, this, m_symbol, property, library);
 		m_stage = stage;
-		property->setPropertySetting(new d2d::SymbolPropertySetting(stage, m_symbol));
+		property->setPropertySetting(new d2d::ComplexPropertySetting(stage, m_symbol));
 
 //		ToolbarPanel* toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage, context->property);
 

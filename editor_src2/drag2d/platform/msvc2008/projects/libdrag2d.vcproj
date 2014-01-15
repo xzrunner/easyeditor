@@ -1780,6 +1780,14 @@
 					Name="symbol"
 					>
 					<File
+						RelativePath="..\..\..\src\drag2d\view\ComplexPropertySetting.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\ComplexPropertySetting.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\view\Scale9PropertySetting.cpp"
 						>
 					</File>

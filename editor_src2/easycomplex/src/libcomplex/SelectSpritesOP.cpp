@@ -53,7 +53,7 @@ SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
 	if (sprite)
 		return d2d::SelectSpritesOP::createPropertySetting(sprite);
 	else
-		return new d2d::SymbolPropertySetting(m_editPanel, static_cast<StagePanel*>(m_editPanel)->getSymbol());
+		return new d2d::ComplexPropertySetting(m_editPanel, static_cast<StagePanel*>(m_editPanel)->getSymbol());
 }
 
 } // libcomplex

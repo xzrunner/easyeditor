@@ -69,6 +69,7 @@
 #include "view/MultiSpritesPropertySetting.h"
 #include "view/TextPropertySetting.h"
 #include "view/SymbolPropertySetting.h"
+#include "view/ComplexPropertySetting.h"
 #include "view/DialogStageCanvas.h"
 #include "view/SpriteStageCanvas.h"
 #include "view/ShapeStageCanvas.h"

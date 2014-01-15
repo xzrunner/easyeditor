@@ -57,7 +57,16 @@ namespace d2d
 		static const float SCALE;
 
 	public:
+		struct Group
+		{
+			std::string name;
+			std::vector<ISprite*> members;
+		};
+
+	public:
 		std::vector<ISprite*> m_sprites;
+
+		std::vector<Group> m_groups;
 
 		Rect m_rect;
 

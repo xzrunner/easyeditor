@@ -62,7 +62,7 @@ namespace ecomplex
 		property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
 		stage = m_stage = new libcomplex::StagePanel(leftVerticalSplitter, m_parent, m_property, m_library);
-		m_property->setPropertySetting(new d2d::SymbolPropertySetting(m_stage, m_stage->getSymbol()));
+		m_property->setPropertySetting(new d2d::ComplexPropertySetting(m_stage, m_stage->getSymbol()));
 
 //		context->toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage, context->property);
 

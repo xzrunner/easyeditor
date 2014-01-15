@@ -18,7 +18,11 @@ namespace d2d
 		virtual void updatePropertyGrid(PropertySettingPanel* panel);
 		virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
 
-	private:
+	protected:
+		virtual void updateProperties(wxPropertyGrid* pg);
+		virtual void initProperties(wxPropertyGrid* pg);
+
+	protected:
 		ISymbol* m_symbol;
 
 		std::string* m_name;
