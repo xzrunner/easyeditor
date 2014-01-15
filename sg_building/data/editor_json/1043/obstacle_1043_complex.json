@@ -1,0 +1,45 @@
+
+{
+	"name" : "obstacle_1043",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\shadow_circle.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -31.48518371582031,
+				"y" : 14.40014266967773
+			},
+			"x mirror" : false,
+			"x scale" : 3.234065055847168,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 3.234065055847168,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\1043_3.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

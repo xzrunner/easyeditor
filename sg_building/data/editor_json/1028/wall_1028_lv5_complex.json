@@ -1,0 +1,17 @@
+{
+	"name": "wall_1028_lv5",
+	"sprite": [
+		{
+			"angle": 0.0,
+			"filepath": "..\\..\\pngs\\1028_1_lv5_01.png",
+			"name": "",
+			"position": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"scale": 1.0,
+			"x mirror": false,
+			"y mirror": false
+		}
+	]
+}

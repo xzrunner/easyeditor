@@ -1,0 +1,64 @@
+
+{
+	"name" : "building_1012_lv8",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\1107_1.PNG",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -12.0,
+				"y" : -6.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8500000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8500000238418579,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\1012_3_lv8.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_1012_ani_1_anim.json",
+			"multi color" : "",
+			"name" : "resource",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 39.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

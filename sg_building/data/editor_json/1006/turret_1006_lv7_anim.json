@@ -1,0 +1,241 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_01.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 1,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_02.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 46,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_03.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 91,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_04.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 136,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_05.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 181,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_06.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 226,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_07.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 271,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_08.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 316,
+					"tween" : false
+				},
+				{
+					"actor" : 
+					[
+						
+						{
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1006_3_lv7_08.png",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 360,
+					"tween" : false
+				}
+			],
+			"name" : "Layer1"
+		}
+	],
+	"name" : ""
+}

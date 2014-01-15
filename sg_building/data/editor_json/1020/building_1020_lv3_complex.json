@@ -1,0 +1,64 @@
+
+{
+	"name" : "building_1020_lv3",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\shadow_circle.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -26.20423126220703,
+				"y" : -7.613113403320313
+			},
+			"x mirror" : false,
+			"x scale" : 2.580105781555176,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 2.580105781555176,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\1020_3_lv2_02.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\1020_3_lv3_01.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -32,8 +32,9 @@ deprecated
 
 /misc_import/data
 
-/sg_building/data
+/sg_building/output
 /sg_building/other
+/sg_building_bak
 
 /cocres_decode/output
 /cloud_import/data

@@ -1,0 +1,17 @@
+{
+	"name": "scaffold_1023_x4",
+	"sprite": [
+		{
+			"angle": 0.0,
+			"filepath": "..\\..\\pngs\\1023_4_lV1.png",
+			"name": "",
+			"position": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"scale": 1.0,
+			"x mirror": false,
+			"y mirror": false
+		}
+	]
+}

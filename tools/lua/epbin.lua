@@ -53,6 +53,7 @@ local _env = _ENV
 _env.picture = picture
 _env.animation = animation
 _env.texture = texture
+assert(filename, "filename is empty")
 f = assert(loadfile (filename , "t", _env))
 f()
 

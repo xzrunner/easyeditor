@@ -1,0 +1,45 @@
+
+{
+	"name" : "building_1008_lv7",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\shadow_circle.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -29.33738327026367,
+				"y" : -20.12053298950195
+			},
+			"x mirror" : false,
+			"x scale" : 2.931614875793457,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 2.931614875793457,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\1008_3_lv7.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

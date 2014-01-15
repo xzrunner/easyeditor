@@ -1,0 +1,36 @@
+{
+	"name": "deco_1050",
+	"sprite": [
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\shadow_circle.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -23.58857727050781,
+				"y" : 16.81933593750
+			},
+			"x mirror" : false,
+			"x scale" : 2.202214479446411,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 2.202214479446411,
+			"y shear" : 0.0
+		},
+		{
+			"angle": 0.0,
+			"filepath": "..\\..\\pngs\\1050_2.png",
+			"name": "",
+			"position": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"scale": 1.0,
+			"x mirror": false,
+			"y mirror": false
+		}
+	]
+}

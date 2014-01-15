@@ -1,0 +1,45 @@
+
+{
+	"name" : "trap_1031_setup",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\shadow_circle.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -13.27502822875977,
+				"y" : 1.676288604736328
+			},
+			"x mirror" : false,
+			"x scale" : 0.7818755507469177,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.7818755507469177,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "trap_1031_setup_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

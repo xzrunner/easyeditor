@@ -9,28 +9,51 @@ CONV = r'..\data\lua\building_convert.lua'
 
 PATH_SHARE_EP = r'd:\share\coc\ep\ '
 
-WORK_ITEMS = [
-        (
-            r'..\data\json',
-            r'..\data\pack\buildings2',
-            r'..\data\pack\buildings2.tmp.lua',
-            '1.0',
-            r'..\data\pack\buildings2.lua',
-            r'..\data\pack\buildings2.ep',
-        ),
-        (
-            r'..\data\json',
-            r'..\data\pack\buildings2_lowres',
-            r'..\data\pack\buildings2_lowres.tmp.lua',
-            '0.5',
-            r'..\data\pack\buildings2_lowres.lua',
-            r'..\data\pack\buildings2_lowres.ep',
-        ),
-    ]
+_pjoin = os.path.join
 
-def run_cmd(cmd):
+def _run_cmd(cmd):
     print cmd
     os.system(cmd)
+
+def _mkdir(path):
+    if not os.path.isdir(path):
+        _run_cmd('MKDIR "%s"' % path)
+    return path
+
+def data_dir(*args):
+    return _pjoin('..', 'data', *args)
+
+def output_dir(*args):
+    return _pjoin('..', 'output', *args)
+
+WORK_ITEMS = [
+        {
+            'editor_json':  data_dir('editor_json'),
+            'texpack_json': data_dir('texpack_json', 'buildings2'),
+            'texpack_tex':  data_dir('texpack_tex'),
+            'tmp_lua':      output_dir('buildings2.tmp.lua'),
+            'scale':        '1.0',
+            'output_dir':   output_dir(),
+            'output_lua':   output_dir('buildings2.lua'),
+            'output_ep':    output_dir('buildings2.ep'),
+        },
+        #(
+        #    r'..\data\json',
+        #    r'..\data\pack\buildings2',
+        #    r'..\data\output\buildings2.tmp.lua',
+        #    '1.0',
+        #    r'..\data\output\buildings2.lua',
+        #    r'..\data\output\buildings2.ep',
+        #),
+        #(
+        #    r'..\data\json',
+        #    r'..\data\pack\buildings2_lowres',
+        #    r'..\data\output\buildings2_lowres.tmp.lua',
+        #    '0.5',
+        #    r'..\data\output\buildings2_lowres.lua',
+        #    r'..\data\output\buildings2_lowres.ep',
+        #),
+    ]
 
 if len(sys.argv) != 2:
     print "usage: %s options" % os.path.basename(sys.argv[0])
@@ -45,18 +68,23 @@ if len(sys.argv) != 2:
 else:
     options = sys.argv[1]
 
-for ed_json, tp_json, tmp_lua, scale, lua, ep in WORK_ITEMS:
+for entry in WORK_ITEMS:
+    _mkdir(entry["output_dir"])
+
+# for ed_json, tp_json, tmp_lua, scale, lua, ep in WORK_ITEMS:
+for entry in WORK_ITEMS:
     if '1' in options:
-        run_cmd('%s %s %s %s %s' % (COCPACK, ed_json, tp_json, tmp_lua, scale))
+        _run_cmd('%s %s %s %s %s' % (COCPACK, entry["editor_json"], entry["texpack_json"], entry["tmp_lua"], entry["scale"]))
 
     if '2' in options:
-        run_cmd('%s %s %s %s' % (LUA, CONV, tmp_lua, lua))
+        _run_cmd('%s %s %s %s' % (LUA, CONV, entry["tmp_lua"], entry["output_lua"]))
 
     if '3' in options:
-        run_cmd('%s %s -pvr %s' % (LUA, EPBIN, lua))
+        _run_cmd("copy /Y %s %s" % (_pjoin(entry["texpack_tex"], '*'), entry["output_dir"]))
+        _run_cmd('%s %s -pd -pvr %s' % (LUA, EPBIN, entry["output_lua"]))
 
     if '4' in options:
-        run_cmd('copy /Y %s %s' % (ep, PATH_SHARE_EP))
+        _run_cmd('copy /Y %s %s' % (entry["output_ep"], PATH_SHARE_EP))
 
 print ""
 print "================================================="

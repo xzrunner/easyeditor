@@ -1,0 +1,53 @@
+{
+	"name": "building_1009_lv6",
+	"sprite": [
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_1009_ani_1_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 1.099998474121094,
+				"y" : 16.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.658660888671875,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.658660888671875,
+			"y shear" : 0.0
+		},
+		{
+			"angle": 0.0,
+			"filepath": "..\\..\\pngs\\1009_2_lv6_01.png",
+			"name": "",
+			"position": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"scale": 1.0,
+			"x mirror": false,
+			"y mirror": false
+		},
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_1009_ani_2_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 7.152557373046875e-007,
+				"y" : 220.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

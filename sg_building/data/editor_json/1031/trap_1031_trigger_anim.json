@@ -1,0 +1,155 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1031_1_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.08104383945465088,
+								"y" : -1.351646423339844
+							},
+							"x mirror" : false,
+							"x scale" : 0.1000000014901161,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.1000000014901161,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 1,
+					"tween" : true
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1031_1_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.7103357315063477,
+								"y" : -10.15865707397461
+							},
+							"x mirror" : false,
+							"x scale" : 0.8999999761581421,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.8999999761581421,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 5,
+					"tween" : true
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1031_1_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.7103357315063477,
+								"y" : -11.15865707397461
+							},
+							"x mirror" : false,
+							"x scale" : 1.144772171974182,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.144772171974182,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 10,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1031_1_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -1.0,
+								"y" : -10.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 12,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1031_1_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : -12.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.139999985694885,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.139999985694885,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 14,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : ""
+}

@@ -1,0 +1,211 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1032_1_lv2_03_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.1939740180969238,
+								"y" : -7.218849182128906
+							},
+							"x mirror" : false,
+							"x scale" : 0.1626131087541580,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.1626131087541580,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 1,
+					"tween" : true
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1032_1_lv2_03_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.521215438842773,
+								"y" : -40.0
+							},
+							"x mirror" : false,
+							"x scale" : 0.8999999761581421,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.8999999761581421,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 3,
+					"tween" : true
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1032_1_lv2_03_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -8.436349868774414,
+								"y" : -53.40595245361328
+							},
+							"x mirror" : false,
+							"x scale" : 1.200000047683716,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.200000047683716,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 6,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1032_1_lv2_03_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.999998092651367,
+								"y" : -44.06966400146484
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 8,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1032_1_lv2_03_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -7.718173980712891,
+								"y" : -48.85750198364258
+							},
+							"x mirror" : false,
+							"x scale" : 1.100000023841858,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.100000023841858,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 10,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1032_1_lv2_03_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.999998092651367,
+								"y" : -43.83027267456055
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 12,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\1032_1_lv2_03_1.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.999998092651367,
+								"y" : -44.06966400146484
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 52,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : ""
+}
