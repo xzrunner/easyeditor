@@ -1,6 +1,7 @@
 
 {
-	"name" : "",
+	"name" : "yellow_button",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -41,5 +42,6 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"undo" : null
 }

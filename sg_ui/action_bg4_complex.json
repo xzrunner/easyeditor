@@ -1,6 +1,6 @@
 
 {
-	"name" : "pop_up_player_actions",
+	"name" : "action_bg4",
 	"redo" : null,
 	"sprite" : 
 	[
@@ -20,7 +20,7 @@
 			"x scale" : 0.6680327653884888,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 26.10555648803711,
+			"y scale" : 28.0,
 			"y shear" : 0.0
 		},
 		
@@ -33,7 +33,7 @@
 			"position" : 
 			{
 				"x" : 100.50,
-				"y" : 125.50
+				"y" : 134.0249938964844
 			},
 			"x mirror" : false,
 			"x scale" : 0.6680327653884888,
@@ -64,82 +64,6 @@
 		
 		{
 			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "Button1",
-			"position" : 
-			{
-				"x" : 101.0,
-				"y" : 68.750
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "player_name_fontblank.json",
-			"multi color" : "",
-			"name" : "player_name",
-			"position" : 
-			{
-				"x" : 101.0,
-				"y" : 113.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "Button2",
-			"position" : 
-			{
-				"x" : 101.0,
-				"y" : 4.750
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "Button3",
-			"position" : 
-			{
-				"x" : 101.0,
-				"y" : -60.250
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
 			"angle" : 4.710000038146973,
 			"filepath" : "14663271495571.png",
 			"multi color" : "",
@@ -147,7 +71,7 @@
 			"position" : 
 			{
 				"x" : 100.0,
-				"y" : -128.6798400878906
+				"y" : -138.6798400878906
 			},
 			"x mirror" : false,
 			"x scale" : 0.6999999880790710,
@@ -161,7 +85,7 @@
 	[
 		
 		{
-			"sprites" : [ 7 ],
+			"sprites" : [ 3 ],
 			"val" : 
 			{
 				"old" : 
@@ -176,6 +100,91 @@
 				"xscale" : 0.6999999880790710,
 				"yscale" : 0.6700000166893005
 			}
-		}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6680327653884888,
+						"y" : 26.10555648803711
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6680327653884888,
+				"yscale" : 30.0
+			}
+		},
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -20.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6680327653884888,
+						"y" : 30.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6680327653884888,
+				"yscale" : 28.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : 8.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 8.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 2.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		null,
+		null,
+		null
 	]
 }

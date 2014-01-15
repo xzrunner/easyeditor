@@ -1,6 +1,7 @@
 
 {
 	"name" : "momo_rank_item_2nd",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -140,25 +141,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "",
-			"name" : "visit",
-			"position" : 
-			{
-				"x" : 285.0,
-				"y" : 0.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "6126-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
@@ -230,6 +212,83 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_mark_anim.json",
+			"multi color" : "",
+			"name" : "guild_icon",
+			"position" : 
+			{
+				"x" : 210.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_name_fontblank.json",
+			"multi color" : "",
+			"name" : "guild_name",
+			"position" : 
+			{
+				"x" : 305.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.50,
+						"y" : 0.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6000000238418579,
+				"yscale" : 0.50
+			}
+		},
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6000000238418579,
+						"y" : 0.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6000000238418579,
+				"yscale" : 0.6000000238418579
+			}
 		}
 	]
 }

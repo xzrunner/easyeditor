@@ -3,8 +3,8 @@
 	"align" : 0.0,
 	"color" : "0xffffffff",
 	"font" : "",
-	"height" : 20.0,
+	"height" : 25.0,
 	"name" : "log_player_name",
-	"size" : 16.0,
+	"size" : 20.0,
 	"width" : 200.0
 }

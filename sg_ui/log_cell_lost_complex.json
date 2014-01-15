@@ -1,6 +1,7 @@
 
 {
 	"name" : "battle_log_cell_lost",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -19,7 +20,7 @@
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.50,
+			"y scale" : 0.6000000238418579,
 			"y shear" : 0.0
 		},
 		
@@ -38,7 +39,7 @@
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 25.0,
+			"y scale" : 30.0,
 			"y shear" : 0.0
 		},
 		
@@ -51,7 +52,7 @@
 			"position" : 
 			{
 				"x" : -290.0,
-				"y" : 60.0
+				"y" : 74.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -70,7 +71,7 @@
 			"position" : 
 			{
 				"x" : 36.0,
-				"y" : -53.0
+				"y" : -71.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -89,7 +90,7 @@
 			"position" : 
 			{
 				"x" : 325.0,
-				"y" : -44.50
+				"y" : -50.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -108,7 +109,7 @@
 			"position" : 
 			{
 				"x" : 325.0,
-				"y" : 2.50
+				"y" : 13.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -126,8 +127,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -372.0,
-				"y" : -51.50
+				"x" : -378.3999938964844,
+				"y" : -70.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.8000000119209290,
@@ -145,8 +146,8 @@
 			"name" : "loot_gold",
 			"position" : 
 			{
-				"x" : -283.0,
-				"y" : -53.0
+				"x" : -293.7999877929688,
+				"y" : -74.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -164,8 +165,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -194.0,
-				"y" : -47.50
+				"x" : -204.8000030517578,
+				"y" : -66.50
 			},
 			"x mirror" : false,
 			"x scale" : 0.8000000119209290,
@@ -183,8 +184,8 @@
 			"name" : "loot_elixir",
 			"position" : 
 			{
-				"x" : -112.0,
-				"y" : -53.0
+				"x" : -116.1999969482422,
+				"y" : -75.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -203,7 +204,7 @@
 			"position" : 
 			{
 				"x" : 220.0,
-				"y" : -14.95000457763672
+				"y" : -10.95000457763672
 			},
 			"x mirror" : false,
 			"x scale" : 0.3000000119209290,
@@ -241,7 +242,7 @@
 			"position" : 
 			{
 				"x" : 94.0,
-				"y" : 52.44999694824219
+				"y" : 60.44999694824219
 			},
 			"x mirror" : false,
 			"x scale" : 0.3000000119209290,
@@ -260,7 +261,7 @@
 			"position" : 
 			{
 				"x" : 50.0,
-				"y" : 58.0
+				"y" : 64.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -279,7 +280,7 @@
 			"position" : 
 			{
 				"x" : 327.750,
-				"y" : 12.0
+				"y" : 4.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -298,7 +299,7 @@
 			"position" : 
 			{
 				"x" : 327.750,
-				"y" : -44.750
+				"y" : -57.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -317,7 +318,7 @@
 			"position" : 
 			{
 				"x" : 260.50,
-				"y" : 56.25001525878906
+				"y" : 58.25001525878906
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -336,7 +337,7 @@
 			"position" : 
 			{
 				"x" : 185.0,
-				"y" : 58.50
+				"y" : 60.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -355,7 +356,7 @@
 			"position" : 
 			{
 				"x" : 271.0,
-				"y" : 58.50
+				"y" : 60.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -374,7 +375,7 @@
 			"position" : 
 			{
 				"x" : 345.750,
-				"y" : 57.14999389648438
+				"y" : 59.14999389648438
 			},
 			"x mirror" : false,
 			"x scale" : 0.3000000119209290,
@@ -393,7 +394,7 @@
 			"position" : 
 			{
 				"x" : -366.0,
-				"y" : -40.01998901367188
+				"y" : -63.01998901367188
 			},
 			"x mirror" : false,
 			"x scale" : 0.8000000119209290,
@@ -401,6 +402,245 @@
 			"y mirror" : false,
 			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_mark_anim.json",
+			"multi color" : "",
+			"name" : "guild_icon",
+			"position" : 
+			{
+				"x" : -373.0499877929688,
+				"y" : 38.750
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_name_fontblank.json",
+			"multi color" : "",
+			"name" : "guild_name",
+			"position" : 
+			{
+				"x" : -299.0,
+				"y" : 41.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.50,
+						"y" : 0.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.50,
+				"yscale" : 0.6000000238418579
+			}
+		},
+		
+		{
+			"sprites" : [ 14 ],
+			"val" : 
+			{
+				"dx" : -4.0,
+				"dy" : -3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 25.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.0,
+				"yscale" : 26.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 26.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.0,
+				"yscale" : 28.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 28.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.0,
+				"yscale" : 30.0
+			}
+		},
+		
+		{
+			"sprites" : [ 9 ],
+			"val" : 
+			{
+				"dx" : -1.0,
+				"dy" : -16.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 9 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -5.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : -6.0,
+				"dy" : -24.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -4.0,
+				"dy" : -19.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : -6.0,
+				"dy" : -22.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : 2.0,
+				"dy" : 8.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 21 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.50,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 21 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.50,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.50,
+				"yscale" : 0.50
+			}
+		},
+		
+		{
+			"sprites" : [ 21 ],
+			"val" : 
+			{
+				"dx" : -8.0,
+				"dy" : -203.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 22 ],
+			"val" : 
+			{
+				"dx" : 41.0,
+				"dy" : -138.0,
+				"type" : 0
+			}
 		}
 	]
 }
