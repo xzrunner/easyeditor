@@ -1,6 +1,7 @@
 
 {
 	"name" : "castle_building_info_window",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -254,13 +255,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "building_info_housing_bar_complex.json",
+			"filepath" : "building_info_castle_bar_complex.json",
 			"multi color" : "",
 			"name" : "bar2",
 			"position" : 
 			{
-				"x" : 123.0,
-				"y" : 80.0
+				"x" : 124.8750,
+				"y" : 88.750
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -268,6 +269,20 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		
+		{
+			"sprites" : [ 13 ],
+			"val" : 
+			{
+				"dx" : 678.0,
+				"dy" : -71.0,
+				"type" : 0
+			}
 		}
 	]
 }
