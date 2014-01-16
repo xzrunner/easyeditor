@@ -1,0 +1,159 @@
+
+{
+	"name" : "guild_dc",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_mark_anim.json",
+			"multi color" : "",
+			"name" : "guild_icon",
+			"position" : 
+			{
+				"x" : 1.0,
+				"y" : -20.90000152587891
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_name2_fontblank.json",
+			"multi color" : "",
+			"name" : "guild_name",
+			"position" : 
+			{
+				"x" : 7.0,
+				"y" : 39.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -137.0,
+				"dy" : 102.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 38.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 9.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : -28.0,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.200000047683716,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.200000047683716
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -2.0,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 169.0,
+				"dy" : -142.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		}
+	]
+}
