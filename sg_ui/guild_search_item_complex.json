@@ -141,25 +141,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "guild_name2_fontblank.json",
-			"multi color" : "",
-			"name" : "guild_name",
-			"position" : 
-			{
-				"x" : -253.0,
-				"y" : 15.50
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "gd2_fontblank.json",
 			"multi color" : "",
 			"name" : "distance",
@@ -174,6 +155,25 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_name4_fontblank.json",
+			"multi color" : "",
+			"name" : "guild_name",
+			"position" : 
+			{
+				"x" : -254.0,
+				"y" : 15.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"undo" : 
@@ -181,32 +181,11 @@
 		null,
 		
 		{
-			"sprites" : [ 7 ],
-			"val" : 
-			{
-				"dx" : -1.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 7 ],
-			"val" : 
-			{
-				"dx" : 152.0,
-				"dy" : -195.0,
-				"type" : 0
-			}
-		},
-		null,
-		
-		{
 			"sprites" : [ 8 ],
 			"val" : 
 			{
-				"dx" : 89.0,
-				"dy" : -191.0,
+				"dx" : 3.0,
+				"dy" : -240.0,
 				"type" : 0
 			}
 		}
