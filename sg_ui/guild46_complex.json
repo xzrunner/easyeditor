@@ -1,26 +1,26 @@
+
 {
-    "name" : "guild46",
-    "redo" : null,
-    "sprite" : 
-    [
-        
-        {
-            "add color" : "",
-            "angle" : 0.0,
-            "filepath" : "guild_mark_46.png",
-            "multi color" : "",
-            "name" : "",
-            "position" : 
-            {
-                "x" : 0.0,
-                "y" : 0.0
-            },
-            "x mirror" : false,
-            "x scale" : 0.6000000238418579,
-            "x shear" : 0.0,
-            "y mirror" : false,
-            "y scale" : 0.6000000238418579,
-            "y shear" : 0.0
-        }
-    ]
+	"name" : "guild46",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_mark_46.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
+		}
+	]
 }

@@ -1,0 +1,177 @@
+
+{
+	"name" : "guild_join",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_window_bg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_window_bg2_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -1.209991455078125,
+				"y" : -27.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 394.2999877929688,
+				"y" : 297.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tab_complex.json",
+			"multi color" : "",
+			"name" : "tab1",
+			"position" : 
+			{
+				"x" : -312.0,
+				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tab_complex.json",
+			"multi color" : "",
+			"name" : "tab2",
+			"position" : 
+			{
+				"x" : -134.0,
+				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tab_complex.json",
+			"multi color" : "",
+			"name" : "tab3",
+			"position" : 
+			{
+				"x" : 44.0,
+				"y" : 276.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_join_exit_complex.json",
+			"multi color" : "",
+			"name" : "join_exit_title",
+			"position" : 
+			{
+				"x" : -5.103298187255859,
+				"y" : 168.9205169677734
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -212.9600219726563,
+				"dy" : 251.6799774169922,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -1.209991455078125,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 496.0999755859375,
+				"dy" : -262.5700073242188,
+				"type" : 0
+			}
+		},
+		null
+	]
+}

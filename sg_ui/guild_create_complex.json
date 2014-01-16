@@ -1,7 +1,19 @@
 
 {
 	"name" : "guild_create",
-	"redo" : null,
+	"redo" : 
+	[
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		}
+	],
 	"sprite" : 
 	[
 		
@@ -200,7 +212,7 @@
 			"angle" : 0.0,
 			"filepath" : "blue_button_9patch.json",
 			"multi color" : "",
-			"name" : "preview_btn",
+			"name" : "icon_btn",
 			"position" : 
 			{
 				"x" : -2.013020515441895,
@@ -219,10 +231,10 @@
 			"angle" : 0.0,
 			"filepath" : "guild_mark_anim.json",
 			"multi color" : "",
-			"name" : "",
+			"name" : "icon",
 			"position" : 
 			{
-				"x" : -100.7630538940430,
+				"x" : -101.7630310058594,
 				"y" : 38.85314941406250
 			},
 			"x mirror" : false,
@@ -238,7 +250,7 @@
 			"angle" : 0.0,
 			"filepath" : "guild_center_fontblank.json",
 			"multi color" : "",
-			"name" : "flag_input",
+			"name" : "icon_input",
 			"position" : 
 			{
 				"x" : -2.041944503784180,
@@ -295,7 +307,7 @@
 			"angle" : 0.0,
 			"filepath" : "guild_right_fontblank.json",
 			"multi color" : "",
-			"name" : "flag_title",
+			"name" : "icon_title",
 			"position" : 
 			{
 				"x" : -300.2155151367188,
