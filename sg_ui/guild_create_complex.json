@@ -8,25 +8,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "upgrade_button_complex.json",
-			"multi color" : "",
-			"name" : "ok_btn",
-			"position" : 
-			{
-				"x" : -8.001472473144531,
-				"y" : -242.6503906250
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "input_bg_9patch.json",
 			"multi color" : "",
 			"name" : "name_btn",
@@ -65,44 +46,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "input_bg_small_9patch.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.6109461784362793,
-				"y" : 111.3386840820313
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "blue_button_9patch.json",
-			"multi color" : "",
-			"name" : "icon_btn",
-			"position" : 
-			{
-				"x" : -2.013020515441895,
-				"y" : 42.10314941406250
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "guild_mark_anim.json",
 			"multi color" : "",
 			"name" : "icon",
@@ -122,31 +65,12 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "guild_center_fontblank.json",
-			"multi color" : "",
-			"name" : "icon_input",
-			"position" : 
-			{
-				"x" : -2.041944503784180,
-				"y" : 41.97919082641602
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "guild_right_fontblank.json",
 			"multi color" : "",
 			"name" : "name_title",
 			"position" : 
 			{
-				"x" : -300.2155151367188,
+				"x" : -299.2155151367188,
 				"y" : 178.7312622070313
 			},
 			"x mirror" : false,
@@ -269,27 +193,56 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "",
+			"name" : "icon_btn",
+			"position" : 
+			{
+				"x" : -3.013031005859375,
+				"y" : 42.10314941406250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "upgrade_button2_complex.json",
+			"multi color" : "",
+			"name" : "ok_btn",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -232.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"undo" : 
 	[
+		null,
 		
 		{
 			"sprites" : [ 11 ],
 			"val" : 
 			{
-				"dx" : -12.0,
-				"dy" : -16.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 12 ],
-			"val" : 
-			{
-				"dx" : -2.0,
-				"dy" : 5.0,
+				"dx" : 1.0,
+				"dy" : 6.0,
 				"type" : 0
 			}
 		},
@@ -298,26 +251,10 @@
 			"sprites" : [ 11 ],
 			"val" : 
 			{
-				"dx" : -38.99999618530273,
-				"dy" : 11.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 11 ],
-			"val" : 
-			{
-				"dx" : 85.68713378906250,
+				"dx" : 53.0,
 				"dy" : 0.0,
 				"type" : 0
 			}
-		},
-		null,
-		null,
-		null,
-		null,
-		null,
-		null
+		}
 	]
 }

@@ -1,9 +1,10 @@
+
 {
-  "align": 2, 
-  "color": "0xffffffff", 
-  "font": "E", 
-  "height": 21, 
-  "name": "player_name", 
-  "size": 18, 
-  "width": 154
+	"align" : 2.0,
+	"color" : "0xff3d3a5a",
+	"font" : "",
+	"height" : 25.0,
+	"name" : "player_name",
+	"size" : 20.0,
+	"width" : 154.0
 }

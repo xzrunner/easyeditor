@@ -1,9 +1,10 @@
+
 {
-  "align": 1, 
-  "color": "0xffffffff", 
-  "font": "CCBackBeat", 
-  "height": 21, 
-  "name": "player_name", 
-  "size": 16, 
-  "width": 154
+	"align" : 1.0,
+	"color" : "0xff504032",
+	"font" : "CCBackBeat",
+	"height" : 25.0,
+	"name" : "player_name",
+	"size" : 20.0,
+	"width" : 154.0
 }

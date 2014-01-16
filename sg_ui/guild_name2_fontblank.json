@@ -1,10 +1,10 @@
 
 {
 	"align" : 0.0,
-	"color" : "0xff333333",
+	"color" : "0xffffffff",
 	"font" : "",
 	"height" : 25.0,
-	"name" : "guild_name",
+	"name" : "guild_name2",
 	"size" : 18.0,
 	"width" : 150.0
 }

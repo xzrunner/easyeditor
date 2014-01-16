@@ -8,25 +8,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "guild_rank_item_complex.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.50,
-				"y" : 65.21900939941406
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "input_bg_9patch.json",
 			"multi color" : "",
 			"name" : "content_btn",
@@ -119,5 +100,5 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : [ null, null, null, null ]
+	"undo" : [ null, null, null ]
 }
