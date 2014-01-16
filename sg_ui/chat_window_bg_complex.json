@@ -1,0 +1,64 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 4.712388992309570,
+			"filepath" : "6313-diban-9-2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 374.0,
+				"y" : -1024.0
+			},
+			"x mirror" : false,
+			"x scale" : 515.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "chat_expand_bg.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 410.0,
+				"y" : -285.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6313-diban-9-5.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 170.0,
+				"y" : -1024.0
+			},
+			"x mirror" : false,
+			"x scale" : 10.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 51.50,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,510 @@
+
+{
+	"name" : "",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "pop_action_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : -1.570796370506287,
+			"filepath" : "889399927484.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -256.0,
+				"y" : 240.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_1",
+			"position" : 
+			{
+				"x" : -260.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_2",
+			"position" : 
+			{
+				"x" : -130.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_3",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_4",
+			"position" : 
+			{
+				"x" : 130.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_5",
+			"position" : 
+			{
+				"x" : 260.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_6",
+			"position" : 
+			{
+				"x" : -260.0,
+				"y" : -110.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_7",
+			"position" : 
+			{
+				"x" : -130.0,
+				"y" : -110.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_8",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -110.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_9",
+			"position" : 
+			{
+				"x" : 130.0,
+				"y" : -110.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "",
+			"name" : "item_10",
+			"position" : 
+			{
+				"x" : 260.0,
+				"y" : -110.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 317.0,
+				"y" : 192.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"angle" : 0.0,
+				"type" : 1,
+				"xend" : 27.0,
+				"xstart" : 27.0,
+				"yend" : 192.0,
+				"ystart" : 191.0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"angle" : 0.005970233120024204,
+				"type" : 1,
+				"xend" : 3.402823466385289e+038,
+				"xstart" : 3.402823466385289e+038,
+				"yend" : 3.402823466385289e+038,
+				"ystart" : 3.402823466385289e+038
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 21.0,
+				"dy" : -47.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -20.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -20.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -19.99998474121094,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -3.200012207031250,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -29.99996948242188,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -30.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -30.00001525878906,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.200000047683716,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.200000047683716
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 0.799987792968750,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -10.00002288818359,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 9 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -10.00001525878906,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -11.0,
+				"type" : 0
+			}
+		}
+	]
+}
