@@ -1,7 +1,6 @@
 
 {
 	"name" : "setting_window",
-	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -15,6 +14,25 @@
 			{
 				"x" : 0.0,
 				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "setting_bg2_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : -24.0
 			},
 			"x mirror" : false,
 			"x scale" : 0.50,
@@ -46,25 +64,6 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "setting_bg2_9patch.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -1.0,
-				"y" : -24.0
-			},
-			"x mirror" : false,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "st_ejoy_uid_fontblank.json",
 			"multi color" : "",
 			"name" : "uid",
@@ -90,7 +89,7 @@
 			"position" : 
 			{
 				"x" : -104.0,
-				"y" : 46.0
+				"y" : -70.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -108,8 +107,8 @@
 			"name" : "login",
 			"position" : 
 			{
-				"x" : 45.0,
-				"y" : 48.0
+				"x" : 50.0,
+				"y" : -70.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -127,8 +126,8 @@
 			"name" : "account",
 			"position" : 
 			{
-				"x" : 54.0,
-				"y" : 45.0
+				"x" : 74.0,
+				"y" : -73.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -148,6 +147,44 @@
 			{
 				"x" : 115.0,
 				"y" : -205.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "st_ejoy_fontblank.json",
+			"multi color" : "",
+			"name" : "music_title",
+			"position" : 
+			{
+				"x" : -104.0,
+				"y" : 110.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "st_ejoy_fontblank.json",
+			"multi color" : "",
+			"name" : "sound_title",
+			"position" : 
+			{
+				"x" : -104.0,
+				"y" : 50.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -184,14 +221,14 @@
 			"name" : "music",
 			"position" : 
 			{
-				"x" : 128.250,
-				"y" : -80.250
+				"x" : 50.0,
+				"y" : 110.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.8000000119209290,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.8000000119209290,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
@@ -260,14 +297,14 @@
 			"name" : "sound",
 			"position" : 
 			{
-				"x" : -69.250,
-				"y" : -80.250
+				"x" : 50.0,
+				"y" : 50.0
 			},
 			"x mirror" : false,
-			"x scale" : 0.8000000119209290,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.8000000119209290,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
@@ -300,82 +337,6 @@
 			{
 				"x" : 115.0,
 				"y" : -140.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ttttt2_fontblank.json",
-			"multi color" : "",
-			"name" : "sound_title",
-			"position" : 
-			{
-				"x" : -157.250,
-				"y" : -80.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "ttttt2_fontblank.json",
-			"multi color" : "",
-			"name" : "music_title",
-			"position" : 
-			{
-				"x" : 40.0,
-				"y" : -80.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "st_ejoy_fontblank.json",
-			"multi color" : "",
-			"name" : "inviter_title",
-			"position" : 
-			{
-				"x" : -108.750,
-				"y" : 116.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "input_small_complex.json",
-			"multi color" : "",
-			"name" : "input",
-			"position" : 
-			{
-				"x" : 73.0,
-				"y" : 115.50
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -440,19 +401,6 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-		}
-	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : 437.0,
-				"dy" : 24.0,
-				"type" : 0
-			}
 		}
 	]
 }

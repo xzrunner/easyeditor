@@ -1,0 +1,365 @@
+
+{
+	"name" : "guild_search_item",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_item_bg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -1.525878906250000e-005,
+				"y" : -3.051757812500000e-005
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6459-gaoguang-1.png",
+			"multi color" : "",
+			"name" : "line",
+			"position" : 
+			{
+				"x" : 203.50,
+				"y" : 0.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 11.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 368.0,
+				"y" : -4.199998855590820
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "distance_fontblank.json",
+			"multi color" : "",
+			"name" : "distance",
+			"position" : 
+			{
+				"x" : -238.0,
+				"y" : -16.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_mark_anim.json",
+			"multi color" : "",
+			"name" : "guild_icon",
+			"position" : 
+			{
+				"x" : -364.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_name_fontblank.json",
+			"multi color" : "",
+			"name" : "guild_name",
+			"position" : 
+			{
+				"x" : -253.0,
+				"y" : 13.10000038146973
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rr2_fontblank.json",
+			"multi color" : "",
+			"name" : "score",
+			"position" : 
+			{
+				"x" : 295.0,
+				"y" : -4.399999618530273
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_attack_defend_fontblank.json",
+			"multi color" : "",
+			"name" : "member",
+			"position" : 
+			{
+				"x" : 142.0,
+				"y" : -1.399999618530273
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "center_gray_14_fontblank.json",
+			"multi color" : "",
+			"name" : "touch",
+			"position" : 
+			{
+				"x" : -29.0,
+				"y" : -15.89999961853027
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		null,
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 439.0,
+				"dy" : 243.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 223.0,
+				"dy" : 253.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : -573.0,
+				"dy" : -3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : -1.0,
+				"dy" : 6.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -5.200000762939453,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6000000238418579,
+						"y" : 0.6000000238418579
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8000000119209290,
+				"yscale" : 0.6000000238418579
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.8000000119209290,
+						"y" : 0.6000000238418579
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8000000119209290,
+				"yscale" : 0.8000000119209290
+			}
+		},
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : -558.0,
+				"dy" : 11.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : -340.0,
+				"dy" : -1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 214.0,
+				"dy" : -255.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 74.0,
+				"dy" : -228.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 452.0,
+				"dy" : -194.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -5.0,
+				"dy" : -10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -2.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : 334.0,
+				"dy" : -231.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : 309.0,
+				"dy" : -265.0,
+				"type" : 0
+			}
+		}
+	]
+}

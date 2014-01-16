@@ -1,6 +1,6 @@
 
 {
-	"name" : "guild_search",
+	"name" : "active_invite",
 	"redo" : null,
 	"sprite" : 
 	[
@@ -8,70 +8,32 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "guild_rank_item_complex.json",
+			"filepath" : "active_bg3_9patch.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.50,
-				"y" : 65.21900939941406
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"x mirror" : false,
-			"x scale" : 1.0,
+			"x scale" : 0.4615384638309479,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 1.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "input_bg_9patch.json",
-			"multi color" : "",
-			"name" : "content_btn",
-			"position" : 
-			{
-				"x" : 8.555212020874023,
-				"y" : 199.8304290771484
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "blue_button_complex.json",
-			"multi color" : "",
-			"name" : "button",
-			"position" : 
-			{
-				"x" : 308.8499755859375,
-				"y" : 199.5804290771484
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "left_gray_18_fontblank.json",
+			"filepath" : "at_title_fontblank.json",
 			"multi color" : "",
 			"name" : "title",
 			"position" : 
 			{
-				"x" : -291.7381591796875,
-				"y" : 200.5449218750
+				"x" : 0.0,
+				"y" : 229.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -84,13 +46,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "left_gray_16_fontblank.json",
+			"filepath" : "at_text11_fontblank.json",
 			"multi color" : "",
-			"name" : "tip",
+			"name" : "text",
 			"position" : 
 			{
-				"x" : -86.60237121582031,
-				"y" : 160.8304290771484
+				"x" : 0.0,
+				"y" : 22.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -103,13 +65,51 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "left_black_18_350_fontblank.json",
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -163.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.7200000286102295,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "input_small_complex.json",
 			"multi color" : "",
 			"name" : "input",
 			"position" : 
 			{
-				"x" : 11.39760684967041,
-				"y" : 200.5449218750
+				"x" : 5.0,
+				"y" : -231.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "st_ejoy_uid_fontblank.json",
+			"multi color" : "",
+			"name" : "my_uid",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -192.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -119,5 +119,41 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : [ null, null, null, null ]
+	"undo" : 
+	[
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : 172.0,
+				"dy" : -646.0,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : 21.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : 3.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		}
+	]
 }
