@@ -17,10 +17,10 @@ local body_format = [[
                 "y" : 0.0
             },
             "x mirror" : false,
-            "x scale" : 1.0,
+            "x scale" : 0.8,
             "x shear" : 0.0,
             "y mirror" : false,
-            "y scale" : 1.0,
+            "y scale" : 0.8,
             "y shear" : 0.0
         },
 %s
@@ -49,15 +49,15 @@ local frame_format = [[
         }
 ]]
 
-local _x = -300
-local _y = 170
+local _x = -250
+local _y = 140
 local function _gen_data()
     local _str = ""
     local _count = 1
     for i=1,5 do
-        local y = _y - (i-1)*75
+        local y = _y - (i-1)*65
         for j=1,10 do
-            local x = _x + (j-1)*65
+            local x = _x + (j-1)*55
             _str = _str..string.format(frame_format, _count, _count, x, y)
             _count = _count + 1
             if not (i==5 and j==10) then
