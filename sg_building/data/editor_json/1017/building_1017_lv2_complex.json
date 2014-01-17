@@ -3,6 +3,7 @@
 	"name" : "building_1017_lv2",
 	"sprite" : 
 	[
+		
 		{
 			"add color" : "",
 			"angle" : 0.0,
@@ -23,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv1_lv10_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -40,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv1_lv10_02.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -57,8 +62,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv1_lv6_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -74,8 +81,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv1_lv3_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -91,8 +100,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv2_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -108,13 +119,110 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv2_lv4_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 24.83962249755859,
+				"y" : 83.07865905761719
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -33.99999237060547,
+				"y" : 1.499946594238281
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 19.33959579467773,
+				"y" : 0.6314449310302734
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 74.0,
+				"y" : 41.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -75.250,
+				"y" : 30.50002288818359
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

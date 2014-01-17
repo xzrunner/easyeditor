@@ -3,6 +3,7 @@
 	"name" : "building_1017_lv5",
 	"sprite" : 
 	[
+		
 		{
 			"add color" : "",
 			"angle" : 0.0,
@@ -23,8 +24,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv1_lv10_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -40,8 +43,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv1_lv10_02.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -57,8 +62,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv1_lv6_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -74,8 +81,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv4_lv6_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -91,8 +100,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv3_lv10_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -108,8 +119,10 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv5_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
@@ -125,13 +138,129 @@
 		},
 		
 		{
+			"add color" : "",
 			"angle" : 0.0,
 			"filepath" : "..\\..\\pngs\\1017_3_lv5_lv6_01.png",
+			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : -9.0,
 				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 73.99999237060547,
+				"y" : 41.49996948242188
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 21.49999618530273,
+				"y" : 1.499996185302734
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -77.24998474121094,
+				"y" : 32.50000762939453
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -35.00000762939453,
+				"y" : 1.499979019165039
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -30.49994850158691,
+				"y" : 34.99998855590820
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 22.50000381469727,
+				"y" : 71.00000762939453
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,

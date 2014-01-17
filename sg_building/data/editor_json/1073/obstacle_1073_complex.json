@@ -8,32 +8,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\shadow_circle.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -3.0,
-				"y" : 0.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "..\\cj\\zwdl_anim.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 80.0
+				"y" : 30.0
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -43,27 +24,5 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 1 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : 100.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 1 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : -20.0,
-				"type" : 0
-			}
-		}
-	]
+	"undo" : null
 }

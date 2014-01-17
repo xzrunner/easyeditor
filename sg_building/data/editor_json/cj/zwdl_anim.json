@@ -15,13 +15,32 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "..\\..\\pngs\\cj_dl1.png",
+							"filepath" : "..\\..\\pngs\\shadow_circle.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -50.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\cj_zwdl.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
-								"y" : -10.0
+								"y" : 50.0
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -43,13 +62,32 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "..\\..\\pngs\\cj_dl1.png",
+							"filepath" : "..\\..\\pngs\\cj_zwdl.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
-								"y" : 15.0
+								"y" : 75.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\shadow_circle.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -50.0
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -60,7 +98,7 @@
 						}
 					],
 					"id" : 0,
-					"time" : 45,
+					"time" : 60,
 					"tween" : true
 				},
 				
@@ -71,13 +109,32 @@
 						{
 							"add color" : "",
 							"angle" : 0.0,
-							"filepath" : "..\\..\\pngs\\cj_dl1.png",
+							"filepath" : "..\\..\\pngs\\cj_zwdl.png",
 							"multi color" : "",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
-								"y" : -10.0
+								"y" : 50.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "..\\..\\pngs\\shadow_circle.png",
+							"multi color" : "",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -50.0
 							},
 							"x mirror" : false,
 							"x scale" : 1.0,
@@ -88,7 +145,7 @@
 						}
 					],
 					"id" : 0,
-					"time" : 70,
+					"time" : 100,
 					"tween" : false
 				}
 			],

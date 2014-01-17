@@ -1,0 +1,47 @@
+
+{
+	"name" : "deco_1074",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_dlsp.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 25.0,
+				"y" : 80.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\shadow_circle.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 30.0,
+				"y" : -24.96308517456055
+			},
+			"x mirror" : false,
+			"x scale" : 0.4758276343345642,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4758276343345642,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : [ null ]
+}
