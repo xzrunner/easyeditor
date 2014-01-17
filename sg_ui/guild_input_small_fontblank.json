@@ -5,6 +5,6 @@
 	"font" : "CCBackBeat",
 	"height" : 40.0,
 	"name" : "player_name",
-	"size" : 30.0,
+	"size" : 25.0,
 	"width" : 350.0
 }
