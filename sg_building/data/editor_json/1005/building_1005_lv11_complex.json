@@ -40,6 +40,120 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : -0.3000000119209290,
+			"filepath" : "..\\..\\pngs\\cj_sp2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 25.44354248046875,
+				"y" : 54.00321960449219
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 61.21584701538086,
+				"y" : 86.50320434570313
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -69.22814178466797,
+				"y" : 61.50321960449219
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -29.53107070922852,
+				"y" : 31.75533294677734
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 34.21584320068359,
+				"y" : 30.75531387329102
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 74.47496032714844,
+				"y" : 61.75000381469727
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }

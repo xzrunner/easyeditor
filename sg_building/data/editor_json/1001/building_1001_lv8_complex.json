@@ -40,6 +40,215 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 28.44379043579102,
+				"y" : 9.328383445739746
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlyd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 117.9937591552734,
+				"y" : 74.91017913818359
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -112.0217742919922,
+				"y" : 69.91022491455078
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\cj\\pddlzd_anim.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -28.76566123962402,
+				"y" : 9.328394889831543
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -88.50971221923828,
+				"y" : 151.6404571533203
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -109.0216674804688,
+				"y" : 134.1404113769531
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 75.08292388916016,
+				"y" : 193.4459991455078
+			},
+			"x mirror" : false,
+			"x scale" : 0.9272434711456299,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.9272434711456299,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 102.4915771484375,
+				"y" : 176.7826995849609
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -22.26568603515625,
+				"y" : 80.410156250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp2.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 119.4937438964844,
+				"y" : 2.227633476257324
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "..\\..\\pngs\\cj_sp1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 67.67427062988281,
+				"y" : -58.60130310058594
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	]
 }
