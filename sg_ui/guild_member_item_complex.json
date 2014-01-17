@@ -1,0 +1,666 @@
+
+{
+	"name" : "guild_member_item",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_item_bg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -1.525878906250000e-005,
+				"y" : -3.051757812500000e-005
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6118-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -326.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_rank_fontblank.json",
+			"multi color" : "",
+			"name" : "rank",
+			"position" : 
+			{
+				"x" : -321.50,
+				"y" : -3.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6459-gaoguang-1.png",
+			"multi color" : "",
+			"name" : "line",
+			"position" : 
+			{
+				"x" : -231.8512268066406,
+				"y" : -0.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 11.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_player_name_fontblank.json",
+			"multi color" : "",
+			"name" : "player_name",
+			"position" : 
+			{
+				"x" : -145.1637878417969,
+				"y" : 21.00000572204590
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_scorce_fontblank.json",
+			"multi color" : "",
+			"name" : "score",
+			"position" : 
+			{
+				"x" : -76.14905548095703,
+				"y" : -14.49999618530273
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -148.9282989501953,
+				"y" : -15.10002708435059
+			},
+			"x mirror" : false,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_scorce_fontblank.json",
+			"multi color" : "",
+			"name" : "send",
+			"position" : 
+			{
+				"x" : 108.6612014770508,
+				"y" : 17.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "character_info_icon_complex.json",
+			"multi color" : "",
+			"name" : "unit_slot_1",
+			"position" : 
+			{
+				"x" : 194.9016571044922,
+				"y" : -50.78998947143555
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "rank_scorce_fontblank.json",
+			"multi color" : "",
+			"name" : "receive",
+			"position" : 
+			{
+				"x" : 108.6612091064453,
+				"y" : -18.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "character_info_icon_complex.json",
+			"multi color" : "",
+			"name" : "unit_slot_2",
+			"position" : 
+			{
+				"x" : 249.7210998535156,
+				"y" : -50.78998947143555
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "character_info_icon_complex.json",
+			"multi color" : "",
+			"name" : "unit_slot_3",
+			"position" : 
+			{
+				"x" : 304.540527343750,
+				"y" : -50.78998947143555
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "character_info_icon_complex.json",
+			"multi color" : "",
+			"name" : "unit_slot_4",
+			"position" : 
+			{
+				"x" : 359.3599853515625,
+				"y" : -50.78998947143555
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		null,
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : -122.9423904418945,
+				"dy" : 19.86947631835938,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -416.6380615234375,
+				"dy" : -22.35316085815430,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.50,
+						"y" : 0.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.4000000059604645,
+				"yscale" : 0.50
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.4000000059604645,
+						"y" : 0.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.4000000059604645,
+				"yscale" : 0.4000000059604645
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : -3.725524902343750,
+				"dy" : 1.241842269897461,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -47.81092834472656,
+				"dy" : 7.451054573059082,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : -316.6697692871094,
+				"dy" : -10.55565929412842,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : 2.483688354492188,
+				"dy" : -6.830131530761719,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : -25.45777130126953,
+				"dy" : 3.104604721069336,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 9 ],
+			"val" : 
+			{
+				"dx" : -21.11132049560547,
+				"dy" : 4.967369079589844,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : -8.19616699218750,
+				"dy" : -57.37311172485352,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : -11.79750061035156,
+				"dy" : 127.9097518920898,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : 2.483703613281250,
+				"dy" : 81.96159362792969,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"dx" : 14.28118896484375,
+				"dy" : 82.58251190185547,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 26.69961547851563,
+				"dy" : 74.51053619384766,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8000000119209290,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.8000000119209290,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8000000119209290,
+				"yscale" : 0.8000000119209290
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : 17.38578796386719,
+				"dy" : -116.1122512817383,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.8000000119209290,
+						"y" : 0.8000000119209290
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 0.8000000119209290
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.8999999761581421,
+						"y" : 0.8000000119209290
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 0.8999999761581421
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : -1.196960449218750,
+				"dy" : -2.154527187347412,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.8999999761581421,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 0.8999999761581421
+			}
+		},
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.8999999761581421,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 0.8999999761581421
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.8999999761581421,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.8999999761581421,
+				"yscale" : 0.8999999761581421
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : 0.4241027832031250,
+				"dy" : -125.1087341308594,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"dx" : -9.754241943359375,
+				"dy" : -128.0774230957031,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : -41.56155395507813,
+				"dy" : -128.0774230957031,
+				"type" : 0
+			}
+		}
+	]
+}

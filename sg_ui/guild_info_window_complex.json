@@ -70,7 +70,7 @@
 			"name" : "tab1",
 			"position" : 
 			{
-				"x" : -312.0,
+				"x" : -246.0,
 				"y" : 277.0
 			},
 			"x mirror" : false,
@@ -89,7 +89,7 @@
 			"name" : "tab2",
 			"position" : 
 			{
-				"x" : -134.0,
+				"x" : -68.0,
 				"y" : 277.0
 			},
 			"x mirror" : false,
@@ -108,7 +108,7 @@
 			"name" : "tab3",
 			"position" : 
 			{
-				"x" : 44.0,
+				"x" : 110.0,
 				"y" : 277.0
 			},
 			"x mirror" : false,
@@ -119,5 +119,5 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : [ null, null, null ]
+	"undo" : [ null ]
 }

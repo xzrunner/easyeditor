@@ -1,0 +1,103 @@
+
+{
+	"name" : "guild_join_exit_back",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_join_exit_complex.json",
+			"multi color" : "",
+			"name" : "guild_join_exit",
+			"position" : 
+			{
+				"x" : 2.0,
+				"y" : 179.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "back_button_complex.json",
+			"multi color" : "",
+			"name" : "back",
+			"position" : 
+			{
+				"x" : -371.9999389648438,
+				"y" : 289.7448425292969
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 14.0,
+				"dy" : 94.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -46.0,
+				"dy" : 10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -57.0,
+				"dy" : -31.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 3.691833496093750,
+				"dy" : -2.861175537109375,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 135.7619934082031,
+				"dy" : 34.60600280761719,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null
+	]
+}
