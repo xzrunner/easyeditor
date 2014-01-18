@@ -35,7 +35,8 @@ WORK_ITEMS = [
             'scale':        '1.0',
             'output_dir':   output_dir(),
             'output_lua':   output_dir('buildings2.lua'),
-            'output_ep':    output_dir('buildings2.ep'),
+            'output_epp':    output_dir('buildings2.epp'),
+            'output_epd':    output_dir('buildings2.epd'),
         },
         #(
         #    r'..\data\json',
@@ -84,7 +85,8 @@ for entry in WORK_ITEMS:
         _run_cmd('%s %s -pd -pvr %s' % (LUA, EPBIN, entry["output_lua"]))
 
     if '4' in options:
-        _run_cmd('copy /Y %s %s' % (entry["output_ep"], PATH_SHARE_EP))
+        _run_cmd('copy /Y %s %s' % (entry["output_epp"], PATH_SHARE_EP))
+        _run_cmd('copy /Y %s %s' % (entry["output_epd"], PATH_SHARE_EP))
 
 print ""
 print "================================================="
