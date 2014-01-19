@@ -1,0 +1,290 @@
+
+{
+	"name" : "guild_troop_info_window",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_info_window_bg_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_info_window_bg2_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -36.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_title_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 225.250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 317.0,
+				"y" : 223.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_info_window_bg3_9patch.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -133.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6154-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -220.0,
+				"y" : 71.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_item_name_fontblank.json",
+			"multi color" : "",
+			"name" : "item_name",
+			"position" : 
+			{
+				"x" : -221.50,
+				"y" : 148.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_title2_fontblank.json",
+			"multi color" : "",
+			"name" : "title2",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_text_area2_fontblank.json",
+			"multi color" : "",
+			"name" : "text_area2",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -195.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "building_info_castle_bar_complex.json",
+			"multi color" : "",
+			"name" : "bar2",
+			"position" : 
+			{
+				"x" : 149.5750122070313,
+				"y" : 106.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_mark_anim.json",
+			"multi color" : "",
+			"name" : "guild_icon",
+			"position" : 
+			{
+				"x" : -224.0,
+				"y" : 74.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 9 ],
+			"val" : 
+			{
+				"dx" : 29.0,
+				"dy" : 18.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : 38.0,
+				"dy" : -13.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.200000047683716,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.200000047683716
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : -1.0,
+				"dy" : 4.0,
+				"type" : 0
+			}
+		},
+		null
+	]
+}
