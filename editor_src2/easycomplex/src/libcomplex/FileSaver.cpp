@@ -56,34 +56,9 @@ void FileSaver::centerSymbol(d2d::ComplexSymbol* symbol)
 Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
-
-	//		value["id"] = *static_cast<int*>(sprite->getUserData());
-	void* data = sprite->getUserData();
-
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
 		sprite->getSymbol().getFilepath()).ToStdString();
-
-	value["name"] = sprite->name;
-
-	value["multi color"] = sprite->multiColor;
-	value["add color"] = sprite->addColor;
-
-	value["position"]["x"] = sprite->getPosition().x;
-	value["position"]["y"] = sprite->getPosition().y;
-
-	value["angle"] = sprite->getAngle();
-
-	value["x scale"] = sprite->getScaleX();
-	value["y scale"] = sprite->getScaleY();
-
-	value["x shear"] = sprite->getShearX();
-	value["y shear"] = sprite->getShearY();
-
-	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
-	value["x mirror"] = xMirror;
-	value["y mirror"] = yMirror;
-
+	sprite->store(value);
 	return value;
 }
 } // libcomplex

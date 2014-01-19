@@ -59,7 +59,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 					else
 						resolvePicture(image, parser);
 				}
-				else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+				else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 				}
@@ -88,7 +88,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 			//				m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 			//				resolvePicture(image, parser);
 			//			}
-			//			else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+			//			else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
 			//			{
 			//				m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 			//			}
@@ -115,7 +115,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 						d2d::ISprite* sprite = frame->sprites[k];
 						if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
 							unique.insert(&image->getSymbol());
-						else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+						else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
 							m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 					}
 				}
@@ -225,7 +225,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 					resolvePicture(image, parser, tsrc, tscreen);
 				}
-				else if (d2d::FontBlankSprite* font = dynamic_cast<d2d::FontBlankSprite*>(sprite))
+				else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 				}
@@ -732,7 +732,7 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 			id = itr->second;
 		}
 	}
-	else if (const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(sprite))
+	else if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(sprite))
 	{
 		isFont = true;
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
@@ -759,8 +759,8 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 	{
 		if (isFont)
 		{
-			const d2d::FontBlankSymbol& symbol = dynamic_cast<const d2d::FontBlankSprite*>(sprite)->getSymbol();
-			bool isNullNode = symbol.font.empty() && symbol.color.empty();
+			const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(sprite);
+			bool isNullNode = font->font.empty() && font->color.empty();
 			if (isNullNode)
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -769,12 +769,12 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 			else
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
-				std::string aFont = lua::assign("font", "\""+symbol.font+"\"");
-				std::string aColor = lua::assign("color", symbol.color);
-				std::string aAlign = lua::assign("align", wxString::FromDouble(symbol.align).ToStdString());
-				std::string aSize = lua::assign("size", wxString::FromDouble(symbol.size).ToStdString());
-				std::string aWidth = lua::assign("width", wxString::FromDouble(symbol.width).ToStdString());
-				std::string aHeight = lua::assign("height", wxString::FromDouble(symbol.height).ToStdString());
+				std::string aFont = lua::assign("font", "\""+font->font+"\"");
+				std::string aColor = lua::assign("color", font->color);
+				std::string aAlign = lua::assign("align", wxString::FromDouble(font->align).ToStdString());
+				std::string aSize = lua::assign("size", wxString::FromDouble(font->size).ToStdString());
+				std::string aWidth = lua::assign("width", wxString::FromDouble(font->width).ToStdString());
+				std::string aHeight = lua::assign("height", wxString::FromDouble(font->height).ToStdString());
 
 				lua::tableassign(m_gen, "", 7, aName.c_str(), aFont.c_str(), aColor.c_str(), aAlign.c_str(), 
 					aSize.c_str(), aWidth.c_str(), aHeight.c_str());
@@ -841,12 +841,12 @@ void COCCode::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 	if (cindex == -1)
 		throw d2d::Exception("Error! COCCode::resolveSpriteForFrame L806");
 
-	if (const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(sprite))
+	if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(sprite))
 		resolveSpriteForFrameFont(font, cindex);
 	else
 		resolveSpriteForFrameImage(sprite, cindex);
 
-// 	bool forceMat = dynamic_cast<const d2d::FontBlankSprite*>(sprite);
+// 	bool forceMat = dynamic_cast<const d2d::FontSprite*>(sprite);
 // 	resolveSpriteForFrame(sprite, cindex, forceMat);
 }
 
@@ -931,15 +931,14 @@ void COCCode::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 		lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
 }
 
-void COCCode::resolveSpriteForFrameFont(const d2d::FontBlankSprite* sprite, int id)
+void COCCode::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id)
 {
 	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
 
 	float mat[6];
 	transToMat(sprite, mat, true);
 
-	const d2d::FontBlankSymbol& symbol = sprite->getSymbol();
-	if (!symbol.font.empty() || !symbol.color.empty())
+	if (!sprite->font.empty() || !sprite->color.empty())
 	{
 		// move to left-top
 		mat[4] -= (int)(sprite->getBounding()->width() * 0.5f * 16 + 0.5f);
@@ -963,7 +962,7 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 
 	if (!force &&
 		(dynamic_cast<const d2d::ImageSprite*>(sprite) ||
-		dynamic_cast<const d2d::FontBlankSprite*>(sprite)))
+		dynamic_cast<const d2d::FontSprite*>(sprite)))
 	{
 	}
 	else

@@ -929,6 +929,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\dataset\FontSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\FontSprite.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\dataset\ImageSprite.cpp"
 					>
 				</File>
@@ -1413,14 +1421,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\ComplexFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\ComplexFileAdapter.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\common\IFileAdapter.h"
 					>
 				</File>
@@ -1707,6 +1707,14 @@
 				<Filter
 					Name="sprite"
 					>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\FontPropertySetting.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\FontPropertySetting.h"
+						>
+					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\MultiSpritesPropertySetting.cpp"
 						>

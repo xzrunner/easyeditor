@@ -4,7 +4,8 @@
 #include "SymbolMgr.h"
 #include "SpriteFactory.h"
 
-#include "common/ComplexFileAdapter.h"
+#include "common/Context.h"
+#include "common/FileNameTools.h"
 #include "dataset/Bitmap.h"
 #include "dataset/AbstractBV.h"
 #include "render/SpriteDraw.h"
@@ -87,34 +88,33 @@ bool ComplexSymbol::isOneLayer() const
 
 void ComplexSymbol::loadResources()
 {
+	// clear
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		m_sprites[i]->release();
 	m_sprites.clear();
 
-	ComplexFileAdapter adapter;
-	adapter.load(m_filepath.c_str());
+	// load
+	Json::Value value;
+	Json::Reader reader;
+	std::ifstream fin(m_filepath.fn_str());
+	reader.parse(fin, value);
+	fin.close();
 
-	name = adapter.m_name;
+	name = value["name"].asString();
 
-	for (size_t i = 0, n = adapter.m_data.size(); i < n; ++i)
-	{
-		ISprite* sprite = NULL;
+	int i = 0;
+	Json::Value spriteValue = value["sprite"][i++];
+	while (!spriteValue.isNull()) {
+		wxString dir = Context::Instance()->getDir();
+		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
+		ISymbol* symbol = SymbolMgr::Instance()->getSymbol(path);
 
-		const ComplexFileAdapter::Entry& entry = adapter.m_data[i];
-		ISymbol* symbol = SymbolMgr::Instance()->getSymbol(entry.filepath);
-		sprite = SpriteFactory::Instance()->create(symbol);
-
-		sprite->name = entry.name;
-		sprite->multiColor = entry.multiColor;
-		sprite->addColor = entry.addColor;
-		sprite->setTransform(entry.pos, entry.angle);
-		sprite->setScale(entry.xscale, entry.yscale);
-		sprite->setShear(entry.xshear, entry.yshear);
-		sprite->setMirror(entry.xMirror, entry.yMirror);
+		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		sprite->load(spriteValue);
 
 		m_sprites.push_back(sprite);
-	}
-
+		spriteValue = value["sprite"][i++];
+	}	
 	initBounding();
 }
 

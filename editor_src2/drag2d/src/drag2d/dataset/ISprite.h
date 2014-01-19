@@ -5,6 +5,8 @@
 #include "common/Object.h"
 #include "common/Vector.h"
 
+#include <JSON/json.h>
+
 namespace d2d
 {
 	class Vector;
@@ -33,6 +35,9 @@ namespace d2d
 		virtual const ISymbol& getSymbol() const = 0;
 		virtual void setSymbol(ISymbol* symbol) = 0;
 		virtual void loadBodyFromFile() = 0;
+
+		virtual void load(const Json::Value& val);
+		virtual void store(Json::Value& val);
 
 		virtual void setTransform(const Vector& position, float angle);
 		void setScale(float xScale, float yScale);

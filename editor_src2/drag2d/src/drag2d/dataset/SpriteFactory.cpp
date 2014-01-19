@@ -12,7 +12,8 @@
 #include "AnimSprite.h"
 #include "Patch9Sprite.h"
 #include "TextSprite.h"
-#include "FontBlankSprite.h"
+//#include "FontBlankSprite.h"
+#include "FontSprite.h"
 
 namespace d2d
 {
@@ -54,7 +55,8 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		else if (FileNameParser::isType(filepath, FileNameParser::e_9patch))
 			sprite = new Patch9Sprite(static_cast<Patch9Symbol*>(symbol));
 		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
-			sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
+			//sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
+			sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
 	}
 
 	if (sprite) insert(sprite);
@@ -65,12 +67,12 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 void SpriteFactory::insert(ISprite* sprite)
 {
 	std::map<const ISymbol*, SpriteList>::iterator 
-		itr = map_symbol2sprites_.find(&sprite->getSymbol());
-	if (itr == map_symbol2sprites_.end())
+		itr = m_map_symbol2sprites.find(&sprite->getSymbol());
+	if (itr == m_map_symbol2sprites.end())
 	{
 		SpriteList list;
 		list.push_back(sprite);
-		map_symbol2sprites_.insert(std::make_pair(&sprite->getSymbol(), list));
+		m_map_symbol2sprites.insert(std::make_pair(&sprite->getSymbol(), list));
 	}
 	else 
 	{
@@ -81,8 +83,8 @@ void SpriteFactory::insert(ISprite* sprite)
 void SpriteFactory::remove(ISprite* sprite)
 {
 	std::map<const ISymbol*, SpriteList>::iterator 
-		itr = map_symbol2sprites_.begin();
-	for ( ; itr != map_symbol2sprites_.end(); ++itr)
+		itr = m_map_symbol2sprites.begin();
+	for ( ; itr != m_map_symbol2sprites.end(); ++itr)
 	{
 		SpriteList::iterator itr_sprite = itr->second.begin();
 		for ( ; itr_sprite != itr->second.end(); )
@@ -98,8 +100,8 @@ void SpriteFactory::remove(ISprite* sprite)
 void SpriteFactory::updateBoundings(const ISymbol& symbol)
 {
 	std::map<const ISymbol*, SpriteList>::iterator 
-		itr = map_symbol2sprites_.find(&symbol);
-	if (itr != map_symbol2sprites_.end())
+		itr = m_map_symbol2sprites.find(&symbol);
+	if (itr != m_map_symbol2sprites.end())
 	{
 		for (size_t i = 0, n = itr->second.size(); i < n; ++i)
 			itr->second[i]->buildBounding();

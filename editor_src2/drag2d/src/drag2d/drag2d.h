@@ -30,7 +30,7 @@
 #include "dataset/Patch9Sprite.h"
 #include "dataset/AnimSprite.h"
 #include "dataset/TextSprite.h"
-#include "dataset/FontBlankSprite.h"
+#include "dataset/FontSprite.h"
 #include "dataset/ChainShape.h"
 #include "dataset/CosineShape.h"
 #include "dataset/PolygonShape.h"

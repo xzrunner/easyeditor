@@ -54,7 +54,7 @@ void COCParser::prepareSymbols()
 		{
 			m_setSymbols.insert(&sprite->getSymbol());
 		}
-		else if (const d2d::FontBlankSprite* font = dynamic_cast<const d2d::FontBlankSprite*>(sprite))
+		else if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(sprite))
 		{
 			m_setSymbols.insert(&sprite->getSymbol());
 		}

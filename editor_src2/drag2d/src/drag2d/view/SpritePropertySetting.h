@@ -17,6 +17,10 @@ namespace d2d
 		virtual void updatePropertyGrid(PropertySettingPanel* panel);
 		virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
 
+	protected:
+		virtual void updateProperties(wxPropertyGrid* pg);
+		virtual void initProperties(wxPropertyGrid* pg);
+
 	private:
 		void translate(float x, float y);
 		void rotate(float angle);
@@ -24,7 +28,7 @@ namespace d2d
 		void shear(float kx, float ky);
 		void mirror(bool mx, bool my);
 
-	private:
+	protected:
 		ISprite* m_sprite;
 
 	}; // SpritePropertySetting

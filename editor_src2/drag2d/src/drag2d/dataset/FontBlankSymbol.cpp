@@ -1,4 +1,5 @@
 #include "FontBlankSymbol.h"
+#include "FontSprite.h"
 
 #include "common/Vector.h"
 #include "render/PrimitiveDraw.h"
@@ -35,7 +36,14 @@ void FontBlankSymbol::reloadTexture() const
 
 void FontBlankSymbol::draw(const ISprite* sprite/* = NULL*/) const
 {
-	PrimitiveDraw::drawRect(Vector(0, 0), width*0.5f, height*0.5f, true, 2, Colorf(0.7f, 0.7f, 0.7f, 0.7f));
+	float w = width, h = height;
+	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);
+	if (s)
+	{
+		w = s->width;
+		h = s->height;
+	}
+	PrimitiveDraw::drawRect(Vector(0, 0), w*0.5f, h*0.5f, true, 2, Colorf(0.7f, 0.7f, 0.7f, 0.7f));
 }
 
 float FontBlankSymbol::getWidth(const ISprite* sprite/* = NULL*/) const

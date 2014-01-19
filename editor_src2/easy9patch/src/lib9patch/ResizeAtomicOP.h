@@ -13,6 +13,11 @@ namespace lib9patch
 		virtual void undo();
 		virtual void redo();
 
+		virtual Json::Value store(const std::vector<d2d::ISprite*>& sprites) {
+			Json::Value ret;
+			return ret;
+		}
+
 	private:
 		d2d::Patch9Symbol* m_symbol;
 

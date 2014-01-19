@@ -59,6 +59,68 @@ void ISprite::clearUserData(bool deletePtr)
 	delete m_userData, m_userData = NULL;
 }
 
+void ISprite::load(const Json::Value& val)
+{
+	name = val["name"].asString();
+	multiColor = val["multi color"].asString();
+	addColor = val["add color"].asString();
+
+	float x = val["position"]["x"].asDouble();
+	float y = val["position"]["y"].asDouble();
+	float angle = val["angle"].asDouble();
+	setTransform(Vector(x, y), angle);
+
+	float sx, sy;
+	if (val["scale"].isNull())
+	{
+		sx = val["x scale"].asDouble();
+		sy = val["y scale"].asDouble();
+	}
+	else
+	{
+		sx = sy = val["scale"].asDouble();
+	}
+	setScale(sx, sy);
+
+	float kx, ky;
+	if (!val["x shear"].isNull())
+	{
+		kx = val["x shear"].asDouble();
+		ky = val["y shear"].asDouble();
+	}
+	else
+	{
+		kx = ky = 0;
+	}
+	setShear(kx, ky);
+
+	bool mx = val["x mirror"].asBool();
+	bool my = val["y mirror"].asBool();
+	setMirror(mx, my);
+}
+
+void ISprite::store(Json::Value& val)
+{
+	val["name"] = name;
+
+	val["multi color"] = multiColor;
+	val["add color"] = addColor;
+
+	val["position"]["x"] = m_pos.x;
+	val["position"]["y"] = m_pos.y;
+
+	val["angle"] = m_angle;
+
+	val["x scale"] = m_xScale;
+	val["y scale"] = m_yScale;
+
+	val["x shear"] = m_xShear;
+	val["y shear"] = m_yShear;
+
+	val["x mirror"] = m_xMirror;
+	val["y mirror"] = m_yMirror;		
+}
+
 // todo: translate() and rotate() has no opt to m_body
 void ISprite::setTransform(const Vector& position, float angle)
 {

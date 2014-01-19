@@ -26,7 +26,7 @@ namespace d2d
 
 	private:
 		typedef std::vector<ISprite*> SpriteList;
-		std::map<const ISymbol*, SpriteList> map_symbol2sprites_;
+		std::map<const ISymbol*, SpriteList> m_map_symbol2sprites;
 
 	private:
 		static SpriteFactory* m_instance;

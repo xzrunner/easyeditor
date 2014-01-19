@@ -45,7 +45,7 @@ namespace coceditor
 			const std::vector<std::pair<int, std::string> >& order);
 		void resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat);
 		void resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id);
-		void resolveSpriteForFrameFont(const d2d::FontBlankSprite* font, int id);
+		void resolveSpriteForFrameFont(const d2d::FontSprite* font, int id);
 
 		static void transToMat(const d2d::ISprite* sprite, float mat[6], bool force = false);
 
