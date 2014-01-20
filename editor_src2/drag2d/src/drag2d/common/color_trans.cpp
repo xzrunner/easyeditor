@@ -10,15 +10,17 @@ Colorf transColor(const std::string& str)
 	if (str.empty())
 		return Colorf(0, 0, 0, 0);
 
-	assert(str.length() == 10);
+//	assert(str.length() == 10);
 	if (str == "0xffffffff")
 		return Colorf(1, 1, 1, 1);
 
+	int len = str.length();
+
 	Colorf ret;
-	ret.a = transColor(str[2], str[3]);
-	ret.b = transColor(str[4], str[5]);
-	ret.g = transColor(str[6], str[7]);
-	ret.r = transColor(str[8], str[9]);
+	ret.a = (len >= 4 ? transColor(str[2], str[3]) : 1);
+	ret.b = (len >= 6 ? transColor(str[4], str[5]) : 1);
+	ret.g = (len >= 8 ? transColor(str[6], str[7]) : 1);
+	ret.r = (len >= 10 ? transColor(str[8], str[9]) : 1);
 
 	return ret;
 }

@@ -162,6 +162,7 @@
 #include "common/Random.h"
 #include "common/Context.h"
 #include "common/Exception.h"
+#include "common/color_trans.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"

@@ -56,8 +56,6 @@ namespace coceditor
 		std::map<const d2d::ISprite*, int> m_mapSpriteID;
 		std::map<const d2d::ISymbol*, int> m_mapSymbolID;
 
-
-
 	}; // COCCode
 }
 

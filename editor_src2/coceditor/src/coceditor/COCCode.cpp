@@ -518,16 +518,81 @@ void COCCode::resolveAnimation(const d2d::ComplexSymbol* symbol)
 		for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 			resolveSpriteForComponent(symbol->m_sprites[i], ids, unique, order);
 	}
+
+	// for action
 	// children
+	std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
+	std::vector<d2d::ISprite*> others;
+	for (int i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 	{
-		lua::TableAssign ta(m_gen, "", true);
-		// frame 0
+		d2d::ISprite* sprite = symbol->m_sprites[i];
+		if (sprite->tag.empty())
+			others.push_back(sprite);
+		else
 		{
-			lua::TableAssign ta(m_gen, "", true);
- 			for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-				resolveSpriteForFrame(symbol->m_sprites[i], i, ids, order);
+			std::map<std::string, std::vector<d2d::ISprite*> >::iterator itr = 
+				map_actions.find(sprite->tag);
+			if (itr == map_actions.end())
+			{
+				std::vector<d2d::ISprite*> sprites;
+				sprites.push_back(sprite);
+				map_actions.insert(std::make_pair(sprite->tag, sprites));
+			}
+			else
+			{
+				itr->second.push_back(sprite);
+			}
 		}
 	}
+
+	if (!map_actions.empty())
+	{
+		std::map<std::string, std::vector<d2d::ISprite*> >::iterator itr;
+		for (itr = map_actions.begin(); itr != map_actions.end(); ++itr)
+		{
+			lua::TableAssign ta(m_gen, "", true);
+			m_gen.line(lua::assign("action", "\"" + itr->first + "\"") + ",");
+			// frame 0
+			{
+				lua::TableAssign ta(m_gen, "", true);
+				for (size_t i = 0, n = itr->second.size(); i < n; ++i)
+				{
+					int idx = -1;
+					for (idx = 0; idx < symbol->m_sprites.size(); ++idx)
+						if (symbol->m_sprites[idx] == itr->second[i])
+							break;
+					resolveSpriteForFrame(itr->second[i], idx, ids, order);
+				}
+			}
+		}
+	}
+	if (!others.empty())
+	{
+ 		lua::TableAssign ta(m_gen, "", true);
+ 		// frame 0
+ 		{
+ 			lua::TableAssign ta(m_gen, "", true);
+  			for (size_t i = 0, n = others.size(); i < n; ++i)
+			{
+				int idx = -1;
+				for (idx = 0; idx < symbol->m_sprites.size(); ++idx)
+					if (symbol->m_sprites[idx] == others[i])
+						break;
+ 				resolveSpriteForFrame(others[i], idx, ids, order);
+			}
+ 		}
+	}
+
+// 	// children
+// 	{
+// 		lua::TableAssign ta(m_gen, "", true);
+// 		// frame 0
+// 		{
+// 			lua::TableAssign ta(m_gen, "", true);
+//  			for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
+// 				resolveSpriteForFrame(symbol->m_sprites[i], i, ids, order);
+// 		}
+// 	}
 }
 
 //void COCCode::resolveAnimation(const d2d::AnimSymbol* symbol)
@@ -897,10 +962,10 @@ void COCCode::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool for
 		m[3].c_str(), m[4].c_str(), m[5].c_str());
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (!sprite->multiColor.empty() || !sprite->addColor.empty())
+	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", sprite->multiColor);
-		std::string assignAdd = lua::assign("add", sprite->addColor);
+		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol));
+		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol));
 		lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
 	}
 	else
@@ -921,10 +986,10 @@ void COCCode::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 		m[3].c_str(), m[4].c_str(), m[5].c_str());
 	std::string assignMat = lua::assign("mat", smat);
 
-	if (!sprite->multiColor.empty() || !sprite->addColor.empty())
+	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
 	{
-		std::string assignColor = lua::assign("color", sprite->multiColor);
-		std::string assignAdd = lua::assign("add", sprite->addColor);
+		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol));
+		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol));
 		lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
 	}
 	else

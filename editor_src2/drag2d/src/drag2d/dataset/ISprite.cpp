@@ -72,6 +72,7 @@ void ISprite::clearUserData(bool deletePtr)
 void ISprite::load(const Json::Value& val)
 {
 	name = val["name"].asString();
+	tag = val["tag"].asString();
 
 	std::string str = val["multi color"].asString();
 	if (str.empty())
@@ -121,6 +122,7 @@ void ISprite::load(const Json::Value& val)
 void ISprite::store(Json::Value& val)
 {
 	val["name"] = name;
+	val["tag"] = tag;
 
 	val["multi color"] = transColor(multiCol);
 	val["add color"] = transColor(addCol);

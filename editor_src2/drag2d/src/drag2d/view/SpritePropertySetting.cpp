@@ -160,11 +160,13 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 {
 	pg->Clear();
 
+	pg->Append(new wxPropertyCategory("INFO", wxPG_LABEL));
+
 	pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
 
-	pg->Append(new wxPropertyCategory("[Sprite]", wxPG_LABEL));
-
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_sprite->name));
+
+	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_sprite->tag));
 
 	wxColour mul_col = wxColour(m_sprite->multiCol.r*255, m_sprite->multiCol.g*255, m_sprite->multiCol.b*255, m_sprite->multiCol.a*255);
 	wxColour add_col = wxColour(m_sprite->addCol.r*255, m_sprite->addCol.g*255, m_sprite->addCol.b*255, m_sprite->addCol.a*255);
@@ -172,6 +174,8 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Multi Color", "HasAlpha", true);
 	pg->Append(new wxColourProperty(wxT("Add Color"), wxPG_LABEL, add_col));
 	pg->SetPropertyAttribute("Add Color", "HasAlpha", true);
+
+	pg->Append(new wxPropertyCategory("GEOMETRY", wxPG_LABEL));
 
 	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_sprite->getPosition().x));
 	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
@@ -214,10 +218,9 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxBoolProperty(wxT("Horizontal Mirror"), wxPG_LABEL, xMirror));
 	pg->Append(new wxBoolProperty(wxT("Vertical Mirror"), wxPG_LABEL, yMirror));
 
-	pg->Append(new wxPropertyCategory("[Edit]", wxPG_LABEL));
+	pg->Append(new wxPropertyCategory("EDIT", wxPG_LABEL));
 	pg->Append(new wxBoolProperty("Visiable", wxPG_LABEL, m_sprite->visiable));
 	pg->Append(new wxBoolProperty("Editable", wxPG_LABEL, m_sprite->editable));
-	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_sprite->tag));
 }
 
 void SpritePropertySetting::translate(float x, float y) 
