@@ -181,7 +181,7 @@
 			"angle" : 0.0,
 			"filepath" : "building_info_castle_bar_complex.json",
 			"multi color" : "",
-			"name" : "bar2",
+			"name" : "bar1",
 			"position" : 
 			{
 				"x" : 149.5750122070313,
@@ -214,77 +214,5 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : 
-	[
-		null,
-		null,
-		null,
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : 29.0,
-				"dy" : 18.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"dx" : 38.0,
-				"dy" : -13.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.200000047683716,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.200000047683716,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.200000047683716,
-				"yscale" : 1.200000047683716
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"dx" : -1.0,
-				"dy" : 4.0,
-				"type" : 0
-			}
-		},
-		null
-	]
+	"undo" : null
 }

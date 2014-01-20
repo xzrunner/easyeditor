@@ -1,6 +1,7 @@
 
 {
 	"name" : "guild_join_exit",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -20,6 +21,25 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "6154-tongyong-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -341.3500061035156,
+				"y" : -8.186050415039063
+			},
+			"x mirror" : false,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
 		
@@ -83,32 +103,13 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "left_write_18_fontblank.json",
-			"multi color" : "",
-			"name" : "name",
-			"position" : 
-			{
-				"x" : -227.5304870605469,
-				"y" : 38.93121337890625
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
 			"filepath" : "left_write_16_fontblank.json",
 			"multi color" : "",
 			"name" : "score_title",
 			"position" : 
 			{
 				"x" : -227.5304870605469,
-				"y" : -0.9069061279296875
+				"y" : -22.90690612792969
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -127,7 +128,7 @@
 			"position" : 
 			{
 				"x" : -227.5304870605469,
-				"y" : -41.74502563476563
+				"y" : -53.74502563476563
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -146,7 +147,7 @@
 			"position" : 
 			{
 				"x" : -137.4999237060547,
-				"y" : -0.9069061279296875
+				"y" : -23.90690612792969
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -165,32 +166,13 @@
 			"position" : 
 			{
 				"x" : -137.4999694824219,
-				"y" : -41.68605041503906
+				"y" : -54.68605041503906
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "6107-tongyong-1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -42.50000381469727,
-				"y" : 0.0312194824218750
-			},
-			"x mirror" : false,
-			"x scale" : 0.4000000059604645,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		},
 		
@@ -211,6 +193,326 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_button_complex.json",
+			"multi color" : "",
+			"name" : "guild_troop_info",
+			"position" : 
+			{
+				"x" : -42.24992370605469,
+				"y" : 6.681213378906250
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_name2_fontblank.json",
+			"multi color" : "",
+			"name" : "name",
+			"position" : 
+			{
+				"x" : -218.7890319824219,
+				"y" : 45.81394958496094
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "left_write_16_fontblank.json",
+			"multi color" : "",
+			"name" : "troops_title",
+			"position" : 
+			{
+				"x" : -227.5304870605469,
+				"y" : 6.431213378906250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "right_write_16_fontblank.json",
+			"multi color" : "",
+			"name" : "troops",
+			"position" : 
+			{
+				"x" : -137.4999237060547,
+				"y" : 6.431213378906250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : 3.0,
+				"dy" : -1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : 351.0,
+				"dy" : -287.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"dx" : 21.0,
+				"dy" : -200.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.2000000029802322,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.2000000029802322,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.2000000029802322,
+				"yscale" : 0.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.2000000029802322,
+						"y" : 0.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.2000000029802322,
+				"yscale" : 0.2000000029802322
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.2000000029802322,
+						"y" : 0.2000000029802322
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.3000000119209290,
+				"yscale" : 0.2000000029802322
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.3000000119209290,
+						"y" : 0.2000000029802322
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.3000000119209290,
+				"yscale" : 0.3000000119209290
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -217.0,
+				"dy" : -239.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0, 1 ],
+			"val" : 
+			{
+				"dx" : -52.0,
+				"dy" : -8.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 2.0,
+				"dy" : -86.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : -3.0,
+				"dy" : -10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 220.0,
+				"dy" : -323.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 13 ],
+			"val" : 
+			{
+				"dx" : 137.0,
+				"dy" : -244.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : 8.0,
+				"dy" : -30.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"dx" : -9.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 10 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.200000047683716,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 1.200000047683716,
+				"yscale" : 1.200000047683716
+			}
 		}
 	]
 }

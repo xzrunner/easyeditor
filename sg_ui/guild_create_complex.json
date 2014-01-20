@@ -14,7 +14,7 @@
 			"position" : 
 			{
 				"x" : 3.155578613281250,
-				"y" : 178.2586669921875
+				"y" : 141.2586669921875
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -71,26 +71,7 @@
 			"position" : 
 			{
 				"x" : -299.2155151367188,
-				"y" : 178.7312622070313
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "guild_right_fontblank.json",
-			"multi color" : "",
-			"name" : "address_title",
-			"position" : 
-			{
-				"x" : -300.2155151367188,
-				"y" : 111.7891082763672
+				"y" : 146.7312622070313
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -166,26 +147,7 @@
 			"position" : 
 			{
 				"x" : 2.0,
-				"y" : 178.2586669921875
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "guild_center_fontblank.json",
-			"multi color" : "",
-			"name" : "address_input",
-			"position" : 
-			{
-				"x" : -2.041946411132813,
-				"y" : 111.7891082763672
+				"y" : 142.2586669921875
 			},
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -252,5 +214,5 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : null
+	"undo" : [ null, null ]
 }
