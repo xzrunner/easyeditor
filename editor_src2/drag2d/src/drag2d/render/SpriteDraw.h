@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "Shader.h"
+
 class wxMemoryDC;
 
 namespace d2d
@@ -14,7 +16,8 @@ namespace d2d
 	class SpriteDraw
 	{
 	public:
-		static void drawSprite(const ISprite* sprite);
+		static void drawSprite(const ISprite* sprite, const Colorf& mul = Colorf(1,1,1,1),
+			const Colorf& add = Colorf(0,0,0,0));
 
 		static void drawSprite(const ISymbol* symbol, const Vector& pos,
 			float angle = 0.0f, float xScale = 1.0f, float yScale = 1.0f,

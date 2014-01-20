@@ -6,6 +6,9 @@
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
 #include "common/Math.h"
+#include "common/color_trans.h"
+
+#include <wx/propgrid/advprops.h>
 
 namespace d2d
 {
@@ -32,10 +35,14 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 
 	if (name == wxT("Name"))
 		m_sprite->name = wxANY_AS(value, wxString);
-	else if (name == wxT("Multi Color"))
-		m_sprite->multiColor = wxANY_AS(value, wxString);
-	else if (name == wxT("Add Color"))
-		m_sprite->addColor = wxANY_AS(value, wxString);
+	else if (name == wxT("Multi Color")) {
+		wxColour col = wxANY_AS(value, wxColour);
+		m_sprite->multiCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+	}
+	else if (name == wxT("Add Color")) {
+		wxColour col = wxANY_AS(value, wxColour);
+		m_sprite->addCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+	}
 	else if (name == wxT("X"))
 		translate(wxANY_AS(value, float), m_sprite->getPosition().y);
 	else if (name == wxT("Y"))
@@ -111,8 +118,13 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("Name"))->SetValue(m_sprite->name);
 
-	pg->GetProperty(wxT("Multi Color"))->SetValue(m_sprite->multiColor);
-	pg->GetProperty(wxT("Add Color"))->SetValue(m_sprite->addColor);
+// 	pg->GetProperty(wxT("Multi Color"))->SetValue(m_sprite->multiColor);
+// 	pg->GetProperty(wxT("Add Color"))->SetValue(m_sprite->addColor);
+
+	wxColour mul_col = wxColour(m_sprite->multiCol.r*255, m_sprite->multiCol.g*255, m_sprite->multiCol.b*255, m_sprite->multiCol.a*255);
+	wxColour add_col = wxColour(m_sprite->addCol.r*255, m_sprite->addCol.g*255, m_sprite->addCol.b*255, m_sprite->addCol.a*255);
+	pg->SetPropertyValueString(wxT("Multi Color"), mul_col.GetAsString());
+	pg->SetPropertyValueString(wxT("Add Color"), add_col.GetAsString());
 
 	pg->GetProperty(wxT("X"))->SetValue(m_sprite->getPosition().x);
 	pg->GetProperty(wxT("Y"))->SetValue(m_sprite->getPosition().y);
@@ -138,8 +150,12 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_sprite->name));
 
-	pg->Append(new wxStringProperty(wxT("Multi Color"), wxPG_LABEL, m_sprite->multiColor));
-	pg->Append(new wxStringProperty(wxT("Add Color"), wxPG_LABEL, m_sprite->addColor));
+	wxColour mul_col = wxColour(m_sprite->multiCol.r*255, m_sprite->multiCol.g*255, m_sprite->multiCol.b*255, m_sprite->multiCol.a*255);
+	wxColour add_col = wxColour(m_sprite->addCol.r*255, m_sprite->addCol.g*255, m_sprite->addCol.b*255, m_sprite->addCol.a*255);
+	pg->Append(new wxColourProperty(wxT("Multi Color"), wxPG_LABEL, mul_col));
+	pg->SetPropertyAttribute("Multi Color", "HasAlpha", true);
+	pg->Append(new wxColourProperty(wxT("Add Color"), wxPG_LABEL, add_col));
+	pg->SetPropertyAttribute("Add Color", "HasAlpha", true);
 
 	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_sprite->getPosition().x));
 	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));

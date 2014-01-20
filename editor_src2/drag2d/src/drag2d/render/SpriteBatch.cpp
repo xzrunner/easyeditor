@@ -140,7 +140,7 @@ void SpriteBatch::onDraw() const
 
 	++m_drawTimes;
 
-	glColor4f(1, 1, 1, 1);
+//	glColor4f(1, 1, 1, 1);
 
 	const int color_offset = 0;
 	const int vertex_offset = sizeof(unsigned char) * 4;

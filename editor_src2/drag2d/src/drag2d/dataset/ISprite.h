@@ -4,6 +4,7 @@
 #include "common/UserDataImpl.h"
 #include "common/Object.h"
 #include "common/Vector.h"
+#include "common/Color.h"
 
 #include <JSON/json.h>
 
@@ -77,7 +78,7 @@ namespace d2d
 	public:
 		std::string name;
 		
-		std::string multiColor, addColor;
+		Colorf multiCol, addCol;
 
 	protected:
 		Vector m_pos;

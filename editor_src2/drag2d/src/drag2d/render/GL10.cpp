@@ -1,4 +1,5 @@
 #include "GL10.h"
+#include "Shader.h"
 
 #include <GL/glew.h>
 
@@ -17,17 +18,20 @@ void GL10::BindTexture(int target, unsigned int texture)
 
 void GL10::BlendFunc(int sfactor, int dfactor)
 {
-	glBlendFunc(sfactor, dfactor);
+	// set in shader
+//	glBlendFunc(sfactor, dfactor);
 }
 
 void GL10::Color3f(float red, float green, float blue)
 {
-	glColor3f(red, green, blue);
+//	glColor3f(red, green, blue);
+	Shader::Instance()->color(red, green, blue, 1.0f);
 }
 
 void GL10::Color4f(float red, float green, float blue, float alpha)
 {
-	glColor4f(red, green, blue, alpha);
+//	glColor4f(red, green, blue, alpha);
+	Shader::Instance()->color(red, green, blue, alpha);
 }
 
 void GL10::ColorPointer(int size, int type, int stride, const void* pointer)

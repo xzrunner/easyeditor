@@ -101,10 +101,10 @@ void Image::reload()
 
 void Image::draw() const
 {
-	GL10::Enable(GL10::GL_BLEND);
-	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
+// 	GL10::Enable(GL10::GL_BLEND);
+// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 
-	GL10::Color4f(1.0f, 1.0f, 1.0f, 1.0f);
+// 	GL10::Color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
 	const float hWidth = m_width * 0.5f,
 		hHeight = m_height * 0.5f;
@@ -118,7 +118,7 @@ void Image::draw() const
 	GL10::End();
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 
-	GL10::Disable(GL10::GL_BLEND);
+	//GL10::Disable(GL10::GL_BLEND);
 }
 
 void Image::removeTransparentBorder()

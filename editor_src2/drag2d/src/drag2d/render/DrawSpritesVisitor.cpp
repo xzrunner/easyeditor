@@ -11,8 +11,8 @@ namespace d2d
 DrawSpritesVisitor::DrawSpritesVisitor(SpriteBatch& batch)
 	: m_batch(batch)
 {
-	GL10::Enable(GL10::GL_BLEND);
-	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
+// 	GL10::Enable(GL10::GL_BLEND);
+// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 
 	m_batch.clear();
 }
@@ -21,7 +21,7 @@ DrawSpritesVisitor::~DrawSpritesVisitor()
 {
 	m_batch.onDraw();
 
-	GL10::Disable(GL10::GL_BLEND);
+	//GL10::Disable(GL10::GL_BLEND);
 }
 
 void DrawSpritesVisitor::visit(Object* object, bool& bFetchNext)

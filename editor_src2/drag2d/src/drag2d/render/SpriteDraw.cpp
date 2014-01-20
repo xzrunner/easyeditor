@@ -1,6 +1,7 @@
 #include "SpriteDraw.h"
 #include "GL10.h"
 #include "SpriteBatch.h"
+#include "Shader.h"
 
 #include "common/Math.h"
 #include "common/Matrix.h"
@@ -14,8 +15,11 @@ namespace d2d
 
 float SpriteDraw::time = 0;
 
-void SpriteDraw::drawSprite(const ISprite* sprite)
+void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colorf& add)
 {
+	Shader* shader = Shader::Instance();
+	shader->sprite();
+
 	GL10::PushMatrix();
 
 	love::Matrix t;
@@ -26,6 +30,10 @@ void SpriteDraw::drawSprite(const ISprite* sprite)
 	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(), 
 		xScale, yScale, 0, 0, sprite->getShearX(), sprite->getShearY());
 	GL10::MultMatrixf((const float*)t.getElements( ));
+
+	Colorf m = cMul(mul, sprite->multiCol),
+		a = cAdd(add, sprite->addCol);
+	shader->color(m, a);
 
 	sprite->getSymbol().draw(sprite);
 
@@ -132,8 +140,8 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Vector& offset, wxMemor
 void SpriteDraw::drawSprites(const std::vector<ISprite*>& sprites,
 							 SpriteBatch& batch)
 {
-	GL10::Enable(GL10::GL_BLEND);
-	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
+// 	GL10::Enable(GL10::GL_BLEND);
+// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 
 	batch.clear();
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
@@ -146,7 +154,7 @@ void SpriteDraw::drawSprites(const std::vector<ISprite*>& sprites,
 	}
 	batch.onDraw();
 
-	GL10::Disable(GL10::GL_BLEND);
+	//GL10::Disable(GL10::GL_BLEND);
 }
 
 void SpriteDraw::begin(const ISprite* sprite)

@@ -15,7 +15,8 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 		-1,
 		wxDefaultPosition,
 		wxSize(400, 800),
-		wxPG_SPLITTER_AUTO_CENTER/* | wxPG_BOLD_MODIFIED*/
+		wxPG_SPLITTER_AUTO_CENTER
+		| wxPG_BOLD_MODIFIED
 		);
 	Connect(m_pg->GetId(), wxEVT_PG_CHANGED, wxPropertyGridEventHandler(PropertySettingPanel::onPropertyGridChange));
 

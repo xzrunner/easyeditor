@@ -44,10 +44,10 @@ void PhysicsPanelImpl::drawPhysics()
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
 
-	GL10::Enable(GL10::GL_BLEND);
-	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
+// 	GL10::Enable(GL10::GL_BLEND);
+// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 	m_world->DrawDebugData();
-	GL10::Disable(GL10::GL_BLEND);
+	//GL10::Disable(GL10::GL_BLEND);
 
 	GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
 }

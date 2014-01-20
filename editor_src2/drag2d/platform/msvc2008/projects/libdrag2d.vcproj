@@ -1181,6 +1181,14 @@
 				RelativePath="..\..\..\src\drag2d\render\PrimitiveDraw.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\Shader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\Shader.h"
+				>
+			</File>
 			<Filter
 				Name="opengl"
 				>
@@ -1275,6 +1283,14 @@
 			>
 			<File
 				RelativePath="..\..\..\src\drag2d\common\Color.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\color_trans.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\color_trans.h"
 				>
 			</File>
 			<File

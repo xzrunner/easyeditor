@@ -6,6 +6,7 @@
 
 #include "common/AnimFileAdapter.h"
 #include "common/FileNameTools.h"
+#include "common/color_trans.h"
 #include "dataset/Bitmap.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/ImageSprite.h"
@@ -161,8 +162,14 @@ void AnimSymbol::loadResources()
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 
 				sprite->name = entry->name;
-				sprite->multiColor = entry->multiColor;
-				sprite->addColor = entry->addColor;
+				if (entry->multiColor.empty())
+					sprite->multiCol = Colorf(1, 1, 1, 1);
+				else
+					sprite->multiCol = transColor(entry->multiColor);
+				if (entry->addColor.empty())
+					sprite->addCol = Colorf(0 ,0, 0, 0);
+				else
+					sprite->addCol = transColor(entry->addColor);
 
 				sprite->setTransform(entry->pos, entry->angle);
 				sprite->setScale(entry->xScale, entry->yScale);

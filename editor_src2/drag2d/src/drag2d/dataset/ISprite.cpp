@@ -5,6 +5,7 @@
 #include <Box2D/Box2D.h>
 
 #include "common/Math.h"
+#include "common/color_trans.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/SpriteFactory.h"
 
@@ -15,6 +16,9 @@ ISprite::ISprite()
 	: m_body(NULL)
 	, m_observer(NULL)
 {
+	multiCol.set(1, 1, 1, 1);
+	addCol.set(0, 0, 0, 0);
+
 	m_pos.set(0.0f, 0.0f);
 	m_angle = 0.0f;
 	m_xScale = m_yScale = 1.0f;
@@ -27,8 +31,8 @@ ISprite::ISprite(const ISprite& sprite)
 	: m_observer(NULL)
 {
 	name = sprite.name;
-	multiColor = sprite.multiColor;
-	addColor = sprite.addColor;
+	multiCol = sprite.multiCol;
+	addCol = sprite.addCol;
 
 	m_pos = sprite.m_pos;
 	m_angle = sprite.m_angle;
@@ -62,8 +66,17 @@ void ISprite::clearUserData(bool deletePtr)
 void ISprite::load(const Json::Value& val)
 {
 	name = val["name"].asString();
-	multiColor = val["multi color"].asString();
-	addColor = val["add color"].asString();
+
+	std::string str = val["multi color"].asString();
+	if (str.empty())
+		multiCol = Colorf(1, 1, 1, 1);
+	else
+		multiCol = transColor(str);
+	str = val["add color"].asString();
+	if (str.empty())
+		addCol = Colorf(0, 0, 0, 0);
+	else
+		addCol = transColor(str);
 
 	float x = val["position"]["x"].asDouble();
 	float y = val["position"]["y"].asDouble();
@@ -103,8 +116,8 @@ void ISprite::store(Json::Value& val)
 {
 	val["name"] = name;
 
-	val["multi color"] = multiColor;
-	val["add color"] = addColor;
+	val["multi color"] = transColor(multiCol);
+	val["add color"] = transColor(addCol);
 
 	val["position"]["x"] = m_pos.x;
 	val["position"]["y"] = m_pos.y;

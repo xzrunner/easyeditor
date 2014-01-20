@@ -24,6 +24,13 @@ namespace d2d
 			return *this;
 		}
 
+		bool operator != (const Colorf& color) const
+		{
+			return r != color.r || g != color.g || b != color.b || a != color.a;
+		}
+
+		
+
 		void set(float pr, float pg, float pb, float pa) {
 			r = pr;
 			g = pg;
@@ -58,6 +65,26 @@ namespace d2d
 	{
 		os << color.r << " " << color.g << " " << color.b << " " << color.a;
 		return os;
+	}
+
+	inline Colorf cMul(const Colorf& a, const Colorf& b)
+	{
+		Colorf ret;
+		ret.r = a.r * b.r;
+		ret.g = a.g * b.g;
+		ret.b = a.b * b.b;
+		ret.a = a.a * b.a;
+		return ret;
+	}
+
+	inline Colorf cAdd(const Colorf& a, const Colorf& b)
+	{
+		Colorf ret;
+		ret.r = std::min(a.r + b.r, 1.0f);
+		ret.g = std::min(a.g + b.g, 1.0f);
+		ret.b = std::min(a.b + b.b, 1.0f);
+		ret.a = std::min(a.a + b.a, 1.0f);
+		return ret;
 	}
 
 	struct Colori

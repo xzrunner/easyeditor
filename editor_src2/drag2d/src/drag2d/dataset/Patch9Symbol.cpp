@@ -73,7 +73,10 @@ void Patch9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				SpriteDraw::drawSprite(m_sprites[i][j]);
+				if (sprite)
+					SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
+				else
+					SpriteDraw::drawSprite(m_sprites[i][j]);
 			}
 		break;
 	case e_9GridHollow:
@@ -82,21 +85,30 @@ void Patch9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 			{
 				if (i == 1 && j == 1) continue;
 				if (!m_sprites[i][j]) continue;
-				SpriteDraw::drawSprite(m_sprites[i][j]);
+				if (sprite)
+					SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
+				else
+					SpriteDraw::drawSprite(m_sprites[i][j]);
 			}
 			break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[1][i]) continue;
-			SpriteDraw::drawSprite(m_sprites[1][i]);
+			if (sprite)
+				SpriteDraw::drawSprite(m_sprites[1][i], sprite->multiCol, sprite->addCol);
+			else
+				SpriteDraw::drawSprite(m_sprites[1][i]);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[i][1]) continue;
-			SpriteDraw::drawSprite(m_sprites[i][1]);
+			if (sprite)
+				SpriteDraw::drawSprite(m_sprites[i][1], sprite->multiCol, sprite->addCol);
+			else
+				SpriteDraw::drawSprite(m_sprites[i][1]);
 		}
 		break;
 	case e_6GridUpper:
@@ -104,7 +116,10 @@ void Patch9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				SpriteDraw::drawSprite(m_sprites[i][j]);
+				if (sprite)
+					SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
+				else
+					SpriteDraw::drawSprite(m_sprites[i][j]);
 			}
 	}
 

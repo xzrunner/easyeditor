@@ -2,6 +2,8 @@
 #include "Font.h"
 #include "TextSprite.h"
 
+#include "render/Shader.h"
+
 //OpenGL Headers 
 #include <windows.h>
 #include <GL/gl.h>
@@ -43,7 +45,8 @@ void FontSymbol::draw(const ISprite* sprite/* = NULL*/) const
 {
 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));
 	const d2d::Colori& c = text->getColor();
-	glColor4ub(c.r, c.g, c.b, c.a);
+//	glColor4ub(c.r, c.g, c.b, c.a);
+	Shader::Instance()->color(c.r / 255.0f, c.g / 255.0f, c.b / 255.0f, c.a / 255.0f);
 	print(0, 0, text->getText().c_str());
 }
 
@@ -102,8 +105,9 @@ void FontSymbol::print(float x, float y, const char* text) const
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
+	//glEnable(GL_BLEND);
+	// set in shader
+//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	
 
 	glListBase(font);
 
