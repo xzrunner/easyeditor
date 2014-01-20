@@ -9,6 +9,7 @@
 #include "dataset/Bitmap.h"
 #include "dataset/AbstractBV.h"
 #include "render/SpriteDraw.h"
+#include "render/PrimitiveDraw.h"
 
 #include <queue>
 #include <set>
@@ -59,6 +60,8 @@ void ComplexSymbol::draw(const ISprite* sprite/* = NULL*/) const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		SpriteDraw::drawSprite(m_sprites[i]);
+
+	d2d::PrimitiveDraw::drawRect(Vector(m_clipbox.xMin, m_clipbox.yMin), Vector(m_clipbox.xMax, m_clipbox.yMax));
 }
 
 float ComplexSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
@@ -101,6 +104,11 @@ void ComplexSymbol::loadResources()
 	fin.close();
 
 	name = value["name"].asString();
+
+	m_clipbox.xMin = value["xmin"].asInt();
+	m_clipbox.xMax = value["xmax"].asInt();
+	m_clipbox.yMin = value["ymin"].asInt();
+	m_clipbox.yMax = value["ymax"].asInt();
 
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];

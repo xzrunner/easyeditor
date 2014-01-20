@@ -70,6 +70,8 @@ namespace d2d
 
 		Rect m_rect;
 
+		Rect m_clipbox;
+
 	}; // ComplexSymbol
 }
 

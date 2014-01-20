@@ -25,6 +25,26 @@ void ComplexPropertySetting::onPropertyGridChange(const wxString& name, const wx
 		if (m_symbol)
 			setGroupByNames(wxANY_AS(value, wxString));
 	}
+	else if (name == wxT("Clipbox.xmin") && m_symbol)
+	{
+		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
+		c->m_clipbox.xMin = wxANY_AS(value, int);
+	}
+	else if (name == wxT("Clipbox.xmax") && m_symbol)
+	{
+		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
+		c->m_clipbox.xMax = wxANY_AS(value, int);
+	}
+	else if (name == wxT("Clipbox.ymin") && m_symbol)
+	{
+		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
+		c->m_clipbox.yMin = wxANY_AS(value, int);
+	}
+	else if (name == wxT("Clipbox.ymin") && m_symbol)
+	{
+		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
+		c->m_clipbox.yMin = wxANY_AS(value, int);
+	}
 
 	m_editPanel->Refresh();
 }
@@ -33,6 +53,7 @@ void ComplexPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, boo
 {
 	SymbolPropertySetting::enablePropertyGrid(panel, bEnable);
 	panel->getPG()->GetProperty(wxT("Groups"))->Enable(bEnable);
+	panel->getPG()->GetProperty(wxT("Clipbox"))->Enable(bEnable);
 }
 
 std::string ComplexPropertySetting::getGroupNames() const
@@ -107,6 +128,22 @@ void ComplexPropertySetting::updateProperties(wxPropertyGrid* pg)
 		pg->GetProperty(wxT("Groups"))->SetValue(getGroupNames());
 	else
 		pg->GetProperty(wxT("Groups"))->SetValue(wxEmptyString);
+
+	if (m_symbol)
+	{
+		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
+		pg->SetPropertyValue(wxT("Clipbox.xmin"), c->m_clipbox.xMin);
+		pg->SetPropertyValue(wxT("Clipbox.xmax"), c->m_clipbox.xMax);
+		pg->SetPropertyValue(wxT("Clipbox.ymin"), c->m_clipbox.yMin);
+		pg->SetPropertyValue(wxT("Clipbox.ymax"), c->m_clipbox.yMax);
+	}
+	else
+	{
+		pg->SetPropertyValue(wxT("Clipbox.xmin"), 0);
+		pg->SetPropertyValue(wxT("Clipbox.xmax"), 0);
+		pg->SetPropertyValue(wxT("Clipbox.ymin"), 0);
+		pg->SetPropertyValue(wxT("Clipbox.ymax"), 0);
+	}
 }
 
 void ComplexPropertySetting::initProperties(wxPropertyGrid* pg)
@@ -116,6 +153,12 @@ void ComplexPropertySetting::initProperties(wxPropertyGrid* pg)
 		pg->Append(new wxStringProperty(wxT("Groups"), wxPG_LABEL, getGroupNames()));
 	else
 		pg->Append(new wxStringProperty(wxT("Groups"), wxPG_LABEL, wxEmptyString));
+
+	wxPGProperty* cbProp = pg->Append(new wxStringProperty(("Clipbox"), wxPG_LABEL, wxT("<composed>")));
+	pg->AppendIn(cbProp, new wxIntProperty(wxT("xmin"), wxPG_LABEL, 0));
+	pg->AppendIn(cbProp, new wxIntProperty(wxT("xmax"), wxPG_LABEL, 0));
+	pg->AppendIn(cbProp, new wxIntProperty(wxT("ymin"), wxPG_LABEL, 0));
+	pg->AppendIn(cbProp, new wxIntProperty(wxT("ymax"), wxPG_LABEL, 0));
 }
 
 void ComplexPropertySetting::initEachGroup(wxPropertyGrid* pg)
