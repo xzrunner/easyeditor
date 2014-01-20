@@ -78,7 +78,7 @@ MultiSpritesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, std::vect
 void MultiSpritesImpl::RectQueryVisitor::visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
-	if (sprite->isIntersect(m_rect))
+	if (sprite->editable && sprite->isIntersect(m_rect))
 		m_result.push_back(sprite);
 	bFetchNext = true;
 }

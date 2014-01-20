@@ -17,6 +17,9 @@ float SpriteDraw::time = 0;
 
 void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colorf& add)
 {
+	if (!sprite->visiable)
+		return;
+
 	Shader* shader = Shader::Instance();
 	shader->sprite();
 

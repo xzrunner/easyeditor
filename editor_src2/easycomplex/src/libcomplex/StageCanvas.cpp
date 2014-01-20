@@ -35,6 +35,8 @@ namespace libcomplex
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		{
 			d2d::ISprite* sprite = sprites[i];
+			if (!sprite->visiable)
+				continue;
 			if (d2d::AnimSprite* anim = dynamic_cast<d2d::AnimSprite*>(sprite))
 			{
 				d2d::SpriteDraw::begin(sprite);

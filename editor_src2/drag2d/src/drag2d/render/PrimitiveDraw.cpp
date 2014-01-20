@@ -285,17 +285,19 @@ void PrimitiveDraw::drawLines(const std::vector<Vector>& vertices,
 void PrimitiveDraw::drawPolyline(const std::vector<Vector>& vertices, 
 								 const Colorf& color, bool isClose, float size /*= 2*/)
 {
-	Shader::Instance()->shape();
+	Shader* shader = Shader::Instance();
+	shader->shape();
+	shader->color(color);
 
 	GL10::LineWidth(size);
 
  	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
-  	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
+//  	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
  
- 	std::vector<Colorf> colors(vertices.size(), color);
+// 	std::vector<Colorf> colors(vertices.size(), color);
 
 	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &vertices[0]);
-	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
+//	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
 	if (isClose)
 		GL10::DrawArrays(GL10::GL_LINE_LOOP, 0, vertices.size());

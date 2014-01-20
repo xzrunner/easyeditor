@@ -76,9 +76,14 @@ namespace d2d
 		void afterScaleChanged();
 
 	public:
-		std::string name;
-		
+		// 
+		std::string name;		
 		Colorf multiCol, addCol;
+
+		// edit
+		bool visiable;
+		bool editable;
+		std::string tag;
 
 	protected:
 		Vector m_pos;

@@ -10,7 +10,7 @@ class Shader
 public:
 	static Shader* Instance();
 
-	void color(const Colorf& multi, const Colorf& add);
+	void color(const Colorf& multi, const Colorf& add = Colorf(0, 0, 0, 0));
 	void color(float r, float g, float b, float a);
 
 	void sprite();

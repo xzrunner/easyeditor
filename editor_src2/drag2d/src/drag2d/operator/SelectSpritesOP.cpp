@@ -82,7 +82,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 
 	Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
-	if (selected)
+	if (selected && selected->editable)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
 		{

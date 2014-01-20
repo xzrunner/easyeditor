@@ -67,6 +67,8 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 {
 	SpritePropertySetting::initProperties(pg);
 
+	pg->Append(new wxPropertyCategory("[Font]", wxPG_LABEL));
+
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
 	pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, sprite->color));

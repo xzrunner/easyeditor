@@ -81,6 +81,12 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 //		m_sprite->setMirror(xMirror, wxANY_AS(value, bool));
 		mirror(xMirror, wxANY_AS(value, bool));
 	}
+	else if (name == wxT("Visiable"))
+		m_sprite->visiable = wxANY_AS(value, bool);
+	else if (name == wxT("Editable"))
+		m_sprite->editable = wxANY_AS(value, bool);
+	else if (name == "Tag")
+		m_sprite->tag = wxANY_AS(value, wxString);
 
 	m_editPanel->Refresh();
 }
@@ -112,6 +118,10 @@ void SpritePropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool
 	pg->GetProperty(wxT("Shear Y"))->Enable(bEnable);
 	pg->GetProperty(wxT("Horizontal Mirror"))->Enable(bEnable);
 	pg->GetProperty(wxT("Vertical Mirror"))->Enable(bEnable);
+
+	pg->GetProperty(wxT("Visiable"))->Enable(bEnable);
+	pg->GetProperty(wxT("Editable"))->Enable(bEnable);
+	pg->GetProperty(wxT("Tag"))->Enable(bEnable);
 }
 
 void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
@@ -140,6 +150,10 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 	m_sprite->getMirror(xMirror, yMirror);
 	pg->GetProperty(wxT("Horizontal Mirror"))->SetValue(xMirror);
 	pg->GetProperty(wxT("Vertical Mirror"))->SetValue(yMirror);
+
+	pg->GetProperty(wxT("Visiable"))->SetValue(m_sprite->visiable);
+	pg->GetProperty(wxT("Editable"))->SetValue(m_sprite->editable);
+	pg->GetProperty(wxT("Tag"))->SetValue(m_sprite->tag);
 }
 
 void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
@@ -147,6 +161,8 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Clear();
 
 	pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
+
+	pg->Append(new wxPropertyCategory("[Sprite]", wxPG_LABEL));
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_sprite->name));
 
@@ -197,6 +213,11 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	m_sprite->getMirror(xMirror, yMirror);
 	pg->Append(new wxBoolProperty(wxT("Horizontal Mirror"), wxPG_LABEL, xMirror));
 	pg->Append(new wxBoolProperty(wxT("Vertical Mirror"), wxPG_LABEL, yMirror));
+
+	pg->Append(new wxPropertyCategory("[Edit]", wxPG_LABEL));
+	pg->Append(new wxBoolProperty("Visiable", wxPG_LABEL, m_sprite->visiable));
+	pg->Append(new wxBoolProperty("Editable", wxPG_LABEL, m_sprite->editable));
+	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_sprite->tag));
 }
 
 void SpritePropertySetting::translate(float x, float y) 

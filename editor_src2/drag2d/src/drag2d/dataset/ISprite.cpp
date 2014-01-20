@@ -19,6 +19,8 @@ ISprite::ISprite()
 	multiCol.set(1, 1, 1, 1);
 	addCol.set(0, 0, 0, 0);
 
+	visiable = editable = true;
+
 	m_pos.set(0.0f, 0.0f);
 	m_angle = 0.0f;
 	m_xScale = m_yScale = 1.0f;
@@ -33,6 +35,10 @@ ISprite::ISprite(const ISprite& sprite)
 	name = sprite.name;
 	multiCol = sprite.multiCol;
 	addCol = sprite.addCol;
+
+	visiable = sprite.visiable;
+	editable = sprite.editable;
+	tag = sprite.tag;
 
 	m_pos = sprite.m_pos;
 	m_angle = sprite.m_angle;
