@@ -85,10 +85,10 @@ namespace ecomplex
 		{
 			if (library && property)
 			{
-				leftHorizontalSplitter->SetSashGravity(0.65f);
+				leftHorizontalSplitter->SetSashGravity(0.5f);
 				leftHorizontalSplitter->SplitHorizontally(library, property);
 			}
-			leftVerticalSplitter->SetSashGravity(0.15f);
+			leftVerticalSplitter->SetSashGravity(0.2f);
 			leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, stage);
 		}
 
