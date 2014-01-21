@@ -29,6 +29,8 @@ ComplexSymbol::ComplexSymbol()
 	m_bitmap = new Bitmap(
 		new wxBitmap(WIDTH * SCALE, HEIGHT * SCALE)
 		);
+
+	m_clipbox.xMin = m_clipbox.xMax = m_clipbox.yMin = m_clipbox.yMax = 0;
 }
 
 ComplexSymbol::~ComplexSymbol()
@@ -60,8 +62,6 @@ void ComplexSymbol::draw(const ISprite* sprite/* = NULL*/) const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		SpriteDraw::drawSprite(m_sprites[i]);
-
-	d2d::PrimitiveDraw::drawRect(Vector(m_clipbox.xMin, m_clipbox.yMin), Vector(m_clipbox.xMax, m_clipbox.yMax));
 }
 
 float ComplexSymbol::getWidth(const ISprite* sprite/* = NULL*/) const

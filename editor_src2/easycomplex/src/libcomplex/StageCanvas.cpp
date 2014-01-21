@@ -47,6 +47,10 @@ namespace libcomplex
 				d2d::SpriteDraw::drawSprite(sprites[i]);
 		}
 
+		const d2d::Rect& cb = m_editPanel->getSymbol()->m_clipbox;
+		d2d::PrimitiveDraw::drawRect(d2d::Vector(cb.xMin, cb.yMin), d2d::Vector(cb.xMax, cb.yMax), 
+			false, 2, d2d::Colorf(0, 0.8f, 0, 1));
+
 		m_editPanel->drawEditTemp();
 	}
 

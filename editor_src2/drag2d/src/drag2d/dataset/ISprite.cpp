@@ -18,6 +18,7 @@ ISprite::ISprite()
 {
 	multiCol.set(1, 1, 1, 1);
 	addCol.set(0, 0, 0, 0);
+	clip = false;
 
 	visiable = editable = true;
 
@@ -35,6 +36,7 @@ ISprite::ISprite(const ISprite& sprite)
 	name = sprite.name;
 	multiCol = sprite.multiCol;
 	addCol = sprite.addCol;
+	clip = sprite.clip;
 
 	visiable = sprite.visiable;
 	editable = sprite.editable;
@@ -73,6 +75,7 @@ void ISprite::load(const Json::Value& val)
 {
 	name = val["name"].asString();
 	tag = val["tag"].asString();
+	clip = val["clip"].asBool();
 
 	std::string str = val["multi color"].asString();
 	if (str.empty())
@@ -123,6 +126,7 @@ void ISprite::store(Json::Value& val)
 {
 	val["name"] = name;
 	val["tag"] = tag;
+	val["clip"] = clip;
 
 	val["multi color"] = transColor(multiCol);
 	val["add color"] = transColor(addCol);

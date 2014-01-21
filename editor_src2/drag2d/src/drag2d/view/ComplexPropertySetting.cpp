@@ -40,10 +40,10 @@ void ComplexPropertySetting::onPropertyGridChange(const wxString& name, const wx
 		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
 		c->m_clipbox.yMin = wxANY_AS(value, int);
 	}
-	else if (name == wxT("Clipbox.ymin") && m_symbol)
+	else if (name == wxT("Clipbox.ymax") && m_symbol)
 	{
 		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
-		c->m_clipbox.yMin = wxANY_AS(value, int);
+		c->m_clipbox.yMax = wxANY_AS(value, int);
 	}
 
 	m_editPanel->Refresh();
@@ -132,10 +132,10 @@ void ComplexPropertySetting::updateProperties(wxPropertyGrid* pg)
 	if (m_symbol)
 	{
 		ComplexSymbol* c = static_cast<ComplexSymbol*>(m_symbol);
-		pg->SetPropertyValue(wxT("Clipbox.xmin"), c->m_clipbox.xMin);
-		pg->SetPropertyValue(wxT("Clipbox.xmax"), c->m_clipbox.xMax);
-		pg->SetPropertyValue(wxT("Clipbox.ymin"), c->m_clipbox.yMin);
-		pg->SetPropertyValue(wxT("Clipbox.ymax"), c->m_clipbox.yMax);
+		pg->SetPropertyValue(wxT("Clipbox.xmin"), (int)c->m_clipbox.xMin);
+		pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)c->m_clipbox.xMax);
+		pg->SetPropertyValue(wxT("Clipbox.ymin"), (int)c->m_clipbox.yMin);
+		pg->SetPropertyValue(wxT("Clipbox.ymax"), (int)c->m_clipbox.yMax);
 	}
 	else
 	{

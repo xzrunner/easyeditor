@@ -43,6 +43,8 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		wxColour col = wxANY_AS(value, wxColour);
 		m_sprite->addCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
 	}
+	else if (name == wxT("Clip"))
+		m_sprite->clip = wxANY_AS(value, bool);
 	else if (name == wxT("X"))
 		translate(wxANY_AS(value, float), m_sprite->getPosition().y);
 	else if (name == wxT("Y"))
@@ -107,6 +109,7 @@ void SpritePropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool
 	pg->GetProperty(wxT("Name"))->Enable(bEnable);
 	pg->GetProperty(wxT("Multi Color"))->Enable(bEnable);
 	pg->GetProperty(wxT("Add Color"))->Enable(bEnable);
+	pg->GetProperty(wxT("Clip"))->Enable(bEnable);
 	pg->GetProperty(wxT("X"))->Enable(bEnable);
 	pg->GetProperty(wxT("Y"))->Enable(bEnable);
 	pg->GetProperty(wxT("Angle"))->Enable(bEnable);
@@ -135,6 +138,7 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 	wxColour add_col = wxColour(m_sprite->addCol.r*255, m_sprite->addCol.g*255, m_sprite->addCol.b*255, m_sprite->addCol.a*255);
 	pg->SetPropertyValueString(wxT("Multi Color"), mul_col.GetAsString());
 	pg->SetPropertyValueString(wxT("Add Color"), add_col.GetAsString());
+	pg->GetProperty(wxT("Clip"))->SetValue(m_sprite->clip);
 
 	pg->GetProperty(wxT("X"))->SetValue(m_sprite->getPosition().x);
 	pg->GetProperty(wxT("Y"))->SetValue(m_sprite->getPosition().y);
@@ -167,6 +171,8 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_sprite->name));
 
 	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_sprite->tag));
+
+	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, m_sprite->clip));
 
 	wxColour mul_col = wxColour(m_sprite->multiCol.r*255, m_sprite->multiCol.g*255, m_sprite->multiCol.b*255, m_sprite->multiCol.a*255);
 	wxColour add_col = wxColour(m_sprite->addCol.r*255, m_sprite->addCol.g*255, m_sprite->addCol.b*255, m_sprite->addCol.a*255);

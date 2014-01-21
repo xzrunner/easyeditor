@@ -509,6 +509,17 @@ void COCCode::resolveAnimation(const d2d::ComplexSymbol* symbol)
 
 	resolveAnimationCommon(symbol);
 
+	// clipbox
+	const d2d::Rect& cb = symbol->m_clipbox;
+	if (cb.xMin != 0 || cb.xMax != 0 || cb.yMin != 0 || cb.yMax != 0)
+	{
+		std::string width = wxString::FromDouble(cb.xMax - cb.xMin);
+		std::string height = wxString::FromDouble(cb.yMax - cb.yMin);
+		std::string left = wxString::FromDouble(cb.xMin);
+		std::string top = wxString::FromDouble(-cb.yMax);
+		lua::tableassign(m_gen, "clipbox", 4, width.c_str(), height.c_str(), left.c_str(), top.c_str());
+	}
+
 	// component
 	std::vector<int> ids;
 	std::map<int, std::vector<std::string> > unique;
@@ -519,7 +530,6 @@ void COCCode::resolveAnimation(const d2d::ComplexSymbol* symbol)
 			resolveSpriteForComponent(symbol->m_sprites[i], ids, unique, order);
 	}
 
-	// for action
 	// children
 	std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
 	std::vector<d2d::ISprite*> others;
@@ -582,17 +592,6 @@ void COCCode::resolveAnimation(const d2d::ComplexSymbol* symbol)
 			}
  		}
 	}
-
-// 	// children
-// 	{
-// 		lua::TableAssign ta(m_gen, "", true);
-// 		// frame 0
-// 		{
-// 			lua::TableAssign ta(m_gen, "", true);
-//  			for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-// 				resolveSpriteForFrame(symbol->m_sprites[i], i, ids, order);
-// 		}
-// 	}
 }
 
 //void COCCode::resolveAnimation(const d2d::AnimSymbol* symbol)
@@ -990,10 +989,18 @@ void COCCode::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 	{
 		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol));
 		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol));
-		lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
+		if (sprite->clip)
+			lua::tableassign(m_gen, "", 5, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str(), "clip=true");
+		else
+			lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
 	}
 	else
-		lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
+	{
+		if (sprite->clip)
+			lua::tableassign(m_gen, "", 3, assignIndex.c_str(), assignMat.c_str(), "clip=true");
+		else
+			lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
+	}
 }
 
 void COCCode::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id)

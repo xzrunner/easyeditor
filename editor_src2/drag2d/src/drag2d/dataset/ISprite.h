@@ -80,6 +80,7 @@ namespace d2d
 		std::string name;		
 		Colorf multiCol, addCol;
 		std::string tag;
+		bool clip;
 
 		// edit
 		bool visiable;
