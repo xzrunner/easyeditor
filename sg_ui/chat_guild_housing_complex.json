@@ -6,14 +6,14 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
+			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "barrack_slot_price_hint_fontblank.json",
+			"filepath" : "chat_guild_housing_fontblank.json",
 			"font" : "",
-			"label_height" : 28,
-			"label_width" : 360,
+			"label_height" : 19,
+			"label_width" : 100,
 			"multi color" : "0xffffffff",
 			"name" : "text",
 			"position" : 
@@ -21,7 +21,7 @@
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"size" : 24,
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,

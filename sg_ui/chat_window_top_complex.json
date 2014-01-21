@@ -6,16 +6,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_window_top_bg_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -25,16 +27,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "guild_mark_anim.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "guild_icon",
 			"position" : 
 			{
 				"x" : -147.0,
 				"y" : 124.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
@@ -44,16 +48,24 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "chat_guild_name_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"label_height" : 19,
+			"label_width" : 300,
+			"multi color" : "0xffffffff",
 			"name" : "guild_name",
 			"position" : 
 			{
 				"x" : 19.0,
 				"y" : 128.0
 			},
+			"size" : 16,
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -63,16 +75,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "blue_button_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "donate_button",
 			"position" : 
 			{
 				"x" : -99.95002746582031,
 				"y" : 18.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -82,16 +96,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "red_button_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "say_button",
 			"position" : 
 			{
 				"x" : 120.0,
 				"y" : 18.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -101,16 +117,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_guild_housing_bar_anim.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "housing_bar",
 			"position" : 
 			{
 				"x" : -76.0,
 				"y" : 70.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
@@ -120,35 +138,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
-			"filepath" : "chat_guild_housing_fontblank.json",
-			"multi color" : "",
-			"name" : "housing_text",
-			"position" : 
-			{
-				"x" : 67.20005798339844,
-				"y" : 73.40287780761719
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "game_setting_button_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "guild_info",
 			"position" : 
 			{
 				"x" : 158.0,
 				"y" : 116.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
@@ -158,21 +159,44 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "pop_donate_bg_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "donate",
 			"position" : 
 			{
 				"x" : 128.1500244140625,
 				"y" : -145.3500061035156
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "chat_guild_housing_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "housing_text",
+			"position" : 
+			{
+				"x" : 67.20005798339844,
+				"y" : 73.40000152587891
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	],
@@ -180,7 +204,7 @@
 	[
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : 481.0,
@@ -190,7 +214,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"old" : 
@@ -208,7 +232,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"old" : 
@@ -226,7 +250,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : -59.0,
@@ -236,7 +260,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : 163.0,
@@ -246,7 +270,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : -160.0,
@@ -256,7 +280,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : 19.0,
@@ -266,7 +290,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : 8.0,
@@ -276,7 +300,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : -27.0,
@@ -286,7 +310,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : -4.0,
@@ -296,7 +320,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : 8.0,
@@ -306,7 +330,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : 2.0,
@@ -316,7 +340,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 7 ],
 			"val" : 
 			{
 				"dx" : 5.0,
@@ -453,6 +477,41 @@
 				"dy" : 0.0,
 				"type" : 0
 			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : 523.0,
+				"dy" : -114.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : 0.2972869873046875,
+				"dy" : -0.1486434936523438,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 8 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 18.99713134765625,
+				"type" : 0
+			}
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
