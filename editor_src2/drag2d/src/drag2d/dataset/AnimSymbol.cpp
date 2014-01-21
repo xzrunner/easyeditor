@@ -165,11 +165,11 @@ void AnimSymbol::loadResources()
 				if (entry->multiColor.empty())
 					sprite->multiCol = Colorf(1, 1, 1, 1);
 				else
-					sprite->multiCol = transColor(entry->multiColor);
+					sprite->multiCol = transColor(entry->multiColor, PT_BGRA);
 				if (entry->addColor.empty())
 					sprite->addCol = Colorf(0 ,0, 0, 0);
 				else
-					sprite->addCol = transColor(entry->addColor);
+					sprite->addCol = transColor(entry->addColor, PT_ARGB);
 
 				sprite->setTransform(entry->pos, entry->angle);
 				sprite->setScale(entry->xScale, entry->yScale);

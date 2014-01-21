@@ -5,11 +5,21 @@
 
 namespace d2d
 {
-	Colorf transColor(const std::string& str);
+	// text		RGBA
+	// add		ARGB
+	// multi	BGRA
+	enum PixelType
+	{
+		PT_RGBA = 0,
+		PT_ARGB,
+		PT_BGRA
+	};
+
+	Colorf transColor(const std::string& str, PixelType type);
 	float transColor(char high, char low);
 	int transHex(char c);
 
-	std::string transColor(const Colorf& col);
+	std::string transColor(const Colorf& col, PixelType type);
 	std::string transColor(float col);
 	char transHex(int v);
 }

@@ -81,12 +81,12 @@ void ISprite::load(const Json::Value& val)
 	if (str.empty())
 		multiCol = Colorf(1, 1, 1, 1);
 	else
-		multiCol = transColor(str);
+		multiCol = transColor(str, PT_BGRA);
 	str = val["add color"].asString();
 	if (str.empty())
 		addCol = Colorf(0, 0, 0, 0);
 	else
-		addCol = transColor(str);
+		addCol = transColor(str, PT_ARGB);
 
 	float x = val["position"]["x"].asDouble();
 	float y = val["position"]["y"].asDouble();
@@ -128,8 +128,8 @@ void ISprite::store(Json::Value& val)
 	val["tag"] = tag;
 	val["clip"] = clip;
 
-	val["multi color"] = transColor(multiCol);
-	val["add color"] = transColor(addCol);
+	val["multi color"] = transColor(multiCol, PT_BGRA);
+	val["add color"] = transColor(addCol, PT_ARGB);
 
 	val["position"]["x"] = m_pos.x;
 	val["position"]["y"] = m_pos.y;

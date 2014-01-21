@@ -5,35 +5,42 @@
 
 namespace d2d
 {
-Colorf transColor(const std::string& str) 
+Colorf transColor(const std::string& str, PixelType type) 
 {
 	if (str.empty())
 		return Colorf(0, 0, 0, 0);
 
-//	assert(str.length() == 10);
 	if (str == "0xffffffff")
 		return Colorf(1, 1, 1, 1);
 
 	int len = str.length();
 
-	Colorf ret;
-	if (len < 4)
+	Colorf ret(0, 0, 0, 0);
+	if (len == 4)
 	{
-		ret.r = ret.g = ret.b = ret.a = 0;
-	}
-	else if (len == 4)
-	{
-		ret.a = transColor(str[2], str[3]);
-		ret.g = 0;
-		ret.b = 0;
-		ret.r = 0;
+		if (type == PT_RGBA || PT_BGRA)
+			ret.a = transColor(str[2], str[3]);
+		else if (type == PT_ARGB)
+			ret.b = transColor(str[2], str[3]);
 	}
 	else if (len == 10)
 	{
-		ret.a = transColor(str[2], str[3]);
-		ret.g = transColor(str[4], str[5]);
-		ret.b = transColor(str[6], str[7]);
-		ret.r = transColor(str[8], str[9]);
+		if (type == PT_RGBA) {
+			ret.r = transColor(str[2], str[3]);
+			ret.g = transColor(str[4], str[5]);
+			ret.b = transColor(str[6], str[7]);
+			ret.a = transColor(str[8], str[9]);
+		} else if (type == PT_ARGB) {
+			ret.a = transColor(str[2], str[3]);
+			ret.r = transColor(str[4], str[5]);
+			ret.g = transColor(str[6], str[7]);
+			ret.b = transColor(str[8], str[9]);
+		} else if (type == PT_BGRA) {
+			ret.b = transColor(str[2], str[3]);
+			ret.g = transColor(str[4], str[5]);
+			ret.r = transColor(str[6], str[7]);
+			ret.a = transColor(str[8], str[9]);
+		}
 	}
 
 // 	ret.a = (len >= 4 ? transColor(str[2], str[3]) : 0);
@@ -65,13 +72,25 @@ int transHex(char c)
 	}
 }
 
-std::string transColor(const Colorf& col) 
+std::string transColor(const Colorf& col, PixelType type) 
 {
 	std::string ret = "0x";
-	ret += transColor(col.a);
-	ret += transColor(col.g);
-	ret += transColor(col.b);
-	ret += transColor(col.r);
+	if (type == PT_RGBA) {
+		ret += transColor(col.r);
+		ret += transColor(col.g);
+		ret += transColor(col.b);
+		ret += transColor(col.a);
+	} else if (type == PT_ARGB) {
+		ret += transColor(col.a);
+		ret += transColor(col.r);
+		ret += transColor(col.g);
+		ret += transColor(col.b);
+	} else if (type == PT_BGRA) {
+		ret += transColor(col.b);
+		ret += transColor(col.g);
+		ret += transColor(col.r);
+		ret += transColor(col.a);
+	}
 	return ret;
 }
 
