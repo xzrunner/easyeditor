@@ -5,16 +5,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "hero_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "hero",
 			"position" : 
 			{
 				"x" : 1.0,
 				"y" : -11.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -24,16 +26,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "troop_icon_anim.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "troop",
 			"position" : 
 			{
 				"x" : -23.0,
 				"y" : 17.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -43,16 +47,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "spell_icon_anim.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "spell",
 			"position" : 
 			{
 				"x" : -22.1250,
 				"y" : 10.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,

@@ -6,16 +6,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "rank_item_bg_9patch.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : -1.525878906250000e-005,
 				"y" : -3.051757812500000e-005
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
@@ -25,16 +27,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6118-tongyong-1.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : -326.0,
 				"y" : -4.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
@@ -44,16 +48,24 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "rank_rank_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"label_height" : 19,
+			"label_width" : 140,
+			"multi color" : "0xffffffff",
 			"name" : "rank",
 			"position" : 
 			{
-				"x" : -321.50,
-				"y" : -3.0
+				"x" : -330.0,
+				"y" : -1.999994277954102
 			},
+			"size" : 16,
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -63,16 +75,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6459-gaoguang-1.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "line",
 			"position" : 
 			{
-				"x" : -231.8512268066406,
+				"x" : -247.8512268066406,
 				"y" : -0.50
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -82,16 +96,24 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "rank_player_name_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"label_height" : 21,
+			"label_width" : 150,
+			"multi color" : "0xffffffff",
 			"name" : "player_name",
 			"position" : 
 			{
-				"x" : -145.1637878417969,
-				"y" : 21.00000572204590
+				"x" : -96.16378784179688,
+				"y" : 18.00000572204590
 			},
+			"size" : 16,
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -101,16 +123,24 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "rank_scorce_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"label_height" : 19,
+			"label_width" : 93,
+			"multi color" : "0xffffffff",
 			"name" : "score",
 			"position" : 
 			{
-				"x" : -76.14905548095703,
-				"y" : -14.49999618530273
+				"x" : -88.66378784179688,
+				"y" : -18.50
 			},
+			"size" : 16,
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -120,16 +150,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6107-tongyong-1.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -148.9282989501953,
-				"y" : -15.10002708435059
+				"x" : -153.1637878417969,
+				"y" : -19.10003089904785
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
@@ -139,16 +171,24 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "rank_scorce_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"label_height" : 19,
+			"label_width" : 93,
+			"multi color" : "0xffffffff",
 			"name" : "send",
 			"position" : 
 			{
-				"x" : 108.6612014770508,
+				"x" : 120.6612014770508,
 				"y" : 17.50
 			},
+			"size" : 16,
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -158,16 +198,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_1",
 			"position" : 
 			{
-				"x" : 194.9016571044922,
+				"x" : 201.9016571044922,
 				"y" : -50.78998947143555
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
@@ -177,16 +219,24 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "rank_scorce_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"label_height" : 19,
+			"label_width" : 93,
+			"multi color" : "0xffffffff",
 			"name" : "receive",
 			"position" : 
 			{
-				"x" : 108.6612091064453,
+				"x" : 118.6612091064453,
 				"y" : -18.50
 			},
+			"size" : 16,
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -196,16 +246,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_2",
 			"position" : 
 			{
-				"x" : 249.7210998535156,
+				"x" : 258.7210998535156,
 				"y" : -50.78998947143555
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
@@ -215,16 +267,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_3",
 			"position" : 
 			{
-				"x" : 304.540527343750,
+				"x" : 313.540527343750,
 				"y" : -50.78998947143555
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
@@ -234,433 +288,77 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_4",
 			"position" : 
 			{
-				"x" : 359.3599853515625,
+				"x" : 369.3599853515625,
 				"y" : -50.78998947143555
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "level_indicator_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "level",
+			"position" : 
+			{
+				"x" : -211.0,
+				"y" : -1.499988555908203
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xfffeffd9",
+			"filepath" : "leader_text_fontblank.json",
+			"font" : "",
+			"label_height" : 22,
+			"label_width" : 70,
+			"multi color" : "0xffffffff",
+			"name" : "leader",
+			"position" : 
+			{
+				"x" : 21.0,
+				"y" : 16.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
-	"undo" : 
-	[
-		null,
-		null,
-		null,
-		null,
-		null,
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : -122.9423904418945,
-				"dy" : 19.86947631835938,
-				"type" : 0
-			}
-		},
-		null,
-		null,
-		null,
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"dx" : -416.6380615234375,
-				"dy" : -22.35316085815430,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.50,
-						"y" : 0.50
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.4000000059604645,
-				"yscale" : 0.50
-			}
-		},
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.4000000059604645,
-						"y" : 0.50
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.4000000059604645,
-				"yscale" : 0.4000000059604645
-			}
-		},
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : -3.725524902343750,
-				"dy" : 1.241842269897461,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"dx" : -47.81092834472656,
-				"dy" : 7.451054573059082,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : -316.6697692871094,
-				"dy" : -10.55565929412842,
-				"type" : 0
-			}
-		},
-		null,
-		null,
-		null,
-		null,
-		
-		{
-			"sprites" : [ 7 ],
-			"val" : 
-			{
-				"dx" : 2.483688354492188,
-				"dy" : -6.830131530761719,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 7 ],
-			"val" : 
-			{
-				"dx" : -25.45777130126953,
-				"dy" : 3.104604721069336,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : -21.11132049560547,
-				"dy" : 4.967369079589844,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"dx" : -8.19616699218750,
-				"dy" : -57.37311172485352,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"dx" : -11.79750061035156,
-				"dy" : 127.9097518920898,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"dx" : 2.483703613281250,
-				"dy" : 81.96159362792969,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 11 ],
-			"val" : 
-			{
-				"dx" : 14.28118896484375,
-				"dy" : 82.58251190185547,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 12 ],
-			"val" : 
-			{
-				"dx" : 26.69961547851563,
-				"dy" : 74.51053619384766,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8000000119209290,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8000000119209290,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8000000119209290,
-				"yscale" : 0.8000000119209290
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"dx" : 17.38578796386719,
-				"dy" : -116.1122512817383,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8000000119209290,
-						"y" : 0.8000000119209290
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 0.8000000119209290
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8999999761581421,
-						"y" : 0.8000000119209290
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 0.8999999761581421
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"dx" : -1.196960449218750,
-				"dy" : -2.154527187347412,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8999999761581421,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 0.8999999761581421
-			}
-		},
-		
-		{
-			"sprites" : [ 11 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 11 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8999999761581421,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 0.8999999761581421
-			}
-		},
-		
-		{
-			"sprites" : [ 12 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 12 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8999999761581421,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8999999761581421,
-				"yscale" : 0.8999999761581421
-			}
-		},
-		
-		{
-			"sprites" : [ 10 ],
-			"val" : 
-			{
-				"dx" : 0.4241027832031250,
-				"dy" : -125.1087341308594,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 11 ],
-			"val" : 
-			{
-				"dx" : -9.754241943359375,
-				"dy" : -128.0774230957031,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 12 ],
-			"val" : 
-			{
-				"dx" : -41.56155395507813,
-				"dy" : -128.0774230957031,
-				"type" : 0
-			}
-		}
-	]
+	"undo" : null,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
