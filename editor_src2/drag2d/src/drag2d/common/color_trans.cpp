@@ -17,10 +17,25 @@ Colorf transColor(const std::string& str)
 	int len = str.length();
 
 	Colorf ret;
-	ret.a = (len >= 4 ? transColor(str[2], str[3]) : 1);
-	ret.b = (len >= 6 ? transColor(str[4], str[5]) : 1);
-	ret.g = (len >= 8 ? transColor(str[6], str[7]) : 1);
-	ret.r = (len >= 10 ? transColor(str[8], str[9]) : 1);
+	if (len == 4)
+	{
+		ret.r = 0;
+		ret.g = 0;
+		ret.b = 0;
+		ret.a = transColor(str[2], str[3]);
+	}
+	else if (len == 10)
+	{
+		ret.r = transColor(str[2], str[3]);
+		ret.g = transColor(str[4], str[5]);
+		ret.b = transColor(str[6], str[7]);
+		ret.a = transColor(str[8], str[9]);
+	}
+
+// 	ret.a = (len >= 4 ? transColor(str[2], str[3]) : 0);
+// 	ret.b = (len >= 6 ? transColor(str[4], str[5]) : 0);
+// 	ret.g = (len >= 8 ? transColor(str[6], str[7]) : 0);
+// 	ret.r = (len >= 10 ? transColor(str[8], str[9]) : 0);
 
 	return ret;
 }
@@ -49,10 +64,10 @@ int transHex(char c)
 std::string transColor(const Colorf& col) 
 {
 	std::string ret = "0x";
-	ret += transColor(col.a);
-	ret += transColor(col.b);
-	ret += transColor(col.g);
 	ret += transColor(col.r);
+	ret += transColor(col.g);
+	ret += transColor(col.b);
+	ret += transColor(col.a);
 	return ret;
 }
 
