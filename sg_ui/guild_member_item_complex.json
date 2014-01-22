@@ -35,8 +35,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -326.0,
-				"y" : -4.0
+				"x" : -357.0,
+				"y" : 3.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -56,13 +56,13 @@
 			"filepath" : "rank_rank_fontblank.json",
 			"font" : "",
 			"label_height" : 19,
-			"label_width" : 140,
+			"label_width" : 80,
 			"multi color" : "0xffffffff",
 			"name" : "rank",
 			"position" : 
 			{
-				"x" : -330.0,
-				"y" : -1.999994277954102
+				"x" : -355.0,
+				"y" : 0.50
 			},
 			"size" : 16,
 			"tag" : "",
@@ -83,8 +83,8 @@
 			"name" : "line",
 			"position" : 
 			{
-				"x" : -247.8512268066406,
-				"y" : -0.50
+				"x" : -300.8512268066406,
+				"y" : 1.000005722045898
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -104,12 +104,12 @@
 			"filepath" : "rank_player_name_fontblank.json",
 			"font" : "",
 			"label_height" : 21,
-			"label_width" : 150,
+			"label_width" : 210,
 			"multi color" : "0xffffffff",
 			"name" : "player_name",
 			"position" : 
 			{
-				"x" : -96.16378784179688,
+				"x" : -127.1637878417969,
 				"y" : 18.00000572204590
 			},
 			"size" : 16,
@@ -136,7 +136,7 @@
 			"name" : "score",
 			"position" : 
 			{
-				"x" : -88.66378784179688,
+				"x" : -149.6637878417969,
 				"y" : -18.50
 			},
 			"size" : 16,
@@ -158,7 +158,7 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -153.1637878417969,
+				"x" : -214.1637878417969,
 				"y" : -19.10003089904785
 			},
 			"tag" : "",
@@ -184,7 +184,7 @@
 			"name" : "send",
 			"position" : 
 			{
-				"x" : 120.6612014770508,
+				"x" : 118.6612091064453,
 				"y" : 17.50
 			},
 			"size" : 16,
@@ -317,8 +317,8 @@
 			"name" : "level",
 			"position" : 
 			{
-				"x" : -211.0,
-				"y" : -1.499988555908203
+				"x" : -269.0,
+				"y" : -0.50
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -356,7 +356,99 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : null,
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -31.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : -25.0,
+				"dy" : 7.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : -53.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 13 ],
+			"val" : 
+			{
+				"dx" : -58.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : -61.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -64.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : -58.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : 28.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : -3.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		}
+	],
 	"xmax" : 0.0,
 	"xmin" : 0.0,
 	"ymax" : 0.0,

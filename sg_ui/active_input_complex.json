@@ -1,6 +1,6 @@
 
 {
-	"name" : "active_invite",
+	"name" : "active_input",
 	"redo" : null,
 	"sprite" : 
 	[
@@ -61,14 +61,14 @@
 			"color" : "0xff3d3a5a",
 			"filepath" : "at_text11_fontblank.json",
 			"font" : "",
-			"label_height" : 350,
+			"label_height" : 200,
 			"label_width" : 570,
 			"multi color" : "0xffffffff",
 			"name" : "text",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 22.0
+				"x" : -3.0,
+				"y" : 94.0
 			},
 			"size" : 16,
 			"tag" : "",
@@ -84,41 +84,14 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "rank_line_complex.json",
+			"filepath" : "input_small_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "input",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -163.0
+				"x" : 2.0,
+				"y" : -62.0
 			},
-			"tag" : "",
-			"x mirror" : false,
-			"x scale" : 0.7200000286102295,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"align" : 2,
-			"angle" : 0.0,
-			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "st_ejoy_uid_fontblank.json",
-			"font" : "",
-			"label_height" : 18,
-			"label_width" : 400,
-			"multi color" : "0xffffffff",
-			"name" : "my_uid",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -192.0
-			},
-			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -128,7 +101,33 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : [ null ],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : -1.0,
+				"dy" : 72.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : 321.0,
+				"dy" : -166.0,
+				"type" : 0
+			}
+		},
+		null,
+		null
+	],
 	"xmax" : 0.0,
 	"xmin" : 0.0,
 	"ymax" : 0.0,
