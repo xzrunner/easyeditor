@@ -5,16 +5,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_1",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -24,16 +26,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_2",
 			"position" : 
 			{
 				"x" : 58.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -43,16 +47,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_3",
 			"position" : 
 			{
 				"x" : 116.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -62,16 +68,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_4",
 			"position" : 
 			{
 				"x" : 174.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -81,16 +89,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_5",
 			"position" : 
 			{
 				"x" : 232.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -100,16 +110,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_6",
 			"position" : 
 			{
 				"x" : 290.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -119,16 +131,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_7",
 			"position" : 
 			{
 				"x" : 348.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -138,16 +152,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_8",
 			"position" : 
 			{
 				"x" : 406.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -157,16 +173,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_9",
 			"position" : 
 			{
 				"x" : 464.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -176,16 +194,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "unit_slot_10",
 			"position" : 
 			{
 				"x" : 522.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
