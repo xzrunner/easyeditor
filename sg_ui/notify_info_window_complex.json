@@ -6,16 +6,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "rank_window_bg_9patch.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
@@ -25,16 +27,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "rank_window_bg2_9patch.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : -26.1250
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
@@ -44,16 +48,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "close_button_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "close_button",
 			"position" : 
 			{
 				"x" : 394.2999877929688,
 				"y" : 297.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -63,16 +69,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "tab_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "tab1",
 			"position" : 
 			{
-				"x" : -312.0,
+				"x" : -315.0,
 				"y" : 277.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -82,35 +90,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "tab_complex.json",
-			"multi color" : "",
-			"name" : "tab2",
-			"position" : 
-			{
-				"x" : -134.0,
-				"y" : 277.0
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "tab_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "tab3",
 			"position" : 
 			{
-				"x" : 44.0,
+				"x" : 43.0,
 				"y" : 277.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -120,16 +111,60 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "tab_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "tab4",
+			"position" : 
+			{
+				"x" : 222.50,
+				"y" : 277.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "number_of_entrys_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "number",
 			"position" : 
 			{
-				"x" : 123.0,
-				"y" : 302.9499816894531
+				"x" : 305.0,
+				"y" : 297.9499816894531
 			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "tab_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "tab2",
+			"position" : 
+			{
+				"x" : -136.0,
+				"y" : 277.0
+			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -159,6 +194,112 @@
 				"dy" : 5.0,
 				"type" : 0
 			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 92.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 40.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : 127.0,
+				"dy" : -1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 65.0,
+				"dy" : 76.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : 71.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : 74.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : -33.0,
+				"dy" : 180.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : -14.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 5 ],
+			"val" : 
+			{
+				"dx" : -16.0,
+				"dy" : 2.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -16.0,
+				"dy" : -77.0,
+				"type" : 0
+			}
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }

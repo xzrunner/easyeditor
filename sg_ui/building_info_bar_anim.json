@@ -314,6 +314,34 @@
 					"id" : 0,
 					"time" : 11,
 					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "",
+							"angle" : 0.0,
+							"filepath" : "building_info_housing_bar2_complex.json",
+							"multi color" : "",
+							"name" : "castle_housing",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 12,
+					"tween" : false
 				}
 			],
 			"name" : "Layer0"
