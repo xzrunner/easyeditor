@@ -61,8 +61,8 @@
 			"name" : "info",
 			"position" : 
 			{
-				"x" : 108.9647674560547,
-				"y" : -0.568786621093750
+				"x" : 119.9647674560547,
+				"y" : -14.24502563476563
 			},
 			"size" : 14,
 			"tag" : "",
@@ -345,6 +345,33 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff000000",
+			"filepath" : "left_black_14_250_100_fontblank.json",
+			"font" : "CCBackBeat",
+			"label_height" : 25,
+			"label_width" : 250,
+			"multi color" : "0xffffffff",
+			"name" : "club",
+			"position" : 
+			{
+				"x" : 120.9647674560547,
+				"y" : 55.31394958496094
+			},
+			"size" : 14,
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"undo" : 
@@ -406,6 +433,36 @@
 			{
 				"dx" : 23.0,
 				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 14 ],
+			"val" : 
+			{
+				"dx" : -1.0,
+				"dy" : 226.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 11.0,
+				"dy" : -13.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 14 ],
+			"val" : 
+			{
+				"dx" : 13.0,
+				"dy" : -168.0,
 				"type" : 0
 			}
 		}

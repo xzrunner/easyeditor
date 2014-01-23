@@ -14,8 +14,8 @@
 			"name" : "name_btn",
 			"position" : 
 			{
-				"x" : 3.155578613281250,
-				"y" : 141.2586669921875
+				"x" : 0.0,
+				"y" : 200.2586669921875
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -83,7 +83,7 @@
 			"position" : 
 			{
 				"x" : -299.2155151367188,
-				"y" : 146.7312622070313
+				"y" : 205.7312622070313
 			},
 			"size" : 20,
 			"tag" : "",
@@ -190,8 +190,8 @@
 			"name" : "name_input",
 			"position" : 
 			{
-				"x" : 2.0,
-				"y" : 142.2586669921875
+				"x" : 0.0,
+				"y" : 201.2586669921875
 			},
 			"size" : 25,
 			"tag" : "",
@@ -264,9 +264,109 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 1,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff504032",
+			"filepath" : "guild_right_fontblank.json",
+			"font" : "CCBackBeat",
+			"label_height" : 25,
+			"label_width" : 154,
+			"multi color" : "0xffffffff",
+			"name" : "club_title",
+			"position" : 
+			{
+				"x" : -300.2155151367188,
+				"y" : 115.7312622070313
+			},
+			"size" : 20,
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "input_small_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "club_input",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 114.2312622070313
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
-	"undo" : null,
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 11 ],
+			"val" : 
+			{
+				"dx" : -5.0,
+				"dy" : -103.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 155.0,
+				"dy" : -254.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 12 ],
+			"val" : 
+			{
+				"dx" : 8.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 7 ],
+			"val" : 
+			{
+				"dx" : -2.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -3.155578613281250,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		}
+	],
 	"xmax" : 0.0,
 	"xmin" : 0.0,
 	"ymax" : 0.0,
