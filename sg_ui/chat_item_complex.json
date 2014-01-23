@@ -51,7 +51,7 @@
 			"name" : "player_name",
 			"position" : 
 			{
-				"x" : -120.0,
+				"x" : -20.0,
 				"y" : 59.0
 			},
 			"x mirror" : false,
