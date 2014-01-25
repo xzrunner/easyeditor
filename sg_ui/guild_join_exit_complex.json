@@ -55,14 +55,14 @@
 			"color" : "0xff000000",
 			"filepath" : "left_black_14_250_100_fontblank.json",
 			"font" : "CCBackBeat",
-			"label_height" : 100,
+			"label_height" : 90,
 			"label_width" : 250,
 			"multi color" : "0xffffffff",
 			"name" : "info",
 			"position" : 
 			{
 				"x" : 119.9647674560547,
-				"y" : -14.24502563476563
+				"y" : -10.56878662109375
 			},
 			"size" : 14,
 			"tag" : "",
@@ -550,6 +550,16 @@
 			{
 				"dx" : -8.0,
 				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : -3.0,
+				"dy" : 5.0,
 				"type" : 0
 			}
 		}
