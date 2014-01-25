@@ -39,18 +39,22 @@ public:
 
 	virtual void buildBounding();
 
+	void loadFont(const std::string& filename);
+
 protected:
 	FontBlankSymbol* m_symbol;
 
 public:
 	std::string font;
 
-	std::string color;
+	Colorf color;
 
 	AlignType align;
 	int size;
 
 	int width, height;
+
+	std::string filename;
 
 }; // FontSprite
 }

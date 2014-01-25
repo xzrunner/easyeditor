@@ -23,6 +23,7 @@ namespace d2d
 			e_anim,
 			e_9patch,
 			e_fontblank,
+			e_freetype,
 			e_scripts
 		};
 

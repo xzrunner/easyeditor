@@ -8,14 +8,14 @@ namespace d2d
 Colorf transColor(const std::string& str, PixelType type) 
 {
 	if (str.empty())
-		return Colorf(0, 0, 0, 0);
+		return Colorf(0, 0, 0, 1);
 
 	if (str == "0xffffffff")
 		return Colorf(1, 1, 1, 1);
 
 	int len = str.length();
 
-	Colorf ret(0, 0, 0, 0);
+	Colorf ret(0, 0, 0, 1);
 	if (len == 4)
 	{
 		if (type == PT_RGBA || PT_BGRA)
@@ -42,11 +42,6 @@ Colorf transColor(const std::string& str, PixelType type)
 			ret.a = transColor(str[8], str[9]);
 		}
 	}
-
-// 	ret.a = (len >= 4 ? transColor(str[2], str[3]) : 0);
-// 	ret.b = (len >= 6 ? transColor(str[4], str[5]) : 0);
-// 	ret.g = (len >= 8 ? transColor(str[6], str[7]) : 0);
-// 	ret.r = (len >= 10 ? transColor(str[8], str[9]) : 0);
 
 	return ret;
 }

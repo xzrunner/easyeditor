@@ -15,6 +15,7 @@ public:
 
 	void sprite();
 	void shape();
+	void null();
 
 private:
 	Shader();

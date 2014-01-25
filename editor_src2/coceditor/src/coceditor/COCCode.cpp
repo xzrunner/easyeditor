@@ -824,7 +824,7 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 		if (isFont)
 		{
 			const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(sprite);
-			bool isNullNode = font->font.empty() && font->color.empty();
+			bool isNullNode = font->font.empty();
 			if (isNullNode)
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
@@ -834,7 +834,7 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", font->color);
+				std::string aColor = lua::assign("color", transColor(font->color, d2d::PT_ARGB));
 				std::string aAlign = lua::assign("align", wxString::FromDouble(font->align).ToStdString());
 				std::string aSize = lua::assign("size", wxString::FromDouble(font->size).ToStdString());
 				std::string aWidth = lua::assign("width", wxString::FromDouble(font->width).ToStdString());
@@ -1010,7 +1010,7 @@ void COCCode::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id)
 	float mat[6];
 	transToMat(sprite, mat, true);
 
-	if (!sprite->font.empty() || !sprite->color.empty())
+	if (!sprite->font.empty())
 	{
 		// move to left-top
 		mat[4] -= (int)(sprite->getBounding()->width() * 0.5f * 16 + 0.5f);

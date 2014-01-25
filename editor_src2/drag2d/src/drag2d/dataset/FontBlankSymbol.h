@@ -4,6 +4,8 @@
 
 namespace d2d
 {
+	class Font;
+
 	class FontBlankSymbol : public ISymbol
 	{
 	public:
@@ -34,8 +36,14 @@ namespace d2d
 		//
 		virtual void refresh();
 
+		bool loadFont(const std::string& filename);
+
 	protected:
 		virtual void loadResources();
+
+	private:
+		// from NeHe's FreeType
+		void print(float x, float y, const char* text) const;
 
 	public:
 		std::string font;
@@ -46,6 +54,11 @@ namespace d2d
 		float size;
 
 		float width, height;
+
+		std::string filename;
+
+	private:
+		Font* m_font;
 
 	}; // FontBlankSymbol
 }

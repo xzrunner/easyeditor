@@ -63,6 +63,10 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		if (jsonExtension == TAG_SCRIPTS) return e_scripts;
 		else return e_unknown;
 	}
+	else if (extension == ".ttf")
+	{
+		return e_freetype;
+	}
 	else
 	{
 		StringTools::toLower(extension);

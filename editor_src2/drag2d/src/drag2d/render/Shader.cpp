@@ -69,6 +69,12 @@ void Shader::shape()
 	}
 }
 
+void Shader::null()
+{
+	glUseProgram(0);
+	m_prog_curr = 0;
+}
+
 void Shader::load()
 {
 #if 0

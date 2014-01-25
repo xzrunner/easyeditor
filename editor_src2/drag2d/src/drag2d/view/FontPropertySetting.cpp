@@ -3,6 +3,8 @@
 
 #include "dataset/FontSprite.h"
 
+#include <wx/propgrid/advprops.h>
+
 namespace d2d
 {
 const wxChar* FontPropertySetting::ALIGN_LABELS[] = { 
@@ -21,8 +23,10 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	if (name == wxT("Font"))
 		sprite->font = wxANY_AS(value, wxString);
-	else if (name == wxT("Color"))
-		sprite->color = wxANY_AS(value, wxString);
+	else if (name == wxT("Color")) {
+		wxColour col = wxANY_AS(value, wxColour);
+		sprite->color.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+	}
 	else if (name == wxT("Align")) 
 		sprite->align = AlignType(wxANY_AS(value, int));
 	else if (name == wxT("Size"))
@@ -34,6 +38,9 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	else if (name == wxT("LabelHeight")) {
 		sprite->height = wxANY_AS(value, float);
 		sprite->buildBounding();
+	} else if (name == wxT("Filename")) {
+		std::string str = wxANY_AS(value, wxString);
+		sprite->loadFont(str);
 	}
 }
 
@@ -48,6 +55,7 @@ void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool b
 	pg->GetProperty(wxT("Size"))->Enable(bEnable);
 	pg->GetProperty(wxT("LabelWidth"))->Enable(bEnable);
 	pg->GetProperty(wxT("LabelHeight"))->Enable(bEnable);
+	pg->GetProperty(wxT("Filename"))->Enable(bEnable);
 }
 
 void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
@@ -56,11 +64,15 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
-	pg->GetProperty(wxT("Color"))->SetValue(sprite->color);
+
+	wxColour col = wxColour(sprite->color.r*255, sprite->color.g*255, sprite->color.b*255, sprite->color.a*255);
+	pg->SetPropertyValueString(wxT("Color"), col.GetAsString());
+
 	pg->GetProperty(wxT("Align"))->SetValue(ALIGN_LABELS[sprite->align]);
 	pg->GetProperty(wxT("Size"))->SetValue(sprite->size);
 	pg->GetProperty(wxT("LabelWidth"))->SetValue(sprite->width);
 	pg->GetProperty(wxT("LabelHeight"))->SetValue(sprite->height);
+	pg->GetProperty(wxT("Filename"))->SetValue(sprite->filename);
 }
 
 void FontPropertySetting::initProperties(wxPropertyGrid* pg)
@@ -71,11 +83,16 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
-	pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, sprite->color));
+
+	wxColour col = wxColour(sprite->addCol.r*255, sprite->addCol.g*255, sprite->addCol.b*255, sprite->addCol.a*255);
+	pg->Append(new wxColourProperty(wxT("Color"), wxPG_LABEL, col));
+	pg->SetPropertyAttribute("Color", "HasAlpha", true);
+
 	pg->Append(new wxEnumProperty(wxT("Align"), wxPG_LABEL, ALIGN_LABELS));
 	pg->Append(new wxFloatProperty(wxT("Size"), wxPG_LABEL, sprite->size));
 	pg->Append(new wxFloatProperty(wxT("LabelWidth"), wxPG_LABEL, sprite->width));
 	pg->Append(new wxFloatProperty(wxT("LabelHeight"), wxPG_LABEL, sprite->height));
+	pg->Append(new wxStringProperty(wxT("Filename"), wxPG_LABEL, sprite->filename));
 }
 
 }
