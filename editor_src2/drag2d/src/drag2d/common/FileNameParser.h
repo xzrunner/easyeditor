@@ -22,7 +22,8 @@ namespace d2d
 			e_complex,
 			e_anim,
 			e_9patch,
-			e_fontblank
+			e_fontblank,
+			e_scripts
 		};
 
 		static Type getFileType(const wxString& filename);

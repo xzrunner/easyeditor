@@ -18,7 +18,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(m_9patchPage);
 	m_fontPage = new d2d::LibraryFontBlankPage(getNotebook());
 	addPage(m_fontPage);
-
+	m_scriptsPage = new d2d::LibraryScriptsPage(getNotebook());
+	addPage(m_scriptsPage);
 }
 
 void LibraryPanel::loadFromTextFile(std::ifstream& fin)

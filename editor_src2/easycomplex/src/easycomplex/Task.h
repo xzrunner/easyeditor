@@ -20,6 +20,8 @@ namespace ecomplex
 
 		virtual void clear();
 
+		libcomplex::StagePanel* getStagePanel() { return m_stage; }
+
 	private:
 		void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
 			wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,

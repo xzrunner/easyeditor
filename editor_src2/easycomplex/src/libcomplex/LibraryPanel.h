@@ -21,6 +21,7 @@ namespace libcomplex
 		d2d::ILibraryPage* getAnimPage() { return m_animPage; }
 		d2d::ILibraryPage* get9PatchPage() { return m_9patchPage; }
 		d2d::ILibraryPage* getFontPage() { return m_fontPage; }
+		d2d::ILibraryPage* getScriptsPage() { return m_scriptsPage; }
 
 	private:
 		d2d::LibraryImagePage* m_imagePage;
@@ -28,6 +29,7 @@ namespace libcomplex
 		d2d::LibraryAnimPage* m_animPage;
 		d2d::Library9PatchPage* m_9patchPage;
 		d2d::LibraryFontBlankPage* m_fontPage;
+		d2d::LibraryScriptsPage* m_scriptsPage;
 
 	}; // LibraryPanel
 }

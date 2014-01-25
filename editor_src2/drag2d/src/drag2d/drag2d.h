@@ -19,6 +19,7 @@
 #include "dataset/AnimSymbol.h"
 #include "dataset/Patch9Symbol.h"
 #include "dataset/FontBlankSymbol.h"
+#include "dataset/ScriptsSymbol.h"
 #include "dataset/ISprite.h"
 #include "dataset/SpriteFactory.h"
 #include "dataset/ImageSprite.h"
@@ -63,6 +64,7 @@
 #include "view/LibraryAnimPage.h"
 #include "view/Library9PatchPage.h"
 #include "view/LibraryFontBlankPage.h"
+#include "view/LibraryScriptsPage.h"
 #include "view/PropertySettingPanel.h"
 #include "view/IPropertySetting.h"
 #include "view/SpritePropertySetting.h"
@@ -163,6 +165,8 @@
 #include "common/Context.h"
 #include "common/Exception.h"
 #include "common/color_trans.h"
+#include "common/runtime.h"
+#include "common/scripts.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"
@@ -172,4 +176,3 @@
 #include "render/DrawSpritesVisitor.h"
 #include "render/SpriteDraw.h"
 #include "render/SpriteBatch.h"
-

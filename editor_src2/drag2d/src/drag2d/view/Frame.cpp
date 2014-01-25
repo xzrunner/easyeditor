@@ -19,7 +19,7 @@ namespace d2d
 	END_EVENT_TABLE()
 
 	Frame::Frame(const wxString& title, const wxString& filetag)
-		: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
+		: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600) /*wxDefaultSize, wxMAXIMIZE | wxCLOSE_BOX*/)
 		, m_task(NULL)
 		, m_filetag(filetag)
 	{

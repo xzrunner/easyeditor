@@ -91,3 +91,7 @@ deprecated
 /editor_src2/easyshape/platform/msvc2008/libshape
 /editor_src2/easyshape/src/easyshape
 /editor_src2/drag2d/src/common/libpng/contrib
+/editor_src2/libraries/lua-5.2.3/doc
+/editor_src2/libraries/lua-5.2.3/lua
+/editor_src2/libraries/lua-5.2.3/Makefile
+/editor_src2/libraries/lua-5.2.3/README

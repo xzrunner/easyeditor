@@ -16,6 +16,7 @@ static const wxString TAG_COMPLEX = "complex";
 static const wxString TAG_ANIM = "anim";
 static const wxString TAG_PATCH = "9patch";
 static const wxString TAG_FONTBLANK = "fontblank";
+static const wxString TAG_SCRIPTS = "scripts";
 
 FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 {
@@ -51,6 +52,15 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		else if (jsonExtension == TAG_ANIM) return e_anim;
 		else if (jsonExtension == TAG_PATCH) return e_9patch;
 		else if (jsonExtension == TAG_FONTBLANK) return e_fontblank;
+		else return e_unknown;
+	}
+	else if (extension == ".lua")
+	{
+		const wxString luaName = filename.substr(0, filename.find_last_of('.'));
+		if (luaName.find('_') == -1) return e_unknown;
+
+		const wxString jsonExtension = luaName.substr(luaName.find_last_of('_') + 1);
+		if (jsonExtension == TAG_SCRIPTS) return e_scripts;
 		else return e_unknown;
 	}
 	else
@@ -95,6 +105,9 @@ wxString FileNameParser::getFileTag(Type type)
 		break;
 	case e_fontblank:
 		extension = TAG_FONTBLANK;
+		break;
+	case e_scripts:
+		extension = TAG_SCRIPTS;
 		break;
 	}
 	return extension;

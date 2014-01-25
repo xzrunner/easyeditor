@@ -5,6 +5,8 @@
 #include "SymbolContainer.h"
 #include "LibraryPanel.h"
 
+extern d2d::StageModule MODULE_STAGE;
+
 namespace libcomplex
 {
 
@@ -19,6 +21,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new DragSymbolTarget(this));
+
+	MODULE_STAGE.impl = this;
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
@@ -88,13 +92,23 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		symbol = static_cast<d2d::ISymbol*>(library->get9PatchPage()->getSymbol(index));
 	else if (sType == "fontblank")
 		symbol = static_cast<d2d::ISymbol*>(library->getFontPage()->getSymbol(index));
+	else if (sType == "scripts")
+		symbol = static_cast<d2d::ISymbol*>(library->getScriptsPage()->getSymbol(index));
 
 	if (symbol)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->translate(pos);
-		m_stage->insertSprite(sprite);
+		if (d2d::ScriptsSymbol* scripts = dynamic_cast<d2d::ScriptsSymbol*>(symbol)) 
+		{
+			d2d::scripts_do_string(scripts->getContent().c_str());
+//			d2d::scripts_do_file(symbol->getFilepath().c_str());
+		}
+		else
+		{
+			d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			sprite->translate(pos);
+			m_stage->insertSprite(sprite);
+		}
 	}
 
 	return true;

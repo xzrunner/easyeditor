@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src"
+				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src"
+				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -657,6 +657,14 @@
 		<Filter
 			Name="dataset"
 			>
+			<File
+				RelativePath="..\..\..\src\drag2d\dataset\wrap_Dataset.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\dataset\wrap_Dataset.h"
+				>
+			</File>
 			<Filter
 				Name="body"
 				>
@@ -995,6 +1003,14 @@
 						RelativePath="..\..\..\src\drag2d\dataset\SpriteFactory.h"
 						>
 					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\wrap_ISprite.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\wrap_ISprite.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -1070,6 +1086,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\Patch9Symbol.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\ScriptsSymbol.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\ScriptsSymbol.h"
 					>
 				</File>
 				<File
@@ -1354,6 +1378,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\common\Module.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\common\Object.cpp"
 				>
 			</File>
@@ -1382,6 +1410,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\common\runtime.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\runtime.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\scripts.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\scripts.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\common\Settings.cpp"
 				>
 			</File>
@@ -1391,6 +1435,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\common\tools.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\types.h"
 				>
 			</File>
 			<File
@@ -1700,6 +1748,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="scripts"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\LibraryScriptsPage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\LibraryScriptsPage.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="property"
@@ -1850,6 +1910,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\HistoryList.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\wrap_StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\wrap_StagePanel.h"
 					>
 				</File>
 				<Filter
@@ -2159,6 +2227,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\algorithms\SGI.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="sprites"
+			>
+			<File
+				RelativePath="..\..\..\src\drag2d\sprites\SpritesHandler.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\sprites\SpritesHandler.h"
 				>
 			</File>
 		</Filter>
