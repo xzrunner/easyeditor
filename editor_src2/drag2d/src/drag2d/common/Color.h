@@ -29,7 +29,12 @@ namespace d2d
 			return r != color.r || g != color.g || b != color.b || a != color.a;
 		}
 
-		
+		void valid() {
+			r = std::max(0.0f, std::min(r, 1.0f));
+			g = std::max(0.0f, std::min(g, 1.0f));
+			b = std::max(0.0f, std::min(b, 1.0f));
+			a = std::max(0.0f, std::min(a, 1.0f));
+		}
 
 		void set(float pr, float pg, float pb, float pa) {
 			r = pr;
@@ -84,6 +89,16 @@ namespace d2d
 		ret.g = std::min(a.g + b.g, 1.0f);
 		ret.b = std::min(a.b + b.b, 1.0f);
 		ret.a = std::min(a.a + b.a, 1.0f);
+		return ret;
+	}
+
+	inline Colorf cInterpolate(const Colorf& begin, const Colorf& end, float scale)
+	{
+		Colorf ret;
+		ret.r = begin.r + (end.r - begin.r) * scale;
+		ret.g = begin.g + (end.g - begin.g) * scale;
+		ret.b = begin.b + (end.b - begin.b) * scale;
+		ret.a = begin.a + (end.a - begin.a) * scale;
 		return ret;
 	}
 

@@ -242,32 +242,7 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-
-	sprite->name = actorValue["name"].asString();
-
-	sprite->multiColor = actorValue["multi color"].asString();
-	sprite->addColor = actorValue["add color"].asString();
-
-	d2d::Vector pos;
-	pos.x = actorValue["position"]["x"].asDouble();
-	pos.y = actorValue["position"]["y"].asDouble();
-	float angle = actorValue["angle"].asDouble();
-	sprite->setTransform(pos, angle);
-
-	float xscale = actorValue["x scale"].asDouble(),
-		yscale = actorValue["y scale"].asDouble();
-	sprite->setScale(xscale, yscale);
-
-	if (!actorValue["x shear"].isNull())
-	{
-		float xshear = actorValue["x shear"].asDouble(),
-			yshear = actorValue["y shear"].asDouble(); 
-		sprite->setShear(xshear, yshear);
-	}
-
-	bool xMirror = actorValue["x mirror"].asBool(), 
-		yMirror = actorValue["y mirror"].asBool();
-	sprite->setMirror(xMirror, yMirror);
+	sprite->load(actorValue);
 
 	return sprite;
 }
@@ -381,8 +356,8 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dlg)
 
 	value["name"] = sprite->name;
 
-	value["multi color"] = sprite->multiColor;
-	value["add color"] = sprite->addColor;
+	value["multi color"] = transColor(sprite->multiCol, d2d::PT_BGRA);
+	value["add color"] = transColor(sprite->addCol, d2d::PT_ARGB);
 
 	value["position"]["x"] = sprite->getPosition().x;
 	value["position"]["y"] = sprite->getPosition().y;

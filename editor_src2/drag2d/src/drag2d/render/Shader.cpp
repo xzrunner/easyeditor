@@ -75,6 +75,11 @@ void Shader::null()
 	m_prog_curr = 0;
 }
 
+void Shader::release()
+{
+	unload();
+}
+
 void Shader::load()
 {
 #if 0
@@ -165,7 +170,8 @@ void Shader::load()
 
 void Shader::unload()
 {
-	
+	delete m_instance;
+	m_instance = NULL;
 }
 
 int Shader::init(const char *FS, const char *VS)

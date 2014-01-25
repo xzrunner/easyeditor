@@ -114,6 +114,8 @@ void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISpri
 		yscale = (end->getScaleY() - start->getScaleY()) * process + start->getScaleY();
 	float xshear = (end->getShearX() - start->getShearX()) * process + start->getShearX(),
 		yshear = (end->getShearY() - start->getShearY()) * process + start->getShearY();
+	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
+	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);
 	tween->translate(offset);
 	tween->rotate(delta);
 	tween->setScale(xscale, yscale);

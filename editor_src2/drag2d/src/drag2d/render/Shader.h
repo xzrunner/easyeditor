@@ -17,6 +17,8 @@ public:
 	void shape();
 	void null();
 
+	void release();
+
 private:
 	Shader();
 
