@@ -13,6 +13,7 @@ namespace d2d
 
 		// Sprite
 		SPRITE_DATA_ID,
+		SPRITE_SELECTION_DATA_ID,
 
 		TYPE_MAX_ENUM
 	};
@@ -25,6 +26,7 @@ namespace d2d
 
 	// Sprite
 	const uint32_t SPRITE_DATA_T = (1 << SPRITE_DATA_ID) | OBJECT_T;
+	const uint32_t SPRITE_SELECTION_DATA_T = (1 << SPRITE_SELECTION_DATA_ID) | OBJECT_T;
 }
 
 #endif // D2D_TYPES_H

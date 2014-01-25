@@ -14,7 +14,10 @@ namespace d2d
 		MultiSpritesImpl* impl;
 	};
 
-	int w_get_stage_sprite(lua_State* L);
+	int w_stage_get_selected_sprites(lua_State* L);
+	int w_stage_move(lua_State* L);
+	int w_stage_insert(lua_State* L);
+
 	extern "C" __declspec(dllexport) int luaopen_d2d_stage(lua_State* L);
 }
 

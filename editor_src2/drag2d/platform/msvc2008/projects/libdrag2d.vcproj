@@ -657,14 +657,6 @@
 		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\drag2d\dataset\wrap_Dataset.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\dataset\wrap_Dataset.h"
-				>
-			</File>
 			<Filter
 				Name="body"
 				>
@@ -814,6 +806,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\SelectionSet.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.h"
 					>
 				</File>
 			</Filter>
