@@ -356,15 +356,42 @@
 			"filepath" : "left_black_14_250_100_fontblank.json",
 			"font" : "CCBackBeat",
 			"label_height" : 25,
-			"label_width" : 250,
+			"label_width" : 190,
 			"multi color" : "0xffffffff",
 			"name" : "club",
 			"position" : 
 			{
-				"x" : 120.9647674560547,
-				"y" : 55.31394958496094
+				"x" : 149.9647674560547,
+				"y" : 54.25497436523438
 			},
 			"size" : 14,
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"label_height" : 25,
+			"label_width" : 80,
+			"multi color" : "0xffffffff",
+			"name" : "club_title",
+			"position" : 
+			{
+				"x" : 4.450077056884766,
+				"y" : 54.25497436523438
+			},
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -463,6 +490,66 @@
 			{
 				"dx" : 13.0,
 				"dy" : -168.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 14 ],
+			"val" : 
+			{
+				"dx" : 7.0,
+				"dy" : -1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 15 ],
+			"val" : 
+			{
+				"dx" : 366.0,
+				"dy" : -112.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 14 ],
+			"val" : 
+			{
+				"dx" : 20.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 15 ],
+			"val" : 
+			{
+				"dx" : 54.0,
+				"dy" : -132.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 15 ],
+			"val" : 
+			{
+				"dx" : 21.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 15 ],
+			"val" : 
+			{
+				"dx" : -8.0,
+				"dy" : 0.0,
 				"type" : 0
 			}
 		}
