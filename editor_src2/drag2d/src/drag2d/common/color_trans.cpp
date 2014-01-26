@@ -8,7 +8,7 @@ namespace d2d
 Colorf transColor(const std::string& str, PixelType type) 
 {
 	if (str.empty())
-		return Colorf(0, 0, 0, 1);
+		return Colorf(0, 0, 0, 0);
 
 	if (str == "0xffffffff")
 		return Colorf(1, 1, 1, 1);

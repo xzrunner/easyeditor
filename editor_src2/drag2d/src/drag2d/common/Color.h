@@ -24,6 +24,11 @@ namespace d2d
 			return *this;
 		}
 
+		bool operator == (const Colorf& color) const
+		{
+			return r == color.r && g == color.g && b == color.b && a == color.a;
+		}
+
 		bool operator != (const Colorf& color) const
 		{
 			return r != color.r || g != color.g || b != color.b || a != color.a;
