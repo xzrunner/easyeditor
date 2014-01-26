@@ -3,7 +3,7 @@
 namespace d2d
 {
 
-bool Settings::bZoomOnlyUseMouseWheel = true;
+bool Settings::bZoomOnlyUseMouseWheel = false;
 
 int Settings::ctlPosSize = 0;
 bool Settings::bDisplayTrisEdge = false;

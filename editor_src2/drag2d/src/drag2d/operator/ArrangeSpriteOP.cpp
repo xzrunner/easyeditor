@@ -103,6 +103,9 @@ namespace d2d
 	template <typename TBase>
 	bool ArrangeSpriteOP<TBase>::onKeyUp(int keyCode)
 	{
+		if (TBase::onKeyUp(keyCode)) 
+			return true;
+
 		if (m_propertyPanel && m_bDirty)
 		{
 			m_propertyPanel->enablePropertyGrid(true);

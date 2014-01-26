@@ -9,6 +9,7 @@ namespace d2d
 ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus) 
 	: AbstractEditOP(editPanel)
 	, m_bMouseMoveFocus(bMouseMoveFocus)
+	, m_onRightBtnPan(false)
 {
 	m_lastPos.setInvalid();
 }
@@ -56,6 +57,20 @@ bool ZoomViewOP::onMouseLeftUp(int x, int y)
 	}
 }
 
+bool ZoomViewOP::onMouseRightDown(int x, int y) 
+{ 
+	m_onRightBtnPan = true;
+	m_lastPos.set(x, y);
+	return true;
+}
+
+bool ZoomViewOP::onMouseRightUp(int x, int y) 
+{ 
+	m_onRightBtnPan = false;
+	m_lastPos.setInvalid();
+	return true;
+}
+
 bool ZoomViewOP::onMouseMove(int x, int y) 
 {
 	if (m_bMouseMoveFocus) 
@@ -68,7 +83,7 @@ bool ZoomViewOP::onMouseDrag(int x, int y)
 {
 	if (Settings::bZoomOnlyUseMouseWheel) return false;
 
-	if (wxGetKeyState(WXK_SPACE))
+	if (wxGetKeyState(WXK_SPACE) || m_onRightBtnPan)
 	{
 		if (!m_lastPos.isValid())
 			m_lastPos.set(x, y);
