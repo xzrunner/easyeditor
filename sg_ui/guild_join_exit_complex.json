@@ -56,14 +56,14 @@
 			"filepath" : "left_black_14_250_100_fontblank.json",
 			"font" : "CCBackBeat",
 			"font_filename" : "",
-			"label_height" : 90,
+			"label_height" : 70,
 			"label_width" : 250,
 			"multi color" : "0xffffffff",
 			"name" : "info",
 			"position" : 
 			{
-				"x" : 119.9647674560547,
-				"y" : -10.56878662109375
+				"x" : 122.0109863281250,
+				"y" : -29.56878662109375
 			},
 			"size" : 14,
 			"tag" : "",
@@ -371,7 +371,7 @@
 			"position" : 
 			{
 				"x" : 164.9647674560547,
-				"y" : 54.25497436523438
+				"y" : 52.25497436523438
 			},
 			"size" : 14,
 			"tag" : "",
@@ -400,6 +400,34 @@
 			{
 				"x" : 34.96476745605469,
 				"y" : 54.88121032714844
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 80,
+			"multi color" : "0xffffffff",
+			"name" : "des_title",
+			"position" : 
+			{
+				"x" : 35.0109863281250,
+				"y" : 21.93121337890625
 			},
 			"size" : 16,
 			"tag" : "",
@@ -590,6 +618,26 @@
 			{
 				"dx" : 33.0,
 				"dy" : -1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 5.0,
+				"dy" : -10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 16 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : -30.0,
 				"type" : 0
 			}
 		}
