@@ -63,6 +63,7 @@ namespace d2d
 			std::vector<ISprite*> members;
 		};
 
+		// todo: 
 	public:
 		std::vector<ISprite*> m_sprites;
 

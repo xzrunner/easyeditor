@@ -66,12 +66,12 @@ void ComplexSymbol::draw(const ISprite* sprite/* = NULL*/) const
 
 float ComplexSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
 {
-	return 0;
+	return m_rect.xLength();
 }
 
 float ComplexSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
 {
-	return 0;
+	return m_rect.yLength();
 }
 
 void ComplexSymbol::refresh()
