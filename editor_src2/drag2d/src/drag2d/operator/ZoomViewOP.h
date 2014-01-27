@@ -21,6 +21,9 @@ namespace d2d
 		virtual bool onMouseDrag(int x, int y);
 		virtual bool onMouseWheelRotation(int x, int y, int direction);
 
+	protected:
+		bool m_openRightTap;
+
 	private:
 		bool m_bMouseMoveFocus;
 		bool m_onRightBtnPan;

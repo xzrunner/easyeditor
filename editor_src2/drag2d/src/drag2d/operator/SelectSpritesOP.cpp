@@ -166,6 +166,8 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 			m_callback->updateControlValue();
 	}
 
+	m_openRightTap = m_selection->empty();
+
 	return false;
 }
 
