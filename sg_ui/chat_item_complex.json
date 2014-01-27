@@ -6,35 +6,39 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6313-diban-9-5.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 10.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 4.0,
+			"y scale" : 3.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "rank_line_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : -78.750
+				"y" : -58.79999923706055
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
@@ -44,16 +48,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_player_name_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "player_name",
 			"position" : 
 			{
-				"x" : -20.0,
-				"y" : 59.0
+				"x" : 2.0,
+				"y" : 46.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -63,16 +69,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_time_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "time",
 			"position" : 
 			{
 				"x" : 139.0,
-				"y" : -56.0
+				"y" : -42.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -82,16 +90,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_player_role_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "player_role",
 			"position" : 
 			{
 				"x" : 139.0,
-				"y" : 59.0
+				"y" : 46.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -101,16 +111,39 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_content_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "chat_content",
 			"position" : 
 			{
-				"x" : 10.0,
-				"y" : 0.0
+				"x" : 5.0,
+				"y" : -14.0
 			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "sex_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "sex",
+			"position" : 
+			{
+				"x" : -163.0,
+				"y" : 43.0
+			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -119,5 +152,157 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : null
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 299.0,
+				"dy" : -53.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 6.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 3.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -2.0,
+				"dy" : -36.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 5.0,
+				"dy" : 38.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : 2.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 10.0,
+						"y" : 4.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 10.0,
+				"yscale" : 3.50
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 10.0,
+						"y" : 3.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 10.0,
+				"yscale" : 3.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 19.95000076293945,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -20.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -5.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 0.50,
+				"type" : 0
+			}
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
