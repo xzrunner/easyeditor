@@ -8,34 +8,16 @@
 
 namespace d2d
 {
-	class AnimSymbol : public ISymbol
+	class ComplexSymbol : public ISymbol
 	{
 	public:
-		struct Frame
-		{
-			int id;
-			int index;
-			std::vector<ISprite*> sprites;
-			bool bClassicTween;
-		};
-
-		struct Layer
-		{
-			std::string name;
-			std::vector<Frame*> frames;
-
-			Frame* getCurrFrame(int index) const;
-			Frame* getNextFrame(int index) const;
-		};
-
-	public:
-		AnimSymbol();
-		virtual ~AnimSymbol();
+		ComplexSymbol();
+		virtual ~ComplexSymbol();
 
 		//
 		// ICloneable interface
 		//
-		virtual AnimSymbol* clone() const { return NULL; }
+		virtual ComplexSymbol* clone() const { return NULL; }
 
 		//
 		// ISerializable interface
@@ -48,14 +30,15 @@ namespace d2d
 		//
 		virtual void reloadTexture() const;
 		virtual void draw(const ISprite* sprite = NULL) const;
-		virtual Rect getSize(const ISprite* sprite = NULL) const;
+		virtual float getWidth(const ISprite* sprite = NULL) const;
+		virtual float getHeight(const ISprite* sprite = NULL) const;
 
 		//
 		// ListItem interface
 		//
 		virtual void refresh();
 
-		size_t getMaxFrameIndex() const;
+		bool isOneLayer() const;
 
 	protected:
 		virtual void loadResources();
@@ -65,13 +48,31 @@ namespace d2d
 
 		void refreshThumbnail();
 
+		// todo!
 	public:
-		std::vector<Layer*> m_layers;
+		// avoid to cycle same ComplexSymbol
+		void getAllChildren(std::vector<std::pair<const ISprite*, d2d::Vector> >& children) const;
+
+	private:
+		static const float SCALE;
+
+	public:
+		struct Group
+		{
+			std::string name;
+			std::vector<ISprite*> members;
+		};
+
+		// todo: 
+	public:
+		std::vector<ISprite*> m_sprites;
+
+		std::vector<Group> m_groups;
 
 		Rect m_rect;
 
-		int m_fps;
+		Rect m_clipbox;
 
-	}; // AnimSymbol
+	}; // ComplexSymbol
 }
 
