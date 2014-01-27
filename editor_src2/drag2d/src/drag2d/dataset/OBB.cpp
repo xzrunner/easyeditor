@@ -51,6 +51,21 @@ bool OBB::isContain(const Vector& pos) const
 	return Math::isPointInRect(trans, m_rect);
 }
 
+bool OBB::isContain(const Rect& rect) const
+{
+	const Vector center(m_rect.xCenter(), m_rect.yCenter());
+	Vector trans;
+	trans = Math::rotateVector(Vector(m_rect.xMin, m_rect.yMax) - center, m_angle) + center;
+	if (!Math::isPointInRect(trans, rect)) return false;
+	trans = Math::rotateVector(Vector(m_rect.xMin, m_rect.yMin) - center, m_angle) + center;
+	if (!Math::isPointInRect(trans, rect)) return false;
+	trans = Math::rotateVector(Vector(m_rect.xMax, m_rect.yMin) - center, m_angle) + center;
+	if (!Math::isPointInRect(trans, rect)) return false;
+	trans = Math::rotateVector(Vector(m_rect.xMax, m_rect.yMax) - center, m_angle) + center;
+	if (!Math::isPointInRect(trans, rect)) return false;
+	return true;
+}
+
 bool OBB::isIntersect(const Rect& rect) const
 {
 	// 0 3

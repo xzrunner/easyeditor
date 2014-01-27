@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "ShapeStyle.h"
 #include "common/Color.h"
 
 namespace d2d
@@ -20,6 +21,7 @@ namespace d2d
 			bool isFill = false, float size = 2, const Colorf& color = Colorf(0, 0, 0));
 		static void drawRect(const Vector& p0, const Vector& p1,
 			bool isFill = false, float size = 2, const Colorf& color = Colorf(0, 0, 0));
+		static void rect(const Vector& p0, const Vector& p1, const ShapeStyle& style);
 
 		static void drawCircle(const Vector& center, float radius, bool isFill = false, 
 			float size = 2, const Colorf& color = Colorf(0, 0, 0), size_t kSegments = 16);
@@ -42,6 +44,10 @@ namespace d2d
 			const std::vector<Vector>& texCoords);
 		static void drawTrianglesSlow(unsigned int texID, const std::vector<Vector>& triangles, 
 			const std::vector<Vector>& texCoords);
+
+	private:
+		static void lineStypeBegin(const LineStype& style);
+		static void lineStypeEnd(const LineStype& style);
 
 	}; // PrimitiveDraw
 }

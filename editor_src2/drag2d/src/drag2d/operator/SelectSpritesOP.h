@@ -5,6 +5,7 @@
 #include "DrawRectangleOP.h"
 
 #include "dataset/SelectionSet.h"
+#include "render/ShapeStyle.h"
 
 namespace d2d
 {
@@ -17,8 +18,7 @@ namespace d2d
 	{
 	public:
 		SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-			PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback = NULL,
-			const Colorf& color = Colorf(0, 0, 0));
+			PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback = NULL);
 		virtual ~SelectSpritesOP();
 
 		virtual bool onKeyDown(int keyCode);
@@ -53,6 +53,8 @@ namespace d2d
 
 		// To disable mouse able when press ctrl and window query
 		bool m_bDraggable;
+
+		mutable ShapeStyle m_style;
 
 	}; // SelectSpritesOP
 }

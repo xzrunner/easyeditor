@@ -1,5 +1,7 @@
 #include "MultiSpritesImpl.h"
 
+#include "dataset/AbstractBV.h"
+
 namespace d2d
 {
 
@@ -21,9 +23,9 @@ ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 	return result;
 }
 
-void MultiSpritesImpl::querySpritesByRect(const Rect& rect, std::vector<ISprite*>& result) const
+void MultiSpritesImpl::querySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const
 {
-	traverseSprites(RectQueryVisitor(rect, result), e_editable);
+	traverseSprites(RectQueryVisitor(rect, contain, result), e_editable);
 }
 
 void MultiSpritesImpl::removeSpriteSelection()
@@ -70,16 +72,29 @@ void MultiSpritesImpl::PointQueryVisitor::visit(Object* object, bool& bFetchNext
 // class MultiSpritesImpl::RectQueryVisitor
 //////////////////////////////////////////////////////////////////////////
 
-MultiSpritesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, std::vector<ISprite*>& result)
-	: m_rect(rect), m_result(result)
+MultiSpritesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, bool contain, std::vector<ISprite*>& result)
+	: m_rect(rect)
+	, m_contain(contain)
+	, m_result(result)
 {
 }
 
 void MultiSpritesImpl::RectQueryVisitor::visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
-	if (sprite->editable && sprite->isIntersect(m_rect))
-		m_result.push_back(sprite);
+// 	if (sprite->editable && sprite->isIntersect(m_rect))
+// 		m_result.push_back(sprite);
+	if (sprite->editable)
+	{
+		AbstractBV* bv = sprite->getBounding();
+// 		if (!m_contain && bv->isIntersect(m_rect))
+// 			m_result.push_back(sprite);
+
+		if (m_contain && bv->isContain(m_rect))
+			m_result.push_back(sprite);
+		else if (!m_contain && bv->isIntersect(m_rect))
+			m_result.push_back(sprite);
+	}
 	bFetchNext = true;
 }
 

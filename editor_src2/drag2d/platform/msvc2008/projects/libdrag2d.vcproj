@@ -1213,6 +1213,10 @@
 				RelativePath="..\..\..\src\drag2d\render\Shader.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\ShapeStyle.h"
+				>
+			</File>
 			<Filter
 				Name="opengl"
 				>

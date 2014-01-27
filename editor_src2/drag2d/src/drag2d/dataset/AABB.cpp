@@ -35,6 +35,11 @@ bool AABB::isContain(const Vector& pos) const
 	return Math::isPointInRect(pos, m_rect);
 }
 
+bool AABB::isContain(const Rect& rect) const
+{
+	return Math::isRectContainRect(m_rect, rect);
+}
+
 bool AABB::isIntersect(const Rect& rect) const
 {
 	return Math::isRectIntersectRect(m_rect, rect);

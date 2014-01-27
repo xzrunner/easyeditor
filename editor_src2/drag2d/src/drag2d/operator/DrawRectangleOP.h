@@ -20,7 +20,8 @@ namespace d2d
 		virtual bool clear();
 
 	protected:
-		Colorf m_color;
+		mutable Colorf m_color;
+		mutable float m_size;
 
 		Vector m_firstPos, m_currPos;
 

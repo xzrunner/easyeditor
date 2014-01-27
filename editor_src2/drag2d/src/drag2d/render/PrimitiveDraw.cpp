@@ -33,7 +33,10 @@ void PrimitiveDraw::drawRect(const Vector& center, float hWidth, float hHeight, 
 void PrimitiveDraw::drawRect(const Vector& p0, const Vector& p1, bool isFill/* = false*/,
 							 float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/)
 {
-	Shader::Instance()->shape();
+	Shader* shader = Shader::Instance();
+	shader->shape();
+
+//	Shader::Instance()->shape();
 
 	int type = isFill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
 
@@ -47,7 +50,9 @@ void PrimitiveDraw::drawRect(const Vector& p0, const Vector& p1, bool isFill/* =
 		GL10::LineWidth(size);
 	}
 
-	GL10::Color4f(color.r, color.g, color.b, color.a);
+//	GL10::Color4f(color.r, color.g, color.b, color.a);
+	shader->color(color);
+	
 	GL10::Begin(type);
 		GL10::Vertex2f(p0.x, p0.y);
 		GL10::Vertex2f(p0.x, p1.y);
@@ -59,6 +64,29 @@ void PrimitiveDraw::drawRect(const Vector& p0, const Vector& p1, bool isFill/* =
 	//	GL10::Disable(GL10::GL_BLEND);
 	//else
 		GL10::LineWidth(1.0f);
+}
+
+void PrimitiveDraw::rect(const Vector& p0, const Vector& p1, const ShapeStyle& style)
+{
+	Shader* shader = Shader::Instance();
+	shader->shape();
+
+	int type = style.fill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
+	if (!style.fill)
+		GL10::LineWidth(style.size);
+
+	shader->color(style.color);
+	lineStypeBegin(style.lineStyle);
+	GL10::Begin(type);
+		GL10::Vertex2f(p0.x, p0.y);
+		GL10::Vertex2f(p0.x, p1.y);
+		GL10::Vertex2f(p1.x, p1.y);
+		GL10::Vertex2f(p1.x, p0.y);
+	GL10::End();
+	lineStypeEnd(style.lineStyle);
+
+	if (!style.fill)
+		GL10::LineWidth(1);
 }
 
 void PrimitiveDraw::drawCircle(const Vector& center, float radius, bool isFill/* = false*/, 
@@ -610,6 +638,35 @@ void PrimitiveDraw::drawTrianglesSlow(unsigned int texID, const std::vector<Vect
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 
 	//GL10::Disable(GL10::GL_BLEND);
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+void PrimitiveDraw::lineStypeBegin(const LineStype& style)
+{
+	if (style == LS_DEFAULT)
+		return;
+
+	d2d::GL10::Enable(d2d::GL10::GL_LINE_STIPPLE);
+	switch (style)
+	{
+	case LS_DOT:
+		d2d::GL10::LineStipple(1, 0x0101);
+		break;
+	case LS_DASH:
+		d2d::GL10::LineStipple(1, 0x00FF);
+		break;
+	case LS_DOT_DASH:
+		d2d::GL10::LineStipple(1, 0x1c47);
+		break;
+	}
+}
+
+void PrimitiveDraw::lineStypeEnd(const LineStype& style)
+{
+	if (style == LS_DEFAULT)
+		return;
+	d2d::GL10::Disable(d2d::GL10::GL_LINE_STIPPLE);
 }
 
 } // d2d

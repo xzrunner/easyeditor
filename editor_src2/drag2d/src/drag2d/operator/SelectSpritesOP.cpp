@@ -13,14 +13,14 @@
 #include "view/Scale9PropertySetting.h"
 #include "view/MultiSpritesImpl.h"
 #include "render/DrawSelectedSpriteVisitor.h"
+#include "render/PrimitiveDraw.h"
 
 namespace d2d
 {
 
 SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-								 PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback/* = NULL*/,
-								 const Colorf& color /*= Colorf(0, 0, 0)*/)
-	: DrawRectangleOP(editPanel, color)
+								 PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback/* = NULL*/)
+	: DrawRectangleOP(editPanel)
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
 	, m_propertyPanel(propertyPanel)
@@ -31,6 +31,8 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 	m_selection->retain();
 
 	m_firstPos.setInvalid();
+
+	m_style.size = 2;
 }
 
 SelectSpritesOP::~SelectSpritesOP()
@@ -143,9 +145,10 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 
 	if (m_firstPos.isValid())
 	{
-		Rect rect(m_firstPos, m_editPanel->transPosScreenToProject(x, y));
+		Vector end = m_editPanel->transPosScreenToProject(x, y);
+		Rect rect(m_firstPos, end);
 		std::vector<ISprite*> sprites;
-		m_spritesImpl->querySpritesByRect(rect, sprites);
+		m_spritesImpl->querySpritesByRect(rect, m_firstPos.x < end.x, sprites);
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 			m_selection->insert(sprites[i]);
 
@@ -184,9 +187,37 @@ bool SelectSpritesOP::onMouseDrag(int x, int y)
 
 bool SelectSpritesOP::onDraw() const
 {
-	if (DrawRectangleOP::onDraw()) return true;
-
 	m_selection->traverse(DrawSelectedSpriteVisitor(Colorf(1, 0, 0)));
+
+	if (m_firstPos.isValid() && m_currPos.isValid())
+	{
+		if (m_currPos.x > m_firstPos.x)
+		{
+			m_style.lineStyle = LS_DEFAULT;
+
+			m_style.fill = true;
+			m_style.color.set(0, 0.22f, 0, 0.5f);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
+
+			m_style.fill = false;
+			m_style.color.set(0.75f, 0, 0, 1);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
+		}
+		else
+		{
+			m_style.lineStyle = LS_DASH;
+
+			m_style.fill = true;
+			m_style.color.set(0, 0, 0.22f, 0.5f);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
+
+			m_style.fill = false;
+			m_style.color.set(0.75f, 0, 0, 1);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
+		}
+	}
+
+// 	if (DrawRectangleOP::onDraw()) return true;
 
 	return false;
 }

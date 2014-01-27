@@ -24,7 +24,7 @@ namespace d2d
 		virtual void resetSpriteOrder(ISprite* sprite, bool up) = 0;
 
 		virtual ISprite* querySpriteByPos(const Vector& pos) const;
-		virtual void querySpritesByRect(const Rect& rect, std::vector<ISprite*>& result) const;		
+		virtual void querySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const;		
 
 		SpriteSelection* getSpriteSelection() { return m_spriteSelection; }
 		void removeSpriteSelection();
@@ -48,11 +48,12 @@ namespace d2d
 		class RectQueryVisitor : public IVisitor
 		{
 		public:
-			RectQueryVisitor(const Rect& rect, std::vector<ISprite*>& result);
+			RectQueryVisitor(const Rect& rect, bool contain, std::vector<ISprite*>& result);
 			virtual void visit(Object* object, bool& bFetchNext);
 
 		private:
 			const Rect& m_rect;
+			bool m_contain;
 			std::vector<ISprite*>& m_result;
 
 		}; // RectQueryVisitor

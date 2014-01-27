@@ -30,6 +30,7 @@ namespace d2d
 		virtual void combine(const Rect& rect) = 0;
 
 		virtual bool isContain(const Vector& pos) const = 0;
+		virtual bool isContain(const Rect& rect) const = 0;
 		virtual bool isIntersect(const Rect& rect) const = 0;
 
 		virtual float area() const = 0;

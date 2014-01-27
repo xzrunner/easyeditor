@@ -58,6 +58,13 @@ namespace d2d
 			return !(r0.xMin > r1.xMax || r0.xMax < r1.xMin || r0.yMin > r1.yMax || r0.yMax < r1.yMin);
 		}
 
+		// To check if r1 in r0
+		static bool isRectContainRect(const Rect& r0, const Rect& r1)
+		{
+			return r1.xMin >= r0.xMin && r1.xMax <= r0.xMax 
+				&& r1.yMin >= r0.yMin && r1.yMax <= r0.yMax;
+		}
+
 		// To check if the segment intersect with the Rect.
 		static bool isSegmentIntersectRect(float lx1, float ly1, float lx2, float ly2,
 			float ax1, float ay1, float ax2, float ay2);
