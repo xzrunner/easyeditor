@@ -5,9 +5,8 @@
 namespace eanim
 {
 	SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/,
-		const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/)
-			: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback, color)
+		d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
+			: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
 	{
 	}
 

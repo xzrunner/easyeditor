@@ -16,12 +16,12 @@ static const int HEIGHT = 480;
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::ShapeStageCanvas(stage, stage)
 {
+	m_style.color = LIGHT_GRAY;
 }
 
 void StageCanvas::drawGuideLines()
 {
-	d2d::PrimitiveDraw::drawRect(d2d::Vector(0, 0), WIDTH * 0.5f, HEIGHT * 0.5f, 
-		false, 2, LIGHT_GRAY);
+	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), WIDTH * 0.5f, HEIGHT * 0.5f, m_style);
 }
 
 void StageCanvas::initGL()

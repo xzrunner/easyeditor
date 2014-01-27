@@ -30,6 +30,8 @@ namespace libcomplex
 		wxTimer m_timer;
 		int m_currFrame;
 
+		d2d::ShapeStyle m_bgStyle, m_clipboxStyle;
+
 		DECLARE_EVENT_TABLE()
 
 	}; // StageCanvas

@@ -8,11 +8,11 @@ namespace d2d
 DrawRectangleOP::DrawRectangleOP(EditPanel* editPanel,
 								 const Colorf& color /*= Colorf(0, 0, 0)*/)
 	: ZoomViewOP(editPanel, true)
-	, m_color(color)
-	, m_size(1)
 {
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();
+
+	m_style.color = color;
 }
 
 bool DrawRectangleOP::onMouseLeftDown(int x, int y)
@@ -54,7 +54,7 @@ bool DrawRectangleOP::onDraw() const
 	if (ZoomViewOP::onDraw()) return true;
 
 	if (m_firstPos.isValid() && m_currPos.isValid())
-		PrimitiveDraw::drawRect(m_firstPos, m_currPos, false, m_size, m_color);
+		PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
 
 	return false;
 }

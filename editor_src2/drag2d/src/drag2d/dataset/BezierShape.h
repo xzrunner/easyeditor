@@ -2,6 +2,8 @@
 
 #include "ChainShape.h"
 
+#include "render/ShapeStyle.h"
+
 namespace d2d
 {
 	class BezierShape : public ChainShape
@@ -34,6 +36,9 @@ namespace d2d
 	public:
 		// [0] start, [1] ctrl1, [2] ctrl2, [3] end
 		d2d::Vector points[4];
+
+	private:
+		ShapeStyle m_style;
 
 	}; // BezierShape
 }

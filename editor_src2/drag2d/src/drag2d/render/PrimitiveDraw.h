@@ -8,6 +8,7 @@
 namespace d2d
 {
 	class Vector;
+	class Rect;
 	struct Colorf;
 
 	class PrimitiveDraw
@@ -15,12 +16,9 @@ namespace d2d
 	public:
 		static void resetColorAndTexture();
 
-		static void drawRect(const Vector& center, float radius, 
-			bool isFill = false, float size = 2, const Colorf& color = Colorf(0, 0, 0));
-		static void drawRect(const Vector& center, float hWidth, float hHeight, 
-			bool isFill = false, float size = 2, const Colorf& color = Colorf(0, 0, 0));
-		static void drawRect(const Vector& p0, const Vector& p1,
-			bool isFill = false, float size = 2, const Colorf& color = Colorf(0, 0, 0));
+		static void rect(const Vector& center, float radius, const ShapeStyle& style);
+		static void rect(const Vector& center, float hWidth, float hHeight, const ShapeStyle& style);
+		static void rect(const Rect& rect, const ShapeStyle& style);
 		static void rect(const Vector& p0, const Vector& p1, const ShapeStyle& style);
 
 		static void drawCircle(const Vector& center, float radius, bool isFill = false, 

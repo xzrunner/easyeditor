@@ -22,7 +22,7 @@ namespace d2d
 
 		ShapeStyle() 
 			: fill(false)
-			, size(1)
+			, size(2)
 			, color(0,0,0,1)
 			, lineStyle(LS_DEFAULT) 
 		{}

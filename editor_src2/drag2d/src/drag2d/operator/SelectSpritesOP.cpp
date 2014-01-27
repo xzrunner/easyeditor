@@ -31,8 +31,6 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 	m_selection->retain();
 
 	m_firstPos.setInvalid();
-
-	m_style.size = 2;
 }
 
 SelectSpritesOP::~SelectSpritesOP()

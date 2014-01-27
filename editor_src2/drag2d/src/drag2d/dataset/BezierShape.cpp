@@ -62,7 +62,7 @@ void BezierShape::draw(const Colorf& color/* = Colorf(0, 0, 0)*/) const
 	ChainShape::draw(color);
 
 	for (size_t i = 0; i < 4; ++i)
-		PrimitiveDraw::drawRect(points[i], (float)RADIUS, (float)RADIUS);
+		PrimitiveDraw::rect(points[i], (float)RADIUS, (float)RADIUS, m_style);
 }
 
 void BezierShape::createCurve()

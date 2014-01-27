@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ISymbol.h"
+#include "render/ShapeStyle.h"
 
 namespace d2d
 {
@@ -59,6 +60,8 @@ namespace d2d
 
 	private:
 		Font* m_font;
+
+		ShapeStyle m_style;
 
 	}; // FontBlankSymbol
 }

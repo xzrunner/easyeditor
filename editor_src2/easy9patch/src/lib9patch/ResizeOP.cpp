@@ -74,10 +74,10 @@ bool ResizeOP::onDraw() const
 	const float hw = m_symbol->getWidth() * 0.5f,
 		hh = m_symbol->getHeight() * 0.5f;
 	const float r = REGION;
-	d2d::PrimitiveDraw::drawRect(d2d::Vector(-hw, -hh), r, r);
-	d2d::PrimitiveDraw::drawRect(d2d::Vector( hw, -hh), r, r);
-	d2d::PrimitiveDraw::drawRect(d2d::Vector( hw,  hh), r, r);
-	d2d::PrimitiveDraw::drawRect(d2d::Vector(-hw,  hh), r, r);
+	d2d::PrimitiveDraw::rect(d2d::Vector(-hw, -hh), r, r, m_style);
+	d2d::PrimitiveDraw::rect(d2d::Vector( hw, -hh), r, r, m_style);
+	d2d::PrimitiveDraw::rect(d2d::Vector( hw,  hh), r, r, m_style);
+	d2d::PrimitiveDraw::rect(d2d::Vector(-hw,  hh), r, r, m_style);
 
 	return false;
 }

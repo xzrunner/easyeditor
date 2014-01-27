@@ -16,6 +16,9 @@ namespace libcomplex
 	{
 		m_timer.Start(1000 / 30);
 		m_currFrame = 1;
+
+		m_bgStyle.color.set(0.8f, 0.8f, 0.8f);
+		m_clipboxStyle.color.set(0, 0.8f, 0);
 	}
 
 	void StageCanvas::initGL()
@@ -26,8 +29,7 @@ namespace libcomplex
 
 	void StageCanvas::onDraw()
 	{
-		d2d::PrimitiveDraw::drawRect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, 
-			false, 2, d2d::Colorf(0.8f, 0.8f, 0.8f));
+		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 
 		std::vector<d2d::ISprite*> sprites;
 		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
@@ -47,9 +49,7 @@ namespace libcomplex
 				d2d::SpriteDraw::drawSprite(sprites[i]);
 		}
 
-		const d2d::Rect& cb = m_editPanel->getSymbol()->m_clipbox;
-		d2d::PrimitiveDraw::drawRect(d2d::Vector(cb.xMin, cb.yMin), d2d::Vector(cb.xMax, cb.yMax), 
-			false, 2, d2d::Colorf(0, 0.8f, 0, 1));
+		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
 
 		m_editPanel->drawEditTemp();
 	}

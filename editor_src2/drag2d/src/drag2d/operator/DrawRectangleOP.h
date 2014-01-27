@@ -1,8 +1,8 @@
 #pragma once
 
-#include "common/Color.h"
-
 #include "ZoomViewOP.h"
+
+#include "render/ShapeStyle.h"
 
 namespace d2d
 {
@@ -20,10 +20,10 @@ namespace d2d
 		virtual bool clear();
 
 	protected:
-		mutable Colorf m_color;
-		mutable float m_size;
-
 		Vector m_firstPos, m_currPos;
+
+	private:
+		ShapeStyle m_style;
 
 	}; // DrawRectangleOP
 }

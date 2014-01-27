@@ -2,6 +2,7 @@
 #include "GL10.h"
 
 #include "common/Vector.h"
+#include "common/Rect.h"
 #include "common/Color.h"
 #include "common/Math.h"
 #include "render/Shader.h"
@@ -16,54 +17,19 @@ void PrimitiveDraw::resetColorAndTexture()
 	GL10::Color4f(1, 1, 1, 1);
 }
 
-void PrimitiveDraw::drawRect(const Vector& center, float radius, bool isFill/* = false*/,
-							 float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/)
+void PrimitiveDraw::rect(const Vector& center, float radius, const ShapeStyle& style)
 {
-	Shader::Instance()->shape();
-	drawRect(center, radius, radius, isFill, size, color);
+	rect(center, radius, radius, style);
 }
 
-void PrimitiveDraw::drawRect(const Vector& center, float hWidth, float hHeight, bool isFill/* = false*/,
-							 float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/)
+void PrimitiveDraw::rect(const Vector& center, float hWidth, float hHeight, const ShapeStyle& style)
 {
-	Shader::Instance()->shape();
-	drawRect(center - Vector(hWidth, hHeight), center + Vector(hWidth, hHeight), isFill, size, color);
+	rect(center - Vector(hWidth, hHeight), center + Vector(hWidth, hHeight), style);
 }
 
-void PrimitiveDraw::drawRect(const Vector& p0, const Vector& p1, bool isFill/* = false*/,
-							 float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/)
+void PrimitiveDraw::rect(const Rect& r, const ShapeStyle& style)
 {
-	Shader* shader = Shader::Instance();
-	shader->shape();
-
-//	Shader::Instance()->shape();
-
-	int type = isFill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
-
-	if (isFill)
-	{
-// 		GL10::Enable(GL10::GL_BLEND);
-// 		GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
-	}
-	else
-	{
-		GL10::LineWidth(size);
-	}
-
-//	GL10::Color4f(color.r, color.g, color.b, color.a);
-	shader->color(color);
-	
-	GL10::Begin(type);
-		GL10::Vertex2f(p0.x, p0.y);
-		GL10::Vertex2f(p0.x, p1.y);
-		GL10::Vertex2f(p1.x, p1.y);
-		GL10::Vertex2f(p1.x, p0.y);
-	GL10::End();
-
-	//if (isFill)
-	//	GL10::Disable(GL10::GL_BLEND);
-	//else
-		GL10::LineWidth(1.0f);
+	rect(Vector(r.xMin, r.yMin), Vector(r.xMax, r.yMax), style);
 }
 
 void PrimitiveDraw::rect(const Vector& p0, const Vector& p1, const ShapeStyle& style)

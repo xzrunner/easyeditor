@@ -39,6 +39,8 @@ namespace lib9patch
 
 		d2d::Vector m_firstPos;
 
+		d2d::ShapeStyle m_style;
+
 	}; // ResizeOP
 }
 

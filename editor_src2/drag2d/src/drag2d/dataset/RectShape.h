@@ -3,6 +3,7 @@
 #include "IShape.h"
 
 #include "common/Rect.h"
+#include "render/ShapeStyle.h"
 
 namespace d2d
 {
@@ -35,6 +36,9 @@ namespace d2d
 
 	public:
 		Rect m_rect;
+
+	private:
+		ShapeStyle m_style;
 
 	}; // RectShape
 }

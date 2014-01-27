@@ -27,6 +27,9 @@ FontBlankSymbol::FontBlankSymbol()
 	width = height = 100;
 
 	m_font = NULL;
+
+	m_style.fill = true;
+	m_style.color.set(0.7f, 0.7f, 0.7f, 0.7f);
 }
 
 FontBlankSymbol::~FontBlankSymbol()
@@ -56,7 +59,7 @@ void FontBlankSymbol::draw(const ISprite* sprite/* = NULL*/) const
 		if (m_font)
 			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
 	}
-	PrimitiveDraw::drawRect(Vector(0, 0), w*0.5f, h*0.5f, true, 2, Colorf(0.7f, 0.7f, 0.7f, 0.7f));
+	PrimitiveDraw::rect(Vector(0, 0), w*0.5f, h*0.5f, m_style);
 	if (m_font) {
 		Shader::Instance()->null();
 		print(-w*0.5f, 0, "abcdEFGH1234");

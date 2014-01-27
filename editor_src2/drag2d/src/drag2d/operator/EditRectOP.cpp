@@ -223,7 +223,7 @@ bool EditRectOP::onDraw() const
 	else
 	{
 		if (m_firstPress.isValid() && m_currPos.isValid())
-			PrimitiveDraw::drawRect(m_firstPress, m_currPos);
+			PrimitiveDraw::rect(m_firstPress, m_currPos, m_style);
 	}
 
 	return false;

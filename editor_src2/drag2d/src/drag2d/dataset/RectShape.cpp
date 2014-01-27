@@ -52,7 +52,6 @@ bool RectShape::isIntersect(const Rect& rect) const
 
 void RectShape::draw(const Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
-	PrimitiveDraw::drawRect(Vector(m_rect.xMin, m_rect.yMin), 
-		Vector(m_rect.xMax, m_rect.yMax), false, 2, color);
+	PrimitiveDraw::rect(m_rect, m_style);
 }
 } // d2d

@@ -4,6 +4,7 @@
 #include "NodeCapture.h"
 
 #include "component/NodeCaptureCMPT.h"
+#include "render/ShapeStyle.h"
 
 namespace d2d
 {
@@ -37,6 +38,8 @@ namespace d2d
 		Vector m_currPos;
 
 		NodeAddr m_captured;
+
+		ShapeStyle m_style;
 
 	}; // EditRectOP
 }

@@ -14,7 +14,7 @@ namespace libshape
 		StageCanvas(StagePanel* stage);
 
 	public:
-		static void drawGuideLines();
+		void drawGuideLines();
 
 	protected:
 		virtual void initGL();
@@ -24,6 +24,8 @@ namespace libshape
 		void onKeyDown(wxKeyEvent& event);
 
 	private:
+		d2d::ShapeStyle m_style;
+
 		DECLARE_EVENT_TABLE()
 
 	}; // StageCanvas
