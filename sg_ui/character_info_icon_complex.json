@@ -75,6 +75,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "troop_icon_amount_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 17,
 			"label_width" : 41,
 			"multi color" : "0xffffffff",

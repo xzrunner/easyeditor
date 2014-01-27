@@ -33,6 +33,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "level_fontblank.json",
 			"font" : "CCBackBeat",
+			"font_filename" : "",
 			"label_height" : 68,
 			"label_width" : 125,
 			"multi color" : "0xffffffff",
