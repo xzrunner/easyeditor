@@ -4,6 +4,26 @@
 	"redo" : null,
 	"sprite" : 
 	[
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6312-diban-9-5.png",
+			"multi color" : "0xffffffff",
+			"name" : "mask",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6.500030517578125
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 200.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 22.50,
+			"y shear" : 0.0
+		},
 		
 		{
 			"add color" : "",

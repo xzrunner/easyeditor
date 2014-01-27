@@ -9,12 +9,33 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
+			"filepath" : "6312-diban-9-5.png",
+			"multi color" : "0xffffffff",
+			"name" : "mask",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 200.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 22.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "rank_item_bg_9patch.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -1.525878906250000e-005,
+				"x" : 0.0,
 				"y" : -3.051757812500000e-005
 			},
 			"tag" : "",
@@ -35,7 +56,7 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -357.0,
+				"x" : -360.0,
 				"y" : 3.0
 			},
 			"tag" : "",
@@ -55,13 +76,14 @@
 			"color" : "0xffffffff",
 			"filepath" : "rank_rank_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 19,
 			"label_width" : 80,
 			"multi color" : "0xffffffff",
 			"name" : "rank",
 			"position" : 
 			{
-				"x" : -355.0,
+				"x" : -358.0,
 				"y" : 0.50
 			},
 			"size" : 16,
@@ -83,7 +105,7 @@
 			"name" : "line",
 			"position" : 
 			{
-				"x" : -300.8512268066406,
+				"x" : -311.8512268066406,
 				"y" : 1.000005722045898
 			},
 			"tag" : "",
@@ -103,13 +125,14 @@
 			"color" : "0xffffffff",
 			"filepath" : "rank_player_name_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 21,
 			"label_width" : 210,
 			"multi color" : "0xffffffff",
 			"name" : "player_name",
 			"position" : 
 			{
-				"x" : -127.1637878417969,
+				"x" : -148.1637878417969,
 				"y" : 18.00000572204590
 			},
 			"size" : 16,
@@ -130,13 +153,14 @@
 			"color" : "0xffffffff",
 			"filepath" : "rank_scorce_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 19,
 			"label_width" : 93,
 			"multi color" : "0xffffffff",
 			"name" : "score",
 			"position" : 
 			{
-				"x" : -149.6637878417969,
+				"x" : -132.6637878417969,
 				"y" : -18.50
 			},
 			"size" : 16,
@@ -158,7 +182,7 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -214.1637878417969,
+				"x" : -197.1637878417969,
 				"y" : -19.10003089904785
 			},
 			"tag" : "",
@@ -178,6 +202,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "rank_scorce_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 19,
 			"label_width" : 93,
 			"multi color" : "0xffffffff",
@@ -226,6 +251,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "rank_scorce_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 19,
 			"label_width" : 93,
 			"multi color" : "0xffffffff",
@@ -317,7 +343,7 @@
 			"name" : "level",
 			"position" : 
 			{
-				"x" : -269.0,
+				"x" : -282.0,
 				"y" : -0.50
 			},
 			"tag" : "",
@@ -337,6 +363,7 @@
 			"color" : "0xfffeffd9",
 			"filepath" : "leader_text_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 22,
 			"label_width" : 70,
 			"multi color" : "0xffffffff",
@@ -347,6 +374,55 @@
 				"y" : 16.0
 			},
 			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "sex_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "sex",
+			"position" : 
+			{
+				"x" : -237.1637878417969,
+				"y" : -16.99998855590820
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 1,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff333333",
+			"filepath" : "distance_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 22,
+			"label_width" : 140,
+			"multi color" : "0xffffffff",
+			"name" : "distance",
+			"position" : 
+			{
+				"x" : -6.163787841796875,
+				"y" : -18.0
+			},
+			"size" : 14,
 			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -446,6 +522,200 @@
 				"dx" : -3.0,
 				"dy" : 0.0,
 				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 15 ],
+			"val" : 
+			{
+				"dx" : 291.0,
+				"dy" : -168.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 15 ],
+			"val" : 
+			{
+				"dx" : 6.0,
+				"dy" : 7.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 16 ],
+			"val" : 
+			{
+				"dx" : 136.0,
+				"dy" : -70.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 4.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 16 ],
+			"val" : 
+			{
+				"dx" : -171.0,
+				"dy" : -16.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 16 ],
+			"val" : 
+			{
+				"dx" : 75.0,
+				"dy" : 57.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 16 ],
+			"val" : 
+			{
+				"dx" : 161.0,
+				"dy" : -227.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 230.0,
+				"dy" : -76.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 348.0,
+				"dy" : 67.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 200.0,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 200.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 200.0,
+				"yscale" : 21.250
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 148.0,
+				"dy" : 56.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -98.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -164.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 17 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 4.000030517578125,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 200.0,
+						"y" : 21.250
+					}
+				],
+				"type" : 3,
+				"xscale" : 200.0,
+				"yscale" : 22.50
 			}
 		}
 	],
