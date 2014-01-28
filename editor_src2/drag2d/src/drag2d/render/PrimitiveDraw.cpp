@@ -80,6 +80,8 @@ void PrimitiveDraw::drawCircle(const Vector& center, float radius, bool isFill/*
 	}
 	else
 	{
+		GL10::Color3f(color.r, color.g, color.b);
+
 		const float k_increment = 2.0f * PI / kSegments;
 		float theta = 0.0f;
 
@@ -97,23 +99,18 @@ void PrimitiveDraw::drawCircle(const Vector& center, float radius, bool isFill/*
 			theta += k_increment;
 		}
 		vertices.push_back(vertices[1]);
-		colors.push_back(color);
-
-// 		GL10::Enable(GL10::GL_BLEND);
-// 		GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
+//		colors.push_back(color);
 
 		GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
-		GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
+//		GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
 
 		GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &vertices[0]);
-		GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
+//		GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
 		GL10::DrawArrays(GL10::GL_TRIANGLE_FAN, 0, vertices.size());
 
-		GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
+//		GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
 		GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
-
-		//GL10::Disable(GL10::GL_BLEND);
 	}
 }
 

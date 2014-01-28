@@ -51,8 +51,18 @@ namespace d2d
 		void translate(const Vector& offset);
 		void rotate(float delta);
 
-		const Vector& getPosition() const;
-		float getAngle() const;
+		const Vector& getPosition() const {
+			return m_pos;
+		}
+		const Vector& getOffset() const {
+			return m_offset;
+		}
+		void setOffset(const Vector& offset) {
+			m_offset = offset;
+		}
+		float getAngle() const {
+			return m_angle;
+		}
 		float getScaleX() const { return m_xScale; }
 		float getScaleY() const { return m_yScale; }
 		float getShearX() const { return m_xShear; }
@@ -61,7 +71,9 @@ namespace d2d
 		void setMirror(bool xMirror, bool yMirror) { m_xMirror = xMirror; m_yMirror = yMirror; }
 		void getMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
 
-		AbstractBV* getBounding() const;
+		AbstractBV* getBounding() const {
+			return m_bounding;
+		}
 
 		void updateEachFrame();
 		IBody* getBody() const;
@@ -89,6 +101,7 @@ namespace d2d
 	protected:
 		Vector m_pos;
 		float m_angle;
+		Vector m_offset;
 		float m_xScale, m_yScale;
 		float m_xShear, m_yShear;
 

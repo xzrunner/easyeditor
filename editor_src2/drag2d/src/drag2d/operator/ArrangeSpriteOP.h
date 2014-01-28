@@ -90,6 +90,7 @@ namespace d2d
 		Vector m_firstPos;
 
 		Vector m_scaleSelected;
+		bool m_selOffset;
 
 		bool m_bDirty;
 

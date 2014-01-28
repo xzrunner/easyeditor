@@ -135,6 +135,13 @@ namespace d2d
 					return false;
 				}
 			}
+
+			d2d::Vector offset = Math::rotateVector(m_scaling->getOffset(), m_scaling->getAngle()) + m_scaling->getPosition();
+			if (Math::getDistance(offset, m_lastPos) < SCALE_NODE_RADIUS)
+			{
+				m_selOffset = true;
+				return false;
+			}
 		}
 
 		if (TBase::onMouseLeftDown(x, y)) return true;
@@ -160,6 +167,8 @@ namespace d2d
 		if (TBase::onMouseLeftUp(x, y)) return true;
 
 		setScalingFromSelected();
+
+		m_selOffset = false;
 
  		if (m_firstPos.isValid() && !m_selection->empty() && !m_bRightPress)
  		{
@@ -245,11 +254,20 @@ namespace d2d
 	{
 		if (TBase::onMouseDrag(x, y)) return true;
 
-		if (m_scaleOpen && m_scaling && m_scaleSelected.isValid())
+		if (m_scaleOpen && m_scaling)
 		{
 			Vector pos = m_editPanel->transPosScreenToProject(x, y);
-			scaleSprite(pos);
-			return false;
+			if (m_scaleSelected.isValid())
+			{
+				scaleSprite(pos);
+				return false;
+			}
+			else if (m_selOffset)
+			{
+				d2d::Vector offset = Math::rotateVector(pos - m_scaling->getPosition(), -m_scaling->getAngle());
+				m_scaling->setOffset(offset);
+				return false;
+			}
 		}
 
 		if (m_selection->empty()) return false;
@@ -303,6 +321,9 @@ namespace d2d
 			m_scaling->getBounding()->getBoundPos(quad);
 			for (size_t i = 0; i < 4; ++i)
 				PrimitiveDraw::drawCircle(quad[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+
+			d2d::Vector offset = Math::rotateVector(m_scaling->getOffset(), m_scaling->getAngle()) + m_scaling->getPosition();			
+			PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 
 		if (m_autoAlignHor[0] != m_autoAlignHor[1])

@@ -22,7 +22,6 @@ ISprite::ISprite()
 
 	visiable = editable = true;
 
-	m_pos.set(0.0f, 0.0f);
 	m_angle = 0.0f;
 	m_xScale = m_yScale = 1.0f;
 	m_xShear = m_yShear = 0.0f;
@@ -207,21 +206,6 @@ void ISprite::rotate(float delta)
 	Vector offset = m_bounding->center() - m_pos;
 	Vector dst = Math::rotateVector(offset, delta);
 	m_bounding->translate(dst - offset);
-}
-
-const Vector& ISprite::getPosition() const
-{
-	return m_pos;
-}
-
-float ISprite::getAngle() const
-{
-	return m_angle;
-}
-
-AbstractBV* ISprite::getBounding() const
-{
-	return m_bounding;
 }
 
 void ISprite::updateEachFrame()
