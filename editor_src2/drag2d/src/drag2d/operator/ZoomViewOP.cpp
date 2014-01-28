@@ -127,10 +127,10 @@ bool ZoomViewOP::onMouseDrag(int x, int y)
 
 bool ZoomViewOP::onMouseWheelRotation(int x, int y, int direction) 
 {
-	if (Settings::bZoomOnlyUseMouseWheel)
+//	if (Settings::bZoomOnlyUseMouseWheel)
 		m_editPanel->onMouseWheelRotation(x, y, direction);
-	else
-		m_editPanel->onMouseWheelRotation(m_editPanel->GetSize().GetWidth() * 0.5f, m_editPanel->GetSize().GetHeight() * 0.5f, direction);
+// 	else
+// 		m_editPanel->onMouseWheelRotation(m_editPanel->GetSize().GetWidth() * 0.5f, m_editPanel->GetSize().GetHeight() * 0.5f, direction);
 
 	return false;
 }
