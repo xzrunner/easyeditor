@@ -3,7 +3,7 @@
 #include <drag2d.h>
 #include <wx/splitter.h>
 
-namespace libcomplex { class LibraryPanel; class StagePanel; }
+namespace complex { class LibraryPanel; class StagePanel; }
 
 namespace ecomplex 
 {
@@ -20,7 +20,7 @@ namespace ecomplex
 
 		virtual void clear();
 
-		libcomplex::StagePanel* getStagePanel() { return m_stage; }
+		complex::StagePanel* getStagePanel() { return m_stage; }
 
 	private:
 		void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
@@ -34,9 +34,9 @@ namespace ecomplex
 
 		wxFrame* m_parent;
 
-		libcomplex::LibraryPanel* m_library;
+		complex::LibraryPanel* m_library;
 		d2d::PropertySettingPanel* m_property;
-		libcomplex::StagePanel* m_stage;
+		complex::StagePanel* m_stage;
 		d2d::ViewlistPanel* m_viewlist;
 
 		friend class FileIO;

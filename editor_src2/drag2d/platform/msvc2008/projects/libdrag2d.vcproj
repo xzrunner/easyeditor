@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -913,14 +913,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ComplexSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ComplexSprite.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\EShapeSprite.cpp"
 					>
 				</File>
@@ -1030,14 +1022,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\CombinationSymbol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ComplexSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ComplexSymbol.h"
 					>
 				</File>
 				<File
@@ -1689,18 +1673,6 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="complex"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryComplexPage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryComplexPage.h"
-						>
-					</File>
-				</Filter>
-				<Filter
 					Name="anim"
 					>
 					<File
@@ -1867,14 +1839,6 @@
 				<Filter
 					Name="symbol"
 					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\ComplexPropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\ComplexPropertySetting.h"
-						>
-					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\Scale9PropertySetting.cpp"
 						>

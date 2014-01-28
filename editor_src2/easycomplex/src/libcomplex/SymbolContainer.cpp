@@ -1,8 +1,9 @@
 #include "SymbolContainer.h"
+#include "Symbol.h"
 
-namespace libcomplex
+namespace complex
 {
-	SymbolContainer::SymbolContainer(d2d::ComplexSymbol* symbol)
+	SymbolContainer::SymbolContainer(Symbol* symbol)
 	{
 		m_symbol = symbol;
 		m_symbol->retain();

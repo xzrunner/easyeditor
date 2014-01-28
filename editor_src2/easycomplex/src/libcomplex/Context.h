@@ -2,7 +2,7 @@
 // 
 // #include <drag2d.h>
 // 
-// namespace libcomplex
+// namespace complex
 // {
 // class StagePanel;
 // class ToolbarPanel;

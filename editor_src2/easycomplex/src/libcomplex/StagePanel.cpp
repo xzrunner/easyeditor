@@ -1,20 +1,20 @@
 #include "StagePanel.h"
-
 #include "StageCanvas.h"
 #include "SelectSpritesOP.h"
 #include "SymbolContainer.h"
 #include "LibraryPanel.h"
+#include "Symbol.h"
 
 extern d2d::StageModule MODULE_STAGE;
 
-namespace libcomplex
+namespace complex
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
 					   LibraryPanel* library)
 	: EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = new d2d::ComplexSymbol))
+	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
 {
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::ComplexSymbol* symbol,
+					   Symbol* symbol,
 					   d2d::PropertySettingPanel* property,
 					   LibraryPanel* library)
 	: EditPanel(parent, frame)
@@ -43,7 +43,7 @@ void StagePanel::clear()
 {
 	d2d::EditPanel::clear();
 
-	d2d::ComplexSymbol* symbol = getSymbol();
+	Symbol* symbol = getSymbol();
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		symbol->m_sprites[i]->release();
 	symbol->m_sprites.clear();
@@ -114,4 +114,4 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	return true;
 }
 
-} // libcomplex
+} // complex

@@ -2,12 +2,14 @@
 
 #include <drag2d.h>
 
-namespace libcomplex
+namespace complex
 {
+	class Symbol;
+
 	class SymbolContainer : public d2d::IDataContainer
 	{
 	public:
-		SymbolContainer(d2d::ComplexSymbol* symbol);
+		SymbolContainer(Symbol* symbol);
 		virtual ~SymbolContainer();
 
 		//
@@ -20,7 +22,7 @@ namespace libcomplex
 		virtual void resetOrder(const Object* obj, bool up);
 
 	private:
-		d2d::ComplexSymbol* m_symbol;
+		Symbol* m_symbol;
 
 	}; // SymbolContainer
 }

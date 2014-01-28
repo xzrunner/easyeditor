@@ -1,6 +1,6 @@
 // #include "Context.h"
 // 
-// namespace libcomplex
+// namespace complex
 // {
 // 
 // Context* Context::m_instance = NULL;

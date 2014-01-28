@@ -15,6 +15,8 @@
 #include "view/ToolbarPanel.h"
 #include "view/PreviewDialog.h"
 
+#include <easycomplex.h>
+
 namespace eanim
 {
 
@@ -198,7 +200,7 @@ void Frame::initWorkingFrame()
 	d2d::LibraryPanel* library = new d2d::LibraryPanel(leftSplitter);
 	context->library = library;
 	library->addPage(context->imagePage = new d2d::LibraryImagePage(library->getNotebook()));
-	library->addPage(new d2d::LibraryComplexPage(library->getNotebook()));
+	library->addPage(new complex::LibraryPage(library->getNotebook()));
 	library->addPage(new d2d::Library9PatchPage(library->getNotebook()));
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(leftSplitter);
 	context->property = property;

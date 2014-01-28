@@ -7,3 +7,7 @@
 #include "libcomplex/StagePanel.h"
 #include "libcomplex/LibraryPanel.h"
 #include "libcomplex/Context.h"
+
+#include "libcomplex/Sprite.h"
+#include "libcomplex/Symbol.h"
+#include "libcomplex/PropertySetting.h"

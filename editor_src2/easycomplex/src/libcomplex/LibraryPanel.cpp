@@ -2,7 +2,7 @@
 
 #include <wx/notebook.h>
 
-namespace libcomplex
+namespace complex
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
@@ -10,7 +10,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	m_imagePage = new d2d::LibraryImagePage(getNotebook());
 	addPage(m_imagePage);
-	m_complexPage = new d2d::LibraryComplexPage(getNotebook());
+	m_complexPage = new LibraryPage(getNotebook());
 	addPage(m_complexPage);
 	m_animPage = new d2d::LibraryAnimPage(getNotebook());
 	addPage(m_animPage);

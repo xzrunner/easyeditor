@@ -1,11 +1,13 @@
 #include "SelectSpritesOP.h"
 #include "EditDialog.h"
 #include "StagePanel.h"
+#include "Sprite.h"
+#include "PropertySetting.h"
 
 // #include <easyanim.h>
 #include <easy9patch.h>
 
-namespace libcomplex
+namespace complex
 {
 
 SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
@@ -20,9 +22,9 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
-	if (d2d::ComplexSprite* complex = dynamic_cast<d2d::ComplexSprite*>(selected))
+	if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(selected))
 	{
-// 		d2d::ComplexSymbol& symbol = const_cast<d2d::ComplexSymbol&>(complex->getSymbol());
+// 		Symbol& symbol = const_cast<Symbol&>(complex->getSymbol());
 // 		EditDialog dlg(m_editPanel, &symbol);
 // 		dlg.ShowModal();
 // 
@@ -57,7 +59,7 @@ SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
 	if (sprite)
 		return d2d::SelectSpritesOP::createPropertySetting(sprite);
 	else
-		return new d2d::ComplexPropertySetting(m_editPanel, static_cast<StagePanel*>(m_editPanel)->getSymbol());
+		return new complex::PropertySetting(m_editPanel, static_cast<StagePanel*>(m_editPanel)->getSymbol());
 }
 
-} // libcomplex
+} // complex

@@ -1,9 +1,10 @@
 #include "FileSaver.h"
+#include "Symbol.h"
 
-namespace libcomplex
+namespace complex
 {
 
-void FileSaver::store(const char* filepath, const d2d::ComplexSymbol* symbol)
+void FileSaver::store(const char* filepath, const Symbol* symbol)
 {
 	Json::Value value;
 
@@ -21,7 +22,7 @@ void FileSaver::store(const char* filepath, const d2d::ComplexSymbol* symbol)
 	fout.close();
 }
 
-void FileSaver::storeWithHistory(const char* filepath, const d2d::ComplexSymbol* symbol,
+void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol,
 								 d2d::EditPanel* editpanel)
 {
 	Json::Value value;
@@ -45,7 +46,7 @@ void FileSaver::storeWithHistory(const char* filepath, const d2d::ComplexSymbol*
 	fout.close();
 }
 
-void FileSaver::centerSymbol(d2d::ComplexSymbol* symbol)
+void FileSaver::centerSymbol(Symbol* symbol)
 {
 	d2d::Vector offset;
 	offset.x = symbol->m_rect.xCenter();
@@ -66,4 +67,4 @@ Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dir)
 	sprite->store(value);
 	return value;
 }
-} // libcomplex
+} // complex

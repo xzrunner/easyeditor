@@ -2,7 +2,7 @@
 
 #include <drag2d.h>
 
-namespace libcomplex
+namespace complex
 {
 	class SelectSpritesOP : public d2d::SelectSpritesOP
 	{

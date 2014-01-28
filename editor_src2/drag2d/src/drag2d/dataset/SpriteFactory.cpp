@@ -8,12 +8,13 @@
 #include "EShapeSprite.h"
 #include "MeshSprite.h"
 #include "CombinationSprite.h"
-#include "ComplexSprite.h"
 #include "AnimSprite.h"
 #include "Patch9Sprite.h"
 #include "TextSprite.h"
 //#include "FontBlankSprite.h"
 #include "FontSprite.h"
+
+#include <easycomplex.h>
 
 namespace d2d
 {
@@ -49,7 +50,7 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		if (FileNameParser::isType(filepath, FileNameParser::e_shape))
 			sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
 		else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
-			sprite = new ComplexSprite(static_cast<ComplexSymbol*>(symbol));
+			sprite = new complex::Sprite(static_cast<complex::Symbol*>(symbol));
 		else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
 			sprite = new AnimSprite(static_cast<AnimSymbol*>(symbol));
 		else if (FileNameParser::isType(filepath, FileNameParser::e_9patch))

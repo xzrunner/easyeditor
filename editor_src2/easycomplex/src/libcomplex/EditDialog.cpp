@@ -2,16 +2,18 @@
 #include "StagePanel.h"
 #include "FileSaver.h"
 #include "LibraryPanel.h"
+#include "Symbol.h"
+#include "PropertySetting.h"
 
 #include <wx/splitter.h>
 
-namespace libcomplex
+namespace complex
 {
 	BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 		EVT_CLOSE(EditDialog::onClose)
 	END_EVENT_TABLE()
 
-	EditDialog::EditDialog(wxWindow* parent, d2d::ComplexSymbol* symbol)
+	EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
  		: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, 
 		wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 		, m_symbol(symbol)
@@ -35,15 +37,15 @@ namespace libcomplex
 		wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
 		wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
 
-		libcomplex::LibraryPanel* library 
-			= new libcomplex::LibraryPanel(leftHorizontalSplitter);
+		complex::LibraryPanel* library 
+			= new complex::LibraryPanel(leftHorizontalSplitter);
 
 		d2d::PropertySettingPanel* property 
 			= new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
 		StagePanel* stage = new StagePanel(leftVerticalSplitter, this, m_symbol, property, library);
 		m_stage = stage;
-		property->setPropertySetting(new d2d::ComplexPropertySetting(stage, m_symbol));
+		property->setPropertySetting(new complex::PropertySetting(stage, m_symbol));
 
 //		ToolbarPanel* toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage, context->property);
 

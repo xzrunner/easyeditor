@@ -11,12 +11,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easycomplex", "projects\eas
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdrag2d", "..\..\..\drag2d\platform\msvc2008\projects\libdrag2d.vcproj", "{E69A7CDE-521A-45B5-B776-AD16F72F6A07}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909} = {5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcomplex", "projects\libcomplex.vcproj", "{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
-		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
-	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libshape", "..\..\..\easyshape\platform\msvc2008\projects\libshape.vcproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
 EndProject

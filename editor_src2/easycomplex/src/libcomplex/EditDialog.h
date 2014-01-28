@@ -2,12 +2,14 @@
 
 #include <drag2d.h>
 
-namespace libcomplex
+namespace complex
 {
+	class Symbol;
+
 	class EditDialog : public wxDialog
 	{
 	public:
-		EditDialog(wxWindow* parent, d2d::ComplexSymbol* symbol);
+		EditDialog(wxWindow* parent, Symbol* symbol);
 
 	private:
 		void initLayout();
@@ -17,7 +19,7 @@ namespace libcomplex
 	private:
 		d2d::EditPanel* m_stage;
 
-		d2d::ComplexSymbol* m_symbol;
+		Symbol* m_symbol;
 
 		DECLARE_EVENT_TABLE()
 

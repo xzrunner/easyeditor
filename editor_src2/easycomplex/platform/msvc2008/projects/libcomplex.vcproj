@@ -194,40 +194,88 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="stage"
+			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.cpp"
+				RelativePath="..\..\..\src\libcomplex\Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.h"
+				RelativePath="..\..\..\src\libcomplex\Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcomplex\StageCanvas.cpp"
+				RelativePath="..\..\..\src\libcomplex\Symbol.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcomplex\StageCanvas.h"
+				RelativePath="..\..\..\src\libcomplex\Symbol.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\StagePanel.cpp"
+		</Filter>
+		<Filter
+			Name="view"
+			>
+			<Filter
+				Name="stage"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\StagePanel.h"
+				<File
+					RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\StagePanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SymbolContainer.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SymbolContainer.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="property"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\SymbolContainer.cpp"
+				<File
+					RelativePath="..\..\..\src\libcomplex\PropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\PropertySetting.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="library"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\SymbolContainer.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LibraryPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LibraryPage.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

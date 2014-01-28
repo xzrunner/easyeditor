@@ -10,8 +10,9 @@
 #include "dataset/Bitmap.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/ImageSprite.h"
-#include "dataset/ComplexSprite.h"
 #include "render/SpriteDraw.h"
+
+#include <easycomplex.h>
 
 namespace d2d
 {
@@ -225,14 +226,14 @@ void AnimSymbol::refreshThumbnail()
 				ISprite* sprite = frame->sprites[j];
 				if (ImageSprite* image = dynamic_cast<ImageSprite*>(sprite))
 					SpriteDraw::drawSprite(image, memDC);
-				else if (ComplexSprite* complex = dynamic_cast<ComplexSprite*>(sprite))
-				{
-					const Vector& offset = complex->getPosition();
-					std::vector<std::pair<const ISprite*, Vector> > children;
-					complex->getSymbol().getAllChildren(children);
-					for (size_t k = 0, l = children.size(); k < l; ++k)
-						SpriteDraw::drawSprite(children[k].first, children[k].second + offset, memDC);
-				}
+				else if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(sprite))
+ 				{
+ 					const Vector& offset = complex->getPosition();
+ 					std::vector<std::pair<const ISprite*, Vector> > children;
+ 					complex->getSymbol().getAllChildren(children);
+ 					for (size_t k = 0, l = children.size(); k < l; ++k)
+ 						SpriteDraw::drawSprite(children[k].first, children[k].second + offset, memDC);
+ 				}
 			}
 		}
 	}

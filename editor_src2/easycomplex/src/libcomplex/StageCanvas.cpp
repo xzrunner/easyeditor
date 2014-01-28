@@ -1,9 +1,10 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
+#include "Symbol.h"
 
 #include <easyanim.h>
 
-namespace libcomplex
+namespace complex
 {
 	BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 		EVT_TIMER(TIMER_ID, StageCanvas::onTimer)

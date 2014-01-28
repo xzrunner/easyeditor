@@ -2,8 +2,12 @@
 
 #include <drag2d.h>
 
-namespace libcomplex
+#include "LibraryPage.h"
+
+namespace complex
 {
+	class LibraryPage;
+
 	class LibraryPanel : public d2d::LibraryPanel
 	{
 	public:
@@ -25,7 +29,7 @@ namespace libcomplex
 
 	private:
 		d2d::LibraryImagePage* m_imagePage;
-		d2d::LibraryComplexPage* m_complexPage;
+		LibraryPage* m_complexPage;
 		d2d::LibraryAnimPage* m_animPage;
 		d2d::Library9PatchPage* m_9patchPage;
 		d2d::LibraryFontBlankPage* m_fontPage;
