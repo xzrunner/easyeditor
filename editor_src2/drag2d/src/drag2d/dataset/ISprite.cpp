@@ -191,7 +191,7 @@ void ISprite::translate(const Vector& offset)
 		m_observer->translate(this, offset);
 
 	m_pos += offset;
-	m_bounding->translate(offset);
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
 void ISprite::rotate(float delta)
@@ -201,11 +201,12 @@ void ISprite::rotate(float delta)
 
 	m_angle += delta;
 
-	m_bounding->rotate(delta);
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
+}
 
-	Vector offset = m_bounding->center() - m_pos;
-	Vector dst = Math::rotateVector(offset, delta);
-	m_bounding->translate(dst - offset);
+void ISprite::setOffset(const Vector& offset) 
+{
+	m_offset = offset;
 }
 
 void ISprite::updateEachFrame()

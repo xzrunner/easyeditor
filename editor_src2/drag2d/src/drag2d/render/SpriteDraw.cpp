@@ -26,36 +26,17 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
 	GL10::PushMatrix();
 
 	love::Matrix t;
+
  	bool xMirror, yMirror;
  	sprite->getMirror(xMirror, yMirror);
  	const float xScale = xMirror ? -sprite->getScaleX() : sprite->getScaleX(),
  		yScale = yMirror ? -sprite->getScaleY() : sprite->getScaleY();
 
-	//float ox = sprite->getOffset().x,
-	//	oy = sprite->getOffset().y;
- //	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(), 
- //		xScale, yScale, ox, oy, sprite->getShearX(), sprite->getShearY());
-
-	// 1
-	love::Matrix mTrans;
-	d2d::Vector offset = Math::rotateVector(sprite->getOffset(), sprite->getAngle()) + sprite->getPosition();
-	mTrans.setTranslation(offset.x, offset.y);
-
-	love::Matrix mRot;
-	mRot.setRotation(sprite->getAngle());
-
-//   	love::Matrix mFix;
-//   	d2d::Vector fix = Math::rotateVector(sprite->getOffset(), -sprite->getAngle());
-//   	mFix.setTranslation(fix.x, fix.y);
-
-	love::Matrix mScale;
-	mScale.setScale(xScale, yScale);
-
-	love::Matrix mShear;
-	mShear.setShear(sprite->getShearX(), sprite->getShearY());
-
-	t = mTrans * mRot/* * mFix*/ * mScale * mShear;
-	GL10::MultMatrixf((const float*)t.getElements( ));
+ 	d2d::Vector center_offset = Math::rotateVector(-sprite->getOffset(), sprite->getAngle()) + sprite->getOffset();
+ 	d2d::Vector center = sprite->getPosition() + center_offset;
+ 	t.setTransformation(center.x, center.y, sprite->getAngle(), 
+ 		xScale, yScale, 0, 0, sprite->getShearX(), sprite->getShearY());
+ 	GL10::MultMatrixf((const float*)t.getElements( ));
 
 	Colorf m = cMul(mul, sprite->multiCol),
 		a = cAdd(add, sprite->addCol);

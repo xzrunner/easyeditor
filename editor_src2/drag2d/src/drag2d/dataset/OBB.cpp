@@ -34,14 +34,12 @@ void OBB::storeToTextFile(std::ofstream& fout) const
 		<< m_angle << '\n';
 }
 
-void OBB::translate(const Vector& offset)
+void OBB::setTransform(const Vector& position, const Vector& offset, float angle)
 {
-	m_rect.translate(offset);
-}
-
-void OBB::rotate(float delta)
-{
-	m_angle += delta;
+	Vector center_offset = Math::rotateVector(-offset, angle) + offset;
+	Vector center = position + center_offset;
+	m_rect.translate(Vector(center.x - m_rect.xCenter(), center.y - m_rect.yCenter()));
+	m_angle = angle;
 }
 
 bool OBB::isContain(const Vector& pos) const

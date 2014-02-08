@@ -57,9 +57,7 @@ namespace d2d
 		const Vector& getOffset() const {
 			return m_offset;
 		}
-		void setOffset(const Vector& offset) {
-			m_offset = offset;
-		}
+		void setOffset(const Vector& offset);
 		float getAngle() const {
 			return m_angle;
 		}

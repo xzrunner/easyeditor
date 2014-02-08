@@ -64,7 +64,7 @@ void Patch9Sprite::buildBounding()
 	{
 		m_bounding->combine(Rect(m_pos, m_symbol->getWidth() * m_xScale * 0.5f,
 			m_symbol->getHeight() * m_yScale * 0.5f));
-		m_bounding->rotate(m_angle);
+		m_bounding->setTransform(m_pos, m_offset, m_angle);
 	}
 }
 } // d2d

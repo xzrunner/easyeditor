@@ -30,6 +30,13 @@ void AABB::storeToTextFile(std::ofstream& fout) const
 		<< m_rect.yMin << " " << m_rect.yMax << '\n';
 }
 
+void AABB::setTransform(const Vector& position, const Vector& offset, float angle)
+{
+	Vector center_offset = Math::rotateVector(-offset, angle) + offset;
+	Vector center = position + center_offset;
+	m_rect.translate(Vector(center.x - m_rect.xCenter(), center.y - m_rect.yCenter()));
+}
+
 bool AABB::isContain(const Vector& pos) const
 {
 	return Math::isPointInRect(pos, m_rect);

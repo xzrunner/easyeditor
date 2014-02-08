@@ -100,7 +100,7 @@ void ImageSprite::buildBounding(float* texCoords)
 	Vector offset = Math::rotateVector(center, m_angle);
 	rect.translate(m_pos + offset);
 	m_bounding->initFromRect(rect);
-	m_bounding->rotate(m_angle);
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
 void ImageSprite::buildBounding()
@@ -130,7 +130,7 @@ void ImageSprite::buildBounding()
 	rect.scale(m_xScale, m_yScale);
 	rect.translate(m_pos);
 	m_bounding->initFromRect(rect);
-	m_bounding->rotate(m_angle);
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
 } // d2d
