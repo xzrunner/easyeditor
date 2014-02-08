@@ -119,6 +119,18 @@ void ISprite::load(const Json::Value& val)
 	bool mx = val["x mirror"].asBool();
 	bool my = val["y mirror"].asBool();
 	setMirror(mx, my);
+
+	float ox, oy;
+	if (!val["x offset"].isNull())
+	{
+		ox = val["x offset"].asDouble();
+		oy = val["y offset"].asDouble();
+	}
+	else
+	{
+		ox = oy = 0;
+	}
+	setOffset(Vector(ox, oy));
 }
 
 void ISprite::store(Json::Value& val)
@@ -142,7 +154,10 @@ void ISprite::store(Json::Value& val)
 	val["y shear"] = m_yShear;
 
 	val["x mirror"] = m_xMirror;
-	val["y mirror"] = m_yMirror;		
+	val["y mirror"] = m_yMirror;
+
+	val["x offset"] = m_offset.x;
+	val["y offset"] = m_offset.y;
 }
 
 // todo: translate() and rotate() has no opt to m_body
@@ -207,6 +222,7 @@ void ISprite::rotate(float delta)
 void ISprite::setOffset(const Vector& offset) 
 {
 	m_offset = offset;
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
 void ISprite::updateEachFrame()

@@ -322,7 +322,7 @@ namespace d2d
 			for (size_t i = 0; i < 4; ++i)
 				PrimitiveDraw::drawCircle(quad[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 
-			d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();			
+			d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();
 			PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 
