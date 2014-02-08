@@ -68,6 +68,8 @@ namespace d2d
 
 		void setMirror(bool xMirror, bool yMirror) { m_xMirror = xMirror; m_yMirror = yMirror; }
 		void getMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
+		bool getMirrorX() const { return m_xMirror; }
+		bool getMirrorY() const { return m_yMirror; }
 
 		Vector getCenter() const;
 

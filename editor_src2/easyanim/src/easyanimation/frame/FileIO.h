@@ -29,6 +29,7 @@ namespace eanim
 			const wxString& dlg);
 		static d2d::ISprite* loadActor(const Json::Value& actorValue,
 			const wxString& dlg);
+		static void loadConnection(const Json::Value& val, const std::vector<KeyFrame*>& frames);
 
 		static Layer* loadLayer(rapidxml::xml_node<>* layerNode, 
 			const std::map<std::string, std::string>& mapNamePath);
@@ -40,6 +41,7 @@ namespace eanim
 		static Json::Value store(Layer* layer, const wxString& dlg);
 		static Json::Value store(KeyFrame* frame, const wxString& dlg);
 		static Json::Value store(const d2d::ISprite* sprite, const wxString& dlg);
+		static void storeConnection(Json::Value& val, const std::vector<KeyFrame*>& frames);
 
 	private:
 		static std::string filepath;

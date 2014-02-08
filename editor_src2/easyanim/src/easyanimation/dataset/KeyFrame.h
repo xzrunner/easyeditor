@@ -34,6 +34,10 @@ namespace eanim
 				return NULL;
 		}
 
+		const std::vector<Sprite*>& getAllSprites() const {
+			return m_sprites;
+		}
+
 		bool hasClassicTween() const {
 			return m_bClassicTween;
 		}

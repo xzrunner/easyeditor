@@ -187,6 +187,14 @@ Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dlg)
 		frameValue = layerValue["frame"][i++];
 	}
 
+	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+	std::vector<KeyFrame*> all_frames;
+	all_frames.reserve(frames.size());
+	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
+	for ( ; itr != frames.end(); ++itr)
+		all_frames.push_back(itr->second);
+	loadConnection(layerValue, all_frames);
+
 	return layer;
 }
 
@@ -245,6 +253,49 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 	sprite->load(actorValue);
 
 	return sprite;
+}
+
+void FileIO::loadConnection(const Json::Value& val, const std::vector<KeyFrame*>& frames)
+{
+	bool loaded = false;
+
+	int i = 0;
+	Json::Value frameValue = val["frame"][i++];
+	while (!frameValue.isNull()) {
+		const std::vector<Sprite*>& sprites = frames[i-1]->getAllSprites();
+		int j = 0;
+		Json::Value actorValue = frameValue["actor"][j++];
+		while (!actorValue.isNull()) {
+			if (!actorValue["child"].isNull()) {
+				int idx = actorValue["child"].asInt();
+				const std::vector<Sprite*>& next_sprites = frames[i-1+1]->getAllSprites();
+				sprites[j-1]->child = next_sprites[idx];
+				loaded = true;
+			}
+			actorValue = frameValue["actor"][j++];
+		}
+		frameValue = val["frame"][i++];
+	}
+
+	if (!loaded)
+	{
+		for (int i = 0, n = frames.size() - 1; i < n; ++i)
+		{
+			const std::vector<Sprite*>& curr_data = frames[i]->getAllSprites();
+			const std::vector<Sprite*>& next_data = frames[i+1]->getAllSprites();
+			if (curr_data.size() != next_data.size())
+				continue;
+			for (int j = 0; j < curr_data.size(); ++j)
+				for (int k = 0; k < next_data.size(); ++k) {
+					Sprite* curr = curr_data[j];
+					Sprite* next = next_data[k];
+					if (&curr->curr->getSymbol() == &next->curr->getSymbol() &&
+						curr->curr->getMirrorX() == next->curr->getMirrorX() &&
+						curr->curr->getMirrorY() == next->curr->getMirrorY())
+						curr->child = next;
+				}
+		}
+	}
 }
 
 Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
@@ -316,9 +367,15 @@ Json::Value FileIO::store(Layer* layer, const wxString& dlg)
 	value["name"] = layer->name;
 
 	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+	std::vector<KeyFrame*> all_frames;
+	all_frames.reserve(frames.size());
 	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
-	for (size_t i = 0; itr != frames.end(); ++itr, ++i)
+	for (size_t i = 0; itr != frames.end(); ++itr, ++i) {
 		value["frame"][i] = store(itr->second, dlg);
+		all_frames.push_back(itr->second);
+	}
+
+	storeConnection(value, all_frames);
 
 	return value;
 }
@@ -377,4 +434,28 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dlg)
 
 	return value;
 }
+
+void FileIO::storeConnection(Json::Value& val, const std::vector<KeyFrame*>& frames)
+{
+	for (int i = 0, n = frames.size() - 1; i < n; ++i)
+	{
+		KeyFrame* curr = frames[i];
+		KeyFrame* next = frames[i+1];
+		const std::vector<Sprite*>& curr_data = curr->getAllSprites();
+		const std::vector<Sprite*>& next_data = next->getAllSprites();
+		for (int j = 0, m = curr_data.size(); j < m; ++j)
+		{
+			Sprite* parent = curr_data[j];
+			if (parent->child)
+			{
+				for (int k = 0; k < next_data.size(); ++k)
+				{
+					if (parent->child == next_data[k])
+						val["frame"][i]["actor"][j]["child"] = k;
+				}
+			}
+		}
+	}
+}
+
 } // eanim
