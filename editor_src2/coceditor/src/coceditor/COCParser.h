@@ -1,6 +1,7 @@
 #pragma once
 
 #include <easybuilder.h>
+#include <easycomplex.h>
 
 namespace coceditor
 {

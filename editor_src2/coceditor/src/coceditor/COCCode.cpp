@@ -45,7 +45,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 		else if (const d2d::FontBlankSymbol* font = dynamic_cast<const d2d::FontBlankSymbol*>(symbol))
 		{
 		}
-		else if (const d2d::ComplexSymbol* complex = dynamic_cast<const d2d::ComplexSymbol*>(symbol))
+		else if (const complex::Symbol* complex = dynamic_cast<const complex::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
 			{
@@ -332,8 +332,9 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 		screen[i] = rot;
 	}
 	// 3. translate
+	d2d::Vector center = sprite->getCenter();
 	for (size_t i = 0; i < 4; ++i)
-		screen[i] += sprite->getPosition();
+		screen[i] += center;
 	// 4. mirror
 	bool xMirror, yMirror;
 	sprite->getMirror(xMirror, yMirror);
@@ -503,7 +504,7 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
 }
 
-void COCCode::resolveAnimation(const d2d::ComplexSymbol* symbol)
+void COCCode::resolveAnimation(const complex::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "animation", false, false);
 
@@ -1044,8 +1045,9 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 	else
 	{
 		// translate
-		mat[4] = sprite->getPosition().x;
-		mat[5] = sprite->getPosition().y;
+		d2d::Vector center = sprite->getCenter();
+		mat[4] = center.x;
+		mat[5] = center.y;
 
 		// rotate
 		mat[0] = cos(-sprite->getAngle());

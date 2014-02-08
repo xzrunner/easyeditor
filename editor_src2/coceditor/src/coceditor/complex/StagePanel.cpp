@@ -13,7 +13,7 @@ namespace complex
 	StagePanel::StagePanel(wxWindow* parent, 
 						   wxTopLevelWindow* frame,
 						   LibraryPanel* library,
-						   d2d::ComplexSymbol* complexSymbol)
+						   complex::Symbol* complexSymbol)
 		: EditPanel(parent, frame)
 		, d2d::MultiSpritesImpl(this)
 		, m_library(library)

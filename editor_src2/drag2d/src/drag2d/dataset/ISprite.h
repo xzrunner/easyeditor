@@ -69,6 +69,8 @@ namespace d2d
 		void setMirror(bool xMirror, bool yMirror) { m_xMirror = xMirror; m_yMirror = yMirror; }
 		void getMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
 
+		Vector getCenter() const;
+
 		AbstractBV* getBounding() const {
 			return m_bounding;
 		}

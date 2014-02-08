@@ -6,7 +6,7 @@ namespace coceditor
 {
 namespace complex
 {
-	void FileIO::store(const char* filepath, const d2d::ComplexSymbol* complexSymbol)
+	void FileIO::store(const char* filepath, const complex::Sprite* complexSymbol)
 	{
 		Json::Value value;
 

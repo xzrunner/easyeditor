@@ -11,21 +11,21 @@ namespace complex
 	class Dialog : public wxDialog
 	{
 	public:
-		Dialog(wxWindow* parent, d2d::ComplexSymbol* complexSymbol,
+		Dialog(wxWindow* parent, complex::Symbol* complexSymbol,
 			d2d::PropertySettingPanel* propertyPanel);
 		virtual ~Dialog();
 
 	private:
 		void onSize(wxSizeEvent& event);
 
-		void initLayout(d2d::ComplexSymbol* complexSymbol);
+		void initLayout(complex::Symbol* complexSymbol);
 
 		void refreshSpritesBounding();
 
 	private:
 		StagePanel* m_editPanel;
 
-		d2d::ComplexSymbol* m_complexSymbol;
+		complex::Symbol* m_complexSymbol;
 
 		d2d::PropertySettingPanel* m_propertyPanel;
 

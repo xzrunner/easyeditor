@@ -24,10 +24,10 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
-	if (d2d::ComplexSprite* complex = dynamic_cast<d2d::ComplexSprite*>(selected))
+	if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(selected))
 	{
 		complex::Dialog dlg(Context::Instance()->stage, 
-			const_cast<d2d::ComplexSymbol*>(&complex->getSymbol()), Context::Instance()->property);
+			const_cast<complex::Symbol*>(&complex->getSymbol()), Context::Instance()->property);
 		dlg.ShowModal();
 		Context::Instance()->stage->resetCanvas();
 	}

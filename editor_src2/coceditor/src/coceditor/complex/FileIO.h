@@ -9,7 +9,7 @@ namespace complex
 	class FileIO
 	{
 	public:
-		static void store(const char* filepath, const d2d::ComplexSymbol* complexSymbol);
+		static void store(const char* filepath, const complex::Symbol* complexSymbol);
 
 	private:
 		static Json::Value store(d2d::ISprite* sprite);

@@ -16,7 +16,7 @@ namespace complex
 		EVT_SIZE(Dialog::onSize)
 	END_EVENT_TABLE()
 
-	Dialog::Dialog(wxWindow* parent, d2d::ComplexSymbol* complexSymbol,
+	Dialog::Dialog(wxWindow* parent, complex::Symbol* complexSymbol,
 					d2d::PropertySettingPanel* propertyPanel)
  		: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, 
 		wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
@@ -40,7 +40,7 @@ namespace complex
 		Refresh();
 	}
 
-	void Dialog::initLayout(d2d::ComplexSymbol* complexSymbol)
+	void Dialog::initLayout(complex::Symbol* complexSymbol)
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
@@ -75,8 +75,8 @@ namespace complex
 
 	void Dialog::refreshSpritesBounding()
 	{
-		std::vector<d2d::ComplexSprite*> sprites;
-		Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ComplexSprite>(sprites));
+		std::vector<complex::Sprite*> sprites;
+		Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<complex::Sprite>(sprites));
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		{
 			d2d::ISprite* sprite = sprites[i];

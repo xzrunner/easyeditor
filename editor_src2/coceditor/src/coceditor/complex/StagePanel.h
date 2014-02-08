@@ -12,7 +12,7 @@ namespace complex
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-			LibraryPanel* library, d2d::ComplexSymbol* complexSymbol);
+			LibraryPanel* library, complex::Symbol* complexSymbol);
 		virtual ~StagePanel();
 
 		//
@@ -53,7 +53,7 @@ namespace complex
 	private:
 		LibraryPanel* m_library;
 
-		d2d::ComplexSymbol* m_complexSymbol;
+		complex::Symbol* m_complexSymbol;
 
 	}; // StagePanel
 }

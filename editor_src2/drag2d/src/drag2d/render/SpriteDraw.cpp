@@ -32,8 +32,7 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
  	const float xScale = xMirror ? -sprite->getScaleX() : sprite->getScaleX(),
  		yScale = yMirror ? -sprite->getScaleY() : sprite->getScaleY();
 
- 	d2d::Vector center_offset = Math::rotateVector(-sprite->getOffset(), sprite->getAngle()) + sprite->getOffset();
- 	d2d::Vector center = sprite->getPosition() + center_offset;
+ 	d2d::Vector center = sprite->getCenter();
  	t.setTransformation(center.x, center.y, sprite->getAngle(), 
  		xScale, yScale, 0, 0, sprite->getShearX(), sprite->getShearY());
  	GL10::MultMatrixf((const float*)t.getElements( ));

@@ -225,6 +225,13 @@ void ISprite::setOffset(const Vector& offset)
 	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
+Vector ISprite::getCenter() const
+{
+	d2d::Vector center_offset = Math::rotateVector(-m_offset, m_angle) + m_offset;
+	d2d::Vector center = m_pos + center_offset;
+	return center;
+}
+
 void ISprite::updateEachFrame()
 {
 	if (!m_body) return;

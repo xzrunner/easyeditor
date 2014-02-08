@@ -125,7 +125,7 @@ void CodeSettingDlg::onSelectSymbolDir(wxCommandEvent& event)
 //  	{
 //  		std::string path = dlg.GetPath();
 //  		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
-//  		Context::Instance()->symbols.push_back(static_cast<d2d::ComplexSymbol*>(symbol));
+//  		Context::Instance()->symbols.push_back(static_cast<complex::Symbol*>(symbol));
 //  //		if (Context::Instance()->symbol)
 //  			m_symbolPath->SetValue(path);
 //  	}
@@ -145,14 +145,14 @@ void CodeSettingDlg::onSelectSymbolDir(wxCommandEvent& event)
   		Context::Instance()->dlgPath = dlg.GetPath();
   		m_symbolPath->SetValue(dlg.GetPath());
   
-  		d2d::ComplexSymbol* tot = new d2d::ComplexSymbol();
+  		complex::Symbol* tot = new complex::Symbol();
   		for (size_t i = 0, n = files.size(); i < n; ++i)
   		{
   			wxString filepath = files[i];
   			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex))
   			{
   				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
-  				Context::Instance()->symbols.push_back(static_cast<d2d::ComplexSymbol*>(symbol));
+  				Context::Instance()->symbols.push_back(static_cast<complex::Symbol*>(symbol));
   			}
   			else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
   			{

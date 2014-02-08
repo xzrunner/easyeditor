@@ -1,6 +1,7 @@
 #pragma once
 
 #include <easybuilder.h>
+#include <easycomplex.h>
 
 namespace coceditor
 {
@@ -29,7 +30,7 @@ namespace coceditor
 			PicFixType tsrc = e_null, PicFixType tscreen = e_null);
 		void resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& parser,
 			PicFixType tsrc = e_null);
-		void resolveAnimation(const d2d::ComplexSymbol* symbol);
+		void resolveAnimation(const complex::Symbol* symbol);
 		//void resolveAnimation(const d2d::AnimSymbol* symbol);
 		void resolveAnimation(const d2d::AnimSymbol* symbol);
 		void resolveAnimation(const d2d::Patch9Symbol* symbol);

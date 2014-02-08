@@ -27,7 +27,7 @@ void COCParser::prepareSymbols()
 	for (size_t i = 0, n = context->symbols.size(); i < n; ++i)
 	{
 		d2d::ISymbol* symbol = context->symbols[i];
-		if (d2d::ComplexSymbol* complex = dynamic_cast<d2d::ComplexSymbol*>(symbol))
+		if (complex::Symbol* complex = dynamic_cast<complex::Symbol*>(symbol))
 		{
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
 				buffer.push(complex->m_sprites[j]);
@@ -58,9 +58,9 @@ void COCParser::prepareSymbols()
 		{
 			m_setSymbols.insert(&sprite->getSymbol());
 		}
-		else if (const d2d::ComplexSprite* complex = dynamic_cast<const d2d::ComplexSprite*>(sprite))
+		else if (const complex::Sprite* complex = dynamic_cast<const complex::Sprite*>(sprite))
 		{
-			const d2d::ComplexSymbol& symbol = complex->getSymbol();
+			const complex::Symbol& symbol = complex->getSymbol();
 			if (m_setSymbols.find(&symbol) == m_setSymbols.end())
 			{
 				m_setSymbols.insert(&symbol);
@@ -150,7 +150,7 @@ void COCParser::prepareOutList()
 				m_setSymbols.erase(itr);
 				break;
 			}
-			else if (d2d::ComplexSymbol* complex = dynamic_cast<d2d::ComplexSymbol*>(symbol))
+			else if (complex::Symbol* complex = dynamic_cast<complex::Symbol*>(symbol))
 			{
 				bool prepared = true;
 				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i)

@@ -17,7 +17,7 @@ LibraryComplexPage::LibraryComplexPage(wxWindow* parent)
 
 bool LibraryComplexPage::isHandleSymbol(d2d::ISymbol* symbol) const
 {
-	return dynamic_cast<d2d::ComplexSymbol*>(symbol) != NULL;
+	return dynamic_cast<complex::Symbol*>(symbol) != NULL;
 }
 
 void LibraryComplexPage::initLayout(bool draggable /*= true*/)
@@ -52,7 +52,7 @@ void LibraryComplexPage::onAddPress(wxCommandEvent& event)
  		dlg.GetPaths(filenames);
  		for (size_t i = 0, n = filenames.size(); i < n; ++i)
  		{
- 			d2d::ComplexSymbol* item = new d2d::ComplexSymbol;
+ 			complex::Symbol* item = new complex::Symbol;
  			item->loadFromFile(filenames[i]);
 			item->refresh();
  			m_list->insert(item);
@@ -62,7 +62,7 @@ void LibraryComplexPage::onAddPress(wxCommandEvent& event)
 
 void LibraryComplexPage::onNewBtnPress(wxCommandEvent& event)
 {
- 	d2d::ComplexSymbol* item = new d2d::ComplexSymbol();
+ 	complex::Symbol* item = new complex::Symbol();
  	m_list->insert(item);
  
 	complex::Dialog dlg(this, item, Context::Instance()->property);

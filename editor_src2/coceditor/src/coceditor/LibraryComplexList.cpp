@@ -14,7 +14,7 @@ LibraryComplexList::LibraryComplexList(wxWindow* parent)
 
 void LibraryComplexList::onListDoubleClicked(wxCommandEvent& event)
 {
-	complex::Dialog dlg(this, static_cast<d2d::ComplexSymbol*>(m_items[event.GetInt()]), 
+	complex::Dialog dlg(this, static_cast<complex::Symbol*>(m_items[event.GetInt()]), 
 		Context::Instance()->property);
 	dlg.ShowModal();
 // 	if (m_editPanel)
