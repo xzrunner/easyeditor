@@ -43,6 +43,7 @@ ISprite::ISprite(const ISprite& sprite)
 
 	m_pos = sprite.m_pos;
 	m_angle = sprite.m_angle;
+	m_offset = sprite.m_offset;
 	m_xScale = sprite.m_xScale;
 	m_yScale = sprite.m_yScale;
 	m_xShear = sprite.m_xShear;
