@@ -91,6 +91,7 @@ namespace d2d
 				m_selection->traverse(FetchAllVisitor<ISprite>(selected));
 				for (size_t i = 0, n = selected.size(); i < n; ++i)
 					selected[i]->setTransform(Vector(0, 0), 0);
+				m_editPanel->Refresh();
 			}
 			break;
 		}
@@ -266,6 +267,7 @@ namespace d2d
 			{
 				d2d::Vector offset = Math::rotateVector(pos - m_scaling->getPosition(), -m_scaling->getAngle());
 				m_scaling->setOffset(offset);
+				m_editPanel->Refresh();
 				return false;
 			}
 		}
