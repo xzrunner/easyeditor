@@ -4,10 +4,12 @@
 
 namespace eanim
 {
+	class StagePanel;
+
 	class ToolbarPanel : public d2d::ToolbarPanel
 	{
 	public:
-		ToolbarPanel(wxWindow* parent);
+		ToolbarPanel(wxWindow* parent, StagePanel* stage);
 
 		void addAnimChoice(const std::vector<std::string>& choices);
 
@@ -15,14 +17,9 @@ namespace eanim
 		virtual wxSizer* initLayout();
 
 	private:
-		void onLoadAllFrameImages(wxCommandEvent& event);
-		void onFillingFrames(wxCommandEvent& event);
-
 		void onChangeAnim(wxCommandEvent& event);
 
 	private:
-		wxSpinCtrl* m_filling;
-
 		wxRadioBox* m_animChoice;
 
 	}; // ToolbarPanel

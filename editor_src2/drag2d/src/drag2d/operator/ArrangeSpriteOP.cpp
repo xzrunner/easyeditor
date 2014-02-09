@@ -137,11 +137,14 @@ namespace d2d
 				}
 			}
 
-			d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();
-			if (Math::getDistance(offset, m_lastPos) < SCALE_NODE_RADIUS)
+			if (isOffsetEnable())
 			{
-				m_selOffset = true;
-				return false;
+				d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();
+				if (Math::getDistance(offset, m_lastPos) < SCALE_NODE_RADIUS)
+				{
+					m_selOffset = true;
+					return false;
+				}
 			}
 		}
 
@@ -169,7 +172,8 @@ namespace d2d
 
 		setScalingFromSelected();
 
-		m_selOffset = false;
+		if (isOffsetEnable())
+			m_selOffset = false;
 
  		if (m_firstPos.isValid() && !m_selection->empty() && !m_bRightPress)
  		{
@@ -228,8 +232,7 @@ namespace d2d
 				if (curr == m_firstPos && sprite)
 				{
 					wxMenu menu;
-					menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
-					menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
+					setRightPopupMenu(menu);
 					m_editPanel->PopupMenu(&menu, x, y);
 				}
 				else
@@ -263,7 +266,7 @@ namespace d2d
 				scaleSprite(pos);
 				return false;
 			}
-			else if (m_selOffset)
+			else if (isOffsetEnable() && m_selOffset)
 			{
 				d2d::Vector offset = Math::rotateVector(pos - m_scaling->getPosition(), -m_scaling->getAngle());
 				m_scaling->setOffset(offset);
@@ -324,8 +327,11 @@ namespace d2d
 			for (size_t i = 0; i < 4; ++i)
 				PrimitiveDraw::drawCircle(quad[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 
-			d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();
-			PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			if (isOffsetEnable())
+			{
+				d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();
+				PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			}
 		}
 
 		if (m_autoAlignHor[0] != m_autoAlignHor[1])
@@ -393,6 +399,13 @@ namespace d2d
 			m_bDirty = true;
 		}
 		m_editPanel->Refresh();
+	}
+
+	template <typename TBase>
+	void ArrangeSpriteOP<TBase>::setRightPopupMenu(wxMenu& menu)
+	{
+		menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
+		menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
 	}
 
 	template <typename TBase>

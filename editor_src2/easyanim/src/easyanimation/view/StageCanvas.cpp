@@ -16,6 +16,10 @@ void StageCanvas::onDraw()
 	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteDraw::drawSprite(sprites[i]);
+
+	StagePanel* panel = static_cast<StagePanel*>(m_editPanel);
+	panel->getSkeletonData().draw();
+
 	m_editPanel->drawEditTemp();
 }
 

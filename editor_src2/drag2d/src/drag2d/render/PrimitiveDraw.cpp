@@ -64,7 +64,7 @@ void PrimitiveDraw::drawCircle(const Vector& center, float radius, bool isFill/*
 	{
 		GL10::LineWidth(size);
 
-		GL10::Color3f(color.r, color.g, color.b);
+		GL10::Color4f(color.r, color.g, color.b, color.a);
 		const float k_increment = 2.0f * PI / kSegments;
 		float theta = 0.0f;
 		GL10::Begin(GL10::GL_LINE_LOOP);
@@ -80,7 +80,7 @@ void PrimitiveDraw::drawCircle(const Vector& center, float radius, bool isFill/*
 	}
 	else
 	{
-		GL10::Color3f(color.r, color.g, color.b);
+		GL10::Color4f(color.r, color.g, color.b, color.a);
 
 		const float k_increment = 2.0f * PI / kSegments;
 		float theta = 0.0f;
@@ -174,6 +174,8 @@ void PrimitiveDraw::drawCircles(const std::vector<Vector>& circles, float radius
 
 void PrimitiveDraw::drawPoints(const std::vector<Vector>& vertices, const Colorf& color, float size/* = 2*/)
 {
+	if (vertices.empty()) return;
+
 	Shader::Instance()->shape();
 
 	GL10::PointSize(size);

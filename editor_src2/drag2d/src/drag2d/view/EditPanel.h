@@ -62,12 +62,14 @@ namespace d2d
 	public:
 		enum
 		{
-			Menu_UpOneLayer,
+			Menu_UpOneLayer = 0,
 			Menu_DownOneLayer,
+			Menu_End,
 
-			Hot_UpOneLayer,
+			Hot_UpOneLayer = 100,
 			Hot_DownOneLayer,
-			Hot_Delete
+			Hot_Delete,
+			Hot_End
 		};
 
 		static std::string menu_entries[];

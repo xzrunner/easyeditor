@@ -5,6 +5,8 @@
 
 #include <drag2d.h>
 
+#include "SkeletonData.h"
+
 namespace eanim
 {
 	class KeyFrame;
@@ -32,12 +34,31 @@ namespace eanim
 
 		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
+		SkeletonData& getSkeletonData() { return m_skeletonData; }
+
+	private:
+		void onMenuAddJointNode(wxCommandEvent& event);
+
 	private:
 		class DragSymbolTarget : public wxTextDropTarget
 		{
 		public:
 			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
 		}; // DragSymbolTarget
+
+	public:
+		enum
+		{
+			Menu_AddJointNode = EditPanel::Menu_End,
+			Menu_End
+		};
+
+		static std::string menu_entries[];
+
+	private:
+		SkeletonData m_skeletonData;
+
+		friend class StageCanvas;
 
 	}; // StagePanel
 }

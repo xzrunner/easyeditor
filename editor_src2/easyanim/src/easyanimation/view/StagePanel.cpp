@@ -1,13 +1,18 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "ArrangeSpriteOP.h"
 
+#include "edit/ArrangeSpriteOP.h"
 #include "frame/Context.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 
 namespace eanim
 {
+
+std::string StagePanel::menu_entries[] = 
+{
+	"Add Joint",
+};
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: EditPanel(parent, frame)
@@ -17,6 +22,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	m_editOP = new ArrangeSpriteOP(this);
 	m_canvas = new StageCanvas(this);
 	SetDropTarget(new DragSymbolTarget());
+
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
 }
 
 StagePanel::~StagePanel()
@@ -66,6 +73,8 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
+	m_skeletonData.removeSprite(sprite);
+
 	Context* context = Context::Instance();
 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
 
@@ -100,6 +109,12 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 	Context* context = Context::Instance();
 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
 	frame->reorder(sprite, up);
+}
+
+void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
+{
+	m_editOP->onPopMenuSelected(Menu_AddJointNode);
+	Refresh();
 }
 
 //////////////////////////////////////////////////////////////////////////

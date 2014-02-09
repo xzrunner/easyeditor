@@ -208,8 +208,9 @@ void Frame::initWorkingFrame()
 	leftSplitter->SplitHorizontally(library, property);
 
 	wxSplitterWindow* stageSplitter = new wxSplitterWindow(rightSplitter);
-	context->stage = new StagePanel(stageSplitter, this);
-	context->toolbar = new ToolbarPanel(stageSplitter);
+	StagePanel* stage = new StagePanel(stageSplitter, this);
+	context->stage = stage;
+	context->toolbar = new ToolbarPanel(stageSplitter, stage);
 	stageSplitter->SetSashGravity(0.9f);
 	stageSplitter->SplitVertically(context->stage, context->toolbar);
 

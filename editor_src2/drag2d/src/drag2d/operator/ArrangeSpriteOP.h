@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <wx/menu.h>
 
 #include "interfaces.h"
 #include "dataset/SelectionSet.h"
@@ -38,6 +39,9 @@ namespace d2d
 		virtual void translateSprite(const Vector& delta);
 		virtual void rotateSprite(const Vector& dst);
 		virtual void scaleSprite(const Vector& currPos);
+
+		virtual void setRightPopupMenu(wxMenu& menu);
+		virtual bool isOffsetEnable() const { return true; };
 
 	private:
 		void setScalingFromSelected();
@@ -82,12 +86,12 @@ namespace d2d
 
 		ISprite* m_scaling;
 
+		Vector m_firstPos;
+
 	private:
 		bool m_scaleOpen;
 
 		bool m_bRightPress;
-
-		Vector m_firstPos;
 
 		Vector m_scaleSelected;
 		bool m_selOffset;

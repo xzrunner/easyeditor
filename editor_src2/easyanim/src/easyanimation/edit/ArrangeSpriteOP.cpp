@@ -1,6 +1,6 @@
 #include "ArrangeSpriteOP.h"
-#include "StagePanel.h"
 
+#include "view/StagePanel.h"
 #include "frame/Context.h"
 
 namespace eanim

@@ -232,6 +232,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="skeleton"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\Joint.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\Joint.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"
@@ -324,19 +336,11 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\easyanimation\view\ArrangeSpriteOP.cpp"
+					RelativePath="..\..\..\src\easyanimation\view\SkeletonData.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyanimation\view\ArrangeSpriteOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\view\SelectSpritesOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\view\SelectSpritesOP.h"
+					RelativePath="..\..\..\src\easyanimation\view\SkeletonData.h"
 					>
 				</File>
 				<File
@@ -447,6 +451,62 @@
 					RelativePath="..\..\..\src\easyanimation\view\FramePropertySetting.h"
 					>
 				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="edit"
+			>
+			<Filter
+				Name="common"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\ArrangeSpriteOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\ArrangeSpriteOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\CommonCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\CommonCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SelectSpritesOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SelectSpritesOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="skeleton"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SkeletonCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SkeletonCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SkeletonOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SkeletonOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="mesh"
+				>
 			</Filter>
 		</Filter>
 		<File
