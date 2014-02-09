@@ -134,7 +134,7 @@ void ISprite::load(const Json::Value& val)
 	setOffset(Vector(ox, oy));
 }
 
-void ISprite::store(Json::Value& val)
+void ISprite::store(Json::Value& val) const
 {
 	val["name"] = name;
 	val["tag"] = tag;

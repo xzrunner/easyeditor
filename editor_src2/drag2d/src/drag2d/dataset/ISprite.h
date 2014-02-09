@@ -38,7 +38,7 @@ namespace d2d
 		virtual void loadBodyFromFile() = 0;
 
 		virtual void load(const Json::Value& val);
-		virtual void store(Json::Value& val);
+		virtual void store(Json::Value& val) const;
 
 		virtual void setTransform(const Vector& position, float angle);
 		void setScale(float xScale, float yScale);

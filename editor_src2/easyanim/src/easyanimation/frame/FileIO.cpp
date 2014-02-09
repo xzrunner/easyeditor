@@ -400,10 +400,6 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dlg)
 {
 	Json::Value value;
 
-// 	wxFileName filename(sprite->getSymbol().getFilepath());
-// 	filename.MakeRelativeTo(dlg);
-// 	value["filepath"] = filename.GetFullPath().ToStdString();
-
 	if (Context::Instance()->resource.empty())
 		value["filepath"] = d2d::FilenameTools::getRelativePath(dlg, 
 			sprite->getSymbol().getFilepath()).ToStdString();
@@ -411,26 +407,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dlg)
 		value["filepath"] = d2d::FilenameTools::getFilenameWithExtension(
 			sprite->getSymbol().getFilepath()).ToStdString();
 
-	value["name"] = sprite->name;
-
-	value["multi color"] = transColor(sprite->multiCol, d2d::PT_BGRA);
-	value["add color"] = transColor(sprite->addCol, d2d::PT_ARGB);
-
-	value["position"]["x"] = sprite->getPosition().x;
-	value["position"]["y"] = sprite->getPosition().y;
-
-	value["angle"] = sprite->getAngle();
-
-	value["x scale"] = sprite->getScaleX();
-	value["y scale"] = sprite->getScaleY();
-
-	value["x shear"] = sprite->getShearX();
-	value["y shear"] = sprite->getShearY();
-
-	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
-	value["x mirror"] = xMirror;
-	value["y mirror"] = yMirror;
+	sprite->store(value);
 
 	return value;
 }
