@@ -20,24 +20,25 @@ KeyFrame::~KeyFrame()
 void KeyFrame::copySprites(const KeyFrame* src)
 {
 //	clear();
+
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
-		Sprite* item = new Sprite(src->m_sprites[i]);
-		m_sprites.push_back(item);
+		d2d::ISprite* s = src->m_sprites[i]->clone();
+		m_sprites.push_back(s);
 		if (m_layer) {
-			item->curr->setObserver(&m_layer->m_spriteObserver);
-			m_layer->m_spriteObserver.insert(item);
+			s->setObserver(&m_layer->m_spriteObserver);
+			m_layer->m_spriteObserver.insert(s, m_time);
 		}
 	}
 }
 
 void KeyFrame::insert(d2d::ISprite* sprite) 
 {
-	Sprite* item = new Sprite(sprite);
-	m_sprites.push_back(item);
+	d2d::ISprite* s = sprite->clone();
+	m_sprites.push_back(s);
 	if (m_layer) {
-		item->curr->setObserver(&m_layer->m_spriteObserver);
-		m_layer->m_spriteObserver.insert(item);
+		s->setObserver(&m_layer->m_spriteObserver);
+		m_layer->m_spriteObserver.insert(s, m_time);
 	}
 }
 
@@ -48,7 +49,7 @@ bool KeyFrame::remove(const d2d::ISprite* sprite)
 	}
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		if (m_sprites[i]->curr == sprite) {
+		if (m_sprites[i] == sprite) {
 			delete m_sprites[i];
 			m_sprites.erase(m_sprites.begin() + i);
 			return true;
@@ -61,17 +62,17 @@ void KeyFrame::reorder(const d2d::ISprite* sprite, bool up)
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		if (m_sprites[i]->curr == sprite)
+		if (m_sprites[i] == sprite)
 		{
 			if (up && i != n - 1)
 			{
-				Sprite* tmp = m_sprites[i];
+				d2d::ISprite* tmp = m_sprites[i];
 				m_sprites[i] = m_sprites[i+1];
 				m_sprites[i+1] = tmp;
 			}
 			else if (!up && i != 0)
 			{
-				Sprite* tmp = m_sprites[i];
+				d2d::ISprite* tmp = m_sprites[i];
 				m_sprites[i] = m_sprites[i-1];
 				m_sprites[i-1] = tmp;
 			}
@@ -83,7 +84,7 @@ void KeyFrame::clear()
 {
 	if (m_layer) {
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			m_layer->m_spriteObserver.remove(m_sprites[i]->curr);
+			m_layer->m_spriteObserver.remove(m_sprites[i]);
 	}
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		delete m_sprites[i];
@@ -94,12 +95,12 @@ void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::
 {
 	for (int i = 0, n = start->size(); i < n; ++i)
 	{
-		Sprite* s = start->m_sprites[i];
+		d2d::ISprite* s = start->m_sprites[i];
 		for (int j = 0, m = end->size(); j < m; ++j) {
-			Sprite* e = end->m_sprites[j];
-			if (s->child == e) {
-				d2d::ISprite* mid = s->curr->clone();
-				getTweenSprite(s->curr, e->curr, mid, process);
+			d2d::ISprite* e = end->m_sprites[j];
+			if (s->name == e->name) {
+				d2d::ISprite* mid = s->clone();
+				getTweenSprite(s, e, mid, process);
 				tween.push_back(mid);
 			}
 		}

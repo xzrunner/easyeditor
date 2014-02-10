@@ -2,22 +2,25 @@
 
 #include <drag2d.h>
 
-#include "Sprite.h"
-
 namespace eanim
 {
+	class Layer;
+
 	class SpriteObserver : public d2d::ISpriteObserver
 	{
 	public:
+		SpriteObserver(const Layer& layer);
 
 		virtual void translate(d2d::ISprite* sprite, const d2d::Vector& offset);
 		virtual void rotate(d2d::ISprite* sprite, float delta);
 
-		void insert(Sprite* sprite);
+		void insert(const d2d::ISprite* sprite, int frame);
 		void remove(const d2d::ISprite* sprite);
 
 	private:
-		std::map<const d2d::ISprite*, Sprite*> m_mapSprite;
+		const Layer& m_layer;
+
+		std::map<d2d::ISprite*, int> m_map2Frame;
 
 	}; // SpriteObserver
 }

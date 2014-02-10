@@ -21,6 +21,11 @@ namespace d2d
 
 SpriteFactory* SpriteFactory::m_instance = NULL;
 
+SpriteFactory::SpriteFactory()
+	: m_id(0)
+{
+}
+
 ISprite* SpriteFactory::create(ISymbol* symbol)
 {
 	ISprite* sprite = NULL;
@@ -61,6 +66,8 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 	}
 
 	if (sprite) insert(sprite);
+
+	sprite->name = "_sprite"+wxString::FromDouble(m_id++);
 
 	return sprite;
 }

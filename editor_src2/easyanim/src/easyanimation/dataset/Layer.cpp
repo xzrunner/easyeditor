@@ -8,6 +8,7 @@ namespace eanim
 {
 
 Layer::Layer()
+	: m_spriteObserver(*this)
 {
 	static int count = 0;
 	name = "Layer" + StringTools::intToString(count++);

@@ -22,11 +22,13 @@ namespace d2d
 		static SpriteFactory* Instance();
 
 	private:
-		SpriteFactory() {}
+		SpriteFactory();
 
 	private:
 		typedef std::vector<ISprite*> SpriteList;
 		std::map<const ISymbol*, SpriteList> m_map_symbol2sprites;
+
+		int m_id;
 
 	private:
 		static SpriteFactory* m_instance;

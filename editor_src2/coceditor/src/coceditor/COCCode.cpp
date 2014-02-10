@@ -848,7 +848,7 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 		else
 		{
 			std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
-			if (!sprite->name.empty())
+			if (!sprite->name.empty() && sprite->name[0] != '_')
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				lua::tableassign(m_gen, "", 2, aName.c_str(), aID.c_str());
@@ -872,7 +872,7 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 		if (i == itr->second.size() && !isFont)
 		{
 			std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
-			if (!sprite->name.empty())
+			if (!sprite->name.empty() && sprite->name[0] != '_')
 			{
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				lua::tableassign(m_gen, "", 2, aName.c_str(), aID.c_str());

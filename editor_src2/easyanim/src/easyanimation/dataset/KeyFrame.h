@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Sprite.h"
+#include <drag2d.h>
 
 namespace eanim
 {
@@ -29,12 +29,12 @@ namespace eanim
 		size_t size() const { return m_sprites.size(); }
 		const d2d::ISprite* getSprite(int index) {
 			if (index >= 0 && index < m_sprites.size())
-				return m_sprites[index]->curr;
+				return m_sprites[index];
 			else
 				return NULL;
 		}
 
-		const std::vector<Sprite*>& getAllSprites() const {
+		const std::vector<d2d::ISprite*>& getAllSprites() const {
 			return m_sprites;
 		}
 
@@ -60,7 +60,7 @@ namespace eanim
 	private:
 		int m_time;
 
-		std::vector<Sprite*> m_sprites;
+		std::vector<d2d::ISprite*> m_sprites;
 
 		bool m_bClassicTween;
 
