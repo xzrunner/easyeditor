@@ -26,6 +26,7 @@ namespace d2d
 		void rotate(float angle);
 		void scale(float sx, float sy);
 		void shear(float kx, float ky);
+		void offset(float ox, float oy);
 		void mirror(bool mx, bool my);
 
 	protected:

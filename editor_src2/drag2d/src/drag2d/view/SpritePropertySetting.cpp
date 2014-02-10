@@ -69,6 +69,10 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		shear(wxANY_AS(value, float), m_sprite->getShearY());
 	else if (name == wxT("Shear Y"))
 		shear(m_sprite->getShearX(), wxANY_AS(value, float));
+	else if (name == wxT("Offset X"))
+		offset(wxANY_AS(value, float), m_sprite->getOffset().y);
+	else if (name == wxT("Offset Y"))
+		offset(m_sprite->getOffset().x, wxANY_AS(value, float));
 	else if (name == wxT("Horizontal Mirror"))
 	{
 		bool xMirror, yMirror;
@@ -119,6 +123,8 @@ void SpritePropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool
 	pg->GetProperty(wxT("Height"))->Enable(bEnable);
 	pg->GetProperty(wxT("Shear X"))->Enable(bEnable);
 	pg->GetProperty(wxT("Shear Y"))->Enable(bEnable);
+	pg->GetProperty(wxT("Offset X"))->Enable(bEnable);
+	pg->GetProperty(wxT("Offset Y"))->Enable(bEnable);
 	pg->GetProperty(wxT("Horizontal Mirror"))->Enable(bEnable);
 	pg->GetProperty(wxT("Vertical Mirror"))->Enable(bEnable);
 
@@ -149,6 +155,8 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Height"))->SetValue(m_sprite->getSymbol().getHeight() * m_sprite->getScaleY());
 	pg->GetProperty(wxT("Shear X"))->SetValue(m_sprite->getShearX());
 	pg->GetProperty(wxT("Shear Y"))->SetValue(m_sprite->getShearY());
+	pg->GetProperty(wxT("Offset X"))->SetValue(m_sprite->getShearX());
+	pg->GetProperty(wxT("Offset Y"))->SetValue(m_sprite->getShearY());
 
 	bool xMirror, yMirror;
 	m_sprite->getMirror(xMirror, yMirror);
@@ -219,6 +227,14 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute(wxT("Shear Y"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Shear Y"), "Precision", 2);
 
+	pg->Append(new wxFloatProperty(wxT("Offset X"), wxPG_LABEL, m_sprite->getOffset().x));
+	pg->SetPropertyAttribute(wxT("Offset X"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Offset X"), "Precision", 1);
+
+	pg->Append(new wxFloatProperty(wxT("Offset Y"), wxPG_LABEL, m_sprite->getOffset().y));
+	pg->SetPropertyAttribute(wxT("Offset Y"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Offset Y"), "Precision", 1);
+
 	bool xMirror, yMirror;
 	m_sprite->getMirror(xMirror, yMirror);
 	pg->Append(new wxBoolProperty(wxT("Horizontal Mirror"), wxPG_LABEL, xMirror));
@@ -267,6 +283,11 @@ void SpritePropertySetting::shear(float kx, float ky)
 	m_editPanel->addHistoryOP(new arrange_sprite::ShearSpritesAOP(sprites, kx, ky));
 
 	m_sprite->setShear(kx, ky);
+}
+
+void SpritePropertySetting::offset(float ox, float oy)
+{
+	m_sprite->setOffset(Vector(ox, oy));
 }
 
 void SpritePropertySetting::mirror(bool mx, bool my)
