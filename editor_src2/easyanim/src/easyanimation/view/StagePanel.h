@@ -5,11 +5,10 @@
 
 #include <drag2d.h>
 
-#include "SkeletonData.h"
-
 namespace eanim
 {
 	class KeyFrame;
+	class SkeletonData;
 
 	class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 	{
@@ -34,7 +33,7 @@ namespace eanim
 
 		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
-		SkeletonData& getSkeletonData() { return m_skeletonData; }
+		SkeletonData& getSkeletonData();
 
 	private:
 		void onMenuAddJointNode(wxCommandEvent& event);
@@ -54,11 +53,6 @@ namespace eanim
 		};
 
 		static std::string menu_entries[];
-
-	private:
-		SkeletonData m_skeletonData;
-
-		friend class StageCanvas;
 
 	}; // StagePanel
 }

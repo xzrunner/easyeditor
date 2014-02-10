@@ -107,7 +107,7 @@ void Layer::insertKeyFrame(int time)
 		{
 			KeyFrame* frame = new KeyFrame(time);
 			insert(time, frame);
-			frame->copySprites(itr->second);
+			frame->copyKeyFrame(itr->second);
 
 			if (time > Context::Instance()->maxFrame)
 				Context::Instance()->maxFrame = time;

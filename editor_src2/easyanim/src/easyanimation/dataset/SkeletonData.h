@@ -12,6 +12,9 @@ namespace eanim
 	public:
 		~SkeletonData();
 
+		void copyFrom(const std::vector<d2d::ISprite*>& sprites,
+			const SkeletonData& skeleton);
+
 		void removeSprite(d2d::ISprite* sprite);
 
 		void insertJoint(d2d::ISprite* sprite, const d2d::Vector& pos);
@@ -24,6 +27,11 @@ namespace eanim
 		void absorb(d2d::ISprite* sprite);
 		void fixJoint(d2d::ISprite* sprite);
 		void updateJoint(d2d::ISprite* sprite, float dAngle = 0);
+
+	private:
+		void clean();
+
+		static d2d::ISprite* getSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name);
 
 	private:
 		std::map<d2d::ISprite*, std::vector<Joint*> > m_mapJoints;

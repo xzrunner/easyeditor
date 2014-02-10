@@ -235,6 +235,14 @@
 					RelativePath="..\..\..\src\easyanimation\dataset\Joint.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\SkeletonData.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\SkeletonData.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -327,14 +335,6 @@
 			<Filter
 				Name="stage"
 				>
-				<File
-					RelativePath="..\..\..\src\easyanimation\view\SkeletonData.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\view\SkeletonData.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\src\easyanimation\view\StageCanvas.cpp"
 					>

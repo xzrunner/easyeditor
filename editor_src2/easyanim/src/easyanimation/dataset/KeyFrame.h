@@ -2,6 +2,8 @@
 
 #include <drag2d.h>
 
+#include "SkeletonData.h"
+
 namespace eanim
 {
 	class Layer;
@@ -16,14 +18,14 @@ namespace eanim
 			m_layer = layer;
 		}
 
-		void copySprites(const KeyFrame* src);
+		void copyKeyFrame(const KeyFrame* src);
 
 		bool isEmpty() const {
 			return m_sprites.empty();
 		}
 
 		void insert(d2d::ISprite* sprite);
-		bool remove(const d2d::ISprite* sprite);
+		bool remove(d2d::ISprite* sprite);
 		void reorder(const d2d::ISprite* sprite, bool up);
 
 		size_t size() const { return m_sprites.size(); }
@@ -52,6 +54,8 @@ namespace eanim
 
 		void clear();
 
+		SkeletonData& getSkeletonData() { return m_skeletonData; }
+
 		static void getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process);
 
 	private:
@@ -65,6 +69,8 @@ namespace eanim
 		bool m_bClassicTween;
 
 		Layer* m_layer;
+
+		SkeletonData m_skeletonData;
 
 	public:
 		int m_id;

@@ -6,12 +6,88 @@ namespace eanim
 {
 	SkeletonData::~SkeletonData()
 	{
-		std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr
-			= m_mapJoints.begin();
-		for ( ; itr != m_mapJoints.end(); ++itr)
+		clean();
+	}
+
+	void SkeletonData::copyFrom(const std::vector<d2d::ISprite*>& sprites,
+		const SkeletonData& skeleton)
+	{
+		clean();
+
+		// check
+		std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr
+			= skeleton.m_mapJoints.begin();
+		for ( ; itr != skeleton.m_mapJoints.end(); ++itr)
+			if (!getSpriteByName(sprites, itr->first->name))
+				return;
+
+		// prepare
+		std::map<Joint*, Joint*> mapCovJoint;
+		for (itr = skeleton.m_mapJoints.begin() ; itr != skeleton.m_mapJoints.end(); ++itr)
+		{
+			d2d::ISprite* sprite = getSpriteByName(sprites, itr->first->name);
+			if (sprite == NULL)
+				return;
+
 			for (int i = 0, n = itr->second.size(); i < n; ++i)
-				delete itr->second[i];
-		m_mapJoints.clear();
+			{
+				Joint* src = itr->second[i];
+				if (mapCovJoint.find(src) != mapCovJoint.end())
+					continue;
+
+				Joint* dst = new Joint(sprite);
+				dst->m_relative = src->m_relative;
+				dst->m_relativeAngle = src->m_relativeAngle;
+				mapCovJoint.insert(std::make_pair(src, dst));
+			}
+		}
+
+		// convert joint
+		std::map<Joint*, Joint*>::iterator itr_joint = mapCovJoint.begin();
+		for ( ; itr_joint != mapCovJoint.end(); ++itr_joint)
+		{
+			Joint* src = itr_joint->first;
+			Joint* dst = itr_joint->second;
+
+			// parent
+			if (src->m_parent == NULL)
+			{
+				dst->m_parent = NULL;
+			}
+			else
+			{
+				std::map<Joint*, Joint*>::iterator itr_parent = mapCovJoint.find(src->m_parent);
+				assert(itr_parent != mapCovJoint.end());
+				dst->m_parent = itr_parent->second;
+			}
+
+			// children
+			std::set<Joint*>::iterator itr_child = src->m_children.begin();
+			for ( ; itr_child != src->m_children.end(); ++itr_child)
+			{
+				std::map<Joint*, Joint*>::iterator find = mapCovJoint.find(*itr_child);
+				assert(find != mapCovJoint.end());
+				dst->m_children.insert(find->second);
+			}
+		}
+
+		// convert skeleton
+		for (itr = skeleton.m_mapJoints.begin() ; itr != skeleton.m_mapJoints.end(); ++itr)
+		{
+			d2d::ISprite* src_sprite = itr->first;
+			std::vector<Joint*> src_joints = itr->second;
+
+			d2d::ISprite* dst_sprite = getSpriteByName(sprites, src_sprite->name);
+			std::vector<Joint*> dst_joints;
+			for (int i = 0, n = src_joints.size(); i < n; ++i)
+			{
+				std::map<Joint*, Joint*>::iterator find = mapCovJoint.find(src_joints[i]);
+				assert(find != mapCovJoint.end());
+				dst_joints.push_back(find->second);
+			}
+
+			m_mapJoints.insert(std::make_pair(dst_sprite, dst_joints));
+		}
 	}
 
 	void SkeletonData::removeSprite(d2d::ISprite* sprite)
@@ -158,5 +234,23 @@ namespace eanim
 				updateJoint(c->m_sprite, dAngle);
 			}
 		}
+	}
+
+	void SkeletonData::clean()
+	{
+		std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr
+			= m_mapJoints.begin();
+		for ( ; itr != m_mapJoints.end(); ++itr)
+			for (int i = 0, n = itr->second.size(); i < n; ++i)
+				delete itr->second[i];
+		m_mapJoints.clear();
+	}
+
+	d2d::ISprite* SkeletonData::getSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name)
+	{
+		for (int i = 0, n = sprites.size(); i < n; ++i)
+			if (sprites[i]->name == name)
+				return sprites[i];
+		return NULL;
 	}
 }

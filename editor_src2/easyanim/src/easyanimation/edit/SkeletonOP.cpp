@@ -1,6 +1,7 @@
 #include "SkeletonOP.h"
 
 #include "dataset/Joint.h"
+#include "dataset/SkeletonData.h"
 #include "view/StagePanel.h"
 #include "frame/Context.h"
 

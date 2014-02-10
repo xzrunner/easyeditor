@@ -17,10 +17,11 @@ KeyFrame::~KeyFrame()
 	clear();
 }
 
-void KeyFrame::copySprites(const KeyFrame* src)
+void KeyFrame::copyKeyFrame(const KeyFrame* src)
 {
 //	clear();
 
+	// sprites
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = src->m_sprites[i]->clone();
@@ -30,6 +31,9 @@ void KeyFrame::copySprites(const KeyFrame* src)
 			m_layer->m_spriteObserver.insert(s, m_time);
 		}
 	}
+
+	// skeleton
+	m_skeletonData.copyFrom(m_sprites, src->m_skeletonData);
 }
 
 void KeyFrame::insert(d2d::ISprite* sprite) 
@@ -42,8 +46,9 @@ void KeyFrame::insert(d2d::ISprite* sprite)
 	}
 }
 
-bool KeyFrame::remove(const d2d::ISprite* sprite) 
+bool KeyFrame::remove(d2d::ISprite* sprite) 
 {
+	m_skeletonData.removeSprite(sprite);
 	if (m_layer) {
 		m_layer->m_spriteObserver.remove(sprite);
 	}

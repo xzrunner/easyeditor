@@ -73,8 +73,6 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
-	m_skeletonData.removeSprite(sprite);
-
 	Context* context = Context::Instance();
 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
 
@@ -109,6 +107,13 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 	Context* context = Context::Instance();
 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
 	frame->reorder(sprite, up);
+}
+
+SkeletonData& StagePanel::getSkeletonData()
+{
+	Context* context = Context::Instance();
+	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
+	return frame->getSkeletonData();	
 }
 
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)

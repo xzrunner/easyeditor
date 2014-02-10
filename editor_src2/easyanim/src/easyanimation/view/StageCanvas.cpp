@@ -1,6 +1,8 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include "dataset/SkeletonData.h"
+
 namespace eanim
 {
 

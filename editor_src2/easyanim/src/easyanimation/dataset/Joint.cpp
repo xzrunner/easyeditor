@@ -4,6 +4,13 @@ namespace eanim
 {
 	const int Joint::REGION = 5;
 
+	Joint::Joint(d2d::ISprite* sprite)
+		: m_sprite(sprite)
+		, m_parent(NULL)
+	{
+		m_relativeAngle = 0;
+	}
+
 	Joint::Joint(d2d::ISprite* sprite, const d2d::Vector& pos)
 		: m_sprite(sprite)
 		, m_parent(NULL)
