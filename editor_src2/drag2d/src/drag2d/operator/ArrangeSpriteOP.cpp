@@ -90,7 +90,10 @@ namespace d2d
 				std::vector<ISprite*> selected;
 				m_selection->traverse(FetchAllVisitor<ISprite>(selected));
 				for (size_t i = 0, n = selected.size(); i < n; ++i)
+				{
 					selected[i]->setTransform(Vector(0, 0), 0);
+					selected[i]->setOffset(Vector(0, 0));
+				}
 				m_editPanel->Refresh();
 			}
 			break;
