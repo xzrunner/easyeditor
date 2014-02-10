@@ -22,13 +22,15 @@ namespace d2d
 		virtual bool onMouseWheelRotation(int x, int y, int direction);
 
 	protected:
-		bool m_openRightTap;
+		void enableRightTap(bool enable);
 
 	private:
 		bool m_bMouseMoveFocus;
 		bool m_onRightBtnPan;
 
 		Vector m_lastPos;
+
+		bool m_openRightTap;
 
 	}; // ZoomViewOP
 }

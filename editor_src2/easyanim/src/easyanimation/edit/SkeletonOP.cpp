@@ -76,11 +76,9 @@ namespace eanim
 		switch(type)
 		{
 		case StagePanel::Menu_AddJointNode:
-			if (m_selection->size() == 1)
 			{
-				std::vector<d2d::ISprite*> sprites;
-				m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-				m_stage->getSkeletonData().insertJoint(sprites[0], m_firstPos);
+				d2d::ISprite* sprite = m_stage->querySpriteByPos(m_firstPos);
+				m_stage->getSkeletonData().insertJoint(sprite, m_firstPos);
 			}
 			break;
 		case StagePanel::Menu_DelJointNode:

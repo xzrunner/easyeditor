@@ -25,6 +25,7 @@ namespace d2d
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);
 		virtual bool onMouseRightDown(int x, int y);
+		virtual bool onMouseRightUp(int x, int y);
 		virtual bool onMouseDrag(int x, int y);
 
 		virtual bool onDraw() const;
@@ -47,6 +48,7 @@ namespace d2d
 
 	private:
 		Vector m_firstPos;
+		Vector m_rightFirstScrPos;
 
 		std::vector<ISprite*> m_clipboard;
 		bool m_lastCtrlPress;

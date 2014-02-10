@@ -166,16 +166,41 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 			m_callback->updateControlValue();
 	}
 
-	m_openRightTap = m_selection->empty();
+//	enableRightTap(m_selection->empty());
 
 	return false;
 }
 
 bool SelectSpritesOP::onMouseRightDown(int x, int y)
 {
+	m_rightFirstScrPos.set(x, y);
+
+	enableRightTap(m_selection->empty());
+
 	if (DrawRectangleOP::onMouseRightDown(x, y)) return true;
 
-	return SelectSpritesOP::onMouseLeftDown(x, y);
+	return false;
+}
+
+bool SelectSpritesOP::onMouseRightUp(int x, int y)
+{
+	// select
+	if (m_rightFirstScrPos == Vector(x, y))
+	{
+		Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
+		if (sprite)
+		{
+			m_selection->clear();
+			m_selection->insert(sprite);
+			enableRightTap(m_selection->empty());
+			m_editPanel->Refresh();
+		}
+	}
+
+	if (DrawRectangleOP::onMouseRightUp(x, y)) return true;
+
+	return false;
 }
 
 bool SelectSpritesOP::onMouseDrag(int x, int y)

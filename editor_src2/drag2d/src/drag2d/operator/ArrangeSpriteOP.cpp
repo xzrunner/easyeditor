@@ -205,14 +205,12 @@ namespace d2d
 	template <typename TBase>
 	bool ArrangeSpriteOP<TBase>::onMouseRightDown(int x, int y)
 	{
-		if (TBase::onMouseRightDown(x, y)) return true;
-
 		m_lastPos = m_editPanel->transPosScreenToProject(x, y);
+		m_firstPos = m_lastPos;
 		if (m_selection->size() == 1)
-		{
 			m_bRightPress = true;
-			m_firstPos = m_lastPos;
-		}
+
+		if (TBase::onMouseRightDown(x, y)) return true;
 
 		return false;
 	}
@@ -222,24 +220,19 @@ namespace d2d
 	{
 		if (TBase::onMouseRightUp(x, y)) return true;
 
-		if (m_bRightPress)
+		if (m_firstPos.isValid() && !m_selection->empty())
 		{
-			m_bRightPress = false;
-			if (m_firstPos.isValid() && !m_selection->empty())
+			Vector pos = m_editPanel->transPosScreenToProject(x, y);
+			d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
+			if (pos == m_firstPos && sprite)
 			{
-				Vector curr = m_editPanel->transPosScreenToProject(x, y);
-				d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(curr);
-				if (curr == m_firstPos && sprite)
-				{
-					wxMenu menu;
-					setRightPopupMenu(menu);
-					m_editPanel->PopupMenu(&menu, x, y);
-				}
-				else
-				{
-					Vector pos = m_editPanel->transPosScreenToProject(x, y);
-					m_editPanel->addHistoryOP(new arrange_sprite::RotateSpritesAOP(*m_selection, m_firstPos, pos));
-				}
+				wxMenu menu;
+				setRightPopupMenu(menu);
+				m_editPanel->PopupMenu(&menu, x, y);
+			}
+			else
+			{
+				m_editPanel->addHistoryOP(new arrange_sprite::RotateSpritesAOP(*m_selection, m_firstPos, pos));
 			}
 		}
 
@@ -249,6 +242,8 @@ namespace d2d
 			m_propertyPanel->updatePropertyGrid();
 			m_bDirty = false;
 		}
+
+		m_bRightPress = false;
 
 		return false;
 	}

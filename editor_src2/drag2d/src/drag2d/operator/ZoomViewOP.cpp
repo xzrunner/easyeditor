@@ -135,4 +135,21 @@ bool ZoomViewOP::onMouseWheelRotation(int x, int y, int direction)
 	return false;
 }
 
+void ZoomViewOP::enableRightTap(bool enable)
+{
+	if (m_openRightTap == enable)
+		return;
+
+	m_openRightTap = enable;
+	if (enable)
+	{
+		m_onRightBtnPan = true;
+	}
+	else
+	{
+		m_onRightBtnPan = false;
+		m_lastPos.setInvalid();
+	}
+}
+
 } // d2d
