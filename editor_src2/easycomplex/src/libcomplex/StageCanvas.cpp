@@ -32,6 +32,10 @@ namespace complex
 	{
 		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 
+		const float EDGE = 100;
+		d2d::PrimitiveDraw::drawLine(d2d::Vector(-EDGE, 0.0f), d2d::Vector(EDGE, 0.0f), d2d::Colorf(0, 1, 0), 1);
+		d2d::PrimitiveDraw::drawLine(d2d::Vector(0.0f, -EDGE), d2d::Vector(0.0f, EDGE), d2d::Colorf(0, 1, 0), 1);
+
 		std::vector<d2d::ISprite*> sprites;
 		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
