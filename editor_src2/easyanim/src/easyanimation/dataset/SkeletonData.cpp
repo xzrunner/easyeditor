@@ -130,9 +130,10 @@ namespace eanim
 			std::vector<Joint*>::iterator itr_joint = itr->second.begin();
 			for ( ; itr_joint != itr->second.end(); ++itr_joint)
 			{
-				if ((*itr_joint)->contain(pos))
+				Joint* joint = *itr_joint;
+				if (joint->contain(pos))
 				{
-					delete *itr_joint;
+					delete joint;
 					itr->second.erase(itr_joint);
 					return;
 				}

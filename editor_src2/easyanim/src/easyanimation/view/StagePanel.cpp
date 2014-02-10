@@ -12,6 +12,7 @@ namespace eanim
 std::string StagePanel::menu_entries[] = 
 {
 	"Add Joint",
+	"Del Joint",
 };
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
@@ -24,6 +25,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	SetDropTarget(new DragSymbolTarget());
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuDelJointNode, this, Menu_DelJointNode);
 }
 
 StagePanel::~StagePanel()
@@ -119,6 +121,12 @@ SkeletonData& StagePanel::getSkeletonData()
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
 	m_editOP->onPopMenuSelected(Menu_AddJointNode);
+	Refresh();
+}
+
+void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
+{
+	m_editOP->onPopMenuSelected(Menu_DelJointNode);
 	Refresh();
 }
 

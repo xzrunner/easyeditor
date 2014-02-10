@@ -19,6 +19,20 @@ namespace eanim
 		m_relativeAngle = sprite->getAngle();
 	}
 
+	Joint::~Joint()
+	{
+		if (m_parent)
+			m_parent->m_children.erase(this);
+
+		std::set<Joint*>::iterator itr = m_children.begin();
+		for ( ; itr != m_children.end(); ++itr)
+		{
+			Joint* child = *itr;
+			assert(child->m_parent == this);
+			child->m_parent = NULL;
+		}
+	}
+
 	void Joint::draw() const
 	{
 		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));

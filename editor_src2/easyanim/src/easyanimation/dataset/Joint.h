@@ -10,6 +10,7 @@ namespace eanim
 	public:
 		Joint(d2d::ISprite* sprite);
 		Joint(d2d::ISprite* sprite, const d2d::Vector& pos);
+		~Joint();
 
 		void draw() const;
 

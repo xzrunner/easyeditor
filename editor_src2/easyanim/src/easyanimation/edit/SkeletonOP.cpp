@@ -83,6 +83,9 @@ namespace eanim
 				m_stage->getSkeletonData().insertJoint(sprites[0], m_firstPos);
 			}
 			break;
+		case StagePanel::Menu_DelJointNode:
+			m_stage->getSkeletonData().removeJoint(m_firstPos);
+			break;
 		}
 	}
 
@@ -114,6 +117,11 @@ namespace eanim
 	void SkeletonOP::setRightPopupMenu(wxMenu& menu)
 	{
 		d2d::ArrangeSpriteOP<SelectSpritesOP>::setRightPopupMenu(menu);
-		menu.Append(StagePanel::Menu_AddJointNode, StagePanel::menu_entries[StagePanel::Menu_AddJointNode - d2d::EditPanel::Menu_End]);
+
+		Joint* joint = m_stage->getSkeletonData().queryJointByPos(m_firstPos);
+		if (joint)
+			menu.Append(StagePanel::Menu_DelJointNode, StagePanel::menu_entries[StagePanel::Menu_DelJointNode - d2d::EditPanel::Menu_End]);
+		else
+			menu.Append(StagePanel::Menu_AddJointNode, StagePanel::menu_entries[StagePanel::Menu_AddJointNode - d2d::EditPanel::Menu_End]);
 	}
 }

@@ -37,6 +37,7 @@ namespace eanim
 
 	private:
 		void onMenuAddJointNode(wxCommandEvent& event);
+		void onMenuDelJointNode(wxCommandEvent& event);
 
 	private:
 		class DragSymbolTarget : public wxTextDropTarget
@@ -49,6 +50,7 @@ namespace eanim
 		enum
 		{
 			Menu_AddJointNode = EditPanel::Menu_End,
+			Menu_DelJointNode,
 			Menu_End
 		};
 
