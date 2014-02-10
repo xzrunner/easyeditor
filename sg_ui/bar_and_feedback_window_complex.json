@@ -1,6 +1,6 @@
 
 {
-	"name" : "mail_item",
+	"name" : "bar_and_feedback_window",
 	"redo" : null,
 	"sprite" : 
 	[
@@ -9,7 +9,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "mail_item_bg_9patch.json",
+			"filepath" : "cancel_window_bg_9patch.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -19,7 +19,7 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x scale" : 0.4499999880790710,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y scale" : 0.50,
@@ -30,63 +30,91 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "yellow_button_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "claim_button",
-			"position" : 
-			{
-				"x" : 303.750,
-				"y" : -28.50
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "gift.png",
+			"filepath" : "cancel_window_bg2_9patch.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -319.0,
-				"y" : 7.1250
+				"x" : 0.0,
+				"y" : -25.0
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x scale" : 0.250,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.250,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0xfffeffd9",
-			"filepath" : "mi_info_fontblank.json",
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "feedback",
+			"position" : 
+			{
+				"x" : 147.0,
+				"y" : -106.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff3d3a5a",
+			"filepath" : "cancel_text_area_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 44,
-			"label_width" : 500,
+			"label_height" : 40,
+			"label_width" : 450,
 			"multi color" : "0xffffffff",
-			"name" : "text_info",
+			"name" : "text_area",
 			"position" : 
 			{
-				"x" : -18.0,
-				"y" : 30.50
+				"x" : 0.0,
+				"y" : 22.0
 			},
-			"size" : 18,
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "cancel_title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 42,
+			"label_width" : 450,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 144.0
+			},
+			"size" : 22,
 			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
@@ -100,13 +128,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "gift_res_amount_complex.json",
+			"filepath" : "yellow_button_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "res1",
+			"name" : "momo_bar",
 			"position" : 
 			{
-				"x" : 96.0,
-				"y" : -17.50
+				"x" : -149.0,
+				"y" : -106.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -121,34 +149,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "gift_res_amount_complex.json",
+			"filepath" : "close_button_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "res2",
+			"name" : "close_button",
 			"position" : 
 			{
-				"x" : -70.250,
-				"y" : -17.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "gift_res_amount_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "res3",
-			"position" : 
-			{
-				"x" : -236.50,
-				"y" : -17.0
+				"x" : 218.2999877929688,
+				"y" : 145.6000061035156
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -159,70 +166,7 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : -3.0,
-				"dy" : -97.0,
-				"type" : 0
-			}
-		},
-		null,
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : 219.0,
-				"dy" : -226.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : -168.0,
-				"dy" : -1.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : -6.0,
-				"dy" : 4.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : 2.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"dx" : -166.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		}
-	],
+	"undo" : null,
 	"xmax" : 0.0,
 	"xmin" : 0.0,
 	"ymax" : 0.0,

@@ -1,6 +1,6 @@
 
 {
-	"name" : "yellow_button",
+	"name" : "gift_res_amount",
 	"sprite" : 
 	[
 		
@@ -8,13 +8,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "yellow_button_9patch.json",
+			"filepath" : "res_icon_anim.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "icon",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 121.0,
+				"y" : -17.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -27,21 +27,21 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
+			"align" : 1,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "title2_fontblank.json",
+			"filepath" : "gift_get_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 130,
+			"label_height" : 22,
+			"label_width" : 120,
 			"multi color" : "0xffffffff",
-			"name" : "title",
+			"name" : "amount",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 34.0,
+				"y" : -18.0
 			},
 			"size" : 16,
 			"tag" : "",
