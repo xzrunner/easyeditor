@@ -110,7 +110,7 @@ void FontSprite::load(const Json::Value& val)
 	buildBounding();
 }
 
-void FontSprite::store(Json::Value& val)
+void FontSprite::store(Json::Value& val) const
 {
 	ISprite::store(val);
 

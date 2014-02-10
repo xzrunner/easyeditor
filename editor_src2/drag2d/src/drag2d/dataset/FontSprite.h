@@ -35,7 +35,7 @@ public:
 	virtual void loadBodyFromFile();
 
 	virtual void load(const Json::Value& val);
-	virtual void store(Json::Value& val);
+	virtual void store(Json::Value& val) const;
 
 	virtual void buildBounding();
 
