@@ -172,19 +172,19 @@ void ISprite::setTransform(const Vector& position, float angle)
 void ISprite::setScale(float xScale, float yScale)
 {
 	m_scale.set(xScale, yScale);
-	afterScaleChanged();
+	onSizeChanged();
 }
 
 void ISprite::setScale(float scale)
 {
 	m_scale.set(scale, scale);
-	afterScaleChanged();
+	onSizeChanged();
 }
 
 void ISprite::setShear(float xShear, float yShear)
 {
 	m_shear.set(xShear, yShear);
-	// todo: change bounding
+	onSizeChanged();
 }
 
 bool ISprite::isContain(const Vector& pos) const
@@ -252,7 +252,7 @@ IBody* ISprite::getBody() const
 	return m_body;
 }
 
-void ISprite::afterScaleChanged()
+void ISprite::onSizeChanged()
 {
 	buildBounding();
 

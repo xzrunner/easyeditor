@@ -68,6 +68,32 @@ namespace d2d
 			yMax = cy + dy;
 		}
 
+		void shear(float xShear, float yShear)
+		{
+			// y' = x + y*ky
+			// x' = x*kx + y
+			Vector v[4];
+			v[0].y = xMin + yMin*yShear;
+			v[0].x = xMin*xShear + yMin;
+			v[1].y = xMax + yMin*yShear;
+			v[1].x = xMax*xShear + yMin;
+			v[2].y = xMax + yMax*yShear;
+			v[2].x = xMax*xShear + yMax;
+			v[3].y = xMin + yMax*yShear;
+			v[3].x = xMin*xShear + yMax;
+			for (int i = 0; i < 4; ++i)
+			{
+				if (v[i].x < xMin)
+					xMin = v[i].x;
+				else if (v[i].x > xMax)
+					xMax = v[i].x;
+				if (v[i].y < yMin)
+					yMin = v[i].y;
+				else if (v[i].y > yMax)
+					yMax = v[i].y;
+			}
+		}
+
 		void combine(const Vector& pos)
 		{
 			if (pos.x < xMin) xMin = pos.x;

@@ -79,7 +79,7 @@ namespace d2d
 		virtual void buildBounding() = 0;
 
 	private:
-		void afterScaleChanged();
+		void onSizeChanged();
 
 	public:
 		// info

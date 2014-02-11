@@ -55,6 +55,7 @@ namespace complex
 			d2d::Rect rect = m_symbol->m_rect;
 
 			rect.scale(m_scale.x, m_scale.y);
+			rect.shear(m_shear.x, m_shear.y);
 			rect.translate(m_pos);
 			m_bounding->initFromRect(rect);
 			m_bounding->setTransform(m_pos, m_offset, m_angle);
