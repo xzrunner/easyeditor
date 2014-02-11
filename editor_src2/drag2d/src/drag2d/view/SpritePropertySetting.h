@@ -29,6 +29,8 @@ namespace d2d
 		void offset(float ox, float oy);
 		void mirror(bool mx, bool my);
 
+		void splitString(const wxAny& value, double* x, double* y);
+
 	protected:
 		ISprite* m_sprite;
 
