@@ -221,6 +221,22 @@ namespace d2d
 
 		if (TBase::onMouseRightDown(x, y)) return true;
 
+		m_ctrlNodeSelected.setInvalid();
+		if (m_isDeformOpen && m_selected)
+		{
+			Vector ctrlNodes[8];
+			getSpriteCtrlNodes(m_selected, ctrlNodes);
+			for (int i = 0; i < 8; ++i)
+			{
+				if (Math::getDistance(ctrlNodes[i], m_lastPos) < SCALE_NODE_RADIUS)
+				{
+					m_ctrlNodeSelected.pos = ctrlNodes[i];
+					m_ctrlNodeSelected.type = CtrlNodeType(i);
+					return false;
+				}
+			}
+		}
+
 		return false;
 	}
 
@@ -267,10 +283,15 @@ namespace d2d
 			Vector pos = m_editPanel->transPosScreenToProject(x, y);
 			if (m_ctrlNodeSelected.isValid())
 			{
-				if (m_ctrlNodeSelected.type < UP)
-					scaleSprite(pos);
-				else
+// 				if (m_ctrlNodeSelected.type < UP)
+// 					scaleSprite(pos);
+// 				else
+// 					shearSprite(pos);
+
+				if (m_bRightPress && m_ctrlNodeSelected.type >= UP)
 					shearSprite(pos);
+				else
+					scaleSprite(pos);
 				return false;
 			}
 			else if (isOffsetEnable() && m_selOffset)
@@ -397,11 +418,40 @@ namespace d2d
 	{
 		if (!m_isDeformOpen) return;
 
+		float hw = m_selected->getSymbol().getWidth() * 0.5f;
+		float hh = m_selected->getSymbol().getHeight() * 0.5f;
+		love::Matrix t;
+		t.setTransformation(m_selected->getPosition().x, m_selected->getPosition().y, m_selected->getAngle(),
+			m_selected->getScaleX(), m_selected->getScaleY(), 0, 0, m_selected->getShearX(), m_selected->getShearY());
 		const Vector& center = m_selected->getPosition();
-		Vector foot;
-		Math::getFootOfPerpendicular(center, m_ctrlNodeSelected.pos, currPos, &foot);
-		const float scale = Math::getDistance(foot, center) / Math::getDistance(m_ctrlNodeSelected.pos, center);
-		m_selected->setScale(scale);
+
+		Vector ori, fix;
+		if (m_ctrlNodeSelected.type == UP)
+			ori = Math::transVector(Vector(0.0f, hh), t);
+		else if (m_ctrlNodeSelected.type == DOWN)
+			ori = Math::transVector(Vector(0.0f, -hh), t);
+		else if (m_ctrlNodeSelected.type == LEFT)
+			ori = Math::transVector(Vector(-hw, 0.0f), t);
+		else if (m_ctrlNodeSelected.type == RIGHT)
+			ori = Math::transVector(Vector(hw, 0.0f), t);
+		else if (m_ctrlNodeSelected.type == LEFT_UP)
+			ori = Math::transVector(Vector(-hw, hh), t);
+		else if (m_ctrlNodeSelected.type == RIGHT_UP)
+			ori = Math::transVector(Vector(hw, hh), t);
+		else if (m_ctrlNodeSelected.type == LEFT_DOWN)
+			ori = Math::transVector(Vector(-hw, -hh), t);
+		else if (m_ctrlNodeSelected.type == RIGHT_DOWN)
+			ori = Math::transVector(Vector(hw, -hh), t);
+		Math::getFootOfPerpendicular(center, ori, currPos, &fix);
+		float scale = Math::getDistance(center, fix) / Math::getDistance(center, ori);
+		if (m_ctrlNodeSelected.type == UP || m_ctrlNodeSelected.type == DOWN)
+			m_selected->setScale(m_selected->getScaleX(), scale * m_selected->getScaleY());
+		else if (m_ctrlNodeSelected.type == LEFT || m_ctrlNodeSelected.type == RIGHT)
+			m_selected->setScale(scale * m_selected->getScaleX(), m_selected->getScaleY());
+		else		
+			m_selected->setScale(scale * m_selected->getScaleX(), scale * m_selected->getScaleY());
+		m_selected->translate(fix - ori);
+
 		if (m_propertyPanel && !m_bDirty)
 		{
 			m_propertyPanel->enablePropertyGrid(false);
@@ -491,6 +541,11 @@ namespace d2d
 
 		m_selected->setShear(kx, ky);
 
+		if (m_propertyPanel && !m_bDirty)
+		{
+			m_propertyPanel->enablePropertyGrid(false);
+			m_bDirty = true;
+		}
 		m_editPanel->Refresh();
 	}
 
