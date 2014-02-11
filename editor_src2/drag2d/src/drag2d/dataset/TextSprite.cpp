@@ -79,8 +79,8 @@ void TextSprite::buildBounding()
 {
 	if (!m_symbol) return;
 
-	const float width = m_symbol->getWidth(this) * m_xScale,
-		height = m_symbol->getHeight(this) * m_yScale;
+	const float width = m_symbol->getWidth(this) * m_scale.x,
+		height = m_symbol->getHeight(this) * m_scale.y;
 
 	delete m_bounding;
 	m_bounding = BVFactory::createBV(e_aabb);

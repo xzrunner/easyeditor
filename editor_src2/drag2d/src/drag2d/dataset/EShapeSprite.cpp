@@ -66,7 +66,7 @@ void EShapeSprite::loadBodyFromFile()
 			copy(poly->m_fillingVertices.begin(), poly->m_fillingVertices.end(), back_inserter(triangles));
 	}
 
-	m_body = BodyFactory::createBody(triangles, m_xScale);
+	m_body = BodyFactory::createBody(triangles, m_scale.x);
 
 	m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
 }
@@ -83,7 +83,7 @@ void EShapeSprite::buildBounding()
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			rect.combine(shapes[i]->getRect());
 		
-		rect.scale(m_xScale, m_yScale);
+		rect.scale(m_scale.x, m_scale.y);
 		rect.translate(m_pos);
 		m_bounding->initFromRect(rect);
 		m_bounding->setTransform(m_pos, m_offset, m_angle);

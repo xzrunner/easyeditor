@@ -81,7 +81,7 @@ void CombinationSprite::loadBodyFromFile()
 
 		fixture.pos = sprite->getPosition();
 		fixture.angle = sprite->getAngle();
-		fixture.scale = sprite->getScaleX();
+		fixture.scale = sprite->getScale().x;
 
 		fixtures.push_back(fixture);
 	}
@@ -89,7 +89,7 @@ void CombinationSprite::loadBodyFromFile()
 	if (!fixtures.empty())
 	{
 		if (m_body) delete m_body;
-		m_body = BodyFactory::createBody(fixtures, m_xScale);
+		m_body = BodyFactory::createBody(fixtures, m_scale.x);
 		m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
 	}
 }
@@ -103,7 +103,7 @@ void CombinationSprite::buildBounding()
 	{
 		Rect rect = m_symbol->getRect();
 
-		rect.scale(m_xScale, m_yScale);
+		rect.scale(m_scale.x, m_scale.y);
 		rect.translate(m_pos);
 		m_bounding->initFromRect(rect);
 		m_bounding->setTransform(m_pos, m_offset, m_angle);

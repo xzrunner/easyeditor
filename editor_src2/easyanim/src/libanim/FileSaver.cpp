@@ -53,7 +53,7 @@ Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dlg)
 
 	value["angle"] = sprite->getAngle();
 
-	value["scale"] = sprite->getScaleX();
+	value["scale"] = sprite->getScale().x;
 
 	bool xMirror, yMirror;
 	sprite->getMirror(xMirror, yMirror);

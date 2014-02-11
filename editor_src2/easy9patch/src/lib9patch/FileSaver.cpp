@@ -50,7 +50,7 @@ void FileSaver::store(const char* filepath, const d2d::Patch9Symbol& symbol)
 //
 //	value["angle"] = sprite->getAngle();
 //
-//	value["scale"] = sprite->getScaleX();
+//	value["scale"] = sprite->getScale().x;
 //
 //	bool xMirror, yMirror;
 //	sprite->getMirror(xMirror, yMirror);

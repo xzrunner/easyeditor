@@ -21,6 +21,8 @@ namespace e9patch
 	private:
 		d2d::SpriteBatch m_batch;
 
+		d2d::ShapeStyle m_bgStyle, m_nodeStyle;
+
 	}; // StageCanvas
 }
 

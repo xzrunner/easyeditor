@@ -69,9 +69,9 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		scale(x, y);
 	}
 	else if (name == wxT("Scale.X"))
-		scale(wxANY_AS(value, float), m_sprite->getScaleY());
+		scale(wxANY_AS(value, float), m_sprite->getScale().y);
 	else if (name == wxT("Scale.Y"))
-		scale(m_sprite->getScaleX(), wxANY_AS(value, float));
+		scale(m_sprite->getScale().x, wxANY_AS(value, float));
 	// size
 	else if (name == wxT("Size"))
 	{
@@ -82,12 +82,12 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Size.Width"))
 	{
 		const float width = wxANY_AS(value, float);
-		scale(width/m_sprite->getSymbol().getWidth(), m_sprite->getScaleY());
+		scale(width/m_sprite->getSymbol().getWidth(), m_sprite->getScale().y);
 	}
 	else if (name == wxT("Size.Height"))
 	{
 		const float height = wxANY_AS(value, float);
-		scale(m_sprite->getScaleX(), height/m_sprite->getSymbol().getHeight());
+		scale(m_sprite->getScale().x, height/m_sprite->getSymbol().getHeight());
 	}
 	// shear
 	else if (name == wxT("Shear"))
@@ -97,9 +97,9 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		shear(x, y);
 	}
 	else if (name == wxT("Shear.X"))
-		shear(wxANY_AS(value, float), m_sprite->getShearY());
+		shear(wxANY_AS(value, float), m_sprite->getShear().y);
 	else if (name == wxT("Shear.Y"))
-		shear(m_sprite->getShearX(), wxANY_AS(value, float));
+		shear(m_sprite->getShear().x, wxANY_AS(value, float));
 	// offset
 	else if (name == wxT("Offset"))
 	{
@@ -197,14 +197,14 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Pos.X"))->SetValue(m_sprite->getPosition().x);
 	pg->GetProperty(wxT("Pos.Y"))->SetValue(m_sprite->getPosition().y);
 	pg->GetProperty(wxT("Angle"))->SetValue(m_sprite->getAngle() * TRANS_RAD_TO_DEG);
-	pg->GetProperty(wxT("Scale.X"))->SetValue(m_sprite->getScaleX());
-	pg->GetProperty(wxT("Scale.Y"))->SetValue(m_sprite->getScaleY());
-	pg->GetProperty(wxT("Size.Width"))->SetValue(m_sprite->getSymbol().getWidth() * m_sprite->getScaleX());
-	pg->GetProperty(wxT("Size.Height"))->SetValue(m_sprite->getSymbol().getHeight() * m_sprite->getScaleY());
-	pg->GetProperty(wxT("Shear.X"))->SetValue(m_sprite->getShearX());
-	pg->GetProperty(wxT("Shear.Y"))->SetValue(m_sprite->getShearY());
-	pg->GetProperty(wxT("Offset.X"))->SetValue(m_sprite->getShearX());
-	pg->GetProperty(wxT("Offset.Y"))->SetValue(m_sprite->getShearY());
+	pg->GetProperty(wxT("Scale.X"))->SetValue(m_sprite->getScale().x);
+	pg->GetProperty(wxT("Scale.Y"))->SetValue(m_sprite->getScale().y);
+	pg->GetProperty(wxT("Size.Width"))->SetValue(m_sprite->getSymbol().getWidth() * m_sprite->getScale().x);
+	pg->GetProperty(wxT("Size.Height"))->SetValue(m_sprite->getSymbol().getHeight() * m_sprite->getScale().y);
+	pg->GetProperty(wxT("Shear.X"))->SetValue(m_sprite->getShear().x);
+	pg->GetProperty(wxT("Shear.Y"))->SetValue(m_sprite->getShear().y);
+	pg->GetProperty(wxT("Offset.X"))->SetValue(m_sprite->getShear().x);
+	pg->GetProperty(wxT("Offset.Y"))->SetValue(m_sprite->getShear().y);
 
 	bool xMirror, yMirror;
 	m_sprite->getMirror(xMirror, yMirror);
@@ -253,28 +253,28 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 
 	wxPGProperty* scaleProp = pg->Append(new wxStringProperty(wxT("Scale"), wxPG_LABEL, wxT("<composed>")));
 	scaleProp->SetExpanded(false);
-	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, m_sprite->getScaleX()));
+	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, m_sprite->getScale().x));
 	pg->SetPropertyAttribute(wxT("Scale.X"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Scale.X"), "Precision", 2);
-	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_sprite->getScaleY()));
+	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_sprite->getScale().y));
 	pg->SetPropertyAttribute(wxT("Scale.Y"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Scale.Y"), "Precision", 2);
 
 	wxPGProperty* sizeProp = pg->Append(new wxStringProperty(wxT("Size"), wxPG_LABEL, wxT("<composed>")));
 	sizeProp->SetExpanded(false);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_sprite->getSymbol().getWidth() * m_sprite->getScaleX()));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_sprite->getSymbol().getWidth() * m_sprite->getScale().x));
 	pg->SetPropertyAttribute(wxT("Size.Width"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Width"), "Precision", 2);
-	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_sprite->getSymbol().getHeight() * m_sprite->getScaleY()));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_sprite->getSymbol().getHeight() * m_sprite->getScale().y));
 	pg->SetPropertyAttribute(wxT("Size.Height"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("Size.Height"), "Precision", 2);
 
 	wxPGProperty* shearProp = pg->Append(new wxStringProperty(wxT("Shear"), wxPG_LABEL, wxT("<composed>")));
 	shearProp->SetExpanded(false);
-	pg->AppendIn(shearProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, m_sprite->getShearX()));
+	pg->AppendIn(shearProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, m_sprite->getShear().x));
 	pg->SetPropertyAttribute(wxT("Shear.X"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Shear.X"), "Precision", 2);
-	pg->AppendIn(shearProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_sprite->getShearY()));
+	pg->AppendIn(shearProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_sprite->getShear().y));
 	pg->SetPropertyAttribute(wxT("Shear.Y"), wxPG_ATTR_UNITS, wxT("multiple"));
 	pg->SetPropertyAttribute(wxT("Shear.Y"), "Precision", 2);
 

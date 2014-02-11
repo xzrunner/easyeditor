@@ -53,8 +53,8 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 // 		m_node[5] = hh;
 	}
 
-	const float hw = symbol.getWidth() * sprite->getScaleX() * 0.5f,
-		hh = symbol.getHeight() * sprite->getScaleY() * 0.5f;
+	const float hw = symbol.getWidth() * sprite->getScale().x * 0.5f,
+		hh = symbol.getHeight() * sprite->getScale().y * 0.5f;
 	float x0 = -hw;
 	float y0 = -hh;
 	float x1 = -hw;

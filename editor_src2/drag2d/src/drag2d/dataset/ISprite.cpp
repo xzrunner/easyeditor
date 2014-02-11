@@ -23,8 +23,8 @@ ISprite::ISprite()
 	visiable = editable = true;
 
 	m_angle = 0.0f;
-	m_xScale = m_yScale = 1.0f;
-	m_xShear = m_yShear = 0.0f;
+	m_scale.set(1, 1);
+	m_shear.set(0, 0);
 	m_xMirror = m_yMirror = false;
 	m_bounding = NULL;
 }
@@ -44,10 +44,8 @@ ISprite::ISprite(const ISprite& sprite)
 	m_pos = sprite.m_pos;
 	m_angle = sprite.m_angle;
 	m_offset = sprite.m_offset;
-	m_xScale = sprite.m_xScale;
-	m_yScale = sprite.m_yScale;
-	m_xShear = sprite.m_xShear;
-	m_yShear = sprite.m_yShear;
+	m_scale = sprite.m_scale;
+	m_shear = sprite.m_shear;
 	m_xMirror = sprite.m_xMirror;
 	m_yMirror = sprite.m_yMirror;
 	m_bounding = sprite.m_bounding->clone();
@@ -148,11 +146,11 @@ void ISprite::store(Json::Value& val) const
 
 	val["angle"] = m_angle;
 
-	val["x scale"] = m_xScale;
-	val["y scale"] = m_yScale;
+	val["x scale"] = m_scale.x;
+	val["y scale"] = m_scale.y;
 
-	val["x shear"] = m_xShear;
-	val["y shear"] = m_yShear;
+	val["x shear"] = m_shear.x;
+	val["y shear"] = m_shear.y;
 
 	val["x mirror"] = m_xMirror;
 	val["y mirror"] = m_yMirror;
@@ -173,21 +171,19 @@ void ISprite::setTransform(const Vector& position, float angle)
 
 void ISprite::setScale(float xScale, float yScale)
 {
-	m_xScale = xScale;
-	m_yScale = yScale;
+	m_scale.set(xScale, yScale);
 	afterScaleChanged();
 }
 
 void ISprite::setScale(float scale)
 {
-	m_xScale = m_yScale = scale;
+	m_scale.set(scale, scale);
 	afterScaleChanged();
 }
 
 void ISprite::setShear(float xShear, float yShear)
 {
-	m_xShear = xShear;
-	m_yShear = yShear;
+	m_shear.set(xShear, yShear);
 	// todo: change bounding
 }
 

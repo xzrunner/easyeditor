@@ -422,7 +422,7 @@ namespace d2d
 		float hh = m_selected->getSymbol().getHeight() * 0.5f;
 		love::Matrix t;
 		t.setTransformation(m_selected->getPosition().x, m_selected->getPosition().y, m_selected->getAngle(),
-			m_selected->getScaleX(), m_selected->getScaleY(), 0, 0, m_selected->getShearX(), m_selected->getShearY());
+			m_selected->getScale().x, m_selected->getScale().y, 0, 0, m_selected->getShear().x, m_selected->getShear().y);
 		const Vector& center = m_selected->getPosition();
 
 		Vector ori, fix;
@@ -445,11 +445,11 @@ namespace d2d
 		Math::getFootOfPerpendicular(center, ori, currPos, &fix);
 		float scale = Math::getDistance(center, fix) / Math::getDistance(center, ori);
 		if (m_ctrlNodeSelected.type == UP || m_ctrlNodeSelected.type == DOWN)
-			m_selected->setScale(m_selected->getScaleX(), scale * m_selected->getScaleY());
+			m_selected->setScale(m_selected->getScale().x, scale * m_selected->getScale().y);
 		else if (m_ctrlNodeSelected.type == LEFT || m_ctrlNodeSelected.type == RIGHT)
-			m_selected->setScale(scale * m_selected->getScaleX(), m_selected->getScaleY());
+			m_selected->setScale(scale * m_selected->getScale().x, m_selected->getScale().y);
 		else		
-			m_selected->setScale(scale * m_selected->getScaleX(), scale * m_selected->getScaleY());
+			m_selected->setScale(scale * m_selected->getScale().x, scale * m_selected->getScale().y);
 		m_selected->translate(fix - ori);
 
 		if (m_propertyPanel && !m_bDirty)
@@ -497,10 +497,10 @@ namespace d2d
 		// ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x)
 		// ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x)
 		float c = cos(m_selected->getAngle()), s = sin(m_selected->getAngle());
-		float sx = m_selected->getScaleX(), sy = m_selected->getScaleY();
+		float sx = m_selected->getScale().x, sy = m_selected->getScale().y;
 		float px = m_selected->getPosition().x, py = m_selected->getPosition().y;
-		float kx = m_selected->getShearX(),
-			ky = m_selected->getShearY();
+		float kx = m_selected->getShear().x,
+			ky = m_selected->getShear().y;
 
 		float x, y;
 		float hw = m_selected->getSymbol().getWidth() * 0.5f,
@@ -795,7 +795,7 @@ namespace d2d
 		float hh = sprite->getSymbol().getHeight() * 0.5f;
 		love::Matrix t;
 		t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
-			sprite->getScaleX(), sprite->getScaleY(), 0, 0, sprite->getShearX(), sprite->getShearY());
+			sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
 		// scale
 		nodes[0] = Math::transVector(Vector(-hw,  hh), t);
 		nodes[1] = Math::transVector(Vector( hw,  hh), t);

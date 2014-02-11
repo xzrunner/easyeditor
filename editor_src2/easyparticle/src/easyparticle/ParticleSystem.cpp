@@ -2,6 +2,7 @@
 #include "ParticleSystem.h"
 
 #include "Matrix.h"
+#include "math.h"
 
 // #include <common/math.h>
 // 

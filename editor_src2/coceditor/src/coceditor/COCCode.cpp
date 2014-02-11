@@ -322,9 +322,9 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
  		screen[i] += picture->offset / Context::Instance()->scale;
 	// 1. scale
 	for (size_t i = 0; i < 4; ++i)
-		screen[i].x *= sprite->getScaleX();
+		screen[i].x *= sprite->getScale().x;
 	for (size_t i = 0; i < 4; ++i)
-		screen[i].y *= sprite->getScaleY();
+		screen[i].y *= sprite->getScale().y;
 	// 2. rotate
 	for (size_t i = 0; i < 4; ++i)
 	{
@@ -1056,17 +1056,17 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		mat[3] = mat[0];
 
 		// scale
-		mat[0] *= sprite->getScaleX();
-		mat[3] *= sprite->getScaleY();
-		mat[1] *= sprite->getScaleY();
-		mat[2] *= sprite->getScaleX();
+		mat[0] *= sprite->getScale().x;
+		mat[3] *= sprite->getScale().y;
+		mat[1] *= sprite->getScale().y;
+		mat[2] *= sprite->getScale().x;
 
 		// shear
 		float m0 = mat[0], m1 = mat[1], m2 = mat[2], m3 = mat[3];
-		mat[0] = m0 + m1 * sprite->getShearY();
-		mat[1] = m0 * sprite->getShearX() + m1;
-		mat[2] = m2 + m3 * sprite->getShearY();
-		mat[3] = m2 * sprite->getShearX() + m3;
+		mat[0] = m0 + m1 * sprite->getShear().y;
+		mat[1] = m0 * sprite->getShear().x + m1;
+		mat[2] = m2 + m3 * sprite->getShear().y;
+		mat[3] = m2 * sprite->getShear().x + m3;
 
 		// mirror
 		bool xMirror, yMirror;

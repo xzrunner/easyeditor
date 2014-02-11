@@ -29,12 +29,12 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
 
  	bool xMirror, yMirror;
  	sprite->getMirror(xMirror, yMirror);
- 	const float xScale = xMirror ? -sprite->getScaleX() : sprite->getScaleX(),
- 		yScale = yMirror ? -sprite->getScaleY() : sprite->getScaleY();
+ 	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
+ 		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
 
  	d2d::Vector center = sprite->getCenter();
  	t.setTransformation(center.x, center.y, sprite->getAngle(), 
- 		xScale, yScale, 0, 0, sprite->getShearX(), sprite->getShearY());
+ 		xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
  	GL10::MultMatrixf((const float*)t.getElements( ));
 
 	Colorf m = cMul(mul, sprite->multiCol),
@@ -68,8 +68,8 @@ void SpriteDraw::drawSprite(const ISprite* sprite, wxMemoryDC& memDC)
 
 	const wxBitmap* bitmap = sprite->getSymbol().getBitmap()->getBitmap();
 
-	const float width = std::max(1.0f, sprite->getSymbol().getWidth() * sprite->getScaleX() * SCALE),
-		height = std::max(1.0f, sprite->getSymbol().getHeight() * sprite->getScaleY() * SCALE);
+	const float width = std::max(1.0f, sprite->getSymbol().getWidth() * sprite->getScale().x * SCALE),
+		height = std::max(1.0f, sprite->getSymbol().getHeight() * sprite->getScale().y * SCALE);
 	const float hWidth = width * 0.5f,
 		hHeight = height * 0.5f;
 
@@ -173,8 +173,8 @@ void SpriteDraw::begin(const ISprite* sprite)
 
 	bool xMirror, yMirror;
 	sprite->getMirror(xMirror, yMirror);
-	const float xScale = xMirror ? -sprite->getScaleX() : sprite->getScaleX(),
-		yScale = yMirror ? -sprite->getScaleY() : sprite->getScaleY();
+	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
+		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
 	GL10::Scalef(xScale, yScale, 1.0f);
 
 }

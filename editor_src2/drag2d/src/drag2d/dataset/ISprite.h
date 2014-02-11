@@ -51,20 +51,12 @@ namespace d2d
 		void translate(const Vector& offset);
 		void rotate(float delta);
 
-		const Vector& getPosition() const {
-			return m_pos;
-		}
-		const Vector& getOffset() const {
-			return m_offset;
-		}
+		const Vector& getPosition() const { return m_pos; }
+		const Vector& getOffset() const { return m_offset; }
 		void setOffset(const Vector& offset);
-		float getAngle() const {
-			return m_angle;
-		}
-		float getScaleX() const { return m_xScale; }
-		float getScaleY() const { return m_yScale; }
-		float getShearX() const { return m_xShear; }
-		float getShearY() const { return m_yShear; }
+		float getAngle() const { return m_angle; }
+		const Vector& getScale() const { return m_scale; }
+		const Vector& getShear() const { return m_shear; }
 
 		void setMirror(bool xMirror, bool yMirror) { m_xMirror = xMirror; m_yMirror = yMirror; }
 		void getMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
@@ -104,8 +96,8 @@ namespace d2d
 		Vector m_pos;
 		float m_angle;
 		Vector m_offset;
-		float m_xScale, m_yScale;
-		float m_xShear, m_yShear;
+		Vector m_scale;
+		Vector m_shear;
 
 		bool m_xMirror, m_yMirror;
 

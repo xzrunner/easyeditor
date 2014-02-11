@@ -107,10 +107,10 @@ void Tools::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite*
 {
 	d2d::Vector offset = (end->getPosition() - start->getPosition()) * process;
 	float delta = (end->getAngle() - start->getAngle()) * process;
-	float xscale = (end->getScaleX() - start->getScaleX()) * process + start->getScaleX(),
-		yscale = (end->getScaleY() - start->getScaleY()) * process + start->getScaleY();
-	float xshear = (end->getShearX() - start->getShearX()) * process + start->getShearX(),
-		yshear = (end->getShearY() - start->getShearY()) * process + start->getShearY();
+	float xscale = (end->getScale().x - start->getScale().x) * process + start->getScale().x,
+		yscale = (end->getScale().y - start->getScale().y) * process + start->getScale().y;
+	float xshear = (end->getShear().x - start->getShear().x) * process + start->getShear().x,
+		yshear = (end->getShear().y - start->getShear().y) * process + start->getShear().y;
 	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
 	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);
 	tween->translate(offset);

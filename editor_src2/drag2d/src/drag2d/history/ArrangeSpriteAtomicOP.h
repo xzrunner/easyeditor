@@ -96,7 +96,7 @@ namespace d2d
 			virtual Json::Value storeValues();
 
 		private:
-			float m_xScale, m_yScale;
+			Vector m_scale;
 			std::vector<std::pair<float, float> > m_oldScales;
 
 		}; // ScaleSpritesAOP

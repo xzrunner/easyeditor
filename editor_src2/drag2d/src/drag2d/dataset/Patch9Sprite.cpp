@@ -62,8 +62,8 @@ void Patch9Sprite::buildBounding()
 
 	if (m_symbol)
 	{
-		m_bounding->combine(Rect(m_pos, m_symbol->getWidth() * m_xScale * 0.5f,
-			m_symbol->getHeight() * m_yScale * 0.5f));
+		m_bounding->combine(Rect(m_pos, m_symbol->getWidth() * m_scale.x * 0.5f,
+			m_symbol->getHeight() * m_scale.y * 0.5f));
 		m_bounding->setTransform(m_pos, m_offset, m_angle);
 	}
 }

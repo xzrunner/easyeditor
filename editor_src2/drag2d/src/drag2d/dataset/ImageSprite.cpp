@@ -58,17 +58,17 @@ void ImageSprite::loadBodyFromFile()
 	if (FilenameTools::isExist(polygonPath))
 	{
 		if (m_body) delete m_body;
-		m_body = BodyFactory::createBody(polygonPath, m_xScale);
+		m_body = BodyFactory::createBody(polygonPath, m_scale.x);
 	}
 	else if (FilenameTools::isExist(circlePath))
 	{
 		if (m_body) delete m_body;
-		m_body = BodyFactory::createBody(circlePath, m_xScale);
+		m_body = BodyFactory::createBody(circlePath, m_scale.x);
 	}
 	else if (FilenameTools::isExist(shapePath))
 	{
 		if (m_body) delete m_body;
-		m_body = BodyFactory::createBody(shapePath, m_xScale);
+		m_body = BodyFactory::createBody(shapePath, m_scale.x);
 	}
 	m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
 }
@@ -90,8 +90,8 @@ void ImageSprite::buildBounding(float* texCoords)
 	rect.yMax = height * (texCoords[3] - 0.5f);
 
 	Vector center(rect.xCenter(), rect.yCenter());
-	float hWidth = (rect.xMax - rect.xMin) * 0.5f * m_xScale,
-		hHeight = (rect.yMax - rect.yMin) * 0.5f * m_yScale;
+	float hWidth = (rect.xMax - rect.xMin) * 0.5f * m_scale.x,
+		hHeight = (rect.yMax - rect.yMin) * 0.5f * m_scale.y;
 	rect.xMin = -hWidth;
 	rect.xMax = hWidth;
 	rect.yMin = -hHeight;
@@ -112,8 +112,8 @@ void ImageSprite::buildBounding()
 
 	//////////////////////////////////////////////////////////////////////////
 
-// 	const float hWidth = m_symbol->getWidth() * 0.5f * m_xScale,
-// 		hHeight = m_symbol->getHeight() * 0.5f * m_yScale;
+// 	const float hWidth = m_symbol->getWidth() * 0.5f * m_scale.x,
+// 		hHeight = m_symbol->getHeight() * 0.5f * m_scale.y;
 // 
 // 	Rect rect;
 // 	rect.xMin = -hWidth;
@@ -127,7 +127,7 @@ void ImageSprite::buildBounding()
 	//////////////////////////////////////////////////////////////////////////
 
 	Rect rect = m_symbol->getImage()->getRegion();
-	rect.scale(m_xScale, m_yScale);
+	rect.scale(m_scale.x, m_scale.y);
 	rect.translate(m_pos);
 	m_bounding->initFromRect(rect);
 	m_bounding->setTransform(m_pos, m_offset, m_angle);

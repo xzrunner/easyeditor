@@ -220,21 +220,19 @@ Json::Value DeleteSpritesAOP::storeValues()
 
 ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale)
 	: SpritesAOP(sprites)
-	, m_xScale(xScale)
-	, m_yScale(yScale)
+	, m_scale(xScale, yScale)
 {
 	m_oldScales.reserve(sprites.size());
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ISprite* sprite = sprites[i];
-		m_oldScales.push_back(std::make_pair(sprite->getScaleX(), sprite->getScaleY()));
+		m_oldScales.push_back(std::make_pair(sprite->getScale().x, sprite->getScale().y));
 	}
 }
 
 ScaleSpritesAOP::ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale,
 				const std::vector<std::pair<float, float> >& oldScales)
 	: SpritesAOP(sprites)
-	, m_xScale(xScale)
-	, m_yScale(yScale)
+	, m_scale(xScale, yScale)
 	, m_oldScales(oldScales)
 {
 }
@@ -251,7 +249,7 @@ void ScaleSpritesAOP::redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* sprite = m_sprites[i];
-		sprite->setScale(m_xScale, m_yScale);
+		sprite->setScale(m_scale.x, m_scale.y);
 	} 
 }
 
@@ -259,8 +257,8 @@ Json::Value ScaleSpritesAOP::storeValues()
 {
 	Json::Value val;
 	val["type"] = AT_SCALE;
-	val["xscale"] = m_xScale;
-	val["yscale"] = m_yScale;
+	val["xscale"] = m_scale.x;
+	val["yscale"] = m_scale.y;
 	for (size_t i = 0, n = m_oldScales.size(); i < n; ++i) {
 		val["old"][i]["x"] = m_oldScales[i].first;
 		val["old"][i]["y"] = m_oldScales[i].second;
@@ -280,7 +278,7 @@ ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xSh
 	m_oldShears.reserve(sprites.size());
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ISprite* sprite = sprites[i];
-		m_oldShears.push_back(std::make_pair(sprite->getShearX(), sprite->getShearY()));
+		m_oldShears.push_back(std::make_pair(sprite->getShear().x, sprite->getShear().y));
 	}
 }
 

@@ -55,7 +55,7 @@ void MeshSprite::loadBodyFromFile()
 	if (!m_symbol) return;
 
 	if (m_body) delete m_body;
-	m_body = BodyFactory::createBody(m_symbol->getVertices(), m_xScale);
+	m_body = BodyFactory::createBody(m_symbol->getVertices(), m_scale.x);
 
 	m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
 }
@@ -72,7 +72,7 @@ void MeshSprite::buildBounding()
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 			rect.combine(vertices[i]);
 
-		rect.scale(m_xScale, m_yScale);
+		rect.scale(m_scale.x, m_scale.y);
 		rect.translate(m_pos);
 		m_bounding->initFromRect(rect);
 		m_bounding->setTransform(m_pos, m_offset, m_angle);
