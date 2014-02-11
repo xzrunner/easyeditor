@@ -37,6 +37,21 @@ namespace eanim
 	{
 		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
 		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		if (m_parent)
+		{
+			d2d::Vector s = getWorldPos();
+			d2d::Vector e = m_sprite->getPosition() * 2 - s;
+
+			const float w = 0.1f;
+			d2d::Vector mid = s + (e-s)*w;
+			d2d::Vector left = mid + d2d::Math::rotateVectorRightAngle(s - mid, false);
+			d2d::Vector right = mid + d2d::Math::rotateVectorRightAngle(s - mid, true);
+
+ 			d2d::PrimitiveDraw::drawLine(s, left, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+ 			d2d::PrimitiveDraw::drawLine(left, e, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+ 			d2d::PrimitiveDraw::drawLine(e, right, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+ 			d2d::PrimitiveDraw::drawLine(right, s, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		}
 	}
 
 	bool Joint::contain(const d2d::Vector& pos) const
