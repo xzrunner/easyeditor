@@ -55,7 +55,7 @@ bool KeyFrame::remove(d2d::ISprite* sprite)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		if (m_sprites[i] == sprite) {
-			delete m_sprites[i];
+			m_sprites[i]->release();
 			m_sprites.erase(m_sprites.begin() + i);
 			return true;
 		}
