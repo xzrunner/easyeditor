@@ -6,6 +6,8 @@
 #include "common/Vector.h"
 #include "common/Rect.h"
 
+namespace love { class Matrix; }
+
 namespace d2d
 {
 	static const float PI = 3.1415926f;
@@ -195,6 +197,8 @@ namespace d2d
 		static Vector rotateVector(const Vector& v, float rad);
 
 		static Vector rotateVectorRightAngle(const Vector& v, bool isTurnLeft);
+
+		static Vector transVector(const Vector& v, const love::Matrix& m);
 
 		static Vector transCoordsLocalToWorld(const Vector& origin, const Vector& xDir, const Vector& local);
 

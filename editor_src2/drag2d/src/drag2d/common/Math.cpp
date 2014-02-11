@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <Triangle/triangle.cpp>
 
+#include "common/Matrix.h"
 #include "algorithms/SGI.h"
 #include "dataset/ChainShape.h"
 
@@ -439,6 +440,15 @@ Vector Math::rotateVectorRightAngle(const Vector& v, bool isTurnLeft)
 		ret.x = v.y;
 		ret.y = -v.x;
 	}
+	return ret;
+}
+
+Vector Math::transVector(const Vector& v, const love::Matrix& m)
+{
+	Vector ret;
+	const float* e = m.getElements();
+	ret.x = e[0] * v.x + e[4] * v.y + e[12];
+	ret.y = e[1] * v.x + e[5] * v.y + e[13];
 	return ret;
 }
 

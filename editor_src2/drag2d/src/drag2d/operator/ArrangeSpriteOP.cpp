@@ -8,6 +8,7 @@
 #include "dataset/AbstractBV.h"
 #include "common/Math.h"
 #include "common/visitors.h"
+#include "common/Matrix.h"
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
@@ -21,13 +22,13 @@ namespace d2d
 
 	template <typename TBase>
 	ArrangeSpriteOP<TBase>::ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/, bool scaleOpen/* = true*/)
+		PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/, bool isDeformOpen/* = true*/)
 		: TBase(editPanel, spritesImpl, propertyPanel, callback)
-		, m_scaleOpen(scaleOpen)
+		, m_isDeformOpen(isDeformOpen)
 		, m_spritesImpl(spritesImpl)
 		, m_propertyPanel(propertyPanel)
 		, m_bRightPress(false)
-		, m_scaling(NULL)
+		, m_selected(NULL)
 		, m_bDirty(false)
 		, m_autoAlignOpen(false)
 	{
@@ -36,7 +37,11 @@ namespace d2d
 
 		m_firstPos.setInvalid();
 
-		m_scaleSelected.setInvalid();
+		m_ctrlNodeSelected.setInvalid();
+
+		m_shearNodeStyle.color.set(0.2f, 0.8f, 0.2f);
+		m_shearNodeStyle.fill = false;
+		m_shearNodeStyle.size = 2;
 	}
 
 	template <typename TBase>
@@ -71,7 +76,7 @@ namespace d2d
 				m_editPanel->addHistoryOP(new arrange_sprite::DeleteSpritesAOP(noPhysicsSprites, m_spritesImpl));
 			}
 			m_spritesImpl->removeSpriteSelection();
-			m_scaling = NULL;
+			m_selected = NULL;
 			break;
 		case 'a': case 'A':
 			translateSprite(Vector(-1, 0));
@@ -125,24 +130,25 @@ namespace d2d
 	bool ArrangeSpriteOP<TBase>::onMouseLeftDown(int x, int y)
 	{
 		m_lastPos = m_editPanel->transPosScreenToProject(x, y);
-		m_scaleSelected.setInvalid();
+		m_ctrlNodeSelected.setInvalid();
 
-		if (m_scaleOpen && m_scaling)
+		if (m_isDeformOpen && m_selected)
 		{
-			std::vector<Vector> quad;
-			m_scaling->getBounding()->getBoundPos(quad);
-			for (size_t i = 0; i < 4; ++i)
+			Vector ctrlNodes[8];
+			getSpriteCtrlNodes(m_selected, ctrlNodes);
+			for (int i = 0; i < 8; ++i)
 			{
-				if (Math::getDistance(quad[i], m_lastPos) < SCALE_NODE_RADIUS)
+				if (Math::getDistance(ctrlNodes[i], m_lastPos) < SCALE_NODE_RADIUS)
 				{
-					m_scaleSelected = m_scaling->getPosition() + (quad[i] - m_scaling->getPosition()) / m_scaling->getScaleX();
+					m_ctrlNodeSelected.pos = ctrlNodes[i];
+					m_ctrlNodeSelected.type = CtrlNodeType(i);
 					return false;
 				}
 			}
 
 			if (isOffsetEnable())
 			{
-				d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();
+				d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
 				if (Math::getDistance(offset, m_lastPos) < SCALE_NODE_RADIUS)
 				{
 					m_selOffset = true;
@@ -256,18 +262,21 @@ namespace d2d
 	{
 		if (TBase::onMouseDrag(x, y)) return true;
 
-		if (m_scaleOpen && m_scaling)
+		if (m_isDeformOpen && m_selected)
 		{
 			Vector pos = m_editPanel->transPosScreenToProject(x, y);
-			if (m_scaleSelected.isValid())
+			if (m_ctrlNodeSelected.isValid())
 			{
-				scaleSprite(pos);
+				if (m_ctrlNodeSelected.type < UP)
+					scaleSprite(pos);
+				else
+					shearSprite(pos);
 				return false;
 			}
 			else if (isOffsetEnable() && m_selOffset)
 			{
-				d2d::Vector offset = Math::rotateVector(pos - m_scaling->getPosition(), -m_scaling->getAngle());
-				m_scaling->setOffset(offset);
+				d2d::Vector offset = Math::rotateVector(pos - m_selected->getPosition(), -m_selected->getAngle());
+				m_selected->setOffset(offset);
 				m_editPanel->Refresh();
 				return false;
 			}
@@ -318,16 +327,18 @@ namespace d2d
 	{
 		if (TBase::onDraw()) return true;
 
-		if (m_scaleOpen && m_scaling)
+		if (m_isDeformOpen && m_selected)
 		{
-			std::vector<Vector> quad;
-			m_scaling->getBounding()->getBoundPos(quad);
-			for (size_t i = 0; i < 4; ++i)
-				PrimitiveDraw::drawCircle(quad[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+			Vector ctrlNodes[8];
+			getSpriteCtrlNodes(m_selected, ctrlNodes);
+			for (int i = 0; i < 4; ++i)
+				PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+			for (int i = 4; i < 8; ++i)
+				PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
 			if (isOffsetEnable())
 			{
-				d2d::Vector offset = m_scaling->getPosition() + m_scaling->getOffset();
+				d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
 				PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 			}
 		}
@@ -347,7 +358,7 @@ namespace d2d
 
 		m_lastPos.setInvalid();
 		m_bRightPress = false;
-		m_scaling = NULL;
+		m_selected = NULL;
 
 		return false;
 	}
@@ -384,18 +395,102 @@ namespace d2d
 	template <typename TBase>
 	void ArrangeSpriteOP<TBase>::scaleSprite(const Vector& currPos)
 	{
-		if (!m_scaleOpen) return;
+		if (!m_isDeformOpen) return;
 
-		const Vector& center = m_scaling->getPosition();
+		const Vector& center = m_selected->getPosition();
 		Vector foot;
-		Math::getFootOfPerpendicular(center, m_scaleSelected, currPos, &foot);
-		const float scale = Math::getDistance(foot, center) / Math::getDistance(m_scaleSelected, center);
-		m_scaling->setScale(scale);
+		Math::getFootOfPerpendicular(center, m_ctrlNodeSelected.pos, currPos, &foot);
+		const float scale = Math::getDistance(foot, center) / Math::getDistance(m_ctrlNodeSelected.pos, center);
+		m_selected->setScale(scale);
 		if (m_propertyPanel && !m_bDirty)
 		{
 			m_propertyPanel->enablePropertyGrid(false);
 			m_bDirty = true;
 		}
+		m_editPanel->Refresh();
+	}
+
+	template <typename TBase>
+	void ArrangeSpriteOP<TBase>::shearSprite(const Vector& currPos)
+	{
+		if (!m_isDeformOpen) return;
+
+		// fix pos
+		Vector pos;
+		Vector ctrls[8];
+		getSpriteCtrlNodes(m_selected, ctrls);
+		if (m_ctrlNodeSelected.type == UP)
+			Math::getFootOfPerpendicular(ctrls[0], ctrls[1], currPos, &pos);
+		else if (m_ctrlNodeSelected.type == DOWN)
+			Math::getFootOfPerpendicular(ctrls[2], ctrls[3], currPos, &pos);
+		else if (m_ctrlNodeSelected.type == LEFT)
+			Math::getFootOfPerpendicular(ctrls[0], ctrls[2], currPos, &pos);
+		else if (m_ctrlNodeSelected.type == RIGHT)
+			Math::getFootOfPerpendicular(ctrls[1], ctrls[3], currPos, &pos);
+
+		// M * p = p'
+		//
+		// x' = e0 * x + e4 * y + e12
+		// y' = e1 * x + e5 * y + e13
+		// 
+		// e0 = c * sx - ky * s * sy
+		// e4 = kx * c * sx - s * sy
+		// e12 = px
+		//
+		// pos.x = (c * sx - ky * s * sy) * x + (kx * c * sx - s * sy) * y + px
+		// pos.y = (s * sx + ky * c * sy) * x + (kx * s * sx + c * sy) * y + py
+		// pos.x = c*sx*x - ky*s*sy*x + kx*c*sx*y - s*sy*y + px
+		// pos.y = s*sx*x + ky*c*sy*x + kx*s*sx*y + c*sy*y + py
+		// 
+		// kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y)
+		// kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y)
+		// ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x)
+		// ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x)
+		float c = cos(m_selected->getAngle()), s = sin(m_selected->getAngle());
+		float sx = m_selected->getScaleX(), sy = m_selected->getScaleY();
+		float px = m_selected->getPosition().x, py = m_selected->getPosition().y;
+		float kx = m_selected->getShearX(),
+			ky = m_selected->getShearY();
+
+		float x, y;
+		float hw = m_selected->getSymbol().getWidth() * 0.5f,
+			hh = m_selected->getSymbol().getHeight() * 0.5f;
+
+		if (m_ctrlNodeSelected.type == UP)
+		{
+			x = 0; y = hh;
+			if (c != 0)
+				kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
+			else
+				kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y);
+		}
+		else if (m_ctrlNodeSelected.type == DOWN)
+		{
+			x = 0; y = -hh;
+			if (c != 0)
+				kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
+			else
+				kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y);
+		}
+		else if (m_ctrlNodeSelected.type == LEFT)
+		{
+			x = -hw; y = 0;
+			if (s != 0)
+				ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x);
+			else
+				ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
+		}
+		else if (m_ctrlNodeSelected.type == RIGHT)
+		{
+			x = hw; y = 0;
+			if (s != 0)
+				ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x);
+			else
+				ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
+		}
+
+		m_selected->setShear(kx, ky);
+
 		m_editPanel->Refresh();
 	}
 
@@ -409,20 +504,20 @@ namespace d2d
 	template <typename TBase>
 	void ArrangeSpriteOP<TBase>::setScalingFromSelected()
 	{
-		if (!m_scaleOpen) return;
+		if (!m_isDeformOpen) return;
 
 		bool refresh = false;
 		if (m_selection->size() == 1)
 		{
-			refresh = m_scaling == NULL;
+			refresh = m_selected == NULL;
 			std::vector<ISprite*> sprites;
 			m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
-			m_scaling = sprites[0];
+			m_selected = sprites[0];
 		}
 		else
 		{
-			refresh = m_scaling != NULL;
-			m_scaling = NULL;
+			refresh = m_selected != NULL;
+			m_selected = NULL;
 		}
 
 		if (refresh) 
@@ -636,6 +731,26 @@ namespace d2d
 			m_autoAlignVer[0].set(srcRight, dst->getPosition().y - LEN);
 			m_autoAlignVer[1].set(srcRight, dst->getPosition().y + LEN);
 		}
+	}
+
+	template <typename TBase>
+	void ArrangeSpriteOP<TBase>::getSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
+	{
+		float hw = sprite->getSymbol().getWidth() * 0.5f;
+		float hh = sprite->getSymbol().getHeight() * 0.5f;
+		love::Matrix t;
+		t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
+			sprite->getScaleX(), sprite->getScaleY(), 0, 0, sprite->getShearX(), sprite->getShearY());
+		// scale
+		nodes[0] = Math::transVector(Vector(-hw,  hh), t);
+		nodes[1] = Math::transVector(Vector( hw,  hh), t);
+		nodes[2] = Math::transVector(Vector(-hw, -hh), t);
+		nodes[3] = Math::transVector(Vector( hw, -hh), t);
+		// shear
+		nodes[4] = Math::transVector(Vector(0.0f,  hh), t);
+		nodes[5] = Math::transVector(Vector(-hw, 0.0f), t);
+		nodes[6] = Math::transVector(Vector( hw, 0.0f), t);
+		nodes[7] = Math::transVector(Vector(0.0f, -hh), t);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

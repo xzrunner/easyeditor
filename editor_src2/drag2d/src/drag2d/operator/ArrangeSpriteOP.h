@@ -5,6 +5,7 @@
 
 #include "interfaces.h"
 #include "dataset/SelectionSet.h"
+#include "render/ShapeStyle.h"
 
 namespace d2d
 {
@@ -19,7 +20,7 @@ namespace d2d
 	public:
 		ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 			PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL,
-			bool scaleOpen = true);
+			bool isDeformOpen = true);
 		virtual ~ArrangeSpriteOP();
 
 		virtual bool onKeyDown(int keyCode);
@@ -39,6 +40,7 @@ namespace d2d
 		virtual void translateSprite(const Vector& delta);
 		virtual void rotateSprite(const Vector& dst);
 		virtual void scaleSprite(const Vector& currPos);
+		virtual void shearSprite(const Vector& currPos);
 
 		virtual void setRightPopupMenu(wxMenu& menu);
 		virtual bool isOffsetEnable() const { return true; };
@@ -48,6 +50,12 @@ namespace d2d
 
 		void autoAlign(const std::vector<ISprite*>& sprites);
 		void autoAlign(const ISprite* src, ISprite* dst);
+
+		// 0 - 3 are scale, 4 - 7 are shear
+		// 0 4 1
+		// 5   6
+		// 2 7 3
+		static void getSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8]);
 
 	private:
 		class TranslateVisitor : public IVisitor
@@ -84,22 +92,53 @@ namespace d2d
 		SpriteSelection* m_selection;
 		Vector m_lastPos;
 
-		ISprite* m_scaling;
+		ISprite* m_selected;
 
 		Vector m_firstPos;
 
 	private:
-		bool m_scaleOpen;
+		// 0 4 1
+		// 5   6
+		// 2 7 3
+		enum CtrlNodeType
+		{
+			LEFT_UP = 0,
+			RIGHT_UP,
+			LEFT_DOWN,
+			RIGHT_DOWN,
+			UP,
+			LEFT,
+			RIGHT,
+			DOWN
+		};
+
+		struct CtrlNode
+		{
+			Vector pos;
+			CtrlNodeType type;
+
+			void setInvalid() {
+				pos.setInvalid();
+			}
+			bool isValid() {
+				return pos.isValid();
+			}
+		};
+		
+	private:
+		bool m_isDeformOpen;
 
 		bool m_bRightPress;
 
-		Vector m_scaleSelected;
+		CtrlNode m_ctrlNodeSelected;
 		bool m_selOffset;
 
 		bool m_bDirty;
 
 		bool m_autoAlignOpen;
 		Vector m_autoAlignHor[2], m_autoAlignVer[2];
+
+		ShapeStyle m_shearNodeStyle;
 
 		friend class SpritePropertySetting;
 
