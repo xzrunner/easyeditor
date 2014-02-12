@@ -87,6 +87,17 @@ namespace eanim
 		}
 	}
 
+	bool SkeletonOP::onDraw() const
+	{
+		if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw()) 
+			return true;
+
+		StagePanel* panel = static_cast<StagePanel*>(m_editPanel);
+		panel->getSkeletonData().draw();
+
+		return false;
+	}
+
 	void SkeletonOP::translateSprite(const d2d::Vector& delta)
 	{
 		d2d::ArrangeSpriteOP<SelectSpritesOP>::translateSprite(delta);

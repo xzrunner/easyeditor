@@ -19,6 +19,8 @@ namespace eanim
 
 		virtual bool onPopMenuSelected(int type);
 
+		virtual bool onDraw() const;
+
 	protected:
 		virtual void translateSprite(const d2d::Vector& delta);
 		virtual void rotateSprite(const d2d::Vector& dst);
