@@ -81,18 +81,18 @@ namespace eanim
 		return d2d::Math::rotateVector(pos - m_sprite->getPosition(), -m_sprite->getAngle());
 	}
 
-	void Joint::translate(const d2d::Vector& offset)
-	{
-		m_sprite->translate(offset);
-	}
-
-	void Joint::connect(Joint* joint)
+	bool Joint::connect(Joint* joint)
 	{
 		std::set<Joint*>::iterator itr = joint->m_children.find(this);
 		if (itr == joint->m_children.end())
 		{
 			joint->m_parent = this;
 			m_children.insert(joint);
+			return true;
+		}
+		else
+		{
+			return false;
 		}
 	}
 

@@ -2,6 +2,8 @@
 
 #include "dataset/Joint.h"
 
+#include <queue>
+
 namespace eanim
 {
 	SkeletonData::~SkeletonData()
@@ -187,9 +189,13 @@ namespace eanim
 					if (p->intersect(cp))
 					{
 						d2d::Vector pp = p->getWorldPos();
-						c->translate(pp - cp);
-						p->connect(c);
-						return;
+						bool success = p->connect(c);
+						if (success) {
+							translate(c->m_sprite, pp - cp);
+
+//							c->translate(pp - cp);
+							return;
+						}
 					}
 				}
 				c->deconnect();
@@ -245,6 +251,38 @@ namespace eanim
 			for (int i = 0, n = itr->second.size(); i < n; ++i)
 				delete itr->second[i];
 		m_mapJoints.clear();
+	}
+
+	void SkeletonData::translate(d2d::ISprite* sprite, const d2d::Vector& offset)
+	{
+		std::set<d2d::ISprite*> sprites;
+		std::queue<d2d::ISprite*> buf;
+		buf.push(sprite);
+		while (!buf.empty())
+		{
+			d2d::ISprite* curr = buf.front(); buf.pop();
+			sprites.insert(curr);
+
+			std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
+				= m_mapJoints.find(curr);
+			assert(itr != m_mapJoints.end());
+			for (int i = 0, n = itr->second.size(); i < n; ++i)
+			{
+				Joint* j = itr->second[i];
+
+				std::set<Joint*>::iterator itr_child = j->m_children.begin();
+				for ( ; itr_child != j->m_children.end(); ++itr_child)
+				{
+					d2d::ISprite* child = (*itr_child)->m_sprite;
+					if (sprites.find(child) == sprites.end())
+						buf.push(child);
+				}
+			}
+		}
+
+		std::set<d2d::ISprite*>::iterator itr = sprites.begin();
+		for ( ; itr != sprites.end(); ++itr)
+			(*itr)->translate(offset);
 	}
 
 	d2d::ISprite* SkeletonData::getSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name)

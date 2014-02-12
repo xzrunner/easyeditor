@@ -31,6 +31,8 @@ namespace eanim
 	private:
 		void clean();
 
+		void translate(d2d::ISprite* sprite, const d2d::Vector& offset);
+
 		static d2d::ISprite* getSpriteByName(const std::vector<d2d::ISprite*>& sprites, const std::string& name);
 
 	private:

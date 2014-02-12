@@ -22,9 +22,7 @@ namespace eanim
 		d2d::Vector getWorldPos() const;
 		d2d::Vector getRelativePos(const d2d::Vector& pos) const;
 
-		void translate(const d2d::Vector& offset);
-
-		void connect(Joint* joint);
+		bool connect(Joint* joint);
 		void deconnect();
 
 	private:
