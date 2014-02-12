@@ -1,6 +1,6 @@
 
 {
-	"name" : "chat_window",
+	"name" : "guild_tab",
 	"redo" : null,
 	"sprite" : 
 	[
@@ -9,13 +9,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "chat_window_bg_complex.json",
+			"filepath" : "guild_tab_chat_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "tab1",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 63.0,
+				"y" : -20.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -30,34 +30,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "chat_expand_btn_in_complex.json",
+			"filepath" : "guild_tab_fight_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "hide_button",
+			"name" : "tab2",
 			"position" : 
 			{
-				"x" : 411.0,
-				"y" : -285.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "chat_expand_btn_out_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "show_button",
-			"position" : 
-			{
-				"x" : 411.0,
-				"y" : -285.0
+				"x" : 274.0,
+				"y" : -20.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -68,7 +47,29 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : [ null, null ],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -27.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -27.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		}
+	],
 	"xmax" : 0.0,
 	"xmin" : 0.0,
 	"ymax" : 0.0,

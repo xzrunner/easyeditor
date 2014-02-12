@@ -5,16 +5,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "2098_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.299999952316284,
 			"x shear" : 0.0,
@@ -24,16 +26,25 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "entry_number_big_fontblank.json",
-			"multi color" : "",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"label_height" : 24,
+			"label_width" : 60,
+			"multi color" : "0xffffffff",
 			"name" : "entry_number",
 			"position" : 
 			{
 				"x" : -1.0,
 				"y" : 4.0
 			},
+			"size" : 18,
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,

@@ -5,16 +5,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_expand_btn.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -24,16 +26,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_expand_arrow.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : true,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -43,16 +47,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "number_of_entrys_big_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "number_of_entrys",
 			"position" : 
 			{
 				"x" : 16.0,
 				"y" : 46.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,

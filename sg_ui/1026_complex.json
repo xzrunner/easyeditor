@@ -18,9 +18,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.521126747131348,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.515789508819580,
 			"y shear" : 0.0
 		}

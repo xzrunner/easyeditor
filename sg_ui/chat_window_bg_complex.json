@@ -5,16 +5,18 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 4.712388992309570,
+			"clip" : false,
 			"filepath" : "6313-diban-9-2.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 374.0,
 				"y" : -1024.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 515.0,
 			"x shear" : 0.0,
@@ -24,16 +26,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_expand_bg.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 410.0,
 				"y" : -285.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
@@ -43,16 +47,18 @@
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6313-diban-9-5.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 170.0,
 				"y" : -1024.0
 			},
+			"tag" : "",
 			"x mirror" : false,
 			"x scale" : 10.0,
 			"x shear" : 0.0,

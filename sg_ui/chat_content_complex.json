@@ -25,9 +25,11 @@
 			"size" : 14,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}

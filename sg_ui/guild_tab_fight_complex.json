@@ -8,9 +8,9 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "tab_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "tab_background",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -18,12 +18,10 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
+			"y scale" : 1.295238137245178,
 			"y shear" : 0.0
 		},
 		
@@ -31,22 +29,20 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6105-tongyong-1.png",
+			"filepath" : "6113-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 9.0,
+				"y" : 58.250
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		}
 	]
