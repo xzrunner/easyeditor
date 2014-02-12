@@ -1,7 +1,7 @@
 
 {
 	"align" : 2.0,
-	"color" : "4294967295",
+	"color" : "0xffffffff",
 	"font" : "",
 	"height" : 36.0,
 	"name" : "hb_text",
