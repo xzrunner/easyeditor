@@ -96,23 +96,28 @@ void KeyFrame::clear()
 	m_sprites.clear();
 }
 
-void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process)
+void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end, 
+							   std::vector<d2d::ISprite*>& tween, float process) const
 {
 	for (int i = 0, n = start->size(); i < n; ++i)
 	{
 		d2d::ISprite* s = start->m_sprites[i];
 		for (int j = 0, m = end->size(); j < m; ++j) {
 			d2d::ISprite* e = end->m_sprites[j];
-			if (s->name == e->name) {
+			if (s->name == e->name && !m_skeletonData.isContainSprite(s)) {
 				d2d::ISprite* mid = s->clone();
 				getTweenSprite(s, e, mid, process);
 				tween.push_back(mid);
 			}
 		}
 	}
+
+	SkeletonData::getTweenSprites(const_cast<KeyFrame*>(start)->getSkeletonData(), 
+		const_cast<KeyFrame*>(end)->getSkeletonData(), tween, process);
 }
 
-void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process)
+void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 
+							  d2d::ISprite* tween, float process) const
 {
 	d2d::Vector offset = (end->getPosition() - start->getPosition()) * process;
 	float delta = (end->getAngle() - start->getAngle()) * process;

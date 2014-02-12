@@ -16,6 +16,7 @@ namespace eanim
 			const SkeletonData& skeleton);
 
 		void removeSprite(d2d::ISprite* sprite);
+		bool isContainSprite(d2d::ISprite* sprite) const;
 
 		void insertJoint(d2d::ISprite* sprite, const d2d::Vector& pos);
 		void removeJoint(d2d::Vector& pos);
@@ -27,6 +28,9 @@ namespace eanim
 		void absorb(d2d::ISprite* sprite);
 		void fixJoint(d2d::ISprite* sprite);
 		void updateJoint(d2d::ISprite* sprite, float dAngle = 0);
+
+		static void getTweenSprites(const SkeletonData& start, const SkeletonData& end, 
+			std::vector<d2d::ISprite*>& tween, float process);
 
 	private:
 		void clean();

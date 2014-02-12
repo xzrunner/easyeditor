@@ -90,7 +90,7 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 			float process = (float) (m_currFrame - currFrame->getTime()) / (nextFrame->getTime() - currFrame->getTime());
 //			libanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
 
-			KeyFrame::getTweenSprites(currFrame, nextFrame, sprites, process);
+			currFrame->getTweenSprites(currFrame, nextFrame, sprites, process);
 		}
 	}
 }

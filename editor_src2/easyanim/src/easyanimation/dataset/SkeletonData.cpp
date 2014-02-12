@@ -104,6 +104,11 @@ namespace eanim
 		}
 	}
 
+	bool SkeletonData::isContainSprite(d2d::ISprite* sprite) const
+	{
+		return m_mapJoints.find(sprite) != m_mapJoints.end();
+	}
+
 	void SkeletonData::insertJoint(d2d::ISprite* sprite, const d2d::Vector& pos)
 	{
 		std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr 
@@ -239,6 +244,32 @@ namespace eanim
 				if (dAngle != 0)
 					c->m_sprite->rotate(dAngle);
 				updateJoint(c->m_sprite, dAngle);
+			}
+		}
+	}
+
+	void SkeletonData::getTweenSprites(const SkeletonData& start, const SkeletonData& end, 
+		std::vector<d2d::ISprite*>& tween, float process)
+	{
+		std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr_s
+			= start.m_mapJoints.begin();
+		for ( ; itr_s != start.m_mapJoints.end(); ++itr_s)
+		{
+			d2d::ISprite* s = itr_s->first;
+			std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr_e
+				= end.m_mapJoints.begin();
+			for ( ; itr_e != end.m_mapJoints.end(); ++itr_e)
+			{
+				if (s->name == itr_e->first->name)
+				{
+					d2d::ISprite* e = itr_e->first;
+					d2d::ISprite* mid = s->clone();
+					float delta = (e->getAngle() - s->getAngle()) * process;
+					mid->rotate(delta);
+//					updateJoint();
+					tween.push_back(mid);
+					break;
+				}
 			}
 		}
 	}

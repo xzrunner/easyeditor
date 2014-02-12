@@ -56,10 +56,10 @@ namespace eanim
 
 		SkeletonData& getSkeletonData() { return m_skeletonData; }
 
-		static void getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process);
+		void getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process) const;
 
 	private:
-		static void getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process);
+		void getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
 
 	private:
 		int m_time;
