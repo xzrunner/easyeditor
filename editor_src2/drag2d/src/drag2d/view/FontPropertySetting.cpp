@@ -29,7 +29,7 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	}
 	else if (name == wxT("Align")) 
 		sprite->align = AlignType(wxANY_AS(value, int));
-	else if (name == wxT("Size"))
+	else if (name == wxT("FontSize"))
 		sprite->size = wxANY_AS(value, float);
 	else if (name == wxT("LabelWidth")) {
 		sprite->width = wxANY_AS(value, float);
@@ -52,7 +52,7 @@ void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool b
 	pg->GetProperty(wxT("Font"))->Enable(bEnable);
 	pg->GetProperty(wxT("Color"))->Enable(bEnable);
 	pg->GetProperty(wxT("Align"))->Enable(bEnable);
-	pg->GetProperty(wxT("Size"))->Enable(bEnable);
+	pg->GetProperty(wxT("FontSize"))->Enable(bEnable);
 	pg->GetProperty(wxT("LabelWidth"))->Enable(bEnable);
 	pg->GetProperty(wxT("LabelHeight"))->Enable(bEnable);
 	pg->GetProperty(wxT("Filename"))->Enable(bEnable);
@@ -69,7 +69,7 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->SetPropertyValueString(wxT("Color"), col.GetAsString());
 
 	pg->GetProperty(wxT("Align"))->SetValue(ALIGN_LABELS[sprite->align]);
-	pg->GetProperty(wxT("Size"))->SetValue(sprite->size);
+	pg->GetProperty(wxT("FontSize"))->SetValue(sprite->size);
 	pg->GetProperty(wxT("LabelWidth"))->SetValue(sprite->width);
 	pg->GetProperty(wxT("LabelHeight"))->SetValue(sprite->height);
 	pg->GetProperty(wxT("Filename"))->SetValue(sprite->filename);
@@ -88,8 +88,10 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxColourProperty(wxT("Color"), wxPG_LABEL, col));
 	pg->SetPropertyAttribute("Color", "HasAlpha", true);
 
-	pg->Append(new wxEnumProperty(wxT("Align"), wxPG_LABEL, ALIGN_LABELS));
-	pg->Append(new wxFloatProperty(wxT("Size"), wxPG_LABEL, sprite->size));
+	wxEnumProperty* alignProp = new wxEnumProperty(wxT("Align"), wxPG_LABEL, ALIGN_LABELS);
+	alignProp->SetValue(ALIGN_LABELS[sprite->align]);
+	pg->Append(alignProp);
+	pg->Append(new wxFloatProperty(wxT("FontSize"), wxPG_LABEL, sprite->size));
 	pg->Append(new wxFloatProperty(wxT("LabelWidth"), wxPG_LABEL, sprite->width));
 	pg->Append(new wxFloatProperty(wxT("LabelHeight"), wxPG_LABEL, sprite->height));
 	pg->Append(new wxStringProperty(wxT("Filename"), wxPG_LABEL, sprite->filename));
