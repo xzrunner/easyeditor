@@ -28,9 +28,14 @@ namespace eanim
 		void deconnect();
 
 	private:
+		void createId();
+
+	private:
 		static const int REGION;
 
 	private:
+		int m_id;
+
 		d2d::ISprite* m_sprite;
 
 		d2d::Vector m_relative;
@@ -40,6 +45,7 @@ namespace eanim
 		std::set<Joint*> m_children;
 
 		friend class SkeletonData;
+		friend class FileIO;
 
 	}; // Joint
 }

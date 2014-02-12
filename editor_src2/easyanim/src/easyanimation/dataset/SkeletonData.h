@@ -36,6 +36,8 @@ namespace eanim
 	private:
 		std::map<d2d::ISprite*, std::vector<Joint*> > m_mapJoints;
 
+		friend class FileIO;
+
 	}; // SkeletonData
 }
 

@@ -9,6 +9,7 @@ namespace eanim
 		, m_parent(NULL)
 	{
 		m_relativeAngle = 0;
+		createId();
 	}
 
 	Joint::Joint(d2d::ISprite* sprite, const d2d::Vector& pos)
@@ -17,6 +18,7 @@ namespace eanim
 	{
 		setPosition(pos);
 		m_relativeAngle = sprite->getAngle();
+		createId();
 	}
 
 	Joint::~Joint()
@@ -101,5 +103,11 @@ namespace eanim
 			m_parent->m_children.erase(this);
 			m_parent = NULL;
 		}
+	}
+
+	void Joint::createId()
+	{
+		static int id = 0;
+		m_id = ++id;
 	}
 }

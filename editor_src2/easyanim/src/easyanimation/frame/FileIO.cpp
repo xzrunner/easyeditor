@@ -3,6 +3,7 @@
 
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
+#include "dataset/Joint.h"
 #include "view/ToolbarPanel.h"
 #include "view/LayersPanel.h"
 #include "view/StagePanel.h"
@@ -212,8 +213,11 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dlg)
 	while (!actorValue.isNull()) {
 		d2d::ISprite* actor = loadActor(actorValue, dlg);
 		frame->insert(actor);
+		actor->release();
 		actorValue = frameValue["actor"][i++];
 	}
+
+	loadSkeleton(frameValue["skeleton"], frame->getAllSprites(), frame->getSkeletonData());
 
 	return frame;
 }
@@ -252,6 +256,89 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 	sprite->load(actorValue);
 
 	return sprite;
+}
+
+void FileIO::loadSkeleton(const Json::Value& skeletonValue, const std::vector<d2d::ISprite*>& sprites,
+						  SkeletonData& skeleton)
+{
+	// prepare joints
+	std::map<int, Joint*> mapJoint;
+	
+	int i = 0;
+	Json::Value jointsVal = skeletonValue[i++];
+	while (!jointsVal.isNull()) {
+		std::string spriteName = jointsVal["sprite"].asString();
+		d2d::ISprite* sprite = NULL;
+		for (int i = 0, n = sprites.size(); i < n; ++i)
+		{
+			if (sprites[i]->name == spriteName) 
+			{
+				sprite = sprites[i];
+				break;
+			}
+		}
+		assert(sprite);
+		
+		int j = 0;
+		Json::Value jointVal = jointsVal["joints"][j++];
+		while (!jointVal.isNull()) {
+			Joint* joint = new Joint(sprite);			
+			joint->m_id = jointVal["id"].asInt();
+			joint->m_relative.x = jointVal["rx"].asDouble();
+			joint->m_relative.y = jointVal["ry"].asDouble();
+			mapJoint.insert(std::make_pair(joint->m_id, joint));
+
+			jointVal = jointsVal["joints"][j++];
+		}
+		jointsVal = skeletonValue[i++];
+	}
+
+	// skeleton
+	i = 0;
+	jointsVal = skeletonValue[i++];
+	while (!jointsVal.isNull()) {
+		std::string spriteName = jointsVal["sprite"].asString();
+		d2d::ISprite* sprite = NULL;
+		for (int i = 0, n = sprites.size(); i < n; ++i)
+		{
+			if (sprites[i]->name == spriteName) 
+			{
+				sprite = sprites[i];
+				break;
+			}
+		}
+		assert(sprite);
+
+		std::vector<Joint*> joints;
+
+		int j = 0;
+		Json::Value jointVal = jointsVal["joints"][j++];
+		while (!jointVal.isNull()) {
+			int joint_id = jointVal["id"].asInt();
+			std::map<int, Joint*>::iterator itr = mapJoint.find(joint_id);
+			assert(itr != mapJoint.end());
+			Joint* joint = itr->second;
+			if (!jointVal["parent"].isNull()) {
+				itr = mapJoint.find(jointVal["parent"].asInt());
+				assert(itr != mapJoint.end());
+				joint->m_parent = itr->second;
+			}
+			if (!jointVal["children"].isNull()) {
+				int k = 0;
+				Json::Value childVal = jointVal["children"][k++];
+				while (!childVal.isNull()) {
+					itr = mapJoint.find(childVal.asInt());
+					assert(itr != mapJoint.end());
+					joint->m_children.insert(itr->second);
+					childVal = jointVal["children"][k++];
+				}
+			}
+			joints.push_back(joint);
+			jointVal = jointsVal["joints"][j++];
+		}
+		skeleton.m_mapJoints.insert(std::make_pair(sprite, joints));
+		jointsVal = skeletonValue[i++];
+	}
 }
 
 Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
@@ -347,6 +434,8 @@ Json::Value FileIO::store(KeyFrame* frame, const wxString& dlg)
 	for (size_t i = 0, n = frame->size(); i < n; ++i)
 		value["actor"][i] = store(frame->getSprite(i), dlg);
 
+	value["skeleton"] = storeSkeleton(frame->getSkeletonData());
+
 	return value;
 }
 
@@ -362,6 +451,36 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dlg)
 			sprite->getSymbol().getFilepath()).ToStdString();
 
 	sprite->store(value);
+
+	return value;
+}
+
+Json::Value FileIO::storeSkeleton(const SkeletonData& skeleton)
+{
+	Json::Value value;
+
+	std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr
+		= skeleton.m_mapJoints.begin();
+	for (int i = 0; itr != skeleton.m_mapJoints.end(); ++itr, ++i)
+	{
+		value[i]["sprite"] = itr->first->name;
+		for (int j = 0, m = itr->second.size(); j < m; ++j)
+		{
+			Joint* joint = itr->second[j];
+
+			Json::Value jointVal;
+			jointVal["id"] = joint->m_id;
+			jointVal["rx"] = joint->m_relative.x;
+			jointVal["ry"] = joint->m_relative.y;
+			if (joint->m_parent)
+				jointVal["parent"] = joint->m_parent->m_id;
+			std::set<Joint*>::iterator itr_child = joint->m_children.begin();
+			for (int k = 0; itr_child != joint->m_children.end(); ++itr_child, ++k)
+				jointVal["children"][k] = (*itr_child)->m_id;
+
+			value[i]["joints"][j] = jointVal;
+		}
+	}
 
 	return value;
 }

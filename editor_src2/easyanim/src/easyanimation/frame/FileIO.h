@@ -9,6 +9,7 @@ namespace eanim
 {
 	class Layer;
 	class KeyFrame;
+	class SkeletonData;
 
 	class FileIO
 	{
@@ -29,6 +30,8 @@ namespace eanim
 			const wxString& dlg);
 		static d2d::ISprite* loadActor(const Json::Value& actorValue,
 			const wxString& dlg);
+		static void loadSkeleton(const Json::Value& skeletonValue, 
+			const std::vector<d2d::ISprite*>& sprites, SkeletonData& skeleton);
 
 		static Layer* loadLayer(rapidxml::xml_node<>* layerNode, 
 			const std::map<std::string, std::string>& mapNamePath);
@@ -40,6 +43,7 @@ namespace eanim
 		static Json::Value store(Layer* layer, const wxString& dlg);
 		static Json::Value store(KeyFrame* frame, const wxString& dlg);
 		static Json::Value store(const d2d::ISprite* sprite, const wxString& dlg);
+		static Json::Value storeSkeleton(const SkeletonData& skeleton);
 
 	private:
 		static std::string filepath;
