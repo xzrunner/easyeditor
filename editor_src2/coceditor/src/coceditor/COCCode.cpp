@@ -541,18 +541,49 @@ void COCCode::resolveAnimation(const complex::Symbol* symbol)
 			others.push_back(sprite);
 		else
 		{
-			std::map<std::string, std::vector<d2d::ISprite*> >::iterator itr = 
-				map_actions.find(sprite->tag);
-			if (itr == map_actions.end())
+			std::vector<std::string> tags;
+
+			// split
+			char * cstr = new char [sprite->tag.length()+1];
+			std::strcpy(cstr, sprite->tag.c_str());
+			char * p = std::strtok(cstr,";");
+			while (p!=0)
 			{
-				std::vector<d2d::ISprite*> sprites;
-				sprites.push_back(sprite);
-				map_actions.insert(std::make_pair(sprite->tag, sprites));
+				tags.push_back(std::string(p));
+				p = strtok(NULL,";");
 			}
-			else
+			delete[] cstr;
+
+			for (int i = 0, n = tags.size(); i < n; ++i)
 			{
-				itr->second.push_back(sprite);
+				std::map<std::string, std::vector<d2d::ISprite*> >::iterator itr = 
+					map_actions.find(tags[i]);
+				if (itr == map_actions.end())
+				{
+					std::vector<d2d::ISprite*> sprites;
+					sprites.push_back(sprite);
+					map_actions.insert(std::make_pair(tags[i], sprites));
+				}
+				else
+				{
+					itr->second.push_back(sprite);
+				}
 			}
+
+			//////////////////////////////////////////////////////////////////////////
+
+// 			std::map<std::string, std::vector<d2d::ISprite*> >::iterator itr = 
+// 				map_actions.find(sprite->tag);
+// 			if (itr == map_actions.end())
+// 			{
+// 				std::vector<d2d::ISprite*> sprites;
+// 				sprites.push_back(sprite);
+// 				map_actions.insert(std::make_pair(sprite->tag, sprites));
+// 			}
+// 			else
+// 			{
+// 				itr->second.push_back(sprite);
+// 			}
 		}
 	}
 
