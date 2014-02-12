@@ -44,6 +44,19 @@ Frame::Frame(const wxString& title)
 	initWorkingFrame();
 }
 
+void Frame::initWithFile(const wxString& path)
+{
+	clear();
+	m_currFilename = path;
+	SetTitle(path);
+	try {
+		FileIO::load(m_currFilename);
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
+	}
+}
+
 void Frame::onNew(wxCommandEvent& event)
 {
 	setCurrFilename();

@@ -90,6 +90,8 @@ deprecated
 /editor_src2/easyshape/platform/msvc2008/easyshape
 /editor_src2/easyshape/platform/msvc2008/libshape
 /editor_src2/easyshape/src/easyshape
+/editor_src2/easydb/platform/msvc2008/easydb
+/editor_src2/easydb/platform/msvc2008/easydb_cl
 /editor_src2/drag2d/src/common/libpng/contrib
 /editor_src2/libraries/lua-5.2.3/doc
 /editor_src2/libraries/lua-5.2.3/lua

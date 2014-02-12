@@ -13,6 +13,8 @@ namespace eanim
 	public:
 		Frame(const wxString& title);
 
+		void initWithFile(const wxString& path);
+
 	private:
 		void onNew(wxCommandEvent& event);
 		void onOpen(wxCommandEvent& event);
