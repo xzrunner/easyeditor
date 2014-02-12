@@ -25,6 +25,8 @@ namespace d2d
 
 		void setBgColor(const Colorf& color);
 
+		void SetCurrentCanvas();
+
 	protected:
 		virtual void initGL();
 		virtual void onSize(int w, int h) = 0;

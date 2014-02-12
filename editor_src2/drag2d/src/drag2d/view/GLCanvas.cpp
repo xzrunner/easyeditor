@@ -53,6 +53,11 @@ void GLCanvas::setBgColor(const Colorf& color)
 	m_bgColor = color;
 }
 
+void GLCanvas::SetCurrentCanvas()
+{
+	SetCurrent(*m_context);
+}
+
 void GLCanvas::initGL()
 {
 	resetViewport();

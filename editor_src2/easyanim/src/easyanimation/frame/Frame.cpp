@@ -46,6 +46,9 @@ Frame::Frame(const wxString& title)
 
 void Frame::initWithFile(const wxString& path)
 {
+	StagePanel* stage = static_cast<StagePanel*>(Context::Instance()->stage);
+	stage->getCanvas()->SetCurrentCanvas();
+	
 	clear();
 	m_currFilename = path;
 	SetTitle(path);

@@ -15,7 +15,10 @@ namespace d2d
 		assert(pixel_data);
 
 		if (texture == 0)
+		{
 			glGenTextures(1,(GLuint*)&texture);
+			assert(texture);
+		}
 
 		glBindTexture(GL_TEXTURE_2D, texture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
