@@ -1075,36 +1075,10 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 	}
 	else
 	{
-// 		// translate
-// 		d2d::Vector center = sprite->getCenter();
-// 		mat[4] = center.x;
-// 		mat[5] = center.y;
-// 
-// 		// scale
-// 		mat[0] *= sprite->getScale().x;
-// 		mat[3] *= sprite->getScale().y;
-// 		mat[1] *= sprite->getScale().y;
-// 		mat[2] *= sprite->getScale().x;
-// 
-// 		// rotate
-// 		mat[0] = cos(-sprite->getAngle());
-// 		mat[1] = sin(-sprite->getAngle());
-// 		mat[2] = -mat[1];
-// 		mat[3] = mat[0];
-// 
-// 		// shear
-// 		float m0 = mat[0], m1 = mat[1], m2 = mat[2], m3 = mat[3];
-// 		mat[0] = m0 + m1 * sprite->getShear().y;
-// 		mat[1] = m0 * sprite->getShear().x + m1;
-// 		mat[2] = m2 + m3 * sprite->getShear().y;
-// 		mat[3] = m2 * sprite->getShear().x + m3;
-// 
-// 		// mirror
-// 		bool xMirror, yMirror;
-// 		sprite->getMirror(xMirror, yMirror);
-// 		if (xMirror) mat[0] = -mat[0];
-// 		if (yMirror) mat[3] = -mat[3];
-
+		// | 1  kx    | | sx       | |  c  s    | | 1       |
+		// | ky  1    | |    sy    | | -s  c    | |    1    |
+		// |        1 | |        1 | |        1 | | x  y  1 |
+		//     skew        scale        rotate        move
 		float x = sprite->getCenter().x,
 			y = sprite->getCenter().y;
 		float sx = sprite->getScale().x,
@@ -1117,11 +1091,10 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 			s = sin(-sprite->getAngle());
 		float kx = sprite->getShear().x,
 			ky = sprite->getShear().y;
-
-		mat[0] = c*sx - kx*s*sx;
-		mat[1] = s*sy + kx*c*sy;
-		mat[2] = ky*c*sx - s*sx;
-		mat[3] = ky*s*sy + c*sy;
+		mat[0] = sx*c - kx*sy*s;
+		mat[1] = sx*s + kx*sy*c;
+		mat[2] = ky*sx*c - sy*s;
+		mat[3] = ky*sx*s + sy*c;
 		mat[4] = x;
 		mat[5] = y;
 	}
