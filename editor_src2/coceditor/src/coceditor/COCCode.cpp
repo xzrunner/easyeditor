@@ -1080,17 +1080,17 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		mat[4] = center.x;
 		mat[5] = center.y;
 
-		// rotate
-		mat[0] = cos(-sprite->getAngle());
-		mat[1] = sin(-sprite->getAngle());
-		mat[2] = -mat[1];
-		mat[3] = mat[0];
-
 		// scale
 		mat[0] *= sprite->getScale().x;
 		mat[3] *= sprite->getScale().y;
 		mat[1] *= sprite->getScale().y;
 		mat[2] *= sprite->getScale().x;
+
+		// rotate
+		mat[0] = cos(-sprite->getAngle());
+		mat[1] = sin(-sprite->getAngle());
+		mat[2] = -mat[1];
+		mat[3] = mat[0];
 
 		// shear
 		float m0 = mat[0], m1 = mat[1], m2 = mat[2], m3 = mat[3];
