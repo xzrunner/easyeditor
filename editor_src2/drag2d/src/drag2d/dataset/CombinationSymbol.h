@@ -38,7 +38,6 @@ namespace d2d
  		const std::vector<ISprite*>& getChildren() const {
  			return m_sprites;
  		}
-		const Rect& getRect() const { return m_rect; }
 
 	protected:
 		virtual void loadResources();
