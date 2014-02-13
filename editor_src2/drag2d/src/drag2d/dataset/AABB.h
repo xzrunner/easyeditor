@@ -44,8 +44,6 @@ namespace d2d
 
 		virtual void getBoundPos(std::vector<Vector>& bound) const;
 
-		const Rect& getRect() const;
-
 	private:
 		Rect m_rect;
 		Vector m_position;
@@ -78,11 +76,6 @@ namespace d2d
 		Rect r(rect);
 		r.translate(-m_position);
 		m_rect.combine(r);
-	}
-
-	inline const Rect& AABB::getRect() const
-	{
-		return m_rect;
 	}
 }
 

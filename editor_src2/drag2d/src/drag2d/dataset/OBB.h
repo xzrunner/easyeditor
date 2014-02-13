@@ -44,9 +44,6 @@ namespace d2d
 
 		virtual void getBoundPos(std::vector<Vector>& bound) const;
 
-// 		const Rect& getRect() const;
-// 		float getAngle() const;
-
 	private:
 		void transToAABB();
 
@@ -89,15 +86,5 @@ namespace d2d
 		r.translate(-m_position);
 		m_rect.combine(r);
 	}
-
-// 	inline const Rect& OBB::getRect() const
-// 	{
-// 		return m_rect;
-// 	}
-// 
-// 	inline float OBB::getAngle() const
-// 	{
-// 		return m_angle;
-// 	}
 }
 
