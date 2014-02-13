@@ -70,17 +70,17 @@ namespace d2d
 
 		void shear(float xShear, float yShear)
 		{
-			// y' = x + y*ky
-			// x' = x*kx + y
+			// x' = x + y*kx
+			// y' = x*ky + y
 			Vector v[4];
-			v[0].y = xMin + yMin*yShear;
-			v[0].x = xMin*xShear + yMin;
-			v[1].y = xMax + yMin*yShear;
-			v[1].x = xMax*xShear + yMin;
-			v[2].y = xMax + yMax*yShear;
-			v[2].x = xMax*xShear + yMax;
-			v[3].y = xMin + yMax*yShear;
-			v[3].x = xMin*xShear + yMax;
+			v[0].x = xMin + yMin*xShear;
+			v[0].y = xMin*yShear + yMin;
+			v[1].x = xMax + yMin*xShear;
+			v[1].y = xMax*yShear + yMin;
+			v[2].x = xMax + yMax*xShear;
+			v[2].y = xMax*yShear + yMax;
+			v[3].x = xMin + yMax*xShear;
+			v[3].y = xMin*yShear + yMax;
 			for (int i = 0; i < 4; ++i)
 			{
 				if (v[i].x < xMin)
