@@ -12,6 +12,7 @@ namespace eanim
 	public:
 		~SkeletonData();
 
+		void copyFrom(const SkeletonData& skeleton);
 		void copyFrom(const std::vector<d2d::ISprite*>& sprites,
 			const SkeletonData& skeleton);
 
@@ -29,7 +30,7 @@ namespace eanim
 		void fixJoint(d2d::ISprite* sprite);
 		void updateJoint(d2d::ISprite* sprite, float dAngle = 0);
 
-		static void getTweenSprites(const SkeletonData& start, const SkeletonData& end, 
+		static void getTweenSprites(SkeletonData& start, SkeletonData& end, 
 			std::vector<d2d::ISprite*>& tween, float process);
 
 	private:

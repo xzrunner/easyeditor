@@ -112,8 +112,9 @@ void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end,
 		}
 	}
 
-	SkeletonData::getTweenSprites(const_cast<KeyFrame*>(start)->getSkeletonData(), 
-		const_cast<KeyFrame*>(end)->getSkeletonData(), tween, process);
+  	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->getSkeletonData(),
+  		&e_skeleton = const_cast<KeyFrame*>(end)->getSkeletonData();
+	SkeletonData::getTweenSprites(s_skeleton, e_skeleton, tween, process);
 }
 
 void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 

@@ -11,6 +11,17 @@ namespace eanim
 		clean();
 	}
 
+	void SkeletonData::copyFrom(const SkeletonData& skeleton)
+	{
+		std::vector<d2d::ISprite*> sprites;
+		sprites.reserve(skeleton.m_mapJoints.size());
+		std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr 
+			= skeleton.m_mapJoints.begin();
+		for ( ; itr != skeleton.m_mapJoints.end(); ++itr)
+			sprites.push_back(itr->first->clone());
+		copyFrom(sprites, skeleton);
+	}
+
 	void SkeletonData::copyFrom(const std::vector<d2d::ISprite*>& sprites,
 		const SkeletonData& skeleton)
 	{
@@ -197,8 +208,6 @@ namespace eanim
 						bool success = p->connect(c);
 						if (success) {
 							translate(c->m_sprite, pp - cp);
-
-//							c->translate(pp - cp);
 							return;
 						}
 					}
@@ -248,9 +257,12 @@ namespace eanim
 		}
 	}
 
-	void SkeletonData::getTweenSprites(const SkeletonData& start, const SkeletonData& end, 
+	void SkeletonData::getTweenSprites(SkeletonData& start, SkeletonData& end, 
 		std::vector<d2d::ISprite*>& tween, float process)
 	{
+ 		SkeletonData mid;
+ 		mid.copyFrom(start);
+
 		std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr_s
 			= start.m_mapJoints.begin();
 		for ( ; itr_s != start.m_mapJoints.end(); ++itr_s)
@@ -263,15 +275,31 @@ namespace eanim
 				if (s->name == itr_e->first->name)
 				{
 					d2d::ISprite* e = itr_e->first;
-					d2d::ISprite* mid = s->clone();
-					float delta = (e->getAngle() - s->getAngle()) * process;
-					mid->rotate(delta);
-//					updateJoint();
-					tween.push_back(mid);
+					
+					d2d::ISprite* sprite = NULL;
+					std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr_mid = mid.m_mapJoints.begin();
+					for ( ; itr_mid != mid.m_mapJoints.end(); ++itr_mid)
+					{
+						if (itr_mid->first->name == s->name)
+						{
+							sprite = itr_mid->first;
+							break;
+						}
+					}
+					assert(sprite);
+
+ 					float delta = (e->getAngle() - s->getAngle()) * process;
+ 					sprite->rotate(delta);
+					mid.fixJoint(sprite);
+
 					break;
 				}
 			}
 		}
+
+ 		std::map<d2d::ISprite*, std::vector<Joint*> >::iterator itr = mid.m_mapJoints.begin();
+ 		for ( ; itr != mid.m_mapJoints.end(); ++itr)
+ 			tween.push_back(itr->first);
 	}
 
 	void SkeletonData::clean()
