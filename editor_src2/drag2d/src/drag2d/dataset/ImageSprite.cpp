@@ -73,50 +73,34 @@ void ImageSprite::loadBodyFromFile()
 	m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
 }
 
-void ImageSprite::buildBounding(float* texCoords)
+void ImageSprite::buildBoundingFromTexCoords(float* texCoords)
 {
 	if (!m_symbol) return;
 
-	const int width = m_symbol->getWidth(),
-		height = m_symbol->getHeight();
-
-	delete m_bounding;
-	m_bounding = BVFactory::createBV(e_obb);
-
-	Rect rect;
-	rect.xMin = width * (texCoords[0] - 0.5f);
-	rect.xMax = width * (texCoords[2] - 0.5f);
-	rect.yMin = height * (texCoords[1] - 0.5f);
-	rect.yMax = height * (texCoords[3] - 0.5f);
-
-	Vector center(rect.xCenter(), rect.yCenter());
-	float hWidth = (rect.xMax - rect.xMin) * 0.5f * m_scale.x,
-		hHeight = (rect.yMax - rect.yMin) * 0.5f * m_scale.y;
-	rect.xMin = -hWidth;
-	rect.xMax = hWidth;
-	rect.yMin = -hHeight;
-	rect.yMax = hHeight;
-
-	Vector offset = Math::rotateVector(center, m_angle);
-	rect.translate(m_pos + offset);
-	m_bounding->initFromRect(rect);
-	m_bounding->setTransform(m_pos, m_offset, m_angle);
-}
-
-void ImageSprite::buildBounding()
-{
-	if (!m_symbol) return;
-
-	delete m_bounding;
-	m_bounding = BVFactory::createBV(e_obb);
-
-	Rect rect = m_symbol->getImage()->getRegion();
-	rect.scale(m_scale.x, m_scale.y);
-	rect.shear(m_shear.x, m_shear.y);
-	rect.translate(m_pos);
-
-	m_bounding->initFromRect(rect);
-	m_bounding->setTransform(m_pos, m_offset, m_angle);
+ 	const int width = m_symbol->getSize().xLength(),
+ 		height = m_symbol->getSize().yLength();
+ 
+ 	delete m_bounding;
+ 	m_bounding = BVFactory::createBV(e_obb);
+ 
+ 	Rect rect;
+ 	rect.xMin = width * (texCoords[0] - 0.5f);
+ 	rect.xMax = width * (texCoords[2] - 0.5f);
+ 	rect.yMin = height * (texCoords[1] - 0.5f);
+ 	rect.yMax = height * (texCoords[3] - 0.5f);
+ 
+ 	Vector center(rect.xCenter(), rect.yCenter());
+ 	float hWidth = (rect.xMax - rect.xMin) * 0.5f * m_scale.x,
+ 		hHeight = (rect.yMax - rect.yMin) * 0.5f * m_scale.y;
+ 	rect.xMin = -hWidth;
+ 	rect.xMax = hWidth;
+ 	rect.yMin = -hHeight;
+ 	rect.yMax = hHeight;
+ 
+ 	Vector offset = Math::rotateVector(center, m_angle);
+ 	rect.translate(m_pos + offset);
+ 	m_bounding->initFromRect(rect);
+ 	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
 } // d2d

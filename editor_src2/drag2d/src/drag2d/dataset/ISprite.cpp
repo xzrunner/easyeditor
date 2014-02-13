@@ -6,6 +6,7 @@
 
 #include "common/Math.h"
 #include "common/color_trans.h"
+#include "dataset/BVFactory.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/SpriteFactory.h"
 
@@ -54,6 +55,7 @@ ISprite::ISprite(const ISprite& sprite)
 
 ISprite::~ISprite()
 {
+	delete m_bounding;
 	delete m_body;
 
 	SpriteFactory::Instance()->remove(this);
@@ -250,6 +252,18 @@ void ISprite::updateEachFrame()
 IBody* ISprite::getBody() const
 {
 	return m_body;
+}
+
+void ISprite::buildBounding()
+{
+	if (!m_bounding) 
+		m_bounding = BVFactory::createBV(e_obb);
+	const ISymbol& symbol = getSymbol();
+	Rect rect(symbol.getSize());
+	rect.scale(m_scale.x, m_scale.y);
+	rect.shear(m_shear.x, m_shear.y);
+	m_bounding->initFromRect(rect);
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
 void ISprite::onSizeChanged()

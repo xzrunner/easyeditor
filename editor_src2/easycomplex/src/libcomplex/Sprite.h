@@ -25,8 +25,6 @@ namespace complex
 		virtual void setSymbol(d2d::ISymbol* symbol);
 		virtual void loadBodyFromFile();
 
-		virtual void buildBounding();
-
 	protected:
 		Symbol* m_symbol;
 

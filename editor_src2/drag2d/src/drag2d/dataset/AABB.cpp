@@ -10,8 +10,9 @@ AABB::AABB()
 }
 
 AABB::AABB(const AABB& aabb)
+	: m_rect(aabb.m_rect)
+	, m_position(aabb.m_position)
 {
-	m_rect = aabb.m_rect;	
 }
 
 AABB* AABB::clone() const
@@ -32,24 +33,30 @@ void AABB::storeToTextFile(std::ofstream& fout) const
 
 void AABB::setTransform(const Vector& position, const Vector& offset, float angle)
 {
-	Vector center_offset = Math::rotateVector(-offset, angle) + offset;
-	Vector center = position + center_offset;
-	m_rect.translate(Vector(center.x - m_rect.xCenter(), center.y - m_rect.yCenter()));
+// 	Vector center_offset = Math::rotateVector(-offset, angle) + offset;
+// 	Vector center = position + center_offset;
+// 	m_rect.translate(Vector(center.x - m_rect.xCenter(), center.y - m_rect.yCenter()));
+
+	m_position = position;
 }
 
 bool AABB::isContain(const Vector& pos) const
 {
-	return Math::isPointInRect(pos, m_rect);
+	return Math::isPointInRect(pos - m_position, m_rect);
 }
 
 bool AABB::isContain(const Rect& rect) const
 {
-	return Math::isRectContainRect(m_rect, rect);
+	Rect r(rect);
+	r.translate(-m_position);
+	return Math::isRectContainRect(m_rect, r);
 }
 
 bool AABB::isIntersect(const Rect& rect) const
 {
-	return Math::isRectIntersectRect(m_rect, rect);
+	Rect r(rect);
+	r.translate(-m_position);
+	return Math::isRectIntersectRect(m_rect, r);
 }
 
 float AABB::area() const
@@ -69,16 +76,17 @@ float AABB::height() const
 
 Vector AABB::center() const
 {
-	return Vector(m_rect.xCenter(), m_rect.yCenter());
+//	return Vector(m_rect.xCenter(), m_rect.yCenter());
+	return m_position;
 }
 
 void AABB::getBoundPos(std::vector<Vector>& bound) const
 {
 	bound.clear();
-	bound.push_back(Vector(m_rect.xMin, m_rect.yMin));
-	bound.push_back(Vector(m_rect.xMax, m_rect.yMin));
-	bound.push_back(Vector(m_rect.xMax, m_rect.yMax));
-	bound.push_back(Vector(m_rect.xMin, m_rect.yMax));
+	bound.push_back(Vector(m_rect.xMin, m_rect.yMin) + m_position);
+	bound.push_back(Vector(m_rect.xMax, m_rect.yMin) + m_position);
+	bound.push_back(Vector(m_rect.xMax, m_rect.yMax) + m_position);
+	bound.push_back(Vector(m_rect.xMin, m_rect.yMax) + m_position);
 }
 
 } // d2d

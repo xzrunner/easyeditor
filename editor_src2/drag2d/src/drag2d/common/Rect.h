@@ -23,6 +23,12 @@ namespace d2d
 			yMin = center.y - hHeight;
 			yMax = center.y + hHeight;
 		}
+		Rect(float width, float height) {
+			xMin = width * 0.5f;
+			yMin = height * 0.5f;
+			xMax = -xMin;
+			yMax = -yMin;
+		}
 
 		const Rect& operator = (const Rect& aabb)
 		{
@@ -58,14 +64,10 @@ namespace d2d
 
 		void scale(float xScale, float yScale)
 		{
-			const float cx = xCenter(),
-				cy = yCenter();
-			const float dx = xLength() * xScale * 0.5f,
-				dy = yLength() * yScale * 0.5f;
-			xMin = cx - dx;
-			xMax = cx + dx;
-			yMin = cy - dy;
-			yMax = cy + dy;
+			xMin *= xScale;
+			xMax *= xScale;
+			yMin *= yScale;
+			yMax *= yScale;
 		}
 
 		void shear(float xShear, float yShear)

@@ -57,14 +57,12 @@ void EShapeSymbol::draw(const ISprite* sprite/* = NULL*/) const
 		shapes[i]->draw();
 }
 
-float EShapeSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect EShapeSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return 0;
-}
-
-float EShapeSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return 0;
+	Rect rect;
+	for (size_t i = 0, n = shapes.size(); i < n; ++i)
+		rect.combine(shapes[i]->getRect());
+	return rect;
 }
 
 void EShapeSymbol::refresh()

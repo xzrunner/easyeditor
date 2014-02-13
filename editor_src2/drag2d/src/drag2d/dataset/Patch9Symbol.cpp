@@ -126,14 +126,9 @@ void Patch9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 //	if (isResize) resize(w, h);
 }
 
-float Patch9Symbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect Patch9Symbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return m_width;
-}
-
-float Patch9Symbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return m_height;
+	return Rect(m_width, m_height);
 }
 
 void Patch9Symbol::refresh()
@@ -175,7 +170,7 @@ void Patch9Symbol::composeFromSprites(ISprite* sprites[3][3],
 			if (m_sprites[1][i]) m_sprites[1][i]->release();
 			m_sprites[1][i] = sprites[1][i]->clone();
 		}
-		m_height = m_sprites[1][0]->getSymbol().getHeight();
+		m_height = m_sprites[1][0]->getSymbol().getSize().yLength();
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
@@ -183,7 +178,7 @@ void Patch9Symbol::composeFromSprites(ISprite* sprites[3][3],
 			if (m_sprites[i][1]) m_sprites[i][1]->release();
 			m_sprites[i][1] = sprites[i][1]->clone();
 		}
-		m_width = m_sprites[0][1]->getSymbol().getWidth();
+		m_width = m_sprites[0][1]->getSymbol().getSize().xLength();
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i)
@@ -300,11 +295,11 @@ void Patch9Symbol::composeFromSprites() const
 {
 	if (m_type == e_9Grid)
 	{
-		const float w0 = m_sprites[0][0]->getSymbol().getWidth(),
-			w2 = m_sprites[0][2]->getSymbol().getWidth(),
+		const float w0 = m_sprites[0][0]->getSymbol().getSize().xLength(),
+			w2 = m_sprites[0][2]->getSymbol().getSize().xLength(),
 			w1 = m_width - w0 - w2;
-		const float h0 = m_sprites[0][0]->getSymbol().getHeight(),
-			h2 = m_sprites[0][2]->getSymbol().getHeight(),
+		const float h0 = m_sprites[0][0]->getSymbol().getSize().yLength(),
+			h2 = m_sprites[0][2]->getSymbol().getSize().yLength(),
 			h1 = m_height - h0 - h2;
 
 		stretch(m_sprites[0][0], d2d::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -321,11 +316,11 @@ void Patch9Symbol::composeFromSprites() const
 	}
 	else if (m_type == e_9GridHollow)
 	{
-		const float w0 = m_sprites[0][0]->getSymbol().getWidth(),
-			w2 = m_sprites[0][2]->getSymbol().getWidth(),
+		const float w0 = m_sprites[0][0]->getSymbol().getSize().xLength(),
+			w2 = m_sprites[0][2]->getSymbol().getSize().xLength(),
 			w1 = m_width - w0 - w2;
-		const float h0 = m_sprites[0][0]->getSymbol().getHeight(),
-			h2 = m_sprites[0][2]->getSymbol().getHeight(),
+		const float h0 = m_sprites[0][0]->getSymbol().getSize().yLength(),
+			h2 = m_sprites[0][2]->getSymbol().getSize().yLength(),
 			h1 = m_height - h0 - h2;
 
 		stretch(m_sprites[0][0], d2d::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -341,10 +336,10 @@ void Patch9Symbol::composeFromSprites() const
 	}
 	else if (m_type == e_6GridUpper)
 	{
-		const float w0 = m_sprites[2][0]->getSymbol().getWidth(),
-			w2 = m_sprites[2][2]->getSymbol().getWidth(),
+		const float w0 = m_sprites[2][0]->getSymbol().getSize().xLength(),
+			w2 = m_sprites[2][2]->getSymbol().getSize().xLength(),
 			w1 = m_width - w0 - w2;
-		const float h2 = m_sprites[2][0]->getSymbol().getHeight(),
+		const float h2 = m_sprites[2][0]->getSymbol().getSize().yLength(),
 			h1 = m_height - h2;
 
 		stretch(m_sprites[1][0], d2d::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
@@ -357,8 +352,8 @@ void Patch9Symbol::composeFromSprites() const
 	}
 	else if (m_type == e_3GridHor)
 	{
-		const float w0 = m_sprites[1][0]->getSymbol().getWidth(),
-			w2 = m_sprites[1][2]->getSymbol().getWidth(),
+		const float w0 = m_sprites[1][0]->getSymbol().getSize().xLength(),
+			w2 = m_sprites[1][2]->getSymbol().getSize().xLength(),
 			w1 = m_width - w0 - w2; 
 
 		stretch(m_sprites[1][0], d2d::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, m_height);
@@ -367,8 +362,8 @@ void Patch9Symbol::composeFromSprites() const
 	}
 	else if (m_type == e_3GridVer)
 	{
-		const float h0 = m_sprites[0][1]->getSymbol().getHeight(),
-			h2 = m_sprites[2][1]->getSymbol().getHeight(),
+		const float h0 = m_sprites[0][1]->getSymbol().getSize().yLength(),
+			h2 = m_sprites[2][1]->getSymbol().getSize().yLength(),
 			h1 = m_height - h0 - h2;
 
 		stretch(m_sprites[0][1], d2d::Vector(0.0f, -h0*0.5f-h1*0.5f), m_width, h0);
@@ -421,12 +416,12 @@ Patch9Symbol::Type Patch9Symbol::getType(ISprite* sprites[3][3]) const
 void Patch9Symbol::stretch(ISprite* sprite, const d2d::Vector& center, 
 						  float width, float height)
 {
-	assert(sprite->getSymbol().getWidth() != 0
-		&& sprite->getSymbol().getHeight() != 0);
+	assert(sprite->getSymbol().getSize().xLength() != 0
+		&& sprite->getSymbol().getSize().yLength() != 0);
 
 	sprite->setTransform(center, sprite->getAngle());
-	const float sw = sprite->getSymbol().getWidth(),
-		sh = sprite->getSymbol().getHeight();
+	const float sw = sprite->getSymbol().getSize().xLength(),
+		sh = sprite->getSymbol().getSize().yLength();
 
 	const float times = sprite->getAngle() / d2d::PI;
 	if (times - (int)(times + 0.01f) < 0.3f)

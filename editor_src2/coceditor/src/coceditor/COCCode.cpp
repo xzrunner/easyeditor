@@ -54,7 +54,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
 
-					if (image->getSymbol().getWidth() == 4 && image->getSymbol().getHeight() == 4)
+					if (image->getSymbol().getSize().xLength() == 4 && image->getSymbol().getSize().yLength() == 4)
 						resolvePicture(image, parser, e_bothfix);
 					else
 						resolvePicture(image, parser);
@@ -128,7 +128,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 				if (itrFind == m_mapSymbolID.end())
 				{
 					m_mapSymbolID.insert(std::make_pair(*itr, m_id++));
-					if ((*itr)->getWidth() <= 4)
+					if ((*itr)->getSize().xLength() <= 4)
 						resolvePicture(*itr, parser, e_xfix);
 					else
 						resolvePicture(*itr, parser);

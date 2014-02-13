@@ -51,16 +51,4 @@ void FontBlankSprite::loadBodyFromFile()
 {
 }
 
-void FontBlankSprite::buildBounding()
-{
-	delete m_bounding;
-	m_bounding = BVFactory::createBV(e_obb);
-
-	if (m_symbol)
-	{
-		m_bounding->combine(Rect(m_pos, m_symbol->width * m_scale.x * 0.5f,
-			m_symbol->height * m_scale.y * 0.5f));
-		m_bounding->setTransform(m_pos, m_offset, m_angle);
-	}
-}
 } // d2d

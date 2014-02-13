@@ -37,14 +37,9 @@ void ImageSymbol::draw(const ISprite* sprite/* = NULL*/) const
 	m_image->draw();
 }
 
-float ImageSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return m_image->width();
-}
-
-float ImageSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return m_image->height();
+	return m_image->getRegion();
 }
 
 unsigned int ImageSymbol::getTextureID() const

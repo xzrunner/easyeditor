@@ -33,8 +33,7 @@ namespace d2d
 		//
 		virtual void reloadTexture() const;
 		virtual void draw(const ISprite* sprite = NULL) const;
-		virtual float getWidth(const ISprite* sprite = NULL) const;
-		virtual float getHeight(const ISprite* sprite = NULL) const;
+		virtual Rect getSize(const ISprite* sprite = NULL) const;
 
  		const std::vector<ISprite*>& getChildren() const {
  			return m_sprites;

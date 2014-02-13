@@ -143,8 +143,8 @@ void PolygonShape::getTextureBoundarySegments(float left, float right, float low
 {
 	if (!m_fillingTexture) return;
 
-	const int width = m_fillingTexture->getWidth(),
-		height = m_fillingTexture->getHeight();
+	const int width = m_fillingTexture->getSize().xLength(),
+		height = m_fillingTexture->getSize().yLength();
 
 	for (float x = left; x < right; x += width)
 	{
@@ -162,8 +162,8 @@ void PolygonShape::computeTextureCoords(float left, float low)
 {
 	if (!m_fillingTexture) return;
 
-	const int width = m_fillingTexture->getWidth(),
-		height = m_fillingTexture->getHeight();
+	const int width = m_fillingTexture->getSize().xLength(),
+		height = m_fillingTexture->getSize().yLength();
 
 	int index = 0;
 	for (size_t i = 0, n = m_fillingVertices.size() / 3; i < n; ++i)

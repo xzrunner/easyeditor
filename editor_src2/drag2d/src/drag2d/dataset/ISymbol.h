@@ -2,6 +2,7 @@
 
 #include "widgets/ListItem.h"
 #include "common/ResourcesMgr.h"
+#include "common/Rect.h"
 
 namespace d2d
 {
@@ -19,8 +20,7 @@ namespace d2d
 
 		virtual void reloadTexture() const = 0;
 		virtual void draw(const ISprite* sprite = NULL) const = 0;
-		virtual float getWidth(const ISprite* sprite = NULL) const = 0;
-		virtual float getHeight(const ISprite* sprite = NULL) const = 0;
+		virtual Rect getSize(const ISprite* sprite = NULL) const = 0;
 
 		bool loadFromFile(const wxString& filepath);
 

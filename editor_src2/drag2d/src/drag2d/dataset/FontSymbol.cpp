@@ -50,18 +50,13 @@ void FontSymbol::draw(const ISprite* sprite/* = NULL*/) const
 	print(0, 0, text->getText().c_str());
 }
 
-float FontSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect FontSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
+	int w = 0;
 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));
 	if (text)
-		return m_font->h * 0.5f * text->getText().size();
-	else
-		return 0;
-}
-
-float FontSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return m_font->h;
+		w = m_font->h * 0.5f * text->getText().size();
+	return Rect(w, m_font->h);
 }
 
 void FontSymbol::loadResources()

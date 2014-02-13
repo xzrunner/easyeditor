@@ -27,8 +27,7 @@ namespace complex
 		//
 		virtual void reloadTexture() const;
 		virtual void draw(const d2d::ISprite* sprite = NULL) const;
-		virtual float getWidth(const d2d::ISprite* sprite = NULL) const;
-		virtual float getHeight(const d2d::ISprite* sprite = NULL) const;
+		virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
 		//
 		// ListItem interface

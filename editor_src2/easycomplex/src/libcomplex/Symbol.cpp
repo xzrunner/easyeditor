@@ -52,14 +52,9 @@ namespace complex
 			d2d::SpriteDraw::drawSprite(m_sprites[i]);
 	}
 
-	float Symbol::getWidth(const d2d::ISprite* sprite/* = NULL*/) const
+	d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	{
-		return m_rect.xLength();
-	}
-
-	float Symbol::getHeight(const d2d::ISprite* sprite/* = NULL*/) const
-	{
-		return m_rect.yLength();
+		return m_rect;
 	}
 
 	void Symbol::refresh()

@@ -26,8 +26,6 @@ namespace d2d
 		virtual void setSymbol(ISymbol* symbol);
 		virtual void loadBodyFromFile();
 
-		virtual void buildBounding();
-
 	private:
 		EShapeSymbol* m_symbol;
 

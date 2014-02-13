@@ -44,14 +44,15 @@ namespace d2d
 
 		virtual void getBoundPos(std::vector<Vector>& bound) const;
 
-		const Rect& getRect() const;
-		float getAngle() const;
+// 		const Rect& getRect() const;
+// 		float getAngle() const;
 
 	private:
-		Rect transToRect() const;
+		void transToAABB();
 
 	private:
 		Rect m_rect;
+		Vector m_position;
 		float m_angle;
 
 	}; // OBB
@@ -59,6 +60,7 @@ namespace d2d
 	inline void OBB::initFromRect(const Rect& rect)
 	{
 		m_rect = rect;
+		m_position.set(0, 0);
 		m_angle = 0;
 	}
 
@@ -75,31 +77,27 @@ namespace d2d
 	inline void OBB::combine(const Vector& pos)
 	{
 		if (m_rect.isValid())
-		{
-			m_rect = transToRect();
-			m_angle = 0;
-		}
-		m_rect.combine(pos);
+			transToAABB();
+		m_rect.combine(pos - m_position);
 	}
 
 	inline void OBB::combine(const Rect& rect)
 	{
 		if (m_rect.isValid())
-		{
-			m_rect = transToRect();
-			m_angle = 0;
-		}
-		m_rect.combine(rect);
+			transToAABB();
+		Rect r(rect);
+		r.translate(-m_position);
+		m_rect.combine(r);
 	}
 
-	inline const Rect& OBB::getRect() const
-	{
-		return m_rect;
-	}
-
-	inline float OBB::getAngle() const
-	{
-		return m_angle;
-	}
+// 	inline const Rect& OBB::getRect() const
+// 	{
+// 		return m_rect;
+// 	}
+// 
+// 	inline float OBB::getAngle() const
+// 	{
+// 		return m_angle;
+// 	}
 }
 

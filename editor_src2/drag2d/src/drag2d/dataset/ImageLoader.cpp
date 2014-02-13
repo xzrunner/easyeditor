@@ -17,7 +17,7 @@ namespace d2d
 		if (texture == 0)
 		{
 			glGenTextures(1,(GLuint*)&texture);
-			assert(texture);
+//			assert(texture);
 		}
 
 		glBindTexture(GL_TEXTURE_2D, texture);

@@ -27,8 +27,7 @@ namespace d2d
 		//
 		virtual void reloadTexture() const {}
 		virtual void draw(const ISprite* sprite = NULL) const {}
-		virtual float getWidth(const ISprite* sprite = NULL) const { return 0; }
-		virtual float getHeight(const ISprite* sprite = NULL) const { return 0; }
+		virtual Rect getSize(const ISprite* sprite = NULL) const { return Rect(0, 0); }
 
 		//
 		// ListItem interface

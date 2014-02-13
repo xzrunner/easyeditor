@@ -46,14 +46,14 @@ namespace d2d
 	int w_Sprite_width(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		lua_pushnumber(L, t->getSymbol().getWidth());
+		lua_pushnumber(L, t->getSymbol().getSize().xLength());
 		return 1;
 	}
 
 	int w_Sprite_height(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		lua_pushnumber(L, t->getSymbol().getHeight());
+		lua_pushnumber(L, t->getSymbol().getSize().yLength());
 		return 1;
 	}
 

@@ -57,8 +57,8 @@ void TextSprite::loadBodyFromFile()
 void TextSprite::setTransform(const Vector& position, float angle)
 {
 	Vector fixed(position);
-	fixed.x -= m_symbol->getWidth(this) * 0.5f;
-	fixed.y -= m_symbol->getHeight(this) * 0.5f;
+	fixed.x -= m_symbol->getSize(this).xLength() * 0.5f;
+	fixed.y -= m_symbol->getSize(this).yLength() * 0.5f;
 
 	ISprite::setTransform(fixed, angle);
 }
@@ -75,21 +75,4 @@ void TextSprite::setSize(int size)
 	setScale((float)size / Font::DEFAULT_SIZE);
 }
 
-void TextSprite::buildBounding()
-{
-	if (!m_symbol) return;
-
-	const float width = m_symbol->getWidth(this) * m_scale.x,
-		height = m_symbol->getHeight(this) * m_scale.y;
-
-	delete m_bounding;
-	m_bounding = BVFactory::createBV(e_aabb);
-	Rect rect;
-	rect.xMin = 0;
-	rect.xMax = width;
-	rect.yMin = 0;
-	rect.yMax = height;
-	rect.translate(m_pos);
-	m_bounding->initFromRect(rect);
-}
 } // d2d

@@ -28,9 +28,7 @@ namespace d2d
 		virtual void loadBodyFromFile();
 
 		// todo: should auto resize through its symbol and shapes
-		void buildBounding(float* texCoords);
-
-		virtual void buildBounding();
+		void buildBoundingFromTexCoords(float* texCoords);
 
 	protected:
 		ImageSymbol* m_symbol;

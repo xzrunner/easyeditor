@@ -39,8 +39,6 @@ namespace d2d
 		void setColor(const d2d::Colori& color) { m_color = color; }
 		const d2d::Colori& getColor() const { return m_color; }
 
-		virtual void buildBounding();
-
 	protected:
 		FontSymbol* m_symbol;
 

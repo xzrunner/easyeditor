@@ -99,14 +99,9 @@ void AnimSymbol::draw(const ISprite* sprite/* = NULL*/) const
 	}
 }
 
-float AnimSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect AnimSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return 0;
-}
-
-float AnimSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return 0;
+	return m_rect;
 }
 
 void AnimSymbol::refresh()
@@ -202,6 +197,17 @@ void AnimSymbol::initBounding()
 				frame->sprites[j]->getBounding()->getBoundPos(vertices);
 				for (size_t k = 0, l = vertices.size(); k < l; ++k)
 					m_rect.combine(vertices[k]);
+
+// 				ISprite* sprite = frame->sprites[j];
+// 				float hw = sprite->getSymbol().getSize().xLength() * 0.5f;
+// 				float hh = sprite->getSymbol().getSize().yLength() * 0.5f;
+// 				love::Matrix t;
+// 				t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
+// 					sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
+// 				m_rect.combine(Math::transVector(Vector(-hw, -hh), t));
+// 				m_rect.combine(Math::transVector(Vector(-hw,  hh), t));
+// 				m_rect.combine(Math::transVector(Vector( hw,  hh), t));
+// 				m_rect.combine(Math::transVector(Vector( hw, -hh), t));
 			}
 		}
 	}

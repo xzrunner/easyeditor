@@ -43,8 +43,8 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 	{
 		m_textureID = symbol.getTextureID();
 
-// 		const float hw = symbol.getWidth() * 0.5f,
-// 			hh = symbol.getHeight() * 0.5f;
+// 		const float hw = symbol.getSize().xLength() * 0.5f,
+// 			hh = symbol.getSize().yLength() * 0.5f;
 // 		m_node[0] = -hw;
 // 		m_node[1] = -hh;
 // 		m_node[2] = -hw;
@@ -53,8 +53,8 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 // 		m_node[5] = hh;
 	}
 
-	const float hw = symbol.getWidth() * sprite->getScale().x * 0.5f,
-		hh = symbol.getHeight() * sprite->getScale().y * 0.5f;
+	const float hw = symbol.getSize().xLength() * sprite->getScale().x * 0.5f,
+		hh = symbol.getSize().yLength() * sprite->getScale().y * 0.5f;
 	float x0 = -hw;
 	float y0 = -hh;
 	float x1 = -hw;

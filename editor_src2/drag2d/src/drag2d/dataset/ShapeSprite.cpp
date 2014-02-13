@@ -71,24 +71,4 @@ void ShapeSprite::loadBodyFromFile()
 	m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
 }
 
-void ShapeSprite::buildBounding()
-{
-	delete m_bounding;
-	m_bounding = BVFactory::createBV(e_obb);
-
-	if (m_symbol)
-	{
-		Rect rect;
-		const std::vector<IShape*>& shapes = m_symbol->shapes;
-		for (size_t i = 0, n = shapes.size(); i < n; ++i)
-			rect.combine(shapes[i]->getRect());
-		
-		rect.scale(m_scale.x, m_scale.y);
-		rect.shear(m_shear.x, m_shear.y);
-		rect.translate(m_pos);
-		m_bounding->initFromRect(rect);
-		m_bounding->setTransform(m_pos, m_offset, m_angle);
-	}
-}
-
 } // d2d

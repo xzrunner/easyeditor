@@ -50,11 +50,11 @@ bool ResizeOP::onMouseDrag(int x, int y)
 		else if (symbol->type() == d2d::Patch9Symbol::e_3GridHor)
 		{
 			context->width = fabs(pos.x)*2;
-			context->height = symbol->getHeight();
+			context->height = symbol->getSize().yLength();
 		}
 		else if (symbol->type() == d2d::Patch9Symbol::e_3GridVer)
 		{
-			context->width = symbol->getWidth();
+			context->width = symbol->getSize().xLength();
 			context->height = fabs(pos.y)*2;
 		}
 		else

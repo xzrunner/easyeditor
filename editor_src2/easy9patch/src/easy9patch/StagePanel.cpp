@@ -113,12 +113,12 @@ void StagePanel::rebuildPatchSymbol()
 		Context* context = Context::Instance();
 		if (m_patch->type() == d2d::Patch9Symbol::e_3GridHor)
 		{
-			context->height = m_patch->getHeight();
+			context->height = m_patch->getSize().yLength();
 			context->resizeCMPT->setValue(context->width, context->height);
 		}
 		else if (m_patch->type() == d2d::Patch9Symbol::e_3GridVer)
 		{
-			context->width = m_patch->getWidth();
+			context->width = m_patch->getSize().xLength();
 			context->resizeCMPT->setValue(context->width, context->height);
 		}
 	}

@@ -54,14 +54,9 @@ void CombinationSymbol::draw(const ISprite* sprite/* = NULL*/) const
 		SpriteDraw::drawSprite(m_sprites[i]);
 }
 
-float CombinationSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect CombinationSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return 0;
-}
-
-float CombinationSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return 0;
+	return m_rect;
 }
 
 void CombinationSymbol::loadResources()

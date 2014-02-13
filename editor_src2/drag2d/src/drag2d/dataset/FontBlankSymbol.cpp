@@ -66,14 +66,9 @@ void FontBlankSymbol::draw(const ISprite* sprite/* = NULL*/) const
 	}
 }
 
-float FontBlankSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return width;
-}
-
-float FontBlankSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return height;
+	return Rect(width, height);
 }
 
 void FontBlankSymbol::refresh()

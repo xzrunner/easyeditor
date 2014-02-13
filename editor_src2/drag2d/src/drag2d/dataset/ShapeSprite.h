@@ -28,8 +28,6 @@ namespace d2d
 		virtual void setSymbol(ISymbol* symbol);
 		virtual void loadBodyFromFile();
 		
-		virtual void buildBounding();
-
 	private:
 		ShapeSymbol* m_symbol;
 

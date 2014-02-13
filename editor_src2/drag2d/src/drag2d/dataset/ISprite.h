@@ -76,7 +76,7 @@ namespace d2d
 			m_observer = observer;
 		}
 
-		virtual void buildBounding() = 0;
+		void buildBounding();
 
 	private:
 		void onSizeChanged();

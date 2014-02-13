@@ -418,8 +418,8 @@ namespace d2d
 	{
 		if (!m_isDeformOpen) return;
 
-		float hw = m_selected->getSymbol().getWidth() * 0.5f;
-		float hh = m_selected->getSymbol().getHeight() * 0.5f;
+		float hw = m_selected->getSymbol().getSize().xLength() * 0.5f;
+		float hh = m_selected->getSymbol().getSize().yLength() * 0.5f;
 		love::Matrix t;
 		t.setTransformation(m_selected->getPosition().x, m_selected->getPosition().y, m_selected->getAngle(),
 			m_selected->getScale().x, m_selected->getScale().y, 0, 0, m_selected->getShear().x, m_selected->getShear().y);
@@ -503,8 +503,8 @@ namespace d2d
 			ky = m_selected->getShear().y;
 
 		float x, y;
-		float hw = m_selected->getSymbol().getWidth() * 0.5f,
-			hh = m_selected->getSymbol().getHeight() * 0.5f;
+		float hw = m_selected->getSymbol().getSize().xLength() * 0.5f,
+			hh = m_selected->getSymbol().getSize().yLength() * 0.5f;
 
 		if (m_ctrlNodeSelected.type == UP)
 		{
@@ -791,8 +791,8 @@ namespace d2d
 	template <typename TBase>
 	void ArrangeSpriteOP<TBase>::getSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 	{
-		float hw = sprite->getSymbol().getWidth() * 0.5f;
-		float hh = sprite->getSymbol().getHeight() * 0.5f;
+		float hw = sprite->getSymbol().getSize().xLength() * 0.5f;
+		float hh = sprite->getSymbol().getSize().yLength() * 0.5f;
 		love::Matrix t;
 		t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
 			sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);

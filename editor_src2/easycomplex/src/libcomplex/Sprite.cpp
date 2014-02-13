@@ -44,21 +44,4 @@ namespace complex
 	void Sprite::loadBodyFromFile()
 	{
 	}
-
-	void Sprite::buildBounding()
-	{
-		delete m_bounding;
-		m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
-
-		if (m_symbol)
-		{
-			d2d::Rect rect = m_symbol->m_rect;
-
-			rect.scale(m_scale.x, m_scale.y);
-			rect.shear(m_shear.x, m_shear.y);
-			rect.translate(m_pos);
-			m_bounding->initFromRect(rect);
-			m_bounding->setTransform(m_pos, m_offset, m_angle);
-		}
-	}
 }

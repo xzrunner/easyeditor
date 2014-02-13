@@ -18,8 +18,8 @@ namespace d2d
 
 		if (getPGType(pg) == m_type)
 		{
-			pg->GetProperty(wxT("Width"))->SetValue(m_symbol->getWidth());
-			pg->GetProperty(wxT("Height"))->SetValue(m_symbol->getHeight());
+			pg->GetProperty(wxT("Width"))->SetValue(m_symbol->getSize().xLength());
+			pg->GetProperty(wxT("Height"))->SetValue(m_symbol->getSize().yLength());
 		}
 		else
 		{
@@ -27,10 +27,10 @@ namespace d2d
 
 			pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
 
-			pg->Append(new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_symbol->getWidth()));
+			pg->Append(new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_symbol->getSize().xLength()));
 			pg->SetPropertyAttribute(wxT("Width"), "Precision", 0);
 
-			pg->Append(new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_symbol->getHeight()));
+			pg->Append(new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_symbol->getSize().yLength()));
 			pg->SetPropertyAttribute(wxT("Height"), "Precision", 0);
 		}
 	}
@@ -43,12 +43,12 @@ namespace d2d
 		if (name == "Width")
 		{
 			float w = wxANY_AS(value, float),
-				h = m_symbol->getHeight();
+				h = m_symbol->getSize().yLength();
 			m_symbol->resize(w, h);
 		}
 		else if (name == "Height")
 		{
-			float w = m_symbol->getHeight(),
+			float w = m_symbol->getSize().yLength(),
 				h = wxANY_AS(value, float);
 			m_symbol->resize(w, h);
 		}
@@ -71,10 +71,10 @@ namespace d2d
 
 			pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
 
-			pg->Append(new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_symbol->getWidth()));
+			pg->Append(new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_symbol->getSize().xLength()));
 			pg->SetPropertyAttribute(wxT("Width"), "Precision", 0);
 
-			pg->Append(new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_symbol->getHeight()));
+			pg->Append(new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_symbol->getSize().yLength()));
 			pg->SetPropertyAttribute(wxT("Height"), "Precision", 0);
 		}
 

@@ -11,8 +11,8 @@ void FileSaver::store(const char* filepath, const d2d::Patch9Symbol& symbol)
 	reader.parse(fin, value);
 	fin.close();
 
-	value["width"] = symbol.getWidth();
-	value["height"] = symbol.getHeight();
+	value["width"] = symbol.getSize().xLength();
+	value["height"] = symbol.getSize().yLength();
 
 	Json::StyledStreamWriter writer;
 	std::ofstream fout(filepath);

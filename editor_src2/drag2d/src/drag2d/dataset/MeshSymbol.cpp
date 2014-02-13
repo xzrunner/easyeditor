@@ -42,14 +42,12 @@ void MeshSymbol::draw(const ISprite* sprite/* = NULL*/) const
 	PrimitiveDraw::drawTrianglesSlow(m_image->textureID(), m_vertices, m_texCoords);
 }
 
-float MeshSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect MeshSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return 0;
-}
-
-float MeshSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return 0;
+	Rect rect;
+	for (size_t i = 0, n = m_vertices.size(); i < n; ++i)
+		rect.combine(m_vertices[i]);
+	return rect;
 }
 
 const std::vector<Vector>& MeshSymbol::getVertices() const

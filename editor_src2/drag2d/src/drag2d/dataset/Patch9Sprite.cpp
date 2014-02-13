@@ -17,15 +17,15 @@ Patch9Sprite::Patch9Sprite(const Patch9Sprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	width = m_symbol->getWidth();
-	height = m_symbol->getHeight();
+	width = m_symbol->getSize().xLength();
+	height = m_symbol->getSize().yLength();
 }
 
 Patch9Sprite::Patch9Sprite(Patch9Symbol* symbol)
 	: m_symbol(symbol)
 {
-	width = m_symbol->getWidth();
-	height = m_symbol->getHeight();
+	width = m_symbol->getSize().xLength();
+	height = m_symbol->getSize().yLength();
 	buildBounding();
 }
 
@@ -55,16 +55,4 @@ void Patch9Sprite::loadBodyFromFile()
 {
 }
 
-void Patch9Sprite::buildBounding()
-{
-	delete m_bounding;
-	m_bounding = BVFactory::createBV(e_obb);
-
-	if (m_symbol)
-	{
-		m_bounding->combine(Rect(m_pos, m_symbol->getWidth() * m_scale.x * 0.5f,
-			m_symbol->getHeight() * m_scale.y * 0.5f));
-		m_bounding->setTransform(m_pos, m_offset, m_angle);
-	}
-}
 } // d2d

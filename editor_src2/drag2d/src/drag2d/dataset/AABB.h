@@ -48,12 +48,14 @@ namespace d2d
 
 	private:
 		Rect m_rect;
+		Vector m_position;
 
 	}; // AABB
 
 	inline void AABB::initFromRect(const Rect& rect)
 	{
 		m_rect = rect;
+		m_position.set(0, 0);
 	}
 
 	inline bool AABB::isValid() const
@@ -68,12 +70,14 @@ namespace d2d
 
 	inline void AABB::combine(const Vector& pos)
 	{
-		m_rect.combine(pos);
+		m_rect.combine(pos - m_position);
 	}
 
 	inline void AABB::combine(const Rect& rect)
 	{
-		m_rect.combine(rect);
+		Rect r(rect);
+		r.translate(-m_position);
+		m_rect.combine(r);
 	}
 
 	inline const Rect& AABB::getRect() const

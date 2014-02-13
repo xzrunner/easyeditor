@@ -49,14 +49,12 @@ void ShapeSymbol::draw(const ISprite* sprite/* = NULL*/) const
 		shapes[i]->draw();
 }
 
-float ShapeSymbol::getWidth(const ISprite* sprite/* = NULL*/) const
+Rect ShapeSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return 0;
-}
-
-float ShapeSymbol::getHeight(const ISprite* sprite/* = NULL*/) const
-{
-	return 0;
+	Rect rect;
+	for (size_t i = 0, n = shapes.size(); i < n; ++i)
+		rect.combine(shapes[i]->getRect());
+	return rect;
 }
 
 void ShapeSymbol::loadResources()
