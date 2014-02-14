@@ -1,14 +1,13 @@
-#include <iostream>
+#include "ParserLuaFile.h"
 
 int main(int argc, char *argv[])
 {
-	if (argc < 3) {
-		std::cerr << "Params: 1. src .lua file; 2. the filepath of export names' list" << std::endl;
-		return 1;
-	}
+	if (argc > 1)
+	{
+		std::string filename = argv[1];
+		cocextract::ParserLuaFile parser;
+		parser.parser(filename);
+	}	
 
-	std::string srcfilepath = argv[1];
-	std::string listfilepath = argv[2];
-
-
+	return 0;
 }

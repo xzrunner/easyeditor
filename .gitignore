@@ -54,6 +54,7 @@ deprecated
 
 /editor_src2/coceditor/.svn
 /editor_src2/coceditor/platform/msvc2008/coceditor
+/editor_src2/coceditor/platform/msvc2008/cocextract
 /editor_src2/coceditor/platform/msvc2008/cocextrude
 /editor_src2/coceditor/platform/msvc2008/cocpackage
 /editor_src2/coceditor/platform/msvc2008/imagebool
