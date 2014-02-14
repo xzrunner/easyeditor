@@ -20,6 +20,9 @@ namespace cocextract
 		void parserPic(lua_State* L, int id);
 		void parserAni(lua_State* L, int id);
 
+		void transPicFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
+		void transAniFiles(const std::string& outfloder);
+
 	private:
 		struct Picture
 		{
@@ -46,6 +49,9 @@ namespace cocextract
 
 			std::vector<Part*> parts;
 
+			std::string filename;
+			int width, height;
+
 			~Picture()
 			{
 				for_each(parts.begin(), parts.end(), DeletePointerFunctor<Part>());
@@ -65,6 +71,8 @@ namespace cocextract
 			std::string export_name;
 			std::vector<int> component;
 			std::vector<std::vector<Item*> > frames;
+
+			std::string filename;
 
 			~Animation()
 			{

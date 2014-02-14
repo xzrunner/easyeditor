@@ -7,6 +7,7 @@ namespace d2d
 	class NullSymbol : public ISymbol
 	{
 	public:
+		NullSymbol(const std::string& filename) { m_filepath = filename; }
 		NullSymbol(const std::string& filename, int width, int height)
 			: m_size(width, height) { m_filepath = filename; }
 

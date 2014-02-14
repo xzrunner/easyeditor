@@ -32,8 +32,8 @@ namespace cocextract
 
 		if (xmin < 0 || xmin >= m_width ||
 			xmax < 0 || xmax >= m_width ||
-			ymin < 0 || ymin >= m_width ||
-			ymax < 0 || ymax >= m_width ||
+			ymin < 0 || ymin >= m_height ||
+			ymax < 0 || ymax >= m_height ||
 			xmin >= xmax || ymin >= ymax)
 			return NULL;
 

@@ -143,7 +143,7 @@ void AnimSymbol::loadResources()
 		{
 			Frame* dstFrame = new Frame;
 			AnimFileAdapter::Frame* srcFrame = srcLayer->frames[j];
-			dstFrame->id = srcFrame->id;
+//			dstFrame->id = srcFrame->id;
 			dstFrame->index = srcFrame->index;
 			dstFrame->bClassicTween = srcFrame->bClassicTween;
 			for (size_t k = 0, l = srcFrame->entries.size(); k < l; ++k)

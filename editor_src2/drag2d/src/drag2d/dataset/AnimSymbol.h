@@ -13,7 +13,7 @@ namespace d2d
 	public:
 		struct Frame
 		{
-			int id;
+//			int id;
 			int index;
 			std::vector<ISprite*> sprites;
 			bool bClassicTween;
