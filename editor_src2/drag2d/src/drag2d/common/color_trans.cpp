@@ -7,39 +7,49 @@ namespace d2d
 {
 Colorf transColor(const std::string& str, PixelType type) 
 {
-	if (str.empty())
+	std::string snum = str;
+
+	if (snum.empty())
 		return Colorf(0, 0, 0, 0);
 
-	if (str == "0xffffffff")
+	if (snum == "0xffffffff")
 		return Colorf(1, 1, 1, 1);
 
-	int len = str.length();
+	if (snum[0] != '0' || (snum[1] != 'x' && snum[1] != 'X'))
+	{
+		int n = atoi(snum.c_str());
+		char buffer[33];
+		_itoa(n, buffer, 16);
+		snum = "0x" + std::string(buffer);
+	}
+
+	int len = snum.length();
 
 	Colorf ret(0, 0, 0, 1);
 	if (len == 4)
 	{
 		if (type == PT_RGBA || PT_BGRA)
-			ret.a = transColor(str[2], str[3]);
+			ret.a = transColor(snum[2], snum[3]);
 		else if (type == PT_ARGB)
-			ret.b = transColor(str[2], str[3]);
+			ret.b = transColor(snum[2], snum[3]);
 	}
 	else if (len == 10)
 	{
 		if (type == PT_RGBA) {
-			ret.r = transColor(str[2], str[3]);
-			ret.g = transColor(str[4], str[5]);
-			ret.b = transColor(str[6], str[7]);
-			ret.a = transColor(str[8], str[9]);
+			ret.r = transColor(snum[2], snum[3]);
+			ret.g = transColor(snum[4], snum[5]);
+			ret.b = transColor(snum[6], snum[7]);
+			ret.a = transColor(snum[8], snum[9]);
 		} else if (type == PT_ARGB) {
-			ret.a = transColor(str[2], str[3]);
-			ret.r = transColor(str[4], str[5]);
-			ret.g = transColor(str[6], str[7]);
-			ret.b = transColor(str[8], str[9]);
+			ret.a = transColor(snum[2], snum[3]);
+			ret.r = transColor(snum[4], snum[5]);
+			ret.g = transColor(snum[6], snum[7]);
+			ret.b = transColor(snum[8], snum[9]);
 		} else if (type == PT_BGRA) {
-			ret.b = transColor(str[2], str[3]);
-			ret.g = transColor(str[4], str[5]);
-			ret.r = transColor(str[6], str[7]);
-			ret.a = transColor(str[8], str[9]);
+			ret.b = transColor(snum[2], snum[3]);
+			ret.g = transColor(snum[4], snum[5]);
+			ret.r = transColor(snum[6], snum[7]);
+			ret.a = transColor(snum[8], snum[9]);
 		}
 	}
 
