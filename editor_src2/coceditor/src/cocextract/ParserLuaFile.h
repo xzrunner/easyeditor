@@ -14,6 +14,8 @@ namespace cocextract
 
 		void parser(const std::string& filename);
 
+		void transToEasyFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
+
 	private:
 		void parserPic(lua_State* L, int id);
 		void parserAni(lua_State* L, int id);

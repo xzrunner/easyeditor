@@ -1,4 +1,7 @@
 #include "ParserLuaFile.h"
+#include "ImageHelper.h"
+
+#include <sstream>
 
 extern "C" {
 	#include <lua.h>
@@ -57,6 +60,46 @@ namespace cocextract
 		}
 
 		assert(lua_gettop(L) == 1);
+	}
+
+	void ParserLuaFile::transToEasyFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder)
+	{
+		// pictures
+		std::vector<ImageHelper> images;
+		images.resize(texfilenames.size());
+		for (int i = 0, n = texfilenames.size(); i < n; ++i)
+			images[i].loadPPM(texfilenames[i]);
+
+		// clip parts
+		std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
+		for ( ; itr != m_mapPictures.end(); ++itr)
+		{
+			Picture* pic = itr->second;
+			for (int i = 0, n = pic->parts.size(); i < n; ++i)
+			{
+				Picture::Part* part = pic->parts[i];
+				int xmin = INT_MAX, xmax = INT_MIN, ymin = INT_MAX, ymax = INT_MIN;
+				for (int i = 0; i < 4; ++i)
+				{
+					if (part->src[i].x < xmin)
+						xmin = part->src[i].x;
+					else if (part->src[i].x > xmax)
+						xmax = part->src[i].x;
+					if (part->src[i].y < ymin)
+						ymin = part->src[i].y;
+					else if (part->src[i].y > ymax)
+						ymax = part->src[i].y;
+				}
+				const unsigned char* pixels = images[part->tex].clip(xmin, xmax, ymin, ymax);
+				if (pixels) 
+				{
+					std::stringstream ss;
+					ss << xmin << xmax << ymin << ymax;
+					std::string outfile = outfloder + "\\" + ss.str() + ".png";
+					images[i].writeToFile(pixels, xmax-xmin, ymax-ymin, outfile);
+				}
+			}
+		}
 	}
 
 	void ParserLuaFile::parserPic(lua_State* L, int id)
