@@ -988,6 +988,10 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\dataset\NullSprite.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\dataset\SpriteFactory.cpp"
 						>
 					</File>
@@ -1097,6 +1101,10 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\dataset\ISymbol.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\NullSymbol.h"
 						>
 					</File>
 					<File

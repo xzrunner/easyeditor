@@ -3,6 +3,8 @@
 
 #include <sstream>
 
+#include <easycomplex.h>
+
 extern "C" {
 	#include <lua.h>
 	#include <lualib.h>
@@ -70,35 +72,37 @@ namespace cocextract
 		for (int i = 0, n = texfilenames.size(); i < n; ++i)
 			images[i].loadPPM(texfilenames[i]);
 
-		// clip parts
+		// Picture to easycomplex
 		std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
 		for ( ; itr != m_mapPictures.end(); ++itr)
 		{
 			Picture* pic = itr->second;
+
+			complex::Symbol* symbol = new complex::Symbol;
 			for (int i = 0, n = pic->parts.size(); i < n; ++i)
 			{
 				Picture::Part* part = pic->parts[i];
-				int xmin = INT_MAX, xmax = INT_MIN, ymin = INT_MAX, ymax = INT_MIN;
-				for (int i = 0; i < 4; ++i)
-				{
-					if (part->src[i].x < xmin)
-						xmin = part->src[i].x;
-					else if (part->src[i].x > xmax)
-						xmax = part->src[i].x;
-					if (part->src[i].y < ymin)
-						ymin = part->src[i].y;
-					else if (part->src[i].y > ymax)
-						ymax = part->src[i].y;
-				}
-				const unsigned char* pixels = images[part->tex].clip(xmin, xmax, ymin, ymax);
+				const unsigned char* pixels = images[part->tex].clip(part->xmin, part->xmax, part->ymin, part->ymax);
 				if (pixels) 
 				{
-					std::stringstream ss;
-					ss << xmin << xmax << ymin << ymax;
-					std::string outfile = outfloder + "\\" + ss.str() + ".png";
-					images[i].writeToFile(pixels, xmax-xmin, ymax-ymin, outfile);
+					int width = part->xmax-part->xmin,
+						height = part->ymax-part->ymin;
+					std::string outfile = outfloder + "\\" + part->filename + ".png";
+					if (!wxFileExists(outfile))
+						images[i].writeToFile(pixels, width, height, outfile);
+
+					d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(outfile, width, height));
+					part->transform(sprite);
+					symbol->m_sprites.push_back(sprite);
 				}
 			}
+
+			std::stringstream ss;
+			ss << itr->first;
+			std::string filename = outfloder + "\\" + ss.str() 
+				+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
+			complex::FileSaver::store(filename.c_str(), symbol);
+			delete symbol;
 		}
 	}
 
@@ -151,6 +155,7 @@ namespace cocextract
 			}
 			lua_pop(L, 1);
 
+			part->init();
 			pic->parts.push_back(part);
 
 			lua_pop(L, 1);
@@ -258,5 +263,137 @@ namespace cocextract
 		lua_pop(L, 1);
 
 		m_mapAnims.insert(std::make_pair(id, ani));
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// class ParserLuaFile::Picture::Part
+	//////////////////////////////////////////////////////////////////////////
+
+	void ParserLuaFile::Picture::Part::init()
+	{
+		xmin = ymin = INT_MAX;
+		xmax = ymax = INT_MIN;
+		for (int i = 0; i < 4; ++i)
+		{
+			if (src[i].x < xmin)
+				xmin = src[i].x;
+			else if (src[i].x > xmax)
+				xmax = src[i].x;
+			if (src[i].y < ymin)
+				ymin = src[i].y;
+			else if (src[i].y > ymax)
+				ymax = src[i].y;
+		}
+
+		std::stringstream ss;
+		ss << tex << "_" << xmin << "_" << xmax << "_" << ymin << "_" << ymax;
+		filename = ss.str();
+	}
+
+	void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
+	{
+		bool xMirror = false, yMirror = false;
+		float angle = 0;
+		bool xy_swap = false;
+
+		std::string mode = dstMode();
+		// 0123 0321 
+		// 1032 1230
+		// 2103 2301
+		// 3012 3210
+		if (mode == "0123")
+			;
+		else if (mode == "0321")
+		{
+			xMirror = true;
+			angle = d2d::PI * 0.5f;
+			xy_swap = true;
+		}
+		else if (mode == "1032")
+		{
+			xMirror = true;
+		}
+		else if (mode == "1230")
+		{
+			angle = d2d::PI * 0.5f;
+			xy_swap = true;
+		}
+		else if (mode == "2103")
+		{
+			xMirror = true;
+			angle = - d2d::PI * 0.5f;
+			xy_swap = true;
+		}
+		else if (mode == "2301")
+		{
+			angle = d2d::PI;
+		}
+		else if (mode == "3012")
+		{
+			angle = - d2d::PI * 0.5f;
+			xy_swap = true;
+		}
+		else if (mode == "3210")
+		{
+			xMirror = true;
+			angle = d2d::PI;
+		}
+
+		d2d::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
+			dcenter = (dst[0] + dst[1] + dst[2] + dst[3]) * 0.25f;
+		float sw = fabs(src[0].x - scenter.x), sh = fabs(src[0].y - scenter.y);
+		float dw = fabs(dst[0].x - dcenter.x), dh = fabs(dst[0].y - dcenter.y);
+		float sx = dw / 16.0f / sw,
+			  sy = dh / 16.0f / sh;
+
+		if (xy_swap)
+			sprite->setScale(sy, sx);
+		else
+			sprite->setScale(sx, sy);
+		sprite->setMirror(xMirror, yMirror);
+		sprite->rotate(angle);
+	}
+
+	std::string ParserLuaFile::Picture::Part::dstMode() const
+	{
+		int sm[4], dm[4];
+		d2d::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
+			dcenter = (dst[0] + dst[1] + dst[2] + dst[3]) * 0.25f;
+		for (int i = 0; i < 4; ++i)
+			sm[i] = nodeMode(scenter, src[i]);
+		for (int i = 0; i < 4; ++i)
+			dm[i] = nodeMode(dcenter, dst[i]);
+		
+		std::stringstream ss;
+		for (int i = 0; i < 4; ++i)
+			ss << dm[findInMode(sm, i)];
+		return ss.str();
+	}
+
+	int ParserLuaFile::Picture::Part::nodeMode(const d2d::Vector& center, const d2d::Vector& node)
+	{
+		if (node.x < center.x)
+		{
+			if (node.y < center.y)
+				return 3;
+			else
+				return 0;
+		}
+		else
+		{
+			if (node.y < center.y)
+				return 2;
+			else
+				return 1;
+		}
+	}
+
+	int ParserLuaFile::Picture::Part::findInMode(int mode[4], int query)
+	{
+		for (int i = 0; i < 4; ++i)
+			if (mode[i] == query)
+				return i;
+		assert(0);
+		return -1;
 	}
 }
