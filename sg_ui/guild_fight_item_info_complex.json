@@ -30,7 +30,7 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align" : 1,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -43,8 +43,8 @@
 			"name" : "prg",
 			"position" : 
 			{
-				"x" : -33.0,
-				"y" : -20.0
+				"x" : 112.0,
+				"y" : 7.0
 			},
 			"size" : 16,
 			"tag" : "list",

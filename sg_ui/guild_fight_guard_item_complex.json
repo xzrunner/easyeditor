@@ -1,6 +1,6 @@
 
 {
-	"name" : "",
+	"name" : "guild_fight_guard_item",
 	"redo" : null,
 	"sprite" : 
 	[
@@ -9,59 +9,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6313-diban-9-5.png",
+			"filepath" : "level_indicator_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "level",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 10.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 2.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "rank_line_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -48.50
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "guild_mark_anim.json",
-			"multi color" : "0xffffffff",
-			"name" : "icon",
-			"position" : 
-			{
-				"x" : -155.0,
-				"y" : 0.0
+				"x" : -236.50,
+				"y" : -1.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -76,46 +30,69 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_fight_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar",
+			"position" : 
+			{
+				"x" : -5.50,
+				"y" : -1.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cd_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "attack",
+			"position" : 
+			{
+				"x" : 133.50,
+				"y" : -6.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "guild_name4_fontblank.json",
-			"font" : "",
+			"filepath" : "_fontblank.json",
+			"font" : "E",
 			"font_filename" : "",
-			"label_height" : 40,
-			"label_width" : 150,
+			"label_height" : 25,
+			"label_width" : 120,
 			"multi color" : "0xffffffff",
 			"name" : "name",
 			"position" : 
 			{
-				"x" : -43.0,
-				"y" : 15.50
+				"x" : -150.0,
+				"y" : -1.0
 			},
-			"size" : 18,
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "guild_fight_item_info_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "info",
-			"position" : 
-			{
-				"x" : 1.0,
-				"y" : -4.100006103515625
-			},
+			"size" : 15,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -127,19 +104,7 @@
 			"y shear" : 0.0
 		}
 	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 3 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : -272.0,
-				"type" : 0
-			}
-		}
-	],
+	"undo" : null,
 	"xmax" : 0.0,
 	"xmin" : 0.0,
 	"ymax" : 0.0,

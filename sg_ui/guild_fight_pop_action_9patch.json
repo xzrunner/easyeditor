@@ -1,0 +1,135 @@
+
+{
+	"height" : 480.0,
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "abg3.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 50.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "abg4.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 50.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "abg3.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 250.0,
+				"y" : 50.0
+			},
+			"scale" : 1.0,
+			"x mirror" : true,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 1.570796251296997,
+			"filepath" : "abg2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "abg5.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 4.712388992309570,
+			"filepath" : "abg2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 250.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "abg1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 250.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "abg2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 250.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 4.712388992309570,
+			"filepath" : "abg1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 250.0,
+				"y" : 250.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	],
+	"type" : 1,
+	"width" : 980.0
+}
