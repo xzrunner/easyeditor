@@ -1,6 +1,6 @@
 
 {
-	"name" : "yellow_button",
+	"name" : "",
 	"sprite" : 
 	[
 		
@@ -8,45 +8,45 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "yellow_button_9patch.json",
+			"filepath" : "blue_button_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "button",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : -1.0,
+				"y" : -2.0
 			},
-			"tag" : "",
+			"tag" : "no_cd",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.50,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 0.50,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
+			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "title2_fontblank.json",
+			"color" : "0xff000000",
+			"filepath" : "_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 25,
-			"label_width" : 130,
+			"label_width" : 200,
 			"multi color" : "0xffffffff",
-			"name" : "title",
+			"name" : "text",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"size" : 16,
-			"tag" : "",
+			"size" : 0,
+			"tag" : "cd",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 1.0,

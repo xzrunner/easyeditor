@@ -154,13 +154,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "blue_button_complex.json",
+			"filepath" : "guard_cd_button_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "guard",
 			"position" : 
 			{
-				"x" : 268.0,
-				"y" : -15.250
+				"x" : 267.0,
+				"y" : -16.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -317,11 +317,32 @@
 		},
 		
 		{
-			"sprites" : [ 2, 3, 4, 5, 6, 0 ],
+			"sprites" : [ 2, 3, 4, 5, 0 ],
 			"val" : 
 			{
 				"dx" : -61.0,
 				"dy" : -368.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 595.0,
+				"dy" : -212.0,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 35.0,
+				"dy" : 147.0,
 				"type" : 0
 			}
 		}
