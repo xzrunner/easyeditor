@@ -240,8 +240,10 @@ namespace cocextract
 
 		// Picture to easycomplex
 		std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
-		for ( ; itr != m_mapPictures.end(); ++itr)
+		for (int i = 0; itr != m_mapPictures.end(); ++itr, ++i)
 		{
+			std::cout << "pic: [" << i << "/" << m_mapPictures.size() << "]" << std::endl;
+
 			Picture* pic = itr->second;
 
 			complex::Symbol* symbol = new complex::Symbol;
@@ -281,8 +283,10 @@ namespace cocextract
 	{
 		// to Animation
 		std::map<int, Animation*>::iterator itr = m_mapAnims.begin();
-		for ( ; itr != m_mapAnims.end(); ++itr)
+		for (int i = 0; itr != m_mapAnims.end(); ++itr, ++i)
 		{
+			std::cout << "ani: " << itr->first << " [" << i << "/" << m_mapAnims.size() << "]" << std::endl;
+
 			Animation* ani = itr->second;
 
 			d2d::AnimSymbol* symbol = new d2d::AnimSymbol;
@@ -291,11 +295,15 @@ namespace cocextract
 			symbol->m_fps = 30;
 			for (int i = 0, n = ani->frames.size(); i < n; ++i)
 			{
+//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
+
 				d2d::AnimSymbol::Frame* frame = new d2d::AnimSymbol::Frame;
 				frame->index = i;
 				frame->bClassicTween = false;
 				for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
 				{
+//					std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
+
 					Animation::Item* item = ani->frames[i][j];
 					std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
 					if (itr != m_mapPictures.end())
@@ -310,6 +318,53 @@ namespace cocextract
 						assert(itr != m_mapAnims.end());
 						Animation* ani = itr->second;
 						d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(ani->filename));
+						// for mat
+						bool valid = false;
+						for (int i = 0; i < 6; ++i)
+							if (item->mat[i] != 0)
+							{
+								valid = true;
+								break;
+							}
+						if (item->is_full && valid)
+						{
+							float x = item->mat[4] / 16.0f,
+								y = -item->mat[5] / 16.0f;
+							assert(item->mat[0] != 0 && item->mat[3] != 0);
+							float ang1 = atan(-(float)item->mat[2]/item->mat[0]),
+								ang2 = atan((float)item->mat[1]/item->mat[3]);
+							float angle;
+							float sx, sy, kx, ky;
+							if (fabs(ang1 - ang2) < 0.00001f)
+							{
+								if (ang1 == 0)
+								{
+									sx = item->mat[0]/1024.0f/cos(ang1);
+									sy = item->mat[3]/1024.0f/cos(ang1);
+								}
+								else
+								{
+									sx = -item->mat[2]/1024.0f/sin(ang1);
+									sy = item->mat[1]/1024.0f/sin(ang1);
+								}
+								angle = ang1;
+								kx = ky = 0;
+							}
+							else
+							{
+								// no rotate
+								sx = item->mat[0]/1024.0f;
+								sy = item->mat[3]/1024.0f;
+								kx = float(item->mat[2])/item->mat[3];
+								ky = float(item->mat[1])/item->mat[0];
+								angle = 0;
+							}
+							sprite->rotate(angle);
+							sprite->translate(d2d::Vector(x, y));
+							const d2d::Vector& scale = sprite->getScale();
+							sprite->setScale(scale.x * sx, scale.y * sy);
+							sprite->setShear(kx, ky);
+						}
 						frame->sprites.push_back(sprite);
 					}
 				}
