@@ -22,12 +22,17 @@ namespace d2d
 		const wxString& filepath() const { return m_filepath; }
 
 		unsigned int textureID() const { return m_textureID; }
-		int width() const { return m_width; }
-		int height() const { return m_height; }
+		int width() const { return m_region.xLength(); }
+		int height() const { return m_region.yLength(); }
 
-		void draw() const;
+		void draw(const Rect& r) const;
 
-		const Rect& getRegion() const { return m_region; }
+		Rect getRegion() const { return m_region; }
+
+		const unsigned char* clip(int xmin, int xmax, int ymin, int ymax);
+
+		void writeToFile(const unsigned char* pixels, int width, int height,
+			const std::string& filename);
 
 	private:
 		void removeTransparentBorder();

@@ -56,8 +56,15 @@ namespace d2d
 
 	inline void OBB::initFromRect(const Rect& rect)
 	{
+// 		m_rect = rect;
+// 		m_position.set(0, 0);
+// 		m_angle = 0;
+
+		float x = rect.xCenter(),
+			y = rect.yCenter();
 		m_rect = rect;
-		m_position.set(0, 0);
+		m_rect.translate(Vector(-x, -y));
+		m_position.set(x, y);
 		m_angle = 0;
 	}
 

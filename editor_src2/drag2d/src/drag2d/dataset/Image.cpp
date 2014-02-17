@@ -5,6 +5,7 @@
 #include "common/config.h"
 
 #include <SOIL/SOIL.h>
+#include <SOIL/stb_image_write.h>
 
 #include "ImageLoader.h"
 
@@ -78,47 +79,96 @@ void Image::reload()
  		SOIL_FLAG_INVERT_Y
  		);
 #else
-	std::ifstream fin(m_filepath.fn_str(), std::ios::binary);
-	assert(!fin.fail());
+// 	std::ifstream fin(m_filepath.fn_str(), std::ios::binary);
+// 	assert(!fin.fail());
+// 
+// 	// get length of file:
+// 	fin.seekg (0, fin.end);
+// 	int length = fin.tellg();
+// 	fin.seekg (0, fin.beg);
+// 
+// 	char* buffer = new char[length];
+// 	fin.read (buffer,length);
+// 	m_pixels = ImageLoader::loadTexture(buffer, m_width, m_height, m_textureID, m_format);
 
-	// get length of file:
-	fin.seekg (0, fin.end);
-	int length = fin.tellg();
-	fin.seekg (0, fin.beg);
-
-	char* buffer = new char[length];
-	fin.read (buffer,length);
-	m_pixels = ImageLoader::loadTexture(buffer, m_width, m_height, m_textureID, m_format);
+	m_pixels = ImageLoader::loadTexture(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_format);
 
 	m_region.xMin = -m_width*0.5f;
 	m_region.xMax = -m_region.xMin;
 	m_region.yMin = -m_height*0.5f;
 	m_region.yMax = -m_region.yMin;
 
-	delete[] buffer;
+// 	delete[] buffer;
 #endif
 }
 
-void Image::draw() const
+void Image::draw(const Rect& r) const
 {
 // 	GL10::Enable(GL10::GL_BLEND);
 // 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 
 // 	GL10::Color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-	const float hWidth = m_width * 0.5f,
-		hHeight = m_height * 0.5f;
+	float hWidth = r.xLength() * 0.5f,
+		hHeight = r.yLength() * 0.5f;
+	float txmin = r.xMin / m_width ,
+		txmax = r.xMax / m_width ,
+		tymin = r.yMin / m_height ,
+		tymax = r.yMax / m_height ;
 
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
 	GL10::Begin(GL10::GL_QUADS);
-		GL10::TexCoord2f(0, 0); GL10::Vertex3f(-hWidth, -hHeight, -1.0f);
-		GL10::TexCoord2f(1, 0); GL10::Vertex3f( hWidth, -hHeight, -1.0f);
-		GL10::TexCoord2f(1, 1); GL10::Vertex3f( hWidth,  hHeight, -1.0f);
-		GL10::TexCoord2f(0, 1); GL10::Vertex3f(-hWidth,  hHeight, -1.0f);
+		GL10::TexCoord2f(txmin, tymin); GL10::Vertex3f(-hWidth, -hHeight, -1.0f);
+		GL10::TexCoord2f(txmax, tymin); GL10::Vertex3f( hWidth, -hHeight, -1.0f);
+		GL10::TexCoord2f(txmax, tymax); GL10::Vertex3f( hWidth,  hHeight, -1.0f);
+		GL10::TexCoord2f(txmin, tymax); GL10::Vertex3f(-hWidth,  hHeight, -1.0f);
 	GL10::End();
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 
 	//GL10::Disable(GL10::GL_BLEND);
+}
+
+const unsigned char* Image::clip(int xmin, int xmax, int ymin, int ymax)
+{
+	int channels;
+	int size = 0;
+	switch(m_format)
+	{
+	case 0x1907:	// GL_RGB
+		channels = 3;
+		return NULL;
+	case 0x1908:	// GL_RGBA
+		channels = 4;
+		break;
+	default:
+		return NULL;
+	}
+
+	if (xmin < 0 || xmin >= m_width ||
+		xmax < 0 || xmax >= m_width ||
+		ymin < 0 || ymin >= m_height ||
+		ymax < 0 || ymax >= m_height ||
+		xmin >= xmax || ymin >= ymax)
+		return NULL;
+
+	int w = xmax - xmin,
+		h = ymax - ymin;
+	unsigned char* pixels = new unsigned char[w * h * channels];
+	int line_size = channels * w;
+	for (int i = 0; i < h; ++i)
+	{
+		int from = (m_width * (ymin + i) + xmin) * channels,
+			to = i * w * channels;
+		memcpy(&pixels[to], &m_pixels[from], line_size);
+	}
+	return pixels;
+}
+
+void Image::writeToFile(const unsigned char* pixels, int width, int height, 
+						const std::string& filename)
+{
+	assert(m_format == 0x1908);
+	stbi_write_png(filename.c_str(), width, height, 4, pixels, 0);
 }
 
 void Image::removeTransparentBorder()
@@ -184,7 +234,7 @@ void Image::removeTransparentBorder()
 			else break;
 		}
 
-		m_region.translate(Vector(-m_width*0.5f, -m_height*0.5f));
+//		m_region.translate(Vector(-m_width*0.5f, -m_height*0.5f));
 	}
 }
 

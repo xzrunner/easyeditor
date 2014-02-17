@@ -1,5 +1,6 @@
 #include "ImageSymbol.h"
 #include "Bitmap.h"
+#include "Image.h"
 
 namespace d2d
 {
@@ -7,6 +8,13 @@ namespace d2d
 ImageSymbol::ImageSymbol()
 	: m_image(NULL)
 {
+}
+
+ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
+	: m_image(image)
+{
+	m_filepath = filename;
+	m_region = image->getRegion();
 }
 
 ImageSymbol::~ImageSymbol()
@@ -34,12 +42,15 @@ void ImageSymbol::reloadTexture() const
 
 void ImageSymbol::draw(const ISprite* sprite/* = NULL*/) const
 {
-	m_image->draw();
+	m_image->draw(m_region);
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return m_image->getRegion();
+	// to center
+	Rect ret = m_region;
+	ret.translate(Vector(-m_region.xLength()*0.5f, -m_region.yLength()*0.5f));
+	return ret;
 }
 
 unsigned int ImageSymbol::getTextureID() const
@@ -54,6 +65,8 @@ void ImageSymbol::loadResources()
 	m_bitmap = const_cast<Bitmap*>(init);
 
 	m_image = ImageMgr::Instance()->getItem(m_filepath);
+
+	m_region = m_image->getRegion();
 }
 
 } // d2d

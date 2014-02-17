@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ISymbol.h"
-#include "Image.h"
 
 namespace d2d
 {
@@ -11,6 +10,7 @@ namespace d2d
 	{
 	public:
 		ImageSymbol();
+		ImageSymbol(Image* image, const std::string& filename);
 		virtual ~ImageSymbol();
 
 		//
@@ -35,11 +35,15 @@ namespace d2d
 
 //		Image* getImage() { return m_image; }
 
+		void setRegion(const Rect& region) { m_region = region; }
+
 	protected:
 		virtual void loadResources();
 
 	protected:
 		Image* m_image;
+
+		Rect m_region;
 
 	}; // ImageSymbol
 }
