@@ -13,10 +13,10 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
 							"filepath" : "6103-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
@@ -41,10 +41,10 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
 							"filepath" : "6105-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
@@ -69,10 +69,10 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
 							"filepath" : "6106-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
@@ -97,10 +97,10 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.50,
 							"filepath" : "6106-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
@@ -116,10 +116,10 @@
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : -0.6999999880790710,
 							"filepath" : "6105-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
@@ -136,6 +136,34 @@
 					],
 					"id" : 0,
 					"time" : 4,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"filepath" : "6158-tongyong-1.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 5,
 					"tween" : false
 				}
 			],

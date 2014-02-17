@@ -1,6 +1,7 @@
 
 {
 	"name" : "",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -18,11 +19,9 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 10.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 3.0,
 			"y shear" : 0.0
 		},
@@ -41,11 +40,9 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
@@ -64,11 +61,9 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -87,11 +82,9 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -110,11 +103,9 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -133,11 +124,9 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -156,13 +145,164 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 299.0,
+				"dy" : -53.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 6.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 3.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : -2.0,
+				"dy" : -36.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 5.0,
+				"dy" : 38.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : 2.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 10.0,
+						"y" : 4.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 10.0,
+				"yscale" : 3.50
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 10.0,
+						"y" : 3.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 10.0,
+				"yscale" : 3.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 19.95000076293945,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -20.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -5.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 10.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 0.50,
+				"type" : 0
+			}
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
