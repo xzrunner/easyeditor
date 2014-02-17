@@ -11,6 +11,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyanimation", "projects\easyanimation.vcproj", "{BBF6F009-A0EB-4F62-9579-5FC05DECCBE7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909} = {5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38} = {1C3B5344-2217-44F5-B5F0-A551B7B5AB38}
 		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
 		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038} = {E1CFC0B9-F8A8-4F14-930A-E88A436FC038}
 		{11082ADE-13CA-49C7-9F6D-C82F69333AD7} = {11082ADE-13CA-49C7-9F6D-C82F69333AD7}
@@ -24,6 +25,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libshape", "..\..\..\easyshape\platform\msvc2008\projects\libshape.vcproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcomplex", "..\..\..\easycomplex\platform\msvc2008\projects\libcomplex.vcproj", "{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcoco", "..\..\..\coceditor\platform\msvc2008\projects\libcoco.vcproj", "{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +62,10 @@ Global
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Debug|Win32.Build.0 = Debug|Win32
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.ActiveCfg = Release|Win32
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.Build.0 = Release|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Debug|Win32.Build.0 = Debug|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Release|Win32.ActiveCfg = Release|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

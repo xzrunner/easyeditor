@@ -31,38 +31,46 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 	ISprite* sprite = NULL;
 
 	wxString filepath = symbol->getFilepath();
-	wxString ext = FilenameTools::getExtension(filepath).Lower();
+	if (filepath.empty())
+	{
+		if (complex::Symbol* s = dynamic_cast<complex::Symbol*>(symbol))
+			sprite = new complex::Sprite(s);
+	}
+	else
+	{
+		wxString ext = FilenameTools::getExtension(filepath).Lower();
 
-	if (ext == "png" || ext == "jpg" || ext == "bmp")
-	{
-		sprite = new ImageSprite(static_cast<ImageSymbol*>(symbol));
-	}
-	else if (ext == "ttf")
-	{
-		sprite = new TextSprite(static_cast<FontSymbol*>(symbol));
-	}
-	else if (ext == "txt")
-	{
-		if (FileNameParser::isType(filepath, FileNameParser::e_polygon))
-			sprite = new ShapeSprite(static_cast<ShapeSymbol*>(symbol));
-		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
-			sprite = new MeshSprite(static_cast<MeshSymbol*>(symbol));
-		else if (FileNameParser::isType(filepath, FileNameParser::e_combination))
-			sprite = new CombinationSprite(static_cast<CombinationSymbol*>(symbol));
-	}
-	else if (ext == "json")
-	{
-		if (FileNameParser::isType(filepath, FileNameParser::e_shape))
-			sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
-		else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
-			sprite = new complex::Sprite(static_cast<complex::Symbol*>(symbol));
-		else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
-			sprite = new AnimSprite(static_cast<AnimSymbol*>(symbol));
-		else if (FileNameParser::isType(filepath, FileNameParser::e_9patch))
-			sprite = new Patch9Sprite(static_cast<Patch9Symbol*>(symbol));
-		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
-			//sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
-			sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
+		if (ext == "png" || ext == "jpg" || ext == "bmp")
+		{
+			sprite = new ImageSprite(static_cast<ImageSymbol*>(symbol));
+		}
+		else if (ext == "ttf")
+		{
+			sprite = new TextSprite(static_cast<FontSymbol*>(symbol));
+		}
+		else if (ext == "txt")
+		{
+			if (FileNameParser::isType(filepath, FileNameParser::e_polygon))
+				sprite = new ShapeSprite(static_cast<ShapeSymbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
+				sprite = new MeshSprite(static_cast<MeshSymbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_combination))
+				sprite = new CombinationSprite(static_cast<CombinationSymbol*>(symbol));
+		}
+		else if (ext == "json")
+		{
+			if (FileNameParser::isType(filepath, FileNameParser::e_shape))
+				sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
+				sprite = new complex::Sprite(static_cast<complex::Symbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
+				sprite = new AnimSprite(static_cast<AnimSymbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_9patch))
+				sprite = new Patch9Sprite(static_cast<Patch9Symbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
+				//sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
+				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
+		}
 	}
 
 	if (sprite) insert(sprite);

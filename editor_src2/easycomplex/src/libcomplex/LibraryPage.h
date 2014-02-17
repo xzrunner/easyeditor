@@ -15,6 +15,10 @@ namespace complex
 	protected:
 		virtual void onAddPress(wxCommandEvent& event);
 
+	private:
+		void loadFromJsonFile(const wxString& filename);
+		void loadFromLuaFile(const wxString& filename);
+
 	}; // LibraryPage
 }
 
