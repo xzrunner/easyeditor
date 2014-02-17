@@ -5,7 +5,7 @@
 
 struct lua_State;
 
-namespace cocextract
+namespace libcoco
 {
 	class ParserLuaFile
 	{
@@ -15,13 +15,19 @@ namespace cocextract
 		void parser(const std::string& filename);
 
 		void transToEasyFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
+		void transToMemory(const std::vector<std::string>& texfilenames);
+
+		void getAllSymbols(std::vector<d2d::ISymbol*>& symbols) const;
 
 	private:
 		void parserPic(lua_State* L, int id);
 		void parserAni(lua_State* L, int id);
 
-		void transPicFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
-		void transAniFiles(const std::string& outfloder);
+		void transPicToFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
+		void transAniToFiles(const std::string& outfloder);
+
+		void transPicToMemory(const std::vector<std::string>& texfilenames);
+		void transAniToMemory();
 
 	private:
 		struct Picture
@@ -85,7 +91,7 @@ namespace cocextract
 		std::map<int, Picture*> m_mapPictures;
 		std::map<int, Animation*> m_mapAnims;
 
-//		std::map<std::string, Picture::Part*> m_mapPart;
+		std::map<int, d2d::ISymbol*> m_mapSymbols;
 
 	}; // ParserLuaFile
 }

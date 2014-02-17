@@ -1,5 +1,4 @@
 #include "ParserLuaFile.h"
-#include "ImageHelper.h"
 
 #include <sstream>
 
@@ -12,7 +11,7 @@ extern "C" {
 	#include <lauxlib.h>
 };
 
-namespace cocextract
+namespace libcoco
 {
 	ParserLuaFile::~ParserLuaFile()
 	{
@@ -67,8 +66,21 @@ namespace cocextract
 
 	void ParserLuaFile::transToEasyFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder)
 	{
-		transPicFiles(texfilenames, outfloder);
-		transAniFiles(outfloder);
+		transPicToFiles(texfilenames, outfloder);
+		transAniToFiles(outfloder);
+	}
+
+	void ParserLuaFile::transToMemory(const std::vector<std::string>& texfilenames)
+	{
+		transPicToMemory(texfilenames);
+	}
+
+	void ParserLuaFile::getAllSymbols(std::vector<d2d::ISymbol*>& symbols) const
+	{
+		symbols.reserve(m_mapSymbols.size());
+		std::map<int, d2d::ISymbol*>::const_iterator itr = m_mapSymbols.begin();
+		for ( ; itr != m_mapSymbols.end(); ++itr)
+			symbols.push_back(itr->second);
 	}
 
 	void ParserLuaFile::parserPic(lua_State* L, int id)
@@ -230,56 +242,56 @@ namespace cocextract
 		m_mapAnims.insert(std::make_pair(id, ani));
 	}
 
-	void ParserLuaFile::transPicFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder)
+	void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder)
 	{
-		// pictures
-		std::vector<ImageHelper> images;
-		images.resize(texfilenames.size());
-		for (int i = 0, n = texfilenames.size(); i < n; ++i)
-			images[i].loadPPM(texfilenames[i]);
-
-		// Picture to easycomplex
-		std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
-		for (int i = 0; itr != m_mapPictures.end(); ++itr, ++i)
-		{
-			std::cout << "pic: [" << i << "/" << m_mapPictures.size() << "]" << std::endl;
-
-			Picture* pic = itr->second;
-
-			complex::Symbol* symbol = new complex::Symbol;
-			for (int i = 0, n = pic->parts.size(); i < n; ++i)
-			{
-				Picture::Part* part = pic->parts[i];
-				const unsigned char* pixels = images[part->tex].clip(part->xmin, part->xmax, part->ymin, part->ymax);
-				if (pixels) 
-				{
-					int width = part->xmax-part->xmin,
-						height = part->ymax-part->ymin;
-					std::string outfile = outfloder + "\\" + part->filename + ".png";
-					if (!wxFileExists(outfile))
-						images[part->tex].writeToFile(pixels, width, height, outfile);
-
-					d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(outfile, width, height));
-					part->transform(sprite);
-					symbol->m_sprites.push_back(sprite);
-				}
-			}
-
-			std::stringstream ss;
-			ss << itr->first;
-			std::string filename = outfloder + "\\" + ss.str() 
-				+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
-			complex::FileSaver::store(filename.c_str(), symbol);
-
-			pic->filename = filename;
-			pic->width = symbol->getSize().xLength();
-			pic->height = symbol->getSize().yLength();
-
-			delete symbol;
-		}
+ 		// pictures
+		std::vector<d2d::Image*> images;
+ 		images.resize(texfilenames.size());
+ 		for (int i = 0, n = texfilenames.size(); i < n; ++i)
+			images[i] = d2d::ImageMgr::Instance()->getItem(texfilenames[i]);
+ 
+ 		// Picture to easycomplex
+ 		std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
+ 		for (int i = 0; itr != m_mapPictures.end(); ++itr, ++i)
+ 		{
+ 			std::cout << "pic: [" << i << "/" << m_mapPictures.size() << "]" << std::endl;
+ 
+ 			Picture* pic = itr->second;
+ 
+ 			complex::Symbol* symbol = new complex::Symbol;
+ 			for (int i = 0, n = pic->parts.size(); i < n; ++i)
+ 			{
+ 				Picture::Part* part = pic->parts[i];
+ 				const unsigned char* pixels = images[part->tex]->clip(part->xmin, part->xmax, part->ymin, part->ymax);
+ 				if (pixels) 
+ 				{
+ 					int width = part->xmax-part->xmin,
+ 						height = part->ymax-part->ymin;
+ 					std::string outfile = outfloder + "\\" + part->filename + ".png";
+ 					if (!wxFileExists(outfile))
+ 						images[part->tex]->writeToFile(pixels, width, height, outfile);
+ 
+ 					d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(outfile, width, height));
+ 					part->transform(sprite);
+ 					symbol->m_sprites.push_back(sprite);
+ 				}
+ 			}
+ 
+ 			std::stringstream ss;
+ 			ss << itr->first;
+ 			std::string filename = outfloder + "\\" + ss.str() 
+ 				+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
+ 			complex::FileSaver::store(filename.c_str(), symbol);
+ 
+ 			pic->filename = filename;
+ 			pic->width = symbol->getSize().xLength();
+ 			pic->height = symbol->getSize().yLength();
+ 
+ 			delete symbol;
+ 		}
 	}
 
-	void ParserLuaFile::transAniFiles(const std::string& outfloder)
+	void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 	{
 		// to Animation
 		std::map<int, Animation*>::iterator itr = m_mapAnims.begin();
@@ -382,6 +394,50 @@ namespace cocextract
 
 			delete symbol;
 		}
+	}
+
+	void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilenames)
+	{
+		// pictures
+		std::vector<d2d::Image*> images;
+		images.resize(texfilenames.size());
+		for (int i = 0, n = texfilenames.size(); i < n; ++i)
+			images[i] = d2d::ImageMgr::Instance()->getItem(texfilenames[i]);
+
+		// Picture to easycomplex
+		std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
+		for (int i = 0; itr != m_mapPictures.end(); ++itr, ++i)
+		{
+			std::cout << "pic: [" << i << "/" << m_mapPictures.size() << "]" << std::endl;
+
+			Picture* pic = itr->second;
+
+			complex::Symbol* symbol = new complex::Symbol;
+			for (int i = 0, n = pic->parts.size(); i < n; ++i)
+			{
+				Picture::Part* part = pic->parts[i];
+
+				d2d::ImageSymbol* image = new d2d::ImageSymbol(images[part->tex], texfilenames[part->tex]);
+				d2d::Rect r;
+				r.xMin = part->xmin;
+				r.xMax = part->xmax;
+				r.yMin = part->ymin;
+				r.yMax = part->ymax;
+				image->setRegion(r);
+
+				d2d::ISprite* sprite = new d2d::ImageSprite(image);
+				part->transform(sprite);
+				symbol->m_sprites.push_back(sprite);
+			}
+
+			symbol->refresh();
+			m_mapSymbols.insert(std::make_pair(itr->first, symbol));
+		}
+	}
+
+	void ParserLuaFile::transAniToMemory()
+	{
+		
 	}
 
 	//////////////////////////////////////////////////////////////////////////
