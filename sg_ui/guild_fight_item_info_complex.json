@@ -1,7 +1,6 @@
 
 {
 	"name" : "",
-	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -163,10 +162,5 @@
 			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		}
-	],
-	"undo" : null,
-	"xmax" : 0.0,
-	"xmin" : 0.0,
-	"ymax" : 0.0,
-	"ymin" : 0.0
+	]
 }

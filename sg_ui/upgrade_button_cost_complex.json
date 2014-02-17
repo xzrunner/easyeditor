@@ -12,6 +12,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "upgrade_button_text_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 25,
 			"label_width" : 140,
 			"multi color" : "0xffffffff",
@@ -24,9 +25,11 @@
 			"size" : 20,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
