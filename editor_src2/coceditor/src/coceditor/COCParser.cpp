@@ -4,6 +4,10 @@
 
 #include <queue>
 
+#include <easybuilder.h>
+#include <easycomplex.h>
+#include <easyanim.h>
+
 namespace coceditor
 {
 
@@ -32,14 +36,14 @@ void COCParser::prepareSymbols()
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
 				buffer.push(complex->m_sprites[j]);
 		}
-		else if (d2d::AnimSymbol* anim = dynamic_cast<d2d::AnimSymbol*>(symbol))
+		else if (anim::Symbol* anim = dynamic_cast<anim::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
-				d2d::AnimSymbol::Layer* layer = anim->m_layers[i];
+				anim::Symbol::Layer* layer = anim->m_layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					d2d::AnimSymbol::Frame* frame = layer->frames[j];
+					anim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						buffer.push(frame->sprites[k]);
 				}
@@ -71,18 +75,18 @@ void COCParser::prepareSymbols()
 				}
 			}
 		}
-		else if (const d2d::AnimSprite* anim = dynamic_cast<const d2d::AnimSprite*>(sprite))
+		else if (const anim::Sprite* anim = dynamic_cast<const anim::Sprite*>(sprite))
 		{
-			const d2d::AnimSymbol& symbol = anim->getSymbol();
+			const anim::Symbol& symbol = anim->getSymbol();
 			if (m_setSymbols.find(&symbol) == m_setSymbols.end())
 			{
 				m_setSymbols.insert(&symbol);
 				for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 				{
-					d2d::AnimSymbol::Layer* layer = symbol.m_layers[i];
+					anim::Symbol::Layer* layer = symbol.m_layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 					{
-						d2d::AnimSymbol::Frame* frame = layer->frames[j];
+						anim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 							buffer.push(frame->sprites[k]);
 					}
@@ -163,15 +167,15 @@ void COCParser::prepareOutList()
 					break;
 				}
 			}
-			else if (d2d::AnimSymbol* anim = dynamic_cast<d2d::AnimSymbol*>(symbol))
+			else if (anim::Symbol* anim = dynamic_cast<anim::Symbol*>(symbol))
 			{
 				bool prepared = true;
 				for (size_t i = 0, n = anim->m_layers.size(); i < n && prepared; ++i)
 				{
-					d2d::AnimSymbol::Layer* layer = anim->m_layers[i];
+					anim::Symbol::Layer* layer = anim->m_layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m && prepared; ++j)
 					{
-						d2d::AnimSymbol::Frame* frame = layer->frames[j];
+						anim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l && prepared; ++k)
 							if (!isSymbolPrepared(frame->sprites[k]))
 								prepared = false;

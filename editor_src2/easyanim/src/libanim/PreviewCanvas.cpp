@@ -1,7 +1,7 @@
 #include "PreviewCanvas.h"
 #include "tools.h"
 
-namespace libanim
+namespace anim
 {
 
 BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
@@ -10,7 +10,7 @@ END_EVENT_TABLE()
 
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
 							 d2d::LibraryPanel* library,
-							 const d2d::AnimSymbol* symbol)
+							 const Symbol* symbol)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
 	, m_library(library)
@@ -52,4 +52,4 @@ void PreviewCanvas::onTimer(wxTimerEvent& event)
 
 	Refresh();
 }
-} // libanim
+} // anim

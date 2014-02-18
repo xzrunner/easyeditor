@@ -1,9 +1,9 @@
 #include "FileSaver.h"
 
-namespace libanim
+namespace anim
 {
 
-void FileSaver::store(const std::string& filepath, const d2d::AnimSymbol& symbol)
+void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 {
 	Json::Value value;
 
@@ -19,7 +19,7 @@ void FileSaver::store(const std::string& filepath, const d2d::AnimSymbol& symbol
 	fout.close();
 }
 
-Json::Value FileSaver::store(d2d::AnimSymbol::Layer* layer, const wxString& dlg)
+Json::Value FileSaver::store(Symbol::Layer* layer, const wxString& dlg)
 {
 	Json::Value value;
 
@@ -30,7 +30,7 @@ Json::Value FileSaver::store(d2d::AnimSymbol::Layer* layer, const wxString& dlg)
 	return value;
 }
 
-Json::Value FileSaver::store(d2d::AnimSymbol::Frame* frame, const wxString& dlg)
+Json::Value FileSaver::store(Symbol::Frame* frame, const wxString& dlg)
 {
 	Json::Value value;
 
@@ -62,4 +62,4 @@ Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dlg)
 
 	return value;
 }
-} // libanim
+} // anim

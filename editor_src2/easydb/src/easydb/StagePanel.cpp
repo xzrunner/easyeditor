@@ -6,6 +6,7 @@
 #include "TreeCtrl.h"
 
 #include <easycomplex.h>
+#include <easyanim.h>
 
 using namespace edb;
 
@@ -82,15 +83,15 @@ void StagePanel::initConnection()
 						m_graphics.connect(from, sprites[i]);
 			}
 		}
-		else if (d2d::AnimSprite* anim = dynamic_cast<d2d::AnimSprite*>(from))
+		else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(from))
 		{
-			const d2d::AnimSymbol& symbol = anim->getSymbol();
+			const anim::Symbol& symbol = anim->getSymbol();
 			for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 			{
-				d2d::AnimSymbol::Layer* layer = symbol.m_layers[i];
+				anim::Symbol::Layer* layer = symbol.m_layers[i];
 				for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 				{
-					d2d::AnimSymbol::Frame* frame = layer->frames[i];
+					anim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
 					{
 						d2d::ISprite* child = frame->sprites[i];

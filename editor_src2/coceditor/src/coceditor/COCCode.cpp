@@ -6,6 +6,8 @@
 
 #include <queue>
 
+#include <easybuilder.h>
+#include <easycomplex.h>
 #include <easyanim.h>
 
 namespace coceditor
@@ -68,7 +70,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			resolveAnimation(complex);
 		}
-		else if (const d2d::AnimSymbol* anim = dynamic_cast<const d2d::AnimSymbol*>(symbol))
+		else if (const anim::Symbol* anim = dynamic_cast<const anim::Symbol*>(symbol))
 		{
 			////////////////////////////////////////////////////////////////////////////
 			//// version 1: parser all sprites to picture
@@ -76,10 +78,10 @@ void COCCode::resolveFromParser(const COCParser& parser)
 
 			//for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			//{
-			//	d2d::AnimSymbol::Layer* layer = anim->m_layers[i];
+			//	anim::Symbol::Layer* layer = anim->m_layers[i];
 			//	for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 			//	{
-			//		d2d::AnimSymbol::Frame* frame = layer->frames[j];
+			//		anim::Symbol::Frame* frame = layer->frames[j];
 			//		for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 			//		{
 			//			d2d::ISprite* sprite = frame->sprites[k];
@@ -106,10 +108,10 @@ void COCCode::resolveFromParser(const COCParser& parser)
 			std::set<const d2d::ImageSymbol*> unique;
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
-				d2d::AnimSymbol::Layer* layer = anim->m_layers[i];
+				anim::Symbol::Layer* layer = anim->m_layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					d2d::AnimSymbol::Frame* frame = layer->frames[j];
+					anim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 					{
 						d2d::ISprite* sprite = frame->sprites[k];
@@ -626,7 +628,7 @@ void COCCode::resolveAnimation(const complex::Symbol* symbol)
 	}
 }
 
-//void COCCode::resolveAnimation(const d2d::AnimSymbol* symbol)
+//void COCCode::resolveAnimation(const anim::Symbol* symbol)
 //{
 //	lua::TableAssign ta(m_gen, "animation", false, false);
 //
@@ -641,10 +643,10 @@ void COCCode::resolveAnimation(const complex::Symbol* symbol)
 // 		{
 // 			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
 // 			{
-// 				d2d::AnimSymbol::Layer* layer = symbol->m_layers[j];
+// 				anim::Symbol::Layer* layer = symbol->m_layers[j];
 // 				if (i < layer->frames.size())
 // 				{
-// 					d2d::AnimSymbol::Frame* frame = layer->frames[i];
+// 					anim::Symbol::Frame* frame = layer->frames[i];
 // 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 // 						resolveSpriteForComponent(frame->sprites[k], ids, unique);
 // 				}
@@ -661,10 +663,10 @@ void COCCode::resolveAnimation(const complex::Symbol* symbol)
 // 			lua::TableAssign ta(m_gen, "", true);
 // 			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
 // 			{
-// 				d2d::AnimSymbol::Layer* layer = symbol->m_layers[j];
+// 				anim::Symbol::Layer* layer = symbol->m_layers[j];
 // 				if (i < layer->frames.size())
 // 				{
-// 					d2d::AnimSymbol::Frame* frame = layer->frames[i];
+// 					anim::Symbol::Frame* frame = layer->frames[i];
 // 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k, ++index)
 // 						resolveSpriteForFrame(frame->sprites[k], index, ids, unique);
 // 				}
@@ -673,7 +675,7 @@ void COCCode::resolveAnimation(const complex::Symbol* symbol)
 // 	}
 //}
 
-void COCCode::resolveAnimation(const d2d::AnimSymbol* symbol)
+void COCCode::resolveAnimation(const anim::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "animation", false, false);
 
@@ -689,10 +691,10 @@ void COCCode::resolveAnimation(const d2d::AnimSymbol* symbol)
 		{
 			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
 			{
-				d2d::AnimSymbol::Layer* layer = symbol->m_layers[j];
+				anim::Symbol::Layer* layer = symbol->m_layers[j];
 				if (i < layer->frames.size())
 				{
-					d2d::AnimSymbol::Frame* frame = layer->frames[i];
+					anim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						resolveSpriteForComponent(frame->sprites[k], ids, unique, order);
 				}
@@ -709,7 +711,7 @@ void COCCode::resolveAnimation(const d2d::AnimSymbol* symbol)
  			lua::TableAssign ta(m_gen, "", true);
 
 			std::vector<d2d::ISprite*> sprites;
-			libanim::Tools::getCurrSprites(symbol, i, sprites);
+			anim::Tools::getCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				resolveSpriteForFrame(sprites[j], order);
  		}
@@ -818,7 +820,7 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 		}
 		else
 		{
-			// AnimSymbol's sprites store unique
+			// anim::Symbol's sprites store unique
 
 			std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
 			assert(itr != m_mapSymbolID.end());

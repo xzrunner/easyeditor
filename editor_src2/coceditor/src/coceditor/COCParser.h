@@ -1,7 +1,10 @@
 #pragma once
 
-#include <easybuilder.h>
-#include <easycomplex.h>
+#include <drag2d.h>
+
+namespace ebuilder { class CodeGenerator; }
+namespace complex { class Symbol; }
+namespace anim { class Symbol; }
 
 namespace coceditor
 {

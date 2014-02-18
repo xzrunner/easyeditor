@@ -4,6 +4,8 @@
 
 #include "LibraryPage.h"
 
+namespace anim { class LibraryPage; }
+
 namespace complex
 {
 	class LibraryPage;
@@ -22,7 +24,7 @@ namespace complex
 
 		d2d::ILibraryPage* getImagePage() { return m_imagePage; }
 		d2d::ILibraryPage* getComplexPage() { return m_complexPage; }
-		d2d::ILibraryPage* getAnimPage() { return m_animPage; }
+		d2d::ILibraryPage* getAnimPage();
 		d2d::ILibraryPage* get9PatchPage() { return m_9patchPage; }
 		d2d::ILibraryPage* getFontPage() { return m_fontPage; }
 		d2d::ILibraryPage* getScriptsPage() { return m_scriptsPage; }
@@ -30,7 +32,7 @@ namespace complex
 	private:
 		d2d::LibraryImagePage* m_imagePage;
 		LibraryPage* m_complexPage;
-		d2d::LibraryAnimPage* m_animPage;
+		anim::LibraryPage* m_animPage;
 		d2d::Library9PatchPage* m_9patchPage;
 		d2d::LibraryFontBlankPage* m_fontPage;
 		d2d::LibraryScriptsPage* m_scriptsPage;

@@ -1,7 +1,10 @@
 #pragma once
 
-#include <easybuilder.h>
-#include <easycomplex.h>
+#include <drag2d.h>
+
+namespace ebuilder { class CodeGenerator; }
+namespace complex { class Symbol; }
+namespace anim { class Symbol; }
 
 namespace coceditor
 {
@@ -31,8 +34,8 @@ namespace coceditor
 		void resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& parser,
 			PicFixType tsrc = e_null);
 		void resolveAnimation(const complex::Symbol* symbol);
-		//void resolveAnimation(const d2d::AnimSymbol* symbol);
-		void resolveAnimation(const d2d::AnimSymbol* symbol);
+		//void resolveAnimation(const anim::Symbol* symbol);
+		void resolveAnimation(const anim::Symbol* symbol);
 		void resolveAnimation(const d2d::Patch9Symbol* symbol);
 
 		void resolveAnimationCommon(const d2d::ISymbol* symbol);

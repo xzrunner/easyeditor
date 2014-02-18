@@ -141,7 +141,7 @@ namespace edb
 //  					dlg.ShowModal();
 //  					stage->resetCanvas();
 // 				}
-// 				else if (d2d::AnimSymbol* anim = dynamic_cast<d2d::AnimSymbol*>(symbol))
+// 				else if (anim::Symbol* anim = dynamic_cast<anim::Symbol*>(symbol))
 // 				{
 // 
 // 				}

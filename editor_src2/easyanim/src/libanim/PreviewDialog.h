@@ -3,30 +3,34 @@
 #include <wx/wx.h>
 #include <drag2d.h>
 
-namespace libanim
+namespace anim
 {
-	class PreviewDialog : public wxDialog
-	{
-	public:
-		PreviewDialog(wxWindow* parent, d2d::LibraryPanel* library,
-			const d2d::AnimSymbol* symbol);
-		~PreviewDialog();
 
-	private:
-		void initLayout();
+class Symbol;
 
-		void buildToolBar(wxSizer* topSizer);
-		void buildEditPanel(wxSizer* topSizer);
+class PreviewDialog : public wxDialog
+{
+public:
+	PreviewDialog(wxWindow* parent, d2d::LibraryPanel* library,
+		const Symbol* symbol);
+	~PreviewDialog();
 
-		void onSetCirculate(wxCommandEvent& event);
-		void onSetStop(wxCommandEvent& event);
+private:
+	void initLayout();
 
-	private:
-		d2d::EditPanel* m_stage;
-		d2d::LibraryPanel* m_library;
+	void buildToolBar(wxSizer* topSizer);
+	void buildEditPanel(wxSizer* topSizer);
 
-		const d2d::AnimSymbol* m_symbol;
+	void onSetCirculate(wxCommandEvent& event);
+	void onSetStop(wxCommandEvent& event);
 
-	}; // PreviewDialog
+private:
+	d2d::EditPanel* m_stage;
+	d2d::LibraryPanel* m_library;
+
+	const Symbol* m_symbol;
+
+}; // PreviewDialog
+
 }
 

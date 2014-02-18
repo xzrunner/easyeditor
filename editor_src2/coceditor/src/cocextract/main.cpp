@@ -1,5 +1,3 @@
-#include "ParserLuaFile.h"
-
 #include <easycoco.h>
 
 int main(int argc, char *argv[])

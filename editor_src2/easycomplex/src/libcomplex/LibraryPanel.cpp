@@ -2,6 +2,8 @@
 
 #include <wx/notebook.h>
 
+#include <easyanim.h>
+
 namespace complex
 {
 
@@ -12,7 +14,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(m_imagePage);
 	m_complexPage = new LibraryPage(getNotebook());
 	addPage(m_complexPage);
-	m_animPage = new d2d::LibraryAnimPage(getNotebook());
+	m_animPage = new anim::LibraryPage(getNotebook());
 	addPage(m_animPage);
 	m_9patchPage = new d2d::Library9PatchPage(getNotebook());
 	addPage(m_9patchPage);
@@ -29,4 +31,10 @@ void LibraryPanel::loadFromTextFile(std::ifstream& fin)
 void LibraryPanel::storeToTextFile(std::ofstream& fout) const
 {
 }
+
+d2d::ILibraryPage* LibraryPanel::getAnimPage() 
+{ 
+	return m_animPage; 
+}
+
 } // ecomplex

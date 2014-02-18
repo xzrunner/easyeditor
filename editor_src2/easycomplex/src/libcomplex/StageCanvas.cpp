@@ -44,10 +44,10 @@ namespace complex
 			d2d::ISprite* sprite = sprites[i];
 			if (!sprite->visiable)
 				continue;
-			if (d2d::AnimSprite* anim = dynamic_cast<d2d::AnimSprite*>(sprite))
+			if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(sprite))
 			{
 				d2d::SpriteDraw::begin(sprite);
-				libanim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
+				anim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
 				d2d::SpriteDraw::end(sprite);
 			}
 			else
@@ -61,8 +61,8 @@ namespace complex
 
 	void StageCanvas::onTimer(wxTimerEvent& event)
 	{
-		std::vector<d2d::AnimSprite*> sprites;
-		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::AnimSprite>(sprites));
+		std::vector<anim::Sprite*> sprites;
+		m_editPanel->traverseSprites(d2d::FetchAllVisitor<anim::Sprite>(sprites));
 		size_t max = 0;
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 			max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());

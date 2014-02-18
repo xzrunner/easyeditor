@@ -1,11 +1,12 @@
 #include "PreviewDialog.h"
 #include "PreviewCanvas.h"
+#include "Symbol.h"
 
-namespace libanim
+namespace anim
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, d2d::LibraryPanel* library,
-							 const d2d::AnimSymbol* symbol)
+							 const Symbol* symbol)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 	, m_library(library)
 	, m_symbol(symbol)
@@ -73,4 +74,4 @@ void PreviewDialog::onSetStop(wxCommandEvent& event)
 	m_stage->SetFocus();
 }
 
-} // libanim
+} // anim

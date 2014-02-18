@@ -35,9 +35,9 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
-	//else if (d2d::AnimSprite* anim = dynamic_cast<d2d::AnimSprite*>(selected))
+	//else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(selected))
 	//{
- //		libanim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
+ //		anim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
  //		dlg.ShowModal();
  //		Context::Instance()->stage->resetCanvas();
 	//}

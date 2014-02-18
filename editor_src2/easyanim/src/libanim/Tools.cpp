@@ -1,9 +1,9 @@
 #include "Tools.h"
 
-namespace libanim
+namespace anim
 {
 
-void Tools::drawAnimSymbol(const d2d::AnimSymbol* symbol, int index)
+void Tools::drawAnimSymbol(const Symbol* symbol, int index)
 {
 	std::vector<d2d::ISprite*> sprites;
 	getCurrSprites(symbol, index, sprites);
@@ -13,13 +13,13 @@ void Tools::drawAnimSymbol(const d2d::AnimSymbol* symbol, int index)
 	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::ISprite>());
 }
 
-void Tools::getCurrSprites(const d2d::AnimSymbol* symbol, int index, std::vector<d2d::ISprite*>& sprites)
+void Tools::getCurrSprites(const Symbol* symbol, int index, std::vector<d2d::ISprite*>& sprites)
 {
 	for (size_t i = 0, n = symbol->m_layers.size(); i < n; ++i)
 	{
-		d2d::AnimSymbol::Layer* layer = symbol->m_layers[i];
+		Symbol::Layer* layer = symbol->m_layers[i];
 
-		d2d::AnimSymbol::Frame *currFrame = getCurrFrame(layer, index),
+		Symbol::Frame *currFrame = getCurrFrame(layer, index),
 			*nextFrame = getNextFrame(layer, index);
 		if (!currFrame)
 			continue;
@@ -38,13 +38,13 @@ void Tools::getCurrSprites(const d2d::AnimSymbol* symbol, int index, std::vector
 	}
 }
 
-d2d::AnimSymbol::Frame* Tools::getCurrFrame(d2d::AnimSymbol::Layer* layer, int index)
+Symbol::Frame* Tools::getCurrFrame(Symbol::Layer* layer, int index)
 {
-	d2d::AnimSymbol::Frame* ret = NULL;
+	Symbol::Frame* ret = NULL;
 
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 	{
-		d2d::AnimSymbol::Frame* frame = layer->frames[i];
+		Symbol::Frame* frame = layer->frames[i];
 		if (frame->index <= index)
 			ret = frame;
 		else
@@ -53,11 +53,11 @@ d2d::AnimSymbol::Frame* Tools::getCurrFrame(d2d::AnimSymbol::Layer* layer, int i
 	return ret;
 }
 
-d2d::AnimSymbol::Frame* Tools::getNextFrame(d2d::AnimSymbol::Layer* layer, int index)
+Symbol::Frame* Tools::getNextFrame(Symbol::Layer* layer, int index)
 {
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 	{
-		d2d::AnimSymbol::Frame* frame = layer->frames[i];
+		Symbol::Frame* frame = layer->frames[i];
 		if (frame->index > index)
 			return frame;
 	}
@@ -119,4 +119,4 @@ void Tools::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite*
 	tween->setShear(xshear, yshear);
 }
 
-} // libanim
+} // anim

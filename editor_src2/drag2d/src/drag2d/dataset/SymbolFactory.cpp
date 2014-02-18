@@ -4,7 +4,6 @@
 #include "EShapeSymbol.h"
 #include "MeshSymbol.h"
 #include "CombinationSymbol.h"
-#include "AnimSymbol.h"
 #include "Patch9Symbol.h"
 #include "FontSymbol.h"
 #include "FontBlankSymbol.h"
@@ -14,6 +13,7 @@
 #include "common/FileNameParser.h"
 
 #include <easycomplex.h>
+#include <easyanim.h>
 
 namespace d2d
 {
@@ -48,7 +48,7 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
  		else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
 			symbol = new complex::Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
-			symbol = new AnimSymbol;
+			symbol = new anim::Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_9patch))
 			symbol = new Patch9Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
