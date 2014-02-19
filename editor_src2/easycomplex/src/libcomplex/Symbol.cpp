@@ -106,7 +106,9 @@ namespace complex
 			m_sprites.push_back(sprite);
 			spriteValue = value["sprite"][i++];
 		}	
-		initBounding();
+
+		// 为兼容老数据，临时去掉
+//		initBounding();
 	}
 
 	void Symbol::initBounding()
