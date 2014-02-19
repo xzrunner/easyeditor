@@ -1,127 +1,64 @@
 
 {
 	"name" : "ui_top_right",
-	"redo" : null,
 	"sprite" : 
 	[
 		
 		{
-			"add color" : "0x00000000",
+			"add color" : "",
 			"angle" : 0.0,
-			"clip" : false,
 			"filepath" : "game_top_right_elixir_bar_complex.json",
-			"multi color" : "0xffffffff",
+			"multi color" : "",
 			"name" : "elixir_bar",
 			"position" : 
 			{
 				"x" : -160.0,
 				"y" : -103.0
 			},
-			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "0x00000000",
+			"add color" : "",
 			"angle" : 0.0,
-			"clip" : false,
 			"filepath" : "game_top_right_diamond_complex.json",
-			"multi color" : "0xffffffff",
+			"multi color" : "",
 			"name" : "diamond_bar",
 			"position" : 
 			{
 				"x" : -171.0,
 				"y" : -199.0
 			},
-			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "0x00000000",
+			"add color" : "",
 			"angle" : 0.0,
-			"clip" : false,
 			"filepath" : "game_top_right_gold_bar_complex.json",
-			"multi color" : "0xffffffff",
+			"multi color" : "",
 			"name" : "gold_bar",
 			"position" : 
 			{
 				"x" : -160.0,
 				"y" : -40.0
 			},
-			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "wall_bar_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "wall",
-			"position" : 
-			{
-				"x" : -171.0749969482422,
-				"y" : -254.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 3 ],
-			"val" : 
-			{
-				"dx" : 1.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 3 ],
-			"val" : 
-			{
-				"dx" : -59.0,
-				"dy" : -530.0,
-				"type" : 0
-			}
-		}
-	],
-	"xmax" : 0.0,
-	"xmin" : 0.0,
-	"ymax" : 0.0,
-	"ymin" : 0.0
+	]
 }

@@ -5,77 +5,107 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "game_top_background_bar_9patch.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
+				"x" : 18.58750152587891,
+				"y" : -5.025001525878906
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "tid_builder_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 129,
+			"multi color" : "0xffffffff",
 			"name" : "TID_BUILDER",
 			"position" : 
 			{
-				"x" : -4.50,
-				"y" : 24.750
+				"x" : 14.08750152587891,
+				"y" : 19.72499847412109
 			},
+			"size" : 14,
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "worker_button_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "button",
 			"position" : 
 			{
-				"x" : -79.0,
-				"y" : 2.800003051757813
+				"x" : -60.41249847412109,
+				"y" : -2.224998474121094
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "text_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 19,
+			"label_width" : 140,
+			"multi color" : "0xffffffff",
 			"name" : "Text",
 			"position" : 
 			{
-				"x" : 5.0,
-				"y" : 2.250
+				"x" : 23.58750152587891,
+				"y" : -2.775001525878906
 			},
+			"size" : 16,
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}

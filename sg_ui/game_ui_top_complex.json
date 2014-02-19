@@ -1,35 +1,104 @@
 
 {
 	"name" : "ui_top",
+	"redo" : null,
 	"sprite" : 
 	[
 		
 		{
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "game_top_worker_complex.json",
+			"multi color" : "0xffffffff",
 			"name" : "worker",
 			"position" : 
 			{
 				"x" : -110.0,
 				"y" : -40.0
 			},
-			"scale" : 1.0,
+			"tag" : "",
 			"x mirror" : false,
-			"y mirror" : false
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		},
 		
 		{
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "game_top_shield_complex.json",
+			"multi color" : "0xffffffff",
 			"name" : "shield",
 			"position" : 
 			{
 				"x" : 110.0,
 				"y" : -40.0
 			},
-			"scale" : 1.0,
+			"tag" : "",
 			"x mirror" : false,
-			"y mirror" : false
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "wall_bar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "wall",
+			"position" : 
+			{
+				"x" : -105.4124984741211,
+				"y" : -96.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
-	]
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 144.0,
+				"dy" : -310.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : -104.0,
+				"dy" : 3.0,
+				"type" : 0
+			}
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
