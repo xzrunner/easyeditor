@@ -33,7 +33,7 @@ namespace d2d
 
 		unsigned int getTextureID() const;
 
-//		Image* getImage() { return m_image; }
+		Image* getImage() const { return m_image; }
 
 		void setRegion(const Rect& region) { m_region = region; }
 

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src"
+				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..;..\include\c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -2060,6 +2060,22 @@
 			<Filter
 				Name="frame"
 				>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\EJPreviewCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\EJPreviewCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\EJPreviewDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\EJPreviewDialog.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\Frame.cpp"
 					>

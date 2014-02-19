@@ -29,6 +29,8 @@ namespace d2d
 
 		Rect getRegion() const { return m_region; }
 
+		const unsigned char* getPixelData() const { return m_pixels; }
+
 		const unsigned char* clip(int xmin, int xmax, int ymin, int ymax);
 
 		void writeToFile(const unsigned char* pixels, int width, int height,

@@ -21,6 +21,8 @@ namespace d2d
 		void onSave(wxCommandEvent& event);
 		void onSaveAs(wxCommandEvent& event);
 
+		void onEJPreview(wxCommandEvent& event);
+
 		void onQuit(wxCommandEvent& event);
 
 		void onClose(wxCloseEvent& event);
@@ -28,11 +30,18 @@ namespace d2d
 		void initMenuBar();
 
 		wxMenu* initFileBar();
+		wxMenu* initViewBar();
 		wxMenu* initHelpBar();
 
 		wxString getFileFilter() const;
 
 		void setCurrFilename();
+
+	private:
+		enum
+		{
+			ID_EJ_PREVIEW = 1000,
+		};
 
 	private:
 		ITask* m_task;

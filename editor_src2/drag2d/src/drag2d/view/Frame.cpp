@@ -1,4 +1,5 @@
 #include "Frame.h"
+#include "EJPreviewDialog.h"
 
 #include "common/FileNameTools.h"
 #include "common/Exception.h"
@@ -12,6 +13,8 @@ namespace d2d
 		EVT_MENU(wxID_OPEN, Frame::onOpen)
 		EVT_MENU(wxID_SAVE, Frame::onSave)
 		EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
+
+		EVT_MENU(ID_EJ_PREVIEW, Frame::onEJPreview)
 
 		EVT_MENU(wxID_EXIT, Frame::onQuit)
 		
@@ -97,6 +100,14 @@ namespace d2d
 		}
 	}
 
+	void Frame::onEJPreview(wxCommandEvent& event)
+	{
+		std::vector<const ISprite*> sprites;
+		m_task->getAllSprite(sprites);
+		EJPreviewDialog dlg(this, sprites);
+		dlg.ShowModal();
+	}
+
 	void Frame::onQuit(wxCommandEvent& event)
 	{
 		Close(true);
@@ -122,6 +133,7 @@ namespace d2d
 	{
 		wxMenuBar* menuBar = new wxMenuBar;
 		menuBar->Append(initFileBar(), "&File");
+		menuBar->Append(initViewBar(), "&View");
 		SetMenuBar(menuBar);
 	}
 
@@ -136,6 +148,13 @@ namespace d2d
 		fileMenu->AppendSeparator();
 		fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt+X"), wxT("Quit"));
 		return fileMenu;
+	}
+
+	wxMenu* Frame::initViewBar()
+	{
+		wxMenu* viewMenu = new wxMenu;
+		viewMenu->Append(ID_EJ_PREVIEW, wxT("&EJOY2D...\tF5"), wxT("Preview by ejoy2d"));
+		return viewMenu;
 	}
 
 	wxMenu* Frame::initHelpBar()

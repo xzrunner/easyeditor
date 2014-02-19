@@ -20,6 +20,8 @@ namespace ecomplex
 
 		virtual void clear();
 
+		virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
+
 		complex::StagePanel* getStagePanel() { return m_stage; }
 
 	private:

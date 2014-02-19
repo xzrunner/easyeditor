@@ -1,9 +1,11 @@
 #pragma once
 
 #include <fstream>
+#include <vector>
 
 namespace d2d
 {
+	class ISprite;
 	class ITask
 	{
 	public:
@@ -11,6 +13,7 @@ namespace d2d
 		virtual void store(const char* filename) const = 0;
 		virtual bool isDirty() const = 0;
 		virtual void clear() = 0;
+		virtual void getAllSprite(std::vector<const ISprite*>& sprites) const = 0;
 		virtual ~ITask() {}
 	};
 
