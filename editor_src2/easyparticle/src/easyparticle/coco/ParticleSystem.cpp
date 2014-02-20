@@ -44,11 +44,11 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::draw()
 {
-	glEnable(GL_BLEND);
-	if (additive_blend)
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	else
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+// 	glEnable(GL_BLEND);
+// 	if (additive_blend)
+// 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+// 	else
+// 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	vertex vertices[4];
 
@@ -85,7 +85,7 @@ void ParticleSystem::draw()
 	glPopAttrib();
 	glPopMatrix();
 
-	glDisable(GL_BLEND);
+//	glDisable(GL_BLEND);
 }
 
 //void ParticleSystem::draw()
