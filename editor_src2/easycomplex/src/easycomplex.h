@@ -6,6 +6,7 @@
 #include "libcomplex/StageCanvas.h"
 #include "libcomplex/StagePanel.h"
 #include "libcomplex/LibraryPanel.h"
+#include "libcomplex/LibraryPage.h"
 #include "libcomplex/Context.h"
 
 #include "libcomplex/Sprite.h"

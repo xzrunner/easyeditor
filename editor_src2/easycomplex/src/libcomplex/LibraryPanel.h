@@ -2,8 +2,6 @@
 
 #include <drag2d.h>
 
-#include "LibraryPage.h"
-
 namespace anim { class LibraryPage; }
 
 namespace complex
@@ -23,7 +21,7 @@ namespace complex
 		virtual void storeToTextFile(std::ofstream& fout) const;
 
 		d2d::ILibraryPage* getImagePage() { return m_imagePage; }
-		d2d::ILibraryPage* getComplexPage() { return m_complexPage; }
+		d2d::ILibraryPage* getComplexPage();
 		d2d::ILibraryPage* getAnimPage();
 		d2d::ILibraryPage* get9PatchPage() { return m_9patchPage; }
 		d2d::ILibraryPage* getFontPage() { return m_fontPage; }

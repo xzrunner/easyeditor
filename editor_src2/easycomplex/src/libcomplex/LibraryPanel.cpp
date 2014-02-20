@@ -1,4 +1,5 @@
 #include "LibraryPanel.h"
+#include "LibraryPage.h"
 
 #include <wx/notebook.h>
 
@@ -30,6 +31,11 @@ void LibraryPanel::loadFromTextFile(std::ifstream& fin)
 
 void LibraryPanel::storeToTextFile(std::ofstream& fout) const
 {
+}
+
+d2d::ILibraryPage* LibraryPanel::getComplexPage() 
+{ 
+	return m_complexPage; 
 }
 
 d2d::ILibraryPage* LibraryPanel::getAnimPage() 
