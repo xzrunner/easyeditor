@@ -150,11 +150,27 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\libcoco\PackLuaFile.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\PackLuaFile.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libcoco\ParserLuaFile.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\src\libcoco\ParserLuaFile.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\TexturePacker.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\TexturePacker.h"
 			>
 		</File>
 	</Files>

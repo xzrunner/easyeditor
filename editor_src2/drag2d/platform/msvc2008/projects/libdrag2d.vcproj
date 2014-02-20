@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..;..\include\c99"
+				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..;..\include\c99;..\..\..\..\coceditor\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src"
+				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\coceditor\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
