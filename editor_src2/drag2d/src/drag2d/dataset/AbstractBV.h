@@ -23,8 +23,6 @@ namespace d2d
 		virtual bool isValid() const = 0;
 		virtual void makeInfinite() = 0;
 
-// 		virtual void translate(const Vector& offset) = 0;
-// 		virtual void rotate(float delta) = 0;
 		virtual void setTransform(const Vector& position, const Vector& offset, float angle) = 0;
 
 		virtual void combine(const Vector& pos) = 0;

@@ -110,14 +110,12 @@ float OBB::height() const
 
 Vector OBB::center() const
 {
-//	return Vector(m_rect.xCenter(), m_rect.yCenter());
 	return m_position;
 }
 
 void OBB::getBoundPos(std::vector<Vector>& bound) const
 {
 	bound.clear();
-
 	bound.push_back(Math::rotateVector(Vector(m_rect.xMin, m_rect.yMin), m_angle) + m_position);
 	bound.push_back(Math::rotateVector(Vector(m_rect.xMax, m_rect.yMin), m_angle) + m_position);
 	bound.push_back(Math::rotateVector(Vector(m_rect.xMax, m_rect.yMax), m_angle) + m_position);

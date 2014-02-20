@@ -33,11 +33,7 @@ void AABB::storeToTextFile(std::ofstream& fout) const
 
 void AABB::setTransform(const Vector& position, const Vector& offset, float angle)
 {
-// 	Vector center_offset = Math::rotateVector(-offset, angle) + offset;
-// 	Vector center = position + center_offset;
-// 	m_rect.translate(Vector(center.x - m_rect.xCenter(), center.y - m_rect.yCenter()));
-
-	m_position = position;
+	m_position = position + (Math::rotateVector(-offset, angle) + offset);
 }
 
 bool AABB::isContain(const Vector& pos) const
@@ -76,7 +72,6 @@ float AABB::height() const
 
 Vector AABB::center() const
 {
-//	return Vector(m_rect.xCenter(), m_rect.yCenter());
 	return m_position;
 }
 

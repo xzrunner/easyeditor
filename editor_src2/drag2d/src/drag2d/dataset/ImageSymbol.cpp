@@ -47,10 +47,7 @@ void ImageSymbol::draw(const ISprite* sprite/* = NULL*/) const
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	// to center
-	Rect ret = m_region;
-	ret.translate(Vector(-m_region.xLength()*0.5f, -m_region.yLength()*0.5f));
-	return ret;
+	return m_region;
 }
 
 unsigned int ImageSymbol::getTextureID() const

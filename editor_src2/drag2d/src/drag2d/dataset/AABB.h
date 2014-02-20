@@ -52,8 +52,8 @@ namespace d2d
 
 	inline void AABB::initFromRect(const Rect& rect)
 	{
-		m_rect = rect;
-		m_position.set(0, 0);
+ 		m_rect = rect;
+ 		m_position.set(0, 0);
 	}
 
 	inline bool AABB::isValid() const
