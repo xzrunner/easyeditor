@@ -61,17 +61,6 @@ wxSizer* ToolbarPanel::initLayout()
 {
 	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	topSizer->AddSpacer(10);
-	// background
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Background..."));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onSetBackground));
-		sizer->Add(btn);
-
-		topSizer->Add(sizer);
-	}
-	topSizer->AddSpacer(10);
 	// Open
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -344,17 +333,6 @@ void ToolbarPanel::initParticle()
 	ps->setGravity(m_gravity->GetValue());
 	ps->setInertia(m_inertia->GetValue());
 	ps->setFadeoutTime(m_fadeout_time->GetValue());
-}
-
-void ToolbarPanel::onSetBackground(wxCommandEvent& event)
-{
-	wxFileDialog dlg(this, wxT("Choose image"), wxEmptyString, 
-		wxEmptyString, wxT("*.png;*.jpg"), wxFD_OPEN);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(dlg.GetPath());
-		Context::Instance()->stage->m_background = d2d::SpriteFactory::Instance()->create(symbol);
-	}	
 }
 
 void ToolbarPanel::onAddChild(wxCommandEvent& event)

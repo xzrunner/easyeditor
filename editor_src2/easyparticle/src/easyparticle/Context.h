@@ -7,13 +7,15 @@
 namespace eparticle
 {
 	namespace coco { class StagePanel; class ToolbarPanel; }
-	class ToolbarPanel;
+
+	class LibraryPanel;
 
 	class Context
 	{
 	public:
 		coco::StagePanel* stage;
 		coco::ToolbarPanel* toolbar;
+		LibraryPanel* library;
 
 	public:
 		static Context* Instance();

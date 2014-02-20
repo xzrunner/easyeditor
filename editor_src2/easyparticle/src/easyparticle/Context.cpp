@@ -11,6 +11,7 @@ Context::Context()
 {
 	stage = NULL;
 	toolbar = NULL;
+	library = NULL;
 }
 
 Context* Context::Instance()

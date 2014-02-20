@@ -1,7 +1,7 @@
-
 #include "Task.h"
 #include "coco/StagePanel.h"
 #include "coco/ToolbarPanel.h"
+#include "LibraryPanel.h"
 #include "Context.h"
 #include "FileIO.h"
 
@@ -47,24 +47,29 @@ d2d::GLCanvas* Task::getCanvas() const
 		return NULL;
 }
 
-void Task::initWindows(wxSplitterWindow* splitter, 
-					   wxWindow*& stage, wxWindow*& toolbar)
+void Task::initWindows(wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter, 
+					   wxWindow*& library, wxWindow*& stage, wxWindow*& toolbar)
 {
-	stage = Context::Instance()->stage = new coco::StagePanel(splitter, m_parent);
-	toolbar = Context::Instance()->toolbar = new coco::ToolbarPanel(splitter);
+	library = Context::Instance()->library = new eparticle::LibraryPanel(leftVerticalSplitter);
+	stage = Context::Instance()->stage = new coco::StagePanel(leftVerticalSplitter, m_parent);
+	toolbar = Context::Instance()->toolbar = new coco::ToolbarPanel(rightVerticalSplitter);
 }
 
 void Task::initLayout()
 {
-	wxSplitterWindow* splitter = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
 
-	wxWindow *stage, *toolbar;
-	initWindows(splitter, stage, toolbar);
+	wxWindow *library, *stage, *toolbar;
+	initWindows(leftVerticalSplitter, rightVerticalSplitter, library, stage, toolbar);
 
-	splitter->SetSashGravity(0.7f);
-	splitter->SplitVertically(stage, toolbar);
+	leftVerticalSplitter->SetSashGravity(0.2f);
+	leftVerticalSplitter->SplitVertically(library, stage);
 
-	m_root = splitter;
+	rightVerticalSplitter->SetSashGravity(0.85f);
+	rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
+
+	m_root = rightVerticalSplitter;
 
 	wxSize size = m_parent->GetSize();
 	size.SetWidth(size.GetWidth() + 1);

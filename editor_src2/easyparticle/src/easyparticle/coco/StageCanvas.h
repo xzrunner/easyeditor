@@ -8,35 +8,38 @@ namespace eparticle
 {
 namespace coco
 {
-	class StagePanel;
 
-	class StageCanvas : public d2d::OrthoCanvas
+class StagePanel;
+
+class StageCanvas : public d2d::OrthoCanvas
+{
+public:
+	StageCanvas(StagePanel* editPanel);
+	virtual ~StageCanvas();
+
+protected:
+	virtual void onDraw();
+
+private:
+	void onTimer(wxTimerEvent& event);
+
+	enum
 	{
-	public:
-		StageCanvas(StagePanel* editPanel);
-		virtual ~StageCanvas();
+		TIMER_ID = 1000
+	};
 
-	protected:
-		virtual void onDraw();
+	static const int FRAME_RATE = 60;
 
-	private:
-		void onTimer(wxTimerEvent& event);
+private:
+	StagePanel* m_stage;
 
-		enum
-		{
-			TIMER_ID = 1000
-		};
+	wxTimer m_timer;
+	int m_currFrame;
 
-		static const int FRAME_RATE = 60;
+	DECLARE_EVENT_TABLE()
 
-	private:
-		StagePanel* m_stage;
+}; // StageCanvas
 
-		wxTimer m_timer;
-
-		DECLARE_EVENT_TABLE()
-
-	}; // StageCanvas
 }
 }
 

@@ -10,25 +10,25 @@ namespace eparticle
 {
 namespace coco
 {
-	class StagePanel : public d2d::EditPanel
-	{
-	public:
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
-		virtual ~StagePanel();
 
-		//
-		// d2d::EditPanel interface
-		//
-		virtual void clear();
+class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+{
+public:
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
+	virtual ~StagePanel();
 
-	public:
-		coco::ParticleSystem* m_particle;
+	//
+	// d2d::EditPanel interface
+	//
+	virtual void clear();
 
-		d2d::ISprite* m_background;
+public:
+	coco::ParticleSystem* m_particle;
 
-		float xRot, yRot;
+	float xRot, yRot;
 
-	}; // StagePanel
+}; // StagePanel
+
 }
 }
 

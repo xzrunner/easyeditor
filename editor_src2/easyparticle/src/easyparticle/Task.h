@@ -27,7 +27,8 @@ namespace eparticle
 		Task(wxFrame* parent);
 		~Task();
 
-		virtual void initWindows(wxSplitterWindow* splitter, 
+		virtual void initWindows(wxSplitterWindow* leftVerticalSplitter, 
+			wxSplitterWindow* rightVerticalSplitter, wxWindow*& library,
 			wxWindow*& stage, wxWindow*& toolbar);
 
 	private:

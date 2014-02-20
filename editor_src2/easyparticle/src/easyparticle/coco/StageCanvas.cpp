@@ -2,47 +2,75 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
+#include <easyanim.h>
+
 namespace eparticle
 {
 namespace coco
 {
 
-	BEGIN_EVENT_TABLE(StageCanvas, d2d::PerspectCanvas)
-		EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-	END_EVENT_TABLE()
+BEGIN_EVENT_TABLE(StageCanvas, d2d::PerspectCanvas)
+	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
+END_EVENT_TABLE()
 
-	StageCanvas::StageCanvas(StagePanel* editPanel)
-		: d2d::OrthoCanvas(editPanel)
-		, m_stage(editPanel)
-		, m_timer(this, TIMER_ID)
+StageCanvas::StageCanvas(StagePanel* editPanel)
+	: d2d::OrthoCanvas(editPanel)
+	, m_stage(editPanel)
+	, m_timer(this, TIMER_ID)
+{
+//		m_bgColor.set(0, 0, 0, 1);
+	m_bgColor.set(1, 1, 1, 1);
+
+	m_timer.Start(1000 / FRAME_RATE);
+	m_currFrame = 1;
+}
+
+StageCanvas::~StageCanvas()
+{
+}
+
+void StageCanvas::onDraw()
+{
+	std::vector<d2d::ISprite*> sprites;
+	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		m_bgColor.set(0, 0, 0, 1);
-
-		m_timer.Start(1000 / FRAME_RATE);
+		d2d::ISprite* sprite = sprites[i];
+		if (!sprite->visiable)
+			continue;
+		if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(sprite))
+		{
+			d2d::SpriteDraw::begin(sprite);
+			anim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
+			d2d::SpriteDraw::end(sprite);
+		}
+		else
+			d2d::SpriteDraw::drawSprite(sprites[i]);
 	}
 
-	StageCanvas::~StageCanvas()
-	{
-	}
+	if (m_stage->m_particle)
+		m_stage->m_particle->draw();
 
-	void StageCanvas::onDraw()
-	{
- 		if (m_stage->m_particle)
- 		{
-			if (m_stage->m_background)
-				d2d::SpriteDraw::drawSprite(m_stage->m_background);
+	m_editPanel->drawEditTemp();
+}
 
- 			m_stage->m_particle->draw();
- 		}
-	}
+void StageCanvas::onTimer(wxTimerEvent& event)
+{
+	if (m_stage->m_particle)
+		m_stage->m_particle->update(1.0f / FRAME_RATE);
 
-	void StageCanvas::onTimer(wxTimerEvent& event)
-	{
-		if (m_stage->m_particle)
-			m_stage->m_particle->update(1.0f / FRAME_RATE);
+	std::vector<anim::Sprite*> sprites;
+	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<anim::Sprite>(sprites));
+	size_t max = 0;
+	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+		max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());
 
-		Refresh();
-	}
+	++m_currFrame;
+	if (m_currFrame >= max)
+		m_currFrame = 1;
+
+	Refresh();
+}
 
 }
 }
