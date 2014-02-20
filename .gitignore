@@ -52,6 +52,7 @@ deprecated
 # temporary
 /tools-src/depends/src
 
+/particles/
 /editor_src2/coceditor/.svn
 /editor_src2/coceditor/platform/msvc2008/coceditor
 /editor_src2/coceditor/platform/msvc2008/cocextract
