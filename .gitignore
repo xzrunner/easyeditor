@@ -101,3 +101,6 @@ deprecated
 /editor_src2/libraries/lua-5.2.3/lua
 /editor_src2/libraries/lua-5.2.3/Makefile
 /editor_src2/libraries/lua-5.2.3/README
+
+/editor_bin/_tmp_ejoy2d_preview/
+editor_src2/easycomplex/platform/msvc2008/projects/_tmp_ejoy2d_preview/

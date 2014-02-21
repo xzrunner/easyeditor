@@ -150,6 +150,14 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\libcoco\CocoPacker.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\CocoPacker.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libcoco\PackLuaFile.cpp"
 			>
 		</File>

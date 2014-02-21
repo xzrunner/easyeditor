@@ -1,10 +1,13 @@
 #include "Frame.h"
 #include "EJPreviewDialog.h"
 
+#include "common/filetools.h"
 #include "common/FileNameTools.h"
 #include "common/Exception.h"
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
+
+#include <easycoco.h>
 
 namespace d2d
 {
@@ -104,8 +107,26 @@ namespace d2d
 	{
 		std::vector<const ISprite*> sprites;
 		m_task->getAllSprite(sprites);
-		EJPreviewDialog dlg(this, sprites);
-		dlg.ShowModal();
+
+		//////////////////////////////////////////////////////////////////////////
+
+// 		EJPreviewDialog dlg(this, sprites);
+// 		dlg.ShowModal();
+
+		//////////////////////////////////////////////////////////////////////////
+
+ 		const char* folder = "_tmp_ejoy2d_preview";
+ 		MkDirRF(folder);
+ 
+ 		libcoco::PackLuaFile pack;
+ 		pack.pack(sprites, folder);
+ 
+#ifdef _DEBUG
+ 		std::string cmd = "D:\\projects\\ejoy\\coco-tools\\editor_bin\\ejoy2d.exe D:\\projects\\ejoy\\coco-tools\\editor_bin\\ejoy2d\\preview\\play.lua";
+#else
+		std::string cmd = "ejoy2d.exe ejoy2d/preview/play.lua";
+#endif
+ 		WinExec(cmd.c_str(), /*SW_SHOWMAXIMIZED*/SW_NORMAL);
 	}
 
 	void Frame::onQuit(wxCommandEvent& event)

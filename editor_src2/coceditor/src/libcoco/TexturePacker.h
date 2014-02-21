@@ -19,13 +19,10 @@ public:
 
 	void pack(const std::set<d2d::Image*>& images);
 
-	void outputToMemory();
+	void storeToMemory();
+	void storeToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type);
 
-	void outputToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type);
-
-//	void outputToFile(const std::string& floder, const std::string& filename);
-
-	
+	const d2d::Rect* query(d2d::Image* image) const;
 
 private:
 	std::map<d2d::Image*, d2d::Rect> m_mapImg2Rect;

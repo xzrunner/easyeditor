@@ -42,7 +42,7 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 	}
 }
 
-void TexturePacker::outputToMemory()
+void TexturePacker::storeToMemory()
 {
 	delete[] m_pixels;
 	int size = m_edge * m_edge * 4;
@@ -65,10 +65,20 @@ void TexturePacker::outputToMemory()
 	}
 }
 
-void TexturePacker::outputToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type)
+void TexturePacker::storeToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type)
 {
 	std::string filepath = floder + "\\" + filename;
 	d2d::ImageSaver::storeToFile(m_pixels, m_edge, m_edge, filepath, type);
+}
+
+const d2d::Rect* TexturePacker::query(d2d::Image* image) const
+{
+	std::map<d2d::Image*, d2d::Rect>::const_iterator itr 
+		= m_mapImg2Rect.find(image);
+	if (itr != m_mapImg2Rect.end())
+		return &itr->second;
+	else
+		return NULL;
 }
 
 }

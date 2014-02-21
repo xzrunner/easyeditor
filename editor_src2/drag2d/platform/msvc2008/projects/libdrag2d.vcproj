@@ -1342,6 +1342,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\common\filetools.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\filetools.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\common\interface.h"
 				>
 			</File>

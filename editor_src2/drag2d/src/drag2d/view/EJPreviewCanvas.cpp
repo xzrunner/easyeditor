@@ -3,6 +3,7 @@
 #include "EJPreviewCanvas.h"
 
 #include "render/Shader.h"
+#include "common/filetools.h"
 
 // for test
 // #include "ejoy2d/lib/sprite.h"
@@ -64,8 +65,17 @@ void EJPreviewCanvas::prepareSprites(const std::vector<const ISprite*>& sprites)
 
 	//////////////////////////////////////////////////////////////////////////
 
+	const char* folder = "3q293t4hweo";
+	MkDirRF(folder);
+
 	libcoco::PackLuaFile pack;
-	pack.pack(sprites, "d:/test/pack");
+//	pack.pack(sprites, "d:/test/pack");
+	pack.pack(sprites, folder);
+
+	std::string cmd = "ejoy2d.exe ejoy2d/preview/play.lua";
+	WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
+
+//	RemDirRF(folder);
 }
 
 }
