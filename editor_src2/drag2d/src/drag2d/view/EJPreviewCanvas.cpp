@@ -5,10 +5,12 @@
 #include "render/Shader.h"
 
 // for test
-#include "ejoy2d/lib/sprite.h"
-#include "ejoy2d/lib/texture.h"
+// #include "ejoy2d/lib/sprite.h"
+// #include "ejoy2d/lib/texture.h"
 #include "dataset/ImageSprite.h"
 #include "dataset/Image.h"
+
+#include <easycoco.h>
 
 namespace d2d
 {
@@ -46,16 +48,24 @@ void EJPreviewCanvas::onTimer(wxTimerEvent& event)
 
 void EJPreviewCanvas::prepareSprites(const std::vector<const ISprite*>& sprites)
 {
-	if (sprites.empty())
-		return;
+// 	if (sprites.empty())
+// 		return;
+// 
+// 	const ImageSprite* sprite = dynamic_cast<const ImageSprite*>(sprites[0]);
+// 	if (!sprite)
+// 		return;
+// 
+// // 	glewInit();
+// // 	shader_init();
+// 
+// 	Image* img = sprite->getSymbol().getImage();
+//  	const char * msg = texture_load(0, Texture2DPixelFormat_RGBA8888, 
+//  		img->getRegion().xLength(), img->getRegion().yLength(), (void*)img->getPixelData());
 
-	const ImageSprite* sprite = dynamic_cast<const ImageSprite*>(sprites[0]);
-	if (!sprite)
-		return;
+	//////////////////////////////////////////////////////////////////////////
 
-	Image* img = sprite->getSymbol().getImage();
- 	const char * msg = texture_load(0, Texture2DPixelFormat_RGBA8888, 
- 		img->getRegion().xLength(), img->getRegion().yLength(), (void*)img->getPixelData());
+	libcoco::PackLuaFile pack;
+	pack.pack(sprites, "d:/test/pack");
 }
 
 }

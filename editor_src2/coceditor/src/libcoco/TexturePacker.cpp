@@ -5,6 +5,7 @@ namespace libcoco
 
 TexturePacker::TexturePacker()
 	: m_edge(512)
+	, m_pixels(NULL)
 {
 	m_xCurr = m_yCurr = m_width = 0;
 }
@@ -41,30 +42,15 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 	}
 }
 
-void TexturePacker::output(const std::string& floder, const std::string& filename)
+void TexturePacker::outputToMemory()
 {
-	// ppm
-	int ppm_size = 16 + m_edge * m_edge * 3;
-	unsigned char* ppm_data = new unsigned char[ppm_size];
-	sprintf((char*)ppm_data, 
-		"P6\n"
-		"%d %d\n"
-		"%d\n"
-		, m_edge, m_edge, 255);
-
-	// pgm
-	int pgm_size = 16 + m_edge * m_edge;
-	unsigned char* pgm_data = new unsigned char[pgm_size];
-	sprintf((char*)pgm_data, 
-		"P5\n"
-		"%d %d\n"
-		"%d\n"
-		, m_edge, m_edge, 15);
+	delete[] m_pixels;
+	int size = m_edge * m_edge * 4;
+	m_pixels = new uint8_t[size];
 
 	std::map<d2d::Image*, d2d::Rect>::iterator itr 
 		= m_mapImg2Rect.begin();
-	int ppm_line_size = m_edge * 3;
-	int pgm_line_size = m_edge;
+	int size_line = m_edge * 4;
 	for ( ; itr != m_mapImg2Rect.end(); ++itr)
 	{
 		const unsigned char* pixels = itr->first->getPixelData();
@@ -73,41 +59,16 @@ void TexturePacker::output(const std::string& floder, const std::string& filenam
 		for (int i = 0, n = r.yLength(); i < n ;++i)
 		{
 			int ptr_src = src_line_size * (r.yLength() - i - 1);
-			int ptr_ppm = 16 + ppm_line_size * (r.yMin + i) + r.xMin * 3;
-			int ptr_pgm = 16 + pgm_line_size * (r.yMin + i) + r.xMin;
-			for (int j = 0, m = r.xLength(); j < m; ++j)
-			{
-// 				ppm_data[ptr_ppm++] = pixels[ptr_src++];
-// 				ppm_data[ptr_ppm++] = pixels[ptr_src++];
-// 				ppm_data[ptr_ppm++] = pixels[ptr_src++];
-//				pgm_data[ptr_pgm++] = pixels[ptr_src++];
-
-				unsigned char r = pixels[ptr_src++],
-					g = pixels[ptr_src++],
-					b = pixels[ptr_src++],
-					a = pixels[ptr_src++];
-				if (r != 0)
-					int zz = 0;
-				ppm_data[ptr_ppm++] = r / 16;
-				ppm_data[ptr_ppm++] = g / 16;
-				ppm_data[ptr_ppm++] = b / 16;
-				pgm_data[ptr_pgm++] = a / 16;
-			}
+			int ptr_dst = 16 + size_line * (r.yMin + i) + r.xMin * 4;
+			memcpy(&m_pixels[ptr_dst], &pixels[ptr_src], src_line_size);
 		}
 	}
+}
 
-	// write to file
- 	std::string ppm_path = floder + "\\" + filename + ".ppm";
- 	std::ofstream ppm_fout(ppm_path.c_str(), std::ios::binary);
-	ppm_fout.write(reinterpret_cast<const char*>(ppm_data), ppm_size);
-	delete[] ppm_data;
- 	ppm_fout.close();
-
-	std::string pgm_path = floder + "\\" + filename + ".pgm";
-	std::ofstream pgm_fout(pgm_path.c_str(), std::ios::binary);
-	pgm_fout.write(reinterpret_cast<const char*>(pgm_data), pgm_size);
-	delete[] pgm_data;
-	pgm_fout.close();
+void TexturePacker::outputToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type)
+{
+	std::string filepath = floder + "\\" + filename;
+	d2d::ImageSaver::storeToFile(m_pixels, m_edge, m_edge, filepath, type);
 }
 
 }

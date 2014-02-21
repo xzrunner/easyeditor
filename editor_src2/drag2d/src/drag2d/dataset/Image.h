@@ -33,9 +33,6 @@ namespace d2d
 
 		const unsigned char* clip(int xmin, int xmax, int ymin, int ymax);
 
-		void writeToFile(const unsigned char* pixels, int width, int height,
-			const std::string& filename);
-
 	private:
 		void removeTransparentBorder();
 		bool isTransparent(unsigned char* pixels, int x, int y, int channels);

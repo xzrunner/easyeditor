@@ -789,6 +789,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\ImageSaver.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\Matrix.cpp"
 					>
 				</File>

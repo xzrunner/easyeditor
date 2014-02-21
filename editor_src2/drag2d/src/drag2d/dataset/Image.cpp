@@ -5,7 +5,6 @@
 #include "common/config.h"
 
 #include <SOIL/SOIL.h>
-#include <SOIL/stb_image_write.h>
 
 #include "ImageLoader.h"
 
@@ -131,13 +130,6 @@ const unsigned char* Image::clip(int xmin, int xmax, int ymin, int ymax)
 		memcpy(&pixels[to], &m_pixels[from], line_size);
 	}
 	return pixels;
-}
-
-void Image::writeToFile(const unsigned char* pixels, int width, int height, 
-						const std::string& filename)
-{
-	assert(m_format == 0x1908);
-	stbi_write_png(filename.c_str(), width, height, 4, pixels, 0);
 }
 
 void Image::removeTransparentBorder()

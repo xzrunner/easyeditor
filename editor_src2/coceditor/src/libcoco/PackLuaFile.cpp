@@ -16,7 +16,9 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	}
 	TexturePacker packer;
 	packer.pack(setImages);
-	packer.output(outfloder, "zz0");
+//	packer.outputToFile(outfloder, "zz0");
+	packer.outputToMemory();
+	packer.outputToFile(outfloder, "zz0", d2d::ImageSaver::e_ppm);
 
 	// pack lua file
 

@@ -46,6 +46,7 @@
 #include "dataset/Layer.h"
 #include "dataset/BVFactory.h"
 #include "dataset/ImageLoader.h"
+#include "dataset/ImageSaver.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"

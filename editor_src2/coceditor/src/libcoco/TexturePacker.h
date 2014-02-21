@@ -8,11 +8,24 @@ namespace libcoco
 class TexturePacker
 {
 public:
+	enum Type
+	{
+		e_png,
+		e_ppm
+	};
+
+public:
 	TexturePacker();
 
 	void pack(const std::set<d2d::Image*>& images);
 
-	void output(const std::string& floder, const std::string& filename);
+	void outputToMemory();
+
+	void outputToFile(const std::string& floder, const std::string& filename, d2d::ImageSaver::Type type);
+
+//	void outputToFile(const std::string& floder, const std::string& filename);
+
+	
 
 private:
 	std::map<d2d::Image*, d2d::Rect> m_mapImg2Rect;
@@ -20,6 +33,8 @@ private:
 	int m_edge;
 
 	int m_xCurr, m_yCurr, m_width;
+
+	uint8_t* m_pixels;
 
 }; // TexturePacker
 
