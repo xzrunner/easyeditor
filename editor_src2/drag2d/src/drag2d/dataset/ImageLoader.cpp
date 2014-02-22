@@ -84,6 +84,9 @@ void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int format,
 		texture,
 		SOIL_FLAG_INVERT_Y 
 		);
+
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 #else
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
