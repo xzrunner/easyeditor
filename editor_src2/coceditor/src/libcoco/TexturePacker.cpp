@@ -3,9 +3,10 @@
 namespace libcoco
 {
 
-TexturePacker::TexturePacker()
+TexturePacker::TexturePacker(int padding)
 	: m_edge(768)
 	, m_pixels(NULL)
+	, m_padding(padding)
 {
 	m_xCurr = m_yCurr = m_width = 0;
 }
@@ -20,8 +21,8 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 	{
 		d2d::Image* img = sorted[i];
 		d2d::Rect r;
-		int w = img->width(),
-			h = img->height();
+		int w = img->width() + m_padding * 2,
+			h = img->height() + m_padding * 2;
 		assert(w < m_edge && h < m_edge);
 		if (m_width == 0)
 			m_width = w;
@@ -38,6 +39,10 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 		r.yMax = r.yMin + h;
 		m_yCurr += h;
 
+		r.xMin += m_padding;
+		r.xMax -= m_padding;
+		r.yMin += m_padding;
+		r.yMax -= m_padding;
 		m_mapImg2Rect.insert(std::make_pair(img, r));
 	}
 }
@@ -47,6 +52,7 @@ void TexturePacker::storeToMemory()
 	delete[] m_pixels;
 	int size = m_edge * m_edge * 4;
 	m_pixels = new uint8_t[size];
+	memset(&m_pixels[0], 0, size);
 
 	std::map<d2d::Image*, d2d::Rect>::iterator itr 
 		= m_mapImg2Rect.begin();

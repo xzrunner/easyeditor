@@ -15,7 +15,7 @@ public:
 	};
 
 public:
-	TexturePacker();
+	TexturePacker(int padding = 1);
 
 	void pack(const std::set<d2d::Image*>& images);
 
@@ -32,6 +32,8 @@ private:
 	int m_xCurr, m_yCurr, m_width;
 
 	uint8_t* m_pixels;
+
+	int m_padding;
 
 }; // TexturePacker
 
