@@ -4,7 +4,7 @@ namespace libcoco
 {
 
 TexturePacker::TexturePacker()
-	: m_edge(512)
+	: m_edge(768)
 	, m_pixels(NULL)
 {
 	m_xCurr = m_yCurr = m_width = 0;
