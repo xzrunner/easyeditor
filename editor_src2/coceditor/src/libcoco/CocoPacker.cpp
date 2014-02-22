@@ -41,39 +41,91 @@ void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			resolveAnimation(complex);
 		}
+		else if (const anim::Symbol* anim = dynamic_cast<const anim::Symbol*>(symbol))
+		{
+			std::set<const d2d::ImageSymbol*> unique;
+			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
+			{
+				anim::Symbol::Layer* layer = anim->m_layers[i];
+				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
+				{
+					anim::Symbol::Frame* frame = layer->frames[j];
+					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
+					{
+						d2d::ISprite* sprite = frame->sprites[k];
+						if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+							unique.insert(&image->getSymbol());
+						else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
+							m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+					}
+				}
+			}
+
+			std::set<const d2d::ImageSymbol*>::iterator itr = unique.begin();
+			for ( ; itr != unique.end(); ++itr)
+			{
+				std::map<const d2d::ISymbol*, int>::iterator itrFind = m_mapSymbolID.find(*itr);
+				if (itrFind == m_mapSymbolID.end())
+				{
+					m_mapSymbolID.insert(std::make_pair(*itr, m_id++));
+					resolvePicture(*itr);
+				}
+			}
+
+			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
+			resolveAnimation(anim);
+		}
+		else if (const d2d::Patch9Symbol* patch9 = dynamic_cast<const d2d::Patch9Symbol*>(symbol))
+		{
+			std::vector<d2d::ISprite*> sprites;
+			switch (patch9->type())
+			{
+			case d2d::Patch9Symbol::e_9Grid:
+				for (size_t i = 0; i < 3; ++i)
+					for (size_t j = 0; j < 3; ++j)
+						sprites.push_back(patch9->m_sprites[i][j]);
+				break;
+			case d2d::Patch9Symbol::e_9GridHollow:
+				for (size_t i = 0; i < 3; ++i) {
+					for (size_t j = 0; j < 3; ++j) {
+						if (i == 1 && j == 1) continue;
+						sprites.push_back(patch9->m_sprites[i][j]);
+					}
+				}
+				break;
+			case d2d::Patch9Symbol::e_3GridHor:
+				for (size_t i = 0; i < 3; ++i)
+					sprites.push_back(patch9->m_sprites[1][i]);
+				break;
+			case d2d::Patch9Symbol::e_3GridVer:
+				for (size_t i = 0; i < 3; ++i)
+					sprites.push_back(patch9->m_sprites[i][1]);
+				break;
+			case d2d::Patch9Symbol::e_6GridUpper:
+				for (size_t i = 1; i < 3; ++i)
+					for (size_t j = 0; j < 3; ++j)
+						sprites.push_back(patch9->m_sprites[i][j]);
+				break;
+			}
+
+			for (size_t i = 0, n = sprites.size(); i < n; ++i)
+			{
+				d2d::ISprite* sprite = sprites[i];
+				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+				{
+					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+					resolvePicture(image);
+				}
+				else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
+				{
+					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+				}
+			}
+
+			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
+			resolveAnimation(patch9);
+		}
 	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-// 
-// 	lua::TableAssign ta(m_gen, "return", false, false);
-// 
-// 	for (int i = 0, n = sprites.size(); i < n; ++i)
-// 	{
-// 		const d2d::ISprite* s = sprites[i];
-// 		if (const d2d::ImageSprite* d = dynamic_cast<const d2d::ImageSprite*>(s))
-// 		{
-// 			m_mapSpriteID.insert(std::make_pair(s, m_id++));
-// 			resolvePicture(d);
-// 		}
-// 		else if (const d2d::FontSprite* d = dynamic_cast<const d2d::FontSprite*>(s))
-// 		{
-// 			m_mapSpriteID.insert(std::make_pair(s, m_id++));
-// 		}
-// 	}
-// 
-// 	complex::Symbol symbol;
-// 	symbol.name = "root";
-//  	for (int i = 0, n = sprites.size(); i < n; ++i)
-// 	{
-//  		d2d::ISprite* sprite = const_cast<d2d::ISprite*>(sprites[i]);
-// 		sprite->retain();
-//  		symbol.m_sprites.push_back(sprite);
-// 	}
-// 
-//  	m_mapSymbolID.insert(std::make_pair(&symbol, ++m_id));
-//  
-//  	resolveAnimation(&symbol);
 }
 
 void CocoPacker::storeToFile(const std::string& filename)
@@ -166,6 +218,70 @@ void CocoPacker::resolvePicture(const d2d::ImageSprite* sprite)
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] *= SCALE;
 
+	sx0 = wxString::FromDouble(screen[0].x);
+	sy0 = wxString::FromDouble(screen[0].y);
+	sx1 = wxString::FromDouble(screen[1].x);
+	sy1 = wxString::FromDouble(screen[1].y);
+	sx2 = wxString::FromDouble(screen[2].x);
+	sy2 = wxString::FromDouble(screen[2].y);
+	sx3 = wxString::FromDouble(screen[3].x);
+	sy3 = wxString::FromDouble(screen[3].y);
+	std::string assignScreen = lua::assign("screen", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
+		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
+
+	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
+}
+
+void CocoPacker::resolvePicture(const d2d::ImageSymbol* symbol)
+{
+	lua::TableAssign ta(m_gen, "", true, false);
+
+	// type
+	m_gen.line(lua::assign("type", "\"picture\"") + ",");
+
+	// id
+	{
+		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
+		assert(itr != m_mapSymbolID.end());
+		std::string sid = wxString::FromDouble(itr->second);
+		m_gen.line(lua::assign("id", sid.c_str()) + ",");
+	}
+
+	// tex
+	// todo: specify only 1 texture
+	std::string assignTex = lua::assign("tex", wxString::FromDouble(1).ToStdString());
+	const d2d::Rect* pr = m_tex.query(symbol->getImage());
+
+	// src
+	int x0 = pr->xMin, y0 = pr->yMax;
+	int x1 = pr->xMin, y1 = pr->yMin;
+	int x2 = pr->xMax, y2 = pr->yMin;
+	int x3 = pr->xMax, y3 = pr->yMax;
+
+	std::string sx0 = wxString::FromDouble(x0), sy0 = wxString::FromDouble(y0);
+	std::string sx1 = wxString::FromDouble(x1), sy1 = wxString::FromDouble(y1);
+	std::string sx2 = wxString::FromDouble(x2), sy2 = wxString::FromDouble(y2);
+	std::string sx3 = wxString::FromDouble(x3), sy3 = wxString::FromDouble(y3);
+	std::string assignSrc = lua::assign("src", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
+		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
+
+	// screen
+	const float hw = pr->xLength() * 0.5f,
+		hh = pr->yLength() * 0.5f;
+	d2d::Vector screen[4];
+	screen[0].set(-hw, hh);
+	screen[1].set(-hw, -hh);
+	screen[2].set(hw, -hh);
+	screen[3].set(hw, hh);
+
+	// flip y
+	for (size_t i = 0; i < 4; ++i)
+		screen[i].y = -screen[i].y;
+	// finish: scale
+	const float SCALE = 16;
+	for (size_t i = 0; i < 4; ++i)
+		screen[i] *= SCALE;
+	//
 	sx0 = wxString::FromDouble(screen[0].x);
 	sy0 = wxString::FromDouble(screen[0].y);
 	sx1 = wxString::FromDouble(screen[1].x);
@@ -298,6 +414,140 @@ void CocoPacker::resolveAnimation(const complex::Symbol* symbol)
 	}
 }
 
+void CocoPacker::resolveAnimation(const anim::Symbol* symbol)
+{
+	lua::TableAssign ta(m_gen, "", true, false);
+
+	// type
+	m_gen.line(lua::assign("type", "\"animation\"") + ",");
+
+	// export
+	if (!symbol->name.empty())
+		m_gen.line(lua::assign("export", "\""+symbol->name+"\"")+",");
+
+	// id
+	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
+	assert(itr != m_mapSymbolID.end());
+	std::string sid = wxString::FromDouble(itr->second);
+	m_gen.line(lua::assign("id", sid.c_str()) + ",");
+
+	// component
+	std::vector<int> ids;
+	std::map<int, std::vector<std::string> > unique;
+	std::vector<std::pair<int, std::string> > order;
+	{
+		lua::TableAssign ta(m_gen, "component", true);
+		for (size_t i = 0, n = symbol->getMaxFrameIndex(); i < n; ++i)
+		{
+			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
+			{
+				anim::Symbol::Layer* layer = symbol->m_layers[j];
+				if (i < layer->frames.size())
+				{
+					anim::Symbol::Frame* frame = layer->frames[i];
+					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
+						resolveSpriteForComponent(frame->sprites[k], ids, unique, order);
+				}
+			}
+		}
+	}
+	// children
+	{
+		lua::TableAssign ta(m_gen, "", true);
+		// frames
+		int index = 0;
+		for (size_t i = 1, n = symbol->getMaxFrameIndex(); i <= n; ++i)
+		{
+			lua::TableAssign ta(m_gen, "", true);
+
+			std::vector<d2d::ISprite*> sprites;
+			anim::Tools::getCurrSprites(symbol, i, sprites);
+			for (size_t j = 0, m = sprites.size(); j < m; ++j)
+				resolveSpriteForFrame(sprites[j], order);
+		}
+	}
+}
+
+void CocoPacker::resolveAnimation(const d2d::Patch9Symbol* symbol)
+{
+	lua::TableAssign ta(m_gen, "", true, false);
+
+	// type
+	m_gen.line(lua::assign("type", "\"animation\"") + ",");
+
+	// export
+	if (!symbol->name.empty())
+		m_gen.line(lua::assign("export", "\""+symbol->name+"\"")+",");
+
+	// id
+	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
+	assert(itr != m_mapSymbolID.end());
+	std::string sid = wxString::FromDouble(itr->second);
+	m_gen.line(lua::assign("id", sid.c_str()) + ",");
+
+	// component
+	std::vector<int> ids;
+	std::map<int, std::vector<std::string> > unique;
+	std::vector<std::pair<int, std::string> > order;
+	{
+		lua::TableAssign ta(m_gen, "component", true);
+		if (symbol->type() == d2d::Patch9Symbol::e_9Grid)
+			for (size_t i = 0; i < 3; ++i)
+				for (size_t j = 0; j < 3; ++j)
+					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
+		else if (symbol->type() == d2d::Patch9Symbol::e_9GridHollow)
+			for (size_t i = 0; i < 3; ++i) {
+				for (size_t j = 0; j < 3; ++j) {
+					if (i == 1 && j == 1) continue;
+					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
+				}
+			}
+		else if (symbol->type() == d2d::Patch9Symbol::e_3GridHor)
+			for (size_t i = 0; i < 3; ++i)
+				resolveSpriteForComponent(symbol->m_sprites[1][i], ids, unique, order);
+		else if (symbol->type() == d2d::Patch9Symbol::e_3GridVer)
+			for (size_t i = 0; i < 3; ++i)
+				resolveSpriteForComponent(symbol->m_sprites[i][1], ids, unique, order);
+		else if (symbol->type() == d2d::Patch9Symbol::e_6GridUpper)
+			for (size_t i = 1; i < 3; ++i)
+				for (size_t j = 0; j < 3; ++j)
+					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
+	}
+	// children
+	{
+		lua::TableAssign ta(m_gen, "", true);
+		// frame 0
+		{
+			lua::TableAssign ta(m_gen, "", true);
+			int index = 0;
+			if (symbol->type() == d2d::Patch9Symbol::e_9Grid)
+				for (size_t i = 0; i < 3; ++i)
+					for (size_t j = 0; j < 3; ++j, ++index)
+						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
+			else if (symbol->type() == d2d::Patch9Symbol::e_9GridHollow)
+				for (size_t i = 0; i < 3; ++i) {
+					for (size_t j = 0; j < 3; ++j, ++index) {
+						if (i == 1 && j == 1) { 
+							--index;
+							continue;
+						}
+						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
+					}
+				}
+			else if (symbol->type() == d2d::Patch9Symbol::e_3GridHor)
+				for (size_t i = 0; i < 3; ++i)
+					resolveSpriteForFrame(symbol->m_sprites[1][i], i, ids, order);
+			else if (symbol->type() == d2d::Patch9Symbol::e_3GridVer)
+				for (size_t i = 0; i < 3; ++i)
+					resolveSpriteForFrame(symbol->m_sprites[i][1], i, ids, order);
+			else if (symbol->type() == d2d::Patch9Symbol::e_6GridUpper)
+				for (size_t i = 1; i < 3; ++i)
+					for (size_t j = 0; j < 3; ++j, ++index)
+						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
+		}
+	}
+}
+
 void CocoPacker::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<int>& ids, 
 										   std::map<int, std::vector<std::string> >& unique, 
 										   std::vector<std::pair<int, std::string> >& order)
@@ -426,6 +676,63 @@ void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 		resolveSpriteForFrameFont(font, cindex);
 	else
 		resolveSpriteForFrameImage(sprite, cindex);
+}
+
+void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, const std::vector<std::pair<int, std::string> >& order)
+{
+	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
+	assert(itr != m_mapSymbolID.end());
+	if (itr == m_mapSymbolID.end())
+		throw d2d::Exception("Error! COCCode::resolveSpriteForFrame L822");
+
+	int id = itr->second;
+	int cindex = -1;
+	for (size_t i = 0, n = order.size(); i < n; ++i)
+		if (id == order[i].first && sprite->name == order[i].second)
+		{
+			cindex = i;
+			break;
+		}
+
+		if (cindex == -1)
+		{
+			for (size_t i = 0, n = order.size(); i < n; ++i)
+				if (id == order[i].first)
+				{
+					cindex = i;
+					break;
+				}
+		}
+
+		assert(cindex != -1);
+		if (cindex == -1)
+			throw d2d::Exception("Error! COCCode::resolveSpriteForFrame L845");
+
+		resolveSpriteForFrame(sprite, cindex, true);
+}
+
+void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat)
+{
+	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
+
+	float mat[6];
+	transToMat(sprite, mat, forceMat);
+
+	std::string m[6];
+	for (size_t i = 0; i < 6; ++i)
+		m[i] = wxString::FromDouble(mat[i]);
+	std::string smat = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
+		m[3].c_str(), m[4].c_str(), m[5].c_str());
+	std::string assignMat = lua::assign("mat", smat);
+
+	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
+	{
+		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
+		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ARGB));
+		lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
+	}
+	else
+		lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
 }
 
 void CocoPacker::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)

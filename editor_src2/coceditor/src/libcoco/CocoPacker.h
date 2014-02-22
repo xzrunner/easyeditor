@@ -21,8 +21,11 @@ public:
 
 private:
 	void resolvePicture(const d2d::ImageSprite* sprite);
+	void resolvePicture(const d2d::ImageSymbol* symbol);
 
 	void resolveAnimation(const complex::Symbol* symbol);
+	void resolveAnimation(const anim::Symbol* symbol);
+	void resolveAnimation(const d2d::Patch9Symbol* symbol);
 
 	void resolveSpriteForComponent(const d2d::ISprite* sprite, 
 		std::vector<int>& ids, std::map<int, std::vector<std::string> >& unique, 
@@ -30,7 +33,9 @@ private:
 
 	void resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 		const std::vector<int>& ids, const std::vector<std::pair<int, std::string> >& order);
-
+	void resolveSpriteForFrame(const d2d::ISprite* sprite, 
+		const std::vector<std::pair<int, std::string> >& order);
+	void resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat);
 	void resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id);
 	void resolveSpriteForFrameFont(const d2d::FontSprite* font, int id);
 

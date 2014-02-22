@@ -29,7 +29,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 
 	// pack images
 	std::set<d2d::Image*> setImages;
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	for (int i = 0, n = symbols.size(); i < n; ++i)
 	{
 		if (const d2d::ImageSymbol* s = dynamic_cast<const d2d::ImageSymbol*>(symbols[i]))
 			setImages.insert(s->getImage());
