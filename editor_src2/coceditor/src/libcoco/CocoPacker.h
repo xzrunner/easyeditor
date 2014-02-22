@@ -23,6 +23,8 @@ private:
 	void resolvePicture(const d2d::ImageSprite* sprite);
 	void resolvePicture(const d2d::ImageSymbol* symbol);
 
+	void resolveFont(const d2d::FontSprite* sprite);
+
 	void resolveAnimation(const complex::Symbol* symbol);
 	void resolveAnimation(const anim::Symbol* symbol);
 	void resolveAnimation(const d2d::Patch9Symbol* symbol);

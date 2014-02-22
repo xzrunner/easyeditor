@@ -35,6 +35,7 @@ void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 				else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
 				{
 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+					resolveFont(font);
 				}
 			}
 
@@ -294,6 +295,34 @@ void CocoPacker::resolvePicture(const d2d::ImageSymbol* symbol)
 		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
 
 	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
+}
+
+void CocoPacker::resolveFont(const d2d::FontSprite* sprite)
+{
+	lua::TableAssign ta(m_gen, "", true, false);
+
+	// type
+	m_gen.line(lua::assign("type", "\"label\"") + ",");
+
+	// id
+	{
+		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
+		assert(itr != m_mapSpriteID.end());
+		std::string sid = wxString::FromDouble(itr->second);
+		m_gen.line(lua::assign("id", sid.c_str()) + ",");
+	}
+
+
+
+	std::string aFont = lua::assign("font", "\""+sprite->font+"\"");
+	std::string aColor = lua::assign("color", transColor(sprite->color, d2d::PT_ARGB));
+	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align).ToStdString());
+	std::string aSize = lua::assign("size", wxString::FromDouble(sprite->size).ToStdString());
+	std::string aWidth = lua::assign("width", wxString::FromDouble(sprite->width).ToStdString());
+	std::string aHeight = lua::assign("height", wxString::FromDouble(sprite->height).ToStdString());
+	std::string aEdge = lua::assign("noedge", "false");
+
+	m_gen.line(aFont + ", " + aColor + ", " + aAlign + ", " + aSize + ", " + aWidth + ", " + aHeight + ", " + aEdge);
 }
 
 void CocoPacker::resolveAnimation(const complex::Symbol* symbol)
@@ -590,42 +619,17 @@ void CocoPacker::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vect
 	std::map<int, std::vector<std::string> >::iterator itr = unique.find(id);
 	if (unique.find(id) == unique.end())
 	{
-		if (isFont)
+		std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
+		if (!sprite->name.empty() && sprite->name[0] != '_')
 		{
-			const d2d::FontSprite* font = static_cast<const d2d::FontSprite*>(sprite);
-			bool isNullNode = font->font.empty() && font->color == d2d::Colorf(0, 0, 0, 0);
-			if (isNullNode)
-			{
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
-				lua::tableassign(m_gen, "", 1, aName.c_str());
-			}
-			else
-			{
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
-				std::string aFont = lua::assign("font", "\""+font->font+"\"");
-				std::string aColor = lua::assign("color", transColor(font->color, d2d::PT_ARGB));
-				std::string aAlign = lua::assign("align", wxString::FromDouble(font->align).ToStdString());
-				std::string aSize = lua::assign("size", wxString::FromDouble(font->size).ToStdString());
-				std::string aWidth = lua::assign("width", wxString::FromDouble(font->width).ToStdString());
-				std::string aHeight = lua::assign("height", wxString::FromDouble(font->height).ToStdString());
-
-				lua::tableassign(m_gen, "", 7, aName.c_str(), aFont.c_str(), aColor.c_str(), aAlign.c_str(), 
-					aSize.c_str(), aWidth.c_str(), aHeight.c_str());
-			}
+			std::string aName = lua::assign("name", "\""+sprite->name+"\"");
+			lua::tableassign(m_gen, "", 2, aName.c_str(), aID.c_str());
 		}
 		else
 		{
-			std::string aID = lua::assign("id", wxString::FromDouble(id).ToStdString());
-			if (!sprite->name.empty() && sprite->name[0] != '_')
-			{
-				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
-				lua::tableassign(m_gen, "", 2, aName.c_str(), aID.c_str());
-			}
-			else
-			{
-				lua::tableassign(m_gen, "", 1, aID.c_str());
-			}
+			lua::tableassign(m_gen, "", 1, aID.c_str());
 		}
+
 		std::vector<std::string> names;
 		names.push_back(sprite->name);
 		unique.insert(std::make_pair(id, names));
@@ -653,9 +657,6 @@ void CocoPacker::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vect
 			order.push_back(std::make_pair(id, sprite->name));
 		}
 		itr->second.push_back(sprite->name);
-
-		//		if (!sprite->name.empty())
-		//			order.push_back(std::make_pair(id, sprite->name));
 	}
 }
 
