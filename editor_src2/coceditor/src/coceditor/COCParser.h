@@ -1,10 +1,7 @@
 #pragma once
 
 #include <drag2d.h>
-
-namespace ebuilder { class CodeGenerator; }
-namespace complex { class Symbol; }
-namespace anim { class Symbol; }
+#include <easycoco.h>
 
 namespace coceditor
 {
@@ -15,11 +12,7 @@ namespace coceditor
 		void parser();
 
 	private:
-		void prepareSymbols();
-		void prepareOutList();
 		void prepareMapSymbolPic();
-
-		bool isSymbolPrepared(const d2d::ISprite* sprite) const;
 
 	public:
 		struct Picture
@@ -41,7 +34,9 @@ namespace coceditor
 		std::set<const d2d::ISymbol*> m_setSymbols;
 
 	public:
-		std::vector<const d2d::ISymbol*> m_outList;
+//		std::vector<const d2d::ISymbol*> m_outList;
+
+		libcoco::SymbolsPrepare m_symbolPrepare;
 
 		std::map<const d2d::ISymbol*, Picture*> m_mapSymbolPicture;
 

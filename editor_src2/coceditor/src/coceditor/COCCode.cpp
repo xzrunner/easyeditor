@@ -38,9 +38,11 @@ void COCCode::resolveFromParser(const COCParser& parser)
 			++size;
 	m_gen.line("texture("+wxString::FromDouble(size).ToStdString()+")");
 
-	for (size_t i = 0, n = parser.m_outList.size(); i < n; ++i)
+
+	const std::vector<const d2d::ISymbol*>& symbols = parser.m_symbolPrepare.getResult();
+	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
-		const d2d::ISymbol* symbol = parser.m_outList[i];
+		const d2d::ISymbol* symbol = symbols[i];
 		if (const d2d::ImageSymbol* image = dynamic_cast<const d2d::ImageSymbol*>(symbol))
 		{
 		}

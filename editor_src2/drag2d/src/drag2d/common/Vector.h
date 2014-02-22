@@ -39,6 +39,11 @@ namespace d2d
 			x += v.x; y += v.y;
 		}
 
+		void operator -= (const Vector& v)
+		{
+			x -= v.x; y -= v.y;
+		}
+
 		void operator *= (float f)
 		{
 			x *= f; y *= f;

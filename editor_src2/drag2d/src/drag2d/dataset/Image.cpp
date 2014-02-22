@@ -1,8 +1,8 @@
 #include "Image.h"
 
 #include "render/GL10.h"
-
 #include "common/config.h"
+#include "common/tools.h"
 
 #include <SOIL/SOIL.h>
 
@@ -68,7 +68,7 @@ void Image::reload()
  		SOIL_FLAG_INVERT_Y
  		);
 #else
-	m_pixels = ImageLoader::loadTexture(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_format);
+	m_pixels = ImageLoader::load(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_format);
 
 	m_region.xMin = -m_width*0.5f;
 	m_region.xMax = -m_region.xMin;

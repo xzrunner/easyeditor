@@ -18,6 +18,8 @@ namespace e9patch
 
 		virtual void clear();
 
+		virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const {}
+
 	private:
 		void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
 			wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,

@@ -15,7 +15,7 @@ class CocoPacker
 public:
 	CocoPacker(const TexturePacker& tex);
 	
-	void pack(const std::vector<const d2d::ISprite*>& sprites);
+	void pack(const std::vector<const d2d::ISymbol*>& symbols);
 
 	void storeToFile(const std::string& filename);
 

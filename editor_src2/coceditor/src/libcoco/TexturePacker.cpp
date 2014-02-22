@@ -59,7 +59,7 @@ void TexturePacker::storeToMemory()
 		for (int i = 0, n = r.yLength(); i < n ;++i)
 		{
 			int ptr_src = src_line_size * (r.yLength() - i - 1);
-			int ptr_dst = 16 + size_line * (r.yMin + i) + r.xMin * 4;
+			int ptr_dst = size_line * (r.yMin + i) + r.xMin * 4;
 			memcpy(&m_pixels[ptr_dst], &pixels[ptr_src], src_line_size);
 		}
 	}

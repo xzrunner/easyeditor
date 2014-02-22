@@ -1,6 +1,9 @@
 #include "PackLuaFile.h"
 #include "TexturePacker.h"
 #include "CocoPacker.h"
+#include "SymbolsPrepare.h"
+
+#include <easycomplex.h>
 
 namespace libcoco
 {
@@ -8,13 +11,30 @@ namespace libcoco
 void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites, 
 	const std::string& outfloder)
 {
+	// root symbol
+	complex::Symbol root;
+	root.name = "root";
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		d2d::ISprite* sprite = const_cast<d2d::ISprite*>(sprites[i]);
+		sprite->retain();
+		root.m_sprites.push_back(sprite);
+	}
+
+	// get all symbols
+	SymbolsPrepare preprocess;
+	preprocess.prepare(sprites);
+	std::vector<const d2d::ISymbol*> symbols = preprocess.getResult();
+	symbols.push_back(&root);
+
 	// pack images
 	std::set<d2d::Image*> setImages;
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
-		if (const d2d::ImageSprite* s = dynamic_cast<const d2d::ImageSprite*>(sprites[i]))
-			setImages.insert(s->getSymbol().getImage());
+		if (const d2d::ImageSymbol* s = dynamic_cast<const d2d::ImageSymbol*>(symbols[i]))
+			setImages.insert(s->getImage());
 	}
+
 	TexturePacker textures;
 	textures.pack(setImages);
 	textures.storeToMemory();
@@ -22,7 +42,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 
 	// pack lua file
 	CocoPacker code(textures);
-	code.pack(sprites);
+	code.pack(symbols);
 	code.storeToFile(outfloder + "\\tmp.lua");
 }
 

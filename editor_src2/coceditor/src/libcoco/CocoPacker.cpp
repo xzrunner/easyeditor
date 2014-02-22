@@ -15,42 +15,71 @@ CocoPacker::CocoPacker(const TexturePacker& tex)
 {
 }
 
-void CocoPacker::pack(const std::vector<const d2d::ISprite*>& sprites)
+void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 {
 	lua::TableAssign ta(m_gen, "return", false, false);
 
-	for (int i = 0, n = sprites.size(); i < n; ++i)
+	for (int i = 0, n = symbols.size(); i < n; ++i)
 	{
-		const d2d::ISprite* s = sprites[i];
-		if (const d2d::ImageSprite* d = dynamic_cast<const d2d::ImageSprite*>(s))
+		const d2d::ISymbol* symbol = symbols[i];
+		if (const complex::Symbol* complex = dynamic_cast<const complex::Symbol*>(symbol))
 		{
-			m_mapSpriteID.insert(std::make_pair(s, m_id++));
-			resolvePicture(d);
-		}
-		else if (const d2d::FontSprite* d = dynamic_cast<const d2d::FontSprite*>(s))
-		{
-			m_mapSpriteID.insert(std::make_pair(s, m_id++));
+			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
+			{
+				d2d::ISprite* sprite = complex->m_sprites[i];
+				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+				{
+					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+					resolvePicture(image);
+				}
+				else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
+				{
+					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+				}
+			}
+
+			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
+			resolveAnimation(complex);
 		}
 	}
 
-	complex::Symbol symbol;
-	symbol.name = "root";
- 	for (int i = 0, n = sprites.size(); i < n; ++i)
-	{
- 		d2d::ISprite* sprite = const_cast<d2d::ISprite*>(sprites[i]);
-		sprite->retain();
- 		symbol.m_sprites.push_back(sprite);
-	}
+	//////////////////////////////////////////////////////////////////////////
 
- 	m_mapSymbolID.insert(std::make_pair(&symbol, ++m_id));
- 
- 	resolveAnimation(&symbol);
+// 
+// 	lua::TableAssign ta(m_gen, "return", false, false);
+// 
+// 	for (int i = 0, n = sprites.size(); i < n; ++i)
+// 	{
+// 		const d2d::ISprite* s = sprites[i];
+// 		if (const d2d::ImageSprite* d = dynamic_cast<const d2d::ImageSprite*>(s))
+// 		{
+// 			m_mapSpriteID.insert(std::make_pair(s, m_id++));
+// 			resolvePicture(d);
+// 		}
+// 		else if (const d2d::FontSprite* d = dynamic_cast<const d2d::FontSprite*>(s))
+// 		{
+// 			m_mapSpriteID.insert(std::make_pair(s, m_id++));
+// 		}
+// 	}
+// 
+// 	complex::Symbol symbol;
+// 	symbol.name = "root";
+//  	for (int i = 0, n = sprites.size(); i < n; ++i)
+// 	{
+//  		d2d::ISprite* sprite = const_cast<d2d::ISprite*>(sprites[i]);
+// 		sprite->retain();
+//  		symbol.m_sprites.push_back(sprite);
+// 	}
+// 
+//  	m_mapSymbolID.insert(std::make_pair(&symbol, ++m_id));
+//  
+//  	resolveAnimation(&symbol);
 }
 
 void CocoPacker::storeToFile(const std::string& filename)
 {
 	std::ofstream fout(filename.c_str());
-	assert(!fout.fail());
+//	assert(!fout.fail());
 	fout << m_gen.toText() << std::endl;
 	fout.close();
 }
@@ -109,8 +138,13 @@ void CocoPacker::resolvePicture(const d2d::ImageSprite* sprite)
 	}
 	// 3. translate
 	d2d::Vector center = sprite->getCenter();
-	for (size_t i = 0; i < 4; ++i)
-		screen[i] += center;
+ 	for (size_t i = 0; i < 4; ++i)
+ 		screen[i] += center;
+	//for (size_t i = 0; i < 4; ++i)
+	//{
+	//	screen[i].x += center.x;
+	//	screen[i].y -= center.y;
+	//}
 	// 4. mirror
 	bool xMirror, yMirror;
 	sprite->getMirror(xMirror, yMirror);
@@ -124,9 +158,9 @@ void CocoPacker::resolvePicture(const d2d::ImageSprite* sprite)
 		std::swap(screen[1].y, screen[0].y);
 		std::swap(screen[2].y, screen[3].y);
 	}
-	// flip y
-	for (size_t i = 0; i < 4; ++i)
-		screen[i].y = -screen[i].y;
+ 	// flip y
+ 	for (size_t i = 0; i < 4; ++i)
+ 		screen[i].y = -screen[i].y;
 	// finish: scale
 	const float SCALE = 16;
 	for (size_t i = 0; i < 4; ++i)
@@ -436,9 +470,10 @@ void CocoPacker::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id
 	bool isNullNode = sprite->font.empty() && sprite->color == d2d::Colorf(0, 0, 0, 0);
 	if (!isNullNode)
 	{
-		// move to left-top
-		mat[4] -= (int)(sprite->width * 0.5f * 16 + 0.5f);
-		mat[5] -= (int)(sprite->height * 0.5f * 16 + 0.5f);
+		// flip y
+ 		// move to left-top
+  		mat[4] -= (int)(sprite->width * 0.5f * 16 + 0.5f);
+  		mat[5] -= (int)(sprite->height * 0.5f * 16 + 0.5f);
 
 		//mat[4] -= (int)(sprite->getBounding()->width() * 0.5f * 16 + 0.5f);
 		//mat[5] -= (int)(sprite->getBounding()->height() * 0.5f * 16 + 0.5f);

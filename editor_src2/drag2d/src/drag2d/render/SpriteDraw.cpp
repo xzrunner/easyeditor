@@ -22,7 +22,6 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
 
 	Shader* shader = Shader::Instance();
 	shader->sprite();
-//	shader->null();
 
 	GL10::PushMatrix();
 

@@ -2,242 +2,21 @@
 
 #include "Context.h"
 
-#include <queue>
-
-#include <easybuilder.h>
-#include <easycomplex.h>
-#include <easyanim.h>
-
 namespace coceditor
 {
 
 void COCParser::parser()
 {
-	prepareSymbols();
-	prepareOutList();
-	prepareMapSymbolPic();
-}
-
-void COCParser::prepareSymbols()
-{
 	Context* context = Context::Instance();
-	if (context->symbols.empty())
-		return;
+	m_symbolPrepare.prepare(context->symbols);
 
-	for (size_t i = 0, n = context->symbols.size(); i < n; ++i)
-		m_setSymbols.insert(context->symbols[i]);
-	
-	std::queue<d2d::ISprite*> buffer;
-	for (size_t i = 0, n = context->symbols.size(); i < n; ++i)
-	{
-		d2d::ISymbol* symbol = context->symbols[i];
-		if (complex::Symbol* complex = dynamic_cast<complex::Symbol*>(symbol))
-		{
-			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
-				buffer.push(complex->m_sprites[j]);
-		}
-		else if (anim::Symbol* anim = dynamic_cast<anim::Symbol*>(symbol))
-		{
-			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
-			{
-				anim::Symbol::Layer* layer = anim->m_layers[i];
-				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
-				{
-					anim::Symbol::Frame* frame = layer->frames[j];
-					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-						buffer.push(frame->sprites[k]);
-				}
-			}
-		}
-	}
-	
-	while (!buffer.empty())
-	{
-		d2d::ISprite* sprite = buffer.front(); buffer.pop();
-		if (const d2d::ImageSprite* image = dynamic_cast<const d2d::ImageSprite*>(sprite))
-		{
-			m_setSymbols.insert(&sprite->getSymbol());
-		}
-		else if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(sprite))
-		{
-			m_setSymbols.insert(&sprite->getSymbol());
-		}
-		else if (const complex::Sprite* complex = dynamic_cast<const complex::Sprite*>(sprite))
-		{
-			const complex::Symbol& symbol = complex->getSymbol();
-			if (m_setSymbols.find(&symbol) == m_setSymbols.end())
-			{
-				m_setSymbols.insert(&symbol);
-				for (size_t i = 0, n = symbol.m_sprites.size(); i < n; ++i)
-				{
-					d2d::ISprite* child = symbol.m_sprites[i];
-					buffer.push(child);
-				}
-			}
-		}
-		else if (const anim::Sprite* anim = dynamic_cast<const anim::Sprite*>(sprite))
-		{
-			const anim::Symbol& symbol = anim->getSymbol();
-			if (m_setSymbols.find(&symbol) == m_setSymbols.end())
-			{
-				m_setSymbols.insert(&symbol);
-				for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
-				{
-					anim::Symbol::Layer* layer = symbol.m_layers[i];
-					for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
-					{
-						anim::Symbol::Frame* frame = layer->frames[j];
-						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-							buffer.push(frame->sprites[k]);
-					}
-				}
-			}
-		}
-		else if (const d2d::Patch9Sprite* anim = dynamic_cast<const d2d::Patch9Sprite*>(sprite))
-		{
-			const d2d::Patch9Symbol& symbol = anim->getSymbol();
-			if (m_setSymbols.find(&symbol) == m_setSymbols.end())
-			{
-				m_setSymbols.insert(&symbol);
-				switch (symbol.type())
-				{
-				case d2d::Patch9Symbol::e_9Grid:
-					for (size_t i = 0; i < 3; ++i)
-						for (size_t j = 0; j < 3; ++j)
-							buffer.push(symbol.m_sprites[i][j]);
-					break;
-				case d2d::Patch9Symbol::e_9GridHollow:
-					for (size_t i = 0; i < 3; ++i) {
-						for (size_t j = 0; j < 3; ++j) {
-							if (i == 1 && j == 1) continue;
-							buffer.push(symbol.m_sprites[i][j]);
-						}
-					}
-					break;
-				case d2d::Patch9Symbol::e_3GridHor:
-					for (size_t i = 0; i < 3; ++i)
-						buffer.push(symbol.m_sprites[1][i]);
-					break;
-				case d2d::Patch9Symbol::e_3GridVer:
-					for (size_t i = 0; i < 3; ++i)
-						buffer.push(symbol.m_sprites[i][1]);
-					break;
-				case d2d::Patch9Symbol::e_6GridUpper:
-					for (size_t i = 1; i < 3; ++i)
-						for (size_t j = 0; j < 3; ++j)
-							buffer.push(symbol.m_sprites[i][j]);
-					break;
-				}
-			}
-		}
-	}
-}
-
-void COCParser::prepareOutList()
-{
-	while (!m_setSymbols.empty())
-	{
-		std::set<const d2d::ISymbol*>::iterator itr = m_setSymbols.begin();
-		for ( ; itr != m_setSymbols.end(); ++itr)
-		{
-			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(*itr);
-			if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
-			{
-				std::string path = symbol->getFilepath();
-				m_outList.push_back(image);
-				m_setSymbols.erase(itr);
-				break;
-			}
-			else if (d2d::FontBlankSymbol* font = dynamic_cast<d2d::FontBlankSymbol*>(symbol))
-			{
-				m_outList.push_back(font);
-				m_setSymbols.erase(itr);
-				break;
-			}
-			else if (complex::Symbol* complex = dynamic_cast<complex::Symbol*>(symbol))
-			{
-				bool prepared = true;
-				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i)
-					if (!isSymbolPrepared(complex->m_sprites[i]))
-						prepared = false;
-				if (prepared)
-				{
-					m_outList.push_back(complex);
-					m_setSymbols.erase(itr);
-					break;
-				}
-			}
-			else if (anim::Symbol* anim = dynamic_cast<anim::Symbol*>(symbol))
-			{
-				bool prepared = true;
-				for (size_t i = 0, n = anim->m_layers.size(); i < n && prepared; ++i)
-				{
-					anim::Symbol::Layer* layer = anim->m_layers[i];
-					for (size_t j = 0, m = layer->frames.size(); j < m && prepared; ++j)
-					{
-						anim::Symbol::Frame* frame = layer->frames[j];
-						for (size_t k = 0, l = frame->sprites.size(); k < l && prepared; ++k)
-							if (!isSymbolPrepared(frame->sprites[k]))
-								prepared = false;
-					}
-				}
-				if (prepared)
-				{
-					m_outList.push_back(anim);
-					m_setSymbols.erase(itr);
-					break;
-				}
-			}
-			else if (d2d::Patch9Symbol* patch9 = dynamic_cast<d2d::Patch9Symbol*>(symbol))
-			{
-				bool prepared = true;
-				switch (patch9->type())
-				{
-				case d2d::Patch9Symbol::e_9Grid:
-					for (size_t i = 0; i < 3 && prepared; ++i)
-						for (size_t j = 0; j < 3 && prepared; ++j)
-							if (!isSymbolPrepared(patch9->m_sprites[i][j]))
-								prepared = false;
-					break;
-				case d2d::Patch9Symbol::e_9GridHollow:
-					for (size_t i = 0; i < 3 && prepared; ++i) {
-						for (size_t j = 0; j < 3 && prepared; ++j) {
-							if (i == 1 && j == 1) continue;
-							if (!isSymbolPrepared(patch9->m_sprites[i][j]))
-								prepared = false;
-						}
-					}
-					break;
-				case d2d::Patch9Symbol::e_3GridHor:
-					for (size_t i = 0; i < 3 && prepared; ++i)
-						if (!isSymbolPrepared(patch9->m_sprites[1][i]))
-							prepared = false;
-					break;
-				case d2d::Patch9Symbol::e_3GridVer:
-					for (size_t i = 0; i < 3 && prepared; ++i)
-						if (!isSymbolPrepared(patch9->m_sprites[i][1]))
-							prepared = false;
-					break;
-				case d2d::Patch9Symbol::e_6GridUpper:
-					for (size_t i = 1; i < 3 && prepared; ++i)
-						for (size_t j = 0; j < 3 && prepared; ++j)
-							if (!isSymbolPrepared(patch9->m_sprites[i][j]))
-								prepared = false;
-					break;
-				}
-				if (prepared)
-				{
-					m_outList.push_back(patch9);
-					m_setSymbols.erase(itr);
-					break;
-				}
-			}
-		}
-	}
+	prepareMapSymbolPic();
 }
 
 void COCParser::prepareMapSymbolPic()
 {
+	const std::vector<const d2d::ISymbol*>& sorted = m_symbolPrepare.getResult();
+
 	const TexturesMgr& texMgr = Context::Instance()->texMgr;
 	for (size_t i = 0; i < TexturesMgr::NUM; ++i)
 	{
@@ -250,9 +29,9 @@ void COCParser::prepareMapSymbolPic()
 
 			// find symbol
 			const d2d::ISymbol* symbol = NULL;
-			for (size_t k = 0, l = m_outList.size(); k < l; ++k)
+			for (size_t k = 0, l = sorted.size(); k < l; ++k)
 			{
-				const d2d::ISymbol* s = m_outList[k];
+				const d2d::ISymbol* s = sorted[k];
 				std::string filepath = s->getFilepath();
 				d2d::FilenameTools::formatSeparators(filepath);
 
@@ -312,11 +91,4 @@ void COCParser::prepareMapSymbolPic()
 	}
 }
 
-bool COCParser::isSymbolPrepared(const d2d::ISprite* sprite) const
-{
-	for (size_t i = 0, n = m_outList.size(); i < n; ++i)
-		if (&sprite->getSymbol() == m_outList[i])
-			return true;
-	return false;
-}
 } // coceditor

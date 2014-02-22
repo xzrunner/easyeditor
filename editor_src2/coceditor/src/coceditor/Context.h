@@ -23,7 +23,7 @@ namespace coceditor
 
 		TexturesMgr texMgr;
 //		std::vector<complex::Symbol*> symbols;
-		std::vector<d2d::ISymbol*> symbols;
+		std::vector<const d2d::ISymbol*> symbols;
 		wxString dlgPath;
 
 		float scale;

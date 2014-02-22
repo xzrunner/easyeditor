@@ -57,6 +57,8 @@ void ImageSaver::storePPM(const uint8_t* pixels, int width, int height,
 				    g = pixels[ptr_src++],
 					b = pixels[ptr_src++],
 					a = pixels[ptr_src++];
+			if (a == 0)
+				r = g = b = 0;
 			ppm_data[ptr_ppm++] = g;
 			ppm_data[ptr_ppm++] = b;
 			ppm_data[ptr_ppm++] = r;
@@ -67,14 +69,14 @@ void ImageSaver::storePPM(const uint8_t* pixels, int width, int height,
 	// write to file
 	std::string ppm_path = filename + ".ppm";
 	std::ofstream ppm_fout(ppm_path.c_str(), std::ios::binary);
-	assert(!ppm_fout.fail());
+//	assert(!ppm_fout.fail());
 	ppm_fout.write(reinterpret_cast<const char*>(ppm_data), ppm_size);
 	delete[] ppm_data;
 	ppm_fout.close();
 
 	std::string pgm_path = filename + ".pgm";
 	std::ofstream pgm_fout(pgm_path.c_str(), std::ios::binary);
-	assert(!pgm_fout.fail());
+//	assert(!pgm_fout.fail());
 	pgm_fout.write(reinterpret_cast<const char*>(pgm_data), pgm_size);
 	delete[] pgm_data;
 	pgm_fout.close();
