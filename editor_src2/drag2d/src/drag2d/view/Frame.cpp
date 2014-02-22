@@ -122,8 +122,8 @@ namespace d2d
  		pack.pack(sprites, folder);
  
 #ifdef _DEBUG
-//		std::string workpath = "D:\\projects\\ejoy\\coco-tools\\editor_bin\\";
-		std::string workpath = "D:\\MyProject\\ejoy_new\\coco-tools\\editor_bin\\";
+		wxString cwd = wxFileName::GetCwd();
+		std::string workpath = cwd + "\\..\\..\\..\\..\\..\\editor_bin\\";
 		std::string cmd = workpath + "ejoy2d.exe " + workpath + "ejoy2d\\preview\\play.lua";
 #else
 		std::string cmd = "ejoy2d.exe ejoy2d/preview/play.lua";
