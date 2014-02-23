@@ -13,8 +13,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 void StageCanvas::onDraw()
 {
-	if (m_panel->m_sprite)
-		d2d::SpriteDraw::drawSprite(m_panel->m_sprite);
+	m_editPanel->drawEditTemp();
 }
 
 }

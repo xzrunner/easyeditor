@@ -6,9 +6,10 @@
 namespace d2d
 {
 
-ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus) 
+ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
+					   bool bOpenRightTap) 
 	: AbstractEditOP(editPanel)
-	, m_openRightTap(true)
+	, m_openRightTap(bOpenRightTap)
 	, m_bMouseMoveFocus(bMouseMoveFocus)
 	, m_onRightBtnPan(false)
 {

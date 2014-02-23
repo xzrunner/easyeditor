@@ -128,14 +128,16 @@ void PrimitiveDraw::drawCircles(const std::vector<Vector>& circles, float radius
 	{
 		if (circles.empty()) return;
 
+		GL10::Color4f(color.r, color.g, color.b, color.a);
+
 		const float k_increment = 2.0f * PI / kSegments;
 
 		std::vector<Vector> vertices;
-		std::vector<Colorf> colors;
+//		std::vector<Colorf> colors;
 		const int size = kSegments * circles.size() * 3;
 
 		vertices.reserve(size);
-		colors.resize(size, color);
+//		colors.resize(size, color);
 		for (size_t i = 0, n = circles.size(); i < n; ++i)
 		{
 			float theta = 0.0f;
@@ -158,14 +160,14 @@ void PrimitiveDraw::drawCircles(const std::vector<Vector>& circles, float radius
 // 		GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 
 		GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
-		GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
+//		GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
 
 		GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &vertices[0]);
-		GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
+//		GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
 		GL10::DrawArrays(GL10::GL_TRIANGLES, 0, vertices.size());
 
-		GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
+//		GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
 		GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
 
 		//GL10::Disable(GL10::GL_BLEND);
@@ -332,21 +334,23 @@ void PrimitiveDraw::drawTriangles(const std::vector<Vector>& triangles, const Co
 
 	if (triangles.empty()) return;
 
+	GL10::Color4f(color.r, color.g, color.b, color.a);
+
 // 	GL10::Enable(GL10::GL_BLEND);
 // 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 
-	std::vector<Colorf> colors;
-	colors.resize(triangles.size(), color);
+// 	std::vector<Colorf> colors;
+// 	colors.resize(triangles.size(), color);
 
  	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
- 	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
+// 	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
 
 	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &triangles[0]);
-	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
+//	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
 	GL10::DrawArrays(GL10::GL_TRIANGLES, 0, triangles.size());
 
- 	GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
+// 	GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
  	GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
 
 	//GL10::Disable(GL10::GL_BLEND);
@@ -530,7 +534,7 @@ void PrimitiveDraw::drawTriangles(unsigned int texID, const std::vector<Vector>&
 {
 	if (triangles.empty()) return;
 
-	Shader::Instance()->shape();
+	Shader::Instance()->null();
 
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, texID);
 

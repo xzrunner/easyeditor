@@ -9,7 +9,8 @@ namespace d2d
 	class ZoomViewOP : public AbstractEditOP
 	{
 	public:
-		ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus);
+		ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
+			bool bOpenRightTap = true);
 
 		virtual bool onKeyDown(int keyCode);
 		virtual bool onKeyUp(int keyCode);

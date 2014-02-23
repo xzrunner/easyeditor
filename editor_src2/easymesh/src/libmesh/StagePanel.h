@@ -7,6 +7,7 @@ namespace emesh
 {
 
 class Sprite;
+class Mesh;
 class StagePanel : public d2d::EditPanel
 {
 public:
@@ -15,6 +16,11 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library, Sprite* sprite);
 	virtual ~StagePanel();
+
+	Mesh* getMesh();
+	Sprite* getSprite() {
+		return m_sprite;
+	}
 
 private:
 	void init(d2d::LibraryPanel* library);
@@ -36,8 +42,6 @@ private:
 
 private:
 	Sprite* m_sprite;
-
-	friend class StageCanvas;
 
 }; // StagePanel
 

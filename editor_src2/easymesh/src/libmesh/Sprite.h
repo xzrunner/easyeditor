@@ -27,6 +27,10 @@ public:
 	virtual void setSymbol(d2d::ISymbol* symbol);
 	virtual void loadBodyFromFile();
 
+	Mesh* getMesh() { 
+		return m_symbol ? m_symbol->getMesh() : NULL; 
+	}
+
 private:
 	Symbol* m_symbol;
 

@@ -1,26 +1,30 @@
 #include "Symbol.h"
+#include "Mesh.h"
 
 namespace emesh
 {
 
 Symbol::Symbol()
 	: m_image(NULL)
+	, m_mesh(NULL)
 {
 }
 
 Symbol::Symbol(const Symbol& s)
 	: m_image(s.m_image)
-	, m_mesh(s.m_mesh)
 {
+	m_mesh = s.m_mesh->clone();
 }
 
 Symbol::Symbol(d2d::Image* image)
 	: m_image(image)
 {
+	m_mesh = new Mesh(*image);
 }
 
 Symbol::~Symbol()
 {
+	m_mesh->release();
 }
 
 Symbol* Symbol::clone() const 

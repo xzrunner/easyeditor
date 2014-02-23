@@ -229,6 +229,50 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="edit"
+			>
+			<Filter
+				Name="create"
+				>
+				<File
+					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\CreateMeshCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\CreateMeshOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\CreateMeshOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="edit"
+				>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditMeshCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditMeshOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditMeshOP.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

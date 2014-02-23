@@ -2,13 +2,15 @@
 #define _EASYMESH_TOOLBAR_PANEL_H_
 
 #include <drag2d.h>
+
 namespace emesh
 {
 
+class StagePanel;
 class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::EditPanel* stage);
+	ToolbarPanel(wxWindow* parent, StagePanel* stage);
 
 protected:
 	virtual wxSizer* initLayout();

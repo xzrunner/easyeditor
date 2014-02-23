@@ -3,11 +3,10 @@
 
 #include <drag2d.h>
 
-#include "Mesh.h"
-
 namespace emesh
 {
 
+class Mesh;
 class Symbol : public d2d::ISymbol
 {
 public:
@@ -39,13 +38,15 @@ public:
 	//
 	virtual void refresh();
 
+	Mesh* getMesh() { return m_mesh; }
+
 protected:
 	virtual void loadResources();
 
 private:
 	d2d::Image* m_image;
 
-	Mesh m_mesh;
+	Mesh* m_mesh;
 
 }; // Symbol
 

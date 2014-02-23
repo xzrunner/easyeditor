@@ -8,13 +8,21 @@ class Node : public d2d::Object
 {
 public:
 	Node() {}
+	Node(const d2d::Vector& pos, int width, int height) {
+		xy = pos;
+ 		uv.x = pos.x / width + 0.5f;
+ 		uv.y = pos.y / height + 0.5f;
+	}
 	Node(const Node& n) {
-		src = n.src;
-		dst = n.dst;
+		uv = n.uv;
+		xy = n.xy;
 	}
 
 public:
-	d2d::Vector src, dst;
+	static const int RADIUS = 5;
+
+public:
+	d2d::Vector uv, xy;
 
 }; // Node
 
@@ -22,8 +30,8 @@ class NodeCmp
 {
 public:
 	bool operator () (const Node* lhs, const Node* rhs) const {
-		return lhs->src.x < rhs->src.x 
-			|| lhs->src.x == rhs->src.x && lhs->src.y < rhs->src.y;
+		return lhs->uv.x < rhs->uv.x 
+			|| lhs->uv.x == rhs->uv.x && lhs->uv.y < rhs->uv.y;
 	}
 }; // NodeCmp
 

@@ -29,6 +29,11 @@ StagePanel::~StagePanel()
 	m_sprite->release();	
 }
 
+Mesh* StagePanel::getMesh()
+{
+	return m_sprite->getMesh();
+}
+
 void StagePanel::init(d2d::LibraryPanel* library)
 {
 	m_editOP = new d2d::ZoomViewOP(this, true);
