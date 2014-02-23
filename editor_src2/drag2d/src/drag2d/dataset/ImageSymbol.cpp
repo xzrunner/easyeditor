@@ -19,7 +19,6 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 
 ImageSymbol::~ImageSymbol()
 {
-
 }
 
 ImageSymbol* ImageSymbol::clone() const

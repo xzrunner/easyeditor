@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libanim"
-	ProjectGUID="{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
-	RootNamespace="libanim"
+	Name="libmesh"
+	ProjectGUID="{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
+	RootNamespace="libmesh"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\libanim\x86\Debug"
-			IntermediateDirectory="..\libanim\x86\Debug\obj"
+			OutputDirectory="..\libmesh\x86\Debug"
+			IntermediateDirectory="..\libmesh\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -41,14 +41,14 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\coceditor\src"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				AssemblerListingLocation="..\libanim\x86\Debug"
-				ProgramDataBaseFileName="..\libanim\x86\Debug\libanim.pdb"
+				AssemblerListingLocation="..\libmesh\x86\Debug"
+				ProgramDataBaseFileName="..\libmesh\x86\Debug\libmesh.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -82,8 +82,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\libanim\x86\Release"
-			IntermediateDirectory="..\libanim\x86\Release\obj"
+			OutputDirectory="..\libmesh\x86\Release"
+			IntermediateDirectory="..\libmesh\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -107,13 +107,13 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\coceditor\src"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				AssemblerListingLocation="..\libanim\x86\Release"
-				ProgramDataBaseFileName="..\libanim\x86\Release\libanim.pdb"
+				AssemblerListingLocation="..\libmesh\x86\Release"
+				ProgramDataBaseFileName="..\libmesh\x86\Release\libmesh.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -150,46 +150,30 @@
 	</References>
 	<Files>
 		<Filter
-			Name="preview"
+			Name="view"
 			>
 			<File
-				RelativePath="..\..\..\src\libanim\PreviewCanvas.cpp"
+				RelativePath="..\..\..\src\libmesh\StageCanvas.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\PreviewCanvas.h"
+				RelativePath="..\..\..\src\libmesh\StageCanvas.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\PreviewDialog.cpp"
+				RelativePath="..\..\..\src\libmesh\StagePanel.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\PreviewDialog.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="output"
-			>
-			<File
-				RelativePath="..\..\..\src\libanim\FileSaver.cpp"
+				RelativePath="..\..\..\src\libmesh\StagePanel.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\FileSaver.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="tools"
-			>
-			<File
-				RelativePath="..\..\..\src\libanim\Tools.cpp"
+				RelativePath="..\..\..\src\libmesh\ToolbarPanel.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\Tools.h"
+				RelativePath="..\..\..\src\libmesh\ToolbarPanel.h"
 				>
 			</File>
 		</Filter>
@@ -197,53 +181,53 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libanim\Sprite.cpp"
+				RelativePath="..\..\..\src\libmesh\Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\Sprite.h"
+				RelativePath="..\..\..\src\libmesh\Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\Symbol.cpp"
+				RelativePath="..\..\..\src\libmesh\Symbol.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\Symbol.h"
+				RelativePath="..\..\..\src\libmesh\Symbol.h"
 				>
 			</File>
+			<Filter
+				Name="mesh"
+				>
+				<File
+					RelativePath="..\..\..\src\libmesh\Mesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Mesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Node.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Triangle.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
-			Name="view"
+			Name="file"
 			>
-			<Filter
-				Name="library"
+			<File
+				RelativePath="..\..\..\src\libmesh\FileIO.cpp"
 				>
-				<File
-					RelativePath="..\..\..\src\libanim\LibraryPage.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libanim\LibraryPage.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="property"
+			</File>
+			<File
+				RelativePath="..\..\..\src\libmesh\FileIO.h"
 				>
-				<File
-					RelativePath="..\..\..\src\libanim\PropertySetting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libanim\PropertySetting.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="toolbar"
-				>
-			</Filter>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

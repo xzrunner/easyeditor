@@ -43,7 +43,7 @@ namespace complex
 		private:
 			StagePanel* m_stage;
 
-		}; // DragTileTarget
+		}; // DragSymbolTarget
 
 	private:
 		Symbol* m_symbol;

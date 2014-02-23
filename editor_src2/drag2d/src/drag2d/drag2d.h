@@ -3,6 +3,7 @@
 #include "interfaces.h"
 
 #include "algorithms/DelaunayTriangulation.h"
+#include "algorithms/Triangulation.h"
 
 #include "dataset/Bitmap.h"
 #include "dataset/Image.h"

@@ -1,7 +1,7 @@
 #include "Math.h"
 
 #include <assert.h>
-#include <Triangle/triangle.cpp>
+//#include <Triangle/triangle.cpp>
 
 #include "common/Matrix.h"
 #include "algorithms/SGI.h"
@@ -605,302 +605,302 @@ void Math::removeDuplicatePoints(const std::vector<Vector>& src, std::vector<Vec
 	}
 }
 
-void Math::triangulatePolygon(const std::vector<Vector>& polygon, std::vector<Vector>& result, 
-							  TriangulateType type/* = e_Constrained*/)
-{
-	struct triangulateio in, out;
-
-	in.numberofpoints = polygon.size();
-	in.numberofpointattributes = 0;
-	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
-	in.pointmarkerlist = (int *) NULL;
-	int index = 0;
-	for (size_t i = 0; i < in.numberofpoints; ++i)
-	{
-		in.pointlist[index++] = polygon[i].x;
-		in.pointlist[index++] = polygon[i].y;
-	}
-
-	in.numberofsegments = in.numberofpoints;
-	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
-	index = 0;
-	for (size_t i = 0; i < in.numberofsegments - 1; ++i)
-	{
-		in.segmentlist[index++] = i;
-		in.segmentlist[index++] = i + 1;
-	}
-	in.segmentlist[index++] = in.numberofsegments - 1;
-	in.segmentlist[index++] = 0;
-
-	in.segmentmarkerlist = (int *) NULL;
-
-	in.numberofholes = 0;
-	in.numberofregions = 0;
-
-	out.pointlist = (REAL *) NULL;
-	out.pointattributelist = (REAL *) NULL;
-	out.pointmarkerlist = (int *) NULL;
-	out.trianglelist = (int *) NULL;
-	out.triangleattributelist = (REAL *) NULL;
-	out.segmentlist = (int *) NULL;
-	out.segmentmarkerlist = (int *) NULL;
-
-	switch (type)
-	{
-	case e_Constrained:
-		triangulate("pz", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_Conforming:
-		triangulate("pzD", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingAngle:
-		triangulate("pzq", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingArea:
-		triangulate("pza10000", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingCount:
-		triangulate("pzu100", &in, &out, (struct triangulateio *) NULL);
-		break;
-	default:
-		assert(0);
-	}
-
-	index = 0;
-	for (size_t i = 0; i < out.numberoftriangles; ++i)
-	{
-		for (size_t j = 0; j < out.numberofcorners; ++j)
-		{
-			int pIndex = out.trianglelist[index++];
-
-			Vector p;
-			p.x = out.pointlist[pIndex * 2];
-			p.y = out.pointlist[pIndex * 2 + 1];
-			result.push_back(p);
-		}
-	}
-}
-
-void Math::triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
-							  std::vector<Vector>& result, TriangulateType type/* = e_Constrained*/)
-{
-	struct triangulateio in, out;
-
-	in.numberofpoints = polygon.size() + lines.size();
-	in.numberofpointattributes = 0;
-	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
-	in.pointmarkerlist = (int *) NULL;
-	int index = 0;
-	for (size_t i = 0, n = polygon.size(); i < n; ++i)
-	{
-		in.pointlist[index++] = polygon[i].x;
-		in.pointlist[index++] = polygon[i].y;
-	}
-	for (size_t i = 0, n = lines.size(); i < n; ++i)
-	{
-		in.pointlist[index++] = lines[i].x;
-		in.pointlist[index++] = lines[i].y;
-	}
-
-	in.numberofsegments = polygon.size() + lines.size() / 2;
-	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
-
-	index = 0;
-	for (size_t i = 0, n = polygon.size() - 1; i < n; ++i)
-	{
-		in.segmentlist[index++] = i;
-		in.segmentlist[index++] = i + 1;
-	}
-	in.segmentlist[index++] = polygon.size() - 1;
-	in.segmentlist[index++] = 0;
-
-	int lineIndex = polygon.size();
-	for (size_t i = 0, n = lines.size() / 2; i < n; ++i)
-	{
-		in.segmentlist[index++] = lineIndex++;
-		in.segmentlist[index++] = lineIndex++;
-	}
-
-	in.segmentmarkerlist = (int *) NULL;
-
-	in.numberofholes = 0;
-	in.numberofregions = 0;
-
-	out.pointlist = (REAL *) NULL;
-	out.pointattributelist = (REAL *) NULL;
-	out.pointmarkerlist = (int *) NULL;
-	out.trianglelist = (int *) NULL;
-	out.triangleattributelist = (REAL *) NULL;
-	out.segmentlist = (int *) NULL;
-	out.segmentmarkerlist = (int *) NULL;
-
-	switch (type)
-	{
-	case e_Constrained:
-		triangulate("pz", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_Conforming:
-		triangulate("pzD", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingAngle:
-		triangulate("pzq", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingArea:
-		triangulate("pza10000", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingCount:
-		triangulate("pzu100", &in, &out, (struct triangulateio *) NULL);
-		break;
-	default:
-		assert(0);
-	}
-
-	index = 0;
-	for (size_t i = 0; i < out.numberoftriangles; ++i)
-	{
-		std::vector<Vector> tri;
-		for (size_t j = 0; j < out.numberofcorners; ++j)
-		{
-			int pIndex = out.trianglelist[index++];
-
-			Vector p;
-			p.x = out.pointlist[pIndex * 2];
-			p.y = out.pointlist[pIndex * 2 + 1];
-			tri.push_back(p);
-		}
-
-		Vector center = Math::getTriGravityCenter(tri[0], tri[1], tri[2]);
-		if (Math::isPointInArea(center, polygon))
-			copy(tri.begin(), tri.end(), back_inserter(result));
-	}
-}
-
-void Math::triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
-							  const std::vector<std::vector<Vector> >& loops, std::vector<Vector>& result, TriangulateType type/* = e_Constrained*/)
-{
-	struct triangulateio in, out;
-
-	size_t loopSize = 0;
-	for (size_t i = 0, n = loops.size(); i < n; ++i)
-		loopSize += loops[i].size();
-
-	in.numberofpoints = polygon.size() + lines.size() + loopSize;
-	in.numberofpointattributes = 0;
-	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
-	in.pointmarkerlist = (int *) NULL;
-	int index = 0;
-	for (size_t i = 0, n = polygon.size(); i < n; ++i)
-	{
-		in.pointlist[index++] = polygon[i].x;
-		in.pointlist[index++] = polygon[i].y;
-	}
-	for (size_t i = 0, n = lines.size(); i < n; ++i)
-	{
-		in.pointlist[index++] = lines[i].x;
-		in.pointlist[index++] = lines[i].y;
-	}
-	for (size_t i = 0, n = loops.size(); i < n; ++i)
-	{
-		for (size_t j = 0, m = loops[i].size(); j < m; ++j)
-		{
-			in.pointlist[index++] = loops[i][j].x;
-			in.pointlist[index++] = loops[i][j].y;
-		}
-	}
-
-	in.numberofsegments = polygon.size() + lines.size() / 2 + loopSize;
-	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
-
-	index = 0;
-	for (size_t i = 0, n = polygon.size() - 1; i < n; ++i)
-	{
-		in.segmentlist[index++] = i;
-		in.segmentlist[index++] = i + 1;
-	}
-	in.segmentlist[index++] = polygon.size() - 1;
-	in.segmentlist[index++] = 0;
-
-	int lineIndex = polygon.size();
-	for (size_t i = 0, n = lines.size() / 2; i < n; ++i)
-	{
-		in.segmentlist[index++] = lineIndex++;
-		in.segmentlist[index++] = lineIndex++;
-	}
-
-	int loopIndex = polygon.size() + lines.size();
-	for (size_t i = 0, n = loops.size(); i < n; ++i)
-	{
-		int start = loopIndex;
-		for (size_t j = 0, m = loops[i].size() - 1; j < m; ++j)
-		{
-			in.segmentlist[index++] = loopIndex;
-			in.segmentlist[index++] = loopIndex + 1;
-			++loopIndex;
-		}
-		in.segmentlist[index++] = loopIndex;
-		in.segmentlist[index++] = start;
-		++loopIndex;
-	}
-
-	in.segmentmarkerlist = (int *) NULL;
-
-	in.numberofholes = 0;
-	in.numberofregions = 0;
-
-	out.pointlist = (REAL *) NULL;
-	out.pointattributelist = (REAL *) NULL;
-	out.pointmarkerlist = (int *) NULL;
-	out.trianglelist = (int *) NULL;
-	out.triangleattributelist = (REAL *) NULL;
-	out.segmentlist = (int *) NULL;
-	out.segmentmarkerlist = (int *) NULL;
-
-	switch (type)
-	{
-	case e_Constrained:
-		triangulate("pz", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_Conforming:
-		triangulate("pzD", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingAngle:
-		triangulate("pzq", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingArea:
-		triangulate("pza10000", &in, &out, (struct triangulateio *) NULL);
-		break;
-	case e_ConstrainedConformingCount:
-		triangulate("pzu100", &in, &out, (struct triangulateio *) NULL);
-		break;
-	default:
-		assert(0);
-	}
-
-	index = 0;
-	for (size_t i = 0; i < out.numberoftriangles; ++i)
-	{
-		std::vector<Vector> tri;
-		for (size_t j = 0; j < out.numberofcorners; ++j)
-		{
-			int pIndex = out.trianglelist[index++];
-
-			Vector p;
-			p.x = out.pointlist[pIndex * 2];
-			p.y = out.pointlist[pIndex * 2 + 1];
-			tri.push_back(p);
-		}
-
-		Vector center = Math::getTriGravityCenter(tri[0], tri[1], tri[2]);
-		if (Math::isPointInArea(center, polygon))
-			copy(tri.begin(), tri.end(), back_inserter(result));
-	}
-}
-
-void Math::triangulateStrips(const std::vector<Vector>& triangulates, 
-							 std::vector<std::vector<Vector> >& strips)
-{
-	SGI::implement(triangulates, strips);
-}
+//void Math::triangulatePolygon(const std::vector<Vector>& polygon, std::vector<Vector>& result, 
+//							  TriangulateType type/* = e_Constrained*/)
+//{
+//	struct triangulateio in, out;
+//
+//	in.numberofpoints = polygon.size();
+//	in.numberofpointattributes = 0;
+//	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+//	in.pointmarkerlist = (int *) NULL;
+//	int index = 0;
+//	for (size_t i = 0; i < in.numberofpoints; ++i)
+//	{
+//		in.pointlist[index++] = polygon[i].x;
+//		in.pointlist[index++] = polygon[i].y;
+//	}
+//
+//	in.numberofsegments = in.numberofpoints;
+//	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
+//	index = 0;
+//	for (size_t i = 0; i < in.numberofsegments - 1; ++i)
+//	{
+//		in.segmentlist[index++] = i;
+//		in.segmentlist[index++] = i + 1;
+//	}
+//	in.segmentlist[index++] = in.numberofsegments - 1;
+//	in.segmentlist[index++] = 0;
+//
+//	in.segmentmarkerlist = (int *) NULL;
+//
+//	in.numberofholes = 0;
+//	in.numberofregions = 0;
+//
+//	out.pointlist = (REAL *) NULL;
+//	out.pointattributelist = (REAL *) NULL;
+//	out.pointmarkerlist = (int *) NULL;
+//	out.trianglelist = (int *) NULL;
+//	out.triangleattributelist = (REAL *) NULL;
+//	out.segmentlist = (int *) NULL;
+//	out.segmentmarkerlist = (int *) NULL;
+//
+//	switch (type)
+//	{
+//	case e_Constrained:
+//		triangulate("pz", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_Conforming:
+//		triangulate("pzD", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingAngle:
+//		triangulate("pzq", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingArea:
+//		triangulate("pza10000", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingCount:
+//		triangulate("pzu100", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	default:
+//		assert(0);
+//	}
+//
+//	index = 0;
+//	for (size_t i = 0; i < out.numberoftriangles; ++i)
+//	{
+//		for (size_t j = 0; j < out.numberofcorners; ++j)
+//		{
+//			int pIndex = out.trianglelist[index++];
+//
+//			Vector p;
+//			p.x = out.pointlist[pIndex * 2];
+//			p.y = out.pointlist[pIndex * 2 + 1];
+//			result.push_back(p);
+//		}
+//	}
+//}
+//
+//void Math::triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
+//							  std::vector<Vector>& result, TriangulateType type/* = e_Constrained*/)
+//{
+//	struct triangulateio in, out;
+//
+//	in.numberofpoints = polygon.size() + lines.size();
+//	in.numberofpointattributes = 0;
+//	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+//	in.pointmarkerlist = (int *) NULL;
+//	int index = 0;
+//	for (size_t i = 0, n = polygon.size(); i < n; ++i)
+//	{
+//		in.pointlist[index++] = polygon[i].x;
+//		in.pointlist[index++] = polygon[i].y;
+//	}
+//	for (size_t i = 0, n = lines.size(); i < n; ++i)
+//	{
+//		in.pointlist[index++] = lines[i].x;
+//		in.pointlist[index++] = lines[i].y;
+//	}
+//
+//	in.numberofsegments = polygon.size() + lines.size() / 2;
+//	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
+//
+//	index = 0;
+//	for (size_t i = 0, n = polygon.size() - 1; i < n; ++i)
+//	{
+//		in.segmentlist[index++] = i;
+//		in.segmentlist[index++] = i + 1;
+//	}
+//	in.segmentlist[index++] = polygon.size() - 1;
+//	in.segmentlist[index++] = 0;
+//
+//	int lineIndex = polygon.size();
+//	for (size_t i = 0, n = lines.size() / 2; i < n; ++i)
+//	{
+//		in.segmentlist[index++] = lineIndex++;
+//		in.segmentlist[index++] = lineIndex++;
+//	}
+//
+//	in.segmentmarkerlist = (int *) NULL;
+//
+//	in.numberofholes = 0;
+//	in.numberofregions = 0;
+//
+//	out.pointlist = (REAL *) NULL;
+//	out.pointattributelist = (REAL *) NULL;
+//	out.pointmarkerlist = (int *) NULL;
+//	out.trianglelist = (int *) NULL;
+//	out.triangleattributelist = (REAL *) NULL;
+//	out.segmentlist = (int *) NULL;
+//	out.segmentmarkerlist = (int *) NULL;
+//
+//	switch (type)
+//	{
+//	case e_Constrained:
+//		triangulate("pz", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_Conforming:
+//		triangulate("pzD", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingAngle:
+//		triangulate("pzq", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingArea:
+//		triangulate("pza10000", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingCount:
+//		triangulate("pzu100", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	default:
+//		assert(0);
+//	}
+//
+//	index = 0;
+//	for (size_t i = 0; i < out.numberoftriangles; ++i)
+//	{
+//		std::vector<Vector> tri;
+//		for (size_t j = 0; j < out.numberofcorners; ++j)
+//		{
+//			int pIndex = out.trianglelist[index++];
+//
+//			Vector p;
+//			p.x = out.pointlist[pIndex * 2];
+//			p.y = out.pointlist[pIndex * 2 + 1];
+//			tri.push_back(p);
+//		}
+//
+//		Vector center = Math::getTriGravityCenter(tri[0], tri[1], tri[2]);
+//		if (Math::isPointInArea(center, polygon))
+//			copy(tri.begin(), tri.end(), back_inserter(result));
+//	}
+//}
+//
+//void Math::triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
+//							  const std::vector<std::vector<Vector> >& loops, std::vector<Vector>& result, TriangulateType type/* = e_Constrained*/)
+//{
+//	struct triangulateio in, out;
+//
+//	size_t loopSize = 0;
+//	for (size_t i = 0, n = loops.size(); i < n; ++i)
+//		loopSize += loops[i].size();
+//
+//	in.numberofpoints = polygon.size() + lines.size() + loopSize;
+//	in.numberofpointattributes = 0;
+//	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+//	in.pointmarkerlist = (int *) NULL;
+//	int index = 0;
+//	for (size_t i = 0, n = polygon.size(); i < n; ++i)
+//	{
+//		in.pointlist[index++] = polygon[i].x;
+//		in.pointlist[index++] = polygon[i].y;
+//	}
+//	for (size_t i = 0, n = lines.size(); i < n; ++i)
+//	{
+//		in.pointlist[index++] = lines[i].x;
+//		in.pointlist[index++] = lines[i].y;
+//	}
+//	for (size_t i = 0, n = loops.size(); i < n; ++i)
+//	{
+//		for (size_t j = 0, m = loops[i].size(); j < m; ++j)
+//		{
+//			in.pointlist[index++] = loops[i][j].x;
+//			in.pointlist[index++] = loops[i][j].y;
+//		}
+//	}
+//
+//	in.numberofsegments = polygon.size() + lines.size() / 2 + loopSize;
+//	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
+//
+//	index = 0;
+//	for (size_t i = 0, n = polygon.size() - 1; i < n; ++i)
+//	{
+//		in.segmentlist[index++] = i;
+//		in.segmentlist[index++] = i + 1;
+//	}
+//	in.segmentlist[index++] = polygon.size() - 1;
+//	in.segmentlist[index++] = 0;
+//
+//	int lineIndex = polygon.size();
+//	for (size_t i = 0, n = lines.size() / 2; i < n; ++i)
+//	{
+//		in.segmentlist[index++] = lineIndex++;
+//		in.segmentlist[index++] = lineIndex++;
+//	}
+//
+//	int loopIndex = polygon.size() + lines.size();
+//	for (size_t i = 0, n = loops.size(); i < n; ++i)
+//	{
+//		int start = loopIndex;
+//		for (size_t j = 0, m = loops[i].size() - 1; j < m; ++j)
+//		{
+//			in.segmentlist[index++] = loopIndex;
+//			in.segmentlist[index++] = loopIndex + 1;
+//			++loopIndex;
+//		}
+//		in.segmentlist[index++] = loopIndex;
+//		in.segmentlist[index++] = start;
+//		++loopIndex;
+//	}
+//
+//	in.segmentmarkerlist = (int *) NULL;
+//
+//	in.numberofholes = 0;
+//	in.numberofregions = 0;
+//
+//	out.pointlist = (REAL *) NULL;
+//	out.pointattributelist = (REAL *) NULL;
+//	out.pointmarkerlist = (int *) NULL;
+//	out.trianglelist = (int *) NULL;
+//	out.triangleattributelist = (REAL *) NULL;
+//	out.segmentlist = (int *) NULL;
+//	out.segmentmarkerlist = (int *) NULL;
+//
+//	switch (type)
+//	{
+//	case e_Constrained:
+//		triangulate("pz", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_Conforming:
+//		triangulate("pzD", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingAngle:
+//		triangulate("pzq", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingArea:
+//		triangulate("pza10000", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	case e_ConstrainedConformingCount:
+//		triangulate("pzu100", &in, &out, (struct triangulateio *) NULL);
+//		break;
+//	default:
+//		assert(0);
+//	}
+//
+//	index = 0;
+//	for (size_t i = 0; i < out.numberoftriangles; ++i)
+//	{
+//		std::vector<Vector> tri;
+//		for (size_t j = 0; j < out.numberofcorners; ++j)
+//		{
+//			int pIndex = out.trianglelist[index++];
+//
+//			Vector p;
+//			p.x = out.pointlist[pIndex * 2];
+//			p.y = out.pointlist[pIndex * 2 + 1];
+//			tri.push_back(p);
+//		}
+//
+//		Vector center = Math::getTriGravityCenter(tri[0], tri[1], tri[2]);
+//		if (Math::isPointInArea(center, polygon))
+//			copy(tri.begin(), tri.end(), back_inserter(result));
+//	}
+//}
+//
+//void Math::triangulateStrips(const std::vector<Vector>& triangulates, 
+//							 std::vector<std::vector<Vector> >& strips)
+//{
+//	SGI::implement(triangulates, strips);
+//}
 
 void Math::computeQuadNodes(const Vector& center, float angle, float xScale, float yScale, 
 							float width, float height, Vector quad[4])

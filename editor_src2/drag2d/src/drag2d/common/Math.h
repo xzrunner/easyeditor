@@ -220,23 +220,23 @@ namespace d2d
 
 		static void removeDuplicatePoints(const std::vector<Vector>& src, std::vector<Vector>& dst);
 
-		enum TriangulateType
-		{
-			e_Constrained,
-			e_Conforming,
-			e_ConstrainedConformingAngle,
-			e_ConstrainedConformingArea,
-			e_ConstrainedConformingCount
-		};
-		static void triangulatePolygon(const std::vector<Vector>& polygon, std::vector<Vector>& result, 
-			TriangulateType type = e_Constrained);
-		static void triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
-			std::vector<Vector>& result, TriangulateType type = e_Constrained);
-		static void triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
-			const std::vector<std::vector<Vector> >& loops, std::vector<Vector>& result, TriangulateType type = e_Constrained);
-
-		static void triangulateStrips(const std::vector<Vector>& triangulates, 
-			std::vector<std::vector<Vector> >& strips);
+// 		enum TriangulateType
+// 		{
+// 			e_Constrained,
+// 			e_Conforming,
+// 			e_ConstrainedConformingAngle,
+// 			e_ConstrainedConformingArea,
+// 			e_ConstrainedConformingCount
+// 		};
+// 		static void triangulatePolygon(const std::vector<Vector>& polygon, std::vector<Vector>& result, 
+// 			TriangulateType type = e_Constrained);
+// 		static void triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
+// 			std::vector<Vector>& result, TriangulateType type = e_Constrained);
+// 		static void triangulatePolygon(const std::vector<Vector>& polygon, const std::vector<Vector>& lines,
+// 			const std::vector<std::vector<Vector> >& loops, std::vector<Vector>& result, TriangulateType type = e_Constrained);
+// 
+// 		static void triangulateStrips(const std::vector<Vector>& triangulates, 
+// 			std::vector<std::vector<Vector> >& strips);
 
 		// 1 2
 		// 0 3

@@ -81,7 +81,8 @@ void PolygonShape::buildFillingTris()
 
 	if (m_fillingType == e_Color)
 	{
-		Math::triangulatePolygon(boundingFixed, m_fillingVertices, Math::e_Constrained);
+		// todo
+//		Math::triangulatePolygon(boundingFixed, m_fillingVertices, Math::e_Constrained);
 	}
 	else
 	{
@@ -91,7 +92,8 @@ void PolygonShape::buildFillingTris()
 		std::vector<Vector> segments;
 		getTextureBoundarySegments(left, right, low, up, segments);
 
-		Math::triangulatePolygon(boundingFixed, segments, m_fillingVertices, Math::e_Constrained);
+		// todo
+//		Math::triangulatePolygon(boundingFixed, segments, m_fillingVertices, Math::e_Constrained);
 
 		computeTextureCoords(left, low);
 	}
@@ -107,7 +109,8 @@ void PolygonShape::buildFillingTris(const std::vector<Vector>& segments)
 
 	if (m_fillingType == e_Color)
 	{
-		Math::triangulatePolygon(boundingFixed, segments, m_fillingVertices, Math::e_Constrained);
+		// todo
+//		Math::triangulatePolygon(boundingFixed, segments, m_fillingVertices, Math::e_Constrained);
 	}
 	else
 	{
@@ -119,7 +122,8 @@ void PolygonShape::buildFillingTris(const std::vector<Vector>& segments)
 
 		copy(segments.begin(), segments.end(), back_inserter(texSegments));
 
-		Math::triangulatePolygon(boundingFixed, texSegments, m_fillingVertices, Math::e_Constrained);
+		// todo
+//		Math::triangulatePolygon(boundingFixed, texSegments, m_fillingVertices, Math::e_Constrained);
 
 		computeTextureCoords(left, low);
 	}

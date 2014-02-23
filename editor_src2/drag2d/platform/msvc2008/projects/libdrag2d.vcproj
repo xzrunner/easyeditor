@@ -2209,6 +2209,22 @@
 				RelativePath="..\..\..\src\drag2d\algorithms\SGI.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\common\Triangle\triangle.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\common\Triangle\triangle.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\Triangulation.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\Triangulation.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="sprites"
