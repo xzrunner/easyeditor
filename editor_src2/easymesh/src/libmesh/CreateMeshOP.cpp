@@ -40,6 +40,7 @@ bool CreateMeshOP::onMouseLeftUp(int x, int y)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		mesh->insert(pos);
+		m_editPanel->Refresh();
 	}
 
 	return false;
@@ -54,6 +55,7 @@ bool CreateMeshOP::onMouseRightDown(int x, int y)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		mesh->remove(pos);
+		m_editPanel->Refresh();
 	}
 
 	return false;
@@ -71,6 +73,7 @@ bool CreateMeshOP::onMouseDrag(int x, int y)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		mesh->move(m_selected, pos);
+		m_editPanel->Refresh();
 	}
 
 	return false;
@@ -81,15 +84,14 @@ bool CreateMeshOP::onDraw() const
 	if (d2d::ZoomViewOP::onDraw())
 		return true;
 
-	d2d::ISprite* sprite = m_stage->getSprite();
- 	if (sprite)
+	if (const d2d::Image* image = m_stage->getSprite()->getImage())
  	{
- 		d2d::SpriteDraw::drawSprite(sprite);
+		image->draw(image->getRegion());
  	}
 
 	if (Mesh* mesh = m_stage->getMesh())
 	{
-		mesh->drawInfo();
+		mesh->drawInfoUV();
 	}
 
 	return false;

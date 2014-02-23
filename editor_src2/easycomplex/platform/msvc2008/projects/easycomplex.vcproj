@@ -182,37 +182,33 @@
 	</References>
 	<Files>
 		<Filter
-			Name="frame"
+			Name="fileio"
 			>
 			<File
-				RelativePath="..\..\..\src\easycomplex\main.cpp"
+				RelativePath="..\..\..\src\easycomplex\FileIO.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easycomplex\main.h"
+				RelativePath="..\..\..\src\easycomplex\FileIO.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\easycomplex\Task.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easycomplex\Task.h"
-				>
-			</File>
-			<Filter
-				Name="fileio"
-				>
-				<File
-					RelativePath="..\..\..\src\easycomplex\FileIO.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easycomplex\FileIO.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\easycomplex\main.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easycomplex\main.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easycomplex\Task.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easycomplex\Task.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

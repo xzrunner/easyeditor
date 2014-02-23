@@ -14,6 +14,7 @@ public:
 	Sprite();
 	Sprite(const Sprite& s);
 	Sprite(Symbol* symbol);
+	virtual ~Sprite();
 
 	//
 	// IObject interface
@@ -29,6 +30,9 @@ public:
 
 	Mesh* getMesh() { 
 		return m_symbol ? m_symbol->getMesh() : NULL; 
+	}
+	const d2d::Image* getImage() const {
+		return m_symbol ? m_symbol->getImage() : NULL;
 	}
 
 private:

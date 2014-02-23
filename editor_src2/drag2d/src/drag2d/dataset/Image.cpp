@@ -1,6 +1,7 @@
 #include "Image.h"
 
 #include "render/GL10.h"
+#include "render/Shader.h"
 #include "common/config.h"
 #include "common/tools.h"
 
@@ -79,6 +80,9 @@ void Image::reload()
 
 void Image::draw(const Rect& r) const
 {
+	Shader* shader = Shader::Instance();
+	shader->null();
+
 	float tot_hw = m_width * 0.5f,
 		  tot_hh = m_height * 0.5f;
 	float txmin = (r.xMin + tot_hw) / m_width ,

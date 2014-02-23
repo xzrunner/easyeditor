@@ -52,6 +52,7 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		else if (jsonExtension == TAG_ANIM) return e_anim;
 		else if (jsonExtension == TAG_PATCH) return e_9patch;
 		else if (jsonExtension == TAG_FONTBLANK) return e_fontblank;
+		else if (jsonExtension == TAG_MESH) return e_mesh;
 		else return e_unknown;
 	}
 	else if (extension == ".lua")

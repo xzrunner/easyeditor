@@ -2,6 +2,7 @@
 
 #include "common/ResourcesMgr.h"
 #include "common/Rect.h"
+#include "common/Object.h"
 
 #include <wx/wx.h>
 
@@ -10,7 +11,7 @@ namespace d2d
 	class Image;
 	typedef ResourcesMgr<Image> ImageMgr;
 
-	class Image
+	class Image : public Object
 	{
 	public:
 		Image();

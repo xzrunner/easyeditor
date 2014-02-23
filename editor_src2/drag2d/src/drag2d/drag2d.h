@@ -165,6 +165,7 @@
 #include "common/color_trans.h"
 #include "common/runtime.h"
 #include "common/scripts.h"
+#include "common/JsonTools.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"

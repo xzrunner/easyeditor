@@ -18,6 +18,16 @@ Sprite::Sprite(Symbol* symbol)
 {
 }
 
+Sprite::~Sprite()
+{
+//	// todo: not remove from SymbolMgr
+// 	if (m_symbol)
+// 	{
+// 		m_symbol->release();
+// 		m_symbol = NULL;
+// 	}
+}
+
 Sprite* Sprite::clone() const
 {
 	return new Sprite(*this);
@@ -36,6 +46,7 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 
 void Sprite::loadBodyFromFile()
 {
+
 }
 
 }

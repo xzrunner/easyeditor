@@ -17,10 +17,13 @@ public:
 		d2d::LibraryPanel* library, Sprite* sprite);
 	virtual ~StagePanel();
 
+	//
+	// d2d::EditPanel interface
+	//
+	virtual void clear();
+
 	Mesh* getMesh();
-	Sprite* getSprite() {
-		return m_sprite;
-	}
+	Sprite* getSprite() { return m_sprite; }
 
 private:
 	void init(d2d::LibraryPanel* library);

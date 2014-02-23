@@ -24,12 +24,16 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	m_stage->getSprite()->setSymbol(symbol);
+	m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void Task::store(const char* filepath) const
 {
-
+	const Symbol& symbol = m_stage->getSprite()->getSymbol();
+	FileIO::store(filepath, &symbol);
+	m_stage->onSave();
 }
 
 bool Task::isDirty() const

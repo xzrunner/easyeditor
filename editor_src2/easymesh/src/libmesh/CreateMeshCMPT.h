@@ -16,6 +16,12 @@ public:
 protected:
 	virtual wxSizer* initLayout();
 
+private:
+	void onClear(wxCommandEvent& event);
+
+private:
+	StagePanel* m_stage;
+
 }; // CreateMeshCMPT
 
 }

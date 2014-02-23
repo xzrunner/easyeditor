@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common/ResourcesMgr.h"
+#include "common/Object.h"
 
 #include <wx/wx.h>
 
@@ -9,7 +10,7 @@ namespace d2d
 	class Bitmap;
 	typedef ResourcesMgr<Bitmap> BitmapMgr;
 
-	class Bitmap
+	class Bitmap : public Object
 	{
 	public:
 		Bitmap();

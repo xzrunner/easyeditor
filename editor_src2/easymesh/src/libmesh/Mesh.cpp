@@ -22,21 +22,24 @@ Mesh::Mesh(const Mesh& mesh)
 		m_tris.push_back(new Triangle(*mesh.m_tris[i])); 
 }
 
-Mesh::Mesh(const d2d::Image& image)
+Mesh::Mesh(const d2d::Image& image, bool initBound)
 {
 	m_texid = image.textureID();
 
 	m_width = image.getRegion().xLength();
 	m_height = image.getRegion().yLength();
 
-	float hw = m_width * 0.5f,
-		  hh = m_height * 0.5f;
-	m_region.bound.reserve(4);
-	m_region.bound.push_back(d2d::Vector(-hw,-hh));
-	m_region.bound.push_back(d2d::Vector( hw,-hh));
-	m_region.bound.push_back(d2d::Vector( hw, hh));
-	m_region.bound.push_back(d2d::Vector(-hw, hh));
-	loadTriangles();
+	if (initBound)
+	{
+		float hw = m_width * 0.5f,
+			hh = m_height * 0.5f;
+		m_region.bound.reserve(4);
+		m_region.bound.push_back(d2d::Vector(-hw,-hh));
+		m_region.bound.push_back(d2d::Vector( hw,-hh));
+		m_region.bound.push_back(d2d::Vector( hw, hh));
+		m_region.bound.push_back(d2d::Vector(-hw, hh));
+		loadTriangles();
+	}
 }
 
 Mesh::~Mesh()
@@ -112,7 +115,7 @@ Node* Mesh::queryNode(const d2d::Vector& p)
 	return NULL;
 }
 
-void Mesh::drawInfo() const
+void Mesh::drawInfoUV() const
 {
 	std::set<d2d::Vector, d2d::VectorCmp> unique;
 	std::vector<d2d::Vector> tmp(3);
@@ -123,6 +126,25 @@ void Mesh::drawInfo() const
 		{
 			tmp[i].x = (tri->nodes[i]->uv.x - 0.5f) * m_width;
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
+			unique.insert(tmp[i]);
+		}
+		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+	}
+	std::vector<d2d::Vector> nodes;
+	copy(unique.begin(), unique.end(), back_inserter(nodes));
+	d2d::PrimitiveDraw::drawCircles(nodes, Node::RADIUS, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+}
+
+void Mesh::drawInfoXY() const
+{
+	std::set<d2d::Vector, d2d::VectorCmp> unique;
+	std::vector<d2d::Vector> tmp(3);
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int i = 0; i < 3; ++i)
+		{
+			tmp[i] = tri->nodes[i]->xy;
 			unique.insert(tmp[i]);
 		}
 		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
@@ -146,6 +168,17 @@ void Mesh::drawTexture() const
 	}
 
 	d2d::PrimitiveDraw::drawTriangles(m_texid, vertices, texcoords);
+}
+
+void Mesh::reset()
+{
+	loadTriangles();
+}
+
+void Mesh::clear()
+{
+	m_region.nodes.clear();
+	loadTriangles();
 }
 
 void Mesh::loadTriangles()

@@ -13,7 +13,7 @@ class Mesh : public d2d::Object, d2d::ICloneable
 public:
 	Mesh();
 	Mesh(const Mesh& mesh);
-	Mesh(const d2d::Image& image);
+	Mesh(const d2d::Image& image, bool initBound = true);
 	~Mesh();
 
 	//
@@ -28,8 +28,12 @@ public:
 
 	Node* queryNode(const d2d::Vector& p);
 
-	void drawInfo() const;
+	void drawInfoUV() const;
+	void drawInfoXY() const;
 	void drawTexture() const;
+
+	void reset();
+	void clear();
 
 private:
 	void loadTriangles();
@@ -52,6 +56,8 @@ private:
 	Region m_region;
 
 	std::vector<Triangle*> m_tris;
+
+	friend class FileIO;
 
 }; // Mesh
 

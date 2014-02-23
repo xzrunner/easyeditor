@@ -46,6 +46,7 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		m_selected->xy = pos;
+		m_editPanel->Refresh();
 	}
 
 	return false;
@@ -59,7 +60,7 @@ bool EditMeshOP::onDraw() const
 	if (Mesh* mesh = m_stage->getMesh())
 	{
 		mesh->drawTexture();
-		mesh->drawInfo();
+		mesh->drawInfoXY();
 	}
 
 	return false;

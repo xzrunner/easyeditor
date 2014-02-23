@@ -29,6 +29,12 @@ StagePanel::~StagePanel()
 	m_sprite->release();	
 }
 
+void StagePanel::clear()
+{
+	m_sprite->release();
+	m_sprite = new Sprite;
+}
+
 Mesh* StagePanel::getMesh()
 {
 	return m_sprite->getMesh();

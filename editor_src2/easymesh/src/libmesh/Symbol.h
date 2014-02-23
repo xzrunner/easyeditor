@@ -38,7 +38,10 @@ public:
 	//
 	virtual void refresh();
 
+	const Mesh* getMesh() const { return m_mesh; }
 	Mesh* getMesh() { return m_mesh; }
+
+	const d2d::Image* getImage() const { return m_image; }
 
 protected:
 	virtual void loadResources();
@@ -47,6 +50,8 @@ private:
 	d2d::Image* m_image;
 
 	Mesh* m_mesh;
+
+	friend class FileIO;
 
 }; // Symbol
 

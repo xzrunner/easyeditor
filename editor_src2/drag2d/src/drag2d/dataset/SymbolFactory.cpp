@@ -14,6 +14,7 @@
 
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easymesh.h>
 
 namespace d2d
 {
@@ -53,6 +54,8 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 			symbol = new Patch9Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
 			symbol = new FontBlankSymbol;
+		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
+			symbol = new emesh::Symbol;
 	}
 	else if (ext == "lua")
 	{

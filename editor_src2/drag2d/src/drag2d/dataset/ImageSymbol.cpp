@@ -56,11 +56,8 @@ unsigned int ImageSymbol::getTextureID() const
 
 void ImageSymbol::loadResources()
 {
-	const Bitmap* init = BitmapMgr::Instance()->getItem(m_filepath);
-	if (m_bitmap != init) delete m_bitmap;
-	m_bitmap = const_cast<Bitmap*>(init);
-
-	m_image = ImageMgr::Instance()->getItem(m_filepath);
+	d2d::BitmapMgr::Instance()->getItem(m_filepath, &m_bitmap);
+	d2d::ImageMgr::Instance()->getItem(m_filepath, &m_image);
 
 	m_region = m_image->getRegion();
 }

@@ -14,6 +14,7 @@ namespace d2d
 		static ResourcesMgr* Instance();
 
 		T* getItem(const wxString& filename);
+		void getItem(const wxString& filename, T** old);
 
 		void clear();
 
@@ -66,6 +67,18 @@ namespace d2d
 		{
 			return itr->second;
 		}
+	}
+
+
+	template<class T>
+	inline void ResourcesMgr<T>::getItem(const wxString& filename, T** old)
+	{
+		T* _new = getItem(filename);
+		// todo: ×ªÒÆµ½getItemÖÐ
+//		_new->retain();
+		if (_new != *old && *old != NULL)
+			(*old)->release();
+		*old = _new;
 	}
 
 	template<class T>

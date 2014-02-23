@@ -15,6 +15,7 @@
 
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easymesh.h>
 
 namespace d2d
 {
@@ -72,6 +73,8 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
 				//sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
 				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
+				sprite = new emesh::Sprite(static_cast<emesh::Symbol*>(symbol));
 		}
 	}
 
