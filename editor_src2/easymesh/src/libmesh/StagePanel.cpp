@@ -5,6 +5,14 @@
 namespace emesh
 {
 
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
+	: d2d::EditPanel(parent, frame)
+{
+	m_sprite = new Sprite();
+
+	init(NULL);
+}
+
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
@@ -45,7 +53,8 @@ void StagePanel::init(d2d::LibraryPanel* library)
 	m_editOP = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this);
 
-	SetDropTarget(new DragSymbolTarget(this, library));
+	if (library)
+		SetDropTarget(new DragSymbolTarget(this, library));
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -12,6 +12,7 @@ Symbol::Symbol()
 }
 
 Symbol::Symbol(const Symbol& s)
+	: d2d::ISymbol(s)
 {
 	s.m_image->retain();
 	m_image = s.m_image;
@@ -54,12 +55,10 @@ void Symbol::reloadTexture() const
 
 void Symbol::draw(const d2d::ISprite* sprite) const
 {
-//	m_image->draw(m_image->getRegion());
-
 	if (m_mesh)
 	{
 		m_mesh->drawTexture();
-		m_mesh->drawInfoUV();
+//		m_mesh->drawInfoUV();
 	}
 }
 

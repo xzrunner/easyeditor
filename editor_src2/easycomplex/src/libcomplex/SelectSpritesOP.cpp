@@ -6,6 +6,7 @@
 
 // #include <easyanim.h>
 #include <easy9patch.h>
+#include <easymesh.h>
 
 namespace complex
 {
@@ -49,6 +50,14 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
   
  		m_editPanel->resetCanvas();
  	}
+	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
+	{
+		emesh::Symbol& symbol = const_cast<emesh::Symbol&>(sprite->getSymbol());
+		emesh::EditDialog dlg(m_editPanel, &symbol);
+		dlg.ShowModal();
+
+		m_editPanel->resetCanvas();
+	}
 
 	return false;
 }

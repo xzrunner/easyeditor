@@ -19,6 +19,8 @@ public:
 
 	void release();
 
+	void reload();
+
 private:
 	Shader();
 

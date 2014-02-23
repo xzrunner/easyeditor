@@ -20,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 	m_canvas = new StageCanvas(this);
 
-	SetDropTarget(new DragSymbolTarget(this));
+	SetDropTarget(new DragSymbolTarget(this, library));
 
 	MODULE_STAGE.impl = this;
 }
@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 	m_canvas = new StageCanvas(this);
 
-	SetDropTarget(new DragSymbolTarget(this));
+	SetDropTarget(new DragSymbolTarget(this, library));
 }
 
 void StagePanel::clear()
@@ -66,8 +66,9 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::DragSymbolTarget::
-DragSymbolTarget(StagePanel* stage)
+DragSymbolTarget(StagePanel* stage, d2d::LibraryPanel* library)
 	: m_stage(stage)
+	, m_library(library)
 {
 }
 
@@ -80,20 +81,22 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	LibraryPanel* library = m_stage->m_library;
-	d2d::ISymbol* symbol = NULL;
-	if (sType == "symbol")
-		symbol = static_cast<d2d::ISymbol*>(library->getImagePage()->getSymbol(index));
-	else if (sType == "complex")
-		symbol = static_cast<d2d::ISymbol*>(library->getComplexPage()->getSymbol(index));
-	else if (sType == "anim")
-		symbol = static_cast<d2d::ISymbol*>(library->getAnimPage()->getSymbol(index));
-	else if (sType == "9patch")
-		symbol = static_cast<d2d::ISymbol*>(library->get9PatchPage()->getSymbol(index));
-	else if (sType == "fontblank")
-		symbol = static_cast<d2d::ISymbol*>(library->getFontPage()->getSymbol(index));
-	else if (sType == "scripts")
-		symbol = static_cast<d2d::ISymbol*>(library->getScriptsPage()->getSymbol(index));
+	d2d::ISymbol* symbol = m_library->getSymbol(index);
+
+// 	LibraryPanel* library = m_stage->m_library;
+// 	d2d::ISymbol* symbol = NULL;
+// 	if (sType == "symbol")
+// 		symbol = static_cast<d2d::ISymbol*>(library->getImagePage()->getSymbol(index));
+// 	else if (sType == "complex")
+// 		symbol = static_cast<d2d::ISymbol*>(library->getComplexPage()->getSymbol(index));
+// 	else if (sType == "anim")
+// 		symbol = static_cast<d2d::ISymbol*>(library->getAnimPage()->getSymbol(index));
+// 	else if (sType == "9patch")
+// 		symbol = static_cast<d2d::ISymbol*>(library->get9PatchPage()->getSymbol(index));
+// 	else if (sType == "fontblank")
+// 		symbol = static_cast<d2d::ISymbol*>(library->getFontPage()->getSymbol(index));
+// 	else if (sType == "scripts")
+// 		symbol = static_cast<d2d::ISymbol*>(library->getScriptsPage()->getSymbol(index));
 
 	if (symbol)
 	{

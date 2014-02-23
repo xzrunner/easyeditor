@@ -34,6 +34,9 @@ public:
 	const d2d::Image* getImage() const {
 		return m_symbol ? m_symbol->getImage() : NULL;
 	}
+	d2d::Image* getImage() {
+		return m_symbol ? m_symbol->getImage() : NULL;
+	}
 
 private:
 	Symbol* m_symbol;

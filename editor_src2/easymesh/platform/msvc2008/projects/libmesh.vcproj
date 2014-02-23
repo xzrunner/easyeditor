@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="libmesh"
-	ProjectGUID="{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
+	ProjectGUID="{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}"
 	RootNamespace="libmesh"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -152,30 +152,50 @@
 		<Filter
 			Name="view"
 			>
-			<File
-				RelativePath="..\..\..\src\libmesh\StageCanvas.cpp"
+			<Filter
+				Name="library"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libmesh\StageCanvas.h"
+				<File
+					RelativePath="..\..\..\src\libmesh\LibraryPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\LibraryPage.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="toolbar"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libmesh\StagePanel.cpp"
+				<File
+					RelativePath="..\..\..\src\libmesh\ToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\ToolbarPanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="stage"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libmesh\StagePanel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libmesh\ToolbarPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libmesh\ToolbarPanel.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\StagePanel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
@@ -272,6 +292,18 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="frame"
+			>
+			<File
+				RelativePath="..\..\..\src\libmesh\EditDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libmesh\EditDialog.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

@@ -42,6 +42,7 @@ public:
 	Mesh* getMesh() { return m_mesh; }
 
 	const d2d::Image* getImage() const { return m_image; }
+	d2d::Image* getImage() { return m_image; }
 
 protected:
 	virtual void loadResources();

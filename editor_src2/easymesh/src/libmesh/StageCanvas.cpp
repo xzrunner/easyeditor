@@ -11,6 +11,12 @@ StageCanvas::StageCanvas(StagePanel* panel)
 {
 }
 
+void StageCanvas::initGL()
+{
+	d2d::OrthoCanvas::initGL();
+	m_panel->getSprite()->getImage()->reload();
+}
+
 void StageCanvas::onDraw()
 {
 	m_editPanel->drawEditTemp();

@@ -9,13 +9,15 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const Sprite& s)
-	: m_symbol(s.m_symbol)
+	: d2d::ISprite(s)
+	, m_symbol(s.m_symbol)
 {
 }
 
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	buildBounding();
 }
 
 Sprite::~Sprite()
@@ -41,7 +43,11 @@ const Symbol& Sprite::getSymbol() const
 void Sprite::setSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* mesh = dynamic_cast<Symbol*>(symbol);
-	if (mesh) m_symbol = mesh;
+	if (mesh) 
+	{
+		m_symbol = mesh;
+		buildBounding();
+	}
 }
 
 void Sprite::loadBodyFromFile()

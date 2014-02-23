@@ -11,6 +11,7 @@ class Mesh;
 class StagePanel : public d2d::EditPanel
 {
 public:
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 

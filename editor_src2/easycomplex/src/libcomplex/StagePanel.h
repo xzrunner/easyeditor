@@ -36,12 +36,13 @@ namespace complex
 		class DragSymbolTarget : public wxTextDropTarget
 		{
 		public:
-			DragSymbolTarget(StagePanel* stage);
+			DragSymbolTarget(StagePanel* stage, d2d::LibraryPanel* library);
 
 			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
 
 		private:
 			StagePanel* m_stage;
+			d2d::LibraryPanel* m_library;
 
 		}; // DragSymbolTarget
 

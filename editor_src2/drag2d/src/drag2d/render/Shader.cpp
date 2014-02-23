@@ -80,6 +80,11 @@ void Shader::release()
 	unload();
 }
 
+void Shader::reload()
+{
+	load();
+}
+
 void Shader::load()
 {
 #if 0
