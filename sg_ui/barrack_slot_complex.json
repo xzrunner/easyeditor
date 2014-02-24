@@ -5,58 +5,70 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "barrack_slot_item_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "item",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "barrack_slot_locked_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "locked",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "barrack_slot_info_complex.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "info",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}

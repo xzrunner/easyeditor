@@ -5,77 +5,93 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6204-biankuang-4.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : -80.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6204-biankuang-3.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 1.0,
 				"y" : 125.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6204-biankuang-3.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : -7.0,
 				"y" : -127.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 3.141592502593994,
+			"clip" : false,
 			"filepath" : "6204-biankuang-4.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 80.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
