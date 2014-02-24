@@ -69,7 +69,7 @@ void Image::reload()
  		SOIL_FLAG_INVERT_Y
  		);
 #else
-	m_pixels = ImageLoader::load(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_format);
+	m_pixels = ImageLoader::load(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_channels);
 
 	m_region.xMin = -m_width*0.5f;
 	m_region.xMax = -m_region.xMin;
@@ -81,7 +81,7 @@ void Image::reload()
 void Image::draw(const Rect& r) const
 {
 	Shader* shader = Shader::Instance();
-	shader->null();
+	shader->sprite();
 
 	float tot_hw = m_width * 0.5f,
 		  tot_hh = m_height * 0.5f;
@@ -102,20 +102,6 @@ void Image::draw(const Rect& r) const
 
 const unsigned char* Image::clip(int xmin, int xmax, int ymin, int ymax)
 {
-	int channels;
-	int size = 0;
-	switch(m_format)
-	{
-	case 0x1907:	// GL_RGB
-		channels = 3;
-		return NULL;
-	case 0x1908:	// GL_RGBA
-		channels = 4;
-		break;
-	default:
-		return NULL;
-	}
-
 	if (xmin < 0 || xmin >= m_width ||
 		xmax < 0 || xmax >= m_width ||
 		ymin < 0 || ymin >= m_height ||
@@ -125,12 +111,12 @@ const unsigned char* Image::clip(int xmin, int xmax, int ymin, int ymax)
 
 	int w = xmax - xmin,
 		h = ymax - ymin;
-	unsigned char* pixels = new unsigned char[w * h * channels];
-	int line_size = channels * w;
+	unsigned char* pixels = new unsigned char[w * h * m_channels];
+	int line_size = m_channels * w;
 	for (int i = 0; i < h; ++i)
 	{
-		int from = (m_width * (ymin + i) + xmin) * channels,
-			to = i * w * channels;
+		int from = (m_width * (ymin + i) + xmin) * m_channels,
+			to = i * w * m_channels;
 		memcpy(&pixels[to], &m_pixels[from], line_size);
 	}
 	return pixels;
@@ -138,74 +124,61 @@ const unsigned char* Image::clip(int xmin, int xmax, int ymin, int ymax)
 
 void Image::removeTransparentBorder()
 {
-	int channels;
-	int numBytes = 0;
-	switch(m_format)
+	if (m_channels != 4 || m_width == 0 || m_height == 0)
+		return;
+
+	// down
+	m_region.yMin = 0;
+	for (size_t i = 0; i < m_height; ++i)
 	{
-	case GL10::GL_RGB:
-		return;
-	case GL10::GL_RGBA:
-		channels = 4;
-		numBytes = m_width * m_height * channels;
-		break;
-	default:
-		return;
+		size_t j = 0;
+		for ( ; j < m_width; ++j)
+			if (!isTransparent(m_pixels, j, i))
+				break;
+		if (j == m_width) ++m_region.yMin;
+		else break;
+	}
+	// up
+	m_region.yMax = m_height;
+	for (int i = m_height - 1; i >= 0; --i)
+	{
+		size_t j = 0;
+		for ( ; j < m_width; ++j)
+			if (!isTransparent(m_pixels, j, i))
+				break;
+		if (j == m_width) --m_region.yMax;
+		else break;
+	}
+	// left
+	m_region.xMin = 0;
+	for (size_t i = 0; i < m_width; ++i)
+	{
+		size_t j = 0;
+		for ( ; j < m_height; ++j)
+			if (!isTransparent(m_pixels, i, j))
+				break;
+		if (j == m_height) ++m_region.xMin;
+		else break;
+	}
+	// right
+	m_region.xMax = m_width;
+	for (int i = m_width - 1; i >= 0; --i)
+	{
+		size_t j = 0;
+		for ( ; j < m_height; ++j)
+			if (!isTransparent(m_pixels, i, j))
+				break;
+		if (j == m_height) --m_region.xMax;
+		else break;
 	}
 
-	if(numBytes)
-	{		
-		// down
-		m_region.yMin = 0;
-		for (size_t i = 0; i < m_height; ++i)
-		{
-			size_t j = 0;
-			for ( ; j < m_width; ++j)
-				if (!isTransparent(m_pixels, j, i, channels))
-					break;
-			if (j == m_width) ++m_region.yMin;
-			else break;
-		}
-		// up
- 		m_region.yMax = m_height;
- 		for (int i = m_height - 1; i >= 0; --i)
-		{
-			size_t j = 0;
-			for ( ; j < m_width; ++j)
-				if (!isTransparent(m_pixels, j, i, channels))
-					break;
-			if (j == m_width) --m_region.yMax;
-			else break;
-		}
-		// left
-		m_region.xMin = 0;
-		for (size_t i = 0; i < m_width; ++i)
-		{
-			size_t j = 0;
-			for ( ; j < m_height; ++j)
-				if (!isTransparent(m_pixels, i, j, channels))
-					break;
-			if (j == m_height) ++m_region.xMin;
-			else break;
-		}
-		// right
-		m_region.xMax = m_width;
-		for (int i = m_width - 1; i >= 0; --i)
-		{
-			size_t j = 0;
-			for ( ; j < m_height; ++j)
-				if (!isTransparent(m_pixels, i, j, channels))
-					break;
-			if (j == m_height) --m_region.xMax;
-			else break;
-		}
-
-		m_region.translate(Vector(-m_width*0.5f, -m_height*0.5f));
-	}
+	m_region.translate(Vector(-m_width*0.5f, -m_height*0.5f));
+	m_region.scale(1, -1);
 }
 
-bool Image::isTransparent(unsigned char* pixels, int x, int y, int channels)
+bool Image::isTransparent(unsigned char* pixels, int x, int y)
 {
-	return pixels[(m_width * y + x) * channels + channels - 1] == 0;
+	return pixels[(m_width * y + x) * m_channels + m_channels - 1] == 0;
 }
 
 } // d2d

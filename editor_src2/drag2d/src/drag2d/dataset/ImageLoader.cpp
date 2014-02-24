@@ -15,12 +15,12 @@
 namespace d2d
 {
 
-uint8_t* ImageLoader::load(const std::string& filepath, int& width, int& height, unsigned int& texture, int& format)
+uint8_t* ImageLoader::load(const std::string& filepath, int& width, int& height, unsigned int& texture, int& channels)
 {
-	int channels;
+	int format;
 	uint8_t* pixel_data = loadData(filepath, width, height, channels, format);
 	assert(pixel_data);
-	loadTexture(texture, pixel_data, format, width, height, channels);
+	loadTexture(texture, pixel_data, width, height, channels, format);
 	return pixel_data;
 }
 
@@ -49,6 +49,8 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 {
 	uint8_t* data = NULL;
 
+	format = 0;
+
 	std::string type = filepath.substr(filepath.find_last_of(".") + 1);
 	StringTools::toLower(type);
 	if (type == "png")
@@ -64,16 +66,31 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	{
 		std::string filename = filepath.substr(0, filepath.find_last_of("."));
 		channels = 4;
-		data = loadPPM(filename, width, height, format);
+		data = loadPNM(filename, width, height);
 	}
 
 	if (channels == 4)
 		fixPixelsData(data, width, height);
 
+	if (format == 0)
+	{
+		switch (channels)
+		{
+		case 4:
+			format = GL_RGBA;
+			break;
+		case 3:
+			format = GL_RGB;
+			break;
+		default:
+			format = GL_LUMINANCE;
+		}
+	}
+
 	return data;
 }
 
-void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int format, int width, int height, int channels)
+void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int width, int height, int channels, int format)
 {
 	//// todo: 当数据用SOIL导入时，再这个方法导入的纹理时是黑的
 #ifdef USE_SOIL
@@ -254,7 +271,7 @@ uint8_t* ImageLoader::loadPngBySOIL(const std::string& filename, int& width, int
 	return SOIL_load_image(filename.c_str(), &width, &height, &channels, 0);
 }
 
-uint8_t* ImageLoader::loadPPM(const std::string& filename, int& width, int& height, int& format)
+uint8_t* ImageLoader::loadPNM(const std::string& filename, int& width, int& height)
 {
 	std::string filepath;
 	int w0, h0, w1, h1;
@@ -266,7 +283,6 @@ uint8_t* ImageLoader::loadPPM(const std::string& filename, int& width, int& heig
 
 	width = w0;
 	height = h0;
-	format = 0x1908;	// GL_RGBA
 	int size = width * height * 4;
 	uint8_t* pixels = new uint8_t[size];
 

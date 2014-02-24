@@ -36,15 +36,16 @@ namespace d2d
 
 	private:
 		void removeTransparentBorder();
-		bool isTransparent(unsigned char* pixels, int x, int y, int channels);
+		bool isTransparent(unsigned char* pixels, int x, int y);
 
 	private:
 		wxString m_filepath;
 
 		unsigned int m_textureID;
+		int m_channels;
+
 		int m_width, m_height;
 		Rect m_region;
-		int m_format;
 
 		unsigned char* m_pixels;
 
