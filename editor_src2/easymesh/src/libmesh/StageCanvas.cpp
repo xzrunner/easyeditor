@@ -14,7 +14,10 @@ StageCanvas::StageCanvas(StagePanel* panel)
 void StageCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
-	m_panel->getSprite()->getImage()->reload();
+	if (d2d::Image* image = m_panel->getSprite()->getImage())
+	{
+		image->reload();
+	}
 }
 
 void StageCanvas::onDraw()
