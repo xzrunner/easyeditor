@@ -1,6 +1,7 @@
 
 {
-	"name" : "create_button",
+	"name" : "",
+	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -19,11 +20,34 @@
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.8000000119209290,
+			"x scale" : 0.6999999880790710,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 0.8000000119209290,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "res_icon_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "type",
+			"position" : 
+			{
+				"x" : 65.60000610351563,
+				"y" : 0.3999996185302734
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		},
 		
@@ -36,8 +60,8 @@
 			"name" : "cost",
 			"position" : 
 			{
-				"x" : -17.59999847412109,
-				"y" : 1.50
+				"x" : -22.750,
+				"y" : 0.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -48,29 +72,24 @@
 			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-		},
+		}
+	],
+	"undo" : 
+	[
+		null,
 		
 		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "res_icon_anim.json",
-			"multi color" : "0xffffffff",
-			"name" : "icon",
-			"position" : 
+			"sprites" : [ 2 ],
+			"val" : 
 			{
-				"x" : 77.0,
-				"y" : -0.750
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.50,
-			"y shear" : 0.0
+				"dx" : 220.0,
+				"dy" : -296.0,
+				"type" : 0
+			}
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
