@@ -9,6 +9,7 @@ namespace emesh
 EditMeshOP::EditMeshOP(StagePanel* stage)
 	: d2d::ZoomViewOP(stage, true, false)
 	, m_stage(stage)
+	, m_selected(NULL)
 {
 }
 

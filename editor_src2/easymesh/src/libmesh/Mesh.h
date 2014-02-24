@@ -32,6 +32,8 @@ public:
 	void drawInfoXY() const;
 	void drawTexture() const;
 
+	void tween(const Mesh& begin, const Mesh& end, float process);
+
 	void reset();
 	void clear();
 
@@ -39,6 +41,8 @@ private:
 	void loadTriangles();
 
 	void clearTriangles();
+
+	void copyTriangles(const Mesh& mesh);
 
 private:
 	struct Region

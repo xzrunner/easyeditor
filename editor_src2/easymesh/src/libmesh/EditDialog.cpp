@@ -30,7 +30,7 @@ void EditDialog::initLayout()
  	StagePanel* stage = new StagePanel(splitter, this);
  	stage->getSprite()->setSymbol(m_symbol);
  	m_stage = stage;
- 	d2d::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage);
+ 	d2d::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false);
  
  	splitter->SetSashGravity(0.85f);
  	splitter->SplitVertically(stage, toolbar);

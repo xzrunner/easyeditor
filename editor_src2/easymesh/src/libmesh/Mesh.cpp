@@ -17,9 +17,8 @@ Mesh::Mesh(const Mesh& mesh)
 	, m_height(mesh.m_height)
 	, m_region(mesh.m_region)
 {
-	m_tris.reserve(mesh.m_tris.size());
-	for (size_t i = 0, n = mesh.m_tris.size(); i < n; ++i)
-		m_tris.push_back(new Triangle(*mesh.m_tris[i])); 
+	loadTriangles();
+	copyTriangles(mesh);
 }
 
 Mesh::Mesh(const d2d::Image& image, bool initBound)
@@ -170,6 +169,21 @@ void Mesh::drawTexture() const
 	d2d::PrimitiveDraw::drawTriangles(m_texid, vertices, texcoords);
 }
 
+void Mesh::tween(const Mesh& begin, const Mesh& end, float process)
+{
+	assert(m_tris.size() == begin.m_tris.size() && m_tris.size() == end.m_tris.size());
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int j = 0; j < 3; ++j)
+		{
+			const d2d::Vector& p0 = begin.m_tris[i]->nodes[j]->xy;
+			const d2d::Vector& p1 = end.m_tris[i]->nodes[j]->xy;
+			m_tris[i]->nodes[j]->xy = p0 + (p1 - p0) * process;
+		}
+	}
+}
+
 void Mesh::reset()
 {
 	loadTriangles();
@@ -212,6 +226,20 @@ void Mesh::clearTriangles()
 {
 	for_each(m_tris.begin(), m_tris.end(), DeletePointerFunctor<Triangle>());
 	m_tris.clear();
+}
+
+void Mesh::copyTriangles(const Mesh& mesh)
+{
+	assert(m_tris.size() == mesh.m_tris.size());
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* src = mesh.m_tris[i];
+		Triangle* dst = m_tris[i];
+		for (int j = 0; j < 3; ++j)
+		{
+			dst->nodes[j]->xy = src->nodes[j]->xy;
+		}
+	}
 }
 
 }

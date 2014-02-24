@@ -6,10 +6,13 @@
 namespace emesh
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full)
 	: d2d::ToolbarPanel(parent, stage)
 {
-	addChild(new CreateMeshCMPT(this, wxT("Create"), stage));
+	if (full)
+	{
+		addChild(new CreateMeshCMPT(this, wxT("Create"), stage));
+	}
 	addChild(new EditMeshCMPT(this, wxT("Edit"), stage));
 	SetSizer(initLayout());	
 }

@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "FileIO.h"
 
 namespace emesh
 {
@@ -10,8 +11,8 @@ Sprite::Sprite()
 
 Sprite::Sprite(const Sprite& s)
 	: d2d::ISprite(s)
-	, m_symbol(s.m_symbol)
 {
+	m_symbol = s.m_symbol->clone();
 }
 
 Sprite::Sprite(Symbol* symbol)
@@ -52,7 +53,18 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 
 void Sprite::loadBodyFromFile()
 {
+}
 
+void Sprite::load(const Json::Value& val)
+{
+	d2d::ISprite::load(val);
+	FileIO::loadTransform(val["transform"], m_symbol->getMesh());
+}
+
+void Sprite::store(Json::Value& val) const
+{
+	d2d::ISprite::store(val);
+	FileIO::storeTransform(m_symbol->getMesh(), val["transform"]);
 }
 
 }

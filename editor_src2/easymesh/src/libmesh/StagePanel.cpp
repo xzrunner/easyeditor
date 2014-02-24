@@ -76,6 +76,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		Sprite* sprite = new Sprite(new Symbol(image->getImage()));
 		m_stage->m_sprite->release();
 		m_stage->m_sprite = sprite;
+		m_stage->Refresh();
 	}
 
 	return true;

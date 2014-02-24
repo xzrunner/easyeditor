@@ -16,6 +16,7 @@
 #include "view/PreviewDialog.h"
 
 #include <easycomplex.h>
+#include <easymesh.h>
 
 namespace eanim
 {
@@ -217,6 +218,7 @@ void Frame::initWorkingFrame()
 	context->library = library;
 	library->addPage(context->imagePage = new d2d::LibraryImagePage(library->getNotebook()));
 	library->addPage(new complex::LibraryPage(library->getNotebook()));
+	library->addPage(new emesh::LibraryPage(library->getNotebook()));
 	library->addPage(new d2d::Library9PatchPage(library->getNotebook()));
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(leftSplitter);
 	context->property = property;

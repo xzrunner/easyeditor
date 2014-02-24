@@ -10,12 +10,12 @@ class Triangle : public d2d::Object
 {
 public:
 	Triangle() {}
-	Triangle(const Triangle& tri) {
-		for (int i = 0; i < 3; ++i) {
-			tri.nodes[0]->retain();
-			nodes[0] = tri.nodes[0];
-		}
-	}
+// 	Triangle(const Triangle& tri) {
+// 		for (int i = 0; i < 3; ++i) {
+// 			tri.nodes[0]->retain();
+// 			nodes[0] = tri.nodes[0];
+// 		}
+// 	}
 
 // 	Triangle(int width, int height, const d2d::Vector& p0, 
 // 		const d2d::Vector& p1, const d2d::Vector& p2) {

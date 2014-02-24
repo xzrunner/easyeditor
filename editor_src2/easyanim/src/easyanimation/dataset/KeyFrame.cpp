@@ -1,6 +1,8 @@
 #include "KeyFrame.h"
 #include "Layer.h"
 
+#include <easymesh.h>
+
 namespace eanim
 {
 
@@ -132,6 +134,14 @@ void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end,
 	tween->rotate(delta);
 	tween->setScale(xscale, yscale);
 	tween->setShear(xshear, yshear);
+
+	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(start))
+	{
+		emesh::Mesh *s = sprite->getMesh(),
+			*e = static_cast<emesh::Sprite*>(end)->getMesh(),
+			*mid = static_cast<emesh::Sprite*>(tween)->getMesh();
+		mid->tween(*s, *e, process);
+	}
 }
 
 } // eanim
