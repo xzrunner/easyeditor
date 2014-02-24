@@ -5,28 +5,31 @@
 
 namespace eanim
 {
-	class StagePanel;
 
-	class CommonCMPT : public d2d::AbstractEditCMPT
-	{
-	public:
-		CommonCMPT(wxWindow* parent, const wxString& name,
-			StagePanel* stage);
+class StagePanel;
 
-	protected:
-		virtual wxSizer* initLayout();
+class CommonCMPT : public d2d::AbstractEditCMPT
+{
+public:
+	CommonCMPT(wxWindow* parent, const wxString& name,
+		StagePanel* stage);
 
-	private:
-		wxSizer* initEditPanel();
+protected:
+	virtual wxSizer* initLayout();
 
-		void onLoadAllFrameImages(wxCommandEvent& event);
-		void onFillingFrames(wxCommandEvent& event);
-		void onChangeAnim(wxCommandEvent& event);
+private:
+	wxSizer* initEditPanel();
 
-	private:
-		wxSpinCtrl* m_filling;
+	void onLoadFromFloder(wxCommandEvent& event);
+	void onLoadFromList(wxCommandEvent& event);
+	void onFillingFrames(wxCommandEvent& event);
+	void onChangeAnim(wxCommandEvent& event);
 
-	}; // CommonCMPT
+private:
+	wxSpinCtrl* m_filling;
+
+}; // CommonCMPT
+
 }
 
 #endif // EANIM_COMMON_CMPT_H
