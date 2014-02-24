@@ -107,8 +107,7 @@ namespace complex
 			spriteValue = value["sprite"][i++];
 		}	
 
-		// 为兼容老数据，临时去掉
-//		initBounding();
+		initBounding();
 	}
 
 	void Symbol::initBounding()
@@ -122,12 +121,13 @@ namespace complex
 				m_rect.combine(vertices[j]);
 		}
 
-		// to center
-		float x = m_rect.xCenter(),
-			y = m_rect.yCenter();
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			m_sprites[i]->translate(d2d::Vector(-x, -y));
-		m_rect.translate(d2d::Vector(-x, -y));
+		// 为兼容老数据，临时去掉
+		//// to center
+		//float x = m_rect.xCenter(),
+		//	y = m_rect.yCenter();
+		//for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		//	m_sprites[i]->translate(d2d::Vector(-x, -y));
+		//m_rect.translate(d2d::Vector(-x, -y));
 
 		delete m_bitmap;
 		m_bitmap = new d2d::Bitmap(
