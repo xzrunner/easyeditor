@@ -26,8 +26,11 @@ public:
 	d2d::Vector* find(const d2d::Vector& p);
 	void move(d2d::Vector* src, const d2d::Vector& dst);
 
+	// select
 	Node* queryNode(const d2d::Vector& p);
+	void queryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
 
+	// draw
 	void drawInfoUV() const;
 	void drawInfoXY() const;
 	void drawTexture() const;

@@ -2225,7 +2225,7 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						ObjectFile="..\libdrag2d\x86\Debug\triangle1.obj"
+						ObjectFile="..\libdrag2d\x86\Debug\triangle2.obj"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -2233,7 +2233,7 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						ObjectFile="..\libdrag2d\x86\Debug\triangle1.obj"
+						ObjectFile="..\libdrag2d\x86\Debug\triangle2.obj"
 					/>
 				</FileConfiguration>
 			</File>

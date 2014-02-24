@@ -114,6 +114,19 @@ Node* Mesh::queryNode(const d2d::Vector& p)
 	return NULL;
 }
 
+void Mesh::queryNode(const d2d::Rect& r, std::vector<Node*>& nodes)
+{
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int j = 0; j < 3; ++j)
+		{
+			if (d2d::Math::isPointInRect(tri->nodes[j]->xy, r))
+				nodes.push_back(tri->nodes[j]);
+		}
+	}
+}
+
 void Mesh::drawInfoUV() const
 {
 	std::set<d2d::Vector, d2d::VectorCmp> unique;

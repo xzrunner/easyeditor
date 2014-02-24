@@ -291,6 +291,14 @@
 					RelativePath="..\..\..\src\libmesh\EditMeshOP.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\SelectNodesOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\SelectNodesOP.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

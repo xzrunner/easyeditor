@@ -29,6 +29,7 @@ void CreateMeshCMPT::onClear(wxCommandEvent& event)
 {
 	m_stage->getMesh()->clear();
 	m_editPanel->Refresh();
+	m_editOP->clear();
 }
 
 }

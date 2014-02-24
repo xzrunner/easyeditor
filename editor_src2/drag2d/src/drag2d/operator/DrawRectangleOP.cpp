@@ -7,7 +7,7 @@ namespace d2d
 
 DrawRectangleOP::DrawRectangleOP(EditPanel* editPanel,
 								 const Colorf& color /*= Colorf(0, 0, 0)*/)
-	: ZoomViewOP(editPanel, true)
+	: ZoomViewOP(editPanel, true, false)
 {
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();

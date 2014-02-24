@@ -1,6 +1,8 @@
 #ifndef _EASYMESH_NODE_H_
 #define _EASYMESH_NODE_H_
 
+#include <drag2d.h>
+
 namespace emesh
 {
 
@@ -34,6 +36,8 @@ public:
 			|| lhs->uv.x == rhs->uv.x && lhs->uv.y < rhs->uv.y;
 	}
 }; // NodeCmp
+
+typedef d2d::SelectionSet<Node> NodeSelection;
 
 }
 
