@@ -46,10 +46,7 @@ Frame::Frame(const wxString& title)
 }
 
 void Frame::initWithFile(const wxString& path)
-{
-	StagePanel* stage = static_cast<StagePanel*>(Context::Instance()->stage);
-	stage->getCanvas()->SetCurrentCanvas();
-	
+{	
 	clear();
 	m_currFilename = path;
 	SetTitle(path);
@@ -59,6 +56,12 @@ void Frame::initWithFile(const wxString& path)
 		d2d::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
 	}
+}
+
+d2d::GLCanvas* Frame::getCanvas()
+{
+	d2d::EditPanel* panel = static_cast<d2d::EditPanel*>(Context::Instance()->stage);
+	return panel->getCanvas();
 }
 
 void Frame::onNew(wxCommandEvent& event)

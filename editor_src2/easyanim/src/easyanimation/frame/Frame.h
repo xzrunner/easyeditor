@@ -1,6 +1,7 @@
 #pragma once
 
 #include <wx/wx.h>
+#include <drag2d.h>
 
 #include "view/Utility.h"
 
@@ -14,6 +15,8 @@ namespace eanim
 		Frame(const wxString& title);
 
 		void initWithFile(const wxString& path);
+
+		d2d::GLCanvas* getCanvas();
 
 	private:
 		void onNew(wxCommandEvent& event);
