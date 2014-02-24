@@ -39,13 +39,6 @@ namespace eanim
 		void onMenuAddJointNode(wxCommandEvent& event);
 		void onMenuDelJointNode(wxCommandEvent& event);
 
-	private:
-		class DragSymbolTarget : public wxTextDropTarget
-		{
-		public:
-			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
-		}; // DragSymbolTarget
-
 	public:
 		enum
 		{
@@ -55,6 +48,13 @@ namespace eanim
 		};
 
 		static std::string menu_entries[];
+
+	private:
+		class DragSymbolTarget : public wxTextDropTarget
+		{
+		public:
+			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
+		}; // DragSymbolTarget
 
 	}; // StagePanel
 }

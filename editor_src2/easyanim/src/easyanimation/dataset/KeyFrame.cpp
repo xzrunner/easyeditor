@@ -1,5 +1,6 @@
 #include "KeyFrame.h"
 #include "Layer.h"
+#include "frame/Context.h"
 
 #include <easymesh.h>
 
@@ -42,6 +43,7 @@ void KeyFrame::insert(d2d::ISprite* sprite)
 {
 	d2d::ISprite* s = sprite->clone();
 	m_sprites.push_back(s);
+	Context::Instance()->viewlist->insert(s);
 	if (m_layer) {
 		s->setObserver(&m_layer->m_spriteObserver);
 		m_layer->m_spriteObserver.insert(s, m_time);
@@ -57,6 +59,7 @@ bool KeyFrame::remove(d2d::ISprite* sprite)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		if (m_sprites[i] == sprite) {
+			Context::Instance()->viewlist->insert(sprite);
 			m_sprites[i]->release();
 			m_sprites.erase(m_sprites.begin() + i);
 			return true;

@@ -16,6 +16,7 @@ namespace eanim
 		wxWindow* toolbar;
 		wxWindow* layersPanel;
 		wxWindow* keysPanel;
+		d2d::ViewlistPanel* viewlist;
 
 		d2d::ILibraryPage* imagePage;
 
