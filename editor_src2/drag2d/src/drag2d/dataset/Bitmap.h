@@ -24,6 +24,10 @@ namespace d2d
 		}
 
 	private:
+		static void getImage(const wxString& filepath, wxImage& image);
+
+		static wxBitmap* getBitmap(const wxImage& image);
+
 		static float computeScale(float width);
 
 	private:
