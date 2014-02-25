@@ -47,13 +47,11 @@ void Bitmap::getImage(const wxString& filepath, wxImage& image)
 	float h = totimg.GetHeight();
 	rect.translate(Vector(w*0.5f, h*0.5f));
 
-	float offset = (rect.yCenter() - h * 0.5f) * 2;
-
 	wxRect wx_rect;
 	wx_rect.SetLeft(rect.xMin);
 	wx_rect.SetRight(rect.xMax);
-	wx_rect.SetTop(rect.yMax - offset);
-	wx_rect.SetBottom(rect.yMin - offset);
+	wx_rect.SetTop(rect.yMin);
+	wx_rect.SetBottom(rect.yMax);
 
 	image = totimg.GetSubImage(wx_rect);
 }

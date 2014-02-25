@@ -83,12 +83,13 @@ void Image::draw(const Rect& r) const
 	Shader* shader = Shader::Instance();
 	shader->sprite();
 
+	float offset = r.yCenter() * 2;
 	float tot_hw = m_width * 0.5f,
 		  tot_hh = m_height * 0.5f;
-	float txmin = (r.xMin + tot_hw) / m_width ,
-		txmax = (r.xMax + tot_hw) / m_width ,
-		tymin = (r.yMin + tot_hh) / m_height ,
-		tymax = (r.yMax + tot_hh) / m_height ;
+	float txmin = (r.xMin + tot_hw) / m_width,
+		txmax = (r.xMax + tot_hw) / m_width,
+		tymin = (r.yMin - offset + tot_hh) / m_height,
+		tymax = (r.yMax - offset + tot_hh) / m_height;
 
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
 	GL10::Begin(GL10::GL_QUADS);
@@ -173,7 +174,6 @@ void Image::removeTransparentBorder()
 	}
 
 	m_region.translate(Vector(-m_width*0.5f, -m_height*0.5f));
-	m_region.scale(1, -1);
 }
 
 bool Image::isTransparent(unsigned char* pixels, int x, int y)

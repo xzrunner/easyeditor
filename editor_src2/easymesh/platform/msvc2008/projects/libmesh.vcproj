@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="libmesh"
-	ProjectGUID="{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
+	ProjectGUID="{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}"
 	RootNamespace="libmesh"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
