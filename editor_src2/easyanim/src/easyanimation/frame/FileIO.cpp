@@ -50,6 +50,8 @@ void FileIO::load(const wxString& filepath)
 
 	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(context->library);
 	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+
+	context->setCurrFrame(0, 1);
 }
 
 void FileIO::store(const wxString& filepath)

@@ -17,8 +17,8 @@ Context::Context()
 	keysPanel = NULL;
 	viewlist = NULL;
 
-	m_curr_layer = -1;
-	m_curr_frame = -1;
+	m_curr_layer = 0;
+	m_curr_frame = 1;
 	maxFrame = -1;
 
 	fps = 30;
@@ -32,10 +32,18 @@ void Context::setCurrFrame(int layer, int frame)
 	m_curr_frame = frame;
 
 	Layer* pLayer = layers.getLayer(layer);
-	if (!pLayer) return;
+	if (!pLayer) 
+	{
+		m_last_keyframe = NULL;
+		return;
+	}
 
 	KeyFrame* pFrame = pLayer->getCurrKeyFrame(frame);
-	if (!pFrame) return;
+	if (!pFrame) 
+	{
+		m_last_keyframe = NULL;
+		return;
+	}
 
 	if (pFrame != m_last_keyframe) 
 	{

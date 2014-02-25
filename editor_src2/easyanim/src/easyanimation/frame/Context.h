@@ -38,6 +38,8 @@ public:
 	void setCurrFrame(int layer, int frame);
 	KeyFrame* getCurrFrame() { return m_last_keyframe; }
 
+	// layer start from 0
+	// frame start from 1
 	int layer() const { return m_curr_layer; }
 	int frame() const { return m_curr_frame; }
 
@@ -54,6 +56,8 @@ private:
 
 	KeyFrame* m_last_keyframe;
 
+	// layer start from 0
+	// frame start from 1
 	int m_curr_layer;
 	int m_curr_frame;
 
