@@ -41,12 +41,19 @@ void KeyFrame::copyKeyFrame(const KeyFrame* src)
 
 void KeyFrame::insert(d2d::ISprite* sprite) 
 {
-	d2d::ISprite* s = sprite->clone();
-	m_sprites.push_back(s);
-	Context::Instance()->viewlist->insert(s);
+	d2d::ISprite* clone = sprite->clone();
+
+	m_sprites.push_back(clone);
 	if (m_layer) {
-		s->setObserver(&m_layer->m_spriteObserver);
-		m_layer->m_spriteObserver.insert(s, m_time);
+		clone->setObserver(&m_layer->m_spriteObserver);
+		m_layer->m_spriteObserver.insert(clone, m_time);
+	}
+
+	// viewlist
+	Context* context = Context::Instance();
+	KeyFrame* curr = context->getCurrFrame();
+	if (this == curr) {
+		context->viewlist->insert(clone);
 	}
 }
 
@@ -59,9 +66,16 @@ bool KeyFrame::remove(d2d::ISprite* sprite)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		if (m_sprites[i] == sprite) {
-			Context::Instance()->viewlist->insert(sprite);
 			m_sprites[i]->release();
 			m_sprites.erase(m_sprites.begin() + i);
+
+			// viewlist
+			Context* context = Context::Instance();
+			KeyFrame* curr = context->getCurrFrame();
+			if (this == curr) {
+				context->viewlist->remove(sprite);
+			}
+
 			return true;
 		}
 	}

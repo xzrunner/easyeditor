@@ -20,7 +20,7 @@ protected:
 private:
 	wxSizer* initEditPanel();
 
-	void onLoadFromFloder(wxCommandEvent& event);
+	void onLoadFromFolder(wxCommandEvent& event);
 	void onLoadFromList(wxCommandEvent& event);
 	void onFillingFrames(wxCommandEvent& event);
 	void onChangeAnim(wxCommandEvent& event);

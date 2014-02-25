@@ -30,9 +30,9 @@ wxSizer* CommonCMPT::initEditPanel()
 	sizer->AddSpacer(20);
 	// load floder
 	{
-		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Floder"));
+		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::onLoadFromFloder));
+			wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
 		sizer->Add(btnLoad);
 	}
 	sizer->AddSpacer(10);
@@ -92,7 +92,7 @@ private:
 
 }; // DirTraverser
 
-void CommonCMPT::onLoadFromFloder(wxCommandEvent& event)
+void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 {
 	wxDirDialog dlg(NULL, "Images", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() != wxID_OK)

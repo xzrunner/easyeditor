@@ -19,7 +19,8 @@ LayersPanel::LayersPanel(wxWindow* parent)
 void LayersPanel::insertLayer()
 {
 	Context* context = Context::Instance();
-	context->currLayer = context->layers.size();
+	int layer = context->layers.size();
+	context->setCurrFrame(layer, context->frame());
 	context->layers.newLayer();
 	m_parent->Refresh();
 }
@@ -29,12 +30,16 @@ void LayersPanel::removeLayer()
 	Context* context = Context::Instance();
 
 	static_cast<StagePanel*>(context->stage)->removeSpriteSelection();
-	context->layers.removeLayer(context->currLayer);
+	context->layers.removeLayer(context->layer());
 	if (context->layers.size() == 0) 
-		context->currLayer = -1;
-	else if (context->currLayer > 0) 
-		--context->currLayer;
-	static_cast<KeysPanel*>(context->keysPanel)->setCurrPos(context->currFrame);
+	{
+		context->setCurrFrame(-1, context->frame());
+	}
+	else if (context->layer() > 0) 
+	{
+		context->setCurrFrame(context->layer() - 1, context->frame());
+	}
+	static_cast<KeysPanel*>(context->keysPanel)->setCurrPos(context->frame());
 }
 
 //void LayersPanel::onPlay()

@@ -1,4 +1,6 @@
 #include "Context.h"
+#include "dataset/Layer.h"
+#include "dataset/KeyFrame.h"
 
 namespace eanim
 {
@@ -13,12 +15,33 @@ Context::Context()
 	toolbar = NULL;
 	layersPanel = NULL;
 	keysPanel = NULL;
+	viewlist = NULL;
 
-	currLayer = -1;
-	currFrame = -1;
+	m_curr_layer = -1;
+	m_curr_frame = -1;
 	maxFrame = -1;
 
 	fps = 30;
+
+	m_last_keyframe = NULL;
+}
+
+void Context::setCurrFrame(int layer, int frame)
+{
+	m_curr_layer = layer;
+	m_curr_frame = frame;
+
+	Layer* pLayer = layers.getLayer(layer);
+	if (!pLayer) return;
+
+	KeyFrame* pFrame = pLayer->getCurrKeyFrame(frame);
+	if (!pFrame) return;
+
+	if (pFrame != m_last_keyframe) 
+	{
+		reloadViewList(*pFrame);
+		m_last_keyframe = pFrame;
+	}
 }
 
 Context* Context::Instance()
@@ -28,6 +51,16 @@ Context* Context::Instance()
 		m_instance = new Context();
 	}
 	return m_instance;
+}
+
+void Context::reloadViewList(const KeyFrame& frame)
+{
+	if (!viewlist) return;
+
+	viewlist->clear();
+	const std::vector<d2d::ISprite*>& sprites = frame.getAllSprites();
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+		viewlist->insert(sprites[i]);
 }
 
 } // eanim

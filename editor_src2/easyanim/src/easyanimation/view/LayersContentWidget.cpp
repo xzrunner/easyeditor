@@ -66,10 +66,10 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 	}
 
 	// selected
-	if (Context::Instance()->currLayer != -1)
+	if (Context::Instance()->layer() != -1)
 	{
 		int screenIndex = Context::Instance()->layers.size() 
-			- Context::Instance()->currLayer - 1;
+			- Context::Instance()->layer() - 1;
 		dc.SetPen(wxPen(MEDIUM_BLUE));
 		dc.SetBrush(wxBrush(MEDIUM_BLUE));
 		dc.DrawRectangle(0, FRAME_GRID_HEIGHT * screenIndex, width, FRAME_GRID_HEIGHT);
@@ -108,8 +108,10 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 
 	if (event.LeftDown())
 	{
+		Context* context = Context::Instance();
 		unsigned int screenIndex = event.GetY() / FRAME_GRID_HEIGHT;
-		Context::Instance()->currLayer = size - screenIndex - 1;
+		int layer = size - screenIndex - 1;
+		context->setCurrFrame(layer, context->frame());
 		if (screenIndex < size) 
 			isDragOpen = true;
 	}
@@ -118,7 +120,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 		isDragOpen = false;
 		if (m_dragFlagLine != -1) 
 		{
-			int from = Context::Instance()->currLayer,
+			int from = Context::Instance()->layer(),
 				to = size - m_dragFlagLine;
 			if (to == from || to == from + 1)
 				;

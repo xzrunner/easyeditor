@@ -37,7 +37,7 @@ void KeysScaleWidget::onPaint(wxPaintEvent& event)
 	dc.DrawRectangle(GetSize());
 
 	// curr pos
-	const int currPos = Context::Instance()->currFrame;
+	const int currPos = Context::Instance()->frame();
 	dc.SetPen(wxPen(DARK_RED));
 	dc.SetBrush(wxBrush(MEDIUM_RED));
 	dc.DrawRectangle(FRAME_GRID_WIDTH * (currPos - 1), 2, FRAME_GRID_WIDTH + 1, FRAME_GRID_HEIGHT - 2);
@@ -70,17 +70,11 @@ void KeysScaleWidget::onEraseBackground(wxEraseEvent& event)
 
 void KeysScaleWidget::onMouse(wxMouseEvent& event)
 {
-	if (event.LeftDown())
+	if (event.LeftDown() || event.Dragging())
 	{
 		Context* context = Context::Instance();
-		context->currFrame = queryGridByPos(event.GetX());
-		context->stage->Refresh();
-		context->keysPanel->Refresh();
-	}
-	else if (event.Dragging())
-	{
-		Context* context = Context::Instance();
-		context->currFrame = queryGridByPos(event.GetX());
+		int frame = queryGridByPos(event.GetX());
+		context->setCurrFrame(context->layer(), frame);
 		context->stage->Refresh();
 		context->keysPanel->Refresh();
 	}
