@@ -8,13 +8,14 @@ namespace d2d
 {
 
 AbstractEditCMPT::AbstractEditCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel,
-								   const wxString& childrenName/* = wxEmptyString*/)
+								   const wxString& childrenName/* = wxEmptyString*/, bool vertical)
 	: wxScrolledWindow(parent)
 	, m_editPanel(editPanel)
 	, m_editOP(NULL)
 	, m_name(name)
 	, m_childrenName(childrenName)
 	, m_childrenSizer(NULL)
+	, m_vertical(vertical)
 {
 }
 
@@ -28,7 +29,7 @@ AbstractEditCMPT::~AbstractEditCMPT()
 
 wxSizer* AbstractEditCMPT::initChildrenLayout()
 {
-	m_childrenSizer = new wxBoxSizer(wxVERTICAL);
+	m_childrenSizer = m_vertical ? new wxBoxSizer(wxVERTICAL) : new wxBoxSizer(wxHORIZONTAL);
 
 	if (m_children.size() > 1)
 	{
@@ -36,8 +37,9 @@ wxSizer* AbstractEditCMPT::initChildrenLayout()
 		for (size_t i = 0, n = m_children.size(); i < n; ++i)
 			choices.Add(m_children[i]->m_name);
 
+		long style = m_vertical ? wxRA_SPECIFY_COLS : wxRA_SPECIFY_ROWS;
 		m_editChoice = new wxRadioBox(this, wxID_ANY, m_childrenName == wxEmptyString ? wxT("Operation") : m_childrenName, 
-			wxDefaultPosition, wxDefaultSize, choices, 1, wxRA_SPECIFY_COLS);
+			wxDefaultPosition, wxDefaultSize, choices, 1, style);
 		Connect(m_editChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(AbstractEditCMPT::onChangeEditType));
 		m_childrenSizer->Add(m_editChoice, 0);
 

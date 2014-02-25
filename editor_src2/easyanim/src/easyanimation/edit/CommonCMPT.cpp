@@ -13,8 +13,9 @@ namespace eanim
 {
 
 CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name, 
-	StagePanel* stage)
+	StagePanel* stage, bool vertical)
 	: d2d::AbstractEditCMPT(parent, name, stage)
+	, m_vertical(vertical)
 {
 	m_editOP = new ArrangeSpriteOP(stage);
 }
@@ -26,7 +27,9 @@ wxSizer* CommonCMPT::initLayout()
 
 wxSizer* CommonCMPT::initEditPanel()
 {
-	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
+
+	wxBoxSizer* sizer = new wxBoxSizer(orient);
 	sizer->AddSpacer(20);
 	// load floder
 	{
@@ -47,7 +50,7 @@ wxSizer* CommonCMPT::initEditPanel()
 	// fill frames
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
-		wxBoxSizer* fillingSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+		wxBoxSizer* fillingSizer = new wxStaticBoxSizer(bounding, orient);
 		{
 			wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("tot frames: ")));

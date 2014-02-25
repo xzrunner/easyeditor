@@ -12,7 +12,7 @@ class CommonCMPT : public d2d::AbstractEditCMPT
 {
 public:
 	CommonCMPT(wxWindow* parent, const wxString& name,
-		StagePanel* stage);
+		StagePanel* stage, bool vertical);
 
 protected:
 	virtual wxSizer* initLayout();
@@ -26,6 +26,8 @@ private:
 	void onChangeAnim(wxCommandEvent& event);
 
 private:
+	bool m_vertical;
+
 	wxSpinCtrl* m_filling;
 
 }; // CommonCMPT

@@ -12,7 +12,7 @@ namespace d2d
 	{
 	public:
 		AbstractEditCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel,
-			const wxString& childrenName = wxEmptyString);
+			const wxString& childrenName = wxEmptyString, bool vertical = true);
 		virtual ~AbstractEditCMPT();
 
 		virtual void updateControlValue() {}
@@ -45,6 +45,8 @@ namespace d2d
 
 	private:
 		wxString m_name;
+
+		bool m_vertical;
 
 		wxString m_childrenName;
 		std::vector<AbstractEditCMPT*> m_children;

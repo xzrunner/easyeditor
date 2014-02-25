@@ -3,8 +3,8 @@
 namespace d2d
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, EditPanel* editPanel)
-	: AbstractEditCMPT(parent, wxT("Toolbar"), editPanel, wxT("Operation"))
+ToolbarPanel::ToolbarPanel(wxWindow* parent, EditPanel* editPanel, bool vertical)
+	: AbstractEditCMPT(parent, wxT("Toolbar"), editPanel, wxT("Operation"), vertical)
 {
 }
 

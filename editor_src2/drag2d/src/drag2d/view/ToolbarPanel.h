@@ -9,7 +9,7 @@ namespace d2d
 	class ToolbarPanel : public AbstractEditCMPT
 	{
 	public:
-		ToolbarPanel(wxWindow* parent, EditPanel* editPanel);
+		ToolbarPanel(wxWindow* parent, EditPanel* editPanel, bool vertical = true);
 
 	}; // ToolbarPanel
 }

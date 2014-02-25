@@ -9,7 +9,7 @@ namespace eanim
 	class ToolbarPanel : public d2d::ToolbarPanel
 	{
 	public:
-		ToolbarPanel(wxWindow* parent, StagePanel* stage);
+		ToolbarPanel(wxWindow* parent, StagePanel* stage, bool vertical);
 
 		void addAnimChoice(const std::vector<std::string>& choices);
 
