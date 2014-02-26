@@ -53,36 +53,6 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
-			"angle" : 0.0,
-			"clip" : false,
-			"color" : "0xff42352b",
-			"filepath" : "player_name_fontblank.json",
-			"font" : "CCBackBeat",
-			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 200,
-			"multi color" : "0xffffffff",
-			"name" : "title",
-			"position" : 
-			{
-				"x" : 272.0,
-				"y" : 167.0
-			},
-			"size" : 16,
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
 			"filepath" : "guild_fight_guard_item_complex.json",
@@ -171,13 +141,43 @@
 			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff000000",
+			"filepath" : "player_name_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"label_height" : 21,
+			"label_width" : 250,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 280.50,
+				"y" : 167.50
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"undo" : 
 	[
 		
 		{
-			"sprites" : [ 3 ],
+			"sprites" : [ 2 ],
 			"val" : 
 			{
 				"dx" : 404.0,
@@ -187,7 +187,7 @@
 		},
 		
 		{
-			"sprites" : [ 3 ],
+			"sprites" : [ 2 ],
 			"val" : 
 			{
 				"dx" : 5.0,
@@ -197,7 +197,7 @@
 		},
 		
 		{
-			"sprites" : [ 3 ],
+			"sprites" : [ 2 ],
 			"val" : 
 			{
 				"dx" : 0.0,
@@ -207,7 +207,7 @@
 		},
 		
 		{
-			"sprites" : [ 4 ],
+			"sprites" : [ 3 ],
 			"val" : 
 			{
 				"dx" : 1.0,
@@ -217,7 +217,7 @@
 		},
 		
 		{
-			"sprites" : [ 5 ],
+			"sprites" : [ 4 ],
 			"val" : 
 			{
 				"dx" : 0.0,
@@ -277,7 +277,7 @@
 		},
 		
 		{
-			"sprites" : [ 4 ],
+			"sprites" : [ 3 ],
 			"val" : 
 			{
 				"dx" : 2.0,
@@ -287,6 +287,26 @@
 		},
 		
 		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 4 ],
+			"val" : 
+			{
+				"dx" : 3.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
 			"sprites" : [ 4 ],
 			"val" : 
 			{
@@ -297,27 +317,7 @@
 		},
 		
 		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : 3.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 2, 3, 4, 5, 0 ],
+			"sprites" : [ 2, 3, 4, 0 ],
 			"val" : 
 			{
 				"dx" : -61.0,
@@ -327,11 +327,31 @@
 		},
 		
 		{
-			"sprites" : [ 6 ],
+			"sprites" : [ 5 ],
 			"val" : 
 			{
 				"dx" : 595.0,
 				"dy" : -212.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 281.0,
+				"dy" : -24.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 6 ],
+			"val" : 
+			{
+				"dx" : 358.0,
+				"dy" : 3.0,
 				"type" : 0
 			}
 		},
@@ -341,8 +361,8 @@
 			"sprites" : [ 6 ],
 			"val" : 
 			{
-				"dx" : 35.0,
-				"dy" : 147.0,
+				"dx" : 22.0,
+				"dy" : -157.0,
 				"type" : 0
 			}
 		}

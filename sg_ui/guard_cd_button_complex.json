@@ -1,7 +1,6 @@
 
 {
 	"name" : "",
-	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -9,13 +8,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "blue_button_complex.json",
+			"filepath" : "blue_long2_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "button",
 			"position" : 
 			{
-				"x" : -1.0,
-				"y" : -2.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"tag" : "no_cd",
 			"x mirror" : false,
@@ -23,7 +22,7 @@
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
+			"y offset" : -1.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -57,10 +56,5 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	],
-	"undo" : null,
-	"xmax" : 0.0,
-	"xmin" : 0.0,
-	"ymax" : 0.0,
-	"ymin" : 0.0
+	]
 }
