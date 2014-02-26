@@ -25,6 +25,7 @@ namespace complex
 		//
 		virtual void removeSprite(d2d::ISprite* sprite);
 		virtual void insertSprite(d2d::ISprite* sprite);
+		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
 		Symbol* getSymbol() { return m_symbol; }
 
