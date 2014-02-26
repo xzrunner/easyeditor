@@ -179,6 +179,8 @@ void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 
 	if (!symbols.empty())
 		context->layers.clear();
+	else
+		return;
 
 	Layer* layer = new Layer;
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
