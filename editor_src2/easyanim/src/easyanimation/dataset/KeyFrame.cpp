@@ -100,6 +100,10 @@ void KeyFrame::reorder(const d2d::ISprite* sprite, bool up)
 				m_sprites[i] = m_sprites[i-1];
 				m_sprites[i-1] = tmp;
 			}
+
+			Context::Instance()->viewlist->reorder(sprite, up);
+
+			break;
 		}
 	}
 }

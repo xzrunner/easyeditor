@@ -42,7 +42,7 @@ void ViewlistPanel::insert(ISprite* sprite)
 	m_sprites.push_back(sprite);
 }
 
-void ViewlistPanel::reorder(ISprite* sprite, bool up)
+void ViewlistPanel::reorder(const ISprite* sprite, bool up)
 {
 	int i = 0;
 	int n = m_sprites.size();

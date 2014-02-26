@@ -21,7 +21,7 @@ namespace d2d
 
 		void remove(ISprite* sprite);
 		void insert(ISprite* sprite);
-		void reorder(ISprite* sprite, bool up);
+		void reorder(const ISprite* sprite, bool up);
 
 		void onSelected(int index);
 
