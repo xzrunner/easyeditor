@@ -2,6 +2,7 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/StagePanel.h"
+#include "view/StageSettings.h"
 #include "frame/Context.h"
 #include "frame/FileIO.h"
 #include "dataset/Layer.h"
@@ -16,6 +17,7 @@ CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name,
 	StagePanel* stage, bool vertical)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_vertical(vertical)
+	, m_settings(stage->settings)
 {
 	m_editOP = new ArrangeSpriteOP(stage);
 }
@@ -28,53 +30,74 @@ wxSizer* CommonCMPT::initLayout()
 wxSizer* CommonCMPT::initEditPanel()
 {
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
-
 	wxBoxSizer* sizer = new wxBoxSizer(orient);
 	sizer->AddSpacer(10);
-	{
-		wxSizer* loadSizer = new wxBoxSizer(wxVERTICAL);
-		// load floder
-		{
-			wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
-			Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-				wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
-			loadSizer->Add(btnLoad);
-		}
-		sizer->AddSpacer(10);
-		// load all image
-		{
-			wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
-			Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-				wxCommandEventHandler(CommonCMPT::onLoadFromList));
-			loadSizer->Add(btnLoad);
-		}
-		sizer->Add(loadSizer);
-	}
+	initLoadPanel(sizer);
 	sizer->AddSpacer(20);
-	// fill frames
+	initFillingPanel(sizer);
+	sizer->AddSpacer(10);
+	initSettingsPanel(sizer);
+
+	return sizer;
+}
+
+void CommonCMPT::initLoadPanel(wxSizer* sizer)
+{
+	wxSizer* loadSizer = new wxBoxSizer(wxVERTICAL);
+	// folder
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
-		wxBoxSizer* fillingSizer = new wxStaticBoxSizer(bounding, orient);
-		{
-			wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("tot frames: ")));
-
-			m_filling = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), 
-				wxSP_ARROW_KEYS, 10, 1000, 0);
-			sizer->Add(m_filling);
-
-			fillingSizer->Add(sizer);
-		}
-		{
-			wxButton* btnFill = new wxButton(this, wxID_ANY, wxT("Filling"));
-			Connect(btnFill->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-				wxCommandEventHandler(CommonCMPT::onFillingFrames));
-			fillingSizer->Add(btnFill);
-		}
-		sizer->Add(fillingSizer);
+		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
+		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+			wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
+		loadSizer->Add(btnLoad);
 	}
 	sizer->AddSpacer(10);
-	return sizer;
+	// all image
+	{
+		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
+		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+			wxCommandEventHandler(CommonCMPT::onLoadFromList));
+		loadSizer->Add(btnLoad);
+	}
+	sizer->Add(loadSizer);
+}
+
+void CommonCMPT::initFillingPanel(wxSizer* sizer)
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
+	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
+	wxSizer* fillingSizer = new wxStaticBoxSizer(bounding, orient);
+	{
+		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("tot frames: ")));
+
+		m_filling = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), 
+			wxSP_ARROW_KEYS, 10, 1000, 0);
+		sizer->Add(m_filling);
+
+		fillingSizer->Add(sizer);
+	}
+	{
+		wxButton* btnFill = new wxButton(this, wxID_ANY, wxT("Filling"));
+		Connect(btnFill->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+			wxCommandEventHandler(CommonCMPT::onFillingFrames));
+		fillingSizer->Add(btnFill);
+	}
+	sizer->Add(fillingSizer);
+}
+
+void CommonCMPT::initSettingsPanel(wxSizer* sizer)
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Settings"));
+	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
+	wxSizer* settingsSizer = new wxStaticBoxSizer(bounding, orient);
+
+	wxCheckBox* checkCross = new wxCheckBox(this, wxID_ANY, wxT("¸¨ÖúÏß"));
+	checkCross->SetValue(m_settings.bDrawCross);
+	Connect(checkCross->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(CommonCMPT::onSetCross));
+	settingsSizer->Add(checkCross, 0);
+
+	sizer->Add(settingsSizer);
 }
 
 class DirTraverser : public wxDirTraverser
@@ -230,6 +253,12 @@ void CommonCMPT::onChangeAnim(wxCommandEvent& event)
 {
 	Context::Instance()->resource.choice = event.GetInt();
 	FileIO::reload();
+}
+
+void CommonCMPT::onSetCross(wxCommandEvent& event)
+{
+	m_settings.bDrawCross = event.IsChecked();
+	m_editPanel->Refresh();
 }
 
 }

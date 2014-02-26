@@ -5,6 +5,7 @@
 namespace eanim
 {
 	class StagePanel;
+	class StageSettings;
 
 	class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
 	{
@@ -22,6 +23,8 @@ namespace eanim
 		static const int LENGTH = 100;
 
 	private:
+		const StageSettings& m_settings;
+
 		d2d::Vector m_center;
 
 		bool m_bMoveCenter;
