@@ -45,13 +45,13 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 {
 	Context* context = Context::Instance();
 
-	if (context->currLayer == -1 || context->currFrame == -1)
+	if (context->layer() == -1 || context->frame() == -1)
 		return;
 
 	const std::vector<Layer*>& layers = context->layers.getAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
-		KeyFrame* frame = layers[i]->getCurrKeyFrame(context->currFrame);
+		KeyFrame* frame = layers[i]->getCurrKeyFrame(context->frame());
 		if (!frame) continue;
 
 		if (order)
@@ -76,8 +76,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	Context* context = Context::Instance();
-	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
-
+	KeyFrame* frame = context->getCurrFrame();
 	bool success = frame->remove(sprite);
 	if (success)
 		context->keysPanel->Refresh();
@@ -86,7 +85,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	Context* context = Context::Instance();
-	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
+	KeyFrame* frame = context->getCurrFrame();
 	frame->insert(sprite);
 	Refresh();
 	context->keysPanel->Refresh();
@@ -96,8 +95,7 @@ void StagePanel::clearSprites()
 {
 	Context* context = Context::Instance();
 	context->layers.clear();
-	context->currLayer = -1;
-	context->currFrame = -1;
+	context->setCurrFrame(-1, -1);
 
 // 	Context* context = Context::Instance();
 // 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
@@ -106,15 +104,13 @@ void StagePanel::clearSprites()
 
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
-	Context* context = Context::Instance();
-	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
+	KeyFrame* frame = Context::Instance()->getCurrFrame();
 	frame->reorder(sprite, up);
 }
 
 SkeletonData& StagePanel::getSkeletonData()
 {
-	Context* context = Context::Instance();
-	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
+	KeyFrame* frame = Context::Instance()->getCurrFrame();
 	return frame->getSkeletonData();	
 }
 

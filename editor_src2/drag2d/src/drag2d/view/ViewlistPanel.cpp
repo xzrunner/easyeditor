@@ -42,6 +42,35 @@ void ViewlistPanel::insert(ISprite* sprite)
 	m_sprites.push_back(sprite);
 }
 
+void ViewlistPanel::reorder(const ISprite* sprite, bool up)
+{
+	int i = 0;
+	int n = m_sprites.size();
+	for ( ; i < n; ++i)
+		if (m_sprites[i] == sprite)
+			break;
+	assert(i != n);
+
+	if (up)
+	{
+		int pos = i + 1;
+		if (pos < n)
+		{
+			swap(i, pos);
+			m_list->swap(i, pos);
+		}
+	}
+	else
+	{
+		int pos = i - 1;
+		if (pos >= 0)
+		{
+			swap(i, pos);
+			m_list->swap(i, pos);
+		}
+	}
+}
+
 void ViewlistPanel::onSelected(int index)
 {
 	if (m_property)
@@ -74,4 +103,16 @@ void ViewlistPanel::initLayout()
 
 	SetSizer(sizer);
 }
+
+void ViewlistPanel::swap(int i0, int i1)
+{
+	if (i0 < 0 || i0 >= m_sprites.size() ||
+		i1 < 0 || i1 >= m_sprites.size())
+		return;
+
+	ISprite* tmp = m_sprites[i0];
+	m_sprites[i0] = m_sprites[i1];
+	m_sprites[i1] = tmp;
+}
+
 } // d2d

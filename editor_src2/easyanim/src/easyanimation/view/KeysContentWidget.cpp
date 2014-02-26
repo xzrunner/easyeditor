@@ -286,7 +286,7 @@ void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::drawCurrPosFlag(wxBufferedPaintDC& dc)
 {
-	const float x = FRAME_GRID_WIDTH * (Context::Instance()->currFrame - 0.5f);
+	const float x = FRAME_GRID_WIDTH * (Context::Instance()->frame() - 0.5f);
 	dc.SetPen(DARK_RED);
 	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * Context::Instance()->layers.size());
 }

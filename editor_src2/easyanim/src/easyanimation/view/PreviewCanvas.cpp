@@ -1,4 +1,5 @@
 #include "PreviewCanvas.h"
+#include "PreviewSettings.h"
 
 #include "frame/Context.h"
 #include "dataset/KeyFrame.h"
@@ -14,17 +15,13 @@ BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
 END_EVENT_TABLE()
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage)
+PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
+	, m_settings(settings)
 {
 	m_timer.Start(1000 / Context::Instance()->fps);
 	m_currFrame = 1;
-}
-
-PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
-{
-	return m_setting;
 }
 
 void PreviewCanvas::initGL()
@@ -41,12 +38,12 @@ void PreviewCanvas::onDraw()
 
 void PreviewCanvas::onTimer(wxTimerEvent& event)
 {
-	if (!m_setting.isStop)
+	if (!m_settings.isStop)
 		++m_currFrame;
 
 	if (m_currFrame >= Context::Instance()->layers.getFrameCount())
 	{
-		if (m_setting.isCirculate) 
+		if (m_settings.isCirculate) 
 			m_currFrame = 1;
 		else 
 			--m_currFrame;
@@ -94,4 +91,5 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 		}
 	}
 }
+
 } // eanim

@@ -5,7 +5,8 @@
 
 namespace eanim
 {
-	SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
+	SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, 
+		StagePanel* stage, bool vertical)
 		: d2d::AbstractEditCMPT(parent, name, stage)
 	{
 		m_editOP = new SkeletonOP(stage);

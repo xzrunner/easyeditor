@@ -10,7 +10,7 @@ namespace d2d
 	{
 	public:
 		ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
-			bool bOpenRightTap = true);
+			bool bOpenRightTap = true, bool bOpenLeftTap = true);
 
 		virtual bool onKeyDown(int keyCode);
 		virtual bool onKeyUp(int keyCode);
@@ -32,6 +32,7 @@ namespace d2d
 		Vector m_lastPos;
 
 		bool m_openRightTap;
+		bool m_openLeftTap;
 
 	}; // ZoomViewOP
 }

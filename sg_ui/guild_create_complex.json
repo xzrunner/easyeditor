@@ -350,22 +350,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "res_button_complex.json",
+			"filepath" : "cost_res_button_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "rename_button",
 			"position" : 
 			{
-				"x" : 298.0,
-				"y" : 204.6586608886719
+				"x" : 303.9055786132813,
+				"y" : 206.0
 			},
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.8000000119209290,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 0.8000000119209290,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	],
@@ -421,105 +421,31 @@
 				"type" : 0
 			}
 		},
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
+		null,
 		
 		{
 			"sprites" : [ 13 ],
 			"val" : 
 			{
-				"dx" : 591.0,
-				"dy" : -94.0,
+				"dx" : -14.0,
+				"dy" : -6.0,
 				"type" : 0
 			}
 		},
+		null,
 		
 		{
 			"sprites" : [ 13 ],
 			"val" : 
 			{
-				"dx" : -20.0,
-				"dy" : 4.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 13 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8000000119209290,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 13 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8000000119209290,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8000000119209290,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 13 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8000000119209290,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8000000119209290,
-				"yscale" : 0.8000000119209290
-			}
-		},
-		
-		{
-			"sprites" : [ 13 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.8000000119209290,
-						"y" : 0.8000000119209290
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.8000000119209290,
-				"yscale" : 0.8000000119209290
-			}
-		},
-		
-		{
-			"sprites" : [ 13 ],
-			"val" : 
-			{
-				"dx" : -6.0,
-				"dy" : -2.0,
+				"dx" : 8.0,
+				"dy" : -90.0,
 				"type" : 0
 			}
 		}

@@ -3,6 +3,8 @@
 #include <wx/wx.h>
 #include <drag2d.h>
 
+#include "PreviewSettings.h"
+
 namespace eanim
 {
 	class PreviewDialog : public wxDialog
@@ -22,6 +24,8 @@ namespace eanim
 
 	private:
 		d2d::EditPanel* m_stage;
+
+		PlaySettings m_settings;
 
 	}; // PreviewDialog
 }

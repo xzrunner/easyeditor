@@ -38,6 +38,9 @@ namespace eanim
 		wxMenu* initCodesBar();
 
 		void initWorkingFrame();
+		wxWindow* createLeftFrame(wxWindow* parent);
+		wxWindow* createCenterFrame(wxWindow* parent);
+		wxWindow* createRightFrame(wxWindow* parent);
 
 		void clear();
 //		void refresh();

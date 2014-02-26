@@ -2,6 +2,7 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/StagePanel.h"
+#include "view/StageSettings.h"
 #include "frame/Context.h"
 #include "frame/FileIO.h"
 #include "dataset/Layer.h"
@@ -13,8 +14,10 @@ namespace eanim
 {
 
 CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name, 
-	StagePanel* stage)
+	StagePanel* stage, bool vertical)
 	: d2d::AbstractEditCMPT(parent, name, stage)
+	, m_vertical(vertical)
+	, m_settings(stage->settings)
 {
 	m_editOP = new ArrangeSpriteOP(stage);
 }
@@ -26,48 +29,75 @@ wxSizer* CommonCMPT::initLayout()
 
 wxSizer* CommonCMPT::initEditPanel()
 {
-	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
+	wxBoxSizer* sizer = new wxBoxSizer(orient);
+	sizer->AddSpacer(10);
+	initLoadPanel(sizer);
 	sizer->AddSpacer(20);
-	// load floder
+	initFillingPanel(sizer);
+	sizer->AddSpacer(10);
+	initSettingsPanel(sizer);
+
+	return sizer;
+}
+
+void CommonCMPT::initLoadPanel(wxSizer* sizer)
+{
+	wxSizer* loadSizer = new wxBoxSizer(wxVERTICAL);
+	// folder
 	{
-		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Floder"));
+		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::onLoadFromFloder));
-		sizer->Add(btnLoad);
+			wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
+		loadSizer->Add(btnLoad);
 	}
 	sizer->AddSpacer(10);
-	// load all image
+	// all image
 	{
 		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
 			wxCommandEventHandler(CommonCMPT::onLoadFromList));
-		sizer->Add(btnLoad);
+		loadSizer->Add(btnLoad);
 	}
-	sizer->AddSpacer(10);
-	// fill frames
+	sizer->Add(loadSizer);
+}
+
+void CommonCMPT::initFillingPanel(wxSizer* sizer)
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
+	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
+	wxSizer* fillingSizer = new wxStaticBoxSizer(bounding, orient);
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
-		wxBoxSizer* fillingSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("tot frames: ")));
+		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("tot frames: ")));
 
-			m_filling = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), 
-				wxSP_ARROW_KEYS, 10, 1000, 0);
-			sizer->Add(m_filling);
+		m_filling = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), 
+			wxSP_ARROW_KEYS, 10, 1000, 0);
+		sizer->Add(m_filling);
 
-			fillingSizer->Add(sizer);
-		}
-		{
-			wxButton* btnFill = new wxButton(this, wxID_ANY, wxT("Filling"));
-			Connect(btnFill->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-				wxCommandEventHandler(CommonCMPT::onFillingFrames));
-			fillingSizer->Add(btnFill);
-		}
-		sizer->Add(fillingSizer);
+		fillingSizer->Add(sizer);
 	}
-	sizer->AddSpacer(10);
-	return sizer;
+	{
+		wxButton* btnFill = new wxButton(this, wxID_ANY, wxT("Filling"));
+		Connect(btnFill->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+			wxCommandEventHandler(CommonCMPT::onFillingFrames));
+		fillingSizer->Add(btnFill);
+	}
+	sizer->Add(fillingSizer);
+}
+
+void CommonCMPT::initSettingsPanel(wxSizer* sizer)
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Settings"));
+	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
+	wxSizer* settingsSizer = new wxStaticBoxSizer(bounding, orient);
+
+	wxCheckBox* checkCross = new wxCheckBox(this, wxID_ANY, wxT("¸¨ÖúÏß"));
+	checkCross->SetValue(m_settings.bDrawCross);
+	Connect(checkCross->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(CommonCMPT::onSetCross));
+	settingsSizer->Add(checkCross, 0);
+
+	sizer->Add(settingsSizer);
 }
 
 class DirTraverser : public wxDirTraverser
@@ -92,7 +122,7 @@ private:
 
 }; // DirTraverser
 
-void CommonCMPT::onLoadFromFloder(wxCommandEvent& event)
+void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 {
 	wxDirDialog dlg(NULL, "Images", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() != wxID_OK)
@@ -172,6 +202,8 @@ void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 
 	if (!symbols.empty())
 		context->layers.clear();
+	else
+		return;
 
 	Layer* layer = new Layer;
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
@@ -221,6 +253,12 @@ void CommonCMPT::onChangeAnim(wxCommandEvent& event)
 {
 	Context::Instance()->resource.choice = event.GetInt();
 	FileIO::reload();
+}
+
+void CommonCMPT::onSetCross(wxCommandEvent& event)
+{
+	m_settings.bDrawCross = event.IsChecked();
+	m_editPanel->Refresh();
 }
 
 }

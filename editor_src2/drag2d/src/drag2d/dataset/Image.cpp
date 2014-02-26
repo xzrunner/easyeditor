@@ -85,10 +85,10 @@ void Image::draw(const Rect& r) const
 
 	float tot_hw = m_width * 0.5f,
 		  tot_hh = m_height * 0.5f;
-	float txmin = (r.xMin + tot_hw) / m_width ,
-		txmax = (r.xMax + tot_hw) / m_width ,
-		tymin = (r.yMin + tot_hh) / m_height ,
-		tymax = (r.yMax + tot_hh) / m_height ;
+	float txmin = (r.xMin + tot_hw) / m_width,
+		txmax = (r.xMax + tot_hw) / m_width,
+		tymin = (r.yMin + tot_hh) / m_height,
+		tymax = (r.yMax + tot_hh) / m_height;
 
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
 	GL10::Begin(GL10::GL_QUADS);
@@ -173,12 +173,13 @@ void Image::removeTransparentBorder()
 	}
 
 	m_region.translate(Vector(-m_width*0.5f, -m_height*0.5f));
-	m_region.scale(1, -1);
 }
 
 bool Image::isTransparent(unsigned char* pixels, int x, int y)
 {
-	return pixels[(m_width * y + x) * m_channels + m_channels - 1] == 0;
+	// image data from top to bottom
+//	return pixels[(m_width * y + x) * m_channels + m_channels - 1] == 0;
+	return pixels[(m_width * (m_height - y - 1) + x) * m_channels + m_channels - 1] == 0;
 }
 
 } // d2d

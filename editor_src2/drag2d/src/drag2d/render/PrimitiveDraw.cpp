@@ -609,16 +609,21 @@ void PrimitiveDraw::drawTrianglesSlow(unsigned int texID, const std::vector<Vect
 	//GL10::Disable(GL10::GL_BLEND);
 }
 
-void PrimitiveDraw::drawCross(const Vector& center, float edge, const Colorf& color, float size)
+void PrimitiveDraw::cross(const Vector& center, float edge, const Colorf& color, float size)
+{
+	cross(center, edge, edge, color, size);
+}
+
+void PrimitiveDraw::cross(const Vector& center, float xedge, float yedge, const Colorf& color, float size)
 {
 	Vector s = center, e = center;
-	s.x -= edge;
-	e.x += edge;
+	s.x -= xedge;
+	e.x += xedge;
 	drawLine(s, e, color, size);
 
 	s  = e = center;
-	s.y -= edge;
-	e.y += edge;
+	s.y -= yedge;
+	e.y += yedge;
 	drawLine(s, e, color, size);
 }
 

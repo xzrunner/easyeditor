@@ -2108,6 +2108,14 @@
 					RelativePath="..\..\..\src\drag2d\view\Frame.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\SettingsDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\SettingsDialog.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

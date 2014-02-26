@@ -18,8 +18,7 @@ void LayersMgr::newLayer()
 
 void LayersMgr::insertLayer(Layer* layer)
 {
-	Context::Instance()->currLayer = m_layers.size();
-	Context::Instance()->currFrame = 1;
+	Context::Instance()->setCurrFrame(m_layers.size(), 1);
 	m_layers.push_back(layer);
 }
 

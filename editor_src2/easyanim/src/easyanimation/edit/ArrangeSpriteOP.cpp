@@ -1,6 +1,7 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/StagePanel.h"
+#include "view/StageSettings.h"
 #include "frame/Context.h"
 
 namespace eanim
@@ -9,6 +10,7 @@ namespace eanim
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, 
 	static_cast<d2d::PropertySettingPanel*>(Context::Instance()->property))
+	, m_settings(stage->settings)
 	, m_bMoveCenter(false)
 {
 }
@@ -55,12 +57,12 @@ bool ArrangeSpriteOP::onDraw() const
 	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw()) 
 		return true;
 
-	const d2d::Colorf COLOR(1, 0, 0);
-	d2d::PrimitiveDraw::drawCircle(m_center, RADIUS, false, 2, COLOR);
- 	d2d::PrimitiveDraw::drawLine(d2d::Vector(m_center.x - LENGTH, m_center.y), 
- 		d2d::Vector(m_center.x + LENGTH, m_center.y), COLOR);
- 	d2d::PrimitiveDraw::drawLine(d2d::Vector(m_center.x, m_center.y - LENGTH), 
- 		d2d::Vector(m_center.x, m_center.y + LENGTH), COLOR);
+	if (m_settings.bDrawCross)
+	{
+		const d2d::Colorf COLOR = d2d::Colorf(1, 0, 0);
+		d2d::PrimitiveDraw::drawCircle(m_center, RADIUS, false, 2, COLOR);
+		d2d::PrimitiveDraw::cross(m_center, LENGTH, COLOR);
+	}
 
 	return false;
 }

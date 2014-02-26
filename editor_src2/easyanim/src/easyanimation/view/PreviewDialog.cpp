@@ -1,5 +1,6 @@
 #include "PreviewDialog.h"
 #include "PreviewCanvas.h"
+#include "PreviewOP.h"
 
 namespace eanim
 {
@@ -43,17 +44,14 @@ void PreviewDialog::buildToolBar(wxSizer* topSizer)
 void PreviewDialog::buildEditPanel(wxSizer* topSizer)
 {
 	m_stage = new d2d::EditPanel(this, this);
-	m_stage->setEditOP(new d2d::ZoomViewOP(m_stage, false));
-	m_stage->setCanvas(new PreviewCanvas(m_stage));
+	m_stage->setEditOP(new PreviewOP(m_stage, m_settings));
+	m_stage->setCanvas(new PreviewCanvas(m_stage, m_settings));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 
 void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 {
-	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->getCanvas());
-	assert(canvas);
-	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
-	setting.isCirculate = event.IsChecked();
+	m_settings.isCirculate = event.IsChecked();
 
 	m_stage->Refresh();
 	m_stage->SetFocus();
@@ -61,10 +59,7 @@ void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 
 void PreviewDialog::onSetStop(wxCommandEvent& event)
 {
-	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->getCanvas());
-	assert(canvas);
-	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
-	setting.isStop = event.IsChecked();
+	m_settings.isStop = event.IsChecked();
 
 	m_stage->Refresh();
 	m_stage->SetFocus();

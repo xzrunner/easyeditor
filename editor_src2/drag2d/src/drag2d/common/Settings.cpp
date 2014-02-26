@@ -3,11 +3,10 @@
 namespace d2d
 {
 
-bool Settings::bZoomOnlyUseMouseWheel = false;
-
 int Settings::ctlPosSize = 0;
 bool Settings::bDisplayTrisEdge = false;
 bool Settings::bDisplayPolyBound = true;
+bool Settings::bSpriteCapture = true;
 
 Settings::DrawType Settings::drawType = e_DrawBoth;
 

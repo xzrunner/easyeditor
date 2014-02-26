@@ -43,7 +43,8 @@ namespace d2d
 		static void drawTrianglesSlow(unsigned int texID, const std::vector<Vector>& triangles, 
 			const std::vector<Vector>& texCoords);
 
-		static void drawCross(const Vector& center, float edge, const Colorf& color, float size = 2);
+		static void cross(const Vector& center, float edge, const Colorf& color, float size = 2);
+		static void cross(const Vector& center, float xedge, float yedge, const Colorf& color, float size = 2);
 
 	private:
 		static void lineStypeBegin(const LineStype& style);

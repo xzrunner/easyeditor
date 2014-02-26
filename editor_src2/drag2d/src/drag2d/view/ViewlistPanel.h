@@ -21,6 +21,7 @@ namespace d2d
 
 		void remove(ISprite* sprite);
 		void insert(ISprite* sprite);
+		void reorder(const ISprite* sprite, bool up);
 
 		void onSelected(int index);
 
@@ -28,6 +29,8 @@ namespace d2d
 
 	private:
 		void initLayout();
+
+		void swap(int i0, int i1);
 
 	private:
 		EditPanel* m_editPanel;

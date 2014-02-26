@@ -77,28 +77,32 @@ void Layer::removeFrame(int time)
 
 void Layer::insertKeyFrame(KeyFrame* frame)
 {
+	Context* context = Context::Instance();
+
 	std::pair<std::map<int, KeyFrame*>::iterator, bool> status 
 		= insert(frame->getTime(), frame);
 	if (!status.second)
 	{
 		if (frame != status.first->second)
 		{
-			if (status.first->second->getTime() == Context::Instance()->maxFrame)
-				static_cast<KeysPanel*>(Context::Instance()->keysPanel)->setCurrPos(INT_MAX);
+			if (status.first->second->getTime() == context->maxFrame)
+				static_cast<KeysPanel*>(context->keysPanel)->setCurrPos(INT_MAX);
 
 			delete status.first->second;
 			status.first->second = frame;
 		}
 	}
 
-	if (frame->getTime() > Context::Instance()->maxFrame)
-		Context::Instance()->maxFrame = frame->getTime();
+	if (frame->getTime() > context->maxFrame)
+		context->maxFrame = frame->getTime();
 
-	Context::Instance()->currFrame = frame->getTime();
+	context->setCurrFrame(context->layer(), frame->getTime());
 }
 
 void Layer::insertKeyFrame(int time)
 {
+	Context* context = Context::Instance();
+
 	if (!m_frames.empty())
 	{
 		std::map<int, KeyFrame*>::iterator itr = m_frames.end();
@@ -109,10 +113,10 @@ void Layer::insertKeyFrame(int time)
 			insert(time, frame);
 			frame->copyKeyFrame(itr->second);
 
-			if (time > Context::Instance()->maxFrame)
-				Context::Instance()->maxFrame = time;
+			if (time > context->maxFrame)
+				context->maxFrame = time;
 
-			Context::Instance()->currFrame = time;
+			context->setCurrFrame(context->layer(), time);
 		}
 		else
 			insert(time, new KeyFrame(time));
@@ -131,9 +135,9 @@ void Layer::removeKeyFrame(int time)
 		delete itr->second;
 		m_frames.erase(itr);
 
-		static_cast<KeysPanel*>(Context::Instance()->keysPanel)->setCurrPos(INT_MAX);
-
-		Context::Instance()->maxFrame = Context::Instance()->currFrame;
+		Context* context = Context::Instance();
+		static_cast<KeysPanel*>(context->keysPanel)->setCurrPos(INT_MAX);
+		context->maxFrame = context->frame();
 	}
 }
 

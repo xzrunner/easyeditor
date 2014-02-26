@@ -5,25 +5,12 @@
 
 namespace eanim
 {
+	struct PlaySettings;
+
 	class PreviewCanvas : public d2d::OrthoCanvas
 	{
 	public:
-		struct PlaySetting
-		{
-			bool isCirculate;
-			bool isStop;
-
-			PlaySetting()
-			{
-				isCirculate = true;
-				isStop = false;
-			}
-		};
-
-	public:
-		PreviewCanvas(d2d::EditPanel* stage);
-
-		PlaySetting& getPlaySetting();
+		PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings);
 
 	protected:
 		virtual void initGL();
@@ -46,7 +33,7 @@ namespace eanim
 		wxTimer m_timer;
 		int m_currFrame;
 
-		PlaySetting m_setting;
+		const PlaySettings& m_settings;
 
 		DECLARE_EVENT_TABLE()
 

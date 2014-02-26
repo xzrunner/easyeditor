@@ -15,7 +15,9 @@ namespace eanim
 KeysPanel::KeysPanel(wxWindow* parent)
 	: wxScrolledWindow(parent)
 {
-	Context::Instance()->currFrame = 1;
+	Context* context = Context::Instance();
+	context->setCurrFrame(context->layer(), 1);
+
 	m_selectRow = m_selectCol = -1;
 	initLayout();
 }
@@ -32,9 +34,9 @@ void KeysPanel::setCurrPos(int pos)
 	}
 
 	if (pos > maxFrame) pos = maxFrame;
-	if (pos != context->currFrame)
+	if (pos != context->frame())
 	{
-		context->currFrame = pos;
+		context->setCurrFrame(context->layer(), pos);
 //		static_cast<StagePanel*>(context->stage)->clear();
 		static_cast<StagePanel*>(context->stage)->getEditOP()->clear();
 		Refresh();
@@ -54,7 +56,11 @@ void KeysPanel::setSelectPos(int row, int col)
 	{
 		m_selectRow = row;
 		if (row != -1) 
-			Context::Instance()->currLayer = Context::Instance()->layers.size() - row - 1;
+		{
+			Context* context = Context::Instance();
+			int layer = context->layers.size() - row - 1;
+			context->setCurrFrame(layer, context->frame());
+		}
 		refresh = true;
 	}
 	if (col != m_selectCol)

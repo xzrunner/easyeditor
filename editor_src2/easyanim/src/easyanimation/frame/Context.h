@@ -7,41 +7,61 @@
 
 namespace eanim
 {
-	class Context
-	{
-	public:
-		wxWindow* library;
-		wxWindow* property;
-		wxWindow* stage;
-		wxWindow* toolbar;
-		wxWindow* layersPanel;
-		wxWindow* keysPanel;
-		d2d::ViewlistPanel* viewlist;
 
-		d2d::ILibraryPage* imagePage;
+class KeyFrame;
 
-		LayersMgr layers;
-		int currLayer;
-		int currFrame;
-		int maxFrame;
+class Context
+{
+public:
+	wxWindow* library;
+	wxWindow* property;
+	wxWindow* stage;
+	wxWindow* toolbar;
+	wxWindow* layersPanel;
+	wxWindow* keysPanel;
+	d2d::ViewlistPanel* viewlist;
 
-		unsigned int fps;
+	d2d::ILibraryPage* imagePage;
 
-		wxString packer;
+	LayersMgr layers;
+	int maxFrame;
 
-		ResourceMgr resource;
+	unsigned int fps;
 
-		std::string name;
+	wxString packer;
 
-	public:
-		static Context* Instance();
+	ResourceMgr resource;
 
-	private:
-		Context();
+	std::string name;
 
-	private:
-		static Context* m_instance;
+public:
+	void setCurrFrame(int layer, int frame);
+	KeyFrame* getCurrFrame() { return m_last_keyframe; }
 
-	}; // Context
+	// layer start from 0
+	// frame start from 1
+	int layer() const { return m_curr_layer; }
+	int frame() const { return m_curr_frame; }
+
+public:
+	static Context* Instance();
+
+private:
+	Context();
+
+	void reloadViewList(const KeyFrame& frame);
+
+private:
+	static Context* m_instance;
+
+	KeyFrame* m_last_keyframe;
+
+	// layer start from 0
+	// frame start from 1
+	int m_curr_layer;
+	int m_curr_frame;
+
+}; // Context
+
 }
 

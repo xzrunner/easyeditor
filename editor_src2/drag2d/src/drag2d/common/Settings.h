@@ -9,11 +9,10 @@ namespace d2d
 	class Settings
 	{
 	public:
-
-		static bool bZoomOnlyUseMouseWheel;
-
 		static int ctlPosSize;
 		static bool bDisplayTrisEdge, bDisplayPolyBound;
+
+		static bool bSpriteCapture;
 
 		enum DrawType
 		{

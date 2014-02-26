@@ -1,17 +1,16 @@
 #include "Bitmap.h"
+#include "Image.h"
 
 namespace d2d
 {
 
 Bitmap::Bitmap()
 	: m_bitmap(NULL)
-	, m_scale(1.0f)
 {
 }
 
 Bitmap::Bitmap(wxBitmap* bitmap)
 	: m_bitmap(bitmap)
-	, m_scale(1.0f)
 {
 }
 
@@ -26,25 +25,52 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 	if (!init)
 	{
 		wxInitAllImageHandlers();
-//		wxImage::AddHandler(new wxPNGHandler);
-//		wxImage::AddHandler(new wxJPEGHandler);
-	//	wxImage::AddHandler(new wxBMPHandler);
 		init = true;
 	}
 
- 	wxImage image;
- 	image.LoadFile(filepath);
- 
-	m_scale = computeScale(image.GetWidth());
+	wxImage image;
+	getImage(filepath, image);
 
-	int w = image.GetWidth() * m_scale;
-	int h = image.GetHeight() * m_scale;
-	if (w > 1 && h > 1)
-		m_bitmap = new wxBitmap(image.Scale(w, h));
-	else
-		m_bitmap = new wxBitmap(image.Scale(image.GetWidth(), image.GetHeight()));
+	m_bitmap = getBitmap(image);
 
 	return true;
+}
+
+void Bitmap::getImage(const wxString& filepath, wxImage& image)
+{
+	wxImage totimg;
+	totimg.LoadFile(filepath);
+
+	Image* pImage = ImageMgr::Instance()->getItem(filepath);
+	Rect rect = pImage->getRegion();
+	float w = totimg.GetWidth();
+	float h = totimg.GetHeight();
+	// invert y
+	float offset = rect.yCenter() * 2;
+	rect.translate(Vector(w*0.5f, h*0.5f));
+
+	wxRect wx_rect;
+	wx_rect.SetLeft(rect.xMin);
+	wx_rect.SetRight(rect.xMax - 1);
+	wx_rect.SetTop(rect.yMin - offset);
+	wx_rect.SetBottom(rect.yMax - offset - 1);
+
+	image = totimg.GetSubImage(wx_rect);
+}
+
+wxBitmap* Bitmap::getBitmap(const wxImage& image)
+{
+	wxBitmap* bmp = NULL;
+
+	float scale = computeScale(image.GetWidth());
+
+	int w = image.GetWidth() * scale;
+	int h = image.GetHeight() * scale;
+	if (w > 1 && h > 1)
+		bmp = new wxBitmap(image.Scale(w, h));
+	else
+		bmp = new wxBitmap(image.Scale(image.GetWidth(), image.GetHeight()));
+	return bmp;
 }
 
 float Bitmap::computeScale(float width)

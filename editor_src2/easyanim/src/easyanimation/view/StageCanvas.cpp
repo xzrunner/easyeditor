@@ -21,15 +21,10 @@ void StageCanvas::onDraw()
 
 void StageCanvas::drawbackground() const
 {
-	const float hWidth = GetSize().GetWidth() * 0.5f,
-		hHeight = GetSize().GetHeight() * 0.5f;
-
- 	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
- 	glBegin(GL_LINES);
-		glVertex2f(-hWidth, 0.0f);	glVertex2f(hWidth, 0.0f);
-		glVertex2f(0.0f, -hHeight);	glVertex2f(0.0f, hHeight);
- 	glEnd();
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	float xedge = GetSize().GetWidth() * 0.5f;
+	float yedge = GetSize().GetHeight() * 0.5f;
+	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge,
+		d2d::Colorf(0.8f,0.8f,0.8f,0.8f));
 }
 
 } // eanim

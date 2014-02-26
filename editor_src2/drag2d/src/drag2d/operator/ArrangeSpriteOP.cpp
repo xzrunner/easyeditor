@@ -201,7 +201,7 @@ namespace d2d
 			m_bDirty = false;
 		}
 
-		if (m_autoAlignOpen && !m_selection->empty())
+		if (Settings::bSpriteCapture && m_autoAlignOpen && !m_selection->empty())
 		{
 			std::vector<ISprite*> sprites;
 			m_selection->traverse(FetchAllVisitor<ISprite>(sprites));

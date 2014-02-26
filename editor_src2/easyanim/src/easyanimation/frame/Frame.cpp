@@ -209,45 +209,79 @@ wxMenu* Frame::initCodesBar()
 
 void Frame::initWorkingFrame()
 {
+	wxSplitterWindow* rightSplit = new wxSplitterWindow(this);
+	wxSplitterWindow* leftSplit = new wxSplitterWindow(rightSplit);
+
+	wxWindow* left = createLeftFrame(leftSplit);
+	wxWindow* center = createCenterFrame(leftSplit);
+	wxWindow* right = createRightFrame(rightSplit);
+
+	leftSplit->SetSashGravity(0.12f);
+	leftSplit->SplitVertically(left, center);
+
+	rightSplit->SetSashGravity(0.9f);
+	rightSplit->SplitVertically(leftSplit, right);
+}
+
+wxWindow* Frame::createLeftFrame(wxWindow* parent)
+{
 	Context* context = Context::Instance();
 
-	// frame
-	wxSplitterWindow* leftVerSplit = new wxSplitterWindow(this);
-	wxSplitterWindow* rightVerSplit = new wxSplitterWindow(leftVerSplit);
-	wxSplitterWindow* leftHorSplit = new wxSplitterWindow(leftVerSplit);
-	wxSplitterWindow* rightHorSplit = new wxSplitterWindow(rightVerSplit);
-	wxSplitterWindow* centerHorSplit = new wxSplitterWindow(rightVerSplit);
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	leftVerSplit->SetSashGravity(0.12f);
-	leftVerSplit->SplitVertically(leftHorSplit, rightVerSplit);
-
-	rightVerSplit->SetSashGravity(1);
-	rightVerSplit->SplitVertically(centerHorSplit, rightHorSplit);
-
-	// left
-	d2d::LibraryPanel* library = new d2d::LibraryPanel(leftHorSplit);
-	context->library = library;
+	// library
+	d2d::LibraryPanel* library = new d2d::LibraryPanel(split);
 	library->addPage(context->imagePage = new d2d::LibraryImagePage(library->getNotebook()));
 	library->addPage(new complex::LibraryPage(library->getNotebook()));
 	library->addPage(new emesh::LibraryPage(library->getNotebook()));
 	library->addPage(new d2d::Library9PatchPage(library->getNotebook()));
-	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(leftHorSplit);
-	context->property = property;
-	leftHorSplit->SetSashGravity(0.55f);
-	leftHorSplit->SplitHorizontally(library, property);
+	context->library = library;
 
-	// center
-	StagePanel* stage = new StagePanel(centerHorSplit, this);
+	// property
+	context->property = new d2d::PropertySettingPanel(split);
+
+	split->SetSashGravity(0.55f);
+	split->SplitHorizontally(library, context->property);
+
+	return split;
+}
+
+wxWindow* Frame::createCenterFrame(wxWindow* parent)
+{
+	Context* context = Context::Instance();
+
+	wxSplitterWindow* bottomSplit = new wxSplitterWindow(parent);
+	wxSplitterWindow* topSplit = new wxSplitterWindow(bottomSplit);
+
+	// stage
+	StagePanel* stage = new StagePanel(topSplit, this);
 	context->stage = stage;
-	TimeLinePanel* timeline = new TimeLinePanel(centerHorSplit);
-	centerHorSplit->SetSashGravity(0.8f);
-	centerHorSplit->SplitHorizontally(stage, timeline);
 
-	// right
-	context->toolbar = new ToolbarPanel(rightHorSplit, stage);
-	context->viewlist = new d2d::ViewlistPanel(rightHorSplit, stage, stage, property);
-	rightHorSplit->SetSashGravity(0.4f);
-	rightHorSplit->SplitHorizontally(context->toolbar, context->viewlist);
+	// toolbar
+	context->toolbar = new ToolbarPanel(topSplit, stage, false);
+
+	// timeline
+	TimeLinePanel* timeline = new TimeLinePanel(bottomSplit);
+
+	topSplit->SetSashGravity(0.1f);
+	topSplit->SplitHorizontally(context->toolbar, stage);
+
+	bottomSplit->SetSashGravity(0.9f);
+	bottomSplit->SplitHorizontally(topSplit, timeline);
+
+	return bottomSplit;
+}
+
+wxWindow* Frame::createRightFrame(wxWindow* parent)
+{
+	Context* context = Context::Instance();
+
+	// viewlist
+	StagePanel* stage = static_cast<StagePanel*>(context->stage);
+	d2d::PropertySettingPanel* property = static_cast<d2d::PropertySettingPanel*>(context->property);
+	context->viewlist = new d2d::ViewlistPanel(parent, stage, stage, property);
+
+	return context->viewlist;
 }
 
 void Frame::clear()
