@@ -30,23 +30,27 @@ wxSizer* CommonCMPT::initEditPanel()
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
 
 	wxBoxSizer* sizer = new wxBoxSizer(orient);
+	sizer->AddSpacer(10);
+	{
+		wxSizer* loadSizer = new wxBoxSizer(wxVERTICAL);
+		// load floder
+		{
+			wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
+			Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+				wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
+			loadSizer->Add(btnLoad);
+		}
+		sizer->AddSpacer(10);
+		// load all image
+		{
+			wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
+			Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+				wxCommandEventHandler(CommonCMPT::onLoadFromList));
+			loadSizer->Add(btnLoad);
+		}
+		sizer->Add(loadSizer);
+	}
 	sizer->AddSpacer(20);
-	// load floder
-	{
-		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
-		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
-		sizer->Add(btnLoad);
-	}
-	sizer->AddSpacer(10);
-	// load all image
-	{
-		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
-		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
-			wxCommandEventHandler(CommonCMPT::onLoadFromList));
-		sizer->Add(btnLoad);
-	}
-	sizer->AddSpacer(10);
 	// fill frames
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
