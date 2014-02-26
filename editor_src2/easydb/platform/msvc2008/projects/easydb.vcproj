@@ -301,6 +301,26 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="fix"
+			>
+			<File
+				RelativePath="..\..\..\src\easydb\FixImages.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\FixImages.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="tools"
+			>
+			<File
+				RelativePath="..\..\..\src\easydb\filetools.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
