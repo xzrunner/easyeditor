@@ -7,6 +7,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
+#include "common/Math.h"
 
 namespace d2d
 {
@@ -40,20 +41,67 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 	{
 		center(value);
 	}
-	else if (name == wxT("X"))
+	else if (name == wxT("All Pos.X"))
 	{
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		float x = wxANY_AS(value, float);
+		for (int i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			ISprite* sprite = m_sprites[i];
-			sprite->setTransform(Vector(wxANY_AS(value, float), sprite->getPosition().y), sprite->getAngle());
+			ISprite* s = m_sprites[i];
+			s->setTransform(Vector(x, s->getPosition().y), s->getAngle());
 		}
 	}
-	else if (name == wxT("Y"))
+	else if (name == wxT("All Pos.Y"))
 	{
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		float y = wxANY_AS(value, float);
+		for (int i = 0, n = m_sprites.size(); i < n; ++i)
 		{
-			ISprite* sprite = m_sprites[i];
-			sprite->setTransform(Vector(sprite->getPosition().x, wxANY_AS(value, float)), sprite->getAngle());
+			ISprite* s = m_sprites[i];
+			s->setTransform(Vector(s->getPosition().x, y), s->getAngle());
+		}
+	}
+	else if (name == wxT("Pos.dx"))
+	{
+		float dx = wxANY_AS(value, float);
+		for (int i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* s = m_sprites[i];
+			s->setTransform(Vector(s->getPosition().x + dx, s->getPosition().y), s->getAngle());
+		}
+	}
+	else if (name == wxT("Pos.dy"))
+	{
+		float dy = wxANY_AS(value, float);
+		for (int i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* s = m_sprites[i];
+			s->setTransform(Vector(s->getPosition().x, s->getPosition().y + dy), s->getAngle());
+		}
+	}
+	else if (name == wxT("Angle"))
+	{
+		float angle = wxANY_AS(value, float) * TRANS_DEG_TO_RAD;
+		for (int i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* s = m_sprites[i];
+			s->setTransform(s->getPosition(), s->getAngle() + angle);
+		}
+	}
+	else if (name == wxT("Scale.dx"))
+	{
+		float dx = wxANY_AS(value, float);
+		for (int i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* s = m_sprites[i];
+			s->setScale(s->getScale().x * dx, s->getScale().y);
+		}
+	}
+	else if (name == wxT("Scale.dy"))
+	{
+		float dy = wxANY_AS(value, float);
+		for (int i = 0, n = m_sprites.size(); i < n; ++i)
+		{
+			ISprite* s = m_sprites[i];
+			s->setScale(s->getScale().x, s->getScale().y * dy);
 		}
 	}
 
@@ -74,17 +122,31 @@ void MultiSpritesPropertySetting::enablePropertyGrid(PropertySettingPanel* panel
 
 	pg->GetProperty(wxT("Align"))->Enable(bEnable);
 	pg->GetProperty(wxT("Center"))->Enable(bEnable);
-	pg->GetProperty(wxT("X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Y"))->Enable(bEnable);
+	pg->GetProperty(wxT("All Pos"))->Enable(bEnable);
+	pg->GetProperty(wxT("All Pos.X"))->Enable(bEnable);
+	pg->GetProperty(wxT("All Pos.Y"))->Enable(bEnable);
+	pg->GetProperty(wxT("Pos"))->Enable(bEnable);
+	pg->GetProperty(wxT("Pos.dx"))->Enable(bEnable);
+	pg->GetProperty(wxT("Pos.dy"))->Enable(bEnable);
+	pg->GetProperty(wxT("Angle"))->Enable(bEnable);
+	pg->GetProperty(wxT("Scale"))->Enable(bEnable);
+	pg->GetProperty(wxT("Scale.dx"))->Enable(bEnable);
+	pg->GetProperty(wxT("Scale.dy"))->Enable(bEnable);
 }
 
 void MultiSpritesPropertySetting::updateProperties(wxPropertyGrid* pg)
 {
-	Vector pos = getSamePosition();
 	pg->GetProperty(wxT("Align"))->SetValue(wxT("none"));
 	pg->GetProperty(wxT("Center"))->SetValue(wxT("none"));
-	pg->GetProperty(wxT("X"))->SetValue(pos.x);
-	pg->GetProperty(wxT("Y"))->SetValue(pos.y);
+	Vector pos = getSamePosition();
+	pg->GetProperty(wxT("All Pos.X"))->SetValue(pos.x);
+	pg->GetProperty(wxT("All Pos.Y"))->SetValue(pos.y);
+
+	pg->GetProperty(wxT("Pos.dx"))->SetValue(0);
+	pg->GetProperty(wxT("Pos.dy"))->SetValue(0);
+	pg->GetProperty(wxT("Angle"))->SetValue(0);
+	pg->GetProperty(wxT("Scale.dx"))->SetValue(1);
+	pg->GetProperty(wxT("Scale.dy"))->SetValue(1);
 }
 
 void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
@@ -92,6 +154,8 @@ void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
 	Vector pos = getSamePosition();
 
 	pg->Clear();
+
+	pg->Append(new wxPropertyCategory("POSITION", wxPG_LABEL));
 
 	static const wxChar* align_labels[] = { wxT("none"),
 		wxT("left"), wxT("right"), wxT("up"), wxT("down"), wxT("center x"), wxT("center y"), NULL };
@@ -101,13 +165,38 @@ void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
 		wxT("horizontal"), wxT("vertical"), wxT("relative"), NULL };
 	pg->Append(new wxEnumProperty(wxT("Center"), wxPG_LABEL, center_labels));
 
-	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, pos.x));
-	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
-	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
+	wxPGProperty* allPosProp = pg->Append(new wxStringProperty(wxT("All Pos"), wxPG_LABEL, wxT("<composed>")));
+	allPosProp->SetExpanded(false);
+	pg->AppendIn(allPosProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, pos.x));
+	pg->SetPropertyAttribute(wxT("All Pos.X"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("All Pos.X"), "Precision", 1);
+	pg->AppendIn(allPosProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, pos.y));
+	pg->SetPropertyAttribute(wxT("All Pos.Y"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("All Pos.Y"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, pos.y));
-	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
-	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
+	pg->Append(new wxPropertyCategory("CHANGE", wxPG_LABEL));
+
+	wxPGProperty* posProp = pg->Append(new wxStringProperty(wxT("Pos"), wxPG_LABEL, wxT("<composed>")));
+	posProp->SetExpanded(false);
+	pg->AppendIn(posProp, new wxFloatProperty(wxT("dx"), wxPG_LABEL, 0));
+	pg->SetPropertyAttribute(wxT("Pos.dx"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Pos.dx"), "Precision", 1);
+	pg->AppendIn(posProp, new wxFloatProperty(wxT("dy"), wxPG_LABEL, 0));
+	pg->SetPropertyAttribute(wxT("Pos.dy"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Pos.dy"), "Precision", 1);
+
+	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, 0));
+	pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("deg"));
+	pg->SetPropertyAttribute(wxT("Angle"), "Precision", 1);
+
+	wxPGProperty* scaleProp = pg->Append(new wxStringProperty(wxT("Scale"), wxPG_LABEL, wxT("<composed>")));
+	scaleProp->SetExpanded(false);
+	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("dx"), wxPG_LABEL, 1));
+	pg->SetPropertyAttribute(wxT("Scale.dx"), wxPG_ATTR_UNITS, wxT("multiple"));
+	pg->SetPropertyAttribute(wxT("Scale.dx"), "Precision", 2);
+	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("dy"), wxPG_LABEL, 1));
+	pg->SetPropertyAttribute(wxT("Scale.dy"), wxPG_ATTR_UNITS, wxT("multiple"));
+	pg->SetPropertyAttribute(wxT("Scale.dy"), "Precision", 2);
 }
 
 void MultiSpritesPropertySetting::align(const wxAny& value)
