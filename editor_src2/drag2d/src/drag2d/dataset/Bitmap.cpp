@@ -51,9 +51,9 @@ void Bitmap::getImage(const wxString& filepath, wxImage& image)
 
 	wxRect wx_rect;
 	wx_rect.SetLeft(rect.xMin);
-	wx_rect.SetRight(rect.xMax);
+	wx_rect.SetRight(rect.xMax - 1);
 	wx_rect.SetTop(rect.yMin - offset);
-	wx_rect.SetBottom(rect.yMax - offset);
+	wx_rect.SetBottom(rect.yMax - offset - 1);
 
 	image = totimg.GetSubImage(wx_rect);
 }
