@@ -331,6 +331,22 @@
 					RelativePath="..\..\..\src\easyanimation\view\PreviewDialog.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewSettings.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewSettings.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="stage"

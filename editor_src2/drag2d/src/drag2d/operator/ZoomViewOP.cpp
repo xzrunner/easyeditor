@@ -7,10 +7,11 @@ namespace d2d
 {
 
 ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
-					   bool bOpenRightTap) 
+					   bool bOpenRightTap, bool bOpenLeftTap) 
 	: AbstractEditOP(editPanel)
-	, m_openRightTap(bOpenRightTap)
 	, m_bMouseMoveFocus(bMouseMoveFocus)
+	, m_openRightTap(bOpenRightTap)
+	, m_openLeftTap(bOpenLeftTap)
 	, m_onRightBtnPan(false)
 {
 	m_lastPos.setInvalid();
@@ -18,24 +19,24 @@ ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
 
 bool ZoomViewOP::onKeyDown(int keyCode)
 {
-	if (!Settings::bZoomOnlyUseMouseWheel && keyCode == WXK_SPACE)
+	if (m_openLeftTap && keyCode == WXK_SPACE)
 		m_editPanel->SetCursor(wxCURSOR_HAND);
 	return false;
 }
 
 bool ZoomViewOP::onKeyUp(int keyCode)
 {
-	if (!Settings::bZoomOnlyUseMouseWheel && keyCode == WXK_SPACE)
+	if (m_openLeftTap && keyCode == WXK_SPACE)
 		m_editPanel->SetCursor(wxCURSOR_ARROW);
 	return false;
 }
 
 bool ZoomViewOP::onMouseLeftDown(int x, int y)
 {
-	if (!Settings::bZoomOnlyUseMouseWheel)
+	if (m_openLeftTap)
 		m_lastPos.setInvalid();
 
-	if (!Settings::bZoomOnlyUseMouseWheel && wxGetKeyState(WXK_SPACE))
+	if (m_openLeftTap && wxGetKeyState(WXK_SPACE))
 	{
 		m_lastPos.set(x, y);
 		return true;
@@ -48,7 +49,7 @@ bool ZoomViewOP::onMouseLeftDown(int x, int y)
 
 bool ZoomViewOP::onMouseLeftUp(int x, int y)
 {
-	if (!Settings::bZoomOnlyUseMouseWheel && wxGetKeyState(WXK_SPACE))
+	if (m_openLeftTap && wxGetKeyState(WXK_SPACE))
 	{
 		m_lastPos.setInvalid();
 		return true;
@@ -97,7 +98,7 @@ bool ZoomViewOP::onMouseMove(int x, int y)
 
 bool ZoomViewOP::onMouseDrag(int x, int y)
 {
-	if (Settings::bZoomOnlyUseMouseWheel) return false;
+	if (!m_openLeftTap) return false;
 
 	if (wxGetKeyState(WXK_SPACE) || m_onRightBtnPan)
 	{
