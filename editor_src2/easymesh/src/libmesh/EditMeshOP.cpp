@@ -96,7 +96,7 @@ bool EditMeshOP::onDraw() const
 		mesh->drawInfoXY();
 	}
 
-	d2d::PrimitiveDraw::drawCross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
+	d2d::PrimitiveDraw::cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
 	d2d::PrimitiveDraw::drawCircle(m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
 	
 	if (SelectNodesOP::onDraw())

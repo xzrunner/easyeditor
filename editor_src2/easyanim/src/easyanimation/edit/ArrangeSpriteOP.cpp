@@ -61,7 +61,7 @@ bool ArrangeSpriteOP::onDraw() const
 	{
 		const d2d::Colorf COLOR = d2d::Colorf(1, 0, 0);
 		d2d::PrimitiveDraw::drawCircle(m_center, RADIUS, false, 2, COLOR);
-		d2d::PrimitiveDraw::drawCross(m_center, LENGTH, COLOR);
+		d2d::PrimitiveDraw::cross(m_center, LENGTH, COLOR);
 	}
 
 	return false;
