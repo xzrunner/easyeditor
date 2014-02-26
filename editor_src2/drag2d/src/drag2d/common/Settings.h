@@ -12,6 +12,8 @@ namespace d2d
 		static int ctlPosSize;
 		static bool bDisplayTrisEdge, bDisplayPolyBound;
 
+		static bool bSpriteCapture;
+
 		enum DrawType
 		{
 			e_DrawBoth = 0,
