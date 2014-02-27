@@ -55,7 +55,6 @@ def call_tex_pack(png, tex, res, redundant_files):
         '--extrude 1',
         '--data %s' % tex,
         '--format json-array',
-        '--scale 0.5',
         '"%s"' % res,
         '2> %s' % TMP_FILE,
         ])
@@ -166,7 +165,7 @@ def run_pentagon():
 
 ######################################### package ########################################################
 def pack_load():
-    cmd = "cocpackage_load.exe %s %s %s 0.5" % (res, tex2, out)
+    cmd = "cocpackage_load.exe %s %s %s" % (res, tex2, out)
     _run_cmd(cmd) 
 
 ######################################### merge ######################################################## 
