@@ -29,36 +29,6 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
-			"angle" : 0.0,
-			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "tid_button_info_fontblank.json",
-			"font" : "",
-			"font_filename" : "",
-			"label_height" : 17,
-			"label_width" : 91,
-			"multi color" : "0xffffffff",
-			"name" : "TID_BUTTON_UPGRADE_TROOPS",
-			"position" : 
-			{
-				"x" : 0.2250061035156250,
-				"y" : -35.50
-			},
-			"size" : 12,
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
 			"filepath" : "icon_turn_over.png",
@@ -77,6 +47,36 @@
 			"y mirror" : false,
 			"y offset" : -1.0,
 			"y scale" : 0.5319494605064392,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "tid_button_info_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 91,
+			"multi color" : "0xffffffff",
+			"name" : "TID_BUTTON_TITLE",
+			"position" : 
+			{
+				"x" : 0.2250061035156250,
+				"y" : -35.50
+			},
+			"size" : 12,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	],
