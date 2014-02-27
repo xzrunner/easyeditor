@@ -10,7 +10,7 @@
 
 #include "common/tools.h"
 
-#define USE_SOIL
+//#define USE_SOIL
 
 namespace d2d
 {

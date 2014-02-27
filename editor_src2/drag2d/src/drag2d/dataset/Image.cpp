@@ -178,9 +178,12 @@ void Image::removeTransparentBorder()
 
 bool Image::isTransparent(unsigned char* pixels, int x, int y)
 {
+#ifdef USE_SOIL
 	// image data from top to bottom
-//	return pixels[(m_width * y + x) * m_channels + m_channels - 1] == 0;
 	return pixels[(m_width * (m_height - y - 1) + x) * m_channels + m_channels - 1] == 0;
+#else
+	return pixels[(m_width * y + x) * m_channels + m_channels - 1] == 0;
+#endif
 }
 
 } // d2d
