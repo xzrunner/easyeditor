@@ -629,7 +629,7 @@ void PrimitiveDraw::cross(const Vector& center, float xedge, float yedge, const 
 
 //////////////////////////////////////////////////////////////////////////
 
-void PrimitiveDraw::lineStypeBegin(const LineStype& style)
+void PrimitiveDraw::lineStypeBegin(const LineStyle& style)
 {
 	if (style == LS_DEFAULT)
 		return;
@@ -649,7 +649,7 @@ void PrimitiveDraw::lineStypeBegin(const LineStype& style)
 	}
 }
 
-void PrimitiveDraw::lineStypeEnd(const LineStype& style)
+void PrimitiveDraw::lineStypeEnd(const LineStyle& style)
 {
 	if (style == LS_DEFAULT)
 		return;

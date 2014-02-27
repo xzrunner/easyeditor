@@ -5,7 +5,7 @@
 
 namespace d2d
 {
-	enum LineStype
+	enum LineStyle
 	{
 		LS_DEFAULT = 0,
 		LS_DOT,
@@ -18,13 +18,20 @@ namespace d2d
 		bool fill;
 		float size;
 		Colorf color;
-		LineStype lineStyle;
+		LineStyle lineStyle;
 
 		ShapeStyle() 
 			: fill(false)
 			, size(2)
 			, color(0,0,0,1)
 			, lineStyle(LS_DEFAULT) 
+		{}
+
+		ShapeStyle(bool _fill, float _size, const Colorf& _color, LineStyle _stype) 
+			: fill(_fill)
+			, size(_size)
+			, color(_color)
+			, lineStyle(_stype) 
 		{}
 	};
 }

@@ -47,8 +47,8 @@ namespace d2d
 		static void cross(const Vector& center, float xedge, float yedge, const Colorf& color, float size = 2);
 
 	private:
-		static void lineStypeBegin(const LineStype& style);
-		static void lineStypeEnd(const LineStype& style);
+		static void lineStypeBegin(const LineStyle& style);
+		static void lineStypeEnd(const LineStyle& style);
 
 	}; // PrimitiveDraw
 }
