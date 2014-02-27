@@ -29,6 +29,7 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 
 	EVT_MENU(wxID_EXIT, Frame::onQuit)
 	EVT_MENU(ID_PREVIEW, Frame::onPreview)
+	EVT_MENU(ID_SETTINGS, Frame::onSettings)
 //	EVT_MENU(wxID_HELP, Frame::onAbout)
 
 	EVT_MENU(ID_CODESETTING, Frame::onCodeSetting)
@@ -158,11 +159,18 @@ void Frame::onCodeLove2d(wxCommandEvent& event)
  	dlg.ShowModal();
 }
 
+void Frame::onSettings(wxCommandEvent& event)
+{
+	d2d::SettingsDialog dlg(this);
+	dlg.ShowModal();
+}
+
 void Frame::initMenuBar()
 {
 	wxMenuBar* menuBar = new wxMenuBar;
 	menuBar->Append(initFileBar(), "&File");
 	menuBar->Append(initViewBar(), "&View");
+	menuBar->Append(initSettingsBar(), "&Settings");
 	menuBar->Append(initCodesBar(), "&Codes");
 //	menuBar->Append(initHelpBar(), "&Help");	
 	SetMenuBar(menuBar);
@@ -190,6 +198,14 @@ wxMenu* Frame::initViewBar()
 
 	return viewMenu;
 }
+
+wxMenu* Frame::initSettingsBar()
+{
+	wxMenu* settingsMenu = new wxMenu;
+	settingsMenu->Append(ID_SETTINGS, wxT("Settings"), wxT("Settings"));
+	return settingsMenu;
+}
+
 
 wxMenu* Frame::initHelpBar()
 {
