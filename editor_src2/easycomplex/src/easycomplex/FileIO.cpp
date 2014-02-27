@@ -16,13 +16,7 @@ namespace ecomplex
 		for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 			task->m_viewlist->insert(symbol->m_sprites[i]);
 
-		// history op list
-		Json::Value value;
-		Json::Reader reader;
-		std::ifstream fin(filename);
-		reader.parse(fin, value);
-		fin.close();
-		task->m_stage->loadHistoryList(value, symbol->m_sprites);
+		task->m_stage->loadHistoryList(filename, symbol->m_sprites);
 	}
 
 	void FileIO::store(const Task* task, const char* filename)

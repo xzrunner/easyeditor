@@ -38,12 +38,7 @@ void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol,
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = store(symbol->m_sprites[i], dir);
 
-	editpanel->saveHistoryList(value, symbol->m_sprites);
-
-	Json::StyledStreamWriter writer;
-	std::ofstream fout(filepath);
-	writer.write(fout, value);
-	fout.close();
+	editpanel->saveHistoryList(filepath, symbol->m_sprites);
 }
 
 void FileSaver::centerSymbol(Symbol* symbol)
@@ -67,4 +62,5 @@ Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dir)
 	sprite->store(value);
 	return value;
 }
+
 } // complex

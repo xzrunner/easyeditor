@@ -12,6 +12,7 @@
 *.gif
 *.html
 *.dll
+*_history.json
 deprecated
 .svn
 
