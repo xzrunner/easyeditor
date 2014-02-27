@@ -4,6 +4,7 @@
 #include "render/Shader.h"
 #include "common/config.h"
 #include "common/tools.h"
+#include "common/Settings.h"
 
 #include <SOIL/SOIL.h>
 
@@ -51,9 +52,9 @@ bool Image::loadFromFile(const wxString& filepath)
   		GL10::GetTexLevelParameteriv(GL10::GL_TEXTURE_2D, 0, GL10::GL_TEXTURE_HEIGHT, &m_height);
   		GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 #endif
-
- 		removeTransparentBorder();
-
+		if (Settings::bImageEdgeClip) {
+			removeTransparentBorder();
+		}
  		return true;
  	}
 }

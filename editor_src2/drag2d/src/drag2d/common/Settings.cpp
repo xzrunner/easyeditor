@@ -7,6 +7,7 @@ int Settings::ctlPosSize = 0;
 bool Settings::bDisplayTrisEdge = false;
 bool Settings::bDisplayPolyBound = true;
 bool Settings::bSpriteCapture = true;
+bool Settings::bImageEdgeClip = true;
 
 Settings::DrawType Settings::drawType = e_DrawBoth;
 

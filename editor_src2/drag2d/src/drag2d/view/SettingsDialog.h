@@ -14,7 +14,12 @@ public:
 private:
 	void initLayout();
 
+	wxSizer* initEditPanel();
+	wxSizer* initImagePanel();
+	wxSizer* initViewPanel();
+
 	void onChangeSpriteCapture(wxCommandEvent& event);
+	void onChangeImageEdgeClip(wxCommandEvent& event);
 
 }; // SettingsDialog
 
