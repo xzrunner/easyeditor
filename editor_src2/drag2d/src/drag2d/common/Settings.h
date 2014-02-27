@@ -14,6 +14,7 @@ namespace d2d
 
 		static bool bSpriteCapture;
 		static bool bImageEdgeClip;
+		static bool bVisibleImgEdge;
 
 		enum DrawType
 		{

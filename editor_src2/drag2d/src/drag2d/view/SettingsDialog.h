@@ -20,6 +20,7 @@ private:
 
 	void onChangeSpriteCapture(wxCommandEvent& event);
 	void onChangeImageEdgeClip(wxCommandEvent& event);
+	void onChangeVisibleImageEdge(wxCommandEvent& event);
 
 }; // SettingsDialog
 

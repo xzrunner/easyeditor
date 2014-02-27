@@ -8,6 +8,7 @@ bool Settings::bDisplayTrisEdge = false;
 bool Settings::bDisplayPolyBound = true;
 bool Settings::bSpriteCapture = true;
 bool Settings::bImageEdgeClip = true;
+bool Settings::bVisibleImgEdge = false;
 
 Settings::DrawType Settings::drawType = e_DrawBoth;
 

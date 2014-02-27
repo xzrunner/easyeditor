@@ -26,6 +26,9 @@ namespace d2d
 		int width() const { return m_region.xLength(); }
 		int height() const { return m_region.yLength(); }
 
+		int oldWidth() const { return m_width; }
+		int oldHeight() const { return m_height; }
+
 		void draw(const Rect& r) const;
 
 		Rect getRegion() const { return m_region; }
