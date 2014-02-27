@@ -22,5 +22,7 @@ namespace eanim
 
 		std::map<d2d::ISprite*, int> m_map2Frame;
 
+		bool m_enable;
+
 	}; // SpriteObserver
 }
