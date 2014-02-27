@@ -1,0 +1,116 @@
+
+{
+	"name" : "char_info_fujia",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6175-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 36.04999923706055,
+				"y" : -227.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "char_info_fujia_nograss_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite35",
+			"position" : 
+			{
+				"x" : 50.74179077148438,
+				"y" : -25.46820259094238
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -54.250,
+			"x scale" : 0.5646193027496338,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -203.50,
+			"y scale" : 0.5646193027496338,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 41.26101684570313,
+				"dy" : 167.7060852050781,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 107.4380569458008,
+				"dy" : 71.90084838867188,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -157.0248565673828,
+				"dy" : -222.3141174316406,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 2.479339599609375,
+				"dy" : -4.132232666015625,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 6.6115722656250,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		null
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

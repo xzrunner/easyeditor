@@ -13,25 +13,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_daoke_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 1,
 					"tween" : false
 				},
@@ -41,25 +46,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_shenshe_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 2,
 					"tween" : false
 				},
@@ -69,25 +79,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "cha_info_mojin_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 3,
 					"tween" : false
 				},
@@ -97,25 +112,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_jiabing_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 4,
 					"tween" : false
 				},
@@ -125,25 +145,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_sishi_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 5,
 					"tween" : false
 				},
@@ -153,25 +178,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_tianzai_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -14.0,
 								"y" : 229.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 6,
 					"tween" : false
 				},
@@ -181,25 +211,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_daoshi_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 7,
 					"tween" : false
 				},
@@ -209,25 +244,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_shennv_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -26.0,
 								"y" : 235.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 8,
 					"tween" : false
 				},
@@ -237,25 +277,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_dapeng_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -17.0,
 								"y" : 203.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 9,
 					"tween" : false
 				},
@@ -265,25 +310,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_xueying_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -16.0,
 								"y" : 134.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 10,
 					"tween" : false
 				},
@@ -293,25 +343,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_baji_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 11,
 					"tween" : false
 				},
@@ -321,25 +376,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "char_info_yingyan_complex.json",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -37.0,
 								"y" : 226.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 12,
 					"tween" : false
 				},
@@ -349,25 +409,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6290-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 120.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 13,
 					"tween" : false
 				},
@@ -377,25 +442,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6291-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 120.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 14,
 					"tween" : false
 				},
@@ -405,25 +475,30 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6292-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 120.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 15,
 					"tween" : false
 				},
@@ -433,26 +508,97 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6293-tongyong-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 120.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 16,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "char_info_langqi_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite92",
+							"position" : 
+							{
+								"x" : -38.0,
+								"y" : 227.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 75.83549499511719,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -118.0320892333984,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 17,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "char_info_fujia_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite110",
+							"position" : 
+							{
+								"x" : -36.0,
+								"y" : 226.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 36.05000305175781,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -131.3343200683594,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 18,
 					"tween" : false
 				}
 			],

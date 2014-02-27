@@ -1,6 +1,6 @@
 
 {
-	"name" : "buildingbutton_collect_dark_elixir",
+	"name" : "buildingbutton_move",
 	"sprite" : 
 	[
 		
@@ -39,7 +39,7 @@
 			"label_height" : 17,
 			"label_width" : 91,
 			"multi color" : "0xffffffff",
-			"name" : "TID_BUTTON_COLLECT",
+			"name" : "TID_BUTTON_UPGRADE_TROOPS",
 			"position" : 
 			{
 				"x" : 0.2250061035156250,
@@ -61,9 +61,9 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "icon_wine_bottle.png",
+			"filepath" : "icon_cross_arrow.png",
 			"multi color" : "0xffffffff",
-			"name" : "_sprite3",
+			"name" : "_sprite9",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -71,12 +71,12 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : -0.50,
-			"x scale" : 0.6999999880790710,
+			"x offset" : 0.0,
+			"x scale" : 0.3924731910228729,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : -1.0,
-			"y scale" : 0.6999999880790710,
+			"y offset" : -2.0,
+			"y scale" : 0.3924731910228729,
 			"y shear" : 0.0
 		}
 	],

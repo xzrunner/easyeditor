@@ -1,0 +1,167 @@
+
+{
+	"name" : "char_info_langqi",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6175-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 36.04999923706055,
+				"y" : -227.4999694824219
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "char_info_langqi_nograss_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite25",
+			"position" : 
+			{
+				"x" : 27.12103271484375,
+				"y" : -0.9562301635742188
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 90.50,
+			"x scale" : 0.5683293938636780,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -206.0,
+			"y scale" : 0.5683293938636780,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		null,
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -40.26275253295898,
+				"dy" : 270.5657043457031,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 49.92581176757813,
+				"dy" : -17.71561431884766,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -218.6479949951172,
+				"dy" : -186.9652099609375,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -151.5047912597656,
+				"dy" : 68.30133819580078,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -235.4000091552734,
+				"dy" : -343.2000122070313,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 204.6000061035156,
+				"dy" : 185.8999938964844,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 72.60000610351563,
+				"dy" : -213.4000091552734,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -69.29999542236328,
+				"dy" : -110.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -6.599998474121094,
+				"dy" : -27.50,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 0, 1 ],
+			"val" : 
+			{
+				"dx" : -519.2000122070313,
+				"dy" : -380.6000061035156,
+				"type" : 0
+			}
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

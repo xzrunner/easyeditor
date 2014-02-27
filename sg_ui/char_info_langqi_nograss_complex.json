@@ -1,0 +1,237 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_main.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite1",
+			"position" : 
+			{
+				"x" : -138.0,
+				"y" : -9.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite2",
+			"position" : 
+			{
+				"x" : -151.0,
+				"y" : -174.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part03.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite3",
+			"position" : 
+			{
+				"x" : -177.0,
+				"y" : -254.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part04.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite4",
+			"position" : 
+			{
+				"x" : 23.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part05.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite5",
+			"position" : 
+			{
+				"x" : 196.50,
+				"y" : -167.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part06.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite6",
+			"position" : 
+			{
+				"x" : 290.50,
+				"y" : -248.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part07.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite7",
+			"position" : 
+			{
+				"x" : -75.50,
+				"y" : -354.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part08.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite8",
+			"position" : 
+			{
+				"x" : 77.50,
+				"y" : -406.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "army_langqi_part09.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite9",
+			"position" : 
+			{
+				"x" : 240.50,
+				"y" : -351.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}
