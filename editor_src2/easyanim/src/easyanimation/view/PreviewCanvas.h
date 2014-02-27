@@ -5,38 +5,42 @@
 
 namespace eanim
 {
-	struct PlaySettings;
 
-	class PreviewCanvas : public d2d::OrthoCanvas
+struct PlaySettings;
+class PreviewControl;
+
+class PreviewCanvas : public d2d::OrthoCanvas
+{
+public:
+	PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
+		PreviewControl& control);
+
+protected:
+	virtual void initGL();
+	virtual void onDraw();
+
+	void onTimer(wxTimerEvent& event);
+
+private:
+	void drawStageData();
+
+	void getCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
+
+private:
+	enum
 	{
-	public:
-		PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings);
+		TIMER_ID = 1000
+	};
 
-	protected:
-		virtual void initGL();
-		virtual void onDraw();
+private:
+	wxTimer m_timer;
+	PreviewControl& m_control;
 
-		void onTimer(wxTimerEvent& event);
+	const PlaySettings& m_settings;
 
-	private:
-		void drawStageData();
+	DECLARE_EVENT_TABLE()
 
-		void getCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
+}; // PreviewCanvas
 
-	private:
-		enum
-		{
-			TIMER_ID = 1000
-		};
-
-	private:
-		wxTimer m_timer;
-		int m_currFrame;
-
-		const PlaySettings& m_settings;
-
-		DECLARE_EVENT_TABLE()
-
-	}; // PreviewCanvas
 }
 

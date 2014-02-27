@@ -4,6 +4,7 @@
 #include <drag2d.h>
 
 #include "PreviewSettings.h"
+#include "PreviewControl.h"
 
 namespace eanim
 {
@@ -26,6 +27,8 @@ namespace eanim
 		d2d::EditPanel* m_stage;
 
 		PlaySettings m_settings;
+
+		PreviewControl m_control;
 
 	}; // PreviewDialog
 }
