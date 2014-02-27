@@ -11,6 +11,7 @@ namespace eanim
 	{
 	public:
 		ArrangeSpriteOP(StagePanel* stage);
+		virtual ~ArrangeSpriteOP();
 
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);
@@ -18,16 +19,28 @@ namespace eanim
 		
 		virtual bool onDraw() const;
 
+		void addCross();
+		void delCross();
+
 	private:
-		static const int RADIUS = 10;
-		static const int LENGTH = 100;
+		struct Cross
+		{
+			static const int RADIUS = 10;
+			static const int LENGTH = 100;
+
+			Cross();
+			void draw() const;
+			bool contain(const d2d::Vector& p) const;
+
+			d2d::Vector pos;
+
+		}; // Cross
 
 	private:
 		const StageSettings& m_settings;
 
-		d2d::Vector m_center;
-
-		bool m_bMoveCenter;
+		std::vector<Cross*> m_crosses;
+		Cross* m_selected;
 
 	}; // ArrangeSpriteOP
 }

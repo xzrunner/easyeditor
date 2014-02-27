@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-ShapeStyle GREY_THIN_LINE(false, 1, GREY, LS_DEFAULT);
+static ShapeStyle GREY_THIN_LINE(false, 1, GREY, LS_DEFAULT);
 
 }
 

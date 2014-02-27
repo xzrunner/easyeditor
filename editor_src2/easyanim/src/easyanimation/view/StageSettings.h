@@ -7,11 +7,11 @@ namespace eanim
 class StageSettings
 {
 public:
-	bool bDrawCross;
-
-	StageSettings() {
-		bDrawCross = false;
-	}
+// 	bool bDrawCross;
+// 
+// 	StageSettings() {
+// 		bDrawCross = false;
+// 	}
 
 }; // StageSettings
 
