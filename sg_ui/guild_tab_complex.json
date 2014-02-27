@@ -1,7 +1,19 @@
 
 {
 	"name" : "guild_tab",
-	"redo" : null,
+	"redo" : 
+	[
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 22.0,
+				"dy" : -30.0,
+				"type" : 0
+			}
+		}
+	],
 	"sprite" : 
 	[
 		
@@ -15,13 +27,15 @@
 			"position" : 
 			{
 				"x" : 63.0,
-				"y" : -20.0
+				"y" : -21.0
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -36,13 +50,15 @@
 			"position" : 
 			{
 				"x" : 274.0,
-				"y" : -20.0
+				"y" : -21.0
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
