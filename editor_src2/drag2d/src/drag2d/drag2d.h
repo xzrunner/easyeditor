@@ -163,6 +163,7 @@
 #include "common/Context.h"
 #include "common/Exception.h"
 #include "common/color_trans.h"
+#include "common/color_config.h"
 #include "common/runtime.h"
 #include "common/scripts.h"
 #include "common/JsonTools.h"

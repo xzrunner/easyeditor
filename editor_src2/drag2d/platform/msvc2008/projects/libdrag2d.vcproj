@@ -1201,6 +1201,10 @@
 				RelativePath="..\..\..\src\drag2d\render\ShapeStyle.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\style_config.h"
+				>
+			</File>
 			<Filter
 				Name="opengl"
 				>
@@ -1294,30 +1298,6 @@
 			Name="common"
 			>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\Color.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\color_trans.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\color_trans.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\config.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Context.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\drag2d\common\Exception.cpp"
 				>
 				<FileConfiguration
@@ -1342,23 +1322,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\filetools.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\filetools.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\drag2d\common\interface.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\JsonTools.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\JsonTools.h"
 				>
 			</File>
 			<File
@@ -1371,14 +1335,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\common\Log.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Math.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Math.h"
 				>
 			</File>
 			<File
@@ -1402,47 +1358,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\Random.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Rect.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\drag2d\common\ResourcesMgr.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\runtime.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\runtime.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\scripts.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\scripts.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Settings.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Settings.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\tools.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\types.h"
 				>
 			</File>
 			<File
@@ -1451,10 +1367,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\common\UserDataImpl.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\Vector.h"
 				>
 			</File>
 			<File
@@ -1578,6 +1490,122 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\common\FileNameTools.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="color"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Color.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\color_config.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\color_trans.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\color_trans.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="scripts"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\runtime.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\runtime.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\scripts.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\scripts.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="tools"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\filetools.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\filetools.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\JsonTools.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\JsonTools.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\tools.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="math"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Math.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Math.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Random.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Rect.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Vector.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="settings"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\config.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Context.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Context.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Settings.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Settings.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\types.h"
 					>
 				</File>
 			</Filter>

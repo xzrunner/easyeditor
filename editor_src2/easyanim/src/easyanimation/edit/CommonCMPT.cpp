@@ -32,24 +32,24 @@ wxSizer* CommonCMPT::initEditPanel()
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
 	wxBoxSizer* sizer = new wxBoxSizer(orient);
 	sizer->AddSpacer(10);
-	initLoadPanel(sizer);
+	sizer->Add(initLoadPanel());
 	sizer->AddSpacer(20);
-	initFillingPanel(sizer);
+	sizer->Add(initFillingPanel());
 	sizer->AddSpacer(10);
-	initSettingsPanel(sizer);
+	sizer->Add(initSettingsPanel());
 
 	return sizer;
 }
 
-void CommonCMPT::initLoadPanel(wxSizer* sizer)
+wxSizer* CommonCMPT::initLoadPanel()
 {
-	wxSizer* loadSizer = new wxBoxSizer(wxVERTICAL);
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	// folder
 	{
 		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load Folder"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
 			wxCommandEventHandler(CommonCMPT::onLoadFromFolder));
-		loadSizer->Add(btnLoad);
+		sizer->Add(btnLoad);
 	}
 	sizer->AddSpacer(10);
 	// all image
@@ -57,16 +57,16 @@ void CommonCMPT::initLoadPanel(wxSizer* sizer)
 		wxButton* btnLoad = new wxButton(this, wxID_ANY, wxT("Load List"));
 		Connect(btnLoad->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
 			wxCommandEventHandler(CommonCMPT::onLoadFromList));
-		loadSizer->Add(btnLoad);
+		sizer->Add(btnLoad);
 	}
-	sizer->Add(loadSizer);
+	return sizer;
 }
 
-void CommonCMPT::initFillingPanel(wxSizer* sizer)
+wxSizer* CommonCMPT::initFillingPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
-	wxSizer* fillingSizer = new wxStaticBoxSizer(bounding, orient);
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, orient);
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("tot frames: ")));
@@ -75,29 +75,33 @@ void CommonCMPT::initFillingPanel(wxSizer* sizer)
 			wxSP_ARROW_KEYS, 10, 1000, 0);
 		sizer->Add(m_filling);
 
-		fillingSizer->Add(sizer);
+		sizer->Add(sizer);
 	}
 	{
 		wxButton* btnFill = new wxButton(this, wxID_ANY, wxT("Filling"));
 		Connect(btnFill->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
 			wxCommandEventHandler(CommonCMPT::onFillingFrames));
-		fillingSizer->Add(btnFill);
+		sizer->Add(btnFill);
 	}
-	sizer->Add(fillingSizer);
+	return sizer;
 }
 
-void CommonCMPT::initSettingsPanel(wxSizer* sizer)
+wxSizer* CommonCMPT::initSettingsPanel()
 {
-	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Settings"));
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("¸¨ÖúÏß"));
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
-	wxSizer* settingsSizer = new wxStaticBoxSizer(bounding, orient);
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, orient);
 
-	wxCheckBox* checkCross = new wxCheckBox(this, wxID_ANY, wxT("¸¨ÖúÏß"));
-	checkCross->SetValue(m_settings.bDrawCross);
-	Connect(checkCross->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(CommonCMPT::onSetCross));
-	settingsSizer->Add(checkCross, 0);
+	wxButton* btnAdd = new wxButton(this, wxID_ANY, "+", wxDefaultPosition, wxSize(25, 25));
+	sizer->Add(btnAdd, 0, wxLEFT | wxRIGHT, 5);
+	Connect(btnAdd->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+		wxCommandEventHandler(CommonCMPT::onAddCross));
+	wxButton* btnDel = new wxButton(this, wxID_ANY, "-", wxDefaultPosition, wxSize(25, 25));
+	sizer->Add(btnDel, 0, wxLEFT | wxRIGHT, 5);
+	Connect(btnDel->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+		wxCommandEventHandler(CommonCMPT::onDelCross));
 
-	sizer->Add(settingsSizer);
+	return sizer;
 }
 
 class DirTraverser : public wxDirTraverser
@@ -255,10 +259,15 @@ void CommonCMPT::onChangeAnim(wxCommandEvent& event)
 	FileIO::reload();
 }
 
-void CommonCMPT::onSetCross(wxCommandEvent& event)
+void CommonCMPT::onAddCross(wxCommandEvent& event)
 {
-	m_settings.bDrawCross = event.IsChecked();
-	m_editPanel->Refresh();
+	static_cast<ArrangeSpriteOP*>(m_editOP)->addCross();
+
+}
+
+void CommonCMPT::onDelCross(wxCommandEvent& event)
+{
+	static_cast<ArrangeSpriteOP*>(m_editOP)->delCross();
 }
 
 }

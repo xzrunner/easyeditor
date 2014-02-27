@@ -13,6 +13,8 @@ namespace d2d
 		static bool bDisplayTrisEdge, bDisplayPolyBound;
 
 		static bool bSpriteCapture;
+		static bool bImageEdgeClip;
+		static bool bVisibleImgEdge;
 
 		enum DrawType
 		{

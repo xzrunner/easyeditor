@@ -14,21 +14,70 @@ SettingsDialog::SettingsDialog(wxWindow* parent)
 void SettingsDialog::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-//	sizer->AddSpacer(20);
+	sizer->AddSpacer(20);
+	sizer->Add(initEditPanel(), 0, wxCENTER);
+	sizer->AddSpacer(20);
+	sizer->Add(initImagePanel(), 0, wxCENTER);
+	SetSizer(sizer);
 
-	wxCheckBox* checkCross = new wxCheckBox(this, wxID_ANY, wxT("¶ÔÏó²¶×½"));
-	checkCross->SetValue(Settings::bSpriteCapture);
-	Connect(checkCross->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-		wxCommandEventHandler(SettingsDialog::onChangeSpriteCapture));
-	sizer->Add(checkCross, 0);
+	sizer->Layout();
+	Refresh();
+}
 
-// 	sizer->Layout();
-// 	Refresh();
+wxSizer* SettingsDialog::initEditPanel()
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("±à¼­"));
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("¶ÔÏó²¶×½"));
+		check->SetValue(Settings::bSpriteCapture);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(SettingsDialog::onChangeSpriteCapture));
+		sizer->Add(check, 0);
+	}
+	return sizer;
+}
+
+wxSizer* SettingsDialog::initImagePanel()
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Í¼Æ¬"));
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("±ßÔµ²Ã¼ô"));
+		check->SetValue(Settings::bImageEdgeClip);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(SettingsDialog::onChangeImageEdgeClip));
+		sizer->Add(check, 0);
+	}
+	sizer->AddSpacer(10);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("ÏÔÊ¾Ô­Ê¼±ß¿ò"));
+		check->SetValue(Settings::bVisibleImgEdge);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(SettingsDialog::onChangeVisibleImageEdge));
+		sizer->Add(check, 0);
+	}
+	return sizer;
+}
+
+wxSizer* SettingsDialog::initViewPanel()
+{
+	return NULL;
 }
 
 void SettingsDialog::onChangeSpriteCapture(wxCommandEvent& event)
 {
 	Settings::bSpriteCapture = event.IsChecked();
+}
+
+void SettingsDialog::onChangeImageEdgeClip(wxCommandEvent& event)
+{
+	Settings::bImageEdgeClip = event.IsChecked();
+}
+
+void SettingsDialog::onChangeVisibleImageEdge(wxCommandEvent& event)
+{
+	Settings::bVisibleImgEdge = event.IsChecked();
 }
 
 }

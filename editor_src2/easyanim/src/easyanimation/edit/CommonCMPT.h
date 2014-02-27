@@ -21,9 +21,9 @@ protected:
 private:
 	wxSizer* initEditPanel();
 
-	void initLoadPanel(wxSizer* sizer);
-	void initFillingPanel(wxSizer* sizer);
-	void initSettingsPanel(wxSizer* sizer);
+	wxSizer* initLoadPanel();
+	wxSizer* initFillingPanel();
+	wxSizer* initSettingsPanel();
 
 	void onLoadFromFolder(wxCommandEvent& event);
 	void onLoadFromList(wxCommandEvent& event);
@@ -32,7 +32,8 @@ private:
 
 	void onChangeAnim(wxCommandEvent& event);
 
-	void onSetCross(wxCommandEvent& event);
+	void onAddCross(wxCommandEvent& event);
+	void onDelCross(wxCommandEvent& event);
 
 private:
 	bool m_vertical;

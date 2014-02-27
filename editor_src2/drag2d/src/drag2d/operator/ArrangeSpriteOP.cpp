@@ -445,14 +445,18 @@ void ArrangeSpriteOP<TBase>::scaleSprite(const Vector& currPos)
 	else if (m_ctrlNodeSelected.type == RIGHT_DOWN)
 		ori = Math::transVector(Vector(hw, -hh), t);
 	Math::getFootOfPerpendicular(center, ori, currPos, &fix);
+
 	float scale = Math::getDistance(center, fix) / Math::getDistance(center, ori);
+	scale += (1 - scale) * 0.5f;
 	if (m_ctrlNodeSelected.type == UP || m_ctrlNodeSelected.type == DOWN)
 		m_selected->setScale(m_selected->getScale().x, scale * m_selected->getScale().y);
 	else if (m_ctrlNodeSelected.type == LEFT || m_ctrlNodeSelected.type == RIGHT)
 		m_selected->setScale(scale * m_selected->getScale().x, m_selected->getScale().y);
 	else		
 		m_selected->setScale(scale * m_selected->getScale().x, scale * m_selected->getScale().y);
-	m_selected->translate(fix - ori);
+
+	Vector offset = (fix - ori) * 0.5f;
+	m_selected->translate(offset);
 
 	if (m_propertyPanel && !m_bDirty)
 	{
