@@ -572,13 +572,6 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		ToolbarPanel::ChildPanel* child = m_toolbar->m_children.back();
 		child->m_pc->symbol = m_library->getSymbol(index);
 		Context::Instance()->stage->m_particle->start();
-
-
-//		Vector pos = m_stage->transPosScreenToProject(x, y);
-//		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-//		sprite->translate(pos);
-//		m_panelImpl->insertSprite(sprite);
-//		sprite->release();
 	}
 
 	return true;
