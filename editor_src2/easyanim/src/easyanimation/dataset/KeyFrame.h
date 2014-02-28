@@ -25,6 +25,7 @@ namespace eanim
 		}
 
 		void insert(d2d::ISprite* sprite);
+		void insertWithClone(d2d::ISprite* sprite);
 		bool remove(d2d::ISprite* sprite);
 		void reorder(const d2d::ISprite* sprite, bool up);
 
