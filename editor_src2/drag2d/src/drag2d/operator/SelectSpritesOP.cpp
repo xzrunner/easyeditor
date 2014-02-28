@@ -4,6 +4,8 @@
 #include "dataset/TextSprite.h"
 #include "dataset/FontSprite.h"
 #include "dataset/Patch9Sprite.h"
+#include "dataset/SymbolMgr.h"
+#include "dataset/SpriteFactory.h"
 #include "component/AbstractEditCMPT.h"
 #include "view/PropertySettingPanel.h"
 #include "view/SpritePropertySetting.h"
@@ -14,6 +16,9 @@
 #include "view/MultiSpritesImpl.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
+
+#include <wx/clipbrd.h>
+#include <sstream>
 
 namespace d2d
 {
@@ -44,31 +49,21 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 	if (DrawRectangleOP::onKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
+	{
 		m_spritesImpl->removeSpriteSelection();	
+	}
 	else if (wxGetKeyState(WXK_CONTROL_X))
 	{
-		clearClipboard();
-		m_selection->traverse(FetchAllVisitor<ISprite>(m_clipboard));
-		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
-			m_clipboard[i]->retain();
+		pasteToSelection();
 		m_spritesImpl->removeSpriteSelection();
 	}
 	else if (m_lastCtrlPress && (keyCode == 'c' || keyCode == 'C')/*wxGetKeyState(WXK_CONTROL_C)*/)
 	{
-		clearClipboard();
-
-		std::vector<ISprite*> sprites;
-		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
-		for (size_t i = 0, n = sprites.size(); i < n; ++i)
-			m_clipboard.push_back(sprites[i]->clone());
+		pasteToSelection();
 	}
 	else if (wxGetKeyState(WXK_CONTROL_V))
 	{
-		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
-		{
-			m_spritesImpl->insertSprite(m_clipboard[i]->clone());
-			m_editPanel->Refresh();
-		}
+		copyFromSelection();
 	}
 
 	m_lastCtrlPress = keyCode == WXK_CONTROL;
@@ -276,11 +271,58 @@ IPropertySetting* SelectSpritesOP::createPropertySetting(const std::vector<ISpri
 	return new MultiSpritesPropertySetting(m_editPanel, sprites);
 }
 
-void SelectSpritesOP::clearClipboard()
+void SelectSpritesOP::pasteToSelection() const
 {
-	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
-		m_clipboard[i]->release();
-	m_clipboard.clear();
+	std::vector<ISprite*> sprites;
+	m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+	Json::Value value;
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		Json::Value& sval = value["sprite"][i];
+		d2d::ISprite* s = sprites[i];
+		if (wxTheClipboard->Open())
+		{
+			sval["filename"] = s->getSymbol().getFilepath().ToStdString();
+			s->store(sval);
+		}
+	}
+	Json::StyledStreamWriter writer;
+	std::stringstream ss;
+	writer.write(ss, value);
+	wxTheClipboard->SetData( new wxTextDataObject(ss.str()));
+	wxTheClipboard->Close();
+}
+
+void SelectSpritesOP::copyFromSelection()
+{
+	if (wxTheClipboard->Open())
+	{
+		if (wxTheClipboard->IsSupported( wxDF_TEXT ))
+		{
+			wxTextDataObject data;
+			wxTheClipboard->GetData( data );
+
+			Json::Value value;
+			Json::Reader reader;
+			std::string test = data.GetText().ToStdString();
+			reader.parse(data.GetText().ToStdString(), value);
+
+			m_selection->clear();
+
+			int i = 0;
+			Json::Value sval = value["sprite"][i++];
+			while (!sval.isNull()) {
+				ISymbol* symbol = SymbolMgr::Instance()->getSymbol(sval["filename"].asString());
+				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+				sprite->load(sval);
+				m_spritesImpl->insertSprite(sprite);
+				m_selection->insert(sprite);
+
+				sval = value["sprite"][i++];
+			}
+		}
+		wxTheClipboard->Close();
+	}
 }
 
 } // d2d
