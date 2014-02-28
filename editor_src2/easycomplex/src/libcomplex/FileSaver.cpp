@@ -38,6 +38,11 @@ void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol,
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = store(symbol->m_sprites[i], dir);
 
+	Json::StyledStreamWriter writer;
+	std::ofstream fout(filepath);
+	writer.write(fout, value);
+	fout.close();
+
 	editpanel->saveHistoryList(filepath, symbol->m_sprites);
 }
 
