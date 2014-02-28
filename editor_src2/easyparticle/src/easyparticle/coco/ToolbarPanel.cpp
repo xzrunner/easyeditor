@@ -67,7 +67,7 @@ wxSizer* ToolbarPanel::initLayout()
 	wxSizer* leftSizer = new wxBoxSizer(wxVERTICAL);
 	wxSizer* rightSizer = new wxBoxSizer(wxVERTICAL);
 	topSizer->Add(leftSizer);
-	leftSizer->AddSpacer(10);
+	topSizer->AddSpacer(10);
 	topSizer->Add(rightSizer);
 
 	// Name
@@ -109,7 +109,7 @@ wxSizer* ToolbarPanel::initLayout()
 	// Emission Time
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("emission_time:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("emission_time(ms):")));
 
 		m_emission_time = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 10, 1000, EMISSION_TIME);
 		Connect(m_emission_time->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetEmissionTime));
@@ -120,7 +120,7 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Life
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Life:"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Life(ms):"));
 		wxSizer* lifeSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -147,7 +147,7 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Hori
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Hori:"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Hori(deg):"));
 		wxSizer* horiSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -174,7 +174,7 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Vert
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Vert:"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Vert(deg):"));
 		wxSizer* vertSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -201,7 +201,7 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Speed
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Spd:"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Spd(pix):"));
 		wxSizer* spdSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -229,7 +229,7 @@ wxSizer* ToolbarPanel::initLayout()
 	// Gravity
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("gravity:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("gravity(pix):")));
 
 		m_gravity = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 10, 50000, GRAVITY);
 		Connect(m_gravity->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetGravity));
@@ -253,7 +253,7 @@ wxSizer* ToolbarPanel::initLayout()
 	// Fadeout Time
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("fadeout_time:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("fadeout_time(ms):")));
 
 		m_fadeout_time = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 10, 5000, FADEOUT_TIME);
 		Connect(m_fadeout_time->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetFadeoutTime));
@@ -279,7 +279,7 @@ wxSizer* ToolbarPanel::initLayout()
 	// Start Radius
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("start radius:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("start radius(pix):")));
 
 		m_start_radius = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 5000, START_RADIUS);
 		Connect(m_start_radius->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetStartRadius));
@@ -492,7 +492,7 @@ initLayout()
 	topSizer->AddSpacer(10);
 	// Scale
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("scale:"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("scale(%):"));
 		wxSizer* scaleSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -519,7 +519,7 @@ initLayout()
 	topSizer->AddSpacer(10);
 	// Rotate
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("rotate:"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("rotate(deg):"));
 		wxSizer* rotateSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
