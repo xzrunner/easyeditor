@@ -69,7 +69,6 @@ namespace coco
 		private:
 			void initLayout();
 
-			void onSetImage(wxCommandEvent& event);
 			void onSetScale(wxSpinEvent& event);
 			void onSetRotate(wxSpinEvent& event); 
 

@@ -303,21 +303,9 @@ wxSizer* ToolbarPanel::initLayout()
  	// components
  	{
 		// Open
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			{
-				wxButton* btn = new wxButton(this, wxID_ANY, wxT("Add"));
-				Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onAddChild));
-				sizer->Add(btn);
-			}
-			sizer->AddSpacer(10);
-			{
-				wxButton* btn = new wxButton(this, wxID_ANY, wxT("Del"));
-				Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onDelChild));
-				sizer->Add(btn);
-			}
-			rightSizer->Add(sizer);
-		}
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Remove"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onDelChild));
+		rightSizer->Add(btn);
 		rightSizer->AddSpacer(10);
 
  		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("components"));
@@ -468,20 +456,6 @@ initLayout()
 {
 	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	topSizer->AddSpacer(10);
-	// Open
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Open..."));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ChildPanel::onSetImage));
-		sizer->Add(btn);
-
-		m_filename = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_READONLY);
-		sizer->Add(m_filename);
-
-		topSizer->Add(sizer);
-	}
-	topSizer->AddSpacer(10);
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -554,22 +528,6 @@ initLayout()
 	topSizer->AddSpacer(10);
 	//
 	SetSizer(topSizer);
-}
-
-void ToolbarPanel::ChildPanel::
-onSetImage(wxCommandEvent& event)
-{
-	wxString filter = wxT("*.png;*.jpg");
-	filter += wxT(";*_complex.json");
-	filter += wxT(";*_anim.json");
-	wxFileDialog dlg(this, wxT("Choose Symbol"), wxEmptyString, 
-		wxEmptyString, filter, wxFD_OPEN);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		m_pc->symbol = d2d::SymbolMgr::Instance()->getSymbol(dlg.GetPath());
-		m_filename->SetLabelText(m_pc->symbol->getFilepath());
-		Context::Instance()->stage->m_particle->start();
-	}
 }
 
 void ToolbarPanel::ChildPanel::
