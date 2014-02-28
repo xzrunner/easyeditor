@@ -49,6 +49,11 @@ void Context::setCurrFrame(int layer, int frame)
 	{
 		reloadViewList(*pFrame);
 		m_last_keyframe = pFrame;
+
+		stage->Refresh();
+		if (keysPanel) {
+			keysPanel->Refresh();
+		}
 	}
 }
 
