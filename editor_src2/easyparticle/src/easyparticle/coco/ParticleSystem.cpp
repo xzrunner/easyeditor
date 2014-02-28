@@ -44,12 +44,6 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::draw()
 {
-// 	glEnable(GL_BLEND);
-// 	if (additive_blend)
-// 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-// 	else
-// 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	vertex vertices[4];
 
 	glPushMatrix();
@@ -64,10 +58,12 @@ void ParticleSystem::draw()
 		{
 			unsigned char a = 255 * p->life / fadeout_time;
 			vertices[0].a = vertices[1].a = vertices[2].a = vertices[3].a = a;
-			glColor4ub(255, 255, 255, a);
+			d2d::Shader::Instance()->color(1, 1, 1, a / 255.0f);
 		}
 		else
-			glColor4ub(255, 255, 255, 255);
+		{
+			d2d::Shader::Instance()->color(1, 1, 1, 1);
+		}
 
 		float gx = p->position[0] * 0.01f,
 			gy = p->position[1] * 0.01f;
@@ -84,8 +80,6 @@ void ParticleSystem::draw()
 
 	glPopAttrib();
 	glPopMatrix();
-
-//	glDisable(GL_BLEND);
 }
 
 //void ParticleSystem::draw()
