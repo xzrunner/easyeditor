@@ -57,6 +57,38 @@ void Context::setCurrFrame(int layer, int frame)
 	}
 }
 
+void Context::setPrevKeyFrame()
+{
+	Layer* pLayer = layers.getLayer(m_curr_layer);
+	if (!pLayer) {
+		return;
+	}
+
+	KeyFrame* prev = pLayer->getPrevKeyFrame(m_curr_frame);
+	if (prev) 
+	{
+		setCurrFrame(m_curr_layer, prev->getTime());
+		stage->Refresh();
+		keysPanel->Refresh();
+	}
+}
+
+void Context::setNextKeyFrame()
+{
+	Layer* pLayer = layers.getLayer(m_curr_layer);
+	if (!pLayer) {
+		return;
+	}
+
+	KeyFrame* next = pLayer->getNextKeyFrame(m_curr_frame);
+	if (next) 
+	{
+		setCurrFrame(m_curr_layer, next->getTime());
+		stage->Refresh();
+		keysPanel->Refresh();
+	}
+}
+
 Context* Context::Instance()
 {
 	if (!m_instance)

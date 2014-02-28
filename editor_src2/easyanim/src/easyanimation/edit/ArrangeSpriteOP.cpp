@@ -25,21 +25,7 @@ bool ArrangeSpriteOP::onKeyDown(int keyCode)
 	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onKeyDown(keyCode)) 
 		return true;
 
-	switch (keyCode)
-	{
-	case 'z': case 'Z':
-		{
-			Context* context = Context::Instance();
-			context->setCurrFrame(context->layer(), context->frame()-1);
-		}
-		break;
-	case 'x': case 'X':
-		{
-			Context* context = Context::Instance();
-			context->setCurrFrame(context->layer(), context->frame()+1);
-		}
-		break;
-	}
+	m_keyDownHandler.process(keyCode);
 
 	return false;
 }

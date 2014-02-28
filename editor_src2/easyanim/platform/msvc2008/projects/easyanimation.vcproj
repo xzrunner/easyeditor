@@ -524,6 +524,18 @@
 				Name="mesh"
 				>
 			</Filter>
+			<Filter
+				Name="tools"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\KeyDownHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\KeyDownHandler.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"

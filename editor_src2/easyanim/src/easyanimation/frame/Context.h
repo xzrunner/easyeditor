@@ -37,6 +37,8 @@ public:
 public:
 	void setCurrFrame(int layer, int frame);
 	KeyFrame* getCurrFrame() { return m_last_keyframe; }
+	void setPrevKeyFrame();
+	void setNextKeyFrame();
 
 	// layer start from 0
 	// frame start from 1

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SelectSpritesOP.h"
+#include "KeyDownHandler.h"
 
 namespace eanim
 {
@@ -38,6 +39,8 @@ namespace eanim
 		}; // Cross
 
 	private:
+		KeyDownHandler m_keyDownHandler;
+
 		const StageSettings& m_settings;
 
 		std::vector<Cross*> m_crosses;
