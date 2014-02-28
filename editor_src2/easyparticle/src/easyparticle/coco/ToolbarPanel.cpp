@@ -24,13 +24,15 @@ const float ToolbarPanel::END_SCALE			= 80;
 const float ToolbarPanel::MIN_ROTATE		= -180;
 const float ToolbarPanel::MAX_ROTATE		= 180;
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library)
 	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
 	, m_image(NULL)
 {
 	SetScrollbars(1,1, 200, 100, 0, 0);
 	SetSizer(initLayout());	
 	initParticle();
+
+	SetDropTarget(new DropTarget(this, library));
 }
 
 void ToolbarPanel::add(const d2d::ParticleFileAdapter::Child& child)
@@ -59,41 +61,31 @@ void ToolbarPanel::add(const d2d::ParticleFileAdapter::Child& child)
 
 wxSizer* ToolbarPanel::initLayout()
 {
-	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
+	wxSizer* topSizer = new wxBoxSizer(wxHORIZONTAL);
 	topSizer->AddSpacer(10);
-	// Open
-	{
-		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		{
-			wxButton* btn = new wxButton(this, wxID_ANY, wxT("Add"));
-			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onAddChild));
-			sizer->Add(btn);
-		}
-		sizer->AddSpacer(10);
-		{
-			wxButton* btn = new wxButton(this, wxID_ANY, wxT("Del"));
-			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onDelChild));
-			sizer->Add(btn);
-		}
-		topSizer->Add(sizer);
-	}
-	topSizer->AddSpacer(10);
+
+	wxSizer* leftSizer = new wxBoxSizer(wxVERTICAL);
+	wxSizer* rightSizer = new wxBoxSizer(wxVERTICAL);
+	topSizer->Add(leftSizer);
+	leftSizer->AddSpacer(10);
+	topSizer->Add(rightSizer);
+
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("name:")));
 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Package
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("package:")));
 		sizer->Add(m_package = new wxTextCtrl(this, wxID_ANY));
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Count
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -103,17 +95,17 @@ wxSizer* ToolbarPanel::initLayout()
 		Connect(m_count->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetCount));
 		sizer->Add(m_count);
 
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Layer
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("layer:")));
 		sizer->Add(m_layer = new wxSpinCtrl(this));
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Emission Time
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -123,9 +115,9 @@ wxSizer* ToolbarPanel::initLayout()
 		Connect(m_emission_time->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetEmissionTime));
 		sizer->Add(m_emission_time);
 
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Life
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Life:"));
@@ -150,9 +142,9 @@ wxSizer* ToolbarPanel::initLayout()
 
 			lifeSizer->Add(sizer);
 		}
-		topSizer->Add(lifeSizer);
+		leftSizer->Add(lifeSizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Hori
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Hori:"));
@@ -177,9 +169,9 @@ wxSizer* ToolbarPanel::initLayout()
 
 			horiSizer->Add(sizer);
 		}
-		topSizer->Add(horiSizer);
+		leftSizer->Add(horiSizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Vert
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Vert:"));
@@ -204,9 +196,9 @@ wxSizer* ToolbarPanel::initLayout()
 
 			vertSizer->Add(sizer);
 		}
-		topSizer->Add(vertSizer);
+		leftSizer->Add(vertSizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Speed
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Spd:"));
@@ -231,9 +223,9 @@ wxSizer* ToolbarPanel::initLayout()
 
 			spdSizer->Add(sizer);
 		}
-		topSizer->Add(spdSizer);
+		leftSizer->Add(spdSizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Gravity
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -243,9 +235,9 @@ wxSizer* ToolbarPanel::initLayout()
 		Connect(m_gravity->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetGravity));
 		sizer->Add(m_gravity);
 
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Inertia
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -255,9 +247,9 @@ wxSizer* ToolbarPanel::initLayout()
 		Connect(m_inertia->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetInertia));
 		sizer->Add(m_inertia);
 
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Fadeout Time
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -267,23 +259,23 @@ wxSizer* ToolbarPanel::initLayout()
 		Connect(m_fadeout_time->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetFadeoutTime));
 		sizer->Add(m_fadeout_time);
 
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Bounce
 	{
 		m_bounce = new wxCheckBox(this, wxID_ANY, wxT("bounce"));
 		Connect(m_bounce->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::onSetBounce));
-		topSizer->Add(m_bounce);
+		leftSizer->Add(m_bounce);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// AdditiveBlend
 	{
 		m_additiveBlend = new wxCheckBox(this, wxID_ANY, wxT("additive blend"));
 		Connect(m_additiveBlend->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::onSetAdditiveBlend));
-		topSizer->Add(m_additiveBlend);
+		leftSizer->Add(m_additiveBlend);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// Start Radius
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -293,27 +285,45 @@ wxSizer* ToolbarPanel::initLayout()
 		Connect(m_start_radius->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetStartRadius));
 		sizer->Add(m_start_radius);
 
-		topSizer->Add(sizer);
+		leftSizer->Add(sizer);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// orient_to_movement
 	{
 		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, wxT("orient to movement"));	
-		topSizer->Add(m_orient_to_movement);
+		leftSizer->Add(m_orient_to_movement);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
 	// orient_to_parent
 	{
 		m_orient_to_parent = new wxCheckBox(this, wxID_ANY, wxT("orient to parent"));
-		topSizer->Add(m_orient_to_parent);
+		leftSizer->Add(m_orient_to_parent);
 	}
-	topSizer->AddSpacer(10);
+	leftSizer->AddSpacer(10);
  	// components
  	{
+		// Open
+		{
+			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+			{
+				wxButton* btn = new wxButton(this, wxID_ANY, wxT("Add"));
+				Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onAddChild));
+				sizer->Add(btn);
+			}
+			sizer->AddSpacer(10);
+			{
+				wxButton* btn = new wxButton(this, wxID_ANY, wxT("Del"));
+				Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onDelChild));
+				sizer->Add(btn);
+			}
+			rightSizer->Add(sizer);
+		}
+		rightSizer->AddSpacer(10);
+
  		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("components"));
  		m_compSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		m_compSizer->AddSpacer(10);
- 		topSizer->Add(m_compSizer);
+ 		rightSizer->Add(m_compSizer);
  	}
 	return topSizer;
 }
@@ -574,4 +584,44 @@ onSetRotate(wxSpinEvent& event)
 {
 	m_pc->min_rotate = m_min_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
 	m_pc->max_rotate = m_max_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class ToolbarPanel::DropTarget
+//////////////////////////////////////////////////////////////////////////
+
+ToolbarPanel::DropTarget::
+DropTarget(ToolbarPanel* toolbar, d2d::LibraryPanel* library)
+	: m_toolbar(toolbar)
+	, m_library(library)
+{
+}
+
+bool ToolbarPanel::DropTarget::
+OnDropText(wxCoord x, wxCoord y, const wxString& data)
+{
+	wxString sType = data.substr(0, data.find(","));
+	wxString sIndex = data.substr(data.find(",") + 1);
+
+	long index;
+	sIndex.ToLong(&index);
+
+	d2d::ISymbol* symbol = m_library->getSymbol(index);
+	if (symbol)
+	{
+		m_toolbar->onAddChild(wxCommandEvent());
+
+		ToolbarPanel::ChildPanel* child = m_toolbar->m_children.back();
+		child->m_pc->symbol = m_library->getSymbol(index);
+		Context::Instance()->stage->m_particle->start();
+
+
+//		Vector pos = m_stage->transPosScreenToProject(x, y);
+//		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+//		sprite->translate(pos);
+//		m_panelImpl->insertSprite(sprite);
+//		sprite->release();
+	}
+
+	return true;
 }

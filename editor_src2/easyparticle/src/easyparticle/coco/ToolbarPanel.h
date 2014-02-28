@@ -12,7 +12,7 @@ namespace coco
 	class ToolbarPanel : public d2d::ToolbarPanel
 	{
 	public:
-		ToolbarPanel(wxWindow* parent);
+		ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library);
 
 		void add(const d2d::ParticleFileAdapter::Child& child);
 
@@ -86,6 +86,19 @@ namespace coco
 			friend class ToolbarPanel;
 			friend class Code;
 		};
+
+		class DropTarget : public wxTextDropTarget
+		{
+		public:
+			DropTarget(ToolbarPanel* toolbar, d2d::LibraryPanel* library);
+
+			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
+
+		private:
+			ToolbarPanel* m_toolbar;
+			d2d::LibraryPanel* m_library;
+
+		}; // DropTarget
 
 	private:
 		d2d::Image* m_image;
