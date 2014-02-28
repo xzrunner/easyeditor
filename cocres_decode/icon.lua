@@ -153,12 +153,12 @@ local ex_start_format = [[
 						}]]
 
 local start_point = {
-  -75, -107,
-  -45, -107,
-  -15, -107,
-  15, -107,
-  45, -107,
-  75, -107,
+  -70, -97,
+  -42, -97,
+  -14, -97,
+   14, -97,
+   42, -97,
+   70, -97,
 }
 
 local function _gen_start_actor(num)

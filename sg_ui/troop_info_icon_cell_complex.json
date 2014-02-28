@@ -19,9 +19,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 6.750,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 9.250,
 			"y shear" : 0.0
 		},
@@ -35,14 +37,16 @@
 			"name" : "troop",
 			"position" : 
 			{
-				"x" : -8.50,
-				"y" : -19.0
+				"x" : -3.0,
+				"y" : -8.0
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.3000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
@@ -61,9 +65,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.3000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
@@ -89,9 +95,11 @@
 			"size" : 10,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
