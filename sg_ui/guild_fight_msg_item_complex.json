@@ -1,21 +1,58 @@
 
 {
-	"name" : "guild_tab",
+	"name" : "",
 	"sprite" : 
 	[
 		
 		{
 			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_tab_chat_complex.json",
+			"color" : "0xff000000",
+			"filepath" : "_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 20,
+			"label_width" : 100,
 			"multi color" : "0xffffffff",
-			"name" : "tab1",
+			"name" : "score",
 			"position" : 
 			{
-				"x" : 26.50,
-				"y" : -21.0
+				"x" : 194.0,
+				"y" : 26.0
 			},
+			"size" : 0,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffff00",
+			"filepath" : "chat_player_name_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"label_height" : 20,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "player_name",
+			"position" : 
+			{
+				"x" : -47.0,
+				"y" : 25.0
+			},
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -31,68 +68,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_tab_fight_complex.json",
+			"filepath" : "6184-tongyong-1.png",
 			"multi color" : "0xffffffff",
-			"name" : "tab2",
+			"name" : "_sprite5",
 			"position" : 
 			{
-				"x" : 126.2599945068359,
-				"y" : -21.0
+				"x" : 126.0,
+				"y" : 29.0
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
+			"x offset" : -2.50,
+			"x scale" : 0.2000000029802322,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "guild_tab_perk_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "tab3",
-			"position" : 
-			{
-				"x" : 226.5199890136719,
-				"y" : -21.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 17.87000083923340,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 40.50,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "guild_tab_log_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "tab4",
-			"position" : 
-			{
-				"x" : 326.7799987792969,
-				"y" : -21.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 17.87000083923340,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 40.50,
-			"y scale" : 1.0,
+			"y offset" : -2.0,
+			"y scale" : 0.2000000029802322,
 			"y shear" : 0.0
 		}
 	],

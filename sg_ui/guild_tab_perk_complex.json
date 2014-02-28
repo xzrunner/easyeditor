@@ -54,7 +54,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6113-tongyong-1.png",
+			"filepath" : "6114-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -88,7 +88,7 @@
 			"name" : "title",
 			"position" : 
 			{
-				"x" : 15.0,
+				"x" : 16.0,
 				"y" : 40.50
 			},
 			"size" : 16,

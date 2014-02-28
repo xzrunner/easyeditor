@@ -60,7 +60,7 @@
 			"position" : 
 			{
 				"x" : 9.0,
-				"y" : 66.30000305175781
+				"y" : 65.250
 			},
 			"tag" : "no_sel;sel",
 			"x mirror" : false,
@@ -88,8 +88,8 @@
 			"name" : "title",
 			"position" : 
 			{
-				"x" : 8.0,
-				"y" : 40.55000305175781
+				"x" : 15.0,
+				"y" : 40.50
 			},
 			"size" : 16,
 			"tag" : "no_sel;sel",
