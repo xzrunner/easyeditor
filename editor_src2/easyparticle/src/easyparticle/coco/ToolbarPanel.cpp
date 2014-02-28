@@ -320,6 +320,8 @@ wxSizer* ToolbarPanel::initLayout()
 
 void ToolbarPanel::initParticle()
 {
+	clear();
+
 	coco::ParticleSystem* ps = new coco::ParticleSystem(1000);
 	ps->start();
 	Context::Instance()->stage->m_particle = ps;
@@ -333,6 +335,18 @@ void ToolbarPanel::initParticle()
 	ps->setGravity(m_gravity->GetValue());
 	ps->setInertia(m_inertia->GetValue());
 	ps->setFadeoutTime(m_fadeout_time->GetValue());
+}
+
+void ToolbarPanel::clear()
+{
+	while (!m_children.empty())
+	{
+		m_compSizer->Detach(m_children.size()-1);
+		delete m_children[m_children.size()-1];
+		m_children.pop_back();
+		Context::Instance()->stage->m_particle->delChild();
+	}
+	this->Layout();
 }
 
 void ToolbarPanel::onAddChild(wxCommandEvent& event)

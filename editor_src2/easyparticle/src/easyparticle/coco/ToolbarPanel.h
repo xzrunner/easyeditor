@@ -22,6 +22,8 @@ namespace coco
 		virtual wxSizer* initLayout();
 
 	private:
+		void clear();
+
 		void onAddChild(wxCommandEvent& event);
 		void onDelChild(wxCommandEvent& event);
 
