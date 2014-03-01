@@ -80,14 +80,12 @@ deprecated
 /editor_src2/easybuilder/.git
 /editor_src2/easybuilder/platform/msvc2008/easybuilder
 /editor_src2/easybuilder/platform/msvc2008/libbuilder
-/editor_src2/easybuilder/src/easybuilder
 /editor_src2/easycomplex/.svn
 /editor_src2/easycomplex/platform/msvc2008/easycomplex
 /editor_src2/easycomplex/platform/msvc2008/libcomplex
 /editor_src2/easymodeling/.git
 /editor_src2/easymodeling/platform/msvc2008/easymodeling
 /editor_src2/easymodeling/platform/msvc2008/libmodeling
-/editor_src2/easymodeling/src/easybuilder
 /editor_src2/easyparticle/.git
 /editor_src2/easyparticle/.svn
 /editor_src2/easyparticle/platform/msvc2008/easyparticle
