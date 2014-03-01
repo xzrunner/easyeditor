@@ -8,7 +8,7 @@ namespace d2d
 {
 
 DrawPolylineOP::DrawPolylineOP(EditPanel* editPanel, bool isClosed)
-	: ZoomViewOP(editPanel, true)
+	: ZoomViewOP(editPanel, true, false)
 {
 	m_isClosed = isClosed;
 	m_currPos.setInvalid();
