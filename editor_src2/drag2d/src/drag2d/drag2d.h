@@ -168,6 +168,7 @@
 #include "common/runtime.h"
 #include "common/scripts.h"
 #include "common/JsonTools.h"
+#include "common/config.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"
@@ -177,3 +178,4 @@
 #include "render/DrawSpritesVisitor.h"
 #include "render/SpriteDraw.h"
 #include "render/SpriteBatch.h"
+#include "render/style_config.h"

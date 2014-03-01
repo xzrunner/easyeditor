@@ -9,19 +9,18 @@ BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 	EVT_KEY_DOWN(StageCanvas::onKeyDown)
 END_EVENT_TABLE()
 
-static const d2d::Colorf LIGHT_GRAY = d2d::Colorf(0.8f, 0.8f, 0.8f);
-static const int WIDTH = 800;
-static const int HEIGHT = 480;
-
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::ShapeStageCanvas(stage, stage)
 {
-	m_style.color = LIGHT_GRAY;
 }
 
 void StageCanvas::drawGuideLines()
 {
-	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), WIDTH * 0.5f, HEIGHT * 0.5f, m_style);
+	d2d::PrimitiveDraw::rect(
+		d2d::Vector(0, 0), 
+		d2d::HALF_S_WIDTH,
+		d2d::HALF_S_HEIGHT,
+		d2d::LIGHT_GREY_LINE);
 }
 
 void StageCanvas::initGL()
