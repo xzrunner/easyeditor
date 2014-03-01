@@ -1,9 +1,9 @@
-#ifndef EDB_FRAME_H
-#define EDB_FRAME_H
+#ifndef FORMATION_FRAME_H
+#define FORMATION_FRAME_H
 
 #include <wx/wx.h>
 
-namespace edb
+namespace formation
 {
 	class Task;
 
@@ -18,13 +18,16 @@ namespace edb
 		void onSave(wxCommandEvent& event);
 		void onSaveAs(wxCommandEvent& event);
 
-		void onConnect(wxCommandEvent& event);
-
+		void onPreview(wxCommandEvent& event);
 		void onQuit(wxCommandEvent& event);
+
+		void onCodeLove2d(wxCommandEvent& event);
 
 		void initMenuBar();
 
 		wxMenu* initFileBar();
+		wxMenu* initViewBar();
+		wxMenu* initCodesBar();
 		wxMenu* initHelpBar();
 
 		void clear();
@@ -34,7 +37,7 @@ namespace edb
 	private:
 		enum
 		{
-			ID_CONNECT = 1000
+			Menu_Preview = 500
 		};
 
 	private:
@@ -47,4 +50,4 @@ namespace edb
 	}; // Frame
 }
 
-#endif // EDB_FRAME_H
+#endif // FORMATION_FRAME_H

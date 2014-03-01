@@ -1,22 +1,21 @@
 #include "Frame.h"
-#include "Task.h"
-#include "Context.h"
-#include "StagePanel.h"
 
-using namespace edb;
+#include "Task.h"
+
+#include <wx/splitter.h>
+
+using namespace shootbubble;
 
 BEGIN_EVENT_TABLE(Frame, wxFrame)
-	EVT_MENU(wxID_NEW, Frame::onNew)
-	EVT_MENU(wxID_OPEN, Frame::onOpen)
-	EVT_MENU(wxID_SAVE, Frame::onSave)
-	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
+EVT_MENU(wxID_NEW, Frame::onNew)
+EVT_MENU(wxID_OPEN, Frame::onOpen)
+EVT_MENU(wxID_SAVE, Frame::onSave)
+EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
 
-	EVT_MENU(ID_CONNECT, Frame::onConnect)
-
-	EVT_MENU(wxID_EXIT, Frame::onQuit)
+EVT_MENU(wxID_EXIT, Frame::onQuit)
 END_EVENT_TABLE()
 
-static const wxString FILE_TAG = wxT("edb");
+static const wxString FILE_TAG = wxT("shootbubble");
 
 Frame::Frame(const wxString& title)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
@@ -40,12 +39,7 @@ void Frame::onOpen(wxCommandEvent& event)
 		m_task->clear();
 		m_currFilename = dlg.GetPath();
 		SetTitle(d2d::FilenameTools::getFilename(dlg.GetPath()));
-		try {
-			m_task->loadFromTextFile(dlg.GetPath());
-		} catch (d2d::Exception& e) {
-			d2d::ExceptionDlg dlg(this, e);
-			dlg.ShowModal();
-		}
+		m_task->loadFromTextFile(dlg.GetPath());
 	}
 }
 
@@ -70,22 +64,6 @@ void Frame::onSaveAs(wxCommandEvent& event)
 	}
 }
 
-void Frame::onConnect(wxCommandEvent& event)
-{
-	wxDirDialog dlg(NULL, "Choose directory", wxEmptyString,
-		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		try {
-//			Context::Instance()->stage->loadFromDir(dlg.GetPath().ToStdString());
-			Context::Instance()->stage->loadFromDirFast(dlg.GetPath().ToStdString());
-		} catch (d2d::Exception& e) {
-			d2d::ExceptionDlg dlg(this, e);
-			dlg.ShowModal();
-		}
-	}
-}
-
 void Frame::onQuit(wxCommandEvent& event)
 {
 	Close(true);
@@ -106,8 +84,6 @@ wxMenu* Frame::initFileBar()
 	fileMenu->AppendSeparator();
 	fileMenu->Append(wxID_SAVE, wxT("&Save\tCtrl+S"), wxT("Save the project"));
 	fileMenu->Append(wxID_SAVEAS, wxT("&Save as...\tF11", wxT("Save to a new file")));
-	fileMenu->AppendSeparator();
-	fileMenu->Append(ID_CONNECT, wxT("&Connect"), wxT("Connect dir"));
 	fileMenu->AppendSeparator();
 	fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt+X"), wxT("Quit GameFruits"));
 	return fileMenu;

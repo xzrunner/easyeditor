@@ -1,9 +1,21 @@
 #include "Frame.h"
-#include "Task.h"
-#include "Context.h"
-#include "StagePanel.h"
 
-using namespace edb;
+#include "Context.h"
+#include "Task.h"
+#include "PreviewDialog.h"
+#include "StagePanel.h"
+#include "Love2dCode.h"
+
+#include <wx/splitter.h>
+
+using namespace formation;
+
+static const wxString FILE_TAG = wxT("formation");
+
+enum MenuID
+{
+	ID_LOVE2D = 700
+};
 
 BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(wxID_NEW, Frame::onNew)
@@ -11,12 +23,10 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(wxID_SAVE, Frame::onSave)
 	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
 
-	EVT_MENU(ID_CONNECT, Frame::onConnect)
-
+	EVT_MENU(Menu_Preview, Frame::onPreview)
 	EVT_MENU(wxID_EXIT, Frame::onQuit)
+	EVT_MENU(ID_LOVE2D, Frame::onCodeLove2d)
 END_EVENT_TABLE()
-
-static const wxString FILE_TAG = wxT("edb");
 
 Frame::Frame(const wxString& title)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
@@ -40,12 +50,7 @@ void Frame::onOpen(wxCommandEvent& event)
 		m_task->clear();
 		m_currFilename = dlg.GetPath();
 		SetTitle(d2d::FilenameTools::getFilename(dlg.GetPath()));
-		try {
-			m_task->loadFromTextFile(dlg.GetPath());
-		} catch (d2d::Exception& e) {
-			d2d::ExceptionDlg dlg(this, e);
-			dlg.ShowModal();
-		}
+		m_task->loadFromTextFile(dlg.GetPath());
 	}
 }
 
@@ -70,20 +75,11 @@ void Frame::onSaveAs(wxCommandEvent& event)
 	}
 }
 
-void Frame::onConnect(wxCommandEvent& event)
+void Frame::onPreview(wxCommandEvent& event)
 {
-	wxDirDialog dlg(NULL, "Choose directory", wxEmptyString,
-		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		try {
-//			Context::Instance()->stage->loadFromDir(dlg.GetPath().ToStdString());
-			Context::Instance()->stage->loadFromDirFast(dlg.GetPath().ToStdString());
-		} catch (d2d::Exception& e) {
-			d2d::ExceptionDlg dlg(this, e);
-			dlg.ShowModal();
-		}
-	}
+	PreviewDialog dlg(this);
+	dlg.ShowModal();
+	Context::Instance()->stage->resetCanvas();
 }
 
 void Frame::onQuit(wxCommandEvent& event)
@@ -91,10 +87,30 @@ void Frame::onQuit(wxCommandEvent& event)
 	Close(true);
 }
 
+void Frame::onCodeLove2d(wxCommandEvent& event)
+{
+	ebuilder::CodeDialog dlg(this);
+
+	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("level.lua"));
+
+	ebuilder::CodeGenerator gen;
+	Love2dCode code(gen);
+	code.resolve();
+	page->SetReadOnly(false);
+	page->SetText(gen.toText());
+	page->SetReadOnly(true);
+
+	dlg.notebook->AddPage(page, page->getName());
+
+	dlg.ShowModal();
+}
+
 void Frame::initMenuBar()
 {
 	wxMenuBar* menuBar = new wxMenuBar;
 	menuBar->Append(initFileBar(), "&File");
+	menuBar->Append(initViewBar(), "&View");
+	menuBar->Append(initCodesBar(), "&Codes");
 	SetMenuBar(menuBar);
 }
 
@@ -107,10 +123,25 @@ wxMenu* Frame::initFileBar()
 	fileMenu->Append(wxID_SAVE, wxT("&Save\tCtrl+S"), wxT("Save the project"));
 	fileMenu->Append(wxID_SAVEAS, wxT("&Save as...\tF11", wxT("Save to a new file")));
 	fileMenu->AppendSeparator();
-	fileMenu->Append(ID_CONNECT, wxT("&Connect"), wxT("Connect dir"));
-	fileMenu->AppendSeparator();
 	fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt+X"), wxT("Quit GameFruits"));
 	return fileMenu;
+}
+
+wxMenu* Frame::initViewBar()
+{
+	wxMenu* viewMenu = new wxMenu;
+
+	viewMenu->Append(Menu_Preview, wxT("&Preview\tCtrl+Enter"), wxT("Preview"));
+
+	return viewMenu;
+}
+
+wxMenu* Frame::initCodesBar()
+{
+	wxMenu* menu = new wxMenu;
+	menu->Append(ID_LOVE2D, wxT("love2d"), wxEmptyString);
+
+	return menu;
 }
 
 wxMenu* Frame::initHelpBar()

@@ -1,12 +1,17 @@
 #include "Context.h"
 
-using namespace edb;
+#include <stdio.h>
+
+using namespace formation;
 
 Context* Context::m_instance = NULL;
 
 Context::Context() 
 {
+	property = NULL;
+	library = NULL;
 	stage = NULL;
+	toolbar = NULL;
 }
 
 Context* Context::Instance()

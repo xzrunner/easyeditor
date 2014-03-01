@@ -1,11 +1,13 @@
 #include "main.h"
 #include "Frame.h"
 
+using namespace shootbubble;
+
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()
 {
-	edb::Frame* frame = new edb::Frame(wxT("EasyDB"));
+	Frame* frame = new Frame(wxT("ShootBubble"));
 	frame->Show(true);
 
 	return true;

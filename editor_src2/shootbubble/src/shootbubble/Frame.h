@@ -1,9 +1,9 @@
-#ifndef EDB_FRAME_H
-#define EDB_FRAME_H
+#ifndef SHOOTBUBBLE_FRAME_H
+#define SHOOTBUBBLE_FRAME_H
 
 #include <wx/wx.h>
 
-namespace edb
+namespace shootbubble
 {
 	class Task;
 
@@ -18,8 +18,6 @@ namespace edb
 		void onSave(wxCommandEvent& event);
 		void onSaveAs(wxCommandEvent& event);
 
-		void onConnect(wxCommandEvent& event);
-
 		void onQuit(wxCommandEvent& event);
 
 		void initMenuBar();
@@ -32,12 +30,6 @@ namespace edb
 		void setCurrFilename();
 
 	private:
-		enum
-		{
-			ID_CONNECT = 1000
-		};
-
-	private:
 		Task* m_task;
 
 		wxString m_currFilename;
@@ -47,4 +39,4 @@ namespace edb
 	}; // Frame
 }
 
-#endif // EDB_FRAME_H
+#endif // SHOOTBUBBLE_FRAME_H

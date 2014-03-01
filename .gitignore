@@ -97,6 +97,9 @@ deprecated
 /editor_src2/easymesh/platform/msvc2008/easymesh
 /editor_src2/easymesh/platform/msvc2008/libmesh
 /editor_src2/easypacker/platform/msvc2008/easypacker
+/editor_src2/formation/platform/msvc2008/formation
+/editor_src2/raiden/platform/msvc2008/raiden
+/editor_src2/shootbubble/platform/msvc2008/shootbubble
 /editor_src2/drag2d/src/common/libpng/contrib
 /editor_src2/libraries/lua-5.2.3/doc
 /editor_src2/libraries/lua-5.2.3/lua
