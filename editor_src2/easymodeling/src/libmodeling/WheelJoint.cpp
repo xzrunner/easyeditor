@@ -105,7 +105,7 @@ void WheelJoint::drawAnchorA(const d2d::Vector& pos, DrawType type) const
 	}
 
 	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::drawRect(pos, JOINT_RADIUS_OUT, true, 2, color);
+	d2d::PrimitiveDraw::rect(pos, JOINT_RADIUS_OUT, d2d::ShapeStyle(true, color));
 }
 
 void WheelJoint::drawAnchorB(const d2d::Vector& pos, DrawType type) const

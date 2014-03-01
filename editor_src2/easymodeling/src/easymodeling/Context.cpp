@@ -1,4 +1,3 @@
-
 #include "Context.h"
 
 #include <easymodeling.h>
