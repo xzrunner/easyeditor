@@ -16,7 +16,7 @@
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"tag" : "",
+			"tag" : "show;hide",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 10.0,
@@ -39,7 +39,7 @@
 				"x" : 0.0,
 				"y" : -58.79999923706055
 			},
-			"tag" : "",
+			"tag" : "show;hide",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 0.50,
@@ -62,7 +62,7 @@
 				"x" : -171.0,
 				"y" : 44.0
 			},
-			"tag" : "",
+			"tag" : "show",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 0.50,
@@ -92,7 +92,7 @@
 				"y" : 46.0
 			},
 			"size" : 16,
-			"tag" : "",
+			"tag" : "show",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 1.0,
@@ -115,7 +115,7 @@
 				"x" : -49.0,
 				"y" : -14.0
 			},
-			"tag" : "",
+			"tag" : "show",
 			"x mirror" : false,
 			"x offset" : 23.50,
 			"x scale" : 1.0,
@@ -138,7 +138,7 @@
 				"x" : -49.0,
 				"y" : -41.0
 			},
-			"tag" : "",
+			"tag" : "show",
 			"x mirror" : false,
 			"x offset" : 23.50,
 			"x scale" : 1.0,
@@ -161,7 +161,7 @@
 				"x" : -48.0,
 				"y" : -68.0
 			},
-			"tag" : "",
+			"tag" : "show",
 			"x mirror" : false,
 			"x offset" : 23.50,
 			"x scale" : 1.0,

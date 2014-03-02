@@ -22,7 +22,7 @@
 				"x" : 194.0,
 				"y" : 26.0
 			},
-			"size" : 0,
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -39,7 +39,7 @@
 			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0xffffff00",
+			"color" : "0xffffff95",
 			"filepath" : "chat_player_name_fontblank.json",
 			"font" : "E",
 			"font_filename" : "",
@@ -49,7 +49,7 @@
 			"name" : "player_name",
 			"position" : 
 			{
-				"x" : -47.0,
+				"x" : -12.0,
 				"y" : 25.0
 			},
 			"size" : 16,

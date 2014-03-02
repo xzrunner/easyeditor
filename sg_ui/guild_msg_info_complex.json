@@ -8,6 +8,29 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
+			"filepath" : "msg_item_list_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : 191.50,
+				"y" : -179.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -23.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3015.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_window_top_bg_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
@@ -129,29 +152,6 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 22.750,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "msg_item_list_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "list",
-			"position" : 
-			{
-				"x" : 191.50,
-				"y" : -179.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : -23.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : -3015.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
