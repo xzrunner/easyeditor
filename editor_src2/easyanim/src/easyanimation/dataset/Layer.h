@@ -32,6 +32,7 @@ namespace eanim
 
 		KeyFrame* getCurrKeyFrame(int iFrame);
 		KeyFrame* getNextKeyFrame(int iFrame);
+		KeyFrame* getPrevKeyFrame(int iFrame);
 
 		int getFrameCount() const;
 

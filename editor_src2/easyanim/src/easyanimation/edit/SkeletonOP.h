@@ -2,39 +2,45 @@
 #define EANIM_SKELETON_OP_H
 
 #include "SelectSpritesOP.h"
+#include "KeyDownHandler.h"
 
 namespace eanim
 {
-	class StagePanel;
-	class Joint;
 
-	class SkeletonOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
-	{
-	public:
-		SkeletonOP(StagePanel* stage);
+class StagePanel;
+class Joint;
 
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseLeftUp(int x, int y);
-		virtual bool onMouseDrag(int x, int y);
+class SkeletonOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
+{
+public:
+	SkeletonOP(StagePanel* stage);
 
-		virtual bool onPopMenuSelected(int type);
+	virtual bool onKeyDown(int keyCode);
+	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseLeftUp(int x, int y);
+	virtual bool onMouseDrag(int x, int y);
 
-		virtual bool onDraw() const;
+	virtual bool onPopMenuSelected(int type);
 
-	protected:
-		virtual void translateSprite(const d2d::Vector& delta);
-		virtual void rotateSprite(const d2d::Vector& dst);
-		virtual void scaleSprite(const d2d::Vector& currPos);
+	virtual bool onDraw() const;
 
-		virtual void setRightPopupMenu(wxMenu& menu);
-		virtual bool isOffsetEnable() const { return false; }
+protected:
+	virtual void translateSprite(const d2d::Vector& delta);
+	virtual void rotateSprite(const d2d::Vector& dst);
+	virtual void scaleSprite(const d2d::Vector& currPos);
 
-	private:
-		StagePanel* m_stage;
+	virtual void setRightPopupMenu(wxMenu& menu);
+	virtual bool isOffsetEnable() const { return false; }
 
-		Joint* m_selectedJoint;
+private:
+	KeyDownHandler m_keyDownHandler;
 
-	}; // SkeletonOP
+	StagePanel* m_stage;
+
+	Joint* m_selectedJoint;
+
+}; // SkeletonOP
+
 }
 
 #endif // EANIM_SKELETON_OP_H

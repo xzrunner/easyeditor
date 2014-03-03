@@ -55,6 +55,8 @@ void Shader::sprite()
 
 		glUseProgram(m_prog_sprite);
 		m_prog_curr = m_prog_sprite;
+
+		color(1, 1, 1, 1);
 	}
 }
 

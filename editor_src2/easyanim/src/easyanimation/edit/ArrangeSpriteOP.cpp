@@ -20,6 +20,16 @@ ArrangeSpriteOP::~ArrangeSpriteOP()
 	for_each(m_crosses.begin(), m_crosses.end(), DeletePointerFunctor<Cross>());
 }
 
+bool ArrangeSpriteOP::onKeyDown(int keyCode)
+{
+	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onKeyDown(keyCode)) 
+		return true;
+
+	m_keyDownHandler.process(keyCode);
+
+	return false;
+}
+
 bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onMouseLeftDown(x, y)) 

@@ -214,7 +214,7 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dlg)
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
 		d2d::ISprite* actor = loadActor(actorValue, dlg);
-		frame->insert(actor);
+		frame->insertWithClone(actor);
 		actor->release();
 		actorValue = frameValue["actor"][i++];
 	}
@@ -371,7 +371,7 @@ KeyFrame* FileIO::loadFrame(rapidxml::xml_node<>* frameNode,
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
 		d2d::ISprite* actor = loadActor(actorNode, mapNamePath);
-		frame->insert(actor);
+		frame->insertWithClone(actor);
 		actorNode = actorNode->next_sibling();
 	}
 

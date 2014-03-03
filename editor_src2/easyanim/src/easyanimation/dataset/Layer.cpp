@@ -181,8 +181,23 @@ KeyFrame* Layer::getNextKeyFrame(int iFrame)
 	if (m_frames.empty()) return NULL;
 
 	std::map<int, KeyFrame*>::iterator itr = m_frames.upper_bound(iFrame);
-	if (itr == m_frames.end()) return NULL;
-	else return itr->second;
+	if (itr == m_frames.end()) {
+		return NULL;
+	} else {
+		return itr->second;
+	}
+}
+
+KeyFrame* Layer::getPrevKeyFrame(int iFrame)
+{
+	if (m_frames.empty()) return NULL;
+
+	std::map<int, KeyFrame*>::iterator itr = m_frames.lower_bound(iFrame);
+	if (itr == m_frames.end() || itr == m_frames.begin()) {
+		return NULL;
+	} else {
+		return (--itr)->second;
+	}
 }
 
 int Layer::getFrameCount() const

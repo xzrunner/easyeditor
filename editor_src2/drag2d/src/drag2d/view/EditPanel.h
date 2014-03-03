@@ -53,8 +53,8 @@ namespace d2d
 		void redo();
 		void addHistoryOP(AbstractAtomicOP* op);
 
-		void saveHistoryList(Json::Value& value, const std::vector<ISprite*>& sprites);
-		void loadHistoryList(const Json::Value& value, const std::vector<ISprite*>& sprites);
+		void saveHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites);
+		void loadHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites);
 
 		void onSave();
 		bool isDirty() const;

@@ -12,6 +12,7 @@
 *.gif
 *.html
 *.dll
+*_history.json
 deprecated
 .svn
 
@@ -82,25 +83,26 @@ deprecated
 /editor_src2/easybuilder/.git
 /editor_src2/easybuilder/platform/msvc2008/easybuilder
 /editor_src2/easybuilder/platform/msvc2008/libbuilder
-/editor_src2/easybuilder/src/easybuilder
 /editor_src2/easycomplex/.svn
 /editor_src2/easycomplex/platform/msvc2008/easycomplex
 /editor_src2/easycomplex/platform/msvc2008/libcomplex
 /editor_src2/easymodeling/.git
 /editor_src2/easymodeling/platform/msvc2008/easymodeling
 /editor_src2/easymodeling/platform/msvc2008/libmodeling
-/editor_src2/easymodeling/src/easybuilder
 /editor_src2/easyparticle/.git
 /editor_src2/easyparticle/.svn
 /editor_src2/easyparticle/platform/msvc2008/easyparticle
 /editor_src2/easyshape/.git
 /editor_src2/easyshape/platform/msvc2008/easyshape
 /editor_src2/easyshape/platform/msvc2008/libshape
-/editor_src2/easyshape/src/easyshape
 /editor_src2/easydb/platform/msvc2008/easydb
 /editor_src2/easydb/platform/msvc2008/easydb_cl
 /editor_src2/easymesh/platform/msvc2008/easymesh
 /editor_src2/easymesh/platform/msvc2008/libmesh
+/editor_src2/easypacker/platform/msvc2008/easypacker
+/editor_src2/formation/platform/msvc2008/formation
+/editor_src2/raiden/platform/msvc2008/raiden
+/editor_src2/shootbubble/platform/msvc2008/shootbubble
 /editor_src2/drag2d/src/common/libpng/contrib
 /editor_src2/libraries/lua-5.2.3/doc
 /editor_src2/libraries/lua-5.2.3/lua

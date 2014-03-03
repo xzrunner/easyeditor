@@ -52,7 +52,7 @@ void Task::initWindows(wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow*
 {
 	library = Context::Instance()->library = new eparticle::LibraryPanel(leftVerticalSplitter);
 	stage = Context::Instance()->stage = new coco::StagePanel(leftVerticalSplitter, m_parent);
-	toolbar = Context::Instance()->toolbar = new coco::ToolbarPanel(rightVerticalSplitter);
+	toolbar = Context::Instance()->toolbar = new coco::ToolbarPanel(rightVerticalSplitter, Context::Instance()->library);
 }
 
 void Task::initLayout()
@@ -66,7 +66,7 @@ void Task::initLayout()
 	leftVerticalSplitter->SetSashGravity(0.2f);
 	leftVerticalSplitter->SplitVertically(library, stage);
 
-	rightVerticalSplitter->SetSashGravity(0.85f);
+	rightVerticalSplitter->SetSashGravity(0.7f);
 	rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
 
 	m_root = rightVerticalSplitter;

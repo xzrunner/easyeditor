@@ -1,7 +1,7 @@
 
 #include "Frame.h"
 
-#include "SettingOperatingDlg.h"
+//#include "SettingOperatingDlg.h"
 #include "SettingViewDlg.h"
 
 #include "Task.h"
@@ -107,11 +107,11 @@ void Frame::onAbout(wxCommandEvent& event)
 	wxMessageBox(msg, wxT("About EasyModeling"), wxOK | wxICON_INFORMATION, this);
 }
 
-void Frame::onSettingOperatingMenu(wxCommandEvent& event)
-{
-	SettingOperatingDlg dlg(this);
-	dlg.ShowModal();
-}
+// void Frame::onSettingOperatingMenu(wxCommandEvent& event)
+// {
+// 	SettingOperatingDlg dlg(this);
+// 	dlg.ShowModal();
+// }
 
 void Frame::onSettingViewMenu(wxCommandEvent& event)
 {
@@ -194,9 +194,9 @@ wxMenu* Frame::initSettingsBar()
 	wxMenu* menu = new wxMenu;
 
 	int id = ID_OTHERS_BEGIN;
-	menu->Append(id++, wxT("Operation..."));
-	Connect(id - 1, wxEVT_COMMAND_MENU_SELECTED, 
-		wxCommandEventHandler(Frame::onSettingOperatingMenu));
+// 	menu->Append(id++, wxT("Operation..."));
+// 	Connect(id - 1, wxEVT_COMMAND_MENU_SELECTED, 
+// 		wxCommandEventHandler(Frame::onSettingOperatingMenu));
 	menu->Append(id++, wxT("Display..."));
 	Connect(id - 1, wxEVT_COMMAND_MENU_SELECTED, 
 		wxCommandEventHandler(Frame::onSettingViewMenu));

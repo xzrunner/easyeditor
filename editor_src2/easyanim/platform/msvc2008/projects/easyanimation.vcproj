@@ -324,6 +324,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyanimation\view\PreviewControl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyanimation\view\PreviewDialog.cpp"
 					>
 				</File>
@@ -519,6 +523,18 @@
 			<Filter
 				Name="mesh"
 				>
+			</Filter>
+			<Filter
+				Name="tools"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\KeyDownHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\KeyDownHandler.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<File

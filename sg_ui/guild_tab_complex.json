@@ -1,7 +1,6 @@
 
 {
 	"name" : "guild_tab",
-	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -14,14 +13,16 @@
 			"name" : "tab1",
 			"position" : 
 			{
-				"x" : 63.0,
-				"y" : -20.0
+				"x" : 26.50,
+				"y" : -21.0
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -35,39 +36,64 @@
 			"name" : "tab2",
 			"position" : 
 			{
-				"x" : 274.0,
-				"y" : -20.0
+				"x" : 126.2599945068359,
+				"y" : -21.0
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-		}
-	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"dx" : -27.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
 		},
 		
 		{
-			"sprites" : [ 1 ],
-			"val" : 
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_tab_log_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "tab3",
+			"position" : 
 			{
-				"dx" : -27.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
+				"x" : 225.7599945068359,
+				"y" : -21.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 17.87000083923340,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 40.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_tab_perk_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "tab4",
+			"position" : 
+			{
+				"x" : 325.2600097656250,
+				"y" : -21.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 17.87000083923340,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 40.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"xmax" : 0.0,

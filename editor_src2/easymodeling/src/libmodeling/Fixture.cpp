@@ -105,8 +105,8 @@ void Fixture::draw(const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const
 	{
 		const d2d::Vector p0(rect->m_rect.xMin, rect->m_rect.yMin),
 			p1(rect->m_rect.xMax, rect->m_rect.yMax);
-		d2d::PrimitiveDraw::drawRect(p0, p1, true, 2, cFace);
-		d2d::PrimitiveDraw::drawRect(p0, p1, false, 2, cEdge);
+		d2d::PrimitiveDraw::rect(p0, p1, d2d::ShapeStyle(true, cFace));
+		d2d::PrimitiveDraw::rect(p0, p1, d2d::ShapeStyle(false, cFace));
 	}
 	else if (d2d::PolygonShape* polygon = dynamic_cast<d2d::PolygonShape*>(shape))
 	{

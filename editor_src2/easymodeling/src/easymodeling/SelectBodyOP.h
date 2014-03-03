@@ -14,8 +14,7 @@ namespace emodeling
 		SelectBodyOP(d2d::EditPanel* editPanel, 
 			d2d::MultiSpritesImpl* spritesImpl, 
 			d2d::PropertySettingPanel* propertyPanel, 
-			d2d::AbstractEditCMPT* callback = NULL,
-			const d2d::Colorf& color = d2d::Colorf(1, 1, 1));
+			d2d::AbstractEditCMPT* callback = NULL);
 
 		virtual bool onKeyDown(int keyCode);
 		virtual bool onMouseMove(int x, int y);

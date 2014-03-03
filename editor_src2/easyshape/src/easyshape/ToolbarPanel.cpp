@@ -1,0 +1,65 @@
+
+#include "ToolbarPanel.h"
+#include "StagePanel.h"
+#include "Context.h"
+#include "LibraryItem.h"
+
+using namespace eshape;
+
+ToolbarPanel::ToolbarPanel(wxWindow* parent)
+	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
+{
+	StagePanel* stage = Context::Instance()->stage;
+	d2d::PropertySettingPanel* property = Context::Instance()->property;
+
+	addChild(new d2d::NodeCaptureCMPT<d2d::EditRectOP>(this, wxT("rect"), stage, stage, property));
+	addChild(new d2d::NodeCaptureCMPT<d2d::EditCircleOP>(this, wxT("circle"), stage, stage, property));
+	addChild(new d2d::DrawLineCMPT(this, wxT("chain"), stage, stage, property));
+	addChild(new d2d::EditPolygonCMPT(this, wxT("polygon"), stage, stage, property));
+	addChild(new d2d::NodeCaptureCMPT<d2d::EditBezierOP>(this, wxT("bezier"), stage, stage, property));
+
+	SetSizer(initLayout());	
+}
+
+void ToolbarPanel::changeCurrItem(LibraryItem* item)
+{
+	if (!item) return;
+
+	std::vector<d2d::IShape*>* shapes 
+		= static_cast<std::vector<d2d::IShape*>*>(item->getUserData());
+	if (!shapes || shapes->empty()) return;
+
+	d2d::IShape* shape = (*shapes)[0];
+	if (dynamic_cast<d2d::RectShape*>(shape))
+		setChoice(0); 
+	else if (dynamic_cast<d2d::CircleShape*>(shape))
+		setChoice(1);
+	else if (dynamic_cast<d2d::BezierShape*>(shape))
+		setChoice(4);
+	else if (dynamic_cast<d2d::PolygonShape*>(shape))
+		setChoice(3); 
+	else if (dynamic_cast<d2d::ChainShape*>(shape))
+		setChoice(2); 
+}
+
+wxSizer* ToolbarPanel::initLayout()
+{
+	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	sizer->AddSpacer(20);
+	sizer->Add(initChildrenLayout());
+	sizer->AddSpacer(20);
+	{
+		wxButton* btnClear = new wxButton(this, wxID_ANY, wxT("Clear"));
+		Connect(btnClear->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::onClearShapes));
+		sizer->Add(btnClear);
+
+	}
+	return sizer;
+}
+
+void ToolbarPanel::onClearShapes(wxCommandEvent& event)
+{
+	static_cast<StagePanel*>(m_editPanel)->clearShapes();
+	m_editPanel->Refresh();
+}

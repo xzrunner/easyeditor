@@ -39,7 +39,23 @@ void KeyFrame::copyKeyFrame(const KeyFrame* src)
 	m_skeletonData.copyFrom(m_sprites, src->m_skeletonData);
 }
 
-void KeyFrame::insert(d2d::ISprite* sprite) 
+void KeyFrame::insert(d2d::ISprite* sprite)
+{
+	m_sprites.push_back(sprite);
+	if (m_layer) {
+		sprite->setObserver(&m_layer->m_spriteObserver);
+		m_layer->m_spriteObserver.insert(sprite, m_time);
+	}
+
+	// viewlist
+	Context* context = Context::Instance();
+	KeyFrame* curr = context->getCurrFrame();
+	if (this == curr) {
+		context->viewlist->insert(sprite);
+	}
+}
+
+void KeyFrame::insertWithClone(d2d::ISprite* sprite) 
 {
 	d2d::ISprite* clone = sprite->clone();
 

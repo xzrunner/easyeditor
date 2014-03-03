@@ -61,7 +61,7 @@
 			"position" : 
 			{
 				"x" : 44.50,
-				"y" : -35.0
+				"y" : -26.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -90,60 +90,7 @@
 			"position" : 
 			{
 				"x" : 210.50,
-				"y" : -31.0
-			},
-			"size" : 16,
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "clan2.png",
-			"multi color" : "0xffffffff",
-			"name" : "fight_pic",
-			"position" : 
-			{
-				"x" : 68.250,
-				"y" : -138.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"align" : 2,
-			"angle" : 0.0,
-			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "title_fontblank.json",
-			"font" : "",
-			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 250,
-			"multi color" : "0xffffffff",
-			"name" : "title",
-			"position" : 
-			{
-				"x" : 253.7000122070313,
-				"y" : -100.750
+				"y" : -22.0
 			},
 			"size" : 16,
 			"tag" : "",
@@ -166,23 +113,23 @@
 			"filepath" : "title_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 55,
-			"label_width" : 240,
+			"label_height" : 30,
+			"label_width" : 400,
 			"multi color" : "0xffffffff",
 			"name" : "info",
 			"position" : 
 			{
-				"x" : 258.7000122070313,
-				"y" : -146.750
+				"x" : 191.250,
+				"y" : -109.750
 			},
-			"size" : 30,
+			"size" : 20,
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
+			"x offset" : 32.29998779296875,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
+			"y offset" : 22.750,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -197,7 +144,7 @@
 			"position" : 
 			{
 				"x" : 91.250,
-				"y" : -73.14999389648438
+				"y" : -63.14999389648438
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -219,8 +166,8 @@
 			"name" : "apply",
 			"position" : 
 			{
-				"x" : 72.20000457763672,
-				"y" : -136.6499938964844
+				"x" : 324.6499938964844,
+				"y" : -149.250
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -243,7 +190,7 @@
 			"position" : 
 			{
 				"x" : 358.50,
-				"y" : -65.3750
+				"y" : -56.3750
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -253,6 +200,52 @@
 			"y mirror" : false,
 			"y offset" : 0.0,
 			"y scale" : 1.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_fight_player_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "player_info",
+			"position" : 
+			{
+				"x" : 122.0,
+				"y" : -182.1000061035156
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 51.59999847412109,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 33.79999923706055,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite140",
+			"position" : 
+			{
+				"x" : 191.0,
+				"y" : -87.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	],
@@ -270,7 +263,7 @@
 		},
 		
 		{
-			"sprites" : [ 3, 5, 6, 1, 2, 4 ],
+			"sprites" : [ 3, 4, 1, 2 ],
 			"val" : 
 			{
 				"dx" : 525.0,
@@ -280,7 +273,7 @@
 		},
 		
 		{
-			"sprites" : [ 7 ],
+			"sprites" : [ 5 ],
 			"val" : 
 			{
 				"dx" : -38.0,
@@ -290,7 +283,7 @@
 		},
 		
 		{
-			"sprites" : [ 7 ],
+			"sprites" : [ 5 ],
 			"val" : 
 			{
 				"old" : 
@@ -308,7 +301,7 @@
 		},
 		
 		{
-			"sprites" : [ 7 ],
+			"sprites" : [ 5 ],
 			"val" : 
 			{
 				"old" : 
@@ -326,7 +319,7 @@
 		},
 		
 		{
-			"sprites" : [ 7 ],
+			"sprites" : [ 5 ],
 			"val" : 
 			{
 				"dx" : 326.0,
@@ -346,7 +339,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 6 ],
 			"val" : 
 			{
 				"old" : 
@@ -364,7 +357,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 6 ],
 			"val" : 
 			{
 				"old" : 
@@ -382,7 +375,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 6 ],
 			"val" : 
 			{
 				"old" : 
@@ -400,7 +393,7 @@
 		},
 		
 		{
-			"sprites" : [ 8 ],
+			"sprites" : [ 6 ],
 			"val" : 
 			{
 				"old" : 
@@ -416,7 +409,16 @@
 				"yscale" : 0.6999999880790710
 			}
 		},
-		null,
+		
+		{
+			"sprites" : [ 9 ],
+			"val" : 
+			{
+				"dx" : 206.0,
+				"dy" : 174.0,
+				"type" : 0
+			}
+		},
 		
 		{
 			"sprites" : [ 9 ],
@@ -431,7 +433,7 @@
 					}
 				],
 				"type" : 3,
-				"xscale" : 2.0,
+				"xscale" : 0.50,
 				"yscale" : 1.0
 			}
 		},
@@ -444,12 +446,12 @@
 				[
 					
 					{
-						"x" : 2.0,
+						"x" : 0.50,
 						"y" : 1.0
 					}
 				],
 				"type" : 3,
-				"xscale" : 2.0,
+				"xscale" : 0.50,
 				"yscale" : 1.0
 			}
 		},
@@ -458,139 +460,12 @@
 			"sprites" : [ 9 ],
 			"val" : 
 			{
-				"old" : 
-				[
-					
-					{
-						"x" : 2.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 2.0,
-				"yscale" : 2.0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 2.0,
-						"y" : 2.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 2.0,
-				"yscale" : 2.0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : 682.0,
-				"dy" : -331.0,
+				"dx" : 372.0,
+				"dy" : -372.0,
 				"type" : 0
 			}
 		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : -15.0,
-				"dy" : -13.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 2.0,
-						"y" : 2.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.50,
-				"yscale" : 2.0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.50,
-						"y" : 2.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.50,
-				"yscale" : 2.0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.50,
-						"y" : 2.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.50,
-				"yscale" : 1.50
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.50,
-						"y" : 1.50
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.50,
-				"yscale" : 1.50
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : 7.0,
-				"dy" : -12.0,
-				"type" : 0
-			}
-		}
+		null
 	],
 	"xmax" : 0.0,
 	"xmin" : 0.0,

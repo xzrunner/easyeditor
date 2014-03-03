@@ -1,5 +1,6 @@
 #include "PreviewCanvas.h"
 #include "PreviewSettings.h"
+#include "PreviewControl.h"
 
 #include "frame/Context.h"
 #include "dataset/KeyFrame.h"
@@ -15,13 +16,14 @@ BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
 END_EVENT_TABLE()
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings)
+PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
+							 PreviewControl& control)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
+	, m_control(control)
 	, m_settings(settings)
 {
 	m_timer.Start(1000 / Context::Instance()->fps);
-	m_currFrame = 1;
 }
 
 void PreviewCanvas::initGL()
@@ -38,15 +40,18 @@ void PreviewCanvas::onDraw()
 
 void PreviewCanvas::onTimer(wxTimerEvent& event)
 {
-	if (!m_settings.isStop)
-		++m_currFrame;
+	if (!m_settings.isStop) {
+		m_control.update();
+	}
 
-	if (m_currFrame >= Context::Instance()->layers.getFrameCount())
+	if (m_control.frame() >= Context::Instance()->layers.getFrameCount())
 	{
-		if (m_settings.isCirculate) 
-			m_currFrame = 1;
-		else 
-			--m_currFrame;
+		if (m_settings.isCirculate) {
+			m_control.reset();
+		}
+		else {
+			m_control.decrease();
+		}
 	}
 
 	Refresh();
@@ -70,8 +75,8 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 	{
 		Layer* layer = Context::Instance()->layers.getLayer(i);
 
-		KeyFrame *currFrame = layer->getCurrKeyFrame(m_currFrame),
-			*nextFrame = layer->getNextKeyFrame(m_currFrame);
+		KeyFrame *currFrame = layer->getCurrKeyFrame(m_control.frame()),
+			*nextFrame = layer->getNextKeyFrame(m_control.frame());
 		if (!currFrame)
 			continue;
 
@@ -83,8 +88,8 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 		}
 		else
 		{
-			assert(m_currFrame >= currFrame->getTime() && m_currFrame < nextFrame->getTime());
-			float process = (float) (m_currFrame - currFrame->getTime()) / (nextFrame->getTime() - currFrame->getTime());
+			assert(m_control.frame() >= currFrame->getTime() && m_control.frame() < nextFrame->getTime());
+			float process = (float) (m_control.frame() - currFrame->getTime()) / (nextFrame->getTime() - currFrame->getTime());
 //			anim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
 
 			currFrame->getTweenSprites(currFrame, nextFrame, sprites, process);

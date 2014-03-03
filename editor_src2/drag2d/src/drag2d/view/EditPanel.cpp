@@ -179,13 +179,31 @@ void EditPanel::addHistoryOP(AbstractAtomicOP* op)
 	setTitleStatus(true);
 }
 
-void EditPanel::saveHistoryList(Json::Value& value, const std::vector<ISprite*>& sprites)
+void EditPanel::saveHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
+	Json::Value value;
 	m_historyList.store(value, sprites);
+
+	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
+	Json::StyledStreamWriter writer;
+	std::ofstream fout(path.c_str());
+	writer.write(fout, value);
+	fout.close();
 }
 
-void EditPanel::loadHistoryList(const Json::Value& value, const std::vector<ISprite*>& sprites)
+void EditPanel::loadHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
+	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
+
+	Json::Value value;
+	Json::Reader reader;
+	std::ifstream fin(path.c_str());
+	if (fin.fail()) {
+		return;
+	}
+	reader.parse(fin, value);
+	fin.close();
+
 	m_historyList.load(value, sprites);
 }
 

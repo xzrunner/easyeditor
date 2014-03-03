@@ -185,8 +185,8 @@ namespace emodeling
 		libmodeling::Fixture* fixture = new libmodeling::Fixture;
 		fixture->body = &body;
 
-		const float width = sprite->getSymbol().getWidth(),
-			height = sprite->getSymbol().getHeight();
+		const float width = sprite->getSymbol().getSize().xLength(),
+			height = sprite->getSymbol().getSize().yLength();
 		fixture->shape = new d2d::RectShape(d2d::Vector(0, 0), width * 0.5f, height * 0.5f);
 
 		body.fixtures.push_back(fixture);

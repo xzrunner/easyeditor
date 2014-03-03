@@ -24,8 +24,6 @@ namespace libshape
 		void onKeyDown(wxKeyEvent& event);
 
 	private:
-		d2d::ShapeStyle m_style;
-
 		DECLARE_EVENT_TABLE()
 
 	}; // StageCanvas

@@ -6,7 +6,10 @@
 namespace d2d
 {
 
-static ShapeStyle GREY_THIN_LINE(false, 1, GREY, LS_DEFAULT);
+static const ShapeStyle LIGHT_GREY_THIN_LINE(false, 1, LIGHT_GREY, LS_DEFAULT);
+static const ShapeStyle LIGHT_GREY_LINE(false, 2, LIGHT_GREY, LS_DEFAULT);
+
+static const ShapeStyle BLACK_RECT_FACE(true, BLACK);
 
 }
 

@@ -7,16 +7,20 @@ namespace eanim
 {
 
 struct PlaySettings;
+class PreviewControl;
 
 class PreviewOP : public d2d::ZoomViewOP
 {
 public:
-	PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings);
+	PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings,
+		PreviewControl& control);
 
 	virtual bool onKeyDown(int keyCode);
 
 private:
 	PlaySettings& m_settings;
+
+	PreviewControl& m_control;
 
 }; // PreviewOP
 

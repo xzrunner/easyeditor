@@ -34,6 +34,10 @@ namespace d2d
 		virtual IPropertySetting* createPropertySetting(ISprite* sprite) const;
 		virtual IPropertySetting* createPropertySetting(const std::vector<ISprite*>& sprites) const;
 
+	private:
+		void pasteToSelection() const;
+		void copyFromSelection();
+
 	protected:
 		SpriteSelection* m_selection;
 
@@ -50,7 +54,6 @@ namespace d2d
 		Vector m_firstPos;
 		Vector m_rightFirstScrPos;
 
-		std::vector<ISprite*> m_clipboard;
 		bool m_lastCtrlPress;
 
 		// To disable mouse able when press ctrl and window query
