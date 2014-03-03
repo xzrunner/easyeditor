@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib Opengl32.lib GLee.lib json.lib Box2D.lib SOIL.lib freetype250_D.lib lua.lib"
+				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib Opengl32.lib GLee.lib jsond.lib Box2D.lib SOIL.lib freetype250_D.lib lua.lib"
 				OutputFile="..\cocpackage\x86\Debug\cocpackage.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
