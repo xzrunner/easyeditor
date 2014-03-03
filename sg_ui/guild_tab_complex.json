@@ -54,12 +54,12 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_tab_perk_complex.json",
+			"filepath" : "guild_tab_log_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "tab3",
 			"position" : 
 			{
-				"x" : 226.5199890136719,
+				"x" : 225.7599945068359,
 				"y" : -21.0
 			},
 			"tag" : "",
@@ -77,12 +77,12 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_tab_log_complex.json",
+			"filepath" : "guild_tab_perk_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "tab4",
 			"position" : 
 			{
-				"x" : 326.7799987792969,
+				"x" : 325.2600097656250,
 				"y" : -21.0
 			},
 			"tag" : "",
