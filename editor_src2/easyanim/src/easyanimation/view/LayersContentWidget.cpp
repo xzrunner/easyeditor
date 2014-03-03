@@ -1,5 +1,6 @@
 #include "LayersContentWidget.h"
 #include "Utility.h"
+#include "KeysPanel.h"
 
 #include "frame/Context.h"
 #include "dataset/Layer.h"

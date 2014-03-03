@@ -23,6 +23,8 @@ namespace eanim
 	private:
 		LayersPropertyWidget* m_layersProperty;
 
+		wxWindow* m_contentPanel;
+
 	}; // LayersPanel
 }
 

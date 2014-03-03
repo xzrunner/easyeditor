@@ -9,6 +9,7 @@ namespace eanim
 {
 
 class KeyFrame;
+class KeysPanel;
 
 class Context
 {
@@ -18,7 +19,7 @@ public:
 	wxWindow* stage;
 	wxWindow* toolbar;
 	wxWindow* layersPanel;
-	wxWindow* keysPanel;
+	KeysPanel* keysPanel;
 	d2d::ViewlistPanel* viewlist;
 
 	d2d::ILibraryPage* imagePage;

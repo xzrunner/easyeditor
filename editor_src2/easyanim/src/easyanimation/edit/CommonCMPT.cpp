@@ -3,6 +3,7 @@
 
 #include "view/StagePanel.h"
 #include "view/StageSettings.h"
+#include "view/KeysPanel.h"
 #include "frame/Context.h"
 #include "frame/FileIO.h"
 #include "dataset/Layer.h"

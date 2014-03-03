@@ -11,6 +11,7 @@ namespace eanim
 SkeletonOP::SkeletonOP(StagePanel* stage)
 	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, 
 	static_cast<d2d::PropertySettingPanel*>(Context::Instance()->property))
+	, m_keyDownHandler(this)
 	, m_stage(stage)
 	, m_selectedJoint(NULL)
 {
@@ -115,20 +116,26 @@ void SkeletonOP::translateSprite(const d2d::Vector& delta)
 {
 	d2d::ArrangeSpriteOP<SelectSpritesOP>::translateSprite(delta);
 
-	std::vector<d2d::ISprite*> sprites;
-	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	m_stage->getSkeletonData().updateJoint(sprites[0]);
+	if (!m_selection->empty()) 
+	{
+		std::vector<d2d::ISprite*> sprites;
+		m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_stage->getSkeletonData().updateJoint(sprites[0]);
+	}
 }
 
 void SkeletonOP::rotateSprite(const d2d::Vector& dst)
 {
 	d2d::ArrangeSpriteOP<SelectSpritesOP>::rotateSprite(dst);
 
-	std::vector<d2d::ISprite*> sprites;
-	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	m_stage->getSkeletonData().fixJoint(sprites[0]);
-	float dAngle = d2d::Math::getAngleInDirection(sprites[0]->getPosition(), m_lastPos, dst);
-	m_stage->getSkeletonData().updateJoint(sprites[0], dAngle);
+	if (!m_selection->empty()) 
+	{
+		std::vector<d2d::ISprite*> sprites;
+		m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_stage->getSkeletonData().fixJoint(sprites[0]);
+		float dAngle = d2d::Math::getAngleInDirection(sprites[0]->getPosition(), m_lastPos, dst);
+		m_stage->getSkeletonData().updateJoint(sprites[0], dAngle);
+	}
 }
 
 void SkeletonOP::scaleSprite(const d2d::Vector& currPos)

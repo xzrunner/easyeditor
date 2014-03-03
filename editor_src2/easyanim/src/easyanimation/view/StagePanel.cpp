@@ -1,5 +1,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
+#include "KeysPanel.h"
 
 #include "edit/ArrangeSpriteOP.h"
 #include "frame/Context.h"

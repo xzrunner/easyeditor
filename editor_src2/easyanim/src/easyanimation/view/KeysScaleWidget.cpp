@@ -1,4 +1,5 @@
 #include "KeysScaleWidget.h"
+#include "KeysPanel.h"
 #include "Utility.h"
 
 #include "frame/Context.h"
