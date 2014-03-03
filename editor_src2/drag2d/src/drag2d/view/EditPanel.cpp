@@ -117,9 +117,9 @@ void EditPanel::onMouse(wxMouseEvent& event)
 
 void EditPanel::onKeyDown(wxKeyEvent& event)
 {
-	if (wxGetKeyState(WXK_CONTROL_Z))
+	if (wxGetKeyState(WXK_CONTROL_Z) && wxGetKeyState(WXK_CONTROL))
 		undo();
-	else if (wxGetKeyState(WXK_CONTROL_Y))
+	else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL))
 		redo();
 	
 	m_editOP->onKeyDown(event.GetKeyCode());

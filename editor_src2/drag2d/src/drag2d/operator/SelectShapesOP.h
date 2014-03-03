@@ -46,7 +46,6 @@ namespace d2d
 		MultiShapesImpl* m_shapeImpl;
 
 		std::vector<IShape*> m_clipboard;
-		bool m_lastCtrlPress;
 
 		// To disable mouse able when press ctrl and window query
 		bool m_bDraggable;

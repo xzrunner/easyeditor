@@ -29,7 +29,6 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
 	, m_propertyPanel(propertyPanel)
-	, m_lastCtrlPress(false)
 	, m_bDraggable(true)
 {
 	m_selection = spritesImpl->getSpriteSelection();
@@ -52,21 +51,19 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 	{
 		m_spritesImpl->removeSpriteSelection();	
 	}
-	else if (wxGetKeyState(WXK_CONTROL_X))
+	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
 		pasteToSelection();
 		m_spritesImpl->removeSpriteSelection();
 	}
-	else if (m_lastCtrlPress && (keyCode == 'c' || keyCode == 'C')/*wxGetKeyState(WXK_CONTROL_C)*/)
+	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
 		pasteToSelection();
 	}
-	else if (wxGetKeyState(WXK_CONTROL_V))
+	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
 		copyFromSelection();
 	}
-
-	m_lastCtrlPress = keyCode == WXK_CONTROL;
 
 	return false;
 }
