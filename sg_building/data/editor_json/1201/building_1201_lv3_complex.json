@@ -163,6 +163,29 @@
 			"y offset" : -6.50,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\..\\pngs\\1201_3_lv1_08.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite23",
+			"position" : 
+			{
+				"x" : -31.61053657531738,
+				"y" : 32.17501068115234
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 20.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 84.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"xmax" : 0.0,
