@@ -53,6 +53,9 @@ deprecated
 # temporary
 /tools-src/depends/src
 
+/sg_ui_script/resize_png/target
+/sg_ui_script/resize_png/output
+
 /particles/
 /editor_src2/coceditor/.svn
 /editor_src2/coceditor/platform/msvc2008/coceditor
