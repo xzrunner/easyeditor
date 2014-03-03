@@ -8,6 +8,29 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
+			"filepath" : "..\\..\\pngs\\1107_1.PNG",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite61",
+			"position" : 
+			{
+				"x" : -15.0,
+				"y" : -6.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "..\\..\\pngs\\1201_3_lv3_02.png",
 			"multi color" : "0xffffffff",
 			"name" : "_sprite0",
