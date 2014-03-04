@@ -46,14 +46,14 @@ void ParticleSystem::draw()
 {
 	vertex vertices[4];
 
-	glPushMatrix();
-	glPushAttrib(GL_CURRENT_BIT);
-
-	glTranslatef(origin.x, origin.y, 0);
-
 	Particle* p = pStart;
 	while (p != pLast)
 	{
+		glPushMatrix();
+		glPushAttrib(GL_CURRENT_BIT);
+
+		glTranslatef(p->pos.x, p->pos.y, 0);
+
 		if (p->life < fadeout_time)
 		{
 			unsigned char a = 255 * p->life / fadeout_time;
@@ -75,11 +75,11 @@ void ParticleSystem::draw()
 		d2d::SpriteDraw::time = p->life;
 		d2d::SpriteDraw::drawSprite(p->pc->symbol, d2d::Vector(x, y), p->angle, s, s);
 
+		glPopAttrib();
+		glPopMatrix();
+
 		++p;
 	}
-
-	glPopAttrib();
-	glPopMatrix();
 }
 
 void ParticleSystem::update(float dt)
@@ -171,6 +171,8 @@ void ParticleSystem::pause()
 void ParticleSystem::add()
 {
 	if (isFull()) return;
+
+	pLast->pos = origin;
 
 	std::vector<ParticleChild*> choices;
 	for (size_t i = 0, n = children.size(); i < n; ++i)

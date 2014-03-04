@@ -2,8 +2,7 @@
 #define _EASYPARTICLE3D_STAGEPANEL_H_
 
 #include <drag2d.h>
-
-#include "ParticleSystem.h"
+#include <easyparticle3d.h>
 
 namespace eparticle3d
 {

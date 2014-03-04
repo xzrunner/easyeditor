@@ -26,6 +26,8 @@ struct ParticleChild
 
 struct Particle
 {
+	d2d::Vector pos;
+
 	float lifetime;
 	float life;
 

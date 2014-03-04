@@ -2,7 +2,8 @@
 #include "Context.h"
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
-#include "ParticleSystem.h"
+
+#include <easyparticle3d.h>
 
 namespace eparticle3d
 {
