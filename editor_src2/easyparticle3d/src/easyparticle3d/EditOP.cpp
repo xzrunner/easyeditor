@@ -23,4 +23,15 @@ bool EditOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
+bool EditOP::onMouseDrag(int x, int y)
+{
+	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+
+	ParticleSystem* ps = Context::Instance()->stage->m_particle;
+	ps->origin = m_editPanel->transPosScreenToProject(x, y);
+	ps->start();
+
+	return false;
+}
+
 }

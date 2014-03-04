@@ -14,6 +14,7 @@ public:
 	EditOP(StagePanel* stage);
 
 	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseDrag(int x, int y);
 
 private:
 	StagePanel* m_stage;
