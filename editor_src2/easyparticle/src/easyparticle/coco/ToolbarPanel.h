@@ -72,10 +72,11 @@ namespace coco
 			void onSetScale(wxSpinEvent& event);
 			void onSetRotate(wxSpinEvent& event); 
 
+			const wxString& getFilepath() const;
+
 		private:
 			ParticleChild* m_pc;
 
-			wxTextCtrl* m_filename;
 			wxTextCtrl* m_name;
 			wxSpinCtrl *m_start_scale, *m_end_scale;
 			wxSpinCtrl *m_min_rotate, *m_max_rotate;

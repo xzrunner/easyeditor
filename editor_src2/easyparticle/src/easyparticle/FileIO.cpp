@@ -40,7 +40,7 @@ void FileIO::store(const char* filepath)
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		coco::ToolbarPanel::ChildPanel* cp = toolbar->m_children[i];
-		std::string filepath = d2d::FilenameTools::getRelativePath(dir, cp->m_filename->GetValue());
+		std::string filepath = d2d::FilenameTools::getRelativePath(dir, cp->getFilepath());
 		value["components"][i]["filepath"] = filepath;
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
 		value["components"][i]["start_scale"] = cp->m_start_scale->GetValue();

@@ -40,7 +40,6 @@ void ToolbarPanel::add(const d2d::ParticleFileAdapter::Child& child)
 	ParticleChild* pc = new ParticleChild;
 	ChildPanel* cp = new ChildPanel(this, pc);
 
-	cp->m_filename->SetValue(child.filepath);
 	cp->m_name->SetValue(child.name);
 	cp->m_start_scale->SetValue(child.start_scale);
 	cp->m_end_scale->SetValue(child.end_scale);
@@ -542,6 +541,12 @@ onSetRotate(wxSpinEvent& event)
 {
 	m_pc->min_rotate = m_min_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
 	m_pc->max_rotate = m_max_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
+}
+
+const wxString& ToolbarPanel::ChildPanel::
+getFilepath() const
+{
+	return m_pc->symbol->getFilepath();
 }
 
 //////////////////////////////////////////////////////////////////////////
