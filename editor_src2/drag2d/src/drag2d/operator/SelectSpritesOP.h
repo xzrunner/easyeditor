@@ -54,8 +54,6 @@ namespace d2d
 		Vector m_firstPos;
 		Vector m_rightFirstScrPos;
 
-		bool m_lastCtrlPress;
-
 		// To disable mouse able when press ctrl and window query
 		bool m_bDraggable;
 

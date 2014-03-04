@@ -25,7 +25,6 @@ SelectShapesOP::SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl
 	, m_callback(callback)
 	, m_shapeImpl(shapesImpl)
 	, m_propertyPanel(propertyPanel)
-	, m_lastCtrlPress(false)
 	, m_bDraggable(true)
 {
 	m_selection = shapesImpl->getShapeSelection();
@@ -51,7 +50,7 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 		m_shapeImpl->removeShapeSelection();
 		clear();
 	}
-	else if (wxGetKeyState(WXK_CONTROL_X))
+	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
 		clearClipboard();
 		m_selection->traverse(FetchAllVisitor<IShape>(m_clipboard));
@@ -59,7 +58,7 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 			m_clipboard[i]->retain();
 		m_shapeImpl->removeShapeSelection();
 	}
-	else if (m_lastCtrlPress && (keyCode == 'c' || keyCode == 'C')/*wxGetKeyState(WXK_CONTROL_C)*/)
+	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
 		clearClipboard();
 
@@ -68,7 +67,7 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 		for (size_t i = 0, n = polys.size(); i < n; ++i)
 			m_clipboard.push_back(polys[i]->clone());
 	}
-	else if (wxGetKeyState(WXK_CONTROL_V))
+	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 		{
@@ -76,8 +75,6 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 			m_editPanel->Refresh();
 		}
 	}
-
-	m_lastCtrlPress = keyCode == WXK_CONTROL;
 
 	return false;
 }

@@ -2,33 +2,10 @@
 #include "../coceditor/COCCode.h"
 
 #include <iostream>
-#include <wx/dir.h>
 #include <drag2d.h>
 #include <easybuilder.h>
 
 #define CHARACTER
-
-class DirTraverser : public wxDirTraverser
-{
-public:
-	DirTraverser(wxArrayString& files) 
-		: m_files(files) {}
-
-	virtual wxDirTraverseResult OnFile(const wxString& filename)
-	{
-		m_files.Add(filename);
-		return wxDIR_CONTINUE;
-	}
-
-	virtual wxDirTraverseResult OnDir(const wxString& dirname)
-	{
-		return wxDIR_CONTINUE;
-	}
-
-private:
-	wxArrayString& m_files;
-
-}; // DirTraverser
 
 int main(int argc, char *argv[])
 {
@@ -46,10 +23,7 @@ int main(int argc, char *argv[])
 
 	std::string dirpath = argv[1];
 	wxArrayString files;
-	DirTraverser traverser(files);
-
-	wxDir dir(dirpath);
-	dir.Traverse(traverser);
+	d2d::FilenameTools::fetchAllFiles(dirpath, files);
 
 	try {
 		for (size_t i = 0, n = files.size(); i < n; ++i)

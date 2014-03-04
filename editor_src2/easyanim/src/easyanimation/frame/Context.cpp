@@ -1,6 +1,7 @@
 #include "Context.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
+#include "view/KeysPanel.h"
 
 namespace eanim
 {
@@ -50,9 +51,20 @@ void Context::setCurrFrame(int layer, int frame)
 		reloadViewList(*pFrame);
 		m_last_keyframe = pFrame;
 
+		if (keysPanel) 
+		{
+			int row, col;
+			keysPanel->getSelectPos(row, col);
+			col = m_curr_frame - 1;
+			keysPanel->setSelectPos(row, col);
+		}
+
 		stage->Refresh();
 		if (keysPanel) {
 			keysPanel->Refresh();
+		}
+		if (layersPanel) {
+			layersPanel->Refresh();
 		}
 	}
 }
@@ -68,8 +80,6 @@ void Context::setPrevKeyFrame()
 	if (prev) 
 	{
 		setCurrFrame(m_curr_layer, prev->getTime());
-		stage->Refresh();
-		keysPanel->Refresh();
 	}
 }
 
@@ -84,8 +94,6 @@ void Context::setNextKeyFrame()
 	if (next) 
 	{
 		setCurrFrame(m_curr_layer, next->getTime());
-		stage->Refresh();
-		keysPanel->Refresh();
 	}
 }
 

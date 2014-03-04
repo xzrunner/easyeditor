@@ -3,12 +3,11 @@
 
 #include "view/StagePanel.h"
 #include "view/StageSettings.h"
+#include "view/KeysPanel.h"
 #include "frame/Context.h"
 #include "frame/FileIO.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
-
-#include <wx/dir.h>
 
 namespace eanim
 {
@@ -104,28 +103,6 @@ wxSizer* CommonCMPT::initSettingsPanel()
 	return sizer;
 }
 
-class DirTraverser : public wxDirTraverser
-{
-public:
-	DirTraverser(wxArrayString& files) 
-		: m_files(files) {}
-
-	virtual wxDirTraverseResult OnFile(const wxString& filename)
-	{
-		m_files.Add(filename);
-		return wxDIR_CONTINUE;
-	}
-
-	virtual wxDirTraverseResult OnDir(const wxString& dirname)
-	{
-		return wxDIR_IGNORE;
-	}
-
-private:
-	wxArrayString& m_files;
-
-}; // DirTraverser
-
 void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 {
 	wxDirDialog dlg(NULL, "Images", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
@@ -133,10 +110,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		return;
 
 	wxArrayString files;
-	DirTraverser traverser(files);
-
-	wxDir dir(dlg.GetPath());
-	dir.Traverse(traverser);
+	d2d::FilenameTools::fetchAllFiles(dlg.GetPath().ToStdString(), files);
 
 	std::map<int, std::vector<wxString> > mapFrameSymbols;
 	for (size_t i = 0, n = files.size(); i < n; ++i)
