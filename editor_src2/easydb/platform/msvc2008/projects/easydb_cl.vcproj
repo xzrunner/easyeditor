@@ -182,6 +182,14 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\easydb\FixAnimation.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\FixAnimation.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easydb\FixImages.cpp"
 			>
 		</File>

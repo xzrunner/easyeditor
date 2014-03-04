@@ -31,18 +31,18 @@ void FixImages::ProcessImageFiles(const std::string& imgdir)
 			std::string md5(reinterpret_cast<char*>(digest));
 
 			std::map<std::string, std::string>::iterator itr_md5 
-				= _map_md5_2_image.find(md5);
-			if (itr_md5 == _map_md5_2_image.end()) {
-				_map_md5_2_image.insert(std::make_pair(md5, filepath));
+				= m_map_md5_2_image.find(md5);
+			if (itr_md5 == m_map_md5_2_image.end()) {
+				m_map_md5_2_image.insert(std::make_pair(md5, filepath));
 			} else {
 				wxRemoveFile(filepath);
 				std::cout << "same img: " << itr_md5->second << " -- " << filepath << std::endl;
 			}
 
 			std::map<std::string, std::string>::iterator itr_img
-				= _map_image_2_md5.find(img);
-			if (itr_img == _map_image_2_md5.end()) {
-				_map_image_2_md5.insert(std::make_pair(img, md5));
+				= m_map_image_2_md5.find(img);
+			if (itr_img == m_map_image_2_md5.end()) {
+				m_map_image_2_md5.insert(std::make_pair(img, md5));
 			}
 		}
 	}
@@ -93,10 +93,10 @@ void FixImages::FixImagePath(const std::string& imgdir, const std::string& animp
 					filepath = prefix + filepath;
 
 					std::map<std::string, std::string>::iterator itr_img
-						= _map_image_2_md5.find(filepath);
-					assert(itr_img != _map_image_2_md5.end());
+						= m_map_image_2_md5.find(filepath);
+					assert(itr_img != m_map_image_2_md5.end());
 					std::map<std::string, std::string>::iterator itr_md5
-						= _map_md5_2_image.find(itr_img->second);
+						= m_map_md5_2_image.find(itr_img->second);
 					if (filepath != itr_md5->second)
 					{
 						dirty = true;

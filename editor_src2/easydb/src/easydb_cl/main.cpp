@@ -3,6 +3,7 @@
 #include "VerifyImages.h"
 #include "VerifyJsons.h"
 #include "FixImages.h"
+#include "FixAnimation.h"
 
 void verify(const std::string& dirpath, const std::string& op)
 {
@@ -16,6 +17,8 @@ void fix(const std::string& path0, const std::string& path1, const std::string& 
 {
 	if (op == "-images") {
 		edb::FixImages fix(path0, path1);
+	} else if (op == "-anim") {
+		edb::FixAnimation fix(path0);
 	}
 }
 
