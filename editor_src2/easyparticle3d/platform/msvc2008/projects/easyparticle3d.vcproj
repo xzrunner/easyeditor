@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\src"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easybuilder\src;..\..\..\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src;..\..\..\src"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easybuilder\src;..\..\..\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -181,120 +181,32 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="frame"
-			>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Context.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\FileIO.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Frame.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Frame.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\main.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Task.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Task.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="dataset"
-			>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Code.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyparticle3d\Code.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="view"
-			>
-			<Filter
-				Name="library"
-				>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\LibraryPanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\LibraryPanel.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="stage"
-				>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\EditOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\EditOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\StageCanvas.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\StageCanvas.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\StagePanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\StagePanel.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="toolbar"
-				>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\ToolbarPanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyparticle3d\ToolbarPanel.h"
-					>
-				</File>
-			</Filter>
-		</Filter>
 		<File
 			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyparticle3d\Frame.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyparticle3d\Frame.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyparticle3d\main.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyparticle3d\main.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyparticle3d\Task.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyparticle3d\Task.h"
 			>
 		</File>
 	</Files>

@@ -1,18 +1,14 @@
 #include "FileIO.h"
-#include "Context.h"
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
-
-#include <easyparticle3d.h>
+#include "ParticleSystem.h"
 
 namespace eparticle3d
 {
 
-void FileIO::store(const char* filepath)
+void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 {
 	Json::Value value;
-
-	ToolbarPanel* toolbar = Context::Instance()->toolbar;
 
 	value["name"] = toolbar->m_name->GetValue().ToStdString();
 	value["package"] = toolbar->m_package->GetValue().ToStdString();
@@ -56,14 +52,12 @@ void FileIO::store(const char* filepath)
 	fout.close();
 }
 
-void FileIO::load(const char* filepath)
+void FileIO::load(const char* filepath, ParticleSystem* ps,
+				  ToolbarPanel* toolbar)
 {
-	d2d::ParticleFileAdapter adapter;
+	FileAdapter adapter;
 	adapter.load(filepath);
 
-	ParticleSystem* ps = Context::Instance()->stage->m_particle;
-
-	ToolbarPanel* toolbar = Context::Instance()->toolbar;
 	toolbar->m_name->SetValue(adapter.name);
 	toolbar->m_package->SetValue(adapter.package);
 	toolbar->m_count->SetValue(adapter.count);

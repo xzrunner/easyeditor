@@ -1,17 +1,17 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "EditOP.h"
-#include "Context.h"
 #include "LibraryPanel.h"
 #include "ToolBarPanel.h"
 
 namespace eparticle3d
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
+					   LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, Context::Instance()->library)
-	, m_particle(NULL)
+	, d2d::SpritesPanelImpl(this, library)
+	, m_ps(NULL)
 {
 	xRot = yRot = 0;
 
@@ -21,12 +21,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 StagePanel::~StagePanel()
 {
-}
-
-void StagePanel::clear()
-{
-	d2d::EditPanel::clear();
-	Context::Instance()->toolbar->initParticle();
 }
 
 }

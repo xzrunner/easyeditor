@@ -1,6 +1,6 @@
 #include "ToolBarPanel.h"
 #include "StagePanel.h"
-#include "Context.h"
+#include "ParticleSystem.h"
 
 namespace eparticle3d
 {
@@ -24,18 +24,20 @@ const float ToolbarPanel::END_SCALE			= 80;
 const float ToolbarPanel::MIN_ROTATE		= -180;
 const float ToolbarPanel::MAX_ROTATE		= 180;
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library)
-	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
+						   StagePanel* stage)
+	: d2d::ToolbarPanel(parent, stage)
+	, m_stage(stage)
 	, m_image(NULL)
 {
 	SetScrollbars(1,1, 200, 100, 0, 0);
 	SetSizer(initLayout());	
 	initParticle();
 
-	SetDropTarget(new DropTarget(this, library));
+	SetDropTarget(new DropTarget(library, stage, this));
 }
 
-void ToolbarPanel::add(const d2d::ParticleFileAdapter::Child& child)
+void ToolbarPanel::add(const FileAdapter::Child& child)
 {
 	ParticleChild* pc = new ParticleChild;
 	ChildPanel* cp = new ChildPanel(this, pc);
@@ -53,7 +55,7 @@ void ToolbarPanel::add(const d2d::ParticleFileAdapter::Child& child)
 
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
-	Context::Instance()->stage->m_particle->addChild(pc);
+	m_stage->m_ps->addChild(pc);
 
 	this->Layout();
 }
@@ -321,7 +323,7 @@ void ToolbarPanel::initParticle()
 
 	ParticleSystem* ps = new ParticleSystem(1000);
 	ps->start();
-	Context::Instance()->stage->m_particle = ps;
+	m_stage->m_ps = ps;
 
 	ps->setCount(m_count->GetValue());
 	ps->setEmissionTime(m_emission_time->GetValue());
@@ -341,7 +343,7 @@ void ToolbarPanel::clear()
 		m_compSizer->Detach(m_children.size()-1);
 		delete m_children[m_children.size()-1];
 		m_children.pop_back();
-		Context::Instance()->stage->m_particle->delChild();
+		m_stage->m_ps->delChild();
 	}
 	this->Layout();
 }
@@ -352,7 +354,7 @@ void ToolbarPanel::onAddChild(wxCommandEvent& event)
 	ChildPanel* cp = new ChildPanel(this, pc);
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
-	Context::Instance()->stage->m_particle->addChild(pc);
+	m_stage->m_ps->addChild(pc);
 
 // 	this->Fit();
 //	m_parent->Fit();
@@ -368,69 +370,69 @@ void ToolbarPanel::onDelChild(wxCommandEvent& event)
 	m_compSizer->Detach(m_children.size()-1);
 	delete m_children[m_children.size()-1];
 	m_children.pop_back();
-	Context::Instance()->stage->m_particle->delChild();
+	m_stage->m_ps->delChild();
 
 	this->Layout();
 }
 
 void ToolbarPanel::onSetCount(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setCount(m_count->GetValue());
+	m_stage->m_ps->setCount(m_count->GetValue());
 }
 
 void ToolbarPanel::onSetEmissionTime(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setEmissionTime(m_emission_time->GetValue());
+	m_stage->m_ps->setEmissionTime(m_emission_time->GetValue());
 }
 
 void ToolbarPanel::onSetLife(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setLife(m_min_life->GetValue(), m_max_life->GetValue());
+	m_stage->m_ps->setLife(m_min_life->GetValue(), m_max_life->GetValue());
 }
 
 void ToolbarPanel::onSetHori(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setHori(m_min_hori->GetValue(), m_max_hori->GetValue());
+	m_stage->m_ps->setHori(m_min_hori->GetValue(), m_max_hori->GetValue());
 }
 
 void ToolbarPanel::onSetVert(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setVert(m_min_vert->GetValue(), m_max_vert->GetValue());
+	m_stage->m_ps->setVert(m_min_vert->GetValue(), m_max_vert->GetValue());
 }
 
 void ToolbarPanel::onSetSpeed(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setSpeed(m_min_spd->GetValue(), m_max_spd->GetValue());
+	m_stage->m_ps->setSpeed(m_min_spd->GetValue(), m_max_spd->GetValue());
 }
 
 void ToolbarPanel::onSetGravity(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setGravity(m_gravity->GetValue());
+	m_stage->m_ps->setGravity(m_gravity->GetValue());
 }
 
 void ToolbarPanel::onSetInertia(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setInertia(m_inertia->GetValue());
+	m_stage->m_ps->setInertia(m_inertia->GetValue());
 }
 
 void ToolbarPanel::onSetFadeoutTime(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setFadeoutTime(m_fadeout_time->GetValue());
+	m_stage->m_ps->setFadeoutTime(m_fadeout_time->GetValue());
 }
 
 void ToolbarPanel::onSetBounce(wxCommandEvent& event)
 {
-	Context::Instance()->stage->m_particle->setBounce(event.IsChecked());
+	m_stage->m_ps->setBounce(event.IsChecked());
 }
 
 void ToolbarPanel::onSetAdditiveBlend(wxCommandEvent& event)
 {
-	Context::Instance()->stage->m_particle->setAdditiveBlend(event.IsChecked());
+	m_stage->m_ps->setAdditiveBlend(event.IsChecked());
 }
 
 void ToolbarPanel::onSetStartRadius(wxSpinEvent& event)
 {
-	Context::Instance()->stage->m_particle->setStartRadius(m_start_radius->GetValue());
+	m_stage->m_ps->setStartRadius(m_start_radius->GetValue());
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -554,9 +556,11 @@ getFilepath() const
 //////////////////////////////////////////////////////////////////////////
 
 ToolbarPanel::DropTarget::
-DropTarget(ToolbarPanel* toolbar, d2d::LibraryPanel* library)
-	: m_toolbar(toolbar)
-	, m_library(library)
+DropTarget(d2d::LibraryPanel* library, StagePanel* stage,
+		   ToolbarPanel* toolbar)
+	: m_library(library)
+	, m_stage(stage)
+	, m_toolbar(toolbar)
 {
 }
 
@@ -576,7 +580,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 
 		ToolbarPanel::ChildPanel* child = m_toolbar->m_children.back();
 		child->m_pc->symbol = m_library->getSymbol(index);
-		Context::Instance()->stage->m_particle->start();
+		m_stage->m_ps->start();
 	}
 
 	return true;

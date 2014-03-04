@@ -1413,14 +1413,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\ParticleFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\ParticleFileAdapter.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\common\Patch9FileAdapter.cpp"
 					>
 				</File>

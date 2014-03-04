@@ -6,15 +6,19 @@
 namespace eparticle3d
 {
 
+class ToolbarPanel;
+
 class Code
 {
 public:
-	Code(ebuilder::CodeGenerator& gen);
+	Code(ebuilder::CodeGenerator& gen, ToolbarPanel* toolbar);
 
 	void resolve();
 
 private:
 	ebuilder::CodeGenerator& m_gen;
+
+	ToolbarPanel* m_toolbar;
 
 }; // Code
 

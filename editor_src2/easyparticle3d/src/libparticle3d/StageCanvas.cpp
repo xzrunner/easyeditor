@@ -1,5 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
+#include "ParticleSystem.h"
 
 #include <easyanim.h>
 
@@ -44,16 +45,16 @@ void StageCanvas::onDraw()
 			d2d::SpriteDraw::drawSprite(sprites[i]);
 	}
 
-	if (m_stage->m_particle)
-		m_stage->m_particle->draw();
+	if (m_stage->m_ps)
+		m_stage->m_ps->draw();
 
 	m_editPanel->drawEditTemp();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
 {
-	if (m_stage->m_particle)
-		m_stage->m_particle->update(1.0f / FRAME_RATE);
+	if (m_stage->m_ps)
+		m_stage->m_ps->update(1.0f / FRAME_RATE);
 
 	std::vector<anim::Sprite*> sprites;
 	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<anim::Sprite>(sprites));

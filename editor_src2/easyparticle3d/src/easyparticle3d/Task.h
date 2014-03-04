@@ -7,6 +7,10 @@
 namespace eparticle3d
 {
 
+class LibraryPanel;
+class StagePanel;
+class ToolbarPanel;
+
 class Task
 {
 public:
@@ -18,6 +22,10 @@ public:
 
 	d2d::GLCanvas* getCanvas() const;
 
+	ToolbarPanel* getToolbar() const {
+		return m_toolbar;
+	}
+
 	static Task* create(wxFrame* parent)
 	{
 		return new Task(parent);
@@ -27,10 +35,6 @@ protected:
 	Task(wxFrame* parent);
 	~Task();
 
-	virtual void initWindows(wxSplitterWindow* leftVerticalSplitter, 
-		wxSplitterWindow* rightVerticalSplitter, wxWindow*& library,
-		wxWindow*& stage, wxWindow*& toolbar);
-
 private:
 	void initLayout();
 
@@ -38,6 +42,10 @@ private:
 	wxWindow* m_root;
 
 	wxFrame* m_parent;
+
+	LibraryPanel* m_library;
+	StagePanel* m_stage;
+	ToolbarPanel* m_toolbar;
 
 }; // Task
 

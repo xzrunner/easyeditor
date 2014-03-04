@@ -1,13 +1,13 @@
-#include "ParticleFileAdapter.h"
-
-#include "common/FileNameTools.h"
+#include "FileAdapter.h"
 
 #include <fstream>
+#include <JSON/json.h>
+#include <drag2d.h>
 
-namespace d2d
+namespace eparticle3d
 {
 
-void ParticleFileAdapter::load(const char* filename)
+void FileAdapter::load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -36,14 +36,14 @@ void ParticleFileAdapter::load(const char* filename)
 	start_radius = value["start_radius"].asInt();
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
-	
-	std::string dir = FilenameTools::getFileDir(filename);
+
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	int i = 0;
 	Json::Value childValue = value["components"][i++];
 	while (!childValue.isNull()) {
 		Child child;
 		child.filepath = childValue["filepath"].asString();
-		child.filepath = FilenameTools::getAbsolutePath(dir, child.filepath);
+		child.filepath = d2d::FilenameTools::getAbsolutePath(dir, child.filepath);
 		child.name = childValue["name"].asString();
 		child.start_scale = childValue["start_scale"].asInt();
 		child.end_scale = childValue["end_scale"].asInt();
@@ -54,4 +54,5 @@ void ParticleFileAdapter::load(const char* filename)
 		childValue = value["components"][i++];
 	}
 }
-} // d2d
+
+}

@@ -3,6 +3,11 @@
 namespace eparticle3d
 {
 
+ParticleSystem::ParticleSystem(const ParticleSystem& ps)
+{
+	// todo
+}
+
 ParticleSystem::ParticleSystem(unsigned int buffer)
 {
 //	delete[] pStart;
@@ -166,6 +171,15 @@ void ParticleSystem::reset()
 void ParticleSystem::pause()
 {
 	active = false;
+}
+
+void ParticleSystem::reloadTexture() const
+{
+	for (int i = 0, n = children.size(); i < n; ++i)
+	{
+		ParticleChild* child = children[i];
+		child->symbol->reloadTexture();
+	}
 }
 
 void ParticleSystem::add()

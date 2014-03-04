@@ -1,19 +1,23 @@
 #ifndef _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 #define _EASYPARTICLE3D_TOOLBAR_PANEL_H_
 
+#include "FileAdapter.h"
+
 #include <drag2d.h>
 
 namespace eparticle3d
 {
 
+class StagePanel;
 struct ParticleChild;
 
 class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library);
+	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
+		StagePanel* stage);
 
-	void add(const d2d::ParticleFileAdapter::Child& child);
+	void add(const FileAdapter::Child& child);
 
 	void initParticle();
 
@@ -81,25 +85,29 @@ private:
 		wxSpinCtrl *m_min_rotate, *m_max_rotate;
 		wxSpinCtrl* m_startz;
 
-		friend class FileIO;
 		friend class ToolbarPanel;
 		friend class Code;
+		friend class FileIO;
 	};
 
 	class DropTarget : public wxTextDropTarget
 	{
 	public:
-		DropTarget(ToolbarPanel* toolbar, d2d::LibraryPanel* library);
+		DropTarget(d2d::LibraryPanel* library, StagePanel* stage,
+			ToolbarPanel* toolbar);
 
 		virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
 
 	private:
-		ToolbarPanel* m_toolbar;
 		d2d::LibraryPanel* m_library;
+		StagePanel* m_stage;
+		ToolbarPanel* m_toolbar;
 
 	}; // DropTarget
 
 private:
+	StagePanel* m_stage;
+
 	d2d::Image* m_image;
 
 	wxTextCtrl* m_name;
@@ -123,8 +131,8 @@ private:
 	wxSizer* m_compSizer;
 	std::vector<ChildPanel*> m_children;
 
-	friend class FileIO;
 	friend class Code;
+	friend class FileIO;
 
 }; // ToolbarPanel
 

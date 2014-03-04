@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easycomplex\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -149,30 +149,122 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath="..\..\..\src\libparticle3d\ParticleSystem.cpp"
+		<Filter
+			Name="dataset"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libparticle3d\ParticleSystem.h"
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Symbol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Symbol.h"
+				>
+			</File>
+			<Filter
+				Name="ps"
+				>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\ParticleSystem.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\ParticleSystem.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="file"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libparticle3d\Sprite.cpp"
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Code.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Code.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\FileAdapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\FileAdapter.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\FileIO.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="view"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libparticle3d\Sprite.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libparticle3d\Symbol.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libparticle3d\Symbol.h"
-			>
-		</File>
+			<Filter
+				Name="toolbar"
+				>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\ToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\ToolbarPanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="stage"
+				>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\EditOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\EditOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\StagePanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="library"
+				>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\LibraryPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\LibraryPanel.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

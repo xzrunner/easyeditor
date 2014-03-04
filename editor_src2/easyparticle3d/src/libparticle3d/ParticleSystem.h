@@ -44,7 +44,7 @@ struct Particle
 	ParticleChild* pc;
 };
 
-class ParticleSystem
+class ParticleSystem : public d2d::Object
 {
 public:
 	d2d::Vector origin;
@@ -88,6 +88,7 @@ private:
 	bool orient_to_movement;
 
 public:
+	ParticleSystem(const ParticleSystem& ps);
 	ParticleSystem(unsigned int buffer);
 
 	virtual ~ParticleSystem();
@@ -100,6 +101,8 @@ public:
 	void stop();
 	void reset();
 	void pause();
+
+	void reloadTexture() const;
 
 public:
 	void setCount(int val) { count = val; }

@@ -1,5 +1,4 @@
 #include "Code.h"
-#include "Context.h"
 #include "ToolBarPanel.h"
 
 namespace lua = ebuilder::lua;
@@ -7,85 +6,84 @@ namespace lua = ebuilder::lua;
 namespace eparticle3d
 {
 
-Code::Code(ebuilder::CodeGenerator& gen)
+Code::Code(ebuilder::CodeGenerator& gen, ToolbarPanel* toolbar)
 	: m_gen(gen)
+	, m_toolbar(toolbar)
 {
 }
 
 void Code::resolve()
 {
-	ToolbarPanel* toolbar = Context::Instance()->toolbar;
-
-	std::string s = toolbar->m_name->GetValue();
+	std::string s = m_toolbar->m_name->GetValue();
 	lua::TableAssign ta(m_gen, "['"+s+"']", true);
 
 	lua::assign(m_gen, "['name']", "'"+s+"',");
 	
-	s = toolbar->m_package->GetValue();
+	s = m_toolbar->m_package->GetValue();
 	lua::assign(m_gen, "['package']", "'"+s+"',");
 
-	s = wxString::FromDouble(toolbar->m_count->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_count->GetValue());
 	lua::assign(m_gen, "['count']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_layer->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_layer->GetValue());
 	lua::assign(m_gen, "['layer']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_emission_time->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_emission_time->GetValue());
 	lua::assign(m_gen, "['emission_time']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_min_life->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_min_life->GetValue());
 	lua::assign(m_gen, "['min_life']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_max_life->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_max_life->GetValue());
 	lua::assign(m_gen, "['max_life']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_min_hori->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_min_hori->GetValue());
 	lua::assign(m_gen, "['min_hori']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_max_hori->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_max_hori->GetValue());
 	lua::assign(m_gen, "['max_hori']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_min_vert->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_min_vert->GetValue());
 	lua::assign(m_gen, "['min_vert']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_max_vert->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_max_vert->GetValue());
 	lua::assign(m_gen, "['max_vert']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_min_spd->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_min_spd->GetValue());
 	lua::assign(m_gen, "['min_spd']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_max_spd->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_max_spd->GetValue());
 	lua::assign(m_gen, "['max_spd']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_gravity->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_gravity->GetValue());
 	lua::assign(m_gen, "['gravity']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_inertia->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_inertia->GetValue());
 	lua::assign(m_gen, "['inertia']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_fadeout_time->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_fadeout_time->GetValue());
 	lua::assign(m_gen, "['fadeout_time']", s+",");
 
-	s = toolbar->m_bounce->GetValue() ? "true" : "false";
+	s = m_toolbar->m_bounce->GetValue() ? "true" : "false";
 	lua::assign(m_gen, "['bounce']", s+",");
 
-	s = toolbar->m_additiveBlend->GetValue() ? "true" : "false";
+	s = m_toolbar->m_additiveBlend->GetValue() ? "true" : "false";
 	lua::assign(m_gen, "['additive_blend']", s+",");
 
-	s = wxString::FromDouble(toolbar->m_start_radius->GetValue());
+	s = wxString::FromDouble(m_toolbar->m_start_radius->GetValue());
 	lua::assign(m_gen, "['start_radius']", s+",");
 
-	s = toolbar->m_orient_to_movement->GetValue() ? "true" : "false";
+	s = m_toolbar->m_orient_to_movement->GetValue() ? "true" : "false";
 	lua::assign(m_gen, "['orient_to_movement']", s+",");
 
-	s = toolbar->m_orient_to_parent->GetValue() ? "true" : "false";
+	s = m_toolbar->m_orient_to_parent->GetValue() ? "true" : "false";
 	lua::assign(m_gen, "['orient_to_parent']", s+",");
 
 	{
 		lua::TableAssign ta(m_gen, "['components']", true);
-		for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
+		for (size_t i = 0, n = m_toolbar->m_children.size(); i < n; ++i)
 		{
-			ToolbarPanel::ChildPanel* cp = toolbar->m_children[i];
+			ToolbarPanel::ChildPanel* cp = m_toolbar->m_children[i];
 			lua::TableAssign ta(m_gen, "");
 
 			s = cp->m_name->GetValue();

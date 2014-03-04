@@ -1,6 +1,6 @@
 #include "EditOP.h"
 #include "StagePanel.h"
-#include "Context.h"
+#include "ParticleSystem.h"
 
 namespace eparticle3d
 {
@@ -15,7 +15,7 @@ bool EditOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	ParticleSystem* ps = Context::Instance()->stage->m_particle;
+	ParticleSystem* ps = m_stage->m_ps;
 	ps->origin = m_editPanel->transPosScreenToProject(x, y);
 	ps->start();
 	ps->reset();
@@ -27,7 +27,7 @@ bool EditOP::onMouseDrag(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	ParticleSystem* ps = Context::Instance()->stage->m_particle;
+	ParticleSystem* ps = m_stage->m_ps;
 	ps->origin = m_editPanel->transPosScreenToProject(x, y);
 	ps->start();
 

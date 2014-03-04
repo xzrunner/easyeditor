@@ -1,9 +1,6 @@
 #include "Task.h"
-#include "StagePanel.h"
-#include "ToolbarPanel.h"
-#include "LibraryPanel.h"
-#include "Context.h"
-#include "FileIO.h"
+
+#include <easyparticle3d.h>
 
 namespace eparticle3d
 {
@@ -26,55 +23,46 @@ Task::~Task()
 
 void Task::loadFromTextFile(const char* filename)
 {
-	FileIO::load(filename);
+	FileIO::load(filename, m_stage->m_ps, m_toolbar);
 }
 
 void Task::storeToTextFile(const char* filename) const
 {
-	FileIO::store(filename);
+	FileIO::store(filename, m_toolbar);
 }
 
 void Task::clear()
 {
-	Context::Instance()->stage->clear();
-	Context::Instance()->stage->Refresh();
+	m_toolbar->initParticle();
+	m_stage->clear();
+	m_stage->Refresh();
 }
 
 d2d::GLCanvas* Task::getCanvas() const
 {
-	if (Context::Instance()->stage)
-		return Context::Instance()->stage->getCanvas();
-	else
-		return NULL;
-}
-
-void Task::initWindows(wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter, 
-					   wxWindow*& library, wxWindow*& stage, wxWindow*& toolbar)
-{
-	library = Context::Instance()->library = new LibraryPanel(leftVerticalSplitter);
-	stage = Context::Instance()->stage = new StagePanel(leftVerticalSplitter, m_parent);
-	toolbar = Context::Instance()->toolbar = new ToolbarPanel(rightVerticalSplitter, Context::Instance()->library);
+	return m_stage->getCanvas();
 }
 
 void Task::initLayout()
 {
-	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
+	wxSplitterWindow* rightSplitter = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* leftSplitter = new wxSplitterWindow(rightSplitter);
 
-	wxWindow *library, *stage, *toolbar;
-	initWindows(leftVerticalSplitter, rightVerticalSplitter, library, stage, toolbar);
+	m_library = new LibraryPanel(leftSplitter);
+	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
+	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage);
 
-	leftVerticalSplitter->SetSashGravity(0.2f);
-	leftVerticalSplitter->SplitVertically(library, stage);
+	leftSplitter->SetSashGravity(0.2f);
+	leftSplitter->SplitVertically(m_library, m_stage);
 
-	rightVerticalSplitter->SetSashGravity(0.7f);
-	rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
+	rightSplitter->SetSashGravity(0.7f);
+	rightSplitter->SplitVertically(leftSplitter, m_toolbar);
 
-	m_root = rightVerticalSplitter;
+	m_root = rightSplitter;
 
-	wxSize size = m_parent->GetSize();
-	size.SetWidth(size.GetWidth() + 1);
-	m_parent->SetSize(size);
+// 	wxSize size = m_parent->GetSize();
+// 	size.SetWidth(size.GetWidth() + 1);
+// 	m_parent->SetSize(size);
 }
 
 }
