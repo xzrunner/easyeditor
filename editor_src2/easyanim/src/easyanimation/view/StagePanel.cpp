@@ -52,7 +52,12 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 	const std::vector<Layer*>& layers = context->layers.getAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
-		KeyFrame* frame = layers[i]->getCurrKeyFrame(context->frame());
+		Layer* layer = layers[i];
+		if ((type == d2d::e_editable && !layer->editable) ||
+			(type == d2d::e_visible && !layer->visible))
+			continue;
+
+		KeyFrame* frame = layer->getCurrKeyFrame(context->frame());
 		if (!frame) continue;
 
 		if (order)

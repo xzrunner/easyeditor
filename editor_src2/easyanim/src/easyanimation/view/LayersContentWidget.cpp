@@ -15,6 +15,10 @@ BEGIN_EVENT_TABLE(LayersContentWidget, wxPanel)
 	EVT_MOUSE_EVENTS(LayersContentWidget::onMouse)
 END_EVENT_TABLE()
 
+static const int FLAG_RADIUS = 8;
+static const int FLAG_EDITABLE_X = 80;
+static const int FLAG_VISIBLE_X = 120;
+
 LayersContentWidget::LayersContentWidget(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
 {
@@ -93,6 +97,21 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 		size_t storeIndex = size - i - 1;
 		Layer* layer = Context::Instance()->layers.getLayer(storeIndex);
 		dc.DrawText(layer->name, 5, FRAME_GRID_HEIGHT * i);
+
+		dc.SetPen(*wxBLACK_PEN);
+		if (layer->editable) {
+			dc.SetBrush(*wxBLACK_BRUSH);
+		} else {
+			dc.SetBrush(*wxWHITE_BRUSH);
+		}
+		dc.DrawRectangle(FLAG_EDITABLE_X, FRAME_GRID_HEIGHT * i + (FRAME_GRID_HEIGHT - FLAG_RADIUS*2) * 0.5, FLAG_RADIUS*2, FLAG_RADIUS*2);
+
+		if (layer->visible) {
+			dc.SetBrush(*wxBLACK_BRUSH);
+		} else {
+			dc.SetBrush(*wxWHITE_BRUSH);
+		}
+		dc.DrawCircle(FLAG_VISIBLE_X, FRAME_GRID_HEIGHT * i + FRAME_GRID_HEIGHT * 0.5f, FLAG_RADIUS);
 	}
 }
 
@@ -104,11 +123,15 @@ void LayersContentWidget::onEraseBackground(wxEraseEvent& event)
 void LayersContentWidget::onMouse(wxMouseEvent& event)
 {
 	static bool isDragOpen = false;
+	static int xpress = 0, ypress = 0;
 
 	const unsigned int size = Context::Instance()->layers.size();
 
 	if (event.LeftDown())
 	{
+		xpress = event.GetX();
+		ypress = event.GetY();
+
 		Context* context = Context::Instance();
 		unsigned int screenIndex = event.GetY() / FRAME_GRID_HEIGHT;
 		int layer = size - screenIndex - 1;
@@ -118,6 +141,24 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 	}
 	else if (event.LeftUp())
 	{
+		if (xpress == event.GetX() && ypress == event.GetY())
+		{
+			unsigned int screenIndex = event.GetY() / FRAME_GRID_HEIGHT;
+			int layerIndex = size - screenIndex - 1;
+	
+			int x = event.GetX();
+			Layer* layer = Context::Instance()->layers.getLayer(layerIndex);
+			if (x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
+				layer->editable = !layer->editable;
+				Refresh();
+				Context::Instance()->stage->Refresh();
+			} else if (x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
+				layer->visible = !layer->visible;
+				Refresh();
+				Context::Instance()->stage->Refresh();
+			}
+		}
+
 		isDragOpen = false;
 		if (m_dragFlagLine != -1) 
 		{

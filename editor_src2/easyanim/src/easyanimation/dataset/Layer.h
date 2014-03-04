@@ -39,6 +39,8 @@ namespace eanim
 	public:
 		std::string name;
 
+		bool editable, visible;
+
 	private:
 		void clear();
 
