@@ -1,0 +1,6492 @@
+{"frames": [
+
+{
+	"filename": "2001dashi1/build1/2/1_003.png",
+	"frame": {"x":1291,"y":1371,"w":93,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":184,"w":93,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2001dashi1/build1/2/1_005.png",
+	"frame": {"x":1405,"y":97,"w":95,"h":61},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":200,"w":95,"h":61},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2001dashi1/build1/3/1_003.png",
+	"frame": {"x":1581,"y":669,"w":69,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":158,"w":69,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2001dashi1/build1/3/1_006.png",
+	"frame": {"x":1547,"y":813,"w":55,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":202,"w":55,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2001dashi1/build1/3/1_007.png",
+	"frame": {"x":1497,"y":1371,"w":57,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":199,"w":57,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2001dashi1/build2/3/1_001.png",
+	"frame": {"x":1413,"y":1787,"w":65,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":149,"w":65,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2001dashi1/build2/3/1_002.png",
+	"frame": {"x":1403,"y":1033,"w":61,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":193,"w":61,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2001dashi1/idle2/2/1_001.png",
+	"frame": {"x":767,"y":303,"w":45,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":197,"w":45,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2002jumin1/cheer/2/1_002.png",
+	"frame": {"x":1365,"y":767,"w":45,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":179,"w":45,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2002jumin1/run/2/1_004.png",
+	"frame": {"x":1593,"y":995,"w":37,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":184,"w":37,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2002jumin1/run/2/1_005.png",
+	"frame": {"x":811,"y":1237,"w":39,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":186,"w":39,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2002jumin1/run/2/1_007.png",
+	"frame": {"x":365,"y":307,"w":41,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":183,"w":41,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2002jumin1/run/3/1_006.png",
+	"frame": {"x":1601,"y":1787,"w":89,"h":65},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":177,"w":89,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2002jumin1/stand/2/1_004.png",
+	"frame": {"x":1223,"y":1465,"w":39,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":182,"w":39,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack1/1/1_002.png",
+	"frame": {"x":659,"y":777,"w":35,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":182,"w":35,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack1/1/3_010.png",
+	"frame": {"x":411,"y":553,"w":41,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":199,"w":41,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack1/2/3_010.png",
+	"frame": {"x":85,"y":1261,"w":15,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":265,"y":207,"w":15,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack1/3/2_003.png",
+	"frame": {"x":153,"y":1731,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":175,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack1/3/2_004.png",
+	"frame": {"x":95,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":174,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack1/3/2_005.png",
+	"frame": {"x":171,"y":337,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":184,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack1/3/3_008.png",
+	"frame": {"x":623,"y":1829,"w":45,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":263,"y":230,"w":45,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack2/1/1_008.png",
+	"frame": {"x":1267,"y":541,"w":35,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":182,"w":35,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack2/2/3_007.png",
+	"frame": {"x":1185,"y":1005,"w":51,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":170,"y":233,"w":51,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack2/3/2_001.png",
+	"frame": {"x":467,"y":1493,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":179,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack2/3/3_007.png",
+	"frame": {"x":289,"y":557,"w":37,"h":19},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":206,"w":37,"h":19},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/attack2/3/3_008.png",
+	"frame": {"x":903,"y":549,"w":55,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":171,"y":223,"w":55,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/death/1/1_007.png",
+	"frame": {"x":1,"y":1969,"w":78,"h":60},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":26,"y":41,"w":78,"h":60},
+	"sourceSize": {"w":120,"h":120}
+},
+{
+	"filename": "2003daoke1/death/1/1_010.png",
+	"frame": {"x":1989,"y":1125,"w":68,"h":58},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":19,"y":26,"w":68,"h":58},
+	"sourceSize": {"w":120,"h":120}
+},
+{
+	"filename": "2003daoke1/run/3/3_002.png",
+	"frame": {"x":237,"y":1259,"w":17,"h":57},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":221,"w":17,"h":57},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/run/3/3_003.png",
+	"frame": {"x":295,"y":1259,"w":17,"h":57},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":216,"w":17,"h":57},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/run/3/3_007.png",
+	"frame": {"x":1716,"y":2033,"w":13,"h":57},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":219,"w":13,"h":57},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke1/stand/3/2_001.png",
+	"frame": {"x":489,"y":1493,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":179,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack1/1/1_002.png",
+	"frame": {"x":731,"y":777,"w":35,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":182,"w":35,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack1/1/3_010.png",
+	"frame": {"x":829,"y":1481,"w":41,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":199,"w":41,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack1/2/3_010.png",
+	"frame": {"x":125,"y":1261,"w":15,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":265,"y":207,"w":15,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack1/3/3_001.png",
+	"frame": {"x":833,"y":1009,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack1/3/3_008.png",
+	"frame": {"x":311,"y":789,"w":45,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":263,"y":230,"w":45,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack2/1/1_008.png",
+	"frame": {"x":1337,"y":541,"w":35,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":182,"w":35,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack2/2/3_007.png",
+	"frame": {"x":1237,"y":1005,"w":51,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":170,"y":233,"w":51,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack2/3/3_001.png",
+	"frame": {"x":873,"y":1009,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack2/3/3_007.png",
+	"frame": {"x":327,"y":557,"w":37,"h":19},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":206,"w":37,"h":19},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/attack2/3/3_008.png",
+	"frame": {"x":1039,"y":1477,"w":55,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":171,"y":223,"w":55,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/run/3/3_004.png",
+	"frame": {"x":1631,"y":1173,"w":17,"h":55},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":214,"w":17,"h":55},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke3/stand/3/3_001.png",
+	"frame": {"x":913,"y":1009,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack1/1/1_002.png",
+	"frame": {"x":803,"y":777,"w":35,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":182,"w":35,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack1/1/3_010.png",
+	"frame": {"x":453,"y":553,"w":41,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":199,"w":41,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack1/3/2_003.png",
+	"frame": {"x":107,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":175,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack1/3/2_004.png",
+	"frame": {"x":119,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":174,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack1/3/2_005.png",
+	"frame": {"x":511,"y":1493,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":184,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack1/3/3_001.png",
+	"frame": {"x":953,"y":1009,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack1/3/3_008.png",
+	"frame": {"x":357,"y":789,"w":45,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":263,"y":230,"w":45,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/1/1_008.png",
+	"frame": {"x":1407,"y":541,"w":35,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":182,"w":35,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/2/3_007.png",
+	"frame": {"x":1289,"y":1005,"w":51,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":170,"y":233,"w":51,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/2/3_008.png",
+	"frame": {"x":1971,"y":1125,"w":17,"h":55},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":240,"w":17,"h":55},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/3/2_001.png",
+	"frame": {"x":193,"y":337,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":179,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/3/3_001.png",
+	"frame": {"x":993,"y":1009,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/3/3_002.png",
+	"frame": {"x":1774,"y":2033,"w":13,"h":55},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":236,"w":13,"h":55},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/3/3_007.png",
+	"frame": {"x":677,"y":1485,"w":37,"h":19},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":206,"w":37,"h":19},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/attack2/3/3_008.png",
+	"frame": {"x":1073,"y":1005,"w":55,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":171,"y":223,"w":55,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/run/1/3_001.png",
+	"frame": {"x":669,"y":1823,"w":45,"h":29},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":252,"y":211,"w":45,"h":29},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/run/3/3_006.png",
+	"frame": {"x":1830,"y":2033,"w":13,"h":55},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":219,"w":13,"h":55},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke5/stand/3/2_001.png",
+	"frame": {"x":215,"y":337,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":179,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack1/1/1_002.png",
+	"frame": {"x":875,"y":777,"w":35,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":182,"w":35,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack1/1/3_010.png",
+	"frame": {"x":495,"y":553,"w":41,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":199,"w":41,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack1/2/6_010.png",
+	"frame": {"x":237,"y":337,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":268,"y":188,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack1/3/3_001.png",
+	"frame": {"x":1033,"y":1009,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack1/3/3_008.png",
+	"frame": {"x":365,"y":553,"w":45,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":263,"y":230,"w":45,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/1/1_008.png",
+	"frame": {"x":1387,"y":997,"w":35,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":182,"w":35,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/2/3_007.png",
+	"frame": {"x":1845,"y":1,"w":51,"h":27},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":170,"y":233,"w":51,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/2/3_008.png",
+	"frame": {"x":1982,"y":2029,"w":17,"h":55},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":240,"w":17,"h":55},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/3/3_001.png",
+	"frame": {"x":1721,"y":1253,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/3/3_002.png",
+	"frame": {"x":1886,"y":2033,"w":13,"h":55},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":236,"w":13,"h":55},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/3/3_005.png",
+	"frame": {"x":577,"y":551,"w":43,"h":25},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":276,"y":221,"w":43,"h":25},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/3/3_007.png",
+	"frame": {"x":715,"y":1485,"w":37,"h":19},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":206,"w":37,"h":19},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/attack2/3/3_008.png",
+	"frame": {"x":1129,"y":1005,"w":55,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":171,"y":223,"w":55,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2003daoke6/stand/3/3_001.png",
+	"frame": {"x":1761,"y":1253,"w":23,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":221,"w":23,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2004shenshe3/attack1/3/1_004.png",
+	"frame": {"x":1161,"y":1811,"w":41,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":166,"w":41,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2004shenshe5/attack1/3/1_004.png",
+	"frame": {"x":603,"y":307,"w":41,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":166,"w":41,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2004shenshe6/attack1/3/1_004.png",
+	"frame": {"x":1003,"y":1811,"w":41,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":162,"w":41,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2004shenshe6/cheer/1/1_002.png",
+	"frame": {"x":447,"y":307,"w":41,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":170,"w":41,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2004shenshe6/cheer/1/1_003.png",
+	"frame": {"x":525,"y":307,"w":41,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":168,"w":41,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2004shenshe6/stand/3/1_003.png",
+	"frame": {"x":1285,"y":769,"w":43,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":165,"w":43,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2004shenshe6/stand/3/1_004.png",
+	"frame": {"x":1633,"y":1461,"w":43,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":43,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/attack1/1/3_001.png",
+	"frame": {"x":201,"y":569,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":248,"y":230,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/attack1/1/3_005.png",
+	"frame": {"x":213,"y":569,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":246,"y":216,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/attack1/2/2_004.png",
+	"frame": {"x":959,"y":545,"w":61,"h":31},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":207,"w":61,"h":31},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/attack1/2/2_005.png",
+	"frame": {"x":1145,"y":545,"w":57,"h":31},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":206,"w":57,"h":31},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/attack1/2/3_004.png",
+	"frame": {"x":225,"y":569,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":255,"y":227,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/attack1/2/3_005.png",
+	"frame": {"x":237,"y":569,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":226,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/attack1/3/3_001.png",
+	"frame": {"x":183,"y":793,"w":7,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":232,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/run/2/2_001.png",
+	"frame": {"x":665,"y":549,"w":59,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":213,"w":59,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/run/2/2_002.png",
+	"frame": {"x":725,"y":549,"w":59,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":213,"w":59,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/run/2/2_003.png",
+	"frame": {"x":785,"y":549,"w":59,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":210,"w":59,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/run/2/2_004.png",
+	"frame": {"x":403,"y":785,"w":61,"h":27},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":208,"w":61,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/run/3/3_001.png",
+	"frame": {"x":303,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":232,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/run/3/3_008.png",
+	"frame": {"x":315,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":231,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/stand/1/1_001.png",
+	"frame": {"x":595,"y":781,"w":31,"h":63},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":183,"w":31,"h":63},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/stand/1/3_001.png",
+	"frame": {"x":327,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":248,"y":230,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin1/stand/3/3_001.png",
+	"frame": {"x":339,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":232,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/attack1/1/1_001.png",
+	"frame": {"x":1095,"y":1473,"w":31,"h":63},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":183,"w":31,"h":63},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/attack1/1/3_001.png",
+	"frame": {"x":351,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":248,"y":230,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/attack1/1/3_005.png",
+	"frame": {"x":363,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":246,"y":216,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/attack1/2/3_004.png",
+	"frame": {"x":375,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":255,"y":227,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/attack1/2/3_005.png",
+	"frame": {"x":387,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":226,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/attack1/3/3_001.png",
+	"frame": {"x":399,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":232,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/run/1/1_008.png",
+	"frame": {"x":1203,"y":543,"w":33,"h":63},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":185,"w":33,"h":63},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/run/2/2_007.png",
+	"frame": {"x":1085,"y":1811,"w":75,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":191,"y":209,"w":75,"h":41},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/run/3/3_001.png",
+	"frame": {"x":411,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":232,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/run/3/3_008.png",
+	"frame": {"x":423,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":231,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/stand/1/3_001.png",
+	"frame": {"x":435,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":248,"y":230,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin3/stand/3/3_001.png",
+	"frame": {"x":421,"y":1245,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":232,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin5/run/2/2_006.png",
+	"frame": {"x":1255,"y":1223,"w":81,"h":53},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":186,"y":210,"w":81,"h":53},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin5/stand/1/1_001.png",
+	"frame": {"x":1159,"y":1473,"w":31,"h":63},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":183,"w":31,"h":63},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2005mojin5/stand/2/2_001.png",
+	"frame": {"x":1989,"y":1367,"w":89,"h":57},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":193,"w":89,"h":57},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/1/1_004.png",
+	"frame": {"x":397,"y":1277,"w":77,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":191,"y":161,"w":77,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/2/1_001.png",
+	"frame": {"x":1007,"y":1377,"w":63,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":165,"w":63,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/2/1_009.png",
+	"frame": {"x":1769,"y":1,"w":75,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":169,"w":75,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/2/2_003.png",
+	"frame": {"x":131,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":183,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/3/1_002.png",
+	"frame": {"x":1,"y":929,"w":115,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":159,"y":162,"w":115,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/3/1_010.png",
+	"frame": {"x":95,"y":581,"w":111,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":186,"y":169,"w":111,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/3/2_002.png",
+	"frame": {"x":433,"y":1245,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":173,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack1/3/2_003.png",
+	"frame": {"x":1359,"y":1693,"w":7,"h":9},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":162,"w":7,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/1/1_004.png",
+	"frame": {"x":165,"y":1731,"w":99,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":133,"w":99,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/1/1_006.png",
+	"frame": {"x":1959,"y":171,"w":87,"h":67},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":185,"w":87,"h":67},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/1/2_007.png",
+	"frame": {"x":829,"y":295,"w":9,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":254,"y":186,"w":9,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/2/1_001.png",
+	"frame": {"x":1129,"y":447,"w":63,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":167,"w":63,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/2/1_006.png",
+	"frame": {"x":1,"y":1393,"w":115,"h":67},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":197,"w":115,"h":67},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/3/1_006.png",
+	"frame": {"x":279,"y":813,"w":93,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":200,"w":93,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/3/1_007.png",
+	"frame": {"x":427,"y":1613,"w":91,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":196,"w":91,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/attack2/3/2_002.png",
+	"frame": {"x":839,"y":295,"w":9,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":237,"y":160,"w":9,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/1/1_004.png",
+	"frame": {"x":1523,"y":443,"w":79,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":156,"w":79,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/1/2_001.png",
+	"frame": {"x":143,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":245,"y":162,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/1/2_002.png",
+	"frame": {"x":155,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":241,"y":170,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/1/2_004.png",
+	"frame": {"x":167,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":240,"y":157,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/1/2_005.png",
+	"frame": {"x":179,"y":805,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":242,"y":162,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/1/2_006.png",
+	"frame": {"x":215,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":245,"y":169,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/1/2_008.png",
+	"frame": {"x":227,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":248,"y":158,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/2/1_007.png",
+	"frame": {"x":1145,"y":1853,"w":67,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":167,"w":67,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/run/3/1_004.png",
+	"frame": {"x":1439,"y":577,"w":91,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":192,"y":174,"w":91,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing1/stand/1/1_001.png",
+	"frame": {"x":209,"y":1149,"w":109,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":162,"w":109,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack1/1/1_006.png",
+	"frame": {"x":973,"y":1853,"w":99,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":170,"y":169,"w":99,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack1/1/1_007.png",
+	"frame": {"x":913,"y":677,"w":95,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":169,"y":175,"w":95,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack1/1/1_009.png",
+	"frame": {"x":247,"y":349,"w":103,"h":99},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":175,"y":165,"w":103,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack1/2/1_006.png",
+	"frame": {"x":393,"y":681,"w":103,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":170,"w":103,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack1/2/1_010.png",
+	"frame": {"x":1063,"y":1505,"w":63,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":165,"w":63,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack1/2/2_002.png",
+	"frame": {"x":165,"y":1843,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":190,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack1/3/2_003.png",
+	"frame": {"x":1859,"y":1775,"w":7,"h":9},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":162,"w":7,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack2/2/1_009.png",
+	"frame": {"x":1267,"y":1505,"w":75,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":171,"w":75,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack2/2/2_004.png",
+	"frame": {"x":445,"y":1245,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":273,"y":176,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack2/3/1_001.png",
+	"frame": {"x":101,"y":465,"w":111,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":186,"y":169,"w":111,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack2/3/1_005.png",
+	"frame": {"x":85,"y":813,"w":91,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":199,"w":91,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack2/3/1_009.png",
+	"frame": {"x":565,"y":451,"w":99,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":192,"y":176,"w":99,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/attack2/3/5_004.png",
+	"frame": {"x":181,"y":1843,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":209,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/1/1_002.png",
+	"frame": {"x":267,"y":103,"w":101,"h":95},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":186,"y":169,"w":101,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/1/1_003.png",
+	"frame": {"x":1252,"y":1955,"w":91,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":191,"y":162,"w":91,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/1/1_007.png",
+	"frame": {"x":480,"y":1961,"w":85,"h":99},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":161,"w":85,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/1/2_001.png",
+	"frame": {"x":239,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":245,"y":162,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/1/2_004.png",
+	"frame": {"x":251,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":240,"y":157,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/1/2_006.png",
+	"frame": {"x":263,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":245,"y":169,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/2/2_004.png",
+	"frame": {"x":197,"y":1843,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":253,"y":164,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/2/2_008.png",
+	"frame": {"x":213,"y":1843,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":254,"y":168,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/3/1_005.png",
+	"frame": {"x":267,"y":205,"w":101,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":189,"y":179,"w":101,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing3/run/3/1_008.png",
+	"frame": {"x":1651,"y":669,"w":79,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":192,"y":167,"w":79,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/1/1_003.png",
+	"frame": {"x":376,"y":1961,"w":85,"h":103},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":186,"y":177,"w":85,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/1/2_009.png",
+	"frame": {"x":275,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":233,"y":166,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/2/1_005.png",
+	"frame": {"x":867,"y":1033,"w":83,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":166,"w":83,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/2/1_007.png",
+	"frame": {"x":1555,"y":1369,"w":87,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":172,"w":87,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/2/2_003.png",
+	"frame": {"x":287,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":183,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/2/2_009.png",
+	"frame": {"x":229,"y":1843,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":249,"y":170,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/3/1_003.png",
+	"frame": {"x":295,"y":683,"w":97,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":172,"y":141,"w":97,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack1/3/2_002.png",
+	"frame": {"x":447,"y":1025,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":173,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack2/1/1_001.png",
+	"frame": {"x":213,"y":1033,"w":109,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":162,"w":109,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack2/1/1_003.png",
+	"frame": {"x":776,"y":1957,"w":95,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":195,"y":155,"w":95,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack2/1/1_009.png",
+	"frame": {"x":823,"y":813,"w":97,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":194,"y":164,"w":97,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack2/2/1_008.png",
+	"frame": {"x":1665,"y":1505,"w":87,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":180,"w":87,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack2/2/2_009.png",
+	"frame": {"x":245,"y":1843,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":252,"y":175,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack2/3/1_008.png",
+	"frame": {"x":1959,"y":1,"w":87,"h":85},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":185,"w":87,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/attack2/3/2_004.png",
+	"frame": {"x":1211,"y":1465,"w":9,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":258,"y":201,"w":9,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/cheer/1/2_003.png",
+	"frame": {"x":1319,"y":1693,"w":9,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":238,"y":163,"w":9,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/1/2_002.png",
+	"frame": {"x":299,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":241,"y":170,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/1/2_005.png",
+	"frame": {"x":311,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":242,"y":162,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/1/2_008.png",
+	"frame": {"x":323,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":248,"y":158,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/2/1_001.png",
+	"frame": {"x":1496,"y":1947,"w":69,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":167,"w":69,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/2/1_006.png",
+	"frame": {"x":1571,"y":189,"w":79,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":171,"w":79,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/2/2_001.png",
+	"frame": {"x":261,"y":1843,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":170,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/2/2_002.png",
+	"frame": {"x":371,"y":1495,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":177,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/2/2_003.png",
+	"frame": {"x":387,"y":1495,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":252,"y":169,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/2/2_005.png",
+	"frame": {"x":403,"y":1495,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":252,"y":169,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/2/2_007.png",
+	"frame": {"x":419,"y":1495,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":254,"y":173,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/3/1_001.png",
+	"frame": {"x":907,"y":1131,"w":77,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":196,"y":167,"w":77,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing5/run/3/1_007.png",
+	"frame": {"x":1603,"y":813,"w":89,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":188,"y":175,"w":89,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/1/1_001.png",
+	"frame": {"x":215,"y":1387,"w":109,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":162,"w":109,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/1/1_002.png",
+	"frame": {"x":217,"y":1505,"w":67,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":178,"w":67,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/1/1_008.png",
+	"frame": {"x":647,"y":205,"w":97,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":169,"y":175,"w":97,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/1/1_010.png",
+	"frame": {"x":251,"y":1277,"w":109,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":162,"w":109,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/2/1_008.png",
+	"frame": {"x":282,"y":1965,"w":81,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":171,"w":81,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/3/1_006.png",
+	"frame": {"x":243,"y":577,"w":105,"h":101},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":170,"w":105,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/3/1_007.png",
+	"frame": {"x":1439,"y":445,"w":93,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":170,"w":93,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/3/2_004.png",
+	"frame": {"x":259,"y":337,"w":11,"h":21},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":237,"y":164,"w":11,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/3/8_001.png",
+	"frame": {"x":555,"y":1241,"w":35,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":157,"w":35,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack1/3/8_010.png",
+	"frame": {"x":639,"y":1241,"w":35,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":157,"w":35,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack2/1/1_008.png",
+	"frame": {"x":1353,"y":577,"w":85,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":175,"w":85,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack2/1/2_005.png",
+	"frame": {"x":1971,"y":1181,"w":7,"h":9},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":258,"y":182,"w":7,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack2/1/8_004.png",
+	"frame": {"x":1457,"y":997,"w":35,"h":67},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":144,"w":35,"h":67},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack2/1/8_008.png",
+	"frame": {"x":527,"y":781,"w":31,"h":67},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":166,"w":31,"h":67},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack2/2/1_007.png",
+	"frame": {"x":85,"y":925,"w":111,"h":67},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":196,"w":111,"h":67},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack2/2/8_004.png",
+	"frame": {"x":1075,"y":1229,"w":47,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":237,"y":155,"w":47,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/attack2/3/6_002.png",
+	"frame": {"x":1687,"y":1235,"w":33,"h":41},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":180,"y":176,"w":33,"h":41},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/cheer/1/1_001.png",
+	"frame": {"x":103,"y":349,"w":111,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":186,"y":169,"w":111,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/cheer/1/8_002.png",
+	"frame": {"x":927,"y":1817,"w":35,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":235,"y":162,"w":35,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/1_001.png",
+	"frame": {"x":247,"y":453,"w":103,"h":99},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":188,"y":161,"w":103,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/1_005.png",
+	"frame": {"x":777,"y":677,"w":69,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":162,"w":69,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/1_006.png",
+	"frame": {"x":657,"y":1033,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":168,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/1_008.png",
+	"frame": {"x":939,"y":577,"w":95,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":158,"w":95,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/2_003.png",
+	"frame": {"x":761,"y":1013,"w":19,"h":35},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":232,"y":151,"w":19,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/2_004.png",
+	"frame": {"x":797,"y":1013,"w":19,"h":35},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":232,"y":144,"w":19,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/2_005.png",
+	"frame": {"x":1939,"y":349,"w":19,"h":35},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":234,"y":150,"w":19,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/2_006.png",
+	"frame": {"x":1939,"y":385,"w":19,"h":35},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":158,"w":19,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/1/8_007.png",
+	"frame": {"x":2009,"y":277,"w":37,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":159,"w":37,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/2/1_002.png",
+	"frame": {"x":1683,"y":1853,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":171,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/2/1_004.png",
+	"frame": {"x":1595,"y":577,"w":67,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":165,"w":67,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/2/1_005.png",
+	"frame": {"x":1479,"y":1853,"w":73,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":168,"w":73,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/2/1_008.png",
+	"frame": {"x":995,"y":1505,"w":67,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":164,"w":67,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/3/1_002.png",
+	"frame": {"x":1537,"y":1123,"w":77,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":196,"y":173,"w":77,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/3/1_006.png",
+	"frame": {"x":985,"y":1131,"w":97,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":183,"w":97,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/3/8_003.png",
+	"frame": {"x":679,"y":305,"w":43,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":241,"y":161,"w":43,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/3/8_005.png",
+	"frame": {"x":1203,"y":769,"w":43,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":244,"y":165,"w":43,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/3/8_006.png",
+	"frame": {"x":1305,"y":1465,"w":39,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":243,"y":170,"w":39,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/run/3/8_007.png",
+	"frame": {"x":723,"y":1237,"w":39,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":239,"y":161,"w":39,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/stand/3/1_001.png",
+	"frame": {"x":95,"y":693,"w":111,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":186,"y":169,"w":111,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2006jiabing6/stand/3/8_001.png",
+	"frame": {"x":843,"y":1817,"w":35,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":157,"w":35,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/attack1/2/2_004.png",
+	"frame": {"x":913,"y":1481,"w":23,"h":41},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":183,"w":23,"h":41},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/attack1/3/2_004.png",
+	"frame": {"x":715,"y":1823,"w":45,"h":29},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":185,"w":45,"h":29},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/run/1/2_001.png",
+	"frame": {"x":1341,"y":1003,"w":45,"h":29},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":196,"w":45,"h":29},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/run/1/2_005.png",
+	"frame": {"x":1959,"y":1095,"w":45,"h":29},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":196,"w":45,"h":29},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/run/1/3_001.png",
+	"frame": {"x":277,"y":1833,"w":19,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":242,"y":185,"w":19,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/run/1/3_002.png",
+	"frame": {"x":1939,"y":493,"w":19,"h":33},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":244,"y":188,"w":19,"h":33},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/run/2/2_006.png",
+	"frame": {"x":317,"y":1833,"w":19,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":185,"w":19,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/run/2/2_007.png",
+	"frame": {"x":753,"y":1485,"w":19,"h":37},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":186,"w":19,"h":37},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi1/run/2/2_008.png",
+	"frame": {"x":791,"y":1485,"w":19,"h":37},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":186,"w":19,"h":37},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi3/attack1/2/2_003.png",
+	"frame": {"x":955,"y":1481,"w":23,"h":41},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":188,"w":23,"h":41},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi3/run/1/3_001.png",
+	"frame": {"x":357,"y":1833,"w":19,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":242,"y":185,"w":19,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi3/run/1/3_002.png",
+	"frame": {"x":191,"y":793,"w":19,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":244,"y":187,"w":19,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi3/stand/3/2_004.png",
+	"frame": {"x":1845,"y":53,"w":49,"h":27},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":184,"w":49,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi5/run/1/3_001.png",
+	"frame": {"x":231,"y":793,"w":19,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":242,"y":185,"w":19,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi5/run/1/3_002.png",
+	"frame": {"x":271,"y":793,"w":19,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":244,"y":187,"w":19,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2007sishi5/run/2/2_001.png",
+	"frame": {"x":249,"y":557,"w":19,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":186,"w":19,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2008tianzai1/stand/2/3_001.png",
+	"frame": {"x":580,"y":1961,"w":85,"h":97},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":192,"y":43,"w":85,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2008tianzai3/attack1/3/1_004.png",
+	"frame": {"x":2011,"y":1505,"w":35,"h":65},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":115,"w":35,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2008tianzai3/attack1/3/1_005.png",
+	"frame": {"x":761,"y":1821,"w":31,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":121,"w":31,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2008tianzai3/attack1/3/1_010.png",
+	"frame": {"x":1957,"y":1189,"w":31,"h":57},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":225,"y":124,"w":31,"h":57},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2008tianzai3/stand/2/3_001.png",
+	"frame": {"x":678,"y":1961,"w":85,"h":97},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":192,"y":43,"w":85,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/1/1_006.png",
+	"frame": {"x":1891,"y":1505,"w":59,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":155,"w":59,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/2/1_003.png",
+	"frame": {"x":1449,"y":1125,"w":89,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":169,"w":89,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/2/1_004.png",
+	"frame": {"x":1801,"y":757,"w":81,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":167,"w":81,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/2/1_005.png",
+	"frame": {"x":1739,"y":279,"w":69,"h":89},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":234,"y":171,"w":69,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/2/1_006.png",
+	"frame": {"x":1759,"y":1277,"w":67,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":169,"w":67,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/2/1_007.png",
+	"frame": {"x":1927,"y":1595,"w":59,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":167,"w":59,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/2/1_008.png",
+	"frame": {"x":1525,"y":1215,"w":61,"h":89},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":168,"w":61,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/3/1_003.png",
+	"frame": {"x":1821,"y":577,"w":61,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":167,"w":61,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/attack1/3/1_004.png",
+	"frame": {"x":1861,"y":349,"w":89,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":182,"w":89,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/1/1_002.png",
+	"frame": {"x":1721,"y":993,"w":79,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":168,"w":79,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/1/1_003.png",
+	"frame": {"x":1553,"y":1033,"w":77,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":165,"w":77,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/1/1_004.png",
+	"frame": {"x":1659,"y":903,"w":77,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":164,"w":77,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/1/1_005.png",
+	"frame": {"x":1714,"y":1943,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/1/1_007.png",
+	"frame": {"x":1759,"y":1853,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":166,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_001.png",
+	"frame": {"x":541,"y":1721,"w":63,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":177,"w":63,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_002.png",
+	"frame": {"x":529,"y":1383,"w":61,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":178,"w":61,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_003.png",
+	"frame": {"x":421,"y":1139,"w":65,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":177,"w":65,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_004.png",
+	"frame": {"x":369,"y":1033,"w":71,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":175,"w":71,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_005.png",
+	"frame": {"x":303,"y":919,"w":73,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":177,"w":73,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_006.png",
+	"frame": {"x":373,"y":1853,"w":69,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":178,"w":69,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_007.png",
+	"frame": {"x":519,"y":1613,"w":67,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":177,"w":67,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/2/1_008.png",
+	"frame": {"x":297,"y":1143,"w":67,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":175,"w":67,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/3/1_001.png",
+	"frame": {"x":1507,"y":1787,"w":65,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":187,"w":65,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/3/1_002.png",
+	"frame": {"x":1781,"y":1783,"w":69,"h":89},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":189,"w":69,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/run/3/1_005.png",
+	"frame": {"x":1883,"y":873,"w":75,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":188,"w":75,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi1/stand/2/1_001.png",
+	"frame": {"x":979,"y":1229,"w":47,"h":95},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":170,"w":47,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/1/1_006.png",
+	"frame": {"x":1951,"y":1505,"w":59,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":155,"w":59,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/2/1_002.png",
+	"frame": {"x":1737,"y":903,"w":63,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":170,"w":63,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/2/1_003.png",
+	"frame": {"x":1601,"y":1277,"w":89,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":169,"w":89,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/2/1_004.png",
+	"frame": {"x":1801,"y":845,"w":81,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":167,"w":81,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/2/1_005.png",
+	"frame": {"x":1631,"y":1033,"w":69,"h":89},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":234,"y":171,"w":69,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/2/1_006.png",
+	"frame": {"x":1791,"y":1367,"w":67,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":169,"w":67,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/2/1_007.png",
+	"frame": {"x":1935,"y":1685,"w":59,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":167,"w":59,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/2/1_008.png",
+	"frame": {"x":1895,"y":1277,"w":61,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":168,"w":61,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/3/1_003.png",
+	"frame": {"x":1829,"y":1505,"w":61,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":167,"w":61,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/attack1/3/1_004.png",
+	"frame": {"x":1643,"y":1367,"w":89,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":182,"w":89,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/1/1_002.png",
+	"frame": {"x":1721,"y":1081,"w":79,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":168,"w":79,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/1/1_003.png",
+	"frame": {"x":1685,"y":813,"w":77,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":165,"w":77,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/1/1_004.png",
+	"frame": {"x":1731,"y":667,"w":77,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":164,"w":77,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/1/1_005.png",
+	"frame": {"x":1790,"y":1943,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/1/1_007.png",
+	"frame": {"x":1707,"y":1693,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":166,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/1/1_008.png",
+	"frame": {"x":1871,"y":1775,"w":77,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":77,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_001.png",
+	"frame": {"x":587,"y":1613,"w":63,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":177,"w":63,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_002.png",
+	"frame": {"x":539,"y":1277,"w":61,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":178,"w":61,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_003.png",
+	"frame": {"x":441,"y":1033,"w":65,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":177,"w":65,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_004.png",
+	"frame": {"x":377,"y":919,"w":71,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":175,"w":71,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_005.png",
+	"frame": {"x":373,"y":813,"w":73,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":177,"w":73,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_006.png",
+	"frame": {"x":443,"y":1853,"w":69,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":178,"w":69,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_007.png",
+	"frame": {"x":521,"y":1505,"w":67,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":177,"w":67,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/2/1_008.png",
+	"frame": {"x":301,"y":1033,"w":67,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":175,"w":67,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/3/1_001.png",
+	"frame": {"x":1323,"y":1277,"w":65,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":187,"w":65,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/3/1_002.png",
+	"frame": {"x":1631,"y":1103,"w":69,"h":89},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":189,"w":69,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/run/3/1_005.png",
+	"frame": {"x":1883,"y":957,"w":75,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":188,"w":75,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi3/stand/1/1_001.png",
+	"frame": {"x":1881,"y":1457,"w":47,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":171,"w":47,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/1/1_005.png",
+	"frame": {"x":1543,"y":761,"w":51,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":155,"w":51,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/1/1_006.png",
+	"frame": {"x":1987,"y":1595,"w":59,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":155,"w":59,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/1/1_007.png",
+	"frame": {"x":1631,"y":761,"w":51,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":157,"w":51,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/2/1_002.png",
+	"frame": {"x":1883,"y":1125,"w":63,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":170,"w":63,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/2/1_003.png",
+	"frame": {"x":1465,"y":1033,"w":89,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":169,"w":89,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/2/1_004.png",
+	"frame": {"x":1801,"y":933,"w":81,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":167,"w":81,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/2/1_005.png",
+	"frame": {"x":1689,"y":1277,"w":69,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":234,"y":171,"w":69,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/2/1_006.png",
+	"frame": {"x":1827,"y":1277,"w":67,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":169,"w":67,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/2/1_007.png",
+	"frame": {"x":1957,"y":1247,"w":59,"h":89},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":167,"w":59,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/2/1_008.png",
+	"frame": {"x":1927,"y":1367,"w":61,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":168,"w":61,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/3/1_003.png",
+	"frame": {"x":1865,"y":1595,"w":61,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":167,"w":61,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/attack1/3/1_004.png",
+	"frame": {"x":1636,"y":1947,"w":89,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":185,"y":182,"w":89,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_001.png",
+	"frame": {"x":1801,"y":1189,"w":77,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":166,"w":77,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_002.png",
+	"frame": {"x":1959,"y":1015,"w":79,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":168,"w":79,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_003.png",
+	"frame": {"x":1743,"y":577,"w":77,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":165,"w":77,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_004.png",
+	"frame": {"x":1811,"y":439,"w":77,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":164,"w":77,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_005.png",
+	"frame": {"x":1835,"y":1853,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_006.png",
+	"frame": {"x":1879,"y":1189,"w":77,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":168,"w":77,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_007.png",
+	"frame": {"x":1866,"y":1943,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":166,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/1/1_008.png",
+	"frame": {"x":1959,"y":1775,"w":77,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":77,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/2/1_001.png",
+	"frame": {"x":605,"y":1721,"w":63,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":177,"w":63,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/2/1_002.png",
+	"frame": {"x":591,"y":1383,"w":61,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":178,"w":61,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/2/1_003.png",
+	"frame": {"x":487,"y":1139,"w":65,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":177,"w":65,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/2/1_006.png",
+	"frame": {"x":471,"y":1721,"w":69,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":178,"w":69,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/2/1_007.png",
+	"frame": {"x":513,"y":1853,"w":67,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":177,"w":67,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/2/1_008.png",
+	"frame": {"x":255,"y":1615,"w":67,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":175,"w":67,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/3/1_001.png",
+	"frame": {"x":1369,"y":1371,"w":65,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":187,"w":65,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/3/1_002.png",
+	"frame": {"x":1721,"y":1367,"w":69,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":189,"w":69,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/3/1_005.png",
+	"frame": {"x":1883,"y":1041,"w":75,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":188,"w":75,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/run/3/1_007.png",
+	"frame": {"x":1721,"y":1169,"w":79,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":198,"y":188,"w":79,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2009daoshi5/stand/1/1_001.png",
+	"frame": {"x":1963,"y":1457,"w":47,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":171,"w":47,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/2/1_002.png",
+	"frame": {"x":1603,"y":441,"w":63,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":93,"w":63,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/2/1_003.png",
+	"frame": {"x":1277,"y":197,"w":55,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":87,"w":55,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/2/1_004.png",
+	"frame": {"x":1159,"y":1225,"w":51,"h":95},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":87,"w":51,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/2/1_009.png",
+	"frame": {"x":1365,"y":293,"w":55,"h":95},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/2/1_010.png",
+	"frame": {"x":191,"y":349,"w":55,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":92,"w":55,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/2/1_011.png",
+	"frame": {"x":651,"y":1611,"w":59,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":94,"w":59,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/2/1_012.png",
+	"frame": {"x":1419,"y":1505,"w":65,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":97,"w":65,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_001.png",
+	"frame": {"x":757,"y":99,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_002.png",
+	"frame": {"x":347,"y":349,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":86,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_003.png",
+	"frame": {"x":429,"y":205,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":84,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_004.png",
+	"frame": {"x":699,"y":1135,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":83,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_005.png",
+	"frame": {"x":1183,"y":349,"w":63,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":85,"w":63,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_007.png",
+	"frame": {"x":1237,"y":1799,"w":53,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":93,"w":53,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_008.png",
+	"frame": {"x":1337,"y":1221,"w":55,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":87,"w":55,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_009.png",
+	"frame": {"x":1265,"y":445,"w":61,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":86,"w":61,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_010.png",
+	"frame": {"x":1021,"y":1277,"w":69,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":87,"w":69,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_011.png",
+	"frame": {"x":1344,"y":1951,"w":75,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":92,"w":75,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_012.png",
+	"frame": {"x":1029,"y":1033,"w":73,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":92,"w":73,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_001.png",
+	"frame": {"x":1163,"y":1033,"w":57,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":91,"w":57,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_002.png",
+	"frame": {"x":1409,"y":1,"w":59,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":91,"w":59,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_003.png",
+	"frame": {"x":1461,"y":289,"w":59,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":93,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_004.png",
+	"frame": {"x":1555,"y":289,"w":59,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":93,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_005.png",
+	"frame": {"x":1389,"y":1277,"w":61,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":93,"w":61,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_006.png",
+	"frame": {"x":1537,"y":1599,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":94,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_007.png",
+	"frame": {"x":1587,"y":1693,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":94,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_008.png",
+	"frame": {"x":1073,"y":909,"w":59,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":92,"w":59,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_009.png",
+	"frame": {"x":1197,"y":1129,"w":57,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":92,"w":57,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_010.png",
+	"frame": {"x":1257,"y":813,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_011.png",
+	"frame": {"x":1221,"y":673,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/2/1_012.png",
+	"frame": {"x":1241,"y":577,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":91,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_001.png",
+	"frame": {"x":771,"y":1135,"w":69,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":86,"w":69,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_002.png",
+	"frame": {"x":743,"y":1277,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":86,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_003.png",
+	"frame": {"x":745,"y":203,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_004.png",
+	"frame": {"x":587,"y":577,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_005.png",
+	"frame": {"x":645,"y":449,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_006.png",
+	"frame": {"x":703,"y":349,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":88,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_007.png",
+	"frame": {"x":803,"y":577,"w":69,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":89,"w":69,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_008.png",
+	"frame": {"x":795,"y":1379,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":88,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_009.png",
+	"frame": {"x":673,"y":1277,"w":69,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":87,"w":69,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_010.png",
+	"frame": {"x":713,"y":1505,"w":69,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":87,"w":69,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_011.png",
+	"frame": {"x":853,"y":1505,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":88,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/run/3/1_012.png",
+	"frame": {"x":909,"y":1607,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":87,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_002.png",
+	"frame": {"x":817,"y":197,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_003.png",
+	"frame": {"x":823,"y":99,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_004.png",
+	"frame": {"x":883,"y":197,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_005.png",
+	"frame": {"x":757,"y":813,"w":65,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":65,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_006.png",
+	"frame": {"x":825,"y":1,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_007.png",
+	"frame": {"x":1233,"y":1701,"w":67,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":94,"w":67,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_008.png",
+	"frame": {"x":889,"y":99,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_009.png",
+	"frame": {"x":891,"y":1,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_010.png",
+	"frame": {"x":1339,"y":97,"w":65,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":95,"w":65,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_011.png",
+	"frame": {"x":919,"y":349,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv1/stand/3/1_012.png",
+	"frame": {"x":949,"y":197,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/2/1_002.png",
+	"frame": {"x":1653,"y":349,"w":63,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":93,"w":63,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/2/1_003.png",
+	"frame": {"x":1221,"y":1,"w":55,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":87,"w":55,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/2/1_004.png",
+	"frame": {"x":1519,"y":193,"w":51,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":87,"w":51,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/2/1_009.png",
+	"frame": {"x":1327,"y":445,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/2/1_010.png",
+	"frame": {"x":183,"y":685,"w":55,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":92,"w":55,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/2/1_011.png",
+	"frame": {"x":669,"y":1717,"w":59,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":94,"w":59,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/2/1_012.png",
+	"frame": {"x":1471,"y":1599,"w":65,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":97,"w":65,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_001.png",
+	"frame": {"x":955,"y":99,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_002.png",
+	"frame": {"x":441,"y":103,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":86,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_003.png",
+	"frame": {"x":443,"y":1,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":84,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_004.png",
+	"frame": {"x":969,"y":1709,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":83,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_005.png",
+	"frame": {"x":1213,"y":197,"w":63,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":85,"w":63,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_007.png",
+	"frame": {"x":1325,"y":1799,"w":53,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":93,"w":53,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_008.png",
+	"frame": {"x":1431,"y":1221,"w":55,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":87,"w":55,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_009.png",
+	"frame": {"x":1315,"y":349,"w":61,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":86,"w":61,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_010.png",
+	"frame": {"x":1071,"y":1375,"w":69,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":87,"w":69,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_011.png",
+	"frame": {"x":1420,"y":1951,"w":75,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":92,"w":75,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_012.png",
+	"frame": {"x":1063,"y":1131,"w":73,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":92,"w":73,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_001.png",
+	"frame": {"x":1221,"y":1033,"w":57,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":91,"w":57,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_002.png",
+	"frame": {"x":1103,"y":1033,"w":59,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":91,"w":59,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_003.png",
+	"frame": {"x":1623,"y":1853,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":93,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_004.png",
+	"frame": {"x":1547,"y":1505,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":93,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_005.png",
+	"frame": {"x":1435,"y":1371,"w":61,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":93,"w":61,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_006.png",
+	"frame": {"x":1597,"y":1599,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":94,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_007.png",
+	"frame": {"x":1647,"y":1693,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":94,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_008.png",
+	"frame": {"x":1133,"y":909,"w":59,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":92,"w":59,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_009.png",
+	"frame": {"x":1193,"y":909,"w":57,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":92,"w":57,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_010.png",
+	"frame": {"x":1377,"y":349,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_011.png",
+	"frame": {"x":1277,"y":673,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/2/1_012.png",
+	"frame": {"x":1297,"y":577,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":91,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_001.png",
+	"frame": {"x":815,"y":1277,"w":69,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":86,"w":69,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_002.png",
+	"frame": {"x":1073,"y":1853,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":86,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_003.png",
+	"frame": {"x":633,"y":677,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_004.png",
+	"frame": {"x":659,"y":577,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_005.png",
+	"frame": {"x":705,"y":677,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_006.png",
+	"frame": {"x":717,"y":449,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":88,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_007.png",
+	"frame": {"x":861,"y":449,"w":69,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":89,"w":69,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_008.png",
+	"frame": {"x":421,"y":349,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":88,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_009.png",
+	"frame": {"x":725,"y":1381,"w":69,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":87,"w":69,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_010.png",
+	"frame": {"x":771,"y":1609,"w":69,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":87,"w":69,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_011.png",
+	"frame": {"x":503,"y":205,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":88,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/run/3/1_012.png",
+	"frame": {"x":515,"y":103,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":87,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_002.png",
+	"frame": {"x":1015,"y":197,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_003.png",
+	"frame": {"x":957,"y":1,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_004.png",
+	"frame": {"x":1021,"y":99,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_005.png",
+	"frame": {"x":847,"y":677,"w":65,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":65,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_006.png",
+	"frame": {"x":1023,"y":1,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_007.png",
+	"frame": {"x":1251,"y":1603,"w":67,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":94,"w":67,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_008.png",
+	"frame": {"x":931,"y":447,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_009.png",
+	"frame": {"x":985,"y":349,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_010.png",
+	"frame": {"x":1073,"y":813,"w":65,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":95,"w":65,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_011.png",
+	"frame": {"x":1081,"y":197,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv2/stand/3/1_012.png",
+	"frame": {"x":1087,"y":99,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/2/1_002.png",
+	"frame": {"x":1667,"y":441,"w":63,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":93,"w":63,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/2/1_003.png",
+	"frame": {"x":1277,"y":1,"w":55,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":87,"w":55,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/2/1_004.png",
+	"frame": {"x":1469,"y":1,"w":51,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":87,"w":51,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/2/1_009.png",
+	"frame": {"x":1383,"y":445,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/2/1_010.png",
+	"frame": {"x":239,"y":685,"w":55,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":92,"w":55,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/2/1_011.png",
+	"frame": {"x":711,"y":1611,"w":59,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":94,"w":59,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/2/1_012.png",
+	"frame": {"x":1521,"y":1693,"w":65,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":97,"w":65,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_001.png",
+	"frame": {"x":1089,"y":1,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_002.png",
+	"frame": {"x":347,"y":451,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":86,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_003.png",
+	"frame": {"x":441,"y":577,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":84,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_004.png",
+	"frame": {"x":517,"y":1,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":83,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_005.png",
+	"frame": {"x":1219,"y":99,"w":63,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":85,"w":63,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_007.png",
+	"frame": {"x":853,"y":295,"w":53,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":93,"w":53,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_008.png",
+	"frame": {"x":1657,"y":1599,"w":55,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":87,"w":55,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_009.png",
+	"frame": {"x":1401,"y":193,"w":61,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":86,"w":61,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_010.png",
+	"frame": {"x":1091,"y":1277,"w":69,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":87,"w":69,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_011.png",
+	"frame": {"x":1333,"y":1,"w":75,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":92,"w":75,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_012.png",
+	"frame": {"x":999,"y":911,"w":73,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":92,"w":73,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_001.png",
+	"frame": {"x":1199,"y":813,"w":57,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":91,"w":57,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_002.png",
+	"frame": {"x":1139,"y":813,"w":59,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":91,"w":59,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_003.png",
+	"frame": {"x":1309,"y":909,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":93,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_004.png",
+	"frame": {"x":1343,"y":1033,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":93,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_005.png",
+	"frame": {"x":1485,"y":1505,"w":61,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":93,"w":61,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_006.png",
+	"frame": {"x":1389,"y":1127,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":94,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_007.png",
+	"frame": {"x":1451,"y":1277,"w":59,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":94,"w":59,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_008.png",
+	"frame": {"x":1137,"y":1129,"w":59,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":92,"w":59,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_009.png",
+	"frame": {"x":1251,"y":909,"w":57,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":92,"w":57,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_010.png",
+	"frame": {"x":1433,"y":349,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_011.png",
+	"frame": {"x":1463,"y":193,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/2/1_012.png",
+	"frame": {"x":1467,"y":97,"w":55,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":91,"w":55,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_001.png",
+	"frame": {"x":867,"y":1379,"w":69,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":86,"w":69,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_002.png",
+	"frame": {"x":421,"y":451,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":86,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_003.png",
+	"frame": {"x":775,"y":349,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_004.png",
+	"frame": {"x":731,"y":577,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_005.png",
+	"frame": {"x":789,"y":449,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":87,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_006.png",
+	"frame": {"x":847,"y":349,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":88,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_007.png",
+	"frame": {"x":753,"y":913,"w":69,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":89,"w":69,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_008.png",
+	"frame": {"x":493,"y":349,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":88,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_009.png",
+	"frame": {"x":783,"y":1505,"w":69,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":87,"w":69,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_010.png",
+	"frame": {"x":831,"y":1713,"w":69,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":87,"w":69,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_011.png",
+	"frame": {"x":575,"y":205,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":88,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/run/3/1_012.png",
+	"frame": {"x":587,"y":103,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":87,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_002.png",
+	"frame": {"x":997,"y":447,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_003.png",
+	"frame": {"x":1051,"y":349,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_004.png",
+	"frame": {"x":1147,"y":197,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_005.png",
+	"frame": {"x":873,"y":577,"w":65,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":92,"w":65,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_006.png",
+	"frame": {"x":1153,"y":99,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_007.png",
+	"frame": {"x":1301,"y":1701,"w":67,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":94,"w":67,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_008.png",
+	"frame": {"x":1155,"y":1,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_009.png",
+	"frame": {"x":1063,"y":447,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":94,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_010.png",
+	"frame": {"x":1155,"y":673,"w":65,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":95,"w":65,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_011.png",
+	"frame": {"x":1117,"y":349,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":93,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2010shennv3/stand/3/1_012.png",
+	"frame": {"x":1035,"y":577,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":92,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/1/1_006.png",
+	"frame": {"x":105,"y":1,"w":111,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":90,"w":111,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/1/1_007.png",
+	"frame": {"x":62,"y":1969,"w":111,"h":77},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":90,"w":111,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/1/2_002.png",
+	"frame": {"x":351,"y":205,"w":101,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":134,"w":101,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/1/2_003.png",
+	"frame": {"x":1443,"y":905,"w":91,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":158,"y":123,"w":91,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/1/2_006.png",
+	"frame": {"x":1829,"y":277,"w":89,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":163,"y":107,"w":89,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/1/2_007.png",
+	"frame": {"x":515,"y":577,"w":101,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":151,"y":125,"w":101,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/1_001.png",
+	"frame": {"x":585,"y":1033,"w":71,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":75,"w":71,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/1_002.png",
+	"frame": {"x":855,"y":1853,"w":67,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":70,"w":67,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/1_003.png",
+	"frame": {"x":581,"y":1853,"w":63,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":233,"y":73,"w":63,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/1_004.png",
+	"frame": {"x":85,"y":1149,"w":61,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":237,"y":92,"w":61,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/1_005.png",
+	"frame": {"x":105,"y":1739,"w":59,"h":113},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":239,"y":107,"w":59,"h":113},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/1_007.png",
+	"frame": {"x":285,"y":1505,"w":57,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":238,"y":104,"w":57,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/1_008.png",
+	"frame": {"x":1,"y":1855,"w":61,"h":113},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":98,"w":61,"h":113},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_001.png",
+	"frame": {"x":801,"y":1033,"w":99,"h":65},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":101,"w":99,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_002.png",
+	"frame": {"x":925,"y":1505,"w":101,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":89,"w":101,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_003.png",
+	"frame": {"x":919,"y":911,"w":97,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":142,"y":85,"w":97,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_004.png",
+	"frame": {"x":1489,"y":349,"w":93,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":74,"w":93,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_005.png",
+	"frame": {"x":872,"y":1957,"w":91,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":148,"y":62,"w":91,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_006.png",
+	"frame": {"x":1959,"y":769,"w":87,"h":81},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":153,"y":69,"w":87,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_007.png",
+	"frame": {"x":1369,"y":1693,"w":93,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":79,"w":93,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/2/2_008.png",
+	"frame": {"x":1127,"y":1505,"w":97,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":139,"y":94,"w":97,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/1_007.png",
+	"frame": {"x":1,"y":581,"w":115,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":124,"w":115,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/2_001.png",
+	"frame": {"x":1783,"y":1687,"w":89,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":155,"y":76,"w":89,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/2_002.png",
+	"frame": {"x":1959,"y":87,"w":87,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":159,"y":65,"w":87,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/2_004.png",
+	"frame": {"x":1883,"y":529,"w":75,"h":85},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":173,"y":57,"w":75,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/2_005.png",
+	"frame": {"x":1553,"y":1853,"w":69,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":179,"y":47,"w":69,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/2_006.png",
+	"frame": {"x":1663,"y":577,"w":79,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":169,"y":52,"w":79,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/2_007.png",
+	"frame": {"x":1959,"y":349,"w":87,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":60,"w":87,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng1/attack1/3/2_008.png",
+	"frame": {"x":1651,"y":189,"w":91,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":155,"y":69,"w":91,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/1/1_006.png",
+	"frame": {"x":105,"y":113,"w":111,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":90,"w":111,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/1/1_007.png",
+	"frame": {"x":189,"y":113,"w":111,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":90,"w":111,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/1/2_002.png",
+	"frame": {"x":363,"y":103,"w":101,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":134,"w":101,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/1/2_003.png",
+	"frame": {"x":1475,"y":813,"w":91,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":158,"y":123,"w":91,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/1/2_006.png",
+	"frame": {"x":1911,"y":1853,"w":89,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":163,"y":107,"w":89,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/1/2_007.png",
+	"frame": {"x":561,"y":679,"w":101,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":151,"y":125,"w":101,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/1_001.png",
+	"frame": {"x":627,"y":1137,"w":71,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":75,"w":71,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/1_002.png",
+	"frame": {"x":841,"y":1609,"w":67,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":70,"w":67,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/1_004.png",
+	"frame": {"x":147,"y":1149,"w":61,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":237,"y":92,"w":61,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/1_007.png",
+	"frame": {"x":303,"y":1387,"w":57,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":238,"y":104,"w":57,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/1_008.png",
+	"frame": {"x":63,"y":1855,"w":61,"h":113},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":98,"w":61,"h":113},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_001.png",
+	"frame": {"x":841,"y":1133,"w":99,"h":65},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":101,"w":99,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_002.png",
+	"frame": {"x":981,"y":1607,"w":101,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":89,"w":101,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_003.png",
+	"frame": {"x":921,"y":813,"w":97,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":142,"y":85,"w":97,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_004.png",
+	"frame": {"x":1523,"y":95,"w":93,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":74,"w":93,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_005.png",
+	"frame": {"x":964,"y":1957,"w":91,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":148,"y":62,"w":91,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_006.png",
+	"frame": {"x":1959,"y":851,"w":87,"h":81},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":153,"y":69,"w":87,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_007.png",
+	"frame": {"x":1395,"y":1599,"w":93,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":79,"w":93,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/2/2_008.png",
+	"frame": {"x":1181,"y":1603,"w":97,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":139,"y":94,"w":97,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/1_007.png",
+	"frame": {"x":1,"y":697,"w":115,"h":93},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":124,"w":115,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_001.png",
+	"frame": {"x":1789,"y":1595,"w":89,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":155,"y":76,"w":89,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_002.png",
+	"frame": {"x":1959,"y":433,"w":87,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":159,"y":65,"w":87,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_003.png",
+	"frame": {"x":1801,"y":1021,"w":81,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":167,"y":65,"w":81,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_004.png",
+	"frame": {"x":1883,"y":615,"w":75,"h":85},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":173,"y":57,"w":75,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_005.png",
+	"frame": {"x":1566,"y":1947,"w":69,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":179,"y":47,"w":69,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_006.png",
+	"frame": {"x":1731,"y":441,"w":79,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":169,"y":52,"w":79,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_007.png",
+	"frame": {"x":1959,"y":517,"w":87,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":60,"w":87,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng2/attack1/3/2_008.png",
+	"frame": {"x":1687,"y":95,"w":91,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":155,"y":69,"w":91,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/1/1_006.png",
+	"frame": {"x":105,"y":225,"w":111,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":206,"y":90,"w":111,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/1/1_007.png",
+	"frame": {"x":189,"y":225,"w":111,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":90,"w":111,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/1/2_002.png",
+	"frame": {"x":365,"y":1,"w":101,"h":77},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":134,"w":101,"h":77},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/1/2_003.png",
+	"frame": {"x":1509,"y":669,"w":91,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":158,"y":123,"w":91,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/1/2_006.png",
+	"frame": {"x":1919,"y":277,"w":89,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":163,"y":107,"w":89,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/1/2_007.png",
+	"frame": {"x":613,"y":813,"w":101,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":151,"y":125,"w":101,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/1_001.png",
+	"frame": {"x":601,"y":1277,"w":71,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":75,"w":71,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/1_002.png",
+	"frame": {"x":901,"y":1713,"w":67,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":70,"w":67,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/1_004.png",
+	"frame": {"x":151,"y":1037,"w":61,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":237,"y":92,"w":61,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/1_007.png",
+	"frame": {"x":339,"y":1277,"w":57,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":238,"y":104,"w":57,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_001.png",
+	"frame": {"x":955,"y":1277,"w":99,"h":65},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":101,"w":99,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_002.png",
+	"frame": {"x":1041,"y":1709,"w":101,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":136,"y":89,"w":101,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_003.png",
+	"frame": {"x":1009,"y":675,"w":97,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":142,"y":85,"w":97,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_004.png",
+	"frame": {"x":1161,"y":1277,"w":93,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":74,"w":93,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_005.png",
+	"frame": {"x":1511,"y":1277,"w":91,"h":89},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":148,"y":62,"w":91,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_006.png",
+	"frame": {"x":1959,"y":933,"w":87,"h":81},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":153,"y":69,"w":87,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_007.png",
+	"frame": {"x":1445,"y":1693,"w":93,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":146,"y":79,"w":93,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/2/2_008.png",
+	"frame": {"x":1197,"y":1505,"w":97,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":139,"y":94,"w":97,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_001.png",
+	"frame": {"x":1859,"y":1685,"w":89,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":155,"y":76,"w":89,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_002.png",
+	"frame": {"x":1959,"y":601,"w":87,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":159,"y":65,"w":87,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_003.png",
+	"frame": {"x":1801,"y":1105,"w":81,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":167,"y":65,"w":81,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_004.png",
+	"frame": {"x":1883,"y":701,"w":75,"h":85},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":173,"y":57,"w":75,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_005.png",
+	"frame": {"x":1255,"y":1129,"w":69,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":179,"y":47,"w":69,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_006.png",
+	"frame": {"x":1781,"y":349,"w":79,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":169,"y":52,"w":79,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_007.png",
+	"frame": {"x":1959,"y":685,"w":87,"h":83},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":60,"w":87,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2011dapeng3/attack1/3/2_008.png",
+	"frame": {"x":1689,"y":1,"w":91,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":155,"y":69,"w":91,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/1/1_001.png",
+	"frame": {"x":361,"y":1387,"w":91,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":194,"y":151,"w":91,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/1/1_002.png",
+	"frame": {"x":265,"y":1725,"w":105,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":196,"y":151,"w":105,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/1/1_004.png",
+	"frame": {"x":203,"y":923,"w":99,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":192,"y":149,"w":99,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/1/1_005.png",
+	"frame": {"x":1,"y":1,"w":103,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":143,"w":103,"h":115},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/1/1_008.png",
+	"frame": {"x":1,"y":465,"w":99,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":143,"w":99,"h":115},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/1/1_009.png",
+	"frame": {"x":275,"y":1853,"w":97,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":147,"w":97,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/1/2_008.png",
+	"frame": {"x":997,"y":1481,"w":23,"h":41},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":275,"y":163,"w":23,"h":41},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/2/1_002.png",
+	"frame": {"x":1,"y":1625,"w":57,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":146,"w":57,"h":115},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/2/8_002.png",
+	"frame": {"x":165,"y":1261,"w":35,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":214,"w":35,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/2/8_003.png",
+	"frame": {"x":201,"y":1261,"w":35,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":215,"w":35,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/3/1_001.png",
+	"frame": {"x":823,"y":911,"w":97,"h":95},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":154,"w":97,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/3/1_004.png",
+	"frame": {"x":729,"y":1717,"w":103,"h":101},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":191,"y":148,"w":103,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/3/1_005.png",
+	"frame": {"x":661,"y":1,"w":99,"h":95},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":156,"w":99,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/3/1_008.png",
+	"frame": {"x":1521,"y":1,"w":93,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":170,"w":93,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/3/1_009.png",
+	"frame": {"x":1333,"y":673,"w":93,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":162,"w":93,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/attack1/3/3_001.png",
+	"frame": {"x":871,"y":1481,"w":41,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":151,"w":41,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/1/1_003.png",
+	"frame": {"x":177,"y":813,"w":109,"h":101},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":181,"y":147,"w":109,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/1/1_006.png",
+	"frame": {"x":447,"y":813,"w":91,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":195,"y":148,"w":91,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/1/1_007.png",
+	"frame": {"x":323,"y":1615,"w":107,"h":103},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":188,"y":149,"w":107,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/1/2_001.png",
+	"frame": {"x":1021,"y":545,"w":31,"h":61},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":281,"y":164,"w":31,"h":61},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/1/7_006.png",
+	"frame": {"x":1329,"y":1693,"w":9,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":180,"w":9,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/2/1_004.png",
+	"frame": {"x":85,"y":1037,"w":65,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":138,"w":65,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/2/1_005.png",
+	"frame": {"x":189,"y":1,"w":77,"h":111},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":140,"w":77,"h":111},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/2/1_006.png",
+	"frame": {"x":1,"y":1509,"w":65,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":139,"w":65,"h":115},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/3/1_001.png",
+	"frame": {"x":1,"y":813,"w":83,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":139,"w":83,"h":115},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/3/1_008.png",
+	"frame": {"x":343,"y":1505,"w":97,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":183,"y":140,"w":97,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia1/run/3/3_001.png",
+	"frame": {"x":537,"y":553,"w":39,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":149,"w":39,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia2/attack1/2/8_002.png",
+	"frame": {"x":533,"y":1489,"w":35,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":214,"w":35,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia2/attack1/2/8_003.png",
+	"frame": {"x":569,"y":1489,"w":35,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":215,"w":35,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia2/attack1/3/3_001.png",
+	"frame": {"x":477,"y":1829,"w":49,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":151,"w":49,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia2/run/1/7_006.png",
+	"frame": {"x":1339,"y":1693,"w":9,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":180,"w":9,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia2/run/3/3_001.png",
+	"frame": {"x":527,"y":1829,"w":47,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":149,"w":47,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/attack1/1/2_008.png",
+	"frame": {"x":1942,"y":2025,"w":21,"h":39},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":278,"y":161,"w":21,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/attack1/2/2_005.png",
+	"frame": {"x":1525,"y":997,"w":35,"h":67},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":270,"y":123,"w":35,"h":67},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/attack1/2/2_007.png",
+	"frame": {"x":397,"y":1831,"w":79,"h":21},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":272,"y":221,"w":79,"h":21},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/attack1/2/8_002.png",
+	"frame": {"x":605,"y":1489,"w":35,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":214,"w":35,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/attack1/2/8_003.png",
+	"frame": {"x":641,"y":1489,"w":35,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":215,"w":35,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/attack1/3/2_001.png",
+	"frame": {"x":1083,"y":545,"w":31,"h":61},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":217,"w":31,"h":61},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/run/1/2_001.png",
+	"frame": {"x":1687,"y":1173,"w":33,"h":61},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":281,"y":162,"w":33,"h":61},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/run/1/7_006.png",
+	"frame": {"x":1349,"y":1693,"w":9,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":180,"w":9,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/run/2/2_002.png",
+	"frame": {"x":465,"y":1245,"w":89,"h":31},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":235,"y":226,"w":89,"h":31},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2012fujia3/stand/3/3_001.png",
+	"frame": {"x":1845,"y":103,"w":47,"h":27},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":147,"w":47,"h":27},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/1/1_002.png",
+	"frame": {"x":1001,"y":813,"w":71,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":166,"w":71,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/1/1_010.png",
+	"frame": {"x":59,"y":1625,"w":93,"h":113},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":143,"w":93,"h":113},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/1/1_011.png",
+	"frame": {"x":1056,"y":1955,"w":91,"h":99},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":158,"w":91,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/1/1_012.png",
+	"frame": {"x":659,"y":103,"w":97,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":159,"w":97,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/1/1_013.png",
+	"frame": {"x":507,"y":1033,"w":77,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":160,"w":77,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/2/1_007.png",
+	"frame": {"x":67,"y":1509,"w":83,"h":113},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":139,"w":83,"h":113},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/2/1_009.png",
+	"frame": {"x":151,"y":1277,"w":99,"h":109},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":143,"w":99,"h":109},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/3/1_006.png",
+	"frame": {"x":175,"y":1853,"w":111,"h":99},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":165,"w":111,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack1/3/1_007.png",
+	"frame": {"x":267,"y":1,"w":97,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":163,"w":97,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack2/1/1_005.png",
+	"frame": {"x":371,"y":1723,"w":107,"h":99},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":132,"w":107,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack2/1/1_006.png",
+	"frame": {"x":755,"y":1853,"w":99,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":128,"w":99,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack2/1/1_007.png",
+	"frame": {"x":345,"y":577,"w":95,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":128,"w":95,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack2/1/1_008.png",
+	"frame": {"x":441,"y":1505,"w":79,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":134,"w":79,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/attack2/3/1_001.png",
+	"frame": {"x":1,"y":1741,"w":103,"h":113},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":174,"y":135,"w":103,"h":113},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/cheer/1/1_003.png",
+	"frame": {"x":1,"y":233,"w":115,"h":103},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":146,"w":115,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2013baji1/cheer/1/1_006.png",
+	"frame": {"x":1,"y":349,"w":101,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":162,"y":134,"w":101,"h":115},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2014yingyan1/attack1/1/1_002.png",
+	"frame": {"x":1,"y":117,"w":103,"h":115},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":139,"w":103,"h":115},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/1/3_002.png",
+	"frame": {"x":335,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":260,"y":138,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/2/10_008.png",
+	"frame": {"x":459,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":148,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/2/4_001.png",
+	"frame": {"x":435,"y":1495,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":267,"y":153,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/2/4_008.png",
+	"frame": {"x":817,"y":295,"w":7,"h":11},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":270,"y":154,"w":7,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/3/10_001.png",
+	"frame": {"x":451,"y":1495,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":144,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/3/10_006.png",
+	"frame": {"x":1636,"y":2037,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":232,"y":148,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/3/10_007.png",
+	"frame": {"x":1652,"y":2037,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":147,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/3/2_003.png",
+	"frame": {"x":105,"y":337,"w":21,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":133,"w":21,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/attack1/3/5_007.png",
+	"frame": {"x":2037,"y":239,"w":9,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":167,"w":9,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/stand/2/10_002.png",
+	"frame": {"x":479,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":149,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/stand/2/10_006.png",
+	"frame": {"x":499,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":150,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/stand/2/4_001.png",
+	"frame": {"x":1668,"y":2037,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":267,"y":153,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/stand/2/4_005.png",
+	"frame": {"x":1684,"y":2037,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":264,"y":154,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying1/stand/3/10_001.png",
+	"frame": {"x":1700,"y":2037,"w":15,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":144,"w":15,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/attack1/1/3_002.png",
+	"frame": {"x":347,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":260,"y":138,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/attack1/2/10_002.png",
+	"frame": {"x":519,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":150,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/attack1/2/10_008.png",
+	"frame": {"x":539,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":148,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/attack1/3/2_003.png",
+	"frame": {"x":127,"y":337,"w":21,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":133,"w":21,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/attack1/3/5_007.png",
+	"frame": {"x":2037,"y":255,"w":9,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":167,"w":9,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/stand/2/10_002.png",
+	"frame": {"x":559,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":149,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/stand/2/10_006.png",
+	"frame": {"x":579,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":150,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying2/stand/3/1_003.png",
+	"frame": {"x":1989,"y":1194,"w":57,"h":51},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":144,"w":57,"h":51},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/attack1/1/3_002.png",
+	"frame": {"x":359,"y":1497,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":260,"y":138,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/attack1/2/10_002.png",
+	"frame": {"x":599,"y":1021,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":150,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/attack1/2/10_008.png",
+	"frame": {"x":1369,"y":1787,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":148,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/attack1/3/2_003.png",
+	"frame": {"x":149,"y":337,"w":21,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":133,"w":21,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/attack1/3/5_003.png",
+	"frame": {"x":265,"y":1833,"w":11,"h":9},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":171,"w":11,"h":9},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/attack1/3/5_007.png",
+	"frame": {"x":2038,"y":2029,"w":9,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":167,"w":9,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/stand/1/4_008.png",
+	"frame": {"x":457,"y":1245,"w":7,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":232,"y":139,"w":7,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/stand/2/10_002.png",
+	"frame": {"x":1389,"y":1787,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":149,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/stand/2/10_006.png",
+	"frame": {"x":1763,"y":891,"w":19,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":150,"w":19,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/stand/2/10_008.png",
+	"frame": {"x":1783,"y":891,"w":17,"h":11},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":222,"y":149,"w":17,"h":11},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2022xueying3/stand/2/4_007.png",
+	"frame": {"x":1981,"y":1181,"w":7,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":266,"y":152,"w":7,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/attack/1/1_001.png",
+	"frame": {"x":1113,"y":295,"w":53,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":155,"w":53,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/attack/1/1_002.png",
+	"frame": {"x":895,"y":1233,"w":43,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":155,"w":43,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/attack/1/1_006.png",
+	"frame": {"x":1889,"y":439,"w":49,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":150,"w":49,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/attack/2/1_001.png",
+	"frame": {"x":947,"y":775,"w":37,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":155,"w":37,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/attack/2/1_007.png",
+	"frame": {"x":1477,"y":539,"w":37,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":232,"y":157,"w":37,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/attack/3/1_001.png",
+	"frame": {"x":1283,"y":99,"w":55,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":150,"w":55,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/attack/3/1_007.png",
+	"frame": {"x":1515,"y":905,"w":57,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":153,"w":57,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/cheer/3/1_004.png",
+	"frame": {"x":1607,"y":1505,"w":57,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":152,"w":57,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/run/1/1_002.png",
+	"frame": {"x":1995,"y":1685,"w":49,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":159,"w":49,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2201yini1/run/3/1_001.png",
+	"frame": {"x":1957,"y":1307,"w":59,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":151,"w":59,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/1/1_001.png",
+	"frame": {"x":1051,"y":1607,"w":65,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":148,"w":65,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/1/1_002.png",
+	"frame": {"x":1859,"y":1367,"w":67,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":163,"w":67,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/1/1_005.png",
+	"frame": {"x":125,"y":1853,"w":49,"h":113},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":154,"w":49,"h":113},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/1/1_006.png",
+	"frame": {"x":189,"y":461,"w":57,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":154,"w":57,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/1/1_007.png",
+	"frame": {"x":1177,"y":1705,"w":55,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":153,"w":55,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/2/1_002.png",
+	"frame": {"x":1319,"y":1599,"w":75,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":198,"y":158,"w":75,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/2/1_004.png",
+	"frame": {"x":1731,"y":187,"w":77,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":160,"w":77,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/2/1_006.png",
+	"frame": {"x":1101,"y":577,"w":73,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":157,"w":73,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/2/1_007.png",
+	"frame": {"x":885,"y":1277,"w":69,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":151,"w":69,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/3/1_001.png",
+	"frame": {"x":487,"y":679,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":151,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/3/1_002.png",
+	"frame": {"x":951,"y":1033,"w":77,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":151,"w":77,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/3/1_004.png",
+	"frame": {"x":1175,"y":577,"w":65,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":151,"w":65,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/3/1_005.png",
+	"frame": {"x":1193,"y":447,"w":71,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":152,"w":71,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/3/1_006.png",
+	"frame": {"x":627,"y":349,"w":75,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":152,"w":75,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/attack/3/1_007.png",
+	"frame": {"x":685,"y":813,"w":71,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":151,"w":71,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/cheer/3/1_003.png",
+	"frame": {"x":529,"y":917,"w":77,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":149,"w":77,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/cheer/3/1_004.png",
+	"frame": {"x":553,"y":1137,"w":73,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":149,"w":73,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/2/1_001.png",
+	"frame": {"x":1713,"y":1597,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":160,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/2/1_002.png",
+	"frame": {"x":1753,"y":1505,"w":75,"h":89},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":160,"w":75,"h":89},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/2/1_004.png",
+	"frame": {"x":1573,"y":349,"w":79,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":159,"w":79,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/2/1_006.png",
+	"frame": {"x":1343,"y":1505,"w":75,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":159,"w":75,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/2/1_008.png",
+	"frame": {"x":1767,"y":93,"w":77,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":158,"w":77,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/3/1_001.png",
+	"frame": {"x":475,"y":1277,"w":63,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":153,"w":63,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/3/1_002.png",
+	"frame": {"x":937,"y":1379,"w":69,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":154,"w":69,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/3/1_004.png",
+	"frame": {"x":1141,"y":1375,"w":69,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":153,"w":69,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/3/1_006.png",
+	"frame": {"x":1117,"y":1605,"w":63,"h":99},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":154,"w":63,"h":99},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/run/3/1_008.png",
+	"frame": {"x":1111,"y":1709,"w":65,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":152,"w":65,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2202xiyu1/sleep/3/1_001.png",
+	"frame": {"x":1089,"y":675,"w":65,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":154,"w":65,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/1/3_001.png",
+	"frame": {"x":1275,"y":1853,"w":67,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":189,"w":67,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/1/3_002.png",
+	"frame": {"x":1983,"y":1853,"w":63,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":195,"w":63,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/1/3_003.png",
+	"frame": {"x":1369,"y":905,"w":73,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":181,"w":73,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/1/3_004.png",
+	"frame": {"x":453,"y":1385,"w":75,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":163,"w":75,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/1/3_006.png",
+	"frame": {"x":1717,"y":349,"w":63,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":175,"w":63,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/1/3_007.png",
+	"frame": {"x":589,"y":1505,"w":61,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":170,"w":61,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/1/3_008.png",
+	"frame": {"x":1213,"y":1853,"w":61,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":181,"w":61,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/2/3_002.png",
+	"frame": {"x":365,"y":1143,"w":109,"h":55},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":172,"y":205,"w":109,"h":55},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/2/3_008.png",
+	"frame": {"x":1,"y":1277,"w":115,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":172,"y":179,"w":115,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/3/3_006.png",
+	"frame": {"x":1313,"y":813,"w":91,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":193,"w":91,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/3/3_007.png",
+	"frame": {"x":1211,"y":1371,"w":93,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":191,"w":93,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/attack1/3/3_008.png",
+	"frame": {"x":1649,"y":283,"w":89,"h":65},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":194,"w":89,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/1/1_005.png",
+	"frame": {"x":1883,"y":787,"w":75,"h":85},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":146,"w":75,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/1/2_001.png",
+	"frame": {"x":153,"y":925,"w":111,"h":49},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":210,"w":111,"h":49},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/1/3_001.png",
+	"frame": {"x":1247,"y":349,"w":67,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":191,"w":67,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/1/3_002.png",
+	"frame": {"x":589,"y":1,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":186,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/1/3_005.png",
+	"frame": {"x":645,"y":1853,"w":59,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":167,"w":59,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/2/2_001.png",
+	"frame": {"x":923,"y":1853,"w":103,"h":49},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":178,"y":213,"w":103,"h":49},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/2/3_002.png",
+	"frame": {"x":81,"y":1277,"w":113,"h":69},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":165,"y":194,"w":113,"h":69},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/cheer/3/3_005.png",
+	"frame": {"x":681,"y":915,"w":101,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":192,"w":101,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/run/1/2_002.png",
+	"frame": {"x":1763,"y":813,"w":77,"h":37},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":212,"w":77,"h":37},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/run/1/3_004.png",
+	"frame": {"x":1279,"y":1033,"w":63,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":175,"w":63,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/run/1/3_005.png",
+	"frame": {"x":1607,"y":95,"w":79,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":171,"w":79,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/run/2/3_001.png",
+	"frame": {"x":149,"y":1391,"w":113,"h":65},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":197,"w":113,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/run/3/3_001.png",
+	"frame": {"x":1343,"y":1853,"w":67,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":177,"w":67,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi1/run/3/3_002.png",
+	"frame": {"x":539,"y":813,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":172,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi2/attack1/1/4_007.png",
+	"frame": {"x":727,"y":1017,"w":33,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":190,"w":33,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi2/attack1/3/4_004.png",
+	"frame": {"x":2005,"y":1095,"w":41,"h":29},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":217,"w":41,"h":29},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/attack1/1/1_006.png",
+	"frame": {"x":1523,"y":577,"w":91,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":211,"y":155,"w":91,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/attack1/1/1_007.png",
+	"frame": {"x":1809,"y":667,"w":85,"h":73},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":154,"w":85,"h":73},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/attack1/1/2_004.png",
+	"frame": {"x":1156,"y":1955,"w":95,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":190,"w":95,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/attack1/3/1_003.png",
+	"frame": {"x":1873,"y":1,"w":85,"h":81},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":150,"w":85,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/attack1/3/1_007.png",
+	"frame": {"x":1873,"y":83,"w":77,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":163,"w":77,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/attack1/3/2_007.png",
+	"frame": {"x":1573,"y":905,"w":89,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":199,"w":89,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/cheer/1/1_005.png",
+	"frame": {"x":1873,"y":161,"w":77,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":146,"w":77,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi3/cheer/2/2_001.png",
+	"frame": {"x":705,"y":1853,"w":105,"h":49},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":176,"y":213,"w":105,"h":49},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/1/3_001.png",
+	"frame": {"x":1411,"y":1853,"w":67,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":189,"w":67,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/1/3_002.png",
+	"frame": {"x":1983,"y":1941,"w":63,"h":87},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":195,"w":63,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/1/3_003.png",
+	"frame": {"x":1401,"y":813,"w":73,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":200,"y":181,"w":73,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/1/3_006.png",
+	"frame": {"x":1809,"y":185,"w":63,"h":91},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":175,"w":63,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/1/3_007.png",
+	"frame": {"x":651,"y":1505,"w":61,"h":105},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":170,"w":61,"h":105},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/1/3_008.png",
+	"frame": {"x":565,"y":349,"w":61,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":181,"w":61,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/2/3_006.png",
+	"frame": {"x":653,"y":1381,"w":103,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":189,"y":182,"w":103,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/2/3_008.png",
+	"frame": {"x":69,"y":1393,"w":113,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":173,"y":179,"w":113,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/3/3_006.png",
+	"frame": {"x":1421,"y":671,"w":91,"h":87},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":193,"w":91,"h":87},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/attack1/3/3_008.png",
+	"frame": {"x":1691,"y":1787,"w":89,"h":65},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":194,"w":89,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/cheer/1/3_001.png",
+	"frame": {"x":1333,"y":197,"w":67,"h":95},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":191,"w":67,"h":95},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/cheer/1/3_002.png",
+	"frame": {"x":493,"y":451,"w":71,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":186,"w":71,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/cheer/1/3_005.png",
+	"frame": {"x":183,"y":577,"w":59,"h":107},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":167,"w":59,"h":107},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/cheer/2/3_005.png",
+	"frame": {"x":174,"y":1967,"w":107,"h":79},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":178,"w":107,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/cheer/3/3_005.png",
+	"frame": {"x":729,"y":1033,"w":101,"h":71},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":198,"y":192,"w":101,"h":71},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/run/1/3_004.png",
+	"frame": {"x":1325,"y":1127,"w":63,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":175,"w":63,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/run/1/3_005.png",
+	"frame": {"x":1609,"y":1,"w":79,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":201,"y":171,"w":79,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/run/2/3_001.png",
+	"frame": {"x":151,"y":1505,"w":113,"h":65},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":193,"y":197,"w":113,"h":65},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/run/3/3_001.png",
+	"frame": {"x":757,"y":1,"w":67,"h":97},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":177,"w":67,"h":97},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/run/3/3_002.png",
+	"frame": {"x":607,"y":915,"w":73,"h":101},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":172,"w":73,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2203langqi4/run/3/3_006.png",
+	"frame": {"x":449,"y":917,"w":79,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":179,"w":79,"h":103},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/attack1/2/1_004.png",
+	"frame": {"x":1873,"y":239,"w":37,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":173,"w":37,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/attack1/3/1_001.png",
+	"frame": {"x":1637,"y":533,"w":43,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":170,"w":43,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/cheer/1/1_003.png",
+	"frame": {"x":1615,"y":1191,"w":71,"h":85},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":164,"w":71,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/cheer/3/1_001.png",
+	"frame": {"x":1717,"y":533,"w":43,"h":79},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":170,"w":43,"h":79},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/run/2/1_001.png",
+	"frame": {"x":1387,"y":1465,"w":39,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":168,"w":39,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/run/2/1_002.png",
+	"frame": {"x":1469,"y":1465,"w":39,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":168,"w":39,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/run/2/1_004.png",
+	"frame": {"x":1551,"y":1465,"w":39,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":167,"w":39,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/run/2/1_008.png",
+	"frame": {"x":1955,"y":239,"w":37,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":167,"w":37,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/run/3/1_001.png",
+	"frame": {"x":1035,"y":773,"w":39,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":39,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/run/3/1_002.png",
+	"frame": {"x":1119,"y":773,"w":39,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":165,"w":39,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu1/run/3/1_008.png",
+	"frame": {"x":281,"y":307,"w":41,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":164,"w":41,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/cheer/1/1_003.png",
+	"frame": {"x":1245,"y":1277,"w":77,"h":93},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":197,"y":156,"w":77,"h":93},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/cheer/2/1_003.png",
+	"frame": {"x":1451,"y":763,"w":49,"h":91},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":159,"w":49,"h":91},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/cheer/3/1_003.png",
+	"frame": {"x":1713,"y":1457,"w":47,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":216,"y":166,"w":47,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/run/2/1_001.png",
+	"frame": {"x":1797,"y":531,"w":45,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":164,"w":45,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/run/2/1_004.png",
+	"frame": {"x":1797,"y":1457,"w":47,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":164,"w":47,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/run/3/1_001.png",
+	"frame": {"x":941,"y":295,"w":53,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":208,"y":163,"w":53,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/run/3/1_002.png",
+	"frame": {"x":1197,"y":295,"w":53,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":164,"w":53,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/run/3/1_004.png",
+	"frame": {"x":1719,"y":759,"w":53,"h":81},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":163,"w":53,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/run/3/1_006.png",
+	"frame": {"x":1281,"y":295,"w":53,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":162,"w":53,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2204wuzhu2/run/3/1_008.png",
+	"frame": {"x":1027,"y":295,"w":53,"h":85},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":162,"w":53,"h":85},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2205huoyuansu/run/3/1_004.png",
+	"frame": {"x":621,"y":551,"w":43,"h":25},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":148,"y":147,"w":43,"h":25},
+	"sourceSize": {"w":337,"h":337}
+},
+{
+	"filename": "2206jijian1/attack1/1/6_002.png",
+	"frame": {"x":353,"y":1253,"w":55,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":250,"y":200,"w":55,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian1/attack1/2/7_005.png",
+	"frame": {"x":267,"y":307,"w":29,"h":13},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":193,"w":29,"h":13},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian1/attack1/3/1_002.png",
+	"frame": {"x":1942,"y":1943,"w":39,"h":81},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":168,"w":39,"h":81},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian1/attack1/3/1_004.png",
+	"frame": {"x":1561,"y":535,"w":41,"h":75},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":172,"w":41,"h":75},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian1/cheer/2/6_002.png",
+	"frame": {"x":845,"y":549,"w":27,"h":57},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":245,"y":222,"w":27,"h":57},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/attack1/1/6_002.png",
+	"frame": {"x":409,"y":1253,"w":55,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":250,"y":200,"w":55,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/attack1/2/2_001.png",
+	"frame": {"x":1939,"y":421,"w":19,"h":35},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":234,"y":179,"w":19,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/attack1/2/2_002.png",
+	"frame": {"x":655,"y":1017,"w":15,"h":35},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":247,"y":176,"w":15,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/attack1/2/2_003.png",
+	"frame": {"x":1615,"y":1123,"w":15,"h":33},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":252,"y":177,"w":15,"h":33},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/attack1/2/2_004.png",
+	"frame": {"x":1615,"y":1157,"w":15,"h":33},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":253,"y":178,"w":15,"h":33},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/attack1/2/2_005.png",
+	"frame": {"x":691,"y":1017,"w":15,"h":35},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":254,"y":181,"w":15,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/cheer/1/5_002.png",
+	"frame": {"x":189,"y":569,"w":11,"h":7},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":200,"w":11,"h":7},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/cheer/2/2_001.png",
+	"frame": {"x":1939,"y":457,"w":19,"h":35},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":234,"y":179,"w":19,"h":35},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian3/cheer/2/2_004.png",
+	"frame": {"x":1845,"y":151,"w":27,"h":33},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":179,"w":27,"h":33},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian4/attack1/3/3_008.png",
+	"frame": {"x":2011,"y":1571,"w":35,"h":23},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":205,"w":35,"h":23},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2206jijian4/cheer/1/8_004.png",
+	"frame": {"x":619,"y":1017,"w":35,"h":15},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":225,"w":35,"h":15},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2207nuche1/attack1/1/7_002.png",
+	"frame": {"x":465,"y":785,"w":27,"h":61},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":258,"y":197,"w":27,"h":61},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2207nuche1/attack1/2/1_001.png",
+	"frame": {"x":1,"y":1045,"w":115,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":176,"y":194,"w":115,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2207nuche1/attack1/3/1_001.png",
+	"frame": {"x":153,"y":1619,"w":111,"h":101},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":198,"y":185,"w":111,"h":101},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2207nuche3/attack1/2/1_001.png",
+	"frame": {"x":1,"y":1161,"w":115,"h":83},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":176,"y":194,"w":115,"h":83},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2207nuche3/run/2/2_003.png",
+	"frame": {"x":1675,"y":993,"w":45,"h":39},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":261,"y":252,"w":45,"h":39},
+	"sourceSize": {"w":481,"h":481}
+},
+{
+	"filename": "2207nuche4/attack1/1/10_001.png",
+	"frame": {"x":575,"y":1829,"w":23,"h":47},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":268,"y":170,"w":23,"h":47},
+	"sourceSize": {"w":481,"h":481}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "characters22.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "0.94",
+	"smartupdate": "$TexturePacker:SmartUpdate:b0f8366bc5969f68d86520cd09e0fe4f:f2884a9d4ece40bdaa848e0b94484b50:a3d47e00f1824ff08e10a99c864fefd7$"
+}
+}
