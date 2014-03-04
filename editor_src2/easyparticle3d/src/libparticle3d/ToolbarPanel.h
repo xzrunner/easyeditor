@@ -30,18 +30,18 @@ private:
 	void onAddChild(wxCommandEvent& event);
 	void onDelChild(wxCommandEvent& event);
 
-	void onSetCount(wxSpinEvent& event);
-	void onSetEmissionTime(wxSpinEvent& event);
-	void onSetLife(wxSpinEvent& event);
+	void onSetCount(wxScrollEvent& event);
+	void onSetEmissionTime(wxScrollEvent& event);
+	void onSetLife(wxScrollEvent& event);
 	void onSetHori(wxSpinEvent& event);
 	void onSetVert(wxSpinEvent& event);
-	void onSetSpeed(wxSpinEvent& event);
-	void onSetGravity(wxSpinEvent& event);
+	void onSetSpeed(wxScrollEvent& event);
+	void onSetGravity(wxScrollEvent& event);
 	void onSetInertia(wxSpinEvent& event);
-	void onSetFadeoutTime(wxSpinEvent& event);
+	void onSetFadeoutTime(wxScrollEvent& event);
 	void onSetBounce(wxCommandEvent& event);
 	void onSetAdditiveBlend(wxCommandEvent& event);
-	void onSetStartRadius(wxSpinEvent& event);
+	void onSetStartRadius(wxScrollEvent& event);
 
 private:
 	static const float COUNT;
@@ -72,8 +72,8 @@ private:
 	private:
 		void initLayout();
 
-		void onSetScale(wxSpinEvent& event);
-		void onSetRotate(wxSpinEvent& event); 
+		void onSetScale(wxScrollEvent& event);
+		void onSetRotate(wxScrollEvent& event); 
 
 		const wxString& getFilepath() const;
 
@@ -81,8 +81,8 @@ private:
 		ParticleChild* m_pc;
 
 		wxTextCtrl* m_name;
-		wxSpinCtrl *m_start_scale, *m_end_scale;
-		wxSpinCtrl *m_min_rotate, *m_max_rotate;
+		wxSlider *m_start_scale, *m_end_scale;
+		wxSlider *m_min_rotate, *m_max_rotate;
 		wxSpinCtrl* m_startz;
 
 		friend class ToolbarPanel;
@@ -112,19 +112,19 @@ private:
 
 	wxTextCtrl* m_name;
 	wxTextCtrl* m_package;
-	wxSpinCtrl* m_count;
+	wxSlider* m_count;
 	wxSpinCtrl* m_layer;
-	wxSpinCtrl* m_emission_time;
-	wxSpinCtrl *m_min_life, *m_max_life;
+	wxSlider* m_emission_time;
+	wxSlider *m_min_life, *m_max_life;
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
-	wxSpinCtrl *m_min_spd, *m_max_spd;
-	wxSpinCtrl* m_gravity;
+	wxSlider *m_min_spd, *m_max_spd;
+	wxSlider* m_gravity;
 	wxSpinCtrl* m_inertia;
-	wxSpinCtrl* m_fadeout_time;
+	wxSlider* m_fadeout_time;
 	wxCheckBox* m_bounce;
 	wxCheckBox* m_additiveBlend;
-	wxSpinCtrl* m_start_radius;
+	wxSlider* m_start_radius;
 	wxCheckBox* m_orient_to_movement;
 	wxCheckBox* m_orient_to_parent;
 

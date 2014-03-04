@@ -50,8 +50,8 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	cp->m_startz->SetValue(child.start_z);
 
 	pc->symbol = d2d::SymbolMgr::Instance()->getSymbol(child.filepath);
-	cp->onSetScale(wxSpinEvent());
-	cp->onSetRotate(wxSpinEvent());
+	cp->onSetScale(wxScrollEvent());
+	cp->onSetRotate(wxScrollEvent());
 
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
@@ -71,10 +71,11 @@ wxSizer* ToolbarPanel::initLayout()
 	topSizer->AddSpacer(10);
 	topSizer->Add(rightSizer);
 
+	leftSizer->AddSpacer(10);
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("name:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Name ")));
 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
 		leftSizer->Add(sizer);
 	}
@@ -82,18 +83,18 @@ wxSizer* ToolbarPanel::initLayout()
 	// Package
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("package:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Package ")));
 		sizer->Add(m_package = new wxTextCtrl(this, wxID_ANY));
 		leftSizer->Add(sizer);
 	}
 	leftSizer->AddSpacer(10);
 	// Count
 	{
-		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("count:")));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Count"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_count = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 1, 100, COUNT);
-		Connect(m_count->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetCount));
+		m_count = new wxSlider(this, wxID_ANY, COUNT, 1, 100, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+		Connect(m_count->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetCount));
 		sizer->Add(m_count);
 
 		leftSizer->Add(sizer);
@@ -102,18 +103,18 @@ wxSizer* ToolbarPanel::initLayout()
 	// Layer
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("layer:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Layer ")));
 		sizer->Add(m_layer = new wxSpinCtrl(this));
 		leftSizer->Add(sizer);
 	}
 	leftSizer->AddSpacer(10);
 	// Emission Time
 	{
-		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("emission_time(ms):")));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Emission Time (ms)"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_emission_time = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 10, 1000, EMISSION_TIME);
-		Connect(m_emission_time->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetEmissionTime));
+		m_emission_time = new wxSlider(this, wxID_ANY, EMISSION_TIME, 10, 1000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+		Connect(m_emission_time->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetEmissionTime));
 		sizer->Add(m_emission_time);
 
 		leftSizer->Add(sizer);
@@ -121,24 +122,24 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Life
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Life(ms):"));
-		wxSizer* lifeSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Life (ms)"));
+		wxSizer* lifeSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
 
-			m_min_life = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 9999, MIN_LIFE);
-			Connect(m_min_life->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetLife));
+			m_min_life = new wxSlider(this, wxID_ANY, MIN_LIFE, 0, 2500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_min_life->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetLife));
 			sizer->Add(m_min_life);
 
 			lifeSizer->Add(sizer);
 		}
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
 
-			m_max_life = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 9999, MAX_LIFE);
-			Connect(m_max_life->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetLife));
+			m_max_life = new wxSlider(this, wxID_ANY, MAX_LIFE, 0, 2500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_max_life->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetLife));
 			sizer->Add(m_max_life);
 
 			lifeSizer->Add(sizer);
@@ -148,11 +149,11 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Hori
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Hori(deg):"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Horizontal (deg)"));
 		wxSizer* horiSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));	
 
 			m_min_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MIN_HORI);
 			Connect(m_min_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetHori));
@@ -160,9 +161,10 @@ wxSizer* ToolbarPanel::initLayout()
 
 			horiSizer->Add(sizer);
 		}
+		horiSizer->AddSpacer(10);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));	
 
 			m_max_hori = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 360, MAX_HORI);
 			Connect(m_max_hori->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetHori));
@@ -175,11 +177,11 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Vert
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Vert(deg):"));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Vertical (deg)"));
 		wxSizer* vertSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
 
 			m_min_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MIN_VERT);
 			Connect(m_min_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetVert));
@@ -187,9 +189,10 @@ wxSizer* ToolbarPanel::initLayout()
 
 			vertSizer->Add(sizer);
 		}
+		vertSizer->AddSpacer(10);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));	
 
 			m_max_vert = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 90, MAX_VERT);
 			Connect(m_max_vert->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetVert));
@@ -202,24 +205,24 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Speed
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Spd(pix):"));
-		wxSizer* spdSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Speed (pixel)"));
+		wxSizer* spdSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
 
-			m_min_spd = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 9999, MIN_SPD);
-			Connect(m_min_spd->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetSpeed));
+			m_min_spd = new wxSlider(this, wxID_ANY, MIN_SPD, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_min_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetSpeed));
 			sizer->Add(m_min_spd);
 
 			spdSizer->Add(sizer);
 		}
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
 
-			m_max_spd = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 9999, MAX_SPD);
-			Connect(m_max_spd->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetSpeed));
+			m_max_spd = new wxSlider(this, wxID_ANY, MAX_SPD, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_max_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetSpeed));
 			sizer->Add(m_max_spd);
 
 			spdSizer->Add(sizer);
@@ -229,11 +232,11 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Gravity
 	{
-		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("gravity(pix):")));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Gravity (pixel)"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_gravity = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 10, 50000, GRAVITY);
-		Connect(m_gravity->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetGravity));
+		m_gravity = new wxSlider(this, wxID_ANY, GRAVITY, -1000, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+		Connect(m_gravity->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetGravity));
 		sizer->Add(m_gravity);
 
 		leftSizer->Add(sizer);
@@ -242,7 +245,7 @@ wxSizer* ToolbarPanel::initLayout()
 	// Inertia
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("inertia:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Inertia ")));
 
 		m_inertia = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 1000, INERTIA);
 		Connect(m_inertia->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetInertia));
@@ -253,11 +256,11 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Fadeout Time
 	{
-		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("fadeout_time(ms):")));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Fadeout Time (ms)"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_fadeout_time = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 10, 5000, FADEOUT_TIME);
-		Connect(m_fadeout_time->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetFadeoutTime));
+		m_fadeout_time = new wxSlider(this, wxID_ANY, FADEOUT_TIME, 10, 2500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+		Connect(m_fadeout_time->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetFadeoutTime));
 		sizer->Add(m_fadeout_time);
 
 		leftSizer->Add(sizer);
@@ -265,25 +268,25 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// Bounce
 	{
-		m_bounce = new wxCheckBox(this, wxID_ANY, wxT("bounce"));
+		m_bounce = new wxCheckBox(this, wxID_ANY, wxT("Bounce"));
 		Connect(m_bounce->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::onSetBounce));
 		leftSizer->Add(m_bounce);
 	}
 	leftSizer->AddSpacer(10);
 	// AdditiveBlend
 	{
-		m_additiveBlend = new wxCheckBox(this, wxID_ANY, wxT("additive blend"));
+		m_additiveBlend = new wxCheckBox(this, wxID_ANY, wxT("Additive Blend"));
 		Connect(m_additiveBlend->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::onSetAdditiveBlend));
 		leftSizer->Add(m_additiveBlend);
 	}
 	leftSizer->AddSpacer(10);
 	// Start Radius
 	{
-		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("start radius(pix):")));
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Start Radius (pixel)"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_start_radius = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 5000, START_RADIUS);
-		Connect(m_start_radius->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onSetStartRadius));
+		m_start_radius = new wxSlider(this, wxID_ANY, START_RADIUS, 0, 100, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+		Connect(m_start_radius->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetStartRadius));
 		sizer->Add(m_start_radius);
 
 		leftSizer->Add(sizer);
@@ -291,16 +294,18 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	// orient_to_movement
 	{
-		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, wxT("orient to movement"));	
+		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, wxT("Orient to Movement"));	
 		leftSizer->Add(m_orient_to_movement);
 	}
 	leftSizer->AddSpacer(10);
 	// orient_to_parent
 	{
-		m_orient_to_parent = new wxCheckBox(this, wxID_ANY, wxT("orient to parent"));
+		m_orient_to_parent = new wxCheckBox(this, wxID_ANY, wxT("Orient to Parent"));
 		leftSizer->Add(m_orient_to_parent);
 	}
 	leftSizer->AddSpacer(10);
+
+	rightSizer->AddSpacer(10);
  	// components
  	{
 		// Open
@@ -309,7 +314,7 @@ wxSizer* ToolbarPanel::initLayout()
 		rightSizer->Add(btn);
 		rightSizer->AddSpacer(10);
 
- 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("components"));
+ 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Components"));
  		m_compSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		m_compSizer->AddSpacer(10);
  		rightSizer->Add(m_compSizer);
@@ -375,17 +380,17 @@ void ToolbarPanel::onDelChild(wxCommandEvent& event)
 	this->Layout();
 }
 
-void ToolbarPanel::onSetCount(wxSpinEvent& event)
+void ToolbarPanel::onSetCount(wxScrollEvent& event)
 {
 	m_stage->m_ps->setCount(m_count->GetValue());
 }
 
-void ToolbarPanel::onSetEmissionTime(wxSpinEvent& event)
+void ToolbarPanel::onSetEmissionTime(wxScrollEvent& event)
 {
 	m_stage->m_ps->setEmissionTime(m_emission_time->GetValue());
 }
 
-void ToolbarPanel::onSetLife(wxSpinEvent& event)
+void ToolbarPanel::onSetLife(wxScrollEvent& event)
 {
 	m_stage->m_ps->setLife(m_min_life->GetValue(), m_max_life->GetValue());
 }
@@ -400,12 +405,12 @@ void ToolbarPanel::onSetVert(wxSpinEvent& event)
 	m_stage->m_ps->setVert(m_min_vert->GetValue(), m_max_vert->GetValue());
 }
 
-void ToolbarPanel::onSetSpeed(wxSpinEvent& event)
+void ToolbarPanel::onSetSpeed(wxScrollEvent& event)
 {
 	m_stage->m_ps->setSpeed(m_min_spd->GetValue(), m_max_spd->GetValue());
 }
 
-void ToolbarPanel::onSetGravity(wxSpinEvent& event)
+void ToolbarPanel::onSetGravity(wxScrollEvent& event)
 {
 	m_stage->m_ps->setGravity(m_gravity->GetValue());
 }
@@ -415,7 +420,7 @@ void ToolbarPanel::onSetInertia(wxSpinEvent& event)
 	m_stage->m_ps->setInertia(m_inertia->GetValue());
 }
 
-void ToolbarPanel::onSetFadeoutTime(wxSpinEvent& event)
+void ToolbarPanel::onSetFadeoutTime(wxScrollEvent& event)
 {
 	m_stage->m_ps->setFadeoutTime(m_fadeout_time->GetValue());
 }
@@ -430,7 +435,7 @@ void ToolbarPanel::onSetAdditiveBlend(wxCommandEvent& event)
 	m_stage->m_ps->setAdditiveBlend(event.IsChecked());
 }
 
-void ToolbarPanel::onSetStartRadius(wxSpinEvent& event)
+void ToolbarPanel::onSetStartRadius(wxScrollEvent& event)
 {
 	m_stage->m_ps->setStartRadius(m_start_radius->GetValue());
 }
@@ -460,31 +465,31 @@ initLayout()
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("name:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Name")));
 		sizer->Add(m_name = new wxTextCtrl(this, wxID_ANY));
 		topSizer->Add(sizer);
 	}
 	topSizer->AddSpacer(10);
 	// Scale
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("scale(%):"));
-		wxSizer* scaleSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Scale (%)"));
+		wxSizer* scaleSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("start:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("start ")));
 
-			m_start_scale = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 9999, START_SCALE);
-			Connect(m_start_scale->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ChildPanel::onSetScale));
+			m_start_scale = new wxSlider(this, wxID_ANY, START_SCALE, 0, 500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_start_scale->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetScale));
 			sizer->Add(m_start_scale);
 
 			scaleSizer->Add(sizer);
 		}
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("end:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("end ")));
 
-			m_end_scale = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, 0, 9999, END_SCALE);
-			Connect(m_end_scale->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ChildPanel::onSetScale));
+			m_end_scale = new wxSlider(this, wxID_ANY, END_SCALE, 0, 500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_end_scale->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetScale));
 			sizer->Add(m_end_scale);
 
 			scaleSizer->Add(sizer);
@@ -494,24 +499,24 @@ initLayout()
 	topSizer->AddSpacer(10);
 	// Rotate
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("rotate(deg):"));
-		wxSizer* rotateSizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Rotate (deg)"));
+		wxSizer* rotateSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
 
-			m_min_rotate = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -180, 180, MIN_ROTATE);
-			Connect(m_min_rotate->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ChildPanel::onSetRotate));
+			m_min_rotate = new wxSlider(this, wxID_ANY, MIN_ROTATE, -180, 180, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_min_rotate->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetRotate));
 			sizer->Add(m_min_rotate);
 
 			rotateSizer->Add(sizer);
 		}
 		{
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max:")));	
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
 
-			m_max_rotate = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(70, -1), wxSP_ARROW_KEYS, -180, 180, MAX_ROTATE);
-			Connect(m_max_rotate->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ChildPanel::onSetRotate));
+			m_max_rotate = new wxSlider(this, wxID_ANY, MAX_ROTATE, -180, 180, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_max_rotate->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetRotate));
 			sizer->Add(m_max_rotate);
 
 			rotateSizer->Add(sizer);
@@ -522,7 +527,7 @@ initLayout()
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("startz:")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Startz ")));
 		sizer->Add(m_startz = new wxSpinCtrl(this));
 		topSizer->Add(sizer);
 	}
@@ -532,14 +537,14 @@ initLayout()
 }
 
 void ToolbarPanel::ChildPanel::
-onSetScale(wxSpinEvent& event)
+onSetScale(wxScrollEvent& event)
 {
 	m_pc->start_scale = m_start_scale->GetValue() * 0.01f;
 	m_pc->end_scale = m_end_scale->GetValue() * 0.01f;
 }
 
 void ToolbarPanel::ChildPanel::
-onSetRotate(wxSpinEvent& event)
+onSetRotate(wxScrollEvent& event)
 {
 	m_pc->min_rotate = m_min_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
 	m_pc->max_rotate = m_max_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
