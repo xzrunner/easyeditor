@@ -51,7 +51,8 @@ void Shader::sprite()
 {
 	if (m_prog_curr != m_prog_sprite) {
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glUseProgram(m_prog_sprite);
 		m_prog_curr = m_prog_sprite;
@@ -73,6 +74,9 @@ void Shader::shape()
 
 void Shader::null()
 {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glUseProgram(0);
 	m_prog_curr = 0;
 }
