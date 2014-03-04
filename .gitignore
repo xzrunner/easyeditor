@@ -88,7 +88,8 @@ deprecated
 /editor_src2/easymodeling/platform/msvc2008/libmodeling
 /editor_src2/easyparticle/.git
 /editor_src2/easyparticle/.svn
-/editor_src2/easyparticle/platform/msvc2008/easyparticle
+/editor_src2/easyparticle2d/platform/msvc2008/easyparticle2d
+/editor_src2/easyparticle3d/platform/msvc2008/easyparticle3d
 /editor_src2/easyshape/.git
 /editor_src2/easyshape/platform/msvc2008/easyshape
 /editor_src2/easyshape/platform/msvc2008/libshape
