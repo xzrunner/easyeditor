@@ -37,13 +37,20 @@ void Shader::color(const Colorf& multi, const Colorf& add)
 
 void Shader::color(float r, float g, float b, float a)
 {
-	float mul[4] = {r, g, b, a},
-		add[4] = {0, 0, 0, 0};
-	if (m_prog_curr == m_prog_sprite) {
-		glUniform4fv(m_multi_loc, 1, mul);
-		glUniform4fv(m_add_loc, 1, add);
-	} else {
-		glUniform4fv(m_col_loc, 1, mul);
+	if (m_prog_curr == 0)
+	{
+		glColor4f(r, g, b, a);
+	}
+	else
+	{
+		float mul[4] = {r, g, b, a},
+			add[4] = {0, 0, 0, 0};
+		if (m_prog_curr == m_prog_sprite) {
+			glUniform4fv(m_multi_loc, 1, mul);
+			glUniform4fv(m_add_loc, 1, add);
+		} else {
+			glUniform4fv(m_col_loc, 1, mul);
+		}
 	}
 }
 
@@ -51,8 +58,8 @@ void Shader::sprite()
 {
 	if (m_prog_curr != m_prog_sprite) {
 		glEnable(GL_BLEND);
-//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glUseProgram(m_prog_sprite);
 		m_prog_curr = m_prog_sprite;
@@ -116,7 +123,7 @@ void Shader::load()
 		"\n"
 		"void main()  \n"
 		"{  \n"
-		"  gl_Position = gl_ModelViewProjectionMatrix *gl_Vertex; "
+		"  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; "
 		"  v_fragmentColor = color; \n"
 		"  v_fragmentAddi = additive; \n"
 		"  v_texcoord = vec2(gl_MultiTexCoord0);  \n"
@@ -132,8 +139,6 @@ void Shader::load()
 		"\n"
 		"void main()  \n"
 		"{  \n"  
-		"  gl_FragColor = texture2D(texture0, v_texcoord);"
-
  		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
  		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
  		"  gl_FragColor.w = tmp.w;    \n"
@@ -150,7 +155,7 @@ void Shader::load()
 		"\n"
 		"void main()  \n"
 		"{  \n"
-		"  gl_Position = gl_ModelViewProjectionMatrix *gl_Vertex; "
+		"  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; "
 		"  v_fragmentColor = color; \n"
 		"}  \n"
 		;
