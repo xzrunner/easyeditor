@@ -1,6 +1,6 @@
 
 {
-	"name" : "guild_perk_info",
+	"name" : "",
 	"sprite" : 
 	[
 		
@@ -8,45 +8,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_perk_list_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "list",
-			"position" : 
-			{
-				"x" : 191.50,
-				"y" : -179.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : -3013.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "chat_window_top_bg_complex.json",
+			"filepath" : "6313-diban-9-5.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : 191.50,
-				"y" : -159.0
+				"x" : 0.0,
+				"y" : 0.0
 			},
-			"tag" : "",
+			"tag" : "show;hide",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 1.0,
+			"x scale" : 10.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 1.0,
+			"y scale" : 3.0,
 			"y shear" : 0.0
 		},
 		
@@ -54,15 +31,15 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_mark_anim.json",
+			"filepath" : "rank_line_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "guild_icon",
+			"name" : "",
 			"position" : 
 			{
-				"x" : 44.50,
-				"y" : -26.0
+				"x" : 0.0,
+				"y" : -58.79999923706055
 			},
-			"tag" : "",
+			"tag" : "show;hide",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 0.50,
@@ -78,21 +55,21 @@
 			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "chat_guild_name_fontblank.json",
+			"color" : "0x00000000",
+			"filepath" : "mount_icon_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 19,
-			"label_width" : 300,
+			"label_height" : 4,
+			"label_width" : 4,
 			"multi color" : "0xffffffff",
-			"name" : "guild_name",
+			"name" : "icon",
 			"position" : 
 			{
-				"x" : 210.50,
-				"y" : -22.0
+				"x" : -146.0,
+				"y" : 0.0
 			},
-			"size" : 16,
-			"tag" : "",
+			"size" : 0,
+			"tag" : "show",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 1.0,
@@ -108,27 +85,27 @@
 			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "title_fontblank.json",
+			"color" : "0xfffeffd9",
+			"filepath" : "guild_name2_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 30,
-			"label_width" : 400,
+			"label_height" : 40,
+			"label_width" : 200,
 			"multi color" : "0xffffffff",
-			"name" : "info",
+			"name" : "name",
 			"position" : 
 			{
-				"x" : 191.250,
-				"y" : -159.750
+				"x" : -13.0,
+				"y" : 18.0
 			},
-			"size" : 20,
-			"tag" : "",
+			"size" : 25,
+			"tag" : "show",
 			"x mirror" : false,
-			"x offset" : 32.29998779296875,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 22.750,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -137,15 +114,15 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "blue_button_complex.json",
+			"filepath" : "guild_perk_finishnow_button_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "checkin",
+			"name" : "finishnow",
 			"position" : 
 			{
-				"x" : 335.0,
-				"y" : -71.0
+				"x" : 144.250,
+				"y" : -6.250
 			},
-			"tag" : "",
+			"tag" : "show",
 			"x mirror" : false,
 			"x offset" : 0.0,
 			"x scale" : 0.8000000119209290,
@@ -160,44 +137,21 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_fight_xp_complex.json",
+			"filepath" : "research_bar_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "guild_xp",
+			"name" : "research",
 			"position" : 
 			{
-				"x" : 119.0,
-				"y" : -71.0
+				"x" : -12.0,
+				"y" : -37.0
 			},
-			"tag" : "",
+			"tag" : "show",
 			"x mirror" : false,
-			"x offset" : 10.49999237060547,
-			"x scale" : 0.8000000119209290,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 6.50,
-			"y scale" : 0.8000000119209290,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "guild_fight_res_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "guild_res",
-			"position" : 
-			{
-				"x" : 113.0,
-				"y" : -121.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 26.49999237060547,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 4.50,
+			"y offset" : 7.50,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
