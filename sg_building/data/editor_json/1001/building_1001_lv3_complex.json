@@ -1,9 +1,6 @@
-
 {
-	"name" : "building_1001_lv3",
-	"sprite" : 
-	[
-		
+	"name": "building_1001_lv3",
+	"sprite": [
 		{
 			"add color" : "",
 			"angle" : 0.0,
@@ -22,195 +19,17 @@
 			"y scale" : 1.100000023841858,
 			"y shear" : 0.0
 		},
-		
 		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\1001_4_lv3.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 0.0
+			"angle": 0.0,
+			"filepath": "..\\..\\pngs\\1001_4_lv3.png",
+			"name": "",
+			"position": {
+				"x": 0.0,
+				"y": 0.0
 			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\cj\\pddlyd_anim.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 28.55013084411621,
-				"y" : 10.45135879516602
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\cj\\pddlzd_anim.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -33.57077789306641,
-				"y" : 15.45137786865234
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\cj\\pddlyd_anim.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 118.4433822631836,
-				"y" : 76.49996948242188
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\cj\\pddlzd_anim.json",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -110.2746200561523,
-				"y" : 68.72853088378906
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\cj_sp1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -61.57076263427734,
-				"y" : 69.49996948242188
-			},
-			"x mirror" : true,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\cj_sp2.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -69.070800781250,
-				"y" : 84.99998474121094
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\cj_sp2.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 88.94338226318359,
-				"y" : -9.984814643859863
-			},
-			"x mirror" : true,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\cj_sp1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 38.07291793823242,
-				"y" : -34.41996765136719
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\cj_sp1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 54.42512130737305,
-				"y" : 147.8821716308594
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
+			"scale": 1.0,
+			"x mirror": false,
+			"y mirror": false
 		}
 	]
 }
