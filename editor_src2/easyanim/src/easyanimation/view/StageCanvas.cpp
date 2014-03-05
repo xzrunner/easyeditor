@@ -6,7 +6,13 @@ namespace eanim
 
 StageCanvas::StageCanvas(d2d::EditPanel* stage)
 	: d2d::OrthoCanvas(stage)
+	, m_background(NULL)
 {
+}
+
+StageCanvas::~StageCanvas()
+{
+	m_background->release();
 }
 
 void StageCanvas::onDraw()
@@ -21,6 +27,10 @@ void StageCanvas::onDraw()
 
 void StageCanvas::drawbackground() const
 {
+	if (m_background) {
+		m_background->draw(m_background->getRegion());
+	}
+
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
 	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge,

@@ -32,6 +32,7 @@ namespace eanim
 		void onCodeLove2d(wxCommandEvent& event);
 
 		void onSettings(wxCommandEvent& event);
+		void onSetBackground(wxCommandEvent& event);
 
 		void initMenuBar();
 		wxMenu* initFileBar();
@@ -55,6 +56,7 @@ namespace eanim
 		{
 			ID_PREVIEW = 1000,
 			ID_SETTINGS,
+			ID_BACKGROUND,
 			ID_CODESETTING,
 			ID_LOVE2D
 		};
