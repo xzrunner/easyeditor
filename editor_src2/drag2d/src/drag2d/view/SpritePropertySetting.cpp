@@ -203,8 +203,8 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Size.Height"))->SetValue(m_sprite->getSymbol().getSize().yLength() * m_sprite->getScale().y);
 	pg->GetProperty(wxT("Shear.X"))->SetValue(m_sprite->getShear().x);
 	pg->GetProperty(wxT("Shear.Y"))->SetValue(m_sprite->getShear().y);
-	pg->GetProperty(wxT("Offset.X"))->SetValue(m_sprite->getShear().x);
-	pg->GetProperty(wxT("Offset.Y"))->SetValue(m_sprite->getShear().y);
+ 	pg->GetProperty(wxT("Offset.X"))->SetValue(m_sprite->getOffset().x);
+	pg->GetProperty(wxT("Offset.Y"))->SetValue(m_sprite->getOffset().y);
 
 	bool xMirror, yMirror;
 	m_sprite->getMirror(xMirror, yMirror);
