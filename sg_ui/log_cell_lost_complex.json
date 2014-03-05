@@ -9,7 +9,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "log_lost_bg_9patch.json",
+			"filepath" : "log_lost_bg_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -393,7 +393,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "log_point_background_bar_9patch.json",
+			"filepath" : "log_point_background_bar_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 

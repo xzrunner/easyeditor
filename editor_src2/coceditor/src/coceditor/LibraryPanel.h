@@ -29,7 +29,7 @@ namespace coceditor
 		d2d::LibraryImagePage* m_imagePage;
 		LibraryComplexPage* m_complexPage;
 		d2d::LibraryAnimPage* m_animPage;
-		d2d::Library9PatchPage* m_9patchPage;
+		d2d::Library9PatchPage* m_scale9Page;
 
 	}; // LibraryPanel
 }

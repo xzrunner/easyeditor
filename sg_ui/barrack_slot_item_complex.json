@@ -54,7 +54,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "info_icon_bg_9patch.json",
+			"filepath" : "info_icon_bg_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -107,7 +107,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "barrack_slot_price_bg_9patch.json",
+			"filepath" : "barrack_slot_price_bg_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "resbar_bg",
 			"position" : 

@@ -5,7 +5,7 @@
 #include "PropertySetting.h"
 
 // #include <easyanim.h>
-#include <easy9patch.h>
+#include <easyscale9.h>
 #include <easymesh.h>
 
 namespace complex
@@ -42,10 +42,10 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
  //		dlg.ShowModal();
  //		Context::Instance()->stage->resetCanvas();
 	//}
- 	else if (d2d::Patch9Sprite* patch9 = dynamic_cast<d2d::Patch9Sprite*>(selected))
+ 	else if (d2d::Scale9Sprite* patch9 = dynamic_cast<d2d::Scale9Sprite*>(selected))
  	{
-  		d2d::Patch9Symbol& symbol = const_cast<d2d::Patch9Symbol&>(patch9->getSymbol());
-  		lib9patch::EditDialog dlg(m_editPanel, &symbol);
+  		d2d::Scale9Symbol& symbol = const_cast<d2d::Scale9Symbol&>(patch9->getSymbol());
+  		libscale9::EditDialog dlg(m_editPanel, &symbol);
   		dlg.ShowModal();
   
  		m_editPanel->resetCanvas();

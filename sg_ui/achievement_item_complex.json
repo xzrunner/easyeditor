@@ -6,7 +6,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "achievement_item_gb_9patch.json",
+			"filepath" : "achievement_item_gb_scale9.json",
 			"name" : "",
 			"position" : 
 			{
@@ -23,7 +23,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "achievement_item_bg2_9patch.json",
+			"filepath" : "achievement_item_bg2_scale9.json",
 			"name" : "",
 			"position" : 
 			{

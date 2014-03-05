@@ -8,7 +8,7 @@
 #include "EShapeSprite.h"
 #include "MeshSprite.h"
 #include "CombinationSprite.h"
-#include "Patch9Sprite.h"
+#include "Scale9Sprite.h"
 #include "TextSprite.h"
 //#include "FontBlankSprite.h"
 #include "FontSprite.h"
@@ -68,8 +68,8 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 				sprite = new complex::Sprite(static_cast<complex::Symbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
 				sprite = new anim::Sprite(static_cast<anim::Symbol*>(symbol));
-			else if (FileNameParser::isType(filepath, FileNameParser::e_9patch))
-				sprite = new Patch9Sprite(static_cast<Patch9Symbol*>(symbol));
+			else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))
+				sprite = new Scale9Sprite(static_cast<Scale9Symbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
 				//sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
 				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));

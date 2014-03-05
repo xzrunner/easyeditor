@@ -60,7 +60,7 @@ bool StagePanel::DragSymbolTarget::OnDropText(wxCoord x, wxCoord y, const wxStri
 		symbol = static_cast<d2d::ISymbol*>(library->getComplexPage()->getSymbol(index));
 	else if (sType == "anim")
 		symbol = static_cast<d2d::ISymbol*>(library->getAnimPage()->getSymbol(index));
-	else if (sType == "9patch")
+	else if (sType == "scale9")
 		symbol = static_cast<d2d::ISymbol*>(library->get9PatchPage()->getSymbol(index));
 
 	if (symbol)

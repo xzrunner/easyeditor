@@ -23,13 +23,13 @@ public:
 	d2d::ILibraryPage* getImagePage() { return m_imagePage; }
 	d2d::ILibraryPage* getComplexPage();
 	d2d::ILibraryPage* getAnimPage();
-	d2d::ILibraryPage* get9PatchPage() { return m_9patchPage; }
+	d2d::ILibraryPage* getScale9Page() { return m_scale9Page; }
 
 private:
 	d2d::LibraryImagePage* m_imagePage;
 	complex::LibraryPage* m_complexPage;
 	anim::LibraryPage* m_animPage;
-	d2d::Library9PatchPage* m_9patchPage;
+	d2d::LibraryScale9Page* m_scale9Page;
 
 }; // LibraryPanel
 

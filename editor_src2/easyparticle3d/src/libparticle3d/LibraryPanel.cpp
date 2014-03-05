@@ -17,8 +17,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(m_complexPage);
 	m_animPage = new anim::LibraryPage(getNotebook());
 	addPage(m_animPage);
-	m_9patchPage = new d2d::Library9PatchPage(getNotebook());
-	addPage(m_9patchPage);
+	m_scale9Page = new d2d::LibraryScale9Page(getNotebook());
+	addPage(m_scale9Page);
 }
 
 void LibraryPanel::loadFromTextFile(std::ifstream& fin)

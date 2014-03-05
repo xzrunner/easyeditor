@@ -45,7 +45,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "info_icon_bg_9patch.json",
+			"filepath" : "info_icon_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -64,7 +64,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "selected_frame_9patch.json",
+			"filepath" : "selected_frame_scale9.json",
 			"multi color" : "",
 			"name" : "selected",
 			"position" : 

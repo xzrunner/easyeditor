@@ -216,10 +216,18 @@ void ParticleSystem::add()
 	float speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 	transCoords(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
 
+	// 初始角度angle，每帧变换rotate
+	//////////////////////////////////////////////////////////////////////////
+// 	min = pLast->pc->min_rotate; max = pLast->pc->max_rotate;
+// 	pLast->rotate = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
+// 
+// 	pLast->angle = (rand() / (float(RAND_MAX)+1)) * d2d::PI * 2;
+	//////////////////////////////////////////////////////////////////////////
 	min = pLast->pc->min_rotate; max = pLast->pc->max_rotate;
-	pLast->rotate = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
+	pLast->angle = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 
-	pLast->angle = (rand() / (float(RAND_MAX)+1)) * d2d::PI * 2;
+	pLast->rotate = 0;
+	//////////////////////////////////////////////////////////////////////////
 
 	pLast++;
 }
