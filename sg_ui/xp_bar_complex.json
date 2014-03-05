@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_top_right_background_bar_9patch.json",
+			"filepath" : "game_top_right_background_bar_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -45,7 +45,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "game_top_right_bar_gradient_9patch.json",
+			"filepath" : "game_top_right_bar_gradient_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 

@@ -16,7 +16,6 @@
 deprecated
 .svn
 
-/sg_characters/data
 /sg_lowlow/data
 /sg_other/data
 /sg_loading_mmzb/data
@@ -71,10 +70,10 @@ deprecated
 /editor_src2/drag2d/README.md
 /editor_src2/drag2d/platform/msvc2008/libbox2d
 /editor_src2/drag2d/platform/msvc2008/libdrag2d
-/editor_src2/easy9patch/.svn
-/editor_src2/easy9patch/.gitignore
-/editor_src2/easy9patch/platform/msvc2008/easy9patch
-/editor_src2/easy9patch/platform/msvc2008/lib9patch
+/editor_src2/easyscale9/.svn
+/editor_src2/easyscale9/.gitignore
+/editor_src2/easyscale9/platform/msvc2008/easyscale9
+/editor_src2/easyscale9/platform/msvc2008/libscale9
 /editor_src2/easyanim/.git
 /editor_src2/easyanim/.gitignore
 /editor_src2/easyanim/platform/msvc2008/easyanim

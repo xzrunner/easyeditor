@@ -4,12 +4,12 @@
 
 namespace d2d
 {
-	class Patch9Symbol;
+	class Scale9Symbol;
 
 	class Scale9PropertySetting : public IPropertySetting
 	{
 	public:
-		Scale9PropertySetting(EditPanel* editPanel, Patch9Symbol* symbol);
+		Scale9PropertySetting(EditPanel* editPanel, Scale9Symbol* symbol);
 
 		virtual void updatePanel(PropertySettingPanel* panel);
 
@@ -18,7 +18,7 @@ namespace d2d
 		virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
 
 	private:
-		Patch9Symbol* m_symbol;
+		Scale9Symbol* m_symbol;
 
 	}; // Scale9PropertySetting
 }

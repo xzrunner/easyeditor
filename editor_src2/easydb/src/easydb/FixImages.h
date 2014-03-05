@@ -21,8 +21,8 @@ private:
 	void FixImagePath(const std::string& imgdir, const std::string& animpath);
 
 private:
-	std::map<std::string, std::string> _map_md5_2_image;
-	std::map<std::string, std::string> _map_image_2_md5;
+	std::map<std::string, std::string> m_map_md5_2_image;
+	std::map<std::string, std::string> m_map_image_2_md5;
 
 //	std::vector<std::string> _anim_files;
 

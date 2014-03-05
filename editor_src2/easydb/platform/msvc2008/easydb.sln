@@ -18,7 +18,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcomplex", "..\..\..\easy
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libanim", "..\..\..\easyanim\platform\msvc2008\projects\libanim.vcproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib9patch", "..\..\..\easy9patch\platform\msvc2008\projects\lib9patch.vcproj", "{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libscale9", "..\..\..\easyscale9\platform\msvc2008\projects\libscale9.vcproj", "{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easydb_cl", "projects\easydb_cl.vcproj", "{F05FF76F-096A-4AA7-86B1-4D0101C55699}"
 	ProjectSection(ProjectDependencies) = postProject

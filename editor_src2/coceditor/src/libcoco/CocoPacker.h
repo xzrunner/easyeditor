@@ -27,7 +27,7 @@ private:
 
 	void resolveAnimation(const complex::Symbol* symbol);
 	void resolveAnimation(const anim::Symbol* symbol);
-	void resolveAnimation(const d2d::Patch9Symbol* symbol);
+	void resolveAnimation(const d2d::Scale9Symbol* symbol);
 
 	void resolveSpriteForComponent(const d2d::ISprite* sprite, 
 		std::vector<int>& ids, std::map<int, std::vector<std::string> >& unique, 

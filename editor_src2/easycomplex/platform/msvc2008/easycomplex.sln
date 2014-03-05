@@ -28,7 +28,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libshape", "..\..\..\easysh
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libanim", "..\..\..\easyanim\platform\msvc2008\projects\libanim.vcproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib9patch", "..\..\..\easy9patch\platform\msvc2008\projects\lib9patch.vcproj", "{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libscale9", "..\..\..\easyscale9\platform\msvc2008\projects\libscale9.vcproj", "{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcoco", "..\..\..\coceditor\platform\msvc2008\projects\libcoco.vcproj", "{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
 EndProject

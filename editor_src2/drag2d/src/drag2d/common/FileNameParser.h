@@ -21,7 +21,7 @@ namespace d2d
 			e_combination,
 			e_complex,
 			e_anim,
-			e_9patch,
+			e_scale9,
 			e_fontblank,
 			e_freetype,
 			e_scripts

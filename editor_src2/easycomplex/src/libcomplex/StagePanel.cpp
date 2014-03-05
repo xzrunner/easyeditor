@@ -97,8 +97,8 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 // 		symbol = static_cast<d2d::ISymbol*>(library->getComplexPage()->getSymbol(index));
 // 	else if (sType == "anim")
 // 		symbol = static_cast<d2d::ISymbol*>(library->getAnimPage()->getSymbol(index));
-// 	else if (sType == "9patch")
-// 		symbol = static_cast<d2d::ISymbol*>(library->get9PatchPage()->getSymbol(index));
+// 	else if (sType == "scale9")
+// 		symbol = static_cast<d2d::ISymbol*>(library->getScale9Page()->getSymbol(index));
 // 	else if (sType == "fontblank")
 // 		symbol = static_cast<d2d::ISymbol*>(library->getFontPage()->getSymbol(index));
 // 	else if (sType == "scripts")

@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "blue_button_9patch.json",
+			"filepath" : "blue_button_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "button",
 			"position" : 
@@ -36,39 +36,9 @@
 			"name" : "cost",
 			"position" : 
 			{
-				"x" : 2.400009155273438,
-				"y" : 19.250
+				"x" : -17.39999389648438,
+				"y" : -1.350000381469727
 			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"align" : 2,
-			"angle" : 0.0,
-			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "upgrade_button_text_fontblank.json",
-			"font" : "E",
-			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 140,
-			"multi color" : "0xffffffff",
-			"name" : "title",
-			"position" : 
-			{
-				"x" : 2.400009155273438,
-				"y" : -10.750
-			},
-			"size" : 20,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -89,18 +59,22 @@
 			"name" : "type",
 			"position" : 
 			{
-				"x" : 85.60000610351563,
-				"y" : 20.14999961853027
+				"x" : 75.60000610351563,
+				"y" : -1.850000381469727
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.4000000059604645,
+			"x offset" : -7.600006103515625,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.4000000059604645,
+			"y offset" : 16.85000038146973,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }

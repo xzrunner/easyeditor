@@ -59,14 +59,14 @@ namespace edb
 		//		dlg.ShowModal();
 		//		Context::Instance()->stage->resetCanvas();
 		//}
-		// 	else if (d2d::Patch9Sprite* patch9 = dynamic_cast<d2d::Patch9Sprite*>(selected))
+		// 	else if (d2d::Scale9Sprite* patch9 = dynamic_cast<d2d::Scale9Sprite*>(selected))
 		// 	{
-		//  		d2d::Patch9Symbol& symbol = const_cast<d2d::Patch9Symbol&>(patch9->getSymbol());
-		//  		lib9patch::EditDialog dlg(m_editPanel, NULL, &symbol);
+		//  		d2d::Scale9Symbol& symbol = const_cast<d2d::Scale9Symbol&>(patch9->getSymbol());
+		//  		libscale9::EditDialog dlg(m_editPanel, NULL, &symbol);
 		//  		dlg.ShowModal();
 		//  
-		////   		std::vector<d2d::Patch9Sprite*> sprites;
-		////   		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::Patch9Sprite>(sprites));
+		////   		std::vector<d2d::Scale9Sprite*> sprites;
+		////   		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::Scale9Sprite>(sprites));
 		////   		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		////   		{
 		////   			d2d::ISprite* sprite = sprites[i];

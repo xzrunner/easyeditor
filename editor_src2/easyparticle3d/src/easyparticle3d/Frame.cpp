@@ -1,8 +1,8 @@
 #include "Frame.h"
 #include "Task.h"
-#include "Code.h"
 
 #include <wx/splitter.h>
+#include <easyparticle3d.h>
 
 namespace eparticle3d
 {
@@ -94,7 +94,7 @@ void Frame::onCodeCOC(wxCommandEvent& event)
 	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("particle.lua"));
 
 	ebuilder::CodeGenerator gen;
-	Code code(gen);
+	Code code(gen, m_task->getToolbar());
 	code.resolve();
 	page->SetReadOnly(false);
 	page->SetText(gen.toText());

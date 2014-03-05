@@ -8,7 +8,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "building_info_window_bg_9patch.json",
+			"filepath" : "building_info_window_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -27,7 +27,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "building_info_window_bg2_9patch.json",
+			"filepath" : "building_info_window_bg2_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -84,7 +84,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "building_info_window_bg3_9patch.json",
+			"filepath" : "building_info_window_bg3_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
