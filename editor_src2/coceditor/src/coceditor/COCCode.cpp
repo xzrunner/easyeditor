@@ -1,5 +1,4 @@
 #include "COCCode.h"
-#include "COCParser.h"
 
 #include "Context.h"
 #include "StagePanel.h"
@@ -23,10 +22,8 @@ COCCode::COCCode(ebuilder::CodeGenerator& gen)
 
 void COCCode::resolve()
 {
-	COCParser parser;
-	parser.parser();
-
-	resolveFromParser(parser);
+	m_parser.parser();
+	resolveFromParser(m_parser);
 }
 
 void COCCode::resolveFromParser(const COCParser& parser)
@@ -322,8 +319,8 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
- 	for (size_t i = 0; i < 4; ++i)
- 		screen[i] += picture->offset / Context::Instance()->scale;
+//  	for (size_t i = 0; i < 4; ++i)
+//  		screen[i] += picture->offset / Context::Instance()->scale;
 	// 1. scale
 	for (size_t i = 0; i < 4; ++i)
 		screen[i].x *= sprite->getScale().x;
@@ -336,7 +333,7 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 		screen[i] = rot;
 	}
 	// 3. translate
-	d2d::Vector center = sprite->getCenter();
+	d2d::Vector center = sprite->getCenter() + d2d::Math::rotateVector(picture->offset, sprite->getAngle());
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] += center;
 	// 4. mirror
@@ -483,8 +480,8 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
-	for (size_t i = 0; i < 4; ++i)
-		screen[i] += picture->offset / Context::Instance()->scale;
+// 	for (size_t i = 0; i < 4; ++i)
+// 		screen[i] += picture->offset / Context::Instance()->scale;
 
 	// flip y
 	for (size_t i = 0; i < 4; ++i)
@@ -1067,7 +1064,7 @@ void COCCode::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id)
 	lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
 }
 
-void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*= false*/)
+void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*= false*/) const
 {
 	mat[1] = mat[2] = mat[4] = mat[5] = 0;
 	mat[0] = mat[3] = 1;
@@ -1083,8 +1080,24 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		// | ky  1    | |    sy    | | -s  c    | |    1    |
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
-		float x = sprite->getCenter().x,
+		float x, y;
+		if (dynamic_cast<const d2d::ImageSprite*>(sprite))
+		{
+ 			m_parser.m_mapSymbolPicture;
+ 			std::map<const d2d::ISymbol*, COCParser::Picture*>::const_iterator itr 
+ 				= m_parser.m_mapSymbolPicture.find(&sprite->getSymbol());
+ 			assert(itr != m_parser.m_mapSymbolPicture.end());
+ 			COCParser::Picture* picture = itr->second;
+
+			d2d::Vector pos = sprite->getCenter() + d2d::Math::rotateVector(picture->offset, sprite->getAngle());
+			x = pos.x;
+			y = pos.y;
+		}
+		else
+		{
+			x = sprite->getCenter().x;
 			y = sprite->getCenter().y;
+		}
 		float sx = sprite->getScale().x,
 			sy = sprite->getScale().y;
 		bool xMirror, yMirror;
