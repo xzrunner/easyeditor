@@ -25,7 +25,10 @@ namespace ecomplex
 
 	StageCanvas::~StageCanvas()
 	{
-		m_background->release();
+		if (m_background)
+		{
+			m_background->release();
+		}
 	}
 
 	void StageCanvas::initGL()
