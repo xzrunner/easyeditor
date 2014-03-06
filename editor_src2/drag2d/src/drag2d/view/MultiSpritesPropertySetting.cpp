@@ -59,22 +59,17 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 			s->setTransform(Vector(s->getPosition().x, y), s->getAngle());
 		}
 	}
-	else if (name == wxT("Pos.dx"))
+	else if (name == wxT("Pos"))
 	{
-		float dx = wxANY_AS(value, float);
+		double dx, dy;
+		splitString(value, &dx, &dy);
 		for (int i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* s = m_sprites[i];
-			s->setTransform(Vector(s->getPosition().x + dx, s->getPosition().y), s->getAngle());
-		}
-	}
-	else if (name == wxT("Pos.dy"))
-	{
-		float dy = wxANY_AS(value, float);
-		for (int i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* s = m_sprites[i];
-			s->setTransform(Vector(s->getPosition().x, s->getPosition().y + dy), s->getAngle());
+			d2d::Vector pos = s->getPosition();
+			pos.x += dx;
+			pos.y += dy;
+			s->setTransform(pos, s->getAngle());
 		}
 	}
 	else if (name == wxT("Angle"))
@@ -86,22 +81,17 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 			s->setTransform(s->getPosition(), s->getAngle() + angle);
 		}
 	}
-	else if (name == wxT("Scale.dx"))
+	else if (name == wxT("Scale"))
 	{
-		float dx = wxANY_AS(value, float);
+		double dx, dy;
+		splitString(value, &dx, &dy);
 		for (int i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* s = m_sprites[i];
-			s->setScale(s->getScale().x * dx, s->getScale().y);
-		}
-	}
-	else if (name == wxT("Scale.dy"))
-	{
-		float dy = wxANY_AS(value, float);
-		for (int i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* s = m_sprites[i];
-			s->setScale(s->getScale().x, s->getScale().y * dy);
+			d2d::Vector scale = s->getScale();
+			scale.x *= dx;
+			scale.y *= dy;
+			s->setScale(scale.x, scale.y);
 		}
 	}
 
