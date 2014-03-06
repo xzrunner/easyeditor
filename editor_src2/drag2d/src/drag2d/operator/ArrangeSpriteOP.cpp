@@ -859,7 +859,8 @@ void ArrangeSpriteOP<TBase>::RotateVisitor::
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 
-	float angle = Math::getAngleInDirection(sprite->getPosition(), m_start, m_end);
+	Vector center = sprite->getPosition() + sprite->getOffset();
+	float angle = Math::getAngleInDirection(center, m_start, m_end);
 	sprite->rotate(angle);
 
 	bFetchNext = false;
