@@ -2,7 +2,7 @@
 
 #include "ResizeAtomicOP.h"
 
-namespace libscale9
+namespace escale9
 {
 
 ResizeOP::ResizeOP(d2d::EditPanel* editPanel, d2d::Scale9Symbol* symbol)
@@ -81,4 +81,4 @@ bool ResizeOP::onDraw() const
 
 	return false;
 }
-} // libscale9
+} // escale9

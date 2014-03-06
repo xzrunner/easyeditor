@@ -45,7 +45,7 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
  	else if (d2d::Scale9Sprite* patch9 = dynamic_cast<d2d::Scale9Sprite*>(selected))
  	{
   		d2d::Scale9Symbol& symbol = const_cast<d2d::Scale9Symbol&>(patch9->getSymbol());
-  		libscale9::EditDialog dlg(m_editPanel, &symbol);
+  		escale9::EditDialog dlg(m_editPanel, &symbol);
   		dlg.ShowModal();
   
  		m_editPanel->resetCanvas();

@@ -2,7 +2,7 @@
 
 #include <drag2d.h>
 
-namespace libscale9
+namespace escale9
 {
 	class ResizeOP : public d2d::ZoomViewOP
 	{

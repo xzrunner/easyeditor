@@ -3,7 +3,7 @@
 #include <wx/wx.h>
 #include <drag2d.h>
 
-namespace libscale9
+namespace escale9
 {
 	class ToolbarPanel : public wxPanel
 	{

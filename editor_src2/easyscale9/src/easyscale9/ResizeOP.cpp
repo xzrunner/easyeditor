@@ -7,7 +7,7 @@ namespace escale9
 {
 
 ResizeOP::ResizeOP(d2d::EditPanel* editPanel)
-	: libscale9::ResizeOP(editPanel, NULL)
+	: escale9::ResizeOP(editPanel, NULL)
 {
 }
 
@@ -16,8 +16,8 @@ bool ResizeOP::onMouseLeftDown(int x, int y)
 	d2d::Scale9Symbol* symbol = Context::Instance()->stage->getPatchSymbol();
 	if (!symbol) return false;
 
-	libscale9::ResizeOP::setSymbol(symbol);
-	return libscale9::ResizeOP::onMouseLeftDown(x, y);
+	escale9::ResizeOP::setSymbol(symbol);
+	return escale9::ResizeOP::onMouseLeftDown(x, y);
 }
 
 bool ResizeOP::onMouseLeftUp(int x, int y)
@@ -25,8 +25,8 @@ bool ResizeOP::onMouseLeftUp(int x, int y)
 	d2d::Scale9Symbol* symbol = Context::Instance()->stage->getPatchSymbol();
 	if (!symbol) return false;
 
-	libscale9::ResizeOP::setSymbol(symbol);
-	return libscale9::ResizeOP::onMouseLeftUp(x, y);
+	escale9::ResizeOP::setSymbol(symbol);
+	return escale9::ResizeOP::onMouseLeftUp(x, y);
 }
 
 bool ResizeOP::onMouseDrag(int x, int y)
@@ -87,7 +87,7 @@ bool ResizeOP::onDraw() const
 	d2d::Scale9Symbol* symbol = Context::Instance()->stage->getPatchSymbol();
 	if (!symbol) return false;
 
-	libscale9::ResizeOP::setSymbol(symbol);
-	return libscale9::ResizeOP::onDraw();
+	escale9::ResizeOP::setSymbol(symbol);
+	return escale9::ResizeOP::onDraw();
 }
 } // escale9

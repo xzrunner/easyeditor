@@ -2,7 +2,7 @@
 
 #include <wx/spinctrl.h>
 
-namespace libscale9
+namespace escale9
 {
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::Scale9Symbol* symbol)
 	: wxPanel(parent)

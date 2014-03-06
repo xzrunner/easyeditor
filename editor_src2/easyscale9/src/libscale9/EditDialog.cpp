@@ -6,7 +6,7 @@
 #include "FileSaver.h"
 #include "ToolbarPanel.h"
 
-namespace libscale9
+namespace escale9
 {
 	BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 		EVT_CLOSE(EditDialog::onClose)

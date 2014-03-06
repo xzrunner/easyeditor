@@ -1,6 +1,6 @@
 #include "FileSaver.h"
 
-namespace libscale9
+namespace escale9
 {
 
 void FileSaver::store(const char* filepath, const d2d::Scale9Symbol& symbol)
@@ -59,4 +59,4 @@ void FileSaver::store(const char* filepath, const d2d::Scale9Symbol& symbol)
 //
 //	return value;
 //}
-} // libscale9
+} // escale9
