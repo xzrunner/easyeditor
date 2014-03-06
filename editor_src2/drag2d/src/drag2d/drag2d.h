@@ -58,7 +58,6 @@
 #include "view/LibraryImagePage.h"
 #include "view/LibraryShapePage.h"
 #include "view/LibraryEShapePage.h"
-#include "view/LibraryMeshPage.h"
 #include "view/LibraryCombinationPage.h"
 #include "view/LibraryScale9Page.h"
 #include "view/LibraryFontBlankPage.h"

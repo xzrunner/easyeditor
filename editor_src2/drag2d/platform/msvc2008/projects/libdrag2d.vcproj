@@ -1665,18 +1665,6 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="mesh"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryMeshPage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryMeshPage.h"
-						>
-					</File>
-				</Filter>
-				<Filter
 					Name="shape"
 					>
 					<File
