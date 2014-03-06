@@ -1,6 +1,7 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 #include "Symbol.h"
+#include "Settings.h"
 
 #include <easyanim.h>
 
@@ -41,10 +42,6 @@ namespace ecomplex
 	{
 		drawBackground();
 
-		const float EDGE = 100;
-		d2d::PrimitiveDraw::drawLine(d2d::Vector(-EDGE, 0.0f), d2d::Vector(EDGE, 0.0f), d2d::Colorf(0, 1, 0), 1);
-		d2d::PrimitiveDraw::drawLine(d2d::Vector(0.0f, -EDGE), d2d::Vector(0.0f, EDGE), d2d::Colorf(0, 1, 0), 1);
-
 		std::vector<d2d::ISprite*> sprites;
 		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
@@ -64,6 +61,12 @@ namespace ecomplex
 		}
 
 		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
+
+		if (Settings::bVisibleBGCross)
+		{
+			const float EDGE = 100;
+			d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+		}
 
 		m_editPanel->drawEditTemp();
 	}
@@ -90,6 +93,9 @@ namespace ecomplex
 			m_background->draw(m_background->getRegion());
 		}
 
-		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		if (Settings::bVisibleBGRect)
+		{
+			d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		}
 	}
 }

@@ -36,8 +36,7 @@ void StageCanvas::drawbackground() const
 
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
-	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge,
-		d2d::Colorf(0.8f,0.8f,0.8f,0.8f));
+	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
 }
 
 } // eanim

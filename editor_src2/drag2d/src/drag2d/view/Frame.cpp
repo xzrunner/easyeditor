@@ -54,6 +54,12 @@ void Frame::initWithFile(const wxString& path)
 	}
 }
 
+void Frame::onSettings(wxCommandEvent& event)
+{
+	SettingsDialog dlg(this);
+	dlg.ShowModal();
+}
+
 void Frame::onNew(wxCommandEvent& event)
 {
 	if (!m_task) return;
@@ -133,12 +139,6 @@ void Frame::onEJPreview(wxCommandEvent& event)
 	std::string cmd = "ejoy2d.exe ejoy2d/preview/play.lua";
 #endif
 	WinExec(cmd.c_str(), /*SW_SHOWMAXIMIZED*/SW_NORMAL);
-}
-
-void Frame::onSettings(wxCommandEvent& event)
-{
-	SettingsDialog dlg(this);
-	dlg.ShowModal();
 }
 
 void Frame::onQuit(wxCommandEvent& event)

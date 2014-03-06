@@ -16,6 +16,9 @@ public:
 
 	void initWithFile(const wxString& path);
 
+protected:
+	virtual void onSettings(wxCommandEvent& event);
+
 private:
 	void onNew(wxCommandEvent& event);
 	void onOpen(wxCommandEvent& event);
@@ -23,8 +26,6 @@ private:
 	void onSaveAs(wxCommandEvent& event);
 
 	void onEJPreview(wxCommandEvent& event);
-
-	void onSettings(wxCommandEvent& event);
 
 	void onQuit(wxCommandEvent& event);
 

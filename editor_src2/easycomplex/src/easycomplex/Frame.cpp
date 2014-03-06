@@ -16,6 +16,12 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_setting_menu->Append(ID_SET_BG, wxT("Background", wxT("Background")));
 }
 
+void Frame::onSettings(wxCommandEvent& event)
+{
+	SettingsDialog dlg(this);
+	dlg.ShowModal();
+}
+
 void Frame::onSetBackground(wxCommandEvent& event)
 {
 	wxString formatFilter = wxT("*.png;*.jpg");

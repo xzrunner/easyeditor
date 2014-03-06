@@ -165,14 +165,6 @@
 			Name="frame"
 			>
 			<File
-				RelativePath="..\..\..\src\libcomplex\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\Context.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libcomplex\EditDialog.cpp"
 				>
 			</File>
@@ -181,14 +173,22 @@
 				>
 			</File>
 			<Filter
-				Name="library"
+				Name="settings"
 				>
 				<File
-					RelativePath="..\..\..\src\libcomplex\LibraryPanel.cpp"
+					RelativePath="..\..\..\src\libcomplex\Settings.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libcomplex\LibraryPanel.h"
+					RelativePath="..\..\..\src\libcomplex\Settings.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SettingsDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SettingsDialog.h"
 					>
 				</File>
 			</Filter>
@@ -273,6 +273,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libcomplex\LibraryPage.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LibraryPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LibraryPanel.h"
 					>
 				</File>
 			</Filter>

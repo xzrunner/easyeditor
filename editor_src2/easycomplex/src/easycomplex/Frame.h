@@ -11,6 +11,9 @@ class Frame : public d2d::Frame
 public:
 	Frame(const wxString& title, const wxString& filetag);
 
+protected:
+	virtual void onSettings(wxCommandEvent& event);
+
 private:
 	void onSetBackground(wxCommandEvent& event);
 
