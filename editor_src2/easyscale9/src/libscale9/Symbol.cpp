@@ -1,21 +1,13 @@
-#include "Scale9Symbol.h"
-#include "ISprite.h"
-#include "SymbolMgr.h"
-#include "SpriteFactory.h"
-#include "Scale9Sprite.h"
+#include "Symbol.h"
+#include "Sprite.h"
 
-#include "common/Math.h"
-#include "common/FileNameTools.h"
-#include "dataset/Bitmap.h"
-#include "render/SpriteDraw.h"
-
-namespace d2d
+namespace escale9
 {
 
-Scale9Symbol::Scale9Symbol()
+Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = wxT("patch") + wxVariant(id++);
+	m_name = wxT("scale9") + wxVariant(id++);
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 
@@ -23,14 +15,14 @@ Scale9Symbol::Scale9Symbol()
 
 	const float SCALE = 0.15f;
 	const float WIDTH = 800, HEIGHT = 480;
-	m_bitmap = new Bitmap(
+	m_bitmap = new d2d::Bitmap(
 		new wxBitmap(WIDTH * SCALE, HEIGHT * SCALE)
 		);
 
 	m_type = e_null;
 }
 
-Scale9Symbol::~Scale9Symbol()
+Symbol::~Symbol()
 {
 	for (size_t i = 0; i < 3; ++i)
 		for (size_t j = 0; j < 3; ++j)
@@ -41,15 +33,15 @@ Scale9Symbol::~Scale9Symbol()
 	memset(m_sprites, 0, sizeof(int) * 9);
 }
 
-void Scale9Symbol::loadFromTextFile(std::ifstream& fin)
+void Symbol::loadFromTextFile(std::ifstream& fin)
 {
 }
 
-void Scale9Symbol::storeToTextFile(std::ofstream& fout) const
+void Symbol::storeToTextFile(std::ofstream& fout) const
 {
 }
 
-void Scale9Symbol::reloadTexture() const
+void Symbol::reloadTexture() const
 {
 	for (size_t i = 0; i < 3; ++i)
 		for (size_t j = 0; j < 3; ++j)
@@ -59,9 +51,9 @@ void Scale9Symbol::reloadTexture() const
 		}
 }
 
-void Scale9Symbol::draw(const ISprite* sprite/* = NULL*/) const
+void Symbol::draw(const d2d::ISprite* sprite/* = NULL*/) const
 {
-	const Scale9Sprite* scale9 = dynamic_cast<const Scale9Sprite*>(sprite);
+	const Sprite* scale9 = dynamic_cast<const Sprite*>(sprite);
 // 	bool isResize = scale9 && ((scale9->width != m_width) || (scale9->height != m_height));
 // 	float w = m_width, h = m_height;
 // 	if (isResize) resize(scale9->width, scale9->height);
@@ -74,9 +66,9 @@ void Scale9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 			{
 				if (!m_sprites[i][j]) continue;
 				if (sprite)
-					SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
+					d2d::SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
 				else
-					SpriteDraw::drawSprite(m_sprites[i][j]);
+					d2d::SpriteDraw::drawSprite(m_sprites[i][j]);
 			}
 		break;
 	case e_9GridHollow:
@@ -86,9 +78,9 @@ void Scale9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 				if (i == 1 && j == 1) continue;
 				if (!m_sprites[i][j]) continue;
 				if (sprite)
-					SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
+					d2d::SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
 				else
-					SpriteDraw::drawSprite(m_sprites[i][j]);
+					d2d::SpriteDraw::drawSprite(m_sprites[i][j]);
 			}
 			break;
 	case e_3GridHor:
@@ -96,9 +88,9 @@ void Scale9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 		{
 			if (!m_sprites[1][i]) continue;
 			if (sprite)
-				SpriteDraw::drawSprite(m_sprites[1][i], sprite->multiCol, sprite->addCol);
+				d2d::SpriteDraw::drawSprite(m_sprites[1][i], sprite->multiCol, sprite->addCol);
 			else
-				SpriteDraw::drawSprite(m_sprites[1][i]);
+				d2d::SpriteDraw::drawSprite(m_sprites[1][i]);
 		}
 		break;
 	case e_3GridVer:
@@ -106,9 +98,9 @@ void Scale9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 		{
 			if (!m_sprites[i][1]) continue;
 			if (sprite)
-				SpriteDraw::drawSprite(m_sprites[i][1], sprite->multiCol, sprite->addCol);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][1], sprite->multiCol, sprite->addCol);
 			else
-				SpriteDraw::drawSprite(m_sprites[i][1]);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][1]);
 		}
 		break;
 	case e_6GridUpper:
@@ -117,27 +109,27 @@ void Scale9Symbol::draw(const ISprite* sprite/* = NULL*/) const
 			{
 				if (!m_sprites[i][j]) continue;
 				if (sprite)
-					SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
+					d2d::SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
 				else
-					SpriteDraw::drawSprite(m_sprites[i][j]);
+					d2d::SpriteDraw::drawSprite(m_sprites[i][j]);
 			}
 	}
 
 //	if (isResize) resize(w, h);
 }
 
-Rect Scale9Symbol::getSize(const ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
-	return Rect(m_width, m_height);
+	return d2d::Rect(m_width, m_height);
 }
 
-void Scale9Symbol::refresh()
+void Symbol::refresh()
 {
 	ISymbol::refresh();
 	refreshThumbnail();
 }
 
-void Scale9Symbol::composeFromSprites(ISprite* sprites[3][3],
+void Symbol::composeFromSprites(d2d::ISprite* sprites[3][3],
 									  float width, float height)
 {
 	m_type = getType(sprites);
@@ -193,7 +185,7 @@ void Scale9Symbol::composeFromSprites(ISprite* sprites[3][3],
 	composeFromSprites();
 }
 
-void Scale9Symbol::resize(float width, float height) const
+void Symbol::resize(float width, float height) const
 {
 	m_width = width;
 	m_height = height;
@@ -201,12 +193,12 @@ void Scale9Symbol::resize(float width, float height) const
 	composeFromSprites();
 }
 
-void Scale9Symbol::loadResources()
+void Symbol::loadResources()
 {
-	Scale9FileAdapter adapter;
+	FileAdapter adapter;
 	adapter.load(m_filepath.c_str());
 
-	std::string dlg = FilenameTools::getFileDir(m_filepath);
+	std::string dlg = d2d::FilenameTools::getFileDir(m_filepath);
 
 	m_width = adapter.width;
 	m_height = adapter.height;
@@ -250,7 +242,7 @@ void Scale9Symbol::loadResources()
 	composeFromSprites();
 }
 
-void Scale9Symbol::refreshThumbnail()
+void Symbol::refreshThumbnail()
 {
 	wxMemoryDC memDC;
 	memDC.SelectObject(const_cast<wxBitmap&>(*m_bitmap->getBitmap()));
@@ -263,35 +255,35 @@ void Scale9Symbol::refreshThumbnail()
 	case e_9Grid:
 		for (size_t i = 0; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
-				SpriteDraw::drawSprite(m_sprites[i][j], memDC);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], memDC);
 		break;
 	case e_9GridHollow:
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
-				SpriteDraw::drawSprite(m_sprites[i][j], memDC);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], memDC);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
-			SpriteDraw::drawSprite(m_sprites[1][i], memDC);
+			d2d::SpriteDraw::drawSprite(m_sprites[1][i], memDC);
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
-			SpriteDraw::drawSprite(m_sprites[i][1], memDC);
+			d2d::SpriteDraw::drawSprite(m_sprites[i][1], memDC);
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
-				SpriteDraw::drawSprite(m_sprites[i][j], memDC);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], memDC);
 		break;
 	}
 
 	memDC.SelectObject(wxNullBitmap);
 }
 
-void Scale9Symbol::composeFromSprites() const
+void Symbol::composeFromSprites() const
 {
 	if (m_type == e_9Grid)
 	{
@@ -372,7 +364,7 @@ void Scale9Symbol::composeFromSprites() const
 	}
 }
 
-Scale9Symbol::Type Scale9Symbol::getType(ISprite* sprites[3][3]) const
+Symbol::Type Symbol::getType(d2d::ISprite* sprites[3][3]) const
 {
 	{
 		Type type = e_9Grid;
@@ -413,7 +405,7 @@ Scale9Symbol::Type Scale9Symbol::getType(ISprite* sprites[3][3]) const
 	return e_null;
 }
 
-void Scale9Symbol::stretch(ISprite* sprite, const d2d::Vector& center, 
+void Symbol::stretch(d2d::ISprite* sprite, const d2d::Vector& center, 
 						  float width, float height)
 {
 	assert(sprite->getSymbol().getSize().xLength() != 0
@@ -430,15 +422,15 @@ void Scale9Symbol::stretch(ISprite* sprite, const d2d::Vector& center,
 		sprite->setScale(height / sw, width / sh);
 }
 
-void Scale9Symbol::initSprite(const Scale9FileAdapter::Entry& entry, ISprite** pSprite,
-							  const std::string& dlg)
+void Symbol::initSprite(const FileAdapter::Entry& entry, d2d::ISprite** pSprite,
+						const std::string& dlg)
 {
 	std::string filepath = entry.filepath;
-	if (!FilenameTools::isExist(filepath))
-		filepath = FilenameTools::getAbsolutePath(dlg, filepath);
+	if (!d2d::FilenameTools::isExist(filepath))
+		filepath = d2d::FilenameTools::getAbsolutePath(dlg, filepath);
 
-	ISymbol* symbol = SymbolMgr::Instance()->getSymbol(filepath);
-	ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+	ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
 	sprite->name = entry.name;
 
@@ -449,4 +441,5 @@ void Scale9Symbol::initSprite(const Scale9FileAdapter::Entry& entry, ISprite** p
 
 	*pSprite = sprite;
 }
-} // d2d
+
+}

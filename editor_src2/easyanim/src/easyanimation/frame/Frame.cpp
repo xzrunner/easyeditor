@@ -18,6 +18,7 @@
 
 #include <easycomplex.h>
 #include <easymesh.h>
+#include <easyscale9.h>
 
 namespace eanim
 {
@@ -267,7 +268,7 @@ wxWindow* Frame::createLeftFrame(wxWindow* parent)
 	library->addPage(context->imagePage = new d2d::LibraryImagePage(library->getNotebook()));
 	library->addPage(new ecomplex::LibraryPage(library->getNotebook()));
 	library->addPage(new emesh::LibraryPage(library->getNotebook()));
-	library->addPage(new d2d::LibraryScale9Page(library->getNotebook()));
+	library->addPage(new escale9::LibraryPage(library->getNotebook()));
 	context->library = library;
 
 	// property

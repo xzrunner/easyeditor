@@ -5,6 +5,7 @@
 
 namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
+namespace escale9 { class Symbol; }
 
 namespace libcoco
 {
@@ -27,7 +28,7 @@ private:
 
 	void resolveAnimation(const ecomplex::Symbol* symbol);
 	void resolveAnimation(const anim::Symbol* symbol);
-	void resolveAnimation(const d2d::Scale9Symbol* symbol);
+	void resolveAnimation(const escale9::Symbol* symbol);
 
 	void resolveSpriteForComponent(const d2d::ISprite* sprite, 
 		std::vector<int>& ids, std::map<int, std::vector<std::string> >& unique, 

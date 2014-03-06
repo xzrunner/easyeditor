@@ -4,11 +4,13 @@
 
 namespace escale9
 {
+	class Symbol;
+
 	class ResizeAtomicOP : public d2d::AbstractAtomicOP
 	{
 	public:
-		ResizeAtomicOP(d2d::Scale9Symbol* symbol, 
-			const d2d::Vector& src, const d2d::Vector& dst);
+		ResizeAtomicOP(Symbol* symbol, const d2d::Vector& src, 
+			const d2d::Vector& dst);
 
 		virtual void undo();
 		virtual void redo();
@@ -19,7 +21,7 @@ namespace escale9
 		}
 
 	private:
-		d2d::Scale9Symbol* m_symbol;
+		Symbol* m_symbol;
 
 		d2d::Vector m_src, m_dst;
 

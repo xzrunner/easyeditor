@@ -36,7 +36,7 @@ namespace coceditor
 		void resolveAnimation(const ecomplex::Symbol* symbol);
 		//void resolveAnimation(const anim::Symbol* symbol);
 		void resolveAnimation(const anim::Symbol* symbol);
-		void resolveAnimation(const d2d::Scale9Symbol* symbol);
+		void resolveAnimation(const escale9::Symbol* symbol);
 
 		void resolveAnimationCommon(const d2d::ISymbol* symbol);
 

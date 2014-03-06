@@ -4,7 +4,7 @@
 
 namespace escale9
 {
-	class ResizeOP : public escale9::ResizeOP
+	class ResizeOP : public escale9::ResizeBaseOP
 	{
 	public:
 		ResizeOP(d2d::EditPanel* editPanel);

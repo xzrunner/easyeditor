@@ -1,8 +1,9 @@
 #include "ResizeAtomicOP.h"
+#include "Symbol.h"
 
 namespace escale9
 {
-	ResizeAtomicOP::ResizeAtomicOP(d2d::Scale9Symbol* symbol,
+	ResizeAtomicOP::ResizeAtomicOP(Symbol* symbol,
 		const d2d::Vector& src, const d2d::Vector& dst)
 		: m_symbol(symbol)
 		, m_src(src)

@@ -4,10 +4,12 @@
 
 namespace escale9
 {
-	class ResizeOP : public d2d::ZoomViewOP
+	class Symbol;
+
+	class ResizeBaseOP : public d2d::ZoomViewOP
 	{
 	public:
-		ResizeOP(d2d::EditPanel* editPanel, d2d::Scale9Symbol* symbol);
+		ResizeBaseOP(d2d::EditPanel* editPanel, Symbol* symbol);
 
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);
@@ -15,7 +17,7 @@ namespace escale9
 
 		virtual bool onDraw() const;
 
-		void setSymbol(d2d::Scale9Symbol* symbol) const {
+		void setSymbol(Symbol* symbol) const {
 			if (!m_symbol) m_symbol = symbol;
 		}
 
@@ -35,12 +37,12 @@ namespace escale9
 		Status m_status;
 
 	private:
-		mutable d2d::Scale9Symbol* m_symbol;
+		mutable Symbol* m_symbol;
 
 		d2d::Vector m_firstPos;
 
 		d2d::ShapeStyle m_style;
 
-	}; // ResizeOP
+	}; // ResizeBaseOP
 }
 

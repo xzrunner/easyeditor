@@ -3,6 +3,7 @@
 
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyscale9.h>
 
 namespace libcoco
 {
@@ -76,17 +77,17 @@ void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			resolveAnimation(anim);
 		}
-		else if (const d2d::Scale9Symbol* patch9 = dynamic_cast<const d2d::Scale9Symbol*>(symbol))
+		else if (const escale9::Symbol* patch9 = dynamic_cast<const escale9::Symbol*>(symbol))
 		{
 			std::vector<d2d::ISprite*> sprites;
 			switch (patch9->type())
 			{
-			case d2d::Scale9Symbol::e_9Grid:
+			case escale9::Symbol::e_9Grid:
 				for (size_t i = 0; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j)
 						sprites.push_back(patch9->m_sprites[i][j]);
 				break;
-			case d2d::Scale9Symbol::e_9GridHollow:
+			case escale9::Symbol::e_9GridHollow:
 				for (size_t i = 0; i < 3; ++i) {
 					for (size_t j = 0; j < 3; ++j) {
 						if (i == 1 && j == 1) continue;
@@ -94,15 +95,15 @@ void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 					}
 				}
 				break;
-			case d2d::Scale9Symbol::e_3GridHor:
+			case escale9::Symbol::e_3GridHor:
 				for (size_t i = 0; i < 3; ++i)
 					sprites.push_back(patch9->m_sprites[1][i]);
 				break;
-			case d2d::Scale9Symbol::e_3GridVer:
+			case escale9::Symbol::e_3GridVer:
 				for (size_t i = 0; i < 3; ++i)
 					sprites.push_back(patch9->m_sprites[i][1]);
 				break;
-			case d2d::Scale9Symbol::e_6GridUpper:
+			case escale9::Symbol::e_6GridUpper:
 				for (size_t i = 1; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j)
 						sprites.push_back(patch9->m_sprites[i][j]);
@@ -497,7 +498,7 @@ void CocoPacker::resolveAnimation(const anim::Symbol* symbol)
 	}
 }
 
-void CocoPacker::resolveAnimation(const d2d::Scale9Symbol* symbol)
+void CocoPacker::resolveAnimation(const escale9::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 
@@ -520,24 +521,24 @@ void CocoPacker::resolveAnimation(const d2d::Scale9Symbol* symbol)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(m_gen, "component", true);
-		if (symbol->type() == d2d::Scale9Symbol::e_9Grid)
+		if (symbol->type() == escale9::Symbol::e_9Grid)
 			for (size_t i = 0; i < 3; ++i)
 				for (size_t j = 0; j < 3; ++j)
 					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
-		else if (symbol->type() == d2d::Scale9Symbol::e_9GridHollow)
+		else if (symbol->type() == escale9::Symbol::e_9GridHollow)
 			for (size_t i = 0; i < 3; ++i) {
 				for (size_t j = 0; j < 3; ++j) {
 					if (i == 1 && j == 1) continue;
 					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
 				}
 			}
-		else if (symbol->type() == d2d::Scale9Symbol::e_3GridHor)
+		else if (symbol->type() == escale9::Symbol::e_3GridHor)
 			for (size_t i = 0; i < 3; ++i)
 				resolveSpriteForComponent(symbol->m_sprites[1][i], ids, unique, order);
-		else if (symbol->type() == d2d::Scale9Symbol::e_3GridVer)
+		else if (symbol->type() == escale9::Symbol::e_3GridVer)
 			for (size_t i = 0; i < 3; ++i)
 				resolveSpriteForComponent(symbol->m_sprites[i][1], ids, unique, order);
-		else if (symbol->type() == d2d::Scale9Symbol::e_6GridUpper)
+		else if (symbol->type() == escale9::Symbol::e_6GridUpper)
 			for (size_t i = 1; i < 3; ++i)
 				for (size_t j = 0; j < 3; ++j)
 					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
@@ -549,11 +550,11 @@ void CocoPacker::resolveAnimation(const d2d::Scale9Symbol* symbol)
 		{
 			lua::TableAssign ta(m_gen, "", true);
 			int index = 0;
-			if (symbol->type() == d2d::Scale9Symbol::e_9Grid)
+			if (symbol->type() == escale9::Symbol::e_9Grid)
 				for (size_t i = 0; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j, ++index)
 						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
-			else if (symbol->type() == d2d::Scale9Symbol::e_9GridHollow)
+			else if (symbol->type() == escale9::Symbol::e_9GridHollow)
 				for (size_t i = 0; i < 3; ++i) {
 					for (size_t j = 0; j < 3; ++j, ++index) {
 						if (i == 1 && j == 1) { 
@@ -563,13 +564,13 @@ void CocoPacker::resolveAnimation(const d2d::Scale9Symbol* symbol)
 						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
 					}
 				}
-			else if (symbol->type() == d2d::Scale9Symbol::e_3GridHor)
+			else if (symbol->type() == escale9::Symbol::e_3GridHor)
 				for (size_t i = 0; i < 3; ++i)
 					resolveSpriteForFrame(symbol->m_sprites[1][i], i, ids, order);
-			else if (symbol->type() == d2d::Scale9Symbol::e_3GridVer)
+			else if (symbol->type() == escale9::Symbol::e_3GridVer)
 				for (size_t i = 0; i < 3; ++i)
 					resolveSpriteForFrame(symbol->m_sprites[i][1], i, ids, order);
-			else if (symbol->type() == d2d::Scale9Symbol::e_6GridUpper)
+			else if (symbol->type() == escale9::Symbol::e_6GridUpper)
 				for (size_t i = 1; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j, ++index)
 						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);

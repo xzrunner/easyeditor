@@ -4,7 +4,6 @@
 #include "EShapeSymbol.h"
 #include "MeshSymbol.h"
 #include "CombinationSymbol.h"
-#include "Scale9Symbol.h"
 #include "FontSymbol.h"
 #include "FontBlankSymbol.h"
 #include "ScriptsSymbol.h"
@@ -15,6 +14,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easymesh.h>
+#include <easyscale9.h>
 
 namespace d2d
 {
@@ -51,7 +51,7 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 		else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
 			symbol = new anim::Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))
-			symbol = new Scale9Symbol;
+			symbol = new escale9::Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
 			symbol = new FontBlankSymbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))

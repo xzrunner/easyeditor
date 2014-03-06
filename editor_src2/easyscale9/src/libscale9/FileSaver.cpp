@@ -1,9 +1,10 @@
 #include "FileSaver.h"
+#include "Symbol.h"
 
 namespace escale9
 {
 
-void FileSaver::store(const char* filepath, const d2d::Scale9Symbol& symbol)
+void FileSaver::store(const char* filepath, const Symbol& symbol)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -20,7 +21,7 @@ void FileSaver::store(const char* filepath, const d2d::Scale9Symbol& symbol)
 	fout.close();
 }
 
-//void FileSaver::store(const std::string& filepath, const d2d::Scale9Symbol& symbol)
+//void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 //{
 //	Json::Value value;
 //

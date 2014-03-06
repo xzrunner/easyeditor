@@ -1,18 +1,18 @@
-#include "ResizeOP.h"
-
+#include "ResizeBaseOP.h"
 #include "ResizeAtomicOP.h"
+#include "Symbol.h"
 
 namespace escale9
 {
 
-ResizeOP::ResizeOP(d2d::EditPanel* editPanel, d2d::Scale9Symbol* symbol)
+ResizeBaseOP::ResizeBaseOP(d2d::EditPanel* editPanel, Symbol* symbol)
 	: d2d::ZoomViewOP(editPanel, true)
 	, m_symbol(symbol)
 	, m_status(e_null)
 {
 }
 
-bool ResizeOP::onMouseLeftDown(int x, int y)
+bool ResizeBaseOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
@@ -32,7 +32,7 @@ bool ResizeOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool ResizeOP::onMouseLeftUp(int x, int y)
+bool ResizeBaseOP::onMouseLeftUp(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
 
@@ -51,7 +51,7 @@ bool ResizeOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool ResizeOP::onMouseDrag(int x, int y)
+bool ResizeBaseOP::onMouseDrag(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
 
@@ -65,7 +65,7 @@ bool ResizeOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool ResizeOP::onDraw() const
+bool ResizeBaseOP::onDraw() const
 {
 	if (d2d::ZoomViewOP::onDraw()) return true;
 

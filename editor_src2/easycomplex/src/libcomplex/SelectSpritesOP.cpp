@@ -4,9 +4,9 @@
 #include "Sprite.h"
 #include "PropertySetting.h"
 
-// #include <easyanim.h>
 #include <easyscale9.h>
 #include <easymesh.h>
+#include <easyscale9.h>
 
 namespace ecomplex
 {
@@ -42,9 +42,9 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
  //		dlg.ShowModal();
  //		Context::Instance()->stage->resetCanvas();
 	//}
- 	else if (d2d::Scale9Sprite* patch9 = dynamic_cast<d2d::Scale9Sprite*>(selected))
+	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
-  		d2d::Scale9Symbol& symbol = const_cast<d2d::Scale9Symbol&>(patch9->getSymbol());
+		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->getSymbol());
   		escale9::EditDialog dlg(m_editPanel, &symbol);
   		dlg.ShowModal();
   

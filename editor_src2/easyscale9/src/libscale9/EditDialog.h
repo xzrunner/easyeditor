@@ -4,10 +4,12 @@
 
 namespace escale9
 {
+	class Symbol;
+
 	class EditDialog : public wxDialog
 	{
 	public:
-		EditDialog(wxWindow* parent, d2d::Scale9Symbol* symbol);
+		EditDialog(wxWindow* parent, Symbol* symbol);
 
 	private:
 		void initLayout();
@@ -17,7 +19,7 @@ namespace escale9
 		void onClose(wxCloseEvent& event);
 
 	private:
-		d2d::Scale9Symbol* m_symbol;
+		Symbol* m_symbol;
 
 		d2d::EditPanel* m_editPanel;
 

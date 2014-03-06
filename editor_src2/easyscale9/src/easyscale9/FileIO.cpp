@@ -3,6 +3,8 @@
 #include "Context.h"
 #include "ResizeCMPT.h"
 
+#include <easyscale9.h>
+
 namespace escale9
 {
 
@@ -38,7 +40,7 @@ void FileIO::store(const char* filename)
 {
 	Json::Value value;
 
-	value["type"] = static_cast<d2d::Scale9Symbol*>
+	value["type"] = static_cast<Symbol*>
 		(Context::Instance()->stage->getPatchSymbol())->type();
 
 	value["width"] = Context::Instance()->width;
