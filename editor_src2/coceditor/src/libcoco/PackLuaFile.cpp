@@ -12,7 +12,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	const std::string& outfloder)
 {
 	// root symbol
-	complex::Symbol root;
+	ecomplex::Symbol root;
 	root.name = "root";
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{

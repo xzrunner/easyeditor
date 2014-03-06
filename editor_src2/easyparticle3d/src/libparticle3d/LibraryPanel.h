@@ -4,7 +4,7 @@
 #include <drag2d.h>
 
 namespace anim { class LibraryPage; }
-namespace complex { class LibraryPage; }
+namespace ecomplex { class LibraryPage; }
 
 namespace eparticle3d
 {
@@ -27,7 +27,7 @@ public:
 
 private:
 	d2d::LibraryImagePage* m_imagePage;
-	complex::LibraryPage* m_complexPage;
+	ecomplex::LibraryPage* m_complexPage;
 	anim::LibraryPage* m_animPage;
 	d2d::LibraryScale9Page* m_scale9Page;
 

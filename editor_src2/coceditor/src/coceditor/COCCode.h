@@ -5,7 +5,7 @@
 #include "COCParser.h"
 
 namespace ebuilder { class CodeGenerator; }
-namespace complex { class Symbol; }
+namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
 
 namespace coceditor
@@ -33,7 +33,7 @@ namespace coceditor
 			PicFixType tsrc = e_null, PicFixType tscreen = e_null);
 		void resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& parser,
 			PicFixType tsrc = e_null);
-		void resolveAnimation(const complex::Symbol* symbol);
+		void resolveAnimation(const ecomplex::Symbol* symbol);
 		//void resolveAnimation(const anim::Symbol* symbol);
 		void resolveAnimation(const anim::Symbol* symbol);
 		void resolveAnimation(const d2d::Scale9Symbol* symbol);

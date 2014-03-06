@@ -22,7 +22,7 @@ namespace coceditor
 		int id;
 
 		TexturesMgr texMgr;
-//		std::vector<complex::Symbol*> symbols;
+//		std::vector<ecomplex::Symbol*> symbols;
 		std::vector<const d2d::ISymbol*> symbols;
 		wxString dlgPath;
 

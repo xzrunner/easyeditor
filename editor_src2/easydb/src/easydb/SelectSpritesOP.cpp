@@ -25,11 +25,11 @@ namespace edb
 
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
 			{
-				complex::Sprite* complex = dynamic_cast<complex::Sprite*>(sprites[i]);
+				ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprites[i]);
 				if (!complex) continue;
 
-				complex::Symbol& symbol = const_cast<complex::Symbol&>(complex->getSymbol());
-				complex::EditDialog dlg(m_editPanel, &symbol);
+				ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+				ecomplex::EditDialog dlg(m_editPanel, &symbol);
 				dlg.ShowModal();
 
 				m_editPanel->resetCanvas();
@@ -45,10 +45,10 @@ namespace edb
 
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
-		if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(selected))
+		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 		{
-			complex::Symbol& symbol = const_cast<complex::Symbol&>(complex->getSymbol());
-			complex::EditDialog dlg(m_editPanel, &symbol);
+			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+			ecomplex::EditDialog dlg(m_editPanel, &symbol);
 			dlg.ShowModal();
 
 			m_editPanel->resetCanvas();

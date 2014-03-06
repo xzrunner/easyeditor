@@ -62,12 +62,12 @@ namespace ecomplex
 		wxWindow*& library, wxWindow*& property, 
 		wxWindow*& stage, wxWindow*& toolbar)
 	{
-		library = m_library = new complex::LibraryPanel(leftHorizontalSplitter);
+		library = m_library = new ecomplex::LibraryPanel(leftHorizontalSplitter);
 
 		property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
-		stage = m_stage = new complex::StagePanel(leftVerticalSplitter, m_parent, m_property, m_library);
-		m_property->setPropertySetting(new complex::PropertySetting(m_stage, m_stage->getSymbol()));
+		stage = m_stage = new ecomplex::StagePanel(leftVerticalSplitter, m_parent, m_property, m_library);
+		m_property->setPropertySetting(new ecomplex::PropertySetting(m_stage, m_stage->getSymbol()));
 
 //		context->toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage, context->property);
 

@@ -22,7 +22,7 @@ void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 	for (int i = 0, n = symbols.size(); i < n; ++i)
 	{
 		const d2d::ISymbol* symbol = symbols[i];
-		if (const complex::Symbol* complex = dynamic_cast<const complex::Symbol*>(symbol))
+		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
 			{
@@ -325,7 +325,7 @@ void CocoPacker::resolveFont(const d2d::FontSprite* sprite)
 	m_gen.line(aFont + ", " + aColor + ", " + aAlign + ", " + aSize + ", " + aWidth + ", " + aHeight + ", " + aEdge);
 }
 
-void CocoPacker::resolveAnimation(const complex::Symbol* symbol)
+void CocoPacker::resolveAnimation(const ecomplex::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "", true, false);
 

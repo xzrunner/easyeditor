@@ -27,7 +27,7 @@ bool MyApp::OnInit()
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
-		complex::StagePanel* stage = task->getStagePanel();
+		ecomplex::StagePanel* stage = task->getStagePanel();
 		stage->getCanvas()->SetCurrentCanvas();
 
 		wxString path(wxGetApp().argv[1]);

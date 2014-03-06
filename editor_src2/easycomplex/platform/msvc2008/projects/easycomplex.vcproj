@@ -194,6 +194,14 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="..\..\..\src\easycomplex\Frame.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easycomplex\Frame.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easycomplex\main.cpp"
 			>
 		</File>

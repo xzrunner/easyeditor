@@ -6,7 +6,7 @@
 #include <easyanim.h>
 #include <easymesh.h>
 
-namespace complex
+namespace ecomplex
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)

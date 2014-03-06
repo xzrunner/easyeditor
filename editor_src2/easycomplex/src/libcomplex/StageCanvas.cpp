@@ -4,7 +4,7 @@
 
 #include <easyanim.h>
 
-namespace complex
+namespace ecomplex
 {
 	BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 		EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
@@ -30,9 +30,6 @@ namespace complex
 
 	void StageCanvas::onDraw()
 	{
-		const d2d::Image* bg = static_cast<d2d::SpritesPanelImpl*>(m_editPanel)->getBackground();
-		bg->draw(bg->getRegion());
-
 		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 
 		const float EDGE = 100;

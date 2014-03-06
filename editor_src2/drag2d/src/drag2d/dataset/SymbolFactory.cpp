@@ -47,7 +47,7 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 		if (FileNameParser::isType(filepath, FileNameParser::e_shape))
 			symbol = new EShapeSymbol;
  		else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
-			symbol = new complex::Symbol;
+			symbol = new ecomplex::Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
 			symbol = new anim::Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))

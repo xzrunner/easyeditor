@@ -32,7 +32,7 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
 		const d2d::ISymbol* symbol = symbols[i];
-		if (const complex::Symbol* complex = dynamic_cast<const complex::Symbol*>(symbol))
+		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
 				buffer.push(complex->m_sprites[j]);
@@ -95,9 +95,9 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 		{
 			m_unique.insert(&sprite->getSymbol());
 		}
-		else if (const complex::Sprite* complex = dynamic_cast<const complex::Sprite*>(sprite))
+		else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(sprite))
 		{
-			const complex::Symbol& symbol = complex->getSymbol();
+			const ecomplex::Symbol& symbol = complex->getSymbol();
 			if (m_unique.find(&symbol) == m_unique.end())
 			{
 				m_unique.insert(&symbol);
@@ -187,7 +187,7 @@ void SymbolsPrepare::sort()
 				m_unique.erase(itr);
 				break;
 			}
-			else if (complex::Symbol* complex = dynamic_cast<complex::Symbol*>(symbol))
+			else if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(symbol))
 			{
 				bool prepared = true;
 				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i)

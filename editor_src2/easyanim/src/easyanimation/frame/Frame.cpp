@@ -265,7 +265,7 @@ wxWindow* Frame::createLeftFrame(wxWindow* parent)
 	// library
 	d2d::LibraryPanel* library = new d2d::LibraryPanel(split);
 	library->addPage(context->imagePage = new d2d::LibraryImagePage(library->getNotebook()));
-	library->addPage(new complex::LibraryPage(library->getNotebook()));
+	library->addPage(new ecomplex::LibraryPage(library->getNotebook()));
 	library->addPage(new emesh::LibraryPage(library->getNotebook()));
 	library->addPage(new d2d::LibraryScale9Page(library->getNotebook()));
 	context->library = library;

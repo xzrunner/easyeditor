@@ -221,7 +221,7 @@ void Symbol::refreshThumbnail()
 				d2d::ISprite* sprite = frame->sprites[j];
 				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
 					d2d::SpriteDraw::drawSprite(image, memDC);
-				else if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(sprite))
+				else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprite))
 				{
 					const d2d::Vector& offset = complex->getPosition();
 					std::vector<std::pair<const d2d::ISprite*, d2d::Vector> > children;

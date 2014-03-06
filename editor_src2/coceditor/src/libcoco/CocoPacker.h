@@ -3,7 +3,7 @@
 #include <drag2d.h>
 #include <easybuilder.h>
 
-namespace complex { class Symbol; }
+namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
 
 namespace libcoco
@@ -25,7 +25,7 @@ private:
 
 	void resolveFont(const d2d::FontSprite* sprite);
 
-	void resolveAnimation(const complex::Symbol* symbol);
+	void resolveAnimation(const ecomplex::Symbol* symbol);
 	void resolveAnimation(const anim::Symbol* symbol);
 	void resolveAnimation(const d2d::Scale9Symbol* symbol);
 

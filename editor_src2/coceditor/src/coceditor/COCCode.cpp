@@ -46,7 +46,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 		else if (const d2d::FontBlankSymbol* font = dynamic_cast<const d2d::FontBlankSymbol*>(symbol))
 		{
 		}
-		else if (const complex::Symbol* complex = dynamic_cast<const complex::Symbol*>(symbol))
+		else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
 			{
@@ -505,7 +505,7 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
 }
 
-void COCCode::resolveAnimation(const complex::Symbol* symbol)
+void COCCode::resolveAnimation(const ecomplex::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "animation", false, false);
 

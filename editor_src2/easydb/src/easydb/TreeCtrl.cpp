@@ -105,12 +105,12 @@ namespace edb
 		d2d::ISprite* sprite = querySpriteByID(event.GetItem());
 		if (sprite) 
 		{
-			if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(sprite))
+			if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprite))
 			{
 				StagePanel* stage = Context::Instance()->stage;
 
-				complex::Symbol& symbol = const_cast<complex::Symbol&>(complex->getSymbol());
-				complex::EditDialog dlg(stage, &symbol);
+				ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+				ecomplex::EditDialog dlg(stage, &symbol);
 				dlg.ShowModal();
 
 				stage->resetCanvas();
@@ -134,10 +134,10 @@ namespace edb
 				}
 
 // 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(itr->second);
-// 				if (complex::Symbol* complex = dynamic_cast<complex::Symbol*>(symbol))
+// 				if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(symbol))
 // 				{
 //  					StagePanel* stage = Context::Instance()->stage;
-//  					complex::EditDialog dlg(stage, complex);
+//  					ecomplex::EditDialog dlg(stage, complex);
 //  					dlg.ShowModal();
 //  					stage->resetCanvas();
 // 				}

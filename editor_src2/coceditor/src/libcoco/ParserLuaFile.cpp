@@ -260,7 +260,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 
 		Picture* pic = itr->second;
 
-		complex::Symbol* symbol = new complex::Symbol;
+		ecomplex::Symbol* symbol = new ecomplex::Symbol;
 		for (int i = 0, n = pic->parts.size(); i < n; ++i)
 		{
 			Picture::Part* part = pic->parts[i];
@@ -284,7 +284,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		ss << itr->first;
 		std::string filename = outfloder + "\\" + ss.str() 
 			+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
-		complex::FileSaver::store(filename.c_str(), symbol);
+		ecomplex::FileSaver::store(filename.c_str(), symbol);
 
 		pic->filename = filename;
 		pic->width = symbol->getSize().xLength();
@@ -369,7 +369,7 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 
 		Picture* pic = itr->second;
 
-		complex::Symbol* symbol = new complex::Symbol;
+		ecomplex::Symbol* symbol = new ecomplex::Symbol;
 		for (int i = 0, n = pic->parts.size(); i < n; ++i)
 		{
 			Picture::Part* part = pic->parts[i];

@@ -13,7 +13,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	m_imagePage = new d2d::LibraryImagePage(getNotebook());
 	addPage(m_imagePage);
-	m_complexPage = new complex::LibraryPage(getNotebook());
+	m_complexPage = new ecomplex::LibraryPage(getNotebook());
 	addPage(m_complexPage);
 	m_animPage = new anim::LibraryPage(getNotebook());
 	addPage(m_animPage);

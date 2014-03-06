@@ -5,7 +5,7 @@
 namespace anim { class LibraryPage; }
 namespace emesh { class LibraryPage; }
 
-namespace complex
+namespace ecomplex
 {
 	class LibraryPage;
 
