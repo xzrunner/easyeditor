@@ -14,12 +14,18 @@ namespace ecomplex
 		: d2d::OrthoCanvas(editPanel)
 		, m_timer(this, TIMER_ID)
 		, m_editPanel(editPanel)
+		, m_background(NULL)
 	{
 		m_timer.Start(1000 / 30);
 		m_currFrame = 1;
 
 		m_bgStyle.color.set(0.8f, 0.8f, 0.8f);
 		m_clipboxStyle.color.set(0, 0.8f, 0);
+	}
+
+	StageCanvas::~StageCanvas()
+	{
+		m_background->release();
 	}
 
 	void StageCanvas::initGL()
@@ -30,7 +36,7 @@ namespace ecomplex
 
 	void StageCanvas::onDraw()
 	{
-		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		drawBackground();
 
 		const float EDGE = 100;
 		d2d::PrimitiveDraw::drawLine(d2d::Vector(-EDGE, 0.0f), d2d::Vector(EDGE, 0.0f), d2d::Colorf(0, 1, 0), 1);
@@ -72,5 +78,15 @@ namespace ecomplex
 			m_currFrame = 1;
 
 		Refresh();
+	}
+
+	void StageCanvas::drawBackground() const
+	{
+		if (m_background)
+		{
+			m_background->draw(m_background->getRegion());
+		}
+
+		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 	}
 }

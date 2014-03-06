@@ -167,7 +167,7 @@ void Frame::initMenuBar()
 	wxMenuBar* menuBar = new wxMenuBar;
 	menuBar->Append(initFileBar(), "&File");
 	menuBar->Append(initViewBar(), "&View");
-	menuBar->Append(initSettingsBar(), "&Settings");
+	menuBar->Append(m_setting_menu = initSettingsBar(), "&Settings");
 	SetMenuBar(menuBar);
 }
 

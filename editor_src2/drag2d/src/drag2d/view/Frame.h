@@ -41,6 +41,11 @@ private:
 
 	void setCurrFilename();
 
+protected:
+	wxMenu* m_setting_menu;
+
+	ITask* m_task;
+
 private:
 	enum
 	{
@@ -49,8 +54,6 @@ private:
 	};
 
 private:
-	ITask* m_task;
-
 	wxString m_filetag;
 
 	wxString m_currFilename;
