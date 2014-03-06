@@ -1,0 +1,185 @@
+{
+  "name": "", 
+  "sprite": [
+    {
+      "angle": 0, 
+      "filepath": "1908_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0, 
+        "y": 0
+      }, 
+      "x mirror": false, 
+      "x scale": 1, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.7853981633974483, 
+      "filepath": "1908_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": -1.1752888101362344, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.1752888101362344, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 1.446441332248135, 
+      "filepath": "1909_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": -0.999908919954996, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -0.999908919954996, 
+      "y shear": 0
+    }, 
+    {
+      "angle": -1.1071487177940906, 
+      "filepath": "1909_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": -0.9193209165306752, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -0.9193209165306752, 
+      "y shear": 0
+    }, 
+    {
+      "angle": -0.7853981633974483, 
+      "filepath": "1908_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": -0.516519406569861, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -0.516519406569861, 
+      "y shear": 0
+    }, 
+    {
+      "angle": -1.460139105621001, 
+      "filepath": "1908_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": -0.9992758990327423, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -0.9992758990327423, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "1909_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.966796875, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.966796875, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 1.4056476493802699, 
+      "filepath": "1909_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.9999332935548831, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.9999332935548831, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.7853981633974483, 
+      "filepath": "1908_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 1.14628638356413, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.14628638356413, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "1909_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": -0.9716796875, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -0.9716796875, 
+      "y shear": 0
+    }, 
+    {
+      "angle": -1.4288992721907328, 
+      "filepath": "1908_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.996341865232161, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.996341865232161, 
+      "y shear": 0
+    }, 
+    {
+      "angle": -0.7853981633974483, 
+      "filepath": "1909_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.9294587182393487, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.9294587182393487, 
+      "y shear": 0
+    }
+  ]
+}

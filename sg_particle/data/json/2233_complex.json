@@ -1,0 +1,71 @@
+{
+  "name": "", 
+  "sprite": [
+    {
+      "add color": "0x76", 
+      "angle": 1.5707963267948966, 
+      "filepath": "1945_complex.json", 
+      "multi color": "0xfefefefe", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": -3.5625
+      }, 
+      "x mirror": false, 
+      "x scale": 0.4306640625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.4931640625, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "1975_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0625, 
+        "y": -7.5
+      }, 
+      "x mirror": false, 
+      "x scale": 0.7919921875, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.3955078125, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x5000", 
+      "angle": 1.5707963267948966, 
+      "filepath": "1946_complex.json", 
+      "multi color": "0xc9ffff", 
+      "name": "", 
+      "position": {
+        "x": 0.0625, 
+        "y": -2.5625
+      }, 
+      "x mirror": false, 
+      "x scale": 0.7919921875, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.7919921875, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 1.5707963267948966, 
+      "filepath": "1945_complex.json", 
+      "multi color": "0xffffff53", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.5634765625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.6533203125, 
+      "y shear": 0
+    }
+  ]
+}

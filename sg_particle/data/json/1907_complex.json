@@ -1,0 +1,155 @@
+{
+  "name": "", 
+  "sprite": [
+    {
+      "angle": 0, 
+      "filepath": "1254106512951161.png", 
+      "name": "", 
+      "position": {
+        "x": 157.75, 
+        "y": 73.875
+      }, 
+      "x mirror": false, 
+      "x scale": 2.0929878048780486, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.8938802083333334, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "51015726191624.png", 
+      "name": "", 
+      "position": {
+        "x": -66.875, 
+        "y": 157.5
+      }, 
+      "x mirror": false, 
+      "x scale": 1.25, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.25, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "51015726191624.png", 
+      "name": "", 
+      "position": {
+        "x": -157.5, 
+        "y": 66.875
+      }, 
+      "x mirror": true, 
+      "x scale": 0.5963302752293578, 
+      "x shear": 0, 
+      "y mirror": true, 
+      "y scale": 2.6201923076923075, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 1.5707963267948966, 
+      "filepath": "1253106512951162.png", 
+      "name": "", 
+      "position": {
+        "x": 59.375, 
+        "y": 163.75
+      }, 
+      "x mirror": false, 
+      "x scale": 1.25, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.25, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "51015726181623.png", 
+      "name": "", 
+      "position": {
+        "x": -42.8125, 
+        "y": -165.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0017361111111112, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.6274509803921569, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "1253106512951162.png", 
+      "name": "", 
+      "position": {
+        "x": -163.75, 
+        "y": -59.375
+      }, 
+      "x mirror": true, 
+      "x scale": 1.25, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.25, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "51015726181623.png", 
+      "name": "", 
+      "position": {
+        "x": 84.25, 
+        "y": -149.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.7685185185185185, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 2.1213235294117645, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "1254106512951161.png", 
+      "name": "", 
+      "position": {
+        "x": -146.75, 
+        "y": -93.8125
+      }, 
+      "x mirror": false, 
+      "x scale": 2.347560975609756, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.76953125, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "1254106512951161.png", 
+      "name": "", 
+      "position": {
+        "x": 73.8125, 
+        "y": 157.75
+      }, 
+      "x mirror": false, 
+      "x scale": 2.0929878048780486, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.8938802083333334, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "1254106512951161.png", 
+      "name": "", 
+      "position": {
+        "x": 166.0, 
+        "y": -52.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.8018292682926829, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0026041666666667, 
+      "y shear": 0
+    }
+  ]
+}

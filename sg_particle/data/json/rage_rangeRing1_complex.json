@@ -1,0 +1,50 @@
+{
+  "name": "rage_rangeRing1", 
+  "sprite": [
+    {
+      "angle": 0.0, 
+      "filepath": "2142_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.75, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "2146_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.75, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "2148_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0625
+      }, 
+      "x mirror": false, 
+      "x scale": 0.775390625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.5810546875, 
+      "y shear": 0
+    }
+  ]
+}

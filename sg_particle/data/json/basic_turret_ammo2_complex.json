@@ -1,0 +1,35 @@
+{
+  "name": "basic_turret_ammo2", 
+  "sprite": [
+    {
+      "angle": 0.0, 
+      "filepath": "1398_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.90625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.3291015625, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0, 
+      "filepath": "1222_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0, 
+        "y": 0
+      }, 
+      "x mirror": false, 
+      "x scale": 1, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1, 
+      "y shear": 0
+    }
+  ]
+}
