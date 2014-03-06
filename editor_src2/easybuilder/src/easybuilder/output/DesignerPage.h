@@ -80,7 +80,6 @@ namespace ebuilder
 
 		private:
 			std::vector<Actor*> m_clipboard;
-			bool m_lastCtrlPress;
 
 		}; // SelectActorOP
 

@@ -13,6 +13,8 @@ Layer::Layer()
 	static int count = 0;
 	name = "Layer" + StringTools::intToString(count++);
 
+	editable = visible = true;
+
 	insertKeyFrame(1);
 }
 

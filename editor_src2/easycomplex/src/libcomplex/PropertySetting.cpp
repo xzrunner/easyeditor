@@ -1,7 +1,7 @@
 #include "PropertySetting.h"
 #include "Symbol.h"
 
-namespace complex
+namespace ecomplex
 {
 	PropertySetting::PropertySetting(d2d::EditPanel* editPanel, Symbol* symbol)
 		: SymbolPropertySetting(editPanel, symbol)

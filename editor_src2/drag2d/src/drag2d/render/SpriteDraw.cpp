@@ -5,6 +5,7 @@
 
 #include "common/Math.h"
 #include "common/Matrix.h"
+#include "common/config.h"
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "dataset/ImageSprite.h"
@@ -63,6 +64,10 @@ void SpriteDraw::drawSprite(const ISymbol* symbol, const Vector& pos,
 
 void SpriteDraw::drawSprite(const ISprite* sprite, wxMemoryDC& memDC)
 {
+#ifdef NOT_LOAD_IMAGE
+	return;
+#endif
+
 	const float SCALE = 0.15f;
 	const float WIDTH = 800, HEIGHT = 480;
 
@@ -105,6 +110,10 @@ void SpriteDraw::drawSprite(const ISprite* sprite, wxMemoryDC& memDC)
 void SpriteDraw::drawSprite(const ISprite* sprite, const Vector& offset, wxMemoryDC& memDC,
 							float bgwidth /*= 800*/, float bgheight /*= 480*/, float scale /*= 0.15f*/)
 {
+#ifdef NOT_LOAD_IMAGE
+	return;
+#endif
+
 	if (!sprite->getSymbol().getBitmap()) return;
 
 	const wxBitmap* bitmap = sprite->getSymbol().getBitmap()->getBitmap();

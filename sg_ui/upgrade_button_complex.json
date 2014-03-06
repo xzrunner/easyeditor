@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "blue_button_9patch.json",
+			"filepath" : "blue_button_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "button",
 			"position" : 

@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-namespace complex
+namespace ecomplex
 {
 	Sprite::Sprite()
 		: m_symbol(NULL)

@@ -1,7 +1,7 @@
 #include "FileSaver.h"
 #include "Symbol.h"
 
-namespace complex
+namespace ecomplex
 {
 
 void FileSaver::store(const char* filepath, const Symbol* symbol)

@@ -1,0 +1,94 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite1",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.8999999761581421,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.8999999761581421,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2202xiyu1\\sleep\\3\\1_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite0",
+							"position" : 
+							{
+								"x" : -862.0,
+								"y" : 454.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -6.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2202xiyu1\\attack\\2\\1_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite3",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -11.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 45.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				}
+			],
+			"name" : "Layer1"
+		}
+	],
+	"name" : "2202xiyu1_stand_2"
+}

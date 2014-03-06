@@ -3,7 +3,7 @@
 
 #include <queue>
 
-namespace complex
+namespace ecomplex
 {
 
 const float Symbol::SCALE = 0.15f;
@@ -97,7 +97,8 @@ void Symbol::loadResources()
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
-		wxString dir = d2d::Context::Instance()->getDir();
+//		wxString dir = d2d::Context::Instance()->getDir();
+		wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
 		ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
 

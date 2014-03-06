@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\libcomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyanim\src;..\..\..\..\easy9patch\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src"
+				AdditionalIncludeDirectories="..\..\..\src\libcomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\libcomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyanim\src;..\..\..\..\easy9patch\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src"
+				AdditionalIncludeDirectories="..\..\..\src\libcomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -165,14 +165,6 @@
 			Name="frame"
 			>
 			<File
-				RelativePath="..\..\..\src\libcomplex\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\Context.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libcomplex\EditDialog.cpp"
 				>
 			</File>
@@ -181,14 +173,22 @@
 				>
 			</File>
 			<Filter
-				Name="library"
+				Name="settings"
 				>
 				<File
-					RelativePath="..\..\..\src\libcomplex\LibraryPanel.cpp"
+					RelativePath="..\..\..\src\libcomplex\Settings.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libcomplex\LibraryPanel.h"
+					RelativePath="..\..\..\src\libcomplex\Settings.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SettingsDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\SettingsDialog.h"
 					>
 				</File>
 			</Filter>
@@ -273,6 +273,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libcomplex\LibraryPage.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LibraryPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\LibraryPanel.h"
 					>
 				</File>
 			</Filter>

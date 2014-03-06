@@ -2,14 +2,14 @@
 
 #include <drag2d.h>
 
+#include "COCParser.h"
+
 namespace ebuilder { class CodeGenerator; }
-namespace complex { class Symbol; }
+namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
 
 namespace coceditor
 {
-	class COCParser;
-
 	class COCCode
 	{
 	public:
@@ -33,10 +33,10 @@ namespace coceditor
 			PicFixType tsrc = e_null, PicFixType tscreen = e_null);
 		void resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& parser,
 			PicFixType tsrc = e_null);
-		void resolveAnimation(const complex::Symbol* symbol);
+		void resolveAnimation(const ecomplex::Symbol* symbol);
 		//void resolveAnimation(const anim::Symbol* symbol);
 		void resolveAnimation(const anim::Symbol* symbol);
-		void resolveAnimation(const d2d::Patch9Symbol* symbol);
+		void resolveAnimation(const d2d::Scale9Symbol* symbol);
 
 		void resolveAnimationCommon(const d2d::ISymbol* symbol);
 
@@ -51,10 +51,12 @@ namespace coceditor
 		void resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id);
 		void resolveSpriteForFrameFont(const d2d::FontSprite* font, int id);
 
-		static void transToMat(const d2d::ISprite* sprite, float mat[6], bool force = false);
+		void transToMat(const d2d::ISprite* sprite, float mat[6], bool force = false) const;
 
 	private:
 		ebuilder::CodeGenerator& m_gen;
+
+		COCParser m_parser;
 
 		int m_id;
 		std::map<const d2d::ISprite*, int> m_mapSpriteID;

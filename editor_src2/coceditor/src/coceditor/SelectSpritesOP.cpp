@@ -6,7 +6,7 @@
 #include "complex/Dialog.h"
 
 #include <easyanim.h>
-#include <easy9patch.h>
+#include <easyscale9.h>
 
 namespace coceditor
 {
@@ -37,14 +37,14 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		dlg.ShowModal();
 		Context::Instance()->stage->resetCanvas();
 	}
-	else if (d2d::Patch9Sprite* patch9 = dynamic_cast<d2d::Patch9Sprite*>(selected))
+	else if (d2d::Scale9Sprite* patch9 = dynamic_cast<d2d::Scale9Sprite*>(selected))
 	{
-		d2d::Patch9Symbol& symbol = const_cast<d2d::Patch9Symbol&>(patch9->getSymbol());
-		lib9patch::EditDialog dlg(Context::Instance()->stage, &symbol);
+		d2d::Scale9Symbol& symbol = const_cast<d2d::Scale9Symbol&>(patch9->getSymbol());
+		libscale9::EditDialog dlg(Context::Instance()->stage, &symbol);
 		dlg.ShowModal();
 
-		std::vector<d2d::Patch9Sprite*> sprites;
-		Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::Patch9Sprite>(sprites));
+		std::vector<d2d::Scale9Sprite*> sprites;
+		Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::Scale9Sprite>(sprites));
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		{
 			d2d::ISprite* sprite = sprites[i];

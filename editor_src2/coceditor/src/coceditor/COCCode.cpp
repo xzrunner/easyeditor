@@ -1,5 +1,4 @@
 #include "COCCode.h"
-#include "COCParser.h"
 
 #include "Context.h"
 #include "StagePanel.h"
@@ -23,10 +22,8 @@ COCCode::COCCode(ebuilder::CodeGenerator& gen)
 
 void COCCode::resolve()
 {
-	COCParser parser;
-	parser.parser();
-
-	resolveFromParser(parser);
+	m_parser.parser();
+	resolveFromParser(m_parser);
 }
 
 void COCCode::resolveFromParser(const COCParser& parser)
@@ -49,7 +46,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 		else if (const d2d::FontBlankSymbol* font = dynamic_cast<const d2d::FontBlankSymbol*>(symbol))
 		{
 		}
-		else if (const complex::Symbol* complex = dynamic_cast<const complex::Symbol*>(symbol))
+		else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
 			{
@@ -142,17 +139,17 @@ void COCCode::resolveFromParser(const COCParser& parser)
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			resolveAnimation(anim);
 		}
-		else if (const d2d::Patch9Symbol* patch9 = dynamic_cast<const d2d::Patch9Symbol*>(symbol))
+		else if (const d2d::Scale9Symbol* patch9 = dynamic_cast<const d2d::Scale9Symbol*>(symbol))
 		{
 			std::vector<d2d::ISprite*> sprites;
 			switch (patch9->type())
 			{
-			case d2d::Patch9Symbol::e_9Grid:
+			case d2d::Scale9Symbol::e_9Grid:
 				for (size_t i = 0; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j)
 						sprites.push_back(patch9->m_sprites[i][j]);
 				break;
-			case d2d::Patch9Symbol::e_9GridHollow:
+			case d2d::Scale9Symbol::e_9GridHollow:
 				for (size_t i = 0; i < 3; ++i) {
 					for (size_t j = 0; j < 3; ++j) {
 						if (i == 1 && j == 1) continue;
@@ -160,15 +157,15 @@ void COCCode::resolveFromParser(const COCParser& parser)
 					}
 				}
 				break;
-			case d2d::Patch9Symbol::e_3GridHor:
+			case d2d::Scale9Symbol::e_3GridHor:
 				for (size_t i = 0; i < 3; ++i)
 					sprites.push_back(patch9->m_sprites[1][i]);
 				break;
-			case d2d::Patch9Symbol::e_3GridVer:
+			case d2d::Scale9Symbol::e_3GridVer:
 				for (size_t i = 0; i < 3; ++i)
 					sprites.push_back(patch9->m_sprites[i][1]);
 				break;
-			case d2d::Patch9Symbol::e_6GridUpper:
+			case d2d::Scale9Symbol::e_6GridUpper:
 				for (size_t i = 1; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j)
 						sprites.push_back(patch9->m_sprites[i][j]);
@@ -183,7 +180,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 					PicFixType tsrc = e_null, tscreen = e_null;
 					switch (patch9->type())
 					{
-						case d2d::Patch9Symbol::e_9Grid:
+						case d2d::Scale9Symbol::e_9Grid:
 							if (sprite == patch9->m_sprites[1][1]) 
 							{
 								tsrc = e_bothfix;
@@ -194,27 +191,27 @@ void COCCode::resolveFromParser(const COCParser& parser)
 							else if (sprite == patch9->m_sprites[0][1]) tsrc = e_xfix;
 							else if (sprite == patch9->m_sprites[2][1]) tsrc = e_xfix;
 							break;
-						case d2d::Patch9Symbol::e_9GridHollow:
+						case d2d::Scale9Symbol::e_9GridHollow:
 							if (sprite == patch9->m_sprites[1][0]) tsrc = e_yfix;
 							else if (sprite == patch9->m_sprites[1][2]) tsrc = e_yfix;
 							else if (sprite == patch9->m_sprites[0][1]) tsrc = e_xfix;
 							else if (sprite == patch9->m_sprites[2][1]) tsrc = e_xfix;
 							break;
-						case d2d::Patch9Symbol::e_3GridHor:
+						case d2d::Scale9Symbol::e_3GridHor:
 							if (sprite == patch9->m_sprites[1][1]) 
 							{
 								tsrc = e_xfix;
 								tscreen = e_xfix;
 							}
 							break;
-						case d2d::Patch9Symbol::e_3GridVer:
+						case d2d::Scale9Symbol::e_3GridVer:
 							if (sprite == patch9->m_sprites[1][1]) 
 							{
 								tsrc = e_yfix;
 								tscreen = e_yfix;
 							}
 							break;
-						case d2d::Patch9Symbol::e_6GridUpper:
+						case d2d::Scale9Symbol::e_6GridUpper:
 							if (sprite == patch9->m_sprites[1][1]) 
 							{
 								tsrc = e_bothfix;
@@ -322,8 +319,8 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
- 	for (size_t i = 0; i < 4; ++i)
- 		screen[i] += picture->offset / Context::Instance()->scale;
+//  	for (size_t i = 0; i < 4; ++i)
+//  		screen[i] += picture->offset / Context::Instance()->scale;
 	// 1. scale
 	for (size_t i = 0; i < 4; ++i)
 		screen[i].x *= sprite->getScale().x;
@@ -336,7 +333,7 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 		screen[i] = rot;
 	}
 	// 3. translate
-	d2d::Vector center = sprite->getCenter();
+	d2d::Vector center = sprite->getCenter() + d2d::Math::rotateVector(picture->offset, sprite->getAngle());
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] += center;
 	// 4. mirror
@@ -483,8 +480,8 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
-	for (size_t i = 0; i < 4; ++i)
-		screen[i] += picture->offset / Context::Instance()->scale;
+// 	for (size_t i = 0; i < 4; ++i)
+// 		screen[i] += picture->offset / Context::Instance()->scale;
 
 	// flip y
 	for (size_t i = 0; i < 4; ++i)
@@ -508,7 +505,7 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 	lua::tableassign(m_gen, "", 3, assignTex.c_str(), assignSrc.c_str(), assignScreen.c_str());
 }
 
-void COCCode::resolveAnimation(const complex::Symbol* symbol)
+void COCCode::resolveAnimation(const ecomplex::Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "animation", false, false);
 
@@ -720,7 +717,7 @@ void COCCode::resolveAnimation(const anim::Symbol* symbol)
  	}
 }
 
-void COCCode::resolveAnimation(const d2d::Patch9Symbol* symbol)
+void COCCode::resolveAnimation(const d2d::Scale9Symbol* symbol)
 {
 	lua::TableAssign ta(m_gen, "animation", false, false);
 
@@ -732,24 +729,24 @@ void COCCode::resolveAnimation(const d2d::Patch9Symbol* symbol)
 	std::vector<std::pair<int, std::string> > order;
 	{
 		lua::TableAssign ta(m_gen, "component", true);
-		if (symbol->type() == d2d::Patch9Symbol::e_9Grid)
+		if (symbol->type() == d2d::Scale9Symbol::e_9Grid)
 			for (size_t i = 0; i < 3; ++i)
 				for (size_t j = 0; j < 3; ++j)
 					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
-		else if (symbol->type() == d2d::Patch9Symbol::e_9GridHollow)
+		else if (symbol->type() == d2d::Scale9Symbol::e_9GridHollow)
 			for (size_t i = 0; i < 3; ++i) {
 				for (size_t j = 0; j < 3; ++j) {
 					if (i == 1 && j == 1) continue;
 					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
 				}
 			}
-		else if (symbol->type() == d2d::Patch9Symbol::e_3GridHor)
+		else if (symbol->type() == d2d::Scale9Symbol::e_3GridHor)
 			for (size_t i = 0; i < 3; ++i)
 				resolveSpriteForComponent(symbol->m_sprites[1][i], ids, unique, order);
-		else if (symbol->type() == d2d::Patch9Symbol::e_3GridVer)
+		else if (symbol->type() == d2d::Scale9Symbol::e_3GridVer)
 			for (size_t i = 0; i < 3; ++i)
 				resolveSpriteForComponent(symbol->m_sprites[i][1], ids, unique, order);
-		else if (symbol->type() == d2d::Patch9Symbol::e_6GridUpper)
+		else if (symbol->type() == d2d::Scale9Symbol::e_6GridUpper)
 			for (size_t i = 1; i < 3; ++i)
 				for (size_t j = 0; j < 3; ++j)
 					resolveSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
@@ -761,11 +758,11 @@ void COCCode::resolveAnimation(const d2d::Patch9Symbol* symbol)
 		{
 			lua::TableAssign ta(m_gen, "", true);
 			int index = 0;
-			if (symbol->type() == d2d::Patch9Symbol::e_9Grid)
+			if (symbol->type() == d2d::Scale9Symbol::e_9Grid)
 				for (size_t i = 0; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j, ++index)
 						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
-			else if (symbol->type() == d2d::Patch9Symbol::e_9GridHollow)
+			else if (symbol->type() == d2d::Scale9Symbol::e_9GridHollow)
 				for (size_t i = 0; i < 3; ++i) {
 					for (size_t j = 0; j < 3; ++j, ++index) {
 						if (i == 1 && j == 1) { 
@@ -775,13 +772,13 @@ void COCCode::resolveAnimation(const d2d::Patch9Symbol* symbol)
 						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
 					}
 				}
-			else if (symbol->type() == d2d::Patch9Symbol::e_3GridHor)
+			else if (symbol->type() == d2d::Scale9Symbol::e_3GridHor)
 				for (size_t i = 0; i < 3; ++i)
 					resolveSpriteForFrame(symbol->m_sprites[1][i], i, ids, order);
-			else if (symbol->type() == d2d::Patch9Symbol::e_3GridVer)
+			else if (symbol->type() == d2d::Scale9Symbol::e_3GridVer)
 				for (size_t i = 0; i < 3; ++i)
 					resolveSpriteForFrame(symbol->m_sprites[i][1], i, ids, order);
-			else if (symbol->type() == d2d::Patch9Symbol::e_6GridUpper)
+			else if (symbol->type() == d2d::Scale9Symbol::e_6GridUpper)
 				for (size_t i = 1; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j, ++index)
 						resolveSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
@@ -1067,7 +1064,7 @@ void COCCode::resolveSpriteForFrameFont(const d2d::FontSprite* sprite, int id)
 	lua::tableassign(m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
 }
 
-void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*= false*/)
+void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*= false*/) const
 {
 	mat[1] = mat[2] = mat[4] = mat[5] = 0;
 	mat[0] = mat[3] = 1;
@@ -1083,8 +1080,24 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		// | ky  1    | |    sy    | | -s  c    | |    1    |
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
-		float x = sprite->getCenter().x,
+		float x, y;
+		if (dynamic_cast<const d2d::ImageSprite*>(sprite))
+		{
+ 			m_parser.m_mapSymbolPicture;
+ 			std::map<const d2d::ISymbol*, COCParser::Picture*>::const_iterator itr 
+ 				= m_parser.m_mapSymbolPicture.find(&sprite->getSymbol());
+ 			assert(itr != m_parser.m_mapSymbolPicture.end());
+ 			COCParser::Picture* picture = itr->second;
+
+			d2d::Vector pos = sprite->getCenter() + d2d::Math::rotateVector(picture->offset, sprite->getAngle());
+			x = pos.x;
+			y = pos.y;
+		}
+		else
+		{
+			x = sprite->getCenter().x;
 			y = sprite->getCenter().y;
+		}
 		float sx = sprite->getScale().x,
 			sy = sprite->getScale().y;
 		bool xMirror, yMirror;

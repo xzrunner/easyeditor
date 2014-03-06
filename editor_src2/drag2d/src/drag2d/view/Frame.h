@@ -16,6 +16,9 @@ public:
 
 	void initWithFile(const wxString& path);
 
+protected:
+	virtual void onSettings(wxCommandEvent& event);
+
 private:
 	void onNew(wxCommandEvent& event);
 	void onOpen(wxCommandEvent& event);
@@ -23,8 +26,6 @@ private:
 	void onSaveAs(wxCommandEvent& event);
 
 	void onEJPreview(wxCommandEvent& event);
-
-	void onSettings(wxCommandEvent& event);
 
 	void onQuit(wxCommandEvent& event);
 
@@ -41,6 +42,11 @@ private:
 
 	void setCurrFilename();
 
+protected:
+	wxMenu* m_setting_menu;
+
+	ITask* m_task;
+
 private:
 	enum
 	{
@@ -49,8 +55,6 @@ private:
 	};
 
 private:
-	ITask* m_task;
-
 	wxString m_filetag;
 
 	wxString m_currFilename;

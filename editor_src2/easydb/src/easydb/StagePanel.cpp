@@ -72,9 +72,9 @@ void StagePanel::initConnection()
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* from = sprites[i];
-		if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(from))
+		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(from))
 		{
-			const complex::Symbol& symbol = complex->getSymbol();
+			const ecomplex::Symbol& symbol = complex->getSymbol();
 			for (size_t i = 0, n = symbol.m_sprites.size(); i < n; ++i)
 			{
 				d2d::ISprite* child = symbol.m_sprites[i];

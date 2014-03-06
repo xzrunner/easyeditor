@@ -25,11 +25,11 @@ namespace edb
 
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
 			{
-				complex::Sprite* complex = dynamic_cast<complex::Sprite*>(sprites[i]);
+				ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprites[i]);
 				if (!complex) continue;
 
-				complex::Symbol& symbol = const_cast<complex::Symbol&>(complex->getSymbol());
-				complex::EditDialog dlg(m_editPanel, &symbol);
+				ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+				ecomplex::EditDialog dlg(m_editPanel, &symbol);
 				dlg.ShowModal();
 
 				m_editPanel->resetCanvas();
@@ -45,10 +45,10 @@ namespace edb
 
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
-		if (complex::Sprite* complex = dynamic_cast<complex::Sprite*>(selected))
+		if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 		{
-			complex::Symbol& symbol = const_cast<complex::Symbol&>(complex->getSymbol());
-			complex::EditDialog dlg(m_editPanel, &symbol);
+			ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
+			ecomplex::EditDialog dlg(m_editPanel, &symbol);
 			dlg.ShowModal();
 
 			m_editPanel->resetCanvas();
@@ -59,14 +59,14 @@ namespace edb
 		//		dlg.ShowModal();
 		//		Context::Instance()->stage->resetCanvas();
 		//}
-		// 	else if (d2d::Patch9Sprite* patch9 = dynamic_cast<d2d::Patch9Sprite*>(selected))
+		// 	else if (d2d::Scale9Sprite* patch9 = dynamic_cast<d2d::Scale9Sprite*>(selected))
 		// 	{
-		//  		d2d::Patch9Symbol& symbol = const_cast<d2d::Patch9Symbol&>(patch9->getSymbol());
-		//  		lib9patch::EditDialog dlg(m_editPanel, NULL, &symbol);
+		//  		d2d::Scale9Symbol& symbol = const_cast<d2d::Scale9Symbol&>(patch9->getSymbol());
+		//  		libscale9::EditDialog dlg(m_editPanel, NULL, &symbol);
 		//  		dlg.ShowModal();
 		//  
-		////   		std::vector<d2d::Patch9Sprite*> sprites;
-		////   		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::Patch9Sprite>(sprites));
+		////   		std::vector<d2d::Scale9Sprite*> sprites;
+		////   		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::Scale9Sprite>(sprites));
 		////   		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		////   		{
 		////   			d2d::ISprite* sprite = sprites[i];

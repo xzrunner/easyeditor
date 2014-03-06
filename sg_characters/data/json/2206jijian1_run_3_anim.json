@@ -1,0 +1,890 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite138",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.6999999880790710,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.6999999880790710,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\1_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite0",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -1.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 32.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite1",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 16.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 27.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\6_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite2",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -23.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\7_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite3",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -9.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 71.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite138",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.6999999880790710,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.6999999880790710,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\1_002.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite4",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -1.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 32.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite9",
+							"position" : 
+							{
+								"x" : 0.2896642684936523,
+								"y" : -2.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 16.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 27.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\6_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite10",
+							"position" : 
+							{
+								"x" : -1.0,
+								"y" : -5.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -23.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\7_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite11",
+							"position" : 
+							{
+								"x" : -1.0,
+								"y" : -5.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -9.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 71.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite138",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.6999999880790710,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.6999999880790710,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\1_003.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite5",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -3.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 34.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\7_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite12",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -9.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 71.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\6_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite13",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -23.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite14",
+							"position" : 
+							{
+								"x" : -2.0,
+								"y" : 3.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 16.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 27.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 5,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite138",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.6999999880790710,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.6999999880790710,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\1_004.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -5.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 30.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\6_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite21",
+							"position" : 
+							{
+								"x" : -6.0,
+								"y" : -2.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -23.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\7_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite22",
+							"position" : 
+							{
+								"x" : -6.0,
+								"y" : -2.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -9.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 71.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite23",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 16.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 27.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 7,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite138",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.6999999880790710,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.6999999880790710,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\1_005.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite7",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -4.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 31.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\6_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite15",
+							"position" : 
+							{
+								"x" : -1.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -23.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\7_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite16",
+							"position" : 
+							{
+								"x" : -1.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -9.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 71.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite17",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -2.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 16.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 27.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 9,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite138",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.6999999880790710,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.6999999880790710,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\1_006.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite8",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -4.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 36.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\7_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite18",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -9.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 71.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\6_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite19",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -23.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite20",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 3.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 16.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 27.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 11,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite138",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.6999999880790710,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.6999999880790710,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\1_006.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite8",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -4.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 36.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\7_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite18",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -9.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 71.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\6_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite19",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -23.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2206jijian1\\run\\3\\2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite20",
+							"position" : 
+							{
+								"x" : -4.0,
+								"y" : 3.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 16.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 27.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 12,
+					"tween" : false
+				}
+			],
+			"name" : "Layer1"
+		}
+	],
+	"name" : "2206jijian1_run_3"
+}

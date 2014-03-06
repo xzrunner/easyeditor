@@ -222,7 +222,6 @@ SelectActorOP(d2d::EditPanel* editPanel,
 			  d2d::PropertySettingPanel* propertyPanel,
 			  d2d::AbstractEditCMPT* callback/* = NULL*/)
 	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
-	, m_lastCtrlPress(false)
 {
 }
 
@@ -238,7 +237,7 @@ onKeyDown(int keyCode)
 	if (d2d::SelectSpritesOP::onKeyDown(keyCode))
 		return true;
 
-	if (m_lastCtrlPress && (keyCode == 'c' || keyCode == 'C')/*wxGetKeyState(WXK_CONTROL_C)*/)
+	if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
 		clearClipboard();
 
@@ -247,7 +246,7 @@ onKeyDown(int keyCode)
 		for (size_t i = 0, n = actors.size(); i < n; ++i)
 			m_clipboard.push_back(actors[i]->clone());
 	}
-	else if (wxGetKeyState(WXK_CONTROL_V))
+	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 		{
@@ -256,8 +255,6 @@ onKeyDown(int keyCode)
 			actor->release();
 		}
 	}
-
-	m_lastCtrlPress = keyCode == WXK_CONTROL;
 
 	return false;
 }

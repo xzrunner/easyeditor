@@ -3,7 +3,7 @@
 #include "common/Rect.h"
 #include "dataset/TextSprite.h"
 #include "dataset/FontSprite.h"
-#include "dataset/Patch9Sprite.h"
+#include "dataset/Scale9Sprite.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/SpriteFactory.h"
 #include "component/AbstractEditCMPT.h"
@@ -29,7 +29,6 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
 	, m_propertyPanel(propertyPanel)
-	, m_lastCtrlPress(false)
 	, m_bDraggable(true)
 {
 	m_selection = spritesImpl->getSpriteSelection();
@@ -52,21 +51,19 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 	{
 		m_spritesImpl->removeSpriteSelection();	
 	}
-	else if (wxGetKeyState(WXK_CONTROL_X))
+	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
 		pasteToSelection();
 		m_spritesImpl->removeSpriteSelection();
 	}
-	else if (m_lastCtrlPress && (keyCode == 'c' || keyCode == 'C')/*wxGetKeyState(WXK_CONTROL_C)*/)
+	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
 		pasteToSelection();
 	}
-	else if (wxGetKeyState(WXK_CONTROL_V))
+	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
 		copyFromSelection();
 	}
-
-	m_lastCtrlPress = keyCode == WXK_CONTROL;
 
 	return false;
 }
@@ -258,8 +255,8 @@ IPropertySetting* SelectSpritesOP::createPropertySetting(ISprite* sprite) const
 		return new TextPropertySetting(m_editPanel, text);
 	else if (FontSprite* font = dynamic_cast<FontSprite*>(sprite))
 		return new FontPropertySetting(m_editPanel, font);
-//  	else if (Patch9Sprite* scale = dynamic_cast<Patch9Sprite*>(sprite))
-//  		return new Scale9PropertySetting(m_editPanel, const_cast<Patch9Symbol*>(&scale->getSymbol()));
+//  	else if (Scale9Sprite* scale = dynamic_cast<Scale9Sprite*>(sprite))
+//  		return new Scale9PropertySetting(m_editPanel, const_cast<Scale9Symbol*>(&scale->getSymbol()));
 	else if (sprite)
 		return new SpritePropertySetting(m_editPanel, sprite);
 	else 

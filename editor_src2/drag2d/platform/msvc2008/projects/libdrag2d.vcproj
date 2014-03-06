@@ -953,11 +953,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Patch9Sprite.cpp"
+					RelativePath="..\..\..\src\drag2d\dataset\Scale9Sprite.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Patch9Sprite.h"
+					RelativePath="..\..\..\src\drag2d\dataset\Scale9Sprite.h"
 					>
 				</File>
 				<File
@@ -1061,11 +1061,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Patch9Symbol.cpp"
+					RelativePath="..\..\..\src\drag2d\dataset\Scale9Symbol.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Patch9Symbol.h"
+					RelativePath="..\..\..\src\drag2d\dataset\Scale9Symbol.h"
 					>
 				</File>
 				<File
@@ -1413,27 +1413,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\ParticleFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\ParticleFileAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Patch9FileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Patch9FileAdapter.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\common\PolylineFileAdapter.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\common\PolylineFileAdapter.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Scale9FileAdapter.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Scale9FileAdapter.h"
 					>
 				</File>
 				<File
@@ -1673,18 +1665,6 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="mesh"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryMeshPage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryMeshPage.h"
-						>
-					</File>
-				</Filter>
-				<Filter
 					Name="shape"
 					>
 					<File
@@ -1717,14 +1697,14 @@
 					</File>
 				</Filter>
 				<Filter
-					Name="patch"
+					Name="scale9"
 					>
 					<File
-						RelativePath="..\..\..\src\drag2d\view\Library9PatchPage.cpp"
+						RelativePath="..\..\..\src\drag2d\view\LibraryScale9Page.cpp"
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\view\Library9PatchPage.h"
+						RelativePath="..\..\..\src\drag2d\view\LibraryScale9Page.h"
 						>
 					</File>
 				</Filter>

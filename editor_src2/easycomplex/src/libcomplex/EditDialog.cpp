@@ -7,7 +7,7 @@
 
 #include <wx/splitter.h>
 
-namespace complex
+namespace ecomplex
 {
 	BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 		EVT_CLOSE(EditDialog::onClose)
@@ -37,15 +37,15 @@ namespace complex
 		wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
 		wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
 
-		complex::LibraryPanel* library 
-			= new complex::LibraryPanel(leftHorizontalSplitter);
+		ecomplex::LibraryPanel* library 
+			= new ecomplex::LibraryPanel(leftHorizontalSplitter);
 
 		d2d::PropertySettingPanel* property 
 			= new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
 		StagePanel* stage = new StagePanel(leftVerticalSplitter, this, m_symbol, property, library);
 		m_stage = stage;
-		property->setPropertySetting(new complex::PropertySetting(stage, m_symbol));
+		property->setPropertySetting(new ecomplex::PropertySetting(stage, m_symbol));
 
 //		ToolbarPanel* toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage, context->property);
 

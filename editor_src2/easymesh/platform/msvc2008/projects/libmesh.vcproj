@@ -241,6 +241,14 @@
 			Name="file"
 			>
 			<File
+				RelativePath="..\..\..\..\easyparticle3d\src\libparticle3d\FileAdapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\..\easyparticle3d\src\libparticle3d\FileAdapter.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libmesh\FileIO.cpp"
 				>
 			</File>

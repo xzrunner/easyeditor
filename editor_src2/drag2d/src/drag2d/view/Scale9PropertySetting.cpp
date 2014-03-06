@@ -1,12 +1,12 @@
 #include "Scale9PropertySetting.h"
 #include "PropertySettingPanel.h"
 
-#include "dataset/Patch9Symbol.h"
+#include "dataset/Scale9Symbol.h"
 #include "view/EditPanel.h"
 
 namespace d2d
 {
-	Scale9PropertySetting::Scale9PropertySetting(EditPanel* editPanel, Patch9Symbol* symbol)
+	Scale9PropertySetting::Scale9PropertySetting(EditPanel* editPanel, Scale9Symbol* symbol)
 		: IPropertySetting(editPanel, wxT("Scale9 Sprite"))
 		, m_symbol(symbol)
 	{

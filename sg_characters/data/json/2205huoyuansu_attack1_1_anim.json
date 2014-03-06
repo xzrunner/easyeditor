@@ -1,0 +1,295 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -20.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.3000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.3000000119209290,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2205huoyuansu\\attack\\1\\1_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite0",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 3.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 7.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2205huoyuansu\\attack\\1\\1_002.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite1",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 4.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 26.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -20.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.3000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.3000000119209290,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 5,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2205huoyuansu\\attack\\1\\1_003.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite2",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 13.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 35.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -20.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.3000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.3000000119209290,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 8,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2205huoyuansu\\attack\\1\\1_006.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite3",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 8.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 22.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -20.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.3000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.3000000119209290,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 14,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2205huoyuansu\\attack\\1\\1_006.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite3",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 8.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 22.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -20.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.3000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.3000000119209290,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 17,
+					"tween" : false
+				}
+			],
+			"name" : "Layer1"
+		}
+	],
+	"name" : "2205huoyuansu_attack1_1"
+}

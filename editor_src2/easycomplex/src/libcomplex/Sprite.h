@@ -3,7 +3,7 @@
 
 #include "Symbol.h"
 
-namespace complex
+namespace ecomplex
 {
 	class Sprite : public d2d::ISprite
 	{

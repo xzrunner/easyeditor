@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg_9patch.json",
+			"filepath" : "rank_window_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -26,7 +26,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "rank_window_bg2_9patch.json",
+			"filepath" : "rank_window_bg2_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
