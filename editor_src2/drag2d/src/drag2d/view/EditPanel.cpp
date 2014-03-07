@@ -1,7 +1,6 @@
 #include "EditPanel.h"
 #include "HistoryList.h"
 
-#include "common/Context.h"
 #include "operator/AbstractEditOP.h"
 #include "view/Camera.h"
 #include "view/GLCanvas.h"

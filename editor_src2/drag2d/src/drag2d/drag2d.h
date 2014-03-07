@@ -156,7 +156,6 @@
 #include "common/visitors.h"
 #include "common/tools.h"
 #include "common/Random.h"
-#include "common/Context.h"
 #include "common/Exception.h"
 #include "common/color_trans.h"
 #include "common/color_config.h"
