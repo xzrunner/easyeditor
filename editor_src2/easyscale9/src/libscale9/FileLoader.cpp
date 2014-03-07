@@ -1,9 +1,9 @@
-#include "FileAdapter.h"
+#include "FileLoader.h"
 
 namespace escale9
 {
 
-void FileAdapter::load(const char* filename)
+void FileLoader::load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -26,7 +26,7 @@ void FileAdapter::load(const char* filename)
 	}
 }
 
-FileAdapter::Entry FileAdapter::load(const Json::Value& value, const wxString& dir)
+FileLoader::Entry FileLoader::load(const Json::Value& value, const wxString& dir)
 {
 	Entry entry;
 

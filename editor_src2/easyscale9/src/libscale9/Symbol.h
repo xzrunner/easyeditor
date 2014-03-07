@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-#include "FileAdapter.h"
+#include "FileLoader.h"
 
 namespace escale9
 {
@@ -68,7 +68,7 @@ private:
 	static void stretch(d2d::ISprite* sprite, const d2d::Vector& center, 
 		float width, float height);
 
-	static void initSprite(const FileAdapter::Entry& entry,
+	static void initSprite(const FileLoader::Entry& entry,
 		d2d::ISprite** pSprite, const std::string& dlg);
 
 public:

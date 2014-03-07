@@ -6,7 +6,7 @@
 namespace escale9
 {
 
-class FileAdapter
+class FileLoader
 {
 public:
 	struct Entry

@@ -161,14 +161,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libscale9\FileSaver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libscale9\FileSaver.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libscale9\ToolbarPanel.cpp"
 				>
 			</File>
@@ -176,6 +168,26 @@
 				RelativePath="..\..\..\src\libscale9\ToolbarPanel.h"
 				>
 			</File>
+			<Filter
+				Name="file"
+				>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileSaver.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileSaver.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="stage"
@@ -200,14 +212,6 @@
 		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\libscale9\FileAdapter.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libscale9\FileAdapter.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\..\src\libscale9\Sprite.cpp"
 				>
