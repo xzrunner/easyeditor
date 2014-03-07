@@ -1,22 +1,32 @@
 #include "ResizeCMPT.h"
 #include "ResizeOP.h"
-#include "Context.h"
 #include "StagePanel.h"
 
 namespace escale9
 {
 
 ResizeCMPT::ResizeCMPT(wxWindow* parent, const wxString& name, 
-					   d2d::EditPanel* editPanel)
-	: AbstractEditCMPT(parent, name, editPanel)
+					   StagePanel* stage, ToolbarPanel* toolbar)
+	: AbstractEditCMPT(parent, name, stage)
+	, m_stage(stage)
 {
-	m_editOP = new ResizeOP(editPanel);
+	m_editOP = new ResizeOP(stage, toolbar, this);
 }
 
-void ResizeCMPT::setValue(int width, int height)
+void ResizeCMPT::setSize(int width, int height)
 {
 	m_wSpin->SetValue(width);
 	m_hSpin->SetValue(height);
+}
+
+float ResizeCMPT::getWidth() const
+{
+	return m_wSpin->GetValue();
+}
+
+float ResizeCMPT::getHeight() const
+{
+	return m_hSpin->GetValue();
 }
 
 wxSizer* ResizeCMPT::initLayout()
@@ -43,10 +53,8 @@ wxSizer* ResizeCMPT::initLayout()
 
 void ResizeCMPT::onChangeSize(wxSpinEvent& event)
 {
-	Context* context = Context::Instance();
-	context->width = m_wSpin->GetValue();
-	context->height = m_hSpin->GetValue();
-	context->stage->rebuildPatchSymbol();
-	context->stage->Refresh();
+	m_stage->rebuildPatchSymbol();
+	m_stage->Refresh();
 }
+
 } // escale9

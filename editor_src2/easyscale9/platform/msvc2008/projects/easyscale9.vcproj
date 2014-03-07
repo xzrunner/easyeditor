@@ -249,6 +249,10 @@
 			Name="frame"
 			>
 			<File
+				RelativePath="..\..\..\src\easyscale9\config.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easyscale9\Context.cpp"
 				>
 			</File>

@@ -5,11 +5,12 @@
 namespace escale9
 {
 	class Symbol;
+	class ToolbarPanel;
 
 	class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 	{
 	public:
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
+		StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 		virtual ~StagePanel();
 
 		//
@@ -39,6 +40,8 @@ namespace escale9
 
 		void rebuildPatchSymbol();
 
+		void setToolbarPanel(ToolbarPanel* toolbar);
+
 	private:
 		bool isComplete() const;
 
@@ -46,7 +49,15 @@ namespace escale9
 		class DragSymbolTarget : public wxTextDropTarget
 		{
 		public:
+			DragSymbolTarget(d2d::LibraryPanel* library, StagePanel* stage)
+				: m_library(library), m_stage(stage) {}
+
 			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
+
+		private:
+			d2d::LibraryPanel* m_library;
+			StagePanel* m_stage;
+
 		}; // DragSymbolTarget
 
 	private:
@@ -56,6 +67,10 @@ namespace escale9
 		d2d::ISprite* m_sprites[3][3];
 
 		Symbol* m_patch;
+
+		d2d::LibraryPanel* m_library;
+
+		ToolbarPanel* m_toolbar;
 
 	}; // StagePanel
 }

@@ -5,15 +5,20 @@
 
 namespace escale9
 {
+	class StagePanel;
+	class ToolbarPanel;
+
 	class FileIO
 	{
 	public:
-		static void load(const char* filename);
-		static void store(const char* filename);
+		static void load(const char* filename, d2d::LibraryPanel* library, 
+			d2d::MultiSpritesImpl* stage, ToolbarPanel* toolbar);
+		static void store(const char* filename, StagePanel* stage, 
+			ToolbarPanel* toolbar);
 
 	private:
-		static d2d::ISprite* load(const Json::Value& value, const std::string& dlg);
-		static Json::Value store(d2d::ISprite* sprite, const std::string& dlg);
+		static d2d::ISprite* load(const Json::Value& value, const wxString& dlg);
+		static Json::Value store(d2d::ISprite* sprite, const wxString& dlg);
 
 	}; // FileIO
 }
