@@ -1,0 +1,103 @@
+
+{
+	"name" : "ui_top_right_dark_elixir",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_top_right_gold_bar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "gold_bar",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : -40.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_top_right_elixir_bar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "elixir_bar",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : -103.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_top_right_dark_elixir_bar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "dark_elixir_bar",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : -166.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 8.690578460693359,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 5.77722167968750,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_top_right_diamond_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "diamond_bar",
+			"position" : 
+			{
+				"x" : -171.0,
+				"y" : -262.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}
