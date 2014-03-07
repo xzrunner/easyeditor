@@ -181,18 +181,22 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="fileio"
+		<File
+			RelativePath="..\..\..\src\easycomplex\FileIO.cpp"
 			>
-			<File
-				RelativePath="..\..\..\src\easycomplex\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easycomplex\FileIO.h"
-				>
-			</File>
-		</Filter>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easycomplex\FileIO.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easycomplex\Frame.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easycomplex\Frame.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\..\src\easycomplex\main.cpp"
 			>

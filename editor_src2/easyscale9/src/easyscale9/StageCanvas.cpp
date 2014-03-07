@@ -2,6 +2,8 @@
 #include "StagePanel.h"
 #include "Context.h"
 
+#include <easyscale9.h>
+
 namespace escale9
 {
 

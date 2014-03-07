@@ -1,7 +1,7 @@
 #include "SymbolContainer.h"
 #include "Symbol.h"
 
-namespace complex
+namespace ecomplex
 {
 	SymbolContainer::SymbolContainer(Symbol* symbol)
 	{

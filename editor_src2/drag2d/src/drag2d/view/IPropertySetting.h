@@ -23,6 +23,8 @@ namespace d2d
 	protected:
 		wxString getPGType(wxPropertyGrid* pg) const;
 
+		static void splitString(const wxAny& value, double* x, double* y);
+
 	protected:
 		static const wxString TYPE_NAME;
 

@@ -4,6 +4,7 @@
 
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyscale9.h>
 
 namespace libcoco
 {
@@ -32,7 +33,7 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
 		const d2d::ISymbol* symbol = symbols[i];
-		if (const complex::Symbol* complex = dynamic_cast<const complex::Symbol*>(symbol))
+		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
 				buffer.push(complex->m_sprites[j]);
@@ -50,16 +51,16 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 				}
 			}
 		}
-		else if (const d2d::Scale9Symbol* patch = dynamic_cast<const d2d::Scale9Symbol*>(symbol))
+		else if (const escale9::Symbol* patch = dynamic_cast<const escale9::Symbol*>(symbol))
 		{
 			switch (patch->type())
 			{
-			case d2d::Scale9Symbol::e_9Grid:
+			case escale9::Symbol::e_9Grid:
 				for (size_t i = 0; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j)
 						buffer.push(patch->m_sprites[i][j]);
 				break;
-			case d2d::Scale9Symbol::e_9GridHollow:
+			case escale9::Symbol::e_9GridHollow:
 				for (size_t i = 0; i < 3; ++i) {
 					for (size_t j = 0; j < 3; ++j) {
 						if (i == 1 && j == 1) continue;
@@ -67,15 +68,15 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 					}
 				}
 				break;
-			case d2d::Scale9Symbol::e_3GridHor:
+			case escale9::Symbol::e_3GridHor:
 				for (size_t i = 0; i < 3; ++i)
 					buffer.push(patch->m_sprites[1][i]);
 				break;
-			case d2d::Scale9Symbol::e_3GridVer:
+			case escale9::Symbol::e_3GridVer:
 				for (size_t i = 0; i < 3; ++i)
 					buffer.push(patch->m_sprites[i][1]);
 				break;
-			case d2d::Scale9Symbol::e_6GridUpper:
+			case escale9::Symbol::e_6GridUpper:
 				for (size_t i = 1; i < 3; ++i)
 					for (size_t j = 0; j < 3; ++j)
 						buffer.push(patch->m_sprites[i][j]);
@@ -95,9 +96,9 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 		{
 			m_unique.insert(&sprite->getSymbol());
 		}
-		else if (const complex::Sprite* complex = dynamic_cast<const complex::Sprite*>(sprite))
+		else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(sprite))
 		{
-			const complex::Symbol& symbol = complex->getSymbol();
+			const ecomplex::Symbol& symbol = complex->getSymbol();
 			if (m_unique.find(&symbol) == m_unique.end())
 			{
 				m_unique.insert(&symbol);
@@ -126,20 +127,20 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 				}
 			}
 		}
-		else if (const d2d::Scale9Sprite* anim = dynamic_cast<const d2d::Scale9Sprite*>(sprite))
+		else if (const escale9::Sprite* anim = dynamic_cast<const escale9::Sprite*>(sprite))
 		{
-			const d2d::Scale9Symbol& symbol = anim->getSymbol();
+			const escale9::Symbol& symbol = anim->getSymbol();
 			if (m_unique.find(&symbol) == m_unique.end())
 			{
 				m_unique.insert(&symbol);
 				switch (symbol.type())
 				{
-				case d2d::Scale9Symbol::e_9Grid:
+				case escale9::Symbol::e_9Grid:
 					for (size_t i = 0; i < 3; ++i)
 						for (size_t j = 0; j < 3; ++j)
 							buffer.push(symbol.m_sprites[i][j]);
 					break;
-				case d2d::Scale9Symbol::e_9GridHollow:
+				case escale9::Symbol::e_9GridHollow:
 					for (size_t i = 0; i < 3; ++i) {
 						for (size_t j = 0; j < 3; ++j) {
 							if (i == 1 && j == 1) continue;
@@ -147,15 +148,15 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 						}
 					}
 					break;
-				case d2d::Scale9Symbol::e_3GridHor:
+				case escale9::Symbol::e_3GridHor:
 					for (size_t i = 0; i < 3; ++i)
 						buffer.push(symbol.m_sprites[1][i]);
 					break;
-				case d2d::Scale9Symbol::e_3GridVer:
+				case escale9::Symbol::e_3GridVer:
 					for (size_t i = 0; i < 3; ++i)
 						buffer.push(symbol.m_sprites[i][1]);
 					break;
-				case d2d::Scale9Symbol::e_6GridUpper:
+				case escale9::Symbol::e_6GridUpper:
 					for (size_t i = 1; i < 3; ++i)
 						for (size_t j = 0; j < 3; ++j)
 							buffer.push(symbol.m_sprites[i][j]);
@@ -187,7 +188,7 @@ void SymbolsPrepare::sort()
 				m_unique.erase(itr);
 				break;
 			}
-			else if (complex::Symbol* complex = dynamic_cast<complex::Symbol*>(symbol))
+			else if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(symbol))
 			{
 				bool prepared = true;
 				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i)
@@ -221,18 +222,18 @@ void SymbolsPrepare::sort()
 					break;
 				}
 			}
-			else if (d2d::Scale9Symbol* patch9 = dynamic_cast<d2d::Scale9Symbol*>(symbol))
+			else if (escale9::Symbol* patch9 = dynamic_cast<escale9::Symbol*>(symbol))
 			{
 				bool prepared = true;
 				switch (patch9->type())
 				{
-				case d2d::Scale9Symbol::e_9Grid:
+				case escale9::Symbol::e_9Grid:
 					for (size_t i = 0; i < 3 && prepared; ++i)
 						for (size_t j = 0; j < 3 && prepared; ++j)
 							if (!isSymbolPrepared(patch9->m_sprites[i][j]))
 								prepared = false;
 					break;
-				case d2d::Scale9Symbol::e_9GridHollow:
+				case escale9::Symbol::e_9GridHollow:
 					for (size_t i = 0; i < 3 && prepared; ++i) {
 						for (size_t j = 0; j < 3 && prepared; ++j) {
 							if (i == 1 && j == 1) continue;
@@ -241,17 +242,17 @@ void SymbolsPrepare::sort()
 						}
 					}
 					break;
-				case d2d::Scale9Symbol::e_3GridHor:
+				case escale9::Symbol::e_3GridHor:
 					for (size_t i = 0; i < 3 && prepared; ++i)
 						if (!isSymbolPrepared(patch9->m_sprites[1][i]))
 							prepared = false;
 					break;
-				case d2d::Scale9Symbol::e_3GridVer:
+				case escale9::Symbol::e_3GridVer:
 					for (size_t i = 0; i < 3 && prepared; ++i)
 						if (!isSymbolPrepared(patch9->m_sprites[i][1]))
 							prepared = false;
 					break;
-				case d2d::Scale9Symbol::e_6GridUpper:
+				case escale9::Symbol::e_6GridUpper:
 					for (size_t i = 1; i < 3 && prepared; ++i)
 						for (size_t j = 0; j < 3 && prepared; ++j)
 							if (!isSymbolPrepared(patch9->m_sprites[i][j]))

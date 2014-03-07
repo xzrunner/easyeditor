@@ -1,6 +1,8 @@
 #include "Bitmap.h"
 #include "Image.h"
 
+#include "common/config.h"
+
 namespace d2d
 {
 
@@ -21,6 +23,10 @@ Bitmap::~Bitmap()
 
 bool Bitmap::loadFromFile(const wxString& filepath)
 {
+#ifdef NOT_LOAD_IMAGE
+	return true;
+#endif
+
 	static bool init = false;
 	if (!init)
 	{

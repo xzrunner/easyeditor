@@ -4,6 +4,7 @@
 #include "VerifyJsons.h"
 #include "FixImages.h"
 #include "FixAnimation.h"
+#include "FormatJsonFile.h"
 
 void verify(const std::string& dirpath, const std::string& op)
 {
@@ -19,6 +20,13 @@ void fix(const std::string& path0, const std::string& path1, const std::string& 
 		edb::FixImages fix(path0, path1);
 	} else if (op == "-anim") {
 		edb::FixAnimation fix(path0);
+	}
+}
+
+void format(const std::string& dirpath, const std::string& op)
+{
+	if (op == "-jsons") {
+		edb::FormatJsonFile::implement(dirpath);
 	}
 }
 
@@ -51,11 +59,20 @@ int main(int argc, char *argv[])
 	else if (cmd == "fix")
 	{
 		if (argc < 5) {
-			std::cerr << "Params: [path0] [path1] [-iamges] !" << std::endl;
+			std::cerr << "Params: [path0] [path1] [-images] !" << std::endl;
 			return 1;
 		}
 
 		fix(argv[2], argv[3], argv[4]);
+	}
+	else if (cmd == "format")
+	{
+		if (argc < 4) {
+			std::cerr << "Params: [-jsons] [dir] !" << std::endl;
+			return 1;
+		}
+
+		format(argv[3], argv[2]);
 	}
 
 	return 0;

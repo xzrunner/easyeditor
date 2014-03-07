@@ -3,7 +3,7 @@
 
 #include <easycoco.h>
 
-namespace complex
+namespace ecomplex
 {
 	LibraryPage::LibraryPage(wxWindow* parent)
 		: d2d::ILibraryPage(parent, wxT("Complex"))

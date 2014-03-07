@@ -10,6 +10,11 @@ namespace eanim
 	{
 	public:
 		StageCanvas(d2d::EditPanel* stage);
+		virtual ~StageCanvas();
+
+		void setBackground(d2d::Image* image) {
+			m_background = image;
+		}
 
 	protected:
 		virtual void onDraw();
@@ -19,6 +24,9 @@ namespace eanim
 
 	private:
 		void drawbackground() const;
+
+	private:
+		d2d::Image* m_background;
 
 	}; // StageCanvas
 }

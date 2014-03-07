@@ -3,6 +3,8 @@
 #include "Context.h"
 #include "ResizeCMPT.h"
 
+#include <easyscale9.h>
+
 namespace escale9
 {
 
@@ -106,17 +108,17 @@ void StagePanel::rebuildPatchSymbol()
 	if (isComplete())
 	{
 		if (m_patch) delete m_patch;
-		m_patch = new d2d::Scale9Symbol;
+		m_patch = new Symbol;
 		m_patch->composeFromSprites(m_sprites, Context::Instance()->width, 
 			Context::Instance()->height);
 
 		Context* context = Context::Instance();
-		if (m_patch->type() == d2d::Scale9Symbol::e_3GridHor)
+		if (m_patch->type() == Symbol::e_3GridHor)
 		{
 			context->height = m_patch->getSize().yLength();
 			context->resizeCMPT->setValue(context->width, context->height);
 		}
-		else if (m_patch->type() == d2d::Scale9Symbol::e_3GridVer)
+		else if (m_patch->type() == Symbol::e_3GridVer)
 		{
 			context->width = m_patch->getSize().xLength();
 			context->resizeCMPT->setValue(context->width, context->height);

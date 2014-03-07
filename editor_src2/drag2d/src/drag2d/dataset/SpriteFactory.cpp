@@ -8,7 +8,6 @@
 #include "EShapeSprite.h"
 #include "MeshSprite.h"
 #include "CombinationSprite.h"
-#include "Scale9Sprite.h"
 #include "TextSprite.h"
 //#include "FontBlankSprite.h"
 #include "FontSprite.h"
@@ -16,6 +15,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easymesh.h>
+#include <easyscale9.h>
 
 namespace d2d
 {
@@ -34,8 +34,8 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 	wxString filepath = symbol->getFilepath();
 	if (filepath.empty())
 	{
-		if (complex::Symbol* s = dynamic_cast<complex::Symbol*>(symbol))
-			sprite = new complex::Sprite(s);
+		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(symbol))
+			sprite = new ecomplex::Sprite(s);
 		else if (anim::Symbol* s = dynamic_cast<anim::Symbol*>(symbol))
 			sprite = new anim::Sprite(s);
 	}
@@ -65,13 +65,12 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 			if (FileNameParser::isType(filepath, FileNameParser::e_shape))
 				sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
-				sprite = new complex::Sprite(static_cast<complex::Symbol*>(symbol));
+				sprite = new ecomplex::Sprite(static_cast<ecomplex::Symbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
 				sprite = new anim::Sprite(static_cast<anim::Symbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))
-				sprite = new Scale9Sprite(static_cast<Scale9Symbol*>(symbol));
+				sprite = new escale9::Sprite(static_cast<escale9::Symbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
-				//sprite = new FontBlankSprite(static_cast<FontBlankSymbol*>(symbol));
 				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
 				sprite = new emesh::Sprite(static_cast<emesh::Symbol*>(symbol));

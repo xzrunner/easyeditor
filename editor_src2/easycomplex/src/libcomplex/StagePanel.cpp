@@ -7,7 +7,7 @@
 
 extern d2d::StageModule MODULE_STAGE;
 
-namespace complex
+namespace ecomplex
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,

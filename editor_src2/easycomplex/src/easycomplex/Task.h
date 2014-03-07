@@ -1,48 +1,53 @@
-#pragma once
+#ifndef _EASYCOMPLEX_TASK_H_
+#define _EASYCOMPLEX_TASK_H_
 
 #include <drag2d.h>
 #include <wx/splitter.h>
 
-namespace complex { class LibraryPanel; class StagePanel; }
-
 namespace ecomplex 
 {
-	class Task : public d2d::ITask
-	{
-	public:
-		Task(wxFrame* parent);
-		virtual ~Task();
-		
-		virtual void load(const char* filepath);
-		virtual void store(const char* filepath) const;
 
-		virtual bool isDirty() const;
+class LibraryPanel; 
+class StagePanel;
 
-		virtual void clear();
+class Task : public d2d::ITask
+{
+public:
+	Task(wxFrame* parent);
+	virtual ~Task();
+	
+	virtual void load(const char* filepath);
+	virtual void store(const char* filepath) const;
 
-		virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
+	virtual bool isDirty() const;
 
-		complex::StagePanel* getStagePanel() { return m_stage; }
+	virtual void clear();
 
-	private:
-		void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-			wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-			wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
+	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
 
-		void initLayout();
+	ecomplex::StagePanel* getStagePanel() { return m_stage; }
 
-	private:
-		wxWindow* m_root;
+private:
+	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
+		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
+		wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
 
-		wxFrame* m_parent;
+	void initLayout();
 
-		complex::LibraryPanel* m_library;
-		d2d::PropertySettingPanel* m_property;
-		complex::StagePanel* m_stage;
-		d2d::ViewlistPanel* m_viewlist;
+private:
+	wxWindow* m_root;
 
-		friend class FileIO;
+	wxFrame* m_parent;
 
-	}; // Task
+	ecomplex::LibraryPanel* m_library;
+	d2d::PropertySettingPanel* m_property;
+	ecomplex::StagePanel* m_stage;
+	d2d::ViewlistPanel* m_viewlist;
+
+	friend class FileIO;
+
+}; // Task
+
 }
 
+#endif // _EASYCOMPLEX_TASK_H_

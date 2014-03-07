@@ -1,0 +1,243 @@
+{
+  "name": "lightning_arc_spell", 
+  "sprite": [
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 720.0, 
+        "y": 0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 880.0, 
+        "y": -0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 1040.0, 
+        "y": 0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 1200.0, 
+        "y": -0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 80.0, 
+        "y": 0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 240.0, 
+        "y": -0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 400.0, 
+        "y": 0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 560.0, 
+        "y": -0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 1358.75, 
+        "y": 0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 1518.75, 
+        "y": -0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 1676.25, 
+        "y": 0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 1836.25, 
+        "y": -0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 1995.0, 
+        "y": 0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -1.0, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "2218_anim.json", 
+      "multi color": "0xffffffc9", 
+      "name": "", 
+      "position": {
+        "x": 2155.0, 
+        "y": -0.625
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }
+  ]
+}

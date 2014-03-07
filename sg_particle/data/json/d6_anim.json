@@ -1,0 +1,4253 @@
+{
+  "fps": 30, 
+  "layer": [
+    {
+      "frame": [
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8154296875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 1, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8212890625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0029296875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 2, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8271484375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.005859375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 3, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8330078125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0087890625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 4, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff23", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8388671875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.01171875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 5, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff2b", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8447265625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0146484375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7451171875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.15234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 6, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff35", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8505859375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.017578125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": 0.0625, 
+                "y": -0.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7392578125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1357421875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 7, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0205078125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": 0.1875, 
+                "y": -0.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7373046875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1201171875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 8, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": 0.3125, 
+                "y": -0.3125
+              }, 
+              "x mirror": false, 
+              "x scale": 0.734375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1025390625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 9, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0263671875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": 0.4375, 
+                "y": -0.4375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.73046875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0849609375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 10, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.029296875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": 0.5, 
+                "y": -0.5
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7265625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.068359375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 11, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0322265625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": 0.625, 
+                "y": -0.625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.724609375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.052734375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 12, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0361328125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0e", 
+              "name": "", 
+              "position": {
+                "x": 0.75, 
+                "y": -0.75
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7236328125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0361328125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 13, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0390625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": 0.875, 
+                "y": -0.875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7177734375, 
+              "x shear": -0.729106628242075, 
+              "y mirror": false, 
+              "y scale": 1.0166015625, 
+              "y shear": 1.0380952380952382
+            }
+          ], 
+          "id": 0, 
+          "time": 14, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0419921875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff13", 
+              "name": "", 
+              "position": {
+                "x": 1.0, 
+                "y": -1.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7158203125, 
+              "x shear": -0.7575757575757576, 
+              "y mirror": false, 
+              "y scale": 0.9990234375, 
+              "y shear": 1.0409276944065484
+            }
+          ], 
+          "id": 0, 
+          "time": 15, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.044921875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": 1.0625, 
+                "y": -1.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7119140625, 
+              "x shear": -0.7916251246261217, 
+              "y mirror": false, 
+              "y scale": 0.9794921875, 
+              "y shear": 1.0493827160493827
+            }
+          ], 
+          "id": 0, 
+          "time": 16, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0478515625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": 1.1875, 
+                "y": -1.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.708984375, 
+              "x shear": -0.8268839103869654, 
+              "y mirror": false, 
+              "y scale": 0.958984375, 
+              "y shear": 1.0578512396694215
+            }
+          ], 
+          "id": 0, 
+          "time": 17, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.05078125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1b", 
+              "name": "", 
+              "position": {
+                "x": 1.3125, 
+                "y": -1.3125
+              }, 
+              "x mirror": false, 
+              "x scale": 0.705078125, 
+              "x shear": -0.8568464730290456, 
+              "y mirror": false, 
+              "y scale": 0.94140625, 
+              "y shear": 1.0664819944598338
+            }
+          ], 
+          "id": 0, 
+          "time": 18, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0537109375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1e", 
+              "name": "", 
+              "position": {
+                "x": 1.4375, 
+                "y": -1.4375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.703125, 
+              "x shear": -0.8890063424947146, 
+              "y mirror": false, 
+              "y scale": 0.923828125, 
+              "y shear": 1.0694444444444444
+            }
+          ], 
+          "id": 0, 
+          "time": 19, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.056640625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": 1.5, 
+                "y": -1.5
+              }, 
+              "x mirror": false, 
+              "x scale": 0.69921875, 
+              "x shear": -0.9212513484358145, 
+              "y mirror": false, 
+              "y scale": 0.9052734375, 
+              "y shear": 1.0782122905027933
+            }
+          ], 
+          "id": 0, 
+          "time": 20, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0595703125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff23", 
+              "name": "", 
+              "position": {
+                "x": 1.625, 
+                "y": -1.625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6962890625, 
+              "x shear": -0.9613259668508287, 
+              "y mirror": false, 
+              "y scale": 0.8837890625, 
+              "y shear": 1.0855539971949508
+            }
+          ], 
+          "id": 0, 
+          "time": 21, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff25", 
+              "name": "", 
+              "position": {
+                "x": 1.75, 
+                "y": -1.75
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6943359375, 
+              "x shear": -0.9966139954853274, 
+              "y mirror": false, 
+              "y scale": 0.865234375, 
+              "y shear": 1.0886075949367089
+            }
+          ], 
+          "id": 0, 
+          "time": 22, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0654296875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff28", 
+              "name": "", 
+              "position": {
+                "x": 1.875, 
+                "y": -1.875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6904296875, 
+              "x shear": -1.0405092592592593, 
+              "y mirror": false, 
+              "y scale": 0.84375, 
+              "y shear": 1.0975954738330975
+            }
+          ], 
+          "id": 0, 
+          "time": 23, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0693359375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff25", 
+              "name": "", 
+              "position": {
+                "x": 2.0, 
+                "y": -2.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6865234375, 
+              "x shear": -1.0843230403800475, 
+              "y mirror": false, 
+              "y scale": 0.822265625, 
+              "y shear": 1.1066856330014225
+            }
+          ], 
+          "id": 0, 
+          "time": 24, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.072265625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff23", 
+              "name": "", 
+              "position": {
+                "x": 2.0625, 
+                "y": -2.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6826171875, 
+              "x shear": -1.1253041362530414, 
+              "y mirror": false, 
+              "y scale": 0.802734375, 
+              "y shear": 1.1158798283261802
+            }
+          ], 
+          "id": 0, 
+          "time": 25, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0751953125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff23", 
+              "name": "", 
+              "position": {
+                "x": 2.1875, 
+                "y": -2.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.681640625, 
+              "x shear": -1.167082294264339, 
+              "y mirror": false, 
+              "y scale": 0.783203125, 
+              "y shear": 1.1174785100286533
+            }
+          ], 
+          "id": 0, 
+          "time": 26, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.078125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": 2.3125, 
+                "y": -2.3125
+              }, 
+              "x mirror": false, 
+              "x scale": 1.307871331608712, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.079995122827891, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": -0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": -10.0, 
+                "y": -11.25
+              }, 
+              "x mirror": false, 
+              "x scale": 0.564856784190035, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.017953883116064686, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 27, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0810546875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": 2.4375, 
+                "y": -2.4375
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3244441467927717, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.082757258691901, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": -9.75, 
+                "y": -11.25
+              }, 
+              "x mirror": false, 
+              "x scale": 1.04296875, 
+              "x shear": 0.29652996845425866, 
+              "y mirror": false, 
+              "y scale": 1.23828125, 
+              "y shear": 0.0
+            }
+          ], 
+          "id": 0, 
+          "time": 28, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.083984375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1e", 
+              "name": "", 
+              "position": {
+                "x": 2.5, 
+                "y": -2.5
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3382548261128215, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.085519394555911, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": -9.5625, 
+                "y": -11.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0419921875, 
+              "x shear": 0.27258444619010214, 
+              "y mirror": false, 
+              "y scale": 1.2431640625, 
+              "y shear": 0.01218369259606373
+            }
+          ], 
+          "id": 0, 
+          "time": 29, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0869140625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1e", 
+              "name": "", 
+              "position": {
+                "x": 2.625, 
+                "y": -2.625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3548276412968812, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.085519394555911, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": -9.4375, 
+                "y": -10.9375
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0419921875, 
+              "x shear": 0.24882629107981222, 
+              "y mirror": false, 
+              "y scale": 1.248046875, 
+              "y shear": 0.02155576382380506
+            }
+          ], 
+          "id": 0, 
+          "time": 30, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.08984375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1b", 
+              "name": "", 
+              "position": {
+                "x": 2.75, 
+                "y": -2.75
+              }, 
+              "x mirror": false, 
+              "x scale": 1.370019388548936, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.091043666283931, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": -9.1875, 
+                "y": -10.8125
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0400390625, 
+              "x shear": 0.22170179547228727, 
+              "y mirror": false, 
+              "y scale": 1.2509765625, 
+              "y shear": 0.03474178403755868
+            }
+          ], 
+          "id": 0, 
+          "time": 31, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0927734375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": 2.875, 
+                "y": -2.875
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3824489999369807, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.091043666283931, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": -9.0, 
+                "y": -10.6875
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0390625, 
+              "x shear": 0.1985981308411215, 
+              "y mirror": false, 
+              "y scale": 1.25390625, 
+              "y shear": 0.043233082706766915
+            }
+          ], 
+          "id": 0, 
+          "time": 32, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.095703125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": 3.0, 
+                "y": -3.0
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3934975433930206, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.089662598351926, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": -8.8125, 
+                "y": -10.625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0380859375, 
+              "x shear": 0.17249417249417248, 
+              "y mirror": false, 
+              "y scale": 1.2568359375, 
+              "y shear": 0.05644402634054563
+            }
+          ], 
+          "id": 0, 
+          "time": 33, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0986328125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": 3.0625, 
+                "y": -3.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4031650189170555, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0924247342159359, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": -8.75, 
+                "y": -10.5
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0361328125, 
+              "x shear": 0.15306915306915306, 
+              "y mirror": false, 
+              "y scale": 1.2568359375, 
+              "y shear": 0.06597549481621112
+            }
+          ], 
+          "id": 0, 
+          "time": 34, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1025390625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": 3.1875, 
+                "y": -3.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4155946303051001, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0951868700799459, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": -8.4375, 
+                "y": -10.375
+              }, 
+              "x mirror": false, 
+              "x scale": 1.03515625, 
+              "x shear": 0.12723041117145073, 
+              "y mirror": false, 
+              "y scale": 1.2587890625, 
+              "y shear": 0.07830188679245283
+            }
+          ], 
+          "id": 0, 
+          "time": 35, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.10546875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff13", 
+              "name": "", 
+              "position": {
+                "x": 3.3125, 
+                "y": -3.3125
+              }, 
+              "x mirror": false, 
+              "x scale": 1.425262105829135, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0979490059439558, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": -8.1875, 
+                "y": -10.25
+              }, 
+              "x mirror": false, 
+              "x scale": 1.033203125, 
+              "x shear": 0.1008533747090768, 
+              "y mirror": false, 
+              "y scale": 1.2587890625, 
+              "y shear": 0.09073724007561437
+            }
+          ], 
+          "id": 0, 
+          "time": 36, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1083984375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": 3.4375, 
+                "y": -3.4375
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4335485134211647, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0979490059439558, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": -8.0, 
+                "y": -10.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.03125, 
+              "x shear": 0.08229813664596274, 
+              "y mirror": false, 
+              "y scale": 1.2578125, 
+              "y shear": 0.10037878787878787
+            }
+          ], 
+          "id": 0, 
+          "time": 37, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.111328125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": 3.5, 
+                "y": -3.5
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4473591927412146, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1034732776719756, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": -7.8125, 
+                "y": -10.125
+              }, 
+              "x mirror": false, 
+              "x scale": 1.029296875, 
+              "x shear": 0.05672105672105672, 
+              "y mirror": false, 
+              "y scale": 1.2568359375, 
+              "y shear": 0.11005692599620494
+            }
+          ], 
+          "id": 0, 
+          "time": 38, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1142578125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0e", 
+              "name": "", 
+              "position": {
+                "x": 3.625, 
+                "y": -3.625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4542645324012395, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1034732776719756, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": -7.625, 
+                "y": -9.9375
+              }, 
+              "x mirror": false, 
+              "x scale": 1.02734375, 
+              "x shear": 0.034241245136186774, 
+              "y mirror": false, 
+              "y scale": 1.2548828125, 
+              "y shear": 0.12262357414448669
+            }
+          ], 
+          "id": 0, 
+          "time": 39, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1171875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0e", 
+              "name": "", 
+              "position": {
+                "x": 3.75, 
+                "y": -3.75
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4611698720612643, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1062354135359855, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0e", 
+              "name": "", 
+              "position": {
+                "x": -7.5, 
+                "y": -9.8125
+              }, 
+              "x mirror": false, 
+              "x scale": 1.025390625, 
+              "x shear": 0.0124804992199688, 
+              "y mirror": false, 
+              "y scale": 1.251953125, 
+              "y shear": 0.13238095238095238
+            }
+          ], 
+          "id": 0, 
+          "time": 40, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1201171875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": 3.875, 
+                "y": -3.875
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4680752117212892, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1048543456039805, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0e", 
+              "name": "", 
+              "position": {
+                "x": -7.25, 
+                "y": -9.625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0224609375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.248046875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 41, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.123046875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": 4.0, 
+                "y": -4.0
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4749805513813141, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1076164814679905, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": -7.125, 
+                "y": -9.5
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0205078125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.244140625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 42, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1259765625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": 4.0625, 
+                "y": -4.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.480504823109334, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1103786173320005, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": -6.8125, 
+                "y": -9.375
+              }, 
+              "x mirror": false, 
+              "x scale": 1.017578125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2392578125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 43, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.12890625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": 4.1875, 
+                "y": -4.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 1.484648026905349, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1103786173320005, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff13", 
+              "name": "", 
+              "position": {
+                "x": -6.625, 
+                "y": -9.25
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0146484375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 44, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1318359375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": 4.3125, 
+                "y": -4.3125
+              }, 
+              "x mirror": false, 
+              "x scale": 0.619140625, 
+              "x shear": -2.849604221635884, 
+              "y mirror": false, 
+              "y scale": 0.3701171875, 
+              "y shear": 1.274447949526814
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff13", 
+              "name": "", 
+              "position": {
+                "x": -6.4375, 
+                "y": -9.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0126953125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.228515625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 45, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1357421875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": 4.4375, 
+                "y": -4.4375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6171875, 
+              "x shear": -3.025139664804469, 
+              "y mirror": false, 
+              "y scale": 0.349609375, 
+              "y shear": 1.2768987341772151
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": -6.375, 
+                "y": -9.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0087890625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2216796875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 46, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.138671875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": 4.5, 
+                "y": -4.5
+              }, 
+              "x mirror": false, 
+              "x scale": 0.61328125, 
+              "x shear": -3.2195845697329375, 
+              "y mirror": false, 
+              "y scale": 0.3291015625, 
+              "y shear": 1.2882165605095541
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": -6.0625, 
+                "y": -8.875
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0068359375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2158203125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 47, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1416015625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": 4.625, 
+                "y": -4.625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6123046875, 
+              "x shear": -3.4258675078864353, 
+              "y mirror": false, 
+              "y scale": 0.3095703125, 
+              "y shear": 1.2902711323763956
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": -5.875, 
+                "y": -8.75
+              }, 
+              "x mirror": false, 
+              "x scale": 1.00390625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.20703125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 48, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.14453125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": 4.75, 
+                "y": -4.75
+              }, 
+              "x mirror": false, 
+              "x scale": 0.60546875, 
+              "x shear": -3.7260273972602738, 
+              "y mirror": false, 
+              "y scale": 0.28515625, 
+              "y shear": 1.3096774193548386
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": -5.6875, 
+                "y": -8.5625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.0, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.19921875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 49, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1474609375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": 4.875, 
+                "y": -4.875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6044921875, 
+              "x shear": -4.0036764705882355, 
+              "y mirror": false, 
+              "y scale": 0.265625, 
+              "y shear": 1.3117932148626819
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1b", 
+              "name": "", 
+              "position": {
+                "x": -5.5, 
+                "y": -8.5625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9970703125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1904296875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 50, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.150390625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": 5.0, 
+                "y": -5.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6005859375, 
+              "x shear": -4.338645418326693, 
+              "y mirror": false, 
+              "y scale": 0.2451171875, 
+              "y shear": 1.3235772357723576
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1b", 
+              "name": "", 
+              "position": {
+                "x": -5.3125, 
+                "y": -8.3125
+              }, 
+              "x mirror": false, 
+              "x scale": 0.994140625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1796875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 51, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1533203125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1e", 
+              "name": "", 
+              "position": {
+                "x": -5.125, 
+                "y": -8.25
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9892578125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.169921875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 52, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.15625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1e", 
+              "name": "", 
+              "position": {
+                "x": -4.875, 
+                "y": -8.125
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9853515625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.158203125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 53, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1591796875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": -4.75, 
+                "y": -8.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.982421875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1474609375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 54, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.162109375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": -4.5625, 
+                "y": -7.75
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9775390625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.134765625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 55, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1650390625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff23", 
+              "name": "", 
+              "position": {
+                "x": -4.3125, 
+                "y": -7.75
+              }, 
+              "x mirror": false, 
+              "x scale": 0.97265625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.12109375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 56, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.16796875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": -4.125, 
+                "y": -7.625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9677734375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1064453125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 57, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.171875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": -4.0625, 
+                "y": -7.5625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.958984375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0869140625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 58, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1748046875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1e", 
+              "name": "", 
+              "position": {
+                "x": -3.9375, 
+                "y": -7.5
+              }, 
+              "x mirror": false, 
+              "x scale": 0.951171875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.06640625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 59, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.177734375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1e", 
+              "name": "", 
+              "position": {
+                "x": -3.75, 
+                "y": -7.375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.943359375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.048828125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 60, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1806640625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1b", 
+              "name": "", 
+              "position": {
+                "x": -3.75, 
+                "y": -7.3125
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9345703125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0263671875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 61, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.18359375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1b", 
+              "name": "", 
+              "position": {
+                "x": -3.5, 
+                "y": -7.25
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9248046875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0048828125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 62, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1865234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": -3.3125, 
+                "y": -7.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.91796875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.982421875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 63, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.189453125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": -3.25, 
+                "y": -7.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.9072265625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.95703125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 64, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1923828125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": -3.125, 
+                "y": -6.9375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.896484375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9326171875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 65, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1953125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": -2.9375, 
+                "y": -6.75
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8857421875, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.90625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 66, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.1982421875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": -2.8125, 
+                "y": -6.8125
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8759765625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.8828125, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 67, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.201171875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff13", 
+              "name": "", 
+              "position": {
+                "x": -2.75, 
+                "y": -6.625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8642578125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.853515625, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 68, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.205078125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff13", 
+              "name": "", 
+              "position": {
+                "x": -2.5625, 
+                "y": -6.6875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.853515625, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.82421875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 69, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2080078125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": -2.4375, 
+                "y": -6.5625
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8427734375, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.7998046875, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 70, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2109375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": -2.25, 
+                "y": -6.4375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.830078125, 
+              "x shear": -1.105463786531131, 
+              "y mirror": false, 
+              "y scale": 0.7685546875, 
+              "y shear": 0.6905882352941176
+            }
+          ], 
+          "id": 0, 
+          "time": 71, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2138671875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0e", 
+              "name": "", 
+              "position": {
+                "x": -2.125, 
+                "y": -6.375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8173828125, 
+              "x shear": -1.177014531043593, 
+              "y mirror": false, 
+              "y scale": 0.7392578125, 
+              "y shear": 0.7216248506571087
+            }
+          ], 
+          "id": 0, 
+          "time": 72, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.216796875, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0e", 
+              "name": "", 
+              "position": {
+                "x": -2.0625, 
+                "y": -6.375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8056640625, 
+              "x shear": -1.2530949105914717, 
+              "y mirror": false, 
+              "y scale": 0.7099609375, 
+              "y shear": 0.7503030303030302
+            }
+          ], 
+          "id": 0, 
+          "time": 73, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2197265625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": -1.8125, 
+                "y": -6.25
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7919921875, 
+              "x shear": -1.3463203463203464, 
+              "y mirror": false, 
+              "y scale": 0.6767578125, 
+              "y shear": 0.7842170160295932
+            }
+          ], 
+          "id": 0, 
+          "time": 74, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.22265625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": -1.75, 
+                "y": -6.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.7802734375, 
+              "x shear": -1.4365558912386707, 
+              "y mirror": false, 
+              "y scale": 0.646484375, 
+              "y shear": 0.8135168961201502
+            }
+          ], 
+          "id": 0, 
+          "time": 75, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2255859375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": -1.5625, 
+                "y": -6.0625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3396358940448265, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9197912427153139, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 76, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.228515625, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": -1.4375, 
+                "y": -5.9375
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3589708450928961, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9391261937633835, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 77, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3f", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.2314453125, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": -1.3125, 
+                "y": -5.8125
+              }, 
+              "x mirror": false, 
+              "x scale": 1.3824489999369807, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9612232806754631, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 78, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff42", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": -1.25, 
+                "y": -5.75
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4045460868490602, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9819392996555377, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 79, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3c", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": -1.0625, 
+                "y": -5.625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.419737834101115, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 0.9998931827716024, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 80, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff3a", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": -1.0, 
+                "y": -5.625
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4376917172171797, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.016465997955662, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 81, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff37", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": -0.6875, 
+                "y": -5.5
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4528834644692346, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0371820169357369, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 82, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff35", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0.7853981633974483, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": -0.625, 
+                "y": -5.5
+              }, 
+              "x mirror": false, 
+              "x scale": 1.4653130758572792, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.0537548321197965, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 83, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff32", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": -0.5, 
+                "y": -5.375
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6494140625, 
+              "x shear": -3.0254237288135593, 
+              "y mirror": false, 
+              "y scale": 0.345703125, 
+              "y shear": 1.168421052631579
+            }
+          ], 
+          "id": 0, 
+          "time": 84, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff2d", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": -0.3125, 
+                "y": -5.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6328125, 
+              "x shear": -3.36875, 
+              "y mirror": false, 
+              "y scale": 0.3125, 
+              "y shear": 1.2191358024691359
+            }
+          ], 
+          "id": 0, 
+          "time": 85, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff2b", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": -0.1875, 
+                "y": -5.1875
+              }, 
+              "x mirror": false, 
+              "x scale": 0.615234375, 
+              "x shear": -3.847517730496454, 
+              "y mirror": false, 
+              "y scale": 0.275390625, 
+              "y shear": 1.2746031746031745
+            }
+          ], 
+          "id": 0, 
+          "time": 86, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff28", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }, 
+            {
+              "add color": "0x0", 
+              "angle": 0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": -5.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.6005859375, 
+              "x shear": -4.338645418326693, 
+              "y mirror": false, 
+              "y scale": 0.2451171875, 
+              "y shear": 1.3235772357723576
+            }
+          ], 
+          "id": 0, 
+          "time": 87, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff25", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 88, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff23", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 89, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff20", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 90, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff1b", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 91, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff19", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 92, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff16", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 93, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff13", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 94, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff11", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 95, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff0c", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 96, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff09", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 97, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff07", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 98, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff04", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 99, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff02", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 100, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "add color": "0x0", 
+              "angle": 0.0, 
+              "filepath": "2031_complex.json", 
+              "multi color": "0xffffff00", 
+              "name": "", 
+              "position": {
+                "x": 0.0, 
+                "y": 0.0
+              }, 
+              "x mirror": false, 
+              "x scale": 0.8564453125, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1.234375, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 101, 
+          "tween": false
+        }
+      ]
+    }
+  ], 
+  "name": "d6"
+}

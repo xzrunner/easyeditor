@@ -11,12 +11,14 @@
 #include "frame/Context.h"
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
+#include "view/StageCanvas.h"
 #include "view/TimeLinePanel.h"
 #include "view/ToolbarPanel.h"
 #include "view/PreviewDialog.h"
 
 #include <easycomplex.h>
 #include <easymesh.h>
+#include <easyscale9.h>
 
 namespace eanim
 {
@@ -30,6 +32,7 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(wxID_EXIT, Frame::onQuit)
 	EVT_MENU(ID_PREVIEW, Frame::onPreview)
 	EVT_MENU(ID_SETTINGS, Frame::onSettings)
+	EVT_MENU(ID_BACKGROUND, Frame::onSetBackground)
 //	EVT_MENU(wxID_HELP, Frame::onAbout)
 
 	EVT_MENU(ID_CODESETTING, Frame::onCodeSetting)
@@ -165,6 +168,20 @@ void Frame::onSettings(wxCommandEvent& event)
 	dlg.ShowModal();
 }
 
+void Frame::onSetBackground(wxCommandEvent& event)
+{
+	wxString formatFilter = wxT("*.png;*.jpg");
+	wxFileDialog dlg(this, wxT("Choose Background Image"), wxEmptyString, 
+		wxEmptyString, formatFilter, wxFD_OPEN);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		wxString filename = dlg.GetPath();
+		d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filename);
+		d2d::GLCanvas* canvas = static_cast<StagePanel*>(Context::Instance()->stage)->getCanvas();
+		static_cast<StageCanvas*>(canvas)->setBackground(img);
+	}
+}
+
 void Frame::initMenuBar()
 {
 	wxMenuBar* menuBar = new wxMenuBar;
@@ -203,6 +220,7 @@ wxMenu* Frame::initSettingsBar()
 {
 	wxMenu* settingsMenu = new wxMenu;
 	settingsMenu->Append(ID_SETTINGS, wxT("Settings"), wxT("Settings"));
+	settingsMenu->Append(ID_BACKGROUND, wxT("Background", wxT("Background")));
 	return settingsMenu;
 }
 
@@ -248,9 +266,9 @@ wxWindow* Frame::createLeftFrame(wxWindow* parent)
 	// library
 	d2d::LibraryPanel* library = new d2d::LibraryPanel(split);
 	library->addPage(context->imagePage = new d2d::LibraryImagePage(library->getNotebook()));
-	library->addPage(new complex::LibraryPage(library->getNotebook()));
+	library->addPage(new ecomplex::LibraryPage(library->getNotebook()));
 	library->addPage(new emesh::LibraryPage(library->getNotebook()));
-	library->addPage(new d2d::LibraryScale9Page(library->getNotebook()));
+	library->addPage(new escale9::LibraryPage(library->getNotebook()));
 	context->library = library;
 
 	// property

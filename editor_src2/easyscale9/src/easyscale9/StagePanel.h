@@ -4,6 +4,8 @@
 
 namespace escale9
 {
+	class Symbol;
+
 	class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 	{
 	public:
@@ -27,7 +29,7 @@ namespace escale9
 
 		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
-		d2d::Scale9Symbol* getPatchSymbol() { return m_patch; }
+		Symbol* getPatchSymbol() { return m_patch; }
 
 		d2d::ISprite* getSprite(int row, int col) {
 			if (row < 0 || row >= 3 || col < 0 || col >= 3)
@@ -53,7 +55,7 @@ namespace escale9
 		// [0][0] [0][1] [0][2]
 		d2d::ISprite* m_sprites[3][3];
 
-		d2d::Scale9Symbol* m_patch;
+		Symbol* m_patch;
 
 	}; // StagePanel
 }

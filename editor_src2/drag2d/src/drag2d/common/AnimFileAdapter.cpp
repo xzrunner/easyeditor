@@ -86,6 +86,9 @@ AnimFileAdapter::Entry* AnimFileAdapter::loadEntry(const Json::Value& entryValue
 	entry->xScale = entryValue["x scale"].asDouble();
 	entry->yScale = entryValue["y scale"].asDouble();
 
+	entry->xOffset = entryValue["x offset"].asDouble();
+	entry->yOffset = entryValue["y offset"].asDouble();
+
 	if (!entryValue["x shear"].isNull())
 	{
 		entry->xShear = entryValue["x shear"].asDouble();

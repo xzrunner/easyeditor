@@ -3,7 +3,7 @@
 
 #include <queue>
 
-namespace complex
+namespace ecomplex
 {
 
 const float Symbol::SCALE = 0.15f;

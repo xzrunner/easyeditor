@@ -54,6 +54,12 @@ void Frame::initWithFile(const wxString& path)
 	}
 }
 
+void Frame::onSettings(wxCommandEvent& event)
+{
+	SettingsDialog dlg(this);
+	dlg.ShowModal();
+}
+
 void Frame::onNew(wxCommandEvent& event)
 {
 	if (!m_task) return;
@@ -135,12 +141,6 @@ void Frame::onEJPreview(wxCommandEvent& event)
 	WinExec(cmd.c_str(), /*SW_SHOWMAXIMIZED*/SW_NORMAL);
 }
 
-void Frame::onSettings(wxCommandEvent& event)
-{
-	SettingsDialog dlg(this);
-	dlg.ShowModal();
-}
-
 void Frame::onQuit(wxCommandEvent& event)
 {
 	Close(true);
@@ -167,7 +167,7 @@ void Frame::initMenuBar()
 	wxMenuBar* menuBar = new wxMenuBar;
 	menuBar->Append(initFileBar(), "&File");
 	menuBar->Append(initViewBar(), "&View");
-	menuBar->Append(initSettingsBar(), "&Settings");
+	menuBar->Append(m_setting_menu = initSettingsBar(), "&Settings");
 	SetMenuBar(menuBar);
 }
 

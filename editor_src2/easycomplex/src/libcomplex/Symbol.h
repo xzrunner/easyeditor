@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-namespace complex
+namespace ecomplex
 {
 
 class Symbol : public d2d::ISymbol

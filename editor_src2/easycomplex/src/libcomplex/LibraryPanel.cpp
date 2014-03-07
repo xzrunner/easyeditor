@@ -5,8 +5,9 @@
 
 #include <easyanim.h>
 #include <easymesh.h>
+#include <easyscale9.h>
 
-namespace complex
+namespace ecomplex
 {
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
@@ -18,8 +19,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(m_complexPage);
 	m_animPage = new anim::LibraryPage(getNotebook());
 	addPage(m_animPage);
-	m_scale9Page = new d2d::LibraryScale9Page(getNotebook());
-	addPage(m_scale9Page);
+	addPage(new escale9::LibraryPage(getNotebook()));
 	m_fontPage = new d2d::LibraryFontBlankPage(getNotebook());
 	addPage(m_fontPage);
 	m_meshPage = new emesh::LibraryPage(getNotebook());

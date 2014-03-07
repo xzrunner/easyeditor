@@ -24,6 +24,7 @@ namespace d2d
 			float angle;
 			float xScale, yScale;
 			float xShear, yShear;
+			float xOffset, yOffset;
 			bool xMirror, yMirror;
 		};
 

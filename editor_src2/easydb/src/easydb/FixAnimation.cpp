@@ -28,13 +28,15 @@ void FixAnimation::AddNameFromFile(const std::string& dir) const
 			reader.parse(fin, value);
 			fin.close();
 
-			std::string name = value["name"].asString();
-			if (name.empty())
+			std::string oldname = value["name"].asString();
+
+			size_t begin = filepath.find_last_of('\\') + 1;
+			size_t end = filepath.find_last_of('_');
+			std::string newname = filepath.substr(begin, end - begin);
+
+			if (oldname.empty() || oldname != newname)
 			{
-				size_t begin = filepath.find_last_of('\\') + 1;
-				size_t end = filepath.find_last_of('_');
-				name = filepath.substr(begin, end - begin);
-				value["name"] = name;
+				value["name"] = newname;
 
 				Json::StyledStreamWriter writer;
 				std::ofstream fout(filepath.fn_str());

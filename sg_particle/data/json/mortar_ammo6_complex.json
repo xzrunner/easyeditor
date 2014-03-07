@@ -1,0 +1,35 @@
+{
+  "name": "mortar_ammo6", 
+  "sprite": [
+    {
+      "angle": 0.0, 
+      "filepath": "1793_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 2.3994140625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 2.3994140625, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "1794_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 1.791015625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.791015625, 
+      "y shear": 0
+    }
+  ]
+}

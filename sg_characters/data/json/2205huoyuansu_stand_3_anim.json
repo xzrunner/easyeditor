@@ -39,7 +39,7 @@
 							"add color" : "0x00000000",
 							"angle" : 0.0,
 							"clip" : false,
-							"filepath" : "2205huoyuansu\\attack\\3\\1_001.png",
+							"filepath" : "2205huoyuansu\\stand\\3\\1_001.png",
 							"multi color" : "0xffffffff",
 							"name" : "_sprite0",
 							"position" : 
@@ -61,6 +61,118 @@
 					"id" : 0,
 					"skeleton" : null,
 					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2205huoyuansu\\stand\\3\\1_002.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite11",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 5.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 7.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite1",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -20.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.3000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.3000000119209290,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2205huoyuansu\\stand\\3\\1_002.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite11",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 5.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 7.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "shadow.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite1",
+							"position" : 
+							{
+								"x" : -3.0,
+								"y" : -20.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 1.0,
+							"x scale" : 0.3000000119209290,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.50,
+							"y scale" : 0.3000000119209290,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 4,
 					"tween" : false
 				}
 			],

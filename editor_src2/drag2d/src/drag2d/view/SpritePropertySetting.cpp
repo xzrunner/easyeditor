@@ -50,14 +50,10 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	// pos
 	else if (name == wxT("Pos"))
 	{
-		double x, y;
-		splitString(value, &x, &y);
-		translate(x, y);
+ 		double x, y;
+ 		splitString(value, &x, &y);
+ 		translate(x, y);
 	}
-	else if (name == wxT("Pos.X"))
-		translate(wxANY_AS(value, float), m_sprite->getPosition().y);
-	else if (name == wxT("Pos.Y"))
-		translate(m_sprite->getPosition().x, wxANY_AS(value, float));
 	// angle
 	else if (name == wxT("Angle"))
 		rotate(wxANY_AS(value, float) * TRANS_DEG_TO_RAD);
@@ -68,26 +64,12 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		splitString(value, &x, &y);
 		scale(x, y);
 	}
-	else if (name == wxT("Scale.X"))
-		scale(wxANY_AS(value, float), m_sprite->getScale().y);
-	else if (name == wxT("Scale.Y"))
-		scale(m_sprite->getScale().x, wxANY_AS(value, float));
 	// size
 	else if (name == wxT("Size"))
 	{
 		double w, h;
 		splitString(value, &w, &h);
 		scale(w/m_sprite->getSymbol().getSize().xLength(), h/m_sprite->getSymbol().getSize().yLength());
-	}
-	else if (name == wxT("Size.Width"))
-	{
-		const float width = wxANY_AS(value, float);
-		scale(width/m_sprite->getSymbol().getSize().xLength(), m_sprite->getScale().y);
-	}
-	else if (name == wxT("Size.Height"))
-	{
-		const float height = wxANY_AS(value, float);
-		scale(m_sprite->getScale().x, height/m_sprite->getSymbol().getSize().yLength());
 	}
 	// shear
 	else if (name == wxT("Shear"))
@@ -96,10 +78,6 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		splitString(value, &x, &y);
 		shear(x, y);
 	}
-	else if (name == wxT("Shear.X"))
-		shear(wxANY_AS(value, float), m_sprite->getShear().y);
-	else if (name == wxT("Shear.Y"))
-		shear(m_sprite->getShear().x, wxANY_AS(value, float));
 	// offset
 	else if (name == wxT("Offset"))
 	{
@@ -107,10 +85,6 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		splitString(value, &x, &y);
 		offset(x, y);
 	}
-	else if (name == wxT("Offset.X"))
-		offset(wxANY_AS(value, float), m_sprite->getOffset().y);
-	else if (name == wxT("Offset.Y"))
-		offset(m_sprite->getOffset().x, wxANY_AS(value, float));
 	// mirror
 	else if (name == wxT("Mirror"))
 	{
@@ -351,16 +325,6 @@ void SpritePropertySetting::mirror(bool mx, bool my)
 	m_editPanel->addHistoryOP(new arrange_sprite::MirrorSpritesAOP(sprites, mx, my));
 
 	m_sprite->setMirror(mx, my);
-}
-
-void SpritePropertySetting::splitString(const wxAny& value, double* x, double* y)
-{
-	wxString val = wxANY_AS(value, wxString);
-	size_t gap = val.find_first_of(';');
-	wxString sx = val.substr(0, gap),
-		sy = val.substr(gap + 1);
-	sx.ToDouble(x);
-	sy.ToDouble(y);
 }
 
 } // d2d

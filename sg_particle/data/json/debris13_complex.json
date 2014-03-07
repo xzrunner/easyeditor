@@ -1,0 +1,20 @@
+{
+  "name": "debris13", 
+  "sprite": [
+    {
+      "angle": 0, 
+      "filepath": "2044_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0, 
+        "y": 0
+      }, 
+      "x mirror": false, 
+      "x scale": 1, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1, 
+      "y shear": 0
+    }
+  ]
+}

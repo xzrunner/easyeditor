@@ -4,6 +4,7 @@
 
 #include <easyanim.h>
 #include <easycomplex.h>
+#include <easyscale9.h>
 
 namespace eparticle3d
 {
@@ -13,11 +14,11 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	m_imagePage = new d2d::LibraryImagePage(getNotebook());
 	addPage(m_imagePage);
-	m_complexPage = new complex::LibraryPage(getNotebook());
+	m_complexPage = new ecomplex::LibraryPage(getNotebook());
 	addPage(m_complexPage);
 	m_animPage = new anim::LibraryPage(getNotebook());
 	addPage(m_animPage);
-	m_scale9Page = new d2d::LibraryScale9Page(getNotebook());
+	m_scale9Page = new escale9::LibraryPage(getNotebook());
 	addPage(m_scale9Page);
 }
 
@@ -37,6 +38,11 @@ d2d::ILibraryPage* LibraryPanel::getComplexPage()
 d2d::ILibraryPage* LibraryPanel::getAnimPage() 
 { 
 	return m_animPage; 
+}
+
+d2d::ILibraryPage* LibraryPanel::getScale9Page()
+{
+	return m_scale9Page;
 }
 
 }

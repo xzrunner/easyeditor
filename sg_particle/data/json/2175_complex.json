@@ -1,0 +1,65 @@
+{
+  "name": "", 
+  "sprite": [
+    {
+      "angle": 0.0, 
+      "filepath": "2173_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 77.3125
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.75, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "2173_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": -77.3125
+      }, 
+      "x mirror": false, 
+      "x scale": -1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -0.75, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 1.5707963267948966, 
+      "filepath": "2173_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 104.375, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.75, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 1.5707963267948966, 
+      "filepath": "2173_anim.json", 
+      "name": "", 
+      "position": {
+        "x": -104.375, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": -1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": -0.75, 
+      "y shear": 0
+    }
+  ]
+}
