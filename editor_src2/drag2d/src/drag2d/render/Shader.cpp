@@ -58,8 +58,10 @@ void Shader::sprite()
 {
 	if (m_prog_curr != m_prog_sprite) {
 		glEnable(GL_BLEND);
-		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-//		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		// todo 源混合因子ejoy2d用的GL_ONE
+//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glUseProgram(m_prog_sprite);
 		m_prog_curr = m_prog_sprite;
@@ -171,8 +173,8 @@ void Shader::load()
 		;
 
 	glEnable(GL_BLEND);
+	// todo 源混合因子ejoy2d用的GL_ONE
 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	m_prog_sprite = init(sprite_fs, sprite_vs);
