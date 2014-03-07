@@ -1,14 +1,6 @@
 {"frames": [
 
 {
-	"filename": "2001dashi1/build1/1/1_004.png",
-	"frame": {"x":1966,"y":1084,"w":74,"h":80},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":221,"y":181,"w":74,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2001dashi1/build1/2/1_003.png",
 	"frame": {"x":1409,"y":465,"w":94,"h":76},
 	"rotated": true,
@@ -26,7 +18,7 @@
 },
 {
 	"filename": "2001dashi1/build1/3/1_003.png",
-	"frame": {"x":1607,"y":1374,"w":70,"h":92},
+	"frame": {"x":1771,"y":1135,"w":70,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":199,"y":160,"w":70,"h":92},
@@ -34,7 +26,7 @@
 },
 {
 	"filename": "2001dashi1/build1/3/1_006.png",
-	"frame": {"x":1747,"y":1733,"w":56,"h":92},
+	"frame": {"x":1686,"y":1733,"w":56,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":207,"y":204,"w":56,"h":92},
@@ -49,14 +41,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2001dashi1/build2/2/1_001.png",
-	"frame": {"x":1966,"y":527,"w":80,"h":80},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":194,"y":168,"w":80,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2001dashi1/build2/3/1_001.png",
 	"frame": {"x":1373,"y":1494,"w":66,"h":94},
 	"rotated": false,
@@ -66,18 +50,18 @@
 },
 {
 	"filename": "2001dashi1/build2/3/1_002.png",
-	"frame": {"x":1730,"y":1585,"w":62,"h":92},
+	"frame": {"x":1850,"y":1228,"w":62,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":195,"w":62,"h":92},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2002jumin1/run/2/1_002.png",
-	"frame": {"x":1933,"y":1232,"w":32,"h":84},
+	"filename": "2002jumin1/cheer/1/1_002.png",
+	"frame": {"x":1822,"y":670,"w":86,"h":64},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":221,"y":187,"w":32,"h":84},
+	"spriteSourceSize": {"x":195,"y":193,"w":86,"h":64},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -122,18 +106,10 @@
 },
 {
 	"filename": "2002jumin1/stand/2/1_003.png",
-	"frame": {"x":1885,"y":2008,"w":38,"h":80},
+	"frame": {"x":1549,"y":365,"w":38,"h":80},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":213,"y":184,"w":38,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2003daoke1/attack1/1/1_002.png",
-	"frame": {"x":1701,"y":151,"w":36,"h":72},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":225,"y":184,"w":36,"h":72},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -210,7 +186,7 @@
 },
 {
 	"filename": "2003daoke1/attack1/3/3_001.png",
-	"frame": {"x":1646,"y":1467,"w":24,"h":38},
+	"frame": {"x":1646,"y":1374,"w":24,"h":38},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
@@ -258,7 +234,7 @@
 },
 {
 	"filename": "2003daoke1/attack2/3/3_001.png",
-	"frame": {"x":1685,"y":1467,"w":24,"h":38},
+	"frame": {"x":1685,"y":1374,"w":24,"h":38},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
@@ -289,6 +265,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2003daoke1/run/1/3_005.png",
+	"frame": {"x":1845,"y":1835,"w":52,"h":30},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":247,"y":215,"w":52,"h":30},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2003daoke1/run/3/3_007.png",
 	"frame": {"x":358,"y":1720,"w":12,"h":56},
 	"rotated": true,
@@ -297,17 +281,9 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2003daoke3/attack1/1/1_002.png",
-	"frame": {"x":1701,"y":676,"w":36,"h":72},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":225,"y":184,"w":36,"h":72},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2003daoke3/attack1/1/1_003.png",
-	"frame": {"x":1810,"y":2010,"w":36,"h":74},
-	"rotated": true,
+	"frame": {"x":1701,"y":1,"w":36,"h":74},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":226,"y":186,"w":36,"h":74},
 	"sourceSize": {"w":486,"h":486}
@@ -362,7 +338,7 @@
 },
 {
 	"filename": "2003daoke3/attack1/3/3_001.png",
-	"frame": {"x":1724,"y":1467,"w":24,"h":38},
+	"frame": {"x":1724,"y":1374,"w":24,"h":38},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
@@ -402,7 +378,7 @@
 },
 {
 	"filename": "2003daoke3/attack2/3/3_001.png",
-	"frame": {"x":1763,"y":1467,"w":24,"h":38},
+	"frame": {"x":1763,"y":1374,"w":24,"h":38},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
@@ -433,24 +409,24 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2003daoke3/run/1/1_001.png",
+	"frame": {"x":1925,"y":1490,"w":40,"h":80},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":171,"w":40,"h":80},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2003daoke3/stand/3/3_001.png",
-	"frame": {"x":1802,"y":1467,"w":24,"h":38},
+	"frame": {"x":1802,"y":1374,"w":24,"h":38},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2003daoke5/attack1/1/1_002.png",
-	"frame": {"x":1929,"y":1159,"w":36,"h":72},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":225,"y":184,"w":36,"h":72},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2003daoke5/attack1/1/1_003.png",
-	"frame": {"x":1701,"y":1,"w":36,"h":74},
+	"frame": {"x":1701,"y":76,"w":36,"h":74},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":226,"y":186,"w":36,"h":74},
@@ -514,7 +490,7 @@
 },
 {
 	"filename": "2003daoke5/attack1/3/3_001.png",
-	"frame": {"x":1841,"y":1467,"w":24,"h":38},
+	"frame": {"x":1841,"y":1374,"w":24,"h":38},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
@@ -562,8 +538,8 @@
 },
 {
 	"filename": "2003daoke5/attack2/3/3_001.png",
-	"frame": {"x":1526,"y":1,"w":24,"h":38},
-	"rotated": false,
+	"frame": {"x":1880,"y":1374,"w":24,"h":38},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
 	"sourceSize": {"w":486,"h":486}
@@ -601,8 +577,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2003daoke5/run/1/3_005.png",
+	"frame": {"x":1845,"y":1888,"w":52,"h":30},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":247,"y":215,"w":52,"h":30},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2003daoke6/attack1/1/1_002.png",
-	"frame": {"x":1850,"y":1585,"w":36,"h":72},
+	"frame": {"x":1701,"y":226,"w":36,"h":72},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":184,"w":36,"h":72},
@@ -610,7 +594,7 @@
 },
 {
 	"filename": "2003daoke6/attack1/1/1_003.png",
-	"frame": {"x":1701,"y":76,"w":36,"h":74},
+	"frame": {"x":1701,"y":151,"w":36,"h":74},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":226,"y":186,"w":36,"h":74},
@@ -622,6 +606,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":235,"y":228,"w":66,"h":28},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2003daoke6/attack1/1/3_003.png",
+	"frame": {"x":2013,"y":864,"w":60,"h":34},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":246,"w":60,"h":34},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -674,8 +666,8 @@
 },
 {
 	"filename": "2003daoke6/attack1/3/3_001.png",
-	"frame": {"x":1526,"y":40,"w":24,"h":38},
-	"rotated": false,
+	"frame": {"x":1919,"y":1374,"w":24,"h":38},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
 	"sourceSize": {"w":486,"h":486}
@@ -738,7 +730,7 @@
 },
 {
 	"filename": "2003daoke6/attack2/3/3_001.png",
-	"frame": {"x":1526,"y":79,"w":24,"h":38},
+	"frame": {"x":1526,"y":1,"w":24,"h":38},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
@@ -761,6 +753,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2003daoke6/attack2/3/4_006.png",
+	"frame": {"x":1157,"y":1331,"w":26,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":199,"w":26,"h":14},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2003daoke6/attack2/3/4_007.png",
 	"frame": {"x":624,"y":571,"w":24,"h":12},
 	"rotated": false,
@@ -770,50 +770,18 @@
 },
 {
 	"filename": "2003daoke6/attack2/3/4_008.png",
-	"frame": {"x":1157,"y":1331,"w":26,"h":14},
+	"frame": {"x":1913,"y":1305,"w":26,"h":14},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":202,"w":26,"h":14},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2003daoke6/attack2/3/6_003.png",
-	"frame": {"x":1949,"y":1540,"w":12,"h":22},
+	"filename": "2003daoke6/cheer/1/3_001.png",
+	"frame": {"x":1701,"y":676,"w":54,"h":58},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":214,"y":203,"w":12,"h":22},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2003daoke6/attack2/3/6_005.png",
-	"frame": {"x":1949,"y":1563,"w":12,"h":22},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":275,"y":193,"w":12,"h":22},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2003daoke6/run/2/6_004.png",
-	"frame": {"x":1949,"y":1586,"w":12,"h":22},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":270,"y":185,"w":12,"h":22},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2003daoke6/run/2/6_007.png",
-	"frame": {"x":1874,"y":1824,"w":12,"h":22},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":268,"y":186,"w":12,"h":22},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2003daoke6/run/2/6_008.png",
-	"frame": {"x":1874,"y":1847,"w":12,"h":22},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":270,"y":185,"w":12,"h":22},
+	"spriteSourceSize": {"x":215,"y":167,"w":54,"h":58},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -826,18 +794,66 @@
 },
 {
 	"filename": "2003daoke6/stand/3/3_001.png",
-	"frame": {"x":1526,"y":118,"w":24,"h":38},
+	"frame": {"x":1526,"y":40,"w":24,"h":38},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":224,"w":24,"h":38},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2004shenshe6/attack1/1/1_005.png",
-	"frame": {"x":1840,"y":1042,"w":46,"h":72},
+	"filename": "2004shenshe1/run/1/1_003.png",
+	"frame": {"x":1831,"y":891,"w":44,"h":50},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":223,"y":200,"w":44,"h":50},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2004shenshe1/run/3/1_006.png",
+	"frame": {"x":1876,"y":1660,"w":48,"h":74},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":206,"y":184,"w":46,"h":72},
+	"spriteSourceSize": {"x":221,"y":175,"w":48,"h":74},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2004shenshe3/run/3/1_006.png",
+	"frame": {"x":1876,"y":1735,"w":48,"h":74},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":176,"w":48,"h":74},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2004shenshe5/run/3/1_006.png",
+	"frame": {"x":1876,"y":1810,"w":48,"h":74},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":176,"w":48,"h":74},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2004shenshe6/attack1/3/1_003.png",
+	"frame": {"x":1925,"y":1571,"w":40,"h":80},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":164,"w":40,"h":80},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2004shenshe6/attack1/3/1_004.png",
+	"frame": {"x":1925,"y":1652,"w":40,"h":80},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":165,"w":40,"h":80},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2004shenshe6/run/3/1_005.png",
+	"frame": {"x":1876,"y":1885,"w":48,"h":74},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":169,"w":48,"h":74},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -865,19 +881,27 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2004shenshe6/stand/3/1_004.png",
+	"frame": {"x":1276,"y":1329,"w":44,"h":78},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":168,"w":44,"h":78},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2005mojin1/attack1/1/2_003.png",
+	"frame": {"x":1845,"y":1676,"w":30,"h":52},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":224,"y":201,"w":30,"h":52},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2005mojin1/attack1/1/3_002.png",
 	"frame": {"x":220,"y":348,"w":6,"h":12},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":252,"y":223,"w":6,"h":12},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2005mojin1/attack1/1/3_004.png",
-	"frame": {"x":1325,"y":1690,"w":6,"h":8},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":251,"y":220,"w":6,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -906,10 +930,18 @@
 },
 {
 	"filename": "2005mojin1/run/1/1_001.png",
-	"frame": {"x":1819,"y":541,"w":34,"h":66},
-	"rotated": true,
+	"frame": {"x":2013,"y":606,"w":34,"h":66},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":231,"y":187,"w":34,"h":66},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2005mojin1/run/1/1_005.png",
+	"frame": {"x":1905,"y":891,"w":34,"h":60},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":229,"y":187,"w":34,"h":60},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -985,14 +1017,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2005mojin3/attack1/1/3_004.png",
-	"frame": {"x":1421,"y":1923,"w":6,"h":8},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":251,"y":220,"w":6,"h":8},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2005mojin3/attack1/1/3_006.png",
 	"frame": {"x":215,"y":697,"w":6,"h":12},
 	"rotated": true,
@@ -1006,6 +1030,14 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":258,"y":229,"w":6,"h":12},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2005mojin3/run/1/1_008.png",
+	"frame": {"x":2013,"y":673,"w":34,"h":64},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":232,"y":186,"w":34,"h":64},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1042,10 +1074,18 @@
 },
 {
 	"filename": "2005mojin5/attack1/3/1_005.png",
-	"frame": {"x":1914,"y":1540,"w":34,"h":66},
+	"frame": {"x":1905,"y":735,"w":34,"h":66},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":186,"w":34,"h":66},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2005mojin5/run/1/1_002.png",
+	"frame": {"x":2013,"y":738,"w":34,"h":62},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":190,"w":34,"h":62},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1054,6 +1094,14 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":186,"w":30,"h":58},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2005mojin5/run/2/2_007.png",
+	"frame": {"x":1993,"y":1900,"w":84,"h":54},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":187,"y":208,"w":84,"h":54},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1094,6 +1142,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":240,"y":167,"w":16,"h":8},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2006jiabing1/attack1/2/2_003.png",
+	"frame": {"x":983,"y":900,"w":12,"h":8},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":209,"y":184,"w":12,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1162,7 +1218,7 @@
 },
 {
 	"filename": "2006jiabing1/attack2/1/1_006.png",
-	"frame": {"x":1840,"y":1159,"w":88,"h":68},
+	"frame": {"x":1940,"y":1305,"w":88,"h":68},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":214,"y":187,"w":88,"h":68},
@@ -1194,7 +1250,7 @@
 },
 {
 	"filename": "2006jiabing1/attack2/2/2_005.png",
-	"frame": {"x":983,"y":900,"w":12,"h":8},
+	"frame": {"x":996,"y":900,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":284,"y":216,"w":12,"h":8},
@@ -1234,7 +1290,7 @@
 },
 {
 	"filename": "2006jiabing1/run/1/1_004.png",
-	"frame": {"x":1966,"y":1,"w":80,"h":90},
+	"frame": {"x":1551,"y":1,"w":80,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":199,"y":159,"w":80,"h":90},
@@ -1242,7 +1298,7 @@
 },
 {
 	"filename": "2006jiabing1/run/1/2_002.png",
-	"frame": {"x":996,"y":900,"w":12,"h":8},
+	"frame": {"x":1009,"y":900,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":243,"y":171,"w":12,"h":8},
@@ -1250,7 +1306,7 @@
 },
 {
 	"filename": "2006jiabing1/run/1/2_003.png",
-	"frame": {"x":1009,"y":900,"w":12,"h":8},
+	"frame": {"x":1022,"y":900,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":242,"y":163,"w":12,"h":8},
@@ -1258,7 +1314,7 @@
 },
 {
 	"filename": "2006jiabing1/run/1/2_004.png",
-	"frame": {"x":1022,"y":900,"w":12,"h":8},
+	"frame": {"x":1035,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":242,"y":158,"w":12,"h":8},
@@ -1266,7 +1322,7 @@
 },
 {
 	"filename": "2006jiabing1/run/1/2_006.png",
-	"frame": {"x":1035,"y":899,"w":12,"h":8},
+	"frame": {"x":1048,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":247,"y":170,"w":12,"h":8},
@@ -1274,7 +1330,7 @@
 },
 {
 	"filename": "2006jiabing1/run/1/2_007.png",
-	"frame": {"x":1048,"y":899,"w":12,"h":8},
+	"frame": {"x":1061,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":250,"y":164,"w":12,"h":8},
@@ -1282,7 +1338,7 @@
 },
 {
 	"filename": "2006jiabing1/run/1/2_008.png",
-	"frame": {"x":1061,"y":899,"w":12,"h":8},
+	"frame": {"x":1074,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":250,"y":159,"w":12,"h":8},
@@ -1330,7 +1386,7 @@
 },
 {
 	"filename": "2006jiabing1/stand/1/2_001.png",
-	"frame": {"x":1074,"y":899,"w":12,"h":8},
+	"frame": {"x":1087,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":165,"w":12,"h":8},
@@ -1433,8 +1489,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2006jiabing3/attack1/3/2_007.png",
+	"frame": {"x":2035,"y":2036,"w":12,"h":10},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":260,"y":203,"w":12,"h":10},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2006jiabing3/attack2/1/2_009.png",
-	"frame": {"x":1087,"y":899,"w":12,"h":8},
+	"frame": {"x":1100,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":244,"y":168,"w":12,"h":8},
@@ -1506,7 +1570,7 @@
 },
 {
 	"filename": "2006jiabing3/run/1/2_003.png",
-	"frame": {"x":1100,"y":899,"w":12,"h":8},
+	"frame": {"x":1113,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":242,"y":163,"w":12,"h":8},
@@ -1514,7 +1578,7 @@
 },
 {
 	"filename": "2006jiabing3/run/1/2_004.png",
-	"frame": {"x":1113,"y":899,"w":12,"h":8},
+	"frame": {"x":1126,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":242,"y":158,"w":12,"h":8},
@@ -1522,7 +1586,7 @@
 },
 {
 	"filename": "2006jiabing3/run/1/2_006.png",
-	"frame": {"x":1126,"y":899,"w":12,"h":8},
+	"frame": {"x":1139,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":247,"y":170,"w":12,"h":8},
@@ -1570,7 +1634,7 @@
 },
 {
 	"filename": "2006jiabing3/stand/1/2_001.png",
-	"frame": {"x":1139,"y":899,"w":12,"h":8},
+	"frame": {"x":1152,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":165,"w":12,"h":8},
@@ -1618,7 +1682,7 @@
 },
 {
 	"filename": "2006jiabing5/attack1/2/2_003.png",
-	"frame": {"x":1152,"y":899,"w":12,"h":8},
+	"frame": {"x":1165,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":209,"y":184,"w":12,"h":8},
@@ -1630,6 +1694,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":174,"y":142,"w":98,"h":106},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2006jiabing5/attack1/3/2_002.png",
+	"frame": {"x":1970,"y":952,"w":8,"h":12},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":174,"w":8,"h":12},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1673,6 +1745,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2006jiabing5/attack2/3/1_008.png",
+	"frame": {"x":1958,"y":1,"w":88,"h":86},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":199,"y":187,"w":88,"h":86},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2006jiabing5/cheer/1/2_003.png",
 	"frame": {"x":384,"y":577,"w":8,"h":6},
 	"rotated": false,
@@ -1682,7 +1762,7 @@
 },
 {
 	"filename": "2006jiabing5/run/1/2_002.png",
-	"frame": {"x":1165,"y":899,"w":12,"h":8},
+	"frame": {"x":1178,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":243,"y":171,"w":12,"h":8},
@@ -1690,7 +1770,7 @@
 },
 {
 	"filename": "2006jiabing5/run/1/2_007.png",
-	"frame": {"x":1178,"y":899,"w":12,"h":8},
+	"frame": {"x":1191,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":250,"y":164,"w":12,"h":8},
@@ -1698,7 +1778,7 @@
 },
 {
 	"filename": "2006jiabing5/run/1/2_008.png",
-	"frame": {"x":1191,"y":899,"w":12,"h":8},
+	"frame": {"x":1204,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":250,"y":159,"w":12,"h":8},
@@ -1738,7 +1818,7 @@
 },
 {
 	"filename": "2006jiabing5/run/2/7_006.png",
-	"frame": {"x":1526,"y":157,"w":36,"h":24},
+	"frame": {"x":1526,"y":79,"w":36,"h":24},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":163,"w":36,"h":24},
@@ -1750,14 +1830,6 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":198,"y":168,"w":78,"h":98},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2006jiabing5/run/3/1_003.png",
-	"frame": {"x":1962,"y":1560,"w":84,"h":82},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":195,"y":176,"w":84,"h":82},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1881,6 +1953,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2006jiabing6/attack2/1/7_005.png",
+	"frame": {"x":1738,"y":274,"w":34,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":232,"y":177,"w":34,"h":24},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2006jiabing6/attack2/1/8_009.png",
 	"frame": {"x":1268,"y":1698,"w":34,"h":70},
 	"rotated": true,
@@ -1894,14 +1974,6 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":211,"y":197,"w":112,"h":68},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2006jiabing6/attack2/2/8_001.png",
-	"frame": {"x":1897,"y":930,"w":68,"h":70},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":209,"y":155,"w":68,"h":70},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1929,11 +2001,11 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2006jiabing6/cheer/1/2_003.png",
-	"frame": {"x":1949,"y":1609,"w":12,"h":20},
-	"rotated": false,
+	"filename": "2006jiabing6/attack2/3/8_004.png",
+	"frame": {"x":1756,"y":1678,"w":54,"h":88},
+	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":236,"y":153,"w":12,"h":20},
+	"spriteSourceSize": {"x":242,"y":177,"w":54,"h":88},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -1945,8 +2017,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2006jiabing6/cheer/1/6_002.png",
+	"frame": {"x":1972,"y":637,"w":40,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":176,"y":191,"w":40,"h":32},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2006jiabing6/cheer/1/8_004.png",
-	"frame": {"x":1788,"y":471,"w":30,"h":52},
+	"frame": {"x":1845,"y":1729,"w":30,"h":52},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":182,"w":30,"h":52},
@@ -1954,7 +2034,7 @@
 },
 {
 	"filename": "2006jiabing6/cheer/1/8_005.png",
-	"frame": {"x":1788,"y":524,"w":30,"h":52},
+	"frame": {"x":1845,"y":1782,"w":30,"h":52},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":234,"y":181,"w":30,"h":52},
@@ -1993,14 +2073,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2006jiabing6/run/1/2_005.png",
-	"frame": {"x":1506,"y":560,"w":20,"h":36},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":236,"y":151,"w":20,"h":36},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2006jiabing6/run/1/2_006.png",
 	"frame": {"x":1325,"y":562,"w":18,"h":36},
 	"rotated": true,
@@ -2009,24 +2081,24 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2006jiabing6/run/1/2_007.png",
-	"frame": {"x":1543,"y":560,"w":20,"h":36},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":242,"y":152,"w":20,"h":36},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2006jiabing6/run/1/8_006.png",
-	"frame": {"x":1850,"y":1658,"w":36,"h":72},
-	"rotated": false,
+	"frame": {"x":1709,"y":455,"w":36,"h":72},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":207,"y":165,"w":36,"h":72},
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2006jiabing6/run/2/1_002.png",
+	"frame": {"x":1806,"y":463,"w":74,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":207,"y":174,"w":74,"h":88},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2006jiabing6/run/2/1_004.png",
-	"frame": {"x":1639,"y":1492,"w":68,"h":92},
+	"frame": {"x":1775,"y":1042,"w":68,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":214,"y":167,"w":68,"h":92},
@@ -2050,7 +2122,7 @@
 },
 {
 	"filename": "2006jiabing6/run/2/2_006.png",
-	"frame": {"x":1580,"y":556,"w":34,"h":24},
+	"frame": {"x":1773,"y":274,"w":34,"h":24},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":170,"w":34,"h":24},
@@ -2062,14 +2134,6 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":215,"y":181,"w":12,"h":24},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2006jiabing6/run/3/1_002.png",
-	"frame": {"x":1887,"y":1,"w":78,"h":90},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":198,"y":174,"w":78,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2097,6 +2161,30 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2006jiabing6/stand/3/6_001.png",
+	"frame": {"x":1701,"y":735,"w":36,"h":32},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":275,"y":177,"w":36,"h":32},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/attack1/2/1_004.png",
+	"frame": {"x":2016,"y":1985,"w":30,"h":50},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":229,"y":198,"w":30,"h":50},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/attack1/3/3_002.png",
+	"frame": {"x":1966,"y":1759,"w":26,"h":40},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":178,"w":26,"h":40},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2007sishi1/run/1/2_006.png",
 	"frame": {"x":1340,"y":773,"w":46,"h":26},
 	"rotated": false,
@@ -2114,8 +2202,8 @@
 },
 {
 	"filename": "2007sishi1/run/1/2_008.png",
-	"frame": {"x":1887,"y":1492,"w":46,"h":26},
-	"rotated": true,
+	"frame": {"x":1806,"y":552,"w":46,"h":26},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":212,"y":202,"w":46,"h":26},
 	"sourceSize": {"w":486,"h":486}
@@ -2138,10 +2226,18 @@
 },
 {
 	"filename": "2007sishi1/run/1/3_008.png",
-	"frame": {"x":2026,"y":1917,"w":20,"h":36},
-	"rotated": false,
+	"frame": {"x":1506,"y":560,"w":20,"h":36},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":241,"y":189,"w":20,"h":36},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/run/2/2_002.png",
+	"frame": {"x":1882,"y":1,"w":22,"h":44},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":189,"w":22,"h":44},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2185,8 +2281,56 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2007sishi1/stand/1/3_005.png",
+	"frame": {"x":1526,"y":153,"w":24,"h":34},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":245,"y":193,"w":24,"h":34},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/stand/1/3_006.png",
+	"frame": {"x":1526,"y":188,"w":24,"h":34},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":246,"y":193,"w":24,"h":34},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/stand/3/2_003.png",
+	"frame": {"x":1966,"y":1491,"w":44,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":184,"w":44,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/stand/3/2_004.png",
+	"frame": {"x":1966,"y":1536,"w":44,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":184,"w":44,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/stand/3/2_005.png",
+	"frame": {"x":1966,"y":1581,"w":44,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":213,"y":184,"w":44,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi1/stand/3/2_006.png",
+	"frame": {"x":1966,"y":1626,"w":44,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":184,"w":44,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2007sishi3/attack1/1/1_004.png",
-	"frame": {"x":1698,"y":361,"w":30,"h":54},
+	"frame": {"x":1909,"y":670,"w":30,"h":54},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":227,"y":198,"w":30,"h":54},
@@ -2198,6 +2342,22 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":210,"y":187,"w":48,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi3/attack1/3/3_002.png",
+	"frame": {"x":1966,"y":1800,"w":26,"h":40},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":236,"y":178,"w":26,"h":40},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi3/run/1/2_004.png",
+	"frame": {"x":1794,"y":1909,"w":50,"h":30},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":202,"w":50,"h":30},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2249,6 +2409,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2007sishi3/run/2/2_003.png",
+	"frame": {"x":1882,"y":46,"w":22,"h":44},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":193,"w":22,"h":44},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2007sishi3/run/2/2_005.png",
 	"frame": {"x":405,"y":447,"w":20,"h":40},
 	"rotated": true,
@@ -2258,15 +2426,31 @@
 },
 {
 	"filename": "2007sishi3/run/2/2_006.png",
-	"frame": {"x":2026,"y":1954,"w":20,"h":36},
-	"rotated": false,
+	"frame": {"x":1543,"y":560,"w":20,"h":36},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":221,"y":189,"w":20,"h":36},
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2007sishi3/stand/1/3_002.png",
+	"frame": {"x":1526,"y":223,"w":24,"h":34},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":246,"y":193,"w":24,"h":34},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi3/stand/1/3_005.png",
+	"frame": {"x":1526,"y":258,"w":24,"h":34},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":245,"y":193,"w":24,"h":34},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2007sishi3/stand/1/3_006.png",
-	"frame": {"x":1526,"y":231,"w":24,"h":34},
+	"frame": {"x":1526,"y":293,"w":24,"h":34},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":246,"y":193,"w":24,"h":34},
@@ -2305,11 +2489,19 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2007sishi5/attack1/3/1_004.png",
-	"frame": {"x":1701,"y":224,"w":36,"h":48},
+	"filename": "2007sishi5/attack1/3/3_002.png",
+	"frame": {"x":1966,"y":1841,"w":26,"h":40},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":226,"y":198,"w":36,"h":48},
+	"spriteSourceSize": {"x":236,"y":178,"w":26,"h":40},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2007sishi5/run/1/2_005.png",
+	"frame": {"x":1810,"y":2018,"w":50,"h":28},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":198,"w":50,"h":28},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2361,6 +2553,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2007sishi5/run/2/2_004.png",
+	"frame": {"x":1882,"y":891,"w":22,"h":44},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":189,"w":22,"h":44},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2007sishi5/run/2/2_008.png",
 	"frame": {"x":1403,"y":195,"w":18,"h":36},
 	"rotated": true,
@@ -2369,8 +2569,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2007sishi5/run/2/3_008.png",
+	"frame": {"x":1966,"y":1923,"w":26,"h":38},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":248,"y":199,"w":26,"h":38},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2007sishi5/run/3/2_007.png",
-	"frame": {"x":1887,"y":1539,"w":46,"h":26},
+	"frame": {"x":1966,"y":1399,"w":46,"h":26},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":215,"y":188,"w":46,"h":26},
@@ -2378,7 +2586,7 @@
 },
 {
 	"filename": "2007sishi5/stand/1/3_002.png",
-	"frame": {"x":1526,"y":266,"w":24,"h":34},
+	"frame": {"x":1526,"y":328,"w":24,"h":34},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":246,"y":193,"w":24,"h":34},
@@ -2386,7 +2594,7 @@
 },
 {
 	"filename": "2007sishi5/stand/1/3_005.png",
-	"frame": {"x":1526,"y":301,"w":24,"h":34},
+	"frame": {"x":1915,"y":825,"w":24,"h":34},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":245,"y":193,"w":24,"h":34},
@@ -2394,8 +2602,8 @@
 },
 {
 	"filename": "2007sishi5/stand/1/3_006.png",
-	"frame": {"x":1940,"y":1317,"w":24,"h":34},
-	"rotated": false,
+	"frame": {"x":1958,"y":1374,"w":24,"h":34},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":246,"y":193,"w":24,"h":34},
 	"sourceSize": {"w":486,"h":486}
@@ -2417,11 +2625,27 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2008tianzai1/attack1/1/2_003.png",
+	"frame": {"x":1966,"y":1716,"w":42,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":214,"y":124,"w":42,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2008tianzai1/stand/2/3_001.png",
 	"frame": {"x":1043,"y":1733,"w":86,"h":98},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":194,"y":44,"w":86,"h":98},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2008tianzai1/stand/3/1_001.png",
+	"frame": {"x":1905,"y":1042,"w":44,"h":58},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":124,"w":44,"h":58},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2450,31 +2674,23 @@
 },
 {
 	"filename": "2008tianzai5/attack1/3/2_002.png",
-	"frame": {"x":1788,"y":416,"w":54,"h":30},
-	"rotated": true,
+	"frame": {"x":1958,"y":606,"w":54,"h":30},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":210,"y":110,"w":54,"h":30},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2008tianzai5/attack1/3/2_006.png",
-	"frame": {"x":1830,"y":766,"w":56,"h":32},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":213,"y":117,"w":56,"h":32},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2009daoshi1/attack1/1/1_006.png",
-	"frame": {"x":1551,"y":404,"w":60,"h":88},
+	"filename": "2009daoshi1/attack1/2/1_002.png",
+	"frame": {"x":1701,"y":299,"w":64,"h":88},
 	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":214,"y":158,"w":60,"h":88},
+	"spriteSourceSize": {"x":204,"y":172,"w":64,"h":88},
 	"sourceSize": {"w":486,"h":486}
 },
 {
 	"filename": "2009daoshi1/attack1/2/1_003.png",
-	"frame": {"x":1771,"y":1919,"w":90,"h":88},
+	"frame": {"x":1787,"y":1585,"w":90,"h":88},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":189,"y":171,"w":90,"h":88},
@@ -2498,7 +2714,7 @@
 },
 {
 	"filename": "2009daoshi1/attack1/2/1_006.png",
-	"frame": {"x":1678,"y":1374,"w":68,"h":92},
+	"frame": {"x":1590,"y":1585,"w":68,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":169,"w":68,"h":92},
@@ -2506,42 +2722,34 @@
 },
 {
 	"filename": "2009daoshi1/attack1/2/1_007.png",
-	"frame": {"x":1775,"y":1492,"w":60,"h":92},
+	"frame": {"x":1844,"y":1042,"w":60,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":167,"w":60,"h":92},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi1/attack1/3/1_004.png",
-	"frame": {"x":1697,"y":416,"w":90,"h":78},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":187,"y":184,"w":90,"h":78},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2009daoshi1/run/1/1_002.png",
-	"frame": {"x":1806,"y":1,"w":80,"h":90},
+	"frame": {"x":1551,"y":92,"w":80,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":217,"y":168,"w":80,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi1/run/1/1_003.png",
-	"frame": {"x":1887,"y":92,"w":78,"h":90},
+	"filename": "2009daoshi1/run/1/1_005.png",
+	"frame": {"x":1881,"y":91,"w":76,"h":90},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":217,"y":167,"w":78,"h":90},
+	"spriteSourceSize": {"x":218,"y":167,"w":76,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi1/run/1/1_004.png",
-	"frame": {"x":1887,"y":183,"w":78,"h":90},
+	"filename": "2009daoshi1/run/1/1_007.png",
+	"frame": {"x":1881,"y":182,"w":76,"h":90},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":216,"y":166,"w":78,"h":90},
+	"spriteSourceSize": {"x":218,"y":168,"w":76,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2610,47 +2818,47 @@
 },
 {
 	"filename": "2009daoshi1/run/3/1_001.png",
-	"frame": {"x":1773,"y":1042,"w":66,"h":92},
+	"frame": {"x":1659,"y":1585,"w":66,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":206,"y":190,"w":66,"h":92},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi1/run/3/1_007.png",
-	"frame": {"x":1966,"y":272,"w":80,"h":84},
-	"rotated": false,
+	"filename": "2009daoshi3/attack1/1/1_004.png",
+	"frame": {"x":1090,"y":412,"w":52,"h":86},
+	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":200,"y":190,"w":80,"h":84},
+	"spriteSourceSize": {"x":228,"y":160,"w":52,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
 	"filename": "2009daoshi3/attack1/1/1_005.png",
-	"frame": {"x":1090,"y":412,"w":52,"h":86},
+	"frame": {"x":1177,"y":412,"w":52,"h":86},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":221,"y":158,"w":52,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi3/attack1/1/1_006.png",
-	"frame": {"x":1640,"y":495,"w":60,"h":88},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":214,"y":158,"w":60,"h":88},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2009daoshi3/attack1/1/1_007.png",
-	"frame": {"x":1177,"y":412,"w":52,"h":86},
+	"frame": {"x":1505,"y":1321,"w":52,"h":86},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":160,"w":52,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2009daoshi3/attack1/2/1_002.png",
+	"frame": {"x":1757,"y":646,"w":64,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":172,"w":64,"h":88},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2009daoshi3/attack1/2/1_003.png",
-	"frame": {"x":1785,"y":1826,"w":90,"h":88},
+	"frame": {"x":1836,"y":1492,"w":90,"h":88},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":189,"y":171,"w":90,"h":88},
@@ -2658,8 +2866,8 @@
 },
 {
 	"filename": "2009daoshi3/attack1/2/1_004.png",
-	"frame": {"x":1557,"y":465,"w":82,"h":90},
-	"rotated": false,
+	"frame": {"x":1790,"y":299,"w":82,"h":90},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":203,"y":167,"w":82,"h":90},
 	"sourceSize": {"w":486,"h":486}
@@ -2674,7 +2882,7 @@
 },
 {
 	"filename": "2009daoshi3/attack1/2/1_006.png",
-	"frame": {"x":1710,"y":1228,"w":68,"h":92},
+	"frame": {"x":1639,"y":1492,"w":68,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":169,"w":68,"h":92},
@@ -2682,42 +2890,34 @@
 },
 {
 	"filename": "2009daoshi3/attack1/2/1_007.png",
-	"frame": {"x":1812,"y":1374,"w":60,"h":92},
+	"frame": {"x":1726,"y":1585,"w":60,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":167,"w":60,"h":92},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi3/attack1/3/1_004.png",
-	"frame": {"x":1887,"y":547,"w":90,"h":78},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":187,"y":184,"w":90,"h":78},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2009daoshi3/run/1/1_002.png",
-	"frame": {"x":1551,"y":1,"w":80,"h":90},
+	"frame": {"x":1551,"y":183,"w":80,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":217,"y":168,"w":80,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi3/run/1/1_003.png",
-	"frame": {"x":1887,"y":274,"w":78,"h":90},
+	"filename": "2009daoshi3/run/1/1_005.png",
+	"frame": {"x":1881,"y":273,"w":76,"h":90},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":217,"y":167,"w":78,"h":90},
+	"spriteSourceSize": {"x":218,"y":167,"w":76,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi3/run/1/1_004.png",
-	"frame": {"x":1887,"y":365,"w":78,"h":90},
+	"filename": "2009daoshi3/run/1/1_007.png",
+	"frame": {"x":1881,"y":364,"w":76,"h":90},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":216,"y":166,"w":78,"h":90},
+	"spriteSourceSize": {"x":218,"y":168,"w":76,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2786,23 +2986,15 @@
 },
 {
 	"filename": "2009daoshi3/run/3/1_001.png",
-	"frame": {"x":1663,"y":1585,"w":66,"h":92},
+	"frame": {"x":1708,"y":1492,"w":66,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":206,"y":190,"w":66,"h":92},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi3/run/3/1_007.png",
-	"frame": {"x":1966,"y":357,"w":80,"h":84},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":200,"y":190,"w":80,"h":84},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2009daoshi5/attack1/1/1_004.png",
-	"frame": {"x":1505,"y":1321,"w":52,"h":86},
+	"frame": {"x":1592,"y":1321,"w":52,"h":86},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":228,"y":160,"w":52,"h":86},
@@ -2810,7 +3002,7 @@
 },
 {
 	"filename": "2009daoshi5/attack1/1/1_005.png",
-	"frame": {"x":1592,"y":1321,"w":52,"h":86},
+	"frame": {"x":1679,"y":1321,"w":52,"h":86},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":221,"y":158,"w":52,"h":86},
@@ -2818,7 +3010,7 @@
 },
 {
 	"filename": "2009daoshi5/attack1/1/1_006.png",
-	"frame": {"x":1729,"y":586,"w":60,"h":88},
+	"frame": {"x":1551,"y":404,"w":60,"h":88},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":214,"y":158,"w":60,"h":88},
@@ -2826,15 +3018,23 @@
 },
 {
 	"filename": "2009daoshi5/attack1/1/1_007.png",
-	"frame": {"x":1679,"y":1321,"w":52,"h":86},
+	"frame": {"x":1766,"y":1321,"w":52,"h":86},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":160,"w":52,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2009daoshi5/attack1/2/1_002.png",
+	"frame": {"x":1739,"y":735,"w":64,"h":88},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":204,"y":172,"w":64,"h":88},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2009daoshi5/attack1/2/1_003.png",
-	"frame": {"x":1860,"y":1917,"w":90,"h":88},
+	"frame": {"x":1877,"y":1399,"w":90,"h":88},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":189,"y":171,"w":90,"h":88},
@@ -2842,7 +3042,7 @@
 },
 {
 	"filename": "2009daoshi5/attack1/2/1_004.png",
-	"frame": {"x":1804,"y":1733,"w":82,"h":90},
+	"frame": {"x":1557,"y":465,"w":82,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":203,"y":167,"w":82,"h":90},
@@ -2858,7 +3058,7 @@
 },
 {
 	"filename": "2009daoshi5/attack1/2/1_006.png",
-	"frame": {"x":1771,"y":1135,"w":68,"h":92},
+	"frame": {"x":1682,"y":1399,"w":68,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":169,"w":68,"h":92},
@@ -2866,66 +3066,50 @@
 },
 {
 	"filename": "2009daoshi5/attack1/2/1_007.png",
-	"frame": {"x":1686,"y":1733,"w":60,"h":92},
+	"frame": {"x":1775,"y":1492,"w":60,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":232,"y":167,"w":60,"h":92},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi5/attack1/3/1_002.png",
-	"frame": {"x":1819,"y":452,"w":66,"h":88},
-	"rotated": false,
+	"filename": "2009daoshi5/attack1/2/1_008.png",
+	"frame": {"x":1640,"y":493,"w":62,"h":90},
+	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":207,"y":168,"w":66,"h":88},
+	"spriteSourceSize": {"x":223,"y":170,"w":62,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi5/attack1/3/1_004.png",
-	"frame": {"x":1739,"y":676,"w":90,"h":78},
+	"filename": "2009daoshi5/attack1/3/1_003.png",
+	"frame": {"x":1925,"y":1985,"w":62,"h":90},
 	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":187,"y":184,"w":90,"h":78},
+	"spriteSourceSize": {"x":208,"y":169,"w":62,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
 	"filename": "2009daoshi5/run/1/1_002.png",
-	"frame": {"x":1551,"y":92,"w":80,"h":90},
+	"frame": {"x":1551,"y":274,"w":80,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":217,"y":168,"w":80,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi5/run/1/1_003.png",
-	"frame": {"x":1650,"y":556,"w":78,"h":90},
+	"filename": "2009daoshi5/run/1/1_005.png",
+	"frame": {"x":1881,"y":455,"w":76,"h":90},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":217,"y":167,"w":78,"h":90},
+	"spriteSourceSize": {"x":218,"y":167,"w":76,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2009daoshi5/run/1/1_004.png",
-	"frame": {"x":1887,"y":456,"w":78,"h":90},
+	"filename": "2009daoshi5/run/1/1_007.png",
+	"frame": {"x":1881,"y":546,"w":76,"h":90},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":216,"y":166,"w":78,"h":90},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2009daoshi5/run/1/1_006.png",
-	"frame": {"x":1887,"y":766,"w":78,"h":88},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":218,"y":170,"w":78,"h":88},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2009daoshi5/run/1/1_008.png",
-	"frame": {"x":1887,"y":1001,"w":78,"h":88},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":218,"y":167,"w":78,"h":88},
+	"spriteSourceSize": {"x":218,"y":168,"w":76,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -2994,7 +3178,7 @@
 },
 {
 	"filename": "2009daoshi5/run/3/1_001.png",
-	"frame": {"x":1708,"y":1492,"w":66,"h":92},
+	"frame": {"x":1751,"y":1399,"w":66,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":206,"y":190,"w":66,"h":92},
@@ -3002,26 +3186,10 @@
 },
 {
 	"filename": "2009daoshi5/run/3/1_002.png",
-	"frame": {"x":1806,"y":930,"w":70,"h":90},
-	"rotated": true,
+	"frame": {"x":1757,"y":800,"w":70,"h":90},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":206,"y":191,"w":70,"h":90},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2009daoshi5/run/3/1_007.png",
-	"frame": {"x":1966,"y":442,"w":80,"h":84},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":200,"y":190,"w":80,"h":84},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2010shennv1/attack1/1/1_009.png",
-	"frame": {"x":1966,"y":608,"w":80,"h":80},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":202,"y":107,"w":80,"h":80},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -3118,6 +3286,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":215,"y":86,"w":64,"h":98},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2010shennv1/attack1/3/1_007.png",
+	"frame": {"x":1993,"y":1374,"w":54,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":94,"w":54,"h":88},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -3441,14 +3617,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2010shennv2/attack1/1/1_009.png",
-	"frame": {"x":1966,"y":689,"w":80,"h":80},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":202,"y":107,"w":80,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2010shennv2/attack1/2/1_002.png",
 	"frame": {"x":1466,"y":1589,"w":64,"h":94},
 	"rotated": false,
@@ -3542,6 +3710,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":215,"y":86,"w":64,"h":98},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2010shennv2/attack1/3/1_007.png",
+	"frame": {"x":1993,"y":1463,"w":54,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":94,"w":54,"h":88},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -3865,14 +4041,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2010shennv3/attack1/1/1_009.png",
-	"frame": {"x":1806,"y":800,"w":80,"h":80},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":202,"y":107,"w":80,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2010shennv3/attack1/2/1_002.png",
 	"frame": {"x":1421,"y":1828,"w":64,"h":94},
 	"rotated": false,
@@ -3958,6 +4126,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":215,"y":86,"w":64,"h":98},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2010shennv3/attack1/3/1_007.png",
+	"frame": {"x":1993,"y":1552,"w":54,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":94,"w":54,"h":88},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -4314,10 +4490,18 @@
 },
 {
 	"filename": "2011dapeng1/attack1/1/2_003.png",
-	"frame": {"x":1700,"y":1042,"w":92,"h":72},
+	"frame": {"x":1733,"y":908,"w":92,"h":72},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":160,"y":124,"w":92,"h":72},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2011dapeng1/attack1/1/2_006.png",
+	"frame": {"x":1940,"y":670,"w":90,"h":72},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":165,"y":108,"w":90,"h":72},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -4441,14 +4625,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2011dapeng1/attack1/2/2_006.png",
-	"frame": {"x":1966,"y":183,"w":88,"h":80},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":154,"y":71,"w":88,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2011dapeng1/attack1/2/2_007.png",
 	"frame": {"x":1397,"y":676,"w":94,"h":76},
 	"rotated": true,
@@ -4474,7 +4650,7 @@
 },
 {
 	"filename": "2011dapeng1/attack1/3/2_001.png",
-	"frame": {"x":1887,"y":1631,"w":90,"h":74},
+	"frame": {"x":1806,"y":1,"w":90,"h":74},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":156,"y":78,"w":90,"h":74},
@@ -4482,7 +4658,7 @@
 },
 {
 	"filename": "2011dapeng1/attack1/3/2_002.png",
-	"frame": {"x":1873,"y":1382,"w":88,"h":84},
+	"frame": {"x":1958,"y":436,"w":88,"h":84},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":160,"y":66,"w":88,"h":84},
@@ -4498,7 +4674,7 @@
 },
 {
 	"filename": "2011dapeng1/attack1/3/2_006.png",
-	"frame": {"x":1966,"y":92,"w":80,"h":90},
+	"frame": {"x":1709,"y":364,"w":80,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":170,"y":53,"w":80,"h":90},
@@ -4506,7 +4682,7 @@
 },
 {
 	"filename": "2011dapeng1/attack1/3/2_007.png",
-	"frame": {"x":1551,"y":274,"w":88,"h":86},
+	"frame": {"x":1958,"y":88,"w":88,"h":86},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":161,"y":59,"w":88,"h":86},
@@ -4546,10 +4722,18 @@
 },
 {
 	"filename": "2011dapeng2/attack1/1/2_003.png",
-	"frame": {"x":1733,"y":908,"w":92,"h":72},
+	"frame": {"x":1566,"y":1492,"w":92,"h":72},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":160,"y":124,"w":92,"h":72},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2011dapeng2/attack1/1/2_006.png",
+	"frame": {"x":1940,"y":761,"w":90,"h":72},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":165,"y":108,"w":90,"h":72},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -4673,14 +4857,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2011dapeng2/attack1/2/2_006.png",
-	"frame": {"x":1806,"y":183,"w":88,"h":80},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":154,"y":71,"w":88,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2011dapeng2/attack1/2/2_007.png",
 	"frame": {"x":1419,"y":581,"w":94,"h":76},
 	"rotated": true,
@@ -4706,7 +4882,7 @@
 },
 {
 	"filename": "2011dapeng2/attack1/3/2_001.png",
-	"frame": {"x":1887,"y":1722,"w":90,"h":74},
+	"frame": {"x":1806,"y":92,"w":90,"h":74},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":156,"y":78,"w":90,"h":74},
@@ -4714,8 +4890,8 @@
 },
 {
 	"filename": "2011dapeng2/attack1/3/2_002.png",
-	"frame": {"x":1962,"y":1382,"w":88,"h":84},
-	"rotated": true,
+	"frame": {"x":1958,"y":521,"w":88,"h":84},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":160,"y":66,"w":88,"h":84},
 	"sourceSize": {"w":486,"h":486}
@@ -4730,15 +4906,15 @@
 },
 {
 	"filename": "2011dapeng2/attack1/3/2_006.png",
-	"frame": {"x":1806,"y":92,"w":80,"h":90},
-	"rotated": false,
+	"frame": {"x":1790,"y":382,"w":80,"h":90},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":170,"y":53,"w":80,"h":90},
 	"sourceSize": {"w":486,"h":486}
 },
 {
 	"filename": "2011dapeng2/attack1/3/2_007.png",
-	"frame": {"x":1640,"y":274,"w":88,"h":86},
+	"frame": {"x":1958,"y":175,"w":88,"h":86},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":161,"y":59,"w":88,"h":86},
@@ -4778,10 +4954,18 @@
 },
 {
 	"filename": "2011dapeng3/attack1/1/2_003.png",
-	"frame": {"x":1566,"y":1492,"w":92,"h":72},
+	"frame": {"x":1609,"y":1399,"w":92,"h":72},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":160,"y":124,"w":92,"h":72},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2011dapeng3/attack1/1/2_006.png",
+	"frame": {"x":1940,"y":852,"w":90,"h":72},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":165,"y":108,"w":90,"h":72},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -4874,8 +5058,8 @@
 },
 {
 	"filename": "2011dapeng3/attack1/2/2_006.png",
-	"frame": {"x":1806,"y":272,"w":88,"h":80},
-	"rotated": true,
+	"frame": {"x":1958,"y":1220,"w":88,"h":80},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":154,"y":71,"w":88,"h":80},
 	"sourceSize": {"w":486,"h":486}
@@ -4898,7 +5082,7 @@
 },
 {
 	"filename": "2011dapeng3/attack1/3/2_001.png",
-	"frame": {"x":1887,"y":1813,"w":90,"h":74},
+	"frame": {"x":1806,"y":183,"w":90,"h":74},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":156,"y":78,"w":90,"h":74},
@@ -4906,18 +5090,18 @@
 },
 {
 	"filename": "2011dapeng3/attack1/3/2_002.png",
-	"frame": {"x":1962,"y":1471,"w":88,"h":84},
-	"rotated": true,
+	"frame": {"x":1958,"y":1135,"w":88,"h":84},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":160,"y":66,"w":88,"h":84},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2011dapeng3/attack1/3/2_003.png",
-	"frame": {"x":1962,"y":1809,"w":82,"h":84},
-	"rotated": true,
+	"filename": "2011dapeng3/attack1/3/2_004.png",
+	"frame": {"x":1731,"y":492,"w":74,"h":86},
+	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":168,"y":66,"w":82,"h":84},
+	"spriteSourceSize": {"x":176,"y":58,"w":74,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -4930,7 +5114,7 @@
 },
 {
 	"filename": "2011dapeng3/attack1/3/2_006.png",
-	"frame": {"x":1551,"y":183,"w":80,"h":90},
+	"frame": {"x":1650,"y":556,"w":80,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":170,"y":53,"w":80,"h":90},
@@ -4938,8 +5122,8 @@
 },
 {
 	"filename": "2011dapeng3/attack1/3/2_007.png",
-	"frame": {"x":1818,"y":677,"w":88,"h":86},
-	"rotated": true,
+	"frame": {"x":1958,"y":262,"w":88,"h":86},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":161,"y":59,"w":88,"h":86},
 	"sourceSize": {"w":486,"h":486}
@@ -4994,7 +5178,7 @@
 },
 {
 	"filename": "2012fujia1/attack1/1/3_008.png",
-	"frame": {"x":1526,"y":194,"w":36,"h":24},
+	"frame": {"x":1526,"y":116,"w":36,"h":24},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":242,"y":142,"w":36,"h":24},
@@ -5030,14 +5214,6 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":213,"y":157,"w":10,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2012fujia1/attack1/1/7_004.png",
-	"frame": {"x":1874,"y":1870,"w":12,"h":22},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":217,"y":155,"w":12,"h":22},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -5126,6 +5302,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":228,"y":216,"w":36,"h":16},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2012fujia1/attack1/2/8_009.png",
+	"frame": {"x":1122,"y":197,"w":32,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":229,"y":216,"w":32,"h":16},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -5354,7 +5538,7 @@
 },
 {
 	"filename": "2012fujia1/run/3/3_001.png",
-	"frame": {"x":1607,"y":1467,"w":38,"h":24},
+	"frame": {"x":1607,"y":1374,"w":38,"h":24},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":224,"y":150,"w":38,"h":24},
@@ -5409,6 +5593,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2012fujia2/attack1/1/3_009.png",
+	"frame": {"x":1966,"y":1671,"w":44,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":231,"y":144,"w":44,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2012fujia2/attack1/1/4_004.png",
 	"frame": {"x":110,"y":933,"w":4,"h":4},
 	"rotated": false,
@@ -5446,14 +5638,6 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":213,"y":157,"w":10,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2012fujia2/attack1/1/7_004.png",
-	"frame": {"x":1874,"y":1893,"w":12,"h":22},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":217,"y":155,"w":12,"h":22},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -5513,6 +5697,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2012fujia2/attack1/2/8_009.png",
+	"frame": {"x":1155,"y":197,"w":32,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":229,"y":216,"w":32,"h":16},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2012fujia2/attack1/3/3_001.png",
 	"frame": {"x":938,"y":1374,"w":48,"h":24},
 	"rotated": false,
@@ -5558,14 +5750,6 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":271,"y":165,"w":4,"h":4},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2012fujia2/attack1/3/6_002.png",
-	"frame": {"x":1425,"y":895,"w":22,"h":12},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":187,"y":220,"w":22,"h":12},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -5697,6 +5881,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2012fujia3/attack1/1/2_008.png",
+	"frame": {"x":1526,"y":363,"w":22,"h":40},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":280,"y":162,"w":22,"h":40},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2012fujia3/attack1/1/4_004.png",
 	"frame": {"x":175,"y":933,"w":4,"h":4},
 	"rotated": false,
@@ -5793,6 +5985,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2012fujia3/attack1/2/8_009.png",
+	"frame": {"x":1765,"y":891,"w":32,"h":16},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":229,"y":216,"w":32,"h":16},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2012fujia3/attack1/3/2_001.png",
 	"frame": {"x":771,"y":1013,"w":30,"h":62},
 	"rotated": true,
@@ -5806,14 +6006,6 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":205,"y":120,"w":32,"h":96},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2012fujia3/attack1/3/2_004.png",
-	"frame": {"x":1754,"y":647,"w":28,"h":60},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":195,"y":117,"w":28,"h":60},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -5833,19 +6025,19 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2012fujia3/attack1/3/6_002.png",
-	"frame": {"x":1448,"y":895,"w":22,"h":12},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":187,"y":220,"w":22,"h":12},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2012fujia3/attack1/3/7_004.png",
 	"frame": {"x":749,"y":571,"w":24,"h":12},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":180,"w":24,"h":12},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2012fujia3/run/1/2_001.png",
+	"frame": {"x":2013,"y":801,"w":34,"h":62},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":284,"y":163,"w":34,"h":62},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -5857,11 +6049,27 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2012fujia3/run/1/5_004.png",
+	"frame": {"x":326,"y":338,"w":4,"h":4},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":202,"y":164,"w":4,"h":4},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2012fujia3/run/2/2_002.png",
-	"frame": {"x":1739,"y":767,"w":90,"h":32},
+	"frame": {"x":1881,"y":637,"w":90,"h":32},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":237,"y":228,"w":90,"h":32},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2012fujia3/run/2/3_001.png",
+	"frame": {"x":1966,"y":1882,"w":26,"h":40},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":139,"w":26,"h":40},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -5913,14 +6121,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2012fujia3/run/3/7_006.png",
-	"frame": {"x":2026,"y":1991,"w":20,"h":16},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":275,"y":183,"w":20,"h":16},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2012fujia3/stand/2/8_001.png",
 	"frame": {"x":1064,"y":564,"w":34,"h":16},
 	"rotated": false,
@@ -5930,7 +6130,7 @@
 },
 {
 	"filename": "2012fujia4/run/2/3_001.png",
-	"frame": {"x":1887,"y":1586,"w":26,"h":44},
+	"frame": {"x":1966,"y":1446,"w":26,"h":44},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":226,"y":137,"w":26,"h":44},
@@ -6034,18 +6234,10 @@
 },
 {
 	"filename": "2022xueying1/attack1/1/3_002.png",
-	"frame": {"x":1204,"y":899,"w":12,"h":8},
+	"frame": {"x":1217,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":262,"y":139,"w":12,"h":8},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2022xueying1/attack1/1/4_001.png",
-	"frame": {"x":1430,"y":1923,"w":6,"h":8},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -6065,14 +6257,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2022xueying1/attack1/2/2_006.png",
-	"frame": {"x":1362,"y":562,"w":34,"h":18},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":263,"y":134,"w":34,"h":18},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2022xueying1/attack1/2/4_005.png",
 	"frame": {"x":329,"y":577,"w":6,"h":10},
 	"rotated": true,
@@ -6089,16 +6273,8 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2022xueying1/attack1/3/2_003.png",
-	"frame": {"x":1471,"y":895,"w":22,"h":12},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":230,"y":134,"w":22,"h":12},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2022xueying1/attack1/3/5_003.png",
-	"frame": {"x":1217,"y":899,"w":12,"h":8},
+	"frame": {"x":1230,"y":899,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":230,"y":174,"w":12,"h":8},
@@ -6113,16 +6289,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2022xueying1/stand/1/4_001.png",
-	"frame": {"x":1439,"y":1923,"w":6,"h":8},
+	"filename": "2022xueying1/stand/1/1_004.png",
+	"frame": {"x":1979,"y":943,"w":56,"h":68},
 	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
+	"spriteSourceSize": {"x":224,"y":114,"w":56,"h":68},
 	"sourceSize": {"w":486,"h":486}
 },
 {
 	"filename": "2022xueying1/stand/1/4_008.png",
-	"frame": {"x":1448,"y":1923,"w":6,"h":8},
+	"frame": {"x":1325,"y":1690,"w":6,"h":8},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
@@ -6130,7 +6306,7 @@
 },
 {
 	"filename": "2022xueying1/stand/2/4_004.png",
-	"frame": {"x":1230,"y":899,"w":12,"h":8},
+	"frame": {"x":1940,"y":943,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":154,"w":12,"h":8},
@@ -6138,7 +6314,7 @@
 },
 {
 	"filename": "2022xueying1/stand/2/4_007.png",
-	"frame": {"x":1457,"y":1923,"w":6,"h":8},
+	"frame": {"x":1421,"y":1923,"w":6,"h":8},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":153,"w":6,"h":8},
@@ -6170,7 +6346,7 @@
 },
 {
 	"filename": "2022xueying2/attack1/1/3_002.png",
-	"frame": {"x":1788,"y":577,"w":12,"h":8},
+	"frame": {"x":1953,"y":943,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":262,"y":139,"w":12,"h":8},
@@ -6178,7 +6354,7 @@
 },
 {
 	"filename": "2022xueying2/attack1/1/4_001.png",
-	"frame": {"x":1771,"y":2010,"w":6,"h":8},
+	"frame": {"x":1430,"y":1923,"w":6,"h":8},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
@@ -6201,14 +6377,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2022xueying2/attack1/2/2_006.png",
-	"frame": {"x":1397,"y":562,"w":34,"h":18},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":263,"y":134,"w":34,"h":18},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2022xueying2/attack1/2/4_005.png",
 	"frame": {"x":340,"y":577,"w":6,"h":10},
 	"rotated": true,
@@ -6226,7 +6394,7 @@
 },
 {
 	"filename": "2022xueying2/attack1/3/2_003.png",
-	"frame": {"x":1494,"y":895,"w":22,"h":12},
+	"frame": {"x":1425,"y":895,"w":22,"h":12},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":230,"y":134,"w":22,"h":12},
@@ -6234,55 +6402,47 @@
 },
 {
 	"filename": "2022xueying2/attack1/3/5_003.png",
-	"frame": {"x":1801,"y":577,"w":12,"h":8},
+	"frame": {"x":1966,"y":943,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":230,"y":174,"w":12,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2022xueying2/attack1/3/5_005.png",
+	"frame": {"x":1515,"y":167,"w":10,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":167,"w":10,"h":18},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2022xueying2/attack1/3/5_006.png",
+	"frame": {"x":1515,"y":186,"w":10,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":229,"y":167,"w":10,"h":18},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2022xueying2/stand/1/4_001.png",
-	"frame": {"x":1780,"y":2010,"w":6,"h":8},
+	"frame": {"x":1439,"y":1923,"w":6,"h":8},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2022xueying2/stand/1/4_002.png",
-	"frame": {"x":1833,"y":881,"w":6,"h":6},
+	"filename": "2022xueying2/stand/1/4_007.png",
+	"frame": {"x":1970,"y":991,"w":8,"h":8},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":236,"y":143,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2022xueying2/stand/1/4_004.png",
-	"frame": {"x":1873,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":235,"y":144,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2022xueying2/stand/1/4_005.png",
-	"frame": {"x":1880,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":235,"y":145,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2022xueying2/stand/1/4_006.png",
-	"frame": {"x":1887,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":235,"y":144,"w":6,"h":6},
+	"spriteSourceSize": {"x":233,"y":141,"w":8,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
 	"filename": "2022xueying2/stand/1/4_008.png",
-	"frame": {"x":1789,"y":2010,"w":6,"h":8},
+	"frame": {"x":1448,"y":1923,"w":6,"h":8},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
@@ -6290,7 +6450,7 @@
 },
 {
 	"filename": "2022xueying2/stand/2/4_004.png",
-	"frame": {"x":1814,"y":577,"w":12,"h":8},
+	"frame": {"x":1909,"y":725,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":154,"w":12,"h":8},
@@ -6298,7 +6458,7 @@
 },
 {
 	"filename": "2022xueying2/stand/2/4_007.png",
-	"frame": {"x":1798,"y":2010,"w":6,"h":8},
+	"frame": {"x":1457,"y":1923,"w":6,"h":8},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":153,"w":6,"h":8},
@@ -6330,7 +6490,7 @@
 },
 {
 	"filename": "2022xueying3/attack1/1/3_002.png",
-	"frame": {"x":1827,"y":576,"w":12,"h":8},
+	"frame": {"x":1922,"y":725,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":262,"y":139,"w":12,"h":8},
@@ -6338,7 +6498,7 @@
 },
 {
 	"filename": "2022xueying3/attack1/1/4_001.png",
-	"frame": {"x":1879,"y":576,"w":6,"h":8},
+	"frame": {"x":1782,"y":455,"w":6,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
@@ -6362,10 +6522,26 @@
 },
 {
 	"filename": "2022xueying3/attack1/2/2_006.png",
-	"frame": {"x":1701,"y":749,"w":34,"h":18},
+	"frame": {"x":1362,"y":562,"w":34,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":263,"y":134,"w":34,"h":18},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2022xueying3/attack1/2/4_003.png",
+	"frame": {"x":1862,"y":1941,"w":12,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":257,"y":141,"w":12,"h":18},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2022xueying3/attack1/2/4_004.png",
+	"frame": {"x":1783,"y":1826,"w":10,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":270,"y":142,"w":10,"h":18},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -6386,7 +6562,7 @@
 },
 {
 	"filename": "2022xueying3/attack1/3/2_003.png",
-	"frame": {"x":1887,"y":1904,"w":22,"h":12},
+	"frame": {"x":1448,"y":895,"w":22,"h":12},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":230,"y":134,"w":22,"h":12},
@@ -6394,63 +6570,47 @@
 },
 {
 	"filename": "2022xueying3/attack1/3/5_003.png",
-	"frame": {"x":1840,"y":576,"w":12,"h":8},
+	"frame": {"x":1925,"y":1976,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":230,"y":174,"w":12,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2022xueying3/attack1/3/5_005.png",
+	"frame": {"x":1783,"y":1845,"w":10,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":167,"w":10,"h":18},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2022xueying3/attack1/3/5_006.png",
+	"frame": {"x":1783,"y":1864,"w":10,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":229,"y":167,"w":10,"h":18},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2022xueying3/stand/1/4_001.png",
-	"frame": {"x":1806,"y":881,"w":6,"h":8},
-	"rotated": true,
+	"frame": {"x":1782,"y":464,"w":6,"h":8},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2022xueying3/stand/1/4_002.png",
-	"frame": {"x":1894,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":236,"y":143,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2022xueying3/stand/1/4_004.png",
-	"frame": {"x":1901,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":235,"y":144,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2022xueying3/stand/1/4_005.png",
-	"frame": {"x":1908,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":235,"y":145,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2022xueying3/stand/1/4_006.png",
-	"frame": {"x":1915,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":235,"y":144,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2022xueying3/stand/1/4_008.png",
-	"frame": {"x":1815,"y":881,"w":6,"h":8},
-	"rotated": true,
+	"frame": {"x":1782,"y":473,"w":6,"h":8},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":236,"y":140,"w":6,"h":8},
 	"sourceSize": {"w":486,"h":486}
 },
 {
 	"filename": "2022xueying3/stand/2/4_004.png",
-	"frame": {"x":1853,"y":576,"w":12,"h":8},
+	"frame": {"x":1938,"y":1976,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":154,"w":12,"h":8},
@@ -6458,8 +6618,8 @@
 },
 {
 	"filename": "2022xueying3/stand/2/4_007.png",
-	"frame": {"x":1824,"y":881,"w":6,"h":8},
-	"rotated": true,
+	"frame": {"x":1782,"y":482,"w":6,"h":8},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":153,"w":6,"h":8},
 	"sourceSize": {"w":486,"h":486}
@@ -6470,6 +6630,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":270,"y":154,"w":14,"h":8},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2022xueying3/stand/2/7_002.png",
+	"frame": {"x":1789,"y":463,"w":28,"h":16},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":240,"y":149,"w":28,"h":16},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -6490,7 +6658,7 @@
 },
 {
 	"filename": "2201yini1/attack/1/1_001.png",
-	"frame": {"x":1766,"y":1321,"w":52,"h":86},
+	"frame": {"x":1853,"y":1321,"w":52,"h":86},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":220,"y":155,"w":52,"h":86},
@@ -6498,7 +6666,7 @@
 },
 {
 	"filename": "2201yini1/attack/1/1_005.png",
-	"frame": {"x":1793,"y":1585,"w":56,"h":92},
+	"frame": {"x":1726,"y":1826,"w":56,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":220,"y":150,"w":56,"h":92},
@@ -6506,8 +6674,8 @@
 },
 {
 	"filename": "2201yini1/attack/1/1_006.png",
-	"frame": {"x":1729,"y":365,"w":50,"h":90},
-	"rotated": true,
+	"frame": {"x":1907,"y":1135,"w":50,"h":90},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":152,"w":50,"h":90},
 	"sourceSize": {"w":486,"h":486}
@@ -6537,8 +6705,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2201yini1/attack/3/1_006.png",
+	"frame": {"x":1862,"y":1960,"w":62,"h":86},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":227,"y":157,"w":62,"h":86},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2201yini1/attack/3/1_007.png",
-	"frame": {"x":1726,"y":1826,"w":58,"h":92},
+	"frame": {"x":1818,"y":1399,"w":58,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":154,"w":58,"h":92},
@@ -6562,7 +6738,7 @@
 },
 {
 	"filename": "2201yini1/run/1/1_002.png",
-	"frame": {"x":1755,"y":800,"w":50,"h":88},
+	"frame": {"x":1794,"y":1733,"w":50,"h":88},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":218,"y":162,"w":50,"h":88},
@@ -6570,23 +6746,15 @@
 },
 {
 	"filename": "2201yini1/run/1/1_003.png",
-	"frame": {"x":1756,"y":1678,"w":54,"h":88},
-	"rotated": true,
+	"frame": {"x":1993,"y":1641,"w":54,"h":88},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":214,"y":163,"w":54,"h":88},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2201yini1/run/3/1_001.png",
-	"frame": {"x":1905,"y":677,"w":60,"h":86},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":213,"y":153,"w":60,"h":86},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2201yini1/run/3/1_003.png",
-	"frame": {"x":1729,"y":495,"w":58,"h":90},
+	"frame": {"x":1822,"y":579,"w":58,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":214,"y":151,"w":58,"h":90},
@@ -6610,7 +6778,7 @@
 },
 {
 	"filename": "2202xiyu1/attack/1/1_002.png",
-	"frame": {"x":1818,"y":586,"w":68,"h":90},
+	"frame": {"x":1632,"y":274,"w":68,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":203,"y":165,"w":68,"h":90},
@@ -6650,7 +6818,7 @@
 },
 {
 	"filename": "2202xiyu1/attack/2/1_004.png",
-	"frame": {"x":1530,"y":1399,"w":76,"h":92},
+	"frame": {"x":1635,"y":1228,"w":76,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":206,"y":162,"w":76,"h":92},
@@ -6738,7 +6906,7 @@
 },
 {
 	"filename": "2202xiyu1/run/2/1_001.png",
-	"frame": {"x":1729,"y":274,"w":76,"h":90},
+	"frame": {"x":1828,"y":735,"w":76,"h":90},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":212,"y":162,"w":76,"h":90},
@@ -6746,8 +6914,8 @@
 },
 {
 	"filename": "2202xiyu1/run/2/1_002.png",
-	"frame": {"x":1949,"y":1917,"w":76,"h":90},
-	"rotated": false,
+	"frame": {"x":1771,"y":1941,"w":76,"h":90},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":213,"y":162,"w":76,"h":90},
 	"sourceSize": {"w":486,"h":486}
@@ -6770,7 +6938,7 @@
 },
 {
 	"filename": "2202xiyu1/run/2/1_008.png",
-	"frame": {"x":1676,"y":800,"w":78,"h":92},
+	"frame": {"x":1530,"y":1399,"w":78,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":210,"y":160,"w":78,"h":92},
@@ -6834,7 +7002,7 @@
 },
 {
 	"filename": "2203langqi1/attack1/1/3_003.png",
-	"frame": {"x":1635,"y":1228,"w":74,"h":92},
+	"frame": {"x":1696,"y":1135,"w":74,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":202,"y":183,"w":74,"h":92},
@@ -6842,7 +7010,7 @@
 },
 {
 	"filename": "2203langqi1/attack1/1/3_006.png",
-	"frame": {"x":1747,"y":1374,"w":64,"h":92},
+	"frame": {"x":1785,"y":1228,"w":64,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":211,"y":177,"w":64,"h":92},
@@ -6862,14 +7030,6 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":211,"y":183,"w":62,"h":102},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2203langqi1/attack1/2/1_004.png",
-	"frame": {"x":1887,"y":1090,"w":78,"h":68},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":197,"y":172,"w":78,"h":68},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -6902,14 +7062,6 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":174,"y":181,"w":116,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2203langqi1/attack1/3/1_007.png",
-	"frame": {"x":1966,"y":851,"w":78,"h":80},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":221,"y":166,"w":78,"h":80},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -6985,14 +7137,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2203langqi1/cheer/3/1_002.png",
-	"frame": {"x":1966,"y":930,"w":80,"h":76},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":199,"y":174,"w":80,"h":76},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2203langqi1/cheer/3/2_001.png",
 	"frame": {"x":529,"y":1714,"w":18,"h":48},
 	"rotated": true,
@@ -7018,7 +7162,7 @@
 },
 {
 	"filename": "2203langqi1/run/1/2_002.png",
-	"frame": {"x":1887,"y":638,"w":78,"h":38},
+	"frame": {"x":1630,"y":365,"w":78,"h":38},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":228,"y":213,"w":78,"h":38},
@@ -7090,23 +7234,15 @@
 },
 {
 	"filename": "2203langqi2/attack1/1/4_008.png",
-	"frame": {"x":1615,"y":556,"w":34,"h":24},
+	"frame": {"x":1808,"y":274,"w":34,"h":24},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":227,"y":189,"w":34,"h":24},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2203langqi3/attack1/1/1_003.png",
-	"frame": {"x":1887,"y":855,"w":78,"h":74},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":192,"y":172,"w":78,"h":74},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2203langqi3/attack1/1/1_006.png",
-	"frame": {"x":1590,"y":1585,"w":92,"h":72},
+	"frame": {"x":1712,"y":1228,"w":92,"h":72},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":213,"y":156,"w":92,"h":72},
@@ -7121,27 +7257,11 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2203langqi3/attack1/3/1_001.png",
-	"frame": {"x":1966,"y":1159,"w":74,"h":80},
+	"filename": "2203langqi3/attack1/3/1_003.png",
+	"frame": {"x":1965,"y":1001,"w":86,"h":82},
 	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":200,"y":161,"w":74,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2203langqi3/attack1/3/1_002.png",
-	"frame": {"x":1962,"y":1643,"w":84,"h":82},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":193,"y":160,"w":84,"h":82},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2203langqi3/attack1/3/1_004.png",
-	"frame": {"x":1962,"y":1726,"w":84,"h":82},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":196,"y":161,"w":84,"h":82},
+	"spriteSourceSize": {"x":195,"y":151,"w":86,"h":82},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7154,34 +7274,18 @@
 },
 {
 	"filename": "2203langqi3/attack1/3/2_007.png",
-	"frame": {"x":1844,"y":1234,"w":88,"h":86},
+	"frame": {"x":1958,"y":349,"w":88,"h":86},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":205,"y":201,"w":88,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2203langqi3/cheer/1/2_005.png",
-	"frame": {"x":1640,"y":404,"w":56,"h":90},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":246,"y":107,"w":56,"h":90},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2203langqi3/cheer/3/1_001.png",
-	"frame": {"x":1966,"y":1234,"w":74,"h":80},
+	"filename": "2203langqi3/cheer/3/1_005.png",
+	"frame": {"x":1828,"y":826,"w":64,"h":86},
 	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":200,"y":161,"w":74,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2203langqi3/cheer/3/1_002.png",
-	"frame": {"x":1966,"y":770,"w":80,"h":80},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":199,"y":170,"w":80,"h":80},
+	"spriteSourceSize": {"x":225,"y":169,"w":64,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7190,6 +7294,14 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":208,"w":20,"h":38},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2203langqi3/run/2/1_006.png",
+	"frame": {"x":1806,"y":936,"w":64,"h":84},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":221,"y":161,"w":64,"h":84},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7202,7 +7314,7 @@
 },
 {
 	"filename": "2203langqi4/attack1/1/3_003.png",
-	"frame": {"x":1696,"y":1135,"w":74,"h":92},
+	"frame": {"x":1700,"y":1042,"w":74,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":202,"y":183,"w":74,"h":92},
@@ -7210,7 +7322,7 @@
 },
 {
 	"filename": "2203langqi4/attack1/1/3_006.png",
-	"frame": {"x":1779,"y":1228,"w":64,"h":92},
+	"frame": {"x":1842,"y":1135,"w":64,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":211,"y":177,"w":64,"h":92},
@@ -7273,9 +7385,17 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2203langqi4/attack1/3/3_008.png",
-	"frame": {"x":1820,"y":361,"w":90,"h":66},
+	"filename": "2203langqi4/attack1/3/3_007.png",
+	"frame": {"x":1676,"y":800,"w":92,"h":80},
 	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":205,"y":193,"w":92,"h":80},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2203langqi4/attack1/3/3_008.png",
+	"frame": {"x":1731,"y":579,"w":90,"h":66},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":196,"w":90,"h":66},
 	"sourceSize": {"w":486,"h":486}
@@ -7318,14 +7438,6 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":201,"y":180,"w":108,"h":80},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2203langqi4/cheer/3/3_002.png",
-	"frame": {"x":1966,"y":1309,"w":72,"h":80},
-	"rotated": true,
-	"trimmed": true,
-	"spriteSourceSize": {"x":202,"y":185,"w":72,"h":80},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7377,14 +7489,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2203langqi4/run/3/3_005.png",
-	"frame": {"x":1966,"y":1007,"w":80,"h":76},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":206,"y":195,"w":80,"h":76},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2203langqi4/run/3/3_006.png",
 	"frame": {"x":380,"y":1256,"w":80,"h":104},
 	"rotated": false,
@@ -7409,15 +7513,15 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2204wuzhu1/cheer/3/1_003.png",
-	"frame": {"x":1966,"y":2008,"w":38,"h":78},
+	"filename": "2204wuzhu1/cheer/2/1_004.png",
+	"frame": {"x":1891,"y":952,"w":48,"h":78},
 	"rotated": true,
 	"trimmed": true,
-	"spriteSourceSize": {"x":223,"y":174,"w":38,"h":78},
+	"spriteSourceSize": {"x":219,"y":175,"w":48,"h":78},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2204wuzhu1/run/2/1_002.png",
+	"filename": "2204wuzhu1/run/2/1_001.png",
 	"frame": {"x":1550,"y":1001,"w":40,"h":82},
 	"rotated": true,
 	"trimmed": true,
@@ -7425,11 +7529,27 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2204wuzhu1/run/2/1_004.png",
+	"filename": "2204wuzhu1/run/2/1_002.png",
 	"frame": {"x":1633,"y":1001,"w":40,"h":82},
 	"rotated": true,
 	"trimmed": true,
+	"spriteSourceSize": {"x":217,"y":170,"w":40,"h":82},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2204wuzhu1/run/2/1_004.png",
+	"frame": {"x":1716,"y":1001,"w":40,"h":82},
+	"rotated": true,
+	"trimmed": true,
 	"spriteSourceSize": {"x":218,"y":168,"w":40,"h":82},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2204wuzhu1/run/2/1_006.png",
+	"frame": {"x":1925,"y":1733,"w":40,"h":80},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":218,"y":170,"w":40,"h":80},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7442,26 +7562,34 @@
 },
 {
 	"filename": "2204wuzhu1/run/3/1_002.png",
-	"frame": {"x":1716,"y":1001,"w":40,"h":82},
+	"frame": {"x":1799,"y":1001,"w":40,"h":82},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":218,"y":168,"w":40,"h":82},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2204wuzhu1/run/3/1_008.png",
-	"frame": {"x":1615,"y":361,"w":42,"h":82},
-	"rotated": true,
+	"filename": "2204wuzhu1/run/3/1_004.png",
+	"frame": {"x":1925,"y":1814,"w":40,"h":80},
+	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":216,"y":167,"w":42,"h":82},
+	"spriteSourceSize": {"x":218,"y":166,"w":40,"h":80},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2204wuzhu2/attack1/2/1_004.png",
-	"frame": {"x":1526,"y":361,"w":42,"h":88},
-	"rotated": true,
+	"filename": "2204wuzhu1/run/3/1_006.png",
+	"frame": {"x":1925,"y":1895,"w":40,"h":80},
+	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":211,"y":169,"w":42,"h":88},
+	"spriteSourceSize": {"x":217,"y":167,"w":40,"h":80},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2204wuzhu2/attack1/2/1_007.png",
+	"frame": {"x":1993,"y":1730,"w":54,"h":84},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":226,"y":170,"w":54,"h":84},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7473,8 +7601,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2204wuzhu2/cheer/1/1_004.png",
+	"frame": {"x":1640,"y":404,"w":68,"h":88},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":203,"y":164,"w":68,"h":88},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2204wuzhu2/cheer/2/1_003.png",
-	"frame": {"x":1836,"y":1492,"w":50,"h":92},
+	"frame": {"x":1743,"y":1733,"w":50,"h":92},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":217,"y":161,"w":50,"h":92},
@@ -7489,32 +7625,24 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2204wuzhu2/run/3/1_002.png",
+	"frame": {"x":1993,"y":1815,"w":54,"h":84},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":165,"w":54,"h":84},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2204wuzhu2/run/3/1_008.png",
-	"frame": {"x":1853,"y":1321,"w":52,"h":86},
-	"rotated": true,
+	"frame": {"x":1905,"y":1,"w":52,"h":86},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":210,"y":163,"w":52,"h":86},
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2205huoyuansu/run/2/1_005.png",
-	"frame": {"x":1840,"y":1115,"w":46,"h":42},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":142,"y":141,"w":46,"h":42},
-	"sourceSize": {"w":340,"h":340}
-},
-{
-	"filename": "2205huoyuansu/run/2/1_006.png",
-	"frame": {"x":1840,"y":881,"w":46,"h":48},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":143,"y":138,"w":46,"h":48},
-	"sourceSize": {"w":340,"h":340}
-},
-{
 	"filename": "2206jijian1/attack1/1/2_004.png",
-	"frame": {"x":1910,"y":1904,"w":22,"h":12},
+	"frame": {"x":1471,"y":895,"w":22,"h":12},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":177,"w":22,"h":12},
@@ -7522,7 +7650,7 @@
 },
 {
 	"filename": "2206jijian1/attack1/1/2_005.png",
-	"frame": {"x":1933,"y":1904,"w":22,"h":12},
+	"frame": {"x":1494,"y":895,"w":22,"h":12},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":234,"y":178,"w":22,"h":12},
@@ -7542,6 +7670,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":259,"y":210,"w":8,"h":6},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2206jijian1/attack1/1/7_001.png",
+	"frame": {"x":1783,"y":1883,"w":10,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":212,"y":222,"w":10,"h":18},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7586,8 +7722,8 @@
 },
 {
 	"filename": "2206jijian1/attack1/2/1_005.png",
-	"frame": {"x":1276,"y":1329,"w":44,"h":78},
-	"rotated": true,
+	"frame": {"x":1913,"y":1226,"w":44,"h":78},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":221,"y":179,"w":44,"h":78},
 	"sourceSize": {"w":486,"h":486}
@@ -7606,14 +7742,6 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":257,"y":178,"w":12,"h":24},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2206jijian1/attack1/2/2_005.png",
-	"frame": {"x":2032,"y":1892,"w":14,"h":24},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":258,"y":182,"w":14,"h":24},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7642,10 +7770,18 @@
 },
 {
 	"filename": "2206jijian1/attack1/3/1_002.png",
-	"frame": {"x":1799,"y":1001,"w":40,"h":82},
+	"frame": {"x":1882,"y":1001,"w":40,"h":82},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":224,"y":169,"w":40,"h":82},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2206jijian1/attack1/3/1_003.png",
+	"frame": {"x":1876,"y":1583,"w":48,"h":76},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":228,"y":172,"w":48,"h":76},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7665,14 +7801,6 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2206jijian1/attack1/3/7_001.png",
-	"frame": {"x":1922,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":252,"y":218,"w":6,"h":6},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2206jijian1/cheer/1/2_002.png",
 	"frame": {"x":382,"y":1947,"w":8,"h":16},
 	"rotated": true,
@@ -7682,7 +7810,7 @@
 },
 {
 	"filename": "2206jijian1/cheer/1/7_001.png",
-	"frame": {"x":1515,"y":167,"w":10,"h":18},
+	"frame": {"x":1783,"y":1902,"w":10,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":212,"y":222,"w":10,"h":18},
@@ -7705,19 +7833,19 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2206jijian1/cheer/3/1_001.png",
+	"frame": {"x":1794,"y":1822,"w":50,"h":86},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":210,"y":163,"w":50,"h":86},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2206jijian1/cheer/3/6_004.png",
 	"frame": {"x":313,"y":924,"w":12,"h":54},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":207,"y":185,"w":12,"h":54},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2206jijian1/cheer/3/7_001.png",
-	"frame": {"x":1929,"y":1374,"w":6,"h":6},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":252,"y":218,"w":6,"h":6},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7730,10 +7858,18 @@
 },
 {
 	"filename": "2206jijian1/run/3/1_001.png",
-	"frame": {"x":1915,"y":1467,"w":46,"h":72},
-	"rotated": false,
+	"frame": {"x":1905,"y":1088,"w":46,"h":72},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":219,"y":176,"w":46,"h":72},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2206jijian1/run/3/1_002.png",
+	"frame": {"x":1978,"y":1088,"w":46,"h":66},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":219,"y":179,"w":46,"h":66},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7750,6 +7886,14 @@
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":258,"y":184,"w":14,"h":30},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2206jijian2/attack1/3/2_005.png",
+	"frame": {"x":1853,"y":552,"w":26,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":246,"y":200,"w":26,"h":26},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7770,8 +7914,8 @@
 },
 {
 	"filename": "2206jijian3/attack1/1/7_001.png",
-	"frame": {"x":1515,"y":186,"w":10,"h":18},
-	"rotated": false,
+	"frame": {"x":2016,"y":2036,"w":10,"h":18},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":212,"y":222,"w":10,"h":18},
 	"sourceSize": {"w":486,"h":486}
@@ -7809,6 +7953,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2206jijian3/attack1/2/2_001.png",
+	"frame": {"x":2029,"y":1301,"w":18,"h":34},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":238,"y":182,"w":18,"h":34},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2206jijian3/attack1/2/2_002.png",
 	"frame": {"x":1204,"y":564,"w":16,"h":34},
 	"rotated": true,
@@ -7842,7 +7994,7 @@
 },
 {
 	"filename": "2206jijian3/attack1/2/4_003.png",
-	"frame": {"x":1866,"y":576,"w":12,"h":8},
+	"frame": {"x":1951,"y":1976,"w":12,"h":8},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":255,"y":207,"w":12,"h":8},
@@ -7881,11 +8033,19 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2206jijian3/attack1/3/2_008.png",
-	"frame": {"x":1940,"y":1352,"w":24,"h":28},
+	"filename": "2206jijian3/attack1/3/2_004.png",
+	"frame": {"x":1915,"y":860,"w":24,"h":30},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":223,"y":202,"w":24,"h":28},
+	"spriteSourceSize": {"x":255,"y":197,"w":24,"h":30},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2206jijian3/attack1/3/5_001.png",
+	"frame": {"x":1970,"y":965,"w":8,"h":12},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":209,"w":8,"h":12},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7906,7 +8066,7 @@
 },
 {
 	"filename": "2206jijian3/cheer/1/7_002.png",
-	"frame": {"x":1122,"y":197,"w":32,"h":16},
+	"frame": {"x":1798,"y":891,"w":32,"h":16},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":197,"y":205,"w":32,"h":16},
@@ -7914,10 +8074,18 @@
 },
 {
 	"filename": "2206jijian3/cheer/2/2_001.png",
-	"frame": {"x":1800,"y":889,"w":18,"h":34},
-	"rotated": true,
+	"frame": {"x":2029,"y":1336,"w":18,"h":34},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":238,"y":182,"w":18,"h":34},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2206jijian3/cheer/2/4_004.png",
+	"frame": {"x":1891,"y":936,"w":12,"h":14},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":215,"y":237,"w":12,"h":14},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7934,6 +8102,14 @@
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":175,"y":203,"w":52,"h":22},
+	"sourceSize": {"w":486,"h":486}
+},
+{
+	"filename": "2206jijian3/cheer/3/5_001.png",
+	"frame": {"x":1970,"y":978,"w":8,"h":12},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":251,"y":209,"w":8,"h":12},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -7961,8 +8137,16 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2206jijian4/attack1/1/3_007.png",
+	"frame": {"x":1966,"y":1962,"w":26,"h":22},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":235,"y":216,"w":26,"h":22},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2206jijian4/attack1/1/8_003.png",
-	"frame": {"x":1765,"y":889,"w":34,"h":18},
+	"frame": {"x":1397,"y":562,"w":34,"h":18},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":225,"y":227,"w":34,"h":18},
@@ -7978,7 +8162,7 @@
 },
 {
 	"filename": "2206jijian4/attack1/2/3_007.png",
-	"frame": {"x":1914,"y":1607,"w":34,"h":22},
+	"frame": {"x":1905,"y":802,"w":34,"h":22},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":224,"y":216,"w":34,"h":22},
@@ -7986,7 +8170,7 @@
 },
 {
 	"filename": "2206jijian4/attack1/3/3_008.png",
-	"frame": {"x":1880,"y":1467,"w":34,"h":24},
+	"frame": {"x":1843,"y":274,"w":34,"h":24},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":222,"y":206,"w":34,"h":24},
@@ -7994,7 +8178,7 @@
 },
 {
 	"filename": "2206jijian4/attack1/3/8_007.png",
-	"frame": {"x":1155,"y":197,"w":32,"h":16},
+	"frame": {"x":2013,"y":925,"w":32,"h":16},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":228,"y":227,"w":32,"h":16},
@@ -8010,18 +8194,10 @@
 },
 {
 	"filename": "2206jijian4/cheer/1/3_002.png",
-	"frame": {"x":1962,"y":1892,"w":34,"h":24},
+	"frame": {"x":1580,"y":556,"w":34,"h":24},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":228,"y":200,"w":34,"h":24},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2206jijian4/cheer/1/3_004.png",
-	"frame": {"x":1526,"y":336,"w":24,"h":24},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":231,"y":213,"w":24,"h":24},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -8033,6 +8209,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2206jijian4/cheer/1/8_001.png",
+	"frame": {"x":1771,"y":1921,"w":22,"h":18},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":230,"y":227,"w":22,"h":18},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2206jijian4/cheer/1/8_004.png",
 	"frame": {"x":922,"y":564,"w":36,"h":16},
 	"rotated": false,
@@ -8041,19 +8225,19 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2206jijian4/cheer/2/3_002.png",
+	"frame": {"x":1806,"y":908,"w":24,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":237,"y":205,"w":24,"h":26},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2206jijian4/cheer/2/7_004.png",
 	"frame": {"x":721,"y":1710,"w":52,"h":22},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":175,"y":202,"w":52,"h":22},
-	"sourceSize": {"w":486,"h":486}
-},
-{
-	"filename": "2206jijian4/cheer/3/3_001.png",
-	"frame": {"x":1806,"y":908,"w":32,"h":20},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":224,"y":203,"w":32,"h":20},
 	"sourceSize": {"w":486,"h":486}
 },
 {
@@ -8066,7 +8250,7 @@
 },
 {
 	"filename": "2206jijian4/run/1/3_003.png",
-	"frame": {"x":1997,"y":1892,"w":34,"h":24},
+	"frame": {"x":1615,"y":556,"w":34,"h":24},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":228,"y":199,"w":34,"h":24},
@@ -8087,6 +8271,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "0.95",
-	"smartupdate": "$TexturePacker:SmartUpdate:74dd5f7ebea13c12da4dcf02db77f1a1:5ac325b025bcd376131948d91ece5375:a3d47e00f1824ff08e10a99c864fefd7$"
+	"smartupdate": "$TexturePacker:SmartUpdate:63d04cd482a35da1696fafb81e63741d:ebedbc25f646ee49c3bc43e4300fff09:a3d47e00f1824ff08e10a99c864fefd7$"
 }
 }
