@@ -89,7 +89,10 @@ void ActorPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	else if (name == wxT("Angle"))
 		m_actor->setTransform(m_actor->getPosition(), wxANY_AS(value, float));
 	else if (name == wxT("Scale"))
-		m_actor->setScale(wxANY_AS(value, float));
+	{
+		float scale = wxANY_AS(value, float);
+		m_actor->setScale(scale, scale);
+	}
 	else if (name == wxT("Horizontal Mirror"))
 	{
 		bool xMirror, yMirror;

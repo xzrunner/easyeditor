@@ -73,7 +73,8 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const std::string& dlg)
 	pos.y = value["position"]["y"].asDouble();
 	sprite->setTransform(pos, value["angle"].asDouble());
 
-	sprite->setScale(value["scale"].asDouble());
+	float scale = value["scale"].asDouble();
+	sprite->setScale(scale, scale);
 
 	sprite->setMirror(value["x mirror"].asBool(), 
 		value["y mirror"].asBool());
