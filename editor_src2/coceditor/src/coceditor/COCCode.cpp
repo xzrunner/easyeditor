@@ -8,6 +8,7 @@
 #include <easybuilder.h>
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyscale9.h>
 
 namespace coceditor
 {

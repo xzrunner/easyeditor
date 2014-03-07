@@ -7,6 +7,7 @@
 namespace ebuilder { class CodeGenerator; }
 namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
+namespace escale9 { class Symbol; }
 
 namespace coceditor
 {
