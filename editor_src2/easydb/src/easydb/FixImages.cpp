@@ -26,9 +26,11 @@ void FixImages::ProcessImageFiles(const std::string& imgdir)
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			std::string img(filepath.c_str());
-			unsigned char digest[16];
-			md5_file(img.c_str(), digest);
-			std::string md5(reinterpret_cast<char*>(digest));
+
+			char sig[32];
+			md5_file(img.c_str(), sig);
+			std::string md5(reinterpret_cast<char*>(sig));
+			assert(!md5.empty());
 
 			std::map<std::string, std::string>::iterator itr_md5 
 				= m_map_md5_2_image.find(md5);

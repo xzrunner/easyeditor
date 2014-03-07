@@ -11,24 +11,32 @@ namespace edb
 
 extern "C" {
 
-int md5_file(const char* filename, unsigned char digest[16])
+static char _hex[] = "0123456789abcdef";
+
+int md5_file(const char* filename, char sig[32])
 {
 	FILE* fp = fopen(filename, "rb");
 	if (!fp) {
 		return 1;
 	}
 
-	MD5_CTX ctx;
+	MD5_CTX md5;
 	unsigned char buffer[4096];
+	unsigned char decrypt[16];
 
-	MD5Init(&ctx);
+	MD5Init(&md5);
 	while(!feof(fp)) {
 		size_t size = fread(buffer, sizeof(unsigned char), 4096, fp);
-		MD5Update(&ctx, buffer, size);
+		MD5Update(&md5, buffer, size);
 	}
-	MD5Final(digest, &ctx);
+	MD5Final(decrypt, &md5);
 
 	fclose(fp);
+
+	for(int i=0;i<16;i++) {
+		sig[i*2] = _hex[decrypt[i] >> 4];
+		sig[i*2+1] = _hex[decrypt[i] & 0xf];
+	}
 
 	return 0;
 }
