@@ -9,8 +9,7 @@ namespace d2d
 	class DrawRectangleOP : public ZoomViewOP
 	{
 	public:
-		DrawRectangleOP(EditPanel* editPanel, 
-			const Colorf& color = Colorf(0, 0, 0));
+		DrawRectangleOP(EditPanel* editPanel, bool bOpenRightTap = true);
 		
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseLeftUp(int x, int y);
@@ -22,7 +21,6 @@ namespace d2d
 	protected:
 		Vector m_firstPos, m_currPos;
 
-	private:
 		ShapeStyle m_style;
 
 	}; // DrawRectangleOP

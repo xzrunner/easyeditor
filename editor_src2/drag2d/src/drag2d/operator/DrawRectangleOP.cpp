@@ -5,14 +5,11 @@
 namespace d2d
 {
 
-DrawRectangleOP::DrawRectangleOP(EditPanel* editPanel,
-								 const Colorf& color /*= Colorf(0, 0, 0)*/)
-	: ZoomViewOP(editPanel, true, false)
+DrawRectangleOP::DrawRectangleOP(EditPanel* editPanel, bool bOpenRightTap)
+	: ZoomViewOP(editPanel, true, bOpenRightTap)
 {
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();
-
-	m_style.color = color;
 }
 
 bool DrawRectangleOP::onMouseLeftDown(int x, int y)
