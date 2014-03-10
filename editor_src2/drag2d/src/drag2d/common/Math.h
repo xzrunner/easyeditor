@@ -57,7 +57,7 @@ namespace d2d
 
 		static bool isRectIntersectRect(const Rect& r0, const Rect& r1)
 		{
-			return !(r0.xMin > r1.xMax || r0.xMax < r1.xMin || r0.yMin > r1.yMax || r0.yMax < r1.yMin);
+			return !(r0.xMin >= r1.xMax || r0.xMax <= r1.xMin || r0.yMin >= r1.yMax || r0.yMax <= r1.yMin);
 		}
 
 		// To check if r1 in r0
