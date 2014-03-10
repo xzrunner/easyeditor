@@ -1,6 +1,6 @@
 
 {
-	"name" : "yellow_big_button",
+	"name" : "",
 	"sprite" : 
 	[
 		
@@ -8,46 +8,39 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "yellow_button_scale9.json",
+			"filepath" : "zdjs_star1.png",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "_sprite4",
 			"position" : 
 			{
-				"x" : -45.0,
-				"y" : -5.0
+				"x" : -77.0,
+				"y" : 7.0
 			},
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.8999999761581421,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 0.8999999761581421,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0x7fffffff",
-			"filepath" : "hb_text_fontblank.json",
-			"font" : "",
-			"font_filename" : "",
-			"label_height" : 52,
-			"label_width" : 185,
+			"filepath" : "zdjs_star1.png",
 			"multi color" : "0xffffffff",
-			"name" : "title",
+			"name" : "_sprite5",
 			"position" : 
 			{
-				"x" : -49.0,
-				"y" : -3.0
+				"x" : 80.0,
+				"y" : 7.0
 			},
-			"size" : 26,
 			"tag" : "",
-			"x mirror" : false,
+			"x mirror" : true,
 			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,

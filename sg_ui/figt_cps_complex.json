@@ -5,134 +5,183 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6205-biankuang-1.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 47.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 52.50,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6106-tongyong-1.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : -66.30001831054688,
 				"y" : 10.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.4499999880790710,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.4499999880790710,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "6105-tongyong-1.png",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : -63.65001678466797,
 				"y" : -57.250
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.4499999880790710,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.4499999880790710,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "tttt2_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 150,
+			"multi color" : "0xffffffff",
 			"name" : "title",
 			"position" : 
 			{
 				"x" : -3.000015258789063,
 				"y" : 72.0
 			},
+			"size" : 20,
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "ttttt3_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
 			"name" : "gold_amount",
 			"position" : 
 			{
 				"x" : 17.99998474121094,
 				"y" : 11.250
 			},
+			"size" : 18,
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
 			"filepath" : "ttttt3_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
 			"name" : "elixir_amount",
 			"position" : 
 			{
 				"x" : 17.99998474121094,
 				"y" : -60.0
 			},
+			"size" : 18,
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "info_icon_bg_scale9.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.058201074600220,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.8593750,
 			"y shear" : 0.0
 		}

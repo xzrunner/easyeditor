@@ -1,6 +1,6 @@
 
 {
-	"name" : "yellow_big_button",
+	"name" : "",
 	"sprite" : 
 	[
 		
@@ -8,22 +8,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "yellow_button_scale9.json",
+			"filepath" : "start_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -45.0,
-				"y" : -5.0
+				"x" : -5.0,
+				"y" : -1.0
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.8999999761581421,
+			"x offset" : 1.50,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.8999999761581421,
+			"y offset" : 7.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
@@ -32,20 +32,20 @@
 			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0x7fffffff",
-			"filepath" : "hb_text_fontblank.json",
+			"color" : "0xffffffff",
+			"filepath" : "_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 52,
-			"label_width" : 185,
+			"label_height" : 25,
+			"label_width" : 100,
 			"multi color" : "0xffffffff",
 			"name" : "title",
 			"position" : 
 			{
-				"x" : -49.0,
-				"y" : -3.0
+				"x" : -4.50,
+				"y" : -1.50
 			},
-			"size" : 26,
+			"size" : 22,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -56,5 +56,9 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
