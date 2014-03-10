@@ -6,10 +6,12 @@ namespace emesh
 {
 
 SelectNodesOP::SelectNodesOP(StagePanel* stage)
-: d2d::DrawRectangleOP(stage, d2d::Colorf(0.8f, 0.2f, 0.2f))
+	: d2d::DrawRectangleOP(stage)
 	, m_stage(stage)
 	, m_bDraggable(true)
 {
+	m_style.color = d2d::Colorf(0.8f, 0.2f, 0.2f);
+
 	m_firstPos.setInvalid();
 }
 
