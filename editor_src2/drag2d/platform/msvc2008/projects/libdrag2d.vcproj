@@ -1557,14 +1557,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\Context.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Context.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\common\Settings.cpp"
 					>
 				</File>

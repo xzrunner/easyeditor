@@ -1,24 +1,27 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "Context.h"
 #include "ResizeCMPT.h"
+#include "ToolbarPanel.h"
+#include "config.h"
 
 #include <easyscale9.h>
 
 namespace escale9
 {
 
-StagePanel::StagePanel(wxWindow* parent,
-					   wxTopLevelWindow* frame)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
+					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(this)
 	, m_patch(NULL)
+	, m_library(library)
+	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this);
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 
-	SetDropTarget(new DragSymbolTarget());
+	SetDropTarget(new DragSymbolTarget(library, this));
 }
 
 StagePanel::~StagePanel()
@@ -62,7 +65,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	const float edge = Context::Instance()->EDGE;
+	const float edge = EDGE;
 	const d2d::Vector& pos = sprite->getPosition();
 
 	int i, j;
@@ -109,21 +112,27 @@ void StagePanel::rebuildPatchSymbol()
 	{
 		if (m_patch) delete m_patch;
 		m_patch = new Symbol;
-		m_patch->composeFromSprites(m_sprites, Context::Instance()->width, 
-			Context::Instance()->height);
 
-		Context* context = Context::Instance();
+		float width = m_toolbar->getWidth(),
+			  height = m_toolbar->getHeight();
+		m_patch->composeFromSprites(m_sprites, width, height);
 		if (m_patch->type() == Symbol::e_3GridHor)
 		{
-			context->height = m_patch->getSize().yLength();
-			context->resizeCMPT->setValue(context->width, context->height);
+			height = m_patch->getSize().yLength();
+			m_toolbar->setSize(width, height);
 		}
 		else if (m_patch->type() == Symbol::e_3GridVer)
 		{
-			context->width = m_patch->getSize().xLength();
-			context->resizeCMPT->setValue(context->width, context->height);
+			width = m_patch->getSize().xLength();
+			m_toolbar->setSize(width, height);
 		}
 	}
+}
+
+void StagePanel::setToolbarPanel(ToolbarPanel* toolbar)
+{
+	m_toolbar = toolbar;
+	static_cast<StageCanvas*>(m_canvas)->setToolbarPanel(toolbar);
 }
 
 bool StagePanel::isComplete() const
@@ -169,16 +178,12 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	StagePanel* stage = static_cast<StagePanel*>(Context::Instance()->stage);
-	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(Context::Instance()->library);
-
-	d2d::Vector pos = stage->transPosScreenToProject(x, y);
-
-	d2d::ISymbol* symbol = library->getSymbol(index);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::ISymbol* symbol = m_library->getSymbol(index);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	sprite->translate(pos);
 
-	stage->insertSprite(sprite);
+	m_stage->insertSprite(sprite);
 
 	return true;
 }

@@ -42,7 +42,6 @@ namespace d2d
 
 		virtual void setTransform(const Vector& position, float angle);
 		void setScale(float xScale, float yScale);
-		void setScale(float scale);
 		void setShear(float xShear, float yShear);
 
 		bool isContain(const Vector& pos) const;

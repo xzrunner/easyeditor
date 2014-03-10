@@ -5,6 +5,9 @@
 
 namespace escale9
 {
+	class StagePanel;
+	class ToolbarPanel;
+
 	class Task : public d2d::ITask
 	{
 	public:
@@ -31,6 +34,10 @@ namespace escale9
 		wxWindow* m_root;
 
 		wxFrame* m_parent;
+
+		d2d::LibraryPanel* m_library;
+		StagePanel* m_stage;
+		ToolbarPanel* m_toolbar;
 
 	}; // Task
 }

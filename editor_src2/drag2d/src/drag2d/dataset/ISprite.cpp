@@ -180,15 +180,6 @@ void ISprite::setScale(float xScale, float yScale)
 	onSizeChanged();
 }
 
-void ISprite::setScale(float scale)
-{
-	m_offset.x *= (scale / m_scale.x);
-	m_offset.y *= (scale / m_scale.y);
-
-	m_scale.set(scale, scale);
-	onSizeChanged();
-}
-
 void ISprite::setShear(float xShear, float yShear)
 {
 	m_shear.set(xShear, yShear);

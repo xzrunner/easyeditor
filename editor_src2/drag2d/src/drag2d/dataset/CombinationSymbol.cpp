@@ -73,7 +73,7 @@ void CombinationSymbol::loadResources()
 		sprite = SpriteFactory::Instance()->create(symbol);
 
 		sprite->setTransform(entry.pos, entry.angle);
-		sprite->setScale(entry.scale);
+		sprite->setScale(entry.scale, entry.scale);
 		sprite->setMirror(entry.xMirror, entry.yMirror);
 
 		m_sprites.push_back(sprite);

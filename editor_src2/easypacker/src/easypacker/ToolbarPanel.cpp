@@ -169,13 +169,13 @@ void ToolbarPanel::onChangePadding(wxSpinEvent& event)
 
 void ToolbarPanel::onChangeScale(wxSpinEvent& event)
 {
-	Context::Instance()->scale = event.GetValue() * 0.01f;
+	float scale = Context::Instance()->scale = event.GetValue() * 0.01f;
 
 	std::vector<d2d::ISprite*> sprites;
 	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
 	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		sprites[i]->setScale(Context::Instance()->scale);
+		sprites[i]->setScale(scale, scale);
 
 	stage->arrangeAllSprites(true);
 	m_editPanel->Refresh();

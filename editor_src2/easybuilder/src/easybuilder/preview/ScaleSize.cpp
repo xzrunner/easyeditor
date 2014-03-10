@@ -11,5 +11,5 @@ ScaleSize::ScaleSize(d2d::ISprite* sprite, float scale)
 
 void ScaleSize::trigger()
 {
-	m_sprite->setScale(m_scale);
+	m_sprite->setScale(m_scale, m_scale);
 }

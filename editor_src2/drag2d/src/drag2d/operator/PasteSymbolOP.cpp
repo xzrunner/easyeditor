@@ -29,7 +29,7 @@ bool PasteSymbolOP::onMouseLeftDown(int x, int y)
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->translate(m_pos);
 		if (m_pScale)
-			sprite->setScale(*m_pScale);
+			sprite->setScale(*m_pScale, *m_pScale);
 		m_panelImpl->insertSprite(sprite);
 		sprite->release();
 	}

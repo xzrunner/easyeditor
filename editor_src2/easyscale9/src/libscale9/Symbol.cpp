@@ -195,7 +195,7 @@ void Symbol::resize(float width, float height) const
 
 void Symbol::loadResources()
 {
-	FileAdapter adapter;
+	FileLoader adapter;
 	adapter.load(m_filepath.c_str());
 
 	std::string dlg = d2d::FilenameTools::getFileDir(m_filepath);
@@ -422,7 +422,7 @@ void Symbol::stretch(d2d::ISprite* sprite, const d2d::Vector& center,
 		sprite->setScale(height / sw, width / sh);
 }
 
-void Symbol::initSprite(const FileAdapter::Entry& entry, d2d::ISprite** pSprite,
+void Symbol::initSprite(const FileLoader::Entry& entry, d2d::ISprite** pSprite,
 						const std::string& dlg)
 {
 	std::string filepath = entry.filepath;

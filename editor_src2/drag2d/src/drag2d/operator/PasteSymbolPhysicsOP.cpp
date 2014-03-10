@@ -33,7 +33,7 @@ bool PasteSymbolPhysicsOP::onMouseLeftDown(int x, int y)
 
 		sprite->loadBodyFromFile();
 		if (m_pScale) 
-			sprite->setScale(*m_pScale);
+			sprite->setScale(*m_pScale, *m_pScale);
 		if (sprite->getBody())
 			sprite->getBody()->getBody()->SetType(m_bStatic ? b2_staticBody : b2_dynamicBody);
 		m_panelImpl->insertSprite(sprite);

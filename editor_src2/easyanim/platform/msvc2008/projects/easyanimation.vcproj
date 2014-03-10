@@ -371,10 +371,6 @@
 					RelativePath="..\..\..\src\easyanimation\view\StagePanel.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\easyanimation\view\StageSettings.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="timeline"

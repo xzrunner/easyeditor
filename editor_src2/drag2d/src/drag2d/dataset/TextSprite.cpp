@@ -72,7 +72,8 @@ void TextSprite::setText(const std::string& text)
 void TextSprite::setSize(int size)
 {
 	m_size = size;
-	setScale((float)size / Font::DEFAULT_SIZE);
+	float scale = (float)size / Font::DEFAULT_SIZE;
+	setScale(scale, scale);
 }
 
 } // d2d

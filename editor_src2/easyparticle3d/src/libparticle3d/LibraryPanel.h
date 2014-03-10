@@ -21,17 +21,6 @@ public:
 	virtual void loadFromTextFile(std::ifstream& fin);
 	virtual void storeToTextFile(std::ofstream& fout) const;
 
-	d2d::ILibraryPage* getImagePage() { return m_imagePage; }
-	d2d::ILibraryPage* getComplexPage();
-	d2d::ILibraryPage* getAnimPage();
-	d2d::ILibraryPage* getScale9Page();
-
-private:
-	d2d::LibraryImagePage* m_imagePage;
-	ecomplex::LibraryPage* m_complexPage;
-	anim::LibraryPage* m_animPage;
-	escale9::LibraryPage* m_scale9Page;
-
 }; // LibraryPanel
 
 }

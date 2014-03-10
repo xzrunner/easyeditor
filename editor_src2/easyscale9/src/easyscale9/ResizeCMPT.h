@@ -4,13 +4,18 @@
 
 namespace escale9
 {
+	class StagePanel;
+	class ToolbarPanel;
+
 	class ResizeCMPT : public d2d::AbstractEditCMPT
 	{
 	public:
 		ResizeCMPT(wxWindow* parent, const wxString& name,
-			d2d::EditPanel* editPanel);
+			StagePanel* stage, ToolbarPanel* toolbar);
 
-		void setValue(int width, int height);
+		void setSize(int width, int height);
+		float getWidth() const;
+		float getHeight() const;
 
 	protected:
 		virtual wxSizer* initLayout();
@@ -19,6 +24,8 @@ namespace escale9
 		void onChangeSize(wxSpinEvent& event);
 
 	private:
+		StagePanel* m_stage;
+
 		wxSpinCtrl *m_wSpin, *m_hSpin;
 
 	}; // ResizeCMPT

@@ -11,11 +11,6 @@ namespace escale9
 	public:
 		static void store(const char* filepath, const Symbol& symbol);
 
-//		static void store(const std::string& filepath, const Symbol& symbol);
-
-	private:
-//		static Json::Value store(d2d::ISprite* sprite, const std::string& dlg);
-
 	}; // FileSaver
 }
 
