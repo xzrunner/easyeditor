@@ -121,6 +121,18 @@ void HistoryList::load(std::stack<AbstractAtomicOP*>& stack, const Json::Value& 
 		Json::Value spriteValue = opValue["sprites"][j++];
 		while (!spriteValue.isNull()) {
 			int index = spriteValue.asInt();
+
+			// error version
+			if (index < 0 || index >= sprites.size())
+			{
+				while (!stack.empty())
+				{
+					AbstractAtomicOP* op = stack.top(); stack.pop();
+					delete op;
+				}
+				return;
+			}
+
 			assert(index >= 0 && index < sprites.size());
 			selected.push_back(sprites[index]);
 			spriteValue = opValue["sprites"][j++];
