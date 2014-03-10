@@ -6,7 +6,6 @@
 namespace eanim
 {
 	class StagePanel;
-	class StageSettings;
 
 	class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
 	{
@@ -40,8 +39,6 @@ namespace eanim
 
 	private:
 		KeyDownHandler m_keyDownHandler;
-
-		const StageSettings& m_settings;
 
 		std::vector<Cross*> m_crosses;
 		Cross* m_selected;

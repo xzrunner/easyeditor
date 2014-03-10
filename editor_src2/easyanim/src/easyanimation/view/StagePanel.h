@@ -5,8 +5,6 @@
 
 #include <drag2d.h>
 
-#include "StageSettings.h"
-
 namespace eanim
 {
 	class KeyFrame;
@@ -50,9 +48,6 @@ namespace eanim
 		};
 
 		static std::string menu_entries[];
-
-	public:
-		StageSettings settings;
 
 	private:
 		class DragSymbolTarget : public wxTextDropTarget

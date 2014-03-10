@@ -2,7 +2,6 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/StagePanel.h"
-#include "view/StageSettings.h"
 #include "view/KeysPanel.h"
 #include "frame/Context.h"
 #include "frame/FileIO.h"
@@ -16,7 +15,6 @@ CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name,
 	StagePanel* stage, bool vertical)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_vertical(vertical)
-	, m_settings(stage->settings)
 {
 	m_editOP = new ArrangeSpriteOP(stage);
 }

@@ -7,7 +7,6 @@ namespace eanim
 {
 
 class StagePanel;
-class StageSettings;
 
 class CommonCMPT : public d2d::AbstractEditCMPT
 {
@@ -37,8 +36,6 @@ private:
 
 private:
 	bool m_vertical;
-
-	StageSettings& m_settings;
 
 	wxSpinCtrl* m_filling;
 

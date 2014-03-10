@@ -1,7 +1,6 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/StagePanel.h"
-#include "view/StageSettings.h"
 #include "frame/Context.h"
 
 namespace eanim
@@ -11,7 +10,6 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, 
 	static_cast<d2d::PropertySettingPanel*>(Context::Instance()->property))
 	, m_keyDownHandler(this)
-	, m_settings(stage->settings)
 	, m_selected(NULL)
 {
 }
