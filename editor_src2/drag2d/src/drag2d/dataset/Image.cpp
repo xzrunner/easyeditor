@@ -117,7 +117,7 @@ const unsigned char* Image::clip(int xmin, int xmax, int ymin, int ymax)
 	for (int i = 0; i < h; ++i)
 	{
 		int from = (m_width * (ymin + i) + xmin) * m_channels,
-			to = i * w * m_channels;
+			to = (h - 1 - i) * w * m_channels;
 		memcpy(&pixels[to], &m_pixels[from], line_size);
 	}
 	return pixels;
