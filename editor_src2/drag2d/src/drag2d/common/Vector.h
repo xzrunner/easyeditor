@@ -4,6 +4,8 @@
 #include <math.h>
 #include <iostream>
 
+static const float FLT_INVALID = FLT_INVALID;
+
 namespace d2d
 {
 	class Vector
@@ -20,8 +22,8 @@ namespace d2d
 			return *this;
 		}
 
-		void setInvalid() { x = y = FLT_MAX; }
-		bool isValid() const { return x != FLT_MAX && y != FLT_MAX; }
+		void setInvalid() { x = y = FLT_INVALID; }
+		bool isValid() const { return x != FLT_INVALID && y != FLT_INVALID; }
 
 		void set(float _x, float _y) { x = _x; y = _y; }
 
