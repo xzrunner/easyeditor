@@ -4,7 +4,7 @@
 #include <math.h>
 #include <iostream>
 
-static const float FLT_INVALID = FLT_INVALID;
+static const float FLT_INVALID = FLT_MAX;
 
 namespace d2d
 {
