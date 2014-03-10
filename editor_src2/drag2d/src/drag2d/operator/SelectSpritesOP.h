@@ -57,8 +57,6 @@ namespace d2d
 		// To disable mouse able when press ctrl and window query
 		bool m_bDraggable;
 
-		mutable ShapeStyle m_style;
-
 	}; // SelectSpritesOP
 }
 

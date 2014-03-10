@@ -14,6 +14,7 @@
 #include "view/MultiSpritesImpl.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
+#include "render/style_config.h"
 
 #include <wx/clipbrd.h>
 #include <sstream>
@@ -208,27 +209,13 @@ bool SelectSpritesOP::onDraw() const
 	{
 		if (m_currPos.x > m_firstPos.x)
 		{
-			m_style.lineStyle = LS_DEFAULT;
-
-			m_style.fill = true;
-			m_style.color.set(0, 0.22f, 0, 0.5f);
-			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
-
-			m_style.fill = false;
-			m_style.color.set(0.75f, 0, 0, 1);
-			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_ALL);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
 		}
 		else
 		{
-			m_style.lineStyle = LS_DASH;
-
-			m_style.fill = true;
-			m_style.color.set(0, 0, 0.22f, 0.5f);
-			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
-
-			m_style.fill = false;
-			m_style.color.set(0.75f, 0, 0, 1);
-			PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_PART);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
 		}
 	}
 
