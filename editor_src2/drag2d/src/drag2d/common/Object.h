@@ -10,11 +10,11 @@ namespace d2d
 
 		int getReferenceCount() const;
 
-		void retain();
-		void release();
+		void retain() const;
+		void release() const;
 
 	private:
-		int m_count;
+		mutable int m_count;
 
 	}; // Object
 }

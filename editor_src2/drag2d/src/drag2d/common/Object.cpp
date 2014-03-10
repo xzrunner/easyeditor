@@ -17,12 +17,12 @@ int Object::getReferenceCount() const
 	return m_count;
 }
 
-void Object::retain()
+void Object::retain() const
 {
 	++m_count;
 }
 
-void Object::release()
+void Object::release() const
 {
 	if (--m_count <= 0)
 		delete this;
