@@ -33,6 +33,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600) /*wxDefaultSize, wxMAXIMIZE | wxCLOSE_BOX*/)
 	, m_task(NULL)
 	, m_filetag(filetag)
+	, m_recent(this)
 {
 	initMenuBar();
 }
@@ -77,15 +78,7 @@ void Frame::onOpen(wxCommandEvent& event)
 		getFileFilter(), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_task->clear();
-		m_currFilename = dlg.GetPath();
-		SetTitle(dlg.GetPath());
-		try {
-			m_task->load(dlg.GetPath());
-		} catch (d2d::Exception& e) {
-			d2d::ExceptionDlg dlg(this, e);
-			dlg.ShowModal();
-		}
+		openFile(dlg.GetPath());
 	}
 }
 
@@ -112,6 +105,36 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		m_currFilename = fixed;
 		m_task->store(fixed);
 	}
+}
+
+void Frame::onOpenRecent1(wxCommandEvent& event)
+{
+	wxString filename = m_recent.getFilename(0);
+	openFile(filename);
+}
+
+void Frame::onOpenRecent2(wxCommandEvent& event)
+{
+	wxString filename = m_recent.getFilename(1);
+	openFile(filename);
+}
+
+void Frame::onOpenRecent3(wxCommandEvent& event)
+{
+	wxString filename = m_recent.getFilename(2);
+	openFile(filename);
+}
+
+void Frame::onOpenRecent4(wxCommandEvent& event)
+{
+	wxString filename = m_recent.getFilename(3);
+	openFile(filename);
+}
+
+void Frame::onOpenRecent5(wxCommandEvent& event)
+{
+	wxString filename = m_recent.getFilename(4);
+	openFile(filename);
 }
 
 void Frame::onEJPreview(wxCommandEvent& event)
@@ -245,6 +268,8 @@ wxMenu* Frame::initFileBar()
 	fileMenu->Append(wxID_SAVE, wxT("&Save\tCtrl+S"), wxT("Save the project"));
 	fileMenu->Append(wxID_SAVEAS, wxT("&Save as...\tF11"), wxT("Save to a new file"));
 	fileMenu->AppendSeparator();
+	fileMenu->AppendSubMenu(m_recent.getMenu(), wxT("Recent Files"));
+	fileMenu->AppendSeparator();
 	fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt+X"), wxT("Quit"));
 	return fileMenu;
 }
@@ -291,6 +316,86 @@ void Frame::setCurrFilename()
 			m_currFilename = str;
 			break;
 		}
+	}
+}
+
+void Frame::openFile(const wxString& filename)
+{
+	if (!m_task || filename.IsEmpty()) {
+		return;
+	}
+
+	m_task->clear();
+
+	m_currFilename = filename;
+	m_recent.insert(m_currFilename);
+	SetTitle(m_currFilename);
+
+	try {
+		m_task->load(m_currFilename);
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class Frame::RecentFiles
+//////////////////////////////////////////////////////////////////////////
+
+Frame::RecentFiles::RecentFiles(wxFrame* frame)
+	: m_frame(frame)
+	, m_menu(new wxMenu)
+{
+}
+
+void Frame::RecentFiles::insert(const wxString& filename)
+{
+	std::deque<wxString>::iterator itr = m_files.begin();
+	for ( ; itr != m_files.end(); ++itr)
+	{
+		if (*itr == filename) {
+			return;
+		}
+	}
+
+	if (m_files.size() >= CAPACITY)
+	{
+		m_files.pop_front();
+
+		while (m_menu->GetMenuItemCount() > 0) {
+			m_menu->Remove(m_menu->FindItemByPosition(0));
+		}
+
+		std::deque<wxString>::iterator itr = m_files.begin();
+		for ( ; itr != m_files.end(); ++itr)
+		{
+			insertOnlyMenu(*itr);
+		}
+	}
+
+	m_files.push_back(filename);
+	insertOnlyMenu(filename);
+}
+
+void Frame::RecentFiles::insertOnlyMenu(const wxString& filename)
+{
+	int size = m_files.size();
+	if (size > CAPACITY) {
+		return;
+	}
+	int id = ID_RECENT_FILES + size;
+	m_menu->Append(id, filename);
+	if (size == 1) {
+		m_frame->Connect(id, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Frame::onOpenRecent1));
+	} else if (size == 2) {
+		m_frame->Connect(id, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Frame::onOpenRecent2));
+	} else if (size == 3) {
+		m_frame->Connect(id, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Frame::onOpenRecent3));
+	} else if (size == 4) {
+		m_frame->Connect(id, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Frame::onOpenRecent4));
+	} else if (size == 5) {
+		m_frame->Connect(id, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Frame::onOpenRecent5));
 	}
 }
 

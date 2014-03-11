@@ -3,6 +3,7 @@
 #include "interfaces.h"
 
 #include <wx/wx.h>
+#include <deque>
 
 namespace d2d
 {
@@ -24,6 +25,11 @@ private:
 	void onOpen(wxCommandEvent& event);
 	void onSave(wxCommandEvent& event);
 	void onSaveAs(wxCommandEvent& event);
+	void onOpenRecent1(wxCommandEvent& event);
+	void onOpenRecent2(wxCommandEvent& event);
+	void onOpenRecent3(wxCommandEvent& event);
+	void onOpenRecent4(wxCommandEvent& event);
+	void onOpenRecent5(wxCommandEvent& event);
 
 	void onEJPreview(wxCommandEvent& event);
 	void onScreenshot(wxCommandEvent& event);
@@ -43,6 +49,8 @@ private:
 
 	void setCurrFilename();
 
+	void openFile(const wxString& filename);
+
 protected:
 	wxMenu* m_setting_menu;
 
@@ -53,13 +61,51 @@ private:
 	{
 		ID_EJ_PREVIEW = 1000,
 		ID_SCREENSHOT,
-		ID_SETTINGS
+		ID_SETTINGS,
+		ID_RECENT_FILES = 1050,
 	};
+
+private:
+	class RecentFiles
+	{
+	public:
+		RecentFiles(wxFrame* frame);
+
+		wxMenu* getMenu() { return m_menu; }
+
+		void insert(const wxString& filename);
+
+		wxString getFilename(int idx) const {
+			if (idx >= 0 && idx < m_files.size()) {
+				return m_files[idx];
+			} else {
+				return wxEmptyString;
+			}
+		}
+
+	private:
+		void openFile(wxCommandEvent& event);
+
+		void insertOnlyMenu(const wxString& filename);
+
+	private:
+		static const int CAPACITY = 2;
+
+	private:
+		wxFrame* m_frame;
+
+		wxMenu* m_menu;
+
+		std::deque<wxString> m_files;
+
+	}; // RecentFiles
 
 private:
 	wxString m_filetag;
 
 	wxString m_currFilename;
+
+	RecentFiles m_recent;
 
 	DECLARE_EVENT_TABLE()
 
