@@ -57,6 +57,11 @@ void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 	m_stage->traverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
+const d2d::EditPanel* Task::getEditPanel() const
+{
+	return m_stage;
+}
+
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
 	wxSplitterWindow* leftVerticalSplitter, 
 	wxSplitterWindow* rightVerticalSplitter, 

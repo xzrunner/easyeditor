@@ -43,6 +43,11 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
+const d2d::EditPanel* Task::getEditPanel() const
+{
+	return m_stage;
+}
+
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
 					   wxSplitterWindow* leftVerticalSplitter, 
 					   wxSplitterWindow* rightVerticalSplitter, 

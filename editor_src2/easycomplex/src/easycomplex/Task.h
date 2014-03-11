@@ -25,6 +25,8 @@ public:
 
 	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
 
+	virtual const d2d::EditPanel* getEditPanel() const;
+
 	ecomplex::StagePanel* getStagePanel() { return m_stage; }
 
 private:
