@@ -49,15 +49,15 @@ Vector Camera::transPosScreenToProject(int x, int y, int width, int height) cons
 	return proj;
 }
 
-// Vector Camera::transPosProjectToScreen(const Vector& proj, int width, int height) const
-// {
-// 	Vector scr;
-// 	int xView = (proj.x - m_center.x) / m_scale + (width >> 1),
-// 		yView = (proj.y - m_center.y) / m_scale + (height >> 1);
-// 	scr.x = xView;
-// 	scr.y = height - yView;
-// 	return scr;
-// }
+Vector Camera::transPosProjectToScreen(const Vector& proj, int width, int height) const
+{
+	Vector scr;
+	int xView = (proj.x - m_center.x) / m_scale + (width >> 1),
+		yView = (proj.y - m_center.y) / m_scale + (height >> 1);
+	scr.x = xView;
+	scr.y = height - yView;
+	return scr;
+}
 
 void Camera::addObserver(ICameraObserver* observer)
 {

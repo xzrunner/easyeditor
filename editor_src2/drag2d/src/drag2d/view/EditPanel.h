@@ -27,7 +27,7 @@ namespace d2d
 		virtual void clear();
 
 		Vector transPosScreenToProject(int x, int y) const;
-//		Vector transPosProjectToScreen(const Vector& proj) const;
+		Vector transPosProjectToScreen(const Vector& proj) const;
 
 		void drawEditTemp() const;
 

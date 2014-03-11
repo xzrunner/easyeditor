@@ -21,7 +21,7 @@ namespace d2d
 		void setScale(float scale, int x, int y, int width, int height);
 
 		Vector transPosScreenToProject(int x, int y, int width, int height) const;
-//		Vector transPosProjectToScreen(const Vector& proj, int width, int height) const;
+		Vector transPosProjectToScreen(const Vector& proj, int width, int height) const;
 
 		// For reset projection transform (gluOrtho2D)
 		void addObserver(ICameraObserver* observer);
