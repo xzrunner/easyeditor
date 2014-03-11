@@ -1,0 +1,345 @@
+{
+    "ymax": 0.0, 
+    "sprite": [
+        {
+            "y scale": 0.800000011920929, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite61", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1107_1.PNG", 
+            "x scale": 0.800000011920929, 
+            "y offset": 0.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 0.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -6.0, 
+                "x": -15.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite0", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv3_02.png", 
+            "x scale": 1.0, 
+            "y offset": 33.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -15.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite3", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_04.png", 
+            "x scale": 1.0, 
+            "y offset": 25.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -104.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite4", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_05.png", 
+            "x scale": 1.0, 
+            "y offset": 12.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 99.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite5", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_06.png", 
+            "x scale": 1.0, 
+            "y offset": -56.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 6.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite6", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_07.png", 
+            "x scale": 1.0, 
+            "y offset": -18.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 4.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite7", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_08.png", 
+            "x scale": 1.0, 
+            "y offset": 26.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 67.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite8", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_09.png", 
+            "x scale": 1.0, 
+            "y offset": 38.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -79.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite9", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_10.png", 
+            "x scale": 1.0, 
+            "y offset": 29.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 12.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite10", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_11.png", 
+            "x scale": 1.0, 
+            "y offset": 75.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 74.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite11", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_12.png", 
+            "x scale": 1.0, 
+            "y offset": 146.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -19.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite12", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_13.png", 
+            "x scale": 1.0, 
+            "y offset": 100.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -81.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite13", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_15.png", 
+            "x scale": 1.0, 
+            "y offset": -21.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -67.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite1", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_01.png", 
+            "x scale": 1.0, 
+            "y offset": -11.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 59.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite2", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv5_03.png", 
+            "x scale": 1.0, 
+            "y offset": 53.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 32.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 0.0, 
+                "x": 0.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite47", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv1_08.png", 
+            "x scale": 1.0, 
+            "y offset": 84.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 20.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 32.0, 
+                "x": -31.0
+            }, 
+            "add color": "0x00000000"
+        }
+    ], 
+    "xmax": 0.0, 
+    "xmin": 0.0, 
+    "ymin": 0.0, 
+    "name": "building_1201_lv5"
+}

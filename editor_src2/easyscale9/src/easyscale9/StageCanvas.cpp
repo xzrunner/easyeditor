@@ -1,6 +1,9 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "Context.h"
+#include "ToolbarPanel.h"
+#include "config.h"
+
+#include <easyscale9.h>
 
 namespace escale9
 {
@@ -12,6 +15,7 @@ static const int HEIGHT = 480;
 StageCanvas::StageCanvas(StagePanel* editPanel)
 	: d2d::OrthoCanvas(editPanel)
 	, m_batch(100, d2d::SpriteBatch::USAGE_STATIC)
+	, m_toolbar(NULL)
 {
 	m_bgStyle.color = LIGHT_GRAY;
 	m_bgStyle.fill = false;
@@ -29,7 +33,7 @@ StageCanvas::~StageCanvas()
 void StageCanvas::onDraw()
 {
 	StagePanel* editPanel = static_cast<StagePanel*>(m_editPanel);
-	if (Context::Instance()->isComposeOP)
+	if (m_toolbar->isComposeOP())
 	{
 		drawGuideLines();
 		editPanel->traverseSprites(d2d::DrawSpritesVisitor(m_batch),
@@ -48,7 +52,7 @@ void StageCanvas::onDraw()
 
 void StageCanvas::drawGuideLines()
 {
-	const float edge = Context::Instance()->EDGE;
+	const float edge = EDGE;
 
 	for (size_t i = 0; i < 3; ++i)
 		for (size_t j = 0; j < 3; ++j)

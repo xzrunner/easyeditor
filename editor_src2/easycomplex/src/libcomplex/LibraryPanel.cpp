@@ -5,6 +5,7 @@
 
 #include <easyanim.h>
 #include <easymesh.h>
+#include <easyscale9.h>
 
 namespace ecomplex
 {
@@ -12,20 +13,13 @@ namespace ecomplex
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 {
-	m_imagePage = new d2d::LibraryImagePage(getNotebook());
-	addPage(m_imagePage);
-	m_complexPage = new LibraryPage(getNotebook());
-	addPage(m_complexPage);
-	m_animPage = new anim::LibraryPage(getNotebook());
-	addPage(m_animPage);
-	m_scale9Page = new d2d::LibraryScale9Page(getNotebook());
-	addPage(m_scale9Page);
-	m_fontPage = new d2d::LibraryFontBlankPage(getNotebook());
-	addPage(m_fontPage);
-	m_meshPage = new emesh::LibraryPage(getNotebook());
-	addPage(m_meshPage);
-	m_scriptsPage = new d2d::LibraryScriptsPage(getNotebook());
-	addPage(m_scriptsPage);
+	addPage(new d2d::LibraryImagePage(getNotebook()));
+	addPage(new LibraryPage(getNotebook()));
+	addPage(new anim::LibraryPage(getNotebook()));
+	addPage(new escale9::LibraryPage(getNotebook()));
+	addPage(new d2d::LibraryFontBlankPage(getNotebook()));
+	addPage(new emesh::LibraryPage(getNotebook()));
+	addPage(new d2d::LibraryScriptsPage(getNotebook()));
 }
 
 void LibraryPanel::loadFromTextFile(std::ifstream& fin)
@@ -34,21 +28,6 @@ void LibraryPanel::loadFromTextFile(std::ifstream& fin)
 
 void LibraryPanel::storeToTextFile(std::ofstream& fout) const
 {
-}
-
-d2d::ILibraryPage* LibraryPanel::getComplexPage() 
-{ 
-	return m_complexPage; 
-}
-
-d2d::ILibraryPage* LibraryPanel::getAnimPage() 
-{ 
-	return m_animPage; 
-}
-
-d2d::ILibraryPage* LibraryPanel::getMeshPage()
-{
-	return m_meshPage;
 }
 
 } // ecomplex

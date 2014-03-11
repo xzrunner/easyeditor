@@ -1,0 +1,37 @@
+{
+  "name": "fireball1_projectile", 
+  "sprite": [
+    {
+      "angle": 0.0, 
+      "filepath": "2249_anim.json", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 0.3291015625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.3291015625, 
+      "y shear": 0
+    }, 
+    {
+      "add color": "0x2", 
+      "angle": 0.0, 
+      "filepath": "2250_anim.json", 
+      "multi color": "0x1eb2ff", 
+      "name": "", 
+      "position": {
+        "x": 0.8125, 
+        "y": 0.8125
+      }, 
+      "x mirror": false, 
+      "x scale": 0.59375, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.6943359375, 
+      "y shear": 0
+    }
+  ]
+}

@@ -22,4 +22,14 @@ wxString IPropertySetting::getPGType(wxPropertyGrid* pg) const
 	return wxANY_AS(value, wxString);
 }
 
+void IPropertySetting::splitString(const wxAny& value, double* x, double* y)
+{
+	wxString val = wxANY_AS(value, wxString);
+	size_t gap = val.find_first_of(';');
+	wxString sx = val.substr(0, gap),
+		sy = val.substr(gap + 1);
+	sx.ToDouble(x);
+	sy.ToDouble(y);
+}
+
 } // d2d

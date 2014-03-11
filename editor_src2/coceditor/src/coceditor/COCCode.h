@@ -7,6 +7,7 @@
 namespace ebuilder { class CodeGenerator; }
 namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
+namespace escale9 { class Symbol; }
 
 namespace coceditor
 {
@@ -36,7 +37,7 @@ namespace coceditor
 		void resolveAnimation(const ecomplex::Symbol* symbol);
 		//void resolveAnimation(const anim::Symbol* symbol);
 		void resolveAnimation(const anim::Symbol* symbol);
-		void resolveAnimation(const d2d::Scale9Symbol* symbol);
+		void resolveAnimation(const escale9::Symbol* symbol);
 
 		void resolveAnimationCommon(const d2d::ISymbol* symbol);
 

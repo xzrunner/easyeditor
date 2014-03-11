@@ -2569,16 +2569,8 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
-	"filename": "2012fujia3/run/1/5_004.png",
-	"frame": {"x":756,"y":1439,"w":4,"h":4},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":202,"y":164,"w":4,"h":4},
-	"sourceSize": {"w":486,"h":486}
-},
-{
 	"filename": "2012fujia3/run/1/5_006.png",
-	"frame": {"x":1318,"y":1408,"w":4,"h":4},
+	"frame": {"x":756,"y":1439,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":208,"y":168,"w":4,"h":4},
@@ -2634,7 +2626,7 @@
 },
 {
 	"filename": "2012fujia3/run/2/7_007.png",
-	"frame": {"x":1323,"y":1408,"w":4,"h":4},
+	"frame": {"x":1318,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":227,"y":172,"w":4,"h":4},
@@ -2650,7 +2642,7 @@
 },
 {
 	"filename": "2012fujia3/run/3/4_005.png",
-	"frame": {"x":1328,"y":1408,"w":4,"h":4},
+	"frame": {"x":1323,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":205,"y":183,"w":4,"h":4},
@@ -2666,7 +2658,7 @@
 },
 {
 	"filename": "2012fujia3/run/3/4_007.png",
-	"frame": {"x":1333,"y":1408,"w":4,"h":4},
+	"frame": {"x":1328,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":203,"y":190,"w":4,"h":4},
@@ -2674,7 +2666,7 @@
 },
 {
 	"filename": "2012fujia3/run/3/5_004.png",
-	"frame": {"x":1338,"y":1408,"w":4,"h":4},
+	"frame": {"x":1333,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":279,"y":164,"w":4,"h":4},
@@ -2690,7 +2682,7 @@
 },
 {
 	"filename": "2012fujia3/run/3/5_006.png",
-	"frame": {"x":1343,"y":1408,"w":4,"h":4},
+	"frame": {"x":1338,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":271,"y":164,"w":4,"h":4},
@@ -4050,7 +4042,7 @@
 },
 {
 	"filename": "2022xueying1/attack1/1/4_008.png",
-	"frame": {"x":1348,"y":1408,"w":4,"h":4},
+	"frame": {"x":1343,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":239,"y":142,"w":4,"h":4},
@@ -4058,7 +4050,7 @@
 },
 {
 	"filename": "2022xueying1/attack1/2/4_006.png",
-	"frame": {"x":1353,"y":1408,"w":4,"h":4},
+	"frame": {"x":1348,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":288,"y":155,"w":4,"h":4},
@@ -4082,7 +4074,7 @@
 },
 {
 	"filename": "2022xueying1/attack1/3/5_002.png",
-	"frame": {"x":1358,"y":1408,"w":4,"h":4},
+	"frame": {"x":1353,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":231,"y":179,"w":4,"h":4},
@@ -4154,7 +4146,7 @@
 },
 {
 	"filename": "2022xueying2/attack1/1/4_008.png",
-	"frame": {"x":1363,"y":1408,"w":4,"h":4},
+	"frame": {"x":1358,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":239,"y":142,"w":4,"h":4},
@@ -4162,7 +4154,7 @@
 },
 {
 	"filename": "2022xueying2/attack1/2/4_006.png",
-	"frame": {"x":1368,"y":1408,"w":4,"h":4},
+	"frame": {"x":1363,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":288,"y":155,"w":4,"h":4},
@@ -4178,7 +4170,7 @@
 },
 {
 	"filename": "2022xueying2/attack1/3/5_002.png",
-	"frame": {"x":1373,"y":1408,"w":4,"h":4},
+	"frame": {"x":1368,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":231,"y":179,"w":4,"h":4},
@@ -4258,7 +4250,7 @@
 },
 {
 	"filename": "2022xueying3/attack1/1/4_008.png",
-	"frame": {"x":1363,"y":1408,"w":4,"h":4},
+	"frame": {"x":1358,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":239,"y":142,"w":4,"h":4},
@@ -4266,7 +4258,7 @@
 },
 {
 	"filename": "2022xueying3/attack1/2/4_006.png",
-	"frame": {"x":1378,"y":1408,"w":4,"h":4},
+	"frame": {"x":1373,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":288,"y":155,"w":4,"h":4},
@@ -4298,7 +4290,7 @@
 },
 {
 	"filename": "2022xueying3/attack1/3/5_002.png",
-	"frame": {"x":1883,"y":2025,"w":4,"h":4},
+	"frame": {"x":1378,"y":1408,"w":4,"h":4},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":231,"y":179,"w":4,"h":4},
@@ -5225,6 +5217,14 @@
 	"sourceSize": {"w":486,"h":486}
 },
 {
+	"filename": "2206jijian3/cheer/1/5_004.png",
+	"frame": {"x":1883,"y":2025,"w":4,"h":4},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":220,"y":231,"w":4,"h":4},
+	"sourceSize": {"w":486,"h":486}
+},
+{
 	"filename": "2206jijian3/cheer/1/6_004.png",
 	"frame": {"x":704,"y":1444,"w":56,"h":20},
 	"rotated": false,
@@ -5319,6 +5319,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "0.95",
-	"smartupdate": "$TexturePacker:SmartUpdate:74dd5f7ebea13c12da4dcf02db77f1a1:5ac325b025bcd376131948d91ece5375:a3d47e00f1824ff08e10a99c864fefd7$"
+	"smartupdate": "$TexturePacker:SmartUpdate:63d04cd482a35da1696fafb81e63741d:ebedbc25f646ee49c3bc43e4300fff09:a3d47e00f1824ff08e10a99c864fefd7$"
 }
 }

@@ -136,7 +136,7 @@
 			"position" : 
 			{
 				"x" : 33.0,
-				"y" : -62.0
+				"y" : -67.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -159,7 +159,7 @@
 			"position" : 
 			{
 				"x" : 33.0,
-				"y" : -62.0
+				"y" : -67.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -168,6 +168,29 @@
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "res_icon_dark_elixir_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "DarkElixir",
+			"position" : 
+			{
+				"x" : 33.0,
+				"y" : -67.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.3000000119209290,
 			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
@@ -247,5 +270,9 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }

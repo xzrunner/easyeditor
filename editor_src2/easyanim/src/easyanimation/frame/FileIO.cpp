@@ -28,7 +28,6 @@ void FileIO::load(const wxString& filepath)
 	fin.close();
 
 	std::string dlg = d2d::FilenameTools::getFileDir(filepath);
-	d2d::Context::Instance()->resPath = dlg + "\\";
 
 	context->fps = value["fps"].asInt();
 	static_cast<LayersPanel*>(context->layersPanel)->setFPS(context->fps);

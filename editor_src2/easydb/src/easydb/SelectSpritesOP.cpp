@@ -62,7 +62,7 @@ namespace edb
 		// 	else if (d2d::Scale9Sprite* patch9 = dynamic_cast<d2d::Scale9Sprite*>(selected))
 		// 	{
 		//  		d2d::Scale9Symbol& symbol = const_cast<d2d::Scale9Symbol&>(patch9->getSymbol());
-		//  		libscale9::EditDialog dlg(m_editPanel, NULL, &symbol);
+		//  		escale9::EditDialog dlg(m_editPanel, NULL, &symbol);
 		//  		dlg.ShowModal();
 		//  
 		////   		std::vector<d2d::Scale9Sprite*> sprites;

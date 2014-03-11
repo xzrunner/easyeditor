@@ -38,6 +38,10 @@ ISymbol* SymbolMgr::getSymbol(const wxString& filepath)
 	if (itr == m_symbols.end())
 	{
 		ISymbol* symbol = SymbolFactory::create(lowerpath);
+		if (!symbol) 
+		{
+			throw Exception("Symbol %s error!", filepath.c_str());
+		}
 		bool isLoaded = symbol->loadFromFile(lowerpath);
 		if (isLoaded)
 		{

@@ -1,0 +1,736 @@
+{
+  "fps": 30, 
+  "layer": [
+    {
+      "frame": [
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1763_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 1, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1763_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 2, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1763_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 3, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1764_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 4, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1764_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 5, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1764_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 6, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1765_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 7, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1765_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 8, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1765_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 9, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1766_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 10, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1766_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 11, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1766_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 12, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1767_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 13, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1767_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 14, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1767_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 15, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1768_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 16, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1768_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 17, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1768_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 18, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1769_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 19, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1769_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 20, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1769_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 21, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1770_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 22, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1770_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 23, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1770_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 24, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1771_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 25, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1771_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 26, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1771_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 27, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1772_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 28, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1772_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 29, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1772_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 30, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1773_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 31, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1773_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 32, 
+          "tween": false
+        }, 
+        {
+          "actor": [
+            {
+              "angle": 0, 
+              "filepath": "1773_complex.json", 
+              "name": "", 
+              "position": {
+                "x": 0, 
+                "y": 0
+              }, 
+              "x mirror": false, 
+              "x scale": 1, 
+              "x shear": 0, 
+              "y mirror": false, 
+              "y scale": 1, 
+              "y shear": 0
+            }
+          ], 
+          "id": 0, 
+          "time": 33, 
+          "tween": false
+        }
+      ]
+    }
+  ], 
+  "name": ""
+}

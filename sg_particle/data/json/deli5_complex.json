@@ -1,0 +1,22 @@
+{
+  "name": "deli5", 
+  "sprite": [
+    {
+      "add color": "0x0", 
+      "angle": 0.0, 
+      "filepath": "darkelixir_complex.json", 
+      "multi color": "0x250019ff", 
+      "name": "", 
+      "position": {
+        "x": 0.0, 
+        "y": 0.0
+      }, 
+      "x mirror": false, 
+      "x scale": 1.0, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1.0, 
+      "y shear": 0
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 local READ_ME = [[
 	usepage:
-		lua epbin.lua <gen_model> <model> <filename>
+		lua epbin.lua <gen_model> <model> <filename>  [gen_model_opt]
 	gen_model:
 		-ep : 生成单个的ep文件
 		-pd : 生成pic 和animation分离的两个文件(xx.epp: 图片打包文件 xx.epd animation打包文件)
@@ -10,8 +10,11 @@ local READ_ME = [[
 		-png4:      使用的贴图为png4文件
 		-pvr:       使用的贴图文件为pvr压缩文件
 		-ktx:		使用的贴图文件为ktx压缩文件
+		-pkm:		使用的贴图文件为pkm压缩文件
+		-pkmc:		使用的贴图文件为pkm压缩文件
 	filename:
 		导出的lua文件名
+	gen_model_opt: <number>  设置保留update 贴图的个数 默认为0
 
 	PS:
 		贴图的文件命名方式为filename<1..8>.<ext> 其中filename为lua的filename相同(无后缀名)
@@ -23,7 +26,9 @@ local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
 
-local gen_model, model, filename, compress = ...
+local gen_model, model, filename, gm_opt, compress = ...
+gm_opt = tonumber(gm_opt) or 0
+
 local max_id = 0
 local export = 0
 
@@ -53,7 +58,6 @@ local _env = _ENV
 _env.picture = picture
 _env.animation = animation
 _env.texture = texture
-assert(filename, "filename is empty")
 f = assert(loadfile (filename , "t", _env))
 f()
 
@@ -66,6 +70,9 @@ local TEXTURE8 = 1
 local DATA = 2
 local PVRTC = 3
 local KTX = 4
+local PKM = 5
+local PKMC = 6
+
 
 local COMPONENT = 0
 local SWITCH = 1
@@ -304,6 +311,43 @@ local function load_ktx(filename)
 	return table.concat(memfile.result)
 end
 
+local function load_pkm(filename)
+	local pkm = require "pkm"
+	memfile.result = {}
+	local w,h,rgb,alpha = pkm.read(filename)
+	print("Gen pkm image",w,h,filename)
+	wchar(memfile, PKM)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, rgb)
+	table.insert(memfile.result, alpha)
+	return table.concat(memfile.result)
+end
+
+local function load_pkmc(filename)
+	local pkmc = require "pkmc"
+	memfile.result = {}
+	local w,h,rgb,alpha = pkmc.read(filename)
+	print("Gen pkm image",w,h,filename)
+	wchar(memfile, PKMC)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, rgb)
+	table.insert(memfile.result, alpha)
+	return table.concat(memfile.result)
+end
+
+local function load_dds(filename)
+	memfile.result = {}
+	local w,h,data = dds.read(filename..".dds")
+	print("Gen dds image",w,h,filename)
+	wchar(memfile, DDS)
+	wshort(memfile, w)
+	wshort(memfile, h)
+	table.insert(memfile.result, data)
+	return table.concat(memfile.result)
+end
+
 local function _load(filename, func)
 	memfile.result = {}
 	local w,h,depth,data = func(filename)
@@ -367,7 +411,16 @@ elseif model =="-pvr" then
 	gm_filename = filename
 elseif model == "-ktx" then
 	gm_load = load_ktx
-	gm_filename = filename
+	gm_filename = filename		
+elseif model == "-pkm" then
+	gm_load = load_pkm
+	gm_filename = filename	
+elseif model == "-pkmc" then
+	gm_load = load_pkmc
+	gm_filename = filename		
+-- elseif model == "-dds" then
+-- 	gm_load = load_dds
+-- 	gm_filename = filename
 else
 	print(READ_ME)
 	error("not match ppm or png  model.")
@@ -375,9 +428,20 @@ end
 
 -- gen pic data
 local function gen_epp(f_epp)
-	for i = 1,tex do
+	assert(tex - gm_opt > 0)
+
+	for i = 1,tex-gm_opt do
 		local t = gm_load(gm_filename..tostring(i))
 		write_block(f_epp, t)
+	end
+end
+
+local function gen_epup(f_epup)
+	assert(tex - gm_opt > 0)
+
+	for i= tex-gm_opt+1, tex do
+		local t = gm_load(gm_filename..tostring(i))
+		write_block(f_epup, t)
 	end
 end
 
@@ -395,6 +459,12 @@ if gen_model == "-ep" then
 elseif gen_model == "-pd" then
 	local f_epp = io.open(filename .. ".epp", "wb")
 	local f_epd = io.open(filename..".epd", "wb")
+	if gm_opt > 0 then
+		local f_epup = io.open(filename..".epup", "wb")
+		gen_epup(f_epup)
+		f_epup:close()
+	end
+
 	gen_epp(f_epp)
 	gen_epd(f_epd)
 	f_epp:close()

@@ -59,44 +59,6 @@
 			"y mirror" : false,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\cj_sp1.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : -29.42999839782715,
-				"y" : 141.7839660644531
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "",
-			"angle" : 0.0,
-			"filepath" : "..\\..\\pngs\\cj_sp2.png",
-			"multi color" : "",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 27.58317375183106,
-				"y" : 38.20499038696289
-			},
-			"x mirror" : false,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 1.0,
-			"y shear" : 0.0
 		}
 	]
 }

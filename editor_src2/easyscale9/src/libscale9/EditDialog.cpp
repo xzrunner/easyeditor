@@ -1,18 +1,18 @@
 #include "EditDialog.h"
+#include "ResizeBaseOP.h"
+#include "FileSaver.h"
+#include "ToolbarPanel.h"
+#include "Symbol.h"
 
 #include <wx/splitter.h>
 
-#include "ResizeOP.h"
-#include "FileSaver.h"
-#include "ToolbarPanel.h"
-
-namespace libscale9
+namespace escale9
 {
 	BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 		EVT_CLOSE(EditDialog::onClose)
 	END_EVENT_TABLE()
 
-	EditDialog::EditDialog(wxWindow* parent, d2d::Scale9Symbol* symbol)
+	EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 		: wxDialog(parent, wxID_ANY, "Edit Scale9", wxDefaultPosition,
 		wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 		, m_symbol(symbol)
@@ -26,7 +26,7 @@ namespace libscale9
 		wxSplitterWindow* splitter = new wxSplitterWindow(this);
 		
 		m_editPanel = new d2d::EditPanel(splitter, this);
-		m_editPanel->setEditOP(new ResizeOP(m_editPanel, m_symbol));
+		m_editPanel->setEditOP(new ResizeBaseOP(m_editPanel, m_symbol));
 		m_editPanel->setCanvas(new d2d::DialogStageCanvas(m_editPanel, m_symbol));
 
 		ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_symbol);

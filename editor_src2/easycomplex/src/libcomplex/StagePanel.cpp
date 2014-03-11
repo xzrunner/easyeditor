@@ -88,22 +88,6 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	sIndex.ToLong(&index);
 
 	d2d::ISymbol* symbol = m_library->getSymbol(index);
-
-// 	LibraryPanel* library = m_stage->m_library;
-// 	d2d::ISymbol* symbol = NULL;
-// 	if (sType == "symbol")
-// 		symbol = static_cast<d2d::ISymbol*>(library->getImagePage()->getSymbol(index));
-// 	else if (sType == "complex")
-// 		symbol = static_cast<d2d::ISymbol*>(library->getComplexPage()->getSymbol(index));
-// 	else if (sType == "anim")
-// 		symbol = static_cast<d2d::ISymbol*>(library->getAnimPage()->getSymbol(index));
-// 	else if (sType == "scale9")
-// 		symbol = static_cast<d2d::ISymbol*>(library->getScale9Page()->getSymbol(index));
-// 	else if (sType == "fontblank")
-// 		symbol = static_cast<d2d::ISymbol*>(library->getFontPage()->getSymbol(index));
-// 	else if (sType == "scripts")
-// 		symbol = static_cast<d2d::ISymbol*>(library->getScriptsPage()->getSymbol(index));
-
 	if (symbol)
 	{
 		if (d2d::ScriptsSymbol* scripts = dynamic_cast<d2d::ScriptsSymbol*>(symbol)) 

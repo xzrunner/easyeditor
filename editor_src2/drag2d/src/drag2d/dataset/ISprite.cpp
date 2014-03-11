@@ -173,13 +173,10 @@ void ISprite::setTransform(const Vector& position, float angle)
 
 void ISprite::setScale(float xScale, float yScale)
 {
-	m_scale.set(xScale, yScale);
-	onSizeChanged();
-}
+	m_offset.x *= (xScale / m_scale.x);
+	m_offset.y *= (yScale / m_scale.y);
 
-void ISprite::setScale(float scale)
-{
-	m_scale.set(scale, scale);
+	m_scale.set(xScale, yScale);
 	onSizeChanged();
 }
 

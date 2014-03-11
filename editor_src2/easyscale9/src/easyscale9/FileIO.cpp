@@ -1,12 +1,15 @@
 #include "FileIO.h"
 #include "StagePanel.h"
-#include "Context.h"
 #include "ResizeCMPT.h"
+#include "ToolbarPanel.h"
+
+#include <easyscale9.h>
 
 namespace escale9
 {
 
-void FileIO::load(const char* filename)
+void FileIO::load(const char* filename, d2d::LibraryPanel* library, 
+				  d2d::MultiSpritesImpl* stage, ToolbarPanel* toolbar)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -14,40 +17,37 @@ void FileIO::load(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
-	d2d::Context::Instance()->resPath = dlg + "\\";
-
-	Context* context = Context::Instance();
+	wxString dlg = d2d::FilenameTools::getFileDir(filename);
 
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
 		d2d::ISprite* sprite = load(spriteValue, dlg);
-		context->stage->insertSprite(sprite);
+		stage->insertSprite(sprite);
  		spriteValue = value["sprite"][i++];
  	}
 
-	context->width = value["width"].asInt();
-	context->height = value["height"].asInt();
-	context->resizeCMPT->setValue(context->width, context->height);
+	float width = value["width"].asInt(),
+		  height = value["height"].asInt();
+	toolbar->setSize(width, height);
 
-	context->library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
-void FileIO::store(const char* filename)
+void FileIO::store(const char* filename, StagePanel* stage, 
+				   ToolbarPanel* toolbar)
 {
 	Json::Value value;
 
-	value["type"] = static_cast<d2d::Scale9Symbol*>
-		(Context::Instance()->stage->getPatchSymbol())->type();
+	value["type"] = stage->getPatchSymbol()->type();
 
-	value["width"] = Context::Instance()->width;
-	value["height"] = Context::Instance()->height;
+	value["width"] = toolbar->getWidth();
+	value["height"] = toolbar->getHeight();
 
  	std::vector<d2d::ISprite*> sprites;
-	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	wxString dlg = d2d::FilenameTools::getFileDir(filename);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["sprite"][i] = store(sprites[i], dlg);
 
@@ -57,7 +57,7 @@ void FileIO::store(const char* filename)
 	fout.close();
 }
 
-d2d::ISprite* FileIO::load(const Json::Value& value, const std::string& dlg)
+d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dlg)
 {
 	d2d::ISprite* sprite = NULL;
 	std::string path = d2d::FilenameTools::getAbsolutePath(dlg, value["filepath"].asString());
@@ -71,7 +71,8 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const std::string& dlg)
 	pos.y = value["position"]["y"].asDouble();
 	sprite->setTransform(pos, value["angle"].asDouble());
 
-	sprite->setScale(value["scale"].asDouble());
+	float scale = value["scale"].asDouble();
+	sprite->setScale(scale, scale);
 
 	sprite->setMirror(value["x mirror"].asBool(), 
 		value["y mirror"].asBool());
@@ -79,7 +80,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const std::string& dlg)
 	return sprite;
 }
 
-Json::Value FileIO::store(d2d::ISprite* sprite, const std::string& dlg)
+Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dlg)
 {
 	Json::Value value;
 
@@ -102,4 +103,5 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const std::string& dlg)
 
 	return value;
 }
+
 } // escale9

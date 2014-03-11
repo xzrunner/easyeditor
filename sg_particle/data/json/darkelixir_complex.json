@@ -1,0 +1,21 @@
+{
+	"name" : "",
+	"sprite" : 
+	[
+		{
+			"filepath" : "darkelixir.png",
+			"angle" : 1.5707963267949,
+			"x scale" : 1.25,
+			"y scale" : 1.25,
+			"x shear" : 0,
+			"y shear" : 0,
+			"x mirror" : false,
+			"y mirror" : false,
+			"position" : 
+			{
+				"x" : -0.625,
+				"y" : 0
+			}
+		}
+	]
+}

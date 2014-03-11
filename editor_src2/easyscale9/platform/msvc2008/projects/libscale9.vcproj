@@ -161,14 +161,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libscale9\FileSaver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libscale9\FileSaver.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libscale9\ToolbarPanel.cpp"
 				>
 			</File>
@@ -176,6 +168,26 @@
 				RelativePath="..\..\..\src\libscale9\ToolbarPanel.h"
 				>
 			</File>
+			<Filter
+				Name="file"
+				>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileLoader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileLoader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileSaver.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\FileSaver.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="stage"
@@ -189,13 +201,61 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libscale9\ResizeOP.cpp"
+				RelativePath="..\..\..\src\libscale9\ResizeBaseOP.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libscale9\ResizeOP.h"
+				RelativePath="..\..\..\src\libscale9\ResizeBaseOP.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="dataset"
+			>
+			<File
+				RelativePath="..\..\..\src\libscale9\Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libscale9\Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libscale9\Symbol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libscale9\Symbol.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="view"
+			>
+			<Filter
+				Name="library"
+				>
+				<File
+					RelativePath="..\..\..\src\libscale9\LibraryPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\LibraryPage.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\libscale9\SymbolPropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\SymbolPropertySetting.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

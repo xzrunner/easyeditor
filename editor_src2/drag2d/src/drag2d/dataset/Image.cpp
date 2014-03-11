@@ -82,8 +82,7 @@ void Image::reload()
 void Image::draw(const Rect& r) const
 {
 	Shader* shader = Shader::Instance();
-//	shader->sprite();
-	shader->null();
+	shader->sprite();
 
 	float tot_hw = m_width * 0.5f,
 		  tot_hh = m_height * 0.5f;

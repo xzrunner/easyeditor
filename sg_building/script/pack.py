@@ -32,7 +32,7 @@ WORK_ITEMS = [
             'texpack_json': data_dir('texpack_json', 'buildings2'),
             'texpack_tex':  data_dir('texpack_tex'),
             'tmp_lua':      output_dir('buildings2.tmp.lua'),
-            'scale':        '1.0',
+            'scale':        '0.95',
             'output_dir':   output_dir(),
             'output_lua':   output_dir('buildings2.lua'),
             'output_epp':    output_dir('buildings2.epp'),
@@ -95,3 +95,4 @@ print "  FINISHED. press any key to exit"
 print ""
 print "================================================="
 os.system("pause")
+os.system('start explorer "%s"' % PATH_SHARE_EP)

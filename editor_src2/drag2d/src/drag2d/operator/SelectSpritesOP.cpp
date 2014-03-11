@@ -3,7 +3,6 @@
 #include "common/Rect.h"
 #include "dataset/TextSprite.h"
 #include "dataset/FontSprite.h"
-#include "dataset/Scale9Sprite.h"
 #include "dataset/SymbolMgr.h"
 #include "dataset/SpriteFactory.h"
 #include "component/AbstractEditCMPT.h"
@@ -12,7 +11,6 @@
 #include "view/MultiSpritesPropertySetting.h"
 #include "view/TextPropertySetting.h"
 #include "view/FontPropertySetting.h"
-#include "view/Scale9PropertySetting.h"
 #include "view/MultiSpritesImpl.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
@@ -255,8 +253,6 @@ IPropertySetting* SelectSpritesOP::createPropertySetting(ISprite* sprite) const
 		return new TextPropertySetting(m_editPanel, text);
 	else if (FontSprite* font = dynamic_cast<FontSprite*>(sprite))
 		return new FontPropertySetting(m_editPanel, font);
-//  	else if (Scale9Sprite* scale = dynamic_cast<Scale9Sprite*>(sprite))
-//  		return new Scale9PropertySetting(m_editPanel, const_cast<Scale9Symbol*>(&scale->getSymbol()));
 	else if (sprite)
 		return new SpritePropertySetting(m_editPanel, sprite);
 	else 

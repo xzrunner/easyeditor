@@ -2,7 +2,6 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 #include "FileIO.h"
-#include "Context.h"
 
 namespace escale9
 {
@@ -23,27 +22,25 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	FileIO::load(filepath);
+	FileIO::load(filepath, m_library, m_stage, m_toolbar);
 }
 
 void Task::store(const char* filepath) const
 {
-	FileIO::store(filepath);
+	FileIO::store(filepath, m_stage, m_toolbar);
 }
 
 bool Task::isDirty() const
 {
-	return Context::Instance()->stage->isDirty();
+	return m_stage->isDirty();
 }
 
 void Task::clear()
 {
-	Context* context = Context::Instance();
-
-	context->library->clear();
-	context->stage->clear();
-	context->library->Refresh();
-	context->stage->Refresh();
+	m_library->clear();
+	m_stage->clear();
+	m_library->Refresh();
+	m_stage->Refresh();
 }
 
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
@@ -52,16 +49,17 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 					   wxWindow*& library, wxWindow*& property, 
 					   wxWindow*& stage, wxWindow*& toolbar)
 {
-	Context* context = Context::Instance();
+	library = m_library = new d2d::LibraryPanel(leftHorizontalSplitter);
+	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
 
-	library = context->library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	context->library->addPage(new d2d::LibraryImagePage(context->library->getNotebook()));
+	d2d::PropertySettingPanel* _property;
+	property = _property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
-	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent, m_library);
 
-	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
+	toolbar = m_toolbar = new ToolbarPanel(rightVerticalSplitter, m_stage, _property);
 
-	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter);
+	m_stage->setToolbarPanel(m_toolbar);
 }
 
 void Task::initLayout()

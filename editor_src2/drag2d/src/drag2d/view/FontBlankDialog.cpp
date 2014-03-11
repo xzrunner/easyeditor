@@ -1,7 +1,7 @@
 #include "FontBlankDialog.h"
 
-#include "common/Context.h"
 #include "common/FileNameParser.h"
+#include "common/FileNameTools.h"
 #include "dataset/FontBlankSymbol.h"
 
 #include <json/json.h>
@@ -136,9 +136,13 @@ void FontBlankDialog::storeSymbol()
 		ext = "_" + ext + ".json";
 
 		std::string name = m_symbol->name;
-		if (name.empty()) name = m_symbol->getName();
+		if (name.empty()) 
+		{
+			name = m_symbol->getName();
+		}
 
-		filepath = Context::Instance()->getDir() + "\\" + m_symbol->name + ext;
+		wxString dir = FilenameTools::getFileDir(m_symbol->getFilepath());
+		filepath = dir + "\\" + m_symbol->name + ext;
 	}
 
 	Json::Value value;

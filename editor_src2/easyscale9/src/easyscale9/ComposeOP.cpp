@@ -1,12 +1,15 @@
 #include "ComposeOP.h"
-#include "Context.h"
 #include "StagePanel.h"
+#include "ToolbarPanel.h"
+#include "config.h"
 
 namespace escale9
 {
 
-ComposeOP::ComposeOP()
-	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(Context::Instance()->stage, Context::Instance()->stage, Context::Instance()->property)
+ComposeOP::ComposeOP(ToolbarPanel* toolbar, StagePanel* stage, 
+					 d2d::PropertySettingPanel* property)
+	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(stage, stage, property)
+	, m_toolbar(toolbar)
 {
 }
 
@@ -24,8 +27,8 @@ bool ComposeOP::onMouseRightDown(int x, int y)
 	//////////////////////////////////////////////////////////////////////////
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	const int col = pos.x / Context::Instance()->EDGE,
-		row = pos.y / Context::Instance()->EDGE;
+	const int col = pos.x / EDGE,
+		row = pos.y / EDGE;
 	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
 	d2d::ISprite* selected = stage->getSprite(row, col);
  	if (selected)
@@ -41,8 +44,9 @@ bool ComposeOP::onActive()
 {
 	if (d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onActive()) return true;
 
-	Context::Instance()->isComposeOP = true;
+	m_toolbar->setComposeOP(true);
 
 	return false;
 }
+
 } // escale9

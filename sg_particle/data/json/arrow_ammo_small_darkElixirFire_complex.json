@@ -1,0 +1,36 @@
+{
+  "name": "arrow_ammo_small_darkElixirFire", 
+  "sprite": [
+    {
+      "angle": 0, 
+      "filepath": "2562_complex.json", 
+      "name": "", 
+      "position": {
+        "x": 0, 
+        "y": 0
+      }, 
+      "x mirror": false, 
+      "x scale": 1, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 1, 
+      "y shear": 0
+    }, 
+    {
+      "angle": 0.0, 
+      "filepath": "2566_anim.json", 
+      "multi color": "0x8c4200ff", 
+      "name": "", 
+      "position": {
+        "x": -0.1875, 
+        "y": -9.3125
+      }, 
+      "x mirror": false, 
+      "x scale": 0.3837890625, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.958984375, 
+      "y shear": 0
+    }
+  ]
+}

@@ -3,12 +3,14 @@
 #include <wx/wx.h>
 #include <drag2d.h>
 
-namespace libscale9
+namespace escale9
 {
+	class Symbol;
+
 	class ToolbarPanel : public wxPanel
 	{
 	public:
-		ToolbarPanel(wxWindow* parent, d2d::Scale9Symbol* symbol);
+		ToolbarPanel(wxWindow* parent, Symbol* symbol);
 
 	private:
 		void initLayout();
@@ -16,7 +18,7 @@ namespace libscale9
 		void onChangeSize(wxSpinEvent& event);
 
 	private:
-		d2d::Scale9Symbol* m_symbol;
+		Symbol* m_symbol;
 
 		wxSpinCtrl *m_wSpin, *m_hSpin;
 
