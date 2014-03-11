@@ -80,6 +80,7 @@
 #include "view/Frame.h"
 #include "view/VectorUtils.h"
 #include "view/SettingsDialog.h"
+#include "view/FinishDialog.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <wx/wx.h>
+#include "BaseDialog.h"
 
 namespace d2d
 {
-	class ExitDlg : public wxDialog
+	class ExitDlg : public BaseDialog
 	{
 	public:
 		ExitDlg(wxWindow* parent);

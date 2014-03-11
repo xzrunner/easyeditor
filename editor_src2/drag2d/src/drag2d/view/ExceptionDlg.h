@@ -1,12 +1,12 @@
 #pragma once
 
-#include <wx/wx.h>
+#include "BaseDialog.h"
 
 namespace d2d
 {
 	class Exception;
 
-	class ExceptionDlg : public wxDialog
+	class ExceptionDlg : public BaseDialog
 	{
 	public:
 		ExceptionDlg(wxWindow* parent, const Exception& exp);

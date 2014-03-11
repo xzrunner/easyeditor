@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easyimage"
-	ProjectGUID="{9DF3D8C0-69AA-440F-BFBA-3C22BF2CE822}"
+	ProjectGUID="{34069E21-CE51-4420-A745-579D3EF0406E}"
 	RootNamespace="easyimage"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

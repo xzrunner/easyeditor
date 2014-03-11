@@ -3,7 +3,7 @@
 namespace d2d
 {
 	ExitDlg::ExitDlg(wxWindow* parent)
-		: wxDialog(parent, wxID_ANY, "Save?")
+		: BaseDialog(parent, "Save?")
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 

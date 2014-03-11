@@ -2021,6 +2021,14 @@
 				Name="tools"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\BaseDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\BaseDialog.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\ExceptionDlg.cpp"
 					>
 				</File>
@@ -2034,6 +2042,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\ExitDlg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\FinishDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\FinishDialog.h"
 					>
 				</File>
 			</Filter>

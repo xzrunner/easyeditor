@@ -5,7 +5,7 @@
 namespace d2d
 {
 	ExceptionDlg::ExceptionDlg(wxWindow* parent, const Exception& exp)
-		: wxDialog(parent, wxID_ANY, "exception")
+		: BaseDialog(parent, "exception")
 	{
 		initLayout(exp.what());
 	}
