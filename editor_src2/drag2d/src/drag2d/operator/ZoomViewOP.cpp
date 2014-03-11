@@ -19,8 +19,14 @@ ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
 
 bool ZoomViewOP::onKeyDown(int keyCode)
 {
-	if (m_openLeftTap && keyCode == WXK_SPACE)
+	if (m_openLeftTap && keyCode == WXK_SPACE) {
 		m_editPanel->SetCursor(wxCURSOR_HAND);
+	} else if (keyCode == WXK_ESCAPE) {
+		Camera* cam = m_editPanel->getCamera();
+		cam->setCenter(Vector(0, 0));
+		cam->setScale(1.0f);
+	}
+
 	return false;
 }
 
