@@ -39,9 +39,9 @@
 							"add color" : "0x00000000",
 							"angle" : 0.0,
 							"clip" : false,
-							"filepath" : "2204wuzhu2\\attack1\\1\\1_001.png",
+							"filepath" : "2204wuzhu2\\attack1\\3\\1_001.png",
 							"multi color" : "0xffffffff",
-							"name" : "_sprite0",
+							"name" : "_sprite2",
 							"position" : 
 							{
 								"x" : 0.0,
@@ -49,11 +49,11 @@
 							},
 							"tag" : "",
 							"x mirror" : false,
-							"x offset" : -0.50,
+							"x offset" : -7.50,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
-							"y offset" : 29.0,
+							"y offset" : 35.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
