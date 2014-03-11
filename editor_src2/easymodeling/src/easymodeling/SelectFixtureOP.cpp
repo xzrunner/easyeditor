@@ -8,7 +8,7 @@
 using namespace emodeling;
 
 SelectFixtureOP::SelectFixtureOP(StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel)
-	: d2d::DrawRectangleOP(editPanel, d2d::Colorf(1, 1, 1))
+	: d2d::DrawRectangleOP(editPanel, true)
 	, m_selected(NULL)
 	, m_mouseOn(NULL)
 	, m_stagePanel(editPanel)
