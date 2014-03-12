@@ -72,6 +72,12 @@ void Frame::onSaveAs(wxCommandEvent& event)
 
 void Frame::onConnect(wxCommandEvent& event)
 {
+	d2d::ZoomViewOP* op = dynamic_cast<d2d::ZoomViewOP*>
+		(Context::Instance()->stage->getEditOP());
+	if (op) {
+		op->setMouseMoveFocus(false);
+	}
+
 	wxDirDialog dlg(NULL, "Choose directory", wxEmptyString,
 		wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() == wxID_OK)
@@ -83,6 +89,10 @@ void Frame::onConnect(wxCommandEvent& event)
 			d2d::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
 		}
+	}
+
+	if (op) {
+		op->setMouseMoveFocus(true);
 	}
 }
 

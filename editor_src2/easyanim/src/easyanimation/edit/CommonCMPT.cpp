@@ -103,9 +103,14 @@ wxSizer* CommonCMPT::initSettingsPanel()
 
 void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 {
+	ArrangeSpriteOP* op = static_cast<ArrangeSpriteOP*>(m_editOP);
+	op->setMouseMoveFocus(false);
+
 	wxDirDialog dlg(NULL, "Images", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
 	if (dlg.ShowModal() != wxID_OK)
 		return;
+
+	op->setMouseMoveFocus(true);
 
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dlg.GetPath().ToStdString(), files);
