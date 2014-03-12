@@ -22,6 +22,9 @@ public:
 public:
 	~RectMgr();
 
+	void load(const Json::Value& value);
+	void store(Json::Value& value) const;
+
 	void draw() const;
 
 	void insert(const d2d::Rect& rect);
@@ -39,6 +42,9 @@ public:
 	const std::vector<d2d::Rect*>& getAllRect() const {
 		return m_rects;
 	}
+
+private:
+	void clear();
 
 private:
 	std::vector<d2d::Rect*> m_rects;

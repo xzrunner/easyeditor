@@ -1,19 +1,21 @@
 #ifndef _EASYIMAGE_RECT_CUT_OP_H_
 #define _EASYIMAGE_RECT_CUT_OP_H_
 
-#include <drag2d.h>
-
+#include "interfaces.h"
 #include "RectMgr.h"
+
+#include <drag2d.h>
 
 namespace eimage
 {
 
+class RectCutCMPT;
 class StagePanel;
 
 class RectCutOP : public d2d::ZoomViewOP
 {
 public:
-	RectCutOP(StagePanel* stage);
+	RectCutOP(RectCutCMPT* cmpt, StagePanel* stage);
 
 	virtual bool onMouseLeftDown(int x, int y);
 	virtual bool onMouseLeftUp(int x, int y);
@@ -25,9 +27,13 @@ public:
 	virtual bool onDraw() const;
 	virtual bool clear();
 
-	const std::vector<d2d::Rect*>& getAllRect() const {
-		return m_rects.getAllRect();
-	}
+	const RectMgr& getRectMgr() const { return m_rects; }
+	RectMgr& getRectMgr() { return m_rects; }
+
+	std::string getImageFilepath() const;
+	void loadImageFromFile(const std::string& filepath);
+
+	RectCutCMPT* getEditCMPT() const { return m_cmpt; }
 
 private:
 	void drawCaptureLine() const;
@@ -35,6 +41,8 @@ private:
 	void fixedPos(d2d::Vector& pos) const;
 
 private:
+	RectCutCMPT* m_cmpt;
+
 	StagePanel* m_stage;
 
 	d2d::Vector m_firstPos, m_currPos;

@@ -7,59 +7,131 @@
 namespace eimage
 {
 
+static const std::string FILTER = "rectcut";
+
 RectCutCMPT::RectCutCMPT(wxWindow* parent, const wxString& name,
 						   StagePanel* stage)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_stage(stage)
 {
-	m_editOP = new RectCutOP(stage);
+	m_editOP = new RectCutOP(this, stage);
+}
+
+void RectCutCMPT::onSaveEditOP(wxCommandEvent& event)
+{
+	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
+		wxT("*_") + FILTER + wxT(".json"), wxFD_SAVE);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
+
+		Json::Value value;
+
+		std::string filepath = op->getImageFilepath();
+		value["image filepath"] = filepath;
+		op->getRectMgr().store(value);
+
+		wxString filename = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILTER, "json");
+		Json::StyledStreamWriter writer;
+		std::ofstream fout(filename.fn_str());
+		writer.write(fout, value);
+		fout.close();
+	}
+}
+
+void RectCutCMPT::onLoadEditOP(wxCommandEvent& event)
+{
+	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
+		wxT("*_") + FILTER + wxT(".json"), wxFD_OPEN);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		wxString filename = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILTER, "json");
+		Json::Value value;
+		Json::Reader reader;
+		std::ifstream fin(filename.fn_str());
+		reader.parse(fin, value);
+		fin.close();
+
+		RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
+		op->loadImageFromFile(value["image filepath"].asString());
+		op->getRectMgr().load(value);
+	}
 }
 
 wxSizer* RectCutCMPT::initLayout()
 {
-	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+	sizer->Add(initEditIOLayout());
+	sizer->AddSpacer(10);
+	sizer->Add(initDataOutputLayout());
+	return sizer;
+}
+
+wxSizer* RectCutCMPT::initEditIOLayout()
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Edit I/O"));
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+	// save
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Save"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onSaveEditOP));
+		sizer->Add(btn);
+	}
+	sizer->AddSpacer(5);
+	// load
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Load"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onLoadEditOP));
+		sizer->Add(btn);
+	}
+	return sizer;
+}
+
+wxSizer* RectCutCMPT::initDataOutputLayout()
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Data Output"));
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	// images path
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("images path"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		wxSizer* sz = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 
 		m_imagePath = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_READONLY);
-		sizer->Add(m_imagePath);
+		sz->Add(m_imagePath);
 
-		sizer->AddSpacer(5);
-		
+		sz->AddSpacer(5);
+
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(25, 25));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onSetImagesPath));
-		sizer->Add(btn);
+		sz->Add(btn);
 
-		topSizer->Add(sizer);
+		sizer->Add(sz);
 	}
-	topSizer->AddSpacer(10);
+	sizer->AddSpacer(10);
 	// json path
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("json path"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+		wxSizer* sz = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 
 		m_jsonPath = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(200, -1), wxTE_READONLY);
-		sizer->Add(m_jsonPath);
+		sz->Add(m_jsonPath);
 
-		sizer->AddSpacer(5);
+		sz->AddSpacer(5);
 
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(25, 25));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onSetJsonPath));
-		sizer->Add(btn);
+		sz->Add(btn);
 
-		topSizer->Add(sizer);
+		sizer->Add(sz);
 	}
-	topSizer->AddSpacer(10);
+	sizer->AddSpacer(10);
 	// output
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Output"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onOutputData));
-		topSizer->Add(btn);
+		sizer->Add(btn);
 	}
-
-	return topSizer;
+	return sizer;
 }
 
 void RectCutCMPT::onSetImagesPath(wxCommandEvent& event)
@@ -93,7 +165,7 @@ void RectCutCMPT::onSetJsonPath(wxCommandEvent& event)
 void RectCutCMPT::onOutputData(wxCommandEvent& event)
 {
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-	const std::vector<d2d::Rect*>& rects = op->getAllRect();
+	const std::vector<d2d::Rect*>& rects = op->getRectMgr().getAllRect();
 	if (rects.empty()) {
 		return;
 	}

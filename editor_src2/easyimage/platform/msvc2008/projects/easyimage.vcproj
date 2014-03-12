@@ -218,6 +218,14 @@
 			Name="frame"
 			>
 			<File
+				RelativePath="..\..\..\src\easyimage\Frame.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyimage\Frame.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easyimage\main.cpp"
 				>
 			</File>

@@ -4,8 +4,9 @@
 namespace eimage
 {
 
-RectCutOP::RectCutOP(StagePanel* stage)
+RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
 	: d2d::ZoomViewOP(stage, true)
+	, m_cmpt(cmpt)
 	, m_stage(stage)
 	, m_rectSelected(NULL)
 {
@@ -188,6 +189,20 @@ bool RectCutOP::clear()
 	m_currPos.setInvalid();
 
 	return false;
+}
+
+std::string RectCutOP::getImageFilepath() const
+{
+	if (const d2d::ISprite* s = m_stage->getImage()) {
+		return s->getSymbol().getFilepath().ToStdString();
+	} else {
+		return "";
+	}
+}
+
+void RectCutOP::loadImageFromFile(const std::string& filepath)
+{
+	m_stage->setImage(filepath);
 }
 
 void RectCutOP::drawCaptureLine() const

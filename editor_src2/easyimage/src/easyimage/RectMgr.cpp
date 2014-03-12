@@ -7,7 +7,37 @@ static const int RADIUS = 5;
 
 RectMgr::~RectMgr()
 {
-	for_each(m_rects.begin(), m_rects.end(), DeletePointerFunctor<d2d::Rect>());
+	clear();
+}
+
+void RectMgr::load(const Json::Value& value)
+{
+	clear();
+
+	int i = 0;
+	Json::Value val = value["rect"][i++];
+	while (!val.isNull()) {
+		d2d::Rect* r = new d2d::Rect;
+		r->xMin = val["xmin"].asDouble();
+		r->xMax = val["xmax"].asDouble();
+		r->yMin = val["ymin"].asDouble();
+		r->yMax = val["ymax"].asDouble();
+		m_rects.push_back(r);
+
+		val = value["rect"][i++];
+	}
+}
+
+void RectMgr::store(Json::Value& value) const
+{
+	for (int i = 0, n = m_rects.size(); i < n; ++i)
+	{
+		const d2d::Rect* r = m_rects[i];
+		value["rect"][i]["xmin"] = r->xMin;
+		value["rect"][i]["xmax"] = r->xMax;
+		value["rect"][i]["ymin"] = r->yMin;
+		value["rect"][i]["ymax"] = r->yMax;
+	}
 }
 
 void RectMgr::draw() const
@@ -198,6 +228,11 @@ void RectMgr::moveRect(const d2d::Rect* rect, const d2d::Vector& from, const d2d
 	r->xMax += dx;
 	r->yMin += dy;
 	r->yMax += dy;
+}
+
+void RectMgr::clear()
+{
+	for_each(m_rects.begin(), m_rects.end(), DeletePointerFunctor<d2d::Rect>());
 }
 
 }

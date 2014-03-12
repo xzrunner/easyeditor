@@ -56,12 +56,6 @@ void Frame::initWithFile(const wxString& path)
 	}
 }
 
-void Frame::onSettings(wxCommandEvent& event)
-{
-	SettingsDialog dlg(this);
-	dlg.ShowModal();
-}
-
 void Frame::onNew(wxCommandEvent& event)
 {
 	if (!m_task) return;
@@ -105,6 +99,12 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		m_currFilename = fixed;
 		m_task->store(fixed);
 	}
+}
+
+void Frame::onSettings(wxCommandEvent& event)
+{
+	SettingsDialog dlg(this);
+	dlg.ShowModal();
 }
 
 void Frame::onOpenRecent1(wxCommandEvent& event)

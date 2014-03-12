@@ -11,10 +11,15 @@ class StagePanel : public d2d::EditPanel
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		d2d::LibraryPanel* library);
+	virtual ~StagePanel();
 
 	const d2d::ISprite* getImage() const {
 		return m_image;
 	}
+	void setImage(const std::string& filepath);
+
+private:
+	void setImage(d2d::ISymbol* symbol);
 
 private:
 	class DragSymbolTarget : public wxTextDropTarget

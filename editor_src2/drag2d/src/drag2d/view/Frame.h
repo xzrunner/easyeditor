@@ -18,13 +18,14 @@ public:
 	void initWithFile(const wxString& path);
 
 protected:
+	virtual void onNew(wxCommandEvent& event);
+	virtual void onOpen(wxCommandEvent& event);
+	virtual void onSave(wxCommandEvent& event);
+	virtual void onSaveAs(wxCommandEvent& event);
+
 	virtual void onSettings(wxCommandEvent& event);
 
 private:
-	void onNew(wxCommandEvent& event);
-	void onOpen(wxCommandEvent& event);
-	void onSave(wxCommandEvent& event);
-	void onSaveAs(wxCommandEvent& event);
 	void onOpenRecent1(wxCommandEvent& event);
 	void onOpenRecent2(wxCommandEvent& event);
 	void onOpenRecent3(wxCommandEvent& event);

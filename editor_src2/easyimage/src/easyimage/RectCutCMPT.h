@@ -14,10 +14,16 @@ public:
 	RectCutCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
 
+	void onSaveEditOP(wxCommandEvent& event);
+	void onLoadEditOP(wxCommandEvent& event);
+
 protected:
 	virtual wxSizer* initLayout();
 
 private:
+	wxSizer* initEditIOLayout();
+	wxSizer* initDataOutputLayout();
+
 	void onSetImagesPath(wxCommandEvent& event);
 	void onSetJsonPath(wxCommandEvent& event);
 	void onOutputData(wxCommandEvent& event);
