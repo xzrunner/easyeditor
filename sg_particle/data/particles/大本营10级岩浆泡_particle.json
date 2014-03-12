@@ -1,0 +1,37 @@
+
+{
+	"additive_blend" : true,
+	"bounce" : true,
+	"components" : 
+	[
+		
+		{
+			"end_scale" : 5,
+			"filepath" : "..\\json\\»ðµã.png",
+			"max_rotate" : 180,
+			"min_rotate" : -180,
+			"name" : "",
+			"start_scale" : 50,
+			"start_z" : 0
+		}
+	],
+	"count" : 3,
+	"emission_time" : 600,
+	"fadeout_time" : 400,
+	"gravity" : 5000,
+	"inertia" : 4,
+	"layer" : 0,
+	"max_hori" : 360,
+	"max_life" : 1000,
+	"max_spd" : 1800,
+	"max_vert" : 60,
+	"min_hori" : 0,
+	"min_life" : 400,
+	"min_spd" : 2000,
+	"min_vert" : 50,
+	"name" : "Town_Hall_lv10",
+	"orient_to_movement" : false,
+	"orient_to_parent" : false,
+	"package" : "",
+	"start_radius" : 0
+}

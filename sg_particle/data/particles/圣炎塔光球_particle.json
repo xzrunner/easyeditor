@@ -1,0 +1,37 @@
+
+{
+	"additive_blend" : false,
+	"bounce" : false,
+	"components" : 
+	[
+		
+		{
+			"end_scale" : 142,
+			"filepath" : "..\\json\\»ðÇòºËÐÄ.png",
+			"max_rotate" : 180,
+			"min_rotate" : -180,
+			"name" : "",
+			"start_scale" : 39,
+			"start_z" : 0
+		}
+	],
+	"count" : 1,
+	"emission_time" : 94,
+	"fadeout_time" : 448,
+	"gravity" : 1200,
+	"inertia" : 4,
+	"layer" : 0,
+	"max_hori" : 360,
+	"max_life" : 1300,
+	"max_spd" : 0,
+	"max_vert" : 90,
+	"min_hori" : 0,
+	"min_life" : 1167,
+	"min_spd" : 0,
+	"min_vert" : 60,
+	"name" : "firetower_attack_before",
+	"orient_to_movement" : false,
+	"orient_to_parent" : false,
+	"package" : "",
+	"start_radius" : 0
+}
