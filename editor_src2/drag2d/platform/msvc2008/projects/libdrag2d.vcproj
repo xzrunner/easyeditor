@@ -2044,14 +2044,6 @@
 					RelativePath="..\..\..\src\drag2d\view\ExitDlg.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\FinishDialog.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\FinishDialog.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="frame"

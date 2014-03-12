@@ -24,7 +24,8 @@ namespace d2d
 			e_scale9,
 			e_fontblank,
 			e_freetype,
-			e_scripts
+			e_scripts,
+			e_particle3d,
 		};
 
 		static Type getFileType(const wxString& filename);

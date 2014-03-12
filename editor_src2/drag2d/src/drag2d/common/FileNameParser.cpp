@@ -17,6 +17,7 @@ static const wxString TAG_ANIM = "anim";
 static const wxString TAG_PATCH = "scale9";
 static const wxString TAG_FONTBLANK = "fontblank";
 static const wxString TAG_SCRIPTS = "scripts";
+static const wxString TAG_PARTICLE3D = "particle";
 
 FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 {
@@ -53,6 +54,7 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		else if (jsonExtension == TAG_PATCH) return e_scale9;
 		else if (jsonExtension == TAG_FONTBLANK) return e_fontblank;
 		else if (jsonExtension == TAG_MESH) return e_mesh;
+		else if (jsonExtension == TAG_PARTICLE3D) return e_particle3d;
 		else return e_unknown;
 	}
 	else if (extension == ".lua")
@@ -113,6 +115,9 @@ wxString FileNameParser::getFileTag(Type type)
 		break;
 	case e_scripts:
 		extension = TAG_SCRIPTS;
+		break;
+	case e_particle3d:
+		extension = TAG_PARTICLE3D;
 		break;
 	}
 	return extension;
