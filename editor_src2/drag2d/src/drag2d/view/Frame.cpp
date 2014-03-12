@@ -35,7 +35,13 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	, m_filetag(filetag)
 	, m_recent(this)
 {
+	loadTmpInfo();
 	initMenuBar();
+}
+
+Frame::~Frame()
+{
+	saveTmpInfo();
 }
 
 void Frame::setTask(ITask* task)
@@ -53,6 +59,32 @@ void Frame::initWithFile(const wxString& path)
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
+	}
+}
+
+void Frame::saveTmpInfo()
+{
+	wxString filename = wxFileName::GetCwd() + "\\.easy";
+	Json::Value value;
+	m_recent.save(value);
+	Json::StyledStreamWriter writer;
+	std::ofstream fout(filename.fn_str());
+	writer.write(fout, value);
+	fout.close();
+}
+
+void Frame::loadTmpInfo()
+{
+	wxString filename = wxFileName::GetCwd() + "\\.easy";
+	if (wxFileName::FileExists(filename))
+	{
+		Json::Value value;
+		Json::Reader reader;
+		std::ifstream fin(filename.fn_str());
+		reader.parse(fin, value);
+		fin.close();
+
+		m_recent.load(value);
 	}
 }
 
@@ -343,13 +375,35 @@ void Frame::openFile(const wxString& filename)
 // class Frame::RecentFiles
 //////////////////////////////////////////////////////////////////////////
 
-Frame::RecentFiles::RecentFiles(wxFrame* frame)
+Frame::RecentFiles::
+RecentFiles(wxFrame* frame)
 	: m_frame(frame)
 	, m_menu(new wxMenu)
 {
 }
 
-void Frame::RecentFiles::insert(const wxString& filename)
+void Frame::RecentFiles::
+save(Json::Value& value) const
+{
+	for (int i = 0, n = m_files.size(); i < n; ++i)
+	{
+		value["recent"][i] = m_files[i].ToStdString();
+	}
+}
+
+void Frame::RecentFiles::
+load(const Json::Value& value)
+{
+	int i = 0;
+	Json::Value v = value["recent"][i++];
+	while (!v.isNull()) {
+		insert(v.asString());
+		v = value["recent"][i++];
+	}
+}
+
+void Frame::RecentFiles::
+insert(const wxString& filename)
 {
 	std::deque<wxString>::iterator itr = m_files.begin();
 	for ( ; itr != m_files.end(); ++itr)
@@ -378,7 +432,8 @@ void Frame::RecentFiles::insert(const wxString& filename)
 	insertOnlyMenu(filename);
 }
 
-void Frame::RecentFiles::insertOnlyMenu(const wxString& filename)
+void Frame::RecentFiles::
+insertOnlyMenu(const wxString& filename)
 {
 	int size = m_files.size();
 	if (size > CAPACITY) {

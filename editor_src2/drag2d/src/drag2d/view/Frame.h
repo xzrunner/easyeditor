@@ -3,6 +3,7 @@
 #include "interfaces.h"
 
 #include <wx/wx.h>
+#include <JSON/json.h>
 #include <deque>
 
 namespace d2d
@@ -12,6 +13,7 @@ class Frame : public wxFrame
 {
 public:
 	Frame(const wxString& title, const wxString& filetag);
+	virtual ~Frame();
 
 	void setTask(ITask* task);
 
@@ -26,6 +28,9 @@ protected:
 	virtual void onSettings(wxCommandEvent& event);
 
 private:
+	void saveTmpInfo();
+	void loadTmpInfo();
+
 	void onOpenRecent1(wxCommandEvent& event);
 	void onOpenRecent2(wxCommandEvent& event);
 	void onOpenRecent3(wxCommandEvent& event);
@@ -71,6 +76,9 @@ private:
 	{
 	public:
 		RecentFiles(wxFrame* frame);
+
+		void save(Json::Value& value) const;
+		void load(const Json::Value& value);
 
 		wxMenu* getMenu() { return m_menu; }
 
