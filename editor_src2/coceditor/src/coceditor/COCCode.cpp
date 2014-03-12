@@ -1119,8 +1119,8 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		mat[1] = sx*s + kx*sy*c;
 		mat[2] = ky*sx*c - sy*s;
 		mat[3] = ky*sx*s + sy*c;
-		mat[4] = x;
-		mat[5] = y;
+		mat[4] = x / Context::Instance()->scale;
+		mat[5] = y / Context::Instance()->scale;
 	}
 
 	for (size_t i = 0; i < 4; ++i)
