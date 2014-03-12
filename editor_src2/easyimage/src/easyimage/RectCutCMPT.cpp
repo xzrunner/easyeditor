@@ -92,11 +92,6 @@ void RectCutCMPT::onSetJsonPath(wxCommandEvent& event)
 
 void RectCutCMPT::onOutputData(wxCommandEvent& event)
 {
-	d2d::FinishDialog test(this);
-	test.ShowModal();
-
-	//////////////////////////////////////////////////////////////////////////
-
 	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
 	const std::vector<d2d::Rect*>& rects = op->getAllRect();
 	if (rects.empty()) {
