@@ -22,7 +22,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'flame_bomb',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -55,7 +55,7 @@
 	['orient_to_parent'] = true,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'd5',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -88,7 +88,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'firepoint',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -121,7 +121,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'fire_ball',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -154,7 +154,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'firepoint',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -187,7 +187,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'flame',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -195,7 +195,7 @@
 			['start_z'] = 0,
 		},
 		{
-			['name'] = '',
+			['name'] = 'grey_smoke',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -228,7 +228,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'firepoint',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -261,7 +261,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'firepoint',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -269,7 +269,7 @@
 			['start_z'] = 0,
 		},
 		{
-			['name'] = '',
+			['name'] = 'black_smoke',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -302,7 +302,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'lightning_line',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -335,7 +335,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'flame',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -368,7 +368,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'flame',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -376,7 +376,7 @@
 			['start_z'] = 0,
 		},
 		{
-			['name'] = '',
+			['name'] = 'grey_smoke',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
@@ -409,7 +409,7 @@
 	['orient_to_parent'] = false,
 	['components'] = {
 		{
-			['name'] = '',
+			['name'] = 'lightning_ball',
 			['start_scale'] = 0*s,
 			['end_scale'] = 0*s,
 			['min_rotate'] = 0*r,
