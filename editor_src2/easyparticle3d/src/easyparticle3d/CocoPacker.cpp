@@ -47,6 +47,7 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
 	lua::assign(gen, "['name']", "'"+s+"',");
 
 	s = val["package"].asString();
+	s = "misc";
 	lua::assign(gen, "['package']", "'"+s+"',");
 
 	s = wxString::FromDouble(val["count"].asInt());
@@ -112,7 +113,7 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
 		int i = 0;
 		Json::Value child_val = val["components"][i++];
 		while (!child_val.isNull()) {
-			lua::TableAssign ta(gen, "");
+			lua::TableAssign ta(gen, "", true);
 
 			s = child_val["name"].asString();
 			lua::assign(gen, "['name']", "'"+s+"',");

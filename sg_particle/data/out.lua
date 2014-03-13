@@ -1,6 +1,6 @@
 ['fujia_bomb'] = {
 	['name'] = 'fujia_bomb',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 1,
 	['layer'] = 0,
 	['emission_time'] = 16*l,
@@ -28,12 +28,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['fujia_bomb_smog'] = {
 	['name'] = 'fujia_bomb_smog',
-	['package'] = 'buildings',
+	['package'] = 'misc',
 	['count'] = 5,
 	['layer'] = 2,
 	['emission_time'] = 30*l,
@@ -61,12 +61,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['fujia_bomb_particle'] = {
 	['name'] = 'fujia_bomb_particle',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 5,
 	['layer'] = 0,
 	['emission_time'] = 10*l,
@@ -94,12 +94,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['firetower_attack_before'] = {
 	['name'] = 'firetower_attack_before',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 1,
 	['layer'] = 0,
 	['emission_time'] = 94*l,
@@ -127,12 +127,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['Town_Hall_lv10'] = {
 	['name'] = 'Town_Hall_lv10',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 3,
 	['layer'] = 0,
 	['emission_time'] = 600*l,
@@ -160,12 +160,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['huoyuansu_die'] = {
 	['name'] = 'huoyuansu_die',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 7,
 	['layer'] = 0,
 	['emission_time'] = 34*l,
@@ -193,7 +193,7 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 		{
 			['name'] = '',
 			['start_scale'] = 0*s,
@@ -201,12 +201,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['wuzhu_attack_hit_1'] = {
 	['name'] = 'wuzhu_attack_hit_1',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 8,
 	['layer'] = 0,
 	['emission_time'] = 40*l,
@@ -234,12 +234,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['wuzhu_attack_particle'] = {
 	['name'] = 'wuzhu_attack_particle',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 20,
 	['layer'] = 0,
 	['emission_time'] = 150*l,
@@ -267,7 +267,7 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 		{
 			['name'] = '',
 			['start_scale'] = 0*s,
@@ -275,12 +275,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['yini_attack'] = {
 	['name'] = 'yini_attack',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 1,
 	['layer'] = 0,
 	['emission_time'] = 10*l,
@@ -308,12 +308,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['wuzhu_attack_hit_2'] = {
 	['name'] = 'wuzhu_attack_hit_2',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 3,
 	['layer'] = 0,
 	['emission_time'] = 40*l,
@@ -341,12 +341,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['Army_Camp_fire'] = {
 	['name'] = 'Army_Camp_fire',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 7,
 	['layer'] = 0,
 	['emission_time'] = 600*l,
@@ -374,7 +374,7 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 		{
 			['name'] = '',
 			['start_scale'] = 0*s,
@@ -382,12 +382,12 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
 ['yini_attack_before'] = {
 	['name'] = 'yini_attack_before',
-	['package'] = '',
+	['package'] = 'misc',
 	['count'] = 1,
 	['layer'] = 0,
 	['emission_time'] = 40*l,
@@ -415,6 +415,6 @@
 			['min_rotate'] = 0*r,
 			['max_rotate'] = 0*r,
 			['start_z'] = 0,
-		}
+		},
 	},
 },
