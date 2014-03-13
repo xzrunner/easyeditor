@@ -88,10 +88,10 @@ void Symbol::loadResources()
 	m_clipbox.yMin = value["ymin"].asInt();
 	m_clipbox.yMax = value["ymax"].asInt();
 
+	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
-		wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
 		ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
 

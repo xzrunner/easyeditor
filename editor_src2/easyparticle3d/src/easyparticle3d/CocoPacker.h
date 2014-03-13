@@ -15,7 +15,7 @@ public:
 	static void pack(const wxString& srcdir, const wxString& dstfilename);
 
 private:
-	static void pack(const Json::Value& val, ebuilder::CodeGenerator& gen);
+	static void pack(const wxString& filepath, ebuilder::CodeGenerator& gen);
 
 }; // CocoPacker
 

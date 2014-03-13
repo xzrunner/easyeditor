@@ -21,13 +21,7 @@ void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
 		wxString filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_particle3d))
 		{
-			Json::Value value;
-			Json::Reader reader;
-			std::ifstream fin(filepath.fn_str());
-			reader.parse(fin, value);
-			fin.close();
-
-			pack(value, gen);
+			pack(filepath, gen);
 		}
 	}
 
@@ -39,8 +33,14 @@ void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
 	}
 }
 
-void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
+void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 {
+	Json::Value val;
+	Json::Reader reader;
+	std::ifstream fin(filepath.fn_str());
+	reader.parse(fin, val);
+	fin.close();
+
 	std::string s = val["name"].asString();
 	lua::TableAssign ta(gen, "['"+s+"']", true);
 
@@ -107,6 +107,7 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
 	s = val["orient_to_parent"].asBool() ? "true" : "false";
 	lua::assign(gen, "['orient_to_parent']", s+",");
 
+	wxString dir = d2d::FilenameTools::getFileDir(filepath);
 	{
 		lua::TableAssign ta(gen, "['components']", true);
 
@@ -115,7 +116,18 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
 		while (!child_val.isNull()) {
 			lua::TableAssign ta(gen, "", true);
 
-			s = child_val["name"].asString();
+			{
+				wxString filepath = d2d::FilenameTools::getAbsolutePath(dir, child_val["filepath"].asString());
+
+				Json::Value value;
+				Json::Reader reader;
+				std::ifstream fin(filepath.fn_str());
+				reader.parse(fin, value);
+				fin.close();
+
+				s = value["name"].asString();
+			}
+//			s = child_val["name"].asString();
 			lua::assign(gen, "['name']", "'"+s+"',");
 
 			s = wxString::FromDouble(val["start_scale"].asInt());
