@@ -1,6 +1,6 @@
 
 {
-	"name" : "",
+	"name" : "langqi",
 	"sprite" : 
 	[
 		
@@ -10,7 +10,7 @@
 			"clip" : false,
 			"filepath" : "army_langqi_main.png",
 			"multi color" : "0xffffffff",
-			"name" : "_sprite1",
+			"name" : "",
 			"position" : 
 			{
 				"x" : 5.0,
@@ -19,11 +19,11 @@
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 1.0,
+			"x scale" : 0.6000000238418579,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 1.0,
+			"y scale" : 0.6000000238418579,
 			"y shear" : 0.0
 		}
 	],

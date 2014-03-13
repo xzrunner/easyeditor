@@ -1,6 +1,6 @@
 
 {
-	"name" : "",
+	"name" : "wine",
 	"sprite" : 
 	[
 		
@@ -10,7 +10,7 @@
 			"clip" : false,
 			"filepath" : "icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
-			"name" : "wine",
+			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,

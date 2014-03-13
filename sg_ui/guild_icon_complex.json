@@ -1,6 +1,6 @@
 
 {
-	"name" : "",
+	"name" : "guildIcon",
 	"sprite" : 
 	[
 		
@@ -14,7 +14,7 @@
 			"position" : 
 			{
 				"x" : 0.0,
-				"y" : 0.0
+				"y" : 18.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -37,7 +37,7 @@
 			"position" : 
 			{
 				"x" : -3.0,
-				"y" : 0.0
+				"y" : 18.0
 			},
 			"tag" : "",
 			"x mirror" : false,
