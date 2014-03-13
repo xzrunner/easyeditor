@@ -7,7 +7,6 @@
 #include "ShapeSprite.h"
 #include "EShapeSprite.h"
 #include "MeshSprite.h"
-#include "CombinationSprite.h"
 #include "TextSprite.h"
 //#include "FontBlankSprite.h"
 #include "FontSprite.h"
@@ -57,8 +56,6 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 				sprite = new ShapeSprite(static_cast<ShapeSymbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
 				sprite = new MeshSprite(static_cast<MeshSymbol*>(symbol));
-			else if (FileNameParser::isType(filepath, FileNameParser::e_combination))
-				sprite = new CombinationSprite(static_cast<CombinationSymbol*>(symbol));
 		}
 		else if (ext == "json")
 		{

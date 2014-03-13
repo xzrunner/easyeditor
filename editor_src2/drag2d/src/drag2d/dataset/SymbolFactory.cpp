@@ -3,7 +3,6 @@
 #include "ShapeSymbol.h"
 #include "EShapeSymbol.h"
 #include "MeshSymbol.h"
-#include "CombinationSymbol.h"
 #include "FontSymbol.h"
 #include "FontBlankSymbol.h"
 #include "ScriptsSymbol.h"
@@ -39,8 +38,6 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 			symbol = new ShapeSymbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
 			symbol = new MeshSymbol;
-		else if (FileNameParser::isType(filepath, FileNameParser::e_combination))
-			symbol = new CombinationSymbol;
 	}
 	else if (ext == "json")
 	{

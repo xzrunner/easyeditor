@@ -905,14 +905,6 @@
 				Name="sprite"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CombinationSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CombinationSprite.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\EShapeSprite.cpp"
 					>
 				</File>
@@ -1004,14 +996,6 @@
 			<Filter
 				Name="symbol"
 				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CombinationSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CombinationSymbol.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\EShapeSymbol.cpp"
 					>
@@ -1608,18 +1592,6 @@
 					RelativePath="..\..\..\src\drag2d\view\LibraryPanel.h"
 					>
 				</File>
-				<Filter
-					Name="combination"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryCombinationPage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryCombinationPage.h"
-						>
-					</File>
-				</Filter>
 				<Filter
 					Name="image"
 					>
