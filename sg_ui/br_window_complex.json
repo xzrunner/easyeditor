@@ -474,6 +474,29 @@
 			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "battle_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "claim_button",
+			"position" : 
+			{
+				"x" : 435.4929809570313,
+				"y" : 33.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -4.250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 2.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"xmax" : 0.0,
