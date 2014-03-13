@@ -69,7 +69,7 @@ private:
 		float width, float height);
 
 	static void initSprite(const FileLoader::Entry& entry,
-		d2d::ISprite** pSprite, const std::string& dlg);
+		d2d::ISprite** pSprite, const std::string& dir);
 
 public:
 	Type m_type;

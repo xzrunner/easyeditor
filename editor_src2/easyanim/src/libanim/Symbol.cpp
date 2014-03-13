@@ -19,18 +19,7 @@ Symbol::Symbol()
 
 Symbol::~Symbol()
 {
-	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
-		{
-			Frame* frame = layer->frames[j];
-			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-				frame->sprites[k]->release();
-			delete frame;
-		}
-		delete layer;
-	}
+	clear();
 }
 
 void Symbol::loadFromTextFile(std::ifstream& fin)
@@ -113,62 +102,68 @@ size_t Symbol::getMaxFrameIndex() const
 
 void Symbol::loadResources()
 {
-	d2d::AnimFileAdapter adapter;
-	adapter.load(m_filepath.c_str());
+	clear();
 
-	m_name = name = adapter.name;
+	Json::Value value;
+	Json::Reader reader;
+	std::ifstream fin(m_filepath.fn_str());
+	reader.parse(fin, value);
+	fin.close();
 
-	m_fps = adapter.fps;
+	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
 
-	std::string dlg = d2d::FilenameTools::getFileDir(m_filepath);
+	m_name  = name = value["name"].asString();
+	m_fps = value["fps"].asInt();
 
-	for (size_t i = 0, n = adapter.layers.size(); i < n; ++i)
-	{
+	// layers
+	int i = 0;
+	Json::Value layerValue = value["layer"][i++];
+	while (!layerValue.isNull()) {
 		Layer* dstLayer = new Layer;
-		d2d::AnimFileAdapter::Layer* srcLayer = adapter.layers[i];
-		dstLayer->name = srcLayer->name;
-		for (size_t j = 0, m = srcLayer->frames.size(); j < m; ++j)
-		{
+		dstLayer->name = layerValue["name"].asString();
+		// frames
+		int j = 0;
+		Json::Value frameValue = layerValue["frame"][j++];
+		while (!frameValue.isNull()) {
 			Frame* dstFrame = new Frame;
-			d2d::AnimFileAdapter::Frame* srcFrame = srcLayer->frames[j];
-			//			dstFrame->id = srcFrame->id;
-			dstFrame->index = srcFrame->index;
-			dstFrame->bClassicTween = srcFrame->bClassicTween;
-			for (size_t k = 0, l = srcFrame->entries.size(); k < l; ++k)
-			{
-				d2d::AnimFileAdapter::Entry* entry = srcFrame->entries[k];
-
-				std::string filepath = entry->filepath;
-				if (!d2d::FilenameTools::isExist(filepath))
-					filepath = d2d::FilenameTools::getAbsolutePath(dlg, filepath);
-
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+			//dstFrame->id = frameValue["id"].asInt();
+			dstFrame->index = frameValue["time"].asInt();
+			dstFrame->bClassicTween = frameValue["tween"].asBool();
+			// sprites
+			int k = 0;
+			Json::Value spriteValue = frameValue["actor"][k++];
+			while (!spriteValue.isNull()) {
+ 				wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
+ 				ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
 				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-
-				sprite->name = entry->name;
-				if (entry->multiColor.empty())
-					sprite->multiCol = d2d::Colorf(1, 1, 1, 1);
-				else
-					sprite->multiCol = transColor(entry->multiColor, d2d::PT_BGRA);
-				if (entry->addColor.empty())
-					sprite->addCol = d2d::Colorf(0 ,0, 0, 0);
-				else
-					sprite->addCol = transColor(entry->addColor, d2d::PT_ARGB);
-
-				sprite->setTransform(entry->pos, entry->angle);
-				sprite->setScale(entry->xScale, entry->yScale);
-				sprite->setShear(entry->xShear, entry->yShear);
-				sprite->setOffset(d2d::Vector(entry->xOffset, entry->yOffset));
-				sprite->setMirror(entry->xMirror, entry->yMirror);
-
+				sprite->load(spriteValue);
 				dstFrame->sprites.push_back(sprite);
+				spriteValue = frameValue["actor"][k++];
 			}
 			dstLayer->frames.push_back(dstFrame);
+			frameValue = layerValue["frame"][j++];
 		}
 		m_layers.push_back(dstLayer);
+		layerValue = value["layer"][i++];
 	}
 
 	initBounding();
+}
+
+void Symbol::clear()
+{
+	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
+		{
+			Frame* frame = layer->frames[j];
+			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
+				frame->sprites[k]->release();
+			delete frame;
+		}
+		delete layer;
+	}
 }
 
 void Symbol::initBounding()

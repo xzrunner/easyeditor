@@ -48,7 +48,7 @@ void FileIO::store(const char* filename)
 {
 	Json::Value value;
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 
 	{
 		std::vector<LibraryItem*> items;

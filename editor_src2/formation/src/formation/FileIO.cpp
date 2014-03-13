@@ -24,12 +24,12 @@ void FileIO::load(const char* filename)
 	context->time = value["time"].asInt();
 	context->toolbar->initFromContext();
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 
 	int i = 0;
 	Json::Value actorValue = value["actor"][i++];
 	while (!actorValue.isNull()) {
-		d2d::ISprite* sprite = load(actorValue, dlg);
+		d2d::ISprite* sprite = load(actorValue, dir);
 		context->stage->insertSprite(sprite);
 		actorValue = value["actor"][i++];
 	}
@@ -47,12 +47,12 @@ void FileIO::store(const char* filename)
 	value["height"] = context->height;
 	value["time"] = context->time;
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 
 	std::vector<d2d::ISprite*> sprites;
 	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["actor"][i] = store(sprites[i], dlg);
+		value["actor"][i] = store(sprites[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::ofstream fout(filename);
@@ -61,10 +61,10 @@ void FileIO::store(const char* filename)
 }
 
 d2d::ISprite* FileIO::load(const Json::Value& value,
-						   const std::string& dlg)
+						   const std::string& dir)
 {
 	std::string filepath = value["filepath"].asString();
-	filepath = d2d::FilenameTools::getAbsolutePath(dlg, filepath);
+	filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
@@ -83,11 +83,11 @@ d2d::ISprite* FileIO::load(const Json::Value& value,
 }
 
 Json::Value FileIO::store(const d2d::ISprite* sprite,
-						  const std::string& dlg)
+						  const std::string& dir)
 {
 	Json::Value value;
 	
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dlg, 
+	value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
 		sprite->getSymbol().getFilepath()).ToStdString();
 
 	value["position"]["x"] = sprite->getPosition().x;

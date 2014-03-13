@@ -15,14 +15,14 @@ namespace raiden
 
 	private:
 		static d2d::Layer* loadLayer(const Json::Value& value,
-			const std::string& dlg);
+			const std::string& dir);
 		static Json::Value store(const d2d::Layer* layer,
-			const std::string& dlg);
+			const std::string& dir);
 
 		static d2d::ISprite* loadSprite(const Json::Value& value,
-			const std::string& dlg);
+			const std::string& dir);
 		static Json::Value store(const d2d::ISprite* sprite,
-			const std::string& dlg);
+			const std::string& dir);
 
 	}; // FileIO
 }

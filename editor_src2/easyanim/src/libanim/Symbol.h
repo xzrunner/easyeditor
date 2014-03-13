@@ -59,6 +59,8 @@ protected:
 	virtual void loadResources();
 
 private:
+	void clear();
+
 	void initBounding();
 
 	void refreshThumbnail();

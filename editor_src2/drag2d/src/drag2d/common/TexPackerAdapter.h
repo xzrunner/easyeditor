@@ -28,7 +28,7 @@ namespace d2d
 		};
 
 	private:
-		void load(const Json::Value& value, const std::string& dlg);
+		void load(const Json::Value& value, const std::string& dir);
 
 	public:
 		int width, height;

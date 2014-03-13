@@ -293,7 +293,7 @@ void FileApapter::resolve(const wxString& filepath)
 
 	j2World(value["world"]);
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];

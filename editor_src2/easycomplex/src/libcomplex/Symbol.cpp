@@ -24,9 +24,7 @@ Symbol::Symbol()
 
 Symbol::~Symbol()
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		m_sprites[i]->release();
-	m_sprites.clear();
+	clear();
 }
 
 void Symbol::loadFromTextFile(std::ifstream& fin)
@@ -75,12 +73,8 @@ bool Symbol::isOneLayer() const
 
 void Symbol::loadResources()
 {
-	// clear
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		m_sprites[i]->release();
-	m_sprites.clear();
+	clear();
 
-	// load
 	Json::Value value;
 	Json::Reader reader;
 	std::ifstream fin(m_filepath.fn_str());
@@ -97,7 +91,6 @@ void Symbol::loadResources()
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
-//		wxString dir = d2d::Context::Instance()->getDir();
 		wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
 		ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
@@ -110,6 +103,13 @@ void Symbol::loadResources()
 	}	
 
 	initBounding();
+}
+
+void Symbol::clear()
+{
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		m_sprites[i]->release();
+	m_sprites.clear();
 }
 
 void Symbol::initBounding()

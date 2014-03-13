@@ -17,8 +17,8 @@ namespace escale9
 			ToolbarPanel* toolbar);
 
 	private:
-		static d2d::ISprite* load(const Json::Value& value, const wxString& dlg);
-		static Json::Value store(d2d::ISprite* sprite, const wxString& dlg);
+		static d2d::ISprite* load(const Json::Value& value, const wxString& dir);
+		static Json::Value store(d2d::ISprite* sprite, const wxString& dir);
 
 	}; // FileIO
 }

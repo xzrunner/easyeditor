@@ -18,12 +18,12 @@ void FileIO::load(const char* filename)
 
 	Context* context = Context::Instance();
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		d2d::Layer* layer = loadLayer(layerValue, dlg);
+		d2d::Layer* layer = loadLayer(layerValue, dir);
 		context->layers->addLayer(layer);
 		layerValue = value["layer"][i++];
 	}
@@ -35,12 +35,12 @@ void FileIO::store(const char* filename)
 {
 	Json::Value value;
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 
 	std::vector<d2d::Layer*> layers;
 	Context::Instance()->layers->traverseAllLayers(d2d::FetchAllVisitor<d2d::Layer>(layers));
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
-		value["layer"][i] = store(layers[i], dlg);
+		value["layer"][i] = store(layers[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::ofstream fout(filename);
@@ -49,7 +49,7 @@ void FileIO::store(const char* filename)
 }
 
 d2d::Layer* FileIO::loadLayer(const Json::Value& value,
-							  const std::string& dlg)
+							  const std::string& dir)
 {
 	d2d::Layer* layer = new d2d::Layer;
 
@@ -58,7 +58,7 @@ d2d::Layer* FileIO::loadLayer(const Json::Value& value,
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
-		d2d::ISprite* sprite = loadSprite(spriteValue, dlg);
+		d2d::ISprite* sprite = loadSprite(spriteValue, dir);
 		layer->insert(sprite);
 		spriteValue = value["sprite"][i++];
 	}
@@ -67,7 +67,7 @@ d2d::Layer* FileIO::loadLayer(const Json::Value& value,
 }
 
 Json::Value FileIO::store(const d2d::Layer* layer,
-						  const std::string& dlg)
+						  const std::string& dir)
 {
 	Json::Value value;
 
@@ -76,16 +76,16 @@ Json::Value FileIO::store(const d2d::Layer* layer,
 	std::vector<d2d::ISprite*> sprites = layer->getSprites();
 	std::sort(sprites.begin(), sprites.end(), d2d::SpriteCmp());
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["sprite"][i] = store(sprites[i], dlg);
+		value["sprite"][i] = store(sprites[i], dir);
 
 	return value;
 }
 
 d2d::ISprite* FileIO::loadSprite(const Json::Value& value,
-								 const std::string& dlg)
+								 const std::string& dir)
 {
 	std::string filepath = value["filepath"].asString();
-	filepath = d2d::FilenameTools::getAbsolutePath(dlg, filepath);
+	filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
@@ -100,7 +100,7 @@ d2d::ISprite* FileIO::loadSprite(const Json::Value& value,
 	std::string pathfile = value["path"].asString();
 	if (!pathfile.empty())
 	{
-		pathfile = d2d::FilenameTools::getAbsolutePath(dlg, pathfile);
+		pathfile = d2d::FilenameTools::getAbsolutePath(dir, pathfile);
 		info->symbol = d2d::SymbolMgr::Instance()->getSymbol(pathfile);
 		info->resetOffset();
 	}
@@ -111,11 +111,11 @@ d2d::ISprite* FileIO::loadSprite(const Json::Value& value,
 }
 
 Json::Value FileIO::store(const d2d::ISprite* sprite,
-						  const std::string& dlg)
+						  const std::string& dir)
 {
 	Json::Value value;
 
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dlg, 
+	value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
 		sprite->getSymbol().getFilepath()).ToStdString();
 
 	value["position"]["x"] = sprite->getPosition().x;
@@ -132,7 +132,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite,
 			filepath = info->symbol->getName() + "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape) + ".json";
 		else
 			filepath = info->symbol->getFilepath();
-		value["path"] = d2d::FilenameTools::getRelativePath(dlg, filepath).ToStdString();
+		value["path"] = d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
 	}
 	else
 		value["path"] = "";

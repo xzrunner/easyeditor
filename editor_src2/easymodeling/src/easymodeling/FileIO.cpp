@@ -23,7 +23,7 @@ void FileIO::load(const char* filename)
 	delete context->world;
 	context->world = libmodeling::FileApapter::j2World(value["world"]);
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];
@@ -69,7 +69,7 @@ void FileIO::store(const char* filename)
 
 	Json::Value value;
 
-	std::string dlg = d2d::FilenameTools::getFileDir(filename);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 
 	value["world"] = b2j(Context::Instance()->world);
 

@@ -198,7 +198,7 @@ void Symbol::loadResources()
 	FileLoader adapter;
 	adapter.load(m_filepath.c_str());
 
-	std::string dlg = d2d::FilenameTools::getFileDir(m_filepath);
+	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
 
 	m_width = adapter.width;
 	m_height = adapter.height;
@@ -211,31 +211,31 @@ void Symbol::loadResources()
 	case e_9Grid:
 		for (size_t i = 0; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
-				initSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dlg);
+				initSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dir);
 		break;
 	case e_9GridHollow:
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
 				if (i > 1 || i == 1 && j > 1)
-					initSprite(adapter.m_data[i*3+j-1], &m_sprites[i][j], dlg);
+					initSprite(adapter.m_data[i*3+j-1], &m_sprites[i][j], dir);
 				else
-					initSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dlg);
+					initSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dir);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
-			initSprite(adapter.m_data[i], &m_sprites[1][i], dlg);
+			initSprite(adapter.m_data[i], &m_sprites[1][i], dir);
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
-			initSprite(adapter.m_data[i], &m_sprites[i][1], dlg);
+			initSprite(adapter.m_data[i], &m_sprites[i][1], dir);
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
-				initSprite(adapter.m_data[index++], &m_sprites[i][j], dlg);
+				initSprite(adapter.m_data[index++], &m_sprites[i][j], dir);
 		break;
 	}
 
@@ -423,11 +423,11 @@ void Symbol::stretch(d2d::ISprite* sprite, const d2d::Vector& center,
 }
 
 void Symbol::initSprite(const FileLoader::Entry& entry, d2d::ISprite** pSprite,
-						const std::string& dlg)
+						const std::string& dir)
 {
 	std::string filepath = entry.filepath;
 	if (!d2d::FilenameTools::isExist(filepath))
-		filepath = d2d::FilenameTools::getAbsolutePath(dlg, filepath);
+		filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
 
 	ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);

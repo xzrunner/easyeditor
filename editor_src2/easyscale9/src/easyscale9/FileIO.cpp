@@ -17,12 +17,12 @@ void FileIO::load(const char* filename, d2d::LibraryPanel* library,
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dlg = d2d::FilenameTools::getFileDir(filename);
+	wxString dir = d2d::FilenameTools::getFileDir(filename);
 
  	int i = 0;
  	Json::Value spriteValue = value["sprite"][i++];
  	while (!spriteValue.isNull()) {
-		d2d::ISprite* sprite = load(spriteValue, dlg);
+		d2d::ISprite* sprite = load(spriteValue, dir);
 		stage->insertSprite(sprite);
  		spriteValue = value["sprite"][i++];
  	}
@@ -47,9 +47,9 @@ void FileIO::store(const char* filename, StagePanel* stage,
  	std::vector<d2d::ISprite*> sprites;
 	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-	wxString dlg = d2d::FilenameTools::getFileDir(filename);
+	wxString dir = d2d::FilenameTools::getFileDir(filename);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["sprite"][i] = store(sprites[i], dlg);
+		value["sprite"][i] = store(sprites[i], dir);
 
 	Json::StyledStreamWriter writer;
 	std::ofstream fout(filename);
@@ -57,10 +57,10 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	fout.close();
 }
 
-d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dlg)
+d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 {
 	d2d::ISprite* sprite = NULL;
-	std::string path = d2d::FilenameTools::getAbsolutePath(dlg, value["filepath"].asString());
+	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
 	sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
@@ -80,11 +80,11 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dlg)
 	return sprite;
 }
 
-Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dlg)
+Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
 
-	value["filepath"] = d2d::FilenameTools::getRelativePath(dlg,
+	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
 		sprite->getSymbol().getFilepath()).ToStdString();
 
 	value["name"] = sprite->name;

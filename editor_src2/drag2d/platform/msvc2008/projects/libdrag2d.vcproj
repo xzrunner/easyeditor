@@ -1345,14 +1345,6 @@
 				Name="fileadapter"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\AnimFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\AnimFileAdapter.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\common\CircleFileAdapter.cpp"
 					>
 				</File>
@@ -1361,11 +1353,11 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\CombinationFileAdapter.cpp"
+					RelativePath="..\..\..\src\drag2d\common\EShapeFileAdapter.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\CombinationFileAdapter.h"
+					RelativePath="..\..\..\src\drag2d\common\EShapeFileAdapter.h"
 					>
 				</File>
 				<File
@@ -1412,18 +1404,6 @@
 					RelativePath="..\..\..\src\drag2d\common\TexturePackerFileAdapter.h"
 					>
 				</File>
-				<Filter
-					Name="new"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\common\EShapeFileAdapter.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\common\EShapeFileAdapter.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="filename"
