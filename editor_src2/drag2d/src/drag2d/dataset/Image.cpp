@@ -6,11 +6,11 @@
 #include "common/tools.h"
 #include "common/Settings.h"
 
-#include <SOIL/SOIL.h>
-
 #include "ImageLoader.h"
 
 #include <fstream>
+#include <SOIL/SOIL.h>
+#include <easyimage.h>
 
 //#define USE_SOIL
 
@@ -53,7 +53,8 @@ bool Image::loadFromFile(const wxString& filepath)
   		GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 #endif
 		if (Settings::bImageEdgeClip) {
-			removeTransparentBorder();
+			eimage::ImageProcessor processor(this);
+			m_region = processor.trim();
 		}
  		return true;
  	}
@@ -99,91 +100,6 @@ void Image::draw(const Rect& r) const
  		GL10::TexCoord2f(txmin, tymax); GL10::Vertex3f(r.xMin, r.yMax, -1.0f);
 	GL10::End();
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
-}
-
-const unsigned char* Image::clip(int xmin, int xmax, int ymin, int ymax)
-{
-	if (xmin < 0 || xmin >= m_width ||
-		xmax < 0 || xmax >= m_width ||
-		ymin < 0 || ymin >= m_height ||
-		ymax < 0 || ymax >= m_height ||
-		xmin >= xmax || ymin >= ymax)
-		return NULL;
-
-	int w = xmax - xmin,
-		h = ymax - ymin;
-	unsigned char* pixels = new unsigned char[w * h * m_channels];
-	int line_size = m_channels * w;
-	for (int i = 0; i < h; ++i)
-	{
-		int from = (m_width * (ymin + i) + xmin) * m_channels,
-			to = (h - 1 - i) * w * m_channels;
-		memcpy(&pixels[to], &m_pixels[from], line_size);
-	}
-	return pixels;
-}
-
-void Image::removeTransparentBorder()
-{
-	if (m_channels != 4 || m_width == 0 || m_height == 0)
-		return;
-
-	// down
-	m_region.yMin = 0;
-	for (size_t i = 0; i < m_height; ++i)
-	{
-		size_t j = 0;
-		for ( ; j < m_width; ++j)
-			if (!isTransparent(m_pixels, j, i))
-				break;
-		if (j == m_width) ++m_region.yMin;
-		else break;
-	}
-	// up
-	m_region.yMax = m_height;
-	for (int i = m_height - 1; i >= 0; --i)
-	{
-		size_t j = 0;
-		for ( ; j < m_width; ++j)
-			if (!isTransparent(m_pixels, j, i))
-				break;
-		if (j == m_width) --m_region.yMax;
-		else break;
-	}
-	// left
-	m_region.xMin = 0;
-	for (size_t i = 0; i < m_width; ++i)
-	{
-		size_t j = 0;
-		for ( ; j < m_height; ++j)
-			if (!isTransparent(m_pixels, i, j))
-				break;
-		if (j == m_height) ++m_region.xMin;
-		else break;
-	}
-	// right
-	m_region.xMax = m_width;
-	for (int i = m_width - 1; i >= 0; --i)
-	{
-		size_t j = 0;
-		for ( ; j < m_height; ++j)
-			if (!isTransparent(m_pixels, i, j))
-				break;
-		if (j == m_height) --m_region.xMax;
-		else break;
-	}
-
-	m_region.translate(Vector(-m_width*0.5f, -m_height*0.5f));
-}
-
-bool Image::isTransparent(unsigned char* pixels, int x, int y)
-{
-#ifdef USE_SOIL
-	// image data from top to bottom
-	return pixels[(m_width * (m_height - y - 1) + x) * m_channels + m_channels - 1] == 0;
-#else
-	return pixels[(m_width * y + x) * m_channels + m_channels - 1] == 0;
-#endif
 }
 
 } // d2d

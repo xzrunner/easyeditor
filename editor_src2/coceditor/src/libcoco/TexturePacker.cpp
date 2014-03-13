@@ -24,8 +24,8 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 	{
 		d2d::Image* img = sorted[i];
 		d2d::Rect r;
-		int w = img->width() + extra_tot,
-			h = img->height() + extra_tot;
+		int w = img->clipWidth() + extra_tot,
+			h = img->clipHeight() + extra_tot;
 		assert(w < m_edge && h < m_edge);
 		if (m_width == 0)
 			m_width = w;

@@ -56,13 +56,13 @@ public:
 		switch (m_type)
 		{
 		case e_width:
-			return t0->width() > t1->width();
+			return t0->clipWidth() > t1->clipWidth();
 		case e_height:
-			return t0->height() > t1->height();
+			return t0->clipHeight() > t1->clipHeight();
 		case e_area:
-			return t0->width() * t0->height() > t1->width() * t1->height();
+			return t0->clipWidth() * t0->clipHeight() > t1->clipWidth() * t1->clipHeight();
 		default:
-			return t0->width() > t1->width();
+			return t0->clipWidth() > t1->clipWidth();
 		}
 	}
 

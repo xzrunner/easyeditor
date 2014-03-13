@@ -39,8 +39,8 @@ namespace opengl
 															gravityMax(0), radialAccelerationMin(0), radialAccelerationMax(0),
 															tangentialAccelerationMin(0), tangentialAccelerationMax(0),
 															sizeVariation(0), rotationMin(0), rotationMax(0),
-															spinStart(0), spinEnd(0), spinVariation(0), offsetX(sprite->width()*0.5f),
-															offsetY(sprite->height()*0.5f)
+															spinStart(0), spinEnd(0), spinVariation(0), offsetX(sprite->clipWidth()*0.5f),
+															offsetY(sprite->clipHeight()*0.5f)
 	{
 		this->sprite = sprite;
 //		sprite->retain();
@@ -400,9 +400,9 @@ namespace opengl
 			memset(vertices, 255, sizeof(vertex)*4);
 
 			vertices[0].x = 0; vertices[0].y = 0;
-			vertices[1].x = 0; vertices[1].y = sprite->height();
-			vertices[2].x = sprite->width(); vertices[2].y = sprite->height();
-			vertices[3].x = sprite->width(); vertices[3].y = 0;
+			vertices[1].x = 0; vertices[1].y = sprite->clipHeight();
+			vertices[2].x = sprite->clipWidth(); vertices[2].y = sprite->clipHeight();
+			vertices[3].x = sprite->clipWidth(); vertices[3].y = 0;
 
 			vertices[0].s = 0; vertices[0].t = 0;
 			vertices[1].s = 0; vertices[1].t = 1;

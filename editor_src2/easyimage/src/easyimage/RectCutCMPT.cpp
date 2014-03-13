@@ -3,6 +3,7 @@
 #include "StagePanel.h"
 
 #include <easycomplex.h>
+#include <easyimage.h>
 
 namespace eimage
 {
@@ -190,8 +191,9 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{
 		const d2d::Rect& r = *rects[i];
-		const unsigned char* pixels = image->clip(r.xMin, r.xMax, r.yMin, r.yMax);
 
+		eimage::ImageProcessor processor(image);
+		const unsigned char* pixels = processor.clip(r.xMin, r.xMax, r.yMin, r.yMax);
 		float width = r.xLength();
 		float height = r.yLength();
 
@@ -201,8 +203,8 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		wxString img_fullname = img_filename + ".png";
 		d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(img_fullname.ToStdString(), width, height));
 		d2d::Vector off;
-		off.x = r.xCenter() - image->width() * 0.5f;
-		off.y = r.yCenter() - image->height() * 0.5f;
+		off.x = r.xCenter() - image->clipWidth() * 0.5f;
+		off.y = r.yCenter() - image->clipHeight() * 0.5f;
 		sprite->translate(off);
 		complex->m_sprites.push_back(sprite);
 	}

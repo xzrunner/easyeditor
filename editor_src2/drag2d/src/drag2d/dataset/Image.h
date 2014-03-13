@@ -23,23 +23,18 @@ namespace d2d
 		const wxString& filepath() const { return m_filepath; }
 
 		unsigned int textureID() const { return m_textureID; }
-		int width() const { return m_region.xLength(); }
-		int height() const { return m_region.yLength(); }
+		int channels() const { return m_channels; }
 
-		int oldWidth() const { return m_width; }
-		int oldHeight() const { return m_height; }
+		int clipWidth() const { return m_region.xLength(); }
+		int clipHeight() const { return m_region.yLength(); }
+		int originWidth() const { return m_width; }
+		int originHeight() const { return m_height; }
 
 		void draw(const Rect& r) const;
 
 		Rect getRegion() const { return m_region; }
 
 		const unsigned char* getPixelData() const { return m_pixels; }
-
-		const unsigned char* clip(int xmin, int xmax, int ymin, int ymax);
-
-	private:
-		void removeTransparentBorder();
-		bool isTransparent(unsigned char* pixels, int x, int y);
 
 	private:
 		wxString m_filepath;

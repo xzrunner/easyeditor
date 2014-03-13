@@ -4,6 +4,7 @@
 
 #include <easycomplex.h>
 #include <easyanim.h>
+#include <easyimage.h>
 
 extern "C" {
 	#include <lua.h>
@@ -264,7 +265,9 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		for (int i = 0, n = pic->parts.size(); i < n; ++i)
 		{
 			Picture::Part* part = pic->parts[i];
-			const unsigned char* pixels = images[part->tex]->clip(part->xmin, part->xmax, part->ymin, part->ymax);
+			d2d::Image* image = images[part->tex];
+			eimage::ImageProcessor processor(image);
+			const unsigned char* pixels = processor.clip(part->xmin, part->xmax, part->ymin, part->ymax);
 			if (pixels) 
 			{
 				int width = part->xmax-part->xmin,

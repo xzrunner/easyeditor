@@ -45,8 +45,8 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 			GL10::MultMatrixf((const float*)t.getElements( ));
 
 			Image* img = s->getSymbol().getImage();
-			PrimitiveDraw::rect(Vector(0, 0), img->oldWidth() * 0.5f, 
-				img->oldHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
+			PrimitiveDraw::rect(Vector(0, 0), img->originWidth() * 0.5f, 
+				img->originHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
 
 			GL10::PopMatrix();
 		}
