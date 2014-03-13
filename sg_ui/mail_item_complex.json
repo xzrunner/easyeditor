@@ -1,7 +1,6 @@
 
 {
 	"name" : "mail_item",
-	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -19,9 +18,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.4499999880790710,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
@@ -40,9 +41,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -61,10 +64,12 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x scale" : 0.250,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.250,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
@@ -89,9 +94,11 @@
 			"size" : 18,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -110,9 +117,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -131,9 +140,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -152,75 +163,13 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-		}
-	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : -3.0,
-				"dy" : -97.0,
-				"type" : 0
-			}
-		},
-		null,
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : 219.0,
-				"dy" : -226.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : -168.0,
-				"dy" : -1.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : -6.0,
-				"dy" : 4.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : 2.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"dx" : -166.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
 		}
 	],
 	"xmax" : 0.0,

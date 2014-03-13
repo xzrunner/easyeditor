@@ -1,0 +1,30 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "icon_wine_bottle.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.2000000029802322,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.4000000059604645,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		}
+	]
+}

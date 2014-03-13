@@ -36,8 +36,8 @@
 			"name" : "troop",
 			"position" : 
 			{
-				"x" : -23.0,
-				"y" : 17.0
+				"x" : -5.0,
+				"y" : 46.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -59,8 +59,8 @@
 			"name" : "spell",
 			"position" : 
 			{
-				"x" : -22.1250,
-				"y" : 10.0
+				"x" : -5.0,
+				"y" : 46.0
 			},
 			"tag" : "",
 			"x mirror" : false,

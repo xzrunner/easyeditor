@@ -107,22 +107,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6197-tongyong-1.png",
+			"filepath" : "icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
 			"name" : "DarkElixir",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 29.0
+				"x" : -0.3501734733581543,
+				"y" : 26.78668594360352
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.4000000059604645,
+			"x offset" : -0.50,
+			"x scale" : 0.4692695140838623,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.4000000059604645,
+			"y offset" : 1.0,
+			"y scale" : 0.4692695140838623,
 			"y shear" : 0.0
 		}
 	],

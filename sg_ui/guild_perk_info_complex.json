@@ -8,6 +8,29 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
+			"filepath" : "guild_perk_list_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : 191.50,
+				"y" : -179.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3013.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "chat_window_top_bg_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
@@ -84,13 +107,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "game_top_left_trophies_complex.json",
+			"filepath" : "blue_button_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "trophies",
+			"name" : "checkin",
 			"position" : 
 			{
-				"x" : 91.250,
-				"y" : -63.14999389648438
+				"x" : 333.0,
+				"y" : -92.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -105,31 +128,24 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "title_fontblank.json",
-			"font" : "",
-			"font_filename" : "",
-			"label_height" : 30,
-			"label_width" : 400,
+			"filepath" : "guild_fight_xp_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "info",
+			"name" : "guild_xp",
 			"position" : 
 			{
-				"x" : 191.250,
-				"y" : -109.750
+				"x" : 111.0,
+				"y" : -78.250
 			},
-			"size" : 20,
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 32.29998779296875,
-			"x scale" : 1.0,
+			"x offset" : 10.49999237060547,
+			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 22.750,
-			"y scale" : 1.0,
+			"y offset" : 6.50,
+			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		},
 		
@@ -137,22 +153,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "chat_item_list_complex.json",
+			"filepath" : "guild_perk_res_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "list",
+			"name" : "guild_res",
 			"position" : 
 			{
-				"x" : 191.50,
-				"y" : -179.0
+				"x" : 104.6000061035156,
+				"y" : -131.750
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
+			"x offset" : 13.39999389648438,
+			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : -3000.024902343750,
-			"y scale" : 1.0,
+			"y offset" : 1.750,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		}
 	],

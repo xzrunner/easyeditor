@@ -1,0 +1,177 @@
+{
+    "ymax": 0.0, 
+    "sprite": [
+        {
+            "y scale": 0.6000000238418579, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite15", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1107_1.PNG", 
+            "x scale": 0.6000000238418579, 
+            "y offset": 0.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 0.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -23.0, 
+                "x": -12.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite0", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv1_02.png", 
+            "x scale": 1.0, 
+            "y offset": 42.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -8.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -29.0, 
+                "x": 5.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite3", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv2_01.png", 
+            "x scale": 1.0, 
+            "y offset": -0.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 38.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -29.0, 
+                "x": 5.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite4", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv2_03.png", 
+            "x scale": 1.0, 
+            "y offset": 102.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -18.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -29.0, 
+                "x": 5.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite5", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv2_04.png", 
+            "x scale": 1.0, 
+            "y offset": 42.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 28.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -29.0, 
+                "x": 5.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite2", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv1_08.png", 
+            "x scale": 1.0, 
+            "y offset": 84.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": 20.5, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": 3.0, 
+                "x": -28.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite7", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv2_10.png", 
+            "x scale": 1.0, 
+            "y offset": -24.0, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -69.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -29.0, 
+                "x": 5.0
+            }, 
+            "add color": "0x00000000"
+        }, 
+        {
+            "y scale": 1.0, 
+            "x mirror": false, 
+            "y mirror": false, 
+            "angle": 0.0, 
+            "name": "_sprite6", 
+            "clip": false, 
+            "filepath": "..\\..\\pngs\\1201_3_lv2_09.png", 
+            "x scale": 1.0, 
+            "y offset": -6.5, 
+            "y shear": 0.0, 
+            "multi color": "0xffffffff", 
+            "x offset": -46.0, 
+            "tag": "", 
+            "x shear": 0.0, 
+            "position": {
+                "y": -29.0, 
+                "x": 5.0
+            }, 
+            "add color": "0x00000000"
+        }
+    ], 
+    "xmax": 0.0, 
+    "xmin": 0.0, 
+    "ymin": 0.0, 
+    "name": "building_1201_lv2"
+}
