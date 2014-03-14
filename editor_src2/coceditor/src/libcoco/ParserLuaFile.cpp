@@ -277,7 +277,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 					d2d::ImageSaver::storeToFile(pixels, width, height, outfile, d2d::ImageSaver::e_png);
 
 				std::string outpath = outfile + ".png";
-				d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(outfile, width, height));
+				d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(outpath, width, height));
 				part->transform(sprite);
 				symbol->m_sprites.push_back(sprite);
 			}
@@ -328,6 +328,7 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 				{
 					Picture* pic = itr->second;
 					d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(pic->filename, pic->width, pic->height));
+					item->transform(sprite);
 					frame->sprites.push_back(sprite);
 				}
 				else
@@ -593,6 +594,10 @@ void ParserLuaFile::Animation::Item::transform(d2d::ISprite* sprite) const
 
 	if (is_full && valid)
 	{
+		// coc的数据颜色都是argb格式
+		sprite->multiCol = d2d::transColor(color, d2d::PT_ARGB);
+		sprite->addCol = d2d::transColor(add, d2d::PT_ARGB);
+
 		float x = mat[4] / 16.0f,
 			y = -mat[5] / 16.0f;
 		assert(mat[0] != 0 && mat[3] != 0);
