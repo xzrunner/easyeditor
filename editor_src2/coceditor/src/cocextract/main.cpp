@@ -9,8 +9,11 @@ int main(int argc, char *argv[])
 		parser.parser(filename);
 
 		std::vector<std::string> texs;
-		texs.push_back("D:\\test\\characters.sc.1.pgm");
-		parser.transToEasyFiles(texs, "D:\\test\\out");
+		texs.push_back("e:\\test\\1.png");
+		texs.push_back("e:\\test\\2.png");
+		texs.push_back("e:\\test\\3.png");
+		texs.push_back("e:\\test\\4.png");
+		parser.transToEasyFiles(texs, "e:\\test\\out");
 	}
 
 	return 0;
