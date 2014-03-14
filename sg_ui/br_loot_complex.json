@@ -66,8 +66,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -245.0,
-				"y" : 26.0
+				"x" : -241.1831207275391,
+				"y" : -13.86516952514648
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -86,7 +86,7 @@
 			"clip" : false,
 			"filepath" : "br_loot_text_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "loot_gold",
+			"name" : "loot_trophy_position2",
 			"position" : 
 			{
 				"x" : -43.0,
@@ -135,8 +135,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -245.0,
-				"y" : -12.0
+				"x" : -241.1831207275391,
+				"y" : -51.86516952514648
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -155,7 +155,7 @@
 			"clip" : false,
 			"filepath" : "br_loot_text_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "loot_elixir",
+			"name" : "loot_gold",
 			"position" : 
 			{
 				"x" : -43.0,
@@ -204,8 +204,8 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : -244.5049438476563,
-				"y" : -88.97786712646484
+				"x" : -241.0,
+				"y" : 25.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -224,7 +224,7 @@
 			"clip" : false,
 			"filepath" : "br_loot_text_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "loot_dark_elixir",
+			"name" : "loot_elixir",
 			"position" : 
 			{
 				"x" : -43.0,
@@ -270,11 +270,11 @@
 			"clip" : false,
 			"filepath" : "icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
-			"name" : "_sprite12",
+			"name" : "icon_dark_elixir",
 			"position" : 
 			{
-				"x" : -246.0,
-				"y" : -49.56923294067383
+				"x" : -242.1831207275391,
+				"y" : -89.43440246582031
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -293,7 +293,7 @@
 			"clip" : false,
 			"filepath" : "br_loot_text_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "loot_trophy_position2",
+			"name" : "loot_dark_elixir",
 			"position" : 
 			{
 				"x" : -43.0,
@@ -309,5 +309,9 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }

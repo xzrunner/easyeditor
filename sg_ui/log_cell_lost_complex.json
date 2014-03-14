@@ -1,7 +1,6 @@
 
 {
 	"name" : "battle_log_cell_lost",
-	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -19,9 +18,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.6000000238418579,
 			"y shear" : 0.0
 		},
@@ -40,9 +41,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 30.0,
 			"y shear" : 0.0
 		},
@@ -55,6 +58,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "log_player_name_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 25,
 			"label_width" : 200,
 			"multi color" : "0xffffffff",
@@ -67,9 +71,11 @@
 			"size" : 20,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -82,21 +88,24 @@
 			"color" : "0xff333333",
 			"filepath" : "log_time_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 19,
 			"label_width" : 143,
 			"multi color" : "0xffffffff",
 			"name" : "time",
 			"position" : 
 			{
-				"x" : 36.0,
-				"y" : -71.0
+				"x" : -57.56698608398438,
+				"y" : 59.84809112548828
 			},
 			"size" : 13,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -109,6 +118,7 @@
 			"color" : "0xff666666",
 			"filepath" : "log_tid_revenge_not_available_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 36,
 			"label_width" : 127,
 			"multi color" : "0xffffffff",
@@ -121,9 +131,11 @@
 			"size" : 12,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -136,6 +148,7 @@
 			"color" : "0xff666666",
 			"filepath" : "log_tid_replay_not_available_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 35,
 			"label_width" : 127,
 			"multi color" : "0xffffffff",
@@ -148,9 +161,11 @@
 			"size" : 12,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -161,17 +176,19 @@
 			"clip" : false,
 			"filepath" : "bar_gold_icon_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "icon_gold",
 			"position" : 
 			{
-				"x" : -378.3999938964844,
-				"y" : -70.0
+				"x" : -372.0,
+				"y" : -68.50
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		},
@@ -184,21 +201,24 @@
 			"color" : "0xffffffff",
 			"filepath" : "log_loot_gold_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 19,
 			"label_width" : 126,
 			"multi color" : "0xffffffff",
 			"name" : "loot_gold",
 			"position" : 
 			{
-				"x" : -293.7999877929688,
-				"y" : -74.50
+				"x" : -283.0,
+				"y" : -69.0
 			},
 			"size" : 15,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -209,17 +229,19 @@
 			"clip" : false,
 			"filepath" : "bar_elixir_icon_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "icon_elixir",
 			"position" : 
 			{
-				"x" : -204.8000030517578,
-				"y" : -66.50
+				"x" : -196.8000030517578,
+				"y" : -67.50000762939453
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		},
@@ -232,21 +254,24 @@
 			"color" : "0xffffffff",
 			"filepath" : "log_loot_gold_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 19,
 			"label_width" : 126,
 			"multi color" : "0xffffffff",
 			"name" : "loot_elixir",
 			"position" : 
 			{
-				"x" : -116.1999969482422,
-				"y" : -75.0
+				"x" : -118.4665069580078,
+				"y" : -68.53350067138672
 			},
 			"size" : 15,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -265,9 +290,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.3000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
@@ -280,6 +307,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "log_points_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 24,
 			"label_width" : 51,
 			"multi color" : "0xffffffff",
@@ -292,9 +320,11 @@
 			"size" : 20,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -313,9 +343,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.3000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
@@ -328,6 +360,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "log_points_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 24,
 			"label_width" : 51,
 			"multi color" : "0xffffffff",
@@ -340,9 +373,11 @@
 			"size" : 20,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -361,9 +396,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -382,9 +419,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -403,9 +442,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
@@ -418,6 +459,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "log_tid_you_win_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 21,
 			"label_width" : 100,
 			"multi color" : "0xffffffff",
@@ -430,9 +472,11 @@
 			"size" : 15,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -445,6 +489,7 @@
 			"color" : "0xffffffff",
 			"filepath" : "log_percent_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 18,
 			"label_width" : 60,
 			"multi color" : "0xffffffff",
@@ -457,9 +502,11 @@
 			"size" : 15,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -478,9 +525,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.3000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.3000000119209290,
 			"y shear" : 0.0
 		},
@@ -499,9 +548,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		},
@@ -520,9 +571,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
@@ -535,6 +588,7 @@
 			"color" : "0xfffeffd9",
 			"filepath" : "guild_name_fontblank.json",
 			"font" : "",
+			"font_filename" : "",
 			"label_height" : 25,
 			"label_width" : 150,
 			"multi color" : "0xffffffff",
@@ -547,222 +601,66 @@
 			"size" : 18,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-		}
-	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.50,
-						"y" : 0.50
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.50,
-				"yscale" : 0.6000000238418579
-			}
 		},
 		
 		{
-			"sprites" : [ 14 ],
-			"val" : 
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "icon_wine_bottle.png",
+			"multi color" : "0xffffffff",
+			"name" : "icon_dark_elixir",
+			"position" : 
 			{
-				"dx" : -4.0,
-				"dy" : -3.0,
-				"type" : 0
-			}
+				"x" : -32.31287002563477,
+				"y" : -65.14964294433594
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.197692871093750,
+			"x scale" : 0.39538574218750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.39538574218750,
+			"y scale" : 0.39538574218750,
+			"y shear" : 0.0
 		},
 		
 		{
-			"sprites" : [ 1 ],
-			"val" : 
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "log_loot_gold_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 19,
+			"label_width" : 126,
+			"multi color" : "0xffffffff",
+			"name" : "loot_dark_elixir",
+			"position" : 
 			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 25.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.0,
-				"yscale" : 26.0
-			}
-		},
-		
-		{
-			"sprites" : [ 1 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 26.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.0,
-				"yscale" : 28.0
-			}
-		},
-		
-		{
-			"sprites" : [ 1 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 28.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 1.0,
-				"yscale" : 30.0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : -1.0,
-				"dy" : -16.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 9 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : -5.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"dx" : -6.0,
-				"dy" : -24.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"dx" : -4.0,
-				"dy" : -19.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 7 ],
-			"val" : 
-			{
-				"dx" : -6.0,
-				"dy" : -22.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 8 ],
-			"val" : 
-			{
-				"dx" : 2.0,
-				"dy" : 8.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 21 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.50,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 21 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.50,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.50,
-				"yscale" : 0.50
-			}
-		},
-		
-		{
-			"sprites" : [ 21 ],
-			"val" : 
-			{
-				"dx" : -8.0,
-				"dy" : -203.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 22 ],
-			"val" : 
-			{
-				"dx" : 41.0,
-				"dy" : -138.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 22 ],
-			"val" : 
-			{
-				"dx" : 28.0,
-				"dy" : -2.0,
-				"type" : 0
-			}
+				"x" : 51.40000152587891,
+				"y" : -68.43552398681641
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"xmax" : 0.0,

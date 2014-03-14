@@ -169,7 +169,7 @@
 			"clip" : false,
 			"filepath" : "icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
-			"name" : "_sprite30",
+			"name" : "icon_dark_elixir",
 			"position" : 
 			{
 				"x" : -61.70101547241211,
@@ -215,5 +215,9 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
