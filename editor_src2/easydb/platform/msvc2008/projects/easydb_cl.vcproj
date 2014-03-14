@@ -198,6 +198,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\easydb\FixJsonFiles.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\FixJsonFiles.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easydb\FormatJsonFile.cpp"
 			>
 		</File>
