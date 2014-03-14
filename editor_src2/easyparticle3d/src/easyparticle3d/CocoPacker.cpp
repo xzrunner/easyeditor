@@ -77,10 +77,12 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 	s = wxString::FromDouble(val["max_vert"].asInt());
 	lua::assign(gen, "['max_vert']", s+",");
 
-	s = wxString::FromDouble(val["min_spd"].asInt());
+	const float SPEED_SCALE = 0.25f;
+
+	s = wxString::FromDouble(val["min_spd"].asInt() * SPEED_SCALE);
 	lua::assign(gen, "['min_spd']", s+"*k,");
 
-	s = wxString::FromDouble(val["max_spd"].asInt());
+	s = wxString::FromDouble(val["max_spd"].asInt() * SPEED_SCALE);
 	lua::assign(gen, "['max_spd']", s+"*k,");
 
 	s = wxString::FromDouble(val["gravity"].asInt());
@@ -130,22 +132,22 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 //			s = child_val["name"].asString();
 			lua::assign(gen, "['name']", "'"+s+"',");
 
-			s = wxString::FromDouble(val["start_scale"].asInt());
+			s = wxString::FromDouble(child_val["start_scale"].asInt());
 			lua::assign(gen, "['start_scale']", s+"*s,");
 
-			s = wxString::FromDouble(val["end_scale"].asInt());
+			s = wxString::FromDouble(child_val["end_scale"].asInt());
 			lua::assign(gen, "['end_scale']", s+"*s,");
 
-			s = wxString::FromDouble(val["min_rotate"].asInt());
+			s = wxString::FromDouble(child_val["min_rotate"].asInt());
 			lua::assign(gen, "['min_rotate']", s+"*r,");
 
-			s = wxString::FromDouble(val["max_rotate"].asInt());
+			s = wxString::FromDouble(child_val["max_rotate"].asInt());
 			lua::assign(gen, "['max_rotate']", s+"*r,");
 
-			s = wxString::FromDouble(val["start_z"].asInt());
+			s = wxString::FromDouble(child_val["start_z"].asInt());
 			lua::assign(gen, "['start_z']", s+",");
 
-			child_val = val["components"][i++];
+			child_val = child_val["components"][i++];
 		}
 	}	
 }
