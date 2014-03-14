@@ -1,96 +1,30 @@
 
 {
 	"name" : "yellow_background",
-	"redo" : null,
 	"sprite" : 
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
+			"clip" : false,
 			"filepath" : "yellow_button2_scale9.json",
-			"multi color" : "",
+			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
-		}
-	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"dx" : 72.0,
-				"dy" : -32.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"dx" : 5.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : -26.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.50,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 0.50,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 0.50,
-				"yscale" : 0.50
-			}
 		}
 	]
 }
