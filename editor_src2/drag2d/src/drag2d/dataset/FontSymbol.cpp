@@ -41,12 +41,16 @@ void FontSymbol::reloadTexture() const
 	
 }
 
-void FontSymbol::draw(const ISprite* sprite/* = NULL*/) const
+void FontSymbol::draw(const Colorf& mul, const Colorf& add,
+					  const ISprite* sprite/* = NULL*/) const
 {
 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));
+
 	const d2d::Colori& c = text->getColor();
-//	glColor4ub(c.r, c.g, c.b, c.a);
-	Shader::Instance()->color(c.r / 255.0f, c.g / 255.0f, c.b / 255.0f, c.a / 255.0f);
+	d2d::Colorf _mul(c.r / 255.0f, c.g / 255.0f, c.b / 255.0f, c.a / 255.0f);
+	_mul = cMul(_mul, mul);
+	Shader::Instance()->color(_mul, add);
+
 	print(0, 0, text->getText().c_str());
 }
 

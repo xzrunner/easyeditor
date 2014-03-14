@@ -44,7 +44,8 @@ void Symbol::reloadTexture() const
 	}
 }
 
-void Symbol::draw(const d2d::ISprite* sprite/* = NULL*/) const
+void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	int index = d2d::SpriteDraw::time / (1.0f / m_fps);
 	index = index % getMaxFrameIndex();
@@ -69,7 +70,7 @@ void Symbol::draw(const d2d::ISprite* sprite/* = NULL*/) const
 				for (size_t j = 0, m = frame->sprites.size(); j < m; ++j)
 				{
 					d2d::ISprite* sprite = frame->sprites[j];
-					d2d::SpriteDraw::drawSprite(sprite);
+					d2d::SpriteDraw::drawSprite(sprite, mul, add);
 				}
 			}
 		}

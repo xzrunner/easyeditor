@@ -21,9 +21,6 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
 	if (!sprite->visiable)
 		return;
 
-	Shader* shader = Shader::Instance();
-	shader->sprite();
-
 	GL10::PushMatrix();
 
 	love::Matrix t;
@@ -38,11 +35,11 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
  		xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
  	GL10::MultMatrixf((const float*)t.getElements( ));
 
-	Colorf m = cMul(mul, sprite->multiCol),
-		a = cAdd(add, sprite->addCol);
-	shader->color(m, a);
+	Shader* shader = Shader::Instance();
 
-	sprite->getSymbol().draw(sprite);
+	Colorf _mul = cMul(sprite->multiCol, mul),
+		   _add = cAdd(sprite->addCol, add);
+	sprite->getSymbol().draw(_mul, _add, sprite);
 
 	GL10::PopMatrix();
 }
@@ -50,7 +47,8 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
 void SpriteDraw::drawSprite(const ISymbol* symbol, const Vector& pos,
 							float angle/* = 0.0f*/, float xScale/* = 1.0f*/, 
 							float yScale/* = 1.0f*/, float xShear/* = 0.0f*/, 
-							float yShear/* = 0.0f*/)
+							float yShear/* = 0.0f*/, const Colorf& mul /*= Colorf(1,1,1,1)*/,
+							const Colorf& add /*= Colorf(0,0,0,0)*/)
 {
 	GL10::PushMatrix();
 
@@ -58,7 +56,7 @@ void SpriteDraw::drawSprite(const ISymbol* symbol, const Vector& pos,
 	t.setTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
 	GL10::MultMatrixf((const float*)t.getElements());
 
-	symbol->draw();
+	symbol->draw(mul, add);
 	GL10::PopMatrix();
 }
 

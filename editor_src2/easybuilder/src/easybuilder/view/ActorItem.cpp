@@ -28,7 +28,8 @@ void ActorItem::reloadTexture() const
 {
 }
 
-void ActorItem::draw(const d2d::ISprite* sprite/* = NULL*/) const
+void ActorItem::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+					 const d2d::ISprite* sprite/* = NULL*/) const
 {
 //	m_actor->getSymbol().draw();
 }

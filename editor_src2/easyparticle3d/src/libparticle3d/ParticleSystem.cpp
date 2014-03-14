@@ -59,15 +59,12 @@ void ParticleSystem::draw()
 
 		glTranslatef(p->pos.x, p->pos.y, 0);
 
+		d2d::Colorf multi(1, 1, 1, 1);
 		if (p->life < fadeout_time)
 		{
 			unsigned char a = 255 * p->life / fadeout_time;
 			vertices[0].a = vertices[1].a = vertices[2].a = vertices[3].a = a;
-			d2d::Shader::Instance()->color(1, 1, 1, a / 255.0f);
-		}
-		else
-		{
-			d2d::Shader::Instance()->color(1, 1, 1, 1);
+			multi.set(1, 1, 1, a/255.0f);
 		}
 
 		float gx = p->position[0] * 0.01f,
@@ -78,7 +75,7 @@ void ParticleSystem::draw()
 		float s = (p->life / p->lifetime) * (p->pc->start_scale - p->pc->end_scale) + p->pc->end_scale;
 
 		d2d::SpriteDraw::time = p->lifetime - p->life;
-		d2d::SpriteDraw::drawSprite(p->pc->symbol, d2d::Vector(x, y), p->angle, s, s);
+		d2d::SpriteDraw::drawSprite(p->pc->symbol, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
 
 		glPopAttrib();
 		glPopMatrix();

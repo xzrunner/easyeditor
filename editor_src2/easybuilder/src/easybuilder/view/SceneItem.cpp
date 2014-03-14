@@ -42,7 +42,8 @@ void SceneItem::reloadTexture() const
 {
 }
 
-void SceneItem::draw(const d2d::ISprite* sprite/* = NULL*/) const
+void SceneItem::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+					 const d2d::ISprite* sprite/* = NULL*/) const
 {
 }
 

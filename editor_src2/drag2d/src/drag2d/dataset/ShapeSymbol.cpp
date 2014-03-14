@@ -43,7 +43,8 @@ void ShapeSymbol::reloadTexture() const
 
 }
 
-void ShapeSymbol::draw(const ISprite* sprite/* = NULL*/) const
+void ShapeSymbol::draw(const Colorf& mul, const Colorf& add,
+					   const ISprite* sprite/* = NULL*/) const
 {
 	for (size_t i = 0, n = shapes.size(); i < n; ++i)
 		shapes[i]->draw();

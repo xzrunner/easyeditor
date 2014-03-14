@@ -51,7 +51,8 @@ void EShapeSymbol::reloadTexture() const
 
 }
 
-void EShapeSymbol::draw(const ISprite* sprite/* = NULL*/) const
+void EShapeSymbol::draw(const Colorf& mul, const Colorf& add,
+						const ISprite* sprite/* = NULL*/) const
 {
 	for (size_t i = 0, n = shapes.size(); i < n; ++i)
 		shapes[i]->draw();

@@ -48,7 +48,8 @@ void FontBlankSymbol::reloadTexture() const
 {
 }
 
-void FontBlankSymbol::draw(const ISprite* sprite/* = NULL*/) const
+void FontBlankSymbol::draw(const Colorf& mul, const Colorf& add,
+						   const ISprite* sprite/* = NULL*/) const
 {
 	float w = width, h = height;
 	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);

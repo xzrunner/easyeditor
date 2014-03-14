@@ -51,7 +51,8 @@ void Symbol::reloadTexture() const
 		}
 }
 
-void Symbol::draw(const d2d::ISprite* sprite/* = NULL*/) const
+void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	const Sprite* scale9 = dynamic_cast<const Sprite*>(sprite);
 // 	bool isResize = scale9 && ((scale9->width != m_width) || (scale9->height != m_height));
@@ -65,10 +66,7 @@ void Symbol::draw(const d2d::ISprite* sprite/* = NULL*/) const
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				if (sprite)
-					d2d::SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
-				else
-					d2d::SpriteDraw::drawSprite(m_sprites[i][j]);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mul, add);
 			}
 		break;
 	case e_9GridHollow:
@@ -77,30 +75,21 @@ void Symbol::draw(const d2d::ISprite* sprite/* = NULL*/) const
 			{
 				if (i == 1 && j == 1) continue;
 				if (!m_sprites[i][j]) continue;
-				if (sprite)
-					d2d::SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
-				else
-					d2d::SpriteDraw::drawSprite(m_sprites[i][j]);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mul, add);
 			}
 			break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[1][i]) continue;
-			if (sprite)
-				d2d::SpriteDraw::drawSprite(m_sprites[1][i], sprite->multiCol, sprite->addCol);
-			else
-				d2d::SpriteDraw::drawSprite(m_sprites[1][i]);
+			d2d::SpriteDraw::drawSprite(m_sprites[1][i], mul, add);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[i][1]) continue;
-			if (sprite)
-				d2d::SpriteDraw::drawSprite(m_sprites[i][1], sprite->multiCol, sprite->addCol);
-			else
-				d2d::SpriteDraw::drawSprite(m_sprites[i][1]);
+			d2d::SpriteDraw::drawSprite(m_sprites[i][1], mul, add);
 		}
 		break;
 	case e_6GridUpper:
@@ -108,10 +97,7 @@ void Symbol::draw(const d2d::ISprite* sprite/* = NULL*/) const
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				if (sprite)
-					d2d::SpriteDraw::drawSprite(m_sprites[i][j], sprite->multiCol, sprite->addCol);
-				else
-					d2d::SpriteDraw::drawSprite(m_sprites[i][j]);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mul, add);
 			}
 	}
 

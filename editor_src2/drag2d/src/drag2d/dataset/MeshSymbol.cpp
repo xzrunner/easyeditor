@@ -35,7 +35,8 @@ void MeshSymbol::reloadTexture() const
 	m_image->reload();
 }
 
-void MeshSymbol::draw(const ISprite* sprite/* = NULL*/) const
+void MeshSymbol::draw(const Colorf& mul, const Colorf& add,
+					  const ISprite* sprite/* = NULL*/) const
 {
 //	PrimitiveDraw::drawTriangles(m_image->textureID(), m_vertices, m_texCoords);
 

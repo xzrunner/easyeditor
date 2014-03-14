@@ -21,7 +21,8 @@ namespace d2d
 
 		static void drawSprite(const ISymbol* symbol, const Vector& pos,
 			float angle = 0.0f, float xScale = 1.0f, float yScale = 1.0f,
-			float xShear = 0.0f, float yShear = 0.0f);
+			float xShear = 0.0f, float yShear = 0.0f, const Colorf& mul = Colorf(1,1,1,1),
+			const Colorf& add = Colorf(0,0,0,0));
 
 		static void drawSprite(const ISprite* sprite, wxMemoryDC& memDC);
 		static void drawSprite(const ISprite* sprite, const Vector& offset, wxMemoryDC& memDC,

@@ -3,6 +3,7 @@
 #include "widgets/ListItem.h"
 #include "common/ResourcesMgr.h"
 #include "common/Rect.h"
+#include "common/Color.h"
 
 namespace d2d
 {
@@ -19,7 +20,9 @@ namespace d2d
 		virtual ISymbol* clone() const { return NULL; }
 
 		virtual void reloadTexture() const = 0;
-		virtual void draw(const ISprite* sprite = NULL) const = 0;
+		virtual void draw(const Colorf& mul = Colorf(1, 1, 1, 1), 
+			const Colorf& add = Colorf(0, 0, 0, 0),
+			const ISprite* sprite = NULL) const = 0;
 		virtual Rect getSize(const ISprite* sprite = NULL) const = 0;
 
 		bool loadFromFile(const wxString& filepath);

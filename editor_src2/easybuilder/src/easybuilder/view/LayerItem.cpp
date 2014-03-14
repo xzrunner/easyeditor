@@ -41,7 +41,8 @@ void LayerItem::reloadTexture() const
 {
 }
 
-void LayerItem::draw(const d2d::ISprite* sprite/* = NULL*/) const
+void LayerItem::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+					 const d2d::ISprite* sprite/* = NULL*/) const
 {
 }
 

@@ -1,6 +1,9 @@
 #include "ImageSymbol.h"
 #include "Bitmap.h"
 #include "Image.h"
+#include "ISprite.h"
+
+#include "render/Shader.h"
 
 namespace d2d
 {
@@ -39,8 +42,13 @@ void ImageSymbol::reloadTexture() const
 	m_image->reload();
 }
 
-void ImageSymbol::draw(const ISprite* sprite/* = NULL*/) const
+void ImageSymbol::draw(const Colorf& mul, const Colorf& add,
+					   const ISprite* sprite/* = NULL*/) const
 {
+	Shader* shader = Shader::Instance();
+	shader->sprite();
+	shader->color(mul, add);
+
 	m_image->draw(m_region);
 }
 
