@@ -360,6 +360,12 @@ void MultiSpritesPropertySetting::center(const wxAny& value)
 
 Vector MultiSpritesPropertySetting::getSamePosition() const
 {
+	if (m_sprites.empty()) {
+		Vector p;
+		p.setInvalid();
+		return p;
+	}
+
 	Vector p = m_sprites[0]->getPosition();
 	for (size_t i = 1, n = m_sprites.size(); i < n; ++i)
 	{
