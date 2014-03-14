@@ -86,7 +86,7 @@
 			"clip" : false,
 			"filepath" : "6107-tongyong-1.png",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "WinTrophyIcon",
 			"position" : 
 			{
 				"x" : 28.06578254699707,
@@ -139,7 +139,7 @@
 			"clip" : false,
 			"filepath" : "6107-tongyong-1.png",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "LoseTrophyIcon",
 			"position" : 
 			{
 				"x" : 28.10000038146973,
@@ -192,7 +192,7 @@
 			"clip" : false,
 			"filepath" : "6106-tongyong-1.png",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "GoldIcon",
 			"position" : 
 			{
 				"x" : 25.20048141479492,
@@ -215,7 +215,7 @@
 			"clip" : false,
 			"filepath" : "6105-tongyong-1.png",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "ElixirIcon",
 			"position" : 
 			{
 				"x" : 26.95023345947266,
@@ -358,7 +358,7 @@
 			"clip" : false,
 			"filepath" : "icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
-			"name" : "_sprite126",
+			"name" : "DarkElixirIcon",
 			"position" : 
 			{
 				"x" : 27.63853454589844,

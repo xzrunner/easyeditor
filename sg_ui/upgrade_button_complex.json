@@ -33,7 +33,7 @@
 			"clip" : false,
 			"filepath" : "6105-tongyong-1.png",
 			"multi color" : "0xffffffff",
-			"name" : "elixir",
+			"name" : "Elixir",
 			"position" : 
 			{
 				"x" : 67.0,
@@ -79,7 +79,7 @@
 			"clip" : false,
 			"filepath" : "6106-tongyong-1.png",
 			"multi color" : "0xffffffff",
-			"name" : "gold",
+			"name" : "Gold",
 			"position" : 
 			{
 				"x" : 67.0,
@@ -94,6 +94,33 @@
 			"y offset" : 0.0,
 			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "icon_wine_bottle.png",
+			"multi color" : "0xffffffff",
+			"name" : "DarkElixir",
+			"position" : 
+			{
+				"x" : 66.26264953613281,
+				"y" : 1.588149070739746
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.1858665794134140,
+			"x scale" : 0.3717331588268280,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.3717331588268280,
+			"y scale" : 0.3717331588268280,
+			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
