@@ -138,8 +138,24 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 		Rect rect(m_firstPos, end);
 		std::vector<ISprite*> sprites;
 		m_spritesImpl->querySpritesByRect(rect, m_firstPos.x < end.x, sprites);
-		for (size_t i = 0, n = sprites.size(); i < n; ++i)
-			m_selection->insert(sprites[i]);
+		if (wxGetKeyState(WXK_CONTROL))
+		{
+			for (size_t i = 0, n = sprites.size(); i < n; ++i) 
+			{
+				d2d::ISprite* sprite = sprites[i];
+				if (m_selection->isExist(sprite)) {
+					m_selection->erase(sprites[i]);
+				} else {
+					m_selection->insert(sprites[i]);
+				}
+			}
+		}
+		else
+		{
+			for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+				m_selection->insert(sprites[i]);
+			}
+		}
 
 		if (m_propertyPanel)
 		{
