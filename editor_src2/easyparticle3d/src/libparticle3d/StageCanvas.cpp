@@ -18,7 +18,8 @@ StageCanvas::StageCanvas(StagePanel* editPanel)
 {
 	m_bgColor.set(1, 1, 1, 1);
 
-	m_timer.Start(1000 / FRAME_RATE);
+	// todo: not 1000?
+	m_timer.Start(500 / FRAME_RATE);
 	m_currFrame = 1;
 }
 

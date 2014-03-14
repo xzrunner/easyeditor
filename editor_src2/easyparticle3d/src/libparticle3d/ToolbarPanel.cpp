@@ -128,7 +128,7 @@ wxSizer* ToolbarPanel::initLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
 
-			m_min_life = new wxSlider(this, wxID_ANY, MIN_LIFE, 0, 2500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			m_min_life = new wxSlider(this, wxID_ANY, MIN_LIFE, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
 			Connect(m_min_life->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetLife));
 			sizer->Add(m_min_life);
 
@@ -138,7 +138,7 @@ wxSizer* ToolbarPanel::initLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
 
-			m_max_life = new wxSlider(this, wxID_ANY, MAX_LIFE, 0, 2500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			m_max_life = new wxSlider(this, wxID_ANY, MAX_LIFE, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
 			Connect(m_max_life->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetLife));
 			sizer->Add(m_max_life);
 
