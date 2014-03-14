@@ -115,7 +115,7 @@ wxMenu* Frame::initFileBar()
 	fileMenu->Append(wxID_OPEN, wxT("&Open...\tCtrl+O"), wxT("Open a project"));
 	fileMenu->AppendSeparator();
 	fileMenu->Append(wxID_SAVE, wxT("&Save\tCtrl+S"), wxT("Save the project"));
-	fileMenu->Append(wxID_SAVEAS, wxT("&Save as...\tF11", wxT("Save to a new file")));
+	fileMenu->Append(wxID_SAVEAS, wxT("&Save as...\tF11"), wxT("Save to a new file"));
 	fileMenu->AppendSeparator();
 	fileMenu->Append(ID_CONNECT, wxT("&Connect"), wxT("Connect dir"));
 	fileMenu->AppendSeparator();
