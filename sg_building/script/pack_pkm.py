@@ -24,7 +24,7 @@ def data_dir(*args):
     return _pjoin('..', 'data', *args)
 
 def output_dir(*args):
-    return _pjoin('..', 'output', *args)
+    return _pjoin('..', 'output', 'pkm', *args)
 
 WORK_ITEMS = [
         {
@@ -32,7 +32,7 @@ WORK_ITEMS = [
             'texpack_json': data_dir('texpack_json', 'buildings2'),
             'texpack_tex':  data_dir('texpack_tex'),
             'tmp_lua':      output_dir('buildings2.tmp.lua'),
-            'scale':        '1.0',
+            'scale':        '0.95',
             'output_dir':   output_dir(),
             'output_lua':   output_dir('buildings2.lua'),
             'output_epp':    output_dir('buildings2.epp'),
@@ -81,7 +81,7 @@ for entry in WORK_ITEMS:
         _run_cmd('%s %s %s %s' % (LUA, CONV, entry["tmp_lua"], entry["output_lua"]))
 
     if '3' in options:
-        _run_cmd("copy /Y %s %s" % (_pjoin(entry["texpack_tex"], '*'), entry["output_dir"]))
+        _run_cmd("copy /Y %s %s" % (_pjoin(entry["texpack_tex"], '*.pkm'), entry["output_dir"]))
         _run_cmd('%s %s -pd -pkmc %s' % (LUA, EPBIN, entry["output_lua"]))
 
     if '4' in options:

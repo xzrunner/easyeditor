@@ -24,7 +24,7 @@ def data_dir(*args):
     return _pjoin('..', 'data', *args)
 
 def output_dir(*args):
-    return _pjoin('..', 'output', *args)
+    return _pjoin('..', 'output', 'pvr', *args)
 
 WORK_ITEMS = [
         {
@@ -81,7 +81,7 @@ for entry in WORK_ITEMS:
         _run_cmd('%s %s %s %s' % (LUA, CONV, entry["tmp_lua"], entry["output_lua"]))
 
     if '3' in options:
-        _run_cmd("copy /Y %s %s" % (_pjoin(entry["texpack_tex"], '*'), entry["output_dir"]))
+        _run_cmd("copy /Y %s %s" % (_pjoin(entry["texpack_tex"], '*.pvr'), entry["output_dir"]))
         _run_cmd('%s %s -pd -pvr %s' % (LUA, EPBIN, entry["output_lua"]))
 
     if '4' in options:
