@@ -16,6 +16,7 @@ namespace d2d
 	};
 
 	Colorf transColor(const std::string& str, PixelType type);
+	Colorf transColor(int color, PixelType type);
 	float transColor(char high, char low);
 	int transHex(char c);
 

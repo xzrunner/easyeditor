@@ -56,6 +56,33 @@ Colorf transColor(const std::string& str, PixelType type)
 	return ret;
 }
 
+Colorf transColor(int color, PixelType type)
+{
+	Colorf ret(0, 0, 0, 1);
+	if (type == PT_RGBA)
+	{
+		ret.r = (color >> 24 & 0xff) / 255.0f;
+		ret.g = (color >> 16 & 0xff) / 255.0f;
+		ret.b = (color >> 8 & 0xff) / 255.0f;
+		ret.a = (color & 0xff) / 255.0f;
+	}
+	else if (type == PT_ARGB)
+	{
+		ret.a = (color >> 24 & 0xff) / 255.0f;
+		ret.r = (color >> 16 & 0xff) / 255.0f;
+		ret.g = (color >> 8 & 0xff) / 255.0f;
+		ret.b = (color & 0xff) / 255.0f;
+	}
+	else if (type == PT_BGRA)
+	{
+		ret.b = (color >> 24 & 0xff) / 255.0f;
+		ret.g = (color >> 16 & 0xff) / 255.0f;
+		ret.r = (color >> 8 & 0xff) / 255.0f;
+		ret.a = (color & 0xff) / 255.0f;
+	}
+	return ret;
+}
+
 float transColor(char high, char low) 
 {
 	int col = transHex(high) * 16 + transHex(low);

@@ -60,15 +60,15 @@ private:
 		struct Item
 		{
 			int index;
-			std::string color, add;
+			unsigned int color, add;
 			int mat[6];
 			bool is_full;
 
 			void transform(d2d::ISprite* sprite) const;
 
 			Item() {
-				color = "0xffffffff";
-				add = "0x0";
+				color = 0xffffffff;
+				add = 0;
 				memset(&mat[0], 0, sizeof(int) * 6);
 				mat[0] = mat[3] = 1024;
 			}

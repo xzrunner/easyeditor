@@ -244,13 +244,15 @@ void ParserLuaFile::parserAni(lua_State* L, int id)
 				lua_pop(L, 1);
 
 				lua_getfield(L, -1, "color");
-				if (lua_type(L, -1) != LUA_TNIL)
-					item->color = lua_tostring(L, -1);
+				if (lua_type(L, -1) != LUA_TNIL) {
+					item->color = lua_tonumber(L, -1);
+				}
 				lua_pop(L, 1);
 
 				lua_getfield(L, -1, "add");
-				if (lua_type(L, -1) != LUA_TNIL)
-					item->add = lua_tostring(L, -1);
+				if (lua_type(L, -1) != LUA_TNIL) {
+					item->add = lua_tonumber(L, -1);
+				}
 				lua_pop(L, 1);
 
 				lua_getfield(L, -1, "mat");
@@ -726,8 +728,7 @@ void ParserLuaFile::Animation::Item::transform(d2d::ISprite* sprite) const
 
 	if (is_full && valid)
 	{
-		// coc的数据颜色都是argb格式
-		sprite->multiCol = d2d::transColor(color, d2d::PT_ARGB);
+		sprite->multiCol = d2d::transColor(color, d2d::PT_BGRA);
 		sprite->addCol = d2d::transColor(add, d2d::PT_ARGB);
 
 		float x = mat[4] / 16.0f,
