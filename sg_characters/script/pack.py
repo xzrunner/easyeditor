@@ -14,7 +14,7 @@ WORK_ITEMS = [
             r'..\data\json',
             r'..\data\pack\characters2',
             r'..\data\pack\characters2.tmp.lua',
-            '1.0638',
+            '0.95',
             r'..\data\pack\characters2.lua',
             r'..\data\pack\characters2.ep',
         ),
