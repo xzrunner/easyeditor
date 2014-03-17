@@ -7,6 +7,8 @@ void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 {
 	Json::Value value;
 
+	value["name"] = symbol.name;
+
 	value["fps"] = symbol.m_fps;
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
