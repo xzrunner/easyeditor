@@ -19,7 +19,7 @@
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.6999999880790710,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
@@ -36,7 +36,7 @@
 			"name" : "_sprite6",
 			"position" : 
 			{
-				"x" : -65.0,
+				"x" : -52.0,
 				"y" : 4.0
 			},
 			"tag" : "",
@@ -59,8 +59,8 @@
 			"name" : "_sprite7",
 			"position" : 
 			{
-				"x" : -66.0,
-				"y" : 2.0
+				"x" : -53.0,
+				"y" : 5.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -83,12 +83,12 @@
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 17,
-			"label_width" : 170,
+			"label_width" : 130,
 			"multi color" : "0xffffffff",
 			"name" : "text",
 			"position" : 
 			{
-				"x" : 44.50,
+				"x" : 33.50,
 				"y" : 0.0
 			},
 			"size" : 15,

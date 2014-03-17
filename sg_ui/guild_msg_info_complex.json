@@ -105,29 +105,6 @@
 		
 		{
 			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "game_top_left_trophies_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "trophies",
-			"position" : 
-			{
-				"x" : 91.250,
-				"y" : -63.14999389648438
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.8000000119209290,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.8000000119209290,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
 			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
