@@ -32,9 +32,51 @@ ParserLuaFile::~ParserLuaFile()
 void ParserLuaFile::parser(const std::string& filename)
 {
 	lua_State *L = luaL_newstate();
+	luaL_openlibs(L);
 	lua_settop(L,0);
 
 	luaL_dofile(L, filename.c_str());
+	// for old format
+	if (lua_isstring(L, -1))
+	{
+		lua_pop(L, 1);
+
+		const char* script = 
+			"local all = {} \n"
+			"local function picture(tbl) \n"
+			"  tbl[\"type\"] = \"picture\" \n"
+			"  table.insert(all, tbl) \n"
+			"end \n"
+			"local function animation(tbl) \n"
+			"  tbl[\"type\"] = \"animation\" \n"
+			"  table.insert(all, tbl) \n"
+			"end \n"
+			"local function texture(n) \n"
+			"end \n"
+			"local _env = _ENV \n"
+			"_env.picture = picture \n"
+			"_env.animation = animation \n"
+			"_env.texture = texture \n"
+			"function foo(filename) \n"
+			"  f = assert(loadfile(filename , \"t\", _env)) \n"
+			"  f() \n"
+			"  return all \n"
+			"end \n"
+			;
+
+		int err = luaL_dostring(L, script);
+		if (err) {
+			const char *msg = lua_tostring(L,-1);
+			std::cout << msg << std::endl;
+		}
+		lua_getglobal(L, "foo");
+		lua_pushstring(L, filename.c_str());
+		err = lua_pcall(L, 1, 1, 0);
+		if (err) {
+			const char *msg = lua_tostring(L,-1);
+			std::cout << msg << std::endl;
+		}
+	}
 
 	if(lua_gettop(L) == 1 && lua_istable(L, 1))
 	{
@@ -267,6 +309,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			Picture::Part* part = pic->parts[i];
 			d2d::Image* image = images[part->tex];
 			eimage::ImageProcessor processor(image);
+
 			const unsigned char* pixels = processor.clip(part->xmin, part->xmax, part->ymin, part->ymax);
 			if (pixels) 
 			{
@@ -316,7 +359,7 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 //				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
 			anim::Symbol::Frame* frame = new anim::Symbol::Frame;
-			frame->index = i;
+			frame->index = i+1;
 			frame->bClassicTween = false;
 			for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
 			{
