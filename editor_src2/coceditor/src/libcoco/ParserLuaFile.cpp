@@ -329,7 +329,11 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		}
 
 		std::stringstream ss;
-		ss << itr->first;
+		if (symbol->name.empty()) {
+			ss << itr->first;
+		} else {
+			ss << symbol->name;
+		}
 		std::string filename = outfloder + "\\" + ss.str() 
 			+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
 		ecomplex::FileSaver::store(filename.c_str(), symbol);
@@ -399,7 +403,11 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 	symbol->m_layers.push_back(layer);
 
 	std::stringstream ss;
-	ss << id;
+	if (symbol->name.empty()) {
+		ss << id;
+	} else {
+		ss << symbol->name;
+	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim) + ".json";
 	anim::FileSaver::store(filename.c_str(), *symbol);
@@ -437,7 +445,11 @@ void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, 
 	}
 
 	std::stringstream ss;
-	ss << id;
+	if (symbol->name.empty()) {
+		ss << id;
+	} else {
+		ss << symbol->name;
+	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
 	ecomplex::FileSaver::store(filename.c_str(), symbol);
