@@ -349,55 +349,100 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 		std::cout << "ani: " << itr->first << " [" << i << "/" << m_mapAnims.size() << "]" << std::endl;
 
 		Animation* ani = itr->second;
-
-		anim::Symbol* symbol = new anim::Symbol;
-		anim::Symbol::Layer* layer = new anim::Symbol::Layer;
-		symbol->name = ani->export_name;
-		symbol->m_fps = 30;
-		for (int i = 0, n = ani->frames.size(); i < n; ++i)
-		{
-//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
-
-			anim::Symbol::Frame* frame = new anim::Symbol::Frame;
-			frame->index = i+1;
-			frame->bClassicTween = false;
-			for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
-			{
-//					std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
-
-				Animation::Item* item = ani->frames[i][j];
-				std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
-				if (itr != m_mapPictures.end())
-				{
-					Picture* pic = itr->second;
-					d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(pic->filename, pic->width, pic->height));
-					item->transform(sprite);
-					frame->sprites.push_back(sprite);
-				}
-				else
-				{
-					std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
-					assert(itr != m_mapAnims.end());
-					Animation* ani = itr->second;
-					d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(ani->filename));
-					item->transform(sprite);
-					frame->sprites.push_back(sprite);
-				}
-			}
-			layer->frames.push_back(frame);
+		if (ani->frames.size() > 1) {
+			transAniToAnimationFile(outfloder, itr->first, ani);
+		} else {
+			transAniToComplexFile(outfloder, itr->first, ani);
 		}
-		symbol->m_layers.push_back(layer);
-
-		std::stringstream ss;
-		ss << itr->first;
-		std::string filename = outfloder + "\\" + ss.str() 
-			+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim) + ".json";
-		anim::FileSaver::store(filename.c_str(), *symbol);
-
-		ani->filename = filename;
-
-		delete symbol;
 	}
+}
+
+void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
+{
+	anim::Symbol* symbol = new anim::Symbol;
+	anim::Symbol::Layer* layer = new anim::Symbol::Layer;
+	symbol->name = ani->export_name;
+	symbol->m_fps = 30;
+	for (int i = 0, n = ani->frames.size(); i < n; ++i)
+	{
+		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
+
+		anim::Symbol::Frame* frame = new anim::Symbol::Frame;
+		frame->index = i+1;
+		frame->bClassicTween = false;
+		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
+		{
+			//					std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
+
+			Animation::Item* item = ani->frames[i][j];
+			d2d::ISprite* sprite = NULL;
+			std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
+			if (itr != m_mapPictures.end())
+			{
+				Picture* pic = itr->second;
+				sprite = new d2d::NullSprite(new d2d::NullSymbol(pic->filename, pic->width, pic->height));
+			}
+			else
+			{
+				std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
+				assert(itr != m_mapAnims.end());
+				Animation* ani = itr->second;
+				sprite = new d2d::NullSprite(new d2d::NullSymbol(ani->filename));
+			}
+			item->transform(sprite);
+			frame->sprites.push_back(sprite);
+		}
+		layer->frames.push_back(frame);
+	}
+	symbol->m_layers.push_back(layer);
+
+	std::stringstream ss;
+	ss << id;
+	std::string filename = outfloder + "\\" + ss.str() 
+		+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim) + ".json";
+	anim::FileSaver::store(filename.c_str(), *symbol);
+
+	ani->filename = filename;
+
+	delete symbol;
+}
+
+void ParserLuaFile::transAniToComplexFile(const std::string& outfloder, int id, Animation* ani)
+{
+	assert(ani->frames.size() == 1);
+
+	ecomplex::Symbol* symbol = new ecomplex::Symbol;
+	symbol->name = ani->export_name;
+	for (int i = 0, n = ani->frames[0].size(); i < n; ++i)
+	{
+		Animation::Item* item = ani->frames[0][i];
+		d2d::ISprite* sprite = NULL;
+		std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
+		if (itr != m_mapPictures.end())
+		{
+			Picture* pic = itr->second;
+			sprite = new d2d::NullSprite(new d2d::NullSymbol(pic->filename, pic->width, pic->height));
+		}
+		else
+		{
+			std::map<int, Animation*>::iterator itr = m_mapAnims.find(ani->component[item->index]);
+			assert(itr != m_mapAnims.end());
+			Animation* ani = itr->second;
+			sprite = new d2d::NullSprite(new d2d::NullSymbol(ani->filename));
+		}
+		item->transform(sprite);
+		symbol->m_sprites.push_back(sprite);
+	}
+
+	std::stringstream ss;
+	ss << id;
+	std::string filename = outfloder + "\\" + ss.str() 
+		+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex) + ".json";
+	ecomplex::FileSaver::store(filename.c_str(), symbol);
+
+	ani->filename = filename;
+
+	delete symbol;
 }
 
 void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilenames)
@@ -447,48 +492,92 @@ void ParserLuaFile::transAniToMemory()
 		std::cout << "ani: " << itr->first << " [" << i << "/" << m_mapAnims.size() << "]" << std::endl;
 
 		Animation* ani = itr->second;
-
-		anim::Symbol* symbol = new anim::Symbol;
-		anim::Symbol::Layer* layer = new anim::Symbol::Layer;
-		symbol->name = ani->export_name;
-		symbol->m_fps = 30;
-		for (int i = 0, n = ani->frames.size(); i < n; ++i)
-		{
-			// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
-
-			anim::Symbol::Frame* frame = new anim::Symbol::Frame;
-			frame->index = i;
-			frame->bClassicTween = false;
-			for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
-			{
-				// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
-
-				Animation::Item* item = ani->frames[i][j];
-				std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
-				if (itr != m_mapPictures.end())
-				{
-					std::map<int, d2d::ISymbol*>::iterator itr 
-						= m_mapSymbols.find(ani->component[item->index]);
-					assert(itr != m_mapSymbols.end());
-					frame->sprites.push_back(d2d::SpriteFactory::Instance()->create(itr->second));
-				}
-				else
-				{
-					std::map<int, d2d::ISymbol*>::iterator itr 
-						= m_mapSymbols.find(ani->component[item->index]);
-					assert(itr != m_mapSymbols.end());
-					d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(itr->second);
-					item->transform(sprite);
-					frame->sprites.push_back(sprite);
-				}
-			}
-			layer->frames.push_back(frame);
+		if (ani->frames.size() > 1) {
+			transAniToAnimationMemory(itr->first, ani);
+		} else {
+			transAniToComplexMemory(itr->first, ani);
 		}
-		symbol->m_layers.push_back(layer);
-
-		symbol->refresh();
-		m_mapSymbols.insert(std::make_pair(itr->first, symbol));
 	}
+}
+
+void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
+{
+	anim::Symbol* symbol = new anim::Symbol;
+	anim::Symbol::Layer* layer = new anim::Symbol::Layer;
+	symbol->name = ani->export_name;
+	symbol->m_fps = 30;
+	for (int i = 0, n = ani->frames.size(); i < n; ++i)
+	{
+		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
+
+		anim::Symbol::Frame* frame = new anim::Symbol::Frame;
+		frame->index = i + 1;
+		frame->bClassicTween = false;
+		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
+		{
+			// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
+
+			Animation::Item* item = ani->frames[i][j];
+			d2d::ISprite* sprite = NULL;
+			std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
+			if (itr != m_mapPictures.end())
+			{
+				std::map<int, d2d::ISymbol*>::iterator itr 
+					= m_mapSymbols.find(ani->component[item->index]);
+				assert(itr != m_mapSymbols.end());
+				sprite = d2d::SpriteFactory::Instance()->create(itr->second);
+			}
+			else
+			{
+				std::map<int, d2d::ISymbol*>::iterator itr 
+					= m_mapSymbols.find(ani->component[item->index]);
+				assert(itr != m_mapSymbols.end());
+				sprite = d2d::SpriteFactory::Instance()->create(itr->second);
+			}
+			item->transform(sprite);
+			frame->sprites.push_back(sprite);
+		}
+		layer->frames.push_back(frame);
+	}
+	symbol->m_layers.push_back(layer);
+
+	symbol->refresh();
+	m_mapSymbols.insert(std::make_pair(id, symbol));
+}
+
+void ParserLuaFile::transAniToComplexMemory(int id, Animation* ani)
+{
+	assert(ani->frames.size() == 1);
+
+	ecomplex::Symbol* symbol = new ecomplex::Symbol;
+	symbol->name = ani->export_name;
+	for (int i = 0, n = ani->frames[0].size(); i < n; ++i)
+	{
+		// std::cout << "item: [" << j << "/" << ani->frames[i].size() << "]" << std::endl;
+
+		Animation::Item* item = ani->frames[0][i];
+		d2d::ISprite* sprite = NULL;
+		std::map<int, Picture*>::iterator itr = m_mapPictures.find(ani->component[item->index]);
+		if (itr != m_mapPictures.end())
+		{
+			std::map<int, d2d::ISymbol*>::iterator itr 
+				= m_mapSymbols.find(ani->component[item->index]);
+			assert(itr != m_mapSymbols.end());
+			sprite = d2d::SpriteFactory::Instance()->create(itr->second);
+		}
+		else
+		{
+			std::map<int, d2d::ISymbol*>::iterator itr 
+				= m_mapSymbols.find(ani->component[item->index]);
+			assert(itr != m_mapSymbols.end());
+			sprite = d2d::SpriteFactory::Instance()->create(itr->second);
+		}
+		item->transform(sprite);
+		symbol->m_sprites.push_back(sprite);
+	}
+
+	symbol->refresh();
+	m_mapSymbols.insert(std::make_pair(id, symbol));
 }
 
 //////////////////////////////////////////////////////////////////////////

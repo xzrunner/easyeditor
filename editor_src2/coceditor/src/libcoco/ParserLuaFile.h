@@ -21,16 +21,6 @@ public:
 	void getAllSymbols(std::vector<d2d::ISymbol*>& symbols) const;
 
 private:
-	void parserPic(lua_State* L, int id);
-	void parserAni(lua_State* L, int id);
-
-	void transPicToFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
-	void transAniToFiles(const std::string& outfloder);
-
-	void transPicToMemory(const std::vector<std::string>& texfilenames);
-	void transAniToMemory();
-
-private:
 	struct Picture
 	{
 		struct Part
@@ -96,6 +86,20 @@ private:
 				for_each(frames[i].begin(), frames[i].end(), DeletePointerFunctor<Item>());
 		}
 	};
+
+private:
+	void parserPic(lua_State* L, int id);
+	void parserAni(lua_State* L, int id);
+
+	void transPicToFiles(const std::vector<std::string>& texfilenames, const std::string& outfloder);
+	void transAniToFiles(const std::string& outfloder);
+	void transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani);
+	void transAniToComplexFile(const std::string& outfloder, int id, Animation* ani);
+
+	void transPicToMemory(const std::vector<std::string>& texfilenames);
+	void transAniToMemory();
+	void transAniToAnimationMemory(int id, Animation* ani);
+	void transAniToComplexMemory(int id, Animation* ani);
 
 private:
 	std::map<int, Picture*> m_mapPictures;
