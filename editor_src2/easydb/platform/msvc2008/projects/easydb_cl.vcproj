@@ -206,6 +206,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\easydb\FixTexPackerJson.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\FixTexPackerJson.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easydb\FormatJsonFile.cpp"
 			>
 		</File>
