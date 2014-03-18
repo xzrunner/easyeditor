@@ -1,10 +1,12 @@
 #include <iostream>
+#include <fstream>
 
 #include "VerifyImages.h"
 #include "VerifyJsons.h"
 #include "FixImages.h"
 #include "FixAnimation.h"
 #include "FormatJsonFile.h"
+#include "CopyFiles.h"
 
 void verify(const std::string& dirpath, const std::string& op)
 {
@@ -73,6 +75,32 @@ int main(int argc, char *argv[])
 		}
 
 		format(argv[3], argv[2]);
+	}
+	else if (cmd == "copy")
+	{
+		if (argc < 5) {
+			std::cerr << "Params: [src] [dst] [list]!" << std::endl;
+			return 1;
+		}
+
+		std::string srcdir = argv[2];
+		std::string dstdir = argv[3];
+		std::string listfile = argv[4];
+
+		std::set<std::string> names;
+		std::ifstream fin(listfile.c_str());
+		if (fin.fail()) {
+			std::cerr << "Can't open file " << listfile << std::endl;
+			return 1;
+		}
+		std::string str;
+		while (getline(fin, str)) {
+			names.insert(str);
+		}
+		fin.close();
+
+		edb::CopyFiles copy(srcdir, dstdir);
+		copy.CopyByExportNames(names);
 	}
 
 	return 0;
