@@ -14,12 +14,12 @@
 			"font" : "E",
 			"font_filename" : "",
 			"label_height" : 20,
-			"label_width" : 200,
+			"label_width" : 250,
 			"multi color" : "0xffffffff",
 			"name" : "desc",
 			"position" : 
 			{
-				"x" : -3.0,
+				"x" : 24.0,
 				"y" : 3.0
 			},
 			"size" : 16,
@@ -72,8 +72,8 @@
 			"name" : "prg",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 12.0
+				"x" : 1.0,
+				"y" : 13.0
 			},
 			"size" : 16,
 			"tag" : "research",
@@ -86,5 +86,9 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
