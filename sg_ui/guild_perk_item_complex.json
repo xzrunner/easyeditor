@@ -114,29 +114,6 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "guild_perk_finishnow_button_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "finishnow",
-			"position" : 
-			{
-				"x" : 144.250,
-				"y" : -6.250
-			},
-			"tag" : "show",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.8000000119209290,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.8000000119209290,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
 			"filepath" : "research_bar_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "research",
@@ -153,6 +130,29 @@
 			"y mirror" : false,
 			"y offset" : 7.50,
 			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "res_button2_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "finishnow",
+			"position" : 
+			{
+				"x" : 126.0,
+				"y" : -17.0
+			},
+			"tag" : "show",
+			"x mirror" : false,
+			"x offset" : 0.6000000238418579,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 30.50,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		}
 	],
