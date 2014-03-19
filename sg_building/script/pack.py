@@ -7,7 +7,7 @@ LUA = r'..\..\tools\lua\lua52.exe'
 EPBIN = r'..\..\tools\lua\epbin.lua'
 CONV = r'..\data\lua\building_convert.lua'
 
-PATH_SHARE_EP = r'd:\share\coc\ep\ '
+PATH_SHARE_EP = r'd:\share\coc\ep\iOS\ '
 
 _pjoin = os.path.join
 
@@ -95,4 +95,3 @@ print "  FINISHED. press any key to exit"
 print ""
 print "================================================="
 os.system("pause")
-os.system('start explorer "%s"' % PATH_SHARE_EP)

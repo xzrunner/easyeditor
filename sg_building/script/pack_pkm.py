@@ -7,7 +7,7 @@ LUA = r'..\..\tools\lua\lua52.exe'
 EPBIN = r'..\..\tools\lua\epbin.lua'
 CONV = r'..\data\lua\building_convert.lua'
 
-PATH_SHARE_EP = r'd:\share\coc\ep\ '
+PATH_SHARE_EP = r'd:\share\coc\ep\android\ '
 
 _pjoin = os.path.join
 
