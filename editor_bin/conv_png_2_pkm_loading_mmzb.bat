@@ -5,6 +5,6 @@ SET PATH="C:\Program Files (x86)\arm\mali developer tools\mali texture compressi
 rd /S/Q tmp1
 mkdir tmp1
 cd tmp1
-start etcpack.exe ..\build_loading_mmzb\loading_mmzb1.png ..\build_loading_mmzb -s slow -e perceptual -c etc1 -ext PNG -progress -as
+start etcpack.exe ..\build_loading_mmzb_android\loading_mmzb1.png ..\build_loading_mmzb_android -s slow -e perceptual -c etc1 -ext PNG -progress -as
 cd ..
 
