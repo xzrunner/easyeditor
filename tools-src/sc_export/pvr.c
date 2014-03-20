@@ -15,6 +15,13 @@
 #define COMPRESSED_RGBA_PVRTC_2BPPV1_IMG 2
 static char prv_texture_identifier[4] = "PVR!";
 
+#define PVRTEX3_HEADERSIZE 52
+
+typedef unsigned int    PVRTuint32;
+// V3 Header Identifiers.
+const PVRTuint32 PVRTEX3_IDENT      = 0x03525650; // 'P''V''R'3
+const PVRTuint32 PVRTEX3_IDENT_REV  = 0x50565203;   
+
 enum{
   kPVRTextureFlagTypePVRTC_2 = 24,
   kPVRTextureFlagTypePVRTC_4
@@ -35,6 +42,65 @@ struct PVRTexHeader{
   uint32_t bitmaskAlpha;
   uint32_t pvrTag;
   uint32_t numSurfs;
+};
+
+struct PVRTexHeaderV3 {
+  uint32_t  u32Version;     ///< Version of the file header, used to identify it.
+  uint32_t  u32Flags;     ///< Various format flags.
+  uint64_t  u64PixelFormat;   ///< The pixel format, 8cc value storing the 4 channel identifiers and their respective sizes.
+  uint32_t  u32ColourSpace;   ///< The Colour Space of the texture, currently either linear RGB or sRGB.
+  uint32_t  u32ChannelType;   ///< Variable type that the channel is stored in. Supports signed/unsigned int/short/byte or float for now.
+  uint32_t  u32Height;      ///< Height of the texture.
+  uint32_t  u32Width;     ///< Width of the texture.
+  uint32_t  u32Depth;     ///< Depth of the texture. (Z-slices)
+  uint32_t  u32NumSurfaces;   ///< Number of members in a Texture Array.
+  uint32_t  u32NumFaces;    ///< Number of faces in a Cube Map. Maybe be a value other than 6.
+  uint32_t  u32MIPMapCount;   ///< Number of MIP Maps in the texture - NB: Includes top level.
+  uint32_t  u32MetaDataSize;  ///< Size of the accompanying meta data.  
+};
+
+//Compressed pixel formats
+enum EPVRTPixelFormat
+{
+  ePVRTPF_PVRTCI_2bpp_RGB,
+  ePVRTPF_PVRTCI_2bpp_RGBA,
+  ePVRTPF_PVRTCI_4bpp_RGB,
+  ePVRTPF_PVRTCI_4bpp_RGBA,
+  ePVRTPF_PVRTCII_2bpp,
+  ePVRTPF_PVRTCII_4bpp,
+  ePVRTPF_ETC1,
+  ePVRTPF_DXT1,
+  ePVRTPF_DXT2,
+  ePVRTPF_DXT3,
+  ePVRTPF_DXT4,
+  ePVRTPF_DXT5,
+
+  //These formats are identical to some DXT formats.
+  ePVRTPF_BC1 = ePVRTPF_DXT1,
+  ePVRTPF_BC2 = ePVRTPF_DXT3,
+  ePVRTPF_BC3 = ePVRTPF_DXT5,
+
+  //These are currently unsupported:
+  ePVRTPF_BC4,
+  ePVRTPF_BC5,
+  ePVRTPF_BC6,
+  ePVRTPF_BC7,
+
+  //These are supported
+  ePVRTPF_UYVY,
+  ePVRTPF_YUY2,
+  ePVRTPF_BW1bpp,
+  ePVRTPF_SharedExponentR9G9B9E5,
+  ePVRTPF_RGBG8888,
+  ePVRTPF_GRGB8888,
+  ePVRTPF_ETC2_RGB,
+  ePVRTPF_ETC2_RGBA,
+  ePVRTPF_ETC2_RGB_A1,
+  ePVRTPF_EAC_R11,
+  ePVRTPF_EAC_RG11,
+
+  //Invalid value
+  ePVRTPF_NumCompressedPFs
 };
 
 struct slice{
@@ -101,9 +167,25 @@ _read_l32tohost(uint8_t* p){
   return ret;
 }
 
+static inline uint64_t
+_read_l64tohost(uint8_t* p){
+  assert(p);
+  uint64_t ret = 0;
+  ret = ret | p[0];
+  ret = ret | (((uint64_t)p[1])<<8);
+  ret = ret | (((uint64_t)p[2])<<16);
+  ret = ret | (((uint64_t)p[3])<<24);
+  ret = ret | (((uint64_t)p[4])<<32);
+  ret = ret | (((uint64_t)p[5])<<40);
+  ret = ret | (((uint64_t)p[6])<<48);
+  ret = ret | (((uint64_t)p[7])<<56);
+  return ret;
+}
+
 static struct PVRTexHeader*
 _read_head(uint8_t* p, struct PVRTexHeader* head){
   assert(p);
+
   assert(head);
 
   head->headerLength = _read_l32tohost(p),    p+=sizeof(uint32_t);
@@ -121,6 +203,28 @@ _read_head(uint8_t* p, struct PVRTexHeader* head){
   head->numSurfs = _read_l32tohost(p),        p+=sizeof(uint32_t);
   
   return head;
+}
+
+static struct PVRTexHeaderV3*
+_read_headv3(uint8_t* p, struct PVRTexHeaderV3* head) {
+  assert(p);
+
+  assert(head);
+
+  head->u32Version = _read_l32tohost(p),      p+=sizeof(uint32_t);
+  head->u32Flags = _read_l32tohost(p),        p+=sizeof(uint32_t);
+  head->u64PixelFormat = _read_l64tohost(p),  p+=sizeof(uint64_t);
+  head->u32ColourSpace = _read_l32tohost(p),  p+=sizeof(uint32_t);
+  head->u32ChannelType = _read_l32tohost(p),  p+=sizeof(uint32_t);
+  head->u32Height = _read_l32tohost(p),       p+=sizeof(uint32_t);
+  head->u32Width = _read_l32tohost(p),        p+=sizeof(uint32_t);
+  head->u32Depth = _read_l32tohost(p),        p+=sizeof(uint32_t);
+  head->u32NumSurfaces = _read_l32tohost(p),  p+=sizeof(uint32_t);
+  head->u32NumFaces = _read_l32tohost(p),     p+=sizeof(uint32_t);
+  head->u32MIPMapCount = _read_l32tohost(p),  p+=sizeof(uint32_t);
+  head->u32MetaDataSize = _read_l32tohost(p), p+=sizeof(uint32_t);
+
+  return head;  
 }
 
 static FILE*
@@ -190,25 +294,61 @@ pvrt_unpack(uint8_t* data){
   int success = 0;
   struct PVRTexHeader header = {0};
   uint32_t flags, pvr_tag;
-  uint32_t dataLength = 0, dataOffset = 0, dataSize = 0;
+  uint32_t dataOffset = 0, dataSize = 0;
   uint32_t blockSize = 0, widthBlocks = 0, heightBlocks = 0;
   uint32_t width = 0, height = 0, bpp = 4;
   uint8_t *bytes = NULL;
   uint32_t formatFlags;
-  _read_head(data, &header);
-  
-  pvr_tag = header.pvrTag;
-  if (prv_texture_identifier[0] != ((pvr_tag >>  0) & 0xff) ||
-      prv_texture_identifier[1] != ((pvr_tag >>  8) & 0xff) ||
-      prv_texture_identifier[2] != ((pvr_tag >> 16) & 0xff) ||
-      prv_texture_identifier[3] != ((pvr_tag >> 24) & 0xff))
-  {
-    return 0;
+
+  if((*(PVRTuint32*)data)!=PVRTEX3_IDENT) {
+    _read_head(data, &header);
+    
+    pvr_tag = header.pvrTag;
+    if (prv_texture_identifier[0] != ((pvr_tag >>  0) & 0xff) ||
+        prv_texture_identifier[1] != ((pvr_tag >>  8) & 0xff) ||
+        prv_texture_identifier[2] != ((pvr_tag >> 16) & 0xff) ||
+        prv_texture_identifier[3] != ((pvr_tag >> 24) & 0xff))
+    {
+      return 0;
+    }
+    bytes = data + sizeof(header);
+
+    flags = header.flags;
+    formatFlags = flags & PVR_TEXTURE_FLAG_TYPE_MASK;    
+  } else {
+    struct PVRTexHeaderV3 headerv3;
+    _read_headv3(data, &headerv3);
+    header.flags = headerv3.u32Flags;
+    header.width = headerv3.u32Width;
+    header.height = headerv3.u32Height;
+
+    header.bitmaskAlpha = 1;
+    bytes = data + PVRTEX3_HEADERSIZE+headerv3.u32MetaDataSize;
+
+    if (headerv3.u64PixelFormat == ePVRTPF_PVRTCI_4bpp_RGB || headerv3.u64PixelFormat == ePVRTPF_PVRTCI_4bpp_RGBA) {
+      formatFlags = kPVRTextureFlagTypePVRTC_4;
+    } else if (headerv3.u64PixelFormat == ePVRTPF_PVRTCI_2bpp_RGB || headerv3.u64PixelFormat == ePVRTPF_PVRTCI_2bpp_RGBA) {
+      formatFlags = kPVRTextureFlagTypePVRTC_2;
+    }
   }
+
+  //
+  // _read_head(data, &header);
   
-  flags = header.flags;
-  formatFlags = flags & PVR_TEXTURE_FLAG_TYPE_MASK;
+  // pvr_tag = header.pvrTag;
+  // if (prv_texture_identifier[0] != ((pvr_tag >>  0) & 0xff) ||
+  //     prv_texture_identifier[1] != ((pvr_tag >>  8) & 0xff) ||
+  //     prv_texture_identifier[2] != ((pvr_tag >> 16) & 0xff) ||
+  //     prv_texture_identifier[3] != ((pvr_tag >> 24) & 0xff))
+  // {
+  //   return 0;
+  // }
+  //
   
+  // flags = header.flags;
+  // formatFlags = flags & PVR_TEXTURE_FLAG_TYPE_MASK;
+
+
   if(formatFlags == kPVRTextureFlagTypePVRTC_4 || formatFlags == kPVRTextureFlagTypePVRTC_2){
     _image_data_clear_all();
     
@@ -225,11 +365,12 @@ pvrt_unpack(uint8_t* data){
     else
       PT.has_alpha = 0;
     
-    dataLength = header.dataLength;
-    bytes = data + sizeof(header);
+    // dataLength = header.dataLength;
+//    bytes = data + sizeof(header);
     
     // Calculate the data size for each texture level and respect the minimum number of blocks
-    while (dataOffset < dataLength){
+    // 目前不用mipmap
+//    while (dataOffset < dataLength){
       if (formatFlags == kPVRTextureFlagTypePVRTC_4){
         blockSize = 4 * 4; // Pixel by pixel block size for 4bpp
         widthBlocks = width / 4;
@@ -256,7 +397,7 @@ pvrt_unpack(uint8_t* data){
       
       width = MAX(width >> 1, 1);
       height = MAX(height >> 1, 1);
-    }
+//    }
     
     success = 1;
   }
