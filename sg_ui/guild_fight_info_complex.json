@@ -166,7 +166,7 @@
 			"position" : 
 			{
 				"x" : 358.50,
-				"y" : -56.3750
+				"y" : -61.3750
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -240,8 +240,8 @@
 			"name" : "guild_score",
 			"position" : 
 			{
-				"x" : 133.0,
-				"y" : -62.50
+				"x" : 169.0,
+				"y" : -65.50
 			},
 			"size" : 16,
 			"tag" : "",
@@ -252,6 +252,29 @@
 			"y mirror" : false,
 			"y offset" : 0.0,
 			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_icon_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite135",
+			"position" : 
+			{
+				"x" : 47.0,
+				"y" : -70.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.6999999880790710,
+			"x scale" : 0.2800000011920929,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 3.360000133514404,
+			"y scale" : 0.2800000011920929,
 			"y shear" : 0.0
 		}
 	],

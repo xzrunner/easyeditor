@@ -113,7 +113,7 @@
 			"position" : 
 			{
 				"x" : 333.0,
-				"y" : -92.0
+				"y" : -128.0
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -159,15 +159,15 @@
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 25,
-			"label_width" : 200,
+			"label_width" : 240,
 			"multi color" : "0xffffffff",
 			"name" : "guild_res",
 			"position" : 
 			{
-				"x" : 134.0,
+				"x" : 152.0,
 				"y" : -129.0
 			},
-			"size" : 18,
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -189,7 +189,7 @@
 			"position" : 
 			{
 				"x" : 353.0,
-				"y" : -23.0
+				"y" : -73.0
 			},
 			"tag" : "",
 			"x mirror" : false,
