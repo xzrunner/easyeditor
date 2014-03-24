@@ -6,13 +6,14 @@
 #include <Box2D/Box2D.h>
 
 #include "common/Vector.h"
+#include "common/Object.h"
 
 namespace d2d
 {
 	class BodyData;
 	typedef ResourcesMgr<BodyData> BodyDataMgr;
 
-	class BodyData
+	class BodyData : public Object
 	{
 	public:
 		enum Type

@@ -308,7 +308,7 @@ void SelectSpritesOP::copyFromSelection()
 			int i = 0;
 			Json::Value sval = value["sprite"][i++];
 			while (!sval.isNull()) {
-				ISymbol* symbol = SymbolMgr::Instance()->getSymbol(sval["filename"].asString());
+				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(sval["filename"].asString());
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 				sprite->load(sval);
 				m_spritesImpl->insertSprite(sprite);

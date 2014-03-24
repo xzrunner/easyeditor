@@ -23,7 +23,7 @@ public:
 	virtual ~FontSprite();
 
 	//
-	// IObject interface
+	// ICloneable interface
 	//
 	virtual FontSprite* clone() const;
 

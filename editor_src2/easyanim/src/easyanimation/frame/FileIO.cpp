@@ -252,7 +252,7 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 		break;
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	sprite->load(actorValue);
 
@@ -382,7 +382,7 @@ d2d::ISprite* FileIO::loadActor(rapidxml::xml_node<>* actorNode,
 {
 	std::string name = actorNode->first_attribute("libraryItemName")->value();
 	std::string filepath = mapNamePath.find(name)->second;
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
 	rapidxml::xml_node<>* matrixNode = actorNode->first_node("matrix")->first_node("Matrix");

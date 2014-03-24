@@ -63,7 +63,7 @@ d2d::Rect LibraryItem::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 
 void LibraryItem::loadResources()
 {
-	m_symbol = d2d::SymbolMgr::Instance()->getSymbol(m_filepath);
+	m_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(m_filepath);
 
 	m_name = m_symbol->getName();
 	m_bitmap = const_cast<d2d::Bitmap*>(m_symbol->getBitmap());

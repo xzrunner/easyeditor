@@ -13,7 +13,7 @@ namespace d2d
 		virtual ~FontSymbol();
 
 		//
-		// IObject interface
+		// ICloneable interface
 		//	
 		virtual FontSymbol* clone() const;
 

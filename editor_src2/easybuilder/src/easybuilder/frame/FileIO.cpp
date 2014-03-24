@@ -163,7 +163,7 @@ Actor* FileIO::loadActor(const Json::Value& actorValue,
 {
 	wxString filepath = actorValue["filepath"].asString();
 	d2d::ImageSymbol* symbol = dynamic_cast<d2d::ImageSymbol*>
-		(d2d::SymbolMgr::Instance()->getSymbol(filepath));
+		(d2d::SymbolMgr::Instance()->fetchSymbol(filepath));
 	assert(symbol);
 
 	Actor* actor = new Actor(symbol);
@@ -186,7 +186,7 @@ d2d::TextSprite* FileIO::loadText(const Json::Value& textValue)
 {
 	wxString filepath = textValue["filepath"].asString();
 	d2d::FontSymbol* symbol = dynamic_cast<d2d::FontSymbol*>
-		(d2d::SymbolMgr::Instance()->getSymbol(filepath));
+		(d2d::SymbolMgr::Instance()->fetchSymbol(filepath));
 	assert(symbol);
 
 	d2d::TextSprite* text = new d2d::TextSprite(symbol);
@@ -234,7 +234,7 @@ Behavior* FileIO::loadBehavior(const Json::Value& behaviorValue,
 			(BehaviorFactory::createBehavior(e_ChangeImage, actor));
 		std::string path = behaviorValue["image path"].asString();
 		d2d::ImageSymbol* symbol = dynamic_cast<d2d::ImageSymbol*>
-			(d2d::SymbolMgr::Instance()->getSymbol(path));
+			(d2d::SymbolMgr::Instance()->fetchSymbol(path));
 		buffer.push_back(std::make_pair(changeImage, path));
 		return changeImage;
 	}

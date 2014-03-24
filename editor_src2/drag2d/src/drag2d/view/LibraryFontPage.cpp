@@ -24,7 +24,7 @@ void LibraryFontPage::onAddPress(wxCommandEvent& event)
 		wxEmptyString, wxT("*.ttf"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		ISymbol* symbol = SymbolMgr::Instance()->getSymbol(dlg.GetPath());
+		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(dlg.GetPath());
 		m_list->insert(symbol);
 	}
 }

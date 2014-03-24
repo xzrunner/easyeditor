@@ -17,7 +17,7 @@ namespace d2d
 		virtual ~MeshSprite();
 
 		//
-		// IObject interface
+		// ICloneable interface
 		//
 		virtual MeshSprite* clone() const;
 

@@ -16,7 +16,7 @@ namespace d2d
 		virtual ~ShapeSymbol();
 
 		//
-		// IObject interface
+		// ICloneable interface
 		//	
 		virtual ShapeSymbol* clone() const;
 

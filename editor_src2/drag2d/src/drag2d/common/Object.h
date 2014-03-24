@@ -10,8 +10,8 @@ namespace d2d
 
 		int getReferenceCount() const;
 
-		void retain() const;
-		void release() const;
+		virtual void retain() const;
+		virtual void release() const;
 
 	private:
 		mutable int m_count;

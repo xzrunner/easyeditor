@@ -14,9 +14,10 @@ namespace d2d
 		ImageSprite();
 		ImageSprite(const ImageSprite& sprite);
 		ImageSprite(ImageSymbol* symbol);
+		virtual ~ImageSprite();
 
 		//
-		// IObject interface
+		// ICloneable interface
 		//
 		virtual ImageSprite* clone() const;
 

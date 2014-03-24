@@ -21,6 +21,7 @@ FontSymbol::FontSymbol()
 
 FontSymbol::~FontSymbol()
 {
+//	m_font->release();
 }
 
 FontSymbol* FontSymbol::clone() const

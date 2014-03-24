@@ -5,30 +5,32 @@
 
 namespace ecomplex
 {
-	class Sprite : public d2d::ISprite
-	{
-	public:
-		Sprite();
-		Sprite(const Sprite& sprite);
-		Sprite(Symbol* symbol);
-		virtual ~Sprite();
 
-		//
-		// IObject interface
-		//
-		virtual Sprite* clone() const;
+class Sprite : public d2d::ISprite
+{
+public:
+	Sprite();
+	Sprite(const Sprite& sprite);
+	Sprite(Symbol* symbol);
+	virtual ~Sprite();
 
-		//
-		// ISprite interface
-		//
-		virtual const Symbol& getSymbol() const;
-		virtual void setSymbol(d2d::ISymbol* symbol);
-		virtual void loadBodyFromFile();
+	//
+	// ICloneable interface
+	//
+	virtual Sprite* clone() const;
 
-	protected:
-		Symbol* m_symbol;
+	//
+	// ISprite interface
+	//
+	virtual const Symbol& getSymbol() const;
+	virtual void setSymbol(d2d::ISymbol* symbol);
+	virtual void loadBodyFromFile();
 
-	}; // Sprite
+protected:
+	Symbol* m_symbol;
+
+}; // Sprite
+
 }
 
 #endif // COMPLEX_SPRITE_H

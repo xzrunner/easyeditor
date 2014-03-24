@@ -30,7 +30,7 @@ SymbolMgr* SymbolMgr::Instance()
 	return m_instance;
 }
 
-ISymbol* SymbolMgr::getSymbol(const wxString& filepath)
+ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 {
 	wxString lowerpath = filepath.Lower();
 
@@ -58,7 +58,18 @@ ISymbol* SymbolMgr::getSymbol(const wxString& filepath)
 	}
 	else
 	{
+		itr->second->retain();
 		return itr->second;
+	}
+}
+
+void SymbolMgr::remove(const ISymbol* symbol)
+{
+	wxString lowerpath = symbol->getFilepath().Lower();
+	std::map<wxString, ISymbol*>::iterator itr = m_symbols.find(lowerpath);
+	assert(itr != m_symbols.end());
+	if (itr != m_symbols.end()) {
+		m_symbols.erase(itr);
 	}
 }
 

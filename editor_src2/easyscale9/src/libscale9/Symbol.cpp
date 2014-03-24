@@ -415,7 +415,7 @@ void Symbol::initSprite(const FileLoader::Entry& entry, d2d::ISprite** pSprite,
 	if (!d2d::FilenameTools::isExist(filepath))
 		filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
 
-	ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
 	sprite->name = entry.name;

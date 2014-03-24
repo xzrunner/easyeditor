@@ -18,6 +18,7 @@ Bitmap::Bitmap(wxBitmap* bitmap)
 
 Bitmap::~Bitmap()
 {
+	BitmapMgr::Instance()->removeItem(m_filename);
 	delete m_bitmap;
 }
 
@@ -26,6 +27,8 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 #ifdef NOT_LOAD_IMAGE
 	return true;
 #endif
+
+	m_filename = filepath;
 
 	static bool init = false;
 	if (!init)

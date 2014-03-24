@@ -31,6 +31,8 @@ namespace d2d
 		static float computeScale(float width);
 
 	private:
+		wxString m_filename;
+
 		wxBitmap* m_bitmap;
 
 		float m_scale;

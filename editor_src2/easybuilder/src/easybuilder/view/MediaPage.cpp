@@ -41,7 +41,7 @@ void MediaPage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filenames[i]);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 			m_list->insert(symbol);
 		}
 

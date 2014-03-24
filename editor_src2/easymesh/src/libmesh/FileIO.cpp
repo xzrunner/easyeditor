@@ -49,7 +49,7 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 	{
 		wxString dir = d2d::FilenameTools::getFileDir(filepath);
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
-		d2d::SymbolMgr::Instance()->getSymbol(path);
+		d2d::SymbolMgr::Instance()->fetchSymbol(path);
 		d2d::BitmapMgr::Instance()->getItem(path, &symbol->m_bitmap);
 		d2d::ImageMgr::Instance()->getItem(path, &symbol->m_image);
 	}

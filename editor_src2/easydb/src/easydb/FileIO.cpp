@@ -50,7 +50,7 @@ void FileIO::store(const char* filename)
 d2d::ISprite* FileIO::loadSprite(const Json::Value& value)
 {
 	d2d::ISprite* sprite = NULL;
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(
 		value["filepath"].asString());
 	sprite = d2d::SpriteFactory::Instance()->create(symbol);
 

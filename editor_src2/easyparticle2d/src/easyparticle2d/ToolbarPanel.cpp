@@ -38,7 +38,7 @@ void ToolbarPanel::load(std::ifstream& fin)
 		std::string filepath = StringTools::getLine(fin);
 
 		enable(true);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 		m_image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
 		if (Context::Instance()->stage->m_particle)
 			Context::Instance()->stage->m_particle->setSprite(m_image);
@@ -429,7 +429,7 @@ void ToolbarPanel::onOpenImage(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		enable(true);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(dlg.GetPath());
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(dlg.GetPath());
 		m_image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
 		if (Context::Instance()->stage->m_particle)
 			Context::Instance()->stage->m_particle->setSprite(m_image);

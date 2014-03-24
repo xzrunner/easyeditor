@@ -94,10 +94,12 @@ void Symbol::loadResources()
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
-		ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
+		ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spriteValue);
+
+		symbol->release();
 
 		m_sprites.push_back(sprite);
 		spriteValue = value["sprite"][i++];

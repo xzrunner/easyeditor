@@ -34,6 +34,7 @@ FontBlankSymbol::FontBlankSymbol()
 
 FontBlankSymbol::~FontBlankSymbol()
 {
+//	m_font->release();
 }
 
 void FontBlankSymbol::loadFromTextFile(std::ifstream& fin)

@@ -13,11 +13,14 @@ namespace d2d
 	public:
 		static SymbolMgr* Instance();
 
-		ISymbol* getSymbol(const wxString& filepath);
+		ISymbol* fetchSymbol(const wxString& filepath);
 
 		void clear();
 
 		void traverse(IVisitor& visitor) const;
+
+	protected:
+		void remove(const ISymbol* symbol);
 
 	private:
 		SymbolMgr();
@@ -27,6 +30,8 @@ namespace d2d
 		static SymbolMgr* m_instance;
 
 		std::map<wxString, ISymbol*> m_symbols;
+
+		friend class ISymbol;
 
 	}; // SymbolMgr
 }

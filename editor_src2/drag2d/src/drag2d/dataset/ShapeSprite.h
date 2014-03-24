@@ -17,7 +17,7 @@ namespace d2d
 		virtual ~ShapeSprite();
 
 		//
-		// IObject interface
+		// ICloneable interface
 		//
 		virtual ShapeSprite* clone() const;
 

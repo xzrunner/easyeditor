@@ -158,7 +158,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		KeyFrame* frame = new KeyFrame(itr->first);
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(itr->second[i]);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(itr->second[i]);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			frame->insertWithClone(sprite);
 		}

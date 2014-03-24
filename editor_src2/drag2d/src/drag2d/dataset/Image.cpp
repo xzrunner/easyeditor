@@ -26,6 +26,7 @@ Image::Image()
 
 Image::~Image()
 {
+	ImageMgr::Instance()->removeItem(m_filepath);
 	delete m_pixels;
 }
 

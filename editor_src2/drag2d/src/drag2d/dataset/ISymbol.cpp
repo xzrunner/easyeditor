@@ -1,9 +1,15 @@
 #include "ISymbol.h"
+#include "SymbolMgr.h"
 
 #include "common/FileNameTools.h"
 
 namespace d2d
 {
+
+ISymbol::~ISymbol()
+{
+	SymbolMgr::Instance()->remove(this);
+}
 
 bool ISymbol::loadFromFile(const wxString& filepath)
 {

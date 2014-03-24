@@ -30,7 +30,7 @@ void LibraryImagePage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			ISymbol* symbol = SymbolMgr::Instance()->getSymbol(filenames[i]);
+			ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 			m_list->insert(symbol);
 		}
 	}

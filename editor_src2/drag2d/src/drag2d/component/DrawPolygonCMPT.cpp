@@ -130,7 +130,7 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 		else
 		{
 			poly->m_fillingType = PolygonShape::e_Texture;
-			poly->m_fillingTexture = static_cast<ImageSymbol*>(SymbolMgr::Instance()->getSymbol(m_filePath));
+			poly->m_fillingTexture = static_cast<ImageSymbol*>(SymbolMgr::Instance()->fetchSymbol(m_filePath));
 		}
 		poly->buildFillingTris();
 

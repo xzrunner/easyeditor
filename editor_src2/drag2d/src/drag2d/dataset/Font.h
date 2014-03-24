@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common/ResourcesMgr.h"
+#include "common/Object.h"
 
 //FreeType Headers
 #include <ft2build.h>
@@ -12,7 +13,7 @@ namespace d2d
 	typedef ResourcesMgr<Font> FontMgr;
 
 	// from nehe's FreeType
-	class Font
+	class Font : public Object
 	{
 	public:
 		Font();
@@ -34,6 +35,9 @@ namespace d2d
 		unsigned int list_base;	///< Holds the first display list id
 
 		FT_Face face;
+
+	private:
+		wxString m_filename;
 
 	}; // Font
 }

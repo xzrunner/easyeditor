@@ -14,6 +14,7 @@ namespace d2d
 {
 
 ShapeSprite::ShapeSprite()
+	: m_symbol(NULL)
 {
 }
 
@@ -21,16 +22,19 @@ ShapeSprite::ShapeSprite(const ShapeSprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_symbol->retain();
 }
 
 ShapeSprite::ShapeSprite(ShapeSymbol* symbol)
 	: m_symbol(symbol)
 {
+	m_symbol->retain();
 	buildBounding();
 }
 
 ShapeSprite::~ShapeSprite()
 {
+	m_symbol->retain();
 }
 
 ShapeSprite* ShapeSprite::clone() const
@@ -48,7 +52,13 @@ const ShapeSymbol& ShapeSprite::getSymbol() const
 void ShapeSprite::setSymbol(ISymbol* symbol)
 {
 	ShapeSymbol* shape = dynamic_cast<ShapeSymbol*>(symbol);
-	if (shape) m_symbol = shape;
+	if (m_symbol != symbol && shape)
+	{
+		m_symbol->release();
+		symbol->retain();
+
+		m_symbol = shape;
+	}
 }
 
 void ShapeSprite::loadBodyFromFile()

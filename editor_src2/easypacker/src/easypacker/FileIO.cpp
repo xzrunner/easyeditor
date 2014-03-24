@@ -22,7 +22,7 @@ void FileIO::load(const char* filename)
 	for (size_t i = 0, n = adapter.textures.size(); i < n; ++i)
 	{
 		d2d::TexPackerAdapter::Texture tex = adapter.textures[i];
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(tex.filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(tex.filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
 		d2d::Vector pos;

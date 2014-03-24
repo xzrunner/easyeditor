@@ -16,6 +16,8 @@ namespace d2d
 		T* getItem(const wxString& filename);
 		void getItem(const wxString& filename, T** old);
 
+		void removeItem(const wxString& filename);
+
 		void clear();
 
 		void traverse(IVisitor& visitor) const;
@@ -65,6 +67,7 @@ namespace d2d
 		}
 		else
 		{
+			itr->second->retain();
 			return itr->second;
 		}
 	}
@@ -79,6 +82,16 @@ namespace d2d
 		if (_new != *old && *old != NULL)
 			(*old)->release();
 		*old = _new;
+	}
+
+	template<class T>
+	inline void ResourcesMgr<T>::removeItem(const wxString& filename)
+	{
+		std::map<wxString, T*>::iterator itr = m_items.find(filename);
+		//assert(itr != m_items.end());
+		if (itr != m_items.end()) {
+			m_items.erase(itr);
+		}
 	}
 
 	template<class T>

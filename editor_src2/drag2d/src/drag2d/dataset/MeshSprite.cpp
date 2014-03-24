@@ -13,6 +13,7 @@ namespace d2d
 {
 
 MeshSprite::MeshSprite()
+	: m_symbol(NULL)
 {
 }
 
@@ -20,16 +21,19 @@ MeshSprite::MeshSprite(const MeshSprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_symbol->retain();
 }
 
 MeshSprite::MeshSprite(MeshSymbol* symbol)
 	: m_symbol(symbol)
 {
+	m_symbol->retain();
 	buildBounding();
 }
 
 MeshSprite::~MeshSprite()
 {
+	m_symbol->release();
 }
 
 MeshSprite* MeshSprite::clone() const
@@ -47,7 +51,13 @@ const MeshSymbol& MeshSprite::getSymbol() const
 void MeshSprite::setSymbol(ISymbol* symbol)
 {
 	MeshSymbol* mesh = dynamic_cast<MeshSymbol*>(symbol);
-	if (mesh) m_symbol = mesh;
+	if (m_symbol != symbol && mesh)
+	{
+		m_symbol->release();
+		symbol->retain();
+
+		m_symbol = mesh;
+	}
 }
 
 void MeshSprite::loadBodyFromFile()

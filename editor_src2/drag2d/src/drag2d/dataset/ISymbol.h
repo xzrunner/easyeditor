@@ -12,7 +12,7 @@ namespace d2d
 	class ISymbol : public ListItem, public ISerializable
 	{
 	public:
-		virtual ~ISymbol() {}
+		virtual ~ISymbol();
 
 		//
 		// IObject interface

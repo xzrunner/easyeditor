@@ -14,7 +14,7 @@ namespace d2d
 		virtual ~ImageSymbol();
 
 		//
-		// IObject interface
+		// ICloneable interface
 		//	
 		virtual ImageSymbol* clone() const;
 

@@ -22,11 +22,13 @@ void OrthoCanvas::onSize(int w, int h)
 
 	const float hWidth = w * m_camera->getScale() * 0.5f,
 		hHeight = h * m_camera->getScale() * 0.5f;
-	gluOrtho2D(
+	glOrtho(
 		m_camera->getCenter().x - hWidth, 
 		m_camera->getCenter().x + hWidth, 
 		m_camera->getCenter().y - hHeight,
-		m_camera->getCenter().y + hHeight
+		m_camera->getCenter().y + hHeight,
+		0,
+		1
 		);
 
 	glMatrixMode(GL_MODELVIEW);

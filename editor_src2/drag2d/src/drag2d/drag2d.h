@@ -44,6 +44,7 @@
 #include "dataset/BVFactory.h"
 #include "dataset/ImageLoader.h"
 #include "dataset/ImageSaver.h"
+#include "dataset/Snapshoot.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"

@@ -17,7 +17,7 @@ public:
 	virtual ~Sprite();
 
 	//
-	// IObject interface
+	// ICloneable interface
 	//
 	virtual Sprite* clone() const;
 

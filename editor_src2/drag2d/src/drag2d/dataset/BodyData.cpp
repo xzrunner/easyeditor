@@ -23,6 +23,7 @@ BodyData::BodyData()
 
 BodyData::~BodyData()
 {
+	BodyDataMgr::Instance()->removeItem(m_filename);
 	clear();
 }
 

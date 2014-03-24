@@ -27,7 +27,7 @@ void StagePanel::setImage(const std::string& filepath)
 		m_image->release();
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	if (symbol) {
 		setImage(symbol);
 	}

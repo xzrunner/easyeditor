@@ -43,7 +43,7 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
 			|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			insertSprite(sprite);
 		}

@@ -48,7 +48,7 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	int index = d2d::SpriteDraw::time / (1.0f / m_fps);
-	index = index % getMaxFrameIndex();
+	index = (index + 1) % getMaxFrameIndex();
 
 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -135,7 +135,7 @@ void Symbol::loadResources()
 			Json::Value spriteValue = frameValue["actor"][k++];
 			while (!spriteValue.isNull()) {
  				wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
- 				ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(path);
+ 				ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 				sprite->load(spriteValue);
 				dstFrame->sprites.push_back(sprite);

@@ -14,6 +14,7 @@ namespace d2d
 		TextSprite();
 		TextSprite(const TextSprite& sprite);
 		TextSprite(FontSymbol* symbol);
+		virtual ~TextSprite();
 
 		//
 		// IObject interface

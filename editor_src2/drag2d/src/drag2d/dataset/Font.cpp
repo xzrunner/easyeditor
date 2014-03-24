@@ -18,6 +18,8 @@ Font::Font()
 
 Font::~Font()
 {
+	FontMgr::Instance()->removeItem(m_filename);
+
 	glDeleteLists(list_base,128);
 	glDeleteTextures(128,textures);
 	delete [] textures;
@@ -27,6 +29,8 @@ Font::~Font()
 
 bool Font::loadFromFile(const wxString& filepath)
 {
+	m_filename = filepath;
+
 	//Allocate some memory to store the texture ids.
 	textures = new GLuint[128];
 

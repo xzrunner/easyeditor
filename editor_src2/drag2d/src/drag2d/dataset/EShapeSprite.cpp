@@ -21,16 +21,19 @@ EShapeSprite::EShapeSprite(const EShapeSprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_symbol->retain();
 }
 
 EShapeSprite::EShapeSprite(EShapeSymbol* symbol)
 	: m_symbol(symbol)
 {
+	m_symbol->retain();
 	buildBounding();
 }
 
 EShapeSprite::~EShapeSprite()
 {
+	m_symbol->release();
 }
 
 EShapeSprite* EShapeSprite::clone() const
@@ -48,7 +51,13 @@ const EShapeSymbol& EShapeSprite::getSymbol() const
 void EShapeSprite::setSymbol(ISymbol* symbol)
 {
 	EShapeSymbol* shape = dynamic_cast<EShapeSymbol*>(symbol);
-	if (shape) m_symbol = shape;
+	if (m_symbol != symbol && shape)
+	{
+		m_symbol->release();
+		symbol->retain();
+
+		m_symbol = shape;
+	}
 }
 
 void EShapeSprite::loadBodyFromFile()

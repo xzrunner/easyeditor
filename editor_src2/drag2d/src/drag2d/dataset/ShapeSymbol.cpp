@@ -30,12 +30,10 @@ ShapeSymbol* ShapeSymbol::clone() const
 
 void ShapeSymbol::loadFromTextFile(std::ifstream& fin)
 {
-
 }
 
 void ShapeSymbol::storeToTextFile(std::ofstream& fout) const
 {
-
 }
 
 void ShapeSymbol::reloadTexture() const
@@ -77,8 +75,9 @@ void ShapeSymbol::loadResources()
 
 void ShapeSymbol::clear()
 {
-	for (size_t i = 0, n = shapes.size(); i < n; ++i)
+	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
 		shapes[i]->release();
+	}
 	shapes.clear();
 }
 

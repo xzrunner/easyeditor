@@ -14,7 +14,7 @@ MeshSymbol::MeshSymbol()
 
 MeshSymbol::~MeshSymbol()
 {
-
+	m_image->release();
 }
 
 MeshSymbol* MeshSymbol::clone() const 

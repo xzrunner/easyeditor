@@ -44,7 +44,7 @@ Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 	std::string filepath = bodyValue["filepath"].asString();
 	filepath = d2d::FilenameTools::getAbsolutePath(dlg, filepath);
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
 	d2d::Vector pos;
@@ -298,7 +298,7 @@ void FileApapter::resolve(const wxString& filepath)
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];
 	while (!bodyValue.isNull()) {
-		Body* body = j2bBody(bodyValue, dlg);
+		Body* body = j2bBody(bodyValue, dir);
 		m_nameBodyMap.insert(std::make_pair(body->name, body));
 		m_bodies.push_back(body);
 

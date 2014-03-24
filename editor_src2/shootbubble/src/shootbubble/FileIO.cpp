@@ -49,7 +49,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value)
 	const int row = value["row"].asInt(),
 		col = value["col"].asInt();
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::Vector pos;
 	Context::Instance()->stage->transGridPosToCoords(row, col, pos);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);

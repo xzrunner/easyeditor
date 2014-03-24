@@ -87,7 +87,7 @@ d2d::ISprite* FileIO::loadSprite(const Json::Value& value,
 	std::string filepath = value["filepath"].asString();
 	filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	const float x = value["position"]["x"].asDouble(),
 		y = value["position"]["y"].asDouble();
@@ -101,7 +101,7 @@ d2d::ISprite* FileIO::loadSprite(const Json::Value& value,
 	if (!pathfile.empty())
 	{
 		pathfile = d2d::FilenameTools::getAbsolutePath(dir, pathfile);
-		info->symbol = d2d::SymbolMgr::Instance()->getSymbol(pathfile);
+		info->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(pathfile);
 		info->resetOffset();
 	}
 
