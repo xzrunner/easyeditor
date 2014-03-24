@@ -7,6 +7,7 @@
 #include "FixAnimation.h"
 #include "FormatJsonFile.h"
 #include "CopyFiles.h"
+#include "Snapshoot.h"
 
 void verify(const std::string& dirpath, const std::string& op)
 {
@@ -101,6 +102,18 @@ int main(int argc, char *argv[])
 
 		edb::CopyFiles copy(srcdir, dstdir);
 		copy.CopyByExportNames(names);
+	}
+	else if (cmd == "snapshoot")
+	{
+		if (argc < 4) {
+			std::cerr << "Params: [src dir] [dst dir]!" << std::endl;
+			return 1;
+		}
+
+		std::string srcdir = argv[2];
+		std::string dstdir = argv[3];
+
+		edb::Snapshoot::trigger(srcdir, dstdir);
 	}
 
 	return 0;

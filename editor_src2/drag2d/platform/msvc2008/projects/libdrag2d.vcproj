@@ -657,6 +657,14 @@
 		<Filter
 			Name="dataset"
 			>
+			<File
+				RelativePath="..\..\..\src\drag2d\dataset\Snapshoot.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\dataset\Snapshoot.h"
+				>
+			</File>
 			<Filter
 				Name="body"
 				>
@@ -1147,6 +1155,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\render\GL10.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\common\opengl\opengl.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\common\opengl\opengl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\common\opengl\platform.h"
 				>
 			</File>
 			<File
