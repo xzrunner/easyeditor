@@ -24,8 +24,8 @@ namespace d2d
 			yMax = center.y + hHeight;
 		}
 		Rect(float width, float height) {
-			xMin = width * 0.5f;
-			yMin = height * 0.5f;
+			xMin = -width * 0.5f;
+			yMin = -height * 0.5f;
 			xMax = -xMin;
 			yMax = -yMin;
 		}
