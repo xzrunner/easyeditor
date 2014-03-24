@@ -65,7 +65,7 @@
 			"name" : "Name",
 			"position" : 
 			{
-				"x" : 206.9999694824219,
+				"x" : 225.9999694824219,
 				"y" : -22.50
 			},
 			"size" : 16,
@@ -372,6 +372,29 @@
 			"y mirror" : false,
 			"y offset" : 0.3846747577190399,
 			"y scale" : 0.3846747577190399,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "sex_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "sex",
+			"position" : 
+			{
+				"x" : 64.63853454589844,
+				"y" : -24.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -1.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	],
