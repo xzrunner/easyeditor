@@ -14,6 +14,7 @@ namespace d2d
 	class SymbolMgr;
 	class LibraryList;
 	class IVisitor;
+	class GLCanvas;
 
 	class LibraryPanel : public wxPanel, public ISerializable
 	{
@@ -41,6 +42,8 @@ namespace d2d
 		void traverse(IVisitor& visitor) const;
 
 		wxWindow* getNotebook() { return m_notebook; }
+
+		void setCanvas(GLCanvas* canvas);
 
 	private:
 		void initLayout();

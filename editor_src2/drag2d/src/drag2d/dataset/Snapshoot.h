@@ -12,7 +12,10 @@ class Snapshoot
 {
 public:
 	Snapshoot();
+	Snapshoot(int width, int height);
 	~Snapshoot();
+
+	unsigned char* outputToMemory(const ISymbol* symbol) const;
 
 	void outputToImageFile(const ISymbol* symbol, const std::string& filename) const;
 
@@ -23,6 +26,10 @@ private:
 	void drawFBO(const ISymbol* symbol) const;
 
 	int checkFramebufferStatus() const;
+
+private:
+	static const int DEFAULT_WIDTH = 800;
+	static const int DEFAULT_HEIGHT = 600;
 
 private:
 	int m_tex;

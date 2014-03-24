@@ -2,6 +2,7 @@
 #include "LibraryList.h"
 
 #include "dataset/ScriptsSymbol.h"
+#include "dataset/SymbolMgr.h"
 #include "common/FileNameParser.h"
 
 namespace d2d
@@ -30,10 +31,9 @@ namespace d2d
 			dlg.GetPaths(filenames);
 			for (size_t i = 0, n = filenames.size(); i < n; ++i)
 			{
-				ScriptsSymbol* item = new ScriptsSymbol;
-				item->loadFromFile(filenames[i]);
-				item->refresh();
-				m_list->insert(item);
+				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+				symbol->refresh();
+				m_list->insert(symbol);
 			}
 		}
 	}

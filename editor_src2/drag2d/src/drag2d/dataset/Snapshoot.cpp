@@ -18,7 +18,14 @@ Snapshoot::Snapshoot()
 	: m_tex(0)
 	, m_fbo(0)
 {
-	createFBO(800, 600);
+	createFBO(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+}
+
+Snapshoot::Snapshoot(int width, int height)
+	: m_tex(0)
+	, m_fbo(0)
+{
+	createFBO(width, height);
 }
 
 Snapshoot::~Snapshoot()
@@ -26,23 +33,30 @@ Snapshoot::~Snapshoot()
 	releaseFBO();
 }
 
-void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& filename) const
+unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol) const
 {
 	drawFBO(symbol);
 
 	int w = symbol->getSize().xLength(),
 		h = symbol->getSize().yLength();
 	size_t size = w*h*4;
-	GLubyte* pixels = new GLubyte[size];
-	if(!pixels) return;
+	unsigned char* pixels = new unsigned char[size];
+	if(!pixels) return NULL;
 	memset(&pixels[0], 0, size);	
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 
-	ImageSaver::storeToFile(pixels, w, h, filename, ImageSaver::e_png);
+	return pixels;
+}
 
+void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& filename) const
+{
+	int w = symbol->getSize().xLength(),
+		h = symbol->getSize().yLength();
+	unsigned char* pixels = outputToMemory(symbol);
+	ImageSaver::storeToFile(pixels, w, h, filename, ImageSaver::e_png);
 	delete[] pixels;
 }
 

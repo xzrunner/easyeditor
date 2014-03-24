@@ -8,6 +8,7 @@ ILibraryPage::ILibraryPage(wxWindow* parent, const wxString& name)
 	: wxWindow(parent, wxID_ANY)
 	, m_name(name)
 	, m_list(NULL)
+	, m_canvas(NULL)
 {
 	m_btnAdd = m_btnDel = NULL;
 }

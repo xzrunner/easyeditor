@@ -45,7 +45,6 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 		bool isLoaded = symbol->loadFromFile(lowerpath);
 		if (isLoaded)
 		{
-			symbol->refresh();
 			m_symbols.insert(std::make_pair(lowerpath, symbol));
 			return symbol;
 		}

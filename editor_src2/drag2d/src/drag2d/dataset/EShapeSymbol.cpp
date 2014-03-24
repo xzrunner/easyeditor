@@ -91,12 +91,12 @@ void EShapeSymbol::loadThumbnail()
 	for (size_t i = 0, n = shapes.size(); i < n; ++i)
 		rect.combine(shapes[i]->getRect());
 
-	if (m_bitmap) delete m_bitmap;
-	m_bitmap = new Bitmap(
-		new wxBitmap(
-		rect.xLength() * SCALE + PADDING, 
-		rect.yLength() * SCALE + PADDING)
-		);
+	//if (m_bitmap) delete m_bitmap;
+	//m_bitmap = new Bitmap(
+	//	new wxBitmap(
+	//	rect.xLength() * SCALE + PADDING, 
+	//	rect.yLength() * SCALE + PADDING)
+	//	);
 
 	const float dx = (-rect.xMin * SCALE) + PADDING*0.5f,
 		dy = (rect.yMax * SCALE) + PADDING*0.5f;

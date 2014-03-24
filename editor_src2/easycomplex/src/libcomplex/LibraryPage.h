@@ -5,21 +5,23 @@
 
 namespace ecomplex
 {
-	class LibraryPage : public d2d::ILibraryPage
-	{
-	public:
-		LibraryPage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+class LibraryPage : public d2d::ILibraryPage
+{
+public:
+	LibraryPage(wxWindow* parent);
 
-	protected:
-		virtual void onAddPress(wxCommandEvent& event);
+	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
-	private:
-		void loadFromJsonFile(const wxString& filename);
-		void loadFromLuaFile(const wxString& filename);
+protected:
+	virtual void onAddPress(wxCommandEvent& event);
 
-	}; // LibraryPage
+private:
+	void loadFromJsonFile(const wxString& filename);
+	void loadFromLuaFile(const wxString& filename);
+
+}; // LibraryPage
+
 }
 
 #endif // COMPLEX_LIBRARY_PAGE_H

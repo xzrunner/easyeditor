@@ -9,6 +9,7 @@ namespace d2d
 	class ListItem;
 	class ISymbol;
 	class LibraryList;
+	class GLCanvas;
 
 	class ILibraryPage : public wxWindow, public ISerializable
 	{
@@ -36,6 +37,10 @@ namespace d2d
 
 		LibraryList* getList() { return m_list; }
 
+		void setCanvas(GLCanvas* canvas) {
+			m_canvas = canvas;
+		}
+
 	protected:
 		virtual void initLayout(bool draggable = true);
 
@@ -51,6 +56,8 @@ namespace d2d
 		wxButton *m_btnAdd, *m_btnDel;
 
 		LibraryList* m_list;
+
+		GLCanvas* m_canvas;
 
 	}; // ILibraryPage
 }

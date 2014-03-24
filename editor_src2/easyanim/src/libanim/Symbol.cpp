@@ -9,12 +9,6 @@ Symbol::Symbol()
 {
 	static int id = 0;
 	m_name = wxT("anim") + wxVariant(id++);
-
-	const float SCALE = 0.15f;
-	const float WIDTH = 800, HEIGHT = 480;
-	m_bitmap = new d2d::Bitmap(
-		new wxBitmap(WIDTH * SCALE, HEIGHT * SCALE)
-		);
 }
 
 Symbol::~Symbol()
@@ -182,17 +176,6 @@ void Symbol::initBounding()
 				frame->sprites[j]->getBounding()->getBoundPos(vertices);
 				for (size_t k = 0, l = vertices.size(); k < l; ++k)
 					m_rect.combine(vertices[k]);
-
-				// 				d2d::ISprite* sprite = frame->sprites[j];
-				// 				float hw = sprite->getSymbol().getSize().xLength() * 0.5f;
-				// 				float hh = sprite->getSymbol().getSize().yLength() * 0.5f;
-				// 				love::Matrix t;
-				// 				t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
-				// 					sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
-				// 				m_rect.combine(Math::transVector(d2d::Vector(-hw, -hh), t));
-				// 				m_rect.combine(Math::transVector(d2d::Vector(-hw,  hh), t));
-				// 				m_rect.combine(Math::transVector(d2d::Vector( hw,  hh), t));
-				// 				m_rect.combine(Math::transVector(d2d::Vector( hw, -hh), t));
 			}
 		}
 	}
@@ -200,36 +183,8 @@ void Symbol::initBounding()
 
 void Symbol::refreshThumbnail()
 {
-	wxMemoryDC memDC;
-	memDC.SelectObject(const_cast<wxBitmap&>(*m_bitmap->getBitmap()));
-
-	memDC.SetBackground(wxBrush(*wxWHITE));
-	memDC.Clear();
-
-	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		if (!layer->frames.empty())
-		{
-			Frame* frame = layer->frames[0];
-			for (size_t j = 0, m = frame->sprites.size(); j < m; ++j)
-			{
-				d2d::ISprite* sprite = frame->sprites[j];
-				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
-					d2d::SpriteDraw::drawSprite(image, memDC);
-				else if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(sprite))
-				{
-					const d2d::Vector& offset = complex->getPosition();
-					std::vector<std::pair<const d2d::ISprite*, d2d::Vector> > children;
-					complex->getSymbol().getAllChildren(children);
-					for (size_t k = 0, l = children.size(); k < l; ++k)
-						d2d::SpriteDraw::drawSprite(children[k].first, children[k].second + offset, memDC);
-				}
-			}
-		}
-	}
-
-	memDC.SelectObject(wxNullBitmap);
+	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
+	m_bitmap->loadFromFile(m_filepath);
 }
 
 //////////////////////////////////////////////////////////////////////////

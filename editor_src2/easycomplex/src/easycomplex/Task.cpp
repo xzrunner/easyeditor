@@ -80,6 +80,8 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	toolbar = m_viewlist = new d2d::ViewlistPanel(rightVerticalSplitter, m_stage, m_stage, m_property);
 
 	m_stage->setViewlist(m_viewlist);
+
+	m_library->setCanvas(m_stage->getCanvas());
 }
 
 void Task::initLayout()

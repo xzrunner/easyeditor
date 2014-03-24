@@ -13,12 +13,6 @@ Symbol::Symbol()
 
 	m_width = m_height = 0;
 
-	const float SCALE = 0.15f;
-	const float WIDTH = 800, HEIGHT = 480;
-	m_bitmap = new d2d::Bitmap(
-		new wxBitmap(WIDTH * SCALE, HEIGHT * SCALE)
-		);
-
 	m_type = e_null;
 }
 
@@ -230,43 +224,8 @@ void Symbol::loadResources()
 
 void Symbol::refreshThumbnail()
 {
-	wxMemoryDC memDC;
-	memDC.SelectObject(const_cast<wxBitmap&>(*m_bitmap->getBitmap()));
-
-	memDC.SetBackground(wxBrush(*wxWHITE));
-	memDC.Clear();
-
-	switch (m_type)
-	{
-	case e_9Grid:
-		for (size_t i = 0; i < 3; ++i)
-			for (size_t j = 0; j < 3; ++j)
-				d2d::SpriteDraw::drawSprite(m_sprites[i][j], memDC);
-		break;
-	case e_9GridHollow:
-		for (size_t i = 0; i < 3; ++i) {
-			for (size_t j = 0; j < 3; ++j) {
-				if (i == 1 && j == 1) continue;
-				d2d::SpriteDraw::drawSprite(m_sprites[i][j], memDC);
-			}
-		}
-		break;
-	case e_3GridHor:
-		for (size_t i = 0; i < 3; ++i)
-			d2d::SpriteDraw::drawSprite(m_sprites[1][i], memDC);
-		break;
-	case e_3GridVer:
-		for (size_t i = 0; i < 3; ++i)
-			d2d::SpriteDraw::drawSprite(m_sprites[i][1], memDC);
-		break;
-	case e_6GridUpper:
-		for (size_t i = 1; i < 3; ++i)
-			for (size_t j = 0; j < 3; ++j)
-				d2d::SpriteDraw::drawSprite(m_sprites[i][j], memDC);
-		break;
-	}
-
-	memDC.SelectObject(wxNullBitmap);
+	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
+	m_bitmap->loadFromFile(m_filepath);
 }
 
 void Symbol::composeFromSprites() const

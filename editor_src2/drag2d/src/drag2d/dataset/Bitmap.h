@@ -14,7 +14,6 @@ namespace d2d
 	{
 	public:
 		Bitmap();
-		Bitmap(wxBitmap* bitmap);
 		virtual ~Bitmap();
 
 		bool loadFromFile(const wxString& filepath);
@@ -24,6 +23,8 @@ namespace d2d
 		}
 
 	private:
+		static unsigned char* transRGBA2RGB(unsigned char* rgba, int width, int height);
+
 		static void getImage(const wxString& filepath, wxImage& image);
 
 		static wxBitmap* getBitmap(const wxImage& image);

@@ -28,10 +28,10 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			Symbol* item = new Symbol;
-			item->loadFromFile(filenames[i]);
-			item->refresh();
-			m_list->insert(item);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+			symbol->refresh();
+			m_list->insert(symbol);
+			m_canvas->resetInitState();
 		}
 	}
 }

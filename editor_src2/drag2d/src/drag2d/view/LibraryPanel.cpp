@@ -86,6 +86,13 @@ void LibraryPanel::traverse(IVisitor& visitor) const
 		m_selected->traverse(visitor);
 }
 
+void LibraryPanel::setCanvas(GLCanvas* canvas)
+{
+	for (int i = 0, n = m_pages.size(); i < n; ++i) {
+		m_pages[i]->setCanvas(canvas);
+	}
+}
+
 void LibraryPanel::initLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);

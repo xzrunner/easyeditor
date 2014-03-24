@@ -290,6 +290,8 @@ wxWindow* Frame::createCenterFrame(wxWindow* parent)
 	// stage
 	StagePanel* stage = new StagePanel(topSplit, this);
 	context->stage = stage;
+	static_cast<d2d::LibraryPanel*>(context->library)
+		->setCanvas(stage->getCanvas());
 
 	// toolbar
 	context->toolbar = new ToolbarPanel(topSplit, stage, false);

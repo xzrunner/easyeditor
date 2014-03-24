@@ -12,11 +12,11 @@ LayerItem::LayerItem(Layer* layer)
 {
 	m_name = m_layer->name;
 
-	m_bitmap = new d2d::Bitmap(
-		new wxBitmap(
-		Game::WIDTH * Thumbnail::SCALE, 
-		Game::HEIGHT * Thumbnail::SCALE)
-		);
+	//m_bitmap = new d2d::Bitmap(
+	//	new wxBitmap(
+	//	Game::WIDTH * Thumbnail::SCALE, 
+	//	Game::HEIGHT * Thumbnail::SCALE)
+	//	);
 }
 
 LayerItem::~LayerItem()

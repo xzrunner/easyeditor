@@ -35,20 +35,21 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			const wxString filename = filenames[i];
 			std::string type = filename.substr(filename.find_last_of(".") + 1);
 			StringTools::toLower(type);
-			if (type == "json")
+			if (type == "json") {
 				loadFromJsonFile(filename);
-			else if (type == "lua")
+				m_canvas->resetInitState();
+			} else if (type == "lua") {
 				loadFromLuaFile(filename);
+			}
 		}
 	}
 }
 
 void LibraryPage::loadFromJsonFile(const wxString& filename)
 {
-	Symbol* item = new Symbol;
-	item->loadFromFile(filename);
-	item->refresh();
-	m_list->insert(item);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+	symbol->refresh();
+	m_list->insert(symbol);
 }
 
 void LibraryPage::loadFromLuaFile(const wxString& filename)

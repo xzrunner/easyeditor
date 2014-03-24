@@ -1,18 +1,17 @@
 #include "Bitmap.h"
 #include "Image.h"
+#include "ISymbol.h"
+#include "SymbolMgr.h"
+#include "Snapshoot.h"
 
 #include "common/config.h"
+#include "common/FileNameParser.h"
 
 namespace d2d
 {
 
 Bitmap::Bitmap()
 	: m_bitmap(NULL)
-{
-}
-
-Bitmap::Bitmap(wxBitmap* bitmap)
-	: m_bitmap(bitmap)
 {
 }
 
@@ -30,19 +29,56 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 
 	m_filename = filepath;
 
-	static bool init = false;
-	if (!init)
+	static bool inited = false;
+	if (!inited)
 	{
 		wxInitAllImageHandlers();
-		init = true;
+		inited = true;
 	}
 
-	wxImage image;
-	getImage(filepath, image);
+	if (FileNameParser::isType(filepath, FileNameParser::e_image))
+	{
+	 	wxImage image;
+	 	getImage(filepath, image);
+	 
+	 	m_bitmap = getBitmap(image);
+	}
+	else
+	{
+		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::Rect rect = symbol->getSize();
+		int w = std::max(1.0f, rect.xLength()),
+			h = std::max(1.0f, rect.yLength());
 
-	m_bitmap = getBitmap(image);
+		d2d::Snapshoot ss(w, h);
+		unsigned char* rgba = ss.outputToMemory(symbol);
+		unsigned char* rgb = transRGBA2RGB(rgba, w, h);
+		delete[] rgba;
+
+		wxImage image(w, h, rgb, true);
+		if (m_bitmap) {
+			delete m_bitmap;
+			m_bitmap = NULL;
+		}
+ 		m_bitmap = getBitmap(image);
+		delete[] rgb;
+ 		symbol->release();
+	}
 
 	return true;
+}
+
+unsigned char* Bitmap::transRGBA2RGB(unsigned char* rgba, int width, int height)
+{
+	unsigned char* rgb = new unsigned char[width*height*3];
+	for (int i = 0; i < height; ++i) {
+		for (int j = 0; j < width; ++j) {
+			int src = (i*width+j)*4;
+			int dst = (i*width+j)*3;
+			memcpy(&rgb[dst], &rgba[src], sizeof(unsigned char) * 3);
+		}
+	}
+	return rgb;
 }
 
 void Bitmap::getImage(const wxString& filepath, wxImage& image)

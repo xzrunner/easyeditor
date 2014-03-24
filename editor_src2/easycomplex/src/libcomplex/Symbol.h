@@ -49,11 +49,6 @@ private:
 
 	void refreshThumbnail();
 
-	// todo!
-public:
-	// avoid to cycle same Symbol
-	void getAllChildren(std::vector<std::pair<const d2d::ISprite*, d2d::Vector> >& children) const;
-
 private:
 	static const float SCALE;
 

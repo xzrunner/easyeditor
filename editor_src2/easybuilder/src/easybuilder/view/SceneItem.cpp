@@ -13,11 +13,11 @@ SceneItem::SceneItem(Scene* scene)
 {
 	m_name = m_scene->m_name;
 
-	m_bitmap = new d2d::Bitmap(
-		new wxBitmap(
-		Game::WIDTH * Thumbnail::SCALE, 
-		Game::HEIGHT * Thumbnail::SCALE)
-		);
+	//m_bitmap = new d2d::Bitmap(
+	//	new wxBitmap(
+	//	Game::WIDTH * Thumbnail::SCALE, 
+	//	Game::HEIGHT * Thumbnail::SCALE)
+	//	);
 }
 
 SceneItem::~SceneItem()
