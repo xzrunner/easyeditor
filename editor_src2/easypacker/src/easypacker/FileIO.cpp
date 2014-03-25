@@ -4,7 +4,7 @@
 #include "Context.h"
 
 #include <SOIL/SOIL.h>
-#include <SOIL/stb_image_write.h>
+// #include <SOIL/stb_image_write.h>
 
 using namespace epacker;
 
@@ -117,7 +117,7 @@ void FileIO::storeImage(const char* filename)
 	switch (type)
 	{
 	case ToolbarPanel::e_bmp:
-		stbi_write_bmp((imgFile + ".bmp").c_str(), width, height, channel, dst_data);
+//		stbi_write_bmp((imgFile + ".bmp").c_str(), width, height, channel, dst_data);
 		break;
 	case ToolbarPanel::e_jpg:
 		{
@@ -130,7 +130,7 @@ void FileIO::storeImage(const char* filename)
 		}
 		break;
 	case ToolbarPanel::e_png:
-		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
+//		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
 		break;
 	}
 

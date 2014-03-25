@@ -28,7 +28,7 @@ void FileIO::load(const char* filename)
 	int i = 0;
 	Json::Value bodyValue = value["body"][i++];
 	while (!bodyValue.isNull()) {
-		libmodeling::Body* body = libmodeling::FileApapter::j2bBody(bodyValue, dlg);
+		libmodeling::Body* body = libmodeling::FileApapter::j2bBody(bodyValue, dir);
 		context->stage->insertSprite(body->sprite);
 		bodies.push_back(body);
 
@@ -77,7 +77,7 @@ void FileIO::store(const char* filename)
 	for (size_t i = 0, n = bodies.size(); i < n; ++i)
 	{
 		bodyIndexMap[bodies[i]] = i;
-		value["body"][i] = b2j(bodies[i], dlg);
+		value["body"][i] = b2j(bodies[i], dir);
 	}
 
 	std::map<libmodeling::Joint*, int> jointIndexMap;

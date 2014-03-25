@@ -57,11 +57,11 @@ void FileIO::store(const char* filename)
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 		{
 			if (items[i]->getFilepath().empty())
-				value["shape"][i] = (dlg + "\\" + items[i]->getName() + 
+				value["shape"][i] = (dir + "\\" + items[i]->getName() + 
 					"_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape) + ".json").ToStdString();
 			else
 				value["shape"][i] = items[i]->getFilepath().ToStdString();
-			store(items[i], dlg);
+			store(items[i], dir);
 		}
 	}
 	{
@@ -71,7 +71,7 @@ void FileIO::store(const char* filename)
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 		{
 			value["image"][i] = items[i]->getFilepath().ToStdString();
-			store(items[i], dlg);
+			store(items[i], dir);
 		}
 	}
 
