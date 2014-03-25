@@ -57,6 +57,14 @@ namespace d2d
 		return 1;
 	}
 
+	int w_Sprite_setName(lua_State* L)
+	{
+		ISprite* t = luax_checksprite(L, 1);
+		const char* str = luaL_checkstring(L, 2);
+		t->name = str;
+		return 0;
+	}
+
 	static const luaL_Reg functions[] = {
 		{ "clone", w_Sprite_clone },
 		{ "getPosition", w_Sprite_getPosition },
@@ -64,6 +72,7 @@ namespace d2d
 		{ "move", w_Sprite_move },
 		{ "width", w_Sprite_width },
 		{ "height", w_Sprite_height },
+		{ "setName", w_Sprite_setName },
 		{ 0, 0 }
 	};
 
