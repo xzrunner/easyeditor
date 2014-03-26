@@ -56,7 +56,7 @@
 			"clip" : false,
 			"filepath" : "res_icon_anim.json",
 			"multi color" : "0xffffffff",
-			"name" : "icon",
+			"name" : "type",
 			"position" : 
 			{
 				"x" : 77.0,
@@ -72,5 +72,9 @@
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }
