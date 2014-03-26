@@ -1,14 +1,15 @@
 
 {
 	"name" : "buildingbutton_inactive_request_troops",
+	"redo" : null,
 	"sprite" : 
 	[
 		
 		{
-			"add color" : "0xff000000",
+			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6002-anniu-1.png",
+			"filepath" : "load_bg_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -18,11 +19,30 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
+			"x scale" : 0.9499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.9499999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6002-anniu-1.png",
+			"multi color" : "0x01143935",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
@@ -41,11 +61,9 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 0.6000000238418579,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 0.6000000238418579,
 			"y shear" : 0.0
 		},
@@ -58,7 +76,6 @@
 			"color" : "0xffffffff",
 			"filepath" : "buildingbutton_inactive_request_troops_fontblank.json",
 			"font" : "",
-			"font_filename" : "",
 			"label_height" : 14,
 			"label_width" : 82,
 			"multi color" : "0xffffffff",
@@ -71,11 +88,9 @@
 			"size" : 11,
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -88,7 +103,6 @@
 			"color" : "0xffffffff",
 			"filepath" : "tid_button_info_fontblank.json",
 			"font" : "",
-			"font_filename" : "",
 			"label_height" : 17,
 			"label_width" : 91,
 			"multi color" : "0xffffffff",
@@ -101,15 +115,14 @@
 			"size" : 12,
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
 	],
+	"undo" : null,
 	"xmax" : 0.0,
 	"xmin" : 0.0,
 	"ymax" : 0.0,

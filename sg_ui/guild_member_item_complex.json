@@ -1,7 +1,6 @@
 
 {
 	"name" : "guild_member_item",
-	"redo" : null,
 	"sprite" : 
 	[
 		
@@ -19,9 +18,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 200.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 22.50,
 			"y shear" : 0.0
 		},
@@ -40,9 +41,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
@@ -61,9 +64,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
@@ -89,9 +94,11 @@
 			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -110,9 +117,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 11.0,
 			"y shear" : 0.0
 		},
@@ -138,9 +147,11 @@
 			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -160,15 +171,17 @@
 			"name" : "score",
 			"position" : 
 			{
-				"x" : -132.6637878417969,
+				"x" : -136.6637878417969,
 				"y" : -18.50
 			},
 			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -187,9 +200,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.4000000059604645,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.4000000059604645,
 			"y shear" : 0.0
 		},
@@ -209,15 +224,17 @@
 			"name" : "send",
 			"position" : 
 			{
-				"x" : 118.6612091064453,
+				"x" : 236.6612091064453,
 				"y" : 17.50
 			},
 			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -231,14 +248,16 @@
 			"name" : "unit_slot_1",
 			"position" : 
 			{
-				"x" : 201.9016571044922,
+				"x" : 313.9016723632813,
 				"y" : -50.78998947143555
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		},
@@ -258,15 +277,17 @@
 			"name" : "receive",
 			"position" : 
 			{
-				"x" : 118.6612091064453,
+				"x" : 237.6612091064453,
 				"y" : -18.50
 			},
 			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -280,56 +301,16 @@
 			"name" : "unit_slot_2",
 			"position" : 
 			{
-				"x" : 258.7210998535156,
+				"x" : 370.7210998535156,
 				"y" : -50.78998947143555
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 0.8999999761581421,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y scale" : 0.8999999761581421,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "unit_slot_3",
-			"position" : 
-			{
-				"x" : 313.540527343750,
-				"y" : -50.78998947143555
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x scale" : 0.8999999761581421,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y scale" : 0.8999999761581421,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "character_info_icon_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "unit_slot_4",
-			"position" : 
-			{
-				"x" : 369.3599853515625,
-				"y" : -50.78998947143555
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x scale" : 0.8999999761581421,
-			"x shear" : 0.0,
-			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 0.8999999761581421,
 			"y shear" : 0.0
 		},
@@ -348,9 +329,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -370,15 +353,17 @@
 			"name" : "leader",
 			"position" : 
 			{
-				"x" : 21.0,
+				"x" : 14.0,
 				"y" : 16.0
 			},
 			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -397,9 +382,11 @@
 			},
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
@@ -419,304 +406,49 @@
 			"name" : "distance",
 			"position" : 
 			{
-				"x" : -6.163787841796875,
+				"x" : -16.16378784179688,
 				"y" : -18.0
 			},
 			"size" : 14,
 			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
-		}
-	],
-	"undo" : 
-	[
-		
-		{
-			"sprites" : [ 1 ],
-			"val" : 
-			{
-				"dx" : -31.0,
-				"dy" : 3.0,
-				"type" : 0
-			}
 		},
 		
 		{
-			"sprites" : [ 2 ],
-			"val" : 
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff333333",
+			"filepath" : "distance_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 30,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
+			"name" : "last_checkin_time",
+			"position" : 
 			{
-				"dx" : -25.0,
-				"dy" : 7.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 3 ],
-			"val" : 
-			{
-				"dx" : -53.0,
-				"dy" : 1.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 13 ],
-			"val" : 
-			{
-				"dx" : -58.0,
-				"dy" : 1.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : -61.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 6 ],
-			"val" : 
-			{
-				"dx" : -64.0,
-				"dy" : 1.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 5 ],
-			"val" : 
-			{
-				"dx" : -58.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 4 ],
-			"val" : 
-			{
-				"dx" : 28.0,
-				"dy" : 1.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 7 ],
-			"val" : 
-			{
-				"dx" : -3.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 15 ],
-			"val" : 
-			{
-				"dx" : 291.0,
-				"dy" : -168.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 15 ],
-			"val" : 
-			{
-				"dx" : 6.0,
-				"dy" : 7.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 16 ],
-			"val" : 
-			{
-				"dx" : 136.0,
-				"dy" : -70.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : -1.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"dx" : 4.0,
-				"dy" : 0.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 16 ],
-			"val" : 
-			{
-				"dx" : -171.0,
-				"dy" : -16.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 16 ],
-			"val" : 
-			{
-				"dx" : 75.0,
-				"dy" : 57.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 16 ],
-			"val" : 
-			{
-				"dx" : 161.0,
-				"dy" : -227.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"dx" : 230.0,
-				"dy" : -76.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"dx" : 348.0,
-				"dy" : 67.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 1.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 200.0,
-				"yscale" : 1.0
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 200.0,
-						"y" : 1.0
-					}
-				],
-				"type" : 3,
-				"xscale" : 200.0,
-				"yscale" : 21.250
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"dx" : 148.0,
-				"dy" : 56.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : -98.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : -164.0,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 17 ],
-			"val" : 
-			{
-				"dx" : 0.0,
-				"dy" : 4.000030517578125,
-				"type" : 0
-			}
-		},
-		
-		{
-			"sprites" : [ 0 ],
-			"val" : 
-			{
-				"old" : 
-				[
-					
-					{
-						"x" : 200.0,
-						"y" : 21.250
-					}
-				],
-				"type" : 3,
-				"xscale" : 200.0,
-				"yscale" : 22.50
-			}
+				"x" : 121.8362121582031,
+				"y" : 4.0
+			},
+			"size" : 14,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
 	],
 	"xmax" : 0.0,
