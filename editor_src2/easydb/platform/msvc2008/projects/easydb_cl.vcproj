@@ -190,6 +190,22 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\easydb\DFFParser.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\DFFParser.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\DistanceFieldFont.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\DistanceFieldFont.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easydb\FixAnimation.cpp"
 			>
 		</File>

@@ -15,34 +15,13 @@
 namespace d2d
 {
 
-uint8_t* ImageLoader::load(const std::string& filepath, int& width, int& height, unsigned int& texture, int& channels)
+uint8_t* ImageLoader::loadTexture(const std::string& filepath, int& width, int& height, unsigned int& texture, int& channels)
 {
 	int format;
 	uint8_t* pixel_data = loadData(filepath, width, height, channels, format);
 	assert(pixel_data);
 	loadTexture(texture, pixel_data, width, height, channels, format);
 	return pixel_data;
-}
-
-void ImageLoader::fixPixelsData(uint8_t* pixels, int width, int height)
-{
-	int ptr = 0;
-	for (int i = 0; i < height; ++i)
-	{
-		for (int j = 0; j < width; ++j)
-		{
-			uint8_t r = pixels[ptr],
-					g = pixels[ptr+1],
-					b = pixels[ptr+2],
-					a = pixels[ptr+3];
-			if (a == 0)
-				r = g = b = 0;
-			pixels[ptr++] = r;
-			pixels[ptr++] = g;
-			pixels[ptr++] = b;
-			pixels[ptr++] = a;
-		}
-	}
 }
 
 uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& height, int& channels, int& format)
@@ -88,6 +67,27 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	}
 
 	return data;
+}
+
+void ImageLoader::fixPixelsData(uint8_t* pixels, int width, int height)
+{
+	int ptr = 0;
+	for (int i = 0; i < height; ++i)
+	{
+		for (int j = 0; j < width; ++j)
+		{
+			uint8_t r = pixels[ptr],
+					g = pixels[ptr+1],
+					b = pixels[ptr+2],
+					a = pixels[ptr+3];
+			if (a == 0)
+				r = g = b = 0;
+			pixels[ptr++] = r;
+			pixels[ptr++] = g;
+			pixels[ptr++] = b;
+			pixels[ptr++] = a;
+		}
+	}
 }
 
 void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int width, int height, int channels, int format)

@@ -8,6 +8,8 @@
 #include "FormatJsonFile.h"
 #include "CopyFiles.h"
 #include "Snapshoot.h"
+#include "DistanceFieldFont.h"
+#include "DFFParser.h"
 
 void verify(const std::string& dirpath, const std::string& op)
 {
@@ -114,6 +116,27 @@ int main(int argc, char *argv[])
 		std::string dstdir = argv[3];
 
 		edb::Snapshoot::trigger(srcdir, dstdir);
+	} else if (cmd == "text") {
+		if (argc < 4) {
+			std::cerr << "Params: [font file] [text file]!" << std::endl;
+			return 1;
+		} 
+
+ 		edb::DistanceFieldFont dff(argv[2]);
+ 		dff.test(argv[3]);
+	} else if (cmd == "loadtext") {
+		if (argc < 3) {
+			std::cerr << "Params: [font file]!" << std::endl;
+			return 1;
+		}
+
+		edb::DFFParser parser(argv[2]);
+
+		int edge = 32;
+		for (int i = 0; i < 5; ++i) {
+			parser.outputImage(edge, edge);
+			edge = edge << 1;
+		}
 	}
 
 	return 0;

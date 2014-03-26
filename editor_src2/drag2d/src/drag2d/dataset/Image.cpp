@@ -72,7 +72,7 @@ void Image::reload()
  		SOIL_FLAG_INVERT_Y
  		);
 #else
-	m_pixels = ImageLoader::load(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_channels);
+	m_pixels = ImageLoader::loadTexture(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_channels);
 
 	m_region.xMin = -m_width*0.5f;
 	m_region.xMax = -m_region.xMin;
