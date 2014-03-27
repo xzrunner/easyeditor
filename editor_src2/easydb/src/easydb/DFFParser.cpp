@@ -201,7 +201,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 			int pos_start = (sy * width + sx) * 4 + 3;
 			float curr_alpha = sa;
 			for (int k = sx, pos = pos_start; k < ex; ++k) {
-				pixels[pos] = std::min(255.0f, curr_alpha);
+				pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 				curr_alpha += dalpha;
 				pos += hor_offset;
 			}
@@ -211,7 +211,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = sa - dalpha;
 				for (int k = sx - 1, pos = pos_start - hor_offset; k >= 0; --k)
 				{
-					pixels[pos] = std::max(0.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha -= dalpha;
 					pos -= hor_offset;
 				}
@@ -221,7 +221,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = ea;
 				for (int k = ex, pos = pos_start+(ex-sx)*hor_offset; k < width; ++k)
 				{
-					pixels[pos] = std::min(255.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha += dalpha;
 					pos += hor_offset;
 				}
@@ -243,7 +243,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 			int pos_start = (sy * width + sx) * 4 + 3;
 			float curr_alpha = sa;
 			for (int k = sy, pos = pos_start; k < ey; ++k) {
-				pixels[pos] = std::min(255.0f, curr_alpha);
+				pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 				curr_alpha += dalpha;
 				pos += ver_offset;
 			}
@@ -253,7 +253,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = sa - dalpha;
 				for (int k = sy - 1, pos = pos_start - ver_offset; k >= 0; --k)
 				{
-					pixels[pos] = std::max(0.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha -= dalpha;
 					pos -= ver_offset;
 				}
@@ -263,7 +263,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = ea;
 				for (int k = ey, pos = pos_start+(ey-sy)*ver_offset; k < height; ++k)
 				{
-					pixels[pos] = std::min(255.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha += dalpha;
 					pos += ver_offset;
 				}
@@ -288,7 +288,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 
 			float curr_alpha = sa;
 			for (int k = sy, pos = pos_start; k < ey; ++k) {
-				pixels[pos] = std::min(255.0f, curr_alpha);
+				pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 				curr_alpha += dalpha;
 				pos += ver_offset;
 			}
@@ -297,7 +297,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = sa - dalpha;
 				for (int k = sy - 1, pos = pos_start - ver_offset; k >= 0; --k)
 				{
-					pixels[pos] = std::max(0.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha -= dalpha;
 					pos -= ver_offset;
 				}
@@ -307,7 +307,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = ea;
 				for (int k = ey, pos = pos_start+(ey-sy)*ver_offset; k < height; ++k)
 				{
-					pixels[pos] = std::min(255.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha += dalpha;
 					pos += ver_offset;
 				}
@@ -332,7 +332,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 
 			float curr_alpha = sa;
 			for (int k = sx, pos = pos_start; k < ex; ++k) {
-				pixels[pos] = std::min(255.0f, curr_alpha);
+				pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 				curr_alpha += dalpha;
 				pos += hor_offset;
 			}
@@ -341,7 +341,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = sa - dalpha;
 				for (int k = sx - 1, pos = pos_start - hor_offset; k >= 0; --k)
 				{
-					pixels[pos] = std::max(0.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha -= dalpha;
 					pos -= hor_offset;
 				}
@@ -351,7 +351,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 				curr_alpha = ea;
 				for (int k = ex, pos = pos_start+(ex-sx)*hor_offset; k < width; ++k)
 				{
-					pixels[pos] = std::min(255.0f, curr_alpha);
+					pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 					curr_alpha += dalpha;
 					pos += hor_offset;
 				}
@@ -372,7 +372,7 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 			float dalpha = float(ea - sa) / (ex - sx);
 			float curr_alpha = sa + dalpha;
 			for (int pos = pos_start+hor_offset; pos < pos_end; pos += hor_offset) {
-				pixels[pos] = std::min(255.0f, curr_alpha);
+				pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
 				curr_alpha += dalpha;
 			}
 		}
@@ -391,10 +391,11 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 			float dalpha = float(ea - sa) / (ey - sy);
 			float curr_alpha = sa + dalpha;
 			for (int pos = pos_start+ver_offset; pos < pos_end; pos += ver_offset) {
-				float alpha = (pixels[pos] + curr_alpha) * 0.5f;
-				pixels[pos] = std::min(255.0f, alpha);
+// 				float alpha = (pixels[pos] + curr_alpha) * 0.5f;
+// 				pixels[pos] = std::max(0.0f, std::min(255.0f, alpha));
 
-//				pixels[pos] = std::min(255.0f, curr_alpha);
+				pixels[pos] = std::max(0.0f, std::min(255.0f, curr_alpha));
+
 				curr_alpha += dalpha;
 			}
 		}
