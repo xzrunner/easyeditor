@@ -149,6 +149,25 @@ void Shader::load()
 		"}  \n"
 		;
 
+	static const char* font_fs = 
+		FLOAT_PRECISION
+		"varying vec4 v_fragmentColor; \n"
+		"varying vec2 v_texcoord;  \n"
+		"uniform sampler2D texture0;  \n"
+		"\n"
+		"void main()  \n"
+		"{  \n"  
+		"  float mask = texture2D(texture0, v_texcoord).a;    \n"
+		"  vec4 clr;                                          \n"
+		"  clr.rgb = vec3(1.0, 0.0, 0.0);                     \n"
+		"  if (mask < 0.5)				                      \n"
+		"    clr.a = 0.0;                                     \n"
+		"  else                                               \n"
+		"    clr.a = 1.0;                                     \n"
+		"  gl_FragColor = clr;                                \n"
+		"}  \n"
+		;
+
 	static const char * shape_vs =
 		FLOAT_PRECISION
 		"uniform vec4 color;     \n"
@@ -172,6 +191,7 @@ void Shader::load()
 		"}  \n"
 		;
 
+
 	glEnable(GL_BLEND);
 	// todo 源混合因子ejoy2d用的GL_ONE
 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -179,7 +199,8 @@ void Shader::load()
 
 	m_prog_sprite = init(sprite_fs, sprite_vs);
 	m_prog_shape = init(shape_fs, shape_vs);
-	
+	m_prog_font = init(font_fs, sprite_vs);
+
 	// bind attr
 	m_multi_loc = glGetUniformLocation(m_prog_sprite, "color");
 	m_add_loc = glGetUniformLocation(m_prog_sprite, "additive");
@@ -238,10 +259,18 @@ int Shader::compile(const char * source, int type)
 
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
 
-	if (status == 0) {
+	if (status == GL_FALSE) {
+		char buf[1024];
+		GLint len;
+		glGetShaderInfoLog(shader, 1024, &len, buf);
+
+		printf("compile failed:%s\n"
+			"source:\n %s\n",
+			buf, source);
 		glDeleteShader(shader);
 		return 0;
 	}
+
 	return shader;	
 }
 

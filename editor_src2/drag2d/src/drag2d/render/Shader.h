@@ -38,6 +38,7 @@ private:
 	int m_prog_curr;
 	int m_prog_sprite;
 	int m_prog_shape;
+	int m_prog_font;
 
 	// for sprite
 	int m_multi_loc;
