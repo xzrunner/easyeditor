@@ -113,15 +113,15 @@
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 30,
-			"label_width" : 400,
+			"label_width" : 360,
 			"multi color" : "0xffffffff",
 			"name" : "info",
 			"position" : 
 			{
-				"x" : 191.250,
-				"y" : -109.750
+				"x" : 190.250,
+				"y" : -107.4000091552734
 			},
-			"size" : 20,
+			"size" : 18,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 32.29998779296875,
