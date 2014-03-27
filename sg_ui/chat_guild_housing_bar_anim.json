@@ -13,63 +13,76 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 211.50,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : true,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -211.50,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-2.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 100.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 1,
 					"tween" : false
 				},
@@ -79,120 +92,145 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 211.50,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : true,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -211.50,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-2.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 100.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6411-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -212.0,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6411-gaoguang-h3-2.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -200.0,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6411-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -188.0,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : true,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 2,
 					"tween" : true
 				},
@@ -202,120 +240,145 @@
 					[
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -211.50,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-2.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 100.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6410-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 211.50,
 								"y" : 0.0
 							},
+							"tag" : "",
 							"x mirror" : true,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6411-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : -212.0,
 								"y" : 0.50
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6411-gaoguang-h3-2.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
 								"x" : 0.0,
 								"y" : 0.50
 							},
+							"tag" : "",
 							"x mirror" : false,
+							"x offset" : 0.0,
 							"x scale" : 101.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						},
 						
 						{
-							"add color" : "",
+							"add color" : "0x00000000",
 							"angle" : 0.0,
+							"clip" : false,
 							"filepath" : "6411-gaoguang-h3-1.png",
-							"multi color" : "",
+							"multi color" : "0xffffffff",
 							"name" : "",
 							"position" : 
 							{
-								"x" : 212.0,
+								"x" : 210.0,
 								"y" : 0.50
 							},
+							"tag" : "",
 							"x mirror" : true,
+							"x offset" : 0.0,
 							"x scale" : 1.0,
 							"x shear" : 0.0,
 							"y mirror" : false,
+							"y offset" : 0.0,
 							"y scale" : 1.0,
 							"y shear" : 0.0
 						}
 					],
 					"id" : 0,
+					"skeleton" : null,
 					"time" : 200,
 					"tween" : false
 				}
