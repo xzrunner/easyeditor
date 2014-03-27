@@ -1,6 +1,6 @@
 
 {
-	"name" : "buildingbutton_build_more",
+	"name" : "buildingbutton_rotate",
 	"sprite" : 
 	[
 		
@@ -31,22 +31,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "icon_build_more_complex.json",
+			"filepath" : "icon_turn_over.png",
 			"multi color" : "0xffffffff",
-			"name" : "_sprite8",
+			"name" : "_sprite32",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 5.0
+				"x" : -0.1317224502563477,
+				"y" : 5.501483917236328
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : -2.0,
-			"x scale" : 0.50,
+			"x offset" : 0.0,
+			"x scale" : 0.5020828843116760,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : -3.50,
-			"y scale" : 0.50,
+			"y offset" : 0.5020828843116760,
+			"y scale" : 0.5020828843116760,
 			"y shear" : 0.0
 		},
 		
