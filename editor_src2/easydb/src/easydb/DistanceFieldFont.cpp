@@ -174,6 +174,7 @@ void DistanceFieldFont::genChar(int unicode)
 
 	delete[] expanded_data;
 	delete[] extracted;		
+	delete[] result;
 }
 
 int DistanceFieldFont::copystr(char *utf8, const char *str, int n)  const
