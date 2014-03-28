@@ -224,7 +224,7 @@
 			"name" : "send",
 			"position" : 
 			{
-				"x" : 114.6612091064453,
+				"x" : 135.6612091064453,
 				"y" : 17.50
 			},
 			"size" : 16,
@@ -248,7 +248,7 @@
 			"name" : "unit_slot_1",
 			"position" : 
 			{
-				"x" : 191.9016723632813,
+				"x" : 212.9016723632813,
 				"y" : -50.78998947143555
 			},
 			"tag" : "",
@@ -277,7 +277,7 @@
 			"name" : "receive",
 			"position" : 
 			{
-				"x" : 115.6612091064453,
+				"x" : 136.6612091064453,
 				"y" : -18.50
 			},
 			"size" : 16,
@@ -301,7 +301,7 @@
 			"name" : "unit_slot_2",
 			"position" : 
 			{
-				"x" : 248.7210998535156,
+				"x" : 265.7210998535156,
 				"y" : -50.78998947143555
 			},
 			"tag" : "",
@@ -431,15 +431,45 @@
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 30,
-			"label_width" : 120,
+			"label_width" : 100,
 			"multi color" : "0xffffffff",
 			"name" : "last_checkin_time",
 			"position" : 
 			{
-				"x" : 336.4211120605469,
+				"x" : 345.4211120605469,
 				"y" : 2.0
 			},
 			"size" : 14,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff400040",
+			"filepath" : "leader_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 22,
+			"label_width" : 35,
+			"multi color" : "0xffffffff",
+			"name" : "at_group",
+			"position" : 
+			{
+				"x" : 73.0,
+				"y" : -1.0
+			},
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
