@@ -24,22 +24,41 @@ DistanceFieldFont::~DistanceFieldFont()
 	delete[] m_cache;
 }
 
+void DistanceFieldFont::transLuaFileToList(const char* luafilename, const char* outputfile) const
+{
+	std::set<int> unicodes;
+
+	std::ifstream fin(luafilename);
+	std::string str;
+	while (getline(fin, str)) {
+		transString2Unicode(str.c_str(), unicodes);
+	}
+	fin.close();
+
+	std::ofstream fout(outputfile);
+	std::set<int>::iterator itr = unicodes.begin();
+	for ( ; itr != unicodes.end(); ++itr) {
+		fout << *itr << " ";
+	}
+	fout.close();
+}
+
 void DistanceFieldFont::readFromLuaFile(const char* filename) const
 {
 }
 
 void DistanceFieldFont::test(const char* filename)
 {
-	std::ifstream fin(filename);
-	std::string str;
-	while (getline(fin, str)) {
-		std::vector<int> unicodes;
-		transString2Unicode(str.c_str(), unicodes);
-		for (int i = 0, n = unicodes.size(); i < n; ++i) {
-			genChar(unicodes[i]);
-		}
-	}
-	fin.close();
+// 	std::ifstream fin(filename);
+// 	std::string str;
+// 	while (getline(fin, str)) {
+// 		std::set<int> unicodes;
+// 		transString2Unicode(str.c_str(), unicodes);
+// 		for (int i = 0, n = unicodes.size(); i < n; ++i) {
+// 			genChar(unicodes[i]);
+// 		}
+// 	}
+// 	fin.close();
 }
 
 void DistanceFieldFont::initFreeType(const char* fontfilepath)
@@ -190,7 +209,7 @@ int DistanceFieldFont::copystr(char *utf8, const char *str, int n)  const
 	return unicode;
 }
 
-void DistanceFieldFont::transString2Unicode(const char* str, std::vector<int>& unicodes) const
+void DistanceFieldFont::transString2Unicode(const char* str, std::set<int>& unicodes) const
 {
 	char utf8[7];
 	for (int i=0; str[i] ;) 
@@ -216,7 +235,7 @@ void DistanceFieldFont::transString2Unicode(const char* str, std::vector<int>& u
 			unicode = copystr(utf8,&str[i],6);
 			i+=6;
 		}
-		unicodes.push_back(unicode);
+		unicodes.insert(unicode);
 	}
 }
 
@@ -363,7 +382,8 @@ float DistanceFieldFont::getDistanceToEdge(unsigned char* pixels, unsigned char*
 			}
 		}
 
-		if (nearest != FLT_MAX) {
+		// 128 = 4096 / 32
+		if (nearest != FLT_MAX || r > 128) {
 			nearest = sqrt(nearest);
 			int index = alpha_index(x, y, width);
 			if (pixels[index] > 0) {

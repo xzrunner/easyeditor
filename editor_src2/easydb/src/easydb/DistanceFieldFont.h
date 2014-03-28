@@ -2,6 +2,7 @@
 #define _EASYDB_DISTANCE_FIELD_FONT_H_
 
 #include <vector>
+#include <set>
 
 //FreeType Headers
 #include <ft2build.h>
@@ -16,6 +17,8 @@ public:
 	DistanceFieldFont(const char* fontfilepath);
 	~DistanceFieldFont();
 	
+	void transLuaFileToList(const char* luafilename, const char* outputfile) const;
+
 	void readFromLuaFile(const char* filename) const;
 
 	void test(const char* filename);
@@ -27,7 +30,7 @@ private:
 	void genChar(int unicode);
 	
 	int copystr(char *utf8, const char *str, int n) const;
-	void transString2Unicode(const char* str, std::vector<int>& unicodes) const;
+	void transString2Unicode(const char* str, std::set<int>& unicodes) const;
 
 	unsigned char* extraceEdge(unsigned char* pixels, int width, int height) const;
 

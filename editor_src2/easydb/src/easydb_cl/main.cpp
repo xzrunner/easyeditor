@@ -124,6 +124,14 @@ int main(int argc, char *argv[])
 
  		edb::DistanceFieldFont dff(argv[2]);
  		dff.test(argv[3]);
+	} else if (cmd == "listfont") {
+		if (argc < 5) {
+			std::cerr << "Params: [font file] [text file] [out file]!" << std::endl;
+			return 1;
+		} 
+
+		edb::DistanceFieldFont dff(argv[2]);
+		dff.transLuaFileToList(argv[3], argv[4]);
 	} else if (cmd == "loadtext") {
 		if (argc < 3) {
 			std::cerr << "Params: [font file]!" << std::endl;
