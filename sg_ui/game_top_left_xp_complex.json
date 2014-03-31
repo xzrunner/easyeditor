@@ -211,8 +211,8 @@
 			"name" : "guild_fight",
 			"position" : 
 			{
-				"x" : 144.0,
-				"y" : -188.0
+				"x" : 40.0,
+				"y" : -192.0
 			},
 			"tag" : "",
 			"x mirror" : false,
