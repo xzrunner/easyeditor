@@ -715,10 +715,10 @@ void ArrangeSpriteOP<TBase>::autoAlign(const ISprite* src, ISprite* dst)
 	Rect sr = src->getSymbol().getSize();
 	Rect dr = dst->getSymbol().getSize();
 
-	const float srcHalfWidth = sr.xLength() * 0.5f,
-		srcHalfHeight = sr.yLength() * 0.5f;
-	const float dstHalfWidth = dr.xLength() * 0.5f,
-		dstHalfHeight = dr.yLength() * 0.5f;
+	const float srcHalfWidth = sr.xLength() * src->getScale().x * 0.5f,
+		srcHalfHeight = sr.yLength() * src->getScale().y * 0.5f;
+	const float dstHalfWidth = dr.xLength() * dst->getScale().x * 0.5f,
+		dstHalfHeight = dr.yLength() * dst->getScale().y * 0.5f;
 
 	float src_dx = sr.xCenter();
 	float src_dy = sr.yCenter();
