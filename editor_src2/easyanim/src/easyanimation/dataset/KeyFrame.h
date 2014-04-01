@@ -62,6 +62,8 @@ namespace eanim
 	private:
 		void getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
 
+		bool canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& end) const;
+
 	private:
 		int m_time;
 

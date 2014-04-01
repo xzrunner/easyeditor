@@ -143,7 +143,8 @@ void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end,
 		d2d::ISprite* s = start->m_sprites[i];
 		for (int j = 0, m = end->size(); j < m; ++j) {
 			d2d::ISprite* e = end->m_sprites[j];
-			if (s->name == e->name && !m_skeletonData.isContainSprite(s)) {
+			if (canSpritesTween(*s, *e))
+			{
 				d2d::ISprite* mid = s->clone();
 				getTweenSprite(s, e, mid, process);
 				tween.push_back(mid);
@@ -179,6 +180,23 @@ void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end,
 			*mid = static_cast<emesh::Sprite*>(tween)->getMesh();
 		mid->tween(*s, *e, process);
 	}
+}
+
+bool KeyFrame::canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& end) const
+{
+	bool autoNamed = false;
+	if (!begin.name.empty() && begin.name[0] == '_' && !end.name.empty() && end.name[0] == '_') {
+		autoNamed = true;
+	}
+
+	if (autoNamed && begin.name == end.name && !m_skeletonData.isContainSprite(const_cast<d2d::ISprite*>(&begin))) {
+		return true;
+	} else {
+		if (begin.getSymbol().getFilepath() == end.getSymbol().getFilepath()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 } // eanim
