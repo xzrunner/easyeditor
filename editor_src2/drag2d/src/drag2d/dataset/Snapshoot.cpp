@@ -119,7 +119,7 @@ void Snapshoot::drawFBO(const ISymbol* symbol) const
 {
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	d2d::Rect rect = symbol->getSize();
