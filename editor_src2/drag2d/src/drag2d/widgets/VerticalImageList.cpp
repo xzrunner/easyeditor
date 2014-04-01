@@ -56,6 +56,14 @@ void VerticalImageList::insert(ListItem* item)
 	Refresh();
 }
 
+void VerticalImageList::insertFront(ListItem* item)
+{
+	m_items.insert(m_items.begin(), item);
+	SetItemCount(m_items.size());
+	SetSelection(0);
+	Refresh();
+}
+
 void VerticalImageList::remove()
 {
 	remove(GetSelection());

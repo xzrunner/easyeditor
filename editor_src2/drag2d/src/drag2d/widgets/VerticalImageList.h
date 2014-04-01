@@ -24,6 +24,7 @@ namespace d2d
 
 		void clear();
 		void insert(ListItem* item);
+		void insertFront(ListItem* item);
 		void remove();
 		void remove(int index);
 

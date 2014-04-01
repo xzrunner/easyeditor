@@ -38,8 +38,11 @@ void ViewlistPanel::remove(ISprite* sprite)
 
 void ViewlistPanel::insert(ISprite* sprite)
 {
-	m_list->insert(const_cast<ISymbol*>(&sprite->getSymbol()));
-	m_sprites.push_back(sprite);
+//	m_list->insert(const_cast<ISymbol*>(&sprite->getSymbol()));
+//  m_sprites.push_back(sprite);
+
+	m_list->insertFront(const_cast<ISymbol*>(&sprite->getSymbol()));
+	m_sprites.insert(m_sprites.begin(), sprite);
 }
 
 void ViewlistPanel::reorder(const ISprite* sprite, bool up)
@@ -53,8 +56,8 @@ void ViewlistPanel::reorder(const ISprite* sprite, bool up)
 
 	if (up)
 	{
-		int pos = i + 1;
-		if (pos < n)
+		int pos = i - 1;
+		if (pos >= 0)
 		{
 			swap(i, pos);
 			m_list->swap(i, pos);
@@ -62,8 +65,8 @@ void ViewlistPanel::reorder(const ISprite* sprite, bool up)
 	}
 	else
 	{
-		int pos = i - 1;
-		if (pos >= 0)
+		int pos = i + 1;
+		if (pos < n)
 		{
 			swap(i, pos);
 			m_list->swap(i, pos);
