@@ -72,7 +72,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 	m_bDraggable = true;
 
 	Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
+	ISprite* selected = selectByPos(pos);
 	if (selected && selected->editable)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
@@ -319,6 +319,24 @@ void SelectSpritesOP::copyFromSelection()
 		}
 		wxTheClipboard->Close();
 	}
+}
+
+ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
+{
+	ISprite* selected = NULL;
+	std::vector<ISprite*> sprites;
+	m_spritesImpl->getSpriteSelection()->traverse(FetchAllVisitor<ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		if (sprites[i]->isContain(pos)) {
+			selected = sprites[i];
+			break;
+		}
+	}
+	if (!selected) {
+		selected = m_spritesImpl->querySpriteByPos(pos);
+	}
+	return selected;
 }
 
 } // d2d

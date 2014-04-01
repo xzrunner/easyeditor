@@ -38,6 +38,8 @@ namespace d2d
 		void pasteToSelection() const;
 		void copyFromSelection();
 
+		ISprite* selectByPos(const Vector& pos) const;
+
 	protected:
 		SpriteSelection* m_selection;
 
