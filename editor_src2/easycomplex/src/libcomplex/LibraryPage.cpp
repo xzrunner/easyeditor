@@ -1,5 +1,6 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
+#include "config.h"
 
 #include <easycoco.h>
 
@@ -10,7 +11,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Complex"))
 {
 	initLayout();
-	m_list->setFileter("complex");
+	m_list->setFileter(FILE_TAG);
 }
 
 bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const

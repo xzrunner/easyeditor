@@ -1,5 +1,6 @@
 #include "Symbol.h"
 #include "Sprite.h"
+#include "config.h"
 
 namespace escale9
 {
@@ -7,7 +8,7 @@ namespace escale9
 Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = wxT("scale9") + wxVariant(id++);
+	m_name = FILE_TAG + wxVariant(id++);
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 

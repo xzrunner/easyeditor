@@ -1,4 +1,5 @@
 #include "Symbol.h"
+#include "config.h"
 
 #include <easycomplex.h>
 
@@ -8,7 +9,7 @@ namespace anim
 Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = wxT("anim") + wxVariant(id++);
+	m_name = eanim::FILE_TAG + wxVariant(id++);
 }
 
 Symbol::~Symbol()

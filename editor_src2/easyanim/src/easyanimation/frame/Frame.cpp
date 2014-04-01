@@ -16,6 +16,8 @@
 #include "view/ToolbarPanel.h"
 #include "view/PreviewDialog.h"
 
+#include "../../libanim/config.h"
+
 #include <easycomplex.h>
 #include <easymesh.h>
 #include <easyscale9.h>
@@ -38,8 +40,6 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(ID_CODESETTING, Frame::onCodeSetting)
 	EVT_MENU(ID_LOVE2D, Frame::onCodeLove2d)
 END_EVENT_TABLE()
-
-static const wxString FILE_TAG = wxT("anim");
 
 Frame::Frame(const wxString& title)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
@@ -78,7 +78,7 @@ void Frame::onNew(wxCommandEvent& event)
 void Frame::onOpen(wxCommandEvent& event)
 {
 	wxString filter = wxString("DOMDocument.xml") + ";" 
-		+ wxString(wxT("*_") + FILE_TAG + wxT(".json"));
+		+ wxString(wxT("*_") + wxString(FILE_TAG) + wxT(".json"));
   	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
   	if (dlg.ShowModal() == wxID_OK)
   	{
@@ -110,7 +110,7 @@ void Frame::onSave(wxCommandEvent& event)
 void Frame::onSaveAs(wxCommandEvent& event)
 {
  	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString,
-		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_SAVE);
+		wxT("*_") + wxString(FILE_TAG) + wxT(".json"), wxFD_SAVE);
  	if (dlg.ShowModal() == wxID_OK)
  	{
 		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");

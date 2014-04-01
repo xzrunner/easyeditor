@@ -1,5 +1,6 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
+#include "config.h"
 
 namespace escale9
 {
@@ -8,7 +9,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Scale9"))
 {
 	initLayout();
-	m_list->setFileter("scale9");
+	m_list->setFileter(FILE_TAG);
 }
 
 bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const

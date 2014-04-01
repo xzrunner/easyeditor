@@ -197,6 +197,10 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\libanim\config.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libanim\Sprite.cpp"
 				>
 			</File>

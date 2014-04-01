@@ -213,6 +213,10 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\libscale9\config.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libscale9\Sprite.cpp"
 				>
 			</File>

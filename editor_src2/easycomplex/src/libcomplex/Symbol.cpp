@@ -1,5 +1,6 @@
 #include "Symbol.h"
 #include "Sprite.h"
+#include "config.h"
 
 #include <queue>
 
@@ -11,7 +12,7 @@ const float Symbol::SCALE = 0.15f;
 Symbol::Symbol()
 {
 	static int id = 0;
-	m_name = wxT("complex") + wxVariant(id++);
+	m_name = FILE_TAG + wxVariant(id++);
 
 	m_clipbox.xMin = m_clipbox.xMax = m_clipbox.yMin = m_clipbox.yMax = 0;
 }

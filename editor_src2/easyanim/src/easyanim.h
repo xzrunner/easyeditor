@@ -1,5 +1,6 @@
 #pragma once
 
+#include "libanim/config.h"
 //#include "libanim/PreviewCanvas.h"
 #include "libanim/PreviewDialog.h"
 #include "libanim/Tools.h"
