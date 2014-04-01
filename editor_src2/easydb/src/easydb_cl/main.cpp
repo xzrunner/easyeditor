@@ -138,15 +138,15 @@ int main(int argc, char *argv[])
 			return 1;
 		}
 
- 		//edb::DFFParser parser(argv[2]);
- 		//parser.outputImageFast(512, 256);
-
  		edb::DFFParser parser(argv[2]);
-  		int edge = 8;
-  		for (int i = 0; i < 8; ++i) {
-  			parser.outputImageFast(edge, edge);
-  			edge = edge << 1;
-  		}
+ 		parser.outputImageFast(23, 25);
+
+//  		edb::DFFParser parser(argv[2]);
+//   		int edge = 8;
+//   		for (int i = 0; i < 8; ++i) {
+//   			parser.outputImageFast(edge, edge);
+//   			edge = edge << 1;
+//   		}
 	}
 
 	return 0;

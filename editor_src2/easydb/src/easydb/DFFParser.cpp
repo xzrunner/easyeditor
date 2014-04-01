@@ -140,33 +140,105 @@ void DFFParser::outputImageFast(int width, int height)
 	uint8_t* pixels = new uint8_t[size];
 	memset(&pixels[0], 0, size);
 
-	fillingAlpha(pixels, width, height);
+	fillingAlphaNew(pixels, width, height);
 
 	std::string filepath = m_dir + "_" + wxString::FromDouble(width) + "_" + wxString::FromDouble(height);
 	d2d::ImageSaver::storeToFile(pixels, width, height, filepath, d2d::ImageSaver::e_png);
 	delete[] pixels;
 }
 
+void DFFParser::fillingAlphaNew(uint8_t* pixels, int width, int height) const
+{
+	float cross[EDGE][EDGE][3];
+
+	int ptr = 0;
+	for (int j = 0; j < EDGE; ++j) {
+		for (int i = 0; i < EDGE; ++i) {
+			float x = (i + 0.5f) * width / EDGE;
+			float y = (j + 0.5f) * height / EDGE;
+			float alpha = m_alphas[ptr++];
+			cross[j][i][0] = x;
+			cross[j][i][1] = y;
+			cross[j][i][2] = alpha;
+		}
+	}
+
+	for (int j = 0; j < EDGE-1; ++j) {
+		for (int i = 0; i < EDGE-1; ++i) {
+			float left = cross[j][i][0];
+			float right = cross[j][i+1][0];
+			float top = cross[j][i][1];
+			float bottom = cross[j+1][i][1];
+
+			float left_top = cross[j][i][2];
+			float left_bottom = cross[j+1][i][2];
+			float right_top = cross[j][i+1][2];
+			float right_bottom = cross[j+1][i+1][2];
+
+			int ileft = std::ceil(left);
+			int iright = std::ceil(right);
+			int itop = std::ceil(top);
+			int ibottom = std::ceil(bottom);
+			if (i == 0) {
+				ileft = 0;
+			} else if (i == EDGE - 2) {
+				iright = width;
+			}
+			if (j == 0) {
+				itop = 0;
+			} else if (j == EDGE - 2) {
+				ibottom = height;
+			}
+			for (int j = itop; j < ibottom; ++j) {
+				for (int i = ileft; i < iright; ++i) {
+					float xfactor;
+					if (i < left) {
+						xfactor = (right-left)/(right-i);
+					} else if (i > right) {
+						xfactor = (right-left)/(i-left);
+					} else {
+						xfactor = (right-i)/(right-left);
+					}
+					float yfactor;
+					if (j < top) {
+						yfactor = (bottom-top)/(bottom-j);
+					} else if (j > bottom) {
+						yfactor = (bottom-top)/(j-top);
+					} else {
+						yfactor = (bottom-j)/(bottom-top);
+					}
+					pixels[(j*width+i)*4+3] = 
+						xfactor*yfactor*left_top +
+						xfactor*(1-yfactor)*left_bottom +
+						(1-xfactor)*(1-yfactor)*right_bottom +
+						(1-xfactor)*yfactor*right_top;
+				}
+			}
+		}
+	}
+}
+
 void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 {
-	int cross[EDGE+2][EDGE+2][3];
+	float cross[EDGE+2][EDGE+2][3];
 
 	// filling cross node
 	int ptr = 0;
 	for (int j = 0; j < EDGE; ++j) {
 		for (int i = 0; i < EDGE; ++i) {
-			int x = (0.5 + i) * width / 32.0f;
-			int y = (0.5 + j) * height / 32.0f;
-			int alpha = m_alphas[ptr++];
+			float x = (i + 0.5f) * width / EDGE;
+			float y = (j + 0.5f) * height / EDGE;
+			float alpha = m_alphas[ptr++];
 
-			int pos = (y * width + x) * 4 + 3;
-			pixels[pos] = alpha;
+// 			int pos = (y * width + x) * 4 + 3;
+// 			pixels[pos] = alpha;
 
 			cross[j+1][i+1][0] = x;
 			cross[j+1][i+1][1] = y;
 			cross[j+1][i+1][2] = alpha;
 		}
 	}
+
 	cross[0][0][0] = cross[0][0][1] = cross[EDGE+1][0][0] = cross[0][EDGE+1][1] = 0;
 	cross[0][EDGE+1][0] = cross[EDGE+1][EDGE+1][0] = width-1;
 	cross[EDGE+1][0][1] = cross[EDGE+1][EDGE+1][1] = height-1;
@@ -189,12 +261,12 @@ void DFFParser::fillingAlpha(uint8_t* pixels, int width, int height) const
 	// horizontal
 	for (int j = 0; j < EDGE; ++j) {
 		for (int i = 0; i < EDGE-1; ++i) {
-			int sx = cross[j+1][i+1][0];
-			int sy = cross[j+1][i+1][1];
-			int sa = cross[j+1][i+1][2];
-			int ex = cross[j+1][i+1+1][0];
-			int ey = cross[j+1][i+1+1][1];
-			int ea = cross[j+1][i+1+1][2];
+			float sx = cross[j+1][i+1][0];
+			float sy = cross[j+1][i+1][1];
+			float sa = cross[j+1][i+1][2];
+			float ex = cross[j+1][i+1+1][0];
+			float ey = cross[j+1][i+1+1][1];
+			float ea = cross[j+1][i+1+1][2];
 			assert(sy == ey);
 			float dalpha = float(ea - sa) / (ex - sx);
 			

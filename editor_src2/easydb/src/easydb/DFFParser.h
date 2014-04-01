@@ -20,6 +20,7 @@ private:
 
 	int getAlpha(int x, int y);
 
+	void fillingAlphaNew(uint8_t* pixels, int width, int height) const;
 	void fillingAlpha(uint8_t* pixels, int width, int height) const;
 
 private:
