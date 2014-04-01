@@ -161,6 +161,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(itr->second[i]);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			frame->insertWithClone(sprite);
+			symbol->release();
 		}
 		layer->insertKeyFrame(frame);
 	}

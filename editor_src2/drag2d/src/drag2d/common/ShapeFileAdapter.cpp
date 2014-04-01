@@ -68,6 +68,7 @@ void ShapeFileAdapter::load(const char* filename)
 			if (type == PolygonShape::e_Color)
 				poly->m_fillingColor = color;
 			else if (type == PolygonShape::e_Texture)
+				// todo release symbol
 				poly->m_fillingTexture = static_cast<ImageSymbol*>(SymbolMgr::Instance()->fetchSymbol(texPath));
 			else
 				continue;

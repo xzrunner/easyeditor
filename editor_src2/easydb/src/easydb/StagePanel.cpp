@@ -45,6 +45,7 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			symbol->release();
 			insertSprite(sprite);
 		}
 	}

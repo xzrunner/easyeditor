@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
 			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
 				|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
 			{
+				// todo release symbol
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 				coceditor::Context::Instance()->symbols.push_back(symbol);
 			}

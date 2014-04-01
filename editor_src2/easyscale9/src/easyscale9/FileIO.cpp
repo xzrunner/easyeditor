@@ -63,6 +63,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	symbol->release();
 
 	sprite->name = value["name"].asString();
 

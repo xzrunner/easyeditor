@@ -310,6 +310,7 @@ void SelectSpritesOP::copyFromSelection()
 			while (!sval.isNull()) {
 				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(sval["filename"].asString());
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+				symbol->release();
 				sprite->load(sval);
 				m_spritesImpl->insertSprite(sprite);
 				m_selection->insert(sprite);

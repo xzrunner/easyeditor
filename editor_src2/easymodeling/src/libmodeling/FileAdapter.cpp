@@ -46,6 +46,7 @@ Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	symbol->release();
 
 	d2d::Vector pos;
 	pos.x = bodyValue["position"]["x"].asDouble();

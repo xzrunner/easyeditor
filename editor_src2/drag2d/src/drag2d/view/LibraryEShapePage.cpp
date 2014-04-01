@@ -33,6 +33,7 @@ void LibraryEShapePage::onAddPress(wxCommandEvent& event)
 		{
 			ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 			m_list->insert(symbol);
+			symbol->release();
 		}
 	}
 }

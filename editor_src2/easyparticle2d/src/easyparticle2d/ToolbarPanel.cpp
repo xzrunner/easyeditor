@@ -38,6 +38,7 @@ void ToolbarPanel::load(std::ifstream& fin)
 		std::string filepath = StringTools::getLine(fin);
 
 		enable(true);
+		// todo release symbol
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 		m_image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
 		if (Context::Instance()->stage->m_particle)
@@ -429,6 +430,7 @@ void ToolbarPanel::onOpenImage(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		enable(true);
+		// todo release symbol
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(dlg.GetPath());
 		m_image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
 		if (Context::Instance()->stage->m_particle)

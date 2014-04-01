@@ -53,6 +53,7 @@ d2d::ISprite* FileIO::loadSprite(const Json::Value& value)
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(
 		value["filepath"].asString());
 	sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	symbol->release();
 
 	sprite->load(value);
 

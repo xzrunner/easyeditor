@@ -53,6 +53,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value)
 	d2d::Vector pos;
 	Context::Instance()->stage->transGridPosToCoords(row, col, pos);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	symbol->release();
 	sprite->translate(pos);
 	return sprite;
 }

@@ -42,7 +42,9 @@ void VerticalImageList::traverse(IVisitor& visitor) const
 
 void VerticalImageList::clear()
 {
-//	for_each(m_items.begin(), m_items.end(), DeletePointerFunctor<ListItem>());
+	for (int i = 0, n = m_items.size(); i < n; ++i) {
+		m_items[i]->release();
+	}
 	m_items.clear();
 	SetItemCount(0);
 	Refresh();
@@ -50,6 +52,7 @@ void VerticalImageList::clear()
 
 void VerticalImageList::insert(ListItem* item)
 {
+	item->retain();
 	m_items.push_back(item);
 	SetItemCount(m_items.size());
 	SetSelection(m_items.size() - 1);
@@ -58,6 +61,7 @@ void VerticalImageList::insert(ListItem* item)
 
 void VerticalImageList::insertFront(ListItem* item)
 {
+	item->retain();
 	m_items.insert(m_items.begin(), item);
 	SetItemCount(m_items.size());
 	SetSelection(0);
@@ -74,7 +78,7 @@ void VerticalImageList::remove(int index)
 	if (index < 0 || index >= m_items.size())
 		return;
 
-	//	delete m_items[index];
+	m_items[index]->release();
 	m_items.erase(m_items.begin() + index);
  	SetItemCount(m_items.size());
 	Refresh();

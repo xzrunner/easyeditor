@@ -167,6 +167,7 @@ Actor* FileIO::loadActor(const Json::Value& actorValue,
 	assert(symbol);
 
 	Actor* actor = new Actor(symbol);
+	symbol->release();
 	actor->load(actorValue);
 	actor->m_isBg = actorValue["isBg"].asBool();
 
@@ -190,6 +191,7 @@ d2d::TextSprite* FileIO::loadText(const Json::Value& textValue)
 	assert(symbol);
 
 	d2d::TextSprite* text = new d2d::TextSprite(symbol);
+	symbol->release();
 	text->load(textValue);
 
 	text->setText(textValue["text"].asString());
@@ -233,6 +235,7 @@ Behavior* FileIO::loadBehavior(const Json::Value& behaviorValue,
 		ChangeImage* changeImage = static_cast<ChangeImage*>
 			(BehaviorFactory::createBehavior(e_ChangeImage, actor));
 		std::string path = behaviorValue["image path"].asString();
+		// todo release symbol
 		d2d::ImageSymbol* symbol = dynamic_cast<d2d::ImageSymbol*>
 			(d2d::SymbolMgr::Instance()->fetchSymbol(path));
 		buffer.push_back(std::make_pair(changeImage, path));

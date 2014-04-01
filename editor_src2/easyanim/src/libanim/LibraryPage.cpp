@@ -50,6 +50,7 @@ void LibraryPage::loadFromJsonFile(const wxString& filename)
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
 	symbol->refresh();
 	m_list->insert(symbol);
+	symbol->release();
 }
 
 void LibraryPage::loadFromLuaFile(const wxString& filename)

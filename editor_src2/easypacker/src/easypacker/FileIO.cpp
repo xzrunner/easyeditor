@@ -24,6 +24,7 @@ void FileIO::load(const char* filename)
 		d2d::TexPackerAdapter::Texture tex = adapter.textures[i];
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(tex.filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		symbol->release();
 
 		d2d::Vector pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;

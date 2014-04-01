@@ -53,6 +53,7 @@ void LibraryShapePage::onAddPress(wxCommandEvent& event)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 			m_list->insert(symbol);
+			symbol->release();
 		}
 	}
 }

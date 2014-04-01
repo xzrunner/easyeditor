@@ -30,6 +30,7 @@ void StagePanel::setImage(const std::string& filepath)
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	if (symbol) {
 		setImage(symbol);
+		symbol->release();
 	}
 }
 

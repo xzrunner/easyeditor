@@ -49,6 +49,7 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	cp->m_max_rotate->SetValue(child.max_rotate);
 	cp->m_startz->SetValue(child.start_z);
 
+	// todo release symbol
 	pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
 	cp->onSetScale(wxScrollEvent());
 	cp->onSetRotate(wxScrollEvent());

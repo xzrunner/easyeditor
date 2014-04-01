@@ -20,7 +20,7 @@ LibraryItem::LibraryItem(const wxString& filename)
 LibraryItem::~LibraryItem()
 {
 	clearUserData(true);
-	delete m_symbol;
+	m_symbol->release();
 }
 
 void LibraryItem::loadFromTextFile(std::ifstream& fin)

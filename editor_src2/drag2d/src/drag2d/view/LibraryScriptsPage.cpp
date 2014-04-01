@@ -34,6 +34,7 @@ namespace d2d
 				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 				symbol->refresh();
 				m_list->insert(symbol);
+				symbol->release();
 			}
 		}
 	}

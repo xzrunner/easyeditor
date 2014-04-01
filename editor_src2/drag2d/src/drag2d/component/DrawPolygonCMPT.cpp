@@ -130,6 +130,7 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 		else
 		{
 			poly->m_fillingType = PolygonShape::e_Texture;
+			// todo release symbol
 			poly->m_fillingTexture = static_cast<ImageSymbol*>(SymbolMgr::Instance()->fetchSymbol(m_filePath));
 		}
 		poly->buildFillingTris();

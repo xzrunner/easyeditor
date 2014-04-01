@@ -68,6 +68,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value,
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	symbol->release();
 	const float x = value["position"]["x"].asDouble(),
 		y = value["position"]["y"].asDouble();
 	sprite->setTransform(d2d::Vector(x, y), 0);
