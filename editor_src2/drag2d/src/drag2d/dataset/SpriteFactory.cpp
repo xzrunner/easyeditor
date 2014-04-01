@@ -21,6 +21,8 @@ namespace d2d
 
 SpriteFactory* SpriteFactory::m_instance = NULL;
 
+SpriteFactory::CallbackMap SpriteFactory::m_creators;
+
 SpriteFactory::SpriteFactory()
 	: m_id(0)
 {
@@ -33,10 +35,11 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 	wxString filepath = symbol->getFilepath();
 	if (filepath.empty())
 	{
-		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(symbol))
-			sprite = new ecomplex::Sprite(s);
-		else if (anim::Symbol* s = dynamic_cast<anim::Symbol*>(symbol))
-			sprite = new anim::Sprite(s);
+		// todo
+// 		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(symbol))
+// 			sprite = new ecomplex::Sprite(s);
+// 		else if (anim::Symbol* s = dynamic_cast<anim::Symbol*>(symbol))
+// 			sprite = new anim::Sprite(s);
 	}
 	else
 	{
@@ -59,14 +62,22 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		}
 		else if (ext == "json")
 		{
-			if (FileNameParser::isType(filepath, FileNameParser::e_shape))
+			size_t s = filepath.find_last_of('_');
+			size_t e = filepath.find_last_of('.');
+			wxString type = filepath.substr(s+1, e-s-1);
+			CallbackMap::iterator itr = m_creators.find(type.ToStdString());
+			if (itr != m_creators.end()) {
+				sprite = (itr->second)(symbol);
+			}
+
+			else if (FileNameParser::isType(filepath, FileNameParser::e_shape))
 				sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
-			else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
-				sprite = new ecomplex::Sprite(static_cast<ecomplex::Symbol*>(symbol));
-			else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
-				sprite = new anim::Sprite(static_cast<anim::Symbol*>(symbol));
-			else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))
-				sprite = new escale9::Sprite(static_cast<escale9::Symbol*>(symbol));
+// 			else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
+// 				sprite = new ecomplex::Sprite(static_cast<ecomplex::Symbol*>(symbol));
+// 			else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
+// 				sprite = new anim::Sprite(static_cast<anim::Symbol*>(symbol));
+// 			else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))
+// 				sprite = new escale9::Sprite(static_cast<escale9::Symbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
 				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
 			else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
@@ -123,6 +134,16 @@ void SpriteFactory::updateBoundings(const ISymbol& symbol)
 		for (size_t i = 0, n = itr->second.size(); i < n; ++i)
 			itr->second[i]->buildBounding();
 	}
+}
+
+void SpriteFactory::RegisterCreator(const std::string& type, CreateCallback cb)
+{
+	m_creators.insert(std::make_pair(type, cb));
+}
+
+void SpriteFactory::UnregisterCreator(const std::string& type)
+{
+	m_creators.erase(type);
 }
 
 SpriteFactory* SpriteFactory::Instance()

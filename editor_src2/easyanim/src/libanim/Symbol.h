@@ -57,6 +57,8 @@ public:
 
 	size_t getMaxFrameIndex() const;
 
+	static d2d::ISymbol* Create() { return new Symbol(); }
+
 protected:
 	virtual void loadResources();
 

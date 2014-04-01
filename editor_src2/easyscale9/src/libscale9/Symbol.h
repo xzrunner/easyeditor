@@ -57,6 +57,8 @@ public:
 
 	Type type() const { return m_type; }
 
+	static d2d::ISymbol* Create() { return new Symbol(); }
+
 protected:
 	virtual void loadResources();
 

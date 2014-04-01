@@ -18,6 +18,10 @@ namespace d2d
 
 		void updateBoundings(const ISymbol& symbol);
 
+		typedef ISprite* (*CreateCallback)(ISymbol*);
+		static void RegisterCreator(const std::string& type, CreateCallback cb);
+		static void UnregisterCreator(const std::string& type);
+
 	public:
 		static SpriteFactory* Instance();
 
@@ -32,6 +36,9 @@ namespace d2d
 
 	private:
 		static SpriteFactory* m_instance;
+
+		typedef std::map<std::string, CreateCallback> CallbackMap;
+		static CallbackMap m_creators;
 
 	}; // SpriteFactory
 }

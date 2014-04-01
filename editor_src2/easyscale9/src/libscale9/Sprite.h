@@ -26,6 +26,10 @@ public:
 	virtual void setSymbol(d2d::ISymbol* symbol);
 	virtual void loadBodyFromFile();
 
+	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
+		return new Sprite(static_cast<Symbol*>(symbol));
+	}
+
 public:
 	float width, height;
 
