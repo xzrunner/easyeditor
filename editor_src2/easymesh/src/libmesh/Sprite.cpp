@@ -23,12 +23,9 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
-//	// todo: not remove from SymbolMgr
-// 	if (m_symbol)
-// 	{
-// 		m_symbol->release();
-// 		m_symbol = NULL;
-// 	}
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 Sprite* Sprite::clone() const
@@ -44,8 +41,13 @@ const Symbol& Sprite::getSymbol() const
 void Sprite::setSymbol(d2d::ISymbol* symbol)
 {
 	Symbol* mesh = dynamic_cast<Symbol*>(symbol);
-	if (mesh) 
+	if (m_symbol != mesh)
 	{
+		if (m_symbol) {
+			m_symbol->release();
+		}
+		symbol->retain();
+
 		m_symbol = mesh;
 		buildBounding();
 	}
