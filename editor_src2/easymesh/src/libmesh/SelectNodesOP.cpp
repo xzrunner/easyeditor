@@ -6,7 +6,7 @@ namespace emesh
 {
 
 SelectNodesOP::SelectNodesOP(StagePanel* stage)
-	: d2d::DrawRectangleOP(stage)
+	: d2d::DrawRectangleOP(stage, false)
 	, m_stage(stage)
 	, m_bDraggable(true)
 {
