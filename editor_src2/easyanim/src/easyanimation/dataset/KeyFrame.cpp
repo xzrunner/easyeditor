@@ -130,8 +130,10 @@ void KeyFrame::clear()
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 			m_layer->m_spriteObserver.remove(m_sprites[i]);
 	}
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		delete m_sprites[i];
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
+	//	delete m_sprites[i];
+		m_sprites[i]->release();
+	}
 	m_sprites.clear();
 }
 
