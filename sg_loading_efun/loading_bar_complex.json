@@ -1,0 +1,64 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "loading_bar_bg_scale9.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.5,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.5,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "loading_bar_anim.json",
+			"multi color" : "",
+			"name" : "bar",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "loading_bar_fg_scale9.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 4.750
+			},
+			"x mirror" : false,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		}
+	]
+}
