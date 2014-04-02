@@ -24,9 +24,10 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->getSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	m_stage->getSprite()->setSymbol(symbol);
 	m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	symbol->release();
 }
 
 void Task::store(const char* filepath) const
@@ -47,6 +48,11 @@ void Task::clear()
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
+}
+
+const d2d::EditPanel* Task::getEditPanel() const 
+{ 
+	return m_stage; 
 }
 
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
