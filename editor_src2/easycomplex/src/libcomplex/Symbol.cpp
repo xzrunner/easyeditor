@@ -91,6 +91,7 @@ void Symbol::loadResources()
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
 		ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 
+		symbol->refresh();
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spriteValue);
 

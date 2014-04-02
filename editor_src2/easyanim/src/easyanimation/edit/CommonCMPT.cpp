@@ -159,6 +159,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(itr->second[i]);
+			symbol->refresh();
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			frame->insertWithClone(sprite);
 			symbol->release();
@@ -172,6 +173,9 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 
 	context->stage->Refresh();
 	context->keysPanel->Refresh();
+
+	d2d::EditPanel* panel = static_cast<d2d::EditPanel*>(context->stage);
+	panel->getCanvas()->resetInitState();
 }
 
 void CommonCMPT::onLoadFromList(wxCommandEvent& event)
