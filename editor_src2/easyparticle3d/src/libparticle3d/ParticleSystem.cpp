@@ -4,11 +4,13 @@ namespace eparticle3d
 {
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
+	: m_recorder(1000)
 {
 	// todo
 }
 
 ParticleSystem::ParticleSystem(unsigned int buffer)
+	: m_recorder(buffer)
 {
 //	delete[] pStart;
 	pLast = pStart = new Particle[buffer];

@@ -160,6 +160,7 @@
 #include "common/scripts.h"
 #include "common/JsonTools.h"
 #include "common/config.h"
+#include "common/PointerPool.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"

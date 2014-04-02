@@ -5,8 +5,12 @@
 namespace eparticle3d
 {
 
-Recorder::Recorder()
+static const int MAX_FRAME = 1024;
+
+Recorder::Recorder(int max_per_frame)
 	: m_curr_frame(NULL)
+	, m_frame_pool(MAX_FRAME)
+	, m_item_pool(MAX_FRAME * max_per_frame)
 {
 }
 
@@ -18,11 +22,15 @@ Recorder::~Recorder()
 void Recorder::AddItem(const std::string& filepath, float x, float y, 
 					   float angle, float scale, const d2d::Colorf& col)
 {
-	if (!m_curr_frame) {
-		m_curr_frame = new Frame();
+	while (!m_curr_frame) {
+		m_curr_frame = m_frame_pool.GetPointer();
+		if (!m_curr_frame) {
+			Clear();
+		}
 	}
 
-	Item* item = new Item;
+	Item* item = m_item_pool.GetPointer();
+	assert(item);
 	item->filepath = filepath;
 	item->x = x;
 	item->y = y;
@@ -42,11 +50,11 @@ void Recorder::FinishFrame()
 
 void Recorder::Clear()
 {
-	for_each(m_frames.begin(), m_frames.end(), DeletePointerFunctor<Frame>());
 	m_frames.clear();
-
-	delete m_curr_frame;
 	m_curr_frame = NULL;
+
+	m_frame_pool.Reset();
+	m_item_pool.Reset();
 }
 
 void Recorder::StoreToAnimFile(const std::string& filepath) const
@@ -86,13 +94,14 @@ void Recorder::StoreToAnimFile(const std::string& filepath) const
 
 Recorder::Frame::~Frame()
 {
-	Clear();
-}
+//	Clear();
 
-void Recorder::Frame::Clear()
-{
-	for_each(items.begin(), items.end(), DeletePointerFunctor<Item>());
 	items.clear();
 }
+
+// void Recorder::Frame::Clear()
+// {
+// 	items.clear();
+// }
 
 }

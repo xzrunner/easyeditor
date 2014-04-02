@@ -1346,6 +1346,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\common\PointerPool.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\common\ResourcesMgr.h"
 				>
 			</File>

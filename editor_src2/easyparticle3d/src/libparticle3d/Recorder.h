@@ -9,7 +9,7 @@ namespace eparticle3d
 class Recorder
 {
 public:
-	Recorder();
+	Recorder(int max_per_frame);
 	~Recorder();
 
 	void AddItem(const std::string& filepath, float x, float y, 
@@ -34,7 +34,7 @@ private:
 	{
 		~Frame();
 
-		void Clear();
+//		void Clear();
 
 		std::vector<Item*> items;
 	};
@@ -43,6 +43,9 @@ private:
 	std::vector<Frame*> m_frames;
 
 	Frame* m_curr_frame;
+
+	d2d::PointerPool<Frame> m_frame_pool;
+	d2d::PointerPool<Item> m_item_pool;
 
 }; // Recorder
 
