@@ -1,6 +1,6 @@
 
 {
-	"name" : "yellow_button",
+	"name" : "m_setting_language",
 	"sprite" : 
 	[
 		
@@ -8,44 +8,14 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "yellow_button_scale9.json",
+			"filepath" : "setting_language_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "background",
+			"name" : "window",
 			"position" : 
 			{
 				"x" : 0.0,
 				"y" : 0.0
 			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"align" : 2,
-			"angle" : 0.0,
-			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "title2_fontblank.json",
-			"font" : "",
-			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 130,
-			"multi color" : "0xffffffff",
-			"name" : "title",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : 0.0
-			},
-			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -55,6 +25,33 @@
 			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : true,
+			"filepath" : "setting_language_item_list_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 140.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -1170.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 180.0,
+	"xmin" : -180.0,
+	"ymax" : 188.0,
+	"ymin" : -236.0
 }
