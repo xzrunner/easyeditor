@@ -2,10 +2,25 @@
 #include "../coceditor/COCCode.h"
 
 #include <iostream>
-#include <drag2d.h>
+
 #include <easybuilder.h>
+#include <easycomplex.h>
+#include <easyanim.h>
+#include <easyscale9.h>
 
 #define CHARACTER
+
+static void InitSymbolCreators() 
+{
+	d2d::SymbolFactory::RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(ecomplex::FILE_TAG, &ecomplex::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &anim::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &anim::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
+}
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +28,8 @@ int main(int argc, char *argv[])
 		std::cerr << "Need Resource Dir & Texture Packer Filepath & Output filepath !" << std::endl;
 		return 1;
 	}
+
+	InitSymbolCreators();
 
 	if (argc > 4)
 	{
