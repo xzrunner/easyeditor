@@ -63,14 +63,16 @@ void Recorder::StoreToAnimFile(const std::string& filepath) const
 	anim::Symbol::Layer* layer = new anim::Symbol::Layer;
 	// symbol->name = ani->export_name;
 	symbol->m_fps = 30;
-	for (int i = 0, n = m_frames.size(); i < n; ++i)
+	// particle 60fps, while anim 30fps
+	for (int i = 0, n = m_frames.size(); i*2 < n; ++i)
 	{
 		anim::Symbol::Frame* frame = new anim::Symbol::Frame;
 		frame->index = i + 1;
 		frame->bClassicTween = false;
-		for (int j = 0, m = m_frames[i]->items.size(); j < m; ++j)
+		Frame* record_frame = m_frames[i*2];
+		for (int j = 0, m = record_frame->items.size(); j < m; ++j)
 		{
-			Item* item = m_frames[i]->items[j];
+			Item* item = record_frame->items[j];
 			d2d::ISprite* sprite = new d2d::NullSprite(
 				new d2d::NullSymbol(item->filepath));
 
