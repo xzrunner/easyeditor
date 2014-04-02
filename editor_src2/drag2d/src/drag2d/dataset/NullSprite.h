@@ -9,6 +9,9 @@ namespace d2d
 	public:
 		NullSprite(ISymbol* symbol) 
 			: m_symbol(symbol) {}
+		~NullSprite() {
+			m_symbol->release();
+		}
 
 		//
 		// IObject interface
