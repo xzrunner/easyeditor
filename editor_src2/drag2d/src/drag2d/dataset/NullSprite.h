@@ -8,9 +8,13 @@ namespace d2d
 	{
 	public:
 		NullSprite(ISymbol* symbol) 
-			: m_symbol(symbol) {}
+			: m_symbol(symbol) {
+				m_symbol->retain();
+		}
 		~NullSprite() {
-			m_symbol->release();
+			if (m_symbol) {
+				m_symbol->release();
+			}
 		}
 
 		//

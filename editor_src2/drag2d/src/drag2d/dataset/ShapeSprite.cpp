@@ -34,7 +34,9 @@ ShapeSprite::ShapeSprite(ShapeSymbol* symbol)
 
 ShapeSprite::~ShapeSprite()
 {
-	m_symbol->retain();
+	if (m_symbol) {
+		m_symbol->retain();
+	}
 }
 
 ShapeSprite* ShapeSprite::clone() const

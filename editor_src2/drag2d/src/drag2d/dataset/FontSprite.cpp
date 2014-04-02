@@ -56,7 +56,9 @@ FontSprite::FontSprite(FontBlankSymbol* symbol)
 
 FontSprite::~FontSprite()
 {
-	m_symbol->release();
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 FontSprite* FontSprite::clone() const

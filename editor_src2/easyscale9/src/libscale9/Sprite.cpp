@@ -29,7 +29,9 @@ Sprite::Sprite(Symbol* symbol)
 
 Sprite::~Sprite()
 {
-	m_symbol->release();
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 Sprite* Sprite::clone() const

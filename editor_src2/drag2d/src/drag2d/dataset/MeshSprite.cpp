@@ -33,7 +33,9 @@ MeshSprite::MeshSprite(MeshSymbol* symbol)
 
 MeshSprite::~MeshSprite()
 {
-	m_symbol->release();
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 MeshSprite* MeshSprite::clone() const

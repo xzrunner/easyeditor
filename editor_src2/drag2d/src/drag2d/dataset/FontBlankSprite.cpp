@@ -17,16 +17,21 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
+	m_symbol->retain();
 }
 
 FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 	: m_symbol(symbol)
 {
+	m_symbol->retain();
 	buildBounding();
 }
 
 FontBlankSprite::~FontBlankSprite()
 {
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 FontBlankSprite* FontBlankSprite::clone() const

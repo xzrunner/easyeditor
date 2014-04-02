@@ -36,7 +36,9 @@ TextSprite::TextSprite(FontSymbol* symbol)
 
 TextSprite::~TextSprite()
 {
-	m_symbol->release();
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 TextSprite* TextSprite::clone() const

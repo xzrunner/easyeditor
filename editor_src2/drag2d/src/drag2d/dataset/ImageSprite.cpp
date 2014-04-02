@@ -35,7 +35,9 @@ ImageSprite::ImageSprite(ImageSymbol* symbol)
 
 ImageSprite::~ImageSprite()
 {
-	m_symbol->release();
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 ImageSprite* ImageSprite::clone() const

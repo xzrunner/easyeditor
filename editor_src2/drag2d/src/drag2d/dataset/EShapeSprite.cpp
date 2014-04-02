@@ -14,6 +14,7 @@ namespace d2d
 {
 
 EShapeSprite::EShapeSprite()
+	: m_symbol(NULL)
 {
 }
 
@@ -33,7 +34,9 @@ EShapeSprite::EShapeSprite(EShapeSymbol* symbol)
 
 EShapeSprite::~EShapeSprite()
 {
-	m_symbol->release();
+	if (m_symbol) {
+		m_symbol->release();
+	}
 }
 
 EShapeSprite* EShapeSprite::clone() const

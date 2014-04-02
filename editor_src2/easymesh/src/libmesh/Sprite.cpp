@@ -18,6 +18,7 @@ Sprite::Sprite(const Sprite& s)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	m_symbol->retain();
 	buildBounding();
 }
 
