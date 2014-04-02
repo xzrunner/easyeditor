@@ -208,6 +208,14 @@
 				RelativePath="..\..\..\src\libparticle3d\FileIO.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Recorder.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\Recorder.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="view"

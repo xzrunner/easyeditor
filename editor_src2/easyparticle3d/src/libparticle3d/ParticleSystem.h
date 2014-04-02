@@ -1,6 +1,8 @@
 #ifndef _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 
+#include "Recorder.h"
+
 #include <drag2d.h>
 
 namespace eparticle3d
@@ -104,6 +106,8 @@ public:
 
 	void reloadTexture() const;
 
+	void StoreRecordAsAnimFile(const std::string& filepath) const;
+
 public:
 	void setCount(int val) { count = val; }
 	void setEmissionTime(int val) { 
@@ -141,6 +145,9 @@ protected:
 
 private:
 	void transCoords(float r, float hori, float vert, float result[3]);
+
+private:
+	Recorder m_recorder;
 
 }; // ParticleSystem
 

@@ -27,6 +27,8 @@ protected:
 private:
 	void clear();
 
+	void onStoreRecord(wxCommandEvent& event);
+
 	void onAddChild(wxCommandEvent& event);
 	void onDelChild(wxCommandEvent& event);
 

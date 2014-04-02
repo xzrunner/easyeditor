@@ -49,6 +49,8 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::draw()
 {
+	m_recorder.FinishFrame();
+
 	vertex vertices[4];
 
 	Particle* p = pStart;
@@ -76,6 +78,8 @@ void ParticleSystem::draw()
 
 		d2d::SpriteDraw::time = p->lifetime - p->life;
 		d2d::SpriteDraw::drawSprite(p->pc->symbol, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
+
+		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), x, y, p->angle, s, multi);
 
 		glPopAttrib();
 		glPopMatrix();
@@ -176,6 +180,8 @@ void ParticleSystem::reset()
 	pLast = pStart;
 	life = lifetime = emission_time;
 	emitCounter = 0;
+
+	m_recorder.Clear();
 }
 
 void ParticleSystem::pause()
@@ -190,6 +196,11 @@ void ParticleSystem::reloadTexture() const
 		ParticleChild* child = children[i];
 		child->symbol->reloadTexture();
 	}
+}
+
+void ParticleSystem::StoreRecordAsAnimFile(const std::string& filepath) const
+{
+	m_recorder.StoreToAnimFile(filepath);
 }
 
 void ParticleSystem::add()
