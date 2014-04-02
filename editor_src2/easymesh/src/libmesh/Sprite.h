@@ -41,6 +41,10 @@ public:
 		return m_symbol ? m_symbol->getImage() : NULL;
 	}
 
+	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
+		return new Sprite(static_cast<Symbol*>(symbol));
+	}
+
 private:
 	Symbol* m_symbol;
 

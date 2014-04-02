@@ -1,5 +1,6 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
+#include "config.h"
 
 namespace emesh
 {
@@ -8,7 +9,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Mesh"))
 {
 	initLayout();
-	m_list->setFileter("mesh");
+	m_list->setFileter(emesh::FILE_TAG);
 }
 
 bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const

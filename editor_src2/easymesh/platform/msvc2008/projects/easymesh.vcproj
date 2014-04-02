@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easymesh"
-	ProjectGUID="{908B8FCC-3F78-4F8B-9663-0A45623442F4}"
+	ProjectGUID="{EAD5B5DF-3249-4935-8351-D4A69C4F1B51}"
 	RootNamespace="easymesh"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib GLee.lib jsond.lib box2dd.lib SOIL.lib freetype250_D.lib"
+				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib GLee.lib jsond.lib Box2D.lib SOIL.lib freetype250_D.lib"
 				OutputFile="..\easymesh\x86\Debug\easymesh.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
@@ -143,7 +143,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib GLee.lib json.lib box2d.lib SOIL.lib freetype250.lib"
+				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib GLee.lib json.lib Box2D.lib SOIL.lib freetype250.lib"
 				OutputFile="..\easymesh\x86\Release\easymesh.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"

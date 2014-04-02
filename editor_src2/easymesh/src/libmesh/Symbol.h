@@ -46,6 +46,8 @@ public:
 	const d2d::Image* getImage() const { return m_image; }
 	d2d::Image* getImage() { return m_image; }
 
+	static d2d::ISymbol* Create() { return new Symbol(); }
+
 protected:
 	virtual void loadResources();
 

@@ -61,8 +61,8 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 // 			symbol = new escale9::Symbol;
 		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
 			symbol = new FontBlankSymbol;
-		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
-			symbol = new emesh::Symbol;
+// 		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
+// 			symbol = new emesh::Symbol;
 	}
 	else if (ext == "lua")
 	{
