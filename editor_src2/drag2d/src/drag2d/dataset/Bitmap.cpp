@@ -7,6 +7,8 @@
 #include "common/config.h"
 #include "common/FileNameParser.h"
 
+#include <gl/gl.h>
+
 namespace d2d
 {
 
@@ -26,6 +28,11 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 #ifdef NOT_LOAD_IMAGE
 	return true;
 #endif
+
+	const GLubyte* test = glGetString(GL_VERSION);
+	if (!test) {
+		return true;
+	}
 
 	m_filename = filepath;
 
