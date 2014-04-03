@@ -953,14 +953,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ShapeSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ShapeSprite.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\TextSprite.cpp"
 					>
 				</File>
@@ -1050,14 +1042,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\ScriptsSymbol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ShapeSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ShapeSymbol.h"
 					>
 				</File>
 				<Filter
@@ -1617,14 +1601,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\LibraryEShapePage.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryShapePage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryShapePage.h"
 						>
 					</File>
 				</Filter>

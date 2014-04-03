@@ -1,6 +1,5 @@
 #include "SymbolFactory.h"
 #include "ImageSymbol.h"
-#include "ShapeSymbol.h"
 #include "EShapeSymbol.h"
 #include "MeshSymbol.h"
 #include "FontSymbol.h"
@@ -36,9 +35,7 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 	}
 	else if (ext == "txt")
 	{
-		if (FileNameParser::isType(filepath, FileNameParser::e_polygon))
-			symbol = new ShapeSymbol;
-		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
+		if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
 			symbol = new MeshSymbol;
 	}
 	else if (ext == "json")

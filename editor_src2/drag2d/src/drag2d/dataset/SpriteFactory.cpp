@@ -4,7 +4,6 @@
 #include "common/FileNameParser.h"
 
 #include "ImageSprite.h"
-#include "ShapeSprite.h"
 #include "EShapeSprite.h"
 #include "MeshSprite.h"
 #include "TextSprite.h"
@@ -55,9 +54,7 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		}
 		else if (ext == "txt")
 		{
-			if (FileNameParser::isType(filepath, FileNameParser::e_polygon))
-				sprite = new ShapeSprite(static_cast<ShapeSymbol*>(symbol));
-			else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
+			if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
 				sprite = new MeshSprite(static_cast<MeshSymbol*>(symbol));
 		}
 		else if (ext == "json")
