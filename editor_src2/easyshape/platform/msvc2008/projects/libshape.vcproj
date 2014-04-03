@@ -170,7 +170,67 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="edit"
+			Name="dataset"
+			>
+			<File
+				RelativePath="..\..\..\src\libshape\config.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshape\Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshape\Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshape\Symbol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshape\Symbol.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="view"
+			>
+			<Filter
+				Name="stage"
+				>
+				<File
+					RelativePath="..\..\..\src\libshape\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\StagePanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="toolbar"
+				>
+				<File
+					RelativePath="..\..\..\src\libshape\ToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\ToolbarPanel.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="frame"
 			>
 			<File
 				RelativePath="..\..\..\src\libshape\MainDialog.cpp"
@@ -178,30 +238,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libshape\MainDialog.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libshape\StageCanvas.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libshape\StageCanvas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libshape\StagePanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libshape\StagePanel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libshape\ToolbarPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libshape\ToolbarPanel.h"
 				>
 			</File>
 		</Filter>
