@@ -15,12 +15,14 @@ protected:
 	virtual void onSettings(wxCommandEvent& event);
 
 private:
+	void onEJPreview(wxCommandEvent& event);
 	void onSetBackground(wxCommandEvent& event);
 
 private:
 	enum
 	{
 		ID_SET_BG = 1100,
+		ID_EJ_PREVIEW,
 	};
 
 private:

@@ -57,6 +57,7 @@ private:
 	void openFile(const wxString& filename);
 
 protected:
+	wxMenu* m_view_menu;
 	wxMenu* m_setting_menu;
 
 	ITask* m_task;
@@ -64,7 +65,7 @@ protected:
 private:
 	enum
 	{
-		ID_EJ_PREVIEW = 1000,
+		ID_VIEWS = 1000,
 		ID_SETTINGS,
 		ID_RECENT_FILES = 1050,
 	};

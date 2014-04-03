@@ -1,14 +1,12 @@
 #include "Frame.h"
-#include "EJPreviewDialog.h"
 #include "SettingsDialog.h"
 
-#include "common/filetools.h"
 #include "common/FileNameTools.h"
 #include "common/Exception.h"
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
 
-#include <easycoco.h>
+#include <wx/filename.h>
 
 namespace d2d
 {
@@ -18,8 +16,6 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(wxID_OPEN, Frame::onOpen)
 	EVT_MENU(wxID_SAVE, Frame::onSave)
 	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
-
-	EVT_MENU(ID_EJ_PREVIEW, Frame::onEJPreview)
 	
 	EVT_MENU(ID_SETTINGS, Frame::onSettings)
 
@@ -168,34 +164,6 @@ void Frame::onOpenRecent5(wxCommandEvent& event)
 	openFile(filename);
 }
 
-void Frame::onEJPreview(wxCommandEvent& event)
-{
-	std::vector<const ISprite*> sprites;
-	m_task->getAllSprite(sprites);
-
-	//////////////////////////////////////////////////////////////////////////
-
-// 		EJPreviewDialog dlg(this, sprites);
-// 		dlg.ShowModal();
-
-	//////////////////////////////////////////////////////////////////////////
-
-	const char* folder = "_tmp_ejoy2d_preview";
-	MkDirRF(folder);
-
-	libcoco::PackLuaFile pack;
-	pack.pack(sprites, folder);
-
-#ifdef _DEBUG
-	wxString cwd = wxFileName::GetCwd();
-	std::string workpath = cwd + "\\..\\..\\..\\..\\..\\editor_bin\\";
-	std::string cmd = workpath + "ejoy2d.exe " + workpath + "ejoy2d\\preview\\play.lua";
-#else
-	std::string cmd = "ejoy2d.exe ejoy2d/preview/play.lua";
-#endif
-	WinExec(cmd.c_str(), /*SW_SHOWMAXIMIZED*/SW_NORMAL);
-}
-
 void Frame::onQuit(wxCommandEvent& event)
 {
 	Close(true);
@@ -221,7 +189,7 @@ void Frame::initMenuBar()
 {
 	wxMenuBar* menuBar = new wxMenuBar;
 	menuBar->Append(initFileBar(), "&File");
-	menuBar->Append(initViewBar(), "&View");
+	menuBar->Append(m_view_menu = initViewBar(), "&View");
 	menuBar->Append(m_setting_menu = initSettingsBar(), "&Settings");
 	SetMenuBar(menuBar);
 }
@@ -244,7 +212,7 @@ wxMenu* Frame::initFileBar()
 wxMenu* Frame::initViewBar()
 {
 	wxMenu* viewMenu = new wxMenu;
-	viewMenu->Append(ID_EJ_PREVIEW, wxT("&EJOY2D\tF5"), wxT("Preview by ejoy2d"));
+//	viewMenu->Append(ID_EJ_PREVIEW, wxT("View"), wxT("View"));
 	return viewMenu;
 }
 
