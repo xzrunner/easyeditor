@@ -49,7 +49,13 @@ const FontBlankSymbol& FontBlankSprite::getSymbol() const
 void FontBlankSprite::setSymbol(ISymbol* symbol)
 {
 	FontBlankSymbol* font = dynamic_cast<FontBlankSymbol*>(symbol);
-	if (font) m_symbol = font;
+	if (m_symbol != symbol && font)
+	{
+		m_symbol->release();
+		symbol->retain();
+
+		m_symbol = font;
+	}
 }
 
 void FontBlankSprite::loadBodyFromFile()
