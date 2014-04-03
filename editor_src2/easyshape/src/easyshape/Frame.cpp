@@ -1,15 +1,12 @@
-
 #include "Frame.h"
-
 #include "Task.h"
-
 #include "Love2dCode.h"
 
 #include <wx/splitter.h>
 
-using namespace eshape;
+#include <easyshape.h>
 
-static const wxString FILE_TAG = wxT("eshape");
+using namespace eshape;
 
 enum MenuID
 {
@@ -42,7 +39,7 @@ void Frame::onNew(wxCommandEvent& event)
 void Frame::onOpen(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_OPEN);
+		wxT("*_") + wxString(FILE_TAG) + wxT(".json"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		m_task->clear();
@@ -64,7 +61,7 @@ void Frame::onSave(wxCommandEvent& event)
 void Frame::onSaveAs(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_SAVE);
+		wxT("*_") + wxString(FILE_TAG) + wxT(".json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");

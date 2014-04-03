@@ -1,5 +1,6 @@
 #include "LibraryPage.h"
 #include "Symbol.h"
+#include "config.h"
 
 namespace libshape
 {
@@ -8,6 +9,7 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: ILibraryPage(parent, wxT("Shape"))
 {
 	initLayout();
+	m_list->setFileter(FILE_TAG);
 }
 
 bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
