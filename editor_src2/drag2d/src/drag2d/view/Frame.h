@@ -38,7 +38,6 @@ private:
 	void onOpenRecent5(wxCommandEvent& event);
 
 	void onEJPreview(wxCommandEvent& event);
-	void onScreenshot(wxCommandEvent& event);
 
 	void onQuit(wxCommandEvent& event);
 
@@ -66,7 +65,6 @@ private:
 	enum
 	{
 		ID_EJ_PREVIEW = 1000,
-		ID_SCREENSHOT,
 		ID_SETTINGS,
 		ID_RECENT_FILES = 1050,
 	};

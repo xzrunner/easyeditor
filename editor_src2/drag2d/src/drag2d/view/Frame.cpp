@@ -20,7 +20,6 @@ BEGIN_EVENT_TABLE(Frame, wxFrame)
 	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
 
 	EVT_MENU(ID_EJ_PREVIEW, Frame::onEJPreview)
-	EVT_MENU(ID_SCREENSHOT, Frame::onScreenshot)
 	
 	EVT_MENU(ID_SETTINGS, Frame::onSettings)
 
@@ -197,70 +196,6 @@ void Frame::onEJPreview(wxCommandEvent& event)
 	WinExec(cmd.c_str(), /*SW_SHOWMAXIMIZED*/SW_NORMAL);
 }
 
-void Frame::onScreenshot(wxCommandEvent& event)
-{
-	wxFileDialog dlg(this, wxT("Save as PNG file"), wxEmptyString, wxEmptyString, 
-		"PNG files (*.png)|*.png", wxFD_SAVE);
-	if (dlg.ShowModal() != wxID_OK) {
-		return;
-	}
-
-	wxString filepath = dlg.GetPath();
-
-	d2d::Rect rect;
-	rect.makeInfinite();
-	std::vector<const ISprite*> sprites;
-	m_task->getAllSprite(sprites);
-	if (sprites.empty()) {
-		return;
-	}
-	for (int i = 0, n = sprites.size(); i < n; ++i)
-	{
-		const ISprite* sprite = sprites[i];
-		love::Matrix t;
-		t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
-			sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
-		
-		float hw = sprite->getSymbol().getSize().xLength() * 0.5f;
-		float hh = sprite->getSymbol().getSize().yLength() * 0.5f;
-
-		Vector pos;
-		pos = Math::transVector(Vector(-hw, -hh), t);
-		rect.combine(pos);
-		pos = Math::transVector(Vector(-hw,  hh), t);
-		rect.combine(pos);
-		pos = Math::transVector(Vector( hw,  hh), t);
-		rect.combine(pos);
-		pos = Math::transVector(Vector( hw, -hh), t);
-		rect.combine(pos);
-	}
-
-	const d2d::EditPanel* stage = m_task->getEditPanel();
-	d2d::Vector lefttop = stage->transPosProjectToScreen(d2d::Vector(rect.xMin, rect.yMax));
-	d2d::Vector rightbottom = stage->transPosProjectToScreen(d2d::Vector(rect.xMax, rect.yMin));
-
-	int x = lefttop.x;
-	int y = lefttop.y;
-	int width = rightbottom.x - x;
-	int height = rightbottom.y - y;
-	if (width <= 0 || height <= 0) {
-		return;
-	}
-
-	size_t size = width*height*4;
-	GLubyte* pixels = new GLubyte[size];
-	if(!pixels) {
-		return;
-	}
-	memset(&pixels[0], 0, size);
-
-	glReadPixels(x, y, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-
-	ImageSaver::storeToFile(pixels, width, height, filepath.ToStdString(), ImageSaver::e_png);
-
-	delete[] pixels;
-}
-
 void Frame::onQuit(wxCommandEvent& event)
 {
 	Close(true);
@@ -310,7 +245,6 @@ wxMenu* Frame::initViewBar()
 {
 	wxMenu* viewMenu = new wxMenu;
 	viewMenu->Append(ID_EJ_PREVIEW, wxT("&EJOY2D\tF5"), wxT("Preview by ejoy2d"));
-	viewMenu->Append(ID_SCREENSHOT, wxT("Screenshot\tCtrl+Shift+c"), wxT("Screenshot"));
 	return viewMenu;
 }
 
