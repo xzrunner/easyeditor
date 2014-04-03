@@ -4,7 +4,6 @@
 #include "common/FileNameParser.h"
 
 #include "ImageSprite.h"
-#include "MeshSprite.h"
 #include "TextSprite.h"
 //#include "FontBlankSprite.h"
 #include "FontSprite.h"
@@ -50,11 +49,6 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		else if (ext == "ttf")
 		{
 			sprite = new TextSprite(static_cast<FontSymbol*>(symbol));
-		}
-		else if (ext == "txt")
-		{
-			if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
-				sprite = new MeshSprite(static_cast<MeshSymbol*>(symbol));
 		}
 		else if (ext == "json")
 		{

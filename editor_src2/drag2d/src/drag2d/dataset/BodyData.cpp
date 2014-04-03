@@ -9,8 +9,6 @@
 #include "common/FileNameParser.h"
 #include "common/PolylineFileAdapter.h"
 #include "common/CircleFileAdapter.h"
-#include "common/EShapeFileAdapter.h"
-#include "dataset/MeshSymbol.h"
 #include "dataset/CircleShape.h"
 #include "dataset/RectShape.h"
 
@@ -60,26 +58,27 @@ bool BodyData::loadFromFile(const wxString& filename)
 	return true;
 }
 
+// todo 去掉MeshSymbol，以后用easymesh的，避免不必要的对easymesh的依赖
 void BodyData::loadFromMeshFile(const wxString& filename)
 {
-	m_type = e_mesh;
+	//m_type = e_mesh;
 
-	MeshSymbol symbol;
-	symbol.loadFromFile(filename);
+	//MeshSymbol symbol;
+	//symbol.loadFromFile(filename);
 
-	const std::vector<Vector>& triangles = symbol.getVertices();
+	//const std::vector<Vector>& triangles = symbol.getVertices();
 
-	size_t size = triangles.size() / 3;
-	m_fixtures.reserve(size);
-	size_t index = 0;
-	for (size_t i = 0; i < size; ++i)
-	{
-		FixtureData* fd = new FixtureData;
-		fd->vertices.push_back(triangles[index++]);
-		fd->vertices.push_back(triangles[index++]);
-		fd->vertices.push_back(triangles[index++]);
-		m_fixtures.push_back(fd);
-	}
+	//size_t size = triangles.size() / 3;
+	//m_fixtures.reserve(size);
+	//size_t index = 0;
+	//for (size_t i = 0; i < size; ++i)
+	//{
+	//	FixtureData* fd = new FixtureData;
+	//	fd->vertices.push_back(triangles[index++]);
+	//	fd->vertices.push_back(triangles[index++]);
+	//	fd->vertices.push_back(triangles[index++]);
+	//	m_fixtures.push_back(fd);
+	//}
 }
 
 void BodyData::loadFromPolygonFile(const wxString& filename)

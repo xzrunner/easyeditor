@@ -937,14 +937,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\MeshSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\MeshSprite.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\TextSprite.cpp"
 					>
 				</File>
@@ -1010,14 +1002,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\ImageSymbol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\MeshSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\MeshSymbol.h"
 					>
 				</File>
 				<File
@@ -1345,23 +1329,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\EShapeFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\EShapeFileAdapter.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\common\IFileAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\MeshFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\MeshFileAdapter.h"
 					>
 				</File>
 				<File
