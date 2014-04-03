@@ -3,7 +3,10 @@
 #include "Context.h"
 #include "ActorInfo.h"
 
-using namespace raiden;
+#include <easyshape.h>
+
+namespace raiden
+{
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: EditPanel(parent, frame)
@@ -86,7 +89,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	d2d::Layer* layer = Context::Instance()->layers->getEditedLayer();
 	if (layer)
 	{
-		if (d2d::EShapeSprite* shape = dynamic_cast<d2d::EShapeSprite*>(sprite))
+		if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(sprite))
 		{
 			const std::vector<d2d::ISprite*>& sprites = layer->getSprites();
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
@@ -132,4 +135,6 @@ void StagePanel::resetPathOffset(d2d::ISymbol* symbol)
 		if (info->symbol == symbol)
 			info->resetOffset();
 	}
+}
+
 }

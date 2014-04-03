@@ -1,9 +1,10 @@
-
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "FileAdapter.h"
+#include "Symbol.h"
 
-using namespace libshape;
+namespace libshape
+{
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::ISymbol* symbol)
 	: EditPanel(parent, frame)
@@ -105,7 +106,7 @@ void StagePanel::storeShapes() const
 		}
 		else
 		{
-			d2d::EShapeSymbol* symbol = static_cast<d2d::EShapeSymbol*>(const_cast<d2d::ISymbol*>(&m_symbol));
+			Symbol* symbol = static_cast<Symbol*>(const_cast<d2d::ISymbol*>(&m_symbol));
 
 			std::vector<d2d::IShape*>& shapes = symbol->shapes;
 
@@ -124,4 +125,6 @@ void StagePanel::storeShapes() const
 			adapter.store(filepath.c_str());
 		}
 	}
+}
+
 }

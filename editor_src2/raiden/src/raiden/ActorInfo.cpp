@@ -1,5 +1,7 @@
 #include "ActorInfo.h"
 
+#include <easyshape.h>
+
 using namespace raiden;
 
 ActorInfo::ActorInfo() 
@@ -11,7 +13,7 @@ ActorInfo::ActorInfo()
 
 void ActorInfo::resetOffset()
 {
-	if (d2d::EShapeSymbol* shape = dynamic_cast<d2d::EShapeSymbol*>(const_cast<d2d::ISymbol*>(symbol)))
+	if (libshape::Symbol* shape = dynamic_cast<libshape::Symbol*>(const_cast<d2d::ISymbol*>(symbol)))
 	{
 		if (shape->shapes.empty())
 			return;

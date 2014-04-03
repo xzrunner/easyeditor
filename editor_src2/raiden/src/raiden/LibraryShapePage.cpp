@@ -61,7 +61,7 @@ void LibraryShapePage::onAddPress(wxCommandEvent& event)
 void LibraryShapePage::onNewBtnPress(wxCommandEvent& event)
 {
 	static int id = 0;
-	d2d::EShapeSymbol* symbol = new d2d::EShapeSymbol;
+	libshape::Symbol* symbol = new libshape::Symbol;
 	symbol->setName("shape"+wxString::FromDouble(id++));
 
 	m_list->insert(symbol);

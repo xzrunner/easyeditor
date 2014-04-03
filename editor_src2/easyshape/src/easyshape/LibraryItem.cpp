@@ -1,13 +1,15 @@
- 
 #include "LibraryItem.h"
 
-using namespace eshape;
+#include <easyshape.h>
+
+namespace eshape
+{
 
 LibraryItem::LibraryItem()
 {
 	static int id = 0;
 
-	m_symbol = new d2d::EShapeSymbol;
+	m_symbol = new libshape::Symbol;
 	m_name = "shape"+wxString::FromDouble(id++);
 	m_bitmap = NULL;
 }
@@ -69,4 +71,6 @@ void LibraryItem::loadResources()
 	m_bitmap = const_cast<d2d::Bitmap*>(m_symbol->getBitmap());
 
 	//	FileIO::loadItemShapes(this);
+}
+
 }

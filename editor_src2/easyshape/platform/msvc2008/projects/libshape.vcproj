@@ -228,6 +228,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="library"
+				>
+				<File
+					RelativePath="..\..\..\src\libshape\LibraryPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\LibraryPage.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"

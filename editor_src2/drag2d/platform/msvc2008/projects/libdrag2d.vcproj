@@ -913,14 +913,6 @@
 				Name="sprite"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\EShapeSprite.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\EShapeSprite.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\FontBlankSprite.cpp"
 					>
 				</File>
@@ -996,14 +988,6 @@
 			<Filter
 				Name="symbol"
 				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\EShapeSymbol.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\EShapeSymbol.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\FontBlankSymbol.cpp"
 					>
@@ -1589,18 +1573,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\LibraryImagePage.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="shape"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryEShapePage.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryEShapePage.h"
 						>
 					</File>
 				</Filter>

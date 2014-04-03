@@ -4,7 +4,6 @@
 #include "common/FileNameParser.h"
 
 #include "ImageSprite.h"
-#include "EShapeSprite.h"
 #include "MeshSprite.h"
 #include "TextSprite.h"
 //#include "FontBlankSprite.h"
@@ -67,8 +66,8 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 				sprite = (itr->second)(symbol);
 			}
 
-			else if (FileNameParser::isType(filepath, FileNameParser::e_shape))
-				sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
+// 			else if (FileNameParser::isType(filepath, FileNameParser::e_shape))
+// 				sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
 // 			else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
 // 				sprite = new ecomplex::Sprite(static_cast<ecomplex::Symbol*>(symbol));
 // 			else if (FileNameParser::isType(filepath, FileNameParser::e_anim))

@@ -1,13 +1,21 @@
 #include "main.h"
 #include "Frame.h"
 
-using namespace raiden;
+#include <easyshape.h>
 
 IMPLEMENT_APP(MyApp)
 
+static void InitSymbolCreators() 
+{
+	d2d::SymbolFactory::RegisterCreator(libshape::FILE_TAG, &libshape::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(libshape::FILE_TAG, &libshape::Sprite::Create);
+}
+
 bool MyApp::OnInit()
 {
-	Frame* frame = new Frame(wxT("Raiden"));
+	InitSymbolCreators();
+
+	raiden::Frame* frame = new raiden::Frame(wxT("Raiden"));
 	frame->Show(true);
 
 	return true;

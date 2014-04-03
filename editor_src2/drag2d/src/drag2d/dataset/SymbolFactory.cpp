@@ -1,6 +1,5 @@
 #include "SymbolFactory.h"
 #include "ImageSymbol.h"
-#include "EShapeSymbol.h"
 #include "MeshSymbol.h"
 #include "FontSymbol.h"
 #include "FontBlankSymbol.h"
@@ -48,8 +47,8 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 			symbol = (itr->second)();
 		}
 
-		else if (FileNameParser::isType(filepath, FileNameParser::e_shape))
-			symbol = new EShapeSymbol;
+// 		else if (FileNameParser::isType(filepath, FileNameParser::e_shape))
+// 			symbol = new EShapeSymbol;
 //  	else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
 // 			symbol = new ecomplex::Symbol;
 // 		else if (FileNameParser::isType(filepath, FileNameParser::e_anim))

@@ -38,6 +38,8 @@ public:
 	//
 	virtual void refresh();
 
+	static d2d::ISymbol* Create() { return new Symbol(); }
+
 private:
 	void loadResources();
 

@@ -113,7 +113,7 @@ void Symbol::loadThumbnail()
 			memDC.DrawLines(size, points);
 			delete points;
 		}
-		else if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape))
+		else if (d2d::PolygonShape* poly = dynamic_cast<d2d::PolygonShape*>(shape))
 		{
 			size_t size = poly->getVertices().size();
 			wxPoint* points = new wxPoint[size];
@@ -125,7 +125,7 @@ void Symbol::loadThumbnail()
 			memDC.DrawPolygon(size, points);
 			delete points;
 		}
-		else if (ChainShape* chain = dynamic_cast<ChainShape*>(shape))
+		else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape))
 		{
 			size_t size = chain->getVertices().size();
 			wxPoint* points = new wxPoint[size];
@@ -137,7 +137,7 @@ void Symbol::loadThumbnail()
 			memDC.DrawLines(size, points);
 			delete points;
 		}
-		else if (RectShape* rect = dynamic_cast<RectShape*>(shape))
+		else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(shape))
 		{
 			memDC.DrawRectangle(
 				rect->m_rect.xMin * SCALE + dx,
@@ -145,7 +145,7 @@ void Symbol::loadThumbnail()
 				rect->m_rect.xLength() * SCALE,
 				rect->m_rect.yLength() * SCALE);
 		}
-		else if (CircleShape* circle = dynamic_cast<CircleShape*>(shape))
+		else if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
 		{
 			memDC.DrawCircle(wxPoint(circle->center.x * SCALE + dx, -circle->center.y * SCALE + dy), 
 				circle->radius * SCALE);
