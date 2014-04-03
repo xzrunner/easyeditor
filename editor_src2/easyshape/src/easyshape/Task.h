@@ -1,43 +1,47 @@
-
-#ifndef ESHAPE_TASK_H
-#define ESHAPE_TASK_H
+#ifndef _ESHAPE_TASK_H_
+#define _ESHAPE_TASK_H_
 
 #include <drag2d.h>
 #include <wx/splitter.h>
 
 namespace eshape
 {
-	class Task
-	{
-	public:
 
-		virtual void loadFromTextFile(const char* filename);
-		virtual void storeToTextFile(const char* filename) const;
+class StagePanel;
 
-		virtual void clear();
+class Task :public d2d::ITask
+{
+public:
+	Task(wxFrame* parent);
+	~Task();
 
-		static Task* create(wxFrame* parent)
-		{
-			return new Task(parent);
-		}
+	virtual void load(const char* filename);
+	virtual void store(const char* filename) const;
 
-	protected:
-		Task(wxFrame* parent);
-		~Task();
+	virtual bool isDirty() const;
 
-		virtual void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-			wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-			wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
+	virtual void clear();
 
-	private:
-		void initLayout();
+	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const {}
 
-	private:
-		wxWindow* m_root;
+	virtual const d2d::EditPanel* getEditPanel() const;
 
-		wxFrame* m_parent;
+private:
+	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
+		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
+		wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
 
-	}; // Task
+	void initLayout();
+
+private:
+	wxWindow* m_root;
+
+	wxFrame* m_parent;
+
+	StagePanel* m_stage;
+
+}; // Task
+
 }
 
-#endif // ESHAPE_TASK_H
+#endif // _ESHAPE_TASK_H_

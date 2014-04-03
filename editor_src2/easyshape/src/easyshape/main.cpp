@@ -1,5 +1,5 @@
 #include "main.h"
-#include "Frame.h"
+#include "Task.h"
 
 #include <easyshape.h>
 
@@ -15,7 +15,9 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	eshape::Frame* frame = new eshape::Frame(wxT("EasyShape"));
+	d2d::Frame* frame = new d2d::Frame("EasyShape", libshape::FILE_TAG);
+	eshape::Task* task = new eshape::Task(frame);
+	frame->setTask(task);
 	frame->Show(true);
 
 	return true;

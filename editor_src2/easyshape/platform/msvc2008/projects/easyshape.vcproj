@@ -193,14 +193,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyshape\Frame.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\Frame.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyshape\main.cpp"
 				>
 			</File>

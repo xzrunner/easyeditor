@@ -1,4 +1,3 @@
-
 #include "Task.h"
 #include "LibraryPanel.h"
 #include "StagePanel.h"
@@ -11,6 +10,7 @@ using namespace eshape;
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
+	, m_stage(NULL)
 {
 	initLayout();
 }
@@ -22,14 +22,19 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::loadFromTextFile(const char* filename)
+void Task::load(const char* filename)
 {
 	FileIO::load(filename);
 }
 
-void Task::storeToTextFile(const char* filename) const
+void Task::store(const char* filename) const
 {
 	FileIO::store(filename);
+}
+
+bool Task::isDirty() const
+{
+	return false;
 }
 
 void Task::clear()
@@ -40,6 +45,11 @@ void Task::clear()
 	context->stage->clear();
 	context->library->Refresh();
 	context->stage->Refresh();
+}
+
+const d2d::EditPanel* Task::getEditPanel() const
+{
+	return m_stage;
 }
 
 void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
@@ -54,7 +64,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 
 	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
-	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
+	stage = context->stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent);
 
 	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter);
 }
