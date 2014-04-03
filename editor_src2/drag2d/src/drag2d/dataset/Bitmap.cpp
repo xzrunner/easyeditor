@@ -51,7 +51,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 			h = std::max(1.0f, rect.yLength());
 
 		d2d::Snapshoot ss(w, h);
-		unsigned char* rgba = ss.outputToMemory(symbol);
+		unsigned char* rgba = ss.outputToMemory(symbol, true);
 		unsigned char* rgb = transRGBA2RGB(rgba, w, h);
 		delete[] rgba;
 

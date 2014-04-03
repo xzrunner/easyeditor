@@ -15,7 +15,7 @@ public:
 	Snapshoot(int width, int height);
 	~Snapshoot();
 
-	unsigned char* outputToMemory(const ISymbol* symbol) const;
+	unsigned char* outputToMemory(const ISymbol* symbol, bool whitebg = false) const;
 
 	void outputToImageFile(const ISymbol* symbol, const std::string& filename) const;
 
@@ -23,7 +23,7 @@ private:
 	void createFBO(int width, int height);
 	void releaseFBO();
 
-	void drawFBO(const ISymbol* symbol) const;
+	void drawFBO(const ISymbol* symbol, bool whitebg = false) const;
 
 	int checkFramebufferStatus() const;
 

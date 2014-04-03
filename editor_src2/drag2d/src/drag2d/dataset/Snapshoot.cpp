@@ -33,9 +33,9 @@ Snapshoot::~Snapshoot()
 	releaseFBO();
 }
 
-unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol) const
+unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg) const
 {
-	drawFBO(symbol);
+	drawFBO(symbol, whitebg);
 
 	int w = symbol->getSize().xLength(),
 		h = symbol->getSize().yLength();
@@ -115,11 +115,15 @@ void Snapshoot::releaseFBO()
 	}
 }
 
-void Snapshoot::drawFBO(const ISymbol* symbol) const
+void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg) const
 {
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 
-	glClearColor(0, 0, 0, 0);
+	if (whitebg) {
+		glClearColor(1, 1, 1, 1);
+	} else {
+		glClearColor(0, 0, 0, 0);
+	}	
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	d2d::Rect rect = symbol->getSize();
