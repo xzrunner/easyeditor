@@ -33,7 +33,7 @@
 			"clip" : false,
 			"filepath" : "rank_item_bg_scale9.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "background",
 			"position" : 
 			{
 				"x" : 0.0,
