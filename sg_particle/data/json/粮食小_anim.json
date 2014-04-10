@@ -1,0 +1,3591 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff0a",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -162.1649475097656,
+								"y" : 940.9846801757813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.445329189300537,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.445329189300537,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 1
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff26",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -157.0168609619141,
+								"y" : 911.9889526367188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.351826667785645,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.351826667785645,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 2
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff43",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -151.8687744140625,
+								"y" : 882.9357910156250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.258324146270752,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.258324146270752,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 3
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff5f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -146.7206726074219,
+								"y" : 853.8250732421875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.164821624755859,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.164821624755859,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 4
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff7b",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -141.5725708007813,
+								"y" : 824.6569213867188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.071319103240967,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.071319103240967,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 5
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff98",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -136.4244842529297,
+								"y" : 795.4312744140625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.977816581726074,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.977816581726074,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff18",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -177.1064910888672,
+								"y" : 820.7628173828125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.380032539367676,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.380032539367676,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 6
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffb4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -131.2763977050781,
+								"y" : 766.1480712890625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.884314060211182,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.884314060211182,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff34",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -169.8776702880859,
+								"y" : 787.9379272460938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.262480020523071,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.262480020523071,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 7
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffd0",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -126.1282958984375,
+								"y" : 736.8074340820313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.790811538696289,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.790811538696289,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff50",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -162.6488189697266,
+								"y" : 755.0554809570313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.144927740097046,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.144927740097046,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 8
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffed",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -120.9802017211914,
+								"y" : 707.4092407226563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.697308778762817,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.697308778762817,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff6d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -155.4199981689453,
+								"y" : 722.1156005859375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.027375459671021,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.027375459671021,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 9
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -115.8321075439453,
+								"y" : 677.953613281250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.603806257247925,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.603806257247925,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff89",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -148.1911621093750,
+								"y" : 689.11816406250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.909822940826416,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.909822940826416,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 10
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -110.6840133666992,
+								"y" : 648.4404907226563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.510303735733032,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.510303735733032,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffa5",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -140.9623107910156,
+								"y" : 656.0632324218750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.792270660400391,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.792270660400391,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 11
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -105.5359191894531,
+								"y" : 618.8698120117188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.416800975799561,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.416800975799561,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffc2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -133.7334747314453,
+								"y" : 622.9508666992188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.674718379974365,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.674718379974365,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 12
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff1b",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 59.60298919677734,
+								"y" : 862.8256225585938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.382423162460327,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.382423162460327,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffde",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -126.5046386718750,
+								"y" : 589.7809448242188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.557165861129761,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.557165861129761,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -100.3878250122070,
+								"y" : 589.241699218750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.323298454284668,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.323298454284668,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 13
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff37",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 57.51165390014648,
+								"y" : 833.3416748046875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.281285524368286,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.281285524368286,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xfffffffa",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -119.2758102416992,
+								"y" : 556.5535888671875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.439613580703735,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.439613580703735,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -95.23973083496094,
+								"y" : 559.5560302734375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.229795694351196,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.229795694351196,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 14
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff54",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 55.42031860351563,
+								"y" : 803.800292968750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.180147886276245,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.180147886276245,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -112.0469741821289,
+								"y" : 523.2686767578125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.322061061859131,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.322061061859131,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -90.09164428710938,
+								"y" : 529.8128662109375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.136293172836304,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.136293172836304,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 15
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff70",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 53.32898712158203,
+								"y" : 774.2012939453125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.079010248184204,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.079010248184204,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -104.8181304931641,
+								"y" : 489.9262390136719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.204508543014526,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.204508543014526,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -84.94355773925781,
+								"y" : 500.0121765136719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.042790412902832,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.042790412902832,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 16
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff8c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 51.23765182495117,
+								"y" : 744.5447998046875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.977872371673584,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.977872371673584,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -97.58930206298828,
+								"y" : 456.5263366699219
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.086956024169922,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.086956024169922,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -79.79546356201172,
+								"y" : 470.1540527343750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.949288010597229,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.949288010597229,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 17
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffa9",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 49.14632034301758,
+								"y" : 714.8308105468750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.876734733581543,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.876734733581543,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff0f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 108.7729034423828,
+								"y" : 620.8186645507813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.405557870864868,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.405557870864868,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff03",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 179.4391021728516,
+								"y" : 570.3219604492188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.458568572998047,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.458568572998047,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -90.36046600341797,
+								"y" : 423.0689392089844
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.969403624534607,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.969403624534607,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -74.64736938476563,
+								"y" : 440.2384033203125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.855785608291626,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.855785608291626,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 18
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffc5",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 47.05498886108398,
+								"y" : 685.0593261718750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.775597095489502,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.775597095489502,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff2b",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 103.7136993408203,
+								"y" : 592.532714843750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.270415544509888,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.270415544509888,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff20",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 169.9949493408203,
+								"y" : 540.8225097656250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.302854537963867,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.302854537963867,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff08",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 113.3781814575195,
+								"y" : 433.4436340332031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.425737142562866,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.425737142562866,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -69.4992675781250,
+								"y" : 410.2652893066406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.762283086776733,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.762283086776733,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -83.13162231445313,
+								"y" : 389.5540466308594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.851851224899292,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.851851224899292,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 19
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffe1",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 44.96365737915039,
+								"y" : 655.2303466796875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.674459457397461,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.674459457397461,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff48",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 98.65449523925781,
+								"y" : 564.1893310546875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.135273456573486,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.135273456573486,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff3c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 160.550781250,
+								"y" : 511.2655639648438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.147140502929688,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.147140502929688,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff24",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 106.2920455932617,
+								"y" : 406.784667968750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.242878437042236,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.242878437042236,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -64.35117340087891,
+								"y" : 380.2346496582031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.668780684471130,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.668780684471130,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -75.90278625488281,
+								"y" : 355.9816589355469
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.734298706054688,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.734298706054688,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 20
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xfffffffe",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 42.87232589721680,
+								"y" : 625.3438720703125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.573321580886841,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.573321580886841,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff64",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 93.59529113769531,
+								"y" : 535.7883911132813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.000131130218506,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.000131130218506,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff58",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 151.1066131591797,
+								"y" : 481.6511230468750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.991426229476929,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.991426229476929,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff41",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 99.20591735839844,
+								"y" : 380.0681457519531
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.060019969940186,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.060019969940186,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -59.20308303833008,
+								"y" : 350.1465454101563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.575278282165527,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.575278282165527,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -68.67395019531250,
+								"y" : 322.3517761230469
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.616746425628662,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.616746425628662,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 21
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 40.78099060058594,
+								"y" : 595.399902343750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.47218394279480,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.47218394279480,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff80",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 88.53608703613281,
+								"y" : 507.3300170898438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.864988803863525,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.864988803863525,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff75",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 141.6624450683594,
+								"y" : 451.9791564941406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.835712194442749,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.835712194442749,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff5d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 92.11978149414063,
+								"y" : 353.2941894531250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.877161502838135,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.877161502838135,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -54.05498886108398,
+								"y" : 320.0008850097656
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.481775760650635,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.481775760650635,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -61.44511413574219,
+								"y" : 288.6643676757813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.499194145202637,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.499194145202637,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 22
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 38.68965530395508,
+								"y" : 565.39843750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.371046066284180,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.371046066284180,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff9d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 83.47688293457031,
+								"y" : 478.8140869140625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.729846715927124,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.729846715927124,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff91",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 132.2182769775391,
+								"y" : 422.2496643066406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.679998159408569,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.679998159408569,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff79",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 85.03365325927734,
+								"y" : 326.4627075195313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.694303035736084,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.694303035736084,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -48.90689086914063,
+								"y" : 289.7976989746094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.388273358345032,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.388273358345032,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -54.21627426147461,
+								"y" : 254.9194946289063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.381641864776611,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.381641864776611,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 23
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 36.59832382202148,
+								"y" : 535.3395385742188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.269908428192139,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.269908428192139,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffb9",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 78.41767883300781,
+								"y" : 450.2406616210938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.594704389572144,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.594704389572144,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffad",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 122.7741165161133,
+								"y" : 392.4627075195313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.524283885955811,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.524283885955811,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffff96",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 77.9475097656250,
+								"y" : 299.573730468750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.511444568634033,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.511444568634033,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -43.75879669189453,
+								"y" : 259.5370483398438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.294770836830139,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.294770836830139,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -46.98744201660156,
+								"y" : 221.1170959472656
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.264089584350586,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.264089584350586,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 24
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 34.50699234008789,
+								"y" : 505.2230224609375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.168770551681519,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.168770551681519,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffd5",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 73.35847473144531,
+								"y" : 421.6097412109375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.459562301635742,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.459562301635742,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffca",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 113.3299484252930,
+								"y" : 362.6182556152344
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.368569850921631,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.368569850921631,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffb2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 70.86137390136719,
+								"y" : 272.6272583007813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.328586101531982,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.328586101531982,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -38.61070632934570,
+								"y" : 229.2189025878906
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.201268434524536,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.201268434524536,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -39.75860595703125,
+								"y" : 187.2571868896484
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.146537423133850,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.146537423133850,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 25
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 32.41565704345703,
+								"y" : 475.0490417480469
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.067632913589478,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.067632913589478,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xfffffff2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 68.29926300048828,
+								"y" : 392.9213256835938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.324419975280762,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.324419975280762,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffe6",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 103.8857803344727,
+								"y" : 332.716308593750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.212855577468872,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.212855577468872,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffce",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 63.77524566650391,
+								"y" : 245.6232757568359
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.145727634429932,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.145727634429932,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -33.46260833740234,
+								"y" : 198.8432464599609
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.107765913009644,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.107765913009644,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -32.52976608276367,
+								"y" : 153.3397979736328
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.028985142707825,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.028985142707825,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 26
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 30.32432746887207,
+								"y" : 444.8175964355469
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.966495037078857,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.966495037078857,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 63.24005889892578,
+								"y" : 364.1754150390625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.189277648925781,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.189277648925781,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 94.44161987304688,
+								"y" : 302.75683593750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.057141542434692,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.057141542434692,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffeb",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 56.68910598754883,
+								"y" : 218.5618133544922
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.962868928909302,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.962868928909302,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -28.31451606750488,
+								"y" : 168.4100799560547
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.014263510704041,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.014263510704041,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -25.30093002319336,
+								"y" : 119.3649139404297
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9114328622817993,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9114328622817993,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 27
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 28.23299407958984,
+								"y" : 414.5286254882813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.865357398986816,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.865357398986816,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 58.18085098266602,
+								"y" : 335.3719787597656
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.054135322570801,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.054135322570801,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 84.99745178222656,
+								"y" : 272.7398986816406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.901427149772644,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.901427149772644,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 49.60296630859375,
+								"y" : 191.4428253173828
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.780010342597961,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.780010342597961,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -23.16642189025879,
+								"y" : 137.919433593750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9207610487937927,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9207610487937927,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -18.07209205627441,
+								"y" : 85.33252716064453
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7938806414604187,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7938806414604187,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 28
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 26.14166069030762,
+								"y" : 384.1821594238281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.764219760894775,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.764219760894775,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 53.12164688110352,
+								"y" : 306.5110778808594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.918992877006531,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.918992877006531,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 75.55329132080078,
+								"y" : 242.6654663085938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.745712876319885,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.745712876319885,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 42.51682662963867,
+								"y" : 164.2663421630859
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.597151637077332,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.597151637077332,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -18.01832771301270,
+								"y" : 107.3712997436523
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8272585868835449,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8272585868835449,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -10.84325599670410,
+								"y" : 51.24264144897461
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6763283610343933,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6763283610343933,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 29
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 24.05032920837402,
+								"y" : 353.7781982421875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.663082242012024,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.663082242012024,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 48.06243896484375,
+								"y" : 277.5926818847656
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.783850550651550,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.783850550651550,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 66.1091308593750,
+								"y" : 212.5335388183594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.589998722076416,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.589998722076416,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 35.43068695068359,
+								"y" : 137.0323791503906
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.414292931556702,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.414292931556702,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -12.87023544311523,
+								"y" : 76.76566314697266
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7337561249732971,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7337561249732971,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.7389952540397644,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.614418268203735,
+								"y" : 17.09525489807129
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5587761402130127,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5587761402130127,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 30
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 21.95899581909180,
+								"y" : 323.3167724609375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.561944603919983,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.561944603919983,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 43.00323104858398,
+								"y" : 248.6168060302734
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.648708224296570,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.648708224296570,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 56.66497039794922,
+								"y" : 182.3441162109375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.434284448623657,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.434284448623657,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 28.34454917907715,
+								"y" : 109.7409057617188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.231434345245361,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.231434345245361,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -7.722141265869141,
+								"y" : 46.10252380371094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6402536630630493,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6402536630630493,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 31
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 19.86766242980957,
+								"y" : 292.7978210449219
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.460807085037231,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.460807085037231,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 37.94402694702148,
+								"y" : 219.5833740234375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.513565897941589,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.513565897941589,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 47.22081375122070,
+								"y" : 152.097167968750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.278570175170898,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.278570175170898,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 21.25841331481934,
+								"y" : 82.39192199707031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.048575639724731,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.048575639724731,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -3.001425266265869,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -2.574047088623047,
+								"y" : 15.38188171386719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5467512011528015,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5467512011528015,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 32
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 17.77632904052734,
+								"y" : 262.2213745117188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.359669446945190,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.359669446945190,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 32.88481903076172,
+								"y" : 190.4924621582031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.378423690795898,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.378423690795898,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 37.77664947509766,
+								"y" : 121.7927322387695
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.122855901718140,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.122855901718140,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 14.17227554321289,
+								"y" : 54.98544692993164
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8657169938087463,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8657169938087463,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 33
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 15.68499660491943,
+								"y" : 231.5874328613281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.258531928062439,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.258531928062439,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 27.82561683654785,
+								"y" : 161.3440551757813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.243281602859497,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.243281602859497,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 28.33248710632324,
+								"y" : 91.43080139160156
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9671419262886047,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9671419262886047,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.6147428154945374,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 7.086137294769287,
+								"y" : 27.52147293090820
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6828583478927612,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6828583478927612,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 34
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 13.59366416931152,
+								"y" : 200.8959655761719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.157394289970398,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.157394289970398,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 22.76641464233398,
+								"y" : 132.1381530761719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.108139395713806,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.108139395713806,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 18.88832473754883,
+								"y" : 61.01136398315430
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8114279508590698,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8114279508590698,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 35
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 11.50233173370361,
+								"y" : 170.1470184326172
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.056256771087647,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.056256771087647,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 17.70721244812012,
+								"y" : 102.8747406005859
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9729973673820496,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9729973673820496,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 3.026736021041870,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 9.444162368774414,
+								"y" : 30.53443145751953
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6557139754295349,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6557139754295349,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 36
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 9.410998344421387,
+								"y" : 139.3405609130859
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9551191329956055,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9551191329956055,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 12.64800834655762,
+								"y" : 73.55383300781250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8378552198410034,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8378552198410034,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 37
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 7.319665908813477,
+								"y" : 108.4766159057617
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8539815545082092,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8539815545082092,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 7.588804721832275,
+								"y" : 44.17542266845703
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7027131319046021,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7027131319046021,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 38
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 5.228332996368408,
+								"y" : 77.555175781250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7528439760208130,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7528439760208130,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.233128786087036,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 2.529601812362671,
+								"y" : 14.73951625823975
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5675710439682007,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5675710439682007,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 39
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.136999845504761,
+								"y" : 46.57622909545898
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6517063975334168,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6517063975334168,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 40
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 2.064162969589233,
+							"clip" : false,
+							"filepath" : "202791222811.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 1.045666694641113,
+								"y" : 15.53978347778320
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5505688190460205,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5505688190460205,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 41
+				}
+			],
+			"name" : ""
+		}
+	],
+	"name" : "food_fly_small"
+}

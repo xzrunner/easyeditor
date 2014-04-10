@@ -1,0 +1,7402 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff07",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -135.3684082031250,
+								"y" : 1287.282958984375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.278952360153198,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.278952360153198,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 1
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff1b",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -202.7702178955078,
+								"y" : 1071.476196289063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.228597879409790,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.228597879409790,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff24",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -131.6082000732422,
+								"y" : 1252.531250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.201759338378906,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.201759338378906,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 2
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff37",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -197.2899475097656,
+								"y" : 1043.552368164063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.154851913452148,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.154851913452148,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff40",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -127.8479614257813,
+								"y" : 1217.722167968750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.124566078186035,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.124566078186035,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 3
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff54",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -191.8096618652344,
+								"y" : 1015.570983886719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.081105947494507,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.081105947494507,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff5c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -124.0877380371094,
+								"y" : 1182.855590820313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.047373056411743,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.047373056411743,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 4
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff16",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 21.97088050842285,
+								"y" : 956.2769165039063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.229355335235596,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.229355335235596,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff79",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -120.3275146484375,
+								"y" : 1147.931396484375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.970179796218872,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.970179796218872,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff70",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -186.3293762207031,
+								"y" : 987.53222656250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.007359981536865,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.007359981536865,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 5
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff32",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 21.25052642822266,
+								"y" : 925.7717285156250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.139868259429932,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.139868259429932,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff95",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -116.5672760009766,
+								"y" : 1112.949829101563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.892986774444580,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.892986774444580,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff8c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -180.8491058349609,
+								"y" : 959.4358520507813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.933614253997803,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.933614253997803,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 6
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff4f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 20.53017044067383,
+								"y" : 895.2089233398438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.050381183624268,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.050381183624268,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffb1",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -112.8070449829102,
+								"y" : 1077.910644531250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.815793514251709,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.815793514251709,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffa9",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -175.3688354492188,
+								"y" : 931.2820434570313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.859868288040161,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.859868288040161,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 7
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff6b",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 19.80981636047363,
+								"y" : 864.5886840820313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.960894107818604,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.960894107818604,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffce",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -109.0468063354492,
+								"y" : 1042.814086914063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.738600492477417,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.738600492477417,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffc5",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -169.8885498046875,
+								"y" : 903.0707397460938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.786122322082520,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.786122322082520,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 8
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff18",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -96.30319213867188,
+								"y" : 1061.123779296875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.224919080734253,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.224919080734253,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffea",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -105.2865676879883,
+								"y" : 1007.659912109375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.661407232284546,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.661407232284546,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffe1",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -164.4082794189453,
+								"y" : 874.8019409179688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.712376356124878,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.712376356124878,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff87",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 19.08946418762207,
+								"y" : 833.9109497070313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.871407032012940,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.871407032012940,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 9
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff34",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -93.24595642089844,
+								"y" : 1028.314208984375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.138413667678833,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.138413667678833,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -101.5263519287109,
+								"y" : 972.44824218750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.584213972091675,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.584213972091675,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffffe",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -158.9279937744141,
+								"y" : 846.47558593750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.638630390167236,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.638630390167236,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffa4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 18.36910820007324,
+								"y" : 803.1757202148438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.781919956207275,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.781919956207275,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 10
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff51",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -90.18871307373047,
+								"y" : 995.4470825195313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.051908254623413,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.051908254623413,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -97.76610565185547,
+								"y" : 937.1791381835938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.507020711898804,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.507020711898804,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -153.4477233886719,
+								"y" : 818.0917968750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.564884424209595,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.564884424209595,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff00",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 110.4306488037109,
+								"y" : 986.8068847656250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.299061059951782,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.299061059951782,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffc0",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 17.64875221252441,
+								"y" : 772.3829956054688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.692432880401611,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.692432880401611,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 11
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff6d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -87.13147735595703,
+								"y" : 962.52246093750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.965402841567993,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.965402841567993,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -94.00587463378906,
+								"y" : 901.85253906250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.429827451705933,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.429827451705933,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -147.9674377441406,
+								"y" : 789.6505126953125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.491138458251953,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.491138458251953,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff1c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 106.4150085449219,
+								"y" : 951.6848754882813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.197277069091797,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.197277069091797,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffdc",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 16.92839241027832,
+								"y" : 741.532714843750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.602945804595947,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.602945804595947,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 12
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff89",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -84.07423400878906,
+								"y" : 929.5403442382813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.878897428512573,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.878897428512573,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff0a",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 4.895103454589844,
+								"y" : 555.490722656250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.243856430053711,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.243856430053711,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -142.4871673583984,
+								"y" : 761.1516723632813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.417392492294312,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.417392492294312,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff38",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 102.3993377685547,
+								"y" : 916.505371093750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.095492839813232,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.095492839813232,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffff9",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 16.20803642272949,
+								"y" : 710.6250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.513458490371704,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.513458490371704,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -90.24564361572266,
+								"y" : 866.4683837890625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.352634429931641,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.352634429931641,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 13
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffa6",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -81.01699829101563,
+								"y" : 896.5007324218750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.792392253875732,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.792392253875732,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff27",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 4.630503654479981,
+								"y" : 525.9673461914063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.095540046691895,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.095540046691895,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -137.0068817138672,
+								"y" : 732.5953369140625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.343646526336670,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.343646526336670,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff55",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 98.38369750976563,
+								"y" : 881.2683715820313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.993708848953247,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.993708848953247,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff11",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -153.8969421386719,
+								"y" : 487.982910156250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.200120687484741,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.200120687484741,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -86.48541259765625,
+								"y" : 831.0267944335938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.275441169738770,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.275441169738770,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 15.48767948150635,
+								"y" : 679.6597900390625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.423971414566040,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.423971414566040,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 14
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffc2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -77.95976257324219,
+								"y" : 863.4036865234375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.705886840820313,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.705886840820313,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff43",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 4.365902423858643,
+								"y" : 496.3864135742188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.947223424911499,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.947223424911499,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -131.5266113281250,
+								"y" : 703.98144531250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.269900560379028,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.269900560379028,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff71",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 94.36803436279297,
+								"y" : 845.9738769531250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.891924858093262,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.891924858093262,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff2e",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -144.8441772460938,
+								"y" : 459.7380676269531
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.041290044784546,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.041290044784546,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -82.72516632080078,
+								"y" : 795.5276489257813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.198247909545898,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.198247909545898,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 14.76732254028320,
+								"y" : 648.6370849609375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.334484100341797,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.334484100341797,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 15
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffde",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -74.90252685546875,
+								"y" : 830.2490844726563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.619381427764893,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.619381427764893,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff5f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 4.101303100585938,
+								"y" : 466.7480163574219
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.798906803131104,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.798906803131104,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -126.0463256835938,
+								"y" : 675.3101196289063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.196154594421387,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.196154594421387,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff8d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 90.35237121582031,
+								"y" : 810.6218872070313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.790140867233276,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.790140867233276,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff4a",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -135.7914123535156,
+								"y" : 431.4356994628906
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.882459402084351,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.882459402084351,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -78.96493530273438,
+								"y" : 759.9710693359375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.121054649353027,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.121054649353027,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff18",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.716977596282959,
+								"y" : 588.9488525390625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.174719810485840,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.174719810485840,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 14.04696559906006,
+								"y" : 617.5568237304688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.244997024536133,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.244997024536133,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 16
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffffb",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -71.84529113769531,
+								"y" : 797.0369873046875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.532876014709473,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.532876014709473,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff00",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -60.73479461669922,
+								"y" : 711.8795776367188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.299524307250977,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.299524307250977,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -120.5660552978516,
+								"y" : 646.5812988281250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.122408628463745,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.122408628463745,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffaa",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 86.33672332763672,
+								"y" : 775.2123413085938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.688356637954712,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.688356637954712,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff66",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -126.7386398315430,
+								"y" : 403.0758361816406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.723628759384155,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.723628759384155,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -75.20469665527344,
+								"y" : 724.356933593750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.043861627578735,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.043861627578735,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff11",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -16.94719886779785,
+								"y" : 502.7638244628906
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.196747303009033,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.196747303009033,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 13.32660865783691,
+								"y" : 586.4191284179688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.155509948730469,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.155509948730469,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff34",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.353896617889404,
+								"y" : 557.6168823242188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.030140399932861,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.030140399932861,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff7c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.836702108383179,
+								"y" : 437.0521240234375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.650590419769287,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.650590419769287,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 17
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -68.78805541992188,
+								"y" : 763.7674560546875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.446370363235474,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.446370363235474,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff1c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -58.09415435791016,
+								"y" : 681.5608520507813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.177805662155151,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.177805662155151,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -115.0857849121094,
+								"y" : 617.7949829101563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.048662900924683,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.048662900924683,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffc6",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 82.32106018066406,
+								"y" : 739.7453002929688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.586572647094727,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.586572647094727,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff83",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -117.6858749389648,
+								"y" : 374.6584472656250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.564798355102539,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.564798355102539,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -71.44447326660156,
+								"y" : 688.6853637695313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.966668486595154,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.966668486595154,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff2d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -15.88799858093262,
+								"y" : 471.7723388671875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.028200626373291,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.028200626373291,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 12.60625267028809,
+								"y" : 555.2239379882813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.066022634506226,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.066022634506226,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff51",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.990817546844482,
+								"y" : 526.2274169921875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.885560989379883,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.885560989379883,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff98",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.572102069854736,
+								"y" : 407.2987060546875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.502273797988892,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.502273797988892,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 18
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -65.73081207275391,
+								"y" : 730.4403686523438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.359864950180054,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.359864950180054,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff38",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -55.45351409912109,
+								"y" : 651.1845092773438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.056087255477905,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.056087255477905,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -109.6055068969727,
+								"y" : 588.9511718750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.974916934967041,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.974916934967041,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffe2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 78.30540466308594,
+								"y" : 704.2208251953125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.484788656234741,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.484788656234741,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff9f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -108.6331100463867,
+								"y" : 346.1835327148438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.405967712402344,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.405967712402344,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -67.68422698974609,
+								"y" : 652.9562988281250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.889475464820862,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.889475464820862,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff4a",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -14.82879829406738,
+								"y" : 440.7233581542969
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.859653949737549,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.859653949737549,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 11.88589477539063,
+								"y" : 523.9712524414063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.976535558700562,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.976535558700562,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff6d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.627737045288086,
+								"y" : 494.7804565429688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.740981578826904,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.740981578826904,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffb4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.307502746582031,
+								"y" : 377.4878234863281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.353957176208496,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.353957176208496,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 19
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -62.67356109619141,
+								"y" : 697.0557861328125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.273359537124634,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.273359537124634,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff55",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -52.81287384033203,
+								"y" : 620.7506713867188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.934368848800659,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.934368848800659,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -104.1252365112305,
+								"y" : 560.04980468750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.901171088218689,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.901171088218689,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 74.28974151611328,
+								"y" : 668.6387329101563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.383004426956177,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.383004426956177,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffbb",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -99.58034515380859,
+								"y" : 317.6511230468750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.247137069702148,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.247137069702148,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -63.92398834228516,
+								"y" : 617.1696777343750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.812282323837280,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.812282323837280,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff11",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 62.80734252929688,
+								"y" : 496.0468139648438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.195113420486450,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.195113420486450,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 11.16553783416748,
+								"y" : 492.6610107421875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.887048482894898,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.887048482894898,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff89",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.264656543731690,
+								"y" : 463.2760009765625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.596402168273926,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.596402168273926,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff05",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -75.41494750976563,
+								"y" : 402.2499389648438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.258392095565796,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.258392095565796,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff66",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -13.76959800720215,
+								"y" : 409.6168518066406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.691107273101807,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.691107273101807,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffd1",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.042901754379273,
+								"y" : 347.6194458007813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.205640792846680,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.205640792846680,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 20
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -59.61631011962891,
+								"y" : 663.6137084960938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.186854124069214,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.186854124069214,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff71",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -50.17223358154297,
+								"y" : 590.2593994140625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.812650442123413,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.812650442123413,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -98.64497375488281,
+								"y" : 531.0910034179688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.827425241470337,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.827425241470337,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 70.27409362792969,
+								"y" : 632.9992675781250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.281220197677612,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.281220197677612,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffd8",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -90.5275878906250,
+								"y" : 289.0612487792969
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.088306427001953,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.088306427001953,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -60.16375732421875,
+								"y" : 581.3255615234375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.735089302062988,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.735089302062988,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff2d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 58.88188552856445,
+								"y" : 465.475097656250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.026669025421143,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.026669025421143,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 10.44517993927002,
+								"y" : 461.2933044433594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.797561526298523,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.797561526298523,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffa6",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -4.901576995849609,
+								"y" : 431.7140197753906
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.451822757720947,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.451822757720947,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff22",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -70.02816772460938,
+								"y" : 373.8915405273438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.061364173889160,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.061364173889160,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff82",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -12.71039867401123,
+								"y" : 378.4528198242188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.522560596466065,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.522560596466065,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffed",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 2.778301239013672,
+								"y" : 317.6935729980469
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.057324171066284,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.057324171066284,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 21
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -56.55906295776367,
+								"y" : 630.1140747070313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.100348472595215,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.100348472595215,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff8d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -47.53158950805664,
+								"y" : 559.7105712890625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.690932035446167,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.690932035446167,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -93.16469573974609,
+								"y" : 502.074707031250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.753679394721985,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.753679394721985,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 66.25843811035156,
+								"y" : 597.302246093750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.179436206817627,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.179436206817627,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffff4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -81.47482299804688,
+								"y" : 260.4138488769531
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.929475784301758,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.929475784301758,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -56.40352249145508,
+								"y" : 545.4239501953125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.657896161079407,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.657896161079407,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff4a",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 54.95642852783203,
+								"y" : 434.8459167480469
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.858224391937256,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.858224391937256,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 9.724822998046875,
+								"y" : 429.8680725097656
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.708074450492859,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.708074450492859,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffc2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -4.538498401641846,
+								"y" : 400.0945739746094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.307243347167969,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.307243347167969,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff3e",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -64.64138793945313,
+								"y" : 345.4756469726563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.864336252212524,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.864336252212524,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff9f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -11.65119743347168,
+								"y" : 347.2313232421875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.354014158248901,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.354014158248901,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff17",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.14489746093750,
+								"y" : 338.0315246582031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.097186088562012,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.097186088562012,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 2.513701677322388,
+								"y" : 287.7101440429688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.909007430076599,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.909007430076599,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 22
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -53.50181961059570,
+								"y" : 596.5569458007813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.013843059539795,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.013843059539795,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffaa",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -44.89094924926758,
+								"y" : 529.1042480468750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.569213628768921,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.569213628768921,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -87.68442535400391,
+								"y" : 473.0008850097656
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.679933547973633,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.679933547973633,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 62.24278259277344,
+								"y" : 561.5477294921875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.077651977539063,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.077651977539063,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -72.42206573486328,
+								"y" : 231.7089843750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.770645022392273,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.770645022392273,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -52.64328384399414,
+								"y" : 509.464843750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.580703139305115,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.580703139305115,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff66",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 51.03096771240234,
+								"y" : 404.1592102050781
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.689779758453369,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.689779758453369,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 9.004466056823731,
+								"y" : 398.3853759765625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.618587493896484,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.618587493896484,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffde",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -4.175418376922607,
+								"y" : 368.4176330566406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.162663936614990,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.162663936614990,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff5a",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -59.25460052490234,
+								"y" : 317.0022583007813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.667308330535889,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.667308330535889,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffbb",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -10.59199810028076,
+								"y" : 315.9523315429688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.185467481613159,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.185467481613159,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff33",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.559669971466065,
+								"y" : 306.1111755371094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.849834918975830,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.849834918975830,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 2.249101161956787,
+								"y" : 257.6692199707031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.760690808296204,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.760690808296204,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 23
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -50.44456863403320,
+								"y" : 562.9423217773438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.927337646484375,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.927337646484375,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffc6",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -42.25030136108398,
+								"y" : 498.4404907226563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.447494983673096,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.447494983673096,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -82.20415496826172,
+								"y" : 443.8695373535156
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.606187701225281,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.606187701225281,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 58.22711944580078,
+								"y" : 525.7357788085938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.975867867469788,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.975867867469788,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -63.36930847167969,
+								"y" : 202.9466094970703
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.611814379692078,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.611814379692078,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -48.88305282592773,
+								"y" : 473.44824218750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.503509998321533,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.503509998321533,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff82",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 47.10551071166992,
+								"y" : 373.41503906250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.521335363388062,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.521335363388062,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 8.284109115600586,
+								"y" : 366.8451538085938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.529100537300110,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.529100537300110,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffffb",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.812339067459106,
+								"y" : 336.6831665039063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.018084287643433,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.018084287643433,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff77",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -53.86782073974609,
+								"y" : 288.4713745117188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.470280408859253,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.470280408859253,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffd7",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -9.532798767089844,
+								"y" : 284.6158447265625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.016920804977417,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.016920804977417,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff4f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -4.974441528320313,
+								"y" : 274.1333312988281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.602483987808228,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.602483987808228,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 1.984501004219055,
+								"y" : 227.5708312988281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.612374067306519,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.612374067306519,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 24
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -47.38731765747070,
+								"y" : 529.2702636718750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.840832352638245,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.840832352638245,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffe2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -39.60966110229492,
+								"y" : 467.7192077636719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.325776576995850,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.325776576995850,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -76.7238769531250,
+								"y" : 414.6807250976563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.532441854476929,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.532441854476929,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 54.21145629882813,
+								"y" : 489.86621093750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.874083638191223,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.874083638191223,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -54.31655120849609,
+								"y" : 174.1267242431641
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.452983617782593,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.452983617782593,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -45.12281417846680,
+								"y" : 437.3741455078125
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.426316976547241,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.426316976547241,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff9f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 43.18004989624023,
+								"y" : 342.6133728027344
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.352890729904175,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.352890729904175,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 7.563751697540283,
+								"y" : 335.2474670410156
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.439613461494446,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.439613461494446,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.449259281158447,
+								"y" : 304.8912353515625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.873504757881165,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.873504757881165,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff93",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -48.48103332519531,
+								"y" : 259.8829956054688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.273252487182617,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.273252487182617,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffff4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -8.473598480224609,
+								"y" : 253.2218475341797
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.848373889923096,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.848373889923096,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff6c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -4.389213562011719,
+								"y" : 242.0979614257813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.355133056640625,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.355133056640625,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 1.719901323318481,
+								"y" : 197.4149169921875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.464057445526123,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.464057445526123,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 25
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -44.33007431030273,
+								"y" : 495.5406799316406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.754327058792114,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.754327058792114,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -36.96901702880859,
+								"y" : 436.9404602050781
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.204057931900024,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.204057931900024,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -71.24360656738281,
+								"y" : 385.4344177246094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.458696007728577,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.458696007728577,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 50.19579315185547,
+								"y" : 453.9391784667969
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.772299528121948,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.772299528121948,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -45.26379394531250,
+								"y" : 145.2493591308594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.294152855873108,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.294152855873108,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -41.36258316040039,
+								"y" : 401.2425537109375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.349123835563660,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.349123835563660,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffbb",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 39.25459289550781,
+								"y" : 311.7541809082031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.184446334838867,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.184446334838867,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 6.843394279479981,
+								"y" : 303.5922546386719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.350126504898071,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.350126504898071,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.086180210113525,
+								"y" : 273.0418090820313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.728925108909607,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.728925108909607,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffaf",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -43.09425354003906,
+								"y" : 231.2371368408203
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.076224565505981,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.076224565505981,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -7.414398670196533,
+								"y" : 221.7703552246094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.679827094078064,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.679827094078064,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff88",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.803985595703125,
+								"y" : 210.0050964355469
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.107782125473023,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.107782125473023,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 1.455300927162170,
+								"y" : 167.2015075683594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.315740823745728,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.315740823745728,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 26
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -41.27282333374023,
+								"y" : 461.7536315917969
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.667821764945984,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.667821764945984,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -34.32837295532227,
+								"y" : 406.1041564941406
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.082339525222778,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.082339525222778,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -65.76332855224609,
+								"y" : 356.1306152343750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.384950160980225,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.384950160980225,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 46.18012237548828,
+								"y" : 417.9546508789063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.670515537261963,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.670515537261963,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -36.21103668212891,
+								"y" : 116.3144912719727
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.135322213172913,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.135322213172913,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.60234451293945,
+								"y" : 365.0534667968750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.271930813789368,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.271930813789368,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffd7",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 35.32913208007813,
+								"y" : 280.8374938964844
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.016001701354981,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.016001701354981,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 6.123036384582520,
+								"y" : 271.8795776367188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.260639548301697,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.260639548301697,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -2.723100662231445,
+								"y" : 241.1348724365234
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.584345579147339,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.584345579147339,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffcc",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -37.70746994018555,
+								"y" : 202.5337371826172
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.879196643829346,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.879196643829346,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.355199337005615,
+								"y" : 190.2613677978516
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.511280298233032,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.511280298233032,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffa4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.218757390975952,
+								"y" : 177.8547515869141
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.860431075096130,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.860431075096130,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 1.190700411796570,
+								"y" : 136.9306030273438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.167424082756043,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.167424082756043,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 27
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -38.2155761718750,
+								"y" : 427.9090576171875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.581316471099854,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.581316471099854,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -31.68773078918457,
+								"y" : 375.2103576660156
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.960620880126953,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.960620880126953,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -60.28305435180664,
+								"y" : 326.7692871093750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.311204314231873,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.311204314231873,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 42.16445922851563,
+								"y" : 381.9126281738281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.568731665611267,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.568731665611267,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff0f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 69.00454711914063,
+								"y" : 316.1822204589844
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 3.144328594207764,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 3.144328594207764,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -33.84210968017578,
+								"y" : 328.8068847656250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.194737672805786,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.194737672805786,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffff4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 31.40367507934570,
+								"y" : 249.8633422851563
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.847557067871094,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.847557067871094,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 5.402679443359375,
+								"y" : 240.1093750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.171152472496033,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.171152472496033,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -2.360020399093628,
+								"y" : 209.1704406738281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.439766049385071,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.439766049385071,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffe8",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -32.32068252563477,
+								"y" : 173.7728424072266
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.682168602943420,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.682168602943420,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.295999050140381,
+								"y" : 158.6949005126953
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.342733502388001,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.342733502388001,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffc1",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -2.633528709411621,
+								"y" : 145.6468963623047
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.613080143928528,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.613080143928528,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.9261004924774170,
+								"y" : 106.6022109985352
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.019107460975647,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.019107460975647,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -27.15827941894531,
+								"y" : 87.32211303710938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9764914512634277,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9764914512634277,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 28
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -35.15832901000977,
+								"y" : 394.0069274902344
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.494811177253723,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.494811177253723,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -29.04708671569824,
+								"y" : 344.2590637207031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.838902354240418,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.838902354240418,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -54.80277252197266,
+								"y" : 297.3504943847656
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.237458467483521,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.237458467483521,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 38.14879226684570,
+								"y" : 345.8131103515625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.466947674751282,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.466947674751282,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff2c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 61.74091339111328,
+								"y" : 283.1442565917969
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.865978240966797,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.865978240966797,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -30.08187103271484,
+								"y" : 292.5028076171875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.117544651031494,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.117544651031494,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 27.47821426391602,
+								"y" : 218.8316802978516
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.679112315177918,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.679112315177918,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 4.682322025299072,
+								"y" : 208.2816619873047
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.081665515899658,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.081665515899658,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -1.996940612792969,
+								"y" : 177.1484832763672
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.295186519622803,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.295186519622803,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -26.93390274047852,
+								"y" : 144.9544525146484
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.485140562057495,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.485140562057495,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -4.236799240112305,
+								"y" : 127.0709228515625
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.174186706542969,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.174186706542969,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffdd",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -2.048300266265869,
+								"y" : 113.3815383911133
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.365729212760925,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.365729212760925,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.6615004539489746,
+								"y" : 76.216308593750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8707910180091858,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8707910180091858,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -18.10552024841309,
+								"y" : 58.27224349975586
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8176608681678772,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8176608681678772,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 29
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -32.10108566284180,
+								"y" : 360.0473022460938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.408305764198303,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.408305764198303,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -26.40644264221191,
+								"y" : 313.2502441406250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.717183828353882,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.717183828353882,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -49.32249832153320,
+								"y" : 267.8742065429688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.163712620735169,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.163712620735169,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 34.13312530517578,
+								"y" : 309.6560974121094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.365163683891296,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.365163683891296,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff48",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 54.47727203369141,
+								"y" : 250.0487976074219
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.587628126144409,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.587628126144409,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -26.32163619995117,
+								"y" : 256.1412048339844
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.040351510047913,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.040351510047913,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 23.55275726318359,
+								"y" : 187.7425231933594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.510667681694031,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.510667681694031,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.961965084075928,
+								"y" : 176.3964538574219
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9921784996986389,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9921784996986389,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -1.633859992027283,
+								"y" : 145.0690307617188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.150606989860535,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.150606989860535,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -21.54712295532227,
+								"y" : 116.0785675048828
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.288112401962280,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.288112401962280,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.177599668502808,
+								"y" : 95.38943481445313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.005639910697937,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.005639910697937,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffff9",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -1.463071346282959,
+								"y" : 81.05869293212891
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.118377923965454,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.118377923965454,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.3969002068042755,
+								"y" : 45.77290725708008
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7224746346473694,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7224746346473694,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -9.052760124206543,
+								"y" : 29.16487121582031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6588304638862610,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6588304638862610,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 30
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -29.04383850097656,
+								"y" : 326.0302124023438
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.321800470352173,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.321800470352173,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -23.76579856872559,
+								"y" : 282.1839599609375
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.595465302467346,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.595465302467346,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -43.84222030639648,
+								"y" : 238.3404235839844
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.089966773986816,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.089966773986816,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 30.11745643615723,
+								"y" : 273.4415893554688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.263379693031311,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.263379693031311,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff64",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 47.21363830566406,
+								"y" : 216.8958435058594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.309277772903442,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.309277772903442,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -22.56140708923340,
+								"y" : 219.7221069335938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9631584882736206,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9631584882736206,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 19.62729835510254,
+								"y" : 156.5958404541016
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.342222929000855,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.342222929000855,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.241607666015625,
+								"y" : 144.4537506103516
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9026914834976196,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9026914834976196,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -1.270779848098755,
+								"y" : 112.9320907592773
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.006027579307556,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.006027579307556,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -16.16034317016602,
+								"y" : 87.14517211914063
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.091084361076355,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.091084361076355,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -2.118399620056152,
+								"y" : 63.65045928955078
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8370931744575501,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8370931744575501,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.8778428435325623,
+								"y" : 48.67833328247070
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8710268139839172,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8710268139839172,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.1323000788688660,
+								"y" : 15.27201080322266
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5741581916809082,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5741581916809082,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 31
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -25.98659324645996,
+								"y" : 291.9555969238281
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.235295176506043,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.235295176506043,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -21.12515640258789,
+								"y" : 251.0601959228516
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.473746657371521,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.473746657371521,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -38.36194229125977,
+								"y" : 208.7490997314453
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.016220927238464,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.016220927238464,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 26.10179519653320,
+								"y" : 237.1695709228516
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.161595702171326,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.161595702171326,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff81",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 39.95000076293945,
+								"y" : 183.6853637695313
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 2.030927419662476,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.030927419662476,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -18.80117034912109,
+								"y" : 183.2454986572266
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8859654068946838,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8859654068946838,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 15.70183753967285,
+								"y" : 125.3916702270508
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.173778295516968,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.173778295516968,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 2.521250247955322,
+								"y" : 112.4535369873047
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8132045269012451,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8132045269012451,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.9076997637748718,
+								"y" : 80.73765563964844
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8614482283592224,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8614482283592224,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -10.77356147766113,
+								"y" : 58.15428543090820
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8940562009811401,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8940562009811401,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -1.059199810028076,
+								"y" : 31.85397911071777
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6685464978218079,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6685464978218079,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.2926143109798431,
+								"y" : 16.24048614501953
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6236755847930908,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6236755847930908,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 32
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -22.92934608459473,
+								"y" : 257.8234863281250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.148789882659912,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.148789882659912,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -18.48451232910156,
+								"y" : 219.878906250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.352028369903565,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.352028369903565,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -32.88166809082031,
+								"y" : 179.1002960205078
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9424750804901123,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9424750804901123,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 22.08613586425781,
+								"y" : 200.8400726318359
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.059811830520630,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.059811830520630,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffff9d",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 32.68636703491211,
+								"y" : 150.4174041748047
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.752577066421509,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.752577066421509,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -15.04093360900879,
+								"y" : 146.7113952636719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8087723255157471,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8087723255157471,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 11.77637672424316,
+								"y" : 94.12999725341797
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.005333662033081,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.005333662033081,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 1.800892949104309,
+								"y" : 80.39582824707031
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7237175107002258,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7237175107002258,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.5446199178695679,
+								"y" : 48.48571395874023
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7168689370155335,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7168689370155335,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.386780738830566,
+								"y" : 29.10589218139648
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6970281004905701,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6970281004905701,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 33
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -19.87210083007813,
+								"y" : 223.6338958740234
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.062284588813782,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.062284588813782,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -15.84386634826660,
+								"y" : 188.640136718750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.230310082435608,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.230310082435608,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -27.40139007568359,
+								"y" : 149.3939819335938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8687292337417603,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8687292337417603,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 18.07047843933106,
+								"y" : 164.4530792236328
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9580278396606445,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9580278396606445,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffb9",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 25.42273330688477,
+								"y" : 117.0919265747070
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.474226713180542,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.474226713180542,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -11.28069877624512,
+								"y" : 110.1197967529297
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7315792441368103,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7315792441368103,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 7.850917816162109,
+								"y" : 62.81082916259766
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8368889093399048,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8368889093399048,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 1.080535769462585,
+								"y" : 48.28062057495117
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6342304944992065,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6342304944992065,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -0.1815399825572968,
+								"y" : 16.17627906799316
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5722896456718445,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5722896456718445,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 34
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -16.81485366821289,
+								"y" : 189.3867950439453
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9757792353630066,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9757792353630066,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -13.20322132110596,
+								"y" : 157.3438568115234
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.108591675758362,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.108591675758362,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -21.92111206054688,
+								"y" : 119.6301879882813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7949833869934082,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7949833869934082,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 14.05481624603272,
+								"y" : 128.0085754394531
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8562438488006592,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8562438488006592,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffd6",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 18.15909385681152,
+								"y" : 83.70896148681641
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.195876479148865,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.195876479148865,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -7.520466804504395,
+								"y" : 73.47069549560547
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6543861627578735,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6543861627578735,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.925458908081055,
+								"y" : 31.43416404724121
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6684443950653076,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6684443950653076,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 0.3601785898208618,
+								"y" : 16.10791587829590
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5447434782981873,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5447434782981873,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 35
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -13.75760650634766,
+								"y" : 155.0822143554688
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8892739415168762,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8892739415168762,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -10.56257629394531,
+								"y" : 125.9900970458984
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9868733286857605,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9868733286857605,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -16.44083213806152,
+								"y" : 89.80889129638672
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7212375402450562,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7212375402450562,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 10.03915500640869,
+								"y" : 91.50656890869141
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7544599175453186,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7544599175453186,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xfffffff2",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 10.89545631408691,
+								"y" : 50.26850128173828
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.9175258278846741,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.9175258278846741,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -3.760233402252197,
+								"y" : 36.76409530639648
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5771930813789368,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5771930813789368,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 36
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -10.70036029815674,
+								"y" : 120.7201156616211
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8027685880661011,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8027685880661011,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -7.921932697296143,
+								"y" : 94.57881927490234
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.8651550412178040,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.8651550412178040,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -10.96055507659912,
+								"y" : 59.93009567260742
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6474916934967041,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6474916934967041,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 6.023492813110352,
+								"y" : 54.94706344604492
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6526759266853333,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6526759266853333,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 3.631818532943726,
+								"y" : 16.77054214477539
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6391752958297730,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6391752958297730,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 37
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -7.643114089965820,
+								"y" : 86.30052185058594
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7162632942199707,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7162632942199707,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.281288146972656,
+								"y" : 63.11004638671875
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.7434366941452026,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.7434366941452026,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -5.480277538299561,
+								"y" : 29.99379730224609
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5737458467483521,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5737458467483521,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : 2.007830858230591,
+								"y" : 18.33006286621094
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5508919954299927,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5508919954299927,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 38
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -4.585868835449219,
+								"y" : 51.82344055175781
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6297580003738403,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6297580003738403,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -2.640644073486328,
+								"y" : 31.58377265930176
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.6217183470726013,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.6217183470726013,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 39
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -1.762782573699951,
+							"clip" : false,
+							"filepath" : "darkelixir.png",
+							"multi color" : "0xffffffff",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -1.528622746467590,
+								"y" : 17.28885459899902
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.5432526469230652,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.5432526469230652,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 40
+				}
+			],
+			"name" : ""
+		}
+	],
+	"name" : "wine_fly_middle"
+}
