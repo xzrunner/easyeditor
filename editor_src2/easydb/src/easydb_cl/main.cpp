@@ -10,6 +10,7 @@
 #include "Snapshoot.h"
 #include "DistanceFieldFont.h"
 #include "DFFParser.h"
+#include "ReverseAnimation.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -87,6 +88,16 @@ int main(int argc, char *argv[])
 		}
 
 		fix(argv[2], argv[3], argv[4]);
+	}
+	else if (cmd == "reverse")
+	{
+		if (argc < 3) {
+			std::cerr << "Params: [dir]!" << std::endl;
+			return 1;
+		}
+
+		std::string dir = argv[2];
+		edb::ReverseAnimation reverse(dir);
 	}
 	else if (cmd == "format")
 	{

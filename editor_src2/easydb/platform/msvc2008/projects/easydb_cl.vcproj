@@ -262,6 +262,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\easydb\ReverseAnimation.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\ReverseAnimation.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easydb\Snapshoot.cpp"
 			>
 		</File>
