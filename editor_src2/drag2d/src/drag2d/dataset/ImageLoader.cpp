@@ -142,7 +142,9 @@ void callback_read(png_structp png, png_bytep data, png_size_t size)
 
 uint8_t* ImageLoader::loadPngByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format)
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	assert(!fin.fail());
 
 	// get length of file:
@@ -310,7 +312,9 @@ uint8_t* ImageLoader::loadPNM(const std::string& filename, int& width, int& heig
 
 uint8_t* ImageLoader::loadPPM(const std::string& filename, int& width, int& height)
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	assert(!fin.fail());
 
 	uint8_t tag0, tag1;
@@ -353,7 +357,9 @@ uint8_t* ImageLoader::loadPPM(const std::string& filename, int& width, int& heig
 
 uint8_t* ImageLoader::loadPGM(const std::string& filename, int& width, int& height)
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
+	std::locale::global(std::locale("C"));
 	assert(!fin.fail());
 
 	uint8_t tag0, tag1;

@@ -8,7 +8,9 @@ void FileSaver::store(const char* filepath, const Symbol& symbol)
 {
 	Json::Value value;
 	Json::Reader reader;
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 

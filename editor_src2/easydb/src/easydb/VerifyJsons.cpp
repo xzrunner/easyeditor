@@ -45,7 +45,9 @@ void VerifyJsons::VerifyExport()
 	{
 		Json::Value value;
 		Json::Reader reader;
+		std::locale::global(std::locale(""));
 		std::ifstream fin(itr->second->filepath.c_str());
+		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 
@@ -61,7 +63,9 @@ void VerifyJsons::VerifyConnection()
 	{
 		Json::Value value;
 		Json::Reader reader;
+		std::locale::global(std::locale(""));
 		std::ifstream fin(_complex_files[i].c_str());
+		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 
@@ -76,7 +80,9 @@ void VerifyJsons::VerifyConnection()
 	{
 		Json::Value value;
 		Json::Reader reader;
+		std::locale::global(std::locale(""));
 		std::ifstream fin(_anim_files[i].c_str());
+		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 

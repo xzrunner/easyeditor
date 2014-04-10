@@ -15,7 +15,9 @@ FileAdapter::~FileAdapter()
 
 void FileAdapter::resolve(const wxString& filepath)
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.fn_str());
+	std::locale::global(std::locale("C"));
 	
 	fin >> m_width >> m_height;
 

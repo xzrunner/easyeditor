@@ -4,7 +4,9 @@ namespace d2d
 {
 	void ScriptsSymbol::loadResources()
 	{
+		std::locale::global(std::locale(""));
 		std::ifstream fin(m_filepath.fn_str());
+		std::locale::global(std::locale("C"));
 		fin.seekg(0, std::ios::end);   
 		m_data.reserve(fin.tellg());
 		fin.seekg(0, std::ios::beg);

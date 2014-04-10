@@ -71,7 +71,9 @@ void FixImages::FixImagePath(const std::string& imgdir, const std::string& animp
 {
 	Json::Value value;
 	Json::Reader reader;
+	std::locale::global(std::locale(""));
 	std::ifstream fin(animpath.c_str());
+	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 

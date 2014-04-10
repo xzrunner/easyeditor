@@ -7,7 +7,9 @@ void FileLoader::load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 

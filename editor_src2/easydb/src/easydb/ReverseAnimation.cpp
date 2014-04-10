@@ -24,7 +24,9 @@ void ReverseAnimation::Trigger(const std::string& dir) const
 		{
 			Json::Value value;
 			Json::Reader reader;
+			std::locale::global(std::locale(""));
 			std::ifstream fin(filepath.fn_str());
+			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();
 

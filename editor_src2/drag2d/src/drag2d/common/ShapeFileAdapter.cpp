@@ -21,7 +21,9 @@ void ShapeFileAdapter::load(const char* filename)
 	if (filepathFixed == wxEmptyString)
 		return;
 
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filepathFixed.fn_str());
+	std::locale::global(std::locale("C"));
 
 	wxString colorStr = StringTools::getLine(fin);
 	m_color.FromString(colorStr);

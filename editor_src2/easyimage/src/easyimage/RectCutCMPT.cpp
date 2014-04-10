@@ -49,7 +49,9 @@ void RectCutCMPT::onLoadEditOP(wxCommandEvent& event)
 		wxString filename = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILTER, "json");
 		Json::Value value;
 		Json::Reader reader;
+		std::locale::global(std::locale(""));
 		std::ifstream fin(filename.fn_str());
+		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 

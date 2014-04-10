@@ -196,7 +196,9 @@ void EditPanel::loadHistoryList(const std::string& filepath, const std::vector<I
 
 	Json::Value value;
 	Json::Reader reader;
+	std::locale::global(std::locale(""));
 	std::ifstream fin(path.c_str());
+	std::locale::global(std::locale("C"));
 	if (fin.fail()) {
 		return;
 	}

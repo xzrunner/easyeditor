@@ -27,7 +27,9 @@ void Snapshoot::trigger(const std::string& srcdir, const std::string& dstdir)
 		{
 			Json::Value value;
 			Json::Reader reader;
+			std::locale::global(std::locale(""));
 			std::ifstream fin(filepath.fn_str());
+			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();
 

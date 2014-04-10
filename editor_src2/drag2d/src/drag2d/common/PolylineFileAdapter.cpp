@@ -14,7 +14,9 @@ PolylineFileAdapter::PolylineFileAdapter(std::vector<ChainShape*>& chains)
 
 void PolylineFileAdapter::load(const char* filename)
 {
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
 
 	std::string line;
 	getline(fin, line);

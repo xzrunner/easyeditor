@@ -25,7 +25,9 @@ void CopyFiles::CopyByExportNames(const std::set<std::string>& export_names) con
 		{
 			Json::Value value;
 			Json::Reader reader;
+			std::locale::global(std::locale(""));
 			std::ifstream fin(filepath.fn_str());
+			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();
 
@@ -52,7 +54,9 @@ void CopyFiles::GetDependFiles(const wxString& filepath, std::set<std::string>& 
 		Json::Value value;
 		Json::Reader reader;
 		wxString fullpath = d2d::FilenameTools::getAbsolutePath(m_src_dir, filepath);
+		std::locale::global(std::locale(""));
 		std::ifstream fin(fullpath.fn_str());
+		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 
@@ -74,7 +78,9 @@ void CopyFiles::GetDependFiles(const wxString& filepath, std::set<std::string>& 
 		Json::Value value;
 		Json::Reader reader;
 		wxString fullpath = d2d::FilenameTools::getAbsolutePath(m_src_dir, filepath);
+		std::locale::global(std::locale(""));
 		std::ifstream fin(fullpath.fn_str());
+		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
 

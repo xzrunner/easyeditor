@@ -120,7 +120,9 @@ int main(int argc, char *argv[])
 		std::string listfile = argv[4];
 
 		std::set<std::string> names;
+		std::locale::global(std::locale(""));
 		std::ifstream fin(listfile.c_str());
+		std::locale::global(std::locale("C"));
 		if (fin.fail()) {
 			std::cerr << "Can't open file " << listfile << std::endl;
 			return 1;

@@ -37,7 +37,9 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 {
 	Json::Value val;
 	Json::Reader reader;
+	std::locale::global(std::locale(""));
 	std::ifstream fin(filepath.fn_str());
+	std::locale::global(std::locale("C"));
 	reader.parse(fin, val);
 	fin.close();
 
@@ -123,7 +125,9 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 
 				Json::Value value;
 				Json::Reader reader;
+				std::locale::global(std::locale(""));
 				std::ifstream fin(filepath.fn_str());
+				std::locale::global(std::locale("C"));
 				reader.parse(fin, value);
 				fin.close();
 
