@@ -53,7 +53,7 @@ namespace ecomplex
 			if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(sprite))
 			{
 				d2d::SpriteDraw::begin(sprite);
-				anim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
+				anim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame, anim->multiCol, anim->addCol);
 				d2d::SpriteDraw::end(sprite);
 			}
 			else
