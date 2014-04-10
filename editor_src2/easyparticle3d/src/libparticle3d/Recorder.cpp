@@ -24,8 +24,11 @@ void Recorder::AddItem(const std::string& filepath, float x, float y,
 {
 	while (!m_curr_frame) {
 		m_curr_frame = m_frame_pool.GetPointer();
+//		assert(m_curr_frame);
 		if (!m_curr_frame) {
 			Clear();
+		} else {
+			m_curr_frame->items.clear();
 		}
 	}
 
@@ -65,11 +68,13 @@ void Recorder::StoreToAnimFile(const std::string& filepath) const
 	symbol->m_fps = 30;
 	// particle 60fps, while anim 30fps
 	for (int i = 0, n = m_frames.size(); i*2 < n; ++i)
+//	for (int i = 0, n = m_frames.size(); i < n; ++i)
 	{
 		anim::Symbol::Frame* frame = new anim::Symbol::Frame;
 		frame->index = i + 1;
 		frame->bClassicTween = false;
 		Frame* record_frame = m_frames[i*2];
+//		Frame* record_frame = m_frames[i];
 		for (int j = 0, m = record_frame->items.size(); j < m; ++j)
 		{
 			Item* item = record_frame->items[j];
