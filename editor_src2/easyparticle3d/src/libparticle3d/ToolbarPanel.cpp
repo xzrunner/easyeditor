@@ -221,7 +221,7 @@ wxSizer* ToolbarPanel::initLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
 
-			m_min_spd = new wxSlider(this, wxID_ANY, MIN_SPD, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			m_min_spd = new wxSlider(this, wxID_ANY, MIN_SPD, 0, 9000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
 			Connect(m_min_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetSpeed));
 			sizer->Add(m_min_spd);
 
@@ -231,7 +231,7 @@ wxSizer* ToolbarPanel::initLayout()
 			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
 
-			m_max_spd = new wxSlider(this, wxID_ANY, MAX_SPD, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			m_max_spd = new wxSlider(this, wxID_ANY, MAX_SPD, 0, 9000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
 			Connect(m_max_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetSpeed));
 			sizer->Add(m_max_spd);
 
