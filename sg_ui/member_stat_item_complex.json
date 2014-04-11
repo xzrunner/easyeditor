@@ -1,6 +1,6 @@
 
 {
-	"name" : "ranking_momo_window",
+	"name" : "",
 	"sprite" : 
 	[
 		
@@ -8,9 +8,9 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "rank_window_bg_scale9.json",
+			"filepath" : "bg_gray_800_150_scale9.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "_sprite522",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -19,49 +19,33 @@
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.50,
+			"x scale" : 0.4749999940395355,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 0.50,
+			"y scale" : 0.8666666746139526,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "rank_window_bg2_scale9.json",
+			"color" : "0xfffeffd9",
+			"filepath" : "guild_name2_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 40,
+			"label_width" : 200,
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "title",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : -27.0
+				"x" : -82.0,
+				"y" : 39.0
 			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "close_button_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "close_button",
-			"position" : 
-			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
-			},
+			"size" : 25,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -75,16 +59,23 @@
 		
 		{
 			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "tab_complex.json",
+			"color" : "0xffffffff",
+			"filepath" : "left_write_16_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"label_height" : 21,
+			"label_width" : 280,
 			"multi color" : "0xffffffff",
-			"name" : "tab1",
+			"name" : "info1",
 			"position" : 
 			{
-				"x" : -231.0,
-				"y" : 276.0
+				"x" : -41.0,
+				"y" : -3.0
 			},
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -98,16 +89,23 @@
 		
 		{
 			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "tab_complex.json",
+			"color" : "0xffffffff",
+			"filepath" : "left_write_16_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"label_height" : 21,
+			"label_width" : 280,
 			"multi color" : "0xffffffff",
-			"name" : "tab2",
+			"name" : "info2",
 			"position" : 
 			{
-				"x" : -53.0,
-				"y" : 276.0
+				"x" : -41.0,
+				"y" : -36.0
 			},
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -121,16 +119,53 @@
 		
 		{
 			"add color" : "0x00000000",
+			"align" : 1,
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "tab_complex.json",
+			"color" : "0xffffffff",
+			"filepath" : "right_write_16_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"label_height" : 21,
+			"label_width" : 80,
 			"multi color" : "0xffffffff",
-			"name" : "tab3",
+			"name" : "value1",
 			"position" : 
 			{
-				"x" : 125.0,
-				"y" : 276.0
+				"x" : 145.0,
+				"y" : -3.0
 			},
+			"size" : 14,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 1,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "right_write_16_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"label_height" : 21,
+			"label_width" : 80,
+			"multi color" : "0xffffffff",
+			"name" : "value2",
+			"position" : 
+			{
+				"x" : 145.0,
+				"y" : -36.0
+			},
+			"size" : 14,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -141,9 +176,5 @@
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
-	],
-	"xmax" : 0.0,
-	"xmin" : 0.0,
-	"ymax" : 0.0,
-	"ymin" : 0.0
+	]
 }

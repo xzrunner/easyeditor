@@ -1,6 +1,6 @@
 
 {
-	"name" : "ranking_momo_window",
+	"name" : "member_view_back",
 	"sprite" : 
 	[
 		
@@ -8,59 +8,13 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "rank_window_bg_scale9.json",
+			"filepath" : "back_button_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "back",
 			"position" : 
 			{
-				"x" : 0.0,
-				"y" : 0.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "rank_window_bg2_scale9.json",
-			"multi color" : "0xffffffff",
-			"name" : "",
-			"position" : 
-			{
-				"x" : 0.0,
-				"y" : -27.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 0.50,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 0.50,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "close_button_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "close_button",
-			"position" : 
-			{
-				"x" : 394.2999877929688,
-				"y" : 297.0
+				"x" : -371.9999389648438,
+				"y" : 289.7448425292969
 			},
 			"tag" : "",
 			"x mirror" : false,
@@ -77,17 +31,40 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "tab_complex.json",
+			"filepath" : "member_view_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "tab1",
+			"name" : "profile",
 			"position" : 
 			{
-				"x" : -231.0,
-				"y" : 276.0
+				"x" : 2.000061035156250,
+				"y" : 178.9312133789063
 			},
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -5.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "member_stat_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item1",
+			"position" : 
+			{
+				"x" : -200.0,
+				"y" : 8.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 16.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
@@ -100,17 +77,17 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "tab_complex.json",
+			"filepath" : "member_stat_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "tab2",
+			"name" : "item2",
 			"position" : 
 			{
-				"x" : -53.0,
-				"y" : 276.0
+				"x" : 212.0,
+				"y" : 8.0
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
+			"x offset" : 16.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
@@ -123,17 +100,40 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "tab_complex.json",
+			"filepath" : "member_stat_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "tab3",
+			"name" : "item3",
 			"position" : 
 			{
-				"x" : 125.0,
-				"y" : 276.0
+				"x" : -200.0,
+				"y" : -130.0
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : 0.0,
+			"x offset" : 16.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "member_stat_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item4",
+			"position" : 
+			{
+				"x" : 212.0,
+				"y" : -130.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 16.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
