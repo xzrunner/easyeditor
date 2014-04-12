@@ -18,6 +18,7 @@ local detail = {
   ["jump"]      = {name = "6293-tongyong-1.PNG",  x=0, y=0 },
   ["langqi"]    = {name = "army_langqi_main.png", x=-1, y=-16 },
   ["fujia"]     = {name = "army_fujia_main.png",  x=0, y=-6 },
+  ["wuzhu"]     = {name = "army_wuzhu_main.png",  x=0, y=0 },
 }
 
 local show_icon_cfg = {
@@ -37,6 +38,7 @@ local show_icon_cfg = {
   {tag = 'jump'},
   {tag = 'langqi'},
   {tag = 'fujia'},
+  {tag = 'wuzhu'},
 }
 
 local troop_cfg = {
@@ -52,6 +54,7 @@ local troop_cfg = {
   {level = 5, tag = 'xueying'},
   {level = 6, tag = 'langqi'},
   {level = 6, tag = 'fujia'},
+  {level = 6, tag = 'wuzhu'},
 }
 
 
@@ -72,6 +75,7 @@ local troop_spell_cfg = {
   {level = 2, tag = 'jump'},
   {level = 6, tag = 'langqi'},
   {level = 6, tag = 'fujia'},
+  {level = 6, tag = 'wuzhu'},
 }
 
 local spell_cfg = {

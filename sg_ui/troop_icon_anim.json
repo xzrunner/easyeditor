@@ -5333,6 +5333,486 @@
 					"id" : 0,
 					"time" : 68,
 					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "army_wuzhu_main.png",
+							"name" : "",
+							"position" :
+							{
+								"x" : 0.000000,
+								"y" : 0.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -70.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 69,
+					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "army_wuzhu_main.png",
+							"name" : "",
+							"position" :
+							{
+								"x" : 0.000000,
+								"y" : 0.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -70.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -42.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 70,
+					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "army_wuzhu_main.png",
+							"name" : "",
+							"position" :
+							{
+								"x" : 0.000000,
+								"y" : 0.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -70.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -42.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -14.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 71,
+					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "army_wuzhu_main.png",
+							"name" : "",
+							"position" :
+							{
+								"x" : 0.000000,
+								"y" : 0.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -70.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -42.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -14.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 14.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 72,
+					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "army_wuzhu_main.png",
+							"name" : "",
+							"position" :
+							{
+								"x" : 0.000000,
+								"y" : 0.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -70.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -42.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -14.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 14.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 42.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 73,
+					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "army_wuzhu_main.png",
+							"name" : "",
+							"position" :
+							{
+								"x" : 0.000000,
+								"y" : 0.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -70.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -42.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": -14.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 14.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 42.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						},
+						{
+							"angle": 0.0,
+							"filepath": "6101-tongyong-1.png",
+							"name": "",
+							"position":
+							{
+								"x": 70.000000,
+								"y": -97.000000
+							},
+							"x mirror" : false,
+							"x scale" : 0.3,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 0.3,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 74,
+					"tween" : false
 				}
 			],
 			"name" : "Layer0"

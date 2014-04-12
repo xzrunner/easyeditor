@@ -600,6 +600,105 @@
 					"skeleton" : null,
 					"time" : 18,
 					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "char_info_wuzhu_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite120",
+							"position" : 
+							{
+								"x" : -35.85591125488281,
+								"y" : 226.3772583007813
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 27.98000335693359,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -103.5099792480469,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 19,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "char_info_xiyu_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite129",
+							"position" : 
+							{
+								"x" : -36.0,
+								"y" : 225.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 35.35000610351563,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -100.3699798583984,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 20,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "char_info_yini_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite140",
+							"position" : 
+							{
+								"x" : -36.17832183837891,
+								"y" : 225.7924499511719
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 35.35000610351563,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -107.2399826049805,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 21,
+					"tween" : false
 				}
 			],
 			"name" : "Layer0"

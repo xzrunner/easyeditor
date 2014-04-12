@@ -389,6 +389,30 @@
 					"id" : 0,
 					"time" : 16,
 					"tween" : false
+				},
+				{
+					"actor" :
+					[
+						{
+							"angle" : 0.0,
+							"filepath" : "army_wuzhu_main.png",
+							"name" : "",
+							"position" :
+							{
+								"x" : 0.000000,
+								"y" : 0.000000
+							},
+							"x mirror" : false,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"time" : 17,
+					"tween" : false
 				}
 			],
 			"name" : "Layer0"
