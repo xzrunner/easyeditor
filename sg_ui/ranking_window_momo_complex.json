@@ -82,7 +82,7 @@
 			"name" : "tab1",
 			"position" : 
 			{
-				"x" : -231.0,
+				"x" : -249.0,
 				"y" : 276.0
 			},
 			"tag" : "",
@@ -105,7 +105,7 @@
 			"name" : "tab2",
 			"position" : 
 			{
-				"x" : -53.0,
+				"x" : -71.0,
 				"y" : 276.0
 			},
 			"tag" : "",
@@ -128,7 +128,30 @@
 			"name" : "tab3",
 			"position" : 
 			{
-				"x" : 125.0,
+				"x" : 107.0,
+				"y" : 276.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "tab_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "tab4",
+			"position" : 
+			{
+				"x" : 284.0,
 				"y" : 276.0
 			},
 			"tag" : "",
