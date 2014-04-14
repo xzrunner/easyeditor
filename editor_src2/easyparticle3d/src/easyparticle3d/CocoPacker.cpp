@@ -90,7 +90,8 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 	s = wxString::FromDouble(val["gravity"].asInt());
 	lua::assign(gen, "['gravity']", s+"*g,");
 
-	s = wxString::FromDouble(val["inertia"].asInt());
+//	s = wxString::FromDouble(val["inertia"].asInt());
+	s = wxString::FromDouble(10);
 	lua::assign(gen, "['inertia']", s+",");
 
 	s = wxString::FromDouble(val["fadeout_time"].asInt());
@@ -151,7 +152,7 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 			s = wxString::FromDouble(child_val["start_z"].asInt());
 			lua::assign(gen, "['start_z']", s+",");
 
-			child_val = child_val["components"][i++];
+			child_val = val["components"][i++];
 		}
 	}	
 }
