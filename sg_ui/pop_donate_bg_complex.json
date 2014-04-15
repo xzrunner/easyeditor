@@ -13,7 +13,7 @@
 			"name" : "",
 			"position" : 
 			{
-				"x" : 63.0,
+				"x" : 128.0,
 				"y" : 0.0
 			},
 			"tag" : "",
@@ -171,7 +171,53 @@
 			"clip" : false,
 			"filepath" : "barrack_slot_item_complex.json",
 			"multi color" : "0xffffffff",
+			"name" : "item_6",
+			"position" : 
+			{
+				"x" : 390.0,
+				"y" : 80.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "0xffffffff",
 			"name" : "item_7",
+			"position" : 
+			{
+				"x" : 520.0,
+				"y" : 80.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_8",
 			"position" : 
 			{
 				"x" : -260.0,
@@ -194,7 +240,7 @@
 			"clip" : false,
 			"filepath" : "barrack_slot_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "item_8",
+			"name" : "item_9",
 			"position" : 
 			{
 				"x" : -130.0,
@@ -217,7 +263,7 @@
 			"clip" : false,
 			"filepath" : "barrack_slot_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "item_9",
+			"name" : "item_10",
 			"position" : 
 			{
 				"x" : 0.0,
@@ -240,7 +286,7 @@
 			"clip" : false,
 			"filepath" : "barrack_slot_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "item_10",
+			"name" : "item_11",
 			"position" : 
 			{
 				"x" : 130.0,
@@ -263,7 +309,7 @@
 			"clip" : false,
 			"filepath" : "barrack_slot_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "item_11",
+			"name" : "item_12",
 			"position" : 
 			{
 				"x" : 260.0,
@@ -289,17 +335,17 @@
 			"name" : "close_button",
 			"position" : 
 			{
-				"x" : 451.0,
+				"x" : 582.0,
 				"y" : 194.0
 			},
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 1.200000047683716,
+			"x scale" : 1.197916626930237,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 1.200000047683716,
+			"y scale" : 1.185567021369934,
 			"y shear" : 0.0
 		},
 		
@@ -309,30 +355,7 @@
 			"clip" : false,
 			"filepath" : "barrack_slot_item_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "item_6",
-			"position" : 
-			{
-				"x" : 390.0,
-				"y" : 80.0
-			},
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.200000047683716,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.200000047683716,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"angle" : 0.0,
-			"clip" : false,
-			"filepath" : "barrack_slot_item_complex.json",
-			"multi color" : "0xffffffff",
-			"name" : "item_12",
+			"name" : "item_13",
 			"position" : 
 			{
 				"x" : 390.0,
