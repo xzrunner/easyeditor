@@ -5,20 +5,31 @@
 	[
 		
 		{
-			"add color" : "",
+			"add color" : "0x00000000",
+			"align" : 2,
 			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff3d3a5a",
 			"filepath" : "fsa_link_fontblank.json",
-			"multi color" : "",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 250,
+			"multi color" : "0xffffffff",
 			"name" : "link",
 			"position" : 
 			{
 				"x" : 1.0,
 				"y" : -71.0
 			},
+			"size" : 22,
+			"tag" : "",
 			"x mirror" : false,
+			"x offset" : 0.0,
 			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
+			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
 		}
