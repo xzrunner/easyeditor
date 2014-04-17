@@ -1,3 +1,15 @@
+# -*- coding:utf-8 -*- 
+README = \
+"usepage:" \
+"pyhton package_ui.py <module>  [target]" \
+"module:" \
+"   -load:  只是生成ui2.ori.lua" \
+"   -pack:  生成png贴图以及lua文件" \
+"target:" \
+"   common: 默认打包目标"\
+"   360: 打包360"\
+"   efun: 打包efun"
+
 
 import sys
 import os
@@ -8,6 +20,10 @@ _abspath = os.path.abspath
 _pjoin = os.path.join
 
 modle = sys.argv[1]
+target = "common"
+if len(sys.argv)>=3:
+    target = sys.argv[2]
+
 
 def _run_cmd(cmd):
     print "_run_cmd -------------::", cmd
@@ -26,13 +42,60 @@ PYTHON = _pjoin(pwd, '..', 'tools', 'Python27', 'python.exe')
 
 tex_json = {}
 
-res = _abspath(_pjoin(pwd, '..', 'sg_ui'))
+
+pack_dir = _abspath(_pjoin(pwd, "../", "sg_ui"))
+base_res = _abspath(_pjoin(pwd, '..', 'sg_ui/common'))
+sub_res_map = {
+    '360' :  _abspath(_pjoin(pwd, '..', 'sg_ui/360')),
+    'efun' : _abspath(_pjoin(pwd, '..', 'sg_ui/efun'))
+}
+
+tmp_pack = _abspath(_pjoin(pwd, "tmp_pack"))
+res = tmp_pack
 
 _mkdir('ui_output')
 png = _pjoin(pwd, 'ui_output', "ui2%d.png")
 tex = _pjoin(pwd, 'ui_output', "ui2%d.json")
 tex2 = _pjoin(pwd, 'ui_output', "ui2")
 out = _pjoin(pwd, 'ui_output', "ui2.ori.lua")
+
+ui2_conver = _pjoin(pwd, "ui_output", "ui2.conver.lua")
+ui2_manual = _pjoin(pwd, "ui_output", "ui2.manual.lua")
+ui2 = _pjoin(pwd, "ui_output", "ui2.lua")
+ep = _pjoin(pwd, "ui_output", "ui2")
+epbin = _pjoin(pwd, "../tools/lua/epbin.lua")
+
+def _rm_tmp_pack_dir():
+    if os.path.exists(tmp_pack):
+        _run_cmd('RD /Q/S "%s"' % tmp_pack)
+
+def _have_file(dir):
+    for file in os.listdir(dir):
+        return True
+    return False
+
+
+def _gen_pack_dir():
+    global res
+    if sub_res_map.has_key(target):
+        target_path = sub_res_map[target]
+        if _have_file(target_path+"\\png"):
+            _mkdir(res)
+            _run_cmd('COPY /Y "%s\\png\\*.png" "%s\\"' % (base_res, res))
+            _run_cmd('COPY /Y "%s\\png\\*.png" "%s\\"' % (target_path, res))
+            return
+    res = base_res + "\\png"
+
+def _gen_jsons_dir():
+    global res
+    if sub_res_map.has_key(target):
+        target_path = sub_res_map[target]
+        if _have_file(target_path+"\\json"):
+            _mkdir(res)
+            _run_cmd('COPY /Y "%s\\json\\*.json" "%s\\"' % (base_res, res))
+            _run_cmd('COPY /Y "%s\\json\\*.json" "%s\\"' % (target_path, res))
+            return
+    res = base_res + "\\json"
 
 def _del_file(name):
     if os.path.isfile(name):
@@ -92,6 +155,7 @@ def _tmpdir(name):
     return path
 
 def pack_textures():
+    _gen_pack_dir()
     png1 = png % 1
     tex1 = tex % 1
     redundant_files = []
@@ -124,6 +188,7 @@ def pack_textures():
 
     _run_cmd('RD /Q/S "%s"' % tmpdir1)
     _run_cmd('RD /Q/S "%s"' % tmpdir2)
+    _rm_tmp_pack_dir()
 
 
 def _json2map(json_file):
@@ -162,11 +227,25 @@ def run_pentagon():
     _run_cmd(cmd)
 
 
+######################################### gen ep ########################################################
+def gen_ep():
+    _del_file(ui2)
+    _run_cmd("type %s >> %s" % (ui2_conver, ui2))
+    _run_cmd("type %s >> %s" % (out, ui2))
+    _run_cmd("type %s >> %s" % (ui2_manual, ui2))
+
+    print("---------gen ios ep file.----------------")
+    _run_cmd("lua %s -pd -png8 %s %s.ios" % (epbin, ui2, ep))
+    print("---------gen android ep file.----------------")
+    _run_cmd("lua %s -pd -pkmc %s %s.android" % (epbin, ui2, ep))
+
 
 ######################################### package ########################################################
 def pack_load():
+    _gen_jsons_dir()
     cmd = "cocpackage_load.exe %s %s %s" % (res, tex2, out)
     _run_cmd(cmd) 
+    _rm_tmp_pack_dir()
 
 ######################################### merge ######################################################## 
 def pack_merge():
@@ -216,20 +295,26 @@ def pack_up():
 if modle == '-load':
     tex_json[0] = tex % 1
     tex_json[1] = tex % 2
-
     run_pentagon()
     pack_load()
     pack_merge()
+    gen_ep()
+
 elif modle == '-pack':
     pack_textures()
     run_pentagon()
     pack_load()
     pack_merge()
+    gen_ep()
+
 elif modle == '-update':
     tex_json[0] = tex % 1
     tex_json[1] = tex % 2
-    
     pack_up()
     run_pentagon()
     pack_load()
     pack_merge()
+    gen_ep()
+
+else  :
+    print(README)

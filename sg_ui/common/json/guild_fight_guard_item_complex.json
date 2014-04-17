@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/level_indicator_complex.json",
+			"filepath" : "level_indicator_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "level",
 			"position" : 
@@ -84,7 +84,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6184-tongyong-1.png",
+			"filepath" : "../png/6184-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 

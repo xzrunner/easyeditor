@@ -6,7 +6,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/rank_item_bg_scale9.json",
+			"filepath" : "rank_item_bg_scale9.json",
 			"name" : "",
 			"position" : 
 			{
@@ -23,7 +23,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "../png/6118-tongyong-1.png",
 			"name" : "",
 			"position" : 
 			{
@@ -40,7 +40,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/rank_rank_fontblank.json",
+			"filepath" : "rank_rank_fontblank.json",
 			"name" : "rank",
 			"position" : 
 			{
@@ -57,7 +57,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6459-gaoguang-1.png",
+			"filepath" : "../png/6459-gaoguang-1.png",
 			"name" : "line",
 			"position" : 
 			{
@@ -74,7 +74,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/rank_player_name_fontblank.json",
+			"filepath" : "rank_player_name_fontblank.json",
 			"name" : "player_name",
 			"position" : 
 			{
@@ -125,7 +125,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6107-tongyong-1.png",
+			"filepath" : "../png/6107-tongyong-1.png",
 			"name" : "",
 			"position" : 
 			{
@@ -142,7 +142,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/level_indicator_complex.json",
+			"filepath" : "level_indicator_complex.json",
 			"name" : "level_indicator",
 			"position" : 
 			{
@@ -210,7 +210,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6126-tongyong-1.PNG",
+			"filepath" : "../png/6126-tongyong-1.PNG",
 			"name" : "",
 			"position" : 
 			{

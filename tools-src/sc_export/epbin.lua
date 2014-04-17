@@ -1,6 +1,6 @@
 local READ_ME = [[
 	usepage:
-		lua epbin.lua <gen_model> <model> <filename>
+		lua epbin.lua <gen_model> <model> <filename> [outfile]
 	gen_model:
 		-ep : 生成单个的ep文件
 		-pd : 生成pic 和animation分离的两个文件(xx.epp: 图片打包文件 xx.epd animation打包文件)
@@ -12,7 +12,9 @@ local READ_ME = [[
 		-ktx:		使用的贴图文件为ktx压缩文件
 		-pkm:		使用的贴图文件为pkm压缩文件
 	filename:
-		导出的lua文件名
+		导入的lua文件名
+	outfile:
+		导出的ep文件前缀名称, 如果没有传入，将使用filename
 
 	PS:
 		贴图的文件命名方式为filename<1..8>.<ext> 其中filename为lua的filename相同(无后缀名)
@@ -23,11 +25,11 @@ local ppm = require "ppm"
 local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
-local ktx = require "ktx"
-local pkm = require "pkm"
+-- local ktx = require "ktx"
+-- local pkm = require "pkm"
 local pkmc = require "pkmc"
 
-local gen_model, model, filename, compress = ...
+local gen_model, model, filename, outfile, compress = ...
 local max_id = 0
 local export = 0
 
@@ -393,6 +395,7 @@ end
 
 
 filename = string.match(filename, "(.*)%..*$")
+outfile = outfile or filename
 
 local gm_filename, gm_load = nil, nil
 
@@ -437,13 +440,13 @@ end
 
 
 if gen_model == "-ep" then
-	local f = io.open(filename.. ".ep", "wb")
+	local f = io.open(outfile.. ".ep", "wb")
 	gen_epp(f)
 	gen_epd(f)
 	f:close()
 elseif gen_model == "-pd" then
-	local f_epp = io.open(filename .. ".epp", "wb")
-	local f_epd = io.open(filename..".epd", "wb")
+	local f_epp = io.open(outfile .. ".epp", "wb")
+	local f_epd = io.open(outfile..".epd", "wb")
 	gen_epp(f_epp)
 	gen_epd(f_epd)
 	f_epp:close()

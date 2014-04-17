@@ -65,7 +65,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/yellow_button_complex.json",
+			"filepath" : "yellow_button_complex.json",
 			"multi color" : "",
 			"name" : "Button1",
 			"position" : 
@@ -141,7 +141,7 @@
 		{
 			"add color" : "",
 			"angle" : 4.710000038146973,
-			"filepath" : "14663271495571.png",
+			"filepath" : "../png/14663271495571.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 

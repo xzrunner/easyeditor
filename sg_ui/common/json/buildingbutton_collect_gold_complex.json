@@ -20,7 +20,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/TID_BUTTON_INFO_fontblank.json",
+			"filepath" : "TID_BUTTON_INFO_fontblank.json",
 			"name" : "TID_BUTTON_COLLECT",
 			"position" : 
 			{
@@ -34,7 +34,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6106-tongyong-1.png",
+			"filepath" : "../png/6106-tongyong-1.png",
 			"name" : "gold",
 			"position" : 
 			{

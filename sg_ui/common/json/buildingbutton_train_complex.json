@@ -26,7 +26,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/tid_button_info_fontblank.json",
+			"filepath" : "tid_button_info_fontblank.json",
 			"multi color" : "",
 			"name" : "TID_BUTTON_TRAIN",
 			"position" : 
@@ -45,7 +45,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6184-tongyong-1.png",
+			"filepath" : "../png/6184-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 

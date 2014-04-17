@@ -6,7 +6,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/ach_tid_reward_fontblank.json",
+			"filepath" : "ach_tid_reward_fontblank.json",
 			"name" : "TID_ACHIEVEMENTS_REWARD",
 			"position" : 
 			{
@@ -40,7 +40,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6460-gaoguang-1.png",
+			"filepath" : "../png/6460-gaoguang-1.png",
 			"name" : "",
 			"position" : 
 			{
@@ -57,7 +57,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/ach_gems_fontblank.json",
+			"filepath" : "ach_gems_fontblank.json",
 			"name" : "gems",
 			"position" : 
 			{
@@ -74,7 +74,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6103-tongyong-1.png",
+			"filepath" : "../png/6103-tongyong-1.png",
 			"name" : "",
 			"position" : 
 			{

@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/setting_bg_scale9.json",
+			"filepath" : "setting_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -159,7 +159,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6314-diban-9-5.png",
+			"filepath" : "../png/6314-diban-9-5.png",
 			"multi color" : "",
 			"name" : "link11",
 			"position" : 
@@ -178,7 +178,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/sa_link_complex.json",
+			"filepath" : "sa_link_complex.json",
 			"multi color" : "",
 			"name" : "link1",
 			"position" : 
@@ -197,7 +197,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6314-diban-9-5.png",
+			"filepath" : "../png/6314-diban-9-5.png",
 			"multi color" : "",
 			"name" : "link22",
 			"position" : 

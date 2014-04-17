@@ -29,7 +29,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/rank_item_bg_scale9.json",
+			"filepath" : "rank_item_bg_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -50,7 +50,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "../png/6118-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -73,7 +73,7 @@
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "../png/rank_rank_fontblank.json",
+			"filepath" : "rank_rank_fontblank.json",
 			"font" : "",
 			"label_height" : 19,
 			"label_width" : 140,
@@ -98,7 +98,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6459-gaoguang-1.png",
+			"filepath" : "../png/6459-gaoguang-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "line",
 			"position" : 
@@ -142,7 +142,7 @@
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "../png/rr_play_name2_fontblank.json",
+			"filepath" : "rr_play_name2_fontblank.json",
 			"font" : "",
 			"label_height" : 21,
 			"label_width" : 300,
@@ -194,7 +194,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6125-tongyong-1.png",
+			"filepath" : "../png/6125-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 

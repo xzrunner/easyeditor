@@ -46,7 +46,10 @@ deprecated
 /editor_bin/build_loading_mmzb
 /editor_bin/build_loading_mmzb_android
 /editor_bin/build_loading_efun
-/editor_bin/ui_output
+/editor_bin/ui_output/*.epp
+/editor_bin/ui_output/*.epd
+/editor_bin/ui_output/*.ep
+/editor_bin/ui_output/ui2.lua
 
 /pentagon_import/pt_char.lua
 /pentagon_import/pt_hero.lua

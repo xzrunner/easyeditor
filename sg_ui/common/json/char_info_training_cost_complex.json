@@ -33,7 +33,7 @@
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "../png/ci_cur_fontblank.json",
+			"filepath" : "ci_cur_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 17,
@@ -91,7 +91,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6455-gaoguang-1.png",
+			"filepath" : "../png/6455-gaoguang-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "up",
 			"position" : 

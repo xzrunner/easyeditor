@@ -6,7 +6,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/achievement_item_gb_scale9.json",
+			"filepath" : "achievement_item_gb_scale9.json",
 			"name" : "",
 			"position" : 
 			{
@@ -40,7 +40,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6119-tongyong-1.png",
+			"filepath" : "../png/6119-tongyong-1.png",
 			"name" : "",
 			"position" : 
 			{

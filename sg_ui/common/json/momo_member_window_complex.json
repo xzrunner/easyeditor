@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/building_info_window_bg_scale9.json",
+			"filepath" : "building_info_window_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -197,7 +197,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "momo_vip7.png",
+			"filepath" : "../png/momo_vip7.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -254,7 +254,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/vip_info_fontblank.json",
+			"filepath" : "vip_info_fontblank.json",
 			"multi color" : "",
 			"name" : "info",
 			"position" : 
@@ -273,7 +273,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "momo_vip_30.png",
+			"filepath" : "../png/momo_vip_30.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 

@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/od_bg_scale9.json",
+			"filepath" : "od_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -64,7 +64,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6102-tongyong-1.png",
+			"filepath" : "../png/6102-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 

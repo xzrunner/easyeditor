@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/shurukuang1_scale9.json",
+			"filepath" : "shurukuang1_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -31,7 +31,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "../png/6118-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 

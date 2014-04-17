@@ -9,7 +9,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/building_info_window_bg_scale9.json",
+			"filepath" : "building_info_window_bg_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -120,7 +120,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6154-tongyong-1.png",
+			"filepath" : "../png/6154-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 

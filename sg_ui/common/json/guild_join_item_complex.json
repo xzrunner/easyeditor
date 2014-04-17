@@ -28,7 +28,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/rank_item_bg_scale9.json",
+			"filepath" : "rank_item_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -47,7 +47,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6459-gaoguang-1.png",
+			"filepath" : "../png/6459-gaoguang-1.png",
 			"multi color" : "",
 			"name" : "line",
 			"position" : 

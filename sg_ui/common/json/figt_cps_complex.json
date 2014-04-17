@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/figt_cps_bg_complex.json",
+			"filepath" : "figt_cps_bg_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "_sprite33",
 			"position" : 
@@ -31,7 +31,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6106-tongyong-1.png",
+			"filepath" : "../png/6106-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -79,7 +79,7 @@
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "../png/tttt2_fontblank.json",
+			"filepath" : "tttt2_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 25,
@@ -167,7 +167,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "icon_wine_bottle.png",
+			"filepath" : "../png/icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
 			"name" : "icon_dark_elixir",
 			"position" : 

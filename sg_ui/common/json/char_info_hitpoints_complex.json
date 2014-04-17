@@ -45,7 +45,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/ci_cur_fontblank.json",
+			"filepath" : "ci_cur_fontblank.json",
 			"multi color" : "",
 			"name" : "cur_info",
 			"position" : 
@@ -83,7 +83,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6455-gaoguang-1.png",
+			"filepath" : "../png/6455-gaoguang-1.png",
 			"multi color" : "",
 			"name" : "up",
 			"position" : 

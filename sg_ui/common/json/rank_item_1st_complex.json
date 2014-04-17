@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/rank_item_bg_scale9.json",
+			"filepath" : "rank_item_bg_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -26,7 +26,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6125-tongyong-1.png",
+			"filepath" : "../png/6125-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -83,7 +83,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/rank_rank_fontblank.json",
+			"filepath" : "rank_rank_fontblank.json",
 			"multi color" : "",
 			"name" : "rank",
 			"position" : 
@@ -102,7 +102,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6459-gaoguang-1.png",
+			"filepath" : "../png/6459-gaoguang-1.png",
 			"multi color" : "",
 			"name" : "line",
 			"position" : 
@@ -121,7 +121,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/rank_player_name_fontblank.json",
+			"filepath" : "rank_player_name_fontblank.json",
 			"multi color" : "",
 			"name" : "player_name",
 			"position" : 
@@ -178,7 +178,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "6107-tongyong-1.png",
+			"filepath" : "../png/6107-tongyong-1.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 

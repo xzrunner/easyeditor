@@ -31,7 +31,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/troop_spell_anim.json",
+			"filepath" : "troop_spell_anim.json",
 			"multi color" : "0xffffffff",
 			"name" : "troop",
 			"position" : 
@@ -107,7 +107,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6156-tongyong-2.png",
+			"filepath" : "../png/6156-tongyong-2.png",
 			"multi color" : "0xffffffff",
 			"name" : "cancel",
 			"position" : 

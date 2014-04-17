@@ -7,7 +7,7 @@
 		{
 			"add color" : "",
 			"angle" : 0.0,
-			"filepath" : "../png/pop_action_scale9.json",
+			"filepath" : "pop_action_scale9.json",
 			"multi color" : "",
 			"name" : "",
 			"position" : 
@@ -26,7 +26,7 @@
 		{
 			"add color" : "",
 			"angle" : -1.570796370506287,
-			"filepath" : "889399927484.png",
+			"filepath" : "../png/889399927484.png",
 			"multi color" : "",
 			"name" : "",
 			"position" : 

@@ -9,7 +9,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/info_bar_complex.json",
+			"filepath" : "info_bar_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "bar",
 			"position" : 
@@ -30,7 +30,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6464-gaoguang-1.png",
+			"filepath" : "../png/6464-gaoguang-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 

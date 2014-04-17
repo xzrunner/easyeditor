@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/big_bubble_bg_complex.json",
+			"filepath" : "big_bubble_bg_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -61,7 +61,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6106-tongyong-1.png",
+			"filepath" : "../png/6106-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "Gold",
 			"position" : 

@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/br_line_complex.json",
+			"filepath" : "br_line_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -61,7 +61,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6106-tongyong-1.png",
+			"filepath" : "../png/6106-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -84,7 +84,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/br_loot_text_complex.json",
+			"filepath" : "br_loot_text_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "loot_trophy_position2",
 			"position" : 
@@ -130,7 +130,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6105-tongyong-1.png",
+			"filepath" : "../png/6105-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -153,7 +153,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/br_loot_text_complex.json",
+			"filepath" : "br_loot_text_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "loot_gold",
 			"position" : 
@@ -199,7 +199,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6107-tongyong-1.png",
+			"filepath" : "../png/6107-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -222,7 +222,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/br_loot_text_complex.json",
+			"filepath" : "br_loot_text_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "loot_elixir",
 			"position" : 
@@ -268,7 +268,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "icon_wine_bottle.png",
+			"filepath" : "../png/icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
 			"name" : "icon_dark_elixir",
 			"position" : 

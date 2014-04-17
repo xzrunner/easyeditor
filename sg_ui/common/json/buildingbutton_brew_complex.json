@@ -33,7 +33,7 @@
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "../png/tid_button_info_fontblank.json",
+			"filepath" : "tid_button_info_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
 			"label_height" : 17,
@@ -91,7 +91,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "icon_wine_bottle.png",
+			"filepath" : "../png/icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
 			"name" : "_sprite6",
 			"position" : 

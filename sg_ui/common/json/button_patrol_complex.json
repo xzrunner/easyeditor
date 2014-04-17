@@ -34,7 +34,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "../png/TID_BUTTON_INFO_fontblank.json",
+			"filepath" : "TID_BUTTON_INFO_fontblank.json",
 			"name" : "Text",
 			"position" : 
 			{
@@ -48,7 +48,7 @@
 		
 		{
 			"angle" : 0.0,
-			"filepath" : "6192-tongyong-1.png",
+			"filepath" : "../png/6192-tongyong-1.png",
 			"name" : "icon_zzz",
 			"position" : 
 			{

@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/game_top_right_background_bar_scale9.json",
+			"filepath" : "game_top_right_background_bar_scale9.json",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -167,7 +167,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6118-tongyong-1.png",
+			"filepath" : "../png/6118-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -190,7 +190,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/ex_gold_damping_anim.json",
+			"filepath" : "ex_gold_damping_anim.json",
 			"multi color" : "0xffffffff",
 			"name" : "icon",
 			"position" : 
@@ -213,7 +213,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6001-anniu-1.png",
+			"filepath" : "../png/6001-anniu-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "add_button",
 			"position" : 

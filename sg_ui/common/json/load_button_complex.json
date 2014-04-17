@@ -32,7 +32,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/icon_load_complex.json",
+			"filepath" : "icon_load_complex.json",
 			"multi color" : "0xffffffff",
 			"name" : "_sprite29",
 			"position" : 
@@ -85,7 +85,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "6105-tongyong-1.png",
+			"filepath" : "../png/6105-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "elixir",
 			"position" : 

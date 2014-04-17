@@ -1,6 +1,6 @@
 local READ_ME = [[
 	usepage:
-		lua epbin.lua <gen_model> <model> <filename>  [gen_model_opt]
+		lua epbin.lua <gen_model> <model> <filename> [outfile]
 	gen_model:
 		-ep : 生成单个的ep文件
 		-pd : 生成pic 和animation分离的两个文件(xx.epp: 图片打包文件 xx.epd animation打包文件)
@@ -11,10 +11,10 @@ local READ_ME = [[
 		-pvr:       使用的贴图文件为pvr压缩文件
 		-ktx:		使用的贴图文件为ktx压缩文件
 		-pkm:		使用的贴图文件为pkm压缩文件
-		-pkmc:		使用的贴图文件为pkm压缩文件
 	filename:
-		导出的lua文件名
-	gen_model_opt: <number>  设置保留update 贴图的个数 默认为0
+		导入的lua文件名
+	outfile:
+		导出的ep文件前缀名称, 如果没有传入，将使用filename
 
 	PS:
 		贴图的文件命名方式为filename<1..8>.<ext> 其中filename为lua的filename相同(无后缀名)
@@ -25,10 +25,11 @@ local ppm = require "ppm"
 local epconv = require "epconv"
 local lzma = require "lzma"
 local pvr = require "pvr"
+-- local ktx = require "ktx"
+-- local pkm = require "pkm"
+local pkmc = require "pkmc"
 
-local gen_model, model, filename, gm_opt, compress = ...
-gm_opt = tonumber(gm_opt) or 0
-
+local gen_model, model, filename, outfile, compress = ...
 local max_id = 0
 local export = 0
 
@@ -299,7 +300,6 @@ local function load_pvr(filename)
 end
 
 local function load_ktx(filename)
-	local ktx = require "ktx"
 	memfile.result = {}
 	local w,h,size,data = ktx.read(filename..".ktx")
 	print("Gen ktx image",w,h,filename)
@@ -312,7 +312,6 @@ local function load_ktx(filename)
 end
 
 local function load_pkm(filename)
-	local pkm = require "pkm"
 	memfile.result = {}
 	local w,h,rgb,alpha = pkm.read(filename)
 	print("Gen pkm image",w,h,filename)
@@ -325,7 +324,6 @@ local function load_pkm(filename)
 end
 
 local function load_pkmc(filename)
-	local pkmc = require "pkmc"
 	memfile.result = {}
 	local w,h,rgb,alpha = pkmc.read(filename)
 	print("Gen pkm image",w,h,filename)
@@ -397,6 +395,7 @@ end
 
 
 filename = string.match(filename, "(.*)%..*$")
+outfile = outfile or filename
 
 local gm_filename, gm_load = nil, nil
 
@@ -428,20 +427,9 @@ end
 
 -- gen pic data
 local function gen_epp(f_epp)
-	assert(tex - gm_opt > 0)
-
-	for i = 1,tex-gm_opt do
+	for i = 1,tex do
 		local t = gm_load(gm_filename..tostring(i))
 		write_block(f_epp, t)
-	end
-end
-
-local function gen_epup(f_epup)
-	assert(tex - gm_opt > 0)
-
-	for i= tex-gm_opt+1, tex do
-		local t = gm_load(gm_filename..tostring(i))
-		write_block(f_epup, t)
 	end
 end
 
@@ -452,19 +440,13 @@ end
 
 
 if gen_model == "-ep" then
-	local f = io.open(filename.. ".ep", "wb")
+	local f = io.open(outfile.. ".ep", "wb")
 	gen_epp(f)
 	gen_epd(f)
 	f:close()
 elseif gen_model == "-pd" then
-	local f_epp = io.open(filename .. ".epp", "wb")
-	local f_epd = io.open(filename..".epd", "wb")
-	if gm_opt > 0 then
-		local f_epup = io.open(filename..".epup", "wb")
-		gen_epup(f_epup)
-		f_epup:close()
-	end
-
+	local f_epp = io.open(outfile .. ".epp", "wb")
+	local f_epd = io.open(outfile..".epd", "wb")
 	gen_epp(f_epp)
 	gen_epd(f_epd)
 	f_epp:close()
