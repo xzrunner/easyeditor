@@ -235,9 +235,9 @@ def gen_ep():
     _run_cmd("type %s >> %s" % (ui2_manual, ui2))
 
     print("---------gen ios ep file.----------------")
-    _run_cmd("lua %s -pd -png8 %s %s.ios" % (epbin, ui2, ep))
+    _run_cmd(r"..\tools\lua\lua %s -pd -png8 %s %s.ios" % (epbin, ui2, ep))
     print("---------gen android ep file.----------------")
-    _run_cmd("lua %s -pd -pkmc %s %s.android" % (epbin, ui2, ep))
+    _run_cmd(r"..\tools\lua\lua %s -pd -pkmc %s %s.android" % (epbin, ui2, ep))
 
 
 ######################################### package ########################################################
