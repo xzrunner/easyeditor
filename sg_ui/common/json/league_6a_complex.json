@@ -1,0 +1,45 @@
+
+{
+	"name" : "league_6a",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "../png/league_6a.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -29.00,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "../png/league_6a.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 29.00,
+				"y" : 0.0
+			},
+			"x mirror" : true,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

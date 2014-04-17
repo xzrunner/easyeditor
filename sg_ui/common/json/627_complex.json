@@ -1,0 +1,20 @@
+{
+  "name": "", 
+  "sprite": [
+    {
+      "angle": 1.5707963267948966, 
+      "filepath": "../png/9804041006570.png", 
+      "name": "", 
+      "position": {
+        "x": 1.9499999999999993, 
+        "y": 19.225
+      }, 
+      "x mirror": false, 
+      "x scale": 0.675, 
+      "x shear": 0, 
+      "y mirror": false, 
+      "y scale": 0.65, 
+      "y shear": 0
+    }
+  ]
+}

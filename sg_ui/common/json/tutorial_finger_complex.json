@@ -1,0 +1,45 @@
+
+{
+	"name" : "m_tutorial_finger",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "../png/finger.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -116.0,
+				"y" : 219.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tutorial_finger_fontblank.json",
+			"multi color" : "",
+			"name" : "hint",
+			"position" : 
+			{
+				"x" : 126.50,
+				"y" : 213.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,405 @@
+
+{
+	"name" : "ui_top_left_battle",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/6118-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 26.0,
+				"y" : -37.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/level_indicator_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "xp",
+			"position" : 
+			{
+				"x" : 25.50,
+				"y" : -37.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "xp_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 19,
+			"label_width" : 300,
+			"multi color" : "0xffffffff",
+			"name" : "Name",
+			"position" : 
+			{
+				"x" : 225.9999694824219,
+				"y" : -22.50
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "WinTrophyIcon",
+			"position" : 
+			{
+				"x" : 28.06578254699707,
+				"y" : -212.0855712890625
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3786982595920563,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3786982595920563,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "../png/bar_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 110,
+			"multi color" : "0xffffffff",
+			"name" : "WinTrophy",
+			"position" : 
+			{
+				"x" : 112.0,
+				"y" : -210.0
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6107-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "LoseTrophyIcon",
+			"position" : 
+			{
+				"x" : 28.10000038146973,
+				"y" : -296.6000061035156
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3799999952316284,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3799999952316284,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "../png/bar_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 110,
+			"multi color" : "0xffffffff",
+			"name" : "LoseTrophy",
+			"position" : 
+			{
+				"x" : 111.9999923706055,
+				"y" : -294.2236938476563
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6106-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "GoldIcon",
+			"position" : 
+			{
+				"x" : 25.20048141479492,
+				"y" : -92.60729217529297
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4048546552658081,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.8230309486389160,
+			"y scale" : 0.4048546552658081,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/6105-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "ElixirIcon",
+			"position" : 
+			{
+				"x" : 26.95023345947266,
+				"y" : -131.9303894042969
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -6.469102382659912,
+			"x scale" : 0.4170073866844177,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 2.156367063522339,
+			"y scale" : 0.4170073866844177,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "../png/bar_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 110,
+			"multi color" : "0xffffffff",
+			"name" : "Gold",
+			"position" : 
+			{
+				"x" : 112.0,
+				"y" : -90.0
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "bar_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 110,
+			"multi color" : "0xffffffff",
+			"name" : "Elixir",
+			"position" : 
+			{
+				"x" : 112.0,
+				"y" : -130.0
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "bar_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 110,
+			"multi color" : "0xffffffff",
+			"name" : "Defeat",
+			"position" : 
+			{
+				"x" : 57.0,
+				"y" : -254.0
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "bar_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 110,
+			"multi color" : "0xffffffff",
+			"name" : "DarkElixir",
+			"position" : 
+			{
+				"x" : 112.0,
+				"y" : -170.0
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "icon_wine_bottle.png",
+			"multi color" : "0xffffffff",
+			"name" : "DarkElixirIcon",
+			"position" : 
+			{
+				"x" : 27.63853454589844,
+				"y" : -170.6427307128906
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.192337378859520,
+			"x scale" : 0.3846747577190399,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.3846747577190399,
+			"y scale" : 0.3846747577190399,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "sex_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "sex",
+			"position" : 
+			{
+				"x" : 64.63853454589844,
+				"y" : -24.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -1.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

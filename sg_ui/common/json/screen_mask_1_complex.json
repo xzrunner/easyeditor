@@ -1,0 +1,26 @@
+
+{
+	"name" : "screen_mask_1",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "../png/jy-0001-screen-mask.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 1.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 300.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 300.0,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,262 @@
+
+{
+	"name" : "achievement_item",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "../png/achievement_item_gb_scale9.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "achievement_item_bg2_scale9.json",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "6119-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 328.0,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "../png/6119-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -332.0,
+				"y" : 26.0
+			},
+			"x mirror" : true,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "ach_name_fontblank.json",
+			"name" : "achievement_name",
+			"position" : 
+			{
+				"x" : -96.50,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "ach_desc_fontblank.json",
+			"name" : "achievement_description",
+			"position" : 
+			{
+				"x" : 146.0,
+				"y" : 24.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "achievement_reward_complex.json",
+			"name" : "reward",
+			"position" : 
+			{
+				"x" : -166.3750,
+				"y" : -29.250
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "blue_button_complex.json",
+			"name" : "button_claim",
+			"position" : 
+			{
+				"x" : 270.3750,
+				"y" : -28.3750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "star_0_complex.json",
+			"name" : "star_0",
+			"position" : 
+			{
+				"x" : -223.0,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "star_1_complex.json",
+			"name" : "star_1",
+			"position" : 
+			{
+				"x" : -223.0,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "star_3_complex.json",
+			"name" : "star_3",
+			"position" : 
+			{
+				"x" : -223.0,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "star_2_complex.json",
+			"name" : "star_2",
+			"position" : 
+			{
+				"x" : -223.0,
+				"y" : 26.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "info_bar_complex.json",
+			"name" : "bar",
+			"position" : 
+			{
+				"x" : 165.750,
+				"y" : -28.50
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "ahc_prg_fontblank.json",
+			"name" : "achievement_progress",
+			"position" : 
+			{
+				"x" : 165.250,
+				"y" : -29.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "achievement_completed_complex.json",
+			"name" : "achievement_completed",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -27.50
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,53 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/6118-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/icon_wine_bottle.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -4.269429206848145,
+				"y" : 4.953594207763672
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.4211646616458893,
+			"x scale" : 0.8423293232917786,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.8423293232917786,
+			"y scale" : 0.8423293232917786,
+			"y shear" : 0.0
+		}
+	]
+}

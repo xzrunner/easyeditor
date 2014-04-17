@@ -1,0 +1,186 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/6454-gaoguang-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -31.0,
+				"y" : 89.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 7.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "../png/ci_cur_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 80,
+			"multi color" : "0xffffffff",
+			"name" : "cur_info",
+			"position" : 
+			{
+				"x" : -30.10000610351563,
+				"y" : 88.50
+			},
+			"size" : 11,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "ci_cur_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 80,
+			"multi color" : "0xffffffff",
+			"name" : "next_info",
+			"position" : 
+			{
+				"x" : -35.10000610351563,
+				"y" : 111.50
+			},
+			"size" : 11,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "6455-gaoguang-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "up",
+			"position" : 
+			{
+				"x" : 9.599998474121094,
+				"y" : 101.250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/6118-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite191",
+			"position" : 
+			{
+				"x" : -79.14170837402344,
+				"y" : 87.60755920410156
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3784079253673554,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.3784079253673554,
+			"y scale" : 0.3784079253673554,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/6105-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "Elixir",
+			"position" : 
+			{
+				"x" : -79.84362030029297,
+				"y" : 86.99851226806641
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -2.234912872314453,
+			"x scale" : 0.3724856674671173,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.7449713349342346,
+			"y scale" : 0.3724856674671173,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/icon_wine_bottle.png",
+			"multi color" : "0xffffffff",
+			"name" : "DarkElixir",
+			"position" : 
+			{
+				"x" : -81.73545837402344,
+				"y" : 90.12275695800781
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.1714016795158386,
+			"x scale" : 0.3382304608821869,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.3428033590316773,
+			"y scale" : 0.3382304608821869,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}
