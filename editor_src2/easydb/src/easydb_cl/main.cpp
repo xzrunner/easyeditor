@@ -11,6 +11,7 @@
 #include "DistanceFieldFont.h"
 #include "DFFParser.h"
 #include "ReverseAnimation.h"
+#include "PackParticle3D.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -178,6 +179,13 @@ int main(int argc, char *argv[])
 //   			parser.outputImageFast(edge, edge);
 //   			edge = edge << 1;
 //   		}
+	} else if (cmd == "pack") {
+		if (argc < 4) {
+			std::cerr << "Params: [src dir] [dst file]!" << std::endl;
+			return 1;
+		}
+
+		edb::PackParticle3D::Pack(argv[2], argv[3]);
 	}
 
 	return 0;

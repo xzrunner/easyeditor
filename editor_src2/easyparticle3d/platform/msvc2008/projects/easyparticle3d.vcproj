@@ -182,14 +182,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\easyparticle3d\CocoPacker.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easyparticle3d\CocoPacker.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"
 			>
 		</File>

@@ -185,6 +185,14 @@
 			Name="file"
 			>
 			<File
+				RelativePath="..\..\..\src\libparticle3d\CocoPacker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle3d\CocoPacker.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libparticle3d\Code.cpp"
 				>
 			</File>

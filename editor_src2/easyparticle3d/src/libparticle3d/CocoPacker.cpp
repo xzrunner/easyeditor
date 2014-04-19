@@ -54,7 +54,6 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 
 	s = wxString::FromDouble(val["count"].asInt());
 	lua::assign(gen, "['count']", s+",");
-
 	s = wxString::FromDouble(val["layer"].asInt());
 	lua::assign(gen, "['layer']", s+",");
 
