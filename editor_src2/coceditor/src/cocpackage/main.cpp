@@ -73,12 +73,16 @@ int main(int argc, char *argv[])
 		++i;
 	}
 
-	ebuilder::CodeGenerator gen;
-	coceditor::COCCode code(gen);
-	code.resolve();
-	std::ofstream fout(argv[3]);
-	fout << gen.toText() << std::endl;
-	fout.close();
+	try {
+		ebuilder::CodeGenerator gen;
+		coceditor::COCCode code(gen);
+		code.resolve();
+		std::ofstream fout(argv[3]);
+		fout << gen.toText() << std::endl;
+		fout.close();
+	} catch (d2d::Exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
 
 	return 0;
 }
