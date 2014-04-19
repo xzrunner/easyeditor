@@ -61,7 +61,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/6106-tongyong-1.png",
+			"filepath" : "..\\png\\6106-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -130,7 +130,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/6105-tongyong-1.png",
+			"filepath" : "..\\png\\6105-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -199,7 +199,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/6107-tongyong-1.png",
+			"filepath" : "..\\png\\6107-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -268,7 +268,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/icon_wine_bottle.png",
+			"filepath" : "..\\png\\icon_wine_bottle.png",
 			"multi color" : "0xffffffff",
 			"name" : "icon_dark_elixir",
 			"position" : 

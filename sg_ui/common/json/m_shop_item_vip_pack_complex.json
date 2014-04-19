@@ -1,6 +1,6 @@
 
 {
-	"name" : "",
+	"name" : "m_shop_item_vip_pack",
 	"sprite" : 
 	[
 		
@@ -8,22 +8,22 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "figt_cps_bg_complex.json",
+			"filepath" : "shop_item_bg_scale9.json",
 			"multi color" : "0xffffffff",
-			"name" : "_sprite33",
+			"name" : "",
 			"position" : 
 			{
-				"x" : -1.991207122802734,
-				"y" : -24.41648864746094
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 1.307238459587097,
+			"x scale" : 0.50,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 1.307238459587097,
+			"y scale" : 0.50,
 			"y shear" : 0.0
 		},
 		
@@ -31,45 +31,52 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "..\\png\\6106-tongyong-1.png",
+			"filepath" : "..\\png\\6154-tongyong-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
 			{
-				"x" : -62.56796264648438,
-				"y" : 11.39952087402344
+				"x" : 0.0,
+				"y" : 0.0
 			},
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.4499999880790710,
+			"x scale" : 0.750,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 0.4499999880790710,
+			"y scale" : 0.750,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "0x00000000",
+			"align" : 0,
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "..\\png\\6105-tongyong-1.png",
+			"color" : "0x00000000",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
 			"multi color" : "0xffffffff",
-			"name" : "",
+			"name" : "icon",
 			"position" : 
 			{
-				"x" : -61.31748199462891,
-				"y" : -42.38158035278320
+				"x" : -2.0,
+				"y" : 2.0
 			},
+			"size" : 0,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
-			"x scale" : 0.4499999880790710,
+			"x scale" : 1.0,
 			"x shear" : 0.0,
 			"y mirror" : false,
 			"y offset" : 0.0,
-			"y scale" : 0.4499999880790710,
+			"y scale" : 1.0,
 			"y shear" : 0.0
 		},
 		
@@ -79,19 +86,19 @@
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "tttt2_fontblank.json",
+			"filepath" : "shop_item_title3_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 150,
+			"label_height" : 24,
+			"label_width" : 200,
 			"multi color" : "0xffffffff",
 			"name" : "title",
 			"position" : 
 			{
-				"x" : -3.000015258789063,
-				"y" : 72.0
+				"x" : 2.0,
+				"y" : 102.50
 			},
-			"size" : 20,
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -105,53 +112,23 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "ttttt3_fontblank.json",
+			"filepath" : "shop_item_amount_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 120,
+			"label_height" : 24,
+			"label_width" : 200,
 			"multi color" : "0xffffffff",
-			"name" : "gold_amount",
+			"name" : "deadline",
 			"position" : 
 			{
-				"x" : 18.0,
-				"y" : 12.0
-			},
-			"size" : 18,
-			"tag" : "",
-			"x mirror" : false,
-			"x offset" : 0.0,
-			"x scale" : 1.0,
-			"x shear" : 0.0,
-			"y mirror" : false,
-			"y offset" : 0.0,
-			"y scale" : 1.0,
-			"y shear" : 0.0
-		},
-		
-		{
-			"add color" : "0x00000000",
-			"align" : 0,
-			"angle" : 0.0,
-			"clip" : false,
-			"color" : "0xffffffff",
-			"filepath" : "ttttt3_fontblank.json",
-			"font" : "",
-			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 120,
-			"multi color" : "0xffffffff",
-			"name" : "elixir_amount",
-			"position" : 
-			{
-				"x" : 18.0,
+				"x" : 1.0,
 				"y" : -41.0
 			},
-			"size" : 18,
+			"size" : 16,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -167,44 +144,44 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "..\\png\\icon_wine_bottle.png",
+			"filepath" : "shop_item_title_bar2_scale9.json",
 			"multi color" : "0xffffffff",
-			"name" : "icon_dark_elixir",
+			"name" : "",
 			"position" : 
 			{
-				"x" : -61.70101547241211,
-				"y" : -95.09027862548828
+				"x" : 0.0,
+				"y" : -90.0
 			},
 			"tag" : "",
 			"x mirror" : false,
-			"x offset" : -0.2170657068490982,
-			"x scale" : 0.4341314136981964,
+			"x offset" : 0.0,
+			"x scale" : 0.8000000119209290,
 			"x shear" : 0.0,
 			"y mirror" : false,
-			"y offset" : 0.4341314136981964,
-			"y scale" : 0.4341314136981964,
+			"y offset" : 0.0,
+			"y scale" : 0.8000000119209290,
 			"y shear" : 0.0
 		},
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align" : 2,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
-			"filepath" : "ttttt3_fontblank.json",
+			"filepath" : "shop_item_price2_fontblank.json",
 			"font" : "",
 			"font_filename" : "",
-			"label_height" : 25,
-			"label_width" : 120,
+			"label_height" : 36,
+			"label_width" : 240,
 			"multi color" : "0xffffffff",
-			"name" : "dark_elixir_amount",
+			"name" : "price",
 			"position" : 
 			{
-				"x" : 18.0,
-				"y" : -94.0
+				"x" : 0.0,
+				"y" : -86.0
 			},
-			"size" : 18,
+			"size" : 36,
 			"tag" : "",
 			"x mirror" : false,
 			"x offset" : 0.0,
@@ -214,6 +191,33 @@
 			"y offset" : 0.0,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "info_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : -119.0749969482422,
+				"y" : 102.1250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.50,
+			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }

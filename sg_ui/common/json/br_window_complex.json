@@ -482,11 +482,34 @@
 			"clip" : false,
 			"filepath" : "battle_reward_complex.json",
 			"multi color" : "0xffffffff",
-			"name" : "claim_button",
+			"name" : "claim_button2",
 			"position" : 
 			{
 				"x" : 389.4678344726563,
 				"y" : 34.3278808593750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -4.250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 2.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "battle_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "claim_button1",
+			"position" : 
+			{
+				"x" : 505.4929809570313,
+				"y" : 192.7044982910156
 			},
 			"tag" : "",
 			"x mirror" : false,
