@@ -39,13 +39,13 @@ else:
 
 for ed_json, tp_json, tmp_lua, scale, lua, ep in WORK_ITEMS:
     if '1' in options:
-        run_cmd('%s %s %s %s %s' % (COCPACK, ed_json, tp_json, tmp_lua, scale))
+        run_cmd('%s %s %s %s %s' % (COCPACK, ed_json, tp_json, lua, scale))
 
-    if '2' in options:
-        run_cmd('%s %s %s %s' % (LUA, CONV, tmp_lua, lua))
+    # if '2' in options:
+    #     run_cmd('%s %s %s %s' % (LUA, CONV, tmp_lua, lua))
 
     if '3' in options:
-        run_cmd('%s %s -pd -png8 %s' % (LUA, EPBIN, lua))
+        run_cmd('%s %s -pd -pvr %s' % (LUA, EPBIN, lua))
 
     if '4' in options:
         run_cmd('copy /Y %s %s' % (ep, PATH_SHARE_EP))
