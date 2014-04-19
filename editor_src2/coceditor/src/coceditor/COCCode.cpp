@@ -246,9 +246,10 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 
 	std::map<const d2d::ISymbol*, COCParser::Picture*>::const_iterator itr 
 		= parser.m_mapSymbolPicture.find(&sprite->getSymbol());
-	assert(itr != parser.m_mapSymbolPicture.end());
-	if (itr == parser.m_mapSymbolPicture.end())
-		throw d2d::Exception("Error! COCCode::resolvePicture L232");
+	if (itr == parser.m_mapSymbolPicture.end()) {
+		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the texpacker file!";
+		throw d2d::Exception(str.c_str());
+	}
 
 	COCParser::Picture* picture = itr->second;
 
@@ -257,10 +258,10 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 	// id
 	{
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
-		assert(itr != m_mapSpriteID.end());
-		if (itr == m_mapSpriteID.end())
-			throw d2d::Exception("Error! COCCode::resolvePicture L243");
-
+		if (itr == m_mapSpriteID.end()) {
+			std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the m_mapSpriteID!";
+			throw d2d::Exception(str.c_str());
+		}
 		std::string sid = wxString::FromDouble(itr->second);
 		m_gen.line(lua::assign("id", sid.c_str()) + ",");
 	}
@@ -410,9 +411,10 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 
 	std::map<const d2d::ISymbol*, COCParser::Picture*>::const_iterator itr 
 		= parser.m_mapSymbolPicture.find(symbol);
-	assert(itr != parser.m_mapSymbolPicture.end());
-	if (itr == parser.m_mapSymbolPicture.end())
-		throw d2d::Exception("Error! COCCode::resolvePicture L390");
+	if (itr == parser.m_mapSymbolPicture.end()) {
+		std::string str = "\""+symbol->getFilepath()+"\""+" not in the texpacker file!";
+		throw d2d::Exception(str.c_str());
+	}
 
 	COCParser::Picture* picture = itr->second;
 
@@ -421,10 +423,10 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 	// id
 	{
 		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
-		assert(itr != m_mapSymbolID.end());
-		if (itr == m_mapSymbolID.end())
-			throw d2d::Exception("Error! COCCode::resolvePicture L401");
-
+		if (itr == m_mapSymbolID.end()) {
+			std::string str = "\""+symbol->getFilepath()+"\""+" not in m_mapSymbolID!";
+			throw d2d::Exception(str.c_str());
+		}
 		std::string sid = wxString::FromDouble(itr->second);
 		m_gen.line(lua::assign("id", sid.c_str()) + ",");
 	}
@@ -798,9 +800,10 @@ void COCCode::resolveAnimationCommon(const d2d::ISymbol* symbol)
 
 	// id
 	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(symbol);
-	assert(itr != m_mapSymbolID.end());
-	if (itr == m_mapSymbolID.end())
-		throw d2d::Exception("Error! COCCode::resolveAnimationCommon L666");
+	if (itr == m_mapSymbolID.end()) {
+		std::string str = "\""+symbol->getFilepath()+"\""+" not in m_mapSymbolID!";
+		throw d2d::Exception(str.c_str());
+	}
 
 	std::string sid = wxString::FromDouble(itr->second);
 	m_gen.line(lua::assign("id", sid.c_str()) + ",");
@@ -826,10 +829,10 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 			// anim::Symbol's sprites store unique
 
 			std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
-			assert(itr != m_mapSymbolID.end());
-			if (itr == m_mapSymbolID.end())
-				throw d2d::Exception("Error! COCCode::resolveSpriteForComponent L694");
-
+			if (itr == m_mapSymbolID.end()) {
+				std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in m_mapSymbolID!";
+				throw d2d::Exception(str.c_str());
+			}
 			id = itr->second;
 		}
 	}
@@ -837,19 +840,19 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 	{
 		isFont = true;
 		std::map<const d2d::ISprite*, int>::iterator itr = m_mapSpriteID.find(sprite);
-		assert(itr != m_mapSpriteID.end());
-		if (itr == m_mapSpriteID.end())
-			throw d2d::Exception("Error! COCCode::resolveSpriteForComponent L705");
-
+		if (itr == m_mapSpriteID.end()) {
+			std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in m_mapSpriteID!";
+			throw d2d::Exception(str.c_str());
+		}
 		id = itr->second;
 	}
 	else
 	{
 		std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
-		assert(itr != m_mapSymbolID.end());
-		if (itr == m_mapSymbolID.end())
-			throw d2d::Exception("Error! COCCode::resolveSpriteForComponent L715");
-
+		if (itr == m_mapSymbolID.end()) {
+			std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in m_mapSymbolID!";
+			throw d2d::Exception(str.c_str());
+		}
 		id = itr->second;
 	}
 
@@ -938,9 +941,10 @@ void COCCode::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 			cindex = i;
 			break;
 		}
-	assert(cindex != -1);
-	if (cindex == -1)
-		throw d2d::Exception("Error! COCCode::resolveSpriteForFrame L806");
+	if (cindex == -1) {
+		std::string str = sprite->name + " not found in order!";
+		throw d2d::Exception(str.c_str());
+	}	
 
 	if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(sprite))
 		resolveSpriteForFrameFont(font, cindex);
@@ -954,9 +958,10 @@ void COCCode::resolveSpriteForFrame(const d2d::ISprite* sprite, int index,
 void COCCode::resolveSpriteForFrame(const d2d::ISprite* sprite, const std::vector<std::pair<int, std::string> >& order)
 {
 	std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
-	assert(itr != m_mapSymbolID.end());
-	if (itr == m_mapSymbolID.end())
-		throw d2d::Exception("Error! COCCode::resolveSpriteForFrame L822");
+	if (itr == m_mapSymbolID.end()) {
+		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in m_mapSymbolID!";
+		throw d2d::Exception(str.c_str());
+	}
 
 	int id = itr->second;
 	int cindex = -1;
@@ -977,9 +982,10 @@ void COCCode::resolveSpriteForFrame(const d2d::ISprite* sprite, const std::vecto
 			}
 	}
 
-	assert(cindex != -1);
-	if (cindex == -1)
-		throw d2d::Exception("Error! COCCode::resolveSpriteForFrame L845");
+	if (cindex == -1) {
+		std::string str = sprite->name + " not in order!";
+		throw d2d::Exception(str.c_str());
+	}
 
 	resolveSpriteForFrame(sprite, cindex, true);
 }
@@ -1090,7 +1096,11 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
  			m_parser.m_mapSymbolPicture;
  			std::map<const d2d::ISymbol*, COCParser::Picture*>::const_iterator itr 
  				= m_parser.m_mapSymbolPicture.find(&sprite->getSymbol());
- 			assert(itr != m_parser.m_mapSymbolPicture.end());
+			if (itr == m_parser.m_mapSymbolPicture.end()) {
+				std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the texpacker file!";
+				throw d2d::Exception(str.c_str());
+			}
+
  			COCParser::Picture* picture = itr->second;
 
 			d2d::Vector offset = picture->offset;
