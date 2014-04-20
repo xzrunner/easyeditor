@@ -1,0 +1,30 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -7.152557373046875e-007,
+			"clip" : false,
+			"filepath" : "0_1878_1891_1788_1801.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.6250,
+				"y" : -0.6250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.346152782440186,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.346154928207398,
+			"y shear" : 0.0
+		}
+	]
+}

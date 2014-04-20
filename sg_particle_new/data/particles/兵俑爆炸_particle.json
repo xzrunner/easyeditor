@@ -1,0 +1,37 @@
+
+{
+	"additive_blend" : false,
+	"bounce" : false,
+	"components" : 
+	[
+		
+		{
+			"end_scale" : 80,
+			"filepath" : "..\\json\\»ðÑæ±¬Õ¨_anim.json",
+			"max_rotate" : -1,
+			"min_rotate" : -1,
+			"name" : "",
+			"start_scale" : 79,
+			"start_z" : 0
+		}
+	],
+	"count" : 1,
+	"emission_time" : 32.0,
+	"fadeout_time" : 170.0,
+	"gravity" : 1200,
+	"inertia" : 4,
+	"layer" : 0,
+	"max_hori" : 360,
+	"max_life" : 696.0,
+	"max_spd" : 0,
+	"max_vert" : 90,
+	"min_hori" : 0,
+	"min_life" : 606.0,
+	"min_spd" : 0,
+	"min_vert" : 90,
+	"name" : "fujia_bomb",
+	"orient_to_movement" : false,
+	"orient_to_parent" : false,
+	"package" : "",
+	"start_radius" : 0
+}

@@ -1,0 +1,47 @@
+
+{
+	"additive_blend" : false,
+	"bounce" : false,
+	"components" : 
+	[
+		
+		{
+			"end_scale" : 30,
+			"filepath" : "..\\json\\»ðµã_complex.json",
+			"max_rotate" : 60,
+			"min_rotate" : 0,
+			"name" : "",
+			"start_scale" : 2,
+			"start_z" : 0
+		},
+		
+		{
+			"end_scale" : 30,
+			"filepath" : "..\\json\\ºÚÑÌ_complex.json",
+			"max_rotate" : 23,
+			"min_rotate" : 0,
+			"name" : "",
+			"start_scale" : 2,
+			"start_z" : 0
+		}
+	],
+	"count" : 13,
+	"emission_time" : 300,
+	"fadeout_time" : 322,
+	"gravity" : 200,
+	"inertia" : 4,
+	"layer" : 0,
+	"max_hori" : 360,
+	"max_life" : 303,
+	"max_spd" : 650,
+	"max_vert" : 90,
+	"min_hori" : 0,
+	"min_life" : 273,
+	"min_spd" : 300,
+	"min_vert" : 40,
+	"name" : "wuzhu_attack_particle",
+	"orient_to_movement" : false,
+	"orient_to_parent" : false,
+	"package" : "",
+	"start_radius" : 0
+}

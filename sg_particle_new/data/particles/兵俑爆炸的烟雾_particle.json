@@ -1,0 +1,37 @@
+
+{
+	"additive_blend" : false,
+	"bounce" : false,
+	"components" : 
+	[
+		
+		{
+			"end_scale" : 200,
+			"filepath" : "..\\json\\d5_anim.json",
+			"max_rotate" : 130,
+			"min_rotate" : -180,
+			"name" : "",
+			"start_scale" : 30,
+			"start_z" : 70
+		}
+	],
+	"count" : 5,
+	"emission_time" : 60.0,
+	"fadeout_time" : 5000.0,
+	"gravity" : 10,
+	"inertia" : 0,
+	"layer" : 2,
+	"max_hori" : 0,
+	"max_life" : 3000.0,
+	"max_spd" : 800,
+	"max_vert" : 90,
+	"min_hori" : 0,
+	"min_life" : 2000.0,
+	"min_spd" : 300,
+	"min_vert" : 60,
+	"name" : "fujia_bomb_smog",
+	"orient_to_movement" : false,
+	"orient_to_parent" : true,
+	"package" : "buildings",
+	"start_radius" : 30
+}

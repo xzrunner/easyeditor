@@ -1,0 +1,37 @@
+
+{
+	"additive_blend" : false,
+	"bounce" : false,
+	"components" : 
+	[
+		
+		{
+			"end_scale" : 45,
+			"filepath" : "..\\json\\»ðÑæ_complex.json",
+			"max_rotate" : 58,
+			"min_rotate" : -69,
+			"name" : "",
+			"start_scale" : 3,
+			"start_z" : 0
+		}
+	],
+	"count" : 3,
+	"emission_time" : 80.0,
+	"fadeout_time" : 412.0,
+	"gravity" : 10,
+	"inertia" : 4,
+	"layer" : 0,
+	"max_hori" : 360,
+	"max_life" : 636.0,
+	"max_spd" : 1273,
+	"max_vert" : 90,
+	"min_hori" : 0,
+	"min_life" : 122.0,
+	"min_spd" : 788,
+	"min_vert" : 70,
+	"name" : "wuzhu_attack_hit_2",
+	"orient_to_movement" : false,
+	"orient_to_parent" : false,
+	"package" : "",
+	"start_radius" : 0
+}
