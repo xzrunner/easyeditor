@@ -17,6 +17,11 @@ static void InitSymbolCreators()
 
 int main(int argc, char *argv[])
 {
+	if (argc < 3) {
+		std::cerr << "Params: [lua] [pngs] [dst] !" << std::endl;
+		return 1;
+	}
+
 	if (argc > 1)
 	{
 		InitSymbolCreators();
@@ -25,13 +30,20 @@ int main(int argc, char *argv[])
 		libcoco::ParserLuaFile parser;
 		parser.parser(filename);
 
-		std::vector<std::string> texs;
-// 		texs.push_back("e:\\test\\1.png");
-// 		texs.push_back("e:\\test\\2.png");
-// 		texs.push_back("e:\\test\\3.png");
-// 		texs.push_back("e:\\test\\4.png");
-		texs.push_back("e:\\test\\misc1.png");
-		parser.transToEasyFiles(texs, "e:\\test\\out");
+		std::vector<std::string> textures;
+		std::string pngs_file_head = argv[2];
+		for (int i = 1; ; ++i) 
+		{
+			std::string filename = pngs_file_head + wxString::FromDouble(i) + ".png";
+			if (wxFileName::FileExists(filename)) {
+				textures.push_back(filename);
+			} else {
+				break;
+			}
+		}
+
+		std::string outfloder = argv[3];
+		parser.transToEasyFiles(textures, outfloder);
 	}
 
 	return 0;

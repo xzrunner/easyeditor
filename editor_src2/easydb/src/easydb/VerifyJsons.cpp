@@ -26,8 +26,6 @@ void VerifyJsons::InitFiles(const std::string& dirpath)
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
 		std::string name = d2d::FilenameTools::getFilenameWithExtension(filepath).ToStdString();
-		StringTools::toLower(name);
-
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 			_complex_files.push_back(filepath.ToStdString());
 			_map_name2node.insert(std::make_pair(name, new Node(filepath.ToStdString())));
