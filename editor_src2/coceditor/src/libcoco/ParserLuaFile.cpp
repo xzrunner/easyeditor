@@ -212,7 +212,6 @@ void ParserLuaFile::parserAni(lua_State* L, int id)
 
 	// frames
 	len = lua_rawlen(L, -1);
-	assert(len == 1);
 	lua_pushinteger(L, 1);
 	lua_gettable(L, -2);
 	len = lua_rawlen(L, -1);
@@ -309,6 +308,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		for (int i = 0, n = pic->parts.size(); i < n; ++i)
 		{
 			Picture::Part* part = pic->parts[i];
+
 			d2d::Image* image = images[part->tex];
 			eimage::ImageProcessor processor(image);
 
@@ -625,7 +625,31 @@ void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
 	float angle = 0;
 	bool xy_swap = false;
 
-	std::string mode = dstMode();
+	std::set<int> buf;
+	for (int i = 0; i < 4; ++i) {
+		buf.insert(dst[i].x);
+		buf.insert(dst[i].y);
+	}
+	float pre_rotate = 0;
+	d2d::Vector _dst[4];
+	memcpy(&_dst[0].x, &dst[0].x, sizeof(d2d::Vector)*4);
+	if (buf.size() != 4)
+	{
+		d2d::Vector center(0, 0);
+		for (int i = 0; i < 4; ++i) {
+			center += dst[i];
+		}
+		center /= 4;
+
+		d2d::Vector other = (dst[0] + dst[1]) * 0.5f;
+		float angle = d2d::Math::getLineAngle(center, other);
+		for (int i = 0; i < 4; ++i) {
+			_dst[i] = center + d2d::Math::rotateVector(dst[i] - center, -angle);
+		}
+		pre_rotate = -angle;
+	}
+
+	std::string mode = dstMode(_dst);
 	// 0123 0321 
 	// 1032 1230
 	// 2103 2301
@@ -634,8 +658,8 @@ void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
 		;
 	else if (mode == "0321")
 	{
-		xMirror = true;
-		angle = d2d::PI * 0.5f;
+		yMirror = true;
+		angle = -d2d::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "1032")
@@ -644,13 +668,13 @@ void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
 	}
 	else if (mode == "1230")
 	{
-		angle = d2d::PI * 0.5f;
+		angle = -d2d::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "2103")
 	{
 		xMirror = true;
-		angle = - d2d::PI * 0.5f;
+		angle = -d2d::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "2301")
@@ -659,7 +683,7 @@ void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
 	}
 	else if (mode == "3012")
 	{
-		angle = - d2d::PI * 0.5f;
+		angle = d2d::PI * 0.5f;
 		xy_swap = true;
 	}
 	else if (mode == "3210")
@@ -669,29 +693,37 @@ void ParserLuaFile::Picture::Part::transform(d2d::ISprite* sprite) const
 	}
 
 	d2d::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
-		dcenter = (dst[0] + dst[1] + dst[2] + dst[3]) * 0.25f;
+		dcenter = (_dst[0] + _dst[1] + _dst[2] + _dst[3]) * 0.25f;
 	float sw = fabs(src[0].x - scenter.x), sh = fabs(src[0].y - scenter.y);
-	float dw = fabs(dst[0].x - dcenter.x), dh = fabs(dst[0].y - dcenter.y);
-	float sx = dw / 16.0f / sw,
-		  sy = dh / 16.0f / sh;
+	float dw = fabs(_dst[0].x - dcenter.x), dh = fabs(_dst[0].y - dcenter.y);
 
-	if (xy_swap)
-		sprite->setScale(sy, sx);
+	float sx, sy;
+	if (xy_swap) 
+	{
+		sx = dw / 16.0f / sh;
+		sy = dh / 16.0f / sw;
+	} 
 	else
-		sprite->setScale(sx, sy);
+	{
+		sx = dw / 16.0f / sw;
+		sy = dh / 16.0f / sh;
+	}
+	sprite->setScale(sx, sy);
+
 	sprite->setMirror(xMirror, yMirror);
-	sprite->setTransform(d2d::Vector(dcenter.x / 16, - dcenter.y / 16), angle);
+	angle = -angle;
+	sprite->setTransform(d2d::Vector(dcenter.x / 16, - dcenter.y / 16), pre_rotate + angle);
 }
 
-std::string ParserLuaFile::Picture::Part::dstMode() const
+std::string ParserLuaFile::Picture::Part::dstMode(const d2d::Vector _dst[4]) const
 {
 	int sm[4], dm[4];
 	d2d::Vector scenter = (src[0] + src[1] + src[2] + src[3]) * 0.25f, 
-		dcenter = (dst[0] + dst[1] + dst[2] + dst[3]) * 0.25f;
+		dcenter = (_dst[0] + _dst[1] + _dst[2] + _dst[3]) * 0.25f;
 	for (int i = 0; i < 4; ++i)
 		sm[i] = nodeMode(scenter, src[i]);
 	for (int i = 0; i < 4; ++i)
-		dm[i] = nodeMode(dcenter, dst[i]);
+		dm[i] = nodeMode(dcenter, _dst[i]);
 	
 	std::stringstream ss;
 	for (int i = 0; i < 4; ++i)
@@ -744,36 +776,48 @@ void ParserLuaFile::Animation::Item::transform(d2d::ISprite* sprite) const
 		sprite->addCol = d2d::transColor(add, d2d::PT_ARGB);
 
 		float x = mat[4] / 16.0f,
-			y = -mat[5] / 16.0f;
-		assert(mat[0] != 0 && mat[3] != 0);
-		float ang1 = atan(-(float)mat[2]/mat[0]),
+			y = mat[5] / 16.0f;
+		float ang1, ang2;
+		if (mat[0] == 0) {
+			ang1 = d2d::PI * 0.5f;
+		} else {
+			ang1 = atan(-(float)mat[2]/mat[0]);
+		}
+		if (mat[3] == 0) {
+			ang2 = d2d::PI * 0.5f;
+		} else {
 			ang2 = atan((float)mat[1]/mat[3]);
-		float angle;
-		float sx, sy, kx, ky;
-		if (fabs(ang1 - ang2) < 0.00001f)
-		{
-			if (ang1 == 0)
-			{
-				sx = mat[0]/1024.0f/cos(ang1);
-				sy = mat[3]/1024.0f/cos(ang1);
-			}
-			else
-			{
-				sx = -mat[2]/1024.0f/sin(ang1);
-				sy = mat[1]/1024.0f/sin(ang1);
-			}
-			angle = ang1;
-			kx = ky = 0;
 		}
-		else
-		{
-			// no rotate
-			sx = mat[0]/1024.0f;
-			sy = mat[3]/1024.0f;
-			kx = float(mat[2])/mat[3];
-			ky = float(mat[1])/mat[0];
-			angle = 0;
-		}
+ 		float angle;
+ 		float sx, sy, kx, ky;
+ 		if (fabs(ang1 - ang2) < 0.00001f)
+ 		{
+ 			if (ang1 == 0)
+ 			{
+ 				sx = mat[0]/1024.0f/cos(ang1);
+ 				sy = mat[3]/1024.0f/cos(ang1);
+ 			}
+ 			else
+ 			{
+ 				sx = mat[1]/1024.0f/sin(ang1);
+				sy = -mat[2]/1024.0f/sin(ang1);
+ 			}
+ 			angle = ang1;
+ 			kx = ky = 0;
+ 		}
+ 		else
+ 		{
+ 			// no rotate
+ 			sx = mat[0]/1024.0f;
+ 			sy = mat[3]/1024.0f;
+ 			kx = float(mat[2])/mat[3];
+ 			ky = float(mat[1])/mat[0];
+ 			angle = 0;
+ 		}
+		// for y
+		y = -y;
+		angle = -angle;
+
 		sprite->rotate(angle);
 		sprite->translate(d2d::Vector(x, y));
 		const d2d::Vector& scale = sprite->getScale();

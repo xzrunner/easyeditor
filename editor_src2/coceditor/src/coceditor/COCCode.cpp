@@ -40,6 +40,8 @@ void COCCode::resolveFromParser(const COCParser& parser)
 	const std::vector<const d2d::ISymbol*>& symbols = parser.m_symbolPrepare.getResult();
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
+		std::cout << "[" << i << "/" << n << "]\n";
+
 		const d2d::ISymbol* symbol = symbols[i];
 		if (const d2d::ImageSymbol* image = dynamic_cast<const d2d::ImageSymbol*>(symbol))
 		{

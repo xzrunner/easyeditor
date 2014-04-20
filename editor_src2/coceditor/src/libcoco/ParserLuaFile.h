@@ -37,7 +37,7 @@ private:
 			void transform(d2d::ISprite* sprite) const;
 
 		private:
-			std::string dstMode() const;
+			std::string dstMode(const d2d::Vector dst[4]) const;
 			// 0 1
 			// 3 2
 			static int nodeMode(const d2d::Vector& center, const d2d::Vector& node);
