@@ -138,7 +138,6 @@
 #include "common/CircleFileAdapter.h"
 #include "common/ShapeFileAdapter.h"
 #include "common/TexPackerAdapter.h"
-#include "common/TexturePackerFileAdapter.h"
 #include "common/Settings.h"
 #include "common/Math.h"
 #include "common/visitors.h"
