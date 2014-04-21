@@ -23,8 +23,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 	, m_control(control)
 	, m_settings(settings)
 {
-	// todo: not 1000?
-	m_timer.Start(500 / Context::Instance()->fps);
+	m_timer.Start(1000 / Context::Instance()->fps);
 }
 
 void PreviewCanvas::initGL()
