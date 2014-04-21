@@ -14,7 +14,7 @@ namespace coceditor
 	class COCCode
 	{
 	public:
-		COCCode(ebuilder::CodeGenerator& gen);
+		COCCode(ebuilder::CodeGenerator& gen, float scale = 1.0f);
 
 		void resolve();
 
@@ -56,6 +56,8 @@ namespace coceditor
 
 	private:
 		ebuilder::CodeGenerator& m_gen;
+
+		float m_scale;
 
 		COCParser m_parser;
 

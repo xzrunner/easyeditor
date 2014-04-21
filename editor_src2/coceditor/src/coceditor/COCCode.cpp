@@ -15,8 +15,9 @@ namespace coceditor
 
 namespace lua = ebuilder::lua;
 
-COCCode::COCCode(ebuilder::CodeGenerator& gen)
+COCCode::COCCode(ebuilder::CodeGenerator& gen, float scale)
 	: m_gen(gen)
+	, m_scale(scale)
 	, m_id(0)
 {
 }
@@ -31,7 +32,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 {
 	size_t size = 0;
 	const TexturesMgr& texMgr = Context::Instance()->texMgr;
-	for (size_t i = 0; i < TexturesMgr::NUM; ++i)
+	for (size_t i = 0; i < TexturesMgr::MAX_NUM; ++i)
 		if (texMgr.textures[i])
 			++size;
 	m_gen.line("texture("+wxString::FromDouble(size).ToStdString()+")");
@@ -316,15 +317,13 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
 
 	// screen
-	const float hw = picture->entry->spriteSourceSize.w * 0.5f / Context::Instance()->scale,
-		hh = picture->entry->spriteSourceSize.h * 0.5f / Context::Instance()->scale;
+	const float hw = picture->entry->spriteSourceSize.w * 0.5f / picture->invscale * m_scale,
+		hh = picture->entry->spriteSourceSize.h * 0.5f / picture->invscale * m_scale;
 	d2d::Vector screen[4];
 	screen[0].set(-hw, hh);
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
-//  	for (size_t i = 0; i < 4; ++i)
-//  		screen[i] += picture->offset / Context::Instance()->scale;
 	// 1. scale
 	for (size_t i = 0; i < 4; ++i)
 		screen[i].x *= sprite->getScale().x;
@@ -481,15 +480,13 @@ void COCCode::resolvePicture(const d2d::ImageSymbol* symbol, const COCParser& pa
 		sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));
 
 	// screen
-	const float hw = picture->entry->spriteSourceSize.w * 0.5f / Context::Instance()->scale,
-		hh = picture->entry->spriteSourceSize.h * 0.5f / Context::Instance()->scale;
+	const float hw = picture->entry->spriteSourceSize.w * 0.5f / picture->invscale * m_scale,
+		hh = picture->entry->spriteSourceSize.h * 0.5f / picture->invscale * m_scale;
 	d2d::Vector screen[4];
 	screen[0].set(-hw, hh);
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
-// 	for (size_t i = 0; i < 4; ++i)
-// 		screen[i] += picture->offset / Context::Instance()->scale;
 
 	// flip y
 	for (size_t i = 0; i < 4; ++i)
@@ -1111,6 +1108,9 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 			d2d::Vector pos = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
 			x = pos.x;
 			y = pos.y;
+
+	 		x = x / picture->invscale;
+	 		y = y / picture->invscale;
 		}
 		else
 		{
@@ -1131,8 +1131,8 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		mat[1] = sx*s + kx*sy*c;
 		mat[2] = ky*sx*c - sy*s;
 		mat[3] = ky*sx*s + sy*c;
-		mat[4] = x / Context::Instance()->scale;
-		mat[5] = y / Context::Instance()->scale;
+		mat[4] = x * m_scale;
+		mat[5] = y * m_scale;
 	}
 
 	for (size_t i = 0; i < 4; ++i)
