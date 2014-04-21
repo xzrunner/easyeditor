@@ -7,6 +7,8 @@
 
 namespace ecomplex
 {
+	static const int FRAME_RATE = 30;
+
 	BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 		EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
 	END_EVENT_TABLE()
@@ -17,7 +19,8 @@ namespace ecomplex
 		, m_editPanel(editPanel)
 		, m_background(NULL)
 	{
-		m_timer.Start(1000 / 30);
+		// todo: not 1000?
+		m_timer.Start(500 / FRAME_RATE);
 		m_currFrame = 1;
 
 		m_bgStyle.color.set(0.8f, 0.8f, 0.8f);

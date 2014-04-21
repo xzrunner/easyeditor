@@ -30,7 +30,8 @@ namespace ebuilder
 				m_canvas = canvas;
 			}
 
-			void start() { m_timer.Start(1000 / FRAME_RATE); }
+			void start() { 	// todo: not 1000?
+				m_timer.Start(500 / FRAME_RATE); }
 			void stop() { m_timer.Stop(); }
 
 			void clear();

@@ -17,7 +17,8 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* editPanel)
 	, m_timer(this, TIMER_ID)
 	, m_yOffset(0.0f)
 {
-	m_timer.Start(1000 / FRAME_RATE);
+	// todo: not 1000?
+	m_timer.Start(500 / FRAME_RATE);
 	loadSprites();
 }
 

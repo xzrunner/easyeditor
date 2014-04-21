@@ -16,7 +16,8 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
 	, m_library(library)
 	, m_symbol(symbol)
 {
-	m_timer.Start(1000 / symbol->m_fps);
+	// todo: not 1000?
+	m_timer.Start(500 / symbol->m_fps);
 	m_currFrame = 1;
 }
 

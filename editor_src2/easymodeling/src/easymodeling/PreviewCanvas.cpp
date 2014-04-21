@@ -14,7 +14,8 @@ PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
 	, m_timer(this, TIMER_ID)
 {
 	setBgColor(d2d::Colorf(0, 0, 0));
-	m_timer.Start(1000 / FRAME_RATE);
+	// todo: not 1000?
+	m_timer.Start(500 / FRAME_RATE);
 }
 
 PreviewCanvas::~PreviewCanvas()

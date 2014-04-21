@@ -25,7 +25,8 @@ EJPreviewCanvas::EJPreviewCanvas(EditPanel* stage, const std::vector<const ISpri
 	, m_timer(this, TIMER_ID)
 {
 	const int FPS = 60;
-	m_timer.Start(1000 / FPS);
+	// todo: not 1000?
+	m_timer.Start(500 / FPS);
 
 	prepareSprites(sprites);
 }
