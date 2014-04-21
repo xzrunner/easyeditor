@@ -210,6 +210,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\coceditor\TexPackerAdapter.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\coceditor\TexPackerAdapter.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\coceditor\TexturesMgr.cpp"
 			>
 		</File>
