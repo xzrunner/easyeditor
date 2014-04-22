@@ -39,6 +39,15 @@ deprecated
 /sg_building/other
 /sg_building_bak
 
+/sg_scene/copy_to_builder/pngs
+/sg_scene/copy_to_builder/script/pack_png/json
+/sg_scene/copy_to_builder/script/pack_png/png
+/sg_scene/copy_to_builder/script/png2pvr/json
+/sg_scene/copy_to_builder/script/png2pvr/pvr
+/sg_scene/copy_to_builder/script/png2pkm/pkm
+/sg_scene/copy_to_builder/script/collect/texpack_json
+/sg_scene/copy_to_builder/script/collect/texpack_tex
+
 /cocres_decode/output
 /cloud_import/data
 /mac_share_file
