@@ -47,6 +47,8 @@ private:
 
 	void copyTriangles(const Mesh& mesh);
 
+	void fixNodeToRegion(d2d::Vector& node);
+
 private:
 	struct Region
 	{

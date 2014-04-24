@@ -95,7 +95,9 @@ void Mesh::move(d2d::Vector* src, const d2d::Vector& dst)
 
 	if (d2d::Math::isPointInArea(dst, m_region.bound))
 	{
-		*src = dst;
+		d2d::Vector d = dst;
+		fixNodeToRegion(d);
+		*src = d;
 		loadTriangles();
 	}
 }
@@ -251,6 +253,22 @@ void Mesh::copyTriangles(const Mesh& mesh)
 		for (int j = 0; j < 3; ++j)
 		{
 			dst->nodes[j]->xy = src->nodes[j]->xy;
+		}
+	}
+}
+
+void Mesh::fixNodeToRegion(d2d::Vector& node)
+{
+	const float REGION = 5;
+
+	for (int i = 0, n = m_region.bound.size(); i < n; ++i)
+	{
+		const d2d::Vector& b = m_region.bound[i];
+		if (fabs(node.x - b.x) < REGION) {
+			node.x = b.x;
+		}
+		if (fabs(node.y - b.y) < REGION) {
+			node.y = b.y;
 		}
 	}
 }
