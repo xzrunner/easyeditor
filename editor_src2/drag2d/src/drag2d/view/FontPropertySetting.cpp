@@ -8,7 +8,7 @@
 namespace d2d
 {
 const wxChar* FontPropertySetting::ALIGN_LABELS[] = { 
-	wxT("left"), wxT("right"), wxT("center"), NULL };
+	wxT("left"), wxT("right"), wxT("center"), wxT("auto"), NULL };
 
 FontPropertySetting::FontPropertySetting(EditPanel* editPanel, FontSprite* sprite)
 	: SpritePropertySetting(editPanel, sprite)
