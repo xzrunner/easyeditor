@@ -19,8 +19,8 @@ public:
 private:
 	static void loadTexture(unsigned int& texture, uint8_t* pixel, int width, int height, int channels, int format);
 
-	static uint8_t* loadPngByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format);
-	static uint8_t* loadPngBySOIL(const std::string& filename, int& width, int& height, int& channels);
+	static uint8_t* loadImageByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format);
+	static uint8_t* loadImageBySOIL(const std::string& filename, int& width, int& height, int& channels);
 
 	static uint8_t* loadPNM(const std::string& filename, int& width, int& height);
 	static uint8_t* loadPPM(const std::string& filename, int& width, int& height);

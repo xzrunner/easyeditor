@@ -36,9 +36,9 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	{
 		// todo: 用libpng读出来的数据再导出时有的会乱掉
 #ifdef USE_SOIL
-		data = loadPngBySOIL(filepath, width, height, channels);
+		data = loadImageBySOIL(filepath, width, height, channels);
 #else
-		data = loadPngByLibpng(filepath, width, height, channels, format);
+		data = loadImageByLibpng(filepath, width, height, channels, format);
 #endif // USE_SOIL
 	}
 	else if (type == "ppm" || type == "pgm")
@@ -46,6 +46,10 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 		std::string filename = filepath.substr(0, filepath.find_last_of("."));
 		channels = 4;
 		data = loadPNM(filename, width, height);
+	}
+	else
+	{
+		data = loadImageBySOIL(filepath, width, height, channels);
 	}
 
 	if (channels == 4)
@@ -140,7 +144,7 @@ void callback_read(png_structp png, png_bytep data, png_size_t size)
 	offset += size;
 }
 
-uint8_t* ImageLoader::loadPngByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format)
+uint8_t* ImageLoader::loadImageByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format)
 {
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
@@ -268,7 +272,7 @@ uint8_t* ImageLoader::loadPngByLibpng(const std::string& filename, int& width, i
 	return NULL;
 }
 
-uint8_t* ImageLoader::loadPngBySOIL(const std::string& filename, int& width, int& height, int& channels)
+uint8_t* ImageLoader::loadImageBySOIL(const std::string& filename, int& width, int& height, int& channels)
 {
 	return SOIL_load_image(filename.c_str(), &width, &height, &channels, 0);
 }
