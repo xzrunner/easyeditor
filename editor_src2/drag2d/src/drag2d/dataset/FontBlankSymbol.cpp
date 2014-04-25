@@ -23,7 +23,8 @@ FontBlankSymbol::FontBlankSymbol()
 	static int id = 0;
 	m_name = wxT("fontblank") + wxVariant(id++);
 
-	align = size = 0;
+	align_hori = align_vert = 0;
+	size = 0;
 	width = height = 100;
 
 	m_font = NULL;
@@ -105,7 +106,12 @@ void FontBlankSymbol::loadResources()
 	name = value["name"].asString();
 	font = value["font"].asString();
 	color = value["color"].asString();
-	align = value["align"].asDouble();
+	if (!value["align"].isNull()) {
+		align_hori = value["align"].asDouble();
+	} else {
+		align_hori = value["align hori"].asDouble();
+		align_vert = value["align vert"].asDouble();
+	}
 	size = value["size"].asDouble();
 	width = value["width"].asDouble();
 	height = value["height"].asDouble();

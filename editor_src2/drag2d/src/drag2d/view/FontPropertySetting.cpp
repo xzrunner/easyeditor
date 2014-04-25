@@ -75,7 +75,7 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->SetPropertyValueString(wxT("Color"), col.GetAsString());
 
 	pg->GetProperty(wxT("AlignHori"))->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
-	pg->GetProperty(wxT("AlignVert"))->SetValue(HORI_ALIGN_LABELS[sprite->align_vert]);
+	pg->GetProperty(wxT("AlignVert"))->SetValue(VERT_ALIGN_LABELS[sprite->align_vert]);
 	pg->GetProperty(wxT("FontSize"))->SetValue(sprite->size);
 	pg->GetProperty(wxT("LabelWidth"))->SetValue(sprite->width);
 	pg->GetProperty(wxT("LabelHeight"))->SetValue(sprite->height);

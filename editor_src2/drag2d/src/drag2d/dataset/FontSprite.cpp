@@ -42,12 +42,25 @@ FontSprite::FontSprite(FontBlankSymbol* symbol)
 	m_symbol->retain();
 	font = m_symbol->font;
 	color = transColor(m_symbol->color, PT_ARGB);
-	if (symbol->align == 0)
+
+	if (symbol->align_hori == 0)
 		align_hori = HAT_LEFT;
-	else if (symbol->align == 1)
+	else if (symbol->align_hori == 1)
 		align_hori = HAT_RIGHT;
-	else
+	else if (symbol->align_hori == 2)
 		align_hori = HAT_CENTER;
+	else
+		align_hori = HAT_AUTO;
+
+	if (symbol->align_vert == 0)
+		align_vert = VAT_TOP;
+	else if (symbol->align_vert == 1)
+		align_vert = VAT_BOTTOM;
+	else if (symbol->align_vert == 2)
+		align_vert = VAT_CENTER;
+	else
+		align_vert = VAT_AUTO;
+
 	align_vert = VAT_TOP;
 	size = symbol->size;
 	width = symbol->width;
@@ -101,7 +114,8 @@ void FontSprite::load(const Json::Value& val)
 	{
 		font = m_symbol->font;
 		color = transColor(m_symbol->color, PT_ARGB);
-		align_hori = HoriAlignType((int)m_symbol->align);
+		align_hori = HoriAlignType((int)m_symbol->align_hori);
+		align_vert = VertAlignType((int)m_symbol->align_vert);
 		size = m_symbol->size;
 		width = m_symbol->width;
 		height = m_symbol->height;

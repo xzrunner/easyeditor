@@ -25,7 +25,7 @@ FontBlankDialog::~FontBlankDialog()
 
 	double tmp;
 	m_align->GetValue().ToDouble(&tmp);
-	m_symbol->align = tmp;
+	m_symbol->align_hori = tmp;
 
 	m_size->GetValue().ToDouble(&tmp);
 	m_symbol->size = tmp;
@@ -81,7 +81,7 @@ void FontBlankDialog::initLayout()
 		csizer->Add(new wxStaticText(this, wxID_ANY, "align"), 0, wxLEFT | wxRIGHT, 5);
 
 		m_align = new wxTextCtrl(this, wxID_ANY);
-		m_align->SetValue(wxString::FromDouble(m_symbol->align));
+		m_align->SetValue(wxString::FromDouble(m_symbol->align_hori));
 		csizer->Add(m_align, 0, wxLEFT | wxRIGHT, 5);
 
 		sizer->Add(csizer);
@@ -150,7 +150,8 @@ void FontBlankDialog::storeSymbol()
 	value["name"] = m_symbol->name;
 	value["font"] = m_symbol->font;
 	value["color"] = m_symbol->color;
-	value["align"] = m_symbol->align;
+	value["align hori"] = m_symbol->align_hori;
+	value["align vert"] = m_symbol->align_vert;
 	value["size"] = m_symbol->size;
 	value["width"] = m_symbol->width;
 	value["height"] = m_symbol->height;

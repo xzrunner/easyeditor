@@ -52,7 +52,7 @@ namespace d2d
 
 		std::string color;
 
-		float align;
+		float align_hori, align_vert;
 		float size;
 
 		float width, height;
