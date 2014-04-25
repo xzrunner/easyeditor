@@ -31,11 +31,11 @@ const unsigned char* ImageProcessor::clip(int xmin, int xmax, int ymin, int ymax
 		return NULL;
 	}
 
-	// todo y方向反转
-	int _ymin = height - ymax;
-	int _ymax = height - ymin;
-	ymin = _ymin;
-	ymax = _ymax;
+// 	// todo y方向反转
+// 	int _ymin = height - ymax;
+// 	int _ymax = height - ymin;
+// 	ymin = _ymin;
+// 	ymax = _ymax;
 
 	int w = xmax - xmin,
 		h = ymax - ymin;
