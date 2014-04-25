@@ -56,7 +56,10 @@ void RectCutCMPT::onLoadEditOP(wxCommandEvent& event)
 		fin.close();
 
 		RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
-		op->loadImageFromFile(value["image filepath"].asString());
+		wxString dlgpath = d2d::FilenameTools::getFileDir(filename);
+		wxString path = value["image filepath"].asString();
+		wxString absolutePath = d2d::FilenameTools::getAbsolutePath(dlgpath, path);
+		op->loadImageFromFile(absolutePath.ToStdString());
 		op->getRectMgr().load(value);
 	}
 }
