@@ -64,9 +64,11 @@ void RectCutCMPT::onLoadEditOP(wxCommandEvent& event)
 wxSizer* RectCutCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(initEditIOLayout());
-	sizer->AddSpacer(10);
+// 	sizer->Add(initEditIOLayout());
+// 	sizer->AddSpacer(10);
 	sizer->Add(initDataOutputLayout());
+	sizer->AddSpacer(10);
+	sizer->Add(initAddRectLayout());
 	return sizer;
 }
 
@@ -132,6 +134,32 @@ wxSizer* RectCutCMPT::initDataOutputLayout()
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Output"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onOutputData));
+		sizer->Add(btn);
+	}
+	return sizer;
+}
+
+wxSizer* RectCutCMPT::initAddRectLayout()
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Add Rect"));
+	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+	{
+		wxSizer* inputSizer = new wxBoxSizer(wxHORIZONTAL);
+
+		m_widthCtrl = new wxTextCtrl(this, wxID_ANY, "100", wxDefaultPosition, wxSize(60, -1));
+		inputSizer->Add(m_widthCtrl);
+
+		inputSizer->AddSpacer(5);
+
+		m_heightCtrl = new wxTextCtrl(this, wxID_ANY, "100", wxDefaultPosition, wxSize(60, -1));
+		inputSizer->Add(m_heightCtrl);
+
+		sizer->Add(inputSizer);
+	}
+	sizer->AddSpacer(5);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Add"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(RectCutCMPT::onAddRect));
 		sizer->Add(btn);
 	}
 	return sizer;
@@ -218,6 +246,18 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 
 	d2d::FinishDialog dlg(this);
 	dlg.ShowModal();
+}
+
+void RectCutCMPT::onAddRect(wxCommandEvent& event)
+{
+	double width, height;
+	m_widthCtrl->GetValue().ToDouble(&width);
+	m_heightCtrl->GetValue().ToDouble(&height);
+	
+	RectCutOP* op = static_cast<RectCutOP*>(m_editOP);
+	op->getRectMgr().insert(d2d::Rect(d2d::Vector(0, 0), d2d::Vector((float)width, (float)height)));
+
+	m_editPanel->Refresh();
 }
 
 }

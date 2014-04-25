@@ -23,15 +23,19 @@ protected:
 private:
 	wxSizer* initEditIOLayout();
 	wxSizer* initDataOutputLayout();
+	wxSizer* initAddRectLayout();
 
 	void onSetImagesPath(wxCommandEvent& event);
 	void onSetJsonPath(wxCommandEvent& event);
 	void onOutputData(wxCommandEvent& event);
+	void onAddRect(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;
 
 	wxTextCtrl *m_imagePath, *m_jsonPath;
+
+	wxTextCtrl *m_widthCtrl, *m_heightCtrl;
 
 }; // RectCutCMPT
 
