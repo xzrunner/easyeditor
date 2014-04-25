@@ -67,7 +67,7 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 		Mesh* mesh = new Mesh(*symbol->m_image, false);
 		d2d::JsonTools::load(value["bound"], mesh->m_region.bound);
 		d2d::JsonTools::load(value["nodes"], mesh->m_region.nodes);
-		mesh->loadTriangles();
+		mesh->refreshTriangles();
 		loadTransform(value["transform"], mesh);
 
 		if (symbol->m_mesh)

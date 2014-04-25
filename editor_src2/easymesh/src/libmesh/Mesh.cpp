@@ -17,7 +17,7 @@ Mesh::Mesh(const Mesh& mesh)
 	, m_height(mesh.m_height)
 	, m_region(mesh.m_region)
 {
-	loadTriangles();
+	refreshTriangles();
 	copyTriangles(mesh);
 }
 
@@ -37,7 +37,7 @@ Mesh::Mesh(const d2d::Image& image, bool initBound)
 		m_region.bound.push_back(d2d::Vector( hw,-hh));
 		m_region.bound.push_back(d2d::Vector( hw, hh));
 		m_region.bound.push_back(d2d::Vector(-hw, hh));
-		loadTriangles();
+		refreshTriangles();
 	}
 }
 
@@ -56,7 +56,7 @@ void Mesh::insert(const d2d::Vector& p)
 	if (d2d::Math::isPointInArea(p, m_region.bound))
 	{
 		m_region.nodes.push_back(p);
-		loadTriangles();
+		refreshTriangles();
 	}
 }
 
@@ -71,7 +71,7 @@ void Mesh::remove(const d2d::Vector& p)
 			if (d2d::Math::getDistance(*itr, p) < Node::RADIUS)
 			{
 				m_region.nodes.erase(itr);
-				loadTriangles();
+				refreshTriangles();
 				break;
 			}
 		}
@@ -98,7 +98,7 @@ void Mesh::move(d2d::Vector* src, const d2d::Vector& dst)
 		d2d::Vector d = dst;
 		fixNodeToRegion(d);
 		*src = d;
-		loadTriangles();
+		refreshTriangles();
 	}
 }
 
@@ -201,37 +201,142 @@ void Mesh::tween(const Mesh& begin, const Mesh& end, float process)
 
 void Mesh::reset()
 {
-	loadTriangles();
+	m_uv_offset.set(0, 0);
+	refreshTriangles();
 }
 
 void Mesh::clear()
 {
 	m_region.nodes.clear();
-	loadTriangles();
+	refreshTriangles();
 }
 
-void Mesh::loadTriangles()
+void Mesh::resetUVOffset(float dx, float dy)
+{
+	m_uv_offset.x += dx;
+	m_uv_offset.y += dy;
+	m_uv_offset.x = m_uv_offset.x - std::floor(m_uv_offset.x);
+	m_uv_offset.y = m_uv_offset.y - std::floor(m_uv_offset.y);
+
+	refreshTrianglesWithUV();
+
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		d2d::Rect r;
+		r.makeInfinite();
+		for (int i = 0; i < 3; ++i) {
+			r.combine(tri->nodes[i]->uv);
+		}
+
+		for (int i = 0; i < 3; ++i) 
+		{
+			Node* n = tri->nodes[i];
+			float x = n->uv.x - m_uv_offset.x;
+			float y = n->uv.y - m_uv_offset.y;
+			x = x - std::floor(x);
+			y = y - std::floor(y);
+			if (fabs(x - 0) < 0.0001f && n->uv.x == r.xMax) {
+				x = 1;
+			}
+			if (fabs(x - 1) < 0.0001f && n->uv.x == r.xMin) {
+				x = 0;
+			}
+			if (fabs(y - 0) < 0.0001f && n->uv.y == r.yMax) {
+				y = 1;
+			}
+			if (fabs(y - 1) < 0.0001f && n->uv.y == r.yMin) {
+				y = 0;
+			}
+			n->uv.x = x;
+			n->uv.y = y;
+		}
+	}
+}
+
+void Mesh::refreshTriangles()
 {
 	clearTriangles();
 
-	std::vector<d2d::Vector> result;
-	std::map<d2d::Vector, Node*, d2d::VectorCmp> map2Node;
-	Node null;
-	d2d::Triangulation::points(m_region.bound, m_region.nodes, result);
-	for (int i = 0, n = result.size(); i < n; ++i)
-		map2Node.insert(std::make_pair(result[i], &null));
+	std::vector<d2d::Vector> tris;
+	d2d::Triangulation::points(m_region.bound, m_region.nodes, tris);
+	loadTriangles(tris);
+}
 
-	for (int i = 0, n = result.size() / 3, ptr = 0; i < n; ++i)
+void Mesh::refreshTrianglesWithUV()
+{
+	//// get bounds
+	//std::set<d2d::Vector, d2d::VectorCmp> bounds;
+	//for (int i = 0, n = m_region.bound.size(); i < n; ++i) {
+	//	bounds.insert(m_region.bound[i]);
+	//}
+	//std::set<d2d::Vector, d2d::VectorCmp> unique;
+	//for (int i = 0, n = m_tris.size(); i < n; ++i)
+	//{
+	//	Triangle* tri = m_tris[i];
+	//	for (int i = 0; i < 3; ++i) {
+	//		if (bounds.find(tri->nodes[i]->xy) == bounds.end()) {
+	//			unique.insert(tri->nodes[i]->xy);
+	//		}
+	//	}
+	//}
+	//std::vector<d2d::Vector> nodes;
+	//copy(unique.begin(), unique.end(), back_inserter(nodes));
+
+	// triangulation
+	int width = fabs(m_region.bound[0].x) * 2;
+	int height = fabs(m_region.bound[0].y) * 2;
+
+	const float MAX = 99999;
+	std::vector<d2d::Vector> tris;
+	std::vector<d2d::Vector> lines;
+	if (m_uv_offset.x != 0)
+	{
+		float x = -width*0.5f + width*m_uv_offset.x;
+		lines.push_back(d2d::Vector(x, -MAX));
+		lines.push_back(d2d::Vector(x, MAX));
+	}
+	if (m_uv_offset.y != 0)
+	{
+		float y = -height*0.5f + height*m_uv_offset.y;
+		lines.push_back(d2d::Vector(-MAX, y));
+		lines.push_back(d2d::Vector(MAX, y));
+	}
+	d2d::Triangulation::pointsAndLines(m_region.bound, m_region.nodes, lines, tris);
+
+	std::vector<std::pair<d2d::Vector, d2d::Vector> > trans_list;
+	std::set<Node*> nodes;
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int i = 0; i < 3; ++i) {
+			nodes.insert(tri->nodes[i]);
+		}
+	}
+	std::set<Node*>::iterator itr = nodes.begin();
+	for ( ; itr != nodes.end(); ++itr)
+	{
+		Node* n = *itr;
+		if (n->xy != n->ori_xy) {
+			trans_list.push_back(std::make_pair(n->ori_xy, n->xy));
+		}
+	}
+
+	// create tris
+	clearTriangles();
+	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
 	{
 		Triangle* tri = new Triangle;
-		for (int j = 0; j < 3; ++j)
-		{
-			std::map<d2d::Vector, Node*, d2d::VectorCmp>::iterator itr 
-				= map2Node.find(result[ptr++]);
-			assert(itr != map2Node.end());
-			if (itr->second == &null)
-				itr->second = new Node(itr->first, m_width, m_height);
-			tri->nodes[j] = itr->second;
+		for (int j = 0; j < 3; ++j) {
+			Node* n = new Node(tris[ptr++], m_width, m_height);
+			for (int i = 0, m = trans_list.size(); i < m; ++i)
+			{
+				if (n->ori_xy == trans_list[i].first) {
+					n->xy = trans_list[i].second;
+					break;
+				}
+			}
+			tri->nodes[j] = n;
 		}
 		m_tris.push_back(tri);
 	}
@@ -241,6 +346,29 @@ void Mesh::clearTriangles()
 {
 	for_each(m_tris.begin(), m_tris.end(), DeletePointerFunctor<Triangle>());
 	m_tris.clear();
+}
+
+void Mesh::loadTriangles(const std::vector<d2d::Vector>& tris)
+{
+	std::map<d2d::Vector, Node*, d2d::VectorCmp> map2Node;
+	Node null;
+	for (int i = 0, n = tris.size(); i < n; ++i)
+		map2Node.insert(std::make_pair(tris[i], &null));
+
+	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
+	{
+		Triangle* tri = new Triangle;
+		for (int j = 0; j < 3; ++j)
+		{
+			std::map<d2d::Vector, Node*, d2d::VectorCmp>::iterator itr 
+				= map2Node.find(tris[ptr++]);
+			assert(itr != map2Node.end());
+			if (itr->second == &null)
+				itr->second = new Node(itr->first, m_width, m_height);
+			tri->nodes[j] = itr->second;
+		}
+		m_tris.push_back(tri);
+	}
 }
 
 void Mesh::copyTriangles(const Mesh& mesh)

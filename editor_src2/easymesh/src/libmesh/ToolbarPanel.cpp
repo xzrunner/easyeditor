@@ -1,6 +1,7 @@
 #include "ToolbarPanel.h"
 #include "CreateMeshCMPT.h"
 #include "EditMeshCMPT.h"
+#include "EditUVCMPT.h"
 #include "StagePanel.h"
 
 namespace emesh
@@ -14,6 +15,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full)
 		addChild(new CreateMeshCMPT(this, wxT("Create"), stage));
 	}
 	addChild(new EditMeshCMPT(this, wxT("Edit"), stage));
+	addChild(new EditUVCMPT(this, wxT("UV"), stage));
 	SetSizer(initLayout());	
 }
 

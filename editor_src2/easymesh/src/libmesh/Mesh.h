@@ -40,10 +40,14 @@ public:
 	void reset();
 	void clear();
 
+	void resetUVOffset(float dx, float dy);
+
 private:
-	void loadTriangles();
+	void refreshTriangles();
+	void refreshTrianglesWithUV();
 
 	void clearTriangles();
+	void loadTriangles(const std::vector<d2d::Vector>& tris);
 
 	void copyTriangles(const Mesh& mesh);
 
@@ -65,6 +69,8 @@ private:
 	Region m_region;
 
 	std::vector<Triangle*> m_tris;
+
+	d2d::Vector m_uv_offset;
 
 	friend class FileIO;
 

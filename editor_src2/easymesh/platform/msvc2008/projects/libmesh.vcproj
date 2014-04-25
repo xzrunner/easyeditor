@@ -312,6 +312,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="uv"
+				>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditUVCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditUVCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditUVOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditUVOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"

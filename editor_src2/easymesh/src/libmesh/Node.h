@@ -11,13 +11,13 @@ class Node : public d2d::Object
 public:
 	Node() {}
 	Node(const d2d::Vector& pos, int width, int height) {
-		xy = pos;
+		xy = ori_xy = pos;
  		uv.x = pos.x / width + 0.5f;
  		uv.y = pos.y / height + 0.5f;
 	}
 	Node(const Node& n) {
 		uv = n.uv;
-		xy = n.xy;
+		xy = ori_xy = n.xy;
 	}
 
 public:
@@ -25,6 +25,7 @@ public:
 
 public:
 	d2d::Vector uv, xy;
+	d2d::Vector ori_xy;
 
 }; // Node
 
