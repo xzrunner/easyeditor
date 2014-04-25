@@ -14,7 +14,8 @@ FontSprite::FontSprite()
 {
 	font = "";
 	color.set(1, 1, 1, 1);
-	align = AT_LEFT;
+	align_hori = HAT_LEFT;
+	align_vert = VAT_TOP;
 	size = 16;
 	width = 100;
 	height = 20;
@@ -27,7 +28,8 @@ FontSprite::FontSprite(const FontSprite& sprite)
 	m_symbol->retain();
 	font = sprite.font;
 	color = sprite.color;
-	align = sprite.align;
+	align_hori = sprite.align_hori;
+	align_vert = sprite.align_vert;
 	size = sprite.size;
 	width = sprite.width;
 	height = sprite.height;
@@ -41,11 +43,12 @@ FontSprite::FontSprite(FontBlankSymbol* symbol)
 	font = m_symbol->font;
 	color = transColor(m_symbol->color, PT_ARGB);
 	if (symbol->align == 0)
-		align = AT_LEFT;
+		align_hori = HAT_LEFT;
 	else if (symbol->align == 1)
-		align = AT_RIGHT;
+		align_hori = HAT_RIGHT;
 	else
-		align = AT_CENTER;
+		align_hori = HAT_CENTER;
+	align_vert = VAT_TOP;
 	size = symbol->size;
 	width = symbol->width;
 	height = symbol->height;
@@ -98,7 +101,7 @@ void FontSprite::load(const Json::Value& val)
 	{
 		font = m_symbol->font;
 		color = transColor(m_symbol->color, PT_ARGB);
-		align = AlignType((int)m_symbol->align);
+		align_hori = HoriAlignType((int)m_symbol->align);
 		size = m_symbol->size;
 		width = m_symbol->width;
 		height = m_symbol->height;
@@ -108,7 +111,13 @@ void FontSprite::load(const Json::Value& val)
 	{
 		font = val["font"].asString();
 		color = transColor(val["color"].asString(), PT_ARGB);
-		align = AlignType(val["align"].asInt());
+		// is old version data
+		if (!val["align"].isNull()) {
+			align_hori = HoriAlignType(val["align"].asInt());
+		} else {
+			align_hori = HoriAlignType(val["align hori"].asInt());
+			align_vert = VertAlignType(val["align vert"].asInt());
+		}
 		size = val["size"].asInt();
 		width = val["label_width"].asInt();
 		height = val["label_height"].asInt();
@@ -127,7 +136,8 @@ void FontSprite::store(Json::Value& val) const
 
 	val["font"] = font;
 	val["color"] = transColor(color, PT_ARGB);
-	val["align"] = align;
+	val["align hori"] = align_hori;
+	val["align vert"] = align_vert;
 	val["size"] = size;
 	val["label_width"] = width;
 	val["label_height"] = height;

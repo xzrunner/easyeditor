@@ -20,7 +20,8 @@ protected:
 	virtual void initProperties(wxPropertyGrid* pg);
 
 private:
-	static const wxChar* ALIGN_LABELS[];
+	static const wxChar* HORI_ALIGN_LABELS[];
+	static const wxChar* VERT_ALIGN_LABELS[];
 
 }; // FontPropertySetting
 }

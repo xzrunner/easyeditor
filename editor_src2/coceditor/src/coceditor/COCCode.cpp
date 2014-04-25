@@ -874,7 +874,13 @@ void COCCode::resolveSpriteForComponent(const d2d::ISprite* sprite, std::vector<
 				std::string aName = lua::assign("name", "\""+sprite->name+"\"");
 				std::string aFont = lua::assign("font", "\""+font->font+"\"");
 				std::string aColor = lua::assign("color", transColor(font->color, d2d::PT_ARGB));
-				std::string aAlign = lua::assign("align", wxString::FromDouble(font->align).ToStdString());
+
+//				std::string aAlign = lua::assign("align", wxString::FromDouble(font->align).ToStdString());
+				int align_hori = font->align_hori;
+				int align_vert = font->align_vert;
+				int align = align_hori | (align_vert << 4);
+				std::string aAlign = lua::assign("align", wxString::FromDouble(align).ToStdString());
+
 				std::string aSize = lua::assign("size", wxString::FromDouble(font->size).ToStdString());
 				std::string aWidth = lua::assign("width", wxString::FromDouble(font->width).ToStdString());
 				std::string aHeight = lua::assign("height", wxString::FromDouble(font->height).ToStdString());

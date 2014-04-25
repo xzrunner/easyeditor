@@ -313,11 +313,10 @@ void CocoPacker::resolveFont(const d2d::FontSprite* sprite)
 		m_gen.line(lua::assign("id", sid.c_str()) + ",");
 	}
 
-
-
 	std::string aFont = lua::assign("font", "\""+sprite->font+"\"");
 	std::string aColor = lua::assign("color", transColor(sprite->color, d2d::PT_ARGB));
-	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align).ToStdString());
+//	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align).ToStdString());
+	std::string aAlign = lua::assign("align", wxString::FromDouble(sprite->align_hori).ToStdString());
 	std::string aSize = lua::assign("size", wxString::FromDouble(sprite->size).ToStdString());
 	std::string aWidth = lua::assign("width", wxString::FromDouble(sprite->width).ToStdString());
 	std::string aHeight = lua::assign("height", wxString::FromDouble(sprite->height).ToStdString());

@@ -7,11 +7,21 @@
 
 namespace d2d
 {
-enum AlignType
+
+enum HoriAlignType
 {
-	AT_LEFT = 0,
-	AT_RIGHT = 1,
-	AT_CENTER = 2
+	HAT_LEFT = 0,
+	HAT_RIGHT = 1,
+	HAT_CENTER = 2,
+	HAT_AUTO = 3
+};
+
+enum VertAlignType
+{
+	VAT_TOP = 0,
+	VAT_BOTTOM = 1,
+	VAT_CENTER = 2,
+	VAT_AUTO = 3
 };
 
 class FontSprite : public ISprite
@@ -47,7 +57,8 @@ public:
 
 	Colorf color;
 
-	AlignType align;
+	HoriAlignType align_hori;
+	VertAlignType align_vert;
 	int size;
 
 	int width, height;
