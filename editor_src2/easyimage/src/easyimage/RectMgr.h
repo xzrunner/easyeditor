@@ -34,7 +34,7 @@ public:
 
 	Node queryNode(const d2d::Vector& pos) const;
 
-	const d2d::Rect* queryRect(const d2d::Vector& pos) const;
+	d2d::Rect* queryRect(const d2d::Vector& pos) const;
 
 	bool moveNode(const Node& node, const d2d::Vector& pos);
 	void moveRect(const d2d::Rect* rect, const d2d::Vector& from, const d2d::Vector& to);

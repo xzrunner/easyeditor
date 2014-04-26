@@ -45,6 +45,15 @@ bool RectCutOP::onMouseLeftUp(int x, int y)
 		}
 		m_nodeSelected.rect = NULL;
 	}
+	// fix rect
+	if (m_rectSelected)
+	{
+		m_rectSelected->xMin = (int)(m_rectSelected->xMin + 0.5f);
+		m_rectSelected->xMax = (int)(m_rectSelected->xMax + 0.5f);
+		m_rectSelected->yMin = (int)(m_rectSelected->yMin + 0.5f);
+		m_rectSelected->yMax = (int)(m_rectSelected->yMax + 0.5f);
+		m_editPanel->Refresh();
+	}
 
 	return false;
 }

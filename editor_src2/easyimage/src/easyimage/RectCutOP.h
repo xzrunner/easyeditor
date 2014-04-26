@@ -50,7 +50,7 @@ private:
 	d2d::Vector m_captured;
 
 	RectMgr::Node m_nodeSelected;
-	const d2d::Rect* m_rectSelected;
+	d2d::Rect* m_rectSelected;
 
 	RectMgr m_rects;
 

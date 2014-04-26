@@ -158,7 +158,7 @@ RectMgr::Node RectMgr::queryNode(const d2d::Vector& pos) const
 	return ret;
 }
 
-const d2d::Rect* RectMgr::queryRect(const d2d::Vector& pos) const
+d2d::Rect* RectMgr::queryRect(const d2d::Vector& pos) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
