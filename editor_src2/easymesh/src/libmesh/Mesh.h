@@ -44,6 +44,8 @@ public:
 
 private:
 	void refreshTriangles();
+
+	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
 	void refreshTrianglesWithUV();
 
 	void clearTriangles();

@@ -154,5 +154,20 @@ namespace d2d
 		}
 	}; // VectorCmp
 
+	class VectorCmpX
+	{
+	public:
+		bool operator () (const Vector& p0, const Vector& p1) const {
+			return p0.x < p1.x;
+		}
+	}; // VectorCmp
+
+	class VectorCmpY
+	{
+	public:
+		bool operator () (const Vector& p0, const Vector& p1) const {
+			return p0.y < p1.y;
+		}
+	}; // VectorCmp
 }
 

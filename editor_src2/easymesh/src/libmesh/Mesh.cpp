@@ -263,6 +263,58 @@ void Mesh::refreshTriangles()
 	loadTriangles(tris);
 }
 
+void Mesh::getLinesCutByUVBounds(std::vector<d2d::Vector>& lines)
+{
+	// hori
+	if (m_uv_offset.y != 0)
+	{
+		int height = fabs(m_region.bound[0].y) * 2;
+		std::set<d2d::Vector, d2d::VectorCmpX> nodes;
+		float y = -height*0.5f + height*m_uv_offset.y;
+		for (int i = 0, n = m_tris.size(); i < n; ++i)
+		{
+			Triangle* tri = m_tris[i];
+			for (int i = 0; i < 3; ++i) {
+				Node* sn = tri->nodes[i];
+				Node* en = tri->nodes[(i+1) % 3];
+				if (sn->xy.y == en->xy.y) {
+					continue;
+				}
+				float x = d2d::Math::findXOnSeg(sn->xy, en->xy, y);
+				if (x > sn->xy.x && x < en->xy.x) {
+					nodes.insert(d2d::Vector(x, y));
+				}
+			}
+		}
+		assert(nodes.size() % 2 == 0);
+		copy(nodes.begin(), nodes.end(), back_inserter(lines));
+	}
+	// vert
+	if (m_uv_offset.x != 0)
+	{
+		int width = fabs(m_region.bound[0].x) * 2;
+		std::set<d2d::Vector, d2d::VectorCmpY> nodes;
+		float x = -width*0.5f + width*m_uv_offset.x;
+		for (int i = 0, n = m_tris.size(); i < n; ++i)
+		{
+			Triangle* tri = m_tris[i];
+			for (int i = 0; i < 3; ++i) {
+				Node* sn = tri->nodes[i];
+				Node* en = tri->nodes[(i+1) % 3];
+				if (sn->xy.x == en->xy.x) {
+					continue;
+				}
+				float y = d2d::Math::findXOnSeg(sn->xy, en->xy, x);
+				if (y > sn->xy.y && y < en->xy.y) {
+					nodes.insert(d2d::Vector(x, y));
+				}
+			}
+		}
+		assert(nodes.size() % 2 == 0);
+		copy(nodes.begin(), nodes.end(), back_inserter(lines));
+	}
+}
+
 void Mesh::refreshTrianglesWithUV()
 {
 	//// get bounds
@@ -302,6 +354,9 @@ void Mesh::refreshTrianglesWithUV()
 		lines.push_back(d2d::Vector(-MAX, y));
 		lines.push_back(d2d::Vector(MAX, y));
 	}
+	//std::vector<d2d::Vector> tris;
+	//std::vector<d2d::Vector> lines;
+	//getLinesCutByUVBounds(lines);
 	d2d::Triangulation::pointsAndLines(m_region.bound, m_region.nodes, lines, tris);
 
 	std::vector<std::pair<d2d::Vector, d2d::Vector> > trans_list;
@@ -322,6 +377,46 @@ void Mesh::refreshTrianglesWithUV()
 		}
 	}
 
+	// uv bound to trans_list
+	if (m_uv_offset.y != 0)
+	{
+// 		float hw = width * 0.5f;
+// 		float y = -height*0.5f + height*m_uv_offset.y;
+// 		for (int i = 0, n = m_tris.size(); i < n; ++i) {
+// 			Triangle* tri = m_tris[i];
+// 			for (int i = 0; i < 3; ++i) {
+// 				Node* curr = tri->nodes[i];
+// 				Node* next = tri->nodes[(i+1)%3];
+// 				if (((y > curr->ori_xy.y && y < next->ori_xy.y) || (y < curr->ori_xy.y && y > next->ori_xy.y)) &&
+// 					fabs(curr->ori_xy.x - hw) < 0.0001f && fabs(next->ori_xy.x - hw) < 0.0001f) {
+// 						d2d::Vector from = (curr->ori_xy + next->ori_xy) * 0.5f;
+// 						d2d::Vector to = (curr->xy + next->xy) * 0.5f;
+// 
+// 						trans_list.push_back(std::make_pair(n->ori_xy, n->xy));
+// 				}
+// 			}
+// 		}
+
+		float y = -height*0.5f + height*m_uv_offset.y;
+		for (int i = 0, n = m_tris.size(); i < n; ++i) {
+			Triangle* tri = m_tris[i];
+			for (int i = 0; i < 3; ++i) {
+				Node* curr = tri->nodes[i];
+				Node* next = tri->nodes[(i+1)%3];
+				if ((y > curr->ori_xy.y && y < next->ori_xy.y || 
+					y < curr->ori_xy.y && y > next->ori_xy.y) &&
+					(curr->ori_xy != curr->xy || next->ori_xy != next->xy)) {
+						d2d::Vector from, to;
+						from.y = to.y = y;
+						from.x = d2d::Math::findXOnSeg(curr->ori_xy, next->ori_xy, y);
+						to.x = d2d::Math::findXOnSeg(curr->xy, next->xy, y);
+						trans_list.push_back(std::make_pair(from, to));
+				}
+			}
+		}
+	}
+
+
 	// create tris
 	clearTriangles();
 	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
@@ -331,7 +426,8 @@ void Mesh::refreshTrianglesWithUV()
 			Node* n = new Node(tris[ptr++], m_width, m_height);
 			for (int i = 0, m = trans_list.size(); i < m; ++i)
 			{
-				if (n->ori_xy == trans_list[i].first) {
+				float dis = d2d::Math::getDistanceSquare(n->ori_xy, trans_list[i].first);
+				if (dis < 0.01) {
 					n->xy = trans_list[i].second;
 					break;
 				}
@@ -340,6 +436,78 @@ void Mesh::refreshTrianglesWithUV()
 		}
 		m_tris.push_back(tri);
 	}
+
+
+	//// for uv bounds
+	//if (m_uv_offset.x != 0)
+	//{
+	//	float x = -width*0.5f + width*m_uv_offset.x;
+	//	std::map<d2d::Vector, std::vector<std::pair<Node*, Node*> >, d2d::VectorCmp> connected;
+	//	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	//	{
+	//		for (int j = 0; j < 3; ++j)
+	//		{
+	//			Node* curr = m_tris[i]->nodes[j];
+	//			if (curr->xy.x == x) {
+	//				Node* next = m_tris[i]->nodes[(j+1)%3];
+	//				if (next->xy.x != x) {
+	//					std::map<d2d::Vector, std::vector<std::pair<Node*, Node*> >, d2d::VectorCmp>::iterator itr 
+	//						= connected.find(curr->xy);
+	//					if (itr != connected.end()) {
+	//						itr->second.push_back(std::make_pair(curr, next));
+	//					} else {
+	//						std::vector<std::pair<Node*, Node*> > nodes;
+	//						nodes.push_back(std::make_pair(curr, next));
+	//						connected.insert(std::make_pair(curr->xy, nodes));
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//	assert(connected.size() == 0 || connected.size() == 2);
+	//}
+	//if (m_uv_offset.y != 0)
+	//{
+	//	float y = -height*0.5f + height*m_uv_offset.y;
+	//	std::map<d2d::Vector, std::vector<std::pair<Node*, Node*> >, d2d::VectorCmp> connected;
+	//	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	//	{
+	//		for (int j = 0; j < 3; ++j)
+	//		{
+	//			Node* curr = m_tris[i]->nodes[j];
+	//			if (curr->xy.y == y) {
+	//				Node* next = m_tris[i]->nodes[(j+1)%3];
+	//				if (next->xy.y != y) {
+	//					std::map<d2d::Vector, std::vector<std::pair<Node*, Node*> >, d2d::VectorCmp>::iterator itr 
+	//						= connected.find(curr->xy);
+	//					if (itr != connected.end()) {
+	//						itr->second.push_back(std::make_pair(curr, next));
+	//					} else {
+	//						std::vector<std::pair<Node*, Node*> > nodes;
+	//						nodes.push_back(std::make_pair(curr, next));
+	//						connected.insert(std::make_pair(curr->xy, nodes));
+	//					}
+	//				}
+	//			}
+	//		}
+	//	}
+	//	assert(connected.size() == 0 || connected.size() == 2);
+
+	//	std::map<d2d::Vector, std::vector<std::pair<Node*, Node*> >, d2d::VectorCmp>::iterator itr 
+	//		= connected.begin();
+	//	for ( ; itr != connected.end(); ++itr)
+	//	{
+	//		float cx = 0;
+	//		int size = itr->second.size();
+	//		for (int i = 0; i < size; ++i) {
+	//			cx += itr->second[i].second->xy.x;
+	//		}
+	//		cx /= size;
+	//		for (int i = 0; i < size; ++i) {
+	//			itr->second[i].second->xy.x = cx;
+	//		}
+	//	}
+	//}
 }
 
 void Mesh::clearTriangles()
