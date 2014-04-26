@@ -23,10 +23,10 @@ const unsigned char* ImageProcessor::clip(int xmin, int xmax, int ymin, int ymax
 	int channels = m_image->channels();
 	const unsigned char* pixels = m_image->getPixelData();
 
-	if (xmin < 0 || xmin >= width ||
-		xmax < 0 || xmax >= width ||
-		ymin < 0 || ymin >= height ||
-		ymax < 0 || ymax >= height ||
+	if (xmin < 0 || xmin > width ||
+		xmax < 0 || xmax > width ||
+		ymin < 0 || ymin > height ||
+		ymax < 0 || ymax > height ||
 		xmin >= xmax || ymin >= ymax) {
 		return NULL;
 	}
