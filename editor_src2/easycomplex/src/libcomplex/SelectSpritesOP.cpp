@@ -25,16 +25,16 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
-// 		Symbol& symbol = const_cast<Symbol&>(complex->getSymbol());
-// 		EditDialog dlg(m_editPanel, &symbol);
-// 		dlg.ShowModal();
-// 
-//  		m_editPanel->resetCanvas();
+ 		Symbol& symbol = const_cast<Symbol&>(complex->getSymbol());
+ 		EditDialog dlg(m_editPanel, &symbol);
+ 		dlg.ShowModal();
+ 
+  		m_editPanel->resetCanvas();
 
 		//////////////////////////////////////////////////////////////////////////
 
-		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
-		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
+// 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
+// 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
 	//else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(selected))
 	//{
