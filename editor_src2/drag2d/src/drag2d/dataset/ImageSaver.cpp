@@ -1,4 +1,5 @@
 #include "ImageSaver.h"
+#include "common/Exception.h"
 
 #include <SOIL/stb_image_write.h>
 
@@ -8,6 +9,10 @@ namespace d2d
 void ImageSaver::storeToFile(const uint8_t* pixels, int width, int height,
 	const std::string& filename, Type type)
 {
+	if (!pixels) {
+		throw Exception("Fail to store image %s: null pixles!", filename.c_str());
+	}
+
 	switch (type)
 	{
 	case e_png:
@@ -22,7 +27,12 @@ void ImageSaver::storeToFile(const uint8_t* pixels, int width, int height,
 void ImageSaver::storePNG(const uint8_t* pixels, int width, int height,
 	const std::string& filename)
 {
-	std::string filepath = filename + ".png";
+	std::string filepath;
+	if (filename.rfind('.') != std::string::npos) {
+		filepath = filename;
+	} else {
+		filepath = filename + ".png";
+	}
 	stbi_write_png(filepath.c_str(), width, height, 4, pixels, 0);
 }
 
