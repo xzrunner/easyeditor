@@ -76,6 +76,20 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 	}
 }
 
+void FileIO::loadStruct(const char* filepath, Mesh& mesh)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	d2d::JsonTools::load(value["bound"], mesh.m_region.nodes);
+	d2d::JsonTools::load(value["nodes"], mesh.m_region.nodes);
+}
+
 void FileIO::storeTransform(const Mesh* mesh, Json::Value& value)
 {
 	std::vector<d2d::Vector> transform;

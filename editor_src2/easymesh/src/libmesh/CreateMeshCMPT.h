@@ -17,6 +17,7 @@ protected:
 	virtual wxSizer* initLayout();
 
 private:
+	void onCopy(wxCommandEvent& event);
 	void onClear(wxCommandEvent& event);
 
 private:

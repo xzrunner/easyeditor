@@ -2,6 +2,7 @@
 #include "CreateMeshOP.h"
 #include "StagePanel.h"
 #include "Mesh.h"
+#include "FileIO.h"
 
 namespace emesh
 {
@@ -17,12 +18,33 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const wxString& name,
 wxSizer* CreateMeshCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->AddSpacer(20);
-	wxButton* btnClear = new wxButton(this, wxID_ANY, wxT("Clear"));
- 	Connect(btnClear->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
- 		wxCommandEventHandler(CreateMeshCMPT::onClear));
-	sizer->Add(btnClear);
+	sizer->AddSpacer(15);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Copy..."));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+			wxCommandEventHandler(CreateMeshCMPT::onCopy));
+		sizer->Add(btn);
+	}
+	sizer->AddSpacer(10);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Clear"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+			wxCommandEventHandler(CreateMeshCMPT::onClear));
+		sizer->Add(btn);
+	}
 	return sizer;
+}
+
+void CreateMeshCMPT::onCopy(wxCommandEvent& event)
+{
+	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_mesh);
+	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
+		wxT("*_") + tag + wxT(".json"), wxFD_OPEN);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		FileIO::loadStruct(dlg.GetPath(), *m_stage->getMesh());
+		m_editPanel->Refresh();
+	}
 }
 
 void CreateMeshCMPT::onClear(wxCommandEvent& event)
