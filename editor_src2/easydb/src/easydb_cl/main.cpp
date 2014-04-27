@@ -12,6 +12,7 @@
 #include "DFFParser.h"
 #include "ReverseAnimation.h"
 #include "PackParticle3D.h"
+#include "ClipImages.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -53,28 +54,26 @@ void format(const std::string& dirpath, const std::string& op)
 	}
 }
 
-int main(int argc, char *argv[])
+static void command(int argc, char *argv[])
 {
 	if (argc < 2) {
 		std::cerr << "Need Command: [verify] ... !" << std::endl;
 		std::cerr << "verify [folder path] (-images | -jsons)" << std::endl;
-		return 1;
+		return;
 	}
-
-	InitSymbolCreators();
 
 	std::string cmd = argv[1];
 	if (cmd == "verify")
 	{
 		if (argc < 3) {
 			std::cerr << "Need Resources' folder path!" << std::endl;
-			return 1;
+			return;
 		}
 
 		std::string dirpath = argv[2];
 		if (argc < 4) {
 			std::cerr << "Need [-images] or [-jsons]!" << std::endl;
-			return 1;
+			return;
 		}
 
 		verify(dirpath, argv[3]);
@@ -85,7 +84,7 @@ int main(int argc, char *argv[])
 	{
 		if (argc < 5) {
 			std::cerr << "Params: [path0] [path1] [-images] !" << std::endl;
-			return 1;
+			return;
 		}
 
 		fix(argv[2], argv[3], argv[4]);
@@ -94,7 +93,7 @@ int main(int argc, char *argv[])
 	{
 		if (argc < 3) {
 			std::cerr << "Params: [dir]!" << std::endl;
-			return 1;
+			return;
 		}
 
 		std::string dir = argv[2];
@@ -104,7 +103,7 @@ int main(int argc, char *argv[])
 	{
 		if (argc < 4) {
 			std::cerr << "Params: [-jsons] [dir] !" << std::endl;
-			return 1;
+			return;
 		}
 
 		format(argv[3], argv[2]);
@@ -113,7 +112,7 @@ int main(int argc, char *argv[])
 	{
 		if (argc < 5) {
 			std::cerr << "Params: [src] [dst] [list]!" << std::endl;
-			return 1;
+			return;
 		}
 
 		std::string srcdir = argv[2];
@@ -126,7 +125,7 @@ int main(int argc, char *argv[])
 		std::locale::global(std::locale("C"));
 		if (fin.fail()) {
 			std::cerr << "Can't open file " << listfile << std::endl;
-			return 1;
+			return;
 		}
 		std::string str;
 		while (getline(fin, str)) {
@@ -141,7 +140,7 @@ int main(int argc, char *argv[])
 	{
 		if (argc < 4) {
 			std::cerr << "Params: [src dir] [dst dir]!" << std::endl;
-			return 1;
+			return;
 		}
 
 		std::string srcdir = argv[2];
@@ -151,15 +150,15 @@ int main(int argc, char *argv[])
 	} else if (cmd == "text") {
 		if (argc < 4) {
 			std::cerr << "Params: [font file] [text file]!" << std::endl;
-			return 1;
+			return;
 		} 
 
- 		edb::DistanceFieldFont dff(argv[2]);
- 		dff.test(argv[3]);
+		edb::DistanceFieldFont dff(argv[2]);
+		dff.test(argv[3]);
 	} else if (cmd == "listfont") {
 		if (argc < 5) {
 			std::cerr << "Params: [font file] [text file] [out file]!" << std::endl;
-			return 1;
+			return;
 		} 
 
 		edb::DistanceFieldFont dff(argv[2]);
@@ -167,25 +166,43 @@ int main(int argc, char *argv[])
 	} else if (cmd == "loadtext") {
 		if (argc < 3) {
 			std::cerr << "Params: [font file]!" << std::endl;
-			return 1;
+			return;
 		}
 
- 		edb::DFFParser parser(argv[2]);
- 		parser.outputImageFast(23, 25);
+		edb::DFFParser parser(argv[2]);
+		parser.outputImageFast(23, 25);
 
-//  		edb::DFFParser parser(argv[2]);
-//   		int edge = 8;
-//   		for (int i = 0; i < 8; ++i) {
-//   			parser.outputImageFast(edge, edge);
-//   			edge = edge << 1;
-//   		}
+		//  		edb::DFFParser parser(argv[2]);
+		//   		int edge = 8;
+		//   		for (int i = 0; i < 8; ++i) {
+		//   			parser.outputImageFast(edge, edge);
+		//   			edge = edge << 1;
+		//   		}
 	} else if (cmd == "pack") {
 		if (argc < 4) {
 			std::cerr << "Params: [src dir] [dst file]!" << std::endl;
-			return 1;
+			return;
 		}
 
 		edb::PackParticle3D::Pack(argv[2], argv[3]);
+	} else if (cmd == "clip") {
+		if (argc < 3) {
+			std::cerr << "Params: [dir] !" << std::endl;
+			return;
+		}
+
+		edb::ClipImages::ClipImages(argv[2]);
+	}
+}
+
+int main(int argc, char *argv[])
+{
+	InitSymbolCreators();
+
+	try {
+		command(argc, argv);
+	} catch (d2d::Exception& e) {
+		std::cerr << e.what() << std::endl;
 	}
 
 	return 0;

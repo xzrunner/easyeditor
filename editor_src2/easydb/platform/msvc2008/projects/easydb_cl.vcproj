@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -269,6 +269,14 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\easydb\ClipImages.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easydb\ClipImages.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\..\src\easydb\CopyFiles.cpp"
 			>
