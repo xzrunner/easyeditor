@@ -136,7 +136,6 @@ d2d::Rect ImageProcessor::trim() const
 		}
 	}
 
-	sub.translate(d2d::Vector(-width*0.5f, -height*0.5f));
 	return sub;
 }
 
