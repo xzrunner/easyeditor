@@ -98,6 +98,7 @@ void Mesh::move(d2d::Vector* src, const d2d::Vector& dst)
 		d2d::Vector d = dst;
 		fixNodeToRegion(d);
 		*src = d;
+		fixNodes();
 		refreshTriangles();
 	}
 }
@@ -250,6 +251,26 @@ void Mesh::resetUVOffset(float dx, float dy)
 			}
 			n->uv.x = x;
 			n->uv.y = y;
+		}
+	}
+}
+
+void Mesh::fixNodes()
+{
+	std::vector<d2d::Vector>::iterator itr = m_region.nodes.begin();
+	for ( ; itr != m_region.nodes.end(); )
+	{
+		int i = 0, n = m_region.bound.size();
+		for (; i < n; ++i)
+		{
+			float dis = d2d::Math::getDistanceSquare(*itr, m_region.bound[i]);
+			if (dis < Node::RADIUS) {
+				itr = m_region.nodes.erase(itr);
+				break;
+			}
+		}
+		if (i == n) {
+			++itr;
 		}
 	}
 }
@@ -555,15 +576,13 @@ void Mesh::copyTriangles(const Mesh& mesh)
 
 void Mesh::fixNodeToRegion(d2d::Vector& node)
 {
-	const float REGION = 5;
-
 	for (int i = 0, n = m_region.bound.size(); i < n; ++i)
 	{
 		const d2d::Vector& b = m_region.bound[i];
-		if (fabs(node.x - b.x) < REGION) {
+		if (fabs(node.x - b.x) < Node::RADIUS) {
 			node.x = b.x;
 		}
-		if (fabs(node.y - b.y) < REGION) {
+		if (fabs(node.y - b.y) < Node::RADIUS) {
 			node.y = b.y;
 		}
 	}

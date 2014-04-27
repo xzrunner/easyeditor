@@ -42,6 +42,8 @@ public:
 
 	void resetUVOffset(float dx, float dy);
 
+	void fixNodes();
+
 private:
 	void refreshTriangles();
 
