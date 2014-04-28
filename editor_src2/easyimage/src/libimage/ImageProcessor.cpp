@@ -62,14 +62,14 @@ d2d::Rect ImageProcessor::trim() const
 		return sub;
 	}
 
-	sub = m_image->getRegion();
-
 	int width = m_image->originWidth(),
 		height = m_image->originHeight();
 	int channels = m_image->channels();
 	if (channels != 4 || width == 0 || height == 0) {
 		return sub;
 	}
+
+	sub = m_image->getRegion();
 
 	// down
 	sub.yMin = 0;

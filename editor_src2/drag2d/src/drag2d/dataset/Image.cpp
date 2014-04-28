@@ -55,8 +55,11 @@ bool Image::loadFromFile(const wxString& filepath)
 #endif
 		if (Settings::bImageEdgeClip) {
 			eimage::ImageProcessor processor(this);
-			m_region = processor.trim();
-			m_region.translate(d2d::Vector(-m_width*0.5f, -m_height*0.5f));
+			d2d::Rect r = processor.trim();
+			if (r.isValid()) {
+				r.translate(d2d::Vector(-m_width*0.5f, -m_height*0.5f));
+				m_region = r;
+			}
 		}
  		return true;
  	}

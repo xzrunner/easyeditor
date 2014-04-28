@@ -53,7 +53,7 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	}
 
 	if (channels == 4)
-		fixPixelsData(data, width, height);
+		checkPixelsDataAlpha(data, width, height);
 
 	if (format == 0)
 	{
@@ -73,7 +73,7 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	return data;
 }
 
-void ImageLoader::fixPixelsData(uint8_t* pixels, int width, int height)
+void ImageLoader::checkPixelsDataAlpha(uint8_t* pixels, int width, int height)
 {
 	int ptr = 0;
 	for (int i = 0; i < height; ++i)
@@ -124,15 +124,41 @@ void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int width, 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	glTexImage2D(GL_TEXTURE_2D,
-		0,
-		format,
-		(GLsizei)width,
-		(GLsizei)height,
-		0,
-		format,
-		GL_UNSIGNED_BYTE,
-		pixel);
+	if (format == GL_RGB) {
+		format = GL_RGBA;
+		
+		uint8_t* fixed = new uint8_t[width * height * 4];
+		int size = width * height;
+		int ptr_src = 0, ptr_dst = 0;
+		for (int i = 0; i < size; ++i) {
+			for (int i = 0; i < 3; ++i) {
+				fixed[ptr_dst++] = pixel[ptr_src++];
+			}
+			fixed[ptr_dst++] = 255;
+		}
+
+		glTexImage2D(GL_TEXTURE_2D,
+			0,
+			format,
+			(GLsizei)width,
+			(GLsizei)height,
+			0,
+			format,
+			GL_UNSIGNED_BYTE,
+			fixed);
+
+		delete[] fixed;
+	} else {
+		glTexImage2D(GL_TEXTURE_2D,
+			0,
+			format,
+			(GLsizei)width,
+			(GLsizei)height,
+			0,
+			format,
+			GL_UNSIGNED_BYTE,
+			pixel);
+	}
 #endif // USE_SOIL
 }
 
