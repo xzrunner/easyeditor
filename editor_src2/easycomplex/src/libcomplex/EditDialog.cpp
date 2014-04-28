@@ -20,6 +20,7 @@ namespace ecomplex
 	{
 		SetTitle(symbol->getFilepath());
 		initLayout();
+		loadSymbolInfo();
 	}
 
 	void EditDialog::initLayout()
@@ -39,6 +40,7 @@ namespace ecomplex
 
 		ecomplex::LibraryPanel* library 
 			= new ecomplex::LibraryPanel(leftHorizontalSplitter);
+		m_library = library;
 
 		d2d::PropertySettingPanel* property 
 			= new d2d::PropertySettingPanel(leftHorizontalSplitter);
@@ -49,9 +51,10 @@ namespace ecomplex
 
 //		ToolbarPanel* toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage, context->property);
 
-		d2d::ViewlistPanel* toolbar
+		d2d::ViewlistPanel* viewlist
 			= new d2d::ViewlistPanel(rightVerticalSplitter, stage, stage, property);
-		stage->setViewlist(toolbar);
+		m_viewlist = viewlist;
+		stage->setViewlist(viewlist);
 
 		if (library || property)
 		{
@@ -64,10 +67,10 @@ namespace ecomplex
 			leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, stage);
 		}
 
-		if (toolbar)
+		if (viewlist)
 		{
 			rightVerticalSplitter->SetSashGravity(0.85f);
-			rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
+			rightVerticalSplitter->SplitVertically(leftVerticalSplitter, viewlist);
 		}
 
 //		m_root = rightVerticalSplitter;
@@ -100,5 +103,14 @@ namespace ecomplex
 		}
 
 		Destroy();
+	}
+
+	void EditDialog::loadSymbolInfo()
+	{
+		//m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+		for (size_t i = 0, n = m_symbol->m_sprites.size(); i < n; ++i)
+			m_viewlist->insert(m_symbol->m_sprites[i]);
+
+//		m_stage->loadHistoryList(filename, m_symbol->m_sprites);
 	}
 }
