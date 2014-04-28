@@ -22,7 +22,10 @@ void FileIO::store(const char* filepath, const Symbol* symbol)
 	if (mesh)
 	{
 		const Mesh::Region& r = mesh->m_region;
-		d2d::JsonTools::store(r.bound, value["bound"]);
+		value["bound"]["xmin"] = r.rect.xMin;
+		value["bound"]["xmax"] = r.rect.xMax;
+		value["bound"]["ymin"] = r.rect.yMin;
+		value["bound"]["ymax"] = r.rect.yMax;
 		d2d::JsonTools::store(r.nodes, value["nodes"]);
 		storeTransform(mesh, value["transform"]);
 	}
@@ -65,7 +68,11 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 	if (!value["bound"].isNull())
 	{
 		Mesh* mesh = new Mesh(*symbol->m_image, false);
-		d2d::JsonTools::load(value["bound"], mesh->m_region.bound);
+		d2d::Rect& r = mesh->m_region.rect;
+		r.xMin = value["bound"]["xmin"].asDouble();
+		r.xMax = value["bound"]["xmax"].asDouble();
+		r.yMin = value["bound"]["ymin"].asDouble();
+		r.yMax = value["bound"]["ymax"].asDouble();
 		d2d::JsonTools::load(value["nodes"], mesh->m_region.nodes);
 		mesh->refreshTriangles();
 		loadTransform(value["transform"], mesh);
@@ -86,8 +93,11 @@ void FileIO::loadStruct(const char* filepath, Mesh& mesh)
 	reader.parse(fin, value);
 	fin.close();
 
-	d2d::JsonTools::load(value["bound"], mesh.m_region.nodes);
-	d2d::JsonTools::load(value["nodes"], mesh.m_region.nodes);
+// 	mesh.m_region.nodes.clear();
+// 	d2d::JsonTools::load(value["nodes"], mesh.m_region.nodes);
+// 
+// 	std::vector<d2d:Vector> bounds;
+// 	d2d::JsonTools::load(value["bound"], bounds);	
 }
 
 void FileIO::storeTransform(const Mesh* mesh, Json::Value& value)

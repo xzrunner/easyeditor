@@ -31,12 +31,9 @@ Mesh::Mesh(const d2d::Image& image, bool initBound)
 	if (initBound)
 	{
 		float hw = m_width * 0.5f,
-			hh = m_height * 0.5f;
-		m_region.bound.reserve(4);
-		m_region.bound.push_back(d2d::Vector(-hw,-hh));
-		m_region.bound.push_back(d2d::Vector( hw,-hh));
-		m_region.bound.push_back(d2d::Vector( hw, hh));
-		m_region.bound.push_back(d2d::Vector(-hw, hh));
+			  hh = m_height * 0.5f;
+		m_region.rect.combine(d2d::Vector(hw, hh));
+		m_region.rect.combine(d2d::Vector(-hw, -hh));
 		refreshTriangles();
 	}
 }
@@ -53,7 +50,7 @@ Mesh* Mesh::clone() const
 
 void Mesh::insert(const d2d::Vector& p)
 {
-	if (d2d::Math::isPointInArea(p, m_region.bound))
+	if (d2d::Math::isPointInRect(p, m_region.rect))
 	{
 		m_region.nodes.push_back(p);
 		refreshTriangles();
@@ -62,7 +59,7 @@ void Mesh::insert(const d2d::Vector& p)
 
 void Mesh::remove(const d2d::Vector& p)
 {
-	if (d2d::Math::isPointInArea(p, m_region.bound))
+	if (d2d::Math::isPointInRect(p, m_region.rect))
 	{
 		std::vector<d2d::Vector>::iterator itr
 			= m_region.nodes.begin();
@@ -80,9 +77,9 @@ void Mesh::remove(const d2d::Vector& p)
 
 d2d::Vector* Mesh::find(const d2d::Vector& p)
 {
-	for (int i = 0, m = m_region.bound.size(); i < m; ++i)
-		if (d2d::Math::getDistance(m_region.bound[i], p) < Node::RADIUS)
-			return &m_region.bound[i];
+// 	for (int i = 0, m = m_region.bound.size(); i < m; ++i)
+// 		if (d2d::Math::getDistance(m_region.bound[i], p) < Node::RADIUS)
+// 			return &m_region.bound[i];
 	for (int i = 0, m = m_region.nodes.size(); i < m; ++i)
 		if (d2d::Math::getDistance(m_region.nodes[i], p) < Node::RADIUS)
 			return &m_region.nodes[i];
@@ -93,12 +90,12 @@ void Mesh::move(d2d::Vector* src, const d2d::Vector& dst)
 {
 	if (!src) return;
 
-	if (d2d::Math::isPointInArea(dst, m_region.bound))
+	if (d2d::Math::isPointInRect(dst, m_region.rect))
 	{
 		d2d::Vector d = dst;
-		fixNodeToRegion(d);
+		absorbNodeToRegion(d);
 		*src = d;
-		fixNodes();
+		removeCornerFromNodes();
 		refreshTriangles();
 	}
 }
@@ -255,32 +252,23 @@ void Mesh::resetUVOffset(float dx, float dy)
 	}
 }
 
-void Mesh::fixNodes()
+void Mesh::getRegionBound(std::vector<d2d::Vector>& bound) const
 {
-	std::vector<d2d::Vector>::iterator itr = m_region.nodes.begin();
-	for ( ; itr != m_region.nodes.end(); )
-	{
-		int i = 0, n = m_region.bound.size();
-		for (; i < n; ++i)
-		{
-			float dis = d2d::Math::getDistanceSquare(*itr, m_region.bound[i]);
-			if (dis < Node::RADIUS) {
-				itr = m_region.nodes.erase(itr);
-				break;
-			}
-		}
-		if (i == n) {
-			++itr;
-		}
-	}
+	const d2d::Rect& r = m_region.rect;
+	bound.push_back(d2d::Vector(r.xMin, r.yMin));
+	bound.push_back(d2d::Vector(r.xMin, r.yMax));
+	bound.push_back(d2d::Vector(r.xMax, r.yMax));
+	bound.push_back(d2d::Vector(r.xMax, r.yMin));
 }
 
 void Mesh::refreshTriangles()
 {
 	clearTriangles();
 
+	std::vector<d2d::Vector> bound;
+	getRegionBound(bound);
 	std::vector<d2d::Vector> tris;
-	d2d::Triangulation::points(m_region.bound, m_region.nodes, tris);
+	d2d::Triangulation::points(bound, m_region.nodes, tris);
 	loadTriangles(tris);
 }
 
@@ -289,7 +277,7 @@ void Mesh::getLinesCutByUVBounds(std::vector<d2d::Vector>& lines)
 	// hori
 	if (m_uv_offset.y != 0)
 	{
-		int height = fabs(m_region.bound[0].y) * 2;
+		int height = m_region.rect.yLength();
 		std::set<d2d::Vector, d2d::VectorCmpX> nodes;
 		float y = -height*0.5f + height*m_uv_offset.y;
 		for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -313,7 +301,7 @@ void Mesh::getLinesCutByUVBounds(std::vector<d2d::Vector>& lines)
 	// vert
 	if (m_uv_offset.x != 0)
 	{
-		int width = fabs(m_region.bound[0].x) * 2;
+		int width = m_region.rect.xLength();
 		std::set<d2d::Vector, d2d::VectorCmpY> nodes;
 		float x = -width*0.5f + width*m_uv_offset.x;
 		for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -357,8 +345,8 @@ void Mesh::refreshTrianglesWithUV()
 	//copy(unique.begin(), unique.end(), back_inserter(nodes));
 
 	// triangulation
-	int width = fabs(m_region.bound[0].x) * 2;
-	int height = fabs(m_region.bound[0].y) * 2;
+	int width = m_region.rect.xLength();
+	int height = m_region.rect.yLength();
 
 	const float MAX = 99999;
 	std::vector<d2d::Vector> tris;
@@ -378,7 +366,9 @@ void Mesh::refreshTrianglesWithUV()
 	//std::vector<d2d::Vector> tris;
 	//std::vector<d2d::Vector> lines;
 	//getLinesCutByUVBounds(lines);
-	d2d::Triangulation::pointsAndLines(m_region.bound, m_region.nodes, lines, tris);
+	std::vector<d2d::Vector> bound;
+	getRegionBound(bound);
+	d2d::Triangulation::pointsAndLines(bound, m_region.nodes, lines, tris);
 
 	std::vector<std::pair<d2d::Vector, d2d::Vector> > trans_list;
 	std::set<Node*> nodes;
@@ -574,17 +564,48 @@ void Mesh::copyTriangles(const Mesh& mesh)
 	}
 }
 
-void Mesh::fixNodeToRegion(d2d::Vector& node)
+void Mesh::absorbNodeToRegion(d2d::Vector& node)
 {
-	for (int i = 0, n = m_region.bound.size(); i < n; ++i)
+	const d2d::Rect& r = m_region.rect;
+	if (fabs(node.x - r.xMin) < Node::RADIUS) {
+		node.x = r.xMin;
+	}
+	if (fabs(node.x - r.xMax) < Node::RADIUS) {
+		node.x = r.xMax;
+	}
+	if (fabs(node.y - r.yMin) < Node::RADIUS) {
+		node.y = r.yMin;
+	}
+	if (fabs(node.y - r.yMax) < Node::RADIUS) {
+		node.y = r.yMax;
+	}
+}
+
+void Mesh::removeCornerFromNodes()
+{
+	const d2d::Rect& r = m_region.rect;
+	std::vector<d2d::Vector>::iterator itr = m_region.nodes.begin();
+	for ( ; itr != m_region.nodes.end(); )
 	{
-		const d2d::Vector& b = m_region.bound[i];
-		if (fabs(node.x - b.x) < Node::RADIUS) {
-			node.x = b.x;
+		if ((itr->x == r.xMin || itr->x == r.xMax)
+			&& (itr->y == r.yMin || itr->y == r.yMax)) {
+			itr = m_region.nodes.erase(itr);
+		} else {
+			++itr;
 		}
-		if (fabs(node.y - b.y) < Node::RADIUS) {
-			node.y = b.y;
-		}
+
+		// 		int i = 0, n = m_region.bound.size();
+		// 		for (; i < n; ++i)
+		// 		{
+		// 			float dis = d2d::Math::getDistanceSquare(*itr, m_region.bound[i]);
+		// 			if (dis < Node::RADIUS) {
+		// 				itr = m_region.nodes.erase(itr);
+		// 				break;
+		// 			}
+		// 		}
+		// 		if (i == n) {
+		// 			++itr;
+		// 		}
 	}
 }
 

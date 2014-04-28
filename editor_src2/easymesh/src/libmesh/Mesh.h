@@ -42,9 +42,8 @@ public:
 
 	void resetUVOffset(float dx, float dy);
 
-	void fixNodes();
-
 private:
+	void getRegionBound(std::vector<d2d::Vector>& bound) const;
 	void refreshTriangles();
 
 	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
@@ -55,12 +54,14 @@ private:
 
 	void copyTriangles(const Mesh& mesh);
 
-	void fixNodeToRegion(d2d::Vector& node);
+	void absorbNodeToRegion(d2d::Vector& node);
+	void removeCornerFromNodes();
 
 private:
 	struct Region
 	{
-		std::vector<d2d::Vector> bound;
+		d2d::Rect rect;
+//		std::vector<d2d::Vector> bound;
 		std::vector<d2d::Vector> nodes;
 	};
 
