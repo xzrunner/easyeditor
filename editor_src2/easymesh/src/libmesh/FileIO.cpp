@@ -93,11 +93,13 @@ void FileIO::loadStruct(const char* filepath, Mesh& mesh)
 	reader.parse(fin, value);
 	fin.close();
 
-// 	mesh.m_region.nodes.clear();
-// 	d2d::JsonTools::load(value["nodes"], mesh.m_region.nodes);
-// 
-// 	std::vector<d2d:Vector> bounds;
-// 	d2d::JsonTools::load(value["bound"], bounds);	
+ 	mesh.m_region.nodes.clear();
+
+	d2d::JsonTools::load(value["nodes"], mesh.m_region.nodes);
+	mesh.refreshTriangles();
+
+	// todo: need set triangles if need tween
+	//       or index nodes
 }
 
 void FileIO::storeTransform(const Mesh* mesh, Json::Value& value)
