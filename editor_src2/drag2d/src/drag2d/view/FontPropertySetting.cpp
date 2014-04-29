@@ -26,7 +26,7 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	if (name == wxT("Font"))
 		sprite->font = wxANY_AS(value, wxString);
-	else if (name == wxT("Color")) {
+	else if (name == wxT("FontColor")) {
 		wxColour col = wxANY_AS(value, wxColour);
 		sprite->color.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
 	}
@@ -55,7 +55,7 @@ void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool b
 
 	wxPropertyGrid* pg = panel->getPG();
 	pg->GetProperty(wxT("Font"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color"))->Enable(bEnable);
+	pg->GetProperty(wxT("FontColor"))->Enable(bEnable);
 	pg->GetProperty(wxT("AlignHori"))->Enable(bEnable);
 	pg->GetProperty(wxT("AlignVert"))->Enable(bEnable);
 	pg->GetProperty(wxT("FontSize"))->Enable(bEnable);
@@ -72,7 +72,7 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
 
 	wxColour col = wxColour(sprite->color.r*255, sprite->color.g*255, sprite->color.b*255, sprite->color.a*255);
-	pg->SetPropertyValueString(wxT("Color"), col.GetAsString());
+	pg->SetPropertyValueString(wxT("FontColor"), col.GetAsString());
 
 	pg->GetProperty(wxT("AlignHori"))->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
 	pg->GetProperty(wxT("AlignVert"))->SetValue(VERT_ALIGN_LABELS[sprite->align_vert]);
@@ -92,8 +92,8 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
 
 	wxColour col = wxColour(sprite->addCol.r*255, sprite->addCol.g*255, sprite->addCol.b*255, sprite->addCol.a*255);
-	pg->Append(new wxColourProperty(wxT("Color"), wxPG_LABEL, col));
-	pg->SetPropertyAttribute("Color", "HasAlpha", true);
+	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));
+	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);
 
 	wxEnumProperty* horiAlignProp = new wxEnumProperty(wxT("AlignHori"), wxPG_LABEL, HORI_ALIGN_LABELS);
 	horiAlignProp->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
