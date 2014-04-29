@@ -124,31 +124,31 @@ void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int width, 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	if (format == GL_RGB) {
-		format = GL_RGBA;
-		
-		uint8_t* fixed = new uint8_t[width * height * 4];
-		int size = width * height;
-		int ptr_src = 0, ptr_dst = 0;
-		for (int i = 0; i < size; ++i) {
-			for (int i = 0; i < 3; ++i) {
-				fixed[ptr_dst++] = pixel[ptr_src++];
-			}
-			fixed[ptr_dst++] = 255;
-		}
-
-		glTexImage2D(GL_TEXTURE_2D,
-			0,
-			format,
-			(GLsizei)width,
-			(GLsizei)height,
-			0,
-			format,
-			GL_UNSIGNED_BYTE,
-			fixed);
-
-		delete[] fixed;
-	} else {
+ 	if (format == GL_RGB) {
+ 		format = GL_RGBA;
+ 		
+ 		uint8_t* fixed = new uint8_t[width * height * 4];
+ 		int size = width * height;
+ 		int ptr_src = 0, ptr_dst = 0;
+ 		for (int i = 0; i < size; ++i) {
+ 			for (int i = 0; i < 3; ++i) {
+ 				fixed[ptr_dst++] = pixel[ptr_src++];
+ 			}
+ 			fixed[ptr_dst++] = 255;
+ 		}
+ 
+ 		glTexImage2D(GL_TEXTURE_2D,
+ 			0,
+ 			format,
+ 			(GLsizei)width,
+ 			(GLsizei)height,
+ 			0,
+ 			format,
+ 			GL_UNSIGNED_BYTE,
+ 			fixed);
+ 
+ 		delete[] fixed;
+ 	} else {
 		glTexImage2D(GL_TEXTURE_2D,
 			0,
 			format,
@@ -300,7 +300,21 @@ uint8_t* ImageLoader::loadImageByLibpng(const std::string& filename, int& width,
 
 uint8_t* ImageLoader::loadImageBySOIL(const std::string& filename, int& width, int& height, int& channels)
 {
-	return SOIL_load_image(filename.c_str(), &width, &height, &channels, 0);
+	uint8_t* pixels = SOIL_load_image(filename.c_str(), &width, &height, &channels, 0);
+
+	// invert y
+	int size = width*height*channels;
+	uint8_t* inverted = new uint8_t[size];
+	int line_size = width * channels;
+	int ptr = size - line_size;
+	while (ptr > 0)
+	{
+		memcpy(&inverted[size - ptr], &pixels[ptr], line_size);
+		ptr -= line_size;
+	}
+	
+	delete[] pixels;
+	return inverted;
 }
 
 uint8_t* ImageLoader::loadPNM(const std::string& filename, int& width, int& height)
