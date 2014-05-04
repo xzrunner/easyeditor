@@ -19,12 +19,6 @@ namespace eshape
 		virtual LibraryItem* clone() { return NULL; }
 
 		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
-		//
 		// UserDataImpl interface
 		//	
 		virtual void clearUserData(bool deletePtr);

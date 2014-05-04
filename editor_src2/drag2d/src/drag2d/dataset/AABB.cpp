@@ -20,17 +20,6 @@ AABB* AABB::clone() const
 	return new AABB(*this);
 }
 
-void AABB::loadFromTextFile(std::ifstream& fin)
-{
-	fin >> m_rect.xMin >> m_rect.xMax >> m_rect.yMin >> m_rect.yMax;
-}
-
-void AABB::storeToTextFile(std::ofstream& fout) const
-{
-	fout << m_rect.xMin << " " << m_rect.xMax << " "
-		<< m_rect.yMin << " " << m_rect.yMax << '\n';
-}
-
 void AABB::setTransform(const Vector& position, const Vector& offset, float angle)
 {
 	m_position = position + (Math::rotateVector(-offset, angle) + offset);

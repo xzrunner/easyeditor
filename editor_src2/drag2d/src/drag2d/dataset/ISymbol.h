@@ -9,7 +9,7 @@ namespace d2d
 {
 	class ISprite;
 
-	class ISymbol : public ListItem, public ISerializable
+	class ISymbol : public ListItem
 	{
 	public:
 		virtual ~ISymbol();

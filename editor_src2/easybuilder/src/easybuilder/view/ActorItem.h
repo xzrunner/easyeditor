@@ -20,12 +20,6 @@ namespace ebuilder
 		virtual ActorItem* clone() { return NULL; }
 
 		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
-		//
 		// d2d::ISymbol interface
 		//
 		virtual void reloadTexture() const;

@@ -20,16 +20,6 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(m_imagePage);
 }
 
-void LibraryPanel::loadFromTextFile(std::ifstream& fin)
-{
-	m_imagePage->loadFromTextFile(fin);
-}
-
-void LibraryPanel::storeToTextFile(std::ofstream& fout) const
-{
-	m_imagePage->storeToTextFile(fout);
-}
-
 void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
 {
 	d2d::LibraryPanel::onPageChanged(event);

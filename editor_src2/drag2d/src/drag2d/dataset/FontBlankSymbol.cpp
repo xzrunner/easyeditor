@@ -38,14 +38,6 @@ FontBlankSymbol::~FontBlankSymbol()
 //	m_font->release();
 }
 
-void FontBlankSymbol::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void FontBlankSymbol::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void FontBlankSymbol::reloadTexture() const
 {
 }

@@ -20,12 +20,6 @@ namespace d2d
 		virtual CircleShape* clone() const;
 
 		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
-		//
 		// IShape interface
 		//
 		virtual bool isContain(const Vector& pos) const;

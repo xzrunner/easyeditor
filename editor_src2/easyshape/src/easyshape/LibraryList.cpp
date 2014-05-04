@@ -10,15 +10,6 @@ LibraryList::LibraryList(wxWindow* parent)
 {
 }
 
-void LibraryList::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void LibraryList::storeToTextFile(std::ofstream& fout) const
-{
-
-}
-
 void LibraryList::onListSelected(wxCommandEvent& event)
 {
 	if (m_items.empty()) return;

@@ -32,14 +32,6 @@ CircleShape* CircleShape::clone() const
 	return new CircleShape(*this);
 }
 
-void CircleShape::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void CircleShape::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 bool CircleShape::isContain(const Vector& pos) const
 {
 	return Math::getDistance(center, pos) < QUERY_ACCURACY;

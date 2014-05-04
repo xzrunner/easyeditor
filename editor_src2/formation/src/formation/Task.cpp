@@ -21,12 +21,12 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::loadFromTextFile(const char* filename)
+void Task::loadFromFile(const char* filename)
 {
 	FileIO::load(filename);
 }
 
-void Task::storeToTextFile(const char* filename) const
+void Task::storeToFile(const char* filename) const
 {
 	FileIO::store(filename);
 }

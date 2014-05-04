@@ -10,7 +10,7 @@ namespace d2d
 	class Vector;
 	class Rect;
 
-	class IShape : public ICloneable, public UserDataImpl, public Object, public ISerializable
+	class IShape : public ICloneable, public UserDataImpl, public Object
 	{
 	public:
 		IShape();

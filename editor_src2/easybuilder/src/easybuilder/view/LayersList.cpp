@@ -20,14 +20,6 @@ LayersList::LayersList(LayersPage* page)
 {
 }
 
-void LayersList::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void LayersList::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void LayersList::onListSelected(wxCommandEvent& event)
 {
 	onSelected(event.GetInt());

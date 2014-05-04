@@ -60,7 +60,6 @@ void Symbol::refresh()
 
 void Symbol::loadResources()
 {
-	
 }
 
 }

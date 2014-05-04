@@ -21,14 +21,6 @@ ScenesList::ScenesList(ScenesPage* page)
 {
 }
 
-void ScenesList::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void ScenesList::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void ScenesList::onListSelected(wxCommandEvent& event)
 {
 	onSelected(event.GetInt());

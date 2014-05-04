@@ -12,16 +12,6 @@ LibraryList::LibraryList(wxWindow* parent,
 {
 }
 
-void LibraryList::loadFromTextFile(std::ifstream& fin)
-{
-
-}
-
-void LibraryList::storeToTextFile(std::ofstream& fout) const
-{
-
-}
-
 ListItem* LibraryList::getItem(int index/* = -1*/) const
 {
 	if (index == -1)

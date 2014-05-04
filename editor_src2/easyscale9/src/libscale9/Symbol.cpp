@@ -28,14 +28,6 @@ Symbol::~Symbol()
 	memset(m_sprites, 0, sizeof(int) * 9);
 }
 
-void Symbol::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void Symbol::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void Symbol::reloadTexture() const
 {
 	for (size_t i = 0; i < 3; ++i)

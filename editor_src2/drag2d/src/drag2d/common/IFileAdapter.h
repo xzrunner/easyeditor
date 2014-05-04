@@ -7,7 +7,7 @@ namespace d2d
 	public:
 		virtual ~IFileAdapter() {}
 
-		virtual void load(const char* filename) = 0;
+		virtual void load(const char* filename) {}
 		virtual void store(const char* filename) {}
 
 	}; // IFileAdapter

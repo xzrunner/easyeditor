@@ -29,14 +29,6 @@ FontSymbol* FontSymbol::clone() const
 	return NULL;
 }
 
-void FontSymbol::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void FontSymbol::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void FontSymbol::reloadTexture() const
 {
 	

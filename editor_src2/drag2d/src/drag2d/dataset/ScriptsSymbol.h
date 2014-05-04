@@ -17,12 +17,6 @@ namespace d2d
 		virtual ScriptsSymbol* clone() const { return NULL; }
 
 		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin) {}
-		virtual void storeToTextFile(std::ofstream& fout) const {}
-
-		//
 		// ISymbol interfaces
 		//
 		virtual void reloadTexture() const {}

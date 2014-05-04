@@ -18,14 +18,6 @@ ActorsList::ActorsList(wxWindow* parent)
 {
 }
 
-void ActorsList::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void ActorsList::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void ActorsList::onListSelected(wxCommandEvent& event)
 {
 	if (m_items.empty()) return;

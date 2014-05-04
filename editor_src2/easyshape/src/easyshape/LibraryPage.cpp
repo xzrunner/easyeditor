@@ -12,16 +12,6 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name)
 	m_list = new LibraryList(this);
 }
 
-void LibraryPage::loadFromTextFile(std::ifstream& fin)
-{
-//	m_list->loadFromTextFile(fin);
-}
-
-void LibraryPage::storeToTextFile(std::ofstream& fout) const
-{
-	//	traverse(FileIO::StoreItemVisitor(fout));
-}
-
 void LibraryPage::clickListSelection()
 {
 	int index = m_list->GetSelection();

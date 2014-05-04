@@ -22,14 +22,6 @@ Symbol::~Symbol()
 	clear();
 }
 
-void Symbol::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void Symbol::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void Symbol::reloadTexture() const
 {
 	std::set<const ISymbol*> symbols;

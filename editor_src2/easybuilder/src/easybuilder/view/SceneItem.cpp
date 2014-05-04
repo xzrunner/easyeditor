@@ -30,14 +30,6 @@ SceneItem* SceneItem::clone()
 	return NULL;
 }
 
-void SceneItem::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void SceneItem::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void SceneItem::reloadTexture() const
 {
 }

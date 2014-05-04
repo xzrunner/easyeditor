@@ -13,16 +13,6 @@ ILibraryPage::ILibraryPage(wxWindow* parent, const wxString& name)
 	m_btnAdd = m_btnDel = NULL;
 }
 
-void ILibraryPage::loadFromTextFile(std::ifstream& fin)
-{
-	m_list->loadFromTextFile(fin);
-}
-
-void ILibraryPage::storeToTextFile(std::ofstream& fout) const
-{
-	m_list->storeToTextFile(fout);
-}
-
 void ILibraryPage::clear()
 {
 	m_list->clear();

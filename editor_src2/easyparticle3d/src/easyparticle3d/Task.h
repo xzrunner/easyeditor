@@ -15,8 +15,8 @@ class Task
 {
 public:
 
-	virtual void loadFromTextFile(const char* filename);
-	virtual void storeToTextFile(const char* filename) const;
+	virtual void loadFromFile(const char* filename);
+	virtual void storeToFile(const char* filename) const;
 
 	virtual void clear();
 

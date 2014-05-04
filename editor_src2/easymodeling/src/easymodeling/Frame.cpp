@@ -62,7 +62,7 @@ void Frame::onOpen(wxCommandEvent& event)
 		m_currFilename = dlg.GetPath();
 		SetTitle(d2d::FilenameTools::getFilename(dlg.GetPath()));
 		try {
-			m_task->loadFromTextFile(dlg.GetPath());
+			m_task->loadFromFile(dlg.GetPath());
 		} catch (d2d::Exception& e) {
 			d2d::ExceptionDlg dlg(this, e);
 			dlg.ShowModal();
@@ -77,7 +77,7 @@ void Frame::onSave(wxCommandEvent& event)
 	if (!m_currFilename.empty())
 	{
 		SetTitle(d2d::FilenameTools::getFilename(m_currFilename));
-		m_task->storeToTextFile(m_currFilename);
+		m_task->storeToFile(m_currFilename);
 	}
 }
 
@@ -91,7 +91,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 	{
 		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
 		m_currFilename = fixed;
-		m_task->storeToTextFile(fixed);
+		m_task->storeToFile(fixed);
 	}
 }
 

@@ -9,7 +9,7 @@ namespace d2d
 	class Rect;
 	class Vector;
 
-	class AbstractBV : public ICloneable, public ISerializable
+	class AbstractBV : public ICloneable
 	{
 	public:
 		

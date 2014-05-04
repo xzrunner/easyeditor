@@ -29,14 +29,6 @@ LayerItem* LayerItem::clone()
 	return NULL;
 }
 
-void LayerItem::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void LayerItem::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void LayerItem::reloadTexture() const
 {
 }

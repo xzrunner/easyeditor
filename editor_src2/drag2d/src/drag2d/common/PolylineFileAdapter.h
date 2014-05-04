@@ -14,9 +14,6 @@ namespace d2d
 	public:
 		PolylineFileAdapter(std::vector<ChainShape*>& chains);
 
-		virtual void load(const char* filename);
-		virtual void store(const char* filename);
-
 		void setImgPath(const wxString& path) {
 			m_imgPath = path;
 		}

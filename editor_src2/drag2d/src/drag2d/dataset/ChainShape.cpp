@@ -33,45 +33,6 @@ ChainShape* ChainShape::clone() const
 	return new ChainShape(*this);
 }
 
-void ChainShape::loadFromTextFile(std::ifstream& fin)
-{
-	m_vertices.clear();
-	size_t size;
-	fin >> size;
-	m_vertices.reserve(size);
-	for (size_t i = 0; i < size; ++i)
-	{
-		Vector pos;
-		fin >> pos;
-		m_vertices.push_back(pos);
-	}
-
-	fin >> m_isLoop;
-
-// 	int isLoop;
-// 	fin >> isLoop;
-// 	m_isLoop = (isLoop == 1 ? true : false);
-
-	initBounding();
-}
-
-void ChainShape::storeToTextFile(std::ofstream& fout) const
-{
-	std::vector<Vector> fixed;
-	for (size_t i = 0, n = m_vertices.size(); i < n; ++i)
-	{
-		if (fixed.empty() || Math::getDistance(m_vertices[i], fixed.back()) > FLT_EPSILON)
-			fixed.push_back(m_vertices[i]);
-	}
-
-	fout << fixed.size() << '\n';
-	for (size_t i = 0, n = fixed.size(); i < n; ++i)
-		fout << fixed[i] << " ";
-	fout << '\n';
-	fout << m_isLoop;
-	fout << '\n';
-}
-
 bool ChainShape::isContain(const Vector& pos) const
 {
 	Rect rect(m_rect);

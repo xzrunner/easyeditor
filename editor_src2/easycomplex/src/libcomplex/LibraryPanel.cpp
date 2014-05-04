@@ -22,12 +22,4 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(new d2d::LibraryScriptsPage(getNotebook()));
 }
 
-void LibraryPanel::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void LibraryPanel::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 } // ecomplex

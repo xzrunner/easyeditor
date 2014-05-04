@@ -10,12 +10,6 @@ namespace raiden
 	public:
 		LibraryShapePage(wxWindow* parent);
 
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin) {}
-		virtual void storeToTextFile(std::ofstream& fout) const {}
-
 		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
 	protected:

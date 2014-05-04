@@ -13,12 +13,6 @@ namespace eshape
 	public:
 		LibraryPage(wxWindow* parent, const char* name);
 
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
 		void clickListSelection();
 
 	private:

@@ -13,12 +13,6 @@ namespace ebuilder
 	public:
 		ScenesList(ScenesPage* page);
 
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
 		virtual void onListSelected(wxCommandEvent& event);
 		virtual void onListDoubleClicked(wxCommandEvent& event);
 

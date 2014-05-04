@@ -31,15 +31,6 @@ RectShape* RectShape::clone() const
 	return new RectShape(*this);
 }
 
-void RectShape::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void RectShape::storeToTextFile(std::ofstream& fout) const
-{
-}
-
-
 bool RectShape::isContain(const Vector& pos) const
 {
 	return Math::isPointInRect(pos, m_rect);

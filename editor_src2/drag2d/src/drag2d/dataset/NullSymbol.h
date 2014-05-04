@@ -17,12 +17,6 @@ namespace d2d
 		virtual ISymbol* clone() const { return NULL; }
 
 		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin) {}
-		virtual void storeToTextFile(std::ofstream& fout) const {}
-
-		//
 		// ISymbol interface
 		//	
 		virtual void reloadTexture() const {}

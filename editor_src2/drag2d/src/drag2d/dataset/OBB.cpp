@@ -22,19 +22,6 @@ OBB* OBB::clone() const
 	return new OBB(*this);
 }
 
-void OBB::loadFromTextFile(std::ifstream& fin)
-{
-	fin >> m_rect.xMin >> m_rect.xMax >> m_rect.yMin >> m_rect.yMax 
-		>> m_angle;
-}
-
-void OBB::storeToTextFile(std::ofstream& fout) const
-{
-	fout << m_rect.xMin << " " << m_rect.xMax << " "
-		<< m_rect.yMin << " " << m_rect.yMax << '\n'
-		<< m_angle << '\n';
-}
-
 void OBB::setTransform(const Vector& position, const Vector& offset, float angle)
 {
 	m_position = position + (Math::rotateVector(-offset, angle) + offset);

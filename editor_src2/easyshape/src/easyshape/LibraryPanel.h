@@ -16,12 +16,6 @@ namespace eshape
 	public:
 		LibraryPanel(wxWindow* parent);
 
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
 		virtual void onPageChanged(wxBookCtrlEvent& event);
 
 		d2d::ILibraryPage* getShapePage();

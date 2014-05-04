@@ -21,12 +21,6 @@ namespace ebuilder
 		virtual LayerItem* clone();
 
 		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
-		//
 		// ISymbol interface
 		//
 		virtual void reloadTexture() const;

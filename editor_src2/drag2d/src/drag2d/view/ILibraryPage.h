@@ -11,16 +11,10 @@ namespace d2d
 	class LibraryList;
 	class GLCanvas;
 
-	class ILibraryPage : public wxWindow, public ISerializable
+	class ILibraryPage : public wxWindow
 	{
 	public:
 		ILibraryPage(wxWindow* parent, const wxString& name);
-
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
 
 		virtual bool isHandleSymbol(ISymbol* symbol) const = 0;
 

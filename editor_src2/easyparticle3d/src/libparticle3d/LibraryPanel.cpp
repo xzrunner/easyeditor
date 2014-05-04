@@ -18,12 +18,4 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(new escale9::LibraryPage(getNotebook()));
 }
 
-void LibraryPanel::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void LibraryPanel::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 }

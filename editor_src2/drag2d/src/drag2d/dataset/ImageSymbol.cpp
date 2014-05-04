@@ -33,14 +33,6 @@ ImageSymbol* ImageSymbol::clone() const
 	return NULL;
 }
 
-void ImageSymbol::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void ImageSymbol::storeToTextFile(std::ofstream& fout) const
-{
-}
-
 void ImageSymbol::reloadTexture() const
 {
 	m_image->reload();

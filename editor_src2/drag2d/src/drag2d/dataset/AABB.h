@@ -17,12 +17,6 @@ namespace d2d
 		//
 		virtual AABB* clone() const;
 
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
 		virtual void initFromRect(const Rect& rect);
 
 		virtual bool isValid() const;

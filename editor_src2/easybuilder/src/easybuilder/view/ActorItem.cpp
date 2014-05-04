@@ -14,16 +14,6 @@ ActorItem::ActorItem(Actor* actor)
 	m_bitmap = const_cast<d2d::Bitmap*>(init);
 }
 
-void ActorItem::loadFromTextFile(std::ifstream& fin)
-{
-
-}
-
-void ActorItem::storeToTextFile(std::ofstream& fout) const
-{
-
-}
-
 void ActorItem::reloadTexture() const
 {
 }

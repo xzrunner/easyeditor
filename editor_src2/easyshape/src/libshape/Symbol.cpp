@@ -28,19 +28,8 @@ Symbol* Symbol::clone() const
 	return new Symbol(*this); 
 }
 
-void Symbol::loadFromTextFile(std::ifstream& fin)
-{
-
-}
-
-void Symbol::storeToTextFile(std::ofstream& fout) const
-{
-
-}
-
 void Symbol::reloadTexture() const
 {
-
 }
 
 void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,

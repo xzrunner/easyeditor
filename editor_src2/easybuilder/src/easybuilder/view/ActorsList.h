@@ -13,12 +13,6 @@ namespace ebuilder
 	public:
 		ActorsList(wxWindow* parent);
 
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
-
 		virtual void onListSelected(wxCommandEvent& event);
 
 		void loadFromLayer(Layer* layer);

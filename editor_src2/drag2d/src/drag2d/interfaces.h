@@ -37,13 +37,13 @@ namespace d2d
 		virtual ~IVisitor() {}
 	}; // IVisitor
 
-	class ISerializable
-	{
-	public:
-		virtual void loadFromTextFile(std::ifstream& fin) = 0;
-		virtual void storeToTextFile(std::ofstream& fout) const = 0;
-		virtual ~ISerializable() {}
-	}; // ISerializable
+// 	class ISerializable
+// 	{
+// 	public:
+// 		virtual void loadFromTextFile(std::ifstream& fin) = 0;
+// 		virtual void storeToTextFile(std::ofstream& fout) const = 0;
+// 		virtual ~ISerializable() {}
+// 	}; // ISerializable
 
 	class ICloneable 
 	{

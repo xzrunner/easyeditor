@@ -17,16 +17,6 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	initLayout();
 }
 
-void LibraryPanel::loadFromTextFile(std::ifstream& fin)
-{
-
-}
-
-void LibraryPanel::storeToTextFile(std::ofstream& fout) const
-{
-
-}
-
 void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
 {
 	m_selected = m_pages[event.GetSelection()];

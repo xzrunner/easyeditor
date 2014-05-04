@@ -87,7 +87,8 @@ void BodyData::loadFromPolygonFile(const wxString& filename)
 
 	std::vector<ChainShape*> chains;
 	PolylineFileAdapter fileAdapter(chains);
-	fileAdapter.load(filename.c_str());
+	// todo rewrite IO
+//	fileAdapter.load(filename.c_str());
 
 	m_fixtures.reserve(fileAdapter.m_chains.size());
 	for (size_t i = 0, n = fileAdapter.m_chains.size(); i < n; ++i)

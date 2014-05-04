@@ -25,15 +25,6 @@ LibraryItem::~LibraryItem()
 	m_symbol->release();
 }
 
-void LibraryItem::loadFromTextFile(std::ifstream& fin)
-{
-}
-
-void LibraryItem::storeToTextFile(std::ofstream& fout) const
-{
-}
-
-
 void LibraryItem::clearUserData(bool deletePtr)
 {
 	if (m_userData)

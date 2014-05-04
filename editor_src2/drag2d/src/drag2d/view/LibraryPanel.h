@@ -16,16 +16,10 @@ namespace d2d
 	class IVisitor;
 	class GLCanvas;
 
-	class LibraryPanel : public wxPanel, public ISerializable
+	class LibraryPanel : public wxPanel
 	{
 	public:
 		LibraryPanel(wxWindow* parent);
-
-		//
-		// ISerializable interface
-		//
-		virtual void loadFromTextFile(std::ifstream& fin);
-		virtual void storeToTextFile(std::ofstream& fout) const;
 
 		virtual void onPageChanged(wxBookCtrlEvent& event);
 
