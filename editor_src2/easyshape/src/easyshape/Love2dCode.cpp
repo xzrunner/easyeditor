@@ -1,7 +1,6 @@
 
 #include "Love2dCode.h"
 
-#include "Context.h"
 #include "StagePanel.h"
 #include "LibraryPanel.h"
 #include "LibraryItem.h"
@@ -9,8 +8,9 @@
 using namespace eshape;
 using namespace ebuilder;
 
-Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen)
+Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen, LibraryPanel* library)
 	: m_gen(gen)
+	, m_library(library)
 {
 }
 
@@ -18,14 +18,14 @@ void Love2dCode::resolve()
 {
 	{
 		std::vector<LibraryItem*> items;
-		Context::Instance()->library->getShapePage()->getList()->
+		m_library->getShapePage()->getList()->
 			traverse(d2d::FetchAllVisitor<LibraryItem>(items));
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 			resolve(items[i]);
 	}
 	{
 		std::vector<LibraryItem*> items;
-		Context::Instance()->library->getImagePage()->getList()->
+		m_library->getImagePage()->getList()->
 			traverse(d2d::FetchAllVisitor<LibraryItem>(items));
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 			resolve(items[i]);

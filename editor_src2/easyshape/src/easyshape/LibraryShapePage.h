@@ -1,27 +1,28 @@
-
-#ifndef ESHAPE_LIBRARY_SHAPE_PAGE_H
-#define ESHAPE_LIBRARY_SHAPE_PAGE_H
+#ifndef _ESHAPE_LIBRARY_SHAPE_PAGE_H_
+#define _ESHAPE_LIBRARY_SHAPE_PAGE_H_
 
 #include "LibraryPage.h"
 
 namespace eshape
 {
-	class LibraryShapePage : public LibraryPage
-	{
-	public:
-		LibraryShapePage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+class LibraryShapePage : public LibraryPage
+{
+public:
+	LibraryShapePage(wxWindow* parent);
 
-	protected:
-		virtual void initLayout(bool draggable = true);
+	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
-		virtual void onAddPress(wxCommandEvent& event);
+protected:
+	virtual void initLayout(bool draggable = true);
 
-	private:
-		void onNewBtnPress(wxCommandEvent& event);
+	virtual void onAddPress(wxCommandEvent& event);
 
-	}; // LibraryShapePage
+private:
+	void onNewBtnPress(wxCommandEvent& event);
+
+}; // LibraryShapePage
+
 }
 
-#endif // ESHAPE_LIBRARY_SHAPE_PAGE_H
+#endif // _ESHAPE_LIBRARY_SHAPE_PAGE_H_

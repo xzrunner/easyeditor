@@ -8,13 +8,14 @@
 
 namespace eshape
 {
+	class LibraryPanel;
 	class LibraryItem;
 
 	class FileIO
 	{
 	public:
-		static void load(const char* filename);
-		static void store(const char* filename);
+		static void load(const char* filename, LibraryPanel* library);
+		static void store(const char* filename, LibraryPanel* library);
 
 	private:
 		static LibraryItem* loadShapeItem(const std::string& filepath);

@@ -7,12 +7,13 @@
 
 namespace eshape
 {
+	class LibraryPanel;
 	class LibraryItem;
 
 	class Love2dCode
 	{
 	public:
-		Love2dCode(ebuilder::CodeGenerator& gen);
+		Love2dCode(ebuilder::CodeGenerator& gen, LibraryPanel* library);
 
 		void resolve();
 
@@ -27,6 +28,8 @@ namespace eshape
 
 	private:
 		ebuilder::CodeGenerator& m_gen;
+
+		LibraryPanel* m_library;
 
 	}; // Love2dCode
 }

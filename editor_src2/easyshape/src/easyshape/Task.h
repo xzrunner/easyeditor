@@ -7,7 +7,9 @@
 namespace eshape
 {
 
+class LibraryPanel;
 class StagePanel;
+class ToolbarPanel;
 
 class Task :public d2d::ITask
 {
@@ -38,7 +40,10 @@ private:
 
 	wxFrame* m_parent;
 
+	LibraryPanel* m_library;
+	d2d::PropertySettingPanel* m_property;
 	StagePanel* m_stage;
+	ToolbarPanel* m_toolbar;
 
 }; // Task
 

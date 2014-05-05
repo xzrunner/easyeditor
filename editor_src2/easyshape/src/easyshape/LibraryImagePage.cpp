@@ -1,12 +1,12 @@
-
 #include "LibraryImagePage.h"
 #include "LibraryItem.h"
-
-#include "Context.h"
+#include "StagePanel.h"
+#include "ToolBarPanel.h"
 
 #include <easyshape.h>
 
-using namespace eshape;
+namespace eshape
+{
 
 LibraryImagePage::LibraryImagePage(wxWindow* parent)
 	: LibraryPage(parent, "Image")
@@ -40,9 +40,12 @@ void LibraryImagePage::onAddPress(wxCommandEvent& event)
 			libshape::FileAdapter adapter(*shapes);
 			adapter.load(shape_filepath);
 
-			Context::Instance()->changeCurrItem(item);
+			m_stage->changeCurrItem(item);
+			m_toolbar->changeCurrItem(item);
 
 			m_list->insert(item);
 		}
 	}
+}
+
 }

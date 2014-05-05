@@ -1,21 +1,21 @@
 
 #include "StageCanvas.h"
 #include "StagePanel.h"
-#include "Context.h"
 #include "LibraryItem.h"
 
 #include "../libshape/StageCanvas.h"
 
 using namespace eshape;
 
-StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::ShapeStageCanvas(editPanel, editPanel, d2d::Colorf(1.0f, 0.0f, 0.0f))
+StageCanvas::StageCanvas(StagePanel* stage)
+	: d2d::ShapeStageCanvas(stage, stage, d2d::Colorf(1.0f, 0.0f, 0.0f))
+	, m_stage(stage)
 {
 }
 
 void StageCanvas::onDraw()
 {
-	LibraryItem* item = Context::Instance()->stage->m_item;
+	LibraryItem* item = m_stage->m_item;
 
 	if (item) 
 	{

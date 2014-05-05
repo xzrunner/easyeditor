@@ -1,6 +1,5 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
-#include "Context.h"
 #include "LibraryItem.h"
 
 #include <easyshape.h>
@@ -8,12 +7,10 @@
 namespace eshape
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent)
-	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
+						   StagePanel* stage)
+	: d2d::ToolbarPanel(parent, stage)
 {
-	StagePanel* stage = Context::Instance()->stage;
-	d2d::PropertySettingPanel* property = Context::Instance()->property;
-
 	addChild(new libshape::NodeCaptureCMPT<libshape::EditRectOP>(this, wxT("rect"), stage, stage, property));
 	addChild(new libshape::NodeCaptureCMPT<libshape::EditCircleOP>(this, wxT("circle"), stage, stage, property));
 	addChild(new libshape::DrawLineCMPT(this, wxT("chain"), stage, stage, property));

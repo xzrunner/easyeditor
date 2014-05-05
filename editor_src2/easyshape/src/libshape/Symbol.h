@@ -42,9 +42,6 @@ private:
 
 	void clear();
 
-private:
-	static const float SCALE;
-
 public:
 	std::vector<d2d::IShape*> shapes;
 

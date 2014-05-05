@@ -12,7 +12,8 @@ class LibraryItem;
 class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent);
+	ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
+		StagePanel* stage);
 
 	void changeCurrItem(LibraryItem* item);
 

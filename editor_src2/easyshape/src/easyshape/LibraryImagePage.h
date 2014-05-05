@@ -1,22 +1,23 @@
-
-#ifndef ESHAPE_LIBRARY_IMAGE_PAGE_H
-#define ESHAPE_LIBRARY_IMAGE_PAGE_H
+#ifndef _ESHAPE_LIBRARY_IMAGE_PAGE_H_
+#define _ESHAPE_LIBRARY_IMAGE_PAGE_H_
 
 #include "LibraryPage.h"
 
 namespace eshape
 {
-	class LibraryImagePage : public LibraryPage
-	{
-	public:
-		LibraryImagePage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+class LibraryImagePage : public LibraryPage
+{
+public:
+	LibraryImagePage(wxWindow* parent);
 
-	protected:
-		virtual void onAddPress(wxCommandEvent& event);
+	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
-	}; // LibraryImagePage
+protected:
+	virtual void onAddPress(wxCommandEvent& event);
+
+}; // LibraryImagePage
+
 }
 
-#endif // ESHAPE_LIBRARY_IMAGE_PAGE_H
+#endif // _ESHAPE_LIBRARY_IMAGE_PAGE_H_

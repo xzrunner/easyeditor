@@ -6,6 +6,8 @@
 
 namespace eshape
 {
+	class StagePanel;
+	class ToolbarPanel;
 	class LibraryItem;
 
 	class LibraryPage : public d2d::ILibraryPage
@@ -15,8 +17,14 @@ namespace eshape
 
 		void clickListSelection();
 
+		void setContext(StagePanel* stage, ToolbarPanel* toolbar);
+
 	private:
 		virtual void onDelPress(wxCommandEvent& event);
+
+	protected:
+		StagePanel* m_stage;
+		ToolbarPanel* m_toolbar;
 
 	}; // LibraryPage
 }

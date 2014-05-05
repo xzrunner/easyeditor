@@ -3,7 +3,6 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 #include "FileIO.h"
-#include "Context.h"
 
 using namespace eshape;
 
@@ -24,12 +23,12 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
-	FileIO::load(filename);
+	FileIO::load(filename, m_library);
 }
 
 void Task::store(const char* filename) const
 {
-	FileIO::store(filename);
+	FileIO::store(filename, m_library);
 }
 
 bool Task::isDirty() const
@@ -39,12 +38,10 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	Context* context = Context::Instance();
-
-	context->library->clear();
-	context->stage->clear();
-	context->library->Refresh();
-	context->stage->Refresh();
+	m_library->clear();
+	m_stage->clear();
+	m_library->Refresh();
+	m_stage->Refresh();
 }
 
 const d2d::EditPanel* Task::getEditPanel() const
@@ -58,15 +55,16 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 					   wxWindow*& library, wxWindow*& property, 
 					   wxWindow*& stage, wxWindow*& toolbar)
 {
-	Context* context = Context::Instance();
+	library = m_library = new LibraryPanel(leftHorizontalSplitter);
 
-	library = context->library = new LibraryPanel(leftHorizontalSplitter);
+	property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
-	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent);
 
-	stage = context->stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent);
+	toolbar = m_toolbar = new ToolbarPanel(rightVerticalSplitter, m_property, m_stage);
 
-	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter);
+	m_library->setContext(m_stage, m_toolbar);
+	m_stage->setToolbar(m_toolbar);
 }
 
 void Task::initLayout()

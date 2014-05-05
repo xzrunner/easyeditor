@@ -2,13 +2,12 @@
 #include "FileIO.h"
 #include "LibraryPanel.h"
 #include "LibraryItem.h"
-#include "Context.h"
 
 #include <easyshape.h>
 
 using namespace eshape;
 
-void FileIO::load(const char* filename)
+void FileIO::load(const char* filename, LibraryPanel* library)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -17,8 +16,6 @@ void FileIO::load(const char* filename)
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
-
-	LibraryPanel* library = Context::Instance()->library;
 	{
 		int i = 0;
 		Json::Value shapeValue = value["shape"][i++];
@@ -39,22 +36,20 @@ void FileIO::load(const char* filename)
 			imageValue = value["image"][i++];
 		}
 	}
-
 	int index = static_cast<wxNotebook*>(library->getNotebook())->GetSelection();
 	wxBookCtrlEvent event;
  	event.SetSelection(index);
  	library->onPageChanged(event);
 }
 
-void FileIO::store(const char* filename)
+void FileIO::store(const char* filename, LibraryPanel* library)
 {
 	Json::Value value;
 
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
-
 	{
 		std::vector<LibraryItem*> items;
-		Context::Instance()->library->getShapePage()->getList()->
+		library->getShapePage()->getList()->
 			traverse(d2d::FetchAllVisitor<LibraryItem>(items));
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 		{
@@ -68,7 +63,7 @@ void FileIO::store(const char* filename)
 	}
 	{
 		std::vector<LibraryItem*> items;
-		Context::Instance()->library->getImagePage()->getList()->
+		library->getImagePage()->getList()->
 			traverse(d2d::FetchAllVisitor<LibraryItem>(items));
 		for (size_t i = 0, n = items.size(); i < n; ++i)
 		{
@@ -76,7 +71,6 @@ void FileIO::store(const char* filename)
 			store(items[i], dir);
 		}
 	}
-
 	Json::StyledStreamWriter writer;
 	std::ofstream fout(filename);
 	writer.write(fout, value);

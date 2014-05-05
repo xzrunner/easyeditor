@@ -11,13 +11,16 @@ namespace eshape
 	class StageCanvas : public d2d::ShapeStageCanvas
 	{
 	public:
-		StageCanvas(StagePanel* editPanel);
+		StageCanvas(StagePanel* stage);
 
 	protected:
 		virtual void onDraw();
 
 	private:
 		void drawGuideLines();
+
+	private:
+		StagePanel* m_stage;
 
 	}; // StageCanvas 
 }

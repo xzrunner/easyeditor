@@ -1,12 +1,12 @@
-
 #include "LibraryShapePage.h"
 #include "LibraryItem.h"
-
-#include "Context.h"
+#include "StagePanel.h"
+#include "ToolBarPanel.h"
 
 #include <easyshape.h>
 
-using namespace eshape;
+namespace eshape
+{
 
 LibraryShapePage::LibraryShapePage(wxWindow* parent)
 	: LibraryPage(parent, "Shape")
@@ -60,7 +60,8 @@ void LibraryShapePage::onAddPress(wxCommandEvent& event)
 			libshape::FileAdapter adapter(*shapes);
 			adapter.load(filenames[i]);
 
-			Context::Instance()->changeCurrItem(item);
+			m_stage->changeCurrItem(item);
+			m_toolbar->changeCurrItem(item);
 
 			m_list->insert(item);
 		}
@@ -74,7 +75,10 @@ void LibraryShapePage::onNewBtnPress(wxCommandEvent& event)
 	std::vector<d2d::IShape*>* shapes = new std::vector<d2d::IShape*>;
 	item->setUserData(shapes);
 
-	Context::Instance()->changeCurrItem(item);
+	m_stage->changeCurrItem(item);
+	m_toolbar->changeCurrItem(item);
 
 	m_list->insert(item);
+}
+
 }

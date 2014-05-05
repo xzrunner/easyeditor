@@ -7,6 +7,7 @@
 namespace eshape
 {
 	class LibraryItem;
+	class ToolbarPanel;
 
 	class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
 	{
@@ -29,8 +30,14 @@ namespace eshape
 
 		void changeCurrItem(LibraryItem* item);
 
+		void setToolbar(ToolbarPanel* toolbar) {
+			m_toolbar = toolbar;
+		}
+
 	private:
 		LibraryItem* m_item;
+
+		ToolbarPanel* m_toolbar;
 
 		friend class StageCanvas;
 

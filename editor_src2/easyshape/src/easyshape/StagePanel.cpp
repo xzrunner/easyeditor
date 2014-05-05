@@ -3,7 +3,6 @@
 #include "StageCanvas.h"
 #include "LibraryItem.h"
 #include "ToolBarPanel.h"
-#include "Context.h"
 
 using namespace eshape;
 
@@ -11,6 +10,7 @@ StagePanel::StagePanel(wxWindow* parent,
 					   wxTopLevelWindow* frame)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl(parent)
+	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this);
 	m_item = NULL;
@@ -19,7 +19,9 @@ StagePanel::StagePanel(wxWindow* parent,
 void StagePanel::clear()
 {
 	changeCurrItem(NULL);
-	Context::Instance()->toolbar->changeCurrItem(NULL);
+	if (m_toolbar) {
+		m_toolbar->changeCurrItem(NULL);
+	}
 
 	d2d::EditPanel::clear();
 	clearShapes();

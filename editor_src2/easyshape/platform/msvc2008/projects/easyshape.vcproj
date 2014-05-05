@@ -185,14 +185,6 @@
 			Name="frame"
 			>
 			<File
-				RelativePath="..\..\..\src\easyshape\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyshape\Context.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyshape\main.cpp"
 				>
 			</File>
