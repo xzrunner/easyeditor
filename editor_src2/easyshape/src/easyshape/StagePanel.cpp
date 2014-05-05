@@ -68,7 +68,7 @@ void StagePanel::insertShape(d2d::IShape* shape)
 
 	std::vector<d2d::IShape*>* shapes 
 		= static_cast<std::vector<d2d::IShape*>*>(m_item->getUserData());
-//	static_cast<d2d::ChainShape*>(shape)->setClosed(Context::Instance()->isClosed);
+//	static_cast<libshape::ChainShape*>(shape)->setClosed(Context::Instance()->isClosed);
 	shapes->push_back(shape);
 }
 

@@ -3,6 +3,7 @@
 #define ESHAPE_LOVE2D_CODE_H
 
 #include <easybuilder.h>
+#include <easyshape.h>
 
 namespace eshape
 {
@@ -18,11 +19,11 @@ namespace eshape
 	private:
 		void resolve(LibraryItem* item);
 		void resolve(d2d::IShape* shape);
-		void resolve(const d2d::BezierShape* bezier);
-		void resolve(const d2d::PolygonShape* poly);
-		void resolve(const d2d::ChainShape* chain);
-		void resolve(const d2d::RectShape* rect);
-		void resolve(const d2d::CircleShape* circle);
+		void resolve(const libshape::BezierShape* bezier);
+		void resolve(const libshape::PolygonShape* poly);
+		void resolve(const libshape::ChainShape* chain);
+		void resolve(const libshape::RectShape* rect);
+		void resolve(const libshape::CircleShape* circle);
 
 	private:
 		ebuilder::CodeGenerator& m_gen;

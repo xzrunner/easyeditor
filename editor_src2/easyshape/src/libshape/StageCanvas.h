@@ -1,32 +1,33 @@
-
-#ifndef LIBSHAPE_STAGE_CANVAS_H
-#define LIBSHAPE_STAGE_CANVAS_H
+#ifndef _LIBSHAPE_STAGE_CANVAS_H_
+#define _LIBSHAPE_STAGE_CANVAS_H_
 
 #include <drag2d.h>
 
 namespace libshape
 {
-	class StagePanel;
 
-	class StageCanvas : public d2d::ShapeStageCanvas
-	{
-	public:
-		StageCanvas(StagePanel* stage);
+class StagePanel;
 
-	public:
-		void drawGuideLines();
+class StageCanvas : public d2d::ShapeStageCanvas
+{
+public:
+	StageCanvas(StagePanel* stage);
 
-	protected:
-		virtual void initGL();
-		virtual void onDraw();
+public:
+	void drawGuideLines();
 
-		void onMouse(wxMouseEvent& event);
-		void onKeyDown(wxKeyEvent& event);
+protected:
+	virtual void initGL();
+	virtual void onDraw();
 
-	private:
-		DECLARE_EVENT_TABLE()
+	void onMouse(wxMouseEvent& event);
+	void onKeyDown(wxKeyEvent& event);
 
-	}; // StageCanvas
+private:
+	DECLARE_EVENT_TABLE()
+
+}; // StageCanvas
+
 }
 
-#endif // LIBSHAPE_STAGE_CANVAS_H
+#endif // _LIBSHAPE_STAGE_CANVAS_H_

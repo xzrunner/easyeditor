@@ -1,6 +1,5 @@
-#pragma once
-
-#include <vector>
+#ifndef _D2D_SELECT_SHAPES_OP_H_
+#define _D2D_SELECT_SHAPES_OP_H_
 
 #include "DrawRectangleOP.h"
 
@@ -8,48 +7,53 @@
 
 namespace d2d
 {
-	class MultiShapesImpl;
-	class AbstractEditCMPT;
-	class PropertySettingPanel;
-	class IPropertySetting;
 
-	class SelectShapesOP : public DrawRectangleOP
-	{
-	public:
-		SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl, 
-			PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback = NULL);
-		virtual ~SelectShapesOP();
+class EditPanel;
+class MultiShapesImpl;
+class PropertySettingPanel;
+class AbstractEditCMPT;
+class IPropertySetting;
+class IShape;
 
-		virtual bool onKeyDown(int keyCode);
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseLeftUp(int x, int y);
-		virtual bool onMouseDrag(int x, int y);
+class SelectShapesOP : public DrawRectangleOP
+{
+public:
+	SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl, 
+		PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback = NULL);
+	virtual ~SelectShapesOP();
 
-		virtual bool onDraw() const;
-		virtual bool clear();
+	virtual bool onKeyDown(int keyCode);
+	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseLeftUp(int x, int y);
+	virtual bool onMouseDrag(int x, int y);
 
-		virtual IPropertySetting* createPropertySetting(IShape* shape) const;
+	virtual bool onDraw() const;
+	virtual bool clear();
 
-	private:
-		void clearClipboard();
+	virtual IPropertySetting* createPropertySetting(IShape* shape) const;
 
-	protected:
-		Vector m_firstPos;
+private:
+	void clearClipboard();
 
-		ShapeSelection* m_selection;
+protected:
+	Vector m_firstPos;
 
-		PropertySettingPanel* m_propertyPanel;
+	ShapeSelection* m_selection;
 
-	private:
-		AbstractEditCMPT* m_callback;
+	PropertySettingPanel* m_propertyPanel;
 
-		MultiShapesImpl* m_shapeImpl;
+private:
+	AbstractEditCMPT* m_callback;
 
-		std::vector<IShape*> m_clipboard;
+	MultiShapesImpl* m_shapeImpl;
 
-		// To disable mouse able when press ctrl and window query
-		bool m_bDraggable;
+	std::vector<IShape*> m_clipboard;
 
-	}; // SelectShapesOP
+	// To disable mouse able when press ctrl and window query
+	bool m_bDraggable;
+
+}; // SelectShapesOP
+
 }
 
+#endif // _D2D_SELECT_SHAPES_OP_H_

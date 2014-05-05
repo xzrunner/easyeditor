@@ -84,7 +84,7 @@ private:
 		void insert(const wxString& filename);
 
 		wxString getFilename(int idx) const {
-			if (idx >= 0 && idx < m_files.size()) {
+			if (idx >= 0 && idx < (int)m_files.size()) {
 				return m_files[idx];
 			} else {
 				return wxEmptyString;

@@ -3,14 +3,17 @@
 #include <easyshape.h>
 
 #include "BodyData.h"
-#include "ChainShape.h"
+// todo for 3rd part
+//#include "ChainShape.h"
 
 #include "common/tools.h"
 #include "common/FileNameParser.h"
 #include "common/PolylineFileAdapter.h"
 #include "common/CircleFileAdapter.h"
-#include "dataset/CircleShape.h"
-#include "dataset/RectShape.h"
+
+// todo for 3rd part
+// #include "dataset/CircleShape.h"
+// #include "dataset/RectShape.h"
 
 namespace d2d
 {
@@ -83,22 +86,23 @@ void BodyData::loadFromMeshFile(const wxString& filename)
 
 void BodyData::loadFromPolygonFile(const wxString& filename)
 {
-	m_type = e_polygon;
-
-	std::vector<ChainShape*> chains;
-	PolylineFileAdapter fileAdapter(chains);
-	// todo rewrite IO
-//	fileAdapter.load(filename.c_str());
-
-	m_fixtures.reserve(fileAdapter.m_chains.size());
-	for (size_t i = 0, n = fileAdapter.m_chains.size(); i < n; ++i)
-	{
-		FixtureData* fd = new FixtureData;
-		fd->vertices = fileAdapter.m_chains[i]->getVertices();
-		m_fixtures.push_back(fd);
-	}
-
-	for_each(chains.begin(), chains.end(), DeletePointerFunctor<ChainShape>());
+// todo for 3rd part
+//	m_type = e_polygon;
+//
+//	std::vector<ChainShape*> chains;
+//	PolylineFileAdapter fileAdapter(chains);
+//	// todo rewrite IO
+////	fileAdapter.load(filename.c_str());
+//
+//	m_fixtures.reserve(fileAdapter.m_chains.size());
+//	for (size_t i = 0, n = fileAdapter.m_chains.size(); i < n; ++i)
+//	{
+//		FixtureData* fd = new FixtureData;
+//		fd->vertices = fileAdapter.m_chains[i]->getVertices();
+//		m_fixtures.push_back(fd);
+//	}
+//
+//	for_each(chains.begin(), chains.end(), DeletePointerFunctor<ChainShape>());
 }
 
 void BodyData::loadFromCircleFile(const wxString& filename)

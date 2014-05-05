@@ -18,8 +18,6 @@ namespace d2d
 	static const float TRANS_RAD_TO_DEG = 180.0f / PI;
 	static const float BOX2D_SCALE_FACTOR = 20.0f;
 
-	class ChainShape;
-
 	class Math
 	{
 	public:
@@ -213,11 +211,6 @@ namespace d2d
 
 		//////////////////////////////////////////////////////////////////////////
 
-		static void mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
-			std::vector<Vector>& dst);
-
-		static void mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<Vector>& dst);
-
 		static void removeDuplicatePoints(const std::vector<Vector>& src, std::vector<Vector>& dst);
 
 // 		enum TriangulateType
@@ -242,11 +235,6 @@ namespace d2d
 		// 0 3
 		static void computeQuadNodes(const Vector& center, float angle, 
 			float xScale, float yScale, float width, float height, Vector quad[4]);
-
-	private:
-		// for mergeMultiChains
-		static void findNearestPair(const std::vector<ChainShape*>& chains, int& index0, int& index1);
-		static float getDistanceOfChains(const ChainShape& chain0, const ChainShape& chain1);
 
 	}; // Math
 }

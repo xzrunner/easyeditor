@@ -1,11 +1,18 @@
-
 #include "Package.h"
 
-using namespace libshape;
+#include "BezierShape.h"
+#include "ChainShape.h"
+#include "CircleShape.h"
+#include "CosineShape.h"
+#include "PolygonShape.h"
+#include "RectShape.h"
+
+namespace libshape
+{
 
 void Paskage::packShape(d2d::IShape* shape, std::ofstream& fout)
 {
-	if (d2d::PolygonShape* poly = dynamic_cast<d2d::PolygonShape*>(shape))
+	if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape))
 	{
 		int type = e_polygon;
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
@@ -19,7 +26,7 @@ void Paskage::packShape(d2d::IShape* shape, std::ofstream& fout)
 			fout.write(reinterpret_cast<const char*>(&vertices[i].y), sizeof(float));
 		}
 	}
-	else if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
+	else if (CircleShape* circle = dynamic_cast<CircleShape*>(shape))
 	{
 		int type = e_circle;
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
@@ -28,4 +35,6 @@ void Paskage::packShape(d2d::IShape* shape, std::ofstream& fout)
 		fout.write(reinterpret_cast<const char*>(&circle->center.y), sizeof(float));
 		fout.write(reinterpret_cast<const char*>(&circle->radius), sizeof(float));
 	}
+}
+
 }

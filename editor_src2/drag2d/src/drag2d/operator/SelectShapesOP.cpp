@@ -1,18 +1,10 @@
 #include "SelectShapesOP.h"
 
 #include "common/visitors.h"
-#include "dataset/BezierShape.h"
-#include "dataset/PolygonShape.h"
-#include "dataset/CircleShape.h"
-#include "dataset/RectShape.h"
-#include "component/AbstractEditCMPT.h"
-#include "view/PropertySettingPanel.h"
-#include "view/BezierPropertySetting.h"
-#include "view/PolygonPropertySetting.h"
-#include "view/ChainPropertySetting.h"
-#include "view/CirclePropertySetting.h"
-#include "view/RectPropertySetting.h"
+#include "common/Rect.h"
 #include "view/MultiShapesImpl.h"
+#include "view/PropertySettingPanel.h"
+#include "component/AbstractEditCMPT.h"
 #include "render/DrawSelectedShapeVisitor.h"
 
 namespace d2d
@@ -62,10 +54,10 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 	{
 		clearClipboard();
 
-		std::vector<PolygonShape*> polys;
-		m_selection->traverse(FetchAllVisitor<PolygonShape>(polys));
-		for (size_t i = 0, n = polys.size(); i < n; ++i)
-			m_clipboard.push_back(polys[i]->clone());
+		std::vector<IShape*> shapes;
+		m_selection->traverse(FetchAllVisitor<IShape>(shapes));
+		for (size_t i = 0, n = shapes.size(); i < n; ++i)
+			m_clipboard.push_back(shapes[i]->clone());
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
@@ -189,18 +181,7 @@ bool SelectShapesOP::clear()
 
 IPropertySetting* SelectShapesOP::createPropertySetting(IShape* shape) const
 {
-	if (BezierShape* bezier = dynamic_cast<BezierShape*>(shape))
-		return new BezierPropertySetting(m_editPanel, bezier);
-	else if (PolygonShape* polygon = dynamic_cast<PolygonShape*>(shape))
-		return new PolygonPropertySetting(m_editPanel, polygon);
-	else if (ChainShape* chain = dynamic_cast<ChainShape*>(shape))
-		return new ChainPropertySetting(m_editPanel, chain);
-	else if (CircleShape* circle = dynamic_cast<CircleShape*>(shape))
-		return new CirclePropertySetting(m_editPanel, circle);
-	else if (RectShape* rect = dynamic_cast<RectShape*>(shape))
-		return new RectPropertySetting(m_editPanel, rect);
-	else
-		return NULL;
+	return shape->createPropertySetting(m_editPanel);
 }
 
 void SelectShapesOP::clearClipboard()
@@ -210,4 +191,4 @@ void SelectShapesOP::clearClipboard()
  	m_clipboard.clear();
 }
 
-} // d2d
+}

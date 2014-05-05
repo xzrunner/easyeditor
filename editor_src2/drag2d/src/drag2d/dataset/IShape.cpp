@@ -10,4 +10,5 @@ IShape::IShape()
 	static int index = 0;
 	name = "shape" + wxString::FromDouble(index++);
 }
+
 } // d2d

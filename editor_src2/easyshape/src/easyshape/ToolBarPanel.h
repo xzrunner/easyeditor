@@ -1,4 +1,3 @@
-
 #ifndef ESHAPE_TOOLBAR_PANEL_H
 #define ESHAPE_TOOLBAR_PANEL_H
 
@@ -6,23 +5,25 @@
 
 namespace eshape
 {
-	class StagePanel;
-	class LibraryItem;
 
-	class ToolbarPanel : public d2d::ToolbarPanel
-	{
-	public:
-		ToolbarPanel(wxWindow* parent);
+class StagePanel;
+class LibraryItem;
 
-		void changeCurrItem(LibraryItem* item);
+class ToolbarPanel : public d2d::ToolbarPanel
+{
+public:
+	ToolbarPanel(wxWindow* parent);
 
-	protected:
-		virtual wxSizer* initLayout();
+	void changeCurrItem(LibraryItem* item);
 
-	private:
-		void onClearShapes(wxCommandEvent& event);
+protected:
+	virtual wxSizer* initLayout();
 
-	}; // ToolbarPanel
+private:
+	void onClearShapes(wxCommandEvent& event);
+
+}; // ToolbarPanel
+
 }
 
 #endif // ESHAPE_TOOLBAR_PANEL_H

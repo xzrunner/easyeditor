@@ -1,6 +1,8 @@
 #include "Sprite.h"
 #include "Symbol.h"
 
+#include "PolygonShape.h"
+
 namespace libshape
 {
 
@@ -64,7 +66,7 @@ void Sprite::loadBodyFromFile()
 	const std::vector<d2d::IShape*>& shapes = m_symbol->shapes;
 	for (size_t i = 0, n = shapes.size(); i < n; ++i)
 	{
-		d2d::PolygonShape* poly = dynamic_cast<d2d::PolygonShape*>(shapes[i]);
+		PolygonShape* poly = dynamic_cast<PolygonShape*>(shapes[i]);
 		if (poly)
 			copy(poly->m_fillingVertices.begin(), poly->m_fillingVertices.end(), back_inserter(triangles));
 	}

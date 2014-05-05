@@ -1,45 +1,46 @@
-
-#ifndef LIBSHAPE_STAGE_PANEL_H
-#define LIBSHAPE_STAGE_PANEL_H
+#ifndef _LIBSHAPE_STAGE_PANEL_H_
+#define _LIBSHAPE_STAGE_PANEL_H_
 
 #include <drag2d.h>
 
 namespace libshape
 {
-	class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
-	{
-	public:
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::ISymbol* symbol);
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::ISprite* sprite);
-		virtual ~StagePanel();
 
-		//
-		// ICameraObserver interface
-		//
-		virtual void clear();
+class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
+{
+public:
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::ISymbol* symbol);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::ISprite* sprite);
+	virtual ~StagePanel();
 
-		//
-		// d2d::MultiShapesImpl interface
-		//
-		virtual void traverseShapes(d2d::IVisitor& visitor, 
-			d2d::TraverseType type = d2d::e_allExisting) const;
-		virtual void removeShape(d2d::IShape* shape);
-		virtual void insertShape(d2d::IShape* shape);
-		virtual void clearShapes();
+	//
+	// ICameraObserver interface
+	//
+	virtual void clear();
 
-		virtual void loadShapes();
-		virtual void storeShapes() const;
+	//
+	// d2d::MultiShapesImpl interface
+	//
+	virtual void traverseShapes(d2d::IVisitor& visitor, 
+		d2d::TraverseType type = d2d::e_allExisting) const;
+	virtual void removeShape(d2d::IShape* shape);
+	virtual void insertShape(d2d::IShape* shape);
+	virtual void clearShapes();
 
-		const d2d::ISymbol& getSymbol() const { return m_symbol; }
+	virtual void loadShapes();
+	virtual void storeShapes() const;
 
-	protected:
-		const d2d::ISymbol& m_symbol;
+	const d2d::ISymbol& getSymbol() const { return m_symbol; }
 
-		d2d::ISprite* m_sprite;
+protected:
+	const d2d::ISymbol& m_symbol;
 
-		mutable std::vector<d2d::IShape*> m_shapes;
+	d2d::ISprite* m_sprite;
 
-	}; // StagePanel
+	mutable std::vector<d2d::IShape*> m_shapes;
+
+}; // StagePanel
+
 }
 
-#endif // LIBSHAPE_STAGE_PANEL_H
+#endif // _LIBSHAPE_STAGE_PANEL_H_

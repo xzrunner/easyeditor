@@ -1,10 +1,12 @@
-
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
 #include "Context.h"
 #include "LibraryItem.h"
 
-using namespace eshape;
+#include <easyshape.h>
+
+namespace eshape
+{
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent)
 	: d2d::ToolbarPanel(parent, Context::Instance()->stage)
@@ -12,11 +14,11 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent)
 	StagePanel* stage = Context::Instance()->stage;
 	d2d::PropertySettingPanel* property = Context::Instance()->property;
 
-	addChild(new d2d::NodeCaptureCMPT<d2d::EditRectOP>(this, wxT("rect"), stage, stage, property));
-	addChild(new d2d::NodeCaptureCMPT<d2d::EditCircleOP>(this, wxT("circle"), stage, stage, property));
-	addChild(new d2d::DrawLineCMPT(this, wxT("chain"), stage, stage, property));
-	addChild(new d2d::EditPolygonCMPT(this, wxT("polygon"), stage, stage, property));
-	addChild(new d2d::NodeCaptureCMPT<d2d::EditBezierOP>(this, wxT("bezier"), stage, stage, property));
+	addChild(new libshape::NodeCaptureCMPT<libshape::EditRectOP>(this, wxT("rect"), stage, stage, property));
+	addChild(new libshape::NodeCaptureCMPT<libshape::EditCircleOP>(this, wxT("circle"), stage, stage, property));
+	addChild(new libshape::DrawLineCMPT(this, wxT("chain"), stage, stage, property));
+	addChild(new libshape::EditPolygonCMPT(this, wxT("polygon"), stage, stage, property));
+	addChild(new libshape::NodeCaptureCMPT<libshape::EditBezierOP>(this, wxT("bezier"), stage, stage, property));
 
 	SetSizer(initLayout());	
 }
@@ -30,15 +32,15 @@ void ToolbarPanel::changeCurrItem(LibraryItem* item)
 	if (!shapes || shapes->empty()) return;
 
 	d2d::IShape* shape = (*shapes)[0];
-	if (dynamic_cast<d2d::RectShape*>(shape))
+	if (dynamic_cast<libshape::RectShape*>(shape))
 		setChoice(0); 
-	else if (dynamic_cast<d2d::CircleShape*>(shape))
+	else if (dynamic_cast<libshape::CircleShape*>(shape))
 		setChoice(1);
-	else if (dynamic_cast<d2d::BezierShape*>(shape))
+	else if (dynamic_cast<libshape::BezierShape*>(shape))
 		setChoice(4);
-	else if (dynamic_cast<d2d::PolygonShape*>(shape))
+	else if (dynamic_cast<libshape::PolygonShape*>(shape))
 		setChoice(3); 
-	else if (dynamic_cast<d2d::ChainShape*>(shape))
+	else if (dynamic_cast<libshape::ChainShape*>(shape))
 		setChoice(2); 
 }
 
@@ -62,4 +64,6 @@ void ToolbarPanel::onClearShapes(wxCommandEvent& event)
 {
 	static_cast<StagePanel*>(m_editPanel)->clearShapes();
 	m_editPanel->Refresh();
+}
+
 }

@@ -1,6 +1,13 @@
 #include "Symbol.h"
 #include "FileAdapter.h"
 
+#include "BezierShape.h"
+#include "ChainShape.h"
+#include "CircleShape.h"
+#include "CosineShape.h"
+#include "PolygonShape.h"
+#include "RectShape.h"
+
 namespace libshape
 {
 
@@ -90,7 +97,7 @@ void Symbol::loadThumbnail()
 	for (size_t i = 0, n = shapes.size(); i < n ;++i)
 	{
 		d2d::IShape* shape = shapes[i];
-		if (d2d::BezierShape* bezier = dynamic_cast<d2d::BezierShape*>(shape))
+		if (BezierShape* bezier = dynamic_cast<BezierShape*>(shape))
 		{
 			size_t size = bezier->getVertices().size();
 			wxPoint* points = new wxPoint[size];
@@ -102,7 +109,7 @@ void Symbol::loadThumbnail()
 			memDC.DrawLines(size, points);
 			delete points;
 		}
-		else if (d2d::PolygonShape* poly = dynamic_cast<d2d::PolygonShape*>(shape))
+		else if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape))
 		{
 			size_t size = poly->getVertices().size();
 			wxPoint* points = new wxPoint[size];
@@ -114,7 +121,7 @@ void Symbol::loadThumbnail()
 			memDC.DrawPolygon(size, points);
 			delete points;
 		}
-		else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape))
+		else if (ChainShape* chain = dynamic_cast<ChainShape*>(shape))
 		{
 			size_t size = chain->getVertices().size();
 			wxPoint* points = new wxPoint[size];
@@ -126,7 +133,7 @@ void Symbol::loadThumbnail()
 			memDC.DrawLines(size, points);
 			delete points;
 		}
-		else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(shape))
+		else if (RectShape* rect = dynamic_cast<RectShape*>(shape))
 		{
 			memDC.DrawRectangle(
 				rect->m_rect.xMin * SCALE + dx,
@@ -134,7 +141,7 @@ void Symbol::loadThumbnail()
 				rect->m_rect.xLength() * SCALE,
 				rect->m_rect.yLength() * SCALE);
 		}
-		else if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
+		else if (CircleShape* circle = dynamic_cast<CircleShape*>(shape))
 		{
 			memDC.DrawCircle(wxPoint(circle->center.x * SCALE + dx, -circle->center.y * SCALE + dy), 
 				circle->radius * SCALE);

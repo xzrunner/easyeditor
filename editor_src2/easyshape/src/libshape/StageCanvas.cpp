@@ -1,8 +1,8 @@
-
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
-using namespace libshape;
+namespace libshape
+{
 
 BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 	EVT_MOUSE_EVENTS(StageCanvas::onMouse)
@@ -56,4 +56,6 @@ void StageCanvas::onMouse(wxMouseEvent& event)
 void StageCanvas::onKeyDown(wxKeyEvent& event)
 {
 	m_editPanel->onKeyDown(event);
+}
+
 }

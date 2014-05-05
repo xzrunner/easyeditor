@@ -1,7 +1,14 @@
-
 #include "FileAdapter.h"
 
-using namespace libshape;
+#include "BezierShape.h"
+#include "ChainShape.h"
+#include "CircleShape.h"
+#include "CosineShape.h"
+#include "PolygonShape.h"
+#include "RectShape.h"
+
+namespace libshape
+{
 
 FileAdapter::FileAdapter(std::vector<d2d::IShape*>& shapes)
 	: m_shapes(shapes)
@@ -64,15 +71,15 @@ Json::Value FileAdapter::store(d2d::IShape* shape)
 {
 	Json::Value value;
 
-	if (d2d::BezierShape* bezier = dynamic_cast<d2d::BezierShape*>(shape))
+	if (BezierShape* bezier = dynamic_cast<BezierShape*>(shape))
 		value["bezier"] = store(bezier);
-	else if (d2d::PolygonShape* poly = dynamic_cast<d2d::PolygonShape*>(shape))
+	else if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape))
 		value["polygon"] = store(poly);
-	else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape))
+	else if (ChainShape* chain = dynamic_cast<ChainShape*>(shape))
 		value["chain"] = store(chain);
-	else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(shape))
+	else if (RectShape* rect = dynamic_cast<RectShape*>(shape))
 		value["rect"] = store(rect);
-	else if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
+	else if (CircleShape* circle = dynamic_cast<CircleShape*>(shape))
 		value["circle"] = store(circle);
 
 	return value;
@@ -87,7 +94,7 @@ d2d::IShape* FileAdapter::loadBezier(const Json::Value& value)
 		points[i].y = value["points"]["y"][i].asDouble();
 	}
 
-	d2d::BezierShape* bezier = new d2d::BezierShape(points);
+	BezierShape* bezier = new BezierShape(points);
 	bezier->name = value["name"].asString();
 
 	return bezier;
@@ -104,7 +111,7 @@ d2d::IShape* FileAdapter::loadPolygon(const Json::Value& value)
 		vertices[i].y = value["vertices"]["y"][i].asDouble();
 	}
 
-	d2d::PolygonShape* poly = new d2d::PolygonShape(vertices);
+	PolygonShape* poly = new PolygonShape(vertices);
 	poly->name = value["name"].asString();
 
 	return poly;
@@ -123,7 +130,7 @@ d2d::IShape* FileAdapter::loadChain(const Json::Value& value)
 
 	bool isLoop = value["closed"].asBool();
 
-	d2d::ChainShape* chain = new d2d::ChainShape(vertices, isLoop);
+	ChainShape* chain = new ChainShape(vertices, isLoop);
 	chain->name = value["name"].asString();
 
 	return chain;
@@ -136,7 +143,7 @@ d2d::IShape* FileAdapter::loadRect(const Json::Value& value)
 		ymin = value["ymin"].asDouble(),
 		ymax = value["ymax"].asDouble();
 
-	d2d::RectShape* rect = new d2d::RectShape(d2d::Vector(xmin, ymin), d2d::Vector(xmax, ymax));
+	RectShape* rect = new RectShape(d2d::Vector(xmin, ymin), d2d::Vector(xmax, ymax));
 	rect->name = value["name"].asString();
 
 	return rect;
@@ -148,13 +155,13 @@ d2d::IShape* FileAdapter::loadCircle(const Json::Value& value)
 		y = value["y"].asDouble(),
 		radius = value["radius"].asDouble();
 
-	d2d::CircleShape* circle = new d2d::CircleShape(d2d::Vector(x, y), radius);
+	CircleShape* circle = new CircleShape(d2d::Vector(x, y), radius);
 	circle->name = value["name"].asString();
 
 	return circle;
 }
 
-Json::Value FileAdapter::store(const d2d::BezierShape* bezier)
+Json::Value FileAdapter::store(const BezierShape* bezier)
 {
 	Json::Value value;
 
@@ -169,7 +176,7 @@ Json::Value FileAdapter::store(const d2d::BezierShape* bezier)
 	return value;
 }
 
-Json::Value FileAdapter::store(const d2d::PolygonShape* poly)
+Json::Value FileAdapter::store(const PolygonShape* poly)
 {
 	Json::Value value;
 
@@ -185,7 +192,7 @@ Json::Value FileAdapter::store(const d2d::PolygonShape* poly)
 	return value;
 }
 
-Json::Value FileAdapter::store(const d2d::ChainShape* chain)
+Json::Value FileAdapter::store(const ChainShape* chain)
 {
 	Json::Value value;
 
@@ -202,7 +209,7 @@ Json::Value FileAdapter::store(const d2d::ChainShape* chain)
 	return value;
 }
 
-Json::Value FileAdapter::store(const d2d::RectShape* rect)
+Json::Value FileAdapter::store(const RectShape* rect)
 {
 	Json::Value value;
 
@@ -216,7 +223,7 @@ Json::Value FileAdapter::store(const d2d::RectShape* rect)
 	return value;
 }
 
-Json::Value FileAdapter::store(const d2d::CircleShape* circle)
+Json::Value FileAdapter::store(const CircleShape* circle)
 {
 	Json::Value value;
 
@@ -227,4 +234,6 @@ Json::Value FileAdapter::store(const d2d::CircleShape* circle)
 	value["radius"] = circle->radius;
 
 	return value;
+}
+
 }

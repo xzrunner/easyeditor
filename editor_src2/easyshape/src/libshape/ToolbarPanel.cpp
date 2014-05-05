@@ -1,18 +1,32 @@
-
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
 
-using namespace libshape;
+#include "BezierShape.h"
+#include "ChainShape.h"
+#include "CircleShape.h"
+#include "CosineShape.h"
+#include "PolygonShape.h"
+#include "RectShape.h"
+
+#include "EditRectOP.h"
+#include "EditCircleOP.h"
+#include "EditBezierOP.h"
+
+#include "DrawLineCMPT.h"
+#include "EditPolygonCMPT.h"
+
+namespace libshape
+{
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
 						   StagePanel* stage)
 	: d2d::ToolbarPanel(parent, stage)
 {
-	addChild(new d2d::NodeCaptureCMPT<d2d::EditRectOP>(this, wxT("rect"), stage, stage, property));
-	addChild(new d2d::NodeCaptureCMPT<d2d::EditCircleOP>(this, wxT("circle"), stage, stage, property));
-	addChild(new d2d::DrawLineCMPT(this, wxT("chain"), stage, stage, property));
-	addChild(new d2d::EditPolygonCMPT(this, wxT("polygon"), stage, stage, property));
-	addChild(new d2d::NodeCaptureCMPT<d2d::EditBezierOP>(this, wxT("bezier"), stage, stage, property));
+	addChild(new NodeCaptureCMPT<EditRectOP>(this, wxT("rect"), stage, stage, property));
+	addChild(new NodeCaptureCMPT<EditCircleOP>(this, wxT("circle"), stage, stage, property));
+	addChild(new DrawLineCMPT(this, wxT("chain"), stage, stage, property));
+	addChild(new EditPolygonCMPT(this, wxT("polygon"), stage, stage, property));
+	addChild(new NodeCaptureCMPT<EditBezierOP>(this, wxT("bezier"), stage, stage, property));
 
 	SetSizer(initLayout());	
 }
@@ -46,14 +60,16 @@ void ToolbarPanel::selectSuitableEditOP()
 		d2d::FetchAllVisitor<d2d::IShape>(shapes));
 	if (shapes.empty()) return;
 
-	if (dynamic_cast<d2d::CircleShape*>(shapes[0]))
+	if (dynamic_cast<CircleShape*>(shapes[0]))
 		setChoice(1);
-	else if (dynamic_cast<d2d::RectShape*>(shapes[0]))
+	else if (dynamic_cast<RectShape*>(shapes[0]))
 		setChoice(0); 
-	else if (dynamic_cast<d2d::BezierShape*>(shapes[0]))
+	else if (dynamic_cast<BezierShape*>(shapes[0]))
 		setChoice(4);
-	else if (dynamic_cast<d2d::PolygonShape*>(shapes[0]))
+	else if (dynamic_cast<PolygonShape*>(shapes[0]))
 		setChoice(3); 
-	else if (dynamic_cast<d2d::ChainShape*>(shapes[0]))
+	else if (dynamic_cast<ChainShape*>(shapes[0]))
 		setChoice(2); 
+}
+
 }

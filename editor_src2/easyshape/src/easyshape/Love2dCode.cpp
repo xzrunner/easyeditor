@@ -46,19 +46,19 @@ void Love2dCode::resolve(LibraryItem* item)
 
 void Love2dCode::resolve(d2d::IShape* shape)
 {
-	if (d2d::BezierShape* bezier = dynamic_cast<d2d::BezierShape*>(shape))
+	if (libshape::BezierShape* bezier = dynamic_cast<libshape::BezierShape*>(shape))
 		resolve(bezier);
-	else if (d2d::PolygonShape* poly = dynamic_cast<d2d::PolygonShape*>(shape))
+	else if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
 		resolve(poly);
-	else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape))
+	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
 		resolve(chain);
-	else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(shape))
+	else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shape))
 		resolve(rect);
-	else if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
+	else if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
 		resolve(circle);
 }
 
-void Love2dCode::resolve(const d2d::BezierShape* bezier)
+void Love2dCode::resolve(const libshape::BezierShape* bezier)
 {
 	std::string type = lua::assign("type", "\"bezier\"");
 
@@ -76,7 +76,7 @@ void Love2dCode::resolve(const d2d::BezierShape* bezier)
 	lua::tableassign(m_gen, "", 3, type.c_str(), name.c_str(), points.c_str());
 }
 
-void Love2dCode::resolve(const d2d::PolygonShape* poly)
+void Love2dCode::resolve(const libshape::PolygonShape* poly)
 {
 	std::string type = lua::assign("type", "\"polygon\"");
 
@@ -95,7 +95,7 @@ void Love2dCode::resolve(const d2d::PolygonShape* poly)
 	lua::tableassign(m_gen, "", 3, type.c_str(), name.c_str(), points.c_str());
 }
 
-void Love2dCode::resolve(const d2d::ChainShape* chain)
+void Love2dCode::resolve(const libshape::ChainShape* chain)
 {
 	std::string type = lua::assign("type", "\"polygon\"");
 
@@ -116,7 +116,7 @@ void Love2dCode::resolve(const d2d::ChainShape* chain)
 	lua::tableassign(m_gen, "", 4, type.c_str(), name.c_str(), points.c_str(), closed.c_str());
 }
 
-void Love2dCode::resolve(const d2d::RectShape* rect)
+void Love2dCode::resolve(const libshape::RectShape* rect)
 {
 	std::string type = lua::assign("type", "\"rect\"");
 
@@ -130,7 +130,7 @@ void Love2dCode::resolve(const d2d::RectShape* rect)
 	lua::tableassign(m_gen, "", 6, type.c_str(), name.c_str(), xmin.c_str(), xmax.c_str(), ymin.c_str(), ymax.c_str());
 }
 
-void Love2dCode::resolve(const d2d::CircleShape* circle)
+void Love2dCode::resolve(const libshape::CircleShape* circle)
 {
 	std::string type = lua::assign("type", "\"circle\"");
 

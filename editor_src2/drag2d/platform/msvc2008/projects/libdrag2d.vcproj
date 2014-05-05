@@ -196,124 +196,12 @@
 			<Filter
 				Name="draw"
 				>
-				<Filter
-					Name="complex"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawCosineCurveOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawCosineCurveOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPencilLineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPencilLineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPenLineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPenLineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPolygonEdgeOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPolygonEdgeOP.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="simple"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawCurveOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawCurveOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPolylineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawPolylineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawRectangleOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\DrawRectangleOP.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="edit"
-				>
 				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditBezierOP.cpp"
+					RelativePath="..\..\..\src\drag2d\operator\DrawRectangleOP.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditBezierOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditCircleOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditCircleOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditNodesOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditNodesOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditPolylineOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditPolylineOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditPolylinesOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditPolylinesOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditPolylineWithCopyNodeOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditRectOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\EditRectOP.h"
+					RelativePath="..\..\..\src\drag2d\operator\DrawRectangleOP.h"
 					>
 				</File>
 			</Filter>
@@ -405,14 +293,6 @@
 				Name="select"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\operator\SelectNodesOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\SelectNodesOP.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\operator\SelectPixelsOP.cpp"
 					>
 				</File>
@@ -434,18 +314,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\operator\SelectSpritesOP.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="tools"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\NodeCapture.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\NodeCapture.h"
 					>
 				</File>
 			</Filter>
@@ -481,18 +349,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="edit"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\history\EditNodesAtomicOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\history\EditNodesAtomicOP.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="edit_component"
@@ -522,66 +378,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\component\UniversalArrangeCMPT.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="draw"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\DrawLineCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\DrawLineCMPT.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\DrawPencilLineCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\DrawPencilLineCMPT.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\DrawPolygonCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\DrawPolygonCMPT.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\NodeCaptureCMPT.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="edit"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\EditNodesCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\EditNodesCMPT.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\EditPolygonCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\EditPolygonCMPT.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\EditPolylinesCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\EditPolylinesCMPT.h"
 					>
 				</File>
 			</Filter>
@@ -848,54 +644,6 @@
 			<Filter
 				Name="shape"
 				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\BezierShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\BezierShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ChainShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ChainShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CircleShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CircleShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CosineShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CosineShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\PolygonShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\PolygonShape.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\RectShape.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\RectShape.h"
-					>
-				</File>
 				<Filter
 					Name="base"
 					>
@@ -1645,50 +1393,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\TextPropertySetting.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="shape"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\BezierPropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\BezierPropertySetting.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\ChainPropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\ChainPropertySetting.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\CirclePropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\CirclePropertySetting.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\PolygonPropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\PolygonPropertySetting.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\RectPropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\RectPropertySetting.h"
 						>
 					</File>
 				</Filter>
