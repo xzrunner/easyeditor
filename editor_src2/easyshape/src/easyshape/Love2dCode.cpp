@@ -1,12 +1,12 @@
-
 #include "Love2dCode.h"
-
 #include "StagePanel.h"
 #include "LibraryPanel.h"
 #include "LibraryItem.h"
 
-using namespace eshape;
-using namespace ebuilder;
+namespace lua = ebuilder::lua;
+
+namespace eshape
+{
 
 Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen, LibraryPanel* library)
 	: m_gen(gen)
@@ -142,4 +142,6 @@ void Love2dCode::resolve(const libshape::CircleShape* circle)
 	std::string r = lua::assign("r", wxString::FromDouble(circle->radius, 1).ToStdString());
 
 	lua::tableassign(m_gen, "", 5, type.c_str(), name.c_str(), cx.c_str(), cy.c_str(), r.c_str());
+}
+
 }

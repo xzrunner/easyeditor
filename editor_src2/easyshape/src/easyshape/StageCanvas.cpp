@@ -1,11 +1,9 @@
-
 #include "StageCanvas.h"
 #include "StagePanel.h"
 #include "LibraryItem.h"
 
-#include "../libshape/StageCanvas.h"
-
-using namespace eshape;
+namespace eshape
+{
 
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::ShapeStageCanvas(stage, stage, d2d::Colorf(1.0f, 0.0f, 0.0f))
@@ -38,4 +36,6 @@ void StageCanvas::drawGuideLines()
 		d2d::HALF_S_WIDTH,
 		d2d::HALF_S_HEIGHT,
 		d2d::LIGHT_GREY_LINE);
+}
+
 }

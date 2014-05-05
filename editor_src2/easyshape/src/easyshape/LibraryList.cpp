@@ -1,10 +1,10 @@
-
 #include "LibraryList.h"
 #include "LibraryItem.h"
 #include "StagePanel.h"
 #include "ToolBarPanel.h"
 
-using namespace eshape;
+namespace eshape
+{
 
 LibraryList::LibraryList(wxWindow* parent)
 	: d2d::LibraryList(parent)
@@ -23,4 +23,6 @@ void LibraryList::onListSelected(wxCommandEvent& event)
 		m_stage->changeCurrItem(item);
 		m_toolbar->changeCurrItem(item);
 	}
+}
+
 }

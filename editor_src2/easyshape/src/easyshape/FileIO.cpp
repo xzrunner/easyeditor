@@ -1,11 +1,11 @@
-
 #include "FileIO.h"
 #include "LibraryPanel.h"
 #include "LibraryItem.h"
 
 #include <easyshape.h>
 
-using namespace eshape;
+namespace eshape
+{
 
 void FileIO::load(const char* filename, LibraryPanel* library)
 {
@@ -125,4 +125,6 @@ void FileIO::store(LibraryItem* item, const std::string& dlg)
 	std::ofstream fout(filepath.fn_str());
 	writer.write(fout, value);
 	fout.close();
+}
+
 }

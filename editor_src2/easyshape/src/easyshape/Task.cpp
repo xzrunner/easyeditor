@@ -4,7 +4,8 @@
 #include "ToolbarPanel.h"
 #include "FileIO.h"
 
-using namespace eshape;
+namespace eshape
+{
 
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
@@ -99,4 +100,6 @@ void Task::initLayout()
 	wxSize size = m_parent->GetSize();
 	size.SetWidth(size.GetWidth() + 1);
 	m_parent->SetSize(size);
+}
+
 }

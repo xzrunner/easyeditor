@@ -1,28 +1,29 @@
-
-#ifndef ESHAPE_STAGE_CANVAS_H
-#define ESHAPE_STAGE_CANVAS_H
+#ifndef _ESHAPE_STAGE_CANVAS_H_
+#define _ESHAPE_STAGE_CANVAS_H_
 
 #include <drag2d.h>
 
 namespace eshape
 {
-	class StagePanel;
 
-	class StageCanvas : public d2d::ShapeStageCanvas
-	{
-	public:
-		StageCanvas(StagePanel* stage);
+class StagePanel;
 
-	protected:
-		virtual void onDraw();
+class StageCanvas : public d2d::ShapeStageCanvas
+{
+public:
+	StageCanvas(StagePanel* stage);
 
-	private:
-		void drawGuideLines();
+protected:
+	virtual void onDraw();
 
-	private:
-		StagePanel* m_stage;
+private:
+	void drawGuideLines();
 
-	}; // StageCanvas 
+private:
+	StagePanel* m_stage;
+
+}; // StageCanvas 
+
 }
 
-#endif // ESHAPE_STAGE_CANVAS_H
+#endif // _ESHAPE_STAGE_CANVAS_H_

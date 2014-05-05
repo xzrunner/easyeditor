@@ -1,32 +1,33 @@
-
-#ifndef ESHAPE_LIBRARY_PAGE_H
-#define ESHAPE_LIBRARY_PAGE_H
+#ifndef _ESHAPE_LIBRARY_PAGE_H_
+#define _ESHAPE_LIBRARY_PAGE_H_
 
 #include <drag2d.h>
 
 namespace eshape
 {
-	class StagePanel;
-	class ToolbarPanel;
-	class LibraryItem;
 
-	class LibraryPage : public d2d::ILibraryPage
-	{
-	public:
-		LibraryPage(wxWindow* parent, const char* name);
+class StagePanel;
+class ToolbarPanel;
+class LibraryItem;
 
-		void clickListSelection();
+class LibraryPage : public d2d::ILibraryPage
+{
+public:
+	LibraryPage(wxWindow* parent, const char* name);
 
-		void setContext(StagePanel* stage, ToolbarPanel* toolbar);
+	void clickListSelection();
 
-	private:
-		virtual void onDelPress(wxCommandEvent& event);
+	void setContext(StagePanel* stage, ToolbarPanel* toolbar);
 
-	protected:
-		StagePanel* m_stage;
-		ToolbarPanel* m_toolbar;
+private:
+	virtual void onDelPress(wxCommandEvent& event);
 
-	}; // LibraryPage
+protected:
+	StagePanel* m_stage;
+	ToolbarPanel* m_toolbar;
+
+}; // LibraryPage
+
 }
 
-#endif // ESHAPE_LIBRARY_PAGE_H
+#endif // _ESHAPE_LIBRARY_PAGE_H_

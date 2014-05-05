@@ -1,5 +1,5 @@
-#ifndef ESHAPE_TOOLBAR_PANEL_H
-#define ESHAPE_TOOLBAR_PANEL_H
+#ifndef _ESHAPE_TOOLBAR_PANEL_H_
+#define _ESHAPE_TOOLBAR_PANEL_H_
 
 #include <drag2d.h>
 
@@ -27,4 +27,4 @@ private:
 
 }
 
-#endif // ESHAPE_TOOLBAR_PANEL_H
+#endif // _ESHAPE_TOOLBAR_PANEL_H_

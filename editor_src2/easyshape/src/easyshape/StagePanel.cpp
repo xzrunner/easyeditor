@@ -1,10 +1,10 @@
-
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "LibraryItem.h"
 #include "ToolBarPanel.h"
 
-using namespace eshape;
+namespace eshape
+{
 
 StagePanel::StagePanel(wxWindow* parent,
 					   wxTopLevelWindow* frame)
@@ -94,4 +94,6 @@ void StagePanel::changeCurrItem(LibraryItem* item)
 		m_item->setUserData(shapes);
 	}
 	Refresh();
+}
+
 }

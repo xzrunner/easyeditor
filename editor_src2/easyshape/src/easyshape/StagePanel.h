@@ -1,6 +1,5 @@
-
-#ifndef ESHAPE_STAGE_PANEL_H
-#define ESHAPE_STAGE_PANEL_H
+#ifndef _ESHAPE_STAGE_PANEL_H_
+#define _ESHAPE_STAGE_PANEL_H_
 
 #include <drag2d.h>
 
@@ -44,4 +43,4 @@ namespace eshape
 	}; // StagePanel
 }
 
-#endif // ESHAPE_STAGE_PANEL_H
+#endif // _ESHAPE_STAGE_PANEL_H_

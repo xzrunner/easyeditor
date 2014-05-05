@@ -1,10 +1,10 @@
-
 #include "LibraryPage.h"
 #include "LibraryList.h"
 #include "StagePanel.h"
 #include "ToolBarPanel.h"
 
-using namespace eshape;
+namespace eshape
+{
 
 LibraryPage::LibraryPage(wxWindow* parent, const char* name)
 	: d2d::ILibraryPage(parent, name)
@@ -43,4 +43,6 @@ void LibraryPage::onDelPress(wxCommandEvent& event)
 		m_stage->changeCurrItem(NULL);
 		m_toolbar->changeCurrItem(NULL);
 	}
+}
+
 }
