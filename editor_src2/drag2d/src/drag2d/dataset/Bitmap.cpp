@@ -29,12 +29,11 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 	return true;
 #endif
 
+	m_filename = filepath;
 	const GLubyte* test = glGetString(GL_VERSION);
 	if (!test) {
 		return true;
 	}
-
-	m_filename = filepath;
 
 	static bool inited = false;
 	if (!inited)
