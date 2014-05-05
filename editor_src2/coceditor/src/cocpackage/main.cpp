@@ -22,6 +22,116 @@ static void InitSymbolCreators()
 	d2d::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
 }
 
+void LoadFromDir(const std::string& dir)
+{
+	wxArrayString files;
+	d2d::FilenameTools::fetchAllFiles(dir, files);
+
+	try {
+		for (size_t i = 0, n = files.size(); i < n; ++i)
+		{
+			wxFileName filename(files[i]);
+			filename.Normalize();
+			wxString filepath = filename.GetFullPath();
+
+			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
+				|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+			{
+				// todo release symbol
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				coceditor::Context::Instance()->symbols.push_back(symbol);
+			}
+		}
+	} catch (d2d::Exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void LoadFromList(const std::string& list)
+{
+	std::set<std::string> names;
+
+	wxString ext = d2d::FilenameTools::getExtension(list).Lower();
+	if (ext == "txt")
+	{
+		std::locale::global(std::locale(""));
+		std::ifstream fin(list.c_str());
+		std::locale::global(std::locale("C"));
+
+		std::string str;
+		while (getline(fin, str)) {
+			names.insert(str);
+		}
+
+		fin.close();
+	}
+	else if (ext == "json")
+	{
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(list.c_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		int i = 0;
+		Json::Value itemValue = value["items"][i++];
+		while (!itemValue.isNull()) {
+			std::string name = itemValue["name"].asString();
+			names.insert(name);
+			itemValue = value["items"][i++];
+		}
+	}
+	else 
+	{
+		std::cerr << "unsupported format " << ext << std::endl;
+		return;
+	}
+
+	wxString dir = d2d::FilenameTools::getFileDir(list);
+	wxArrayString files;
+	d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
+
+	try {
+		for (size_t i = 0, n = files.size(); i < n; ++i)
+		{
+			wxFileName filename(files[i]);
+			filename.Normalize();
+			wxString filepath = filename.GetFullPath();
+
+			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
+				|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+			{
+				// todo release symbol
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				std::set<std::string>::iterator itr = names.find(symbol->name);
+				if (itr == names.end()) {
+					symbol->release();
+				} else {
+					coceditor::Context::Instance()->symbols.push_back(symbol);
+				}
+			}
+		}
+	} catch (d2d::Exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void LoadTexturePacker(std::string texpackerpath)
+{
+	size_t i = 1;
+	while (true)
+	{
+		std::string path = texpackerpath + wxString::FromDouble(i) + ".json";
+		if (wxFileName::FileExists(path))
+			coceditor::Context::Instance()->texMgr.initTexture(path, i-1);
+		else
+			break;
+		++i;
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc < 4) {
@@ -39,40 +149,21 @@ int main(int argc, char *argv[])
 		gscale = dscale;
 	}
 
-	std::string dirpath = argv[1];
-	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dirpath, files);
-
-	try {
-		for (size_t i = 0, n = files.size(); i < n; ++i)
-		{
-			wxFileName filename(files[i]);
-			filename.Normalize();
-			wxString filepath = filename.GetFullPath();
-			
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
-				|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
-			{
-				// todo release symbol
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-				coceditor::Context::Instance()->symbols.push_back(symbol);
-			}
-		}
-	} catch (d2d::Exception& e) {
-		std::cerr << e.what() << std::endl;
+	std::string path = argv[1];
+	bool is_dir = false;
+	int pos_dot = path.find_last_of('.');
+	int pos_divide = std::max(path.find_last_of('/'), path.find_last_of('\\'));
+	if (pos_dot == std::string::npos || pos_dot < pos_divide) {
+		is_dir = true;
+	}
+	if (is_dir) {
+		LoadFromDir(path);
+	} else {
+		LoadFromList(path);
 	}
 
 	std::string texpackerpath = argv[2];
-	size_t i = 1;
-	while (true)
-	{
-		std::string path = texpackerpath + wxString::FromDouble(i) + ".json";
-		if (wxFileName::FileExists(path))
-			coceditor::Context::Instance()->texMgr.initTexture(path, i-1);
-		else
-			break;
-		++i;
-	}
+	LoadTexturePacker(texpackerpath);
 
 	try {
 		ebuilder::CodeGenerator gen;
