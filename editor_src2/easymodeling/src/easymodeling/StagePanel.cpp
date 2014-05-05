@@ -156,11 +156,11 @@ namespace emodeling
 
 			fixture->shape = shapes[i];
 
-			// 		if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shapes[i]))
+			// 		if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shapes[i]))
 			// 		{
-			// 			fixture->shape = new d2d::ChainShape(chain->getVertices(), true);
+			// 			fixture->shape = new libshape::ChainShape(chain->getVertices(), true);
 			// 		}
-			// 		else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(shapes[i]))
+			// 		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shapes[i]))
 			// 		{
 			// 			std::vector<d2d::Vector> vertices(4);
 			//  			vertices[0] = d2d::Vector(rect->m_rect.xMin, rect->m_rect.yMin);
@@ -168,11 +168,11 @@ namespace emodeling
 			//  			vertices[2] = d2d::Vector(rect->m_rect.xMax, rect->m_rect.yMax);
 			//  			vertices[3] = d2d::Vector(rect->m_rect.xMin, rect->m_rect.yMax);
 			// 
-			// 			fixture->shape = new d2d::ChainShape(vertices, true);
+			// 			fixture->shape = new libshape::ChainShape(vertices, true);
 			// 		}
-			// 		else if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shapes[i]))
+			// 		else if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shapes[i]))
 			// 		{
-			// 			fixture->shape = new d2d::CircleShape(d2d::Vector(), circle->radius);
+			// 			fixture->shape = new libshape::CircleShape(d2d::Vector(), circle->radius);
 			// 		}
 			body.fixtures.push_back(fixture);
 
@@ -187,7 +187,7 @@ namespace emodeling
 
 		const float width = sprite->getSymbol().getSize().xLength(),
 			height = sprite->getSymbol().getSize().yLength();
-		fixture->shape = new d2d::RectShape(d2d::Vector(0, 0), width * 0.5f, height * 0.5f);
+		fixture->shape = new libshape::RectShape(d2d::Vector(0, 0), width * 0.5f, height * 0.5f);
 
 		body.fixtures.push_back(fixture);
 	}

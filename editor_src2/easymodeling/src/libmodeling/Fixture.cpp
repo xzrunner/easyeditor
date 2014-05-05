@@ -2,6 +2,8 @@
 #include "Fixture.h"
 #include "Body.h"
 
+#include <easyshape.h>
+
 using namespace libmodeling;
 
 Fixture::Fixture()
@@ -26,12 +28,12 @@ Fixture::~Fixture()
 
 bool Fixture::isContain(const d2d::Vector& pos) const
 {
-	if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
+	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
 	{
 		return d2d::Math::getDistance(circle->center + body->sprite->getPosition(), pos) 
 			< circle->radius;
 	}
-	else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(shape))
+	else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shape))
 	{
 		std::vector<d2d::Vector> boundary(4);
 		boundary[0].set(rect->m_rect.xMin, rect->m_rect.yMin);
@@ -43,13 +45,13 @@ bool Fixture::isContain(const d2d::Vector& pos) const
 		transLocalToWorld(boundary, fixed);
 		return d2d::Math::isPointInArea(pos, fixed);
 	}
-	else if (d2d::PolygonShape* polygon = dynamic_cast<d2d::PolygonShape*>(shape))
+	else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shape))
 	{
 		std::vector<d2d::Vector> fixed;
 		transLocalToWorld(polygon->getVertices(), fixed);
 		return d2d::Math::isPointInArea(pos, fixed);
 	}
-	else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape))
+	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
 	{
 		std::vector<d2d::Vector> fixed;
 		transLocalToWorld(chain->getVertices(), fixed);
@@ -61,12 +63,12 @@ bool Fixture::isContain(const d2d::Vector& pos) const
 
 bool Fixture::isIntersect(const d2d::Rect& rect) const
 {
-	if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
+	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
 	{
 		return d2d::Math::isCircleIntersectRect(circle->center + body->sprite->getPosition(), 
 			circle->radius, rect);
 	}
-	else if (d2d::RectShape* r = dynamic_cast<d2d::RectShape*>(shape))
+	else if (libshape::RectShape* r = dynamic_cast<libshape::RectShape*>(shape))
 	{
 		std::vector<d2d::Vector> boundary(4);
 		boundary[0].set(r->m_rect.xMin, r->m_rect.yMin);
@@ -78,13 +80,13 @@ bool Fixture::isIntersect(const d2d::Rect& rect) const
 		transLocalToWorld(boundary, fixed);
 		return d2d::Math::isPolylineIntersectRect(fixed, true, rect);
 	}
-	else if (d2d::PolygonShape* polygon = dynamic_cast<d2d::PolygonShape*>(shape))
+	else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shape))
 	{
 		std::vector<d2d::Vector> fixed;
 		transLocalToWorld(polygon->getVertices(), fixed);
 		return d2d::Math::isPolylineIntersectRect(fixed, true, rect);
 	}
-	else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape))
+	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
 	{
 		std::vector<d2d::Vector> fixed;
 		transLocalToWorld(chain->getVertices(), fixed);
@@ -96,25 +98,25 @@ bool Fixture::isIntersect(const d2d::Rect& rect) const
 
 void Fixture::draw(const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const
 {
-	if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(shape))
+	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
 	{
 		d2d::PrimitiveDraw::drawCircle(circle->center, circle->radius, true, 2, cFace);
 		d2d::PrimitiveDraw::drawCircle(circle->center, circle->radius, false, 2, cEdge, 32);
 	}
-	else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(shape))
+	else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(shape))
 	{
 		const d2d::Vector p0(rect->m_rect.xMin, rect->m_rect.yMin),
 			p1(rect->m_rect.xMax, rect->m_rect.yMax);
 		d2d::PrimitiveDraw::rect(p0, p1, d2d::ShapeStyle(true, cFace));
 		d2d::PrimitiveDraw::rect(p0, p1, d2d::ShapeStyle(false, cFace));
 	}
-	else if (d2d::PolygonShape* polygon = dynamic_cast<d2d::PolygonShape*>(shape))
+	else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shape))
 	{
 		const std::vector<d2d::Vector>& vertices = polygon->getVertices();
 		d2d::PrimitiveDraw::drawPolygon(vertices, cFace);
 		d2d::PrimitiveDraw::drawPolyline(vertices, cEdge, true, 2);
 	}
-	else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape))
+	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
 	{
 		const std::vector<d2d::Vector>& vertices = chain->getVertices();
 		d2d::PrimitiveDraw::drawPolyline(vertices, cEdge, chain->isClosed(), 2);

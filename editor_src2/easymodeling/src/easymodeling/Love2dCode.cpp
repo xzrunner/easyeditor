@@ -4,6 +4,7 @@
 #include "StagePanel.h"
 
 #include <easymodeling.h>
+#include <easyshape.h>
 
 using namespace emodeling;
 using namespace ebuilder;
@@ -218,7 +219,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		libmodeling::Fixture* fData = body->fixtures[i];
 
 		std::string newShape;
-		if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(fData->shape))
+		if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(fData->shape))
 		{
 			std::string radius = wxString::FromDouble(circle->radius, 1);
 			if (circle->center.x == 0 && circle->center.y == 0)
@@ -234,7 +235,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 				newShape = lua::call("", "love.physics.newCircleShape", 3, x.c_str(), y.c_str(), radius.c_str());
 			}
 		}
-		else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(fData->shape))
+		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
 		{
 			// love.physics.newRectangleShape(x, y, w, h)
 			std::string x = wxString::FromDouble((rect->m_rect.xMax + rect->m_rect.xMin) * 0.5f, 1),
@@ -243,7 +244,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 				h = wxString::FromDouble(rect->m_rect.yMax - rect->m_rect.yMin, 1);
 			newShape = lua::call("", "love.physics.newRectangleShape", 4, x.c_str(), y.c_str(), w.c_str(), h.c_str());
 		}
-		else if (d2d::PolygonShape* polygon = dynamic_cast<d2d::PolygonShape*>(fData->shape))
+		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
 			// love.physics.newPolygonShape(size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
 			const std::vector<d2d::Vector>& vertices = polygon->getVertices();
@@ -259,7 +260,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 			}
 			newShape = lua::call("", "love.physics.newPolygonShape", 1, strParams.c_str());
 		}
-		else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(fData->shape))
+		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
 			// love.physics.newChainShape(loop, size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
 			std::string strParams = chain->isClosed() ? "true" : "false";

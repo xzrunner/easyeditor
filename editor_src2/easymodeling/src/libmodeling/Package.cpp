@@ -13,7 +13,10 @@
 #include "RopeJoint.h"
 #include "MotorJoint.h"
 
-using namespace libmodeling;
+#include <easyshape.h>
+
+namespace libmodeling
+{
 
 void Paskage::packBody(const Body& data, std::ofstream& fout)
 {
@@ -34,7 +37,7 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 		fout.write(reinterpret_cast<const char*>(&fData->friction), sizeof(float));
 		fout.write(reinterpret_cast<const char*>(&fData->restitution), sizeof(float));
 
-		if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(fData->shape))
+		if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(fData->shape))
 		{
 			int type = e_circle;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
@@ -43,7 +46,7 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 			fout.write(reinterpret_cast<const char*>(&circle->center.x), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&circle->center.y), sizeof(float));
 		}
-		else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(fData->shape))
+		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
 		{
 			int type = e_rect;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
@@ -53,9 +56,9 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 			fout.write(reinterpret_cast<const char*>(&rect->m_rect.yMin), sizeof(float));
 			fout.write(reinterpret_cast<const char*>(&rect->m_rect.yMax), sizeof(float));
 		}
-		else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(fData->shape))
+		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
-			int type = dynamic_cast<d2d::PolygonShape*>(chain) ? e_polygon : e_chain;
+			int type = dynamic_cast<libshape::PolygonShape*>(chain) ? e_polygon : e_chain;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
 			const std::vector<d2d::Vector>& vertices = chain->getVertices();
@@ -319,4 +322,6 @@ int Paskage::queryBodyIndex(const Body* body, const std::vector<Body*>& bodies)
 		}
 	}
 	return ret;
+}
+
 }

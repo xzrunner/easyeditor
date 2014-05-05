@@ -2,6 +2,7 @@
 #include "ResolveToB2.h"
 
 #include <easymodeling.h>
+#include <easyshape.h>
 
 using namespace emodeling;
 
@@ -48,7 +49,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		fd.filter.maskBits = fData->maskBits;
 		fd.filter.groupIndex = fData->groupIndex;
 
-		if (d2d::CircleShape* circle = dynamic_cast<d2d::CircleShape*>(fData->shape))
+		if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(fData->shape))
 		{
 			b2CircleShape shape;
 			shape.m_radius = circle->radius / d2d::BOX2D_SCALE_FACTOR;
@@ -58,7 +59,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 			fd.shape = &shape;
 			body->CreateFixture(&fd);
 		}
-		else if (d2d::RectShape* rect = dynamic_cast<d2d::RectShape*>(fData->shape))
+		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
 		{
 			const float hx = (rect->m_rect.xMax - rect->m_rect.xMin) * 0.5f / d2d::BOX2D_SCALE_FACTOR,
 				hy = (rect->m_rect.yMax - rect->m_rect.yMin) * 0.5f / d2d::BOX2D_SCALE_FACTOR;
@@ -71,7 +72,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 			fd.shape = &shape;
 			body->CreateFixture(&fd);
 		}
-		else if (d2d::PolygonShape* polygon = dynamic_cast<d2d::PolygonShape*>(fData->shape))
+		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
 			const std::vector<d2d::Vector>& src = polygon->getVertices();
 			const size_t size = src.size();
@@ -88,7 +89,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 
 			body->CreateFixture(&fd);
 		}
-		else if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(fData->shape))
+		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
 			const std::vector<d2d::Vector>& src = chain->getVertices();
 			const size_t size = src.size();
