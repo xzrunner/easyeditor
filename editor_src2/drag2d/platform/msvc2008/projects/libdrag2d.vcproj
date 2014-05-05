@@ -644,18 +644,14 @@
 			<Filter
 				Name="shape"
 				>
-				<Filter
-					Name="base"
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\IShape.cpp"
 					>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\IShape.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\IShape.h"
-						>
-					</File>
-				</Filter>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\IShape.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="sprite"

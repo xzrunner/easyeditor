@@ -34,10 +34,11 @@ public:
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
-private:
-	void loadResources();
+protected:
+	virtual void loadResources();
 
-	void loadThumbnail();
+private:
+	void refreshThumbnail();
 
 	void clear();
 
