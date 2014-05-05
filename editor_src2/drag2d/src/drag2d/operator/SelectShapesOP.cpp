@@ -181,7 +181,7 @@ bool SelectShapesOP::clear()
 
 IPropertySetting* SelectShapesOP::createPropertySetting(IShape* shape) const
 {
-	return shape->createPropertySetting(m_editPanel);
+	return shape ? shape->createPropertySetting(m_editPanel) : NULL;
 }
 
 void SelectShapesOP::clearClipboard()
