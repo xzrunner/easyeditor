@@ -36,7 +36,7 @@ wxSizer* EditUVCMPT::initLayout()
 
 void EditUVCMPT::onMove(wxCommandEvent& event)
 {
-	m_stage->getMesh()->resetUVOffset(0, 0.1f);
+	m_stage->getMesh()->resetUVOffset(0, -0.1f);
 	m_editPanel->Refresh();
 }
 
