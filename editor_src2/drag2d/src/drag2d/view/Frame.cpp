@@ -107,9 +107,12 @@ void Frame::onOpen(wxCommandEvent& event)
 
 void Frame::onSave(wxCommandEvent& event)
 {
-	if (!m_task) return;
+	if (!m_task || m_currFilename.empty()) return;
 
-	if (!m_currFilename.empty())
+	wxMessageDialog* dlg = new wxMessageDialog(NULL, 
+		wxT("Are you sure to save?"), wxT("Question"), 
+		wxYES_NO | wxNO_DEFAULT | wxICON_QUESTION);
+	if (dlg->ShowModal() == wxID_YES)
 	{
 		SetTitle(m_currFilename);
 		m_task->store(m_currFilename);

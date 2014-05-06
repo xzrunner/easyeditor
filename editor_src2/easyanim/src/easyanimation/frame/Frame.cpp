@@ -100,7 +100,14 @@ void Frame::onOpen(wxCommandEvent& event)
 
 void Frame::onSave(wxCommandEvent& event)
 {
-	if (!m_currFilename.empty())
+	if (m_currFilename.empty()) {
+		return;
+	}
+
+	wxMessageDialog* dlg = new wxMessageDialog(NULL, 
+		wxT("Are you sure to save?"), wxT("Question"), 
+		wxYES_NO | wxNO_DEFAULT | wxICON_QUESTION);
+	if (dlg->ShowModal() == wxID_YES)
 	{
 		SetTitle(d2d::FilenameTools::getFilename(m_currFilename));
 		FileIO::store(m_currFilename);
