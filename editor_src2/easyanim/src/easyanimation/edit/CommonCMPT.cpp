@@ -168,6 +168,8 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 	}
 	context->layers.insertLayer(layer);
 
+	context->setCurrFrame(0, 1);
+
 	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(context->library);
 	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
