@@ -6,7 +6,7 @@
 using namespace emodeling;
 
 FixturePropertySetting::FixturePropertySetting(d2d::EditPanel* editPanel, libmodeling::Fixture* fixture)
-	: d2d::IPropertySetting(editPanel, wxT("Body"))
+	: d2d::IPropertySetting(editPanel, wxT("Fixture"))
 	, m_fixture(fixture)
 {
 }
