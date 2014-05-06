@@ -3,6 +3,7 @@
 #include "common/Math.h"
 #include "dataset/BodyFactory.h"
 #include "render/GL10.h"
+#include "render/Shader.h"
 
 namespace d2d
 {
@@ -41,6 +42,8 @@ void PhysicsPanelImpl::update(wxCommandEvent& event)
 
 void PhysicsPanelImpl::drawPhysics()
 {
+	Shader::Instance()->null();
+
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
 
