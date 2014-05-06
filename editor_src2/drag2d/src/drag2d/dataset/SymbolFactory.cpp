@@ -40,19 +40,9 @@ ISymbol* SymbolFactory::create(const wxString& filepath)
 		if (itr != m_creators.end()) {
 			symbol = (itr->second)();
 		}
-
-// 		else if (FileNameParser::isType(filepath, FileNameParser::e_shape))
-// 			symbol = new EShapeSymbol;
-//  	else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
-// 			symbol = new ecomplex::Symbol;
-// 		else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
-// 			symbol = new anim::Symbol;
-// 		else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))
-// 			symbol = new escale9::Symbol;
-		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
+		else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank)) {
 			symbol = new FontBlankSymbol;
-// 		else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
-// 			symbol = new emesh::Symbol;
+		}
 	}
 	else if (ext == "lua")
 	{

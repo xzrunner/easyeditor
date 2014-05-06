@@ -59,19 +59,9 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 			if (itr != m_creators.end()) {
 				sprite = (itr->second)(symbol);
 			}
-
-// 			else if (FileNameParser::isType(filepath, FileNameParser::e_shape))
-// 				sprite = new EShapeSprite(static_cast<EShapeSymbol*>(symbol));
-// 			else if (FileNameParser::isType(filepath, FileNameParser::e_complex))
-// 				sprite = new ecomplex::Sprite(static_cast<ecomplex::Symbol*>(symbol));
-// 			else if (FileNameParser::isType(filepath, FileNameParser::e_anim))
-// 				sprite = new anim::Sprite(static_cast<anim::Symbol*>(symbol));
-// 			else if (FileNameParser::isType(filepath, FileNameParser::e_scale9))
-// 				sprite = new escale9::Sprite(static_cast<escale9::Symbol*>(symbol));
-			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank))
+			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank)) {
 				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
-// 			else if (FileNameParser::isType(filepath, FileNameParser::e_mesh))
-// 				sprite = new emesh::Sprite(static_cast<emesh::Symbol*>(symbol));
+			}
 		}
 	}
 
