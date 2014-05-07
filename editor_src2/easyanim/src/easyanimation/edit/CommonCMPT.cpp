@@ -110,6 +110,8 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 	if (dlg.ShowModal() != wxID_OK)
 		return;
 
+	clear();
+
 	op->setMouseMoveFocus(true);
 
 	wxArrayString files;
@@ -162,6 +164,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 			symbol->refresh();
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			frame->insertWithClone(sprite);
+			sprite->release();
 			symbol->release();
 		}
 		layer->insertKeyFrame(frame);
@@ -252,6 +255,14 @@ void CommonCMPT::onAddCross(wxCommandEvent& event)
 void CommonCMPT::onDelCross(wxCommandEvent& event)
 {
 	static_cast<ArrangeSpriteOP*>(m_editOP)->delCross();
+}
+
+void CommonCMPT::clear()
+{
+	Context* context = Context::Instance();
+	static_cast<d2d::LibraryPanel*>(context->library)->clear();
+	static_cast<StagePanel*>(context->stage)->clear();
+	context->layers.clear();
 }
 
 }

@@ -34,6 +34,8 @@ private:
 	void onAddCross(wxCommandEvent& event);
 	void onDelCross(wxCommandEvent& event);
 
+	void clear();
+
 private:
 	bool m_vertical;
 
