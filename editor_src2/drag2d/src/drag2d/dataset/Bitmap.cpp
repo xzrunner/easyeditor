@@ -94,8 +94,8 @@ void Bitmap::getImage(const wxString& filepath, wxImage& image)
 
 	Image* pImage = ImageMgr::Instance()->getItem(filepath);
 	Rect rect = pImage->getRegion();
-	// for cache
-//	pImage->release();
+	// not cache
+	pImage->release();
 
 	float w = totimg.GetWidth();
 	float h = totimg.GetHeight();
