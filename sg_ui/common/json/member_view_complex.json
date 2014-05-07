@@ -29,7 +29,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -59,7 +60,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -89,7 +91,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 1,
+			"align hori" : 1,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -119,7 +122,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 1,
+			"align hori" : 1,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -149,7 +153,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xfffeffd9",
@@ -179,7 +184,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -209,7 +215,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 1,
+			"align hori" : 1,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -239,7 +246,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -269,7 +277,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 1,
+			"align hori" : 1,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -368,7 +377,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -486,6 +496,33 @@
 			"y offset" : 57.28124618530273,
 			"y scale" : 1.0,
 			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_mark_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "guild_icon",
+			"position" : 
+			{
+				"x" : -101.0,
+				"y" : -62.49502563476563
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.250,
+			"y scale" : 0.50,
+			"y shear" : 0.0
 		}
-	]
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
 }

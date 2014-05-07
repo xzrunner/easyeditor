@@ -8,7 +8,7 @@
 			"add color" : "0x00000000",
 			"angle" : 0.0,
 			"clip" : false,
-			"filepath" : "../png/6205-biankuang-1.png",
+			"filepath" : "..\\png\\6205-biankuang-1.png",
 			"multi color" : "0xffffffff",
 			"name" : "",
 			"position" : 
@@ -75,7 +75,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",

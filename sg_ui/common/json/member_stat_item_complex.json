@@ -29,7 +29,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xfffeffd9",
@@ -59,7 +60,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -89,7 +91,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 0,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -119,7 +122,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 1,
+			"align hori" : 1,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -149,7 +153,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 1,
+			"align hori" : 1,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
@@ -179,7 +184,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
+			"align hori" : 0,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xff000000",
@@ -192,7 +198,7 @@
 			"name" : "tips",
 			"position" : 
 			{
-				"x" : 2.0,
+				"x" : -41.0,
 				"y" : -46.0
 			},
 			"size" : 16,

@@ -29,7 +29,8 @@
 		
 		{
 			"add color" : "0x00000000",
-			"align" : 2,
+			"align hori" : 2,
+			"align vert" : 0,
 			"angle" : 0.0,
 			"clip" : false,
 			"color" : "0xffffffff",
