@@ -333,6 +333,8 @@ void Frame::clear()
 	static_cast<d2d::LibraryPanel*>(context->library)->clear();
 	static_cast<StagePanel*>(context->stage)->clear();
 	context->layers.clear();
+
+//	d2d::Statistics::PrintRes();
 }
 // 
 // void Frame::refresh()

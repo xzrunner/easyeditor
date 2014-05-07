@@ -34,6 +34,7 @@
 #include "dataset/ImageLoader.h"
 #include "dataset/ImageSaver.h"
 #include "dataset/Snapshoot.h"
+#include "dataset/Font.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"
@@ -127,6 +128,7 @@
 #include "common/config.h"
 #include "common/PointerPool.h"
 #include "common/filetools.h"
+#include "common/Statistics.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"

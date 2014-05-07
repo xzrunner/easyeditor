@@ -1050,6 +1050,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\common\Statistics.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\Statistics.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\common\UserDataImpl.cpp"
 				>
 			</File>

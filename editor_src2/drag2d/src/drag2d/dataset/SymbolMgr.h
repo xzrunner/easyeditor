@@ -19,6 +19,10 @@ namespace d2d
 
 		void traverse(IVisitor& visitor) const;
 
+		size_t size() const {
+			return m_symbols.size();
+		}
+
 	protected:
 		void remove(const ISymbol* symbol);
 
