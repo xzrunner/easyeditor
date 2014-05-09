@@ -152,7 +152,7 @@ int main(int argc, char *argv[])
 	std::string path = argv[1];
 	bool is_dir = false;
 	int pos_dot = path.find_last_of('.');
-	int pos_divide = std::max(path.find_last_of('/'), path.find_last_of('\\'));
+	int pos_divide = std::max((int)path.find_last_of('/'), (int)path.find_last_of('\\'));
 	if (pos_dot == std::string::npos || pos_dot < pos_divide) {
 		is_dir = true;
 	}
