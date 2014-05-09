@@ -62,6 +62,7 @@ wxString FilenameTools::getRelativePath(const wxString& dir, const wxString& abs
 
 	wxFileName filename(absolute);
 	filename.MakeRelativeTo(dir);
+	filename.Normalize();
 	return filename.GetFullPath().ToStdString();
 }
 
@@ -69,6 +70,7 @@ wxString FilenameTools::getAbsolutePath(const wxString& dir, const wxString& rel
 {
 	wxFileName filename(relative);
 	filename.MakeAbsolute(dir);
+	filename.Normalize();
 	wxString filepath = filename.GetFullPath();
  	if (!isExist(filepath))
  		return getExistFilepath(relative, dir);

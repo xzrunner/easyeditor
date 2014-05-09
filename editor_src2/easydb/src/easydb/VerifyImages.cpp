@@ -32,7 +32,7 @@ void VerifyImages::InitFiles(const std::string& dirpath)
 			StringTools::toLower(filename);
 			_anim_files.push_back(filename);
 		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
-			std::string filename = d2d::FilenameTools::getFilenameWithExtension(filepath).ToStdString();
+			std::string filename = filepath.ToStdString();
 			StringTools::toLower(filename);
 			_map_images.insert(std::make_pair(filename, false));
 		}
@@ -51,10 +51,12 @@ void VerifyImages::VerifyLack()
 		reader.parse(fin, value);
 		fin.close();
 
+		wxString dir = d2d::FilenameTools::getFileDir(_complex_files[i]);
+
 		int j = 0;
 		Json::Value spriteValue = value["sprite"][j++];
 		while (!spriteValue.isNull()) {
-			HandleSpritePath(spriteValue["filepath"].asString());
+			HandleSpritePath(dir, spriteValue["filepath"].asString());
 			spriteValue = value["sprite"][j++];
 		}		
 	}
@@ -68,6 +70,8 @@ void VerifyImages::VerifyLack()
 		reader.parse(fin, value);
 		fin.close();
 
+		wxString dir = d2d::FilenameTools::getFileDir(_anim_files[i]);
+
 		int j = 0;
 		Json::Value layerValue = value["layer"][j++];
 		while (!layerValue.isNull()) {
@@ -77,7 +81,7 @@ void VerifyImages::VerifyLack()
 				int j = 0;
 				Json::Value entryValue = frameValue["actor"][j++];
 				while (!entryValue.isNull()) {
-					HandleSpritePath(entryValue["filepath"].asString());
+					HandleSpritePath(dir, entryValue["filepath"].asString());
 					entryValue = frameValue["actor"][j++];
 				}
 				frameValue = layerValue["frame"][i++];
@@ -106,19 +110,17 @@ void VerifyImages::Report() const
 	}
 }
 
-void VerifyImages::HandleSpritePath(const std::string& path)
+void VerifyImages::HandleSpritePath(const wxString& dir, const std::string& relative_path)
 {
-	if (!d2d::FileNameParser::isType(path, d2d::FileNameParser::e_image))
+	std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, relative_path).ToStdString();
+	StringTools::toLower(filepath);
+
+	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		return;
 
-	wxFileName wxname(path);
-	wxname.Normalize();
-	std::string filename = d2d::FilenameTools::getFilenameWithExtension(wxname.GetFullPath());
-	StringTools::toLower(filename);
-
-	std::map<std::string, bool>::iterator itr = _map_images.find(filename);
+	std::map<std::string, bool>::iterator itr = _map_images.find(filepath);
 	if (itr == _map_images.end())
-		_reports.insert("Lack Image " + filename);
+		_reports.insert("Lack Image " + filepath);
 	else
 		itr->second = true;
 }

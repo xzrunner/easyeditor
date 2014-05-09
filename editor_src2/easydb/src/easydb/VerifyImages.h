@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <wx/wx.h>
 
 namespace edb {
 
@@ -19,7 +20,7 @@ private:
 	void VerifySurplus();
 	void Report() const;
 
-	void HandleSpritePath(const std::string& path);
+	void HandleSpritePath(const wxString& dir, const std::string& relative_path);
 
 private:
 	std::vector<std::string> _complex_files;
