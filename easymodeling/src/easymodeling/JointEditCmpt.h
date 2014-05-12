@@ -1,0 +1,54 @@
+
+#ifndef EMODELING_JOINT_EDIT_CMPT_H
+#define EMODELING_JOINT_EDIT_CMPT_H
+
+#include <drag2d.h>
+
+namespace emodeling
+{
+	class StagePanel;
+
+	class JointEditCmpt : public d2d::AbstractEditCMPT
+	{
+	public:
+		JointEditCmpt(wxWindow* parent, const wxString& name,
+			StagePanel* editPanel, d2d::PropertySettingPanel* propertyPanel);
+
+		virtual void updateControlValue();
+
+	protected:
+		virtual wxSizer* initLayout();
+
+	private:
+		void onCreateJoint(wxCommandEvent& event);
+
+		void onTypeChanged(wxCommandEvent& event);
+
+	private:
+		class SelectWheelDialog : public wxDialog
+		{
+		public:
+			SelectWheelDialog(wxWindow* parent, const wxString& title, 
+				const wxString& body0, const wxString& body1);
+
+			int getChoice() const {
+				return m_wheelChoice->GetSelection();
+			}
+
+		private:
+			void initLayout(const wxString& body0, const wxString& body1);
+
+		private:
+			wxChoice* m_wheelChoice;
+
+		}; // SelectWheelDialog
+
+	private:
+		wxChoice* m_typeChoice;
+
+		wxButton* m_btnOK;
+
+	}; // JointEditCmpt
+}
+
+#endif // EMODELING_JOINT_EDIT_CMPT_H

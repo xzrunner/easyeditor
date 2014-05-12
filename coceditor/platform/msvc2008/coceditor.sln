@@ -1,0 +1,101 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "coceditor", "projects\coceditor.vcproj", "{1594D892-268E-473B-9CC3-A7CD5BFE3E92}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
+		{11082ADE-13CA-49C7-9F6D-C82F69333AD7} = {11082ADE-13CA-49C7-9F6D-C82F69333AD7}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdrag2d", "..\..\..\drag2d\platform\msvc2008\projects\libdrag2d.vcproj", "{E69A7CDE-521A-45B5-B776-AD16F72F6A07}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libshape", "..\..\..\easyshape\platform\msvc2008\projects\libshape.vcproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbuilder", "..\..\..\easybuilder\platform\msvc2008\projects\libbuilder.vcproj", "{11082ADE-13CA-49C7-9F6D-C82F69333AD7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocpackage", "projects\cocpackage.vcproj", "{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909} = {5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38} = {1C3B5344-2217-44F5-B5F0-A551B7B5AB38}
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038} = {E1CFC0B9-F8A8-4F14-930A-E88A436FC038}
+		{11082ADE-13CA-49C7-9F6D-C82F69333AD7} = {11082ADE-13CA-49C7-9F6D-C82F69333AD7}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libanim", "..\..\..\easyanim\platform\msvc2008\projects\libanim.vcproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cocextract", "projects\cocextract.vcproj", "{E50A178B-CF4A-4B5E-8362-0A7270A4DF90}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909} = {5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38} = {1C3B5344-2217-44F5-B5F0-A551B7B5AB38}
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038} = {E1CFC0B9-F8A8-4F14-930A-E88A436FC038}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "imagebool", "projects\imagebool.vcproj", "{0F701648-BF4B-4848-A39E-74B56B22163A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcomplex", "..\..\..\easycomplex\platform\msvc2008\projects\libcomplex.vcproj", "{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcoco", "projects\libcoco.vcproj", "{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1594D892-268E-473B-9CC3-A7CD5BFE3E92}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1594D892-268E-473B-9CC3-A7CD5BFE3E92}.Debug|Win32.Build.0 = Debug|Win32
+		{1594D892-268E-473B-9CC3-A7CD5BFE3E92}.Release|Win32.ActiveCfg = Release|Win32
+		{1594D892-268E-473B-9CC3-A7CD5BFE3E92}.Release|Win32.Build.0 = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.Build.0 = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.ActiveCfg = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.Build.0 = Release|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Debug|Win32.Build.0 = Debug|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Release|Win32.ActiveCfg = Release|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Release|Win32.Build.0 = Release|Win32
+		{11082ADE-13CA-49C7-9F6D-C82F69333AD7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{11082ADE-13CA-49C7-9F6D-C82F69333AD7}.Debug|Win32.Build.0 = Debug|Win32
+		{11082ADE-13CA-49C7-9F6D-C82F69333AD7}.Release|Win32.ActiveCfg = Release|Win32
+		{11082ADE-13CA-49C7-9F6D-C82F69333AD7}.Release|Win32.Build.0 = Release|Win32
+		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Debug|Win32.Build.0 = Debug|Win32
+		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Release|Win32.ActiveCfg = Release|Win32
+		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Release|Win32.Build.0 = Release|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Debug|Win32.Build.0 = Debug|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Release|Win32.ActiveCfg = Release|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Release|Win32.Build.0 = Release|Win32
+		{E50A178B-CF4A-4B5E-8362-0A7270A4DF90}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E50A178B-CF4A-4B5E-8362-0A7270A4DF90}.Debug|Win32.Build.0 = Debug|Win32
+		{E50A178B-CF4A-4B5E-8362-0A7270A4DF90}.Release|Win32.ActiveCfg = Release|Win32
+		{E50A178B-CF4A-4B5E-8362-0A7270A4DF90}.Release|Win32.Build.0 = Release|Win32
+		{0F701648-BF4B-4848-A39E-74B56B22163A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0F701648-BF4B-4848-A39E-74B56B22163A}.Debug|Win32.Build.0 = Debug|Win32
+		{0F701648-BF4B-4848-A39E-74B56B22163A}.Release|Win32.ActiveCfg = Release|Win32
+		{0F701648-BF4B-4848-A39E-74B56B22163A}.Release|Win32.Build.0 = Release|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Debug|Win32.Build.0 = Debug|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.ActiveCfg = Release|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.Build.0 = Release|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Debug|Win32.Build.0 = Debug|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Release|Win32.ActiveCfg = Release|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal
