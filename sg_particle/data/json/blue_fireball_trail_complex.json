@@ -1,22 +1,30 @@
+
 {
-  "name": "blue_fireball_trail", 
-  "sprite": [
-    {
-      "add color": "0x993d35", 
-      "angle": 0.0, 
-      "filepath": "2252_anim.json", 
-      "multi color": "0xffbc42ff", 
-      "name": "", 
-      "position": {
-        "x": 10.0, 
-        "y": -4.6875
-      }, 
-      "x mirror": false, 
-      "x scale": -0.3994140625, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": -0.9521484375, 
-      "y shear": 0
-    }
-  ]
+	"name" : "blue_fireball_trail",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00993d35",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "2252_anim.json",
+			"multi color" : "0xffbc42ff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 10.0,
+				"y" : -4.68750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : -0.39941406250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : -0.95214843750,
+			"y shear" : 0.0
+		}
+	]
 }

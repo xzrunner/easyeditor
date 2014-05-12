@@ -1,22 +1,30 @@
+
 {
-  "name": "mortar_ammo4", 
-  "sprite": [
-    {
-      "add color": "0x0", 
-      "angle": 0.0, 
-      "filepath": "1796_anim.json", 
-      "multi color": "0x7f7f7fff", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 0.869140625, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.869140625, 
-      "y shear": 0
-    }
-  ]
+	"name" : "mortar_ammo4",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "1796_anim.json",
+			"multi color" : "0x7f7f7fff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8691406250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8691406250,
+			"y shear" : 0.0
+		}
+	]
 }

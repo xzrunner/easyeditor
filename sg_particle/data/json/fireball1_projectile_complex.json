@@ -1,37 +1,53 @@
+
 {
-  "name": "fireball1_projectile", 
-  "sprite": [
-    {
-      "angle": 0.0, 
-      "filepath": "2249_anim.json", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 0.3291015625, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.3291015625, 
-      "y shear": 0
-    }, 
-    {
-      "add color": "0x2", 
-      "angle": 0.0, 
-      "filepath": "2250_anim.json", 
-      "multi color": "0x1eb2ff", 
-      "name": "", 
-      "position": {
-        "x": 0.8125, 
-        "y": 0.8125
-      }, 
-      "x mirror": false, 
-      "x scale": 0.59375, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.6943359375, 
-      "y shear": 0
-    }
-  ]
+	"name" : "fireball1_projectile",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "2249_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.32910156250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.32910156250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000002",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "2250_anim.json",
+			"multi color" : "0x001eb2ff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.81250,
+				"y" : 0.81250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.593750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.69433593750,
+			"y shear" : 0.0
+		}
+	]
 }

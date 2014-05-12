@@ -14,7 +14,7 @@ WORK_ITEMS = [
             r'..\data\json',
             r'..\data\pack\misc',
             r'..\data\pack\misc.tmp.lua',
-            '1.0',
+            '0.914',
             r'..\data\pack\misc.lua',
             r'..\data\pack\misc.ep',
         ),
@@ -45,7 +45,7 @@ for ed_json, tp_json, tmp_lua, scale, lua, ep in WORK_ITEMS:
     #     run_cmd('%s %s %s %s' % (LUA, CONV, tmp_lua, lua))
 
     if '3' in options:
-        run_cmd('%s %s -pd -pvr %s' % (LUA, EPBIN, lua))
+        run_cmd('%s %s -pd -pkmc %s' % (LUA, EPBIN, lua))
 
     if '4' in options:
         run_cmd('copy /Y %s %s' % (ep, PATH_SHARE_EP))

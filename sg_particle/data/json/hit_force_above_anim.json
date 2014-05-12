@@ -1,562 +1,705 @@
+
 {
-  "fps": 30, 
-  "layer": [
-    {
-      "frame": [
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff75", 
-              "name": "", 
-              "position": {
-                "x": -6.25, 
-                "y": 30.8125
-              }, 
-              "x mirror": false, 
-              "x scale": 4.30859375, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 1.4033203125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 1, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff87", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 31.5
-              }, 
-              "x mirror": false, 
-              "x scale": 4.6533203125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 1.5361328125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 2, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff99", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 32.25
-              }, 
-              "x mirror": false, 
-              "x scale": 4.998046875, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 1.66796875, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 3, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffab", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 32.9375
-              }, 
-              "x mirror": false, 
-              "x scale": 5.3427734375, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 1.80078125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 4, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffbc", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 33.6875
-              }, 
-              "x mirror": false, 
-              "x scale": 5.6875, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 1.9326171875, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 5, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffce", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 34.375
-              }, 
-              "x mirror": false, 
-              "x scale": 6.0322265625, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.0654296875, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 6, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffe0", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.125
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.197265625, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 7, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffd1", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.1875
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.2314453125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 8, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffc4", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.25
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.2646484375, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 9, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffb7", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.375
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.298828125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 10, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ffab", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.375
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.3330078125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 11, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff9e", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.5
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.3671875, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 12, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff8e", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.5625
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.400390625, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 13, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff82", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.6875
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.4345703125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 14, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff75", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.75
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.46875, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 15, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff68", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.8125
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.501953125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 16, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff5b", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 35.9375
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.5361328125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 17, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff4c", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 36.0
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.5703125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 18, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff3f", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 36.125
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.603515625, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 19, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff32", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 36.1875
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.6376953125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 20, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff25", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 36.25
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.671875, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 21, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff19", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 36.3125
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.7060546875, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 22, 
-          "tween": false
-        }, 
-        {
-          "actor": [
-            {
-              "add color": "0x0", 
-              "angle": 0.0, 
-              "filepath": "1974_complex.json", 
-              "multi color": "0xff42ff0c", 
-              "name": "", 
-              "position": {
-                "x": -6.3125, 
-                "y": 36.4375
-              }, 
-              "x mirror": false, 
-              "x scale": 6.376953125, 
-              "x shear": 0, 
-              "y mirror": false, 
-              "y scale": 2.7392578125, 
-              "y shear": 0
-            }
-          ], 
-          "id": 0, 
-          "time": 23, 
-          "tween": false
-        }
-      ]
-    }
-  ], 
-  "name": "hit_force_above"
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff75",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.250,
+								"y" : 30.81250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 4.308593750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.40332031250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 1
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff87",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 31.50
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 4.65332031250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.53613281250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 2
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff99",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 32.250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 4.9980468750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.667968750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 3
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffab",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 32.93750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 5.34277343750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.800781250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 4
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffbc",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 33.68750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 5.68750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.93261718750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 5
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffce",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 34.3750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.03222656250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.06542968750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 6
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffe0",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.1250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.1972656250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 7
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffd1",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.18750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.23144531250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 8
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffc4",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.26464843750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 9
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffb7",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.3750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.2988281250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 10
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ffab",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.3750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.33300781250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 11
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff9e",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.50
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.36718750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 12
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff8e",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.56250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.4003906250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 13
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff82",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.68750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.43457031250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 14
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff75",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.468750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 15
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff68",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.81250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.5019531250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 16
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff5b",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 35.93750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.53613281250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 17
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff4c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 36.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.57031250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 18
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff3f",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 36.1250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.6035156250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 19
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff32",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 36.18750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.63769531250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 20
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff25",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 36.250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.6718750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 21
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff19",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 36.31250
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.70605468750,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 22
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1974_complex.json",
+							"multi color" : "0xff42ff0c",
+							"name" : "",
+							"position" : 
+							{
+								"x" : -6.31250,
+								"y" : 36.43750
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 6.3769531250,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 2.73925781250,
+							"y shear" : 0.0
+						}
+					],
+					"time" : 23
+				}
+			],
+			"name" : ""
+		}
+	],
+	"name" : "hit_force_above"
 }

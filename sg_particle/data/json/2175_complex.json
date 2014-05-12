@@ -1,65 +1,99 @@
+
 {
-  "name": "", 
-  "sprite": [
-    {
-      "angle": 0.0, 
-      "filepath": "2173_anim.json", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": 77.3125
-      }, 
-      "x mirror": false, 
-      "x scale": 1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.75, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0.0, 
-      "filepath": "2173_anim.json", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": -77.3125
-      }, 
-      "x mirror": false, 
-      "x scale": -1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": -0.75, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 1.5707963267948966, 
-      "filepath": "2173_anim.json", 
-      "name": "", 
-      "position": {
-        "x": 104.375, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.75, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 1.5707963267948966, 
-      "filepath": "2173_anim.json", 
-      "name": "", 
-      "position": {
-        "x": -104.375, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": -1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": -0.75, 
-      "y shear": 0
-    }
-  ]
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "2173_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 77.31250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.750,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "2173_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -77.31250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : -1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : -0.750,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -1.570796251296997,
+			"clip" : false,
+			"filepath" : "2173_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 104.3750,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -1.570796251296997,
+			"clip" : false,
+			"filepath" : "2173_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -104.3750,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : -0.750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : -1.0,
+			"y shear" : 0.0
+		}
+	]
 }

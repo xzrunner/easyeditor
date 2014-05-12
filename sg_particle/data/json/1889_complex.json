@@ -1,20 +1,30 @@
+
 {
-  "name": "", 
-  "sprite": [
-    {
-      "angle": 0, 
-      "filepath": "11617171881779.png", 
-      "name": "", 
-      "position": {
-        "x": -19.375, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 3.1684027777777777, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 3.0483870967741935, 
-      "y shear": 0
-    }
-  ]
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "3_116_188_1717_1779.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -19.3750,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 3.168402671813965,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 3.048387050628662,
+			"y shear" : 0.0
+		}
+	]
 }

@@ -1,37 +1,53 @@
+
 {
-  "name": "basic_turret_ammo10", 
-  "sprite": [
-    {
-      "angle": 0.0, 
-      "filepath": "1387_complex.json", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 0.8681640625, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.3291015625, 
-      "y shear": 0
-    }, 
-    {
-      "add color": "0x60e0a", 
-      "angle": 0.0, 
-      "filepath": "1215_complex.json", 
-      "multi color": "0xa0fcffff", 
-      "name": "", 
-      "position": {
-        "x": 0.25, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.0, 
-      "y shear": 0
-    }
-  ]
+	"name" : "basic_turret_ammo10",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "1387_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.86816406250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.32910156250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00060e0a",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "1215_complex.json",
+			"multi color" : "0xa0fcffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.250,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
 }

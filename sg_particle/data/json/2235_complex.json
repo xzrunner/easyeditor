@@ -1,52 +1,76 @@
+
 {
-  "name": "", 
-  "sprite": [
-    {
-      "angle": 1.5707963267948966, 
-      "filepath": "1945_complex.json", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": -3.5625
-      }, 
-      "x mirror": false, 
-      "x scale": 0.4306640625, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.4931640625, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 1.5707963267948966, 
-      "filepath": "1946_complex.json", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": -2.5
-      }, 
-      "x mirror": false, 
-      "x scale": 0.7919921875, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.7919921875, 
-      "y shear": 0
-    }, 
-    {
-      "add color": "0x0", 
-      "angle": 1.5707963267948966, 
-      "filepath": "1945_complex.json", 
-      "multi color": "0xffffff53", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 0.5634765625, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.6533203125, 
-      "y shear": 0
-    }
-  ]
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -1.570796251296997,
+			"clip" : false,
+			"filepath" : "1945_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3.56250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.49316406250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.43066406250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -1.570796251296997,
+			"clip" : false,
+			"filepath" : "1946_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.79199218750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.79199218750,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -1.570796251296997,
+			"clip" : false,
+			"filepath" : "1945_complex.json",
+			"multi color" : "0xffffff53",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.65332031250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.56347656250,
+			"y shear" : 0.0
+		}
+	]
 }

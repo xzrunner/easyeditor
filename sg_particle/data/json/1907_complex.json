@@ -1,155 +1,237 @@
+
 {
-  "name": "", 
-  "sprite": [
-    {
-      "angle": 0, 
-      "filepath": "1254106512951161.png", 
-      "name": "", 
-      "position": {
-        "x": 157.75, 
-        "y": 73.875
-      }, 
-      "x mirror": false, 
-      "x scale": 2.0929878048780486, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.8938802083333334, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "51015726191624.png", 
-      "name": "", 
-      "position": {
-        "x": -66.875, 
-        "y": 157.5
-      }, 
-      "x mirror": false, 
-      "x scale": 1.25, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.25, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "51015726191624.png", 
-      "name": "", 
-      "position": {
-        "x": -157.5, 
-        "y": 66.875
-      }, 
-      "x mirror": true, 
-      "x scale": 0.5963302752293578, 
-      "x shear": 0, 
-      "y mirror": true, 
-      "y scale": 2.6201923076923075, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 1.5707963267948966, 
-      "filepath": "1253106512951162.png", 
-      "name": "", 
-      "position": {
-        "x": 59.375, 
-        "y": 163.75
-      }, 
-      "x mirror": false, 
-      "x scale": 1.25, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.25, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "51015726181623.png", 
-      "name": "", 
-      "position": {
-        "x": -42.8125, 
-        "y": -165.625
-      }, 
-      "x mirror": false, 
-      "x scale": 1.0017361111111112, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.6274509803921569, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "1253106512951162.png", 
-      "name": "", 
-      "position": {
-        "x": -163.75, 
-        "y": -59.375
-      }, 
-      "x mirror": true, 
-      "x scale": 1.25, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.25, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "51015726181623.png", 
-      "name": "", 
-      "position": {
-        "x": 84.25, 
-        "y": -149.0
-      }, 
-      "x mirror": false, 
-      "x scale": 0.7685185185185185, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 2.1213235294117645, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "1254106512951161.png", 
-      "name": "", 
-      "position": {
-        "x": -146.75, 
-        "y": -93.8125
-      }, 
-      "x mirror": false, 
-      "x scale": 2.347560975609756, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.76953125, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "1254106512951161.png", 
-      "name": "", 
-      "position": {
-        "x": 73.8125, 
-        "y": 157.75
-      }, 
-      "x mirror": false, 
-      "x scale": 2.0929878048780486, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.8938802083333334, 
-      "y shear": 0
-    }, 
-    {
-      "angle": 0, 
-      "filepath": "1254106512951161.png", 
-      "name": "", 
-      "position": {
-        "x": 166.0, 
-        "y": -52.625
-      }, 
-      "x mirror": false, 
-      "x scale": 1.8018292682926829, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.0026041666666667, 
-      "y shear": 0
-    }
-  ]
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "0_510_619_1572_1624.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -66.8750,
+				"y" : 157.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 1.570796251296997,
+			"clip" : false,
+			"filepath" : "0_1253_1295_1065_1162.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 59.3750,
+				"y" : 163.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 1.570796251296997,
+			"clip" : false,
+			"filepath" : "0_510_619_1572_1624.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -157.50,
+				"y" : 66.8750
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 1.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "0_1253_1295_1065_1162.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -163.750,
+				"y" : -59.3750
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 1.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 2.486942768096924,
+			"clip" : false,
+			"filepath" : "0_510_618_1572_1623.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -42.781250,
+				"y" : -165.6250152587891
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.275418996810913,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.262580275535584,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -2.225473880767822,
+			"clip" : false,
+			"filepath" : "0_1254_1295_1065_1161.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -146.750,
+				"y" : -93.781250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.281639337539673,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.263878822326660,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 4.057677268981934,
+			"clip" : false,
+			"filepath" : "0_510_618_1572_1623.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 84.250,
+				"y" : -148.968750
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 1.276865601539612,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.262532830238342,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 2.486892461776733,
+			"clip" : false,
+			"filepath" : "0_1254_1295_1065_1161.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 166.031250,
+				"y" : -52.6250
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 1.282001733779907,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.263869643211365,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : -2.356198310852051,
+			"clip" : false,
+			"filepath" : "0_1254_1295_1065_1161.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 73.81250,
+				"y" : 157.750
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 1.282720446586609,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.264135360717773,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.7853969335556030,
+			"clip" : false,
+			"filepath" : "0_1254_1295_1065_1161.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 157.750,
+				"y" : 73.8750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.282705187797546,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.264138221740723,
+			"y shear" : 0.0
+		}
+	]
 }

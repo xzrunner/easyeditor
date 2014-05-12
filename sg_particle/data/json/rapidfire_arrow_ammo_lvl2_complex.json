@@ -1,37 +1,53 @@
+
 {
-  "name": "rapidfire_arrow_ammo_lvl2", 
-  "sprite": [
-    {
-      "angle": 0.0, 
-      "filepath": "2231_complex.json", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": -6.25
-      }, 
-      "x mirror": false, 
-      "x scale": 1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.5, 
-      "y shear": 0
-    }, 
-    {
-      "add color": "0x5000", 
-      "angle": 1.5707963267948966, 
-      "filepath": "1946_complex.json", 
-      "multi color": "0xc9ffff", 
-      "name": "", 
-      "position": {
-        "x": 0.0, 
-        "y": 0.0
-      }, 
-      "x mirror": false, 
-      "x scale": 1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.0, 
-      "y shear": 0
-    }
-  ]
+	"name" : "rapidfire_arrow_ammo_lvl2",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "2231_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6.250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00005000",
+			"angle" : -1.570796251296997,
+			"clip" : false,
+			"filepath" : "1946_complex.json",
+			"multi color" : "0x00c9ffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
 }

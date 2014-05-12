@@ -1,20 +1,30 @@
+
 {
-  "name": "wizard_tower_blast", 
-  "sprite": [
-    {
-      "angle": 0.0, 
-      "filepath": "2109_anim.json", 
-      "name": "", 
-      "position": {
-        "x": 102.5, 
-        "y": -1.25
-      }, 
-      "x mirror": false, 
-      "x scale": 1.0, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1.0, 
-      "y shear": 0
-    }
-  ]
+	"name" : "wizard_tower_blast",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "2109_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 102.50,
+				"y" : -1.250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
 }

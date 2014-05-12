@@ -1,37 +1,53 @@
+
 {
-  "name": "fw_ammo6", 
-  "sprite": [
-    {
-      "angle": 0, 
-      "filepath": "1225_complex.json", 
-      "name": "", 
-      "position": {
-        "x": 0, 
-        "y": 0
-      }, 
-      "x mirror": false, 
-      "x scale": 1, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 1, 
-      "y shear": 0
-    }, 
-    {
-      "add color": "0x2451", 
-      "angle": 0.0, 
-      "filepath": "1402_anim.json", 
-      "multi color": "0x4989ff84", 
-      "name": "", 
-      "position": {
-        "x": 0.75, 
-        "y": 3.4375
-      }, 
-      "x mirror": false, 
-      "x scale": 0.404296875, 
-      "x shear": 0, 
-      "y mirror": false, 
-      "y scale": 0.021484375, 
-      "y shear": 0
-    }
-  ]
+	"name" : "fw_ammo6",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "1225_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00002451",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "1402_anim.json",
+			"multi color" : "0x4989ff84",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.750,
+				"y" : 3.43750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4042968750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.0214843750,
+			"y shear" : 0.0
+		}
+	]
 }
