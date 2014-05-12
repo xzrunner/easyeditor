@@ -1,0 +1,463 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite0",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -2.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 40.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite38",
+							"position" : 
+							{
+								"x" : -6.421895980834961,
+								"y" : -0.09931516647338867
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 9.054305076599121,
+							"x scale" : 0.7243432402610779,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -9.054305076599121,
+							"y scale" : 0.7243432402610779,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.06219574064016342,
+							"clip" : false,
+							"filepath" : "2_003.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite39",
+							"position" : 
+							{
+								"x" : 4.957000732421875,
+								"y" : 0.4418296813964844
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 47.23081970214844,
+							"x scale" : 0.8587412834167481,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 12.88104534149170,
+							"y scale" : 0.8587412834167481,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_003.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 13.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 31.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.107044339179993,
+							"clip" : false,
+							"filepath" : "2_003.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite40",
+							"position" : 
+							{
+								"x" : 0.4496955871582031,
+								"y" : 43.51610946655273
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 46.80389785766602,
+							"x scale" : 0.8509808182716370,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 12.76472282409668,
+							"y scale" : 0.8509808182716370,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_005.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite10",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 21.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 38.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 6,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_007.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite12",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 20.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 41.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.02374313026666641,
+							"clip" : false,
+							"filepath" : "2_007.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite41",
+							"position" : 
+							{
+								"x" : 9.003959655761719,
+								"y" : 10.86724090576172
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 27.94603157043457,
+							"x scale" : 0.7984560132026672,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 69.86492156982422,
+							"y scale" : 0.7984560132026672,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 10,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_009.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite16",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 2.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 21.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.4704666137695313,
+							"clip" : false,
+							"filepath" : "2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite42",
+							"position" : 
+							{
+								"x" : -2.752730369567871,
+								"y" : -38.66920089721680
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 9.977418899536133,
+							"x scale" : 0.7981938719749451,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -9.977418899536133,
+							"y scale" : 0.7981938719749451,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 12,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_011.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite18",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -5.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 32.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.4895091652870178,
+							"clip" : false,
+							"filepath" : "2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite43",
+							"position" : 
+							{
+								"x" : -18.63805389404297,
+								"y" : -18.30999183654785
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 9.661863327026367,
+							"x scale" : 0.7729496359825134,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -9.661863327026367,
+							"y scale" : 0.7729496359825134,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 14,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_013.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite20",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -7.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 37.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.4134583473205566,
+							"clip" : false,
+							"filepath" : "2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite44",
+							"position" : 
+							{
+								"x" : -20.13986968994141,
+								"y" : -11.47296905517578
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 9.805672645568848,
+							"x scale" : 0.7844550609588623,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -9.805672645568848,
+							"y scale" : 0.7844550609588623,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 16,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "1_013.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite20",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -7.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 37.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : -0.4134583473205566,
+							"clip" : false,
+							"filepath" : "2_001.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite44",
+							"position" : 
+							{
+								"x" : -20.13986968994141,
+								"y" : -11.47296905517578
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 9.805672645568848,
+							"x scale" : 0.7844550609588623,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -9.805672645568848,
+							"y scale" : 0.7844550609588623,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 18,
+					"tween" : false
+				}
+			],
+			"name" : "Layer1"
+		}
+	],
+	"name" : "daoke1_attack1_3"
+}
