@@ -20,7 +20,7 @@ private:
 	void VerifySurplus();
 	void Report() const;
 
-	void HandleSpritePath(const wxString& dir, const std::string& relative_path);
+	void HandleSpritePath(const std::string& filepath);
 
 private:
 	std::vector<std::string> _complex_files;
