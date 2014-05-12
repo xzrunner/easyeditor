@@ -26,6 +26,9 @@ namespace d2d
 		// get path dir + relative
 		static wxString getAbsolutePath(const wxString& dir, const wxString& relative);
 
+		// get path dir(base) + relative
+		static wxString getAbsolutePathFromFile(const wxString& base, const wxString& relative);
+
 		// get string from begin to '.'
 		static wxString getFilePathExceptExtension(const wxString& filepath);
 

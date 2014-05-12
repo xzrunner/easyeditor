@@ -11,7 +11,8 @@ namespace edb
 FixImages::FixImages(const std::string& imgdir, const std::string& jsondir)
 {
 	ProcessImageFiles(imgdir);
-	ProcessJsonFiles(imgdir, jsondir);
+	ProcessJsonFiles(jsondir);
+	RemoveImages();
 }
 
 void FixImages::ProcessImageFiles(const std::string& imgdir)
@@ -25,32 +26,33 @@ void FixImages::ProcessImageFiles(const std::string& imgdir)
 		wxString filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
-			std::string img(filepath.c_str());
+			std::string imgpath(filepath.c_str());
+			StringTools::toLower(imgpath);
 
 			char sig[32];
-			md5_file(img.c_str(), sig);
+			md5_file(imgpath.c_str(), sig);
 			std::string md5(reinterpret_cast<char*>(sig));
 			assert(!md5.empty());
 
 			std::map<std::string, std::string>::iterator itr_md5 
 				= m_map_md5_2_image.find(md5);
 			if (itr_md5 == m_map_md5_2_image.end()) {
-				m_map_md5_2_image.insert(std::make_pair(md5, filepath));
+				m_map_md5_2_image.insert(std::make_pair(md5, imgpath));
 			} else {
-				wxRemoveFile(filepath);
-				std::cout << "same img: " << itr_md5->second << " -- " << filepath << std::endl;
+				m_to_remove.push_back(imgpath);
+				std::cout << "same img: " << itr_md5->second << " -- " << imgpath << std::endl;
 			}
 
 			std::map<std::string, std::string>::iterator itr_img
-				= m_map_image_2_md5.find(img);
+				= m_map_image_2_md5.find(imgpath);
 			if (itr_img == m_map_image_2_md5.end()) {
-				m_map_image_2_md5.insert(std::make_pair(img, md5));
+				m_map_image_2_md5.insert(std::make_pair(imgpath, md5));
 			}
 		}
 	}
 }
 
-void FixImages::ProcessJsonFiles(const std::string& imgdir, const std::string& jsondir)
+void FixImages::ProcessJsonFiles(const std::string& jsondir)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(jsondir, files);
@@ -62,17 +64,26 @@ void FixImages::ProcessJsonFiles(const std::string& imgdir, const std::string& j
 		wxString filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
 			std::string filename = filepath.ToStdString();
-			FixImagePath(imgdir, filename);
+			FixImagePath(filename);
 		}
 	}
 }
 
-void FixImages::FixImagePath(const std::string& imgdir, const std::string& animpath)
+void FixImages::RemoveImages()
+{
+	for (int i = 0, n = m_to_remove.size(); i < n; ++i)
+	{
+		wxRemoveFile(m_to_remove[i]);
+	}
+}
+
+void FixImages::FixImagePath(const std::string& animpath)
 {
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
 	std::ifstream fin(animpath.c_str());
+	assert(!fin.fail());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -80,7 +91,7 @@ void FixImages::FixImagePath(const std::string& imgdir, const std::string& animp
 	Json::Value outValue = value;
 	bool dirty = false;
 
-	std::string prefix = imgdir + "\\";
+	wxString dir = d2d::FilenameTools::getFileDir(animpath);
 
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
@@ -94,7 +105,8 @@ void FixImages::FixImagePath(const std::string& imgdir, const std::string& animp
 				std::string filepath = entryValue["filepath"].asString();
 				if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) 
 				{
-					filepath = prefix + filepath;
+					filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+					StringTools::toLower(filepath);
 
 					std::map<std::string, std::string>::iterator itr_img
 						= m_map_image_2_md5.find(filepath);
@@ -104,9 +116,10 @@ void FixImages::FixImagePath(const std::string& imgdir, const std::string& animp
 					if (filepath != itr_md5->second)
 					{
 						dirty = true;
-						const std::string& full = itr_md5->second;
-						std::string fixed = full.substr(full.find_first_of(prefix) + prefix.size());
-						outValue["layer"][i-1]["frame"][j-1]["actor"][k-1]["filepath"] = fixed;
+
+  						const wxString& absolute = itr_md5->second;
+  						wxString relative = d2d::FilenameTools::getRelativePath(dir, absolute);
+  						outValue["layer"][i-1]["frame"][j-1]["actor"][k-1]["filepath"] = relative.ToStdString();
 					}
 				}
 				entryValue = frameValue["actor"][k++];
@@ -119,8 +132,13 @@ void FixImages::FixImagePath(const std::string& imgdir, const std::string& animp
 	if (dirty)
 	{
 		Json::StyledStreamWriter writer;
+
+		std::locale::global(std::locale(""));
 		std::ofstream fout(animpath.c_str());
+		std::locale::global(std::locale("C"));
+
 		writer.write(fout, outValue);
+		writer.write(fout, Json::Value());
 		fout.close();
 	}
 }
