@@ -1,5 +1,0 @@
-生成粒子编辑器能导入的数据
-当前目录下建三个文件夹：
-./pictures放粒子的小图片，由image_extract得到
-./middle放anim和complex中间文件，由split_mid.lua生成
-./particles放粒子的particle文件，由split.lua生成

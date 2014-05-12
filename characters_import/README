@@ -1,7 +1,0 @@
-1. 将资源文件夹copy到当前目录
-3. 运行python gen_png.py <path> 将会自动生成png 以及lua文件，同时生成 ep文件,运行gen_png.py 的执行流程如下：
-	<1>. 生成gen_md5.lua 文件，其中包含了每个png图片对应的md5值
-	<2>. 使用lua52 gen_fl.lua <path> 生成animation.lua 文件，同时删除重复的png
-	<3>. 使用TexturePacker 工具，进行png 和 lua文件的生成，生成的文件命名规则为：  characters2X.png / characters2X.lua X为<1, 2, 3, ...>
-	<4>. 将2部分生成的animation.lua 文件copy到当前目录，执行 lua gen_pa.lua characters2 命令生成 characters2.lua 文件
-	<5>. 调用lua52  ../tools/lua/epbin.lua -png8  ./characters2.lua 生成ep文件
