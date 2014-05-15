@@ -1,0 +1,36 @@
+gif2rgb.o: gif2rgb.c c:\mingw\include\stdlib.h c:\mingw\include\_mingw.h \
+ c:\mingw\include\sdkddkver.h \
+ c:\mingw\lib\gcc\mingw32\4.8.1\include\stddef.h c:\mingw\include\stdio.h \
+ c:\mingw\lib\gcc\mingw32\4.8.1\include\stdarg.h \
+ c:\mingw\include\sys\types.h c:\mingw\include\ctype.h \
+ c:\mingw\include\string.h \
+ c:\mingw\lib\gcc\mingw32\4.8.1\include\stdbool.h \
+ c:\mingw\include\fcntl.h c:\mingw\include\io.h ../lib/gif_lib.h getarg.h
+
+c:\mingw\include\stdlib.h:
+
+c:\mingw\include\_mingw.h:
+
+c:\mingw\include\sdkddkver.h:
+
+c:\mingw\lib\gcc\mingw32\4.8.1\include\stddef.h:
+
+c:\mingw\include\stdio.h:
+
+c:\mingw\lib\gcc\mingw32\4.8.1\include\stdarg.h:
+
+c:\mingw\include\sys\types.h:
+
+c:\mingw\include\ctype.h:
+
+c:\mingw\include\string.h:
+
+c:\mingw\lib\gcc\mingw32\4.8.1\include\stdbool.h:
+
+c:\mingw\include\fcntl.h:
+
+c:\mingw\include\io.h:
+
+../lib/gif_lib.h:
+
+getarg.h:

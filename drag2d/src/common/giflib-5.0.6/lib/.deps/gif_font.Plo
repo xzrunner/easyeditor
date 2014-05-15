@@ -1,0 +1,16 @@
+gif_font.lo: gif_font.c c:\mingw\include\string.h \
+ c:\mingw\include\_mingw.h c:\mingw\include\sdkddkver.h \
+ c:\mingw\lib\gcc\mingw32\4.8.1\include\stddef.h gif_lib.h \
+ c:\mingw\lib\gcc\mingw32\4.8.1\include\stdbool.h
+
+c:\mingw\include\string.h:
+
+c:\mingw\include\_mingw.h:
+
+c:\mingw\include\sdkddkver.h:
+
+c:\mingw\lib\gcc\mingw32\4.8.1\include\stddef.h:
+
+gif_lib.h:
+
+c:\mingw\lib\gcc\mingw32\4.8.1\include\stdbool.h:
