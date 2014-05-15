@@ -156,6 +156,7 @@ void Symbol::clear()
 		}
 		delete layer;
 	}
+	m_layers.clear();
 }
 
 void Symbol::initBounding()
