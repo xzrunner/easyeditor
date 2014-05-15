@@ -63,11 +63,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib jsond.lib Box2D.lib SOIL.lib freetype250_D.lib md5.lib opengl32.lib GLee.lib"
+				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib jsond.lib Box2D.lib SOIL.lib freetype250_D.lib md5.lib opengl32.lib GLee.lib lua.lib libgifd.lib"
 				OutputFile="..\easydb_cl\x86\Debug\easydb_cl.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
+				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easydb_cl\x86\Debug\easydb_cl.pdb"
 				SubSystem="1"
@@ -124,6 +125,7 @@
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
+				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -143,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib json.lib Box2D.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib"
+				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib json.lib Box2D.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib lua.lib libgif.lib"
 				OutputFile="..\easydb_cl\x86\Release\easydb_cl.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
@@ -266,6 +268,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easydb\PackParticle3D.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="trans"
+			>
+			<File
+				RelativePath="..\..\..\src\easydb\TransToGif.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\TransToGif.h"
 				>
 			</File>
 		</Filter>

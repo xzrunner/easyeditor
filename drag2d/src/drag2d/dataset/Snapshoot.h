@@ -3,6 +3,8 @@
 
 #include <string>
 
+namespace anim { class Symbol; }
+
 namespace d2d
 {
 
@@ -16,6 +18,7 @@ public:
 	~Snapshoot();
 
 	unsigned char* outputToMemory(const ISymbol* symbol, bool whitebg = false) const;
+	unsigned char* outputAnimToMemory(const ISymbol* symbol, int index, bool whitebg = false) const;
 
 	void outputToImageFile(const ISymbol* symbol, const std::string& filename) const;
 
@@ -24,6 +27,7 @@ private:
 	void releaseFBO();
 
 	void drawFBO(const ISymbol* symbol, bool whitebg = false) const;
+	void drawAnimFBO(const anim::Symbol* symbol, int index, bool whitebg = false) const;
 
 	int checkFramebufferStatus() const;
 

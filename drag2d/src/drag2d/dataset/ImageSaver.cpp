@@ -21,6 +21,8 @@ void ImageSaver::storeToFile(const uint8_t* pixels, int width, int height,
 	case e_ppm:
 		storePPM(pixels, width, height, filename);
 		break;
+	case e_gif:
+		break;
 	}
 }
 

@@ -13,6 +13,7 @@
 #include "ReverseAnimation.h"
 #include "PackParticle3D.h"
 #include "ClipImages.h"
+#include "TransToGif.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -192,6 +193,13 @@ static void command(int argc, char *argv[])
 		}
 
 		edb::ClipImages::ClipImages(argv[2]);
+	} else if (cmd == "togif") {
+		if (argc < 4) {
+			std::cerr << "Params: [src dir] [dst file]!" << std::endl;
+			return;
+		}
+
+		edb::TransToGif::trigger(argv[2], argv[3]);
 	}
 }
 

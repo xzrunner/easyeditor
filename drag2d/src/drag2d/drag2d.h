@@ -35,6 +35,7 @@
 #include "dataset/ImageSaver.h"
 #include "dataset/Snapshoot.h"
 #include "dataset/Font.h"
+#include "dataset/AnimatedGifSaver.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"

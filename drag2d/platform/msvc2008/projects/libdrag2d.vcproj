@@ -108,7 +108,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;..\..\..\..\easyscale9\src;..\..\..\..\easyimage\src"
+				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\include\c99;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;..\..\..\..\easyscale9\src;..\..\..\..\easyimage\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -560,6 +560,14 @@
 			<Filter
 				Name="primitive"
 				>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\AnimatedGifSaver.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\AnimatedGifSaver.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\Bitmap.cpp"
 					>

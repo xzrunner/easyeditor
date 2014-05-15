@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="easydb_cl"
+	ProjectGUID="{18AF704F-C568-4B02-AE21-54386416DFDD}"
+	VCNestedProjectGUID="{F05FF76F-096A-4AA7-86B1-4D0101C55699}"
+	VCNestedProjectFileName="easydb_cl.vcproj">
+	<Configurations/>
+	<Files/>
+</VisualStudioProject>
