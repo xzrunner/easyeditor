@@ -194,9 +194,9 @@ bool KeyFrame::canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& en
 	if (autoNamed && begin.name == end.name && !m_skeletonData.isContainSprite(const_cast<d2d::ISprite*>(&begin))) {
 		return true;
 	} else {
-		if (begin.getSymbol().getFilepath() == end.getSymbol().getFilepath()) {
-			return true;
-		}
+		//if (begin.getSymbol().getFilepath() == end.getSymbol().getFilepath()) {
+		//	return true;
+		//}
 	}
 	return false;
 }
