@@ -162,10 +162,6 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string name = value["name"].asString();
-	if (name.empty()) {
-		return;
-	}
 	d2d::Snapshoot ss;
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
 	anim::Symbol* anim = static_cast<anim::Symbol*>(symbol);
@@ -182,8 +178,6 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 		delete[] rgba;
 		delete[] rgb;
 	}
-//	std::string filename = dst + "//" + name + ".gif";
-//	saver.Save(filename.c_str());
 	saver.Save(dst.c_str());
 
 	symbol->release();
