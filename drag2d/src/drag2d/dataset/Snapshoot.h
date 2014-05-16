@@ -18,7 +18,7 @@ public:
 	~Snapshoot();
 
 	unsigned char* outputToMemory(const ISymbol* symbol, bool whitebg = false) const;
-	unsigned char* outputAnimToMemory(const ISymbol* symbol, int index, bool whitebg = false) const;
+	unsigned char* outputAnimToMemory(const anim::Symbol* symbol, int index, bool whitebg = false) const;
 
 	void outputToImageFile(const ISymbol* symbol, const std::string& filename) const;
 

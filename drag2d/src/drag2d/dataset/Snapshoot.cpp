@@ -53,14 +53,9 @@ unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg) co
 	return pixels;
 }
 
-unsigned char* Snapshoot::outputAnimToMemory(const ISymbol* symbol, int index, bool whitebg) const
+unsigned char* Snapshoot::outputAnimToMemory(const anim::Symbol* symbol, int index, bool whitebg) const
 {
-	const anim::Symbol* anim = dynamic_cast<const anim::Symbol*>(symbol);
-	if (!anim) {
-		return NULL;
-	}
-
-	drawAnimFBO(anim, index, whitebg);
+	drawAnimFBO(symbol, index, whitebg);
 
 	int w = symbol->getSize().xLength(),
 		h = symbol->getSize().yLength();
