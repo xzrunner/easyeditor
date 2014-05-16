@@ -11,8 +11,6 @@ class TransToGif
 public:
 	static void trigger(const std::string& srcdir, const std::string& dstdir);
 
-	static void test();
-
 private:
 	static unsigned char* formatRGBA(const unsigned char* rgba, int width, int height);
 
