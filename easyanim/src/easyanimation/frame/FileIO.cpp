@@ -155,14 +155,6 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 		return;
 	}
 
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(src.fn_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
 	d2d::Snapshoot ss;
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
 	anim::Symbol* anim = static_cast<anim::Symbol*>(symbol);
@@ -181,6 +173,18 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 	}
 	saver.Save(dst.c_str());
 
+	symbol->release();
+}
+
+void FileIO::storeAsPng(const wxString& src, const wxString& dst)
+{
+	if (!d2d::FileNameParser::isType(src, d2d::FileNameParser::e_anim)) {
+		return;
+	}
+
+	d2d::Snapshoot ss;
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
+	ss.outputToImageFile(symbol, dst.ToStdString());
 	symbol->release();
 }
 

@@ -116,7 +116,7 @@ void Frame::onSave(wxCommandEvent& event)
 
 void Frame::onSaveAs(wxCommandEvent& event)
 {
-	wxString filter = "JSON files (*.json)|*.json|GIF files (*.gif)|*.gif";
+	wxString filter = "JSON files (*.json)|*.json|GIF files (*.gif)|*.gif|PNG files (*.png)|*.png";
  	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
  	if (dlg.ShowModal() == wxID_OK)
  	{
@@ -125,6 +125,10 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		if (ext == "gif")
 		{
 			FileIO::storeAsGif(m_currFilename, filename);
+		}
+		else if (ext == "png")
+		{
+			FileIO::storeAsPng(m_currFilename, filename);
 		}
 		else
 		{

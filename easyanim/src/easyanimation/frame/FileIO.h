@@ -21,6 +21,7 @@ namespace eanim
 		static void loadFlash(const wxString& filepath);
 
 		static void storeAsGif(const wxString& src, const wxString& dst);
+		static void storeAsPng(const wxString& src, const wxString& dst);
 
 	private:
 		static void loadResource(const Json::Value& resValue);
