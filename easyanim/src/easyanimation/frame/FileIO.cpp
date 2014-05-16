@@ -10,6 +10,7 @@
 
 #include <rapidxml-1.13/rapidxml_utils.hpp>
 #include <easyanim.h>
+#include <easyimage.h>
 
 namespace eanim
 {
@@ -172,8 +173,8 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 	AnimatedGifSaver saver(width, height);
 	for (int i = 0; i < max_frame; ++i)
 	{
-		unsigned char* rgba = ss.outputAnimToMemory(anim, i + 1, true);
-		unsigned char* rgb = formatRGBA(rgba, width, height);
+		byte* rgba = ss.outputAnimToMemory(anim, i + 1, true);
+		byte* rgb = eimage::RGBA2RGB(rgba, width, height, true);
 		saver.AddFrame(rgb, 1 / 30.0f);
 		delete[] rgba;
 		delete[] rgb;
@@ -531,21 +532,6 @@ Json::Value FileIO::storeSkeleton(const SkeletonData& skeleton)
 	}
 
 	return value;
-}
-
-unsigned char* FileIO::formatRGBA(const unsigned char* rgba, int width, int height)
-{
-	int ptr = 0;
-	unsigned char* ret = new unsigned char[width * height * 3];
-	for (int i = 0; i < height; ++i) {
-		for (int j = 0; j < width; ++j) {
-			int p = ((height - 1 - i) * width + j) * 4;
-			ret[ptr++] = rgba[p++];
-			ret[ptr++] = rgba[p++];
-			ret[ptr++] = rgba[p++];
-		}
-	}
-	return ret;
 }
 
 } // eanim

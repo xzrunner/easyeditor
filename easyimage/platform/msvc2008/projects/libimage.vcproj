@@ -153,6 +153,14 @@
 			RelativePath="..\..\..\src\libimage\ImageProcessor.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\..\src\libimage\PixelsTools.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libimage\PixelsTools.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -47,8 +47,6 @@ namespace eanim
 		static Json::Value store(const d2d::ISprite* sprite, const wxString& dir);
 		static Json::Value storeSkeleton(const SkeletonData& skeleton);
 
-		static unsigned char* formatRGBA(const unsigned char* rgba, int width, int height);
-
 	private:
 		static std::string filepath;
 
