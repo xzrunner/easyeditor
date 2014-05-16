@@ -162,18 +162,19 @@ void Symbol::clear()
 void Symbol::initBounding()
 {
 	m_rect.makeInfinite();
-	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
-		if (!layer->frames.empty())
+		for (int i = 0, n = layer->frames.size(); i < n; ++i)
 		{
-			Frame* frame = layer->frames[0];
-			for (size_t j = 0, m = frame->sprites.size(); j < m; ++j)
+			Frame* frame = layer->frames[i];
+			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
 			{
 				std::vector<d2d::Vector> vertices;
-				frame->sprites[j]->getBounding()->getBoundPos(vertices);
-				for (size_t k = 0, l = vertices.size(); k < l; ++k)
-					m_rect.combine(vertices[k]);
+				frame->sprites[i]->getBounding()->getBoundPos(vertices);
+				for (int i = 0, n = vertices.size(); i < n; ++i) {
+					m_rect.combine(vertices[i]);
+				}
 			}
 		}
 	}
