@@ -280,12 +280,13 @@ void SelectSpritesOP::pasteToSelection() const
 		{
 			sval["filename"] = s->getSymbol().getFilepath().ToStdString();
 			s->store(sval);
+			sval["name"] = s->name;
 		}
 	}
 	Json::StyledStreamWriter writer;
 	std::stringstream ss;
 	writer.write(ss, value);
-	wxTheClipboard->SetData( new wxTextDataObject(ss.str()));
+	wxTheClipboard->SetData(new wxTextDataObject(ss.str()));
 	wxTheClipboard->Close();
 }
 
@@ -310,6 +311,7 @@ void SelectSpritesOP::copyFromSelection()
 			while (!sval.isNull()) {
 				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(sval["filename"].asString());
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+				sprite->name = sval["name"].asString();
 				symbol->release();
 				sprite->load(sval);
 				m_spritesImpl->insertSprite(sprite);
