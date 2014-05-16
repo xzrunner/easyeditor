@@ -116,13 +116,22 @@ void Frame::onSave(wxCommandEvent& event)
 
 void Frame::onSaveAs(wxCommandEvent& event)
 {
- 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString,
-		wxT("*_") + wxString(FILE_TAG) + wxT(".json"), wxFD_SAVE);
+	wxString filter = "JSON files (*.json)|*.json|GIF files (*.gif)|*.gif";
+ 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
  	if (dlg.ShowModal() == wxID_OK)
  	{
-		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
-		m_currFilename = fixed;
-		FileIO::store(m_currFilename);
+		wxString filename = dlg.GetPath();
+		wxString ext = d2d::FilenameTools::getExtension(filename);
+		if (ext == "gif")
+		{
+			FileIO::storeAsGif(m_currFilename, filename);
+		}
+		else
+		{
+			wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
+			m_currFilename = fixed;
+			FileIO::store(m_currFilename);
+		}
  	}
 }
 

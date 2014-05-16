@@ -20,6 +20,8 @@ namespace eanim
 
 		static void loadFlash(const wxString& filepath);
 
+		static void storeAsGif(const wxString& src, const wxString& dst);
+
 	private:
 		static void loadResource(const Json::Value& resValue);
 		static void storeResource(Json::Value& value);
@@ -44,6 +46,8 @@ namespace eanim
 		static Json::Value store(KeyFrame* frame, const wxString& dir);
 		static Json::Value store(const d2d::ISprite* sprite, const wxString& dir);
 		static Json::Value storeSkeleton(const SkeletonData& skeleton);
+
+		static unsigned char* formatRGBA(const unsigned char* rgba, int width, int height);
 
 	private:
 		static std::string filepath;

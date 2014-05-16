@@ -9,6 +9,7 @@
 #include "view/StagePanel.h"
 
 #include <rapidxml-1.13/rapidxml_utils.hpp>
+#include <easyanim.h>
 
 namespace eanim
 {
@@ -145,6 +146,47 @@ void FileIO::loadFlash(const wxString& filepath)
 
 	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(Context::Instance()->library);
 	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+}
+
+void FileIO::storeAsGif(const wxString& src, const wxString& dst)
+{
+	if (!d2d::FileNameParser::isType(src, d2d::FileNameParser::e_anim)) {
+		return;
+	}
+
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(src.fn_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	std::string name = value["name"].asString();
+	if (name.empty()) {
+		return;
+	}
+	d2d::Snapshoot ss;
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
+	anim::Symbol* anim = static_cast<anim::Symbol*>(symbol);
+
+	int max_frame = anim->getMaxFrameIndex();
+	int width = symbol->getSize().xLength();
+	int height = symbol->getSize().yLength();
+	AnimatedGifSaver saver(width, height);
+	for (int i = 0; i < max_frame; ++i)
+	{
+		unsigned char* rgba = ss.outputAnimToMemory(anim, i + 1, true);
+		unsigned char* rgb = formatRGBA(rgba, width, height);
+		saver.AddFrame(rgb, 1 / 30.0f);
+		delete[] rgba;
+		delete[] rgb;
+	}
+//	std::string filename = dst + "//" + name + ".gif";
+//	saver.Save(filename.c_str());
+	saver.Save(dst.c_str());
+
+	symbol->release();
 }
 
 void FileIO::loadResource(const Json::Value& resValue)
@@ -495,6 +537,21 @@ Json::Value FileIO::storeSkeleton(const SkeletonData& skeleton)
 	}
 
 	return value;
+}
+
+unsigned char* FileIO::formatRGBA(const unsigned char* rgba, int width, int height)
+{
+	int ptr = 0;
+	unsigned char* ret = new unsigned char[width * height * 3];
+	for (int i = 0; i < height; ++i) {
+		for (int j = 0; j < width; ++j) {
+			int p = ((height - 1 - i) * width + j) * 4;
+			ret[ptr++] = rgba[p++];
+			ret[ptr++] = rgba[p++];
+			ret[ptr++] = rgba[p++];
+		}
+	}
+	return ret;
 }
 
 } // eanim
