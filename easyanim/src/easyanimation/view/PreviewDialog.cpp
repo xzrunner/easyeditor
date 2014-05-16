@@ -7,6 +7,7 @@ namespace eanim
 
 PreviewDialog::PreviewDialog(wxWindow* parent)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
+	, m_control(0.033f)
 {
 	initLayout();
 }

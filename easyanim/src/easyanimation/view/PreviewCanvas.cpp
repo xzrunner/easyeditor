@@ -23,7 +23,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 	, m_control(control)
 	, m_settings(settings)
 {
-	m_timer.Start(1000 / Context::Instance()->fps);
+	m_timer.Start(10);
 }
 
 void PreviewCanvas::initGL()
@@ -40,8 +40,9 @@ void PreviewCanvas::onDraw()
 
 void PreviewCanvas::onTimer(wxTimerEvent& event)
 {
+	bool refresh = false;
 	if (!m_settings.isStop) {
-		m_control.update();
+		refresh = m_control.update();
 	}
 
 	if (m_control.frame() >= Context::Instance()->layers.getFrameCount())
@@ -54,7 +55,9 @@ void PreviewCanvas::onTimer(wxTimerEvent& event)
 		}
 	}
 
-	Refresh();
+	if (refresh) {
+		Refresh();
+	}
 }
 
 // todo: waste time!

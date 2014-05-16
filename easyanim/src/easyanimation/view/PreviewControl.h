@@ -7,10 +7,29 @@ namespace eanim
 class PreviewControl
 {
 public:
-	PreviewControl() : m_curr_frame(1) {}
+	PreviewControl(float dt) 
+		: m_curr_frame(1), m_last(-1)
+	{
+		m_dt = dt * CLOCKS_PER_SEC;
+	}
 
-	void update() {
-		++m_curr_frame;
+	bool update() {
+		bool refresh = false;
+
+		if (m_last == -1) {
+			m_last = clock();
+		} else {
+			clock_t curr = clock();
+			int dt = curr - m_last;
+			while (dt > m_dt) {
+				dt -= m_dt;
+				++m_curr_frame;
+				refresh = true;
+			}
+			m_last = curr - dt;
+		}
+
+		return refresh;
 	}
 
 	void reset() {
@@ -27,6 +46,10 @@ public:
 
 private:
 	int m_curr_frame;
+
+	clock_t m_last;
+
+	int m_dt;
 
 }; // PreviewControl
 
