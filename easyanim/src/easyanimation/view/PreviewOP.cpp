@@ -1,12 +1,13 @@
 #include "PreviewOP.h"
 #include "PreviewSettings.h"
-#include "PreviewControl.h"
+
+#include <easyanim.h>
 
 namespace eanim
 {
 
 PreviewOP::PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings,
-					 PreviewControl& control)
+					 anim::PreviewControl& control)
 	: d2d::ZoomViewOP(editPanel, true, true, false)
 	, m_settings(settings)
 	, m_control(control)

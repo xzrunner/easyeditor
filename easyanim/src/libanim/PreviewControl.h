@@ -1,7 +1,7 @@
-#ifndef _EASYANIM_PREVIEW_CONTROL_H_
-#define _EASYANIM_PREVIEW_CONTROL_H_
+#ifndef _LIBANIM_PREVIEW_CONTROL_H_
+#define _LIBANIM_PREVIEW_CONTROL_H_
 
-namespace eanim
+namespace anim
 {
 
 class PreviewControl
@@ -55,4 +55,4 @@ private:
 
 }
 
-#endif // _EASYANIM_PREVIEW_CONTROL_H_
+#endif // _LIBANIM_PREVIEW_CONTROL_H_

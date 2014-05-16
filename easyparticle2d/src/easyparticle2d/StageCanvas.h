@@ -31,6 +31,7 @@ private:
 	StagePanel* m_stage;
 
 	wxTimer m_timer;
+	clock_t m_last;
 
 	DECLARE_EVENT_TABLE()
 

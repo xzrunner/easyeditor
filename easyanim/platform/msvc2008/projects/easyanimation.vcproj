@@ -324,10 +324,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyanimation\view\PreviewControl.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easyanimation\view\PreviewDialog.cpp"
 					>
 				</File>

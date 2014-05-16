@@ -4,6 +4,7 @@
 #include <wx/wx.h>
 
 #include "Symbol.h"
+#include "PreviewControl.h"
 
 namespace anim
 {
@@ -50,6 +51,8 @@ private:
 	d2d::LibraryPanel* m_library;
 
 	const Symbol* m_symbol;
+
+	PreviewControl m_control;
 
 	DECLARE_EVENT_TABLE()
 

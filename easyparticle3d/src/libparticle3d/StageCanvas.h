@@ -2,6 +2,7 @@
 #define _EASYPARTICLE3D_STAGE_CANVAS_H_
 
 #include <drag2d.h>
+#include <easyanim.h>
 
 namespace eparticle3d
 {
@@ -32,6 +33,9 @@ private:
 
 	wxTimer m_timer;
 	int m_currFrame;
+	clock_t m_last;
+
+	anim::PreviewControl m_control;
 
 	DECLARE_EVENT_TABLE()
 

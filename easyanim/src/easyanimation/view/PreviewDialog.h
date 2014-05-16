@@ -2,9 +2,9 @@
 
 #include <wx/wx.h>
 #include <drag2d.h>
+#include <easyanim.h>
 
 #include "PreviewSettings.h"
-#include "PreviewControl.h"
 
 namespace eanim
 {
@@ -28,7 +28,7 @@ namespace eanim
 
 		PlaySettings m_settings;
 
-		PreviewControl m_control;
+		anim::PreviewControl m_control;
 
 	}; // PreviewDialog
 }

@@ -15,8 +15,9 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
 	, m_timer(this, TIMER_ID)
 	, m_library(library)
 	, m_symbol(symbol)
+	, m_control(1.0f / symbol->m_fps)
 {
-	m_timer.Start(1000 / symbol->m_fps);
+	m_timer.Start(10);
 	m_currFrame = 1;
 }
 
@@ -39,17 +40,24 @@ void PreviewCanvas::onDraw()
 
 void PreviewCanvas::onTimer(wxTimerEvent& event)
 {
-	if (!m_setting.isStop)
-		++m_currFrame;
-
-	if (m_currFrame >= m_symbol->getMaxFrameIndex())
-	{
-		if (m_setting.isCirculate) 
-			m_currFrame = 1;
-		else 
-			--m_currFrame;
+	bool refresh = false;
+	if (!m_setting.isStop) {
+		refresh = m_control.update();
 	}
 
-	Refresh();
+	if (m_control.frame() >= m_symbol->getMaxFrameIndex())
+	{
+		if (m_setting.isCirculate) {
+			m_control.reset();
+		}
+		else {
+			m_control.decrease();
+		}
+	}
+
+	if (refresh) {
+		Refresh();
+	}
 }
+
 } // anim

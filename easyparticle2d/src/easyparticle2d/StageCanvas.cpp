@@ -17,6 +17,7 @@ StageCanvas::StageCanvas(StagePanel* editPanel)
 	m_bgColor.set(0, 0, 0, 1);
 
 	m_timer.Start(1000 / FRAME_RATE);
+	m_last = -1;
 }
 
 StageCanvas::~StageCanvas()
@@ -36,10 +37,19 @@ void StageCanvas::onDraw()
 
 void StageCanvas::onTimer(wxTimerEvent& event)
 {
-	if (m_stage->m_particle)
-		m_stage->m_particle->update(1.0f / FRAME_RATE);
+	if (m_last == -1) {
+		m_last = clock();
+	} else {
+		clock_t curr = clock();
+		int dt = curr - m_last;
+		m_last = curr;
 
-	Refresh();
+		if (m_stage->m_particle) {
+			m_stage->m_particle->update((float)dt / CLOCKS_PER_SEC);
+		}
+
+		Refresh();
+	}
 }
 
 }

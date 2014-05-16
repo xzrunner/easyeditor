@@ -3,17 +3,18 @@
 #include <drag2d.h>
 #include <wx/wx.h>
 
+namespace anim { class PreviewControl; }
+
 namespace eanim
 {
 
 struct PlaySettings;
-class PreviewControl;
 
 class PreviewCanvas : public d2d::OrthoCanvas
 {
 public:
 	PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
-		PreviewControl& control);
+		anim::PreviewControl& control);
 
 protected:
 	virtual void initGL();
@@ -34,7 +35,7 @@ private:
 
 private:
 	wxTimer m_timer;
-	PreviewControl& m_control;
+	anim::PreviewControl& m_control;
 
 	const PlaySettings& m_settings;
 
