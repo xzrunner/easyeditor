@@ -18,7 +18,7 @@ void ActorInfo::resetOffset()
 		if (shape->shapes.empty())
 			return;
 
-		if (d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(shape->shapes[0]))
+		if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape->shapes[0]))
 		{
 			const std::vector<d2d::Vector>& vertices = chain->getVertices();
 			if (vertices.front().y > vertices.back().y)

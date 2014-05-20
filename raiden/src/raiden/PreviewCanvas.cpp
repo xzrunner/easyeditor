@@ -185,7 +185,7 @@ PreviewCanvas::Sprite::Sprite(d2d::ISprite* sprite)
  	const libshape::Symbol* symbol = static_cast<const libshape::Symbol*>(info->symbol);
  	if (symbol && !symbol->shapes.empty())
  	{
- 		d2d::ChainShape* chain = dynamic_cast<d2d::ChainShape*>(symbol->shapes[0]);
+		libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(symbol->shapes[0]);
  		if (chain) 
  			lines = chain->getVertices();
  	}

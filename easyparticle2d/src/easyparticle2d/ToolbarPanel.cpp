@@ -4,6 +4,7 @@
 #include "Context.h"
 
 #include <wx/spinctrl.h>
+#include <wx/colordlg.h>
 
 namespace eparticle2d
 {
