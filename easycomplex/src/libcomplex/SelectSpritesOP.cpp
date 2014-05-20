@@ -7,6 +7,7 @@
 #include <easyscale9.h>
 #include <easymesh.h>
 #include <easyscale9.h>
+#include <easyanim.h>
 
 namespace ecomplex
 {
@@ -36,12 +37,13 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 // 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
 // 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
-	//else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(selected))
-	//{
- //		anim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
- //		dlg.ShowModal();
- //		Context::Instance()->stage->resetCanvas();
-	//}
+	else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(selected))
+	{
+ 		anim::PreviewDialog dlg(m_editPanel, &anim->getSymbol());
+ 		dlg.ShowModal();
+
+ 		m_editPanel->resetCanvas();
+	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->getSymbol());

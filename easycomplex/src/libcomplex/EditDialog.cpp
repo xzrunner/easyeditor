@@ -38,14 +38,14 @@ namespace ecomplex
 		wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
 		wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
 
-		ecomplex::LibraryPanel* library 
-			= new ecomplex::LibraryPanel(leftHorizontalSplitter);
-		m_library = library;
+		ecomplex::LibraryPanel* library = new ecomplex::LibraryPanel(leftHorizontalSplitter);
+		library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 		d2d::PropertySettingPanel* property 
 			= new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
-		StagePanel* stage = new StagePanel(leftVerticalSplitter, this, m_symbol, property, library);
+		StagePanel* stage = new StagePanel(leftVerticalSplitter, this, m_symbol, property, 
+			static_cast<ecomplex::LibraryPanel*>(library));
 		m_stage = stage;
 		property->setPropertySetting(new ecomplex::PropertySetting(stage, m_symbol));
 

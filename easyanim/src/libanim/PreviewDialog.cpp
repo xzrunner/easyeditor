@@ -5,10 +5,8 @@
 namespace anim
 {
 
-PreviewDialog::PreviewDialog(wxWindow* parent, d2d::LibraryPanel* library,
-							 const Symbol* symbol)
+PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* symbol)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
-	, m_library(library)
 	, m_symbol(symbol)
 {
 	initLayout();
@@ -48,7 +46,7 @@ void PreviewDialog::buildEditPanel(wxSizer* topSizer)
 {
 	m_stage = new d2d::EditPanel(this, this);
 	m_stage->setEditOP(new d2d::ZoomViewOP(m_stage, false));
-	m_stage->setCanvas(new PreviewCanvas(m_stage, m_library, m_symbol));
+	m_stage->setCanvas(new PreviewCanvas(m_stage, m_symbol));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 

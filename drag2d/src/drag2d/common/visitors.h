@@ -86,5 +86,20 @@ namespace d2d
 		std::vector<wxString>& m_names;
 
 	}; // GetNameVisitor
+
+	template <typename T>
+	class ReloadTextureVisitor : public IVisitor
+	{
+	public:
+		virtual void visit(Object* object, bool& bFetchNext)
+		{
+			T* item = dynamic_cast<T*>(object);
+			if (item) {
+				item->reloadTexture();
+			}
+			bFetchNext = true;
+		}
+
+	}; // ReloadTextureVisitor
 }
 

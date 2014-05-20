@@ -19,7 +19,6 @@ namespace ecomplex
 		void loadSymbolInfo();
 
 	private:
-		d2d::LibraryPanel* m_library;
 		d2d::EditPanel* m_stage;
 		d2d::ViewlistPanel* m_viewlist;
 

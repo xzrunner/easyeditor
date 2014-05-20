@@ -11,8 +11,7 @@ class Symbol;
 class PreviewDialog : public wxDialog
 {
 public:
-	PreviewDialog(wxWindow* parent, d2d::LibraryPanel* library,
-		const Symbol* symbol);
+	PreviewDialog(wxWindow* parent, const Symbol* symbol);
 	~PreviewDialog();
 
 private:
@@ -26,7 +25,6 @@ private:
 
 private:
 	d2d::EditPanel* m_stage;
-	d2d::LibraryPanel* m_library;
 
 	const Symbol* m_symbol;
 
