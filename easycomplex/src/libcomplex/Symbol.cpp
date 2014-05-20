@@ -15,6 +15,7 @@ Symbol::Symbol()
 	m_name = FILE_TAG + wxVariant(id++);
 
 	m_clipbox.xMin = m_clipbox.xMax = m_clipbox.yMin = m_clipbox.yMax = 0;
+	m_style.color.set(0, 0.8f, 0);
 }
 
 Symbol::~Symbol()
@@ -37,6 +38,8 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		d2d::SpriteDraw::drawSprite(m_sprites[i], mul, add);
+
+	d2d::PrimitiveDraw::rect(m_clipbox, m_style);
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

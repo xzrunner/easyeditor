@@ -64,6 +64,7 @@ public:
 	d2d::Rect m_rect;
 
 	d2d::Rect m_clipbox;
+	d2d::ShapeStyle m_style;
 
 }; // Symbol
 
