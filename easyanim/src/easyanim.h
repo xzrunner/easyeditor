@@ -9,3 +9,5 @@
 #include "libanim/Symbol.h"
 #include "libanim/LibraryPage.h"
 #include "libanim/PreviewControl.h"
+#include "libanim/Symbol.h"
+#include "libanim/Sprite.h"

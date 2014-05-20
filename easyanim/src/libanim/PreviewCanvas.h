@@ -25,8 +25,7 @@ public:
 	};
 
 public:
-	PreviewCanvas(d2d::EditPanel* stage, d2d::LibraryPanel* library,
-		const Symbol* symbol);
+	PreviewCanvas(d2d::EditPanel* stage, const Symbol* symbol);
 
 	PlaySetting& getPlaySetting();
 
@@ -44,11 +43,8 @@ private:
 
 private:
 	wxTimer m_timer;
-	int m_currFrame;
 
 	PlaySetting m_setting;
-
-	d2d::LibraryPanel* m_library;
 
 	const Symbol* m_symbol;
 

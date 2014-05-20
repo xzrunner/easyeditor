@@ -36,7 +36,6 @@ namespace ecomplex
 
 	private:
 		wxTimer m_timer;
-		int m_currFrame;
 
 		d2d::ShapeStyle m_bgStyle, m_clipboxStyle;
 

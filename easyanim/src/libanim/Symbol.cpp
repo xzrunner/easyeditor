@@ -1,5 +1,6 @@
 #include "Symbol.h"
 #include "config.h"
+#include "Tools.h"
 
 #include <easycomplex.h>
 
@@ -34,33 +35,14 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
-	int index = d2d::SpriteDraw::time / (1.0f / m_fps);
-	index = (index + 1) % getMaxFrameIndex();
-
-	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		if (!layer->frames.empty())
-		{
-			Frame* frame = NULL;
-			for (int i = layer->frames.size() - 1; i >= 0; --i)
-			{
-				if (layer->frames[i]->index <= index)
-				{
-					frame = layer->frames[i];
-					break;
-				}
-			}
-
-			if (frame)
-			{
-				for (size_t j = 0, m = frame->sprites.size(); j < m; ++j)
-				{
-					d2d::ISprite* sprite = frame->sprites[j];
-					d2d::SpriteDraw::drawSprite(sprite, mul, add);
-				}
-			}
-		}
+	static clock_t init = 0;
+	if (init == 0) {
+		init = clock();
+	} else {
+		clock_t curr = clock();
+		float during = (float)(curr - init) / CLOCKS_PER_SEC;
+		int index = during / (1.0f / m_fps);
+		anim::Tools::drawAnimSymbol(this, index % getMaxFrameIndex() + 1, mul, add);
 	}
 }
 

@@ -18,7 +18,6 @@ namespace ecomplex
 		, m_background(NULL)
 	{
 		m_timer.Start(1000 / 30);
-		m_currFrame = 1;
 
 		m_bgStyle.color.set(0.8f, 0.8f, 0.8f);
 		m_clipboxStyle.color.set(0, 0.8f, 0);
@@ -50,14 +49,7 @@ namespace ecomplex
 			d2d::ISprite* sprite = sprites[i];
 			if (!sprite->visiable)
 				continue;
-			if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(sprite))
-			{
-				d2d::SpriteDraw::begin(sprite);
-				anim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame, anim->multiCol, anim->addCol);
-				d2d::SpriteDraw::end(sprite);
-			}
-			else
-				d2d::SpriteDraw::drawSprite(sprites[i]);
+			d2d::SpriteDraw::drawSprite(sprite, sprite->multiCol, sprite->addCol);
 		}
 
 		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
@@ -73,16 +65,6 @@ namespace ecomplex
 
 	void StageCanvas::onTimer(wxTimerEvent& event)
 	{
-		std::vector<anim::Sprite*> sprites;
-		m_editPanel->traverseSprites(d2d::FetchAllVisitor<anim::Sprite>(sprites));
-		size_t max = 0;
-		for (size_t i = 0, n = sprites.size(); i < n; ++i)
-			max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());
-
-		++m_currFrame;
-		if (m_currFrame >= max)
-			m_currFrame = 1;
-
 		Refresh();
 	}
 

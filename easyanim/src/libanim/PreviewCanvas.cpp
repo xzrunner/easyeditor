@@ -9,16 +9,13 @@ BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
 END_EVENT_TABLE()
 
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
-							 d2d::LibraryPanel* library,
 							 const Symbol* symbol)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
-	, m_library(library)
 	, m_symbol(symbol)
 	, m_control(1.0f / symbol->m_fps)
 {
 	m_timer.Start(10);
-	m_currFrame = 1;
 }
 
 PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
@@ -29,13 +26,12 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 void PreviewCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
-//	static_cast<d2d::LibraryPanel*>(Context::Instance()->library)->reloadTexture();
-	m_library->reloadTexture();
+	d2d::SymbolMgr::Instance()->traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
 }
 
 void PreviewCanvas::onDraw()
 {
-	Tools::drawAnimSymbol(m_symbol, m_currFrame);
+	d2d::SpriteDraw::drawSprite(m_symbol, d2d::Vector(0, 0));
 }
 
 void PreviewCanvas::onTimer(wxTimerEvent& event)
