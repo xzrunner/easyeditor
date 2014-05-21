@@ -169,7 +169,7 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 		byte* rgba = ss.outputToMemory(symbol, true);
 
 		byte* rgb = eimage::RGBA2RGB(rgba, width, height, true);
-		saver.AddFrame(rgb, 1);
+		saver.AddFrame(rgb, 1.0f / anim->m_fps);
 		delete[] rgba;
 		delete[] rgb;
 	}
