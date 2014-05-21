@@ -20,7 +20,7 @@ PreviewDialog::~PreviewDialog()
 void PreviewDialog::initLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-	buildToolBar(sizer);
+//	buildToolBar(sizer);
 	buildEditPanel(sizer);
 	SetSizer(sizer);
 }
