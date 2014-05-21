@@ -8,6 +8,7 @@ namespace anim
 {
 
 Symbol::Symbol()
+	: m_index(0)
 {
 	static int id = 0;
 	m_name = eanim::FILE_TAG + wxVariant(id++);
@@ -35,14 +36,18 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
-	static clock_t init = 0;
-	if (init == 0) {
-		init = clock();
+	if (m_index != 0) {
+		Tools::drawAnimSymbol(this, m_index, mul, add);
 	} else {
-		clock_t curr = clock();
-		float during = (float)(curr - init) / CLOCKS_PER_SEC;
-		int index = during / (1.0f / m_fps);
-		anim::Tools::drawAnimSymbol(this, index % getMaxFrameIndex() + 1, mul, add);
+		static clock_t init = 0;
+		if (init == 0) {
+			init = clock();
+		} else {
+			clock_t curr = clock();
+			float during = (float)(curr - init) / CLOCKS_PER_SEC;
+			int index = during / (1.0f / m_fps);
+			Tools::drawAnimSymbol(this, index % getMaxFrameIndex() + 1, mul, add);
+		}
 	}
 }
 
@@ -139,6 +144,8 @@ void Symbol::clear()
 		delete layer;
 	}
 	m_layers.clear();
+
+	m_index = 0;
 }
 
 void Symbol::initBounding()

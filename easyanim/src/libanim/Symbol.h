@@ -51,6 +51,10 @@ public:
 
 	size_t getMaxFrameIndex() const;
 
+	void setFrameIndex(int index) {
+		m_index = index;
+	}
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
@@ -69,6 +73,9 @@ public:
 	d2d::Rect m_rect;
 
 	int m_fps;
+
+private:
+	int m_index; // for draw certain frame
 
 }; // Symbol
 

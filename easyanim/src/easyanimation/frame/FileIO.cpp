@@ -165,12 +165,15 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 	AnimatedGifSaver saver(width, height);
 	for (int i = 0; i < max_frame; ++i)
 	{
-		byte* rgba = ss.outputAnimToMemory(anim, i + 1, true);
+		anim->setFrameIndex(i + 1);
+		byte* rgba = ss.outputToMemory(symbol, true);
+
 		byte* rgb = eimage::RGBA2RGB(rgba, width, height, true);
-		saver.AddFrame(rgb, 1 / 30.0f);
+		saver.AddFrame(rgb, 1);
 		delete[] rgba;
 		delete[] rgb;
 	}
+	anim->setFrameIndex(0);
 	saver.Save(dst.c_str());
 
 	symbol->release();

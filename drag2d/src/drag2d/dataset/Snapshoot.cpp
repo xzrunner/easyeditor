@@ -53,24 +53,6 @@ unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg) co
 	return pixels;
 }
 
-unsigned char* Snapshoot::outputAnimToMemory(const anim::Symbol* symbol, int index, bool whitebg) const
-{
-	drawAnimFBO(symbol, index, whitebg);
-
-	int w = symbol->getSize().xLength(),
-		h = symbol->getSize().yLength();
-	size_t size = w*h*4;
-	unsigned char* pixels = new unsigned char[size];
-	if(!pixels) return NULL;
-	memset(&pixels[0], 0, size);	
-
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-
-	return pixels;
-}
-
 void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& filename) const
 {
 	int w = symbol->getSize().xLength(),
@@ -167,41 +149,6 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg) const
 	glLoadIdentity();
 
 	SpriteDraw::drawSprite(symbol, d2d::Vector(0, 0));
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-}
-
-void Snapshoot::drawAnimFBO(const anim::Symbol* symbol, int index, bool whitebg /*= false*/) const
-{
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-
-	if (whitebg) {
-		glClearColor(1, 1, 1, 1);
-	} else {
-		glClearColor(0, 0, 0, 0);
-	}	
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	d2d::Rect rect = symbol->getSize();
-	int w = rect.xLength(),
-		h = rect.yLength();
-	glViewport(0, 0, w, h);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-
-	glOrtho(
-		rect.xMin,
-		rect.xMax,
-		rect.yMax,
-		rect.yMin,
-		0,
-		1
-		);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	anim::Tools::drawAnimSymbol(symbol, index);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 

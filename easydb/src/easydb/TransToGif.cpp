@@ -48,12 +48,15 @@ void TransToGif::trigger(const std::string& srcdir, const std::string& dstdir)
 			AnimatedGifSaver saver(width, height);
 			for (int i = 0; i < max_frame; ++i)
 			{
-				byte* rgba = ss.outputAnimToMemory(anim, i + 1, true);
+				anim->setFrameIndex(i + 1);
+				byte* rgba = ss.outputToMemory(symbol, true);
+
 				byte* rgb = eimage::RGBA2RGB(rgba, width, height, true);
 				saver.AddFrame(rgb, 1 / 30.0f);
 				delete[] rgba;
 				delete[] rgb;
 			}
+			anim->setFrameIndex(0);
 			std::string filename = dstdir + "//" + name + ".gif";
 			saver.Save(filename.c_str());
 			
