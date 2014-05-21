@@ -4,10 +4,16 @@
 namespace eanim
 {
 
+BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
+	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
+END_EVENT_TABLE()
+
 StageCanvas::StageCanvas(d2d::EditPanel* stage)
 	: d2d::OrthoCanvas(stage)
+	, m_timer(this, TIMER_ID)
 	, m_background(NULL)
 {
+	m_timer.Start(1000 / 30);
 }
 
 StageCanvas::~StageCanvas()
@@ -26,6 +32,11 @@ void StageCanvas::onDraw()
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteDraw::drawSprite(sprites[i]);
 	m_editPanel->drawEditTemp();
+}
+
+void StageCanvas::onTimer(wxTimerEvent& event)
+{
+	Refresh();
 }
 
 void StageCanvas::drawbackground() const

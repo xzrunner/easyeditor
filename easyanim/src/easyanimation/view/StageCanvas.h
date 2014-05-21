@@ -19,6 +19,8 @@ namespace eanim
 	protected:
 		virtual void onDraw();
 
+		void onTimer(wxTimerEvent& event);
+
 		void onMouse(wxMouseEvent& event);
 		void onKeyDown(wxKeyEvent& event);
 
@@ -26,7 +28,17 @@ namespace eanim
 		void drawbackground() const;
 
 	private:
+		enum
+		{
+			TIMER_ID = 1000
+		};
+
+	private:
+		wxTimer m_timer;
+
 		d2d::Image* m_background;
+
+		DECLARE_EVENT_TABLE()
 
 	}; // StageCanvas
 }
