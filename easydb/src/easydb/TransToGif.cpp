@@ -52,7 +52,7 @@ void TransToGif::trigger(const std::string& srcdir, const std::string& dstdir)
 				byte* rgba = ss.outputToMemory(symbol, true);
 
 				byte* rgb = eimage::RGBA2RGB(rgba, width, height, true);
-				saver.AddFrame(rgb, 1.0f / anim->m_fps);
+				saver.AddFrame(rgb, 1.0f / anim->getFPS());
 				delete[] rgba;
 				delete[] rgb;
 			}

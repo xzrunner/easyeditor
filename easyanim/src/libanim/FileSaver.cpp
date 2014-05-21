@@ -9,7 +9,7 @@ void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 
 	value["name"] = symbol.name;
 
-	value["fps"] = symbol.m_fps;
+	value["fps"] = symbol.getFPS();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)

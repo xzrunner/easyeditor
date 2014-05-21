@@ -13,7 +13,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
 	, m_symbol(symbol)
-	, m_control(1.0f / symbol->m_fps)
+	, m_control(1.0f / symbol->getFPS())
 {
 	m_timer.Start(10);
 }

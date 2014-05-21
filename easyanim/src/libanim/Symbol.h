@@ -55,6 +55,9 @@ public:
 		m_index = index;
 	}
 
+	int getFPS() const { return m_fps; }
+	void setFPS(int fps) { m_fps = fps; }
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
@@ -70,11 +73,11 @@ private:
 public:
 	std::vector<Layer*> m_layers;
 
+private:
 	d2d::Rect m_rect;
 
 	int m_fps;
 
-private:
 	int m_index; // for draw certain frame
 
 }; // Symbol
