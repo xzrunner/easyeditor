@@ -78,7 +78,6 @@ void ParticleSystem::draw()
 
 		float s = (p->life / p->lifetime) * (p->pc->start_scale - p->pc->end_scale) + p->pc->end_scale;
 
-		d2d::SpriteDraw::time = p->lifetime - p->life;
 		d2d::SpriteDraw::drawSprite(p->pc->symbol, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
 
 		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), x, y, p->angle, s, multi);
