@@ -136,7 +136,16 @@ d2d::Rect ImageProcessor::trim() const
 		}
 	}
 
-	return sub;
+	if (sub.isValid()) {
+		return sub;
+	} else {
+		const d2d::Rect& r = m_image->getRegion();
+		d2d::Rect ret;
+		ret.xMin = ret.yMin = 0;
+		ret.xMax = r.xLength();
+		ret.yMax = r.yLength();
+		return ret;
+	}
 }
 
 bool ImageProcessor::isTransparent(int x, int y) const
