@@ -1,15 +1,25 @@
 #ifndef _EASYDB_REVERSE_ANIMATION_H_
 #define _EASYDB_REVERSE_ANIMATION_H_
 
-#include <string>
+#include "ICommand.h"
 
 namespace edb
 {
 
-class ReverseAnimation
+class ReverseAnimation : public ICommand
 {
 public:
-	ReverseAnimation(const std::string& dir);
+	ReverseAnimation() {}
+
+	//
+	// interface ITask
+	//
+	virtual std::string Command() const;
+	virtual std::string Description() const;
+	virtual std::string Usage() const;
+	virtual void Run(int argc, char *argv[]);
+
+	static ICommand* Create() { return new ReverseAnimation(); }
 
 private:
 	void Trigger(const std::string& dir) const;

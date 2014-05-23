@@ -1,4 +1,5 @@
 #include "FormatJsonFile.h"
+#include "check_params.h"
 
 #include <wx/wx.h>
 #include <drag2d.h>
@@ -6,7 +7,32 @@
 namespace edb
 {
 
-void FormatJsonFile::implement(const std::string& dir)
+std::string FormatJsonFile::Command() const
+{
+	return "format-json";
+}
+
+std::string FormatJsonFile::Description() const
+{
+	return "format json file, load and store";
+}
+
+std::string FormatJsonFile::Usage() const
+{
+	// format-json e:/test2/1001
+
+	return Command() + " [dir path]";
+}
+
+void FormatJsonFile::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 3)) return;
+	if (!check_folder(argv[2])) return;
+
+	Trigger(argv[2]);
+}
+
+void FormatJsonFile::Trigger(const std::string& dir) const
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);

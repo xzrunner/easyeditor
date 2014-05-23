@@ -1,15 +1,28 @@
 #ifndef _EASYDB_PACK_PARTICLE3D_H_
 #define _EASYDB_PACK_PARTICLE3D_H_
 
-#include <string>
+#include "ICommand.h"
 
 namespace edb
 {
 
-class PackParticle3D
+class PackParticle3D : public ICommand
 {
 public:
-	static void Pack(const std::string& dir, const std::string& out);
+	PackParticle3D() {}
+
+	//
+	// interface ITask
+	//
+	virtual std::string Command() const;
+	virtual std::string Description() const;
+	virtual std::string Usage() const;
+	virtual void Run(int argc, char *argv[]);
+
+	static ICommand* Create() { return new PackParticle3D(); }
+
+private:
+	void Trigger(const std::string& dir, const std::string& out);
 
 }; // PackParticle3D
 

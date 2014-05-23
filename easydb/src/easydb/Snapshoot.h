@@ -1,15 +1,28 @@
 #ifndef _EASYDB_SNAPSHOOT_H_
 #define _EASYDB_SNAPSHOOT_H_
 
-#include <drag2d.h>
+#include "ICommand.h"
 
 namespace edb
 {
 
-class Snapshoot
+class Snapshoot : public ICommand
 {
 public:
-	static void trigger(const std::string& srcdir, const std::string& dstdir);
+	Snapshoot() {}
+
+	//
+	// interface ITask
+	//
+	virtual std::string Command() const;
+	virtual std::string Description() const;
+	virtual std::string Usage() const;
+	virtual void Run(int argc, char *argv[]);
+
+	static ICommand* Create() { return new Snapshoot(); }
+
+private:
+	void Trigger(const std::string& srcdir, const std::string& dstdir) const;
 
 }; // Snapshoot
 

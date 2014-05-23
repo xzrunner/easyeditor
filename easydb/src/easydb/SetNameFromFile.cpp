@@ -1,4 +1,5 @@
-#include "FixAnimation.h"
+#include "SetNameFromFile.h"
+#include "check_params.h"
 
 #include <wx/wx.h>
 #include <drag2d.h>
@@ -6,12 +7,32 @@
 namespace edb
 {
 
-FixAnimation::FixAnimation(const std::string& dir)
+std::string SetNameFromFile::Command() const
 {
-	AddNameFromFile(dir);
+	return "set-name";
 }
 
-void FixAnimation::AddNameFromFile(const std::string& dir) const
+std::string SetNameFromFile::Description() const
+{
+	return "set \"name\" from filename";
+}
+
+std::string SetNameFromFile::Usage() const
+{
+	// set-name E:\test2\1001
+
+	return Command() + " [dir path]";
+}
+
+void SetNameFromFile::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 3)) return;
+	if (!check_folder(argv[2])) return;
+
+	AddNameFromFile(argv[2]);
+}
+
+void SetNameFromFile::AddNameFromFile(const std::string& dir) const
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);

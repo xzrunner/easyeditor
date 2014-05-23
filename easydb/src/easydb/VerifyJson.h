@@ -1,18 +1,33 @@
-#pragma once
+#ifndef _EASYDB_VERIFY_JSON_H_
+#define _EASYDB_VERIFY_JSON_H_
 
-#include <string>
+#include "ICommand.h"
+
 #include <map>
 #include <set>
 #include <vector>
 
-namespace edb {
+namespace edb 
+{
 
-class VerifyJsons
+class VerifyJson : public ICommand
 {
 public:
-	VerifyJsons(const std::string& dirpath);
+	VerifyJson() {}
+
+	//
+	// interface ITask
+	//
+	virtual std::string Command() const;
+	virtual std::string Description() const;
+	virtual std::string Usage() const;
+	virtual void Run(int argc, char *argv[]);
+
+	static ICommand* Create() { return new VerifyJson(); }
 
 private:
+	void Trigger(const std::string& dirpath);
+
 	void InitFiles(const std::string& dirpath);
 
 	void VerifyExport();
@@ -66,3 +81,5 @@ private:
 }; // VerifyJsons
 
 }
+
+#endif // _EASYDB_VERIFY_JSON_H_

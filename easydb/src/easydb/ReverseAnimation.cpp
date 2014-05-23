@@ -1,4 +1,5 @@
 #include "ReverseAnimation.h"
+#include "check_params.h"
 
 #include <wx/wx.h>
 #include <drag2d.h>
@@ -6,9 +7,29 @@
 namespace edb
 {
 
-ReverseAnimation::ReverseAnimation(const std::string& dir)
+std::string ReverseAnimation::Command() const
 {
-	Trigger(dir);
+	return "reverse-anim";
+}
+
+std::string ReverseAnimation::Description() const
+{
+	return "reverse anim's all frames";
+}
+
+std::string ReverseAnimation::Usage() const
+{
+	// reverse-anim E:\test2\1001
+
+	return Command() + " [dir path]";
+}
+
+void ReverseAnimation::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 3)) return;
+	if (!check_folder(argv[2])) return;
+
+	Trigger(argv[2]);
 }
 
 void ReverseAnimation::Trigger(const std::string& dir) const

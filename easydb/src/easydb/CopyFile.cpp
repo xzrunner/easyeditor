@@ -1,18 +1,61 @@
-#include "CopyFiles.h"
+#include "CopyFile.h"
+#include "check_params.h"
 
 #include <drag2d.h>
 
 namespace edb
 {
 
-CopyFiles::CopyFiles(const std::string& src_dir, const std::string& dst_dir)
-	: m_src_dir(src_dir)
-	, m_dst_dir(dst_dir)
+std::string CopyFile::Command() const
 {
+	return "copy";
+}
+
+std::string CopyFile::Description() const
+{
+	return "copy files";
+}
+
+std::string CopyFile::Usage() const
+{
+	std::string usage = Command() + " [src path] [dst path] [options] <parms>";
+	usage += "-l, --list \t copy by file list of export names: [file path]";
+	return usage;
+}
+
+void CopyFile::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 6)) return;
+	if (!check_folder(argv[2])) return;
+	if (!check_folder(argv[3])) return;
+
+	// todo
+	std::string opt = argv[3];
+	if (opt != "-l" || opt != "--list") {
+		std::cerr << "error opt" << std::endl;
+		std::cerr << Usage() << std::endl;
+		return;
+	}
+
+//	Trigger(argv[2]);
+
+	Init(argv[2], argv[3]);
+	if (opt == "-s" || opt == "--scale") {
+//		CopyByExportNames(argv[4], atof(argv[5]));
+	} else {
+		std::cerr << "unknown option" << std::endl;
+	}
+}
+
+void CopyFile::Init(const std::string& src_dir, const std::string& dst_dir)
+{
+	m_src_dir = src_dir;
+	m_dst_dir = dst_dir;
+
 	d2d::FilenameTools::fetchAllFiles(src_dir, m_files);
 }
 
-void CopyFiles::CopyByExportNames(const std::set<std::string>& export_names) const
+void CopyFile::CopyByExportNames(const std::set<std::string>& export_names) const
 {
 	std::set<std::string> files;
 	for (int i = 0, n = m_files.size(); i < n; ++i)
@@ -43,7 +86,7 @@ void CopyFiles::CopyByExportNames(const std::set<std::string>& export_names) con
 	Copy(files);
 }
 
-void CopyFiles::GetDependFiles(const wxString& filepath, std::set<std::string>& files) const
+void CopyFile::GetDependFiles(const wxString& filepath, std::set<std::string>& files) const
 {
 	if (files.find(filepath.ToStdString()) != files.end()) {
 		return;
@@ -109,7 +152,7 @@ void CopyFiles::GetDependFiles(const wxString& filepath, std::set<std::string>& 
 	}
 }
 
-void CopyFiles::Copy(const std::set<std::string>& files) const
+void CopyFile::Copy(const std::set<std::string>& files) const
 {
 	std::set<std::string>::const_iterator itr = files.begin();
 	for ( ; itr != files.end(); ++itr)

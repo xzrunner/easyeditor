@@ -1,4 +1,5 @@
-#include "FixImages.h"
+#include "UniqueImage.h"
+#include "check_params.h"
 
 #include <wx/wx.h>
 #include <drag2d.h>
@@ -8,14 +9,38 @@
 namespace edb
 {
 
-FixImages::FixImages(const std::string& imgdir, const std::string& jsondir)
+std::string UniqueImage::Command() const
+{
+	return "unique-image";
+}
+
+std::string UniqueImage::Description() const
+{
+	return "remove repeated images and fix links";
+}
+
+std::string UniqueImage::Usage() const
+{
+	return Command() + " [img path] [json path]";
+}
+
+void UniqueImage::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 4)) return;
+	if (!check_folder(argv[2])) return;
+	if (!check_folder(argv[3])) return;
+
+	Trigger(argv[2], argv[3]);
+}
+
+void UniqueImage::Trigger(const std::string& imgdir, const std::string& jsondir)
 {
 	ProcessImageFiles(imgdir);
 	ProcessJsonFiles(jsondir);
-	RemoveImages();
+	RemoveImages();	
 }
 
-void FixImages::ProcessImageFiles(const std::string& imgdir)
+void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(imgdir, files);
@@ -52,7 +77,7 @@ void FixImages::ProcessImageFiles(const std::string& imgdir)
 	}
 }
 
-void FixImages::ProcessJsonFiles(const std::string& jsondir)
+void UniqueImage::ProcessJsonFiles(const std::string& jsondir)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(jsondir, files);
@@ -69,7 +94,7 @@ void FixImages::ProcessJsonFiles(const std::string& jsondir)
 	}
 }
 
-void FixImages::RemoveImages()
+void UniqueImage::RemoveImages()
 {
 	for (int i = 0, n = m_to_remove.size(); i < n; ++i)
 	{
@@ -77,7 +102,7 @@ void FixImages::RemoveImages()
 	}
 }
 
-void FixImages::FixImagePath(const std::string& animpath)
+void UniqueImage::FixImagePath(const std::string& animpath)
 {
 	Json::Value value;
 	Json::Reader reader;

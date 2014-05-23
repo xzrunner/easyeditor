@@ -1,15 +1,28 @@
 #ifndef _EASYDB_TRANS_TO_GIF_H_
 #define _EASYDB_TRANS_TO_GIF_H_
 
-#include <string>
+#include "ICommand.h"
 
 namespace edb
 {
 
-class TransToGif
+class TransToGif : public ICommand
 {
 public:
-	static void trigger(const std::string& srcdir, const std::string& dstdir);
+	TransToGif() {}
+
+	//
+	// interface ITask
+	//
+	virtual std::string Command() const;
+	virtual std::string Description() const;
+	virtual std::string Usage() const;
+	virtual void Run(int argc, char *argv[]);
+
+	static ICommand* Create() { return new TransToGif(); }
+
+private:
+	void Trigger(const std::string& srcdir, const std::string& dstdir) const;
 
 }; // TransToGif
 

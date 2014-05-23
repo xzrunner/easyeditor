@@ -1,11 +1,40 @@
 #include "Snapshoot.h"
+#include "check_params.h"
 
 #include <glfw.h>
+#include <drag2d.h>
 
 namespace edb
 {
 
-void Snapshoot::trigger(const std::string& srcdir, const std::string& dstdir)
+std::string Snapshoot::Command() const
+{
+	return "snapshoot";
+}
+
+std::string Snapshoot::Description() const
+{
+	return "get snapshoot from json files";
+}
+
+std::string Snapshoot::Usage() const
+{
+	// snapshoot E:\test2\image E:\test2\image
+
+	return Command() + " [src path] [dst path]";
+}
+
+void Snapshoot::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 4)) return;
+	if (!check_folder(argv[2])) return;
+	if (!check_folder(argv[3])) return;
+
+	Trigger(argv[2], argv[3]);
+}
+
+
+void Snapshoot::Trigger(const std::string& srcdir, const std::string& dstdir) const
 {
 	glfwInit();
 	if(!glfwOpenWindow(800, 600, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))

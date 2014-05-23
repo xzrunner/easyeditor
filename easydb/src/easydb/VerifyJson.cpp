@@ -1,11 +1,36 @@
-#include "VerifyJsons.h"
+#include "VerifyJson.h"
+#include "check_params.h"
 
 #include <wx/wx.h>
 #include <drag2d.h>
 
-namespace edb {
+namespace edb 
+{
 	
-VerifyJsons::VerifyJsons(const std::string& dirpath)
+std::string VerifyJson::Command() const
+{
+	return "verify-json";
+}
+
+std::string VerifyJson::Description() const
+{
+	return "check json file's link or surplus";
+}
+
+std::string VerifyJson::Usage() const
+{
+	return Command() + " [dir path]";
+}
+
+void VerifyJson::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 3)) return;
+	if (!check_folder(argv[2])) return;
+
+	Trigger(argv[2]);
+}
+
+void VerifyJson::Trigger(const std::string& dirpath)
 {
 	InitFiles(dirpath);
 
@@ -15,7 +40,7 @@ VerifyJsons::VerifyJsons(const std::string& dirpath)
 	Report();
 }
 
-void VerifyJsons::InitFiles(const std::string& dirpath)
+void VerifyJson::InitFiles(const std::string& dirpath)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dirpath, files);
@@ -36,7 +61,7 @@ void VerifyJsons::InitFiles(const std::string& dirpath)
 	}
 }
 
-void VerifyJsons::VerifyExport()
+void VerifyJson::VerifyExport()
 {
 	std::map<std::string, Node*>::iterator itr = _map_name2node.begin();
 	for ( ; itr != _map_name2node.end(); ++itr)
@@ -55,7 +80,7 @@ void VerifyJsons::VerifyExport()
 	}
 }
 
-void VerifyJsons::VerifyConnection()
+void VerifyJson::VerifyConnection()
 {
 	for (size_t i = 0, n = _complex_files.size(); i < n; ++i)
 	{
@@ -103,7 +128,7 @@ void VerifyJsons::VerifyConnection()
 	}
 }
 
-void VerifyJsons::VerifySurplus()
+void VerifyJson::VerifySurplus()
 {
 	std::map<std::string, Node*>::iterator itr = _map_name2node.begin();
 	for ( ; itr != _map_name2node.end(); ++itr)
@@ -118,7 +143,7 @@ void VerifyJsons::VerifySurplus()
 	}
 }
 
-void VerifyJsons::Report() const
+void VerifyJson::Report() const
 {
 	if (_reports.empty()) {
 		std::cout << "Jsons OK!" << std::endl;
@@ -129,7 +154,7 @@ void VerifyJsons::Report() const
 	}
 }
 
-void VerifyJsons::HandleSpritePath(const std::string& parent,
+void VerifyJson::HandleSpritePath(const std::string& parent,
 								   const std::string& child)
 {
  	if (!d2d::FileNameParser::isType(child, d2d::FileNameParser::e_complex) &&

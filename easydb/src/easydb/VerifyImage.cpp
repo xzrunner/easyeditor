@@ -1,11 +1,36 @@
-#include "VerifyImages.h"
+#include "VerifyImage.h"
+#include "check_params.h"
 
 #include <wx/wx.h>
 #include <drag2d.h>
 
-namespace edb {
+namespace edb 
+{
 
-VerifyImages::VerifyImages(const std::string& dirpath)
+std::string VerifyImage::Command() const
+{
+	return "verify-image";
+}
+
+std::string VerifyImage::Description() const
+{
+	return "check if image file lack or surplus";
+}
+
+std::string VerifyImage::Usage() const
+{
+	return Command() + " [dir path]";
+}
+
+void VerifyImage::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 3)) return;
+	if (!check_folder(argv[2])) return;
+
+	Trigger(argv[2]);
+}
+
+void VerifyImage::Trigger(const std::string& dirpath)
 {
 	InitFiles(dirpath);
 	VerifyLack();
@@ -13,7 +38,7 @@ VerifyImages::VerifyImages(const std::string& dirpath)
 	Report();
 }
 
-void VerifyImages::InitFiles(const std::string& dirpath)
+void VerifyImage::InitFiles(const std::string& dirpath)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dirpath, files);
@@ -39,7 +64,7 @@ void VerifyImages::InitFiles(const std::string& dirpath)
 	}
 }
 
-void VerifyImages::VerifyLack()
+void VerifyImage::VerifyLack()
 {
 	for (size_t i = 0, n = _complex_files.size(); i < n; ++i)
 	{
@@ -97,7 +122,7 @@ void VerifyImages::VerifyLack()
 	}
 }
 
-void VerifyImages::VerifySurplus()
+void VerifyImage::VerifySurplus()
 {
 	std::map<std::string, bool>::iterator itr = _map_images.begin();
 	for ( ; itr != _map_images.end(); ++itr)
@@ -105,7 +130,7 @@ void VerifyImages::VerifySurplus()
 			_reports.insert("Surplus Image " + itr->first);
 }
 
-void VerifyImages::Report() const
+void VerifyImage::Report() const
 {
 	if (_reports.empty()) {
 		std::cout << "Images OK!" << std::endl;
@@ -116,7 +141,7 @@ void VerifyImages::Report() const
 	}
 }
 
-void VerifyImages::HandleSpritePath(const std::string& filepath)
+void VerifyImage::HandleSpritePath(const std::string& filepath)
 {
 	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		return;

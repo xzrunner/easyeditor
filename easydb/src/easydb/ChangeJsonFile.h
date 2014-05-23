@@ -1,0 +1,40 @@
+#ifndef _EASYDB_CHANGE_JSON_FILE_H_
+#define _EASYDB_CHANGE_JSON_FILE_H_
+
+#include "ICommand.h"
+
+#include <drag2d.h>
+
+namespace edb
+{
+
+class ChangeJsonFile : public ICommand
+{
+public:
+	ChangeJsonFile() {}
+
+	//
+	// interface ITask
+	//
+	virtual std::string Command() const;
+	virtual std::string Description() const;
+	virtual std::string Usage() const;
+	virtual void Run(int argc, char *argv[]);
+
+	static ICommand* Create() { return new ChangeJsonFile(); }
+
+private:
+	void Run(const std::string& dir/*, d2d::FileNameParser::Type type*/);
+
+	void Scale(const std::string& key, float times);
+
+private:
+	wxArrayString m_files;
+
+//	d2d::FileNameParser::Type m_type;
+
+}; // ChangeJsonFile
+
+}
+
+#endif // _EASYDB_CHANGE_JSON_FILE_H_

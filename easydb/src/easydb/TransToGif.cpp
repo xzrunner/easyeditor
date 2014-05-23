@@ -1,4 +1,5 @@
 #include "TransToGif.h"
+#include "check_params.h"
 
 #include <glfw.h>
 #include <drag2d.h>
@@ -8,7 +9,33 @@
 namespace edb
 {
 
-void TransToGif::trigger(const std::string& srcdir, const std::string& dstdir)
+std::string TransToGif::Command() const
+{
+	return "togif";
+}
+
+std::string TransToGif::Description() const
+{
+	return "translate anims to gif files";
+}
+
+std::string TransToGif::Usage() const
+{
+	// togif D:\projects\ejoy\coco-tools\sg_characters_new\data\json\2003daoke\attack1\1 E:\gif
+
+	return Command() + " [src path] [dst path]";
+}
+
+void TransToGif::Run(int argc, char *argv[])
+{
+	if (!check_number(this, argc, 4)) return;
+	if (!check_folder(argv[2])) return;
+	if (!check_folder(argv[3])) return;
+
+	Trigger(argv[2], argv[3]);
+}
+
+void TransToGif::Trigger(const std::string& srcdir, const std::string& dstdir) const
 {
 	glfwInit();
 	if(!glfwOpenWindow(800, 600, 8, 8, 8, 8, 24, 8, GLFW_WINDOW))
@@ -59,7 +86,7 @@ void TransToGif::trigger(const std::string& srcdir, const std::string& dstdir)
 			anim->setFrameIndex(0);
 			std::string filename = dstdir + "//" + name + ".gif";
 			saver.Save(filename.c_str());
-			
+
 			symbol->release();
 		}
 	}

@@ -1,4 +1,5 @@
-#include "ClipImages.h"
+#include "TrimImage.h"
+#include "check_params.h"
 
 #include <drag2d.h>
 #include <easyimage.h>
@@ -6,12 +7,32 @@
 namespace edb
 {
 
-ClipImages::ClipImages(const std::string& dir)
+std::string TrimImage::Command() const
 {
-	Clip(dir);
+	return "trim-image";
 }
 
-void ClipImages::Clip(const std::string& dir)
+std::string TrimImage::Description() const
+{
+	return "trim image, clip blank part";
+}
+
+std::string TrimImage::Usage() const
+{
+	return Command() + " [dir path]";
+}
+
+void TrimImage::Run(int argc, char *argv[])
+{
+	// trim-image e:/test2/1001
+
+	if (!check_number(this, argc, 3)) return;
+	if (!check_folder(argv[2])) return;
+
+	Trigger(argv[2]);
+}
+
+void TrimImage::Trigger(const std::string& dir)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);
