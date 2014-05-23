@@ -40,6 +40,8 @@ namespace d2d
 		virtual void load(const Json::Value& val);
 		virtual void store(Json::Value& val) const;
 
+		virtual void buildBounding();
+
 		virtual void setTransform(const Vector& position, float angle);
 		void setScale(float xScale, float yScale);
 		void setShear(float xShear, float yShear);
@@ -74,8 +76,6 @@ namespace d2d
 		void setObserver(ISpriteObserver* observer) {
 			m_observer = observer;
 		}
-
-		void buildBounding();
 
 	private:
 		void onSizeChanged();

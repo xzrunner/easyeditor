@@ -158,6 +158,19 @@ void FontSprite::store(Json::Value& val) const
 	val["font_filename"] = filename;
 }
 
+void FontSprite::buildBounding()
+{
+	if (!m_bounding) 
+		m_bounding = BVFactory::createBV(e_obb);
+	Rect rect(width, height);
+	if (m_offset.x == 0 && m_offset.y == 0)
+		m_offset.set(rect.xCenter(), rect.yCenter());
+	rect.scale(m_scale.x, m_scale.y);
+	rect.shear(m_shear.x, m_shear.y);
+	m_bounding->initFromRect(rect);
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
+}
+
 void FontSprite::loadFont(const std::string& _filename)
 {
 	if (m_symbol->loadFont(_filename))

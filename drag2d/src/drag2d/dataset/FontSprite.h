@@ -47,6 +47,8 @@ public:
 	virtual void load(const Json::Value& val);
 	virtual void store(Json::Value& val) const;
 
+	virtual void buildBounding();
+
 	void loadFont(const std::string& filename);
 
 protected:
