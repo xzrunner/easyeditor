@@ -41,7 +41,8 @@ namespace d2d
 
 		bool isValid() const {
 			return xMin != FLT_MAX && yMin != FLT_MAX
-				&& xMax != - FLT_MAX && yMax != - FLT_MAX;
+				&& xMax != - FLT_MAX && yMax != - FLT_MAX
+				&& xMin <= xMax && yMin <= yMax;
 		}
 		void makeInfinite() {
 			xMin = yMin = FLT_MAX;
