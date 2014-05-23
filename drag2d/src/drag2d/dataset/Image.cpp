@@ -57,8 +57,7 @@ bool Image::loadFromFile(const wxString& filepath)
 			eimage::ImageProcessor processor(this);
 			d2d::Rect r = processor.trim();
 			if (r.isValid()) {
-				r.translate(d2d::Vector(-m_width*0.5f, -m_height*0.5f));
-				m_region = r;
+				m_region = d2d::Rect(r.xLength(), r.yLength());
 			}
 		}
  		return true;
