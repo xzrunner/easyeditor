@@ -114,17 +114,10 @@ void Bitmap::getImage(const wxString& filepath, wxImage& image)
 
 wxBitmap* Bitmap::getBitmap(const wxImage& image)
 {
-	wxBitmap* bmp = NULL;
-
 	float scale = computeScale(image.GetWidth());
-
-	int w = image.GetWidth() * scale;
-	int h = image.GetHeight() * scale;
-	if (w > 1 && h > 1)
-		bmp = new wxBitmap(image.Scale(w, h));
-	else
-		bmp = new wxBitmap(image.Scale(image.GetWidth(), image.GetHeight()));
-	return bmp;
+	int w = std::max(1.0f, image.GetWidth() * scale);
+	int h = std::max(1.0f, image.GetHeight() * scale);
+	return new wxBitmap(image.Scale(w, h));
 }
 
 float Bitmap::computeScale(float width)
