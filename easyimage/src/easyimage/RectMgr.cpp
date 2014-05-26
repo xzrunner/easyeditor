@@ -233,6 +233,7 @@ void RectMgr::moveRect(const d2d::Rect* rect, const d2d::Vector& from, const d2d
 void RectMgr::clear()
 {
 	for_each(m_rects.begin(), m_rects.end(), DeletePointerFunctor<d2d::Rect>());
+	m_rects.clear();
 }
 
 }
