@@ -241,6 +241,12 @@ void RectCutOP::drawCaptureLine() const
 
 void RectCutOP::fixedPos(d2d::Vector& pos) const
 {
+	const float RADIUS = 5;
+	if (fabs(pos.x - m_captured.x) > RADIUS || 
+		fabs(pos.y - m_captured.y) > RADIUS) {
+		return;
+	}
+	
 	// by capture
 	if (m_captured.x != FLT_INVALID) {
 		pos.x = m_captured.x;
