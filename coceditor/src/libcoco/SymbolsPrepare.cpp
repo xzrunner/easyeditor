@@ -171,7 +171,7 @@ void SymbolsPrepare::sort()
 {
 	while (!m_unique.empty())
 	{
-		std::set<const d2d::ISymbol*>::iterator itr = m_unique.begin();
+		std::set<const d2d::ISymbol*, d2d::SymbolCmp>::iterator itr = m_unique.begin();
 		for ( ; itr != m_unique.end(); ++itr)
 		{
 			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(*itr);

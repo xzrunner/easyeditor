@@ -108,7 +108,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 			// version 2: use mat instead of each picture
 			//////////////////////////////////////////////////////////////////////////
 
-			std::set<const d2d::ImageSymbol*> unique;
+			std::set<const d2d::ImageSymbol*, d2d::SymbolCmp> unique;
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
 				anim::Symbol::Layer* layer = anim->m_layers[i];
@@ -126,7 +126,7 @@ void COCCode::resolveFromParser(const COCParser& parser)
 				}
 			}
 
-			std::set<const d2d::ImageSymbol*>::iterator itr = unique.begin();
+			std::set<const d2d::ImageSymbol*, d2d::SymbolCmp>::iterator itr = unique.begin();
 			for ( ; itr != unique.end(); ++itr)
 			{
 				std::map<const d2d::ISymbol*, int>::iterator itrFind = m_mapSymbolID.find(*itr);

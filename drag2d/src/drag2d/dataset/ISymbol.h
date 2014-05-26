@@ -41,5 +41,13 @@ namespace d2d
 		wxString m_filepath;
 
 	}; // ISymbol
+
+	class SymbolCmp
+	{
+	public:
+		bool operator () (const d2d::ISymbol* s0, const d2d::ISymbol* s1) const {
+			return s0->getFilepath() < s1->getFilepath();
+		}
+	}; // SymbolCmp
 }
 

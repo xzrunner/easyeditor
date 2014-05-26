@@ -22,23 +22,34 @@ static void InitSymbolCreators()
 	d2d::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
 }
 
-void LoadFromDir(const std::string& dir)
+void LoadAllFilesSorted(const std::string& dir, std::set<std::string>& files_sorted)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);
 
-	try {
-		for (size_t i = 0, n = files.size(); i < n; ++i)
-		{
-			wxFileName filename(files[i]);
-			filename.Normalize();
-			wxString filepath = filename.GetFullPath();
+	for (int i = 0, n = files.size(); i < n; ++i) 
+	{
+		wxFileName filename(files[i]);
+		filename.Normalize();
+		wxString filepath = filename.GetFullPath();
+		files_sorted.insert(filepath.ToStdString());
+	}
+}
 
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
-				|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+void LoadFromDir(const std::string& dir)
+{
+	std::set<std::string> files_sorted;
+	LoadAllFilesSorted(dir, files_sorted);
+
+	try {
+		std::set<std::string>::iterator itr = files_sorted.begin();
+		for ( ; itr != files_sorted.end(); ++itr) 
+		{
+			if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
+				|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
 			{
 				// todo release symbol
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(*itr);
 				coceditor::Context::Instance()->symbols.push_back(symbol);
 			}
 		}
@@ -90,21 +101,19 @@ void LoadFromList(const std::string& list)
 	}
 
 	wxString dir = d2d::FilenameTools::getFileDir(list);
-	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
+
+	std::set<std::string> files_sorted;
+	LoadAllFilesSorted(dir.ToStdString(), files_sorted);
 
 	try {
-		for (size_t i = 0, n = files.size(); i < n; ++i)
+		std::set<std::string>::iterator itr = files_sorted.begin();
+		for ( ; itr != files_sorted.end(); ++itr) 
 		{
-			wxFileName filename(files[i]);
-			filename.Normalize();
-			wxString filepath = filename.GetFullPath();
-
-			if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
-				|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
+			if (d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_complex)
+				|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
 			{
 				// todo release symbol
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(*itr);
 				std::set<std::string>::iterator itr = names.find(symbol->name);
 				if (itr == names.end()) {
 					symbol->release();

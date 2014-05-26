@@ -23,7 +23,7 @@ private:
 	bool isSymbolPrepared(const d2d::ISprite* sprite) const;
 
 private:
-	std::set<const d2d::ISymbol*> m_unique;
+	std::set<const d2d::ISymbol*, d2d::SymbolCmp> m_unique;
 
 	std::vector<const d2d::ISymbol*> m_result;
 
