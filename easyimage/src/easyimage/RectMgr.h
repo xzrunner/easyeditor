@@ -43,7 +43,6 @@ public:
 		return m_rects;
 	}
 
-private:
 	void clear();
 
 private:

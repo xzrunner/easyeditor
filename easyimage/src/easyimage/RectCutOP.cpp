@@ -197,6 +197,10 @@ bool RectCutOP::clear()
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();
 
+	m_rects.clear();
+	m_rectSelected = NULL;
+	m_nodeSelected.rect = NULL;
+
 	return false;
 }
 
