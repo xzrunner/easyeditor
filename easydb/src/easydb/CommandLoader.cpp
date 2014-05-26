@@ -13,6 +13,8 @@
 #include "UniqueImage.h"
 #include "VerifyImage.h"
 #include "VerifyJson.h"
+#include "ScaleOverall.h"
+#include "AddFrameSprite.h"
 
 namespace edb
 {
@@ -32,6 +34,8 @@ void CommandLoader::Init()
 	fc->Register(UniqueImage::Create());
 	fc->Register(VerifyImage::Create());
 	fc->Register(VerifyJson::Create());
+	fc->Register(ScaleOverall::Create());
+	fc->Register(AddFrameSprite::Create());
 }
 
 }

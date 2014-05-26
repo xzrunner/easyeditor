@@ -263,6 +263,14 @@
 			Name="commands"
 			>
 			<File
+				RelativePath="..\..\..\src\easydb\AddFrameSprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\AddFrameSprite.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easydb\ChangeJsonFile.cpp"
 				>
 			</File>
@@ -300,6 +308,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easydb\ReverseAnimation.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\ScaleOverall.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\ScaleOverall.h"
 				>
 			</File>
 			<File
