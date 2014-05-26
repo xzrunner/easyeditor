@@ -90,10 +90,12 @@ void VerifyImage::VerifyLack()
 	}
 	for (size_t i = 0, n = _anim_files.size(); i < n; ++i)
 	{
+		const std::string& anim = _anim_files[i];
+
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(_anim_files[i].c_str());
+		std::ifstream fin(anim.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();
@@ -107,9 +109,8 @@ void VerifyImage::VerifyLack()
 				int j = 0;
 				Json::Value entryValue = frameValue["actor"][j++];
 				while (!entryValue.isNull()) {
-					std::string base = _anim_files[i];
 					std::string relative = entryValue["filepath"].asString();
-					std::string filepath = d2d::FilenameTools::getAbsolutePathFromFile(base, relative).ToStdString();
+					std::string filepath = d2d::FilenameTools::getAbsolutePathFromFile(anim, relative).ToStdString();
 					StringTools::toLower(filepath);
 					HandleSpritePath(filepath);
 
