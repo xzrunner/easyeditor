@@ -35,12 +35,13 @@ Snapshoot::~Snapshoot()
 	releaseFBO();
 }
 
-unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg) const
+unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg,
+										 float scale) const
 {
-	drawFBO(symbol, whitebg);
+	drawFBO(symbol, whitebg, scale);
 
-	int w = symbol->getSize().xLength(),
-		h = symbol->getSize().yLength();
+	int w = symbol->getSize().xLength() * scale,
+		h = symbol->getSize().yLength() * scale;
 	size_t size = w*h*4;
 	unsigned char* pixels = new unsigned char[size];
 	if(!pixels) return NULL;
@@ -53,11 +54,12 @@ unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg) co
 	return pixels;
 }
 
-void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& filename) const
+void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& filename,
+								  float scale) const
 {
-	int w = symbol->getSize().xLength(),
-		h = symbol->getSize().yLength();
-	unsigned char* pixels = outputToMemory(symbol);
+	int w = symbol->getSize().xLength() * scale,
+		h = symbol->getSize().yLength() * scale;
+	unsigned char* pixels = outputToMemory(symbol, false, scale);
 	ImageSaver::storeToFile(pixels, w, h, filename, ImageSaver::e_png);
 	delete[] pixels;
 }
@@ -117,7 +119,7 @@ void Snapshoot::releaseFBO()
 	}
 }
 
-void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg) const
+void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 {
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 
@@ -129,18 +131,18 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg) const
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	d2d::Rect rect = symbol->getSize();
-	int w = rect.xLength(),
-		h = rect.yLength();
+	int w = rect.xLength() * scale,
+		h = rect.yLength() * scale;
 	glViewport(0, 0, w, h);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	glOrtho(
-		rect.xMin,
-		rect.xMax,
-		rect.yMax,
-		rect.yMin,
+		rect.xMin * scale,
+		rect.xMax * scale,
+		rect.yMax * scale,
+		rect.yMin * scale,
 		0,
 		1
 		);
@@ -148,7 +150,7 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg) const
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	SpriteDraw::drawSprite(symbol, d2d::Vector(0, 0));
+	SpriteDraw::drawSprite(symbol, d2d::Vector(0, 0), 0.0f, scale, scale);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 

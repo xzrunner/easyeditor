@@ -17,15 +17,18 @@ public:
 	Snapshoot(int width, int height);
 	~Snapshoot();
 
-	unsigned char* outputToMemory(const ISymbol* symbol, bool whitebg = false) const;
+	unsigned char* outputToMemory(const ISymbol* symbol, bool whitebg = false,
+		float scale = 1.0f) const;
 
-	void outputToImageFile(const ISymbol* symbol, const std::string& filename) const;
+	void outputToImageFile(const ISymbol* symbol, const std::string& filename, 
+		float scale = 1.0f) const;
 
 private:
 	void createFBO(int width, int height);
 	void releaseFBO();
 
-	void drawFBO(const ISymbol* symbol, bool whitebg = false) const;
+	void drawFBO(const ISymbol* symbol, bool whitebg = false,
+		float scale = 1.0f) const;
 
 	int checkFramebufferStatus() const;
 
