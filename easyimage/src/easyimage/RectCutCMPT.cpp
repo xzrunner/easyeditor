@@ -29,7 +29,8 @@ void RectCutCMPT::onSaveEditOP(wxCommandEvent& event)
 		Json::Value value;
 
 		std::string filepath = op->getImageFilepath();
-		value["image filepath"] = filepath;
+		std::string dir = d2d::FilenameTools::getFileDir(dlg.GetPath());
+		value["image filepath"] = d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
 		op->getRectMgr().store(value);
 
 		wxString filename = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILTER, "json");
