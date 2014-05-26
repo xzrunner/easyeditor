@@ -12,6 +12,8 @@ bool check_number(const ICommand* cmd, int argc, int min);
 
 bool check_folder(const char* dirpath);
 
+bool check_file(const char* filepath);
+
 bool check_json_key(const Json::Value& value, const std::string& key, 
 					const std::string& filename);
 

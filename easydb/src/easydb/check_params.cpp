@@ -28,6 +28,16 @@ bool check_folder(const char* dirpath)
 	return false;
 }
 
+bool check_file(const char* filepath)
+{
+	if (wxFileName::FileExists(filepath)) {
+		return true;
+	}
+
+	std::cerr << "error file: " << filepath << std::endl;
+	return false;
+}
+
 bool check_json_key(const Json::Value& value, const std::string& key,
 					const std::string& filename)
 {
