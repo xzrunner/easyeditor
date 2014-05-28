@@ -133,3 +133,4 @@ libraries/lua-5.2.3/README
 easydb/src/glfw/glfw.lib
 /editor_bin/_tmp_ejoy2d_preview/
 easycomplex/platform/msvc2008/projects/_tmp_ejoy2d_preview/
+sg/platform/msvc2008/sg
