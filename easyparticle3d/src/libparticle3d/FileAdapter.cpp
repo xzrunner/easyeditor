@@ -33,8 +33,8 @@ void FileAdapter::load(const char* filename)
 	gravity = value["gravity"].asInt();
 	inertia = value["inertia"].asInt();
 	fadeout_time = value["fadeout_time"].asInt();
-	bounce = value["bounce"].asInt();
-	additive_blend = value["additive_blend"].asInt();
+	bounce = value["bounce"].asBool();
+	additive_blend = value["additive_blend"].asBool();
 	start_radius = value["start_radius"].asInt();
 	orient_to_movement = value["orient_to_movement"].asBool();
 	orient_to_parent = value["orient_to_parent"].asBool();
