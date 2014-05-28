@@ -1,5 +1,6 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
+#include "ArrangeSpriteCMPT.h"
 
 namespace sg
 {
@@ -11,8 +12,10 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	addChild(new d2d::UniversalCMPT(this, wxT("paste"), stage, 
 		new d2d::PasteSymbolOP(stage, stage, library)));
 	addChild(new d2d::PasteSpriteCMPT(this, wxT("batch"), stage, stage, property));
-	addChild(new d2d::UniversalCMPT(this, wxT("arrange"), stage, 
-		new d2d::ArrangeSpriteFixOP(stage, stage, property)));
+	//addChild(new d2d::UniversalCMPT(this, wxT("arrange"), stage, 
+	//	new d2d::ArrangeSpriteFixOP(stage, stage, property)));
+
+	addChild(new ArrangeSpriteCMPT(this, wxT("arrange"), stage, property));
 
 	SetSizer(initLayout());	
 }
@@ -51,7 +54,7 @@ wxSizer* ToolbarPanel::initLayout()
 		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("length:")));
 
 		m_edge = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
-			wxSP_ARROW_KEYS, 16, 512, 64);
+			wxSP_ARROW_KEYS, 16, 128, 48);
 		Connect(m_edge->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onParamsChanged));
 		sizer->Add(m_edge);
 

@@ -37,6 +37,10 @@ public:
 		m_col = col;
 		m_edge = edge;
 	}
+	bool getPerspective() const { return m_is_flat; }
+	void setPerspective(bool is_flat);
+
+	void changeSpritesLevel(bool up);
 
 private:
 	d2d::Vector fixSpriteLocation(const d2d::Vector& pos) const;
@@ -45,6 +49,7 @@ private:
 	// data
 	int m_row, m_col;
 	int m_edge;
+	bool m_is_flat;
 
 }; // StagePanel
 

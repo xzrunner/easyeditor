@@ -11,7 +11,7 @@ class LibraryPanel;
 class StagePanel;
 class ToolbarPanel;
 
-class Task :public d2d::ITask
+class Task : public d2d::ITask
 {
 public:
 	Task(wxFrame* parent);

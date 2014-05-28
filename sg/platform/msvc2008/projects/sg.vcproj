@@ -186,6 +186,14 @@
 			Name="stage"
 			>
 			<File
+				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sg\StageCanvas.cpp"
 				>
 			</File>
@@ -227,6 +235,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\sg\FileIO.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\Frame.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\Frame.h"
 				>
 			</File>
 			<File

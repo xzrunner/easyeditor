@@ -1,6 +1,7 @@
 #include "main.h"
 #include "Task.h"
 #include "config.h"
+#include "Frame.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -24,7 +25,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	d2d::Frame* frame = new d2d::Frame("SgEditor", sg::FILE_TAG);
+	d2d::Frame* frame = new sg::Frame("SgEditor", sg::FILE_TAG);
 	sg::Task* task = new sg::Task(frame);
 	frame->setTask(task);
 	frame->Show(true);
