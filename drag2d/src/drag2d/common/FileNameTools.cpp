@@ -39,27 +39,20 @@ wxString FilenameTools::getFilenameTag(const wxString& filepath)
 
 wxString FilenameTools::getFilename(const wxString& filepath)
 {
-	const size_t start = filepath.find_last_of('\\') + 1,
+	int pos_divide = std::max((int)filepath.find_last_of('/'), (int)filepath.find_last_of('\\'));
+	const size_t start = pos_divide + 1,
 		end = filepath.find_last_of('.');
 	return filepath.substr(start, end - start);
 }
 
 wxString FilenameTools::getFilenameWithExtension(const wxString& filepath)
 {
-	return filepath.substr(filepath.find_last_of('\\') + 1);
+	int pos_divide = std::max((int)filepath.find_last_of('/'), (int)filepath.find_last_of('\\'));
+	return filepath.substr(pos_divide + 1);
 }
 
 wxString FilenameTools::getRelativePath(const wxString& dir, const wxString& absolute)
 {
-// 	size_t start = 0;
-// 	while (dir.size() > start && filepath.size() > start && dir[start] == filepath[start])
-// 		++start;
-// 	wxString ret = filepath.substr(start);
-// 	ret.Replace('\\', '/');
-// 	return ret;
-
-	//////////////////////////////////////////////////////////////////////////
-
 	wxFileName filename(absolute);
 	filename.MakeRelativeTo(dir);
 	return filename.GetFullPath().ToStdString();
@@ -95,7 +88,8 @@ wxString FilenameTools::getExtension(const wxString& filepath)
 
 wxString FilenameTools::getFileDir(const wxString& filepath)
 {
-	return filepath.substr(0, filepath.find_last_of('\\'));
+	int pos_divide = std::max((int)filepath.find_last_of('/'), (int)filepath.find_last_of('\\'));
+	return filepath.substr(0, pos_divide);
 }
 
 bool FilenameTools::isExist(const wxString& filepath)
