@@ -31,7 +31,7 @@ void StagePanel::clear()
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	sprite->setTransform(fixSpriteLocation(sprite->getPosition()), 0);
+	sprite->setTransform(fixSpriteLocation(sprite->getPosition()), sprite->getAngle());
 	if (sprite->getPosition().isValid()) {
 		d2d::SpritesPanelImpl::insertSprite(sprite);
 	}
@@ -62,8 +62,10 @@ void StagePanel::updateAllSpritesLocation()
 {
 	std::vector<d2d::ISprite*> sprites;
 	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		sprites[i]->setTransform(fixSpriteLocation(sprites[i]->getPosition()), 0);
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		d2d::ISprite* s = sprites[i];
+		s->setTransform(fixSpriteLocation(s->getPosition()), s->getAngle());
+	}
 }
 
 void StagePanel::setPerspective(bool is_flat) 
@@ -86,7 +88,7 @@ void StagePanel::setPerspective(bool is_flat)
 		transGridPosToCoords(row, col, pos);
 		m_is_flat = !m_is_flat;
 
-		sprite->setTransform(pos, 0);
+		sprite->setTransform(pos, sprite->getAngle());
 	}
 
  	m_is_flat = is_flat; 
