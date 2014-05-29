@@ -18,9 +18,16 @@ protected:
 	virtual wxSizer* initLayout();
 
 private:
+	void initOptSetting(wxSizer* sizer);
+	void initSizeSetting(wxBoxSizer* topSizer);
+
 	void onParamsChanged(wxSpinEvent& event);
 
+	void onLevelChanged(wxCommandEvent& event);
+
 private:
+	StagePanel* m_stage;
+
 	wxSpinCtrl *m_row, *m_col;
 	wxSpinCtrl* m_edge;
 

@@ -1,5 +1,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
+#include "ResourceMgr.h"
 
 namespace sg
 {
@@ -9,9 +10,17 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: EditPanel(parent, frame)
 	, SpritesPanelImpl(this, library)
 	, m_is_flat(false)
+	, m_resource(new ResourceMgr(this, library))
 {
 	m_canvas = new StageCanvas(this);
 	m_row = m_col = m_edge = 0;
+
+	m_level = 1;
+}
+
+StagePanel::~StagePanel()
+{
+	delete m_resource;
 }
 
 void StagePanel::clear()

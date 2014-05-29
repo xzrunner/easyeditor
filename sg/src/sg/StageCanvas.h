@@ -37,7 +37,7 @@ private:
 private:
 	wxTimer m_timer;
 
-	StagePanel* m_stagePanel;
+	StagePanel* m_stage;
 
 	d2d::ISprite* m_background;
 

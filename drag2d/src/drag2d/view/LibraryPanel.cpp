@@ -34,12 +34,16 @@ void LibraryPanel::reloadTexture() const
 		m_pages[i]->reloadTexture();
 }
 
-void LibraryPanel::addPage(ILibraryPage* page)
+void LibraryPanel::addPage(ILibraryPage* page, const char* name)
 {
 	if (m_notebook->GetPageCount() == 0)
 		m_selected = page;
 
-	m_notebook->AddPage(page, page->getName());
+	if (name != NULL) {
+		m_notebook->AddPage(page, name);
+	} else {
+		m_notebook->AddPage(page, page->getName());
+	}
 	m_pages.push_back(page);
 }
 

@@ -1,5 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
+#include "ResourceMgr.h"
 
 static const d2d::Colorf LIGHT_GRAY = d2d::Colorf(0.8f, 0.8f, 0.8f);
 
@@ -12,6 +13,7 @@ END_EVENT_TABLE()
 
 StageCanvas::StageCanvas(StagePanel* parent)
 	: d2d::SpriteStageCanvas(parent, parent)
+	, m_stage(parent)
 	, m_background(NULL)
 	, m_timer(this, TIMER_ID)
 {
@@ -28,7 +30,7 @@ StageCanvas::~StageCanvas()
 void StageCanvas::setBackground(d2d::ISymbol* background)
 {
 	m_background = d2d::SpriteFactory::Instance()->create(background);
-	m_background->translate(d2d::Vector(0.0f, m_background->getBounding()->height() * 0.4f));
+	m_background->translate(d2d::Vector(0.0f, m_background->getBounding()->height() * 0.375f));
 }
 
 d2d::Vector StageCanvas::transToBirdView(const d2d::Vector& pos)
@@ -48,6 +50,12 @@ d2d::Vector StageCanvas::transToFlatView(const d2d::Vector& pos)
 
 void StageCanvas::onDraw()
 {
+	static bool inited = false;
+	if (!inited) {
+		m_stage->getResourceMgr()->init();
+		inited = true;
+	}
+
 	drawBackground();
 	drawGuideLines();
 	d2d::SpriteStageCanvas::onDraw();

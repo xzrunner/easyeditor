@@ -27,7 +27,7 @@ namespace d2d
 
 		void reloadTexture() const;
 
-		void addPage(ILibraryPage* page);
+		void addPage(ILibraryPage* page, const char* name = NULL);
 
 		ISymbol* getSymbol(int index = -1) const;
 

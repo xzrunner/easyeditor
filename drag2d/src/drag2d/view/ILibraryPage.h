@@ -14,7 +14,7 @@ namespace d2d
 	class ILibraryPage : public wxWindow
 	{
 	public:
-		ILibraryPage(wxWindow* parent, const wxString& name);
+		ILibraryPage(wxWindow* parent, const wxString& name, bool isStatic = false);
 
 		virtual bool isHandleSymbol(ISymbol* symbol) const = 0;
 
@@ -46,6 +46,8 @@ namespace d2d
 
 	protected:
 		wxString m_name;
+
+		bool m_isStatic;
 
 		wxButton *m_btnAdd, *m_btnDel;
 

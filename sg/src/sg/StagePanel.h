@@ -6,11 +6,14 @@
 namespace sg
 {
 
+class ResourceMgr;
+
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
+	virtual ~StagePanel();
 
 	//
 	// d2d::EditPanel interface
@@ -42,6 +45,11 @@ public:
 
 	void changeSpritesLevel(bool up);
 
+	int getLevel() const { return m_level; }
+	void setLevel(int level) { m_level = level; }
+
+	ResourceMgr* getResourceMgr() { return m_resource; }
+
 private:
 	d2d::Vector fixSpriteLocation(const d2d::Vector& pos) const;
 
@@ -50,6 +58,10 @@ private:
 	int m_row, m_col;
 	int m_edge;
 	bool m_is_flat;
+
+	int m_level;
+
+	ResourceMgr* m_resource;
 
 }; // StagePanel
 

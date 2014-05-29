@@ -1,0 +1,847 @@
+{
+	"background" : "data/scene_bg1/editor_json/scene_bg4_complex.json",
+	"buildings" :
+	{
+		"defenses" : 
+		[
+			{
+				"name" : "Cannon",
+				"size" : 3,
+				"attack_range" : 18,
+				"max_level" : 11,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv1.png"
+					},
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv2.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv3.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv4.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv5.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv6.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv7.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv8.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv9.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv10.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1004_lv11.png"
+					}
+				]
+			},
+			{
+				"name" : "Archer Tower",
+				"size" : 3,
+				"attack_range" : 20,
+				"max_level" : 11,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv1.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv2.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv3.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv4.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv5.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv6.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv7.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv8.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv9.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv10.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1005_lv11.png"
+					}
+				]
+			},
+			{
+				"name" : "Wall",
+				"size" : 1,
+				"max_level" : 10,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv1.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv2.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv3.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv4.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv5.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv6.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv7.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv8.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv9.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/wall_1028_lv10.png"
+					}
+				]
+			},
+			{
+				"name" : "Mortar",
+				"size" : 3,
+				"max_level" : 7,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1006_lv1.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1006_lv2.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1006_lv3.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1006_lv4.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1006_lv5.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1006_lv6.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1006_lv7.png"
+					}
+				]
+			},
+			{
+				"name" : "Air Defense",
+				"size" : 3,
+				"max_level" : 7,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1008_lv1.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1008_lv2.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1008_lv3.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1008_lv4.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1008_lv5.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1008_lv6.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1008_lv7.png"
+					}
+				]
+			},
+			{
+				"name" : "Wizard Tower",
+				"size" : 3,
+				"max_level" : 7,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1007_lv1.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1007_lv2.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1007_lv3.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1007_lv4.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1007_lv5.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1007_lv6.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1007_lv7.png"
+					}
+				]
+			},
+			{
+				"name" : "Tesla Tower",
+				"size" : 2,
+				"max_level" : 6,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1009_lv1.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1009_lv2.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1009_lv3.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1009_lv4.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1009_lv5.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1009_lv6.png"
+					}
+				]
+			},
+			{
+				"name" : "Bow",
+				"size" : 3,
+				"max_level" : 3,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1010a_lv1.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1010a_lv2.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1010a_lv3.png"
+					}
+				]
+			}
+		],
+		"resources" :
+		[
+			{
+				"name" : "Dark Elixir Pump",
+				"size" : 3,
+				"max_level" : 6,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1015_lv1.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1015_lv2.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1015_lv3.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1015_lv4.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1015_lv5.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1015_lv6.png"
+					}
+				]
+			},
+			{
+				"name" : "Dark Elixir Storage",
+				"size" : 3,
+				"max_level" : 6,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1016_lv1.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1016_lv2.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1016_lv3.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1016_lv4.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1016_lv5.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1016_lv6.png"
+					}
+				]
+			},
+			{
+				"name" : "Elixir Pump",
+				"size" : 3,
+				"max_level" : 11,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv1.png"
+					},
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv2.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv3.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv4.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv5.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv6.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv7.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv8.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv9.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv10.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1013_lv11.png"
+					}
+				]
+			},
+			{
+				"name" : "Elixir Storage",
+				"size" : 3,
+				"max_level" : 11,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv1.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv2.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv3.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv4.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv5.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv6.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv7.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv8.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv9.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv10.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1014_lv11.png"
+					}
+				]
+			},
+			{
+				"name" : "Gold Mine",
+				"size" : 3,
+				"max_level" : 11,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv1.png"
+					},
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv2.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv3.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv4.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv5.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv6.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv7.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv8.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv9.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv10.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1011_lv11.png"
+					}
+				]
+			},	
+			{
+				"name" : "Gold Storage",
+				"size" : 3,
+				"max_level" : 11,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv1.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv2.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv3.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv4.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv5.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv6.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv7.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv8.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv9.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv10.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1012_lv11.png"
+					}
+				]
+			},
+			{
+				"name" : "Worker Building",
+				"size" : 2,
+				"max_level" : 1,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1003_lv1.png"
+					}
+				]
+			}
+		],
+		"army" :
+		[
+			{
+				"name" : "Alliance Castle",
+				"size" : 3,
+				"max_level" : 4,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1002_lv1.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1002_lv2.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1002_lv3.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1002_lv4.png"
+					}
+				]
+			},
+			{
+				"name" : "Troop Housing",
+				"size" : 5,
+				"max_level" : 7,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1018_lv1.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1018_lv2.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1018_lv3.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1018_lv4.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1018_lv5.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1018_lv6.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1018_lv7.png"
+					}
+				]
+			},
+			{
+				"name" : "Barrack",
+				"size" : 3,
+				"max_level" : 10,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv1.png"
+					},
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv2.png"
+					},
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv3.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv4.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv5.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv6.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv7.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv8.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv9.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1017_lv10.png"
+					}
+				]
+			},
+			{
+				"name" : "Dark Elixir Barrack",
+				"size" : 3,
+				"max_level" : 4,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1201_lv1.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1201_lv2.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1201_lv3.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1201_lv4.png"
+					}
+				]
+			},
+			{
+				"name" : "Spell Forge",
+				"size" : 3,
+				"max_level" : 4,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1020_lv1.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1020_lv2.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1020_lv3.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1020_lv4.png"
+					}
+				]
+			},
+			{
+				"name" : "Laboratory",
+				"size" : 4,
+				"max_level" : 7,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1019_lv1.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1019_lv2.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1019_lv3.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1019_lv4.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1019_lv5.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1019_lv6.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1019_lv7.png"
+					}
+				]
+			},
+			{
+				"name" : "Hero Altar Barbarian King",
+				"size" : 3,
+				"max_level" : 1,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1021_lv1.png"
+					}
+				]
+			},
+			{
+				"name" : "Hero Altar Archer Queen",
+				"size" : 3,
+				"max_level" : 1,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1021_lv2.png"
+					}
+				]
+			},
+			{
+				"name" : "Hero Altar XiYu",
+				"size" : 3,
+				"max_level" : 1,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1203_lv1.png"
+					}
+				]
+			}				
+		],
+		"other" : 
+		[
+		],
+		"traps" : 
+		[
+		]
+	}
+}

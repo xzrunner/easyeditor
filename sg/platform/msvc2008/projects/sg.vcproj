@@ -262,6 +262,30 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="data"
+			>
+			<File
+				RelativePath="..\..\..\src\sg\ResourceMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\ResourceMgr.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="library"
+			>
+			<File
+				RelativePath="..\..\..\src\sg\LibraryPage.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\LibraryPage.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

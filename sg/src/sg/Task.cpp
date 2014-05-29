@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 #include "FileIO.h"
+#include "StageCanvas.h"
 
 #include <easycomplex.h>
 
@@ -56,13 +57,12 @@ void Task::initLayout()
 	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
 	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
 
-	m_library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
-	m_library->addPage(new ecomplex::LibraryPage(m_library->getNotebook()));
+	m_library = new d2d::LibraryPanel(leftHorizontalSplitter);	
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
 	m_stage = new StagePanel(leftVerticalSplitter, m_parent, m_library);
+	m_library->setCanvas(m_stage->getCanvas());
 
 	ToolbarPanel* toolbar = new ToolbarPanel(rightVerticalSplitter, m_library, property, m_stage);
 
@@ -79,7 +79,7 @@ void Task::initLayout()
 
 	if (toolbar)
 	{
-		rightVerticalSplitter->SetSashGravity(0.85f);
+		rightVerticalSplitter->SetSashGravity(0.9f);
 		rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
 	}
 

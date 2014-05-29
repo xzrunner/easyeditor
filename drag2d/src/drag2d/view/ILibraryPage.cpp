@@ -4,9 +4,11 @@
 namespace d2d
 {
 
-ILibraryPage::ILibraryPage(wxWindow* parent, const wxString& name)
+ILibraryPage::ILibraryPage(wxWindow* parent, const wxString& name,
+						   bool isStatic)
 	: wxWindow(parent, wxID_ANY)
 	, m_name(name)
+	, m_isStatic(isStatic)
 	, m_list(NULL)
 	, m_canvas(NULL)
 {
@@ -46,7 +48,9 @@ void ILibraryPage::initLayout(bool draggable/* = true*/)
 	else
 		sizer = new wxBoxSizer(wxVERTICAL);
 
-	initButtons(sizer);
+	if (!m_isStatic) {
+		initButtons(sizer);
+	}
 
 	if (!m_list)
 		m_list = new LibraryList(this);
