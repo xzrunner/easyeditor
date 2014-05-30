@@ -10,6 +10,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: EditPanel(parent, frame)
 	, SpritesPanelImpl(this, library)
+	, m_library(library)
 	, m_is_flat(false)
 	, m_resource(new ResourceMgr(this, library))
 	, m_grid(NULL)
@@ -28,7 +29,13 @@ StagePanel::~StagePanel()
 void StagePanel::clear()
 {
 	EditPanel::clear();
-	SpritesPanelImpl::clearSprites();
+	clearSprites();
+}
+
+void StagePanel::removeSprite(d2d::ISprite* sprite)
+{
+	changeSymbolRemain(sprite, true);
+	SpritesPanelImpl::removeSprite(sprite);
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
@@ -36,7 +43,19 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	sprite->setTransform(fixSpriteLocation(sprite->getPosition()), sprite->getAngle());
 	if (sprite->getPosition().isValid()) {
 		d2d::SpritesPanelImpl::insertSprite(sprite);
+		changeSymbolRemain(sprite, false);
 	}
+}
+
+void StagePanel::clearSprites()
+{
+	std::vector<d2d::ISprite*> sprites;
+	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		changeSymbolRemain(sprites[i], true);
+	}
+
+	SpritesPanelImpl::clearSprites();
 }
 
 void StagePanel::transCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
@@ -161,6 +180,7 @@ void StagePanel::changeSpritesLevel(bool up)
 			{
 				SymbolInfo* new_info = new SymbolInfo;
 				new_info->size = info->size;
+				new_info->remain = info->remain;
 				new_info->level = pItem->level;
 				new_info->building = pItem->building;
 				symbol->setUserData(new_info);
@@ -179,6 +199,23 @@ d2d::Vector StagePanel::fixSpriteLocation(const d2d::Vector& pos) const
 	d2d::Vector ret;
 	transGridPosToCoords(row, col, ret);
 	return ret;
+}
+
+void StagePanel::changeSymbolRemain(d2d::ISprite* sprite, bool increase) const
+{
+	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	if (!info) {
+		return;
+	}
+
+	if (increase) {
+		++info->remain;
+	} else {
+		--info->remain;
+	}
+	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(sprite->getSymbol());
+	symbol.setInfo(wxString::FromDouble(info->remain));
+	m_library->Refresh();
 }
 
 }

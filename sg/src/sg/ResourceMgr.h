@@ -19,6 +19,8 @@ public:
 
 	void initLibraryFromBuildings();
 
+	int queryAmountLimit(const std::string& name) const;
+
 public:
 	struct Building;
 	struct Item
@@ -49,6 +51,7 @@ private:
 	void initGrid(const Json::Value& value);
 	void initArrow(const Json::Value& value);
 	void initGrass(const Json::Value& value);
+	void initAmountLimit(const Json::Value& value);
 
 	void initBuildings(const Json::Value& value);
 	void initBuildings(const Json::Value& value, 
@@ -64,6 +67,8 @@ private:
 	AllBuilding m_buildings;
 
 	LibraryPage *m_defenses, *m_resources, *m_army;
+
+	std::vector<std::map<std::string, int> > m_amount_limit;
 
 }; // ResourceMgr
 

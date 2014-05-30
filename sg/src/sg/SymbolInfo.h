@@ -9,6 +9,7 @@ namespace sg
 struct SymbolInfo
 {
 	int size;
+	int remain;
 
 	// todo
 	int level;

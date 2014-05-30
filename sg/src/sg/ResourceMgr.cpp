@@ -28,6 +28,7 @@ void ResourceMgr::init()
 	fin.close();
 
 	try {
+		initAmountLimit(value);
 		initBackground(value);
 		initGrid(value);
  		initBuildings(value);
@@ -43,6 +44,20 @@ void ResourceMgr::initLibraryFromBuildings()
 	initLibraryFromBuildings(m_defenses, m_buildings.defenses);
 	initLibraryFromBuildings(m_resources, m_buildings.resources);
 	initLibraryFromBuildings(m_army, m_buildings.army);
+}
+
+int ResourceMgr::queryAmountLimit(const std::string& name) const
+{
+	int level = m_stage->getLevel();
+
+	assert(level >= 0 && level < m_amount_limit.size());
+	std::map<std::string, int>::const_iterator itr 
+		= m_amount_limit[level].find(name);
+	if (itr == m_amount_limit[level].end()) {
+		return -1;
+	} else {
+		return itr->second;
+	}
 }
 
 void ResourceMgr::initBackground(const Json::Value& value)
@@ -100,6 +115,25 @@ void ResourceMgr::initGrass(const Json::Value& value)
 		m_stage->m_grass[i-1] = sprite;
 
 		grassVal = value["grass"]["levels"][i++];
+	}
+}
+
+void ResourceMgr::initAmountLimit(const Json::Value& value)
+{
+	int i = 0;
+	Json::Value amountVal = value["amount"][i++];
+	while (!amountVal.isNull()) {
+		std::map<std::string, int> mapName2Amount;
+		Json::ValueIterator itr = amountVal.begin();
+		while (itr != amountVal.end()) {
+			std::string key = itr.key().asString();
+			int val = amountVal[key].asInt();
+			mapName2Amount.insert(std::make_pair(key, val));
+			++itr;
+		}
+		m_amount_limit.push_back(mapName2Amount);
+
+		amountVal = value["amount"][i++];
 	}
 }
 
@@ -169,11 +203,14 @@ void ResourceMgr::initLibraryFromBuildings(LibraryPage* library,
 		{
 			SymbolInfo* info = new SymbolInfo;
 			info->size = b->size;
+			info->remain = queryAmountLimit(pItem->building->name);
+			assert(info->remain != -1);
 
 			info->level = pItem->level;
 			info->building = pItem->building;
 
 			d2d::ISymbol* s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			s->setInfo(wxString::FromDouble(info->remain));
 			s->setUserData(info);
 			library->getList()->insert(s);
 			s->release();

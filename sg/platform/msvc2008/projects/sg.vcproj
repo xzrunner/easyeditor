@@ -289,22 +289,38 @@
 		<Filter
 			Name="edit"
 			>
-			<File
-				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.cpp"
+			<Filter
+				Name="arrange"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.h"
+				<File
+					RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\ArrangeSpriteOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\ArrangeSpriteOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="paste"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\ArrangeSpriteOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\ArrangeSpriteOP.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\sg\PasteSymbolOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\PasteSymbolOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

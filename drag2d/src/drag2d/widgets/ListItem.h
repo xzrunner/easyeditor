@@ -22,10 +22,14 @@ namespace d2d
 		const wxString& getName() const { return m_name; }
 		void setName(const wxString& name) { m_name = name; }
 
+		const wxString& getInfo() const { return m_info; }
+		void setInfo(const wxString& info) { m_info = info; }
+
 		const Bitmap* getBitmap() const { return m_bitmap; }
 
 	protected:
 		wxString m_name;
+		wxString m_info;
 
 		Bitmap* m_bitmap;
 

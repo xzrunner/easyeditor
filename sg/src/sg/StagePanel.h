@@ -23,7 +23,9 @@ public:
 	//
 	// d2d::SpritesPanelImpl interface
 	//
+	virtual void removeSprite(d2d::ISprite* sprite);
 	virtual void insertSprite(d2d::ISprite* sprite);
+	virtual void clearSprites();
 
 	void transCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
 	void transGridPosToCoords(int row, int col, d2d::Vector& pos) const;
@@ -53,6 +55,8 @@ public:
 private:
 	d2d::Vector fixSpriteLocation(const d2d::Vector& pos) const;
 
+	void changeSymbolRemain(d2d::ISprite* sprite, bool increase) const;
+
 public:
 	d2d::ISprite* m_grid;
 	d2d::ISymbol *m_arrow_down, *m_arrow_right;
@@ -60,6 +64,8 @@ public:
 	d2d::ISprite* m_grass[5];
 
 private:
+	d2d::LibraryPanel* m_library;
+
 	// data
 	int m_row, m_col;
 	int m_edge;

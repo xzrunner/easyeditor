@@ -1,6 +1,7 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
 #include "ArrangeSpriteCMPT.h"
+#include "PasteSymbolOP.h"
 #include "ResourceMgr.h"
 
 static const int ROW = 44;
@@ -16,7 +17,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	, m_stage(stage)
 {
 	addChild(new d2d::UniversalCMPT(this, wxT("paste"), stage, 
-		new d2d::PasteSymbolOP(stage, stage, library)));
+		new PasteSymbolOP(stage, library)));
 	addChild(new d2d::PasteSpriteCMPT(this, wxT("batch"), stage, stage, property));
 	addChild(new ArrangeSpriteCMPT(this, wxT("arrange"), stage, property));
 

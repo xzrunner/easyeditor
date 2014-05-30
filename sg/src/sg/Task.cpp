@@ -40,9 +40,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
 	m_stage->clear();
-	m_library->Refresh();
 	m_stage->Refresh();
 }
 
