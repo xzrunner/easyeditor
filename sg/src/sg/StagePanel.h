@@ -57,6 +57,8 @@ public:
 	d2d::ISprite* m_grid;
 	d2d::ISymbol *m_arrow_down, *m_arrow_right;
 
+	d2d::ISprite* m_grass[5];
+
 private:
 	// data
 	int m_row, m_col;

@@ -59,6 +59,7 @@ void StageCanvas::onDraw()
 
 	drawBackground();
 	drawGuideLines();
+	drawGrass();
 	drawGrids();
 	d2d::SpriteStageCanvas::onDraw();
 	drawArrow();
@@ -111,6 +112,24 @@ void StageCanvas::drawGuideLines() const
 	}
 }
 
+void StageCanvas::drawGrass() const
+{
+	std::vector<d2d::ISprite*> sprites;
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		d2d::ISprite* sprite = sprites[i];
+		SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+		if (info == NULL) {
+			continue;
+		}
+
+		d2d::ISprite* grass = m_stage->m_grass[info->size - 1];
+		grass->setTransform(sprite->getPosition(), 0);
+		d2d::SpriteDraw::drawSprite(grass);
+	}
+}
+
 void StageCanvas::drawGrids() const
 {
 	d2d::ISprite* grid = m_stage->m_grid;
@@ -138,7 +157,8 @@ void StageCanvas::drawGrids() const
 }
 
 void StageCanvas::drawArrow() const
-{std::vector<d2d::ISprite*> sprites;
+{
+	std::vector<d2d::ISprite*> sprites;
 	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	if (sprites.size() != 1) {
 		return;
@@ -146,6 +166,9 @@ void StageCanvas::drawArrow() const
 
 	d2d::ISprite* sprite = sprites[0];
 	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	if (info == NULL) {
+		return;
+	}
 	int r = (info->size >> 1) + 2;
 
 	int row, col;

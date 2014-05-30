@@ -12,6 +12,32 @@
 		"scale" : 1.2,
 		"alpha" : 200
 	},
+	"grass" :
+	{
+		"levels" : 
+		[
+			{
+				"filepath" : "data/scene_bg1/pngs/7002_2.png",
+				"scale" : 0.3
+			},
+			{
+				"filepath" : "data/scene_bg1/pngs/7002_2.png",
+				"scale" : 0.6
+			},
+			{
+				"filepath" : "data/scene_bg1/pngs/7002_2.png",
+				"scale" : 1.0
+			},
+			{
+				"filepath" : "data/scene_bg1/pngs/7002_3.png",
+				"scale" : 0.8
+			},
+			{
+				"filepath" : "data/scene_bg1/pngs/7002_3.png",
+				"scale" : 1.0
+			}
+		]
+	},
 	"buildings" :
 	{
 		"defenses" : 

@@ -30,8 +30,9 @@ void ResourceMgr::init()
 	try {
 		initBackground(value);
 		initGrid(value);
-		initBuildings(value);
-		initArrow(value);
+ 		initBuildings(value);
+ 		initArrow(value);
+		initGrass(value);
 	} catch (d2d::Exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
@@ -84,6 +85,22 @@ void ResourceMgr::initArrow(const Json::Value& value)
 //		symbol->release();
 	}
 	m_stage->getCanvas()->resetInitState();
+}
+
+void ResourceMgr::initGrass(const Json::Value& value)
+{
+	int i = 0;
+	Json::Value grassVal = value["grass"]["levels"][i++];
+	while (!grassVal.isNull()) {
+		std::string filepath = grassVal["filepath"].asString();
+		float scale = grassVal["scale"].asDouble();
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		sprite->setScale(scale, scale);
+		m_stage->m_grass[i-1] = sprite;
+
+		grassVal = value["grass"]["levels"][i++];
+	}
 }
 
 void ResourceMgr::initBuildings(const Json::Value& value)
