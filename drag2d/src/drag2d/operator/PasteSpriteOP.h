@@ -16,7 +16,7 @@ namespace d2d
 	{
 	public:
 		PasteSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-			PropertySettingPanel* propertyPanel, PasteSpriteCMPT* cmpt = NULL);
+			PropertySettingPanel* propertyPanel = NULL, PasteSpriteCMPT* cmpt = NULL);
 		virtual ~PasteSpriteOP();
 
 		virtual bool onKeyDown(int keyCode);

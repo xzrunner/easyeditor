@@ -51,38 +51,23 @@ const d2d::EditPanel* Task::getEditPanel() const
 
 void Task::initLayout()
 {
-	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
-	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
+	wxSplitterWindow* rightSplitter = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* leftSplitter = new wxSplitterWindow(rightSplitter);
+	
+	m_library = new d2d::LibraryPanel(leftSplitter);	
 
-	m_library = new d2d::LibraryPanel(leftHorizontalSplitter);	
-	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
-
-	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
-
-	m_stage = new StagePanel(leftVerticalSplitter, m_parent, m_library);
+	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
 	m_library->setCanvas(m_stage->getCanvas());
 
-	ToolbarPanel* toolbar = new ToolbarPanel(rightVerticalSplitter, m_library, property, m_stage);
+	ToolbarPanel* toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage);
 
-	if (m_library || property)
-	{
-		if (m_library && property)
-		{
-			leftHorizontalSplitter->SetSashGravity(0.8f);
-			leftHorizontalSplitter->SplitHorizontally(m_library, property);
-		}
-		leftVerticalSplitter->SetSashGravity(0.15f);
-		leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, m_stage);
-	}
+	leftSplitter->SetSashGravity(0.15f);
+	leftSplitter->SplitVertically(m_library, m_stage);
 
-	if (toolbar)
-	{
-		rightVerticalSplitter->SetSashGravity(0.9f);
-		rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
-	}
+	rightSplitter->SetSashGravity(0.9f);
+	rightSplitter->SplitVertically(leftSplitter, toolbar);
 
-	m_root = rightVerticalSplitter;
+	m_root = leftSplitter;
 
 	wxSize size = m_parent->GetSize();
 	size.SetWidth(size.GetWidth() + 1);

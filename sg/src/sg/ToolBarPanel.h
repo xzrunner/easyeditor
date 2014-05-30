@@ -11,8 +11,7 @@ class StagePanel;
 class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
-		d2d::PropertySettingPanel* property, StagePanel* stage);
+	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, StagePanel* stage);
 
 protected:
 	virtual wxSizer* initLayout();

@@ -18,7 +18,7 @@ namespace d2d
 	{
 	public:
 		SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-			PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback = NULL);
+			PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL);
 		virtual ~SelectSpritesOP();
 
 		virtual bool onKeyDown(int keyCode);

@@ -10,7 +10,7 @@ namespace d2d
 {
 
 PasteSpriteOP::PasteSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-							 PropertySettingPanel* propertyPanel, PasteSpriteCMPT* cmpt /*= NULL*/)
+							 PropertySettingPanel* propertyPanel /*= NULL*/, PasteSpriteCMPT* cmpt /*= NULL*/)
 	: SelectSpritesOP(editPanel, spritesImpl, propertyPanel)
 	, m_spritesImpl(spritesImpl)
 	, m_cmpt(cmpt)

@@ -23,7 +23,7 @@ namespace d2d
 {
 
 SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-								 PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback/* = NULL*/)
+								 PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/)
 	: DrawRectangleOP(editPanel)
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
