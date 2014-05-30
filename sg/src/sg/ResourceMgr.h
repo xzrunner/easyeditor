@@ -19,11 +19,15 @@ public:
 
 	void initLibraryFromBuildings();
 
-private:
+public:
+	struct Building;
 	struct Item
 	{
 		int town_hall_level;
 		std::string res_snapshoot_path;
+
+		int level;
+		Building* building;
 	}; // Item
 
 	struct Building
@@ -35,9 +39,9 @@ private:
 
 	struct AllBuilding
 	{
-		std::vector<Building> defenses;
-		std::vector<Building> resources;
-		std::vector<Building> army;
+		std::vector<Building*> defenses;
+		std::vector<Building*> resources;
+		std::vector<Building*> army;
 	}; // AllBuilding
 
 private:
@@ -48,9 +52,9 @@ private:
 
 	void initBuildings(const Json::Value& value);
 	void initBuildings(const Json::Value& value, 
-		std::vector<Building>& buildings);
+		std::vector<Building*>& buildings);
 	void initLibraryFromBuildings(LibraryPage* library, 
-		const std::vector<Building>& buildings);
+		const std::vector<Building*>& buildings);
 
 private:
 	StagePanel* m_stage;

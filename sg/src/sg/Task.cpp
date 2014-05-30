@@ -58,6 +58,7 @@ void Task::initLayout()
 	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
 
 	m_library = new d2d::LibraryPanel(leftHorizontalSplitter);	
+	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 

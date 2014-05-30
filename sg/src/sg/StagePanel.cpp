@@ -1,6 +1,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "ResourceMgr.h"
+#include "SymbolInfo.h"
 
 namespace sg
 {
@@ -95,6 +96,43 @@ void StagePanel::setPerspective(bool is_flat)
  	m_is_flat = is_flat; 
 }
 
+//void StagePanel::changeSpritesLevel(bool up)
+//{
+//	std::vector<d2d::ISprite*> sprites;
+//	getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+//	for (int i = 0, n = sprites.size(); i < n; ++i)
+//	{
+//		d2d::ISprite* sprite = sprites[i];
+//		wxString filepath = sprite->getSymbol().getFilepath();
+//		if (!filepath.Contains("lv")) {
+//			continue;
+//		}
+//
+//		int s = filepath.find("lv") + 2;
+//		int e = filepath.find('_', s-1);
+//		if (s == -1 || e == -1) {
+//			continue;
+//		}
+//
+//		wxString sLevel = filepath.substr(s, e - s);
+//		double level;
+//		sLevel.ToDouble(&level);
+//		level = up ? level + 1 : level - 1;
+//
+//		wxString newfilepath = filepath.substr(0, s) + wxString::FromDouble(level) + filepath.substr(e);
+//
+//		if (!wxFileName::FileExists(newfilepath)) {
+//			continue;
+//		}
+//
+//		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(newfilepath);
+//		if (symbol) {
+//			sprite->setSymbol(symbol);
+//		}
+//		symbol->release();
+//	}
+//}
+
 void StagePanel::changeSpritesLevel(bool up)
 {
 	std::vector<d2d::ISprite*> sprites;
@@ -102,30 +140,31 @@ void StagePanel::changeSpritesLevel(bool up)
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
-		wxString filepath = sprite->getSymbol().getFilepath();
-		if (!filepath.Contains("lv")) {
+
+		SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+		if (info == NULL || info->building->levels.size() == 1) {
 			continue;
 		}
 
-		int s = filepath.find("lv") + 2;
-		int e = filepath.find('_', s-1);
-		if (s == -1 || e == -1) {
+		const ResourceMgr::Item* pItem;
+		if (up && info->level != info->building->levels.size() - 1) {
+			pItem = &info->building->levels[info->level + 1];
+		} else if (!up && info->level != 0) {
+			pItem = &info->building->levels[info->level - 1];
+		} else {
 			continue;
 		}
 
-		wxString sLevel = filepath.substr(s, e - s);
-		double level;
-		sLevel.ToDouble(&level);
-		level = up ? level + 1 : level - 1;
-
-		wxString newfilepath = filepath.substr(0, s) + wxString::FromDouble(level) + filepath.substr(e);
-
-		if (!wxFileName::FileExists(newfilepath)) {
-			continue;
-		}
-
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(newfilepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
 		if (symbol) {
+			if (symbol->getUserData() == NULL) 
+			{
+				SymbolInfo* new_info = new SymbolInfo;
+				new_info->size = info->size;
+				new_info->level = pItem->level;
+				new_info->building = pItem->building;
+				symbol->setUserData(new_info);
+			}
 			sprite->setSymbol(symbol);
 		}
 		symbol->release();

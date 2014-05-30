@@ -120,21 +120,23 @@ void ResourceMgr::initBuildings(const Json::Value& value)
 }
 
 void ResourceMgr::initBuildings(const Json::Value& value, 
-								std::vector<Building>& buildings)
+								std::vector<Building*>& buildings)
 {
 	int i = 0;
 	Json::Value buildingVal = value[i++];
 	while (!buildingVal.isNull()) {
-		Building b;
-		b.name = buildingVal["name"].asString();
-		b.size = buildingVal["size"].asInt();
+		Building* b = new Building;
+		b->name = buildingVal["name"].asString();
+		b->size = buildingVal["size"].asInt();
 		int j = 0;
 		Json::Value levelVal = buildingVal["levels"][j++];
 		while (!levelVal.isNull()) {
 			Item item;
 			item.town_hall_level = levelVal["town_hall_level"].asInt();
 			item.res_snapshoot_path = levelVal["res_snapshoot"].asString();
-			b.levels.push_back(item);
+			item.level = j - 1;
+			item.building = b;
+			b->levels.push_back(item);
 			levelVal = buildingVal["levels"][j++];
 		}
 		buildings.push_back(b);
@@ -144,27 +146,32 @@ void ResourceMgr::initBuildings(const Json::Value& value,
 }
 
 void ResourceMgr::initLibraryFromBuildings(LibraryPage* library, 
-										   const std::vector<Building>& buildings)
+										   const std::vector<Building*>& buildings)
 {
 	library->getList()->clear();
 
 	int lv = m_stage->getLevel();
 	for (int i = 0, n = buildings.size(); i < n; ++i)
 	{
-		const Building& b = buildings[i];
+		const Building* b = buildings[i];
 		
 		std::string filepath;
-		for (int j = 0, m = b.levels.size(); j < m; ++j) {
-			const Item& item = b.levels[j];
+		const Item* pItem = NULL;
+		for (int j = 0, m = b->levels.size(); j < m; ++j) {
+			const Item& item = b->levels[j];
 			if (item.town_hall_level <= lv) {
 				filepath = item.res_snapshoot_path;
+				pItem = &item;
 			}
 		}
 
 		if (!filepath.empty()) 
 		{
 			SymbolInfo* info = new SymbolInfo;
-			info->size = b.size;
+			info->size = b->size;
+
+			info->level = pItem->level;
+			info->building = pItem->building;
 
 			d2d::ISymbol* s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			s->setUserData(info);

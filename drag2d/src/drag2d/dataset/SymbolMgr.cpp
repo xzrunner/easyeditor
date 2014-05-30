@@ -6,6 +6,9 @@
 #include "ISymbol.h"
 
 #include "common/Exception.h"
+#include "common/FileNameTools.h"
+
+#include <wx/filename.h>
 
 namespace d2d
 {
@@ -32,21 +35,24 @@ SymbolMgr* SymbolMgr::Instance()
 
 ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 {
-	wxString lowerpath = filepath.Lower();
+	wxString fixedPath = FilenameTools::getExistFilepath(filepath.Lower());
+	wxFileName filename(fixedPath);
+	filename.Normalize();
+	fixedPath = filename.GetFullPath();
 
-	std::map<wxString, ISymbol*>::iterator itr = m_symbols.find(lowerpath);
+	std::map<wxString, ISymbol*>::iterator itr = m_symbols.find(fixedPath);
 	if (itr == m_symbols.end())
 	{
-		ISymbol* symbol = SymbolFactory::create(lowerpath);
+		ISymbol* symbol = SymbolFactory::create(fixedPath);
 		if (!symbol) 
 		{
 			const char* path = filepath.c_str();
 			throw Exception("Create symbol %s fail!", path);
 		}
-		bool isLoaded = symbol->loadFromFile(lowerpath);
+		bool isLoaded = symbol->loadFromFile(fixedPath);
 		if (isLoaded)
 		{
-			m_symbols.insert(std::make_pair(lowerpath, symbol));
+			m_symbols.insert(std::make_pair(fixedPath, symbol));
 			return symbol;
 		}
 		else
