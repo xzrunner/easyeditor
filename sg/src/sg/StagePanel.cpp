@@ -181,6 +181,7 @@ void StagePanel::changeSpritesLevel(bool up)
 				SymbolInfo* new_info = new SymbolInfo;
 				new_info->size = info->size;
 				new_info->remain = info->remain;
+				new_info->iswall = info->iswall;
 				new_info->level = pItem->level;
 				new_info->building = pItem->building;
 				symbol->setUserData(new_info);

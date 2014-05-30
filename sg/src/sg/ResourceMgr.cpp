@@ -204,6 +204,7 @@ void ResourceMgr::initLibraryFromBuildings(LibraryPage* library,
 			SymbolInfo* info = new SymbolInfo;
 			info->size = b->size;
 			info->remain = queryAmountLimit(pItem->building->name);
+			info->iswall = (b->name == "Wall" ? true : false);
 			assert(info->remain != -1);
 
 			info->level = pItem->level;

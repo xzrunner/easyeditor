@@ -10,6 +10,7 @@ struct SymbolInfo
 {
 	int size;
 	int remain;
+	bool iswall;
 
 	// todo
 	int level;

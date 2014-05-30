@@ -17,6 +17,7 @@ StageCanvas::StageCanvas(StagePanel* parent)
 	, m_stage(parent)
 	, m_background(NULL)
 	, m_timer(this, TIMER_ID)
+	, m_render(parent)
 {
 	m_timer.Start(1000 / 30);
 }
@@ -116,43 +117,19 @@ void StageCanvas::drawGrass() const
 {
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
-	{
-		d2d::ISprite* sprite = sprites[i];
-		SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
-		if (info == NULL) {
-			continue;
-		}
-
-		d2d::ISprite* grass = m_stage->m_grass[info->size - 1];
-		grass->setTransform(sprite->getPosition(), 0);
-		d2d::SpriteDraw::drawSprite(grass);
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		d2d::ISprite* s = sprites[i];
+		m_render.DrawGrass(s->getSymbol(), s->getPosition());
 	}
 }
 
 void StageCanvas::drawGrids() const
 {
-	d2d::ISprite* grid = m_stage->m_grid;
-
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
-	{
-		d2d::ISprite* sprite = sprites[i];
-		int row, col;
-		m_stage->transCoordsToGridPos(sprite->getPosition(), row, col);
-
-		SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
-		int center = (info->size >> 1);
-		for (int i = 0; i < info->size; ++i) {
-			for (int j = 0; j < info->size; ++j) {
-				d2d::Vector pos;
-				m_stage->transGridPosToCoords(row + i - center, col + j - center, pos);
-				grid->setTransform(pos, grid->getAngle());
-//				grid->multiCol = d2d::Colorf(0, 255, 0, 10);
-				d2d::SpriteDraw::drawSprite(grid, d2d::Colorf(0, 255, 0, 10));
-			}
-		}
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		d2d::ISprite* s = sprites[i];
+		m_render.DrawGrids(s->getSymbol(), s->getPosition());
 	}
 }
 
@@ -160,42 +137,9 @@ void StageCanvas::drawArrow() const
 {
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	if (sprites.size() != 1) {
-		return;
-	}
-
-	d2d::ISprite* sprite = sprites[0];
-	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
-	if (info == NULL) {
-		return;
-	}
-	int r = (info->size >> 1) + 2;
-
-	int row, col;
-	m_stage->transCoordsToGridPos(sprite->getPosition(), row, col);
-	// left
-	{
-		d2d::Vector pos;
-		m_stage->transGridPosToCoords(row, col - r, pos);
-		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_right, pos, d2d::PI);
-	}
-	// right
-	{
-		d2d::Vector pos;
-		m_stage->transGridPosToCoords(row, col + r, pos);
-		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_right, pos);
-	}
-	// up
-	{
-		d2d::Vector pos;
-		m_stage->transGridPosToCoords(row + r, col, pos);
-		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_down, pos, d2d::PI);
-	}
-	// down
-	{
-		d2d::Vector pos;
-		m_stage->transGridPosToCoords(row - r, col, pos);
-		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_down, pos);
+	if (sprites.size() == 1) {
+		d2d::ISprite* s = sprites[0];
+		m_render.DrawArrow(s->getSymbol(), s->getPosition());
 	}
 }
 

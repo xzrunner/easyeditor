@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "SymbolRender.h"
+
 namespace sg
 {
 
@@ -43,6 +45,8 @@ private:
 	StagePanel* m_stage;
 
 	d2d::ISprite* m_background;
+
+	SymbolRender m_render;
 
 	DECLARE_EVENT_TABLE()
 

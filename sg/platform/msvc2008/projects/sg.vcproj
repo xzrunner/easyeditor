@@ -322,6 +322,18 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="tools"
+			>
+			<File
+				RelativePath="..\..\..\src\sg\SymbolRender.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\SymbolRender.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

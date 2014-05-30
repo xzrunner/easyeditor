@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "SymbolRender.h"
+
 namespace sg
 {
 
@@ -13,11 +15,17 @@ public:
 	PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library);
 
 	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseDrag(int x, int y);
 
 	virtual bool onDraw() const;
 
 private:
 	bool isCurrSymbolValid() const;
+
+	bool isCurrSymbolIsWall() const;
+
+private:
+	SymbolRender m_render;
 
 }; // PasteSymbolOP
 
