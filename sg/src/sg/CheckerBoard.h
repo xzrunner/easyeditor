@@ -27,12 +27,14 @@ public:
 	void ClearRemovedCache() {
 		m_mapRemoved.clear();
 	}
-	void SetCachedPos(d2d::ISprite* sprite) const;
+	bool SetCachedPos(d2d::ISprite* sprite) const;
+
+	void ResetWall();
 
 private:
 	StagePanel* m_stage;
 
-	bool m_grid[ROW][COL];
+	d2d::ISprite* m_grid[ROW][COL];
 
 	std::map<d2d::ISprite*, d2d::Vector> m_mapSprite2Pos;
 

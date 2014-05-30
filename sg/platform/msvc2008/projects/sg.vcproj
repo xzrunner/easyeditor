@@ -341,6 +341,10 @@
 				RelativePath="..\..\..\src\sg\SymbolRender.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\sg\tools.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

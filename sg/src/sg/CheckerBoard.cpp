@@ -1,6 +1,7 @@
 #include "CheckerBoard.h"
 #include "StagePanel.h"
 #include "SymbolInfo.h"
+#include "tools.h"
 
 #include <string>
 
@@ -22,7 +23,7 @@ void CheckerBoard::AddSprite(d2d::ISprite* sprite)
 	int center = (info->size >> 1);
 	for (int i = 0; i < info->size; ++i) {
 		for (int j = 0; j < info->size; ++j) {
-			m_grid[row + i - center][col + j - center] = true;
+			m_grid[row + i - center][col + j - center] = sprite;
 		}
 	}
 
@@ -42,7 +43,7 @@ void CheckerBoard::RemoveSprite(d2d::ISprite* sprite)
 	int center = (info->size >> 1);
 	for (int i = 0; i < info->size; ++i) {
 		for (int j = 0; j < info->size; ++j) {
-			m_grid[row + i - center][col + j - center] = false;
+			m_grid[row + i - center][col + j - center] = NULL;
 		}
 	}
 
@@ -91,13 +92,61 @@ void CheckerBoard::DebugDraw() const
 	}
 }
 
-void CheckerBoard::SetCachedPos(d2d::ISprite* sprite) const
+bool CheckerBoard::SetCachedPos(d2d::ISprite* sprite) const
 {
 	std::map<d2d::ISprite*, d2d::Vector>::const_iterator itr 
 		= m_mapRemoved.find(sprite);
-	if (itr != m_mapRemoved.end())
-	{
+	if (itr != m_mapRemoved.end()) {
 		sprite->setTransform(itr->second, sprite->getAngle());
+		return true;
+	} else {
+		return false;
+	}
+}
+
+void CheckerBoard::ResetWall()
+{
+	for (int i = ROW - 1; i > 0; --i) {
+		for (int j = 0; j < ROW - 1; ++j) {
+			bool curr = m_grid[i][j] && IsSymbolWall(m_grid[i][j]);
+			bool right = m_grid[i][j+1] && IsSymbolWall(m_grid[i][j+1]);
+			bool up = m_grid[i-1][j] && IsSymbolWall(m_grid[i-1][j]);
+
+			if (!curr) {
+				continue;
+			}
+
+			const d2d::ISymbol& symbol = m_grid[i][j]->getSymbol();
+			wxString filepath = symbol.getFilepath();
+			int s = filepath.find("lv") + 2;
+			int e = filepath.find('_', s-1);
+			if (e != -1) {
+				filepath = filepath.substr(0, e) + ".png";
+			}
+			int dot = filepath.find_last_of(".");
+
+			if (!right && !up) {
+				;
+			} else if (right && up) {
+				filepath = filepath.insert(dot, "_3");
+			} else if (right) {
+				filepath = filepath.insert(dot, "_2");
+			} else if (up) {
+				filepath = filepath.insert(dot, "_1");
+			}
+
+			if (filepath == symbol.getFilepath()) {
+				continue;
+			}
+
+			SymbolInfo* old = static_cast<SymbolInfo*>(symbol.getUserData());
+			SymbolInfo* info = new SymbolInfo;
+			*info = *old;
+			
+			d2d::ISymbol* new_s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			new_s->setUserData(info);
+			m_grid[i][j]->setSymbol(new_s);
+		}
 	}
 }
 

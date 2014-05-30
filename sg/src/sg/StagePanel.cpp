@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 #include "ResourceMgr.h"
 #include "SymbolInfo.h"
+#include "tools.h"
 
 namespace sg
 {
@@ -35,9 +36,15 @@ void StagePanel::clear()
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
+	bool reset_wall = IsSymbolWall(sprite);
+
 	changeSymbolRemain(sprite, true);
 	SpritesPanelImpl::removeSprite(sprite);
 	m_checkboard.RemoveSprite(sprite);
+
+	if (reset_wall) {
+		m_checkboard.ResetWall();
+	}
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
@@ -45,12 +52,19 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	sprite->setTransform(fixSpriteLocation(sprite->getPosition()), sprite->getAngle());
 	if (sprite->getPosition().isValid()) {
 		if (!m_checkboard.IsValid(sprite)) {
-			m_checkboard.SetCachedPos(sprite);
+			bool fixed = m_checkboard.SetCachedPos(sprite);
+			if (!fixed) {
+				return;
+			}
 		}
 
 		d2d::SpritesPanelImpl::insertSprite(sprite);
 		changeSymbolRemain(sprite, false);
 		m_checkboard.AddSprite(sprite);
+
+		if (IsSymbolWall(sprite)) {
+			m_checkboard.ResetWall();
+		}
 	}
 }
 
