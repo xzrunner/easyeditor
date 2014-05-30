@@ -3,10 +3,7 @@
 #include "ArrangeSpriteCMPT.h"
 #include "PasteSymbolOP.h"
 #include "ResourceMgr.h"
-
-static const int ROW = 44;
-static const int COL = 44;
-static const int EDGE = 48;
+#include "config.h"
 
 namespace sg
 {

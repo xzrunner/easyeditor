@@ -9,6 +9,12 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, d2d::PropertySettingPanel* p
 {
 }
 
+bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
+{
+	static_cast<StagePanel*>(m_editPanel)->getCheckBoard().ClearRemovedCache();
+	return d2d::ArrangeSpriteFixOP::onMouseLeftUp(x, y);
+}
+
 bool ArrangeSpriteOP::onMouseLeftDClick(int x, int y)
 {
 	if (d2d::ArrangeSpriteFixOP::onMouseLeftDClick(x, y)) {

@@ -14,7 +14,7 @@ public:
 	SymbolRender(StagePanel* stage);
 
 	void DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
-	void DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
+	void DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool valid) const;
 	void DrawArrow(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
 
 private:

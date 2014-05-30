@@ -226,6 +226,14 @@
 			Name="data"
 			>
 			<File
+				RelativePath="..\..\..\src\sg\CheckerBoard.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\CheckerBoard.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sg\ResourceMgr.cpp"
 				>
 			</File>

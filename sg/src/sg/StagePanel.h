@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "CheckerBoard.h"
+
 namespace sg
 {
 
@@ -52,6 +54,13 @@ public:
 
 	ResourceMgr* getResourceMgr() { return m_resource; }
 
+	const CheckerBoard& getCheckBoard() const {
+		return m_checkboard;
+	}
+	CheckerBoard& getCheckBoard() {
+		return m_checkboard;
+	}
+
 private:
 	d2d::Vector fixSpriteLocation(const d2d::Vector& pos) const;
 
@@ -74,6 +83,8 @@ private:
 	int m_level;
 
 	ResourceMgr* m_resource;
+
+	CheckerBoard m_checkboard;
 
 }; // StagePanel
 

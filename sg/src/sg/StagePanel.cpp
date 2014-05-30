@@ -14,6 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_is_flat(false)
 	, m_resource(new ResourceMgr(this, library))
 	, m_grid(NULL)
+	, m_checkboard(this)
 {
 	m_canvas = new StageCanvas(this);
 	m_row = m_col = m_edge = 0;
@@ -36,14 +37,20 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	changeSymbolRemain(sprite, true);
 	SpritesPanelImpl::removeSprite(sprite);
+	m_checkboard.RemoveSprite(sprite);
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	sprite->setTransform(fixSpriteLocation(sprite->getPosition()), sprite->getAngle());
 	if (sprite->getPosition().isValid()) {
+		if (!m_checkboard.IsValid(sprite)) {
+			m_checkboard.SetCachedPos(sprite);
+		}
+
 		d2d::SpritesPanelImpl::insertSprite(sprite);
 		changeSymbolRemain(sprite, false);
+		m_checkboard.AddSprite(sprite);
 	}
 }
 
@@ -54,6 +61,7 @@ void StagePanel::clearSprites()
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		changeSymbolRemain(sprites[i], true);
 	}
+	m_checkboard.Clear();
 
 	SpritesPanelImpl::clearSprites();
 }

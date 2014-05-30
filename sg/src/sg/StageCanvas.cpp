@@ -64,6 +64,8 @@ void StageCanvas::onDraw()
 	drawGrids();
 	d2d::SpriteStageCanvas::onDraw();
 	drawArrow();
+
+//	m_stage->getCheckBoard().DebugDraw();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
@@ -129,7 +131,7 @@ void StageCanvas::drawGrids() const
 	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
-		m_render.DrawGrids(s->getSymbol(), s->getPosition());
+		m_render.DrawGrids(s->getSymbol(), s->getPosition(), true);
 	}
 }
 

@@ -16,6 +16,7 @@ namespace d2d
 		virtual bool onMouseRightUp(int x, int y);
 
 	private:
+		// todo cost!
 		void fixSpritesLocation(const std::vector<ISprite*>& sprites);
 
 	private:

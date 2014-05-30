@@ -31,16 +31,23 @@ bool PasteSymbolOP::onMouseDrag(int x, int y)
 
 bool PasteSymbolOP::onDraw() const
 {
-	if (isCurrSymbolValid()) {
-		d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
-		m_render.DrawGrass(*symbol, m_pos);
-		m_render.DrawGrids(*symbol, m_pos);
-		bool ret = d2d::PasteSymbolOP::onDraw();
-		m_render.DrawArrow(*symbol, m_pos);
-		return ret;
-	} else {
+	if (!isCurrSymbolValid()) {
 		return false;
 	}
+
+	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
+
+	m_render.DrawGrass(*symbol, m_pos);
+
+	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	bool valid = stage->getCheckBoard().IsValid(*symbol, m_pos);
+	m_render.DrawGrids(*symbol, m_pos, valid);
+
+	bool ret = d2d::PasteSymbolOP::onDraw();
+
+	m_render.DrawArrow(*symbol, m_pos);
+
+	return ret;
 }
 
 bool PasteSymbolOP::isCurrSymbolValid() const

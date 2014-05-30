@@ -22,12 +22,15 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 	d2d::SpriteDraw::drawSprite(grass);
 }
 
-void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos) const
+void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos,
+							 bool valid) const
 {
 	int row, col;
 	m_stage->transCoordsToGridPos(pos, row, col);
 
 	d2d::ISprite* grid = m_stage->m_grid;
+
+	d2d::Colorf color = valid ? d2d::Colorf(0, 255, 0, 10) : d2d::Colorf(255, 0, 0, 10);
 
 	SymbolInfo* info = static_cast<SymbolInfo*>(symbol.getUserData());
 	int center = (info->size >> 1);
@@ -37,7 +40,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 			m_stage->transGridPosToCoords(row + i - center, col + j - center, pos);
 			grid->setTransform(pos, grid->getAngle());
 			//grid->multiCol = d2d::Colorf(0, 255, 0, 10);
-			d2d::SpriteDraw::drawSprite(grid, d2d::Colorf(0, 255, 0, 10));
+			d2d::SpriteDraw::drawSprite(grid, color);
 		}
 	}
 }
