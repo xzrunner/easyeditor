@@ -183,46 +183,6 @@
 	</References>
 	<Files>
 		<Filter
-			Name="stage"
-			>
-			<File
-				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\StageCanvas.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\StageCanvas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\StagePanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\StagePanel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="toolbar"
-			>
-			<File
-				RelativePath="..\..\..\src\sg\ToolbarPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\ToolBarPanel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="frame"
 			>
 			<File
@@ -273,16 +233,76 @@
 				RelativePath="..\..\..\src\sg\ResourceMgr.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\sg\SymbolInfo.h"
+				>
+			</File>
 		</Filter>
 		<Filter
-			Name="library"
+			Name="view"
+			>
+			<Filter
+				Name="stage"
+				>
+				<File
+					RelativePath="..\..\..\src\sg\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\StagePanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="toolbar"
+				>
+				<File
+					RelativePath="..\..\..\src\sg\ToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\ToolBarPanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="library"
+				>
+				<File
+					RelativePath="..\..\..\src\sg\LibraryPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\sg\LibraryPage.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="edit"
 			>
 			<File
-				RelativePath="..\..\..\src\sg\LibraryPage.cpp"
+				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sg\LibraryPage.h"
+				RelativePath="..\..\..\src\sg\ArrangeSpriteCMPT.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\ArrangeSpriteOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\ArrangeSpriteOP.h"
 				>
 			</File>
 		</Filter>

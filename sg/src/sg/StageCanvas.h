@@ -27,6 +27,8 @@ protected:
 private:
 	void drawBackground() const;
 	void drawGuideLines() const;
+	void drawGrids() const;
+	void drawArrow() const;
 
 private:
 	enum

@@ -11,6 +11,11 @@ ISymbol::~ISymbol()
 	SymbolMgr::Instance()->remove(this);
 }
 
+void ISymbol::clearUserData(bool deletePtr)
+{
+	delete m_userData, m_userData = NULL;
+}
+
 bool ISymbol::loadFromFile(const wxString& filepath)
 {
 	m_filepath = FilenameTools::getExistFilepath(filepath);

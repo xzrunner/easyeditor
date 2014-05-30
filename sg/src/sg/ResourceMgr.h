@@ -42,6 +42,8 @@ private:
 
 private:
 	void initBackground(const Json::Value& value);
+	void initGrid(const Json::Value& value);
+	void initArrow(const Json::Value& value);
 
 	void initBuildings(const Json::Value& value);
 	void initBuildings(const Json::Value& value, 

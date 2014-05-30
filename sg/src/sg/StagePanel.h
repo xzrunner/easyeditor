@@ -53,6 +53,10 @@ public:
 private:
 	d2d::Vector fixSpriteLocation(const d2d::Vector& pos) const;
 
+public:
+	d2d::ISprite* m_grid;
+	d2d::ISymbol *m_arrow_down, *m_arrow_right;
+
 private:
 	// data
 	int m_row, m_col;

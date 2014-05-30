@@ -4,12 +4,13 @@
 #include "common/ResourcesMgr.h"
 #include "common/Rect.h"
 #include "common/Color.h"
+#include "common/UserDataImpl.h"
 
 namespace d2d
 {
 	class ISprite;
 
-	class ISymbol : public ListItem
+	class ISymbol : public ListItem, public UserDataImpl
 	{
 	public:
 		virtual ~ISymbol();
@@ -18,6 +19,11 @@ namespace d2d
 		// IObject interface
 		//	
 		virtual ISymbol* clone() const { return NULL; }
+
+		//
+		// UserDataImpl interface
+		//	
+		virtual void clearUserData(bool deletePtr);
 
 		virtual void reloadTexture() const = 0;
 		virtual void draw(const Colorf& mul = Colorf(1, 1, 1, 1), 

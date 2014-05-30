@@ -11,6 +11,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, SpritesPanelImpl(this, library)
 	, m_is_flat(false)
 	, m_resource(new ResourceMgr(this, library))
+	, m_grid(NULL)
 {
 	m_canvas = new StageCanvas(this);
 	m_row = m_col = m_edge = 0;

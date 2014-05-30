@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "LibraryPage.h"
+#include "SymbolInfo.h"
 
 #include <JSON/json.h>
 
@@ -28,7 +29,9 @@ void ResourceMgr::init()
 
 	try {
 		initBackground(value);
-		initBuildings(value);	
+		initGrid(value);
+		initBuildings(value);
+		initArrow(value);
 	} catch (d2d::Exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
@@ -43,12 +46,44 @@ void ResourceMgr::initLibraryFromBuildings()
 
 void ResourceMgr::initBackground(const Json::Value& value)
 {
-	std::string bg_filepath = value["background"].asString();
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(bg_filepath);
+	std::string filepath = value["background"].asString();
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::GLCanvas* canvas = m_stage->getCanvas();
 	static_cast<StageCanvas*>(canvas)->setBackground(symbol);
 	symbol->release();
 	canvas->resetInitState();
+}
+
+void ResourceMgr::initGrid(const Json::Value& value)
+{
+	std::string filepath = value["grid"]["filepath"].asString();
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	float angle = value["grid"]["angle"].asInt();
+	float scale = value["grid"]["scale"].asDouble();
+	float alpha = value["grid"]["alpha"].asInt();
+	sprite->setTransform(d2d::Vector(0, 0), angle * d2d::TRANS_DEG_TO_RAD);
+	sprite->setScale(scale, scale);
+	m_stage->m_grid = sprite;
+	symbol->release();
+	m_stage->getCanvas()->resetInitState();
+}
+
+void ResourceMgr::initArrow(const Json::Value& value)
+{
+	{
+		std::string filepath = value["arrow"]["down_path"].asString();
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		m_stage->m_arrow_down = symbol;
+//		symbol->release();
+	}
+	{
+		std::string filepath = value["arrow"]["right_path"].asString();
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		m_stage->m_arrow_right = symbol;
+//		symbol->release();
+	}
+	m_stage->getCanvas()->resetInitState();
 }
 
 void ResourceMgr::initBuildings(const Json::Value& value)
@@ -111,7 +146,11 @@ void ResourceMgr::initLibraryFromBuildings(LibraryPage* library,
 
 		if (!filepath.empty()) 
 		{
+			SymbolInfo* info = new SymbolInfo;
+			info->size = b.size;
+
 			d2d::ISymbol* s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			s->setUserData(info);
 			library->getList()->insert(s);
 			s->release();
 		}

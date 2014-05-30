@@ -1,5 +1,17 @@
 {
 	"background" : "data/scene_bg1/editor_json/scene_bg4_complex.json",
+	"arrow" : 
+	{
+		"down_path" : "data/other/6197-tongyong-11.png",
+		"right_path" : "data/other/6197-tongyong-12.png"
+	},
+	"grid" : 
+	{
+		"filepath" : "data/other/1_1721_1763_699_756.png",
+		"angle" : 90,
+		"scale" : 1.2,
+		"alpha" : 200
+	},
 	"buildings" :
 	{
 		"defenses" : 
