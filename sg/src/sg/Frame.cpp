@@ -20,7 +20,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 void Frame::onChangePerspective(wxCommandEvent& event)
 {
 	const StagePanel* stage = static_cast<const StagePanel*>((m_task)->getEditPanel());
-	const_cast<StagePanel*>(stage)->setPerspective(!stage->getPerspective());
+	const_cast<StagePanel*>(stage)->SetPerspective(!stage->GetPerspective());
 	const_cast<StagePanel*>(stage)->Refresh();
 }
 
@@ -35,7 +35,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
 		const StagePanel* stage = static_cast<const StagePanel*>((m_task)->getEditPanel());
 		d2d::GLCanvas* canvas = stage->getCanvas();
-		static_cast<StageCanvas*>(canvas)->setBackground(symbol);
+		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->release();
 	}
 }

@@ -226,6 +226,14 @@
 			Name="data"
 			>
 			<File
+				RelativePath="..\..\..\src\sg\BuildingCfg.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\sg\BuildingCfg.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sg\CheckerBoard.cpp"
 				>
 			</File>
@@ -234,15 +242,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\sg\ResourceMgr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\ResourceMgr.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\sg\SymbolInfo.h"
+				RelativePath="..\..\..\src\sg\SymbolExt.h"
 				>
 			</File>
 		</Filter>

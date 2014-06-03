@@ -38,7 +38,7 @@ namespace d2d
 	protected:
 		virtual void initLayout(bool draggable = true);
 
-		virtual void onAddPress(wxCommandEvent& event) = 0;
+		virtual void onAddPress(wxCommandEvent& event);
 		virtual void onDelPress(wxCommandEvent& event);
 
 	protected:

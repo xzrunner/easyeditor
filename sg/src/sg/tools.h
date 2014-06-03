@@ -4,14 +4,19 @@
 namespace sg
 {
 
-static bool IsSymbolWall(d2d::ISprite* sprite)
+static bool IsSymbolWall(const d2d::ISymbol& symbol)
 {
-	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
 	if (info == NULL) {
 		return false;
 	}
 
 	return info->wall_type != -1;
+}
+
+static bool IsSymbolWall(const d2d::ISprite& sprite)
+{
+	return IsSymbolWall(sprite.getSymbol());
 }
 
 }

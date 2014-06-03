@@ -59,6 +59,10 @@ void ILibraryPage::initLayout(bool draggable/* = true*/)
 	SetSizer(sizer);
 }
 
+void ILibraryPage::onAddPress(wxCommandEvent& event)
+{
+}
+
 void ILibraryPage::onDelPress(wxCommandEvent& event)
 {
 	m_list->remove();

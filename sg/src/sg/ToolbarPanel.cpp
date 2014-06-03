@@ -2,7 +2,7 @@
 #include "StagePanel.h"
 #include "ArrangeSpriteCMPT.h"
 #include "PasteSymbolOP.h"
-#include "ResourceMgr.h"
+#include "BuildingCfg.h"
 #include "config.h"
 
 namespace sg
@@ -19,7 +19,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, StagePa
 
 	SetSizer(initLayout());	
 
-	stage->setLayoutInfo(ROW, COL, EDGE);
+	stage->SetLayoutInfo(ROW, COL, EDGE);
 }
 
 wxSizer* ToolbarPanel::initLayout()
@@ -90,16 +90,16 @@ void ToolbarPanel::initSizeSetting(wxBoxSizer* topSizer)
 void ToolbarPanel::onParamsChanged(wxSpinEvent& event)
 {
 	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
-	stage->setLayoutInfo(m_row->GetValue(), 
+	stage->SetLayoutInfo(m_row->GetValue(), 
 		m_col->GetValue(), m_edge->GetValue());
-	stage->updateAllSpritesLocation();
+	stage->UpdateAllSpritesLocation();
 	m_editPanel->Refresh();
 }
 
 void ToolbarPanel::onLevelChanged(wxCommandEvent& event)
 {
-	m_stage->setLevel(event.GetSelection() + 1);
-	m_stage->getResourceMgr()->initLibraryFromBuildings();
+	m_stage->SetBaseLevel(event.GetSelection() + 1);
+	m_stage->GetBuildingCfg().ResetLibraryList();
 }
 
 }

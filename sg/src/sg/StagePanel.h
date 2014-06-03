@@ -3,19 +3,19 @@
 
 #include <drag2d.h>
 
+#include "BuildingCfg.h"
 #include "CheckerBoard.h"
 
 namespace sg
 {
 
-class ResourceMgr;
+class BuildingCfg;
 
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
-	virtual ~StagePanel();
 
 	//
 	// d2d::EditPanel interface
@@ -29,60 +29,51 @@ public:
 	virtual void insertSprite(d2d::ISprite* sprite);
 	virtual void clearSprites();
 
-	void transCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
-	void transGridPosToCoords(int row, int col, d2d::Vector& pos) const;
+	void TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
+	void TransGridPosToCoords(int row, int col, d2d::Vector& pos) const;
 
-	void updateAllSpritesLocation();
+	void UpdateAllSpritesLocation();
 
-	void getLayoutInfo(int& row, int& col, int& edge) {
+	void GetLayoutInfo(int& row, int& col, int& edge) {
 		row = m_row;
 		col = m_col;
 		edge = m_edge;
 	}
-	void setLayoutInfo(int row, int col, int edge) {
+	void SetLayoutInfo(int row, int col, int edge) {
 		m_row = row;
 		m_col = col;
 		m_edge = edge;
 	}
-	bool getPerspective() const { return m_is_flat; }
-	void setPerspective(bool is_flat);
+	bool GetPerspective() const { return m_is_flat; }
+	void SetPerspective(bool is_flat);
 
-	void changeSpritesLevel(bool up);
+	void ChangeSelectedSpritesLevel(bool up);
 
-	int getLevel() const { return m_level; }
-	void setLevel(int level) { m_level = level; }
+	int GetBaseLevel() const { return m_base_level; }
+	void SetBaseLevel(int level) { m_base_level = level; }
 
-	ResourceMgr* getResourceMgr() { return m_resource; }
+	const BuildingCfg& GetBuildingCfg() const { return m_building_cfg; }
+	BuildingCfg& GetBuildingCfg() { return m_building_cfg; }
 
-	const CheckerBoard& getCheckBoard() const {
-		return m_checkboard;
-	}
-	CheckerBoard& getCheckBoard() {
-		return m_checkboard;
-	}
+	const CheckerBoard& GetCheckBoard() const { return m_checkboard; }
+	CheckerBoard& GetCheckBoard() { return m_checkboard; }
 
 private:
-	d2d::Vector fixSpriteLocation(const d2d::Vector& pos) const;
+	d2d::Vector FixSpriteLocation(const d2d::Vector& pos) const;
 
-	void changeSymbolRemain(d2d::ISprite* sprite, bool increase) const;
-
-public:
-	d2d::ISprite* m_grid;
-	d2d::ISymbol *m_arrow_down, *m_arrow_right;
-
-	d2d::ISprite* m_grass[5];
+	void ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const;
 
 private:
 	d2d::LibraryPanel* m_library;
 
-	// data
+	// layout
 	int m_row, m_col;
 	int m_edge;
 	bool m_is_flat;
 
-	int m_level;
+	int m_base_level;
 
-	ResourceMgr* m_resource;
+	BuildingCfg m_building_cfg;
 
 	CheckerBoard m_checkboard;
 

@@ -1,7 +1,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "ResourceMgr.h"
-#include "SymbolInfo.h"
+#include "BuildingCfg.h"
+#include "SymbolExt.h"
 #include "tools.h"
 
 namespace sg
@@ -13,19 +13,13 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, SpritesPanelImpl(this, library)
 	, m_library(library)
 	, m_is_flat(false)
-	, m_resource(new ResourceMgr(this, library))
-	, m_grid(NULL)
+	, m_building_cfg(this, library)
 	, m_checkboard(this)
 {
 	m_canvas = new StageCanvas(this);
 	m_row = m_col = m_edge = 0;
 
-	m_level = 1;
-}
-
-StagePanel::~StagePanel()
-{
-	delete m_resource;
+	m_base_level = 1;
 }
 
 void StagePanel::clear()
@@ -36,9 +30,9 @@ void StagePanel::clear()
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
-	bool reset_wall = IsSymbolWall(sprite);
+	bool reset_wall = IsSymbolWall(*sprite);
 
-	changeSymbolRemain(sprite, true);
+	ChangeSymbolRemain(sprite, true);
 	SpritesPanelImpl::removeSprite(sprite);
 	m_checkboard.RemoveSprite(sprite);
 
@@ -49,7 +43,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	sprite->setTransform(fixSpriteLocation(sprite->getPosition()), sprite->getAngle());
+	sprite->setTransform(FixSpriteLocation(sprite->getPosition()), sprite->getAngle());
 	if (sprite->getPosition().isValid()) {
 		if (!m_checkboard.IsValid(sprite)) {
 			bool fixed = m_checkboard.SetCachedPos(sprite);
@@ -59,10 +53,10 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 		}
 
 		d2d::SpritesPanelImpl::insertSprite(sprite);
-		changeSymbolRemain(sprite, false);
+		ChangeSymbolRemain(sprite, false);
 		m_checkboard.AddSprite(sprite);
 
-		if (IsSymbolWall(sprite)) {
+		if (IsSymbolWall(*sprite)) {
 			m_checkboard.ResetWall();
 		}
 	}
@@ -73,45 +67,45 @@ void StagePanel::clearSprites()
 	std::vector<d2d::ISprite*> sprites;
 	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		changeSymbolRemain(sprites[i], true);
+		ChangeSymbolRemain(sprites[i], true);
 	}
 	m_checkboard.Clear();
 
 	SpritesPanelImpl::clearSprites();
 }
 
-void StagePanel::transCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
+void StagePanel::TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const
 {
 	d2d::Vector p;
 	if (m_is_flat) {
 		p = pos;
 	} else {
-		p = StageCanvas::transToFlatView(pos);		
+		p = StageCanvas::TransToFlatView(pos);		
 	}
 	col = std::max(0.0f, std::min(p.x / m_edge, (float)(m_col - 1)));
 	row = std::max(0.0f, std::min(p.y / m_edge, (float)(m_row - 1)));
 }
 
-void StagePanel::transGridPosToCoords(int row, int col, d2d::Vector& pos) const
+void StagePanel::TransGridPosToCoords(int row, int col, d2d::Vector& pos) const
 {
 	pos.x = m_edge * col + m_edge * 0.5f;
 	pos.y = m_edge * row + m_edge * 0.5f;
 	if (!m_is_flat) {
-		pos = StageCanvas::transToBirdView(pos);
+		pos = StageCanvas::TransToBirdView(pos);
 	}
 }
 
-void StagePanel::updateAllSpritesLocation()
+void StagePanel::UpdateAllSpritesLocation()
 {
 	std::vector<d2d::ISprite*> sprites;
 	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
-		s->setTransform(fixSpriteLocation(s->getPosition()), s->getAngle());
+		s->setTransform(FixSpriteLocation(s->getPosition()), s->getAngle());
 	}
 }
 
-void StagePanel::setPerspective(bool is_flat) 
+void StagePanel::SetPerspective(bool is_flat) 
 { 
 	if (m_is_flat == is_flat) {
 		return;
@@ -124,11 +118,11 @@ void StagePanel::setPerspective(bool is_flat)
 		d2d::ISprite* sprite = sprites[i];
 
 		int row, col;
-		transCoordsToGridPos(sprite->getPosition(), row, col);
+		TransCoordsToGridPos(sprite->getPosition(), row, col);
 		m_is_flat = !m_is_flat;
 
 		d2d::Vector pos;
-		transGridPosToCoords(row, col, pos);
+		TransGridPosToCoords(row, col, pos);
 		m_is_flat = !m_is_flat;
 
 		sprite->setTransform(pos, sprite->getAngle());
@@ -174,7 +168,7 @@ void StagePanel::setPerspective(bool is_flat)
 //	}
 //}
 
-void StagePanel::changeSpritesLevel(bool up)
+void StagePanel::ChangeSelectedSpritesLevel(bool up)
 {
 	std::vector<d2d::ISprite*> sprites;
 	getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
@@ -182,12 +176,12 @@ void StagePanel::changeSpritesLevel(bool up)
 	{
 		d2d::ISprite* sprite = sprites[i];
 
-		SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+		SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
 		if (info == NULL || info->building->levels.size() == 1) {
 			continue;
 		}
 
-		const ResourceMgr::Item* pItem;
+		const BuildingCfg::Item* pItem;
 		if (up && info->level != info->building->levels.size() - 1) {
 			pItem = &info->building->levels[info->level + 1];
 		} else if (!up && info->level != 0) {
@@ -196,7 +190,7 @@ void StagePanel::changeSpritesLevel(bool up)
 			continue;
 		}
 
-		if (pItem->town_hall_level > m_level) {
+		if (pItem->town_hall_level > m_base_level) {
 			return;
 		}
 
@@ -204,7 +198,7 @@ void StagePanel::changeSpritesLevel(bool up)
 		if (symbol) {
 			if (symbol->getUserData() == NULL) 
 			{
-				SymbolInfo* new_info = new SymbolInfo;
+				SymbolExt* new_info = new SymbolExt;
 				new_info->size = info->size;
 				new_info->remain = info->remain;
 				new_info->wall_type = info->wall_type;
@@ -218,19 +212,19 @@ void StagePanel::changeSpritesLevel(bool up)
 	}
 }
 
-d2d::Vector StagePanel::fixSpriteLocation(const d2d::Vector& pos) const
+d2d::Vector StagePanel::FixSpriteLocation(const d2d::Vector& pos) const
 {
 	int row, col;
-	transCoordsToGridPos(pos, row, col);
+	TransCoordsToGridPos(pos, row, col);
 
 	d2d::Vector ret;
-	transGridPosToCoords(row, col, ret);
+	TransGridPosToCoords(row, col, ret);
 	return ret;
 }
 
-void StagePanel::changeSymbolRemain(d2d::ISprite* sprite, bool increase) const
+void StagePanel::ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const
 {
-	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
 	if (!info) {
 		return;
 	}

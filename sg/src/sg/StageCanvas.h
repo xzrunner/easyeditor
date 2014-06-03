@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "SymbolRender.h"
-
 namespace sg
 {
 
@@ -13,26 +11,26 @@ class StagePanel;
 class StageCanvas : public d2d::SpriteStageCanvas
 {
 public:
-	StageCanvas(StagePanel* parent);
+	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
-	void setBackground(d2d::ISymbol* background);
+	void SetBackground(d2d::ISymbol* background);
 
-	static d2d::Vector transToBirdView(const d2d::Vector& pos);
-	static d2d::Vector transToFlatView(const d2d::Vector& pos);
+	static d2d::Vector TransToBirdView(const d2d::Vector& pos);
+	static d2d::Vector TransToFlatView(const d2d::Vector& pos);
 
 protected:
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
+	void OnTimer(wxTimerEvent& event);
 
 private:
-	void drawBackground() const;
-	void drawGuideLines() const;
-	void drawGrass() const;
-	void drawGrids() const;
-	void drawSprites() const;
-	void drawArrow() const;
+	void DrawBackground() const;
+	void DrawGuideLines() const;
+	void DrawGrass() const;
+	void DrawGrids() const;
+	void DrawSprites() const;
+	void DrawArrow() const;
 
 private:
 	enum
@@ -46,8 +44,6 @@ private:
 	StagePanel* m_stage;
 
 	d2d::ISprite* m_background;
-
-	SymbolRender m_render;
 
 	DECLARE_EVENT_TABLE()
 

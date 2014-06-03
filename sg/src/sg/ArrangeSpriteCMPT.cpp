@@ -32,12 +32,12 @@ wxSizer* ArrangeSpriteCMPT::initLayout()
 
 void ArrangeSpriteCMPT::onUpLevelPress(wxCommandEvent& event)
 {
-	static_cast<StagePanel*>(m_editPanel)->changeSpritesLevel(true);
+	static_cast<StagePanel*>(m_editPanel)->ChangeSelectedSpritesLevel(true);
 }
 
 void ArrangeSpriteCMPT::onDownLevelPress(wxCommandEvent& event)
 {
-	static_cast<StagePanel*>(m_editPanel)->changeSpritesLevel(false);	
+	static_cast<StagePanel*>(m_editPanel)->ChangeSelectedSpritesLevel(false);	
 }
 
 }

@@ -1,5 +1,5 @@
-#ifndef _SG_RESOURCE_MGR_H_
-#define _SG_RESOURCE_MGR_H_
+#ifndef _SG_BUILDING_CFG_H_
+#define _SG_BUILDING_CFG_H_
 
 #include <JSON/json.h>
 #include <drag2d.h>
@@ -10,16 +10,16 @@ namespace sg
 class LibraryPage;
 class StagePanel;
 
-class ResourceMgr
+class BuildingCfg
 {
 public:
-	ResourceMgr(StagePanel* stage, d2d::LibraryPanel* library);
+	BuildingCfg(StagePanel* stage, d2d::LibraryPanel* library);
 
-	void init();
+	void InitAllData();
 
-	void initLibraryFromBuildings();
+	void ResetLibraryList();
 
-	int queryAmountLimit(const std::string& name) const;
+	int QueryAmountLimit(const std::string& name) const;
 
 public:
 	struct Building;
@@ -47,16 +47,17 @@ public:
 	}; // AllBuilding
 
 private:
-	void initBackground(const Json::Value& value);
-	void initGrid(const Json::Value& value);
-	void initArrow(const Json::Value& value);
-	void initGrass(const Json::Value& value);
-	void initAmountLimit(const Json::Value& value);
+	void InitBackground(const Json::Value& value);
+	void InitGrid(const Json::Value& value);
+	void InitArrow(const Json::Value& value);
+	void InitGrass(const Json::Value& value);
+	void InitAmountLimit(const Json::Value& value);
 
-	void initBuildings(const Json::Value& value);
-	void initBuildings(const Json::Value& value, 
+	void InitBuildings(const Json::Value& value);
+	void InitBuildings(const Json::Value& value, 
 		std::vector<Building*>& buildings);
-	void initLibraryFromBuildings(LibraryPage* library, 
+
+	void ResetLibraryList(LibraryPage* library, 
 		const std::vector<Building*>& buildings);
 
 private:
@@ -70,8 +71,8 @@ private:
 
 	std::vector<std::map<std::string, int> > m_amount_limit;
 
-}; // ResourceMgr
+}; // BuildingCfg
 
 }
 
-#endif // _SG_RESOURCE_MGR_H_
+#endif // _SG_BUILDING_CFG_H_

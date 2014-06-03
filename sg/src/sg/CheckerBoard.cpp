@@ -1,6 +1,6 @@
 #include "CheckerBoard.h"
 #include "StagePanel.h"
-#include "SymbolInfo.h"
+#include "SymbolExt.h"
 #include "tools.h"
 
 #include <string>
@@ -17,9 +17,9 @@ CheckerBoard::CheckerBoard(StagePanel* stage)
 void CheckerBoard::AddSprite(d2d::ISprite* sprite)
 {
 	int row, col;
-	m_stage->transCoordsToGridPos(sprite->getPosition(), row, col);
+	m_stage->TransCoordsToGridPos(sprite->getPosition(), row, col);
 
-	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
 	int center = (info->size >> 1);
 	for (int i = 0; i < info->size; ++i) {
 		for (int j = 0; j < info->size; ++j) {
@@ -37,9 +37,9 @@ void CheckerBoard::RemoveSprite(d2d::ISprite* sprite)
 	assert(itr != m_mapSprite2Pos.end());
 
 	int row, col;
-	m_stage->transCoordsToGridPos(itr->second, row, col);
+	m_stage->TransCoordsToGridPos(itr->second, row, col);
 
-	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
 	int center = (info->size >> 1);
 	for (int i = 0; i < info->size; ++i) {
 		for (int j = 0; j < info->size; ++j) {
@@ -59,9 +59,9 @@ void CheckerBoard::Clear()
 bool CheckerBoard::IsValid(d2d::ISprite* sprite) const
 {
 	int row, col;
-	m_stage->transCoordsToGridPos(sprite->getPosition(), row, col);
+	m_stage->TransCoordsToGridPos(sprite->getPosition(), row, col);
 
-	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
 	int center = (info->size >> 1);
 	for (int i = 0; i < info->size; ++i) {
 		for (int j = 0; j < info->size; ++j) {
@@ -79,9 +79,9 @@ bool CheckerBoard::IsValid(d2d::ISprite* sprite) const
 bool CheckerBoard::IsValid(const d2d::ISymbol& symbol, const d2d::Vector& pos) const
 {
 	int row, col;
-	m_stage->transCoordsToGridPos(pos, row, col);
+	m_stage->TransCoordsToGridPos(pos, row, col);
 
-	SymbolInfo* info = static_cast<SymbolInfo*>(symbol.getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
 	int center = (info->size >> 1);
 	for (int i = 0; i < info->size; ++i) {
 		for (int j = 0; j < info->size; ++j) {
@@ -100,7 +100,7 @@ void CheckerBoard::DebugDraw() const
 		for (int j = 0; j < COL; ++j) {
 			if (m_grid[i][j]) {
 				d2d::Vector pos;
-				m_stage->transGridPosToCoords(i, j, pos);
+				m_stage->TransGridPosToCoords(i, j, pos);
 				d2d::PrimitiveDraw::drawCircle(pos, 10, true, 2, d2d::Colorf(0, 0, 0));
 			}
 		}
@@ -123,9 +123,9 @@ void CheckerBoard::ResetWall()
 {
 	for (int i = 0; i < ROW - 1; ++i) {
 		for (int j = 0; j < COL - 1; ++j) {
-			bool curr = m_grid[i][j] && IsSymbolWall(m_grid[i][j]);
-			bool right = m_grid[i][j+1] && IsSymbolWall(m_grid[i][j+1]);
-			bool up = m_grid[i+1][j] && IsSymbolWall(m_grid[i+1][j]);
+			bool curr = m_grid[i][j] && IsSymbolWall(*m_grid[i][j]);
+			bool right = m_grid[i][j+1] && IsSymbolWall(*m_grid[i][j+1]);
+			bool up = m_grid[i+1][j] && IsSymbolWall(*m_grid[i+1][j]);
 
 			if (!curr) {
 				continue;
@@ -159,8 +159,8 @@ void CheckerBoard::ResetWall()
 				continue;
 			}
 
-			SymbolInfo* old = static_cast<SymbolInfo*>(symbol.getUserData());
-			SymbolInfo* info = new SymbolInfo;
+			SymbolExt* old = static_cast<SymbolExt*>(symbol.getUserData());
+			SymbolExt* info = new SymbolExt;
 			*info = *old;
 			info->wall_type = wall_type;
 			

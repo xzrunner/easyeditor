@@ -1,13 +1,14 @@
 #include "PasteSymbolOP.h"
 #include "StagePanel.h"
-#include "SymbolInfo.h"
+#include "SymbolExt.h"
+#include "SymbolRender.h"
+#include "tools.h"
 
 namespace sg
 {
 
 PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library)
 	: d2d::PasteSymbolOP(stage, stage, library)
-	, m_render(stage)
 {
 }
 
@@ -37,15 +38,16 @@ bool PasteSymbolOP::onDraw() const
 
 	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
 
-	m_render.DrawGrass(*symbol, m_pos);
+	SymbolRender* render = SymbolRender::Instance();
+	render->DrawGrass(*symbol, m_pos);
 
 	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
-	bool valid = stage->getCheckBoard().IsValid(*symbol, m_pos);
-	m_render.DrawGrids(*symbol, m_pos, valid);
+	bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
+	render->DrawGrids(*symbol, m_pos, valid);
 
 	bool ret = d2d::PasteSymbolOP::onDraw();
 
-	m_render.DrawArrow(*symbol, m_pos);
+	render->DrawArrow(*symbol, m_pos);
 
 	return ret;
 }
@@ -57,7 +59,7 @@ bool PasteSymbolOP::isCurrSymbolValid() const
 		return false;
 	}
 
-	SymbolInfo* info = static_cast<SymbolInfo*>(symbol->getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol->getUserData());
 	if (info == NULL) {
 		return false;
 	}
@@ -68,16 +70,7 @@ bool PasteSymbolOP::isCurrSymbolValid() const
 bool PasteSymbolOP::isCurrSymbolIsWall() const
 {
 	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
-	if (!symbol) {
-		return false;
-	}
-
-	SymbolInfo* info = static_cast<SymbolInfo*>(symbol->getUserData());
-	if (info == NULL) {
-		return false;
-	}
-
-	return info->wall_type != -1;	
+	return IsSymbolWall(*symbol);
 }
 
 }

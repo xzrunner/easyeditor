@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "SymbolRender.h"
-
 namespace sg
 {
 
@@ -21,11 +19,7 @@ public:
 
 private:
 	bool isCurrSymbolValid() const;
-
 	bool isCurrSymbolIsWall() const;
-
-private:
-	SymbolRender m_render;
 
 }; // PasteSymbolOP
 

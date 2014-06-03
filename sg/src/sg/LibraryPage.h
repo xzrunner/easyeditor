@@ -13,9 +13,6 @@ public:
 
 	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
-protected:
-	virtual void onAddPress(wxCommandEvent& event) {}
-
 }; // LibraryPage 
 
 }

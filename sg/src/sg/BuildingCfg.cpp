@@ -1,21 +1,22 @@
-#include "ResourceMgr.h"
+#include "BuildingCfg.h"
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "LibraryPage.h"
-#include "SymbolInfo.h"
+#include "SymbolExt.h"
+#include "SymbolRender.h"
 
 #include <JSON/json.h>
 
 namespace sg
 {
 
-ResourceMgr::ResourceMgr(StagePanel* stage, d2d::LibraryPanel* library)
+BuildingCfg::BuildingCfg(StagePanel* stage, d2d::LibraryPanel* library)
 	: m_stage(stage)
 	, m_library(library)
 {
 }
 
-void ResourceMgr::init()
+void BuildingCfg::InitAllData()
 {
 	const char* config_filepath = "config.json";
 
@@ -28,27 +29,27 @@ void ResourceMgr::init()
 	fin.close();
 
 	try {
-		initAmountLimit(value);
-		initBackground(value);
-		initGrid(value);
- 		initBuildings(value);
- 		initArrow(value);
-		initGrass(value);
+		InitAmountLimit(value);
+		InitBackground(value);
+		InitGrid(value);
+ 		InitBuildings(value);
+ 		InitArrow(value);
+		InitGrass(value);
 	} catch (d2d::Exception& e) {
 		std::cerr << e.what() << std::endl;
 	}
 }
 
-void ResourceMgr::initLibraryFromBuildings()
+void BuildingCfg::ResetLibraryList()
 {
-	initLibraryFromBuildings(m_defenses, m_buildings.defenses);
-	initLibraryFromBuildings(m_resources, m_buildings.resources);
-	initLibraryFromBuildings(m_army, m_buildings.army);
+	ResetLibraryList(m_defenses, m_buildings.defenses);
+	ResetLibraryList(m_resources, m_buildings.resources);
+	ResetLibraryList(m_army, m_buildings.army);
 }
 
-int ResourceMgr::queryAmountLimit(const std::string& name) const
+int BuildingCfg::QueryAmountLimit(const std::string& name) const
 {
-	int level = m_stage->getLevel();
+	int level = m_stage->GetBaseLevel();
 
 	assert(level >= 0 && level < m_amount_limit.size());
 	std::map<std::string, int>::const_iterator itr 
@@ -60,17 +61,17 @@ int ResourceMgr::queryAmountLimit(const std::string& name) const
 	}
 }
 
-void ResourceMgr::initBackground(const Json::Value& value)
+void BuildingCfg::InitBackground(const Json::Value& value)
 {
 	std::string filepath = value["background"].asString();
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::GLCanvas* canvas = m_stage->getCanvas();
-	static_cast<StageCanvas*>(canvas)->setBackground(symbol);
+	static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 	symbol->release();
 	canvas->resetInitState();
 }
 
-void ResourceMgr::initGrid(const Json::Value& value)
+void BuildingCfg::InitGrid(const Json::Value& value)
 {
 	std::string filepath = value["grid"]["filepath"].asString();
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
@@ -80,29 +81,25 @@ void ResourceMgr::initGrid(const Json::Value& value)
 	float alpha = value["grid"]["alpha"].asInt();
 	sprite->setTransform(d2d::Vector(0, 0), angle * d2d::TRANS_DEG_TO_RAD);
 	sprite->setScale(scale, scale);
-	m_stage->m_grid = sprite;
+	SymbolRender::Instance()->SetGrid(sprite);
 	symbol->release();
 	m_stage->getCanvas()->resetInitState();
 }
 
-void ResourceMgr::initArrow(const Json::Value& value)
+void BuildingCfg::InitArrow(const Json::Value& value)
 {
-	{
-		std::string filepath = value["arrow"]["down_path"].asString();
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-		m_stage->m_arrow_down = symbol;
-//		symbol->release();
-	}
-	{
-		std::string filepath = value["arrow"]["right_path"].asString();
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-		m_stage->m_arrow_right = symbol;
-//		symbol->release();
-	}
+	std::string filepath = value["arrow"]["down_path"].asString();
+	d2d::ISymbol* down = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+
+	filepath = value["arrow"]["right_path"].asString();
+	d2d::ISymbol* right = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+
+	SymbolRender::Instance()->SetArrow(down, right);
+
 	m_stage->getCanvas()->resetInitState();
 }
 
-void ResourceMgr::initGrass(const Json::Value& value)
+void BuildingCfg::InitGrass(const Json::Value& value)
 {
 	int i = 0;
 	Json::Value grassVal = value["grass"]["levels"][i++];
@@ -112,13 +109,13 @@ void ResourceMgr::initGrass(const Json::Value& value)
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->setScale(scale, scale);
-		m_stage->m_grass[i-1] = sprite;
+		SymbolRender::Instance()->SetGrass(i-1, sprite);
 
 		grassVal = value["grass"]["levels"][i++];
 	}
 }
 
-void ResourceMgr::initAmountLimit(const Json::Value& value)
+void BuildingCfg::InitAmountLimit(const Json::Value& value)
 {
 	int i = 0;
 	Json::Value amountVal = value["amount"][i++];
@@ -137,11 +134,11 @@ void ResourceMgr::initAmountLimit(const Json::Value& value)
 	}
 }
 
-void ResourceMgr::initBuildings(const Json::Value& value)
+void BuildingCfg::InitBuildings(const Json::Value& value)
 {
-	initBuildings(value["buildings"]["defenses"], m_buildings.defenses);
-	initBuildings(value["buildings"]["resources"], m_buildings.resources);
-	initBuildings(value["buildings"]["army"], m_buildings.army);
+	InitBuildings(value["buildings"]["defenses"], m_buildings.defenses);
+	InitBuildings(value["buildings"]["resources"], m_buildings.resources);
+	InitBuildings(value["buildings"]["army"], m_buildings.army);
 
 	m_defenses = new LibraryPage(m_library->getNotebook(), "Defenses");
 	m_library->addPage(m_defenses);
@@ -150,10 +147,10 @@ void ResourceMgr::initBuildings(const Json::Value& value)
 	m_army = new LibraryPage(m_library->getNotebook(), "Army");
 	m_library->addPage(m_army);	
 
-	initLibraryFromBuildings();
+	ResetLibraryList();
 }
 
-void ResourceMgr::initBuildings(const Json::Value& value, 
+void BuildingCfg::InitBuildings(const Json::Value& value, 
 								std::vector<Building*>& buildings)
 {
 	int i = 0;
@@ -179,12 +176,11 @@ void ResourceMgr::initBuildings(const Json::Value& value,
 	}
 }
 
-void ResourceMgr::initLibraryFromBuildings(LibraryPage* library, 
-										   const std::vector<Building*>& buildings)
+void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Building*>& buildings)
 {
 	library->getList()->clear();
 
-	int lv = m_stage->getLevel();
+	int lv = m_stage->GetBaseLevel();
 	for (int i = 0, n = buildings.size(); i < n; ++i)
 	{
 		const Building* b = buildings[i];
@@ -201,10 +197,9 @@ void ResourceMgr::initLibraryFromBuildings(LibraryPage* library,
 
 		if (!filepath.empty()) 
 		{
-			SymbolInfo* info = new SymbolInfo;
+			SymbolExt* info = new SymbolExt;
 			info->size = b->size;
-			info->remain = queryAmountLimit(pItem->building->name);
-//			info->iswall = (b->name == "Wall" ? true : false);
+			info->remain = QueryAmountLimit(pItem->building->name);
 			info->wall_type = (b->name == "Wall" ? 0 : -1);
 			assert(info->remain != -1);
 

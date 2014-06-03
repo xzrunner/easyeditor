@@ -11,7 +11,7 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 
 bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
 {
-	static_cast<StagePanel*>(m_editPanel)->getCheckBoard().ClearRemovedCache();
+	static_cast<StagePanel*>(m_editPanel)->GetCheckBoard().ClearRemovedCache();
 	return d2d::ArrangeSpriteFixOP::onMouseLeftUp(x, y);
 }
 
@@ -52,7 +52,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 	{
 		d2d::ISprite* s = sprites[i];
 		int row, col;
-		stage->transCoordsToGridPos(s->getPosition(), row, col);
+		stage->TransCoordsToGridPos(s->getPosition(), row, col);
 		switch (type)
 		{
 		case d2d::e_up:
@@ -70,7 +70,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 		}
 
 		d2d::Vector pos;
-		stage->transGridPosToCoords(row, col, pos);
+		stage->TransGridPosToCoords(row, col, pos);
 		s->setTransform(pos, s->getAngle());
 	}
 
