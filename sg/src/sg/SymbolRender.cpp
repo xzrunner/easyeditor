@@ -30,7 +30,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos,
 
 	d2d::ISprite* grid = m_stage->m_grid;
 
-	d2d::Colorf color = valid ? d2d::Colorf(0, 255, 0, 10) : d2d::Colorf(255, 0, 0, 10);
+	d2d::Colorf color = valid ? d2d::Colorf(0, 1.0f, 0, 0.8f) : d2d::Colorf(1, 0, 0, 0.8f);
 
 	SymbolInfo* info = static_cast<SymbolInfo*>(symbol.getUserData());
 	int center = (info->size >> 1);
@@ -39,7 +39,6 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos,
 			d2d::Vector pos;
 			m_stage->transGridPosToCoords(row + i - center, col + j - center, pos);
 			grid->setTransform(pos, grid->getAngle());
-			//grid->multiCol = d2d::Colorf(0, 255, 0, 10);
 			d2d::SpriteDraw::drawSprite(grid, color);
 		}
 	}
