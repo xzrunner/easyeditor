@@ -18,7 +18,20 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 	}
 
 	d2d::ISprite* grass = m_stage->m_grass[info->size - 1];
-	grass->setTransform(pos, 0);
+	if (info->size % 2 == 0)
+	{
+		int row, col;
+		m_stage->transCoordsToGridPos(pos, row, col);
+
+		d2d::Vector fixed;
+		m_stage->transGridPosToCoords(row - 1, col - 1, fixed);
+
+		grass->setTransform((pos + fixed) * 0.5f, 0);
+	}
+	else
+	{
+		grass->setTransform(pos, 0);
+	}
 	d2d::SpriteDraw::drawSprite(grass);
 }
 
