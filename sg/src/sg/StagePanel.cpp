@@ -196,6 +196,10 @@ void StagePanel::changeSpritesLevel(bool up)
 			continue;
 		}
 
+		if (pItem->town_hall_level > m_level) {
+			return;
+		}
+
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
 		if (symbol) {
 			if (symbol->getUserData() == NULL) 
