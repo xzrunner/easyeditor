@@ -15,6 +15,14 @@ class MultiSpritesImpl;
 class PropertySettingPanel;
 class AbstractEditCMPT;
 
+enum DirectionType
+{
+	e_up,
+	e_down,
+	e_left,
+	e_right
+};
+
 template <typename TBase>
 class ArrangeSpriteOP : public TBase
 {
@@ -38,6 +46,9 @@ public:
 	virtual bool clear();
 
 protected:
+	virtual void onDirectionKeyDown(DirectionType type);
+	virtual void onSpaceKeyDown();
+
 	virtual void translateSprite(const Vector& delta);
 	virtual void rotateSprite(const Vector& dst);
 	virtual void scaleSprite(const Vector& currPos);

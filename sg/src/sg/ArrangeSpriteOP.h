@@ -16,6 +16,9 @@ public:
 	virtual bool onMouseLeftUp(int x, int y);
 	virtual bool onMouseLeftDClick(int x, int y);
 
+protected:
+	virtual void onDirectionKeyDown(d2d::DirectionType type);
+
 }; // ArrangeSpriteOP
 
 }

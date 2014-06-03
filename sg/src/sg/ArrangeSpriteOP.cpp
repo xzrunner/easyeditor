@@ -42,4 +42,39 @@ bool ArrangeSpriteOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
+void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
+{
+	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+
+	std::vector<d2d::ISprite*> sprites;
+	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		d2d::ISprite* s = sprites[i];
+		int row, col;
+		stage->transCoordsToGridPos(s->getPosition(), row, col);
+		switch (type)
+		{
+		case d2d::e_up:
+			++row;
+			break;
+		case d2d::e_down:
+			--row;
+			break;
+		case d2d::e_left:
+			--col;
+			break;
+		case d2d::e_right:
+			++col;
+			break;
+		}
+
+		d2d::Vector pos;
+		stage->transGridPosToCoords(row, col, pos);
+		s->setTransform(pos, s->getAngle());
+	}
+
+	m_editPanel->Refresh();
+}
+
 }

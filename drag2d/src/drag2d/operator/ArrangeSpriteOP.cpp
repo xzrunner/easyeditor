@@ -82,28 +82,19 @@ bool ArrangeSpriteOP<TBase>::onKeyDown(int keyCode)
 		m_selected = NULL;
 		break;
 	case 'a': case 'A':
-		translateSprite(Vector(-1, 0));
+		onDirectionKeyDown(e_left);
 		break;
 	case 'd': case 'D':
-		translateSprite(Vector(1, 0));
+		onDirectionKeyDown(e_right);
 		break;
 	case 's': case 'S':
-		translateSprite(Vector(0, -1));
+		onDirectionKeyDown(e_down);
 		break;
 	case 'w': case 'W':
-		translateSprite(Vector(0, 1));
+		onDirectionKeyDown(e_up);
 		break;
 	case WXK_SPACE:
-		{
-			std::vector<ISprite*> selected;
-			m_selection->traverse(FetchAllVisitor<ISprite>(selected));
-			for (size_t i = 0, n = selected.size(); i < n; ++i)
-			{
-				selected[i]->setTransform(Vector(0, 0), 0);
-//					selected[i]->setOffset(Vector(0, 0));
-			}
-			m_editPanel->Refresh();
-		}
+		onSpaceKeyDown();
 		break;
 	}
 
@@ -387,6 +378,39 @@ bool ArrangeSpriteOP<TBase>::clear()
 	m_selected = NULL;
 
 	return false;
+}
+
+template <typename TBase>
+void ArrangeSpriteOP<TBase>::onDirectionKeyDown(DirectionType type)
+{
+	switch (type)
+	{
+	case e_left:
+		translateSprite(Vector(-1, 0));
+		break;
+	case e_right:
+		translateSprite(Vector(1, 0));
+		break;
+	case e_down:
+		translateSprite(Vector(0, -1));
+		break;
+	case e_up:
+		translateSprite(Vector(0, 1));
+		break;
+	}
+}
+
+template <typename TBase>
+void ArrangeSpriteOP<TBase>::onSpaceKeyDown()
+{
+	std::vector<ISprite*> selected;
+	m_selection->traverse(FetchAllVisitor<ISprite>(selected));
+	for (size_t i = 0, n = selected.size(); i < n; ++i)
+	{
+		selected[i]->setTransform(Vector(0, 0), 0);
+		//selected[i]->setOffset(Vector(0, 0));
+	}
+	m_editPanel->Refresh();
 }
 
 template <typename TBase>
