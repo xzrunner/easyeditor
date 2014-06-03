@@ -58,7 +58,7 @@ void SymbolRender::DrawArrow(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 	{
 		d2d::Vector pos;
 		m_stage->transGridPosToCoords(row, col - r, pos);
-		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_right, pos, d2d::PI);
+		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_down, pos, 0, -1);
 	}
 	// right
 	{
@@ -70,7 +70,7 @@ void SymbolRender::DrawArrow(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 	{
 		d2d::Vector pos;
 		m_stage->transGridPosToCoords(row + r, col, pos);
-		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_down, pos, d2d::PI);
+		d2d::SpriteDraw::drawSprite(m_stage->m_arrow_right, pos, 0, -1);
 	}
 	// down
 	{
