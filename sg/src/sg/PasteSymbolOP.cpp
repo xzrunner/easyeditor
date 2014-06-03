@@ -77,7 +77,7 @@ bool PasteSymbolOP::isCurrSymbolIsWall() const
 		return false;
 	}
 
-	return info->iswall;	
+	return info->wall_type != -1;	
 }
 
 }

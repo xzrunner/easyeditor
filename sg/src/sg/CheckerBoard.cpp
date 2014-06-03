@@ -121,17 +121,18 @@ bool CheckerBoard::SetCachedPos(d2d::ISprite* sprite) const
 
 void CheckerBoard::ResetWall()
 {
-	for (int i = ROW - 1; i > 0; --i) {
-		for (int j = 0; j < ROW - 1; ++j) {
+	for (int i = 0; i < ROW - 1; ++i) {
+		for (int j = 0; j < COL - 1; ++j) {
 			bool curr = m_grid[i][j] && IsSymbolWall(m_grid[i][j]);
 			bool right = m_grid[i][j+1] && IsSymbolWall(m_grid[i][j+1]);
-			bool up = m_grid[i-1][j] && IsSymbolWall(m_grid[i-1][j]);
+			bool up = m_grid[i+1][j] && IsSymbolWall(m_grid[i+1][j]);
 
 			if (!curr) {
 				continue;
 			}
 
-			const d2d::ISymbol& symbol = m_grid[i][j]->getSymbol();
+			d2d::ISprite* sprite = m_grid[i][j];
+			const d2d::ISymbol& symbol = sprite->getSymbol();
 			wxString filepath = symbol.getFilepath();
 			int s = filepath.find("lv") + 2;
 			int e = filepath.find('_', s-1);
@@ -140,13 +141,17 @@ void CheckerBoard::ResetWall()
 			}
 			int dot = filepath.find_last_of(".");
 
+			int wall_type = 0;
 			if (!right && !up) {
 				;
 			} else if (right && up) {
+				wall_type = 3;
 				filepath = filepath.insert(dot, "_3");
 			} else if (right) {
+				wall_type = 2;
 				filepath = filepath.insert(dot, "_2");
 			} else if (up) {
+				wall_type = 1;
 				filepath = filepath.insert(dot, "_1");
 			}
 
@@ -157,6 +162,7 @@ void CheckerBoard::ResetWall()
 			SymbolInfo* old = static_cast<SymbolInfo*>(symbol.getUserData());
 			SymbolInfo* info = new SymbolInfo;
 			*info = *old;
+			info->wall_type = wall_type;
 			
 			d2d::ISymbol* new_s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			new_s->setUserData(info);

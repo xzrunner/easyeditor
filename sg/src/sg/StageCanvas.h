@@ -31,6 +31,7 @@ private:
 	void drawGuideLines() const;
 	void drawGrass() const;
 	void drawGrids() const;
+	void drawSprites() const;
 	void drawArrow() const;
 
 private:

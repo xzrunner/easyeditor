@@ -62,8 +62,10 @@ void StageCanvas::onDraw()
 	drawGuideLines();
 	drawGrass();
 	drawGrids();
-	d2d::SpriteStageCanvas::onDraw();
+	drawSprites();
 	drawArrow();
+
+	m_editPanel->drawEditTemp();
 
 //	m_stage->getCheckBoard().DebugDraw();
 }
@@ -133,6 +135,46 @@ void StageCanvas::drawGrids() const
 		d2d::ISprite* s = sprites[i];
 		bool valid = m_stage->getCheckBoard().IsValid(s);
 		m_render.DrawGrids(s->getSymbol(), s->getPosition(), valid);
+	}
+}
+
+void StageCanvas::drawSprites() const
+{
+	std::vector<d2d::ISprite*> walls;
+
+	std::vector<d2d::ISprite*> sprites;
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::e_visible);
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		d2d::ISprite* sprite = sprites[i];
+		SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+		if (info->wall_type != -1) {
+			walls.push_back(sprite);
+		} else {
+			d2d::SpriteDraw::drawSprite(sprite);
+		}
+	}
+
+	std::sort(walls.begin(), walls.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
+	for (int i = 0, n = walls.size(); i < n; ++i)
+	{
+		d2d::ISprite* sprite = walls[i];
+		SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+		{
+			if (info->wall_type == 0) {
+				d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 4);
+				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), pos);
+			} else if (info->wall_type == 1) {
+				d2d::Vector pos = sprite->getPosition() + d2d::Vector(-10, 8);
+				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), pos);
+			} else if (info->wall_type == 2) {
+				d2d::Vector pos = sprite->getPosition() + d2d::Vector(10, 8);
+				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), pos);
+			} else if (info->wall_type == 3) {
+				d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 6);
+				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), pos);
+			}
+		}
 	}
 }
 

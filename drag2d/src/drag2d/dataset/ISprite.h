@@ -115,7 +115,9 @@ namespace d2d
 		{
 			e_file,
 			e_x,
-			e_y
+			e_y,
+			e_x_invert,
+			e_y_invert
 		};
 
 	public:

@@ -304,6 +304,10 @@ bool SpriteCmp::operator() (const ISprite* s0, const ISprite* s1) const
 		return s0->getPosition().x < s1->getPosition().x;
 	case e_y:
 		return s0->getPosition().y < s1->getPosition().y;
+	case e_x_invert:
+		return s0->getPosition().x > s1->getPosition().x;
+	case e_y_invert:
+		return s0->getPosition().y > s1->getPosition().y;
 	default:
 		return s0->getSymbol().getFilepath() < s1->getSymbol().getFilepath();
 	}

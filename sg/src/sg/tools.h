@@ -11,7 +11,7 @@ static bool IsSymbolWall(d2d::ISprite* sprite)
 		return false;
 	}
 
-	return info->iswall;
+	return info->wall_type != -1;
 }
 
 }
