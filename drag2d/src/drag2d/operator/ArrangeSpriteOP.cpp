@@ -24,7 +24,8 @@ const float ArrangeSpriteOP<TBase>::SCALE_NODE_RADIUS = 2.0f;
 
 template <typename TBase>
 ArrangeSpriteOP<TBase>::ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-	PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/, bool isDeformOpen/* = true*/)
+	PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/, 
+	bool isDeformOpen/* = true*/, bool isAutoAlignOpen /*= true*/)
 	: TBase(editPanel, spritesImpl, propertyPanel, callback)
 	, m_isDeformOpen(isDeformOpen)
 	, m_spritesImpl(spritesImpl)
@@ -32,7 +33,7 @@ ArrangeSpriteOP<TBase>::ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* 
 	, m_bRightPress(false)
 	, m_selected(NULL)
 	, m_bDirty(false)
-	, m_autoAlignOpen(false)
+	, m_isAutoAlignOpen(isAutoAlignOpen)
 {
 	m_selection = spritesImpl->getSpriteSelection();
 	m_selection->retain();
@@ -169,7 +170,6 @@ bool ArrangeSpriteOP<TBase>::onMouseLeftDown(int x, int y)
 	}
 	m_bRightPress = false;
 
-	m_autoAlignOpen = false;
 	m_autoAlignHor[0] = m_autoAlignHor[1];
 	m_autoAlignVer[0] = m_autoAlignVer[1];
 
@@ -203,7 +203,7 @@ bool ArrangeSpriteOP<TBase>::onMouseLeftUp(int x, int y)
 		m_bDirty = false;
 	}
 
-	if (Settings::bSpriteCapture && m_autoAlignOpen && !m_selection->empty())
+	if (Settings::bSpriteCapture && m_isAutoAlignOpen && !m_selection->empty())
 	{
 		std::vector<ISprite*> sprites;
 		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
@@ -366,10 +366,13 @@ bool ArrangeSpriteOP<TBase>::onDraw() const
 		}
 	}
 
-	if (m_autoAlignHor[0] != m_autoAlignHor[1])
-		PrimitiveDraw::drawDashLine(m_autoAlignHor[0], m_autoAlignHor[1], Colorf(0, 0, 0));
-	if (m_autoAlignVer[0] != m_autoAlignVer[1])
-		PrimitiveDraw::drawDashLine(m_autoAlignVer[0], m_autoAlignVer[1], Colorf(0, 0, 0));
+	if (m_isAutoAlignOpen)
+	{
+		if (m_autoAlignHor[0] != m_autoAlignHor[1])
+			PrimitiveDraw::drawDashLine(m_autoAlignHor[0], m_autoAlignHor[1], Colorf(0, 0, 0));
+		if (m_autoAlignVer[0] != m_autoAlignVer[1])
+			PrimitiveDraw::drawDashLine(m_autoAlignVer[0], m_autoAlignVer[1], Colorf(0, 0, 0));
+	}
 
 	return false;
 }
@@ -392,7 +395,6 @@ void ArrangeSpriteOP<TBase>::translateSprite(const Vector& delta)
 	m_selection->traverse(TranslateVisitor(delta));
 	if (!m_selection->empty()) 
 	{
-		m_autoAlignOpen = true;
 		if (m_propertyPanel && !m_bDirty)
 		{
 			m_propertyPanel->enablePropertyGrid(false);

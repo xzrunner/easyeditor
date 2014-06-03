@@ -10,7 +10,7 @@ namespace d2d
 	public:
 		ArrangeSpriteFixOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
 			PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL,
-			bool isDeformOpen = true);
+			bool isDeformOpen = true, bool isAutoAlignOpen = true);
 
 		virtual bool onMouseLeftUp(int x, int y);
 		virtual bool onMouseRightDown(int x, int y);

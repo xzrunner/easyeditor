@@ -21,7 +21,7 @@ class ArrangeSpriteOP : public TBase
 public:
 	ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 		PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL,
-		bool isDeformOpen = true);
+		bool isDeformOpen = true, bool isAutoAlignOpen = true);
 	virtual ~ArrangeSpriteOP();
 
 	virtual bool onKeyDown(int keyCode);
@@ -136,7 +136,7 @@ private:
 
 	bool m_bDirty;
 
-	bool m_autoAlignOpen;
+	bool m_isAutoAlignOpen;
 	Vector m_autoAlignHor[2], m_autoAlignVer[2];
 
 	ShapeStyle m_shearNodeStyle;
