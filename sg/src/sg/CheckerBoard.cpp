@@ -58,7 +58,22 @@ void CheckerBoard::Clear()
 
 bool CheckerBoard::IsValid(d2d::ISprite* sprite) const
 {
-	return IsValid(sprite->getSymbol(), sprite->getPosition());
+	int row, col;
+	m_stage->transCoordsToGridPos(sprite->getPosition(), row, col);
+
+	SymbolInfo* info = static_cast<SymbolInfo*>(sprite->getSymbol().getUserData());
+	int center = (info->size >> 1);
+	for (int i = 0; i < info->size; ++i) {
+		for (int j = 0; j < info->size; ++j) {
+			int y = row + i - center;
+			int x = col + j - center;
+			if (m_grid[y][x] && m_grid[y][x] != sprite) {
+				return false;
+			}
+		}
+	}
+
+	return true;
 }
 
 bool CheckerBoard::IsValid(const d2d::ISymbol& symbol, const d2d::Vector& pos) const

@@ -131,7 +131,8 @@ void StageCanvas::drawGrids() const
 	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
-		m_render.DrawGrids(s->getSymbol(), s->getPosition(), true);
+		bool valid = m_stage->getCheckBoard().IsValid(s);
+		m_render.DrawGrids(s->getSymbol(), s->getPosition(), valid);
 	}
 }
 
