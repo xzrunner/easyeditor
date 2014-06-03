@@ -6,8 +6,9 @@ namespace d2d
 {
 
 ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-									   PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/)
-	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, callback)
+									   PropertySettingPanel* propertyPanel/* = NULL*/, 
+									   AbstractEditCMPT* callback/* = NULL*/, bool isDeformOpen /*= true*/)
+	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, callback, isDeformOpen)
 	, m_spritesImpl(spritesImpl)
 {
 }
