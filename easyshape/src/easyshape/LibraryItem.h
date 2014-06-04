@@ -6,7 +6,7 @@
 namespace eshape
 {
 
-class LibraryItem : public d2d::ISymbol, public d2d::UserDataImpl
+class LibraryItem : public d2d::ISymbol
 {
 public:
 	LibraryItem();

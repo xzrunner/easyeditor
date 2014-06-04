@@ -282,36 +282,8 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="verify"
+			Name="command"
 			>
-			<File
-				RelativePath="..\..\..\src\easydb\VerifyImages.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\VerifyImages.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\VerifyJsons.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\VerifyJsons.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="fix"
-			>
-			<File
-				RelativePath="..\..\..\src\easydb\FixImages.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easydb\FixImages.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="tools"
