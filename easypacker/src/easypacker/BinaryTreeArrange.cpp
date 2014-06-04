@@ -58,9 +58,11 @@ void BinaryTreeArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 			{
 				for (size_t j = i; j < n; ++j)
 				{
-					const d2d::ImageSymbol& symbol = sorted[j]->getSymbol();
-					sorted[j]->setTransform(d2d::Vector(-SPACING - symbol.getSize().xLength() * 0.5f, 
-						-SPACING - symbol.getSize().yLength() * 0.5f), 0);
+					d2d::Rect r = sorted[j]->getSymbol().getSize();
+					d2d::Vector pos;
+					pos.x = -SPACING - r.xLength() * 0.5f - r.xCenter();
+					pos.y = -SPACING - r.yLength() * 0.5f - r.yCenter();
+					sorted[j]->setTransform(pos, 0);
 				}
 				break;
 			}

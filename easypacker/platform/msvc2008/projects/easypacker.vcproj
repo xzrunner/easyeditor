@@ -202,6 +202,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easypacker\BinaryTreeNewArrange.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easypacker\BinaryTreeNewArrange.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easypacker\DirectlyArrange.cpp"
 				>
 			</File>
