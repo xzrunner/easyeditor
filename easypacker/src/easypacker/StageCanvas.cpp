@@ -1,41 +1,34 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 #include "Context.h"
-
-static const d2d::Colorf LIGHT_GRAY = d2d::Colorf(0.8f, 0.8f, 0.8f);
+#include "config.h"
 
 using namespace epacker;
 
-StageCanvas::StageCanvas(StagePanel* parent)
-	: d2d::SpriteStageCanvas(parent, parent)
+StageCanvas::StageCanvas(StagePanel* stage)
+	: d2d::SpriteStageCanvas(stage, stage)
 {
 }
 
 void StageCanvas::onDraw()
 {
-	drawGuideLines();
 	d2d::SpriteStageCanvas::onDraw();
+	drawRegion();
 }
 
-void StageCanvas::drawGuideLines()
+void StageCanvas::drawRegion()
 {
 	const float width = Context::Instance()->width,
 		height = Context::Instance()->height;
 
-	glColor3f(LIGHT_GRAY.r, LIGHT_GRAY.g, LIGHT_GRAY.b);
-
-	glPushMatrix();
-	glBegin(GL_LINES);
-	for (size_t i = 0; i <= height; ++i)
+	int x = 0, y = 0;
+	int count = static_cast<StagePanel*>(m_editPanel)->GetTextureAccount();
+	for (int i = 0; i < count; ++i)
 	{
-		glVertex2f(0, i);
-		glVertex2f(width, i);
+		d2d::PrimitiveDraw::rect(
+			d2d::Vector(x, y), 
+			d2d::Vector(x + width, y + height), 
+			d2d::LIGHT_GREY_LINE);
+		x += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;
 	}
-	for (size_t i = 0; i <= width; ++i)
-	{
-		glVertex2f(i, 0);
-		glVertex2f(i, height);
-	}
-	glEnd();
-	glPopMatrix();
 }

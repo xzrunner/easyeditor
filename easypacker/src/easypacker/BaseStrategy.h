@@ -11,6 +11,7 @@ namespace epacker
 		virtual ~BaseStrategy() {}
 
 		virtual void arrange(const std::vector<d2d::ImageSprite*>& sprites) = 0;
+		virtual int GetTextureAccount() const = 0;
 
 	protected:
 		void sortByArea(std::vector<d2d::ImageSprite*>& sprites, bool isDescend = true) const;

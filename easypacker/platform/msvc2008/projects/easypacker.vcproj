@@ -314,6 +314,10 @@
 			Name="frame"
 			>
 			<File
+				RelativePath="..\..\..\src\easypacker\config.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easypacker\Context.cpp"
 				>
 			</File>

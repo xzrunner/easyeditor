@@ -1,5 +1,6 @@
 #include "BinaryTreeNewArrange.h"
 #include "Context.h"
+#include "config.h"
 
 namespace epacker
 {
@@ -8,6 +9,7 @@ static const float PADDING = 1;
 
 BinaryTreeNewArrange::BinaryTreeNewArrange()
 	: m_root(NULL)
+	, m_tex_account(0)
 {
 }
 
@@ -19,6 +21,8 @@ BinaryTreeNewArrange::~BinaryTreeNewArrange()
 
 void BinaryTreeNewArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 {
+	m_tex_account = 0;
+
 	float tot_w = Context::Instance()->width,
 		tot_h = Context::Instance()->height;
 	float scale = 1;
@@ -42,7 +46,10 @@ void BinaryTreeNewArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites
 				float h = r.yLength() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&
 					(w > tot_h || h > tot_w)) {
-					s->setTransform(d2d::Vector(-1024, -1024), 0);
+					d2d::Vector pos;
+					pos.x = tot_w * INVALID_SPRITE_OFFSET_FACTOR;
+					pos.y = tot_h * INVALID_SPRITE_OFFSET_FACTOR;
+					s->setTransform(pos, 0);
 				} else {
 					remain.push_back(s);
 				}
@@ -50,9 +57,11 @@ void BinaryTreeNewArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites
 				s->translate(d2d::Vector(x_offset, 0.0f));
 			}
 		}
-		x_offset += Context::Instance()->width * 1.5f;
+		x_offset += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;
 
 		sorted = remain;
+
+		m_tex_account++;
 	}
 }
 
@@ -295,7 +304,7 @@ float BinaryTreeNewArrange::Node::
 GetMaxLength() const
 {
 	int w = xmax - xmin,
-		h = ymax - xmin;
+		h = ymax - ymin;
 	return w > h ? w : h;
 }
 

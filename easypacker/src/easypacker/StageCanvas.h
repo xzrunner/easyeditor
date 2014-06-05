@@ -10,16 +10,13 @@ namespace epacker
 	class StageCanvas : public d2d::SpriteStageCanvas
 	{
 	public:
-		StageCanvas(StagePanel* parent);
+		StageCanvas(StagePanel* stage);
 
 	protected:
 		virtual void onDraw();
 
 	private:
-		void drawGuideLines();
-
-		void drawCross();
-		void drawRect();
+		void drawRegion();
 
 	}; // StageCanvas
 }

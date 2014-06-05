@@ -13,6 +13,9 @@ public:
 	virtual ~BinaryTreeNewArrange();
 
 	virtual void arrange(const std::vector<d2d::ImageSprite*>& sprites);
+	virtual int GetTextureAccount() const {
+		return m_tex_account;
+	}
 
 private:
 	struct Node
@@ -65,6 +68,8 @@ private:
 	Node* m_root;
 
 	std::map<std::string, Node*> m_mapImages;
+
+	int m_tex_account;
 
 }; // BinaryTreeNewArrange
 

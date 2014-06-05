@@ -78,6 +78,11 @@ void StagePanel::loadFromLibrary()
 	arrangeAllSprites(true);
 }
 
+int StagePanel::GetTextureAccount() const
+{
+	return m_strategy->GetTextureAccount();
+}
+
 void StagePanel::fixCoords(d2d::ISprite* sprite)
 {
 	const d2d::Vector& pos = sprite->getPosition();

@@ -28,6 +28,8 @@ namespace epacker
 		void arrangeAllSprites(bool bClearSelection);
 		void loadFromLibrary();
 
+		int GetTextureAccount() const;
+
 	public:
 		static void fixCoords(d2d::ISprite* sprite);
 
