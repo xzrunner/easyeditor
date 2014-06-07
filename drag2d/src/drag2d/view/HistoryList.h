@@ -15,8 +15,8 @@ namespace d2d
 
 		enum Type {
 			NO_CHANGE = 0,
-			FIXED,
-			NOT_FIXED
+			DIRTY,
+			NOT_DIRTY
 		};
 
 		void clear();

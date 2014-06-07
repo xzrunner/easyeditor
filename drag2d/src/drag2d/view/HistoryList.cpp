@@ -31,11 +31,11 @@ HistoryList::Type HistoryList::undo()
 	m_redoStack.push(op);
 
 	if (!m_savedOP && m_undoStack.empty())
-		return NOT_FIXED;
+		return NOT_DIRTY;
 	else if (m_savedOP && !m_undoStack.empty() && m_savedOP == m_undoStack.top())
-		return NOT_FIXED;
+		return NOT_DIRTY;
 	else
-		return FIXED;
+		return DIRTY;
 }
 
 HistoryList::Type HistoryList::redo()
@@ -49,11 +49,11 @@ HistoryList::Type HistoryList::redo()
 	m_undoStack.push(op);
 
 	if (!m_savedOP && m_undoStack.empty())
-		return NOT_FIXED;
+		return NOT_DIRTY;
 	else if (m_savedOP && !m_undoStack.empty() && m_savedOP == m_undoStack.top())
-		return NOT_FIXED;
+		return NOT_DIRTY;
 	else
-		return FIXED;
+		return DIRTY;
 }
 
 void HistoryList::insert(AbstractAtomicOP* op)

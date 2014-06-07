@@ -5,8 +5,9 @@
 
 namespace escale9
 {
-ToolbarPanel::ToolbarPanel(wxWindow* parent, Symbol* symbol)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::EditPanel* stage, Symbol* symbol)
 	: wxPanel(parent)
+	, m_stage(stage)
 	, m_symbol(symbol)
 {
 	initLayout();
@@ -38,6 +39,7 @@ void ToolbarPanel::initLayout()
 
 void ToolbarPanel::onChangeSize(wxSpinEvent& event)
 {
+	m_stage->setTitleStatus(true);
 	const float w = m_wSpin->GetValue(),
 		h = m_hSpin->GetValue();
 	m_symbol->resize(w, h);

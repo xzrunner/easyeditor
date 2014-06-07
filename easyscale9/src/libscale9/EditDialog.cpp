@@ -29,7 +29,7 @@ namespace escale9
 		m_editPanel->setEditOP(new ResizeBaseOP(m_editPanel, m_symbol));
 		m_editPanel->setCanvas(new d2d::DialogStageCanvas(m_editPanel, m_symbol));
 
-		ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_symbol);
+		ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_editPanel, m_symbol);
 		
 		splitter->SetSashGravity(0.85f);
 		splitter->SplitVertically(m_editPanel, toolbar);

@@ -59,6 +59,8 @@ namespace d2d
 		void onSave();
 		bool isDirty() const;
 
+		void setTitleStatus(bool dirty);
+
 	public:
 		enum
 		{
@@ -83,9 +85,6 @@ namespace d2d
 
 	protected:
 		void onSize(wxSizeEvent& event);
-
-	private:
-		void setTitleStatus(bool fixed);
 
 	protected:
 		AbstractEditOP* m_editOP;

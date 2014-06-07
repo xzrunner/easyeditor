@@ -153,7 +153,7 @@ void EditPanel::undo()
 	HistoryList::Type type = m_historyList.undo();
 	if (type != HistoryList::NO_CHANGE) {
 		Refresh();
-		if (type == HistoryList::FIXED)
+		if (type == HistoryList::DIRTY)
 			setTitleStatus(true);
 		else
 			setTitleStatus(false);
@@ -165,7 +165,7 @@ void EditPanel::redo()
 	HistoryList::Type type = m_historyList.redo();
 	if (type != HistoryList::NO_CHANGE) {
 		Refresh();
-		if (type == HistoryList::FIXED)
+		if (type == HistoryList::DIRTY)
 			setTitleStatus(true);
 		else
 			setTitleStatus(false);
@@ -222,6 +222,24 @@ bool EditPanel::isDirty() const
 	return title[title.Len()-1] == '*';
 }
 
+void EditPanel::setTitleStatus(bool dirty)
+{
+	if (!m_frame) return;
+
+	wxString title = m_frame->GetTitle();
+	if (title.IsNull()) return;
+	if (dirty && title[title.Len()-1] != '*')
+	{
+		title.Append('*');
+		m_frame->SetTitle(title);
+	}
+	else if (!dirty && title[title.Len()-1] == '*')
+	{
+		title = title.SubString(0, title.Len()-2);
+		m_frame->SetTitle(title);
+	}
+}
+
 void EditPanel::onMenuUpOneLayer(wxCommandEvent& event)
 {
 	m_editOP->onPopMenuSelected(Menu_UpOneLayer);
@@ -260,21 +278,4 @@ void EditPanel::onSize(wxSizeEvent& event)
 	Refresh();	// no refresh when change window size
 }
 
-void EditPanel::setTitleStatus(bool fixed)
-{
-	if (!m_frame) return;
-
-	wxString title = m_frame->GetTitle();
-	if (title.IsNull()) return;
-	if (fixed && title[title.Len()-1] != '*')
-	{
-		title.Append('*');
-		m_frame->SetTitle(title);
-	}
-	else if (!fixed && title[title.Len()-1] == '*')
-	{
-		title = title.SubString(0, title.Len()-2);
-		m_frame->SetTitle(title);
-	}
-}
 } // d2d
