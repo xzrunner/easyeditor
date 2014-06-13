@@ -5,7 +5,7 @@
 namespace epacker
 {
 
-static const float PADDING = 1;
+static const float PADDING = 0;
 
 BinaryTreeNewArrange::BinaryTreeNewArrange()
 	: m_root(NULL)

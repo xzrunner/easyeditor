@@ -3,7 +3,7 @@
 #include "StageCanvas.h"
 #include "BinaryTreeArrange.h"
 #include "BinaryTreeNewArrange.h"
-//#include "RectBinArrange.h"
+#include "RectBinArrange.h"
 #include "Context.h"
 
 using namespace epacker;
@@ -17,9 +17,9 @@ StagePanel::StagePanel(wxWindow* parent,
 	m_canvas = new StageCanvas(this);
 
 //	m_strategy = new BinaryTreeArrange();
-	m_strategy = new BinaryTreeNewArrange();
+//	m_strategy = new BinaryTreeNewArrange();
 
-//	m_strategy = new RectBinArrange();
+	m_strategy = new RectBinArrange();
 }
 
 void StagePanel::clear()

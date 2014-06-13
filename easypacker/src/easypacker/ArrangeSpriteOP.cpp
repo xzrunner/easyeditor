@@ -7,7 +7,7 @@ using namespace epacker;
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* editPanel, 
 								 d2d::PropertySettingPanel* propertyPanel,
 								 d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(editPanel, editPanel, propertyPanel, callback)
+	: d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(editPanel, editPanel, propertyPanel, callback, false, false)
 {
 	m_editPanel = editPanel;
 }
