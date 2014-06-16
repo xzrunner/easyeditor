@@ -16,7 +16,7 @@ namespace d2d
 	class Font : public Object
 	{
 	public:
-		Font();
+		Font(bool stroke = false);
 		virtual ~Font();
 
 		bool loadFromFile(const wxString& filepath);
@@ -27,17 +27,20 @@ namespace d2d
 		static const int DEFAULT_SIZE = 16;
 
 	private:
-		void make_dlist(char ch);
+		void make_dlist_freetypes(char ch);
+		void make_dlist_wx(char ch);
 
 	public:
 		unsigned int h;			///< Holds the height of the font.
 		unsigned int * textures;	///< Holds the texture id's 
 		unsigned int list_base;	///< Holds the first display list id
 
-		FT_Face face;
-
 	private:
+		bool m_stroke;
+
 		wxString m_filename;
+
+		FT_Face m_face;
 
 	}; // Font
 }

@@ -14,7 +14,7 @@ namespace d2d
 
 		//
 		// ICloneable interface
-		//	
+		// 
 		virtual FontSymbol* clone() const;
 
 		//
@@ -31,6 +31,9 @@ namespace d2d
 
 	protected:
 		virtual void loadResources();
+
+	private:
+		int getStrWidth(const std::string& str) const;
 
 	private:
 		Font* m_font;

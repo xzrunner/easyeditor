@@ -9,8 +9,11 @@
 namespace d2d
 {
 
-Font::Font()
+Font::Font(bool stroke /*= false*/)
+	: m_stroke(stroke)
 {
+	m_face = NULL;
+
 	h = DEFAULT_SIZE;
 	textures = NULL;
 	list_base = 0;
@@ -24,7 +27,9 @@ Font::~Font()
 	glDeleteTextures(128,textures);
 	delete [] textures;
 
-	FT_Done_Face(face);
+	if (m_face) {
+		FT_Done_Face(m_face);
+	}
 }
 
 bool Font::loadFromFile(const wxString& filepath)
@@ -36,39 +41,50 @@ bool Font::loadFromFile(const wxString& filepath)
 
 	this->h=h;
 
-	//Create and initilize a freetype font library.
-	FT_Library library;
-	if (FT_Init_FreeType( &library )) 
-		throw std::runtime_error("FT_Init_FreeType failed");
+	if (filepath.Contains("default")) 
+	{
+		list_base=glGenLists(128);
+		glGenTextures( 128, textures );
 
-	//This is where we load in the font information from the file.
-	//Of all the places where the code might die, this is the most likely,
-	//as FT_New_Face will die if the font file does not exist or is somehow broken.
-	if (FT_New_Face( library, filepath.c_str(), 0, &face )) 
-		throw std::runtime_error("FT_New_Face failed (there is probably a problem with your font file)");
+		for(unsigned char i=0;i<128;i++)
+			make_dlist_wx(i);
+	} 
+	else 
+	{
+		//Create and initilize a freetype font library.
+		FT_Library library;
+		if (FT_Init_FreeType( &library )) 
+			throw std::runtime_error("FT_Init_FreeType failed");
 
-	//For some twisted reason, Freetype measures font size
-	//in terms of 1/64ths of pixels.  Thus, to make a font
-	//h pixels high, we need to request a size of h*64.
-	//(h << 6 is just a prettier way of writting h*64)
-	FT_Set_Char_Size( face, h << 6, h << 6, 96, 96);
+		//This is where we load in the font information from the file.
+		//Of all the places where the code might die, this is the most likely,
+		//as FT_New_Face will die if the font file does not exist or is somehow broken.
+		if (FT_New_Face( library, filepath.c_str(), 0, &m_face )) 
+			throw std::runtime_error("FT_New_Face failed (there is probably a problem with your font file)");
 
-	//Here we ask opengl to allocate resources for
-	//all the textures and displays lists which we
-	//are about to create.  
-	list_base=glGenLists(128);
-	glGenTextures( 128, textures );
+		//For some twisted reason, Freetype measures font size
+		//in terms of 1/64ths of pixels.  Thus, to make a font
+		//h pixels high, we need to request a size of h*64.
+		//(h << 6 is just a prettier way of writting h*64)
+		FT_Set_Char_Size( m_face, h << 6, h << 6, 96, 96);
 
-	//This is where we actually create each of the fonts display lists.
-	for(unsigned char i=0;i<128;i++)
-		make_dlist(i);
+		//Here we ask opengl to allocate resources for
+		//all the textures and displays lists which we
+		//are about to create.  
+		list_base=glGenLists(128);
+		glGenTextures( 128, textures );
 
-	//We don't need the face information now that the display
-	//lists have been created, so we free the assosiated resources.
-	FT_Done_Face(face);
+		//This is where we actually create each of the fonts display lists.
+		for(unsigned char i=0;i<128;i++)
+			make_dlist_freetypes(i);
 
-	//Ditto for the library.
-	FT_Done_FreeType(library);
+		//We don't need the face information now that the display
+		//lists have been created, so we free the assosiated resources.
+		FT_Done_Face(m_face);
+
+		//Ditto for the library.
+		FT_Done_FreeType(library);
+	}
 
 	return true;
 }
@@ -89,18 +105,18 @@ inline int next_p2 ( int a )
 	return rval;
 }
 
-void Font::make_dlist(char ch)
+void Font::make_dlist_freetypes(char ch)
 {
 	//The first thing we do is get FreeType to render our character
 	//into a bitmap.  This actually requires a couple of FreeType commands:
 
 	//Load the Glyph for our character.
-	if(FT_Load_Glyph( face, FT_Get_Char_Index( face, ch ), FT_LOAD_DEFAULT ))
+	if(FT_Load_Glyph( m_face, FT_Get_Char_Index( m_face, ch ), FT_LOAD_DEFAULT ))
 		throw std::runtime_error("FT_Load_Glyph failed");
 
 	//Move the face's glyph into a Glyph object.
 	FT_Glyph glyph;
-	if(FT_Get_Glyph( face->glyph, &glyph ))
+	if(FT_Get_Glyph( m_face->glyph, &glyph ))
 		throw std::runtime_error("FT_Get_Glyph failed");
 
 	//Convert the glyph to a bitmap.
@@ -117,7 +133,9 @@ void Font::make_dlist(char ch)
 	int height = next_p2( bitmap.rows );
 
 	//Allocate memory for the texture data.
-	GLubyte* expanded_data = new GLubyte[ 2 * width * height];
+	
+	GLubyte* expanded_data = m_stroke ? new GLubyte[width * height * 2] : new GLubyte[width * height];
+//	memset(&expanded_data[0], 0, width * height);
 
 	//Here we fill in the data for the expanded bitmap.
 	//Notice that we are using two channel bitmap (one for
@@ -129,9 +147,13 @@ void Font::make_dlist(char ch)
 	//is the the Freetype bitmap otherwise.
 	for(int j=0; j <height;j++) {
 		for(int i=0; i < width; i++){
-			expanded_data[2*(i+j*width)]= expanded_data[2*(i+j*width)+1] = 
-				(i>=bitmap.width || j>=bitmap.rows) ?
+			int c = (i>=bitmap.width || j>=bitmap.rows) ?
 				0 : bitmap.buffer[i + bitmap.width*j];
+			if (m_stroke) {
+				expanded_data[2*(i+j*width)]= expanded_data[2*(i+j*width)+1] = c;
+			} else {
+				expanded_data[i+j*width] = c;
+			}
 		}
 	}
 
@@ -145,7 +167,7 @@ void Font::make_dlist(char ch)
 	//that we are using GL_LUMINANCE_ALPHA to indicate that
 	//we are using 2 channel data.
 	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width, height,
-		0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, expanded_data );
+		0, /*GL_LUMINANCE_ALPHA*/GL_ALPHA, GL_UNSIGNED_BYTE, expanded_data );
 
 	//With the texture created, we don't need to expanded data anymore
 	delete [] expanded_data;
@@ -189,14 +211,83 @@ void Font::make_dlist(char ch)
 	glTexCoord2d(x,0); glVertex2f(bitmap.width,bitmap.rows);
 	glEnd();
 	glPopMatrix();
-	glTranslatef(face->glyph->advance.x >> 6 ,0,0);
+	glTranslatef(m_face->glyph->advance.x >> 6 ,0,0);
 
 
 	//increment the raster position as if we were a bitmap font.
 	//(only needed if you want to calculate text length)
-	//glBitmap(0,0,0,0,face->glyph->advance.x >> 6,0,NULL);
+	//glBitmap(0,0,0,0,m_face->glyph->advance.x >> 6,0,NULL);
 
 	//Finnish the display list
 	glEndList();
 }
+
+void Font::make_dlist_wx(char ch)
+{
+	wxMemoryDC dc;
+
+	dc.SetPen(wxPen(wxColour(255, 255, 255), 3));
+
+	wxSize size = dc.GetTextExtent(ch);
+
+	wxBitmap bmp(size);
+	dc.SelectObject(bmp);
+	dc.SetFont(wxFont(10, wxDEFAULT, wxNORMAL, wxNORMAL));
+
+	dc.DrawRectangle(0, 0, 100, 100);
+	dc.DrawText(ch, 0, 0);
+
+	wxImage img = bmp.ConvertToImage();
+	unsigned char* src_data = img.GetData();
+
+	int w = size.GetWidth();
+	int h = size.GetHeight();
+	int w_exp = next_p2(w);
+	int h_exp = next_p2(h);
+
+	GLubyte* expanded_data = new GLubyte[w_exp * h_exp * 4];
+
+	memset(&expanded_data[0], 0, w_exp * h_exp * 4);
+	for(int j=0; j <h_exp;j++) {
+		for(int i=0; i < w_exp; i++) {
+			if (j < h && i < w) {
+				for (int k = 0; k < 4; ++k) {
+					expanded_data[(i+j*w_exp)*4+k] = src_data[(i+j*w)*3+k];
+				}
+				expanded_data[(i+j*w_exp)*4+3] = 255;
+			}
+		}
+	}
+
+	glBindTexture( GL_TEXTURE_2D, textures[ch]);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w_exp, h_exp,
+		0, GL_RGBA, GL_UNSIGNED_BYTE, expanded_data );
+
+	delete [] expanded_data;
+
+	glNewList(list_base+ch,GL_COMPILE);
+
+	glBindTexture(GL_TEXTURE_2D,textures[ch]);
+
+	glPushMatrix();
+
+ 	float x=(float)(w+0.5f) / (float)w_exp,
+ 		y=(float)(h+0.5f) / (float)h_exp;
+
+	glBegin(GL_QUADS);
+		glTexCoord2d(0,0); glVertex2f(0,h);
+		glTexCoord2d(0,y); glVertex2f(0,0);
+		glTexCoord2d(x,y); glVertex2f(w,0);
+		glTexCoord2d(x,0); glVertex2f(w,h);
+	glEnd();
+
+	glPopMatrix();
+	glTranslatef(w,0,0);
+
+	glEndList();
+}
+
 } // d2d

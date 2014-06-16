@@ -40,6 +40,16 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 		d2d::SpriteDraw::drawSprite(m_sprites[i], mul, add);
 
 	d2d::PrimitiveDraw::rect(m_clipbox, m_style);
+
+	if (sprite)
+	{
+		d2d::ISymbol* s = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
+		if (s) {
+			d2d::Shader::Instance()->null();
+			d2d::FontSymbol* fs = static_cast<d2d::FontSymbol*>(s);
+			fs->print(0, 0, sprite->name.c_str());
+		}
+	}
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

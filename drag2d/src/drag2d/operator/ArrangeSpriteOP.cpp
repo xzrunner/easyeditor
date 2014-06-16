@@ -827,7 +827,7 @@ void ArrangeSpriteOP<TBase>::autoAlign(const ISprite* src, ISprite* dst)
 template <typename TBase>
 void ArrangeSpriteOP<TBase>::getSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 {
-	Rect r = sprite->getSymbol().getSize();
+	Rect r = sprite->getSymbol().getSize(sprite);
 	love::Matrix t;
 	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
 		sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);

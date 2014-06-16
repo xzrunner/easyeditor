@@ -44,16 +44,26 @@ void FontSymbol::draw(const Colorf& mul, const Colorf& add,
 	_mul = cMul(_mul, mul);
 	Shader::Instance()->color(_mul, add);
 
+	Shader::Instance()->null();
 	print(0, 0, text->getText().c_str());
 }
 
 Rect FontSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	int w = 0;
+// 	int w = 0;
+// 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));
+// 	if (text)
+// 		w = m_font->h * 0.5f * text->getText().size();
+// 	return Rect(w, m_font->h);
+
+	int w, h = m_font->h;
 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));
-	if (text)
-		w = m_font->h * 0.5f * text->getText().size();
-	return Rect(w, m_font->h);
+	if (text) {
+		w = m_font->h * 0.5f * (std::string(text->getText())).size();
+	} else {
+		w = h;
+	}
+	return Rect(w, h);
 }
 
 void FontSymbol::loadResources()
@@ -61,8 +71,16 @@ void FontSymbol::loadResources()
 	m_font = FontMgr::Instance()->getItem(m_filepath);
 }
 
+int FontSymbol::getStrWidth(const std::string& str) const
+{
+	return m_font->h * 0.8f * str.size();
+}
+
 void FontSymbol::print(float x, float y, const char* text) const
 {
+	x -= 0.5f * getStrWidth(text);
+	y -= 0.5f * m_font->h;
+
 	// We want a coordinate system where things coresponding to window pixels.
 	//	pushScreenCoordinateMatrix();					
 

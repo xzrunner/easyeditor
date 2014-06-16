@@ -166,7 +166,7 @@ void ISprite::buildBounding()
 	if (!m_bounding) 
 		m_bounding = BVFactory::createBV(e_obb);
 	const ISymbol& symbol = getSymbol();
-	Rect rect(symbol.getSize());
+	Rect rect(symbol.getSize(this));
 	if (m_offset.x == 0 && m_offset.y == 0)
 		m_offset.set(rect.xCenter(), rect.yCenter());
 	rect.scale(m_scale.x, m_scale.y);
