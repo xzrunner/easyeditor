@@ -5,12 +5,14 @@
 #include "common/config.h"
 #include "common/tools.h"
 #include "common/Settings.h"
+#include "common/Exception.h"
 
 #include "ImageLoader.h"
 
 #include <fstream>
 #include <SOIL/SOIL.h>
 #include <easyimage.h>
+#include <wx/filename.h>
 
 //#define USE_SOIL
 
@@ -32,6 +34,10 @@ Image::~Image()
 
 bool Image::loadFromFile(const wxString& filepath)
 {
+	if (!wxFileName::FileExists(filepath)) {
+		throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
+	}
+
 	m_filepath = filepath;
  
 #ifdef NOT_LOAD_IMAGE

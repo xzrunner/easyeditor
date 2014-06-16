@@ -10,10 +10,13 @@
 #include "common/FileNameParser.h"
 #include "common/PolylineFileAdapter.h"
 #include "common/CircleFileAdapter.h"
+#include "common/Exception.h"
 
 // todo for 3rd part
 // #include "dataset/CircleShape.h"
 // #include "dataset/RectShape.h"
+
+#include <wx/filename.h>
 
 namespace d2d
 {
@@ -36,6 +39,10 @@ void BodyData::clear()
 
 bool BodyData::loadFromFile(const wxString& filename)
 {
+	if (!wxFileName::FileExists(filename)) {
+		throw Exception("File: %s don't exist!", filename.ToStdString().c_str());
+	}
+
 	clear();
 
 	m_filename = filename;

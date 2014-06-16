@@ -5,6 +5,9 @@
 #include <GL/gl.h>
 
 #include <freetype/ftglyph.h>
+#include <wx/filename.h>
+
+#include "common/Exception.h"
 
 namespace d2d
 {
@@ -51,6 +54,10 @@ bool Font::loadFromFile(const wxString& filepath)
 	} 
 	else 
 	{
+		if (!wxFileName::FileExists(filepath)) {
+			throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
+		}
+
 		//Create and initilize a freetype font library.
 		FT_Library library;
 		if (FT_Init_FreeType( &library )) 

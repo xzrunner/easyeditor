@@ -1,6 +1,8 @@
 #include "RawPixels.h"
+#include "common/Exception.h"
 
 #include <SOIL/SOIL.h>
+#include <wx/filename.h>
 
 namespace d2d
 {
@@ -17,6 +19,10 @@ RawPixels::~RawPixels()
 
 void RawPixels::loadFromFile(const char* filepath)
 {
+	if (!wxFileName::FileExists(filepath)) {
+		throw Exception("File: %s don't exist!", filepath);
+	}
+
 	SOIL_free_image_data(m_pixelData);
 	m_pixelData = SOIL_load_image(filepath, &m_width, &m_height, &m_channels, 0);
 }

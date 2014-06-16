@@ -6,8 +6,10 @@
 
 #include "common/config.h"
 #include "common/FileNameParser.h"
+#include "common/Exception.h"
 
 #include <gl/gl.h>
+#include <wx/filename.h>
 
 namespace d2d
 {
@@ -25,6 +27,10 @@ Bitmap::~Bitmap()
 
 bool Bitmap::loadFromFile(const wxString& filepath)
 {
+	if (!wxFileName::FileExists(filepath)) {
+		throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
+	}
+
 #ifdef NOT_LOAD_IMAGE
 	return true;
 #endif
