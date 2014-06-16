@@ -20,6 +20,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(new d2d::LibraryFontBlankPage(getNotebook()));
 	addPage(new emesh::LibraryPage(getNotebook()));
 	addPage(new d2d::LibraryScriptsPage(getNotebook()));
+	addPage(new d2d::LibraryFontPage(getNotebook()));
 }
 
 } // ecomplex
