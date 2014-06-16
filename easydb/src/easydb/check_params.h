@@ -17,6 +17,8 @@ bool check_file(const char* filepath);
 bool check_json_key(const Json::Value& value, const std::string& key, 
 					const std::string& filename);
 
+bool check_params(const char* params, const char* short_cmd, const char* long_cmd);
+
 }
 
 #endif // _EASYDB_CHECK_PARAMS_H_

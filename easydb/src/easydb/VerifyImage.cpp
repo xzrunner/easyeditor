@@ -19,13 +19,19 @@ std::string VerifyImage::Description() const
 
 std::string VerifyImage::Usage() const
 {
-	return Command() + " [dir path]";
+	return Command() + " [dir path] (-r)or(--remove)";
 }
 
 void VerifyImage::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 3)) return;
 	if (!check_folder(argv[2])) return;
+	
+	if (argc >= 4) {
+		_delete_surplus = check_params(argv[3], "-r", "--remove");
+	} else {
+		_delete_surplus = false;
+	}
 
 	Trigger(argv[2]);
 }
@@ -126,9 +132,14 @@ void VerifyImage::VerifyLack()
 void VerifyImage::VerifySurplus()
 {
 	std::map<std::string, bool>::iterator itr = _map_images.begin();
-	for ( ; itr != _map_images.end(); ++itr)
-		if (!itr->second)
+	for ( ; itr != _map_images.end(); ++itr) {
+		if (!itr->second) {
 			_reports.insert("Surplus Image " + itr->first);
+			if (_delete_surplus) {
+				wxRemoveFile(itr->first);
+			}
+		}
+	}
 }
 
 void VerifyImage::Report() const

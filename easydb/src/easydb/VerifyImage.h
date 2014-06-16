@@ -44,6 +44,8 @@ private:
 
 	std::set<std::string> _reports;
 
+	bool _delete_surplus;
+
 }; // VerifyImages
 
 }

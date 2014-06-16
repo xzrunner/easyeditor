@@ -49,4 +49,13 @@ bool check_json_key(const Json::Value& value, const std::string& key,
 	return false;
 }
 
+bool check_params(const char* params, const char* short_cmd, const char* long_cmd)
+{
+	if (!strcmp(params, short_cmd) || !strcmp(params, long_cmd)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 }
