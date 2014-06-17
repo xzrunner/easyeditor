@@ -12,6 +12,7 @@
 #include "view/TextPropertySetting.h"
 #include "view/FontPropertySetting.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/GLCanvas.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
 #include "render/style_config.h"
@@ -310,6 +311,8 @@ void SelectSpritesOP::copyFromSelection()
 			Json::Value sval = value["sprite"][i++];
 			while (!sval.isNull()) {
 				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(sval["filename"].asString());
+				// for snapshoot
+				symbol->refresh();
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 				sprite->name = sval["name"].asString();
 				symbol->release();
@@ -319,6 +322,8 @@ void SelectSpritesOP::copyFromSelection()
 
 				sval = value["sprite"][i++];
 			}
+
+			m_editPanel->getCanvas()->resetInitState();
 		}
 		wxTheClipboard->Close();
 	}
