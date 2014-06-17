@@ -32,12 +32,6 @@ void PreviewCanvas::onDraw()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		const d2d::ISprite* sprite = m_sprites[i];
-		const d2d::FontBlankSymbol* font = 
-			dynamic_cast<const d2d::FontBlankSymbol*>(&sprite->getSymbol());
-		if (font) {
-			continue;
-		}
-
 // 		if (!sprite->visiable)
 // 			continue;
 		d2d::SpriteDraw::drawSprite(sprite, sprite->multiCol, sprite->addCol);

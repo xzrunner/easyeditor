@@ -6,6 +6,7 @@
 #include "common/color_trans.h"
 #include "common/FileNameTools.h"
 #include "common/FileNameParser.h"
+#include "common/Settings.h"
 #include "render/PrimitiveDraw.h"
 #include "render/Shader.h"
 
@@ -45,23 +46,17 @@ void FontBlankSymbol::reloadTexture() const
 void FontBlankSymbol::draw(const Colorf& mul, const Colorf& add,
 						   const ISprite* sprite/* = NULL*/) const
 {
-	float w = width, h = height;
-	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);
-	if (s)
-	{
-		w = s->width;
-		h = s->height;
-		if (m_font)
-			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
-	}
-	PrimitiveDraw::rect(Vector(0, 0), w*0.5f, h*0.5f, m_style);
-	if (m_font) {
-		Shader::Instance()->null();
-		print(-w*0.5f, 0, "abcdEFGH1234");
+	if (Settings::drawFontType == Settings::e_DrawFontBg) {
+		DrawBackground(sprite);
+	} else if (Settings::drawFontType == Settings::e_DrawFontText) {
+		DrawText(sprite);
+	} else if (Settings::drawFontType == Settings::e_DrawFontAll) {
+		DrawBackground(sprite);
+		DrawText(sprite);				
 	}
 
-	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
-		d2d::PrimitiveDraw::text(sprite->name.c_str());
+	if (Settings::drawFontType != Settings::e_DrawFontNull) {
+		DrawName(sprite);
 	}
 }
 
@@ -116,6 +111,40 @@ void FontBlankSymbol::loadResources()
 	else {
 		filename = value["font filename"].asString();
 		loadFont(filename);
+	}
+}
+
+void FontBlankSymbol::DrawBackground(const ISprite* sprite) const
+{
+	float w = width, h = height;
+	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);
+	if (s)
+	{
+		w = s->width;
+		h = s->height;
+		if (m_font)
+			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
+	}
+	PrimitiveDraw::rect(Vector(0, 0), w*0.5f, h*0.5f, m_style);
+}
+
+void FontBlankSymbol::DrawName(const ISprite* sprite) const
+{
+	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
+		d2d::PrimitiveDraw::text(sprite->name.c_str());
+	}
+}
+
+void FontBlankSymbol::DrawText(const ISprite* sprite) const
+{
+	if (m_font) 
+	{
+		float w = width;
+		if (const FontSprite* s = dynamic_cast<const FontSprite*>(sprite)) {
+			w = s->width;
+		}
+		Shader::Instance()->null();
+		print(-w*0.5f, 0, "abcdEFGH1234");
 	}
 }
 

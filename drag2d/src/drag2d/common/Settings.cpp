@@ -12,6 +12,8 @@ bool Settings::bVisibleImgEdge = false;
 
 Settings::DrawType Settings::drawType = e_DrawBoth;
 
+Settings::DrawFontType Settings::drawFontType = e_DrawFontBg;
+
 std::set<wxString> Settings::RESOURCE_PATH;
 
 } // d2d

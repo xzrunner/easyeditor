@@ -55,16 +55,18 @@ void Frame::onSettings(wxCommandEvent& event)
 
 void Frame::onPreview(wxCommandEvent& event)
 {
+	d2d::Settings::DrawFontType old_type = d2d::Settings::drawFontType;
+	d2d::Settings::drawFontType = d2d::Settings::e_DrawFontText;
+
 	std::vector<const d2d::ISprite*> sprites;
 	m_task->getAllSprite(sprites);
-// 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-// 		sprites[i]->getSymbol().reloadTexture();
-// 	}
  	PreviewDialog dlg(this, sprites);
  	dlg.ShowModal();
 
 	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->getEditPanel());
  	stage->resetCanvas();
+
+	d2d::Settings::drawFontType = old_type;
 }
 
 void Frame::onEJPreview(wxCommandEvent& event)

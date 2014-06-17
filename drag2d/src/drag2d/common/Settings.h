@@ -24,6 +24,15 @@ namespace d2d
 		};
 		static DrawType drawType;
 
+		enum DrawFontType
+		{
+			e_DrawFontBg = 0,
+			e_DrawFontText,
+			e_DrawFontAll,
+			e_DrawFontNull
+		};
+		static DrawFontType drawFontType;
+
 		static std::set<wxString> RESOURCE_PATH;
 
 	}; // Settings

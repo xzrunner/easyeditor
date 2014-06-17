@@ -38,6 +38,10 @@ namespace d2d
 		virtual void loadResources();
 
 	private:
+		void DrawBackground(const ISprite* sprite) const;
+		void DrawName(const ISprite* sprite) const;
+		void DrawText(const ISprite* sprite) const;
+
 		// from NeHe's FreeType
 		void print(float x, float y, const char* text) const;
 
