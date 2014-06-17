@@ -49,6 +49,10 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 			Tools::drawAnimSymbol(this, index % getMaxFrameIndex() + 1, mul, add);
 		}
 	}
+
+	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
+		d2d::PrimitiveDraw::text(sprite->name.c_str());
+	}
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

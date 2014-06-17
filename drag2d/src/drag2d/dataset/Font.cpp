@@ -12,6 +12,8 @@
 namespace d2d
 {
 
+const char* Font::DEFAULT_FONTFILE = "default.ttf";
+
 Font::Font(bool stroke /*= false*/)
 	: m_stroke(stroke)
 {
@@ -44,7 +46,7 @@ bool Font::loadFromFile(const wxString& filepath)
 
 	this->h=h;
 
-	if (filepath.Contains("default")) 
+	if (filepath.Contains(DEFAULT_FONTFILE)) 
 	{
 		list_base=glGenLists(128);
 		glGenTextures( 128, textures );
@@ -234,23 +236,25 @@ void Font::make_dlist_wx(char ch)
 	wxMemoryDC dc;
 
 	dc.SetPen(wxPen(wxColour(255, 255, 255), 3));
+	dc.SetFont(wxFont(20, wxDEFAULT, wxNORMAL, wxNORMAL));
 
 	wxSize size = dc.GetTextExtent(ch);
+	size.SetWidth(size.GetWidth()+2);
+	size.SetHeight(size.GetHeight()+2);
 
 	wxBitmap bmp(size);
 	dc.SelectObject(bmp);
-	dc.SetFont(wxFont(10, wxDEFAULT, wxNORMAL, wxNORMAL));
 
 	dc.DrawRectangle(0, 0, 100, 100);
-	dc.DrawText(ch, 0, 0);
+	dc.DrawText(ch, 1, 1);
 
 	wxImage img = bmp.ConvertToImage();
 	unsigned char* src_data = img.GetData();
 
 	int w = size.GetWidth();
 	int h = size.GetHeight();
-	int w_exp = next_p2(w);
-	int h_exp = next_p2(h);
+ 	int w_exp = next_p2(w);
+ 	int h_exp = next_p2(h);
 
 	GLubyte* expanded_data = new GLubyte[w_exp * h_exp * 4];
 
@@ -281,18 +285,20 @@ void Font::make_dlist_wx(char ch)
 
 	glPushMatrix();
 
- 	float x=(float)(w+0.5f) / (float)w_exp,
- 		y=(float)(h+0.5f) / (float)h_exp;
+ 	float x_max = (float)(w - 1) / (float)w_exp,
+ 		  y_max = (float)(h - 1) / (float)h_exp;
+	float x_min = 1.0f / w_exp,
+		  y_min = 1.0f / h_exp;
 
 	glBegin(GL_QUADS);
-		glTexCoord2d(0,0); glVertex2f(0,h);
-		glTexCoord2d(0,y); glVertex2f(0,0);
-		glTexCoord2d(x,y); glVertex2f(w,0);
-		glTexCoord2d(x,0); glVertex2f(w,h);
+		glTexCoord2d(x_min,y_min); glVertex2f(0,h);
+		glTexCoord2d(x_min,y_max); glVertex2f(0,0);
+		glTexCoord2d(x_max,y_max); glVertex2f(w,0);
+		glTexCoord2d(x_max,y_min); glVertex2f(w,h);
 	glEnd();
 
 	glPopMatrix();
-	glTranslatef(w,0,0);
+ 	glTranslatef(w,0,0);
 
 	glEndList();
 }

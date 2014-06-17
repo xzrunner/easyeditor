@@ -59,6 +59,10 @@ void FontBlankSymbol::draw(const Colorf& mul, const Colorf& add,
 		Shader::Instance()->null();
 		print(-w*0.5f, 0, "abcdEFGH1234");
 	}
+
+	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
+		d2d::PrimitiveDraw::text(sprite->name.c_str());
+	}
 }
 
 Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const

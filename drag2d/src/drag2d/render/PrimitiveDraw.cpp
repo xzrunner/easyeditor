@@ -1,6 +1,10 @@
 #include "PrimitiveDraw.h"
 #include "GL10.h"
 
+#include "dataset/ISymbol.h"
+#include "dataset/SymbolMgr.h"
+#include "dataset/Font.h"
+#include "dataset/FontSymbol.h"
 #include "common/Vector.h"
 #include "common/Rect.h"
 #include "common/Color.h"
@@ -220,12 +224,12 @@ void PrimitiveDraw::drawDotLine(const Vector& p0, const Vector& p1,
 {
 	Shader::Instance()->shape();
 
-	d2d::GL10::Enable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Enable(GL10::GL_LINE_STIPPLE);
 
-	d2d::GL10::LineStipple(1, 0x0101);
-	d2d::PrimitiveDraw::drawLine(p0, p1, color, size);
+	GL10::LineStipple(1, 0x0101);
+	PrimitiveDraw::drawLine(p0, p1, color, size);
 
-	d2d::GL10::Disable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Disable(GL10::GL_LINE_STIPPLE);
 }
 
 void PrimitiveDraw::drawDashLine(const Vector& p0, const Vector& p1, 
@@ -233,12 +237,12 @@ void PrimitiveDraw::drawDashLine(const Vector& p0, const Vector& p1,
 {
 	Shader::Instance()->shape();
 
-	d2d::GL10::Enable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Enable(GL10::GL_LINE_STIPPLE);
 
-	d2d::GL10::LineStipple(1, 0x00FF);
-	d2d::PrimitiveDraw::drawLine(p0, p1, color, size);
+	GL10::LineStipple(1, 0x00FF);
+	PrimitiveDraw::drawLine(p0, p1, color, size);
 
-	d2d::GL10::Disable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Disable(GL10::GL_LINE_STIPPLE);
 }
 
 void PrimitiveDraw::drawDotDashLine(const Vector& p0, const Vector& p1, 
@@ -246,12 +250,12 @@ void PrimitiveDraw::drawDotDashLine(const Vector& p0, const Vector& p1,
 {
 	Shader::Instance()->shape();
 
-	d2d::GL10::Enable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Enable(GL10::GL_LINE_STIPPLE);
 
-	d2d::GL10::LineStipple(1, 0x1c47);
-	d2d::PrimitiveDraw::drawLine(p0, p1, color, size);
+	GL10::LineStipple(1, 0x1c47);
+	PrimitiveDraw::drawLine(p0, p1, color, size);
 
-	d2d::GL10::Disable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Disable(GL10::GL_LINE_STIPPLE);
 }
 
 void PrimitiveDraw::drawLines(const std::vector<Vector>& vertices, 
@@ -627,6 +631,16 @@ void PrimitiveDraw::cross(const Vector& center, float xedge, float yedge, const 
 	drawLine(s, e, color, size);
 }
 
+void PrimitiveDraw::text(const char* text)
+{
+	ISymbol* s = SymbolMgr::Instance()->fetchSymbol(Font::DEFAULT_FONTFILE);
+	if (s) {
+		Shader::Instance()->null();
+		FontSymbol* fs = static_cast<FontSymbol*>(s);
+		fs->print(0, 0, text);
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 
 void PrimitiveDraw::lineStypeBegin(const LineStyle& style)
@@ -634,17 +648,17 @@ void PrimitiveDraw::lineStypeBegin(const LineStyle& style)
 	if (style == LS_DEFAULT)
 		return;
 
-	d2d::GL10::Enable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Enable(GL10::GL_LINE_STIPPLE);
 	switch (style)
 	{
 	case LS_DOT:
-		d2d::GL10::LineStipple(1, 0x0101);
+		GL10::LineStipple(1, 0x0101);
 		break;
 	case LS_DASH:
-		d2d::GL10::LineStipple(1, 0x00FF);
+		GL10::LineStipple(1, 0x00FF);
 		break;
 	case LS_DOT_DASH:
-		d2d::GL10::LineStipple(1, 0x1c47);
+		GL10::LineStipple(1, 0x1c47);
 		break;
 	}
 }
@@ -653,7 +667,7 @@ void PrimitiveDraw::lineStypeEnd(const LineStyle& style)
 {
 	if (style == LS_DEFAULT)
 		return;
-	d2d::GL10::Disable(d2d::GL10::GL_LINE_STIPPLE);
+	GL10::Disable(GL10::GL_LINE_STIPPLE);
 }
 
 } // d2d

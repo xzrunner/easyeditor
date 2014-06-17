@@ -26,6 +26,8 @@ namespace d2d
 	public:
 		static const int DEFAULT_SIZE = 16;
 
+		static const char* DEFAULT_FONTFILE;
+
 	private:
 		void make_dlist_freetypes(char ch);
 		void make_dlist_wx(char ch);

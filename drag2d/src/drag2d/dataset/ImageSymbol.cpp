@@ -4,6 +4,7 @@
 #include "ISprite.h"
 
 #include "render/Shader.h"
+#include "render/PrimitiveDraw.h"
 
 namespace d2d
 {
@@ -46,6 +47,10 @@ void ImageSymbol::draw(const Colorf& mul, const Colorf& add,
 	shader->color(mul, add);
 
 	m_image->draw(m_region);
+
+	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
+		PrimitiveDraw::text(sprite->name.c_str());
+	}
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const
@@ -60,8 +65,8 @@ unsigned int ImageSymbol::getTextureID() const
 
 void ImageSymbol::loadResources()
 {
-	d2d::BitmapMgr::Instance()->getItem(m_filepath, &m_bitmap);
-	d2d::ImageMgr::Instance()->getItem(m_filepath, &m_image);
+	BitmapMgr::Instance()->getItem(m_filepath, &m_bitmap);
+	ImageMgr::Instance()->getItem(m_filepath, &m_image);
 
 	m_region = m_image->getRegion();
 }
