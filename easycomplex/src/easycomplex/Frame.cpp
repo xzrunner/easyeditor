@@ -8,6 +8,7 @@ namespace ecomplex
 {
 
 BEGIN_EVENT_TABLE(Frame, d2d::Frame)
+	EVT_MENU(ID_PREVIEW, Frame::onPreview)
 	EVT_MENU(ID_EJ_PREVIEW, Frame::onEJPreview)
 	EVT_MENU(ID_SET_BG, Frame::onSetBackground)
 END_EVENT_TABLE()
@@ -15,6 +16,7 @@ END_EVENT_TABLE()
 Frame::Frame(const wxString& title, const wxString& filetag)
 	: d2d::Frame(title, filetag)
 {
+	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
 	m_view_menu->Append(ID_EJ_PREVIEW, wxT("EJ Preview"), wxT("Preview"));
 	m_setting_menu->Append(ID_SET_BG, wxT("Background"), wxT("Background"));
 }
@@ -49,6 +51,20 @@ void Frame::onSettings(wxCommandEvent& event)
 {
 	SettingsDialog dlg(this);
 	dlg.ShowModal();
+}
+
+void Frame::onPreview(wxCommandEvent& event)
+{
+	std::vector<const d2d::ISprite*> sprites;
+	m_task->getAllSprite(sprites);
+// 	for (int i = 0, n = sprites.size(); i < n; ++i) {
+// 		sprites[i]->getSymbol().reloadTexture();
+// 	}
+ 	PreviewDialog dlg(this, sprites);
+ 	dlg.ShowModal();
+
+	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->getEditPanel());
+ 	stage->resetCanvas();
 }
 
 void Frame::onEJPreview(wxCommandEvent& event)

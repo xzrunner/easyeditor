@@ -13,5 +13,6 @@
 #include "libcomplex/StagePanel.h"
 #include "libcomplex/LibraryPanel.h"
 #include "libcomplex/LibraryPage.h"
+#include "libcomplex/PreviewDialog.h"
 
 #endif // _EASYCOMPLEX_H_

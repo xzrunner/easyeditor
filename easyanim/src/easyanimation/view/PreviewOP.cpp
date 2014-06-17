@@ -7,7 +7,7 @@ namespace eanim
 {
 
 PreviewOP::PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings,
-					 anim::PreviewControl& control)
+					 d2d::PlayControl& control)
 	: d2d::ZoomViewOP(editPanel, true, true, false)
 	, m_settings(settings)
 	, m_control(control)

@@ -1201,6 +1201,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\PlayControl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\tools.h"
 					>
 				</File>

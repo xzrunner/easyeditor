@@ -7,7 +7,6 @@
 #include "dataset/LayersMgr.h"
 
 #include "../libanim/Tools.h"
-#include "../libanim/PreviewControl.h"
 
 namespace eanim
 {
@@ -17,7 +16,7 @@ BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
 END_EVENT_TABLE()
 
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
-							 anim::PreviewControl& control)
+							 d2d::PlayControl& control)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
 	, m_control(control)

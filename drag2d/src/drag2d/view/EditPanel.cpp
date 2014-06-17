@@ -48,18 +48,23 @@ EditPanel::~EditPanel()
 
 	delete m_camera;
 	delete m_canvas;
-	if (m_editOP) m_editOP->release();
+	if (m_editOP) {
+		m_editOP->release();
+	}
 }
 
 void EditPanel::onCameraChanged()
 {
-	if (m_canvas)
+	if (m_canvas) {
 		m_canvas->resetViewport();
+	}
 }
 
 void EditPanel::clear()
 {
-	m_editOP->clear();
+	if (m_editOP) {
+		m_editOP->clear();
+	}
 
 	m_historyList.clear();
 }
@@ -76,7 +81,9 @@ Vector EditPanel::transPosProjectToScreen(const Vector& proj) const
 
 void EditPanel::drawEditTemp() const
 {
-	if (m_editOP) m_editOP->onDraw();
+	if (m_editOP) {
+		m_editOP->onDraw();
+	}
 }
 
 void EditPanel::setEditOP(AbstractEditOP* editOP)
@@ -121,12 +128,16 @@ void EditPanel::onKeyDown(wxKeyEvent& event)
 	else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL))
 		redo();
 	
-	m_editOP->onKeyDown(event.GetKeyCode());
+	if (m_editOP) {
+		m_editOP->onKeyDown(event.GetKeyCode());
+	}
 }
 
 void EditPanel::onKeyUp(wxKeyEvent& event)
 {
-	m_editOP->onKeyUp(event.GetKeyCode());
+	if (m_editOP) {
+		m_editOP->onKeyUp(event.GetKeyCode());
+	}
 }
 
 void EditPanel::onMouseWheelRotation(int x, int y, int direction)
@@ -242,26 +253,34 @@ void EditPanel::setTitleStatus(bool dirty)
 
 void EditPanel::onMenuUpOneLayer(wxCommandEvent& event)
 {
-	m_editOP->onPopMenuSelected(Menu_UpOneLayer);
-	Refresh();
+	if (m_editOP) {
+		m_editOP->onPopMenuSelected(Menu_UpOneLayer);
+		Refresh();
+	}
 }
 
 void EditPanel::onMenuDownOneLayer(wxCommandEvent& event)
 {
-	m_editOP->onPopMenuSelected(Menu_DownOneLayer);
-	Refresh();
+	if (m_editOP) {
+		m_editOP->onPopMenuSelected(Menu_DownOneLayer);
+		Refresh();
+	}
 }
 
 void EditPanel::onKeyUpOneLayer(wxKeyEvent& event)
 {
-	m_editOP->onPopMenuSelected(Menu_UpOneLayer);
-	Refresh();
+	if (m_editOP) {
+		m_editOP->onPopMenuSelected(Menu_UpOneLayer);
+		Refresh();
+	}
 }
 
 void EditPanel::onKeyDownOneLayer(wxKeyEvent& event)
 {
-	m_editOP->onPopMenuSelected(Menu_DownOneLayer);
-	Refresh();
+	if (m_editOP) {
+		m_editOP->onPopMenuSelected(Menu_DownOneLayer);
+		Refresh();
+	}
 }
 
 // void EditPanel::onKeyDelete(wxKeyEvent& event)
@@ -272,8 +291,9 @@ void EditPanel::onKeyDownOneLayer(wxKeyEvent& event)
 
 void EditPanel::onSize(wxSizeEvent& event)
 {
-	if (m_canvas)
+	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
+	}
 	m_camera->setCenter(Vector(0.0f, 0.0f));
 	Refresh();	// no refresh when change window size
 }

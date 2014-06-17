@@ -4,7 +4,6 @@
 #include <wx/wx.h>
 
 #include "Symbol.h"
-#include "PreviewControl.h"
 
 namespace anim
 {
@@ -48,7 +47,7 @@ private:
 
 	const Symbol* m_symbol;
 
-	PreviewControl m_control;
+	d2d::PlayControl m_control;
 
 	DECLARE_EVENT_TABLE()
 

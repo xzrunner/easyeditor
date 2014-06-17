@@ -28,7 +28,7 @@ namespace eanim
 
 		PlaySettings m_settings;
 
-		anim::PreviewControl m_control;
+		d2d::PlayControl m_control;
 
 	}; // PreviewDialog
 }

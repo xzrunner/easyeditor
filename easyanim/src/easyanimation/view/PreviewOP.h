@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-namespace anim { class PreviewControl; }
-
 namespace eanim
 {
 
@@ -14,14 +12,14 @@ class PreviewOP : public d2d::ZoomViewOP
 {
 public:
 	PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings,
-		anim::PreviewControl& control);
+		d2d::PlayControl& control);
 
 	virtual bool onKeyDown(int keyCode);
 
 private:
 	PlaySettings& m_settings;
 
-	anim::PreviewControl& m_control;
+	d2d::PlayControl& m_control;
 
 }; // PreviewOP
 

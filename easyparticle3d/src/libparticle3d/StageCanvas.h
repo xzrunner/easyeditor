@@ -35,7 +35,7 @@ private:
 	int m_currFrame;
 	clock_t m_last;
 
-	anim::PreviewControl m_control;
+	d2d::PlayControl m_control;
 
 	DECLARE_EVENT_TABLE()
 

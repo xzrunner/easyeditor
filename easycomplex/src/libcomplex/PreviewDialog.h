@@ -1,0 +1,28 @@
+#ifndef _EASYCOMPLEX_PREVIEW_DIALOG_H_
+#define _EASYCOMPLEX_PREVIEW_DIALOG_H_
+
+#include <drag2d.h>
+
+namespace ecomplex
+{
+
+class PreviewDialog : public wxDialog
+{
+public:
+	PreviewDialog(wxWindow* parent, const std::vector<const d2d::ISprite*>& sprites);
+
+private:
+	void InitLayout();
+
+	void BuildEditPanel(wxSizer* sizer);
+
+private:
+	std::vector<const d2d::ISprite*> m_sprites;
+
+	d2d::PlayControl m_control;
+
+}; // PreviewDialog
+
+}
+
+#endif // _EASYCOMPLEX_PREVIEW_DIALOG_H_

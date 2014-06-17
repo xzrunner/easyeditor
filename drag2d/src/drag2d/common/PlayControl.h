@@ -1,16 +1,19 @@
-#ifndef _LIBANIM_PREVIEW_CONTROL_H_
-#define _LIBANIM_PREVIEW_CONTROL_H_
+#ifndef _DRAG2D_PLAY_CONTROL_H_
+#define _DRAG2D_PLAY_CONTROL_H_
 
-namespace anim
+namespace d2d
 {
 
-class PreviewControl
+class PlayControl
 {
 public:
-	PreviewControl(float dt) 
+	PlayControl(float dt) 
 		: m_curr_frame(1), m_last(-1)
 	{
 		m_dt = dt * CLOCKS_PER_SEC;
+	}
+	~PlayControl() {
+		int zz = 0;
 	}
 
 	bool update() {
@@ -51,8 +54,8 @@ private:
 
 	int m_dt;
 
-}; // PreviewControl
+}; // PlayControl
 
 }
 
-#endif // _LIBANIM_PREVIEW_CONTROL_H_
+#endif // _DRAG2D_PLAY_CONTROL_H_
