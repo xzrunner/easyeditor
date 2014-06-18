@@ -51,6 +51,9 @@ public:
 
 	void loadFont(const std::string& filename);
 
+	void SetTextContent(const std::string& str) { m_text = str; }
+	const std::string& GetTextContext() const { return m_text; }
+
 protected:
 	FontBlankSymbol* m_symbol;
 
@@ -66,6 +69,9 @@ public:
 	int width, height;
 
 	std::string filename;
+
+private:
+	std::string m_text;
 
 }; // FontSprite
 }

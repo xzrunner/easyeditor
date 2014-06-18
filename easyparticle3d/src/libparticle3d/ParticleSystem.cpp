@@ -91,19 +91,6 @@ void ParticleSystem::draw()
 
 void ParticleSystem::update(float dt)
 {
-// 	static clock_t time = 0;
-// 	clock_t curr = clock();
-// 	if (time != 0) {
-// 		float test = (float)(curr - time) / CLOCKS_PER_SEC;
-// 		float d = fabs(dt - test);
-// 		if (d > 0.005f) {
-// 			int zz = 0;
-// 		}
-// 	} else {
-// 		float test = 0.016f;
-// 	}
-// 	time = curr;
-
 	if (active)
 	{
 		float rate = emission_time / count;

@@ -31,7 +31,7 @@ FontSymbol* FontSymbol::clone() const
 
 void FontSymbol::reloadTexture() const
 {
-	
+	m_font->loadFromFile("default.ttf");
 }
 
 void FontSymbol::draw(const Colorf& mul, const Colorf& add,

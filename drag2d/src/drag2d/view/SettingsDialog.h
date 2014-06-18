@@ -21,7 +21,9 @@ private:
 	void onChangeSpriteCapture(wxCommandEvent& event);
 	void onChangeImageEdgeClip(wxCommandEvent& event);
 	void onChangeVisibleImageEdge(wxCommandEvent& event);
-	void onChangeFontBlankDisplayType(wxCommandEvent& event);
+	void onChangeFontBackground(wxCommandEvent& event);
+	void onChangeFontText(wxCommandEvent& event);
+	void onChangeNodeName(wxCommandEvent& event);
 
 }; // SettingsDialog
 

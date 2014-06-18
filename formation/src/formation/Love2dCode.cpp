@@ -18,14 +18,6 @@ void Love2dCode::resolve()
 	std::vector<d2d::ISprite*> sprites;
 	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-	for (size_t i = 0, n = sprites.size();  i< n; ++i)
-	{
-		if (sprites[i]->getPosition().x > 10000 || sprites[i]->getPosition().y > 10000)
-		{
-			int zz = 0;
-		}
-	}
-
 	std::sort(sprites.begin(), sprites.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y));
 
 	lua::TableAssign ta(m_gen, "");

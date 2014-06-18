@@ -46,6 +46,9 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	} else if (name == wxT("Filename")) {
 		std::string str = wxANY_AS(value, wxString);
 		sprite->loadFont(str);
+	} else if (name == wxT("TextContent")) {
+		std::string str = wxANY_AS(value, wxString);
+		sprite->SetTextContent(str);
 	}
 }
 
@@ -62,6 +65,7 @@ void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool b
 	pg->GetProperty(wxT("LabelWidth"))->Enable(bEnable);
 	pg->GetProperty(wxT("LabelHeight"))->Enable(bEnable);
 	pg->GetProperty(wxT("Filename"))->Enable(bEnable);
+	pg->GetProperty(wxT("TextContent"))->Enable(bEnable);
 }
 
 void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
@@ -80,6 +84,7 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("LabelWidth"))->SetValue(sprite->width);
 	pg->GetProperty(wxT("LabelHeight"))->SetValue(sprite->height);
 	pg->GetProperty(wxT("Filename"))->SetValue(sprite->filename);
+	pg->GetProperty(wxT("TextContent"))->SetValue(sprite->GetTextContext());
 }
 
 void FontPropertySetting::initProperties(wxPropertyGrid* pg)
@@ -107,6 +112,7 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxFloatProperty(wxT("LabelWidth"), wxPG_LABEL, sprite->width));
 	pg->Append(new wxFloatProperty(wxT("LabelHeight"), wxPG_LABEL, sprite->height));
 	pg->Append(new wxStringProperty(wxT("Filename"), wxPG_LABEL, sprite->filename));
+	pg->Append(new wxStringProperty(wxT("TextContent"), wxPG_LABEL, sprite->GetTextContext()));
 }
 
 }

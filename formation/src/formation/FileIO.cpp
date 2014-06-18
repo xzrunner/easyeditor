@@ -75,9 +75,6 @@ d2d::ISprite* FileIO::load(const Json::Value& value,
 		y = value["position"]["y"].asDouble();
 	sprite->setTransform(d2d::Vector(x, y), 0);
 
-	if (x > 10000 || y > 10000)
-		int zz = 0;
-
 	ActorInfo* info = new ActorInfo;
  	info->id = value["id"].asInt();
 	sprite->setUserData(info);

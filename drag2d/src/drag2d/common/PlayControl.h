@@ -13,7 +13,6 @@ public:
 		m_dt = dt * CLOCKS_PER_SEC;
 	}
 	~PlayControl() {
-		int zz = 0;
 	}
 
 	bool update() {

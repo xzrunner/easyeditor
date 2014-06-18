@@ -2,6 +2,7 @@
 #include "Bitmap.h"
 #include "Image.h"
 #include "ISprite.h"
+#include "SpriteTools.h"
 
 #include "render/Shader.h"
 #include "render/PrimitiveDraw.h"
@@ -48,9 +49,7 @@ void ImageSymbol::draw(const Colorf& mul, const Colorf& add,
 
 	m_image->draw(m_region);
 
-	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
-		PrimitiveDraw::text(sprite->name.c_str());
-	}
+	SpriteTools::DrawName(sprite);
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const

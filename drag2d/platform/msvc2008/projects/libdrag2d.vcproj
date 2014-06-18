@@ -720,6 +720,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SpriteTools.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SpriteTools.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\dataset\wrap_ISprite.cpp"
 						>
 					</File>
@@ -838,6 +846,38 @@
 				>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\VectorObjectStream.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="text"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\DFont.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\DFont.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\FTRender.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\FTRender.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\glyph_util.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\Label.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\Label.h"
 					>
 				</File>
 			</Filter>

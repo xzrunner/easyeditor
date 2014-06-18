@@ -7,6 +7,7 @@
 #include "common/FileNameTools.h"
 #include "common/FileNameParser.h"
 #include "common/Settings.h"
+#include "dataset/SpriteTools.h"
 #include "render/PrimitiveDraw.h"
 #include "render/Shader.h"
 
@@ -46,18 +47,14 @@ void FontBlankSymbol::reloadTexture() const
 void FontBlankSymbol::draw(const Colorf& mul, const Colorf& add,
 						   const ISprite* sprite/* = NULL*/) const
 {
-	if (Settings::drawFontType == Settings::e_DrawFontBg) {
+	if (Settings::DrawFontType & Settings::DrawFontBg) {
 		DrawBackground(sprite);
-	} else if (Settings::drawFontType == Settings::e_DrawFontText) {
+	} 
+	if (Settings::DrawFontType & Settings::DrawFontText) {
 		DrawText(sprite);
-	} else if (Settings::drawFontType == Settings::e_DrawFontAll) {
-		DrawBackground(sprite);
-		DrawText(sprite);				
 	}
 
-	if (Settings::drawFontType != Settings::e_DrawFontNull) {
-		DrawName(sprite);
-	}
+	SpriteTools::DrawName(sprite);
 }
 
 Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
@@ -128,24 +125,23 @@ void FontBlankSymbol::DrawBackground(const ISprite* sprite) const
 	PrimitiveDraw::rect(Vector(0, 0), w*0.5f, h*0.5f, m_style);
 }
 
-void FontBlankSymbol::DrawName(const ISprite* sprite) const
-{
-	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
-		d2d::PrimitiveDraw::text(sprite->name.c_str());
-	}
-}
-
 void FontBlankSymbol::DrawText(const ISprite* sprite) const
 {
-	if (m_font) 
-	{
-		float w = width;
-		if (const FontSprite* s = dynamic_cast<const FontSprite*>(sprite)) {
-			w = s->width;
+	if (sprite) {
+		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
+			d2d::PrimitiveDraw::text(font->GetTextContext().c_str());
 		}
-		Shader::Instance()->null();
-		print(-w*0.5f, 0, "abcdEFGH1234");
 	}
+
+// 	if (m_font) 
+// 	{
+// 		float w = width;
+// 		if (const FontSprite* s = dynamic_cast<const FontSprite*>(sprite)) {
+// 			w = s->width;
+// 		}
+// 		Shader::Instance()->null();
+// 		print(-w*0.5f, 0, "abcdEFGH1234");
+// 	}
 }
 
 void FontBlankSymbol::print(float x, float y, const char* text) const

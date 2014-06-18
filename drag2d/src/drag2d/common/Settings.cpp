@@ -9,10 +9,11 @@ bool Settings::bDisplayPolyBound = true;
 bool Settings::bSpriteCapture = true;
 bool Settings::bImageEdgeClip = true;
 bool Settings::bVisibleImgEdge = false;
+bool Settings::bVisibleNodeName = true;
 
 Settings::DrawType Settings::drawType = e_DrawBoth;
 
-Settings::DrawFontType Settings::drawFontType = e_DrawFontBg;
+int Settings::DrawFontType = DrawFontBg | DrawFontText;
 
 std::set<wxString> Settings::RESOURCE_PATH;
 
