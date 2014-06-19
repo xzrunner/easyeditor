@@ -880,6 +880,14 @@
 					RelativePath="..\..\..\src\drag2d\dataset\Label.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\WXRender.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\WXRender.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

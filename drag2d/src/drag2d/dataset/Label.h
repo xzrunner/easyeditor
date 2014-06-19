@@ -3,6 +3,7 @@
 
 #include "DFont.h"
 #include "FTRender.h"
+#include "WXRender.h"
 
 #include <opengl/opengl.h>
 
@@ -28,10 +29,37 @@ private:
 	void DrawGlyph(int unicode, int x, int y, int size,unsigned int color, int is_edge);
 
 private:
-	class Layout
+	struct Layout
 	{
 	public:
-		
+		Layout(DFont& dfont);
+
+		void LoadFontFile(const char* filename);
+
+		GlyphSizer GetGlyphSizer(int unicode, const char* utf8, int font_size, int color, int is_edge);
+
+		void InitLayout(const char* str, int width, int height, int font_size, unsigned long color, int is_edge);
+
+	private:
+		GlyphSizer GenChar(int unicode, const char* utf8, int font_size, int color, int is_edge);
+		uint32_t* GenFTChar(int unicode, const char* utf8, int font_size, int color, int is_edge, GlyphLayout& layout);
+		uint32_t* GenWXChar(int unicode, const char* utf8, int font_size, int color, int is_edge, GlyphLayout& layout);
+
+	public:
+		int char_count;
+		int line_height;
+		int line_count;
+
+	private:
+		static const int FONT_SIZE_COUNT = 64;
+
+	private:
+		DFont& m_dfont;
+
+		FTRender m_ft_render;
+		WXRender m_wx_render;
+
+		GlyphSizer m_space_sizer[FONT_SIZE_COUNT];
 
 	}; // Layout
 
@@ -44,9 +72,10 @@ private:
 
 	float m_scale;
 
+	// todo: move to layout
 	DFont m_dfont;
 
-	FTRender m_freetype;
+	Layout m_layout;
 
 }; // Label
 

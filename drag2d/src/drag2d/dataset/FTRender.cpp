@@ -106,36 +106,40 @@ void FTRender::LoadFont(const char* filename)
 	}
 }
 
-//void FTRender::GetGlyphSize(int unicode, int size, int* width, int* height)
-//{
-//	if (!m_face) {
-//		// todo
-//		*width = size;
-//		*height = size;
-//		return;
-//	}
-//
-//	FT_Set_Pixel_Sizes(m_face, size, size);
-//
-//	FT_Size_Metrics s = m_face->size->metrics;
-//	*height = (s.height >> 6) + 1;    
-//
-//	FT_UInt gindex = FT_Get_Char_Index(m_face, unicode);
-//	if (FT_Load_Glyph(m_face, gindex, FT_LOAD_NO_BITMAP) == 0) {
-//		*width = (m_face->glyph->metrics.horiAdvance >> 6) - 1;  
-//	} else {
-//		*width = 0;
-//	}
-//}
-
-unsigned int* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel32 fontCol,
-	union Pixel32 outlineCol, float outlineWidth, GlyphSizer& sizer)
+GlyphSizer FTRender::GetGlyphSizer(int unicode, int size)
 {
+	GlyphSizer sizer;
+
+	if (!m_face) {
+		return sizer;
+	}
+
+	FT_Set_Pixel_Sizes(m_face, size, size);
+
+	FT_Size_Metrics s = m_face->size->metrics;
+	sizer.height = (s.height >> 6) + 1;    
+
+	FT_UInt gindex = FT_Get_Char_Index(m_face, unicode);
+	if (FT_Load_Glyph(m_face, gindex, FT_LOAD_NO_BITMAP) == 0) {
+		sizer.height = (m_face->glyph->metrics.horiAdvance >> 6) - 1;  
+	} else {
+		sizer.width = 0;
+	}
+	return sizer;
+}
+
+uint32_t* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel32 fontCol,
+	union Pixel32 outlineCol, float outlineWidth, GlyphLayout& layout)
+{
+	if (!m_face) {
+		return NULL;
+	}
+
 	// Set the size to use.
 	//  if (FT_Set_Char_Size(m_face, size >> 6, size >> 6, 90, 90) == 0)
 	FT_Set_Pixel_Sizes(m_face, size, size);
 	FT_Size_Metrics s = m_face->size->metrics;
-	sizer.metrics_height = s.height >> 6;    
+	layout.metrics_height = s.height >> 6;    
 	{
 		// Load the glyph we are looking for.
 		FT_UInt gindex = FT_Get_Char_Index(m_face, unicode);
@@ -203,9 +207,9 @@ unsigned int* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel
 							rect.Include(Vec2(s->x + s->width - 1, s->y));
 						}
 
-						sizer.bearingX = m_face->glyph->metrics.horiBearingX >> 6;
-						sizer.bearingY = m_face->glyph->metrics.horiBearingY >> 6;
-						sizer.advance = m_face->glyph->metrics.horiAdvance >> 6;
+						layout.bearingX = m_face->glyph->metrics.horiBearingX >> 6;
+						layout.bearingY = m_face->glyph->metrics.horiBearingY >> 6;
+						layout.advance = m_face->glyph->metrics.horiAdvance >> 6;
 
 						// Get some metrics of our image.
 						int imgWidth = rect.Width(),
@@ -242,9 +246,9 @@ unsigned int* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel
 									dst.a = std::min(255, dst.a + src.a);
 								}
 
-								sizer.width = imgWidth;
-								sizer.height = imgHeight;
-								return (unsigned int*)pxl;
+								layout.sizer.width = imgWidth;
+								layout.sizer.height = imgHeight;
+								return (uint32_t*)pxl;
 					}
 				}
 			}
@@ -253,12 +257,16 @@ unsigned int* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel
 	return NULL;
 }
 
-unsigned int* FTRender::WriteGlyphNoStroker(int unicode, int size, union Pixel32 col, 
-											GlyphSizer& sizer)
+uint32_t* FTRender::WriteGlyphNoStroker(int unicode, int size, union Pixel32 col, 
+											GlyphLayout& layout)
 {
+	if (!m_face) {
+		return NULL;
+	}
+
 	FT_Set_Pixel_Sizes(m_face, size, size);
 	FT_Size_Metrics s = m_face->size->metrics;
-	sizer.metrics_height = s.height >> 6;
+	layout.metrics_height = s.height >> 6;
 
 	FT_UInt gindex = FT_Get_Char_Index(m_face, unicode);
 	if(gindex ==0 )
@@ -278,14 +286,14 @@ unsigned int* FTRender::WriteGlyphNoStroker(int unicode, int size, union Pixel32
 	FT_Bitmap& bitmap = bitmap_glyph->bitmap; //just to make things easier
 
 	// Get metrics
-	sizer.bearingX = m_face->glyph->metrics.horiBearingX >> 6;
-	sizer.bearingY = m_face->glyph->metrics.horiBearingY >> 6;
-	sizer.height = bitmap.rows;
-	sizer.width = bitmap.width;
-	sizer.advance = m_face->glyph->metrics.horiAdvance >> 6;
+	layout.bearingX = m_face->glyph->metrics.horiBearingX >> 6;
+	layout.bearingY = m_face->glyph->metrics.horiBearingY >> 6;
+	layout.sizer.height = bitmap.rows;
+	layout.sizer.width = bitmap.width;
+	layout.advance = m_face->glyph->metrics.horiAdvance >> 6;
 
 	int sz = bitmap.rows*bitmap.width;
-	unsigned int* dst = (unsigned int*)malloc(sz*sizeof(unsigned int));
+	uint32_t* dst = (uint32_t*)malloc(sz*sizeof(uint32_t));
 	memset(dst, 0, sz);
 	for (int i = 0; i<sz; i++)
 	{
