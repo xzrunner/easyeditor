@@ -125,7 +125,9 @@ void ScaleOverall::ScaleComplex(const wxString& path, float scale,
 	}		
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.fn_str());
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
@@ -180,7 +182,9 @@ void ScaleOverall::ScaleAnim(const wxString& path, float scale,
 	}		
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.fn_str());
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }

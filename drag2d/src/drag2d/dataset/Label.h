@@ -26,7 +26,7 @@ private:
 
 	void LoadFontFile(const char* filename);
 
-	void DrawGlyph(int unicode, int x, int y, int size,unsigned int color, int is_edge);
+	void DrawGlyph(int unicode, int x, int y, int font_size, unsigned int color, int is_edge) const;
 
 private:
 	struct Layout
@@ -46,9 +46,20 @@ private:
 		uint32_t* GenWXChar(int unicode, const char* utf8, int font_size, int color, int is_edge, GlyphLayout& layout);
 
 	public:
-		int char_count;
+//		int char_count;
 		int line_height;
 		int line_count;
+
+		static const int CHAR_MAX_COUNT = 2048;
+		struct Graphy
+		{
+			int unicode;
+			float width;
+		};
+		Graphy char_buf[CHAR_MAX_COUNT];
+		
+		static const int MAX_LINE = 128;
+		int line_buf[MAX_LINE];
 
 	private:
 		static const int FONT_SIZE_COUNT = 64;

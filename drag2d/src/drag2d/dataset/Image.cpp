@@ -2,6 +2,7 @@
 
 #include "render/GL10.h"
 #include "render/Shader.h"
+#include "render/ShaderNew.h"
 #include "common/config.h"
 #include "common/tools.h"
 #include "common/Settings.h"
@@ -93,24 +94,46 @@ void Image::reload()
 
 void Image::draw(const Rect& r) const
 {
-	Shader* shader = Shader::Instance();
+//  	Shader* shader = Shader::Instance();
+//  	shader->sprite();
+//  
+//  	float tot_hw = m_width * 0.5f,
+//  		  tot_hh = m_height * 0.5f;
+//  	float txmin = (r.xMin + tot_hw) / m_width,
+//  		txmax = (r.xMax + tot_hw) / m_width,
+//  		tymin = (r.yMin + tot_hh) / m_height,
+//  		tymax = (r.yMax + tot_hh) / m_height;
+//  
+//  	GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
+//  	GL10::Begin(GL10::GL_QUADS);
+//   		GL10::TexCoord2f(txmin, tymin); GL10::Vertex3f(r.xMin, r.yMin, -1.0f);
+//   		GL10::TexCoord2f(txmax, tymin); GL10::Vertex3f(r.xMax, r.yMin, -1.0f);
+//   		GL10::TexCoord2f(txmax, tymax); GL10::Vertex3f(r.xMax, r.yMax, -1.0f);
+//   		GL10::TexCoord2f(txmin, tymax); GL10::Vertex3f(r.xMin, r.yMax, -1.0f);
+//  	GL10::End();
+//  	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
+
+ 	ShaderNew* shader = ShaderNew::Instance();
+ 	shader->sprite();
+ 
+ 	float vb[16];
+
+	vb[0] = 0, vb[1] = 2;
+	vb[2] = 0, vb[3] = 0;
+
+	vb[4] = 0, vb[5] = 2;
+	vb[6] = 0, vb[7] = 1;
+
+	vb[8] = 2, vb[9] = 2;
+	vb[10] = 1, vb[11] = 1;
+
+	vb[12] = 2, vb[13] = 0;
+	vb[14] = 1, vb[15] = 0;
+
 	shader->sprite();
+ 	shader->Draw(vb, m_textureID);
 
-	float tot_hw = m_width * 0.5f,
-		  tot_hh = m_height * 0.5f;
-	float txmin = (r.xMin + tot_hw) / m_width,
-		txmax = (r.xMax + tot_hw) / m_width,
-		tymin = (r.yMin + tot_hh) / m_height,
-		tymax = (r.yMax + tot_hh) / m_height;
-
-	GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
-	GL10::Begin(GL10::GL_QUADS);
- 		GL10::TexCoord2f(txmin, tymin); GL10::Vertex3f(r.xMin, r.yMin, -1.0f);
- 		GL10::TexCoord2f(txmax, tymin); GL10::Vertex3f(r.xMax, r.yMin, -1.0f);
- 		GL10::TexCoord2f(txmax, tymax); GL10::Vertex3f(r.xMax, r.yMax, -1.0f);
- 		GL10::TexCoord2f(txmin, tymax); GL10::Vertex3f(r.xMin, r.yMax, -1.0f);
-	GL10::End();
-	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
+	shader->Flush();
 }
 
 } // d2d

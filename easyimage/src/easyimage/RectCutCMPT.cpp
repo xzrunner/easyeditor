@@ -35,7 +35,9 @@ void RectCutCMPT::onSaveEditOP(wxCommandEvent& event)
 
 		wxString filename = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILTER, "json");
 		Json::StyledStreamWriter writer;
+		std::locale::global(std::locale(""));
 		std::ofstream fout(filename.fn_str());
+		std::locale::global(std::locale("C"));
 		writer.write(fout, value);
 		fout.close();
 	}

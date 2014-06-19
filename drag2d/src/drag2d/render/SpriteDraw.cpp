@@ -19,27 +19,29 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
 	if (!sprite->visiable)
 		return;
 
-	GL10::PushMatrix();
+// 	GL10::PushMatrix();
+// 
+// 	love::Matrix t;
+// 
+//  	bool xMirror, yMirror;
+//  	sprite->getMirror(xMirror, yMirror);
+//  	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
+//  		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
+// 
+//  	d2d::Vector center = sprite->getCenter();
+//  	t.setTransformation(center.x, center.y, sprite->getAngle(), 
+//  		xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
+//  	GL10::MultMatrixf((const float*)t.getElements( ));
+// 
+// 	Shader* shader = Shader::Instance();
+// 
+// 	Colorf _mul = cMul(sprite->multiCol, mul),
+// 		   _add = cAdd(sprite->addCol, add);
+// 	sprite->getSymbol().draw(_mul, _add, sprite);
+// 
+// 	GL10::PopMatrix();
 
-	love::Matrix t;
-
- 	bool xMirror, yMirror;
- 	sprite->getMirror(xMirror, yMirror);
- 	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
- 		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
-
- 	d2d::Vector center = sprite->getCenter();
- 	t.setTransformation(center.x, center.y, sprite->getAngle(), 
- 		xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
- 	GL10::MultMatrixf((const float*)t.getElements( ));
-
-	Shader* shader = Shader::Instance();
-
-	Colorf _mul = cMul(sprite->multiCol, mul),
-		   _add = cAdd(sprite->addCol, add);
-	sprite->getSymbol().draw(_mul, _add, sprite);
-
-	GL10::PopMatrix();
+	sprite->getSymbol().draw(Colorf(), Colorf(), sprite);
 }
 
 void SpriteDraw::drawSprite(const ISymbol* symbol, const Vector& pos,

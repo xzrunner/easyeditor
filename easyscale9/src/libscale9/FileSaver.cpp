@@ -18,7 +18,9 @@ void FileSaver::store(const char* filepath, const Symbol& symbol)
 	value["height"] = symbol.getSize().yLength();
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath);
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }

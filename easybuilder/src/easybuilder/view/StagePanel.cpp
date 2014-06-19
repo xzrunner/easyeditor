@@ -88,7 +88,9 @@ void StagePanel::storeAllCodePages(const wxString& dir) const
 		CodePage* page = static_cast<CodePage*>(m_notebook->GetPage(i));
 
 		wxString filepath = dir + "\\" + page->getName();
+		std::locale::global(std::locale(""));
 		std::ofstream fout(filepath.fn_str());
+		std::locale::global(std::locale("C"));	
 		fout << page->GetText();
 		fout.close();
 	}

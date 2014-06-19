@@ -132,7 +132,9 @@ void CocoPacker::pack(const std::vector<const d2d::ISymbol*>& symbols)
 
 void CocoPacker::storeToFile(const std::string& filename)
 {
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filename.c_str());
+	std::locale::global(std::locale("C"));	
 //	assert(!fout.fail());
 	fout << m_gen.toText() << std::endl;
 	fout.close();

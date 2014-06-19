@@ -71,7 +71,9 @@ void MainFrame::onSave(wxCommandEvent& event)
 {
 	if (!m_currFilename.empty())
 	{
+		std::locale::global(std::locale(""));
 		std::ofstream fout(m_currFilename.c_str());
+		std::locale::global(std::locale("C"));		
 		Context::Instance()->library->storeToTextFile(fout);
 		Context::Instance()->timeline->storeToTextFile(fout);
 		fout.close();
@@ -83,7 +85,9 @@ void MainFrame::onSaveAs(wxCommandEvent& event)
  	wxFileDialog dlg(this, wxT("±£´æ"), wxEmptyString, wxEmptyString, wxT("*.ani"), wxFD_SAVE);
  	if (dlg.ShowModal() == wxID_OK)
  	{
+		std::locale::global(std::locale(""));
 		std::ofstream fout(dlg.GetPath().fn_str());
+		std::locale::global(std::locale("C"));	
 		Context::Instance()->library->storeToTextFile(fout);
 		Context::Instance()->timeline->storeToTextFile(fout);
 		fout.close();

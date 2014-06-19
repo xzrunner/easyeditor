@@ -178,7 +178,9 @@ int main(int argc, char *argv[])
 		ebuilder::CodeGenerator gen;
 		coceditor::COCCode code(gen, gscale);
 		code.resolve();
+		std::locale::global(std::locale(""));
 		std::ofstream fout(argv[3]);
+		std::locale::global(std::locale("C"));
 		fout << gen.toText() << std::endl;
 		fout.close();
 	} catch (d2d::Exception& e) {

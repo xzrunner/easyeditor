@@ -45,7 +45,9 @@ void FileIO::store(const char* filename)
 		value["layer"][i] = store(layers[i], dir);
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }

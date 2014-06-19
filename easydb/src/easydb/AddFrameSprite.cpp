@@ -82,7 +82,9 @@ void AddFrameSprite::Trigger(const std::string& dir, const std::string& sprite_p
 		}
 
  		Json::StyledStreamWriter writer;
+		std::locale::global(std::locale(""));
  		std::ofstream fout(json_file.fn_str());
+		std::locale::global(std::locale("C"));
  		writer.write(fout, value);
  		fout.close();
 	}

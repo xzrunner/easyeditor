@@ -72,7 +72,9 @@ void FileIO::store(const char* filename, LibraryPanel* library)
 		}
 	}
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
@@ -122,7 +124,9 @@ void FileIO::store(LibraryItem* item, const std::string& dlg)
 		filepath = d2d::FilenameTools::getFilePathExceptExtension(item->getFilepath()) + ext;
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.fn_str());
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }

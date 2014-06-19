@@ -22,7 +22,9 @@ void FileSaver::store(const char* filepath, const Symbol* symbol)
 		value["sprite"][i] = store(symbol->m_sprites[i], dir);
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath);
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
@@ -44,7 +46,12 @@ void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol,
 		value["sprite"][i] = store(symbol->m_sprites[i], dir);
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath);
+	std::locale::global(std::locale("C"));
+	if (fout.fail()) {
+		throw d2d::Exception("Can't save file: %s !", filepath);
+	}
 	writer.write(fout, value);
 	fout.close();
 

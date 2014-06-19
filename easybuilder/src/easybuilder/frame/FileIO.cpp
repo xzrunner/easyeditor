@@ -73,7 +73,9 @@ void FileIO::store(const wxString& filepath)
 	}
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.fn_str());
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }

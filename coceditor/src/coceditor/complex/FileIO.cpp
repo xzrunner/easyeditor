@@ -14,7 +14,9 @@ namespace complex
 			value["sprite"][i] = store(complexSymbol->m_sprites[i]);
 
 		Json::StyledStreamWriter writer;
+		std::locale::global(std::locale(""));
 		std::ofstream fout(filepath);
+		std::locale::global(std::locale("C"));	
 		writer.write(fout, value);
 		fout.close();
 	}

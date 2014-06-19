@@ -63,7 +63,9 @@ void Frame::saveTmpInfo()
 	Json::Value value;
 	m_recent.save(value);
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filename.fn_str());
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
@@ -97,11 +99,16 @@ void Frame::onOpen(wxCommandEvent& event)
 {
 	if (!m_task) return;
 
-	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
-		getFileFilter(), wxFD_OPEN);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		openFile(dlg.GetPath());
+	try {
+		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
+			getFileFilter(), wxFD_OPEN);
+		if (dlg.ShowModal() == wxID_OK)
+		{
+			openFile(dlg.GetPath());
+		}
+	} catch (Exception& e) {
+		ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
 	}
 }
 
@@ -109,13 +116,18 @@ void Frame::onSave(wxCommandEvent& event)
 {
 	if (!m_task || m_currFilename.empty()) return;
 
-	wxMessageDialog* dlg = new wxMessageDialog(NULL, 
-		wxT("Are you sure to save?"), wxT("Question"), 
-		wxYES_NO | wxNO_DEFAULT | wxICON_QUESTION);
-	if (dlg->ShowModal() == wxID_YES)
-	{
-		SetTitle(m_currFilename);
-		m_task->store(m_currFilename);
+	try {
+		wxMessageDialog* dlg = new wxMessageDialog(NULL, 
+			wxT("Are you sure to save?"), wxT("Question"), 
+			wxYES_NO | wxNO_DEFAULT | wxICON_QUESTION);
+		if (dlg->ShowModal() == wxID_YES)
+		{
+			SetTitle(m_currFilename);
+			m_task->store(m_currFilename);
+		}
+	} catch (Exception& e) {
+		ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
 	}
 }
 
@@ -123,13 +135,18 @@ void Frame::onSaveAs(wxCommandEvent& event)
 {
 	if (!m_task) return;
 
-	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
-		getFileFilter(), wxFD_SAVE);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
-		m_currFilename = fixed;
-		m_task->store(fixed);
+	try {
+		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
+			getFileFilter(), wxFD_SAVE);
+		if (dlg.ShowModal() == wxID_OK)
+		{
+			wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
+			m_currFilename = fixed;
+			m_task->store(fixed);
+		}
+	} catch (Exception& e) {
+		ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
 	}
 }
 

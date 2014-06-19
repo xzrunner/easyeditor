@@ -196,7 +196,9 @@ void EditPanel::saveHistoryList(const std::string& filepath, const std::vector<I
 
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(path.c_str());
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }

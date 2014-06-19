@@ -37,63 +37,28 @@ void Label::Draw(const char *str, int width, int height, int align, int x, int y
 	shader->sprite();
 //	shader->color();
 	
-	//int i, j;
-	//int cx = 0, cy = 0;
+	int cx = 0, cy = 0;
 
-	//int halign = align & 0x0f;
-	//int valign = align >> 4;
+// 	int halign = align & 0x0f;
+// 	int valign = align >> 4;
 
-	//switch (valign) {
-	//case 0:
-	//	cy = 0;
-	//	break;
-	//case 1:
-	//	cy = height - layout_line_h * layout_line_c;
-	//	break;
-	//default:
-	//	cy = (height - layout_line_h * layout_line_c) / 2;
-	//	break;
-	//}
-	//cy = MAX(cy, 0);
+	int line_start = 0;
+	for (int i = 0; i < m_layout.line_count; ++i) 
+	{
+		for (int j = line_start; j < m_layout.line_buf[i]; ++j) 
+		{
+			int unicode = m_layout.char_buf[i].unicode;
+			if (unicode != '\n' && unicode != '\r') {
+				DrawGlyph(unicode, cx, cy, font_size, color, is_edge);
+//				draw_utf8(unicode, x, y, cx, cy, mat, size, color, screen, is_edge, use_cache);
+				cx += m_layout.char_buf[i].width;
+			}
+		}
 
-	//j = TEXT_RTL?layout_char_c-1:0;
-	//for (i=0; i<layout_line_c; ++i) {
-	//	if (halign == 3)
-	//		halign = TEXT_RTL;
-	//	switch (halign) {
-	//  case 0:
-	//	  cx = 0;
-	//	  break;
-	//  case 1:
-	//	  cx = width - line_buf[i].w;
-	//	  break;
-	//  default:
-	//	  cx = (width - line_buf[i].w) / 2;
-	//	  break;
-	//	}
-
-	//	if (TEXT_RTL) {
-	//		for (; j>line_buf[i].end_idx; --j) {
-	//			int unicode = glyph_buf[j].data;
-	//			if (unicode != '\n' && unicode != '\r') {
-	//				draw_utf8(unicode, x, y, cx + line_buf[i].w - glyph_buf[j].w, cy, mat, size, color, screen, is_edge, use_cache);
-	//				cx -= glyph_buf[j].w;
-	//			}
-	//		}
-	//	} else {
-	//		for (; j<line_buf[i].end_idx; ++j) {
-	//			int unicode = glyph_buf[j].data;
-	//			if (unicode != '\n' && unicode != '\r') {
-	//				draw_utf8(unicode, x, y, cx, cy, mat, size, color, screen, is_edge, use_cache);
-	//				cx += glyph_buf[j].w;
-	//			}
-	//		}
-	//	}
-
-	//	cy += layout_line_h;
-	//	if (cy > height)  // 下一行已经不能显示
-	//		break;
-	//}
+		cy += m_layout.line_height;
+		if (cy > height)
+			break;
+	}
 }
 
 void Label::Init()
@@ -121,8 +86,18 @@ void Label::LoadFontFile(const char* filename)
 	m_layout.LoadFontFile(filename);
 }
 
-void Label::DrawGlyph(int unicode, int x, int y, int size,unsigned int color, int is_edge)
+void Label::DrawGlyph(int unicode, int x, int y, int font_size, unsigned int color, int is_edge) const
 {
+	if (unicode == ' ') {
+		return;
+	}
+
+	const DFont::dfont_rect* dr = m_dfont.LookUp(unicode, font_size, color, is_edge);
+	if (dr == NULL) {
+		return;
+	}
+
+	// draw rect
 	
 }
 
@@ -188,12 +163,11 @@ copystr(char *utf8, const char *str, int n)
 void Label::Layout::
 InitLayout(const char* str, int width, int height, int font_size, unsigned long color, int is_edge)
 {
+	line_height = 0;
+
+	int char_idx = 0;
 	int unicode;
 	char utf8[7];
-	int char_w = 0;  // 字符宽
-	int char_c = 0;  // 字符数
-	int line_h = 0;  // 行高
-
 	for (int i=0; str[i]; ) 
 	{
 		uint8_t c = (uint8_t)str[i];
@@ -220,15 +194,18 @@ InitLayout(const char* str, int width, int height, int font_size, unsigned long 
 		if (unicode == '\r')
 			continue;
 
-// 		char_w = draw_size(unicode, utf8, size, color, is_edge, &is_init);
-// 		if (line_h == 0) {
-// 			line_h = _get_font_size(unicode, utf8, size, color, is_edge, &is_init).height;
-// 		}
-// 
-// 		glyph_buf[char_c].data = unicode;
-// 		glyph_buf[char_c].w = char_w;
-// 		char_c += 1;
-	}	
+		GlyphSizer sizer = GetGlyphSizer(unicode, utf8, font_size, color, is_edge);
+		char_buf[char_idx].unicode = unicode;
+		char_buf[char_idx].width = sizer.width;
+		if (line_height == 0) {
+			line_height = sizer.height;
+		}
+		char_idx += 1;
+	}
+
+	// todo
+	line_count = 1;
+	line_buf[0] = char_idx;
 }
 
 GlyphSizer Label::Layout::

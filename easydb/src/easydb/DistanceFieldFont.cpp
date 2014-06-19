@@ -37,7 +37,9 @@ void DistanceFieldFont::transLuaFileToList(const char* luafilename, const char* 
 	}
 	fin.close();
 
+	std::locale::global(std::locale(""));
 	std::ofstream fout(outputfile);
+	std::locale::global(std::locale("C"));
 	std::set<int>::iterator itr = unicodes.begin();
 	for ( ; itr != unicodes.end(); ++itr) {
 		fout << *itr << " ";

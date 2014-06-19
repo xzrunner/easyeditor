@@ -25,7 +25,9 @@ void CocoPacker::pack(const wxString& srcdir, const wxString& dstfilename)
 		}
 	}
 
+	std::locale::global(std::locale(""));
 	std::ofstream fout(dstfilename.fn_str());
+	std::locale::global(std::locale("C"));
 	if (!fout.fail())
 	{
 		fout << gen.toText();

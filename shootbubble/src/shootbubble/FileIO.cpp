@@ -40,7 +40,9 @@ void FileIO::store(const char* filename)
 		value["image"][i] = store(sprites[i]);
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }

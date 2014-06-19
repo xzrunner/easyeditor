@@ -16,7 +16,9 @@ void FileSaver::store(const std::string& filepath, const Symbol& symbol)
 		store(value["layer"][i], symbol.m_layers[i], dir);
 
 	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.c_str());
+	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
