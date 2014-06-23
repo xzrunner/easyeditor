@@ -337,8 +337,8 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 	}
 	// 3. translate
 	d2d::Vector offset = picture->offset;
-	offset.x *= sprite->getScale().x;
-	offset.y *= sprite->getScale().y;
+	offset.x *= sprite->getScale().x / picture->invscale;
+	offset.y *= sprite->getScale().y / picture->invscale;
 	d2d::Vector center = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] += center;
@@ -1109,8 +1109,8 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
  			COCParser::Picture* picture = itr->second;
 
 			d2d::Vector offset = picture->offset;
-			offset.x *= sprite->getScale().x;
-			offset.y *= sprite->getScale().y;
+			offset.x *= sprite->getScale().x / picture->invscale;
+			offset.y *= sprite->getScale().y / picture->invscale;
 			d2d::Vector pos = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
 			x = pos.x;
 			y = pos.y;
