@@ -188,11 +188,12 @@ void ShaderNew::load()
 		"\n"
 		"void main()  \n"
 		"{  \n"  
-		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-		"  gl_FragColor.w = tmp.w;    \n"
-		"  gl_FragColor *= v_fragmentColor.w;  \n"
-		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
+// 		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
+// 		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
+// 		"  gl_FragColor.w = tmp.w;    \n"
+// 		"  gl_FragColor *= v_fragmentColor.w;  \n"
+// 		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
+		"  gl_FragColor = vec4(1,0,0,1); "
 		"}  \n"
 		;
 
@@ -245,8 +246,8 @@ void ShaderNew::load()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	m_prog_sprite = InitShader(sprite_fs, sprite_vs);
-	m_prog_shape = InitShader(shape_fs, shape_vs);
-	m_prog_font = InitShader(font_fs, sprite_vs);
+// 	m_prog_shape = InitShader(shape_fs, shape_vs);
+// 	m_prog_font = InitShader(font_fs, sprite_vs);
 
 	InitBuffers();
 
@@ -359,23 +360,47 @@ void ShaderNew::InitBuffers()
 
 void ShaderNew::Commit()
 {
+	m_sprite_count = 1;
+
  	if (m_sprite_count == 0) {
  		return;
  	}
- 
- 	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
- 	glBufferData(GL_ARRAY_BUFFER, SPRITE_FLOAT_NUM * m_sprite_count * sizeof(float), m_vb, GL_DYNAMIC_DRAW);
- 
- 	glEnableVertexAttribArray(ATTRIB_VERTEX);
- 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
- 	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
- 	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(8));
- 	glEnableVertexAttribArray(ATTRIB_COLOR);
- 	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(16));
- 	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
- 	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(20));  
- 	glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
- 
+
+// 	float vertices[] = {
+// 		0, 0, -1,
+// 		100, 0, -1,
+// 		100, 100, -1,
+// 		0, 100, -1,
+// 	};
+
+	float vertices[] = {
+		0, 0,
+		100, 0,
+		100, 100,
+		0, 100, 
+	};
+
+	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), &vertices[0], GL_DYNAMIC_DRAW);
+
+	glEnableVertexAttribArray(ATTRIB_VERTEX);
+	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 2, &vertices[0]);
+	glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
+
+
+//  	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
+//  	glBufferData(GL_ARRAY_BUFFER, SPRITE_FLOAT_NUM * m_sprite_count * sizeof(float), m_vb, GL_DYNAMIC_DRAW);
+//  
+//  	glEnableVertexAttribArray(ATTRIB_VERTEX);
+//  	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
+//  	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
+//  	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(8));
+//  	glEnableVertexAttribArray(ATTRIB_COLOR);
+//  	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(16));
+//  	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
+//  	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(20));  
+//  	glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
+//  
  	m_sprite_count = 0;
 }
 
