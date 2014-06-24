@@ -311,6 +311,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easydb\ScaleJson.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\ScaleJson.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easydb\ScaleOverall.cpp"
 				>
 			</File>

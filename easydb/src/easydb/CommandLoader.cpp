@@ -14,6 +14,7 @@
 #include "VerifyImage.h"
 #include "VerifyJson.h"
 #include "ScaleOverall.h"
+#include "ScaleJson.h"
 #include "AddFrameSprite.h"
 
 namespace edb
@@ -35,6 +36,7 @@ void CommandLoader::Init()
 	fc->Register(VerifyImage::Create());
 	fc->Register(VerifyJson::Create());
 	fc->Register(ScaleOverall::Create());
+	fc->Register(ScaleJson::Create());
 	fc->Register(AddFrameSprite::Create());
 }
 
