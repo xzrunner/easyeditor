@@ -141,7 +141,6 @@ wxString FilenameTools::getExistFilepath(const wxString& filepath, const wxStrin
 
 void FilenameTools::formatSeparators(std::string& filepath)
 {
-	StringTools::toLower(filepath);
 	const std::string oldVal = "\\", newVal = "/";
 	for(std::string::size_type pos(0); pos != std::string::npos; pos += oldVal.length())   
 	{   

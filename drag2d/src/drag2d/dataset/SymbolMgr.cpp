@@ -38,7 +38,7 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 	wxString fixedPath = FilenameTools::getExistFilepath(filepath.Lower());
 	wxFileName filename(fixedPath);
 	filename.Normalize();
-	fixedPath = filename.GetFullPath();
+	fixedPath = filename.GetFullPath().Lower();
 
 	std::map<wxString, ISymbol*>::iterator itr = m_symbols.find(fixedPath);
 	if (itr == m_symbols.end())

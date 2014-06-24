@@ -31,10 +31,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 		throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
 	}
 
-#ifdef NOT_LOAD_IMAGE
-	return true;
-#endif
-
+#ifndef NOT_LOAD_IMAGE
 	m_filename = filepath;
 	const GLubyte* test = glGetString(GL_VERSION);
 	if (!test) {
@@ -50,10 +47,10 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 
 	if (FileNameParser::isType(filepath, FileNameParser::e_image))
 	{
-	 	wxImage image;
-	 	getImage(filepath, image);
-	 
-	 	m_bitmap = getBitmap(image);
+		wxImage image;
+		getImage(filepath, image);
+
+		m_bitmap = getBitmap(image);
 	}
 	else
 	{
@@ -72,10 +69,11 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 			delete m_bitmap;
 			m_bitmap = NULL;
 		}
- 		m_bitmap = getBitmap(image);
+		m_bitmap = getBitmap(image);
 		delete[] rgb;
- 		symbol->release();
+		symbol->release();
 	}
+#endif
 
 	return true;
 }

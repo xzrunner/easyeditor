@@ -345,6 +345,7 @@ void Frame::clear()
 	Context* context = Context::Instance();
 	static_cast<d2d::LibraryPanel*>(context->library)->clear();
 	static_cast<StagePanel*>(context->stage)->clear();
+	context->viewlist->clear();
 	context->layers.clear();
 
 //	d2d::Statistics::PrintRes();

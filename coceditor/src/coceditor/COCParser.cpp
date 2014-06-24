@@ -33,6 +33,7 @@ void COCParser::prepareMapSymbolPic()
 			{
 				const d2d::ISymbol* s = sorted[k];
 				std::string filepath = s->getFilepath();
+				StringTools::toLower(filepath);
 				d2d::FilenameTools::formatSeparators(filepath);
 
 				bool find = false;
