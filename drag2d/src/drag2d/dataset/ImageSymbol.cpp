@@ -43,13 +43,13 @@ void ImageSymbol::reloadTexture() const
 void ImageSymbol::draw(const Colorf& mul, const Colorf& add,
 					   const ISprite* sprite/* = NULL*/) const
 {
-// 	Shader* shader = Shader::Instance();
-// 	shader->sprite();
-// 	shader->color(mul, add);
+ 	Shader* shader = Shader::Instance();
+ 	shader->sprite();
+ 	shader->color(mul, add);
 
 	m_image->draw(m_region);
 
-//	SpriteTools::DrawName(sprite);
+	SpriteTools::DrawName(sprite);
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const
