@@ -295,7 +295,7 @@ wxSizer* ToolbarPanel::initLayout()
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Start Radius (pixel)"));
 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_start_radius = new wxSlider(this, wxID_ANY, START_RADIUS, 0, 100, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+		m_start_radius = new wxSlider(this, wxID_ANY, START_RADIUS, 0, 1000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
 		Connect(m_start_radius->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetStartRadius));
 		sizer->Add(m_start_radius);
 
