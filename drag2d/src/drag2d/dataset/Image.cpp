@@ -104,40 +104,29 @@ void Image::draw(const Rect& r) const
   		tymin = (r.yMin + tot_hh) / m_height,
   		tymax = (r.yMax + tot_hh) / m_height;
   
-   	GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
-   	GL10::Begin(GL10::GL_QUADS);
-    		GL10::TexCoord2f(txmin, tymin); GL10::Vertex3f(r.xMin, r.yMin, -1.0f);
-    		GL10::TexCoord2f(txmax, tymin); GL10::Vertex3f(r.xMax, r.yMin, -1.0f);
-    		GL10::TexCoord2f(txmax, tymax); GL10::Vertex3f(r.xMax, r.yMax, -1.0f);
-    		GL10::TexCoord2f(txmin, tymax); GL10::Vertex3f(r.xMin, r.yMax, -1.0f);
-   	GL10::End();
-   	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
+	float SCALE = 100;
 
-	//shader->Flush();
+	float vb[16];
+	vb[0] = r.xMin / SCALE;
+	vb[1] = r.yMin / SCALE;
+	vb[2] = txmin;
+	vb[3] = tymin;
+	vb[4] = r.xMax / SCALE;
+	vb[5] = r.yMin / SCALE;
+	vb[6] = txmax;
+	vb[7] = tymin;
+	vb[8] = r.xMax / SCALE;
+	vb[9] = r.yMax / SCALE;
+	vb[10] = txmax;
+	vb[11] = tymax;
+	vb[12] = r.xMin / SCALE;
+	vb[13] = r.yMax / SCALE;
+	vb[14] = txmin;
+	vb[15] = tymax;
 
-	//////////////////////////////////////////////////////////////////////////
+	shader->Draw(vb, m_textureID);
 
-//  	ShaderNew* shader = ShaderNew::Instance();
-//  	shader->sprite();
-//  
-//  	float vb[16];
-// 
-// 	vb[0] = 0, vb[1] = 2;
-// 	vb[2] = 0, vb[3] = 0;
-// 
-// 	vb[4] = 0, vb[5] = 2;
-// 	vb[6] = 0, vb[7] = 1;
-// 
-// 	vb[8] = 2, vb[9] = 2;
-// 	vb[10] = 1, vb[11] = 1;
-// 
-// 	vb[12] = 2, vb[13] = 0;
-// 	vb[14] = 1, vb[15] = 0;
-// 
-// 	shader->sprite();
-//  	shader->Draw(vb, m_textureID);
-// 
-// 	shader->Flush();
+	shader->Flush();
 }
 
 } // d2d

@@ -41,6 +41,19 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
 // 
 // 	GL10::PopMatrix();
 
+	//////////////////////////////////////////////////////////////////////////
+ 
+  	bool xMirror, yMirror;
+  	sprite->getMirror(xMirror, yMirror);
+  	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
+  		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
+ 
+  	d2d::Vector center = sprite->getCenter();
+	love::Matrix t;
+  	t.setTransformation(center.x, center.y, sprite->getAngle(), 
+  		xScale * 0.1, yScale * 0.1, 0, 0, sprite->getShear().x, sprite->getShear().y);
+ // GL10::MultMatrixf((const float*)t.getElements( ));
+
 	sprite->getSymbol().draw(Colorf(), Colorf(), sprite);
 }
 
