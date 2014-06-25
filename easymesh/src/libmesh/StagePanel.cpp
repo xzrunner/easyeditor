@@ -43,9 +43,9 @@ void StagePanel::clear()
 	m_sprite = new Sprite;
 }
 
-Mesh* StagePanel::getMesh()
+Shape* StagePanel::getShape()
 {
-	return m_sprite->getMesh();
+	return m_sprite->getShape();
 }
 
 void StagePanel::init(d2d::LibraryPanel* library)

@@ -27,7 +27,7 @@ wxSizer* EditMeshCMPT::initLayout()
 
 void EditMeshCMPT::onReset(wxCommandEvent& event)
 {
-	m_stage->getMesh()->reset();
+	m_stage->getShape()->Reset();
 	m_editPanel->Refresh();
 	m_editOP->clear();
 }

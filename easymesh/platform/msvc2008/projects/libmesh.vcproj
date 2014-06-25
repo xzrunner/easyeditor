@@ -231,8 +231,32 @@
 					RelativePath="..\..\..\src\libmesh\Mesh.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="strip"
+				>
+				<File
+					RelativePath="..\..\..\src\libmesh\Strip.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Strip.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="base"
+				>
 				<File
 					RelativePath="..\..\..\src\libmesh\Node.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Shape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\Shape.h"
 					>
 				</File>
 				<File

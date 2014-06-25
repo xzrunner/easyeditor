@@ -13,10 +13,10 @@ EditUVOP::EditUVOP(StagePanel* stage)
 
 bool EditUVOP::onDraw() const
 {
-	if (Mesh* mesh = m_stage->getMesh())
+	if (Shape* shape = m_stage->getShape())
 	{
-		mesh->drawTexture();
-		mesh->drawInfoXY();
+		shape->DrawTexture();
+		shape->DrawInfoXY();
 	}
 
 	return false;

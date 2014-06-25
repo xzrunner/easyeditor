@@ -37,19 +37,19 @@ wxSizer* CreateMeshCMPT::initLayout()
 
 void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 {
-	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_mesh);
-	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + tag + wxT(".json"), wxFD_OPEN);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		FileIO::loadStruct(dlg.GetPath(), *m_stage->getMesh());
-		m_editPanel->Refresh();
-	}
+// 	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_mesh);
+// 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
+// 		wxT("*_") + tag + wxT(".json"), wxFD_OPEN);
+// 	if (dlg.ShowModal() == wxID_OK)
+// 	{
+// 		FileIO::loadStruct(dlg.GetPath(), *m_stage->getMesh());
+// 		m_editPanel->Refresh();
+// 	}
 }
 
 void CreateMeshCMPT::onClear(wxCommandEvent& event)
 {
-	m_stage->getMesh()->clear();
+	m_stage->getShape()->Clear();
 	m_editPanel->Refresh();
 	m_editOP->clear();
 }

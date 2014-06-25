@@ -1,6 +1,6 @@
 #include "CreateMeshOP.h"
 #include "StagePanel.h"
-#include "Mesh.h"
+#include "Shape.h"
 #include "Triangle.h"
 #include "Sprite.h"
 
@@ -19,10 +19,10 @@ bool CreateMeshOP::onMouseLeftDown(int x, int y)
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y))
 		return true;
 
-	if (Mesh* mesh = m_stage->getMesh())
+	if (Shape* shape = m_stage->getShape())
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		m_selected = mesh->find(pos);
+		m_selected = shape->Find(pos);
 	}
 
 	return false;
@@ -33,13 +33,13 @@ bool CreateMeshOP::onMouseLeftUp(int x, int y)
 	if (d2d::ZoomViewOP::onMouseLeftUp(x, y))
 		return true;
 
-	Mesh* mesh = m_stage->getMesh();
-	if (!mesh) return false;
+	Shape* shape = m_stage->getShape();
+	if (!shape) return false;
 
 	if (!m_selected)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		mesh->insert(pos);
+		shape->Insert(pos);
 		m_editPanel->Refresh();
 	}
 
@@ -51,10 +51,10 @@ bool CreateMeshOP::onMouseRightDown(int x, int y)
 	if (d2d::ZoomViewOP::onMouseRightDown(x, y))
 		return true;
 
-	if (Mesh* mesh = m_stage->getMesh())
+	if (Shape* shape = m_stage->getShape())
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		mesh->remove(pos);
+		shape->Remove(pos);
 		m_editPanel->Refresh();
 	}
 
@@ -66,13 +66,13 @@ bool CreateMeshOP::onMouseDrag(int x, int y)
 	if (d2d::ZoomViewOP::onMouseDrag(x, y))
 		return true;
 
-	Mesh* mesh = m_stage->getMesh();
-	if (!mesh) return false;
+	Shape* shape = m_stage->getShape();
+	if (!shape) return false;
 
 	if (m_selected)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		mesh->move(m_selected, pos);
+		shape->Move(m_selected, pos);
 		m_editPanel->Refresh();
 	}
 
@@ -89,9 +89,9 @@ bool CreateMeshOP::onDraw() const
 		image->draw(image->getRegion());
  	}
 
-	if (Mesh* mesh = m_stage->getMesh())
+	if (Shape* shape = m_stage->getShape())
 	{
-		mesh->drawInfoUV();
+		shape->DrawInfoUV();
 	}
 
 	return false;

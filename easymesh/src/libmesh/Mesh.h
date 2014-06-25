@@ -1,6 +1,8 @@
 #ifndef _EASYMESH_MESH_H_
 #define _EASYMESH_MESH_H_
 
+#include "Shape.h"
+
 #include <drag2d.h>
 
 namespace emesh
@@ -8,39 +10,32 @@ namespace emesh
 
 class Node;
 class Triangle;
-class Mesh : public d2d::Object, d2d::ICloneable
+class Mesh : public Shape
 {
 public:
 	Mesh();
 	Mesh(const Mesh& mesh);
 	Mesh(const d2d::Image& image, bool initBound = true);
-	~Mesh();
 
 	//
 	// ICloneable interface
 	//
 	virtual Mesh* clone() const;
 
-	void insert(const d2d::Vector& p);
-	void remove(const d2d::Vector& p);
-	d2d::Vector* find(const d2d::Vector& p);
-	void move(d2d::Vector* src, const d2d::Vector& dst);
+	//
+	// IShape interface
+	//
+	virtual void Insert(const d2d::Vector& p);
+	virtual void Remove(const d2d::Vector& p);
+	virtual d2d::Vector* Find(const d2d::Vector& p);
+	virtual void Move(d2d::Vector* src, const d2d::Vector& dst);
 
-	// select
-	Node* queryNode(const d2d::Vector& p);
-	void queryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
+//	void tween(const Mesh& begin, const Mesh& end, float process);
 
-	// draw
-	void drawInfoUV() const;
-	void drawInfoXY() const;
-	void drawTexture() const;
+	virtual void Reset();
+	virtual void Clear();
 
-	void tween(const Mesh& begin, const Mesh& end, float process);
-
-	void reset();
-	void clear();
-
-	void resetUVOffset(float dx, float dy);
+	virtual void ResetUVOffset(float dx, float dy);
 
 private:
 	void getRegionBound(std::vector<d2d::Vector>& bound) const;
@@ -66,14 +61,7 @@ private:
 	};
 
 private:
-	int m_texid;
-
-	float m_width, m_height;
-
-//	std::vector<Region> m_regions;
 	Region m_region;
-
-	std::vector<Triangle*> m_tris;
 
 	d2d::Vector m_uv_offset;
 

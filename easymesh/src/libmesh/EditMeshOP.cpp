@@ -71,8 +71,8 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 	if (SelectNodesOP::onMouseDrag(x, y))
 		return true;
 
-	Mesh* mesh = m_stage->getMesh();
-	if (!mesh) return false;
+	Shape* shape = m_stage->getShape();
+	if (!shape) return false;
 
 	if (!m_selection.empty())
 	{
@@ -90,10 +90,10 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 
 bool EditMeshOP::onDraw() const
 {
-	if (Mesh* mesh = m_stage->getMesh())
+	if (Shape* shape = m_stage->getShape())
 	{
-		mesh->drawTexture();
-		mesh->drawInfoXY();
+		shape->DrawTexture();
+		shape->DrawInfoXY();
 	}
 
 	d2d::PrimitiveDraw::cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));

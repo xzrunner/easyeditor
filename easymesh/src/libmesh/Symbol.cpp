@@ -1,13 +1,15 @@
 #include "Symbol.h"
-#include "Mesh.h"
+#include "Shape.h"
 #include "FileIO.h"
+#include "Mesh.h"
+#include "Strip.h"
 
 namespace emesh
 {
 
 Symbol::Symbol()
 	: m_image(NULL)
-	, m_mesh(NULL)
+	, m_shape(NULL)
 {
 }
 
@@ -17,7 +19,7 @@ Symbol::Symbol(const Symbol& s)
 	s.m_image->retain();
 	m_image = s.m_image;
 
-	m_mesh = s.m_mesh->clone();
+	m_shape = s.m_shape->clone();
 }
 
 Symbol::Symbol(d2d::Image* image)
@@ -25,7 +27,8 @@ Symbol::Symbol(d2d::Image* image)
 	image->retain();
 	m_image = image;
 
-	m_mesh = new Mesh(*image);
+	m_shape = new Strip(*image);
+	//m_shape = new Mesh(*image);
 }
 
 Symbol::~Symbol()
@@ -35,11 +38,10 @@ Symbol::~Symbol()
 		m_image->release();
 		m_image = NULL;
 	}
-
-	if (m_mesh)
+	if (m_shape)
 	{
-		m_mesh->release();
-		m_mesh = NULL;
+		m_shape->release();
+		m_shape = NULL;
 	}
 }
 
@@ -56,10 +58,8 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 				  const d2d::ISprite* sprite) const
 {
-	if (m_mesh)
-	{
-		m_mesh->drawTexture();
-//		m_mesh->drawInfoUV();
+	if (m_shape) {
+		m_shape->DrawTexture();
 	}
 }
 

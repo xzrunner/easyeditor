@@ -6,7 +6,7 @@
 namespace emesh
 {
 
-class Mesh;
+class Shape;
 class Symbol : public d2d::ISymbol
 {
 public:
@@ -34,8 +34,8 @@ public:
 	//
 	virtual void refresh();
 
-	const Mesh* getMesh() const { return m_mesh; }
-	Mesh* getMesh() { return m_mesh; }
+ 	const Shape* getShape() const { return m_shape; }
+ 	Shape* getShape() { return m_shape; }
 
 	const d2d::Image* getImage() const { return m_image; }
 	d2d::Image* getImage() { return m_image; }
@@ -48,7 +48,7 @@ protected:
 private:
 	d2d::Image* m_image;
 
-	Mesh* m_mesh;
+	Shape* m_shape;
 
 	friend class FileIO;
 

@@ -25,11 +25,11 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	if (d2d::DrawRectangleOP::onMouseLeftDown(x, y)) 
 		return true;
 
-	Mesh* mesh = m_stage->getMesh();
-	if (!mesh) return false;
+	Shape* shape = m_stage->getShape();
+	if (!shape) return false;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	Node* selected = mesh->queryNode(pos);
+	Node* selected = shape->QueryNode(pos);
 	if (selected)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
@@ -69,13 +69,13 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 
 	m_bDraggable = true;
 
-	Mesh* mesh = m_stage->getMesh();
-	if (m_firstPos.isValid() && mesh)
+	Shape* shape = m_stage->getShape();
+	if (m_firstPos.isValid() && shape)
 	{
 		d2d::Vector end = m_editPanel->transPosScreenToProject(x, y);
 		d2d::Rect rect(m_firstPos, end);
 		std::vector<Node*> nodes;
-		mesh->queryNode(rect, nodes);
+		shape->QueryNode(rect, nodes);
 		for (size_t i = 0, n = nodes.size(); i < n; ++i)
 			m_selection.insert(nodes[i]);
 

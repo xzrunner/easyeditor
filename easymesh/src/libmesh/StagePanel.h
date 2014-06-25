@@ -7,7 +7,7 @@ namespace emesh
 {
 
 class Sprite;
-class Mesh;
+class Shape;
 class StagePanel : public d2d::EditPanel
 {
 public:
@@ -23,7 +23,7 @@ public:
 	//
 	virtual void clear();
 
-	Mesh* getMesh();
+	Shape* getShape();
 	Sprite* getSprite() { return m_sprite; }
 
 private:
