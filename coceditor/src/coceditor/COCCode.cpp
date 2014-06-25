@@ -324,37 +324,36 @@ void COCCode::resolvePicture(const d2d::ImageSprite* sprite, const COCParser& pa
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
-	// 1. scale
+	// 1. mirror
+	bool xMirror, yMirror;
+	sprite->getMirror(xMirror, yMirror);
+	if (xMirror) {
+		for (size_t i = 0; i < 4; ++i)
+			screen[i].x = -screen[i].x;
+	}
+	if (yMirror) {
+		for (size_t i = 0; i < 4; ++i)
+			screen[i].y = -screen[i].y;
+	}
+	// 2. scale
 	for (size_t i = 0; i < 4; ++i)
 		screen[i].x *= sprite->getScale().x;
 	for (size_t i = 0; i < 4; ++i)
 		screen[i].y *= sprite->getScale().y;
-	// 2. rotate
+	// 3. rotate
 	for (size_t i = 0; i < 4; ++i)
 	{
 		d2d::Vector rot = d2d::Math::rotateVector(screen[i], sprite->getAngle());
 		screen[i] = rot;
 	}
-	// 3. translate
+	// 4. translate
 	d2d::Vector offset = picture->offset;
 	offset.x *= sprite->getScale().x / picture->invscale;
 	offset.y *= sprite->getScale().y / picture->invscale;
 	d2d::Vector center = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] += center;
-	// 4. mirror
-	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
-	if (xMirror)
-	{
-		std::swap(screen[0].x, screen[3].x);
-		std::swap(screen[1].x, screen[2].x);
-	}
-	if (yMirror)
-	{
-		std::swap(screen[1].y, screen[0].y);
-		std::swap(screen[2].y, screen[3].y);
-	}
+
 	// flip y
 	for (size_t i = 0; i < 4; ++i)
 		screen[i].y = -screen[i].y;
@@ -1129,6 +1128,7 @@ void COCCode::transToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		sprite->getMirror(xMirror, yMirror);
 		if (xMirror) sx = -sx;
 		if (yMirror) sy = -sy;
+
 		float c = cos(-sprite->getAngle()),
 			s = sin(-sprite->getAngle());
 		float kx = sprite->getShear().x,
