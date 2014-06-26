@@ -41,7 +41,6 @@ public:
 
 protected:
 	void ClearTriangles();
-	void LoadTriangles(const std::vector<d2d::Vector>& tris);
 
 protected:
 	int m_texid;

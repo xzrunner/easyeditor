@@ -38,6 +38,8 @@ public:
 	virtual void ResetUVOffset(float dx, float dy);
 
 private:
+	void LoadTriangles(const std::vector<d2d::Vector>& tris);
+
 	void getRegionBound(std::vector<d2d::Vector>& bound) const;
 	void refreshTriangles();
 
