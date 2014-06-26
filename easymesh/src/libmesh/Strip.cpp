@@ -115,6 +115,7 @@ void Strip::Clear()
 
 void Strip::ResetUVOffset(float dx, float dy)
 {
+
 }
 
 void Strip::InitBound()
@@ -145,26 +146,9 @@ void Strip::RefreshTriangles()
 		tris.push_back(m_left_nodes[i]);
 		tris.push_back(m_right_nodes[i+1]);
 		tris.push_back(m_left_nodes[i+1]);
-
-		//////////////////////////////////////////////////////////////////////////
-		Triangle* tri0 = new Triangle;
-		tri0->nodes[0] = new Node(m_left_nodes[i], m_width, m_height);
-		tri0->nodes[1] = new Node(m_right_nodes[i], m_width, m_height);
-		tri0->nodes[2] = new Node(m_right_nodes[i+1], m_width, m_height);
-		m_tris.push_back(tri0);
-		Triangle* tri1 = new Triangle;
-		tri1->nodes[0] = new Node(m_left_nodes[i], m_width, m_height);
-		tri1->nodes[1] = new Node(m_right_nodes[i+1], m_width, m_height);
-		tri1->nodes[2] = new Node(m_left_nodes[i+1], m_width, m_height);
-		m_tris.push_back(tri1);
 	}
-//	LoadTriangles(tris);
+	LoadTriangles(tris);
 }
-
-// void Strip::LoadTriangles(const std::vector<d2d::Vector>& tris)
-// {
-// 	
-// }
 
 void Strip::CopyTriangles(const Strip& strip)
 {

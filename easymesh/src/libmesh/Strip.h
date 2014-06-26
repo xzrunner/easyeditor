@@ -39,7 +39,6 @@ private:
 	void InitBound();
 	
 	void RefreshTriangles();
-//	void LoadTriangles(const std::vector<d2d::Vector>& tris);
 
 	void CopyTriangles(const Strip& strip);
 

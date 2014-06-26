@@ -167,13 +167,13 @@ void Mesh::getRegionBound(std::vector<d2d::Vector>& bound) const
 
 void Mesh::refreshTriangles()
 {
-	clearTriangles();
+	ClearTriangles();
 
 	std::vector<d2d::Vector> bound;
 	getRegionBound(bound);
 	std::vector<d2d::Vector> tris;
 	d2d::Triangulation::points(bound, m_region.nodes, tris);
-	loadTriangles(tris);
+	LoadTriangles(tris);
 }
 
 void Mesh::getLinesCutByUVBounds(std::vector<d2d::Vector>& lines)
@@ -333,7 +333,7 @@ void Mesh::refreshTrianglesWithUV()
 
 
 	// create tris
-	clearTriangles();
+	ClearTriangles();
 	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
 	{
 		Triangle* tri = new Triangle;
@@ -423,35 +423,6 @@ void Mesh::refreshTrianglesWithUV()
 	//		}
 	//	}
 	//}
-}
-
-void Mesh::clearTriangles()
-{
-	for_each(m_tris.begin(), m_tris.end(), DeletePointerFunctor<Triangle>());
-	m_tris.clear();
-}
-
-void Mesh::loadTriangles(const std::vector<d2d::Vector>& tris)
-{
-	std::map<d2d::Vector, Node*, d2d::VectorCmp> map2Node;
-	Node null;
-	for (int i = 0, n = tris.size(); i < n; ++i)
-		map2Node.insert(std::make_pair(tris[i], &null));
-
-	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
-	{
-		Triangle* tri = new Triangle;
-		for (int j = 0; j < 3; ++j)
-		{
-			std::map<d2d::Vector, Node*, d2d::VectorCmp>::iterator itr 
-				= map2Node.find(tris[ptr++]);
-			assert(itr != map2Node.end());
-			if (itr->second == &null)
-				itr->second = new Node(itr->first, m_width, m_height);
-			tri->nodes[j] = itr->second;
-		}
-		m_tris.push_back(tri);
-	}
 }
 
 void Mesh::copyTriangles(const Mesh& mesh)

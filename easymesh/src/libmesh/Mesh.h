@@ -44,9 +44,6 @@ private:
 	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
 	void refreshTrianglesWithUV();
 
-	void clearTriangles();
-	void loadTriangles(const std::vector<d2d::Vector>& tris);
-
 	void copyTriangles(const Mesh& mesh);
 
 	void absorbNodeToRegion(d2d::Vector& node);
