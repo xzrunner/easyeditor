@@ -12,6 +12,7 @@ CreateMeshOP::CreateMeshOP(StagePanel* stage)
 	, m_stage(stage)
 	, m_selected(NULL)
 {
+	m_last_right.setInvalid();
 }
 
 bool CreateMeshOP::onMouseLeftDown(int x, int y)
@@ -56,7 +57,19 @@ bool CreateMeshOP::onMouseRightDown(int x, int y)
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		shape->Remove(pos);
 		m_editPanel->Refresh();
+
+		m_last_right = pos;
 	}
+
+	return false;
+}
+
+bool CreateMeshOP::onMouseRightUp(int x, int y)
+{
+	if (d2d::ZoomViewOP::onMouseRightUp(x, y))
+		return true;
+
+	m_last_right.setInvalid();
 
 	return false;
 }
@@ -66,15 +79,25 @@ bool CreateMeshOP::onMouseDrag(int x, int y)
 	if (d2d::ZoomViewOP::onMouseDrag(x, y))
 		return true;
 
+	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+
+	// move background
+	if (m_last_right.isValid())
+	{
+		d2d::Vector offset = pos - m_last_right;
+		StagePanel* stage = static_cast<StagePanel*>(m_stage);
+		stage->TranslateBackground(offset);
+		m_last_right = pos;
+	}
+
 	Shape* shape = m_stage->getShape();
 	if (!shape) return false;
 
-	if (m_selected)
-	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	if (m_selected) {
 		shape->Move(m_selected, pos);
-		m_editPanel->Refresh();
 	}
+
+	m_editPanel->Refresh();
 
 	return false;
 }

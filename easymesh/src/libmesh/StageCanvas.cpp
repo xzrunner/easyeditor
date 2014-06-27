@@ -14,14 +14,17 @@ StageCanvas::StageCanvas(StagePanel* panel)
 void StageCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
-	if (d2d::Image* image = m_panel->getSprite()->getImage())
-	{
+	if (d2d::Image* image = m_panel->getSprite()->getImage()) {
 		image->reload();
 	}
 }
 
 void StageCanvas::onDraw()
 {
+	const d2d::ISprite* bg = m_panel->GetBackground();
+	if (bg) {
+		d2d::SpriteDraw::drawSprite(bg);
+	}
 	m_editPanel->drawEditTemp();
 }
 

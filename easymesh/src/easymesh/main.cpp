@@ -1,5 +1,6 @@
 #include "main.h"
 #include "Task.h"
+#include "Frame.h"
 
 #include <easymesh.h>
 
@@ -15,7 +16,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators() ;
 
-	d2d::Frame* frame = new d2d::Frame("EasyMesh", emesh::FILE_TAG);
+	d2d::Frame* frame = new emesh::Frame("EasyMesh", emesh::FILE_TAG);
 	emesh::Task* task = new emesh::Task(frame);
 	frame->setTask(task);
 	frame->Show(true);

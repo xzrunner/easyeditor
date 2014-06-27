@@ -121,6 +121,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
  		d2d::GLCanvas* canvas = stage->getCanvas();
  		static_cast<StageCanvas*>(canvas)->setBackground(img);
+		img->release();
 	}
 }
 

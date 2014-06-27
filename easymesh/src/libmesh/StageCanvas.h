@@ -11,7 +11,7 @@ class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* panel);
-	
+
 protected:
 	virtual void initGL();
 	virtual void onDraw();

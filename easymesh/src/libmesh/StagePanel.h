@@ -26,6 +26,18 @@ public:
 	Shape* getShape();
 	Sprite* getSprite() { return m_sprite; }
 
+	// for background
+	void SetBackground(d2d::ISprite* bg) { 
+		bg->retain();
+		m_background = bg; 
+	}
+	const d2d::ISprite* GetBackground() const { return m_background; }
+	void TranslateBackground(const d2d::Vector& offset) { 
+		if (m_background) {
+			m_background->translate(offset);
+		}
+	}
+
 private:
 	void init(d2d::LibraryPanel* library);
 
@@ -46,6 +58,8 @@ private:
 
 private:
 	Sprite* m_sprite;
+
+	d2d::ISprite* m_background;
 
 }; // StagePanel
 

@@ -13,6 +13,7 @@ namespace ecomplex
 		virtual ~StageCanvas();
 
 		void setBackground(d2d::Image* image) {
+			image->retain();
 			m_background = image;
 		}
 

@@ -28,9 +28,6 @@ public:
 	virtual void setSymbol(d2d::ISymbol* symbol);
 	virtual void loadBodyFromFile();
 
-	virtual void load(const Json::Value& val);
-	virtual void store(Json::Value& val) const;
-
 	Shape* getShape() {
 		return m_symbol ? m_symbol->getShape() : NULL; 
 	}

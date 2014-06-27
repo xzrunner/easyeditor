@@ -29,25 +29,26 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	if (!shape) return false;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	Node* selected = shape->QueryNode(pos);
-	if (selected)
+	std::vector<Node*> nodes;
+	shape->QueryNode(pos, nodes);
+	if (!nodes.empty())
 	{
-		if (wxGetKeyState(WXK_CONTROL))
+		m_selection.clear();
+		for (int i = 0, n = nodes.size(); i < n; ++i)
 		{
-			if (m_selection.isExist(selected))
-				m_selection.erase(selected);
-			else
-				m_selection.insert(selected);
-		}
-		else
-		{
-			if (!m_selection.isExist(selected))
-			{
-				m_selection.clear();
-				m_selection.insert(selected);
+			Node* node = nodes[i];
+			if (wxGetKeyState(WXK_CONTROL)) {
+				if (m_selection.isExist(node))
+					m_selection.erase(node);
+				else
+					m_selection.insert(node);
+			} else {
+				if (!m_selection.isExist(node)) {
+					m_selection.insert(node);
+				}
 			}
+			m_firstPos.setInvalid();
 		}
-		m_firstPos.setInvalid();
 	}
 	else
 	{

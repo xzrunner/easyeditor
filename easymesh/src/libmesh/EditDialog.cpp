@@ -24,7 +24,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 	initLayout();
 
 	m_symbol->SetPause(true);
-	m_symbol->getShape()->RefreshTriangles();
+//	m_symbol->getShape()->RefreshTriangles();
 }
 
 EditDialog::~EditDialog()

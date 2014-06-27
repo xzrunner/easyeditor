@@ -7,6 +7,7 @@ namespace emesh
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: d2d::EditPanel(parent, frame)
+	, m_background(NULL)
 {
 	m_sprite = new Sprite();
 
@@ -16,6 +17,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
+	, m_background(NULL)
 {
 	m_sprite = new Sprite();
 
@@ -25,6 +27,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library, Sprite* sprite)
 	: d2d::EditPanel(parent, frame)
+	, m_background(NULL)
 {
 	sprite->retain();
 	m_sprite = sprite;
@@ -34,7 +37,11 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {
-	m_sprite->release();	
+	m_sprite->release();
+
+	if (m_background) {
+		m_background->release();
+	}
 }
 
 void StagePanel::clear()

@@ -15,6 +15,7 @@ public:
 	virtual bool onMouseLeftDown(int x, int y);
 	virtual bool onMouseLeftUp(int x, int y);
 	virtual bool onMouseRightDown(int x, int y);
+	virtual bool onMouseRightUp(int x, int y);
 	virtual bool onMouseDrag(int x, int y);
 
 	virtual bool onDraw() const;
@@ -23,6 +24,8 @@ private:
 	StagePanel* m_stage;
 
 	d2d::Vector* m_selected;
+
+	d2d::Vector m_last_right;
 
 }; // CreateMeshOP
 

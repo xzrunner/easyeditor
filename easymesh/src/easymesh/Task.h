@@ -26,6 +26,8 @@ public:
 
 	virtual const d2d::EditPanel* getEditPanel() const;
 
+	emesh::StagePanel* getStagePanel() { return m_stage; }
+
 private:
 	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
 		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,

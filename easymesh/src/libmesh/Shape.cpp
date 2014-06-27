@@ -33,18 +33,17 @@ Shape::~Shape()
 	ClearTriangles();
 }
 
-Node* Shape::QueryNode(const d2d::Vector& p)
+void Shape::QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes)
 {
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
-		for (int j = 0; j < 3; ++j)
-		{
-			if (d2d::Math::getDistance(tri->nodes[j]->xy, p) < Node::RADIUS)
-				return tri->nodes[j];
+		for (int j = 0; j < 3; ++j) {
+			if (d2d::Math::getDistance(tri->nodes[j]->xy, p) < Node::RADIUS) {
+				nodes.push_back(tri->nodes[j]);
+			}
 		}
 	}
-	return NULL;
 }
 
 void Shape::QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes)

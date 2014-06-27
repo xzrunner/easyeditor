@@ -85,14 +85,6 @@ void Strip::Move(d2d::Vector* src, const d2d::Vector& dst)
 	if (!src) return;
 
 	src->y = dst.y;
-// 	for (int i = 0, n = m_tris.size(); i < n; ++i) {
-// 		for (int j = 0; j < 3; ++j) {
-// 			Node* n = m_tris[i]->nodes[j];
-// 			if (n->xy == *src) {
-// 				n->xy.y = dst.y;
-// 			}
-// 		}
-// 	}
 
 	m_left_nodes.Sort();
 	m_right_nodes.Sort();
