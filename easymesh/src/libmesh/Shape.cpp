@@ -121,4 +121,29 @@ void Shape::ClearTriangles()
 	m_tris.clear();
 }
 
+void Shape::StoreTriangles(Json::Value& value) const
+{
+	std::vector<d2d::Vector> transform;
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int i = 0; i < 3; ++i)
+			transform.push_back(tri->nodes[i]->xy);
+	}
+	d2d::JsonTools::store(transform, value);
+}
+
+void Shape::LoadTriangles(const Json::Value& value)
+{
+	std::vector<d2d::Vector> transform;
+	d2d::JsonTools::load(value, transform);
+	int itr = 0;
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int i = 0; i < 3; ++i)
+			tri->nodes[i]->xy = transform[itr++];
+	}
+}
+
 }

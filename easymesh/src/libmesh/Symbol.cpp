@@ -10,6 +10,7 @@ namespace emesh
 Symbol::Symbol()
 	: m_image(NULL)
 	, m_shape(NULL)
+	, m_pause(false)
 {
 }
 
@@ -28,7 +29,7 @@ Symbol::Symbol(d2d::Image* image)
 	m_image = image;
 
 	m_shape = new Strip(*image);
-	//m_shape = new Mesh(*image);
+//	m_shape = new Mesh(*image);
 }
 
 Symbol::~Symbol()
@@ -60,6 +61,9 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 {
 	if (m_shape) {
 		m_shape->DrawTexture();
+		if (!m_pause) {
+			m_shape->OffsetUV(0, -0.01f);			
+		}
 	}
 }
 
@@ -70,6 +74,26 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 
 void Symbol::refresh()
 {
+}
+
+void Symbol::SetShape(Shape* shape)
+{
+	if (m_shape) {
+		m_shape->release();
+	}
+	shape->retain();
+	m_shape = shape;
+}
+
+const wxString& Symbol::GetImagePath() const
+{
+	return m_image->filepath();
+}
+
+void Symbol::LoadImage(const wxString& filepath)
+{
+	d2d::BitmapMgr::Instance()->getItem(filepath, &m_bitmap);
+	d2d::ImageMgr::Instance()->getItem(filepath, &m_image);
 }
 
 void Symbol::loadResources()

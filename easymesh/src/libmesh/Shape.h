@@ -30,7 +30,10 @@ public:
 	virtual void Reset() = 0;
 	virtual void Clear() = 0;
 
-	virtual void ResetUVOffset(float dx, float dy) = 0;
+	virtual void OffsetUV(float dx, float dy) = 0;
+
+	virtual void Load(const Json::Value& value) = 0;
+	virtual void Store(Json::Value& value) const = 0;
 
 	Node* QueryNode(const d2d::Vector& p);
 	void QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
@@ -41,6 +44,9 @@ public:
 
 protected:
 	void ClearTriangles();
+
+	void StoreTriangles(Json::Value& value) const;
+	void LoadTriangles(const Json::Value& value);
 
 protected:
 	int m_texid;

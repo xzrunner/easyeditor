@@ -36,9 +36,15 @@ public:
 
  	const Shape* getShape() const { return m_shape; }
  	Shape* getShape() { return m_shape; }
+	void SetShape(Shape* shape);
 
 	const d2d::Image* getImage() const { return m_image; }
 	d2d::Image* getImage() { return m_image; }
+
+	const wxString& GetImagePath() const;
+	void LoadImage(const wxString& filepath);
+
+	void SetPause(bool pause) { m_pause = pause; }
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
@@ -50,7 +56,7 @@ private:
 
 	Shape* m_shape;
 
-	friend class FileIO;
+	bool m_pause;
 
 }; // Symbol
 

@@ -33,20 +33,23 @@ public:
 	virtual void Reset();
 	virtual void Clear();
 
-	virtual void ResetUVOffset(float dx, float dy);
+	virtual void OffsetUV(float dx, float dy);
+
+	virtual void Load(const Json::Value& value);
+	virtual void Store(Json::Value& value) const;
+
+	static const char* GetType() { return "strip"; }
 
 private:
 	void InitBound();
 	
 	void RefreshTriangles();
-
 	void CopyTriangles(const Strip& strip);
 
 	void AbsorbNodeToRegion(d2d::Vector& node);
 	void RemoveCornerFromNodes();
 
 	void GetTransList(std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list) const;
-	void TransTriangles(const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list);
 
 	static void TranslateNode(Node* node, const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list);
 	static void TranslateNode(d2d::Vector& node, const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list);
@@ -62,9 +65,9 @@ private:
 			const d2d::Vector& end);
 
 		void Insert(const d2d::Vector& p);
-		int InsertExt(const d2d::Vector& p, const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list, d2d::Vector& nearest);
-		int InsertExt(const d2d::Vector& p, d2d::Vector& nearest);
 		void Remove(int idx);
+
+		int GetNodeInsertPos(const d2d::Vector& p, d2d::Vector& nearest);
 
 		int QueryIndex(const d2d::Vector& p) const;
 		d2d::Vector* QueryPointer(const d2d::Vector& p);
@@ -75,17 +78,10 @@ private:
 
 		void Sort();
 
-		const std::vector<d2d::Vector>& GetExtNodes() const {
-			return m_ext;
-		}
-		std::vector<d2d::Vector>& GetExtNodes() {
-			return m_ext;
-		}
-
 	private:
 		static void Insert(std::vector<d2d::Vector>& nodes, const d2d::Vector& p);
 
-	private:
+	public:
 		std::vector<d2d::Vector> m_ori, m_ext;
 
 	}; // NodeList

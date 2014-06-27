@@ -35,27 +35,24 @@ public:
 	virtual void Reset();
 	virtual void Clear();
 
-	virtual void ResetUVOffset(float dx, float dy);
+	virtual void OffsetUV(float dx, float dy);
+
+	virtual void Load(const Json::Value& value);
+	virtual void Store(Json::Value& value) const;
+
+	static const char* GetType() { return "mesh"; }
 
 private:
-	void LoadTriangles(const std::vector<d2d::Vector>& tris);
+	void RefreshTriangles();
 
-	void getRegionBound(std::vector<d2d::Vector>& bound) const;
-	void refreshTriangles();
+	void GetRegionBound(std::vector<d2d::Vector>& bound) const;
 
-	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
-	void refreshTrianglesWithUV();
-
-	void copyTriangles(const Mesh& mesh);
-
-	void absorbNodeToRegion(d2d::Vector& node);
-	void removeCornerFromNodes();
+//	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
 
 private:
 	struct Region
 	{
 		d2d::Rect rect;
-//		std::vector<d2d::Vector> bound;
 		std::vector<d2d::Vector> nodes;
 	};
 
@@ -63,8 +60,6 @@ private:
 	Region m_region;
 
 	d2d::Vector m_uv_offset;
-
-	friend class FileIO;
 
 }; // Mesh
 

@@ -4,6 +4,7 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 #include "FileIO.h"
+#include "Shape.h"
 
 #include <wx/splitter.h>
 
@@ -21,6 +22,14 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 {
 	SetTitle(symbol->getFilepath());
 	initLayout();
+
+	m_symbol->SetPause(true);
+	m_symbol->getShape()->RefreshTriangles();
+}
+
+EditDialog::~EditDialog()
+{
+	m_symbol->SetPause(false);
 }
 
 void EditDialog::initLayout()

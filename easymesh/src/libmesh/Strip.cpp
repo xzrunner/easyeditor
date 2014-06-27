@@ -85,6 +85,14 @@ void Strip::Move(d2d::Vector* src, const d2d::Vector& dst)
 	if (!src) return;
 
 	src->y = dst.y;
+// 	for (int i = 0, n = m_tris.size(); i < n; ++i) {
+// 		for (int j = 0; j < 3; ++j) {
+// 			Node* n = m_tris[i]->nodes[j];
+// 			if (n->xy == *src) {
+// 				n->xy.y = dst.y;
+// 			}
+// 		}
+// 	}
 
 	m_left_nodes.Sort();
 	m_right_nodes.Sort();
@@ -104,53 +112,37 @@ void Strip::Clear()
 	RefreshTriangles();
 }
 
-void Strip::ResetUVOffset(float dx, float dy)
+void Strip::OffsetUV(float dx, float dy)
 {
+	// update uv base
  	m_uv_offset += dy;
  	m_uv_offset = m_uv_offset - std::floor(m_uv_offset);
 
 	std::vector<std::pair<d2d::Vector, d2d::Vector> > trans_list;
 	GetTransList(trans_list);
 
+	// insert node
   	d2d::Vector pos;
   	pos.x = 0;
   	pos.y = -m_height*0.5f + m_height*m_uv_offset;
-
 	int idx_left, idx_right;
 	d2d::Vector pos_left, pos_right;
-	// debug
-	idx_left = m_left_nodes.InsertExt(pos, pos_left);
-	idx_right = m_right_nodes.InsertExt(pos, pos_right);
+	idx_left = m_left_nodes.GetNodeInsertPos(pos, pos_left);
+	idx_right = m_right_nodes.GetNodeInsertPos(pos, pos_right);
 	if (idx_left != -1 && idx_right != -1) {
-// 		d2d::Vector _pos_left, _pos_right;
-// 		m_left_nodes.InsertExt(pos, trans_list, _pos_left);
-// 		m_right_nodes.InsertExt(pos, trans_list, _pos_right);
-// 		trans_list.push_back(std::make_pair(pos_left, _pos_left));
-// 		trans_list.push_back(std::make_pair(pos_right, _pos_right));
-
-		std::vector<d2d::Vector>& left_ext = m_left_nodes.GetExtNodes();
-		std::vector<d2d::Vector>& right_ext = m_right_nodes.GetExtNodes();
-
-		//////////////////////////////////////////////////////////////////////////
-	
+		std::vector<d2d::Vector>& left_ext = m_left_nodes.m_ext;
+		std::vector<d2d::Vector>& right_ext = m_right_nodes.m_ext;
 		MapUV2XY(left_ext, idx_left, pos, trans_list);
 		MapUV2XY(right_ext, idx_right, pos, trans_list);
-
-		//////////////////////////////////////////////////////////////////////////
-
 		left_ext.insert(left_ext.begin() + idx_left + 1, pos_left);
 		right_ext.insert(right_ext.begin() + idx_right + 1, pos_right);
 	}
 
-// 	m_left_nodes.InsertExt(pos, trans_list);
-// 	m_right_nodes.InsertExt(pos, trans_list);
-
-	// create tris
+	// create triangles separate
 	ClearTriangles();
-
 	assert(m_left_nodes.Size() == m_right_nodes.Size());
-	const std::vector<d2d::Vector>& left = m_left_nodes.GetExtNodes();
-	const std::vector<d2d::Vector>& right = m_right_nodes.GetExtNodes();
+	const std::vector<d2d::Vector>& left = m_left_nodes.m_ext;
+	const std::vector<d2d::Vector>& right = m_right_nodes.m_ext;
 	for (int i = 0, n = left.size() - 1; i < n; ++i)
 	{
 		Triangle* tri = new Triangle;
@@ -165,10 +157,13 @@ void Strip::ResetUVOffset(float dx, float dy)
 		tri->nodes[2] = new Node(left[i+1], m_width, m_height);
 		m_tris.push_back(tri);
 	}
+	for (int i = 0, n = m_tris.size(); i < n; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			TranslateNode(m_tris[i]->nodes[j], trans_list);
+		}
+	}
 
-	TransTriangles(trans_list);
-	//
-
+	// set uv between textures
  	for (int i = 0, n = m_tris.size(); i < n; ++i)
  	{
  		Triangle* tri = m_tris[i];
@@ -194,6 +189,36 @@ void Strip::ResetUVOffset(float dx, float dy)
  	}
 }
 
+void Strip::Load(const Json::Value& value)
+{
+	m_width = value["width"].asDouble();
+	m_height = value["height"].asDouble();
+
+	m_left_nodes.m_ori.clear();
+	m_right_nodes.m_ori.clear();
+	d2d::JsonTools::load(value["left nodes"], m_left_nodes.m_ori);
+	d2d::JsonTools::load(value["right nodes"], m_right_nodes.m_ori);
+	m_left_nodes.m_ext = m_left_nodes.m_ori;
+	m_right_nodes.m_ext = m_right_nodes.m_ori;
+
+	RefreshTriangles();
+
+	LoadTriangles(value["triangles"]);
+}
+
+void Strip::Store(Json::Value& value) const
+{
+	value["type"] = GetType();
+
+	value["width"] = m_width;
+	value["height"] = m_height;
+
+	d2d::JsonTools::store(m_left_nodes.m_ori, value["left nodes"]);
+	d2d::JsonTools::store(m_right_nodes.m_ori, value["right nodes"]);
+
+	StoreTriangles(value["triangles"]);
+}
+
 void Strip::InitBound()
 {
 	float hw = m_width * 0.5f;
@@ -207,8 +232,8 @@ void Strip::RefreshTriangles()
 	ClearTriangles();
 
 	assert(m_left_nodes.Size() == m_right_nodes.Size());
-	const std::vector<d2d::Vector>& left = m_left_nodes.GetExtNodes();
-	const std::vector<d2d::Vector>& right = m_right_nodes.GetExtNodes();
+	const std::vector<d2d::Vector>& left = m_left_nodes.m_ext;
+	const std::vector<d2d::Vector>& right = m_right_nodes.m_ext;
 	Node* last_left = new Node(left[0], m_width, m_height);
 	Node* last_right = new Node(right[0], m_width, m_height);
 	for (int i = 0, n = left.size() - 1; i < n; ++i)
@@ -232,29 +257,6 @@ void Strip::RefreshTriangles()
 		last_right = next_right;
 	}
 }
-
-// void Strip::RefreshTrianglesSeparate()
-// {
-// 	ClearTriangles();
-// 
-// 	assert(m_left_nodes.Size() == m_right_nodes.Size());
-// 	const std::vector<d2d::Vector>& left = m_left_nodes.GetExtNodes();
-// 	const std::vector<d2d::Vector>& right = m_right_nodes.GetExtNodes();
-// 	for (int i = 0, n = left.size() - 1; i < n; ++i)
-// 	{
-// 		Triangle* tri = new Triangle;
-// 		tri->nodes[0] = new Node(left[i], m_width, m_height);
-// 		tri->nodes[1] = new Node(right[i], m_width, m_height);
-// 		tri->nodes[2] = new Node(right[i+1], m_width, m_height);
-// 		m_tris.push_back(tri);
-// 
-// 		tri = new Triangle;
-// 		tri->nodes[0] = new Node(left[i], m_width, m_height);
-// 		tri->nodes[1] = new Node(right[i+1], m_width, m_height);
-// 		tri->nodes[2] = new Node(left[i+1], m_width, m_height);
-// 		m_tris.push_back(tri);
-// 	}
-// }
 
 void Strip::CopyTriangles(const Strip& strip)
 {
@@ -308,15 +310,6 @@ void Strip::GetTransList(std::vector<std::pair<d2d::Vector, d2d::Vector> >& tran
 	}
 }
 
-void Strip::TransTriangles(const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list)
-{
-	for (int i = 0, n = m_tris.size(); i < n; ++i) {
-		for (int j = 0; j < 3; ++j) {
-			TranslateNode(m_tris[i]->nodes[j], trans_list);
-		}
-	}
-}
-
 void Strip::TranslateNode(Node* node, const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list)
 {
 	for (int i = 0, m = trans_list.size(); i < m; ++i)
@@ -356,7 +349,7 @@ void Strip::MapUV2XY(const std::vector<d2d::Vector>& nodes, int index, const d2d
 	
 	float p = d2d::Math::getDistance(s, foot) / d2d::Math::getDistance(s, e);
  	d2d::Vector xy_p = xy_s + (xy_e - xy_s) * p;
- 	trans_list.push_back(std::make_pair(pos, xy_p));
+ 	trans_list.push_back(std::make_pair(foot, xy_p));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -379,45 +372,15 @@ Insert(const d2d::Vector& p)
 	m_ext = m_ori;
 }
 
-int Strip::NodeList::
-InsertExt(const d2d::Vector& p, const std::vector<std::pair<d2d::Vector, d2d::Vector> >& trans_list, 
-		  d2d::Vector& nearest)
+void Strip::NodeList::
+Remove(int idx)
 {
-	m_ext = m_ori;
-
-	std::vector<d2d::Vector> list = m_ori;
-	for (int i = 0, n = list.size(); i < n; ++i) {
-		TranslateNode(list[i], trans_list);
-	}
-
-	int idx_nearest = -1;
-	float dis_nearest = FLT_MAX;
-	d2d::Vector foot_nearest;
-	for (int i = 0, n = list.size() - 1; i < n; ++i)
-	{
-		d2d::Vector foot;
-		int st = d2d::Math::getFootOfPerpendicular(list[i], list[i+1], p, &foot);
-		if (st == -1) {
-			continue;
-		}
-		float dis = d2d::Math::getDistanceSquare(foot, p);
-		if (dis < dis_nearest) {
-			idx_nearest = i;
-			dis_nearest = dis;
-			foot_nearest = foot;
-		}
-	}
-
-	if (idx_nearest != -1) {
-		nearest = foot_nearest;
-//		m_ext.insert(m_ext.begin() + idx_nearest + 1, foot_nearest);
-	}
-
-	return idx_nearest;
+	m_ori.erase(m_ori.begin() + idx);
+	m_ext.erase(m_ext.begin() + idx);
 }
 
 int Strip::NodeList::
-InsertExt(const d2d::Vector& p, d2d::Vector& nearest)
+GetNodeInsertPos(const d2d::Vector& p, d2d::Vector& nearest)
 {
 	m_ext = m_ori;
 
@@ -441,17 +404,9 @@ InsertExt(const d2d::Vector& p, d2d::Vector& nearest)
 
 	if (idx_nearest != -1) {
 		nearest = foot_nearest;
-		//		m_ext.insert(m_ext.begin() + idx_nearest + 1, foot_nearest);
 	}
 
 	return idx_nearest;
-}
-
-void Strip::NodeList::
-Remove(int idx)
-{
-	m_ori.erase(m_ori.begin() + idx);
-	m_ext.erase(m_ext.begin() + idx);
 }
 
 int Strip::NodeList::

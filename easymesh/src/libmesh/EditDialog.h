@@ -11,6 +11,7 @@ class EditDialog : public wxDialog
 {
 public:
 	EditDialog(wxWindow* parent, Symbol* symbol);
+	virtual ~EditDialog();
 
 private:
 	void initLayout();
