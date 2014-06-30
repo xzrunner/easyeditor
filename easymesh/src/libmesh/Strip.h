@@ -38,6 +38,8 @@ public:
 	virtual void Load(const Json::Value& value);
 	virtual void Store(Json::Value& value) const;
 
+	virtual int GetQuadSize() const;
+
 	static const char* GetType() { return "strip"; }
 
 private:

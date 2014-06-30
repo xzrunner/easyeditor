@@ -7,6 +7,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
+#include <easymesh.h>
 
 #define CHARACTER
 
@@ -20,6 +21,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
 }
 
 void LoadAllFilesSorted(const std::string& dir, std::set<std::string>& files_sorted)
@@ -177,7 +181,7 @@ int main(int argc, char *argv[])
 	try {
 		ebuilder::CodeGenerator gen;
 		coceditor::COCCode code(gen, gscale);
-		code.resolve();
+		code.Parser();
 		std::locale::global(std::locale(""));
 		std::ofstream fout(argv[3]);
 		std::locale::global(std::locale("C"));

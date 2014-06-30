@@ -24,7 +24,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	// get all symbols
 	SymbolsPrepare preprocess;
 	preprocess.prepare(sprites);
-	std::vector<const d2d::ISymbol*> symbols = preprocess.getResult();
+	std::vector<const d2d::ISymbol*> symbols = preprocess.GetAllSymbols();
 	symbols.push_back(&root);
 
 	// pack images

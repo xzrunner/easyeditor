@@ -6,6 +6,9 @@
 namespace emesh
 {
 
+static const float SPEED_X = 0;
+static const float SPEED_Y = -0.05f;
+
 EditUVCMPT::EditUVCMPT(wxWindow* parent, const wxString& name, 
 					   StagePanel* stage)
 	: d2d::AbstractEditCMPT(parent, name, stage)
@@ -36,7 +39,7 @@ wxSizer* EditUVCMPT::initLayout()
 
 void EditUVCMPT::onMove(wxCommandEvent& event)
 {
-	m_stage->getShape()->OffsetUV(0, -0.05f);
+	m_stage->getShape()->OffsetUV(0, SPEED_Y);
 	m_editPanel->Refresh();
 }
 

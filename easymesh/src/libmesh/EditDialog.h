@@ -6,11 +6,12 @@
 namespace emesh
 {
 
-class Symbol;
+class Sprite;
+
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* symbol);
+	EditDialog(wxWindow* parent, Sprite* sprite);
 	virtual ~EditDialog();
 
 private:
@@ -21,7 +22,7 @@ private:
 private:
 	d2d::EditPanel* m_stage;
 
-	Symbol* m_symbol;
+	Sprite* m_sprite;
 
 	DECLARE_EVENT_TABLE()
 

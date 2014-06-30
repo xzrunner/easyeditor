@@ -54,8 +54,7 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
-		emesh::Symbol& symbol = const_cast<emesh::Symbol&>(sprite->getSymbol());
-		emesh::EditDialog dlg(m_editPanel, &symbol);
+		emesh::EditDialog dlg(m_editPanel, sprite);
 		dlg.ShowModal();
 
 		m_editPanel->resetCanvas();

@@ -28,6 +28,9 @@ public:
 	virtual void setSymbol(d2d::ISymbol* symbol);
 	virtual void loadBodyFromFile();
 
+	virtual void load(const Json::Value& val);
+	virtual void store(Json::Value& val) const;
+
 	Shape* getShape() {
 		return m_symbol ? m_symbol->getShape() : NULL; 
 	}
@@ -38,12 +41,17 @@ public:
 		return m_symbol ? m_symbol->getImage() : NULL;
 	}
 
+	const d2d::Vector& GetSpeed() const { return m_speed; }
+	void SetSpeed(const d2d::Vector& spd) { m_speed = spd; }
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
 
 private:
 	Symbol* m_symbol;
+
+	d2d::Vector m_speed;
 
 }; // Sprite
 

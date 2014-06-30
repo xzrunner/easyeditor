@@ -5,6 +5,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
+#include <easymesh.h>
 
 namespace libcoco
 {
@@ -164,6 +165,10 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 				}
 			}
 		}
+		else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(sprite))
+		{
+			m_unique.insert(&mesh->getSymbol());
+		}
 	}
 }
 
@@ -191,9 +196,11 @@ void SymbolsPrepare::sort()
 			else if (ecomplex::Symbol* complex = dynamic_cast<ecomplex::Symbol*>(symbol))
 			{
 				bool prepared = true;
-				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i)
-					if (!isSymbolPrepared(complex->m_sprites[i]))
+				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i) {
+					if (!isSymbolPrepared(complex->m_sprites[i])) {
 						prepared = false;
+					}
+				}
 				if (prepared)
 				{
 					m_result.push_back(complex);
@@ -265,6 +272,19 @@ void SymbolsPrepare::sort()
 					m_unique.erase(itr);
 					break;
 				}
+			}
+			else if (emesh::Symbol* mesh = dynamic_cast<emesh::Symbol*>(symbol))
+			{
+ 				std::string path = mesh->GetImagePath();
+ 				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+				std::vector<const d2d::ISymbol*>::iterator itr_find 
+					= std::find(m_result.begin(), m_result.end(), image);
+				if (itr_find == m_result.end()) {
+					m_result.push_back(image);
+				}
+				m_result.push_back(mesh);
+				m_unique.erase(itr);
+				break;
 			}
 		}
 	}

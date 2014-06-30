@@ -12,7 +12,7 @@ public:
 	void prepare(const std::vector<const d2d::ISymbol*>& symbols);
 	void prepare(const std::vector<const d2d::ISprite*>& sprites);
 
-	const std::vector<const d2d::ISymbol*>& getResult() const {
+	const std::vector<const d2d::ISymbol*>& GetAllSymbols() const {
 		return m_result;
 	}
 

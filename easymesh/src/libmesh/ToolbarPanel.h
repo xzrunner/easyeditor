@@ -7,13 +7,23 @@ namespace emesh
 {
 
 class StagePanel;
+class Sprite;
+
 class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
-	ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full);
+	ToolbarPanel(wxWindow* parent, StagePanel* stage, bool full,
+		Sprite* sprite);
 
 protected:
 	virtual wxSizer* initLayout();
+
+	void OnSetSpeed(wxCommandEvent& event);
+
+private:
+	Sprite* m_sprite;
+
+	wxTextCtrl *m_ctrl_xspeed, *m_ctrl_yspeed;
 
 }; // ToolbarPanel
 

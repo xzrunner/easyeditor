@@ -40,6 +40,8 @@ public:
 	virtual void Load(const Json::Value& value);
 	virtual void Store(Json::Value& value) const;
 
+	virtual int GetQuadSize() const { return -1; }		
+
 	static const char* GetType() { return "mesh"; }
 
 private:

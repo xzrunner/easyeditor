@@ -35,12 +35,16 @@ public:
 	virtual void Load(const Json::Value& value) = 0;
 	virtual void Store(Json::Value& value) const = 0;
 
+	virtual int GetQuadSize() const = 0;
+
 	void QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes);
 	void QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
 
 	void DrawInfoUV() const;
 	void DrawInfoXY() const;
 	void DrawTexture() const;
+
+	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 
 protected:
 	void ClearTriangles();

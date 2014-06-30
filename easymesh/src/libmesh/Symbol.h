@@ -45,6 +45,8 @@ public:
 	void LoadImage(const wxString& filepath);
 
 	void SetPause(bool pause) { m_pause = pause; }
+	
+	int GetQuadSize() const;
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 

@@ -13,6 +13,7 @@ namespace d2d
 	public:
 		Vector() : x(0), y(0) {}
 		Vector(float x, float y) : x(x), y(y) {}
+		Vector(double x, double y) : x(static_cast<float>(x)), y(static_cast<float>(y)) {}
 		Vector(int x, int y) : x(static_cast<float>(x)), y(static_cast<float>(y)) {}
 		Vector(const Vector& p) : x(p.x), y(p.y) {}
 

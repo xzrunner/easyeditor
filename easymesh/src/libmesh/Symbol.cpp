@@ -3,6 +3,7 @@
 #include "FileIO.h"
 #include "Mesh.h"
 #include "Strip.h"
+#include "Sprite.h"
 
 namespace emesh
 {
@@ -62,7 +63,9 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 	if (m_shape) {
 		m_shape->DrawTexture();
 		if (!m_pause) {
-			m_shape->OffsetUV(0, -0.01f);			
+			const Sprite* mesh = static_cast<const Sprite*>(sprite);
+			d2d::Vector spd = mesh->GetSpeed();
+			m_shape->OffsetUV(spd.x, spd.y);
 		}
 	}
 }
@@ -94,6 +97,11 @@ void Symbol::LoadImage(const wxString& filepath)
 {
 	d2d::BitmapMgr::Instance()->getItem(filepath, &m_bitmap);
 	d2d::ImageMgr::Instance()->getItem(filepath, &m_image);
+}
+
+int Symbol::GetQuadSize() const 
+{ 
+	return m_shape->GetQuadSize(); 
 }
 
 void Symbol::loadResources()

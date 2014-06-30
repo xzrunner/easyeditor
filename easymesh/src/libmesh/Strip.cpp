@@ -211,6 +211,11 @@ void Strip::Store(Json::Value& value) const
 	StoreTriangles(value["triangles"]);
 }
 
+int Strip::GetQuadSize() const
+{
+	return m_tris.size() / 2;
+}
+
 void Strip::InitBound()
 {
 	float hw = m_width * 0.5f;

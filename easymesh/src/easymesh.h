@@ -9,4 +9,5 @@
 #include "libmesh/Sprite.h"
 #include "libmesh/Symbol.h"
 #include "libmesh/Mesh.h"
+#include "libmesh/Triangle.h"
 #include "libmesh/FileIO.h"

@@ -7,10 +7,12 @@ namespace emesh
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
+	m_speed.set(0, -0.01f);
 }
 
 Sprite::Sprite(const Sprite& s)
 	: d2d::ISprite(s)
+	, m_speed(s.m_speed)
 {
 	m_symbol = s.m_symbol->clone();
 }
@@ -18,6 +20,8 @@ Sprite::Sprite(const Sprite& s)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	m_speed.set(0, -0.01f);
+
 	m_symbol->retain();
 	buildBounding();
 }
@@ -56,6 +60,20 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 
 void Sprite::loadBodyFromFile()
 {
+}
+
+void Sprite::load(const Json::Value& val)
+{
+	ISprite::load(val);
+	m_speed.x = val["speed"]["x"].asDouble();
+	m_speed.y = val["speed"]["y"].asDouble();
+}
+
+void Sprite::store(Json::Value& val) const
+{
+	ISprite::store(val);
+	val["speed"]["x"] = m_speed.x;
+	val["speed"]["y"] = m_speed.y;
 }
 
 }

@@ -15,7 +15,7 @@ void COCParser::parser()
 
 void COCParser::prepareMapSymbolPic()
 {
-	const std::vector<const d2d::ISymbol*>& sorted = m_symbolPrepare.getResult();
+	const std::vector<const d2d::ISymbol*>& sorted = m_symbolPrepare.GetAllSymbols();
 
 	const TexturesMgr& texMgr = Context::Instance()->texMgr;
 	for (size_t i = 0; i < TexturesMgr::MAX_NUM; ++i)

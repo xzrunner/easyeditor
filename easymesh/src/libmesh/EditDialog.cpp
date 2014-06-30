@@ -15,21 +15,23 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::onClose)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
+EditDialog::EditDialog(wxWindow* parent, Sprite* sprite)
 	: wxDialog(parent, wxID_ANY, "Edit Mesh", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
-	, m_symbol(symbol)
+	, m_sprite(sprite)
 {
-	SetTitle(symbol->getFilepath());
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+	SetTitle(symbol.getFilepath());
 	initLayout();
 
-	m_symbol->SetPause(true);
+	symbol.SetPause(true);
 //	m_symbol->getShape()->RefreshTriangles();
 }
 
 EditDialog::~EditDialog()
 {
-	m_symbol->SetPause(false);
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+	symbol.SetPause(false);
 }
 
 void EditDialog::initLayout()
@@ -37,9 +39,10 @@ void EditDialog::initLayout()
  	wxSplitterWindow* splitter = new wxSplitterWindow(this);
  
  	StagePanel* stage = new StagePanel(splitter, this);
- 	stage->getSprite()->setSymbol(m_symbol);
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+ 	stage->getSprite()->setSymbol(&symbol);
  	m_stage = stage;
- 	d2d::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false);
+ 	d2d::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
  
  	splitter->SetSashGravity(0.85f);
  	splitter->SplitVertically(stage, toolbar);
@@ -53,18 +56,20 @@ void EditDialog::onClose(wxCloseEvent& event)
 		return;
 	}
 
+	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
+
 	d2d::ExitDlg dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_OK)
 	{
-		FileIO::store(m_symbol->getFilepath(), m_symbol);
+		FileIO::store(symbol.getFilepath(), &symbol);
 
-		m_symbol->refresh();
-		d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+		symbol.refresh();
+		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
 	}
 	else if (val == wxID_CANCEL)
 	{
-		m_symbol->loadFromFile(m_symbol->getFilepath());
+		symbol.loadFromFile(symbol.getFilepath());
 	}
 
 	Destroy();
