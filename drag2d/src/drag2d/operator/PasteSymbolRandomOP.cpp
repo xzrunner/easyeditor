@@ -3,6 +3,7 @@
 #include "dataset/SpriteFactory.h"
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/GLCanvas.h"
 #include "render/SpriteDraw.h"
 
 namespace d2d
@@ -57,8 +58,10 @@ bool PasteSymbolRandomOP::onDraw() const
 	ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol) 
 		symbol = m_libraryPanel->getSymbol();
-	if (symbol && m_pos.isValid())
-		SpriteDraw::drawSprite(symbol, m_pos, m_randomValue.angle, m_randomValue.scale);
+	if (symbol && m_pos.isValid()) {
+		const Screen& scr = m_editPanel->getCanvas()->GetScreen();
+		SpriteDraw::drawSprite(scr, symbol, m_pos, m_randomValue.angle, m_randomValue.scale);
+	}
 
 	return false;
 }

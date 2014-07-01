@@ -11,6 +11,7 @@ namespace d2d
 	class ISprite;
 	class MultiSpritesImpl;
 	class PasteSpriteCMPT;
+	class Screen;
 
 	class PasteSpriteOP : public SelectSpritesOP
 	{
@@ -36,7 +37,7 @@ namespace d2d
 		class SpriteBatch
 		{
 		public:
-			SpriteBatch();
+			SpriteBatch(const Screen& scr);
 			~SpriteBatch();
 
 			void loadFromSelection(const SpriteSelection& selection);
@@ -55,6 +56,8 @@ namespace d2d
 			void computeCenter();
 
 		private:
+			const Screen& m_scr;
+
 			std::vector<ISprite*> m_selected;
 			Vector m_center;
 

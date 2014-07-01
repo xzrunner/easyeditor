@@ -448,7 +448,7 @@ void ArrangeSpriteOP<TBase>::scaleSprite(const Vector& currPos)
 
 	float hw = m_selected->getSymbol().getSize().xLength() * 0.5f;
 	float hh = m_selected->getSymbol().getSize().yLength() * 0.5f;
-	love::Matrix t;
+	Matrix t;
 	t.setTransformation(m_selected->getPosition().x, m_selected->getPosition().y, m_selected->getAngle(),
 		m_selected->getScale().x, m_selected->getScale().y, 0, 0, m_selected->getShear().x, m_selected->getShear().y);
 	const Vector& center = m_selected->getPosition();
@@ -828,7 +828,7 @@ template <typename TBase>
 void ArrangeSpriteOP<TBase>::getSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 {
 	Rect r = sprite->getSymbol().getSize(sprite);
-	love::Matrix t;
+	Matrix t;
 	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
 		sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
 	// scale

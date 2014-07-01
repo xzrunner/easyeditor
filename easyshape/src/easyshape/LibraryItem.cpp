@@ -43,7 +43,10 @@ void LibraryItem::reloadTexture() const
 	m_symbol->reloadTexture();
 }
 
-void LibraryItem::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+void LibraryItem::draw(const d2d::Screen& scr,
+					   const d2d::Matrix& mt,
+					   const d2d::Colorf& mul, 
+					   const d2d::Colorf& add,
 					   const d2d::ISprite* sprite/* = NULL*/) const
 {
 	m_symbol->draw();

@@ -44,7 +44,10 @@ void FontBlankSymbol::reloadTexture() const
 {
 }
 
-void FontBlankSymbol::draw(const Colorf& mul, const Colorf& add,
+void FontBlankSymbol::draw(const Screen& scr,
+						   const Matrix& mt,
+						   const Colorf& mul, 
+						   const Colorf& add,
 						   const ISprite* sprite/* = NULL*/) const
 {
 	if (Settings::DrawFontType & Settings::DrawFontBg) {

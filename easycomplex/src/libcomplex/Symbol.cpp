@@ -33,7 +33,10 @@ void Symbol::reloadTexture() const
 		(*itr)->reloadTexture();
 }
 
-void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+void Symbol::draw(const d2d::Screen& scr,
+				  const d2d::Matrix& mt,
+				  const d2d::Colorf& mul, 
+				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)

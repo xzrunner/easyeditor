@@ -10,6 +10,7 @@
 #include "dataset/ISymbol.h"
 #include "dataset/ImageSprite.h"
 #include "dataset/Bitmap.h"
+#include "view/Screen.h"
 
 namespace d2d
 {
@@ -49,12 +50,17 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Colorf& mul, const Colo
   		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
  
   	d2d::Vector center = sprite->getCenter();
-	love::Matrix t;
-  	t.setTransformation(center.x, center.y, sprite->getAngle(), 
-  		xScale * 0.1, yScale * 0.1, 0, 0, sprite->getShear().x, sprite->getShear().y);
+	Matrix t;
+//	t.setScale(0.01f, 0.01f);
+//    	t.setTransformation(center.x, center.y, sprite->getAngle(), 
+//    		xScale*0.01f, yScale*0.01f, 0, 0, sprite->getShear().x, sprite->getShear().y);
+
  // GL10::MultMatrixf((const float*)t.getElements( ));
 
-	sprite->getSymbol().draw(Colorf(), Colorf(), sprite);
+	// todo for test
+	Screen scr;
+	scr.SetSize(800, 600);
+	sprite->getSymbol().draw(scr, t, Colorf(), Colorf(), sprite);
 }
 
 void SpriteDraw::drawSprite(const ISymbol* symbol, const Vector& pos,
@@ -65,11 +71,75 @@ void SpriteDraw::drawSprite(const ISymbol* symbol, const Vector& pos,
 {
 	GL10::PushMatrix();
 
-	love::Matrix t;
+	Matrix t;
 	t.setTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
 	GL10::MultMatrixf((const float*)t.getElements());
 
-	symbol->draw(mul, add);
+	// todo for test
+	Screen scr;
+	scr.SetSize(800, 600);
+	symbol->draw(scr, t, mul, add);
+	GL10::PopMatrix();
+}
+
+void SpriteDraw::drawSprite(const Screen& scr, const ISprite* sprite, const Colorf& mul, const Colorf& add)
+{
+	if (!sprite->visiable)
+		return;
+
+// 	GL10::PushMatrix();
+// 
+// 	love::Matrix t;
+// 
+//  	bool xMirror, yMirror;
+//  	sprite->getMirror(xMirror, yMirror);
+//  	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
+//  		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
+// 
+//  	d2d::Vector center = sprite->getCenter();
+//  	t.setTransformation(center.x, center.y, sprite->getAngle(), 
+//  		xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
+//  	GL10::MultMatrixf((const float*)t.getElements( ));
+// 
+// 	Shader* shader = Shader::Instance();
+// 
+// 	Colorf _mul = cMul(sprite->multiCol, mul),
+// 		   _add = cAdd(sprite->addCol, add);
+// 	sprite->getSymbol().draw(_mul, _add, sprite);
+// 
+// 	GL10::PopMatrix();
+
+	//////////////////////////////////////////////////////////////////////////
+ 
+  	bool xMirror, yMirror;
+  	sprite->getMirror(xMirror, yMirror);
+  	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
+  		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
+ 
+  	d2d::Vector center = sprite->getCenter();
+	Matrix t;
+//	t.setScale(0.01f, 0.01f);
+//    	t.setTransformation(center.x, center.y, sprite->getAngle(), 
+//    		xScale*0.01f, yScale*0.01f, 0, 0, sprite->getShear().x, sprite->getShear().y);
+
+ // GL10::MultMatrixf((const float*)t.getElements( ));
+
+	sprite->getSymbol().draw(scr, t, Colorf(), Colorf(), sprite);
+}
+
+void SpriteDraw::drawSprite(const Screen& scr, const ISymbol* symbol, const Vector& pos,
+							float angle/* = 0.0f*/, float xScale/* = 1.0f*/, 
+							float yScale/* = 1.0f*/, float xShear/* = 0.0f*/, 
+							float yShear/* = 0.0f*/, const Colorf& mul /*= Colorf(1,1,1,1)*/,
+							const Colorf& add /*= Colorf(0,0,0,0)*/)
+{
+	GL10::PushMatrix();
+
+	Matrix t;
+	t.setTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
+	GL10::MultMatrixf((const float*)t.getElements());
+
+	symbol->draw(scr, t, mul, add);
 	GL10::PopMatrix();
 }
 
@@ -163,25 +233,25 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const Vector& offset, wxMemor
 		true);
 }
 
-void SpriteDraw::drawSprites(const std::vector<ISprite*>& sprites,
-							 SpriteBatch& batch)
-{
-// 	GL10::Enable(GL10::GL_BLEND);
-// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
-
-	batch.clear();
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-	{
-// 		ImageSprite* sprite = dynamic_cast<ImageSprite*>(sprites[i]);
-// 		if (sprite)
-// 			batch.add(sprite);
-// 		else
-			SpriteDraw::drawSprite(static_cast<ISprite*>(sprites[i]));
-	}
-	batch.onDraw();
-
-	//GL10::Disable(GL10::GL_BLEND);
-}
+//void SpriteDraw::drawSprites(const std::vector<ISprite*>& sprites,
+//							 SpriteBatch& batch)
+//{
+//// 	GL10::Enable(GL10::GL_BLEND);
+//// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
+//
+//	batch.clear();
+//	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+//	{
+//// 		ImageSprite* sprite = dynamic_cast<ImageSprite*>(sprites[i]);
+//// 		if (sprite)
+//// 			batch.add(sprite);
+//// 		else
+//			SpriteDraw::drawSprite(static_cast<ISprite*>(sprites[i]));
+//	}
+//	batch.onDraw();
+//
+//	//GL10::Disable(GL10::GL_BLEND);
+//}
 
 void SpriteDraw::begin(const ISprite* sprite)
 {

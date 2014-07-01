@@ -5,6 +5,7 @@
 #include "view/MultiSpritesImpl.h"
 #include "render/GL10.h"
 #include "render/SpriteDraw.h"
+#include "view/GLCanvas.h"
 
 namespace d2d
 {
@@ -14,6 +15,7 @@ PasteSpriteOP::PasteSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl
 	: SelectSpritesOP(editPanel, spritesImpl, propertyPanel)
 	, m_spritesImpl(spritesImpl)
 	, m_cmpt(cmpt)
+	, m_batch(editPanel->getCanvas()->GetScreen())
 {
 	m_selection = spritesImpl->getSpriteSelection();
 	m_selection->retain();
@@ -146,7 +148,8 @@ void PasteSpriteOP::fixPosOrthogonal()
 //////////////////////////////////////////////////////////////////////////
 
 PasteSpriteOP::SpriteBatch::
-SpriteBatch()
+SpriteBatch(const Screen& scr)
+	: m_scr(scr)
 {
 	m_center.setInvalid();
 }
@@ -210,7 +213,7 @@ draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 
 			GL10::PushMatrix();
 			GL10::Translatef(x, y, 0.0f);
-			SpriteDraw::drawSprite(m_selected[i]);
+			SpriteDraw::drawSprite(m_scr, m_selected[i]);
 			GL10::PopMatrix();
 		}
 	}

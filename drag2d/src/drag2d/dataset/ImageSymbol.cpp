@@ -40,14 +40,17 @@ void ImageSymbol::reloadTexture() const
 	m_image->reload();
 }
 
-void ImageSymbol::draw(const Colorf& mul, const Colorf& add,
+void ImageSymbol::draw(const Screen& scr,
+					   const Matrix& mt,
+					   const Colorf& mul, 
+					   const Colorf& add,
 					   const ISprite* sprite/* = NULL*/) const
 {
 // 	Shader* shader = Shader::Instance();
 // 	shader->sprite();
 // 	shader->color(mul, add);
 
-	m_image->draw(m_region);
+	m_image->draw(scr, mt, m_region);
 
 //	SpriteTools::DrawName(sprite);
 }

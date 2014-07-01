@@ -86,7 +86,8 @@ bool CreateMeshOP::onDraw() const
 
 	if (const d2d::Image* image = m_stage->getSprite()->getImage())
  	{
-		image->draw(image->getRegion());
+		d2d::Matrix mt;
+		image->draw(m_stage->getCanvas()->GetScreen(), mt, image->getRegion());
  	}
 
 	if (Mesh* mesh = m_stage->getMesh())

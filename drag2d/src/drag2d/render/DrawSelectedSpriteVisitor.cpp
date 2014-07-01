@@ -32,7 +32,7 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 		{
 			GL10::PushMatrix();
 
-			love::Matrix t;
+			Matrix t;
 
 			bool xMirror, yMirror;
 			sprite->getMirror(xMirror, yMirror);

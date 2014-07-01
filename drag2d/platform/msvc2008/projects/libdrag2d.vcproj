@@ -609,14 +609,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\Matrix.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Matrix.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\RawPixels.cpp"
 					>
 				</File>
@@ -1277,6 +1269,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\Matrix.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Matrix.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\Random.h"
 					>
 				</File>
@@ -1319,6 +1319,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\view\Camera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\view\Screen.h"
 				>
 			</File>
 			<Filter

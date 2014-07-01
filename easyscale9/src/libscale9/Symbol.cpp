@@ -38,7 +38,10 @@ void Symbol::reloadTexture() const
 		}
 }
 
-void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+void Symbol::draw(const d2d::Screen& scr,
+				  const d2d::Matrix& mt,
+				  const d2d::Colorf& mul, 
+				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	const Sprite* scale9 = dynamic_cast<const Sprite*>(sprite);

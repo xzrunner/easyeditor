@@ -47,7 +47,7 @@ namespace ecomplex
 			d2d::ISprite* sprite = sprites[i];
 			if (!sprite->visiable)
 				continue;
-			d2d::SpriteDraw::drawSprite(sprite, sprite->multiCol, sprite->addCol);
+			d2d::SpriteDraw::drawSprite(m_screen, sprite, sprite->multiCol, sprite->addCol);
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -85,7 +85,8 @@ namespace ecomplex
 	{
 		if (m_background)
 		{
-			m_background->draw(m_background->getRegion());
+			d2d::Matrix mt;
+			m_background->draw(m_screen, mt, m_background->getRegion());
 		}
 
 		if (Settings::bVisibleBGRect)

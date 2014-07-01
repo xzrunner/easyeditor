@@ -3,13 +3,13 @@
 #include <float.h>
 #include <vector>
 
-#include "common/Vector.h"
-#include "common/Rect.h"
-
-namespace love { class Matrix; }
+#include "Vector.h"
+#include "Rect.h"
 
 namespace d2d
 {
+	class Matrix;
+
 	static const float PI = 3.1415926f;
 //	static const float FLOAT_MAX = FLT_MAX;
 //	static const float FLT_EPSILON = FLT_EPSILON;
@@ -196,7 +196,7 @@ namespace d2d
 
 		static Vector rotateVectorRightAngle(const Vector& v, bool isTurnLeft);
 
-		static Vector transVector(const Vector& v, const love::Matrix& m);
+		static Vector transVector(const Vector& v, const Matrix& m);
 
 		static Vector transCoordsLocalToWorld(const Vector& origin, const Vector& xDir, const Vector& local);
 

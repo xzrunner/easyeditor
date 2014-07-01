@@ -3,6 +3,7 @@
 #include "dataset/SpriteFactory.h"
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/GLCanvas.h"
 #include "render/SpriteDraw.h"
 
 namespace d2d
@@ -54,10 +55,11 @@ bool PasteSymbolOP::onDraw() const
 	ISymbol* symbol = m_libraryPanel->getSymbol();
 	if (symbol && m_pos.isValid())
 	{
+		const Screen& scr = m_editPanel->getCanvas()->GetScreen();
 		if (m_pScale)
-			SpriteDraw::drawSprite(symbol, m_pos, 0.0f, *m_pScale);
+			SpriteDraw::drawSprite(scr, symbol, m_pos, 0.0f, *m_pScale);
 		else
-			SpriteDraw::drawSprite(symbol, m_pos);
+			SpriteDraw::drawSprite(scr, symbol, m_pos);
 	}
 
 	return false;

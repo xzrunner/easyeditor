@@ -9,6 +9,8 @@
 namespace d2d
 {
 	class ISprite;
+	class Matrix;
+	class Screen;
 
 	class ISymbol : public ListItem, public UserDataImpl
 	{
@@ -26,7 +28,9 @@ namespace d2d
 		virtual void clearUserData(bool deletePtr);
 
 		virtual void reloadTexture() const = 0;
-		virtual void draw(const Colorf& mul = Colorf(1, 1, 1, 1), 
+		virtual void draw(const Screen& scr,
+			const Matrix& mt,
+			const Colorf& mul = Colorf(1, 1, 1, 1), 
 			const Colorf& add = Colorf(0, 0, 0, 0),
 			const ISprite* sprite = NULL) const = 0;
 		virtual Rect getSize(const ISprite* sprite = NULL) const = 0;

@@ -18,13 +18,13 @@
 * 3. This notice may not be removed or altered from any source distribution.
 **/
 
-#ifndef LOVE_MATRIX_H
-#define LOVE_MATRIX_H
+#ifndef _D2D_MATRIX_H_
+#define _D2D_MATRIX_H_
 
 // LOVE
 #include "math.h"
 
-namespace love
+namespace d2d
 {
 	/**
 	* This class is the basis for all transformations in LOVE. Althought not
@@ -161,6 +161,6 @@ namespace love
 
 	}; // Matrix
 
-} //love
+} //d2d
 
-#endif// LOVE_MATRIX_H
+#endif// _D2D_MATRIX_H_

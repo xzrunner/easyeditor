@@ -7,6 +7,8 @@
 #include "common/tools.h"
 #include "common/Settings.h"
 #include "common/Exception.h"
+#include "common/Math.h"
+#include "view/Screen.h"
 
 #include "ImageLoader.h"
 
@@ -92,7 +94,7 @@ void Image::reload()
 #endif
 }
 
-void Image::draw(const Rect& r) const
+void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 {
   	ShaderNew* shader = ShaderNew::Instance();
   	shader->sprite();
@@ -104,23 +106,33 @@ void Image::draw(const Rect& r) const
   		tymin = (r.yMin + tot_hh) / m_height,
   		tymax = (r.yMax + tot_hh) / m_height;
   
-	float SCALE = 100;
+	d2d::Vector vertices[4];
+	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
+	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
+	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
+	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+
+	for (int i = 0; i < 4; ++i) {
+		scr.TransPosForRender(vertices[i]);
+	}
+
+//	float SCALE = 100;
 
 	float vb[16];
-	vb[0] = r.xMin / SCALE;
-	vb[1] = r.yMin / SCALE;
+	vb[0] = vertices[0].x;
+	vb[1] = vertices[0].y;
 	vb[2] = txmin;
 	vb[3] = tymin;
-	vb[4] = r.xMax / SCALE;
-	vb[5] = r.yMin / SCALE;
+	vb[4] = vertices[1].x;
+	vb[5] = vertices[1].y;
 	vb[6] = txmax;
 	vb[7] = tymin;
-	vb[8] = r.xMax / SCALE;
-	vb[9] = r.yMax / SCALE;
+	vb[8] = vertices[2].x;
+	vb[9] = vertices[2].y;
 	vb[10] = txmax;
 	vb[11] = tymax;
-	vb[12] = r.xMin / SCALE;
-	vb[13] = r.yMax / SCALE;
+	vb[12] = vertices[3].x;
+	vb[13] = vertices[3].y;
 	vb[14] = txmin;
 	vb[15] = tymax;
 

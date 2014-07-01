@@ -61,7 +61,7 @@ void GLCanvas::SetCurrentCanvas()
 
 void GLCanvas::initGL()
 {
-//	resetViewport();
+	resetViewport();
 
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);

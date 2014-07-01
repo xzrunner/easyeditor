@@ -24,7 +24,7 @@
 #include <cstring> // memcpy
 #include <cmath>
 
-namespace love
+namespace d2d
 {
 
 	// | e0 e4 e8  e12 |
