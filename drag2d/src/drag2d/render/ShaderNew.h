@@ -14,8 +14,8 @@ class ShaderNew
 public:
 	static ShaderNew* Instance();
 
-	void color(const Colorf& multi, const Colorf& add = Colorf(0, 0, 0, 0));
-// 		void color(float r, float g, float b, float a);
+	void SetSpriteColor(const Colorf& multi, const Colorf& add);
+	void SetShapeColor(const Colorf& col);
 
 	void sprite();
 	void shape();

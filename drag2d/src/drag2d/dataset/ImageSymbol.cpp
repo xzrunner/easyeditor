@@ -52,7 +52,7 @@ void ImageSymbol::draw(const Screen& scr,
 // 	shader->color(mul, add);
 
 	ShaderNew* shader = ShaderNew::Instance();
-	shader->color(mul, add);
+	shader->SetSpriteColor(mul, add);
 	m_image->draw(scr, mt, m_region);
 
 //	SpriteTools::DrawName(sprite);

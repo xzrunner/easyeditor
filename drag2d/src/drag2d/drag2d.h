@@ -144,3 +144,4 @@
 #include "render/SpriteDraw.h"
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
+#include "render/ShaderNew.h"

@@ -17,9 +17,10 @@ namespace d2d
 
 void PrimitiveDraw::resetColorAndTexture()
 {
-	ShaderNew::Instance()->shape();
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->shape();
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
-	GL10::Color4f(1, 1, 1, 1);
+	shader->SetShapeColor(Colorf(1,1,1,1));
 }
 
 void PrimitiveDraw::rect(const Screen& scr, const Vector& center, float radius, const ShapeStyle& style)
@@ -55,7 +56,7 @@ void PrimitiveDraw::rect(const Screen& scr, const Vector& p0, const Vector& p1, 
  		scr.TransPosForRender(vertices[i]);
  	}
 
-	shader->color(style.color);
+	shader->SetShapeColor(style.color);
 	lineStypeBegin(style.lineStyle);
 	GL10::Begin(type);
 	for (int i = 0; i < 4; ++i) {
@@ -71,13 +72,14 @@ void PrimitiveDraw::rect(const Screen& scr, const Vector& p0, const Vector& p1, 
 void PrimitiveDraw::drawCircle(const Screen& scr, const Vector& center, float radius, bool isFill/* = false*/, 
 							   float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/, size_t kSegments/* = 16*/)
 {
-	ShaderNew::Instance()->shape();
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->shape();
 
 	if (!isFill)
 	{
 		GL10::LineWidth(size);
 
-		GL10::Color4f(color.r, color.g, color.b, color.a);
+		shader->SetShapeColor(color);
 		const float k_increment = 2.0f * PI / kSegments;
 		float theta = 0.0f;
 		GL10::Begin(GL10::GL_LINE_LOOP);
@@ -94,40 +96,29 @@ void PrimitiveDraw::drawCircle(const Screen& scr, const Vector& center, float ra
 	}
 	else
 	{
-		GL10::Color4f(color.r, color.g, color.b, color.a);
+		shader->SetShapeColor(color);
 
 		const float k_increment = 2.0f * PI / kSegments;
 		float theta = 0.0f;
 
 		std::vector<Vector> vertices;
-		std::vector<Colorf> colors;
-		vertices.reserve(kSegments + 2);
-		colors.reserve(kSegments + 2);
-		vertices.push_back(center);
-		colors.push_back(color);
-		for (size_t i = 0; i < kSegments; ++i)
-		{
-			Vector v = center + Vector(cosf(theta), sinf(theta)) * radius;
-			vertices.push_back(v);
-			colors.push_back(color);
-			theta += k_increment;
-		}
-		vertices.push_back(vertices[1]);
-//		colors.push_back(color);
+ 		vertices.reserve(kSegments + 2);
+ 		vertices.push_back(center);
+ 		for (size_t i = 0; i < kSegments; ++i)
+ 		{
+ 			Vector v = center + Vector(cosf(theta), sinf(theta)) * radius;
+ 			vertices.push_back(v);
+ 			theta += k_increment;
+ 		}
+ 		vertices.push_back(vertices[1]);
 
-		for (int i = 0, n = vertices.size(); i < n; ++i) {
-			scr.TransPosForRender(vertices[i]);
-		}
+  		for (int i = 0, n = vertices.size(); i < n; ++i) {
+  			scr.TransPosForRender(vertices[i]);
+  		}
 
 		GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
-//		GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
-
 		GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &vertices[0]);
-//		GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
-
 		GL10::DrawArrays(GL10::GL_TRIANGLE_FAN, 0, vertices.size());
-
-//		GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
 		GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
 	}
 }
@@ -135,7 +126,8 @@ void PrimitiveDraw::drawCircle(const Screen& scr, const Vector& center, float ra
 void PrimitiveDraw::drawCircles(const Screen& scr, const std::vector<Vector>& circles, float radius, bool isFill/* = false*/, 
 								float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/, size_t kSegments/* = 16*/)
 {
-	ShaderNew::Instance()->shape();
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->shape();
 
 	if (!isFill)
 	{
@@ -146,16 +138,14 @@ void PrimitiveDraw::drawCircles(const Screen& scr, const std::vector<Vector>& ci
 	{
 		if (circles.empty()) return;
 
-		GL10::Color4f(color.r, color.g, color.b, color.a);
+		shader->SetShapeColor(color);
 
 		const float k_increment = 2.0f * PI / kSegments;
 
 		std::vector<Vector> vertices;
-//		std::vector<Colorf> colors;
 		const int size = kSegments * circles.size() * 3;
 
 		vertices.reserve(size);
-//		colors.resize(size, color);
 		for (size_t i = 0, n = circles.size(); i < n; ++i)
 		{
 			float theta = 0.0f;
@@ -174,24 +164,15 @@ void PrimitiveDraw::drawCircles(const Screen& scr, const std::vector<Vector>& ci
 			}
 		}
 
-// 		GL10::Enable(GL10::GL_BLEND);
-// 		GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
-
 		for (int i = 0, n = vertices.size(); i < n; ++i) {
 			scr.TransPosForRender(vertices[i]);
 		}
 		GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
-//		GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
-
 		GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &vertices[0]);
-//		GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
 		GL10::DrawArrays(GL10::GL_TRIANGLES, 0, vertices.size());
 
-//		GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
 		GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
-
-		//GL10::Disable(GL10::GL_BLEND);
 	}
 }
 
@@ -227,11 +208,12 @@ void PrimitiveDraw::drawPoints(const Screen& scr, const std::vector<Vector>& ver
 void PrimitiveDraw::drawLine(const Screen& scr, const Vector& p0, const Vector& p1, 
 							 const Colorf& color, float size/* = 2*/)
 {
-	ShaderNew::Instance()->shape();
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->shape();
 
 	GL10::LineWidth(size);
 
-	GL10::Color4f(color.r, color.g, color.b, color.a);
+	shader->SetShapeColor(color);
 
 	Vector _p0(p0), _p1(p1);
 	scr.TransPosForRender(_p0);
@@ -319,7 +301,7 @@ void PrimitiveDraw::drawPolyline(const Screen& scr, const std::vector<Vector>& v
 
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->shape();
-	shader->color(color);
+	shader->SetShapeColor(color);
 
 	GL10::LineWidth(size);
 
@@ -334,9 +316,9 @@ void PrimitiveDraw::drawPolyline(const Screen& scr, const std::vector<Vector>& v
 	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &_vertices[0]);
 //	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
-	if (isClose)
-		GL10::DrawArrays(GL10::GL_LINE_LOOP, 0, _vertices.size());
-	else
+ 	if (isClose)
+ 		GL10::DrawArrays(GL10::GL_LINE_LOOP, 0, _vertices.size());
+ 	else
 		GL10::DrawArrays(GL10::GL_LINE_STRIP, 0, _vertices.size());
 
  	GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
@@ -344,15 +326,12 @@ void PrimitiveDraw::drawPolyline(const Screen& scr, const std::vector<Vector>& v
 
 	GL10::LineWidth(1.0f);
 }
-
+ 
 void PrimitiveDraw::drawPolygon(const Screen& scr, const std::vector<Vector>& vertices, const Colorf& color)
 {
 	std::vector<Vector> _vertices(vertices);
 
 	ShaderNew::Instance()->shape();
-
-// 	GL10::Enable(GL10::GL_BLEND);
-// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
 
 	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
 	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
@@ -369,42 +348,29 @@ void PrimitiveDraw::drawPolygon(const Screen& scr, const std::vector<Vector>& ve
 
 	GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
 	GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
-
-	//GL10::Disable(GL10::GL_BLEND);
 }
 
 void PrimitiveDraw::drawTriangles(const Screen& scr, const std::vector<Vector>& triangles, const Colorf& color)
 {
+	if (triangles.empty()) return;
+
 	std::vector<Vector> _vertices(triangles);
 
-	ShaderNew::Instance()->shape();
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->shape();
 
-	if (_vertices.empty()) return;
-
-	GL10::Color4f(color.r, color.g, color.b, color.a);
-
-// 	GL10::Enable(GL10::GL_BLEND);
-// 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
-
-// 	std::vector<Colorf> colors;
-// 	colors.resize(_vertices.size(), color);
+	shader->SetShapeColor(color);
 
 	for (int i = 0, n = _vertices.size(); i < n; ++i) {
 		scr.TransPosForRender(_vertices[i]);
 	}
 
  	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
-// 	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
-
 	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &_vertices[0]);
-//	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
 	GL10::DrawArrays(GL10::GL_TRIANGLES, 0, _vertices.size());
 
-// 	GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
  	GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
-
-	//GL10::Disable(GL10::GL_BLEND);
 }
 
 //void PrimitiveDraw::drawTriangles(const std::vector<Vector>& triangles, const wxString& filepath)

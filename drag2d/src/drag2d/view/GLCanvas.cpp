@@ -100,7 +100,7 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 
 	glFlush();
 	SwapBuffers();
-}
+ }
 
 void GLCanvas::onEraseBackground(wxEraseEvent& event)
 {	

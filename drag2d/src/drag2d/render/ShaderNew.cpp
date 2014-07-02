@@ -40,45 +40,25 @@ ShaderNew::ShaderNew()
 	m_additive = 0;
 }
 
-void ShaderNew::color(const Colorf& multi, const Colorf& add)
+void ShaderNew::SetSpriteColor(const Colorf& multi, const Colorf& add)
 {
 	// ABGR
 	m_color = ((int)(multi.a * 255 + 0.5f) << 24) | 
-		      ((int)(multi.b * 255 + 0.5f) << 16) | 
-			  ((int)(multi.g * 255 + 0.5f) << 8) | 
-			  ((int)(multi.r * 255 + 0.5f));
+		((int)(multi.b * 255 + 0.5f) << 16) | 
+		((int)(multi.g * 255 + 0.5f) << 8) | 
+		((int)(multi.r * 255 + 0.5f));
 	m_additive = ((int)(add.a * 255 + 0.5f) << 24) | 
 		((int)(add.b * 255 + 0.5f) << 16) | 
 		((int)(add.g * 255 + 0.5f) << 8) | 
 		((int)(add.r * 255 + 0.5f));
-
-	if (m_prog_curr == m_prog_shape) {
-		glUniform4fv(m_col_loc, 1, (GLfloat*)(&multi.r));
-	}
 }
 
-// 
-// 	void ShaderNew::color(float r, float g, float b, float a)
-// 	{
-// 		if (m_prog_curr == 0)
-// 		{
-// 			glColor4f(r, g, b, a);
-// 		}
-// 		else
-// 		{
-// 			float mul[4] = {r, g, b, a},
-// 				add[4] = {0, 0, 0, 0};
-// 			if (m_prog_curr == m_prog_sprite) {
-// 				glUniform4fv(ATTRIB_COLOR, 1, mul);
-// 				glUniform4fv(ATTRIB_ADDITIVE, 1, add);
-// 
-// 				// 			glUniform4fv(m_multi_loc, 1, mul);
-// 				// 			glUniform4fv(m_add_loc, 1, add);
-// 			} else {
-// 				glUniform4fv(m_col_loc, 1, mul);
-// 			}
-// 		}
-// 	}
+void ShaderNew::SetShapeColor(const Colorf& col)
+{
+	if (m_prog_curr == m_prog_shape) {
+		glUniform4fv(m_col_loc, 1, (GLfloat*)(&col.r));
+	}
+}
 
 void ShaderNew::sprite()
 {
@@ -370,6 +350,10 @@ void ShaderNew::Commit()
 		return;
 	}
 
+	sprite();
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
+
 	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, SPRITE_FLOAT_NUM * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
 
@@ -386,6 +370,13 @@ void ShaderNew::Commit()
 	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(20));  
 
 	glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
+
+ 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+ 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(ATTRIB_VERTEX);
+	glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
+	glDisableVertexAttribArray(ATTRIB_COLOR);
+	glDisableVertexAttribArray(ATTRIB_ADDITIVE);
 
 	m_sprite_count = 0;
 }
