@@ -116,8 +116,6 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 		scr.TransPosForRender(vertices[i]);
 	}
 
-//	float SCALE = 100;
-
 	float vb[16];
 	vb[0] = vertices[0].x;
 	vb[1] = vertices[0].y;
@@ -137,8 +135,6 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 	vb[15] = tymax;
 
 	shader->Draw(vb, m_textureID);
-
-	shader->Flush();
 }
 
 } // d2d

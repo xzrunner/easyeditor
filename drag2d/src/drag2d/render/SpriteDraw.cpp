@@ -118,13 +118,11 @@ void SpriteDraw::drawSprite(const Screen& scr, const ISprite* sprite, const Colo
  
   	d2d::Vector center = sprite->getCenter();
 	Matrix t;
-//	t.setScale(0.01f, 0.01f);
-//    	t.setTransformation(center.x, center.y, sprite->getAngle(), 
-//    		xScale*0.01f, yScale*0.01f, 0, 0, sprite->getShear().x, sprite->getShear().y);
-
- // GL10::MultMatrixf((const float*)t.getElements( ));
-
-	sprite->getSymbol().draw(scr, t, Colorf(), Colorf(), sprite);
+    t.setTransformation(center.x, center.y, sprite->getAngle(), 
+		xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
+	Colorf _mul = cMul(sprite->multiCol, mul),
+		   _add = cAdd(sprite->addCol, add);
+	sprite->getSymbol().draw(scr, t, _mul, _add, sprite);
 }
 
 void SpriteDraw::drawSprite(const Screen& scr, const ISymbol* symbol, const Vector& pos,

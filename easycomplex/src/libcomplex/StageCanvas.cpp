@@ -39,6 +39,8 @@ namespace ecomplex
 
 	void StageCanvas::onDraw()
 	{
+		drawBackground();
+
 		std::vector<d2d::ISprite*> sprites;
 		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
@@ -47,8 +49,18 @@ namespace ecomplex
 			d2d::ISprite* sprite = sprites[i];
 			if (!sprite->visiable)
 				continue;
-			d2d::SpriteDraw::drawSprite(m_screen, sprite, sprite->multiCol, sprite->addCol);
+			d2d::SpriteDraw::drawSprite(m_screen, sprite);
 		}
+
+ 		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
+ 
+ 		if (Settings::bVisibleBGCross)
+ 		{
+ 			const float EDGE = 100;
+ 			d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+ 		}
+ 
+ 		m_editPanel->drawEditTemp();
 
 		//////////////////////////////////////////////////////////////////////////
 

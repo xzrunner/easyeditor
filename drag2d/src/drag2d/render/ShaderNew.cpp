@@ -40,18 +40,19 @@ ShaderNew::ShaderNew()
 	m_additive = 0;
 }
 
-// 	void ShaderNew::color(const Colorf& multi, const Colorf& add)
-// 	{
-// 		if (m_prog_curr == m_prog_sprite) {
-// 			glUniform4fv(ATTRIB_COLOR, 1, (GLfloat*)(&multi.r));
-// 			glUniform4fv(ATTRIB_ADDITIVE, 1, (GLfloat*)(&add.r));
-// 
-// 			// 		glUniform4fv(m_multi_loc, 1, (GLfloat*)(&multi.r));
-// 			// 		glUniform4fv(m_add_loc, 1, (GLfloat*)(&add.r));
-// 		} else {
-// 			glUniform4fv(m_col_loc, 1, (GLfloat*)(&multi.r));
-// 		}
-// 	}
+void ShaderNew::color(const Colorf& multi, const Colorf& add)
+{
+	// ABGR
+	m_color = ((int)(multi.a * 255 + 0.5f) << 24) | 
+		      ((int)(multi.b * 255 + 0.5f) << 16) | 
+			  ((int)(multi.g * 255 + 0.5f) << 8) | 
+			  ((int)(multi.r * 255 + 0.5f));
+	m_additive = ((int)(add.a * 255 + 0.5f) << 24) | 
+		((int)(add.b * 255 + 0.5f) << 16) | 
+		((int)(add.g * 255 + 0.5f) << 8) | 
+		((int)(add.r * 255 + 0.5f));
+}
+
 // 
 // 	void ShaderNew::color(float r, float g, float b, float a)
 // 	{

@@ -3,6 +3,7 @@
 
 #include "view/EditPanel.h"
 #include "render/Shader.h"
+#include "render/ShaderNew.h"
 
 #include <wx/wx.h>
 #include <gl/glu.h>
@@ -94,6 +95,7 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 
 //	glPushMatrix();
 	onDraw();
+	ShaderNew::Instance()->Flush();
 //	glPopMatrix();
 
 	glFlush();

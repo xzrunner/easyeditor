@@ -5,6 +5,7 @@
 #include "SpriteTools.h"
 
 #include "render/Shader.h"
+#include "render/ShaderNew.h"
 #include "render/PrimitiveDraw.h"
 
 namespace d2d
@@ -50,6 +51,8 @@ void ImageSymbol::draw(const Screen& scr,
 // 	shader->sprite();
 // 	shader->color(mul, add);
 
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->color(mul, add);
 	m_image->draw(scr, mt, m_region);
 
 //	SpriteTools::DrawName(sprite);
