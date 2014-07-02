@@ -101,13 +101,13 @@ bool SkeletonOP::onPopMenuSelected(int type)
 	return false;
 }
 
-bool SkeletonOP::onDraw() const
+bool SkeletonOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw()) 
+	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw(scr)) 
 		return true;
 
 	StagePanel* panel = static_cast<StagePanel*>(m_editPanel);
-	panel->getSkeletonData().draw();
+	panel->getSkeletonData().draw(scr);
 
 	return false;
 }

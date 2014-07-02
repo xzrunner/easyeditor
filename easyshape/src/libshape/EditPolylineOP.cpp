@@ -301,17 +301,17 @@ onMouseDrag(int x, int y)
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onDraw() const 
+onDraw(const d2d::Screen& scr) const 
 {
-	if (TBase::onDraw()) return true;
+	if (TBase::onDraw(scr)) return true;
 
-	m_selectOP->onDraw();
+	m_selectOP->onDraw(scr);
 	if (m_cmpt)
 	{
 		if (m_capturedEditable.shape)
-			drawCaptured(m_capturedEditable);
+			drawCaptured(scr, m_capturedEditable);
 		else if (m_captureSelectable.shape)
-			drawCaptured(m_captureSelectable);
+			drawCaptured(scr, m_captureSelectable);
 	}
 
 	return false;
@@ -332,17 +332,18 @@ clear()
 
 template <typename TBase, typename TSelected>
 void libshape::EditPolylineOP<TBase, TSelected>::
-drawCaptured(const NodeAddr& captured) const
+drawCaptured(const d2d::Screen& scr, const NodeAddr& captured) const
 {
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
-		if (captured.pos.isValid())
-			d2d::PrimitiveDraw::drawCircle(captured.pos, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+		if (captured.pos.isValid()) {
+			d2d::PrimitiveDraw::drawCircle(scr, captured.pos, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+		}
 
 		d2d::Vector center;
 		center.x = chain->getRect().xCenter();
 		center.y = chain->getRect().yCenter();
-		d2d::PrimitiveDraw::drawCircle(center, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+		d2d::PrimitiveDraw::drawCircle(scr, center, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 	}
 }
 

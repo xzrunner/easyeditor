@@ -52,17 +52,15 @@ namespace ecomplex
  			d2d::SpriteDraw::drawSprite(m_screen, sprite);
  		}
 
-		//////////////////////////////////////////////////////////////////////////
-
-//  		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
-//  
-//  		if (Settings::bVisibleBGCross)
-//  		{
-//  			const float EDGE = 100;
-//  			d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
-//  		}
-//  
-//  		m_editPanel->drawEditTemp();
+  		d2d::PrimitiveDraw::rect(m_screen, m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
+  
+  		if (Settings::bVisibleBGCross)
+  		{
+  			const float EDGE = 100;
+  			d2d::PrimitiveDraw::cross(m_screen, d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+  		}
+  
+  		m_editPanel->drawEditTemp(m_screen);
 
 		//////////////////////////////////////////////////////////////////////////
 

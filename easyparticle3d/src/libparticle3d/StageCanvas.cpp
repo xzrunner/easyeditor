@@ -50,7 +50,7 @@ void StageCanvas::onDraw()
 	if (m_stage->m_ps)
 		m_stage->m_ps->draw();
 
-	m_editPanel->drawEditTemp();
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)

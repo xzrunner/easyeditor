@@ -25,7 +25,7 @@ public:
 	void load(const Json::Value& value);
 	void store(Json::Value& value) const;
 
-	void draw() const;
+	void draw(const d2d::Screen& scr) const;
 
 	void insert(const d2d::Rect& rect);
 	bool remove(const d2d::Vector& pos);

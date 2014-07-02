@@ -51,7 +51,7 @@ void FontBlankSymbol::draw(const Screen& scr,
 						   const ISprite* sprite/* = NULL*/) const
 {
 	if (Settings::DrawFontType & Settings::DrawFontBg) {
-		DrawBackground(sprite);
+		DrawBackground(scr, sprite);
 	} 
 	if (Settings::DrawFontType & Settings::DrawFontText) {
 		DrawText(sprite);
@@ -114,7 +114,7 @@ void FontBlankSymbol::loadResources()
 	}
 }
 
-void FontBlankSymbol::DrawBackground(const ISprite* sprite) const
+void FontBlankSymbol::DrawBackground(const Screen& scr, const ISprite* sprite) const
 {
 	float w = width, h = height;
 	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);
@@ -125,7 +125,7 @@ void FontBlankSymbol::DrawBackground(const ISprite* sprite) const
 		if (m_font)
 			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
 	}
-	PrimitiveDraw::rect(Vector(0, 0), w*0.5f, h*0.5f, m_style);
+	PrimitiveDraw::rect(scr, Vector(0, 0), w*0.5f, h*0.5f, m_style);
 }
 
 void FontBlankSymbol::DrawText(const ISprite* sprite) const

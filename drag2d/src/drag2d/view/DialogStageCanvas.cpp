@@ -21,7 +21,7 @@ void DialogStageCanvas::initGL()
 
 void DialogStageCanvas::onDraw()
 {
-	m_editPanel->drawEditTemp();
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 } // d2d

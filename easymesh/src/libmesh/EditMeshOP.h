@@ -18,7 +18,7 @@ public:
 	virtual bool onMouseRightDown(int x, int y);
 	virtual bool onMouseDrag(int x, int y);
 
-	virtual bool onDraw() const;
+	virtual bool onDraw(const d2d::Screen& scr) const;
 
 private:
 	void translasteNode(const d2d::Vector& offset);

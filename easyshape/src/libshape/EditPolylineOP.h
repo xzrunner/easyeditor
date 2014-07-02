@@ -28,11 +28,11 @@ public:
 	virtual bool onMouseMove(int x, int y);
 	virtual bool onMouseDrag(int x, int y);
 
-	virtual bool onDraw() const;
+	virtual bool onDraw(const d2d::Screen& scr) const;
 	virtual bool clear();
 
 private:
-	void drawCaptured(const NodeAddr& captured) const;
+	void drawCaptured(const d2d::Screen& scr, const NodeAddr& captured) const;
 
 	void checkActiveShape(const NodeAddr& captured);
 

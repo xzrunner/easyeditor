@@ -22,7 +22,7 @@ void StageCanvas::initGL()
 
 void StageCanvas::onDraw()
 {
-	m_editPanel->drawEditTemp();
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 }

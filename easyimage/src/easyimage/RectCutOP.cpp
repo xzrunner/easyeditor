@@ -165,26 +165,26 @@ bool RectCutOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onDraw() const
+bool RectCutOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::onDraw(scr)) return true;
 
 	if (!m_stage->getImage()) return false;
 
-	m_rects.draw();
+	m_rects.draw(scr);
 
 	if (m_firstPos.isValid() && m_currPos.isValid())
 	{
-		d2d::PrimitiveDraw::rect(m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
+		d2d::PrimitiveDraw::rect(scr, m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
 	}
 
-	drawCaptureLine();
+	drawCaptureLine(scr);
 
 	if (m_rectSelected) {
-		d2d::PrimitiveDraw::rect(*m_rectSelected, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::rect(scr, *m_rectSelected, d2d::LIGHT_GREEN_FACE);
 	}
 	if (m_nodeSelected.rect) {
-		d2d::PrimitiveDraw::rect(*m_nodeSelected.rect, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::rect(scr, *m_nodeSelected.rect, d2d::LIGHT_GREEN_FACE);
 	}
 
 	return false;
@@ -218,7 +218,7 @@ void RectCutOP::loadImageFromFile(const std::string& filepath)
 	m_stage->setImage(filepath);
 }
 
-void RectCutOP::drawCaptureLine() const
+void RectCutOP::drawCaptureLine(const d2d::Screen& scr) const
 {
 	if (!m_currPos.isValid()) return;
 	if (m_captured.x == FLT_INVALID && m_captured.y == FLT_INVALID) return;
@@ -228,14 +228,14 @@ void RectCutOP::drawCaptureLine() const
 	{
 		d2d::Vector p0(m_captured.x, -EDGE);
 		d2d::Vector p1(m_captured.x, EDGE);
-		d2d::PrimitiveDraw::drawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
+		d2d::PrimitiveDraw::drawDashLine(scr, p0, p1, d2d::Colorf(0, 0, 0));
 	}
 
 	if (m_captured.y != FLT_INVALID)
 	{
 		d2d::Vector p0(-EDGE, m_captured.y);
 		d2d::Vector p1(EDGE, m_captured.y);
-		d2d::PrimitiveDraw::drawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
+		d2d::PrimitiveDraw::drawDashLine(scr, p0, p1, d2d::Colorf(0, 0, 0));
 	}
 }
 

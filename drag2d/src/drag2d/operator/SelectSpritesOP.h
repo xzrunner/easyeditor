@@ -28,7 +28,7 @@ namespace d2d
 		virtual bool onMouseRightUp(int x, int y);
 		virtual bool onMouseDrag(int x, int y);
 
-		virtual bool onDraw() const;
+		virtual bool onDraw(const Screen& scr) const;
 		virtual bool clear();
 
 		virtual IPropertySetting* createPropertySetting(ISprite* sprite) const;

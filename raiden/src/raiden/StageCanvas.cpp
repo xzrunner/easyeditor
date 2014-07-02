@@ -29,7 +29,7 @@ void StageCanvas::onDraw()
 			d2d::SpriteDraw::drawSprite(info->symbol, sprite->getPosition() + info->offset);
 	}
 
-	m_editPanel->drawEditTemp();
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 void StageCanvas::drawGuideLines()

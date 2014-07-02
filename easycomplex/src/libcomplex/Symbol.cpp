@@ -42,7 +42,7 @@ void Symbol::draw(const d2d::Screen& scr,
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		d2d::SpriteDraw::drawSprite(m_sprites[i], mul, add);
 
-	d2d::PrimitiveDraw::rect(m_clipbox, m_style);
+	d2d::PrimitiveDraw::rect(scr, m_clipbox, m_style);
 
 	d2d::SpriteTools::DrawName(sprite);
 }

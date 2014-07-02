@@ -25,7 +25,7 @@ void StageCanvas::drawRegion()
 	int count = static_cast<StagePanel*>(m_editPanel)->GetTextureAccount();
 	for (int i = 0; i < count; ++i)
 	{
-		d2d::PrimitiveDraw::rect(
+		d2d::PrimitiveDraw::rect(m_screen,
 			d2d::Vector(x, y), 
 			d2d::Vector(x + width, y + height), 
 			d2d::LIGHT_GREY_LINE);

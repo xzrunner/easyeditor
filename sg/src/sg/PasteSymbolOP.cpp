@@ -30,7 +30,7 @@ bool PasteSymbolOP::onMouseDrag(int x, int y)
 	}
 }
 
-bool PasteSymbolOP::onDraw() const
+bool PasteSymbolOP::onDraw(const d2d::Screen& scr) const
 {
 	if (!isCurrSymbolValid()) {
 		return false;
@@ -45,7 +45,7 @@ bool PasteSymbolOP::onDraw() const
 	bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
 	render->DrawGrids(*symbol, m_pos, valid);
 
-	bool ret = d2d::PasteSymbolOP::onDraw();
+	bool ret = d2d::PasteSymbolOP::onDraw(scr);
 
 	render->DrawArrow(*symbol, m_pos);
 

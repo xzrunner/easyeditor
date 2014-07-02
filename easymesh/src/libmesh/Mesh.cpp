@@ -127,7 +127,7 @@ void Mesh::queryNode(const d2d::Rect& r, std::vector<Node*>& nodes)
 	}
 }
 
-void Mesh::drawInfoUV() const
+void Mesh::drawInfoUV(const d2d::Screen& scr) const
 {
 	std::set<d2d::Vector, d2d::VectorCmp> unique;
 	std::vector<d2d::Vector> tmp(3);
@@ -140,14 +140,14 @@ void Mesh::drawInfoUV() const
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		d2d::PrimitiveDraw::drawPolyline(scr, tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(nodes, Node::RADIUS, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::drawCircles(scr, nodes, Node::RADIUS, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
-void Mesh::drawInfoXY() const
+void Mesh::drawInfoXY(const d2d::Screen& scr) const
 {
 	std::set<d2d::Vector, d2d::VectorCmp> unique;
 	std::vector<d2d::Vector> tmp(3);
@@ -159,14 +159,14 @@ void Mesh::drawInfoXY() const
 			tmp[i] = tri->nodes[i]->xy;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		d2d::PrimitiveDraw::drawPolyline(scr, tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(nodes, Node::RADIUS, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::drawCircles(scr, nodes, Node::RADIUS, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
-void Mesh::drawTexture() const
+void Mesh::drawTexture(const d2d::Screen& scr) const
 {
 	std::vector<d2d::Vector> vertices, texcoords;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -179,7 +179,7 @@ void Mesh::drawTexture() const
 		}
 	}
 
-	d2d::PrimitiveDraw::drawTriangles(m_texid, vertices, texcoords);
+	d2d::PrimitiveDraw::drawTriangles(scr, m_texid, vertices, texcoords);
 }
 
 void Mesh::tween(const Mesh& begin, const Mesh& end, float process)

@@ -60,14 +60,14 @@ bool SelectBodyOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
-bool SelectBodyOP::onDraw() const
+bool SelectBodyOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::DrawRectangleOP::onDraw()) return true;
+	if (d2d::DrawRectangleOP::onDraw(scr)) return true;
 
-	m_selection->traverse(DrawSelectedVisitor());
+	m_selection->traverse(DrawSelectedVisitor(scr));
 
 	if (m_mouseOn)
-		DrawUtils::drawBody(m_mouseOn, DrawUtils::e_mouseOn);
+		DrawUtils::drawBody(scr, m_mouseOn, DrawUtils::e_mouseOn);
 
 	return false;
 }
@@ -99,6 +99,6 @@ visit(d2d::Object* object, bool& bFetchNext)
 	std::vector<d2d::Vector> bound;
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->getUserData());
-	DrawUtils::drawBody(body, DrawUtils::e_selected);
+	DrawUtils::drawBody(m_scr, body, DrawUtils::e_selected);
 	bFetchNext = true;
 }

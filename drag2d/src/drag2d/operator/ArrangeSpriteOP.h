@@ -42,7 +42,7 @@ public:
 
 	virtual bool onPopMenuSelected(int type);
 
-	virtual bool onDraw() const;
+	virtual bool onDraw(const Screen& scr) const;
 	virtual bool clear();
 
 protected:

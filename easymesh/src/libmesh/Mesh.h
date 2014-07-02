@@ -31,9 +31,9 @@ public:
 	void queryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
 
 	// draw
-	void drawInfoUV() const;
-	void drawInfoXY() const;
-	void drawTexture() const;
+	void drawInfoUV(const d2d::Screen& scr) const;
+	void drawInfoXY(const d2d::Screen& scr) const;
+	void drawTexture(const d2d::Screen& scr) const;
 
 	void tween(const Mesh& begin, const Mesh& end, float process);
 

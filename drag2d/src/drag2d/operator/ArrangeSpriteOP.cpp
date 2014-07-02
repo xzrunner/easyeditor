@@ -337,32 +337,32 @@ bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onDraw() const
+bool ArrangeSpriteOP<TBase>::onDraw(const Screen& scr) const
 {
-	if (TBase::onDraw()) return true;
+	if (TBase::onDraw(scr)) return true;
 
 	if (m_isDeformOpen && m_selected)
 	{
 		Vector ctrlNodes[8];
 		getSpriteCtrlNodes(m_selected, ctrlNodes);
 		for (int i = 0; i < 4; ++i)
-			PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 		for (int i = 4; i < 8; ++i)
-			PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], SCALE_NODE_RADIUS, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
 		if (isOffsetEnable())
 		{
 			d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
-			PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 	}
 
 	if (m_isAutoAlignOpen)
 	{
 		if (m_autoAlignHor[0] != m_autoAlignHor[1])
-			PrimitiveDraw::drawDashLine(m_autoAlignHor[0], m_autoAlignHor[1], Colorf(0, 0, 0));
+			PrimitiveDraw::drawDashLine(scr, m_autoAlignHor[0], m_autoAlignHor[1], Colorf(0, 0, 0));
 		if (m_autoAlignVer[0] != m_autoAlignVer[1])
-			PrimitiveDraw::drawDashLine(m_autoAlignVer[0], m_autoAlignVer[1], Colorf(0, 0, 0));
+			PrimitiveDraw::drawDashLine(scr, m_autoAlignVer[0], m_autoAlignVer[1], Colorf(0, 0, 0));
 	}
 
 	return false;

@@ -237,24 +237,24 @@ bool SelectJointOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool SelectJointOP::onDraw() const
+bool SelectJointOP::onDraw(const d2d::Screen& scr) const
 {
-	if (SelectBodyOP::onDraw()) 
+	if (SelectBodyOP::onDraw(scr)) 
 		return true;
 
-	m_selection->traverse(DrawSelectedVisitor());
+	m_selection->traverse(DrawSelectedVisitor(scr));
 
 	if (m_mouseOn)
-		m_mouseOn->draw(libmodeling::Joint::e_mouseOn);
+		m_mouseOn->draw(scr, libmodeling::Joint::e_mouseOn);
 	if (m_selected) 
-		m_selected->draw(libmodeling::Joint::e_selected);
+		m_selected->draw(scr, libmodeling::Joint::e_selected);
 
 	return false;
 }
 
 bool SelectJointOP::clear()
 {
-	if (SelectBodyOP::onDraw()) 
+	if (SelectBodyOP::clear()) 
 		return true;
 
 	m_selected = m_mouseOn = NULL;
@@ -273,6 +273,6 @@ visit(d2d::Object* object, bool& bFetchNext)
 	std::vector<d2d::Vector> bound;
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->getUserData());
-	DrawUtils::drawBody(body, DrawUtils::e_selected);
+	DrawUtils::drawBody(m_scr, body, DrawUtils::e_selected);
 	bFetchNext = true;
 }

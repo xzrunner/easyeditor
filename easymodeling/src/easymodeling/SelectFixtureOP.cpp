@@ -123,14 +123,14 @@ bool SelectFixtureOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool SelectFixtureOP::onDraw() const
+bool SelectFixtureOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::DrawRectangleOP::onDraw()) return true;
+	if (d2d::DrawRectangleOP::onDraw(scr)) return true;
 
 	if (m_selected)
-		DrawUtils::drawFixture(m_selected, DrawUtils::e_selected, true);
+		DrawUtils::drawFixture(scr, m_selected, DrawUtils::e_selected, true);
 	if (m_mouseOn)
-		DrawUtils::drawFixture(m_mouseOn, DrawUtils::e_mouseOn, true);
+		DrawUtils::drawFixture(scr, m_mouseOn, DrawUtils::e_mouseOn, true);
 
 	return false;
 }

@@ -12,6 +12,7 @@ namespace d2d
 class Vector;
 class Rect;
 class IPropertySetting;
+class Screen;
 
 class IShape : public ICloneable, public UserDataImpl, public Object
 {
@@ -34,7 +35,7 @@ public:
 
 	virtual const Rect& getRect() const = 0;
 
-	virtual void draw(const Colorf& color = Colorf(0, 0, 0)) const = 0;
+	virtual void draw(const Screen& scr, const Colorf& color = Colorf(0, 0, 0)) const = 0;
 
 	virtual IPropertySetting* createPropertySetting(EditPanel* editPanel) = 0;
 

@@ -72,15 +72,15 @@ bool EditNodesOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditNodesOP::onDraw() const
+bool EditNodesOP::onDraw(const d2d::Screen& scr) const
 {
-	if (SelectNodesOP::onDraw()) return true;
+	if (SelectNodesOP::onDraw(scr)) return true;
 
 	const float radius = d2d::Settings::ctlPosSize == 0 ? 3 : d2d::Settings::ctlPosSize;
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		d2d::PrimitiveDraw::drawPolyline(m_buffer[i].dst, d2d::Colorf(0.8f, 0.2f, 0.2f), false);
-		d2d::PrimitiveDraw::drawCircles(m_buffer[i].dst, radius, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
+		d2d::PrimitiveDraw::drawPolyline(scr, m_buffer[i].dst, d2d::Colorf(0.8f, 0.2f, 0.2f), false);
+		d2d::PrimitiveDraw::drawCircles(scr, m_buffer[i].dst, radius, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;

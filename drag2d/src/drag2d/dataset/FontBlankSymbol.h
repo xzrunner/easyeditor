@@ -40,7 +40,7 @@ namespace d2d
 		virtual void loadResources();
 
 	private:
-		void DrawBackground(const ISprite* sprite) const;
+		void DrawBackground(const Screen& scr, const ISprite* sprite) const;
 		void DrawName(const ISprite* sprite) const;
 		void DrawText(const ISprite* sprite) const;
 

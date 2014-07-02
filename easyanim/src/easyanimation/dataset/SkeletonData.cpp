@@ -173,13 +173,13 @@ namespace eanim
 		return NULL;
 	}
 
-	void SkeletonData::draw() const
+	void SkeletonData::draw(const d2d::Screen& scr) const
 	{
 		std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr
 			= m_mapJoints.begin();
 		for ( ; itr != m_mapJoints.end(); ++itr)
 			for (int i = 0, n = itr->second.size(); i < n; ++i)
-				itr->second[i]->draw();
+				itr->second[i]->draw(scr);
 	}
 
 	void SkeletonData::absorb(d2d::ISprite* sprite)

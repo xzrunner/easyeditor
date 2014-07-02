@@ -88,18 +88,18 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::onDraw() const
+bool EditMeshOP::onDraw(const d2d::Screen& scr) const
 {
 	if (Mesh* mesh = m_stage->getMesh())
 	{
-		mesh->drawTexture();
-		mesh->drawInfoXY();
+		mesh->drawTexture(scr);
+		mesh->drawInfoXY(scr);
 	}
 
-	d2d::PrimitiveDraw::cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
-	d2d::PrimitiveDraw::drawCircle(m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
+	d2d::PrimitiveDraw::cross(scr, m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
+	d2d::PrimitiveDraw::drawCircle(scr, m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
 	
-	if (SelectNodesOP::onDraw())
+	if (SelectNodesOP::onDraw(scr))
 		return true;
 
 	return false;

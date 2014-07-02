@@ -48,14 +48,13 @@ bool PasteSymbolOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSymbolOP::onDraw() const
+bool PasteSymbolOP::onDraw(const Screen& scr) const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::onDraw(scr)) return true;
 
 	ISymbol* symbol = m_libraryPanel->getSymbol();
 	if (symbol && m_pos.isValid())
 	{
-		const Screen& scr = m_editPanel->getCanvas()->GetScreen();
 		if (m_pScale)
 			SpriteDraw::drawSprite(scr, symbol, m_pos, 0.0f, *m_pScale);
 		else

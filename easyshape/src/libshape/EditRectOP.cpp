@@ -194,9 +194,9 @@ bool EditRectOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditRectOP::onDraw() const
+bool EditRectOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::onDraw(scr)) return true;
 
 	if (m_captured.shape)
 	{
@@ -204,10 +204,10 @@ bool EditRectOP::onDraw() const
 		{
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
-				d2d::PrimitiveDraw::drawCircle(d2d::Vector(rect->m_rect.xCenter(), rect->m_rect.yCenter()), 
+				d2d::PrimitiveDraw::drawCircle(scr, d2d::Vector(rect->m_rect.xCenter(), rect->m_rect.yCenter()), 
 					m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.isValid())
-					d2d::PrimitiveDraw::drawCircle(m_captured.pos, m_cmpt->getNodeCaptureDistance(), 
+					d2d::PrimitiveDraw::drawCircle(scr, m_captured.pos, m_cmpt->getNodeCaptureDistance(), 
 						true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 			}
 		}
@@ -215,7 +215,7 @@ bool EditRectOP::onDraw() const
 	else
 	{
 		if (m_firstPress.isValid() && m_currPos.isValid())
-			d2d::PrimitiveDraw::rect(m_firstPress, m_currPos, m_style);
+			d2d::PrimitiveDraw::rect(scr, m_firstPress, m_currPos, m_style);
 	}
 
 	return false;

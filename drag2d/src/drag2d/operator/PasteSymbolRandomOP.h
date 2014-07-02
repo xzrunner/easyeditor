@@ -15,7 +15,7 @@ namespace d2d
 		virtual bool onMouseLeftDown(int x, int y);
 		virtual bool onMouseRightDown(int x, int y);
 
-		virtual bool onDraw() const;
+		virtual bool onDraw(const Screen& scr) const;
 
 	private:
 		void changeRandomValue();

@@ -18,7 +18,7 @@ namespace epacker
 		virtual bool onMouseRightDown(int x, int y);
 		virtual bool onMouseRightUp(int x, int y);
 
-		virtual bool onDraw() const;
+		virtual bool onDraw(const d2d::Screen& scr) const;
 
 	private:
 		class FixCoordsVisitor : public d2d::IVisitor

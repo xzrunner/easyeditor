@@ -22,7 +22,7 @@ public:
 
 	virtual bool onPopMenuSelected(int type);
 
-	virtual bool onDraw() const;
+	virtual bool onDraw(const d2d::Screen& scr) const;
 
 protected:
 	virtual void translateSprite(const d2d::Vector& delta);

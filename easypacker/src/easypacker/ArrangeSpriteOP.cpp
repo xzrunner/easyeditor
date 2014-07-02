@@ -49,13 +49,11 @@ bool ArrangeSpriteOP::onMouseRightUp(int x, int y)
 	return onMouseLeftUp(x, y);
 }
 
-bool ArrangeSpriteOP::onDraw() const
+bool ArrangeSpriteOP::onDraw(const d2d::Screen& scr) const
 {
-	m_editPanel->traverseSprites(
-		d2d::DrawSelectedSpriteVisitor(d2d::Colorf(1.0f, 1.0f, 0.0f)),
-		d2d::e_visible
-		);
-	return d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onDraw();
+	m_editPanel->traverseSprites(d2d::DrawSelectedSpriteVisitor(scr, 
+		d2d::Colorf(1.0f, 1.0f, 0.0f)), d2d::e_visible);
+	return d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onDraw(scr);
 }
 
 //////////////////////////////////////////////////////////////////////////

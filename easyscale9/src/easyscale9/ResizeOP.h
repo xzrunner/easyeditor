@@ -20,7 +20,7 @@ namespace escale9
 
 		virtual bool onActive();
 
-		virtual bool onDraw() const;
+		virtual bool onDraw(const d2d::Screen& scr) const;
 
 	private:
 		StagePanel* m_stage;

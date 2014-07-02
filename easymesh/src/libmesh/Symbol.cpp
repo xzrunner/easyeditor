@@ -61,8 +61,8 @@ void Symbol::draw(const d2d::Screen& scr,
 {
 	if (m_mesh)
 	{
-		m_mesh->drawTexture();
-//		m_mesh->drawInfoUV();
+		m_mesh->drawTexture(scr);
+//		m_mesh->drawInfoUV(scr);
 	}
 }
 

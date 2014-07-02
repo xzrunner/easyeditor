@@ -28,8 +28,6 @@ namespace d2d
 
 		void SetCurrentCanvas();
 
-		const Screen& GetScreen() const { return m_screen; }
-
 	protected:
 		virtual void initGL();
 		virtual void onSize(int w, int h) = 0;

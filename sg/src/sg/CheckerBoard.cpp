@@ -94,14 +94,14 @@ bool CheckerBoard::IsValid(const d2d::ISymbol& symbol, const d2d::Vector& pos) c
 	return true;
 }
 
-void CheckerBoard::DebugDraw() const
+void CheckerBoard::DebugDraw(const d2d::Screen& scr) const
 {
 	for (int i = 0; i < ROW; ++i) {
 		for (int j = 0; j < COL; ++j) {
 			if (m_grid[i][j]) {
 				d2d::Vector pos;
 				m_stage->TransGridPosToCoords(i, j, pos);
-				d2d::PrimitiveDraw::drawCircle(pos, 10, true, 2, d2d::Colorf(0, 0, 0));
+				d2d::PrimitiveDraw::drawCircle(scr, pos, 10, true, 2, d2d::Colorf(0, 0, 0));
 			}
 		}
 	}

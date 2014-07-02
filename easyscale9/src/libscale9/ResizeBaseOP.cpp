@@ -65,19 +65,19 @@ bool ResizeBaseOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool ResizeBaseOP::onDraw() const
+bool ResizeBaseOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::onDraw(scr)) return true;
 
 	d2d::SpriteDraw::drawSprite(m_symbol, d2d::Vector(0, 0));
 
 	const float hw = m_symbol->getSize().xLength() * 0.5f,
 		hh = m_symbol->getSize().yLength() * 0.5f;
 	const float r = REGION;
-	d2d::PrimitiveDraw::rect(d2d::Vector(-hw, -hh), r, r, m_style);
-	d2d::PrimitiveDraw::rect(d2d::Vector( hw, -hh), r, r, m_style);
-	d2d::PrimitiveDraw::rect(d2d::Vector( hw,  hh), r, r, m_style);
-	d2d::PrimitiveDraw::rect(d2d::Vector(-hw,  hh), r, r, m_style);
+	d2d::PrimitiveDraw::rect(scr, d2d::Vector(-hw, -hh), r, r, m_style);
+	d2d::PrimitiveDraw::rect(scr, d2d::Vector( hw, -hh), r, r, m_style);
+	d2d::PrimitiveDraw::rect(scr, d2d::Vector( hw,  hh), r, r, m_style);
+	d2d::PrimitiveDraw::rect(scr, d2d::Vector(-hw,  hh), r, r, m_style);
 
 	return false;
 }

@@ -51,15 +51,15 @@ bool PasteSymbolRandomOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool PasteSymbolRandomOP::onDraw() const
+bool PasteSymbolRandomOP::onDraw(const Screen& scr) const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::onDraw(scr)) return true;
 
 	ISymbol* symbol = m_randomValue.symbol;
-	if (!symbol) 
+	if (!symbol) {
 		symbol = m_libraryPanel->getSymbol();
+	}
 	if (symbol && m_pos.isValid()) {
-		const Screen& scr = m_editPanel->getCanvas()->GetScreen();
 		SpriteDraw::drawSprite(scr, symbol, m_pos, m_randomValue.angle, m_randomValue.scale);
 	}
 

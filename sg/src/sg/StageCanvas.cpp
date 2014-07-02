@@ -68,7 +68,7 @@ void StageCanvas::onDraw()
 	DrawSprites();
 	DrawArrow();
 
-	m_editPanel->drawEditTemp();
+	m_editPanel->drawEditTemp(m_screen);
 
 //	m_stage->getCheckBoard().DebugDraw();
 }
@@ -99,10 +99,10 @@ void StageCanvas::DrawGuideLines() const
 	if (is_flat)
 	{
 		for (int i = 0; i <= row; ++i) {
-			d2d::PrimitiveDraw::drawLine(d2d::Vector(0, i*edge), d2d::Vector(width, i*edge), LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(m_screen, d2d::Vector(0, i*edge), d2d::Vector(width, i*edge), LIGHT_GRAY);
 		}
 		for (int i = 0; i <= col; ++i) {
-			d2d::PrimitiveDraw::drawLine(d2d::Vector(i*edge, 0), d2d::Vector(i*edge, height), LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(m_screen, d2d::Vector(i*edge, 0), d2d::Vector(i*edge, height), LIGHT_GRAY);
 		}
 	}
 	else
@@ -110,12 +110,12 @@ void StageCanvas::DrawGuideLines() const
 		for (int i = 0; i <= row; ++i) {
 			d2d::Vector s = TransToBirdView(d2d::Vector(0, i*edge));
 			d2d::Vector e = TransToBirdView(d2d::Vector(width, i*edge));
-			d2d::PrimitiveDraw::drawLine(s, e, LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(m_screen, s, e, LIGHT_GRAY);
 		}
 		for (int i = 0; i <= col; ++i) {
 			d2d::Vector s = TransToBirdView(d2d::Vector(i*edge, 0));
 			d2d::Vector e = TransToBirdView(d2d::Vector(i*edge, height));
-			d2d::PrimitiveDraw::drawLine(s, e, LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(m_screen, s, e, LIGHT_GRAY);
 		}
 	}
 }

@@ -195,9 +195,9 @@ bool EditBezierOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditBezierOP::onDraw() const
+bool EditBezierOP::onDraw(const d2d::Screen& scr) const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::onDraw(scr)) return true;
 
 	if (m_captured.shape)
 	{
@@ -205,10 +205,10 @@ bool EditBezierOP::onDraw() const
 		{
 			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 			{
-				d2d::PrimitiveDraw::drawCircle(d2d::Vector(bezier->getRect().xCenter(), bezier->getRect().yCenter()), 
+				d2d::PrimitiveDraw::drawCircle(scr, d2d::Vector(bezier->getRect().xCenter(), bezier->getRect().yCenter()), 
 					m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.isValid()) {
-					d2d::PrimitiveDraw::drawCircle(m_captured.pos, m_cmpt->getNodeCaptureDistance(), 
+					d2d::PrimitiveDraw::drawCircle(scr, m_captured.pos, m_cmpt->getNodeCaptureDistance(), 
 						true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
@@ -219,7 +219,7 @@ bool EditBezierOP::onDraw() const
 		if (m_firstPress.isValid() && m_currPos.isValid())
 		{
 			BezierShape bezier(m_firstPress, m_currPos);
-			bezier.draw();
+			bezier.draw(scr);
 		}
 //			PrimitiveDraw::drawRect(m_firstPress, m_currPos);
 	}

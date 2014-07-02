@@ -26,7 +26,7 @@ namespace d2d
 		virtual bool onMouseRightDown(int x, int y);
 		virtual bool onMouseMove(int x, int y);
 
-		virtual bool onDraw() const;
+		virtual bool onDraw(const Screen& scr) const;
 		virtual bool clear();
 
 	private:
@@ -37,14 +37,14 @@ namespace d2d
 		class SpriteBatch
 		{
 		public:
-			SpriteBatch(const Screen& scr);
+			SpriteBatch();
 			~SpriteBatch();
 
 			void loadFromSelection(const SpriteSelection& selection);
 
 			void insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 				bool isHorMirror, bool isVerMirror);
-			void draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const;
+			void draw(const Screen& scr, const Vector& pos, bool isHorMirror, bool isVerMirror) const;
 
 			const Vector& getCenter() const { return m_center; }
 
@@ -56,8 +56,6 @@ namespace d2d
 			void computeCenter();
 
 		private:
-			const Screen& m_scr;
-
 			std::vector<ISprite*> m_selected;
 			Vector m_center;
 
