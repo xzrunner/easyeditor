@@ -51,6 +51,10 @@ void ShaderNew::color(const Colorf& multi, const Colorf& add)
 		((int)(add.b * 255 + 0.5f) << 16) | 
 		((int)(add.g * 255 + 0.5f) << 8) | 
 		((int)(add.r * 255 + 0.5f));
+
+	if (m_prog_curr == m_prog_shape) {
+		glUniform4fv(m_col_loc, 1, (GLfloat*)(&multi.r));
+	}
 }
 
 // 
@@ -245,10 +249,13 @@ void ShaderNew::load()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	m_prog_sprite = InitShader(sprite_fs, sprite_vs);
-// 	m_prog_shape = InitShader(shape_fs, shape_vs);
-// 	m_prog_font = InitShader(font_fs, sprite_vs);
+	m_prog_shape = InitShader(shape_fs, shape_vs);
+	m_prog_font = InitShader(font_fs, sprite_vs);
 
 	InitBuffers();
+
+	// bind attr
+	m_col_loc = glGetUniformLocation(m_prog_shape, "color");
 
 	m_vb = new float[SPRITE_FLOAT_NUM * MAX_COMMBINE];
 }
@@ -284,11 +291,11 @@ int ShaderNew::InitShader(const char *FS, const char *VS)
 		glAttachShader(prog, vs);
 	}
 
-	// attr location
-	glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
-	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
-	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
-	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
+ 	// attr location
+ 	glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
+ 	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
+ 	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
+ 	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
 
 	// link
 	GLint status;

@@ -77,6 +77,9 @@ private:
 
 	uint32_t m_color, m_additive;
 
+	// for shape
+	int m_col_loc;
+
 }; // ShaderNew
 
 }

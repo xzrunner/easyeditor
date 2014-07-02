@@ -10,6 +10,8 @@
 #include "common/Color.h"
 #include "common/Math.h"
 #include "render/Shader.h"
+#include "render/ShaderNew.h"
+#include "view/Screen.h"
 
 namespace d2d
 {
@@ -38,20 +40,70 @@ void PrimitiveDraw::rect(const Rect& r, const ShapeStyle& style)
 
 void PrimitiveDraw::rect(const Vector& p0, const Vector& p1, const ShapeStyle& style)
 {
-	Shader* shader = Shader::Instance();
+ 	Shader* shader = Shader::Instance();
 	shader->shape();
 
 	int type = style.fill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
 	if (!style.fill)
 		GL10::LineWidth(style.size);
 
+ 	shader->color(style.color);
+ 	lineStypeBegin(style.lineStyle);
+ 	GL10::Begin(type);
+ 		GL10::Vertex2f(p0.x, p0.y);
+ 		GL10::Vertex2f(p0.x, p1.y);
+ 		GL10::Vertex2f(p1.x, p1.y);
+ 		GL10::Vertex2f(p1.x, p0.y);
+ 	GL10::End();
+ 	lineStypeEnd(style.lineStyle);
+
+	if (!style.fill)
+		GL10::LineWidth(1);
+}
+
+void PrimitiveDraw::rect(const Screen& scr, const Vector& center, float radius, const ShapeStyle& style)
+{
+	rect(scr, center, radius, radius, style);
+}
+
+void PrimitiveDraw::rect(const Screen& scr, const Vector& center, float hWidth, float hHeight, const ShapeStyle& style)
+{
+	rect(scr, center - Vector(hWidth, hHeight), center + Vector(hWidth, hHeight), style);
+}
+
+void PrimitiveDraw::rect(const Screen& scr, const Rect& r, const ShapeStyle& style)
+{
+	rect(scr, Vector(r.xMin, r.yMin), Vector(r.xMax, r.yMax), style);
+}
+
+void PrimitiveDraw::rect(const Screen& scr, const Vector& p0, const Vector& p1, const ShapeStyle& style)
+{
+// 	GL10::Disable(GL10::GL_TEXTURE_2D);
+// 	GL10::BindTexture(GL10::GL_TEXTURE_2D, 0);
+
+//	Shader* shader = Shader::Instance();
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->shape();
+
+	int type = style.fill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
+	if (!style.fill)
+		GL10::LineWidth(style.size);
+
+	d2d::Vector vertices[4];
+	vertices[0].set(p0.x, p0.y);
+	vertices[1].set(p0.x, p1.y);
+	vertices[2].set(p1.x, p1.y);
+	vertices[3].set(p1.x, p0.y);
+ 	for (int i = 0; i < 4; ++i) {
+ 		scr.TransPosForRender(vertices[i]);
+ 	}
+
 	shader->color(style.color);
 	lineStypeBegin(style.lineStyle);
 	GL10::Begin(type);
-		GL10::Vertex2f(p0.x, p0.y);
-		GL10::Vertex2f(p0.x, p1.y);
-		GL10::Vertex2f(p1.x, p1.y);
-		GL10::Vertex2f(p1.x, p0.y);
+	for (int i = 0; i < 4; ++i) {
+		GL10::Vertex2f(vertices[i].x, vertices[i].y);
+	}
 	GL10::End();
 	lineStypeEnd(style.lineStyle);
 

@@ -22,7 +22,7 @@ public:
 		m_scale = 1.0f / cam.getScale();
 	}
 
-	void TransPosForRender(d2d::Vector& pos) const {
+	void TransPosForRender(Vector& pos) const {
 		pos += m_offset;
 		pos *= m_scale;
 		pos.x = pos.x * 2 / m_size.x;
@@ -30,8 +30,8 @@ public:
 	}
 
 private:
-	d2d::Vector m_size;
-	d2d::Vector m_offset;
+	Vector m_size;
+	Vector m_offset;
 	float m_scale;
 
 }; // Screen
