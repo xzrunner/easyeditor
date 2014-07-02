@@ -889,13 +889,11 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 			for (int j = 0; j < frame_size[i]; ++j)
 			{
 				std::string assign_index = lua::assign("index", wxString::FromDouble(id++).ToStdString());
+//				lua::tableassign(m_gen, "", 1, assign_index.c_str());
 
-// 				std::string smat = lua::tableassign("", 6, "1024", "0", "0", "1024", "0", "0");
-// 				std::string assign_mat = lua::assign("mat", smat);
-// 
-// 				lua::tableassign(m_gen, "", 2, assign_index.c_str(), assign_mat.c_str());
-
-				lua::tableassign(m_gen, "", 1, assign_index.c_str());
+				std::string assign_color = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
+				std::string assign_add = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ARGB));
+				lua::tableassign(m_gen, "", 3, assign_index.c_str(), assign_color.c_str(), assign_add.c_str());
 			}
 		}
 	}
