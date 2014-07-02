@@ -538,7 +538,7 @@ void PrimitiveDraw::drawTriangles(unsigned int texID, const std::vector<Vector>&
 {
 	if (triangles.empty()) return;
 
-	Shader::Instance()->null();
+	Shader::Instance()->sprite();
 
 	GL10::BindTexture(GL10::GL_TEXTURE_2D, texID);
 

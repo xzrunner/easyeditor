@@ -61,6 +61,10 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 				  const d2d::ISprite* sprite) const
 {
 	if (m_shape) {
+		d2d::Shader* shader = d2d::Shader::Instance();
+		shader->sprite();
+		shader->color(mul, add);
+
 		m_shape->DrawTexture();
 		if (!m_pause) {
 			const Sprite* mesh = static_cast<const Sprite*>(sprite);
