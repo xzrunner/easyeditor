@@ -33,7 +33,9 @@ wxSizer* ToolbarPanel::initLayout()
 
 		m_ctrl_xspeed = new wxTextCtrl(this, wxID_ANY);
 		Connect(m_ctrl_xspeed->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ToolbarPanel::OnSetSpeed));
-		m_ctrl_xspeed->SetValue(wxString::FromDouble(m_sprite->GetSpeed().x));
+		if (m_sprite) {
+			m_ctrl_xspeed->SetValue(wxString::FromDouble(m_sprite->GetSpeed().x));
+		}
 		speed_sizer->Add(m_ctrl_xspeed, 0, wxLEFT | wxRIGHT, 5);
 		sizer->Add(speed_sizer);
 	}
@@ -43,7 +45,9 @@ wxSizer* ToolbarPanel::initLayout()
 
 		m_ctrl_yspeed = new wxTextCtrl(this, wxID_ANY);
 		Connect(m_ctrl_yspeed->GetId(), wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler(ToolbarPanel::OnSetSpeed));
-		m_ctrl_yspeed->SetValue(wxString::FromDouble(m_sprite->GetSpeed().y));
+		if (m_sprite) {
+			m_ctrl_yspeed->SetValue(wxString::FromDouble(m_sprite->GetSpeed().y));
+		}
 		speed_sizer->Add(m_ctrl_yspeed, 0, wxLEFT | wxRIGHT, 5);
 		sizer->Add(speed_sizer);
 	}
