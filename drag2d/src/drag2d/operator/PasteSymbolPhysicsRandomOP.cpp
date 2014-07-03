@@ -66,7 +66,7 @@ bool PasteSymbolPhysicsRandomOP::onDraw(const Screen& scr) const
 		symbol = m_libraryPanel->getSymbol();
 	}
 	if (symbol && m_pos.isValid()) {
-		SpriteDraw::drawSprite(scr, symbol, m_pos, m_randomValue.angle, m_randomValue.scale);
+		SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
 	}
 
 	return false;

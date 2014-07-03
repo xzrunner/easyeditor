@@ -37,8 +37,6 @@ void OrthoCanvas::onSize(int w, int h)
 	//////////////////////////////////////////////////////////////////////////
 
 	glViewport(0, 0, w, h);
-
-	m_screen.SetSize(w, h);
-	m_screen.SetFromCamera(*m_camera);
+	m_screen.SetSize(w, h, -m_camera->getCenter(), 1.0f / m_camera->getScale());
 }
 } // d2d

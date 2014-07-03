@@ -145,9 +145,9 @@ bool PasteSymbolTileOP::onDraw(const Screen& scr) const
 	if (symbol && m_pos.isValid())
 	{
 		if (m_pScale)
-			SpriteDraw::drawSprite(scr, symbol, m_pos, m_rotate, *m_pScale);
+			SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos, m_rotate, *m_pScale);
 		else
-			SpriteDraw::drawSprite(scr, symbol, m_pos, m_rotate);
+			SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos, m_rotate);
 	}
 
 	return false;

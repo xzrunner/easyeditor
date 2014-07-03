@@ -95,7 +95,7 @@ public:
 
 	virtual ~ParticleSystem();
 
-	virtual void draw();
+	virtual void draw(const d2d::Screen& scr);
 
 	void update(float dt);
 

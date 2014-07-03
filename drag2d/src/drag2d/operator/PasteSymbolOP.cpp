@@ -56,9 +56,9 @@ bool PasteSymbolOP::onDraw(const Screen& scr) const
 	if (symbol && m_pos.isValid())
 	{
 		if (m_pScale)
-			SpriteDraw::drawSprite(scr, symbol, m_pos, 0.0f, *m_pScale);
+			SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos, 0.0f, *m_pScale);
 		else
-			SpriteDraw::drawSprite(scr, symbol, m_pos);
+			SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos);
 	}
 
 	return false;

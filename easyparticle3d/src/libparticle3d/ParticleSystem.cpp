@@ -49,7 +49,7 @@ ParticleSystem::~ParticleSystem()
 		delete[] pStart;
 }
 
-void ParticleSystem::draw()
+void ParticleSystem::draw(const d2d::Screen& scr)
 {
 	m_recorder.FinishFrame();
 
@@ -78,7 +78,7 @@ void ParticleSystem::draw()
 
 		float s = (p->life / p->lifetime) * (p->pc->start_scale - p->pc->end_scale) + p->pc->end_scale;
 
-		d2d::SpriteDraw::drawSprite(p->pc->symbol, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
+		d2d::SpriteDraw::drawSprite(scr, p->pc->symbol, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
 
 		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), x, y, p->angle, s, multi);
 

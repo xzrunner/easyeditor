@@ -16,7 +16,7 @@ SpriteStageCanvas::SpriteStageCanvas(EditPanel* editPanel, MultiSpritesImpl* spr
 
 void SpriteStageCanvas::onDraw()
 {
-	m_spritesImpl->traverseSprites(DrawSpritesVisitor(m_batch), e_visible);
+	m_spritesImpl->traverseSprites(DrawSpritesVisitor(m_screen, m_batch), e_visible);
 	m_editPanel->drawEditTemp(m_screen);
 }
 

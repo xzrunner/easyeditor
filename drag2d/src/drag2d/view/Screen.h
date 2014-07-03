@@ -1,7 +1,6 @@
 #ifndef _D2D_SCREEN_H_
 #define _D2D_SCREEN_H_
 
-#include "Camera.h"
 #include "common/Vector.h"
 
 namespace d2d
@@ -12,14 +11,11 @@ class Screen
 public:
 	Screen() : m_scale(1) {}
 	
-	void SetSize(int w, int h) {
+	void SetSize(int w, int h, const Vector& offset, float scale) {
 		m_size.x = w;
 		m_size.y = h;
-	}
-
-	void SetFromCamera(const Camera& cam) {
-		m_offset = -cam.getCenter();
-		m_scale = 1.0f / cam.getScale();
+		m_offset = offset;
+		m_scale = scale;
 	}
 
 	void TransPosForRender(Vector& pos) const {

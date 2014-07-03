@@ -135,22 +135,25 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 		h = rect.yLength() * scale;
 	glViewport(0, 0, w, h);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+// 	glMatrixMode(GL_PROJECTION);
+// 	glLoadIdentity();
+// 
+// 	glOrtho(
+// 		rect.xMin * scale,
+// 		rect.xMax * scale,
+// 		rect.yMax * scale,
+// 		rect.yMin * scale,
+// 		0,
+// 		1
+// 		);
+// 
+// 	glMatrixMode(GL_MODELVIEW);
+// 	glLoadIdentity();
 
-	glOrtho(
-		rect.xMin * scale,
-		rect.xMax * scale,
-		rect.yMax * scale,
-		rect.yMin * scale,
-		0,
-		1
-		);
+	Screen scr;
+	scr.SetSize(w, h, Vector(-rect.xCenter(), -rect.yCenter()) * scale, 1);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	SpriteDraw::drawSprite(symbol, d2d::Vector(0, 0), 0.0f, scale, scale);
+	SpriteDraw::drawSprite(scr, symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, scale);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 

@@ -65,7 +65,7 @@ void PreviewCanvas::drawStageData()
 	std::vector<d2d::ISprite*> sprites;
 	getCurrSprites(sprites);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteDraw::drawSprite(m_screen, sprites[i]);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		sprites[i]->release();

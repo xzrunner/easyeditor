@@ -30,7 +30,7 @@ void StageCanvas::onDraw()
 	std::vector<d2d::ISprite*> sprites;
 	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::e_visible);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteDraw::drawSprite(m_screen, sprites[i]);
 	m_editPanel->drawEditTemp(m_screen);
 }
 

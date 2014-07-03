@@ -10,7 +10,7 @@ namespace anim
 class Tools
 {
 public:
-	static void drawAnimSymbol(const Symbol* symbol, int index, const d2d::Colorf& mul = d2d::Colorf(1,1,1,1), 
+	static void drawAnimSymbol(const d2d::Screen& scr, const Symbol* symbol, int index, const d2d::Colorf& mul = d2d::Colorf(1,1,1,1), 
 		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0));
 	static void getCurrSprites(const Symbol* symbol, int index, std::vector<d2d::ISprite*>& sprites);
 	static Symbol::Frame* getCurrFrame(Symbol::Layer* layer, int index);
