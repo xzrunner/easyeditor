@@ -9,7 +9,7 @@ bool Settings::bDisplayPolyBound = true;
 bool Settings::bSpriteCapture = true;
 bool Settings::bImageEdgeClip = true;
 bool Settings::bVisibleImgEdge = false;
-bool Settings::bVisibleNodeName = true;
+bool Settings::bVisibleNodeName = false;
 
 Settings::DrawType Settings::drawType = e_DrawBoth;
 
