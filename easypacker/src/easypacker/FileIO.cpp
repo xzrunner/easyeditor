@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "ToolBarPanel.h"
 #include "Context.h"
+#include "config.h"
 
 #include <SOIL/SOIL.h>
 // #include <SOIL/stb_image_write.h>
@@ -14,6 +15,26 @@ void FileIO::load(const char* filename)
 
 	d2d::SymbolMgr::Instance()->clear();
 	d2d::BitmapMgr::Instance()->clear();
+
+	wxString ext = wxT("_") + wxString(FILE_TAG) + wxT(".json");
+	if (wxString(filename).Contains(ext)) {
+		loadFromEasypackerFile(filename);
+	} else {
+		loadFromTexPackerFile(filename);
+	}
+
+	context->library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+}
+
+void FileIO::store(const char* filename)
+{
+	storeImage(filename);
+	storePosition(filename);
+}
+
+void FileIO::loadFromEasypackerFile(const char* filename)
+{
+	Context* context = Context::Instance();
 
 	d2d::TexPackerAdapter adapter;
 	adapter.load(filename);
@@ -36,14 +57,65 @@ void FileIO::load(const char* filename)
 
 		context->stage->insertSpriteNoArrange(sprite);
 	}
-
-	context->library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
-void FileIO::store(const char* filename)
+void FileIO::loadFromTexPackerFile(const char* filename)
 {
-	storeImage(filename);
-	storePosition(filename);
+	Context* context = Context::Instance();
+
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	d2d::Settings::bImageEdgeClip = false;
+
+	context->width = value["meta"]["size"]["w"].asInt();
+	context->height = value["meta"]["size"]["h"].asInt();
+
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
+
+	int i = 0;
+	Json::Value frame_val = value["frames"][i++];
+	while (!frame_val.isNull()) {
+		std::string filepath = frame_val["filename"].asString();
+		if (!d2d::FilenameTools::isExist(filepath))
+			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		symbol->release();
+
+		int width = frame_val["sourceSize"]["w"].asInt();
+		int height = frame_val["sourceSize"]["h"].asInt();
+		d2d::Vector pos;
+		float angle = 0;
+		if (frame_val["rotated"].asBool())
+		{
+			int left = frame_val["frame"]["x"].asInt() - (height - frame_val["spriteSourceSize"]["y"].asInt() - frame_val["spriteSourceSize"]["h"].asInt());
+			int top = frame_val["frame"]["y"].asInt() - frame_val["spriteSourceSize"]["x"].asInt();
+ 			pos.x = left + height * 0.5f;
+ 			pos.y = context->height - (top + width * 0.5f);
+			angle = -d2d::PI*0.5f;
+		}
+		else
+		{
+			int left = frame_val["frame"]["x"].asInt() - frame_val["spriteSourceSize"]["x"].asInt();
+			int top = frame_val["frame"]["y"].asInt() - frame_val["spriteSourceSize"]["y"].asInt();
+			pos.x = left + width * 0.5f;
+			pos.y = context->height - (top + height * 0.5f);
+		}
+		sprite->setTransform(pos, angle);
+
+		context->stage->insertSpriteNoArrange(sprite);
+
+		frame_val = value["frames"][i++];
+	}
+
+	d2d::Settings::bImageEdgeClip = true;
 }
 
 void FileIO::storeImage(const char* filename)

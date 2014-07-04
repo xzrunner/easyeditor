@@ -16,6 +16,9 @@ namespace epacker
 		static void store(const char* filename);
 
 	private:
+		static void loadFromEasypackerFile(const char* filename);
+		static void loadFromTexPackerFile(const char* filename);
+
 		static void storeImage(const char* filename);
 		static void storePosition(const char* filename);
 

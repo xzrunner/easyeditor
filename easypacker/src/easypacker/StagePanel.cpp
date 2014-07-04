@@ -44,7 +44,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSpriteNoArrange(d2d::ISprite* sprite)
 {
-	fixCoords(sprite);
+//	fixCoords(sprite);
 	d2d::SpritesPanelImpl::insertSprite(sprite);
 }
 
@@ -114,6 +114,6 @@ void StagePanel::fixCoords(d2d::ISprite* sprite)
 		fixedCenter.x = int(fixedCenter.x) + width * 0.5f;
 		fixedCenter.y = int(fixedCenter.y) + height * 0.5f;
 
-		sprite->setTransform(fixedCenter, 0);
+		sprite->setTransform(fixedCenter, sprite->getAngle());
 	}
 }
