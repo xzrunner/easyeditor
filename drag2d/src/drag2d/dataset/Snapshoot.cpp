@@ -121,40 +121,28 @@ void Snapshoot::releaseFBO()
 
 void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(m_fbo);
 
-	if (whitebg) {
-		glClearColor(1, 1, 1, 1);
-	} else {
+ 	if (whitebg) {
+ 		glClearColor(1, 1, 1, 1);
+ 	} else {
 		glClearColor(0, 0, 0, 0);
 	}	
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	d2d::Rect rect = symbol->getSize();
-	int w = rect.xLength() * scale,
-		h = rect.yLength() * scale;
+ 	int w = rect.xLength() * scale,
+ 		h = rect.yLength() * scale;
 	glViewport(0, 0, w, h);
 
-// 	glMatrixMode(GL_PROJECTION);
-// 	glLoadIdentity();
-// 
-// 	glOrtho(
-// 		rect.xMin * scale,
-// 		rect.xMax * scale,
-// 		rect.yMax * scale,
-// 		rect.yMin * scale,
-// 		0,
-// 		1
-// 		);
-// 
-// 	glMatrixMode(GL_MODELVIEW);
-// 	glLoadIdentity();
-
 	Screen scr;
-	scr.SetSize(w, h, Vector(-rect.xCenter(), -rect.yCenter()) * scale, 1);
+	scr.SetSize(w, h, Vector(-rect.xCenter(), -rect.yCenter()) * scale, Vector(1, -1));
 
 	SpriteDraw::drawSprite(scr, symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, scale);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+
+	shader->SetFBO(0);
+	shader->SetTexture(0);
 }
 
 int Snapshoot::checkFramebufferStatus() const

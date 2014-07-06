@@ -35,6 +35,7 @@ ShaderNew::ShaderNew()
 	m_sprite_count = 0;
 	m_vb = NULL;
 	m_tex = 0;
+	m_fbo = 0;
 
 	m_color = 0xffffffff;
 	m_additive = 0;
@@ -111,6 +112,16 @@ void ShaderNew::SetTexture(int tex)
 		Commit();
 		m_tex = (GLuint)tex;
 		glBindTexture(GL_TEXTURE_2D, m_tex);
+	}
+}
+
+void ShaderNew::SetFBO(int fbo)
+{
+	if (m_fbo != fbo) 
+	{
+		Commit();
+		m_fbo = (GLuint)fbo;
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 	}
 }
 

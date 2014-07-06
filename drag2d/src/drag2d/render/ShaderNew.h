@@ -26,6 +26,7 @@ public:
 	void reload();
 
 	void SetTexture(int tex);
+	void SetFBO(int fbo);
 
 	void Draw(const float vb[16], int texid);
 
@@ -74,6 +75,7 @@ private:
 	float* m_vb;
 
 	GLuint m_tex;
+	GLuint m_fbo;
 
 	uint32_t m_color, m_additive;
 

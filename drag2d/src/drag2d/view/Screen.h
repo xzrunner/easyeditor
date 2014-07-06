@@ -9,9 +9,10 @@ namespace d2d
 class Screen
 {
 public:
-	Screen() : m_scale(1) {}
+	Screen() {}
 	
-	void SetSize(int w, int h, const Vector& offset, float scale) {
+	void SetSize(int w, int h, const Vector& offset = Vector(0,0), 
+		const Vector& scale = Vector(1,1)) {
 		m_size.x = w;
 		m_size.y = h;
 		m_offset = offset;
@@ -20,7 +21,8 @@ public:
 
 	void TransPosForRender(Vector& pos) const {
 		pos += m_offset;
-		pos *= m_scale;
+		pos.x *= m_scale.x;
+		pos.y *= m_scale.y;
 		pos.x = pos.x * 2 / m_size.x;
 		pos.y = pos.y * 2 / m_size.y;
 	}
@@ -28,7 +30,7 @@ public:
 private:
 	Vector m_size;
 	Vector m_offset;
-	float m_scale;
+	Vector m_scale;
 
 }; // Screen
 
