@@ -3,13 +3,17 @@
 namespace anim
 {
 
-void Tools::drawAnimSymbol(const d2d::Screen& scr, const Symbol* symbol, int index, 
-						   const d2d::Colorf& mul, const d2d::Colorf& add)
+void Tools::drawAnimSymbol(const d2d::Screen& scr, 
+						   const Symbol* symbol, 
+						   const d2d::Matrix& mt,
+						   int index, 
+						   const d2d::Colorf& mul, 
+						   const d2d::Colorf& add)
 {
 	std::vector<d2d::ISprite*> sprites;
 	getCurrSprites(symbol, index, sprites);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(scr, sprites[i], d2d::Matrix(), mul, add);
+		d2d::SpriteDraw::drawSprite(scr, sprites[i], mt, mul, add);
 
 	for_each(sprites.begin(), sprites.end(), DeletePointerFunctor<d2d::ISprite>());
 }

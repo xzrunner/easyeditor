@@ -56,7 +56,7 @@ void Symbol::draw(const d2d::Screen& scr,
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(scr, m_sprites[i][j], d2d::Matrix(), mul, add);
+				d2d::SpriteDraw::drawSprite(scr, m_sprites[i][j], mt, mul, add);
 			}
 		break;
 	case e_9GridHollow:
@@ -65,21 +65,21 @@ void Symbol::draw(const d2d::Screen& scr,
 			{
 				if (i == 1 && j == 1) continue;
 				if (!m_sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(scr, m_sprites[i][j], d2d::Matrix(), mul, add);
+				d2d::SpriteDraw::drawSprite(scr, m_sprites[i][j], mt, mul, add);
 			}
 			break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[1][i]) continue;
-			d2d::SpriteDraw::drawSprite(scr, m_sprites[1][i], d2d::Matrix(), mul, add);
+			d2d::SpriteDraw::drawSprite(scr, m_sprites[1][i], mt, mul, add);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[i][1]) continue;
-			d2d::SpriteDraw::drawSprite(scr, m_sprites[i][1], d2d::Matrix(), mul, add);
+			d2d::SpriteDraw::drawSprite(scr, m_sprites[i][1], mt, mul, add);
 		}
 		break;
 	case e_6GridUpper:
@@ -87,7 +87,7 @@ void Symbol::draw(const d2d::Screen& scr,
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(scr, m_sprites[i][j], d2d::Matrix(), mul, add);
+				d2d::SpriteDraw::drawSprite(scr, m_sprites[i][j], mt, mul, add);
 			}
 	}
 

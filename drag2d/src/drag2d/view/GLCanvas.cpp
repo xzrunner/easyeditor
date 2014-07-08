@@ -2,7 +2,6 @@
 #include "Camera.h"
 
 #include "view/EditPanel.h"
-#include "render/Shader.h"
 #include "render/ShaderNew.h"
 
 #include <wx/wx.h>
@@ -67,7 +66,7 @@ void GLCanvas::initGL()
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 
-//	Shader::Instance()->reload();
+	ShaderNew::Instance()->reload();
 }
 
 void GLCanvas::onSize(wxSizeEvent& event)

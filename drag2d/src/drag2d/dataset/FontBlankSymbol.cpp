@@ -7,6 +7,7 @@
 #include "common/FileNameTools.h"
 #include "common/FileNameParser.h"
 #include "common/Settings.h"
+#include "common/Math.h"
 #include "dataset/SpriteTools.h"
 #include "render/PrimitiveDraw.h"
 #include "render/Shader.h"
@@ -51,13 +52,13 @@ void FontBlankSymbol::draw(const Screen& scr,
 						   const ISprite* sprite/* = NULL*/) const
 {
 	if (Settings::DrawFontType & Settings::DrawFontBg) {
-		DrawBackground(scr, sprite);
+		DrawBackground(scr, sprite, mt);
 	} 
 	if (Settings::DrawFontType & Settings::DrawFontText) {
-		DrawText(sprite);
+//		DrawText(scr, sprite, mt);
 	}
 
-	SpriteTools::DrawName(sprite);
+//	SpriteTools::DrawName(scr, sprite, mt);
 }
 
 Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
@@ -114,7 +115,8 @@ void FontBlankSymbol::loadResources()
 	}
 }
 
-void FontBlankSymbol::DrawBackground(const Screen& scr, const ISprite* sprite) const
+void FontBlankSymbol::DrawBackground(const Screen& scr, const ISprite* sprite,
+									 const Matrix& mt) const
 {
 	float w = width, h = height;
 	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);
@@ -125,14 +127,19 @@ void FontBlankSymbol::DrawBackground(const Screen& scr, const ISprite* sprite) c
 		if (m_font)
 			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
 	}
-	PrimitiveDraw::rect(scr, Vector(0, 0), w*0.5f, h*0.5f, m_style);
+	Vector center(0, 0);
+	center = Math::transVector(center, mt);
+	PrimitiveDraw::rect(scr, center, w*0.5f, h*0.5f, m_style);
 }
 
-void FontBlankSymbol::DrawText(const ISprite* sprite) const
+void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const Matrix& mt) const
 {
 	if (sprite) {
 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
-			d2d::PrimitiveDraw::text(font->GetTextContext().c_str());
+			const std::string& str = font->GetTextContext();
+			if (!str.empty()) {
+				d2d::PrimitiveDraw::text(str.c_str());
+			}
 		}
 	}
 

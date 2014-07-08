@@ -64,6 +64,8 @@ void ShaderNew::SetShapeColor(const Colorf& col)
 void ShaderNew::sprite()
 {
 	if (m_prog_curr != m_prog_sprite) {
+		Commit();
+
 		glEnable(GL_BLEND);
 
 		// todo 源混合因子ejoy2d用的GL_ONE
@@ -78,6 +80,8 @@ void ShaderNew::sprite()
 void ShaderNew::shape()
 {
 	if (m_prog_curr != m_prog_shape) {
+		Commit();
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -88,6 +92,8 @@ void ShaderNew::shape()
 
 void ShaderNew::null()
 {
+	Commit();
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
