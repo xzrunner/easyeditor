@@ -295,6 +295,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easydb\FormatTIDString.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easydb\FormatTIDString.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easydb\PackParticle3D.cpp"
 				>
 			</File>

@@ -16,6 +16,7 @@
 #include "ScaleOverall.h"
 #include "ScaleJson.h"
 #include "AddFrameSprite.h"
+#include "FormatTIDString.h"
 
 namespace edb
 {
@@ -38,6 +39,7 @@ void CommandLoader::Init()
 	fc->Register(ScaleOverall::Create());
 	fc->Register(ScaleJson::Create());
 	fc->Register(AddFrameSprite::Create());
+	fc->Register(FormatTIDString::Create());
 }
 
 }
