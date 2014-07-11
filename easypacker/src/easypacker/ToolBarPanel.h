@@ -10,6 +10,7 @@ namespace epacker
 	public:
 		enum IMG_TYPE
 		{
+			e_unknow = 0,
 			e_bmp,
 			e_jpg,
 			e_png
@@ -29,14 +30,13 @@ namespace epacker
 		void initSizeSettingPanel(wxSizer* topSizer);
 		void initSettingsPanel(wxSizer* topSizer);
 		void initFormatChoicePanel(wxSizer* topSizer);
-		void initRearrangePanel(wxSizer* topSizer);
-		void initLoadListPanel(wxSizer* topSizer);
 
 		void onChangeOutputImageSize(wxCommandEvent& event);
 		void onChangePadding(wxSpinEvent& event);
 		void onChangeScale(wxSpinEvent& event);
 		void onRearrange(wxCommandEvent& event);
 		void onLoadLibraryList(wxCommandEvent& event);
+		void onChangeAutoArrange(wxCommandEvent& event);
 
 	private:
 		static const int BASE_EDGE = 32;
@@ -46,7 +46,7 @@ namespace epacker
 		wxChoice *m_widthChoice, *m_heightChoice;
 		wxRadioBox* m_formatChoice;
 
-		wxCheckBox* m_boundCheck;
+		wxCheckBox* m_auto_arrage;
 
 	}; // ToolbarPanel
 }

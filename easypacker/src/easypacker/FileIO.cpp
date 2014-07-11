@@ -5,7 +5,7 @@
 #include "config.h"
 
 #include <SOIL/SOIL.h>
-// #include <SOIL/stb_image_write.h>
+//#include <SOIL/stb_image_write.h>
 
 using namespace epacker;
 
@@ -28,8 +28,12 @@ void FileIO::load(const char* filename)
 
 void FileIO::store(const char* filename)
 {
-	storeImage(filename);
-	storePosition(filename);
+	wxString ext = wxT("_") + wxString(FILE_TAG) + wxT(".json");
+	if (wxString(filename).Contains(ext)) {
+		storeToEasypackerFile(filename);
+	} else {
+		storeToTexPackerFile(filename);
+	}
 }
 
 void FileIO::loadFromEasypackerFile(const char* filename)
@@ -110,12 +114,32 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 		}
 		sprite->setTransform(pos, angle);
 
+		sprite->editable = false;
+
+		Json::Value* val = new Json::Value;
+		*val = frame_val;
+		sprite->setUserData(val);
+
 		context->stage->insertSpriteNoArrange(sprite);
 
 		frame_val = value["frames"][i++];
 	}
 
+	Context::Instance()->tp_meta = value["meta"];
+
 	d2d::Settings::bImageEdgeClip = true;
+}
+
+void FileIO::storeToEasypackerFile(const char* filename)
+{
+	storeImage(filename);
+	storeEasypackerPosition(filename);
+}
+
+void FileIO::storeToTexPackerFile(const char* filename)
+{
+	storeImage(filename);
+	storeTexpackerPosition(filename);
 }
 
 void FileIO::storeImage(const char* filename)
@@ -151,21 +175,41 @@ void FileIO::storeImage(const char* filename)
 			sh = sprite->getSymbol().getSize().xLength();
 		}
 
-		if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||
-			sprite->getPosition().y - sh * 0.5f < 0 || sprite->getPosition().y + sh * 0.5f > width)
-			continue;
+		//if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||
+		//	sprite->getPosition().y - sh * 0.5f < 0 || sprite->getPosition().y + sh * 0.5f > width)
+		//	continue;
 
-		int w, h, c;
-		unsigned char* src_data = SOIL_load_image(sprite->getSymbol().getFilepath().c_str(), &w, &h, &c, 0);
+		int w, h, c, f;
+		byte* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().getFilepath().ToStdString(), w, h, c, f);
 
 		if (sprite->getAngle() != 0)
 		{
 			for (size_t iRow = 0; iRow < w; ++iRow) {
 				for (size_t iCol = 0; iCol < h; ++iCol) {
-					const int baseFrom = (iCol * w + (w - 1 - iRow)) * c,
-						baseTo = ((height - center.y - w * 0.5f + iRow) * width + center.x - h * 0.5f + iCol) * channel;
+					int dst_row = height - center.y - w * 0.5f + iRow;
+					int dst_col = center.x - h * 0.5f + iCol;
+					if (dst_row < 0 || dst_row >= height ||
+						dst_col < 0 || dst_col >= width ) {
+						continue;
+					}
+//					const int baseFrom = (iCol * w + (w - 1 - iRow)) * c,
+//					const int baseFrom = ((h - 1 - iCol) * w + iRow) * c,
+					const int baseFrom = (iCol * w + iRow) * c,
+						baseTo = (dst_row * width + dst_col) * channel;
+					if (channel == 4 && src_data[baseFrom + 3] == 0) {
+						continue;
+					}
+
 					for (size_t iCanel = 0; iCanel < channel; ++iCanel)
 						dst_data[baseTo + iCanel] = src_data[baseFrom + iCanel];
+
+					// premultiplied alpha
+					if (channel == 4)
+					{
+						float alpha = src_data[baseFrom + 3] / 255.0f;
+						for (size_t iCanel = 0; iCanel < channel-1; ++iCanel)
+							dst_data[baseTo + iCanel] = dst_data[baseTo + iCanel] * alpha;
+					}
 				}
 			}
 		}
@@ -173,10 +217,28 @@ void FileIO::storeImage(const char* filename)
 		{
 			for (size_t iRow = 0; iRow < h; ++iRow) {
 				for (size_t iCol = 0; iCol < w; ++iCol) {
-					const int baseFrom = (iRow * w + iCol) * c,
-						baseTo = ((height - center.y - h * 0.5f + iRow) * width + center.x - w * 0.5f + iCol) * channel;
+					int dst_row = height - center.y - h * 0.5f + iRow;
+					int dst_col = center.x - w * 0.5f + iCol;
+					if (dst_row < 0 || dst_row >= height ||
+						dst_col < 0 || dst_col >= width ) {
+							continue;
+					}
+//					const int baseFrom = (iRow * w + iCol) * c,
+					const int baseFrom = ((h - 1 - iRow) * w + iCol) * c,
+						baseTo = (dst_row * width + dst_col) * channel;
+					if (channel == 4 && src_data[baseFrom + 3] == 0) {
+						continue;
+					}
 					for (size_t iCanel = 0; iCanel < channel; ++iCanel)
 						dst_data[baseTo + iCanel] = src_data[baseFrom + iCanel];
+
+					// premultiplied alpha
+					if (channel == 4)
+					{
+						float alpha = src_data[baseFrom + 3] / 255.0f;
+						for (size_t iCanel = 0; iCanel < channel-1; ++iCanel)
+							dst_data[baseTo + iCanel] = dst_data[baseTo + iCanel] * alpha;
+					}
 				}
 			}
 		}
@@ -204,13 +266,15 @@ void FileIO::storeImage(const char* filename)
 		break;
 	case ToolbarPanel::e_png:
 //		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
+		d2d::ImageSaver::storeToFile(dst_data, width, height, imgFile.ToStdString(), 
+			d2d::ImageSaver::e_png);
 		break;
 	}
 
 	free((void*)dst_data);
 }
 
-void FileIO::storePosition(const char* filename)
+void FileIO::storeEasypackerPosition(const char* filename)
 {
 	Json::Value value;
 
@@ -221,6 +285,53 @@ void FileIO::storePosition(const char* filename)
 	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		value["image"][i] = store(sprites[i]);
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filename);
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
+}
+
+void FileIO::storeTexpackerPosition(const char* filename)
+{
+	Json::Value value;
+
+	value["meta"] = Context::Instance()->tp_meta;
+
+	std::vector<d2d::ISprite*> sprites;
+	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		d2d::ISprite* sprite = sprites[i];
+		if (sprite->getUserData()) 
+		{
+			Json::Value* val = static_cast<Json::Value*>(sprite->getUserData());
+			value["frames"][i] = *val;
+		} 
+		else 
+		{
+			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->getSymbol()).getImage();
+			Json::Value val;
+			val["filename"] = d2d::FilenameTools::getFilenameWithExtension(img->filepath()).ToStdString();
+			val["rotated"] = sprite->getAngle() == 0 ? false : true;
+			val["trimmed"] = true;
+			val["sourceSize"]["w"] = img->originWidth();
+			val["sourceSize"]["h"] = img->originHeight();
+
+			d2d::Rect r = img->getRegion();
+			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.xLength();
+			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.yLength();
+			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->originWidth();
+			val["spriteSourceSize"]["y"] = img->originHeight() - (r.yMax + 0.5f * img->originHeight());
+			
+			const d2d::Vector& pos = sprite->getPosition();
+			val["frame"]["x"] = pos.x + r.xMin;
+			val["frame"]["y"] = Context::Instance()->height - (pos.y + r.yMax);
+
+			value["frames"][i] = val;
+		}
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

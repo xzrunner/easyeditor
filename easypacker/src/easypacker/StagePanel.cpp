@@ -50,6 +50,10 @@ void StagePanel::insertSpriteNoArrange(d2d::ISprite* sprite)
 
 void StagePanel::arrangeAllSprites(bool bClearSelection)
 {
+	if (!Context::Instance()->auto_arrange) {
+		return;
+	}
+
 	if (bClearSelection) m_spriteSelection->clear();
 
 	std::vector<d2d::ImageSprite*> sprites;

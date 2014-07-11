@@ -19,6 +19,9 @@ namespace epacker
 		int width, height;
 		int padding;
 		float scale;
+		bool auto_arrange;
+
+		Json::Value tp_meta;
 
 	public:
 		static Context* Instance();

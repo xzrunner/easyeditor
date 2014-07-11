@@ -68,13 +68,16 @@ void Frame::onSave(wxCommandEvent& event)
 
 void Frame::onSaveAs(wxCommandEvent& event)
 {
-	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + wxString(FILE_TAG) + wxT(".json"), wxFD_SAVE);
+	wxString ext = wxT("*_") + wxString(FILE_TAG) + wxT(".json");
+	wxString filter = "Easypacker file ("+ext+")|"+ext+"|TP file (*.json)|*json";
+	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
-		m_currFilename = fixed;
-		m_task->storeToFile(fixed);
+// 		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
+// 		m_currFilename = fixed;
+// 		m_task->storeToFile(fixed);
+
+		m_task->storeToFile(dlg.GetPath());
 	}
 }
 

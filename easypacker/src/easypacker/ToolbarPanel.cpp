@@ -22,7 +22,7 @@ ToolbarPanel::IMG_TYPE ToolbarPanel::getImgType() const
 	case 2:
 		return e_bmp;
 	default:
-		assert(0);
+		return e_unknow;
 	}
 }
 
@@ -60,10 +60,27 @@ wxSizer* ToolbarPanel::initLayout()
 	sizer->AddSpacer(20);
 	initFormatChoicePanel(sizer);
 	sizer->AddSpacer(20);
-	initRearrangePanel(sizer);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Reset"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onRearrange));
+		sizer->Add(btn);
+	}
 	sizer->AddSpacer(10);
-	initLoadListPanel(sizer);
-
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Load All"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onLoadLibraryList));
+		sizer->Add(btn);
+	}
+	sizer->AddSpacer(10);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Auto Arrange"));
+		check->SetValue(Context::Instance()->auto_arrange);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::onChangeAutoArrange));
+		sizer->Add(check);
+	}
+	sizer->AddSpacer(10);
+	
 	return sizer;
 }
 
@@ -138,20 +155,6 @@ void ToolbarPanel::initFormatChoicePanel(wxSizer* topSizer)
 	topSizer->Add(m_formatChoice);
 }
 
-void ToolbarPanel::initRearrangePanel(wxSizer* topSizer)
-{
-	wxButton* btn = new wxButton(this, wxID_ANY, wxT("Reset"));
-	Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onRearrange));
-	topSizer->Add(btn);
-}
-
-void ToolbarPanel::initLoadListPanel(wxSizer* topSizer)
-{
-	wxButton* btn = new wxButton(this, wxID_ANY, wxT("Load All"));
-	Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onLoadLibraryList));
-	topSizer->Add(btn);
-}
-
 void ToolbarPanel::onChangeOutputImageSize(wxCommandEvent& event)
 {
 	Context::Instance()->width = wxVariant(m_widthChoice->GetString(m_widthChoice->GetSelection())).GetInteger();
@@ -191,4 +194,9 @@ void ToolbarPanel::onLoadLibraryList(wxCommandEvent& event)
 {
 	static_cast<StagePanel*>(m_editPanel)->loadFromLibrary();
 	m_editPanel->Refresh();
+}
+
+void ToolbarPanel::onChangeAutoArrange(wxCommandEvent& event)
+{
+	Context::Instance()->auto_arrange = event.IsChecked();
 }
