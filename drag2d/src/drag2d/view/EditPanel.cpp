@@ -31,8 +31,11 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
 	, m_frame(frame)
 {
-	RegisterHotKey(Hot_UpOneLayer, 0, VK_ADD);
-	RegisterHotKey(Hot_DownOneLayer, 0, VK_SUBTRACT);
+ 	//RegisterHotKey(Hot_UpOneLayer, 0, VK_ADD);
+ 	//RegisterHotKey(Hot_DownOneLayer, 0, VK_SUBTRACT);
+	RegisterHotKey(Hot_UpOneLayer, 0, VK_PRIOR);
+	RegisterHotKey(Hot_DownOneLayer, 0, VK_NEXT);
+
 //	RegisterHotKey(Hot_Delete, 0, VK_DELETE);
 
 	m_editOP = NULL;
