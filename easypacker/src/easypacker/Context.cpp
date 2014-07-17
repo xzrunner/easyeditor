@@ -18,6 +18,7 @@ Context::Context()
 	scale = 1.0f;
 
 	auto_arrange = true;
+	premultiplied_alpha = false;
 }
 
 Context* Context::Instance()

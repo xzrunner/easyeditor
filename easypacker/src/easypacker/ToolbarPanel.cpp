@@ -80,6 +80,14 @@ wxSizer* ToolbarPanel::initLayout()
 		sizer->Add(check);
 	}
 	sizer->AddSpacer(10);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Premultiplied Alpha"));
+		check->SetValue(Context::Instance()->premultiplied_alpha);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::onChangePremultipliedAlpha));
+		sizer->Add(check);
+	}
+	sizer->AddSpacer(10);
 	
 	return sizer;
 }
@@ -199,4 +207,9 @@ void ToolbarPanel::onLoadLibraryList(wxCommandEvent& event)
 void ToolbarPanel::onChangeAutoArrange(wxCommandEvent& event)
 {
 	Context::Instance()->auto_arrange = event.IsChecked();
+}
+
+void ToolbarPanel::onChangePremultipliedAlpha(wxCommandEvent& event)
+{
+	Context::Instance()->premultiplied_alpha = event.IsChecked();
 }

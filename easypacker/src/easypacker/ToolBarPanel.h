@@ -37,6 +37,7 @@ namespace epacker
 		void onRearrange(wxCommandEvent& event);
 		void onLoadLibraryList(wxCommandEvent& event);
 		void onChangeAutoArrange(wxCommandEvent& event);
+		void onChangePremultipliedAlpha(wxCommandEvent& event);
 
 	private:
 		static const int BASE_EDGE = 32;

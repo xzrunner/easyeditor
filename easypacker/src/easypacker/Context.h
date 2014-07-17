@@ -20,6 +20,7 @@ namespace epacker
 		int padding;
 		float scale;
 		bool auto_arrange;
+		bool premultiplied_alpha;
 
 		Json::Value tp_meta;
 

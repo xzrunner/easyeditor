@@ -179,6 +179,8 @@ void FileIO::storeImage(const char* filename)
 		//	sprite->getPosition().y - sh * 0.5f < 0 || sprite->getPosition().y + sh * 0.5f > width)
 		//	continue;
 
+		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
+
 		int w, h, c, f;
 		byte* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().getFilepath().ToStdString(), w, h, c, f);
 
@@ -203,8 +205,7 @@ void FileIO::storeImage(const char* filename)
 					for (size_t iCanel = 0; iCanel < channel; ++iCanel)
 						dst_data[baseTo + iCanel] = src_data[baseFrom + iCanel];
 
-					// premultiplied alpha
-					if (channel == 4)
+					if (use_premultiplied_alpha)
 					{
 						float alpha = src_data[baseFrom + 3] / 255.0f;
 						for (size_t iCanel = 0; iCanel < channel-1; ++iCanel)
@@ -232,8 +233,7 @@ void FileIO::storeImage(const char* filename)
 					for (size_t iCanel = 0; iCanel < channel; ++iCanel)
 						dst_data[baseTo + iCanel] = src_data[baseFrom + iCanel];
 
-					// premultiplied alpha
-					if (channel == 4)
+					if (use_premultiplied_alpha)
 					{
 						float alpha = src_data[baseFrom + 3] / 255.0f;
 						for (size_t iCanel = 0; iCanel < channel-1; ++iCanel)
