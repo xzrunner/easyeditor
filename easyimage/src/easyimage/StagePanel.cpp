@@ -9,6 +9,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 	, m_image(NULL)
 {
+	m_left = m_right = NULL;
+
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new DragSymbolTarget(this, library));
@@ -71,6 +73,19 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		m_stage->setImage(symbol);
 	}
 
+	// todo for diff
+	// fixme
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	d2d::Rect r = sprite->getSymbol().getSize();
+	if (pos.x < 0) {
+		sprite->setTransform(d2d::Vector(-r.xLength() * 0.5f - 10, 0.0f), 0);
+		m_stage->m_left = sprite;
+	} else {
+		sprite->setTransform(d2d::Vector(r.xLength() * 0.5f + 10, 0.0f), 0);
+		m_stage->m_right = sprite;
+	}
+	
 	return true;
 }
 

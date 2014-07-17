@@ -245,30 +245,54 @@
 		<Filter
 			Name="edit"
 			>
-			<File
-				RelativePath="..\..\..\src\easyimage\RectCutCMPT.cpp"
+			<Filter
+				Name="cut"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyimage\RectCutCMPT.h"
+				<File
+					RelativePath="..\..\..\src\easyimage\RectCutCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\RectCutCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\RectCutOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\RectCutOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\RectMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\RectMgr.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="diff"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyimage\RectCutOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyimage\RectCutOP.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyimage\RectMgr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyimage\RectMgr.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\PixelDiffCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\PixelDiffCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\PixelDiffOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\PixelDiffOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

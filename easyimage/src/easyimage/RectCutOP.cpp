@@ -169,6 +169,8 @@ bool RectCutOP::onDraw() const
 {
 	if (d2d::ZoomViewOP::onDraw()) return true;
 
+	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+
 	if (!m_stage->getImage()) return false;
 
 	m_rects.draw();

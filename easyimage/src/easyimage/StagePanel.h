@@ -18,6 +18,9 @@ public:
 	}
 	void setImage(const std::string& filepath);
 
+	const d2d::ISprite* getLeft() const { return m_left; }
+	const d2d::ISprite* getRight() const { return m_right; }
+
 private:
 	void setImage(d2d::ISymbol* symbol);
 
@@ -38,6 +41,9 @@ private:
 private:
 	const d2d::ISprite* m_image;
 
+	// todo 根据OP的不同来组织数据
+	const d2d::ISprite *m_left, *m_right;
+	
 }; // StagePanel
 
 }
