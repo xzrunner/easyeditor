@@ -1,7 +1,7 @@
 #include "EditMeshOP.h"
 #include "StagePanel.h"
-#include "Mesh.h"
 #include "Triangle.h"
+#include "Shape.h"
 
 namespace emesh
 {

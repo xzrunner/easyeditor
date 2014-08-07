@@ -48,7 +48,7 @@ void Strip::Remove(const d2d::Vector& p)
 	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
 	int idx;
-	idx = m_left_nodes.QueryIndex(p);
+	idx = m_left_nodes.QueryIndex(p, m_node_radius);
 	if (idx != -1) 
 	{
 		m_left_nodes.Remove(idx);
@@ -57,7 +57,7 @@ void Strip::Remove(const d2d::Vector& p)
 	} 
 	else 
 	{
-		idx = m_right_nodes.QueryIndex(p);
+		idx = m_right_nodes.QueryIndex(p, m_node_radius);
 		if (idx != -1) 
 		{
 			m_left_nodes.Remove(idx);
@@ -71,9 +71,9 @@ d2d::Vector* Strip::Find(const d2d::Vector& p)
 {
 	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
-	d2d::Vector* ptr = m_left_nodes.QueryPointer(p);
+	d2d::Vector* ptr = m_left_nodes.QueryPointer(p, m_node_radius);
 	if (ptr == NULL) {
-		ptr = m_right_nodes.QueryPointer(p);
+		ptr = m_right_nodes.QueryPointer(p, m_node_radius);
 	}
 	return ptr;
 }
@@ -273,16 +273,16 @@ void Strip::AbsorbNodeToRegion(d2d::Vector& node)
 {
 	float hw = m_width * 0.5f;
 	float hh = m_height * 0.5f;
-	if (fabs(node.x - (-hw)) < Node::RADIUS) {
+	if (fabs(node.x - (-hw)) < m_node_radius) {
 		node.x = -hw;
 	}
-	if (fabs(node.x - hw) < Node::RADIUS) {
+	if (fabs(node.x - hw) < m_node_radius) {
 		node.x = hw;
 	}
-	if (fabs(node.y - (-hh)) < Node::RADIUS) {
+	if (fabs(node.y - (-hh)) < m_node_radius) {
 		node.y = -hh;
 	}
-	if (fabs(node.y - hh) < Node::RADIUS) {
+	if (fabs(node.y - hh) < m_node_radius) {
 		node.y = hh;
 	}
 }
@@ -407,11 +407,11 @@ GetNodeInsertPos(const d2d::Vector& p, d2d::Vector& nearest)
 }
 
 int Strip::NodeList::
-QueryIndex(const d2d::Vector& p) const
+QueryIndex(const d2d::Vector& p, float radius) const
 {
 	// front and back are bound
 	for (int i = 1, n = m_ori.size() - 1; i < n; ++i) {
-		if (d2d::Math::getDistance(m_ori[i], p) < Node::RADIUS) {
+		if (d2d::Math::getDistance(m_ori[i], p) < radius) {
 			return i;
 		}
 	}
@@ -419,9 +419,9 @@ QueryIndex(const d2d::Vector& p) const
 }
 
 d2d::Vector* Strip::NodeList::
-QueryPointer(const d2d::Vector& p)
+QueryPointer(const d2d::Vector& p, float radius)
 {
-	int idx = QueryIndex(p);
+	int idx = QueryIndex(p, radius);
 	if (idx != -1) {
 		return &m_ori[idx];
 	} else {

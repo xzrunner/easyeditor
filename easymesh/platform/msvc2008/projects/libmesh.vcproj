@@ -260,6 +260,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libmesh\ShapeFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\ShapeFactory.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libmesh\Triangle.h"
 					>
 				</File>

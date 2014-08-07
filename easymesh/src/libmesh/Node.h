@@ -21,9 +21,6 @@ public:
 	}
 
 public:
-	static const int RADIUS = 5;
-
-public:
 	d2d::Vector uv, xy;
 	d2d::Vector ori_xy;
 

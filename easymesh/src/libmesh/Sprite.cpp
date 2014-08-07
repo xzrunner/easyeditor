@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include "FileIO.h"
+#include "Shape.h"
 
 namespace emesh
 {
@@ -67,6 +68,8 @@ void Sprite::load(const Json::Value& val)
 	ISprite::load(val);
 	m_speed.x = val["speed"]["x"].asDouble();
 	m_speed.y = val["speed"]["y"].asDouble();
+
+	m_symbol->getShape()->Load(val);
 }
 
 void Sprite::store(Json::Value& val) const
@@ -74,6 +77,24 @@ void Sprite::store(Json::Value& val) const
 	ISprite::store(val);
 	val["speed"]["x"] = m_speed.x;
 	val["speed"]["y"] = m_speed.y;
+
+	m_symbol->getShape()->Store(val);
+}
+
+void Sprite::buildBounding()
+{
+	if (!m_bounding) 
+		m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
+	const d2d::ISymbol& symbol = getSymbol();
+
+	d2d::Rect rect = m_symbol->getShape()->GetRegion();
+	m_symbol->SetRegion(rect);
+	if (m_offset.x == 0 && m_offset.y == 0)
+		m_offset.set(rect.xCenter(), rect.yCenter());
+	rect.scale(m_scale.x, m_scale.y);
+	rect.shear(m_shear.x, m_shear.y);
+	m_bounding->initFromRect(rect);
+	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
 }

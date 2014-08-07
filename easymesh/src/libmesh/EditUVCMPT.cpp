@@ -1,7 +1,7 @@
 #include "EditUVCMPT.h"
 #include "StagePanel.h"
 #include "EditUVOP.h"
-#include "Mesh.h"
+#include "Shape.h"
 
 namespace emesh
 {

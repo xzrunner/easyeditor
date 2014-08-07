@@ -1,6 +1,6 @@
 #include "EditUVOP.h"
 #include "StagePanel.h"
-#include "Mesh.h"
+#include "Shape.h"
 
 namespace emesh
 {

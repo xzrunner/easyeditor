@@ -1,9 +1,8 @@
 #include "Symbol.h"
 #include "Shape.h"
 #include "FileIO.h"
-#include "Mesh.h"
-#include "Strip.h"
 #include "Sprite.h"
+#include "ShapeFactory.h"
 
 namespace emesh
 {
@@ -29,8 +28,7 @@ Symbol::Symbol(d2d::Image* image)
 	image->retain();
 	m_image = image;
 
-	m_shape = new Strip(*image);
-//	m_shape = new Mesh(*image);
+	m_shape = ShapeFactory::Instance()->CreateShape(*image);
 }
 
 Symbol::~Symbol()
@@ -69,15 +67,17 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 		if (!m_pause) {
 			const Sprite* mesh = static_cast<const Sprite*>(sprite);
 			d2d::Vector spd = mesh->GetSpeed();
-			m_shape->OffsetUV(spd.x, spd.y);
+			if (spd.x != 0 && spd.y != 0) {
+				m_shape->OffsetUV(spd.x, spd.y);
+			}
 		}
 	}
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
-{
-	return m_image->getRegion();
-}
+// d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
+// {
+// //	return m_image->getRegion();
+// }
 
 void Symbol::refresh()
 {

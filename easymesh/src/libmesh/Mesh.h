@@ -42,6 +42,8 @@ public:
 
 	virtual int GetQuadSize() const { return -1; }		
 
+	virtual ShapeType GetShapeType() const { return ST_MESH; }
+
 	static const char* GetType() { return "mesh"; }
 
 private:

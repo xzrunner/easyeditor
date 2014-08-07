@@ -40,6 +40,8 @@ public:
 
 	virtual int GetQuadSize() const;
 
+	virtual ShapeType GetShapeType() const { return ST_STRIP; }
+
 	static const char* GetType() { return "strip"; }
 
 private:
@@ -71,8 +73,8 @@ private:
 
 		int GetNodeInsertPos(const d2d::Vector& p, d2d::Vector& nearest);
 
-		int QueryIndex(const d2d::Vector& p) const;
-		d2d::Vector* QueryPointer(const d2d::Vector& p);
+		int QueryIndex(const d2d::Vector& p, float radius) const;
+		d2d::Vector* QueryPointer(const d2d::Vector& p, float radius);
 
 		bool IsRegionContain(const d2d::Vector& p) const;
 

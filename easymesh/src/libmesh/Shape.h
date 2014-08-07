@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "config.h"
+
 namespace emesh
 {
 
@@ -37,6 +39,8 @@ public:
 
 	virtual int GetQuadSize() const = 0;
 
+	virtual ShapeType GetShapeType() const  = 0;
+
 	void QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes);
 	void QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
 
@@ -45,6 +49,10 @@ public:
 	void DrawTexture() const;
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
+
+	float GetNodeRegion() const { return m_node_radius; }
+
+	d2d::Rect GetRegion() const;
 
 protected:
 	void ClearTriangles();
@@ -57,6 +65,8 @@ protected:
 	float m_width, m_height;
 
 	std::vector<Triangle*> m_tris;
+
+	float m_node_radius;
 
 }; // IShape
 

@@ -1,8 +1,9 @@
 #include "CreateMeshCMPT.h"
 #include "CreateMeshOP.h"
 #include "StagePanel.h"
-#include "Mesh.h"
 #include "FileIO.h"
+#include "ShapeFactory.h"
+#include "Shape.h"
 
 namespace emesh
 {
@@ -20,6 +21,19 @@ wxSizer* CreateMeshCMPT::initLayout()
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(15);
 	{
+		wxArrayString choices;
+		choices.Add(wxT("mesh"));
+		choices.Add(wxT("strip"));
+		wxRadioBox* typeChoice = new wxRadioBox(this, wxID_ANY, wxT("Type"), 
+			wxDefaultPosition, wxDefaultSize, choices, 2, wxRA_SPECIFY_COLS);
+		typeChoice->SetSelection(1);
+		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
+ 		Connect(typeChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
+ 			wxCommandEventHandler(CreateMeshCMPT::onChangeType));
+		sizer->Add(typeChoice);
+	}
+	sizer->AddSpacer(15);
+	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Copy..."));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
 			wxCommandEventHandler(CreateMeshCMPT::onCopy));
@@ -33,6 +47,20 @@ wxSizer* CreateMeshCMPT::initLayout()
 		sizer->Add(btn);
 	}
 	return sizer;
+}
+
+void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
+{
+	int idx = event.GetSelection();
+	switch (idx)
+	{
+	case 0:
+		ShapeFactory::Instance()->SetShapeType(ST_MESH);
+		break;
+	case 1:
+		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
+		break;
+	}
 }
 
 void CreateMeshCMPT::onCopy(wxCommandEvent& event)

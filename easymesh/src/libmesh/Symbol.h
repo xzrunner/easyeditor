@@ -27,7 +27,9 @@ public:
 	virtual void draw(const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
 		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
 		const d2d::ISprite* sprite = NULL) const;
-	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
+	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const {
+		return m_region;
+	}
 
 	//
 	// ListItem interface
@@ -48,6 +50,10 @@ public:
 	
 	int GetQuadSize() const;
 
+	void SetRegion(const d2d::Rect& r) {
+		m_region = r;
+	}
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
@@ -59,6 +65,8 @@ private:
 	Shape* m_shape;
 
 	bool m_pause;
+
+	d2d::Rect m_region;
 
 }; // Symbol
 

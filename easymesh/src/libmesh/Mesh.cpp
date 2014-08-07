@@ -62,7 +62,7 @@ void Mesh::Remove(const d2d::Vector& p)
 			= m_region.nodes.begin();
 		for ( ; itr != m_region.nodes.end(); ++itr)
 		{
-			if (d2d::Math::getDistance(*itr, p) < Node::RADIUS)
+			if (d2d::Math::getDistance(*itr, p) < m_node_radius)
 			{
 				m_region.nodes.erase(itr);
 				RefreshTriangles();
@@ -75,7 +75,7 @@ void Mesh::Remove(const d2d::Vector& p)
 d2d::Vector* Mesh::Find(const d2d::Vector& p)
 {
 	for (int i = 0, m = m_region.nodes.size(); i < m; ++i)
-		if (d2d::Math::getDistance(m_region.nodes[i], p) < Node::RADIUS)
+		if (d2d::Math::getDistance(m_region.nodes[i], p) < m_node_radius)
 			return &m_region.nodes[i];
 	return NULL;
 }
@@ -90,16 +90,16 @@ void Mesh::Move(d2d::Vector* src, const d2d::Vector& dst)
 
 		// absorb node to region
 		const d2d::Rect& r = m_region.rect;
-		if (fabs(d.x - r.xMin) < Node::RADIUS) {
+		if (fabs(d.x - r.xMin) < m_node_radius) {
 			d.x = r.xMin;
 		}
-		if (fabs(d.x - r.xMax) < Node::RADIUS) {
+		if (fabs(d.x - r.xMax) < m_node_radius) {
 			d.x = r.xMax;
 		}
-		if (fabs(d.y - r.yMin) < Node::RADIUS) {
+		if (fabs(d.y - r.yMin) < m_node_radius) {
 			d.y = r.yMin;
 		}
-		if (fabs(d.y - r.yMax) < Node::RADIUS) {
+		if (fabs(d.y - r.yMax) < m_node_radius) {
 			d.y = r.yMax;
 		}
 

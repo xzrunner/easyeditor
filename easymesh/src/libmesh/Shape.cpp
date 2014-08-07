@@ -10,6 +10,7 @@ Shape::Shape()
 	: m_texid(0)
 	, m_width(0)
 	, m_height(0)
+	, m_node_radius(5)
 {
 }
 
@@ -26,6 +27,8 @@ Shape::Shape(const d2d::Image& image)
 
 	m_width = image.getRegion().xLength();
 	m_height = image.getRegion().yLength();
+
+	m_node_radius = std::min(m_width * 0.1f, 5.0f);
 }
 
 Shape::~Shape()
@@ -39,7 +42,7 @@ void Shape::QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes)
 	{
 		Triangle* tri = m_tris[i];
 		for (int j = 0; j < 3; ++j) {
-			if (d2d::Math::getDistance(tri->nodes[j]->xy, p) < Node::RADIUS) {
+			if (d2d::Math::getDistance(tri->nodes[j]->xy, p) < m_node_radius) {
 				nodes.push_back(tri->nodes[j]);
 			}
 		}
@@ -76,7 +79,7 @@ void Shape::DrawInfoUV() const
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(nodes, Node::RADIUS, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::drawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
 void Shape::DrawInfoXY() const
@@ -95,7 +98,7 @@ void Shape::DrawInfoXY() const
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(nodes, Node::RADIUS, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::drawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
 void Shape::DrawTexture() const
@@ -112,6 +115,19 @@ void Shape::DrawTexture() const
 	}
 
 	d2d::PrimitiveDraw::drawTriangles(m_texid, vertices, texcoords);
+}
+
+d2d::Rect Shape::GetRegion() const
+{
+	d2d::Rect r;
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int i = 0; i < 3; ++i) {
+			r.combine(tri->nodes[i]->xy);
+		}
+	}	
+	return r;
 }
 
 void Shape::ClearTriangles()

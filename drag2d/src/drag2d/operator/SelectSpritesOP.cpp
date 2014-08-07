@@ -70,7 +70,7 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 
 bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 {
-	m_bDraggable = true;
+ 	m_bDraggable = true;
 
 	Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	ISprite* selected = selectByPos(pos);

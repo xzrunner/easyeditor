@@ -50,6 +50,8 @@ void EditDialog::initLayout()
 
 void EditDialog::onClose(wxCloseEvent& event)
 {
+	m_sprite->buildBounding();
+
 	if (!m_stage->isDirty())
 	{
 		Destroy();

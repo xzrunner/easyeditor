@@ -31,6 +31,8 @@ public:
 	virtual void load(const Json::Value& val);
 	virtual void store(Json::Value& val) const;
 
+	virtual void buildBounding();
+
 	Shape* getShape() {
 		return m_symbol ? m_symbol->getShape() : NULL; 
 	}
