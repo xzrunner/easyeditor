@@ -34,6 +34,7 @@ namespace epacker
 		void onChangeOutputImageSize(wxCommandEvent& event);
 		void onChangePadding(wxSpinEvent& event);
 		void onChangeScale(wxSpinEvent& event);
+		void onChangeExtrude(wxSpinEvent& event);
 		void onRearrange(wxCommandEvent& event);
 		void onLoadLibraryList(wxCommandEvent& event);
 		void onChangeAutoArrange(wxCommandEvent& event);

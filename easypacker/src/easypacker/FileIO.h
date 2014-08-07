@@ -28,6 +28,8 @@ namespace epacker
 
 		static Json::Value store(const d2d::ISprite* sprite);
 
+
+
 	}; // FileIO
 }
 

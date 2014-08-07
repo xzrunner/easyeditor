@@ -15,6 +15,7 @@ Context::Context()
 
 	width = height = 0;
 	padding = 0;
+	extrude = 0;
 	scale = 1.0f;
 
 	auto_arrange = true;

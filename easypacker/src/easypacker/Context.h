@@ -18,6 +18,7 @@ namespace epacker
 
 		int width, height;
 		int padding;
+		int extrude;
 		float scale;
 		bool auto_arrange;
 		bool premultiplied_alpha;

@@ -72,22 +72,6 @@ wxSizer* ToolbarPanel::initLayout()
 		sizer->Add(btn);
 	}
 	sizer->AddSpacer(10);
-	{
-		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Auto Arrange"));
-		check->SetValue(Context::Instance()->auto_arrange);
-		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-			wxCommandEventHandler(ToolbarPanel::onChangeAutoArrange));
-		sizer->Add(check);
-	}
-	sizer->AddSpacer(10);
-	{
-		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Premultiplied Alpha"));
-		check->SetValue(Context::Instance()->premultiplied_alpha);
-		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-			wxCommandEventHandler(ToolbarPanel::onChangePremultipliedAlpha));
-		sizer->Add(check);
-	}
-	sizer->AddSpacer(10);
 	
 	return sizer;
 }
@@ -128,7 +112,7 @@ void ToolbarPanel::initSettingsPanel(wxSizer* topSizer)
 	wxBoxSizer* settingsSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("padding: ")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Padding: ")));
 
 		wxSpinCtrl* padding = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
 			wxSP_ARROW_KEYS, 0, 100, 0);
@@ -140,7 +124,7 @@ void ToolbarPanel::initSettingsPanel(wxSizer* topSizer)
 	settingsSizer->AddSpacer(10);
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("scale: ")));
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Scale: ")));
 
 		wxSpinCtrl* scale = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
 			wxSP_ARROW_KEYS, 10, 200, 100);
@@ -148,6 +132,34 @@ void ToolbarPanel::initSettingsPanel(wxSizer* topSizer)
 		sizer->Add(scale);
 
 		settingsSizer->Add(sizer);
+	}
+	settingsSizer->AddSpacer(10);
+	{
+		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("Extrude: ")));
+
+		wxSpinCtrl* extrude = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(50, -1), 
+			wxSP_ARROW_KEYS, 0, 10, 0);
+		Connect(extrude->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::onChangeScale));
+		sizer->Add(extrude);
+
+		settingsSizer->Add(sizer);
+	}
+	settingsSizer->AddSpacer(10);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Auto Arrange"));
+		check->SetValue(Context::Instance()->auto_arrange);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::onChangeAutoArrange));
+		settingsSizer->Add(check);
+	}
+	settingsSizer->AddSpacer(10);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Premultiplied Alpha"));
+		check->SetValue(Context::Instance()->premultiplied_alpha);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::onChangePremultipliedAlpha));
+		settingsSizer->Add(check);
 	}
 	topSizer->Add(settingsSizer);
 }
@@ -190,6 +202,11 @@ void ToolbarPanel::onChangeScale(wxSpinEvent& event)
 
 	stage->arrangeAllSprites(true);
 	m_editPanel->Refresh();
+}
+
+void ToolbarPanel::onChangeExtrude(wxSpinEvent& event)
+{
+	Context::Instance()->extrude = event.GetValue();
 }
 
 void ToolbarPanel::onRearrange(wxCommandEvent& event)

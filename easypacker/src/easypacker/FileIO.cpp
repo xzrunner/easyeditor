@@ -146,6 +146,8 @@ void FileIO::storeImage(const char* filename)
 {
 	StagePanel* stage = Context::Instance()->stage;
 
+	int extrude = Context::Instance()->extrude;
+
 	const int width = Context::Instance()->width,
 		height = Context::Instance()->height;
 	int channel = 4;
