@@ -31,6 +31,15 @@ wxSizer* CreateMeshCMPT::initLayout()
  		Connect(typeChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
  			wxCommandEventHandler(CreateMeshCMPT::onChangeType));
 		sizer->Add(typeChoice);
+
+		sizer->AddSpacer(5);
+
+		wxCheckBox* regionSet = new wxCheckBox(this, wxID_ANY, wxT("Ê¹ÓÃ±ß½ç"), 
+			wxDefaultPosition, wxDefaultSize, wxCHK_2STATE);
+		bool use_region = ShapeFactory::Instance()->IsUseRegion();
+		regionSet->SetValue(use_region);
+		Connect(regionSet->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(CreateMeshCMPT::onChangeUseRegion));
+		sizer->Add(regionSet);
 	}
 	sizer->AddSpacer(15);
 	{
@@ -61,6 +70,11 @@ void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
 		break;
 	}
+}
+
+void CreateMeshCMPT::onChangeUseRegion(wxCommandEvent& event)
+{
+	ShapeFactory::Instance()->SetUseRegion(event.IsChecked());
 }
 
 void CreateMeshCMPT::onCopy(wxCommandEvent& event)

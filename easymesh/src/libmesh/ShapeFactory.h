@@ -17,14 +17,19 @@ public:
 
 	void SetShapeType(ShapeType type);
 
+	void SetUseRegion(bool use_region);
+	bool IsUseRegion() const;
+
 public:
 	static ShapeFactory* Instance();
 
 private:
-	ShapeFactory() {}
+	ShapeFactory();
 
 private:
 	ShapeType m_type;
+
+	bool m_use_region;
 
 private:
 	static ShapeFactory* m_instance;

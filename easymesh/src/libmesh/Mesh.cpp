@@ -4,13 +4,15 @@
 namespace emesh
 {
 
-Mesh::Mesh()
+Mesh::Mesh(bool use_region)
+	: m_use_region(use_region)
 {
 }
 
 Mesh::Mesh(const Mesh& mesh)
 	: Shape(mesh)
 	, m_region(mesh.m_region)
+	, m_use_region(mesh.m_use_region)
 {
 	RefreshTriangles();
 
@@ -27,8 +29,9 @@ Mesh::Mesh(const Mesh& mesh)
 	}
 }
 
-Mesh::Mesh(const d2d::Image& image, bool initBound)
+Mesh::Mesh(const d2d::Image& image, bool initBound, bool use_region)
 	: Shape(image)
+	, m_use_region(use_region)
 {
 	if (initBound)
 	{
@@ -316,10 +319,20 @@ void Mesh::RefreshTriangles()
 {
 	ClearTriangles();
 
+	if (!m_use_region && m_region.nodes.size() < 3) {
+		return;
+	}
+
 	std::vector<d2d::Vector> bound;
 	GetRegionBound(bound);
 	std::vector<d2d::Vector> tris;
-	d2d::Triangulation::points(bound, m_region.nodes, tris);
+	if (m_use_region) {
+		d2d::Triangulation::points(bound, m_region.nodes, tris);
+	} else {
+		std::vector<d2d::Vector> empty;
+		d2d::Triangulation::points(bound, empty, tris);
+	}
+	
 	std::map<d2d::Vector, Node*, d2d::VectorCmp> map2Node;
 	Node null;
 	for (int i = 0, n = tris.size(); i < n; ++i)
@@ -343,11 +356,15 @@ void Mesh::RefreshTriangles()
 
 void Mesh::GetRegionBound(std::vector<d2d::Vector>& bound) const
 {
-	const d2d::Rect& r = m_region.rect;
-	bound.push_back(d2d::Vector(r.xMin, r.yMin));
-	bound.push_back(d2d::Vector(r.xMin, r.yMax));
-	bound.push_back(d2d::Vector(r.xMax, r.yMax));
-	bound.push_back(d2d::Vector(r.xMax, r.yMin));
+	if (m_use_region) {
+		const d2d::Rect& r = m_region.rect;
+		bound.push_back(d2d::Vector(r.xMin, r.yMin));
+		bound.push_back(d2d::Vector(r.xMin, r.yMax));
+		bound.push_back(d2d::Vector(r.xMax, r.yMax));
+		bound.push_back(d2d::Vector(r.xMax, r.yMin));
+	} else {
+		std::copy(m_region.nodes.begin(), m_region.nodes.end(), back_inserter(bound));
+	}
 }
 
 //void Mesh::getLinesCutByUVBounds(std::vector<d2d::Vector>& lines)

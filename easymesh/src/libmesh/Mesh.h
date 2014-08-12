@@ -13,9 +13,9 @@ class Triangle;
 class Mesh : public Shape
 {
 public:
-	Mesh();
+	Mesh(bool use_region = false);
 	Mesh(const Mesh& mesh);
-	Mesh(const d2d::Image& image, bool initBound = true);
+	Mesh(const d2d::Image& image, bool initBound = true, bool use_region = false);
 
 	//
 	// ICloneable interface
@@ -61,6 +61,8 @@ private:
 	};
 
 private:
+	bool m_use_region;
+
 	Region m_region;
 
 	d2d::Vector m_uv_offset;
