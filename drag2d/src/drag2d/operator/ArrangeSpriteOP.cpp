@@ -128,6 +128,16 @@ bool ArrangeSpriteOP<TBase>::onMouseLeftDown(int x, int y)
 
 	if (m_isDeformOpen && m_selected)
 	{
+		if (isOffsetEnable())
+		{
+			d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
+			if (Math::getDistance(offset, m_lastPos) < SCALE_NODE_RADIUS)
+			{
+				m_selOffset = true;
+				return false;
+			}
+		}
+
 		Vector ctrlNodes[8];
 		getSpriteCtrlNodes(m_selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
@@ -136,16 +146,6 @@ bool ArrangeSpriteOP<TBase>::onMouseLeftDown(int x, int y)
 			{
 				m_ctrlNodeSelected.pos = ctrlNodes[i];
 				m_ctrlNodeSelected.type = CtrlNodeType(i);
-				return false;
-			}
-		}
-
-		if (isOffsetEnable())
-		{
-			d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
-			if (Math::getDistance(offset, m_lastPos) < SCALE_NODE_RADIUS)
-			{
-				m_selOffset = true;
 				return false;
 			}
 		}
@@ -274,7 +274,14 @@ bool ArrangeSpriteOP<TBase>::onMouseDrag(int x, int y)
 	if (m_isDeformOpen && m_selected)
 	{
 		Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		if (m_ctrlNodeSelected.isValid())
+		if (isOffsetEnable() && m_selOffset)
+		{
+			d2d::Vector offset = Math::rotateVector(pos - m_selected->getPosition(), -m_selected->getAngle());
+			m_selected->setOffset(offset);
+			m_editPanel->Refresh();
+			return false;
+		}
+		else if (m_ctrlNodeSelected.isValid())
 		{
 // 				if (m_ctrlNodeSelected.type < UP)
 // 					scaleSprite(pos);
@@ -285,13 +292,6 @@ bool ArrangeSpriteOP<TBase>::onMouseDrag(int x, int y)
 				shearSprite(pos);
 			else
 				scaleSprite(pos);
-			return false;
-		}
-		else if (isOffsetEnable() && m_selOffset)
-		{
-			d2d::Vector offset = Math::rotateVector(pos - m_selected->getPosition(), -m_selected->getAngle());
-			m_selected->setOffset(offset);
-			m_editPanel->Refresh();
 			return false;
 		}
 	}
