@@ -235,7 +235,12 @@ void ISprite::rotate(float delta)
 
 void ISprite::setOffset(const Vector& offset) 
 {
+	// rotate + offset -> offset + rotate	
+	Vector old_center = getCenter();
 	m_offset = offset;
+	Vector new_center = getCenter();
+	m_pos += (old_center - new_center);
+
 	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 

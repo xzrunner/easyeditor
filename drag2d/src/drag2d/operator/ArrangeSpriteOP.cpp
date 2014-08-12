@@ -276,7 +276,7 @@ bool ArrangeSpriteOP<TBase>::onMouseDrag(int x, int y)
 		Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		if (isOffsetEnable() && m_selOffset)
 		{
-			d2d::Vector offset = Math::rotateVector(pos - m_selected->getPosition(), -m_selected->getAngle());
+			d2d::Vector offset = Math::rotateVector(pos - m_selected->getCenter(), -m_selected->getAngle());
 			m_selected->setOffset(offset);
 			m_editPanel->Refresh();
 			return false;
