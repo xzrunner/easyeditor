@@ -67,7 +67,7 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 		if (!m_pause) {
 			const Sprite* mesh = static_cast<const Sprite*>(sprite);
 			d2d::Vector spd = mesh->GetSpeed();
-			if (spd.x != 0 && spd.y != 0) {
+			if (spd.x != 0 || spd.y != 0) {
 				m_shape->OffsetUV(spd.x, spd.y);
 			}
 		}
