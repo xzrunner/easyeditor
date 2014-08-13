@@ -449,9 +449,9 @@ void ArrangeSpriteOP<TBase>::scaleSprite(const Vector& currPos)
 	float hw = m_selected->getSymbol().getSize().xLength() * 0.5f;
 	float hh = m_selected->getSymbol().getSize().yLength() * 0.5f;
 	love::Matrix t;
-	t.setTransformation(m_selected->getPosition().x, m_selected->getPosition().y, m_selected->getAngle(),
+	const Vector& center = m_selected->getCenter();
+	t.setTransformation(center.x, center.y, m_selected->getAngle(),
 		m_selected->getScale().x, m_selected->getScale().y, 0, 0, m_selected->getShear().x, m_selected->getShear().y);
-	const Vector& center = m_selected->getPosition();
 
 	Vector ori, fix;
 	if (m_ctrlNodeSelected.type == UP)
