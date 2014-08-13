@@ -69,7 +69,10 @@ void Sprite::load(const Json::Value& val)
 	m_speed.x = val["speed"]["x"].asDouble();
 	m_speed.y = val["speed"]["y"].asDouble();
 
-	m_symbol->getShape()->Load(val);
+	// ¼æÈÝÀÏÊý¾Ý
+	if (!val["left nodes"].isNull()) {
+		m_symbol->getShape()->Load(val);
+	}
 }
 
 void Sprite::store(Json::Value& val) const
