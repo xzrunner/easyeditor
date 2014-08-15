@@ -100,4 +100,9 @@ void Sprite::buildBounding()
 	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
+void Sprite::SetTween(Sprite* begin, Sprite* end, float process)
+{
+	getShape()->SetTween(begin->getShape(), end->getShape(), process);
+}
+
 }

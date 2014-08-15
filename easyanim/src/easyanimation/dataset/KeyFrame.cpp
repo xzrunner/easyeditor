@@ -175,12 +175,11 @@ void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end,
 	tween->setScale(xscale, yscale);
 	tween->setShear(xshear, yshear);
 
-	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(start))
-	{
-		emesh::Mesh *s = sprite->getMesh(),
-			*e = static_cast<emesh::Sprite*>(end)->getMesh(),
-			*mid = static_cast<emesh::Sprite*>(tween)->getMesh();
-		mid->tween(*s, *e, process);
+	emesh::Sprite* s = dynamic_cast<emesh::Sprite*>(start),
+		*mid = dynamic_cast<emesh::Sprite*>(tween),
+		*e = static_cast<emesh::Sprite*>(end);
+	if (s && mid && e) {
+		mid->SetTween(s, e, process);
 	}
 }
 

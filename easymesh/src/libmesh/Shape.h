@@ -54,6 +54,8 @@ public:
 
 	d2d::Rect GetRegion() const;
 
+	void SetTween(Shape* begin, Shape* end, float process);
+
 protected:
 	void ClearTriangles();
 

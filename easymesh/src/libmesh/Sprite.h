@@ -46,6 +46,8 @@ public:
 	const d2d::Vector& GetSpeed() const { return m_speed; }
 	void SetSpeed(const d2d::Vector& spd) { m_speed = spd; }
 
+	void SetTween(Sprite* begin, Sprite* end, float process);
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}

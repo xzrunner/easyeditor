@@ -30,8 +30,6 @@ public:
 	virtual d2d::Vector* Find(const d2d::Vector& p);
 	virtual void Move(d2d::Vector* src, const d2d::Vector& dst);
 
-//	void tween(const Mesh& begin, const Mesh& end, float process);
-
 	virtual void Reset();
 	virtual void Clear();
 

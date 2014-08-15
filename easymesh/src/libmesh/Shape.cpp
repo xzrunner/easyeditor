@@ -130,6 +130,21 @@ d2d::Rect Shape::GetRegion() const
 	return r;
 }
 
+void Shape::SetTween(Shape* begin, Shape* end, float process)
+{
+	assert(m_tris.size() == begin->m_tris.size() && m_tris.size() == end->m_tris.size());
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int j = 0; j < 3; ++j)
+		{
+			const d2d::Vector& p0 = begin->m_tris[i]->nodes[j]->xy;
+			const d2d::Vector& p1 = end->m_tris[i]->nodes[j]->xy;
+			m_tris[i]->nodes[j]->xy = p0 + (p1 - p0) * process;
+		}
+	}
+}
+
 void Shape::ClearTriangles()
 {
 	for_each(m_tris.begin(), m_tris.end(), DeletePointerFunctor<Triangle>());
