@@ -4,24 +4,18 @@
 #include <wx/menu.h>
 
 #include "interfaces.h"
+#include "common/typedef.h"
 #include "dataset/SelectionSet.h"
 #include "render/ShapeStyle.h"
 
 namespace d2d
 {
 
+class ArrangeSpriteImpl;
 class EditPanel;
 class MultiSpritesImpl;
 class PropertySettingPanel;
 class AbstractEditCMPT;
-
-enum DirectionType
-{
-	e_up,
-	e_down,
-	e_left,
-	e_right
-};
 
 template <typename TBase>
 class ArrangeSpriteOP : public TBase
@@ -49,10 +43,10 @@ protected:
 	virtual void onDirectionKeyDown(DirectionType type);
 	virtual void onSpaceKeyDown();
 
-	virtual void translateSprite(const Vector& delta);
-	virtual void rotateSprite(const Vector& dst);
-	virtual void scaleSprite(const Vector& currPos);
-	virtual void shearSprite(const Vector& currPos);
+	//virtual void translateSprite(const Vector& delta);
+	//virtual void rotateSprite(const Vector& dst);
+	//virtual void scaleSprite(const Vector& currPos);
+	//virtual void shearSprite(const Vector& currPos);
 
 	virtual void setRightPopupMenu(wxMenu& menu);
 	virtual bool isOffsetEnable() const { return true; };
@@ -60,43 +54,36 @@ protected:
 private:
 	void setScalingFromSelected();
 
-	void autoAlign(const std::vector<ISprite*>& sprites);
-	void autoAlign(const ISprite* src, ISprite* dst);
-
-	// 0 - 3 are scale, 4 - 7 are shear
-	// 0 4 1
-	// 5   6
-	// 2 7 3
-	static void getSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8]);
-
-private:
-	class TranslateVisitor : public IVisitor
-	{
-	public:
-		TranslateVisitor(const Vector& delta);
-		virtual void visit(Object* object, bool& bFetchNext);
-
-	private:
-		const Vector& m_delta;
-
-	}; // TranslateVisitor
-
-	class RotateVisitor : public IVisitor
-	{
-	public:
-		RotateVisitor(const Vector& start, const Vector& end);
-		virtual void visit(Object* object, bool& bFetchNext);
-
-	private:
-		const Vector &m_start, &m_end;
-
-	}; // RotateVisitor
+// private:
+// 	class TranslateVisitor : public IVisitor
+// 	{
+// 	public:
+// 		TranslateVisitor(const Vector& delta);
+// 		virtual void visit(Object* object, bool& bFetchNext);
+// 
+// 	private:
+// 		const Vector& m_delta;
+// 
+// 	}; // TranslateVisitor
+// 
+// 	class RotateVisitor : public IVisitor
+// 	{
+// 	public:
+// 		RotateVisitor(const Vector& start, const Vector& end);
+// 		virtual void visit(Object* object, bool& bFetchNext);
+// 
+// 	private:
+// 		const Vector &m_start, &m_end;
+// 
+// 	}; // RotateVisitor
 
 private:
 	static const float SCALE_NODE_RADIUS;
 
 private:
 	PropertySettingPanel* m_propertyPanel;
+
+	ArrangeSpriteImpl* m_impl;
 
 protected:
 	MultiSpritesImpl* m_spritesImpl;
@@ -146,9 +133,6 @@ private:
 	bool m_selOffset;
 
 	bool m_bDirty;
-
-	bool m_isAutoAlignOpen;
-	Vector m_autoAlignHor[2], m_autoAlignVer[2];
 
 	ShapeStyle m_shearNodeStyle;
 
