@@ -169,11 +169,27 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteOP.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\AutoAlign.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\AutoAlign.h"
 					>
 				</File>
 				<File
@@ -1119,6 +1135,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\common\Statistics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\common\typedef.h"
 				>
 			</File>
 			<File
