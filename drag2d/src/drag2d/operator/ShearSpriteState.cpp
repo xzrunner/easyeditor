@@ -3,6 +3,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "common/Math.h"
+#include "history/ArrangeSpriteAtomicOP.h"
 
 namespace d2d
 {
@@ -13,6 +14,8 @@ ShearSpriteState::ShearSpriteState(ISprite* sprite,
 {
 	m_sprite = sprite;
 	m_sprite->retain();
+
+	m_first_shear = m_sprite->getShear();
 }
 
 ShearSpriteState::~ShearSpriteState()
@@ -24,6 +27,13 @@ bool ShearSpriteState::OnMousePress(const Vector& pos)
 {
 	Shear(pos);
 	return true;
+}
+
+AbstractAtomicOP* ShearSpriteState::OnMouseRelease(const Vector& pos)
+{
+	std::vector<ISprite*> sprites;
+	sprites.push_back(m_sprite);
+	return new arrange_sprite::ShearSpritesAOP(sprites, m_sprite->getShear(), m_first_shear);
 }
 
 void ShearSpriteState::Shear(const Vector& curr)

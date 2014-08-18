@@ -105,9 +105,10 @@ namespace d2d
 		class ShearSpritesAOP : public SpritesAOP
 		{
 		public:
-			ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear);
-			ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear,
-				const std::vector<std::pair<float, float> >& oldShears);
+			ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear, 
+				const Vector& old_shear);
+			ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear,
+				const std::vector<Vector>& oldShears);
 
 			virtual void undo();
 			virtual void redo();
@@ -116,8 +117,8 @@ namespace d2d
 			virtual Json::Value storeValues();
 
 		private:
-			float m_xShear, m_yShear;
-			std::vector<std::pair<float, float> > m_oldShears;
+			Vector m_shear;
+			std::vector<Vector> m_oldShears;
 
 		}; // ShearSpritesAOP
 

@@ -26,7 +26,7 @@ private:
 
 	SpriteCtrlNode::Node m_ctrl_node;
 
-	d2d::Vector m_first_scale;
+	Vector m_first_pos, m_first_scale;
 
 }; // ScaleSpriteState
 

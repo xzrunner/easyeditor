@@ -14,6 +14,7 @@ public:
 	virtual ~ShearSpriteState();
 
 	virtual	bool OnMousePress(const Vector& pos);
+	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
 
 private:
 	void Shear(const Vector& curr);
@@ -22,6 +23,8 @@ private:
 	ISprite* m_sprite;
 
 	SpriteCtrlNode::Node m_ctrl_node;
+
+	Vector m_first_shear;
 
 }; // ShearSpriteState
 

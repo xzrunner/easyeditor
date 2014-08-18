@@ -63,20 +63,20 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 			break;
 		case AT_SHEAR:
 			{
-				float xscale = val["xshear"].asDouble();
-				float yscale = val["yshear"].asDouble();
+				float xshear = val["xshear"].asDouble();
+				float yshear = val["yshear"].asDouble();
 
-				std::vector<std::pair<float, float> > oldShears;
+				std::vector<Vector> oldShears;
 				int i = 0;
 				Json::Value pairVal = val["old"][i++];
 				while (!pairVal.isNull()) {
 					float x = pairVal["x"].asDouble();
 					float y = pairVal["y"].asDouble();
-					oldShears.push_back(std::make_pair(x, y));
+					oldShears.push_back(Vector(x, y));
 					pairVal = val["old"][i++];
 				}
 
-				ret = new arrange_sprite::ShearSpritesAOP(sprites, xscale, yscale, oldShears);
+				ret = new arrange_sprite::ShearSpritesAOP(sprites, Vector(xshear, yshear), oldShears);
 			}
 			break;
 		case AT_MIRROR:

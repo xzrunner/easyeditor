@@ -337,7 +337,8 @@ void SpritePropertySetting::shear(float kx, float ky)
 {
 	std::vector<ISprite*> sprites;
 	sprites.push_back(m_sprite);
-	m_editPanel->addHistoryOP(new arrange_sprite::ShearSpritesAOP(sprites, kx, ky));
+	m_editPanel->addHistoryOP(
+		new arrange_sprite::ShearSpritesAOP(sprites, Vector(kx, ky), m_sprite->getShear()));
 
 	m_sprite->setShear(kx, ky);
 }

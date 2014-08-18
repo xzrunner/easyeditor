@@ -272,23 +272,22 @@ Json::Value ScaleSpritesAOP::storeValues()
 // class ShearSpritesAOP
 //////////////////////////////////////////////////////////////////////////
 
-ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear)
+ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear, 
+								 const Vector& old_shear)
 	: SpritesAOP(sprites)
-	, m_xShear(xShear)
-	, m_yShear(yShear)
+	, m_shear(new_shear)
 {
 	m_oldShears.reserve(sprites.size());
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		ISprite* sprite = sprites[i];
-		m_oldShears.push_back(std::make_pair(sprite->getShear().x, sprite->getShear().y));
+		m_oldShears.push_back(old_shear);
 	}
 }
 
-ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, float xShear, float yShear,
-								 const std::vector<std::pair<float, float> >& oldShears)
+ShearSpritesAOP::ShearSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_shear,
+								 const std::vector<Vector>& oldShears)
 	: SpritesAOP(sprites)
-	, m_xShear(xShear)
-	, m_yShear(yShear)
+	, m_shear(new_shear)
 	, m_oldShears(oldShears)
 {
 }
@@ -297,7 +296,7 @@ void ShearSpritesAOP::undo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* sprite = m_sprites[i];
-		sprite->setShear(m_oldShears[i].first, m_oldShears[i].second);
+		sprite->setShear(m_oldShears[i].x, m_oldShears[i].y);
 	} 
 }
 
@@ -305,7 +304,7 @@ void ShearSpritesAOP::redo()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* sprite = m_sprites[i];
-		sprite->setShear(m_xShear, m_yShear);
+		sprite->setShear(m_shear.x, m_shear.y);
 	} 
 }
 
@@ -313,11 +312,11 @@ Json::Value ShearSpritesAOP::storeValues()
 {
 	Json::Value val;
 	val["type"] = AT_SHEAR;
-	val["xshear"] = m_xShear;
-	val["yshear"] = m_yShear;
+	val["xshear"] = m_shear.x;
+	val["yshear"] = m_shear.y;
 	for (size_t i = 0, n = m_oldShears.size(); i < n; ++i) {
-		val["old"][i]["x"] = m_oldShears[i].first;
-		val["old"][i]["y"] = m_oldShears[i].second;
+		val["old"][i]["x"] = m_oldShears[i].x;
+		val["old"][i]["y"] = m_oldShears[i].y;
 	}
 	return val;
 }

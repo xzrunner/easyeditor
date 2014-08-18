@@ -4,6 +4,7 @@
 #include "dataset/ISymbol.h"
 #include "dataset/ISprite.h"
 #include "history/ArrangeSpriteAtomicOP.h"
+#include "history/CombineAOP.h"
 
 namespace d2d
 {
@@ -14,6 +15,7 @@ ScaleSpriteState::ScaleSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& 
 	m_sprite = sprite;
 	m_sprite->retain();
 
+	m_first_pos = m_sprite->getPosition();
 	m_first_scale = m_sprite->getScale();
 }
 
@@ -30,10 +32,15 @@ bool ScaleSpriteState::OnMousePress(const Vector& pos)
 
 AbstractAtomicOP* ScaleSpriteState::OnMouseRelease(const Vector& pos)
 {
+	CombineAOP* comb = new CombineAOP();
+
 	std::vector<ISprite*> sprites;
 	sprites.push_back(m_sprite);
-	return new arrange_sprite::ScaleSpritesAOP(sprites, 
-		m_sprite->getScale(), m_first_scale);
+
+	comb->Insert(new arrange_sprite::MoveSpritesAOP(sprites, m_sprite->getPosition() - m_first_pos));
+	comb->Insert(new arrange_sprite::ScaleSpritesAOP(sprites, m_sprite->getScale(), m_first_scale));
+
+	return comb;
 }
 
 void ScaleSpriteState::Scale(const Vector& curr)

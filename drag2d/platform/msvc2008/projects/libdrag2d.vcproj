@@ -421,6 +421,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="other"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\CombineAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\CombineAOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="edit_component"
