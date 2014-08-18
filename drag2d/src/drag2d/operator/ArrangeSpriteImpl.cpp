@@ -315,6 +315,28 @@ void ArrangeSpriteImpl::clear()
 	m_selected = NULL;
 }
 
+ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
+{
+ 	if (!m_isDeformOpen || !m_selected) return NULL;
+
+	if (isOffsetEnable())
+	{
+		d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
+		if (Math::getDistance(offset, pos) < SCALE_NODE_RADIUS) {
+			return m_selected;
+		}
+	}
+
+	Vector ctrlNodes[8];
+	GetSpriteCtrlNodes(m_selected, ctrlNodes);
+	for (int i = 0; i < 8; ++i) {
+		if (Math::getDistance(ctrlNodes[i], pos) < SCALE_NODE_RADIUS) {
+			return m_selected;
+		}
+	}
+	return NULL;
+}
+
 void ArrangeSpriteImpl::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 {
 	Rect r = sprite->getSymbol().getSize(sprite);

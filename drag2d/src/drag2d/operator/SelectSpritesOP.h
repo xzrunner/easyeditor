@@ -34,11 +34,12 @@ namespace d2d
 		virtual IPropertySetting* createPropertySetting(ISprite* sprite) const;
 		virtual IPropertySetting* createPropertySetting(const std::vector<ISprite*>& sprites) const;
 
+	protected:
+		virtual ISprite* selectByPos(const Vector& pos) const;
+
 	private:
 		void pasteToSelection() const;
 		void copyFromSelection();
-
-		ISprite* selectByPos(const Vector& pos) const;
 
 	protected:
 		SpriteSelection* m_selection;

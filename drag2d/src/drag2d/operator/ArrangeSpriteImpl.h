@@ -36,6 +36,9 @@ public:
 	virtual void onDraw() const;
 	virtual void clear();
 
+	// query edited sprite, include its extra edit region
+	ISprite* QueryEditedSprite(const Vector& pos) const;
+
 public:
 	// 0 - 3 are scale, 4 - 7 are shear
 	// 0 4 1

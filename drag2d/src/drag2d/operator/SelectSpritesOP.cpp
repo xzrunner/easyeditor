@@ -264,6 +264,24 @@ IPropertySetting* SelectSpritesOP::createPropertySetting(const std::vector<ISpri
 	return new MultiSpritesPropertySetting(m_editPanel, sprites);
 }
 
+ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
+{
+	ISprite* selected = NULL;
+	std::vector<ISprite*> sprites;
+	m_spritesImpl->getSpriteSelection()->traverse(FetchAllVisitor<ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		if (sprites[i]->isContain(pos)) {
+			selected = sprites[i];
+			break;
+		}
+	}
+	if (!selected) {
+		selected = m_spritesImpl->querySpriteByPos(pos);
+	}
+	return selected;
+}
+
 void SelectSpritesOP::pasteToSelection() const
 {
 	std::vector<ISprite*> sprites;
@@ -323,24 +341,6 @@ void SelectSpritesOP::copyFromSelection()
 		}
 		wxTheClipboard->Close();
 	}
-}
-
-ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
-{
-	ISprite* selected = NULL;
-	std::vector<ISprite*> sprites;
-	m_spritesImpl->getSpriteSelection()->traverse(FetchAllVisitor<ISprite>(sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i)
-	{
-		if (sprites[i]->isContain(pos)) {
-			selected = sprites[i];
-			break;
-		}
-	}
-	if (!selected) {
-		selected = m_spritesImpl->querySpriteByPos(pos);
-	}
-	return selected;
 }
 
 } // d2d

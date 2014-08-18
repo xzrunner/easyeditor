@@ -102,6 +102,17 @@ bool ArrangeSpriteOP<TBase>::clear()
 	return false;
 }
 
+template <typename TBase>
+ISprite* ArrangeSpriteOP<TBase>::selectByPos(const Vector& pos) const
+{
+	ISprite* sprite = NULL;
+	sprite = m_impl->QueryEditedSprite(pos);
+	if (!sprite) {
+		sprite = TBase::selectByPos(pos);
+	}
+	return sprite;
+}
+
 }
 
 #endif // D2D_ARRANGE_SPRITE_OP_CPP_

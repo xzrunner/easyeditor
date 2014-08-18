@@ -33,6 +33,9 @@ public:
  	virtual bool onDraw() const;
  	virtual bool clear();
 
+protected:
+	virtual ISprite* selectByPos(const Vector& pos) const;
+
 private:
 	ArrangeSpriteImpl* m_impl;
 	
