@@ -48,17 +48,17 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 				float xscale = val["xscale"].asDouble();
 				float yscale = val["yscale"].asDouble();
 
-				std::vector<std::pair<float, float> > oldScales;
+				std::vector<Vector> oldScales;
 				int i = 0;
 				Json::Value pairVal = val["old"][i++];
 				while (!pairVal.isNull()) {
 					float x = pairVal["x"].asDouble();
 					float y = pairVal["y"].asDouble();
-					oldScales.push_back(std::make_pair(x, y));
+					oldScales.push_back(Vector(x, y));
 					pairVal = val["old"][i++];
 				}
 
-				ret = new arrange_sprite::ScaleSpritesAOP(sprites, xscale, yscale, oldScales);
+				ret = new arrange_sprite::ScaleSpritesAOP(sprites, Vector(xscale, yscale), oldScales);
 			}
 			break;
 		case AT_SHEAR:

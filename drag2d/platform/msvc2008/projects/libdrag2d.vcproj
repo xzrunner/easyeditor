@@ -169,14 +169,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteOP.cpp"
 					>
 				</File>
@@ -208,6 +200,70 @@
 					RelativePath="..\..\..\src\drag2d\operator\UniversalArrangeOP.h"
 					>
 				</File>
+				<Filter
+					Name="sprite"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\IArrangeSpriteState.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\OffsetSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\OffsetSpriteState.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\RotateSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\RotateSpriteState.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ScaleSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ScaleSpriteState.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ShearSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\ShearSpriteState.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\SpriteCtrlNode.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\SpriteCtrlNode.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\TranslateSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\TranslateSpriteState.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="draw"

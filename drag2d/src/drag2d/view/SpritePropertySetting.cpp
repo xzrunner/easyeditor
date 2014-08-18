@@ -327,7 +327,8 @@ void SpritePropertySetting::scale(float sx, float sy)
 {
 	std::vector<ISprite*> sprites;
 	sprites.push_back(m_sprite);
-	m_editPanel->addHistoryOP(new arrange_sprite::ScaleSpritesAOP(sprites, sx, sy));
+	m_editPanel->addHistoryOP(new arrange_sprite::ScaleSpritesAOP(sprites, 
+		Vector(sx, sy), m_sprite->getScale()));
 
 	m_sprite->setScale(sx, sy);
 }

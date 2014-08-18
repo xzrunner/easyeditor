@@ -1,13 +1,16 @@
 #include "ArrangeSpriteImpl.h"
 
-#include "common/typedef.h"
-#include "common/Rect.h"
-#include "common/Matrix.h"
+#include "TranslateSpriteState.h"
+#include "RotateSpriteState.h"
+#include "ScaleSpriteState.h"
+#include "ShearSpriteState.h"
+#include "OffsetSpriteState.h"
+
+#include "common/Math.h"
 #include "common/Settings.h"
-#include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
-#include "view/PropertySettingPanel.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/PropertySettingPanel.h"
 #include "history/ArrangeSpriteAtomicOP.h"
 #include "render/PrimitiveDraw.h"
 
@@ -20,33 +23,28 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 									 MultiSpritesImpl* spritesImpl,
 									 PropertySettingPanel* propertyPanel,
 									 bool isDeformOpen,
-									 bool isAutoAlignOpen) 
+									 bool isAutoAlignOpen,
+									 bool isOffsetOpen) 
 	: m_editPanel(editPanel)
 	, m_spritesImpl(spritesImpl)
 	, m_propertyPanel(propertyPanel)
 	, m_isDeformOpen(isDeformOpen)
 	, m_align(spritesImpl)
-	, m_bDirty(false)
-	, m_selected(NULL)
-	, m_bRightPress(false)
+	, m_op_state(NULL)
+	, m_is_offset_open(isOffsetOpen)
 {
 	m_align.SetOpen(isAutoAlignOpen);
 
 	m_selection = spritesImpl->getSpriteSelection();
 	m_selection->retain();
 
-	m_firstPos.setInvalid();
-
-	m_ctrlNodeSelected.setInvalid();
-
-	m_shearNodeStyle.color.set(0.2f, 0.8f, 0.2f);
-	m_shearNodeStyle.fill = false;
-	m_shearNodeStyle.size = 2;
+	m_right_down_pos.setInvalid();
 }
 
 ArrangeSpriteImpl::~ArrangeSpriteImpl()
 {
 	m_selection->release();
+	delete m_op_state;
 }
 
 void ArrangeSpriteImpl::onKeyDown(int keyCode)
@@ -66,7 +64,6 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 			m_editPanel->addHistoryOP(new arrange_sprite::DeleteSpritesAOP(noPhysicsSprites, m_spritesImpl));
 		}
 		m_spritesImpl->removeSpriteSelection();
-		m_selected = NULL;
 		break;
 	case 'a': case 'A':
 		onDirectionKeyDown(e_left);
@@ -88,79 +85,69 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 
 void ArrangeSpriteImpl::onKeyUp(int keyCode)
 {
-	if (m_propertyPanel && m_bDirty)
+	if (m_propertyPanel)
 	{
 		m_propertyPanel->enablePropertyGrid(true);
 		m_propertyPanel->updatePropertyGrid();
-		m_bDirty = false;
 	}
 }
 
 void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 {
-	m_lastPos = m_editPanel->transPosScreenToProject(x, y);
-	m_ctrlNodeSelected.setInvalid();
+	m_align.SetInvisible();
 
-	if (m_isDeformOpen && m_selected)
+	ISprite* selected = NULL;
+	if (m_selection->size() == 1)
 	{
-		if (isOffsetEnable())
-		{
-			d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
-			if (Math::getDistance(offset, m_lastPos) < SCALE_NODE_RADIUS)
-			{
-				m_selOffset = true;
-				return;
-			}
-		}
+		std::vector<ISprite*> sprites;
+		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		selected = sprites[0];
+	}
+	if (!selected) return;
 
+	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+
+	// offset
+	if (m_is_offset_open)
+	{
+		d2d::Vector offset = selected->getPosition() + selected->getOffset();
+		if (Math::getDistance(offset, pos) < SCALE_NODE_RADIUS) {
+			delete m_op_state;
+			m_op_state = new OffsetSpriteState(selected);
+			return;
+		}
+	}
+
+	// scale
+	if (m_isDeformOpen)
+	{
 		Vector ctrlNodes[8];
-		GetSpriteCtrlNodes(m_selected, ctrlNodes);
+		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
-			if (Math::getDistance(ctrlNodes[i], m_lastPos) < SCALE_NODE_RADIUS)
+			if (Math::getDistance(ctrlNodes[i], pos) < SCALE_NODE_RADIUS)
 			{
-				m_ctrlNodeSelected.pos = ctrlNodes[i];
-				m_ctrlNodeSelected.type = CtrlNodeType(i);
+				SpriteCtrlNode::Node cn;
+				cn.pos = ctrlNodes[i];
+				cn.type = SpriteCtrlNode::Type(i);
+				delete m_op_state;
+				m_op_state = new ScaleSpriteState(selected, cn);
 				return;
 			}
 		}
 	}
 
-//	if (TBase::onMouseLeftDown(x, y)) return true;
-
-	setScalingFromSelected();
-
-	if (!m_selection->empty())
-	{
-		m_firstPos = m_lastPos;
-	}
-	m_bRightPress = false;
-
-	m_align.SetInvisible();
+	// translate
+	m_op_state = new TranslateSpriteState(m_selection, pos);
 }
 
 void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 {
-	setScalingFromSelected();
-
-	if (isOffsetEnable())
-		m_selOffset = false;
-
-	if (m_firstPos.isValid() && !m_selection->empty() && !m_bRightPress)
+	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	if (m_op_state) 
 	{
-		Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		if (pos != m_firstPos)
-		{
-			m_editPanel->addHistoryOP(new arrange_sprite::MoveSpritesAOP(*m_selection, pos - m_firstPos));
-			m_firstPos.setInvalid();
-		}
-	}
-
-	if (m_propertyPanel && m_bDirty)
-	{
-		m_propertyPanel->enablePropertyGrid(true);
-		m_propertyPanel->updatePropertyGrid();
-		m_bDirty = false;
+		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
+		m_editPanel->addHistoryOP(history);
 	}
 
 	if (Settings::bSpriteCapture && m_align.IsOpen() && !m_selection->empty())
@@ -169,99 +156,84 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
 		m_align.Align(sprites);
 	}
+
+	if (m_propertyPanel)
+	{
+		m_propertyPanel->enablePropertyGrid(true);
+		m_propertyPanel->updatePropertyGrid();
+	}
 }
 
 void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 {
-	m_lastPos = m_editPanel->transPosScreenToProject(x, y);
-	m_firstPos = m_lastPos;
+	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	m_right_down_pos = pos;
+
+	ISprite* selected = NULL;
 	if (m_selection->size() == 1)
-		m_bRightPress = true;
-
-//	if (TBase::onMouseRightDown(x, y)) return true;
-
-	m_ctrlNodeSelected.setInvalid();
-	if (m_isDeformOpen && m_selected)
 	{
-		Vector ctrlNodes[8];
-		GetSpriteCtrlNodes(m_selected, ctrlNodes);
-		for (int i = 0; i < 8; ++i)
+		std::vector<ISprite*> sprites;
+		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		selected = sprites[0];
+	}
+	if (!selected) return;
+
+	// shear
+	Vector ctrlNodes[8];
+	SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
+	for (int i = 0; i < 8; ++i)
+	{
+		if (Math::getDistance(ctrlNodes[i], pos) < SCALE_NODE_RADIUS)
 		{
-			if (Math::getDistance(ctrlNodes[i], m_lastPos) < SCALE_NODE_RADIUS)
-			{
-				m_ctrlNodeSelected.pos = ctrlNodes[i];
-				m_ctrlNodeSelected.type = CtrlNodeType(i);
-				return;
-			}
+			SpriteCtrlNode::Node cn;
+			cn.pos = ctrlNodes[i];
+			cn.type = SpriteCtrlNode::Type(i);
+			delete m_op_state;
+			m_op_state = new ShearSpriteState(selected, cn);
+			return;
 		}
 	}
 
-	return;
+	// rotate
+	m_op_state = new RotateSpriteState(m_selection, pos);
 }
 
 void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 {
-	if (m_firstPos.isValid() && !m_selection->empty())
+	if (m_right_down_pos.isValid() && !m_selection->empty())
 	{
 		Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
-		if (pos == m_firstPos && sprite)
+		if (pos == m_right_down_pos && sprite)
 		{
 			wxMenu menu;
 			setRightPopupMenu(menu);
 			m_editPanel->PopupMenu(&menu, x, y);
 		}
-		else
+		else if (m_op_state)
 		{
-			m_editPanel->addHistoryOP(new arrange_sprite::RotateSpritesAOP(*m_selection, m_firstPos, pos));
+			AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
+			m_editPanel->addHistoryOP(history);
+		}
+
+		if (m_propertyPanel)
+		{
+			m_propertyPanel->enablePropertyGrid(true);
+			m_propertyPanel->updatePropertyGrid();
 		}
 	}
-
-	if (m_propertyPanel && m_bDirty)
-	{
-		m_propertyPanel->enablePropertyGrid(true);
-		m_propertyPanel->updatePropertyGrid();
-		m_bDirty = false;
-	}
-
-	m_bRightPress = false;
 }
 
 void ArrangeSpriteImpl::onMouseDrag(int x, int y)
 {
-	if (m_isDeformOpen && m_selected)
-	{
-		Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		if (isOffsetEnable() && m_selOffset)
-		{
-			d2d::Vector offset = Math::rotateVector(pos - m_selected->getCenter(), -m_selected->getAngle());
-			m_selected->setOffset(offset);
-			m_editPanel->Refresh();
-			return;
-		}
-		else if (m_ctrlNodeSelected.isValid())
-		{
-			// 				if (m_ctrlNodeSelected.type < UP)
-			// 					scaleSprite(pos);
-			// 				else
-			// 					shearSprite(pos);
-
-			if (m_bRightPress && m_ctrlNodeSelected.type >= UP)
-				shearSprite(pos);
-			else
-				scaleSprite(pos);
-			return;
-		}
-	}
-
-	if (m_selection->empty()) return;
-
 	Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	if (m_bRightPress)
-		rotateSprite(pos);
-	else
-		translateSprite(pos - m_lastPos);
-	m_lastPos = pos;
+	if (m_op_state && m_op_state->OnMousePress(pos))
+	{
+		if (m_propertyPanel) {
+			m_propertyPanel->enablePropertyGrid(false);
+		}
+		m_editPanel->Refresh();
+	}
 }
 
 void ArrangeSpriteImpl::onPopMenuSelected(int type)
@@ -289,18 +261,23 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 
 void ArrangeSpriteImpl::onDraw() const
 {
-	if (m_isDeformOpen && m_selected)
+	if (m_isDeformOpen && m_selection->size() == 1)
 	{
+		ISprite* selected = NULL;
+		std::vector<ISprite*> sprites;
+		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		selected = sprites[0];
+
 		Vector ctrlNodes[8];
-		GetSpriteCtrlNodes(m_selected, ctrlNodes);
+		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 4; ++i)
 			PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 		for (int i = 4; i < 8; ++i)
 			PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
-		if (isOffsetEnable())
+		if (m_is_offset_open)
 		{
-			d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
+			d2d::Vector offset = selected->getPosition() + selected->getOffset();
 			PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 	}
@@ -310,72 +287,48 @@ void ArrangeSpriteImpl::onDraw() const
 
 void ArrangeSpriteImpl::clear()
 {
-	m_lastPos.setInvalid();
-	m_bRightPress = false;
-	m_selected = NULL;
 }
 
 ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 {
- 	if (!m_isDeformOpen || !m_selected) return NULL;
-
-	if (isOffsetEnable())
+	ISprite* selected = NULL;
+	if (m_isDeformOpen && m_selection->size() == 1)
 	{
-		d2d::Vector offset = m_selected->getPosition() + m_selected->getOffset();
+		std::vector<ISprite*> sprites;
+		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		selected = sprites[0];
+	}
+	if (!selected) return NULL;
+
+	if (m_is_offset_open)
+	{
+		d2d::Vector offset = selected->getPosition() + selected->getOffset();
 		if (Math::getDistance(offset, pos) < SCALE_NODE_RADIUS) {
-			return m_selected;
+			return selected;
 		}
 	}
 
 	Vector ctrlNodes[8];
-	GetSpriteCtrlNodes(m_selected, ctrlNodes);
+	SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 	for (int i = 0; i < 8; ++i) {
 		if (Math::getDistance(ctrlNodes[i], pos) < SCALE_NODE_RADIUS) {
-			return m_selected;
+			return selected;
 		}
 	}
 	return NULL;
 }
 
-void ArrangeSpriteImpl::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
-{
-	Rect r = sprite->getSymbol().getSize(sprite);
-	love::Matrix t;
-	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
-		sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
-	// scale
-	nodes[0] = Math::transVector(Vector(r.xMin, r.yMax), t);
-	nodes[1] = Math::transVector(Vector(r.xMax, r.yMax), t);
-	nodes[2] = Math::transVector(Vector(r.xMin, r.yMin), t);
-	nodes[3] = Math::transVector(Vector(r.xMax, r.yMin), t);
-	// shear
-	nodes[4] = Math::transVector(Vector(r.xCenter(), r.yMax), t);
-	nodes[5] = Math::transVector(Vector(r.xMin, r.yCenter()), t);
-	nodes[6] = Math::transVector(Vector(r.xMax, r.yCenter()), t);
-	nodes[7] = Math::transVector(Vector(r.xCenter(), r.yMin), t);
-	// fix for offset
-	d2d::Vector offset = sprite->getOffset();
-	d2d::Vector fix = Math::rotateVector(-offset, sprite->getAngle()) + offset;
-	for (int i = 0; i < 8; ++i)
-		nodes[i] += fix;
-}
-
 void ArrangeSpriteImpl::onDirectionKeyDown(DirectionType type)
 {
-	switch (type)
+	if (!m_op_state) return;
+
+	bool dirty = m_op_state->OnDirectionKeyDown(type);
+	if (dirty)
 	{
-	case e_left:
-		translateSprite(Vector(-1, 0));
-		break;
-	case e_right:
-		translateSprite(Vector(1, 0));
-		break;
-	case e_down:
-		translateSprite(Vector(0, -1));
-		break;
-	case e_up:
-		translateSprite(Vector(0, 1));
-		break;
+		if (m_propertyPanel) {
+			m_propertyPanel->enablePropertyGrid(false);
+		}
+		m_editPanel->Refresh();
 	}
 }
 
@@ -391,236 +344,10 @@ void ArrangeSpriteImpl::onSpaceKeyDown()
 	m_editPanel->Refresh();
 }
 
-void ArrangeSpriteImpl::translateSprite(const Vector& delta)
-{
-	m_selection->traverse(TranslateVisitor(delta));
-	if (!m_selection->empty()) 
-	{
-		if (m_propertyPanel && !m_bDirty)
-		{
-			m_propertyPanel->enablePropertyGrid(false);
-			m_bDirty = true;
-		}
-		m_editPanel->Refresh();
-	}
-}
-
-void ArrangeSpriteImpl::rotateSprite(const Vector& dst)
-{
-	if (m_selection->size() != 1) return;
-	m_selection->traverse(RotateVisitor(m_lastPos, dst));
-	if (m_propertyPanel && !m_bDirty)
-	{
-		m_propertyPanel->enablePropertyGrid(false);
-		m_bDirty = true;
-	}
-	m_editPanel->Refresh();
-}
-
-void ArrangeSpriteImpl::scaleSprite(const Vector& currPos)
-{
-	if (!m_isDeformOpen) return;
-
-	float hw = m_selected->getSymbol().getSize().xLength() * 0.5f;
-	float hh = m_selected->getSymbol().getSize().yLength() * 0.5f;
-	love::Matrix t;
-	const Vector& center = m_selected->getCenter();
-	t.setTransformation(center.x, center.y, m_selected->getAngle(),
-		m_selected->getScale().x, m_selected->getScale().y, 0, 0, m_selected->getShear().x, m_selected->getShear().y);
-
-	Vector ori, fix;
-	if (m_ctrlNodeSelected.type == UP)
-		ori = Math::transVector(Vector(0.0f, hh), t);
-	else if (m_ctrlNodeSelected.type == DOWN)
-		ori = Math::transVector(Vector(0.0f, -hh), t);
-	else if (m_ctrlNodeSelected.type == LEFT)
-		ori = Math::transVector(Vector(-hw, 0.0f), t);
-	else if (m_ctrlNodeSelected.type == RIGHT)
-		ori = Math::transVector(Vector(hw, 0.0f), t);
-	else if (m_ctrlNodeSelected.type == LEFT_UP)
-		ori = Math::transVector(Vector(-hw, hh), t);
-	else if (m_ctrlNodeSelected.type == RIGHT_UP)
-		ori = Math::transVector(Vector(hw, hh), t);
-	else if (m_ctrlNodeSelected.type == LEFT_DOWN)
-		ori = Math::transVector(Vector(-hw, -hh), t);
-	else if (m_ctrlNodeSelected.type == RIGHT_DOWN)
-		ori = Math::transVector(Vector(hw, -hh), t);
-	Math::getFootOfPerpendicular(center, ori, currPos, &fix);
-
-	float scale = Math::getDistance(center, fix) / Math::getDistance(center, ori);
-	scale += (1 - scale) * 0.5f;
-	if (m_ctrlNodeSelected.type == UP || m_ctrlNodeSelected.type == DOWN)
-		m_selected->setScale(m_selected->getScale().x, scale * m_selected->getScale().y);
-	else if (m_ctrlNodeSelected.type == LEFT || m_ctrlNodeSelected.type == RIGHT)
-		m_selected->setScale(scale * m_selected->getScale().x, m_selected->getScale().y);
-	else		
-		m_selected->setScale(scale * m_selected->getScale().x, scale * m_selected->getScale().y);
-
-	Vector offset = (fix - ori) * 0.5f;
-	m_selected->translate(offset);
-
-	if (m_propertyPanel && !m_bDirty)
-	{
-		m_propertyPanel->enablePropertyGrid(false);
-		m_bDirty = true;
-	}
-	m_editPanel->Refresh();
-}
-
-void ArrangeSpriteImpl::shearSprite(const Vector& currPos)
-{
-	if (!m_isDeformOpen) return;
-
-	// fix pos
-	Vector pos;
-	Vector ctrls[8];
-	GetSpriteCtrlNodes(m_selected, ctrls);
-	if (m_ctrlNodeSelected.type == UP)
-		Math::getFootOfPerpendicular(ctrls[0], ctrls[1], currPos, &pos);
-	else if (m_ctrlNodeSelected.type == DOWN)
-		Math::getFootOfPerpendicular(ctrls[2], ctrls[3], currPos, &pos);
-	else if (m_ctrlNodeSelected.type == LEFT)
-		Math::getFootOfPerpendicular(ctrls[0], ctrls[2], currPos, &pos);
-	else if (m_ctrlNodeSelected.type == RIGHT)
-		Math::getFootOfPerpendicular(ctrls[1], ctrls[3], currPos, &pos);
-
-	// M * p = p'
-	//
-	// x' = e0 * x + e4 * y + e12
-	// y' = e1 * x + e5 * y + e13
-	// 
-	// e0 = c * sx - ky * s * sy
-	// e4 = kx * c * sx - s * sy
-	// e12 = px
-	//
-	// pos.x = (c * sx - ky * s * sy) * x + (kx * c * sx - s * sy) * y + px
-	// pos.y = (s * sx + ky * c * sy) * x + (kx * s * sx + c * sy) * y + py
-	// pos.x = c*sx*x - ky*s*sy*x + kx*c*sx*y - s*sy*y + px
-	// pos.y = s*sx*x + ky*c*sy*x + kx*s*sx*y + c*sy*y + py
-	// 
-	// kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y)
-	// kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y)
-	// ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x)
-	// ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x)
-	float c = cos(m_selected->getAngle()), s = sin(m_selected->getAngle());
-	float sx = m_selected->getScale().x, sy = m_selected->getScale().y;
-	float px = m_selected->getPosition().x, py = m_selected->getPosition().y;
-	float kx = m_selected->getShear().x,
-		ky = m_selected->getShear().y;
-
-	float x, y;
-	float hw = m_selected->getSymbol().getSize().xLength() * 0.5f,
-		hh = m_selected->getSymbol().getSize().yLength() * 0.5f;
-
-	if (m_ctrlNodeSelected.type == UP)
-	{
-		x = 0; y = hh;
-		if (c != 0)
-			kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
-		else
-			kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y);
-	}
-	else if (m_ctrlNodeSelected.type == DOWN)
-	{
-		x = 0; y = -hh;
-		if (c != 0)
-			kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
-		else
-			kx = (pos.y - s*sx*x - ky*c*sy*x - c*sy*y - py) / (s*sx*y);
-	}
-	else if (m_ctrlNodeSelected.type == LEFT)
-	{
-		x = -hw; y = 0;
-		if (s != 0)
-			ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x);
-		else
-			ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
-	}
-	else if (m_ctrlNodeSelected.type == RIGHT)
-	{
-		x = hw; y = 0;
-		if (s != 0)
-			ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x);
-		else
-			ky = (pos.y - s*sx*x - kx*s*sx*y - c*sy*y - py) / (c*sy*x);
-	}
-
-	m_selected->setShear(kx, ky);
-
-	if (m_propertyPanel && !m_bDirty)
-	{
-		m_propertyPanel->enablePropertyGrid(false);
-		m_bDirty = true;
-	}
-	m_editPanel->Refresh();
-}
-
 void ArrangeSpriteImpl::setRightPopupMenu(wxMenu& menu)
 {
 	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
 	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
-}
-
-void ArrangeSpriteImpl::setScalingFromSelected()
-{
-	if (!m_isDeformOpen) return;
-
-	bool refresh = false;
-	if (m_selection->size() == 1)
-	{
-		refresh = m_selected == NULL;
-		std::vector<ISprite*> sprites;
-		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
-		m_selected = sprites[0];
-	}
-	else
-	{
-		refresh = m_selected != NULL;
-		m_selected = NULL;
-	}
-
-	if (refresh) 
-		m_editPanel->Refresh();
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class ArrangeSpriteImpl::TranslateVisitor
-//////////////////////////////////////////////////////////////////////////
-
-ArrangeSpriteImpl::TranslateVisitor::
-TranslateVisitor(const Vector& delta)
-	: m_delta(delta)
-{
-}
-
-void ArrangeSpriteImpl::TranslateVisitor::
-visit(Object* object, bool& bFetchNext)
-{
-	ISprite* sprite = static_cast<ISprite*>(object);
-	sprite->translate(m_delta);
-	bFetchNext = true;
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class ArrangeSpriteImpl::RotateVisitor
-//////////////////////////////////////////////////////////////////////////
-
-ArrangeSpriteImpl::RotateVisitor::
-RotateVisitor(const Vector& start, const Vector& end)
-	: m_start(start), m_end(end)
-{
-}
-
-void ArrangeSpriteImpl::RotateVisitor::
-visit(Object* object, bool& bFetchNext)
-{
-	ISprite* sprite = static_cast<ISprite*>(object);
-
-	Vector center = sprite->getPosition() + sprite->getOffset();
-	float angle = Math::getAngleInDirection(center, m_start, m_end);
-	sprite->rotate(angle);
-
-	bFetchNext = false;
 }
 
 }

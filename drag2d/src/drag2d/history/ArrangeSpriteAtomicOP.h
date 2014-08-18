@@ -85,9 +85,10 @@ namespace d2d
 		class ScaleSpritesAOP : public SpritesAOP
 		{
 		public:
-			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale);
-			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, float xScale, float yScale,
-				const std::vector<std::pair<float, float> >& oldScales);
+			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_scale, 
+				const Vector& old_scale);
+			ScaleSpritesAOP(const std::vector<ISprite*>& sprites, const Vector& new_scale,
+				const std::vector<Vector>& oldScales);
 
 			virtual void undo();
 			virtual void redo();
@@ -97,7 +98,7 @@ namespace d2d
 
 		private:
 			Vector m_scale;
-			std::vector<std::pair<float, float> > m_oldScales;
+			std::vector<Vector> m_oldScales;
 
 		}; // ScaleSpritesAOP
 

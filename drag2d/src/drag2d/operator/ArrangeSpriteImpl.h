@@ -7,20 +7,20 @@
 
 #include "common/typedef.h"
 #include "dataset/SelectionSet.h"
-#include "render/ShapeStyle.h"
 
 namespace d2d
 {
 
 class MultiSpritesImpl;
 class PropertySettingPanel;
+class IArrangeSpriteState;
 
 class ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 		PropertySettingPanel* propertyPanel, bool isDeformOpen = true,
-		bool isAutoAlignOpen = true);
+		bool isAutoAlignOpen = true, bool isOffsetOpen = true);
 	~ArrangeSpriteImpl();
 
 	virtual void onKeyDown(int keyCode);
@@ -39,50 +39,11 @@ public:
 	// query edited sprite, include its extra edit region
 	ISprite* QueryEditedSprite(const Vector& pos) const;
 
-public:
-	// 0 - 3 are scale, 4 - 7 are shear
-	// 0 4 1
-	// 5   6
-	// 2 7 3
-	static void GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8]);
-
 protected:
 	virtual void onDirectionKeyDown(DirectionType type);
 	virtual void onSpaceKeyDown();
 
-	virtual void translateSprite(const Vector& delta);
-	virtual void rotateSprite(const Vector& dst);
-	virtual void scaleSprite(const Vector& currPos);
-	virtual void shearSprite(const Vector& currPos);
-
 	virtual void setRightPopupMenu(wxMenu& menu);
-	virtual bool isOffsetEnable() const { return true; };
-
-private:
-	void setScalingFromSelected();
-
-private:
-	class TranslateVisitor : public IVisitor
-	{
-	public:
-		TranslateVisitor(const Vector& delta);
-		virtual void visit(Object* object, bool& bFetchNext);
-
-	private:
-		const Vector& m_delta;
-
-	}; // TranslateVisitor
-
-	class RotateVisitor : public IVisitor
-	{
-	public:
-		RotateVisitor(const Vector& start, const Vector& end);
-		virtual void visit(Object* object, bool& bFetchNext);
-
-	private:
-		const Vector &m_start, &m_end;
-
-	}; // RotateVisitor
 
 protected:
 	SpriteSelection* m_selection;
@@ -91,55 +52,19 @@ private:
 	static const float SCALE_NODE_RADIUS;
 
 private:
-	// 0 4 1
-	// 5   6
-	// 2 7 3
-	enum CtrlNodeType
-	{
-		LEFT_UP = 0,
-		RIGHT_UP,
-		LEFT_DOWN,
-		RIGHT_DOWN,
-		UP,
-		LEFT,
-		RIGHT,
-		DOWN
-	};
-
-	struct CtrlNode
-	{
-		Vector pos;
-		CtrlNodeType type;
-
-		void setInvalid() {
-			pos.setInvalid();
-		}
-		bool isValid() {
-			return pos.isValid();
-		}
-	};
-
-private:
 	AutoAlign m_align;
 
 	EditPanel* m_editPanel;
 	MultiSpritesImpl* m_spritesImpl;
 	PropertySettingPanel* m_propertyPanel;
 
-	bool m_bDirty;
-
-	Vector m_lastPos;
-	ISprite* m_selected;
-	Vector m_firstPos;
-
 	bool m_isDeformOpen;
 
-	bool m_bRightPress;
+	IArrangeSpriteState* m_op_state;
 
-	CtrlNode m_ctrlNodeSelected;
-	bool m_selOffset;
+	bool m_is_offset_open;
 
-	ShapeStyle m_shearNodeStyle;
+	Vector m_right_down_pos;
 
 }; // ArrangeSpriteImpl
 

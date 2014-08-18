@@ -1,0 +1,43 @@
+#ifndef _DRAG2D_TRANSLATE_SPRITE_STATE_H_
+#define _DRAG2D_TRANSLATE_SPRITE_STATE_H_
+
+#include "IArrangeSpriteState.h"
+#include "dataset/SelectionSet.h"
+
+namespace d2d
+{
+
+class TranslateSpriteState : public IArrangeSpriteState
+{
+public:
+	TranslateSpriteState(SpriteSelection* selection, const Vector& first_pos);
+	virtual ~TranslateSpriteState();
+
+	virtual	bool OnMousePress(const Vector& pos);
+	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
+
+	virtual bool OnDirectionKeyDown(DirectionType type);
+
+private:
+	void Translate(const Vector& offset);
+
+private:
+	class Visitor : public IVisitor
+	{
+	public:
+		Visitor(const Vector& offset) : m_offset(offset) {}
+		virtual void visit(Object* object, bool& bFetchNext);
+	private:
+		Vector m_offset;
+	}; // Visitor
+
+private:
+	SpriteSelection* m_selection;
+
+	Vector m_first_pos, m_last_pos;
+	
+}; // TranslateState
+
+}
+
+#endif // _DRAG2D_TRANSLATE_SPRITE_STATE_H_
