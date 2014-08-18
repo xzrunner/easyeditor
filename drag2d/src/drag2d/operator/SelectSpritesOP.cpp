@@ -47,11 +47,7 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 {
 	if (DrawRectangleOP::onKeyDown(keyCode)) return true;
 
-	if (keyCode == WXK_DELETE)
-	{
-		m_spritesImpl->removeSpriteSelection();	
-	}
-	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
+	if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
 		pasteToSelection();
 		m_spritesImpl->removeSpriteSelection();

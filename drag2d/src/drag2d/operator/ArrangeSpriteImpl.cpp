@@ -51,15 +51,14 @@ ArrangeSpriteImpl::~ArrangeSpriteImpl()
 
 void ArrangeSpriteImpl::onKeyDown(int keyCode)
 {
-	std::vector<ISprite*> sprites;
-	m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		sprites[i]->retain();
-
 	switch (keyCode)
 	{
 	case WXK_DELETE:
+		// add history
 		{
+			std::vector<ISprite*> sprites;
+			m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+
 			std::vector<ISprite*> noPhysicsSprites;
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
 				if (!sprites[i]->getBody()) 
@@ -85,9 +84,6 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		onSpaceKeyDown();
 		break;
 	}
-
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		sprites[i]->release();
 }
 
 void ArrangeSpriteImpl::onKeyUp(int keyCode)
