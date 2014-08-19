@@ -1,5 +1,5 @@
-#ifndef _DRAG2D_ROTATE_SPRITE_STATE_H_
-#define _DRAG2D_ROTATE_SPRITE_STATE_H_
+#ifndef _DRAG2D_ROTATE_SPRITE_AOP_H_
+#define _DRAG2D_ROTATE_SPRITE_AOP_H_
 
 #include "AbstractAtomicOP.h"
 
@@ -39,4 +39,4 @@ private:
 
 }
 
-#endif // _DRAG2D_ROTATE_SPRITE_STATE_H_
+#endif // _DRAG2D_ROTATE_SPRITE_AOP_H_

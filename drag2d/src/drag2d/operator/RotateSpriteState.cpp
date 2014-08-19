@@ -33,8 +33,7 @@ bool RotateSpriteState::OnMousePress(const Vector& pos)
 AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)
 {
 	if (pos != m_first_pos) {
-//		return new RotateSpriteAOP(*m_selection, m_first_pos, pos);
-//		return new RotateSpriteAOP();
+		return new RotateSpriteAOP(*m_selection, m_first_pos, pos);
 	}
 	return NULL;
 }
