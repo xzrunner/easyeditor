@@ -169,6 +169,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteOP.cpp"
 					>
 				</File>
