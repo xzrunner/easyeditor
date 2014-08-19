@@ -92,6 +92,7 @@
 #include "operator/SelectShapesOP.h"
 #include "operator/TranslateSpriteState.h"
 #include "operator/RotateSpriteState.h"
+#include "operator/ScaleSpriteState.h"
 
 #include "history/AbstractAtomicOP.h"
 

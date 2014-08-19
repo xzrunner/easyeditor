@@ -274,14 +274,6 @@
 			Name="stage"
 			>
 			<File
-				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easypacker\StageCanvas.cpp"
 				>
 			</File>
@@ -381,6 +373,26 @@
 					</File>
 				</Filter>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="editop"
+			>
+			<File
+				RelativePath="..\..\..\src\easypacker\ArrangeSpriteImpl.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easypacker\ArrangeSpriteImpl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"

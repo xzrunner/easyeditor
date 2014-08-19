@@ -320,61 +320,97 @@ clearClipboard()
 }
 
 //////////////////////////////////////////////////////////////////////////
+// class DesignerPage::TranslateActorState
+//////////////////////////////////////////////////////////////////////////
+
+void DesignerPage::TranslateActorState::
+Translate(const d2d::Vector& offset) 
+{
+	d2d::TranslateSpriteState::Translate(offset);
+
+	LibraryPanel* library = Context::Instance()->library;
+	library->getScenePage()->refreshThumbnail();
+	library->getScenePage()->Refresh();
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class DesignerPage::RotateActorState
+//////////////////////////////////////////////////////////////////////////
+
+void DesignerPage::RotateActorState::
+Rotate(const d2d::Vector& dst) 
+{
+	d2d::RotateSpriteState::Rotate(dst);
+
+	LibraryPanel* library = Context::Instance()->library;
+	library->getScenePage()->refreshThumbnail();
+	library->getScenePage()->Refresh();
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class DesignerPage::ScaleActorState
+//////////////////////////////////////////////////////////////////////////
+
+void DesignerPage::ScaleActorState::
+Scale(const d2d::Vector& curr) 
+{
+	d2d::ScaleSpriteState::Scale(curr);
+
+	LibraryPanel* library = Context::Instance()->library;
+	library->getScenePage()->refreshThumbnail();
+	library->getScenePage()->Refresh();
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class DesignerPage::ArrangeActorImpl
+//////////////////////////////////////////////////////////////////////////
+
+DesignerPage::ArrangeActorImpl::
+ArrangeActorImpl(DesignerPage* editPanel)
+	: d2d::ArrangeSpriteImpl(editPanel, editPanel, Context::Instance()->property)
+	, m_editPanel(editPanel)
+{
+}
+
+void DesignerPage::ArrangeActorImpl::
+onMouseLeftUp(int x, int y)
+{
+	d2d::ArrangeSpriteImpl::onMouseLeftUp(x, y);
+	static_cast<DesignerPage*>(m_editPanel)->updateCodePage();
+}
+
+void DesignerPage::ArrangeActorImpl::
+onMouseRightUp(int x, int y)
+{
+	d2d::ArrangeSpriteImpl::onMouseRightUp(x, y);
+	static_cast<DesignerPage*>(m_editPanel)->updateCodePage();
+}
+
+d2d::IArrangeSpriteState* DesignerPage::ArrangeActorImpl::
+CreateTransalteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+{
+	return new TranslateActorState(selection, first_pos);
+}
+
+d2d::IArrangeSpriteState* DesignerPage::ArrangeActorImpl::
+CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const
+{
+	return new RotateActorState(selection, first_pos);
+}
+
+d2d::IArrangeSpriteState* DesignerPage::
+ArrangeActorImpl::CreateScaleState(d2d::ISprite* sprite, const d2d::SpriteCtrlNode::Node& ctrl_node) const
+{
+	return new ScaleActorState(sprite, ctrl_node);
+}
+
+//////////////////////////////////////////////////////////////////////////
 // class DesignerPage::ArrangeActorOP
 //////////////////////////////////////////////////////////////////////////
 
 DesignerPage::ArrangeActorOP::
 ArrangeActorOP(DesignerPage* editPanel, d2d::AbstractEditCMPT* callback)
-	: d2d::ArrangeSpriteOP<SelectActorOP>(editPanel, editPanel, Context::Instance()->property, callback, false)
+	: d2d::ArrangeSpriteOP<SelectActorOP>(editPanel, editPanel, Context::Instance()->property, 
+	callback, false, true, new ArrangeActorImpl(editPanel))
 {
-}
-
-bool DesignerPage::ArrangeActorOP::
-onMouseLeftUp(int x, int y)
-{
-	if (d2d::ArrangeSpriteOP<SelectActorOP>::onMouseLeftUp(x, y))
-		return true;
-	static_cast<DesignerPage*>(m_editPanel)->updateCodePage();
-	return false;
-}
-
-bool DesignerPage::ArrangeActorOP::
-onMouseRightUp(int x, int y)
-{
-	if (d2d::ArrangeSpriteOP<SelectActorOP>::onMouseRightUp(x, y))
-		return true;
-	static_cast<DesignerPage*>(m_editPanel)->updateCodePage();
-	return false;
-}
-
-void DesignerPage::ArrangeActorOP::
-translateSprite(const d2d::Vector& delta)
-{
-	d2d::ArrangeSpriteOP<SelectActorOP>::
-		translateSprite(delta);
-	refreshThumbnail();
-}
-
-void DesignerPage::ArrangeActorOP::
-rotateSprite(const d2d::Vector& dst)
-{
-	d2d::ArrangeSpriteOP<SelectActorOP>::
-		rotateSprite(dst);
-	refreshThumbnail();
-}
-
-void DesignerPage::ArrangeActorOP::
-scaleSprite(const d2d::Vector& currPos)
-{
-	d2d::ArrangeSpriteOP<SelectActorOP>::
-		scaleSprite(currPos);
-	refreshThumbnail();
-}
-
-void DesignerPage::ArrangeActorOP::
-refreshThumbnail()
-{
-	LibraryPanel* library = Context::Instance()->library;
-	library->getScenePage()->refreshThumbnail();
-	library->getScenePage()->Refresh();
 }

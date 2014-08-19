@@ -13,23 +13,6 @@ namespace epacker
 		ArrangeSpriteOP(StagePanel* editPanel, 
 			d2d::PropertySettingPanel* propertyPanel,
 			d2d::AbstractEditCMPT* callback = NULL);
-
-		virtual bool onMouseLeftUp(int x, int y);
-		virtual bool onMouseRightDown(int x, int y);
-		virtual bool onMouseRightUp(int x, int y);
-
-		virtual bool onDraw() const;
-
-	private:
-		class FixCoordsVisitor : public d2d::IVisitor
-		{
-		public:
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
-		}; // FixCoordsVisitor
-
-	private:
-		StagePanel* m_editPanel;
-
 	}; // ArrangeSpriteOP
 }
 

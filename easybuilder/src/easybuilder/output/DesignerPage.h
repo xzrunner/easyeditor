@@ -83,24 +83,66 @@ namespace ebuilder
 
 		}; // SelectActorOP
 
+		//////////////////////////////////////////////////////////////////////////
+
+		class TranslateActorState : public d2d::TranslateSpriteState
+		{
+		public:
+			TranslateActorState(d2d::SpriteSelection* selection, 
+				const d2d::Vector& first_pos)
+				: d2d::TranslateSpriteState(selection, first_pos) {}
+
+		protected:
+			virtual void Translate(const d2d::Vector& offset);
+		}; // TranslateActorState
+
+		class RotateActorState : public d2d::RotateSpriteState
+		{
+		public:
+			RotateActorState(d2d::SpriteSelection* selection, 
+				const d2d::Vector& first_pos)
+				: d2d::RotateSpriteState(selection, first_pos) {}
+
+		protected:
+			virtual void Rotate(const d2d::Vector& dst);
+		}; // RotateActorState 
+
+		class ScaleActorState : public d2d::ScaleSpriteState
+		{
+		public:
+			ScaleActorState(d2d::ISprite* sprite, 
+				const d2d::SpriteCtrlNode::Node& ctrl_node)
+				: d2d::ScaleSpriteState(sprite, ctrl_node) {}
+
+		protected:
+			void Scale(const d2d::Vector& curr);
+		}; // ScaleActorState 
+
+		class ArrangeActorImpl : public d2d::ArrangeSpriteImpl
+		{
+		public:
+			ArrangeActorImpl(DesignerPage* editPanel);
+
+			virtual void onMouseLeftUp(int x, int y);
+			virtual void onMouseRightUp(int x, int y);
+
+		protected:
+			virtual d2d::IArrangeSpriteState* CreateTransalteState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const;
+			virtual d2d::IArrangeSpriteState* CreateRotateState(d2d::SpriteSelection* selection, const d2d::Vector& first_pos) const;
+			virtual d2d::IArrangeSpriteState* CreateScaleState(d2d::ISprite* sprite, const d2d::SpriteCtrlNode::Node& ctrl_node) const;
+
+		private:
+			DesignerPage* m_editPanel;
+
+		}; // ArrangeActorImpl
+
 		class ArrangeActorOP : public d2d::ArrangeSpriteOP<SelectActorOP>
 		{
 		public:
-			ArrangeActorOP(DesignerPage* editPanel,
-				d2d::AbstractEditCMPT* callback);
-			
-			virtual bool onMouseLeftUp(int x, int y);
-			virtual bool onMouseRightUp(int x, int y);
-
-		protected:
-			virtual void translateSprite(const d2d::Vector& delta);
-			virtual void rotateSprite(const d2d::Vector& dst);
-			virtual void scaleSprite(const d2d::Vector& currPos);
-
-		private:
-			void refreshThumbnail();
-
+			ArrangeActorOP(DesignerPage* editPanel, d2d::AbstractEditCMPT* callback);
 		}; // ArrangeActorOP
+
+		//////////////////////////////////////////////////////////////////////////
 
 	}; // DesignerPage
 }

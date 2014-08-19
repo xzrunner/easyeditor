@@ -18,8 +18,8 @@ public:
 	virtual	bool OnMousePress(const Vector& pos);
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
 
-private:
-	void Scale(const Vector& curr);
+protected:
+	virtual void Scale(const Vector& curr);
 
 private:
 	ISprite* m_sprite;

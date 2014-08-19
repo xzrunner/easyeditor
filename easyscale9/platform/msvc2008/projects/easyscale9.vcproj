@@ -216,6 +216,14 @@
 				Name="compose"
 				>
 				<File
+					RelativePath="..\..\..\src\easyscale9\ComposeImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyscale9\ComposeImpl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyscale9\ComposeOP.cpp"
 					>
 				</File>

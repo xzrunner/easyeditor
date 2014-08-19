@@ -13,9 +13,6 @@ namespace escale9
 		ComposeOP(ToolbarPanel* toolbar, StagePanel* stage, 
 			d2d::PropertySettingPanel* property);
 
-		virtual bool onMouseRightDown(int x, int y);
-		virtual bool onMouseDrag(int x, int y) { return false; }
-
 		virtual bool onActive();
 
 	private:
