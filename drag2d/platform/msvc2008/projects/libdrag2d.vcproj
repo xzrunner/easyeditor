@@ -420,6 +420,14 @@
 					RelativePath="..\..\..\src\drag2d\history\ArrangeSpriteAtomicOP.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\OffsetSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\OffsetSpriteAOP.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="other"

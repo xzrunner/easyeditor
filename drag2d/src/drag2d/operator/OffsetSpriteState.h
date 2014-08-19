@@ -3,6 +3,8 @@
 
 #include "IArrangeSpriteState.h"
 
+#include "common/Vector.h"
+
 namespace d2d
 {
 
@@ -15,9 +17,12 @@ public:
 	virtual ~OffsetSpriteState();
 
 	virtual	bool OnMousePress(const Vector& pos);
+	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
 
 private:
 	ISprite* m_sprite;
+
+	Vector m_old_offset;
 
 }; // OffsetSpriteState
 

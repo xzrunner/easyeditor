@@ -2,6 +2,7 @@
 #include "PropertySettingPanel.h"
 
 #include "history/ArrangeSpriteAtomicOP.h"
+#include "history/OffsetSpriteAOP.h"
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
@@ -345,6 +346,7 @@ void SpritePropertySetting::shear(float kx, float ky)
 
 void SpritePropertySetting::offset(float ox, float oy)
 {
+	m_editPanel->addHistoryOP(new OffsetSpriteAOP(m_sprite, Vector(ox, oy), m_sprite->getOffset()));
 	m_sprite->setOffset(Vector(ox, oy));
 }
 
