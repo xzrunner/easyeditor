@@ -58,6 +58,7 @@ HistoryList::Type HistoryList::redo()
 
 void HistoryList::insert(AbstractAtomicOP* op)
 {
+	assert(op);
 	m_undoStack.push(op);
 	clear(m_redoStack);
 }

@@ -31,10 +31,7 @@ bool TranslateSpriteState::OnMousePress(const Vector& pos)
 
 AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
 {
-	if (pos != m_first_pos) {
-		return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
-	}
-	return NULL;
+	return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
 }
 
 bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
