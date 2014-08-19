@@ -18,8 +18,11 @@ public:
 
 	virtual bool OnDirectionKeyDown(DirectionType type);
 
-private:
-	void Translate(const Vector& offset);
+protected:
+	virtual void Translate(const Vector& offset);
+
+protected:
+	SpriteSelection* GetSelection() { return m_selection; } 
 
 private:
 	class Visitor : public IVisitor

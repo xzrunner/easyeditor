@@ -11,7 +11,8 @@ namespace eanim
 	{
 	public:
 		SkeletonCMPT(wxWindow* parent, const wxString& name,
-			StagePanel* stage, bool vertical);
+			StagePanel* stage, d2d::PropertySettingPanel* property,
+			bool vertical);
 
 	protected:
 		virtual wxSizer* initLayout();

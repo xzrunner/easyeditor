@@ -13,7 +13,8 @@ namespace eanim
 	class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
 	{
 	public:
-		StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
+		StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
+			d2d::PropertySettingPanel* property);
 		virtual ~StagePanel();
 
 		//

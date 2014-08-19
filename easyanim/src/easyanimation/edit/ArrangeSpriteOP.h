@@ -10,7 +10,7 @@ namespace eanim
 	class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
 	{
 	public:
-		ArrangeSpriteOP(StagePanel* stage);
+		ArrangeSpriteOP(StagePanel* stage, d2d::PropertySettingPanel* property);
 		virtual ~ArrangeSpriteOP();
 
 		virtual bool onKeyDown(int keyCode);

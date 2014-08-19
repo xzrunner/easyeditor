@@ -90,6 +90,8 @@
 #include "operator/PasteSymbolPhysicsRandomOP.h"
 #include "operator/PasteSpriteOP.h"
 #include "operator/SelectShapesOP.h"
+#include "operator/TranslateSpriteState.h"
+#include "operator/RotateSpriteState.h"
 
 #include "history/AbstractAtomicOP.h"
 

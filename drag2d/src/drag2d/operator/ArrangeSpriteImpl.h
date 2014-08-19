@@ -4,6 +4,7 @@
 #include <wx/menu.h>
 
 #include "AutoAlign.h"
+#include "SpriteCtrlNode.h"
 
 #include "common/typedef.h"
 #include "dataset/SelectionSet.h"
@@ -44,6 +45,12 @@ protected:
 	virtual void onSpaceKeyDown();
 
 	virtual void setRightPopupMenu(wxMenu& menu);
+
+	virtual IArrangeSpriteState* CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const;
+	virtual IArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const;
+	virtual IArrangeSpriteState* CreateScaleState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual IArrangeSpriteState* CreateShearState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
+	virtual IArrangeSpriteState* CreateOffsetState(ISprite* sprite) const;
 
 protected:
 	SpriteSelection* m_selection;

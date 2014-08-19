@@ -12,7 +12,8 @@ class CommonCMPT : public d2d::AbstractEditCMPT
 {
 public:
 	CommonCMPT(wxWindow* parent, const wxString& name,
-		StagePanel* stage, bool vertical);
+		StagePanel* stage, d2d::PropertySettingPanel* property,
+		bool vertical);
 
 protected:
 	virtual wxSizer* initLayout();

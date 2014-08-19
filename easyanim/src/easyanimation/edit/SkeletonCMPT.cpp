@@ -5,20 +5,22 @@
 
 namespace eanim
 {
-	SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, 
-		StagePanel* stage, bool vertical)
-		: d2d::AbstractEditCMPT(parent, name, stage)
-	{
-		m_editOP = new SkeletonOP(stage);
-	}
 
-	wxSizer* SkeletonCMPT::initLayout()
-	{
-		return NULL;
-	}
+SkeletonCMPT::SkeletonCMPT(wxWindow* parent, const wxString& name, 
+	StagePanel* stage, d2d::PropertySettingPanel* property, bool vertical)
+	: d2d::AbstractEditCMPT(parent, name, stage)
+{
+	m_editOP = new SkeletonOP(stage, property);
+}
 
-	wxSizer* SkeletonCMPT::initEditPanel()
-	{
-		return NULL;
-	}
+wxSizer* SkeletonCMPT::initLayout()
+{
+	return NULL;
+}
+
+wxSizer* SkeletonCMPT::initEditPanel()
+{
+	return NULL;
+}
+
 }

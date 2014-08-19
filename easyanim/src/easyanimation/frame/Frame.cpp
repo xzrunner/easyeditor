@@ -303,18 +303,19 @@ wxWindow* Frame::createLeftFrame(wxWindow* parent)
 wxWindow* Frame::createCenterFrame(wxWindow* parent)
 {
 	Context* context = Context::Instance();
+	d2d::PropertySettingPanel* property = static_cast<d2d::PropertySettingPanel*>(context->property);
 
 	wxSplitterWindow* bottomSplit = new wxSplitterWindow(parent);
 	wxSplitterWindow* topSplit = new wxSplitterWindow(bottomSplit);
 
 	// stage
-	StagePanel* stage = new StagePanel(topSplit, this);
+	StagePanel* stage = new StagePanel(topSplit, this, property);
 	context->stage = stage;
 	static_cast<d2d::LibraryPanel*>(context->library)
 		->setCanvas(stage->getCanvas());
 
 	// toolbar
-	context->toolbar = new ToolbarPanel(topSplit, stage, false);
+	context->toolbar = new ToolbarPanel(topSplit, stage, property, false);
 
 	// timeline
 	TimeLinePanel* timeline = new TimeLinePanel(bottomSplit);

@@ -10,10 +10,14 @@ namespace d2d
 template <typename TBase>
 ArrangeSpriteOP<TBase>::ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 	PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/, 
-	bool isDeformOpen/* = true*/, bool isAutoAlignOpen /*= true*/)
+	bool isDeformOpen/* = true*/, bool isAutoAlignOpen /*= true*/, ArrangeSpriteImpl* impl /*= NULL*/)
 	: TBase(editPanel, spritesImpl, propertyPanel, callback)
 {
-	m_impl = new ArrangeSpriteImpl(editPanel, spritesImpl, propertyPanel, isDeformOpen);
+	if (impl) {
+		m_impl = impl;
+	} else {
+		m_impl = new ArrangeSpriteImpl(editPanel, spritesImpl, propertyPanel, isDeformOpen);
+	}
 }
 
 template <typename TBase>

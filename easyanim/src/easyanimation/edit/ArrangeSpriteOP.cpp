@@ -6,9 +6,9 @@
 namespace eanim
 {
 
-ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
-	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, 
-	static_cast<d2d::PropertySettingPanel*>(Context::Instance()->property))
+ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, 
+								 d2d::PropertySettingPanel* property)
+	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, property)
 	, m_keyDownHandler(this)
 	, m_selected(NULL)
 {

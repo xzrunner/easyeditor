@@ -16,12 +16,13 @@ std::string StagePanel::menu_entries[] =
 	"Del Joint",
 };
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
+					   d2d::PropertySettingPanel* property)
 	: EditPanel(parent, frame)
 	, MultiSpritesImpl(parent)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
-	m_editOP = new ArrangeSpriteOP(this);
+	m_editOP = new ArrangeSpriteOP(this, property);
 	m_canvas = new StageCanvas(this);
 	SetDropTarget(new DragSymbolTarget());
 

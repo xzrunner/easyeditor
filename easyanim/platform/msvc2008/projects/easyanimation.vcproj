@@ -496,6 +496,14 @@
 				Name="skeleton"
 				>
 				<File
+					RelativePath="..\..\..\src\easyanimation\edit\RotateSpriteState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\RotateSpriteState.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyanimation\edit\SkeletonCMPT.cpp"
 					>
 				</File>
@@ -504,11 +512,27 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SkeletonImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\SkeletonImpl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyanimation\edit\SkeletonOP.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\easyanimation\edit\SkeletonOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\TranslateSpriteState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\edit\TranslateSpriteState.h"
 					>
 				</File>
 			</Filter>

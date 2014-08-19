@@ -16,8 +16,13 @@ public:
 	virtual	bool OnMousePress(const Vector& pos);
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
 
-private:
-	void Rotate(const Vector& dst);
+protected:
+	virtual void Rotate(const Vector& dst);
+
+protected:
+	SpriteSelection* GetSelection() { return m_selection; } 
+
+	Vector GetLastPos() const { return m_last_pos; }
 
 private:
 	class Visitor : public IVisitor

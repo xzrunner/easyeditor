@@ -113,7 +113,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 		d2d::Vector offset = selected->getPosition() + selected->getOffset();
 		if (Math::getDistance(offset, pos) < SCALE_NODE_RADIUS) {
 			delete m_op_state;
-			m_op_state = new OffsetSpriteState(selected);
+			m_op_state = CreateOffsetState(selected);
 			return;
 		}
 	}
@@ -131,14 +131,14 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 				cn.pos = ctrlNodes[i];
 				cn.type = SpriteCtrlNode::Type(i);
 				delete m_op_state;
-				m_op_state = new ScaleSpriteState(selected, cn);
+				m_op_state = CreateScaleState(selected, cn);
 				return;
 			}
 		}
 	}
 
 	// translate
-	m_op_state = new TranslateSpriteState(m_selection, pos);
+	m_op_state = CreateTransalteState(m_selection, pos);
 }
 
 void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
@@ -189,13 +189,13 @@ void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 			cn.pos = ctrlNodes[i];
 			cn.type = SpriteCtrlNode::Type(i);
 			delete m_op_state;
-			m_op_state = new ShearSpriteState(selected, cn);
+			m_op_state = CreateShearState(selected, cn);
 			return;
 		}
 	}
 
 	// rotate
-	m_op_state = new RotateSpriteState(m_selection, pos);
+	m_op_state = CreateRotateState(m_selection, pos);
 }
 
 void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
@@ -348,6 +348,31 @@ void ArrangeSpriteImpl::setRightPopupMenu(wxMenu& menu)
 {
 	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
 	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
+}
+
+IArrangeSpriteState* ArrangeSpriteImpl::CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const
+{
+	return new TranslateSpriteState(selection, first_pos);
+}
+
+IArrangeSpriteState* ArrangeSpriteImpl::CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const
+{
+	return new RotateSpriteState(selection, first_pos);
+}
+
+IArrangeSpriteState* ArrangeSpriteImpl::CreateScaleState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+{
+	return new ScaleSpriteState(sprite, ctrl_node);
+}
+
+IArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const
+{
+	return new ShearSpriteState(sprite, ctrl_node);
+}
+
+IArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(ISprite* sprite) const
+{
+	return new OffsetSpriteState(sprite);
 }
 
 }

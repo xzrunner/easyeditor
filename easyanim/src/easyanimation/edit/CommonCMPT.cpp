@@ -12,11 +12,11 @@ namespace eanim
 {
 
 CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name, 
-	StagePanel* stage, bool vertical)
+	StagePanel* stage, d2d::PropertySettingPanel* property, bool vertical)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_vertical(vertical)
 {
-	m_editOP = new ArrangeSpriteOP(stage);
+	m_editOP = new ArrangeSpriteOP(stage, property);
 }
 
 wxSizer* CommonCMPT::initLayout()

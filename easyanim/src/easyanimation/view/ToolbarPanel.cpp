@@ -9,12 +9,13 @@
 namespace eanim
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, bool vertical)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, 
+						   d2d::PropertySettingPanel* property, bool vertical)
 	: d2d::ToolbarPanel(parent, stage, vertical)
 	, m_animChoice(NULL)
 {
-	addChild(new CommonCMPT(this, wxT("Common"), stage, vertical));
-	addChild(new SkeletonCMPT(this, wxT("Skeleton"), stage, vertical));
+	addChild(new CommonCMPT(this, wxT("Common"), stage, property, vertical));
+	addChild(new SkeletonCMPT(this, wxT("Skeleton"), stage, property, vertical));
 	SetSizer(initLayout());	
 }
 
