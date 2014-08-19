@@ -1,6 +1,6 @@
 #include "TranslateSpriteState.h"
 
-#include "history/ArrangeSpriteAtomicOP.h"
+#include "history/TranslateSpriteAOP.h"
 
 namespace d2d
 {
@@ -32,7 +32,7 @@ bool TranslateSpriteState::OnMousePress(const Vector& pos)
 AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
 {
 	if (pos != m_first_pos) {
-		return new arrange_sprite::MoveSpritesAOP(*m_selection, pos - m_first_pos);
+		return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
 	}
 	return NULL;
 }

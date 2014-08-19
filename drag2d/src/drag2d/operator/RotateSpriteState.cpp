@@ -1,7 +1,7 @@
 #include "RotateSpriteState.h"
 
+#include "history/RotateSpriteAOP.h"
 #include "common/Math.h"
-#include "history/ArrangeSpriteAtomicOP.h"
 
 namespace d2d
 {
@@ -33,7 +33,8 @@ bool RotateSpriteState::OnMousePress(const Vector& pos)
 AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)
 {
 	if (pos != m_first_pos) {
-		return new arrange_sprite::RotateSpritesAOP(*m_selection, m_first_pos, pos);
+//		return new RotateSpriteAOP(*m_selection, m_first_pos, pos);
+//		return new RotateSpriteAOP();
 	}
 	return NULL;
 }

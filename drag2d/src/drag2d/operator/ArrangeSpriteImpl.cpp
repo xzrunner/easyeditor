@@ -11,7 +11,7 @@
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
-#include "history/ArrangeSpriteAtomicOP.h"
+#include "history/DeleteSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
 
 namespace d2d
@@ -61,7 +61,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
 				if (!sprites[i]->getBody()) 
 					noPhysicsSprites.push_back(sprites[i]);
-			m_editPanel->addHistoryOP(new arrange_sprite::DeleteSpritesAOP(noPhysicsSprites, m_spritesImpl));
+			m_editPanel->addHistoryOP(new DeleteSpriteAOP(noPhysicsSprites, m_spritesImpl));
 		}
 		m_spritesImpl->removeSpriteSelection();
 		break;

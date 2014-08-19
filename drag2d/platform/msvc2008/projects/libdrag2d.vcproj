@@ -409,6 +409,14 @@
 				RelativePath="..\..\..\src\drag2d\history\AtomicType.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\history\HistoryUtil.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\history\HistoryUtil.h"
+				>
+			</File>
 			<Filter
 				Name="arrange"
 				>
@@ -421,11 +429,59 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\history\DeleteSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\DeleteSpriteAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\MirrorSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\MirrorSpriteAOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\history\OffsetSpriteAOP.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\history\OffsetSpriteAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\RotateSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\RotateSpriteAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\ScaleSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\ScaleSpriteAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\ShearSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\ShearSpriteAOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\TranslateSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\TranslateSpriteAOP.h"
 					>
 				</File>
 			</Filter>

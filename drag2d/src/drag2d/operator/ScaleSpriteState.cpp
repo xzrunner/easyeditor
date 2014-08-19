@@ -5,6 +5,8 @@
 #include "dataset/ISprite.h"
 #include "history/ArrangeSpriteAtomicOP.h"
 #include "history/CombineAOP.h"
+#include "history/TranslateSpriteAOP.h"
+#include "history/ScaleSpriteAOP.h"
 
 namespace d2d
 {
@@ -34,11 +36,8 @@ AbstractAtomicOP* ScaleSpriteState::OnMouseRelease(const Vector& pos)
 {
 	CombineAOP* comb = new CombineAOP();
 
-	std::vector<ISprite*> sprites;
-	sprites.push_back(m_sprite);
-
-	comb->Insert(new arrange_sprite::MoveSpritesAOP(sprites, m_sprite->getPosition() - m_first_pos));
-	comb->Insert(new arrange_sprite::ScaleSpritesAOP(sprites, m_sprite->getScale(), m_first_scale));
+	comb->Insert(new TranslateSpriteAOP(m_sprite, m_sprite->getPosition() - m_first_pos));
+	comb->Insert(new ScaleSpriteAOP(m_sprite, m_sprite->getScale(), m_first_scale));
 
 	return comb;
 }

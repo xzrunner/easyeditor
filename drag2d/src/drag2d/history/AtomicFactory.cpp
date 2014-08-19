@@ -2,6 +2,9 @@
 #include "AtomicType.h"
 #include "ArrangeSpriteAtomicOP.h"
 
+#include "TranslateSpriteAOP.h"
+#include "RotateSpriteAOP.h"
+
 namespace d2d
 {
 
@@ -18,7 +21,7 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 			{
 				float dx = val["dx"].asDouble(),
 					dy = val["dy"].asDouble();
-				ret = new arrange_sprite::MoveSpritesAOP(sprites, Vector(dx, dy));
+				ret = new TranslateSpriteAOP(sprites, Vector(dx, dy));
 			}
 			break;
 		case AT_ROTATE:
@@ -32,9 +35,9 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 				float angle = val["angle"].asDouble();
 
 				if (start.isValid() && end.isValid()) {
-					ret = new arrange_sprite::RotateSpritesAOP(sprites, start, end);
+					ret = new RotateSpriteAOP(sprites, start, end);
 				} else {
-					ret = new arrange_sprite::RotateSpritesAOP(sprites, angle);
+					ret = new RotateSpriteAOP(sprites, angle);
 				}
 			}
 			break;
@@ -58,7 +61,7 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 					pairVal = val["old"][i++];
 				}
 
-				ret = new arrange_sprite::ScaleSpritesAOP(sprites, Vector(xscale, yscale), oldScales);
+//				ret = new arrange_sprite::ScaleSpritesAOP(sprites, Vector(xscale, yscale), oldScales);
 			}
 			break;
 		case AT_SHEAR:
@@ -76,7 +79,7 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 					pairVal = val["old"][i++];
 				}
 
-				ret = new arrange_sprite::ShearSpritesAOP(sprites, Vector(xshear, yshear), oldShears);
+//				ret = new arrange_sprite::ShearSpritesAOP(sprites, Vector(xshear, yshear), oldShears);
 			}
 			break;
 		case AT_MIRROR:
@@ -94,7 +97,7 @@ AbstractAtomicOP* AtomicFactory::create(const Json::Value& val,
 					pairVal = val["old"][i++];
 				}
 
-				ret = new arrange_sprite::MirrorSpritesAOP(sprites, xscale, yscale, oldMirrors);
+//				ret = new arrange_sprite::MirrorSpritesAOP(sprites, xscale, yscale, oldMirrors);
 			}
 			break;
 	}

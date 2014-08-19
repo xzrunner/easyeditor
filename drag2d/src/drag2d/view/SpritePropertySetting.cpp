@@ -1,8 +1,13 @@
 #include "SpritePropertySetting.h"
 #include "PropertySettingPanel.h"
 
-#include "history/ArrangeSpriteAtomicOP.h"
+#include "history/TranslateSpriteAOP.h"
+#include "history/RotateSpriteAOP.h"
+#include "history/ScaleSpriteAOP.h"
+#include "history/ShearSpriteAOP.h"
+#include "history/MirrorSpriteAOP.h"
 #include "history/OffsetSpriteAOP.h"
+
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
@@ -308,7 +313,7 @@ void SpritePropertySetting::translate(float x, float y)
 
 	std::vector<ISprite*> sprites;
 	sprites.push_back(m_sprite);
-	m_editPanel->addHistoryOP(new arrange_sprite::MoveSpritesAOP(sprites, new_pos - m_sprite->getPosition()));
+	m_editPanel->addHistoryOP(new TranslateSpriteAOP(sprites, new_pos - m_sprite->getPosition()));
 
 	m_sprite->setTransform(new_pos, m_sprite->getAngle());
 }
@@ -319,28 +324,22 @@ void SpritePropertySetting::rotate(float angle)
 
 	std::vector<ISprite*> sprites;
 	sprites.push_back(m_sprite);
-	m_editPanel->addHistoryOP(new arrange_sprite::RotateSpritesAOP(sprites, offset_angle));
+	m_editPanel->addHistoryOP(new RotateSpriteAOP(sprites, offset_angle));
 
 	m_sprite->setTransform(m_sprite->getPosition(), angle);	
 }
 
 void SpritePropertySetting::scale(float sx, float sy)
 {
-	std::vector<ISprite*> sprites;
-	sprites.push_back(m_sprite);
-	m_editPanel->addHistoryOP(new arrange_sprite::ScaleSpritesAOP(sprites, 
+	m_editPanel->addHistoryOP(new ScaleSpriteAOP(m_sprite, 
 		Vector(sx, sy), m_sprite->getScale()));
-
 	m_sprite->setScale(sx, sy);
 }
 
 void SpritePropertySetting::shear(float kx, float ky)
 {
-	std::vector<ISprite*> sprites;
-	sprites.push_back(m_sprite);
-	m_editPanel->addHistoryOP(
-		new arrange_sprite::ShearSpritesAOP(sprites, Vector(kx, ky), m_sprite->getShear()));
-
+	m_editPanel->addHistoryOP(new ShearSpriteAOP(m_sprite, 
+		Vector(kx, ky), m_sprite->getShear()));
 	m_sprite->setShear(kx, ky);
 }
 
@@ -352,10 +351,8 @@ void SpritePropertySetting::offset(float ox, float oy)
 
 void SpritePropertySetting::mirror(bool mx, bool my)
 {
-	std::vector<ISprite*> sprites;
-	sprites.push_back(m_sprite);
-	m_editPanel->addHistoryOP(new arrange_sprite::MirrorSpritesAOP(sprites, mx, my));
-
+	m_editPanel->addHistoryOP(new MirrorSpriteAOP(m_sprite, 
+		m_sprite->getMirrorX(), m_sprite->getMirrorY(), mx, my));
 	m_sprite->setMirror(mx, my);
 }
 
