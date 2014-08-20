@@ -51,29 +51,15 @@ TPNode* TPNode::Insert(const Image* image, int w, int h)
 			return NULL;
 		}
 
-		//if (w <= dw && h <= dh) 
-		//{	  
-		//	TPNode* n = Split(w, h);
-		//	if (n) {
-		//		n->m_image = image;
-		//	}
-		//	return n;
-		//} 
-		//else if (w <= dh && h <= dw) 
-		//{
-		//	TPNode* n = Split(h, w);
-		//	if (n) {
-		//		n->m_image = image;
-		//		n->m_is_rotated = true;
-		//	}
-		//	return n;
-		//} 
-		//else 
-		//{
-		//	return NULL;
-		//}
-
-		if (w <= dh && h <= dw) 
+		if (w <= dw && h <= dh) 
+		{	  
+			TPNode* n = Split(w, h);
+			if (n) {
+				n->m_image = image;
+			}
+			return n;
+		} 
+		else if (w <= dh && h <= dw) 
 		{
 			TPNode* n = Split(h, w);
 			if (n) {
