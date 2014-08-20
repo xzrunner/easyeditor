@@ -69,6 +69,9 @@ bool Symbol::isOneLayer() const
 
 void Symbol::loadResources()
 {
+	d2d::DynamicTexture* dtex = d2d::DynamicTexture::Instance();
+	dtex->Begin();
+
 	clear();
 
 	Json::Value value;
@@ -104,6 +107,8 @@ void Symbol::loadResources()
 	}	
 
 	initBounding();
+
+	dtex->End();
 }
 
 void Symbol::clear()

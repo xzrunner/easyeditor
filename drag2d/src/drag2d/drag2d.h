@@ -38,6 +38,7 @@
 #include "dataset/AnimatedGifSaver.h"
 #include "dataset/Layer.h"
 #include "dataset/SpriteTools.h"
+#include "dataset/TPNode.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"
@@ -145,3 +146,4 @@
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
 #include "render/ShaderNew.h"
+#include "render/DynamicTexture.h"

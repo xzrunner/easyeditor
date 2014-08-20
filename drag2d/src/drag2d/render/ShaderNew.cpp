@@ -1,4 +1,5 @@
 #include "ShaderNew.h"
+#include "DynamicTexture.h"
 
 #include <GL/GLee.h>
 #include <stdio.h>
@@ -133,6 +134,10 @@ void ShaderNew::SetFBO(int fbo)
 
 void ShaderNew::Draw(const float vb[16], int texid)
 {
+	if (m_fbo == 1) {
+		int zz = 0;
+	}
+
 	SetTexture(texid);
 
 	CopyVertex(vb);
@@ -144,6 +149,8 @@ void ShaderNew::Draw(const float vb[16], int texid)
 void ShaderNew::Flush()
 {
 	Commit();
+
+	DynamicTexture::Instance()->DebugDraw();
 }
 
 void ShaderNew::load()
@@ -365,6 +372,10 @@ void ShaderNew::Commit()
 {
 	if (m_sprite_count == 0) {
 		return;
+	}
+
+	if (m_fbo == 1) {
+		int zz = 0;
 	}
 
 	sprite();

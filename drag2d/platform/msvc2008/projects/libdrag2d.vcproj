@@ -621,6 +621,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\dataset\TPNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\TPNode.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.cpp"
 					>
 				</File>
@@ -894,6 +902,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicTexture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicTexture.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\render\GL10.cpp"
 				>
 			</File>
@@ -919,6 +935,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\render\PrimitiveDraw.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderList.h"
 				>
 			</File>
 			<File

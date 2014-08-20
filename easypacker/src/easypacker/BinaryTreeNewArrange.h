@@ -18,44 +18,6 @@ public:
 	}
 
 private:
-	struct Node
-	{
-		const d2d::ImageSprite* image;
-
-		int xmin, ymin, xmax, ymax;
-		bool is_rotated;
-		bool is_split_y;
-
-		Node* next;
-		Node* child;
-		Node* parent;
-
-		int remain_area;
-		int remain_len;
-		int remain_space;
-
-	
-	public:
-		Node();
-		Node(int width, int height);
-		~Node() {
-			// todo
-		}
-
-		Node* Insert(const d2d::ImageSprite& img, int w, int h);
-	
-		bool IsRoomEnough(int w, int h) const;
-
-	private:
-		Node* Split(int w, int h);
-
-		float GetArea() const;
-		float GetMaxLength() const;
-
-		void UpdateRemain();
-	};
-
-private:
 	void InitRoot();
 
 	bool Insert(d2d::ImageSprite& img) const;
@@ -65,9 +27,9 @@ private:
 	#define NODE_SIZE 4096*2
 
 private:
-	Node* m_root;
+	d2d::TPNode* m_root;
 
-	std::map<std::string, Node*> m_mapImages;
+	std::map<std::string, d2d::TPNode*> m_mapImages;
 
 	int m_tex_account;
 
