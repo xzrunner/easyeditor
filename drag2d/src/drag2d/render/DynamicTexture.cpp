@@ -216,27 +216,34 @@ void DynamicTexture::InsertImage(const Image& img)
 	vb[9] = ymax;
 	vb[12] = xmin;
 	vb[13] = ymax;
+
+	int ori_width = img.originWidth(),
+		ori_height = img.originHeight();
+	float txmin = (r.xMin + ori_width * 0.5f) / ori_width;
+	float txmax = (r.xMax + ori_width * 0.5f) / ori_width;
+	float tymin = (r.yMin + ori_height * 0.5f) / ori_height;
+	float tymax = (r.yMax + ori_height * 0.5f) / ori_height;
 	if (n->IsRotated())
 	{
-		vb[2] = 0;
-		vb[3] = 1;
-		vb[6] = 0;
-		vb[7] = 0;
-		vb[10] = 1;
-		vb[11] = 0;
-		vb[14] = 1;
-		vb[15] = 1;
+		vb[2] = txmin;
+		vb[3] = tymax;
+		vb[6] = txmin;
+		vb[7] = tymin;
+		vb[10] = txmax;
+		vb[11] = tymin;
+		vb[14] = txmax;
+		vb[15] = tymax;
 	}
 	else
 	{
-		vb[2] = 0;
-		vb[3] = 0;
-		vb[6] = 1;
-		vb[7] = 0;
-		vb[10] = 1;
-		vb[11] = 1;
-		vb[14] = 0;
-		vb[15] = 1;
+		vb[2] = txmin;
+		vb[3] = tymin;
+		vb[6] = txmax;
+		vb[7] = tymin;
+		vb[10] = txmax;
+		vb[11] = tymax;
+		vb[14] = txmin;
+		vb[15] = tymax;
 	}
 	ShaderNew::Instance()->Draw(vb, img.textureID());
 }
