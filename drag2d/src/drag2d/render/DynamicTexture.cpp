@@ -5,8 +5,6 @@
 #include "dataset/TPNode.h"
 #include "render/ShaderNew.h"
 
-//#include <gl/glew.h>
-
 #include <opengl/opengl.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
@@ -60,17 +58,18 @@ void DynamicTexture::Begin()
 	++m_preload_idx;
 }
 
-void DynamicTexture::Insert(const Image& img)
+void DynamicTexture::Insert(Image* img)
 {
 	// find
-	const wxString& filepath = img.filepath();
+	const wxString& filepath = img->filepath();
 	if (m_map_images.find(filepath) != m_map_images.end()) {
 		return;
 	}
 
 	// todo need insert directly
 	if (m_preload_idx != 0) {
-		m_preload_list.insert(&img);
+		img->retain();
+		m_preload_list.push_back(img);
 	} else {
 		ShaderNew* shader = ShaderNew::Instance();
 		shader->SetFBO(m_fbo);
@@ -94,11 +93,12 @@ void DynamicTexture::End()
 	shader->sprite();
 
 	glViewport(0, 0, m_width, m_height);
-
-	std::set<const Image*, ImageSizeCmp>::iterator itr 
-		= m_preload_list.begin();
+	std::sort(m_preload_list.begin(), m_preload_list.end(), ImageSizeCmp());
+	std::vector<const Image*>::iterator itr = m_preload_list.begin();
 	for ( ; itr != m_preload_list.end(); ++itr) {
-		InsertImage(**itr);
+		const Image* img = *itr;
+		InsertImage(img);
+		img->release();
 	}
 	m_preload_list.clear();
 
@@ -186,23 +186,28 @@ void DynamicTexture::InitRoot(int width, int height)
 	m_root->SetChild(c);
 }
 
-void DynamicTexture::InsertImage(const Image& img)
+void DynamicTexture::InsertImage(const Image* img)
 {
-	d2d::Rect r = img.getRegion();
+	const wxString& filepath = img->filepath();
+	if (m_map_images.find(filepath) != m_map_images.end()) {
+		return;
+	}
+
+	d2d::Rect r = img->getRegion();
 	int w = r.xLength();
 	int h = r.yLength();
 	d2d::TPNode* n = NULL;
 	if (m_root->IsRoomEnough(w, h)) {
-		n = m_root->Insert(&img, w+m_padding*2, h+m_padding*2);
+		n = m_root->Insert(img, w+m_padding*2, h+m_padding*2);
 	} else {
-		n = m_root->Insert(&img, h+m_padding*2, w+m_padding*2);
+		n = m_root->Insert(img, h+m_padding*2, w+m_padding*2);
 	}
 
 	if (!n) {
 		return;
 	}
 
-	m_map_images.insert(std::make_pair(img.filepath(), n));
+	m_map_images.insert(std::make_pair(img->filepath(), n));
 	// draw fbo
 	float xmin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
 	float xmax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
@@ -218,8 +223,8 @@ void DynamicTexture::InsertImage(const Image& img)
 	vb[12] = xmin;
 	vb[13] = ymax;
 
-	int ori_width = img.originWidth(),
-		ori_height = img.originHeight();
+	int ori_width = img->originWidth(),
+		ori_height = img->originHeight();
 	float txmin = (r.xMin + ori_width * 0.5f) / ori_width;
 	float txmax = (r.xMax + ori_width * 0.5f) / ori_width;
 	float tymin = (r.yMin + ori_height * 0.5f) / ori_height;
@@ -246,7 +251,9 @@ void DynamicTexture::InsertImage(const Image& img)
 		vb[14] = txmin;
 		vb[15] = tymax;
 	}
-	ShaderNew::Instance()->Draw(vb, img.textureID());
+	ShaderNew::Instance()->Draw(vb, img->textureID());
+
+	m_map_images.insert(std::make_pair(img->filepath(), n));
 }
 
 }

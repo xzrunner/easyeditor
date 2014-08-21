@@ -74,7 +74,7 @@ bool Image::loadFromFile(const wxString& filepath)
 		}
 
 		// todo
-		DynamicTexture::Instance()->Insert(*this);
+		DynamicTexture::Instance()->Insert(this);
 
  		return true;
  	}

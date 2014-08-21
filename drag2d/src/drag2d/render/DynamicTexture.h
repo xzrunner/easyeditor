@@ -21,7 +21,7 @@ public:
 	static DynamicTexture* Instance();
 
 	void Begin();
-	void Insert(const Image& img);
+	void Insert(Image* img);
 	void End();
 
 	float GetPadding() const { return m_padding; }
@@ -44,7 +44,7 @@ private:
 	void InitFBO();
 	void InitRoot(int width, int height);
 
-	void InsertImage(const Image& img);
+	void InsertImage(const Image* img);
 
 private:
 	class ImageSizeCmp
@@ -91,7 +91,7 @@ private:
 	TPNode* m_root;
 
 	int m_preload_idx;
-	std::set<const Image*, ImageSizeCmp> m_preload_list;
+	std::vector<const Image*> m_preload_list;
 
 	std::map<wxString, TPNode*> m_map_images;
 	
