@@ -16,7 +16,7 @@ namespace d2d
 
 const int DynamicTexture::WIDTH = 512;
 const int DynamicTexture::HEIGHT = 512;
-const int DynamicTexture::PADDING = 1;
+const int DynamicTexture::PADDING = 50;
 
 DynamicTexture* DynamicTexture::m_instance = NULL;
 DynamicTexture* DynamicTexture::Instance()
@@ -32,6 +32,7 @@ DynamicTexture::DynamicTexture()
 {
 	m_width = WIDTH;
 	m_height = HEIGHT;
+	m_padding = PADDING;
 
 	initOpenGLExtensions();
 
@@ -192,9 +193,9 @@ void DynamicTexture::InsertImage(const Image& img)
 	int h = r.yLength();
 	d2d::TPNode* n = NULL;
 	if (m_root->IsRoomEnough(w, h)) {
-		n = m_root->Insert(&img, w+PADDING*2, h+PADDING*2);
+		n = m_root->Insert(&img, w+m_padding*2, h+m_padding*2);
 	} else {
-		n = m_root->Insert(&img, h+PADDING*2, w+PADDING*2);
+		n = m_root->Insert(&img, h+m_padding*2, w+m_padding*2);
 	}
 
 	if (!n) {
@@ -203,10 +204,10 @@ void DynamicTexture::InsertImage(const Image& img)
 
 	m_map_images.insert(std::make_pair(img.filepath(), n));
 	// draw fbo
-	float xmin = ((float)n->GetMinX() / m_width) * 2 - 1;
-	float xmax = ((float)n->GetMaxX() / m_width) * 2 - 1;
-	float ymin = ((float)n->GetMinY() / m_height) * 2 - 1;
-	float ymax = ((float)n->GetMaxY() / m_height) * 2 - 1;
+	float xmin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
+	float xmax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
+	float ymin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
+	float ymax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
 	float vb[16];
 	vb[0] = xmin;
 	vb[1] = ymin;

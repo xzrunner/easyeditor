@@ -24,6 +24,8 @@ public:
 	void Insert(const Image& img);
 	void End();
 
+	float GetPadding() const { return m_padding; }
+
 	const TPNode* Query(const Image& img) const;
 
 	int GetTextureID() const { return m_tex; }
@@ -81,6 +83,7 @@ private:
 
 private:
 	int m_width, m_height;
+	int m_padding;
 
 	GLuint m_tex;
 	GLuint m_fbo;

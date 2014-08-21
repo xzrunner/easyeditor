@@ -187,13 +187,14 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 	const TPNode* n = dt->Query(*this);
 	if (n)
 	{
+		float padding = dt->GetPadding();
 		int width = dt->GetWidth();
 		int height = dt->GetHeight();
 		texid = dt->GetTextureID();
-		txmin = (float)n->GetMinX() / width;
-		txmax = (float)n->GetMaxX() / width;
-		tymin = (float)n->GetMinY() / height;
-		tymax = (float)n->GetMaxY() / height;
+		txmin = (n->GetMinX()+padding) / width;
+		txmax = (n->GetMaxX()-padding) / width;
+		tymin = (n->GetMinY()+padding) / height;
+		tymax = (n->GetMaxY()-padding) / height;
 
 		if (n->IsRotated())
 		{
