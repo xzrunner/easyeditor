@@ -134,10 +134,6 @@ void ShaderNew::SetFBO(int fbo)
 
 void ShaderNew::Draw(const float vb[16], int texid)
 {
-	if (m_fbo == 1) {
-		int zz = 0;
-	}
-
 	SetTexture(texid);
 
 	CopyVertex(vb);
@@ -373,12 +369,6 @@ void ShaderNew::Commit()
 	if (m_sprite_count == 0) {
 		return;
 	}
-
-	if (m_fbo == 1) {
-		int zz = 0;
-	}
-
-	sprite();
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
 
