@@ -46,6 +46,10 @@ private:
 
 	void InsertImage(const Image* img);
 
+	void DrawRegion(const Rect& vertex, const Rect& texcoords, int texid, bool is_rotate);
+
+	void DrawExtrude(const Image* img, TPNode* node);
+
 private:
 	class ImageSizeCmp
 	{
@@ -77,13 +81,12 @@ private:
 	}; // NodeCmp
 
 private:
-	static const int WIDTH;
-	static const int HEIGHT;
-	static const int PADDING;
+	static const int WIDTH, HEIGHT;
+	static const int PADDING, EXTRUDE;
 
 private:
 	int m_width, m_height;
-	int m_padding;
+	int m_padding, m_extrude;
 
 	GLuint m_tex;
 	GLuint m_fbo;

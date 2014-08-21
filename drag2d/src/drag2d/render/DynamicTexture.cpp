@@ -14,7 +14,8 @@ namespace d2d
 
 const int DynamicTexture::WIDTH = 512;
 const int DynamicTexture::HEIGHT = 512;
-const int DynamicTexture::PADDING = 50;
+const int DynamicTexture::PADDING = 1;
+const int DynamicTexture::EXTRUDE = 1;
 
 DynamicTexture* DynamicTexture::m_instance = NULL;
 DynamicTexture* DynamicTexture::Instance()
@@ -31,6 +32,7 @@ DynamicTexture::DynamicTexture()
 	m_width = WIDTH;
 	m_height = HEIGHT;
 	m_padding = PADDING;
+	m_extrude = EXTRUDE;
 
 	initOpenGLExtensions();
 
@@ -207,53 +209,117 @@ void DynamicTexture::InsertImage(const Image* img)
 		return;
 	}
 
-	m_map_images.insert(std::make_pair(img->filepath(), n));
 	// draw fbo
-	float xmin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-	float xmax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
-	float ymin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
-	float ymax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
-	float vb[16];
-	vb[0] = xmin;
-	vb[1] = ymin;
-	vb[4] = xmax;
-	vb[5] = ymin;
-	vb[8] = xmax;
-	vb[9] = ymax;
-	vb[12] = xmin;
-	vb[13] = ymax;
+	Rect r_vertex, r_texcoords;
+	r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
+	r_vertex.xMax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
+	r_vertex.yMin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
+	r_vertex.yMax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
 
 	int ori_width = img->originWidth(),
 		ori_height = img->originHeight();
-	float txmin = (r.xMin + ori_width * 0.5f) / ori_width;
-	float txmax = (r.xMax + ori_width * 0.5f) / ori_width;
-	float tymin = (r.yMin + ori_height * 0.5f) / ori_height;
-	float tymax = (r.yMax + ori_height * 0.5f) / ori_height;
-	if (n->IsRotated())
+	r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
+	r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
+	r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
+	r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
+	DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
+
+	DrawExtrude(img, n);
+
+	m_map_images.insert(std::make_pair(img->filepath(), n));
+}
+
+void DynamicTexture::DrawRegion(const Rect& vertex, const Rect& texcoords, int texid, bool is_rotate)
+{
+	float vb[16];
+	vb[0] = vertex.xMin;
+	vb[1] = vertex.yMin;
+	vb[4] = vertex.xMax;
+	vb[5] = vertex.yMin;
+	vb[8] = vertex.xMax;
+	vb[9] = vertex.yMax;
+	vb[12] = vertex.xMin;
+	vb[13] = vertex.yMax;
+
+	if (is_rotate)
 	{
-		vb[2] = txmin;
-		vb[3] = tymax;
-		vb[6] = txmin;
-		vb[7] = tymin;
-		vb[10] = txmax;
-		vb[11] = tymin;
-		vb[14] = txmax;
-		vb[15] = tymax;
+		vb[2] = texcoords.xMin;
+		vb[3] = texcoords.yMax;
+		vb[6] = texcoords.xMin;
+		vb[7] = texcoords.yMin;
+		vb[10] = texcoords.xMax;
+		vb[11] = texcoords.yMin;
+		vb[14] = texcoords.xMax;
+		vb[15] = texcoords.yMax;
 	}
 	else
 	{
-		vb[2] = txmin;
-		vb[3] = tymin;
-		vb[6] = txmax;
-		vb[7] = tymin;
-		vb[10] = txmax;
-		vb[11] = tymax;
-		vb[14] = txmin;
-		vb[15] = tymax;
+		vb[2] = texcoords.xMin;
+		vb[3] = texcoords.yMin;
+		vb[6] = texcoords.xMax;
+		vb[7] = texcoords.yMin;
+		vb[10] = texcoords.xMax;
+		vb[11] = texcoords.yMax;
+		vb[14] = texcoords.xMin;
+		vb[15] = texcoords.yMax;
 	}
-	ShaderNew::Instance()->Draw(vb, img->textureID());
+	ShaderNew::Instance()->Draw(vb, texid);
+}
 
-	m_map_images.insert(std::make_pair(img->filepath(), n));
+void DynamicTexture::DrawExtrude(const Image* img, TPNode* n)
+{
+	d2d::Rect r = img->getRegion();
+	int ori_width = img->originWidth(),
+		ori_height = img->originHeight();
+	Rect r_vertex, r_texcoords;
+
+	// up
+	r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
+	r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
+	r_texcoords.yMin = (r.yMax - 1 + ori_height * 0.5f) / ori_height;
+	r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
+	r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
+	r_vertex.xMax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
+	for (int i = 0; i < m_extrude; ++i)
+	{
+		r_vertex.yMin = ((float)(n->GetMaxY()+i-m_padding) / m_height) * 2 - 1;
+		r_vertex.yMax = ((float)(n->GetMaxY()+1+i-m_padding) / m_height) * 2 - 1;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
+	}
+
+	// down
+	r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
+	r_texcoords.yMax = (r.yMin + 1 + ori_height * 0.5f) / ori_height;
+	for (int i = 0; i < m_extrude; ++i)
+	{
+		r_vertex.yMin = ((float)(n->GetMinY()-1-i+m_padding) / m_height) * 2 - 1;
+		r_vertex.yMax = ((float)(n->GetMinY()-i+m_padding) / m_height) * 2 - 1;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
+	}
+
+	// left
+	r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
+	r_texcoords.xMax = (r.xMin + 1 + ori_width * 0.5f) / ori_width;
+	r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
+	r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
+	r_vertex.yMin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
+	r_vertex.yMax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
+	for (int i = 0; i < m_extrude; ++i)
+	{
+		r_vertex.xMin = ((float)(n->GetMinX()-1-i+m_padding) / m_width) * 2 - 1;
+		r_vertex.xMax = ((float)(n->GetMinX()-i+m_padding) / m_width) * 2 - 1;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
+	}
+
+	// right
+	r_texcoords.xMin = (r.xMax - 1 + ori_width * 0.5f) / ori_width;
+	r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
+	for (int i = 0; i < m_extrude; ++i)
+	{
+		r_vertex.xMin = ((float)(n->GetMaxX()+i-m_padding) / m_width) * 2 - 1;
+		r_vertex.xMax = ((float)(n->GetMaxX()+1+i-m_padding) / m_width) * 2 - 1;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
+	}
 }
 
 }
