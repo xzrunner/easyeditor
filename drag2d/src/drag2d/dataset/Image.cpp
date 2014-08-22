@@ -224,7 +224,6 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 //	RenderList::Instance()->Insert(texid, vertices, texcoords);
 
 	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(0);
 	shader->sprite();
 	float vb[16];
 	for (int j = 0; j < 4; ++j)
