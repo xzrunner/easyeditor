@@ -2,6 +2,7 @@
 
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
+#include "render/DynamicTexture.h"
 
 namespace d2d
 {
@@ -15,8 +16,9 @@ DialogStageCanvas::DialogStageCanvas(EditPanel* editPanel,
 
 void DialogStageCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	OrthoCanvas::initGL();
 	m_symbol->reloadTexture();
+	DynamicTexture::Instance()->ReloadTexture();
 }
 
 void DialogStageCanvas::onDraw()
