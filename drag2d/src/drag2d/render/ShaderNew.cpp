@@ -65,6 +65,10 @@ void ShaderNew::SetShapeColor(const Colorf& col)
 void ShaderNew::sprite()
 {
 	if (m_prog_curr != m_prog_sprite) {
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit change shader to sprite"));
+		}
+
 		Commit();
 
 		glEnable(GL_BLEND);
@@ -81,6 +85,10 @@ void ShaderNew::sprite()
 void ShaderNew::shape()
 {
 	if (m_prog_curr != m_prog_shape) {
+		if (m_sprite_count != 0) {
+//			wxLogDebug(_T("Shader Commit change shader to shape"));
+		}
+
 		Commit();
 
 		glEnable(GL_BLEND);
@@ -93,6 +101,10 @@ void ShaderNew::shape()
 
 void ShaderNew::null()
 {
+	if (m_sprite_count != 0) {
+		wxLogDebug(_T("Shader Commit change shader to null"));
+	}
+
 	Commit();
 
 	glEnable(GL_BLEND);
@@ -116,6 +128,10 @@ void ShaderNew::SetTexture(int tex)
 {
 	if (m_tex != tex) 
 	{
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit SetTexture %d to %d"), m_tex, tex);
+		}
+
 		Commit();
 		m_tex = (GLuint)tex;
 		glBindTexture(GL_TEXTURE_2D, m_tex);
@@ -126,6 +142,10 @@ void ShaderNew::SetFBO(int fbo)
 {
 	if (m_fbo != fbo) 
 	{
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit SetFBO %d to %d"), m_fbo, fbo);
+		}
+
 		Commit();
 		m_fbo = (GLuint)fbo;
 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
@@ -138,12 +158,20 @@ void ShaderNew::Draw(const float vb[16], int texid)
 
 	CopyVertex(vb);
 	if (++m_sprite_count >= MAX_COMMBINE) {
+
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit count to max"));
+		}
 		Commit();
 	}
 }
 
 void ShaderNew::Flush()
 {
+	if (m_sprite_count != 0) {
+		wxLogDebug(_T("Shader Commit Flush"));
+	}
+
 	Commit();
 
 	DynamicTexture::Instance()->DebugDraw();
@@ -368,6 +396,11 @@ void ShaderNew::Commit()
 {
 	if (m_sprite_count == 0) {
 		return;
+	}
+
+	if (m_fbo != 0 || m_tex != 1) {
+		int zz = 0;
+		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
 	}
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);

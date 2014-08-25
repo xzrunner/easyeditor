@@ -185,28 +185,34 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 	float txmin, txmax, tymin, tymax;
 	DynamicTexture* dt = DynamicTexture::Instance();
 	const TPNode* n = dt->Query(*this);
-	if (n)
-	{
-		float padding = dt->GetPadding();
-		int width = dt->GetWidth();
-		int height = dt->GetHeight();
-		texid = dt->GetTextureID();
-		txmin = (n->GetMinX()+padding) / width;
-		txmax = (n->GetMaxX()-padding) / width;
-		tymin = (n->GetMinY()+padding) / height;
-		tymax = (n->GetMaxY()-padding) / height;
-
-		if (n->IsRotated())
-		{
-			d2d::Vector tmp = vertices[3];
-			vertices[3] = vertices[2];
-			vertices[2] = vertices[1];
-			vertices[1] = vertices[0];
-			vertices[0] = tmp;
+ 	if (n)
+ 	{
+ 		float padding = dt->GetPadding();
+ 		int width = dt->GetWidth();
+ 		int height = dt->GetHeight();
+ 		texid = dt->GetTextureID();
+ 		txmin = (n->GetMinX()+padding) / width;
+ 		txmax = (n->GetMaxX()-padding) / width;
+ 		tymin = (n->GetMinY()+padding) / height;
+ 		tymax = (n->GetMaxY()-padding) / height;
+ 
+		if (texid != 1) {
+			wxLogDebug(_T("img dt's tex = %d"), texid);
 		}
-	}
-	else
+
+ 		if (n->IsRotated())
+ 		{
+ 			d2d::Vector tmp = vertices[3];
+ 			vertices[3] = vertices[2];
+ 			vertices[2] = vertices[1];
+ 			vertices[1] = vertices[0];
+ 			vertices[0] = tmp;
+ 		}
+ 	}
+ 	else
 	{
+		wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
+
 		texid = m_textureID;
 	 	d2d::Vector texcoords[4];
 	 	float tot_hw = m_width * 0.5f,
@@ -233,6 +239,8 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 		vb[j*4+2] = texcoords[j].x;
 		vb[j*4+3] = texcoords[j].y;
 	}
+
+	//shader->SetTexture(0);
 	shader->Draw(vb, texid);
 }
 
