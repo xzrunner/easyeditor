@@ -78,6 +78,7 @@ void DynamicTexture::Insert(Image* img)
  		shader->sprite();
  		glViewport(0, 0, m_width, m_height);
 		InsertImage(img);
+		// set fbo to force flush
 		shader->SetFBO(0);
 	}
 }
@@ -104,6 +105,8 @@ void DynamicTexture::End()
 	}
 	m_preload_list.clear();
 
+	// set fbo to force flush
+	// todo dtex连续insert会慢
 	shader->SetFBO(0);
 }
 
@@ -140,6 +143,8 @@ void DynamicTexture::ReloadTexture()
 		DrawNode(n, img);
 	}
 
+	// set fbo to force flush
+	// todo dtex之后insert时，不能连续
 	shader->SetFBO(0);
 }
 
@@ -197,7 +202,7 @@ void DynamicTexture::InitFBO(int fbo_id)
 	if (fbo_id == 0) {
 		glGenFramebuffersEXT(1, (GLuint*)&fbo_id);
 	}
-	shader->SetFBO(fbo_id);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo_id);
 
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_tex, 0);
 
@@ -206,8 +211,7 @@ void DynamicTexture::InitFBO(int fbo_id)
 		throw Exception("Create FBO error: %d", status);
 	}
 
-	shader->SetFBO(0);
-	shader->SetTexture(0);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderNew::Instance()->GetFboID());
 
 	m_fbo = fbo_id;
 }

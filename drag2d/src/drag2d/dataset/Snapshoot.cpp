@@ -138,8 +138,10 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 
 	SpriteDraw::drawSprite(scr, symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, scale);
 
-	shader->SetFBO(0);
-	shader->SetTexture(0);
+	// set fbo to force flush
+	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
+ 	shader->SetFBO(0);
+ 	shader->SetTexture(0);
 }
 
 int Snapshoot::checkFramebufferStatus() const
