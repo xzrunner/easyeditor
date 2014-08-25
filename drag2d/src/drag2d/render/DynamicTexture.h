@@ -32,7 +32,7 @@ public:
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
 
-	void Rebuild();
+	void ReloadTexture();
 
 	void DebugDraw() const;
 
@@ -40,15 +40,15 @@ private:
 	DynamicTexture();
 	~DynamicTexture();
 
-	void InitTexture(int width, int height);
-	void InitFBO();
+	void InitTexture(int width, int height, int tex_id = 0);
+	void InitFBO(int fbo_id = 0);
 	void InitRoot(int width, int height);
 
 	void InsertImage(const Image* img);
 
-	void DrawRegion(const Rect& vertex, const Rect& texcoords, int texid, bool is_rotate);
-
-	void DrawExtrude(const Image* img, TPNode* node);
+	void DrawNode(const TPNode* node, const Image* image) const;
+	void DrawRegion(const Rect& vertex, const Rect& texcoords, int texid, bool is_rotate) const;
+	void DrawExtrude(const Image* img, const TPNode* node) const;
 
 private:
 	class ImageSizeCmp

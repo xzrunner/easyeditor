@@ -35,6 +35,7 @@ namespace ecomplex
 	{
 		d2d::OrthoCanvas::initGL();
 		m_editPanel->getSymbol()->reloadTexture();
+		d2d::DynamicTexture::Instance()->ReloadTexture();
 	}
 
 	void StageCanvas::onDraw()
@@ -51,8 +52,7 @@ namespace ecomplex
   				continue;
   			d2d::SpriteDraw::drawSprite(m_screen, sprite);
   		}
- 		d2d::ShaderNew::Instance()->Flush();
- 
+
  		d2d::PrimitiveDraw::rect(m_screen, m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
  
   		if (Settings::bVisibleBGCross)

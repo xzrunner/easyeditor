@@ -75,8 +75,8 @@ void DynamicTexture::Insert(Image* img)
 	} else {
 		ShaderNew* shader = ShaderNew::Instance();
 		shader->SetFBO(m_fbo);
-		shader->sprite();
-		glViewport(0, 0, m_width, m_height);
+ 		shader->sprite();
+ 		glViewport(0, 0, m_width, m_height);
 		InsertImage(img);
 		shader->SetFBO(0);
 	}
@@ -119,6 +119,30 @@ const TPNode* DynamicTexture::Query(const Image& img) const
 	}
 }
 
+void DynamicTexture::ReloadTexture()
+{
+	InitTexture(m_width, m_height, m_tex);
+	InitFBO(m_fbo);
+
+	// init content
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(m_fbo);
+	shader->sprite();
+
+	glViewport(0, 0, m_width, m_height);
+	std::map<wxString, TPNode*>::iterator itr = m_map_images.begin();
+	for ( ; itr != m_map_images.end(); ++itr)
+	{
+		Image* img = ImageMgr::Instance()->getItem(itr->first);
+		assert(img);
+		TPNode* n = itr->second;
+		assert(n);
+		DrawNode(n, img);
+	}
+
+	shader->SetFBO(0);
+}
+
 void DynamicTexture::DebugDraw() const
 {
 	ShaderNew* shader = ShaderNew::Instance();
@@ -142,13 +166,15 @@ void DynamicTexture::DebugDraw() const
 	ShaderNew::Instance()->Draw(vb, m_tex);
 }
 
-void DynamicTexture::InitTexture(int width, int height)
+void DynamicTexture::InitTexture(int width, int height, int tex_id)
 {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
-	glGenTextures(1, &m_tex);
+	if (tex_id == 0) {
+		glGenTextures(1, (GLuint*)&tex_id);
+	}
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_tex);
+	glBindTexture(GL_TEXTURE_2D, tex_id);
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
@@ -160,14 +186,18 @@ void DynamicTexture::InitTexture(int width, int height)
 	memset(empty_data, 0, width*height*4);
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)width, (GLsizei)height, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
 	delete[] empty_data;
+
+	m_tex = tex_id;
 }
 
-void DynamicTexture::InitFBO()
+void DynamicTexture::InitFBO(int fbo_id)
 {
 	ShaderNew* shader = ShaderNew::Instance();
 
-	glGenFramebuffersEXT(1, &m_fbo);
-	shader->SetFBO(m_fbo);
+	if (fbo_id == 0) {
+		glGenFramebuffersEXT(1, (GLuint*)&fbo_id);
+	}
+	shader->SetFBO(fbo_id);
 
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_tex, 0);
 
@@ -178,6 +208,8 @@ void DynamicTexture::InitFBO()
 
 	shader->SetFBO(0);
 	shader->SetTexture(0);
+
+	m_fbo = fbo_id;
 }
 
 void DynamicTexture::InitRoot(int width, int height)
@@ -209,7 +241,15 @@ void DynamicTexture::InsertImage(const Image* img)
 		return;
 	}
 
-	// draw fbo
+	DrawNode(n, img);
+
+	m_map_images.insert(std::make_pair(img->filepath(), n));
+}
+
+void DynamicTexture::DrawNode(const TPNode* n, const Image* img) const
+{
+	d2d::Rect r = img->getRegion();
+
 	Rect r_vertex, r_texcoords;
 	r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
 	r_vertex.xMax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
@@ -225,11 +265,9 @@ void DynamicTexture::InsertImage(const Image* img)
 	DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
 
 	DrawExtrude(img, n);
-
-	m_map_images.insert(std::make_pair(img->filepath(), n));
 }
 
-void DynamicTexture::DrawRegion(const Rect& vertex, const Rect& texcoords, int texid, bool is_rotate)
+void DynamicTexture::DrawRegion(const Rect& vertex, const Rect& texcoords, int texid, bool is_rotate) const
 {
 	float vb[16];
 	vb[0] = vertex.xMin;
@@ -266,7 +304,7 @@ void DynamicTexture::DrawRegion(const Rect& vertex, const Rect& texcoords, int t
 	ShaderNew::Instance()->Draw(vb, texid);
 }
 
-void DynamicTexture::DrawExtrude(const Image* img, TPNode* n)
+void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 {
 	d2d::Rect r = img->getRegion();
 	int ori_width = img->originWidth(),

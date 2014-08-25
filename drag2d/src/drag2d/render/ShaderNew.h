@@ -25,6 +25,9 @@ public:
 
 	void reload();
 
+	int GetTexID() const { return m_tex; }
+	int GetFboID() const { return m_fbo; }
+
 	void SetTexture(int tex);
 	void SetFBO(int fbo);
 
