@@ -47,6 +47,8 @@ void GLCanvas::resetInitState()
 
 void GLCanvas::resetViewport()
 {
+	wxLogDebug(_T("GLCanvas::resetViewport()"));
+
 	onSize(wxSizeEvent(m_parent->GetSize()));
 }
 
@@ -62,6 +64,8 @@ void GLCanvas::SetCurrentCanvas()
 
 void GLCanvas::initGL()
 {
+	wxLogDebug(_T("GLCanvas::initGL()"));
+
 	resetViewport();
 
 	glShadeModel(GL_SMOOTH);
