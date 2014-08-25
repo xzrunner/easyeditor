@@ -18,7 +18,8 @@ void FileIO::load(const Task* task, const char* filename)
 
 	task->m_stage->loadHistoryList(filename, symbol->m_sprites);
 
-	const_cast<Task*>(task)->getStagePanel()->getCanvas()->resetInitState();
+	//// rm resetinitstate
+	//const_cast<task*>(task)->getstagepanel()->getcanvas()->resetinitstate();
 }
 
 void FileIO::store(const Task* task, const char* filename)

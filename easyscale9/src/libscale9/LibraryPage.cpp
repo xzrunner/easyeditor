@@ -33,7 +33,8 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			symbol->refresh();
 			m_list->insert(symbol);
 			symbol->release();
-			m_canvas->resetInitState();
+			//// rm resetinitstate
+			//m_canvas->resetInitState();
 		}
 	}
 }

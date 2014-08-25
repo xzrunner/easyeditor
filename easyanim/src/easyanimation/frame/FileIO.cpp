@@ -56,8 +56,9 @@ void FileIO::load(const wxString& filepath)
 
 	context->setCurrFrame(0, 1);
 
-	d2d::EditPanel* stage = static_cast<d2d::EditPanel*>(context->stage);
-	stage->getCanvas()->resetInitState();
+// 	// rm resetInitState
+// 	d2d::EditPanel* stage = static_cast<d2d::EditPanel*>(context->stage);
+// 	stage->getCanvas()->resetInitState();
 }
 
 void FileIO::store(const wxString& filepath)

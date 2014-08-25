@@ -38,7 +38,8 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			StringTools::toLower(type);
 			if (type == "json") {
 				loadFromJsonFile(filename);
-				m_canvas->resetInitState();
+				//// rm resetInitState
+				//m_canvas->resetInitState();
 			} else if (type == "lua") {
 				loadFromLuaFile(filename);
 			}
