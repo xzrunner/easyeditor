@@ -49,7 +49,7 @@ unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg,
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderNew::Instance()->GetFboID());
 
 	return pixels;
 }
@@ -90,18 +90,15 @@ void Snapshoot::createFBO(int width, int height)
 	delete[] empty_data;
 
 	// init fbo
-	GLuint fbo;
-
-	glGenFramebuffersEXT(1, &fbo);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo);
-	m_fbo = fbo;
+	glGenFramebuffersEXT(1, (GLuint*)&m_fbo);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0);
 
 	int status = checkFramebufferStatus();
 	assert(status);
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderNew::Instance()->GetFboID());
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

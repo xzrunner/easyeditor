@@ -9,6 +9,7 @@
 #include <fstream>
 
 #include "common/tools.h"
+#include "render/ShaderNew.h"
 
 //#define USE_SOIL
 
@@ -118,11 +119,11 @@ void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int width, 
 	}
 
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+ 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+ 
+ 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+ 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
  	if (format == GL_RGB) {
  		format = GL_RGBA;
@@ -159,6 +160,8 @@ void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int width, 
 			GL_UNSIGNED_BYTE,
 			pixel);
 	}
+
+	glBindTexture(GL_TEXTURE_2D, ShaderNew::Instance()->GetTexID());
 #endif // USE_SOIL
 }
 
