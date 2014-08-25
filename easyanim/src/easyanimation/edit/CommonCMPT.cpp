@@ -179,9 +179,8 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 	context->stage->Refresh();
 	context->keysPanel->Refresh();
 
-// 	// rm resetInitState
-// 	d2d::EditPanel* panel = static_cast<d2d::EditPanel*>(context->stage);
-// 	panel->getCanvas()->resetInitState();
+ 	d2d::EditPanel* panel = static_cast<d2d::EditPanel*>(context->stage);
+ 	panel->getCanvas()->resetViewport();
 }
 
 void CommonCMPT::onLoadFromList(wxCommandEvent& event)

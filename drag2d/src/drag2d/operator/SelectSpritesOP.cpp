@@ -323,8 +323,7 @@ void SelectSpritesOP::copyFromSelection()
 				sval = value["sprite"][i++];
 			}
 
-			// rm resetInitState
-			//m_editPanel->getCanvas()->resetInitState();
+			m_editPanel->getCanvas()->resetViewport();
 		}
 		wxTheClipboard->Close();
 	}
