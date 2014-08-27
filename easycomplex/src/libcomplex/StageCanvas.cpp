@@ -62,6 +62,8 @@ namespace ecomplex
   		}
 
     	m_editPanel->drawEditTemp(m_screen);
+
+//		d2d::DynamicTexture::Instance()->DebugDraw(m_screen);
 	}
 
 	void StageCanvas::onTimer(wxTimerEvent& event)

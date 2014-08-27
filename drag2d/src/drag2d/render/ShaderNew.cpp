@@ -168,13 +168,13 @@ void ShaderNew::Draw(const float vb[16], int texid)
 
 void ShaderNew::Flush()
 {
-	if (m_sprite_count != 0) {
-		wxLogDebug(_T("Shader Commit Flush"));
-	}
+// 	if (m_sprite_count != 0) {
+// 		wxLogDebug(_T("Shader Commit Flush"));
+// 	}
 
 	Commit();
 
-	DynamicTexture::Instance()->DebugDraw();
+//	DynamicTexture::Instance()->DebugDraw();
 }
 
 void ShaderNew::load()
