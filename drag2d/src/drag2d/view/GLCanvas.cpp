@@ -47,8 +47,7 @@ void GLCanvas::resetInitState()
 
 void GLCanvas::resetViewport()
 {
-	wxLogDebug(_T("GLCanvas::resetViewport()"));
-
+//	wxLogDebug(_T("GLCanvas::resetViewport()"));
 	onSize(wxSizeEvent(m_parent->GetSize()));
 }
 
