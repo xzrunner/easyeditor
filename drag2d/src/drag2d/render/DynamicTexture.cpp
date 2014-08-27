@@ -226,7 +226,7 @@ void DynamicTexture::InsertImage(const Image* img)
 	d2d::Rect r = img->getRegion();
 	int w = r.xLength();
 	int h = r.yLength();
-	d2d::TPNode* n = m_root->Insert(img, w+m_padding*2, h+m_padding*2);
+	d2d::TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
 	if (!n) {
 		return;
 	}

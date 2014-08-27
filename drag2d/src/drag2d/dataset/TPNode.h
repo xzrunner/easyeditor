@@ -4,8 +4,6 @@
 namespace d2d
 {
 
-class Image;
-
 class TPNode
 {
 public:
@@ -15,7 +13,7 @@ public:
 		// todo
 	}
 
-	TPNode* Insert(const Image* image, int w, int h);
+	TPNode* Insert(int w, int h);
 	void Clear();
 
 	bool IsRoomEnough(int w, int h) const;
@@ -42,7 +40,7 @@ private:
 	void UpdateRemain();
 
 private:
-	const Image* m_image;
+	bool m_used;
 
 	int m_xmin, m_ymin, m_xmax, m_ymax;
 	bool m_is_rotated;

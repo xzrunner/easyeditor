@@ -93,9 +93,9 @@ Insert(d2d::ImageSprite& img) const
 	int h = r.yLength();
 	float scale = 1.0f;
 	if (m_root->IsRoomEnough(r.xLength(), r.yLength())) {
-		n = m_root->Insert(image, w*scale+PADDING*2, h*scale+PADDING*2);		
+		n = m_root->Insert(w*scale+PADDING*2, h*scale+PADDING*2);		
 	} else {
-		n = m_root->Insert(image, h*scale+PADDING*2, w*scale+PADDING*2);
+		n = m_root->Insert(h*scale+PADDING*2, w*scale+PADDING*2);
 	}
 
 	if (!n) {

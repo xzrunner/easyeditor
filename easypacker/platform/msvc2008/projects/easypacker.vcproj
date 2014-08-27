@@ -278,10 +278,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easypacker\StageCanvas.cpp"
 				>
 			</File>

@@ -8,7 +8,7 @@ namespace d2d
 {
 
 TPNode::TPNode()
-	: m_image(NULL)
+	: m_used(false)
 {
 	m_xmin = m_ymin = m_xmax = m_ymax = 0;
 	m_is_rotated = m_is_split_y = false;
@@ -19,7 +19,7 @@ TPNode::TPNode()
 }
 
 TPNode::TPNode(int width, int height)
-	: m_image(NULL)
+	: m_used(false)
 {
 	m_xmin = m_ymin = 0;
 	m_xmax = width;
@@ -33,7 +33,7 @@ TPNode::TPNode(int width, int height)
 	m_remain_space = width;
 }
 
-TPNode* TPNode::Insert(const Image* image, int w, int h)
+TPNode* TPNode::Insert(int w, int h)
 {
 // 	Rect r = img.getSymbol().getImage()->getRegion();
 // 	int w = r.xLength(),
@@ -47,7 +47,7 @@ TPNode* TPNode::Insert(const Image* image, int w, int h)
 
 	if (!m_child) 
 	{
-		if (m_image) {
+		if (m_used) {
 			return NULL;
 		}
 
@@ -55,7 +55,7 @@ TPNode* TPNode::Insert(const Image* image, int w, int h)
 		{	  
 			TPNode* n = Split(w, h);
 			if (n) {
-				n->m_image = image;
+				n->m_used = true;
 			}
 			return n;
 		} 
@@ -63,7 +63,7 @@ TPNode* TPNode::Insert(const Image* image, int w, int h)
 		{
 			TPNode* n = Split(h, w);
 			if (n) {
-				n->m_image = image;
+				n->m_used = true;
 				n->m_is_rotated = true;
 			}
 			return n;
@@ -80,7 +80,7 @@ TPNode* TPNode::Insert(const Image* image, int w, int h)
 		{
 			TPNode* n = NULL;
 			if (next->IsRoomEnough(w, h)) {
-				n = next->Insert(image, w, h);
+				n = next->Insert(w, h);
 			}
 			if (n) {
 				return n;
@@ -94,7 +94,7 @@ TPNode* TPNode::Insert(const Image* image, int w, int h)
 
 void TPNode::Clear()
 {
-	m_image = NULL;	
+	m_used = false;
 }
 
 bool TPNode::IsRoomEnough(int w, int h) const
