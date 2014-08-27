@@ -92,6 +92,11 @@ TPNode* TPNode::Insert(const Image* image, int w, int h)
 	}
 }
 
+void TPNode::Clear()
+{
+	m_image = NULL;	
+}
+
 bool TPNode::IsRoomEnough(int w, int h) const
 {
 	return (w <= m_remain_space || h <= m_remain_space) 
@@ -158,26 +163,26 @@ TPNode* TPNode::Split(int w, int h)
 	// remain area
 	_next->m_remain_area = _next->GetArea();
 	_child_next->m_remain_area = _child_next->GetArea();
-	_child->m_remain_area = 0;
+	_child->m_remain_area = _child->GetArea();
 	m_remain_area = _child_next->m_remain_area;
 	// remain len
 	_next->m_remain_len = _next->GetMaxLength();
 	_child_next->m_remain_len = _child_next->GetMaxLength();
-	_child->m_remain_len = 0;
+	_child->m_remain_len = _child->GetMaxLength();
 	m_remain_len = _child_next->m_remain_len;  
 	// remain_space
 	if (m_is_split_y) 
 	{
 		_next->m_remain_space = _next->m_ymax - _next->m_ymin;
 		_child_next->m_remain_space = _child_next->m_xmax - _child_next->m_xmin;
-		_child->m_remain_space = 0;
+		_child->m_remain_space = _child->m_xmax - _child->m_xmin;
 		m_remain_space = _child_next->m_remain_space;
 	} 
 	else 
 	{
 		_next->m_remain_space = _next->m_xmax - _next->m_xmin;
 		_child_next->m_remain_space = _child_next->m_ymax - _child_next->m_ymin;
-		_child->m_remain_space = 0;
+		_child->m_remain_space = _child->m_ymax - _child->m_ymin;
 		m_remain_space = _child_next->m_remain_space;
 	}
 	UpdateRemain();

@@ -24,6 +24,8 @@ public:
 	void Insert(Image* img);
 	void End();
 
+	void Remove(Image* img);
+
 	float GetPadding() const { return m_padding; }
 
 	const TPNode* Query(const Image& img) const;

@@ -4,6 +4,8 @@
 #include "common/Exception.h"
 #include "dataset/TPNode.h"
 #include "render/ShaderNew.h"
+#include "render/PrimitiveDraw.h"
+#include "render/style_config.h"
 #include "view/Screen.h"
 
 #include <opengl/opengl.h>
@@ -13,8 +15,8 @@
 namespace d2d
 {
 
-const int DynamicTexture::WIDTH = 2048;
-const int DynamicTexture::HEIGHT = 2048;
+const int DynamicTexture::WIDTH = 512;
+const int DynamicTexture::HEIGHT = 512;
 const int DynamicTexture::PADDING = 1;
 const int DynamicTexture::EXTRUDE = 1;
 
@@ -111,6 +113,17 @@ void DynamicTexture::End()
 	shader->SetFBO(0);
 }
 
+void DynamicTexture::Remove(Image* img)
+{
+	const wxString& filepath = img->filepath();
+	std::map<wxString, TPNode*>::const_iterator itr 
+		= m_map_images.find(filepath);
+	if (itr != m_map_images.end()) {
+		itr->second->Clear();
+		m_map_images.erase(itr);
+	}
+}
+
 const TPNode* DynamicTexture::Query(const Image& img) const
 {
 	const wxString& filepath = img.filepath();
@@ -174,11 +187,13 @@ void DynamicTexture::DebugDraw() const
 
 void DynamicTexture::DebugDraw(const Screen& screen) const
 {
+	const int EDGE = 1024;
+
 	d2d::Vector vertices[4];
 	vertices[0].set(0, 0);
-	vertices[1].set(0, 1024);
-	vertices[2].set(1024, 1024);
-	vertices[3].set(1024, 0);
+	vertices[1].set(0, EDGE);
+	vertices[2].set(EDGE, EDGE);
+	vertices[3].set(EDGE, 0);
  	for (int i = 0; i < 4; ++i) {
  		screen.TransPosForRender(vertices[i]);
  	}
@@ -202,6 +217,8 @@ void DynamicTexture::DebugDraw(const Screen& screen) const
 	vb[14] = 1, vb[15] = 0;
 
 	ShaderNew::Instance()->Draw(vb, m_tex);
+
+	PrimitiveDraw::rect(screen, Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
 
 void DynamicTexture::InitTexture(int width, int height, int tex_id)

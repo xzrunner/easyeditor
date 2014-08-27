@@ -67,6 +67,7 @@ namespace d2d
 		{
 			Menu_UpOneLayer = 0,
 			Menu_DownOneLayer,
+			Menu_RemoveFromDTex,
 			Menu_End,
 
 			Hot_UpOneLayer = 100,
@@ -79,6 +80,7 @@ namespace d2d
 
 		void onMenuUpOneLayer(wxCommandEvent& event);
 		void onMenuDownOneLayer(wxCommandEvent& event);
+		void onMenuRemoveFromDTex(wxCommandEvent& event);
 
 		void onKeyUpOneLayer(wxKeyEvent& event);
 		void onKeyDownOneLayer(wxKeyEvent& event);

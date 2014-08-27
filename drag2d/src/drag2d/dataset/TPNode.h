@@ -16,6 +16,7 @@ public:
 	}
 
 	TPNode* Insert(const Image* image, int w, int h);
+	void Clear();
 
 	bool IsRoomEnough(int w, int h) const;
 
