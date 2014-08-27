@@ -35,6 +35,7 @@ public:
 	void ReloadTexture();
 
 	void DebugDraw() const;
+	void DebugDraw(const Screen& screen) const;
 
 private:
 	DynamicTexture();
