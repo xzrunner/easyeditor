@@ -902,11 +902,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicFont.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicFont.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\render\DynamicTexture.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\render\DynamicTexture.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicUtils.h"
 				>
 			</File>
 			<File

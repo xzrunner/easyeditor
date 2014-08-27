@@ -43,10 +43,6 @@ private:
 	DynamicTexture();
 	~DynamicTexture();
 
-	void InitTexture(int width, int height, int tex_id = 0);
-	void InitFBO(int fbo_id = 0);
-	void InitRoot(int width, int height);
-
 	void InsertImage(const Image* img);
 
 	void DrawNode(const TPNode* node, const Image* image) const;

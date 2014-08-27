@@ -1,4 +1,5 @@
 #include "DynamicTexture.h"
+#include "DynamicUtils.h"
 
 #include "common/tools.h"
 #include "common/Exception.h"
@@ -39,9 +40,9 @@ DynamicTexture::DynamicTexture()
 
 	initOpenGLExtensions();
 
-	InitTexture(m_width, m_height);
-	InitFBO();
-	InitRoot(m_width, m_height);
+	m_tex = DynamicUtils::InitTexture(m_width, m_height);
+	m_fbo = DynamicUtils::InitFBO(m_tex);
+	m_root = DynamicUtils::InitRoot(m_width, m_height);
 }
 
 DynamicTexture::~DynamicTexture()
@@ -50,12 +51,6 @@ DynamicTexture::~DynamicTexture()
 	glDeleteFramebuffersEXT(1, &m_fbo);
 
 	delete m_root;
-
-	std::map<wxString, TPNode*>::iterator itr = m_map_images.begin();
-	for ( ; itr != m_map_images.end(); ++itr) {
-		delete itr->second;
-	}
-	m_map_images.clear();
 }
 
 void DynamicTexture::Begin()
@@ -138,8 +133,8 @@ const TPNode* DynamicTexture::Query(const Image& img) const
 
 void DynamicTexture::ReloadTexture()
 {
-	InitTexture(m_width, m_height, m_tex);
-	InitFBO(m_fbo);
+	m_tex = DynamicUtils::InitTexture(m_width, m_height, m_tex);
+	m_fbo = DynamicUtils::InitFBO(m_tex, m_fbo);
 
 	// init content
 	ShaderNew* shader = ShaderNew::Instance();
@@ -221,59 +216,6 @@ void DynamicTexture::DebugDraw(const Screen& screen) const
 	PrimitiveDraw::rect(screen, Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
 
-void DynamicTexture::InitTexture(int width, int height, int tex_id)
-{
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-
-	if (tex_id == 0) {
-		glGenTextures(1, (GLuint*)&tex_id);
-	}
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, tex_id);
-
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)width, (GLsizei)height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	byte* empty_data = new byte[width*height*4];
-	memset(empty_data, 0, width*height*4);
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)width, (GLsizei)height, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
-	delete[] empty_data;
-
-	m_tex = tex_id;
-}
-
-void DynamicTexture::InitFBO(int fbo_id)
-{
-	ShaderNew* shader = ShaderNew::Instance();
-
-	if (fbo_id == 0) {
-		glGenFramebuffersEXT(1, (GLuint*)&fbo_id);
-	}
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo_id);
-
-	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, m_tex, 0);
-
-	GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
-	if (status != GL_FRAMEBUFFER_COMPLETE_EXT) {
-		throw Exception("Create FBO error: %d", status);
-	}
-
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderNew::Instance()->GetFboID());
-
-	m_fbo = fbo_id;
-}
-
-void DynamicTexture::InitRoot(int width, int height)
-{
-	m_root = new d2d::TPNode(width, height);
-
-	d2d::TPNode* c = new d2d::TPNode(width, height);
-	m_root->SetChild(c);
-}
-
 void DynamicTexture::InsertImage(const Image* img)
 {
 	const wxString& filepath = img->filepath();
@@ -284,13 +226,7 @@ void DynamicTexture::InsertImage(const Image* img)
 	d2d::Rect r = img->getRegion();
 	int w = r.xLength();
 	int h = r.yLength();
-	d2d::TPNode* n = NULL;
-	if (m_root->IsRoomEnough(w, h)) {
-		n = m_root->Insert(img, w+m_padding*2, h+m_padding*2);
-	} else {
-		n = m_root->Insert(img, h+m_padding*2, w+m_padding*2);
-	}
-
+	d2d::TPNode* n = m_root->Insert(img, w+m_padding*2, h+m_padding*2);
 	if (!n) {
 		return;
 	}
