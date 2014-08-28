@@ -166,6 +166,19 @@ void ShaderNew::Draw(const float vb[16], int texid)
 	}
 }
 
+void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int texid)
+{
+	float vb[16];
+	for (int j = 0; j < 4; ++j)
+	{
+		vb[j*4] = vertices[j].x;
+		vb[j*4+1] = vertices[j].y;
+		vb[j*4+2] = texcoords[j].x;
+		vb[j*4+3] = texcoords[j].y;
+	}
+	Draw(vb, texid);
+}
+
 void ShaderNew::Flush()
 {
 // 	if (m_sprite_count != 0) {

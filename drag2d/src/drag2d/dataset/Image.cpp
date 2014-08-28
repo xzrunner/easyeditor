@@ -231,17 +231,7 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->sprite();
-	float vb[16];
-	for (int j = 0; j < 4; ++j)
-	{
-		vb[j*4] = vertices[j].x;
-		vb[j*4+1] = vertices[j].y;
-		vb[j*4+2] = texcoords[j].x;
-		vb[j*4+3] = texcoords[j].y;
-	}
-
-	//shader->SetTexture(0);
-	shader->Draw(vb, texid);
+	shader->Draw(vertices, texcoords, texid);
 }
 
 } // d2d

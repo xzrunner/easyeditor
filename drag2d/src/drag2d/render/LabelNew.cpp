@@ -27,7 +27,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 	const int tex_id = dfont->GetTextureID();
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
-		const TPNode* r = dfont->LookUp(unicodes[i], 20, 0xffffffff, 1);
+		const TPNode* r = dfont->LookUp(unicodes[i], 20, 0, 0);
 		if (!r) {
 			continue;
 		}
@@ -61,15 +61,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 
 		ShaderNew* shader = ShaderNew::Instance();
 		shader->sprite();
-		float vb[16];
-		for (int j = 0; j < 4; ++j)
-		{
-			vb[j*4] = vertices[j].x;
-			vb[j*4+1] = vertices[j].y;
-			vb[j*4+2] = texcoords[j].x;
-			vb[j*4+3] = texcoords[j].y;
-		}
-		shader->Draw(vb, tex_id);
+		shader->Draw(vertices, texcoords, tex_id);
 
 		x += WIDTH;
 	}

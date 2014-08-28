@@ -9,6 +9,8 @@ typedef unsigned int GLuint;
 namespace d2d
 {
 
+class Vector;
+
 class ShaderNew
 {
 public:
@@ -32,6 +34,7 @@ public:
 	void SetFBO(int fbo);
 
 	void Draw(const float vb[16], int texid);
+	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 
 	void Flush();
 
