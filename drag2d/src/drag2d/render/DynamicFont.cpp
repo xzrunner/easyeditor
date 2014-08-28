@@ -10,6 +10,7 @@ namespace d2d
 
 const int DynamicFont::WIDTH = 512;
 const int DynamicFont::HEIGHT = 512;
+const int DynamicFont::PADDING = 1;
 
 DynamicFont* DynamicFont::m_instance = NULL;
 DynamicFont* DynamicFont::Instance()
@@ -25,6 +26,7 @@ DynamicFont::DynamicFont()
 {
 	m_width = WIDTH;
 	m_height = HEIGHT;
+	m_padding = PADDING;
 
 	initOpenGLExtensions();
 
@@ -65,7 +67,7 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
  	uint32_t* buffer = GenFTChar(character, font_size, color, is_edge, layout);
  	int w = layout.sizer.width;
  	int h = layout.sizer.height;
- 	TPNode* n = m_root->Insert(w, h);
+ 	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
  	if (n) {
 		glBindTexture(GL_TEXTURE_2D, m_tex);
 		if (n->IsRotated()) {
@@ -77,10 +79,10 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
 					rotated[ptr_dst] = buffer[ptr_src++];
 				}
 			}
-			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX(), n->GetMinY(), h, w, GL_RGBA, GL_UNSIGNED_BYTE, rotated);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, h, w, GL_RGBA, GL_UNSIGNED_BYTE, rotated);
 			delete[] rotated;
 		} else {
-			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX(), n->GetMinY(), w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 		}
 		free(buffer);
 

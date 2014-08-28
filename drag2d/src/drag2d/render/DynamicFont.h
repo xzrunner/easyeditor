@@ -44,6 +44,7 @@ public:
 	int GetTextureID() const { return m_tex; }
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
+	int GetPadding() const { return m_padding; }
 
 	void DebugDraw(const Screen& screen) const;
 
@@ -93,10 +94,12 @@ private:
 
 private:
 	static const int WIDTH, HEIGHT;
+	static const int PADDING;
 	static const int FONT_SIZE_COUNT = 256;
 
 private:
 	int m_width, m_height;
+	int m_padding;
 
 	GLuint m_tex;
 	GLuint m_fbo;

@@ -24,6 +24,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 	const float tex_width = dfont->GetWidth(),
 		tex_height = dfont->GetHeight();
 	const int tex_id = dfont->GetTextureID();
+	const int padding = dfont->GetPadding();
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
 		const Glyph* g = dfont->LookUp(unicodes[i], 20, 0, 0);
@@ -35,11 +36,11 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 		xmin = x + g->bearing_x;
 		ymax = y + g->bearing_y;
 		if (r->IsRotated()) {
-			xmax = xmin + r->GetHeight();
-			ymin = ymax - r->GetWidth();
+			xmax = xmin + (r->GetHeight()-padding*2);
+			ymin = ymax - (r->GetWidth()-padding*2);
 		} else {
-			xmax = xmin + r->GetWidth();
-			ymin = ymax - r->GetHeight();
+			xmax = xmin + (r->GetWidth()-padding*2);
+			ymin = ymax - (r->GetHeight()-padding*2);
 		}
 
 		vertices[0].set(xmin, ymin);
@@ -50,10 +51,10 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 			screen.TransPosForRender(vertices[i]);
 		}
 
-		txmin = r->GetMinX() / tex_width;
-		txmax = r->GetMaxX() / tex_width;
-		tymin = r->GetMinY() / tex_height;
-		tymax = r->GetMaxY() / tex_height;
+		txmin = (r->GetMinX()+padding) / tex_width;
+		txmax = (r->GetMaxX()-padding) / tex_width;
+		tymin = (r->GetMinY()+padding) / tex_height;
+		tymax = (r->GetMaxY()-padding) / tex_height;
 
  		if (r->IsRotated())
  		{
