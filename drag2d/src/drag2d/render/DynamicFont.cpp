@@ -68,7 +68,21 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
  	TPNode* n = m_root->Insert(w, h);
  	if (n) {
 		glBindTexture(GL_TEXTURE_2D, m_tex);
-		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX(), n->GetMinY(), w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+		if (n->IsRotated()) {
+			uint32_t* rotated = new uint32_t[w*h];
+			int ptr_src = 0;
+			for (int i = 0; i < h; ++i) {
+				for (int j = 0; j < w; ++j) {
+					int ptr_dst = j*h + (h-1-i);
+					rotated[ptr_dst] = buffer[ptr_src++];
+				}
+			}
+			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX(), n->GetMinY(), h, w, GL_RGBA, GL_UNSIGNED_BYTE, rotated);
+			delete[] rotated;
+		} else {
+			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX(), n->GetMinY(), w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+		}
+		free(buffer);
 
 		glyph->is_used = true;
 		glyph->bearing_x = layout.bearingX;

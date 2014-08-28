@@ -19,6 +19,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 	float x = pos.x,
 		  y = pos.y;
 	Vector vertices[4], texcoords[4];
+	float xmin, xmax, ymin, ymax;
 	float txmin, txmax, tymin, tymax;
 	const float tex_width = dfont->GetWidth(),
 		tex_height = dfont->GetHeight();
@@ -31,10 +32,15 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 		}
 		const TPNode* r = g->tpnode;
 
-		float xmin = x + g->bearing_x;
-		float xmax = xmin + r->GetWidth();
-		float ymax = y + g->bearing_y;
-		float ymin = ymax - r->GetHeight();
+		xmin = x + g->bearing_x;
+		ymax = y + g->bearing_y;
+		if (r->IsRotated()) {
+			xmax = xmin + r->GetHeight();
+			ymin = ymax - r->GetWidth();
+		} else {
+			xmax = xmin + r->GetWidth();
+			ymin = ymax - r->GetHeight();
+		}
 
 		vertices[0].set(xmin, ymin);
 		vertices[1].set(xmax, ymin);
@@ -49,14 +55,14 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 		tymin = r->GetMinY() / tex_height;
 		tymax = r->GetMaxY() / tex_height;
 
-		if (r->IsRotated())
-		{
-			d2d::Vector tmp = vertices[3];
-			vertices[3] = vertices[2];
-			vertices[2] = vertices[1];
-			vertices[1] = vertices[0];
-			vertices[0] = tmp;
-		}
+ 		if (r->IsRotated())
+ 		{
+ 			d2d::Vector tmp = vertices[3];
+ 			vertices[3] = vertices[2];
+ 			vertices[2] = vertices[1];
+ 			vertices[1] = vertices[0];
+ 			vertices[0] = tmp;
+ 		}
 
 		texcoords[0].set(txmin, tymin);
 		texcoords[1].set(txmax, tymin);
