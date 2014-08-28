@@ -11,6 +11,7 @@
 #include "dataset/SpriteTools.h"
 #include "render/PrimitiveDraw.h"
 #include "render/Shader.h"
+#include "render/LabelNew.h"
 
 //OpenGL Headers 
 #include <windows.h>
@@ -55,7 +56,7 @@ void FontBlankSymbol::draw(const Screen& scr,
 		DrawBackground(scr, sprite, mt);
 	} 
 	if (Settings::DrawFontType & Settings::DrawFontText) {
-//		DrawText(scr, sprite, mt);
+		DrawText(scr, sprite, mt);
 	}
 
 //	SpriteTools::DrawName(scr, sprite, mt);
@@ -138,10 +139,20 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
 			const std::string& str = font->GetTextContext();
 			if (!str.empty()) {
-				d2d::PrimitiveDraw::text(str.c_str());
+				LabelNew label;
+				label.Print(scr, str.c_str(), Vector(-400, 0));
 			}
 		}
 	}
+
+// 	if (sprite) {
+// 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
+// 			const std::string& str = font->GetTextContext();
+// 			if (!str.empty()) {
+// 				d2d::PrimitiveDraw::text(str.c_str());
+// 			}
+// 		}
+// 	}
 
 // 	if (m_font) 
 // 	{

@@ -881,6 +881,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\dataset\text_util.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\text_util.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\dataset\WXRender.cpp"
 					>
 				</File>
@@ -931,6 +939,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\render\GL10.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\LabelNew.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\LabelNew.h"
 				>
 			</File>
 			<File

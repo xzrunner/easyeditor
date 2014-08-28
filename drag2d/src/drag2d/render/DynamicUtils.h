@@ -7,6 +7,7 @@ namespace d2d
 typedef unsigned int GLuint;
 
 class TPNode;
+class Screen;
 
 class DynamicUtils
 {
@@ -16,6 +17,9 @@ public:
 	static GLuint InitFBO(int tex_id, int fbo_id = 0);
 
 	static TPNode* InitRoot(int width, int height);
+
+	static void DebugDraw(GLuint tex_id);
+	static void DebugDraw(const Screen& screen, GLuint tex_id);
 
 }; // DynamicUtils
 

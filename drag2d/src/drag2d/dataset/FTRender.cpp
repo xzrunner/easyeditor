@@ -97,7 +97,7 @@ FTRender::~FTRender()
 
 void FTRender::LoadFont(const char* filename)
 {
-	if (wxFileName::FileExists(filename)) {
+	if (!wxFileName::FileExists(filename)) {
 		throw Exception("File: %s don't exist!", filename);
 	}
 
@@ -225,7 +225,9 @@ uint32_t* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel32 f
 						// image.
 						for (Spans::iterator s = outlineSpans.begin(); s != outlineSpans.end(); ++s)
 							for (int w = 0; w < s->width; ++w) {
-								int index = (int)((imgHeight - 1 - (s->y - rect.ymin)) * imgWidth + s->x - rect.xmin + w);								
+								// todo rotate
+//								int index = (int)((imgHeight - 1 - (s->y - rect.ymin)) * imgWidth + s->x - rect.xmin + w);								
+								int index = (int)((s->y - rect.ymin) * imgWidth + s->x - rect.xmin + w);								
 //								set_color(&pxl[index], outlineCol.b, outlineCol.g, outlineCol.r, s->coverage);
 								pxl[index].Set(outlineCol.r, outlineCol.g, outlineCol.b, s->coverage);
 							}
@@ -235,8 +237,12 @@ uint32_t* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel32 f
 							for (Spans::iterator s = spans.begin(); s != spans.end(); ++s)
 								for (int w = 0; w < s->width; ++w)
 								{
+									// todo rotate
+// 									Pixel32 &dst =
+// 										pxl[(int)((imgHeight - 1 - (s->y - rect.ymin)) * imgWidth + s->x - rect.xmin + w)];
 									Pixel32 &dst =
-										pxl[(int)((imgHeight - 1 - (s->y - rect.ymin)) * imgWidth + s->x - rect.xmin + w)];
+										pxl[(int)((s->y - rect.ymin) * imgWidth + s->x - rect.xmin + w)];
+
 									Pixel32 src;
 //									set_color(&src, fontCol.b, fontCol.g, fontCol.r, s->coverage);
 									src.Set(fontCol.r, fontCol.g, fontCol.b, s->coverage);
@@ -295,13 +301,27 @@ uint32_t* FTRender::WriteGlyphNoStroker(int unicode, int size, union Pixel32 col
 	int sz = bitmap.rows*bitmap.width;
 	uint32_t* dst = (uint32_t*)malloc(sz*sizeof(uint32_t));
 	memset(dst, 0, sz);
-	for (int i = 0; i<sz; i++)
-	{
-		unsigned char r = ((col.r * bitmap.buffer[i]) >> 8) + 1,
-			g = ((col.g * bitmap.buffer[i]) >> 8) + 1,
-			b = ((col.b * bitmap.buffer[i]) >> 8) + 1,
-			a = bitmap.buffer[i];
-		dst[i] = a << 24 | b << 16 | g << 8 | r;                    
+
+	// todo rotate
+// 	for (int i = 0; i<sz; i++)
+// 	{
+// 		unsigned char r = ((col.r * bitmap.buffer[i]) >> 8) + 1,
+// 			g = ((col.g * bitmap.buffer[i]) >> 8) + 1,
+// 			b = ((col.b * bitmap.buffer[i]) >> 8) + 1,
+// 			a = bitmap.buffer[i];
+// 		dst[i] = a << 24 | b << 16 | g << 8 | r;                    
+// 	}
+	int ptr = 0;
+	for (int i = 0; i < bitmap.rows; ++i) {
+		for (int j = 0; j < bitmap.width; ++j) {
+			unsigned char r = ((col.r * bitmap.buffer[ptr]) >> 8) + 1,
+				g = ((col.g * bitmap.buffer[ptr]) >> 8) + 1,
+				b = ((col.b * bitmap.buffer[ptr]) >> 8) + 1,
+				a = bitmap.buffer[ptr];
+			int dst_ptr = (bitmap.rows - 1 - i) * bitmap.width + j;
+			dst[dst_ptr] = a << 24 | b << 16 | g << 8 | r;
+			++ptr;
+		}
 	}
 
 	FT_Done_Glyph(glyph);

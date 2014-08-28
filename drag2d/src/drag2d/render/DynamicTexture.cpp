@@ -159,61 +159,12 @@ void DynamicTexture::ReloadTexture()
 
 void DynamicTexture::DebugDraw() const
 {
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(0);
-	shader->sprite();
-
-	float vb[16];
-
-	vb[0] = 0, vb[1] = 0;
-	vb[2] = 0, vb[3] = 0;
-
-	vb[4] = 0, vb[5] = 1;
-	vb[6] = 0, vb[7] = 1;
-
-	vb[8] = 1, vb[9] = 1;
-	vb[10] = 1, vb[11] = 1;
-
-	vb[12] = 1, vb[13] = 0;
-	vb[14] = 1, vb[15] = 0;
-
-	ShaderNew::Instance()->Draw(vb, m_tex);
+	DynamicUtils::DebugDraw(m_tex);
 }
 
 void DynamicTexture::DebugDraw(const Screen& screen) const
 {
-	const int EDGE = 1024;
-
-	d2d::Vector vertices[4];
-	vertices[0].set(0, 0);
-	vertices[1].set(0, EDGE);
-	vertices[2].set(EDGE, EDGE);
-	vertices[3].set(EDGE, 0);
- 	for (int i = 0; i < 4; ++i) {
- 		screen.TransPosForRender(vertices[i]);
- 	}
-
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(0);
-	shader->sprite();
-
-	float vb[16];
-
-	vb[0] = vertices[0].x, vb[1] = vertices[0].y;
-	vb[2] = 0, vb[3] = 0;
-
-	vb[4] = vertices[1].x, vb[5] = vertices[1].y;
-	vb[6] = 0, vb[7] = 1;
-
-	vb[8] = vertices[2].x, vb[9] = vertices[2].y;
-	vb[10] = 1, vb[11] = 1;
-
-	vb[12] = vertices[3].x, vb[13] = vertices[3].y;
-	vb[14] = 1, vb[15] = 0;
-
-	ShaderNew::Instance()->Draw(vb, m_tex);
-
-	PrimitiveDraw::rect(screen, Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
+	DynamicUtils::DebugDraw(screen, m_tex);
 }
 
 void DynamicTexture::InsertImage(const Image* img)

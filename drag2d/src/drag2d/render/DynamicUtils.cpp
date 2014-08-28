@@ -2,7 +2,11 @@
 #include "ShaderNew.h"
 
 #include "common/Exception.h"
+#include "common/Vector.h"
 #include "dataset/TPNode.h"
+#include "view/Screen.h"
+#include "render/PrimitiveDraw.h"
+#include "render/style_config.h"
 
 #include <opengl/opengl.h>
 #include <gl/gl.h>
@@ -62,6 +66,65 @@ TPNode* DynamicUtils::InitRoot(int width, int height)
 	TPNode* c = new TPNode(width, height);
 	root->SetChild(c);
 	return root;
+}
+
+void DynamicUtils::DebugDraw(GLuint tex_id)
+{
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(0);
+	shader->sprite();
+
+	float vb[16];
+
+	vb[0] = 0, vb[1] = 0;
+	vb[2] = 0, vb[3] = 0;
+
+	vb[4] = 0, vb[5] = 1;
+	vb[6] = 0, vb[7] = 1;
+
+	vb[8] = 1, vb[9] = 1;
+	vb[10] = 1, vb[11] = 1;
+
+	vb[12] = 1, vb[13] = 0;
+	vb[14] = 1, vb[15] = 0;
+
+	ShaderNew::Instance()->Draw(vb, tex_id);
+}
+
+void DynamicUtils::DebugDraw(const Screen& screen, GLuint tex_id)
+{
+	const int EDGE = 1024;
+
+	Vector vertices[4];
+	vertices[0].set(0, 0);
+	vertices[1].set(0, EDGE);
+	vertices[2].set(EDGE, EDGE);
+	vertices[3].set(EDGE, 0);
+	for (int i = 0; i < 4; ++i) {
+		screen.TransPosForRender(vertices[i]);
+	}
+
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(0);
+	shader->sprite();
+
+	float vb[16];
+
+	vb[0] = vertices[0].x, vb[1] = vertices[0].y;
+	vb[2] = 0, vb[3] = 0;
+
+	vb[4] = vertices[1].x, vb[5] = vertices[1].y;
+	vb[6] = 0, vb[7] = 1;
+
+	vb[8] = vertices[2].x, vb[9] = vertices[2].y;
+	vb[10] = 1, vb[11] = 1;
+
+	vb[12] = vertices[3].x, vb[13] = vertices[3].y;
+	vb[14] = 1, vb[15] = 0;
+
+	ShaderNew::Instance()->Draw(vb, tex_id);
+
+	PrimitiveDraw::rect(screen, Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
 
 }

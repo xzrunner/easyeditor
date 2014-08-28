@@ -39,6 +39,7 @@
 #include "dataset/Layer.h"
 #include "dataset/SpriteTools.h"
 #include "dataset/TPNode.h"
+#include "dataset/text_util.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"
@@ -147,3 +148,4 @@
 #include "render/style_config.h"
 #include "render/ShaderNew.h"
 #include "render/DynamicTexture.h"
+#include "render/DynamicFont.h"

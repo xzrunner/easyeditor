@@ -1,7 +1,6 @@
 #ifndef _DRAG2D_DYNAMIC_FONT_H_
 #define _DRAG2D_DYNAMIC_FONT_H_
 
-#include "common/Rect.h"
 #include "common/tools.h"
 #include "dataset/FTRender.h"
 
@@ -13,15 +12,22 @@ namespace d2d
 typedef unsigned int GLuint;
 
 class TPNode;
+class Screen;
 
 class DynamicFont
 {
 public:
 	static DynamicFont* Instance();
 
-	const Rect* LookUp(int character, int font_size, int color, int is_edge);
+	const TPNode* LookUp(int character, int font_size, int color, int is_edge);
 
 	void LoadFontFile(const char* filename);
+
+	int GetTextureID() const { return m_tex; }
+	int GetWidth() const { return m_width; }
+	int GetHeight() const { return m_height; }
+
+	void DebugDraw(const Screen& screen) const;
 
 private:
 	DynamicFont();
@@ -38,7 +44,7 @@ private:
 
 		void Init(int capacity);
 
-		Rect* LookUp(int character, int font_size, int color, int is_edge);
+		TPNode** LookUp(int character, int font_size, int color, int is_edge);
 
 	private:
 		static int GetHashVal(int character, int font_size, int color, int is_edge);
@@ -53,7 +59,7 @@ private:
 			int color;
 			int is_edge;
 
-			Rect rect;
+			TPNode* rect;
 		}; // Node
 
 	private:
