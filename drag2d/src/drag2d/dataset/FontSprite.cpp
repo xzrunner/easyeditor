@@ -139,6 +139,7 @@ void FontSprite::load(const Json::Value& val)
 			filename = val["font_filename"].asString();
 			m_symbol->loadFont(filename);
 		}
+		m_text = val["content"].asString();
 	}
 
 	buildBounding();
@@ -156,6 +157,7 @@ void FontSprite::store(Json::Value& val) const
 	val["label_width"] = width;
 	val["label_height"] = height;
 	val["font_filename"] = filename;
+	val["content"] = m_text;
 }
 
 void FontSprite::buildBounding()
