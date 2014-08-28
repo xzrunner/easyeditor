@@ -263,8 +263,7 @@ uint32_t* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel32 f
 	return NULL;
 }
 
-uint32_t* FTRender::WriteGlyphNoStroker(int unicode, int size, union Pixel32 col, 
-											GlyphLayout& layout)
+uint32_t* FTRender::WriteGlyphNoStroker(int unicode, int size, union Pixel32 col, GlyphLayout& layout)
 {
 	if (!m_face) {
 		return NULL;

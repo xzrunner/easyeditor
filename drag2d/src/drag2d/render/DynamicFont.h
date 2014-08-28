@@ -14,12 +14,30 @@ typedef unsigned int GLuint;
 class TPNode;
 class Screen;
 
+struct Glyph
+{
+	bool is_used;
+
+	// only hori current
+	int bearing_x;
+	int bearing_y;
+	int advande;
+
+	TPNode* tpnode;
+
+	Glyph() {
+		is_used = false;
+		tpnode = NULL;
+		bearing_x = bearing_y = advande = 0;
+	}
+}; // Glyph
+
 class DynamicFont
 {
 public:
 	static DynamicFont* Instance();
 
-	const TPNode* LookUp(int character, int font_size, int color, int is_edge);
+	const Glyph* LookUp(int character, int font_size, int color, int is_edge);
 
 	void LoadFontFile(const char* filename);
 
@@ -44,7 +62,7 @@ private:
 
 		void Init(int capacity);
 
-		TPNode** LookUp(int character, int font_size, int color, int is_edge);
+		Glyph* LookUp(int character, int font_size, int color, int is_edge);
 
 	private:
 		static int GetHashVal(int character, int font_size, int color, int is_edge);
@@ -59,7 +77,7 @@ private:
 			int color;
 			int is_edge;
 
-			TPNode* rect;
+			Glyph glyph;
 		}; // Node
 
 	private:

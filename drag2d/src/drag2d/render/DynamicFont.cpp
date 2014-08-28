@@ -43,11 +43,11 @@ DynamicFont::~DynamicFont()
 	delete m_root;
 }
 
-const TPNode* DynamicFont::LookUp(int character, int font_size, int color, int is_edge)
+const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is_edge)
 {
-	TPNode** r = m_hash.LookUp(character, font_size, color, is_edge);
-	if (*r) {
-		return *r;
+	Glyph* glyph = m_hash.LookUp(character, font_size, color, is_edge);
+	if (glyph->is_used) {
+		return glyph;
 	}
 	
 // 	if (character == ' ') {
@@ -69,7 +69,12 @@ const TPNode* DynamicFont::LookUp(int character, int font_size, int color, int i
  	if (n) {
 		glBindTexture(GL_TEXTURE_2D, m_tex);
 		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX(), n->GetMinY(), w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-		*r = n;
+
+		glyph->is_used = true;
+		glyph->bearing_x = layout.bearingX;
+		glyph->bearing_y = layout.bearingY;
+		glyph->advande = layout.advance;
+		glyph->tpnode = n;
  	}	
 
 	return NULL;
@@ -132,7 +137,7 @@ Init(int capacity)
 	}
 }
 
-TPNode** DynamicFont::Hash::
+Glyph* DynamicFont::Hash::
 LookUp(int character, int font_size, int color, int is_edge)
 {
 	int h = Hash::GetHashVal(character, font_size, color, is_edge);
@@ -143,7 +148,7 @@ LookUp(int character, int font_size, int color, int is_edge)
 			n->color == color && 
 			n->is_edge == is_edge) 
 		{
-			return &n->rect;
+			return &n->glyph;
 		}
 		n = n->next;
 	}
@@ -158,7 +163,7 @@ LookUp(int character, int font_size, int color, int is_edge)
 	new_node->font_size = font_size;
 	new_node->color = color;
 	new_node->is_edge = is_edge;
-	return &new_node->rect;
+	return &new_node->glyph;
 }
 
 int DynamicFont::Hash::

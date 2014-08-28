@@ -18,8 +18,6 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 
 	float x = pos.x,
 		  y = pos.y;
-	const float WIDTH = 20,
-				HEIGHT = 20;
 	Vector vertices[4], texcoords[4];
 	float txmin, txmax, tymin, tymax;
 	const float tex_width = dfont->GetWidth(),
@@ -27,15 +25,21 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 	const int tex_id = dfont->GetTextureID();
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
-		const TPNode* r = dfont->LookUp(unicodes[i], 20, 0, 0);
-		if (!r) {
+		const Glyph* g = dfont->LookUp(unicodes[i], 20, 0, 0);
+		if (!g) {
 			continue;
 		}
+		const TPNode* r = g->tpnode;
 
-		vertices[0].set(x, y);
-		vertices[1].set(x+WIDTH, y);
-		vertices[2].set(x+WIDTH, y+HEIGHT);
-		vertices[3].set(x, y+HEIGHT);
+		float xmin = x + g->bearing_x;
+		float xmax = xmin + r->GetWidth();
+		float ymax = y + g->bearing_y;
+		float ymin = ymax - r->GetHeight();
+
+		vertices[0].set(xmin, ymin);
+		vertices[1].set(xmax, ymin);
+		vertices[2].set(xmax, ymax);
+		vertices[3].set(xmin, ymax);
 		for (int i = 0; i < 4; ++i) {
 			screen.TransPosForRender(vertices[i]);
 		}
@@ -63,7 +67,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 		shader->sprite();
 		shader->Draw(vertices, texcoords, tex_id);
 
-		x += WIDTH;
+		x += g->advande;
 	}
 }
 

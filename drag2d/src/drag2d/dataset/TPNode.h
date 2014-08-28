@@ -31,6 +31,9 @@ public:
 	int GetMinY() const { return m_ymin; }
 	int GetMaxY() const { return m_ymax; }
 
+	int GetWidth() const { return m_xmax - m_xmin; }
+	int GetHeight() const { return m_ymax - m_ymin; }
+
 private:
 	TPNode* Split(int w, int h);
 
