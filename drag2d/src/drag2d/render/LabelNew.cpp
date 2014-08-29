@@ -11,7 +11,7 @@ namespace d2d
 {
 
 void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
-					 const LabelStyle& style) const
+					 const LabelStyle& style)
 {
 	// to unicode
 	DynamicFont* dfont = DynamicFont::Instance();

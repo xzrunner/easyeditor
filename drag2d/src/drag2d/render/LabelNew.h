@@ -27,8 +27,8 @@ struct Glyph;
 class LabelNew
 {
 public:
-	void Print(const Screen& screen, const char* text, const Vector& pos,
-		const LabelStyle& style) const;
+	static void Print(const Screen& screen, const char* text, const Vector& pos,
+		const LabelStyle& style);
 
 private:
 	struct Line

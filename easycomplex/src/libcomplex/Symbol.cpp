@@ -44,7 +44,7 @@ void Symbol::draw(const d2d::Screen& scr,
 
 	d2d::PrimitiveDraw::rect(scr, m_clipbox, m_style);
 
-	d2d::SpriteTools::DrawName(sprite);
+	d2d::SpriteTools::DrawName(scr, sprite);
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

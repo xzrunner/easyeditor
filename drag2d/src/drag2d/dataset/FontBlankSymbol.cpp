@@ -59,7 +59,7 @@ void FontBlankSymbol::draw(const Screen& scr,
 		DrawText(scr, sprite, mt);
 	}
 
-//	SpriteTools::DrawName(scr, sprite, mt);
+	SpriteTools::DrawName(scr, sprite, mt);
 }
 
 Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
@@ -139,7 +139,9 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
 			const std::string& str = font->GetTextContext();
 			if (!str.empty()) {
-				LabelNew label;
+				Vector pos = sprite->getPosition();
+				pos = Math::transVector(Vector(pos), mt);
+
 				LabelStyle style;
 				style.has_edge = font->has_edge;
 				style.font_size = font->size;
@@ -148,7 +150,8 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 				style.color = font->color;
 				style.align_hori = font->align_hori;
 				style.align_vert = font->align_vert;
-				label.Print(scr, str.c_str(), sprite->getPosition(), style);
+
+				LabelNew::Print(scr, str.c_str(), pos, style);
 			}
 		}
 	}
