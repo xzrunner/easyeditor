@@ -140,7 +140,13 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 			const std::string& str = font->GetTextContext();
 			if (!str.empty()) {
 				LabelNew label;
-				label.Print(scr, str.c_str(), sprite->getPosition(), font->size, font->width, font->height);
+				LabelStyle style;
+				style.has_edge = font->has_edge;
+				style.font_size = font->size;
+				style.width = font->width;
+				style.height = font->height;
+				style.color = font->color;
+				label.Print(scr, str.c_str(), sprite->getPosition(), style);
 			}
 		}
 	}

@@ -60,6 +60,8 @@ protected:
 public:
 	std::string font;
 
+	bool has_edge;
+
 	Colorf color;
 
 	HoriAlignType align_hori;

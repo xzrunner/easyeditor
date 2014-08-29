@@ -13,6 +13,7 @@ FontSprite::FontSprite()
 	: m_symbol(NULL)
 {
 	font = "";
+	has_edge = false;
 	color.set(1, 1, 1, 1);
 	align_hori = HAT_LEFT;
 	align_vert = VAT_TOP;
@@ -27,6 +28,7 @@ FontSprite::FontSprite(const FontSprite& sprite)
 {
 	m_symbol->retain();
 	font = sprite.font;
+	has_edge = sprite.has_edge;
 	color = sprite.color;
 	align_hori = sprite.align_hori;
 	align_vert = sprite.align_vert;
@@ -66,6 +68,7 @@ FontSprite::FontSprite(FontBlankSymbol* symbol)
 	width = symbol->width;
 	height = symbol->height;
 	filename = symbol->filename;
+	has_edge = false;
 
 	buildBounding();
 }

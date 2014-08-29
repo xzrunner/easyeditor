@@ -1,6 +1,7 @@
 #include "LabelNew.h"
 #include "DynamicFont.h"
 
+#include "common/color_trans.h"
 #include "dataset/text_util.h"
 #include "dataset/TPNode.h"
 #include "view/Screen.h"
@@ -10,15 +11,17 @@ namespace d2d
 {
 
 void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
-					 int font_size, int width, int height) const
+					 const LabelStyle& style) const
 {
+	const int color = trans_color2int(style.color, PT_RGBA);
+
 	DynamicFont* dfont = DynamicFont::Instance();
 	std::string utf8 = string2utf8(text);
 	std::vector<int> unicodes;
 	utf8_to_unicode(utf8.c_str(), unicodes);
 
-	float x = pos.x - width*0.5f,
-		  y = pos.y + height*0.5f;
+	float x = pos.x - style.width*0.5f,
+		  y = pos.y + style.height*0.5f;
 	const float start_x = x, start_y = y;
 	Vector vertices[4], texcoords[4];
 	float xmin, xmax, ymin, ymax;
@@ -29,15 +32,15 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 	const int padding = dfont->GetPadding();
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
-		const Glyph* g = dfont->LookUp(unicodes[i], font_size, 0, 0);
+		const Glyph* g = dfont->LookUp(unicodes[i], style.font_size, color, style.has_edge);
 		if (!g) {
 			continue;
 		}
-		if (x + g->advande - start_x > width) {
+		if (x + g->advande - start_x > style.width) {
 			x = start_x;
 			y -= g->metrics_height;
 		}
-		if (start_y - (y - g->metrics_height) > height) {
+		if (start_y - (y - g->metrics_height) > style.height) {
 			break;
 		}
 
