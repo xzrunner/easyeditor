@@ -2,14 +2,15 @@
 #include "DynamicUtils.h"
 
 #include "dataset/TPNode.h"
+#include "render/ShaderNew.h"
 
 #include <opengl/opengl.h>
 
 namespace d2d
 {
 
-const int DynamicFont::WIDTH = 512;
-const int DynamicFont::HEIGHT = 512;
+const int DynamicFont::WIDTH = 256;
+const int DynamicFont::HEIGHT = 256;
 const int DynamicFont::PADDING = 1;
 
 DynamicFont* DynamicFont::m_instance = NULL;
@@ -33,8 +34,6 @@ DynamicFont::DynamicFont()
 	m_tex = DynamicUtils::InitTexture(m_width, m_height);
 	m_fbo = DynamicUtils::InitFBO(m_tex);
 	m_root = DynamicUtils::InitRoot(m_width, m_height);
-
-	m_hash.Init(1024);
 }
 
 DynamicFont::~DynamicFont()
@@ -68,6 +67,11 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
  	int w = layout.sizer.width;
  	int h = layout.sizer.height;
  	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+	if (!n) {
+		Clear();
+		n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+	}
+
  	if (n) {
 		glBindTexture(GL_TEXTURE_2D, m_tex);
 		if (n->IsRotated()) {
@@ -100,6 +104,22 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
 void DynamicFont::LoadFontFile(const char* filename)
 {
 	m_ft_render.LoadFont(filename);	
+}
+
+void DynamicFont::Clear()
+{
+	delete m_root;
+	m_root = DynamicUtils::InitRoot(m_width, m_height);
+	m_hash.Clear();
+
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+	glBindTexture(GL_TEXTURE_2D, m_tex);
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	ShaderNew* shader = ShaderNew::Instance();
+	glBindTexture(GL_TEXTURE_2D, shader->GetTexID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, shader->GetFboID());
 }
 
 void DynamicFont::DebugDraw(const Screen& screen) const
@@ -135,23 +155,20 @@ Hash()
 {
 	m_freelist = m_freenode_ptr = NULL;
 	memset(m_hash, 0, sizeof(m_hash));
+
+	m_capacity = 10240;
+	m_freenode_ptr = m_freelist = new Node[m_capacity];
+	memset(m_freelist, 0, sizeof(Node)*m_capacity);
+	for (int i = 0; i < m_capacity; i++) {
+		Node* n = &m_freelist[i];
+		n->next = &m_freelist[i+1];
+	}
 }
 
 DynamicFont::Hash::
 ~Hash()
 {
 	delete m_freelist;
-}
-
-void DynamicFont::Hash::
-Init(int capacity)
-{
-	m_freenode_ptr = m_freelist = new Node[capacity];
-	memset(m_freelist, 0, sizeof(Node)*capacity);
-	for (int i = 0; i < capacity; i++) {
-		Node* n = &m_freelist[i];
-		n->next = &m_freelist[i+1];
-	}
 }
 
 Glyph* DynamicFont::Hash::
@@ -182,6 +199,19 @@ LookUp(int character, int font_size, int color, int is_edge)
 	new_node->is_edge = is_edge;
 
 	return &new_node->glyph;
+}
+
+void DynamicFont::Hash::
+Clear()
+{
+	memset(m_hash, 0, sizeof(m_hash));
+
+	m_freenode_ptr = m_freelist;
+	memset(m_freelist, 0, sizeof(Node)*m_capacity);
+	for (int i = 0; i < m_capacity; i++) {
+		Node* n = &m_freelist[i];
+		n->next = &m_freelist[i+1];
+	}
 }
 
 int DynamicFont::Hash::

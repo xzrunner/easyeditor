@@ -57,6 +57,8 @@ private:
 
 	uint32_t* GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout);
 
+	void Clear();
+
 private:
 	class Hash
 	{
@@ -64,9 +66,9 @@ private:
 		Hash();
 		~Hash();
 
-		void Init(int capacity);
-
 		Glyph* LookUp(int character, int font_size, int color, int is_edge);
+
+		void Clear();
 
 	private:
 		static int GetHashVal(int character, int font_size, int color, int is_edge);
@@ -88,6 +90,7 @@ private:
 		static const int HASH_SIZE = 4651;
 
 	private:
+		int m_capacity;
 		Node* m_freelist;
 		Node* m_freenode_ptr;
 
