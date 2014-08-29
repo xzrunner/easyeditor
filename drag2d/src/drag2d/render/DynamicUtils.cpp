@@ -68,6 +68,18 @@ TPNode* DynamicUtils::InitRoot(int width, int height)
 	return root;
 }
 
+void DynamicUtils::ClearTexture(int tex_id, int fbo_id)
+{
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo_id);
+	glBindTexture(GL_TEXTURE_2D, tex_id);
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	ShaderNew* shader = ShaderNew::Instance();
+	glBindTexture(GL_TEXTURE_2D, shader->GetTexID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, shader->GetFboID());
+}
+
 void DynamicUtils::DebugDraw(GLuint tex_id)
 {
 	ShaderNew* shader = ShaderNew::Instance();

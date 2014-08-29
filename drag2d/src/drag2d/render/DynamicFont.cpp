@@ -2,7 +2,6 @@
 #include "DynamicUtils.h"
 
 #include "dataset/TPNode.h"
-#include "render/ShaderNew.h"
 
 #include <opengl/opengl.h>
 
@@ -112,14 +111,7 @@ void DynamicFont::Clear()
 	m_root = DynamicUtils::InitRoot(m_width, m_height);
 	m_hash.Clear();
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-	glBindTexture(GL_TEXTURE_2D, m_tex);
-	glClearColor(0, 0, 0, 0);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	ShaderNew* shader = ShaderNew::Instance();
-	glBindTexture(GL_TEXTURE_2D, shader->GetTexID());
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, shader->GetFboID());
+	DynamicUtils::ClearTexture(m_tex, m_fbo);
 }
 
 void DynamicFont::DebugDraw(const Screen& screen) const
