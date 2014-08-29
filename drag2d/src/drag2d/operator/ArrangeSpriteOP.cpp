@@ -6,6 +6,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "dataset/AbstractBV.h"
+#include "dataset/ImageSymbol.h"
 #include "common/Math.h"
 #include "common/visitors.h"
 #include "common/Matrix.h"
@@ -188,7 +189,7 @@ bool ArrangeSpriteOP<TBase>::onMouseLeftUp(int x, int y)
 		}
 	}
 
-	if (m_propertyPanel && m_bDirty)
+	if (m_propertyPanel && (m_bDirty || m_selection->size() == 1))
 	{
 		m_propertyPanel->enablePropertyGrid(true);
 		m_propertyPanel->updatePropertyGrid();
