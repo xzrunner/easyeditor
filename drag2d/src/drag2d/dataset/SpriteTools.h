@@ -12,12 +12,7 @@ struct LabelStyle;
 class SpriteTools
 {
 public:
-	static void DrawName(const Screen& scr, const ISprite* sprite);
-
 	static void DrawName(const Screen& scr, const ISprite* sprite, const Matrix& mt);
-
-private:
-	static void InitLabelStyle(LabelStyle& style);
 
 }; // SpriteTools
 
