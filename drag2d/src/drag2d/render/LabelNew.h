@@ -10,7 +10,8 @@ class Vector;
 class LabelNew
 {
 public:
-	void Print(const Screen& screen, const char* text, const Vector& pos) const;
+	void Print(const Screen& screen, const char* text, const Vector& pos,
+		int font_size, int width, int height) const;
 
 }; // LabelNew
 

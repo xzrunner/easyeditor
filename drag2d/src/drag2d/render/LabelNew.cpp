@@ -9,15 +9,17 @@
 namespace d2d
 {
 
-void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) const
+void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
+					 int font_size, int width, int height) const
 {
 	DynamicFont* dfont = DynamicFont::Instance();
 	std::string utf8 = string2utf8(text);
 	std::vector<int> unicodes;
 	utf8_to_unicode(utf8.c_str(), unicodes);
 
-	float x = pos.x,
-		  y = pos.y;
+	float x = pos.x - width*0.5f,
+		  y = pos.y + height*0.5f;
+	const float start_x = x, start_y = y;
 	Vector vertices[4], texcoords[4];
 	float xmin, xmax, ymin, ymax;
 	float txmin, txmax, tymin, tymax;
@@ -27,14 +29,22 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos) 
 	const int padding = dfont->GetPadding();
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
-		const Glyph* g = dfont->LookUp(unicodes[i], 20, 0, 0);
+		const Glyph* g = dfont->LookUp(unicodes[i], font_size, 0, 0);
 		if (!g) {
 			continue;
 		}
+		if (x + g->advande - start_x > width) {
+			x = start_x;
+			y -= g->metrics_height;
+		}
+		if (start_y - (y - g->metrics_height) > height) {
+			break;
+		}
+
 		const TPNode* r = g->tpnode;
 
 		xmin = x + g->bearing_x;
-		ymax = y + g->bearing_y;
+		ymax = y + g->bearing_y - g->metrics_height;
 		if (r->IsRotated()) {
 			xmax = xmin + (r->GetHeight()-padding*2);
 			ymin = ymax - (r->GetWidth()-padding*2);

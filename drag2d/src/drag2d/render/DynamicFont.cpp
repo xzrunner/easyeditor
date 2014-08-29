@@ -90,6 +90,7 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
 		glyph->bearing_x = layout.bearingX;
 		glyph->bearing_y = layout.bearingY;
 		glyph->advande = layout.advance;
+		glyph->metrics_height = layout.metrics_height;
 		glyph->tpnode = n;
  	}	
 
@@ -172,13 +173,14 @@ LookUp(int character, int font_size, int color, int is_edge)
 	// insert
 	Node* new_node = m_freenode_ptr;
 	m_freenode_ptr = m_freenode_ptr->next;
-	new_node->next = n;
+	new_node->next = m_hash[h];
 	m_hash[h] = new_node;
 
 	new_node->character = character;
 	new_node->font_size = font_size;
 	new_node->color = color;
 	new_node->is_edge = is_edge;
+
 	return &new_node->glyph;
 }
 

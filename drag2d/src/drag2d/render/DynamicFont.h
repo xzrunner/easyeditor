@@ -23,12 +23,15 @@ struct Glyph
 	int bearing_y;
 	int advande;
 
+	int metrics_height;
+
 	TPNode* tpnode;
 
 	Glyph() {
 		is_used = false;
 		tpnode = NULL;
 		bearing_x = bearing_y = advande = 0;
+		metrics_height = 0;
 	}
 }; // Glyph
 
