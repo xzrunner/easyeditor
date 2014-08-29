@@ -73,6 +73,7 @@
 #include "view/SettingsDialog.h"
 #include "view/FinishDialog.h"
 #include "view/LibraryFontPage.h"
+#include "view/TextDialog.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

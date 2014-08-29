@@ -1776,6 +1776,14 @@
 					RelativePath="..\..\..\src\drag2d\view\FinishDialog.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\TextDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\TextDialog.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="frame"

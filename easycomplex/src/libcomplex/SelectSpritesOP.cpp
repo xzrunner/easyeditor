@@ -60,6 +60,11 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 
 		m_editPanel->resetCanvas();
 	}
+	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
+	{
+		d2d::TextDialog dlg(m_editPanel, font);
+		dlg.ShowModal();
+	}
 
 	return false;
 }
