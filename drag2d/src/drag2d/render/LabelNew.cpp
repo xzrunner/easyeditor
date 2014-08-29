@@ -30,64 +30,93 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 		tex_height = dfont->GetHeight();
 	const int tex_id = dfont->GetTextureID();
 	const int padding = dfont->GetPadding();
+
+	std::vector<Line> lines;
+	Line line;
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
-		const Glyph* g = dfont->LookUp(unicodes[i], style.font_size, color, style.has_edge);
-		if (!g) {
-			continue;
-		}
-		if (x + g->advande - start_x > style.width) {
-			x = start_x;
-			y -= g->metrics_height;
-		}
-		if (start_y - (y - g->metrics_height) > style.height) {
-			break;
+		int unicode = unicodes[i];
+		if (unicode == '\n') {
+			lines.push_back(line);
+			line.Clear();
 		}
 
-		const TPNode* r = g->tpnode;
-
-		xmin = x + g->bearing_x;
-		ymax = y + g->bearing_y - g->metrics_height;
-		if (r->IsRotated()) {
-			xmax = xmin + (r->GetHeight()-padding*2);
-			ymin = ymax - (r->GetWidth()-padding*2);
-		} else {
-			xmax = xmin + (r->GetWidth()-padding*2);
-			ymin = ymax - (r->GetHeight()-padding*2);
+		const Glyph* g = dfont->LookUp(unicode, style.font_size, color, style.has_edge);
+		if (g) {
+			if (line.height == 0) {
+				line.height = g->metrics_height;
+			}
+			line.width += g->advande;
 		}
-
-		vertices[0].set(xmin, ymin);
-		vertices[1].set(xmax, ymin);
-		vertices[2].set(xmax, ymax);
-		vertices[3].set(xmin, ymax);
-		for (int i = 0; i < 4; ++i) {
-			screen.TransPosForRender(vertices[i]);
+		if (line.height == 0 && g) {
+			line.height = g->metrics_height;
 		}
+		line.glyphs.push_back(g);
+	}
+	lines.push_back(line);
 
-		txmin = (r->GetMinX()+padding) / tex_width;
-		txmax = (r->GetMaxX()-padding) / tex_width;
-		tymin = (r->GetMinY()+padding) / tex_height;
-		tymax = (r->GetMaxY()-padding) / tex_height;
+	for (int i = 0, n = lines.size(); i < n; ++i) {
+		const Line& line = lines[i];
+		for (int j = 0, m = line.glyphs.size(); j < m; ++j) {
+			const Glyph* g = line.glyphs[j];
+			if (!g) {
+				continue;
+			}
+			if (x + g->advande - start_x > style.width) {
+				x = start_x;
+				y -= g->metrics_height;
+			}
+			if (start_y - (y - g->metrics_height) > style.height) {
+				break;
+			}
 
- 		if (r->IsRotated())
- 		{
- 			d2d::Vector tmp = vertices[3];
- 			vertices[3] = vertices[2];
- 			vertices[2] = vertices[1];
- 			vertices[1] = vertices[0];
- 			vertices[0] = tmp;
- 		}
+			const TPNode* r = g->tpnode;
 
-		texcoords[0].set(txmin, tymin);
-		texcoords[1].set(txmax, tymin);
-		texcoords[2].set(txmax, tymax);
-		texcoords[3].set(txmin, tymax);
+			xmin = x + g->bearing_x;
+			ymax = y + g->bearing_y - g->metrics_height;
+			if (r->IsRotated()) {
+				xmax = xmin + (r->GetHeight()-padding*2);
+				ymin = ymax - (r->GetWidth()-padding*2);
+			} else {
+				xmax = xmin + (r->GetWidth()-padding*2);
+				ymin = ymax - (r->GetHeight()-padding*2);
+			}
 
-		ShaderNew* shader = ShaderNew::Instance();
-		shader->sprite();
-		shader->Draw(vertices, texcoords, tex_id);
+			vertices[0].set(xmin, ymin);
+			vertices[1].set(xmax, ymin);
+			vertices[2].set(xmax, ymax);
+			vertices[3].set(xmin, ymax);
+			for (int i = 0; i < 4; ++i) {
+				screen.TransPosForRender(vertices[i]);
+			}
 
-		x += g->advande;
+			txmin = (r->GetMinX()+padding) / tex_width;
+			txmax = (r->GetMaxX()-padding) / tex_width;
+			tymin = (r->GetMinY()+padding) / tex_height;
+			tymax = (r->GetMaxY()-padding) / tex_height;
+
+			if (r->IsRotated())
+			{
+				d2d::Vector tmp = vertices[3];
+				vertices[3] = vertices[2];
+				vertices[2] = vertices[1];
+				vertices[1] = vertices[0];
+				vertices[0] = tmp;
+			}
+
+			texcoords[0].set(txmin, tymin);
+			texcoords[1].set(txmax, tymin);
+			texcoords[2].set(txmax, tymax);
+			texcoords[3].set(txmin, tymax);
+
+			ShaderNew* shader = ShaderNew::Instance();
+			shader->sprite();
+			shader->Draw(vertices, texcoords, tex_id);
+
+			x += g->advande;
+		}
+		y -= line.height;
+		x = start_x;
 	}
 }
 
