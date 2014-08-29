@@ -61,6 +61,7 @@ void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool b
 
 	wxPropertyGrid* pg = panel->getPG();
 	pg->GetProperty(wxT("Font"))->Enable(bEnable);
+	pg->GetProperty(wxT("Edge"))->Enable(bEnable);
 	pg->GetProperty(wxT("FontColor"))->Enable(bEnable);
 	pg->GetProperty(wxT("AlignHori"))->Enable(bEnable);
 	pg->GetProperty(wxT("AlignVert"))->Enable(bEnable);
@@ -77,6 +78,8 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
+
+	pg->GetProperty(wxT("Edge"))->SetValue(sprite->has_edge);
 
 	wxColour col = wxColour(sprite->color.r*255, sprite->color.g*255, sprite->color.b*255, sprite->color.a*255);
 	pg->SetPropertyValueString(wxT("FontColor"), col.GetAsString());
