@@ -146,6 +146,8 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 				style.width = font->width;
 				style.height = font->height;
 				style.color = font->color;
+				style.align_hori = font->align_hori;
+				style.align_vert = font->align_vert;
 				label.Print(scr, str.c_str(), sprite->getPosition(), style);
 			}
 		}

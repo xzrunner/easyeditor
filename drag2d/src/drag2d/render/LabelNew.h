@@ -2,6 +2,7 @@
 #define _DRAG2D_LABEL_NEW_H_
 
 #include <common/Color.h>
+#include <common/types.h>
 
 #include <vector>
 
@@ -17,6 +18,8 @@ struct LabelStyle
 	int width, height;
 	Colorf color;
 	bool has_edge;
+	HoriAlignType align_hori;
+	VertAlignType align_vert;
 };
 
 struct Glyph;

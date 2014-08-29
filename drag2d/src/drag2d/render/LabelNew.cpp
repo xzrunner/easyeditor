@@ -13,36 +13,33 @@ namespace d2d
 void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 					 const LabelStyle& style) const
 {
-	const int color = trans_color2int(style.color, PT_RGBA);
-
+	// to unicode
 	DynamicFont* dfont = DynamicFont::Instance();
 	std::string utf8 = string2utf8(text);
 	std::vector<int> unicodes;
 	utf8_to_unicode(utf8.c_str(), unicodes);
 
-	float x = pos.x - style.width*0.5f,
-		  y = pos.y + style.height*0.5f;
-	const float start_x = x, start_y = y;
-	Vector vertices[4], texcoords[4];
-	float xmin, xmax, ymin, ymax;
-	float txmin, txmax, tymin, tymax;
-	const float tex_width = dfont->GetWidth(),
-		tex_height = dfont->GetHeight();
-	const int tex_id = dfont->GetTextureID();
-	const int padding = dfont->GetPadding();
-
+	// to lines
+	const int color = trans_color2int(style.color, PT_RGBA);
+	int tot_line_height = 0;
 	std::vector<Line> lines;
 	Line line;
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
 		int unicode = unicodes[i];
 		if (unicode == '\n') {
+			tot_line_height += line.height;
 			lines.push_back(line);
 			line.Clear();
 		}
 
 		const Glyph* g = dfont->LookUp(unicode, style.font_size, color, style.has_edge);
 		if (g) {
+			if (line.width + g->advande > style.width) {
+				tot_line_height += line.height;
+				lines.push_back(line);
+				line.Clear();
+			}
 			if (line.height == 0) {
 				line.height = g->metrics_height;
 			}
@@ -53,21 +50,41 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 		}
 		line.glyphs.push_back(g);
 	}
+	tot_line_height += line.height;
 	lines.push_back(line);
 
+	// draw
+	Vector vertices[4], texcoords[4];
+	float xmin, xmax, ymin, ymax;
+	float txmin, txmax, tymin, tymax;
+	const float tex_width = dfont->GetWidth(),
+		tex_height = dfont->GetHeight();
+	const int tex_id = dfont->GetTextureID();
+	const int padding = dfont->GetPadding();
+
+	int y = pos.y + style.height*0.5f;
+	if (style.align_vert == VAT_TOP) {
+		y = pos.y + style.height*0.5f;
+	} else if (style.align_vert == VAT_BOTTOM) {
+		y = pos.y - style.height*0.5f + tot_line_height;
+	} else if (style.align_vert == VAT_CENTER) {
+		y = pos.y + tot_line_height * 0.5f;
+	}
 	for (int i = 0, n = lines.size(); i < n; ++i) {
+		// todo discard line which outof label
 		const Line& line = lines[i];
+		float x = pos.x - style.width*0.5f;
+		if (style.align_hori == HAT_LEFT) {
+			x = pos.x - style.width*0.5f;
+		} else if (style.align_hori == HAT_RIGHT) {
+			x = pos.x + style.width*0.5f - line.width;
+		} else if (style.align_hori == HAT_CENTER) {
+			x = pos.x -line.width * 0.5f;
+		}
 		for (int j = 0, m = line.glyphs.size(); j < m; ++j) {
 			const Glyph* g = line.glyphs[j];
 			if (!g) {
 				continue;
-			}
-			if (x + g->advande - start_x > style.width) {
-				x = start_x;
-				y -= g->metrics_height;
-			}
-			if (start_y - (y - g->metrics_height) > style.height) {
-				break;
 			}
 
 			const TPNode* r = g->tpnode;
@@ -116,7 +133,6 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 			x += g->advande;
 		}
 		y -= line.height;
-		x = start_x;
 	}
 }
 
