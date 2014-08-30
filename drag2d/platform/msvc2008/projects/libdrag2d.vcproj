@@ -918,19 +918,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicPacker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\DynamicPacker.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\render\DynamicTexture.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\render\DynamicTexture.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\DynamicUtils.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\DynamicUtils.h"
 				>
 			</File>
 			<File

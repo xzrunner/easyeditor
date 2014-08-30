@@ -1,17 +1,9 @@
 #include "DynamicTexture.h"
-#include "DynamicUtils.h"
 
-#include "common/tools.h"
-#include "common/Exception.h"
 #include "dataset/TPNode.h"
 #include "render/ShaderNew.h"
-#include "render/PrimitiveDraw.h"
-#include "render/style_config.h"
-#include "view/Screen.h"
 
 #include <opengl/opengl.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
 
 namespace d2d
 {
@@ -31,26 +23,10 @@ DynamicTexture* DynamicTexture::Instance()
 }
 
 DynamicTexture::DynamicTexture()
-	: m_preload_idx(0)
+	: DynamicPacker(WIDTH, HEIGHT, PADDING)
+	, m_preload_idx(0)
 {
-	m_width = WIDTH;
-	m_height = HEIGHT;
-	m_padding = PADDING;
 	m_extrude = EXTRUDE;
-
-	initOpenGLExtensions();
-
-	m_tex = DynamicUtils::InitTexture(m_width, m_height);
-	m_fbo = DynamicUtils::InitFBO(m_tex);
-	m_root = DynamicUtils::InitRoot(m_width, m_height);
-}
-
-DynamicTexture::~DynamicTexture()
-{
-	glDeleteTextures(1, &m_tex);
-	glDeleteFramebuffersEXT(1, &m_fbo);
-
-	delete m_root;
 }
 
 void DynamicTexture::Begin()
@@ -131,12 +107,8 @@ const TPNode* DynamicTexture::Query(const Image& img) const
 	}
 }
 
-void DynamicTexture::ReloadTexture()
+void DynamicTexture::ReloadPixels()
 {
-	m_tex = DynamicUtils::InitTexture(m_width, m_height, m_tex);
-	m_fbo = DynamicUtils::InitFBO(m_tex, m_fbo);
-
-	// init content
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
@@ -154,17 +126,7 @@ void DynamicTexture::ReloadTexture()
 
 	// set fbo to force flush
 	// todo dtex之后insert时，不能连续
-	shader->SetFBO(0);
-}
-
-void DynamicTexture::DebugDraw() const
-{
-	DynamicUtils::DebugDraw(m_tex);
-}
-
-void DynamicTexture::DebugDraw(const Screen& screen) const
-{
-	DynamicUtils::DebugDraw(screen, m_tex);
+	shader->SetFBO(0);	
 }
 
 void DynamicTexture::InsertImage(const Image* img)

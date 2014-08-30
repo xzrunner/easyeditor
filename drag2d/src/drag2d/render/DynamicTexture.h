@@ -1,10 +1,11 @@
 #ifndef _DRAG2D_DYNAMIC_TEXTURE_H_
 #define _DRAG2D_DYNAMIC_TEXTURE_H_
 
+#include "DynamicPacker.h"
+
 #include "common/Rect.h"
 #include "dataset/Image.h"
 
-#include <set>
 #include <vector>
 
 namespace d2d
@@ -15,7 +16,7 @@ typedef unsigned int GLuint;
 class TPNode;
 class Image;
 
-class DynamicTexture
+class DynamicTexture : public DynamicPacker
 {
 public:
 	static DynamicTexture* Instance();
@@ -26,22 +27,13 @@ public:
 
 	void Remove(Image* img);
 
-	float GetPadding() const { return m_padding; }
-
 	const TPNode* Query(const Image& img) const;
 
-	int GetTextureID() const { return m_tex; }
-	int GetWidth() const { return m_width; }
-	int GetHeight() const { return m_height; }
-
-	void ReloadTexture();
-
-	void DebugDraw() const;
-	void DebugDraw(const Screen& screen) const;
+protected:
+	virtual void ReloadPixels();
 
 private:
 	DynamicTexture();
-	~DynamicTexture();
 
 	void InsertImage(const Image* img);
 
@@ -84,13 +76,7 @@ private:
 	static const int PADDING, EXTRUDE;
 
 private:
-	int m_width, m_height;
-	int m_padding, m_extrude;
-
-	GLuint m_tex;
-	GLuint m_fbo;
-
-	TPNode* m_root;
+	int m_extrude;
 
 	int m_preload_idx;
 	std::vector<const Image*> m_preload_list;

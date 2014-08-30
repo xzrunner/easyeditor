@@ -102,47 +102,47 @@ void Image::reload()
 
 void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 {
-	//////////////////////////////////////////////////////////////////////////
-//	// 原始 直接画
-//    	ShaderNew* shader = ShaderNew::Instance();
-//    	shader->sprite();
-//    
-//    	float tot_hw = m_width * 0.5f,
-//    		  tot_hh = m_height * 0.5f;
-//    	float txmin = (r.xMin + tot_hw) / m_width,
-//    		txmax = (r.xMax + tot_hw) / m_width,
-//    		tymin = (r.yMin + tot_hh) / m_height,
-//    		tymax = (r.yMax + tot_hh) / m_height;
-//    
-//  	d2d::Vector vertices[4];
-//  	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
-//  	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
-//  	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
-//  	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
-//  
-//  	for (int i = 0; i < 4; ++i) {
-//  		scr.TransPosForRender(vertices[i]);
-//  	}
-//  
-//  	float vb[16];
-//  	vb[0] = vertices[0].x;
-//  	vb[1] = vertices[0].y;
-//  	vb[2] = txmin;
-//  	vb[3] = tymin;
-//  	vb[4] = vertices[1].x;
-//  	vb[5] = vertices[1].y;
-//  	vb[6] = txmax;
-//  	vb[7] = tymin;
-//  	vb[8] = vertices[2].x;
-//  	vb[9] = vertices[2].y;
-//  	vb[10] = txmax;
-//  	vb[11] = tymax;
-//  	vb[12] = vertices[3].x;
-//  	vb[13] = vertices[3].y;
-//  	vb[14] = txmin;
-//  	vb[15] = tymax;
-//  
-//  	shader->Draw(vb, m_textureID);
+	////////////////////////////////////////////////////////////////////////////
+	//// 原始 直接画
+ //   	ShaderNew* shader = ShaderNew::Instance();
+ //   	shader->sprite();
+ //   
+ //   	float tot_hw = m_width * 0.5f,
+ //   		  tot_hh = m_height * 0.5f;
+ //   	float txmin = (r.xMin + tot_hw) / m_width,
+ //   		txmax = (r.xMax + tot_hw) / m_width,
+ //   		tymin = (r.yMin + tot_hh) / m_height,
+ //   		tymax = (r.yMax + tot_hh) / m_height;
+ //   
+ // 	d2d::Vector vertices[4];
+ // 	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
+ // 	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
+ // 	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
+ // 	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+ // 
+ // 	for (int i = 0; i < 4; ++i) {
+ // 		scr.TransPosForRender(vertices[i]);
+ // 	}
+ // 
+ // 	float vb[16];
+ // 	vb[0] = vertices[0].x;
+ // 	vb[1] = vertices[0].y;
+ // 	vb[2] = txmin;
+ // 	vb[3] = tymin;
+ // 	vb[4] = vertices[1].x;
+ // 	vb[5] = vertices[1].y;
+ // 	vb[6] = txmax;
+ // 	vb[7] = tymin;
+ // 	vb[8] = vertices[2].x;
+ // 	vb[9] = vertices[2].y;
+ // 	vb[10] = txmax;
+ // 	vb[11] = tymax;
+ // 	vb[12] = vertices[3].x;
+ // 	vb[13] = vertices[3].y;
+ // 	vb[14] = txmin;
+ // 	vb[15] = tymax;
+ // 
+ // 	shader->Draw(vb, m_textureID);
 
 	//////////////////////////////////////////////////////////////////////////
 //	用renderlist

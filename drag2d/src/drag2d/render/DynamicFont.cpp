@@ -1,5 +1,4 @@
 #include "DynamicFont.h"
-#include "DynamicUtils.h"
 
 #include "dataset/TPNode.h"
 #include "render/ShaderNew.h"
@@ -24,24 +23,8 @@ DynamicFont* DynamicFont::Instance()
 }
 
 DynamicFont::DynamicFont()
+	: DynamicPacker(WIDTH, HEIGHT, PADDING)
 {
-	m_width = WIDTH;
-	m_height = HEIGHT;
-	m_padding = PADDING;
-
-	initOpenGLExtensions();
-
-	m_tex = DynamicUtils::InitTexture(m_width, m_height);
-	m_fbo = DynamicUtils::InitFBO(m_tex);
-	m_root = DynamicUtils::InitRoot(m_width, m_height);
-}
-
-DynamicFont::~DynamicFont()
-{
-	glDeleteTextures(1, &m_tex);
-	glDeleteFramebuffersEXT(1, &m_fbo);
-
-	delete m_root;
 }
 
 const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is_edge)
@@ -112,21 +95,8 @@ void DynamicFont::LoadFontFile(const char* filename)
 	m_ft_render.LoadFont(filename);	
 }
 
-void DynamicFont::Clear()
+void DynamicFont::ReloadPixels()
 {
-	delete m_root;
-	m_root = DynamicUtils::InitRoot(m_width, m_height);
-	m_hash.Clear();
-
-	DynamicUtils::ClearTexture(m_tex, m_fbo);
-}
-
-void DynamicFont::ReloadTexture()
-{
-	m_tex = DynamicUtils::InitTexture(m_width, m_height, m_tex);
-	m_fbo = DynamicUtils::InitFBO(m_tex, m_fbo);
-
-	// init content
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
@@ -139,9 +109,13 @@ void DynamicFont::ReloadTexture()
 	shader->SetFBO(0);
 }
 
-void DynamicFont::DebugDraw(const Screen& screen) const
+void DynamicFont::Clear()
 {
-	DynamicUtils::DebugDraw(screen, m_tex);
+	delete m_root;
+	InitRoot();
+	m_hash.Clear();
+
+	ClearTexture();
 }
 
 uint32_t* DynamicFont::GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout)

@@ -1,13 +1,12 @@
 #ifndef _DRAG2D_DYNAMIC_FONT_H_
 #define _DRAG2D_DYNAMIC_FONT_H_
 
+#include "DynamicPacker.h"
 #include "interfaces.h"
-
+ 
 #include "common/tools.h"
 #include "common/Object.h"
 #include "dataset/FTRender.h"
-
-#include <map>
 
 namespace d2d
 {
@@ -47,7 +46,7 @@ struct Glyph : public Object
 	}
 }; // Glyph
 
-class DynamicFont
+class DynamicFont : public DynamicPacker
 {
 public:
 	static DynamicFont* Instance();
@@ -56,18 +55,11 @@ public:
 
 	void LoadFontFile(const char* filename);
 
-	int GetTextureID() const { return m_tex; }
-	int GetWidth() const { return m_width; }
-	int GetHeight() const { return m_height; }
-	int GetPadding() const { return m_padding; }
-
-	void ReloadTexture();
-
-	void DebugDraw(const Screen& screen) const;
+protected:
+	virtual void ReloadPixels();
 
 private:
 	DynamicFont();
-	~DynamicFont();
 
 	uint32_t* GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout);
 
@@ -130,14 +122,6 @@ private:
 	static const int FONT_SIZE_COUNT = 256;
 
 private:
-	int m_width, m_height;
-	int m_padding;
-
-	GLuint m_tex;
-	GLuint m_fbo;
-
-	TPNode* m_root;
-
 	Hash m_hash;
 
 	FTRender m_ft_render;
