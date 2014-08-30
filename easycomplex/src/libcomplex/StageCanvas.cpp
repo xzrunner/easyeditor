@@ -36,6 +36,7 @@ namespace ecomplex
 		d2d::OrthoCanvas::initGL();
 		m_editPanel->getSymbol()->reloadTexture();
 		d2d::DynamicTexture::Instance()->ReloadTexture();
+		d2d::DynamicFont::Instance()->ReloadTexture();
 	}
 
 	void StageCanvas::onDraw()

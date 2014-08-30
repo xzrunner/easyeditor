@@ -1,7 +1,10 @@
 #ifndef _DRAG2D_DYNAMIC_FONT_H_
 #define _DRAG2D_DYNAMIC_FONT_H_
 
+#include "interfaces.h"
+
 #include "common/tools.h"
+#include "common/Object.h"
 #include "dataset/FTRender.h"
 
 #include <map>
@@ -14,7 +17,7 @@ typedef unsigned int GLuint;
 class TPNode;
 class Screen;
 
-struct Glyph
+struct Glyph : public Object
 {
 	bool is_used;
 
@@ -24,14 +27,23 @@ struct Glyph
 	int advande;
 
 	int metrics_height;
+	int width, height;
 
 	TPNode* tpnode;
 
+	uint32_t* buffer;
+
 	Glyph() {
 		is_used = false;
-		tpnode = NULL;
 		bearing_x = bearing_y = advande = 0;
 		metrics_height = 0;
+		width = height = 0;
+		tpnode = NULL;
+		buffer = NULL;
+	}
+
+	~Glyph() {
+		delete[] buffer;
 	}
 }; // Glyph
 
@@ -48,6 +60,8 @@ public:
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
 	int GetPadding() const { return m_padding; }
+
+	void ReloadTexture();
 
 	void DebugDraw(const Screen& screen) const;
 
@@ -70,10 +84,9 @@ private:
 
 		void Clear();
 
-	private:
-		static int GetHashVal(int character, int font_size, int color, int is_edge);
+		void Traverse(IVisitor& visitor) const;
 
-	private:
+	public:
 		struct Node
 		{
 			Node* next;
@@ -87,6 +100,9 @@ private:
 		}; // Node
 
 	private:
+		static int GetHashVal(int character, int font_size, int color, int is_edge);
+
+	private:
 		static const int HASH_SIZE = 4651;
 
 	private:
@@ -97,6 +113,16 @@ private:
 		Node* m_hash[HASH_SIZE];
 
 	}; // Hash
+
+	class ReloadTextureVisitor : public IVisitor
+	{
+	public:
+		ReloadTextureVisitor(int tex, int padding) : m_tex(tex), m_padding(padding) {}
+		virtual void visit(Object* object, bool& bFetchNext);
+	private:
+		int m_tex;
+		int m_padding;
+	}; // ReloadTextureVisitor
 
 private:
 	static const int WIDTH, HEIGHT;

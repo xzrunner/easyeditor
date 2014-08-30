@@ -16,8 +16,8 @@
 namespace d2d
 {
 
-const int DynamicTexture::WIDTH = 512;
-const int DynamicTexture::HEIGHT = 512;
+const int DynamicTexture::WIDTH = 4096;
+const int DynamicTexture::HEIGHT = 4096;
 const int DynamicTexture::PADDING = 1;
 const int DynamicTexture::EXTRUDE = 1;
 

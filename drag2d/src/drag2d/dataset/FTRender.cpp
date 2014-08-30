@@ -218,7 +218,7 @@ uint32_t* FTRender::WriteGlyphWithStroker(int unicode, int size, union Pixel32 f
 
 						// Allocate data for our image and clear it out to transparent.
 						//            Pixel32 *pxl = new Pixel32[imgSize];
-						Pixel32 *pxl = (Pixel32*)malloc(sizeof(Pixel32)*imgSize);
+						Pixel32 *pxl = new Pixel32[imgSize];
 						memset(pxl, 0, sizeof(Pixel32) * imgSize);
 
 						// Loop over the outline spans and just draw them into the
@@ -298,7 +298,7 @@ uint32_t* FTRender::WriteGlyphNoStroker(int unicode, int size, union Pixel32 col
 	layout.advance = m_face->glyph->metrics.horiAdvance >> 6;
 
 	int sz = bitmap.rows*bitmap.width;
-	uint32_t* dst = (uint32_t*)malloc(sz*sizeof(uint32_t));
+	uint32_t* dst = new uint32_t[sz];
 	memset(dst, 0, sz);
 
 	// todo rotate

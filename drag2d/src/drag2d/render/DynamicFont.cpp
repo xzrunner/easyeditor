@@ -2,6 +2,7 @@
 #include "DynamicUtils.h"
 
 #include "dataset/TPNode.h"
+#include "render/ShaderNew.h"
 
 #include <opengl/opengl.h>
 
@@ -83,17 +84,23 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
 				}
 			}
 			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, h, w, GL_RGBA, GL_UNSIGNED_BYTE, rotated);
-			delete[] rotated;
+			glyph->buffer = rotated;
+			delete[] buffer;
 		} else {
 			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+			glyph->buffer = buffer;
 		}
-		free(buffer);
+
+		// todo
+		//glBindTexture(ShaderNew::Instance()->GetTexID());
 
 		glyph->is_used = true;
 		glyph->bearing_x = layout.bearingX;
 		glyph->bearing_y = layout.bearingY;
 		glyph->advande = layout.advance;
 		glyph->metrics_height = layout.metrics_height;
+		glyph->width = w;
+		glyph->height = h;
 		glyph->tpnode = n;
  	}	
 
@@ -112,6 +119,24 @@ void DynamicFont::Clear()
 	m_hash.Clear();
 
 	DynamicUtils::ClearTexture(m_tex, m_fbo);
+}
+
+void DynamicFont::ReloadTexture()
+{
+	m_tex = DynamicUtils::InitTexture(m_width, m_height, m_tex);
+	m_fbo = DynamicUtils::InitFBO(m_tex, m_fbo);
+
+	// init content
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(m_fbo);
+	shader->sprite();
+
+	glViewport(0, 0, m_width, m_height);
+	m_hash.Traverse(ReloadTextureVisitor(m_tex, m_padding));
+
+	// set fbo to force flush
+	// todo dtex之后insert时，不能连续
+	shader->SetFBO(0);
 }
 
 void DynamicFont::DebugDraw(const Screen& screen) const
@@ -206,6 +231,25 @@ Clear()
 	}
 }
 
+void DynamicFont::Hash::
+Traverse(IVisitor& visitor) const
+{
+	for (int i = 0; i < HASH_SIZE; ++i)
+	{
+		Node* n = m_hash[i];
+		while (n) {
+			bool has_next = true;
+			if (n->glyph.is_used) {
+				visitor.visit(&n->glyph, has_next);
+			}
+			if (!has_next) {
+				return;
+			}
+			n = n->next;
+		}
+	}
+}
+
 int DynamicFont::Hash::
 GetHashVal(int character, int font_size, int color, int is_edge)
 {
@@ -214,6 +258,26 @@ GetHashVal(int character, int font_size, int color, int is_edge)
 	} else {
 		return (character ^ (font_size * 97) ^ (unsigned int)color ^ (is_edge * 31)) % HASH_SIZE;
 	}	
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class DynamicFont::ReloadTextureVisitor
+//////////////////////////////////////////////////////////////////////////
+
+void DynamicFont::ReloadTextureVisitor::
+visit(Object* object, bool& bFetchNext)
+{
+	Glyph* g = static_cast<Glyph*>(object);
+	TPNode* n = g->tpnode;
+	
+	glBindTexture(GL_TEXTURE_2D, m_tex);
+	if (n->IsRotated()) {
+		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, g->height, g->width, GL_RGBA, GL_UNSIGNED_BYTE, g->buffer);
+	} else {
+		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, g->width, g->height, GL_RGBA, GL_UNSIGNED_BYTE, g->buffer);
+	}
+
+	bFetchNext = true;
 }
 
 }
