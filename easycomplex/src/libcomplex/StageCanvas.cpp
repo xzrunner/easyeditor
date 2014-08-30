@@ -36,8 +36,9 @@ namespace ecomplex
 	{
 		d2d::OrthoCanvas::initGL();
 		m_editPanel->getSymbol()->reloadTexture();
-		d2d::DynamicTexture::Instance()->ReloadTexture();
-		d2d::DynamicFont::Instance()->ReloadTexture();
+// 		d2d::DynamicTexture::Instance()->ReloadTexture();
+// 		d2d::DynamicFont::Instance()->ReloadTexture();
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 
 	void StageCanvas::onDraw()
@@ -70,7 +71,8 @@ namespace ecomplex
 		m_stat.End();
 
 //		d2d::DynamicTexture::Instance()->DebugDraw(m_screen);
-		d2d::DynamicFont::Instance()->DebugDraw(m_screen);
+//		d2d::DynamicFont::Instance()->DebugDraw(m_screen);
+		d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
 
 		m_stat.DrawTime(m_screen);
 

@@ -149,5 +149,5 @@
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
 #include "render/ShaderNew.h"
-#include "render/DynamicTexture.h"
-#include "render/DynamicFont.h"
+//#include "render/DynamicTexture.h"
+//#include "render/DynamicFont.h"

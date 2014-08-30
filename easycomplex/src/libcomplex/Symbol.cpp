@@ -69,7 +69,8 @@ bool Symbol::isOneLayer() const
 
 void Symbol::loadResources()
 {
-	d2d::DynamicTexture* dtex = d2d::DynamicTexture::Instance();
+//	d2d::DynamicTexture* dtex = d2d::DynamicTexture::Instance();
+	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
 	dtex->Begin();
 
 	clear();

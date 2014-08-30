@@ -1,5 +1,6 @@
 #include "LabelNew.h"
-#include "DynamicFont.h"
+//#include "DynamicFont.h"
+#include "DynamicTexAndFont.h"
 
 #include "common/color_trans.h"
 #include "dataset/text_util.h"
@@ -24,7 +25,8 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes)
 {
-	DynamicFont* dfont = DynamicFont::Instance();
+//	DynamicFont* dfont = DynamicFont::Instance();
+	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 	std::string utf8 = string2utf8(text);
 	utf8_to_unicode(utf8.c_str(), unicodes);
 }
@@ -33,7 +35,8 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 						   const LabelStyle& style,
 						   std::vector<Line>& lines)
 {
-	DynamicFont* dfont = DynamicFont::Instance();
+//	DynamicFont* dfont = DynamicFont::Instance();
+	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 
 	const int color = trans_color2int(style.color, PT_RGBA);
 	int tot_line_height = 0;
@@ -76,7 +79,8 @@ void LabelNew::DrawLines(const Screen& screen,
 						 const std::vector<Line>& lines,
 						 int tot_line_height)
 {
-	DynamicFont* dfont = DynamicFont::Instance();
+//	DynamicFont* dfont = DynamicFont::Instance();
+	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 
 	Vector vertices[4], texcoords[4];
 	float xmin, xmax, ymin, ymax;

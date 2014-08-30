@@ -109,15 +109,6 @@ void DynamicFont::ReloadPixels()
 	shader->SetFBO(0);
 }
 
-void DynamicFont::Clear()
-{
-	delete m_root;
-	InitRoot();
-	m_hash.Clear();
-
-	ClearTexture();
-}
-
 uint32_t* DynamicFont::GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout)
 {
 	uint32_t* buffer = NULL;
@@ -135,6 +126,15 @@ uint32_t* DynamicFont::GenFTChar(int unicode, int font_size, int color, int is_e
 		buffer = m_ft_render.WriteGlyphNoStroker(unicode, font_size, col, layout);
 	}
 	return buffer;
+}
+
+void DynamicFont::Clear()
+{
+	delete m_root;
+	InitRoot();
+	m_hash.Clear();
+
+	ClearTexture();
 }
 
 //////////////////////////////////////////////////////////////////////////

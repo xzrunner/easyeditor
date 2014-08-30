@@ -5,7 +5,8 @@
 #include "render/GL10.h"
 #include "render/Shader.h"
 #include "render/ShaderNew.h"
-#include "render/DynamicTexture.h"
+//#include "render/DynamicTexture.h"
+#include "render/DynamicTexAndFont.h"
 #include "render/RenderList.h"
 #include "common/config.h"
 #include "common/tools.h"
@@ -74,7 +75,8 @@ bool Image::loadFromFile(const wxString& filepath)
 		}
 
 		// todo
-		DynamicTexture::Instance()->Insert(this);
+		//DynamicTexture::Instance()->Insert(this);
+		DynamicTexAndFont::Instance()->Insert(this);
 
  		return true;
  	}
@@ -183,7 +185,8 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 	int texid;
 	d2d::Vector texcoords[4];
 	float txmin, txmax, tymin, tymax;
-	DynamicTexture* dt = DynamicTexture::Instance();
+	//DynamicTexture* dt = DynamicTexture::Instance();
+	DynamicTexAndFont* dt = DynamicTexAndFont::Instance();
 	const TPNode* n = dt->Query(*this);
  	if (n)
  	{

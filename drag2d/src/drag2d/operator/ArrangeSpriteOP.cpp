@@ -16,7 +16,8 @@
 #include "view/PropertySettingPanel.h"
 #include "history/ArrangeSpriteAtomicOP.h"
 #include "render/PrimitiveDraw.h"
-#include "render/DynamicTexture.h"
+//#include "render/DynamicTexture.h"
+#include "render/DynamicTexAndFont.h"
 
 namespace d2d
 {
@@ -337,7 +338,8 @@ bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 		{
 			std::vector<d2d::ISprite*> selected;
 			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-			DynamicTexture* dtex = DynamicTexture::Instance();
+			//DynamicTexture* dtex = DynamicTexture::Instance();
+			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 			for (size_t i = 0, n = selected.size(); i < n; ++i) {
 				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
 				ImageSymbol* img = dynamic_cast<ImageSymbol*>(&s);
