@@ -1,8 +1,10 @@
 #include "ShaderNew.h"
-#include "DynamicTexture.h"
+
+#include "common/Vector.h"
 
 #include <GL/GLee.h>
 #include <stdio.h>
+#include <wx/wx.h>
 
 namespace d2d
 {
@@ -15,6 +17,9 @@ static const int ATTRIB_COLOR     = 2;
 static const int ATTRIB_ADDITIVE  = 3;
 
 ShaderNew* ShaderNew::m_instance = NULL;
+
+//int ShaderNew::MAX_COMMBINE = 10240;
+int ShaderNew::MAX_COMMBINE = 4096;
 
 ShaderNew* ShaderNew::Instance()
 {
@@ -158,7 +163,6 @@ void ShaderNew::Draw(const float vb[16], int texid)
 
 	CopyVertex(vb);
 	if (++m_sprite_count >= MAX_COMMBINE) {
-
 		if (m_sprite_count != 0) {
 			wxLogDebug(_T("Shader Commit count to max"));
 		}

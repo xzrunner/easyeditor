@@ -54,7 +54,7 @@ private:
 	void CopyVertex(const float vb[16]);
 
 private:
-	static const int MAX_COMMBINE = 1024;
+	static int MAX_COMMBINE;
 	static const int SPRITE_FLOAT_NUM = 24;	// 
 
 private:
