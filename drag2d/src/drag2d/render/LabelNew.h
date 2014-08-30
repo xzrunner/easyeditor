@@ -33,11 +33,6 @@ public:
 		const Vector& pos,
 		const LabelStyle& style);
 
-	static void Print(
-		const char* text, 
-		const Vector& pos,
-		const LabelStyle& style);
-
 private:
 	struct Line
 	{
@@ -65,11 +60,11 @@ private:
 		std::vector<Line>& lines);
 
 	static void DrawLines(
+		const Screen& screen,
 		const Vector& pos,
 		const LabelStyle& style,
 		const std::vector<Line>& lines,
-		int tot_line_height,
-		const Screen* screen);
+		int tot_line_height);
 
 }; // LabelNew
 

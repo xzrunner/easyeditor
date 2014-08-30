@@ -137,6 +137,7 @@
 #include "common/filetools.h"
 #include "common/Statistics.h"
 #include "common/PlayControl.h"
+#include "common/FpsStat.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"

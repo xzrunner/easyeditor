@@ -1297,6 +1297,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\FpsStat.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\FpsStat.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\JsonTools.cpp"
 					>
 				</File>

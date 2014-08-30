@@ -133,8 +133,8 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
  		h = rect.yLength() * scale;
 	glViewport(0, 0, w, h);
 
-	Screen scr;
-	scr.SetSize(w, h, Vector(-rect.xCenter(), -rect.yCenter()) * scale, Vector(1, -1));
+	Screen scr(w, h);
+	scr.SetCamera(Vector(-rect.xCenter(), -rect.yCenter()) * scale, Vector(1, -1));
 
 	SpriteDraw::drawSprite(scr, symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, scale);
 

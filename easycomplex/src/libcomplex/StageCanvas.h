@@ -41,6 +41,8 @@ namespace ecomplex
 
 		d2d::Image* m_background;
 
+		d2d::FpsStat m_stat;
+
 		DECLARE_EVENT_TABLE()
 
 	}; // StageCanvas

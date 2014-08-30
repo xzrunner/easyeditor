@@ -16,6 +16,7 @@ namespace ecomplex
 		, m_timer(this, TIMER_ID)
 		, m_editPanel(editPanel)
 		, m_background(NULL)
+		, m_stat(1)
 	{
 		m_timer.Start(1000 / 30);
 
@@ -41,6 +42,8 @@ namespace ecomplex
 
 	void StageCanvas::onDraw()
 	{
+		m_stat.Begin();
+
 		drawBackground();
 
   		std::vector<d2d::ISprite*> sprites;
@@ -64,8 +67,14 @@ namespace ecomplex
 
     	m_editPanel->drawEditTemp(m_screen);
 
+		m_stat.End();
+
 //		d2d::DynamicTexture::Instance()->DebugDraw(m_screen);
 		d2d::DynamicFont::Instance()->DebugDraw(m_screen);
+
+		m_stat.DrawTime(m_screen);
+
+		d2d::ShaderNew::Instance()->Flush();
 	}
 
 	void StageCanvas::onTimer(wxTimerEvent& event)

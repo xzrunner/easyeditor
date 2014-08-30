@@ -19,18 +19,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 	std::vector<Line> lines;
 	int tot_line_height = TransToLines(unicodes, style, lines);
 
-	DrawLines(pos, style, lines, tot_line_height, &screen);
-}
-
-void LabelNew::Print(const char* text, const Vector& pos, const LabelStyle& style)
-{
-	std::vector<int> unicodes;
-	TransToUnicodes(text, unicodes);
-
-	std::vector<Line> lines;
-	int tot_line_height = TransToLines(unicodes, style, lines);
-
-	DrawLines(pos, style, lines, tot_line_height, NULL);
+	DrawLines(screen, pos, style, lines, tot_line_height);
 }
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes)
@@ -81,11 +70,11 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 	return tot_line_height;
 }
 
-void LabelNew::DrawLines(const Vector& pos,
+void LabelNew::DrawLines(const Screen& screen,
+						 const Vector& pos,
 						 const LabelStyle& style,
 						 const std::vector<Line>& lines,
-						 int tot_line_height,
-						 const Screen* screen)
+						 int tot_line_height)
 {
 	DynamicFont* dfont = DynamicFont::Instance();
 
@@ -138,10 +127,8 @@ void LabelNew::DrawLines(const Vector& pos,
 			vertices[1].set(xmax, ymin);
 			vertices[2].set(xmax, ymax);
 			vertices[3].set(xmin, ymax);
-			if (screen) {
-				for (int i = 0; i < 4; ++i) {
-					screen->TransPosForRender(vertices[i]);
-				}
+			for (int i = 0; i < 4; ++i) {
+				screen.TransPosForRender(vertices[i]);
 			}
 
 			txmin = (r->GetMinX()+padding) / tex_width;

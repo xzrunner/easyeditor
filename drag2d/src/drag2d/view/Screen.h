@@ -9,12 +9,16 @@ namespace d2d
 class Screen
 {
 public:
-	Screen() {}
+	Screen() : m_scale(1, 1) {}
+	Screen(int width, int height) 
+		: m_size(width, height) , m_scale(1, 1) {}
 	
-	void SetSize(int w, int h, const Vector& offset = Vector(0,0), 
+	const Vector& GetSize() const { return m_size; }
+	void SetSize(int width, int height) { m_size.set(width, height); }
+
+	void SetCamera(
+		const Vector& offset = Vector(0,0), 
 		const Vector& scale = Vector(1,1)) {
-		m_size.x = w;
-		m_size.y = h;
 		m_offset = offset;
 		m_scale = scale;
 	}
