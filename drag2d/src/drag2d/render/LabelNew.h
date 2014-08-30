@@ -27,7 +27,15 @@ struct Glyph;
 class LabelNew
 {
 public:
-	static void Print(const Screen& screen, const char* text, const Vector& pos,
+	static void Print(
+		const Screen& screen, 
+		const char* text, 
+		const Vector& pos,
+		const LabelStyle& style);
+
+	static void Print(
+		const char* text, 
+		const Vector& pos,
 		const LabelStyle& style);
 
 private:
@@ -45,6 +53,23 @@ private:
 			width = height = 0;
 		}
 	}; 
+
+private:
+	static void TransToUnicodes(
+		const char* text, 
+		std::vector<int>& unicodes);
+
+	static int TransToLines(
+		const std::vector<int>& unicodes, 
+		const LabelStyle& style,
+		std::vector<Line>& lines);
+
+	static void DrawLines(
+		const Vector& pos,
+		const LabelStyle& style,
+		const std::vector<Line>& lines,
+		int tot_line_height,
+		const Screen* screen);
 
 }; // LabelNew
 

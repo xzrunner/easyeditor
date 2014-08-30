@@ -13,16 +13,41 @@ namespace d2d
 void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 					 const LabelStyle& style)
 {
-	// to unicode
+	std::vector<int> unicodes;
+	TransToUnicodes(text, unicodes);
+
+	std::vector<Line> lines;
+	int tot_line_height = TransToLines(unicodes, style, lines);
+
+	DrawLines(pos, style, lines, tot_line_height, &screen);
+}
+
+void LabelNew::Print(const char* text, const Vector& pos, const LabelStyle& style)
+{
+	std::vector<int> unicodes;
+	TransToUnicodes(text, unicodes);
+
+	std::vector<Line> lines;
+	int tot_line_height = TransToLines(unicodes, style, lines);
+
+	DrawLines(pos, style, lines, tot_line_height, NULL);
+}
+
+void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes)
+{
 	DynamicFont* dfont = DynamicFont::Instance();
 	std::string utf8 = string2utf8(text);
-	std::vector<int> unicodes;
 	utf8_to_unicode(utf8.c_str(), unicodes);
+}
 
-	// to lines
+int LabelNew::TransToLines(const std::vector<int>& unicodes, 
+						   const LabelStyle& style,
+						   std::vector<Line>& lines)
+{
+	DynamicFont* dfont = DynamicFont::Instance();
+
 	const int color = trans_color2int(style.color, PT_RGBA);
 	int tot_line_height = 0;
-	std::vector<Line> lines;
 	Line line;
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
@@ -53,7 +78,17 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 	tot_line_height += line.height;
 	lines.push_back(line);
 
-	// draw
+	return tot_line_height;
+}
+
+void LabelNew::DrawLines(const Vector& pos,
+						 const LabelStyle& style,
+						 const std::vector<Line>& lines,
+						 int tot_line_height,
+						 const Screen* screen)
+{
+	DynamicFont* dfont = DynamicFont::Instance();
+
 	Vector vertices[4], texcoords[4];
 	float xmin, xmax, ymin, ymax;
 	float txmin, txmax, tymin, tymax;
@@ -103,8 +138,10 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 			vertices[1].set(xmax, ymin);
 			vertices[2].set(xmax, ymax);
 			vertices[3].set(xmin, ymax);
-			for (int i = 0; i < 4; ++i) {
-				screen.TransPosForRender(vertices[i]);
+			if (screen) {
+				for (int i = 0; i < 4; ++i) {
+					screen->TransPosForRender(vertices[i]);
+				}
 			}
 
 			txmin = (r->GetMinX()+padding) / tex_width;
