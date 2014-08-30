@@ -52,9 +52,9 @@ void FontBlankSymbol::draw(const Screen& scr,
 						   const Colorf& add,
 						   const ISprite* sprite/* = NULL*/) const
 {
-	if (Settings::DrawFontType & Settings::DrawFontBg) {
-		DrawBackground(scr, sprite, mt);
-	} 
+// 	if (Settings::DrawFontType & Settings::DrawFontBg) {
+// 		DrawBackground(scr, sprite, mt);
+// 	} 
 	if (Settings::DrawFontType & Settings::DrawFontText) {
 		DrawText(scr, sprite, mt);
 	}
