@@ -1,7 +1,10 @@
 #include "DynamicTexAndFont.h"
 
 #include "dataset/TPNode.h"
+#include "dataset/ISymbol.h"
 #include "render/ShaderNew.h"
+#include "render/SpriteDraw.h"
+#include "view/Screen.h"
 
 #include <opengl/opengl.h>
 
@@ -30,16 +33,16 @@ DynamicTexAndFont::DynamicTexAndFont()
 	m_extrude = EXTRUDE;
 }
 
-void DynamicTexAndFont::Begin()
+void DynamicTexAndFont::BeginImage()
 {
 	++m_preload_idx;
 }
 
-void DynamicTexAndFont::Insert(Image* img)
+void DynamicTexAndFont::InsertImage(Image* img)
 {
 	// find
 	const wxString& filepath = img->filepath();
-	if (m_map_images.find(filepath) != m_map_images.end()) {
+	if (m_path2node.find(filepath) != m_path2node.end()) {
 		return;
 	}
 
@@ -58,7 +61,7 @@ void DynamicTexAndFont::Insert(Image* img)
 	}
 }
 
-void DynamicTexAndFont::End()
+void DynamicTexAndFont::EndImage()
 {
 	--m_preload_idx;
 
@@ -85,30 +88,58 @@ void DynamicTexAndFont::End()
 	shader->SetFBO(0);
 }
 
-void DynamicTexAndFont::Remove(Image* img)
+void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 {
-	const wxString& filepath = img->filepath();
+	const wxString& filepath = symbol.getFilepath();
+	if (m_path2node.find(filepath) != m_path2node.end()) {
+		return;
+	}
+
+	Rect r = symbol.getSize();
+	int w = r.xLength();
+	int h = r.yLength();
+	d2d::TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+	if (!n) {
+		return;
+	}
+
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(m_fbo);
+	shader->sprite();
+	glViewport(-m_width*0.5f, -m_height*0.5f, m_width, m_height);
+
+	Screen scr(m_width, m_height);
+	Vector pos(n->GetCenterX(), n->GetCenterY());
+	float angle = n->IsRotated() ? PI * 0.5f : 0;
+	SpriteDraw::drawSprite(scr, &symbol, Matrix(), pos, angle);
+
+	shader->SetFBO(0);
+
+	m_path2node.insert(std::make_pair(filepath, n));
+}
+
+void DynamicTexAndFont::Remove(const wxString& filepath)
+{
 	std::map<wxString, TPNode*>::const_iterator itr 
-		= m_map_images.find(filepath);
-	if (itr != m_map_images.end()) {
+		= m_path2node.find(filepath);
+	if (itr != m_path2node.end()) {
 		itr->second->Clear();
-		m_map_images.erase(itr);
+		m_path2node.erase(itr);
 	}
 }
 
-const TPNode* DynamicTexAndFont::Query(const Image& img) const
+const TPNode* DynamicTexAndFont::Query(const wxString& filepath) const
 {
-	const wxString& filepath = img.filepath();
 	std::map<wxString, TPNode*>::const_iterator itr 
-		= m_map_images.find(filepath);
-	if (itr != m_map_images.end()) {
+		= m_path2node.find(filepath);
+	if (itr != m_path2node.end()) {
 		return itr->second;
 	} else {
 		return NULL;
 	}
 }
 
-const Glyph* DynamicTexAndFont::LookUp(int character, int font_size, int color, int is_edge)
+const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, int font_size, int color, int is_edge)
 {
 	Glyph* glyph = m_hash.LookUp(character, font_size, color, is_edge);
 	if (glyph->is_used) {
@@ -185,8 +216,8 @@ void DynamicTexAndFont::ReloadPixels()
 
 	glViewport(0, 0, m_width, m_height);
 
-	std::map<wxString, TPNode*>::iterator itr = m_map_images.begin();
-	for ( ; itr != m_map_images.end(); ++itr)
+	std::map<wxString, TPNode*>::iterator itr = m_path2node.begin();
+	for ( ; itr != m_path2node.end(); ++itr)
 	{
 		Image* img = ImageMgr::Instance()->getItem(itr->first);
 		assert(img);
@@ -205,7 +236,7 @@ void DynamicTexAndFont::ReloadPixels()
 void DynamicTexAndFont::InsertImage(const Image* img)
 {
 	const wxString& filepath = img->filepath();
-	if (m_map_images.find(filepath) != m_map_images.end()) {
+	if (m_path2node.find(filepath) != m_path2node.end()) {
 		return;
 	}
 
@@ -219,7 +250,7 @@ void DynamicTexAndFont::InsertImage(const Image* img)
 
 	DrawNode(n, img);
 
-	m_map_images.insert(std::make_pair(img->filepath(), n));
+	m_path2node.insert(std::make_pair(filepath, n));
 }
 
 void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
@@ -478,6 +509,7 @@ void DynamicTexAndFont::Clear()
 	InitRoot();
 	m_hash.Clear();
 
+	m_path2node.clear();
 	ClearTexture();
 }
 

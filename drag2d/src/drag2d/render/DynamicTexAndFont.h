@@ -18,6 +18,7 @@ typedef unsigned int GLuint;
 
 class TPNode;
 class Image;
+class ISymbol;
 
 struct Glyph : public Object
 {
@@ -54,23 +55,25 @@ class DynamicTexAndFont : public DynamicPacker
 public:
 	static DynamicTexAndFont* Instance();
 
-	void Begin();
-	void Insert(Image* img);
-	void End();
+	void BeginImage();
+	void InsertImage(Image* img);
+	void EndImage();
 
-	void Remove(Image* img);
+	void InsertSymbol(const ISymbol& symbol);
 
-	const TPNode* Query(const Image& img) const;
+	void Remove(const wxString& filepath);
 
-	const Glyph* LookUp(int character, int font_size, int color, int is_edge);
+	const TPNode* Query(const wxString& filepath) const;
 
-	void LoadFontFile(const char* filename);
+	const Glyph* QueryAndInsertFont(int character, int font_size, int color, int is_edge);
 
 protected:
 	virtual void ReloadPixels();
 
 private:
 	DynamicTexAndFont();
+
+	void LoadFontFile(const char* filename);
 
 	void InsertImage(const Image* img);
 
@@ -174,7 +177,7 @@ private:
 	int m_preload_idx;
 	std::vector<const Image*> m_preload_list;
 
-	std::map<wxString, TPNode*> m_map_images;
+	std::map<wxString, TPNode*> m_path2node;
 	
 	// for font
 	Hash m_hash;

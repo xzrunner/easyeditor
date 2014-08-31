@@ -6,7 +6,6 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "dataset/AbstractBV.h"
-#include "dataset/ImageSymbol.h"
 #include "common/Math.h"
 #include "common/visitors.h"
 #include "common/Matrix.h"
@@ -14,7 +13,7 @@
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
-#include "history/ArrangeSpriteAtomicOP.h"
+#include "history/ArrangeSpriteAtomicOP.h" 
 #include "render/PrimitiveDraw.h"
 //#include "render/DynamicTexture.h"
 #include "render/DynamicTexAndFont.h"
@@ -334,6 +333,17 @@ bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 				m_spritesImpl->resetSpriteOrder(selected[i], false);
 		}
 		break;
+	case EditPanel::Menu_InsertToDTex:
+		{
+			std::vector<d2d::ISprite*> selected;
+			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
+			for (size_t i = 0, n = selected.size(); i < n; ++i) {
+				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
+				dtex->InsertSymbol(s);
+			}
+		}
+		break;
 	case EditPanel::Menu_RemoveFromDTex:
 		{
 			std::vector<d2d::ISprite*> selected;
@@ -342,10 +352,7 @@ bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 			for (size_t i = 0, n = selected.size(); i < n; ++i) {
 				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
-				ImageSymbol* img = dynamic_cast<ImageSymbol*>(&s);
-				if (img) {
-					dtex->Remove(img->getImage());
-				}
+				dtex->Remove(s.getFilepath());
 			}
 		}
 		break;
@@ -604,6 +611,8 @@ void ArrangeSpriteOP<TBase>::setRightPopupMenu(wxMenu& menu)
 {
 	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
 	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
+
+	menu.Append(EditPanel::Menu_InsertToDTex, EditPanel::menu_entries[EditPanel::Menu_InsertToDTex]);
 	menu.Append(EditPanel::Menu_RemoveFromDTex, EditPanel::menu_entries[EditPanel::Menu_RemoveFromDTex]);
 }
 

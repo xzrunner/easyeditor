@@ -50,7 +50,7 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 			line.Clear();
 		}
 
-		const Glyph* g = dfont->LookUp(unicode, style.font_size, color, style.has_edge);
+		const Glyph* g = dfont->QueryAndInsertFont(unicode, style.font_size, color, style.has_edge);
 		if (g) {
 			if (line.width + g->advande > style.width) {
 				tot_line_height += line.height;

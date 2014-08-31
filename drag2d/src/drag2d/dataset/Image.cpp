@@ -76,7 +76,7 @@ bool Image::loadFromFile(const wxString& filepath)
 
 		// todo
 		//DynamicTexture::Instance()->Insert(this);
-		DynamicTexAndFont::Instance()->Insert(this);
+//		DynamicTexAndFont::Instance()->Insert(this);
 
  		return true;
  	}
@@ -187,7 +187,7 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 	float txmin, txmax, tymin, tymax;
 	//DynamicTexture* dt = DynamicTexture::Instance();
 	DynamicTexAndFont* dt = DynamicTexAndFont::Instance();
-	const TPNode* n = dt->Query(*this);
+	const TPNode* n = dt->Query(m_filepath);
  	if (n)
  	{
  		float padding = dt->GetPadding();
