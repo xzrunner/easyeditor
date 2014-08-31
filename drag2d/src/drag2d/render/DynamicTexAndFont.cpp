@@ -38,7 +38,7 @@ void DynamicTexAndFont::BeginImage()
 	++m_preload_idx;
 }
 
-void DynamicTexAndFont::InsertImage(Image* img)
+void DynamicTexAndFont::Insert(Image* img)
 {
 	// find
 	const wxString& filepath = img->filepath();

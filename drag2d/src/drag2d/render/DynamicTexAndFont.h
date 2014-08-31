@@ -56,7 +56,7 @@ public:
 	static DynamicTexAndFont* Instance();
 
 	void BeginImage();
-	void InsertImage(Image* img);
+	void Insert(Image* img);
 	void EndImage();
 
 	void InsertSymbol(const ISymbol& symbol);
