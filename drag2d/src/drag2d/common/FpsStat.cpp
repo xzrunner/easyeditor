@@ -24,9 +24,9 @@ void FpsStat::Begin()
 
 void FpsStat::End() 
 {
-	if (m_tot_cost > m_interval) {
+	if (m_tot_cost > m_interval || m_count > 60) {
 		{
-			int dt = m_tot_cost / m_count;	
+			float dt = (float)m_tot_cost / m_count;	
 			std::stringstream ss;
 			ss << dt;
 			m_time = "cost: "+ss.str()+" ms";
