@@ -98,24 +98,37 @@ void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 	Rect r = symbol.getSize();
 	int w = r.xLength();
 	int h = r.yLength();
-	d2d::TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
 	if (!n) {
 		return;
 	}
 
+	RefreshSymbol(symbol, *n);
+
+	m_path2node.insert(std::make_pair(filepath, n));
+}
+
+void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
+{
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 	glViewport(-m_width*0.5f, -m_height*0.5f, m_width, m_height);
 
+	glScissor(node.GetMinX(), node.GetMinY(), node.GetMaxX() - node.GetMinX(), node.GetMaxY() - node.GetMinY());
+	glEnable(GL_SCISSOR_TEST);
+
+ 	glClearColor(0, 0, 0, 0);
+ 	glClear(GL_COLOR_BUFFER_BIT);
+
 	Screen scr(m_width, m_height);
-	Vector pos(n->GetCenterX(), n->GetCenterY());
-	float angle = n->IsRotated() ? PI * 0.5f : 0;
+	Vector pos(node.GetCenterX(), node.GetCenterY());
+	float angle = node.IsRotated() ? PI * 0.5f : 0;
 	SpriteDraw::drawSprite(scr, &symbol, Matrix(), pos, angle);
 
-	shader->SetFBO(0);
+	glDisable(GL_SCISSOR_TEST);
 
-	m_path2node.insert(std::make_pair(filepath, n));
+	shader->SetFBO(0);
 }
 
 void DynamicTexAndFont::Remove(const wxString& filepath)

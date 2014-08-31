@@ -60,6 +60,7 @@ public:
 	void EndImage();
 
 	void InsertSymbol(const ISymbol& symbol);
+	void RefreshSymbol(const ISymbol& symbol, const TPNode& node);
 
 	void Remove(const wxString& filepath);
 

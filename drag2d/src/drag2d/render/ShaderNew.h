@@ -36,6 +36,8 @@ public:
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 
+	int GetVersion() const { return m_version; }
+
 	void Flush();
 
 private:
@@ -87,6 +89,8 @@ private:
 
 	// for shape
 	int m_col_loc;
+
+	int m_version;
 
 }; // ShaderNew
 

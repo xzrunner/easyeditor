@@ -45,6 +45,8 @@ ShaderNew::ShaderNew()
 
 	m_color = 0xffffffff;
 	m_additive = 0;
+
+	m_version = 0;
 }
 
 void ShaderNew::SetSpriteColor(const Colorf& multi, const Colorf& add)
@@ -185,6 +187,8 @@ void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int te
 
 void ShaderNew::Flush()
 {
+	++m_version;
+
 // 	if (m_sprite_count != 0) {
 // 		wxLogDebug(_T("Shader Commit Flush"));
 // 	}
