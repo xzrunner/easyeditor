@@ -25,12 +25,14 @@ void FpsStat::Begin()
 void FpsStat::End() 
 {
 	if (m_tot_cost > m_interval || m_count > 60) {
+		if (m_count != 0)
 		{
 			float dt = (float)m_tot_cost / m_count;	
 			std::stringstream ss;
 			ss << dt;
 			m_time = "cost: "+ss.str()+" ms";
 		}
+		if (m_tot_cost != 0)
 		{
 			int fps = m_count * CLOCKS_PER_SEC / m_tot_cost;	
 			std::stringstream ss;
