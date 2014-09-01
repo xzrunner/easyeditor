@@ -10,6 +10,7 @@ namespace d2d
 
 class ISprite;
 class MultiSpritesImpl;
+class Screen;
 
 class AutoAlign
 {
@@ -19,7 +20,7 @@ public:
 	void Align(const std::vector<ISprite*>& sprites);
 	void Align(const ISprite* src, ISprite* dst);
 
-	void Draw() const;
+	void Draw(const Screen& scr) const;
 
 	void SetInvisible();
 

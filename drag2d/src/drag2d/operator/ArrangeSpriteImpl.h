@@ -34,7 +34,7 @@ public:
 
 	virtual void onPopMenuSelected(int type);
 
-	virtual void onDraw() const;
+	virtual void onDraw(const Screen& scr) const;
 	virtual void clear();
 
 	// query edited sprite, include its extra edit region

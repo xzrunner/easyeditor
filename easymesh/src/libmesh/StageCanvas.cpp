@@ -23,7 +23,7 @@ void StageCanvas::onDraw()
 {
 	const d2d::ISprite* bg = m_panel->GetBackground();
 	if (bg) {
-		d2d::SpriteDraw::drawSprite(bg);
+		d2d::SpriteDraw::drawSprite(m_screen, bg);
 	}
 
 	m_editPanel->drawEditTemp(m_screen);

@@ -108,8 +108,8 @@ bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onDraw(const Screen& scr) const
 {
-	if (TBase::onDraw()) return true;
-	m_impl->onDraw();
+	if (TBase::onDraw(scr)) return true;
+	m_impl->onDraw(scr);
 	return false;
 }
 

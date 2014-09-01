@@ -11,7 +11,7 @@ namespace d2d
 void SpriteCtrlNode::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 {
 	Rect r = sprite->getSymbol().getSize(sprite);
-	love::Matrix t;
+	Matrix t;
 	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
 		sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
 	// scale

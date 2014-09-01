@@ -10,6 +10,7 @@ class EditPanel;
 class MultiSpritesImpl;
 class PropertySettingPanel;
 class AbstractEditCMPT;
+class Screen;
 
 template <typename TBase>
 class ArrangeSpriteOP : public TBase

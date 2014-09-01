@@ -47,15 +47,16 @@ void ImageSymbol::draw(const Screen& scr,
 					   const Colorf& add,
 					   const ISprite* sprite/* = NULL*/) const
 {
- 	Shader* shader = Shader::Instance();
- 	shader->sprite();
- 	shader->color(mul, add);
+//	// todo ShaderNew::Color
+//  	Shader* shader = Shader::Instance();
+//  	shader->sprite();
+//  	shader->color(mul, add);
 
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetSpriteColor(mul, add);
 	m_image->draw(scr, mt, m_region);
 
-	SpriteTools::DrawName(sprite);
+	SpriteTools::DrawName(scr, sprite, mt);
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const

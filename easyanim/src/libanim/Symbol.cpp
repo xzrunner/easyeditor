@@ -45,7 +45,7 @@ void Symbol::draw(const d2d::Screen& scr,
 		static clock_t init = 0;
 		if (init == 0) {
 			init = clock();
-			Tools::drawAnimSymbol(this, 1, mul, add);
+			Tools::drawAnimSymbol(scr, this, mt, 1, mul, add);
 		} else {
 			clock_t curr = clock();
 			float during = (float)(curr - init) / CLOCKS_PER_SEC;

@@ -62,11 +62,12 @@ void Symbol::draw(const d2d::Screen& scr,
 				  const d2d::ISprite* sprite) const
 {
  	if (m_shape) {
- 		d2d::Shader* shader = d2d::Shader::Instance();
+ 		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
  		shader->sprite();
- 		shader->color(mul, add);
+// 		// todo ShaderNew::Color
+//  		shader->color(mul, add);
  
- 		m_shape->DrawTexture();
+ 		m_shape->DrawTexture(scr);
  		if (!m_pause) {
  			const Sprite* mesh = static_cast<const Sprite*>(sprite);
  			d2d::Vector spd = mesh->GetSpeed();

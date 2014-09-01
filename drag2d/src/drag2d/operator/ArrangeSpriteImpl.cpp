@@ -8,11 +8,13 @@
 
 #include "common/Math.h"
 #include "common/Settings.h"
+#include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
 #include "history/DeleteSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
+#include "render/DynamicTexAndFont.h"
 
 namespace d2d
 {
@@ -256,10 +258,33 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 				m_spritesImpl->resetSpriteOrder(selected[i], false);
 		}
 		break;
+	case EditPanel::Menu_InsertToDTex:
+		{
+			std::vector<d2d::ISprite*> selected;
+			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
+			for (size_t i = 0, n = selected.size(); i < n; ++i) {
+				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
+				dtex->InsertSymbol(s);
+			}
+		}
+		break;
+	case EditPanel::Menu_RemoveFromDTex:
+		{
+			std::vector<d2d::ISprite*> selected;
+			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+			//DynamicTexture* dtex = DynamicTexture::Instance();
+			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
+			for (size_t i = 0, n = selected.size(); i < n; ++i) {
+				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
+				dtex->Remove(s.getFilepath());
+			}
+		}
+		break;
 	}
 }
 
-void ArrangeSpriteImpl::onDraw() const
+void ArrangeSpriteImpl::onDraw(const Screen& scr) const
 {
 	if (m_isDeformOpen && m_selection->size() == 1)
 	{
@@ -271,18 +296,18 @@ void ArrangeSpriteImpl::onDraw() const
 		Vector ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 4; ++i)
-			PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 		for (int i = 4; i < 8; ++i)
-			PrimitiveDraw::drawCircle(ctrlNodes[i], SCALE_NODE_RADIUS, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], SCALE_NODE_RADIUS, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
 		if (m_is_offset_open)
 		{
 			d2d::Vector offset = selected->getPosition() + selected->getOffset();
-			PrimitiveDraw::drawCircle(offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 	}
 
-	m_align.Draw();
+	m_align.Draw(scr);
 }
 
 void ArrangeSpriteImpl::clear()
@@ -348,6 +373,9 @@ void ArrangeSpriteImpl::setRightPopupMenu(wxMenu& menu)
 {
 	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
 	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
+
+	menu.Append(EditPanel::Menu_InsertToDTex, EditPanel::menu_entries[EditPanel::Menu_InsertToDTex]);
+	menu.Append(EditPanel::Menu_RemoveFromDTex, EditPanel::menu_entries[EditPanel::Menu_RemoveFromDTex]);
 }
 
 IArrangeSpriteState* ArrangeSpriteImpl::CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const

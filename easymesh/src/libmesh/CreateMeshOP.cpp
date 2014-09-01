@@ -115,7 +115,7 @@ bool CreateMeshOP::onDraw(const d2d::Screen& scr) const
 
 	if (Shape* shape = m_stage->getShape())
 	{
-		mesh->drawInfoUV(scr);
+		shape->DrawInfoUV(scr);
 	}
 
 	return false;
