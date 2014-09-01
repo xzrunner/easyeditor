@@ -29,6 +29,7 @@ void FpsStat::End()
 		{
 			float dt = (float)m_tot_cost / m_count;	
 			std::stringstream ss;
+			ss.precision(2);
 			ss << dt;
 			m_time = "cost: "+ss.str()+" ms";
 		}
@@ -62,7 +63,7 @@ void FpsStat::Draw(const Screen& scr, const std::string& str) const
 	LabelStyle style;
 	style.has_edge = false;
 	style.font_size = 20;
-	style.width = 100;
+	style.width = 200;
 	style.height = 50;
 	style.color = LIGHT_RED;
 	style.align_hori = HAT_LEFT;
