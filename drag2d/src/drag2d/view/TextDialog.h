@@ -12,12 +12,16 @@ class TextDialog : public wxDialog
 {
 public:
 	TextDialog(wxWindow* parent, FontSprite* font);
-	virtual ~TextDialog();
+
+private:
+	void OnClose(wxCloseEvent& event);
 
 private:
 	FontSprite* m_font;
 
 	wxTextCtrl* m_text_ctrl;
+
+	DECLARE_EVENT_TABLE()
 
 }; // TextDialog
 
