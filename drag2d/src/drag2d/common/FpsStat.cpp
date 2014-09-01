@@ -29,7 +29,7 @@ void FpsStat::End()
 		{
 			float dt = (float)m_tot_cost / m_count;	
 			std::stringstream ss;
-			ss.precision(2);
+			ss.precision(3);
 			ss << dt;
 			m_time = "cost: "+ss.str()+" ms";
 		}
