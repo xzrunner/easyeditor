@@ -63,21 +63,21 @@ bool DrawPolylineOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
-bool DrawPolylineOP::onDraw() const
+bool DrawPolylineOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::onDraw(scr)) return true;
 
 	if (!m_polyline.empty())
 	{
 		if (m_currPos.isValid())
 		{
 			m_polyline.push_back(m_currPos);
-			d2d::PrimitiveDraw::drawPolyline(m_polyline, d2d::Colorf(0, 0, 0), false, 2);
+			d2d::PrimitiveDraw::drawPolyline(scr, m_polyline, d2d::Colorf(0, 0, 0), false, 2);
 			m_polyline.pop_back();
 		}
 		else
 		{
-			d2d::PrimitiveDraw::drawPolyline(m_polyline, d2d::Colorf(0, 0, 0), false, 2);
+			d2d::PrimitiveDraw::drawPolyline(scr, m_polyline, d2d::Colorf(0, 0, 0), false, 2);
 		}
 	}
 

@@ -13,8 +13,9 @@
 namespace d2d
 {
 
-DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const Colorf& color)
-	: m_color(color)
+DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const Screen& scr, const Colorf& color)
+	: m_scr(scr)
+	, m_color(color)
 {}
 
 void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext) 
@@ -23,7 +24,7 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 	ISprite* sprite = static_cast<ISprite*>(object);
 	sprite->getBounding()->getBoundPos(bound);
 
-	PrimitiveDraw::drawPolyline(bound, m_color, true);
+	PrimitiveDraw::drawPolyline(m_scr, bound, m_color, true);
 
 	// todo: bad
 	if (Settings::bVisibleImgEdge)
@@ -32,7 +33,7 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 		{
 			GL10::PushMatrix();
 
-			love::Matrix t;
+			Matrix t;
 
 			bool xMirror, yMirror;
 			sprite->getMirror(xMirror, yMirror);
@@ -45,7 +46,7 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 			GL10::MultMatrixf((const float*)t.getElements( ));
 
 			Image* img = s->getSymbol().getImage();
-			PrimitiveDraw::rect(Vector(0, 0), img->originWidth() * 0.5f, 
+			PrimitiveDraw::rect(m_scr, Vector(0, 0), img->originWidth() * 0.5f, 
 				img->originHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
 
 			GL10::PopMatrix();

@@ -20,18 +20,18 @@ public:
 		bool isDeformOpen = true, bool isAutoAlignOpen = true, ArrangeSpriteImpl* impl = NULL);
 	virtual ~ArrangeSpriteOP();
 
- 	virtual bool onKeyDown(int keyCode);
- 	virtual bool onKeyUp(int keyCode);
- 	virtual bool onMouseLeftDown(int x, int y);
- 	virtual bool onMouseLeftUp(int x, int y);
- 	virtual bool onMouseRightDown(int x, int y);
- 	virtual bool onMouseRightUp(int x, int y);
- 	virtual bool onMouseDrag(int x, int y);
- 
- 	virtual bool onPopMenuSelected(int type);
- 
- 	virtual bool onDraw() const;
- 	virtual bool clear();
+	virtual bool onKeyDown(int keyCode);
+	virtual bool onKeyUp(int keyCode);
+	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseLeftUp(int x, int y);
+	virtual bool onMouseRightDown(int x, int y);
+	virtual bool onMouseRightUp(int x, int y);
+	virtual bool onMouseDrag(int x, int y);
+
+	virtual bool onPopMenuSelected(int type);
+
+	virtual bool onDraw(const Screen& scr) const;
+	virtual bool clear();
 
 protected:
 	virtual ISprite* selectByPos(const Vector& pos) const;

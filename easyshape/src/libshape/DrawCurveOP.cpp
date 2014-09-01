@@ -46,12 +46,13 @@ bool DrawCurveOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawCurveOP::onDraw() const
+bool DrawCurveOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::onDraw(scr)) return true;
 
-	if (!m_curve.empty())
-		d2d::PrimitiveDraw::drawPolyline(m_curve, d2d::Colorf(0, 0, 0), false, 1);
+	if (!m_curve.empty()) {
+		d2d::PrimitiveDraw::drawPolyline(scr, m_curve, d2d::Colorf(0, 0, 0), false, 1);
+	}
 
 	return false;
 }

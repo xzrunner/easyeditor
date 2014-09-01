@@ -70,13 +70,13 @@ bool ArrangeSpriteOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool ArrangeSpriteOP::onDraw() const
+bool ArrangeSpriteOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw()) 
+	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw(scr)) 
 		return true;
 
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {
-		m_crosses[i]->draw();
+		m_crosses[i]->draw(scr);
 	}
 
 	return false;
@@ -84,7 +84,7 @@ bool ArrangeSpriteOP::onDraw() const
 
 void ArrangeSpriteOP::addCross()
 {
-	m_crosses.push_back(new Cross);
+	m_crosses.push_back(new Cross());
 	m_editPanel->Refresh();
 }
 
@@ -117,10 +117,10 @@ ArrangeSpriteOP::Cross::Cross()
 {
 }
 
-void ArrangeSpriteOP::Cross::draw() const
+void ArrangeSpriteOP::Cross::draw(const d2d::Screen& scr) const
 {
-	d2d::PrimitiveDraw::drawCircle(pos, RADIUS, false, 1, d2d::LIGHT_RED);
-	d2d::PrimitiveDraw::cross(pos, LENGTH, d2d::LIGHT_RED, 1);
+	d2d::PrimitiveDraw::drawCircle(scr, pos, RADIUS, false, 1, d2d::LIGHT_RED);
+	d2d::PrimitiveDraw::cross(scr, pos, LENGTH, d2d::LIGHT_RED, 1);
 }
 
 bool ArrangeSpriteOP::Cross::contain(const d2d::Vector& p) const

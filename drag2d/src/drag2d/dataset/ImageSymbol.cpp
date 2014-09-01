@@ -5,6 +5,7 @@
 #include "SpriteTools.h"
 
 #include "render/Shader.h"
+#include "render/ShaderNew.h"
 #include "render/PrimitiveDraw.h"
 
 namespace d2d
@@ -40,14 +41,19 @@ void ImageSymbol::reloadTexture() const
 	m_image->reload();
 }
 
-void ImageSymbol::draw(const Colorf& mul, const Colorf& add,
+void ImageSymbol::draw(const Screen& scr,
+					   const Matrix& mt,
+					   const Colorf& mul, 
+					   const Colorf& add,
 					   const ISprite* sprite/* = NULL*/) const
 {
  	Shader* shader = Shader::Instance();
  	shader->sprite();
  	shader->color(mul, add);
 
-	m_image->draw(m_region);
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetSpriteColor(mul, add);
+	m_image->draw(scr, mt, m_region);
 
 	SpriteTools::DrawName(sprite);
 }

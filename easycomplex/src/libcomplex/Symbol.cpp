@@ -10,6 +10,8 @@ namespace ecomplex
 const float Symbol::SCALE = 0.15f;
 
 Symbol::Symbol()
+	: m_render_version(0)
+	, m_render_cache(true)
 {
 	static int id = 0;
 	m_name = FILE_TAG + wxVariant(id++);
@@ -33,15 +35,82 @@ void Symbol::reloadTexture() const
 		(*itr)->reloadTexture();
 }
 
-void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+void Symbol::draw(const d2d::Screen& scr,
+				  const d2d::Matrix& mt,
+				  const d2d::Colorf& mul, 
+				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(m_sprites[i], mul, add);
+ 	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+ 	const d2d::TPNode* n = NULL;
+	if (m_render_cache) {
+		n = dtex->Query(m_filepath);
+	}
+ 	if (n) 
+ 	{
+		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
+		if (shader->GetVersion() != m_render_version)
+		{
+			m_render_cache = false;
+			dtex->RefreshSymbol(*this, *n);
+			m_render_cache = true;
 
-	d2d::PrimitiveDraw::rect(m_clipbox, m_style);
+			const d2d::Vector& size = scr.GetSize();
+			glViewport(0, 0, size.x, size.y);
 
-	d2d::SpriteTools::DrawName(sprite);
+			m_render_version = shader->GetVersion();
+		}
+
+		d2d::Vector vertices[4];
+		float hw = m_rect.xLength() * 0.5f,
+			hh = m_rect.yLength() * 0.5f;
+		vertices[0] = d2d::Math::transVector(d2d::Vector(-hw, -hh), mt);
+		vertices[1] = d2d::Math::transVector(d2d::Vector( hw, -hh), mt);
+		vertices[2] = d2d::Math::transVector(d2d::Vector( hw,  hh), mt);
+		vertices[3] = d2d::Math::transVector(d2d::Vector(-hw,  hh), mt);
+		for (int i = 0; i < 4; ++i) {
+			scr.TransPosForRender(vertices[i]);
+		}
+		if (n->IsRotated())
+		{
+			d2d::Vector tmp = vertices[3];
+			vertices[3] = vertices[2];
+			vertices[2] = vertices[1];
+			vertices[1] = vertices[0];
+			vertices[0] = tmp;
+		}
+
+		d2d::Vector texcoords[4];
+		float txmin, txmax, tymin, tymax;
+		float padding = dtex->GetPadding();
+		int width = dtex->GetWidth();
+		int height = dtex->GetHeight();
+		int texid = dtex->GetTextureID();
+		txmin = (n->GetMinX()+padding) / width;
+		txmax = (n->GetMaxX()-padding) / width;
+		tymin = (n->GetMinY()+padding) / height;
+		tymax = (n->GetMaxY()-padding) / height;
+
+		if (texid != 1) {
+			wxLogDebug(_T("img dt's tex = %d"), texid);
+		}
+		texcoords[0].set(txmin, tymin);
+		texcoords[1].set(txmax, tymin);
+		texcoords[2].set(txmax, tymax);
+		texcoords[3].set(txmin, tymax);
+
+		shader->sprite();
+		shader->Draw(vertices, texcoords, texid);
+ 	}
+ 	else
+	{
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+			d2d::SpriteDraw::drawSprite(scr, m_sprites[i], mt, mul, add);
+
+		//	d2d::PrimitiveDraw::rect(scr, m_clipbox, m_style);
+
+		d2d::SpriteTools::DrawName(scr, sprite, mt);
+	}
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
@@ -66,6 +135,10 @@ bool Symbol::isOneLayer() const
 
 void Symbol::loadResources()
 {
+//	d2d::DynamicTexture* dtex = d2d::DynamicTexture::Instance();
+//	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+// 	dtex->Begin();
+
 	clear();
 
 	Json::Value value;
@@ -90,7 +163,7 @@ void Symbol::loadResources()
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
 		ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 
-		symbol->refresh();
+//		symbol->refresh();
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spriteValue);
 
@@ -101,6 +174,10 @@ void Symbol::loadResources()
 	}	
 
 	initBounding();
+
+//	dtex->End();
+
+//	dtex->InsertSymbol(*this);
 }
 
 void Symbol::clear()

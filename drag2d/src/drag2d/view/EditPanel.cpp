@@ -16,6 +16,9 @@ BEGIN_EVENT_TABLE(EditPanel, wxPanel)
 
 	EVT_MENU(Menu_UpOneLayer, EditPanel::onMenuUpOneLayer)
 	EVT_MENU(Menu_DownOneLayer, EditPanel::onMenuDownOneLayer)
+	EVT_MENU(Menu_InsertToDTex, EditPanel::onMenuInsertToDTex)
+	EVT_MENU(Menu_RemoveFromDTex, EditPanel::onMenuRemoveFromDTex)
+
 	EVT_HOTKEY(Hot_UpOneLayer, EditPanel::onKeyUpOneLayer)
 	EVT_HOTKEY(Hot_DownOneLayer, EditPanel::onKeyDownOneLayer)
 //	EVT_HOTKEY(Hot_Delete, EditPanel::onKeyDelete)
@@ -24,7 +27,9 @@ END_EVENT_TABLE()
 std::string EditPanel::menu_entries[] = 
 {
 	"Up One Layer",
-	"Down One Layer"
+	"Down One Layer",
+	"Insert To DTex",
+	"Remove From DTex",
 };
 
 EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
@@ -82,10 +87,10 @@ Vector EditPanel::transPosProjectToScreen(const Vector& proj) const
 	return m_camera->transPosProjectToScreen(proj, GetSize().GetWidth(), GetSize().GetHeight());
 }
 
-void EditPanel::drawEditTemp() const
+void EditPanel::drawEditTemp(const Screen& scr) const
 {
 	if (m_editOP) {
-		m_editOP->onDraw();
+		m_editOP->onDraw(scr);
 	}
 }
 
@@ -268,6 +273,22 @@ void EditPanel::onMenuDownOneLayer(wxCommandEvent& event)
 {
 	if (m_editOP) {
 		m_editOP->onPopMenuSelected(Menu_DownOneLayer);
+		Refresh();
+	}
+}
+
+void EditPanel::onMenuInsertToDTex(wxCommandEvent& event)
+{
+	if (m_editOP) {
+		m_editOP->onPopMenuSelected(Menu_InsertToDTex);
+		Refresh();
+	}
+}
+
+void EditPanel::onMenuRemoveFromDTex(wxCommandEvent& event)
+{
+	if (m_editOP) {
+		m_editOP->onPopMenuSelected(Menu_RemoveFromDTex);
 		Refresh();
 	}
 }

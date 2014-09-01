@@ -34,14 +34,14 @@ namespace ebuilder
 		class Canvas : public d2d::SpriteStageCanvas
 		{
 		public:
-			Canvas(DesignerPage* panel);
+			Canvas(DesignerPage* panelscr);
 
 		protected:
-			virtual void onDraw();
+			virtual void onDraw(const d2d::Screen& scr);
 
 		private:
-			void drawBackground();
-			void drawCenter();
+			void drawBackground(const d2d::Screen& scr);
+			void drawCenter(const d2d::Screen& scr);
 
 		}; // Canvas
 

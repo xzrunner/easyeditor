@@ -23,6 +23,9 @@ namespace d2d
 	std::string transColor(const Colorf& col, PixelType type);
 	std::string transColor(float col);
 	char transHex(int v);
+
+	int trans_color2int(const Colorf& col, PixelType type);
+	int trans_color2int(float col);
 }
 
 #endif // D2D_COLOR_TRANS_H

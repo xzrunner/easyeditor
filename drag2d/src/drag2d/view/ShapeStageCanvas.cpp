@@ -17,8 +17,8 @@ ShapeStageCanvas::ShapeStageCanvas(EditPanel* editPanel, MultiShapesImpl* shapes
 
 void ShapeStageCanvas::onDraw()
 {
-	m_shapesImpl->traverseShapes(DrawShapesVisitor(m_color), e_visible);
-	m_editPanel->drawEditTemp();
+	m_shapesImpl->traverseShapes(DrawShapesVisitor(m_screen, m_color), e_visible);
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 } // d2d

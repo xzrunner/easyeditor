@@ -27,7 +27,7 @@ namespace libmodeling
 		bool isContain(const d2d::Vector& pos) const;
 		bool isIntersect(const d2d::Rect& rect) const;
 
-		void draw(const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const;
+		void draw(const d2d::Screen& scr, const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const;
 
 	public:
 		wxString name;

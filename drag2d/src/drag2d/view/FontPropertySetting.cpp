@@ -26,6 +26,9 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	if (name == wxT("Font"))
 		sprite->font = wxANY_AS(value, wxString);
+	else if (name == wxT("Edge")) {
+		sprite->has_edge = wxANY_AS(value, bool);
+	}
 	else if (name == wxT("FontColor")) {
 		wxColour col = wxANY_AS(value, wxColour);
 		sprite->color.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
@@ -58,6 +61,7 @@ void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool b
 
 	wxPropertyGrid* pg = panel->getPG();
 	pg->GetProperty(wxT("Font"))->Enable(bEnable);
+	pg->GetProperty(wxT("Edge"))->Enable(bEnable);
 	pg->GetProperty(wxT("FontColor"))->Enable(bEnable);
 	pg->GetProperty(wxT("AlignHori"))->Enable(bEnable);
 	pg->GetProperty(wxT("AlignVert"))->Enable(bEnable);
@@ -74,6 +78,8 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
+
+	pg->GetProperty(wxT("Edge"))->SetValue(sprite->has_edge);
 
 	wxColour col = wxColour(sprite->color.r*255, sprite->color.g*255, sprite->color.b*255, sprite->color.a*255);
 	pg->SetPropertyValueString(wxT("FontColor"), col.GetAsString());
@@ -95,6 +101,8 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
+
+	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, sprite->has_edge));
 
 	wxColour col = wxColour(sprite->addCol.r*255, sprite->addCol.g*255, sprite->addCol.b*255, sprite->addCol.a*255);
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));

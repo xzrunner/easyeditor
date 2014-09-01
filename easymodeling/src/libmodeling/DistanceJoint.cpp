@@ -23,22 +23,22 @@ bool DistanceJoint::isIntersect(const d2d::Rect& rect) const
 		|| d2d::Math::isPointInRect(getWorldAnchorB(), rect);
 }
 
-void DistanceJoint::draw(DrawType type) const
+void DistanceJoint::draw(const d2d::Screen& scr, DrawType type) const
 {
 	const d2d::Vector anchorA = getWorldAnchorA(),
 		anchorB = getWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::drawDashLine(anchorA, bodyA->sprite->getPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::drawDashLine(anchorB, bodyB->sprite->getPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		d2d::PrimitiveDraw::drawDashLine(scr, anchorA, bodyA->sprite->getPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
+		d2d::PrimitiveDraw::drawDashLine(scr, anchorB, bodyB->sprite->getPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
 
-		drawBodyFlag();
+		drawBodyFlag(scr);
 	}
 
-	drawAnchor(anchorA, type);
-	drawAnchor(anchorB, type);
-	drawConnection(anchorA, anchorB, type);
+	drawAnchor(scr, anchorA, type);
+	drawAnchor(scr, anchorB, type);
+	drawConnection(scr, anchorA, anchorB, type);
 }
 
 
@@ -62,7 +62,7 @@ void DistanceJoint::setLocalAnchorB(const d2d::Vector& world)
 	localAnchorB = transWorldToLocal(world, bodyB->sprite);
 }
 
-void DistanceJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
+void DistanceJoint::drawAnchor(const d2d::Screen& scr, const d2d::Vector& pos, DrawType type) const
 {
 	d2d::Colorf color;
 	switch (type)
@@ -78,12 +78,12 @@ void DistanceJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
+	d2d::PrimitiveDraw::drawCircle(scr, pos, JOINT_RADIUS_IN, true, 2, color);
+	d2d::PrimitiveDraw::drawCircle(scr, pos, JOINT_RADIUS_OUT, false, 2, color);
 }
 
-void DistanceJoint::drawConnection(const d2d::Vector& worldAnchorA, const d2d::Vector& worldAnchorB,
-								   DrawType type) const
+void DistanceJoint::drawConnection(const d2d::Screen& scr, const d2d::Vector& worldAnchorA, 
+								   const d2d::Vector& worldAnchorB, DrawType type) const
 {
 	d2d::Colorf color;
 	switch (type)
@@ -99,5 +99,5 @@ void DistanceJoint::drawConnection(const d2d::Vector& worldAnchorA, const d2d::V
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawLine(worldAnchorA, worldAnchorB, color, 1);
+	d2d::PrimitiveDraw::drawLine(scr, worldAnchorA, worldAnchorB, color, 1);
 }

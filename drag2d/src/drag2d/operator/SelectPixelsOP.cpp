@@ -115,9 +115,9 @@
 //	return m_drawOP->onMouseDrag(x, y);
 //}
 //
-//bool SelectPixelsOP::onDraw() const
+//bool SelectPixelsOP::onDraw(const Screen& scr) const
 //{
-//	return m_drawOP->onDraw();
+//	return m_drawOP->onDraw(scr);
 //}
 //
 //bool SelectPixelsOP::clear()

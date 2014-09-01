@@ -3,11 +3,11 @@
 namespace eparticle3d
 {
 
-ParticleSystem::ParticleSystem(const ParticleSystem& ps)
-	: m_recorder(1000)
-{
-	// todo
-}
+// ParticleSystem::ParticleSystem(/*const ParticleSystem& ps*/)
+// 	: m_recorder(1000)
+// {
+// 	// todo
+// }
 
 ParticleSystem::ParticleSystem(unsigned int buffer)
 	: m_recorder(buffer)
@@ -49,7 +49,7 @@ ParticleSystem::~ParticleSystem()
 		delete[] pStart;
 }
 
-void ParticleSystem::draw()
+void ParticleSystem::draw(const d2d::Screen& scr, const d2d::Matrix& mt)
 {
 	m_recorder.FinishFrame();
 
@@ -58,10 +58,7 @@ void ParticleSystem::draw()
 	Particle* p = pStart;
 	while (p != pLast)
 	{
-		glPushMatrix();
-		glPushAttrib(GL_CURRENT_BIT);
-
-		glTranslatef(p->pos.x, p->pos.y, 0);
+		//glPushAttrib(GL_CURRENT_BIT);
 
 		d2d::Colorf multi(1, 1, 1, 1);
 		if (p->life < fadeout_time)
@@ -78,12 +75,13 @@ void ParticleSystem::draw()
 
 		float s = (p->life / p->lifetime) * (p->pc->start_scale - p->pc->end_scale) + p->pc->end_scale;
 
-		d2d::SpriteDraw::drawSprite(p->pc->symbol, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
+		d2d::Matrix _mt(mt);
+//		_mt.translate(p->pos.x, p->pos.y);
+		d2d::SpriteDraw::drawSprite(scr, p->pc->symbol, _mt, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
 
 		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), x, y, p->angle, s, multi);
 
-		glPopAttrib();
-		glPopMatrix();
+		//glPopAttrib();
 
 		++p;
 	}
@@ -175,6 +173,11 @@ void ParticleSystem::reset()
 void ParticleSystem::pause()
 {
 	active = false;
+}
+
+bool ParticleSystem::IsEmpty() const
+{
+	return pStart == pLast;
 }
 
 void ParticleSystem::reloadTexture() const

@@ -274,6 +274,10 @@
 			Name="stage"
 			>
 			<File
+				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easypacker\StageCanvas.cpp"
 				>
 			</File>

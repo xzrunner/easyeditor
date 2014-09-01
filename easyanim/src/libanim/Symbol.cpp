@@ -33,11 +33,14 @@ void Symbol::reloadTexture() const
 	}
 }
 
-void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+void Symbol::draw(const d2d::Screen& scr,
+				  const d2d::Matrix& mt,
+				  const d2d::Colorf& mul, 
+				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	if (m_index != 0) {
-		Tools::drawAnimSymbol(this, m_index, mul, add);
+		Tools::drawAnimSymbol(scr, this, mt, m_index, mul, add);
 	} else {
 		static clock_t init = 0;
 		if (init == 0) {
@@ -47,11 +50,11 @@ void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
 			clock_t curr = clock();
 			float during = (float)(curr - init) / CLOCKS_PER_SEC;
 			int index = during / (1.0f / m_fps);
-			Tools::drawAnimSymbol(this, index % getMaxFrameIndex() + 1, mul, add);
+			Tools::drawAnimSymbol(scr, this, mt, index % getMaxFrameIndex() + 1, mul, add);
 		}
 	}
 
-	d2d::SpriteTools::DrawName(sprite);
+	d2d::SpriteTools::DrawName(scr, sprite, mt);
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

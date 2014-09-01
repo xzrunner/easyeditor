@@ -4,6 +4,21 @@
 #include "ArrangeSpriteOP.h"
 #include "ArrangeSpriteImpl.h"
 
+#include "dataset/ISprite.h"
+#include "dataset/ISymbol.h"
+#include "dataset/AbstractBV.h"
+#include "common/Math.h"
+#include "common/visitors.h"
+#include "common/Matrix.h"
+#include "common/Settings.h"
+#include "view/EditPanel.h"
+#include "view/MultiSpritesImpl.h"
+#include "view/PropertySettingPanel.h"
+#include "history/ArrangeSpriteAtomicOP.h" 
+#include "render/PrimitiveDraw.h"
+//#include "render/DynamicTexture.h"
+#include "render/DynamicTexAndFont.h"
+
 namespace d2d
 {
 
@@ -91,7 +106,7 @@ bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onDraw() const
+bool ArrangeSpriteOP<TBase>::onDraw(const Screen& scr) const
 {
 	if (TBase::onDraw()) return true;
 	m_impl->onDraw();

@@ -272,6 +272,14 @@
 				Name="library"
 				>
 				<File
+					RelativePath="..\..\..\src\libparticle3d\LibraryPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\LibraryPage.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libparticle3d\LibraryPanel.cpp"
 					>
 				</File>
@@ -281,6 +289,10 @@
 				</File>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\libparticle3d\config.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

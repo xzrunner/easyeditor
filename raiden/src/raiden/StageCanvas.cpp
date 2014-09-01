@@ -22,14 +22,14 @@ void StageCanvas::onDraw()
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
-		d2d::SpriteDraw::drawSprite(sprite);
+		d2d::SpriteDraw::drawSprite(m_screen, sprite);
 
 		ActorInfo* info = static_cast<ActorInfo*>(sprite->getUserData());
 		if (info->symbol)
-			d2d::SpriteDraw::drawSprite(info->symbol, sprite->getPosition() + info->offset);
+			d2d::SpriteDraw::drawSprite(m_screen, info->symbol, sprite->getPosition() + info->offset);
 	}
 
-	m_editPanel->drawEditTemp();
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 void StageCanvas::drawGuideLines()

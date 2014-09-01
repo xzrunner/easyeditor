@@ -49,7 +49,7 @@ unsigned char* Snapshoot::outputToMemory(const ISymbol* symbol, bool whitebg,
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderNew::Instance()->GetFboID());
 
 	return pixels;
 }
@@ -90,18 +90,15 @@ void Snapshoot::createFBO(int width, int height)
 	delete[] empty_data;
 
 	// init fbo
-	GLuint fbo;
-
-	glGenFramebuffersEXT(1, &fbo);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo);
-	m_fbo = fbo;
+	glGenFramebuffersEXT(1, (GLuint*)&m_fbo);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0);
 
 	int status = checkFramebufferStatus();
 	assert(status);
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderNew::Instance()->GetFboID());
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
@@ -121,37 +118,30 @@ void Snapshoot::releaseFBO()
 
 void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 {
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(m_fbo);
 
-	if (whitebg) {
-		glClearColor(1, 1, 1, 1);
-	} else {
+ 	if (whitebg) {
+ 		glClearColor(1, 1, 1, 1);
+ 	} else {
 		glClearColor(0, 0, 0, 0);
 	}	
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	d2d::Rect rect = symbol->getSize();
-	int w = rect.xLength() * scale,
-		h = rect.yLength() * scale;
+ 	int w = rect.xLength() * scale,
+ 		h = rect.yLength() * scale;
 	glViewport(0, 0, w, h);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	Screen scr(w, h);
+	scr.SetCamera(Vector(-rect.xCenter(), -rect.yCenter()) * scale, Vector(1, -1));
 
-	glOrtho(
-		rect.xMin * scale,
-		rect.xMax * scale,
-		rect.yMax * scale,
-		rect.yMin * scale,
-		0,
-		1
-		);
+	SpriteDraw::drawSprite(scr, symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, scale);
 
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	SpriteDraw::drawSprite(symbol, d2d::Vector(0, 0), 0.0f, scale, scale);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
+	// set fbo to force flush
+	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
+ 	shader->SetFBO(0);
+ 	shader->SetTexture(0);
 }
 
 int Snapshoot::checkFramebufferStatus() const

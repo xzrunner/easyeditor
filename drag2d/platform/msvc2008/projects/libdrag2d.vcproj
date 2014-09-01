@@ -765,14 +765,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\Matrix.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\Matrix.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\RawPixels.cpp"
 					>
 				</File>
@@ -782,6 +774,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\dataset\SelectionSet.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\TPNode.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\TPNode.h"
 					>
 				</File>
 				<File
@@ -1037,6 +1037,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\dataset\text_util.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\text_util.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\dataset\WXRender.cpp"
 					>
 				</File>
@@ -1066,6 +1074,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\render\LabelNew.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\LabelNew.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\common\opengl\opengl.cpp"
 				>
 			</File>
@@ -1083,6 +1099,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\render\PrimitiveDraw.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\render\RenderList.h"
 				>
 			</File>
 			<File
@@ -1194,6 +1218,42 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\SpriteDraw.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="dynamic_packer"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicFont.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicFont.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicPacker.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicPacker.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicTexAndFont.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicTexAndFont.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicTexture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\DynamicTexture.h"
 					>
 				</File>
 			</Filter>
@@ -1409,6 +1469,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\FpsStat.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\FpsStat.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\JsonTools.cpp"
 					>
 				</File>
@@ -1434,6 +1502,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\common\Math.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Matrix.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Matrix.h"
 					>
 				</File>
 				<File
@@ -1479,6 +1555,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\view\Camera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\view\Screen.h"
 				>
 			</File>
 			<Filter
@@ -1874,6 +1954,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\FinishDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\TextDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\TextDialog.h"
 					>
 				</File>
 			</Filter>

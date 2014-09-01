@@ -59,15 +59,15 @@ bool EditPolylinesOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditPolylinesOP::onDraw() const
+bool EditPolylinesOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::SelectShapesOP::onDraw()) return true;
+	if (d2d::SelectShapesOP::onDraw(scr)) return true;
 
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
-		itr->second->draw(d2d::Colorf(0.8f, 0.8f, 0.2f));
-		d2d::PrimitiveDraw::drawCircles(itr->second->getVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
+		itr->second->draw(scr, d2d::Colorf(0.8f, 0.8f, 0.2f));
+		d2d::PrimitiveDraw::drawCircles(scr, itr->second->getVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;

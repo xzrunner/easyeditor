@@ -39,6 +39,8 @@
 #include "dataset/Layer.h"
 #include "dataset/SpriteTools.h"
 #include "dataset/AbstractBV.h"
+#include "dataset/TPNode.h"
+#include "dataset/text_util.h"
 
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"
@@ -72,6 +74,7 @@
 #include "view/SettingsDialog.h"
 #include "view/FinishDialog.h"
 #include "view/LibraryFontPage.h"
+#include "view/TextDialog.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"
@@ -138,6 +141,7 @@
 #include "common/filetools.h"
 #include "common/Statistics.h"
 #include "common/PlayControl.h"
+#include "common/FpsStat.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"
@@ -148,3 +152,6 @@
 #include "render/SpriteDraw.h"
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
+#include "render/ShaderNew.h"
+//#include "render/DynamicTexture.h"
+//#include "render/DynamicFont.h"

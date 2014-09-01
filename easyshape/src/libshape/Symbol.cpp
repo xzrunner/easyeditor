@@ -30,11 +30,15 @@ void Symbol::reloadTexture() const
 {
 }
 
-void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
-	const d2d::ISprite* sprite/* = NULL*/) const
+void Symbol::draw(const d2d::Screen& scr,
+				  const d2d::Matrix& mt,
+				  const d2d::Colorf& mul, 
+				  const d2d::Colorf& add,
+				  const d2d::ISprite* sprite/* = NULL*/) const
 {
-	for (size_t i = 0, n = shapes.size(); i < n; ++i)
-		shapes[i]->draw();
+	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
+		shapes[i]->draw(scr);
+	}
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

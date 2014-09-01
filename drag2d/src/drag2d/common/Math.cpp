@@ -3,8 +3,9 @@
 #include <assert.h>
 //#include <Triangle/triangle.cpp>
 
-#include "common/Matrix.h"
 #include "algorithms/SGI.h"
+
+#include "Matrix.h"
 
 namespace d2d
 {
@@ -442,7 +443,7 @@ Vector Math::rotateVectorRightAngle(const Vector& v, bool isTurnLeft)
 	return ret;
 }
 
-Vector Math::transVector(const Vector& v, const love::Matrix& m)
+Vector Math::transVector(const Vector& v, const Matrix& m)
 {
 	Vector ret;
 	const float* e = m.getElements();

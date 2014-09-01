@@ -55,23 +55,26 @@ void Symbol::reloadTexture() const
 	m_image->reload();
 }
 
-void Symbol::draw(const d2d::Colorf& mul, const d2d::Colorf& add,
+void Symbol::draw(const d2d::Screen& scr,
+				  const d2d::Matrix& mt,
+				  const d2d::Colorf& mul, 
+				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite) const
 {
-	if (m_shape) {
-		d2d::Shader* shader = d2d::Shader::Instance();
-		shader->sprite();
-		shader->color(mul, add);
-
-		m_shape->DrawTexture();
-		if (!m_pause) {
-			const Sprite* mesh = static_cast<const Sprite*>(sprite);
-			d2d::Vector spd = mesh->GetSpeed();
-			if (spd.x != 0 || spd.y != 0) {
-				m_shape->OffsetUV(spd.x, spd.y);
-			}
-		}
-	}
+ 	if (m_shape) {
+ 		d2d::Shader* shader = d2d::Shader::Instance();
+ 		shader->sprite();
+ 		shader->color(mul, add);
+ 
+ 		m_shape->DrawTexture();
+ 		if (!m_pause) {
+ 			const Sprite* mesh = static_cast<const Sprite*>(sprite);
+ 			d2d::Vector spd = mesh->GetSpeed();
+ 			if (spd.x != 0 || spd.y != 0) {
+ 				m_shape->OffsetUV(spd.x, spd.y);
+ 			}
+ 		}
+ 	}
 }
 
 // d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const

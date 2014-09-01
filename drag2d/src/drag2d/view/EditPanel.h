@@ -12,6 +12,7 @@ namespace d2d
 	class AbstractEditOP;
 	class GLCanvas;
 	class Camera;
+	class Screen;
 
 	class EditPanel : public wxPanel, public ICameraObserver
 	{
@@ -29,7 +30,7 @@ namespace d2d
 		Vector transPosScreenToProject(int x, int y) const;
 		Vector transPosProjectToScreen(const Vector& proj) const;
 
-		void drawEditTemp() const;
+		void drawEditTemp(const Screen& scr) const;
 
 		AbstractEditOP* getEditOP() const { return m_editOP; }
 		void setEditOP(AbstractEditOP* editOP);
@@ -66,6 +67,8 @@ namespace d2d
 		{
 			Menu_UpOneLayer = 0,
 			Menu_DownOneLayer,
+			Menu_InsertToDTex,
+			Menu_RemoveFromDTex,
 			Menu_End,
 
 			Hot_UpOneLayer = 100,
@@ -78,6 +81,8 @@ namespace d2d
 
 		void onMenuUpOneLayer(wxCommandEvent& event);
 		void onMenuDownOneLayer(wxCommandEvent& event);
+		void onMenuInsertToDTex(wxCommandEvent& event);
+		void onMenuRemoveFromDTex(wxCommandEvent& event);
 
 		void onKeyUpOneLayer(wxKeyEvent& event);
 		void onKeyDownOneLayer(wxKeyEvent& event);

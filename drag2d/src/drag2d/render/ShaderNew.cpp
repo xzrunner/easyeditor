@@ -1,8 +1,10 @@
 #include "ShaderNew.h"
 
+#include "common/Vector.h"
+
 #include <GL/GLee.h>
 #include <stdio.h>
-//#include <gl/glew.h>
+#include <wx/wx.h>
 
 namespace d2d
 {
@@ -15,6 +17,9 @@ static const int ATTRIB_COLOR     = 2;
 static const int ATTRIB_ADDITIVE  = 3;
 
 ShaderNew* ShaderNew::m_instance = NULL;
+
+//int ShaderNew::MAX_COMMBINE = 10240;
+int ShaderNew::MAX_COMMBINE = 4096;
 
 ShaderNew* ShaderNew::Instance()
 {
@@ -36,49 +41,43 @@ ShaderNew::ShaderNew()
 	m_sprite_count = 0;
 	m_vb = NULL;
 	m_tex = 0;
+	m_fbo = 0;
 
-	m_color = 0x0fffffff;
+	m_color = 0xffffffff;
 	m_additive = 0;
+
+	m_version = 0;
 }
 
-// 	void ShaderNew::color(const Colorf& multi, const Colorf& add)
-// 	{
-// 		if (m_prog_curr == m_prog_sprite) {
-// 			glUniform4fv(ATTRIB_COLOR, 1, (GLfloat*)(&multi.r));
-// 			glUniform4fv(ATTRIB_ADDITIVE, 1, (GLfloat*)(&add.r));
-// 
-// 			// 		glUniform4fv(m_multi_loc, 1, (GLfloat*)(&multi.r));
-// 			// 		glUniform4fv(m_add_loc, 1, (GLfloat*)(&add.r));
-// 		} else {
-// 			glUniform4fv(m_col_loc, 1, (GLfloat*)(&multi.r));
-// 		}
-// 	}
-// 
-// 	void ShaderNew::color(float r, float g, float b, float a)
-// 	{
-// 		if (m_prog_curr == 0)
-// 		{
-// 			glColor4f(r, g, b, a);
-// 		}
-// 		else
-// 		{
-// 			float mul[4] = {r, g, b, a},
-// 				add[4] = {0, 0, 0, 0};
-// 			if (m_prog_curr == m_prog_sprite) {
-// 				glUniform4fv(ATTRIB_COLOR, 1, mul);
-// 				glUniform4fv(ATTRIB_ADDITIVE, 1, add);
-// 
-// 				// 			glUniform4fv(m_multi_loc, 1, mul);
-// 				// 			glUniform4fv(m_add_loc, 1, add);
-// 			} else {
-// 				glUniform4fv(m_col_loc, 1, mul);
-// 			}
-// 		}
-// 	}
+void ShaderNew::SetSpriteColor(const Colorf& multi, const Colorf& add)
+{
+	// ABGR
+	m_color = ((int)(multi.a * 255 + 0.5f) << 24) | 
+		((int)(multi.b * 255 + 0.5f) << 16) | 
+		((int)(multi.g * 255 + 0.5f) << 8) | 
+		((int)(multi.r * 255 + 0.5f));
+	m_additive = ((int)(add.a * 255 + 0.5f) << 24) | 
+		((int)(add.b * 255 + 0.5f) << 16) | 
+		((int)(add.g * 255 + 0.5f) << 8) | 
+		((int)(add.r * 255 + 0.5f));
+}
+
+void ShaderNew::SetShapeColor(const Colorf& col)
+{
+	if (m_prog_curr == m_prog_shape) {
+		glUniform4fv(m_col_loc, 1, (GLfloat*)(&col.r));
+	}
+}
 
 void ShaderNew::sprite()
 {
 	if (m_prog_curr != m_prog_sprite) {
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit change shader to sprite"));
+		}
+
+		Commit();
+
 		glEnable(GL_BLEND);
 
 		// todo 源混合因子ejoy2d用的GL_ONE
@@ -93,6 +92,12 @@ void ShaderNew::sprite()
 void ShaderNew::shape()
 {
 	if (m_prog_curr != m_prog_shape) {
+		if (m_sprite_count != 0) {
+//			wxLogDebug(_T("Shader Commit change shader to shape"));
+		}
+
+		Commit();
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -103,6 +108,12 @@ void ShaderNew::shape()
 
 void ShaderNew::null()
 {
+	if (m_sprite_count != 0) {
+		wxLogDebug(_T("Shader Commit change shader to null"));
+	}
+
+	Commit();
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -124,9 +135,27 @@ void ShaderNew::SetTexture(int tex)
 {
 	if (m_tex != tex) 
 	{
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit SetTexture %d to %d"), m_tex, tex);
+		}
+
 		Commit();
 		m_tex = (GLuint)tex;
 		glBindTexture(GL_TEXTURE_2D, m_tex);
+	}
+}
+
+void ShaderNew::SetFBO(int fbo)
+{
+	if (m_fbo != fbo) 
+	{
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit SetFBO %d to %d"), m_fbo, fbo);
+		}
+
+		Commit();
+		m_fbo = (GLuint)fbo;
+		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 	}
 }
 
@@ -136,13 +165,37 @@ void ShaderNew::Draw(const float vb[16], int texid)
 
 	CopyVertex(vb);
 	if (++m_sprite_count >= MAX_COMMBINE) {
+		if (m_sprite_count != 0) {
+			wxLogDebug(_T("Shader Commit count to max"));
+		}
 		Commit();
 	}
 }
 
+void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int texid)
+{
+	float vb[16];
+	for (int j = 0; j < 4; ++j)
+	{
+		vb[j*4] = vertices[j].x;
+		vb[j*4+1] = vertices[j].y;
+		vb[j*4+2] = texcoords[j].x;
+		vb[j*4+3] = texcoords[j].y;
+	}
+	Draw(vb, texid);
+}
+
 void ShaderNew::Flush()
 {
+	++m_version;
+
+// 	if (m_sprite_count != 0) {
+// 		wxLogDebug(_T("Shader Commit Flush"));
+// 	}
+
 	Commit();
+
+//	DynamicTexture::Instance()->DebugDraw();
 }
 
 void ShaderNew::load()
@@ -173,8 +226,8 @@ void ShaderNew::load()
 		"void main()  \n"
 		"{  \n"
 		"  gl_Position = position; "
-		"  v_fragmentColor = color; \n"
-		"  v_fragmentAddi = additive; \n"
+ 		"  v_fragmentColor = color / 255.0; \n"
+ 		"  v_fragmentAddi = additive / 255.0; \n"
 		"  v_texcoord = texcoord;  \n"
 		"}  \n"
 		;
@@ -188,11 +241,11 @@ void ShaderNew::load()
 		"\n"
 		"void main()  \n"
 		"{  \n"  
-		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-		"  gl_FragColor.w = tmp.w;    \n"
-		"  gl_FragColor *= v_fragmentColor.w;  \n"
-		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
+  		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
+  		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
+  		"  gl_FragColor.w = tmp.w;    \n"
+  		"  gl_FragColor *= v_fragmentColor.w;  \n"
+  		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
 		"}  \n"
 		;
 
@@ -250,6 +303,9 @@ void ShaderNew::load()
 
 	InitBuffers();
 
+	// bind attr
+	m_col_loc = glGetUniformLocation(m_prog_shape, "color");
+
 	m_vb = new float[SPRITE_FLOAT_NUM * MAX_COMMBINE];
 }
 
@@ -284,11 +340,11 @@ int ShaderNew::InitShader(const char *FS, const char *VS)
 		glAttachShader(prog, vs);
 	}
 
-	// attr location
-	glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
-	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
-	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
-	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
+ 	// attr location
+ 	glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
+ 	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
+ 	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
+ 	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
 
 	// link
 	GLint status;
@@ -359,29 +415,46 @@ void ShaderNew::InitBuffers()
 
 void ShaderNew::Commit()
 {
- 	if (m_sprite_count == 0) {
- 		return;
- 	}
- 
- 	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
- 	glBufferData(GL_ARRAY_BUFFER, SPRITE_FLOAT_NUM * m_sprite_count * sizeof(float), m_vb, GL_DYNAMIC_DRAW);
- 
- 	glEnableVertexAttribArray(ATTRIB_VERTEX);
- 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
- 	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
- 	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(8));
- 	glEnableVertexAttribArray(ATTRIB_COLOR);
- 	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(16));
- 	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
- 	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(20));  
- 	glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
- 
- 	m_sprite_count = 0;
+	if (m_sprite_count == 0) {
+		return;
+	}
+
+	if (m_fbo != 0 || (m_tex != 1 && m_tex != 2)) {
+		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
+	}
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, m_sprite_count * SPRITE_FLOAT_NUM * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
+
+	glEnableVertexAttribArray(ATTRIB_VERTEX);
+	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(0));
+
+	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
+	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(8));
+
+	glEnableVertexAttribArray(ATTRIB_COLOR);
+	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(16));
+
+	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
+	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(20));  
+
+	glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
+
+ 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+ 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glDisableVertexAttribArray(ATTRIB_VERTEX);
+	glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
+	glDisableVertexAttribArray(ATTRIB_COLOR);
+	glDisableVertexAttribArray(ATTRIB_ADDITIVE);
+
+	m_sprite_count = 0;
 }
 
 void ShaderNew::CopyVertex(const float vb[16])
 {
-	float* ptr = m_vb + 24 * m_sprite_count;
+	float* ptr = m_vb + SPRITE_FLOAT_NUM * m_sprite_count;
 	memcpy(ptr, vb, 4 * sizeof(float));
 	ptr += 4;
 	memcpy(ptr, &m_color, sizeof(int));

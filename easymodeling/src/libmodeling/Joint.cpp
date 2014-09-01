@@ -18,10 +18,10 @@ Joint::Joint(Body* b0, Body* b1, Type type)
 	m_name = wxT("joint") + wxString::FromDouble(count++);
 }
 
-void Joint::drawBodyFlag() const
+void Joint::drawBodyFlag(const d2d::Screen& scr) const
 {
-	drawBodyFlag(bodyA->sprite->getPosition());
-	drawBodyFlag(bodyB->sprite->getPosition());
+	drawBodyFlag(scr, bodyA->sprite->getPosition());
+	drawBodyFlag(scr, bodyB->sprite->getPosition());
 }
 
 d2d::Vector Joint::transWorldToLocal(const d2d::Vector& world, 
@@ -36,7 +36,7 @@ d2d::Vector Joint::transLocalToWorld(const d2d::Vector& local,
 	return d2d::Math::rotateVector(local, sprite->getAngle()) + sprite->getPosition();
 }
 
-void Joint::drawBodyFlag(const d2d::Vector& pos) const
+void Joint::drawBodyFlag(const d2d::Screen& scr, const d2d::Vector& pos) const
 {
 	const float edge = 2.5f;
 
@@ -45,5 +45,5 @@ void Joint::drawBodyFlag(const d2d::Vector& pos) const
 	vertices[1].x += edge;
 	vertices[2].y -= edge;
 	vertices[3].y += edge;
-	d2d::PrimitiveDraw::drawLines(vertices, d2d::Colorf(0.4f, 0.8f, 0.8f), 1);
+	d2d::PrimitiveDraw::drawLines(scr, vertices, d2d::Colorf(0.4f, 0.8f, 0.8f), 1);
 }

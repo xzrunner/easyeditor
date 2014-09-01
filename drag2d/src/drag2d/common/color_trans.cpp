@@ -153,4 +153,35 @@ char transHex(int v)
 		return '0';
 	}
 }
+
+int trans_color2int(const Colorf& col, PixelType type)
+{
+	int ret = 0;
+	if (type == PT_RGBA) {
+		ret = (trans_color2int(col.a)) << 24 
+			| (trans_color2int(col.b)) << 16
+			| (trans_color2int(col.g)) << 8
+			| (trans_color2int(col.r));
+	} else if (type == PT_ARGB) {
+		ret = (trans_color2int(col.b)) << 24 
+			| (trans_color2int(col.g)) << 16
+			| (trans_color2int(col.r)) << 8
+			| (trans_color2int(col.a));
+	} else if (type == PT_BGRA) {
+		ret = (trans_color2int(col.a)) << 24 
+			| (trans_color2int(col.r)) << 16
+			| (trans_color2int(col.g)) << 8
+			| (trans_color2int(col.b));
+	}
+	return ret;
+}
+
+int trans_color2int(float col)
+{
+	assert(col >= 0 && col <= 1.0f);
+
+	int c = (int)(col * 255 + 0.5f);
+	return c;
+}
+
 }

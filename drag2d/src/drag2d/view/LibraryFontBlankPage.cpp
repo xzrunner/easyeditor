@@ -67,7 +67,5 @@ void LibraryFontBlankPage::onNewBtnPress(wxCommandEvent& event)
 
 	FontBlankDialog dlg(this, item);
 	dlg.ShowModal();
-
-// 	Context::Instance()->stage->resetCanvas();
 }
 } // d2d

@@ -68,9 +68,9 @@ bool UniversalArrangeOP::onMouseDrag(int x, int y)
 	return m_editOP->onMouseDrag(x, y);
 }
 
-bool UniversalArrangeOP::onDraw() const
+bool UniversalArrangeOP::onDraw(const Screen& scr) const
 {
-	return m_editOP->onDraw();
+	return m_editOP->onDraw(scr);
 }
 
 bool UniversalArrangeOP::clear()

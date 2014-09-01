@@ -13,6 +13,7 @@ FontSprite::FontSprite()
 	: m_symbol(NULL)
 {
 	font = "";
+	has_edge = false;
 	color.set(1, 1, 1, 1);
 	align_hori = HAT_LEFT;
 	align_vert = VAT_TOP;
@@ -27,6 +28,7 @@ FontSprite::FontSprite(const FontSprite& sprite)
 {
 	m_symbol->retain();
 	font = sprite.font;
+	has_edge = sprite.has_edge;
 	color = sprite.color;
 	align_hori = sprite.align_hori;
 	align_vert = sprite.align_vert;
@@ -66,6 +68,7 @@ FontSprite::FontSprite(FontBlankSymbol* symbol)
 	width = symbol->width;
 	height = symbol->height;
 	filename = symbol->filename;
+	has_edge = false;
 
 	buildBounding();
 }
@@ -139,6 +142,7 @@ void FontSprite::load(const Json::Value& val)
 			filename = val["font_filename"].asString();
 			m_symbol->loadFont(filename);
 		}
+		m_text = val["content"].asString();
 	}
 
 	buildBounding();
@@ -156,6 +160,7 @@ void FontSprite::store(Json::Value& val) const
 	val["label_width"] = width;
 	val["label_height"] = height;
 	val["font_filename"] = filename;
+	val["content"] = m_text;
 }
 
 void FontSprite::buildBounding()

@@ -3,18 +3,18 @@
 
 using namespace emodeling;
 
-void DrawUtils::drawBody(libmodeling::Body* body, DrawType dType)
+void DrawUtils::drawBody(const d2d::Screen& scr, libmodeling::Body* body, DrawType dType)
 {
 	d2d::Colorf cFace, cEdge;
 	getBodyColor(body->type, dType, cFace, cEdge);
 
 	d2d::SpriteDraw::begin(body->sprite);
-	body->draw(cFace, cEdge);
+	body->draw(scr, cFace, cEdge);
 	d2d::SpriteDraw::end(body->sprite);
 }
 
-void DrawUtils::drawFixture(libmodeling::Fixture* fixture, DrawType dType,
-							bool onlyFixture)
+void DrawUtils::drawFixture(const d2d::Screen& scr, libmodeling::Fixture* fixture, 
+							DrawType dType, bool onlyFixture)
 {
 	d2d::Colorf cFace, cEdge;
 	if (onlyFixture)
@@ -23,7 +23,7 @@ void DrawUtils::drawFixture(libmodeling::Fixture* fixture, DrawType dType,
 		getBodyColor(fixture->body->type, dType, cFace, cEdge);
 
 	d2d::SpriteDraw::begin(fixture->body->sprite);
-	fixture->draw(cFace, cEdge);
+	fixture->draw(scr, cFace, cEdge);
 	d2d::SpriteDraw::end(fixture->body->sprite);
 }
 

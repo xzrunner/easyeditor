@@ -50,6 +50,7 @@ void Thumbnail::draw(const std::vector<Actor*>& actors, wxMemoryDC& memDC)
 
 		//////////////////////////////////////////////////////////////////////////
 
-		d2d::SpriteDraw::drawSprite(actors[i], memDC);
+		// todo
+//		d2d::SpriteDraw::drawSprite(actors[i], memDC);
 	}
 }

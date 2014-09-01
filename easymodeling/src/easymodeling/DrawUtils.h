@@ -19,9 +19,9 @@ namespace emodeling
 		};
 
 	public:
-		static void drawBody(libmodeling::Body* body, DrawType dType);
-		static void drawFixture(libmodeling::Fixture* fixture, DrawType dType,
-			bool onlyFixture);
+		static void drawBody(const d2d::Screen& scr, libmodeling::Body* body, DrawType dType);
+		static void drawFixture(const d2d::Screen& scr, libmodeling::Fixture* fixture, 
+			DrawType dType, bool onlyFixture);
 
 	private:
 		static void getBodyColor(libmodeling::Body::Type type, DrawType dType,

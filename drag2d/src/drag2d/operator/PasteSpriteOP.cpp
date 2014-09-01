@@ -5,6 +5,7 @@
 #include "view/MultiSpritesImpl.h"
 #include "render/GL10.h"
 #include "render/SpriteDraw.h"
+#include "view/GLCanvas.h"
 
 namespace d2d
 {
@@ -100,14 +101,14 @@ bool PasteSpriteOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSpriteOP::onDraw() const
+bool PasteSpriteOP::onDraw(const Screen& scr) const
 {
-	if (SelectSpritesOP::onDraw()) return true;
+	if (SelectSpritesOP::onDraw(scr)) return true;
 
 	if (m_cmpt)
-		m_batch.draw(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
+		m_batch.draw(scr, m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
 	else
-		m_batch.draw(m_pos, false, false);
+		m_batch.draw(scr, m_pos, false, false);
 
 	return false;
 }
@@ -191,7 +192,7 @@ insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 }
 
 void PasteSpriteOP::SpriteBatch::
-draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
+draw(const Screen& scr, const Vector& pos, bool isHorMirror, bool isVerMirror) const
 {
 	if (!m_selected.empty() && pos.isValid())
 	{
@@ -210,7 +211,7 @@ draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 
 			GL10::PushMatrix();
 			GL10::Translatef(x, y, 0.0f);
-			SpriteDraw::drawSprite(m_selected[i]);
+			SpriteDraw::drawSprite(scr, m_selected[i]);
 			GL10::PopMatrix();
 		}
 	}

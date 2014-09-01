@@ -6,6 +6,7 @@
 #include <easyanim.h>
 #include <easyscale9.h>
 #include <easymesh.h>
+#include <easyparticle3d.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -22,6 +23,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Sprite::Create);
 }
 
 bool MyApp::OnInit()

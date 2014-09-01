@@ -4,6 +4,7 @@
 #include "dataset/IBody.h"
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/GLCanvas.h"
 #include "render/SpriteDraw.h"
  
 namespace d2d
@@ -56,15 +57,17 @@ bool PasteSymbolPhysicsRandomOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool PasteSymbolPhysicsRandomOP::onDraw() const
+bool PasteSymbolPhysicsRandomOP::onDraw(const Screen& scr) const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::onDraw(scr)) return true;
 
 	ISymbol* symbol = m_randomValue.symbol;
-	if (!symbol) 
+	if (!symbol)  {
 		symbol = m_libraryPanel->getSymbol();
-	if (symbol && m_pos.isValid())
-		SpriteDraw::drawSprite(symbol, m_pos, m_randomValue.angle, m_randomValue.scale);
+	}
+	if (symbol && m_pos.isValid()) {
+		SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
+	}
 
 	return false;
 }

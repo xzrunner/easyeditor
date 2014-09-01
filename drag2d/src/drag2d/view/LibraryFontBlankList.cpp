@@ -15,7 +15,6 @@ void LibraryFontBlankList::onListDoubleClicked(wxCommandEvent& event)
 {
 	FontBlankDialog dlg(this, static_cast<FontBlankSymbol*>(m_items[event.GetInt()]));
 	dlg.ShowModal();
-	// resetCanvas
 }
 
 } // d2d

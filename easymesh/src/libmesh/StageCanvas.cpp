@@ -25,7 +25,8 @@ void StageCanvas::onDraw()
 	if (bg) {
 		d2d::SpriteDraw::drawSprite(bg);
 	}
-	m_editPanel->drawEditTemp();
+
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 }

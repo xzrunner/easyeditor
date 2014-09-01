@@ -9,13 +9,15 @@ typedef unsigned int GLuint;
 namespace d2d
 {
 
+class Vector;
+
 class ShaderNew
 {
 public:
 	static ShaderNew* Instance();
 
-// 		void color(const Colorf& multi, const Colorf& add = Colorf(0, 0, 0, 0));
-// 		void color(float r, float g, float b, float a);
+	void SetSpriteColor(const Colorf& multi, const Colorf& add);
+	void SetShapeColor(const Colorf& col);
 
 	void sprite();
 	void shape();
@@ -25,9 +27,16 @@ public:
 
 	void reload();
 
+	int GetTexID() const { return m_tex; }
+	int GetFboID() const { return m_fbo; }
+
 	void SetTexture(int tex);
+	void SetFBO(int fbo);
 
 	void Draw(const float vb[16], int texid);
+	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
+
+	int GetVersion() const { return m_version; }
 
 	void Flush();
 
@@ -47,7 +56,7 @@ private:
 	void CopyVertex(const float vb[16]);
 
 private:
-	static const int MAX_COMMBINE = 1024;
+	static int MAX_COMMBINE;
 	static const int SPRITE_FLOAT_NUM = 24;	// 
 
 private:
@@ -74,8 +83,14 @@ private:
 	float* m_vb;
 
 	GLuint m_tex;
+	GLuint m_fbo;
 
 	uint32_t m_color, m_additive;
+
+	// for shape
+	int m_col_loc;
+
+	int m_version;
 
 }; // ShaderNew
 

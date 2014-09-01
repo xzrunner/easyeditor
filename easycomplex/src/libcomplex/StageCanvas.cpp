@@ -16,6 +16,7 @@ namespace ecomplex
 		, m_timer(this, TIMER_ID)
 		, m_editPanel(editPanel)
 		, m_background(NULL)
+		, m_stat(1)
 	{
 		m_timer.Start(1000 / 30);
 
@@ -35,32 +36,47 @@ namespace ecomplex
 	{
 		d2d::OrthoCanvas::initGL();
 		m_editPanel->getSymbol()->reloadTexture();
+// 		d2d::DynamicTexture::Instance()->ReloadTexture();
+// 		d2d::DynamicFont::Instance()->ReloadTexture();
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 
 	void StageCanvas::onDraw()
 	{
- 		drawBackground();
+		m_stat.Begin();
+
+		drawBackground();
+
+  		std::vector<d2d::ISprite*> sprites;
+  		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+  
+  		for (size_t i = 0, n = sprites.size(); i < n; ++i)
+  		{
+  			d2d::ISprite* sprite = sprites[i];
+  			if (!sprite->visiable)
+  				continue;
+  			d2d::SpriteDraw::drawSprite(m_screen, sprite);
+  		}
+
+ 		d2d::PrimitiveDraw::rect(m_screen, m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
  
- 		std::vector<d2d::ISprite*> sprites;
- 		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
- 
- 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
- 		{
- 			d2d::ISprite* sprite = sprites[i];
- 			if (!sprite->visiable)
- 				continue;
- 			d2d::SpriteDraw::drawSprite(sprite, sprite->multiCol, sprite->addCol);
- 		}
- 
- 		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
- 
- 		if (Settings::bVisibleBGCross)
- 		{
- 			const float EDGE = 100;
- 			d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
- 		}
- 
- 		m_editPanel->drawEditTemp();
+  		if (Settings::bVisibleBGCross)
+  		{
+  			const float EDGE = 100;
+  			d2d::PrimitiveDraw::cross(m_screen, d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+  		}
+
+    	m_editPanel->drawEditTemp(m_screen);
+
+		m_stat.End();
+
+//		d2d::DynamicTexture::Instance()->DebugDraw(m_screen);
+//		d2d::DynamicFont::Instance()->DebugDraw(m_screen);
+		d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+
+		m_stat.DrawTime(m_screen);
+
+		d2d::ShaderNew::Instance()->Flush();
 	}
 
 	void StageCanvas::onTimer(wxTimerEvent& event)
@@ -72,12 +88,13 @@ namespace ecomplex
 	{
 		if (m_background)
 		{
-			m_background->draw(m_background->getRegion());
+			d2d::Matrix mt;
+			m_background->draw(m_screen, mt, m_background->getRegion());
 		}
 
 		if (Settings::bVisibleBGRect)
 		{
-			d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+			d2d::PrimitiveDraw::rect(m_screen, d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 		}
 	}
 }

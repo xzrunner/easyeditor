@@ -11,6 +11,7 @@ namespace d2d
 	class ISprite;
 	class MultiSpritesImpl;
 	class PasteSpriteCMPT;
+	class Screen;
 
 	class PasteSpriteOP : public SelectSpritesOP
 	{
@@ -25,7 +26,7 @@ namespace d2d
 		virtual bool onMouseRightDown(int x, int y);
 		virtual bool onMouseMove(int x, int y);
 
-		virtual bool onDraw() const;
+		virtual bool onDraw(const Screen& scr) const;
 		virtual bool clear();
 
 	private:
@@ -43,7 +44,7 @@ namespace d2d
 
 			void insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 				bool isHorMirror, bool isVerMirror);
-			void draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const;
+			void draw(const Screen& scr, const Vector& pos, bool isHorMirror, bool isVerMirror) const;
 
 			const Vector& getCenter() const { return m_center; }
 

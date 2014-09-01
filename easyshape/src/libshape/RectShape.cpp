@@ -39,9 +39,9 @@ bool RectShape::isIntersect(const d2d::Rect& rect) const
 	return d2d::Math::isRectIntersectRect(rect, m_rect);
 }
 
-void RectShape::draw(const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
+void RectShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
 {
-	d2d::PrimitiveDraw::rect(m_rect, m_style);
+	d2d::PrimitiveDraw::rect(scr, m_rect, m_style);
 }
 
 d2d::IPropertySetting* RectShape::createPropertySetting(d2d::EditPanel* editPanel)

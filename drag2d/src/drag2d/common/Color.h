@@ -55,7 +55,7 @@ namespace d2d
 		}
 
 		unsigned int pack() const {
-			return ((int)(r * 255 + 0.5f) << 24) | ((int)(g * 255 + 0.5f) << 16) | ((int)(b * 255 + 0.5f) << 8) | ((int)(r * 255 + 0.5f));
+			return ((int)(r * 255 + 0.5f) << 24) | ((int)(g * 255 + 0.5f) << 16) | ((int)(b * 255 + 0.5f) << 8) | ((int)(a * 255 + 0.5f));
 		}
 		void unpack(unsigned int color) {
 			r = ((color & 0xff000000) >> 24) / 255.0f;

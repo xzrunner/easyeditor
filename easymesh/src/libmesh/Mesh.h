@@ -30,8 +30,8 @@ public:
 	virtual d2d::Vector* Find(const d2d::Vector& p);
 	virtual void Move(d2d::Vector* src, const d2d::Vector& dst);
 
-	virtual void Reset();
-	virtual void Clear();
+ 	virtual void Reset();
+ 	virtual void Clear();
 
 	virtual void OffsetUV(float dx, float dy);
 

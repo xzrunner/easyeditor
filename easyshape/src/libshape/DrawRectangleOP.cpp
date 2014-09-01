@@ -44,12 +44,13 @@ bool DrawRectangleOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::onDraw() const
+bool DrawRectangleOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::onDraw(scr)) return true;
 
-	if (m_firstPos.isValid() && m_currPos.isValid())
-		d2d::PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
+	if (m_firstPos.isValid() && m_currPos.isValid()) {
+		d2d::PrimitiveDraw::rect(scr, m_firstPos, m_currPos, m_style);
+	}
 
 	return false;
 }

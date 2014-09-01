@@ -40,10 +40,10 @@ void PreviewCanvas::onDraw()
 
 		if (op->currPos.isValid())
 		{
-			d2d::PrimitiveDraw::drawLine(first, op->currPos, d2d::Colorf(1, 1, 1), 1);
-			d2d::PrimitiveDraw::drawCircle(op->currPos, 2, true, 2, d2d::Colorf(0, 1, 0));
+			d2d::PrimitiveDraw::drawLine(m_screen, first, op->currPos, d2d::Colorf(1, 1, 1), 1);
+			d2d::PrimitiveDraw::drawCircle(m_screen, op->currPos, 2, true, 2, d2d::Colorf(0, 1, 0));
 		}
-		d2d::PrimitiveDraw::drawCircle(first, 2, true, 2, d2d::Colorf(0, 1, 0));
+		d2d::PrimitiveDraw::drawCircle(m_screen, first, 2, true, 2, d2d::Colorf(0, 1, 0));
 	}
 }
 

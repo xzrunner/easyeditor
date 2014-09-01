@@ -116,9 +116,9 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::onDraw() const
+bool SelectNodesOP::onDraw(const d2d::Screen& scr) const
 {
-	if (DrawRectangleOP::onDraw()) return true;
+	if (DrawRectangleOP::onDraw(scr)) return true;
 
 	if (m_nodeSelection.empty()) return false;
 
@@ -134,7 +134,7 @@ bool SelectNodesOP::onDraw() const
 		copy(selectedNodes.begin(), selectedNodes.end(), back_inserter(nodes));
 	}
 
-	d2d::PrimitiveDraw::drawCircles(nodes, getThreshold(), true, 2, d2d::Colorf(0.8f, 0.4f, 0.4f));
+	d2d::PrimitiveDraw::drawCircles(scr, nodes, getThreshold(), true, 2, d2d::Colorf(0.8f, 0.4f, 0.4f));
 
 	return false;
 }

@@ -21,8 +21,8 @@ bool GearJoint::isIntersect(const d2d::Rect& rect) const
 	return joint1->isIntersect(rect) || joint2->isIntersect(rect);
 }
 
-void GearJoint::draw(DrawType type) const
+void GearJoint::draw(const d2d::Screen& scr, DrawType type) const
 {
-	joint1->draw(type);
-	joint2->draw(type);
+	joint1->draw(scr, type);
+	joint2->draw(scr, type);
 }

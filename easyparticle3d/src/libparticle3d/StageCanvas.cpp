@@ -37,20 +37,20 @@ void StageCanvas::onDraw()
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(sprite))
-		{
-			d2d::SpriteDraw::begin(sprite);
-			anim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
-			d2d::SpriteDraw::end(sprite);
-		}
-		else
-			d2d::SpriteDraw::drawSprite(sprites[i]);
+// 		if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(sprite))
+// 		{
+// 			d2d::SpriteDraw::begin(sprite);
+// 			anim::Tools::drawAnimSymbol(m_screen, &anim->getSymbol(), m_currFrame);
+// 			d2d::SpriteDraw::end(sprite);
+// 		}
+// 		else
+			d2d::SpriteDraw::drawSprite(m_screen, sprites[i]);
 	}
 
-	if (m_stage->m_ps)
-		m_stage->m_ps->draw();
+ 	if (m_stage->m_ps)
+		m_stage->m_ps->draw(m_screen, d2d::Matrix());
 
-	m_editPanel->drawEditTemp();
+	m_editPanel->drawEditTemp(m_screen);
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)

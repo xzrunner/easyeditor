@@ -1,6 +1,8 @@
 #include "Code.h"
 #include "ToolBarPanel.h"
 
+#include <easybuilder.h>
+
 namespace lua = ebuilder::lua;
 
 namespace eparticle3d

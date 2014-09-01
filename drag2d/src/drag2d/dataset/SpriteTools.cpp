@@ -1,19 +1,32 @@
 #include "SpriteTools.h"
+
 #include "dataset/ISprite.h"
 #include "common/Settings.h"
-#include "render/PrimitiveDraw.h"
+#include "common/Math.h"
+#include "render/LabelNew.h"
 
 namespace d2d
 {
 
-void SpriteTools::DrawName(const ISprite* sprite)
+void SpriteTools::DrawName(const Screen& scr, const ISprite* sprite, const Matrix& mt)
 {
-	if (!Settings::bVisibleNodeName) {
-		return;
-	}
-	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
-		PrimitiveDraw::text(sprite->name.c_str());
-	}
+ 	if (!Settings::bVisibleNodeName) {
+ 		return;
+ 	}
+ 	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {
+		Vector pos = Math::transVector(Vector(0, 0), mt);
+
+		LabelStyle style;
+		style.has_edge = false;
+		style.font_size = 20;
+		style.width = 200;
+		style.height = 50;
+		style.color = Colorf(0, 0, 0);
+		style.align_hori = HAT_CENTER;
+		style.align_vert = VAT_TOP;
+
+		LabelNew::Print(scr, sprite->name.c_str(), pos, style);
+ 	}
 }
 
 }

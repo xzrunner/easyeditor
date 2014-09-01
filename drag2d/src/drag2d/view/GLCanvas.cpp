@@ -2,7 +2,8 @@
 #include "Camera.h"
 
 #include "view/EditPanel.h"
-#include "render/Shader.h"
+#include "render/ShaderNew.h"
+#include "render/RenderList.h"
 
 #include <wx/wx.h>
 #include <gl/glu.h>
@@ -46,6 +47,7 @@ void GLCanvas::resetInitState()
 
 void GLCanvas::resetViewport()
 {
+//	wxLogDebug(_T("GLCanvas::resetViewport()"));
 	onSize(wxSizeEvent(m_parent->GetSize()));
 }
 
@@ -61,12 +63,14 @@ void GLCanvas::SetCurrentCanvas()
 
 void GLCanvas::initGL()
 {
+	wxLogDebug(_T("GLCanvas::initGL()"));
+
 	resetViewport();
 
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 
-	Shader::Instance()->reload();
+	ShaderNew::Instance()->reload();
 }
 
 void GLCanvas::onSize(wxSizeEvent& event)
@@ -94,11 +98,13 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 
 	glPushMatrix();
 	onDraw();
-	glPopMatrix();
+	//RenderList::Instance()->Flush();
+	ShaderNew::Instance()->Flush();
+//	glPopMatrix();
 
 	glFlush();
 	SwapBuffers();
-}
+ }
 
 void GLCanvas::onEraseBackground(wxEraseEvent& event)
 {	

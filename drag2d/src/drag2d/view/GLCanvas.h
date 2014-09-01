@@ -2,6 +2,7 @@
 
 #include <wx/glcanvas.h>
 
+#include "Screen.h"
 #include "common/Color.h"
 
 namespace d2d
@@ -47,6 +48,8 @@ namespace d2d
 		Colorf m_bgColor;
 
 		int m_width, m_height;
+
+		Screen m_screen;
 
 	private:
 		bool m_isInit;

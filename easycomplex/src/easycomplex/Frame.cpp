@@ -19,6 +19,18 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
 	m_view_menu->Append(ID_EJ_PREVIEW, wxT("EJ Preview"), wxT("Preview"));
 	m_setting_menu->Append(ID_SET_BG, wxT("Background"), wxT("Background"));
+
+#ifdef _DEBUG
+	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
+	m_log_chain = new wxLogChain(new wxLogStderr);
+#endif
+}
+
+Frame::~Frame()
+{
+#ifdef _DEBUG
+	delete m_log_chain;
+#endif
 }
 
 void Frame::onSaveAs(wxCommandEvent& event)

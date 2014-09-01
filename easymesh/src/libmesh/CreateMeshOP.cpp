@@ -102,19 +102,20 @@ bool CreateMeshOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::onDraw() const
+bool CreateMeshOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw())
+	if (d2d::ZoomViewOP::onDraw(scr))
 		return true;
 
 	if (const d2d::Image* image = m_stage->getSprite()->getImage())
  	{
-		image->draw(image->getRegion());
+		d2d::Matrix mt;
+		image->draw(scr, mt, image->getRegion());
  	}
 
 	if (Shape* shape = m_stage->getShape())
 	{
-		shape->DrawInfoUV();
+		mesh->drawInfoUV(scr);
 	}
 
 	return false;

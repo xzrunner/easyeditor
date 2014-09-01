@@ -6,6 +6,7 @@
 #include <easyanim.h>
 #include <easymesh.h>
 #include <easyscale9.h>
+#include <easyparticle3d.h>
 
 namespace ecomplex
 {
@@ -21,6 +22,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(new emesh::LibraryPage(getNotebook()));
 	addPage(new d2d::LibraryScriptsPage(getNotebook()));
 	addPage(new d2d::LibraryFontPage(getNotebook()));
+	addPage(new eparticle3d::LibraryPage(getNotebook()));
 }
 
 } // ecomplex

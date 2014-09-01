@@ -11,12 +11,12 @@ EditUVOP::EditUVOP(StagePanel* stage)
 {
 }
 
-bool EditUVOP::onDraw() const
+bool EditUVOP::onDraw(const d2d::Screen& scr) const
 {
 	if (Shape* shape = m_stage->getShape())
 	{
-		shape->DrawTexture();
-		shape->DrawInfoXY();
+		mesh->drawTexture(scr);
+		mesh->drawInfoXY(scr);
 	}
 
 	return false;

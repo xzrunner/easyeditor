@@ -61,7 +61,7 @@ void PreviewCanvas::DrawVisitor::visit(d2d::Object* object, bool& bFetchNext)
 	d2d::Vector new_pos = sprite->getPosition() * m_scale;
 	const int tol = 100;
 	if (new_pos.y - m_yOffset < 0 + tol && new_pos.y - m_yOffset > -800 - tol)
-		d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), new_pos);
+		d2d::SpriteDraw::drawSprite(m_scr, &sprite->getSymbol(), new_pos);
 
 	bFetchNext = true;
 }

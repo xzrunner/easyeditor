@@ -1,14 +1,19 @@
 #include "Image.h"
+#include "ImageLoader.h"
 
+#include "dataset/TPNode.h"
 #include "render/GL10.h"
 #include "render/Shader.h"
 #include "render/ShaderNew.h"
+//#include "render/DynamicTexture.h"
+#include "render/DynamicTexAndFont.h"
+#include "render/RenderList.h"
 #include "common/config.h"
 #include "common/tools.h"
 #include "common/Settings.h"
 #include "common/Exception.h"
-
-#include "ImageLoader.h"
+#include "common/Math.h"
+#include "view/Screen.h"
 
 #include <fstream>
 #include <SOIL/SOIL.h>
@@ -68,6 +73,11 @@ bool Image::loadFromFile(const wxString& filepath)
 				m_region = r;
 			}
 		}
+
+// 		// todo
+// 		DynamicTexture::Instance()->Insert(this);
+// 		DynamicTexAndFont::Instance()->Insert(this);
+
  		return true;
  	}
 }
@@ -92,26 +102,139 @@ void Image::reload()
 #endif
 }
 
-void Image::draw(const Rect& r) const
+void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
 {
-	Shader* shader = Shader::Instance();
+	////////////////////////////////////////////////////////////////////////////
+	//// 原始 直接画
+ //   	ShaderNew* shader = ShaderNew::Instance();
+ //   	shader->sprite();
+ //   
+ //   	float tot_hw = m_width * 0.5f,
+ //   		  tot_hh = m_height * 0.5f;
+ //   	float txmin = (r.xMin + tot_hw) / m_width,
+ //   		txmax = (r.xMax + tot_hw) / m_width,
+ //   		tymin = (r.yMin + tot_hh) / m_height,
+ //   		tymax = (r.yMax + tot_hh) / m_height;
+ //   
+ // 	d2d::Vector vertices[4];
+ // 	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
+ // 	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
+ // 	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
+ // 	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+ // 
+ // 	for (int i = 0; i < 4; ++i) {
+ // 		scr.TransPosForRender(vertices[i]);
+ // 	}
+ // 
+ // 	float vb[16];
+ // 	vb[0] = vertices[0].x;
+ // 	vb[1] = vertices[0].y;
+ // 	vb[2] = txmin;
+ // 	vb[3] = tymin;
+ // 	vb[4] = vertices[1].x;
+ // 	vb[5] = vertices[1].y;
+ // 	vb[6] = txmax;
+ // 	vb[7] = tymin;
+ // 	vb[8] = vertices[2].x;
+ // 	vb[9] = vertices[2].y;
+ // 	vb[10] = txmax;
+ // 	vb[11] = tymax;
+ // 	vb[12] = vertices[3].x;
+ // 	vb[13] = vertices[3].y;
+ // 	vb[14] = txmin;
+ // 	vb[15] = tymax;
+ // 
+ // 	shader->Draw(vb, m_textureID);
+
+	//////////////////////////////////////////////////////////////////////////
+//	用renderlist
+// 	d2d::Vector vertices[4];
+// 	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
+// 	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
+// 	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
+// 	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+// 	for (int i = 0; i < 4; ++i) {
+// 		scr.TransPosForRender(vertices[i]);
+// 	}
+// 
+// 	d2d::Vector texcoords[4];
+// 	float tot_hw = m_width * 0.5f,
+// 		tot_hh = m_height * 0.5f;
+// 	float txmin = (r.xMin + tot_hw) / m_width,
+// 		txmax = (r.xMax + tot_hw) / m_width,
+// 		tymin = (r.yMin + tot_hh) / m_height,
+// 		tymax = (r.yMax + tot_hh) / m_height;
+// 	texcoords[0].set(txmin, tymin);
+// 	texcoords[1].set(txmax, tymin);
+// 	texcoords[2].set(txmax, tymax);
+// 	texcoords[3].set(txmin, tymax);
+// 
+// 	RenderList::Instance()->Insert(m_textureID, vertices, texcoords);
+
+	//////////////////////////////////////////////////////////////////////////
+	// 用dtex
+ 	d2d::Vector vertices[4];
+ 	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
+ 	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
+ 	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
+ 	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+ 	for (int i = 0; i < 4; ++i) {
+ 		scr.TransPosForRender(vertices[i]);
+ 	}
+
+	int texid;
+	d2d::Vector texcoords[4];
+	float txmin, txmax, tymin, tymax;
+	//DynamicTexture* dt = DynamicTexture::Instance();
+	DynamicTexAndFont* dt = DynamicTexAndFont::Instance();
+	const TPNode* n = dt->Query(m_filepath);
+ 	if (n)
+ 	{
+ 		float padding = dt->GetPadding();
+ 		int width = dt->GetWidth();
+ 		int height = dt->GetHeight();
+ 		texid = dt->GetTextureID();
+ 		txmin = (n->GetMinX()+padding) / width;
+ 		txmax = (n->GetMaxX()-padding) / width;
+ 		tymin = (n->GetMinY()+padding) / height;
+ 		tymax = (n->GetMaxY()-padding) / height;
+ 
+		if (texid != 1) {
+			wxLogDebug(_T("img dt's tex = %d"), texid);
+		}
+
+ 		if (n->IsRotated())
+ 		{
+ 			d2d::Vector tmp = vertices[3];
+ 			vertices[3] = vertices[2];
+ 			vertices[2] = vertices[1];
+ 			vertices[1] = vertices[0];
+ 			vertices[0] = tmp;
+ 		}
+ 	}
+ 	else
+	{
+		wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
+
+		texid = m_textureID;
+	 	d2d::Vector texcoords[4];
+	 	float tot_hw = m_width * 0.5f,
+	 		tot_hh = m_height * 0.5f;
+	 	txmin = (r.xMin + tot_hw) / m_width;
+	 	txmax = (r.xMax + tot_hw) / m_width;
+	 	tymin = (r.yMin + tot_hh) / m_height;
+	 	tymax = (r.yMax + tot_hh) / m_height;
+	}
+ 	texcoords[0].set(txmin, tymin);
+ 	texcoords[1].set(txmax, tymin);
+ 	texcoords[2].set(txmax, tymax);
+ 	texcoords[3].set(txmin, tymax);
+
+//	RenderList::Instance()->Insert(texid, vertices, texcoords);
+
+	ShaderNew* shader = ShaderNew::Instance();
 	shader->sprite();
-
-	float tot_hw = m_width * 0.5f,
-		tot_hh = m_height * 0.5f;
-	float txmin = (r.xMin + tot_hw) / m_width,
-		txmax = (r.xMax + tot_hw) / m_width,
-		tymin = (r.yMin + tot_hh) / m_height,
-		tymax = (r.yMax + tot_hh) / m_height;
-
-	GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
-	GL10::Begin(GL10::GL_QUADS);
-	GL10::TexCoord2f(txmin, tymin); GL10::Vertex3f(r.xMin, r.yMin, -1.0f);
-	GL10::TexCoord2f(txmax, tymin); GL10::Vertex3f(r.xMax, r.yMin, -1.0f);
-	GL10::TexCoord2f(txmax, tymax); GL10::Vertex3f(r.xMax, r.yMax, -1.0f);
-	GL10::TexCoord2f(txmin, tymax); GL10::Vertex3f(r.xMin, r.yMax, -1.0f);
-	GL10::End();
-	GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
+	shader->Draw(vertices, texcoords, texid);
 }
 
 } // d2d

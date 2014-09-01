@@ -34,7 +34,10 @@ void FontSymbol::reloadTexture() const
 	m_font->loadFromFile("default.ttf");
 }
 
-void FontSymbol::draw(const Colorf& mul, const Colorf& add,
+void FontSymbol::draw(const Screen& scr,
+					  const Matrix& mt,
+					  const Colorf& mul, 
+					  const Colorf& add,
 					  const ISprite* sprite/* = NULL*/) const
 {
 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));

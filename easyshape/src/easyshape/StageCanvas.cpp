@@ -22,7 +22,7 @@ void StageCanvas::onDraw()
 			drawGuideLines();
 		}
 		else {
-			item->draw();
+			item->draw(m_screen, d2d::Matrix());
 		}
 	}
 
@@ -31,7 +31,7 @@ void StageCanvas::onDraw()
 
 void StageCanvas::drawGuideLines()
 {
-	d2d::PrimitiveDraw::rect(
+	d2d::PrimitiveDraw::rect(m_screen,
 		d2d::Vector(0, 0), 
 		d2d::HALF_S_WIDTH,
 		d2d::HALF_S_HEIGHT,
