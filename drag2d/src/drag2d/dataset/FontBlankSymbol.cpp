@@ -52,9 +52,9 @@ void FontBlankSymbol::draw(const Screen& scr,
 						   const Colorf& add,
 						   const ISprite* sprite/* = NULL*/) const
 {
-// 	if (Settings::DrawFontType & Settings::DrawFontBg) {
-// 		DrawBackground(scr, sprite, mt);
-// 	} 
+ 	if (Settings::DrawFontType & Settings::DrawFontBg) {
+ 		DrawBackground(scr, sprite, mt);
+ 	} 
 	if (Settings::DrawFontType & Settings::DrawFontText) {
 		DrawText(scr, sprite, mt);
 	}
@@ -139,8 +139,7 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
 			const std::string& str = font->GetTextContext();
 			if (!str.empty()) {
-				Vector pos = sprite->getPosition();
-				pos = Math::transVector(Vector(pos), mt);
+				Vector pos = Math::transVector(Vector(0, 0), mt);
 
 				LabelStyle style;
 				style.has_edge = font->has_edge;
