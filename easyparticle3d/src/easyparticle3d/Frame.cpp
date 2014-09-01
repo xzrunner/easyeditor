@@ -2,6 +2,8 @@
 #include "Task.h"
 
 #include <wx/splitter.h>
+
+#include <easybuilder.h>
 #include <easyparticle3d.h>
 
 namespace eparticle3d
@@ -26,8 +28,6 @@ END_EVENT_TABLE()
 
 //static const wxString VERSION = wxT("0.13.0514");
 
-static const wxString FILE_TAG = wxT("particle");
-
 Frame::Frame(const wxString& title)
 	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
 {
@@ -43,8 +43,10 @@ void Frame::onNew(wxCommandEvent& event)
 
 void Frame::onOpen(wxCommandEvent& event)
 {
+	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
+	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_OPEN);
+		filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		m_task->clear();
@@ -65,11 +67,13 @@ void Frame::onSave(wxCommandEvent& event)
 
 void Frame::onSaveAs(wxCommandEvent& event)
 {
+	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
+	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
-		wxT("*_") + FILE_TAG + wxT(".json"), wxFD_SAVE);
+		filter, wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), FILE_TAG, "json");
+		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), eparticle3d::FILE_TAG, "json");
 		m_currFilename = fixed;
 		m_task->storeToFile(fixed);
 	}

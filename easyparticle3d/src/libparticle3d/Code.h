@@ -1,7 +1,7 @@
 #ifndef _EASYPARTICLE3D_CODE_H_
 #define _EASYPARTICLE3D_CODE_H_
 
-#include <easybuilder.h>
+namespace ebuilder { class CodeGenerator; }
 
 namespace eparticle3d
 {

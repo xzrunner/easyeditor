@@ -36,6 +36,8 @@ public:
 	//
 	virtual void refresh();
 	
+	static d2d::ISymbol* Create() { return new Symbol(); }
+
 protected:
 	virtual void loadResources();
 

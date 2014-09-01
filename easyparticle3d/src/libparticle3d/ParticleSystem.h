@@ -90,12 +90,12 @@ private:
 	bool orient_to_movement;
 
 public:
-	ParticleSystem(const ParticleSystem& ps);
+//	ParticleSystem(/*const ParticleSystem& ps*/);
 	ParticleSystem(unsigned int buffer);
 
 	virtual ~ParticleSystem();
 
-	virtual void draw(const d2d::Screen& scr);
+	virtual void draw(const d2d::Screen& scr, const d2d::Matrix& mt);
 
 	void update(float dt);
 
@@ -103,6 +103,8 @@ public:
 	void stop();
 	void reset();
 	void pause();
+
+	bool IsEmpty() const;
 
 	void reloadTexture() const;
 
