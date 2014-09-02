@@ -137,6 +137,10 @@ void Strip::OffsetUV(float dx, float dy)
 	const std::vector<d2d::Vector>& right = m_right_nodes.m_ext;
 	for (int i = 0, n = left.size() - 1; i < n; ++i)
 	{
+		if (left[i] == left[i+1] && right[i] == right[i+1]) {
+			continue;
+		}
+
 		Triangle* tri = new Triangle;
 		tri->nodes[0] = new Node(left[i], m_width, m_height);
 		tri->nodes[1] = new Node(right[i], m_width, m_height);
