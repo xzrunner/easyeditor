@@ -803,7 +803,7 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 				for (int i = 0; i < 4; ++i)
 				{
 					float u = src[i].x, v = src[i].y;
-					src[i].x = picture->scr[1].x + v * w;
+					src[i].x = picture->scr[1].x + v * h;
 					src[i].y = picture->scr[1].y + (1-u) * w;
 				}
  			}
