@@ -128,9 +128,7 @@ void FontBlankSymbol::DrawBackground(const Screen& scr, const ISprite* sprite,
 		if (m_font)
 			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
 	}
-	Vector center(0, 0);
-	center = Math::transVector(center, mt);
-	PrimitiveDraw::rect(scr, center, w*0.5f, h*0.5f, m_style);
+	PrimitiveDraw::rect(scr, mt, w*0.5f, h*0.5f, m_style);
 }
 
 void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const Matrix& mt) const

@@ -11,6 +11,7 @@ namespace d2d
 	class Rect;
 	struct Colorf;
 	class Screen;
+	class Matrix;
 
 	class PrimitiveDraw
 	{
@@ -21,6 +22,9 @@ namespace d2d
 		static void rect(const Screen& scr, const Vector& center, float hWidth, float hHeight, const ShapeStyle& style);
 		static void rect(const Screen& scr, const Rect& rect, const ShapeStyle& style);
 		static void rect(const Screen& scr, const Vector& p0, const Vector& p1, const ShapeStyle& style);
+
+		static void rect(const Screen& scr, const Matrix& mt, float hWidth, float hHeight, const ShapeStyle& style);
+		static void rect(const Screen& scr, const Matrix& mt, const Vector& p0, const Vector& p1, const ShapeStyle& style);
 
 		static void drawCircle(const Screen& scr, const Vector& center, float radius, bool isFill = false, 
 			float size = 2, const Colorf& color = Colorf(0, 0, 0), size_t kSegments = 16);

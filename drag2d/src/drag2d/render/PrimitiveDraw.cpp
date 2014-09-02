@@ -69,6 +69,45 @@ void PrimitiveDraw::rect(const Screen& scr, const Vector& p0, const Vector& p1, 
 		GL10::LineWidth(1);
 }
 
+void PrimitiveDraw::rect(const Screen& scr, const Matrix& mt, float hWidth, 
+						 float hHeight, const ShapeStyle& style)
+{
+	rect(scr, mt, -Vector(hWidth, hHeight), Vector(hWidth, hHeight), style);
+}
+
+void PrimitiveDraw::rect(const Screen& scr, const Matrix& mt, const Vector& p0, 
+						 const Vector& p1, const ShapeStyle& style)
+{
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->shape();
+
+	int type = style.fill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
+	if (!style.fill)
+		GL10::LineWidth(style.size);
+
+	d2d::Vector vertices[4];
+	vertices[0].set(p0.x, p0.y);
+	vertices[1].set(p0.x, p1.y);
+	vertices[2].set(p1.x, p1.y);
+	vertices[3].set(p1.x, p0.y);
+	for (int i = 0; i < 4; ++i) {
+		vertices[i] = Math::transVector(vertices[i], mt);
+		scr.TransPosForRender(vertices[i]);
+	}
+
+	shader->SetShapeColor(style.color);
+	lineStypeBegin(style.lineStyle);
+	GL10::Begin(type);
+	for (int i = 0; i < 4; ++i) {
+		GL10::Vertex2f(vertices[i].x, vertices[i].y);
+	}
+	GL10::End();
+	lineStypeEnd(style.lineStyle);
+
+	if (!style.fill)
+		GL10::LineWidth(1);
+}
+
 void PrimitiveDraw::drawCircle(const Screen& scr, const Vector& center, float radius, bool isFill/* = false*/, 
 							   float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/, size_t kSegments/* = 16*/)
 {
