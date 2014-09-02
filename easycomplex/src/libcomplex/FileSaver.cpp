@@ -17,6 +17,8 @@ void FileSaver::store(const char* filepath, const Symbol* symbol)
 	value["ymin"] = symbol->m_clipbox.yMin;
 	value["ymax"] = symbol->m_clipbox.yMax;
 
+	value["use_render_cache"] = symbol->m_use_render_cache;
+
 	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		value["sprite"][i] = store(symbol->m_sprites[i], dir);
@@ -40,6 +42,8 @@ void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol,
 	value["xmax"] = symbol->m_clipbox.xMax;
 	value["ymin"] = symbol->m_clipbox.yMin;
 	value["ymax"] = symbol->m_clipbox.yMax;
+
+	value["use_render_cache"] = symbol->m_use_render_cache;
 
 	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)

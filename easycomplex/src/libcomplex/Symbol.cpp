@@ -10,8 +10,9 @@ namespace ecomplex
 const float Symbol::SCALE = 0.15f;
 
 Symbol::Symbol()
-	: m_render_version(0)
-	, m_render_cache(true)
+	: m_use_render_cache(false)
+	, m_render_version(0)
+	, m_render_cache_open(true)
 {
 	static int id = 0;
 	m_name = FILE_TAG + wxVariant(id++);
@@ -43,7 +44,7 @@ void Symbol::draw(const d2d::Screen& scr,
 {
  	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
  	const d2d::TPNode* n = NULL;
-	if (m_render_cache) {
+	if (m_render_cache_open) {
 		n = dtex->Query(m_filepath);
 	}
  	if (n) 
@@ -51,9 +52,9 @@ void Symbol::draw(const d2d::Screen& scr,
 		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
 		if (shader->GetVersion() != m_render_version)
 		{
-			m_render_cache = false;
+			m_render_cache_open = false;
 			dtex->RefreshSymbol(*this, *n);
-			m_render_cache = true;
+			m_render_cache_open = true;
 
 			const d2d::Vector& size = scr.GetSize();
 			glViewport(0, 0, size.x, size.y);
@@ -136,8 +137,8 @@ bool Symbol::isOneLayer() const
 void Symbol::loadResources()
 {
 //	d2d::DynamicTexture* dtex = d2d::DynamicTexture::Instance();
-//	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
-// 	dtex->Begin();
+	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+ 	dtex->BeginImage();
 
 	clear();
 
@@ -156,7 +157,9 @@ void Symbol::loadResources()
 	m_clipbox.yMin = value["ymin"].asInt();
 	m_clipbox.yMax = value["ymax"].asInt();
 
-	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
+	m_use_render_cache = value["use_render_cache"].asBool();
+
+ 	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
@@ -175,9 +178,10 @@ void Symbol::loadResources()
 
 	initBounding();
 
-//	dtex->End();
-
-//	dtex->InsertSymbol(*this);
+	dtex->EndImage();
+	if (m_use_render_cache) {
+		dtex->InsertSymbol(*this);
+	}
 }
 
 void Symbol::clear()

@@ -68,9 +68,11 @@ public:
 	d2d::Rect m_clipbox;
 	d2d::ShapeStyle m_style;
 
+	bool m_use_render_cache;
+
 private:
 	mutable int m_render_version;
-	mutable bool m_render_cache;
+	mutable bool m_render_cache_open;
 
 }; // Symbol
 

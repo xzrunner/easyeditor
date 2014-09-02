@@ -40,6 +40,17 @@ namespace ecomplex
 			Symbol* c = static_cast<Symbol*>(m_symbol);
 			c->m_clipbox.yMax = wxANY_AS(value, int);
 		}
+		else if (name == wxT("Cache") && m_symbol)
+		{
+			Symbol* c = static_cast<Symbol*>(m_symbol);
+			c->m_use_render_cache = wxANY_AS(value, bool);
+			d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+			if (c->m_use_render_cache) {
+				dtex->InsertSymbol(*c);
+			} else {
+				dtex->Remove(c->getFilepath());
+			}
+		}
 
 		m_editPanel->Refresh();
 	}
@@ -48,7 +59,11 @@ namespace ecomplex
 	{
 		SymbolPropertySetting::enablePropertyGrid(panel, bEnable);
 		panel->getPG()->GetProperty(wxT("Groups"))->Enable(bEnable);
-		panel->getPG()->GetProperty(wxT("Clipbox"))->Enable(bEnable);
+		panel->getPG()->GetProperty(wxT("Clipbox.xmin"))->Enable(bEnable);
+		panel->getPG()->GetProperty(wxT("Clipbox.xmax"))->Enable(bEnable);
+		panel->getPG()->GetProperty(wxT("Clipbox.ymin"))->Enable(bEnable);
+		panel->getPG()->GetProperty(wxT("Clipbox.ymax"))->Enable(bEnable);
+		panel->getPG()->GetProperty(wxT("Cache"))->Enable(bEnable);
 	}
 
 	std::string PropertySetting::getGroupNames() const
@@ -131,6 +146,7 @@ namespace ecomplex
 			pg->SetPropertyValue(wxT("Clipbox.xmax"), (int)c->m_clipbox.xMax);
 			pg->SetPropertyValue(wxT("Clipbox.ymin"), (int)c->m_clipbox.yMin);
 			pg->SetPropertyValue(wxT("Clipbox.ymax"), (int)c->m_clipbox.yMax);
+			pg->SetPropertyValue(wxT("Cache"), c->m_use_render_cache);
 		}
 		else
 		{
@@ -138,6 +154,7 @@ namespace ecomplex
 			pg->SetPropertyValue(wxT("Clipbox.xmax"), 0);
 			pg->SetPropertyValue(wxT("Clipbox.ymin"), 0);
 			pg->SetPropertyValue(wxT("Clipbox.ymax"), 0);
+			pg->SetPropertyValue(wxT("Cache"), false);			
 		}
 	}
 
@@ -154,6 +171,9 @@ namespace ecomplex
 		pg->AppendIn(cbProp, new wxIntProperty(wxT("xmax"), wxPG_LABEL, 0));
 		pg->AppendIn(cbProp, new wxIntProperty(wxT("ymin"), wxPG_LABEL, 0));
 		pg->AppendIn(cbProp, new wxIntProperty(wxT("ymax"), wxPG_LABEL, 0));
+
+		
+		pg->Append(new wxBoolProperty(wxT("Cache"), wxPG_LABEL, false));
 	}
 
 	void PropertySetting::initEachGroup(wxPropertyGrid* pg)

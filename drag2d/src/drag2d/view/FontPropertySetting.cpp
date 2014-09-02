@@ -24,26 +24,23 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	SpritePropertySetting::onPropertyGridChange(name, value);
 
 	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
-	if (name == wxT("Font"))
+	if (name == wxT("Font")) {
 		sprite->font = wxANY_AS(value, wxString);
-	else if (name == wxT("Edge")) {
+	} else if (name == wxT("Edge")) {
 		sprite->has_edge = wxANY_AS(value, bool);
-	}
-	else if (name == wxT("FontColor")) {
+	} else if (name == wxT("FontColor")) {
 		wxColour col = wxANY_AS(value, wxColour);
 		sprite->color.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
-	}
-	else if (name == wxT("AlignHori")) 
+	} else if (name == wxT("Align.Hori")) {
 		sprite->align_hori = HoriAlignType(wxANY_AS(value, int));
-	else if (name == wxT("AlignVert"))
+	} else if (name == wxT("Align.Vert")) {
 		sprite->align_vert = VertAlignType(wxANY_AS(value, int));
-	else if (name == wxT("FontSize"))
+	} else if (name == wxT("FontSize")) {
 		sprite->size = wxANY_AS(value, float);
-	else if (name == wxT("LabelWidth")) {
+	} else if (name == wxT("LabelSize.Width")) {
 		sprite->width = wxANY_AS(value, float);
 		sprite->buildBounding();
-	}
-	else if (name == wxT("LabelHeight")) {
+	} else if (name == wxT("LabelSize.Height")) {
 		sprite->height = wxANY_AS(value, float);
 		sprite->buildBounding();
 	} else if (name == wxT("Filename")) {
@@ -52,6 +49,9 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	} else if (name == wxT("TextContent")) {
 		std::string str = wxANY_AS(value, wxString);
 		sprite->SetTextContent(str);
+	} else if (name == wxT("TextID")) {
+		std::string tid = wxANY_AS(value, wxString);
+		sprite->SetTextID(tid);
 	}
 }
 
@@ -63,13 +63,15 @@ void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool b
 	pg->GetProperty(wxT("Font"))->Enable(bEnable);
 	pg->GetProperty(wxT("Edge"))->Enable(bEnable);
 	pg->GetProperty(wxT("FontColor"))->Enable(bEnable);
-	pg->GetProperty(wxT("AlignHori"))->Enable(bEnable);
-	pg->GetProperty(wxT("AlignVert"))->Enable(bEnable);
+	pg->GetProperty(wxT("Align"))->Enable(bEnable);
+	pg->GetProperty(wxT("Align.Hori"))->Enable(bEnable);
+	pg->GetProperty(wxT("Align.Vert"))->Enable(bEnable);
 	pg->GetProperty(wxT("FontSize"))->Enable(bEnable);
-	pg->GetProperty(wxT("LabelWidth"))->Enable(bEnable);
-	pg->GetProperty(wxT("LabelHeight"))->Enable(bEnable);
+	pg->GetProperty(wxT("LabelSize.Width"))->Enable(bEnable);
+	pg->GetProperty(wxT("LabelSize.Height"))->Enable(bEnable);
 	pg->GetProperty(wxT("Filename"))->Enable(bEnable);
 	pg->GetProperty(wxT("TextContent"))->Enable(bEnable);
+	pg->GetProperty(wxT("TextID"))->Enable(bEnable);
 }
 
 void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
@@ -84,13 +86,14 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 	wxColour col = wxColour(sprite->color.r*255, sprite->color.g*255, sprite->color.b*255, sprite->color.a*255);
 	pg->SetPropertyValueString(wxT("FontColor"), col.GetAsString());
 
-	pg->GetProperty(wxT("AlignHori"))->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
-	pg->GetProperty(wxT("AlignVert"))->SetValue(VERT_ALIGN_LABELS[sprite->align_vert]);
+	pg->GetProperty(wxT("Align.Hori"))->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
+	pg->GetProperty(wxT("Align.Vert"))->SetValue(VERT_ALIGN_LABELS[sprite->align_vert]);
 	pg->GetProperty(wxT("FontSize"))->SetValue(sprite->size);
-	pg->GetProperty(wxT("LabelWidth"))->SetValue(sprite->width);
-	pg->GetProperty(wxT("LabelHeight"))->SetValue(sprite->height);
+	pg->GetProperty(wxT("LabelSize.Width"))->SetValue(sprite->width);
+	pg->GetProperty(wxT("LabelSize.Height"))->SetValue(sprite->height);
 	pg->GetProperty(wxT("Filename"))->SetValue(sprite->filename);
 	pg->GetProperty(wxT("TextContent"))->SetValue(sprite->GetTextContext());
+	pg->GetProperty(wxT("TextID"))->SetValue(sprite->GetTextID());
 }
 
 void FontPropertySetting::initProperties(wxPropertyGrid* pg)
@@ -108,19 +111,27 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));
 	pg->SetPropertyAttribute("FontColor", "HasAlpha", true);
 
-	wxEnumProperty* horiAlignProp = new wxEnumProperty(wxT("AlignHori"), wxPG_LABEL, HORI_ALIGN_LABELS);
-	horiAlignProp->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
-	pg->Append(horiAlignProp);
+	wxPGProperty* alignProp = pg->Append(new wxStringProperty(wxT("Align"), wxPG_LABEL, wxT("<composed>")));
+	alignProp->SetExpanded(false);
 
-	wxEnumProperty* vertAlignProp = new wxEnumProperty(wxT("AlignVert"), wxPG_LABEL, VERT_ALIGN_LABELS);
+	wxEnumProperty* horiAlignProp = new wxEnumProperty(wxT("Hori"), wxPG_LABEL, HORI_ALIGN_LABELS);
+	horiAlignProp->SetValue(HORI_ALIGN_LABELS[sprite->align_hori]);
+	pg->AppendIn(alignProp, horiAlignProp);
+
+	wxEnumProperty* vertAlignProp = new wxEnumProperty(wxT("Vert"), wxPG_LABEL, VERT_ALIGN_LABELS);
 	vertAlignProp->SetValue(VERT_ALIGN_LABELS[sprite->align_vert]);
-	pg->Append(vertAlignProp);
+	pg->AppendIn(alignProp, vertAlignProp);
 
 	pg->Append(new wxFloatProperty(wxT("FontSize"), wxPG_LABEL, sprite->size));
-	pg->Append(new wxFloatProperty(wxT("LabelWidth"), wxPG_LABEL, sprite->width));
-	pg->Append(new wxFloatProperty(wxT("LabelHeight"), wxPG_LABEL, sprite->height));
+
+	wxPGProperty* sizeProp = pg->Append(new wxStringProperty(wxT("LabelSize"), wxPG_LABEL, wxT("<composed>")));
+	sizeProp->SetExpanded(false);
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Width"), wxPG_LABEL, sprite->width));
+	pg->AppendIn(sizeProp, new wxFloatProperty(wxT("Height"), wxPG_LABEL, sprite->height));
+
 	pg->Append(new wxStringProperty(wxT("Filename"), wxPG_LABEL, sprite->filename));
 	pg->Append(new wxStringProperty(wxT("TextContent"), wxPG_LABEL, sprite->GetTextContext()));
+	pg->Append(new wxStringProperty(wxT("TextID"), wxPG_LABEL, sprite->GetTextID()));
 }
 
 }
