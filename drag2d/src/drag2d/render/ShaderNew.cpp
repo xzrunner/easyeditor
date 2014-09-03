@@ -419,7 +419,7 @@ void ShaderNew::Commit()
 		return;
 	}
 
-	if (m_fbo != 0 || (m_tex != 1 && m_tex != 1)) {
+	if (m_fbo != 0 || (m_fbo != 1 && m_tex != 1)) {
 		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
 	}
 
