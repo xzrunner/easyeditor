@@ -3,6 +3,7 @@
 
 #include "dataset/SymbolMgr.h"
 #include "dataset/ImageSymbol.h"
+#include "view/GLCanvas.h"
 
 namespace d2d
 {
@@ -33,6 +34,9 @@ void LibraryImagePage::onAddPress(wxCommandEvent& event)
 			ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
 			m_list->insert(symbol);
 			symbol->release();
+		}
+		if (m_canvas) {
+			m_canvas->resetViewport();
 		}
 	}
 }
