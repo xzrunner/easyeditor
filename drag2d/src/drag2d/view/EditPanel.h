@@ -49,6 +49,7 @@ namespace d2d
 		void onMouseWheelRotation(int x, int y, int direction);
 
 		void resetCanvas();
+		void ResetViewport();
 
 		void undo();
 		void redo();

@@ -31,6 +31,7 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
  		dlg.ShowModal();
  
   		m_editPanel->resetCanvas();
+		//m_editPanel->ResetViewport();
 
 		//////////////////////////////////////////////////////////////////////////
 

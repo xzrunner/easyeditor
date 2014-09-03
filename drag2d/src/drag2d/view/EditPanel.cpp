@@ -167,6 +167,15 @@ void EditPanel::resetCanvas()
 	}
 }
 
+void EditPanel::ResetViewport()
+{
+	if (m_canvas)
+	{
+		m_canvas->resetViewport();
+//		Refresh();
+	}
+}
+
 void EditPanel::undo()
 {
 	HistoryList::Type type = m_historyList.undo();
