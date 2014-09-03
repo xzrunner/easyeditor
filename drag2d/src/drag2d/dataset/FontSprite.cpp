@@ -143,6 +143,7 @@ void FontSprite::load(const Json::Value& val)
 			m_symbol->loadFont(filename);
 		}
 		m_text = val["content"].asString();
+		m_tid = val["tid"].asString();
 	}
 
 	buildBounding();
@@ -161,6 +162,7 @@ void FontSprite::store(Json::Value& val) const
 	val["label_height"] = height;
 	val["font_filename"] = filename;
 	val["content"] = m_text;
+	val["tid"] = m_tid;
 }
 
 void FontSprite::buildBounding()

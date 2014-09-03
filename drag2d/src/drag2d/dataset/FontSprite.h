@@ -40,6 +40,9 @@ public:
 	void SetTextContent(const std::string& str) { m_text = str; }
 	const std::string& GetTextContext() const { return m_text; }
 
+	void SetTextID(const std::string& tid) { m_tid = tid; }
+	const std::string& GetTextID() const { return m_tid; }
+
 protected:
 	FontBlankSymbol* m_symbol;
 
@@ -60,6 +63,8 @@ public:
 
 private:
 	std::string m_text;
+
+	std::string m_tid;
 
 }; // FontSprite
 }
