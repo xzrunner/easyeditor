@@ -15,8 +15,8 @@ public:
 	ScaleSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node);
 	virtual ~ScaleSpriteState();
 
-	virtual	bool OnMousePress(const Vector& pos);
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
+	virtual	bool OnMouseMove(const Vector& pos);
 
 protected:
 	virtual void Scale(const Vector& curr);

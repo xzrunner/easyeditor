@@ -13,8 +13,8 @@ public:
 	RotateSpriteState(SpriteSelection* selection, const Vector& first_pos);
 	virtual ~RotateSpriteState();
 
-	virtual	bool OnMousePress(const Vector& pos);
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
+	virtual	bool OnMouseMove(const Vector& pos);
 
 protected:
 	virtual void Rotate(const Vector& dst);

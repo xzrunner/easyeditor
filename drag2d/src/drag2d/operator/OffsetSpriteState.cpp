@@ -20,17 +20,17 @@ OffsetSpriteState::~OffsetSpriteState()
 	m_sprite->release();
 }
 
-bool OffsetSpriteState::OnMousePress(const Vector& pos)
-{
-	d2d::Vector offset = Math::rotateVector(pos - m_sprite->getCenter(), -m_sprite->getAngle());
-	m_sprite->setOffset(offset);
-	return true;
-}
-
 AbstractAtomicOP* OffsetSpriteState::OnMouseRelease(const Vector& pos)
 {
 	d2d::Vector new_offset = Math::rotateVector(pos - m_sprite->getCenter(), -m_sprite->getAngle());
 	return new OffsetSpriteAOP(m_sprite, new_offset, m_old_offset);
+}
+
+bool OffsetSpriteState::OnMouseMove(const Vector& pos)
+{
+	d2d::Vector offset = Math::rotateVector(pos - m_sprite->getCenter(), -m_sprite->getAngle());
+	m_sprite->setOffset(offset);
+	return true;
 }
 
 }

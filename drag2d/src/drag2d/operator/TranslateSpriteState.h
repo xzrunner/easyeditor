@@ -13,8 +13,9 @@ public:
 	TranslateSpriteState(SpriteSelection* selection, const Vector& first_pos);
 	virtual ~TranslateSpriteState();
 
-	virtual	bool OnMousePress(const Vector& pos);
+	virtual	void OnMousePress(const Vector& pos);
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
+	virtual	bool OnMouseMove(const Vector& pos);
 
 	virtual bool OnDirectionKeyDown(DirectionType type);
 

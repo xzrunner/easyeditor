@@ -96,6 +96,8 @@ void ArrangeSpriteImpl::onKeyUp(int keyCode)
 
 void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 {
+	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+
 	m_align.SetInvisible();
 
 	ISprite* selected = NULL;
@@ -105,9 +107,12 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
 		selected = sprites[0];
 	}
-	if (!selected) return;
-
-	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	if (!selected) {
+		if (m_op_state) {
+			m_op_state->OnMousePress(pos);
+		}
+		return;
+	}
 
 	// offset
 	if (m_is_offset_open)
@@ -141,6 +146,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 
 	// translate
 	m_op_state = CreateTransalteState(m_selection, pos);
+	m_op_state->OnMousePress(pos);
 }
 
 void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
@@ -229,7 +235,7 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 void ArrangeSpriteImpl::onMouseDrag(int x, int y)
 {
 	Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	if (m_op_state && m_op_state->OnMousePress(pos))
+	if (m_op_state && m_op_state->OnMouseMove(pos))
 	{
 		if (m_propertyPanel) {
 			m_propertyPanel->enablePropertyGrid(false);

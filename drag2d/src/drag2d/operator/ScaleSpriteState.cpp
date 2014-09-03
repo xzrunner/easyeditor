@@ -26,12 +26,6 @@ ScaleSpriteState::~ScaleSpriteState()
 	m_sprite->release();
 }
 
-bool ScaleSpriteState::OnMousePress(const Vector& pos)
-{
-	Scale(pos);
-	return true;
-}
-
 AbstractAtomicOP* ScaleSpriteState::OnMouseRelease(const Vector& pos)
 {
 	CombineAOP* comb = new CombineAOP();
@@ -40,6 +34,12 @@ AbstractAtomicOP* ScaleSpriteState::OnMouseRelease(const Vector& pos)
 	comb->Insert(new ScaleSpriteAOP(m_sprite, m_sprite->getScale(), m_first_scale));
 
 	return comb;
+}
+
+bool ScaleSpriteState::OnMouseMove(const Vector& pos)
+{
+	Scale(pos);
+	return true;
 }
 
 void ScaleSpriteState::Scale(const Vector& curr)

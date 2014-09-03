@@ -16,8 +16,9 @@ class IArrangeSpriteState
 public:
 	virtual ~IArrangeSpriteState() {}
 	
-	virtual bool OnMousePress(const Vector& pos) { return false; }
+	virtual void OnMousePress(const Vector& pos) {}
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos) { return NULL; }
+	virtual bool OnMouseMove(const Vector& pos) { return false; }
 
 	virtual bool OnDirectionKeyDown(DirectionType type) { return false; }
 

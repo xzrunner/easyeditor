@@ -20,7 +20,15 @@ RotateSpriteState::~RotateSpriteState()
 	m_selection->release();
 }
 
-bool RotateSpriteState::OnMousePress(const Vector& pos)
+AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)
+{
+	if (pos != m_first_pos) {
+		return new RotateSpriteAOP(*m_selection, m_first_pos, pos);
+	}
+	return NULL;
+}
+
+bool RotateSpriteState::OnMouseMove(const Vector& pos)
 {
 	if (m_selection->size() != 1) return false;
 
@@ -28,14 +36,6 @@ bool RotateSpriteState::OnMousePress(const Vector& pos)
 	m_last_pos = pos;
 
 	return true;
-}
-
-AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)
-{
-	if (pos != m_first_pos) {
-		return new RotateSpriteAOP(*m_selection, m_first_pos, pos);
-	}
-	return NULL;
 }
 
 void RotateSpriteState::Rotate(const Vector& dst)

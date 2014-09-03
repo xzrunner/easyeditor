@@ -19,7 +19,17 @@ TranslateSpriteState::~TranslateSpriteState()
 	m_selection->release();
 }
 
-bool TranslateSpriteState::OnMousePress(const Vector& pos)
+void TranslateSpriteState::OnMousePress(const Vector& pos)
+{
+	m_last_pos = pos;
+}
+
+AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
+{
+	return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
+}
+
+bool TranslateSpriteState::OnMouseMove(const Vector& pos)
 {
 	if (m_selection->empty()) return false;
 
@@ -27,11 +37,6 @@ bool TranslateSpriteState::OnMousePress(const Vector& pos)
 	m_last_pos = pos;
 
 	return true;
-}
-
-AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
-{
-	return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
 }
 
 bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
