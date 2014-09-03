@@ -70,9 +70,11 @@ namespace ecomplex
 
 		m_stat.End();
 
+#ifdef _DEBUG 
 //		d2d::DynamicTexture::Instance()->DebugDraw(m_screen);
 //		d2d::DynamicFont::Instance()->DebugDraw(m_screen);
 		d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+#endif
 
 		m_stat.DrawTime(m_screen);
 
