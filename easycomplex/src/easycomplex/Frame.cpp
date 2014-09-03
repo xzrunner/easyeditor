@@ -1,16 +1,24 @@
 #include "Frame.h"
 #include "Task.h"
+#include "Code.h"
 
 #include <easycomplex.h>
 #include <easycoco.h>
+#include <easybuilder.h>
 
 namespace ecomplex
 {
+
+enum MenuID
+{
+	ID_CODE = 700
+};
 
 BEGIN_EVENT_TABLE(Frame, d2d::Frame)
 	EVT_MENU(ID_PREVIEW, Frame::onPreview)
 	EVT_MENU(ID_EJ_PREVIEW, Frame::onEJPreview)
 	EVT_MENU(ID_SET_BG, Frame::onSetBackground)
+	EVT_MENU(ID_CODE, Frame::onCode)
 END_EVENT_TABLE()
 
 Frame::Frame(const wxString& title, const wxString& filetag)
@@ -19,6 +27,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_view_menu->Append(ID_PREVIEW, wxT("&Preview\tCtrl+Enter"), wxT("Play"));
 	m_view_menu->Append(ID_EJ_PREVIEW, wxT("EJ Preview"), wxT("Preview"));
 	m_setting_menu->Append(ID_SET_BG, wxT("Background"), wxT("Background"));
+	m_code_menu->Append(ID_CODE, wxT("Info\tCtrl+I"), wxT("Info"));
 
 #ifdef _DEBUG
 	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
@@ -135,6 +144,27 @@ void Frame::onSetBackground(wxCommandEvent& event)
  		static_cast<StageCanvas*>(canvas)->setBackground(img);
 		img->release();
 	}
+}
+
+void Frame::onCode(wxCommandEvent& event)
+{
+	ebuilder::CodeDialog dlg(this);
+	// path
+	{
+		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("init_path.lua"));
+
+		ebuilder::CodeGenerator gen;
+		Code code(gen);
+		StagePanel* stage = static_cast<StagePanel*>(
+			const_cast<d2d::EditPanel*>(m_task->getEditPanel()));
+		code.Resolve(*stage->getSymbol());
+		page->SetReadOnly(false);
+		page->SetText(gen.toText());
+		page->SetReadOnly(true);
+
+		dlg.notebook->AddPage(page, page->getName());
+	}
+	dlg.ShowModal();
 }
 
 }

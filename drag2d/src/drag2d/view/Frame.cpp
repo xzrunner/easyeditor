@@ -217,6 +217,7 @@ void Frame::initMenuBar()
 	menuBar->Append(initFileBar(), "&File");
 	menuBar->Append(m_view_menu = initViewBar(), "&View");
 	menuBar->Append(m_setting_menu = initSettingsBar(), "&Settings");
+	menuBar->Append(m_code_menu = InitCodeBar(), "&Code");
 	SetMenuBar(menuBar);
 }
 
@@ -247,6 +248,12 @@ wxMenu* Frame::initSettingsBar()
 	wxMenu* settingsMenu = new wxMenu;
 	settingsMenu->Append(ID_SETTINGS, wxT("Settings"), wxT("Settings"));
 	return settingsMenu;
+}
+
+wxMenu* Frame::InitCodeBar()
+{
+	wxMenu* menu = new wxMenu;
+	return menu;
 }
 
 wxMenu* Frame::initHelpBar()

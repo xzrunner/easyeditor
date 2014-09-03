@@ -48,6 +48,7 @@ private:
 	wxMenu* initFileBar();
 	wxMenu* initViewBar();
 	wxMenu* initSettingsBar();
+	wxMenu* InitCodeBar();
 	wxMenu* initHelpBar();
 
 	wxString getFileFilter() const;
@@ -59,6 +60,7 @@ private:
 protected:
 	wxMenu* m_view_menu;
 	wxMenu* m_setting_menu;
+	wxMenu* m_code_menu;
 
 	ITask* m_task;
 

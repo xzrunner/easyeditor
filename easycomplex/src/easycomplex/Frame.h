@@ -21,6 +21,7 @@ private:
 	void onPreview(wxCommandEvent& event);
 	void onEJPreview(wxCommandEvent& event);
 	void onSetBackground(wxCommandEvent& event);
+	void onCode(wxCommandEvent& event);
 
 private:
 	enum
