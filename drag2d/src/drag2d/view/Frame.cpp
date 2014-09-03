@@ -5,6 +5,7 @@
 #include "common/Exception.h"
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
+#include "render/DynamicTexAndFont.h"
 
 #include <wx/filename.h>
 
@@ -93,6 +94,8 @@ void Frame::onNew(wxCommandEvent& event)
 
 	setCurrFilename();
 	m_task->clear();
+
+	DynamicTexAndFont::Instance()->Clear();
 }
 
 void Frame::onOpen(wxCommandEvent& event)
@@ -104,6 +107,7 @@ void Frame::onOpen(wxCommandEvent& event)
 			getFileFilter(), wxFD_OPEN);
 		if (dlg.ShowModal() == wxID_OK)
 		{
+			DynamicTexAndFont::Instance()->Clear();
 			openFile(dlg.GetPath());
 		}
 	} catch (Exception& e) {

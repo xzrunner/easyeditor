@@ -220,6 +220,15 @@ void DynamicTexAndFont::LoadFontFile(const char* filename)
 	m_ft_render.LoadFont(filename);	
 }
 
+void DynamicTexAndFont::Clear()
+{
+	delete m_root;
+	InitRoot();
+	m_hash.Clear();
+
+	m_path2node.clear();
+	ClearTexture();
+}
 
 void DynamicTexAndFont::ReloadPixels()
 {
@@ -514,16 +523,6 @@ uint32_t* DynamicTexAndFont::GenFTChar(int unicode, int font_size, int color, in
 		buffer = m_ft_render.WriteGlyphNoStroker(unicode, font_size, col, layout);
 	}
 	return buffer;
-}
-
-void DynamicTexAndFont::Clear()
-{
-	delete m_root;
-	InitRoot();
-	m_hash.Clear();
-
-	m_path2node.clear();
-	ClearTexture();
 }
 
 //////////////////////////////////////////////////////////////////////////

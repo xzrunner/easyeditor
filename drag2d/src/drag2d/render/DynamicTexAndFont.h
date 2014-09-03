@@ -68,6 +68,8 @@ public:
 
 	const Glyph* QueryAndInsertFont(int character, int font_size, int color, int is_edge);
 
+	void Clear();
+
 protected:
 	virtual void ReloadPixels();
 
@@ -83,8 +85,6 @@ private:
 	void DrawExtrude(const Image* img, const TPNode* node) const;
 
 	uint32_t* GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout);
-
-	void Clear();
 
 private:
 	class ImageSizeCmp
