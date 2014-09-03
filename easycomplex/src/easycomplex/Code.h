@@ -15,18 +15,8 @@ class Code
 public:
 	Code(ebuilder::CodeGenerator& gen);
 
-	void Resolve(const Symbol& symbol);
-
-private:
-	struct Node
-	{
-		const Symbol& symbol;
-		std::string path;
-		std::string name;
-
-		Node(const Symbol& _symbol, const std::string& _path) 
-			: symbol(_symbol), path(_path) {}
-	}; // Node
+	void ResolveUI(const Symbol& symbol);
+	void ResolveText(const Symbol& symbol);
 
 private:
 	ebuilder::CodeGenerator& m_gen;

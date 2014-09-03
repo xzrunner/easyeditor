@@ -149,15 +149,28 @@ void Frame::onSetBackground(wxCommandEvent& event)
 void Frame::onCode(wxCommandEvent& event)
 {
 	ebuilder::CodeDialog dlg(this);
-	// path
+	StagePanel* stage = static_cast<StagePanel*>(
+		const_cast<d2d::EditPanel*>(m_task->getEditPanel()));
+	// ui
 	{
-		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("init_path.lua"));
+		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("ui.lua"));
 
 		ebuilder::CodeGenerator gen;
 		Code code(gen);
-		StagePanel* stage = static_cast<StagePanel*>(
-			const_cast<d2d::EditPanel*>(m_task->getEditPanel()));
-		code.Resolve(*stage->getSymbol());
+		code.ResolveUI(*stage->getSymbol());
+		page->SetReadOnly(false);
+		page->SetText(gen.toText());
+		page->SetReadOnly(true);
+
+		dlg.notebook->AddPage(page, page->getName());
+	}
+	// tid
+	{
+		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("texts.lua"));
+
+		ebuilder::CodeGenerator gen;
+		Code code(gen);
+		code.ResolveText(*stage->getSymbol());
 		page->SetReadOnly(false);
 		page->SetText(gen.toText());
 		page->SetReadOnly(true);
