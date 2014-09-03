@@ -23,6 +23,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	SetDropTarget(new DragSymbolTarget(this, library));
 
 	MODULE_STAGE.impl = this;
+
+	SetDropTarget(this);
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
@@ -37,6 +39,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new DragSymbolTarget(this, library));
+
+	SetDropTarget(this);
 }
 
 void StagePanel::clear()
@@ -67,6 +71,21 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
 	m_viewlist->reorder(sprite, up);
+}
+
+bool StagePanel::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
+{
+	if (filenames.size() != 1) {
+		return true;
+	}
+
+	wxString filename = filenames[0];
+	if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_complex)) {
+		d2d::Frame* frame = static_cast<d2d::Frame*>(m_frame);
+		frame->openFile(filename);
+	}
+
+	return true;
 }
 
 //////////////////////////////////////////////////////////////////////////

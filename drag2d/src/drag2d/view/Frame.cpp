@@ -58,6 +58,28 @@ void Frame::initWithFile(const wxString& path)
 	}
 }
 
+void Frame::openFile(const wxString& filename)
+{
+	if (!m_task || filename.IsEmpty()) {
+		return;
+	}
+
+	DynamicTexAndFont::Instance()->Clear();
+
+	m_task->clear();
+
+	m_currFilename = filename;
+	m_recent.insert(m_currFilename);
+	SetTitle(m_currFilename);
+
+	try {
+		m_task->load(m_currFilename);
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
+	}
+}
+
 void Frame::saveTmpInfo()
 {
 	wxString filename = wxFileName::GetCwd() + "\\.easy";
@@ -107,7 +129,6 @@ void Frame::onOpen(wxCommandEvent& event)
 			getFileFilter(), wxFD_OPEN);
 		if (dlg.ShowModal() == wxID_OK)
 		{
-			DynamicTexAndFont::Instance()->Clear();
 			openFile(dlg.GetPath());
 		}
 	} catch (Exception& e) {
@@ -283,26 +304,6 @@ void Frame::setCurrFilename()
 			m_currFilename = str;
 			break;
 		}
-	}
-}
-
-void Frame::openFile(const wxString& filename)
-{
-	if (!m_task || filename.IsEmpty()) {
-		return;
-	}
-
-	m_task->clear();
-
-	m_currFilename = filename;
-	m_recent.insert(m_currFilename);
-	SetTitle(m_currFilename);
-
-	try {
-		m_task->load(m_currFilename);
-	} catch (d2d::Exception& e) {
-		d2d::ExceptionDlg dlg(this, e);
-		dlg.ShowModal();
 	}
 }
 

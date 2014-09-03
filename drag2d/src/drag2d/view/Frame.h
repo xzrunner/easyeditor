@@ -19,6 +19,8 @@ public:
 
 	void initWithFile(const wxString& path);
 
+	void openFile(const wxString& filename);
+
 protected:
 	virtual void onNew(wxCommandEvent& event);
 	virtual void onOpen(wxCommandEvent& event);
@@ -54,8 +56,6 @@ private:
 	wxString getFileFilter() const;
 
 	void setCurrFilename();
-
-	void openFile(const wxString& filename);
 
 protected:
 	wxMenu* m_view_menu;
