@@ -75,6 +75,12 @@ void PrimitiveDraw::rect(const Screen& scr, const Matrix& mt, float hWidth,
 	rect(scr, mt, -Vector(hWidth, hHeight), Vector(hWidth, hHeight), style);
 }
 
+void PrimitiveDraw::rect(const Screen& scr, const Matrix& mt, const Rect& r, 
+						 const ShapeStyle& style)
+{
+	rect(scr, mt, Vector(r.xMin, r.yMin), Vector(r.xMax, r.yMax), style);
+}
+
 void PrimitiveDraw::rect(const Screen& scr, const Matrix& mt, const Vector& p0, 
 						 const Vector& p1, const ShapeStyle& style)
 {

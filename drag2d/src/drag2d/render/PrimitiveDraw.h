@@ -24,6 +24,7 @@ namespace d2d
 		static void rect(const Screen& scr, const Vector& p0, const Vector& p1, const ShapeStyle& style);
 
 		static void rect(const Screen& scr, const Matrix& mt, float hWidth, float hHeight, const ShapeStyle& style);
+		static void rect(const Screen& scr, const Matrix& mt, const Rect& rect, const ShapeStyle& style);
 		static void rect(const Screen& scr, const Matrix& mt, const Vector& p0, const Vector& p1, const ShapeStyle& style);
 
 		static void drawCircle(const Screen& scr, const Vector& center, float radius, bool isFill = false, 
