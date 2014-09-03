@@ -11,6 +11,7 @@
 #include <opengl/opengl.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
+#include <wx/wx.h>
 
 namespace d2d
 {
@@ -37,6 +38,8 @@ DynamicPacker::~DynamicPacker()
 
 void DynamicPacker::ReloadTexture()
 {
+	wxLogDebug(_T("DynamicPacker ReloadTexture"));
+
 	InitTexture(m_tex);
 	InitFBO(m_fbo);
 	ReloadPixels();
