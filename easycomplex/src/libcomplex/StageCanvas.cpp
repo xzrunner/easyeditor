@@ -39,6 +39,8 @@ namespace ecomplex
 // 		d2d::DynamicTexture::Instance()->ReloadTexture();
 // 		d2d::DynamicFont::Instance()->ReloadTexture();
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+
+		resetViewport();
 	}
 
 	void StageCanvas::onDraw()
