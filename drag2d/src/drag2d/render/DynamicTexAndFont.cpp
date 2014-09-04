@@ -1,5 +1,6 @@
 #include "DynamicTexAndFont.h"
 
+#include "common/FileNameTools.h"
 #include "dataset/TPNode.h"
 #include "dataset/ISymbol.h"
 #include "render/ShaderNew.h"
@@ -21,7 +22,9 @@ DynamicTexAndFont* DynamicTexAndFont::Instance()
 {
 	if (!m_instance) {
 		m_instance = new DynamicTexAndFont();
-		m_instance->LoadFontFile("FZCY_GBK.ttf");
+		if (FilenameTools::isExist("FZCY_GBK.ttf")) {
+			m_instance->LoadFontFile("FZCY_GBK.ttf");
+		}
 	}
 	return m_instance;
 }
