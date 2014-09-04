@@ -1745,6 +1745,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\StageDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\StageDropTarget.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\wrap_StagePanel.cpp"
 					>
 				</File>

@@ -26,8 +26,10 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	FileIO::load(this, filepath);
-	m_stage->getCanvas()->resetViewport();
+	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
+		FileIO::load(this, filepath);
+		m_stage->getCanvas()->resetViewport();
+	}
 }
 
 void Task::store(const char* filepath) const

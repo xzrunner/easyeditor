@@ -7,7 +7,7 @@ namespace ecomplex
 	class LibraryPanel;
 	class Symbol;
 
-	class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, public wxFileDropTarget
+	class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
@@ -27,30 +27,11 @@ namespace ecomplex
 		virtual void insertSprite(d2d::ISprite* sprite);
 		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
-		//
-		// wxFileDropTarget interface
-		//
-		virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
-
 		Symbol* getSymbol() { return m_symbol; }
 
 		void setViewlist(d2d::ViewlistPanel* viewlist) {
 			m_viewlist = viewlist;
 		}
-
-	private:
-		class DragSymbolTarget : public wxTextDropTarget
-		{
-		public:
-			DragSymbolTarget(StagePanel* stage, d2d::LibraryPanel* library);
-
-			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
-
-		private:
-			StagePanel* m_stage;
-			d2d::LibraryPanel* m_library;
-
-		}; // DragSymbolTarget
 
 	private:
 		Symbol* m_symbol;

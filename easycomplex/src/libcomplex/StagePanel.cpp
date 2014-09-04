@@ -20,11 +20,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 	m_canvas = new StageCanvas(this);
 
-	SetDropTarget(new DragSymbolTarget(this, library));
+	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
 
 	MODULE_STAGE.impl = this;
-
-	SetDropTarget(this);
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
@@ -38,9 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 	m_canvas = new StageCanvas(this);
 
-	SetDropTarget(new DragSymbolTarget(this, library));
-
-	SetDropTarget(this);
+	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
 }
 
 void StagePanel::clear()
@@ -71,61 +67,6 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
 	m_viewlist->reorder(sprite, up);
-}
-
-bool StagePanel::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
-{
-	if (filenames.size() != 1) {
-		return true;
-	}
-
-	wxString filename = filenames[0];
-	if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_complex)) {
-		d2d::Frame* frame = static_cast<d2d::Frame*>(m_frame);
-		frame->openFile(filename);
-	}
-
-	return true;
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class StagePanel::DragSymbolTarget
-//////////////////////////////////////////////////////////////////////////
-
-StagePanel::DragSymbolTarget::
-DragSymbolTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: m_stage(stage)
-	, m_library(library)
-{
-}
-
-bool StagePanel::DragSymbolTarget::
-OnDropText(wxCoord x, wxCoord y, const wxString& data)
-{
-	wxString sType = data.substr(0, data.find(","));
-	wxString sIndex = data.substr(data.find(",") + 1);
-
-	long index;
-	sIndex.ToLong(&index);
-
-	d2d::ISymbol* symbol = m_library->getSymbol(index);
-	if (symbol)
-	{
-		if (d2d::ScriptsSymbol* scripts = dynamic_cast<d2d::ScriptsSymbol*>(symbol)) 
-		{
-			d2d::scripts_do_string(scripts->getContent().c_str());
-//			d2d::scripts_do_file(symbol->getFilepath().c_str());
-		}
-		else
-		{
-			d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			sprite->translate(pos);
-			m_stage->insertSprite(sprite);
-		}
-	}
-
-	return true;
 }
 
 } // complex

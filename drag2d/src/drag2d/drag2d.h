@@ -75,6 +75,7 @@
 #include "view/FinishDialog.h"
 #include "view/LibraryFontPage.h"
 #include "view/TextDialog.h"
+#include "view/StageDropTarget.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"
