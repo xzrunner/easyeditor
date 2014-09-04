@@ -60,33 +60,39 @@ void StagePanel::init(d2d::LibraryPanel* library)
 	m_editOP = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this);
 
-	if (library)
-		SetDropTarget(new DragSymbolTarget(this, library));
+	if (library) {
+		d2d::Frame* frame = static_cast<d2d::Frame*>(m_frame);
+		SetDropTarget(new StageDropTarget(frame, this, library));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
-// class StagePanel::DragSymbolTarget
+// class StagePanel::StageDropTarget
 //////////////////////////////////////////////////////////////////////////
 
-bool StagePanel::DragSymbolTarget::
-OnDropText(wxCoord x, wxCoord y, const wxString& data)
+StagePanel::StageDropTarget::
+StageDropTarget(d2d::Frame* frame, StagePanel* stage, d2d::LibraryPanel* library)
+	: d2d::StageDropTarget(frame, stage, NULL, library)
+	, m_stage(stage)
 {
-	wxString sType = data.substr(0, data.find(","));
-	wxString sIndex = data.substr(data.find(",") + 1);
+}
 
-	long index;
-	sIndex.ToLong(&index);
-
-	d2d::ISymbol* symbol = m_library->getSymbol(index);
+bool StagePanel::StageDropTarget::
+OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
+{
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
 		Sprite* sprite = new Sprite(new Symbol(image->getImage()));
 		m_stage->m_sprite->release();
 		m_stage->m_sprite = sprite;
-		m_stage->Refresh();
+		//m_stage->Refresh();
+
+		m_stage->getCanvas()->resetViewport();
+
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 }

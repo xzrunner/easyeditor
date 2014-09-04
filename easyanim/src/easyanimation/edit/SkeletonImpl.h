@@ -25,7 +25,7 @@ public:
 
 	virtual void onPopMenuSelected(int type);
 
-	virtual void onDraw() const;
+	virtual void onDraw(const d2d::Screen& scr) const;
 
 protected:
 	virtual void setRightPopupMenu(wxMenu& menu);

@@ -10,6 +10,8 @@ class Frame;
 class EditPanel;
 class MultiSpritesImpl;
 class LibraryPanel;
+class ISymbol;
+class Vector;
 
 class StageDropTarget : public wxDropTarget
 {
@@ -17,7 +19,12 @@ public:
 	StageDropTarget(Frame* frame, EditPanel* edit_panel, 
 		MultiSpritesImpl* sprites_impl, LibraryPanel* library);
 
+	//
+	//	interface wxDropTarget
+	//
 	virtual wxDragResult OnData(wxCoord x, wxCoord y, wxDragResult def);
+
+	virtual bool OnDropSymbol(ISymbol* symbol, const Vector& pos) { return false; }
 
 	void OnDropText(wxCoord x, wxCoord y, const wxString& text);
 	void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);

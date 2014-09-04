@@ -24,7 +24,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
 	m_editOP = new ArrangeSpriteOP(this, property);
 	m_canvas = new StageCanvas(this);
-	SetDropTarget(new DragSymbolTarget());
+
+	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(Context::Instance()->library);
+	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuDelJointNode, this, Menu_DelJointNode);
@@ -133,30 +135,4 @@ void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 	Refresh();
 }
 
-//////////////////////////////////////////////////////////////////////////
-// class StagePanel::DragSymbolTarget
-//////////////////////////////////////////////////////////////////////////
-
-bool StagePanel::DragSymbolTarget::
-OnDropText(wxCoord x, wxCoord y, const wxString& data)
-{
-	wxString sType = data.substr(0, data.find(","));
-	wxString sIndex = data.substr(data.find(",") + 1);
-
-	long index;
-	sIndex.ToLong(&index);
-
-	StagePanel* stage = static_cast<StagePanel*>(Context::Instance()->stage);
-	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(Context::Instance()->library);
-
-	d2d::Vector pos = stage->transPosScreenToProject(x, y);
-
-	d2d::ISymbol* symbol = library->getSymbol(index);
-	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-	sprite->translate(pos);
-
-	stage->insertSprite(sprite);
-
-	return true;
-}
 } // eanim

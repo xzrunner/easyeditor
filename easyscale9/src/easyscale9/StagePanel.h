@@ -46,21 +46,6 @@ namespace escale9
 		bool isComplete() const;
 
 	private:
-		class DragSymbolTarget : public wxTextDropTarget
-		{
-		public:
-			DragSymbolTarget(d2d::LibraryPanel* library, StagePanel* stage)
-				: m_library(library), m_stage(stage) {}
-
-			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
-
-		private:
-			d2d::LibraryPanel* m_library;
-			StagePanel* m_stage;
-
-		}; // DragSymbolTarget
-
-	private:
 		// [2][0]
 		// [1][0]
 		// [0][0] [0][1] [0][2]

@@ -1,8 +1,5 @@
 #pragma once
 
-#include <wx/wx.h>
-#include <wx/dnd.h>
-
 #include <drag2d.h>
 
 namespace eanim
@@ -49,13 +46,6 @@ namespace eanim
 		};
 
 		static std::string menu_entries[];
-
-	private:
-		class DragSymbolTarget : public wxTextDropTarget
-		{
-		public:
-			virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
-		}; // DragSymbolTarget
 
 	}; // StagePanel
 }

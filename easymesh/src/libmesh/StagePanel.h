@@ -42,19 +42,18 @@ private:
 	void init(d2d::LibraryPanel* library);
 
 private:
-	class DragSymbolTarget : public wxTextDropTarget
+	class StageDropTarget : public d2d::StageDropTarget
 	{
 	public:
-		DragSymbolTarget(StagePanel* stage, d2d::LibraryPanel* library) 
-			: m_stage(stage), m_library(library) {}
+		StageDropTarget(d2d::Frame* frame, StagePanel* stage, 
+			d2d::LibraryPanel* library);
 
-		virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
+		virtual bool OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos);
 
 	private:
 		StagePanel* m_stage;
-		d2d::LibraryPanel* m_library;
 
-	}; // DragSymbolTarget
+	}; // StageDropTarget 
 
 private:
 	Sprite* m_sprite;

@@ -21,7 +21,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 
-	SetDropTarget(new DragSymbolTarget(library, this));
+	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
 }
 
 StagePanel::~StagePanel()
@@ -165,26 +165,4 @@ bool StagePanel::isComplete() const
 	return false;
 }
 
-//////////////////////////////////////////////////////////////////////////
-// class StagePanel::DragSymbolTarget
-//////////////////////////////////////////////////////////////////////////
-
-bool StagePanel::DragSymbolTarget::
-OnDropText(wxCoord x, wxCoord y, const wxString& data)
-{
-	wxString sType = data.substr(0, data.find(","));
-	wxString sIndex = data.substr(data.find(",") + 1);
-
-	long index;
-	sIndex.ToLong(&index);
-
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
-	d2d::ISymbol* symbol = m_library->getSymbol(index);
-	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-	sprite->translate(pos);
-
-	m_stage->insertSprite(sprite);
-
-	return true;
-}
 } // escale9

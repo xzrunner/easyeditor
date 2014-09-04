@@ -41,18 +41,26 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	ISymbol* symbol = m_library->getSymbol(index);
 	if (symbol)
 	{
-		if (ScriptsSymbol* scripts = dynamic_cast<ScriptsSymbol*>(symbol)) 
-		{
-			scripts_do_string(scripts->getContent().c_str());
-			//			scripts_do_file(symbol->getFilepath().c_str());
-		}
-		else
-		{
-			Vector pos = m_edit_panel->transPosScreenToProject(x, y);
+		Vector pos = m_edit_panel->transPosScreenToProject(x, y);
+		bool handled = OnDropSymbol(symbol, pos);
+		if (!handled) {
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 			sprite->translate(pos);
 			m_sprites_impl->insertSprite(sprite);
 		}
+
+// 		if (ScriptsSymbol* scripts = dynamic_cast<ScriptsSymbol*>(symbol)) 
+// 		{
+// 			scripts_do_string(scripts->getContent().c_str());
+// 			//			scripts_do_file(symbol->getFilepath().c_str());
+// 		}
+// 		else
+		//{
+		//	Vector pos = m_edit_panel->transPosScreenToProject(x, y);
+		//	ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+		//	sprite->translate(pos);
+		//	m_sprites_impl->insertSprite(sprite);
+		//}
 	}
 }
 

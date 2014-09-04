@@ -24,10 +24,14 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-	m_stage->getSprite()->setSymbol(symbol);
-	m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
-	symbol->release();
+	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_mesh)) {
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		m_stage->getSprite()->setSymbol(symbol);
+		m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+		symbol->release();
+
+		m_stage->getCanvas()->resetViewport();
+	}
 }
 
 void Task::store(const char* filepath) const

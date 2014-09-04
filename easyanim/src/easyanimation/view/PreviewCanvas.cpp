@@ -29,7 +29,7 @@ void PreviewCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
 	static_cast<d2d::LibraryPanel*>(Context::Instance()->library)->reloadTexture();
-	d2d::Shader::Instance()->release();
+//	d2d::Shader::Instance()->release();
 }
 
 void PreviewCanvas::onDraw()
