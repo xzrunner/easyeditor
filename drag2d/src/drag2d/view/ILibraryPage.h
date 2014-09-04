@@ -20,6 +20,8 @@ namespace d2d
 
 		virtual void clear();
 
+		virtual void LoadFromConfig() {}
+
 		void traverse(IVisitor& visitor) const;
 
 		const wxString& getName() const { return m_name; }
@@ -45,6 +47,8 @@ namespace d2d
 
 	protected:
 		void initButtons(wxSizer* sizer);
+
+		void LoadFromConfig(const std::string& key);
 
 	protected:
 		wxString m_name;

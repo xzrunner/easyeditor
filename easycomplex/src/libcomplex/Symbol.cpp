@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "config.h"
 
+#include "common/Config.h"
+
 #include <queue>
 
 namespace ecomplex
@@ -44,7 +46,9 @@ void Symbol::draw(const d2d::Screen& scr,
 {
  	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
  	const d2d::TPNode* n = NULL;
-	if (m_render_cache_open) {
+	if (d2d::Config::Instance()->IsUseDTex() && 
+		m_render_cache_open) 
+	{
 		n = dtex->Query(m_filepath);
 	}
  	if (n) 
@@ -136,9 +140,12 @@ bool Symbol::isOneLayer() const
 
 void Symbol::loadResources()
 {
-//	d2d::DynamicTexture* dtex = d2d::DynamicTexture::Instance();
-	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
- 	dtex->BeginImage();
+	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
+	d2d::DynamicTexAndFont* dtex = NULL;
+	if (use_dtex) {
+		dtex = d2d::DynamicTexAndFont::Instance();
+		dtex->BeginImage();
+	}
 
 	clear();
 
@@ -178,9 +185,11 @@ void Symbol::loadResources()
 
 	initBounding();
 
-	dtex->EndImage();
-	if (m_use_render_cache) {
-		dtex->InsertSymbol(*this);
+	if (use_dtex) {
+		dtex->EndImage();
+		if (m_use_render_cache) {
+			dtex->InsertSymbol(*this);
+		}
 	}
 }
 

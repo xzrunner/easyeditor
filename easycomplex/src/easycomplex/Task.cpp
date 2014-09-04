@@ -15,6 +15,8 @@ Task::Task(wxFrame* parent)
 	, m_viewlist(NULL)
 {
 	initLayout();
+
+	m_library->LoadFromConfig();
 }
 
 Task::~Task()

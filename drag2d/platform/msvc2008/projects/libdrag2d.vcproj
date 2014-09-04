@@ -1529,7 +1529,15 @@
 				Name="settings"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\config.h"
+					RelativePath="..\..\..\src\drag2d\common\Config.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\Config.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\const.h"
 					>
 				</File>
 				<File

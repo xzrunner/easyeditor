@@ -4,7 +4,6 @@
 #include "SymbolMgr.h"
 #include "Snapshoot.h"
 
-#include "common/config.h"
 #include "common/FileNameParser.h"
 #include "common/Exception.h"
 

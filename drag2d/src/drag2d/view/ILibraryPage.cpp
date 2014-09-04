@@ -2,6 +2,10 @@
 #include "LibraryList.h"
 #include "GLCanvas.h"
 
+#include "common/Config.h"
+#include "dataset/SymbolMgr.h"
+#include "dataset/ISymbol.h"
+
 namespace d2d
 {
 
@@ -88,6 +92,19 @@ void ILibraryPage::initButtons(wxSizer* sizer)
 	btnSizer->Add(m_btnDel, 0, wxLEFT | wxRIGHT, 5);
 
 	sizer->Add(btnSizer, 0, wxALIGN_RIGHT);
+}
+
+void ILibraryPage::LoadFromConfig(const std::string& key)
+{
+	std::vector<std::string> filenames;
+	Config::Instance()->GetStrings(key, filenames);
+	for (int i = 0, n = filenames.size(); i < n; ++i)
+	{
+		std::string filename = filenames[i];
+		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filename);
+		m_list->insert(symbol);
+		symbol->release();
+	}
 }
 
 } // d2d

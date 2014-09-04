@@ -43,6 +43,8 @@ namespace d2d
 
 		void AddSymbol(ISymbol* symbol);
 
+		void LoadFromConfig();
+
 	private:
 		void initLayout();
 

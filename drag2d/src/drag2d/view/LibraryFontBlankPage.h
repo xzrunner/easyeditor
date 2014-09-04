@@ -11,6 +11,8 @@ namespace d2d
 
 		virtual bool isHandleSymbol(ISymbol* symbol) const;
 
+		virtual void LoadFromConfig();
+
 	protected:
 		virtual void initLayout(bool draggable = true);
 
@@ -19,8 +21,6 @@ namespace d2d
 
 	private:
 		void onNewBtnPress(wxCommandEvent& event);
-
-		void LoadFromConfig();
 
 	}; // LibraryFontBlankPage
 }

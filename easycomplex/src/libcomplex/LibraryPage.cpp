@@ -12,13 +12,16 @@ LibraryPage::LibraryPage(wxWindow* parent)
 {
 	initLayout();
 	m_list->setFileter(FILE_TAG);
-
-	LoadFromConfig();
 }
 
 bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
+}
+
+void LibraryPage::LoadFromConfig()
+{
+	ILibraryPage::LoadFromConfig("library_complex");
 }
 
 void LibraryPage::onAddPress(wxCommandEvent& event)
@@ -73,34 +76,6 @@ void LibraryPage::loadFromLuaFile(const wxString& filename)
 	for (int i = 0, n = symbols.size(); i < n; ++i)
 		if (isHandleSymbol(symbols[i]))
 			m_list->insert(symbols[i]);
-}
-
-void LibraryPage::LoadFromConfig()
-{
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(d2d::CONFIG_FILEPATH);
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	Json::Value list = value["library_complex"];
-	if (list.isNull()) {
-		return;
-	}
-
-	int i = 0;
-	Json::Value item_val = list[i++];
-	while (!item_val.isNull()) {
-		std::string filepath = item_val.asString();
-
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-		m_list->insert(symbol);
-		symbol->release();
-
-		item_val = list[i++];
-	}
 }
 
 }

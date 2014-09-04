@@ -5,7 +5,6 @@
 #include "dataset/SymbolMgr.h"
 #include "dataset/FontBlankSymbol.h"
 #include "common/FileNameParser.h"
-#include "common/config.h"
 
 #include <JSON/json.h>
 
@@ -17,13 +16,16 @@ LibraryFontBlankPage::LibraryFontBlankPage(wxWindow* parent)
 {
 	m_list = new LibraryFontBlankList(this);
 	initLayout();
-
-	LoadFromConfig();
 }
 
 bool LibraryFontBlankPage::isHandleSymbol(ISymbol* symbol) const
 {
 	return dynamic_cast<FontBlankSymbol*>(symbol) != NULL;
+}
+
+void LibraryFontBlankPage::LoadFromConfig()
+{
+	ILibraryPage::LoadFromConfig("library_label");
 }
 
 void LibraryFontBlankPage::initLayout(bool draggable /*= true*/)
@@ -72,34 +74,6 @@ void LibraryFontBlankPage::onNewBtnPress(wxCommandEvent& event)
 
 	FontBlankDialog dlg(this, item);
 	dlg.ShowModal();
-}
-
-void LibraryFontBlankPage::LoadFromConfig()
-{
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(CONFIG_FILEPATH);
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	Json::Value list = value["library_label"];
-	if (list.isNull()) {
-		return;
-	}
-
-	int i = 0;
-	Json::Value item_val = list[i++];
-	while (!item_val.isNull()) {
-		std::string filepath = item_val.asString();
-		
-		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
-		m_list->insert(symbol);
-		symbol->release();
-
-		item_val = list[i++];
-	}
 }
 
 } // d2d

@@ -8,11 +8,11 @@
 //#include "render/DynamicTexture.h"
 #include "render/DynamicTexAndFont.h"
 #include "render/RenderList.h"
-#include "common/config.h"
 #include "common/tools.h"
 #include "common/Settings.h"
 #include "common/Exception.h"
 #include "common/Math.h"
+#include "common/Config.h"
 #include "view/Screen.h"
 
 #include <fstream>
@@ -76,7 +76,9 @@ bool Image::loadFromFile(const wxString& filepath)
 
 // 		// todo
 // 		DynamicTexture::Instance()->Insert(this);
- 		DynamicTexAndFont::Instance()->AddImage(this);
+		if (Config::Instance()->IsUseDTex()) {
+			DynamicTexAndFont::Instance()->AddImage(this);
+		}
 
  		return true;
  	}

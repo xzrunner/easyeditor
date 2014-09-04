@@ -13,14 +13,14 @@ public:
 
 	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
+	virtual void LoadFromConfig();
+
 protected:
 	virtual void onAddPress(wxCommandEvent& event);
 
 private:
 	void loadFromJsonFile(const wxString& filename);
 	void loadFromLuaFile(const wxString& filename);
-
-	void LoadFromConfig();
 
 }; // LibraryPage
 

@@ -137,7 +137,6 @@
 #include "common/runtime.h"
 #include "common/scripts.h"
 #include "common/JsonTools.h"
-#include "common/config.h"
 #include "common/PointerPool.h"
 #include "common/filetools.h"
 #include "common/Statistics.h"

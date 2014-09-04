@@ -103,6 +103,13 @@ void LibraryPanel::AddSymbol(ISymbol* symbol)
 	}
 }
 
+void LibraryPanel::LoadFromConfig()
+{
+	for (int i = 0, n = m_pages.size(); i < n; ++i) {
+		m_pages[i]->LoadFromConfig();
+	}
+}
+
 void LibraryPanel::initLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
