@@ -123,6 +123,10 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 
  	glClearColor(0, 0, 0, 0);
  	glClear(GL_COLOR_BUFFER_BIT);
+ 
+	// todo why?
+  	glEnable(GL_BLEND);
+  	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
 	Screen scr(m_width, m_height);
 	Vector pos(node.GetCenterX(), node.GetCenterY());
