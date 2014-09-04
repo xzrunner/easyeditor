@@ -388,8 +388,10 @@ void ArrangeSpriteImpl::setRightPopupMenu(wxMenu& menu)
 	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
 	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
 
+#ifdef _DEBUG
 	menu.Append(EditPanel::Menu_InsertToDTex, EditPanel::menu_entries[EditPanel::Menu_InsertToDTex]);
 	menu.Append(EditPanel::Menu_RemoveFromDTex, EditPanel::menu_entries[EditPanel::Menu_RemoveFromDTex]);
+#endif
 }
 
 IArrangeSpriteState* ArrangeSpriteImpl::CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const
