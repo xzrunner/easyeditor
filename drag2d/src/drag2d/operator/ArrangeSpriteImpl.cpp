@@ -12,6 +12,7 @@
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
+#include "view/GLCanvas.h"
 #include "history/DeleteSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
 #include "render/DynamicTexAndFont.h"
@@ -279,6 +280,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
 				dtex->InsertSymbol(s);
 			}
+			m_editPanel->getCanvas()->resetViewport();
 		}
 		break;
 	case EditPanel::Menu_RemoveFromDTex:
