@@ -144,43 +144,43 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\dgif_lib.c"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\dgif_lib.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\egif_lib.c"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\egif_lib.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\gif_err.c"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\gif_err.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\gif_font.c"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\gif_font.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\gif_hash.c"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\gif_hash.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\gif_hash.h"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\gif_hash.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\gif_lib.h"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\gif_lib.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\gif_lib_private.h"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\gif_lib_private.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\gifalloc.c"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\gifalloc.c"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\giflib-5.0.6\lib\quantize.c"
+			RelativePath="..\..\drag2d\src\common\giflib-5.0.6\lib\quantize.c"
 			>
 		</File>
 	</Files>
