@@ -35,6 +35,8 @@ namespace d2d
 			m_canvas = canvas;
 		}
 
+		void AddItem(ListItem* item);
+
 	protected:
 		virtual void initLayout(bool draggable = true);
 

@@ -23,6 +23,8 @@ namespace d2d
 
 		virtual void onPageChanged(wxBookCtrlEvent& event);
 
+		virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) { return true; }
+
 		void clear();
 
 		void reloadTexture() const;
@@ -38,6 +40,8 @@ namespace d2d
 		wxWindow* getNotebook() { return m_notebook; }
 
 		void setCanvas(GLCanvas* canvas);
+
+		void AddSymbol(ISymbol* symbol);
 
 	private:
 		void initLayout();

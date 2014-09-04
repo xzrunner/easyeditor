@@ -1,5 +1,6 @@
 #include "ILibraryPage.h"
 #include "LibraryList.h"
+#include "GLCanvas.h"
 
 namespace d2d
 {
@@ -38,6 +39,12 @@ ISymbol* ILibraryPage::getSymbol(int index/* = -1*/) const
 void ILibraryPage::reloadTexture() const
 {
 	m_list->reloadTexture();
+}
+
+void ILibraryPage::AddItem(ListItem* item)
+{
+	m_list->insert(item);
+	m_canvas->resetViewport();
 }
 
 void ILibraryPage::initLayout(bool draggable/* = true*/)

@@ -2,6 +2,7 @@
 #include "ILibraryPage.h"
 #include "LibraryList.h"
 #include "LibraryImagePage.h"
+#include "LibraryDropTarget.h"
 
 #include "common/visitors.h"
 #include "dataset/SymbolMgr.h"
@@ -15,6 +16,8 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	, m_selected(NULL)
 {
 	initLayout();
+
+	SetDropTarget(new LibraryDropTarget(this));
 }
 
 void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
@@ -84,6 +87,19 @@ void LibraryPanel::setCanvas(GLCanvas* canvas)
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i) {
 		m_pages[i]->setCanvas(canvas);
+	}
+}
+
+void LibraryPanel::AddSymbol(ISymbol* symbol)
+{
+	for (int i = 0, n = m_pages.size(); i < n; ++i) 
+	{
+		ILibraryPage* page = m_pages[i];
+		if (page->isHandleSymbol(symbol)) 
+		{
+			page->AddItem(symbol);
+			break;
+		}
 	}
 }
 

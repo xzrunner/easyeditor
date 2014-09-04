@@ -1573,6 +1573,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\LibraryDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LibraryDropTarget.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\LibraryList.cpp"
 					>
 				</File>
