@@ -40,6 +40,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 	m_selection = spritesImpl->getSpriteSelection();
 	m_selection->retain();
 
+	m_left_down_pos.setInvalid();
 	m_right_down_pos.setInvalid();
 }
 
@@ -110,6 +111,7 @@ void ArrangeSpriteImpl::onKeyUp(int keyCode)
 void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 {
 	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	m_left_down_pos = pos;
 
 	m_align.SetInvisible();
 
@@ -171,7 +173,8 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 		m_editPanel->addHistoryOP(history);
 	}
 
-	if (Settings::bSpriteCapture && m_align.IsOpen() && !m_selection->empty())
+	if (Settings::bSpriteCapture && m_align.IsOpen() && !m_selection->empty()
+		&& m_left_down_pos != pos)
 	{
 		std::vector<ISprite*> sprites;
 		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));

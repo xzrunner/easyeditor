@@ -75,7 +75,7 @@ private:
 
 	bool m_is_offset_open;
 
-	Vector m_right_down_pos;
+	Vector m_left_down_pos, m_right_down_pos;
 
 }; // ArrangeSpriteImpl
 
