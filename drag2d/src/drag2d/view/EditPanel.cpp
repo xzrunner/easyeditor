@@ -18,10 +18,6 @@ BEGIN_EVENT_TABLE(EditPanel, wxPanel)
 	EVT_MENU(Menu_DownOneLayer, EditPanel::onMenuDownOneLayer)
 	EVT_MENU(Menu_InsertToDTex, EditPanel::onMenuInsertToDTex)
 	EVT_MENU(Menu_RemoveFromDTex, EditPanel::onMenuRemoveFromDTex)
-
-	EVT_HOTKEY(Hot_UpOneLayer, EditPanel::onKeyUpOneLayer)
-	EVT_HOTKEY(Hot_DownOneLayer, EditPanel::onKeyDownOneLayer)
-//	EVT_HOTKEY(Hot_Delete, EditPanel::onKeyDelete)
 END_EVENT_TABLE()
 
 std::string EditPanel::menu_entries[] = 
@@ -36,13 +32,6 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
 	, m_frame(frame)
 {
- 	//RegisterHotKey(Hot_UpOneLayer, 0, VK_ADD);
- 	//RegisterHotKey(Hot_DownOneLayer, 0, VK_SUBTRACT);
-	RegisterHotKey(Hot_UpOneLayer, 0, VK_PRIOR);
-	RegisterHotKey(Hot_DownOneLayer, 0, VK_NEXT);
-
-//	RegisterHotKey(Hot_Delete, 0, VK_DELETE);
-
 	m_editOP = NULL;
 	m_canvas = NULL;
 	m_camera = new Camera;

@@ -79,14 +79,27 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 	case 'w': case 'W':
 		onDirectionKeyDown(e_up);
 		break;
-	case WXK_SPACE:
-		onSpaceKeyDown();
+	case '[':
+		DownOneLayer();
+		break;
+	case ']':
+		UpOneLayer();
 		break;
 	}
 }
 
 void ArrangeSpriteImpl::onKeyUp(int keyCode)
 {
+	switch (keyCode)
+	{
+	case WXK_PAGEUP:
+		UpOneLayer();
+		break;
+	case WXK_PAGEDOWN:
+		DownOneLayer();
+		break;
+	}
+
 	if (m_propertyPanel)
 	{
 		m_propertyPanel->enablePropertyGrid(true);
@@ -249,20 +262,10 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 	switch (type)
 	{
 	case EditPanel::Menu_UpOneLayer:
-		{
-			std::vector<d2d::ISprite*> selected;
-			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-			for (size_t i = 0, n = selected.size(); i < n; ++i)
-				m_spritesImpl->resetSpriteOrder(selected[i], true);
-		}
+		UpOneLayer();
 		break;
 	case EditPanel::Menu_DownOneLayer:
-		{
-			std::vector<d2d::ISprite*> selected;
-			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-			for (size_t i = 0, n = selected.size(); i < n; ++i)
-				m_spritesImpl->resetSpriteOrder(selected[i], false);
-		}
+		DownOneLayer();
 		break;
 	case EditPanel::Menu_InsertToDTex:
 		{
@@ -407,6 +410,22 @@ IArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(ISprite* sprite, const 
 IArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(ISprite* sprite) const
 {
 	return new OffsetSpriteState(sprite);
+}
+
+void ArrangeSpriteImpl::UpOneLayer()
+{
+	std::vector<d2d::ISprite*> selected;
+	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	for (size_t i = 0, n = selected.size(); i < n; ++i)
+		m_spritesImpl->resetSpriteOrder(selected[i], true);
+}
+
+void ArrangeSpriteImpl::DownOneLayer()
+{
+	std::vector<d2d::ISprite*> selected;
+	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	for (size_t i = 0, n = selected.size(); i < n; ++i)
+		m_spritesImpl->resetSpriteOrder(selected[i], false);
 }
 
 }

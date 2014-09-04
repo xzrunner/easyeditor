@@ -56,6 +56,10 @@ protected:
 	SpriteSelection* m_selection;
 
 private:
+	void UpOneLayer();
+	void DownOneLayer();
+
+private:
 	static const float SCALE_NODE_RADIUS;
 
 private:
