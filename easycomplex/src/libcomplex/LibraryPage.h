@@ -20,6 +20,8 @@ private:
 	void loadFromJsonFile(const wxString& filename);
 	void loadFromLuaFile(const wxString& filename);
 
+	void LoadFromConfig();
+
 }; // LibraryPage
 
 }

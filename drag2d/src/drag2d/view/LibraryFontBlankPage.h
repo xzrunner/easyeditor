@@ -20,6 +20,8 @@ namespace d2d
 	private:
 		void onNewBtnPress(wxCommandEvent& event);
 
+		void LoadFromConfig();
+
 	}; // LibraryFontBlankPage
 }
 
