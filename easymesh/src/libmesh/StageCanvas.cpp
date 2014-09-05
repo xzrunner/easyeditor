@@ -27,6 +27,10 @@ void StageCanvas::onDraw()
 	}
 
 	m_editPanel->drawEditTemp(m_screen);
+
+#ifdef _DEBUG 
+	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+#endif
 }
 
 }
