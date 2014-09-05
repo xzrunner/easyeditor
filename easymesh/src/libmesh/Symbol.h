@@ -52,14 +52,14 @@ public:
 	
 	int GetQuadSize() const;
 
-	void SetRegion(const d2d::Rect& r) {
-		m_region = r;
-	}
-
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void loadResources();
+
+private:
+	void InitBounding();
+	void RefreshThumbnail();
 
 private:
 	d2d::Image* m_image;

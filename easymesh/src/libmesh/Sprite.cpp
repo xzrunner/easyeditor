@@ -90,8 +90,7 @@ void Sprite::buildBounding()
 		m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
 	const d2d::ISymbol& symbol = getSymbol();
 
-	d2d::Rect rect = m_symbol->getShape()->GetRegion();
-	m_symbol->SetRegion(rect);
+	d2d::Rect rect = m_symbol->getSize();
 	if (m_offset.x == 0 && m_offset.y == 0)
 		m_offset.set(rect.xCenter(), rect.yCenter());
 	rect.scale(m_scale.x, m_scale.y);

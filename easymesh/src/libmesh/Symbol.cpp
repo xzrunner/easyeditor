@@ -66,15 +66,16 @@ void Symbol::draw(const d2d::Screen& scr,
  		shader->sprite();
 // 		// todo ShaderNew::Color
 //  		shader->color(mul, add);
+		shader->SetSpriteColor(mul, add);
  
- 		m_shape->DrawTexture(scr);
- 		if (!m_pause) {
- 			const Sprite* mesh = static_cast<const Sprite*>(sprite);
- 			d2d::Vector spd = mesh->GetSpeed();
- 			if (spd.x != 0 || spd.y != 0) {
- 				m_shape->OffsetUV(spd.x, spd.y);
- 			}
- 		}
+ 		m_shape->DrawTexture(scr, mt);
+//  		if (!m_pause) {
+//  			const Sprite* mesh = static_cast<const Sprite*>(sprite);
+//  			d2d::Vector spd = mesh->GetSpeed();
+//  			if (spd.x != 0 || spd.y != 0) {
+//  				m_shape->OffsetUV(spd.x, spd.y);
+//  			}
+//  		}
  	}
 }
 
@@ -85,6 +86,10 @@ void Symbol::draw(const d2d::Screen& scr,
 
 void Symbol::refresh()
 {
+	ISymbol::refresh();
+	
+	InitBounding();
+	RefreshThumbnail();
 }
 
 void Symbol::SetShape(Shape* shape)
@@ -115,6 +120,17 @@ int Symbol::GetQuadSize() const
 void Symbol::loadResources()
 {
 	FileIO::load(m_filepath, this);
+}
+
+void Symbol::InitBounding()
+{
+	m_region = m_shape->GetRegion();
+}
+
+void Symbol::RefreshThumbnail()
+{
+	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
+	m_bitmap->loadFromFile(m_filepath);	
 }
 
 }
