@@ -30,9 +30,10 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
-			symbol->refresh();
-			m_list->insert(symbol);
+ 			symbol->refresh();
+			AddItem(symbol);
 			symbol->release();
+
 		}
 	}
 }
