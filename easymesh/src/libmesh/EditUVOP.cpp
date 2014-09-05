@@ -15,7 +15,7 @@ bool EditUVOP::onDraw(const d2d::Screen& scr) const
 {
 	if (Shape* shape = m_stage->getShape())
 	{
-		shape->DrawTexture(scr);
+		shape->DrawTexture(scr, d2d::Matrix());
 		shape->DrawInfoXY(scr);
 	}
 

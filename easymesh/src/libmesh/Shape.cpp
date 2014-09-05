@@ -101,20 +101,25 @@ void Shape::DrawInfoXY(const d2d::Screen& scr) const
 	d2d::PrimitiveDraw::drawCircles(scr, nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
-void Shape::DrawTexture(const d2d::Screen& scr) const
+void Shape::DrawTexture(const d2d::Screen& scr,
+						const d2d::Matrix& mt) const
 {
-	std::vector<d2d::Vector> vertices, texcoords;
+	d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
+	shader->sprite();
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
+		d2d::Vector vertices[4], texcoords[4];
 		for (int i = 0; i < 3; ++i)
 		{
-			texcoords.push_back(tri->nodes[i]->uv);
-			vertices.push_back(tri->nodes[i]->xy);
+			vertices[i] = d2d::Math::transVector(tri->nodes[i]->xy, mt);
+			scr.TransPosForRender(vertices[i]);
+			texcoords[i] = tri->nodes[i]->uv;
 		}
+		vertices[3] = vertices[2];
+		texcoords[3] = vertices[2];
+		shader->Draw(vertices, texcoords, m_texid);
 	}
-
-	d2d::PrimitiveDraw::drawTriangles(scr, m_texid, vertices, texcoords);
 }
 
 d2d::Rect Shape::GetRegion() const

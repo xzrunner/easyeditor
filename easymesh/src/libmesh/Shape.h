@@ -46,7 +46,7 @@ public:
 
 	void DrawInfoUV(const d2d::Screen& scr) const;
 	void DrawInfoXY(const d2d::Screen& scr) const;
-	void DrawTexture(const d2d::Screen& scr) const;
+	void DrawTexture(const d2d::Screen& scr, const d2d::Matrix& mt) const;
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 
