@@ -64,18 +64,17 @@ void Symbol::draw(const d2d::Screen& scr,
  	if (m_shape) {
  		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
  		shader->sprite();
-// 		// todo ShaderNew::Color
-//  		shader->color(mul, add);
 		shader->SetSpriteColor(mul, add);
  
  		m_shape->DrawTexture(scr, mt);
-//  		if (!m_pause) {
-//  			const Sprite* mesh = static_cast<const Sprite*>(sprite);
-//  			d2d::Vector spd = mesh->GetSpeed();
-//  			if (spd.x != 0 || spd.y != 0) {
-//  				m_shape->OffsetUV(spd.x, spd.y);
-//  			}
-//  		}
+  		if (!m_pause && sprite) 
+		{
+			const Sprite* s = static_cast<const Sprite*>(sprite);
+  			d2d::Vector spd = s->GetSpeed();
+  			if (spd.x != 0 || spd.y != 0) {
+  				m_shape->OffsetUV(spd.x, spd.y);
+  			}
+  		}
  	}
 }
 
