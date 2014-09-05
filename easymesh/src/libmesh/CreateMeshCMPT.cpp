@@ -26,8 +26,10 @@ wxSizer* CreateMeshCMPT::initLayout()
 		choices.Add(wxT("strip"));
 		wxRadioBox* typeChoice = new wxRadioBox(this, wxID_ANY, wxT("Type"), 
 			wxDefaultPosition, wxDefaultSize, choices, 2, wxRA_SPECIFY_COLS);
-		typeChoice->SetSelection(1);
-		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
+// 		typeChoice->SetSelection(1);
+// 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
+		typeChoice->SetSelection(0);
+		ShapeFactory::Instance()->SetShapeType(ST_MESH);
  		Connect(typeChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, 
  			wxCommandEventHandler(CreateMeshCMPT::onChangeType));
 		sizer->Add(typeChoice);
