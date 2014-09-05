@@ -8,7 +8,7 @@ namespace emesh
 Sprite::Sprite()
 	: m_symbol(NULL)
 {
-	m_speed.set(0, -0.01f);
+//	m_speed.set(0, -0.01f);
 }
 
 Sprite::Sprite(const Sprite& s)
@@ -21,7 +21,7 @@ Sprite::Sprite(const Sprite& s)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_speed.set(0, -0.01f);
+//	m_speed.set(0, -0.01f);
 
 	m_symbol->retain();
 	buildBounding();
