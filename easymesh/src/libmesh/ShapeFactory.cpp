@@ -8,7 +8,7 @@ namespace emesh
 ShapeFactory* ShapeFactory::m_instance = NULL;
 
 ShapeFactory::ShapeFactory() 
-	: m_use_region(true) 
+	: m_use_region(false) 
 {
 }
 
