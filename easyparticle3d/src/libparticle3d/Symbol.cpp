@@ -66,10 +66,6 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 	return d2d::Rect(200, 200);
 }
 
-void Symbol::refresh()
-{
-}
-
 void Symbol::loadResources()
 {
 	FileAdapter adapter;

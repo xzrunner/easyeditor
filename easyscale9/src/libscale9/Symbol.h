@@ -41,11 +41,6 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
-	//
-	// ListItem interface
-	//
-	virtual void refresh();
-
 	void composeFromSprites(d2d::ISprite* sprites[3][3], 
 		float width, float height);
 
@@ -59,8 +54,6 @@ protected:
 	virtual void loadResources();
 
 private:
-	void refreshThumbnail();
-
 	void composeFromSprites() const;
 
 	Type getType(d2d::ISprite* sprites[3][3]) const;

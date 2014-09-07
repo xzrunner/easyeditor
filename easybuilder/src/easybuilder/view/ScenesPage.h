@@ -21,8 +21,6 @@ namespace ebuilder
 			return m_observer;
 		}
 
-		void refreshThumbnail();
-
 		void insert();
 
 		void enableDelBtn();

@@ -62,13 +62,6 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	return m_rect;
 }
 
-void Symbol::refresh()
-{
-	d2d::ISymbol::refresh();
-	refreshThumbnail();
-	initBounding();
-}
-
 size_t Symbol::getMaxFrameIndex() const
 {
 	int index = 0;
@@ -119,7 +112,6 @@ void Symbol::loadResources()
  				wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
  				ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-				symbol->refresh();
 				symbol->release();
 				sprite->load(spriteValue);
 				dstFrame->sprites.push_back(sprite);
@@ -173,12 +165,6 @@ void Symbol::initBounding()
 			}
 		}
 	}
-}
-
-void Symbol::refreshThumbnail()
-{
-	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
-	m_bitmap->loadFromFile(m_filepath);
 }
 
 //////////////////////////////////////////////////////////////////////////

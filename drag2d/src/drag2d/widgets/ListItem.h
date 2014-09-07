@@ -17,7 +17,7 @@ namespace d2d
 		}
 		virtual ~ListItem() {}
 
-		virtual void refresh() {}
+		void RefreshThumbnail(const wxString& filepath, bool force = false);
 
 		const wxString& getName() const { return m_name; }
 		void setName(const wxString& name) { m_name = name; }

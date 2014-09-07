@@ -29,11 +29,11 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filenames[i]);
- 			symbol->refresh();
+			const wxString& filepath = filenames[i];
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			symbol->RefreshThumbnail(filepath);
 			AddItem(symbol);
 			symbol->release();
-
 		}
 	}
 }

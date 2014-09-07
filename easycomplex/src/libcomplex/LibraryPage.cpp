@@ -56,7 +56,7 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 void LibraryPage::loadFromJsonFile(const wxString& filename)
 {
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
-	symbol->refresh();
+	symbol->RefreshThumbnail(filename);
 	m_list->insert(symbol);
 	symbol->release();
 }

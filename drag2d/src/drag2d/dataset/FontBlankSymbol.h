@@ -29,11 +29,6 @@ namespace d2d
 			const ISprite* sprite = NULL) const;
 		virtual Rect getSize(const ISprite* sprite = NULL) const;
 
-		//
-		// ListItem interface
-		//
-		virtual void refresh();
-
 		bool loadFont(const std::string& filename);
 
 	protected:

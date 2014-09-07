@@ -83,14 +83,6 @@ void Symbol::draw(const d2d::Screen& scr,
 // //	return m_image->getRegion();
 // }
 
-void Symbol::refresh()
-{
-	ISymbol::refresh();
-	
-	InitBounding();
-	RefreshThumbnail();
-}
-
 void Symbol::SetShape(Shape* shape)
 {
 	if (m_shape) {
@@ -107,7 +99,7 @@ const wxString& Symbol::GetImagePath() const
 
 void Symbol::LoadImage(const wxString& filepath)
 {
-	d2d::BitmapMgr::Instance()->getItem(filepath, &m_bitmap);
+//	d2d::BitmapMgr::Instance()->getItem(filepath, &m_bitmap);
 	d2d::ImageMgr::Instance()->getItem(filepath, &m_image);
 }
 
@@ -125,12 +117,6 @@ void Symbol::loadResources()
 void Symbol::InitBounding()
 {
 	m_region = m_shape->GetRegion();
-}
-
-void Symbol::RefreshThumbnail()
-{
-	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
-	m_bitmap->loadFromFile(m_filepath);	
 }
 
 }

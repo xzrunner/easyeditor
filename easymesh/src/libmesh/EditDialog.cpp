@@ -64,9 +64,10 @@ void EditDialog::onClose(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_OK)
 	{
+		const wxString& filepath = symbol.getFilepath();
 		FileIO::store(symbol.getFilepath(), &symbol);
+		symbol.RefreshThumbnail(filepath);
 
-		symbol.refresh();
 		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
 	}
 	else if (val == wxID_CANCEL)

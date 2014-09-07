@@ -70,6 +70,7 @@ void LibraryPanel::loadFromSymbolMgr(const SymbolMgr& mgr)
 			ILibraryPage* page = m_pages[j];
 			if (page->isHandleSymbol(symbol))
 			{
+				symbol->RefreshThumbnail(symbol->getFilepath());
 				page->getList()->insert(symbol);
 				break;
 			}

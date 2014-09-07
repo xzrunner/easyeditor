@@ -493,7 +493,8 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 			symbol->m_sprites.push_back(sprite);
 		}
 
-		symbol->refresh();
+		// todo filepath
+//		symbol->InitThumbnail();
 		m_mapSymbols.insert(std::make_pair(itr->first, symbol));
 	}
 }
@@ -555,7 +556,8 @@ void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 	}
 	symbol->m_layers.push_back(layer);
 
-	symbol->refresh();
+	// todo filepath
+	//symbol->InitThumbnail();
 	m_mapSymbols.insert(std::make_pair(id, symbol));
 }
 
@@ -590,7 +592,8 @@ void ParserLuaFile::transAniToComplexMemory(int id, Animation* ani)
 		symbol->m_sprites.push_back(sprite);
 	}
 
-	symbol->refresh();
+	// todo filepath
+	//symbol->InitThumbnail();
 	m_mapSymbols.insert(std::make_pair(id, symbol));
 }
 

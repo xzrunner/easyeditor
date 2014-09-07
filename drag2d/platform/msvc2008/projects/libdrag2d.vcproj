@@ -2045,6 +2045,10 @@
 				Name="list"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ListItem.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\widgets\ListItem.h"
 					>
 				</File>

@@ -92,9 +92,9 @@ namespace ecomplex
 		int val = dlg.ShowModal();
 		if (val == wxID_OK)
 		{
-			FileSaver::store(m_symbol->getFilepath(), m_symbol);
-
-			m_symbol->refresh();
+			const wxString& filepath = m_symbol->getFilepath();
+			FileSaver::store(filepath, m_symbol);
+			m_symbol->RefreshThumbnail(filepath);
 			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
 		}
 		else if (val == wxID_CANCEL)

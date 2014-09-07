@@ -46,11 +46,6 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
-	//
-	// ListItem interface
-	//
-	virtual void refresh();
-
 	size_t getMaxFrameIndex() const;
 
 	void setFrameIndex(int index) {
@@ -69,8 +64,6 @@ private:
 	void clear();
 
 	void initBounding();
-
-	void refreshThumbnail();
 
 public:
 	std::vector<Layer*> m_layers;

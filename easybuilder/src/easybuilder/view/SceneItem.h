@@ -31,11 +31,6 @@ namespace ebuilder
 			const d2d::ISprite* sprite = NULL) const;
 		virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
-		//
-		// ListItem interface
-		//
-		virtual void refresh();
-
 		Scene* getScene() const {
 			return m_scene;
 		}
@@ -45,9 +40,6 @@ namespace ebuilder
 
 	protected:
 		virtual void loadResources() {}
-
-	private:
-		void refreshThumbnail();
 
 	private:
 		Scene* m_scene;

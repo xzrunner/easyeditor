@@ -33,11 +33,6 @@ public:
 		return m_region;
 	}
 
-	//
-	// ListItem interface
-	//
-	virtual void refresh();
-
  	const Shape* getShape() const { return m_shape; }
  	Shape* getShape() { return m_shape; }
 	void SetShape(Shape* shape);
@@ -59,7 +54,6 @@ protected:
 
 private:
 	void InitBounding();
-	void RefreshThumbnail();
 
 private:
 	d2d::Image* m_image;

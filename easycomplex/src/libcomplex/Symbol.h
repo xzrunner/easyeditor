@@ -28,11 +28,6 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
-	//
-	// ListItem interface
-	//
-	virtual void refresh();
-
 	bool isOneLayer() const;
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
@@ -44,8 +39,6 @@ private:
 	void clear();
 
 	void initBounding();
-
-	void refreshThumbnail();
 
 private:
 	static const float SCALE;

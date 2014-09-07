@@ -324,9 +324,10 @@ void SelectSpritesOP::copyFromSelection()
 			int i = 0;
 			Json::Value sval = value["sprite"][i++];
 			while (!sval.isNull()) {
-				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(sval["filename"].asString());
+				std::string filepath = sval["filename"].asString();
+				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
 				// for snapshoot
-				symbol->refresh();
+				symbol->RefreshThumbnail(filepath);
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 				sprite->name = sval["name"].asString();
 				symbol->release();

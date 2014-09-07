@@ -31,8 +31,9 @@ namespace d2d
 			dlg.GetPaths(filenames);
 			for (size_t i = 0, n = filenames.size(); i < n; ++i)
 			{
-				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
-				symbol->refresh();
+				const wxString& filepath = filenames[i];
+				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
+				symbol->RefreshThumbnail(filepath);
 				m_list->insert(symbol);
 				symbol->release();
 			}

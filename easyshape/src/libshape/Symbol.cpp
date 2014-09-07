@@ -49,24 +49,12 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	return rect;
 }
 
-void Symbol::refresh()
-{
-	ISymbol::refresh();
-	refreshThumbnail();
-}
-
 void Symbol::loadResources()
 {
 	clear();
 
 	FileAdapter adpater(shapes);
 	adpater.load(m_filepath.c_str());
-}
-
-void Symbol::refreshThumbnail()
-{
-	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
-	m_bitmap->loadFromFile(m_filepath);
 }
 
 void Symbol::clear()

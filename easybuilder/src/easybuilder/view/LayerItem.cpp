@@ -46,12 +46,6 @@ d2d::Rect LayerItem::getSize(const d2d::ISprite* sprite /*= NULL*/) const
 	return d2d::Rect();
 }
 
-void LayerItem::refresh()
-{
-	d2d::ISymbol::refresh();
-	refreshThumbnail();
-}
-
 const wxString& LayerItem::getName() const
 {
 	return m_name;
@@ -61,17 +55,4 @@ void LayerItem::setName(const wxString& name)
 {
 	m_name = name;
 	m_layer->name = name;
-}
-
-void LayerItem::refreshThumbnail()
-{
-	wxMemoryDC memDC;
-	memDC.SelectObject(const_cast<wxBitmap&>(*m_bitmap->getBitmap()));
-
-	memDC.SetBackground(wxBrush(*wxWHITE));
-	memDC.Clear();
-
-	Thumbnail::draw(m_layer->getActors(), memDC);
-
-	memDC.SelectObject(wxNullBitmap);
 }

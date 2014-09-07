@@ -123,13 +123,6 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	return m_rect;
 }
 
-void Symbol::refresh()
-{
-	ISymbol::refresh();
-	initBounding();
-	refreshThumbnail();
-}
-
 bool Symbol::isOneLayer() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
@@ -218,12 +211,6 @@ void Symbol::initBounding()
 	//for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	//	m_sprites[i]->translate(d2d::Vector(-x, -y));
 	//m_rect.translate(d2d::Vector(-x, -y));
-}
-
-void Symbol::refreshThumbnail()
-{
-	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
-	m_bitmap->loadFromFile(m_filepath);
 }
 
 }

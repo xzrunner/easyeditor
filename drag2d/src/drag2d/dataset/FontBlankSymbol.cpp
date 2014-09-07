@@ -67,10 +67,6 @@ Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 	return Rect(width, height);
 }
 
-void FontBlankSymbol::refresh()
-{
-}
-
 bool FontBlankSymbol::loadFont(const std::string& _filename)
 {
 	if (_filename == filename)

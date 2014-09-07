@@ -99,12 +99,6 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	return d2d::Rect(m_width, m_height);
 }
 
-void Symbol::refresh()
-{
-	ISymbol::refresh();
-	refreshThumbnail();
-}
-
 void Symbol::composeFromSprites(d2d::ISprite* sprites[3][3],
 									  float width, float height)
 {
@@ -216,12 +210,6 @@ void Symbol::loadResources()
 	}
 
 	composeFromSprites();
-}
-
-void Symbol::refreshThumbnail()
-{
-	m_bitmap = d2d::BitmapMgr::Instance()->getItem(m_filepath);
-	m_bitmap->loadFromFile(m_filepath);
 }
 
 void Symbol::composeFromSprites() const
