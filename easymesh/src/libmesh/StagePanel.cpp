@@ -85,7 +85,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		Sprite* sprite = new Sprite(new Symbol(image->getImage()));
 		m_stage->m_sprite->release();
 		m_stage->m_sprite = sprite;
-		//m_stage->Refresh();
+		m_stage->Refresh();
 
 		m_stage->getCanvas()->resetViewport();
 
