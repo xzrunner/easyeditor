@@ -69,6 +69,19 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		}
 		m_spritesImpl->removeSpriteSelection();
 		break;
+	case WXK_SPACE:
+		{
+			std::vector<ISprite*> sprites;
+			m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+			for (int i = 0, n = sprites.size(); i < n; ++i) {
+				ISprite* sprite = sprites[i];
+				sprite->setTransform(Vector(0, 0), 0);
+				sprite->setScale(1, 1);
+				sprite->setShear(0, 0);
+				sprite->setOffset(Vector(0, 0));
+			}
+		}
+		break;
 	case 'a': case 'A':
 		onDirectionKeyDown(e_left);
 		break;
