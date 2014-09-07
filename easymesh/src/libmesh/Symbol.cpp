@@ -119,6 +119,7 @@ int Symbol::GetQuadSize() const
 void Symbol::loadResources()
 {
 	FileIO::load(m_filepath, this);
+	InitBounding();
 }
 
 void Symbol::InitBounding()
