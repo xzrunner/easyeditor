@@ -179,6 +179,9 @@ const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, int font_size,
 
 	GlyphLayout layout;
 	uint32_t* buffer = GenFTChar(character, font_size, color, is_edge, layout);
+	if (!buffer) {
+		return NULL;
+	}
 	int w = layout.sizer.width;
 	int h = layout.sizer.height;
 	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);

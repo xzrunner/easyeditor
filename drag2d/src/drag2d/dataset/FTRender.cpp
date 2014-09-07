@@ -85,6 +85,7 @@ RenderSpans(FT_Library &m_library,
 }
 
 FTRender::FTRender()
+	: m_face(NULL)
 {
 	FT_Init_FreeType(&m_library);
 }

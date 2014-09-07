@@ -19,8 +19,9 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 
 	std::vector<Line> lines;
 	int tot_line_height = TransToLines(unicodes, style, lines);
-
-	DrawLines(screen, pos, style, lines, tot_line_height);
+	if (!lines.empty()) {
+		DrawLines(screen, pos, style, lines, tot_line_height);
+	}
 }
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes)
@@ -61,14 +62,16 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 				line.height = g->metrics_height;
 			}
 			line.width += g->advande;
+			line.glyphs.push_back(g);
 		}
 		if (line.height == 0 && g) {
 			line.height = g->metrics_height;
 		}
-		line.glyphs.push_back(g);
 	}
-	tot_line_height += line.height;
-	lines.push_back(line);
+	if (!line.glyphs.empty()) {
+		tot_line_height += line.height;
+		lines.push_back(line);
+	}
 
 	return tot_line_height;
 }
