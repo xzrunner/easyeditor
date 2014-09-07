@@ -13,7 +13,7 @@ const char* FILENAME = "config.json";
 
 Config::Config()
 {
-	m_use_dtex = false;
+	m_use_dtex = true;
 }
 
 Config* Config::Instance()
