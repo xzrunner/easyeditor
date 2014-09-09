@@ -196,10 +196,10 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
  		int width = dt->GetWidth();
  		int height = dt->GetHeight();
  		texid = dt->GetTextureID();
- 		txmin = (n->GetMinX()+padding) / width;
- 		txmax = (n->GetMaxX()-padding) / width;
- 		tymin = (n->GetMinY()+padding) / height;
- 		tymax = (n->GetMaxY()-padding) / height;
+ 		txmin = (n->GetMinX()+padding+0.5f) / width;
+ 		txmax = (n->GetMaxX()-padding-0.5f) / width;
+ 		tymin = (n->GetMinY()+padding+0.5f) / height;
+ 		tymax = (n->GetMaxY()-padding-0.5f) / height;
  
 		if (texid != 1) {
 			wxLogDebug(_T("img dt's tex = %d"), texid);
