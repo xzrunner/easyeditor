@@ -17,7 +17,7 @@ ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
 	m_symbol->retain();
 	scripts_do_string(symbol->getContent().c_str());
 }
-Z
+
 ScriptsSprite::~ScriptsSprite()
 {
 	if (m_symbol) {
