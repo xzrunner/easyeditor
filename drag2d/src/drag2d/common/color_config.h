@@ -6,6 +6,8 @@
 namespace d2d
 {
 
+static Colorf NULL_COLOR(0, 0, 0, 0);
+
 static Colorf LIGHT_GREY(0.8f, 0.8f, 0.8f, 0.8f);
 
 static Colorf MID_RED(0.8f, 0, 0, 0.8f);
