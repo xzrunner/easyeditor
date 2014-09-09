@@ -78,7 +78,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 				sprite->setTransform(Vector(0, 0), 0);
 				sprite->setScale(1, 1);
 				sprite->setShear(0, 0);
-				sprite->setOffset(Vector(0, 0));
+//				sprite->setOffset(Vector(0, 0));
 			}
 		}
 		break;
