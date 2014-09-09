@@ -4,8 +4,6 @@
 #include "MultiSpritesImpl.h"
 #include "LibraryPanel.h"
 
-#include "common/scripts.h"
-#include "dataset/ScriptsSymbol.h"
 #include "dataset/SpriteFactory.h"
 
 namespace d2d
@@ -45,22 +43,13 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 		bool handled = OnDropSymbol(symbol, pos);
 		if (!handled) {
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-			sprite->translate(pos);
-			m_sprites_impl->insertSprite(sprite);
+			if (sprite->getSymbol().getSize().isValid()) {
+				sprite->translate(pos);
+				m_sprites_impl->insertSprite(sprite);
+			} else {
+				sprite->release();
+			}
 		}
-
-// 		if (ScriptsSymbol* scripts = dynamic_cast<ScriptsSymbol*>(symbol)) 
-// 		{
-// 			scripts_do_string(scripts->getContent().c_str());
-// 			//			scripts_do_file(symbol->getFilepath().c_str());
-// 		}
-// 		else
-		//{
-		//	Vector pos = m_edit_panel->transPosScreenToProject(x, y);
-		//	ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-		//	sprite->translate(pos);
-		//	m_sprites_impl->insertSprite(sprite);
-		//}
 	}
 }
 

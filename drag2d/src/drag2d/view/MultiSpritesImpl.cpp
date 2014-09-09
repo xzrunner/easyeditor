@@ -90,10 +90,11 @@ void MultiSpritesImpl::RectQueryVisitor::visit(Object* object, bool& bFetchNext)
 // 		if (!m_contain && bv->isIntersect(m_rect))
 // 			m_result.push_back(sprite);
 
-		if (m_contain && bv->isContain(m_rect))
+		if (m_contain && bv && bv->isContain(m_rect)) {
 			m_result.push_back(sprite);
-		else if (!m_contain && bv->isIntersect(m_rect))
+		} else if (!m_contain && bv && bv->isIntersect(m_rect)) {
 			m_result.push_back(sprite);
+		}
 	}
 	bFetchNext = true;
 }

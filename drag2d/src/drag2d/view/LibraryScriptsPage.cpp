@@ -4,6 +4,7 @@
 #include "dataset/ScriptsSymbol.h"
 #include "dataset/SymbolMgr.h"
 #include "common/FileNameParser.h"
+#include "view/GLCanvas.h"
 
 namespace d2d
 {
@@ -36,6 +37,10 @@ namespace d2d
 				symbol->RefreshThumbnail(filepath);
 				m_list->insert(symbol);
 				symbol->release();
+			}
+
+			if (m_canvas) {
+				 m_canvas->resetViewport();
 			}
 		}
 	}

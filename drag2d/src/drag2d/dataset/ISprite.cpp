@@ -163,8 +163,9 @@ void ISprite::store(Json::Value& val) const
 
 void ISprite::buildBounding()
 {
-	if (!m_bounding) 
+	if (!m_bounding) {
 		m_bounding = BVFactory::createBV(e_obb);
+	}
 	const ISymbol& symbol = getSymbol();
 	Rect rect(symbol.getSize(this));
 	if (m_offset.x == 0 && m_offset.y == 0)
@@ -199,12 +200,12 @@ void ISprite::setShear(float xShear, float yShear)
 
 bool ISprite::isContain(const Vector& pos) const
 {
-	return m_bounding->isContain(pos);
+	return m_bounding ? m_bounding->isContain(pos) : false;
 }
 
 bool ISprite::isIntersect(const Rect& rect) const
 {
-	return m_bounding->isIntersect(rect);
+	return m_bounding ? m_bounding->isIntersect(rect) : false;
 }
 
 void ISprite::translate(const Vector& offset)
@@ -238,7 +239,9 @@ void ISprite::setOffset(const Vector& offset)
 	Vector new_center = getCenter();
 	m_pos += (old_center - new_center);
 
-	m_bounding->setTransform(m_pos, m_offset, m_angle);
+	if (m_bounding) {
+		m_bounding->setTransform(m_pos, m_offset, m_angle);
+	}
 }
 
 Vector ISprite::getCenter() const

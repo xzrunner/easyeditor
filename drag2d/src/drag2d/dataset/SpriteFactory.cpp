@@ -7,6 +7,7 @@
 #include "TextSprite.h"
 //#include "FontBlankSprite.h"
 #include "FontSprite.h"
+#include "ScriptsSprite.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -58,16 +59,22 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 			CallbackMap::iterator itr = m_creators.find(type.ToStdString());
 			if (itr != m_creators.end()) {
 				sprite = (itr->second)(symbol);
-			}
-			else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank)) {
+			} else if (FileNameParser::isType(filepath, FileNameParser::e_fontblank)) {
 				sprite = new FontSprite(static_cast<FontBlankSymbol*>(symbol));
+			}
+		}
+		else if (ext == "lua")
+		{
+			if (FileNameParser::isType(filepath, FileNameParser::e_scripts)) {
+				sprite = new ScriptsSprite(static_cast<ScriptsSymbol*>(symbol));
 			}
 		}
 	}
 
-	if (sprite) insert(sprite);
-
-	sprite->name = "_sprite"+wxString::FromDouble(m_id++);
+	if (sprite) {
+		insert(sprite);
+		sprite->name = "_sprite"+wxString::FromDouble(m_id++);
+	}
 
 	return sprite;
 }

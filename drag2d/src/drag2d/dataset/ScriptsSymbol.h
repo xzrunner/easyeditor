@@ -25,7 +25,7 @@ namespace d2d
 			const Colorf& mul = Colorf(1, 1, 1, 1), 
 			const Colorf& add = Colorf(0, 0, 0, 0),
 			const ISprite* sprite = NULL) const {}
-		virtual Rect getSize(const ISprite* sprite = NULL) const { return Rect(0, 0); }
+		virtual Rect getSize(const ISprite* sprite = NULL) const;
 
 		//
 		// ListItem interface
