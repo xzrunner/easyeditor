@@ -549,12 +549,10 @@ uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int 
 	dc.SetFont(wxFont(font_size, wxDEFAULT, wxNORMAL, wxNORMAL));
 	
 	wxSize size = dc.GetTextExtent(uft8);
-// 	size.SetWidth(size.GetWidth()+2);
-// 	size.SetHeight(size.GetHeight()+2);
 	wxBitmap bmp(size);
 	dc.SelectObject(bmp);
 
-	dc.DrawRectangle(0, 0, 100, 100);
+ 	dc.DrawRectangle(0, 0, 100, 100);
 	dc.DrawText(uft8, 0, 0);
 
 	wxImage img = bmp.ConvertToImage();
@@ -577,7 +575,12 @@ uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int 
 			uint8_t r = src_data[ptr_src++];
 			uint8_t g = src_data[ptr_src++];
 			uint8_t b = src_data[ptr_src++];
-			uint32_t c = 255 << 24 | b << 16 | g << 8 | r;
+
+			uint8_t alpha = 255;
+			if (r == 255 && g == 255 && b == 255) {
+				alpha = 0;
+			}
+			uint32_t c = alpha << 24 | b << 16 | g << 8 | r;
 
 			ret[ptr_dst] = c;
 		}
