@@ -44,34 +44,42 @@ bool ScaleSpriteState::OnMouseMove(const Vector& pos)
 
 void ScaleSpriteState::Scale(const Vector& curr)
 {
-	float hw = m_sprite->getSymbol().getSize().xLength() * 0.5f;
-	float hh = m_sprite->getSymbol().getSize().yLength() * 0.5f;
+	Rect r = m_sprite->getSymbol().getSize();
 	Matrix t;
-	const Vector& center = m_sprite->getCenter();
-	t.setTransformation(center.x, center.y, m_sprite->getAngle(),
+
+//	const Vector& center = m_sprite->getCenter();
+	Vector center = m_sprite->getPosition() + m_sprite->getOffset();
+
+	t.setTransformation(m_sprite->getPosition().x, m_sprite->getPosition().y, m_sprite->getAngle(),
 		m_sprite->getScale().x, m_sprite->getScale().y, 0, 0, m_sprite->getShear().x, m_sprite->getShear().y);
+
+	d2d::Vector offset = m_sprite->getOffset();
+	d2d::Vector fix_node = Math::rotateVector(-offset, m_sprite->getAngle()) + offset;
 
 	Vector ori, fix;
 	if (m_ctrl_node.type == SpriteCtrlNode::UP)
-		ori = Math::transVector(Vector(0.0f, hh), t);
+		ori = Math::transVector(Vector(r.xCenter(), r.yMax) + fix_node, t);
 	else if (m_ctrl_node.type == SpriteCtrlNode::DOWN)
-		ori = Math::transVector(Vector(0.0f, -hh), t);
+		ori = Math::transVector(Vector(r.xCenter(), r.yMin) + fix_node, t);
 	else if (m_ctrl_node.type == SpriteCtrlNode::LEFT)
-		ori = Math::transVector(Vector(-hw, 0.0f), t);
+		ori = Math::transVector(Vector(r.xMin, r.yCenter()) + fix_node, t);
 	else if (m_ctrl_node.type == SpriteCtrlNode::RIGHT)
-		ori = Math::transVector(Vector(hw, 0.0f), t);
+		ori = Math::transVector(Vector(r.xMax, r.yCenter()) + fix_node, t);
 	else if (m_ctrl_node.type == SpriteCtrlNode::LEFT_UP)
-		ori = Math::transVector(Vector(-hw, hh), t);
+		ori = Math::transVector(Vector(r.xMin, r.yMax) + fix_node, t);
 	else if (m_ctrl_node.type == SpriteCtrlNode::RIGHT_UP)
-		ori = Math::transVector(Vector(hw, hh), t);
+		ori = Math::transVector(Vector(r.xMax, r.yMax) + fix_node, t);
 	else if (m_ctrl_node.type == SpriteCtrlNode::LEFT_DOWN)
-		ori = Math::transVector(Vector(-hw, -hh), t);
+		ori = Math::transVector(Vector(r.xMin, r.yMin) + fix_node, t);
 	else if (m_ctrl_node.type == SpriteCtrlNode::RIGHT_DOWN)
-		ori = Math::transVector(Vector(hw, -hh), t);
+		ori = Math::transVector(Vector(r.xMax, r.yMin) + fix_node, t);
 	Math::getFootOfPerpendicular(center, ori, curr, &fix);
 
 	float scale = Math::getDistance(center, fix) / Math::getDistance(center, ori);
 	scale += (1 - scale) * 0.5f;
+	if (fabs(scale - 1) < FLT_EPSILON) {
+		return;
+	}
 	if (m_ctrl_node.type == SpriteCtrlNode::UP || m_ctrl_node.type == SpriteCtrlNode::DOWN)
 		m_sprite->setScale(m_sprite->getScale().x, scale * m_sprite->getScale().y);
 	else if (m_ctrl_node.type == SpriteCtrlNode::LEFT || m_ctrl_node.type == SpriteCtrlNode::RIGHT)
@@ -79,9 +87,7 @@ void ScaleSpriteState::Scale(const Vector& curr)
 	else		
 		m_sprite->setScale(scale * m_sprite->getScale().x, scale * m_sprite->getScale().y);
 
-	Vector offset = (fix - ori) * 0.5f;
-	m_sprite->translate(offset);
-
+	m_sprite->translate((fix - ori) * 0.5f);
 }
 
 }
