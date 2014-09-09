@@ -66,7 +66,8 @@ public:
 
 	const TPNode* Query(const wxString& filepath) const;
 
-	const Glyph* QueryAndInsertFont(int character, int font_size, int color, int is_edge);
+	const Glyph* QueryAndInsertFont(int character, const wxString& uft8, 
+		int font_size, int color, int is_edge);
 
 	void Clear();
 
@@ -85,6 +86,7 @@ private:
 	void DrawExtrude(const Image* img, const TPNode* node) const;
 
 	uint32_t* GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout);
+	uint32_t* GenWXChar(const wxString& uft8, int font_size, int color, int is_edge, GlyphLayout& layout);
 
 private:
 	class ImageSizeCmp

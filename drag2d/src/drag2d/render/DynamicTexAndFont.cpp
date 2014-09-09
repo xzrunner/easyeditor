@@ -159,7 +159,8 @@ const TPNode* DynamicTexAndFont::Query(const wxString& filepath) const
 	}
 }
 
-const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, int font_size, int color, int is_edge)
+const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, const wxString& uft8,
+												   int font_size, int color, int is_edge)
 {
 	Glyph* glyph = m_hash.LookUp(character, font_size, color, is_edge);
 	if (glyph->is_used) {
@@ -180,7 +181,10 @@ const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, int font_size,
 	GlyphLayout layout;
 	uint32_t* buffer = GenFTChar(character, font_size, color, is_edge, layout);
 	if (!buffer) {
-		return NULL;
+		buffer = GenWXChar(uft8, font_size, color, is_edge, layout);
+		if (!buffer) {
+			return NULL;
+		}
 	}
 	int w = layout.sizer.width;
 	int h = layout.sizer.height;
@@ -533,6 +537,51 @@ uint32_t* DynamicTexAndFont::GenFTChar(int unicode, int font_size, int color, in
 		buffer = m_ft_render.WriteGlyphNoStroker(unicode, font_size, col, layout);
 	}
 	return buffer;
+}
+
+uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int color, int is_edge, GlyphLayout& layout)
+{
+	wxMemoryDC dc;
+
+	dc.SetPen(wxPen(wxColour(color & 0xff, (color >> 8) & 0xff, (color >> 16) & 0xff), 1));
+	dc.SetFont(wxFont(font_size, wxDEFAULT, wxNORMAL, wxNORMAL));
+	
+	wxSize size = dc.GetTextExtent(uft8);
+// 	size.SetWidth(size.GetWidth()+2);
+// 	size.SetHeight(size.GetHeight()+2);
+	wxBitmap bmp(size);
+	dc.SelectObject(bmp);
+
+	dc.DrawRectangle(0, 0, 100, 100);
+	//dc.DrawText(uft8, -1, -1);
+	dc.DrawText(uft8, 0, 0);
+
+	wxImage img = bmp.ConvertToImage();
+	unsigned char* src_data = img.GetData();
+
+	int offset = 0;
+
+	layout.advance = size.x;
+	layout.bearingX = layout.bearingY = 0;
+	layout.metrics_height = size.y;
+	layout.sizer.width = size.x - offset;
+	layout.sizer.height = size.y - offset;
+
+	uint32_t* ret = new uint32_t[(size.x-offset) * (size.y-offset)];
+	for (int i = offset; i < size.y; ++i) {
+		for (int j = offset; j < size.x; ++j) {
+			int ptr_src = (size.x * i + j) * 3;
+			int ptr_dst = (size.x-offset) * (size.y - 1 - i) + j;
+
+			uint8_t r = src_data[ptr_src++];
+			uint8_t g = src_data[ptr_src++];
+			uint8_t b = src_data[ptr_src++];
+			uint32_t c = 255 << 24 | b << 16 | g << 8 | r;
+
+			ret[ptr_dst] = c;
+		}
+	}
+	return ret;
 }
 
 //////////////////////////////////////////////////////////////////////////

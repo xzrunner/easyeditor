@@ -38,7 +38,9 @@ int _copystr(char *utf8, const char *str, int n)
 	return unicode;
 }
 
-void utf8_to_unicode(const char* utf8_src, std::vector<int>& unicode_dst)
+void utf8_to_unicode(const char* utf8_src, 
+					 std::vector<int>& unicode_dst,
+					 std::vector<wxString>& utf8_dst)
 {
 	char utf8[7];
 	for (int i=0; utf8_src[i] ;) 
@@ -66,6 +68,7 @@ void utf8_to_unicode(const char* utf8_src, std::vector<int>& unicode_dst)
 		}
 
 		unicode_dst.push_back(unicode);
+		utf8_dst.push_back(wxString::FromUTF8(utf8));
 	}	
 }
 

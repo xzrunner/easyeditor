@@ -15,27 +15,31 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 					 const LabelStyle& style)
 {
 	std::vector<int> unicodes;
-	TransToUnicodes(text, unicodes);
+	std::vector<wxString> utf8s;
+	TransToUnicodes(text, unicodes, utf8s);
 
 	std::vector<Line> lines;
-	int tot_line_height = TransToLines(unicodes, style, lines);
+	int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 	if (!lines.empty()) {
 		DrawLines(screen, pos, style, lines, tot_line_height);
 	}
 }
 
-void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes)
+void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes, std::vector<wxString>& utf8s)
 {
 //	DynamicFont* dfont = DynamicFont::Instance();
 	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 	std::string utf8 = string2utf8(text);
-	utf8_to_unicode(utf8.c_str(), unicodes);
+	utf8_to_unicode(utf8.c_str(), unicodes, utf8s);
 }
 
-int LabelNew::TransToLines(const std::vector<int>& unicodes, 
+int LabelNew::TransToLines(const std::vector<int>& unicodes,
+						   const std::vector<wxString>& utf8s,
 						   const LabelStyle& style,
 						   std::vector<Line>& lines)
 {
+	assert(unicodes.size() == utf8s.size());
+
 //	DynamicFont* dfont = DynamicFont::Instance();
 	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 
@@ -45,13 +49,14 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 	for (int i = 0, n = unicodes.size(); i < n; ++i) 
 	{
 		int unicode = unicodes[i];
+		wxString uft8 = utf8s[i];
 		if (unicode == '\n') {
 			tot_line_height += line.height;
 			lines.push_back(line);
 			line.Clear();
 		}
 
-		const Glyph* g = dfont->QueryAndInsertFont(unicode, style.font_size, color, style.has_edge);
+		const Glyph* g = dfont->QueryAndInsertFont(unicode, uft8, style.font_size, color, style.has_edge);
 		if (g) {
 			if (line.width + g->advande > style.width) {
 				tot_line_height += line.height;

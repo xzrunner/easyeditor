@@ -5,6 +5,7 @@
 #include <common/types.h>
 
 #include <vector>
+#include <wx/string.h>
 
 namespace d2d
 {
@@ -52,10 +53,12 @@ private:
 private:
 	static void TransToUnicodes(
 		const char* text, 
-		std::vector<int>& unicodes);
+		std::vector<int>& unicodes,
+		std::vector<wxString>& utf8s);
 
 	static int TransToLines(
 		const std::vector<int>& unicodes, 
+		const std::vector<wxString>& utf8s,
 		const LabelStyle& style,
 		std::vector<Line>& lines);
 
