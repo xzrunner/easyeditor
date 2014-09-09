@@ -357,14 +357,29 @@ int Math::getFootOfPerpendicular(const Vector& s, const Vector& e, const Vector&
 		return -1;
 	}
 
-	foot->x = (dxSquare * out.x + dySquare * s.x + dx * dy * (out.y - s.y)) / (dxSquare + dySquare);
-	if (s.x == e.x)
+	if (fabs(s.x - e.x) > fabs(s.y - e.y))
 	{
-		foot->y = out.y;
+		foot->x = (dxSquare * out.x + dySquare * s.x + dx * dy * (out.y - s.y)) / (dxSquare + dySquare);
+		if (s.x == e.x)
+		{
+			foot->y = out.y;
+		}
+		else
+		{
+			foot->y = findYOnSeg(s, e, foot->x);
+		}
 	}
 	else
 	{
-		foot->y = findYOnSeg(s, e, foot->x);
+		foot->y = (dySquare * out.y + dxSquare * s.y + dx * dy * (out.x - s.x)) / (dxSquare + dySquare);
+		if (s.y == e.y)
+		{
+			foot->x = out.x;
+		}
+		else
+		{
+			foot->x = findXOnSeg(s, e, foot->y);
+		}
 	}
 
 	if (isBetween(s.x, e.x, foot->x) && isBetween(s.y, e.y, foot->y))
