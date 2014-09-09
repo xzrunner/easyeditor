@@ -188,9 +188,20 @@ void ISprite::setTransform(const Vector& position, float angle)
 
 void ISprite::setScale(float xScale, float yScale)
 {
+	Vector dscale;
+	dscale.x = xScale / m_scale.x;
+	dscale.y = yScale / m_scale.y;
+
+	Vector old_offset = m_offset;
+	Vector new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
+	setOffset(new_offset);
+
+	translate(old_offset - new_offset);
+
 	m_scale.set(xScale, yScale);
+
 	onSizeChanged();
-}
+ }
 
 void ISprite::setShear(float xShear, float yShear)
 {
