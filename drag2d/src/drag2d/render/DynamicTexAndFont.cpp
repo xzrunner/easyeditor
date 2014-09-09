@@ -553,25 +553,24 @@ uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int 
 	dc.SelectObject(bmp);
 
 	dc.DrawRectangle(0, 0, 100, 100);
-	//dc.DrawText(uft8, -1, -1);
 	dc.DrawText(uft8, 0, 0);
 
 	wxImage img = bmp.ConvertToImage();
 	unsigned char* src_data = img.GetData();
 
-	int offset = 0;
-
 	layout.advance = size.x;
 	layout.bearingX = layout.bearingY = 0;
 	layout.metrics_height = size.y;
-	layout.sizer.width = size.x - offset;
-	layout.sizer.height = size.y - offset;
+	layout.sizer.width = size.x;
+	layout.sizer.height = size.y;
 
-	uint32_t* ret = new uint32_t[(size.x-offset) * (size.y-offset)];
-	for (int i = offset; i < size.y; ++i) {
-		for (int j = offset; j < size.x; ++j) {
+	int sz = size.x * size.y;
+	uint32_t* ret = new uint32_t[sz];
+	memset(ret, 0, sizeof(uint32_t) * sz);
+	for (int i = 0; i < size.y; ++i) {
+		for (int j = 0; j < size.x; ++j) {
 			int ptr_src = (size.x * i + j) * 3;
-			int ptr_dst = (size.x-offset) * (size.y - 1 - i) + j;
+			int ptr_dst = size.x * (size.y - 1 - i) + j;
 
 			uint8_t r = src_data[ptr_src++];
 			uint8_t g = src_data[ptr_src++];
