@@ -14,6 +14,10 @@ namespace d2d
 void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 					 const LabelStyle& style)
 {
+	if (strlen(text) == 0) {
+		return;
+	}
+
 	std::vector<int> unicodes;
 	std::vector<wxString> utf8s;
 	TransToUnicodes(text, unicodes, utf8s);
@@ -143,10 +147,10 @@ void LabelNew::DrawLines(const Screen& screen,
 				screen.TransPosForRender(vertices[i]);
 			}
 
-			txmin = (r->GetMinX()+padding) / tex_width;
-			txmax = (r->GetMaxX()-padding) / tex_width;
-			tymin = (r->GetMinY()+padding) / tex_height;
-			tymax = (r->GetMaxY()-padding) / tex_height;
+			txmin = (r->GetMinX()+padding+0.5f) / tex_width;
+			txmax = (r->GetMaxX()-padding-0.5f) / tex_width;
+			tymin = (r->GetMinY()+padding+0.5f) / tex_height;
+			tymax = (r->GetMaxY()-padding-0.5f) / tex_height;
 
 			if (r->IsRotated())
 			{
