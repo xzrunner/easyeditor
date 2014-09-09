@@ -14,8 +14,8 @@ namespace d2d
 
 const int DynamicTexAndFont::WIDTH = 4096;
 const int DynamicTexAndFont::HEIGHT = 4096;
-const int DynamicTexAndFont::PADDING = 1;
-const int DynamicTexAndFont::EXTRUDE = 1;
+const int DynamicTexAndFont::PADDING = 0;
+const int DynamicTexAndFont::EXTRUDE = 0;
 
 DynamicTexAndFont* DynamicTexAndFont::m_instance = NULL;
 DynamicTexAndFont* DynamicTexAndFont::Instance()
@@ -307,7 +307,9 @@ void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
 	r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
 	DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
 
-	DrawExtrude(img, n);
+	if (m_extrude > 0) {
+		DrawExtrude(img, n);
+	}
 }
 
 void DynamicTexAndFont::DrawRegion(const Rect& vertex, const Rect& texcoords, int texid, bool is_rotate) const
