@@ -194,7 +194,7 @@ void ISprite::setScale(float xScale, float yScale)
 
 	Vector old_offset = m_offset;
 	Vector new_offset(m_offset.x * dscale.x, m_offset.y * dscale.y);
-	setOffset(new_offset);
+	m_offset = new_offset;
 
 	translate(old_offset - new_offset);
 
