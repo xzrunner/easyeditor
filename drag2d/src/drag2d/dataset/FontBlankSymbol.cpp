@@ -6,7 +6,8 @@
 #include "common/color_trans.h"
 #include "common/FileNameTools.h"
 #include "common/FileNameParser.h"
-#include "common/Settings.h"
+#include "common/Config.h"
+#include "common/SettingData.h"
 #include "common/Math.h"
 #include "dataset/SpriteTools.h"
 #include "render/PrimitiveDraw.h"
@@ -52,10 +53,11 @@ void FontBlankSymbol::draw(const Screen& scr,
 						   const Colorf& add,
 						   const ISprite* sprite/* = NULL*/) const
 {
- 	if (Settings::DrawFontType & Settings::DrawFontBg) {
+	const SettingData& setting = Config::Instance()->GetSettings();
+	if (setting.visible_label_bg) {
  		DrawBackground(scr, sprite, mt);
  	} 
-	if (Settings::DrawFontType & Settings::DrawFontText) {
+	if (setting.visible_label_text) {
 		DrawText(scr, sprite, mt);
 	}
 

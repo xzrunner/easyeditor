@@ -6,6 +6,8 @@
 namespace d2d
 {
 
+struct SettingData;
+
 class SettingsDialog : public wxDialog
 {
 public:
@@ -24,6 +26,9 @@ private:
 	void onChangeFontBackground(wxCommandEvent& event);
 	void onChangeFontText(wxCommandEvent& event);
 	void onChangeNodeName(wxCommandEvent& event);
+
+private:
+	SettingData& m_settings;
 
 }; // SettingsDialog
 

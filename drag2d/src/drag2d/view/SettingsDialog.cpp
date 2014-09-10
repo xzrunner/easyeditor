@@ -1,12 +1,14 @@
 #include "SettingsDialog.h"
 
-#include "common/Settings.h"
+#include "common/Config.h"
+#include "common/SettingData.h"
 
 namespace d2d
 {
 
 SettingsDialog::SettingsDialog(wxWindow* parent)
 	: wxDialog(parent, wxID_ANY, wxT("Settings"))
+	, m_settings(Config::Instance()->GetSettings())
 {
 	initLayout();
 }
@@ -33,7 +35,7 @@ wxSizer* SettingsDialog::initEditPanel()
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
 		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("对象捕捉"));
-		check->SetValue(Settings::bSpriteCapture);
+		check->SetValue(m_settings.open_sprite_capture);
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(SettingsDialog::onChangeSpriteCapture));
 		sizer->Add(check, 0);
@@ -47,7 +49,7 @@ wxSizer* SettingsDialog::initImagePanel()
 	wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
 		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("边缘裁剪"));
-		check->SetValue(Settings::bImageEdgeClip);
+		check->SetValue(m_settings.open_image_edge_clip);
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(SettingsDialog::onChangeImageEdgeClip));
 		sizer->Add(check, 0);
@@ -55,7 +57,7 @@ wxSizer* SettingsDialog::initImagePanel()
 	sizer->AddSpacer(10);
 	{
 		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("显示原始边框"));
-		check->SetValue(Settings::bVisibleImgEdge);
+		check->SetValue(m_settings.visible_image_edge);
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(SettingsDialog::onChangeVisibleImageEdge));
 		sizer->Add(check, 0);
@@ -70,21 +72,21 @@ wxSizer* SettingsDialog::initViewPanel()
 	{
 		{
 			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("文字框"));
-			check->SetValue(d2d::Settings::DrawFontType & d2d::Settings::DrawFontBg);
+			check->SetValue(m_settings.visible_label_bg);
 			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 				wxCommandEventHandler(SettingsDialog::onChangeFontBackground));
 			sizer->Add(check, 0);
 		}
 		{
 			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("文字内容"));
-			check->SetValue(d2d::Settings::DrawFontType & d2d::Settings::DrawFontText);
+			check->SetValue(m_settings.visible_label_text);
 			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 				wxCommandEventHandler(SettingsDialog::onChangeFontText));
 			sizer->Add(check, 0);
 		}
 		{
 			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("节点名称"));
-			check->SetValue(d2d::Settings::bVisibleNodeName);
+			check->SetValue(m_settings.visible_node_name);
 			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 				wxCommandEventHandler(SettingsDialog::onChangeNodeName));
 			sizer->Add(check, 0);
@@ -95,32 +97,32 @@ wxSizer* SettingsDialog::initViewPanel()
 
 void SettingsDialog::onChangeSpriteCapture(wxCommandEvent& event)
 {
-	Settings::bSpriteCapture = event.IsChecked();
+	m_settings.open_sprite_capture = event.IsChecked();
 }
 
 void SettingsDialog::onChangeImageEdgeClip(wxCommandEvent& event)
 {
-	Settings::bImageEdgeClip = event.IsChecked();
+	m_settings.open_image_edge_clip = event.IsChecked();
 }
 
 void SettingsDialog::onChangeVisibleImageEdge(wxCommandEvent& event)
 {
-	Settings::bVisibleImgEdge = event.IsChecked();
+	m_settings.visible_image_edge = event.IsChecked();
 }
 
 void SettingsDialog::onChangeFontBackground(wxCommandEvent& event)
 {
-	d2d::Settings::DrawFontType ^= d2d::Settings::DrawFontBg;
+	m_settings.visible_label_bg = event.IsChecked();
 }
 
 void SettingsDialog::onChangeFontText(wxCommandEvent& event)
 {
-	d2d::Settings::DrawFontType ^= d2d::Settings::DrawFontText;
+	m_settings.visible_label_text = event.IsChecked();
 }
 
 void SettingsDialog::onChangeNodeName(wxCommandEvent& event)
 {
-	Settings::bVisibleNodeName = event.IsChecked();
+	m_settings.visible_node_name = event.IsChecked();
 }
 
 }

@@ -12,11 +12,6 @@ namespace d2d
 		static int ctlPosSize;
 		static bool bDisplayTrisEdge, bDisplayPolyBound;
 
-		static bool bSpriteCapture;
-		static bool bImageEdgeClip;
-		static bool bVisibleImgEdge;
-		static bool bVisibleNodeName;
-
 		enum DrawType
 		{
 			e_DrawBoth = 0,
@@ -24,12 +19,6 @@ namespace d2d
 			e_DrawImage
 		};
 		static DrawType drawType;
-
-		static const int DrawFontBg   = 0x1;
-		static const int DrawFontText = 0x2;
-		static int DrawFontType;
-
-		static std::set<wxString> RESOURCE_PATH;
 
 	}; // Settings
 }

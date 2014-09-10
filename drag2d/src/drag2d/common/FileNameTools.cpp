@@ -1,8 +1,8 @@
 #include "FilenameTools.h"
-#include "Settings.h"
 
 #include "common/tools.h"
 #include "common/Exception.h"
+#include "common/Config.h"
 
 #include <wx/filename.h>
 #include <wx/dir.h>
@@ -107,8 +107,10 @@ wxString FilenameTools::getExistFilepath(const wxString& filepath, const wxStrin
 		{
 			wxString cwd = wxFileName::GetCwd();
 
-			std::set<wxString>::iterator itr = Settings::RESOURCE_PATH.begin();
-			for ( ; itr != Settings::RESOURCE_PATH.end(); ++itr)
+			Config* cfg = Config::Instance();
+			std::set<wxString>::const_iterator 
+				itr = cfg->GetResPathes().begin();
+			for ( ; itr != cfg->GetResPathes().end(); ++itr)
 			{
 				filepathFixed = *itr + filename;
 				if (isExist(filepathFixed))

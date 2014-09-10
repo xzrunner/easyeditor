@@ -1,6 +1,12 @@
 {
 	// settings
 	"font_filepath" : "FZCY_GBK.ttf",
+	"sprite_capture" : false,			// 编辑对象捕捉
+	"image_edge_clip" : true,			// 图片边缘裁剪
+	"visible_image_edge" : false,		// 显示图片原始边框
+	"visible_label_bg" : true,			// 显示文本框
+	"visible_label_text" : true,		// 显示文本
+	"visible_node_name" : false,		// 显示节点名称
 
 	// library list default
 	"library_label" :

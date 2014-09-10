@@ -75,7 +75,9 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
-	d2d::Settings::bImageEdgeClip = false;
+	d2d::SettingData& settings = d2d::Config::Instance()->GetSettings();
+	bool old_open_image_edge_clip = settings.open_image_edge_clip;
+	settings.open_image_edge_clip = false;
 
 	context->width = value["meta"]["size"]["w"].asInt();
 	context->height = value["meta"]["size"]["h"].asInt();
@@ -127,7 +129,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 
 	Context::Instance()->tp_meta = value["meta"];
 
-	d2d::Settings::bImageEdgeClip = true;
+	settings.open_image_edge_clip = old_open_image_edge_clip;
 }
 
 void FileIO::storeToEasypackerFile(const char* filename)

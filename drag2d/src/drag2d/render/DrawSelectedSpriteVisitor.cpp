@@ -8,7 +8,8 @@
 #include "render/style_config.h"
 #include "render/GL10.h"
 #include "common/Matrix.h"
-#include "common/Settings.h"
+#include "common/Config.h"
+#include "common/SettingData.h"
 
 namespace d2d
 {
@@ -27,7 +28,7 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 	PrimitiveDraw::drawPolyline(m_scr, bound, m_color, true);
 
 	// todo: bad
-	if (Settings::bVisibleImgEdge)
+	if (Config::Instance()->GetSettings().visible_image_edge)
 	{
 		if (ImageSprite* s = dynamic_cast<ImageSprite*>(sprite))
 		{

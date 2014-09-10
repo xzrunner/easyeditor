@@ -7,7 +7,8 @@
 #include "OffsetSpriteState.h"
 
 #include "common/Math.h"
-#include "common/Settings.h"
+#include "common/Config.h"
+#include "common/SettingData.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
@@ -192,7 +193,9 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 		m_op_state = NULL;
 	}
 
-	if (Settings::bSpriteCapture && m_align.IsOpen() && !m_selection->empty()
+	if (Config::Instance()->GetSettings().open_sprite_capture
+		&& m_align.IsOpen() 
+		&& !m_selection->empty()
 		&& m_left_down_pos != pos)
 	{
 		std::vector<ISprite*> sprites;

@@ -1,7 +1,6 @@
 #include "ZoomViewOP.h"
 
 #include "view/Camera.h"
-#include "common/Settings.h"
 
 namespace d2d
 {

@@ -9,10 +9,10 @@
 #include "render/DynamicTexAndFont.h"
 #include "render/RenderList.h"
 #include "common/tools.h"
-#include "common/Settings.h"
 #include "common/Exception.h"
 #include "common/Math.h"
 #include "common/Config.h"
+#include "common/SettingData.h"
 #include "view/Screen.h"
 
 #include <fstream>
@@ -65,7 +65,8 @@ bool Image::loadFromFile(const wxString& filepath)
   		GL10::GetTexLevelParameteriv(GL10::GL_TEXTURE_2D, 0, GL10::GL_TEXTURE_HEIGHT, &m_height);
   		GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
 #endif
-		if (Settings::bImageEdgeClip) {
+		if (Config::Instance()->GetSettings().open_image_edge_clip) 
+		{
 			eimage::ImageProcessor processor(this);
 			d2d::Rect r = processor.trim();
 			if (r.isValid()) {

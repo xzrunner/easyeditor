@@ -1,4 +1,5 @@
 #include "Config.h"
+#include "SettingData.h"
 
 #include "common/FileNameTools.h"
 
@@ -14,6 +15,8 @@ const char* FILENAME = "config.json";
 Config::Config()
 {
 	m_use_dtex = true;
+
+	m_settings = new SettingData;
 }
 
 Config* Config::Instance()
@@ -55,6 +58,8 @@ void Config::LoadFromFile(const char* filename)
 	m_use_dtex = m_value["use_dtex"].asBool();
 
 	m_font_filepath = m_value["font_filepath"].asString();
+
+	m_settings->LoadFromFile(m_value);
 }
 
 }

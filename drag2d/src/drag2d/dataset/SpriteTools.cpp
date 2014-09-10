@@ -1,7 +1,8 @@
 #include "SpriteTools.h"
 
 #include "dataset/ISprite.h"
-#include "common/Settings.h"
+#include "common/Config.h"
+#include "common/SettingData.h"
 #include "common/Math.h"
 #include "render/LabelNew.h"
 
@@ -10,7 +11,7 @@ namespace d2d
 
 void SpriteTools::DrawName(const Screen& scr, const ISprite* sprite, const Matrix& mt)
 {
- 	if (!Settings::bVisibleNodeName) {
+	if (!Config::Instance()->GetSettings().visible_node_name) {
  		return;
  	}
  	if (sprite && !sprite->name.empty() && sprite->name[0] != '_') {

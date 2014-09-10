@@ -63,7 +63,7 @@ void Frame::onOpen(wxCommandEvent& event)
 		m_currFilename = dlg.GetPath();
 		SetTitle(d2d::FilenameTools::getFilename(dlg.GetPath()));
 		Game::DLG_PATH = d2d::FilenameTools::getFileDir(dlg.GetPath()) + "\\";
-		d2d::Settings::RESOURCE_PATH.insert(Game::DLG_PATH);
+		d2d::Config::Instance()->GetResPathes().insert(Game::DLG_PATH);
 		try {
 			FileIO::load(dlg.GetPath());
 		} catch (d2d::Exception& e) {

@@ -142,6 +142,8 @@
 #include "common/Statistics.h"
 #include "common/PlayControl.h"
 #include "common/FpsStat.h"
+#include "common/Config.h"
+#include "common/SettingData.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"

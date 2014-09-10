@@ -10,7 +10,6 @@
 #include "common/Math.h"
 #include "common/visitors.h"
 #include "common/Matrix.h"
-#include "common/Settings.h"
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"

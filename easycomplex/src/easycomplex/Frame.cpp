@@ -81,12 +81,6 @@ void Frame::onSettings(wxCommandEvent& event)
 
 void Frame::onPreview(wxCommandEvent& event)
 {
-	int old_font_type = d2d::Settings::DrawFontType;
-	d2d::Settings::DrawFontType = d2d::Settings::DrawFontText;
-
-	bool old_name_type = d2d::Settings::bVisibleNodeName;
-	d2d::Settings::bVisibleNodeName = true;
-
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
 	symbol->reloadTexture();
 
@@ -97,9 +91,6 @@ void Frame::onPreview(wxCommandEvent& event)
 
 	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->getEditPanel());
  	stage->resetCanvas();
-
-	d2d::Settings::DrawFontType = old_font_type;
-	d2d::Settings::bVisibleNodeName = old_name_type;
 }
 
 void Frame::onEJPreview(wxCommandEvent& event)
