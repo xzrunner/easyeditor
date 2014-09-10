@@ -47,9 +47,7 @@ void ScaleSpriteState::Scale(const Vector& curr)
 	Rect r = m_sprite->getSymbol().getSize();
 	Matrix t;
 
-//	const Vector& center = m_sprite->getCenter();
 	Vector center = m_sprite->getPosition() + m_sprite->getOffset();
-
 	t.setTransformation(m_sprite->getPosition().x, m_sprite->getPosition().y, m_sprite->getAngle(),
 		m_sprite->getScale().x, m_sprite->getScale().y, 0, 0, m_sprite->getShear().x, m_sprite->getShear().y);
 
