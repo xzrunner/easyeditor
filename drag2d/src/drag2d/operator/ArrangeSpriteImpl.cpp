@@ -185,6 +185,9 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 	{
 		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
 		m_editPanel->addHistoryOP(history);
+
+		delete m_op_state;
+		m_op_state = NULL;
 	}
 
 	if (Settings::bSpriteCapture && m_align.IsOpen() && !m_selection->empty()
@@ -252,6 +255,9 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 		{
 			AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
 			m_editPanel->addHistoryOP(history);
+
+			delete m_op_state;
+			m_op_state = NULL;
 		}
 
 		if (m_propertyPanel)
