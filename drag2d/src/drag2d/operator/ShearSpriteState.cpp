@@ -40,14 +40,15 @@ void ShearSpriteState::Shear(const Vector& curr)
 	Vector pos;
 	Vector ctrls[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(m_sprite, ctrls);
-	if (m_ctrl_node.type == SpriteCtrlNode::UP)
-		Math::getFootOfPerpendicular(ctrls[0], ctrls[1], curr, &pos);
-	else if (m_ctrl_node.type == SpriteCtrlNode::DOWN)
-		Math::getFootOfPerpendicular(ctrls[2], ctrls[3], curr, &pos);
-	else if (m_ctrl_node.type == SpriteCtrlNode::LEFT)
-		Math::getFootOfPerpendicular(ctrls[0], ctrls[2], curr, &pos);
-	else if (m_ctrl_node.type == SpriteCtrlNode::RIGHT)
-		Math::getFootOfPerpendicular(ctrls[1], ctrls[3], curr, &pos);
+	if (m_ctrl_node.type == SpriteCtrlNode::UP) {
+		Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::RIGHT_UP], curr, &pos);
+	} else if (m_ctrl_node.type == SpriteCtrlNode::DOWN) {
+		Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_DOWN], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &pos);
+	} else if (m_ctrl_node.type == SpriteCtrlNode::LEFT) {
+		Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::LEFT_UP], ctrls[SpriteCtrlNode::LEFT_DOWN], curr, &pos);
+	} else if (m_ctrl_node.type == SpriteCtrlNode::RIGHT) {
+		Math::getFootOfPerpendicular(ctrls[SpriteCtrlNode::RIGHT_UP], ctrls[SpriteCtrlNode::RIGHT_DOWN], curr, &pos);
+	}
 
 	// M * p = p'
 	//
