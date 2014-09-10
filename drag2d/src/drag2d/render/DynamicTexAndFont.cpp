@@ -1,6 +1,7 @@
 #include "DynamicTexAndFont.h"
 
 #include "common/FileNameTools.h"
+#include "common/Config.h"
 #include "dataset/TPNode.h"
 #include "dataset/ISymbol.h"
 #include "render/ShaderNew.h"
@@ -22,8 +23,9 @@ DynamicTexAndFont* DynamicTexAndFont::Instance()
 {
 	if (!m_instance) {
 		m_instance = new DynamicTexAndFont();
-		if (FilenameTools::isExist("FZCY_GBK.ttf")) {
-			m_instance->LoadFontFile("FZCY_GBK.ttf");
+		const std::string& filepath = Config::Instance()->GetFontFilepath();
+		if (FilenameTools::isExist(filepath)) {
+			m_instance->LoadFontFile(filepath.c_str());
 		}
 	}
 	return m_instance;

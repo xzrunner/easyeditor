@@ -1,4 +1,8 @@
 {
+	// settings
+	"font_filepath" : "FZCY_GBK.ttf",
+
+	// library list default
 	"library_label" :
 	[
 		"D:/projects/ejoy/coco-tools/sg_ui/data/json/center_write_14_fontblank.json"
@@ -7,5 +11,7 @@
 	// [
 	// 	"D:/projects/ejoy/coco-tools/sg_ui/data/json/313_complex.json"
 	// ],
+
+	// render
 	"use_dtex" : true
 }

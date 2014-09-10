@@ -13,6 +13,8 @@ public:
 
 	bool IsUseDTex() const { return m_use_dtex; }
 
+	const std::string& GetFontFilepath() const { return m_font_filepath; }
+
 	void GetStrings(const std::string& key, std::vector<std::string>& val) const;
 
 private:
@@ -24,6 +26,8 @@ private:
 	Json::Value m_value;
 
 	bool m_use_dtex;
+
+	std::string m_font_filepath;
 
 private:
 	static Config* m_instance;
