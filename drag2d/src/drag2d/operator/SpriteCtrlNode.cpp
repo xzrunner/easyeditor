@@ -27,8 +27,9 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 	// fix for offset
 	d2d::Vector offset = sprite->getOffset();
 	d2d::Vector fix = Math::rotateVector(-offset, sprite->getAngle()) + offset;
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 8; ++i) {
 		nodes[i] += fix;
+	}
 }
 
 }
