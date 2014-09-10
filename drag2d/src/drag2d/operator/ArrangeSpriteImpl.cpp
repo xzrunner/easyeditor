@@ -20,7 +20,7 @@
 namespace d2d
 {
 
-const float ArrangeSpriteImpl::SCALE_NODE_RADIUS = 2.0f;
+const float ArrangeSpriteImpl::CTRL_NODE_RADIUS = 10.0f;
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 									 MultiSpritesImpl* spritesImpl,
@@ -43,6 +43,8 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 
 	m_left_down_pos.setInvalid();
 	m_right_down_pos.setInvalid();
+
+	m_ctrl_node_radius = CTRL_NODE_RADIUS;
 }
 
 ArrangeSpriteImpl::~ArrangeSpriteImpl()
@@ -147,7 +149,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 	if (m_is_offset_open)
 	{
 		d2d::Vector offset = selected->getPosition() + selected->getOffset();
-		if (Math::getDistance(offset, pos) < SCALE_NODE_RADIUS) {
+		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
 			delete m_op_state;
 			m_op_state = CreateOffsetState(selected);
 			return;
@@ -161,7 +163,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 8; ++i)
 		{
-			if (Math::getDistance(ctrlNodes[i], pos) < SCALE_NODE_RADIUS)
+			if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
 			{
 				SpriteCtrlNode::Node cn;
 				cn.pos = ctrlNodes[i];
@@ -224,7 +226,7 @@ void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 	SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 	for (int i = 0; i < 8; ++i)
 	{
-		if (Math::getDistance(ctrlNodes[i], pos) < SCALE_NODE_RADIUS)
+		if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
 		{
 			SpriteCtrlNode::Node cn;
 			cn.pos = ctrlNodes[i];
@@ -319,6 +321,9 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 
 void ArrangeSpriteImpl::onDraw(const Screen& scr) const
 {
+	Vector scale = scr.GetScale();
+	m_ctrl_node_radius = CTRL_NODE_RADIUS / scale.x;
+
 	if (m_isDeformOpen && m_selection->size() == 1)
 	{
 		ISprite* selected = NULL;
@@ -329,14 +334,14 @@ void ArrangeSpriteImpl::onDraw(const Screen& scr) const
 		Vector ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 4; ++i)
-			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], SCALE_NODE_RADIUS, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 		for (int i = 4; i < 8; ++i)
-			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], SCALE_NODE_RADIUS, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
 		if (m_is_offset_open)
 		{
 			d2d::Vector offset = selected->getPosition() + selected->getOffset();
-			PrimitiveDraw::drawCircle(scr, offset, SCALE_NODE_RADIUS, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			PrimitiveDraw::drawCircle(scr, offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 	}
 
@@ -361,7 +366,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 	if (m_is_offset_open)
 	{
 		d2d::Vector offset = selected->getPosition() + selected->getOffset();
-		if (Math::getDistance(offset, pos) < SCALE_NODE_RADIUS) {
+		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
 			return selected;
 		}
 	}
@@ -369,7 +374,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 	Vector ctrlNodes[8];
 	SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 	for (int i = 0; i < 8; ++i) {
-		if (Math::getDistance(ctrlNodes[i], pos) < SCALE_NODE_RADIUS) {
+		if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius) {
 			return selected;
 		}
 	}

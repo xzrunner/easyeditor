@@ -31,6 +31,8 @@ public:
 		pos.y = pos.y * 2 / m_size.y;
 	}
 
+	const Vector& GetScale() const { return m_scale; }
+
 private:
 	Vector m_size;
 	Vector m_offset;

@@ -60,7 +60,7 @@ private:
 	void DownOneLayer();
 
 private:
-	static const float SCALE_NODE_RADIUS;
+	static const float CTRL_NODE_RADIUS;
 
 private:
 	AutoAlign m_align;
@@ -76,6 +76,8 @@ private:
 	bool m_is_offset_open;
 
 	Vector m_left_down_pos, m_right_down_pos;
+
+	mutable float m_ctrl_node_radius;
 
 }; // ArrangeSpriteImpl
 
