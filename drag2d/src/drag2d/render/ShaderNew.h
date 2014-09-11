@@ -38,6 +38,10 @@ public:
 
 	int GetVersion() const { return m_version; }
 
+	void SetBufferData(bool open) {
+		m_open_buffer_data = open;
+	}
+
 	void Flush();
 
 private:
@@ -91,6 +95,8 @@ private:
 	int m_col_loc;
 
 	int m_version;
+
+	bool m_open_buffer_data;
 
 }; // ShaderNew
 

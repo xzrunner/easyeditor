@@ -18,15 +18,47 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 		return;
 	}
 
-	std::vector<int> unicodes;
-	std::vector<wxString> utf8s;
-	TransToUnicodes(text, unicodes, utf8s);
+	clock_t begin = clock();
 
-	std::vector<Line> lines;
-	int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
-	if (!lines.empty()) {
-		DrawLines(screen, pos, style, lines, tot_line_height);
+	static std::vector<int> unicodes;
+	static std::vector<wxString> utf8s;
+// 	std::vector<int> unicodes;
+// 	std::vector<wxString> utf8s;
+	if (unicodes.empty())
+		TransToUnicodes(text, unicodes, utf8s);
+
+	clock_t end0 = clock();
+
+	static std::vector<Line> lines;
+	static int tot_line_height = 0;
+// 	std::vector<Line> lines;
+// 	int tot_line_height = 0;
+	if (lines.empty()) {
+		tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 	}
+
+	clock_t end1 = clock();
+
+	static int times = 0;
+	if (!lines.empty() && ++times < 100) {
+//		first = false;
+		DrawLines(screen, pos, style, lines, tot_line_height);
+
+// 		ShaderNew::Instance()->Flush();
+// 		ShaderNew::Instance()->SetBufferData(false);
+	} else if (times == 100) {
+		ShaderNew::Instance()->SetBufferData(false);
+	}
+
+	clock_t end2 = clock();
+
+	int t0 = end0 - begin;
+	int t1 = end1 - end0;
+	int t2 = end2 - end1;
+
+	int zz = 0;
+
+//	ShaderNew::Instance()->SetBufferData(false);
 }
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes, std::vector<wxString>& utf8s)

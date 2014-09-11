@@ -4,28 +4,31 @@
 
 namespace ecomplex
 {
-	class Symbol;
 
-	class EditDialog : public wxDialog
-	{
-	public:
-		EditDialog(wxWindow* parent, Symbol* symbol);
+class Symbol;
 
-	private:
-		void initLayout();
+class EditDialog : public wxDialog
+{
+public:
+	EditDialog(wxWindow* parent, Symbol* symbol);
 
-		void onClose(wxCloseEvent& event);
+private:
+	void initLayout();
 
-		void loadSymbolInfo();
+	void onCloseEvent(wxCloseEvent& event);
+	void onClose(bool force, int returncode);
 
-	private:
-		d2d::EditPanel* m_stage;
-		d2d::ViewlistPanel* m_viewlist;
+	void loadSymbolInfo();
 
-		Symbol* m_symbol;
+private:
+	d2d::EditPanel* m_stage;
+	d2d::ViewlistPanel* m_viewlist;
 
-		DECLARE_EVENT_TABLE()
+	Symbol* m_symbol;
 
-	}; // EditDialog
+	DECLARE_EVENT_TABLE()
+
+}; // EditDialog
+
 }
 

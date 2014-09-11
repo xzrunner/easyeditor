@@ -18,6 +18,9 @@
 #include "render/PrimitiveDraw.h"
 #include "render/DynamicTexAndFont.h"
 
+// for debug
+#include "render/ShaderNew.h"
+
 namespace d2d
 {
 
@@ -102,6 +105,14 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		break;
 	case ']':
 		UpOneLayer();
+		break;
+
+		// for debug
+	case 'O':
+		ShaderNew::Instance()->SetBufferData(true);
+		break;
+	case 'C':
+		ShaderNew::Instance()->SetBufferData(false);
 		break;
 	}
 }

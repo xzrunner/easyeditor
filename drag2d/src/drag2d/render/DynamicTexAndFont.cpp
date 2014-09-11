@@ -226,6 +226,8 @@ const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, const wxString
 		glyph->width = w;
 		glyph->height = h;
 		glyph->tpnode = n;
+
+		return glyph;
 	}	
 
 	return NULL;

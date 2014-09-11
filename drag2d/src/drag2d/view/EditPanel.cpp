@@ -235,9 +235,14 @@ void EditPanel::onSave()
 
 bool EditPanel::isDirty() const
 {
-	if (!m_frame) return false;
+	if (!m_frame) {
+		return false;
+	}
 
 	wxString title = m_frame->GetTitle();
+	if (title.IsEmpty()) {
+		return false;
+	}
 	return title[title.Len()-1] == '*';
 }
 

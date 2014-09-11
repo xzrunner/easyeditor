@@ -18,8 +18,8 @@ static const int ATTRIB_ADDITIVE  = 3;
 
 ShaderNew* ShaderNew::m_instance = NULL;
 
-//int ShaderNew::MAX_COMMBINE = 10240;
-int ShaderNew::MAX_COMMBINE = 4096;
+int ShaderNew::MAX_COMMBINE = 20000;
+//int ShaderNew::MAX_COMMBINE = 4096;
 
 ShaderNew* ShaderNew::Instance()
 {
@@ -47,6 +47,8 @@ ShaderNew::ShaderNew()
 	m_additive = 0;
 
 	m_version = 0;
+
+	m_open_buffer_data = true;
 }
 
 void ShaderNew::SetSpriteColor(const Colorf& multi, const Colorf& add)
@@ -415,9 +417,9 @@ void ShaderNew::InitBuffers()
 
 void ShaderNew::Commit()
 {
-	if (m_sprite_count == 0) {
-		return;
-	}
+// 	if (m_sprite_count == 0) {
+// 		return;
+// 	}
 
 	if (m_fbo != 0 || (m_fbo != 1 && m_tex != 1)) {
 		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
@@ -426,7 +428,13 @@ void ShaderNew::Commit()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, m_sprite_count * SPRITE_FLOAT_NUM * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
+	static int last_count = 0;
+	if (m_open_buffer_data && m_sprite_count != 0) {
+		last_count = m_sprite_count;
+ 		glBufferData(GL_ARRAY_BUFFER, m_sprite_count * SPRITE_FLOAT_NUM * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
+	} else {
+		int zz = 0;
+	}
 
 	glEnableVertexAttribArray(ATTRIB_VERTEX);
 	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(0));
@@ -440,7 +448,17 @@ void ShaderNew::Commit()
 	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
 	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(20));  
 
-	glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
+	static int max_count = 0;
+	if (m_sprite_count > max_count) {
+		max_count = m_sprite_count;
+	}
+
+// 	if (!m_open_buffer_data) {
+// 		glDrawElements(GL_TRIANGLES, 6 * max_count, GL_UNSIGNED_SHORT, 0);
+// 	} else {
+// 		glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
+// 	}
+	glDrawElements(GL_TRIANGLES, 6 * last_count, GL_UNSIGNED_SHORT, 0);
 
  	glBindBuffer(GL_ARRAY_BUFFER, 0);
  	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

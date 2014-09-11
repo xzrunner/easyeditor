@@ -14,6 +14,11 @@ public:
 private:
 	void toCenter();
 
+	void onCloseEvent(wxCloseEvent& event);
+	void onClose(bool force, int returncode);
+
+	DECLARE_EVENT_TABLE()
+
 }; // BaseDialog
 
 }
