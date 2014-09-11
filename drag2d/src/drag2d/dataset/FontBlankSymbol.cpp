@@ -133,7 +133,7 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 {
 	if (sprite) {
 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
-			const std::string& str = font->GetTextContext();
+			const wxString& str = font->GetTextContext();
 			if (!str.empty()) {
 				Vector pos = Math::transVector(Vector(0, 0), mt);
 
@@ -146,7 +146,7 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 				style.align_hori = font->align_hori;
 				style.align_vert = font->align_vert;
 
-				LabelNew::Print(scr, str.c_str(), pos, style);
+				LabelNew::Print(scr, str.utf8_str(), pos, style);
 			}
 		}
 	}

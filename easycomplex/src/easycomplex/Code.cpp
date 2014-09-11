@@ -109,7 +109,7 @@ void Code::ResolveText(const Symbol& symbol)
  
  			if (d2d::FontSprite* s = dynamic_cast<d2d::FontSprite*>(child))
  			{
-				std::string content = s->GetTextContext();
+				std::string content = s->GetTextContext().ToStdString();
 				size_t pos = 0;
 				std::string replace("\\n");
 				while ((pos = content.find('\n', pos)) != std::string::npos) {

@@ -161,7 +161,7 @@ void FontSprite::store(Json::Value& val) const
 	val["label_width"] = width;
 	val["label_height"] = height;
 	val["font_filename"] = filename;
-	val["content"] = m_text;
+	val["content"] = m_text.ToStdString();
 	val["tid"] = m_tid;
 }
 

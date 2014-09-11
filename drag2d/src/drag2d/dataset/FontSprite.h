@@ -37,8 +37,8 @@ public:
 
 	void loadFont(const std::string& filename);
 
-	void SetTextContent(const std::string& str) { m_text = str; }
-	const std::string& GetTextContext() const { return m_text; }
+	void SetTextContent(const wxString& str) { m_text = str; }
+	const wxString& GetTextContext() const { return m_text; }
 
 	void SetTextID(const std::string& tid) { m_tid = tid; }
 	const std::string& GetTextID() const { return m_tid; }
@@ -62,7 +62,7 @@ public:
 	std::string filename;
 
 private:
-	std::string m_text;
+	wxString m_text;
 
 	std::string m_tid;
 

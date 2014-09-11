@@ -47,8 +47,7 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 		std::string str = wxANY_AS(value, wxString);
 		sprite->loadFont(str);
 	} else if (name == wxT("TextContent")) {
-		std::string str = wxANY_AS(value, wxString);
-		sprite->SetTextContent(str);
+		sprite->SetTextContent(wxANY_AS(value, wxString));
 	} else if (name == wxT("TextID")) {
 		std::string tid = wxANY_AS(value, wxString);
 		sprite->SetTextID(tid);

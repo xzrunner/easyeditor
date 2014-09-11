@@ -28,7 +28,8 @@ void TextDialog::OnClose(wxCloseEvent& event)
 	for (int i = 0, n = m_text_ctrl->GetNumberOfLines(); i < n; ++i) {
 		text += m_text_ctrl->GetLineText(i) + '\n';
 	}
-	m_font->SetTextContent(text.ToStdString());
+
+	m_font->SetTextContent(text);
 
 	Destroy();
 }
