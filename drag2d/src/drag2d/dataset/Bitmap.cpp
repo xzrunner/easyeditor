@@ -58,6 +58,10 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 		int w = std::max(1.0f, rect.xLength()),
 			h = std::max(1.0f, rect.yLength());
 
+ 		if (w > 2048 || h > 2048) {
+ 			return true;
+ 		}
+
 		d2d::Snapshoot ss(w, h);
 		unsigned char* rgba = ss.outputToMemory(symbol, true);
 		unsigned char* rgb = transRGBA2RGB(rgba, w, h);
