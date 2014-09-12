@@ -1082,14 +1082,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\drag2d\render\LabelNew.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\LabelNew.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\common\opengl\opengl.cpp"
 				>
 			</File>
@@ -1262,6 +1254,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\DynamicTexture.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="label"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\LabelLayout.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\LabelLayout.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\LabelNew.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\LabelNew.h"
 					>
 				</File>
 			</Filter>

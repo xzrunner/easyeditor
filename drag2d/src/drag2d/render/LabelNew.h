@@ -1,6 +1,8 @@
 #ifndef _DRAG2D_LABEL_NEW_H_
 #define _DRAG2D_LABEL_NEW_H_
 
+#include "LabelLayout.h"
+
 #include <common/Color.h>
 #include <common/types.h>
 
@@ -48,7 +50,7 @@ private:
 			glyphs.clear();
 			width = height = 0;
 		}
-	}; 
+	}; // Line
 
 private:
 	static void TransToUnicodes(
@@ -67,7 +69,12 @@ private:
 		const Vector& pos,
 		const LabelStyle& style,
 		const std::vector<Line>& lines,
-		int tot_line_height);
+		int tot_line_height,
+		LabelLayout::Layout& layout);
+
+	static void Draw(
+		const LabelLayout::Layout* layout
+		);
 
 }; // LabelNew
 

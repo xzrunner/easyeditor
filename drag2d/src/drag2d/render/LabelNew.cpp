@@ -18,47 +18,30 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 		return;
 	}
 
-	clock_t begin = clock();
+	int sz = strlen(text);
+// 	if (sz > 100) {
+// 		
+// 	}
 
-	static std::vector<int> unicodes;
-	static std::vector<wxString> utf8s;
-// 	std::vector<int> unicodes;
-// 	std::vector<wxString> utf8s;
-	if (unicodes.empty())
+	const LabelLayout::Layout* layout = LabelLayout::Instance()->Query(text);
+	if (!layout) 
+	{
+		LabelLayout::Layout* new_layout = new LabelLayout::Layout;
+		std::vector<int> unicodes;
+		std::vector<wxString> utf8s;
 		TransToUnicodes(text, unicodes, utf8s);
 
-	clock_t end0 = clock();
+		std::vector<Line> lines;
+		int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 
-	static std::vector<Line> lines;
-	static int tot_line_height = 0;
-// 	std::vector<Line> lines;
-// 	int tot_line_height = 0;
-	if (lines.empty()) {
-		tot_line_height = TransToLines(unicodes, utf8s, style, lines);
+		if (!lines.empty()) {
+			DrawLines(screen, pos, style, lines, tot_line_height, *new_layout);
+		}
+
+		layout = new_layout;
+		LabelLayout::Instance()->Insert(text, layout);
 	}
-
-	clock_t end1 = clock();
-
-	static int times = 0;
-	if (!lines.empty() && ++times < 100) {
-//		first = false;
-		DrawLines(screen, pos, style, lines, tot_line_height);
-
-// 		ShaderNew::Instance()->Flush();
-// 		ShaderNew::Instance()->SetBufferData(false);
-	} else if (times == 100) {
-		ShaderNew::Instance()->SetBufferData(false);
-	}
-
-	clock_t end2 = clock();
-
-	int t0 = end0 - begin;
-	int t1 = end1 - end0;
-	int t2 = end2 - end1;
-
-	int zz = 0;
-
-//	ShaderNew::Instance()->SetBufferData(false);
+	Draw(layout);
 }
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes, std::vector<wxString>& utf8s)
@@ -121,12 +104,13 @@ void LabelNew::DrawLines(const Screen& screen,
 						 const Vector& pos,
 						 const LabelStyle& style,
 						 const std::vector<Line>& lines,
-						 int tot_line_height)
+						 int tot_line_height,
+						 LabelLayout::Layout& layout)
 {
 //	DynamicFont* dfont = DynamicFont::Instance();
 	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 
-	Vector vertices[4], texcoords[4];
+	//Vector vertices[4], texcoords[4];
 	float xmin, xmax, ymin, ymax;
 	float txmin, txmax, tymin, tymax;
 	const float tex_width = dfont->GetWidth(),
@@ -161,6 +145,8 @@ void LabelNew::DrawLines(const Screen& screen,
 
 			const TPNode* r = g->tpnode;
 
+			LabelLayout::Glyph glyph;
+
 			xmin = x + g->bearing_x;
 			ymax = y + g->bearing_y - g->metrics_height;
 			if (r->IsRotated()) {
@@ -171,12 +157,12 @@ void LabelNew::DrawLines(const Screen& screen,
 				ymin = ymax - (r->GetHeight()-padding*2);
 			}
 
-			vertices[0].set(xmin, ymin);
-			vertices[1].set(xmax, ymin);
-			vertices[2].set(xmax, ymax);
-			vertices[3].set(xmin, ymax);
+			glyph.vertices[0].set(xmin, ymin);
+			glyph.vertices[1].set(xmax, ymin);
+			glyph.vertices[2].set(xmax, ymax);
+			glyph.vertices[3].set(xmin, ymax);
 			for (int i = 0; i < 4; ++i) {
-				screen.TransPosForRender(vertices[i]);
+				screen.TransPosForRender(glyph.vertices[i]);
 			}
 
 			txmin = (r->GetMinX()+padding+0.5f) / tex_width;
@@ -186,25 +172,40 @@ void LabelNew::DrawLines(const Screen& screen,
 
 			if (r->IsRotated())
 			{
-				d2d::Vector tmp = vertices[3];
-				vertices[3] = vertices[2];
-				vertices[2] = vertices[1];
-				vertices[1] = vertices[0];
-				vertices[0] = tmp;
+				d2d::Vector tmp = glyph.vertices[3];
+				glyph.vertices[3] = glyph.vertices[2];
+				glyph.vertices[2] = glyph.vertices[1];
+				glyph.vertices[1] = glyph.vertices[0];
+				glyph.vertices[0] = tmp;
 			}
 
-			texcoords[0].set(txmin, tymin);
-			texcoords[1].set(txmax, tymin);
-			texcoords[2].set(txmax, tymax);
-			texcoords[3].set(txmin, tymax);
+			glyph.texcoords[0].set(txmin, tymin);
+			glyph.texcoords[1].set(txmax, tymin);
+			glyph.texcoords[2].set(txmax, tymax);
+			glyph.texcoords[3].set(txmin, tymax);
 
-			ShaderNew* shader = ShaderNew::Instance();
-			shader->sprite();
-			shader->Draw(vertices, texcoords, tex_id);
+// 			ShaderNew* shader = ShaderNew::Instance();
+// 			shader->sprite();
+// 			shader->Draw(vertices, texcoords, tex_id);
+			layout.glyphs.push_back(glyph);
 
 			x += g->advande;
 		}
 		y -= line.height;
+	}
+}
+
+void LabelNew::Draw(const LabelLayout::Layout* layout)
+{
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->sprite();
+
+	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
+	const int tex_id = dfont->GetTextureID();
+
+	for (int i = 0, n = layout->glyphs.size(); i < n; ++i) {
+		const LabelLayout::Glyph& g = layout->glyphs[i];
+		shader->Draw(g.vertices, g.texcoords, tex_id);
 	}
 }
 
