@@ -204,6 +204,10 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 		m_op_state = NULL;
 	}
 
+	if (!m_selection->empty()) {
+		m_op_state = CreateTransalteState(m_selection, pos);
+	}
+
 	if (Config::Instance()->GetSettings().open_sprite_capture
 		&& m_align.IsOpen() 
 		&& !m_selection->empty()
