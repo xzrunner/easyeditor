@@ -47,7 +47,7 @@ namespace ecomplex
 	{
 		m_stat.Begin();
 
-/*		drawBackground();*/
+		drawBackground();
 
   		std::vector<d2d::ISprite*> sprites;
   		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
@@ -60,22 +60,22 @@ namespace ecomplex
   			d2d::SpriteDraw::drawSprite(m_screen, sprite);
   		}
 
-//  		d2d::PrimitiveDraw::rect(m_screen, m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
-//  
-//   		if (Settings::bVisibleBGCross)
-//   		{
-//   			const float EDGE = 100;
-//   			d2d::PrimitiveDraw::cross(m_screen, d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
-//   		}
-// 
-//     	m_editPanel->drawEditTemp(m_screen);
+  		d2d::PrimitiveDraw::rect(m_screen, m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
+  
+   		if (Settings::bVisibleBGCross)
+   		{
+   			const float EDGE = 100;
+   			d2d::PrimitiveDraw::cross(m_screen, d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+   		}
+ 
+     	m_editPanel->drawEditTemp(m_screen);
 
 		m_stat.End();
 
 #ifdef _DEBUG 
 //		d2d::DynamicTexture::Instance()->DebugDraw(m_screen);
 //		d2d::DynamicFont::Instance()->DebugDraw(m_screen);
-	//	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+		d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
 #endif
 
 		m_stat.DrawTime(m_screen);

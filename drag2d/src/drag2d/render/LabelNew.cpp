@@ -18,30 +18,44 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 		return;
 	}
 
-	int sz = strlen(text);
-// 	if (sz > 100) {
-// 		
+	//////////////////////////////////////////////////////////////////////////
+// 	// use cache
+// 	const LabelLayout::Layout* layout = LabelLayout::Instance()->Query(text);
+// 	if (!layout) 
+// 	{
+// 		LabelLayout::Layout* new_layout = new LabelLayout::Layout;
+// 		std::vector<int> unicodes;
+// 		std::vector<wxString> utf8s;
+// 		TransToUnicodes(text, unicodes, utf8s);
+// 
+// 		std::vector<Line> lines;
+// 		int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
+// 
+// 		if (!lines.empty()) {
+// 			DrawLines(screen, pos, style, lines, tot_line_height, *new_layout);
+// 		}
+// 
+// 		layout = new_layout;
+// 		LabelLayout::Instance()->Insert(text, layout);
 // 	}
+// 	Draw(layout);
 
-	const LabelLayout::Layout* layout = LabelLayout::Instance()->Query(text);
-	if (!layout) 
-	{
-		LabelLayout::Layout* new_layout = new LabelLayout::Layout;
-		std::vector<int> unicodes;
-		std::vector<wxString> utf8s;
-		TransToUnicodes(text, unicodes, utf8s);
+	//////////////////////////////////////////////////////////////////////////
+	// not use cache
 
-		std::vector<Line> lines;
-		int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
+	LabelLayout::Layout layout;
+	std::vector<int> unicodes;
+	std::vector<wxString> utf8s;
+	TransToUnicodes(text, unicodes, utf8s);
 
-		if (!lines.empty()) {
-			DrawLines(screen, pos, style, lines, tot_line_height, *new_layout);
-		}
+	std::vector<Line> lines;
+	int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 
-		layout = new_layout;
-		LabelLayout::Instance()->Insert(text, layout);
+	if (!lines.empty()) {
+		DrawLines(screen, pos, style, lines, tot_line_height, layout);
 	}
-	Draw(layout);
+
+	Draw(&layout);
 }
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes, std::vector<wxString>& utf8s)

@@ -50,12 +50,12 @@ void FpsStat::End()
 
 void FpsStat::DrawTime(const Screen& scr) const
 {
-//	Draw(scr, m_time);
+	Draw(scr, m_time);
 }
 
 void FpsStat::DrawFPS(const Screen& scr) const
 {
-//	Draw(scr, m_fps);
+	Draw(scr, m_fps);
 }
 
 void FpsStat::Draw(const Screen& scr, const std::string& str) const
