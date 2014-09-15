@@ -14,7 +14,7 @@ public:
 	virtual ~StagePanel();
 
 	//
-	// ICameraObserver interface
+	// EditPanel interface
 	//
 	virtual void clear();
 

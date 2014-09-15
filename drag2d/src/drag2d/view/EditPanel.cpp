@@ -35,7 +35,6 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	m_editOP = NULL;
 	m_canvas = NULL;
 	m_camera = new Camera;
-	m_camera->addObserver(this);
 	SetFocus();		// For onMouseWheelRotation
 }
 
@@ -47,13 +46,6 @@ EditPanel::~EditPanel()
 	delete m_canvas;
 	if (m_editOP) {
 		m_editOP->release();
-	}
-}
-
-void EditPanel::onCameraChanged()
-{
-	if (m_canvas) {
-		m_canvas->resetViewport();
 	}
 }
 

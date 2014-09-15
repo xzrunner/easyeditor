@@ -52,13 +52,6 @@ namespace d2d
 		virtual ~ICloneable() {}
 	}; // ICloneable
 
-	class ICameraObserver
-	{
-	public:
-		virtual void onCameraChanged() = 0;
-		virtual ~ICameraObserver() {}
-	}; // ICameraObserver
-
 	class ISprite;
 	class Vector;
 

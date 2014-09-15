@@ -187,6 +187,22 @@ void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int te
 	Draw(vb, texid);
 }
 
+void ShaderNew::SetTransform(const Vector& pos)
+{
+	m_mat_modelview.setTranslation(pos.x, pos.y);
+}
+
+void ShaderNew::SetScale(float scale)
+{
+	m_mat_modelview.setScale(scale, scale);
+}
+
+//void ShaderNew::SetOrtho()
+//{
+//// 	m_mat_projection.orthographic(0, 800, 600, 0, -1, 1);
+//	m_mat_projection.orthographic(0, 2, 0, 2, -1, 1);
+//}
+
 void ShaderNew::Flush()
 {
 	++m_version;
@@ -225,9 +241,14 @@ void ShaderNew::load()
 		"varying vec4 v_fragmentColor;  \n"
 		"varying vec4 v_fragmentAddi; \n"
 		"\n"
+//		"uniform mat4 u_projection; \n"
+		"uniform mat4 u_modelview; \n"
+		"\n"
 		"void main()  \n"
 		"{  \n"
-		"  gl_Position = position; "
+//		"  gl_Position = position; "
+//		"  gl_Position = u_projection * u_modelview * position; "
+		"  gl_Position = u_modelview * position; "
  		"  v_fragmentColor = color / 255.0; \n"
  		"  v_fragmentAddi = additive / 255.0; \n"
 		"  v_texcoord = texcoord;  \n"
@@ -302,6 +323,9 @@ void ShaderNew::load()
 	m_prog_sprite = InitShader(sprite_fs, sprite_vs);
 	m_prog_shape = InitShader(shape_fs, shape_vs);
 	m_prog_font = InitShader(font_fs, sprite_vs);
+
+ 	m_projection = glGetUniformLocation(m_prog_sprite, "u_projection");
+ 	m_model_view = glGetUniformLocation(m_prog_sprite, "u_modelview");
 
 	InitBuffers();
 
@@ -424,6 +448,14 @@ void ShaderNew::Commit()
 	if (m_fbo != 0 || (m_fbo != 1 && m_tex != 1)) {
 		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
 	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Set the model-view transform.
+	glUniformMatrix4fv(m_model_view, 1, 0, m_mat_modelview.getElements());
+
+	// Set the projection transform.
+	glUniformMatrix4fv(m_projection, 1, 0, m_mat_projection.getElements());
+	//////////////////////////////////////////////////////////////////////////
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
 

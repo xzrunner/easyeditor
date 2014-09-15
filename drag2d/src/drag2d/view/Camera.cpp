@@ -2,6 +2,8 @@
 
 #include "interfaces.h"
 
+#include "render/ShaderNew.h"
+
 namespace d2d
 {
 
@@ -18,7 +20,9 @@ const Vector& Camera::getCenter() const
 void Camera::setCenter(const Vector& center)
 {
 	m_center = center;
-	notifyObservers();
+
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetTransform(m_center);
 }
 
 float Camera::getScale() const
@@ -29,7 +33,9 @@ float Camera::getScale() const
 void Camera::setScale(float scale)
 {
 	m_scale = scale;
-	notifyObservers();
+
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetScale(1/m_scale);
 }
 
 void Camera::setScale(float scale, int x, int y, int width, int height)
@@ -37,7 +43,10 @@ void Camera::setScale(float scale, int x, int y, int width, int height)
 	m_center.x = (x - (width >> 1)) * m_scale + m_center.x - (x - (width >> 1)) * scale;
 	m_center.y = (y - (height >> 1)) * m_scale + m_center.y - (y - (height >> 1)) * scale;
 	m_scale = scale;
-	notifyObservers();
+
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetTransform(m_center);
+	shader->SetScale(1/m_scale);
 }
 
 Vector Camera::transPosScreenToProject(int x, int y, int width, int height) const
@@ -57,17 +66,6 @@ Vector Camera::transPosProjectToScreen(const Vector& proj, int width, int height
 	scr.x = xView;
 	scr.y = height - yView;
 	return scr;
-}
-
-void Camera::addObserver(ICameraObserver* observer)
-{
-	m_observers.push_back(observer);
-}
-
-void Camera::notifyObservers()
-{
-	for (size_t i = 0, n = m_observers.size(); i < n; ++i)
-		m_observers[i]->onCameraChanged();
 }
 
 } // d2d

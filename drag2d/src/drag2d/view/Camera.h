@@ -6,8 +6,6 @@
 
 namespace d2d
 {
-	class ICameraObserver;
-
 	class Camera
 	{
 	public:
@@ -23,17 +21,9 @@ namespace d2d
 		Vector transPosScreenToProject(int x, int y, int width, int height) const;
 		Vector transPosProjectToScreen(const Vector& proj, int width, int height) const;
 
-		// For reset projection transform (gluOrtho2D)
-		void addObserver(ICameraObserver* observer);
-
-	private:
-		void notifyObservers();
-
 	private:
 		Vector m_center;
 		float m_scale;
-
-		std::vector<ICameraObserver*> m_observers;
 
 	}; // Camera
 }

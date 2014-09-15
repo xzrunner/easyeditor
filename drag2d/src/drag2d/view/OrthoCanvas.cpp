@@ -36,10 +36,16 @@ void OrthoCanvas::onSize(int w, int h)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	glViewport(0, 0, w, h);
-	Vector scale;
-	scale.x = scale.y = 1.0f / m_camera->getScale();
-	m_screen.SetSize(w, h);
-	m_screen.SetCamera(-m_camera->getCenter(), scale);
+// 	glViewport(0, 0, w, h);
+// 	Vector scale;
+// 	scale.x = scale.y = 1.0f / m_camera->getScale();
+// 	m_screen.SetSize(w, h);
+// 	m_screen.SetCamera(-m_camera->getCenter(), scale);
+
+	//////////////////////////////////////////////////////////////////////////
+
+ 	glViewport(0, 0, w, h);
+ 	m_screen.SetSize(w, h);
+ 	m_screen.SetCamera();
 }
 } // d2d

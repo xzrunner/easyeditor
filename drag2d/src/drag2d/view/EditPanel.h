@@ -14,16 +14,11 @@ namespace d2d
 	class Camera;
 	class Screen;
 
-	class EditPanel : public wxPanel, public ICameraObserver
+	class EditPanel : public wxPanel
 	{
 	public:
 		EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
 		virtual ~EditPanel();
-
- 		//
- 		// ICameraObserver interface
- 		//
- 		virtual void onCameraChanged();
 
 		virtual void clear();
 

@@ -3,6 +3,7 @@
 
 #include "common/Color.h"
 #include "common/tools.h"
+#include "common/Matrix.h"
 
 typedef unsigned int GLuint;
 
@@ -41,6 +42,10 @@ public:
 	void SetBufferData(bool open) {
 		m_open_buffer_data = open;
 	}
+
+	void SetTransform(const Vector& pos);
+	void SetScale(float scale);
+//	void SetOrtho();
 
 	void Flush();
 
@@ -97,6 +102,11 @@ private:
 	int m_version;
 
 	bool m_open_buffer_data;
+
+	GLuint m_model_view;
+	GLuint m_projection;
+
+	Matrix m_mat_modelview, m_mat_projection;
 
 }; // ShaderNew
 
