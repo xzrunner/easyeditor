@@ -19,5 +19,5 @@
 	// ],
 
 	// render
-	"use_dtex" : true
+	"use_dtex" : false
 }
