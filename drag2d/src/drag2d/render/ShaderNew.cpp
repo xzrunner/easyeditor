@@ -195,7 +195,9 @@ void ShaderNew::SetModelView(const Vector& offset, float scale)
 
 void ShaderNew::SetProjection(int width, int height)
 {
-	m_mat_projection.orthographic(0, width, 0, height, 1, -1);
+ 	float hw = width * 0.5f;
+ 	float hh = height * 0.5f;
+ 	m_mat_projection.orthographic(-hw, hw, -hh, hh, 1, -1);
 }
 
 void ShaderNew::Flush()
