@@ -73,10 +73,12 @@ void ISprite::clearUserData(bool deletePtr)
 
 void ISprite::load(const Json::Value& val)
 {
+	// info
 	name = val["name"].asString();
 	tag = val["tag"].asString();
 	clip = val["clip"].asBool();
 
+	// color
 	std::string str = val["multi color"].asString();
 	if (str.empty())
 		multiCol = Colorf(1, 1, 1, 1);
@@ -88,11 +90,7 @@ void ISprite::load(const Json::Value& val)
 	else
 		addCol = transColor(str, PT_ARGB);
 
-	float x = val["position"]["x"].asDouble();
-	float y = val["position"]["y"].asDouble();
-	float angle = val["angle"].asDouble();
-	setTransform(Vector(x, y), angle);
-
+	// scale
 	float sx, sy;
 	if (val["scale"].isNull())
 	{
@@ -105,6 +103,7 @@ void ISprite::load(const Json::Value& val)
 	}
 	setScale(sx, sy);
 
+	// shear
 	float kx, ky;
 	if (!val["x shear"].isNull())
 	{
@@ -117,10 +116,12 @@ void ISprite::load(const Json::Value& val)
 	}
 	setShear(kx, ky);
 
+	// mirror
 	bool mx = val["x mirror"].asBool();
 	bool my = val["y mirror"].asBool();
 	setMirror(mx, my);
 
+	// offset
 	float ox, oy;
 	if (!val["x offset"].isNull())
 	{
@@ -132,6 +133,16 @@ void ISprite::load(const Json::Value& val)
 		ox = oy = 0;
 	}
 	setOffset(Vector(ox, oy));
+
+	// translate
+	float x = val["position"]["x"].asDouble();
+	float y = val["position"]["y"].asDouble();
+	if (x == -99 && y == 0.25f) {
+		int zz = 0;
+	}
+	// rotate
+	float angle = val["angle"].asDouble();
+	setTransform(Vector(x, y), angle);
 }
 
 void ISprite::store(Json::Value& val) const
