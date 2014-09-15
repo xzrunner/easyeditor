@@ -11,15 +11,16 @@ namespace d2d
 	public:
 		Camera(float scale = 1.0f);
 
-		const Vector& getCenter() const;
-		void setCenter(const Vector& center);
+		void Reset();
 
-		float getScale() const;
-		void setScale(float scale);
-		void setScale(float scale, int x, int y, int width, int height);
+		void Translate(const Vector& offset);
+		void Scale(float scale, int x, int y, int width, int height);
 
 		Vector transPosScreenToProject(int x, int y, int width, int height) const;
 		Vector transPosProjectToScreen(const Vector& proj, int width, int height) const;
+
+	private:
+		void UpdateModelView() const;
 
 	private:
 		Vector m_center;

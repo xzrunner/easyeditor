@@ -12,41 +12,26 @@ Camera::Camera(float scale/* = 1.0f*/)
 	m_scale = scale;
 }
 
-const Vector& Camera::getCenter() const
+void Camera::Reset()
 {
-	return m_center;
+	m_center.set(0, 0);
+	m_scale = 1;
+	UpdateModelView();
 }
 
-void Camera::setCenter(const Vector& center)
+void Camera::Translate(const Vector& offset)
 {
-	m_center = center;
-
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetModelView(-m_center, 1/m_scale);
+	m_center += offset * m_scale;
+	UpdateModelView();
 }
 
-float Camera::getScale() const
+void Camera::Scale(float scale, int x, int y, int width, int height)
 {
-	return m_scale;
-}
-
-void Camera::setScale(float scale)
-{
-	m_scale = scale;
-
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetModelView(-m_center, 1/m_scale);
-}
-
-void Camera::setScale(float scale, int x, int y, int width, int height)
-{
-	m_center.x = (x - (width >> 1)) * m_scale + m_center.x - (x - (width >> 1)) * scale;
-	m_center.y = (y - (height >> 1)) * m_scale + m_center.y - (y - (height >> 1)) * scale;
-	m_scale = scale;
-
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetModelView(-m_center, 1/m_scale);
-	shader->SetProjection(width, height);
+	float new_scale = m_scale * scale;
+	m_center.x = (x - (width >> 1)) * m_scale + m_center.x - (x - (width >> 1)) * new_scale;
+	m_center.y = (y - (height >> 1)) * m_scale + m_center.y - (y - (height >> 1)) * new_scale;
+	m_scale = new_scale;
+	UpdateModelView();
 }
 
 Vector Camera::transPosScreenToProject(int x, int y, int width, int height) const
@@ -66,6 +51,12 @@ Vector Camera::transPosProjectToScreen(const Vector& proj, int width, int height
 	scr.x = xView;
 	scr.y = height - yView;
 	return scr;
+}
+
+void Camera::UpdateModelView() const
+{
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetModelView(-m_center, 1/m_scale);
 }
 
 } // d2d

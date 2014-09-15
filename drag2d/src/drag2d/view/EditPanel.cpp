@@ -131,11 +131,10 @@ void EditPanel::onKeyUp(wxKeyEvent& event)
 
 void EditPanel::onMouseWheelRotation(int x, int y, int direction)
 {
-	const float oldScale = m_camera->getScale();
-	const float newScale = direction > 0 ? oldScale / 1.1f : oldScale * 1.1f;
+	const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
 	const float cx = static_cast<float>(x),
 		cy = static_cast<float>(GetSize().GetHeight() - y);
-	m_camera->setScale(newScale, cx, cy, GetSize().GetWidth(), GetSize().GetHeight());
+	m_camera->Scale(scale, cx, cy, GetSize().GetWidth(), GetSize().GetHeight());
 	Refresh();
 }
 
@@ -315,7 +314,6 @@ void EditPanel::onSize(wxSizeEvent& event)
 	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
 	}
-	m_camera->setCenter(Vector(0.0f, 0.0f));
 	Refresh();	// no refresh when change window size
 }
 
