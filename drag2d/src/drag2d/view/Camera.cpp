@@ -22,7 +22,7 @@ void Camera::setCenter(const Vector& center)
 	m_center = center;
 
 	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetModelView(-center, 1);
+	shader->SetModelView(-m_center, 1/m_scale);
 }
 
 float Camera::getScale() const
@@ -35,7 +35,7 @@ void Camera::setScale(float scale)
 	m_scale = scale;
 
 	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetModelView(Vector(0, 0), 1/m_scale);
+	shader->SetModelView(-m_center, 1/m_scale);
 }
 
 void Camera::setScale(float scale, int x, int y, int width, int height)
