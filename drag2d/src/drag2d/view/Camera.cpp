@@ -22,7 +22,7 @@ void Camera::setCenter(const Vector& center)
 	m_center = center;
 
 	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetTransform(m_center);
+	shader->SetModelView(-center, 1);
 }
 
 float Camera::getScale() const
@@ -35,7 +35,7 @@ void Camera::setScale(float scale)
 	m_scale = scale;
 
 	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetScale(1/m_scale);
+	shader->SetModelView(Vector(0, 0), 1/m_scale);
 }
 
 void Camera::setScale(float scale, int x, int y, int width, int height)
@@ -45,8 +45,8 @@ void Camera::setScale(float scale, int x, int y, int width, int height)
 	m_scale = scale;
 
 	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetTransform(m_center);
-	shader->SetScale(1/m_scale);
+	shader->SetModelView(-m_center, 1/m_scale);
+	shader->SetProjection(width, height);
 }
 
 Vector Camera::transPosScreenToProject(int x, int y, int width, int height) const

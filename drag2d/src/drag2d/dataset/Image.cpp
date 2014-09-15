@@ -181,9 +181,6 @@ void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
  	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
  	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
  	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
- 	for (int i = 0; i < 4; ++i) {
- 		scr.TransPosForRender(vertices[i]);
- 	}
 
 	int texid;
 	d2d::Vector texcoords[4];

@@ -43,9 +43,8 @@ public:
 		m_open_buffer_data = open;
 	}
 
-	void SetTransform(const Vector& pos);
-	void SetScale(float scale);
-//	void SetOrtho();
+	void SetModelView(const Vector& offset, float scale);
+	void SetProjection(int width, int height);
 
 	void Flush();
 

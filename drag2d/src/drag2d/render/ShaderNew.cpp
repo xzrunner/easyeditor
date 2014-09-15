@@ -187,21 +187,16 @@ void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int te
 	Draw(vb, texid);
 }
 
-void ShaderNew::SetTransform(const Vector& pos)
-{
-	m_mat_modelview.setTranslation(pos.x, pos.y);
-}
-
-void ShaderNew::SetScale(float scale)
+void ShaderNew::SetModelView(const Vector& offset, float scale)
 {
 	m_mat_modelview.setScale(scale, scale);
+	m_mat_modelview.translate(offset.x, offset.y);
 }
 
-//void ShaderNew::SetOrtho()
-//{
-//// 	m_mat_projection.orthographic(0, 800, 600, 0, -1, 1);
-//	m_mat_projection.orthographic(0, 2, 0, 2, -1, 1);
-//}
+void ShaderNew::SetProjection(int width, int height)
+{
+	m_mat_projection.orthographic(0, width, 0, height, 1, -1);
+}
 
 void ShaderNew::Flush()
 {
@@ -241,14 +236,14 @@ void ShaderNew::load()
 		"varying vec4 v_fragmentColor;  \n"
 		"varying vec4 v_fragmentAddi; \n"
 		"\n"
-//		"uniform mat4 u_projection; \n"
+		"uniform mat4 u_projection; \n"
 		"uniform mat4 u_modelview; \n"
 		"\n"
 		"void main()  \n"
 		"{  \n"
 //		"  gl_Position = position; "
-//		"  gl_Position = u_projection * u_modelview * position; "
-		"  gl_Position = u_modelview * position; "
+		"  gl_Position = u_projection * u_modelview * position; "
+//		"  gl_Position = u_modelview * position; "
  		"  v_fragmentColor = color / 255.0; \n"
  		"  v_fragmentAddi = additive / 255.0; \n"
 		"  v_texcoord = texcoord;  \n"
