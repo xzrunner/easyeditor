@@ -93,19 +93,19 @@ void ShaderNew::sprite()
 
 void ShaderNew::shape()
 {
-	if (m_prog_curr != m_prog_shape) {
-		if (m_sprite_count != 0) {
-//			wxLogDebug(_T("Shader Commit change shader to shape"));
-		}
-
-		Commit();
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		glUseProgram(m_prog_shape);
-		m_prog_curr = m_prog_shape;
-	}
+ 	if (m_prog_curr != m_prog_shape) {
+ 		if (m_sprite_count != 0) {
+ //			wxLogDebug(_T("Shader Commit change shader to shape"));
+ 		}
+ 
+ 		Commit();
+ 
+ 		glEnable(GL_BLEND);
+ 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ 
+ 		glUseProgram(m_prog_shape);
+ 		m_prog_curr = m_prog_shape;
+ 	}
 }
 
 void ShaderNew::null()
@@ -176,6 +176,10 @@ void ShaderNew::Draw(const float vb[16], int texid)
 
 void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int texid)
 {
+	if (!m_open_buffer_data) {
+		return;
+	}
+
 	float vb[16];
 	for (int j = 0; j < 4; ++j)
 	{

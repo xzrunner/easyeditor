@@ -8,6 +8,8 @@
 #include "view/Screen.h"
 #include "render/ShaderNew.h"
 
+#define LABEL_USE_CACHE
+
 namespace d2d
 {
 
@@ -18,31 +20,27 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 		return;
 	}
 
-	//////////////////////////////////////////////////////////////////////////
-// 	// use cache
-// 	const LabelLayout::Layout* layout = LabelLayout::Instance()->Query(text);
-// 	if (!layout) 
-// 	{
-// 		LabelLayout::Layout* new_layout = new LabelLayout::Layout;
-// 		std::vector<int> unicodes;
-// 		std::vector<wxString> utf8s;
-// 		TransToUnicodes(text, unicodes, utf8s);
-// 
-// 		std::vector<Line> lines;
-// 		int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
-// 
-// 		if (!lines.empty()) {
-// 			DrawLines(screen, pos, style, lines, tot_line_height, *new_layout);
-// 		}
-// 
-// 		layout = new_layout;
-// 		LabelLayout::Instance()->Insert(text, layout);
-// 	}
-// 	Draw(layout);
+#ifdef LABEL_USE_CACHE
+	const LabelLayout::Layout* layout = LabelLayout::Instance()->Query(text);
+	if (!layout) 
+	{
+		LabelLayout::Layout* new_layout = new LabelLayout::Layout;
+		std::vector<int> unicodes;
+		std::vector<wxString> utf8s;
+		TransToUnicodes(text, unicodes, utf8s);
 
-	//////////////////////////////////////////////////////////////////////////
-	// not use cache
+		std::vector<Line> lines;
+		int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 
+		if (!lines.empty()) {
+			DrawLines(screen, pos, style, lines, tot_line_height, *new_layout);
+		}
+
+		layout = new_layout;
+		LabelLayout::Instance()->Insert(text, layout);
+	}
+	Draw(layout);
+#else
 	LabelLayout::Layout layout;
 	std::vector<int> unicodes;
 	std::vector<wxString> utf8s;
@@ -56,6 +54,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 	}
 
 	Draw(&layout);
+#endif
 }
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes, std::vector<wxString>& utf8s)
@@ -175,9 +174,9 @@ void LabelNew::DrawLines(const Screen& screen,
 			glyph.vertices[1].set(xmax, ymin);
 			glyph.vertices[2].set(xmax, ymax);
 			glyph.vertices[3].set(xmin, ymax);
-			for (int i = 0; i < 4; ++i) {
-				screen.TransPosForRender(glyph.vertices[i]);
-			}
+// 			for (int i = 0; i < 4; ++i) {
+// 				screen.TransPosForRender(glyph.vertices[i]);
+// 			}
 
 			txmin = (r->GetMinX()+padding+0.5f) / tex_width;
 			txmax = (r->GetMaxX()-padding-0.5f) / tex_width;
@@ -212,6 +211,13 @@ void LabelNew::DrawLines(const Screen& screen,
 void LabelNew::Draw(const LabelLayout::Layout* layout)
 {
 	ShaderNew* shader = ShaderNew::Instance();
+
+#ifdef LABEL_USE_CACHE
+	if (shader->IsOpenBufferData()) {
+		return;
+	}
+#endif
+
 	shader->sprite();
 
 	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();

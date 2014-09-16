@@ -42,6 +42,7 @@ public:
 	void SetBufferData(bool open) {
 		m_open_buffer_data = open;
 	}
+	bool IsOpenBufferData() const { return m_open_buffer_data; }
 
 	void SetModelView(const Vector& offset, float scale);
 	void SetProjection(int width, int height);
