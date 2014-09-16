@@ -1,4 +1,5 @@
 #include "PrimitiveDraw.h"
+#include "PrimitiveDrawNew.h"
 #include "GL10.h"
 
 #include "dataset/ISymbol.h"
@@ -52,9 +53,9 @@ void PrimitiveDraw::rect(const Screen& scr, const Vector& p0, const Vector& p1, 
 	vertices[1].set(p0.x, p1.y);
 	vertices[2].set(p1.x, p1.y);
 	vertices[3].set(p1.x, p0.y);
- 	for (int i = 0; i < 4; ++i) {
- 		scr.TransPosForRender(vertices[i]);
- 	}
+//  	for (int i = 0; i < 4; ++i) {
+//  		scr.TransPosForRender(vertices[i]);
+//  	}
 
 	shader->SetShapeColor(style.color);
 	lineStypeBegin(style.lineStyle);
@@ -250,26 +251,40 @@ void PrimitiveDraw::drawPoints(const Screen& scr, const std::vector<Vector>& ver
 	GL10::PointSize(1.0f);
 }
 
+// void PrimitiveDraw::drawLine(const Screen& scr, const Vector& p0, const Vector& p1, 
+// 							 const Colorf& color, float size/* = 2*/)
+// {
+// 	ShaderNew* shader = ShaderNew::Instance();
+// 	shader->shape();
+// 
+// 	GL10::LineWidth(size);
+// 
+// 	shader->SetShapeColor(color);
+// 
+// 	Vector _p0(p0), _p1(p1);
+// // 	scr.TransPosForRender(_p0);
+// // 	scr.TransPosForRender(_p1);
+// 
+// 	GL10::Begin(GL10::GL_LINES);
+// 		GL10::Vertex2f(_p0.x, _p0.y); 
+// 		GL10::Vertex2f(_p1.x, _p1.y);
+// 	GL10::End();
+// 
+// 	GL10::LineWidth(1.0f);
+// }
+
 void PrimitiveDraw::drawLine(const Screen& scr, const Vector& p0, const Vector& p1, 
 							 const Colorf& color, float size/* = 2*/)
 {
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->shape();
 
-	GL10::LineWidth(size);
-
-	shader->SetShapeColor(color);
-
-	Vector _p0(p0), _p1(p1);
-	scr.TransPosForRender(_p0);
-	scr.TransPosForRender(_p1);
-
-	GL10::Begin(GL10::GL_LINES);
-		GL10::Vertex2f(_p0.x, _p0.y); 
-		GL10::Vertex2f(_p1.x, _p1.y);
-	GL10::End();
-
-	GL10::LineWidth(1.0f);
+	float vertices[4];
+	vertices[0] = p0.x;
+	vertices[1] = p0.y;
+	vertices[2] = p1.x;
+	vertices[3] = p1.y;
+	PrimitiveDrawNew::Polyline(vertices, 2);
 }
 
 void PrimitiveDraw::drawDotLine(const Screen& scr, const Vector& p0, const Vector& p1, 
@@ -690,6 +705,8 @@ void PrimitiveDraw::cross(const Screen& scr, const Vector& center, float edge, c
 
 void PrimitiveDraw::cross(const Screen& scr, const Vector& center, float xedge, float yedge, const Colorf& color, float size)
 {
+	xedge /= 1000;
+
 	Vector s = center, e = center;
 	s.x -= xedge;
 	e.x += xedge;

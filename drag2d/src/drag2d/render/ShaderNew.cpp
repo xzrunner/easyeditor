@@ -34,8 +34,6 @@ ShaderNew* ShaderNew::Instance()
 ShaderNew::ShaderNew()
 {
 	m_prog_curr = 0;
-	m_prog_sprite = 0;
-	m_prog_shape = 0;
 
 	VertexBuffer = IndexBuffer = 0;
 	m_sprite_count = 0;
@@ -66,14 +64,14 @@ void ShaderNew::SetSpriteColor(const Colorf& multi, const Colorf& add)
 
 void ShaderNew::SetShapeColor(const Colorf& col)
 {
-	if (m_prog_curr == m_prog_shape) {
+	if (m_prog_curr == m_rs_shape.prog) {
 		glUniform4fv(m_col_loc, 1, (GLfloat*)(&col.r));
 	}
 }
 
 void ShaderNew::sprite()
 {
-	if (m_prog_curr != m_prog_sprite) {
+	if (m_prog_curr != m_rs_sprite.prog) {
 		if (m_sprite_count != 0) {
 			wxLogDebug(_T("Shader Commit change shader to sprite"));
 		}
@@ -86,14 +84,14 @@ void ShaderNew::sprite()
 		//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glUseProgram(m_prog_sprite);
-		m_prog_curr = m_prog_sprite;
+		glUseProgram(m_rs_sprite.prog);
+		m_prog_curr = m_rs_sprite.prog;
 	}
 }
 
 void ShaderNew::shape()
 {
- 	if (m_prog_curr != m_prog_shape) {
+ 	if (m_prog_curr != m_rs_shape.prog) {
  		if (m_sprite_count != 0) {
  //			wxLogDebug(_T("Shader Commit change shader to shape"));
  		}
@@ -103,8 +101,8 @@ void ShaderNew::shape()
  		glEnable(GL_BLEND);
  		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
  
- 		glUseProgram(m_prog_shape);
- 		m_prog_curr = m_prog_shape;
+ 		glUseProgram(m_rs_shape.prog);
+ 		m_prog_curr = m_rs_shape.prog;
  	}
 }
 
@@ -296,9 +294,16 @@ void ShaderNew::load()
 		"\n"
 		"varying vec4 v_fragmentColor;  \n"
 		"\n"
+		"\n"
+		"uniform mat4 u_projection; \n"
+		"uniform mat4 u_modelview; \n"
+		"\n"
 		"void main()  \n"
 		"{  \n"
-		"  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; "
+//		"  gl_Position = u_projection * u_modelview * gl_Vertex; "
+//		"  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; "
+//		"  gl_Position = gl_Vertex + vec2(0, 0); "
+		"  gl_Position = gl_Vertex; "
 		"  v_fragmentColor = color; \n"
 		"}  \n"
 		;
@@ -319,17 +324,19 @@ void ShaderNew::load()
 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	m_prog_sprite = InitShader(sprite_fs, sprite_vs);
-	m_prog_shape = InitShader(shape_fs, shape_vs);
+	m_rs_sprite.prog = InitShader(sprite_fs, sprite_vs);
+	m_rs_shape.prog = InitShader(shape_fs, shape_vs);
 	m_prog_font = InitShader(font_fs, sprite_vs);
 
- 	m_projection = glGetUniformLocation(m_prog_sprite, "u_projection");
- 	m_model_view = glGetUniformLocation(m_prog_sprite, "u_modelview");
+  	m_rs_sprite.projection = glGetUniformLocation(m_rs_sprite.prog, "u_projection");
+  	m_rs_sprite.model_view = glGetUniformLocation(m_rs_sprite.prog, "u_modelview");
+	m_rs_shape.projection = glGetUniformLocation(m_rs_shape.prog, "u_projection");
+	m_rs_shape.model_view = glGetUniformLocation(m_rs_shape.prog, "u_modelview");
 
 	InitBuffers();
 
 	// bind attr
-	m_col_loc = glGetUniformLocation(m_prog_shape, "color");
+	m_col_loc = glGetUniformLocation(m_rs_shape.prog, "color");
 
 	m_vb = new float[SPRITE_FLOAT_NUM * MAX_COMMBINE];
 }
@@ -450,10 +457,13 @@ void ShaderNew::Commit()
 
 	//////////////////////////////////////////////////////////////////////////
 	// Set the model-view transform.
-	glUniformMatrix4fv(m_model_view, 1, 0, m_mat_modelview.getElements());
+	glUniformMatrix4fv(m_rs_sprite.model_view, 1, 0, m_mat_modelview.getElements());
+	glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
 
 	// Set the projection transform.
-	glUniformMatrix4fv(m_projection, 1, 0, m_mat_projection.getElements());
+	glUniformMatrix4fv(m_rs_sprite.projection, 1, 0, m_mat_projection.getElements());
+	glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
+
 	//////////////////////////////////////////////////////////////////////////
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);

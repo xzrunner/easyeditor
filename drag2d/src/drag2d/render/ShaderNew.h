@@ -72,10 +72,23 @@ private:
 	static ShaderNew* m_instance;
 
 private:
-	int m_prog_curr;
-	int m_prog_sprite;
-	int m_prog_shape;
-	int m_prog_font;
+	struct RenderState
+	{
+		GLuint prog;
+		GLuint model_view, projection;
+
+		RenderState() {
+			prog = 0;
+			model_view = projection = 0;
+		}
+	};
+
+private:
+	GLuint m_prog_curr;
+	GLuint m_prog_font;
+
+	RenderState m_rs_sprite;
+	RenderState m_rs_shape;
 
 // 		// for sprite
 // 		int m_multi_loc;
@@ -103,8 +116,8 @@ private:
 
 	bool m_open_buffer_data;
 
-	GLuint m_model_view;
-	GLuint m_projection;
+// 	GLuint m_model_view;
+// 	GLuint m_projection;
 
 	Matrix m_mat_modelview, m_mat_projection;
 
