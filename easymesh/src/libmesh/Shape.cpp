@@ -25,8 +25,10 @@ Shape::Shape(const d2d::Image& image)
 {
 	m_texid = image.textureID();
 
-	m_width = image.getRegion().xLength();
-	m_height = image.getRegion().yLength();
+// 	m_width = image.getRegion().xLength();
+// 	m_height = image.getRegion().yLength();
+	m_width = image.originWidth();
+	m_height = image.originHeight();
 
 	m_node_radius = std::min(m_width * 0.1f, 5.0f);
 }
@@ -117,7 +119,7 @@ void Shape::DrawTexture(const d2d::Screen& scr,
 			texcoords[i] = tri->nodes[i]->uv;
 		}
 		vertices[3] = vertices[2];
-		texcoords[3] = vertices[2];
+		texcoords[3] = texcoords[2];
 		shader->Draw(vertices, texcoords, m_texid);
 	}
 }
