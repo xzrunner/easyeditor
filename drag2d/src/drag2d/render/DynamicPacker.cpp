@@ -77,9 +77,6 @@ void DynamicPacker::DebugDraw(const Screen& screen) const
 	vertices[1].set(0, EDGE);
 	vertices[2].set(EDGE, EDGE);
 	vertices[3].set(EDGE, 0);
-	for (int i = 0; i < 4; ++i) {
-		screen.TransPosForRender(vertices[i]);
-	}
 
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(0);

@@ -59,6 +59,7 @@ void DynamicTexAndFont::AddImage(Image* img)
 		ShaderNew* shader = ShaderNew::Instance();
 		shader->SetFBO(m_fbo);
  		shader->sprite();
+		shader->SetProjection(m_width, m_height);
  		glViewport(0, 0, m_width, m_height);
 		InsertImage(img);
 		// set fbo to force flush
@@ -77,6 +78,7 @@ void DynamicTexAndFont::EndImage()
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
+	shader->SetProjection(m_width, m_height);
 
 	glViewport(0, 0, m_width, m_height);
 	std::sort(m_preload_list.begin(), m_preload_list.end(), ImageSizeCmp());
@@ -298,10 +300,11 @@ void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
 	d2d::Rect r = img->getRegion();
 
 	Rect r_vertex, r_texcoords;
-	r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-	r_vertex.xMax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
-	r_vertex.yMin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
-	r_vertex.yMax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
+ 	r_vertex.xMin = n->GetMinX() + m_padding;
+ 	r_vertex.xMax = n->GetMaxX() - m_padding;
+ 	r_vertex.yMin = n->GetMinY() + m_padding;
+ 	r_vertex.yMax = n->GetMaxY() - m_padding;
+	r_vertex.translate(Vector(-m_width*0.5f, -m_height*0.5f));
 
 	int ori_width = img->originWidth(),
 		ori_height = img->originHeight();
