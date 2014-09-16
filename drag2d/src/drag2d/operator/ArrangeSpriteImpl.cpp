@@ -198,7 +198,9 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 	if (m_op_state) 
 	{
 		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
-		m_editPanel->addHistoryOP(history);
+		if (history) {
+			m_editPanel->addHistoryOP(history);
+		}
 
 		delete m_op_state;
 		m_op_state = NULL;
@@ -274,7 +276,9 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 		else if (m_op_state)
 		{
 			AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
-			m_editPanel->addHistoryOP(history);
+			if (history) {
+				m_editPanel->addHistoryOP(history);
+			}
 
 			delete m_op_state;
 			m_op_state = NULL;
