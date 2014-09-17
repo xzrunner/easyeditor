@@ -78,14 +78,17 @@ void ShaderNew::sprite()
 
 		Commit();
 
-		glEnable(GL_BLEND);
-
-		// todo 源混合因子ejoy2d用的GL_ONE
-		//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+ 		glEnable(GL_BLEND);
+ 
+ 		// todo 源混合因子ejoy2d用的GL_ONE
+ 		//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+ 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glUseProgram(m_rs_sprite.prog);
 		m_prog_curr = m_rs_sprite.prog;
+
+ 		glUniformMatrix4fv(m_rs_sprite.model_view, 1, 0, m_mat_modelview.getElements());
+ 		glUniformMatrix4fv(m_rs_sprite.projection, 1, 0, m_mat_projection.getElements());
 	}
 }
 
@@ -103,6 +106,14 @@ void ShaderNew::shape()
  
  		glUseProgram(m_rs_shape.prog);
  		m_prog_curr = m_rs_shape.prog;
+
+// 		glDisable(GL_DEPTH_TEST);
+// 
+// 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+// 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+ 		glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
+ 		glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
  	}
 }
 
@@ -300,10 +311,7 @@ void ShaderNew::load()
 		"\n"
 		"void main()  \n"
 		"{  \n"
-//		"  gl_Position = u_projection * u_modelview * gl_Vertex; "
-//		"  gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex; "
-//		"  gl_Position = gl_Vertex + vec2(0, 0); "
-		"  gl_Position = gl_Vertex; "
+		"  gl_Position = u_projection * u_modelview * gl_Vertex; "
 		"  v_fragmentColor = color; \n"
 		"}  \n"
 		;
@@ -328,8 +336,8 @@ void ShaderNew::load()
 	m_rs_shape.prog = InitShader(shape_fs, shape_vs);
 	m_prog_font = InitShader(font_fs, sprite_vs);
 
-  	m_rs_sprite.projection = glGetUniformLocation(m_rs_sprite.prog, "u_projection");
-  	m_rs_sprite.model_view = glGetUniformLocation(m_rs_sprite.prog, "u_modelview");
+   	m_rs_sprite.projection = glGetUniformLocation(m_rs_sprite.prog, "u_projection");
+   	m_rs_sprite.model_view = glGetUniformLocation(m_rs_sprite.prog, "u_modelview");
 	m_rs_shape.projection = glGetUniformLocation(m_rs_shape.prog, "u_projection");
 	m_rs_shape.model_view = glGetUniformLocation(m_rs_shape.prog, "u_modelview");
 
@@ -454,17 +462,6 @@ void ShaderNew::Commit()
 	if (m_fbo != 0 || (m_fbo != 1 && m_tex != 1)) {
 		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
 	}
-
-	//////////////////////////////////////////////////////////////////////////
-	// Set the model-view transform.
-	glUniformMatrix4fv(m_rs_sprite.model_view, 1, 0, m_mat_modelview.getElements());
-	glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
-
-	// Set the projection transform.
-	glUniformMatrix4fv(m_rs_sprite.projection, 1, 0, m_mat_projection.getElements());
-	glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
-
-	//////////////////////////////////////////////////////////////////////////
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
 
