@@ -89,6 +89,21 @@ void ShaderNew::sprite()
 
  		glUniformMatrix4fv(m_rs_sprite.model_view, 1, 0, m_mat_modelview.getElements());
  		glUniformMatrix4fv(m_rs_sprite.projection, 1, 0, m_mat_projection.getElements());
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
+
+		glEnableVertexAttribArray(ATTRIB_VERTEX);
+		glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(0));
+
+		glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
+		glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(8));
+
+		glEnableVertexAttribArray(ATTRIB_COLOR);
+		glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(16));
+
+		glEnableVertexAttribArray(ATTRIB_ADDITIVE);
+		glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(20));  
 	}
 }
 
@@ -108,12 +123,16 @@ void ShaderNew::shape()
  		m_prog_curr = m_rs_shape.prog;
 
 // 		glDisable(GL_DEPTH_TEST);
-// 
-// 		glBindBuffer(GL_ARRAY_BUFFER, 0);
-// 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
  		glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
  		glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glDisableVertexAttribArray(ATTRIB_VERTEX);
+		glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
+		glDisableVertexAttribArray(ATTRIB_COLOR);
+		glDisableVertexAttribArray(ATTRIB_ADDITIVE);
  	}
 }
 
@@ -463,39 +482,17 @@ void ShaderNew::Commit()
 		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
 	}
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
 	static int last_count = 0;
 	if (m_open_buffer_data) {
 		last_count = m_sprite_count;
  		glBufferData(GL_ARRAY_BUFFER, m_sprite_count * SPRITE_FLOAT_NUM * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
 	}
 
-	glEnableVertexAttribArray(ATTRIB_VERTEX);
-	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(0));
-
-	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(8));
-
-	glEnableVertexAttribArray(ATTRIB_COLOR);
-	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(16));
-
-	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
-	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(20));  
-
  	if (!m_open_buffer_data) {
  		glDrawElements(GL_TRIANGLES, 6 * last_count, GL_UNSIGNED_SHORT, 0);
  	} else {
  		glDrawElements(GL_TRIANGLES, 6 * m_sprite_count, GL_UNSIGNED_SHORT, 0);
  	}
-
- 	glBindBuffer(GL_ARRAY_BUFFER, 0);
- 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glDisableVertexAttribArray(ATTRIB_VERTEX);
-	glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glDisableVertexAttribArray(ATTRIB_COLOR);
-	glDisableVertexAttribArray(ATTRIB_ADDITIVE);
 
 	m_sprite_count = 0;
 }
