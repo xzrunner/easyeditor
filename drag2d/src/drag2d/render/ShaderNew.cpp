@@ -1,4 +1,5 @@
 #include "ShaderNew.h"
+#include "ShaderImpl.h"
 
 #include "common/Vector.h"
 

@@ -12,6 +12,8 @@ namespace d2d
 
 class Vector;
 
+class ShaderImpl;
+
 class ShaderNew
 {
 public:
@@ -74,57 +76,7 @@ private:
 	static ShaderNew* m_instance;
 
 private:
-	struct RenderState
-	{
-		GLuint prog;
-		GLuint model_view, projection;
-
-		bool is_mat_dirty;
-
-		RenderState() {
-			prog = 0;
-			model_view = projection = 0;
-			is_mat_dirty = false;
-		}
-	};
-
-private:
-	GLuint m_prog_curr;
-	GLuint m_prog_font;
-
-	RenderState m_rs_sprite;
-	RenderState m_rs_shape;
-
-// 		// for sprite
-// 		int m_multi_loc;
-// 		int m_add_loc;
-// 		// for shape
-// 		int m_col_loc;
-
-	//////////////////////////////////////////////////////////////////////////
-	GLuint VertexBuffer;
-	GLuint IndexBuffer;
-
-	int m_sprite_count;
-
-	float* m_vb;
-
-	GLuint m_tex;
-	GLuint m_fbo;
-
-	uint32_t m_color, m_additive;
-
-	// for shape
-	int m_col_loc;
-
-	int m_version;
-
-	bool m_open_buffer_data;
-
-// 	GLuint m_model_view;
-// 	GLuint m_projection;
-
-	Matrix m_mat_modelview, m_mat_projection;
+	ShaderImpl* m_impl;
 
 }; // ShaderNew
 
