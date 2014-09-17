@@ -705,8 +705,6 @@ void PrimitiveDraw::cross(const Screen& scr, const Vector& center, float edge, c
 
 void PrimitiveDraw::cross(const Screen& scr, const Vector& center, float xedge, float yedge, const Colorf& color, float size)
 {
-	xedge /= 1000;
-
 	Vector s = center, e = center;
 	s.x -= xedge;
 	e.x += xedge;

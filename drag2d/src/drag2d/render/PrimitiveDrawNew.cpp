@@ -7,7 +7,7 @@ namespace d2d
 
 void PrimitiveDrawNew::Polyline(const float *coords, size_t count)
 {
-	glLineWidth(4);
+	//glLineWidth(4);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(2, GL_FLOAT, 0, (const GLvoid*)coords);
