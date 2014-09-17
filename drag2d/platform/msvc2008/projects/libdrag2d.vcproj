@@ -1281,6 +1281,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderImpl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\render\ShaderNew.cpp"
 					>
 				</File>

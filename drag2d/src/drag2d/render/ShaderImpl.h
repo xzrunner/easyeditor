@@ -1,6 +1,12 @@
 #ifndef _DRAG2D_SHADER_IMPL_H_
 #define _DRAG2D_SHADER_IMPL_H_
 
+#include "common/Color.h"
+#include "common/tools.h"
+#include "common/Matrix.h"
+
+typedef unsigned int GLuint;
+
 namespace d2d
 {
 
@@ -26,29 +32,33 @@ private:
 		bool is_mat_dirty;
 	}; // RenderState
 
-// 	class SpriteRS : public RenderState
-// 	{
-// 	public:
-// 
-// 	public:
-// 
-// 	}; // SpriteRS
-// 
-// 	class ShapeRS : public RenderState
-// 	{
-// 	public:
-// 
-// 	public:
-// 
-// 	}; // ShapeRS
+ 	class SpriteRS : public RenderState
+ 	{
+ 	public:
+ 
+ 	public:
+ 
+ 	}; // SpriteRS
+ 
+ 	class ShapeRS : public RenderState
+ 	{
+ 	public:
+ 
+ 	public:
+ 
+ 	}; // ShapeRS
+
+private:
+	static int MAX_COMMBINE;
+	static const int SPRITE_FLOAT_NUM = 24;	// 
 
 private:
 	GLuint m_prog_curr;
 
 	GLuint m_prog_font;
 
-	RenderState m_rs_sprite;
-	RenderState m_rs_shape;
+	SpriteRS m_rs_sprite;
+	ShapeRS m_rs_shape;
 
 	GLuint VertexBuffer;
 	GLuint IndexBuffer;

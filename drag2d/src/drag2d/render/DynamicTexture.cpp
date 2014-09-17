@@ -4,6 +4,7 @@
 #include "render/ShaderNew.h"
 
 #include <opengl/opengl.h>
+#include <algorithm>
 
 namespace d2d
 {
