@@ -87,9 +87,6 @@ void ShaderNew::sprite()
 		glUseProgram(m_rs_sprite.prog);
 		m_prog_curr = m_rs_sprite.prog;
 
- 		glUniformMatrix4fv(m_rs_sprite.model_view, 1, 0, m_mat_modelview.getElements());
- 		glUniformMatrix4fv(m_rs_sprite.projection, 1, 0, m_mat_projection.getElements());
-
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
 		glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
 
@@ -124,15 +121,15 @@ void ShaderNew::shape()
 
 // 		glDisable(GL_DEPTH_TEST);
 
- 		glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
- 		glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
-
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glDisableVertexAttribArray(ATTRIB_VERTEX);
 		glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
 		glDisableVertexAttribArray(ATTRIB_COLOR);
 		glDisableVertexAttribArray(ATTRIB_ADDITIVE);
+
+		//glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
+		//glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
  	}
 }
 
@@ -223,6 +220,7 @@ void ShaderNew::SetModelView(const Vector& offset, float scale)
 {
 	m_mat_modelview.setScale(scale, scale);
 	m_mat_modelview.translate(offset.x, offset.y);
+	m_rs_sprite.is_mat_dirty = m_rs_shape.is_mat_dirty = true;
 }
 
 void ShaderNew::SetProjection(int width, int height)
@@ -230,6 +228,16 @@ void ShaderNew::SetProjection(int width, int height)
  	float hw = width * 0.5f;
  	float hh = height * 0.5f;
  	m_mat_projection.orthographic(-hw, hw, -hh, hh, 1, -1);
+	m_rs_sprite.is_mat_dirty = m_rs_shape.is_mat_dirty = true;
+}
+
+void ShaderNew::UpdateShapeMatrix()
+{
+	if (m_rs_shape.is_mat_dirty) {
+ 		glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
+ 		glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
+		m_rs_shape.is_mat_dirty = false;
+	}
 }
 
 void ShaderNew::Flush()
@@ -480,6 +488,15 @@ void ShaderNew::Commit()
 
 	if (m_fbo != 0 || (m_fbo != 1 && m_tex != 1)) {
 		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
+	}
+
+	glUniformMatrix4fv(m_rs_shape.model_view, 1, 0, m_mat_modelview.getElements());
+	glUniformMatrix4fv(m_rs_shape.projection, 1, 0, m_mat_projection.getElements());
+
+	if (m_rs_sprite.is_mat_dirty) {
+ 		glUniformMatrix4fv(m_rs_sprite.model_view, 1, 0, m_mat_modelview.getElements());
+ 		glUniformMatrix4fv(m_rs_sprite.projection, 1, 0, m_mat_projection.getElements());
+		m_rs_sprite.is_mat_dirty = false;
 	}
 
 	static int last_count = 0;

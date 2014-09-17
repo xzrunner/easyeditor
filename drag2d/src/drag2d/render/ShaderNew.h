@@ -47,6 +47,8 @@ public:
 	void SetModelView(const Vector& offset, float scale);
 	void SetProjection(int width, int height);
 
+	void UpdateShapeMatrix();
+
 	void Flush();
 
 private:
@@ -77,9 +79,12 @@ private:
 		GLuint prog;
 		GLuint model_view, projection;
 
+		bool is_mat_dirty;
+
 		RenderState() {
 			prog = 0;
 			model_view = projection = 0;
+			is_mat_dirty = false;
 		}
 	};
 
