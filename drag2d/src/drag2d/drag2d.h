@@ -144,6 +144,7 @@
 #include "common/FpsStat.h"
 #include "common/Config.h"
 #include "common/SettingData.h"
+#include "common/const.h"
 
 #include "render/b2Render.h"
 #include "render/PrimitiveDraw.h"
