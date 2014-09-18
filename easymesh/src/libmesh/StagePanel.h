@@ -8,7 +8,7 @@ namespace emesh
 
 class Sprite;
 class Shape;
-class StagePanel : public d2d::EditPanel
+class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
@@ -22,6 +22,15 @@ public:
 	// d2d::EditPanel interface
 	//
 	virtual void clear();
+
+	//
+	// d2d::MultiShapesImpl interface
+	//
+	virtual void traverseShapes(d2d::IVisitor& visitor, 
+		d2d::TraverseType type = d2d::e_allExisting) const;
+	virtual void removeShape(d2d::IShape* shape);
+	virtual void insertShape(d2d::IShape* shape);
+	virtual void clearShapes();
 
 	Shape* getShape();
 	Sprite* getSprite() { return m_sprite; }
@@ -59,6 +68,8 @@ private:
 	Sprite* m_sprite;
 
 	d2d::ISprite* m_background;
+
+	std::vector<d2d::IShape*> m_shapes;
 
 }; // StagePanel
 

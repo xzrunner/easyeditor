@@ -19,6 +19,7 @@
 #include "libshape/EditRectOP.h"
 #include "libshape/EditCircleOP.h"
 #include "libshape/EditBezierOP.h"
+#include "libshape/DrawPenLineOP.h"
 
 #include "libshape/NodeCaptureCMPT.h"
 #include "libshape/DrawLineCMPT.h"

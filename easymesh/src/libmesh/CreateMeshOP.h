@@ -2,12 +2,13 @@
 #define _EASYMESH_CREATE_MESH_OP_H_
 
 #include <drag2d.h>
+#include <easyshape.h>
 
 namespace emesh
 {
 
 class StagePanel;
-class CreateMeshOP : public d2d::ZoomViewOP
+class CreateMeshOP : public libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>
 {
 public:
 	CreateMeshOP(StagePanel* stage);

@@ -8,7 +8,7 @@ namespace emesh
 {
 
 CreateMeshOP::CreateMeshOP(StagePanel* stage)
-	: d2d::ZoomViewOP(stage, true, false)
+	: libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage, NULL, NULL)
 	, m_stage(stage)
 	, m_selected(NULL)
 {
@@ -17,7 +17,7 @@ CreateMeshOP::CreateMeshOP(StagePanel* stage)
 
 bool CreateMeshOP::onMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>::onMouseLeftDown(x, y))
 		return true;
 
 	if (Shape* shape = m_stage->getShape())
@@ -31,7 +31,7 @@ bool CreateMeshOP::onMouseLeftDown(int x, int y)
 
 bool CreateMeshOP::onMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>::onMouseLeftUp(x, y))
 		return true;
 
 	Shape* shape = m_stage->getShape();
@@ -49,7 +49,7 @@ bool CreateMeshOP::onMouseLeftUp(int x, int y)
 
 bool CreateMeshOP::onMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightDown(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>::onMouseRightDown(x, y))
 		return true;
 
 	if (Shape* shape = m_stage->getShape())
@@ -66,7 +66,7 @@ bool CreateMeshOP::onMouseRightDown(int x, int y)
 
 bool CreateMeshOP::onMouseRightUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightUp(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>::onMouseRightUp(x, y))
 		return true;
 
 	m_last_right.setInvalid();
@@ -76,7 +76,7 @@ bool CreateMeshOP::onMouseRightUp(int x, int y)
 
 bool CreateMeshOP::onMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>::onMouseDrag(x, y))
 		return true;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
@@ -104,7 +104,7 @@ bool CreateMeshOP::onMouseDrag(int x, int y)
 
 bool CreateMeshOP::onDraw(const d2d::Screen& scr) const
 {
-	if (d2d::ZoomViewOP::onDraw(scr))
+	if (libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>::onDraw(scr))
 		return true;
 
 	if (const d2d::Image* image = m_stage->getSprite()->getImage())

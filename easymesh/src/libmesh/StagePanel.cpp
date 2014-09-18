@@ -7,6 +7,7 @@ namespace emesh
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: d2d::EditPanel(parent, frame)
+	, d2d::MultiShapesImpl(parent)
 	, m_background(NULL)
 {
 	m_sprite = new Sprite();
@@ -17,6 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
+	, d2d::MultiShapesImpl(parent)
 	, m_background(NULL)
 {
 	m_sprite = new Sprite();
@@ -27,6 +29,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library, Sprite* sprite)
 	: d2d::EditPanel(parent, frame)
+	, d2d::MultiShapesImpl(parent)
 	, m_background(NULL)
 {
 	sprite->retain();
@@ -48,6 +51,42 @@ void StagePanel::clear()
 {
 	m_sprite->release();
 	m_sprite = new Sprite;
+}
+
+void StagePanel::traverseShapes(d2d::IVisitor& visitor, 
+								d2d::TraverseType type/* = d2d::e_allExisting*/) const
+{
+	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
+	{
+		bool hasNext;
+		visitor.visit(m_shapes[i], hasNext);
+		if (!hasNext) break;
+	}
+}
+
+void StagePanel::removeShape(d2d::IShape* shape)
+{
+	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
+	{
+		if (m_shapes[i] == shape)
+		{
+			m_shapes.erase(m_shapes.begin() + i);
+			shape->release();
+			break;
+		}
+	}
+}
+
+void StagePanel::insertShape(d2d::IShape* shape)
+{
+	m_shapes.push_back(shape);
+}
+
+void StagePanel::clearShapes()
+{
+	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
+		m_shapes[i]->release();
+	m_shapes.clear();
 }
 
 Shape* StagePanel::getShape()
