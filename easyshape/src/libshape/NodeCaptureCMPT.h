@@ -1,20 +1,25 @@
 #ifndef _LIBSHAPE_NODE_CAPTURE_CMPT_H_
 #define _LIBSHAPE_NODE_CAPTURE_CMPT_H_
 
+#include "INodeCapture.h"
+
 #include <drag2d.h>
 
 namespace libshape
 {
 
 template<class T>
-class NodeCaptureCMPT : public d2d::AbstractEditCMPT
+class NodeCaptureCMPT : public d2d::AbstractEditCMPT, public INodeCapture
 {
 public:
 	NodeCaptureCMPT(wxWindow* parent, const wxString& name,
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 		d2d::PropertySettingPanel* propertyPanel);
 
-	int getNodeCaptureDistance() const;
+	//
+	// interface INodeCapture
+	//
+	virtual float GetScope() const;
 
 protected:
 	virtual wxSizer* initLayout();
@@ -33,7 +38,7 @@ inline NodeCaptureCMPT<T>::NodeCaptureCMPT(wxWindow* parent, const wxString& nam
 }
 
 template<class T>
-int NodeCaptureCMPT<T>::getNodeCaptureDistance() const
+float NodeCaptureCMPT<T>::GetScope() const
 {
 	return m_tolSlider->GetValue();
 }

@@ -4,16 +4,17 @@
 #include <drag2d.h>
 
 #include "NodeCapture.h"
-#include "NodeCaptureCMPT.h"
 
 namespace libshape
 {
+
+class INodeCapture;
 
 class EditBezierOP : public d2d::ZoomViewOP
 {
 public:
 	EditBezierOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel, NodeCaptureCMPT<EditBezierOP>* cmpt);
+		d2d::PropertySettingPanel* propertyPanel, INodeCapture* node_capture);
 
 	virtual bool onKeyDown(int keyCode);
 	virtual bool onMouseLeftDown(int x, int y);
@@ -30,7 +31,7 @@ private:
 
 	d2d::PropertySettingPanel* m_propertyPanel;
 
-	NodeCaptureCMPT<EditBezierOP>* m_cmpt;
+	INodeCapture* m_node_capture;
 
 	d2d::Vector m_firstPress;
 	d2d::Vector m_currPos;

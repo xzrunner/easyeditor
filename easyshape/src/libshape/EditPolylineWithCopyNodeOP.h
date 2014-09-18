@@ -21,8 +21,9 @@ public:
 		if (EditPolylineOP<T, SelectNodesOP>::onKeyDown(keyCode)) 
 			return true;
 
-		if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
-			m_selectOP->fetchSelectedNode(m_polyline);
+		// todo EditPolylineOP 
+// 		if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
+// 			m_selectOP->fetchSelectedNode(m_polyline);
 
 		return false;
 	}

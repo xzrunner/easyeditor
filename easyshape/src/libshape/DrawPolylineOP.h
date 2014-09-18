@@ -32,6 +32,9 @@ protected:
 private:
 	bool m_isClosed;
 
+	// todo
+	friend class EditPolylineImpl;
+
 }; // DrawPolylineOP
 
 }

@@ -1,5 +1,6 @@
 #include "DrawPolygonCMPT.h"
 #include "EditPolylineWithCopyNodeOP.h"
+#include "PolygonShape.h"
 
 #include <wx/colordlg.h>
 

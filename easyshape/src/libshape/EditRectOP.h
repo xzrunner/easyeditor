@@ -4,16 +4,17 @@
 #include <drag2d.h>
 
 #include "NodeCapture.h"
-#include "NodeCaptureCMPT.h"
 
 namespace libshape
 {
+
+class INodeCapture;
 
 class EditRectOP : public d2d::ZoomViewOP
 {
 public:
 	EditRectOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel, NodeCaptureCMPT<EditRectOP>* cmpt);
+		d2d::PropertySettingPanel* propertyPanel, INodeCapture* node_capture);
 
 	virtual bool onKeyDown(int keyCode);
 	virtual bool onMouseLeftDown(int x, int y);
@@ -30,7 +31,7 @@ private:
 
 	d2d::PropertySettingPanel* m_propertyPanel;
 
-	NodeCaptureCMPT<EditRectOP>* m_cmpt;
+	INodeCapture* m_node_capture;
 
 	d2d::Vector m_firstPress;
 	d2d::Vector m_currPos;

@@ -443,14 +443,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\libshape\EditPolylineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\EditPolylineOP.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\libshape\EditPolylinesOP.cpp"
 						>
 					</File>
@@ -470,6 +462,26 @@
 						RelativePath="..\..\..\src\libshape\EditRectOP.h"
 						>
 					</File>
+					<Filter
+						Name="polyline"
+						>
+						<File
+							RelativePath="..\..\..\src\libshape\EditPolylineImpl.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\EditPolylineImpl.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\EditPolylineOP.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\EditPolylineOP.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="select"
@@ -568,6 +580,14 @@
 		<Filter
 			Name="tools"
 			>
+			<File
+				RelativePath="..\..\..\src\libshape\INodeCapture.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshape\IOperaterBase.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\src\libshape\Math.cpp"
 				>

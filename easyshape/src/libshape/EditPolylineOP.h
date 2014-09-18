@@ -3,16 +3,17 @@
 
 #include <drag2d.h>
 
-#include "NodeCapture.h"
 #include "NodeCaptureCMPT.h"
+#include "IOperaterBase.h"
 
 namespace libshape
 {
 
 class ChainShape;
+class EditPolylineImpl;
 
 template <typename TBase, typename TSelected>
-class EditPolylineOP : public TBase
+class EditPolylineOP : public TBase, public IOperaterBase
 {
 public:
 	EditPolylineOP(d2d::EditPanel* editPanel, 
@@ -31,67 +32,16 @@ public:
 	virtual bool onDraw(const d2d::Screen& scr) const;
 	virtual bool clear();
 
-private:
-	void drawCaptured(const d2d::Screen& scr, const NodeAddr& captured) const;
-
-	void checkActiveShape(const NodeAddr& captured);
-
-private:
-	class InterruptChainVisitor : public d2d::IVisitor
-	{
-	public:
-		InterruptChainVisitor(const d2d::Vector& pos, int tol);
-
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
-
-		ChainShape* getInterruptedChain() { return m_chain; }
-
-	private:
-		const d2d::Vector& m_pos;
-		int m_tol;
-		ChainShape* m_chain;
-
-	}; // InterruptChainVisitor
-
-	class NearestNodeVisitor : public d2d::IVisitor
-	{
-	public:
-		NearestNodeVisitor(const d2d::Vector& pos, int tol);
-
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
-
-		const d2d::Vector& getNearestNode() const {
-			return m_nearest;
-		}
-
-	private:
-		d2d::Vector m_pos;
-		int m_tol;
-
-		float m_dis;
-		d2d::Vector m_nearest;
-
-	}; // NearestNodeVisitor
+	//
+	// interface IOperaterBase
+	//
+	virtual bool OnMouseLeftDownBase(int x, int y);
+	virtual bool OnMouseRightDownBase(int x, int y);
 
 private:
-	static const int DRAG_SELECT_TOL = 5;
+	EditPolylineImpl* m_impl;
 
-private:
-	d2d::MultiShapesImpl* m_shapesImpl;
-
-	d2d::PropertySettingPanel* m_propertyPanel;
-
-	NodeCaptureCMPT<EditPolylineOP>* m_cmpt;
-//		NodeAddr m_captured;
-
-protected:
-	NodeAddr m_capturedEditable, m_captureSelectable;
-
-protected:
-	TSelected* m_selectOP;
-private:
-	d2d::Vector m_lastLeftDownPos;
-	bool m_bSelectOpen;
+	TSelected* m_select_op;
 
 }; // EditPolylineOP
 

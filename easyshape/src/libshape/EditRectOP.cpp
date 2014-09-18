@@ -2,16 +2,18 @@
 #include "RectShape.h"
 #include "RectPropertySetting.h"
 
+#include "INodeCapture.h"
+
 namespace libshape
 {
 
 EditRectOP::EditRectOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 					   d2d::PropertySettingPanel* propertyPanel,
-					   NodeCaptureCMPT<EditRectOP>* cmpt)
+					   INodeCapture* node_capture)
 	: d2d::ZoomViewOP(editPanel, true)
 	, m_propertyPanel(propertyPanel)
 	, m_shapesImpl(shapesImpl)
-	, m_cmpt(cmpt)
+	, m_node_capture(node_capture)
 {
 	clear();
 }
@@ -40,11 +42,7 @@ bool EditRectOP::onMouseLeftDown(int x, int y)
 
 	m_shapesImpl->getShapeSelection()->clear();
 
-	int tolerance;
-	if (m_cmpt)
-		tolerance = m_cmpt->getNodeCaptureDistance();
-	else
-		tolerance = 0;
+	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
@@ -102,11 +100,7 @@ bool EditRectOP::onMouseRightDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseRightDown(x, y)) return true;
 
-	int tolerance;
-	if (m_cmpt)
-		tolerance = m_cmpt->getNodeCaptureDistance();
-	else
-		tolerance = 0;
+	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
 	if (tolerance != 0)
 	{
 		m_currPos = m_editPanel->transPosScreenToProject(x, y);
@@ -136,11 +130,7 @@ bool EditRectOP::onMouseMove(int x, int y)
 	if (d2d::ZoomViewOP::onMouseMove(x, y)) return true;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	int tolerance;
-	if (m_cmpt)
-		tolerance = m_cmpt->getNodeCaptureDistance();
-	else
-		tolerance = 0;
+	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
@@ -200,14 +190,15 @@ bool EditRectOP::onDraw(const d2d::Screen& scr) const
 
 	if (m_captured.shape)
 	{
-		if (m_cmpt)
+		if (m_node_capture)
 		{
+			int tolerance = m_node_capture->GetScope();
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
 				d2d::PrimitiveDraw::drawCircle(scr, d2d::Vector(rect->m_rect.xCenter(), rect->m_rect.yCenter()), 
-					m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+					tolerance, true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 				if (m_captured.pos.isValid())
-					d2d::PrimitiveDraw::drawCircle(scr, m_captured.pos, m_cmpt->getNodeCaptureDistance(), 
+					d2d::PrimitiveDraw::drawCircle(scr, m_captured.pos, tolerance, 
 						true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 			}
 		}
