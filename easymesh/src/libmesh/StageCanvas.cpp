@@ -26,6 +26,8 @@ void StageCanvas::onDraw()
 		d2d::SpriteDraw::drawSprite(m_screen, bg);
 	}
 
+	m_panel->traverseShapes(d2d::DrawShapesVisitor(m_screen), d2d::e_visible);
+
 	m_editPanel->drawEditTemp(m_screen);
 
 #ifdef _DEBUG 
