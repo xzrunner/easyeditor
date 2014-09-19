@@ -113,6 +113,7 @@ easyparticle3d/platform/msvc2008/easyparticle3d
 easyparticle3d/platform/msvc2008/libparticle3d
 easyshape/.git
 easyshape/platform/msvc2008/easyshape
+easyshape/platform/msvc2008/easyshape_new
 easyshape/platform/msvc2008/libshape
 easydb/platform/msvc2008/easydb
 easydb/platform/msvc2008/easydb_cl

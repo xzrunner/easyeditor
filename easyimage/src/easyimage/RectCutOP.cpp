@@ -169,7 +169,7 @@ bool RectCutOP::onDraw(const d2d::Screen& scr) const
 {
 	if (d2d::ZoomViewOP::onDraw(scr)) return true;
 
-	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	d2d::PrimitiveDraw::cross(scr, d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	if (!m_stage->getImage()) return false;
 

@@ -342,6 +342,15 @@ void PrimitiveDraw::drawLines(const Screen& scr, const std::vector<Vector>& vert
 void PrimitiveDraw::drawPolyline(const Screen& scr, const std::vector<Vector>& vertices, 
 								 const Colorf& color, bool isClose, float size /*= 2*/)
 {
+// 	if (vertices.size() < 2) {
+// 		return;
+// 	}
+// 
+// 	for (int i = 0, n = vertices.size() - 1; i < n; ++i) {
+// 		drawLine(scr, vertices[i], vertices[i+1], color, size);
+// 	}
+// 	return;
+
 	std::vector<Vector> _vertices(vertices);
 
 	ShaderNew* shader = ShaderNew::Instance();

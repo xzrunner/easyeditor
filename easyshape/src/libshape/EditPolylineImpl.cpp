@@ -100,12 +100,12 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 				}
 				else
 				{
-					return m_base_op->OnMouseRightDownBase(x, y);
+					return m_base_op->OnMouseLeftDownBase(x, y);
 				}
 			}
 			else
 			{
-				return m_base_op->OnMouseRightDownBase(x, y);
+				return m_base_op->OnMouseLeftDownBase(x, y);
 			}
 		}
 	}

@@ -17,7 +17,7 @@ void StageCanvas::onDraw()
 
 	if (item) 
 	{
-		if (item->getFilepath().empty() || 
+		if (!item->getFilepath().empty() || 
 			d2d::FileNameParser::isType(item->getFilepath(), d2d::FileNameParser::e_shape)) {
 			drawGuideLines();
 		}

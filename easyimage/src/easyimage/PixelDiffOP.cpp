@@ -27,7 +27,7 @@ bool PixelDiffOP::onMouseLeftDown(int x, int y)
 	m_stage->getLeft()->getSymbol().getSize();
 
 	int row, col;
-	row = (p.y - left->originHeight() * 0.5f) / left.originHeight();
+	row = (p.y - left->originHeight() * 0.5f) / left->originHeight();
 
 	if (p.x < 0) {
 
@@ -38,9 +38,9 @@ bool PixelDiffOP::onMouseLeftDown(int x, int y)
 
 bool PixelDiffOP::onDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
-
-	d2d::PrimitiveDraw::drawLine(d2d::Vector(0, -1024), d2d::Vector(0, 1024), d2d::LIGHT_GREY);
+// 	if (d2d::ZoomViewOP::onDraw()) return true;
+// 
+// 	d2d::PrimitiveDraw::drawLine(d2d::Vector(0, -1024), d2d::Vector(0, 1024), d2d::LIGHT_GREY);
 
 	return false;
 }
