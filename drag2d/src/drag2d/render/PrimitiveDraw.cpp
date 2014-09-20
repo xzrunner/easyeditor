@@ -44,29 +44,47 @@ void PrimitiveDraw::rect(const Screen& scr, const Vector& p0, const Vector& p1, 
 	shader->shape();
 
 	int type = style.fill ? GL10::GL_QUADS : GL10::GL_LINE_LOOP;
-	if (!style.fill)
-		GL10::LineWidth(style.size);
+// 	if (!style.fill)
+// 		GL10::LineWidth(style.size);
 
-	d2d::Vector vertices[4];
-	vertices[0].set(p0.x, p0.y);
-	vertices[1].set(p0.x, p1.y);
-	vertices[2].set(p1.x, p1.y);
-	vertices[3].set(p1.x, p0.y);
- 	for (int i = 0; i < 4; ++i) {
- 		scr.TransPosForRender(vertices[i]);
- 	}
+// 	d2d::Vector vertices[4];
+// 	vertices[0].set(p0.x, p0.y);
+// 	vertices[1].set(p0.x, p1.y);
+// 	vertices[2].set(p1.x, p1.y);
+// 	vertices[3].set(p1.x, p0.y);
+//  	for (int i = 0; i < 4; ++i) {
+//  		scr.TransPosForRender(vertices[i]);
+//  	}
+
+	std::vector<Vector> vertices;
+	vertices.push_back(Vector(p0.x, p0.y));
+	vertices.push_back(Vector(p0.x, p1.y));
+	vertices.push_back(Vector(p1.x, p1.y));
+	vertices.push_back(Vector(p1.x, p0.y));
+	for (int i = 0, n = vertices.size(); i < n; ++i) {
+		scr.TransPosForRender(vertices[i]);
+	}
 
 	shader->SetShapeColor(style.color);
-	lineStypeBegin(style.lineStyle);
-	GL10::Begin(type);
-	for (int i = 0; i < 4; ++i) {
-		GL10::Vertex2f(vertices[i].x, vertices[i].y);
-	}
-	GL10::End();
-	lineStypeEnd(style.lineStyle);
 
-	if (!style.fill)
-		GL10::LineWidth(1);
+	//////////////////////////////////////////////////////////////////////////
+// 	lineStypeBegin(style.lineStyle);
+// 	GL10::Begin(type);
+// 	for (int i = 0; i < 4; ++i) {
+// 		GL10::Vertex2f(vertices[i].x, vertices[i].y);
+// 	}
+// 	GL10::End();
+// 	lineStypeEnd(style.lineStyle);
+	//////////////////////////////////////////////////////////////////////////
+	if (style.fill) {
+		drawPolygon(vertices, style.color);
+	} else {
+		drawPolyline(vertices, style.color, true, style.size);
+	}
+	//////////////////////////////////////////////////////////////////////////
+
+// 	if (!style.fill)
+// 		GL10::LineWidth(1);
 }
 
 void PrimitiveDraw::rect(const Screen& scr, const Matrix& mt, float hWidth, 
@@ -342,63 +360,55 @@ void PrimitiveDraw::drawLines(const Screen& scr, const std::vector<Vector>& vert
 void PrimitiveDraw::drawPolyline(const Screen& scr, const std::vector<Vector>& vertices, 
 								 const Colorf& color, bool isClose, float size /*= 2*/)
 {
-// 	if (vertices.size() < 2) {
-// 		return;
-// 	}
-// 
-// 	for (int i = 0, n = vertices.size() - 1; i < n; ++i) {
-// 		drawLine(scr, vertices[i], vertices[i+1], color, size);
-// 	}
-// 	return;
-
 	std::vector<Vector> _vertices(vertices);
+	for (int i = 0, n = _vertices.size(); i < n; ++i) {
+		scr.TransPosForRender(_vertices[i]);
+	}
+	drawPolyline(_vertices, color, isClose, size);
+}
 
+void PrimitiveDraw::drawPolyline(const std::vector<Vector>& vertices, const Colorf& color, 
+								 bool isClose, float size /*= 2*/)
+{
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->shape();
 	shader->SetShapeColor(color);
 
 	GL10::LineWidth(size);
 
- 	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
-//  	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
- 
-// 	std::vector<Colorf> colors(_vertices.size(), color);
-
-	for (int i = 0, n = _vertices.size(); i < n; ++i) {
-		scr.TransPosForRender(_vertices[i]);
-	}
-	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &_vertices[0]);
-//	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
-
- 	if (isClose)
- 		GL10::DrawArrays(GL10::GL_LINE_LOOP, 0, _vertices.size());
- 	else
-		GL10::DrawArrays(GL10::GL_LINE_STRIP, 0, _vertices.size());
-
- 	GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
- 	GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
+	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
+	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &vertices[0]);
+	if (isClose)
+		GL10::DrawArrays(GL10::GL_LINE_LOOP, 0, vertices.size());
+	else
+		GL10::DrawArrays(GL10::GL_LINE_STRIP, 0, vertices.size());
+	GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);
 
 	GL10::LineWidth(1.0f);
 }
- 
+
 void PrimitiveDraw::drawPolygon(const Screen& scr, const std::vector<Vector>& vertices, const Colorf& color)
 {
 	std::vector<Vector> _vertices(vertices);
+	for (int i = 0, n = _vertices.size(); i < n; ++i) {
+		scr.TransPosForRender(_vertices[i]);
+	}
+	drawPolygon(_vertices, color);
+}
 
+void PrimitiveDraw::drawPolygon(const std::vector<Vector>& vertices, const Colorf& color)
+{
 	ShaderNew::Instance()->shape();
 
 	GL10::EnableClientState(GL10::GL_VERTEX_ARRAY);
 	GL10::EnableClientState(GL10::GL_COLOR_ARRAY);
 
-	std::vector<Colorf> colors(_vertices.size(), color);
+	std::vector<Colorf> colors(vertices.size(), color);
 
-	for (int i = 0, n = _vertices.size(); i < n; ++i) {
-		scr.TransPosForRender(_vertices[i]);
-	}
-	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &_vertices[0]);
+	GL10::VertexPointer(2, GL10::GL_FLOAT, 0, &vertices[0]);
 	GL10::ColorPointer(4, GL10::GL_FLOAT, 0, &colors[0]);
 
-	GL10::DrawArrays(GL10::GL_POLYGON, 0, _vertices.size());
+	GL10::DrawArrays(GL10::GL_POLYGON, 0, vertices.size());
 
 	GL10::DisableClientState(GL10::GL_COLOR_ARRAY);
 	GL10::DisableClientState(GL10::GL_VERTEX_ARRAY);

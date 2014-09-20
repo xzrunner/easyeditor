@@ -39,7 +39,9 @@ namespace d2d
 		static void drawDotDashLine(const Screen& scr, const Vector& p0, const Vector& p1, const Colorf& color, float size = 2);
 		static void drawLines(const Screen& scr, const std::vector<Vector>& vertices, const Colorf& color, float size = 2);
 		static void drawPolyline(const Screen& scr, const std::vector<Vector>& vertices, const Colorf& color, bool isClose, float size = 2);
+		static void drawPolyline(const std::vector<Vector>& vertices, const Colorf& color, bool isClose, float size = 2);
 		static void drawPolygon(const Screen& scr, const std::vector<Vector>& vertices, const Colorf& color);
+		static void drawPolygon(const std::vector<Vector>& vertices, const Colorf& color);
 		static void drawTriangles(const Screen& scr, const std::vector<Vector>& triangles, const Colorf& color);
 		// 		static void drawTriangles(const std::vector<Vector>& triangles, const wxString& filepath);
 		// 		static void drawTriangles(const std::vector<Vector>& triangles, const wxString& filepath, 
