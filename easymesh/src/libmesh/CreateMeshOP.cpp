@@ -12,6 +12,7 @@ CreateMeshOP::CreateMeshOP(StagePanel* stage)
 	, m_stage(stage)
 	, m_selected(NULL)
 {
+	SetLoop(true);
 	m_last_right.setInvalid();
 }
 

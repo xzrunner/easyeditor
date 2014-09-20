@@ -19,6 +19,10 @@ public:
 	virtual bool onDraw(const d2d::Screen& scr) const;
 	virtual bool clear();
 
+	void SetLoop(bool is_loop) {
+		m_isClosed = is_loop;
+	}
+
 protected:
 	bool shouldFixMousePos() const;
 
