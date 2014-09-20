@@ -136,7 +136,9 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 
 		if (m_capturedEditable.shape)
 		{
-			m_propertyPanel->enablePropertyGrid(true);
+			if (m_propertyPanel) {
+				m_propertyPanel->enablePropertyGrid(true);
+			}
 			checkActiveShape(m_capturedEditable);
 		}
 	}
@@ -176,7 +178,9 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 					m_shapesImpl->getShapeSelection()->clear();
 					m_capturedEditable.clear();
 					m_captureSelectable.clear();
-					m_propertyPanel->setPropertySetting(NULL);
+					if (m_propertyPanel) {
+						m_propertyPanel->setPropertySetting(NULL);
+					}
 				}
 				m_capturedEditable.shape = NULL;
 				m_editPanel->Refresh();
@@ -254,7 +258,9 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			chain->refresh();
 			m_editPanel->Refresh();
 
-			m_propertyPanel->enablePropertyGrid(false);
+			if (m_propertyPanel) {
+				m_propertyPanel->enablePropertyGrid(false);
+			}
 		}
 	}
 	else if (m_lastLeftDownPos.isValid() 
@@ -308,12 +314,16 @@ void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 {
 	if (PolygonShape* poly = dynamic_cast<PolygonShape*>(captured.shape))
 	{
-		m_propertyPanel->setPropertySetting(new PolygonPropertySetting(m_editPanel, poly));
+		if (m_propertyPanel) {
+			m_propertyPanel->setPropertySetting(new PolygonPropertySetting(m_editPanel, poly));
+		}
 		m_shapesImpl->getShapeSelection()->insert(poly);
 	}
 	else if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
-		m_propertyPanel->setPropertySetting(new ChainPropertySetting(m_editPanel, chain));
+		if (m_propertyPanel) {
+			m_propertyPanel->setPropertySetting(new ChainPropertySetting(m_editPanel, chain));
+		}
 		m_shapesImpl->getShapeSelection()->insert(chain);
 	}	
 }
