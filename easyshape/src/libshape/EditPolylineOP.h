@@ -19,7 +19,8 @@ public:
 	EditPolylineOP(d2d::EditPanel* editPanel, 
 		d2d::MultiShapesImpl* shapesImpl, 
 		d2d::PropertySettingPanel* propertyPanel,
-		NodeCaptureCMPT<EditPolylineOP>* cmpt);
+		NodeCaptureCMPT<EditPolylineOP>* cmpt,
+		float node_capture_scope = 0);
 	virtual ~EditPolylineOP();
 
 	virtual bool onKeyDown(int keyCode);
@@ -39,9 +40,21 @@ public:
 	virtual bool OnMouseRightDownBase(int x, int y);
 
 private:
+	class NodeCapture : public INodeCapture
+	{
+	public:
+		NodeCapture(float scope) : m_scope(scope) {}
+		virtual float GetScope() const { return m_scope; }
+	private:
+		float m_scope;
+	}; // NodeCapture
+
+private:
 	EditPolylineImpl* m_impl;
 
 	TSelected* m_select_op;
+
+	NodeCapture* m_node_capture;
 
 }; // EditPolylineOP
 

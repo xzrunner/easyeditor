@@ -8,7 +8,7 @@ namespace emesh
 {
 
 CreateMeshOP::CreateMeshOP(StagePanel* stage)
-	: libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage, NULL, NULL)
+	: libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage, NULL, NULL, 5)
 	, m_stage(stage)
 	, m_selected(NULL)
 {

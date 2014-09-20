@@ -8,17 +8,24 @@ template <typename TBase, typename TSelected>
 libshape::EditPolylineOP<TBase, TSelected>::
 EditPolylineOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 			   d2d::PropertySettingPanel* propertyPanel,
-			   NodeCaptureCMPT<EditPolylineOP>* cmpt)
+			   NodeCaptureCMPT<EditPolylineOP>* cmpt,
+			   float node_capture_scope)
 	: TBase(editPanel, shapesImpl)
+	, m_node_capture(NULL)
 {
 	m_select_op = new TSelected(editPanel, shapesImpl, propertyPanel, cmpt);
-	m_impl = new EditPolylineImpl(editPanel, shapesImpl, propertyPanel, cmpt, this, m_select_op, this);
+	INodeCapture* node_capture = cmpt;
+	if (!node_capture) {
+		node_capture = m_node_capture = new NodeCapture(node_capture_scope);
+	}
+	m_impl = new EditPolylineImpl(editPanel, shapesImpl, propertyPanel, node_capture, this, m_select_op, this);
 }
 
 template <typename TBase, typename TSelected>
 libshape::EditPolylineOP<TBase, TSelected>::
 ~EditPolylineOP() 
 {
+	delete m_node_capture;
 	delete m_select_op;
 }
 
