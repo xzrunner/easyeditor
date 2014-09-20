@@ -105,6 +105,9 @@ void ShaderNew::shape()
 
 		glUseProgram(m_prog_shape);
 		m_prog_curr = m_prog_shape;
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 }
 
