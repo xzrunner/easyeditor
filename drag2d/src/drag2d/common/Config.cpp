@@ -34,7 +34,7 @@ Config* Config::Instance()
 
 bool Config::IsUseDTex() const 
 {
-#ifdef NOT_LOAD_IMAGE
+#ifdef COC_PACKAGE
 	return false;
 #else
 	return m_use_dtex; 
