@@ -85,8 +85,8 @@ void COCParser::prepareMapSymbolPic()
  				picture->scr[3].set(right, up);
 			}
 
-// 			picture->offset.x = (entry.spriteSourceSize.x + entry.spriteSourceSize.w * 0.5f) - entry.srcWidth * 0.5f;
-// 			picture->offset.y = entry.srcHeight * 0.5f - (entry.spriteSourceSize.y + entry.spriteSourceSize.h * 0.5f);
+ 			picture->offset.x = (entry.spriteSourceSize.x + entry.spriteSourceSize.w * 0.5f) - entry.srcWidth * 0.5f;
+ 			picture->offset.y = entry.srcHeight * 0.5f - (entry.spriteSourceSize.y + entry.spriteSourceSize.h * 0.5f);
 
 			m_mapSymbolPicture.insert(std::make_pair(symbol, picture));
 		}

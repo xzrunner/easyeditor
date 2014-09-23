@@ -363,11 +363,17 @@ void COCCode::ParserPicture(const d2d::ImageSprite* sprite, const COCParser& par
 		screen[i] = rot;
 	}
 	// 4. translate
-//	d2d::Vector offset = picture->offset;
-	d2d::Vector offset = sprite->getOffset();
+// 	d2d::Vector offset = picture->offset;
+// 	offset.x *= sprite->getScale().x / picture->invscale;
+// 	offset.y *= sprite->getScale().y / picture->invscale;
+// 	d2d::Vector center = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
+
+	d2d::Vector center = sprite->getCenter();
+	d2d::Vector offset = picture->offset;
 	offset.x *= sprite->getScale().x / picture->invscale;
 	offset.y *= sprite->getScale().y / picture->invscale;
-	d2d::Vector center = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
+	center += offset;
+
 	for (size_t i = 0; i < 4; ++i)
 		screen[i] += center;
 
@@ -1206,7 +1212,31 @@ void COCCode::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		// | ky  1    | |    sy    | | -s  c    | |    1    |
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
-		float x, y;
+//		float x, y;
+//		if (dynamic_cast<const d2d::ImageSprite*>(sprite))
+//		{
+// 			m_parser.m_mapSymbolPicture;
+// 			std::map<const d2d::ISymbol*, COCParser::Picture*>::const_iterator itr 
+// 				= m_parser.m_mapSymbolPicture.find(&sprite->getSymbol());
+//			if (itr == m_parser.m_mapSymbolPicture.end()) {
+//				std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the texpacker file!";
+//				throw d2d::Exception(str.c_str());
+//			}
+//
+// 			COCParser::Picture* picture = itr->second;
+////			d2d::Vector offset = picture->offset;
+//			d2d::Vector offset = sprite->getOffset();
+//			offset.x *= sprite->getScale().x / picture->invscale;
+//			offset.y *= sprite->getScale().y / picture->invscale;
+//
+//			d2d::Vector center = sprite->getCenter();
+//
+//			d2d::Vector pos = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
+//			x = pos.x;
+//			y = pos.y;
+//		}
+//		else
+		d2d::Vector center = sprite->getCenter();
 		if (dynamic_cast<const d2d::ImageSprite*>(sprite))
 		{
  			m_parser.m_mapSymbolPicture;
@@ -1218,18 +1248,10 @@ void COCCode::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 			}
 
  			COCParser::Picture* picture = itr->second;
-//			d2d::Vector offset = picture->offset;
-			d2d::Vector offset = sprite->getOffset();
+			d2d::Vector offset = picture->offset;
 			offset.x *= sprite->getScale().x / picture->invscale;
 			offset.y *= sprite->getScale().y / picture->invscale;
-			d2d::Vector pos = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
-			x = pos.x;
-			y = pos.y;
-		}
-		else
-		{
-			x = sprite->getCenter().x;
-			y = sprite->getCenter().y;
+			center += offset;
 		}
 		float sx = sprite->getScale().x,
 			sy = sprite->getScale().y;
@@ -1246,8 +1268,8 @@ void COCCode::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 		mat[1] = sx*s + kx*sy*c;
 		mat[2] = ky*sx*c - sy*s;
 		mat[3] = ky*sx*s + sy*c;
-		mat[4] = x * m_scale;
-		mat[5] = y * m_scale;
+		mat[4] = center.x * m_scale;
+		mat[5] = center.y * m_scale;
 	}
 
 	for (size_t i = 0; i < 4; ++i)
