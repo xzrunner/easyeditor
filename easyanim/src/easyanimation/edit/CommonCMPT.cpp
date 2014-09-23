@@ -161,7 +161,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(itr->second[i]);
-			symbol->refresh();
+//			symbol->refresh();
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			frame->insertWithClone(sprite);
 			sprite->release();
