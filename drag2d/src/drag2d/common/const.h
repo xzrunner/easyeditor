@@ -2,8 +2,6 @@
 
 namespace d2d
 {
-//#define NOT_LOAD_IMAGE
-
 
 static const int S_WIDTH = 800;
 static const int S_HEIGHT = 480;

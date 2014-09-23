@@ -1,0 +1,1 @@
+#define NOT_LOAD_IMAGE

@@ -13,6 +13,7 @@
 #include "common/Math.h"
 #include "common/Config.h"
 #include "common/SettingData.h"
+#include "common/TodoConfig.h"
 #include "view/Screen.h"
 
 #include <fstream>
@@ -45,7 +46,7 @@ bool Image::loadFromFile(const wxString& filepath)
 	}
 
 	m_filepath = filepath;
- 
+
 #ifdef NOT_LOAD_IMAGE
 	return true;
 #endif

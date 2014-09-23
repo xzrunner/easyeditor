@@ -6,6 +6,7 @@
 
 #include "common/FileNameParser.h"
 #include "common/Exception.h"
+#include "common/TodoConfig.h"
 
 #include <gl/gl.h>
 #include <wx/filename.h>

@@ -2,6 +2,7 @@
 #include "SettingData.h"
 
 #include "common/FileNameTools.h"
+#include "common/TodoConfig.h"
 
 #include <fstream>
 
@@ -29,6 +30,15 @@ Config* Config::Instance()
 		}
 	}
 	return m_instance;
+}
+
+bool Config::IsUseDTex() const 
+{
+#ifdef NOT_LOAD_IMAGE
+	return false;
+#else
+	return m_use_dtex; 
+#endif
 }
 
 void Config::GetStrings(const std::string& key, 

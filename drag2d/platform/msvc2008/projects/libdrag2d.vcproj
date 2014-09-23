@@ -1577,6 +1577,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\TodoConfig.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\types.h"
 					>
 				</File>

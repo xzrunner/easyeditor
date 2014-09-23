@@ -15,7 +15,7 @@ class Config
 public:
 	static Config* Instance();
 
-	bool IsUseDTex() const { return m_use_dtex; }
+	bool IsUseDTex() const;
 
 	const std::string& GetFontFilepath() const { return m_font_filepath; }
 
