@@ -363,7 +363,8 @@ void COCCode::ParserPicture(const d2d::ImageSprite* sprite, const COCParser& par
 		screen[i] = rot;
 	}
 	// 4. translate
-	d2d::Vector offset = picture->offset;
+//	d2d::Vector offset = picture->offset;
+	d2d::Vector offset = sprite->getOffset();
 	offset.x *= sprite->getScale().x / picture->invscale;
 	offset.y *= sprite->getScale().y / picture->invscale;
 	d2d::Vector center = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());
@@ -1217,7 +1218,8 @@ void COCCode::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 			}
 
  			COCParser::Picture* picture = itr->second;
-			d2d::Vector offset = picture->offset;
+//			d2d::Vector offset = picture->offset;
+			d2d::Vector offset = sprite->getOffset();
 			offset.x *= sprite->getScale().x / picture->invscale;
 			offset.y *= sprite->getScale().y / picture->invscale;
 			d2d::Vector pos = sprite->getCenter() + d2d::Math::rotateVector(offset, sprite->getAngle());

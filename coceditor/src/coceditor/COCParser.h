@@ -31,7 +31,7 @@ public:
 		// 1 2
 		d2d::Vector scr[4];
 
-		d2d::Vector offset;
+//		d2d::Vector offset;
 	};
 
 private:
