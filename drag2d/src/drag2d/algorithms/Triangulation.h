@@ -40,6 +40,9 @@ public:
 	static void strips(const std::vector<Vector>& triangulates, 
 		std::vector<std::vector<Vector> >& strips);
 
+private:
+	static void VerifyBound(const std::vector<Vector>& src, std::vector<Vector>& dst);
+
 }; // Triangulation
 
 }

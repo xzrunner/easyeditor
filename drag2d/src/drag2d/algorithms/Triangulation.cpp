@@ -73,15 +73,18 @@ void Triangulation::normal(const std::vector<Vector>& bound,
 {
 	struct triangulateio in, out;
 
-	in.numberofpoints = bound.size();
+	std::vector<Vector> bound_fixed;
+	VerifyBound(bound, bound_fixed);
+
+	in.numberofpoints = bound_fixed.size();
 	in.numberofpointattributes = 0;
 	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
 	in.pointmarkerlist = (int *) NULL;
 	int index = 0;
 	for (size_t i = 0; i < in.numberofpoints; ++i)
 	{
-		in.pointlist[index++] = bound[i].x;
-		in.pointlist[index++] = bound[i].y;
+		in.pointlist[index++] = bound_fixed[i].x;
+		in.pointlist[index++] = bound_fixed[i].y;
 	}
 
 	in.numberofsegments = in.numberofpoints;
@@ -102,7 +105,7 @@ void Triangulation::normal(const std::vector<Vector>& bound,
 
 	init(out);
 	implement(in, out, type);
-	finish(out, bound, result);
+	finish(out, bound_fixed, result);
 }
 
 void Triangulation::points(const std::vector<Vector>& bound, 
@@ -112,15 +115,18 @@ void Triangulation::points(const std::vector<Vector>& bound,
 {
 	struct triangulateio in, out;
 
-	in.numberofpoints = bound.size() + points.size();
+	std::vector<Vector> bound_fixed;
+	VerifyBound(bound, bound_fixed);
+
+	in.numberofpoints = bound_fixed.size() + points.size();
 	in.numberofpointattributes = 0;
 	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
 	in.pointmarkerlist = (int *) NULL;
 	int index = 0;
-	for (size_t i = 0, n = bound.size(); i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size(); i < n; ++i)
 	{
-		in.pointlist[index++] = bound[i].x;
-		in.pointlist[index++] = bound[i].y;
+		in.pointlist[index++] = bound_fixed[i].x;
+		in.pointlist[index++] = bound_fixed[i].y;
 	}
 	for (size_t i = 0, n = points.size(); i < n; ++i)
 	{
@@ -128,16 +134,16 @@ void Triangulation::points(const std::vector<Vector>& bound,
 		in.pointlist[index++] = points[i].y;
 	}
 
-	in.numberofsegments = bound.size();
+	in.numberofsegments = bound_fixed.size();
 	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
 
 	index = 0;
-	for (size_t i = 0, n = bound.size() - 1; i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size() - 1; i < n; ++i)
 	{
 		in.segmentlist[index++] = i;
 		in.segmentlist[index++] = i + 1;
 	}
-	in.segmentlist[index++] = bound.size() - 1;
+	in.segmentlist[index++] = bound_fixed.size() - 1;
 	in.segmentlist[index++] = 0;
 
 	in.segmentmarkerlist = (int *) NULL;
@@ -147,7 +153,7 @@ void Triangulation::points(const std::vector<Vector>& bound,
 
 	init(out);
 	implement(in, out, type);
-	finish(out, bound, result);
+	finish(out, bound_fixed, result);
 }
 
 void Triangulation::lines(const std::vector<Vector>& bound, 
@@ -157,15 +163,18 @@ void Triangulation::lines(const std::vector<Vector>& bound,
 {
 	struct triangulateio in, out;
 
-	in.numberofpoints = bound.size() + lines.size();
+	std::vector<Vector> bound_fixed;
+	VerifyBound(bound, bound_fixed);
+
+	in.numberofpoints = bound_fixed.size() + lines.size();
 	in.numberofpointattributes = 0;
 	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
 	in.pointmarkerlist = (int *) NULL;
 	int index = 0;
-	for (size_t i = 0, n = bound.size(); i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size(); i < n; ++i)
 	{
-		in.pointlist[index++] = bound[i].x;
-		in.pointlist[index++] = bound[i].y;
+		in.pointlist[index++] = bound_fixed[i].x;
+		in.pointlist[index++] = bound_fixed[i].y;
 	}
 	for (size_t i = 0, n = lines.size(); i < n; ++i)
 	{
@@ -173,19 +182,19 @@ void Triangulation::lines(const std::vector<Vector>& bound,
 		in.pointlist[index++] = lines[i].y;
 	}
 
-	in.numberofsegments = bound.size() + lines.size() / 2;
+	in.numberofsegments = bound_fixed.size() + lines.size() / 2;
 	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
 
 	index = 0;
-	for (size_t i = 0, n = bound.size() - 1; i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size() - 1; i < n; ++i)
 	{
 		in.segmentlist[index++] = i;
 		in.segmentlist[index++] = i + 1;
 	}
-	in.segmentlist[index++] = bound.size() - 1;
+	in.segmentlist[index++] = bound_fixed.size() - 1;
 	in.segmentlist[index++] = 0;
 
-	int lineIndex = bound.size();
+	int lineIndex = bound_fixed.size();
 	for (size_t i = 0, n = lines.size() / 2; i < n; ++i)
 	{
 		in.segmentlist[index++] = lineIndex++;
@@ -199,7 +208,7 @@ void Triangulation::lines(const std::vector<Vector>& bound,
 
 	init(out);
 	implement(in, out, type);
-	finish(out, bound, result);
+	finish(out, bound_fixed, result);
 }
 
 void Triangulation::pointsAndLines(const std::vector<Vector>& bound, const std::vector<Vector>& points,
@@ -207,15 +216,18 @@ void Triangulation::pointsAndLines(const std::vector<Vector>& bound, const std::
 {
 	struct triangulateio in, out;
 
-	in.numberofpoints = bound.size() + lines.size() + points.size();
+	std::vector<Vector> bound_fixed;
+	VerifyBound(bound, bound_fixed);
+
+	in.numberofpoints = bound_fixed.size() + lines.size() + points.size();
 	in.numberofpointattributes = 0;
 	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
 	in.pointmarkerlist = (int *) NULL;
 	int index = 0;
-	for (size_t i = 0, n = bound.size(); i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size(); i < n; ++i)
 	{
-		in.pointlist[index++] = bound[i].x;
-		in.pointlist[index++] = bound[i].y;
+		in.pointlist[index++] = bound_fixed[i].x;
+		in.pointlist[index++] = bound_fixed[i].y;
 	}
 	for (size_t i = 0, n = lines.size(); i < n; ++i)
 	{
@@ -228,19 +240,19 @@ void Triangulation::pointsAndLines(const std::vector<Vector>& bound, const std::
 		in.pointlist[index++] = points[i].y;
 	}
 
-	in.numberofsegments = bound.size() + lines.size() / 2;
+	in.numberofsegments = bound_fixed.size() + lines.size() / 2;
 	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
 
 	index = 0;
-	for (size_t i = 0, n = bound.size() - 1; i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size() - 1; i < n; ++i)
 	{
 		in.segmentlist[index++] = i;
 		in.segmentlist[index++] = i + 1;
 	}
-	in.segmentlist[index++] = bound.size() - 1;
+	in.segmentlist[index++] = bound_fixed.size() - 1;
 	in.segmentlist[index++] = 0;
 
-	int lineIndex = bound.size();
+	int lineIndex = bound_fixed.size();
 	for (size_t i = 0, n = lines.size() / 2; i < n; ++i)
 	{
 		in.segmentlist[index++] = lineIndex++;
@@ -254,7 +266,7 @@ void Triangulation::pointsAndLines(const std::vector<Vector>& bound, const std::
 
 	init(out);
 	implement(in, out, type);
-	finish(out, bound, result);
+	finish(out, bound_fixed, result);
 }
 
 void Triangulation::linesAndLoops(const std::vector<Vector>& bound, 
@@ -269,15 +281,18 @@ void Triangulation::linesAndLoops(const std::vector<Vector>& bound,
 	for (size_t i = 0, n = loops.size(); i < n; ++i)
 		loopSize += loops[i].size();
 
-	in.numberofpoints = bound.size() + lines.size() + loopSize;
+	std::vector<Vector> bound_fixed;
+	VerifyBound(bound, bound_fixed);
+
+	in.numberofpoints = bound_fixed.size() + lines.size() + loopSize;
 	in.numberofpointattributes = 0;
 	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
 	in.pointmarkerlist = (int *) NULL;
 	int index = 0;
-	for (size_t i = 0, n = bound.size(); i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size(); i < n; ++i)
 	{
-		in.pointlist[index++] = bound[i].x;
-		in.pointlist[index++] = bound[i].y;
+		in.pointlist[index++] = bound_fixed[i].x;
+		in.pointlist[index++] = bound_fixed[i].y;
 	}
 	for (size_t i = 0, n = lines.size(); i < n; ++i)
 	{
@@ -293,26 +308,26 @@ void Triangulation::linesAndLoops(const std::vector<Vector>& bound,
 		}
 	}
 
-	in.numberofsegments = bound.size() + lines.size() / 2 + loopSize;
+	in.numberofsegments = bound_fixed.size() + lines.size() / 2 + loopSize;
 	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
 
 	index = 0;
-	for (size_t i = 0, n = bound.size() - 1; i < n; ++i)
+	for (size_t i = 0, n = bound_fixed.size() - 1; i < n; ++i)
 	{
 		in.segmentlist[index++] = i;
 		in.segmentlist[index++] = i + 1;
 	}
-	in.segmentlist[index++] = bound.size() - 1;
+	in.segmentlist[index++] = bound_fixed.size() - 1;
 	in.segmentlist[index++] = 0;
 
-	int lineIndex = bound.size();
+	int lineIndex = bound_fixed.size();
 	for (size_t i = 0, n = lines.size() / 2; i < n; ++i)
 	{
 		in.segmentlist[index++] = lineIndex++;
 		in.segmentlist[index++] = lineIndex++;
 	}
 
-	int loopIndex = bound.size() + lines.size();
+	int loopIndex = bound_fixed.size() + lines.size();
 	for (size_t i = 0, n = loops.size(); i < n; ++i)
 	{
 		int start = loopIndex;
@@ -334,13 +349,31 @@ void Triangulation::linesAndLoops(const std::vector<Vector>& bound,
 
 	init(out);
 	implement(in, out, type);
-	finish(out, bound, result);
+	finish(out, bound_fixed, result);
 }
 
 void Triangulation::strips(const std::vector<Vector>& triangulates, 
 	std::vector<std::vector<Vector> >& strips)
 {
 	d2d::SGI::implement(triangulates, strips);
+}
+
+void Triangulation::VerifyBound(const std::vector<Vector>& src, std::vector<Vector>& dst)
+{
+	for (int i = 0, n = src.size(); i < n; ++i)
+	{
+		bool skip = false;
+		for (int j = 0, m = dst.size(); j < m; ++j) {
+			if (src[i] == dst[j]) {
+				skip = true;
+				break;
+			}
+		}
+		if (skip) {
+			continue;
+		}
+		dst.push_back(src[i]);
+	}
 }
 
 }
