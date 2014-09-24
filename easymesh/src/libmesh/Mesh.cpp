@@ -13,7 +13,7 @@ Mesh::Mesh(bool use_region)
 
 Mesh::Mesh(const Mesh& mesh)
 	: Shape(mesh)
-	, m_region_new(mesh.m_region_new)
+	, m_region(mesh.m_region)
 	, m_use_region(mesh.m_use_region)
 {
 	RefreshTriangles();
@@ -39,8 +39,8 @@ Mesh::Mesh(const d2d::Image& image, bool initBound, bool use_region)
 	{
 		float hw = m_width * 0.5f,
 			  hh = m_height * 0.5f;
-		m_region_new.rect.combine(d2d::Vector(hw, hh));
-		m_region_new.rect.combine(d2d::Vector(-hw, -hh));
+		m_region.rect.combine(d2d::Vector(hw, hh));
+		m_region.rect.combine(d2d::Vector(-hw, -hh));
 		RefreshTriangles();
 	}
 }
@@ -48,82 +48,6 @@ Mesh::Mesh(const d2d::Image& image, bool initBound, bool use_region)
 Mesh* Mesh::clone() const
 {
 	return new Mesh(*this);
-}
-
-void Mesh::Insert(const d2d::Vector& p)
-{
-// 	if (d2d::Math::isPointInRect(p, m_region_new.rect))
-// 	{
-// 		m_region_new.nodes.push_back(p);
-// 		RefreshTriangles();
-// 	}
-}
-
-void Mesh::Remove(const d2d::Vector& p)
-{
-// 	if (d2d::Math::isPointInRect(p, m_region.rect))
-// 	{
-// 		std::vector<d2d::Vector>::iterator itr
-// 			= m_region.nodes.begin();
-// 		for ( ; itr != m_region.nodes.end(); ++itr)
-// 		{
-// 			if (d2d::Math::getDistance(*itr, p) < m_node_radius)
-// 			{
-// 				m_region.nodes.erase(itr);
-// 				RefreshTriangles();
-// 				break;
-// 			}
-// 		}
-// 	}
-}
-
-d2d::Vector* Mesh::Find(const d2d::Vector& p)
-{
-// 	for (int i = 0, m = m_region.nodes.size(); i < m; ++i)
-// 		if (d2d::Math::getDistance(m_region.nodes[i], p) < m_node_radius)
-// 			return &m_region.nodes[i];
-	return NULL;
-}
-
-void Mesh::Move(d2d::Vector* src, const d2d::Vector& dst)
-{
-// 	if (!src) return;
-// 
-// 	if (d2d::Math::isPointInRect(dst, m_region.rect))
-// 	{
-// 		d2d::Vector d = dst;
-// 
-// 		// absorb node to region
-// 		const d2d::Rect& r = m_region.rect;
-// 		if (fabs(d.x - r.xMin) < m_node_radius) {
-// 			d.x = r.xMin;
-// 		}
-// 		if (fabs(d.x - r.xMax) < m_node_radius) {
-// 			d.x = r.xMax;
-// 		}
-// 		if (fabs(d.y - r.yMin) < m_node_radius) {
-// 			d.y = r.yMin;
-// 		}
-// 		if (fabs(d.y - r.yMax) < m_node_radius) {
-// 			d.y = r.yMax;
-// 		}
-// 
-// 		*src = d;
-// 
-// 		// remove corner rrom nodes
-// 		std::vector<d2d::Vector>::iterator itr = m_region.nodes.begin();
-// 		for ( ; itr != m_region.nodes.end(); )
-// 		{
-// 			if ((itr->x == r.xMin || itr->x == r.xMax)
-// 				&& (itr->y == r.yMin || itr->y == r.yMax)) {
-// 					itr = m_region.nodes.erase(itr);
-// 			} else {
-// 				++itr;
-// 			}
-// 		}
-// 
-// 		RefreshTriangles();
-// 	}
 }
 
 void Mesh::Reset()
@@ -275,7 +199,7 @@ void Mesh::OffsetUV(float dx, float dy)
 
 void Mesh::Load(const Json::Value& value)
 {
- 	d2d::Rect& r = m_region_new.rect;
+ 	d2d::Rect& r = m_region.rect;
  	r.xMin = value["bound"]["xmin"].asDouble();
  	r.xMax = value["bound"]["xmax"].asDouble();
  	r.yMin = value["bound"]["ymin"].asDouble();
@@ -288,7 +212,7 @@ void Mesh::Load(const Json::Value& value)
 		std::vector<d2d::Vector> nodes;
 		d2d::JsonTools::load(loop_val, nodes);
 		libshape::ChainShape* shape = new libshape::ChainShape(nodes, true);
-		m_region_new.loops.push_back(shape);
+		m_region.loops.push_back(shape);
 		loop_val = loops_val[i++];
 	}
  
@@ -303,14 +227,14 @@ void Mesh::Store(Json::Value& value) const
 {
  	value["type"] = GetType();
  
- 	value["bound"]["xmin"] = m_region_new.rect.xMin;
- 	value["bound"]["xmax"] = m_region_new.rect.xMax;
- 	value["bound"]["ymin"] = m_region_new.rect.yMin;
- 	value["bound"]["ymax"] = m_region_new.rect.yMax;
+ 	value["bound"]["xmin"] = m_region.rect.xMin;
+ 	value["bound"]["xmax"] = m_region.rect.xMax;
+ 	value["bound"]["ymin"] = m_region.rect.yMin;
+ 	value["bound"]["ymax"] = m_region.rect.yMax;
 
 	Json::Value& loops_val = value["loops"];
-	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i) {
-		const libshape::ChainShape* loop = m_region_new.loops[i];
+	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
+		const libshape::ChainShape* loop = m_region.loops[i];
 		d2d::JsonTools::store(loop->getVertices(), loops_val[i]);
 	}
 
@@ -324,10 +248,10 @@ void Mesh::Refresh()
 
 void Mesh::TraverseShapes(d2d::IVisitor& visitor) const
 {
-	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i)
+	for (int i = 0, n = m_region.loops.size(); i < n; ++i)
 	{
 		libshape::ChainShape* shape 
-			= const_cast<libshape::ChainShape*>(m_region_new.loops[i]);
+			= const_cast<libshape::ChainShape*>(m_region.loops[i]);
 
 		bool has_next;
 		visitor.visit(shape, has_next);
@@ -339,12 +263,12 @@ void Mesh::TraverseShapes(d2d::IVisitor& visitor) const
 
 void Mesh::RemoveShapes(d2d::IShape* shape)
 {
-	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i)
+	for (int i = 0, n = m_region.loops.size(); i < n; ++i)
 	{
-		const d2d::IShape* loop = m_region_new.loops[i];
+		const d2d::IShape* loop = m_region.loops[i];
 		if (loop == shape) {
 			loop->release();
-			m_region_new.loops.erase(m_region_new.loops.begin() + i);
+			m_region.loops.erase(m_region.loops.begin() + i);
 			break;
 		}
 	}
@@ -355,37 +279,53 @@ void Mesh::InsertShapes(d2d::IShape* shape)
 	libshape::ChainShape* loop = dynamic_cast<libshape::ChainShape*>(shape);
 	if (loop) {
 		loop->retain();
-		m_region_new.loops.push_back(loop);
+		m_region.loops.push_back(loop);
 	}
 }
 
 void Mesh::ClearShapes()
 {
-	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i) {
-		m_region_new.loops[i]->release();
+	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
+		m_region.loops[i]->release();
 	}
-	m_region_new.loops.clear();
+	m_region.loops.clear();
 }
 
 void Mesh::RefreshTriangles()
 {
 	ClearTriangles();
 
+	// get all tris
 	std::vector<d2d::Vector> tris;
-	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i)
+	if (m_use_region)
 	{
-		const libshape::ChainShape* chain = m_region_new.loops[i];
-		const std::vector<d2d::Vector>& loop = chain->getVertices();
-		d2d::Triangulation::normal(loop, tris);
-	}
+		std::vector<d2d::Vector> bound;
+		const d2d::Rect& r = m_region.rect;
+		bound.push_back(d2d::Vector(r.xMin, r.yMin));
+		bound.push_back(d2d::Vector(r.xMin, r.yMax));
+		bound.push_back(d2d::Vector(r.xMax, r.yMax));
+		bound.push_back(d2d::Vector(r.xMax, r.yMin));
 
-// 	if (m_use_region) {
-// 		d2d::Triangulation::points(bound, m_region.nodes, tris);
-// 	} else {
-// 		std::vector<d2d::Vector> empty;
-// 		d2d::Triangulation::points(bound, empty, tris);
-// 	}
+		std::vector<d2d::Vector> points;
+		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
+		{
+			const libshape::ChainShape* chain = m_region.loops[i];
+			const std::vector<d2d::Vector>& loop = chain->getVertices();
+			std::copy(loop.begin(), loop.end(), back_inserter(points));
+		}
+		d2d::Triangulation::points(bound, points, tris);
+	}
+	else
+	{
+		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
+		{
+			const libshape::ChainShape* chain = m_region.loops[i];
+			const std::vector<d2d::Vector>& loop = chain->getVertices();
+			d2d::Triangulation::normal(loop, tris);
+		}
+	}
 	
+	// create nodes from tris
 	std::map<d2d::Vector, Node*, d2d::VectorCmp> map2Node;
 	Node null;
 	for (int i = 0, n = tris.size(); i < n; ++i)

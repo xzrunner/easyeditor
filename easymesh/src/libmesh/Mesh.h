@@ -27,10 +27,10 @@ public:
 	//
 	// IShape interface
 	//
-	virtual void Insert(const d2d::Vector& p);
-	virtual void Remove(const d2d::Vector& p);
-	virtual d2d::Vector* Find(const d2d::Vector& p);
-	virtual void Move(d2d::Vector* src, const d2d::Vector& dst);
+	virtual void Insert(const d2d::Vector& p) {}
+	virtual void Remove(const d2d::Vector& p) {}
+	virtual d2d::Vector* Find(const d2d::Vector& p) { return NULL; }
+	virtual void Move(d2d::Vector* src, const d2d::Vector& dst) {}
 
  	virtual void Reset();
  	virtual void Clear();
@@ -61,7 +61,7 @@ private:
 //	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
 
 private:
-	struct RegionNew
+	struct Region
 	{
 		d2d::Rect rect;
 		std::vector<const libshape::ChainShape*> loops;
@@ -70,7 +70,7 @@ private:
 private:
 	bool m_use_region;
 
-	RegionNew m_region_new;
+	Region m_region;
 
 	d2d::Vector m_uv_offset;
 
