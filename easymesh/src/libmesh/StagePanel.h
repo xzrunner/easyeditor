@@ -6,16 +6,17 @@
 namespace emesh
 {
 
-class Sprite;
+class Symbol;
 class Shape;
+
 class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library, Sprite* sprite);
+// 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+// 		d2d::LibraryPanel* library, Sprite* sprite);
 	virtual ~StagePanel();
 
 	//
@@ -32,8 +33,11 @@ public:
 	virtual void insertShape(d2d::IShape* shape);
 	virtual void clearShapes();
 
-	Shape* getShape();
-	Sprite* getSprite() { return m_sprite; }
+	void SetSymbol(Symbol* symbol);
+	const Symbol* GetSymbol() const;
+
+ 	Shape* GetShape();
+// 	Sprite* getSprite() { return m_sprite; }
 
 	// for background
 	void SetBackground(d2d::ISprite* bg) { 
@@ -46,6 +50,10 @@ public:
 			m_background->translate(offset);
 		}
 	}
+
+	void LoadFromSymbol(const d2d::ISymbol* symbol);
+
+	void UpdateSymbol();
 
 private:
 	void init(d2d::LibraryPanel* library);
@@ -65,11 +73,9 @@ private:
 	}; // StageDropTarget 
 
 private:
-	Sprite* m_sprite;
-
 	d2d::ISprite* m_background;
 
-	std::vector<d2d::IShape*> m_shapes;
+	Symbol* m_symbol;
 
 }; // StagePanel
 

@@ -5,6 +5,8 @@
 
 #include "config.h"
 
+namespace libshape { class ChainShape; }
+
 namespace emesh
 {
 
@@ -40,6 +42,13 @@ public:
 	virtual int GetQuadSize() const = 0;
 
 	virtual ShapeType GetShapeType() const  = 0;
+
+	virtual void Refresh() = 0;
+
+	virtual void TraverseShapes(d2d::IVisitor& visitor) const = 0;
+	virtual void RemoveShapes(d2d::IShape* shape) = 0;
+	virtual void InsertShapes(d2d::IShape* shape) = 0;
+	virtual void ClearShapes() = 0;
 
 	void QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes);
 	void QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes);

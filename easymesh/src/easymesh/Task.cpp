@@ -26,18 +26,18 @@ void Task::load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_mesh)) {
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-		m_stage->getSprite()->setSymbol(symbol);
+		Symbol* msymbol = static_cast<Symbol*>(symbol);
+		m_stage->SetSymbol(msymbol);
+		
 		m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 		symbol->release();
-
 		m_stage->getCanvas()->resetViewport();
 	}
 }
 
 void Task::store(const char* filepath) const
 {
-	const Symbol& symbol = m_stage->getSprite()->getSymbol();
-	FileIO::store(filepath, &symbol);
+	FileIO::store(filepath, m_stage->GetSymbol());
 	m_stage->onSave();
 }
 

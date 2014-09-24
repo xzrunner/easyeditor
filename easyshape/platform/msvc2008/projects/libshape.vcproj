@@ -359,43 +359,11 @@
 					Name="draw"
 					>
 					<File
-						RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\libshape\DrawCurveOP.cpp"
 						>
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\DrawCurveOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPencilLineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPencilLineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPenLineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPenLineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPolygonEdgeOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPolygonEdgeOP.h"
 						>
 					</File>
 					<File
@@ -504,6 +472,50 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\NodeCapture.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="insert"
+					>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawLoopOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawLoopOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPencilLineOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPencilLineOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPenLineOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPenLineOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPolygonEdgeOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPolygonEdgeOP.h"
 						>
 					</File>
 				</Filter>

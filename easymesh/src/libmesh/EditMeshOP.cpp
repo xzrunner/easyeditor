@@ -71,7 +71,7 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 	if (SelectNodesOP::onMouseDrag(x, y))
 		return true;
 
-	Shape* shape = m_stage->getShape();
+	Shape* shape = m_stage->GetShape();
 	if (!shape) return false;
 
 	if (!m_selection.empty())
@@ -90,7 +90,7 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 
 bool EditMeshOP::onDraw(const d2d::Screen& scr) const
 {
-	if (Shape* shape = m_stage->getShape())
+	if (Shape* shape = m_stage->GetShape())
 	{
 		shape->DrawTexture(scr, d2d::Matrix());
 		shape->DrawInfoXY(scr);

@@ -5,6 +5,8 @@
 
 #include <drag2d.h>
 
+namespace libshape { class ChainShape; }
+
 namespace emesh
 {
 
@@ -42,6 +44,13 @@ public:
 
 	virtual ShapeType GetShapeType() const { return ST_MESH; }
 
+	virtual void Refresh();
+
+	virtual void TraverseShapes(d2d::IVisitor& visitor) const;
+	virtual void RemoveShapes(d2d::IShape* shape);
+	virtual void InsertShapes(d2d::IShape* shape);
+	virtual void ClearShapes();
+
 	static const char* GetType() { return "mesh"; }
 
 private:
@@ -52,16 +61,16 @@ private:
 //	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
 
 private:
-	struct Region
+	struct RegionNew
 	{
 		d2d::Rect rect;
-		std::vector<d2d::Vector> nodes;
+		std::vector<const libshape::ChainShape*> loops;
 	};
 
 private:
 	bool m_use_region;
 
-	Region m_region;
+	RegionNew m_region_new;
 
 	d2d::Vector m_uv_offset;
 

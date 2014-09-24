@@ -107,7 +107,12 @@ void ChainShape::removeVertices(const d2d::Vector& pos)
 	{
 		if (*itr == pos)
 		{
-			m_vertices.erase(itr);
+			if (m_isLoop && (itr == m_vertices.begin() || itr == m_vertices.end()-1)) {
+				m_vertices.pop_back();
+				m_vertices.erase(m_vertices.begin());
+			} else {
+				m_vertices.erase(itr);
+			}
 			break;
 		}
 	}
@@ -125,6 +130,14 @@ void ChainShape::changeVertices(const d2d::Vector& from, const d2d::Vector& to)
 	if (index == m_vertices.size()) return;
 
 	m_vertices[index] = to;
+	if (m_isLoop) {
+		if (index == 0) {
+			m_vertices.back() = to;
+		} else if (index == m_vertices.size() - 1) {
+			m_vertices.front() = to;
+		}
+	}
+
 	if (from.x == m_rect.xMin || from.x == m_rect.xMax
 		|| from.y == m_rect.yMin || from.y == m_rect.yMax)
 		initBounding();

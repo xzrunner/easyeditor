@@ -25,7 +25,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	if (d2d::DrawRectangleOP::onMouseLeftDown(x, y)) 
 		return true;
 
-	Shape* shape = m_stage->getShape();
+	Shape* shape = m_stage->GetShape();
 	if (!shape) return false;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
@@ -70,7 +70,7 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 
 	m_bDraggable = true;
 
-	Shape* shape = m_stage->getShape();
+	Shape* shape = m_stage->GetShape();
 	if (m_firstPos.isValid() && shape)
 	{
 		d2d::Vector end = m_editPanel->transPosScreenToProject(x, y);
@@ -110,8 +110,8 @@ bool SelectNodesOP::onDraw(const d2d::Screen& scr) const
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 		points.push_back(nodes[i]->xy);
 
-	Shape* shape = m_stage->getShape();
-	d2d::PrimitiveDraw::drawCircles(scr, points, m_stage->getShape()->GetNodeRegion(), 
+	Shape* shape = m_stage->GetShape();
+	d2d::PrimitiveDraw::drawCircles(scr, points, shape->GetNodeRegion(), 
 		true, 2, d2d::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
 
 	return false;

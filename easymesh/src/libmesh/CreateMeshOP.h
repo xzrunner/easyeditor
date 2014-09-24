@@ -8,7 +8,9 @@ namespace emesh
 {
 
 class StagePanel;
-class CreateMeshOP : public libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>
+class Shape;
+
+class CreateMeshOP : public libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>
 {
 public:
 	CreateMeshOP(StagePanel* stage);

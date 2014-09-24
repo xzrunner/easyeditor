@@ -14,9 +14,9 @@ StageCanvas::StageCanvas(StagePanel* panel)
 void StageCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
-	if (d2d::Image* image = m_panel->getSprite()->getImage()) {
-		image->reload();
-	}
+// 	if (d2d::Image* image = m_panel->getSprite()->getImage()) {
+// 		image->reload();
+// 	}
 }
 
 void StageCanvas::onDraw()
@@ -26,9 +26,9 @@ void StageCanvas::onDraw()
 		d2d::SpriteDraw::drawSprite(m_screen, bg);
 	}
 
-	m_panel->traverseShapes(d2d::DrawShapesVisitor(m_screen), d2d::e_visible);
-
 	m_editPanel->drawEditTemp(m_screen);
+
+	m_panel->traverseShapes(d2d::DrawShapesVisitor(m_screen), d2d::e_visible);
 
 #ifdef _DEBUG 
 	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);

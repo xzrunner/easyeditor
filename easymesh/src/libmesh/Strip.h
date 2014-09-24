@@ -42,6 +42,13 @@ public:
 
 	virtual ShapeType GetShapeType() const { return ST_STRIP; }
 
+	virtual void Refresh() {}
+
+	virtual void TraverseShapes(d2d::IVisitor& visitor) const {}
+	virtual void RemoveShapes(d2d::IShape* shape) {}
+	virtual void InsertShapes(d2d::IShape* shape) {}
+	virtual void ClearShapes() {}
+
 	static const char* GetType() { return "strip"; }
 
 private:

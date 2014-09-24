@@ -1,6 +1,9 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "Sprite.h"
+#include "Symbol.h"
+#include "Shape.h"
+
+#include <easyshape.h>
 
 namespace emesh
 {
@@ -10,8 +13,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	, d2d::MultiShapesImpl(parent)
 	, m_background(NULL)
 {
-	m_sprite = new Sprite();
-
+	m_symbol = new Symbol;
 	init(NULL);
 }
 
@@ -21,27 +23,25 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::MultiShapesImpl(parent)
 	, m_background(NULL)
 {
-	m_sprite = new Sprite();
-
+	m_symbol = new Symbol;
 	init(library);
 }
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library, Sprite* sprite)
-	: d2d::EditPanel(parent, frame)
-	, d2d::MultiShapesImpl(parent)
-	, m_background(NULL)
-{
-	sprite->retain();
-	m_sprite = sprite;
-
-	init(library);
-}
+// StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+// 					   d2d::LibraryPanel* library, Sprite* sprite)
+// 	: d2d::EditPanel(parent, frame)
+// 	, d2d::MultiShapesImpl(parent)
+// 	, m_background(NULL)
+// {
+// 	sprite->retain();
+// 	m_sprite = sprite;
+// 
+// 	init(library);
+// }
 
 StagePanel::~StagePanel()
 {
-	m_sprite->release();
-
+	m_symbol->release();
 	if (m_background) {
 		m_background->release();
 	}
@@ -49,49 +49,74 @@ StagePanel::~StagePanel()
 
 void StagePanel::clear()
 {
-	m_sprite->release();
-	m_sprite = new Sprite;
+	m_symbol->release();
+	m_symbol = new Symbol;
 }
 
 void StagePanel::traverseShapes(d2d::IVisitor& visitor, 
 								d2d::TraverseType type/* = d2d::e_allExisting*/) const
 {
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
-	{
-		bool hasNext;
-		visitor.visit(m_shapes[i], hasNext);
-		if (!hasNext) break;
+	Shape* shape = m_symbol->getShape();
+	if (shape) {
+		shape->TraverseShapes(visitor);
 	}
 }
 
 void StagePanel::removeShape(d2d::IShape* shape)
 {
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
-	{
-		if (m_shapes[i] == shape)
-		{
-			m_shapes.erase(m_shapes.begin() + i);
-			shape->release();
-			break;
-		}
+	Shape* mshape = m_symbol->getShape();
+	if (mshape) {
+		mshape->RemoveShapes(shape);
 	}
 }
 
 void StagePanel::insertShape(d2d::IShape* shape)
 {
-	m_shapes.push_back(shape);
+	Shape* mshape = m_symbol->getShape();
+	if (mshape) {
+		mshape->InsertShapes(shape);
+	}
 }
 
 void StagePanel::clearShapes()
 {
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
-		m_shapes[i]->release();
-	m_shapes.clear();
+	Shape* shape = m_symbol->getShape();
+	if (shape) {
+		shape->ClearShapes();
+	}
 }
 
-Shape* StagePanel::getShape()
+void StagePanel::SetSymbol(Symbol* symbol)
 {
-	return m_sprite->getShape();
+	if (m_symbol != symbol) {
+		m_symbol->release();
+		m_symbol = symbol;
+		m_symbol->retain();
+	}
+}
+
+const Symbol* StagePanel::GetSymbol() const
+{
+	return m_symbol;
+}
+
+Shape* StagePanel::GetShape()
+{
+	return m_symbol->getShape();
+}
+
+void StagePanel::LoadFromSymbol(const d2d::ISymbol* symbol)
+{
+	
+}
+
+void StagePanel::UpdateSymbol()
+{
+	if (Shape* shape = m_symbol->getShape()) {
+		std::vector<const libshape::ChainShape*> polylines;
+		traverseShapes(d2d::FetchAllVisitor<const libshape::ChainShape>(polylines));
+		shape->Refresh();
+	}
 }
 
 void StagePanel::init(d2d::LibraryPanel* library)
@@ -121,9 +146,9 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 {
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
-		Sprite* sprite = new Sprite(new Symbol(image->getImage()));
-		m_stage->m_sprite->release();
-		m_stage->m_sprite = sprite;
+		Symbol* symbol = new Symbol(image->getImage());
+		m_stage->m_symbol->release();
+		m_stage->m_symbol = symbol;
 		m_stage->Refresh();
 
 		m_stage->getCanvas()->resetViewport();

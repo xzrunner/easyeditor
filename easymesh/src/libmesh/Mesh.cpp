@@ -1,6 +1,8 @@
 #include "Mesh.h"
 #include "Triangle.h"
 
+#include <easyshape.h>
+
 namespace emesh
 {
 
@@ -11,7 +13,7 @@ Mesh::Mesh(bool use_region)
 
 Mesh::Mesh(const Mesh& mesh)
 	: Shape(mesh)
-	, m_region(mesh.m_region)
+	, m_region_new(mesh.m_region_new)
 	, m_use_region(mesh.m_use_region)
 {
 	RefreshTriangles();
@@ -37,8 +39,8 @@ Mesh::Mesh(const d2d::Image& image, bool initBound, bool use_region)
 	{
 		float hw = m_width * 0.5f,
 			  hh = m_height * 0.5f;
-		m_region.rect.combine(d2d::Vector(hw, hh));
-		m_region.rect.combine(d2d::Vector(-hw, -hh));
+		m_region_new.rect.combine(d2d::Vector(hw, hh));
+		m_region_new.rect.combine(d2d::Vector(-hw, -hh));
 		RefreshTriangles();
 	}
 }
@@ -50,78 +52,78 @@ Mesh* Mesh::clone() const
 
 void Mesh::Insert(const d2d::Vector& p)
 {
-	if (d2d::Math::isPointInRect(p, m_region.rect))
-	{
-		m_region.nodes.push_back(p);
-		RefreshTriangles();
-	}
+// 	if (d2d::Math::isPointInRect(p, m_region_new.rect))
+// 	{
+// 		m_region_new.nodes.push_back(p);
+// 		RefreshTriangles();
+// 	}
 }
 
 void Mesh::Remove(const d2d::Vector& p)
 {
-	if (d2d::Math::isPointInRect(p, m_region.rect))
-	{
-		std::vector<d2d::Vector>::iterator itr
-			= m_region.nodes.begin();
-		for ( ; itr != m_region.nodes.end(); ++itr)
-		{
-			if (d2d::Math::getDistance(*itr, p) < m_node_radius)
-			{
-				m_region.nodes.erase(itr);
-				RefreshTriangles();
-				break;
-			}
-		}
-	}
+// 	if (d2d::Math::isPointInRect(p, m_region.rect))
+// 	{
+// 		std::vector<d2d::Vector>::iterator itr
+// 			= m_region.nodes.begin();
+// 		for ( ; itr != m_region.nodes.end(); ++itr)
+// 		{
+// 			if (d2d::Math::getDistance(*itr, p) < m_node_radius)
+// 			{
+// 				m_region.nodes.erase(itr);
+// 				RefreshTriangles();
+// 				break;
+// 			}
+// 		}
+// 	}
 }
 
 d2d::Vector* Mesh::Find(const d2d::Vector& p)
 {
-	for (int i = 0, m = m_region.nodes.size(); i < m; ++i)
-		if (d2d::Math::getDistance(m_region.nodes[i], p) < m_node_radius)
-			return &m_region.nodes[i];
+// 	for (int i = 0, m = m_region.nodes.size(); i < m; ++i)
+// 		if (d2d::Math::getDistance(m_region.nodes[i], p) < m_node_radius)
+// 			return &m_region.nodes[i];
 	return NULL;
 }
 
 void Mesh::Move(d2d::Vector* src, const d2d::Vector& dst)
 {
-	if (!src) return;
-
-	if (d2d::Math::isPointInRect(dst, m_region.rect))
-	{
-		d2d::Vector d = dst;
-
-		// absorb node to region
-		const d2d::Rect& r = m_region.rect;
-		if (fabs(d.x - r.xMin) < m_node_radius) {
-			d.x = r.xMin;
-		}
-		if (fabs(d.x - r.xMax) < m_node_radius) {
-			d.x = r.xMax;
-		}
-		if (fabs(d.y - r.yMin) < m_node_radius) {
-			d.y = r.yMin;
-		}
-		if (fabs(d.y - r.yMax) < m_node_radius) {
-			d.y = r.yMax;
-		}
-
-		*src = d;
-
-		// remove corner rrom nodes
-		std::vector<d2d::Vector>::iterator itr = m_region.nodes.begin();
-		for ( ; itr != m_region.nodes.end(); )
-		{
-			if ((itr->x == r.xMin || itr->x == r.xMax)
-				&& (itr->y == r.yMin || itr->y == r.yMax)) {
-					itr = m_region.nodes.erase(itr);
-			} else {
-				++itr;
-			}
-		}
-
-		RefreshTriangles();
-	}
+// 	if (!src) return;
+// 
+// 	if (d2d::Math::isPointInRect(dst, m_region.rect))
+// 	{
+// 		d2d::Vector d = dst;
+// 
+// 		// absorb node to region
+// 		const d2d::Rect& r = m_region.rect;
+// 		if (fabs(d.x - r.xMin) < m_node_radius) {
+// 			d.x = r.xMin;
+// 		}
+// 		if (fabs(d.x - r.xMax) < m_node_radius) {
+// 			d.x = r.xMax;
+// 		}
+// 		if (fabs(d.y - r.yMin) < m_node_radius) {
+// 			d.y = r.yMin;
+// 		}
+// 		if (fabs(d.y - r.yMax) < m_node_radius) {
+// 			d.y = r.yMax;
+// 		}
+// 
+// 		*src = d;
+// 
+// 		// remove corner rrom nodes
+// 		std::vector<d2d::Vector>::iterator itr = m_region.nodes.begin();
+// 		for ( ; itr != m_region.nodes.end(); )
+// 		{
+// 			if ((itr->x == r.xMin || itr->x == r.xMax)
+// 				&& (itr->y == r.yMin || itr->y == r.yMax)) {
+// 					itr = m_region.nodes.erase(itr);
+// 			} else {
+// 				++itr;
+// 			}
+// 		}
+// 
+// 		RefreshTriangles();
+// 	}
 }
 
 void Mesh::Reset()
@@ -132,191 +134,257 @@ void Mesh::Reset()
 
 void Mesh::Clear()
 {
-	m_region.nodes.clear();
+//	m_region.nodes.clear();
 	RefreshTriangles();
 }
 
 void Mesh::OffsetUV(float dx, float dy)
 {
-	// update uv base
-	m_uv_offset.x += dx;
-	m_uv_offset.y += dy;
-	m_uv_offset.x = m_uv_offset.x - std::floor(m_uv_offset.x);
-	m_uv_offset.y = m_uv_offset.y - std::floor(m_uv_offset.y);
-
-	// insert node 
-	int width = m_region.rect.xLength();
-	int height = m_region.rect.yLength();
-
-	const float MAX = 99999;
-	std::vector<d2d::Vector> tris;
-	std::vector<d2d::Vector> lines;
-	if (m_uv_offset.x != 0)
-	{
-		float x = -width*0.5f + width*m_uv_offset.x;
-		lines.push_back(d2d::Vector(x, -MAX));
-		lines.push_back(d2d::Vector(x, MAX));
-	}
-	if (m_uv_offset.y != 0)
-	{
-		float y = -height*0.5f + height*m_uv_offset.y;
-		lines.push_back(d2d::Vector(-MAX, y));
-		lines.push_back(d2d::Vector(MAX, y));
-	}
-
-	std::vector<d2d::Vector> bound;
-	GetRegionBound(bound);
-	d2d::Triangulation::pointsAndLines(bound, m_region.nodes, lines, tris);
-
-	std::vector<std::pair<d2d::Vector, d2d::Vector> > trans_list;
-	std::set<Node*> nodes;
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		for (int i = 0; i < 3; ++i) {
-			nodes.insert(tri->nodes[i]);
-		}
-	}
-	std::set<Node*>::iterator itr = nodes.begin();
-	for ( ; itr != nodes.end(); ++itr)
-	{
-		Node* n = *itr;
-		if (n->xy != n->ori_xy) {
-			trans_list.push_back(std::make_pair(n->ori_xy, n->xy));
-		}
-	}
-
-	// uv bound to trans_list
-	if (m_uv_offset.y != 0)
-	{
-		float y = -height*0.5f + height*m_uv_offset.y;
-		for (int i = 0, n = m_tris.size(); i < n; ++i) {
-			Triangle* tri = m_tris[i];
-			for (int i = 0; i < 3; ++i) {
-				Node* curr = tri->nodes[i];
-				Node* next = tri->nodes[(i+1)%3];
-				if ((y > curr->ori_xy.y && y < next->ori_xy.y || 
-					y < curr->ori_xy.y && y > next->ori_xy.y) &&
-					(curr->ori_xy != curr->xy || next->ori_xy != next->xy)) {
-// 						d2d::Vector from, to;
-// 						from.y = to.y = y;
-// 						from.x = d2d::Math::findXOnSeg(curr->ori_xy, next->ori_xy, y);
-// 						to.x = d2d::Math::findXOnSeg(curr->xy, next->xy, y);
-
-						d2d::Vector pos(0.0f, y);
-						d2d::Vector from, to;
-						d2d::Math::getFootOfPerpendicular(curr->ori_xy, next->ori_xy, pos, &from);
-
-						float p = d2d::Math::getDistance(pos, curr->ori_xy) / d2d::Math::getDistance(curr->ori_xy, next->ori_xy);
-						to = curr->xy + (next->xy - curr->xy) * p;
-
-						trans_list.push_back(std::make_pair(from, to));
-				}
-			}
-		}
-	}
-
-	// create triangles separate
-	ClearTriangles();
-	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
-	{
-		Triangle* tri = new Triangle;
-		for (int j = 0; j < 3; ++j) {
-			Node* n = new Node(tris[ptr++], m_width, m_height);
-			for (int i = 0, m = trans_list.size(); i < m; ++i)
-			{
-				float dis = d2d::Math::getDistanceSquare(n->ori_xy, trans_list[i].first);
-				if (dis < 0.01) {
-					n->xy = trans_list[i].second;
-					break;
-				}
-			}
-			tri->nodes[j] = n;
-		}
-		m_tris.push_back(tri);
-	}
-
-	// set uv between textures
-	for (int i = 0, n = m_tris.size(); i < n; ++i)
-	{
-		Triangle* tri = m_tris[i];
-		d2d::Rect r;
-		r.makeInfinite();
-		for (int i = 0; i < 3; ++i) {
-			r.combine(tri->nodes[i]->uv);
-		}
-
-		for (int i = 0; i < 3; ++i) 
-		{
-			Node* n = tri->nodes[i];
-			float x = n->uv.x - m_uv_offset.x;
-			float y = n->uv.y - m_uv_offset.y;
-			x = x - std::floor(x);
-			y = y - std::floor(y);
-			if (fabs(x - 0) < 0.0001f && n->uv.x == r.xMax) {
-				x = 1;
-			}
-			if (fabs(x - 1) < 0.0001f && n->uv.x == r.xMin) {
-				x = 0;
-			}
-			if (fabs(y - 0) < 0.0001f && n->uv.y == r.yMax) {
-				y = 1;
-			}
-			if (fabs(y - 1) < 0.0001f && n->uv.y == r.yMin) {
-				y = 0;
-			}
-			n->uv.x = x;
-			n->uv.y = y;
-		}
-	}
+//	// update uv base
+//	m_uv_offset.x += dx;
+//	m_uv_offset.y += dy;
+//	m_uv_offset.x = m_uv_offset.x - std::floor(m_uv_offset.x);
+//	m_uv_offset.y = m_uv_offset.y - std::floor(m_uv_offset.y);
+//
+//	// insert node 
+//	int width = m_region.rect.xLength();
+//	int height = m_region.rect.yLength();
+//
+//	const float MAX = 99999;
+//	std::vector<d2d::Vector> tris;
+//	std::vector<d2d::Vector> lines;
+//	if (m_uv_offset.x != 0)
+//	{
+//		float x = -width*0.5f + width*m_uv_offset.x;
+//		lines.push_back(d2d::Vector(x, -MAX));
+//		lines.push_back(d2d::Vector(x, MAX));
+//	}
+//	if (m_uv_offset.y != 0)
+//	{
+//		float y = -height*0.5f + height*m_uv_offset.y;
+//		lines.push_back(d2d::Vector(-MAX, y));
+//		lines.push_back(d2d::Vector(MAX, y));
+//	}
+//
+//	std::vector<d2d::Vector> bound;
+//	GetRegionBound(bound);
+//	d2d::Triangulation::pointsAndLines(bound, m_region.nodes, lines, tris);
+//
+//	std::vector<std::pair<d2d::Vector, d2d::Vector> > trans_list;
+//	std::set<Node*> nodes;
+//	for (int i = 0, n = m_tris.size(); i < n; ++i)
+//	{
+//		Triangle* tri = m_tris[i];
+//		for (int i = 0; i < 3; ++i) {
+//			nodes.insert(tri->nodes[i]);
+//		}
+//	}
+//	std::set<Node*>::iterator itr = nodes.begin();
+//	for ( ; itr != nodes.end(); ++itr)
+//	{
+//		Node* n = *itr;
+//		if (n->xy != n->ori_xy) {
+//			trans_list.push_back(std::make_pair(n->ori_xy, n->xy));
+//		}
+//	}
+//
+//	// uv bound to trans_list
+//	if (m_uv_offset.y != 0)
+//	{
+//		float y = -height*0.5f + height*m_uv_offset.y;
+//		for (int i = 0, n = m_tris.size(); i < n; ++i) {
+//			Triangle* tri = m_tris[i];
+//			for (int i = 0; i < 3; ++i) {
+//				Node* curr = tri->nodes[i];
+//				Node* next = tri->nodes[(i+1)%3];
+//				if ((y > curr->ori_xy.y && y < next->ori_xy.y || 
+//					y < curr->ori_xy.y && y > next->ori_xy.y) &&
+//					(curr->ori_xy != curr->xy || next->ori_xy != next->xy)) {
+//// 						d2d::Vector from, to;
+//// 						from.y = to.y = y;
+//// 						from.x = d2d::Math::findXOnSeg(curr->ori_xy, next->ori_xy, y);
+//// 						to.x = d2d::Math::findXOnSeg(curr->xy, next->xy, y);
+//
+//						d2d::Vector pos(0.0f, y);
+//						d2d::Vector from, to;
+//						d2d::Math::getFootOfPerpendicular(curr->ori_xy, next->ori_xy, pos, &from);
+//
+//						float p = d2d::Math::getDistance(pos, curr->ori_xy) / d2d::Math::getDistance(curr->ori_xy, next->ori_xy);
+//						to = curr->xy + (next->xy - curr->xy) * p;
+//
+//						trans_list.push_back(std::make_pair(from, to));
+//				}
+//			}
+//		}
+//	}
+//
+//	// create triangles separate
+//	ClearTriangles();
+//	for (int i = 0, n = tris.size() / 3, ptr = 0; i < n; ++i)
+//	{
+//		Triangle* tri = new Triangle;
+//		for (int j = 0; j < 3; ++j) {
+//			Node* n = new Node(tris[ptr++], m_width, m_height);
+//			for (int i = 0, m = trans_list.size(); i < m; ++i)
+//			{
+//				float dis = d2d::Math::getDistanceSquare(n->ori_xy, trans_list[i].first);
+//				if (dis < 0.01) {
+//					n->xy = trans_list[i].second;
+//					break;
+//				}
+//			}
+//			tri->nodes[j] = n;
+//		}
+//		m_tris.push_back(tri);
+//	}
+//
+//	// set uv between textures
+//	for (int i = 0, n = m_tris.size(); i < n; ++i)
+//	{
+//		Triangle* tri = m_tris[i];
+//		d2d::Rect r;
+//		r.makeInfinite();
+//		for (int i = 0; i < 3; ++i) {
+//			r.combine(tri->nodes[i]->uv);
+//		}
+//
+//		for (int i = 0; i < 3; ++i) 
+//		{
+//			Node* n = tri->nodes[i];
+//			float x = n->uv.x - m_uv_offset.x;
+//			float y = n->uv.y - m_uv_offset.y;
+//			x = x - std::floor(x);
+//			y = y - std::floor(y);
+//			if (fabs(x - 0) < 0.0001f && n->uv.x == r.xMax) {
+//				x = 1;
+//			}
+//			if (fabs(x - 1) < 0.0001f && n->uv.x == r.xMin) {
+//				x = 0;
+//			}
+//			if (fabs(y - 0) < 0.0001f && n->uv.y == r.yMax) {
+//				y = 1;
+//			}
+//			if (fabs(y - 1) < 0.0001f && n->uv.y == r.yMin) {
+//				y = 0;
+//			}
+//			n->uv.x = x;
+//			n->uv.y = y;
+//		}
+//	}
 }
 
 void Mesh::Load(const Json::Value& value)
 {
-	d2d::Rect& r = m_region.rect;
-	r.xMin = value["bound"]["xmin"].asDouble();
-	r.xMax = value["bound"]["xmax"].asDouble();
-	r.yMin = value["bound"]["ymin"].asDouble();
-	r.yMax = value["bound"]["ymax"].asDouble();
-
-	d2d::JsonTools::load(value["nodes"], m_region.nodes);
-
-	RefreshTriangles();
-
-	LoadTriangles(value["triangles"]);
+ 	d2d::Rect& r = m_region_new.rect;
+ 	r.xMin = value["bound"]["xmin"].asDouble();
+ 	r.xMax = value["bound"]["xmax"].asDouble();
+ 	r.yMin = value["bound"]["ymin"].asDouble();
+ 	r.yMax = value["bound"]["ymax"].asDouble();
+ 
+	Json::Value loops_val = value["loops"];
+	int i = 0;
+	Json::Value loop_val = loops_val[i++];
+	while (!loop_val.isNull()) {
+		std::vector<d2d::Vector> nodes;
+		d2d::JsonTools::load(loop_val, nodes);
+		libshape::ChainShape* shape = new libshape::ChainShape(nodes, true);
+		m_region_new.loops.push_back(shape);
+		loop_val = loops_val[i++];
+	}
+ 
+ 	RefreshTriangles();
+ 
+	if (!value["triangles"].isNull()) {
+		LoadTriangles(value["triangles"]);
+	}
 }
 
 void Mesh::Store(Json::Value& value) const
 {
-	value["type"] = GetType();
+ 	value["type"] = GetType();
+ 
+ 	value["bound"]["xmin"] = m_region_new.rect.xMin;
+ 	value["bound"]["xmax"] = m_region_new.rect.xMax;
+ 	value["bound"]["ymin"] = m_region_new.rect.yMin;
+ 	value["bound"]["ymax"] = m_region_new.rect.yMax;
 
-	value["bound"]["xmin"] = m_region.rect.xMin;
-	value["bound"]["xmax"] = m_region.rect.xMax;
-	value["bound"]["ymin"] = m_region.rect.yMin;
-	value["bound"]["ymax"] = m_region.rect.yMax;
+	Json::Value& loops_val = value["loops"];
+	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i) {
+		const libshape::ChainShape* loop = m_region_new.loops[i];
+		d2d::JsonTools::store(loop->getVertices(), loops_val[i]);
+	}
 
-	d2d::JsonTools::store(m_region.nodes, value["nodes"]);
+ 	StoreTriangles(value["triangles"]);
+}
 
-	StoreTriangles(value["triangles"]);
+void Mesh::Refresh()
+{
+	RefreshTriangles();
+}
+
+void Mesh::TraverseShapes(d2d::IVisitor& visitor) const
+{
+	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i)
+	{
+		libshape::ChainShape* shape 
+			= const_cast<libshape::ChainShape*>(m_region_new.loops[i]);
+
+		bool has_next;
+		visitor.visit(shape, has_next);
+		if (!has_next) {
+			break;
+		}
+	}
+}
+
+void Mesh::RemoveShapes(d2d::IShape* shape)
+{
+	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i)
+	{
+		const d2d::IShape* loop = m_region_new.loops[i];
+		if (loop == shape) {
+			loop->release();
+			m_region_new.loops.erase(m_region_new.loops.begin() + i);
+			break;
+		}
+	}
+}
+
+void Mesh::InsertShapes(d2d::IShape* shape)
+{
+	libshape::ChainShape* loop = dynamic_cast<libshape::ChainShape*>(shape);
+	if (loop) {
+		loop->retain();
+		m_region_new.loops.push_back(loop);
+	}
+}
+
+void Mesh::ClearShapes()
+{
+	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i) {
+		m_region_new.loops[i]->release();
+	}
+	m_region_new.loops.clear();
 }
 
 void Mesh::RefreshTriangles()
 {
 	ClearTriangles();
 
-	if (!m_use_region && m_region.nodes.size() < 3) {
-		return;
+	std::vector<d2d::Vector> tris;
+	for (int i = 0, n = m_region_new.loops.size(); i < n; ++i)
+	{
+		const libshape::ChainShape* chain = m_region_new.loops[i];
+		const std::vector<d2d::Vector>& loop = chain->getVertices();
+		d2d::Triangulation::normal(loop, tris);
 	}
 
-	std::vector<d2d::Vector> bound;
-	GetRegionBound(bound);
-	std::vector<d2d::Vector> tris;
-	if (m_use_region) {
-		d2d::Triangulation::points(bound, m_region.nodes, tris);
-	} else {
-		std::vector<d2d::Vector> empty;
-		d2d::Triangulation::points(bound, empty, tris);
-	}
+// 	if (m_use_region) {
+// 		d2d::Triangulation::points(bound, m_region.nodes, tris);
+// 	} else {
+// 		std::vector<d2d::Vector> empty;
+// 		d2d::Triangulation::points(bound, empty, tris);
+// 	}
 	
 	std::map<d2d::Vector, Node*, d2d::VectorCmp> map2Node;
 	Node null;
@@ -341,15 +409,15 @@ void Mesh::RefreshTriangles()
 
 void Mesh::GetRegionBound(std::vector<d2d::Vector>& bound) const
 {
-	if (m_use_region) {
-		const d2d::Rect& r = m_region.rect;
-		bound.push_back(d2d::Vector(r.xMin, r.yMin));
-		bound.push_back(d2d::Vector(r.xMin, r.yMax));
-		bound.push_back(d2d::Vector(r.xMax, r.yMax));
-		bound.push_back(d2d::Vector(r.xMax, r.yMin));
-	} else {
-		std::copy(m_region.nodes.begin(), m_region.nodes.end(), back_inserter(bound));
-	}
+// 	if (m_use_region) {
+// 		const d2d::Rect& r = m_region.rect;
+// 		bound.push_back(d2d::Vector(r.xMin, r.yMin));
+// 		bound.push_back(d2d::Vector(r.xMin, r.yMax));
+// 		bound.push_back(d2d::Vector(r.xMax, r.yMax));
+// 		bound.push_back(d2d::Vector(r.xMax, r.yMin));
+// 	} else {
+// 		std::copy(m_region.nodes.begin(), m_region.nodes.end(), back_inserter(bound));
+// 	}
 }
 
 //void Mesh::getLinesCutByUVBounds(std::vector<d2d::Vector>& lines)

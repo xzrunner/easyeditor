@@ -39,13 +39,13 @@ wxSizer* EditUVCMPT::initLayout()
 
 void EditUVCMPT::onMove(wxCommandEvent& event)
 {
-	m_stage->getShape()->OffsetUV(0, SPEED_Y);
+	m_stage->GetShape()->OffsetUV(0, SPEED_Y);
 	m_editPanel->Refresh();
 }
 
 void EditUVCMPT::onReset(wxCommandEvent& event)
 {
-	m_stage->getShape()->Reset();
+	m_stage->GetShape()->Reset();
 	m_editPanel->Refresh();
 	m_editOP->clear();
 }
