@@ -24,6 +24,11 @@ public:
 	static void normal(const std::vector<Vector>& bound, std::vector<Vector>& result, 
 		Type type = e_Constrained);
 
+	static void Holes(const std::vector<Vector>& bound, const std::vector<std::vector<Vector> >& holes,
+		std::vector<Vector>& result, Type type = e_Constrained);
+	static void HolesNew(const std::vector<Vector>& bound, const std::vector<Vector>& hole,
+		std::vector<Vector>& result, Type type = e_Constrained);
+
 	static void points(const std::vector<Vector>& bound, const std::vector<Vector>& points,
 		std::vector<Vector>& result, Type type = e_Constrained);
 

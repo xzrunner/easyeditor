@@ -108,6 +108,138 @@ void Triangulation::normal(const std::vector<Vector>& bound,
 	finish(out, bound_fixed, result);
 }
 
+void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<std::vector<Vector> >& holes, 
+						  std::vector<Vector>& result, Type type)
+{
+	struct triangulateio in, out;
+
+	std::vector<Vector> bound_fixed;
+	VerifyBound(bound, bound_fixed);
+
+	in.numberofpoints = bound_fixed.size();
+	in.numberofpointattributes = 0;
+	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+	in.pointmarkerlist = (int *) NULL;
+	int index = 0;
+	for (size_t i = 0; i < in.numberofpoints; ++i)
+	{
+		in.pointlist[index++] = bound_fixed[i].x;
+		in.pointlist[index++] = bound_fixed[i].y;
+	}
+
+	in.numberofsegments = in.numberofpoints;
+	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
+	index = 0;
+	for (size_t i = 0; i < in.numberofsegments - 1; ++i)
+	{
+		in.segmentlist[index++] = i;
+		in.segmentlist[index++] = i + 1;
+	}
+	in.segmentlist[index++] = in.numberofsegments - 1;
+	in.segmentlist[index++] = 0;
+
+	in.segmentmarkerlist = (int *) NULL;
+
+	//in.numberofholes = 0;
+
+ 	in.numberofholes = 1;
+ 	in.holelist = (REAL *) malloc(in.numberofholes * 2 * sizeof(REAL));
+ 	in.holelist[0] = 0;
+ 	in.holelist[1] = 0;
+
+// 	std::vector<Vector> hole_fixed;
+// 	VerifyBound(holes[0], hole_fixed);
+// 	in.numberofholes = hole_fixed.size();
+// 	in.holelist = (REAL*)malloc(in.numberofholes * 2 * sizeof(REAL));
+// 	index = 0;
+// 	for (size_t i = 0; i < in.numberofholes; ++i)
+// 	{
+// 		in.holelist[index++] = hole_fixed[i].x;
+// 		in.holelist[index++] = hole_fixed[i].y;
+// 	}
+
+	in.numberofregions = 0;
+
+	init(out);
+	implement(in, out, type);
+	finish(out, bound_fixed, result);
+}
+
+void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector<Vector>& hole,
+							 std::vector<Vector>& result, Type type)
+{
+	struct triangulateio in, out;
+
+	std::vector<Vector> bound_fixed, hole_fixed;
+	VerifyBound(bound, bound_fixed);
+	VerifyBound(hole, hole_fixed);
+
+	in.numberofpoints = bound_fixed.size() + hole_fixed.size();
+	in.numberofpointattributes = 0;
+	in.pointlist = (REAL *) malloc(in.numberofpoints * 2 * sizeof(REAL));
+	in.pointmarkerlist = (int *) NULL;
+	int index = 0;
+	for (size_t i = 0, n = bound_fixed.size(); i < n; ++i)
+	{
+		in.pointlist[index++] = bound_fixed[i].x;
+		in.pointlist[index++] = bound_fixed[i].y;
+	}
+	d2d::Vector hold_center;
+	for (size_t i = 0, n = hole_fixed.size(); i < n; ++i)
+	{
+		in.pointlist[index++] = hole_fixed[i].x;
+		in.pointlist[index++] = hole_fixed[i].y;
+
+		hold_center += hole_fixed[i];
+	}
+	hold_center /= hole_fixed.size();
+
+	in.numberofsegments = in.numberofpoints;
+	in.segmentlist = (int *) malloc(in.numberofsegments * 2 * sizeof(int));
+	index = 0;
+	for (size_t i = 0; i < bound_fixed.size() - 1; ++i)
+	{
+		in.segmentlist[index++] = i;
+		in.segmentlist[index++] = i + 1;
+	}
+	in.segmentlist[index++] = bound_fixed.size() - 1;
+	in.segmentlist[index++] = 0;
+
+	for (size_t i = 0; i < hole_fixed.size() - 1; ++i)
+	{
+		in.segmentlist[index++] = i;
+		in.segmentlist[index++] = i + 1;
+	}
+	in.segmentlist[index++] = in.numberofpoints - 1;
+	in.segmentlist[index++] = bound_fixed.size();
+
+	in.segmentmarkerlist = (int *) NULL;
+
+	//in.numberofholes = 0;
+
+	in.numberofholes = 1;
+	in.holelist = (REAL *) malloc(in.numberofholes * 2 * sizeof(REAL));
+	in.holelist[0] = hold_center.x;
+	in.holelist[1] = hold_center.y;
+
+	// 	std::vector<Vector> hole_fixed;
+	// 	VerifyBound(holes[0], hole_fixed);
+	// 	in.numberofholes = hole_fixed.size();
+	// 	in.holelist = (REAL*)malloc(in.numberofholes * 2 * sizeof(REAL));
+	// 	index = 0;
+	// 	for (size_t i = 0; i < in.numberofholes; ++i)
+	// 	{
+	// 		in.holelist[index++] = hole_fixed[i].x;
+	// 		in.holelist[index++] = hole_fixed[i].y;
+	// 	}
+
+	in.numberofregions = 0;
+
+	init(out);
+	implement(in, out, type);
+	finish(out, bound_fixed, result);
+}
+
 void Triangulation::points(const std::vector<Vector>& bound, 
 						   const std::vector<Vector>& points,
 						   std::vector<Vector>& result, 

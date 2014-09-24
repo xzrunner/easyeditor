@@ -56,6 +56,9 @@ public:
 private:
 	void RefreshTriangles();
 
+	void GetTriangulation(std::vector<d2d::Vector>& tris);
+	void LoadFromTriangulation(const std::vector<d2d::Vector>& tris);
+
 	void GetRegionBound(std::vector<d2d::Vector>& bound) const;
 
 //	void getLinesCutByUVBounds(std::vector<d2d::Vector>& lines);
