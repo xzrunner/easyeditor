@@ -40,7 +40,7 @@ void EditDialog::initLayout()
  
  	StagePanel* stage = new StagePanel(splitter, this);
 	Symbol& symbol = const_cast<Symbol&>(m_sprite->getSymbol());
-// 	stage->getSprite()->setSymbol(&symbol);
+	stage->SetSymbol(&symbol);
  	m_stage = stage;
  	d2d::ToolbarPanel* toolbar = new ToolbarPanel(splitter, stage, false, m_sprite);
  
