@@ -32,6 +32,10 @@ void StageCanvas::onDraw()
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteDraw::drawSprite(m_screen, sprites[i]);
 	m_editPanel->drawEditTemp(m_screen);
+
+#ifdef _DEBUG 
+	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+#endif
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
