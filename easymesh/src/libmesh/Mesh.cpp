@@ -323,29 +323,29 @@ void Mesh::GetTriangulation(std::vector<d2d::Vector>& tris)
 	}
 	else
 	{
-// 		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
-// 		{
-// 			const libshape::ChainShape* chain = m_region.loops[i];
-// 			const std::vector<d2d::Vector>& loop = chain->getVertices();
-// 			d2d::Triangulation::normal(loop, tris);
+ 		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
+ 		{
+ 			const libshape::ChainShape* chain = m_region.loops[i];
+ 			const std::vector<d2d::Vector>& loop = chain->getVertices();
+ 			d2d::Triangulation::normal(loop, tris);
+ 		}
+
+// 		for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
+// 			const std::vector<d2d::Vector>& loop0 = m_region.loops[i]->getVertices();
+// 			for (int j = 0; j < n; ++j) {
+// 				if (i != j) {
+// 					const std::vector<d2d::Vector>& loop1 = m_region.loops[j]->getVertices();
+// 					if (d2d::Math::isPointInArea(loop1[0], loop0)) {
+// 
+// // 						std::vector<std::vector<d2d::Vector> > holes;
+// // 						holes.push_back(loop1);
+// // 						d2d::Triangulation::Holes(loop0, holes, tris);
+// 
+// 						d2d::Triangulation::HolesNew(loop0, loop1, tris);
+// 					}
+// 				}
+// 			}
 // 		}
-
-		for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-			const std::vector<d2d::Vector>& loop0 = m_region.loops[i]->getVertices();
-			for (int j = 0; j < n; ++j) {
-				if (i != j) {
-					const std::vector<d2d::Vector>& loop1 = m_region.loops[j]->getVertices();
-					if (d2d::Math::isPointInArea(loop1[0], loop0)) {
-
-// 						std::vector<std::vector<d2d::Vector> > holes;
-// 						holes.push_back(loop1);
-// 						d2d::Triangulation::Holes(loop0, holes, tris);
-
-						d2d::Triangulation::HolesNew(loop0, loop1, tris);
-					}
-				}
-			}
-		}
 	}
 }
 

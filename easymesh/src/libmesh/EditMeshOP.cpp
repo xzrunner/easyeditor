@@ -93,14 +93,14 @@ bool EditMeshOP::onDraw(const d2d::Screen& scr) const
 	if (Shape* shape = m_stage->GetShape())
 	{
 		shape->DrawTexture(scr, d2d::Matrix());
-		shape->DrawInfoXY(scr);
+//		shape->DrawInfoXY(scr);
 	}
 
-	d2d::PrimitiveDraw::cross(scr, m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
-	d2d::PrimitiveDraw::drawCircle(scr, m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
-
-	if (SelectNodesOP::onDraw(scr))
-		return true;
+// 	d2d::PrimitiveDraw::cross(scr, m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
+// 	d2d::PrimitiveDraw::drawCircle(scr, m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
+// 
+// 	if (SelectNodesOP::onDraw(scr))
+// 		return true;
 
 	return false;
 }

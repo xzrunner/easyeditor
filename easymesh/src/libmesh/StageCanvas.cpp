@@ -15,6 +15,7 @@ void StageCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
 	m_panel->GetSymbol()->reloadTexture();
+	d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	resetViewport();
 }
 
@@ -29,9 +30,9 @@ void StageCanvas::onDraw()
 
 	m_panel->traverseShapes(d2d::DrawShapesVisitor(m_screen), d2d::e_visible);
 
-#ifdef _DEBUG 
-	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
-#endif
+// #ifdef _DEBUG 
+// 	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+// #endif
 }
 
 }

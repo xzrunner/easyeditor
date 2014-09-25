@@ -47,6 +47,11 @@ bool Image::loadFromFile(const wxString& filepath)
 
 	m_filepath = filepath;
 
+// 	m_region.xMin = - m_width * 0.5f;
+// 	m_region.xMax =   m_width * 0.5f;
+// 	m_region.yMin = - m_height * 0.5f;
+// 	m_region.yMax =   m_height * 0.5f;
+
 #ifdef NOT_LOAD_IMAGE
 	return true;
 #endif
@@ -74,6 +79,13 @@ bool Image::loadFromFile(const wxString& filepath)
 				r.translate(d2d::Vector(-m_width*0.5f, -m_height*0.5f));
 				m_region = r;
 			}
+		} 
+		else 
+		{
+			m_region.xMin = - m_width * 0.5f;
+			m_region.xMax =   m_width * 0.5f;
+			m_region.yMin = - m_height * 0.5f;
+			m_region.yMax =   m_height * 0.5f;
 		}
 
 // 		// todo
@@ -98,6 +110,12 @@ void Image::reload()
  		);
 #else
 	m_pixels = ImageLoader::loadTexture(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_channels);
+
+ 	m_region.xMin = - m_width * 0.5f;
+ 	m_region.xMax =   m_width * 0.5f;
+ 	m_region.yMin = - m_height * 0.5f;
+ 	m_region.yMax =   m_height * 0.5f;
+
 #endif
 }
 

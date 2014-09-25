@@ -63,11 +63,17 @@ void FileIO::store(const char* filename, StagePanel* stage,
 
 d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 {
+	d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
+	bool old_edge_clip = setting.open_image_edge_clip;
+	setting.open_image_edge_clip = false;
+
 	d2d::ISprite* sprite = NULL;
 	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	symbol->release();
+
+	setting.open_image_edge_clip = old_edge_clip;
 
 	sprite->name = value["name"].asString();
 

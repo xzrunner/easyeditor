@@ -165,6 +165,10 @@ void Symbol::resize(float width, float height) const
 
 void Symbol::loadResources()
 {
+	d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
+	bool old_edge_clip = setting.open_image_edge_clip;
+	setting.open_image_edge_clip = false;
+
 	FileLoader adapter;
 	adapter.load(m_filepath.c_str());
 
@@ -210,6 +214,8 @@ void Symbol::loadResources()
 	}
 
 	composeFromSprites();
+
+	setting.open_image_edge_clip = old_edge_clip;
 }
 
 void Symbol::composeFromSprites() const
@@ -337,18 +343,19 @@ Symbol::Type Symbol::getType(d2d::ISprite* sprites[3][3]) const
 void Symbol::stretch(d2d::ISprite* sprite, const d2d::Vector& center, 
 						  float width, float height)
 {
-	assert(sprite->getSymbol().getSize().xLength() != 0
-		&& sprite->getSymbol().getSize().yLength() != 0);
+	const d2d::ImageSymbol& symbol = dynamic_cast<const d2d::ImageSymbol&>(sprite->getSymbol());
+// 	int w = symbol.getImage()->originWidth(),
+// 		h = symbol.getImage()->originHeight();
+	int w = sprite->getSymbol().getSize().xLength(),
+		h = sprite->getSymbol().getSize().yLength();
+	assert(w != 0 && h != 0);
 
 	sprite->setTransform(center, sprite->getAngle());
-	const float sw = sprite->getSymbol().getSize().xLength(),
-		sh = sprite->getSymbol().getSize().yLength();
-
 	const float times = sprite->getAngle() / d2d::PI;
 	if (times - (int)(times + 0.01f) < 0.3f)
-		sprite->setScale(width / sw, height / sh);
+		sprite->setScale(width / w, height / h);
 	else
-		sprite->setScale(height / sw, width / sh);
+		sprite->setScale(height / w, width / h);
 }
 
 void Symbol::initSprite(const FileLoader::Entry& entry, d2d::ISprite** pSprite,
