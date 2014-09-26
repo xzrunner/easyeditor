@@ -8,7 +8,7 @@ namespace emesh
 {
 
 CreateMeshOP::CreateMeshOP(StagePanel* stage)
-	: libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>(stage, stage, NULL, NULL, 5)
+	: libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>(stage, stage, NULL, NULL, 5)
 	, m_stage(stage)
 	, m_selected(NULL)
 {
@@ -16,9 +16,27 @@ CreateMeshOP::CreateMeshOP(StagePanel* stage)
 	m_last_right.setInvalid();
 }
 
+bool CreateMeshOP::onKeyDown(int keyCode)
+{
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onKeyDown(keyCode))
+		return true;
+
+	switch (keyCode)
+	{
+	case 'a': case 'A':
+	case 'd': case 'D':
+	case 's': case 'S':
+	case 'w': case 'W':
+		m_stage->UpdateSymbol();
+		break;
+	}
+
+	return false;
+}
+
 bool CreateMeshOP::onMouseLeftDown(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>::onMouseLeftDown(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseLeftDown(x, y))
 		return true;
 
 	m_stage->UpdateSymbol();
@@ -34,7 +52,7 @@ bool CreateMeshOP::onMouseLeftDown(int x, int y)
 
 bool CreateMeshOP::onMouseLeftUp(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>::onMouseLeftUp(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseLeftUp(x, y))
 		return true;
 
 	m_stage->UpdateSymbol();
@@ -54,7 +72,7 @@ bool CreateMeshOP::onMouseLeftUp(int x, int y)
 
 bool CreateMeshOP::onMouseRightDown(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>::onMouseRightDown(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseRightDown(x, y))
 		return true;
 
 	m_stage->UpdateSymbol();
@@ -73,7 +91,7 @@ bool CreateMeshOP::onMouseRightDown(int x, int y)
 
 bool CreateMeshOP::onMouseRightUp(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>::onMouseRightUp(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseRightUp(x, y))
 		return true;
 
 	m_stage->UpdateSymbol();
@@ -85,7 +103,7 @@ bool CreateMeshOP::onMouseRightUp(int x, int y)
 
 bool CreateMeshOP::onMouseDrag(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>::onMouseDrag(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseDrag(x, y))
 		return true;
 
 	//d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
@@ -124,7 +142,7 @@ bool CreateMeshOP::onDraw(const d2d::Screen& scr) const
 		shape->DrawInfoUV(scr);
 	}
 
-	libshape::EditPolylineOP<libshape::DrawLoopOP, d2d::SelectShapesOP>::onDraw(scr);
+	libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onDraw(scr);
 
 	return false;
 }

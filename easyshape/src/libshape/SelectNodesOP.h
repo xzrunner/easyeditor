@@ -29,6 +29,9 @@ public:
 protected:
 	void clearSelectedNodes();
 
+private:
+	void OnDirectionKeyDown(d2d::DirectionType type);
+
 protected:
 	struct ChainSelectedNodes
 	{

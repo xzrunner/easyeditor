@@ -23,10 +23,28 @@ bool SelectNodesOP::onKeyDown(int keyCode)
 {
 	if (DrawRectangleOP::onKeyDown(keyCode)) return true;
 
-	if (keyCode == WXK_DELETE)
+	switch (keyCode)
 	{
+	case WXK_DELETE:
 		clearSelectedNodes();
 		m_editPanel->Refresh();
+		break;
+	case 'a': case 'A':
+		OnDirectionKeyDown(d2d::e_left);
+		m_editPanel->Refresh();
+		break;
+	case 'd': case 'D':
+		OnDirectionKeyDown(d2d::e_right);
+		m_editPanel->Refresh();
+		break;
+	case 's': case 'S':
+		OnDirectionKeyDown(d2d::e_down);
+		m_editPanel->Refresh();
+		break;
+	case 'w': case 'W':
+		OnDirectionKeyDown(d2d::e_up);
+		m_editPanel->Refresh();
+		break;
 	}
 
 	return false;
@@ -173,6 +191,40 @@ void SelectNodesOP::clearSelectedNodes()
 {
 	for_each(m_nodeSelection.begin(), m_nodeSelection.end(), DeletePointerFunctor<ChainSelectedNodes>());
 	m_nodeSelection.clear();
+}
+
+void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
+{
+	if (m_nodeSelection.empty()) {
+		return;
+	}
+
+	d2d::Vector offset;
+	switch (type)
+	{
+	case d2d::e_left:
+		offset.x -= 1;
+		break;
+	case d2d::e_right:
+		offset.x += 1;
+		break;
+	case d2d::e_down:
+		offset.y -= 1;
+		break;
+	case d2d::e_up:
+		offset.y += 1;
+		break;
+	}
+
+	for (int i = 0, n = m_nodeSelection.size(); i < n; ++i) {
+		ChainSelectedNodes* nodes = m_nodeSelection[i];
+		for (int j = 0, m = nodes->selectedNodes.size(); j < m; ++j) {
+			const d2d::Vector& from = nodes->selectedNodes[j];
+			d2d::Vector to = from + offset;
+			nodes->chain->changeVertices(from, to);
+			nodes->selectedNodes[j] = to;
+		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
