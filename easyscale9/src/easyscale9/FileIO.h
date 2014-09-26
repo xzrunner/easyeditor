@@ -19,6 +19,7 @@ namespace escale9
 	private:
 		static d2d::ISprite* load(const Json::Value& value, const wxString& dir);
 		static Json::Value store(d2d::ISprite* sprite, const wxString& dir);
+		static Json::Value StoreNew(d2d::ISprite* sprite, const wxString& dir);
 
 	}; // FileIO
 }

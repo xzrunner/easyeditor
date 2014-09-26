@@ -163,59 +163,93 @@ void Symbol::resize(float width, float height) const
 	composeFromSprites();
 }
 
+// todo 
 void Symbol::loadResources()
 {
-// 	d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
-// 	bool old_edge_clip = setting.open_image_edge_clip;
-// 	setting.open_image_edge_clip = false;
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(m_filepath.fn_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
 
-	FileLoader adapter;
-	adapter.load(m_filepath.c_str());
-
-	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
-
-	m_width = adapter.width;
-	m_height = adapter.height;
-
-	int index = 0;
-
-	m_type = Type(adapter.type);
-	switch (m_type)
+	if (value["sprite new"].isNull())
 	{
-	case e_9Grid:
-		for (size_t i = 0; i < 3; ++i)
-			for (size_t j = 0; j < 3; ++j)
-				initSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dir);
-		break;
-	case e_9GridHollow:
-		for (size_t i = 0; i < 3; ++i) {
-			for (size_t j = 0; j < 3; ++j) {
-				if (i == 1 && j == 1) continue;
-				if (i > 1 || i == 1 && j > 1)
-					initSprite(adapter.m_data[i*3+j-1], &m_sprites[i][j], dir);
-				else
+		FileLoader adapter;
+		adapter.load(m_filepath.c_str());
+
+		std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
+
+		m_width = adapter.width;
+		m_height = adapter.height;
+
+		int index = 0;
+
+		m_type = Type(adapter.type);
+		switch (m_type)
+		{
+		case e_9Grid:
+			for (size_t i = 0; i < 3; ++i)
+				for (size_t j = 0; j < 3; ++j)
 					initSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dir);
+			break;
+		case e_9GridHollow:
+			for (size_t i = 0; i < 3; ++i) {
+				for (size_t j = 0; j < 3; ++j) {
+					if (i == 1 && j == 1) continue;
+					if (i > 1 || i == 1 && j > 1)
+						initSprite(adapter.m_data[i*3+j-1], &m_sprites[i][j], dir);
+					else
+						initSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dir);
+				}
+			}
+			break;
+		case e_3GridHor:
+			for (size_t i = 0; i < 3; ++i)
+				initSprite(adapter.m_data[i], &m_sprites[1][i], dir);
+			break;
+		case e_3GridVer:
+			for (size_t i = 0; i < 3; ++i)
+				initSprite(adapter.m_data[i], &m_sprites[i][1], dir);
+			break;
+		case e_6GridUpper:
+			for (size_t i = 1; i < 3; ++i)
+				for (size_t j = 0; j < 3; ++j)
+					initSprite(adapter.m_data[index++], &m_sprites[i][j], dir);
+			break;
+		}
+
+		composeFromSprites();
+	}
+	else
+	{
+		m_width = value["width"].asDouble();
+		m_height = value["height"].asDouble();
+		m_type = Type(value["type"].asInt());
+
+		std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
+		int idx = 0;
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 3; ++j) {
+				Json::Value val = value["sprite new"][idx++];
+				if (val.isNull()) {
+					continue;
+				}
+
+				std::string filepath = val["filepath"].asString();
+				if (!d2d::FilenameTools::isExist(filepath))
+					filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+
+				ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+				symbol->release();
+				sprite->load(val);
+
+				m_sprites[i][j] = sprite;
 			}
 		}
-		break;
-	case e_3GridHor:
-		for (size_t i = 0; i < 3; ++i)
-			initSprite(adapter.m_data[i], &m_sprites[1][i], dir);
-		break;
-	case e_3GridVer:
-		for (size_t i = 0; i < 3; ++i)
-			initSprite(adapter.m_data[i], &m_sprites[i][1], dir);
-		break;
-	case e_6GridUpper:
-		for (size_t i = 1; i < 3; ++i)
-			for (size_t j = 0; j < 3; ++j)
-				initSprite(adapter.m_data[index++], &m_sprites[i][j], dir);
-		break;
 	}
-
-	composeFromSprites();
-
-//	setting.open_image_edge_clip = old_edge_clip;
 }
 
 void Symbol::composeFromSprites() const
@@ -346,8 +380,6 @@ void Symbol::stretch(d2d::ISprite* sprite, const d2d::Vector& center,
 	const d2d::ImageSymbol& symbol = dynamic_cast<const d2d::ImageSymbol&>(sprite->getSymbol());
  	int w = symbol.getImage()->originWidth(),
  		h = symbol.getImage()->originHeight();
-// 	int w = sprite->getSymbol().getSize().xLength(),
-// 		h = sprite->getSymbol().getSize().yLength();
 	assert(w != 0 && h != 0);
 
 	sprite->setTransform(center, sprite->getAngle());
@@ -357,9 +389,7 @@ void Symbol::stretch(d2d::ISprite* sprite, const d2d::Vector& center,
 	else
 		sprite->setScale(height / w, width / h);
 
-	d2d::Vector pos_old = sprite->getPosition();
-	sprite->setOffset(d2d::Vector(0, 0));
-	sprite->setTransform(pos_old, sprite->getAngle());
+	sprite->translate(d2d::Math::rotateVector(sprite->getOffset(), sprite->getAngle()) - sprite->getOffset());
 }
 
 void Symbol::initSprite(const FileLoader::Entry& entry, d2d::ISprite** pSprite,

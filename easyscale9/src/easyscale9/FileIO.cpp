@@ -50,8 +50,23 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	wxString dir = d2d::FilenameTools::getFileDir(filename);
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		value["sprite"][i] = store(sprites[i], dir);
+	}
+
+	Symbol* symbol = stage->getPatchSymbol();
+	int idx = 0;
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			d2d::ISprite* sprite = symbol->m_sprites[i][j];
+			if (sprite) {
+				value["sprite new"][idx++] = StoreNew(sprite, dir);
+			} else {
+//				value["sprite new"][idx++] = NULL;
+				idx++;
+			}
+		}
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -63,17 +78,11 @@ void FileIO::store(const char* filename, StagePanel* stage,
 
 d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 {
-// 	d2d::SettingData& setting = d2d::Config::Instance()->GetSettings();
-// 	bool old_edge_clip = setting.open_image_edge_clip;
-// 	setting.open_image_edge_clip = false;
-
 	d2d::ISprite* sprite = NULL;
 	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	symbol->release();
-
-//	setting.open_image_edge_clip = old_edge_clip;
 
 	sprite->name = value["name"].asString();
 
@@ -112,6 +121,15 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 	value["x mirror"] = xMirror;
 	value["y mirror"] = yMirror;
 
+	return value;
+}
+
+Json::Value FileIO::StoreNew(d2d::ISprite* sprite, const wxString& dir)
+{
+	Json::Value value;
+	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+		sprite->getSymbol().getFilepath()).ToStdString();
+	sprite->store(value);
 	return value;
 }
 
