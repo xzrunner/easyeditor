@@ -14,8 +14,15 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const wxString& name,
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_stage(stage)
 {
-//	m_editOP = new CreateMeshOP(stage);
-	m_editOP = new CreateStripOP(stage);
+	m_mesh_op = new CreateMeshOP(stage);
+	m_strip_op= new CreateStripOP(stage);
+	m_editOP = m_mesh_op;
+}
+
+CreateMeshCMPT::~CreateMeshCMPT()
+{
+	m_mesh_op->release();
+	m_strip_op->release();
 }
 
 wxSizer* CreateMeshCMPT::initLayout()
@@ -69,9 +76,13 @@ void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
 	{
 	case 0:
 		ShapeFactory::Instance()->SetShapeType(ST_MESH);
+		m_editOP = m_mesh_op;
+		m_editPanel->setEditOP(m_editOP);
 		break;
 	case 1:
 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
+		m_editOP = m_strip_op;
+		m_editPanel->setEditOP(m_editOP);
 		break;
 	}
 }

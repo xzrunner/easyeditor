@@ -12,6 +12,7 @@ class CreateMeshCMPT : public d2d::AbstractEditCMPT
 public:
 	CreateMeshCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
+	virtual ~CreateMeshCMPT();
 
 protected:
 	virtual wxSizer* initLayout();
@@ -24,6 +25,8 @@ private:
 
 private:
 	StagePanel* m_stage;
+
+	d2d::AbstractEditOP *m_mesh_op, *m_strip_op;
 
 }; // CreateMeshCMPT
 
