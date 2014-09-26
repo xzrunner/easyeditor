@@ -81,8 +81,9 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	if (m_sprites[i][j] && m_sprites[i][j] != sprite)
 		m_sprites[i][j]->release();
 	m_sprites[i][j] = sprite;
-	sprite->setTransform(d2d::Vector(edge*0.5f+edge*j, edge*0.5f+edge*i), 
-		sprite->getAngle());
+	d2d::Vector center(edge*0.5f+edge*j, edge*0.5f+edge*i);
+	sprite->setOffset(d2d::Vector(0, 0));
+	sprite->setTransform(center, sprite->getAngle());
 
 	rebuildPatchSymbol();
 
