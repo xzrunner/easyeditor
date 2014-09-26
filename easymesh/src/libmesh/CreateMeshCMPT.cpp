@@ -1,5 +1,6 @@
 #include "CreateMeshCMPT.h"
 #include "CreateMeshOP.h"
+#include "CreateStripOP.h"
 #include "StagePanel.h"
 #include "FileIO.h"
 #include "ShapeFactory.h"
@@ -13,7 +14,8 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const wxString& name,
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_stage(stage)
 {
-	m_editOP = new CreateMeshOP(stage);
+//	m_editOP = new CreateMeshOP(stage);
+	m_editOP = new CreateStripOP(stage);
 }
 
 wxSizer* CreateMeshCMPT::initLayout()
