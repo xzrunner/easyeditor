@@ -52,7 +52,9 @@ Symbol* Symbol::clone() const
 
 void Symbol::reloadTexture() const
 {
-	m_image->reload();
+	if (m_image) {
+		m_image->reload();
+	}
 }
 
 void Symbol::draw(const d2d::Screen& scr,
