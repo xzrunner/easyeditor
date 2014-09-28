@@ -356,14 +356,14 @@ void ArrangeSpriteImpl::onDraw(const Screen& scr) const
 		Vector ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 4; ++i)
-			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(ctrlNodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 		for (int i = 4; i < 8; ++i)
-			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(ctrlNodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
 		if (m_is_offset_open)
 		{
 			d2d::Vector offset = selected->getPosition() + selected->getOffset();
-			PrimitiveDraw::drawCircle(scr, offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			PrimitiveDraw::drawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 	}
 

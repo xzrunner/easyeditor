@@ -119,8 +119,8 @@ ArrangeSpriteOP::Cross::Cross()
 
 void ArrangeSpriteOP::Cross::draw(const d2d::Screen& scr) const
 {
-	d2d::PrimitiveDraw::drawCircle(scr, pos, RADIUS, false, 1, d2d::LIGHT_RED);
-	d2d::PrimitiveDraw::cross(scr, pos, LENGTH, d2d::LIGHT_RED, 1);
+	d2d::PrimitiveDraw::drawCircle(pos, RADIUS, false, 1, d2d::LIGHT_RED);
+	d2d::PrimitiveDraw::cross(pos, LENGTH, d2d::LIGHT_RED, 1);
 }
 
 bool ArrangeSpriteOP::Cross::contain(const d2d::Vector& p) const

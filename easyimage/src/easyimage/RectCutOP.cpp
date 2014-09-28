@@ -177,16 +177,16 @@ bool RectCutOP::onDraw(const d2d::Screen& scr) const
 
 	if (m_firstPos.isValid() && m_currPos.isValid())
 	{
-		d2d::PrimitiveDraw::rect(scr, m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
+		d2d::PrimitiveDraw::rect(m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
 	}
 
 	drawCaptureLine(scr);
 
 	if (m_rectSelected) {
-		d2d::PrimitiveDraw::rect(scr, *m_rectSelected, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::rect(*m_rectSelected, d2d::LIGHT_GREEN_FACE);
 	}
 	if (m_nodeSelected.rect) {
-		d2d::PrimitiveDraw::rect(scr, *m_nodeSelected.rect, d2d::LIGHT_GREEN_FACE);
+		d2d::PrimitiveDraw::rect(*m_nodeSelected.rect, d2d::LIGHT_GREEN_FACE);
 	}
 
 	return false;

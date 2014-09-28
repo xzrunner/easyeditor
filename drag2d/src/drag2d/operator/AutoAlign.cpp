@@ -230,10 +230,10 @@ void AutoAlign::Draw(const Screen& scr) const
 	if (m_open)
 	{
 		if (m_hor[0] != m_hor[1]) {
-			PrimitiveDraw::drawDashLine(scr, m_hor[0], m_hor[1], Colorf(0, 0, 0));
+			PrimitiveDraw::drawDashLine(m_hor[0], m_hor[1], Colorf(0, 0, 0));
 		}
 		if (m_ver[0] != m_ver[1]) {
-			PrimitiveDraw::drawDashLine(scr, m_ver[0], m_ver[1], Colorf(0, 0, 0));
+			PrimitiveDraw::drawDashLine(m_ver[0], m_ver[1], Colorf(0, 0, 0));
 		}
 	}
 }

@@ -222,13 +222,13 @@ bool SelectSpritesOP::onDraw(const Screen& scr) const
 	{
 		if (m_currPos.x > m_firstPos.x)
 		{
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_ALL);
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_BOUND);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_ALL);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
 		}
 		else
 		{
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_PART);
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_BOUND);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_PART);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
 		}
 	}
 

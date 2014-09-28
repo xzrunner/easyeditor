@@ -17,7 +17,7 @@ void StageCanvas::onDraw()
 		d2d::SpriteDraw::drawSprite(m_screen, s);
 	}
 
-	d2d::PrimitiveDraw::cross(m_screen, d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
+	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	m_editPanel->drawEditTemp(m_screen);
 }

@@ -337,13 +337,13 @@ drawCaptured(const d2d::Screen& scr, const NodeAddr& captured) const
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
 		if (captured.pos.isValid()) {
-			d2d::PrimitiveDraw::drawCircle(scr, captured.pos, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+			d2d::PrimitiveDraw::drawCircle(captured.pos, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 		}
 
 		d2d::Vector center;
 		center.x = chain->getRect().xCenter();
 		center.y = chain->getRect().yCenter();
-		d2d::PrimitiveDraw::drawCircle(scr, center, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+		d2d::PrimitiveDraw::drawCircle(center, m_cmpt->getNodeCaptureDistance(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 	}
 }
 

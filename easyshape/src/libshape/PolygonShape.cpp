@@ -37,8 +37,6 @@ PolygonShape* PolygonShape::clone() const
 
 void PolygonShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
-	d2d::PrimitiveDraw::resetColorAndTexture();
-
 	if (m_fillingType == e_Color) {
 		d2d::PrimitiveDraw::drawTriangles(scr, m_fillingVertices, m_fillingColor);
 	} else if (m_fillingType == e_Texture) {
@@ -53,7 +51,7 @@ void PolygonShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Col
 			buf.push_back(m_fillingVertices[i]);
 			if (buf.size() == 3)
 			{
-				d2d::PrimitiveDraw::drawPolyline(scr, buf, d2d::Colorf(0, 1, 0), true);
+				d2d::PrimitiveDraw::drawPolyline(buf, d2d::Colorf(0, 1, 0), true);
 				buf.clear();
 			}
 		}

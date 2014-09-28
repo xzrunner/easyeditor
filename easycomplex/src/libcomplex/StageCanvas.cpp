@@ -60,12 +60,12 @@ namespace ecomplex
   			d2d::SpriteDraw::drawSprite(m_screen, sprite);
   		}
 
-  		d2d::PrimitiveDraw::rect(m_screen, m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
+  		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
   
    		if (Settings::bVisibleBGCross)
    		{
    			const float EDGE = 100;
-   			d2d::PrimitiveDraw::cross(m_screen, d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
+   			d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
    		}
  
      	m_editPanel->drawEditTemp(m_screen);
@@ -98,7 +98,7 @@ namespace ecomplex
 
 		if (Settings::bVisibleBGRect)
 		{
-			d2d::PrimitiveDraw::rect(m_screen, d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+			d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 		}
 	}
 }

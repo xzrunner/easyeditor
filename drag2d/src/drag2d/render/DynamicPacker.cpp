@@ -98,7 +98,7 @@ void DynamicPacker::DebugDraw(const Screen& screen) const
 
 	ShaderNew::Instance()->Draw(vb, m_tex);
 
-	PrimitiveDraw::rect(screen, Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
+	PrimitiveDraw::rect(Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
 
 void DynamicPacker::InitTexture(int tex_id)

@@ -67,7 +67,7 @@ bool EditPolylinesOP::onDraw(const d2d::Screen& scr) const
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
 		itr->second->draw(scr, d2d::Colorf(0.8f, 0.8f, 0.2f));
-		d2d::PrimitiveDraw::drawCircles(scr, itr->second->getVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
+		d2d::PrimitiveDraw::drawCircles(itr->second->getVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;

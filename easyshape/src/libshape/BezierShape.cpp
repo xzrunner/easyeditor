@@ -60,7 +60,7 @@ void BezierShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colo
 	ChainShape::draw(scr, color);
 
 	for (size_t i = 0; i < 4; ++i) {
-		d2d::PrimitiveDraw::rect(scr, points[i], (float)RADIUS, (float)RADIUS, m_style);
+		d2d::PrimitiveDraw::rect(points[i], (float)RADIUS, (float)RADIUS, m_style);
 	}
 }
 

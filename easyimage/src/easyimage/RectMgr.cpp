@@ -44,8 +44,8 @@ void RectMgr::draw(const d2d::Screen& scr) const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{
-		d2d::PrimitiveDraw::rect(scr, *m_rects[i], d2d::LIGHT_RED_FACE);
-		d2d::PrimitiveDraw::rect(scr, *m_rects[i], d2d::LIGHT_RED_THIN_LINE);
+		d2d::PrimitiveDraw::rect(*m_rects[i], d2d::LIGHT_RED_FACE);
+		d2d::PrimitiveDraw::rect(*m_rects[i], d2d::LIGHT_RED_THIN_LINE);
 	}
 }
 

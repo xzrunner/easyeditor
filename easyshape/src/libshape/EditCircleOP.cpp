@@ -189,10 +189,10 @@ bool EditCircleOP::onDraw(const d2d::Screen& scr) const
 		{
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 			{
-				d2d::PrimitiveDraw::drawCircle(scr, circle->center, m_cmpt->getNodeCaptureDistance(), 
+				d2d::PrimitiveDraw::drawCircle(circle->center, m_cmpt->getNodeCaptureDistance(), 
 					true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 				if (!m_captured.pos.isValid()) {
-					d2d::PrimitiveDraw::drawCircle(scr, circle->center, circle->radius,
+					d2d::PrimitiveDraw::drawCircle(circle->center, circle->radius,
 						false, m_cmpt->getNodeCaptureDistance(), d2d::Colorf(1.0f, 0.4f, 0.4f));
 				}
 			}
@@ -201,7 +201,7 @@ bool EditCircleOP::onDraw(const d2d::Screen& scr) const
 	else
 	{
 		if (m_firstPress.isValid() && m_currPos.isValid()) {
-			d2d::PrimitiveDraw::drawCircle(scr, m_firstPress, d2d::Math::getDistance(m_firstPress, m_currPos), 
+			d2d::PrimitiveDraw::drawCircle(m_firstPress, d2d::Math::getDistance(m_firstPress, m_currPos), 
 				false, 3, d2d::Colorf(0, 0, 0), 32);
 		}
 	}

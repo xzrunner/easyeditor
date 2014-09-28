@@ -111,7 +111,7 @@ bool SelectNodesOP::onDraw(const d2d::Screen& scr) const
 		points.push_back(nodes[i]->xy);
 
 	Shape* shape = m_stage->getShape();
-	d2d::PrimitiveDraw::drawCircles(scr, points, m_stage->getShape()->GetNodeRegion(), 
+	d2d::PrimitiveDraw::drawCircles(points, m_stage->getShape()->GetNodeRegion(), 
 		true, 2, d2d::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
 
 	return false;

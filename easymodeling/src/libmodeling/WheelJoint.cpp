@@ -85,7 +85,7 @@ void WheelJoint::drawFootBLine(const d2d::Screen& scr, const d2d::Vector& worldA
 	d2d::Math::getFootOfPerpendicular(worldAnchorA, otherA, worldAnchorB, &foot);
 
 	d2d::PrimitiveDraw::drawDashLine(scr, worldAnchorB, foot, d2d::Colorf(1, 0, 0), 1);
-	d2d::PrimitiveDraw::drawCircle(scr, foot, JOINT_RADIUS_IN, true, 2, d2d::Colorf(1, 0, 0));
+	d2d::PrimitiveDraw::drawCircle(foot, JOINT_RADIUS_IN, true, 2, d2d::Colorf(1, 0, 0));
 }
 
 void WheelJoint::drawAnchorA(const d2d::Screen& scr, const d2d::Vector& pos, DrawType type) const
@@ -104,8 +104,8 @@ void WheelJoint::drawAnchorA(const d2d::Screen& scr, const d2d::Vector& pos, Dra
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawCircle(scr, pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::rect(scr, pos, JOINT_RADIUS_OUT, d2d::ShapeStyle(true, color));
+	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	d2d::PrimitiveDraw::rect(pos, JOINT_RADIUS_OUT, d2d::ShapeStyle(true, color));
 }
 
 void WheelJoint::drawAnchorB(const d2d::Screen& scr, const d2d::Vector& pos, DrawType type) const
@@ -124,6 +124,6 @@ void WheelJoint::drawAnchorB(const d2d::Screen& scr, const d2d::Vector& pos, Dra
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawCircle(scr, pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::drawCircle(scr, pos, JOINT_RADIUS_OUT, false, 2, color);
+	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }
