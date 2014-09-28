@@ -88,6 +88,8 @@ private:
 	uint32_t* GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout);
 	uint32_t* GenWXChar(const wxString& uft8, int font_size, int color, int is_edge, GlyphLayout& layout);
 
+	void InitShader();
+
 private:
 	class ImageSizeCmp
 	{

@@ -120,6 +120,7 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 {
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(m_fbo);
+	shader->sprite();
 
  	if (whitebg) {
  		glClearColor(1, 1, 1, 1);
@@ -131,12 +132,14 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 	d2d::Rect rect = symbol->getSize();
  	int w = rect.xLength() * scale,
  		h = rect.yLength() * scale;
+	shader->SetModelView(Vector(0, 0), 1);
+	shader->SetProjection(w, h);
 	glViewport(0, 0, w, h);
 
 	Screen scr(w, h);
 	scr.SetCamera(Vector(-rect.xCenter(), -rect.yCenter()) * scale, Vector(1, -1));
 
-	SpriteDraw::drawSprite(scr, symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, scale);
+	SpriteDraw::drawSprite(scr, symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, -scale);
 
 	// set fbo to force flush
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。

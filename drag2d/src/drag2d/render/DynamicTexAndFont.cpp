@@ -56,15 +56,10 @@ void DynamicTexAndFont::AddImage(Image* img)
 		img->retain();
 		m_preload_list.push_back(img);
 	} else {
-		ShaderNew* shader = ShaderNew::Instance();
-		shader->SetFBO(m_fbo);
- 		shader->sprite();
-		shader->SetModelView(Vector(0, 0), 1);
-		shader->SetProjection(m_width, m_height);
- 		glViewport(0, 0, m_width, m_height);
+		InitShader();
 		InsertImage(img);
 		// set fbo to force flush
-		shader->SetFBO(0);
+		ShaderNew::Instance()->SetFBO(0);
 	}
 }
 
@@ -76,12 +71,8 @@ void DynamicTexAndFont::EndImage()
 		return;
 	}
 
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(m_fbo);
-	shader->sprite();
-	shader->SetProjection(m_width, m_height);
+	InitShader();
 
-	glViewport(0, 0, m_width, m_height);
 	std::sort(m_preload_list.begin(), m_preload_list.end(), ImageSizeCmp());
 	std::vector<const Image*>::iterator itr = m_preload_list.begin();
 	for ( ; itr != m_preload_list.end(); ++itr) {
@@ -93,7 +84,7 @@ void DynamicTexAndFont::EndImage()
 
 	// set fbo to force flush
 	// todo dtex连续insert会慢
-	shader->SetFBO(0);
+	ShaderNew::Instance()->SetFBO(0);
 }
 
 void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
@@ -118,10 +109,7 @@ void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 
 void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 {
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(m_fbo);
-	shader->sprite();
-	glViewport(-m_width*0.5f, -m_height*0.5f, m_width, m_height);
+	InitShader();
 
 	glScissor(node.GetMinX(), node.GetMinY(), node.GetMaxX() - node.GetMinX(), node.GetMaxY() - node.GetMinY());
 	glEnable(GL_SCISSOR_TEST);
@@ -140,7 +128,7 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 
 	glDisable(GL_SCISSOR_TEST);
 
-	shader->SetFBO(0);
+	ShaderNew::Instance()->SetFBO(0);
 }
 
 void DynamicTexAndFont::Remove(const wxString& filepath)
@@ -253,11 +241,7 @@ void DynamicTexAndFont::Clear()
 
 void DynamicTexAndFont::ReloadPixels()
 {
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(m_fbo);
-	shader->sprite();
-
-	glViewport(0, 0, m_width, m_height);
+	InitShader();
 
 	std::map<wxString, TPNode*>::iterator itr = m_path2node.begin();
 	for ( ; itr != m_path2node.end(); ++itr)
@@ -273,7 +257,7 @@ void DynamicTexAndFont::ReloadPixels()
 
 	// set fbo to force flush
 	// todo dtex之后insert时，不能连续
-	shader->SetFBO(0);	
+	ShaderNew::Instance()->SetFBO(0);	
 }
 
 void DynamicTexAndFont::InsertImage(const Image* img)
@@ -594,6 +578,16 @@ uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int 
 		}
 	}
 	return ret;
+}
+
+void DynamicTexAndFont::InitShader()
+{
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetFBO(m_fbo);
+	shader->sprite();
+	shader->SetModelView(Vector(0, 0), 1);
+	shader->SetProjection(m_width, m_height);
+	glViewport(0, 0, m_width, m_height);
 }
 
 //////////////////////////////////////////////////////////////////////////
