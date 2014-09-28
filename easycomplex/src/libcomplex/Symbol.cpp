@@ -112,9 +112,7 @@ void Symbol::draw(const d2d::Screen& scr,
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 			d2d::SpriteDraw::drawSprite(scr, m_sprites[i], mt, mul, add);
 
-		// tag zz1
-//		d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
-		d2d::PrimitiveDraw::rect(m_clipbox, m_style);
+		d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
 
 		d2d::SpriteTools::DrawName(scr, sprite, mt);
 	}

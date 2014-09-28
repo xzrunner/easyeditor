@@ -117,19 +117,7 @@ void FontBlankSymbol::loadResources()
 void FontBlankSymbol::DrawBackground(const Screen& scr, const ISprite* sprite,
 									 const Matrix& mt) const
 {
-	float w = width, h = height;
-	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);
-	if (s)
-	{
-		w = s->width;
-		h = s->height;
-		if (m_font)
-			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
-	}
-
-	// tag zz1
-//	PrimitiveDraw::rect(mt, w*0.5f, h*0.5f, m_style);
-	PrimitiveDraw::rect(Vector(0, 0), w*0.5f, h*0.5f, m_style);
+	PrimitiveDraw::rect(mt, width*0.5f, height*0.5f, m_style);
 }
 
 void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const Matrix& mt) const
