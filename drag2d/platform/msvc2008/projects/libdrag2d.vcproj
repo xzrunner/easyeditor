@@ -1650,6 +1650,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\view\Screen.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\view\Screen.h"
 				>
 			</File>

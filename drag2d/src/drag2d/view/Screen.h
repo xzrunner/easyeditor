@@ -6,13 +6,16 @@
 namespace d2d
 {
 
+class Camera;
+
 class Screen
 {
 public:
-	Screen() : m_scale(1, 1) {}
+//	Screen() : m_scale(1, 1) {}
 	Screen(int width, int height) 
 		: m_size(width, height) , m_scale(1, 1) {}
-	
+	Screen(Camera* cam) : m_cam(cam) {}
+
 	const Vector& GetSize() const { return m_size; }
 	void SetSize(int width, int height) { m_size.set(width, height); }
 
@@ -33,10 +36,14 @@ public:
 
 	const Vector& GetScale() const { return m_scale; }
 
+	void UpdateModelView() const;
+
 private:
 	Vector m_size;
 	Vector m_offset;
 	Vector m_scale;
+
+	Camera* m_cam;
 
 }; // Screen
 

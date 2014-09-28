@@ -5,15 +5,14 @@
 #include "common/color_trans.h"
 #include "dataset/text_util.h"
 #include "dataset/TPNode.h"
-#include "view/Screen.h"
 #include "render/ShaderNew.h"
 
-#define LABEL_USE_CACHE
+//#define LABEL_USE_CACHE
 
 namespace d2d
 {
 
-void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
+void LabelNew::Print(const char* text, const Vector& pos,
 					 const LabelStyle& style)
 {
 	if (strlen(text) == 0) {
@@ -33,7 +32,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 		int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 
 		if (!lines.empty()) {
-			DrawLines(screen, pos, style, lines, tot_line_height, *new_layout);
+			DrawLines(pos, style, lines, tot_line_height, *new_layout);
 		}
 
 		layout = new_layout;
@@ -50,7 +49,7 @@ void LabelNew::Print(const Screen& screen, const char* text, const Vector& pos,
 	int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 
 	if (!lines.empty()) {
-		DrawLines(screen, pos, style, lines, tot_line_height, layout);
+		DrawLines(pos, style, lines, tot_line_height, layout);
 	}
 
 	Draw(&layout);
@@ -113,8 +112,7 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 	return tot_line_height;
 }
 
-void LabelNew::DrawLines(const Screen& screen,
-						 const Vector& pos,
+void LabelNew::DrawLines(const Vector& pos,
 						 const LabelStyle& style,
 						 const std::vector<Line>& lines,
 						 int tot_line_height,
@@ -174,9 +172,6 @@ void LabelNew::DrawLines(const Screen& screen,
 			glyph.vertices[1].set(xmax, ymin);
 			glyph.vertices[2].set(xmax, ymax);
 			glyph.vertices[3].set(xmin, ymax);
-// 			for (int i = 0; i < 4; ++i) {
-// 				screen.TransPosForRender(glyph.vertices[i]);
-// 			}
 
 			txmin = (r->GetMinX()+padding+0.5f) / tex_width;
 			txmax = (r->GetMaxX()-padding-0.5f) / tex_width;

@@ -137,7 +137,7 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 				style.align_hori = font->align_hori;
 				style.align_vert = font->align_vert;
 
-				LabelNew::Print(scr, str.utf8_str(), pos, style);
+				LabelNew::Print(str.utf8_str(), pos, style);
 			}
 		}
 	}

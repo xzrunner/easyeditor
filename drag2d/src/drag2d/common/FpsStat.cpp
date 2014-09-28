@@ -3,6 +3,7 @@
 #include "common/color_config.h"
 #include "common/Vector.h"
 #include "render/LabelNew.h"
+#include "render/ShaderNew.h"
 #include "view/Screen.h"
 
 #include <sstream>
@@ -71,9 +72,14 @@ void FpsStat::Draw(const Screen& scr, const std::string& str) const
 
 	const Vector& size = scr.GetSize();
 	Vector pos;
-	pos.x = -size.x * 0.4f;
-	pos.y = size.y * 0.45f;
-	LabelNew::Print(Screen(size.x, size.y), m_time.c_str(), pos, style);
+ 	pos.x = -size.x * 0.4f;
+ 	pos.y = size.y * 0.45f;
+
+	ShaderNew* shader = ShaderNew::Instance();
+	shader->SetModelView(Vector(0, 0), 1);
+	LabelNew::Print(m_time.c_str(), pos, style);
+	shader->Commit();
+	scr.UpdateModelView();
 }
 
 }
