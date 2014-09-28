@@ -92,8 +92,8 @@ bool EditMeshOP::onDraw(const d2d::Screen& scr) const
 {
 	if (Shape* shape = m_stage->getShape())
 	{
-		shape->DrawTexture(scr, d2d::Matrix());
-		shape->DrawInfoXY(scr);
+		shape->DrawTexture(d2d::Matrix());
+		shape->DrawInfoXY();
 	}
 
 	d2d::PrimitiveDraw::cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));

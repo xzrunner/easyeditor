@@ -44,9 +44,9 @@ public:
 	void QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes);
 	void QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
 
-	void DrawInfoUV(const d2d::Screen& scr) const;
-	void DrawInfoXY(const d2d::Screen& scr) const;
-	void DrawTexture(const d2d::Screen& scr, const d2d::Matrix& mt) const;
+	void DrawInfoUV() const;
+	void DrawInfoXY() const;
+	void DrawTexture(const d2d::Matrix& mt) const;
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 

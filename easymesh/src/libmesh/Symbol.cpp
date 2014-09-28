@@ -66,7 +66,7 @@ void Symbol::draw(const d2d::Screen& scr,
  		shader->sprite();
 		shader->SetSpriteColor(mul, add);
  
- 		m_shape->DrawTexture(scr, mt);
+ 		m_shape->DrawTexture(mt);
   		if (!m_pause && sprite) 
 		{
 			const Sprite* s = static_cast<const Sprite*>(sprite);
