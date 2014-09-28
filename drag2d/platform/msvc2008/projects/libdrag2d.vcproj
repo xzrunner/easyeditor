@@ -1066,22 +1066,6 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\drag2d\render\GL10.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\GL10.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\common\opengl\opengl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\common\opengl\opengl.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\common\opengl\platform.h"
 				>
 			</File>
@@ -1098,6 +1082,22 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\Exception.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\GL10.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\GL10.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common\opengl\opengl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common\opengl\opengl.h"
 					>
 				</File>
 				<File
@@ -1265,6 +1265,14 @@
 				Name="shader"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\render\IShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\IShader.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
 					>
 				</File>
@@ -1296,6 +1304,34 @@
 					RelativePath="..\..\..\src\drag2d\render\ShaderNew.h"
 					>
 				</File>
+				<Filter
+					Name="shaders"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\FontShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\FontShader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\ShapeShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\ShapeShader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\SpriteShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\SpriteShader.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter

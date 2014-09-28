@@ -8,8 +8,6 @@ struct Colorf;
 class Vector;
 class ShaderImpl;
 
-class ShaderImpl;
-
 class ShaderNew
 {
 public:
@@ -43,25 +41,14 @@ public:
 	void SetModelView(const Vector& offset, float scale);
 	void SetProjection(int width, int height);
 
-	void UpdateShapeMatrix();
+	// todo
+	void Commit();
 
 	void Flush();
 
 private:
 	ShaderNew();
 	~ShaderNew();
-
-	void load();
-	void unload();
-
-	int InitShader(const char *FS, const char *VS);
-	int CompileShader(const char * source, int type);
-
-	void InitBuffers();
-
-	void Commit();
-
-	void CopyVertex(const float vb[16]);
 
 private:
 	static ShaderNew* m_instance;
