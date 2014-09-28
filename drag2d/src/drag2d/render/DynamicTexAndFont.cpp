@@ -59,6 +59,7 @@ void DynamicTexAndFont::AddImage(Image* img)
 		ShaderNew* shader = ShaderNew::Instance();
 		shader->SetFBO(m_fbo);
  		shader->sprite();
+		shader->SetModelView(Vector(0, 0), 1);
 		shader->SetProjection(m_width, m_height);
  		glViewport(0, 0, m_width, m_height);
 		InsertImage(img);

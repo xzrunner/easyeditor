@@ -49,6 +49,7 @@ void OrthoCanvas::onSize(int w, int h)
  	m_screen.SetSize(w, h);
  	m_screen.SetCamera();
 
+	m_camera->UpdateModelView();
 	ShaderNew::Instance()->SetProjection(w, h);
 }
 } // d2d
