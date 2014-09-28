@@ -21,6 +21,8 @@ namespace d2d
 
 		void UpdateModelView() const;
 
+		float GetScale() const { return m_scale; }
+
 	private:
 		Vector m_center;
 		float m_scale;

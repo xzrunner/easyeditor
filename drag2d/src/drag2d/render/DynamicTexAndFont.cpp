@@ -121,7 +121,8 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
   	glEnable(GL_BLEND);
   	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-	Screen scr(m_width, m_height);
+//	Screen scr(m_width, m_height);
+	Screen scr(NULL);
 	Vector pos(node.GetCenterX(), node.GetCenterY());
 	float angle = node.IsRotated() ? PI * 0.5f : 0;
 	SpriteDraw::drawSprite(scr, &symbol, Matrix(), pos, angle);

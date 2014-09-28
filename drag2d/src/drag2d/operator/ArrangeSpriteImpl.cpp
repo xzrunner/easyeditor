@@ -343,8 +343,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 
 void ArrangeSpriteImpl::onDraw(const Screen& scr) const
 {
-	Vector scale = scr.GetScale();
-	m_ctrl_node_radius = CTRL_NODE_RADIUS / scale.x;
+	m_ctrl_node_radius = CTRL_NODE_RADIUS * scr.GetScale();
 
 	if (m_isDeformOpen && m_selection->size() == 1)
 	{
