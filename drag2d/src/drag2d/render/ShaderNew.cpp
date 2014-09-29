@@ -162,6 +162,15 @@ void ShaderNew::SetModelView(const Vector& offset, float scale)
 {
 	m_impl->m_shape_shader->SetModelView(offset, scale);
 	m_impl->m_sprite_shader->SetModelView(offset, scale);
+	
+	m_impl->m_offset = offset;
+	m_impl->m_scale = scale;
+}
+
+void ShaderNew::GetModelView(Vector& offset, float& scale)
+{
+	offset = m_impl->m_offset;
+	scale = m_impl->m_scale;
 }
 
 void ShaderNew::SetProjection(int width, int height)

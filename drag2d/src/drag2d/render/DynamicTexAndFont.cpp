@@ -55,10 +55,9 @@ void DynamicTexAndFont::AddImage(Image* img)
 		img->retain();
 		m_preload_list.push_back(img);
 	} else {
-		InitShader();
+		BeginDraw();
 		InsertImage(img);
-		// set fbo to force flush
-		ShaderNew::Instance()->SetFBO(0);
+		EndDraw();
 	}
 }
 
@@ -70,7 +69,7 @@ void DynamicTexAndFont::EndImage()
 		return;
 	}
 
-	InitShader();
+	BeginDraw();
 
 	std::sort(m_preload_list.begin(), m_preload_list.end(), ImageSizeCmp());
 	std::vector<const Image*>::iterator itr = m_preload_list.begin();
@@ -81,9 +80,7 @@ void DynamicTexAndFont::EndImage()
 	}
 	m_preload_list.clear();
 
-	// set fbo to force flush
-	// todo dtex连续insert会慢
-	ShaderNew::Instance()->SetFBO(0);
+	EndDraw();
 }
 
 void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
@@ -108,7 +105,7 @@ void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 
 void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 {
-	InitShader();
+	BeginDraw();
 
 	glScissor(node.GetMinX(), node.GetMinY(), node.GetMaxX() - node.GetMinX(), node.GetMaxY() - node.GetMinY());
 	glEnable(GL_SCISSOR_TEST);
@@ -130,7 +127,7 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 
 	glDisable(GL_SCISSOR_TEST);
 
-	ShaderNew::Instance()->SetFBO(0);
+	EndDraw();
 }
 
 void DynamicTexAndFont::Remove(const wxString& filepath)
@@ -243,7 +240,7 @@ void DynamicTexAndFont::Clear()
 
 void DynamicTexAndFont::ReloadPixels()
 {
-	InitShader();
+	BeginDraw();
 
 	std::map<wxString, TPNode*>::iterator itr = m_path2node.begin();
 	for ( ; itr != m_path2node.end(); ++itr)
@@ -257,9 +254,7 @@ void DynamicTexAndFont::ReloadPixels()
 
 	m_hash.Traverse(ReloadTextureVisitor(m_tex, m_padding));
 
-	// set fbo to force flush
-	// todo dtex之后insert时，不能连续
-	ShaderNew::Instance()->SetFBO(0);	
+	EndDraw();
 }
 
 void DynamicTexAndFont::InsertImage(const Image* img)
@@ -582,14 +577,33 @@ uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int 
 	return ret;
 }
 
-void DynamicTexAndFont::InitShader()
+void DynamicTexAndFont::BeginDraw()
 {
 	ShaderNew* shader = ShaderNew::Instance();
+
+	int viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	m_ori_width = viewport[2];
+	m_ori_height = viewport[3];
+
+	shader->GetModelView(m_ori_offset, m_ori_scale);
+
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 	shader->SetModelView(Vector(0, 0), 1);
 	shader->SetProjection(m_width, m_height);
 	glViewport(0, 0, m_width, m_height);
+}
+
+void DynamicTexAndFont::EndDraw()
+{
+	ShaderNew* shader = ShaderNew::Instance();
+	// set fbo to force flush
+	// todo dtex连续insert会慢
+	shader->SetFBO(0);
+	shader->SetModelView(m_ori_offset, m_ori_scale);
+	shader->SetProjection(m_ori_width, m_ori_height);
+	glViewport(0, 0, m_ori_width, m_ori_height);
 }
 
 //////////////////////////////////////////////////////////////////////////

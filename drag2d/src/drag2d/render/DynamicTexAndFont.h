@@ -88,7 +88,8 @@ private:
 	uint32_t* GenFTChar(int unicode, int font_size, int color, int is_edge, GlyphLayout& layout);
 	uint32_t* GenWXChar(const wxString& uft8, int font_size, int color, int is_edge, GlyphLayout& layout);
 
-	void InitShader();
+	void BeginDraw();
+	void EndDraw();
 
 private:
 	class ImageSizeCmp
@@ -189,6 +190,11 @@ private:
 
 	FTRender m_ft_render;
 	GlyphSizer m_space_sizer[FONT_SIZE_COUNT];
+
+	// shader info
+	int m_ori_width, m_ori_height;
+	Vector m_ori_offset;
+	float m_ori_scale;
 
 private:
 	static DynamicTexAndFont* m_instance;

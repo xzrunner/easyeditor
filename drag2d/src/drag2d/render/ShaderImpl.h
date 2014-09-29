@@ -3,6 +3,8 @@
 
 typedef unsigned int GLuint;
 
+#include "common/Vector.h"
+
 namespace d2d
 {
 
@@ -21,6 +23,10 @@ private:
 	IShader* m_font_shader;
 
 	int m_version;
+
+	// cache model view
+	Vector m_offset;
+	float m_scale;
 
 	friend class ShaderNew;
 

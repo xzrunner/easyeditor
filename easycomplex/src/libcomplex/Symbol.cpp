@@ -53,17 +53,14 @@ void Symbol::draw(const d2d::Matrix& mt,
  	if (n) 
  	{
 		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
-		//if (shader->GetVersion() != m_render_version)
-		//{
-		//	m_render_cache_open = false;
-		//	dtex->RefreshSymbol(*this, *n);
-		//	m_render_cache_open = true;
+		if (shader->GetVersion() != m_render_version)
+		{
+			m_render_cache_open = false;
+			dtex->RefreshSymbol(*this, *n);
+			m_render_cache_open = true;
 
-		//	const d2d::Vector& size = scr.GetSize();
-		//	glViewport(0, 0, size.x, size.y);
-
-		//	m_render_version = shader->GetVersion();
-		//}
+			m_render_version = shader->GetVersion();
+		}
 
 		d2d::Vector vertices[4];
 		float hw = m_rect.xLength() * 0.5f,
