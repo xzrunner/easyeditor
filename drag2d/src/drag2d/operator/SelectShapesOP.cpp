@@ -159,11 +159,11 @@ bool SelectShapesOP::onMouseDrag(int x, int y)
 	return !m_bDraggable;
 }
 
-bool SelectShapesOP::onDraw(const Screen& scr) const
+bool SelectShapesOP::onDraw() const
 {
-	if (DrawRectangleOP::onDraw(scr)) return true;
+	if (DrawRectangleOP::onDraw()) return true;
 
-	m_selection->traverse(DrawSelectedShapeVisitor(scr));
+	m_selection->traverse(DrawSelectedShapeVisitor());
 
 	return false;
 }

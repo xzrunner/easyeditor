@@ -30,8 +30,8 @@ void StageCanvas::onDraw()
 	std::vector<d2d::ISprite*> sprites;
 	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::e_visible);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(m_screen, sprites[i]);
-	m_editPanel->drawEditTemp(m_screen);
+		d2d::SpriteDraw::drawSprite(sprites[i]);
+	m_editPanel->drawEditTemp();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
@@ -42,7 +42,7 @@ void StageCanvas::onTimer(wxTimerEvent& event)
 void StageCanvas::drawbackground() const
 {
 	if (m_background) {
-		m_background->draw(m_screen, d2d::Matrix(), m_background->getRegion());
+		m_background->draw(d2d::Matrix(), m_background->getRegion());
 	}
 
 	float xedge = GetSize().GetWidth() * 0.5f;

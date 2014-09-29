@@ -12,7 +12,7 @@ namespace eanim
 		Joint(d2d::ISprite* sprite, const d2d::Vector& pos);
 		~Joint();
 
-		void draw(const d2d::Screen& scr) const;
+		void draw() const;
 
 		bool contain(const d2d::Vector& pos) const;
 		bool intersect(const d2d::Vector& pos) const;

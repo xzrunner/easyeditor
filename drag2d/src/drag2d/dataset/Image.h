@@ -12,7 +12,6 @@ namespace d2d
 	typedef ResourcesMgr<Image> ImageMgr;
 
 	class Matrix;
-	class Screen;
 
 	class Image : public Object
 	{
@@ -33,7 +32,7 @@ namespace d2d
 		int originWidth() const { return m_width; }
 		int originHeight() const { return m_height; }
 
-		void draw(const Screen& scr, const Matrix& mt, const Rect& r) const;
+		void draw(const Matrix& mt, const Rect& r) const;
 
 		Rect getRegion() const { return m_region; }
 

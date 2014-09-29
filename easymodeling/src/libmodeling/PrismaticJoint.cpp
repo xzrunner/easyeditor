@@ -32,22 +32,22 @@ bool PrismaticJoint::isIntersect(const d2d::Rect& rect) const
 		|| d2d::Math::isPointInRect(getWorldAnchorB(), rect);
 }
 
-void PrismaticJoint::draw(const d2d::Screen& scr, DrawType type) const
+void PrismaticJoint::draw(DrawType type) const
 {
 	const d2d::Vector anchorA = getWorldAnchorA(),
 		anchorB = getWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::drawDashLine(scr, anchorA, anchorB, d2d::Colorf(1, 0, 0), 2);
-		d2d::PrimitiveDraw::drawDashLine(scr, anchorA, bodyA->sprite->getPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::drawDashLine(scr, anchorB, bodyB->sprite->getPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		d2d::PrimitiveDraw::drawDashLine(anchorA, anchorB, d2d::Colorf(1, 0, 0), 2);
+		d2d::PrimitiveDraw::drawDashLine(anchorA, bodyA->sprite->getPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
+		d2d::PrimitiveDraw::drawDashLine(anchorB, bodyB->sprite->getPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
 
-		drawBodyFlag(scr);
+		drawBodyFlag();
 	}
 
-	drawAnchor(scr, anchorA, type);
-	drawAnchor(scr, anchorB, type);
+	drawAnchor(anchorA, type);
+	drawAnchor(anchorB, type);
 }
 
 d2d::Vector PrismaticJoint::getWorldAnchorA() const
@@ -70,7 +70,7 @@ void PrismaticJoint::setLocalAnchorB(const d2d::Vector& world)
 	localAnchorB = transWorldToLocal(world, bodyB->sprite);
 }
 
-void PrismaticJoint::drawAnchor(const d2d::Screen& scr, const d2d::Vector& pos, DrawType type) const
+void PrismaticJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
 {
 	d2d::Colorf color;
 	switch (type)

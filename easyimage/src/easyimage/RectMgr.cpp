@@ -40,7 +40,7 @@ void RectMgr::store(Json::Value& value) const
 	}
 }
 
-void RectMgr::draw(const d2d::Screen& scr) const
+void RectMgr::draw() const
 {
 	for (int i = 0, n = m_rects.size(); i < n; ++i)
 	{

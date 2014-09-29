@@ -83,13 +83,13 @@ bool ResizeOP::onActive()
 	return false;
 }
 
-bool ResizeOP::onDraw(const d2d::Screen& scr) const
+bool ResizeOP::onDraw() const
 {
 	Symbol* symbol = m_stage->getPatchSymbol();
 	if (!symbol) return false;
 
 	escale9::ResizeBaseOP::setSymbol(symbol);
-	return escale9::ResizeBaseOP::onDraw(scr);
+	return escale9::ResizeBaseOP::onDraw();
 }
 
 } // escale9

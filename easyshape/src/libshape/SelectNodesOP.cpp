@@ -116,9 +116,9 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::onDraw(const d2d::Screen& scr) const
+bool SelectNodesOP::onDraw() const
 {
-	if (DrawRectangleOP::onDraw(scr)) return true;
+	if (DrawRectangleOP::onDraw()) return true;
 
 	if (m_nodeSelection.empty()) return false;
 

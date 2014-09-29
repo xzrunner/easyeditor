@@ -179,9 +179,9 @@ bool EditCircleOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditCircleOP::onDraw(const d2d::Screen& scr) const
+bool EditCircleOP::onDraw() const
 {
-	if (ZoomViewOP::onDraw(scr)) return true;
+	if (ZoomViewOP::onDraw()) return true;
 
 	if (m_captured.shape)
 	{

@@ -24,7 +24,7 @@ namespace emodeling
 		virtual bool onMouseMove(int x, int y);
 		virtual bool onMouseDrag(int x, int y);
 
-		virtual bool onDraw(const d2d::Screen& scr) const;
+		virtual bool onDraw() const;
 		virtual bool clear();
 
 		virtual d2d::IPropertySetting* createPropertySetting(d2d::ISprite* sprite) const;
@@ -33,10 +33,7 @@ namespace emodeling
 		class DrawSelectedVisitor : public d2d::IVisitor
 		{
 		public:
-			DrawSelectedVisitor(const d2d::Screen& scr) : m_scr(scr) {}
 			virtual void visit(d2d::Object* object, bool& bFetchNext);
-		private:
-			const d2d::Screen& m_scr;
 		}; // DrawSelectedVisitor
 
 	private:

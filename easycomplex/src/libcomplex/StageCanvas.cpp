@@ -57,7 +57,7 @@ namespace ecomplex
   			d2d::ISprite* sprite = sprites[i];
   			if (!sprite->visiable)
   				continue;
-  			d2d::SpriteDraw::drawSprite(m_screen, sprite);
+  			d2d::SpriteDraw::drawSprite(sprite);
   		}
 
   		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
@@ -68,14 +68,14 @@ namespace ecomplex
    			d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
    		}
  
-     	m_editPanel->drawEditTemp(m_screen);
+     	m_editPanel->drawEditTemp();
 
 		m_stat.End();
 
 #ifdef _DEBUG 
-//		d2d::DynamicTexture::Instance()->DebugDraw(m_screen);
-//		d2d::DynamicFont::Instance()->DebugDraw(m_screen);
-		d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+//		d2d::DynamicTexture::Instance()->DebugDraw();
+//		d2d::DynamicFont::Instance()->DebugDraw();
+		d2d::DynamicTexAndFont::Instance()->DebugDraw();
 #endif
 
 		m_stat.DrawTime(m_screen);
@@ -93,7 +93,7 @@ namespace ecomplex
 		if (m_background)
 		{
 			d2d::Matrix mt;
-			m_background->draw(m_screen, mt, m_background->getRegion());
+			m_background->draw(mt, m_background->getRegion());
 		}
 
 		if (Settings::bVisibleBGRect)

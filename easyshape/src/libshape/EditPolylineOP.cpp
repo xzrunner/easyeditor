@@ -301,17 +301,17 @@ onMouseDrag(int x, int y)
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onDraw(const d2d::Screen& scr) const 
+onDraw() const 
 {
-	if (TBase::onDraw(scr)) return true;
+	if (TBase::onDraw()) return true;
 
-	m_selectOP->onDraw(scr);
+	m_selectOP->onDraw();
 	if (m_cmpt)
 	{
 		if (m_capturedEditable.shape)
-			drawCaptured(scr, m_capturedEditable);
+			drawCaptured(m_capturedEditable);
 		else if (m_captureSelectable.shape)
-			drawCaptured(scr, m_captureSelectable);
+			drawCaptured(m_captureSelectable);
 	}
 
 	return false;
@@ -332,7 +332,7 @@ clear()
 
 template <typename TBase, typename TSelected>
 void libshape::EditPolylineOP<TBase, TSelected>::
-drawCaptured(const d2d::Screen& scr, const NodeAddr& captured) const
+drawCaptured(const NodeAddr& captured) const
 {
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{

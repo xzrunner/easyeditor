@@ -18,7 +18,7 @@ namespace eanim
 		virtual bool onMouseLeftUp(int x, int y);
 		virtual bool onMouseDrag(int x, int y);
 		
-		virtual bool onDraw(const d2d::Screen& scr) const;
+		virtual bool onDraw() const;
 
 		void addCross();
 		void delCross();
@@ -30,7 +30,7 @@ namespace eanim
 			static const int LENGTH = 100;
 
 			Cross();
-			void draw(const d2d::Screen& scr) const;
+			void draw() const;
 			bool contain(const d2d::Vector& p) const;
 
 			d2d::Vector pos;

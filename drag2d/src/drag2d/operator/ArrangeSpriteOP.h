@@ -10,7 +10,6 @@ class EditPanel;
 class MultiSpritesImpl;
 class PropertySettingPanel;
 class AbstractEditCMPT;
-class Screen;
 
 template <typename TBase>
 class ArrangeSpriteOP : public TBase
@@ -31,7 +30,7 @@ public:
 
 	virtual bool onPopMenuSelected(int type);
 
-	virtual bool onDraw(const Screen& scr) const;
+	virtual bool onDraw() const;
 	virtual bool clear();
 
 protected:

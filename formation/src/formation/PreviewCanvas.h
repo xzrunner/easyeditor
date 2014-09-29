@@ -29,16 +29,14 @@ namespace formation
 		class DrawVisitor : public d2d::IVisitor
 		{
 		public:
-			DrawVisitor(float yOffset, float scale, const d2d::Screen& scr) 
-				: m_yOffset(yOffset), m_scale(scale), m_scr(scr) {}
+			DrawVisitor(float yOffset, float scale) 
+				: m_yOffset(yOffset), m_scale(scale) {}
 
 			virtual void visit(d2d::Object* object, bool& bFetchNext);
 
 		private:
 			float m_yOffset;
 			float m_scale;
-
-			const d2d::Screen& m_scr;
 
 		}; // DrawVisitor
 

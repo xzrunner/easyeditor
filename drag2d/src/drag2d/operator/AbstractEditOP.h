@@ -5,7 +5,6 @@
 namespace d2d
 {
 	class EditPanel;
-	class Screen;
 
 	class AbstractEditOP : public Object
 	{
@@ -30,7 +29,7 @@ namespace d2d
 
 		virtual bool onActive() { return false; }
 
-		virtual bool onDraw(const Screen& scr) const { return false; }
+		virtual bool onDraw() const { return false; }
 		virtual bool clear() { return false; }
 
 	protected:

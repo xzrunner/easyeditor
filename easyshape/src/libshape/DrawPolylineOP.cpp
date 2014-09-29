@@ -63,9 +63,9 @@ bool DrawPolylineOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
-bool DrawPolylineOP::onDraw(const d2d::Screen& scr) const
+bool DrawPolylineOP::onDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw(scr)) return true;
+	if (d2d::ZoomViewOP::onDraw()) return true;
 
 	if (!m_polyline.empty())
 	{

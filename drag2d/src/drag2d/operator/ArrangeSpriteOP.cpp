@@ -105,10 +105,10 @@ bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onDraw(const Screen& scr) const
+bool ArrangeSpriteOP<TBase>::onDraw() const
 {
-	if (TBase::onDraw(scr)) return true;
-	m_impl->onDraw(scr);
+	if (TBase::onDraw()) return true;
+	m_impl->onDraw(*m_editPanel->getCamera());
 	return false;
 }
 

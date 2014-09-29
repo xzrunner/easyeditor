@@ -40,10 +40,10 @@ namespace libmodeling
 		virtual bool isContain(const d2d::Vector& pos) const = 0;
 		virtual bool isIntersect(const d2d::Rect& rect) const = 0;
 
-		virtual void draw(const d2d::Screen& scr, DrawType type) const = 0;
+		virtual void draw(DrawType type) const = 0;
 
 	protected:
-		void drawBodyFlag(const d2d::Screen& scr) const;
+		void drawBodyFlag() const;
 
 		static d2d::Vector transWorldToLocal(const d2d::Vector& world, 
 			const d2d::ISprite* sprite);
@@ -51,7 +51,7 @@ namespace libmodeling
 			const d2d::ISprite* sprite);
 
 	private:
-		void drawBodyFlag(const d2d::Screen& scr, const d2d::Vector& pos) const;
+		void drawBodyFlag(const d2d::Vector& pos) const;
 
 	protected:
 		static const float JOINT_RADIUS_OUT;

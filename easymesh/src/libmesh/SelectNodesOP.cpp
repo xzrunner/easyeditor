@@ -95,11 +95,11 @@ bool SelectNodesOP::onMouseDrag(int x, int y)
 	return !m_bDraggable;
 }
 
-bool SelectNodesOP::onDraw(const d2d::Screen& scr) const
+bool SelectNodesOP::onDraw() const
 {
 	if (m_firstPos.isValid())
 	{
-		if (d2d::DrawRectangleOP::onDraw(scr))
+		if (d2d::DrawRectangleOP::onDraw())
 			return true;
 	}
 

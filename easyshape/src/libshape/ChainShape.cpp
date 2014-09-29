@@ -77,7 +77,7 @@ bool ChainShape::isIntersect(const d2d::Rect& rect) const
 	return false;
 }
 
-void ChainShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void ChainShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
 

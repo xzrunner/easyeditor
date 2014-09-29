@@ -46,9 +46,9 @@ bool DrawRectangleOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::onDraw(const Screen& scr) const
+bool DrawRectangleOP::onDraw() const
 {
-	if (ZoomViewOP::onDraw(scr)) return true;
+	if (ZoomViewOP::onDraw()) return true;
 
 	if (m_firstPos.isValid() && m_currPos.isValid()) {
 		PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);

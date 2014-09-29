@@ -29,7 +29,7 @@ CosineShape* CosineShape::clone() const
 	return new CosineShape(*this);	
 }
 
-void CosineShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void CosineShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
 

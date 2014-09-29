@@ -24,7 +24,7 @@ namespace eanim
 
 		Joint* queryJointByPos(const d2d::Vector& pos);
 
-		void draw(const d2d::Screen& scr) const;
+		void draw() const;
 
 		void absorb(d2d::ISprite* sprite);
 		void fixJoint(d2d::ISprite* sprite);

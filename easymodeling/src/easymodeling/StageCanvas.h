@@ -28,11 +28,7 @@ namespace emodeling
 		class DrawJointVisitor : public d2d::IVisitor
 		{
 		public:
-			DrawJointVisitor(const d2d::Screen& scr) : m_scr(scr) {}
 			virtual void visit(d2d::Object* object, bool& bFetchNext);
-
-		private:
-			const d2d::Screen& m_scr;
 		};
 
 	}; // StageCanvas

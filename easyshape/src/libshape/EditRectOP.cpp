@@ -194,9 +194,9 @@ bool EditRectOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditRectOP::onDraw(const d2d::Screen& scr) const
+bool EditRectOP::onDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw(scr)) return true;
+	if (d2d::ZoomViewOP::onDraw()) return true;
 
 	if (m_captured.shape)
 	{

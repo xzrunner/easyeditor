@@ -44,9 +44,9 @@ bool DrawRectangleOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::onDraw(const d2d::Screen& scr) const
+bool DrawRectangleOP::onDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw(scr)) return true;
+	if (d2d::ZoomViewOP::onDraw()) return true;
 
 	if (m_firstPos.isValid() && m_currPos.isValid()) {
 		d2d::PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);

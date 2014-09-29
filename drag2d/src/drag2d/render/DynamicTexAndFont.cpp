@@ -6,7 +6,6 @@
 #include "dataset/ISymbol.h"
 #include "render/ShaderNew.h"
 #include "render/SpriteDraw.h"
-#include "view/Screen.h"
 
 #include <opengl/opengl.h>
 
@@ -121,11 +120,9 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
   	glEnable(GL_BLEND);
   	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-//	Screen scr(m_width, m_height);
-	Screen scr(NULL);
 	Vector pos(node.GetCenterX(), node.GetCenterY());
 	float angle = node.IsRotated() ? PI * 0.5f : 0;
-	SpriteDraw::drawSprite(scr, &symbol, Matrix(), pos, angle);
+	SpriteDraw::drawSprite(&symbol, Matrix(), pos, angle);
 
 	glDisable(GL_SCISSOR_TEST);
 

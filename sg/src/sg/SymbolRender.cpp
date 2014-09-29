@@ -32,7 +32,7 @@ void SymbolRender::Init(StagePanel* stage)
 	m_stage = stage;
 }
 
-void SymbolRender::DrawGrass(const d2d::Screen& scr, const d2d::ISymbol& symbol, const d2d::Vector& pos) const
+void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
 	if (info == NULL) {
@@ -54,10 +54,10 @@ void SymbolRender::DrawGrass(const d2d::Screen& scr, const d2d::ISymbol& symbol,
 	{
 		grass->setTransform(pos, 0);
 	}
-	d2d::SpriteDraw::drawSprite(scr, grass);
+	d2d::SpriteDraw::drawSprite(grass);
 }
 
-void SymbolRender::DrawGrids(const d2d::Screen& scr, const d2d::ISymbol& symbol, 
+void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, 
 							 const d2d::Vector& pos, bool valid) const
 {
 	int row, col;
@@ -72,12 +72,12 @@ void SymbolRender::DrawGrids(const d2d::Screen& scr, const d2d::ISymbol& symbol,
 			d2d::Vector pos;
 			m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 			m_grid->setTransform(pos, m_grid->getAngle());
-			d2d::SpriteDraw::drawSprite(scr, m_grid, color);
+			d2d::SpriteDraw::drawSprite(m_grid, color);
 		}
 	}
 }
 
-void SymbolRender::DrawArrow(const d2d::Screen& scr, const d2d::ISymbol& symbol, 
+void SymbolRender::DrawArrow(const d2d::ISymbol& symbol, 
 							 const d2d::Vector& pos) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
@@ -92,25 +92,25 @@ void SymbolRender::DrawArrow(const d2d::Screen& scr, const d2d::ISymbol& symbol,
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row, col - r, pos);
-		d2d::SpriteDraw::drawSprite(scr, m_arrow_down, pos, 0, -1);
+		d2d::SpriteDraw::drawSprite(m_arrow_down, pos, 0, -1);
 	}
 	// right
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row, col + r, pos);
-		d2d::SpriteDraw::drawSprite(scr, m_arrow_right, pos);
+		d2d::SpriteDraw::drawSprite(m_arrow_right, pos);
 	}
 	// up
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row + r, col, pos);
-		d2d::SpriteDraw::drawSprite(scr, m_arrow_right, pos, 0, -1);
+		d2d::SpriteDraw::drawSprite(m_arrow_right, pos, 0, -1);
 	}
 	// down
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
-		d2d::SpriteDraw::drawSprite(scr, m_arrow_down, pos);
+		d2d::SpriteDraw::drawSprite(m_arrow_down, pos);
 	}
 }
 

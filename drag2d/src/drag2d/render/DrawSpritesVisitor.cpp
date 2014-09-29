@@ -8,9 +8,8 @@
 namespace d2d
 {
 
-DrawSpritesVisitor::DrawSpritesVisitor(const Screen& scr, SpriteBatch& batch)
-	: m_scr(scr)
-	, m_batch(batch)
+DrawSpritesVisitor::DrawSpritesVisitor(SpriteBatch& batch)
+	: m_batch(batch)
 {
 // 	GL10::Enable(GL10::GL_BLEND);
 // 	GL10::BlendFunc(GL10::GL_SRC_ALPHA, GL10::GL_ONE_MINUS_SRC_ALPHA);
@@ -33,7 +32,7 @@ void DrawSpritesVisitor::visit(Object* object, bool& bFetchNext)
 // 	if (sprite)
 // 		m_batch.add(sprite);
 // 	else
-		SpriteDraw::drawSprite(m_scr, static_cast<ISprite*>(object));
+		SpriteDraw::drawSprite(static_cast<ISprite*>(object));
 }
 
 } // d2d

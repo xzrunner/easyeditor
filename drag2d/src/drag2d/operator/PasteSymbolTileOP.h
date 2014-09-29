@@ -21,7 +21,7 @@ namespace d2d
 		virtual bool onMouseRightDown(int x, int y);
 		virtual bool onMouseMove(int x, int y);
 
-		virtual bool onDraw(const Screen& scr) const;
+		virtual bool onDraw() const;
 
 	private:
 		class NearestQueryVisitor : public IVisitor

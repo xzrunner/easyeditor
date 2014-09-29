@@ -48,17 +48,17 @@ bool PasteSymbolOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSymbolOP::onDraw(const Screen& scr) const
+bool PasteSymbolOP::onDraw() const
 {
-	if (ZoomViewOP::onDraw(scr)) return true;
+	if (ZoomViewOP::onDraw()) return true;
 
 	ISymbol* symbol = m_libraryPanel->getSymbol();
 	if (symbol && m_pos.isValid())
 	{
 		if (m_pScale)
-			SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos, 0.0f, *m_pScale);
+			SpriteDraw::drawSprite(symbol, Matrix(), m_pos, 0.0f, *m_pScale);
 		else
-			SpriteDraw::drawSprite(scr, symbol, Matrix(), m_pos);
+			SpriteDraw::drawSprite(symbol, Matrix(), m_pos);
 	}
 
 	return false;

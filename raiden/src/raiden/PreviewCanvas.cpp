@@ -85,7 +85,7 @@ void PreviewCanvas::drawSprites()
 		if (sprite->finish)
 			continue;
 
-		d2d::SpriteDraw::drawSprite(m_screen, sprite->s);
+		d2d::SpriteDraw::drawSprite(sprite->s);
 	}
 }
 

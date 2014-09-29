@@ -26,13 +26,13 @@ public:
 		m_scale = scale;
 	}
 
-	void TransPosForRender(Vector& pos) const {
-		pos += m_offset;
-		pos.x *= m_scale.x;
-		pos.y *= m_scale.y;
-		pos.x = pos.x * 2 / m_size.x;
-		pos.y = pos.y * 2 / m_size.y;
-	}
+// 	void TransPosForRender(Vector& pos) const {
+// 		pos += m_offset;
+// 		pos.x *= m_scale.x;
+// 		pos.y *= m_scale.y;
+// 		pos.x = pos.x * 2 / m_size.x;
+// 		pos.y = pos.y * 2 / m_size.y;
+// 	}
 
 	float GetScale() const;
 

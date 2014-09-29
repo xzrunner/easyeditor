@@ -88,7 +88,7 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::onDraw(const d2d::Screen& scr) const
+bool EditMeshOP::onDraw() const
 {
 	if (Shape* shape = m_stage->getShape())
 	{
@@ -99,7 +99,7 @@ bool EditMeshOP::onDraw(const d2d::Screen& scr) const
 	d2d::PrimitiveDraw::cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
 	d2d::PrimitiveDraw::drawCircle(m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
 
-	if (SelectNodesOP::onDraw(scr))
+	if (SelectNodesOP::onDraw())
 		return true;
 
 	return false;

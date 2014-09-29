@@ -22,8 +22,7 @@ namespace d2d
 		// ISymbol interfaces
 		//
 		virtual void reloadTexture() const;
-		virtual void draw(const Screen& scr,
-			const Matrix& mt,
+		virtual void draw(const Matrix& mt,
 			const Colorf& mul = Colorf(1, 1, 1, 1), 
 			const Colorf& add = Colorf(0, 0, 0, 0),
 			const ISprite* sprite = NULL) const;
@@ -35,8 +34,8 @@ namespace d2d
 		virtual void loadResources();
 
 	private:
-		void DrawBackground(const Screen& scr, const ISprite* sprite, const Matrix& mt) const;
-		void DrawText(const Screen& scr, const ISprite* sprite, const Matrix& mt) const;
+		void DrawBackground(const ISprite* sprite, const Matrix& mt) const;
+		void DrawText(const ISprite* sprite, const Matrix& mt) const;
 
 		// from NeHe's FreeType
 		void print(float x, float y, const char* text) const;

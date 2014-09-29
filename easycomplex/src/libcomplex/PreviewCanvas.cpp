@@ -34,7 +34,7 @@ void PreviewCanvas::onDraw()
 		const d2d::ISprite* sprite = m_sprites[i];
 // 		if (!sprite->visiable)
 // 			continue;
-		d2d::SpriteDraw::drawSprite(m_screen, sprite, d2d::Matrix(), sprite->multiCol, sprite->addCol);
+		d2d::SpriteDraw::drawSprite(sprite, d2d::Matrix(), sprite->multiCol, sprite->addCol);
 	}
 }
 

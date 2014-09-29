@@ -12,7 +12,6 @@ namespace d2d
 	class AbstractEditOP;
 	class GLCanvas;
 	class Camera;
-	class Screen;
 
 	class EditPanel : public wxPanel
 	{
@@ -25,7 +24,7 @@ namespace d2d
 		Vector transPosScreenToProject(int x, int y) const;
 		Vector transPosProjectToScreen(const Vector& proj) const;
 
-		void drawEditTemp(const Screen& scr) const;
+		void drawEditTemp() const;
 
 		AbstractEditOP* getEditOP() const { return m_editOP; }
 		void setEditOP(AbstractEditOP* editOP);

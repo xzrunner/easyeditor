@@ -225,7 +225,7 @@ void AutoAlign::Align(const ISprite* src, ISprite* dst)
 	}
 }
 
-void AutoAlign::Draw(const Screen& scr) const
+void AutoAlign::Draw() const
 {
 	if (m_open)
 	{

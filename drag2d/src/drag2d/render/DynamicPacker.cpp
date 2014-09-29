@@ -4,7 +4,6 @@
 #include "common/Exception.h"
 #include "common/Vector.h"
 #include "dataset/TPNode.h"
-#include "view/Screen.h"
 #include "render/PrimitiveDraw.h"
 #include "render/style_config.h"
 
@@ -45,7 +44,7 @@ void DynamicPacker::ReloadTexture()
 	ReloadPixels();
 }
 
-void DynamicPacker::DebugDraw() const
+void DynamicPacker::DebugDrawStatic() const
 {
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(0);
@@ -68,7 +67,7 @@ void DynamicPacker::DebugDraw() const
 	ShaderNew::Instance()->Draw(vb, m_tex);
 }
 
-void DynamicPacker::DebugDraw(const Screen& screen) const
+void DynamicPacker::DebugDraw() const
 {
 	const int EDGE = 1024;
 

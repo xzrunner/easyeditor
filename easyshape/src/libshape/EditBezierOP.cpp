@@ -195,9 +195,9 @@ bool EditBezierOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditBezierOP::onDraw(const d2d::Screen& scr) const
+bool EditBezierOP::onDraw() const
 {
-	if (ZoomViewOP::onDraw(scr)) return true;
+	if (ZoomViewOP::onDraw()) return true;
 
 	if (m_captured.shape)
 	{
@@ -219,7 +219,7 @@ bool EditBezierOP::onDraw(const d2d::Screen& scr) const
 		if (m_firstPress.isValid() && m_currPos.isValid())
 		{
 			BezierShape bezier(m_firstPress, m_currPos);
-			bezier.draw(scr);
+			bezier.draw();
 		}
 //			PrimitiveDraw::drawRect(m_firstPress, m_currPos);
 	}

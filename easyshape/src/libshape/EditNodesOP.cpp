@@ -72,9 +72,9 @@ bool EditNodesOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditNodesOP::onDraw(const d2d::Screen& scr) const
+bool EditNodesOP::onDraw() const
 {
-	if (SelectNodesOP::onDraw(scr)) return true;
+	if (SelectNodesOP::onDraw()) return true;
 
 	const float radius = d2d::Settings::ctlPosSize == 0 ? 3 : d2d::Settings::ctlPosSize;
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)

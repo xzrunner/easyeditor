@@ -35,7 +35,7 @@ namespace eanim
 		}
 	}
 
-	void Joint::draw(const d2d::Screen& scr) const
+	void Joint::draw() const
 	{
 		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
 		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));

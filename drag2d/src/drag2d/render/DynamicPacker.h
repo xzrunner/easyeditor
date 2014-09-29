@@ -7,7 +7,6 @@ namespace d2d
 typedef unsigned int GLuint;
 
 class TPNode;
-class Screen;
 
 class DynamicPacker
 {
@@ -22,8 +21,8 @@ public:
 
 	void ReloadTexture();
 
+	void DebugDrawStatic() const;
 	void DebugDraw() const;
-	void DebugDraw(const Screen& screen) const;
 
 protected:
 	virtual void ReloadPixels() = 0;

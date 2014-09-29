@@ -94,7 +94,7 @@ bool CheckerBoard::IsValid(const d2d::ISymbol& symbol, const d2d::Vector& pos) c
 	return true;
 }
 
-void CheckerBoard::DebugDraw(const d2d::Screen& scr) const
+void CheckerBoard::DebugDraw() const
 {
 	for (int i = 0; i < ROW; ++i) {
 		for (int j = 0; j < COL; ++j) {

@@ -69,7 +69,7 @@ bool CircleShape::isIntersect(const d2d::Rect& rect) const
 	return false;
 }
 
-void CircleShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
+void CircleShape::draw(const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
 {
 	d2d::PrimitiveDraw::drawCircle(center, radius, false, 3, color, 32);
 }

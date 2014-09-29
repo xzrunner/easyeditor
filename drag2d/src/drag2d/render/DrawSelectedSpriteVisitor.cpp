@@ -14,9 +14,8 @@
 namespace d2d
 {
 
-DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const Screen& scr, const Colorf& color)
-	: m_scr(scr)
-	, m_color(color)
+DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const Colorf& color)
+	: m_color(color)
 {}
 
 void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext) 

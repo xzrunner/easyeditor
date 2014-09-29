@@ -20,7 +20,7 @@ namespace emodeling
 		virtual bool onMouseLeftUp(int x, int y);
 		virtual bool onMouseMove(int x, int y);
 
-		virtual bool onDraw(const d2d::Screen& scr) const;
+		virtual bool onDraw() const;
 		virtual bool clear();
 
 	private:

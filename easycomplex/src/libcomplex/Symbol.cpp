@@ -38,8 +38,7 @@ void Symbol::reloadTexture() const
 		(*itr)->reloadTexture();
 }
 
-void Symbol::draw(const d2d::Screen& scr,
-				  const d2d::Matrix& mt,
+void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
@@ -54,17 +53,17 @@ void Symbol::draw(const d2d::Screen& scr,
  	if (n) 
  	{
 		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
-		if (shader->GetVersion() != m_render_version)
-		{
-			m_render_cache_open = false;
-			dtex->RefreshSymbol(*this, *n);
-			m_render_cache_open = true;
+		//if (shader->GetVersion() != m_render_version)
+		//{
+		//	m_render_cache_open = false;
+		//	dtex->RefreshSymbol(*this, *n);
+		//	m_render_cache_open = true;
 
-			const d2d::Vector& size = scr.GetSize();
-			glViewport(0, 0, size.x, size.y);
+		//	const d2d::Vector& size = scr.GetSize();
+		//	glViewport(0, 0, size.x, size.y);
 
-			m_render_version = shader->GetVersion();
-		}
+		//	m_render_version = shader->GetVersion();
+		//}
 
 		d2d::Vector vertices[4];
 		float hw = m_rect.xLength() * 0.5f,
@@ -73,9 +72,9 @@ void Symbol::draw(const d2d::Screen& scr,
 		vertices[1] = d2d::Math::transVector(d2d::Vector( hw, -hh), mt);
 		vertices[2] = d2d::Math::transVector(d2d::Vector( hw,  hh), mt);
 		vertices[3] = d2d::Math::transVector(d2d::Vector(-hw,  hh), mt);
-		for (int i = 0; i < 4; ++i) {
-			scr.TransPosForRender(vertices[i]);
-		}
+// 		for (int i = 0; i < 4; ++i) {
+// 			scr.TransPosForRender(vertices[i]);
+// 		}
 		if (n->IsRotated())
 		{
 			d2d::Vector tmp = vertices[3];
@@ -110,11 +109,11 @@ void Symbol::draw(const d2d::Screen& scr,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			d2d::SpriteDraw::drawSprite(scr, m_sprites[i], mt, mul, add);
+			d2d::SpriteDraw::drawSprite(m_sprites[i], mt, mul, add);
 
 		d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
 
-		d2d::SpriteTools::DrawName(scr, sprite, mt);
+		d2d::SpriteTools::DrawName(sprite, mt);
 	}
 }
 

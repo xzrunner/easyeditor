@@ -96,7 +96,7 @@ bool Fixture::isIntersect(const d2d::Rect& rect) const
 		return false;
 }
 
-void Fixture::draw(const d2d::Screen& scr, const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const
+void Fixture::draw(const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const
 {
 	if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(shape))
 	{
@@ -113,7 +113,7 @@ void Fixture::draw(const d2d::Screen& scr, const d2d::Colorf& cFace, const d2d::
 	else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shape))
 	{
 		const std::vector<d2d::Vector>& vertices = polygon->getVertices();
-		d2d::PrimitiveDraw::drawPolygon(scr, vertices, cFace);
+		d2d::PrimitiveDraw::drawPolygon(vertices, cFace);
 		d2d::PrimitiveDraw::drawPolyline(vertices, cEdge, true, 2);
 	}
 	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))

@@ -22,7 +22,7 @@ public:
 	bool IsValid(d2d::ISprite* sprite) const;
 	bool IsValid(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
 
-	void DebugDraw(const d2d::Screen& scr) const;
+	void DebugDraw() const;
 
 	void ClearRemovedCache() {
 		m_mapRemoved.clear();

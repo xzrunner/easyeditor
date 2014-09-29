@@ -142,30 +142,29 @@ DesignerPage::Canvas::Canvas(DesignerPage* panel)
 	setBgColor(d2d::Colorf(0.8f, 0.8f, 0.8f));
 }
 
-void DesignerPage::Canvas::onDraw(const d2d::Screen& scr)
+void DesignerPage::Canvas::onDraw()
 {
-	drawBackground(scr);	
+	drawBackground();	
 
 	d2d::SpriteStageCanvas::onDraw();
 
-	drawCenter(scr);
+	drawCenter();
 }
 
-void DesignerPage::Canvas::drawBackground(const d2d::Screen& scr)
+void DesignerPage::Canvas::drawBackground()
 {
-	d2d::PrimitiveDraw::rect(scr,
-		d2d::Vector(), 
+	d2d::PrimitiveDraw::rect(d2d::Vector(), 
 		Game::WIDTH * 0.5f, 
 		Game::HEIGHT * 0.5f, 
 		d2d::BLACK_RECT_FACE);
 }
 
-void DesignerPage::Canvas::drawCenter(const d2d::Screen& scr)
+void DesignerPage::Canvas::drawCenter()
 {
 	const int hEdge = 15;
-	d2d::PrimitiveDraw::drawLine(scr, d2d::Vector(-hEdge, 0), d2d::Vector(hEdge, 0), 
+	d2d::PrimitiveDraw::drawLine(d2d::Vector(-hEdge, 0), d2d::Vector(hEdge, 0), 
 		d2d::Colorf(1, 0, 0), 2);
-	d2d::PrimitiveDraw::drawLine(scr, d2d::Vector(0, -hEdge), d2d::Vector(0, hEdge), 
+	d2d::PrimitiveDraw::drawLine(d2d::Vector(0, -hEdge), d2d::Vector(0, hEdge), 
 		d2d::Colorf(1, 0, 0), 2);
 }
 

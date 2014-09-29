@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-void SpriteTools::DrawName(const Screen& scr, const ISprite* sprite, const Matrix& mt)
+void SpriteTools::DrawName(const ISprite* sprite, const Matrix& mt)
 {
 	if (!Config::Instance()->GetSettings().visible_node_name) {
  		return;

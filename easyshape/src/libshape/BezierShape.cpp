@@ -55,9 +55,9 @@ bool BezierShape::isContain(const d2d::Vector& pos) const
 	return ret;
 }
 
-void BezierShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void BezierShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
-	ChainShape::draw(scr, color);
+	ChainShape::draw(color);
 
 	for (size_t i = 0; i < 4; ++i) {
 		d2d::PrimitiveDraw::rect(points[i], (float)RADIUS, (float)RADIUS, m_style);

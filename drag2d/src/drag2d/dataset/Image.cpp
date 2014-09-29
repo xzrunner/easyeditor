@@ -13,7 +13,6 @@
 #include "common/Math.h"
 #include "common/Config.h"
 #include "common/SettingData.h"
-#include "view/Screen.h"
 
 #include <fstream>
 #include <SOIL/SOIL.h>
@@ -105,7 +104,7 @@ void Image::reload()
 #endif
 }
 
-void Image::draw(const Screen& scr, const Matrix& mt, const Rect& r) const
+void Image::draw(const Matrix& mt, const Rect& r) const
 {
 	////////////////////////////////////////////////////////////////////////////
 	//// 原始 直接画

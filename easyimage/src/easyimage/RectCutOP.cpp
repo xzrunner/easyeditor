@@ -165,22 +165,22 @@ bool RectCutOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onDraw(const d2d::Screen& scr) const
+bool RectCutOP::onDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw(scr)) return true;
+	if (d2d::ZoomViewOP::onDraw()) return true;
 
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	if (!m_stage->getImage()) return false;
 
-	m_rects.draw(scr);
+	m_rects.draw();
 
 	if (m_firstPos.isValid() && m_currPos.isValid())
 	{
 		d2d::PrimitiveDraw::rect(m_firstPos, m_currPos, d2d::LIGHT_RED_LINE);
 	}
 
-	drawCaptureLine(scr);
+	drawCaptureLine();
 
 	if (m_rectSelected) {
 		d2d::PrimitiveDraw::rect(*m_rectSelected, d2d::LIGHT_GREEN_FACE);
@@ -220,7 +220,7 @@ void RectCutOP::loadImageFromFile(const std::string& filepath)
 	m_stage->setImage(filepath);
 }
 
-void RectCutOP::drawCaptureLine(const d2d::Screen& scr) const
+void RectCutOP::drawCaptureLine() const
 {
 	if (!m_currPos.isValid()) return;
 	if (m_captured.x == FLT_INVALID && m_captured.y == FLT_INVALID) return;
@@ -230,14 +230,14 @@ void RectCutOP::drawCaptureLine(const d2d::Screen& scr) const
 	{
 		d2d::Vector p0(m_captured.x, -EDGE);
 		d2d::Vector p1(m_captured.x, EDGE);
-		d2d::PrimitiveDraw::drawDashLine(scr, p0, p1, d2d::Colorf(0, 0, 0));
+		d2d::PrimitiveDraw::drawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
 	}
 
 	if (m_captured.y != FLT_INVALID)
 	{
 		d2d::Vector p0(-EDGE, m_captured.y);
 		d2d::Vector p1(EDGE, m_captured.y);
-		d2d::PrimitiveDraw::drawDashLine(scr, p0, p1, d2d::Colorf(0, 0, 0));
+		d2d::PrimitiveDraw::drawDashLine(p0, p1, d2d::Colorf(0, 0, 0));
 	}
 }
 

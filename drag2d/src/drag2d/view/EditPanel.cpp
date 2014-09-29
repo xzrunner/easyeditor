@@ -68,10 +68,10 @@ Vector EditPanel::transPosProjectToScreen(const Vector& proj) const
 	return m_camera->transPosProjectToScreen(proj, GetSize().GetWidth(), GetSize().GetHeight());
 }
 
-void EditPanel::drawEditTemp(const Screen& scr) const
+void EditPanel::drawEditTemp() const
 {
 	if (m_editOP) {
-		m_editOP->onDraw(scr);
+		m_editOP->onDraw();
 	}
 }
 

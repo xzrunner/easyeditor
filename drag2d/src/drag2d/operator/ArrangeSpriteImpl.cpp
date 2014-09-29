@@ -14,6 +14,7 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
 #include "view/GLCanvas.h"
+#include "view/Camera.h"
 #include "history/DeleteSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
 #include "render/DynamicTexAndFont.h"
@@ -341,9 +342,9 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 	}
 }
 
-void ArrangeSpriteImpl::onDraw(const Screen& scr) const
+void ArrangeSpriteImpl::onDraw(const Camera& cam) const
 {
-	m_ctrl_node_radius = CTRL_NODE_RADIUS * scr.GetScale();
+	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
 
 	if (m_isDeformOpen && m_selection->size() == 1)
 	{
@@ -366,7 +367,7 @@ void ArrangeSpriteImpl::onDraw(const Screen& scr) const
 		}
 	}
 
-	m_align.Draw(scr);
+	m_align.Draw();
 }
 
 void ArrangeSpriteImpl::clear()
