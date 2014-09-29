@@ -122,7 +122,11 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 
 	Vector pos(node.GetCenterX(), node.GetCenterY());
 	float angle = node.IsRotated() ? PI * 0.5f : 0;
-	SpriteDraw::drawSprite(&symbol, Matrix(), pos, angle);
+	Matrix mt;
+	float dx = -m_width*0.5f - symbol.getSize().xCenter();
+	float dy = -m_height*0.5f - symbol.getSize().yCenter();
+	mt.translate(dx, dy);
+	SpriteDraw::drawSprite(&symbol, mt, pos, angle);
 
 	glDisable(GL_SCISSOR_TEST);
 

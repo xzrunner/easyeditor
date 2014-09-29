@@ -68,13 +68,10 @@ void Symbol::draw(const d2d::Matrix& mt,
 		d2d::Vector vertices[4];
 		float hw = m_rect.xLength() * 0.5f,
 			hh = m_rect.yLength() * 0.5f;
-		vertices[0] = d2d::Math::transVector(d2d::Vector(-hw, -hh), mt);
-		vertices[1] = d2d::Math::transVector(d2d::Vector( hw, -hh), mt);
-		vertices[2] = d2d::Math::transVector(d2d::Vector( hw,  hh), mt);
-		vertices[3] = d2d::Math::transVector(d2d::Vector(-hw,  hh), mt);
-// 		for (int i = 0; i < 4; ++i) {
-// 			scr.TransPosForRender(vertices[i]);
-// 		}
+		vertices[0] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMin), mt);
+		vertices[1] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMin), mt);
+		vertices[2] = d2d::Math::transVector(d2d::Vector(m_rect.xMax, m_rect.yMax), mt);
+		vertices[3] = d2d::Math::transVector(d2d::Vector(m_rect.xMin, m_rect.yMax), mt);
 		if (n->IsRotated())
 		{
 			d2d::Vector tmp = vertices[3];

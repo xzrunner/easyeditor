@@ -136,7 +136,11 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 	shader->SetProjection(w, h);
 	glViewport(0, 0, w, h);
 
-	SpriteDraw::drawSprite(symbol, Matrix(), d2d::Vector(0, 0), 0.0f, scale, -scale);
+	Matrix mt;
+	float dx = symbol->getSize().xCenter();
+	float dy = symbol->getSize().yCenter();
+	mt.translate(dx, dy);
+	SpriteDraw::drawSprite(symbol, mt, d2d::Vector(0, 0), 0.0f, scale, -scale);
 
 	// set fbo to force flush
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
