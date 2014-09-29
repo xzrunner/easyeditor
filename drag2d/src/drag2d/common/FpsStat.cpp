@@ -61,6 +61,8 @@ void FpsStat::DrawFPS(const Screen& scr) const
 
 void FpsStat::Draw(const Screen& scr, const std::string& str) const
 {
+	return;
+
 	LabelStyle style;
 	style.has_edge = false;
 	style.font_size = 20;
@@ -75,11 +77,13 @@ void FpsStat::Draw(const Screen& scr, const std::string& str) const
  	pos.x = -size.x * 0.4f;
  	pos.y = size.y * 0.45f;
 
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetModelView(Vector(0, 0), 1);
+// 	ShaderNew* shader = ShaderNew::Instance();
+// 	shader->Commit();
+//	shader->SetSpriteModelView(Vector(0, 0), 1);
 	LabelNew::Print(m_time.c_str(), pos, style);
-	shader->Commit();
-	scr.UpdateModelView();
+//	shader->Commit();
+// 	shader->Commit();
+// 	scr.UpdateModelView();
 }
 
 }
