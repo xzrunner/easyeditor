@@ -23,16 +23,16 @@ void StageCanvas::onDraw()
 {
 	const d2d::ISprite* bg = m_panel->GetBackground();
 	if (bg) {
-		d2d::SpriteDraw::drawSprite(m_screen, bg);
+		d2d::SpriteDraw::drawSprite(bg);
 	}
 
-	m_editPanel->drawEditTemp(m_screen);
+	m_editPanel->drawEditTemp();
 
-	m_panel->traverseShapes(d2d::DrawShapesVisitor(m_screen), d2d::e_visible);
+	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
 
-// #ifdef _DEBUG 
-// 	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
-// #endif
+#ifdef _DEBUG 
+	d2d::DynamicTexAndFont::Instance()->DebugDraw();
+#endif
 }
 
 }

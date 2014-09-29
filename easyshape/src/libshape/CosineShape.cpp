@@ -29,18 +29,16 @@ CosineShape* CosineShape::clone() const
 	return new CosineShape(*this);	
 }
 
-void CosineShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void CosineShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
 
-	d2d::PrimitiveDraw::resetColorAndTexture();
-
-	d2d::PrimitiveDraw::drawPolyline(scr, m_midPoints, color, m_isLoop);
+	d2d::PrimitiveDraw::drawPolyline(m_midPoints, color, m_isLoop);
 	if (d2d::Settings::ctlPosSize != 0) {
-		d2d::PrimitiveDraw::drawCircles(scr, m_vertices, d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
+		d2d::PrimitiveDraw::drawCircles(m_vertices, d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
 	}
 	if (d2d::Settings::ctlPosSize != 0) {
-		d2d::PrimitiveDraw::drawCircles(scr, m_midPoints, d2d::Settings::ctlPosSize * 0.5f, true, 2, d2d::Colorf(0.8f, 0.8f, 0.4f));
+		d2d::PrimitiveDraw::drawCircles(m_midPoints, d2d::Settings::ctlPosSize * 0.5f, true, 2, d2d::Colorf(0.8f, 0.8f, 0.4f));
 	}
 }
 

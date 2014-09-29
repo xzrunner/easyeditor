@@ -101,14 +101,14 @@ bool PasteSpriteOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSpriteOP::onDraw(const Screen& scr) const
+bool PasteSpriteOP::onDraw() const
 {
-	if (SelectSpritesOP::onDraw(scr)) return true;
+	if (SelectSpritesOP::onDraw()) return true;
 
 	if (m_cmpt)
-		m_batch.draw(scr, m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
+		m_batch.draw(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
 	else
-		m_batch.draw(scr, m_pos, false, false);
+		m_batch.draw(m_pos, false, false);
 
 	return false;
 }
@@ -192,7 +192,7 @@ insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 }
 
 void PasteSpriteOP::SpriteBatch::
-draw(const Screen& scr, const Vector& pos, bool isHorMirror, bool isVerMirror) const
+draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 {
 	if (!m_selected.empty() && pos.isValid())
 	{
@@ -211,7 +211,7 @@ draw(const Screen& scr, const Vector& pos, bool isHorMirror, bool isVerMirror) c
 
 			GL10::PushMatrix();
 			GL10::Translatef(x, y, 0.0f);
-			SpriteDraw::drawSprite(scr, m_selected[i]);
+			SpriteDraw::drawSprite(m_selected[i]);
 			GL10::PopMatrix();
 		}
 	}

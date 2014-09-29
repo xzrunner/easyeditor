@@ -12,25 +12,19 @@ namespace d2d
 	class AbstractEditOP;
 	class GLCanvas;
 	class Camera;
-	class Screen;
 
-	class EditPanel : public wxPanel, public ICameraObserver
+	class EditPanel : public wxPanel
 	{
 	public:
 		EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
 		virtual ~EditPanel();
-
- 		//
- 		// ICameraObserver interface
- 		//
- 		virtual void onCameraChanged();
 
 		virtual void clear();
 
 		Vector transPosScreenToProject(int x, int y) const;
 		Vector transPosProjectToScreen(const Vector& proj) const;
 
-		void drawEditTemp(const Screen& scr) const;
+		void drawEditTemp() const;
 
 		AbstractEditOP* getEditOP() const { return m_editOP; }
 		void setEditOP(AbstractEditOP* editOP);

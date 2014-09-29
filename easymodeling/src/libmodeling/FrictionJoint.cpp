@@ -26,22 +26,22 @@ bool FrictionJoint::isIntersect(const d2d::Rect& rect) const
 		|| d2d::Math::isPointInRect(getWorldAnchorB(), rect);
 }
 
-void FrictionJoint::draw(const d2d::Screen& scr, DrawType type) const
+void FrictionJoint::draw(DrawType type) const
 {
 	const d2d::Vector anchorA = getWorldAnchorA(),
 		anchorB = getWorldAnchorB();
 
 	if (type == e_selected || type == e_mouseOn)
 	{
-		d2d::PrimitiveDraw::drawDashLine(scr, anchorA, anchorB, d2d::Colorf(1, 0, 0), 2);
-		d2d::PrimitiveDraw::drawDashLine(scr, anchorA, bodyA->sprite->getPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
-		d2d::PrimitiveDraw::drawDashLine(scr, anchorB, bodyB->sprite->getPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
+		d2d::PrimitiveDraw::drawDashLine(anchorA, anchorB, d2d::Colorf(1, 0, 0), 2);
+		d2d::PrimitiveDraw::drawDashLine(anchorA, bodyA->sprite->getPosition(), d2d::Colorf(0.4f, 0.8f, 0.4f), 2);
+		d2d::PrimitiveDraw::drawDashLine(anchorB, bodyB->sprite->getPosition(), d2d::Colorf(0.4f, 0.4f, 0.8f), 2);
 
-		drawBodyFlag(scr);
+		drawBodyFlag();
 	}
 
-	drawAnchor(scr, anchorA, type);
-	drawAnchor(scr, anchorB, type);
+	drawAnchor(anchorA, type);
+	drawAnchor(anchorB, type);
 }
 
 d2d::Vector FrictionJoint::getWorldAnchorA() const
@@ -64,7 +64,7 @@ void FrictionJoint::setLocalAnchorB(const d2d::Vector& world)
 	localAnchorB = transWorldToLocal(world, bodyB->sprite);
 }
 
-void FrictionJoint::drawAnchor(const d2d::Screen& scr, const d2d::Vector& pos, DrawType type) const
+void FrictionJoint::drawAnchor(const d2d::Vector& pos, DrawType type) const
 {
 	d2d::Colorf color;
 	switch (type)
@@ -80,6 +80,6 @@ void FrictionJoint::drawAnchor(const d2d::Screen& scr, const d2d::Vector& pos, D
 		break;
 	}
 
-	d2d::PrimitiveDraw::drawCircle(scr, pos, JOINT_RADIUS_IN, true, 2, color);
-	d2d::PrimitiveDraw::drawCircle(scr, pos, JOINT_RADIUS_OUT, false, 2, color);
+	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_IN, true, 2, color);
+	d2d::PrimitiveDraw::drawCircle(pos, JOINT_RADIUS_OUT, false, 2, color);
 }

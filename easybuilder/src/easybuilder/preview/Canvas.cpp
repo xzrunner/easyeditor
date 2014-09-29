@@ -28,5 +28,5 @@ void Canvas::onDraw()
 {
 	Scene* scene = static_cast<Panel*>(m_editPanel)->getScene();
 	for (size_t i = 0, n = scene->m_items.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(m_screen, scene->m_items[i]);
+		d2d::SpriteDraw::drawSprite(scene->m_items[i]);
 }

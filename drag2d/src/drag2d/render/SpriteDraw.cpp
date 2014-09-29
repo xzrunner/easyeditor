@@ -4,8 +4,8 @@
 
 namespace d2d
 {
-void SpriteDraw::drawSprite(const Screen& scr, const ISprite* sprite, const d2d::Matrix& mt,
-	const Colorf& mul, const Colorf& add)
+void SpriteDraw::drawSprite(const ISprite* sprite, const d2d::Matrix& mt,
+							const Colorf& mul, const Colorf& add)
 {
 	if (!sprite->visiable)
 		return;
@@ -24,10 +24,10 @@ void SpriteDraw::drawSprite(const Screen& scr, const ISprite* sprite, const d2d:
 
 	t = mt * t;
 
-	sprite->getSymbol().draw(scr, t, _mul, _add, sprite);
+	sprite->getSymbol().draw(t, _mul, _add, sprite);
 }
 
-void SpriteDraw::drawSprite(const Screen& scr, const ISymbol* symbol, const d2d::Matrix& mt,
+void SpriteDraw::drawSprite(const ISymbol* symbol, const d2d::Matrix& mt,
 	const Vector& pos, float angle/* = 0.0f*/, float xScale/* = 1.0f*/, 
 	float yScale/* = 1.0f*/, float xShear/* = 0.0f*/, 
 	float yShear/* = 0.0f*/, const Colorf& mul /*= Colorf(1,1,1,1)*/,
@@ -36,7 +36,7 @@ void SpriteDraw::drawSprite(const Screen& scr, const ISymbol* symbol, const d2d:
 	Matrix t;
 	t.setTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
 	t = mt * t;
-	symbol->draw(scr, t, mul, add);
+	symbol->draw(t, mul, add);
 }
 
 } // d2d

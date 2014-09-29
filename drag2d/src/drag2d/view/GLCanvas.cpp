@@ -28,6 +28,7 @@ GLCanvas::GLCanvas(EditPanel* editPanel)
 	: wxGLCanvas(editPanel, wxID_ANY, gl_attrib)
 	, m_editPanel(editPanel)
  	, m_camera(editPanel->getCamera())
+	, m_screen(editPanel->getCamera())
  	, m_width(0), m_height(0)
  	, m_isInit(false)
  	, m_context(new wxGLContext(this))
@@ -96,11 +97,9 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 	glClearColor(m_bgColor.r, m_bgColor.g, m_bgColor.b, m_bgColor.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glPushMatrix();
 	onDraw();
-	//RenderList::Instance()->Flush();
+
 	ShaderNew::Instance()->Flush();
-//	glPopMatrix();
 
 	glFlush();
 	SwapBuffers();

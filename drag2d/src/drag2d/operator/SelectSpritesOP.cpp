@@ -214,25 +214,25 @@ bool SelectSpritesOP::onMouseDrag(int x, int y)
 	return !m_bDraggable;
 }
 
-bool SelectSpritesOP::onDraw(const Screen& scr) const
+bool SelectSpritesOP::onDraw() const
 {
-	m_selection->traverse(DrawSelectedSpriteVisitor(scr, Colorf(1, 0, 0)));
+	m_selection->traverse(DrawSelectedSpriteVisitor(Colorf(1, 0, 0)));
 
 	if (m_firstPos.isValid() && m_currPos.isValid())
 	{
 		if (m_currPos.x > m_firstPos.x)
 		{
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_ALL);
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_BOUND);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_ALL);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
 		}
 		else
 		{
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_PART);
-			PrimitiveDraw::rect(scr, m_firstPos, m_currPos, SELECT_BOUND);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_PART);
+			PrimitiveDraw::rect(m_firstPos, m_currPos, SELECT_BOUND);
 		}
 	}
 
-// 	if (DrawRectangleOP::onDraw(scr)) return true;
+// 	if (DrawRectangleOP::onDraw()) return true;
 
 	return false;
 }

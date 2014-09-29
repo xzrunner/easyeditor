@@ -77,15 +77,13 @@ bool ChainShape::isIntersect(const d2d::Rect& rect) const
 	return false;
 }
 
-void ChainShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void ChainShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
 
-	d2d::PrimitiveDraw::resetColorAndTexture();
-
-	d2d::PrimitiveDraw::drawPolyline(scr, m_vertices, color, m_isLoop);
+	d2d::PrimitiveDraw::drawPolyline(m_vertices, color, m_isLoop);
 	if (d2d::Settings::ctlPosSize != 0) {
-		d2d::PrimitiveDraw::drawCircles(scr, m_vertices, d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
+		d2d::PrimitiveDraw::drawCircles(m_vertices, d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
 	}
 }
 

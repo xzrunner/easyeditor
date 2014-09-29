@@ -19,7 +19,7 @@ public:
 	virtual bool onMouseRightUp(int x, int y);
 	virtual bool onMouseDrag(int x, int y);
 
-	virtual bool onDraw(const d2d::Screen& scr) const;
+	virtual bool onDraw() const;
 
 private:
 	StagePanel* m_stage;

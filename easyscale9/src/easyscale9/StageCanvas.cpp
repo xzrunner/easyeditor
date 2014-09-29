@@ -36,18 +36,18 @@ void StageCanvas::onDraw()
 	if (m_toolbar->isComposeOP())
 	{
 		drawGuideLines();
-		editPanel->traverseSprites(d2d::DrawSpritesVisitor(m_screen, m_batch),
+		editPanel->traverseSprites(d2d::DrawSpritesVisitor(m_batch),
 			d2d::e_visible);
 	}
 	else
 	{
-		d2d::PrimitiveDraw::rect(m_screen, d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
 
 		d2d::ISymbol* symbol = editPanel->getPatchSymbol();
 		if (symbol)
-			symbol->draw(m_screen, d2d::Matrix());
+			symbol->draw(d2d::Matrix());
 	}
-	editPanel->drawEditTemp(m_screen);
+	editPanel->drawEditTemp();
 }
 
 void StageCanvas::drawGuideLines()
@@ -56,7 +56,7 @@ void StageCanvas::drawGuideLines()
 
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j) {
- 			d2d::PrimitiveDraw::rect(m_screen, d2d::Vector(edge*i, edge*j), 
+ 			d2d::PrimitiveDraw::rect(d2d::Vector(edge*i, edge*j), 
 				d2d::Vector(edge*i+edge, edge*j+edge), m_bgStyle);
 		}
 	}

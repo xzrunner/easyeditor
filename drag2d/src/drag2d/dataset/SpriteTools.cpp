@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-void SpriteTools::DrawName(const Screen& scr, const ISprite* sprite, const Matrix& mt)
+void SpriteTools::DrawName(const ISprite* sprite, const Matrix& mt)
 {
 	if (!Config::Instance()->GetSettings().visible_node_name) {
  		return;
@@ -26,7 +26,7 @@ void SpriteTools::DrawName(const Screen& scr, const ISprite* sprite, const Matri
 		style.align_hori = HAT_CENTER;
 		style.align_vert = VAT_TOP;
 
-		LabelNew::Print(scr, sprite->name.c_str(), pos, style);
+		LabelNew::Print(sprite->name.c_str(), pos, style);
  	}
 }
 

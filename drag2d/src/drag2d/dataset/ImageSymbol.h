@@ -22,8 +22,7 @@ namespace d2d
 		// ISymbol interface
 		//
 		virtual void reloadTexture() const;
-		virtual void draw(const Screen& scr,
-			const Matrix& mt,
+		virtual void draw(const Matrix& mt,
 			const Colorf& mul = Colorf(1, 1, 1, 1), 
 			const Colorf& add = Colorf(0, 0, 0, 0),
 			const ISprite* sprite = NULL) const;

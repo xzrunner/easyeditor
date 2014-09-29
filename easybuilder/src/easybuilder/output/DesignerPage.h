@@ -37,11 +37,11 @@ namespace ebuilder
 			Canvas(DesignerPage* panelscr);
 
 		protected:
-			virtual void onDraw(const d2d::Screen& scr);
+			virtual void onDraw();
 
 		private:
-			void drawBackground(const d2d::Screen& scr);
-			void drawCenter(const d2d::Screen& scr);
+			void drawBackground();
+			void drawCenter();
 
 		}; // Canvas
 

@@ -40,8 +40,8 @@ bool Body::isIntersect(const d2d::Rect& rect) const
 	return false;
 }
 
-void Body::draw(const d2d::Screen& scr, const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const
+void Body::draw(const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const
 {
 	for (size_t i = 0, n = fixtures.size(); i < n; ++i)
-		fixtures[i]->draw(scr, cFace, cEdge);
+		fixtures[i]->draw(cFace, cEdge);
 }

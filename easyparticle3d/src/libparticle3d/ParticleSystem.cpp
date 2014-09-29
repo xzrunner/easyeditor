@@ -49,7 +49,7 @@ ParticleSystem::~ParticleSystem()
 		delete[] pStart;
 }
 
-void ParticleSystem::draw(const d2d::Screen& scr, const d2d::Matrix& mt)
+void ParticleSystem::draw(const d2d::Matrix& mt)
 {
 	m_recorder.FinishFrame();
 
@@ -77,7 +77,7 @@ void ParticleSystem::draw(const d2d::Screen& scr, const d2d::Matrix& mt)
 
 		d2d::Matrix _mt(mt);
 //		_mt.translate(p->pos.x, p->pos.y);
-		d2d::SpriteDraw::drawSprite(scr, p->pc->symbol, _mt, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
+		d2d::SpriteDraw::drawSprite(p->pc->symbol, _mt, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
 
 		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), x, y, p->angle, s, multi);
 

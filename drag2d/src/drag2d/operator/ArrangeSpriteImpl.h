@@ -15,6 +15,7 @@ namespace d2d
 class MultiSpritesImpl;
 class PropertySettingPanel;
 class IArrangeSpriteState;
+class Camera;
 
 class ArrangeSpriteImpl
 {
@@ -34,7 +35,7 @@ public:
 
 	virtual void onPopMenuSelected(int type);
 
-	virtual void onDraw(const Screen& scr) const;
+	virtual void onDraw(const Camera& cam) const;
 	virtual void clear();
 
 	// query edited sprite, include its extra edit region

@@ -1,15 +1,12 @@
 #ifndef D2D_SHADER_NEW_H
 #define D2D_SHADER_NEW_H
 
-#include "common/Color.h"
-#include "common/tools.h"
-
-typedef unsigned int GLuint;
-
 namespace d2d
 {
 
+struct Colorf;
 class Vector;
+class ShaderImpl;
 
 class ShaderNew
 {
@@ -27,8 +24,8 @@ public:
 
 	void reload();
 
-	int GetTexID() const { return m_tex; }
-	int GetFboID() const { return m_fbo; }
+	int GetTexID() const;
+	int GetFboID() const;
 
 	void SetTexture(int tex);
 	void SetFBO(int fbo);
@@ -36,67 +33,29 @@ public:
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 
-	int GetVersion() const { return m_version; }
+	int GetVersion() const;
 
-	void SetBufferData(bool open) {
-		m_open_buffer_data = open;
-	}
+	void SetBufferData(bool open);
+	bool IsOpenBufferData() const;
+
+	void SetModelView(const Vector& offset, float scale);
+	void GetModelView(Vector& offset, float& scale);
+	void SetProjection(int width, int height);
+
+	// todo
+	void Commit();
 
 	void Flush();
 
 private:
 	ShaderNew();
-
-	void load();
-	void unload();
-
-	int InitShader(const char *FS, const char *VS);
-	int CompileShader(const char * source, int type);
-
-	void InitBuffers();
-
-	void Commit();
-
-	void CopyVertex(const float vb[16]);
-
-private:
-	static int MAX_COMMBINE;
-	static const int SPRITE_FLOAT_NUM = 24;	// 
+	~ShaderNew();
 
 private:
 	static ShaderNew* m_instance;
 
 private:
-	int m_prog_curr;
-	int m_prog_sprite;
-	int m_prog_shape;
-	int m_prog_font;
-
-// 		// for sprite
-// 		int m_multi_loc;
-// 		int m_add_loc;
-// 		// for shape
-// 		int m_col_loc;
-
-	//////////////////////////////////////////////////////////////////////////
-	GLuint VertexBuffer;
-	GLuint IndexBuffer;
-
-	int m_sprite_count;
-
-	float* m_vb;
-
-	GLuint m_tex;
-	GLuint m_fbo;
-
-	uint32_t m_color, m_additive;
-
-	// for shape
-	int m_col_loc;
-
-	int m_version;
-
-	bool m_open_buffer_data;
+	ShaderImpl* m_impl;
 
 }; // ShaderNew
 

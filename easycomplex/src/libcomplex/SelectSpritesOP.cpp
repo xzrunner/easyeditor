@@ -30,8 +30,8 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
  		EditDialog dlg(m_editPanel, &symbol);
  		dlg.ShowModal();
  
-  		m_editPanel->resetCanvas();
-		//m_editPanel->ResetViewport();
+  		//m_editPanel->resetCanvas();
+		m_editPanel->ResetViewport();
 
 		//////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,8 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
  		anim::PreviewDialog dlg(m_editPanel, &anim->getSymbol());
  		dlg.ShowModal();
 
- 		m_editPanel->resetCanvas();
+// 		m_editPanel->resetCanvas();
+		m_editPanel->ResetViewport();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
@@ -51,14 +52,16 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
   		escale9::EditDialog dlg(m_editPanel, &symbol);
   		dlg.ShowModal();
   
- 		m_editPanel->resetCanvas();
+// 		m_editPanel->resetCanvas();
+		m_editPanel->ResetViewport();
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
 		emesh::EditDialog dlg(m_editPanel, sprite);
 		dlg.ShowModal();
 
-		m_editPanel->resetCanvas();
+//		m_editPanel->resetCanvas();
+		m_editPanel->ResetViewport();
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
 	{

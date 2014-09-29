@@ -276,15 +276,16 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 	return false;
 }
 
-void EditPolylineImpl::OnDraw(const d2d::Screen& scr) const
+void EditPolylineImpl::OnDraw() const
 {
-	m_selectOP->onDraw(scr);
+	m_selectOP->onDraw();
 	if (m_node_capture)
 	{
-		if (m_capturedEditable.shape)
-			drawCaptured(scr, m_capturedEditable);
-		else if (m_captureSelectable.shape)
-			drawCaptured(scr, m_captureSelectable);
+		if (m_capturedEditable.shape) {
+			drawCaptured(m_capturedEditable);
+		} else if (m_captureSelectable.shape) {
+			drawCaptured(m_captureSelectable);
+		}
 	}
 }
 
@@ -295,18 +296,18 @@ void EditPolylineImpl::Clear()
 	m_captureSelectable.shape = NULL;
 }
 
-void EditPolylineImpl::drawCaptured(const d2d::Screen& scr, const NodeAddr& captured) const
+void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 {
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
 		if (captured.pos.isValid()) {
-			d2d::PrimitiveDraw::drawCircle(scr, captured.pos, m_node_capture->GetScope(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+			d2d::PrimitiveDraw::drawCircle(captured.pos, m_node_capture->GetScope(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 		}
 
 		d2d::Vector center;
 		center.x = chain->getRect().xCenter();
 		center.y = chain->getRect().yCenter();
-		d2d::PrimitiveDraw::drawCircle(scr, center, m_node_capture->GetScope(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+		d2d::PrimitiveDraw::drawCircle(center, m_node_capture->GetScope(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 	}
 }
 

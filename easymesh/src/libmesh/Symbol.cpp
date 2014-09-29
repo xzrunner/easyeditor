@@ -57,8 +57,7 @@ void Symbol::reloadTexture() const
 	}
 }
 
-void Symbol::draw(const d2d::Screen& scr,
-				  const d2d::Matrix& mt,
+void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite) const
@@ -68,7 +67,7 @@ void Symbol::draw(const d2d::Screen& scr,
  		shader->sprite();
 		shader->SetSpriteColor(mul, add);
  
- 		m_shape->DrawTexture(scr, mt);
+ 		m_shape->DrawTexture(mt);
   		if (!m_pause && sprite) 
 		{
 			const Sprite* s = static_cast<const Sprite*>(sprite);

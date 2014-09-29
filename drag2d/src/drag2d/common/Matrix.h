@@ -149,6 +149,8 @@ namespace d2d
 		**/
 		void shear(float kx, float ky);
 
+		void orthographic(float left, float right, float bottom, float top, float near, float zfar);
+
 		/**
 		* Transforms an array of vertices by this Matrix. The sources and
 		* destination arrays may be the same.

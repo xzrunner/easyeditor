@@ -27,12 +27,12 @@ public:
 	bool OnMouseMove(int x, int y);
 	bool OnMouseDrag(int x, int y);
 
-	void OnDraw(const d2d::Screen& scr) const;
+	void OnDraw() const;
 
 	void Clear();
 
 private:
-	void drawCaptured(const d2d::Screen& scr, const NodeAddr& captured) const;
+	void drawCaptured(const NodeAddr& captured) const;
 	void checkActiveShape(const NodeAddr& captured);
 
 private:

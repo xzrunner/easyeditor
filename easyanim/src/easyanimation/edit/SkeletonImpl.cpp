@@ -94,10 +94,10 @@ void SkeletonImpl::onPopMenuSelected(int type)
 	}
 }
 
-void SkeletonImpl::onDraw(const d2d::Screen& scr) const
+void SkeletonImpl::onDraw() const
 {
-	d2d::ArrangeSpriteImpl::onDraw(scr);
-	m_stage->getSkeletonData().draw(scr);
+	d2d::ArrangeSpriteImpl::onDraw();
+	m_stage->getSkeletonData().draw();
 }
 
 void SkeletonImpl::setRightPopupMenu(wxMenu& menu)

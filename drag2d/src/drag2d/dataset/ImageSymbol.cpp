@@ -41,22 +41,16 @@ void ImageSymbol::reloadTexture() const
 	m_image->reload();
 }
 
-void ImageSymbol::draw(const Screen& scr,
-					   const Matrix& mt,
+void ImageSymbol::draw(const Matrix& mt,
 					   const Colorf& mul, 
 					   const Colorf& add,
 					   const ISprite* sprite/* = NULL*/) const
 {
-//	// todo ShaderNew::Color
-//  	Shader* shader = Shader::Instance();
-//  	shader->sprite();
-//  	shader->color(mul, add);
-
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetSpriteColor(mul, add);
-	m_image->draw(scr, mt, m_region);
+	m_image->draw(mt, m_region);
 
-	SpriteTools::DrawName(scr, sprite, mt);
+	SpriteTools::DrawName(sprite, mt);
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const

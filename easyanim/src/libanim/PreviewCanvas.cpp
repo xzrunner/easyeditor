@@ -31,7 +31,7 @@ void PreviewCanvas::initGL()
 
 void PreviewCanvas::onDraw()
 {
-	d2d::SpriteDraw::drawSprite(m_screen, m_symbol);
+	d2d::SpriteDraw::drawSprite(m_symbol);
 }
 
 void PreviewCanvas::onTimer(wxTimerEvent& event)

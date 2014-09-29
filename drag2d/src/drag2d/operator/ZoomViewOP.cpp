@@ -22,8 +22,7 @@ bool ZoomViewOP::onKeyDown(int keyCode)
 		m_editPanel->SetCursor(wxCURSOR_HAND);
 	} else if (keyCode == WXK_ESCAPE) {
 		Camera* cam = m_editPanel->getCamera();
-		cam->setCenter(Vector(0, 0));
-		cam->setScale(1.0f);
+		cam->Reset();
 	}
 
 	return false;
@@ -113,11 +112,9 @@ bool ZoomViewOP::onMouseDrag(int x, int y)
 		{
 			Vector currPos(x, y);
 
-			Vector cameraPos = m_editPanel->getCamera()->getCenter();
 			Vector offset = m_lastPos - currPos;
-			offset *= m_editPanel->getCamera()->getScale();
 			offset.y = -offset.y;
-			m_editPanel->getCamera()->setCenter(cameraPos + offset);
+			m_editPanel->getCamera()->Translate(offset);
 
 			m_lastPos = currPos;
 

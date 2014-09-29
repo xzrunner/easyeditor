@@ -6,7 +6,6 @@
 #include "dataset/ISymbol.h"
 #include "render/ShaderNew.h"
 #include "render/SpriteDraw.h"
-#include "view/Screen.h"
 
 #include <opengl/opengl.h>
 
@@ -56,13 +55,9 @@ void DynamicTexAndFont::AddImage(Image* img)
 		img->retain();
 		m_preload_list.push_back(img);
 	} else {
-		ShaderNew* shader = ShaderNew::Instance();
-		shader->SetFBO(m_fbo);
- 		shader->sprite();
- 		glViewport(0, 0, m_width, m_height);
+		BeginDraw();
 		InsertImage(img);
-		// set fbo to force flush
-		shader->SetFBO(0);
+		EndDraw();
 	}
 }
 
@@ -74,11 +69,8 @@ void DynamicTexAndFont::EndImage()
 		return;
 	}
 
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(m_fbo);
-	shader->sprite();
+	BeginDraw();
 
-	glViewport(0, 0, m_width, m_height);
 	std::sort(m_preload_list.begin(), m_preload_list.end(), ImageSizeCmp());
 	std::vector<const Image*>::iterator itr = m_preload_list.begin();
 	for ( ; itr != m_preload_list.end(); ++itr) {
@@ -88,9 +80,7 @@ void DynamicTexAndFont::EndImage()
 	}
 	m_preload_list.clear();
 
-	// set fbo to force flush
-	// todo dtex连续insert会慢
-	shader->SetFBO(0);
+	EndDraw();
 }
 
 void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
@@ -115,10 +105,7 @@ void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 
 void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 {
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(m_fbo);
-	shader->sprite();
-	glViewport(-m_width*0.5f, -m_height*0.5f, m_width, m_height);
+	BeginDraw();
 
 	glScissor(node.GetMinX(), node.GetMinY(), node.GetMaxX() - node.GetMinX(), node.GetMaxY() - node.GetMinY());
 	glEnable(GL_SCISSOR_TEST);
@@ -130,14 +117,17 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
   	glEnable(GL_BLEND);
   	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
-	Screen scr(m_width, m_height);
 	Vector pos(node.GetCenterX(), node.GetCenterY());
 	float angle = node.IsRotated() ? PI * 0.5f : 0;
-	SpriteDraw::drawSprite(scr, &symbol, Matrix(), pos, angle);
+	Matrix mt;
+	float dx = -m_width*0.5f - symbol.getSize().xCenter();
+	float dy = -m_height*0.5f - symbol.getSize().yCenter();
+	mt.translate(dx, dy);
+	SpriteDraw::drawSprite(&symbol, mt, pos, angle);
 
 	glDisable(GL_SCISSOR_TEST);
 
-	shader->SetFBO(0);
+	EndDraw();
 }
 
 void DynamicTexAndFont::Remove(const wxString& filepath)
@@ -250,11 +240,7 @@ void DynamicTexAndFont::Clear()
 
 void DynamicTexAndFont::ReloadPixels()
 {
-	ShaderNew* shader = ShaderNew::Instance();
-	shader->SetFBO(m_fbo);
-	shader->sprite();
-
-	glViewport(0, 0, m_width, m_height);
+	BeginDraw();
 
 	std::map<wxString, TPNode*>::iterator itr = m_path2node.begin();
 	for ( ; itr != m_path2node.end(); ++itr)
@@ -268,9 +254,7 @@ void DynamicTexAndFont::ReloadPixels()
 
 	m_hash.Traverse(ReloadTextureVisitor(m_tex, m_padding));
 
-	// set fbo to force flush
-	// todo dtex之后insert时，不能连续
-	shader->SetFBO(0);	
+	EndDraw();
 }
 
 void DynamicTexAndFont::InsertImage(const Image* img)
@@ -298,10 +282,11 @@ void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
 	d2d::Rect r = img->getRegion();
 
 	Rect r_vertex, r_texcoords;
-	r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-	r_vertex.xMax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
-	r_vertex.yMin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
-	r_vertex.yMax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
+ 	r_vertex.xMin = n->GetMinX() + m_padding;
+ 	r_vertex.xMax = n->GetMaxX() - m_padding;
+ 	r_vertex.yMin = n->GetMinY() + m_padding;
+ 	r_vertex.yMax = n->GetMaxY() - m_padding;
+	r_vertex.translate(Vector(-m_width*0.5f, -m_height*0.5f));
 
 	int ori_width = img->originWidth(),
 		ori_height = img->originHeight();
@@ -590,6 +575,35 @@ uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int 
 		}
 	}
 	return ret;
+}
+
+void DynamicTexAndFont::BeginDraw()
+{
+	ShaderNew* shader = ShaderNew::Instance();
+
+	int viewport[4];
+	glGetIntegerv(GL_VIEWPORT, viewport);
+	m_ori_width = viewport[2];
+	m_ori_height = viewport[3];
+
+	shader->GetModelView(m_ori_offset, m_ori_scale);
+
+	shader->SetFBO(m_fbo);
+	shader->sprite();
+	shader->SetModelView(Vector(0, 0), 1);
+	shader->SetProjection(m_width, m_height);
+	glViewport(0, 0, m_width, m_height);
+}
+
+void DynamicTexAndFont::EndDraw()
+{
+	ShaderNew* shader = ShaderNew::Instance();
+	// set fbo to force flush
+	// todo dtex连续insert会慢
+	shader->SetFBO(0);
+	shader->SetModelView(m_ori_offset, m_ori_scale);
+	shader->SetProjection(m_ori_width, m_ori_height);
+	glViewport(0, 0, m_ori_width, m_ori_height);
 }
 
 //////////////////////////////////////////////////////////////////////////

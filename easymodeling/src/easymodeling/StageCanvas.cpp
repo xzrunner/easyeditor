@@ -20,8 +20,8 @@ void StageCanvas::onDraw()
 	drawGuideLines();
 
 	drawSprites();
-	static_cast<StagePanel*>(m_editPanel)->traverseJoints(DrawJointVisitor(m_screen));
-	m_editPanel->drawEditTemp(m_screen);
+	static_cast<StagePanel*>(m_editPanel)->traverseJoints(DrawJointVisitor());
+	m_editPanel->drawEditTemp();
 }
 
 void StageCanvas::drawGuideLines()
@@ -36,8 +36,8 @@ void StageCanvas::drawSprites()
 	editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::SpriteDraw::drawSprite(m_screen, sprites[i]);
-		DrawUtils::drawBody(m_screen, static_cast<libmodeling::Body*>(sprites[i]->getUserData()), DrawUtils::e_default);
+		d2d::SpriteDraw::drawSprite(sprites[i]);
+		DrawUtils::drawBody(static_cast<libmodeling::Body*>(sprites[i]->getUserData()), DrawUtils::e_default);
 	}
 }
 
@@ -49,7 +49,7 @@ void StageCanvas::drawCrossLine() const
 	vertices[1].x = halfEdge;
 	vertices[2].y = -halfEdge;
 	vertices[3].y = halfEdge;
-	d2d::PrimitiveDraw::drawLines(m_screen, vertices, d2d::Colorf(0.7f, 0.9f, 0.7f), 1);
+	d2d::PrimitiveDraw::drawLines(vertices, d2d::Colorf(0.7f, 0.9f, 0.7f), 1);
 }
 
 void StageCanvas::drawLines() const
@@ -70,7 +70,7 @@ void StageCanvas::drawLines() const
 			vertices.push_back(d2d::Vector(-halfEdge, y));
 			vertices.push_back(d2d::Vector(halfEdge, y));
 		}
-		d2d::PrimitiveDraw::drawLines(m_screen, vertices, d2d::Colorf(0.7f, 0.9f, 0.7f), 1);
+		d2d::PrimitiveDraw::drawLines(vertices, d2d::Colorf(0.7f, 0.9f, 0.7f), 1);
 	}
 	// red
 	{
@@ -87,7 +87,7 @@ void StageCanvas::drawLines() const
 			vertices.push_back(d2d::Vector(-halfEdge, y));
 			vertices.push_back(d2d::Vector(halfEdge, y));
 		}
-		d2d::PrimitiveDraw::drawLines(m_screen, vertices, d2d::Colorf(0.9f, 0.7f, 0.7f), 1);
+		d2d::PrimitiveDraw::drawLines(vertices, d2d::Colorf(0.9f, 0.7f, 0.7f), 1);
 	}
 }
 

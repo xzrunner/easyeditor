@@ -4,7 +4,6 @@
 #include "common/Exception.h"
 #include "common/Vector.h"
 #include "dataset/TPNode.h"
-#include "view/Screen.h"
 #include "render/PrimitiveDraw.h"
 #include "render/style_config.h"
 
@@ -45,7 +44,7 @@ void DynamicPacker::ReloadTexture()
 	ReloadPixels();
 }
 
-void DynamicPacker::DebugDraw() const
+void DynamicPacker::DebugDrawStatic() const
 {
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(0);
@@ -68,7 +67,7 @@ void DynamicPacker::DebugDraw() const
 	ShaderNew::Instance()->Draw(vb, m_tex);
 }
 
-void DynamicPacker::DebugDraw(const Screen& screen) const
+void DynamicPacker::DebugDraw() const
 {
 	const int EDGE = 1024;
 
@@ -77,9 +76,6 @@ void DynamicPacker::DebugDraw(const Screen& screen) const
 	vertices[1].set(0, EDGE);
 	vertices[2].set(EDGE, EDGE);
 	vertices[3].set(EDGE, 0);
-	for (int i = 0; i < 4; ++i) {
-		screen.TransPosForRender(vertices[i]);
-	}
 
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetFBO(0);
@@ -101,7 +97,7 @@ void DynamicPacker::DebugDraw(const Screen& screen) const
 
 	ShaderNew::Instance()->Draw(vb, m_tex);
 
-	PrimitiveDraw::rect(screen, Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
+	PrimitiveDraw::rect(Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
 
 void DynamicPacker::InitTexture(int tex_id)

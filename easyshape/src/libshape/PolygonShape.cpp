@@ -35,15 +35,14 @@ PolygonShape* PolygonShape::clone() const
 	return new PolygonShape(*this);
 }
 
-void PolygonShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void PolygonShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
-	d2d::PrimitiveDraw::resetColorAndTexture();
-
 	if (m_fillingType == e_Color) {
-		d2d::PrimitiveDraw::drawTriangles(scr, m_fillingVertices, m_fillingColor);
+		d2d::PrimitiveDraw::drawTriangles(m_fillingVertices, m_fillingColor);
 	} else if (m_fillingType == e_Texture) {
-		d2d::PrimitiveDraw::drawTriangles(scr, m_fillingTexture->getTextureID(), 
-			m_fillingVertices, m_fillingTexCoords);
+		// todo
+// 		d2d::PrimitiveDraw::drawTriangles(m_fillingTexture->getTextureID(), 
+// 			m_fillingVertices, m_fillingTexCoords);
 	}
 	if (d2d::Settings::bDisplayTrisEdge)
 	{
@@ -53,14 +52,14 @@ void PolygonShape::draw(const d2d::Screen& scr, const d2d::Colorf& color/* = Col
 			buf.push_back(m_fillingVertices[i]);
 			if (buf.size() == 3)
 			{
-				d2d::PrimitiveDraw::drawPolyline(scr, buf, d2d::Colorf(0, 1, 0), true);
+				d2d::PrimitiveDraw::drawPolyline(buf, d2d::Colorf(0, 1, 0), true);
 				buf.clear();
 			}
 		}
 	}
 
 	if (d2d::Settings::bDisplayPolyBound)
-		ChainShape::draw(scr, color);
+		ChainShape::draw(color);
 }
 
 d2d::IPropertySetting* PolygonShape::createPropertySetting(d2d::EditPanel* editPanel)

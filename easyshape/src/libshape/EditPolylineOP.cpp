@@ -76,10 +76,10 @@ onMouseDrag(int x, int y)
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onDraw(const d2d::Screen& scr) const 
+onDraw() const 
 {
-	if (TBase::onDraw(scr)) return true;
-	m_impl->OnDraw(scr);
+	if (TBase::onDraw()) return true;
+	m_impl->OnDraw();
 	return false;
 }
 

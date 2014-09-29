@@ -1066,67 +1066,7 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\drag2d\render\b2Render.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\b2Render.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\GL10.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\GL10.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\common\opengl\opengl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\common\opengl\opengl.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\common\opengl\platform.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\PrimitiveDraw.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\PrimitiveDraw.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\RenderList.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\Shader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\Shader.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\ShaderNew.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\ShaderNew.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\render\ShapeStyle.h"
 				>
 			</File>
 			<File
@@ -1142,6 +1082,22 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\Exception.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\GL10.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\GL10.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common\opengl\opengl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\common\opengl\opengl.h"
 					>
 				</File>
 				<File
@@ -1173,6 +1129,14 @@
 				Name="shape"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\render\b2Render.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\b2Render.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\render\DrawSelectedShapeVisitor.h"
 					>
 				</File>
@@ -1182,6 +1146,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\DrawShapesVisitor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\PrimitiveDraw.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\PrimitiveDraw.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\PrimitiveDrawNew.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\PrimitiveDrawNew.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShapeStyle.h"
 					>
 				</File>
 			</Filter>
@@ -1276,6 +1260,78 @@
 					RelativePath="..\..\..\src\drag2d\render\LabelNew.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="shader"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\IShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\IShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\RenderList.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\Shader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\Shader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderImpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderNew.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderNew.h"
+					>
+				</File>
+				<Filter
+					Name="shaders"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\FontShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\FontShader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\ShapeShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\ShapeShader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\SpriteShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\SpriteShader.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
@@ -1595,6 +1651,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\view\Camera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\view\Screen.cpp"
 				>
 			</File>
 			<File

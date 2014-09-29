@@ -24,7 +24,7 @@ public:
 	virtual bool onMouseMove(int x, int y);
 	virtual bool onMouseDrag(int x, int y);
 
-	virtual bool onDraw(const d2d::Screen& scr) const;
+	virtual bool onDraw() const;
 	virtual bool clear();
 
 	const RectMgr& getRectMgr() const { return m_rects; }
@@ -36,7 +36,7 @@ public:
 	RectCutCMPT* getEditCMPT() const { return m_cmpt; }
 
 private:
-	void drawCaptureLine(const d2d::Screen& scr) const;
+	void drawCaptureLine() const;
 
 	void fixedPos(d2d::Vector& pos) const;
 

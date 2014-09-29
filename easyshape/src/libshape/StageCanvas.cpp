@@ -16,8 +16,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::drawGuideLines()
 {
-	d2d::PrimitiveDraw::rect(m_screen,
-		d2d::Vector(0, 0), 
+	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
 		d2d::HALF_S_WIDTH,
 		d2d::HALF_S_HEIGHT,
 		d2d::LIGHT_GREY_LINE);
@@ -43,7 +42,7 @@ void StageCanvas::onDraw()
 		d2d::FileNameParser::isType(symbol.getFilepath(), d2d::FileNameParser::e_shape)) {
 		libshape::StageCanvas::drawGuideLines();
 	} else {
-		symbol.draw(m_screen, d2d::Matrix());
+		symbol.draw(d2d::Matrix());
 	}
 
 	d2d::ShapeStageCanvas::onDraw();

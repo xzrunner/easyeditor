@@ -12,7 +12,6 @@
 namespace d2d
 {
 
-class Screen;
 class Vector;
 
 struct LabelStyle
@@ -31,7 +30,6 @@ class LabelNew
 {
 public:
 	static void Print(
-		const Screen& screen, 
 		const char* text, 
 		const Vector& pos,
 		const LabelStyle& style);
@@ -65,7 +63,6 @@ private:
 		std::vector<Line>& lines);
 
 	static void DrawLines(
-		const Screen& screen,
 		const Vector& pos,
 		const LabelStyle& style,
 		const std::vector<Line>& lines,

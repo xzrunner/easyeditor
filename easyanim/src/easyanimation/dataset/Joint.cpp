@@ -35,10 +35,10 @@ namespace eanim
 		}
 	}
 
-	void Joint::draw(const d2d::Screen& scr) const
+	void Joint::draw() const
 	{
-		d2d::PrimitiveDraw::drawCircle(scr, getWorldPos(), Joint::REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
-		d2d::PrimitiveDraw::drawCircle(scr, getWorldPos(), Joint::REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, true, 2, d2d::Colorf(0.2f, 0.8f, 0.2f, 0.5f));
+		d2d::PrimitiveDraw::drawCircle(getWorldPos(), Joint::REGION, false, 2, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
 		if (m_parent)
 		{
 			d2d::Vector s = getWorldPos();
@@ -49,10 +49,10 @@ namespace eanim
 			d2d::Vector left = mid + d2d::Math::rotateVectorRightAngle(s - mid, false);
 			d2d::Vector right = mid + d2d::Math::rotateVectorRightAngle(s - mid, true);
 
- 			d2d::PrimitiveDraw::drawLine(scr, s, left, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
- 			d2d::PrimitiveDraw::drawLine(scr, left, e, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
- 			d2d::PrimitiveDraw::drawLine(scr, e, right, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
- 			d2d::PrimitiveDraw::drawLine(scr, right, s, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+ 			d2d::PrimitiveDraw::drawLine(s, left, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+ 			d2d::PrimitiveDraw::drawLine(left, e, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+ 			d2d::PrimitiveDraw::drawLine(e, right, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
+ 			d2d::PrimitiveDraw::drawLine(right, s, d2d::Colorf(0.8f, 0.2f, 0.2f, 0.5f));
 		}
 	}
 

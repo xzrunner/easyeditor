@@ -10,8 +10,7 @@ namespace anim
 class Tools
 {
 public:
-	static void drawAnimSymbol(const d2d::Screen& scr, 
-		const Symbol* symbol, 
+	static void drawAnimSymbol(const Symbol* symbol, 
 		const d2d::Matrix& mt = d2d::Matrix(),
 		int index = 1, 
 		const d2d::Colorf& mul = d2d::Colorf(1,1,1,1), 

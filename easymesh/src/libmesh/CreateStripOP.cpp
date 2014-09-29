@@ -102,20 +102,20 @@ bool CreateStripOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool CreateStripOP::onDraw(const d2d::Screen& scr) const
+bool CreateStripOP::onDraw() const
 {
  	if (const d2d::Image* image = m_stage->GetSymbol()->getImage())
   	{
  		d2d::Matrix mt;
- 		image->draw(scr, mt, image->getRegion());
+ 		image->draw(mt, image->getRegion());
   	}
 
 	if (Shape* shape = m_stage->GetShape())
 	{
-		shape->DrawInfoUV(scr);
+		shape->DrawInfoUV();
 	}
 
-	d2d::ZoomViewOP::onDraw(scr);
+	d2d::ZoomViewOP::onDraw();
 
 	return false;
 }

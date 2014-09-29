@@ -170,6 +170,20 @@ namespace d2d
 		this->operator *=(t);
 	}
 
+	void Matrix::orthographic(float left, float right, float bottom, float top, float near, float zfar)
+	{
+		float a = 2 / (right - left);
+		float b = 2 / (top - bottom);
+		float c = - (right + left) / (right - left);
+		float d = - (top + bottom) / (top - bottom);
+		float e = - (zfar + near) / (zfar - near);
+		float f = -2 / (zfar - near);
+ 		this->e[0] = a; this->e[1] = 0; this->e[2] = 0; this->e[3] = 0;
+ 		this->e[4] = 0; this->e[5] = b; this->e[6] = 0; this->e[7] = 0;
+ 		this->e[8] = 0; this->e[9] = 0; this->e[10] = f; this->e[11] = 0;
+ 		this->e[12] = c; this->e[13] = d; this->e[14] = e; this->e[15] = 1;
+	}
+
 // 	//                 | x |
 // 	//                 | y |
 // 	//                 | 0 |

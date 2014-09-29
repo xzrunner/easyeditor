@@ -71,20 +71,23 @@ bool CreateMeshOP::onMouseRightUp(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::onDraw(const d2d::Screen& scr) const
+bool CreateMeshOP::onDraw() const
 {
- 	if (const d2d::Image* image = m_stage->GetSymbol()->getImage())
-  	{
- 		d2d::Matrix mt;
- 		image->draw(scr, mt, image->getRegion());
-  	}
+	if (d2d::ZoomViewOP::onDraw())
+		return true;
+
+	if (const d2d::Image* image = m_stage->GetSymbol()->getImage())
+ 	{
+		d2d::Matrix mt;
+		image->draw(mt, image->getRegion());
+ 	}
 
 	if (Shape* shape = m_stage->GetShape())
 	{
-		shape->DrawInfoUV(scr);
+		shape->DrawInfoUV();
 	}
 
-	libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onDraw(scr);
+	libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onDraw();
 
 	return false;
 }

@@ -60,14 +60,14 @@ bool SelectBodyOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
-bool SelectBodyOP::onDraw(const d2d::Screen& scr) const
+bool SelectBodyOP::onDraw() const
 {
-	if (d2d::DrawRectangleOP::onDraw(scr)) return true;
+	if (d2d::DrawRectangleOP::onDraw()) return true;
 
-	m_selection->traverse(DrawSelectedVisitor(scr));
+	m_selection->traverse(DrawSelectedVisitor());
 
 	if (m_mouseOn)
-		DrawUtils::drawBody(scr, m_mouseOn, DrawUtils::e_mouseOn);
+		DrawUtils::drawBody(m_mouseOn, DrawUtils::e_mouseOn);
 
 	return false;
 }

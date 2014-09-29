@@ -14,12 +14,13 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
 #include "view/GLCanvas.h"
+#include "view/Camera.h"
 #include "history/DeleteSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
 #include "render/DynamicTexAndFont.h"
 
-//// for debug
-//#include "render/ShaderNew.h"
+// for debug
+#include "render/ShaderNew.h"
 
 namespace d2d
 {
@@ -107,13 +108,13 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		UpOneLayer();
 		break;
 
-	//	// for debug
-	//case 'O':
-	//	ShaderNew::Instance()->SetBufferData(true);
-	//	break;
-	//case 'C':
-	//	ShaderNew::Instance()->SetBufferData(false);
-	//	break;
+		// for debug
+	case 'O':
+		ShaderNew::Instance()->SetBufferData(true);
+		break;
+	case 'C':
+		ShaderNew::Instance()->SetBufferData(false);
+		break;
 	}
 }
 
@@ -198,14 +199,18 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 	if (m_op_state) 
 	{
 		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
-		m_editPanel->addHistoryOP(history);
+		if (history) {
+			m_editPanel->addHistoryOP(history);
+		}
 
 		delete m_op_state;
 		m_op_state = NULL;
 	}
 
 	if (!m_selection->empty()) {
-		m_op_state = CreateTransalteState(m_selection, pos);
+		Vector p;
+		p.setInvalid();
+		m_op_state = CreateTransalteState(m_selection, p);
 	}
 
 	if (Config::Instance()->GetSettings().open_sprite_capture
@@ -274,7 +279,9 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 		else if (m_op_state)
 		{
 			AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
-			m_editPanel->addHistoryOP(history);
+			if (history) {
+				m_editPanel->addHistoryOP(history);
+			}
 
 			delete m_op_state;
 			m_op_state = NULL;
@@ -337,10 +344,9 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 	}
 }
 
-void ArrangeSpriteImpl::onDraw(const Screen& scr) const
+void ArrangeSpriteImpl::onDraw(const Camera& cam) const
 {
-	Vector scale = scr.GetScale();
-	m_ctrl_node_radius = CTRL_NODE_RADIUS / scale.x;
+	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
 
 	if (m_isDeformOpen && m_selection->size() == 1)
 	{
@@ -352,18 +358,18 @@ void ArrangeSpriteImpl::onDraw(const Screen& scr) const
 		Vector ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
 		for (int i = 0; i < 4; ++i)
-			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(ctrlNodes[i], m_ctrl_node_radius, false, 2, Colorf(0.2f, 0.8f, 0.2f));
 		for (int i = 4; i < 8; ++i)
-			PrimitiveDraw::drawCircle(scr, ctrlNodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
+			PrimitiveDraw::drawCircle(ctrlNodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
 		if (m_is_offset_open)
 		{
 			d2d::Vector offset = selected->getPosition() + selected->getOffset();
-			PrimitiveDraw::drawCircle(scr, offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
+			PrimitiveDraw::drawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 	}
 
-	m_align.Draw(scr);
+	m_align.Draw();
 }
 
 void ArrangeSpriteImpl::clear()

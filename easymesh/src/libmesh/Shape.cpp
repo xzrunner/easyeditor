@@ -64,7 +64,7 @@ void Shape::QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes)
 	}
 }
 
-void Shape::DrawInfoUV(const d2d::Screen& scr) const
+void Shape::DrawInfoUV() const
 {
 	std::set<d2d::Vector, d2d::VectorCmp> unique;
 	std::vector<d2d::Vector> tmp(3);
@@ -77,14 +77,14 @@ void Shape::DrawInfoUV(const d2d::Screen& scr) const
 			tmp[i].y = (tri->nodes[i]->uv.y - 0.5f) * m_height;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::drawPolyline(scr, tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(scr, nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::drawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
-void Shape::DrawInfoXY(const d2d::Screen& scr) const
+void Shape::DrawInfoXY() const
 {
 	std::set<d2d::Vector, d2d::VectorCmp> unique;
 	std::vector<d2d::Vector> tmp(3);
@@ -96,15 +96,14 @@ void Shape::DrawInfoXY(const d2d::Screen& scr) const
 			tmp[i] = tri->nodes[i]->xy;
 			unique.insert(tmp[i]);
 		}
-		d2d::PrimitiveDraw::drawPolyline(scr, tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
+		d2d::PrimitiveDraw::drawPolyline(tmp, d2d::Colorf(0.8f, 0.2f, 0.4f, 0.5f), true);
 	}
 	std::vector<d2d::Vector> nodes;
 	copy(unique.begin(), unique.end(), back_inserter(nodes));
-	d2d::PrimitiveDraw::drawCircles(scr, nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
+	d2d::PrimitiveDraw::drawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
-void Shape::DrawTexture(const d2d::Screen& scr,
-						const d2d::Matrix& mt) const
+void Shape::DrawTexture(const d2d::Matrix& mt) const
 {
 	d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
 	shader->sprite();
@@ -115,7 +114,6 @@ void Shape::DrawTexture(const d2d::Screen& scr,
 		for (int i = 0; i < 3; ++i)
 		{
 			vertices[i] = d2d::Math::transVector(tri->nodes[i]->xy, mt);
-			scr.TransPosForRender(vertices[i]);
 			texcoords[i] = tri->nodes[i]->uv;
 		}
 		vertices[3] = vertices[2];

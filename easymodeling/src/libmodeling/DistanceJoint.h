@@ -14,7 +14,7 @@ namespace libmodeling
 		virtual bool isContain(const d2d::Vector& pos) const;
 		virtual bool isIntersect(const d2d::Rect& rect) const;
 
-		virtual void draw(const d2d::Screen& scr, DrawType type) const;
+		virtual void draw(DrawType type) const;
 
 		d2d::Vector getWorldAnchorA() const;
 		d2d::Vector getWorldAnchorB() const;
@@ -23,9 +23,9 @@ namespace libmodeling
 		void setLocalAnchorB(const d2d::Vector& world);
 
 	private:
-		void drawAnchor(const d2d::Screen& scr, const d2d::Vector& pos, DrawType type) const;
+		void drawAnchor(const d2d::Vector& pos, DrawType type) const;
 
-		void drawConnection(const d2d::Screen& scr, const d2d::Vector& worldAnchorA, 
+		void drawConnection(const d2d::Vector& worldAnchorA, 
 			const d2d::Vector& worldAnchorB, DrawType type) const;
 
 	public:

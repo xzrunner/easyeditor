@@ -47,21 +47,20 @@ void FontBlankSymbol::reloadTexture() const
 {
 }
 
-void FontBlankSymbol::draw(const Screen& scr,
-						   const Matrix& mt,
+void FontBlankSymbol::draw(const Matrix& mt,
 						   const Colorf& mul, 
 						   const Colorf& add,
 						   const ISprite* sprite/* = NULL*/) const
 {
 	const SettingData& setting = Config::Instance()->GetSettings();
 	if (setting.visible_label_bg) {
- 		DrawBackground(scr, sprite, mt);
+ 		DrawBackground(sprite, mt);
  	} 
 	if (setting.visible_label_text) {
-		DrawText(scr, sprite, mt);
+		DrawText(sprite, mt);
 	}
 
-	SpriteTools::DrawName(scr, sprite, mt);
+	SpriteTools::DrawName(sprite, mt);
 }
 
 Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
@@ -114,22 +113,12 @@ void FontBlankSymbol::loadResources()
 	}
 }
 
-void FontBlankSymbol::DrawBackground(const Screen& scr, const ISprite* sprite,
-									 const Matrix& mt) const
+void FontBlankSymbol::DrawBackground(const ISprite* sprite, const Matrix& mt) const
 {
-	float w = width, h = height;
-	const FontSprite* s = dynamic_cast<const FontSprite*>(sprite);
-	if (s)
-	{
-		w = s->width;
-		h = s->height;
-		if (m_font)
-			glColor4f(s->color.r, s->color.g, s->color.b, s->color.a);
-	}
-	PrimitiveDraw::rect(scr, mt, w*0.5f, h*0.5f, m_style);
+	PrimitiveDraw::rect(mt, width*0.5f, height*0.5f, m_style);
 }
 
-void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const Matrix& mt) const
+void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
 {
 	if (sprite) {
 		if (const FontSprite* font = dynamic_cast<const FontSprite*>(sprite)) {
@@ -146,7 +135,7 @@ void FontBlankSymbol::DrawText(const Screen& scr, const ISprite* sprite, const M
 				style.align_hori = font->align_hori;
 				style.align_vert = font->align_vert;
 
-				LabelNew::Print(scr, str.utf8_str(), pos, style);
+				LabelNew::Print(str.utf8_str(), pos, style);
 			}
 		}
 	}

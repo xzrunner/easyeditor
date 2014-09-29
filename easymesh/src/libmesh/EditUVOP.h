@@ -13,7 +13,7 @@ class EditUVOP : public d2d::ZoomViewOP
 public:
 	EditUVOP(StagePanel* stage);
 
-	virtual bool onDraw(const d2d::Screen& scr) const;
+	virtual bool onDraw() const;
 
 private:
 	StagePanel* m_stage;

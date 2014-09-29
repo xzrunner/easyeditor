@@ -14,7 +14,6 @@ namespace d2d
 typedef unsigned int GLuint;
 
 class TPNode;
-class Screen;
 
 struct Glyph : public Object
 {

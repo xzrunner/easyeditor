@@ -95,11 +95,11 @@ bool SelectNodesOP::onMouseDrag(int x, int y)
 	return !m_bDraggable;
 }
 
-bool SelectNodesOP::onDraw(const d2d::Screen& scr) const
+bool SelectNodesOP::onDraw() const
 {
 	if (m_firstPos.isValid())
 	{
-		if (d2d::DrawRectangleOP::onDraw(scr))
+		if (d2d::DrawRectangleOP::onDraw())
 			return true;
 	}
 
@@ -111,7 +111,7 @@ bool SelectNodesOP::onDraw(const d2d::Screen& scr) const
 		points.push_back(nodes[i]->xy);
 
 	Shape* shape = m_stage->GetShape();
-	d2d::PrimitiveDraw::drawCircles(scr, points, shape->GetNodeRegion(), 
+	d2d::PrimitiveDraw::drawCircles(points, shape->GetNodeRegion(), 
 		true, 2, d2d::Colorf(0.4f, 0.8f, 0.2f, 0.5f));
 
 	return false;

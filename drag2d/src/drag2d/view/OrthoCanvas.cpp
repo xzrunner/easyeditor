@@ -2,6 +2,7 @@
 #include "Camera.h"
 
 #include "view/EditPanel.h"
+#include "render/ShaderNew.h"
 
 #include <gl/glu.h>
 
@@ -36,10 +37,19 @@ void OrthoCanvas::onSize(int w, int h)
 
 	//////////////////////////////////////////////////////////////////////////
 
-	glViewport(0, 0, w, h);
-	Vector scale;
-	scale.x = scale.y = 1.0f / m_camera->getScale();
-	m_screen.SetSize(w, h);
-	m_screen.SetCamera(-m_camera->getCenter(), scale);
+// 	glViewport(0, 0, w, h);
+// 	Vector scale;
+// 	scale.x = scale.y = 1.0f / m_camera->getScale();
+// 	m_screen.SetSize(w, h);
+// 	m_screen.SetCamera(-m_camera->getCenter(), scale);
+
+	//////////////////////////////////////////////////////////////////////////
+
+ 	glViewport(0, 0, w, h);
+ 	m_screen.SetSize(w, h);
+ 	m_screen.SetCamera();
+
+	m_camera->UpdateModelView();
+	ShaderNew::Instance()->SetProjection(w, h);
 }
 } // d2d

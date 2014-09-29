@@ -35,8 +35,7 @@ void Symbol::reloadTexture() const
 	m_ps->reloadTexture();
 }
 
-void Symbol::draw(const d2d::Screen& scr,
-				  const d2d::Matrix& mt,
+void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite) const
@@ -55,7 +54,7 @@ void Symbol::draw(const d2d::Screen& scr,
 		}
 
 		m_ps->update((float)(curr - time) / CLOCKS_PER_SEC);
-		m_ps->draw(scr, mt);
+		m_ps->draw(mt);
 	}
 	time = curr;
 }
