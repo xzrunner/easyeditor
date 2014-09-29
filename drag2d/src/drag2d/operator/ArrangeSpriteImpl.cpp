@@ -208,7 +208,9 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 	}
 
 	if (!m_selection->empty()) {
-		m_op_state = CreateTransalteState(m_selection, pos);
+		Vector p;
+		p.setInvalid();
+		m_op_state = CreateTransalteState(m_selection, p);
 	}
 
 	if (Config::Instance()->GetSettings().open_sprite_capture
