@@ -46,11 +46,6 @@ void ImageSymbol::draw(const Matrix& mt,
 					   const Colorf& add,
 					   const ISprite* sprite/* = NULL*/) const
 {
-//	// todo ShaderNew::Color
-//  	Shader* shader = Shader::Instance();
-//  	shader->sprite();
-//  	shader->color(mul, add);
-
 	ShaderNew* shader = ShaderNew::Instance();
 	shader->SetSpriteColor(mul, add);
 	m_image->draw(mt, m_region);
