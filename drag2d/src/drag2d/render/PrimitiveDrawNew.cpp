@@ -20,16 +20,19 @@ void PrimitiveDrawNew::Draw(int type, const float *coords, size_t count)
 
 void PrimitiveDrawNew::SetLineWidth(float width)
 {
+	ShaderNew::Instance()->shape();
 	glLineWidth(width);
 }
 
 void PrimitiveDrawNew::SetColor(const Colorf& col)
 {
+	ShaderNew::Instance()->shape();
 	ShaderNew::Instance()->SetShapeColor(col);
 }
 
 void PrimitiveDrawNew::SetPointSize(float size)
 {
+	ShaderNew::Instance()->shape();
 	glPointSize(size);
 }
 
@@ -38,6 +41,8 @@ void PrimitiveDrawNew::LineStypeBegin(const LineStyle& style)
 	if (style == LS_DEFAULT) {
 		return;
 	}
+
+	ShaderNew::Instance()->shape();
 
 	glEnable(GL_LINE_STIPPLE);
 	switch (style)
@@ -60,6 +65,7 @@ void PrimitiveDrawNew::LineStypeEnd(const LineStyle& style)
 		return;
 	}
 
+	ShaderNew::Instance()->shape();
 	glDisable(GL_LINE_STIPPLE);
 }
 

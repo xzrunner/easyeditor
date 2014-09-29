@@ -42,8 +42,13 @@ void ShaderNew::SetSpriteColor(const Colorf& multi, const Colorf& add)
 
 void ShaderNew::SetShapeColor(const Colorf& col)
 {
-	ShapeShader* shader = static_cast<ShapeShader*>(m_impl->m_shape_shader);
-	shader->SetColor(col);
+// 	ShapeShader* shader = static_cast<ShapeShader*>(m_impl->m_shape_shader);
+// 	shader->SetColor(col);
+
+	if (m_impl->m_shape_shader == m_impl->m_curr_shader) {
+	 	ShapeShader* shader = static_cast<ShapeShader*>(m_impl->m_shape_shader);
+	 	shader->SetColor(col);
+	}
 }
 
 void ShaderNew::sprite()

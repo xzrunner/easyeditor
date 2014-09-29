@@ -98,9 +98,7 @@ void ShapeShader::Commit()
 
 void ShapeShader::SetColor(const Colorf& col)
 {
-//	if (m_impl->m_prog_curr == m_impl->m_rs_shape.prog) {
 	glUniform4fv(m_color, 1, (GLfloat*)(&col.r));
-//	}
 }
 
 }
