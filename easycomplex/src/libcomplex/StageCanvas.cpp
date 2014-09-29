@@ -79,8 +79,6 @@ namespace ecomplex
 #endif
 
 		m_stat.DrawTime(m_screen);
-
-		d2d::ShaderNew::Instance()->Flush();
 	}
 
 	void StageCanvas::onTimer(wxTimerEvent& event)
