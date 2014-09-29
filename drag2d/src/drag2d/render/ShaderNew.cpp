@@ -42,9 +42,6 @@ void ShaderNew::SetSpriteColor(const Colorf& multi, const Colorf& add)
 
 void ShaderNew::SetShapeColor(const Colorf& col)
 {
-// 	ShapeShader* shader = static_cast<ShapeShader*>(m_impl->m_shape_shader);
-// 	shader->SetColor(col);
-
 	if (m_impl->m_shape_shader == m_impl->m_curr_shader) {
 	 	ShapeShader* shader = static_cast<ShapeShader*>(m_impl->m_shape_shader);
 	 	shader->SetColor(col);
@@ -175,7 +172,9 @@ void ShaderNew::SetProjection(int width, int height)
 
 void ShaderNew::Commit()
 {
-	m_impl->m_curr_shader->Commit();
+	if (m_impl->m_curr_shader) {
+		m_impl->m_curr_shader->Commit();
+	}
 }
 
 void ShaderNew::Flush()
@@ -186,7 +185,7 @@ void ShaderNew::Flush()
 // 		wxLogDebug(_T("Shader Commit Flush"));
 // 	}
 
-	m_impl->m_curr_shader->Commit();
+	Commit();
 
 //	DynamicTexture::Instance()->DebugDraw();
 }
