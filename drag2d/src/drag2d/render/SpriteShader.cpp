@@ -105,13 +105,13 @@ void SpriteShader::Unload()
 
 void SpriteShader::Bind()
 {
+	glUseProgram(m_prog);
+
 	glEnable(GL_BLEND);
 
 	// todo 源混合因子ejoy2d用的GL_ONE
 	//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glUseProgram(m_prog);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_index_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);

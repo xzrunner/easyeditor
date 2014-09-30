@@ -21,6 +21,7 @@ private:
 	IShader* m_shape_shader;
 	IShader* m_sprite_shader;
 	IShader* m_font_shader;
+	IShader* m_light_shader;
 
 	int m_version;
 

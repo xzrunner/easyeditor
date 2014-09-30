@@ -7,9 +7,6 @@
 namespace esketch
 {
 
-class StagePanel;
-class ToolbarPanel;
-
 class Task : public d2d::ITask
 {
 public:
@@ -37,8 +34,8 @@ private:
 
 	d2d::LibraryPanel* m_library;
 	d2d::PropertySettingPanel* m_property;
-	StagePanel* m_stage;
-	ToolbarPanel* m_toolbar;
+	d2d::EditPanel* m_stage;
+	d2d::ToolbarPanel* m_toolbar;
 
 }; // Task
 

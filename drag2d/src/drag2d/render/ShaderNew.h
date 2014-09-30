@@ -1,12 +1,15 @@
 #ifndef D2D_SHADER_NEW_H
 #define D2D_SHADER_NEW_H
 
+#include "sketch/sketch3d.h"
+
 namespace d2d
 {
 
 struct Colorf;
 class Vector;
 class ShaderImpl;
+class IShader;
 
 class ShaderNew
 {
@@ -18,6 +21,7 @@ public:
 
 	void sprite();
 	void shape();
+	void lighting();
 	void null();
 
 	void release();
@@ -32,6 +36,8 @@ public:
 
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
+	// todo
+	void Draw(const z3d::IModel* model);
 
 	int GetVersion() const;
 
@@ -50,6 +56,8 @@ public:
 private:
 	ShaderNew();
 	~ShaderNew();
+
+	void Switch(IShader* shader);
 
 private:
 	static ShaderNew* m_instance;

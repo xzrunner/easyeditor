@@ -1,9 +1,9 @@
-#ifndef _EASYSKETCH_STAGE_CANVAS_H_
-#define _EASYSKETCH_STAGE_CANVAS_H_
+#ifndef _LIBSKETCH_STAGE_CANVAS_H_
+#define _LIBSKETCH_STAGE_CANVAS_H_
 
 #include <drag2d.h>
 
-namespace esketch
+namespace libsketch
 {
 
 class StagePanel;
@@ -23,4 +23,4 @@ private:
 
 }
 
-#endif // _EASYSKETCH_STAGE_CANVAS_H_
+#endif // _LIBSKETCH_STAGE_CANVAS_H_

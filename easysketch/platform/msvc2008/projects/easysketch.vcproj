@@ -182,66 +182,30 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="stage"
+		<File
+			RelativePath="..\..\..\src\easysketch\Frame.cpp"
 			>
-			<File
-				RelativePath="..\..\..\src\easysketch\StageCanvas.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\StageCanvas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\StagePanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\StagePanel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="toolbar"
+		</File>
+		<File
+			RelativePath="..\..\..\src\easysketch\Frame.h"
 			>
-			<File
-				RelativePath="..\..\..\src\easysketch\ToolbarPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\ToolBarPanel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="frame"
+		</File>
+		<File
+			RelativePath="..\..\..\src\easysketch\main.cpp"
 			>
-			<File
-				RelativePath="..\..\..\src\easysketch\Frame.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\Frame.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\main.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\Task.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easysketch\Task.h"
-				>
-			</File>
-		</Filter>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easysketch\main.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easysketch\Task.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easysketch\Task.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -1316,6 +1316,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\render\LightingShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\LightingShader.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\render\ShapeShader.cpp"
 						>
 					</File>
@@ -2281,6 +2289,34 @@
 				RelativePath="..\..\..\src\drag2d\sprites\SpritesHandler.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="sketch"
+			>
+			<File
+				RelativePath="..\..\..\src\drag2d\sketch\sketch3d.h"
+				>
+			</File>
+			<Filter
+				Name="math"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\sketch\Matrix.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\sketch\Quaternion.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\sketch\Vector.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="editop"
+				>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\drag2d\drag2d.h"

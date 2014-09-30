@@ -1,11 +1,10 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
 
-namespace esketch
+namespace libsketch
 {
 
-ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
-						   d2d::PropertySettingPanel* property, StagePanel* stage)
+ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	: d2d::ToolbarPanel(parent, stage)
 {
 	SetSizer(initLayout());	

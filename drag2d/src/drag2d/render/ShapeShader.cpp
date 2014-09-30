@@ -62,10 +62,10 @@ void ShapeShader::Unload()
 
 void ShapeShader::Bind()
 {
+	glUseProgram(m_prog);
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glUseProgram(m_prog);
 }
 
 void ShapeShader::Unbind()

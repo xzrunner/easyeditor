@@ -3,6 +3,7 @@
 #include "ShapeShader.h"
 #include "SpriteShader.h"
 #include "FontShader.h"
+#include "LightingShader.h"
 
 #include <stdio.h>
 
@@ -27,6 +28,7 @@ ShaderNew::ShaderNew()
 	m_impl->m_shape_shader = new ShapeShader;
 	m_impl->m_sprite_shader = new SpriteShader;
 	m_impl->m_font_shader = new FontShader;
+	m_impl->m_light_shader = new LightingShader;
 }
 
 ShaderNew::~ShaderNew()
@@ -50,45 +52,22 @@ void ShaderNew::SetShapeColor(const Colorf& col)
 
 void ShaderNew::sprite()
 {
-	if (m_impl->m_curr_shader != m_impl->m_sprite_shader)
-	{
-		if (m_impl->m_curr_shader) {
-			m_impl->m_curr_shader->Commit();
-			m_impl->m_curr_shader->Unbind();
-		}
-		m_impl->m_curr_shader = m_impl->m_sprite_shader;
-		m_impl->m_curr_shader->Bind();
-	}
+	Switch(m_impl->m_sprite_shader);
 }
 
 void ShaderNew::shape()
 {
-	if (m_impl->m_curr_shader != m_impl->m_shape_shader)
-	{
-		if (m_impl->m_curr_shader) {
-			m_impl->m_curr_shader->Commit();
-			m_impl->m_curr_shader->Unbind();
-		}
-		m_impl->m_curr_shader = m_impl->m_shape_shader;
-		m_impl->m_curr_shader->Bind();
-	}
+	Switch(m_impl->m_shape_shader);
+}
+
+void ShaderNew::lighting()
+{
+	Switch(m_impl->m_light_shader);	
 }
 
 void ShaderNew::null()
 {
-	int zz = 0;
-
-// 	if (m_impl->m_sprite_count != 0) {
-// 		wxLogDebug(_T("Shader Commit change shader to null"));
-// 	}
-// 
-// 	Commit();
-// 
-// 	glEnable(GL_BLEND);
-// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-// 
-// 	glUseProgram(0);
-// 	m_impl->m_prog_curr = 0;
+	Switch(NULL);
 }
 
 void ShaderNew::release()
@@ -96,6 +75,7 @@ void ShaderNew::release()
 	m_impl->m_shape_shader->Unload();
 	m_impl->m_sprite_shader->Unload();
 	m_impl->m_font_shader->Unload();
+	m_impl->m_light_shader->Unload();
 }
 
 void ShaderNew::reload()
@@ -103,6 +83,7 @@ void ShaderNew::reload()
 	m_impl->m_shape_shader->Load();
 	m_impl->m_sprite_shader->Load();
 	m_impl->m_font_shader->Load();
+	m_impl->m_light_shader->Load();
 }
 
 int ShaderNew::GetTexID() const 
@@ -139,6 +120,12 @@ void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int te
 {
 	SpriteShader* shader = static_cast<SpriteShader*>(m_impl->m_sprite_shader);
 	shader->Draw(vertices, texcoords, texid);
+}
+
+void ShaderNew::Draw(const z3d::IModel* model)
+{
+	LightingShader* shader = static_cast<LightingShader*>(m_impl->m_light_shader);
+	shader->Draw(model);	
 }
 
 int ShaderNew::GetVersion() const 
@@ -197,6 +184,21 @@ void ShaderNew::Flush()
 	Commit();
 
 //	DynamicTexture::Instance()->DebugDraw();
+}
+
+void ShaderNew::Switch(IShader* shader)
+{
+	if (m_impl->m_curr_shader != shader)
+	{
+		if (m_impl->m_curr_shader) {
+			m_impl->m_curr_shader->Commit();
+			m_impl->m_curr_shader->Unbind();
+		}
+		m_impl->m_curr_shader = shader;
+		if (m_impl->m_curr_shader) {
+			m_impl->m_curr_shader->Bind();
+		}
+	}
 }
 
 }

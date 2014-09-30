@@ -1,7 +1,13 @@
-#ifndef _EASYIMAGE_H_
-#define _EASYIMAGE_H_
+#ifndef _EASYSKETCH_H_
+#define _EASYSKETCH_H_
 
-#include "libsketch/ImageProcessor.h"
-#include "libsketch/PixelsTools.h"
+#include "libsketch/config.h"
 
-#endif // _EASYIMAGE_H_
+#include "libsketch/Symbol.h"
+#include "libsketch/Sprite.h"
+
+#include "libsketch/LibraryPage.h"
+#include "libsketch/StagePanel.h"
+#include "libsketch/ToolBarPanel.h"
+
+#endif // _EASYSKETCH_H_

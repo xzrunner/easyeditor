@@ -1,6 +1,6 @@
 #include "Task.h"
-#include "StagePanel.h"
-#include "ToolbarPanel.h"
+
+#include <easysketch.h>
 
 namespace esketch
 {
@@ -29,7 +29,7 @@ void Task::store(const char* filename) const
 
 bool Task::isDirty() const
 {
-	return m_stage->isDirty();
+	return false;
 }
 
 void Task::clear()
@@ -52,13 +52,14 @@ void Task::initLayout()
 	wxSplitterWindow* leftHorSplitter = new wxSplitterWindow(leftVerSplitter);
 
 	m_library = new d2d::LibraryPanel(leftHorSplitter);
-	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
+	m_library->addPage(new libsketch::LibraryPage(m_library->getNotebook()));
 
 	m_property = new d2d::PropertySettingPanel(leftHorSplitter);
 
-	m_stage = new StagePanel(leftVerSplitter, m_parent, m_library);
+	libsketch::StagePanel* stage = new libsketch::StagePanel(leftVerSplitter, m_parent, m_library);
+	m_stage = stage;
 
-	m_toolbar = new ToolbarPanel(rightVerSplitter, m_library, m_property, m_stage);
+	m_toolbar = new libsketch::ToolbarPanel(rightVerSplitter, stage);
 
 	leftHorSplitter->SetSashGravity(0.8f);
 	leftHorSplitter->SplitHorizontally(m_library, m_property);

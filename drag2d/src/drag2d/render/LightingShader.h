@@ -1,0 +1,57 @@
+#ifndef _DRAG2D_LIGHTING_SHADER_H_
+#define _DRAG2D_LIGHTING_SHADER_H_
+
+#include "IShader.h"
+
+#include "sketch/Matrix.h"
+#include "sketch/Quaternion.h"
+#include "sketch/sketch3d.h"
+
+namespace d2d
+{
+
+class LightingShader : public IShader
+{
+public:
+	LightingShader();
+	virtual ~LightingShader();
+
+	virtual void Load();
+	virtual void Unload();	
+
+	virtual void Bind();
+	virtual void Unbind();
+
+	virtual void Commit();
+
+	virtual void SetModelView(const Vector& offset, float scale) {}
+	virtual void SetModelView(const Quaternion& ori);
+	virtual void SetProjection(int width, int height);
+
+	void Draw(const z3d::IModel* model);
+
+protected:
+	virtual void BindAttrib(GLuint prog);
+
+private:
+	GLuint m_model_view, m_projection;
+
+	GLuint m_normal_matrix;
+	GLuint m_light_position;
+	GLuint m_ambient_material;
+	GLuint m_specular_material;
+	GLuint m_shininess;
+
+	mat4 m_translation;
+	mat4 m_mat_modelview, m_mat_projection;
+
+	std::vector<const z3d::IModel*> m_models;
+
+	// todo
+	GLuint m_position, m_normal;
+
+}; // LightingShader
+
+}
+
+#endif // _DRAG2D_LIGHTING_SHADER_H_
