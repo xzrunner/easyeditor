@@ -123,6 +123,8 @@ easymesh/platform/msvc2008/libmesh
 easypacker/platform/msvc2008/easypacker
 easyimage/platform/msvc2008/easyimage
 easyimage/platform/msvc2008/libimage
+easysketch/platform/msvc2008/easysketch
+easysketch/platform/msvc2008/libsketch
 formation/platform/msvc2008/formation
 raiden/platform/msvc2008/raiden
 shootbubble/platform/msvc2008/shootbubble
