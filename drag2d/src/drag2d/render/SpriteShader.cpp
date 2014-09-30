@@ -303,8 +303,9 @@ void SpriteShader::InitBuffers()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, idxs, GL_STATIC_DRAW);
 	delete[] idxs;
 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 	glGenBuffers(1, &m_vertex_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
 }
 
 void SpriteShader::CopyVertex(const float vb[16])
