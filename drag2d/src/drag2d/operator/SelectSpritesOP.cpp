@@ -51,14 +51,17 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 	{
 		pasteToSelection();
 		m_spritesImpl->removeSpriteSelection();
+		return true;
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
 		pasteToSelection();
+		return true;
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
 		copyFromSelection();
+		return true;
 	}
 
 	return false;
