@@ -104,20 +104,23 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 	const Bitmap* bmp = m_items[n]->getBitmap();
 	if (bmp)
 	{
-		// bmp
 		const wxBitmap* wxBmp = bmp->getBitmap();
-		int x = wxBmp->GetWidth() > rect.width ? 0 : (rect.width - wxBmp->GetWidth()) * 0.5f;
-		dc.DrawBitmap(*wxBmp, x, y);
+		if (wxBmp) 
+		{
+			// bmp
+			int x = wxBmp->GetWidth() > rect.width ? 0 : (rect.width - wxBmp->GetWidth()) * 0.5f;
+			dc.DrawBitmap(*wxBmp, x, y);
 
-		// info
-		wxString info = m_items[n]->getInfo();
-		dc.SetFont(wxFont(18, wxDEFAULT, wxNORMAL, wxNORMAL));
-		//dc.SetTextForeground(wxColour(0xFF, 0x20, 0xFF));
-		wxSize size = dc.GetTextExtent(info);
-		//dc.DrawText(info, rect.x/* + rect.width * 0.5f - size.GetWidth() * 0.5f*/, y);
-		dc.DrawText(info, rect.x + SPACE_UP, y);
+			// info
+			wxString info = m_items[n]->getInfo();
+			dc.SetFont(wxFont(18, wxDEFAULT, wxNORMAL, wxNORMAL));
+			//dc.SetTextForeground(wxColour(0xFF, 0x20, 0xFF));
+			wxSize size = dc.GetTextExtent(info);
+			//dc.DrawText(info, rect.x/* + rect.width * 0.5f - size.GetWidth() * 0.5f*/, y);
+			dc.DrawText(info, rect.x + SPACE_UP, y);
 
-		y += wxBmp->GetHeight();
+			y += wxBmp->GetHeight();
+		}
 	}
 
 	// name
@@ -141,11 +144,15 @@ void VerticalImageList::OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const
 
 wxCoord VerticalImageList::OnMeasureItem(size_t n) const
 {
+	int size = SPACE_UP + SPACE_DOWN;
 	const Bitmap* bmp = m_items[n]->getBitmap();
-	if (bmp) 
-		return bmp->getBitmap()->GetHeight() + SPACE_UP + SPACE_DOWN;
-	else 
-		return SPACE_UP + SPACE_DOWN;
+	if (bmp) {
+		const wxBitmap* wxBmp = bmp->getBitmap();
+		if (wxBmp) {
+			size = wxBmp->GetHeight() + SPACE_UP + SPACE_DOWN;
+		}
+	}
+	return size;
 }
 
 void VerticalImageList::onDragInit(wxMouseEvent& event)
