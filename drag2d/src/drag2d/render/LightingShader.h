@@ -36,6 +36,7 @@ protected:
 private:
 	GLuint m_model_view, m_projection;
 
+	GLuint m_diffuse_material;
 	GLuint m_normal_matrix;
 	GLuint m_light_position;
 	GLuint m_ambient_material;
@@ -46,9 +47,6 @@ private:
 	mat4 m_mat_modelview, m_mat_projection;
 
 	std::vector<const z3d::IModel*> m_models;
-
-	// todo
-	GLuint m_position, m_normal;
 
 }; // LightingShader
 

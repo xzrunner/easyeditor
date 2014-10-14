@@ -36,13 +36,6 @@ ModelParametric::ModelParametric(const ISurface* surface)
 
 	mesh.index_count = surface->GetTriangleIndexCount();
 
-	mesh.vertices = vertices;
-	mesh.indices = indices;
-
-	for (int i = 0; i < mesh.vertices.size(); ++i) {
-		mesh.vertices[i] *= 0.0001f;
-	}
-
 	m_meshes.push_back(mesh);
 }
 
