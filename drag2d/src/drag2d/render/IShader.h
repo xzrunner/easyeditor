@@ -4,6 +4,7 @@
 typedef unsigned int GLuint;
 
 #include "common/Vector.h"
+#include "sketch/Quaternion.h"
 
 namespace d2d
 {
@@ -21,6 +22,7 @@ public:
 	virtual void Unbind() = 0;
 
 	virtual void SetModelView(const Vector& offset, float scale) = 0;
+	virtual void SetModelView(const Quaternion& ori) = 0;
 	virtual void SetProjection(int width, int height) = 0;
 
 	virtual void Commit() = 0;

@@ -257,6 +257,18 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="editop"
+			>
+			<File
+				RelativePath="..\..\..\src\libsketch\RotateOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\RotateOP.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

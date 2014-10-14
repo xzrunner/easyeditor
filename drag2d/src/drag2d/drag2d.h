@@ -158,3 +158,6 @@
 #include "render/ShaderNew.h"
 //#include "render/DynamicTexture.h"
 //#include "render/DynamicFont.h"
+
+#include "sketch/Quaternion.h"
+#include "sketch/sketch3d.h"

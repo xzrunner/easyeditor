@@ -155,6 +155,11 @@ void ShaderNew::SetModelView(const Vector& offset, float scale)
 	m_impl->m_scale = scale;
 }
 
+void ShaderNew::SetModelView(const Quaternion& ori)
+{
+	m_impl->m_light_shader->SetModelView(ori);
+}
+
 void ShaderNew::GetModelView(Vector& offset, float& scale)
 {
 	offset = m_impl->m_offset;

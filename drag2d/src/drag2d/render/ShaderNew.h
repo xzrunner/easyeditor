@@ -1,7 +1,10 @@
 #ifndef D2D_SHADER_NEW_H
 #define D2D_SHADER_NEW_H
 
-#include "sketch/sketch3d.h"
+//#include "sketch/sketch3d.h"
+#include "sketch/Quaternion.h"
+
+namespace z3d { class IModel; }
 
 namespace d2d
 {
@@ -45,6 +48,7 @@ public:
 	bool IsOpenBufferData() const;
 
 	void SetModelView(const Vector& offset, float scale);
+	void SetModelView(const Quaternion& ori);
 	void GetModelView(Vector& offset, float& scale);
 	void SetProjection(int width, int height);
 

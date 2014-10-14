@@ -1,5 +1,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
+#include "RotateOP.h"
 
 namespace libsketch
 {
@@ -10,7 +11,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::MultiSpritesImpl(parent)
 {
 	m_canvas = new StageCanvas(this);
-	m_editOP = new d2d::ZoomViewOP(this, true, false);
+	m_editOP = new RotateOP(this);
 
 	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
 }
