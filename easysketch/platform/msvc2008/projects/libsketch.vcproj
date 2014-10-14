@@ -170,17 +170,29 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="data"
+			Name="model"
 			>
+			<File
+				RelativePath="..\..\..\src\libsketch\Model.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\ModelObj.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\ModelObj.h"
+				>
+			</File>
 			<Filter
-				Name="model"
+				Name="parametric"
 				>
 				<File
-					RelativePath="..\..\..\src\libsketch\ObjSurface.cpp"
+					RelativePath="..\..\..\src\libsketch\ModelParametric.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libsketch\ObjSurface.h"
+					RelativePath="..\..\..\src\libsketch\ModelParametric.h"
 					>
 				</File>
 				<File
@@ -196,22 +208,6 @@
 					>
 				</File>
 			</Filter>
-		</Filter>
-		<Filter
-			Name="model"
-			>
-			<File
-				RelativePath="..\..\..\src\libsketch\Model.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\ModelObj.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\ModelObj.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="view"
