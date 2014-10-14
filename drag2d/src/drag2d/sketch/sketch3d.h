@@ -15,6 +15,12 @@ struct Material
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+
+	Material()
+		: ambient(0.2, 0, 0)
+		, diffuse(0.3, 0, 0)
+		, specular(0.4, 0, 0)
+	{}
 };
 
 struct Mesh
