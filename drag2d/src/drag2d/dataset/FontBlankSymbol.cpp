@@ -65,7 +65,15 @@ void FontBlankSymbol::draw(const Matrix& mt,
 
 Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 {
-	return Rect(width, height);
+	float w = width, h = height;
+	if (sprite) {
+		const FontSprite* font = dynamic_cast<const FontSprite*>(sprite);
+		if (font) {
+			w = font->width;
+			h = font->height;
+		}
+	}
+	return Rect(w, h);
 }
 
 bool FontBlankSymbol::loadFont(const std::string& _filename)
@@ -115,7 +123,17 @@ void FontBlankSymbol::loadResources()
 
 void FontBlankSymbol::DrawBackground(const ISprite* sprite, const Matrix& mt) const
 {
-	PrimitiveDraw::rect(mt, width*0.5f, height*0.5f, m_style);
+	float hw = width * 0.5f,
+		  hh = height * 0.5f;
+	if (sprite) {
+		const FontSprite* font = dynamic_cast<const FontSprite*>(sprite);
+		if (font) {
+			hw = font->width * 0.5f;
+			hh = font->height * 0.5f;
+		}
+	}
+
+	PrimitiveDraw::rect(mt, hw, hh, m_style);
 }
 
 void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
