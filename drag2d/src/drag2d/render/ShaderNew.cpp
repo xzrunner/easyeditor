@@ -149,6 +149,7 @@ void ShaderNew::SetModelView(const Vector& offset, float scale)
 {
 	m_impl->m_shape_shader->SetModelView(offset, scale);
 	m_impl->m_sprite_shader->SetModelView(offset, scale);
+	m_impl->m_light_shader->SetModelView(offset, scale);
 	
 	m_impl->m_offset = offset;
 	m_impl->m_scale = scale;
@@ -164,6 +165,7 @@ void ShaderNew::SetProjection(int width, int height)
 {
 	m_impl->m_shape_shader->SetProjection(width, height);
 	m_impl->m_sprite_shader->SetProjection(width, height);
+	m_impl->m_light_shader->SetProjection(width, height);
 }
 
 void ShaderNew::Commit()
