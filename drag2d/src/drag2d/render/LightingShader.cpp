@@ -85,9 +85,9 @@ void LightingShader::Load()
 	m_shininess = glGetUniformLocation(m_prog, "u_shininess");
 
 	// Set up some default material parameters.
-	glUniform3f(m_ambient_material, 0.04f, 0.04f, 0.04f);
-	glUniform3f(m_specular_material, 0.5, 0.5, 0.5);
-	glUniform1f(m_shininess, 50);
+// 	glUniform3f(m_ambient_material, 0.04f, 0.04f, 0.04f);
+// 	glUniform3f(m_specular_material, 0.5, 0.5, 0.5);
+// 	glUniform1f(m_shininess, 50);
 
 	// Set up transforms.
 	m_translation = mat4::Translate(0, 0, -7);
@@ -105,8 +105,8 @@ void LightingShader::Bind()
 	glUseProgram(m_prog);
 
 	// todo
-	glClearColor(0.5f, 0.5f, 0.5f, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+// 	glClearColor(0.5f, 0.5f, 0.5f, 1);
+// 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnableVertexAttribArray(ATTRIB_POSITION);
 	glVertexAttribPointer(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(0));
@@ -121,8 +121,9 @@ void LightingShader::Bind()
 
 void LightingShader::Unbind()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	// todo glDrawElements»ácrash
+//   	glBindBuffer(GL_ARRAY_BUFFER, 0);
+//   	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	glDisableVertexAttribArray(ATTRIB_POSITION);
 	glDisableVertexAttribArray(ATTRIB_NORMAL);
@@ -144,6 +145,8 @@ void LightingShader::Commit()
 		return;
 	}
 
+	m_mat_modelview = m_mat_modelview * mat4::Rotate(30);
+
 	// Set the light position.
 	vec4 lightPosition(0.25, 0.25, 1, 0);
 	glUniform3fv(m_light_position, 1, lightPosition.Pointer());
@@ -162,19 +165,19 @@ void LightingShader::Commit()
 	for (int i = 0, n = m_models.size(); i < n; ++i) {
 		const std::vector<z3d::Mesh>& meshes = m_models[i]->GetAllMeshes();
 		for (int j = 0, m = meshes.size(); j < m; ++j) {
-			const z3d::Mesh& mesh = meshes[i];
-// 			glVertexAttrib4f(
-// 				ATTRIB_DIFFUSE_MATERIAL, 
-// 				mesh.material.diffuse.x, 
-// 				mesh.material.diffuse.y, 
-// 				mesh.material.diffuse.z, 
-// 				1);
+			const z3d::Mesh& mesh = meshes[j];
+//  			glVertexAttrib4f(
+//  				ATTRIB_DIFFUSE_MATERIAL, 
+//  				mesh.material.diffuse.x, 
+//  				mesh.material.diffuse.y, 
+//  				mesh.material.diffuse.z, 
+//  				1);
 
-			glUniform3f(
-				m_diffuse_material, 
-				mesh.material.diffuse.x, 
-				mesh.material.diffuse.y, 
-				mesh.material.diffuse.z);
+ 			glUniform3f(
+ 				m_diffuse_material, 
+ 				mesh.material.diffuse.x, 
+ 				mesh.material.diffuse.y, 
+ 				mesh.material.diffuse.z);
 			glUniform3f(
 				m_ambient_material, 
 				mesh.material.ambient.x, 
@@ -185,6 +188,8 @@ void LightingShader::Commit()
 				mesh.material.specular.x, 
 				mesh.material.specular.y, 
 				mesh.material.specular.z);
+
+			glUniform1f(m_shininess, 50);
 
 			glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.index_buffer);
