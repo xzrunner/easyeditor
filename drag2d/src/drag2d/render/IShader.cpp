@@ -2,6 +2,7 @@
 
 #include <gl/GLee.h>
 #include <stdio.h>
+#include <assert.h>
 
 namespace d2d
 {
@@ -36,7 +37,10 @@ void IShader::InitShader(const char* FS, const char* VS)
 	glLinkProgram(prog);
 
 	glGetProgramiv(prog, GL_LINK_STATUS, &status);
-	if (status == 0) {
+	if (status == GL_FALSE) {
+		GLchar errorLog[1024] = {0};
+		glGetProgramInfoLog(prog, 1024, NULL, errorLog);
+		assert(0);
 		return;
 	}
 
