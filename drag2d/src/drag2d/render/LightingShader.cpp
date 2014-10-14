@@ -121,9 +121,8 @@ void LightingShader::Bind()
 
 void LightingShader::Unbind()
 {
-	// todo glDrawElements»ácrash
-//   	glBindBuffer(GL_ARRAY_BUFFER, 0);
-//   	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	glDisableVertexAttribArray(ATTRIB_POSITION);
 	glDisableVertexAttribArray(ATTRIB_NORMAL);
@@ -145,8 +144,6 @@ void LightingShader::Commit()
 		return;
 	}
 
-	m_mat_modelview = m_mat_modelview * mat4::Rotate(30);
-
 	// Set the light position.
 	vec4 lightPosition(0.25, 0.25, 1, 0);
 	glUniform3fv(m_light_position, 1, lightPosition.Pointer());
@@ -166,6 +163,7 @@ void LightingShader::Commit()
 		const std::vector<z3d::Mesh>& meshes = m_models[i]->GetAllMeshes();
 		for (int j = 0, m = meshes.size(); j < m; ++j) {
 			const z3d::Mesh& mesh = meshes[j];
+
 //  			glVertexAttrib4f(
 //  				ATTRIB_DIFFUSE_MATERIAL, 
 //  				mesh.material.diffuse.x, 
@@ -192,7 +190,11 @@ void LightingShader::Commit()
 			glUniform1f(m_shininess, 50);
 
 			glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
+			glVertexAttribPointer(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(0));
+			glVertexAttribPointer(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(12));
+
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.index_buffer);
+
 			glDrawElements(GL_TRIANGLES, mesh.index_count, GL_UNSIGNED_SHORT, 0);
 		}
 	}
