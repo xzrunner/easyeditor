@@ -3,17 +3,20 @@
 
 #include "ModelParametric.h"
 #include "ParametricSurface.h"
+#include "Cube.h"
 
 namespace z3d
 {
 
-ModelParametric::ModelParametric(const ISurface* surface)
+ModelParametric::ModelParametric(const ISurface* surface, Cube& aabb)
 {
 	Mesh mesh;
 
+	unsigned char flag = z3d::VertexFlagsNormals;
+
 	// Create the VBO for the vertices.
 	std::vector<float> vertices;
-	surface->GenerateVertices(vertices, z3d::VertexFlagsNormals);
+	surface->GenerateVertices(vertices, flag);
 	glGenBuffers(1, &mesh.vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
 	glBufferData(
@@ -37,6 +40,23 @@ ModelParametric::ModelParametric(const ISurface* surface)
 	mesh.index_count = surface->GetTriangleIndexCount();
 
 	m_meshes.push_back(mesh);
+
+	// Init aabb
+	int step = 3;
+	if (flag == z3d::VertexFlagsNormals) {
+		step = 6;
+	} else if (flag == z3d::VertexFlagsTexCoords) {
+		step = 8;
+	}
+	for (int i = 0, n = vertices.size(); i < n; )
+	{
+		vec3 pos;
+		pos.x = vertices[i];
+		pos.y = vertices[i+1];
+		pos.z = vertices[i+2];
+		aabb.Combine(pos);
+		i += step;
+	}
 }
 
 // ModelParametric::ModelParametric(const ISurface* surface)

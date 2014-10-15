@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "Cube.h"
+
 namespace libsketch
 {
 
@@ -30,12 +32,15 @@ public:
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 	void SetModel(z3d::IModel* model);
+	void SetAABB(const z3d::Cube& aabb) { m_aabb = aabb; }
 
 protected:
 	virtual void loadResources();
 
 private:
 	z3d::IModel* m_model;
+
+	z3d::Cube m_aabb;
 
 }; // Symbol
 

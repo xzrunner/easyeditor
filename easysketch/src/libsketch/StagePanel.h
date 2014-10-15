@@ -28,6 +28,8 @@ public:
 	virtual void clearSprites();
 	virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
+	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
+
 private:
 	std::vector<d2d::ISprite*> m_sprites;
 

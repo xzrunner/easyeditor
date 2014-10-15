@@ -153,6 +153,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libsketch\Cube.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\Cube.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libsketch\Sprite.cpp"
 				>
 			</File>
@@ -166,6 +174,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libsketch\Symbol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\ViewFrustum.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\ViewFrustum.h"
 				>
 			</File>
 		</Filter>
