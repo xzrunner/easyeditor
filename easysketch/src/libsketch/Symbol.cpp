@@ -65,7 +65,7 @@ void Symbol::loadResources()
   
   	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
   	std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
-  	m_model = new z3d::ModelObj(filepath.c_str(), 0.05f);
+  	m_model = new z3d::ModelObj(filepath.c_str(), 0.02f);
 }
 
 }
