@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+namespace z3d { class ISurface; }
+
 namespace libsketch
 {
 
@@ -13,16 +15,23 @@ class StageCanvas : public d2d::OrthoCanvas
 public:
 	StageCanvas(StagePanel* stage, d2d::LibraryPanel* library);
 
+	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
+
 protected:
 	virtual void initGL();
+	virtual void onSize(int w, int h);
 	virtual void onDraw();
 
 private:
 	void InitDefaultSymbol();
 
+	void LoadSymbolToLib(z3d::ISurface* surface, const char* name);
+
 private:
 	StagePanel* m_stage;
 	d2d::LibraryPanel* m_library;
+
+	int m_width, m_height;
 
 }; // StageCanvas
 

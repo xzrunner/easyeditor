@@ -73,4 +73,10 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 
 }
 
+ivec2 StagePanel::TransPos3ProjectToScreen(const vec3& proj) const
+{
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_canvas);
+	return canvas->TransPos3ProjectToScreen(proj);
+}
+
 }
