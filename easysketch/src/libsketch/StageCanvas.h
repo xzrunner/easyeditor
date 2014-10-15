@@ -2,6 +2,7 @@
 #define _LIBSKETCH_STAGE_CANVAS_H_
 
 #include <drag2d.h>
+#include <easy3d.h>
 
 namespace z3d { class ISurface; }
 
@@ -10,7 +11,7 @@ namespace libsketch
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public e3d::StageCanvas
 {
 public:
 	StageCanvas(StagePanel* stage, d2d::LibraryPanel* library);

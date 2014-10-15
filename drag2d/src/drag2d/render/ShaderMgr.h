@@ -1,10 +1,7 @@
-#ifndef D2D_SHADER_NEW_H
-#define D2D_SHADER_NEW_H
+#ifndef _D2D_SHADER_MGR_H_
+#define _D2D_SHADER_MGR_H_
 
-//#include "sketch/sketch3d.h"
-#include "sketch/Quaternion.h"
-
-namespace z3d { class IModel; }
+#include "ShaderMgrBase.h"
 
 namespace d2d
 {
@@ -14,22 +11,17 @@ class Vector;
 class ShaderImpl;
 class IShader;
 
-class ShaderNew
+class ShaderMgr : public ShaderMgrBase
 {
 public:
-	static ShaderNew* Instance();
+	static ShaderMgr* Instance();
 
 	void SetSpriteColor(const Colorf& multi, const Colorf& add);
 	void SetShapeColor(const Colorf& col);
 
 	void sprite();
 	void shape();
-	void lighting();
 	void null();
-
-	void release();
-
-	void reload();
 
 	int GetTexID() const;
 	int GetFboID() const;
@@ -39,8 +31,6 @@ public:
 
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
-	// todo
-	void Draw(const z3d::IModel* model, const vec3& pos);
 
 	int GetVersion() const;
 
@@ -48,29 +38,20 @@ public:
 	bool IsOpenBufferData() const;
 
 	void SetModelView(const Vector& offset, float scale);
-	void SetModelView(const Quaternion& ori);
 	void GetModelView(Vector& offset, float& scale);
-	void SetProjection(int width, int height);
-
-	// todo
-	void Commit();
-
-	void Flush();
 
 private:
-	ShaderNew();
-	~ShaderNew();
-
-	void Switch(IShader* shader);
+	ShaderMgr();
+	~ShaderMgr();
 
 private:
-	static ShaderNew* m_instance;
+	static ShaderMgr* m_instance;
 
 private:
 	ShaderImpl* m_impl;
 
-}; // ShaderNew
+}; // ShaderMgr
 
 }
 
-#endif // D2D_SHADER_NEW_H
+#endif // _D2D_SHADER_MGR_H_

@@ -16,7 +16,7 @@ namespace libsketch
 {
 
 StageCanvas::StageCanvas(StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::OrthoCanvas(stage)
+	: e3d::StageCanvas(stage)
 	, m_stage(stage)
 	, m_library(library)
 {
@@ -29,13 +29,13 @@ ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 
 void StageCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	e3d::StageCanvas::initGL();
 	InitDefaultSymbol();
 }
 
 void StageCanvas::onSize(int w, int h)
 {
-	d2d::OrthoCanvas::onSize(w, h);
+	e3d::StageCanvas::onSize(w, h);
 	m_width = w;
 	m_height = h;
 }

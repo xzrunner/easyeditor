@@ -1,5 +1,5 @@
 #include "RenderList.h"
-#include "ShaderNew.h"
+#include "ShaderMgr.h"
 
 namespace d2d
 {
@@ -27,7 +27,7 @@ void RenderList::Insert(int tex, Vector vertices[4], Vector texcoords[4])
 
 void RenderList::Flush()
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->sprite();
 
 	for (int i = 0, sz = m_nodes.size(); i < sz; ++i)

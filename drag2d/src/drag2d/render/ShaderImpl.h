@@ -16,12 +16,9 @@ public:
 	ShaderImpl();
 
 private:
-	IShader* m_curr_shader;
-
 	IShader* m_shape_shader;
 	IShader* m_sprite_shader;
 	IShader* m_font_shader;
-	IShader* m_light_shader;
 
 	int m_version;
 
@@ -29,7 +26,7 @@ private:
 	Vector m_offset;
 	float m_scale;
 
-	friend class ShaderNew;
+	friend class ShaderMgr;
 
 }; // ShaderImpl
 

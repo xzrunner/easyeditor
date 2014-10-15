@@ -1,5 +1,7 @@
 #include "RotateOP.h"
 
+#include <easy3d.h>
+
 namespace libsketch
 {
 
@@ -28,7 +30,7 @@ bool RotateOP::onMouseDrag(int x, int y)
 	Quaternion delta = Quaternion::CreateFromVectors(start, end);
 	m_ori = delta.Rotated(m_pre_ori);
 
-	d2d::ShaderNew::Instance()->SetModelView(m_ori);
+	e3d::ShaderMgr::Instance()->SetModelView(m_ori);
 	
 	m_editPanel->Refresh();
 

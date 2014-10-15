@@ -1,7 +1,7 @@
 #include "DynamicTexture.h"
 
 #include "dataset/TPNode.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 #include <opengl/opengl.h>
 #include <algorithm>
@@ -48,7 +48,7 @@ void DynamicTexture::Insert(Image* img)
 		img->retain();
 		m_preload_list.push_back(img);
 	} else {
-		ShaderNew* shader = ShaderNew::Instance();
+		ShaderMgr* shader = ShaderMgr::Instance();
 		shader->SetFBO(m_fbo);
  		shader->sprite();
  		glViewport(0, 0, m_width, m_height);
@@ -66,7 +66,7 @@ void DynamicTexture::End()
 		return;
 	}
 
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 
@@ -110,7 +110,7 @@ const TPNode* DynamicTexture::Query(const Image& img) const
 
 void DynamicTexture::ReloadPixels()
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 
@@ -205,7 +205,7 @@ void DynamicTexture::DrawRegion(const Rect& vertex, const Rect& texcoords, int t
 		vb[14] = texcoords.xMin;
 		vb[15] = texcoords.yMax;
 	}
-	ShaderNew::Instance()->Draw(vb, texid);
+	ShaderMgr::Instance()->Draw(vb, texid);
 }
 
 void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const

@@ -105,7 +105,7 @@ void Shape::DrawInfoXY() const
 
 void Shape::DrawTexture(const d2d::Matrix& mt) const
 {
-	d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
+	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->sprite();
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{

@@ -18,9 +18,9 @@ struct Material
 	vec3 specular;
 
 	Material()
-		: ambient(0.2, 0, 0)
-		, diffuse(0.3, 0, 0)
-		, specular(0.4, 0, 0)
+		: ambient(0.2f, 0, 0)
+		, diffuse(0.3f, 0, 0)
+		, specular(0.4f, 0, 0)
 	{}
 };
 

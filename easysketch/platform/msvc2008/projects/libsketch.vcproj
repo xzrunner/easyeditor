@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easysketch\src\easy3d"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -282,6 +282,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libsketch\RotateOP.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="render"
+			>
+			<File
+				RelativePath="..\..\..\src\libsketch\ShapeShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\ShapeShader.h"
 				>
 			</File>
 		</Filter>

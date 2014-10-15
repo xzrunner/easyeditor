@@ -4,7 +4,7 @@
 #include "dataset/TPNode.h"
 #include "render/GL10.h"
 #include "render/Shader.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 //#include "render/DynamicTexture.h"
 #include "render/DynamicTexAndFont.h"
 #include "render/RenderList.h"
@@ -122,7 +122,7 @@ void Image::draw(const Matrix& mt, const Rect& r) const
 {
 	////////////////////////////////////////////////////////////////////////////
 	//// 原始 直接画
- //   	ShaderNew* shader = ShaderNew::Instance();
+ //   	ShaderMgr* shader = ShaderMgr::Instance();
  //   	shader->sprite();
  //   
  //   	float tot_hw = m_width * 0.5f,
@@ -245,7 +245,7 @@ void Image::draw(const Matrix& mt, const Rect& r) const
 
 //	RenderList::Instance()->Insert(texid, vertices, texcoords);
 
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->sprite();
 	shader->Draw(vertices, texcoords, texid);
 }

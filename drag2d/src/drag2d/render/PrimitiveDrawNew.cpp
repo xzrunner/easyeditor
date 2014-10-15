@@ -1,5 +1,5 @@
 #include "PrimitiveDrawNew.h"
-#include "ShaderNew.h"
+#include "ShaderMgr.h"
 
 #include <GL/GLee.h>
 
@@ -8,7 +8,7 @@ namespace d2d
 
 void PrimitiveDrawNew::Draw(int type, const float *coords, size_t count)
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->shape();
 	shader->Commit();
 
@@ -20,19 +20,19 @@ void PrimitiveDrawNew::Draw(int type, const float *coords, size_t count)
 
 void PrimitiveDrawNew::SetLineWidth(float width)
 {
-	ShaderNew::Instance()->shape();
+	ShaderMgr::Instance()->shape();
 	glLineWidth(width);
 }
 
 void PrimitiveDrawNew::SetColor(const Colorf& col)
 {
-	ShaderNew::Instance()->shape();
-	ShaderNew::Instance()->SetShapeColor(col);
+	ShaderMgr::Instance()->shape();
+	ShaderMgr::Instance()->SetShapeColor(col);
 }
 
 void PrimitiveDrawNew::SetPointSize(float size)
 {
-	ShaderNew::Instance()->shape();
+	ShaderMgr::Instance()->shape();
 	glPointSize(size);
 }
 
@@ -42,7 +42,7 @@ void PrimitiveDrawNew::LineStypeBegin(const LineStyle& style)
 		return;
 	}
 
-	ShaderNew::Instance()->shape();
+	ShaderMgr::Instance()->shape();
 
 	glEnable(GL_LINE_STIPPLE);
 	switch (style)
@@ -65,7 +65,7 @@ void PrimitiveDrawNew::LineStypeEnd(const LineStyle& style)
 		return;
 	}
 
-	ShaderNew::Instance()->shape();
+	ShaderMgr::Instance()->shape();
 	glDisable(GL_LINE_STIPPLE);
 }
 

@@ -155,9 +155,11 @@
 #include "render/SpriteDraw.h"
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 //#include "render/DynamicTexture.h"
 //#include "render/DynamicFont.h"
+#include "render/LightingShader.h"
+#include "render/RenderContext.h"
 
 #include "sketch/Quaternion.h"
 #include "sketch/sketch3d.h"

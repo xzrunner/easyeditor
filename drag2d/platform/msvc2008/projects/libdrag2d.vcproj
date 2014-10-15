@@ -1273,6 +1273,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\render\RenderContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\RenderContext.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\render\RenderList.cpp"
 					>
 				</File>
@@ -1297,11 +1305,19 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\render\ShaderNew.cpp"
+					RelativePath="..\..\..\src\drag2d\render\ShaderMgr.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\render\ShaderNew.h"
+					RelativePath="..\..\..\src\drag2d\render\ShaderMgr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderMgrBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\ShaderMgrBase.h"
 					>
 				</File>
 				<Filter

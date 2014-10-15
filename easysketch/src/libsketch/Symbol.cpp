@@ -1,6 +1,8 @@
 #include "Symbol.h"
 #include "ModelObj.h"
 
+#include <easy3d.h>
+
 namespace libsketch
 {
 
@@ -27,8 +29,8 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
-	d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
-	shader->lighting();
+	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
+	shader->Lighting();
 	shader->Draw(m_model, vec3(0, 0, 0));
 }
 
