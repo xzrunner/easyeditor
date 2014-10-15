@@ -1,8 +1,10 @@
-#pragma once
+#ifndef _E3D_MODEL_OBJ_H_
+#define _E3D_MODEL_OBJ_H_
 
-#include <drag2d.h>
+#include "IModel.h"
 
-namespace z3d {
+namespace e3d 
+{
 
 class ModelObj : public IModel
 {
@@ -102,3 +104,5 @@ private:
 }; // ModelObj
 
 }
+
+#endif // _E3D_MODEL_OBJ_H_

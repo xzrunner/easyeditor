@@ -1,9 +1,11 @@
-#ifndef _LIBSKETCH_CUBE_H_
-#define _LIBSKETCH_CUBE_H_
+#ifndef _E3D_CUBE_H_
+#define _E3D_CUBE_H_
 
-#include <drag2d.h>
+#include "Vector.h"
 
-namespace z3d
+#include <float.h>
+
+namespace e3d
 {
 
 class Cube
@@ -34,4 +36,4 @@ private:
 
 }
 
-#endif // _LIBSKETCH_CUBE_H_
+#endif // _E3D_CUBE_H_

@@ -2,6 +2,7 @@
 #define _LIBSKETCH_STAGE_PANEL_H_
 
 #include <drag2d.h>
+#include <easy3d.h>
 
 namespace libsketch
 {

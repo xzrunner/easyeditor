@@ -1,8 +1,13 @@
+#ifndef _E3D_PARAMETRIC_EQUATIONS_H_
+#define _E3D_PARAMETRIC_EQUATIONS_H_
+
 #include "ParametricSurface.h"
 
-namespace z3d {
+namespace e3d 
+{
 
-class Cone : public ParametricSurface {
+class Cone : public ParametricSurface 
+{
 public:
     Cone(float height, float radius) : m_height(height), m_radius(radius)
     {
@@ -176,3 +181,5 @@ private:
 };
 
 }
+
+#endif // _E3D_PARAMETRIC_EQUATIONS_H_

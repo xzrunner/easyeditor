@@ -3,19 +3,10 @@
 
 #include "ModelObj.h"
 
-// #include <gl/glew.h>
-// #include <fstream>
-// #include <string>
-// #include <sstream>
-// #include <algorithm>
-// 
-// #include "Model.h"
-// #include "Modules.h"
-// #include "Log.h"
+#include "ISurface.h"
 
-#include "Model.h"
-
-namespace z3d {
+namespace e3d 
+{
 
 ModelObj::ModelObj(const char* filename, float scale /*= 1.0f*/)
 	: _scale(scale)

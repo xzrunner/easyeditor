@@ -1,16 +1,17 @@
-#ifndef _DRAG2D_LIGHTING_SHADER_H_
-#define _DRAG2D_LIGHTING_SHADER_H_
+#ifndef _E3D_LIGHTING_SHADER_H_
+#define _E3D_LIGHTING_SHADER_H_
 
-#include "IShader.h"
+#include "Vector.h"
+#include "Quaternion.h"
+#include "Matrix.h"
 
-#include "sketch/Matrix.h"
-#include "sketch/Quaternion.h"
-#include "sketch/sketch3d.h"
+#include <drag2d.h>
 
-namespace d2d
+namespace e3d
 {
+class IModel;
 
-class LightingShader : public IShader
+class LightingShader : public d2d::IShader
 {
 public:
 	LightingShader();
@@ -24,11 +25,11 @@ public:
 
 	virtual void Commit();
 
-	virtual void SetModelView(const Vector& offset, float scale) {}
-	virtual void SetModelView(const Quaternion& ori);
 	virtual void SetProjection(int width, int height);
 
-	void Draw(const z3d::IModel* model, const vec3& pos);
+	void SetModelView(const Quaternion& ori);
+
+	void Draw(const IModel* model, const vec3& pos);
 
 protected:
 	virtual void BindAttrib(GLuint prog);
@@ -36,7 +37,7 @@ protected:
 private:
 	struct Node
 	{
-		const z3d::IModel* model;
+		const IModel* model;
 		vec3 pos;
 	};
 
@@ -53,11 +54,10 @@ private:
 	mat4 m_translation;
 	mat4 m_mat_modelview, m_mat_projection;
 
-//	std::vector<const z3d::IModel*> m_models;
 	std::vector<Node> m_render_list;
 
 }; // LightingShader
 
 }
 
-#endif // _DRAG2D_LIGHTING_SHADER_H_
+#endif // _E3D_LIGHTING_SHADER_H_

@@ -24,11 +24,11 @@ public:
 	virtual void Bind();
 	virtual void Unbind();
 
-	virtual void SetModelView(const Vector& offset, float scale);
-	virtual void SetModelView(const Quaternion& ori) {}
 	virtual void SetProjection(int width, int height);
 
 	virtual void Commit();
+
+	void SetModelView(const Vector& offset, float scale);
 
 	int GetTexID() const;
 	void SetTexID(int tex);

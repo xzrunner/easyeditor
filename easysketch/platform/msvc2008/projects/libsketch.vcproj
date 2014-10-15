@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easysketch\src\easy3d"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -153,14 +153,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libsketch\Cube.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\Cube.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libsketch\Sprite.cpp"
 				>
 			</File>
@@ -176,54 +168,6 @@
 				RelativePath="..\..\..\src\libsketch\Symbol.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\ViewFrustum.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\ViewFrustum.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="model"
-			>
-			<File
-				RelativePath="..\..\..\src\libsketch\Model.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\ModelObj.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\ModelObj.h"
-				>
-			</File>
-			<Filter
-				Name="parametric"
-				>
-				<File
-					RelativePath="..\..\..\src\libsketch\ModelParametric.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsketch\ModelParametric.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsketch\ParametricEquations.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsketch\ParametricSurface.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsketch\ParametricSurface.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="view"
@@ -282,18 +226,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libsketch\RotateOP.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="render"
-			>
-			<File
-				RelativePath="..\..\..\src\libsketch\ShapeShader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libsketch\ShapeShader.h"
 				>
 			</File>
 		</Filter>

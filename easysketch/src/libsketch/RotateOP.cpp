@@ -1,7 +1,5 @@
 #include "RotateOP.h"
 
-#include <easy3d.h>
-
 namespace libsketch
 {
 

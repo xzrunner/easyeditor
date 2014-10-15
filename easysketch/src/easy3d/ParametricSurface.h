@@ -1,18 +1,21 @@
-#pragma once
+#ifndef _E3D_PARAMETRIC_SURFACE_H_
+#define _E3D_PARAMETRIC_SURFACE_H_
 
-#include <drag2d.h>
+#include "ISurface.h"
+#include "Vector.h"
 
-#include "Model.h"
+namespace e3d 
+{
 
-namespace z3d {
-
-struct ParametricInterval {
+struct ParametricInterval 
+{
 	ivec2 divisions;
 	vec2 upperBound;
 	vec2 texture_count;
 };
 
-class ParametricSurface : public ISurface {
+class ParametricSurface : public ISurface 
+{
 public:
 	int GetVertexCount() const;
 	int GetTriangleIndexCount() const;
@@ -31,3 +34,5 @@ private:
 }; // ParametricSurface
 
 }
+
+#endif // _E3D_PARAMETRIC_SURFACE_H_

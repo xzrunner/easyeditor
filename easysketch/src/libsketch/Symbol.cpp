@@ -1,5 +1,4 @@
 #include "Symbol.h"
-#include "ModelObj.h"
 
 #include <easy3d.h>
 
@@ -39,7 +38,7 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	return d2d::Rect(100, 100);
 }
 
-void Symbol::SetModel(z3d::IModel* model)
+void Symbol::SetModel(e3d::IModel* model)
 {
 	if (m_model != model)
 	{
@@ -67,7 +66,7 @@ void Symbol::loadResources()
   
   	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
   	std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
-  	m_model = new z3d::ModelObj(filepath.c_str(), 0.02f);
+  	m_model = new e3d::ModelObj(filepath.c_str(), 0.02f);
 }
 
 }

@@ -5,14 +5,14 @@
 #include "ParametricSurface.h"
 #include "Cube.h"
 
-namespace z3d
+namespace e3d
 {
 
 ModelParametric::ModelParametric(const ISurface* surface, Cube& aabb)
 {
 	Mesh mesh;
 
-	unsigned char flag = z3d::VertexFlagsNormals;
+	unsigned char flag = e3d::VertexFlagsNormals;
 
 	// Create the VBO for the vertices.
 	std::vector<float> vertices;
@@ -43,9 +43,9 @@ ModelParametric::ModelParametric(const ISurface* surface, Cube& aabb)
 
 	// Init aabb
 	int step = 3;
-	if (flag == z3d::VertexFlagsNormals) {
+	if (flag == e3d::VertexFlagsNormals) {
 		step = 6;
-	} else if (flag == z3d::VertexFlagsTexCoords) {
+	} else if (flag == e3d::VertexFlagsTexCoords) {
 		step = 8;
 	}
 	for (int i = 0, n = vertices.size(); i < n; )

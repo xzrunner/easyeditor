@@ -1,16 +1,13 @@
-#ifndef _DRAG2D_SKETCH3D_H_
-#define _DRAG2D_SKETCH3D_H_
+#ifndef _E2D_IMODEL_H_
+#define _E2D_IMODEL_H_
 
 #include "Vector.h"
-#include "common/Object.h"
 
-#include <vector>
+#include <drag2d.h>
 
-typedef unsigned int uint32;
-
-namespace z3d 
+namespace e3d 
 {
-
+ 
 struct Material
 {
 	vec3 ambient;
@@ -26,9 +23,9 @@ struct Material
 
 struct Mesh
 {
-	uint32 vertex_buffer;
-	uint32 index_buffer;
-	uint32 index_count;
+	GLuint vertex_buffer;
+	GLuint index_buffer;
+	int index_count;
 
 	Material material;
 };
@@ -42,4 +39,4 @@ public:
 
 }
 
-#endif // _DRAG2D_SKETCH3D_H_
+#endif // _E2D_IMODEL_H_

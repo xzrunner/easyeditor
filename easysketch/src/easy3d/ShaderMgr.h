@@ -3,12 +3,13 @@
 
 #include <drag2d.h>
 
-#include "sketch/Quaternion.h"
-
-namespace z3d { class IModel; }
+#include "Quaternion.h"
 
 namespace e3d
 {
+
+class IModel;
+class LightingShader;
 
 class ShaderMgr : public d2d::ShaderMgrBase
 {
@@ -17,7 +18,7 @@ public:
 
 	void Lighting();
 
-	void Draw(const z3d::IModel* model, const vec3& pos);
+	void Draw(const IModel* model, const vec3& pos);
 
 	void SetModelView(const Quaternion& ori);
 
@@ -29,7 +30,7 @@ private:
 	static ShaderMgr* m_instance;
 
 private:
-	d2d::LightingShader* m_light_shader;
+	LightingShader* m_light_shader;
 
 }; // ShaderMgr
 

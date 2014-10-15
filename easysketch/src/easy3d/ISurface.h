@@ -1,15 +1,19 @@
-#pragma once
+#ifndef _E3D_ISURFACE_H_
+#define _E3D_ISURFACE_H_
 
 #include <vector>
 
-namespace z3d {
+namespace e3d 
+{
 
-enum VertexFlags {
+enum VertexFlags 
+{
     VertexFlagsNormals = 1 << 0,
     VertexFlagsTexCoords = 1 << 1,
 };
 
-class ISurface {
+class ISurface 
+{
 public:
 	virtual int GetVertexCount() const = 0;
 	virtual int GetTriangleIndexCount() const = 0;
@@ -20,3 +24,5 @@ public:
 };
 
 }
+
+#endif // _E3D_ISURFACE_H_

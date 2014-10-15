@@ -1,6 +1,7 @@
 #include "ParametricSurface.h"
 
-namespace z3d {
+namespace e3d 
+{
 
 void ParametricSurface::SetInterval(const ParametricInterval& interval)
 {

@@ -47,8 +47,8 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
 
  	GlyphLayout layout;
  	uint32_t* buffer = GenFTChar(character, font_size, color, is_edge, layout);
- 	int w = layout.sizer.width;
- 	int h = layout.sizer.height;
+ 	float w = layout.sizer.width;
+ 	float h = layout.sizer.height;
  	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
 	if (!n) {
 		Clear();

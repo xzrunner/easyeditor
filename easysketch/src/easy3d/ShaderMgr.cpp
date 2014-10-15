@@ -1,4 +1,5 @@
 #include "ShaderMgr.h"
+#include "LightingShader.h"
 
 namespace e3d
 {
@@ -17,7 +18,7 @@ ShaderMgr* ShaderMgr::Instance()
 
 ShaderMgr::ShaderMgr()
 {
-	m_light_shader = new d2d::LightingShader;
+	m_light_shader = new LightingShader;
 	m_shaders.push_back(m_light_shader);
 }
 
@@ -30,7 +31,7 @@ void ShaderMgr::Lighting()
 	Switch(m_light_shader);	
 }
 
-void ShaderMgr::Draw(const z3d::IModel* model, const vec3& pos)
+void ShaderMgr::Draw(const IModel* model, const vec3& pos)
 {
 	m_light_shader->Draw(model, pos);
 }

@@ -4,8 +4,6 @@
 #include <drag2d.h>
 #include <easy3d.h>
 
-namespace z3d { class ISurface; }
-
 namespace libsketch
 {
 
@@ -26,7 +24,7 @@ protected:
 private:
 	void InitDefaultSymbol();
 
-	void LoadSymbolToLib(z3d::ISurface* surface, const char* name);
+	void LoadSymbolToLib(e3d::ISurface* surface, const char* name);
 
 private:
 	StagePanel* m_stage;

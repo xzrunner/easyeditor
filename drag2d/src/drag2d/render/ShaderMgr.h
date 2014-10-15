@@ -3,6 +3,8 @@
 
 #include "ShaderMgrBase.h"
 
+#include "common/Vector.h"
+
 namespace d2d
 {
 
@@ -10,6 +12,9 @@ struct Colorf;
 class Vector;
 class ShaderImpl;
 class IShader;
+class ShapeShader;
+class SpriteShader;
+class FontShader;
 
 class ShaderMgr : public ShaderMgrBase
 {
@@ -48,7 +53,15 @@ private:
 	static ShaderMgr* m_instance;
 
 private:
-	ShaderImpl* m_impl;
+	ShapeShader* m_shape_shader;
+	SpriteShader* m_sprite_shader;
+	FontShader* m_font_shader;
+
+	int m_version;
+
+	// cache model view
+	Vector m_offset;
+	float m_scale;
 
 }; // ShaderMgr
 

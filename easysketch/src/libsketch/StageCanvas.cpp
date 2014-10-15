@@ -4,9 +4,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
-#include "Model.h"
-#include "ModelParametric.h"
-#include "ParametricEquations.h"
 #include "Symbol.h"
 #include "config.h"
 
@@ -24,7 +21,7 @@ StageCanvas::StageCanvas(StagePanel* stage, d2d::LibraryPanel* library)
 
 ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 {
-	return ViewFrustum::TransPos3ProjectToScreen(proj, m_width, m_height);
+	return e3d::ViewFrustum::TransPos3ProjectToScreen(proj, m_width, m_height);
 }
 
 void StageCanvas::initGL()
@@ -60,31 +57,31 @@ void StageCanvas::onDraw()
 
 void StageCanvas::InitDefaultSymbol()
 {
-	z3d::ISurface* surface;
+	e3d::ISurface* surface;
 
-	surface = new z3d::Cone(2, 1);
+	surface = new e3d::Cone(2, 1);
 	LoadSymbolToLib(surface, "Cone");
 
-	surface = new z3d::Sphere(1);
+	surface = new e3d::Sphere(1);
 	LoadSymbolToLib(surface, "Sphere");
 
-	surface = new z3d::Torus(0.5f, 0.2f);
+	surface = new e3d::Torus(0.5f, 0.2f);
 	LoadSymbolToLib(surface, "Torus");
 
-	surface = new z3d::TrefoilKnot(1);
+	surface = new e3d::TrefoilKnot(1);
 	LoadSymbolToLib(surface, "TrefoilKnot");
 
-	surface = new z3d::MobiusStrip(0.6f);
+	surface = new e3d::MobiusStrip(0.6f);
 	LoadSymbolToLib(surface, "MobiusStrip");
 
-	surface = new z3d::KleinBottle(0.1f);
+	surface = new e3d::KleinBottle(0.1f);
 	LoadSymbolToLib(surface, "KleinBottle");
 }
 
-void StageCanvas::LoadSymbolToLib(z3d::ISurface* surface, const char* name)
+void StageCanvas::LoadSymbolToLib(e3d::ISurface* surface, const char* name)
 {
-	z3d::Cube aabb;
-	z3d::ModelParametric* model = new z3d::ModelParametric(surface, aabb);
+	e3d::Cube aabb;
+	e3d::ModelParametric* model = new e3d::ModelParametric(surface, aabb);
 
 	libsketch::Symbol* symbol = new libsketch::Symbol();
 	symbol->SetAABB(aabb);

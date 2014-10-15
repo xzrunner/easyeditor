@@ -1,10 +1,13 @@
-#include "LightingShader.h"
+#include "Matrix.h"
 
-#include "sketch/Vector.h"
-
+#define NOMINMAX 
 #include <gl/GLee.h>
 
-namespace d2d
+#include "LightingShader.h"
+#include "ISurface.h"
+#include "IModel.h"
+
+namespace e3d
 {
 
 static const int VERTEX_SIZE = 24;
@@ -167,10 +170,10 @@ void LightingShader::Commit()
 		mat4 model_view = m_mat_modelview * mat4::Translate(node.pos.x, node.pos.y, node.pos.z);
 		glUniformMatrix4fv(m_model_view, 1, 0, model_view.Pointer());
 
-		const std::vector<z3d::Mesh>& meshes = node.model->GetAllMeshes();
+		const std::vector<Mesh>& meshes = node.model->GetAllMeshes();
 		for (int j = 0, m = meshes.size(); j < m; ++j) 
 		{
-			const z3d::Mesh& mesh = meshes[j];
+			const Mesh& mesh = meshes[j];
 
 //  			glVertexAttrib4f(
 //  				ATTRIB_DIFFUSE_MATERIAL, 
@@ -226,7 +229,7 @@ void LightingShader::SetProjection(int width, int height)
 	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 1000, 1010);
 }
 
-void LightingShader::Draw(const z3d::IModel* model, const vec3& pos)
+void LightingShader::Draw(const IModel* model, const vec3& pos)
 {
 	Node n;
 	n.model = model;
