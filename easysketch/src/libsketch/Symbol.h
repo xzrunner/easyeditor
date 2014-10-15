@@ -29,6 +29,8 @@ public:
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
+	void SetModel(z3d::IModel* model);
+
 protected:
 	virtual void loadResources();
 

@@ -1,8 +1,5 @@
 #include "Symbol.h"
 #include "ModelObj.h"
-#include "Model.h"
-#include "ParametricEquations.h"
-#include "ModelParametric.h"
 
 namespace libsketch
 {
@@ -40,29 +37,35 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	return d2d::Rect(100, 100);
 }
 
+void Symbol::SetModel(z3d::IModel* model)
+{
+	if (m_model != model)
+	{
+		if (m_model) {
+			m_model->release();
+		}
+		m_model = model;
+		m_model->retain();
+	}
+}
+
 void Symbol::loadResources()
 {
- 	//if (m_model) {
- 	//	delete m_model;
- 	//}
+ 	if (m_model) {
+ 		delete m_model;
+ 	}
  
-  //	Json::Value value;
-  //	Json::Reader reader;
-  //	std::locale::global(std::locale(""));
-  //	std::ifstream fin(m_filepath.fn_str());
-  //	std::locale::global(std::locale("C"));
-  //	reader.parse(fin, value);
-  //	fin.close();
-  //
-  //	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
-  //	std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
-  //	m_model = new z3d::ModelObj(filepath.c_str(), 0.05f);
-
-	////////////////////////
-
-  	z3d::ISurface* surface = new z3d::MobiusStrip(0.8f);
-  //	z3d::ISurface* surface = new z3d::Cone(1, 1);
-  	m_model = new z3d::ModelParametric(surface);
+  	Json::Value value;
+  	Json::Reader reader;
+  	std::locale::global(std::locale(""));
+  	std::ifstream fin(m_filepath.fn_str());
+  	std::locale::global(std::locale("C"));
+  	reader.parse(fin, value);
+  	fin.close();
+  
+  	wxString dir = d2d::FilenameTools::getFileDir(m_filepath);
+  	std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
+  	m_model = new z3d::ModelObj(filepath.c_str(), 0.05f);
 }
 
 }

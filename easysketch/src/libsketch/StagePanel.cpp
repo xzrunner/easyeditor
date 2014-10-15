@@ -10,7 +10,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(parent)
 {
-	m_canvas = new StageCanvas(this);
+	m_canvas = new StageCanvas(this, library);
+	library->setCanvas(m_canvas);
+
 	m_editOP = new RotateOP(this);
 
 	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
@@ -49,8 +51,13 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
+	// todo 
+	m_sprites.clear();
+
 	sprite->retain();
 	m_sprites.push_back(sprite);
+
+	m_canvas->Refresh();
 }
 
 void StagePanel::clearSprites()

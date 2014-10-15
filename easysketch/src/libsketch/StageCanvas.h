@@ -11,13 +11,18 @@ class StagePanel;
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* stage);
+	StageCanvas(StagePanel* stage, d2d::LibraryPanel* library);
 
 protected:
+	virtual void initGL();
 	virtual void onDraw();
 
 private:
+	void InitDefaultSymbol();
+
+private:
 	StagePanel* m_stage;
+	d2d::LibraryPanel* m_library;
 
 }; // StageCanvas
 

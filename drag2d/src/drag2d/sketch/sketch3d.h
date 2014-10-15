@@ -2,6 +2,7 @@
 #define _DRAG2D_SKETCH3D_H_
 
 #include "Vector.h"
+#include "common/Object.h"
 
 #include <vector>
 
@@ -32,7 +33,7 @@ struct Mesh
 	Material material;
 };
 
-class IModel
+class IModel : public d2d::Object
 {
 public:
 	virtual const std::vector<Mesh>& GetAllMeshes() const = 0;
