@@ -28,10 +28,17 @@ public:
 	virtual void SetModelView(const Quaternion& ori);
 	virtual void SetProjection(int width, int height);
 
-	void Draw(const z3d::IModel* model);
+	void Draw(const z3d::IModel* model, const vec3& pos);
 
 protected:
 	virtual void BindAttrib(GLuint prog);
+
+private:
+	struct Node
+	{
+		const z3d::IModel* model;
+		vec3 pos;
+	};
 
 private:
 	GLuint m_model_view, m_projection;
@@ -46,7 +53,8 @@ private:
 	mat4 m_translation;
 	mat4 m_mat_modelview, m_mat_projection;
 
-	std::vector<const z3d::IModel*> m_models;
+//	std::vector<const z3d::IModel*> m_models;
+	std::vector<Node> m_render_list;
 
 }; // LightingShader
 

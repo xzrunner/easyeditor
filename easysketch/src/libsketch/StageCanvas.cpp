@@ -53,7 +53,7 @@ void StageCanvas::InitDefaultSymbol()
 	wxString filepath = FILE_TAG;
 	filepath += ".json";
 
-	surface = new z3d::Cone(2, 1.5f);
+	surface = new z3d::Cone(2, 1);
 	model = new z3d::ModelParametric(surface);
 	symbol = new libsketch::Symbol();
 	symbol->setName("Cone");
@@ -61,7 +61,7 @@ void StageCanvas::InitDefaultSymbol()
 	symbol->SetFilepath(filepath);
 	m_library->AddSymbol(symbol);
 
-	surface = new z3d::Sphere(1.5f);
+	surface = new z3d::Sphere(1);
 	model = new z3d::ModelParametric(surface);
 	symbol = new libsketch::Symbol();
 	symbol->setName("Sphere");
@@ -69,7 +69,7 @@ void StageCanvas::InitDefaultSymbol()
 	symbol->SetFilepath(filepath);
 	m_library->AddSymbol(symbol);
 
-	surface = new z3d::Torus(1.2f, 0.8f);
+	surface = new z3d::Torus(0.5f, 0.2f);
 	model = new z3d::ModelParametric(surface);
 	symbol = new libsketch::Symbol();
 	symbol->setName("Torus");
@@ -77,7 +77,7 @@ void StageCanvas::InitDefaultSymbol()
 	symbol->SetFilepath(filepath);
 	m_library->AddSymbol(symbol);
 
-	surface = new z3d::TrefoilKnot(2);
+	surface = new z3d::TrefoilKnot(1);
 	model = new z3d::ModelParametric(surface);
 	symbol = new libsketch::Symbol();
 	symbol->setName("TrefoilKnot");
@@ -85,7 +85,7 @@ void StageCanvas::InitDefaultSymbol()
 	symbol->SetFilepath(filepath);
 	m_library->AddSymbol(symbol);
 
-	surface = new z3d::MobiusStrip(1.2f);
+	surface = new z3d::MobiusStrip(0.6f);
 	model = new z3d::ModelParametric(surface);
 	symbol = new libsketch::Symbol();
 	symbol->setName("MobiusStrip");
@@ -93,7 +93,7 @@ void StageCanvas::InitDefaultSymbol()
 	symbol->SetFilepath(filepath);
 	m_library->AddSymbol(symbol);
 
-	surface = new z3d::KleinBottle(0.2f);
+	surface = new z3d::KleinBottle(0.1f);
 	model = new z3d::ModelParametric(surface);
 	symbol = new libsketch::Symbol();
 	symbol->setName("KleinBottle");

@@ -40,7 +40,7 @@ public:
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 	// todo
-	void Draw(const z3d::IModel* model);
+	void Draw(const z3d::IModel* model, const vec3& pos);
 
 	int GetVersion() const;
 

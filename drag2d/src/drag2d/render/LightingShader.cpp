@@ -90,9 +90,9 @@ void LightingShader::Load()
 // 	glUniform1f(m_shininess, 50);
 
 	// Set up transforms.
-	m_translation = mat4::Translate(0, 0, -7);
+	m_translation = mat4::Translate(0, 0, -1005);
 
-	m_mat_modelview = mat4::Translate(0, 0, -7);
+	m_mat_modelview = mat4::Translate(0, 0, -1005);
 }
 
 void LightingShader::Unload()
@@ -140,7 +140,7 @@ void LightingShader::BindAttrib(GLuint prog)
 
 void LightingShader::Commit()
 {
-	if (m_models.empty()) {
+	if (m_render_list.empty()) {
 		return;
 	}
 
@@ -148,8 +148,8 @@ void LightingShader::Commit()
 	vec4 lightPosition(0.25, 0.25, 1, 0);
 	glUniform3fv(m_light_position, 1, lightPosition.Pointer());
 
-	// Set the model-view transform.
-	glUniformMatrix4fv(m_model_view, 1, 0, m_mat_modelview.Pointer());
+	//// Set the model-view transform.
+	//glUniformMatrix4fv(m_model_view, 1, 0, m_mat_modelview.Pointer());
 
 	// Set the projection transform.
 	glUniformMatrix4fv(m_projection, 1, 0, m_mat_projection.Pointer());
@@ -159,9 +159,17 @@ void LightingShader::Commit()
 	mat3 normalMatrix = m_mat_modelview.ToMat3();
 	glUniformMatrix3fv(m_normal_matrix, 1, 0, normalMatrix.Pointer());
 
-	for (int i = 0, n = m_models.size(); i < n; ++i) {
-		const std::vector<z3d::Mesh>& meshes = m_models[i]->GetAllMeshes();
-		for (int j = 0, m = meshes.size(); j < m; ++j) {
+	for (int i = 0, n = m_render_list.size(); i < n; ++i) 
+	{
+		const Node& node = m_render_list[i];
+
+		// Set the model-view transform.
+		mat4 model_view = m_mat_modelview * mat4::Translate(node.pos.x, node.pos.y, node.pos.z);
+		glUniformMatrix4fv(m_model_view, 1, 0, model_view.Pointer());
+
+		const std::vector<z3d::Mesh>& meshes = node.model->GetAllMeshes();
+		for (int j = 0, m = meshes.size(); j < m; ++j) 
+		{
 			const z3d::Mesh& mesh = meshes[j];
 
 //  			glVertexAttrib4f(
@@ -199,7 +207,7 @@ void LightingShader::Commit()
 		}
 	}
 
-	m_models.clear();
+	m_render_list.clear();
 }
 
 void LightingShader::SetModelView(const Quaternion& ori)
@@ -210,14 +218,20 @@ void LightingShader::SetModelView(const Quaternion& ori)
 
 void LightingShader::SetProjection(int width, int height)
 {
-	float h = 4.0f * height / width;
-	h = 3;
-	m_mat_projection = mat4::Frustum(-2, 2, -h / 2, h / 2, 5, 12);
+// 	float h = 4.0f * height / width;
+// 	h = 3;
+// 	m_mat_projection = mat4::Frustum(-2, 2, -h / 2, h / 2, 5, 12);
+
+	float hh = 1.0f * height / width;
+	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 1000, 1010);
 }
 
-void LightingShader::Draw(const z3d::IModel* model)
+void LightingShader::Draw(const z3d::IModel* model, const vec3& pos)
 {
-	m_models.push_back(model);
+	Node n;
+	n.model = model;
+	n.pos = pos;
+	m_render_list.push_back(n);
 }
 
 }

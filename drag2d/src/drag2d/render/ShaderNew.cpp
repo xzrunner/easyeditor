@@ -122,10 +122,10 @@ void ShaderNew::Draw(const Vector vertices[4], const Vector texcoords[4], int te
 	shader->Draw(vertices, texcoords, texid);
 }
 
-void ShaderNew::Draw(const z3d::IModel* model)
+void ShaderNew::Draw(const z3d::IModel* model, const vec3& pos)
 {
 	LightingShader* shader = static_cast<LightingShader*>(m_impl->m_light_shader);
-	shader->Draw(model);	
+	shader->Draw(model, pos);
 }
 
 int ShaderNew::GetVersion() const 

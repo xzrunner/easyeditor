@@ -29,7 +29,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 {
 	d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
 	shader->lighting();
-	shader->Draw(m_model);
+	shader->Draw(m_model, vec3(0, 0, 0));
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

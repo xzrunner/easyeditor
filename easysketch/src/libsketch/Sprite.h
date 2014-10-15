@@ -33,6 +33,8 @@ public:
 private:
 	Symbol* m_symbol;
 
+	vec3 m_pos3;
+
 }; // Sprite
 
 }
