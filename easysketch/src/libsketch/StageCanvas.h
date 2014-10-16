@@ -26,6 +26,9 @@ private:
 
 	void LoadSymbolToLib(e3d::ISurface* surface, const char* name);
 
+	void DrawBackground() const;
+	void DrawSprites() const;
+
 private:
 	StagePanel* m_stage;
 	d2d::LibraryPanel* m_library;

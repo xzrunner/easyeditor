@@ -37,19 +37,8 @@ void StageCanvas::onSize(int w, int h)
 
 void StageCanvas::onDraw()
 {
-	e3d::DrawCross(vec3(0, 0, 0), vec3(10, 10, 10), d2d::LIGHT_RED);
-
-  	std::vector<d2d::ISprite*> sprites;
-  	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-  
-  	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-  	{
-  		d2d::ISprite* sprite = sprites[i];
-  		if (!sprite->visiable)
-  			continue;
-  		d2d::SpriteDraw::drawSprite(sprite);
-  	}
- 
+	DrawBackground();
+	DrawSprites();
  	m_editPanel->drawEditTemp();
 }
 
@@ -91,6 +80,27 @@ void StageCanvas::LoadSymbolToLib(e3d::ISurface* surface, const char* name)
 	symbol->SetFilepath(filepath);
 
 	m_library->AddSymbol(symbol);
+}
+
+void StageCanvas::DrawBackground() const
+{
+	e3d::DrawCross(vec3(0, 0, 0), vec3(10, 10, 10), d2d::LIGHT_RED);
+//  	e3d::DrawGrids(vec3(-10, -10, 0), vec3(10, 10, 0), vec3(0.5f, 0.5f, FLT_MAX), 
+//  		d2d::LIGHT_RED);
+}
+
+void StageCanvas::DrawSprites() const
+{
+	std::vector<d2d::ISprite*> sprites;
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+
+	for (size_t i = 0, n = sprites.size(); i < n; ++i)
+	{
+		d2d::ISprite* sprite = sprites[i];
+		if (!sprite->visiable)
+			continue;
+		d2d::SpriteDraw::drawSprite(sprite);
+	}
 }
 
 }
