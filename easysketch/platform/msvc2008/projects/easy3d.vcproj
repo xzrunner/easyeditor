@@ -173,11 +173,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easy3d\PrimitiveDraw.cpp"
+				RelativePath="..\..\..\src\easy3d\primitive_draw.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easy3d\PrimitiveDraw.h"
+				RelativePath="..\..\..\src\easy3d\primitive_draw.h"
 				>
 			</File>
 			<File

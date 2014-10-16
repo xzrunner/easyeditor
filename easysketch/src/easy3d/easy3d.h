@@ -9,7 +9,7 @@
 
 #include "ShaderMgr.h"
 #include "StageCanvas.h"
-#include "PrimitiveDraw.h"
+#include "primitive_draw.h"
 
 #include "ViewFrustum.h"
 

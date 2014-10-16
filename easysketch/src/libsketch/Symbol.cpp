@@ -30,9 +30,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 {
 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
 
-	shader->Shape();
-	shader->SetShapeColor(d2d::LIGHT_GREEN);
-	e3d::DrawCube(m_aabb);
+	e3d::DrawCube(m_aabb, d2d::LIGHT_GREEN);
 
 	shader->Lighting();
 	shader->Draw(m_model, vec3(0, 0, 0));

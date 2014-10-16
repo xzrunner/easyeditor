@@ -7,8 +7,6 @@
 #include "Symbol.h"
 #include "config.h"
 
-#include "ViewFrustum.h"
-
 namespace libsketch
 {
 
@@ -39,6 +37,8 @@ void StageCanvas::onSize(int w, int h)
 
 void StageCanvas::onDraw()
 {
+	e3d::DrawCross(vec3(0, 0, 0), vec3(10, 10, 10), d2d::LIGHT_RED);
+
   	std::vector<d2d::ISprite*> sprites;
   	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
   
