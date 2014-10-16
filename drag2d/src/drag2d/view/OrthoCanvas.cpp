@@ -2,7 +2,7 @@
 #include "Camera.h"
 
 #include "view/EditPanel.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 #include <gl/glu.h>
 
@@ -50,6 +50,7 @@ void OrthoCanvas::onSize(int w, int h)
  	m_screen.SetCamera();
 
 	m_camera->UpdateModelView();
-	ShaderNew::Instance()->SetProjection(w, h);
+
+	ShaderMgr::Instance()->SetProjection(w, h);
 }
 } // d2d

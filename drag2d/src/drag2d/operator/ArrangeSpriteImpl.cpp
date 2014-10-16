@@ -20,7 +20,7 @@
 #include "render/DynamicTexAndFont.h"
 
 // for debug
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 namespace d2d
 {
@@ -110,10 +110,10 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 
 		// for debug
 	case 'O':
-		ShaderNew::Instance()->SetBufferData(true);
+		ShaderMgr::Instance()->SetBufferData(true);
 		break;
 	case 'C':
-		ShaderNew::Instance()->SetBufferData(false);
+		ShaderMgr::Instance()->SetBufferData(false);
 		break;
 	}
 }

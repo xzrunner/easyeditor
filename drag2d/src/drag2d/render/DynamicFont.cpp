@@ -1,7 +1,7 @@
 #include "DynamicFont.h"
 
 #include "dataset/TPNode.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 #include <opengl/opengl.h>
 
@@ -47,8 +47,8 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
 
  	GlyphLayout layout;
  	uint32_t* buffer = GenFTChar(character, font_size, color, is_edge, layout);
- 	int w = layout.sizer.width;
- 	int h = layout.sizer.height;
+ 	float w = layout.sizer.width;
+ 	float h = layout.sizer.height;
  	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
 	if (!n) {
 		Clear();
@@ -75,7 +75,7 @@ const Glyph* DynamicFont::LookUp(int character, int font_size, int color, int is
 		}
 
 		// todo
-		//glBindTexture(ShaderNew::Instance()->GetTexID());
+		//glBindTexture(ShaderMgr::Instance()->GetTexID());
 
 		glyph->is_used = true;
 		glyph->bearing_x = layout.bearingX;
@@ -97,7 +97,7 @@ void DynamicFont::LoadFontFile(const char* filename)
 
 void DynamicFont::ReloadPixels()
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 

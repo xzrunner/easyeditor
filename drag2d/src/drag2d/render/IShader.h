@@ -20,7 +20,6 @@ public:
 	virtual void Bind() = 0;
 	virtual void Unbind() = 0;
 
-	virtual void SetModelView(const Vector& offset, float scale) = 0;
 	virtual void SetProjection(int width, int height) = 0;
 
 	virtual void Commit() = 0;

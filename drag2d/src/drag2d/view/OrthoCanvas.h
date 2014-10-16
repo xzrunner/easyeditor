@@ -11,7 +11,7 @@ namespace d2d
 	public:
 		OrthoCanvas(EditPanel* editPanel);
 
-	private:
+	protected:
 		virtual void onSize(int w, int h);
 
 	}; // OrthoCanvas

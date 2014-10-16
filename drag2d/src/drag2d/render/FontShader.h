@@ -17,7 +17,6 @@ public:
 	virtual void Bind() {}
 	virtual void Unbind() {}
 
-	virtual void SetModelView(const Vector& offset, float scale) {}
 	virtual void SetProjection(int width, int height) {}
 
 	virtual void Commit() {}

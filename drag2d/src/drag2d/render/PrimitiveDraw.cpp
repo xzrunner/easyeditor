@@ -10,7 +10,7 @@
 #include "common/Rect.h"
 #include "common/Color.h"
 #include "common/Math.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 namespace d2d
 {
@@ -280,7 +280,7 @@ void PrimitiveDraw::text(const char* text)
 {
 	ISymbol* s = SymbolMgr::Instance()->fetchSymbol(Font::DEFAULT_FONTFILE);
 	if (s) {
-		ShaderNew::Instance()->null();
+		ShaderMgr::Instance()->null();
 		FontSymbol* fs = static_cast<FontSymbol*>(s);
 		fs->print(0, 0, text);
 	}

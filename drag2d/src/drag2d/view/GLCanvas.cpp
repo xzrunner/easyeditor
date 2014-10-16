@@ -2,8 +2,9 @@
 #include "Camera.h"
 
 #include "view/EditPanel.h"
-#include "render/ShaderNew.h"
 #include "render/RenderList.h"
+#include "render/RenderContext.h"
+#include "render/ShaderMgrBase.h"
 
 #include <wx/wx.h>
 #include <gl/glu.h>
@@ -71,7 +72,9 @@ void GLCanvas::initGL()
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_TEXTURE_2D);
 
-	ShaderNew::Instance()->reload();
+	if (RenderContext::SHADER_MGR) {
+		RenderContext::SHADER_MGR->reload();
+	}
 }
 
 void GLCanvas::onSize(wxSizeEvent& event)
@@ -99,7 +102,9 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 
 	onDraw();
 
-	ShaderNew::Instance()->Flush();
+	if (RenderContext::SHADER_MGR) {
+		RenderContext::SHADER_MGR->Flush();
+	}
 
 	glFlush();
 	SwapBuffers();

@@ -38,6 +38,9 @@ namespace d2d
 		const wxString& getFilepath() const { 
 			return m_filepath; 
 		}
+		void SetFilepath(const wxString& filepath) {
+			m_filepath = filepath;
+		}
 
 	public:
 		std::string name;

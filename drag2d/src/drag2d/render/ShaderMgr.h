@@ -1,5 +1,9 @@
-#ifndef D2D_SHADER_NEW_H
-#define D2D_SHADER_NEW_H
+#ifndef _D2D_SHADER_MGR_H_
+#define _D2D_SHADER_MGR_H_
+
+#include "ShaderMgrBase.h"
+
+#include "common/Vector.h"
 
 namespace d2d
 {
@@ -7,11 +11,15 @@ namespace d2d
 struct Colorf;
 class Vector;
 class ShaderImpl;
+class IShader;
+class ShapeShader;
+class SpriteShader;
+class FontShader;
 
-class ShaderNew
+class ShaderMgr : public ShaderMgrBase
 {
 public:
-	static ShaderNew* Instance();
+	static ShaderMgr* Instance();
 
 	void SetSpriteColor(const Colorf& multi, const Colorf& add);
 	void SetShapeColor(const Colorf& col);
@@ -19,10 +27,6 @@ public:
 	void sprite();
 	void shape();
 	void null();
-
-	void release();
-
-	void reload();
 
 	int GetTexID() const;
 	int GetFboID() const;
@@ -40,25 +44,27 @@ public:
 
 	void SetModelView(const Vector& offset, float scale);
 	void GetModelView(Vector& offset, float& scale);
-	void SetProjection(int width, int height);
-
-	// todo
-	void Commit();
-
-	void Flush();
 
 private:
-	ShaderNew();
-	~ShaderNew();
+	ShaderMgr();
+	~ShaderMgr();
 
 private:
-	static ShaderNew* m_instance;
+	static ShaderMgr* m_instance;
 
 private:
-	ShaderImpl* m_impl;
+	ShapeShader* m_shape_shader;
+	SpriteShader* m_sprite_shader;
+	FontShader* m_font_shader;
 
-}; // ShaderNew
+	int m_version;
+
+	// cache model view
+	Vector m_offset;
+	float m_scale;
+
+}; // ShaderMgr
 
 }
 
-#endif // D2D_SHADER_NEW_H
+#endif // _D2D_SHADER_MGR_H_

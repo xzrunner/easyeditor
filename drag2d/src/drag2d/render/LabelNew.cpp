@@ -5,7 +5,7 @@
 #include "common/color_trans.h"
 #include "dataset/text_util.h"
 #include "dataset/TPNode.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 //#define LABEL_USE_CACHE
 
@@ -192,7 +192,7 @@ void LabelNew::DrawLines(const Vector& pos,
 			glyph.texcoords[2].set(txmax, tymax);
 			glyph.texcoords[3].set(txmin, tymax);
 
-// 			ShaderNew* shader = ShaderNew::Instance();
+// 			ShaderMgr* shader = ShaderMgr::Instance();
 // 			shader->sprite();
 // 			shader->Draw(vertices, texcoords, tex_id);
 			layout.glyphs.push_back(glyph);
@@ -205,7 +205,7 @@ void LabelNew::DrawLines(const Vector& pos,
 
 void LabelNew::Draw(const LabelLayout::Layout* layout)
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 
 #ifdef LABEL_USE_CACHE
 	if (shader->IsOpenBufferData()) {

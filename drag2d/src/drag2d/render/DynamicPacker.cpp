@@ -1,5 +1,5 @@
 #include "DynamicPacker.h"
-#include "ShaderNew.h"
+#include "ShaderMgr.h"
 
 #include "common/Exception.h"
 #include "common/Vector.h"
@@ -46,7 +46,7 @@ void DynamicPacker::ReloadTexture()
 
 void DynamicPacker::DebugDrawStatic() const
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(0);
 	shader->sprite();
 
@@ -64,7 +64,7 @@ void DynamicPacker::DebugDrawStatic() const
 	vb[12] = 1, vb[13] = 0;
 	vb[14] = 1, vb[15] = 0;
 
-	ShaderNew::Instance()->Draw(vb, m_tex);
+	ShaderMgr::Instance()->Draw(vb, m_tex);
 }
 
 void DynamicPacker::DebugDraw() const
@@ -77,7 +77,7 @@ void DynamicPacker::DebugDraw() const
 	vertices[2].set(EDGE, EDGE);
 	vertices[3].set(EDGE, 0);
 
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(0);
 	shader->sprite();
 
@@ -95,7 +95,7 @@ void DynamicPacker::DebugDraw() const
 	vb[12] = vertices[3].x, vb[13] = vertices[3].y;
 	vb[14] = 1, vb[15] = 0;
 
-	ShaderNew::Instance()->Draw(vb, m_tex);
+	ShaderMgr::Instance()->Draw(vb, m_tex);
 
 	PrimitiveDraw::rect(Vector(0, 0), Vector(EDGE, EDGE), LIGHT_RED_THIN_LINE);
 }
@@ -128,7 +128,7 @@ void DynamicPacker::InitTexture(int tex_id)
 
 void DynamicPacker::InitFBO(int fbo_id)
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 
 	if (fbo_id == 0) {
 		glGenFramebuffersEXT(1, (GLuint*)&fbo_id);
@@ -142,7 +142,7 @@ void DynamicPacker::InitFBO(int fbo_id)
 		throw Exception("Create FBO error: %d", status);
 	}
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderNew::Instance()->GetFboID());
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
 
 	m_fbo = fbo_id;
 }
@@ -161,7 +161,7 @@ void DynamicPacker::ClearTexture()
 	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	glBindTexture(GL_TEXTURE_2D, shader->GetTexID());
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, shader->GetFboID());
 }

@@ -63,7 +63,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::ISprite* sprite) const
 {
  	if (m_shape) {
- 		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
+ 		d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
  		shader->sprite();
 		shader->SetSpriteColor(mul, add);
  

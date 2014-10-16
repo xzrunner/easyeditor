@@ -4,7 +4,7 @@
 #include "common/Config.h"
 #include "dataset/TPNode.h"
 #include "dataset/ISymbol.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 #include "render/SpriteDraw.h"
 
 #include <opengl/opengl.h>
@@ -206,7 +206,7 @@ const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, const wxString
 		}
 
 		// todo
-		//glBindTexture(ShaderNew::Instance()->GetTexID());
+		//glBindTexture(ShaderMgr::Instance()->GetTexID());
 
 		glyph->is_used = true;
 		glyph->bearing_x = layout.bearingX;
@@ -335,7 +335,7 @@ void DynamicTexAndFont::DrawRegion(const Rect& vertex, const Rect& texcoords, in
 		vb[14] = texcoords.xMin;
 		vb[15] = texcoords.yMax;
 	}
-	ShaderNew::Instance()->Draw(vb, texid);
+	ShaderMgr::Instance()->Draw(vb, texid);
 }
 
 void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
@@ -579,7 +579,7 @@ uint32_t* DynamicTexAndFont::GenWXChar(const wxString& uft8, int font_size, int 
 
 void DynamicTexAndFont::BeginDraw()
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 
 	int viewport[4];
 	glGetIntegerv(GL_VIEWPORT, viewport);
@@ -597,7 +597,7 @@ void DynamicTexAndFont::BeginDraw()
 
 void DynamicTexAndFont::EndDraw()
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	// set fbo to force flush
 	// todo dtexÁ¬Ðøinsert»áÂý
 	shader->SetFBO(0);

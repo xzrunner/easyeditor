@@ -2,7 +2,7 @@
 
 #include "interfaces.h"
 
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 namespace d2d
 {
@@ -46,8 +46,8 @@ Vector Camera::transPosScreenToProject(int x, int y, int width, int height) cons
 Vector Camera::transPosProjectToScreen(const Vector& proj, int width, int height) const
 {
 	Vector scr;
-	int xView = (proj.x - m_center.x) / m_scale + (width >> 1),
-		yView = (proj.y - m_center.y) / m_scale + (height >> 1);
+	float xView = (proj.x - m_center.x) / m_scale + (width >> 1),
+		  yView = (proj.y - m_center.y) / m_scale + (height >> 1);
 	scr.x = xView;
 	scr.y = height - yView;
 	return scr;
@@ -55,7 +55,7 @@ Vector Camera::transPosProjectToScreen(const Vector& proj, int width, int height
 
 void Camera::UpdateModelView() const
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetModelView(-m_center, 1/m_scale);
 }
 

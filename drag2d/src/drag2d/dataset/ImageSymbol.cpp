@@ -5,7 +5,7 @@
 #include "SpriteTools.h"
 
 #include "render/Shader.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 #include "render/PrimitiveDraw.h"
 
 namespace d2d
@@ -46,7 +46,7 @@ void ImageSymbol::draw(const Matrix& mt,
 					   const Colorf& add,
 					   const ISprite* sprite/* = NULL*/) const
 {
-	ShaderNew* shader = ShaderNew::Instance();
+	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetSpriteColor(mul, add);
 	m_image->draw(mt, m_region);
 

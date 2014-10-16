@@ -52,7 +52,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	}
  	if (n) 
  	{
-		d2d::ShaderNew* shader = d2d::ShaderNew::Instance();
+		d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 		if (shader->GetVersion() != m_render_version)
 		{
 			m_render_cache_open = false;

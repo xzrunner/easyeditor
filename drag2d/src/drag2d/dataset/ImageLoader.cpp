@@ -9,7 +9,7 @@
 #include <fstream>
 
 #include "common/tools.h"
-#include "render/ShaderNew.h"
+#include "render/ShaderMgr.h"
 
 //#define USE_SOIL
 
@@ -161,7 +161,7 @@ void ImageLoader::loadTexture(unsigned int& texture, uint8_t* pixel, int width, 
 			pixel);
 	}
 
-	glBindTexture(GL_TEXTURE_2D, ShaderNew::Instance()->GetTexID());
+	glBindTexture(GL_TEXTURE_2D, ShaderMgr::Instance()->GetTexID());
 #endif // USE_SOIL
 }
 

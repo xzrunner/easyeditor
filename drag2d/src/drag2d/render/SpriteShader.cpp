@@ -105,13 +105,13 @@ void SpriteShader::Unload()
 
 void SpriteShader::Bind()
 {
+	glUseProgram(m_prog);
+
 	glEnable(GL_BLEND);
 
 	// todo 源混合因子ejoy2d用的GL_ONE
 	//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glUseProgram(m_prog);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_index_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
@@ -175,9 +175,6 @@ void SpriteShader::Commit()
 		last_count = m_count;
 		glBufferData(GL_ARRAY_BUFFER, m_count * SPRITE_FLOAT_NUM * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
 	}
-
-	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, SPRITE_FLOAT_NUM, BUFFER_OFFSET(8));
 
 	if (!m_open_buffer_data) {
 		glDrawElements(GL_TRIANGLES, 6 * last_count, GL_UNSIGNED_SHORT, 0);
@@ -306,8 +303,9 @@ void SpriteShader::InitBuffers()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, idxs, GL_STATIC_DRAW);
 	delete[] idxs;
 
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 	glGenBuffers(1, &m_vertex_buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
 }
 
 void SpriteShader::CopyVertex(const float vb[16])
