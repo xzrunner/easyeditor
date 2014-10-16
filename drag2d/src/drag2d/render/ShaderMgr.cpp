@@ -47,10 +47,7 @@ void ShaderMgr::SetSpriteColor(const Colorf& multi, const Colorf& add)
 
 void ShaderMgr::SetShapeColor(const Colorf& col)
 {
-//	if (m_shape_shader == m_curr_shader) {
-	 	ShapeShader* shader = static_cast<ShapeShader*>(m_shape_shader);
-	 	shader->SetColor(col);
-//	}
+	 m_shape_shader->SetColor(col);
 }
 
 void ShaderMgr::sprite()
@@ -61,7 +58,7 @@ void ShaderMgr::sprite()
 void ShaderMgr::shape()
 {
 	Switch(m_shape_shader);
-}
+ }
 
 void ShaderMgr::null()
 {

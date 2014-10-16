@@ -5,7 +5,7 @@ namespace e3d
 {
 
 StageCanvas::StageCanvas(d2d::EditPanel* editPanel)
-	: GLCanvas(editPanel)
+	: d2d::GLCanvas(editPanel)
 {
 }
 

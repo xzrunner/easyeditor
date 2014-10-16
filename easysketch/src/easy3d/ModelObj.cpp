@@ -134,6 +134,7 @@ void ModelObj::InitAllMeshes()
 				vertices.size() * sizeof(vertices[0]),
 				&vertices[0],
 				GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 			// Create a new VBO for the indices if needed.
 			int index_count = mesh_data.GetTriangleIndexCount();
@@ -148,6 +149,7 @@ void ModelObj::InitAllMeshes()
 				index_count * sizeof(GLushort),
 				&indices[0],
 				GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
  			mesh.index_buffer = index_buffer;
  			mesh.vertex_buffer = vertex_buffer;

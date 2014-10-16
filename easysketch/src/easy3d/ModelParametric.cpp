@@ -24,6 +24,7 @@ ModelParametric::ModelParametric(const ISurface* surface, Cube& aabb)
 		vertices.size() * sizeof(vertices[0]),
 		&vertices[0],
 		GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	// Create a new VBO for the indices if needed.
 	int index_count = surface->GetTriangleIndexCount();
@@ -36,6 +37,7 @@ ModelParametric::ModelParametric(const ISurface* surface, Cube& aabb)
 		index_count * sizeof(GLushort),
 		&indices[0],
 		GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	mesh.index_count = surface->GetTriangleIndexCount();
 
@@ -58,37 +60,5 @@ ModelParametric::ModelParametric(const ISurface* surface, Cube& aabb)
 		i += step;
 	}
 }
-
-// ModelParametric::ModelParametric(const ISurface* surface)
-// {
-// 	Mesh mesh;
-// 
-// 	float vertices[] = {
-// 		0, 0, -0.1f, 0, 0, 1,
-// 		100, 0, 0.5f,  0, 0, 1,
-// 		0, 100, -0.9f, 0, 0, 1,
-// 	};
-// 	glGenBuffers(1, &mesh.vertex_buffer);
-// 	glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
-// 	glBufferData(GL_ARRAY_BUFFER,
-// 				18 * sizeof(float),
-// 				&vertices[0],
-// 				GL_STATIC_DRAW);
-// 
-// 	GLushort indices[] = {
-// 		0, 1, 2
-// 	};
-// 	glGenBuffers(1, &mesh.index_buffer);
-// 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.index_buffer);
-// 	glBufferData(
-// 		GL_ELEMENT_ARRAY_BUFFER,
-// 		3 * sizeof(GLushort),
-// 		&indices[0],
-// 		GL_STATIC_DRAW);
-// 
-// 	mesh.index_count = 1;
-// 
-// 	m_meshes.push_back(mesh);
-// }
 
 }

@@ -173,11 +173,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easy3d\PrimitiveDraw.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\PrimitiveDraw.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easy3d\ShaderMgr.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\easy3d\ShaderMgr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\ShapeShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\ShapeShader.h"
 				>
 			</File>
 		</Filter>

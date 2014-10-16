@@ -1,5 +1,6 @@
 #include "ShaderMgr.h"
 #include "LightingShader.h"
+#include "ShapeShader.h"
 
 namespace e3d
 {
@@ -20,6 +21,9 @@ ShaderMgr::ShaderMgr()
 {
 	m_light_shader = new LightingShader;
 	m_shaders.push_back(m_light_shader);
+
+	m_shape_shader = new ShapeShader;
+	m_shaders.push_back(m_shape_shader);
 }
 
 ShaderMgr::~ShaderMgr()
@@ -28,7 +32,12 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::Lighting()
 {
-	Switch(m_light_shader);	
+	Switch(m_light_shader);
+}
+
+void ShaderMgr::Shape()
+{
+	Switch(m_shape_shader);
 }
 
 void ShaderMgr::Draw(const IModel* model, const vec3& pos)
@@ -39,6 +48,12 @@ void ShaderMgr::Draw(const IModel* model, const vec3& pos)
 void ShaderMgr::SetModelView(const Quaternion& ori)
 {
 	m_light_shader->SetModelView(ori);
+	m_shape_shader->SetModelView(ori);
+}
+
+void ShaderMgr::SetShapeColor(const d2d::Colorf& col)
+{
+	m_shape_shader->SetColor(col);
 }
 
 }

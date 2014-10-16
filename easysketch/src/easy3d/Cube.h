@@ -27,6 +27,8 @@ public:
 		if (pos.z > m_zmax) m_zmax = pos.z;
 	}
 
+	void GetSize(vec3& min, vec3& max) const;
+
 private:
 	float m_xmin, m_xmax;
 	float m_ymin, m_ymax;

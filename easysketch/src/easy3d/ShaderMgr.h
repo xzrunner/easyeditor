@@ -10,6 +10,7 @@ namespace e3d
 
 class IModel;
 class LightingShader;
+class ShapeShader;
 
 class ShaderMgr : public d2d::ShaderMgrBase
 {
@@ -17,10 +18,13 @@ public:
 	static ShaderMgr* Instance();
 
 	void Lighting();
+	void Shape();
 
 	void Draw(const IModel* model, const vec3& pos);
 
 	void SetModelView(const Quaternion& ori);
+
+	void SetShapeColor(const d2d::Colorf& col);
 
 private:
 	ShaderMgr();
@@ -31,6 +35,7 @@ private:
 
 private:
 	LightingShader* m_light_shader;
+	ShapeShader* m_shape_shader;
 
 }; // ShaderMgr
 
