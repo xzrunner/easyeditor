@@ -228,6 +228,14 @@
 				RelativePath="..\..\..\src\libsketch\RotateOP.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\SelectOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\SelectOP.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
