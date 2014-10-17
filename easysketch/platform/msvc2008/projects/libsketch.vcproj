@@ -221,11 +221,19 @@
 			Name="editop"
 			>
 			<File
-				RelativePath="..\..\..\src\libsketch\RotateOP.cpp"
+				RelativePath="..\..\..\src\libsketch\ArrangeOP.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libsketch\RotateOP.h"
+				RelativePath="..\..\..\src\libsketch\ArrangeOP.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\RotateCameraOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libsketch\RotateCameraOP.h"
 				>
 			</File>
 			<File
@@ -236,6 +244,30 @@
 				RelativePath="..\..\..\src\libsketch\SelectOP.h"
 				>
 			</File>
+			<Filter
+				Name="arrange_state"
+				>
+				<File
+					RelativePath="..\..\..\src\libsketch\IArrangeState.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsketch\RotateCameraState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsketch\RotateCameraState.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsketch\RotateSpriteState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libsketch\RotateSpriteState.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

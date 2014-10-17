@@ -22,6 +22,8 @@ private:
 private:
 	StagePanel* m_stage;
 
+	d2d::SpriteSelection* m_selection;
+
 }; // SelectOP
 
 }

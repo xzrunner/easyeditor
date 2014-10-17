@@ -18,9 +18,15 @@ public:
 
 	mat4 GetMatrix() const;
 
+	void SetScreenSize(int width, int height);
+
+	vec3 MapToSphere(ivec2 touchpoint) const;
+
 private:
 	mat4 m_translation;
 	mat4 m_rotation;
+
+	int m_width, m_height;
 
 }; // Camera
 
