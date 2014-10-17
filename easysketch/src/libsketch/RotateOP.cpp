@@ -28,8 +28,11 @@ bool RotateOP::onMouseDrag(int x, int y)
 	Quaternion delta = Quaternion::CreateFromVectors(start, end);
 	m_ori = delta.Rotated(m_pre_ori);
 
-	e3d::ShaderMgr::Instance()->SetModelView(m_ori);
-	
+	e3d::StageCanvas* canvas = static_cast<e3d::StageCanvas*>(m_editPanel->getCanvas());
+	e3d::Camera& cam = canvas->GetCamera3();
+	cam.SetRotate(m_ori.ToMatrix());
+	e3d::ShaderMgr::Instance()->SetModelView(cam.GetMatrix());
+
 	m_editPanel->Refresh();
 
 	return false;

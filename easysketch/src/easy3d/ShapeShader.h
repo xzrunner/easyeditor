@@ -23,7 +23,7 @@ public:
 
 	virtual void Commit();
 
-	void SetModelView(const Quaternion& ori);
+	void SetModelView(const mat4& mat);
 
 	void SetColor(const d2d::Colorf& col);
 

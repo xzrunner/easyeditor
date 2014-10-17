@@ -18,4 +18,9 @@ void StageCanvas::onSize(int w, int h)
 	ShaderMgr::Instance()->SetProjection(w, h);
 }
 
+void StageCanvas::SetCameraRotation(const mat4& rot) 
+{
+	m_camera3.SetRotate(rot);
+}
+
 }

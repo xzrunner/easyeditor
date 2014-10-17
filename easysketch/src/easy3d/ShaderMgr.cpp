@@ -45,10 +45,10 @@ void ShaderMgr::Draw(const IModel* model, const vec3& pos)
 	m_light_shader->Draw(model, pos);
 }
 
-void ShaderMgr::SetModelView(const Quaternion& ori)
+void ShaderMgr::SetModelView(const mat4& mat)
 {
-	m_light_shader->SetModelView(ori);
-	m_shape_shader->SetModelView(ori);
+	m_light_shader->SetModelView(mat);
+	m_shape_shader->SetModelView(mat);
 }
 
 void ShaderMgr::SetShapeColor(const d2d::Colorf& col)

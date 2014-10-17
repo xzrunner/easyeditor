@@ -27,7 +27,7 @@ public:
 
 	virtual void SetProjection(int width, int height);
 
-	void SetModelView(const Quaternion& ori);
+	void SetModelView(const mat4& mat);
 
 	void Draw(const IModel* model, const vec3& pos);
 
@@ -51,7 +51,6 @@ private:
 	GLuint m_specular_material;
 	GLuint m_shininess;
 
-	mat4 m_translation;
 	mat4 m_mat_modelview, m_mat_projection;
 
 	std::vector<Node> m_render_list;

@@ -83,10 +83,9 @@ void ShapeShader::Unbind()
 	glDisable(GL_DEPTH_TEST);
 }
 
-void ShapeShader::SetModelView(const Quaternion& ori)
+void ShapeShader::SetModelView(const mat4& mat)
 {
-	mat4 rotation = ori.ToMatrix();
-	m_mat_modelview = rotation * m_translation;
+	m_mat_modelview = mat;
 }
 
 void ShapeShader::SetProjection(int width, int height)

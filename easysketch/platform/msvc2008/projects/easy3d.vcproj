@@ -165,14 +165,6 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\easy3d\LightingShader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\LightingShader.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easy3d\primitive_draw.cpp"
 				>
 			</File>
@@ -180,22 +172,54 @@
 				RelativePath="..\..\..\src\easy3d\primitive_draw.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\ShaderMgr.cpp"
+			<Filter
+				Name="shader"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\ShaderMgr.h"
+				<File
+					RelativePath="..\..\..\src\easy3d\LightingShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\LightingShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\ShaderMgr.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\ShaderMgr.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\ShapeShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\ShapeShader.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="dataset"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\ShapeShader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\ShapeShader.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\Camera.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\Camera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\ViewFrustum.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easy3d\ViewFrustum.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"
@@ -222,14 +246,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easy3d\IModel.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\ViewFrustum.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\ViewFrustum.h"
 				>
 			</File>
 			<Filter

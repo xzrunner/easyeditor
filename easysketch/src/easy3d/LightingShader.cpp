@@ -91,11 +91,6 @@ void LightingShader::Load()
 // 	glUniform3f(m_ambient_material, 0.04f, 0.04f, 0.04f);
 // 	glUniform3f(m_specular_material, 0.5, 0.5, 0.5);
 // 	glUniform1f(m_shininess, 50);
-
-	// Set up transforms.
-	m_translation = mat4::Translate(0, 0, -1005);
-
-	m_mat_modelview = mat4::Translate(0, 0, -1005);
 }
 
 void LightingShader::Unload()
@@ -213,10 +208,9 @@ void LightingShader::Commit()
 	m_render_list.clear();
 }
 
-void LightingShader::SetModelView(const Quaternion& ori)
+void LightingShader::SetModelView(const mat4& mat)
 {
-	mat4 rotation = ori.ToMatrix();
-	m_mat_modelview = rotation * m_translation;
+	m_mat_modelview = mat;
 }
 
 void LightingShader::SetProjection(int width, int height)
