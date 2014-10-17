@@ -37,6 +37,12 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 		sprite->align_vert = VertAlignType(wxANY_AS(value, int));
 	} else if (name == wxT("FontSize")) {
 		sprite->size = wxANY_AS(value, float);
+	} else if (name == "LabelSize") {
+		double w, h;
+		splitString(value, &w, &h);
+		sprite->width = w;
+		sprite->height = h;
+		sprite->buildBounding();
 	} else if (name == wxT("LabelSize.Width")) {
 		sprite->width = wxANY_AS(value, float);
 		sprite->buildBounding();
