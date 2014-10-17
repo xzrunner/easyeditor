@@ -38,7 +38,9 @@ private:
 	struct Node
 	{
 		const IModel* model;
+
 		vec3 pos;
+		Quaternion ori;
 	};
 
 private:

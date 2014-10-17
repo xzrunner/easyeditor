@@ -15,6 +15,8 @@ public:
 	virtual bool onMouseLeftDown(int x, int y);
 	virtual bool onMouseDrag(int x, int y);
 
+	void SetQuaternion(const Quaternion& ori) { m_ori = ori; }
+
 private:
 	vec3 MapToSphere(ivec2 touchpoint) const;
 
