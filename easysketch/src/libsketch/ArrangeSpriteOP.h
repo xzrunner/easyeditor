@@ -1,14 +1,14 @@
 #ifndef _LIBSKETCH_ARRANGE_SPRITE_OP_H_
 #define _LIBSKETCH_ARRANGE_SPRITE_OP_H_
 
-#include "SelectOP.h"
+#include "SelectSpriteOP.h"
 
 namespace libsketch
 {
 
 class IEditState;
 
-class ArrangeSpriteOP : public SelectOP
+class ArrangeSpriteOP : public SelectSpriteOP
 {
 public:
 	ArrangeSpriteOP(StagePanel* stage);

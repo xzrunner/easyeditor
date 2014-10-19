@@ -97,7 +97,7 @@ void ShapeShader::SetProjection(int width, int height)
 
 	float hh = 1.0f * height / width;
 	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 
-		Camera::GetNear(), Camera::GetFar());
+		Camera::CAM_NEAR, Camera::CAM_FAR);
 }
 
 void ShapeShader::Commit()

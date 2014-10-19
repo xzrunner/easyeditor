@@ -1,5 +1,5 @@
-#ifndef _LIBSKETCH_SELECT_OP_H_
-#define _LIBSKETCH_SELECT_OP_H_
+#ifndef _LIBSKETCH_SELECT_SPRITE_OP_H_
+#define _LIBSKETCH_SELECT_SPRITE_OP_H_
 
 #include <drag2d.h>
 #include <easy3d.h>
@@ -9,10 +9,10 @@ namespace libsketch
 
 class StagePanel;
 
-class SelectOP : public d2d::AbstractEditOP
+class SelectSpriteOP : public d2d::AbstractEditOP
 {
 public:	
-	SelectOP(StagePanel* stage);
+	SelectSpriteOP(StagePanel* stage);
 
 	virtual bool onMouseLeftDown(int x, int y);
 
@@ -29,8 +29,8 @@ protected:
 private:
 	d2d::SpriteSelection* m_selection;
 
-}; // SelectOP
+}; // SelectSpriteOP
 
 }
 
-#endif // _LIBSKETCH_SELECT_OP_H_
+#endif // _LIBSKETCH_SELECT_SPRITE_OP_H_

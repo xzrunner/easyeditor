@@ -9,7 +9,7 @@ namespace libsketch
 {
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
-	: SelectOP(stage)
+	: SelectSpriteOP(stage)
 	, m_state(NULL)
 {
 // 	e3d::StageCanvas* canvas = static_cast<e3d::StageCanvas*>(stage->getCanvas());
@@ -23,7 +23,7 @@ ArrangeSpriteOP::~ArrangeSpriteOP()
 
 bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
 {
-	if (SelectOP::onMouseLeftDown(x, y)) {
+	if (SelectSpriteOP::onMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -48,7 +48,7 @@ bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
 
 bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
 {
-	if (SelectOP::onMouseLeftUp(x, y)) {
+	if (SelectSpriteOP::onMouseLeftUp(x, y)) {
 		return true;
 	}
 
@@ -61,7 +61,7 @@ bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
 
 bool ArrangeSpriteOP::onMouseRightDown(int x, int y)
 {
-	if (SelectOP::onMouseRightDown(x, y)) {
+	if (SelectSpriteOP::onMouseRightDown(x, y)) {
 		return true;
 	}
 
@@ -74,7 +74,7 @@ bool ArrangeSpriteOP::onMouseRightDown(int x, int y)
 
 bool ArrangeSpriteOP::onMouseRightUp(int x, int y)
 {
-	if (SelectOP::onMouseRightUp(x, y)) {
+	if (SelectSpriteOP::onMouseRightUp(x, y)) {
 		return true;
 	}
 
@@ -87,7 +87,7 @@ bool ArrangeSpriteOP::onMouseRightUp(int x, int y)
 
 bool ArrangeSpriteOP::onMouseDrag(int x, int y)
 {
-	if (SelectOP::onMouseDrag(x, y)) {
+	if (SelectSpriteOP::onMouseDrag(x, y)) {
 		return true;
 	}
 

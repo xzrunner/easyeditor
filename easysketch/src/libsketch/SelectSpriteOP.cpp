@@ -1,11 +1,11 @@
-#include "SelectOP.h"
+#include "SelectSpriteOP.h"
 #include "StagePanel.h"
 #include "Symbol.h"
 
 namespace libsketch
 {
 
-SelectOP::SelectOP(StagePanel* stage)
+SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
 	: d2d::AbstractEditOP(stage)
 	, m_stage(stage)
 {
@@ -13,7 +13,7 @@ SelectOP::SelectOP(StagePanel* stage)
 	m_selection->retain();
 }
 
-bool SelectOP::onMouseLeftDown(int x, int y)
+bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::AbstractEditOP::onMouseLeftDown(x, y)) return true;
 
@@ -24,7 +24,7 @@ bool SelectOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-d2d::ISprite* SelectOP::SelectByPos(const ivec2& pos) const
+d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 {
 	d2d::ISprite* selected = NULL;
 

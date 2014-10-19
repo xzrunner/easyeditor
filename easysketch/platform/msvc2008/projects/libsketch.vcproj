@@ -237,11 +237,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libsketch\SelectOP.cpp"
+				RelativePath="..\..\..\src\libsketch\SelectSpriteOP.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libsketch\SelectOP.h"
+				RelativePath="..\..\..\src\libsketch\SelectSpriteOP.h"
 				>
 			</File>
 			<Filter

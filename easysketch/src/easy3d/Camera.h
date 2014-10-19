@@ -13,6 +13,7 @@ public:
 	Camera();
 
 	void Translate(const vec3& offset);
+	void Zoom(bool zoomin);
 
 	void SetRotate(const mat4& rot);
 
@@ -22,11 +23,12 @@ public:
 
 	vec3 MapToSphere(ivec2 touchpoint) const;
 
-	static float GetNear();
-	static float GetFar();
+public:
+	static const float CAM_NEAR;
+	static const float CAM_FAR;
 
 private:
-	mat4 m_translation;
+	vec3 m_pos;
 	mat4 m_rotation;
 
 	int m_width, m_height;

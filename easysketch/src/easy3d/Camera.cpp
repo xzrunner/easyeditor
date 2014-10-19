@@ -3,15 +3,28 @@
 namespace e3d
 {
 
+const float Camera::CAM_NEAR = 4;
+const float Camera::CAM_FAR = 10;
+
+static const float ZOOM_STEP = 0.05f;
+
 Camera::Camera()
+	: m_pos(0, 0, -6)
 {
-//	m_translation = mat4::Translate(0, 0, -1005);
-	m_translation = mat4::Translate(0, 0, -6);
 }
 
 void Camera::Translate(const vec3& offset)
 {
-	m_translation = m_translation * mat4::Translate(offset.x, offset.y, offset.z);
+	m_pos += offset;
+}
+
+void Camera::Zoom(bool zoomin)
+{
+	if (zoomin) {
+		m_pos.z *= (1 - ZOOM_STEP);
+	} else {
+		m_pos.z *= (1 + ZOOM_STEP);
+	}
 }
 
 void Camera::SetRotate(const mat4& rot)
@@ -21,7 +34,7 @@ void Camera::SetRotate(const mat4& rot)
 
 mat4 Camera::GetMatrix() const
 {
-	return m_translation * m_rotation;
+	return mat4::Translate(m_pos.x, m_pos.y, m_pos.z) * m_rotation;
 }
 
 void Camera::SetScreenSize(int width, int height)
@@ -57,15 +70,6 @@ vec3 Camera::MapToSphere(ivec2 touchpoint) const
 	float z = sqrt(radius * radius - p.LengthSquared());
 	vec3 mapped = vec3(p.x, p.y, z);
 	return mapped / radius;
-}
-
-float Camera::GetNear()
-{
-	return 4;
-}
-float Camera::GetFar()
-{
-	return 10;
 }
 
 }

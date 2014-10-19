@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 #include "TranslateCameraState.h"
 #include "RotateCameraState.h"
+#include "ZoomCameraState.h"
 
 namespace libsketch
 {
@@ -15,7 +16,14 @@ EditCameraOP::EditCameraOP(d2d::EditPanel* stage)
 
 	m_translate = new TranslateCameraState(canvas);
 	m_rotate = new RotateCameraState(canvas);
-	m_zoom = NULL;
+	m_zoom = new ZoomCameraState(canvas);
+}
+
+EditCameraOP::~EditCameraOP()
+{
+	delete m_translate;
+	delete m_rotate;
+	delete m_zoom;
 }
 
 bool EditCameraOP::onMouseLeftDown(int x, int y)
@@ -49,11 +57,23 @@ bool EditCameraOP::onMouseRightUp(int x, int y)
 	return false;
 }
 
+bool EditCameraOP::onMouseMove(int x, int y)
+{
+	m_editPanel->SetFocus();
+	return false;
+}
+
 bool EditCameraOP::onMouseDrag(int x, int y)
 {
 	if (d2d::AbstractEditOP::onMouseDrag(x, y)) { return true; }
 	m_curr->OnMouseMove(ivec2(x, y));
 	return false;
 }
+
+bool EditCameraOP::onMouseWheelRotation(int x, int y, int direction)
+{
+	if (d2d::AbstractEditOP::onMouseWheelRotation(x, y, direction)) { return true; }
+	m_zoom->OnMouseWheelRotation(ivec2(x, y), direction);
+	return false;}
 
 }

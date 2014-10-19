@@ -12,12 +12,16 @@ class EditCameraOP : public d2d::AbstractEditOP
 {
 public:
 	EditCameraOP(d2d::EditPanel* stage);
+	virtual ~EditCameraOP();
 
 	virtual bool onMouseLeftDown(int x, int y);
 	virtual bool onMouseLeftUp(int x, int y);
 	virtual bool onMouseRightDown(int x, int y);
 	virtual bool onMouseRightUp(int x, int y);
+	virtual bool onMouseMove(int x, int y);
 	virtual bool onMouseDrag(int x, int y);
+
+	virtual bool onMouseWheelRotation(int x, int y, int direction);
 
 private:
 	IEditState* m_curr;

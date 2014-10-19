@@ -11,11 +11,11 @@ class IEditState
 public:
 	virtual ~IEditState() {}
 
-	virtual void OnMousePress(const ivec2& pos) = 0;
-	virtual void OnMouseRelease(const ivec2& pos) = 0;
-	virtual void OnMouseMove(const ivec2& pos) = 0;
+	virtual void OnMousePress(const ivec2& pos) {}
+	virtual void OnMouseRelease(const ivec2& pos) {}
+	virtual void OnMouseMove(const ivec2& pos) {}
 
-
+	virtual void OnMouseWheelRotation(const ivec2& pos, int direction) {}
 
 }; // IEditState
 
