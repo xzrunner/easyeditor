@@ -23,6 +23,8 @@ public:
 
 	vec3 MapToSphere(ivec2 touchpoint) const;
 
+	void Reset();
+
 public:
 	static const float CAM_NEAR;
 	static const float CAM_FAR;

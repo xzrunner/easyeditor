@@ -11,12 +11,11 @@ EditCameraOP::EditCameraOP(d2d::EditPanel* stage)
 	: d2d::AbstractEditOP(stage)
 	, m_curr(NULL)
 {
-	e3d::StageCanvas* canvas 
-		= static_cast<e3d::StageCanvas*>(stage->getCanvas());
+	m_canvas = static_cast<e3d::StageCanvas*>(stage->getCanvas());
 
-	m_translate = new TranslateCameraState(canvas);
-	m_rotate = new RotateCameraState(canvas);
-	m_zoom = new ZoomCameraState(canvas);
+	m_translate = new TranslateCameraState(m_canvas);
+	m_rotate = new RotateCameraState(m_canvas);
+	m_zoom = new ZoomCameraState(m_canvas);
 }
 
 EditCameraOP::~EditCameraOP()
@@ -26,13 +25,29 @@ EditCameraOP::~EditCameraOP()
 	delete m_zoom;
 }
 
+bool EditCameraOP::onKeyDown(int keyCode)
+{
+	if (d2d::AbstractEditOP::onKeyDown(keyCode)) { return true; }
+	
+	switch (keyCode)
+	{
+	case WXK_SPACE:
+		{
+			m_canvas->GetCamera3().Reset();
+			m_canvas->Refresh();
+		}
+		break;
+	}
+
+	return false;
+}
+
 bool EditCameraOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::AbstractEditOP::onMouseLeftDown(x, y)) { return true; }
 	m_curr = m_translate;
 	m_curr->OnMousePress(ivec2(x, y));
 	return false;
-
 }
 
 bool EditCameraOP::onMouseLeftUp(int x, int y)

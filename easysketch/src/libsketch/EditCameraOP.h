@@ -2,6 +2,7 @@
 #define _LIBSKETCH_EDIT_CAMERA_OP_H_
 
 #include <drag2d.h>
+#include <easy3d.h>
 
 namespace libsketch
 {
@@ -14,6 +15,7 @@ public:
 	EditCameraOP(d2d::EditPanel* stage);
 	virtual ~EditCameraOP();
 
+	virtual bool onKeyDown(int keyCode);
 	virtual bool onMouseLeftDown(int x, int y);
 	virtual bool onMouseLeftUp(int x, int y);
 	virtual bool onMouseRightDown(int x, int y);
@@ -24,6 +26,8 @@ public:
 	virtual bool onMouseWheelRotation(int x, int y, int direction);
 
 private:
+	e3d::StageCanvas* m_canvas;
+
 	IEditState* m_curr;
 	IEditState *m_translate, *m_rotate, *m_zoom;
 

@@ -6,10 +6,11 @@ namespace e3d
 const float Camera::CAM_NEAR = 4;
 const float Camera::CAM_FAR = 10;
 
+static const float DEFAULT_Z = -6;
 static const float ZOOM_STEP = 0.05f;
 
 Camera::Camera()
-	: m_pos(0, 0, -6)
+	: m_pos(0, 0, DEFAULT_Z)
 {
 }
 
@@ -70,6 +71,13 @@ vec3 Camera::MapToSphere(ivec2 touchpoint) const
 	float z = sqrt(radius * radius - p.LengthSquared());
 	vec3 mapped = vec3(p.x, p.y, z);
 	return mapped / radius;
+}
+
+void Camera::Reset()
+{
+	m_pos.x = m_pos.y = 0;
+	m_pos.z = DEFAULT_Z;
+	m_rotation = mat4::Identity();
 }
 
 }
