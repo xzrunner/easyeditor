@@ -106,6 +106,14 @@ struct Matrix4 {
 		Matrix4 m = *this * b;
 		return (*this = m);
 	}
+	Vector3<T> operator * (const Vector3<T>& b) const
+	{
+		Vector3<T> v;
+		v.x = b.x * c[0][0] + b.y * c[1][0] + b.z * c[2][0] + c[3][0];
+		v.y = b.x * c[0][1] + b.y * c[1][1] + b.z * c[2][1] + c[3][1];
+		v.z = b.x * c[0][2] + b.y * c[1][2] + b.z * c[2][2] + c[3][2];
+		return v;
+	}
 	Matrix4 Transposed() const
 	{
 		Matrix4 m;

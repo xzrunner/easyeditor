@@ -36,7 +36,9 @@ void Symbol::draw(const d2d::Matrix& mt,
 
 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
 
-	e3d::DrawCube(m_aabb, d2d::LIGHT_GREEN);
+	mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
+		mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
+	e3d::DrawCube(mat, m_aabb, d2d::LIGHT_GREEN);
 
 	shader->Lighting();
 	shader->Draw(m_model, s->GetPos3(), s->GetOri3());

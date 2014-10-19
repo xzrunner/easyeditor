@@ -36,6 +36,96 @@ void DrawCube(const Cube& cube, d2d::Colorf color)
 	DrawCube(min, max, color);
 }
 
+void DrawCube(const mat4& mat, const Cube& cube, d2d::Colorf color)
+{
+	float vertices[24];
+	int idx = 0;
+
+	vec3 min, max;
+	cube.GetSize(min, max);
+
+	vec3 pos = mat * min;
+ 	vertices[idx++] = pos.x;
+ 	vertices[idx++] = pos.y;
+ 	vertices[idx++] = pos.z;
+ 
+	pos = mat * vec3(max.x, min.y, min.z);
+	vertices[idx++] = pos.x;
+	vertices[idx++] = pos.y;
+	vertices[idx++] = pos.z;
+ 
+	pos = mat * vec3(max.x, max.y, min.z);
+	vertices[idx++] = pos.x;
+	vertices[idx++] = pos.y;
+	vertices[idx++] = pos.z;
+ 
+	pos = mat * vec3(min.x, max.y, min.z);
+	vertices[idx++] = pos.x;
+	vertices[idx++] = pos.y;
+	vertices[idx++] = pos.z;
+ 
+	pos = mat * vec3(min.x, min.y, max.z);
+	vertices[idx++] = pos.x;
+	vertices[idx++] = pos.y;
+	vertices[idx++] = pos.z;
+ 
+	pos = mat * vec3(max.x, min.y, max.z);
+	vertices[idx++] = pos.x;
+	vertices[idx++] = pos.y;
+	vertices[idx++] = pos.z;
+ 
+	pos = mat * vec3(max.x, max.y, max.z);
+	vertices[idx++] = pos.x;
+	vertices[idx++] = pos.y;
+	vertices[idx++] = pos.z;
+ 
+	pos = mat * vec3(min.x, max.y, max.z);
+	vertices[idx++] = pos.x;
+	vertices[idx++] = pos.y;
+	vertices[idx++] = pos.z;
+
+	unsigned short indices[24];
+	idx = 0;
+	indices[idx++] = 0;
+	indices[idx++] = 1;
+	indices[idx++] = 1;
+	indices[idx++] = 2;
+	indices[idx++] = 2;
+	indices[idx++] = 3;
+	indices[idx++] = 3;
+	indices[idx++] = 0;
+
+	indices[idx++] = 4;
+	indices[idx++] = 5;
+	indices[idx++] = 5;
+	indices[idx++] = 6;
+	indices[idx++] = 6;
+	indices[idx++] = 7;
+	indices[idx++] = 7;
+	indices[idx++] = 4;
+
+	indices[idx++] = 0;
+	indices[idx++] = 4;
+	indices[idx++] = 1;
+	indices[idx++] = 5;
+	indices[idx++] = 2;
+	indices[idx++] = 6;
+	indices[idx++] = 3;
+	indices[idx++] = 7;
+
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->Shape();
+	shader->SetShapeColor(color);
+	shader->Commit();
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertices);
+
+	glDrawElements(GL_LINES, 24, GL_UNSIGNED_SHORT, indices);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
 void DrawCube(const vec3& min, const vec3& max, d2d::Colorf color)
 {
 	float vertices[24];

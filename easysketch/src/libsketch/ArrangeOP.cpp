@@ -34,9 +34,9 @@ bool ArrangeOP::onMouseLeftDown(int x, int y)
 			= static_cast<const e3d::StageCanvas*>(m_stage->getCanvas());
 		std::vector<d2d::ISprite*> sprites;
 		selection.traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-//  		m_state = new RotateSpriteState(const_cast<e3d::StageCanvas*>(canvas), 
-//  			static_cast<Sprite*>(sprites[0]));
-		m_state = new RotateCameraState(const_cast<e3d::StageCanvas*>(canvas));
+  		m_state = new RotateSpriteState(const_cast<e3d::StageCanvas*>(canvas), 
+  			static_cast<Sprite*>(sprites[0]));
+//		m_state = new RotateCameraState(const_cast<e3d::StageCanvas*>(canvas));
 	}
 
 	if (m_state) {
