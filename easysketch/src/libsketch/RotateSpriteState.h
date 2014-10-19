@@ -1,7 +1,7 @@
 #ifndef _LIBSKETCH_ROTATE_SPRITE_STATE_H_
 #define _LIBSKETCH_ROTATE_SPRITE_STATE_H_
 
-#include "IArrangeState.h"
+#include "IEditState.h"
 
 #include <easy3d.h>
 
@@ -10,7 +10,7 @@ namespace libsketch
 
 class Sprite;
 
-class RotateSpriteState : public IArrangeState
+class RotateSpriteState : public IEditState
 {
 public:
 	RotateSpriteState(e3d::StageCanvas* canvas,

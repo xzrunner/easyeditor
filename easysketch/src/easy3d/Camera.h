@@ -22,6 +22,9 @@ public:
 
 	vec3 MapToSphere(ivec2 touchpoint) const;
 
+	static float GetNear();
+	static float GetFar();
+
 private:
 	mat4 m_translation;
 	mat4 m_rotation;

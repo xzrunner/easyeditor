@@ -1,6 +1,6 @@
-#include "ArrangeOP.h"
+#include "ArrangeSpriteOP.h"
 #include "StagePanel.h"
-#include "IArrangeState.h"
+#include "IEditState.h"
 #include "RotateCameraState.h"
 #include "RotateSpriteState.h"
 #include "Sprite.h"
@@ -8,7 +8,7 @@
 namespace libsketch
 {
 
-ArrangeOP::ArrangeOP(StagePanel* stage)
+ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 	: SelectOP(stage)
 	, m_state(NULL)
 {
@@ -16,12 +16,12 @@ ArrangeOP::ArrangeOP(StagePanel* stage)
 // 	m_state = new RotateCameraState(canvas);
 }
 
-ArrangeOP::~ArrangeOP()
+ArrangeSpriteOP::~ArrangeSpriteOP()
 {
 	delete m_state;
 }
 
-bool ArrangeOP::onMouseLeftDown(int x, int y)
+bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
 {
 	if (SelectOP::onMouseLeftDown(x, y)) {
 		return true;
@@ -34,8 +34,8 @@ bool ArrangeOP::onMouseLeftDown(int x, int y)
 			= static_cast<const e3d::StageCanvas*>(m_stage->getCanvas());
 		std::vector<d2d::ISprite*> sprites;
 		selection.traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-  		m_state = new RotateSpriteState(const_cast<e3d::StageCanvas*>(canvas), 
-  			static_cast<Sprite*>(sprites[0]));
+   		m_state = new RotateSpriteState(const_cast<e3d::StageCanvas*>(canvas), 
+   			static_cast<Sprite*>(sprites[0]));
 //		m_state = new RotateCameraState(const_cast<e3d::StageCanvas*>(canvas));
 	}
 
@@ -46,7 +46,7 @@ bool ArrangeOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool ArrangeOP::onMouseLeftUp(int x, int y)
+bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
 {
 	if (SelectOP::onMouseLeftUp(x, y)) {
 		return true;
@@ -59,7 +59,7 @@ bool ArrangeOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool ArrangeOP::onMouseRightDown(int x, int y)
+bool ArrangeSpriteOP::onMouseRightDown(int x, int y)
 {
 	if (SelectOP::onMouseRightDown(x, y)) {
 		return true;
@@ -72,7 +72,7 @@ bool ArrangeOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool ArrangeOP::onMouseRightUp(int x, int y)
+bool ArrangeSpriteOP::onMouseRightUp(int x, int y)
 {
 	if (SelectOP::onMouseRightUp(x, y)) {
 		return true;
@@ -85,7 +85,7 @@ bool ArrangeOP::onMouseRightUp(int x, int y)
 	return false;
 }
 
-bool ArrangeOP::onMouseDrag(int x, int y)
+bool ArrangeSpriteOP::onMouseDrag(int x, int y)
 {
 	if (SelectOP::onMouseDrag(x, y)) {
 		return true;

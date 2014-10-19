@@ -5,12 +5,13 @@ namespace e3d
 
 Camera::Camera()
 {
-	m_translation = mat4::Translate(0, 0, -1005);
+//	m_translation = mat4::Translate(0, 0, -1005);
+	m_translation = mat4::Translate(0, 0, -6);
 }
 
 void Camera::Translate(const vec3& offset)
 {
-	m_translation.Translate(offset.x, offset.y, offset.z);
+	m_translation = m_translation * mat4::Translate(offset.x, offset.y, offset.z);
 }
 
 void Camera::SetRotate(const mat4& rot)
@@ -20,7 +21,7 @@ void Camera::SetRotate(const mat4& rot)
 
 mat4 Camera::GetMatrix() const
 {
-	return m_rotation * m_translation;
+	return m_translation * m_rotation;
 }
 
 void Camera::SetScreenSize(int width, int height)
@@ -56,6 +57,15 @@ vec3 Camera::MapToSphere(ivec2 touchpoint) const
 	float z = sqrt(radius * radius - p.LengthSquared());
 	vec3 mapped = vec3(p.x, p.y, z);
 	return mapped / radius;
+}
+
+float Camera::GetNear()
+{
+	return 4;
+}
+float Camera::GetFar()
+{
+	return 10;
 }
 
 }

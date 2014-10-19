@@ -1,14 +1,14 @@
 #ifndef _LIBSKETCH_ROTATE_CAMERA_STATE_H_
 #define _LIBSKETCH_ROTATE_CAMERA_STATE_H_
 
-#include "IArrangeState.h"
+#include "IEditState.h"
 
 #include <easy3d.h>
 
 namespace libsketch
 {
 
-class RotateCameraState : public IArrangeState
+class RotateCameraState : public IEditState
 {
 public:
 	RotateCameraState(e3d::StageCanvas* canvas);

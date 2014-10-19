@@ -1,18 +1,18 @@
-#ifndef _LIBSKETCH_ARRANGE_OP_H_
-#define _LIBSKETCH_ARRANGE_OP_H_
+#ifndef _LIBSKETCH_ARRANGE_SPRITE_OP_H_
+#define _LIBSKETCH_ARRANGE_SPRITE_OP_H_
 
 #include "SelectOP.h"
 
 namespace libsketch
 {
 
-class IArrangeState;
+class IEditState;
 
-class ArrangeOP : public SelectOP
+class ArrangeSpriteOP : public SelectOP
 {
 public:
-	ArrangeOP(StagePanel* stage);
-	virtual ~ArrangeOP();
+	ArrangeSpriteOP(StagePanel* stage);
+	virtual ~ArrangeSpriteOP();
 
 	virtual bool onMouseLeftDown(int x, int y);
 	virtual bool onMouseLeftUp(int x, int y);
@@ -21,10 +21,10 @@ public:
 	virtual bool onMouseDrag(int x, int y);
 
 private:
-	IArrangeState* m_state;
+	IEditState* m_state;
 
-}; // ArrangeOP
+}; // ArrangeSpriteOP
 
 }
 
-#endif // _LIBSKETCH_ARRANGE_OP_H_
+#endif // _LIBSKETCH_ARRANGE_SPRITE_OP_H_

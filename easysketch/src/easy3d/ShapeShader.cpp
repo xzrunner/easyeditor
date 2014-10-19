@@ -4,6 +4,7 @@
 #include <gl/GLee.h>
 
 #include "ShapeShader.h"
+#include "Camera.h"
 
 namespace e3d
 {
@@ -95,7 +96,8 @@ void ShapeShader::SetProjection(int width, int height)
 	// 	m_mat_projection = mat4::Frustum(-2, 2, -h / 2, h / 2, 5, 12);
 
 	float hh = 1.0f * height / width;
-	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 1000, 1010);
+	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 
+		Camera::GetNear(), Camera::GetFar());
 }
 
 void ShapeShader::Commit()

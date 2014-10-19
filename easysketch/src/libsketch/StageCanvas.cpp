@@ -37,8 +37,10 @@ void StageCanvas::onSize(int w, int h)
 
 void StageCanvas::onDraw()
 {
+	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetMatrix());
 	DrawBackground();
 	DrawSprites();
+
  	m_editPanel->drawEditTemp();
 }
 
