@@ -1,4 +1,5 @@
 #include "Symbol.h"
+#include "Sprite.h"
 
 #include <easy3d.h>
 
@@ -28,12 +29,17 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
+	if (!sprite) {
+		return;
+	}
+	const Sprite* s = static_cast<const Sprite*>(sprite);
+
 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
 
 	e3d::DrawCube(m_aabb, d2d::LIGHT_GREEN);
 
 	shader->Lighting();
-	shader->Draw(m_model, vec3(0, 0, 0));
+	shader->Draw(m_model, s->GetPos3(), s->GetOri3());
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

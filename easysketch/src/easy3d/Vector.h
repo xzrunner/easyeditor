@@ -6,7 +6,7 @@ const float TwoPi = 2 * Pi;
 
 template <typename T>
 struct Vector2 {
-	Vector2() {}
+	Vector2() : x(0), y(0) {}
 	Vector2(T x, T y) : x(x), y(y) {}
 	T Dot(const Vector2& v) const
 	{
@@ -74,7 +74,7 @@ struct Vector2 {
 
 template <typename T>
 struct Vector3 {
-	Vector3() {}
+	Vector3() : x(0), y(0), z(0) {}
 	Vector3(T x, T y, T z) : x(x), y(y), z(z) {}
 	void Normalize()
 	{
@@ -165,7 +165,7 @@ struct Vector3 {
 
 template <typename T>
 struct Vector4 {
-	Vector4() {}
+	Vector4() : x(0), y(0), z(0), w(1) {}
 	Vector4(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {}
 	T Dot(const Vector4& v) const
 	{

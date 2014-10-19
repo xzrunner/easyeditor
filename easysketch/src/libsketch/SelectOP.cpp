@@ -29,7 +29,7 @@ d2d::ISprite* SelectOP::SelectByPos(const ivec2& pos) const
 	d2d::ISprite* selected = NULL;
 
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{

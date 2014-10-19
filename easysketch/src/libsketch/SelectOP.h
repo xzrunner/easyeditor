@@ -16,12 +16,17 @@ public:
 
 	virtual bool onMouseLeftDown(int x, int y);
 
+	const d2d::SpriteSelection& GetSelection() const {
+		return *m_selection;
+	}
+
 private:
 	d2d::ISprite* SelectByPos(const ivec2& pos) const;
 
-private:
+protected:
 	StagePanel* m_stage;
 
+private:
 	d2d::SpriteSelection* m_selection;
 
 }; // SelectOP

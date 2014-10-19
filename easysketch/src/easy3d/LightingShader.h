@@ -29,7 +29,7 @@ public:
 
 	void SetModelView(const mat4& mat);
 
-	void Draw(const IModel* model, const vec3& pos);
+	void Draw(const IModel* model, const vec3& pos, const Quaternion& ori);
 
 protected:
 	virtual void BindAttrib(GLuint prog);

@@ -20,7 +20,8 @@ public:
 	void Lighting();
 	void Shape();
 
-	void Draw(const IModel* model, const vec3& pos);
+	void Draw(const IModel* model, const vec3& pos,
+		const Quaternion& ori);
 
 	void SetModelView(const mat4& mat);
 
