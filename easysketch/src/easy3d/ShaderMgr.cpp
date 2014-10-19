@@ -40,10 +40,9 @@ void ShaderMgr::Shape()
 	Switch(m_shape_shader);
 }
 
-void ShaderMgr::Draw(const IModel* model, const vec3& pos,
-					 const Quaternion& ori)
+void ShaderMgr::Draw(const IModel* model, const mat4& m)
 {
-	m_light_shader->Draw(model, pos, ori);
+	m_light_shader->Draw(model, m);
 }
 
 void ShaderMgr::SetModelView(const mat4& mat)

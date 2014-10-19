@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-#include "Quaternion.h"
+#include "Matrix.h"
 
 namespace e3d
 {
@@ -20,8 +20,7 @@ public:
 	void Lighting();
 	void Shape();
 
-	void Draw(const IModel* model, const vec3& pos,
-		const Quaternion& ori);
+	void Draw(const IModel* model, const mat4& m);
 
 	void SetModelView(const mat4& mat);
 

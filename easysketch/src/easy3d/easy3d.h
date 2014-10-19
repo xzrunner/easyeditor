@@ -1,6 +1,8 @@
 #ifndef _E3D_H_
 #define _E3D_H_
 
+#include "Quaternion.h"
+
 #include "Cube.h"
 #include "ISurface.h"
 #include "ParametricEquations.h"

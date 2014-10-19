@@ -1,8 +1,6 @@
 #ifndef _E3D_LIGHTING_SHADER_H_
 #define _E3D_LIGHTING_SHADER_H_
 
-#include "Vector.h"
-#include "Quaternion.h"
 #include "Matrix.h"
 
 #include <drag2d.h>
@@ -29,7 +27,7 @@ public:
 
 	void SetModelView(const mat4& mat);
 
-	void Draw(const IModel* model, const vec3& pos, const Quaternion& ori);
+	void Draw(const IModel* model, const mat4& m);
 
 protected:
 	virtual void BindAttrib(GLuint prog);
@@ -38,9 +36,7 @@ private:
 	struct Node
 	{
 		const IModel* model;
-
-		vec3 pos;
-		Quaternion ori;
+		mat4 mat;
 	};
 
 private:

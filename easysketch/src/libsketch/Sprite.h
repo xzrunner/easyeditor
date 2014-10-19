@@ -2,6 +2,7 @@
 #define _LIBSKETCH_SPRITE_H_
 
 #include "Symbol.h"
+#include "Quaternion.h"
 
 namespace libsketch
 {

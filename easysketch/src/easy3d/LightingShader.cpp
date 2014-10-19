@@ -162,8 +162,7 @@ void LightingShader::Commit()
 		const Node& node = m_render_list[i];
 
 		// Set the model-view transform.
-//		mat4 model_view = m_mat_modelview * node.ori.ToMatrix() * mat4::Translate(node.pos.x, node.pos.y, node.pos.z);
-		mat4 model_view = mat4(node.ori.ToMatrix()) * mat4::Translate(node.pos.x, node.pos.y, node.pos.z) * m_mat_modelview;
+		mat4 model_view = node.mat * m_mat_modelview;
 
 		glUniformMatrix4fv(m_model_view, 1, 0, model_view.Pointer());
 
@@ -225,13 +224,11 @@ void LightingShader::SetProjection(int width, int height)
 	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 1000, 1010);
 }
 
-void LightingShader::Draw(const IModel* model, const vec3& pos,
-						  const Quaternion& ori)
+void LightingShader::Draw(const IModel* model, const mat4& m)
 {
 	Node n;
 	n.model = model;
-	n.pos = pos;
-	n.ori = ori;
+	n.mat = m;
 	m_render_list.push_back(n);
 }
 
