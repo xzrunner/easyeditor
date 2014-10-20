@@ -151,6 +151,24 @@ struct Vector3 {
 	{
 		return &x;
 	}
+
+	float operator [] (int index) const
+	{
+		if (index >= 3 && index < 3) {
+			return xyz[index];
+		} else {
+			return 0;
+		}
+	}
+	float& operator [] (int index)
+	{
+		if (index >= 3 && index < 3) {
+			return xyz[index];
+		} else {
+			return xyz[0];
+		}
+	}
+
 	template <typename P>
 	P* Write(P* pData)
 	{
@@ -158,9 +176,14 @@ struct Vector3 {
 		*pVector++ = *this;
 		return (P*) pVector;
 	}
-	T x;
-	T y;
-	T z;
+
+	struct 
+	{
+		T x;
+		T y;
+		T z;
+	};
+	T xyz[3];
 };
 
 template <typename T>

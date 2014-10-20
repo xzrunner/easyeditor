@@ -149,6 +149,14 @@
 			Name="math"
 			>
 			<File
+				RelativePath="..\..\..\src\easy3d\Math3.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\Math3.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easy3d\Matrix.h"
 				>
 			</File>

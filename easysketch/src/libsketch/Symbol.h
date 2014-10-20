@@ -31,7 +31,9 @@ public:
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 	void SetModel(e3d::IModel* model);
+
 	void SetAABB(const e3d::Cube& aabb) { m_aabb = aabb; }
+	const e3d::Cube& GetAABB() const { return m_aabb; }
 
 protected:
 	virtual void loadResources();
