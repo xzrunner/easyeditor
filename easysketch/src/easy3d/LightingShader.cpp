@@ -153,19 +153,18 @@ void LightingShader::Commit()
 	// Set the projection transform.
 	glUniformMatrix4fv(m_projection, 1, 0, m_mat_projection.Pointer());
 
-	// Set the normal matrix.
-	// It's orthogonal, so its Inverse-Transpose is itself!
-	mat3 normalMatrix = m_mat_modelview.ToMat3();
-	glUniformMatrix3fv(m_normal_matrix, 1, 0, normalMatrix.Pointer());
-
 	for (int i = 0, n = m_render_list.size(); i < n; ++i) 
 	{
 		const Node& node = m_render_list[i];
 
 		// Set the model-view transform.
 		mat4 model_view = node.mat * m_mat_modelview;
-
 		glUniformMatrix4fv(m_model_view, 1, 0, model_view.Pointer());
+
+		// Set the normal matrix.
+		// It's orthogonal, so its Inverse-Transpose is itself!
+ 	 	mat3 normalMatrix = model_view.ToMat3();
+ 	 	glUniformMatrix3fv(m_normal_matrix, 1, 0, normalMatrix.Pointer());
 
 		const std::vector<Mesh>& meshes = node.model->GetAllMeshes();
 		for (int j = 0, m = meshes.size(); j < m; ++j) 
