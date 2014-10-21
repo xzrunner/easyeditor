@@ -10,6 +10,7 @@ class Ray
 {
 public:
 	Ray();
+	Ray(const vec3& start, const vec3& dir);
 
 	void Translate(const vec3& offset);
 	void Rotate(const mat4& mat);
@@ -25,6 +26,12 @@ private:
 inline Ray::Ray()
 	: m_start(0, 0, 0)
 	, m_dir(1, 0, 0)
+{
+}
+
+inline Ray::Ray(const vec3& start, const vec3& dir)
+	: m_start(start)
+	, m_dir(dir)
 {
 }
 

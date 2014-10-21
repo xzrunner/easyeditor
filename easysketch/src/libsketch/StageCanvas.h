@@ -15,6 +15,7 @@ public:
 	StageCanvas(StagePanel* stage, d2d::LibraryPanel* library);
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
+	vec3 TransPos3ScreenToDir(const ivec2& screen) const;
 
 protected:
 	virtual void initGL();

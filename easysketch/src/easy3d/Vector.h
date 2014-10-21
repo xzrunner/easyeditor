@@ -154,7 +154,7 @@ struct Vector3 {
 
 	float operator [] (int index) const
 	{
-		if (index >= 3 && index < 3) {
+		if (index >= 0 && index < 3) {
 			return xyz[index];
 		} else {
 			return 0;
@@ -162,7 +162,7 @@ struct Vector3 {
 	}
 	float& operator [] (int index)
 	{
-		if (index >= 3 && index < 3) {
+		if (index >= 0 && index < 3) {
 			return xyz[index];
 		} else {
 			return xyz[0];

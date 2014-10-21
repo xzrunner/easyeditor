@@ -78,7 +78,7 @@ bool Math3::RayAABBIntersection(const AABB& aabb, const Ray& ray, vec3* coord)
 		*coord = cross;
 	}
 
-	return false;
+	return true;
 }
 
 bool Math3::RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaternion& angle, 
@@ -93,7 +93,6 @@ bool Math3::RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaterni
 
 	Ray _ray(ray);
 	_ray.Rotate(rot);
-	_ray.Translate(pos);
 
 	return RayAABBIntersection(_aabb, _ray, coord);
 }

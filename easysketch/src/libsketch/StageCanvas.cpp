@@ -22,6 +22,11 @@ ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 	return e3d::ViewFrustum::TransPos3ProjectToScreen(proj, m_width, m_height);
 }
 
+vec3 StageCanvas::TransPos3ScreenToDir(const ivec2& screen) const
+{
+	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_width, m_height);
+}
+
 void StageCanvas::initGL()
 {
 	e3d::StageCanvas::initGL();

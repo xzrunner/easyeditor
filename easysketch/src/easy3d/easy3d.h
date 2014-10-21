@@ -3,6 +3,8 @@
 
 #include "Quaternion.h"
 #include "AABB.h"
+#include "Ray.h"
+#include "Math3.h"
 
 #include "ISurface.h"
 #include "ParametricEquations.h"

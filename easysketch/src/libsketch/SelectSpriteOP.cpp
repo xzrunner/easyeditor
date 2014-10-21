@@ -1,6 +1,8 @@
 #include "SelectSpriteOP.h"
 #include "StagePanel.h"
+#include "StageCanvas.h"
 #include "Symbol.h"
+#include "Sprite.h"
 
 namespace libsketch
 {
@@ -17,9 +19,9 @@ bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::AbstractEditOP::onMouseLeftDown(x, y)) return true;
 
-	if (m_selection->empty()) {
+//	if (m_selection->empty()) {
 		SelectByPos(ivec2(x, y));
-	}
+//	}
 
 	return false;
 }
@@ -31,14 +33,24 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_editPanel->getCanvas());
+	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
+	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
+
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
 		const Symbol& symbol = static_cast<const Symbol&>(sprite->getSymbol());
 		
 		const e3d::AABB& aabb = symbol.GetAABB();
+		Sprite* s = static_cast<Sprite*>(sprite);
+		
+		vec3 offset = s->GetPos3();
+		offset.z = -6;
 
-//		symbol.getSize();
+		vec3 cross;
+		bool intersect = e3d::Math3::RayOBBIntersection(aabb, offset, s->GetOri3(), ray, &cross);
+
 		m_selection->insert(sprite);
 	}
 

@@ -13,9 +13,9 @@ class Ray;
 class Math3
 {
 public:
-	bool RayAABBIntersection(const AABB& aabb, const Ray& ray, vec3* coord);
+	static bool RayAABBIntersection(const AABB& aabb, const Ray& ray, vec3* coord);
 
-	bool RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaternion& angle,
+	static bool RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaternion& angle,
 		const Ray& ray, vec3* coord);
 
 }; // Math3
