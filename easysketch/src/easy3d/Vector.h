@@ -177,13 +177,17 @@ struct Vector3 {
 		return (P*) pVector;
 	}
 
-	struct 
+	union
 	{
-		T x;
-		T y;
-		T z;
+		struct 
+		{
+			T x;
+			T y;
+			T z;
+		};
+
+		T xyz[3];
 	};
-	T xyz[3];
 };
 
 template <typename T>
