@@ -9,12 +9,12 @@
 namespace e3d
 {
 
-class Cube;
+class AABB;
 
 void DrawLine(const vec3& p0, const vec3& p1, d2d::Colorf color = d2d::BLACK);
 
-void DrawCube(const Cube& cube, d2d::Colorf color = d2d::BLACK);
-void DrawCube(const mat4& mat, const Cube& cube, d2d::Colorf color = d2d::BLACK);
+void DrawCube(const AABB& aabb, d2d::Colorf color = d2d::BLACK);
+void DrawCube(const mat4& mat, const AABB& aabb, d2d::Colorf color = d2d::BLACK);
 void DrawCube(const vec3& min, const vec3& max, d2d::Colorf color = d2d::BLACK);
 
 void DrawCross(const vec3& center, const vec3& size, d2d::Colorf color = d2d::BLACK);

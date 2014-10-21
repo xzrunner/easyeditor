@@ -69,7 +69,7 @@ void StageCanvas::InitDefaultSymbol()
 
 void StageCanvas::LoadSymbolToLib(e3d::ISurface* surface, const char* name)
 {
-	e3d::Cube aabb;
+	e3d::AABB aabb;
 	e3d::ModelParametric* model = new e3d::ModelParametric(surface, aabb);
 
 	libsketch::Symbol* symbol = new libsketch::Symbol();

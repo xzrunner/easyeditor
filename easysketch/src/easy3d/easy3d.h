@@ -2,8 +2,8 @@
 #define _E3D_H_
 
 #include "Quaternion.h"
+#include "AABB.h"
 
-#include "Cube.h"
 #include "ISurface.h"
 #include "ParametricEquations.h"
 #include "ModelParametric.h"

@@ -1,4 +1,6 @@
 #include "Math3.h"
+#include "AABB.h"
+#include "Ray.h"
 
 namespace e3d
 {
@@ -8,8 +10,7 @@ namespace e3d
 #define LEFT	1
 #define MIDDLE	2
 
-bool Math3::HitBoundingBox(const vec3& min_box, const vec3& max_box, 
-						   const vec3& origin, const vec3& dir, vec3* coord)
+bool Math3::RayAABBIntersection(const AABB& aabb, const Ray& ray, vec3* coord)
 {
 	vec3 cross;
 
@@ -21,13 +22,13 @@ bool Math3::HitBoundingBox(const vec3& min_box, const vec3& max_box,
    	rays cast all from the eye(assume perpsective view) */
 	for (int i = 0; i < 3; ++i)
 	{
-		if (origin[i] < min_box[i]) {
+		if (ray.Start()[i] < aabb.Min()[i]) {
 			quadrant[i] = LEFT;
-			candidate_plane[i] = min_box[i];
+			candidate_plane[i] = aabb.Min()[i];
 			inside = false;
-		} else if (origin[i] > max_box[i]) {
+		} else if (ray.Start()[i] > aabb.Max()[i]) {
 			quadrant[i] = RIGHT;
-			candidate_plane[i] = max_box[i];
+			candidate_plane[i] = aabb.Max()[i];
 			inside = false;
 		} else {
 			quadrant[i] = MIDDLE;
@@ -36,15 +37,15 @@ bool Math3::HitBoundingBox(const vec3& min_box, const vec3& max_box,
 
 	/* Ray origin inside bounding box */
 	if (inside) {
-		cross = origin;
+		cross = ray.Start();
 		return true;
 	}
 
 	float max_t[3];
 	/* Calculate T distances to candidate planes */
 	for (int i = 0; i < 3; ++i) {
-		if (quadrant[i] != MIDDLE && dir[i] != 0) {
-			max_t[i] = (candidate_plane[i]-origin[i])/dir[i];
+		if (quadrant[i] != MIDDLE && ray.Dir()[i] != 0) {
+			max_t[i] = (candidate_plane[i]-ray.Start()[i])/ray.Dir()[i];
 		} else {
 			max_t[i] = -1;
 		}
@@ -64,8 +65,8 @@ bool Math3::HitBoundingBox(const vec3& min_box, const vec3& max_box,
 	}
 	for (int i = 0; i < 3; ++i) {
 		if (which_plane != i) {
-			cross[i] = origin[i] + max_t[which_plane] * dir[i];
-			if (cross[i] < min_box[i] || cross[i] > max_box[i]) {
+			cross[i] = ray.Start()[i] + max_t[which_plane] * ray.Dir()[i];
+			if (cross[i] < aabb.Min()[i] || cross[i] > aabb.Max()[i]) {
 				return false;
 			}
 		} else {
@@ -78,6 +79,23 @@ bool Math3::HitBoundingBox(const vec3& min_box, const vec3& max_box,
 	}
 
 	return false;
+}
+
+bool Math3::RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaternion& angle, 
+							   const Ray& ray, vec3* coord)
+{
+	Quaternion _angle = -angle;
+	mat3 rot = _angle.ToMatrix();
+
+	AABB _aabb(aabb);
+	_aabb.Rotate(rot);
+	_aabb.Translate(pos);
+
+	Ray _ray(ray);
+	_ray.Rotate(rot);
+	_ray.Translate(pos);
+
+	return RayAABBIntersection(_aabb, _ray, coord);
 }
 
 }

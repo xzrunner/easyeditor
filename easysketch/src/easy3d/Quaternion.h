@@ -21,6 +21,7 @@ struct QuaternionT {
 	QuaternionT<T> operator+(const QuaternionT<T>& q) const;
 	bool operator==(const QuaternionT<T>& q) const;
 	bool operator!=(const QuaternionT<T>& q) const;
+	QuaternionT<T> operator - () const;
 
 	void Normalize();
 	void Rotate(const QuaternionT<T>& q);
@@ -172,6 +173,12 @@ inline QuaternionT<T>  QuaternionT<T>::CreateFromAxisAngle(const Vector3<T>& axi
 	q.y *= axis.y;
 	q.z *= axis.z;
 	return q;
+}
+
+template <typename T>
+inline QuaternionT<T> QuaternionT<T>::operator - () const
+{
+	return QuaternionT<T>(-x, -y, -z, -w);
 }
 
 template <typename T>

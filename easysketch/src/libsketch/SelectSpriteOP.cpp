@@ -36,9 +36,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 		d2d::ISprite* sprite = sprites[i];
 		const Symbol& symbol = static_cast<const Symbol&>(sprite->getSymbol());
 		
-		const e3d::Cube& cube = symbol.GetAABB();
-		vec3 min, max;
-		cube.GetSize(min, max);
+		const e3d::AABB& aabb = symbol.GetAABB();
 
 //		symbol.getSize();
 		m_selection->insert(sprite);

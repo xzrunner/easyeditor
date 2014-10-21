@@ -7,12 +7,12 @@ namespace e3d
 {
 
 class ISurface;
-class Cube;
+class AABB;
 
 class ModelParametric : public IModel
 {
 public:
-	ModelParametric(const ISurface* surface, Cube& aabb);
+	ModelParametric(const ISurface* surface, AABB& aabb);
 
 	virtual const std::vector<Mesh>& GetAllMeshes() const {
 		return m_meshes;

@@ -149,6 +149,10 @@
 			Name="math"
 			>
 			<File
+				RelativePath="..\..\..\src\easy3d\AABB.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easy3d\Math3.cpp"
 				>
 			</File>
@@ -162,6 +166,10 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easy3d\Quaternion.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\Ray.h"
 				>
 			</File>
 			<File
@@ -244,14 +252,6 @@
 		<Filter
 			Name="dateset"
 			>
-			<File
-				RelativePath="..\..\..\src\easy3d\Cube.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easy3d\Cube.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\..\src\easy3d\IModel.h"
 				>

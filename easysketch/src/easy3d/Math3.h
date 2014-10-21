@@ -2,15 +2,21 @@
 #define _E3D_MATH3_H_
 
 #include "Vector.h"
+#include "Quaternion.h"
 
 namespace e3d
 {
 
+class AABB;
+class Ray;
+
 class Math3
 {
 public:
-	bool HitBoundingBox(const vec3& min_box, const vec3& max_box, const vec3& origin,
-		const vec3& dir, vec3* coord);
+	bool RayAABBIntersection(const AABB& aabb, const Ray& ray, vec3* coord);
+
+	bool RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaternion& angle,
+		const Ray& ray, vec3* coord);
 
 }; // Math3
 

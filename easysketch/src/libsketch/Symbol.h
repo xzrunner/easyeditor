@@ -32,8 +32,8 @@ public:
 
 	void SetModel(e3d::IModel* model);
 
-	void SetAABB(const e3d::Cube& aabb) { m_aabb = aabb; }
-	const e3d::Cube& GetAABB() const { return m_aabb; }
+	void SetAABB(const e3d::AABB& aabb) { m_aabb = aabb; }
+	const e3d::AABB& GetAABB() const { return m_aabb; }
 
 protected:
 	virtual void loadResources();
@@ -41,7 +41,7 @@ protected:
 private:
 	e3d::IModel* m_model;
 
-	e3d::Cube m_aabb;
+	e3d::AABB m_aabb;
 
 }; // Symbol
 

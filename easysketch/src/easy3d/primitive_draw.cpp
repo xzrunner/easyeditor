@@ -1,7 +1,7 @@
 #include "primitive_draw.h"
 
 #include "ShaderMgr.h"
-#include "Cube.h"
+#include "AABB.h"
 
 namespace e3d
 {
@@ -29,20 +29,18 @@ void DrawLine(const vec3& p0, const vec3& p1, d2d::Colorf color)
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
-void DrawCube(const Cube& cube, d2d::Colorf color)
+void DrawCube(const AABB& aabb, d2d::Colorf color)
 {
-	vec3 min, max;
-	cube.GetSize(min, max);
-	DrawCube(min, max, color);
+	DrawCube(aabb.Min(), aabb.Max(), color);
 }
 
-void DrawCube(const mat4& mat, const Cube& cube, d2d::Colorf color)
+void DrawCube(const mat4& mat, const AABB& aabb, d2d::Colorf color)
 {
 	float vertices[24];
 	int idx = 0;
 
-	vec3 min, max;
-	cube.GetSize(min, max);
+	const vec3& min = aabb.Min();
+	const vec3& max = aabb.Max();
 
 	vec3 pos = mat * min;
  	vertices[idx++] = pos.x;

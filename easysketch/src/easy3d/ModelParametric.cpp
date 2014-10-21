@@ -3,12 +3,12 @@
 
 #include "ModelParametric.h"
 #include "ParametricSurface.h"
-#include "Cube.h"
+#include "AABB.h"
 
 namespace e3d
 {
 
-ModelParametric::ModelParametric(const ISurface* surface, Cube& aabb)
+ModelParametric::ModelParametric(const ISurface* surface, AABB& aabb)
 {
 	Mesh mesh;
 

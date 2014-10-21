@@ -1,0 +1,53 @@
+#ifndef _E3D_RAY_H_
+#define _E3D_RAY_H_
+
+#include "Vector.h"
+
+namespace e3d
+{
+
+class Ray
+{
+public:
+	Ray();
+
+	void Translate(const vec3& offset);
+	void Rotate(const mat4& mat);
+
+	const vec3& Start() const;
+	const vec3& Dir() const;
+
+private:
+	vec3 m_start, m_dir;
+
+}; // Ray
+
+inline Ray::Ray()
+	: m_start(0, 0, 0)
+	, m_dir(1, 0, 0)
+{
+}
+
+inline void Ray::Translate(const vec3& offset)
+{
+	m_start += offset;
+}
+
+inline void Ray::Rotate(const mat4& mat)
+{
+	m_dir = mat * m_dir;
+}
+
+inline const vec3& Ray::Start() const 
+{
+	return m_start;
+}
+
+inline const vec3& Ray::Dir() const
+{
+	return m_dir;
+}
+
+}
+
+#endif // _E3D_RAY_H_
