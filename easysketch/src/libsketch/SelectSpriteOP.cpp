@@ -26,6 +26,35 @@ bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
+bool SelectSpriteOP::onMouseLeftUp(int x, int y)
+{
+	if (d2d::AbstractEditOP::onMouseLeftUp(x, y)) return true;
+	m_selection->clear();
+	return false;	
+}
+
+bool SelectSpriteOP::onDraw() const
+{
+	if (d2d::AbstractEditOP::onDraw()) return true;
+
+	std::vector<d2d::ISprite*> sprites;
+	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
+
+		e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
+
+		mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
+			mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
+
+		e3d::DrawCube(mat, s->getSymbol().GetAABB(), d2d::MID_RED);
+	}
+
+	m_stage->Refresh();
+
+	return false;
+}
+
 // 以sprite的中心和方向，旋转ray的坐标系
 // 即AABB不变
 d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
@@ -52,12 +81,9 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 
 		vec3 cross;
 		bool intersect = e3d::Math3::RayOBBIntersection(aabb, offset, s->GetOri3(), ray, &cross);
-
 		if (intersect) {
-			wxLogDebug("SelectByPos true");
+			m_selection->insert(sprite);
 		}
-
-		m_selection->insert(sprite);
 	}
 
 	return selected;

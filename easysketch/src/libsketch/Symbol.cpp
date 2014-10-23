@@ -39,7 +39,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
 		mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
 
-	e3d::DrawCube(mat, m_aabb, d2d::LIGHT_GREEN);
+// 	e3d::DrawCube(mat, m_aabb, d2d::BLACK);
 
 	shader->Lighting();
 	shader->Draw(m_model, mat);

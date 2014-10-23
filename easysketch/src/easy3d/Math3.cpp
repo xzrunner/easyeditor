@@ -85,7 +85,9 @@ bool Math3::RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaterni
 							   const Ray& ray, vec3* coord)
 {
 	Ray _ray(ray);
-	_ray.ChangeCoordSystem(pos, angle);
+	_ray.Translate(-pos);
+	_ray.ChangeCoordSystem(angle);
+
 	return RayAABBIntersection(aabb, _ray, coord);
 }
 

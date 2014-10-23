@@ -169,6 +169,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easy3d\Ray.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easy3d\Ray.h"
 				>
 			</File>

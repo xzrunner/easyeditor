@@ -17,7 +17,7 @@ vec3 ViewFrustum::TransPos3ScreenToDir(const ivec2& screen, float width, float h
 	vec3 start(0, 0, 0);
 
 	vec3 end;
-	end.z = -Camera::CAM_NEAR;
+ 	end.z = -Camera::CAM_NEAR;
 	end.x = (screen.x - width * 0.5f) * 2.0f / width;
 	end.y = (screen.y - height * 0.5f) * 2.0f / width;
 

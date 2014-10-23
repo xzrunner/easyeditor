@@ -65,7 +65,7 @@ void StageCanvas::InitDefaultSymbol()
 	surface = new e3d::TrefoilKnot(1);
 	LoadSymbolToLib(surface, "TrefoilKnot");
 
-	surface = new e3d::MobiusStrip(0.6f);
+	surface = new e3d::MobiusStrip(0.2f);
 	LoadSymbolToLib(surface, "MobiusStrip");
 
 	surface = new e3d::KleinBottle(0.1f);
