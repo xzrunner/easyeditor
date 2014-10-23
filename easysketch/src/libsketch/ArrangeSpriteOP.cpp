@@ -27,17 +27,17 @@ bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
 		return true;
 	}
 
-// 	// after select, set state
-// 	const d2d::SpriteSelection& selection = GetSelection();
-// 	if (!m_state && !selection.empty()) {
-// 		const e3d::StageCanvas* canvas 
-// 			= static_cast<const e3d::StageCanvas*>(m_stage->getCanvas());
-// 		std::vector<d2d::ISprite*> sprites;
-// 		selection.traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-//    		m_state = new RotateSpriteState(const_cast<e3d::StageCanvas*>(canvas), 
-//    			static_cast<Sprite*>(sprites[0]));
-// //		m_state = new RotateCameraState(const_cast<e3d::StageCanvas*>(canvas));
-// 	}
+ 	// after select, set state
+ 	const d2d::SpriteSelection& selection = GetSelection();
+ 	if (!m_state && !selection.empty()) {
+ 		const e3d::StageCanvas* canvas 
+ 			= static_cast<const e3d::StageCanvas*>(m_stage->getCanvas());
+ 		std::vector<d2d::ISprite*> sprites;
+ 		selection.traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+    		m_state = new RotateSpriteState(const_cast<e3d::StageCanvas*>(canvas), 
+    			static_cast<Sprite*>(sprites[0]));
+ //		m_state = new RotateCameraState(const_cast<e3d::StageCanvas*>(canvas));
+ 	}
 
 	if (m_state) {
 		m_state->OnMousePress(ivec2(x, y));

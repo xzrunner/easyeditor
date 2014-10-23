@@ -15,6 +15,8 @@ public:
 	void Translate(const vec3& offset);
 	void Rotate(const mat4& mat);
 
+	void ChangeCoordSystem(const vec3& origin, const Quaternion& rot);
+
 	const vec3& Start() const;
 	const vec3& Dir() const;
 
@@ -42,6 +44,18 @@ inline void Ray::Translate(const vec3& offset)
 
 inline void Ray::Rotate(const mat4& mat)
 {
+	m_dir = mat * m_dir;
+}
+
+inline void Ray::ChangeCoordSystem(const vec3& origin, 
+								   const Quaternion& rot)
+{
+	vec3 _old = m_start - origin;
+
+	mat4 mat = (-rot).ToMatrix();
+	vec3 _new = mat * _old;
+	m_start = _new;
+
 	m_dir = mat * m_dir;
 }
 

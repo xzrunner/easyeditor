@@ -26,6 +26,8 @@ bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
+// 以sprite的中心和方向，旋转ray的坐标系
+// 即AABB不变
 d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 {
 	d2d::ISprite* selected = NULL;
@@ -37,6 +39,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
 
+	mat4 cam_mat = canvas->GetCamera3().GetMatrix();
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
@@ -45,11 +48,14 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 		const e3d::AABB& aabb = symbol.GetAABB();
 		Sprite* s = static_cast<Sprite*>(sprite);
 		
-		vec3 offset = s->GetPos3();
-		offset.z = -6;
+		vec3 offset = cam_mat * s->GetPos3();
 
 		vec3 cross;
 		bool intersect = e3d::Math3::RayOBBIntersection(aabb, offset, s->GetOri3(), ray, &cross);
+
+		if (intersect) {
+			wxLogDebug("SelectByPos true");
+		}
 
 		m_selection->insert(sprite);
 	}
