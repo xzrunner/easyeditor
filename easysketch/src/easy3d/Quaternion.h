@@ -178,7 +178,7 @@ inline QuaternionT<T>  QuaternionT<T>::CreateFromAxisAngle(const Vector3<T>& axi
 template <typename T>
 inline QuaternionT<T> QuaternionT<T>::operator - () const
 {
-	return QuaternionT<T>(-x, -y, -z, -w);
+	return QuaternionT<T>(-x, -y, -z, w);
 }
 
 template <typename T>

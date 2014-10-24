@@ -3,15 +3,15 @@
 namespace e3d
 {
 
-//const float Camera::CAM_NEAR = 4;
-//const float Camera::CAM_FAR = 10;
-//
-//static const float DEFAULT_Z = -6;
+const float Camera::CAM_NEAR = 4;
+const float Camera::CAM_FAR = 10;
 
-	const float Camera::CAM_NEAR = 1004;
-	const float Camera::CAM_FAR = 1010;
+static const float DEFAULT_Z = -6;
 
-	static const float DEFAULT_Z = -1008;
+	//const float Camera::CAM_NEAR = 1004;
+	//const float Camera::CAM_FAR = 1010;
+
+	//static const float DEFAULT_Z = -1008;
 
 static const float ZOOM_STEP = 0.05f;
 

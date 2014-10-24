@@ -66,8 +66,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_editPanel->getCanvas());
 	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
-//	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
-	e3d::Ray ray;
+	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
 
 	mat4 cam_mat = canvas->GetCamera3().GetMatrix();
 	for (int i = 0, n = sprites.size(); i < n; ++i)
