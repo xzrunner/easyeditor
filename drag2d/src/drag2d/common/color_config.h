@@ -18,6 +18,7 @@ static Colorf LIGHT_GREEN(0, 0.22f, 0, 0.5f);
 static Colorf LIGHT_BLUE(0, 0, 0.22f, 0.5f);
 
 static Colorf BLACK(0, 0, 0, 1);
+static Colorf WHITE(1, 1, 1, 1);
 
 static Colorf SELECT_RED(0.75f, 0, 0, 1);
 
