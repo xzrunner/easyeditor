@@ -90,8 +90,10 @@ namespace d2d
 		void normalize() 
 		{
 			const float len = length();
-			x /= len;
-			y /= len;
+			if (len != 0) {
+				x /= len;
+				y /= len;
+			}
 		}
 
 		void turnLeft90Deg() 
