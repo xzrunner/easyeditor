@@ -7,6 +7,7 @@ namespace eparticle2d
 {
 
 class ParticleSystem;
+class ISliderCtrl;
 
 class ToolbarPanel : public d2d::ToolbarPanel
 {
@@ -15,19 +16,17 @@ public:
 		d2d::EditPanel* stage, ParticleSystem* ps);
 	virtual ~ToolbarPanel();
 
+	void Load(const Json::Value& val);
+	void Store(Json::Value& val) const;
+
 protected:
 	virtual wxSizer* initLayout();
 
 private:
+	wxSizer* InitDefaultLayout();
+	wxSizer* InitSpecialLayout();
+
 	void InitPSValue();
-
-	void OnSetCount(wxScrollEvent& event);
-	void OnSetEmissionTime(wxScrollEvent& event);
-	void OnSetFadeoutTime(wxScrollEvent& event);
-
-	void OnSetLife(wxScrollEvent& event);
-	void OnSetPosition(wxScrollEvent& event);
-	void OnSetSpeed(wxScrollEvent& event);
 
 private:
 	class DropTarget : public wxTextDropTarget
@@ -46,14 +45,8 @@ private:
 
 private:
 	ParticleSystem* m_ps;
-	
-	wxSlider* m_count;
-	wxSlider* m_emission_time;
-	wxSlider* m_fadeout_time;
 
-	wxSlider *m_life_min, *m_life_max;
-	wxSlider *m_pos_x_min, *m_pos_x_max, *m_pos_y_min, *m_pos_y_max;
-	wxSlider *m_spd_x_min, *m_spd_x_max, *m_spd_y_min, *m_spd_y_max;
+	std::vector<ISliderCtrl*> m_sliders;
 
 }; // ToolbarPanel
 

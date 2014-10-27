@@ -23,10 +23,31 @@ Task::~Task()
 
 void Task::loadFromFile(const char* filename)
 {
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	LoadPSSymbol(filename, value);
+	m_toolbar->Load(value);
 }
 
 void Task::storeToFile(const char* filename) const
 {
+	Json::Value value;
+
+	StorePSSymbol(filename, value);
+	m_toolbar->Store(value);
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filename);
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 }
 
 void Task::clear()
@@ -61,6 +82,24 @@ void Task::initLayout()
 // 	wxSize size = m_parent->GetSize();
 // 	size.SetWidth(size.GetWidth() + 1);
 // 	m_parent->SetSize(size);
+}
+
+void Task::StorePSSymbol(const char* filename, Json::Value& val) const
+{
+	ParticleSystem* ps = m_stage->GetParticleSystem();
+	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+	val["symbol_path"] = d2d::FilenameTools::getRelativePath(dir,
+		ps->GetSymbolFilePath()).ToStdString();
+}
+
+void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
+{
+	ParticleSystem* ps = m_stage->GetParticleSystem();
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+	ps->SetSymbol(symbol);
+	symbol->release();
 }
 
 }

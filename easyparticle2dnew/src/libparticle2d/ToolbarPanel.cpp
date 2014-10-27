@@ -1,6 +1,8 @@
 #include "ToolBarPanel.h"
 #include "StagePanel.h"
 #include "ParticleSystem.h"
+#include "slider_ctrl.h"
+#include "CosSliderCtrl.h"
 
 namespace eparticle2d
 {
@@ -11,11 +13,19 @@ static const int EMISSION_TIME = 150;
 
 static const float FADEOUT_TIME = 300;
 
-static const int MIN_LIFE = 150, MAX_LIFE = 1300;
+static const int LIFE_CENTER = 1000, LIFE_OFFSET = 2000;
 
-static const int POS_MIN = 0, POS_MAX = 0;
+static const int DIRECTION_CENTER = 0, DIRECTION_OFFSET = 180;
 
-static const int SPD_MIN = 0, SPD_MAX = 0;
+static const int SCALE_START = 100, SCALE_END = 100;
+
+static const int SPD_CENTER = 100, SPD_OFFSET = 1000;
+
+static const int GRAVITY_CENTER = 0, GRAVITY_OFFSET = 0;
+
+static const int RADIAL_ACC_CENTER = 0, RADIAL_ACC_OFFSET = 0;
+
+static const int TANGENTIAL_ACC_CENTER = 0, TANGENTIAL_ACC_OFFSET = 0;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   d2d::EditPanel* stage, ParticleSystem* ps)
@@ -38,168 +48,114 @@ ToolbarPanel::~ToolbarPanel()
 	m_ps->release();
 }
 
+void ToolbarPanel::Load(const Json::Value& val)
+{
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Load(val);
+	}
+
+	InitPSValue();
+}
+
+void ToolbarPanel::Store(Json::Value& val) const
+{
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Store(val);
+	}
+}
+
 wxSizer* ToolbarPanel::initLayout()
 {
-	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
+	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+	sizer->Add(InitDefaultLayout());
+	sizer->AddSpacer(10);
+	sizer->Add(InitSpecialLayout());
+	return sizer;
+}
+
+wxSizer* ToolbarPanel::InitDefaultLayout()
+{
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 	// Emission Time
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Emission Time(ms)"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_emission_time = new wxSlider(this, wxID_ANY, EMISSION_TIME, 10, 1000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_emission_time->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetEmissionTime));
-		sizer->Add(m_emission_time);
-
-		top_sizer->Add(sizer);
-	}
-	top_sizer->AddSpacer(10);
+	SliderCtrlOne* s_emission = new SliderCtrlOne(this, "Emission Time(ms)", "emission_time", m_ps, PS_EMISSION_TIME, 
+		SliderItem("", "", EMISSION_TIME, 10, 10000));
+	sizer->Add(s_emission);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_emission);
 	// Count
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Count"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_count = new wxSlider(this, wxID_ANY, COUNT, 1, 100, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_count->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetCount));
-		sizer->Add(m_count);
-
-		top_sizer->Add(sizer);
-	}
-	top_sizer->AddSpacer(10);
+	SliderCtrlOne* s_count = new SliderCtrlOne(this, "Count", "count", m_ps, PS_COUNT, 
+		SliderItem("", "", COUNT, 1, 100));
+	sizer->Add(s_count);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_count);
 	// Fadeout Time
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Fadeout Time(ms)"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_fadeout_time = new wxSlider(this, wxID_ANY, FADEOUT_TIME, 10, 2500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_fadeout_time->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetFadeoutTime));
-		sizer->Add(m_fadeout_time);
-
-		top_sizer->Add(sizer);
-	}
-	top_sizer->AddSpacer(10);
+	SliderCtrlOne* s_fadeout = new SliderCtrlOne(this, "Fadeout Time(ms)", "fadeout_time", m_ps, PS_FADEOUT_TIME, 
+		SliderItem("", "", FADEOUT_TIME, 10, 2500));
+	sizer->Add(s_fadeout);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_fadeout);
 	// Life
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Life(ms)"));
-		wxSizer* life_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
-
-			m_life_min = new wxSlider(this, wxID_ANY, MIN_LIFE, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_life_min->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetLife));
-			sizer->Add(m_life_min);
-
-			life_sizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
-
-			m_life_max = new wxSlider(this, wxID_ANY, MAX_LIFE, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_life_max->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetLife));
-			sizer->Add(m_life_max);
-
-			life_sizer->Add(sizer);
-		}
-		top_sizer->Add(life_sizer);
-	}
+	SliderCtrlTwo* s_life = new SliderCtrlTwo(this, "Life(ms)", "life", m_ps, PS_LIFE, 
+		SliderItem("center", "center", LIFE_CENTER, 0, 50000), SliderItem("offset", "offset", LIFE_OFFSET, 0, 5000));
+	sizer->Add(s_life);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_life);
 	// Position
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Position"));
-		wxSizer* pos_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min x")));
-
-			m_pos_x_min = new wxSlider(this, wxID_ANY, POS_MIN, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_pos_x_min->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetPosition));
-			sizer->Add(m_pos_x_min);
-
-			pos_sizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max x")));
-
-			m_pos_x_max = new wxSlider(this, wxID_ANY, POS_MAX, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_pos_x_max->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetPosition));
-			sizer->Add(m_pos_x_max);
-
-			pos_sizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min y")));
-
-			m_pos_y_min = new wxSlider(this, wxID_ANY, POS_MIN, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_pos_y_min->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetPosition));
-			sizer->Add(m_pos_y_min);
-
-			pos_sizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max y")));
-
-			m_pos_y_max = new wxSlider(this, wxID_ANY, POS_MAX, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_pos_y_max->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetPosition));
-			sizer->Add(m_pos_y_max);
-
-			pos_sizer->Add(sizer);
-		}
-		top_sizer->Add(pos_sizer);
-	}
-	top_sizer->AddSpacer(10);
+	SliderCtrlTwo* s_spd = new SliderCtrlTwo(this, "Position", "position", m_ps, PS_POSITION,
+		SliderItem("x", "x", 0, -500, 500), SliderItem("y", "y", 0, -500, 500));
+	sizer->Add(s_spd);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_spd);
+	// Direction
+	SliderCtrlTwo* s_dir = new SliderCtrlTwo(this, "方向", "direction", m_ps, PS_DIRECTION, 
+		SliderItem("center", "center", DIRECTION_CENTER, 0, 360), SliderItem("offset", "offset", DIRECTION_OFFSET, 0, 360));
+	sizer->Add(s_dir);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_dir);
+	// Scale
+	SliderCtrlTwo* s_scale = new SliderCtrlTwo(this, "缩放", "scale", m_ps, PS_SCALE, 
+		SliderItem("start", "start", SCALE_START, 0, 500), SliderItem("end", "end", SCALE_END, 0, 500));
+	sizer->Add(s_scale);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_scale);
 	// Speed
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Speed"));
-		wxSizer* spd_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min x")));
+	SliderCtrlTwo* s_speed = new SliderCtrlTwo(this, "速度", "speed", m_ps, PS_SPEED, 
+		SliderItem("center", "center", SPD_CENTER, 0, 500), SliderItem("offset", "offset", SPD_OFFSET, 0, 200));
+	sizer->Add(s_speed);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_speed);
+	// Gravity
+	SliderCtrlTwo* s_gravity = new SliderCtrlTwo(this, "重力", "gravity", m_ps, PS_GRAVITY, 
+		SliderItem("center", "center", GRAVITY_CENTER, 0, 1000), SliderItem("offset", "offset", GRAVITY_OFFSET, 0, 200));
+	sizer->Add(s_gravity);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_gravity);
+	// Radial Acceleration
+	SliderCtrlTwo* s_radial_acc = new SliderCtrlTwo(this, "法向加速度", "radial_acc", m_ps, PS_RADIAL_ACC, 
+		SliderItem("center", "center", RADIAL_ACC_CENTER, 0, 500), SliderItem("offset", "offset", RADIAL_ACC_OFFSET, 0, 100));
+	sizer->Add(s_radial_acc);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_radial_acc);
+	// Tangential Acceleration
+	SliderCtrlTwo* s_tangential_acc = new SliderCtrlTwo(this, "切向加速度", "tangential_acc", m_ps, PS_TANGENTIAL_ACC, 
+		SliderItem("center", "center", RADIAL_ACC_CENTER, 0, 500), SliderItem("offset", "offset", RADIAL_ACC_OFFSET, 0, 100));
+	sizer->Add(s_tangential_acc);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_tangential_acc);
 
-			m_spd_x_min = new wxSlider(this, wxID_ANY, SPD_MIN, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_spd_x_min->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetSpeed));
-			sizer->Add(m_spd_x_min);
+	return sizer;
+}
 
-			spd_sizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max x")));
+wxSizer* ToolbarPanel::InitSpecialLayout()
+{
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-			m_spd_x_max = new wxSlider(this, wxID_ANY, SPD_MAX, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_spd_x_max->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetSpeed));
-			sizer->Add(m_spd_x_max);
+	CosSliderCtrl* s_cos = new CosSliderCtrl(this, "cos", m_ps);
+	sizer->Add(s_cos);
+	m_sliders.push_back(s_cos);
 
-			spd_sizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min y")));
-
-			m_spd_y_min = new wxSlider(this, wxID_ANY, SPD_MIN, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_spd_y_min->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetSpeed));
-			sizer->Add(m_spd_y_min);
-
-			spd_sizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max y")));
-
-			m_spd_y_max = new wxSlider(this, wxID_ANY, SPD_MAX, -200, 200, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_spd_y_max->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::OnSetSpeed));
-			sizer->Add(m_spd_y_max);
-
-			spd_sizer->Add(sizer);
-		}
-		top_sizer->Add(spd_sizer);
-	}
-	top_sizer->AddSpacer(10);
-
-	return top_sizer;
+	return sizer;
 }
 
 void ToolbarPanel::InitPSValue()
@@ -208,47 +164,9 @@ void ToolbarPanel::InitPSValue()
 		return;
 	}
 
-	OnSetCount(wxScrollEvent());
-	OnSetEmissionTime(wxScrollEvent());
-	OnSetFadeoutTime(wxScrollEvent());
-
-	OnSetLife(wxScrollEvent());
-	OnSetPosition(wxScrollEvent());
-	OnSetSpeed(wxScrollEvent());
-}
-
-void ToolbarPanel::OnSetCount(wxScrollEvent& event)
-{
-	m_ps->SetCount(m_count->GetValue());
-}
-
-void ToolbarPanel::OnSetEmissionTime(wxScrollEvent& event)
-{
-	m_ps->SetEmissionTime(m_emission_time->GetValue());	
-}
-
-void ToolbarPanel::OnSetFadeoutTime(wxScrollEvent& event)
-{
-	m_ps->SetFadeoutTime(m_fadeout_time->GetValue());
-}
-
-void ToolbarPanel::OnSetLife(wxScrollEvent& event)
-{
-	m_ps->SetLife(m_life_min->GetValue(), m_life_max->GetValue());
-}
-
-void ToolbarPanel::OnSetPosition(wxScrollEvent& event)
-{
-	d2d::Vector min(m_pos_x_min->GetValue(), m_pos_y_min->GetValue());
-	d2d::Vector max(m_pos_x_max->GetValue(), m_pos_y_max->GetValue());
-	m_ps->SetPosition(min, max);
-}
-
-void ToolbarPanel::OnSetSpeed(wxScrollEvent& event)
-{
-	d2d::Vector min(m_spd_x_min->GetValue(), m_spd_y_min->GetValue());
-	d2d::Vector max(m_spd_x_max->GetValue(), m_spd_y_max->GetValue());
-	m_ps->SetSpeed(min, max);
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Update();
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

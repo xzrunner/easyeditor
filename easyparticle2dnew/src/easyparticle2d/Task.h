@@ -22,10 +22,6 @@ public:
 
 	d2d::GLCanvas* getCanvas() const;
 
-	ToolbarPanel* getToolbar() const {
-		return m_toolbar;
-	}
-
 	static Task* create(wxFrame* parent)
 	{
 		return new Task(parent);
@@ -37,6 +33,9 @@ protected:
 
 private:
 	void initLayout();
+
+	void StorePSSymbol(const char* filename, Json::Value& val) const;
+	void LoadPSSymbol(const char* filename, const Json::Value& val);
 
 private:
 	wxWindow* m_root;

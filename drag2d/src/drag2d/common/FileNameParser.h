@@ -25,6 +25,7 @@ namespace d2d
 			e_fontblank,
 			e_freetype,
 			e_scripts,
+			e_particle2d,
 			e_particle3d,
 		};
 

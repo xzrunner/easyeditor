@@ -3,6 +3,7 @@
 
 #include <drag2d.h>
 
+#include "UICallback.h"
 #include "ValueRegion.h"
 
 namespace eparticle2d
@@ -10,11 +11,37 @@ namespace eparticle2d
 
 class Particle;
 
-class ParticleSystem : public d2d::Object
+enum PS_PROPERTY
+{
+	PS_COUNT = 0,
+	PS_EMISSION_TIME,
+	PS_FADEOUT_TIME,
+
+	PS_LIFE,
+	PS_POSITION,
+	PS_DIRECTION,
+	PS_SCALE,
+	PS_SPEED,
+	PS_GRAVITY,
+	PS_RADIAL_ACC,
+	PS_TANGENTIAL_ACC,
+
+	PS_COS_AMPLITUDE,
+	PS_COS_FREQUENCY,
+
+}; // PS_PROPERTY
+
+class ParticleSystem : public d2d::Object, public UICallback
 {
 public:
 	ParticleSystem(int buffer);
 	~ParticleSystem();
+
+	//
+	// interface UICallback
+	//
+	virtual void OnSetKeyValue(int key, int val);
+	virtual void OnSetKeyValue(int key, int val0, int val1);
 
 	void Draw(const d2d::Matrix& mt);
 
@@ -28,21 +55,9 @@ public:
 	void ReloadTexture() const;
 
 	void SetSymbol(d2d::ISymbol* symbol);
-
-public:
-	void SetCount(int val);
-	void SetEmissionTime(int val);
-	void SetFadeoutTime(int val);
-
-	void SetLife(int min, int max);
-	void SetPosition(const d2d::Vector& min, const d2d::Vector& max);
-	void SetDirection(int min, int max);
-	void SetScale(int min, int max);
-
-	void SetSpeed(const d2d::Vector& min, const d2d::Vector& max);
-	void SetGravity(int min, int max);
-	void SetRadialAcc(int min, int max);
-	void SetTangentialAcc(int min, int max);
+	const wxString& GetSymbolFilePath() const {
+		return m_symbol->getFilepath();
+	}
 
 private:
 	void Add();
@@ -74,6 +89,8 @@ private:
 
 	float m_fadeout_time;
 
+	float m_scale_start, m_scale_end;
+
 	d2d::ISymbol* m_symbol;
 
 	//
@@ -82,14 +99,18 @@ private:
 
 	ValueRegion<float> m_life_region;
 
-	ValueRegion<d2d::Vector> m_pos_region;
+	ValueRegion<float> m_posx_region, m_posy_region;
 	ValueRegion<float> m_direction_region;
-	ValueRegion<float> m_scale_region;
+//	ValueRegion<float> m_scale_region;
 
-	ValueRegion<d2d::Vector> m_speed_region;
+	ValueRegion<float> m_speed_region;
 	ValueRegion<float> m_gravity_region;
 	ValueRegion<float> m_radial_acc_region;
 	ValueRegion<float> m_tangential_acc_region;
+
+	// special
+	ValueRegion<float> m_cos_amplitude_region;
+	ValueRegion<float> m_cos_frequency_region;
 
 }; // ParticleSystem
 

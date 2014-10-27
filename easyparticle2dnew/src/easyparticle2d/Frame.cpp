@@ -40,7 +40,7 @@ void Frame::onNew(wxCommandEvent& event)
 
 void Frame::onOpen(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
+	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle2d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
 		filter, wxFD_OPEN);
@@ -64,7 +64,7 @@ void Frame::onSave(wxCommandEvent& event)
 
 void Frame::onSaveAs(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
+	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle2d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
 		filter, wxFD_SAVE);

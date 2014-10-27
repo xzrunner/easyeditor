@@ -39,7 +39,7 @@ void StageCanvas::onDraw()
 			continue;
 		d2d::SpriteDraw::drawSprite(sprites[i]);
 	}
-
+	
 	ParticleSystem* ps = m_stage->GetParticleSystem();
 	if (ps) {
 		ps->Draw(d2d::Matrix());

@@ -34,6 +34,13 @@ public:
 
 	d2d::Colorf color;
 
+	// special
+	float cos_amplitude;
+	float cos_frequency;
+
+public:
+	Particle();
+
 }; // Patricle
 
 }

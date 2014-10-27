@@ -176,6 +176,26 @@
 				Name="toolbar"
 				>
 				<File
+					RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\ISliderCtrl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\slider_ctrl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\slider_ctrl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel.cpp"
 					>
 				</File>
@@ -257,8 +277,24 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="file"
+			>
+			<File
+				RelativePath="..\..\..\src\libparticle2d\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle2d\FileIO.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libparticle2d\config.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libparticle2d\UICallback.h"
 			>
 		</File>
 	</Files>
