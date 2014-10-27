@@ -136,16 +136,19 @@ void ParticleSystem::Update(float dt)
 
 			d2d::Vector radial = p->position - p->origin;
 			radial.normalize();
-			radial *= p->radial_acceleration;
-
 			d2d::Vector tangential = d2d::Math::rotateVectorRightAngle(radial, true);
+
+			radial *= p->radial_acceleration;			
 			tangential *= p->tangential_acceleration;
 
-			d2d::Vector gravity(0.0f, p->gravity);
+			d2d::Vector gravity(0.0f, -p->gravity);
 
 			p->speed += (radial + tangential + gravity) * dt;
 
-			p->speed.x = p->cos_amplitude * cos(p->cos_frequency * p->life);
+			// 水平速度cos效果器
+			if (p->cos_amplitude != 0) {
+				p->speed.x = p->cos_amplitude * cos(p->cos_frequency * p->life);
+			}
 
 			p->position += p->speed * dt;
 

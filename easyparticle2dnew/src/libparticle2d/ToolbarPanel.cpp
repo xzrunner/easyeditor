@@ -127,19 +127,19 @@ wxSizer* ToolbarPanel::InitDefaultLayout()
 	m_sliders.push_back(s_speed);
 	// Gravity
 	SliderCtrlTwo* s_gravity = new SliderCtrlTwo(this, "重力", "gravity", m_ps, PS_GRAVITY, 
-		SliderItem("center", "center", GRAVITY_CENTER, 0, 1000), SliderItem("offset", "offset", GRAVITY_OFFSET, 0, 200));
+		SliderItem("center", "center", GRAVITY_CENTER, -1000, 1000), SliderItem("offset", "offset", GRAVITY_OFFSET, 0, 200));
 	sizer->Add(s_gravity);
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_gravity);
 	// Radial Acceleration
 	SliderCtrlTwo* s_radial_acc = new SliderCtrlTwo(this, "法向加速度", "radial_acc", m_ps, PS_RADIAL_ACC, 
-		SliderItem("center", "center", RADIAL_ACC_CENTER, 0, 500), SliderItem("offset", "offset", RADIAL_ACC_OFFSET, 0, 100));
+		SliderItem("center", "center", RADIAL_ACC_CENTER, -2000, 2000), SliderItem("offset", "offset", RADIAL_ACC_OFFSET, 0, 100));
 	sizer->Add(s_radial_acc);
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_radial_acc);
 	// Tangential Acceleration
 	SliderCtrlTwo* s_tangential_acc = new SliderCtrlTwo(this, "切向加速度", "tangential_acc", m_ps, PS_TANGENTIAL_ACC, 
-		SliderItem("center", "center", RADIAL_ACC_CENTER, 0, 500), SliderItem("offset", "offset", RADIAL_ACC_OFFSET, 0, 100));
+		SliderItem("center", "center", RADIAL_ACC_CENTER, 0, 4000), SliderItem("offset", "offset", RADIAL_ACC_OFFSET, 0, 100));
 	sizer->Add(s_tangential_acc);
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_tangential_acc);
