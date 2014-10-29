@@ -114,8 +114,8 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
  	glClear(GL_COLOR_BUFFER_BIT);
  
 	// todo why?
-  	glEnable(GL_BLEND);
-  	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+//   	glEnable(GL_BLEND);
+//   	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
 	Vector pos(node.GetCenterX(), node.GetCenterY());
 	float angle = node.IsRotated() ? PI * 0.5f : 0;
@@ -593,6 +593,9 @@ void DynamicTexAndFont::BeginDraw()
 	shader->SetModelView(Vector(0, 0), 1);
 	shader->SetProjection(m_width, m_height);
 	glViewport(0, 0, m_width, m_height);
+
+   	glEnable(GL_BLEND);
+   	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void DynamicTexAndFont::EndDraw()
