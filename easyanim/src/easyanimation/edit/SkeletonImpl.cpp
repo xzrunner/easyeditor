@@ -96,7 +96,7 @@ void SkeletonImpl::onPopMenuSelected(int type)
 
 void SkeletonImpl::onDraw() const
 {
-	d2d::ArrangeSpriteImpl::onDraw();
+	d2d::ArrangeSpriteImpl::onDraw(*m_stage->getCamera());
 	m_stage->getSkeletonData().draw();
 }
 

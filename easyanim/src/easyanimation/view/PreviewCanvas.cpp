@@ -39,7 +39,7 @@ void PreviewCanvas::onDraw()
 	drawStageData();
 
 #ifdef _DEBUG 
-	d2d::DynamicTexAndFont::Instance()->DebugDraw(m_screen);
+	d2d::DynamicTexAndFont::Instance()->DebugDraw();
 #endif
 }
 
