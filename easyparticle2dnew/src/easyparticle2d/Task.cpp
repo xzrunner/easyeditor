@@ -33,6 +33,8 @@ void Task::loadFromFile(const char* filename)
 
 	LoadPSSymbol(filename, value);
 	m_toolbar->Load(value);
+
+	CocoPacker::pack("D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\particle2d", "D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\test.lua");
 }
 
 void Task::storeToFile(const char* filename) const
@@ -65,14 +67,23 @@ void Task::initLayout()
 {
 	wxSplitterWindow* rightSplitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* leftSplitter = new wxSplitterWindow(rightSplitter);
+	wxSplitterWindow* left_hori_splitter = new wxSplitterWindow(leftSplitter);
 
-	m_library = new LibraryPanel(leftSplitter);
+	m_library = new LibraryPanel(left_hori_splitter);
 	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
+
+	d2d::PropertySettingPanel* property 
+		= new d2d::PropertySettingPanel(left_hori_splitter);
+	property->setPropertySetting(new PropertySetting(m_stage, &m_ps_name));
+
 	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage, 
 		m_stage->GetParticleSystem());
 
+	left_hori_splitter->SetSashGravity(0.6f);
+	left_hori_splitter->SplitHorizontally(m_library, property);
+
 	leftSplitter->SetSashGravity(0.2f);
-	leftSplitter->SplitVertically(m_library, m_stage);
+	leftSplitter->SplitVertically(left_hori_splitter, m_stage);
 
 	rightSplitter->SetSashGravity(0.7f);
 	rightSplitter->SplitVertically(leftSplitter, m_toolbar);
@@ -90,6 +101,7 @@ void Task::StorePSSymbol(const char* filename, Json::Value& val) const
 	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
 	val["symbol_path"] = d2d::FilenameTools::getRelativePath(dir,
 		ps->GetSymbolFilePath()).ToStdString();
+	val["name"] = m_ps_name;
 }
 
 void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
@@ -100,6 +112,8 @@ void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	ps->SetSymbol(symbol);
 	symbol->release();
+
+	m_ps_name = val["name"].asString();
 }
 
 }

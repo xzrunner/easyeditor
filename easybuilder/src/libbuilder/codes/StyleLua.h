@@ -25,6 +25,18 @@ namespace lua
 		gen.line(name+" = "+val);
 	}
 
+	static void assign_with_end(CodeGenerator& gen, 
+		const std::string& name, const std::string& val)
+	{
+		gen.line(name+" = "+val+",");
+	}
+
+	static void assign_with_end(CodeGenerator& gen, 
+		const std::string& name, float val)
+	{
+		gen.line(name+" = "+wxString::FromDouble(val).ToStdString()+",");
+	}
+
 	static std::string assign(const std::string& name, const std::string& val)
 	{
 		return name+" = "+val;

@@ -19,7 +19,7 @@ static const int DIRECTION_CENTER = 0, DIRECTION_OFFSET = 180;
 
 static const int SCALE_START = 100, SCALE_END = 100;
 
-static const int SPD_CENTER = 100, SPD_OFFSET = 1000;
+static const int SPD_CENTER = 100, SPD_OFFSET = 0;
 
 static const int GRAVITY_CENTER = 0, GRAVITY_OFFSET = 0;
 

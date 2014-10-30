@@ -252,6 +252,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\PropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\PropertySetting.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="particle"
@@ -280,6 +292,14 @@
 		<Filter
 			Name="file"
 			>
+			<File
+				RelativePath="..\..\..\src\libparticle2d\CocoPacker.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle2d\CocoPacker.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\src\libparticle2d\FileIO.cpp"
 				>

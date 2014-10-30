@@ -7,7 +7,10 @@
 #include "libparticle2d/Sprite.h"
 #include "libparticle2d/LibraryPage.h"
 #include "libparticle2d/LibraryPanel.h"
+#include "libparticle2d/PropertySetting.h"
 #include "libparticle2d/StagePanel.h"
 #include "libparticle2d/ToolbarPanel.h"
+
+#include "libparticle2d/CocoPacker.h"
 
 #endif // _EASYPARTICLE2D_H_

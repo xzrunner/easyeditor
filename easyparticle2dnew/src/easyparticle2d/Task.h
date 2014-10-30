@@ -46,6 +46,9 @@ private:
 	StagePanel* m_stage;
 	ToolbarPanel* m_toolbar;
 
+	// todo
+	std::string m_ps_name;
+
 }; // Task
 
 }
