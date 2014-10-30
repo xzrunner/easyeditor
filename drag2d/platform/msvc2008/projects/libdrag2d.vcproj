@@ -161,6 +161,10 @@
 				Name="arrange"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteConfig.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteFixOP.cpp"
 					>
 				</File>
@@ -211,14 +215,6 @@
 				<Filter
 					Name="sprite"
 					>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\operator\ArrangeSpriteImpl.h"
-						>
-					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\operator\IArrangeSpriteState.h"
 						>

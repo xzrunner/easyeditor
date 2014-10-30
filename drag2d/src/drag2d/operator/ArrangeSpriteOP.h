@@ -10,6 +10,7 @@ class EditPanel;
 class MultiSpritesImpl;
 class PropertySettingPanel;
 class AbstractEditCMPT;
+struct ArrangeSpriteConfig;
 
 template <typename TBase>
 class ArrangeSpriteOP : public TBase
@@ -17,7 +18,7 @@ class ArrangeSpriteOP : public TBase
 public:
 	ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 		PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL,
-		bool isDeformOpen = true, bool isAutoAlignOpen = true, ArrangeSpriteImpl* impl = NULL);
+		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), ArrangeSpriteImpl* impl = NULL);
 	virtual ~ArrangeSpriteOP();
 
 	virtual bool onKeyDown(int keyCode);

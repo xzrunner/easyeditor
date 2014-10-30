@@ -30,18 +30,15 @@ const float ArrangeSpriteImpl::CTRL_NODE_RADIUS = 10.0f;
 ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 									 MultiSpritesImpl* spritesImpl,
 									 PropertySettingPanel* propertyPanel,
-									 bool isDeformOpen,
-									 bool isAutoAlignOpen,
-									 bool isOffsetOpen) 
+									 const ArrangeSpriteConfig& cfg) 
 	: m_editPanel(editPanel)
 	, m_spritesImpl(spritesImpl)
 	, m_propertyPanel(propertyPanel)
-	, m_isDeformOpen(isDeformOpen)
 	, m_align(spritesImpl)
 	, m_op_state(NULL)
-	, m_is_offset_open(isOffsetOpen)
+	, m_cfg(cfg)
 {
-	m_align.SetOpen(isAutoAlignOpen);
+	m_align.SetOpen(cfg.is_auto_align_open);
 
 	m_selection = spritesImpl->getSpriteSelection();
 	m_selection->retain();
@@ -159,7 +156,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 	}
 
 	// offset
-	if (m_is_offset_open)
+	if (m_cfg.is_offset_open)
 	{
 		d2d::Vector offset = selected->getPosition() + selected->getOffset();
 		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
@@ -170,7 +167,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 	}
 
 	// scale
-	if (m_isDeformOpen)
+	if (m_cfg.is_deform_open)
 	{
 		Vector ctrlNodes[8];
 		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
@@ -245,23 +242,28 @@ void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 	if (!selected) return;
 
 	// shear
-	Vector ctrlNodes[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
-	for (int i = 0; i < 8; ++i)
+	if (m_cfg.is_deform_open)
 	{
-		if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
+		Vector ctrlNodes[8];
+		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
+		for (int i = 0; i < 8; ++i)
 		{
-			SpriteCtrlNode::Node cn;
-			cn.pos = ctrlNodes[i];
-			cn.type = SpriteCtrlNode::Type(i);
-			delete m_op_state;
-			m_op_state = CreateShearState(selected, cn);
-			return;
+			if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius)
+			{
+				SpriteCtrlNode::Node cn;
+				cn.pos = ctrlNodes[i];
+				cn.type = SpriteCtrlNode::Type(i);
+				delete m_op_state;
+				m_op_state = CreateShearState(selected, cn);
+				return;
+			}
 		}
 	}
 
 	// rotate
-	m_op_state = CreateRotateState(m_selection, pos);
+	if (m_cfg.is_rotate_open) {
+		m_op_state = CreateRotateState(m_selection, pos);
+	}
 }
 
 void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
@@ -348,7 +350,7 @@ void ArrangeSpriteImpl::onDraw(const Camera& cam) const
 {
 	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
 
-	if (m_isDeformOpen && m_selection->size() == 1)
+	if (m_cfg.is_deform_open && m_selection->size() == 1)
 	{
 		ISprite* selected = NULL;
 		std::vector<ISprite*> sprites;
@@ -362,7 +364,7 @@ void ArrangeSpriteImpl::onDraw(const Camera& cam) const
 		for (int i = 4; i < 8; ++i)
 			PrimitiveDraw::drawCircle(ctrlNodes[i], m_ctrl_node_radius, true, 2, Colorf(0.2f, 0.8f, 0.2f));
 
-		if (m_is_offset_open)
+		if (m_cfg.is_offset_open)
 		{
 			d2d::Vector offset = selected->getPosition() + selected->getOffset();
 			PrimitiveDraw::drawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
@@ -379,7 +381,7 @@ void ArrangeSpriteImpl::clear()
 ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 {
 	ISprite* selected = NULL;
-	if (m_isDeformOpen && m_selection->size() == 1)
+	if (m_cfg.is_deform_open && m_selection->size() == 1)
 	{
 		std::vector<ISprite*> sprites;
 		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
@@ -387,7 +389,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 	}
 	if (!selected) return NULL;
 
-	if (m_is_offset_open)
+	if (m_cfg.is_offset_open)
 	{
 		d2d::Vector offset = selected->getPosition() + selected->getOffset();
 		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {

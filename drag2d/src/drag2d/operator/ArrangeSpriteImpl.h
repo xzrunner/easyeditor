@@ -3,6 +3,7 @@
 
 #include <wx/menu.h>
 
+#include "ArrangeSpriteConfig.h"
 #include "AutoAlign.h"
 #include "SpriteCtrlNode.h"
 
@@ -21,8 +22,7 @@ class ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel, bool isDeformOpen = true,
-		bool isAutoAlignOpen = true, bool isOffsetOpen = true);
+		PropertySettingPanel* propertyPanel, const ArrangeSpriteConfig& cfg);
 	~ArrangeSpriteImpl();
 
 	virtual void onKeyDown(int keyCode);
@@ -64,17 +64,15 @@ private:
 	static const float CTRL_NODE_RADIUS;
 
 private:
+	const ArrangeSpriteConfig m_cfg;
+
 	AutoAlign m_align;
 
 	EditPanel* m_editPanel;
 	MultiSpritesImpl* m_spritesImpl;
 	PropertySettingPanel* m_propertyPanel;
 
-	bool m_isDeformOpen;
-
 	IArrangeSpriteState* m_op_state;
-
-	bool m_is_offset_open;
 
 	Vector m_left_down_pos, m_right_down_pos;
 

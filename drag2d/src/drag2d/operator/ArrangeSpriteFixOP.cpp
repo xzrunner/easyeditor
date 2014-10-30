@@ -5,11 +5,12 @@
 namespace d2d
 {
 
-ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
+ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel, 
+									   MultiSpritesImpl* spritesImpl,
 									   PropertySettingPanel* propertyPanel/* = NULL*/, 
-									   AbstractEditCMPT* callback/* = NULL*/, bool isDeformOpen /*= true*/,
-									   bool isAutoAlignOpen /*= true*/)
-	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, callback, isDeformOpen, isAutoAlignOpen)
+									   AbstractEditCMPT* callback/* = NULL*/, 
+									   const ArrangeSpriteConfig& cfg)
+	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, callback, cfg)
 	, m_spritesImpl(spritesImpl)
 {
 }
