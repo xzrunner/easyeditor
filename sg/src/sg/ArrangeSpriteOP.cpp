@@ -5,7 +5,7 @@ namespace sg
 {
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
-	: d2d::ArrangeSpriteFixOP(stage, stage, NULL, NULL, false, false)
+	: d2d::ArrangeSpriteFixOP(stage, stage, NULL, NULL, d2d::ArrangeSpriteConfig(false, false, false, false))
 {
 }
 
