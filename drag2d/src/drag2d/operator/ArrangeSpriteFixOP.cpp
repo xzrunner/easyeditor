@@ -17,26 +17,31 @@ ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel, MultiSpritesImpl* s
 bool ArrangeSpriteFixOP::onMouseLeftUp(int x, int y)
 {
 	if (ArrangeSpriteOP::onMouseLeftUp(x, y)) return true;
-
-	std::vector<ISprite*> sprites;
-	m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
-	fixSpritesLocation(sprites);
-
+	FixSpritesLocation();
 	return false;
 }
 
-bool ArrangeSpriteFixOP::onMouseRightDown(int x, int y)
-{
-	if (ArrangeSpriteOP::onMouseRightDown(x, y)) return true;
-
-	onMouseLeftDown(x, y);
-
-	return false;
-}
+// bool ArrangeSpriteFixOP::onMouseRightDown(int x, int y)
+// {
+// 	if (ArrangeSpriteOP::onMouseRightDown(x, y)) return true;
+// 
+// 	onMouseLeftDown(x, y);
+// 
+// 	return false;
+// }
 
 bool ArrangeSpriteFixOP::onMouseRightUp(int x, int y)
 {
-	return onMouseLeftUp(x, y);
+	if (ArrangeSpriteOP::onMouseRightUp(x, y)) return true;
+	FixSpritesLocation();
+	return false;
+}
+
+void ArrangeSpriteFixOP::FixSpritesLocation()
+{
+	std::vector<ISprite*> sprites;
+	m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+	fixSpritesLocation(sprites);
 }
 
 void ArrangeSpriteFixOP::fixSpritesLocation(const std::vector<ISprite*>& sprites)

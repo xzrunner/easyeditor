@@ -13,12 +13,14 @@ namespace d2d
 			bool isDeformOpen = true, bool isAutoAlignOpen = true);
 
 		virtual bool onMouseLeftUp(int x, int y);
-		virtual bool onMouseRightDown(int x, int y);
+		//virtual bool onMouseRightDown(int x, int y);
 		virtual bool onMouseRightUp(int x, int y);
 
 	private:
 		// todo cost!
 		void fixSpritesLocation(const std::vector<ISprite*>& sprites);
+
+		void FixSpritesLocation();
 
 	private:
 		MultiSpritesImpl* m_spritesImpl;
