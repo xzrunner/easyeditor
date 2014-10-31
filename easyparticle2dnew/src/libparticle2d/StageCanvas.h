@@ -21,6 +21,9 @@ protected:
 private:
 	void onTimer(wxTimerEvent& event);
 
+	void DrawBackground() const;
+
+private:
 	enum
 	{
 		TIMER_ID = 1000

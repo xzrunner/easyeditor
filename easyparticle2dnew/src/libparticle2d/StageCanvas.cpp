@@ -7,6 +7,9 @@
 namespace eparticle2d
 {
 
+static const int SCREEN_WIDTH = 480;
+static const int SCREEN_HEIGHT = 320;
+
 BEGIN_EVENT_TABLE(StageCanvas, d2d::PerspectCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
 END_EVENT_TABLE()
@@ -30,6 +33,8 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::onDraw()
 {
+	DrawBackground();
+
 	std::vector<d2d::ISprite*> sprites;
 	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
@@ -77,6 +82,12 @@ void StageCanvas::onTimer(wxTimerEvent& event)
 	}
 
 	Refresh();
+}
+
+void StageCanvas::DrawBackground() const
+{
+	d2d::PrimitiveDraw::rect(d2d::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
+		d2d::LIGHT_RED_LINE);
 }
 
 }
