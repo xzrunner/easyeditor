@@ -36,18 +36,32 @@ bool PasteSymbolOP::onDraw() const
 		return false;
 	}
 
+	bool ret;
+
 	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
 
 	SymbolRender* render = SymbolRender::Instance();
-	render->DrawGrass(*symbol, m_pos);
-
 	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
-	bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
-	render->DrawGrids(*symbol, m_pos, valid);
+	bool is_flat = stage->GetPerspective();
 
-	bool ret = d2d::PasteSymbolOP::onDraw();
+	if (is_flat)
+	{
+		render->DrawGrass(*symbol, m_pos);
 
-	render->DrawArrow(*symbol, m_pos);
+		bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
+		render->DrawGrids(*symbol, m_pos, valid);
+
+		ret = d2d::PasteSymbolOP::onDraw();
+
+		render->DrawArrow(*symbol, m_pos);
+	}
+	else
+	{
+		bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
+		render->DrawGrids(*symbol, m_pos, valid);
+
+		ret = d2d::PasteSymbolOP::onDraw();
+	}
 
 	return ret;
 }

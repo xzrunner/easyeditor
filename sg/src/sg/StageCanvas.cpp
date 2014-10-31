@@ -61,12 +61,22 @@ void StageCanvas::onDraw()
 		inited = true;
 	}
 
-	DrawBackground();
-	DrawGuideLines();
-	DrawGrass();
-	DrawGrids();
-	DrawSprites();
-	DrawArrow();
+	bool is_flat = m_stage->GetPerspective();
+	if (is_flat)
+	{
+		DrawGuideLines();
+		DrawGrids();
+		DrawSprites();
+	}
+	else
+	{
+		DrawBackground();
+		DrawGuideLines();
+		DrawGrass();
+		DrawGrids();
+		DrawSprites();
+		DrawArrow();
+	}
 
 	m_editPanel->drawEditTemp();
 
@@ -88,10 +98,9 @@ void StageCanvas::DrawBackground() const
 void StageCanvas::DrawGuideLines() const
 {
 	int row, col, edge;
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
-	stage->GetLayoutInfo(row, col, edge);
+	m_stage->GetLayoutInfo(row, col, edge);
 
-	bool is_flat = stage->GetPerspective();
+	bool is_flat = m_stage->GetPerspective();
 
 	int width = col * edge;
 	int height = row * edge;

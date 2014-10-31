@@ -58,7 +58,8 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 }
 
 void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, 
-							 const d2d::Vector& pos, bool valid) const
+							 const d2d::Vector& pos, 
+							 bool valid) const
 {
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
