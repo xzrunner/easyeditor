@@ -60,17 +60,21 @@ bool PasteSymbolOP::onDraw() const
 
 bool PasteSymbolOP::isCurrSymbolValid() const
 {
-	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
-	if (!symbol) {
-		return false;
-	}
+// 	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
+// 	if (!symbol) {
+// 		return false;
+// 	}
+// 
+// 	SymbolExt* info = static_cast<SymbolExt*>(symbol->getUserData());
+// 	if (info == NULL) {
+// 		return false;
+// 	}
+// 
+// 	return info->remain > 0;
 
-	SymbolExt* info = static_cast<SymbolExt*>(symbol->getUserData());
-	if (info == NULL) {
-		return false;
-	}
+	//////////////////////////////////////////////////////////////////////////
 
-	return info->remain > 0;
+	return true;
 }
 
 bool PasteSymbolOP::isCurrSymbolIsWall() const
