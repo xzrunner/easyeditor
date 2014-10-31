@@ -123,7 +123,10 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	lua::assign_with_end(gen, "tangentialAccelVariance", val["tangential_acc"]["offset"].asInt());
 
 	// count
-	lua::assign_with_end(gen, "maxParticles", val["count"].asInt());
+	int count = val["count"].asInt();
+	int times = val["life"]["center"].asInt() / val["emission_time"].asInt();
+	count *= times;
+	lua::assign_with_end(gen, "maxParticles", count);
 
 	// radius (no use, another mode)
 	lua::assign_with_end(gen, "maxRadius", 0);
@@ -150,8 +153,8 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	lua::assign_with_end(gen, "speedVariance", val["speed"]["offset"].asInt());
 
 	// life
-	lua::assign_with_end(gen, "particleLifespan", val["emission_time"].asInt() * 0.001f);
-	lua::assign_with_end(gen, "particleLifespanVariance", 0);
+	lua::assign_with_end(gen, "particleLifespan", val["life"]["center"].asInt() * 0.001f);
+	lua::assign_with_end(gen, "particleLifespanVariance", val["life"]["offset"].asInt() * 0.001f);
 
 	// cos
 	lua::assign_with_end(gen, "cosAmplitude", val["cos"]["amplitude"]["center"].asInt());
