@@ -43,6 +43,55 @@
 		"defenses" : 
 		[
 			{
+				"name" : "Base",
+				"size" : 5,
+				"attack_range" : 0,
+				"max_level" : 11,
+				"levels" :
+				[
+					{
+						"town_hall_level" : 1,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv2.png"
+					},
+					{
+						"town_hall_level" : 2,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv2.png"
+					},
+					{
+						"town_hall_level" : 3,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv3.png"
+					},
+					{
+						"town_hall_level" : 4,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv4.png"
+					},
+					{
+						"town_hall_level" : 5,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv5.png"
+					},
+					{
+						"town_hall_level" : 6,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv6.png"
+					},
+					{
+						"town_hall_level" : 7,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv7.png"
+					},
+					{
+						"town_hall_level" : 8,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv8.png"
+					},
+					{
+						"town_hall_level" : 9,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv9.png"
+					},
+					{
+						"town_hall_level" : 10,
+						"res_snapshoot" : "data/buildings_snapshoot/building_1001_lv10.png"
+					}
+				]
+			},
+			{
 				"name" : "Cannon",
 				"size" : 3,
 				"attack_range" : 18,
@@ -885,6 +934,7 @@
 	"amount" : 
 	[
 		{
+			"Base" : 1,
 			"Troop Housing" : 1,
 			"Elixir Storage" : 1,
 			"Gold Storage" : 1,
@@ -895,6 +945,7 @@
 			"Worker Building" : 5
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 1,
 			"Elixir Storage" : 1,
 			"Gold Storage" : 1,
@@ -908,6 +959,7 @@
 			"Worker Building" : 5
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 2,
 			"Elixir Storage" : 2,
 			"Gold Storage" : 2,
@@ -924,6 +976,7 @@
 			"Laboratory" : 1
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 2,
 			"Elixir Storage" : 2,
 			"Gold Storage" : 2,
@@ -942,6 +995,7 @@
 			"Laboratory" : 1
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 3,
 			"Elixir Storage" : 2,
 			"Gold Storage" : 2,
@@ -963,6 +1017,7 @@
 			"AirTrap" : 2
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 3,
 			"Elixir Storage" : 2,
 			"Gold Storage" : 2,
@@ -985,6 +1040,7 @@
 			"AirTrap" : 2
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 4,
 			"Elixir Storage" : 2,
 			"Gold Storage" : 2,
@@ -1013,6 +1069,7 @@
 			"Dark Elixir Barrack" : 1
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 4,
 			"Elixir Storage" : 3,
 			"Gold Storage" : 3,
@@ -1042,6 +1099,7 @@
 			"Dark Elixir Barrack" : 2
 		},
 		{
+			"Base" : 1,
 			"Troop Housing" : 4,
 			"Elixir Storage" : 4,
 			"Gold Storage" : 4,
