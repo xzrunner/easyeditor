@@ -53,7 +53,11 @@ int main(int argc, char *argv[])
 	{
 		edb::ICommand* cmd = cmds[i];
 		if (scmd == cmd->Command()) {
-			cmd->Run(argc, argv);
+			try {
+				cmd->Run(argc, argv);
+			} catch (d2d::Exception& e) {
+				std::cerr << e.what() << std::endl;
+			}
 		}
 	}
 

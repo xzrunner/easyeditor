@@ -57,7 +57,9 @@ void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 			char sig[32];
 			md5_file(imgpath.c_str(), sig);
 			std::string md5(reinterpret_cast<char*>(sig));
-			assert(!md5.empty());
+			if (md5.empty()) {
+				throw d2d::Exception("ProcessImageFiles md5 empty");
+			}
 
 			std::map<std::string, std::string>::iterator itr_md5 
 				= m_map_md5_2_image.find(md5);
@@ -108,7 +110,9 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
 	std::ifstream fin(animpath.c_str());
-	assert(!fin.fail());
+	if (fin.fail()) {
+		throw d2d::Exception("FixImagePath fin.fail");
+	}
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -135,7 +139,11 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 
 					std::map<std::string, std::string>::iterator itr_img
 						= m_map_image_2_md5.find(filepath);
-					assert(itr_img != m_map_image_2_md5.end());
+					if (itr_img == m_map_image_2_md5.end()) {
+						std::string str = "FixImagePath \""+filepath+"\""+" not exist!";
+						throw d2d::Exception(str.c_str());
+					}
+
 					std::map<std::string, std::string>::iterator itr_md5
 						= m_map_md5_2_image.find(itr_img->second);
 					if (filepath != itr_md5->second)

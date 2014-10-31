@@ -172,7 +172,10 @@ void VerifyJson::HandleSpritePath(const std::string& parent,
 	} else {
 		std::string parentname = d2d::FilenameTools::getFilenameWithExtension(parent);
 		std::map<std::string, Node*>::iterator itr_p = _map_name2node.find(parentname);
-		assert(itr_p != _map_name2node.end());
+		if (itr_p == _map_name2node.end()) {
+			std::string str = "HandleSpritePath fail to find \""+parentname+"\"";
+			throw d2d::Exception(str.c_str());
+		}
 		itr_p->second->children.insert(itr->second);
 		itr->second->parents.insert(itr_p->second);
 	}
