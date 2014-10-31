@@ -19,18 +19,32 @@ bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::AbstractEditOP::onMouseLeftDown(x, y)) return true;
 
-//	if (m_selection->empty()) {
-		SelectByPos(ivec2(x, y));
-//	}
+	d2d::ISprite* selected = SelectByPos(ivec2(x, y));
+	if (selected && selected->editable)
+	{
+		if (wxGetKeyState(WXK_CONTROL)) 
+		{
+			if (m_selection->isExist(selected)) {
+				m_selection->erase(selected);
+			} else {
+				m_selection->insert(selected);
+			}
+		}
+		else
+		{
+			if (!m_selection->isExist(selected))
+			{
+				m_selection->clear();
+				m_selection->insert(selected);
+			}
+		}
+	}
+	else
+	{
+		m_selection->clear();
+	}
 
 	return false;
-}
-
-bool SelectSpriteOP::onMouseLeftUp(int x, int y)
-{
-	if (d2d::AbstractEditOP::onMouseLeftUp(x, y)) return true;
-	m_selection->clear();
-	return false;	
 }
 
 bool SelectSpriteOP::onDraw() const
@@ -82,11 +96,11 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 		vec3 cross;
 		bool intersect = e3d::Math3::RayOBBIntersection(aabb, offset, s->GetOri3(), ray, &cross);
 		if (intersect) {
-			m_selection->insert(sprite);
+			return sprite;
 		}
 	}
 
-	return selected;
+	return NULL;
 }
 
 }

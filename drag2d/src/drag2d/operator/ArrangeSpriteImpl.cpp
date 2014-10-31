@@ -187,6 +187,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 
 	// translate
 	m_op_state = CreateTransalteState(m_selection, pos);
+
 	m_op_state->OnMousePress(pos);
 }
 

@@ -251,14 +251,6 @@
 					RelativePath="..\..\..\src\libsketch\IEditState.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libsketch\RotateSpriteState.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libsketch\RotateSpriteState.h"
-					>
-				</File>
 				<Filter
 					Name="camera"
 					>
@@ -284,6 +276,26 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libsketch\ZoomCameraState.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="sprite"
+					>
+					<File
+						RelativePath="..\..\..\src\libsketch\RotateSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsketch\RotateSpriteState.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsketch\TranslateSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libsketch\TranslateSpriteState.h"
 						>
 					</File>
 				</Filter>

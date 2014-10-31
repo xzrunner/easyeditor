@@ -15,7 +15,6 @@ public:
 	SelectSpriteOP(StagePanel* stage);
 
 	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
 
 	virtual bool onDraw() const;
 

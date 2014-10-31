@@ -39,6 +39,8 @@ bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
  //		m_state = new RotateCameraState(const_cast<e3d::StageCanvas*>(canvas));
  	}
 
+	m_state = new 
+
 	if (m_state) {
 		m_state->OnMousePress(ivec2(x, y));
 	}
