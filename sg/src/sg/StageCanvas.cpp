@@ -65,6 +65,7 @@ void StageCanvas::onDraw()
 	if (is_flat)
 	{
 		DrawGuideLines();
+		DrawGrass();
 		DrawGrids();
 		DrawSprites();
 	}
@@ -135,7 +136,7 @@ void StageCanvas::DrawGrass() const
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
-		SymbolRender::Instance()->DrawGrass(s->getSymbol(), s->getPosition());
+		SymbolRender::Instance()->DrawGrass(s->getSymbol(), s->getPosition(), m_stage->GetPerspective());
 	}
 }
 
@@ -146,7 +147,7 @@ void StageCanvas::DrawGrids() const
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
 		bool valid = m_stage->GetCheckBoard().IsValid(s);
-		SymbolRender::Instance()->DrawGrids(s->getSymbol(), s->getPosition(), valid);
+		SymbolRender::Instance()->DrawGrids(s->getSymbol(), s->getPosition(), valid, m_stage->GetPerspective());
 	}
 }
 

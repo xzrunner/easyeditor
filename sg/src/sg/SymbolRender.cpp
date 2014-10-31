@@ -32,14 +32,16 @@ void SymbolRender::Init(StagePanel* stage)
 	m_stage = stage;
 }
 
-void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos) const
+void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, 
+							 const d2d::Vector& pos, 
+							 bool is_flat) const
 {
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
 	if (info == NULL) {
 		return;
 	}
 
-	d2d::ISprite* grass = m_grass[info->size - 1];
+	d2d::Vector p = pos;
 	if (info->size % 2 == 0)
 	{
 		int row, col;
@@ -48,18 +50,31 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 		d2d::Vector fixed;
 		m_stage->TransGridPosToCoords(row - 1, col - 1, fixed);
 
-		grass->setTransform((pos + fixed) * 0.5f, 0);
+		p = (pos + fixed) * 0.5f;
+	}
+
+	d2d::ISprite* grass = m_grass[info->size - 1];
+	if (is_flat)
+	{
+		d2d::Rect r = grass->getSymbol().getSize();
+
+		float half_edge = info->size * EDGE * 0.5f;
+
+		d2d::Matrix mat;
+		mat.translate(p.x, p.y);
+		d2d::PrimitiveDraw::rect(mat, half_edge, half_edge, d2d::LIGHT_GREEN_FACE);
 	}
 	else
 	{
-		grass->setTransform(pos, 0);
+		grass->setTransform(p, 0);
+		d2d::SpriteDraw::drawSprite(grass);
 	}
-	d2d::SpriteDraw::drawSprite(grass);
 }
 
 void SymbolRender::DrawGrids(const d2d::ISymbol& symbol, 
 							 const d2d::Vector& pos, 
-							 bool valid) const
+							 bool valid,
+							 bool is_flat) const
 {
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
@@ -68,12 +83,29 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 
 	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
 	int center = (info->size >> 1);
-	for (int i = 0; i < info->size; ++i) {
-		for (int j = 0; j < info->size; ++j) {
-			d2d::Vector pos;
-			m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
-			m_grid->setTransform(pos, m_grid->getAngle());
-			d2d::SpriteDraw::drawSprite(m_grid, d2d::Matrix(), color);
+	if (is_flat)
+	{
+		d2d::Vector pos;
+		m_stage->TransGridPosToCoords(row, col, pos);
+		d2d::Matrix mat;
+		mat.translate(pos.x, pos.y);
+
+		float half_edge = info->size * EDGE * 0.5f;
+
+		d2d::ShapeStyle style = d2d::LIGHT_GREEN_FACE;
+		style.color = color;
+
+ 		d2d::PrimitiveDraw::rect(mat, half_edge, half_edge, style);
+	}
+	else
+	{
+		for (int i = 0; i < info->size; ++i) {
+			for (int j = 0; j < info->size; ++j) {
+				d2d::Vector pos;
+				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
+				m_grid->setTransform(pos, m_grid->getAngle());
+				d2d::SpriteDraw::drawSprite(m_grid, d2d::Matrix(), color);
+			}
 		}
 	}
 }

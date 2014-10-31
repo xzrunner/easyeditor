@@ -22,8 +22,8 @@ public:
 		if (idx >= 0 && idx < GRASS_COUNT) { m_grass[idx] = grass; }
 	}
 
-	void DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
-	void DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool valid) const;
+	void DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool is_flat) const;
+	void DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool valid, bool is_flat) const;
 	void DrawArrow(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
 
 public:

@@ -44,23 +44,15 @@ bool PasteSymbolOP::onDraw() const
 	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
 	bool is_flat = stage->GetPerspective();
 
-	if (is_flat)
-	{
-		render->DrawGrass(*symbol, m_pos);
+	render->DrawGrass(*symbol, m_pos, is_flat);
 
-		bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
-		render->DrawGrids(*symbol, m_pos, valid);
+	bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
+	render->DrawGrids(*symbol, m_pos, valid, is_flat);
 
-		ret = d2d::PasteSymbolOP::onDraw();
+	ret = d2d::PasteSymbolOP::onDraw();
 
+	if (!is_flat) {
 		render->DrawArrow(*symbol, m_pos);
-	}
-	else
-	{
-		bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
-		render->DrawGrids(*symbol, m_pos, valid);
-
-		ret = d2d::PasteSymbolOP::onDraw();
 	}
 
 	return ret;
