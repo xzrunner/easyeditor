@@ -16,7 +16,7 @@ public:
 
 private:
 	static void pack(const wxString& filepath, ebuilder::CodeGenerator& gen);
-	static void pack(const Json::Value& val, ebuilder::CodeGenerator& gen);
+	static void pack(const Json::Value& val, ebuilder::CodeGenerator& gen, const wxString& dir);
 
 //	static void PackFloat(const );
 

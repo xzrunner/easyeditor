@@ -56,13 +56,14 @@ void CocoPacker::pack(const wxString& filepath, ebuilder::CodeGenerator& gen)
 	gen.line(s + " = {");
 	gen.tab();
 
-	pack(val, gen);
+	wxString dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+	pack(val, gen, dir);
 
 	gen.detab();
 	gen.line("},");
 }
 
-void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
+void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, const wxString& dir)
 {
 	lua::assign_with_end(gen, "texId", 0); // no use
 
@@ -102,10 +103,15 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
 	lua::assign_with_end(gen, "finishColorVarianceAlpha", 0);
 
 	// scale
-//	lua::assign_with_end(gen, "startParticleSize", val["scale"]["start"].asInt() * 0.01f);
-	lua::assign_with_end(gen, "startParticleSize", 100);	// todo static size
+	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+	float width = symbol->getSize().xLength();
+	symbol->release();
+	float size_start = width * val["scale"]["start"].asInt() * 0.01f;
+	float size_finish = width * val["scale"]["end"].asInt() * 0.01f;
+	lua::assign_with_end(gen, "startParticleSize", size_start);
 	lua::assign_with_end(gen, "startParticleSizeVariance", 0);
-	lua::assign_with_end(gen, "finishParticleSize", val["scale"]["end"].asInt() * 0.01f);
+	lua::assign_with_end(gen, "finishParticleSize", size_finish);
 	lua::assign_with_end(gen, "finishParticleSizeVariance", 0);
 
 	// gravity
@@ -117,10 +123,7 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
 	lua::assign_with_end(gen, "tangentialAccelVariance", val["tangential_acc"]["offset"].asInt());
 
 	// count
-	// todo count / time
-	int count = val["count"].asInt();
-	int cost = val["emission_time"].asInt() * 0.001f;
-	lua::assign_with_end(gen, "maxParticles", count / cost);
+	lua::assign_with_end(gen, "maxParticles", val["count"].asInt());
 
 	// radius (no use, another mode)
 	lua::assign_with_end(gen, "maxRadius", 0);
@@ -147,8 +150,14 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen)
 	lua::assign_with_end(gen, "speedVariance", val["speed"]["offset"].asInt());
 
 	// life
-	lua::assign_with_end(gen, "particleLifespan", val["life"]["center"].asInt() * 0.001f);
-	lua::assign_with_end(gen, "particleLifespanVariance", val["life"]["offset"].asInt() * 0.001f);
+	lua::assign_with_end(gen, "particleLifespan", val["emission_time"].asInt() * 0.001f);
+	lua::assign_with_end(gen, "particleLifespanVariance", 0);
+
+	// cos
+	lua::assign_with_end(gen, "cosAmplitude", val["cos"]["amplitude"]["center"].asInt());
+	lua::assign_with_end(gen, "cosAmplitudeVariance", val["cos"]["amplitude"]["offset"].asInt());
+	lua::assign_with_end(gen, "cosFrequency", val["cos"]["frequency"]["center"].asInt() * 0.01f);
+	lua::assign_with_end(gen, "cosFrequencyVariance", val["cos"]["frequency"]["offset"].asInt() * 0.01f);
 
 	// other
 	lua::assign_with_end(gen, "yCoordFlipped", -1);
