@@ -50,6 +50,10 @@ bool ArrangeSpriteOP::onKeyDown(int keyCode)
 				sprite->SetPos3(vec3(0, 0, 0));
 				sprite->SetOri3(Quaternion());
 			}
+
+			e3d::StageCanvas* canvas 
+				= static_cast<e3d::StageCanvas*>(m_stage->getCanvas());
+			canvas->GetCamera3().Reset();
 		}
 		break;
 	}
@@ -118,6 +122,17 @@ bool ArrangeSpriteOP::onMouseRightUp(int x, int y)
 	if (m_state) {
 		m_state->OnMouseRelease(ivec2(x, y));
 	}
+
+	return false;
+}
+
+bool ArrangeSpriteOP::onMouseMove(int x, int y)
+{
+	if (SelectSpriteOP::onMouseMove(x, y)) {
+		return true;
+	}
+
+	m_editPanel->SetFocus();
 
 	return false;
 }

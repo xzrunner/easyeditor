@@ -9,10 +9,7 @@ namespace d2d
 {
 
 BEGIN_EVENT_TABLE(EditPanel, wxPanel)
-	EVT_MOUSE_EVENTS(EditPanel::onMouse)
-	EVT_KEY_DOWN(EditPanel::onKeyDown)
-	EVT_KEY_UP(EditPanel::onKeyUp)
-	EVT_SIZE(EditPanel::onSize)
+ 	EVT_SIZE(EditPanel::onSize)
 
 	EVT_MENU(Menu_UpOneLayer, EditPanel::onMenuUpOneLayer)
 	EVT_MENU(Menu_DownOneLayer, EditPanel::onMenuDownOneLayer)
