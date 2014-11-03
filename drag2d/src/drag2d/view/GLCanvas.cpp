@@ -30,7 +30,7 @@ GLCanvas::GLCanvas(EditPanel* editPanel)
 	, m_editPanel(editPanel)
  	, m_camera(editPanel->getCamera())
 	, m_screen(editPanel->getCamera())
- 	, m_width(0), m_height(0)
+ 	, m_screen_width(0), m_screen_height(0)
  	, m_isInit(false)
  	, m_context(new wxGLContext(this))
 {
@@ -80,9 +80,9 @@ void GLCanvas::initGL()
 void GLCanvas::onSize(wxSizeEvent& event)
 {
 	wxSize size = event.GetSize();
- 	m_width = size.GetWidth();
- 	m_height = size.GetHeight();
-	onSize(m_width, m_height);
+ 	m_screen_width = size.GetWidth();
+ 	m_screen_height = size.GetHeight();
+	onSize(m_screen_width, m_screen_height);
 }
 
 void GLCanvas::onPaint(wxPaintEvent& event)

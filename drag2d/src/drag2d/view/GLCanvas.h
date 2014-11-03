@@ -47,7 +47,7 @@ namespace d2d
 
 		Colorf m_bgColor;
 
-		int m_width, m_height;
+		int m_screen_width, m_screen_height;
 
 		Screen m_screen;
 
