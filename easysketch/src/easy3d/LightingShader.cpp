@@ -216,13 +216,8 @@ void LightingShader::SetModelView(const mat4& mat)
 
 void LightingShader::SetProjection(int width, int height)
 {
-// 	float h = 4.0f * height / width;
-// 	h = 3;
-// 	m_mat_projection = mat4::Frustum(-2, 2, -h / 2, h / 2, 5, 12);
-
 	float hh = 1.0f * height / width;
-//	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 1000, 1010);
-	m_mat_projection = mat4::Frustum(-1, 1, -hh, hh, 
+	m_mat_projection = mat4::Perspective(-1, 1, -hh, hh, 
 		Camera::CAM_NEAR, Camera::CAM_FAR);
 }
 
