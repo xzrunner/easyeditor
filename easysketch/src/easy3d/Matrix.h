@@ -330,19 +330,34 @@ struct Matrix4 {
 		return m;
 	}
 
-	static Matrix4<T> Frustum(T left, T right, T bottom, T top, T near, T far)
+	static Matrix4<T> Perspective(T left, T right, T bottom, T top, T near, T far)
 	{
 		T a = 2 * near / (right - left);
 		T b = 2 * near / (top - bottom);
 		T c = (right + left) / (right - left);
 		T d = (top + bottom) / (top - bottom);
-		T e = - (far + near) / (far - near);
-		T f = -2 * far * near / (far - near);
+		T e = -2 * near;
 		Matrix4 m;
 		m.c[0][0] = a; m.c[0][1] = 0; m.c[0][2] = 0; m.c[0][3] = 0;
 		m.c[1][0] = 0; m.c[1][1] = b; m.c[1][2] = 0; m.c[1][3] = 0;
-		m.c[2][0] = c; m.c[2][1] = d; m.c[2][2] = e; m.c[2][3] = -1;
-		m.c[3][0] = 0; m.c[3][1] = 0; m.c[3][2] = f; m.c[3][3] = 1;
+		m.c[2][0] = c; m.c[2][1] = d; m.c[2][2] = -1; m.c[2][3] = -1;
+		m.c[3][0] = 0; m.c[3][1] = 0; m.c[3][2] = e; m.c[3][3] = 0;
+		return m;
+	}
+
+	static Matrix4<T> Orthographic(T left, T right, T bottom, T top, T near, T far)
+	{
+		T a = 2 / (right - left);
+		T b = 2 / (top - bottom);
+		T c = - (right + left) / (right - left);
+		T d = - (top + bottom) / (top - bottom);
+		T e = - (far + near) / (far - near);
+		T f = -2 / (far - near);
+		Matrix4 m;
+		m.c[0][0] = a; m.c[0][1] = 0; m.c[0][2] = 0; m.c[0][3] = 0;
+		m.c[1][0] = 0; m.c[1][1] = b; m.c[1][2] = 0; m.c[1][3] = 0;
+		m.c[2][0] = 0; m.c[2][1] = 0; m.c[2][2] = f; m.c[2][3] = 0;
+		m.c[3][0] = c; m.c[3][1] = d; m.c[3][2] = e; m.c[3][3] = 1;
 		return m;
 	}
 
