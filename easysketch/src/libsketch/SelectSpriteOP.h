@@ -21,6 +21,9 @@ public:
 	const d2d::SpriteSelection& GetSelection() const {
 		return *m_selection;
 	}
+	d2d::SpriteSelection& GetSelection() {
+		return *m_selection;
+	}
 
 private:
 	d2d::ISprite* SelectByPos(const ivec2& pos) const;

@@ -8,31 +8,36 @@
 namespace libsketch
 {
 
+class StagePanel;
+
 class TranslateSpriteState : public IEditState
 {
 public:
-	TranslateSpriteState(d2d::SpriteSelection* selection);
-	virtual ~TranslateSpriteState();
+	TranslateSpriteState(StagePanel* stage, const d2d::SpriteSelection& selection);
 
 	virtual void OnMousePress(const ivec2& pos);
 	virtual void OnMouseRelease(const ivec2& pos);
 	virtual void OnMouseMove(const ivec2& pos);	
 
 private:
-	void Translate(const ivec2& offset);
+	void Translate(const ivec2& first, const ivec2& curr);
 
 private:
 	class Visitor : public d2d::IVisitor
 	{
 	public:
-		Visitor(const ivec2& offset) : m_offset(offset) {}
+		Visitor(StagePanel* stage, const ivec2& last, const ivec2& curr) 
+			: m_stage(stage), m_last(last), m_curr(curr) {}
 		virtual void visit(d2d::Object* object, bool& bFetchNext);
 	private:
-		ivec2 m_offset;
+		StagePanel* m_stage;
+		ivec2 m_last, m_curr;
+
 	}; // Visitor
 
 private:
-	d2d::SpriteSelection* m_selection;
+	StagePanel* m_stage;
+	const d2d::SpriteSelection& m_selection;
 
 	ivec2 m_first_pos, m_last_pos;
 

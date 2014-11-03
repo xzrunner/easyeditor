@@ -19,12 +19,19 @@ StageCanvas::StageCanvas(StagePanel* stage, d2d::LibraryPanel* library)
 
 ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 {
-	return e3d::ViewFrustum::TransPos3ProjectToScreen(proj, m_width, m_height);
+	vec3 pos = GetCamera3().GetMatrix() * proj;
+	return e3d::ViewFrustum::TransPos3ProjectToScreen(pos, m_screen_width, m_screen_height);
+}
+
+vec3 StageCanvas::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
+{
+	vec3 pos = GetCamera3().GetMatrix() * vec3(0, 0, proj_z);
+	return e3d::ViewFrustum::TransPos3ScreenToProject(scr, pos.z, m_screen_width, m_screen_height);
 }
 
 vec3 StageCanvas::TransPos3ScreenToDir(const ivec2& screen) const
 {
-	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_width, m_height);
+	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_screen_width, m_screen_height);
 }
 
 void StageCanvas::initGL()
@@ -36,8 +43,8 @@ void StageCanvas::initGL()
 void StageCanvas::onSize(int w, int h)
 {
 	e3d::StageCanvas::onSize(w, h);
-	m_width = w;
-	m_height = h;
+	m_screen_width = w;
+	m_screen_height = h;
 }
 
 void StageCanvas::onDraw()

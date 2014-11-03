@@ -8,26 +8,42 @@
 namespace libsketch
 {
 
+class StagePanel;
 class Sprite;
 
 class RotateSpriteState : public IEditState
 {
 public:
-	RotateSpriteState(e3d::StageCanvas* canvas,
-		Sprite* sprite);
+	RotateSpriteState(StagePanel* stage,
+		const d2d::SpriteSelection& selection);
 
 	virtual void OnMousePress(const ivec2& pos);
 	virtual void OnMouseRelease(const ivec2& pos);
 	virtual void OnMouseMove(const ivec2& pos);	
 
 private:
-	e3d::StageCanvas* m_canvas;
-	Sprite* m_sprite;
+	void Rotate(const e3d::Camera& cam, const ivec2& start, const ivec2& end);
 
-	bool m_is_open;
+private:
+	class Visitor : public d2d::IVisitor
+	{
+	public:
+		Visitor(StagePanel* stage, const e3d::Camera& cam, const ivec2& start, const ivec2& end) 
+			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
+		virtual void visit(d2d::Object* object, bool& bFetchNext);
 
-	Quaternion m_ori, m_pre_ori;
-	ivec2 m_first_pos;
+	private:
+		StagePanel* m_stage;
+		const e3d::Camera& m_cam;
+		ivec2 m_start, m_end;
+
+	}; // Visitor
+
+private:
+	StagePanel* m_stage;
+	const d2d::SpriteSelection& m_selection;
+
+	ivec2 m_last_pos;
 
 }; // RotateSpriteState
 

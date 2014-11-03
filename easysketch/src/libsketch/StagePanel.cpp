@@ -1,7 +1,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "ArrangeSpriteOP.h"
-#include "EditCameraOP.h"
 
 namespace libsketch
 {
@@ -15,7 +14,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	library->setCanvas(m_canvas);
 
 	m_editOP = new ArrangeSpriteOP(this);
-//	m_editOP = new EditCameraOP(this);
 
 	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
 }
@@ -53,9 +51,6 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	// todo 
-	m_sprites.clear();
-
 	sprite->retain();
 	m_sprites.push_back(sprite);
 
@@ -79,6 +74,12 @@ ivec2 StagePanel::TransPos3ProjectToScreen(const vec3& proj) const
 {
 	StageCanvas* canvas = static_cast<StageCanvas*>(m_canvas);
 	return canvas->TransPos3ProjectToScreen(proj);
+}
+
+vec3 StagePanel::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
+{
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_canvas);
+	return canvas->TransPos3ScreenToProject(scr, proj_z);	
 }
 
 }

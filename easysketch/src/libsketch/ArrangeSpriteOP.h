@@ -14,6 +14,7 @@ public:
 	ArrangeSpriteOP(StagePanel* stage);
 	virtual ~ArrangeSpriteOP();
 
+	virtual bool onKeyDown(int keyCode);
 	virtual bool onMouseLeftDown(int x, int y);
 	virtual bool onMouseLeftUp(int x, int y);
 	virtual bool onMouseRightDown(int x, int y);
@@ -22,6 +23,9 @@ public:
 
 private:
 	IEditState* m_state;
+
+	IEditState *m_translate_sprite, *m_rotate_sprite;
+	IEditState *m_translate_camera, *m_rotate_camera;
 
 }; // ArrangeSpriteOP
 

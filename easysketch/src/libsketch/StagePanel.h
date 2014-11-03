@@ -30,6 +30,7 @@ public:
 	virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
+	vec3 TransPos3ScreenToProject(const ivec2& scr, float proj_z) const;
 
 private:
 	std::vector<d2d::ISprite*> m_sprites;

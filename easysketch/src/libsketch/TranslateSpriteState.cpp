@@ -1,23 +1,20 @@
 #include "TranslateSpriteState.h"
 #include "Sprite.h"
+#include "StagePanel.h"
 
 namespace libsketch
 {
 
-TranslateSpriteState::TranslateSpriteState(d2d::SpriteSelection* selection)
+TranslateSpriteState::TranslateSpriteState(StagePanel* stage,
+										   const d2d::SpriteSelection& selection)
+	: m_stage(stage)
+	, m_selection(selection)
 {
-	m_selection = selection;
-	m_selection->retain();
-}
-
-TranslateSpriteState::~TranslateSpriteState()
-{
-	m_selection->release();
 }
 
 void TranslateSpriteState::OnMousePress(const ivec2& pos)
 {
-	m_last_pos = pos;
+	m_first_pos = m_last_pos = pos;
 }
 
 void TranslateSpriteState::OnMouseRelease(const ivec2& pos)
@@ -27,17 +24,17 @@ void TranslateSpriteState::OnMouseRelease(const ivec2& pos)
 
 void TranslateSpriteState::OnMouseMove(const ivec2& pos)
 {
-	if (m_selection->empty()) {
+	if (m_selection.empty()) {
 		return;
 	}
 
-	Translate(pos - m_last_pos);
+	Translate(m_last_pos, pos);
 	m_last_pos = pos;
 }
 
-void TranslateSpriteState::Translate(const ivec2& offset)
+void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)
 {
-	m_selection->traverse(Visitor(offset));
+	m_selection.traverse(Visitor(m_stage, first, curr));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -48,7 +45,12 @@ void TranslateSpriteState::Visitor::
 visit(d2d::Object* object, bool& bFetchNext)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
-//	sprite->translate(m_offset);
+
+	const vec3& old = sprite->GetPos3();
+	vec3 last = m_stage->TransPos3ScreenToProject(m_last, old.z);
+	vec3 curr = m_stage->TransPos3ScreenToProject(m_curr, old.z);
+	sprite->Translate3(curr - last);
+
 	bFetchNext = true;
 }
 

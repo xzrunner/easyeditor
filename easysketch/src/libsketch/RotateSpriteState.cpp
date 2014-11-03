@@ -1,46 +1,61 @@
 #include "RotateSpriteState.h"
 #include "Sprite.h"
+#include "StagePanel.h"
+#include "StageCanvas.h"
 
 namespace libsketch
 {
 
-RotateSpriteState::RotateSpriteState(e3d::StageCanvas* canvas,
-									 Sprite* sprite)
-	: m_canvas(canvas)
-	, m_sprite(sprite)
-	, m_is_open(false)
+RotateSpriteState::RotateSpriteState(StagePanel* stage,
+									 const d2d::SpriteSelection& selection)
+	: m_stage(stage)
+	, m_selection(selection)
 {
 }
 
 void RotateSpriteState::OnMousePress(const ivec2& pos)
 {
-	m_first_pos.x = pos.x;
-	m_first_pos.y = pos.y;
-	m_pre_ori = m_ori;
-
-	m_is_open = true;
+	m_last_pos = pos;
 }
 
 void RotateSpriteState::OnMouseRelease(const ivec2& pos)
 {
-	m_is_open = false;
 }
 
 void RotateSpriteState::OnMouseMove(const ivec2& pos)
 {
-	if (!m_is_open) { return; }
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->getCanvas());
 
-	e3d::Camera& cam = m_canvas->GetCamera3();
+	e3d::Camera& cam = canvas->GetCamera3();
+	Rotate(cam, m_last_pos, pos);
+	m_last_pos = pos;
 
-	vec3 start = cam.MapToSphere(m_first_pos);
-	vec3 end = cam.MapToSphere(ivec2(pos.x, pos.y));
-	Quaternion delta = Quaternion::CreateFromVectors(start, end);
-	m_ori = delta.Rotated(m_pre_ori);
+	canvas->Refresh();
+}
 
-  	e3d::ShaderMgr::Instance()->SetModelView(cam.GetMatrix());
-	m_sprite->SetOri3(m_ori);
+void RotateSpriteState::Rotate(const e3d::Camera& cam, const ivec2& start, const ivec2& end)
+{
+	m_selection.traverse(Visitor(m_stage, cam, start, end));
+}
 
-	m_canvas->Refresh();
+//////////////////////////////////////////////////////////////////////////
+// class RotateSpriteState::Visitor
+//////////////////////////////////////////////////////////////////////////
+
+void RotateSpriteState::Visitor::
+visit(d2d::Object* object, bool& bFetchNext)
+{
+	Sprite* sprite = static_cast<Sprite*>(object);
+
+	ivec2 center = m_stage->TransPos3ProjectToScreen(sprite->GetPos3());
+	ivec2 base = m_stage->TransPos3ProjectToScreen(vec3(0, 0, 0));
+
+   	vec3 start = m_cam.MapToSphere(base + m_start -  center);
+   	vec3 end = m_cam.MapToSphere(base + m_end - center);
+   	Quaternion delta = Quaternion::CreateFromVectors(start, end);
+
+ 	sprite->Rotate3(delta);
+	bFetchNext = true;
 }
 
 }
