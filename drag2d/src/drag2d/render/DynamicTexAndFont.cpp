@@ -592,6 +592,7 @@ void DynamicTexAndFont::BeginDraw()
 	shader->sprite();
 	shader->SetModelView(Vector(0, 0), 1);
 	shader->SetProjection(m_width, m_height);
+	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
 	glViewport(0, 0, m_width, m_height);
 
    	glEnable(GL_BLEND);

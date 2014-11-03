@@ -49,6 +49,7 @@ void DynamicPacker::DebugDrawStatic() const
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(0);
 	shader->sprite();
+	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
 
 	float vb[16];
 
@@ -80,6 +81,7 @@ void DynamicPacker::DebugDraw() const
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(0);
 	shader->sprite();
+	shader->SetSpriteColor(Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0));
 
 	float vb[16];
 
