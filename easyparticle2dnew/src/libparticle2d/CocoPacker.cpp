@@ -109,6 +109,7 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	symbol->release();
 	float size_start = width * val["scale"]["start"].asInt() * 0.01f;
 	float size_finish = width * val["scale"]["end"].asInt() * 0.01f;
+	lua::assign_with_end(gen, "size", width);
 	lua::assign_with_end(gen, "startParticleSize", size_start);
 	lua::assign_with_end(gen, "startParticleSizeVariance", 0);
 	lua::assign_with_end(gen, "finishParticleSize", size_finish);
