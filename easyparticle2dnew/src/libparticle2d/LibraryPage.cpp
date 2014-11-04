@@ -6,7 +6,7 @@ namespace eparticle2d
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
-	: d2d::ILibraryPage(parent, wxT("Particle3D"))
+	: d2d::ILibraryPage(parent, wxT("Particle2D"))
 {
 	initLayout();
 	m_list->setFileter(FILE_TAG);
@@ -19,7 +19,7 @@ bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
 
 void LibraryPage::onAddPress(wxCommandEvent& event)
 {
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
+	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle2d);
 	filter = wxT("*_") + filter + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入Particle2D文件"), wxEmptyString, 
 		wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

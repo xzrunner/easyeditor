@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easycomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyscale9\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easymesh\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src"
+				AdditionalIncludeDirectories="..\..\..\src\easycomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyscale9\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easymesh\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2dnew\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easycomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyscale9\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easymesh\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src"
+				AdditionalIncludeDirectories="..\..\..\src\easycomplex;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyscale9\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easymesh\src;..\..\..\..\coceditor\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyparticle2dnew\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"

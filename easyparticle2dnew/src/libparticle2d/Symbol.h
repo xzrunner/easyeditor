@@ -32,6 +32,8 @@ public:
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
+	void ResetPS();
+
 protected:
 	virtual void loadResources();
 

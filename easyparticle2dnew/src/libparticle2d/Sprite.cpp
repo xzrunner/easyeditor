@@ -19,7 +19,9 @@ Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
 	m_symbol->retain();
-	buildBounding();	
+	buildBounding();
+
+	m_symbol->ResetPS();
 }
 
 Sprite::~Sprite()

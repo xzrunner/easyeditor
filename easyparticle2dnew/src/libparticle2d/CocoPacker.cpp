@@ -1,4 +1,5 @@
 #include "CocoPacker.h"
+#include "item_string.h"
 
 #include <drag2d.h>
 #include <easybuilder.h>
@@ -70,8 +71,8 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	// positionType
 
 	// direction
-	lua::assign_with_end(gen, "angle", val["direction"]["center"].asInt());
-	lua::assign_with_end(gen, "angleVariance", val["direction"]["offset"].asInt());
+	lua::assign_with_end(gen, "angle", val[ITEM_DIRECTION][ITEM_ATTR_CENTER].asInt());
+	lua::assign_with_end(gen, "angleVariance", val[ITEM_DIRECTION][ITEM_ATTR_OFFSET].asInt());
 
 	// blend (no use)
 	lua::assign_with_end(gen, "blendFuncDestination", 771);
@@ -107,8 +108,8 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	float width = symbol->getSize().xLength();
 	symbol->release();
-	float size_start = width * val["scale"]["start"].asInt() * 0.01f;
-	float size_finish = width * val["scale"]["end"].asInt() * 0.01f;
+	float size_start = width * val[ITEM_SCALE][ITEM_ATTR_START].asInt() * 0.01f;
+	float size_finish = width * val[ITEM_SCALE][ITEM_ATTR_END].asInt() * 0.01f;
 	lua::assign_with_end(gen, "size", width);
 	lua::assign_with_end(gen, "startParticleSize", size_start);
 	lua::assign_with_end(gen, "startParticleSizeVariance", 0);
@@ -117,15 +118,15 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 
 	// gravity
 	lua::assign_with_end(gen, "gravityx", 0);
-	lua::assign_with_end(gen, "gravityy", val["gravity"]["center"].asInt());
-	lua::assign_with_end(gen, "radialAcceleration", val["radial_acc"]["center"].asInt());
-	lua::assign_with_end(gen, "radialAccelVariance", val["radial_acc"]["offset"].asInt());
-	lua::assign_with_end(gen, "tangentialAcceleration", val["tangential_acc"]["center"].asInt());
-	lua::assign_with_end(gen, "tangentialAccelVariance", val["tangential_acc"]["offset"].asInt());
+	lua::assign_with_end(gen, "gravityy", val[ITEM_GRAVITY][ITEM_ATTR_CENTER].asInt());
+	lua::assign_with_end(gen, "radialAcceleration", val[ITEM_RADIAL_ACC][ITEM_ATTR_CENTER].asInt());
+	lua::assign_with_end(gen, "radialAccelVariance", val[ITEM_RADIAL_ACC][ITEM_ATTR_OFFSET].asInt());
+	lua::assign_with_end(gen, "tangentialAcceleration", val[ITEM_TANGENTIAL_ACC][ITEM_ATTR_CENTER].asInt());
+	lua::assign_with_end(gen, "tangentialAccelVariance", val[ITEM_TANGENTIAL_ACC][ITEM_ATTR_OFFSET].asInt());
 
 	// count
-	int count = val["count"].asInt();
-	int times = val["life"]["center"].asInt() / val["emission_time"].asInt();
+	int count = val[ITEM_COUNT].asInt();
+	int times = val[ITEM_LIFE][ITEM_ATTR_CENTER].asInt() / val[ITEM_EMISSION_TIME].asInt();
 	count *= times;
 	lua::assign_with_end(gen, "maxParticles", count);
 
@@ -146,22 +147,22 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	// position
 	lua::assign_with_end(gen, "sourcePositionx", 0);
 	lua::assign_with_end(gen, "sourcePositiony", 0);
-	lua::assign_with_end(gen, "sourcePositionVariancex", val["position"]["x"].asInt());
-	lua::assign_with_end(gen, "sourcePositionVariancey", val["position"]["y"].asInt());
+	lua::assign_with_end(gen, "sourcePositionVariancex", val[ITEM_POSITION][ITEM_ATTR_X].asInt());
+	lua::assign_with_end(gen, "sourcePositionVariancey", val[ITEM_POSITION][ITEM_ATTR_Y].asInt());
 
 	// speed
-	lua::assign_with_end(gen, "speed", val["speed"]["center"].asInt());
-	lua::assign_with_end(gen, "speedVariance", val["speed"]["offset"].asInt());
+	lua::assign_with_end(gen, "speed", val[ITEM_SPEED][ITEM_ATTR_CENTER].asInt());
+	lua::assign_with_end(gen, "speedVariance", val[ITEM_SPEED][ITEM_ATTR_OFFSET].asInt());
 
 	// life
-	lua::assign_with_end(gen, "particleLifespan", val["life"]["center"].asInt() * 0.001f);
-	lua::assign_with_end(gen, "particleLifespanVariance", val["life"]["offset"].asInt() * 0.001f);
+	lua::assign_with_end(gen, "particleLifespan", val[ITEM_LIFE][ITEM_ATTR_CENTER].asInt() * 0.001f);
+	lua::assign_with_end(gen, "particleLifespanVariance", val[ITEM_LIFE][ITEM_ATTR_OFFSET].asInt() * 0.001f);
 
 	// cos
-	lua::assign_with_end(gen, "cosAmplitude", val["cos"]["amplitude"]["center"].asInt());
-	lua::assign_with_end(gen, "cosAmplitudeVariance", val["cos"]["amplitude"]["offset"].asInt());
-	lua::assign_with_end(gen, "cosFrequency", val["cos"]["frequency"]["center"].asInt() * 0.01f);
-	lua::assign_with_end(gen, "cosFrequencyVariance", val["cos"]["frequency"]["offset"].asInt() * 0.01f);
+	lua::assign_with_end(gen, "cosAmplitude", val[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_CENTER].asInt());
+	lua::assign_with_end(gen, "cosAmplitudeVariance", val[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_OFFSET].asInt());
+	lua::assign_with_end(gen, "cosFrequency", val[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asInt() * 0.01f);
+	lua::assign_with_end(gen, "cosFrequencyVariance", val[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asInt() * 0.01f);
 
 	// other
 	lua::assign_with_end(gen, "yCoordFlipped", -1);

@@ -314,6 +314,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\libparticle2d\item_string.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libparticle2d\UICallback.h"
 			>
 		</File>

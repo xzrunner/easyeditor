@@ -7,6 +7,7 @@
 #include <easymesh.h>
 #include <easyscale9.h>
 #include <easyparticle3d.h>
+#include <easyparticle2d.h>
 
 namespace ecomplex
 {
@@ -14,15 +15,17 @@ namespace ecomplex
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 {
-	addPage(new d2d::LibraryImagePage(getNotebook()));
-	addPage(new LibraryPage(getNotebook()));
-	addPage(new anim::LibraryPage(getNotebook()));
-	addPage(new escale9::LibraryPage(getNotebook()));
-	addPage(new d2d::LibraryFontBlankPage(getNotebook()));
-	addPage(new emesh::LibraryPage(getNotebook()));
-	addPage(new d2d::LibraryScriptsPage(getNotebook()));
-	addPage(new d2d::LibraryFontPage(getNotebook()));
-	addPage(new eparticle3d::LibraryPage(getNotebook()));
+	wxWindow* nb = getNotebook();
+	addPage(new d2d::LibraryImagePage(nb));
+	addPage(new LibraryPage(nb));
+	addPage(new anim::LibraryPage(nb));
+	addPage(new escale9::LibraryPage(nb));
+	addPage(new d2d::LibraryFontBlankPage(nb));
+	addPage(new emesh::LibraryPage(nb));
+	addPage(new d2d::LibraryScriptsPage(nb));
+	addPage(new d2d::LibraryFontPage(nb));
+	addPage(new eparticle3d::LibraryPage(nb));
+	addPage(new eparticle2d::LibraryPage(nb));
 }
 
 } // ecomplex

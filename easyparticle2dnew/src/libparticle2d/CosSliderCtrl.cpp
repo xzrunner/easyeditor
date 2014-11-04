@@ -1,5 +1,6 @@
 #include "CosSliderCtrl.h"
 #include "ParticleSystem.h"
+#include "item_string.h"
 
 namespace eparticle2d
 {
@@ -11,14 +12,14 @@ CosSliderCtrl::CosSliderCtrl(wxPanel* parent, const char* title, ParticleSystem*
  	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, title);
  	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
- 	m_amplitude_ctrl = new SliderCtrlTwo(this, "Õñ·ù", "amplitude", this, PS_COS_AMPLITUDE, 
-		SliderItem("center", "center", 0, 0, 200), SliderItem("offset", "offset", 0, 0, 100));
+ 	m_amplitude_ctrl = new SliderCtrlTwo(this, "Õñ·ù", ITEM_COS_AMPLITUDE, this, PS_COS_AMPLITUDE, 
+		SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 200), SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 100));
 	top_sizer->Add(m_amplitude_ctrl);
 
 	top_sizer->AddSpacer(5);
 
-	m_frequency_ctrl = new SliderCtrlTwo(this, "ÆµÂÊ", "frequency", this, PS_COS_FREQUENCY, 
-		SliderItem("center", "center", 0, 0, 100), SliderItem("offset", "offset", 0, 0, 100));
+	m_frequency_ctrl = new SliderCtrlTwo(this, "ÆµÂÊ", ITEM_COS_FREQUENCY, this, PS_COS_FREQUENCY, 
+		SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 100), SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 100));
 	top_sizer->Add(m_frequency_ctrl);
 
  	SetSizer(top_sizer);
@@ -32,14 +33,14 @@ void CosSliderCtrl::Update()
 
 void CosSliderCtrl::Load(const Json::Value& val)
 {
-	m_amplitude_ctrl->Load(val["cos"]);
-	m_frequency_ctrl->Load(val["cos"]);
+	m_amplitude_ctrl->Load(val[ITEM_COS]);
+	m_frequency_ctrl->Load(val[ITEM_COS]);
 }
 
 void CosSliderCtrl::Store(Json::Value& val)
 {
-	m_amplitude_ctrl->Store(val["cos"]);
-	m_frequency_ctrl->Store(val["cos"]);
+	m_amplitude_ctrl->Store(val[ITEM_COS]);
+	m_frequency_ctrl->Store(val[ITEM_COS]);
 }
 
 void CosSliderCtrl::OnSetKeyValue(int key, int val)
