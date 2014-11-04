@@ -13,7 +13,8 @@ class Particle;
 
 enum PS_PROPERTY
 {
-	PS_COUNT = 0,
+	PS_DURATION = 0,
+	PS_COUNT,
 	PS_EMISSION_TIME,
 	PS_FADEOUT_TIME,
 
@@ -83,7 +84,7 @@ private:
 	float m_emission_time;
 	int m_count;
 
-	// The lifetime of the particle emitter (-1 means infinite) and the life it has left.
+	// The lifetime of the particle emitter (0 means infinite) and the life it has left.
 	float m_lifetime;
 	float m_life;
 

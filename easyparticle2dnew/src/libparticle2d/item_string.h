@@ -4,6 +4,7 @@
 namespace eparticle2d
 {
 
+static const char* ITEM_DURATION_TIME = "duration";
 static const char* ITEM_EMISSION_TIME = "emission_time";
 static const char* ITEM_COUNT = "count";
 static const char* ITEM_FADEOUT_TIME = "fadeout_time";

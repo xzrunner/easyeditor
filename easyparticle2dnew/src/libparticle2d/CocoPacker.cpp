@@ -68,6 +68,14 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 {
 	lua::assign_with_end(gen, "texId", 0); // no use
 
+	// duration
+	int duration = val[ITEM_DURATION_TIME].asInt();
+	if (duration == 0) {
+		lua::assign_with_end(gen, "duration", -1);
+	} else {
+		lua::assign_with_end(gen, "duration", duration);
+	}
+
 	// positionType
 
 	// direction
@@ -82,7 +90,6 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	lua::assign_with_end(gen, "configName", val["name"].asString());
 
 	// static cfg
-	lua::assign_with_end(gen, "duration", -1);	// –¥À¿-1£¨Œﬁœﬁ
 	lua::assign_with_end(gen, "emitterType", 0);	
 
 	// color

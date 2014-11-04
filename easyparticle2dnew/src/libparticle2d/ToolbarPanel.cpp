@@ -4,9 +4,12 @@
 #include "slider_ctrl.h"
 #include "CosSliderCtrl.h"
 #include "item_string.h"
+#include "config.h"
 
 namespace eparticle2d
 {
+
+static const int DEFAULT_DURATION = DURATION_INFINITY;
 
 static const int DEFAULT_COUNT = 20;
 
@@ -77,7 +80,13 @@ wxSizer* ToolbarPanel::initLayout()
 wxSizer* ToolbarPanel::InitDefaultLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-
+	
+	// Duration
+	SliderCtrlOne* s_duration = new SliderCtrlOne(this, "Duration", ITEM_DURATION_TIME, m_ps, PS_DURATION, 
+		SliderItem("", "", DEFAULT_DURATION, 0, 10));
+	sizer->Add(s_duration);
+	sizer->AddSpacer(10);
+	m_sliders.push_back(s_duration);
 	// Emission Time
 	SliderCtrlOne* s_emission = new SliderCtrlOne(this, "Emission Time(ms)", ITEM_EMISSION_TIME, m_ps, PS_EMISSION_TIME, 
 		SliderItem("", "", DEFAULT_EMISSION_TIME, 10, 10000));

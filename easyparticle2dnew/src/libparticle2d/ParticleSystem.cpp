@@ -1,6 +1,6 @@
 #include "ParticleSystem.h"
-
 #include "Particle.h"
+#include "config.h"
 
 namespace eparticle2d
 {
@@ -17,7 +17,8 @@ ParticleSystem::ParticleSystem(int buffer)
 	m_emission_time = 0;
 	m_count = 0;
 
-	m_lifetime = m_life = 0;
+	m_lifetime = DURATION_INFINITY;
+	m_life = 0;
 	m_fadeout_time = 0;
 
 	m_symbol = NULL;
@@ -36,12 +37,14 @@ void ParticleSystem::OnSetKeyValue(int key, int val)
 {
 	switch (key)
 	{
+	case PS_DURATION:
+		m_lifetime = val;
+		break;
 	case PS_COUNT:
 		m_count = val;
 		break;
 	case PS_EMISSION_TIME:
 		m_emission_time = val * 0.001f;
-		m_lifetime = m_emission_time;
 		break;
 	case PS_FADEOUT_TIME:
 		m_fadeout_time = val * 0.001f; 
@@ -116,12 +119,12 @@ void ParticleSystem::Update(float dt)
 		}
 
 		m_life -= dt;
-		if (m_lifetime != -1 && m_life < 0) {
+		if (m_lifetime != DURATION_INFINITY && m_life < 0) {
 			Stop();
 		}
 	}
 
-	Particle* p = m_start;
+ 	Particle* p = m_start;
 	while (p != m_last)
 	{
 		if (p->life > 0)
@@ -179,7 +182,7 @@ void ParticleSystem::Stop()
 void ParticleSystem::Reset()
 {
 	m_last = m_start;
-	m_life = m_lifetime = m_emission_time;
+	m_life = m_lifetime;
 	m_emit_counter = 0;
 }
 
