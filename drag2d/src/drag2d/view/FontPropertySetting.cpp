@@ -28,6 +28,11 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 		sprite->font = wxANY_AS(value, wxString);
 	} else if (name == wxT("Edge")) {
 		sprite->has_edge = wxANY_AS(value, bool);
+		if (sprite->has_edge) {
+			sprite->font = "E";
+		} else {
+			sprite->font = "e";
+		}
 	} else if (name == wxT("FontColor")) {
 		wxColour col = wxANY_AS(value, wxColour);
 		sprite->color.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
