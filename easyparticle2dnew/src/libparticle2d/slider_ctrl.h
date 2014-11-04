@@ -35,6 +35,7 @@ public:
 
 private:
 	void OnSetValue(wxScrollEvent& event);
+	void OnSetValue(wxCommandEvent& event);
 
 private:
 	std::string m_name;
@@ -43,6 +44,7 @@ private:
 	int m_key;
 
 	wxSlider* m_slider;
+	wxTextCtrl* m_text;
 
 }; // SliderCtrlOne
 
@@ -51,7 +53,7 @@ class SliderCtrlTwo : public ISliderCtrl, public wxPanel
 public:
 	SliderCtrlTwo(wxPanel* parent, const char* title, const char* name, 
 		UICallback* cb, int key,
-		const SliderItem& item0, const SliderItem& item1);
+		const SliderItem& item_a, const SliderItem& item_b);
 
 	virtual void Update();
 	virtual void Load(const Json::Value& val);
@@ -59,6 +61,15 @@ public:
 
 private:
 	void OnSetValue(wxScrollEvent& event);
+	void OnSetValue(wxCommandEvent& event);
+
+private:
+	struct Item
+	{
+		wxSlider* slider;
+		wxTextCtrl* text;
+		std::string name;
+	};
 
 private:
 	std::string m_name;
@@ -66,8 +77,7 @@ private:
 	UICallback* m_cb;
 	int m_key;
 
-	wxSlider *m_item0, *m_item1;
-	std::string m_item0_name, m_item1_name;
+	Item m_item_a, m_item_b;
 
 }; // SliderCtrlTwo
 

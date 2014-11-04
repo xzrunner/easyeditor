@@ -23,9 +23,13 @@ SliderCtrlOne::SliderCtrlOne(wxPanel* parent, const char* title, const char* nam
 	sizer->Add(new wxStaticText(this, wxID_ANY, item.title));
 
 	m_slider = new wxSlider(this, wxID_ANY, item.default, item.min, item.max, 
-		wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-	Connect(m_slider->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(SliderCtrlOne::OnSetValue));
+		wxDefaultPosition, wxSize(200, -1));
+	Connect(m_slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlOne::OnSetValue));
 	sizer->Add(m_slider);
+
+	m_text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item.default), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+	Connect(m_text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlOne::OnSetValue));
+	sizer->Add(m_text);
 
 	top_sizer->Add(sizer);
 
@@ -49,7 +53,17 @@ void SliderCtrlOne::Store(Json::Value& val)
 
 void SliderCtrlOne::OnSetValue(wxScrollEvent& event)
 {
-	m_cb->OnSetKeyValue(m_key, m_slider->GetValue());
+	int val = m_slider->GetValue();
+	m_text->SetValue(wxString::FromDouble(val));
+	m_cb->OnSetKeyValue(m_key, val);
+}
+
+void SliderCtrlOne::OnSetValue(wxCommandEvent& event)
+{
+	double val;
+	m_text->GetValue().ToDouble(&val);
+	m_slider->SetValue(val);
+	m_cb->OnSetKeyValue(m_key, val);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -58,7 +72,7 @@ void SliderCtrlOne::OnSetValue(wxScrollEvent& event)
 
 SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* name, 
 	UICallback* cb, int key,
-	const SliderItem& item0, const SliderItem& item1)
+	const SliderItem& item_a, const SliderItem& item_b)
 	: wxPanel(parent, wxID_ANY)
 	, m_name(name)
 	, m_cb(cb)
@@ -68,25 +82,35 @@ SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* nam
 	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, item0.title));
+		sizer->Add(new wxStaticText(this, wxID_ANY, item_a.title, wxDefaultPosition, wxSize(40, -1)));
 
-		m_item0 = new wxSlider(this, wxID_ANY, item0.default, item0.min, item0.max, 
-			wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_item0->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
-		sizer->Add(m_item0);
-		m_item0_name = item0.name;
+		m_item_a.slider = new wxSlider(this, wxID_ANY, item_a.default, item_a.min, item_a.max, 
+			wxDefaultPosition, wxSize(160, -1));
+		Connect(m_item_a.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
+		sizer->Add(m_item_a.slider);
+
+		m_item_a.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item_a.default), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+		Connect(m_item_a.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlTwo::OnSetValue));
+		sizer->Add(m_item_a.text);
+
+		m_item_a.name = item_a.name;
 
 		top_sizer->Add(sizer);
 	}
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-		sizer->Add(new wxStaticText(this, wxID_ANY, item1.title));
+		sizer->Add(new wxStaticText(this, wxID_ANY, item_b.title, wxDefaultPosition, wxSize(40, -1)));
 
-		m_item1 = new wxSlider(this, wxID_ANY, item1.default, item1.min, item1.max, 
-			wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_item1->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
-		sizer->Add(m_item1);
-		m_item1_name = item1.name;
+		m_item_b.slider = new wxSlider(this, wxID_ANY, item_b.default, item_b.min, item_b.max, 
+			wxDefaultPosition, wxSize(160, -1));
+		Connect(m_item_b.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrlTwo::OnSetValue));
+		sizer->Add(m_item_b.slider);
+
+		m_item_b.text = new wxTextCtrl(this, wxID_ANY, wxString::FromDouble(item_b.default), wxDefaultPosition, wxSize(50, -1), wxTE_PROCESS_ENTER);
+		Connect(m_item_b.text->GetId(), wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler(SliderCtrlTwo::OnSetValue));
+		sizer->Add(m_item_b.text);
+
+		m_item_b.name = item_b.name;
 
 		top_sizer->Add(sizer);
 	}
@@ -100,19 +124,38 @@ void SliderCtrlTwo::Update()
 
 void SliderCtrlTwo::Load(const Json::Value& val)
 {
-	m_item0->SetValue(val[m_name][m_item0_name].asInt());
-	m_item1->SetValue(val[m_name][m_item1_name].asInt());
+	m_item_a.slider->SetValue(val[m_name][m_item_a.name].asInt());
+	m_item_b.slider->SetValue(val[m_name][m_item_b.name].asInt());
 }
 
 void SliderCtrlTwo::Store(Json::Value& val)
 {
-	val[m_name][m_item0_name] = m_item0->GetValue();
-	val[m_name][m_item1_name] = m_item1->GetValue();
+	val[m_name][m_item_a.name] = m_item_a.slider->GetValue();
+	val[m_name][m_item_b.name] = m_item_b.slider->GetValue();
 }
 
 void SliderCtrlTwo::OnSetValue(wxScrollEvent& event)
 {
-	m_cb->OnSetKeyValue(m_key, m_item0->GetValue(), m_item1->GetValue());
+	int val_a = m_item_a.slider->GetValue(),
+		val_b = m_item_b.slider->GetValue();
+	m_item_a.text->SetValue(wxString::FromDouble(val_a));
+	m_item_b.text->SetValue(wxString::FromDouble(val_b));
+
+	m_cb->OnSetKeyValue(m_key, val_a, val_b);
+}
+
+void SliderCtrlTwo::OnSetValue(wxCommandEvent& event)
+{
+	double val;
+	m_item_a.text->GetValue().ToDouble(&val);
+	int val_a = (int)val;
+	m_item_b.text->GetValue().ToDouble(&val);
+	int val_b = (int)val;
+
+	m_item_a.slider->SetValue(val_a);
+	m_item_b.slider->SetValue(val_b);
+
+	m_cb->OnSetKeyValue(m_key, val_a, val_b);
 }
 
 }
