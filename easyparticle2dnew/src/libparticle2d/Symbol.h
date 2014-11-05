@@ -38,6 +38,9 @@ protected:
 	virtual void loadResources();
 
 private:
+	void DrawBackground(const d2d::Vector& pos) const;
+
+private:
 	ParticleSystem* m_ps;
 
 	d2d::Rect m_region;

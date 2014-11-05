@@ -21,13 +21,16 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eparticle2d::FILE_TAG, &eparticle2d::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eparticle2d::FILE_TAG, &eparticle2d::Sprite::Create);
 }
 
 bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	eparticle2d::Frame* frame = new eparticle2d::Frame(wxT("EasyParticle3D"));
+	eparticle2d::Frame* frame = new eparticle2d::Frame(wxT("EasyParticle2D"));
 	frame->Show(true);
 
 	return true;

@@ -1,4 +1,5 @@
 #include "LibraryPanel.h"
+#include "LibraryPage.h"
 
 #include <wx/notebook.h>
 
@@ -12,10 +13,12 @@ namespace eparticle2d
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 {
-	addPage(new d2d::LibraryImagePage(getNotebook()));
-	addPage(new ecomplex::LibraryPage(getNotebook()));
-	addPage(new anim::LibraryPage(getNotebook()));
-	addPage(new escale9::LibraryPage(getNotebook()));
+	wxWindow* nb = getNotebook();
+	addPage(new d2d::LibraryImagePage(nb));
+	addPage(new ecomplex::LibraryPage(nb));
+	addPage(new anim::LibraryPage(nb));
+	addPage(new escale9::LibraryPage(nb));
+	addPage(new LibraryPage(nb));
 }
 
 }

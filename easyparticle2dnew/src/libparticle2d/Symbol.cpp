@@ -50,12 +50,21 @@ void Symbol::draw(const d2d::Matrix& mt,
 		m_ps->Draw(mt);
 	}
 	time = curr;
+
+	if (sprite) {
+		DrawBackground(sprite->getPosition());
+	}
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 {
-//	return m_region;
 	return d2d::Rect(200, 200);
+}
+
+void Symbol::ResetPS()
+{
+	m_ps->Reset();
+	m_ps->Start();
 }
 
 void Symbol::loadResources()
@@ -90,10 +99,14 @@ void Symbol::loadResources()
 	symbol->release();
 }
 
-void Symbol::ResetPS()
+void Symbol::DrawBackground(const d2d::Vector& pos) const
 {
-	m_ps->Reset();
-	m_ps->Start();
+	d2d::Matrix mat;
+	mat.translate(pos.x, pos.y);
+
+	d2d::Rect r = getSize();
+
+	d2d::PrimitiveDraw::rect(mat, r, d2d::LIGHT_GREY_LINE);
 }
 
 }

@@ -15,7 +15,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_ps(NULL)
 {
 	m_canvas = new StageCanvas(this);
-	m_editOP = new EditOP(this);
+//	m_editOP = new EditOP(this);
+
+	d2d::ArrangeSpriteConfig cfg;
+	cfg.is_auto_align_open = false;
+	cfg.is_deform_open = false;
+	cfg.is_offset_open = false;
+	cfg.is_rotate_open = false;
+	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, NULL, NULL, cfg);
 
 	m_ps = new ParticleSystem(1000);
 }
