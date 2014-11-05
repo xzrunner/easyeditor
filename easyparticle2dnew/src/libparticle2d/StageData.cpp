@@ -69,8 +69,8 @@ void StageData::ChangePSSymbol(d2d::ISymbol* symbol)
 
 	m_ps->SetSymbol(symbol);
 	m_toolbar->InitPSFromUI();
-//	m_ps->Reset();
 	m_ps->Start();
+	m_ps->Reset();
 }
 
 }
