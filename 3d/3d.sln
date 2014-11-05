@@ -21,6 +21,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeasy3d", "..\easysketch\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libimage", "..\easyimage\platform\msvc2008\projects\libimage.vcproj", "{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyterrain", "..\easysketch\platform\msvc2008\projects\easyterrain.vcproj", "{97438907-CD84-4E01-BF7F-3614A6F0C231}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C} = {D41C0B3E-F0A0-4A1F-A568-0100C839406C}
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6} = {126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}
+		{716758A5-F6CF-4294-88B2-29C9950304AF} = {716758A5-F6CF-4294-88B2-29C9950304AF}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libterrain", "..\easysketch\platform\msvc2008\projects\libterrain.vcproj", "{716758A5-F6CF-4294-88B2-29C9950304AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -47,6 +57,14 @@ Global
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.Build.0 = Debug|Win32
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.ActiveCfg = Release|Win32
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.Build.0 = Release|Win32
+		{97438907-CD84-4E01-BF7F-3614A6F0C231}.Debug|Win32.ActiveCfg = Debug|Win32
+		{97438907-CD84-4E01-BF7F-3614A6F0C231}.Debug|Win32.Build.0 = Debug|Win32
+		{97438907-CD84-4E01-BF7F-3614A6F0C231}.Release|Win32.ActiveCfg = Release|Win32
+		{97438907-CD84-4E01-BF7F-3614A6F0C231}.Release|Win32.Build.0 = Release|Win32
+		{716758A5-F6CF-4294-88B2-29C9950304AF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{716758A5-F6CF-4294-88B2-29C9950304AF}.Debug|Win32.Build.0 = Debug|Win32
+		{716758A5-F6CF-4294-88B2-29C9950304AF}.Release|Win32.ActiveCfg = Release|Win32
+		{716758A5-F6CF-4294-88B2-29C9950304AF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
