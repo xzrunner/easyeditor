@@ -1,6 +1,7 @@
 #include "ParticleSystem.h"
 #include "Particle.h"
 #include "config.h"
+#include "ps_config.h"
 
 namespace eparticle2d
 {
@@ -33,60 +34,146 @@ ParticleSystem::~ParticleSystem()
 	}
 }
 
-void ParticleSystem::OnSetKeyValue(int key, int val)
+void ParticleSystem::SetValue(int key, const Data& data)
 {
 	switch (key)
 	{
 	case PS_DURATION:
-		m_lifetime = val;
+		m_lifetime = data.val0;
 		break;
 	case PS_COUNT:
-		m_count = val;
+		m_count = data.val0;
 		break;
 	case PS_EMISSION_TIME:
-		m_emission_time = val * 0.001f;
+		m_emission_time = data.val0 * 0.001f;
 		break;
 	case PS_FADEOUT_TIME:
-		m_fadeout_time = val * 0.001f; 
+		m_fadeout_time = data.val0 * 0.001f; 
 		break;
-	}	
+
+	case PS_LIFE:
+		m_life_region.Set((data.val0 - data.val1) * 0.001f, (data.val0 + data.val1) * 0.001f);
+		break;
+	case PS_DIRECTION:
+		m_direction_region.Set((data.val0 - data.val1) * d2d::TRANS_DEG_TO_RAD, (data.val0 + data.val1) * d2d::TRANS_DEG_TO_RAD);
+		break;
+	case PS_SCALE:
+		m_scale_start = data.val0 * 0.01f;
+		m_scale_end = data.val1 * 0.01f;
+		break;
+	case PS_SPEED:
+		m_speed_region.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+	case PS_GRAVITY:
+		m_gravity_region.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+	case PS_RADIAL_ACC:
+		m_radial_acc_region.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+	case PS_TANGENTIAL_ACC:
+		m_tangential_acc_region.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+	case PS_POSITION:
+		m_posx_region.Set(-data.val0, data.val0);
+		m_posy_region.Set(-data.val1, data.val1);
+		break;
+	case PS_COS_AMPLITUDE:
+		m_cos_amplitude_region.Set(data.val0 - data.val1, data.val0 + data.val1);
+		break;
+	case PS_COS_FREQUENCY:
+		m_cos_frequency_region.Set((data.val0 - data.val1) * 0.01f, (data.val0 + data.val1) * 0.01f);
+		break;
+	}
 }
 
-void ParticleSystem::OnSetKeyValue(int key, int val0, int val1)
+void ParticleSystem::GetValue(int key, Data& data)
 {
 	switch (key)
 	{
+	case PS_DURATION:
+		data.val0 = m_lifetime;
+		break;
+	case PS_COUNT:
+		data.val0 = m_count;
+		break;
+	case PS_EMISSION_TIME:
+		data.val0 = m_emission_time * 1000;
+		break;
+	case PS_FADEOUT_TIME:
+		data.val0 = m_fadeout_time * 1000;
+		break;
+
 	case PS_LIFE:
-		m_life_region.Set((val0 - val1) * 0.001f, (val0 + val1) * 0.001f);
+		{
+			float sub = m_life_region.Begin() * 1000,
+				add = m_life_region.End() * 1000;
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	case PS_DIRECTION:
-		m_direction_region.Set((val0 - val1) * d2d::TRANS_DEG_TO_RAD, (val0 + val1) * d2d::TRANS_DEG_TO_RAD);
+		{
+			float sub = m_direction_region.Begin() * d2d::TRANS_RAD_TO_DEG,
+				add = m_direction_region.End() * d2d::TRANS_RAD_TO_DEG;
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	case PS_SCALE:
-		m_scale_start = val0 * 0.01f;
-		m_scale_end = val1 * 0.01f;
+		data.val0 = m_scale_start * 100;
+		data.val1 = m_scale_end * 100;
 		break;
 	case PS_SPEED:
-		m_speed_region.Set(val0 - val1, val0 + val1);
+		{
+			float sub = m_speed_region.Begin(),
+				add = m_speed_region.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	case PS_GRAVITY:
-		m_gravity_region.Set(val0 - val1, val0 + val1);
+		{
+			float sub = m_gravity_region.Begin(),
+				add = m_gravity_region.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	case PS_RADIAL_ACC:
-		m_radial_acc_region.Set(val0 - val1, val0 + val1);
+		{
+			float sub = m_radial_acc_region.Begin(),
+				add = m_radial_acc_region.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	case PS_TANGENTIAL_ACC:
-		m_tangential_acc_region.Set(val0 - val1, val0 + val1);
+		{
+			float sub = m_tangential_acc_region.Begin(),
+				add = m_tangential_acc_region.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	case PS_POSITION:
-		m_posx_region.Set(-val0, val0);
-		m_posy_region.Set(-val1, val1);
+		data.val0 = m_posx_region.End();
+		data.val1 = m_posy_region.End();
 		break;
 	case PS_COS_AMPLITUDE:
-		m_cos_amplitude_region.Set(val0 - val1, val0 + val1);
+		{
+			float sub = m_cos_amplitude_region.Begin(),
+				add = m_cos_amplitude_region.End();
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	case PS_COS_FREQUENCY:
-		m_cos_frequency_region.Set((val0 - val1) * 0.01f, (val0 + val1) * 0.01f);
+		{
+			float sub = m_cos_frequency_region.Begin() * 100,
+				add = m_cos_frequency_region.End() * 100;
+			data.val0 = (sub + add) * 0.5f;
+			data.val1 = (add - sub) * 0.5f;
+		}
 		break;
 	}
 }

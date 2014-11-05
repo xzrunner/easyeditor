@@ -7,25 +7,26 @@
 namespace eparticle2d
 {
 
-class ParticleSystem;
+class UICallback;
 
 class CosSliderCtrl : public ISliderCtrl, public wxPanel, public UICallback
 {
 public:
-	CosSliderCtrl(wxPanel* parent, const char* title, ParticleSystem* ps);
+	CosSliderCtrl(wxPanel* parent, const char* title, UICallback* cb);
 
 	virtual void Update();
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val);
+	virtual void Load();
 
 	//
 	// interface UICallback
 	//
-	virtual void OnSetKeyValue(int key, int val);
-	virtual void OnSetKeyValue(int key, int val0, int val1);
+	virtual void SetValue(int key, const Data& data);
+	virtual void GetValue(int key, Data& data);
 
 private:
-	ParticleSystem* m_ps;
+	UICallback* m_cb;
 
 	SliderCtrlTwo* m_amplitude_ctrl;
 	SliderCtrlTwo* m_frequency_ctrl;

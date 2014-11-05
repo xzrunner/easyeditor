@@ -161,6 +161,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libparticle2d\StageData.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libparticle2d\StageData.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libparticle2d\Symbol.cpp"
 				>
 			</File>
@@ -213,6 +221,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libparticle2d\EditOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\SelectSpritesOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\SelectSpritesOP.h"
 					>
 				</File>
 				<File
@@ -315,6 +331,10 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\libparticle2d\item_string.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libparticle2d\ps_config.h"
 			>
 		</File>
 		<File

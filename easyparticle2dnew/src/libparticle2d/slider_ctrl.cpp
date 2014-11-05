@@ -1,5 +1,6 @@
 #include "slider_ctrl.h"
 #include "UICallback.h"
+#include "ParticleSystem.h"
 
 namespace eparticle2d
 {
@@ -51,11 +52,19 @@ void SliderCtrlOne::Store(Json::Value& val)
 	val[m_name] = m_slider->GetValue();
 }
 
+void SliderCtrlOne::Load()
+{
+	UICallback::Data data;
+	m_cb->GetValue(m_key, data);
+	m_slider->SetValue(data.val0);
+	m_text->SetValue(wxString::FromDouble(data.val0));
+}
+
 void SliderCtrlOne::OnSetValue(wxScrollEvent& event)
 {
 	int val = m_slider->GetValue();
 	m_text->SetValue(wxString::FromDouble(val));
-	m_cb->OnSetKeyValue(m_key, val);
+	m_cb->SetValue(m_key, UICallback::Data(val));
 }
 
 void SliderCtrlOne::OnSetValue(wxCommandEvent& event)
@@ -63,7 +72,7 @@ void SliderCtrlOne::OnSetValue(wxCommandEvent& event)
 	double val;
 	m_text->GetValue().ToDouble(&val);
 	m_slider->SetValue(val);
-	m_cb->OnSetKeyValue(m_key, val);
+	m_cb->SetValue(m_key, UICallback::Data(val));
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -134,6 +143,16 @@ void SliderCtrlTwo::Store(Json::Value& val)
 	val[m_name][m_item_b.name] = m_item_b.slider->GetValue();
 }
 
+void SliderCtrlTwo::Load()
+{
+	UICallback::Data data;
+	m_cb->GetValue(m_key, data);
+	m_item_a.slider->SetValue(data.val0);
+	m_item_b.slider->SetValue(data.val1);
+	m_item_a.text->SetValue(wxString::FromDouble(data.val0));
+	m_item_b.text->SetValue(wxString::FromDouble(data.val1));
+}
+
 void SliderCtrlTwo::OnSetValue(wxScrollEvent& event)
 {
 	int val_a = m_item_a.slider->GetValue(),
@@ -141,7 +160,7 @@ void SliderCtrlTwo::OnSetValue(wxScrollEvent& event)
 	m_item_a.text->SetValue(wxString::FromDouble(val_a));
 	m_item_b.text->SetValue(wxString::FromDouble(val_b));
 
-	m_cb->OnSetKeyValue(m_key, val_a, val_b);
+	m_cb->SetValue(m_key, UICallback::Data(val_a, val_b));
 }
 
 void SliderCtrlTwo::OnSetValue(wxCommandEvent& event)
@@ -155,7 +174,7 @@ void SliderCtrlTwo::OnSetValue(wxCommandEvent& event)
 	m_item_a.slider->SetValue(val_a);
 	m_item_b.slider->SetValue(val_b);
 
-	m_cb->OnSetKeyValue(m_key, val_a, val_b);
+	m_cb->SetValue(m_key, UICallback::Data(val_a, val_b));
 }
 
 }

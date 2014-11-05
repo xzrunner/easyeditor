@@ -14,9 +14,9 @@ BEGIN_EVENT_TABLE(StageCanvas, d2d::PerspectCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
 END_EVENT_TABLE()
 
-StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
-	, m_stage(editPanel)
+StageCanvas::StageCanvas(StagePanel* stage)
+	: d2d::OrthoCanvas(stage)
+	, m_stage(stage)
 	, m_timer(this, TIMER_ID)
 	, m_control(0.033f)
 {
@@ -45,7 +45,7 @@ void StageCanvas::onDraw()
 		d2d::SpriteDraw::drawSprite(sprites[i]);
 	}
 	
-	ParticleSystem* ps = m_stage->GetParticleSystem();
+	ParticleSystem* ps = m_stage->GetStageData()->GetPS();
 	if (ps) {
 		ps->Draw(d2d::Matrix());
 	}
@@ -62,10 +62,7 @@ void StageCanvas::onTimer(wxTimerEvent& event)
 		int dt = curr - m_last;
 		m_last = curr;
 
-		ParticleSystem* ps = m_stage->GetParticleSystem();
-		if (ps) {
-			ps->Update((float)dt / CLOCKS_PER_SEC);
-		}
+		m_stage->UpdatePS((float)dt / CLOCKS_PER_SEC);
 	}
 
 	std::vector<anim::Sprite*> sprites;

@@ -34,6 +34,9 @@ public:
 
 	void ResetPS();
 
+	// todo
+	ParticleSystem* GetPS() { return m_ps; }
+
 protected:
 	virtual void loadResources();
 

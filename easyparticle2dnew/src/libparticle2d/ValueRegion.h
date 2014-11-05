@@ -14,6 +14,9 @@ public:
 	T Interpolating(float p) const;
 	T Random() const;
 
+	const T& Begin() const { return m_begin; }
+	const T& End() const { return m_end; }
+
 private:
 	T m_begin, m_end;
 

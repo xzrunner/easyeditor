@@ -12,6 +12,7 @@ public:
 	virtual void Update() = 0;
 	virtual void Load(const Json::Value& val) = 0;
 	virtual void Store(Json::Value& val) = 0;
+	virtual void Load() = 0;
 	virtual ~ISliderCtrl() {}
 }; // ISliderCtrl
 

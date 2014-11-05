@@ -12,7 +12,7 @@ class StagePanel;
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* editPanel);
+	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
 protected:
@@ -22,6 +22,8 @@ private:
 	void onTimer(wxTimerEvent& event);
 
 	void DrawBackground() const;
+
+	void UpdatePS(float dt);
 
 private:
 	enum

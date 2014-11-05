@@ -32,6 +32,7 @@ public:
 	virtual void Update();
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val);
+	virtual void Load();
 
 private:
 	void OnSetValue(wxScrollEvent& event);
@@ -58,6 +59,7 @@ public:
 	virtual void Update();
 	virtual void Load(const Json::Value& val);
 	virtual void Store(Json::Value& val);
+	virtual void Load();
 
 private:
 	void OnSetValue(wxScrollEvent& event);

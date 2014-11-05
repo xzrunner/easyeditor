@@ -77,8 +77,7 @@ void Task::initLayout()
 		= new d2d::PropertySettingPanel(left_hori_splitter);
 	property->setPropertySetting(new PropertySetting(m_stage, &m_ps_name));
 
-	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage, 
-		m_stage->GetParticleSystem());
+	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage, m_stage->GetStageData());
 
 	left_hori_splitter->SetSashGravity(0.6f);
 	left_hori_splitter->SplitHorizontally(m_library, property);
@@ -98,7 +97,7 @@ void Task::initLayout()
 
 void Task::StorePSSymbol(const char* filename, Json::Value& val) const
 {
-	ParticleSystem* ps = m_stage->GetParticleSystem();
+	ParticleSystem* ps = m_stage->GetStageData()->GetCurrPS();
 	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
 	val["symbol_path"] = d2d::FilenameTools::getRelativePath(dir,
 		ps->GetSymbolFilePath()).ToStdString();
@@ -107,7 +106,7 @@ void Task::StorePSSymbol(const char* filename, Json::Value& val) const
 
 void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
 {
-	ParticleSystem* ps = m_stage->GetParticleSystem();
+	ParticleSystem* ps = m_stage->GetStageData()->GetCurrPS();
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);

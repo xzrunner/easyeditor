@@ -1,13 +1,13 @@
 #include "CosSliderCtrl.h"
-#include "ParticleSystem.h"
 #include "item_string.h"
+#include "ps_config.h"
 
 namespace eparticle2d
 {
 
-CosSliderCtrl::CosSliderCtrl(wxPanel* parent, const char* title, ParticleSystem* ps)
+CosSliderCtrl::CosSliderCtrl(wxPanel* parent, const char* title, UICallback* cb)
 	: wxPanel(parent, wxID_ANY)
-	, m_ps(ps)
+	, m_cb(cb)
 {
  	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, title);
  	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -43,14 +43,20 @@ void CosSliderCtrl::Store(Json::Value& val)
 	m_frequency_ctrl->Store(val[ITEM_COS]);
 }
 
-void CosSliderCtrl::OnSetKeyValue(int key, int val)
+void CosSliderCtrl::Load()
 {
-	m_ps->OnSetKeyValue(key, val);
+	m_amplitude_ctrl->Load();
+	m_frequency_ctrl->Load();
 }
 
-void CosSliderCtrl::OnSetKeyValue(int key, int val0, int val1)
+void CosSliderCtrl::SetValue(int key, const Data& data)
 {
-	m_ps->OnSetKeyValue(key, val0, val1);
+	m_cb->SetValue(key, data);
+}
+
+void CosSliderCtrl::GetValue(int key, Data& data)
+{
+	m_cb->GetValue(key, data);	
 }
 
 }

@@ -11,27 +11,6 @@ namespace eparticle2d
 
 class Particle;
 
-enum PS_PROPERTY
-{
-	PS_DURATION = 0,
-	PS_COUNT,
-	PS_EMISSION_TIME,
-	PS_FADEOUT_TIME,
-
-	PS_LIFE,
-	PS_POSITION,
-	PS_DIRECTION,
-	PS_SCALE,
-	PS_SPEED,
-	PS_GRAVITY,
-	PS_RADIAL_ACC,
-	PS_TANGENTIAL_ACC,
-
-	PS_COS_AMPLITUDE,
-	PS_COS_FREQUENCY,
-
-}; // PS_PROPERTY
-
 class ParticleSystem : public d2d::Object, public UICallback
 {
 public:
@@ -41,8 +20,8 @@ public:
 	//
 	// interface UICallback
 	//
-	virtual void OnSetKeyValue(int key, int val);
-	virtual void OnSetKeyValue(int key, int val0, int val1);
+	virtual void SetValue(int key, const Data& data);
+	virtual void GetValue(int key, Data& data);
 
 	void Draw(const d2d::Matrix& mt);
 

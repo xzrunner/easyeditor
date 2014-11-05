@@ -3,23 +3,30 @@
 
 #include <drag2d.h>
 
+#include "StageData.h"
+
 namespace eparticle2d
 {
 
 class LibraryPanel;
-class ParticleSystem;
+class ToolbarPanel;
+class Symbol;
 
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		LibraryPanel* library);
-	virtual ~StagePanel();
 
-	ParticleSystem* GetParticleSystem() const { return m_ps; }
+	void SetSelectedSymbol(Symbol* symbol);
+	void SetToolbar(ToolbarPanel* toolbar);
+
+	StageData* GetStageData() { return &m_data; }
+
+	void UpdatePS(float dt);
 
 private:
-	ParticleSystem* m_ps;
+	StageData m_data;
 
 }; // StagePanel
 
