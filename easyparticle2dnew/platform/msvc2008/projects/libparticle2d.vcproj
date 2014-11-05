@@ -184,26 +184,6 @@
 				Name="toolbar"
 				>
 				<File
-					RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\ISliderCtrl.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\slider_ctrl.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\slider_ctrl.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel.cpp"
 					>
 				</File>
@@ -211,6 +191,42 @@
 					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel.h"
 					>
 				</File>
+				<Filter
+					Name="slider"
+					>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\ISliderCtrl.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\SliderCtrlOne.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\SliderCtrlOne.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\SliderCtrlTwo.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\SliderCtrlTwo.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\SliderItem.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="stage"

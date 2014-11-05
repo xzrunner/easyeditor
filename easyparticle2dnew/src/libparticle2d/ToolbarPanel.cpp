@@ -1,12 +1,14 @@
 #include "ToolBarPanel.h"
 #include "StagePanel.h"
 #include "ParticleSystem.h"
-#include "ps_config.h"
-#include "slider_ctrl.h"
-#include "CosSliderCtrl.h"
-#include "item_string.h"
-#include "config.h"
 #include "Symbol.h"
+#include "CosSliderCtrl.h"
+#include "SliderCtrlOne.h"
+#include "SliderCtrlTwo.h"
+
+#include "item_string.h"
+#include "ps_config.h"
+#include "config.h"
 
 namespace eparticle2d
 {
