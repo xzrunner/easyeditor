@@ -22,7 +22,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 {
 	m_bgColor.set(1, 1, 1, 1);
 
-	m_timer.Start(10);
+	m_timer.Start(100);
 	m_currFrame = 1;
 	m_last = -1;
 }
