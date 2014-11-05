@@ -56,8 +56,8 @@ void StageData::SetSelected(Symbol* selected)
 		m_selected = selected;
 		if (m_selected) {
 			m_selected->retain();
-			m_toolbar->ResetUIFromPS();
 		}
+		m_toolbar->ResetUIFromPS();
 	}
 }
 

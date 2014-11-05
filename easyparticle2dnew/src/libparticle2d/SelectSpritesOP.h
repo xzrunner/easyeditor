@@ -12,7 +12,14 @@ public:
 	SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
 		d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback = NULL);
 
+//	virtual bool onMouseLeftDown(int x, int y);
+
+	virtual bool onKeyDown(int keyCode);
 	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseLeftUp(int x, int y);
+
+private:
+	void OnSelected();
 
 }; // SelectSpritesOP
 
