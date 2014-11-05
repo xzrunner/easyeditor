@@ -216,14 +216,6 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\libparticle2d\EditOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\EditOP.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\libparticle2d\SelectSpritesOP.cpp"
 					>
 				</File>
