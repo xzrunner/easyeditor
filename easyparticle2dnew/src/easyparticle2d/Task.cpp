@@ -21,7 +21,7 @@ Task::~Task()
 	m_parent->SetTitle("EasyParticle");
 }
 
-void Task::loadFromFile(const char* filename)
+void Task::load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -34,10 +34,10 @@ void Task::loadFromFile(const char* filename)
 	LoadPSSymbol(filename, value);
 	m_toolbar->Load(value);
 
-	CocoPacker::pack("D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\particle2d", "D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\test.lua");
+//	CocoPacker::pack("D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\particle2d", "D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\test.lua");
 }
 
-void Task::storeToFile(const char* filename) const
+void Task::store(const char* filename) const
 {
 	Json::Value value;
 
@@ -52,16 +52,31 @@ void Task::storeToFile(const char* filename) const
 	fout.close();
 }
 
+bool Task::isDirty() const
+{
+	return m_stage->isDirty();
+}
+
 void Task::clear()
 {
 	m_stage->clear();
 	m_stage->Refresh();
 }
 
-d2d::GLCanvas* Task::getCanvas() const
+void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
-	return m_stage->getCanvas();
+
 }
+
+const d2d::EditPanel* Task::getEditPanel() const
+{
+	return m_stage;
+}
+
+// d2d::GLCanvas* Task::getCanvas() const
+// {
+// 	return m_stage->getCanvas();
+// }
 
 void Task::initLayout()
 {

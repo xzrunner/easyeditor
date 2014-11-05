@@ -11,25 +11,24 @@ class LibraryPanel;
 class StagePanel;
 class ToolbarPanel;
 
-class Task
+class Task : public d2d::ITask
 {
 public:
+	Task(wxFrame* parent);
+	~Task();
 
-	virtual void loadFromFile(const char* filename);
-	virtual void storeToFile(const char* filename) const;
+	virtual void load(const char* filename);
+	virtual void store(const char* filename) const;
+
+	virtual bool isDirty() const;
 
 	virtual void clear();
 
-	d2d::GLCanvas* getCanvas() const;
+	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
 
-	static Task* create(wxFrame* parent)
-	{
-		return new Task(parent);
-	}
+	virtual const d2d::EditPanel* getEditPanel() const;
 
-protected:
-	Task(wxFrame* parent);
-	~Task();
+// 	d2d::GLCanvas* getCanvas() const;
 
 private:
 	void initLayout();

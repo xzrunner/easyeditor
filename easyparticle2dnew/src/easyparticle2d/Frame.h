@@ -1,43 +1,15 @@
 #ifndef _EASYPARTICLE2D_FRAME_H_
 #define _EASYPARTICLE2D_FRAME_H_
 
-#include <wx/wx.h>
-
-class wxSplitterWindow;
+#include <drag2d.h>
 
 namespace eparticle2d
 {
 
-class Task;
-
-class Frame : public wxFrame
+class Frame : public d2d::Frame
 {
 public:
-	Frame(const wxString& title);
-
-private:
-	void onNew(wxCommandEvent& event);
-	void onOpen(wxCommandEvent& event);
-	void onSave(wxCommandEvent& event);
-	void onSaveAs(wxCommandEvent& event);
-
-	void onQuit(wxCommandEvent& event);
-
-	void initMenuBar();
-
-	wxMenu* initFileBar();
-	wxMenu* initHelpBar();
-
-	void clear();
-
-	void setCurrFilename();
-
-private:
-	Task* m_task;
-
-	wxString m_currFilename;
-
-	DECLARE_EVENT_TABLE()
+	Frame(const wxString& title, const wxString& filetag);
 
 }; // Frame
 
