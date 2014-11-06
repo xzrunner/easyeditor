@@ -1,4 +1,6 @@
 #include "CosSliderCtrl.h"
+#include "SliderItem.h"
+#include "SliderCtrlTwo.h"
 #include "item_string.h"
 #include "ps_config.h"
 
