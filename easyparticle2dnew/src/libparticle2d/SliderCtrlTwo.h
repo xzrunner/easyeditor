@@ -13,11 +13,11 @@ class SliderCtrlTwo : public ISliderCtrl, public wxPanel
 {
 public:
 	SliderCtrlTwo(wxPanel* parent, const char* title, const char* name, 
-		UICallback* cb, int key,
-		const SliderItem& item_a, const SliderItem& item_b);
+		UICallback* cb, int key, const SliderItem& item_a, const SliderItem& item_b,
+		float scale_slider2text = 1);
 
 	virtual void Update();
-	virtual void Load(const Json::Value& val);
+	virtual void Load(const Json::Value& val, int version);
 	virtual void Store(Json::Value& val);
 	virtual void Load();
 
@@ -38,6 +38,8 @@ private:
 
 	UICallback* m_cb;
 	int m_key;
+
+	float m_scale_slider2text;
 
 	Item m_item_a, m_item_b;
 

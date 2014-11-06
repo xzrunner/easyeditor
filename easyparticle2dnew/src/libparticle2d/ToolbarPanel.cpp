@@ -50,10 +50,10 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	InitPSFromUI();
 }
 
-void ToolbarPanel::Load(const Json::Value& val)
+void ToolbarPanel::Load(const Json::Value& val, int version)
 {
 	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
-		m_sliders[i]->Load(val);
+		m_sliders[i]->Load(val, version);
 	}
 
 	InitPSFromUI();
@@ -95,8 +95,8 @@ wxSizer* ToolbarPanel::InitDefaultLayout()
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_duration);
 	// Emission Time
-	SliderCtrlOne* s_emission = new SliderCtrlOne(this, "Emission Time(ms)", ITEM_EMISSION_TIME, cb, PS_EMISSION_TIME, 
-		SliderItem("", "", DEFAULT_EMISSION_TIME, 10, 10000));
+	SliderCtrlOne* s_emission = new SliderCtrlOne(this, "Emission Time", ITEM_EMISSION_TIME, cb, PS_EMISSION_TIME, 
+		SliderItem("", "", DEFAULT_EMISSION_TIME, 10, 10000), 0.001f);
 	sizer->Add(s_emission);
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_emission);
@@ -107,19 +107,19 @@ wxSizer* ToolbarPanel::InitDefaultLayout()
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_count);
 	// Fadeout Time
-	SliderCtrlOne* s_fadeout = new SliderCtrlOne(this, "Fadeout Time(ms)", ITEM_FADEOUT_TIME, cb, PS_FADEOUT_TIME, 
-		SliderItem("", "", DEFAULT_FADEOUT_TIME, 10, 2500));
+	SliderCtrlOne* s_fadeout = new SliderCtrlOne(this, "Fadeout Time", ITEM_FADEOUT_TIME, cb, PS_FADEOUT_TIME, 
+		SliderItem("", "", DEFAULT_FADEOUT_TIME, 10, 2500), 0.001f);
 	sizer->Add(s_fadeout);
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_fadeout);
 	// Life
-	SliderCtrlTwo* s_life = new SliderCtrlTwo(this, "Life(ms)", ITEM_LIFE, cb, PS_LIFE, 
-		SliderItem("center", ITEM_ATTR_CENTER, DEFAULT_LIFE_CENTER, 0, 50000), SliderItem("offset", ITEM_ATTR_OFFSET, DEFAULT_LIFE_OFFSET, 0, 5000));
+	SliderCtrlTwo* s_life = new SliderCtrlTwo(this, "Life", ITEM_LIFE, cb, PS_LIFE, 
+		SliderItem("center", ITEM_ATTR_CENTER, DEFAULT_LIFE_CENTER, 0, 50000), SliderItem("offset", ITEM_ATTR_OFFSET, DEFAULT_LIFE_OFFSET, 0, 5000), 0.001f);
 	sizer->Add(s_life);
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_life);
 	// Position
-	SliderCtrlTwo* s_spd = new SliderCtrlTwo(this, "Position", ITEM_POSITION, cb, PS_POSITION,
+	SliderCtrlTwo* s_spd = new SliderCtrlTwo(this, "Î»ÖÃ", ITEM_POSITION, cb, PS_POSITION,
 		SliderItem("x", ITEM_ATTR_X, 0, -500, 500), SliderItem("y", ITEM_ATTR_Y, 0, -500, 500));
 	sizer->Add(s_spd);
 	sizer->AddSpacer(10);
@@ -132,7 +132,7 @@ wxSizer* ToolbarPanel::InitDefaultLayout()
 	m_sliders.push_back(s_dir);
 	// Scale
 	SliderCtrlTwo* s_scale = new SliderCtrlTwo(this, "Ëõ·Å", ITEM_SCALE, cb, PS_SCALE, 
-		SliderItem("start", ITEM_ATTR_START, DEFAULT_SCALE_START, 0, 500), SliderItem("end", ITEM_ATTR_END, DEFAULT_SCALE_END, 0, 500));
+		SliderItem("start", ITEM_ATTR_START, DEFAULT_SCALE_START, 0, 500), SliderItem("end", ITEM_ATTR_END, DEFAULT_SCALE_END, 0, 500), 0.01f);
 	sizer->Add(s_scale);
 	sizer->AddSpacer(10);
 	m_sliders.push_back(s_scale);

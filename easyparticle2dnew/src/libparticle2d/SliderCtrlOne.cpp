@@ -6,12 +6,12 @@ namespace eparticle2d
 {
 
 SliderCtrlOne::SliderCtrlOne(wxPanel* parent, const char* title, const char* name, 
-	UICallback* cb, int key, 
-	const SliderItem& item)
+	UICallback* cb, int key, const SliderItem& item, float scale_slider2text)
 	: wxPanel(parent, wxID_ANY)
 	, m_name(name)
 	, m_cb(cb)
 	, m_key(key)
+	, m_scale_slider2text(scale_slider2text)
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, title);
 	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -38,37 +38,48 @@ void SliderCtrlOne::Update()
 	OnSetValue(wxScrollEvent());
 }
 
-void SliderCtrlOne::Load(const Json::Value& val)
+void SliderCtrlOne::Load(const Json::Value& val, int version)
 {
-	m_slider->SetValue(val[m_name].asInt());
+	int ival;
+	if (version == 0) {
+		ival = val[m_name].asInt();
+	} else {
+		ival = val[m_name].asDouble() / m_scale_slider2text;
+	}
+	m_slider->SetValue(ival);
 }
 
 void SliderCtrlOne::Store(Json::Value& val)
 {
-	val[m_name] = m_slider->GetValue();
+	float fval = m_slider->GetValue() * m_scale_slider2text;
+	val[m_name] = fval;
 }
 
 void SliderCtrlOne::Load()
 {
 	UICallback::Data data;
 	m_cb->GetValue(m_key, data);
-	m_slider->SetValue(data.val0);
-	m_text->SetValue(wxString::FromDouble(data.val0));
+	float fval = data.val0;
+	int ival = (int)(fval / m_scale_slider2text);
+	m_slider->SetValue(ival);
+	m_text->SetValue(wxString::FromDouble(fval));
 }
 
 void SliderCtrlOne::OnSetValue(wxScrollEvent& event)
 {
-	int val = m_slider->GetValue();
-	m_text->SetValue(wxString::FromDouble(val));
-	m_cb->SetValue(m_key, UICallback::Data(val));
+	int ival = m_slider->GetValue();
+	float fval = ival * m_scale_slider2text;
+	m_text->SetValue(wxString::FromDouble(fval));
+	m_cb->SetValue(m_key, UICallback::Data(fval));
 }
 
 void SliderCtrlOne::OnSetValue(wxCommandEvent& event)
 {
-	double val;
-	m_text->GetValue().ToDouble(&val);
-	m_slider->SetValue(val);
-	m_cb->SetValue(m_key, UICallback::Data(val));
+	double fval;
+	m_text->GetValue().ToDouble(&fval);
+	int ival = (int)(fval / m_scale_slider2text);
+	m_slider->SetValue(ival);
+	m_cb->SetValue(m_key, UICallback::Data(fval));
 }
 
 }

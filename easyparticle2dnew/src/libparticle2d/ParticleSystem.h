@@ -20,8 +20,8 @@ public:
 	//
 	// interface UICallback
 	//
-	virtual void SetValue(int key, const Data& data);
-	virtual void GetValue(int key, Data& data);
+	virtual void SetValue(int key, const UICallback::Data& data);
+	virtual void GetValue(int key, UICallback::Data& data);
 
 	void Draw(const d2d::Matrix& mt);
 

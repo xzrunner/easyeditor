@@ -21,7 +21,7 @@ CosSliderCtrl::CosSliderCtrl(wxPanel* parent, const char* title, UICallback* cb)
 	top_sizer->AddSpacer(5);
 
 	m_frequency_ctrl = new SliderCtrlTwo(this, "ÆµÂÊ", ITEM_COS_FREQUENCY, this, PS_COS_FREQUENCY, 
-		SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 100), SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 100));
+		SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 500), SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 500), 0.01f);
 	top_sizer->Add(m_frequency_ctrl);
 
  	SetSizer(top_sizer);
@@ -33,10 +33,10 @@ void CosSliderCtrl::Update()
 	m_frequency_ctrl->Update();
 }
 
-void CosSliderCtrl::Load(const Json::Value& val)
+void CosSliderCtrl::Load(const Json::Value& val, int version)
 {
-	m_amplitude_ctrl->Load(val[ITEM_COS]);
-	m_frequency_ctrl->Load(val[ITEM_COS]);
+	m_amplitude_ctrl->Load(val[ITEM_COS], version);
+	m_frequency_ctrl->Load(val[ITEM_COS], version);
 }
 
 void CosSliderCtrl::Store(Json::Value& val)

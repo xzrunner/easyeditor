@@ -17,7 +17,7 @@ public:
 	CosSliderCtrl(wxPanel* parent, const char* title, UICallback* cb);
 
 	virtual void Update();
-	virtual void Load(const Json::Value& val);
+	virtual void Load(const Json::Value& val, int version);
 	virtual void Store(Json::Value& val);
 	virtual void Load();
 

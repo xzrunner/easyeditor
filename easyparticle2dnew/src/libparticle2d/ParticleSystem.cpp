@@ -34,7 +34,7 @@ ParticleSystem::~ParticleSystem()
 	}
 }
 
-void ParticleSystem::SetValue(int key, const Data& data)
+void ParticleSystem::SetValue(int key, const UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -45,21 +45,21 @@ void ParticleSystem::SetValue(int key, const Data& data)
 		m_count = data.val0;
 		break;
 	case PS_EMISSION_TIME:
-		m_emission_time = data.val0 * 0.001f;
+		m_emission_time = data.val0;
 		break;
 	case PS_FADEOUT_TIME:
-		m_fadeout_time = data.val0 * 0.001f; 
+		m_fadeout_time = data.val0; 
 		break;
 
 	case PS_LIFE:
-		m_life_region.Set((data.val0 - data.val1) * 0.001f, (data.val0 + data.val1) * 0.001f);
+		m_life_region.Set(data.val0 - data.val1, data.val0 + data.val1);
 		break;
 	case PS_DIRECTION:
 		m_direction_region.Set((data.val0 - data.val1) * d2d::TRANS_DEG_TO_RAD, (data.val0 + data.val1) * d2d::TRANS_DEG_TO_RAD);
 		break;
 	case PS_SCALE:
-		m_scale_start = data.val0 * 0.01f;
-		m_scale_end = data.val1 * 0.01f;
+		m_scale_start = data.val0;
+		m_scale_end = data.val1;
 		break;
 	case PS_SPEED:
 		m_speed_region.Set(data.val0 - data.val1, data.val0 + data.val1);
@@ -81,12 +81,12 @@ void ParticleSystem::SetValue(int key, const Data& data)
 		m_cos_amplitude_region.Set(data.val0 - data.val1, data.val0 + data.val1);
 		break;
 	case PS_COS_FREQUENCY:
-		m_cos_frequency_region.Set((data.val0 - data.val1) * 0.01f, (data.val0 + data.val1) * 0.01f);
+		m_cos_frequency_region.Set(data.val0 - data.val1, data.val0 + data.val1);
 		break;
 	}
 }
 
-void ParticleSystem::GetValue(int key, Data& data)
+void ParticleSystem::GetValue(int key, UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -97,16 +97,16 @@ void ParticleSystem::GetValue(int key, Data& data)
 		data.val0 = m_count;
 		break;
 	case PS_EMISSION_TIME:
-		data.val0 = m_emission_time * 1000;
+		data.val0 = m_emission_time;
 		break;
 	case PS_FADEOUT_TIME:
-		data.val0 = m_fadeout_time * 1000;
+		data.val0 = m_fadeout_time;
 		break;
 
 	case PS_LIFE:
 		{
-			float sub = m_life_region.Begin() * 1000,
-				add = m_life_region.End() * 1000;
+			float sub = m_life_region.Begin(),
+				add = m_life_region.End();
 			data.val0 = (sub + add) * 0.5f;
 			data.val1 = (add - sub) * 0.5f;
 		}
@@ -120,8 +120,8 @@ void ParticleSystem::GetValue(int key, Data& data)
 		}
 		break;
 	case PS_SCALE:
-		data.val0 = m_scale_start * 100;
-		data.val1 = m_scale_end * 100;
+		data.val0 = m_scale_start;
+		data.val1 = m_scale_end;
 		break;
 	case PS_SPEED:
 		{
@@ -169,8 +169,8 @@ void ParticleSystem::GetValue(int key, Data& data)
 		break;
 	case PS_COS_FREQUENCY:
 		{
-			float sub = m_cos_frequency_region.Begin() * 100,
-				add = m_cos_frequency_region.End() * 100;
+			float sub = m_cos_frequency_region.Begin(),
+				add = m_cos_frequency_region.End();
 			data.val0 = (sub + add) * 0.5f;
 			data.val1 = (add - sub) * 0.5f;
 		}

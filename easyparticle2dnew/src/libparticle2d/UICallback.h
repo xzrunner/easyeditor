@@ -9,12 +9,12 @@ class UICallback
 public:
 	struct Data
 	{
-		int val0;
-		int val1;
+		float val0;
+		float val1;
 
 		Data() {}
-		Data(int val) : val0(val) {}
-		Data(int val0, int val1) : val0(val0), val1(val1) {}
+		Data(float val) : val0(val) {}
+		Data(float val0, float val1) : val0(val0), val1(val1) {}
 	};
 
 public:

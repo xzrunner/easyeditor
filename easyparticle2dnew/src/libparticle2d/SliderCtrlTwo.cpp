@@ -6,12 +6,13 @@ namespace eparticle2d
 {
 
 SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* name, 
-	UICallback* cb, int key,
-	const SliderItem& item_a, const SliderItem& item_b)
+	UICallback* cb, int key, const SliderItem& item_a, const SliderItem& item_b,
+	float scale_slider2text)
 	: wxPanel(parent, wxID_ANY)
 	, m_name(name)
 	, m_cb(cb)
 	, m_key(key)
+	, m_scale_slider2text(scale_slider2text)
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, title);
 	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
@@ -57,50 +58,68 @@ void SliderCtrlTwo::Update()
 	OnSetValue(wxScrollEvent());
 }
 
-void SliderCtrlTwo::Load(const Json::Value& val)
+void SliderCtrlTwo::Load(const Json::Value& val, int version)
 {
-	m_item_a.slider->SetValue(val[m_name][m_item_a.name].asInt());
-	m_item_b.slider->SetValue(val[m_name][m_item_b.name].asInt());
+	int ivala, ivalb;
+	if (version == 0) {
+		ivala = val[m_name][m_item_a.name].asInt();
+		ivalb = val[m_name][m_item_b.name].asInt();
+	} else {
+		ivala = val[m_name][m_item_a.name].asDouble() / m_scale_slider2text;
+		ivalb = val[m_name][m_item_b.name].asDouble() / m_scale_slider2text;
+	}
+	m_item_a.slider->SetValue(ivala);
+	m_item_b.slider->SetValue(ivalb);
 }
 
 void SliderCtrlTwo::Store(Json::Value& val)
 {
-	val[m_name][m_item_a.name] = m_item_a.slider->GetValue();
-	val[m_name][m_item_b.name] = m_item_b.slider->GetValue();
+	float fvala = m_item_a.slider->GetValue() * m_scale_slider2text,
+		  fvalb = m_item_b.slider->GetValue() * m_scale_slider2text;
+	val[m_name][m_item_a.name] = fvala;
+	val[m_name][m_item_b.name] = fvalb;
 }
 
 void SliderCtrlTwo::Load()
 {
 	UICallback::Data data;
 	m_cb->GetValue(m_key, data);
-	m_item_a.slider->SetValue(data.val0);
-	m_item_b.slider->SetValue(data.val1);
-	m_item_a.text->SetValue(wxString::FromDouble(data.val0));
-	m_item_b.text->SetValue(wxString::FromDouble(data.val1));
+	float fvala = data.val0,
+		  fvalb = data.val1;
+	int ivala = (int)(fvala / m_scale_slider2text),
+		ivalb = (int)(fvalb / m_scale_slider2text);
+	m_item_a.slider->SetValue(ivala);
+	m_item_b.slider->SetValue(ivalb);
+	m_item_a.text->SetValue(wxString::FromDouble(fvala));
+	m_item_b.text->SetValue(wxString::FromDouble(fvalb));
 }
 
 void SliderCtrlTwo::OnSetValue(wxScrollEvent& event)
 {
-	int val_a = m_item_a.slider->GetValue(),
-		val_b = m_item_b.slider->GetValue();
-	m_item_a.text->SetValue(wxString::FromDouble(val_a));
-	m_item_b.text->SetValue(wxString::FromDouble(val_b));
+	int ivala = m_item_a.slider->GetValue(),
+		ivalb = m_item_b.slider->GetValue();
+	float fvala = ivala * m_scale_slider2text,
+		  fvalb = ivalb * m_scale_slider2text;
+	m_item_a.text->SetValue(wxString::FromDouble(fvala));
+	m_item_b.text->SetValue(wxString::FromDouble(fvalb));
 
-	m_cb->SetValue(m_key, UICallback::Data(val_a, val_b));
+	m_cb->SetValue(m_key, UICallback::Data(fvala, fvalb));
 }
 
 void SliderCtrlTwo::OnSetValue(wxCommandEvent& event)
 {
-	double val;
-	m_item_a.text->GetValue().ToDouble(&val);
-	int val_a = (int)val;
-	m_item_b.text->GetValue().ToDouble(&val);
-	int val_b = (int)val;
+	double fvala;
+	m_item_a.text->GetValue().ToDouble(&fvala);
+	double fvalb;
+	m_item_b.text->GetValue().ToDouble(&fvalb);
 
-	m_item_a.slider->SetValue(val_a);
-	m_item_b.slider->SetValue(val_b);
+	int ivala = (int)(fvala / m_scale_slider2text),
+		ivalb = (int)(fvalb / m_scale_slider2text);
 
-	m_cb->SetValue(m_key, UICallback::Data(val_a, val_b));
+	m_item_a.slider->SetValue(ivala);
+	m_item_b.slider->SetValue(ivalb);
+
+	m_cb->SetValue(m_key, UICallback::Data(fvala, fvalb));
 }
 
 }

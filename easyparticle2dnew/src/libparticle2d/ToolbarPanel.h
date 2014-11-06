@@ -15,7 +15,7 @@ public:
 	ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 		d2d::EditPanel* stage, StageData* stage_data);
 
-	void Load(const Json::Value& val);
+	void Load(const Json::Value& val, int version);
 	void Store(Json::Value& val) const;
 
 	void ResetUIFromPS();

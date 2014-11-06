@@ -13,11 +13,10 @@ class SliderCtrlOne : public ISliderCtrl, public wxPanel
 {
 public:
 	SliderCtrlOne(wxPanel* parent, const char* title, const char* name, 
-		UICallback* cb, int key,
-		const SliderItem& item);
+		UICallback* cb, int key, const SliderItem& item, float scale_slider2text = 1);
 
 	virtual void Update();
-	virtual void Load(const Json::Value& val);
+	virtual void Load(const Json::Value& val, int version);
 	virtual void Store(Json::Value& val);
 	virtual void Load();
 
@@ -30,6 +29,8 @@ private:
 
 	UICallback* m_cb;
 	int m_key;
+
+	float m_scale_slider2text;
 
 	wxSlider* m_slider;
 	wxTextCtrl* m_text;

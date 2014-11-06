@@ -31,8 +31,9 @@ void Task::load(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
+	int version = value["version"].asInt();
 	LoadPSSymbol(filename, value);
-	m_toolbar->Load(value);
+	m_toolbar->Load(value, version);
 
 //	CocoPacker::pack("D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\particle2d", "D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\test.lua");
 }
@@ -43,6 +44,7 @@ void Task::store(const char* filename) const
 
 	StorePSSymbol(filename, value);
 	m_toolbar->Store(value);
+	value["version"] = VERSION;
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -121,11 +123,11 @@ void Task::StorePSSymbol(const char* filename, Json::Value& val) const
 
 void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
 {
-	ParticleSystem* ps = m_stage->GetStageData()->GetCurrPS();
+	StageData* sd = m_stage->GetStageData();
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
-	ps->SetSymbol(symbol);
+	sd->ChangePSSymbol(symbol);
 	symbol->release();
 
 	m_ps_name = val["name"].asString();
