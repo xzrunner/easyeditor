@@ -146,6 +146,22 @@
 	</References>
 	<Files>
 		<Filter
+			Name="demo"
+			>
+			<File
+				RelativePath="..\..\..\src\libterrain\IDemo.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\SimpleTriNetwork.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\SimpleTriNetwork.h"
+				>
+			</File>
+		</Filter>
+		<Filter
 			Name="view"
 			>
 			<Filter

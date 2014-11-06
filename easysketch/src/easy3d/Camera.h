@@ -19,6 +19,8 @@ public:
 
 	mat4 GetMatrix() const;
 
+	const vec3& GetPosition() const { return m_pos; }
+
 	void SetScreenSize(int width, int height);
 
 	vec3 MapToSphere(ivec2 touchpoint) const;

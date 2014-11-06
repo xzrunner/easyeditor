@@ -160,3 +160,4 @@
 //#include "render/DynamicFont.h"
 #include "render/RenderContext.h"
 #include "render/IShader.h"
+#include "render/LabelNew.h"

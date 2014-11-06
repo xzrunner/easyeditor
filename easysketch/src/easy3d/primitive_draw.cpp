@@ -8,13 +8,7 @@ namespace e3d
 
 void DrawLine(const vec3& p0, const vec3& p1, d2d::Colorf color)
 {
-	float vertices[6];
-	vertices[0] = p0.x;
-	vertices[1] = p0.y;
-	vertices[2] = p0.z;
-	vertices[3] = p1.x;
-	vertices[4] = p1.y;
-	vertices[5] = p1.z;
+	vec3 vertices[] = {p0, p1};
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->Shape();
@@ -24,9 +18,26 @@ void DrawLine(const vec3& p0, const vec3& p1, d2d::Colorf color)
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
 
-	glDrawArrays(GL_LINES, 0, 2);
+	glDrawArrays(GL_LINES, 0, sizeof(vertices) / sizeof(vec3));
 
 	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+void DrawTriLine(const vec3& p0, const vec3& p1, const vec3& p2, d2d::Colorf color)
+{
+	vec3 vertices[] = {p0, p1, p2};
+
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->Shape();
+	shader->SetShapeColor(color);
+	shader->Commit();
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, &vertices[0].x);
+
+	glDrawArrays(GL_LINE_LOOP, 0, sizeof(vertices) / sizeof(vec3));
+
+	glDisableClientState(GL_VERTEX_ARRAY);	
 }
 
 void DrawCube(const AABB& aabb, d2d::Colorf color)
@@ -36,54 +47,21 @@ void DrawCube(const AABB& aabb, d2d::Colorf color)
 
 void DrawCube(const mat4& mat, const AABB& aabb, d2d::Colorf color)
 {
-	float vertices[24];
-	int idx = 0;
-
 	const vec3& min = aabb.Min();
 	const vec3& max = aabb.Max();
 
-	vec3 pos = mat * min;
- 	vertices[idx++] = pos.x;
- 	vertices[idx++] = pos.y;
- 	vertices[idx++] = pos.z;
- 
-	pos = mat * vec3(max.x, min.y, min.z);
-	vertices[idx++] = pos.x;
-	vertices[idx++] = pos.y;
-	vertices[idx++] = pos.z;
- 
-	pos = mat * vec3(max.x, max.y, min.z);
-	vertices[idx++] = pos.x;
-	vertices[idx++] = pos.y;
-	vertices[idx++] = pos.z;
- 
-	pos = mat * vec3(min.x, max.y, min.z);
-	vertices[idx++] = pos.x;
-	vertices[idx++] = pos.y;
-	vertices[idx++] = pos.z;
- 
-	pos = mat * vec3(min.x, min.y, max.z);
-	vertices[idx++] = pos.x;
-	vertices[idx++] = pos.y;
-	vertices[idx++] = pos.z;
- 
-	pos = mat * vec3(max.x, min.y, max.z);
-	vertices[idx++] = pos.x;
-	vertices[idx++] = pos.y;
-	vertices[idx++] = pos.z;
- 
-	pos = mat * vec3(max.x, max.y, max.z);
-	vertices[idx++] = pos.x;
-	vertices[idx++] = pos.y;
-	vertices[idx++] = pos.z;
- 
-	pos = mat * vec3(min.x, max.y, max.z);
-	vertices[idx++] = pos.x;
-	vertices[idx++] = pos.y;
-	vertices[idx++] = pos.z;
+	vec3 vertices[8];
+	vertices[0] = mat * min; 
+	vertices[1] = mat * vec3(max.x, min.y, min.z);
+	vertices[2] = mat * vec3(max.x, max.y, min.z);
+	vertices[3] = mat * vec3(min.x, max.y, min.z);
+	vertices[4] = mat * vec3(min.x, min.y, max.z);
+	vertices[5] = mat * vec3(max.x, min.y, max.z);
+	vertices[6] = mat * max;
+	vertices[7] = mat * vec3(min.x, max.y, max.z);
 
 	unsigned short indices[24];
-	idx = 0;
+	int idx = 0;
 	indices[idx++] = 0;
 	indices[idx++] = 1;
 	indices[idx++] = 1;
@@ -117,7 +95,7 @@ void DrawCube(const mat4& mat, const AABB& aabb, d2d::Colorf color)
 	shader->Commit();
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, vertices);
+	glVertexPointer(3, GL_FLOAT, 0, &vertices[0].x);
 
 	glDrawElements(GL_LINES, 24, GL_UNSIGNED_SHORT, indices);
 

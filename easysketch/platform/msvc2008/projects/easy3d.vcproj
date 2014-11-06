@@ -301,6 +301,30 @@
 				</Filter>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="editop"
+			>
+			<File
+				RelativePath="..\..\..\src\easy3d\ControlCameraOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\ControlCameraOP.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="tools"
+			>
+			<File
+				RelativePath="..\..\..\src\easy3d\LogViewer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\LogViewer.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\easy3d\easy3d.h"
 			>

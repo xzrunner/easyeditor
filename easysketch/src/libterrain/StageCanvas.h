@@ -7,6 +7,8 @@
 namespace libterrain
 {
 
+class IDemo;
+
 class StageCanvas : public e3d::StageCanvas
 {
 public:
@@ -14,6 +16,9 @@ public:
 
 protected:
 	virtual void onDraw();
+
+private:
+	IDemo* m_demo;
 
 }; // StageCanvas
 

@@ -5,7 +5,7 @@ namespace e3d
 
  const float Camera::CAM_NEAR = 1;
  const float Camera::CAM_FAR = 3;
- static const float DEFAULT_Z = -2;
+ static const float DEFAULT_Z = 2;
 
 // const float Camera::CAM_NEAR = 4;
 // const float Camera::CAM_FAR = 10;
@@ -43,7 +43,11 @@ void Camera::SetRotate(const mat4& rot)
 
 mat4 Camera::GetMatrix() const
 {
-	return mat4::Translate(m_pos.x, m_pos.y, m_pos.z) * m_rotation;
+//	mat4 mat = mat4::Translate(m_pos.x, m_pos.y, m_pos.z) * m_rotation;
+	mat4 mat = mat4::Translate(-m_pos.x, -m_pos.y, -m_pos.z) * m_rotation;
+
+//	return mat.Invert();
+	return mat;
 }
 
 void Camera::SetScreenSize(int width, int height)

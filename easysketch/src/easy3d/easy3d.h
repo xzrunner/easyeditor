@@ -17,4 +17,8 @@
 
 #include "ViewFrustum.h"
 
+#include "ControlCameraOP.h"
+
+#include "LogViewer.h"
+
 #endif // _E3D_H_

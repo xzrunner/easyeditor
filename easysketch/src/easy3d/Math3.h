@@ -18,6 +18,8 @@ public:
 	static bool RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaternion& angle,
 		const Ray& ray, vec3* coord);
 
+	static float GetDistance(const vec3& a, const vec3& b);
+
 }; // Math3
 
 }

@@ -91,4 +91,12 @@ bool Math3::RayOBBIntersection(const AABB& aabb, const vec3& pos, const Quaterni
 	return RayAABBIntersection(aabb, _ray, coord);
 }
 
+float Math3::GetDistance(const vec3& a, const vec3& b)
+{
+	float dx = a.x - b.x,
+		  dy = a.y - b.y,
+		  dz = a.z - b.z;
+	return sqrt(dx*dx+dy*dy+dz*dz);
+}
+
 }
