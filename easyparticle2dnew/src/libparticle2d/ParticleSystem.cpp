@@ -237,7 +237,7 @@ void ParticleSystem::Update(float dt)
 
 			// 水平速度cos效果器
 			if (p->cos_amplitude != 0) {
-				p->speed.x = p->cos_amplitude * cos(p->cos_frequency * p->life);
+				p->speed.x = p->cos_amplitude * cos(p->cos_frequency * (p->lifetime - p->life));
 			}
 
 			p->position += p->speed * dt;
