@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "Vector.h"
+
 namespace e3d
 {
 
@@ -14,10 +16,14 @@ public:
 	ControlCameraOP(d2d::EditPanel* stage);
 
 	virtual bool onKeyDown(int keyCode);
+	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseDrag(int x, int y);
 	virtual bool onMouseMove(int x, int y);
 
 private:
 	StageCanvas* m_canvas;
+
+	ivec2 m_last_pos;
 
 }; // ControlCameraOP
 

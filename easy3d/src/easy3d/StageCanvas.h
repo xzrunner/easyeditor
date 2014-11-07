@@ -16,8 +16,6 @@ public:
 
 	virtual void Refresh();
 
-	void SetCameraRotation(const mat4& rot);
-
 	Camera& GetCamera3() { return m_camera3; }
 	const Camera& GetCamera3() const { return m_camera3; }
 

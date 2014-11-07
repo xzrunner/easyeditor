@@ -36,7 +36,7 @@ void TranslateCameraState::OnMouseMove(const ivec2& pos)
 
 	m_last_pos = pos;
 
-	e3d::ShaderMgr::Instance()->SetModelView(cam.GetMatrix());
+	e3d::ShaderMgr::Instance()->SetModelView(cam.GetModelViewMat());
 
 	m_canvas->Refresh();
 }

@@ -20,10 +20,7 @@ public:
 private:
 	e3d::StageCanvas* m_canvas;
 
-	bool m_is_open;
-
-	Quaternion m_ori, m_pre_ori;
-	ivec2 m_first_pos;
+	ivec2 m_last_pos;
 
 }; // RotateCameraState
 

@@ -19,13 +19,13 @@ StageCanvas::StageCanvas(StagePanel* stage, d2d::LibraryPanel* library)
 
 ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 {
-	vec3 pos = GetCamera3().GetMatrix() * proj;
+	vec3 pos = GetCamera3().GetModelViewMat() * proj;
 	return e3d::ViewFrustum::TransPos3ProjectToScreen(pos, m_screen_width, m_screen_height);
 }
 
 vec3 StageCanvas::TransPos3ScreenToProject(const ivec2& scr, float proj_z) const
 {
-	vec3 pos = GetCamera3().GetMatrix() * vec3(0, 0, proj_z);
+	vec3 pos = GetCamera3().GetModelViewMat() * vec3(0, 0, proj_z);
 	return e3d::ViewFrustum::TransPos3ScreenToProject(scr, pos.z, m_screen_width, m_screen_height);
 }
 
@@ -49,7 +49,7 @@ void StageCanvas::onSize(int w, int h)
 
 void StageCanvas::onDraw()
 {
-	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetMatrix());
+	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetModelViewMat());
 	DrawBackground();
 	DrawSprites();
 

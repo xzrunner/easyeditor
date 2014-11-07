@@ -11,20 +11,15 @@ StageCanvas::StageCanvas(d2d::EditPanel* editPanel)
 
 void StageCanvas::Refresh()
 {
-	ShaderMgr::Instance()->SetModelView(m_camera3.GetMatrix());
+	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 
 	d2d::GLCanvas::Refresh();
-}
-
-void StageCanvas::SetCameraRotation(const mat4& rot) 
-{
-	m_camera3.SetRotate(rot);
 }
 
 void StageCanvas::initGL()
 {
 	d2d::GLCanvas::initGL();
-	ShaderMgr::Instance()->SetModelView(m_camera3.GetMatrix());
+	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 }
 
 void StageCanvas::onSize(int w, int h)
@@ -36,7 +31,7 @@ void StageCanvas::onSize(int w, int h)
 	m_camera3.SetScreenSize(w, h);
 
 	ShaderMgr::Instance()->SetProjection(w, h);
-	ShaderMgr::Instance()->SetModelView(m_camera3.GetMatrix());
+	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 }
 
 }

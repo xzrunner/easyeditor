@@ -15,13 +15,16 @@ public:
 	void Translate(const vec3& offset);
 	void Zoom(bool zoomin);
 
-	mat4 GetMatrix() const;
+	mat4 GetModelViewMat() const;
 
 	const vec3& GetPosition() const { return m_pos; }
 	void SetPosition(const vec3& pos) { m_pos = pos; }
 
-	const mat4& GetRotate() const { return m_rotation; }
-	void SetRotate(const mat4& rot);
+	void Rotate(float dheading, float delevation);
+
+	vec3 GetLeft() const;		// U
+	vec3 GetUp() const;			// V
+	vec3 GetToward() const;		// N
 
 	void SetScreenSize(int width, int height);
 
@@ -34,8 +37,15 @@ public:
 	static const float CAM_FAR;
 
 private:
+	mat4 GetModelViewRotMat() const;
+
+private:
 	vec3 m_pos;
-	mat4 m_rotation;
+	
+	// use UVN model
+	// in degree
+	float m_rot_heading;	// ·½Î»½Ç
+	float m_rot_elevation;	// Ñö½Ç
 
 	int m_width, m_height;
 

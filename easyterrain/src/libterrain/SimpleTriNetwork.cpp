@@ -11,7 +11,7 @@ SimpleTriNetwork::SimpleTriNetwork(e3d::Camera& cam)
 	: m_cam(cam)
 {
 	m_cam.SetPosition(vec3(0, -2, 2));
-	m_cam.SetRotate(mat4::RotateX(30));
+	m_cam.Rotate(0, 30);
 }
 
 void SimpleTriNetwork::Draw() const

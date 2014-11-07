@@ -82,7 +82,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
 
-	mat4 cam_mat = canvas->GetCamera3().GetMatrix();
+	mat4 cam_mat = canvas->GetCamera3().GetModelViewMat();
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
