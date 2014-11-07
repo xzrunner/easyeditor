@@ -68,6 +68,14 @@ namespace coceditor
 		std::map<const d2d::ISprite*, int> m_mapSpriteID;
 		std::map<const d2d::ISymbol*, int> m_mapSymbolID;
 
+		// patch for multi mesh symbol
+		struct MeshID
+		{
+			emesh::Sprite* sprite;
+			int id;
+		};
+		std::map<const emesh::Symbol*, std::vector<MeshID> > m_map_mesh2ids;
+
 	}; // COCCode
 
 }

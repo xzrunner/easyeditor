@@ -70,11 +70,52 @@ void COCCode::ResolveSymbols(const COCParser& parser)
 				}
 				else if (emesh::Sprite* mesh = dynamic_cast<emesh::Sprite*>(sprite))
 				{
-					// mesh's pictures id
-					// todo for x
-					m_mapSpriteID.insert(std::make_pair(sprite, m_id));
-					int size = ParserMesh(mesh, parser);
-					m_id += size;
+					// todo multi mesh!
+					std::map<const emesh::Symbol*, std::vector<MeshID> >::iterator itr
+						= m_map_mesh2ids.find(&mesh->getSymbol());
+					if (itr != m_map_mesh2ids.end()) {
+						bool find = false;
+						for (int i = 0, n = itr->second.size(); i < n; ++i) {
+							MeshID id = itr->second[i];
+							if (mesh->GetSpeed() == id.sprite->GetSpeed()) {
+								m_mapSpriteID.insert(std::make_pair(sprite, id.id));
+								find = true;
+								break;
+							}
+						}
+						if (!find) {
+							if (!itr->second.empty()) {
+								// todo symbol id »áÖØ¸´!
+								int zz = 0;
+							}
+
+							MeshID id;
+							id.sprite = mesh;
+							id.id = m_id;
+							itr->second.push_back(id);
+
+							// mesh's pictures id
+							// todo for x
+							m_mapSpriteID.insert(std::make_pair(sprite, m_id));
+							int size = ParserMesh(mesh, parser);
+							m_id += size;
+						}
+					} else {
+						MeshID id;
+						id.sprite = mesh;
+						id.id = m_id;
+
+						std::vector<MeshID> ids;
+						ids.push_back(id);
+
+						m_map_mesh2ids.insert(std::make_pair(&mesh->getSymbol(), ids));
+
+						// mesh's pictures id
+						// todo for x
+						m_mapSpriteID.insert(std::make_pair(sprite, m_id));
+						int size = ParserMesh(mesh, parser);
+						m_id += size;
+					}
 				}
 			}
 
@@ -816,8 +857,8 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 				for (int i = 0; i < 4; ++i)
 				{
 					float u = src[i].x, v = src[i].y;
-					src[i].x = picture->scr[1].x + u * w;
-					src[i].y = picture->scr[1].y + v * h;
+					src[i].x = picture->scr[0].x + u * w;
+					src[i].y = picture->scr[0].y + v * h;
 				}
  			}
 			std::string sx0 = wxString::FromDouble(src[0].x), sy0 = wxString::FromDouble(src[0].y);
