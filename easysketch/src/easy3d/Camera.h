@@ -15,11 +15,13 @@ public:
 	void Translate(const vec3& offset);
 	void Zoom(bool zoomin);
 
-	void SetRotate(const mat4& rot);
-
 	mat4 GetMatrix() const;
 
 	const vec3& GetPosition() const { return m_pos; }
+	void SetPosition(const vec3& pos) { m_pos = pos; }
+
+	const mat4& GetRotate() const { return m_rotation; }
+	void SetRotate(const mat4& rot);
 
 	void SetScreenSize(int width, int height);
 

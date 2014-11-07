@@ -11,7 +11,7 @@ namespace libterrain
 class SimpleTriNetwork : public IDemo
 {
 public:
-	SimpleTriNetwork(const e3d::Camera& cam);
+	SimpleTriNetwork(e3d::Camera& cam);
 	
 	virtual void Draw() const;
 
@@ -20,7 +20,7 @@ private:
 	void DrawTriByLevel(const vec3& v0, const vec3& v1, const vec3& v2, int level) const;
 
 private:
-	const e3d::Camera& m_cam;
+	e3d::Camera& m_cam;
 
 }; // SimpleTriNetwork
 

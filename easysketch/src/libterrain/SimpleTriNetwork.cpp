@@ -7,9 +7,11 @@ static const float EDGE = 10;
 
 static const int MAX_LEVEL = 10;
 
-SimpleTriNetwork::SimpleTriNetwork(const e3d::Camera& cam)
+SimpleTriNetwork::SimpleTriNetwork(e3d::Camera& cam)
 	: m_cam(cam)
 {
+	m_cam.SetPosition(vec3(0, -2, 2));
+	m_cam.SetRotate(mat4::RotateX(30));
 }
 
 void SimpleTriNetwork::Draw() const

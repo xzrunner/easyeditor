@@ -16,25 +16,49 @@ bool ControlCameraOP::onKeyDown(int keyCode)
 
 	switch (keyCode)
 	{
+// 	case 't': case 'T':
+// 		{
+// 			mat4 mat = mat4::RotateX(-60);
+// 			vec3 dir = mat * vec3(0, 0, -1);
+// 			vec3 dir2 = mat * vec3(0, 0, 1);
+// 			int zz = 0;
+// 		}
+// 		break;
 	case WXK_SPACE:
 		m_canvas->GetCamera3().Reset();
 		m_canvas->Refresh();
 		break;
 	case 'w': case 'W':
-		m_canvas->GetCamera3().Zoom(true);
-		m_canvas->Refresh();
+		{
+			Camera& cam = m_canvas->GetCamera3();
+			vec3 offset = cam.GetRotate() * vec3(0, 0, -1);
+			m_canvas->GetCamera3().Translate(offset);
+			m_canvas->Refresh();
+		}
 		break;
 	case 's': case 'S':
-		m_canvas->GetCamera3().Zoom(false);
-		m_canvas->Refresh();
+		{
+			Camera& cam = m_canvas->GetCamera3();
+			vec3 offset = cam.GetRotate() * vec3(0, 0, 1);
+			m_canvas->GetCamera3().Translate(offset);
+			m_canvas->Refresh();
+		}
 		break;
 	case 'a': case 'A':
-		m_canvas->GetCamera3().Translate(vec3(-1, 0, 0));
-		m_canvas->Refresh();
+		{
+			Camera& cam = m_canvas->GetCamera3();
+			vec3 offset = cam.GetRotate() * vec3(-1, 0, 0);
+			m_canvas->GetCamera3().Translate(offset);
+			m_canvas->Refresh();
+		}
 		break;
 	case 'd': case 'D':
-		m_canvas->GetCamera3().Translate(vec3(1, 0, 0));
-		m_canvas->Refresh();
+		{
+			Camera& cam = m_canvas->GetCamera3();
+			vec3 offset = cam.GetRotate() * vec3(1, 0, 0);
+			m_canvas->GetCamera3().Translate(offset);
+			m_canvas->Refresh();
+		}
 		break;
 	}
 
