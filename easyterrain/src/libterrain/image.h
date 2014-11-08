@@ -107,7 +107,7 @@ class CIMAGE
 	bool LoadUncompressedTGA( void );
 
 	public:
-
+		CIMAGE() : m_bIsLoaded(false), m_ucpData(NULL) {}
 
 	bool Create( unsigned int uiWidth, unsigned int uiHeight, unsigned int uiBPP );
 

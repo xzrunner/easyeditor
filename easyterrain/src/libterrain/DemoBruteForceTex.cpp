@@ -24,7 +24,14 @@ void DemoBruteForceTex::Load()
 	m_bf.SetHeightScale(0.025f);
 
 	//load the terrain texture in
-	m_bf.LoadTexture("demo03/grass_1.tga");
+// 	// 1. load one texture
+// 	m_bf.LoadTexture("demo03/grass_1.tga");
+	// 2. load multi textures
+	m_bf.LoadTile( Terrain::LOWEST_TILE,  "demo03/lowestTile.tga" );
+	m_bf.LoadTile( Terrain::LOW_TILE,     "demo03/lowTile.tga" );
+	m_bf.LoadTile( Terrain::HIGH_TILE,    "demo03/highTile.tga" );
+	m_bf.LoadTile( Terrain::HIGHEST_TILE, "demo03/highestTile.tga" );
+	m_bf.GenerateTextureMap( 256 );
 }
 
 void DemoBruteForceTex::Draw() const

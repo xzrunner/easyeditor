@@ -67,7 +67,7 @@ bool Terrain::SaveHeightMap(const char* filename)
 }
 
 //--------------------------------------------------------------
-// Name:			CTERRAIN::MakeTerrainFault - public
+// Name:			Terrain::MakeTerrainFault - public
 // Description:		Create a height data set using the "Fault Formation"
 //					algorithm.  Thanks a lot to Jason Shankel for this code!
 // Arguments:		-iSize: Desired size of the height map
@@ -183,7 +183,7 @@ bool Terrain::MakeTerrainFault( int iSize, int iIterations, int iMinDelta, int i
 }
 
 //--------------------------------------------------------------
-// Name:			CTERRAIN::MakeTerrainPlasma - public
+// Name:			Terrain::MakeTerrainPlasma - public
 // Description:		Create a height data set using the "Midpoint
 //					Displacement" algorithm.  Thanks a lot to 
 //					Jason Shankel for this code!
@@ -375,13 +375,127 @@ bool Terrain::MakeTerrainPlasma( int iSize, float fRoughness )
 	return true;
 }
 
+//--------------------------------------------------------------
+// Name:			Terrain::GenerateTextureMap - public
+// Description:		Generate a texture map from the four tiles (that must
+//					be loaded before this function is called)
+// Arguments:		-uiSize: the size of the texture map to be generated
+// Return Value:	None
+//--------------------------------------------------------------
+void Terrain::GenerateTextureMap( unsigned int uiSize )
+{
+	unsigned char ucRed, ucGreen, ucBlue;
+	unsigned int iTempID;
+	unsigned int x, z;
+	unsigned int uiTexX, uiTexZ;
+	float fTotalRed, fTotalGreen, fTotalBlue;
+	float fBlend[4];
+	float fMapRatio;
+	int iLastHeight;
+	int i;
+
+	//find out the number of tiles that we have
+	m_tiles.iNumTiles= 0;
+	for( i=0; i<TRN_NUM_TILES; i++ )
+	{
+		//if the current tile is loaded, then we add one to the total tile count
+		if( m_tiles.textureTiles[i].IsLoaded( ) )
+			m_tiles.iNumTiles++;
+	}
+
+	//now, re-loop through, and calculate the texture regions
+	iLastHeight= -1;
+	for( i=0; i<TRN_NUM_TILES; i++ )
+	{
+		//we only want to perform these calculations if we actually have a tile loaded
+		if( m_tiles.textureTiles[i].IsLoaded( ) )
+		{
+			//calculate the three height boundaries
+			m_tiles.m_regions[i].m_iLowHeight= iLastHeight+1;
+			iLastHeight+= 255/m_tiles.iNumTiles;
+
+			m_tiles.m_regions[i].m_iOptimalHeight= iLastHeight;
+
+			m_tiles.m_regions[i].m_iHighHeight= ( iLastHeight-m_tiles.m_regions[i].m_iLowHeight )+iLastHeight;
+		}
+	}
+
+	//create room for a new texture
+	m_texture.Create( uiSize, uiSize, 24 );
+
+	//get the height map to texture map ratio (since, most of the time,
+	//the texture map will be a higher resolution than the height map, so
+	//we need the ratio of height map pixels to texture map pixels)
+	fMapRatio= ( float )m_data.size/uiSize;
+
+	//time to create the texture data
+	for( z=0; z<uiSize; z++ )
+	{
+		for( x=0; x<uiSize; x++ )
+		{
+			//set our total color counters to 0.0f
+			fTotalRed  = 0.0f;
+			fTotalGreen= 0.0f;
+			fTotalBlue = 0.0f;
+
+			//loop through the tiles (for the third time in this function!)
+			for( i=0; i<TRN_NUM_TILES; i++ )
+			{
+				//if the tile is loaded, we can do the calculations
+				if( m_tiles.textureTiles[i].IsLoaded( ) )
+				{
+					uiTexX= x;
+					uiTexZ= z;
+
+					//get texture coordinates
+					GetTexCoords( m_tiles.textureTiles[i], &uiTexX, &uiTexZ );
+
+					//get the current color in the texture at the coordinates that we got
+					//in GetTexCoords
+					m_tiles.textureTiles[i].GetColor( uiTexX, uiTexZ, &ucRed, &ucGreen, &ucBlue );
+
+					//get the current coordinate's blending percentage for this tile
+					fBlend[i]= RegionPercent( i, InterpolateHeight( x, z, fMapRatio ) );
+
+					//calculate the RGB values that will be used
+					fTotalRed  += ucRed*fBlend[i];
+					fTotalGreen+= ucGreen*fBlend[i];
+					fTotalBlue += ucBlue*fBlend[i];
+				}
+			}			
+
+			//set our terrain's texture color to the one that we previously calculated
+			m_texture.SetColor( x, z, ( unsigned char )fTotalRed,
+				( unsigned char )fTotalGreen,
+				( unsigned char )fTotalBlue );
+		}
+	}
+
+	//build the OpenGL texture
+	glGenTextures( 1, &iTempID );
+	glBindTexture( GL_TEXTURE_2D, iTempID );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );						
+
+	//make the texture
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGB, uiSize, uiSize, 0, GL_RGB, GL_UNSIGNED_BYTE, m_texture.GetData( ) );
+
+	//set the texture's ID
+	m_texture.SetID( iTempID );
+}
+
 bool Terrain::LoadTexture(char* filename)
 {
 	return m_texture.Load(filename, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, true);
 }
 
+bool Terrain::LoadTile( ETILE_TYPES tileType, char* szFilename )
+{
+	return m_tiles.textureTiles[tileType].LoadData( szFilename );
+}
+
 //--------------------------------------------------------------
-// Name:			CTERRAIN::NormalizeTerrain - private
+// Name:			Terrain::NormalizeTerrain - private
 // Description:		Scale the terrain height values to a range of
 //					0-255
 // Arguments:		-fpHeightData: the height data buffer
@@ -418,7 +532,7 @@ void Terrain::NormalizeTerrain( float* fpHeightData )
 }
 
 //--------------------------------------------------------------
-// Name:			CTERRAIN::FilterHeightBand - private
+// Name:			Terrain::FilterHeightBand - private
 // Description:		Apply the erosion filter to an individual 
 //					band of height values
 // Arguments:		-fpBand: the band to be filtered
@@ -444,7 +558,7 @@ void Terrain::FilterHeightBand( float* fpBand, int iStride, int iCount, float fF
 }
 
 //--------------------------------------------------------------
-// Name:			CTERRAIN::FilterHeightfTempBuffer - private
+// Name:			Terrain::FilterHeightfTempBuffer - private
 // Description:		Apply the erosion filter to an entire buffer
 //					of height values
 // Arguments:		-fpHeightData: the height values to be filtered
@@ -470,6 +584,169 @@ void Terrain::FilterHeightField( float* fpHeightData, float fFilter )
 	//erode from bottom to top
 	for( i=0; i<m_data.size; i++ )
 		FilterHeightBand( &fpHeightData[m_data.size*(m_data.size-1)+i], -m_data.size, m_data.size, fFilter );
+}
+
+
+//--------------------------------------------------------------
+// Name:			Terrain::RegionPercent - public
+// Description:		Get the percentage of which a texture tile should be
+//					visible at a given height
+// Arguments:		-tileType: type of tile to check
+//					-ucHeight: the current height to test for
+// Return Value:	A floating point value: the percentage of which the
+//					current texture occupies at the given height
+//--------------------------------------------------------------
+float Terrain::RegionPercent( int tileType, unsigned char ucHeight )
+{
+	float fTemp1, fTemp2;
+
+	//if the height is lower than the lowest tile's height, then we want full brightness,
+	//if we don't do this, the area will get darkened, and no texture will get shown
+	if( m_tiles.textureTiles[LOWEST_TILE].IsLoaded( ) )
+	{
+		if( tileType==LOWEST_TILE && ucHeight<m_tiles.m_regions[LOWEST_TILE].m_iOptimalHeight )
+			return 1.0f;
+	}
+	else if( m_tiles.textureTiles[LOW_TILE].IsLoaded( ) )
+	{
+		if( tileType==LOW_TILE && ucHeight<m_tiles.m_regions[LOW_TILE].m_iOptimalHeight )
+			return 1.0f;
+	}
+	else if( m_tiles.textureTiles[HIGH_TILE].IsLoaded( ) )
+	{
+		if( tileType==HIGH_TILE && ucHeight<m_tiles.m_regions[HIGH_TILE].m_iOptimalHeight )
+			return 1.0f;
+	}
+	else if( m_tiles.textureTiles[HIGHEST_TILE].IsLoaded( ) )
+	{
+		if( tileType==HIGHEST_TILE && ucHeight<m_tiles.m_regions[HIGHEST_TILE].m_iOptimalHeight )
+			return 1.0f;
+	}
+
+	//height is lower than the region's boundary
+	if( ucHeight<m_tiles.m_regions[tileType].m_iLowHeight )
+		return 0.0f;
+
+	//height is higher than the region's boundary
+	else if( ucHeight>m_tiles.m_regions[tileType].m_iHighHeight )
+		return 0.0f;
+
+	//height is below the optimum height
+	if( ucHeight<m_tiles.m_regions[tileType].m_iOptimalHeight )
+	{
+		//calculate the texture percentage for the given tile's region
+		fTemp1= ( float )ucHeight-m_tiles.m_regions[tileType].m_iLowHeight;
+		fTemp2= ( float )m_tiles.m_regions[tileType].m_iOptimalHeight-m_tiles.m_regions[tileType].m_iLowHeight;
+
+		return ( fTemp1/fTemp2 );
+	}
+
+	//height is exactly the same as the optimal height
+	else if( ucHeight==m_tiles.m_regions[tileType].m_iOptimalHeight )
+		return 1.0f;
+
+	//height is above the optimal height
+	else if( ucHeight>m_tiles.m_regions[tileType].m_iOptimalHeight )
+	{
+		//calculate the texture percentage for the given tile's region
+		fTemp1= ( float )m_tiles.m_regions[tileType].m_iHighHeight-m_tiles.m_regions[tileType].m_iOptimalHeight;
+
+		return ( ( fTemp1-( ucHeight-m_tiles.m_regions[tileType].m_iOptimalHeight ) )/fTemp1 );
+	}
+
+	//something is seriously wrong if the height doesn't fit the previous cases
+	return 0.0f;
+}
+
+//--------------------------------------------------------------
+// Name:			Terrain::GetTexCoords - public
+// Description:		Get texture coordinates :)
+//					present in the final texture
+// Arguments:		-texture: the texture to get coordinates for
+//					-*x, *y: the unaltered texture coordinates, and the
+//							 storage place for the altered coordinates
+// Return Value:	None
+//--------------------------------------------------------------
+void Terrain::GetTexCoords( CIMAGE texture, unsigned int* x, unsigned int* y )
+{
+	unsigned int uiWidth = texture.GetWidth( );
+	unsigned int uiHeight= texture.GetHeight( );
+	int iRepeatX= -1;
+	int iRepeatY= -1;
+	int i= 0;
+
+	//loop until we figure out how many times the tile has repeated (on the X axis)
+	while( iRepeatX==-1 )
+	{
+		i++;
+
+		//if x is less than the total width, then we found a winner!
+		if( *x<( uiWidth*i ) )
+			iRepeatX= i-1;
+	}
+
+	//prepare to figure out the repetition on the Y axis
+	i= 0;
+
+	//loop until we figure out how many times the tile has repeated (on the Y axis)
+	while( iRepeatY==-1 )
+	{
+		i++;
+
+		//if y is less than the total height, then we have a bingo!
+		if( *y<( uiHeight*i ) )
+			iRepeatY= i-1;
+	}
+
+	//update the given texture coordinates
+	*x= *x-( uiWidth*iRepeatX );
+	*y= *y-( uiHeight*iRepeatY );
+}
+
+//--------------------------------------------------------------
+// Name:			Terrain::InterpolateHeight - public
+// Description:		Interpolate the heights in the height map so that
+//					the generated texture map does not look incredibly blocky
+// Arguments:		-x, z: coordinates to get the height at
+//					-fHeightToTexRatio: Height map size to texture 
+//										map size ratio
+// Return Value:	An unsigned char value: the interpolated height
+//--------------------------------------------------------------
+unsigned char Terrain::InterpolateHeight( int x, int z, float fHeightToTexRatio )
+{
+	unsigned char ucLow, ucHighX, ucHighZ;
+	float ucX, ucZ;
+	float fScaledX= x*fHeightToTexRatio;
+	float fScaledZ= z*fHeightToTexRatio;
+	float fInterpolation;
+
+	//set the middle boundary
+	ucLow= GetTrueHeightAtPoint( ( int )fScaledX, ( int )fScaledZ );
+
+	//start off by interpolating along the X axis
+	//set the high boundary
+	if( ( fScaledX+1 )>=m_data.size )
+		return ucLow;
+	else
+		ucHighX= GetTrueHeightAtPoint( ( int )fScaledX+1, ( int )fScaledZ );
+
+	//calculate the interpolation (for the X axis)
+	fInterpolation= ( fScaledX-( int )fScaledX );
+	ucX= ( ( ucHighX-ucLow )*fInterpolation )+ucLow;
+
+	//interpolate along the Z axis now
+	//set the high boundary
+	if( ( fScaledZ+1 )>=m_data.size )
+		return ucLow;
+	else
+		ucHighZ= GetTrueHeightAtPoint( ( int )fScaledX, ( int )fScaledZ+1 );
+
+	//calculate the interpolation (for the Z axis)
+	fInterpolation= ( fScaledZ-( int )fScaledZ );
+	ucZ= ( ( ucHighZ-ucLow )*fInterpolation )+ucLow;
+
+	//calculate the overall interpolation (average of the two values)
+	return ( ( unsigned char )( ( ucX+ucZ )/2 ) );
 }
 
 }
