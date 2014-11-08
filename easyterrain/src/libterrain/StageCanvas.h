@@ -15,6 +15,7 @@ public:
 	StageCanvas(d2d::EditPanel* stage);
 
 protected:
+	virtual void initGL();
 	virtual void onDraw();
 
 private:

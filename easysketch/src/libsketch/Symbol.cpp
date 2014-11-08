@@ -42,7 +42,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 // 	e3d::DrawCube(mat, m_aabb, d2d::BLACK);
 
 	shader->Lighting();
-	shader->Draw(m_model, mat);
+	shader->DrawModel(m_model, mat);
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

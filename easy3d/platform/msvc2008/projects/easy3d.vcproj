@@ -196,14 +196,6 @@
 				Name="shader"
 				>
 				<File
-					RelativePath="..\..\..\src\easy3d\LightingShader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easy3d\LightingShader.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easy3d\ShaderMgr.cpp"
 					>
 				</File>
@@ -211,14 +203,34 @@
 					RelativePath="..\..\..\src\easy3d\ShaderMgr.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\easy3d\ShapeShader.cpp"
+				<Filter
+					Name="shaders"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easy3d\ShapeShader.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\LightingShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\LightingShader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\ShapeShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\ShapeShader.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\SpriteShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\SpriteShader.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="dataset"

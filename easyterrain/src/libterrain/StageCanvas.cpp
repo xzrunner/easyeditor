@@ -8,7 +8,15 @@ namespace libterrain
 StageCanvas::StageCanvas(d2d::EditPanel* stage)
 	: e3d::StageCanvas(stage)
 {
+	setBgColor(d2d::BLACK);
+
 	m_demo = new SimpleTriNetwork(GetCamera3());
+}
+
+void StageCanvas::initGL()
+{
+	e3d::StageCanvas::initGL();
+	m_demo->Load();
 }
 
 void StageCanvas::onDraw()

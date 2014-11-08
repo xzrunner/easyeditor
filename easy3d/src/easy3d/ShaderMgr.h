@@ -11,6 +11,7 @@ namespace e3d
 class IModel;
 class LightingShader;
 class ShapeShader;
+class SpriteShader;
 
 class ShaderMgr : public d2d::ShaderMgrBase
 {
@@ -19,8 +20,10 @@ public:
 
 	void Lighting();
 	void Shape();
+	void Sprite();
 
-	void Draw(const IModel* model, const mat4& m);
+	void DrawModel(const IModel* model, const mat4& m);
+	void DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int texid);
 
 	void SetModelView(const mat4& mat);
 
@@ -36,6 +39,7 @@ private:
 private:
 	LightingShader* m_light_shader;
 	ShapeShader* m_shape_shader;
+	SpriteShader* m_sprite_shader;
 
 }; // ShaderMgr
 

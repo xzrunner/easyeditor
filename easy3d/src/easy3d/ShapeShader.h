@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "Quaternion.h"
-
 namespace e3d
 {
 
