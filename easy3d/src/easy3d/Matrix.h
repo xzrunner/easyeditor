@@ -337,13 +337,13 @@ struct Matrix4 {
 		return m;
 	}
 
-	static Matrix4<T> Perspective(T left, T right, T bottom, T top, T near, T far)
+	static Matrix4<T> Perspective(T left, T right, T bottom, T top, T _near, T _far)
 	{
-		T a = 2 * near / (right - left);
-		T b = 2 * near / (top - bottom);
+		T a = 2 * _near / (right - left);
+		T b = 2 * _near / (top - bottom);
 		T c = (right + left) / (right - left);
 		T d = (top + bottom) / (top - bottom);
-		T e = -2 * near;
+		T e = -2 * _near;
 		Matrix4 m;
 		m.c[0][0] = a; m.c[0][1] = 0; m.c[0][2] = 0; m.c[0][3] = 0;
 		m.c[1][0] = 0; m.c[1][1] = b; m.c[1][2] = 0; m.c[1][3] = 0;
@@ -352,14 +352,14 @@ struct Matrix4 {
 		return m;
 	}
 
-	static Matrix4<T> Orthographic(T left, T right, T bottom, T top, T near, T far)
+	static Matrix4<T> Orthographic(T left, T right, T bottom, T top, T _near, T _far)
 	{
 		T a = 2 / (right - left);
 		T b = 2 / (top - bottom);
 		T c = - (right + left) / (right - left);
 		T d = - (top + bottom) / (top - bottom);
-		T e = - (far + near) / (far - near);
-		T f = -2 / (far - near);
+		T e = - (_far + _near) / (_far - _near);
+		T f = -2 / (_far - _near);
 		Matrix4 m;
 		m.c[0][0] = a; m.c[0][1] = 0; m.c[0][2] = 0; m.c[0][3] = 0;
 		m.c[1][0] = 0; m.c[1][1] = b; m.c[1][2] = 0; m.c[1][3] = 0;
