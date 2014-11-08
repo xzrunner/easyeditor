@@ -1,5 +1,7 @@
 #include "SimpleTriNetwork.h"
 
+#include "randtab.h"
+
 namespace libterrain
 {
 
@@ -11,13 +13,19 @@ SimpleTriNetwork::SimpleTriNetwork(e3d::Camera& cam)
 	: m_cam(cam)
 	, m_tex(0)
 {
-	m_cam.SetPosition(vec3(0, -2, 2));
-	m_cam.Rotate(0, 30);
 }
 
 void SimpleTriNetwork::Load()
 {
+	m_cam.SetPosition(vec3(0, -8, 8));
+	m_cam.Rotate(0, 40);
+
 	GenTex();
+
+	m_level2size.reserve(MAX_LEVEL + 1);
+	for(int i = 0; i <= MAX_LEVEL; ++i) {
+		m_level2size.push_back(3.0f / ((float)sqrt((float)(1 << i))));
+	}
 }
 
 void SimpleTriNetwork::Draw() const
@@ -41,6 +49,7 @@ void SimpleTriNetwork::DrawTriByLevel(const vec3& v0, const vec3& v1, const vec3
 	if (level < MAX_LEVEL && len > dis * 0.005f)
 	{
 		vec3 new_node = (v1 + v2) * 0.5f;
+		new_node.z = GetRandHeight(v1, v2, level);
 		DrawTriByLevel(new_node, v0, v1, level + 1);
 		DrawTriByLevel(new_node, v0, v2, level + 1);
 		return;
@@ -105,6 +114,34 @@ void SimpleTriNetwork::GenTex()
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, SIZE, SIZE, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
 
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, SIZE, SIZE, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+}
+
+float SimpleTriNetwork::GetRandHeight(const vec3& v1, const vec3& v2, int level) const
+{
+	float rand_height;
+
+	float src[2] = {
+		(v1.x + v2.x) * 0.5f,
+		0.0f
+	};
+
+	//determine random perturbation of center z using hash of x,y
+	//random number lookup per byte of (x, z) data, all added
+	unsigned char* pC = (unsigned char*)src;
+	unsigned int uiS = 0;
+	for(int i = 0; i < 8; ++i) {
+		uiS += randtab[(i << 8) | pC[i]];
+	}
+
+	//stuff random hash value bits from uiS into float (float viewed
+	//as an int, IEEE float tricks here...)
+	int* pInt = (int*)(&rand_height);
+
+	*pInt	    = 0x40000000 + (uiS & 0x007fffff);
+	rand_height-= 3.0f;
+	rand_height	= rand_height * m_level2size[level];
+
+	return (v1.z + v2.z) * 0.5f + rand_height;
 }
 
 }

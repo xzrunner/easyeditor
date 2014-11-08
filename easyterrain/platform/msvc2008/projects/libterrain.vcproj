@@ -185,6 +185,14 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="tools"
+			>
+			<File
+				RelativePath="..\..\..\src\libterrain\randtab.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

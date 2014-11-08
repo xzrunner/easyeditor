@@ -16,7 +16,11 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage)
 void StageCanvas::initGL()
 {
 	e3d::StageCanvas::initGL();
+
 	m_demo->Load();
+
+	// for Camera reset when init
+	Refresh();
 }
 
 void StageCanvas::onDraw()

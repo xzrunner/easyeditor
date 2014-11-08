@@ -24,10 +24,14 @@ private:
 
 	void GenTex();
 
+	float GetRandHeight(const vec3& v1, const vec3& v2, int level) const;
+
 private:
 	e3d::Camera& m_cam;
 
 	GLuint m_tex;
+
+	std::vector<float> m_level2size;
 
 }; // SimpleTriNetwork
 
