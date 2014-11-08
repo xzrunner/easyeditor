@@ -34,10 +34,11 @@ void SimpleTriNetwork::Draw() const
 void SimpleTriNetwork::DrawTriByLevel(const vec3& v0, const vec3& v1, const vec3& v2, int level) const
 {
 	vec3 c = (v0 + v1 + v2) / 3;
-	float dis = e3d::Math3::GetDistance(c, m_cam.GetPosition());
+	float dis = e3d::Math3::GetDistanceSquare(c, m_cam.GetPosition());
+	float len = e3d::Math3::GetDistanceSquare(v1, v2);
 //	e3d::LogViewer::Instance()->Add(("dis:"+wxString::FromDouble(dis)).ToStdString());
 
-	if (level < MAX_LEVEL && dis < (MAX_LEVEL - level))
+	if (level < MAX_LEVEL && len > dis * 0.005f)
 	{
 		vec3 new_node = (v1 + v2) * 0.5f;
 		DrawTriByLevel(new_node, v0, v1, level + 1);

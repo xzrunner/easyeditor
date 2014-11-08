@@ -19,6 +19,7 @@ public:
 		const Ray& ray, vec3* coord);
 
 	static float GetDistance(const vec3& a, const vec3& b);
+	static float GetDistanceSquare(const vec3& a, const vec3& b);
 
 }; // Math3
 
