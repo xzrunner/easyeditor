@@ -1,14 +1,14 @@
-#include "DemoBruteForce.h"
+#include "DemoBruteForceTex.h"
 
 namespace libterrain
 {
 
-DemoBruteForce::DemoBruteForce(e3d::Camera& cam)
+DemoBruteForceTex::DemoBruteForceTex(e3d::Camera& cam)
 	: m_cam(cam)
 {
 }
 
-void DemoBruteForce::Load()
+void DemoBruteForceTex::Load()
 {
 	m_cam.SetPosition(vec3(6, -12, 12));
 	m_cam.Rotate(0, 60);
@@ -22,9 +22,12 @@ void DemoBruteForce::Load()
 //	m_bf.MakeTerrainFault(128, 8, 0, 1, 0.4);
 
 	m_bf.SetHeightScale(0.025f);
+
+	//load the terrain texture in
+	m_bf.LoadTexture("demo03/grass_1.tga");
 }
 
-void DemoBruteForce::Draw() const
+void DemoBruteForceTex::Draw() const
 {
 	m_bf.Draw();
 }

@@ -21,7 +21,7 @@ void BruteForce::Draw() const
 		std::vector<d2d::Colorf> colors;
 		colors.reserve(size);
 		std::vector<vec3> vertices;
-		vertices.reserve(size * 3);
+		vertices.reserve(size);
 		for (int x = 0; x < m_data.size - 1; ++x)
 		{
 			col = GetTrueHeightAtPoint(x, y) / 255.0f;

@@ -173,6 +173,10 @@ void ShapeShader::Draw(int type, float* vertices, int count,
 
 void ShapeShader::Draw(int type, float* vertices, int vcount, const d2d::Colorf& col, unsigned short* indices, int icount)
 {
+	if (vcount >= MAX_VERTEX) {
+		return;
+	}
+
 	if (m_count + vcount >= MAX_VERTEX) {
 		wxLogDebug(_T("ShapeShader Commit count to max"));
 		Commit();
@@ -207,19 +211,19 @@ void ShapeShader::CopyVertex(const float* vertices, int count, int color)
 
 void ShapeShader::CopyVertex(const float* vertices, int count, d2d::Colorf* cols)
 {
-	float* ptr_dst = m_vb + VERTEX_FLOAT_SIZE * m_count;
-	const float* ptr_src = &vertices[0];
-	for (int i = 0; i < count; ++i)
-	{
-		memcpy(ptr_dst, ptr_src, sizeof(float)*3);
-		ptr_dst += 3;
-		ptr_src += 3;
-
-		int color = PackColor(cols[i]);
-		memcpy(ptr_dst, &color, sizeof(int));
-		ptr_dst += 1;
-	}
-	m_count += count;	
+ 	float* ptr_dst = m_vb + VERTEX_FLOAT_SIZE * m_count;
+ 	const float* ptr_src = &vertices[0];
+ 	for (int i = 0; i < count; ++i)
+ 	{
+ 		memcpy(ptr_dst, ptr_src, sizeof(float)*3);
+ 		ptr_dst += 3;
+ 		ptr_src += 3;
+ 
+ 		int color = PackColor(cols[i]);
+ 		memcpy(ptr_dst, &color, sizeof(int));
+ 		ptr_dst += 1;
+ 	}
+ 	m_count += count;
 }
 
 void ShapeShader::Commit(int type, unsigned short* indices, int count)

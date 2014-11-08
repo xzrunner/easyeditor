@@ -131,7 +131,7 @@ void SpriteShader::Commit()
 	// todo test dirty
 	glBufferData(GL_ARRAY_BUFFER, m_count * VERTEX_SIZE, &m_vb[0], GL_DYNAMIC_DRAW);
 
-	glDrawArrays(GL_TRIANGLES, 0, m_count);
+	glDrawArrays(m_type, 0, m_count);
 
 	m_count = 0;
 }
@@ -163,9 +163,36 @@ void SpriteShader::DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int 
 	if (m_count + 3 >= MAX_VERTEX) {
 		wxLogDebug(_T("SpriteShader Commit count to max"));
 		Commit();
+	} else if (m_type != GL_TRIANGLES) {
+		wxLogDebug(_T("SpriteShader Commit change type"));
+		Commit();
+		m_type = GL_TRIANGLES;
 	}
 
 	CopyVertex(vertices, texcoords);
+}
+
+void SpriteShader::DrawTriStrip(float* vertices, float* texcoords, int count, int texid)
+{
+	if (count >= MAX_VERTEX) {
+		return;
+	}
+
+	SetTexID(texid);
+
+	if (m_count + count >= MAX_VERTEX) {
+		wxLogDebug(_T("SpriteShader Commit count to max"));
+		Commit();
+	} else if (m_type != GL_TRIANGLE_STRIP) {
+		wxLogDebug(_T("SpriteShader Commit change type"));
+		Commit();
+		m_type = GL_TRIANGLE_STRIP;
+	}
+
+	CopyVertex(vertices, texcoords, count);
+
+	// force flush
+	Commit();
 }
 
 void SpriteShader::BindAttrib(GLuint prog)
@@ -190,6 +217,19 @@ void SpriteShader::CopyVertex(const vec3 vertices[3], const vec2 texcoords[3])
 	memcpy(ptr, &texcoords[2].x, sizeof(vec2));
 	ptr += 2;
 	m_count += 3;
+}
+
+void SpriteShader::CopyVertex(float* vertices, float* texcoords, int count)
+{
+	float* ptr = m_vb + VERTEX_FLOAT_SIZE * m_count;
+	for (int i = 0; i < count; ++i)
+	{
+		memcpy(ptr, &vertices[i*3], sizeof(vec3));
+		ptr += 3;
+		memcpy(ptr, &texcoords[i*2], sizeof(vec2));
+		ptr += 2;
+		++m_count;
+	}
 }
 
 }

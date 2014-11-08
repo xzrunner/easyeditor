@@ -1,7 +1,14 @@
+//
+// From "Focus On 3D Teeeain Programming" source code, 
+// by Trent Polack (trent@voxelsoft.com)
+//
+
 #ifndef _EASYTERRAIN_TERRAIN_H_
 #define _EASYTERRAIN_TERRAIN_H_
 
 #include <easy3d.h>
+
+#include "image.h"
 
 namespace libterrain
 {
@@ -19,6 +26,8 @@ public:
 
 	bool MakeTerrainFault( int iSize, int iIterations, int iMinDelta, int iMaxDelta, float fFilter );
 	bool MakeTerrainPlasma( int iSize, float fRoughness );
+
+	bool LoadTexture(char* filename);
 
 	unsigned char GetTrueHeightAtPoint(int x, int y) const;
 	float GetScaledHeightAtPoint(int x, int y) const;
@@ -44,6 +53,8 @@ private:
 
 protected:
 	HeightData m_data;
+
+	CIMAGE m_texture;
 
 	float m_hight_scale;
 

@@ -76,6 +76,11 @@ void ShaderMgr::DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int tex
 	m_sprite_shader->DrawTri(vertices, texcoords, texid);
 }
 
+void ShaderMgr::DrawTriStrip(float* vertices, float* texcoords, int count, int texid)
+{
+	m_sprite_shader->DrawTriStrip(vertices, texcoords, count, texid);
+}
+
 void ShaderMgr::SetModelView(const mat4& mat)
 {
 	m_light_shader->SetModelView(mat);

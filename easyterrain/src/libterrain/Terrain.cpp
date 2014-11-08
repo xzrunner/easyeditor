@@ -375,6 +375,11 @@ bool Terrain::MakeTerrainPlasma( int iSize, float fRoughness )
 	return true;
 }
 
+bool Terrain::LoadTexture(char* filename)
+{
+	return m_texture.Load(filename, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, true);
+}
+
 //--------------------------------------------------------------
 // Name:			CTERRAIN::NormalizeTerrain - private
 // Description:		Scale the terrain height values to a range of

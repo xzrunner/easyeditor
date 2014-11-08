@@ -176,6 +176,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="3"
+				>
+				<File
+					RelativePath="..\..\..\src\libterrain\DemoBruteForceTex.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libterrain\DemoBruteForceTex.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"
@@ -205,6 +217,22 @@
 			Name="tools"
 			>
 			<File
+				RelativePath="..\..\..\src\libterrain\image.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\image.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\log.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\log.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libterrain\randtab.h"
 				>
 			</File>
@@ -218,6 +246,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libterrain\BruteForce.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\BruteForceTex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\BruteForceTex.h"
 				>
 			</File>
 			<File
