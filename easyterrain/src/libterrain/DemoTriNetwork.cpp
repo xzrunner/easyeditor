@@ -1,4 +1,4 @@
-#include "SimpleTriNetwork.h"
+#include "DemoTriNetwork.h"
 
 #include "randtab.h"
 
@@ -9,13 +9,13 @@ static const float EDGE = 10;
 
 static const int MAX_LEVEL = 10;
 
-SimpleTriNetwork::SimpleTriNetwork(e3d::Camera& cam)
+DemoTriNetwork::DemoTriNetwork(e3d::Camera& cam)
 	: m_cam(cam)
 	, m_tex(0)
 {
 }
 
-void SimpleTriNetwork::Load()
+void DemoTriNetwork::Load()
 {
 	m_cam.SetPosition(vec3(0, -8, 8));
 	m_cam.Rotate(0, 40);
@@ -28,7 +28,7 @@ void SimpleTriNetwork::Load()
 	}
 }
 
-void SimpleTriNetwork::Draw() const
+void DemoTriNetwork::Draw() const
 {
 	const float HALF_EDGE = EDGE * 0.5f;
 	vec3 v0(-HALF_EDGE,  HALF_EDGE, 0), 
@@ -39,7 +39,7 @@ void SimpleTriNetwork::Draw() const
 	DrawTriByLevel(v3, v0, v2, 0);
 }
 
-void SimpleTriNetwork::DrawTriByLevel(const vec3& v0, const vec3& v1, const vec3& v2, int level) const
+void DemoTriNetwork::DrawTriByLevel(const vec3& v0, const vec3& v1, const vec3& v2, int level) const
 {
 	vec3 c = (v0 + v1 + v2) / 3;
 	float dis = e3d::Math3::GetDistanceSquare(c, m_cam.GetPosition());
@@ -68,7 +68,7 @@ void SimpleTriNetwork::DrawTriByLevel(const vec3& v0, const vec3& v1, const vec3
  	shader->DrawTri(vertices, texcoords, m_tex);
 }
 
-void SimpleTriNetwork::GenTex()
+void DemoTriNetwork::GenTex()
 {
 	//generate pixels
 	const int SIZE = 128;
@@ -116,7 +116,7 @@ void SimpleTriNetwork::GenTex()
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, SIZE, SIZE, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 }
 
-float SimpleTriNetwork::GetRandHeight(const vec3& v1, const vec3& v2, int level) const
+float DemoTriNetwork::GetRandHeight(const vec3& v1, const vec3& v2, int level) const
 {
 	float rand_height;
 

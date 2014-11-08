@@ -28,6 +28,8 @@ public:
 
 	void Draw(int type, float* vertices, int count, 
 		const d2d::Colorf& col, bool force = true);
+	void Draw(int type, float* vertices, int count, 
+		d2d::Colorf* cols, bool force = true);
 	void Draw(int type, float* vertices, int vcount, 
 		const d2d::Colorf& col, unsigned short* indices, int icount);
 
@@ -36,6 +38,7 @@ protected:
 
 private:
 	void CopyVertex(const float* vertices, int count, int color);
+	void CopyVertex(const float* vertices, int count, d2d::Colorf* cols);
 
 	void Commit(int type, unsigned short* indices, int count);
 

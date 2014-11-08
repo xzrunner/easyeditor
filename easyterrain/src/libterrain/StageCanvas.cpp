@@ -1,6 +1,7 @@
 #include "StageCanvas.h"
 
-#include "SimpleTriNetwork.h"
+#include "DemoTriNetwork.h"
+#include "DemoBruteForce.h"
 
 namespace libterrain
 {
@@ -10,7 +11,8 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage)
 {
 	setBgColor(d2d::BLACK);
 
-	m_demo = new SimpleTriNetwork(GetCamera3());
+//	m_demo = new DemoTriNetwork(GetCamera3());
+	m_demo = new DemoBruteForce(GetCamera3());
 }
 
 void StageCanvas::initGL()

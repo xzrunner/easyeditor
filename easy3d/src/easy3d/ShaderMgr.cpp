@@ -60,6 +60,11 @@ void ShaderMgr::DrawShape(int type, float* vertices, int count, const d2d::Color
 	m_shape_shader->Draw(type, vertices, count, col, force);
 }
 
+void ShaderMgr::DrawShape(int type, float* vertices, int count, d2d::Colorf* cols, bool force)
+{
+	m_shape_shader->Draw(type, vertices, count, cols, force);
+}
+
 void ShaderMgr::DrawShape(int type, float* vertices, int vcount, const d2d::Colorf& col, 
 						  unsigned short* indices, int icount)
 {

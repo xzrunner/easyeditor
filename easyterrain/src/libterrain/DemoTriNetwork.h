@@ -1,5 +1,5 @@
-#ifndef _EASYTERRAIN_SIMPLE_TRI_NETWORK_H_
-#define _EASYTERRAIN_SIMPLE_TRI_NETWORK_H_
+#ifndef _EASYTERRAIN_DEMO_TRI_NETWORK_H_
+#define _EASYTERRAIN_DEMO_TRI_NETWORK_H_
 
 #include "IDemo.h"
 
@@ -10,10 +10,10 @@ namespace libterrain
 
 typedef unsigned int GLuint;
 
-class SimpleTriNetwork : public IDemo
+class DemoTriNetwork : public IDemo
 {
 public:
-	SimpleTriNetwork(e3d::Camera& cam);
+	DemoTriNetwork(e3d::Camera& cam);
 	
 	virtual void Load();
 	virtual void Draw() const;
@@ -33,8 +33,8 @@ private:
 
 	std::vector<float> m_level2size;
 
-}; // SimpleTriNetwork
+}; // DemoTriNetwork
 
 }
 
-#endif // _EASYTERRAIN_SIMPLE_TRI_NETWORK_H_
+#endif // _EASYTERRAIN_DEMO_TRI_NETWORK_H_

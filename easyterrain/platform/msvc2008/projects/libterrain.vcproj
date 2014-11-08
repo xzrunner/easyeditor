@@ -152,14 +152,30 @@
 				RelativePath="..\..\..\src\libterrain\IDemo.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libterrain\SimpleTriNetwork.cpp"
+			<Filter
+				Name="1"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libterrain\SimpleTriNetwork.h"
+				<File
+					RelativePath="..\..\..\src\libterrain\DemoTriNetwork.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libterrain\DemoTriNetwork.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="2"
 				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libterrain\DemoBruteForce.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libterrain\DemoBruteForce.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"
@@ -190,6 +206,26 @@
 			>
 			<File
 				RelativePath="..\..\..\src\libterrain\randtab.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="dataset"
+			>
+			<File
+				RelativePath="..\..\..\src\libterrain\BruteForce.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\BruteForce.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\Terrain.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain\Terrain.h"
 				>
 			</File>
 		</Filter>
