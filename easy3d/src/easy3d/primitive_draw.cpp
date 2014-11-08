@@ -12,15 +12,7 @@ void DrawLine(const vec3& p0, const vec3& p1, d2d::Colorf color)
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->Shape();
-	shader->SetShapeColor(color);
-	shader->Commit();
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-	glDrawArrays(GL_LINES, 0, sizeof(vertices) / sizeof(vec3));
-
-	glDisableClientState(GL_VERTEX_ARRAY);
+	shader->DrawShape(GL_LINES, &vertices[0].x, 2, color, true);
 }
 
 void DrawTriLine(const vec3& p0, const vec3& p1, const vec3& p2, d2d::Colorf color)
@@ -29,15 +21,7 @@ void DrawTriLine(const vec3& p0, const vec3& p1, const vec3& p2, d2d::Colorf col
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->Shape();
-	shader->SetShapeColor(color);
-	shader->Commit();
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, &vertices[0].x);
-
-	glDrawArrays(GL_LINE_LOOP, 0, sizeof(vertices) / sizeof(vec3));
-
-	glDisableClientState(GL_VERTEX_ARRAY);	
+	shader->DrawShape(GL_LINE_LOOP, &vertices[0].x, 3, color, true);
 }
 
 void DrawCube(const AABB& aabb, d2d::Colorf color)
@@ -91,15 +75,7 @@ void DrawCube(const mat4& mat, const AABB& aabb, d2d::Colorf color)
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->Shape();
-	shader->SetShapeColor(color);
-	shader->Commit();
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, &vertices[0].x);
-
-	glDrawElements(GL_LINES, 24, GL_UNSIGNED_SHORT, indices);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
+	shader->DrawShape(GL_LINES, &vertices[0].x, 8, color, indices, 24);
 }
 
 void DrawCube(const vec3& min, const vec3& max, d2d::Colorf color)
@@ -170,15 +146,7 @@ void DrawCube(const vec3& min, const vec3& max, d2d::Colorf color)
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->Shape();
-	shader->SetShapeColor(color);
-	shader->Commit();
-
- 	glEnableClientState(GL_VERTEX_ARRAY);
- 	glVertexPointer(3, GL_FLOAT, 0, vertices);
-  
- 	glDrawElements(GL_LINES, 24, GL_UNSIGNED_SHORT, indices);
-
- 	glDisableClientState(GL_VERTEX_ARRAY);
+	shader->DrawShape(GL_LINES, vertices, 8, color, indices, 24);
 }
 
 void DrawCross(const vec3& center, const vec3& size, d2d::Colorf color)
@@ -209,15 +177,7 @@ void DrawCross(const vec3& center, const vec3& size, d2d::Colorf color)
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->Shape();
-	shader->SetShapeColor(color);
-	shader->Commit();
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-	glDrawArrays(GL_LINES, 0, 6);
-
-	glDisableClientState(GL_VERTEX_ARRAY);
+	shader->DrawShape(GL_LINES, vertices, 6, color, true);
 }
 
 void DrawGrids(const vec3& min, const vec3& max, const vec3& size, d2d::Colorf color)
@@ -250,15 +210,7 @@ void DrawGrids(const vec3& min, const vec3& max, const vec3& size, d2d::Colorf c
 
  	ShaderMgr* shader = ShaderMgr::Instance();
  	shader->Shape();
- 	shader->SetShapeColor(color);
- 	shader->Commit();
- 
- 	glEnableClientState(GL_VERTEX_ARRAY);
- 	glVertexPointer(3, GL_FLOAT, 0, &lines[0].x);
- 
- 	glDrawArrays(GL_LINES, 0, lines.size());
- 
- 	glDisableClientState(GL_VERTEX_ARRAY);
+	shader->DrawShape(GL_LINES, &lines[0].x, lines.size(), color, true);
 }
 
 }

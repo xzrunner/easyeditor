@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "Matrix.h"
+
 namespace e3d
 {
 
@@ -10,6 +12,7 @@ class ShapeShader : public d2d::IShader
 {
 public:
 	ShapeShader();
+	virtual ~ShapeShader();
 
 	virtual void Load();
 	virtual void Unload();
@@ -23,18 +26,31 @@ public:
 
 	void SetModelView(const mat4& mat);
 
-	void SetColor(const d2d::Colorf& col);
+	void Draw(int type, float* vertices, int count, 
+		const d2d::Colorf& col, bool force = true);
+	void Draw(int type, float* vertices, int vcount, 
+		const d2d::Colorf& col, unsigned short* indices, int icount);
 
 protected:
-	virtual void BindAttrib(GLuint prog) {}
+	virtual void BindAttrib(GLuint prog);
+
+private:
+	void CopyVertex(const float* vertices, int count, int color);
+
+	void Commit(int type, unsigned short* indices, int count);
+
+	static int PackColor(const d2d::Colorf& col);
 
 private:
 	GLuint m_model_view, m_projection;
 
-	GLuint m_color;
+	GLuint m_vertex_buffer;
 
-	mat4 m_translation;
 	mat4 m_mat_modelview, m_mat_projection;
+
+	int m_type;
+	int m_count;
+	float* m_vb;
 
 }; // ShapeShader
 

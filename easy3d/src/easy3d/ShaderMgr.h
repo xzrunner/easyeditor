@@ -23,11 +23,13 @@ public:
 	void Sprite();
 
 	void DrawModel(const IModel* model, const mat4& m);
+	void DrawShape(int type, float* vertices, int count, const d2d::Colorf& col, 
+		bool force);
+	void DrawShape(int type, float* vertices, int vcount, const d2d::Colorf& col,
+		unsigned short* indices, int icount);
 	void DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int texid);
 
 	void SetModelView(const mat4& mat);
-
-	void SetShapeColor(const d2d::Colorf& col);
 
 private:
 	ShaderMgr();

@@ -160,11 +160,12 @@ void SpriteShader::DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int 
 {
 	SetTexID(texid);
 
-	CopyVertex(vertices, texcoords);
-	if (m_count >= MAX_VERTEX) {
-		wxLogDebug(_T("Shader Commit count to max"));
+	if (m_count + 3 >= MAX_VERTEX) {
+		wxLogDebug(_T("SpriteShader Commit count to max"));
 		Commit();
 	}
+
+	CopyVertex(vertices, texcoords);
 }
 
 void SpriteShader::BindAttrib(GLuint prog)
