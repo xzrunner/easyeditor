@@ -17,10 +17,21 @@ public:
 	bool LoadHeightMap(const char* filename, int size);
 	bool SaveHeightMap(const char* filename);
 
+	bool MakeTerrainFault( int iSize, int iIterations, int iMinDelta, int iMaxDelta, float fFilter );
+	bool MakeTerrainPlasma( int iSize, float fRoughness );
+
 	unsigned char GetTrueHeightAtPoint(int x, int y) const;
 	float GetScaledHeightAtPoint(int x, int y) const;
 
 	void SetHeightScale(float scale);
+
+	void SetHeightAtPoint(unsigned char height, int x, int y);
+
+private:
+	//fractal terrain generation
+	void NormalizeTerrain( float* fpHeightData );
+	void FilterHeightBand( float* fpBand, int iStride, int iCount, float fFilter );
+	void FilterHeightField( float* fpHeightData, float fFilter );
 
 private:
 	struct HeightData
@@ -59,6 +70,15 @@ Terrain::SetHeightScale(float scale)
 {
 	m_hight_scale = scale;
 }
+
+inline void 
+Terrain::SetHeightAtPoint(unsigned char height, int x, int y)
+{	
+	assert(x >= 0 && x < m_data.size 
+		&& y >= 0 && y < m_data.size);
+	m_data.pixels[(y * m_data.size) + x] = height;
+}
+
 
 }
 
