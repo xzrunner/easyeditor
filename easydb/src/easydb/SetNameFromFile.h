@@ -3,13 +3,15 @@
 
 #include "ICommand.h"
 
+#include <wx/wx.h>
+
 namespace edb
 {
 
 class SetNameFromFile : public ICommand
 {
 public:
-	SetNameFromFile() {}
+	SetNameFromFile();
 
 	//
 	// interface ITask
@@ -23,6 +25,11 @@ public:
 
 private:
 	void AddNameFromFile(const std::string& dir) const;
+
+	void AddName(const wxString& filename) const;
+
+private:
+	bool m_do_complex;
 
 }; // SetNameFromFile
 
