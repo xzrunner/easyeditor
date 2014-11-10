@@ -78,20 +78,30 @@ void Symbol::loadResources()
 	reader.parse(fin, value);
 	fin.close();
 
+	int version = value["version"].asInt();
+
  	m_ps = new ParticleSystem(1000);
-	m_ps->SetValue(PS_EMISSION_TIME, UICallback::Data(value[ITEM_EMISSION_TIME].asDouble()));
+	if (version == 0) {
+		m_ps->SetValue(PS_EMISSION_TIME, UICallback::Data(value[ITEM_EMISSION_TIME].asDouble() * 0.001f));
+		m_ps->SetValue(PS_FADEOUT_TIME, UICallback::Data(value[ITEM_FADEOUT_TIME].asDouble() * 0.001f));
+		m_ps->SetValue(PS_LIFE, UICallback::Data(value[ITEM_LIFE][ITEM_ATTR_CENTER].asDouble() * 0.001f, value[ITEM_LIFE][ITEM_ATTR_OFFSET].asDouble() * 0.001f));
+		m_ps->SetValue(PS_SCALE, UICallback::Data(value[ITEM_SCALE][ITEM_ATTR_START].asDouble() * 0.01f, value[ITEM_SCALE][ITEM_ATTR_END].asDouble() * 0.01f));
+		m_ps->SetValue(PS_COS_FREQUENCY, UICallback::Data(value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asDouble() * 0.01f, value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asDouble() * 0.01f));
+	} else {
+		m_ps->SetValue(PS_EMISSION_TIME, UICallback::Data(value[ITEM_EMISSION_TIME].asDouble()));
+		m_ps->SetValue(PS_FADEOUT_TIME, UICallback::Data(value[ITEM_FADEOUT_TIME].asDouble()));
+		m_ps->SetValue(PS_LIFE, UICallback::Data(value[ITEM_LIFE][ITEM_ATTR_CENTER].asDouble(), value[ITEM_LIFE][ITEM_ATTR_OFFSET].asDouble()));
+		m_ps->SetValue(PS_SCALE, UICallback::Data(value[ITEM_SCALE][ITEM_ATTR_START].asDouble(), value[ITEM_SCALE][ITEM_ATTR_END].asDouble()));
+		m_ps->SetValue(PS_COS_FREQUENCY, UICallback::Data(value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asDouble(), value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asDouble()));
+	}
 	m_ps->SetValue(PS_COUNT, UICallback::Data(value[ITEM_COUNT].asInt()));
-	m_ps->SetValue(PS_FADEOUT_TIME, UICallback::Data(value[ITEM_FADEOUT_TIME].asDouble()));
-	m_ps->SetValue(PS_LIFE, UICallback::Data(value[ITEM_LIFE][ITEM_ATTR_CENTER].asDouble(), value[ITEM_LIFE][ITEM_ATTR_OFFSET].asDouble()));
 	m_ps->SetValue(PS_POSITION, UICallback::Data(value[ITEM_POSITION][ITEM_ATTR_X].asInt(), value[ITEM_POSITION][ITEM_ATTR_Y].asInt()));
 	m_ps->SetValue(PS_DIRECTION, UICallback::Data(value[ITEM_DIRECTION][ITEM_ATTR_CENTER].asInt(), value[ITEM_DIRECTION][ITEM_ATTR_OFFSET].asInt()));
-	m_ps->SetValue(PS_SCALE, UICallback::Data(value[ITEM_SCALE][ITEM_ATTR_START].asDouble(), value[ITEM_SCALE][ITEM_ATTR_END].asDouble()));
 	m_ps->SetValue(PS_SPEED, UICallback::Data(value[ITEM_SPEED][ITEM_ATTR_CENTER].asInt(), value[ITEM_SPEED][ITEM_ATTR_OFFSET].asInt()));
 	m_ps->SetValue(PS_GRAVITY, UICallback::Data(value[ITEM_GRAVITY][ITEM_ATTR_CENTER].asInt(), value[ITEM_GRAVITY][ITEM_ATTR_OFFSET].asInt()));
 	m_ps->SetValue(PS_RADIAL_ACC, UICallback::Data(value[ITEM_RADIAL_ACC][ITEM_ATTR_CENTER].asInt(), value[ITEM_RADIAL_ACC][ITEM_ATTR_OFFSET].asInt()));
 	m_ps->SetValue(PS_TANGENTIAL_ACC, UICallback::Data(value[ITEM_TANGENTIAL_ACC][ITEM_ATTR_CENTER].asInt(), value[ITEM_TANGENTIAL_ACC][ITEM_ATTR_OFFSET].asInt()));
 	m_ps->SetValue(PS_COS_AMPLITUDE, UICallback::Data(value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_CENTER].asInt(), value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_OFFSET].asInt()));
-	m_ps->SetValue(PS_COS_FREQUENCY, UICallback::Data(value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_CENTER].asDouble(), value[ITEM_COS][ITEM_COS_FREQUENCY][ITEM_ATTR_OFFSET].asDouble()));
 
 	wxString dir = d2d::FilenameTools::getFileDir(m_filepath) + "\\";
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["symbol_path"].asString());
