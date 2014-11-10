@@ -3,6 +3,8 @@
 #include "item_string.h"
 #include "ps_config.h"
 
+#include <time.h>
+
 namespace eparticle2d
 {
 
@@ -45,7 +47,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 		return;
 	}
 
-	m_ps->Draw(mt);
+	DrawPS(mt);
 
 	if (sprite) {
 		DrawBackground(sprite->getPosition());
@@ -55,14 +57,6 @@ void Symbol::draw(const d2d::Matrix& mt,
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 {
 	return d2d::Rect(200, 200);
-}
-
-void Symbol::Update(float dt, int frame)
-{
-	if (m_curr_frame != frame) {
-		m_ps->Update(dt);
-		m_curr_frame = frame;
-	}
 }
 
 void Symbol::ResetPS()
@@ -111,6 +105,20 @@ void Symbol::loadResources()
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	m_ps->SetSymbol(symbol);
 	symbol->release();
+}
+
+void Symbol::DrawPS(const d2d::Matrix& mt) const
+{
+	static clock_t last_time = 0;
+	if (last_time == 0) {
+		last_time = clock();
+	} else {
+		clock_t curr_time = clock();
+		float dt = (float)(curr_time - last_time) / CLOCKS_PER_SEC;
+		m_ps->Update(dt);
+		last_time = curr_time;
+	}
+	m_ps->Draw(mt);
 }
 
 void Symbol::DrawBackground(const d2d::Vector& pos) const

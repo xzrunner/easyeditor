@@ -33,17 +33,14 @@ private:
 
 private:
 	// todo rm, only UpdateSymbol
-	void UpdateParticle2d(float dt);
+	void UpdateParticle2d();
 	void UpdateAnimation();
-	void UpdateSymbols(float dt);
 
 private:
 	StagePanel* m_stage;
 
 	wxTimer m_timer;
 	int m_currFrame;
-	clock_t m_last;
-	int m_update_frame;
 
 	d2d::PlayControl m_control;
 

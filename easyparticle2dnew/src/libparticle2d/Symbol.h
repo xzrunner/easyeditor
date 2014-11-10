@@ -29,7 +29,6 @@ public:
 		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
-	virtual void Update(float dt, int frame = 0);
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
@@ -42,6 +41,8 @@ protected:
 	virtual void loadResources();
 
 private:
+	void DrawPS(const d2d::Matrix& mt) const;
+
 	void DrawBackground(const d2d::Vector& pos) const;
 
 private:

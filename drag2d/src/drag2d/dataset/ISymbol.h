@@ -32,7 +32,6 @@ namespace d2d
 			const Colorf& add = Colorf(0, 0, 0, 0),
 			const ISprite* sprite = NULL) const = 0;
 		virtual Rect getSize(const ISprite* sprite = NULL) const = 0;
-		virtual void Update(float dt, int frame = 0) {}
 
 		bool loadFromFile(const wxString& filepath);
 

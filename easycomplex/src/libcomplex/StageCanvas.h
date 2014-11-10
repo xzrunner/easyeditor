@@ -47,10 +47,6 @@ namespace ecomplex
 
 		d2d::FpsStat m_stat;
 
-		// todo
-		clock_t m_last;
-		int m_update_frame;
-
 		DECLARE_EVENT_TABLE()
 
 	}; // StageCanvas
