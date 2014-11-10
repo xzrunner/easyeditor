@@ -8,6 +8,7 @@ namespace eparticle2d
 
 Symbol::Symbol()
 	: m_ps(NULL)
+	, m_curr_frame(0)
 {
 }
 
@@ -44,13 +45,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 		return;
 	}
 
-	static clock_t time = 0;
-	clock_t curr = clock();
-	if (time != 0) {
-//		m_ps->Update((float)(curr - time) / CLOCKS_PER_SEC);
-		m_ps->Draw(mt);
-	}
-	time = curr;
+	m_ps->Draw(mt);
 
 	if (sprite) {
 		DrawBackground(sprite->getPosition());
@@ -60,6 +55,14 @@ void Symbol::draw(const d2d::Matrix& mt,
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 {
 	return d2d::Rect(200, 200);
+}
+
+void Symbol::Update(float dt, int frame)
+{
+	if (m_curr_frame != frame) {
+		m_ps->Update(dt);
+		m_curr_frame = frame;
+	}
 }
 
 void Symbol::ResetPS()

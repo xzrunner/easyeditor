@@ -29,6 +29,9 @@ namespace ecomplex
 	private:
 		void drawBackground() const;
 
+		// todo rm, only UpdateSymbol
+		void UpdateParticle2d(float dt);
+
 	private:
 		enum
 		{
@@ -43,6 +46,10 @@ namespace ecomplex
 		d2d::Image* m_background;
 
 		d2d::FpsStat m_stat;
+
+		// todo
+		clock_t m_last;
+		int m_update_frame;
 
 		DECLARE_EVENT_TABLE()
 

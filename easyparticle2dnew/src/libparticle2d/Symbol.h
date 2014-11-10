@@ -29,6 +29,7 @@ public:
 		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
+	virtual void Update(float dt, int frame = 0);
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
@@ -47,6 +48,8 @@ private:
 	ParticleSystem* m_ps;
 
 	d2d::Rect m_region;
+
+	int m_curr_frame;
 
 }; // ParticleSystem
 

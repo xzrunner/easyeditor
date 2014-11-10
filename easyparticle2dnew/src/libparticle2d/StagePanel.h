@@ -23,8 +23,6 @@ public:
 
 	StageData* GetStageData() { return &m_data; }
 
-	void UpdatePS(float dt);
-
 private:
 	StageData m_data;
 

@@ -17,6 +17,7 @@ namespace ecomplex
 		, m_editPanel(editPanel)
 		, m_background(NULL)
 		, m_stat(1)
+		, m_update_frame(0)
 	{
 		m_timer.Start(1000 / 30);
 
@@ -83,6 +84,21 @@ namespace ecomplex
 
 	void StageCanvas::onTimer(wxTimerEvent& event)
 	{
+		float dt = 0;
+		if (m_last == -1) {
+			m_last = clock();
+		} else {
+			clock_t curr = clock();
+			dt = (float)(curr - m_last) / CLOCKS_PER_SEC;
+			m_last = curr;
+		}
+
+		++m_update_frame;
+
+		if (dt != 0) {
+			UpdateParticle2d(dt);
+		}
+
 		Refresh();
 	}
 
@@ -97,6 +113,16 @@ namespace ecomplex
 		if (Settings::bVisibleBGRect)
 		{
 			d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 1024 * 0.5f, 768 * 0.5f, m_bgStyle);
+		}
+	}
+
+	void StageCanvas::UpdateParticle2d(float dt)
+	{
+		std::vector<d2d::ISprite*> sprites;
+		static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		for (int i = 0, n = sprites.size(); i < n; ++i) {
+			const d2d::ISymbol& symbol = sprites[i]->getSymbol();
+			const_cast<d2d::ISymbol&>(symbol).Update(dt, m_update_frame);
 		}
 	}
 }

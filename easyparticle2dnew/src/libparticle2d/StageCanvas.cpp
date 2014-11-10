@@ -19,6 +19,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 	, m_stage(stage)
 	, m_timer(this, TIMER_ID)
 	, m_control(0.033f)
+	, m_update_frame(0)
 {
 	m_bgColor.set(1, 1, 1, 1);
 
@@ -55,16 +56,44 @@ void StageCanvas::onDraw()
 
 void StageCanvas::onTimer(wxTimerEvent& event)
 {
+	float dt = 0;
 	if (m_last == -1) {
 		m_last = clock();
 	} else {
 		clock_t curr = clock();
-		int dt = curr - m_last;
+		dt = (float)(curr - m_last) / CLOCKS_PER_SEC;
 		m_last = curr;
-
-		m_stage->UpdatePS((float)dt / CLOCKS_PER_SEC);
 	}
 
+	++m_update_frame;
+
+	if (dt != 0) {
+		UpdateParticle2d(dt);
+	}
+
+	UpdateAnimation();
+
+	Refresh();
+}
+
+void StageCanvas::DrawBackground() const
+{
+	d2d::PrimitiveDraw::rect(d2d::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
+		d2d::LIGHT_RED_LINE);
+}
+
+void StageCanvas::UpdateParticle2d(float dt)
+{
+	ParticleSystem* ps = m_stage->GetStageData()->GetPS();
+	if (ps) {
+		ps->Update(dt);
+	}
+	
+	UpdateSymbols(dt);
+}
+
+void StageCanvas::UpdateAnimation()
+{
 	std::vector<anim::Sprite*> sprites;
 	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<anim::Sprite>(sprites));
 	size_t max = 0;
@@ -76,15 +105,17 @@ void StageCanvas::onTimer(wxTimerEvent& event)
 	if (m_currFrame >= max) {
 		m_currFrame = 1;
 		m_control.reset();
-	}
-
-	Refresh();
+	}	
 }
 
-void StageCanvas::DrawBackground() const
+void StageCanvas::UpdateSymbols(float dt)
 {
-	d2d::PrimitiveDraw::rect(d2d::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
-		d2d::LIGHT_RED_LINE);
+	std::vector<d2d::ISprite*> sprites;
+	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		const d2d::ISymbol& symbol = sprites[i]->getSymbol();
+		const_cast<d2d::ISymbol&>(symbol).Update(dt, m_update_frame);
+	}
 }
 
 }

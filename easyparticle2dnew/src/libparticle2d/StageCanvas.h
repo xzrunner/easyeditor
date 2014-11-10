@@ -23,8 +23,6 @@ private:
 
 	void DrawBackground() const;
 
-	void UpdatePS(float dt);
-
 private:
 	enum
 	{
@@ -34,11 +32,18 @@ private:
 	static const int FRAME_RATE = 60;
 
 private:
+	// todo rm, only UpdateSymbol
+	void UpdateParticle2d(float dt);
+	void UpdateAnimation();
+	void UpdateSymbols(float dt);
+
+private:
 	StagePanel* m_stage;
 
 	wxTimer m_timer;
 	int m_currFrame;
 	clock_t m_last;
+	int m_update_frame;
 
 	d2d::PlayControl m_control;
 
