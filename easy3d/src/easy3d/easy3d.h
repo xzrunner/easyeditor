@@ -21,4 +21,6 @@
 
 #include "LogViewer.h"
 
+#include "AssimpHelper.h"
+
 #endif // _E3D_H_

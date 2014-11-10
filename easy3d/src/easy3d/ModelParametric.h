@@ -12,10 +12,15 @@ class AABB;
 class ModelParametric : public IModel
 {
 public:
+	ModelParametric();
 	ModelParametric(const ISurface* surface, AABB& aabb);
 
 	virtual const std::vector<Mesh>& GetAllMeshes() const {
 		return m_meshes;
+	}
+
+	void AddMesh(const Mesh& mesh) {
+		m_meshes.push_back(mesh);
 	}
 
 private:

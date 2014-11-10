@@ -8,6 +8,11 @@
 namespace e3d
 {
 
+ModelParametric::ModelParametric()
+{
+
+}
+
 ModelParametric::ModelParametric(const ISurface* surface, AABB& aabb)
 {
 	Mesh mesh;
