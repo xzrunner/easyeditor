@@ -102,7 +102,7 @@ void Task::initLayout()
 	leftSplitter->SetSashGravity(0.2f);
 	leftSplitter->SplitVertically(left_hori_splitter, m_stage);
 
-	rightSplitter->SetSashGravity(0.7f);
+	rightSplitter->SetSashGravity(0.85f);
 	rightSplitter->SplitVertically(leftSplitter, m_toolbar);
 
 	m_root = rightSplitter;

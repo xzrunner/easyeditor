@@ -184,6 +184,14 @@
 				Name="toolbar"
 				>
 				<File
+					RelativePath="..\..\..\src\libparticle2d\SettingPageBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle2d\SettingPageBase.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libparticle2d\ToolbarPanel.cpp"
 					>
 				</File>
@@ -200,6 +208,10 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\EmitterSettingPanel.cpp"
 						>
 					</File>
 					<File
@@ -224,6 +236,26 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libparticle2d\SliderItem.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="pages"
+					>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\EmitterSettingPage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\EmitterSettingPage.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\SpecialSettingPage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libparticle2d\SpecialSettingPage.h"
 						>
 					</File>
 				</Filter>

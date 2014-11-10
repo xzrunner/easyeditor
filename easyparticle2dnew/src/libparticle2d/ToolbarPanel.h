@@ -7,7 +7,7 @@ namespace eparticle2d
 {
 
 class StageData;
-class ISliderCtrl;
+class SettingPageBase;
 
 class ToolbarPanel : public d2d::ToolbarPanel
 {
@@ -23,10 +23,6 @@ public:
 
 protected:
 	virtual wxSizer* initLayout();
-
-private:
-	wxSizer* InitDefaultLayout();
-	wxSizer* InitSpecialLayout();
 
 private:
 	class DropTarget : public wxTextDropTarget
@@ -46,7 +42,10 @@ private:
 private:
 	StageData* m_stage_data;
 
-	std::vector<ISliderCtrl*> m_sliders;
+private:
+	wxNotebook* m_notebook;
+
+	std::vector<SettingPageBase*> m_pages;
 
 }; // ToolbarPanel
 
