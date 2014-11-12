@@ -40,18 +40,19 @@ Image::~Image()
 
 bool Image::loadFromFile(const wxString& filepath)
 {
+	if (filepath.Contains("1107_1") == 0) {
+		int zz = 0;
+	}
+
 	if (!wxFileName::FileExists(filepath)) {
 		throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
 	}
 
 	m_filepath = filepath;
 
-// 	m_region.xMin = - m_width * 0.5f;
-// 	m_region.xMax =   m_width * 0.5f;
-// 	m_region.yMin = - m_height * 0.5f;
-// 	m_region.yMax =   m_height * 0.5f;
-
 #ifdef NOT_LOAD_IMAGE
+	// todo
+	m_region.xMin = m_region.xMax = m_region.yMin = m_region.yMax = 0;
 	return true;
 #endif
 
