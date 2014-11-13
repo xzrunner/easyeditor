@@ -13,7 +13,7 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage)
 	, m_timer(this, TIMER_ID)
 	, m_background(NULL)
 {
-	m_timer.Start(1000 / 30);
+	m_timer.Start(100);
 }
 
 StageCanvas::~StageCanvas()
