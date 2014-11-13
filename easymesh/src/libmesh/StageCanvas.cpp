@@ -15,7 +15,9 @@ void StageCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
 	m_panel->GetSymbol()->reloadTexture();
-	d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	}
 	resetViewport();
 }
 
@@ -31,7 +33,9 @@ void StageCanvas::onDraw()
 	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
 
 #ifdef _DEBUG 
-	d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	}
 #endif
 }
 

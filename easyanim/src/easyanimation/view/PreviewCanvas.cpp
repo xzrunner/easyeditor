@@ -29,7 +29,9 @@ void PreviewCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
 	static_cast<d2d::LibraryPanel*>(Context::Instance()->library)->reloadTexture();
-	d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	}
 
 	resetViewport();
 }
@@ -39,7 +41,9 @@ void PreviewCanvas::onDraw()
 	drawStageData();
 
 #ifdef _DEBUG 
-	d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	}	
 #endif
 }
 

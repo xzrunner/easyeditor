@@ -34,7 +34,9 @@ void StageCanvas::onDraw()
 	m_editPanel->drawEditTemp();
 
 #ifdef _DEBUG 
-	d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	}
 #endif
 }
 

@@ -199,9 +199,12 @@ void Image::draw(const Matrix& mt, const Rect& r) const
 	int texid;
 	d2d::Vector texcoords[4];
 	float txmin, txmax, tymin, tymax;
-	//DynamicTexture* dt = DynamicTexture::Instance();
-	DynamicTexAndFont* dt = DynamicTexAndFont::Instance();
-	const TPNode* n = dt->Query(m_filepath);
+	DynamicTexAndFont* dt = NULL;
+	const TPNode* n = NULL;
+	if (Config::Instance()->IsUseDTex()) {
+		dt = DynamicTexAndFont::Instance();
+		n = dt->Query(m_filepath);
+	}
  	if (n)
  	{
  		float padding = dt->GetPadding();

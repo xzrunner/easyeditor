@@ -1,5 +1,6 @@
 #include "DialogStageCanvas.h"
 
+#include "common/config.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
 //#include "render/DynamicTexture.h"
@@ -19,8 +20,9 @@ void DialogStageCanvas::initGL()
 {
 	OrthoCanvas::initGL();
 	m_symbol->reloadTexture();
-	//DynamicTexture::Instance()->ReloadTexture();
-	DynamicTexAndFont::Instance()->ReloadTexture();
+	if (Config::Instance()->IsUseDTex()) {
+		DynamicTexAndFont::Instance()->ReloadTexture();
+	}
 }
 
 void DialogStageCanvas::onDraw()

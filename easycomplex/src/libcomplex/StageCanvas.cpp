@@ -38,7 +38,10 @@ namespace ecomplex
 		m_editPanel->getSymbol()->reloadTexture();
 // 		d2d::DynamicTexture::Instance()->ReloadTexture();
 // 		d2d::DynamicFont::Instance()->ReloadTexture();
-		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+
+		if (d2d::Config::Instance()->IsUseDTex()) {
+			d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+		}
 
 		resetViewport();
 	}
@@ -75,7 +78,9 @@ namespace ecomplex
 #ifdef _DEBUG 
 //		d2d::DynamicTexture::Instance()->DebugDraw();
 //		d2d::DynamicFont::Instance()->DebugDraw();
-		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+		if (d2d::Config::Instance()->IsUseDTex()) {
+			d2d::DynamicTexAndFont::Instance()->DebugDraw();
+		}
 #endif
 
 		m_stat.DrawTime(m_screen);

@@ -44,11 +44,13 @@ namespace ecomplex
 		{
 			Symbol* c = static_cast<Symbol*>(m_symbol);
 			c->m_use_render_cache = wxANY_AS(value, bool);
-			d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
-			if (c->m_use_render_cache) {
-				dtex->InsertSymbol(*c);
-			} else {
-				dtex->Remove(c->getFilepath());
+			if (d2d::Config::Instance()->IsUseDTex()) {
+				d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+				if (c->m_use_render_cache) {
+					dtex->InsertSymbol(*c);
+				} else {
+					dtex->Remove(c->getFilepath());
+				}
 			}
 		}
 

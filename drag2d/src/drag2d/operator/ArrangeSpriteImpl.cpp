@@ -322,25 +322,31 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 		break;
 	case EditPanel::Menu_InsertToDTex:
 		{
-			std::vector<d2d::ISprite*> selected;
-			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
-			for (size_t i = 0, n = selected.size(); i < n; ++i) {
-				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
-				dtex->InsertSymbol(s);
+			if (Config::Instance()->IsUseDTex()) {
+				std::vector<d2d::ISprite*> selected;
+				m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+
+				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
+				for (size_t i = 0, n = selected.size(); i < n; ++i) {
+					ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
+					dtex->InsertSymbol(s);
+				}
+
+				m_editPanel->getCanvas()->resetViewport();
 			}
-			m_editPanel->getCanvas()->resetViewport();
 		}
 		break;
 	case EditPanel::Menu_RemoveFromDTex:
 		{
-			std::vector<d2d::ISprite*> selected;
-			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-			//DynamicTexture* dtex = DynamicTexture::Instance();
-			DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
-			for (size_t i = 0, n = selected.size(); i < n; ++i) {
-				ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
-				dtex->Remove(s.getFilepath());
+			if (Config::Instance()->IsUseDTex()) {
+				std::vector<d2d::ISprite*> selected;
+				m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+				//DynamicTexture* dtex = DynamicTexture::Instance();
+				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
+				for (size_t i = 0, n = selected.size(); i < n; ++i) {
+					ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
+					dtex->Remove(s.getFilepath());
+				}
 			}
 		}
 		break;

@@ -3,6 +3,7 @@
 #include "DynamicTexAndFont.h"
 
 #include "common/color_trans.h"
+#include "common/Config.h"
 #include "dataset/text_util.h"
 #include "dataset/TPNode.h"
 #include "render/ShaderMgr.h"
@@ -69,6 +70,10 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 						   const LabelStyle& style,
 						   std::vector<Line>& lines)
 {
+	if (!Config::Instance()->IsUseDTex()) {
+		return 0;
+	}
+
 	assert(unicodes.size() == utf8s.size());
 
 //	DynamicFont* dfont = DynamicFont::Instance();
@@ -118,6 +123,10 @@ void LabelNew::DrawLines(const Vector& pos,
 						 int tot_line_height,
 						 LabelLayout::Layout& layout)
 {
+	if (!Config::Instance()->IsUseDTex()) {
+		return;
+	}
+
 //	DynamicFont* dfont = DynamicFont::Instance();
 	DynamicTexAndFont* dfont = DynamicTexAndFont::Instance();
 
@@ -205,6 +214,10 @@ void LabelNew::DrawLines(const Vector& pos,
 
 void LabelNew::Draw(const LabelLayout::Layout* layout)
 {
+	if (!Config::Instance()->IsUseDTex()) {
+		return;
+	}
+
 	ShaderMgr* shader = ShaderMgr::Instance();
 
 #ifdef LABEL_USE_CACHE

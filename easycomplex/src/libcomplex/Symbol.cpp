@@ -43,15 +43,17 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& add,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
- 	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
  	const d2d::TPNode* n = NULL;
 	if (d2d::Config::Instance()->IsUseDTex() && 
 		m_render_cache_open) 
 	{
+		d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
 		n = dtex->Query(m_filepath);
 	}
  	if (n) 
  	{
+		d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+
 		d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 		if (shader->GetVersion() != m_render_version)
 		{

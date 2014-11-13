@@ -3,6 +3,7 @@
 
 #include "common/FileNameTools.h"
 #include "common/Exception.h"
+#include "common/config.h"
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
 #include "render/DynamicTexAndFont.h"
@@ -64,7 +65,9 @@ void Frame::openFile(const wxString& filename)
 		return;
 	}
 
-	DynamicTexAndFont::Instance()->Clear();
+	if (Config::Instance()->IsUseDTex()) {
+		DynamicTexAndFont::Instance()->Clear();
+	}
 
 	m_task->clear();
 
@@ -117,7 +120,9 @@ void Frame::onNew(wxCommandEvent& event)
 	setCurrFilename();
 	m_task->clear();
 
-	DynamicTexAndFont::Instance()->Clear();
+	if (Config::Instance()->IsUseDTex()) {
+		DynamicTexAndFont::Instance()->Clear();
+	}
 }
 
 void Frame::onOpen(wxCommandEvent& event)
