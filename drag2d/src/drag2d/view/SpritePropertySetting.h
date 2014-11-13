@@ -10,6 +10,7 @@ namespace d2d
 	{
 	public:
 		SpritePropertySetting(EditPanel* editPanel, ISprite* sprite);
+		virtual ~SpritePropertySetting();
 
 		virtual void updatePanel(PropertySettingPanel* panel);
 

@@ -21,8 +21,18 @@ namespace d2d
 
 SpritePropertySetting::SpritePropertySetting(EditPanel* editPanel, ISprite* sprite)
 	: IPropertySetting(editPanel, wxT("Sprite"))
-	, m_sprite(sprite)
 {
+	m_sprite = sprite;
+	if (m_sprite) {
+		m_sprite->retain();
+	}
+}
+
+SpritePropertySetting::~SpritePropertySetting()
+{
+	if (m_sprite) {
+		m_sprite->release();
+	}	
 }
 
 void SpritePropertySetting::updatePanel(PropertySettingPanel* panel)

@@ -121,6 +121,7 @@ void EditPanel::onKeyDown(wxKeyEvent& event)
 		{
 			d2d::Frame* frame = dynamic_cast<Frame*>(m_frame);
 			if (frame) {
+				clear();
 				frame->RefreshWithCurrFile();
 			}
 		}
