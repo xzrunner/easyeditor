@@ -51,8 +51,9 @@ namespace d2d
 
 		Screen m_screen;
 
-	private:
 		bool m_isInit;
+
+	private:
 		wxGLContext* m_context;
 
 		DECLARE_EVENT_TABLE()

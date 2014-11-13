@@ -45,7 +45,14 @@ void OrthoCanvas::onSize(int w, int h)
 
 	//////////////////////////////////////////////////////////////////////////
 
- 	glViewport(0, 0, w, h);
+	// Makes the OpenGL state that is represented by the OpenGL rendering 
+	// context context current
+	if (m_isInit) {
+		SetCurrentCanvas();
+	}
+
+	glViewport(0, 0, w, h);
+
  	m_screen.SetSize(w, h);
  	m_screen.SetCamera();
 
