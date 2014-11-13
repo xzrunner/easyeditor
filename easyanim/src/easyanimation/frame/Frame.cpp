@@ -155,7 +155,7 @@ void Frame::onPreview(wxCommandEvent& event)
 {
 	PreviewDialog dlg(this);
 	dlg.ShowModal();
-	static_cast<StagePanel*>(Context::Instance()->stage)->resetCanvas();
+	static_cast<StagePanel*>(Context::Instance()->stage)->ResetViewport();
 }
 
 void Frame::onCodeSetting(wxCommandEvent& event)
