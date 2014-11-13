@@ -89,7 +89,9 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 {
 	wxPaintDC dc(this);
 
-	SetCurrent(*m_context);
+	// Makes the OpenGL state that is represented by the OpenGL rendering 
+	// context context current
+	SetCurrentCanvas();
 
 	if (!m_isInit)
 	{
@@ -117,6 +119,12 @@ void GLCanvas::onEraseBackground(wxEraseEvent& event)
 void GLCanvas::onMouse(wxMouseEvent& event)
 {
 	m_editPanel->onMouse(event);
+
+	// The handler of this event should normally call event.Skip() to allow the default processing 
+	// to take place as otherwise the window under mouse wouldn't get the focus.
+	if (event.LeftDown()) {
+		event.Skip();
+	}
 }
 
 void GLCanvas::onKeyDown(wxKeyEvent& event)
