@@ -137,9 +137,6 @@ void ISprite::load(const Json::Value& val)
 	// translate
 	float x = val["position"]["x"].asDouble();
 	float y = val["position"]["y"].asDouble();
-	if (x == -99 && y == 0.25f) {
-		int zz = 0;
-	}
 	// rotate
 	float angle = val["angle"].asDouble();
 	setTransform(Vector(x, y), angle);

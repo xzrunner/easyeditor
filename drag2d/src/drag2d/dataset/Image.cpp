@@ -40,10 +40,6 @@ Image::~Image()
 
 bool Image::loadFromFile(const wxString& filepath)
 {
-	if (filepath.Contains("1107_1") == 0) {
-		int zz = 0;
-	}
-
 	if (!wxFileName::FileExists(filepath)) {
 		throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
 	}
