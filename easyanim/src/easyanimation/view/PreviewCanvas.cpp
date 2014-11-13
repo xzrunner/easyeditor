@@ -22,7 +22,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 	, m_control(control)
 	, m_settings(settings)
 {
-	m_timer.Start(10);
+	m_timer.Start(100);
 }
 
 void PreviewCanvas::initGL()
@@ -38,6 +38,10 @@ void PreviewCanvas::initGL()
 
 void PreviewCanvas::onDraw()
 {
+	float xedge = GetSize().GetWidth() * 0.5f;
+	float yedge = GetSize().GetHeight() * 0.5f;
+	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
+
 	drawStageData();
 
 #ifdef _DEBUG 
