@@ -21,6 +21,9 @@ public:
 
 	void openFile(const wxString& filename);
 
+	// F5 refresh with curr file
+	void RefreshWithCurrFile();
+
 protected:
 	virtual void onNew(wxCommandEvent& event);
 	virtual void onOpen(wxCommandEvent& event);

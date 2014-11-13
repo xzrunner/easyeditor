@@ -83,6 +83,11 @@ void Frame::openFile(const wxString& filename)
 	}
 }
 
+void Frame::RefreshWithCurrFile()
+{
+	openFile(m_currFilename);
+}
+
 void Frame::saveTmpInfo()
 {
 	wxString filename = wxFileName::GetCwd() + "\\.easy";

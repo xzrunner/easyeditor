@@ -4,6 +4,7 @@
 #include "operator/AbstractEditOP.h"
 #include "view/Camera.h"
 #include "view/GLCanvas.h"
+#include "view/Frame.h"
 
 namespace d2d
 {
@@ -113,9 +114,21 @@ void EditPanel::onKeyDown(wxKeyEvent& event)
 		undo();
 	else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL))
 		redo();
+
+	int key_code = event.GetKeyCode();
+	switch (key_code) {
+	case WXK_F5:
+		{
+			d2d::Frame* frame = dynamic_cast<Frame*>(m_frame);
+			if (frame) {
+				frame->RefreshWithCurrFile();
+			}
+		}
+		break;
+	}
 	
 	if (m_editOP) {
-		m_editOP->onKeyDown(event.GetKeyCode());
+		m_editOP->onKeyDown(key_code);
 	}
 }
 
