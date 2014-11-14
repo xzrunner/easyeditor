@@ -55,6 +55,8 @@ public:
 
 	void UpdateSymbol();
 
+	void CreateShape();
+
 private:
 	void init(d2d::LibraryPanel* library);
 

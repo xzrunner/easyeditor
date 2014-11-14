@@ -28,7 +28,7 @@ Symbol::Symbol(d2d::Image* image)
 	image->retain();
 	m_image = image;
 
-	m_shape = ShapeFactory::Instance()->CreateShape(*image);
+	m_shape = ShapeFactory::Instance()->CreateShape(*m_image);
 }
 
 Symbol::~Symbol()
@@ -107,6 +107,14 @@ void Symbol::LoadImage(const wxString& filepath)
 int Symbol::GetQuadSize() const 
 { 
 	return m_shape->GetQuadSize(); 
+}
+
+void Symbol::CreateShape()
+{
+	if (m_shape) {
+		m_shape->release();
+	}
+	m_shape = ShapeFactory::Instance()->CreateShape(*m_image);
 }
 
 void Symbol::loadResources()

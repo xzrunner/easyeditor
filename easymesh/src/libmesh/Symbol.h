@@ -46,6 +46,8 @@ public:
 	
 	int GetQuadSize() const;
 
+	void CreateShape();
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:

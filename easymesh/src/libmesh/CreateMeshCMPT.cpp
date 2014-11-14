@@ -78,11 +78,13 @@ void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
 		ShapeFactory::Instance()->SetShapeType(ST_MESH);
 		m_editOP = m_mesh_op;
 		m_editPanel->setEditOP(m_editOP);
+		m_stage->CreateShape();
 		break;
 	case 1:
 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
 		m_editOP = m_strip_op;
 		m_editPanel->setEditOP(m_editOP);
+		m_stage->CreateShape();
 		break;
 	}
 }

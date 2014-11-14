@@ -119,6 +119,13 @@ void StagePanel::UpdateSymbol()
 	}
 }
 
+void StagePanel::CreateShape()
+{
+	if (m_symbol) {
+		m_symbol->CreateShape();
+	}
+}
+
 void StagePanel::init(d2d::LibraryPanel* library)
 {
 	m_editOP = new d2d::ZoomViewOP(this, true);
