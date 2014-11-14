@@ -53,8 +53,9 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	Context* context = Context::Instance();
 
 	library = context->library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	context->library->addPage(new d2d::LibraryImagePage(context->library->getNotebook()));
-	context->library->addPage(new LibraryShapePage(context->library->getNotebook()));
+	wxWindow* nb = context->library->getNotebook();
+	context->library->addPage(new d2d::LibraryImagePage(nb));
+	context->library->addPage(new LibraryShapePage(nb));
 
 	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 

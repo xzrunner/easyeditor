@@ -140,11 +140,12 @@ void BuildingCfg::InitBuildings(const Json::Value& value)
 	InitBuildings(value["buildings"]["resources"], m_buildings.resources);
 	InitBuildings(value["buildings"]["army"], m_buildings.army);
 
-	m_defenses = new LibraryPage(m_library->getNotebook(), "Defenses");
+	wxWindow* nb = m_library->getNotebook();
+	m_defenses = new LibraryPage(nb, "Defenses");
 	m_library->addPage(m_defenses);
-	m_resources = new LibraryPage(m_library->getNotebook(), "Resources");
+	m_resources = new LibraryPage(nb, "Resources");
 	m_library->addPage(m_resources);
-	m_army = new LibraryPage(m_library->getNotebook(), "Army");
+	m_army = new LibraryPage(nb, "Army");
 	m_library->addPage(m_army);	
 
 	ResetLibraryList();

@@ -15,9 +15,10 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	, m_stage(NULL)
 	, m_toolbar(NULL)
 {
-	m_shapePage = new LibraryShapePage(getNotebook());
+	wxWindow* nb = library->getNotebook();
+	m_shapePage = new LibraryShapePage(nb);
 	addPage(m_shapePage);
-	m_imagePage = new LibraryImagePage(getNotebook());
+	m_imagePage = new LibraryImagePage(nb);
 	addPage(m_imagePage);
 }
 
