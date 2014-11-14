@@ -34,8 +34,6 @@ void Task::load(const char* filename)
 	int version = value["version"].asInt();
 	LoadPSSymbol(filename, value);
 	m_toolbar->Load(value, version);
-
-//	CocoPacker::pack("D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\particle2d", "D:\\projects\\ejoy\\coco-tools\\sg_particle\\data\\test.lua");
 }
 
 void Task::store(const char* filename) const
