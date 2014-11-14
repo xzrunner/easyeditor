@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyparticle", "projects\easyparticle.vcproj", "{1464785A-5D84-43E2-886D-2A11D34C024F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyparticle3d", "projects\easyparticle3d.vcproj", "{1464785A-5D84-43E2-886D-2A11D34C024F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909} = {5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}
 		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38} = {1C3B5344-2217-44F5-B5F0-A551B7B5AB38}

@@ -109,10 +109,9 @@ easymodeling/platform/msvc2008/libmodeling
 easyparticle/.git
 easyparticle/.svn
 easyparticle2d/platform/msvc2008/easyparticle2d
+easyparticle2d/platform/msvc2008/libparticle2d
 easyparticle3d/platform/msvc2008/easyparticle3d
 easyparticle3d/platform/msvc2008/libparticle3d
-easyparticle2dnew/platform/msvc2008/easyparticle2d
-easyparticle2dnew/platform/msvc2008/libparticle2d
 easyshape/.git
 easyshape/platform/msvc2008/easyshape
 easyshape/platform/msvc2008/easyshape_new

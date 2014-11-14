@@ -7,33 +7,46 @@
 namespace eparticle2d
 {
 
-class Task
+class LibraryPanel;
+class StagePanel;
+class ToolbarPanel;
+
+class Task : public d2d::ITask
 {
 public:
-
-	virtual void loadFromFile(const char* filename);
-	virtual void storeToFile(const char* filename) const;
-
-	virtual void clear();
-
-	d2d::GLCanvas* getCanvas() const;
-
-	static Task* create(wxFrame* parent)
-	{
-		return new Task(parent);
-	}
-
-protected:
 	Task(wxFrame* parent);
 	~Task();
 
+	virtual void load(const char* filename);
+	virtual void store(const char* filename) const;
+
+	virtual bool isDirty() const;
+
+	virtual void clear();
+
+	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
+
+	virtual const d2d::EditPanel* getEditPanel() const;
+
+// 	d2d::GLCanvas* getCanvas() const;
+
 private:
 	void initLayout();
+
+	void StorePSSymbol(const char* filename, Json::Value& val) const;
+	void LoadPSSymbol(const char* filename, const Json::Value& val);
 
 private:
 	wxWindow* m_root;
 
 	wxFrame* m_parent;
+
+	LibraryPanel* m_library;
+	StagePanel* m_stage;
+	ToolbarPanel* m_toolbar;
+
+	// todo
+	std::string m_ps_name;
 
 }; // Task
 
