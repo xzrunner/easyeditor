@@ -68,10 +68,6 @@ void Task::initLayout()
 	rightSplitter->SplitVertically(leftSplitter, toolbar);
 
 	m_root = leftSplitter;
-
-	wxSize size = m_parent->GetSize();
-	size.SetWidth(size.GetWidth() + 1);
-	m_parent->SetSize(size);
 }
 
 }

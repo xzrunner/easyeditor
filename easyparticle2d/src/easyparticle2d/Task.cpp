@@ -104,10 +104,6 @@ void Task::initLayout()
 	rightSplitter->SplitVertically(leftSplitter, m_toolbar);
 
 	m_root = rightSplitter;
-
-// 	wxSize size = m_parent->GetSize();
-// 	size.SetWidth(size.GetWidth() + 1);
-// 	m_parent->SetSize(size);
 }
 
 void Task::StorePSSymbol(const char* filename, Json::Value& val) const

@@ -75,10 +75,6 @@ void EditDialog::initLayout()
 	}
 
 //		m_root = rightVerticalSplitter;
-
-	wxSize size = GetSize();
-	size.SetWidth(size.GetWidth() + 1);
-	SetSize(size);
 }
 
 void EditDialog::onCloseEvent(wxCloseEvent& event)

@@ -102,10 +102,6 @@ void Task::initLayout()
 	}
 
 	m_root = rightVerticalSplitter;
-
-	wxSize size = m_parent->GetSize();
-	size.SetWidth(size.GetWidth() + 1);
-	m_parent->SetSize(size);
 }
 
 }
