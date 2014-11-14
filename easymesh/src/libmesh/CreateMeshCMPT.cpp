@@ -108,8 +108,7 @@ void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 
 void CreateMeshCMPT::onClear(wxCommandEvent& event)
 {
-	Shape* shape = m_stage->GetShape();
-	if (shape) {
+	if (Shape* shape = m_stage->GetShape()) {
 		shape->Clear();
 	}
 	m_stage->clearShapes();
