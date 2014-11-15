@@ -48,10 +48,10 @@ bool RectCutOP::onMouseLeftUp(int x, int y)
 	// fix rect
 	if (m_rectSelected)
 	{
-		m_rectSelected->xMin = (int)(m_rectSelected->xMin + 0.5f);
-		m_rectSelected->xMax = (int)(m_rectSelected->xMax + 0.5f);
-		m_rectSelected->yMin = (int)(m_rectSelected->yMin + 0.5f);
-		m_rectSelected->yMax = (int)(m_rectSelected->yMax + 0.5f);
+		m_rectSelected->xMin = ceil(m_rectSelected->xMin);
+		m_rectSelected->xMax = ceil(m_rectSelected->xMax);
+		m_rectSelected->yMin = ceil(m_rectSelected->yMin);
+		m_rectSelected->yMax = ceil(m_rectSelected->yMax);
 		m_editPanel->Refresh();
 	}
 
