@@ -25,6 +25,8 @@ namespace coceditor
 		std::vector<const d2d::ISymbol*> symbols;
 		wxString dlgPath;
 
+		std::set<std::string> ignore_list;
+
 	public:
 		static Context* Instance();
 

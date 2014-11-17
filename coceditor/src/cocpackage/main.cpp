@@ -145,6 +145,51 @@ void LoadTexturePacker(std::string texpackerpath)
 	}
 }
 
+void DetectScale(int idx, char *argv[], float& scale)
+{
+	std::string opt = argv[idx];
+	if (opt == "-s" || opt == "--scale") {
+		scale = atof(argv[idx+1]);
+	}
+}
+
+void DetectIgnoreFile(int idx, char *argv[], std::string& ignore_file)
+{
+	std::string opt = argv[idx];
+	if (opt == "-i" || opt == "--ignore") {
+		ignore_file = argv[idx+1];
+	}	
+}
+
+void ParamsDetection(int argc, char *argv[], float& scale, std::string& ignore_file)
+{
+	for (int i = 4; i < argc; i += 2)
+	{
+		DetectScale(i, argv, scale);
+		DetectIgnoreFile(i, argv, ignore_file);
+	}
+}
+
+void LoadIgnoreList(const std::string& filename)
+{
+	wxString ext = d2d::FilenameTools::getExtension(filename).Lower();
+
+	std::set<std::string> list;
+
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filename.c_str());
+	std::locale::global(std::locale("C"));
+
+	std::string str;
+	while (getline(fin, str)) {
+		list.insert(str);
+	}
+
+	fin.close();
+
+	coceditor::Context::Instance()->ignore_list = list;
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc < 4) {
@@ -155,11 +200,12 @@ int main(int argc, char *argv[])
 	InitSymbolCreators();
 
 	float gscale = 1.0f;
-	if (argc > 4)
-	{
-		double dscale;
-		wxString(argv[4]).ToDouble(&dscale);
-		gscale = dscale;
+	std::string ignore_file;
+	if (argc > 4) {
+		ParamsDetection(argc, argv, gscale, ignore_file);
+	}
+	if (!ignore_file.empty()) {
+		LoadIgnoreList(ignore_file);
 	}
 
 	std::string path = argv[1];
