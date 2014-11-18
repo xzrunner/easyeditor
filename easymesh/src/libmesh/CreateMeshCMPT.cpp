@@ -16,7 +16,7 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const wxString& name,
 {
 	m_mesh_op = new CreateMeshOP(stage);
 	m_strip_op= new CreateStripOP(stage);
-	m_editOP = m_mesh_op;
+	loadEditOP(m_mesh_op);
 }
 
 CreateMeshCMPT::~CreateMeshCMPT()
@@ -76,14 +76,12 @@ void CreateMeshCMPT::onChangeType(wxCommandEvent& event)
 	{
 	case 0:
 		ShapeFactory::Instance()->SetShapeType(ST_MESH);
-		m_editOP = m_mesh_op;
-		m_editPanel->setEditOP(m_editOP);
+		loadEditOP(m_mesh_op);
 		m_stage->CreateShape();
 		break;
 	case 1:
 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
-		m_editOP = m_strip_op;
-		m_editPanel->setEditOP(m_editOP);
+		loadEditOP(m_strip_op);
 		m_stage->CreateShape();
 		break;
 	}

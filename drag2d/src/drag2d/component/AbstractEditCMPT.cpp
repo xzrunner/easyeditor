@@ -81,21 +81,43 @@ void AbstractEditCMPT::setChoice(size_t index)
 void AbstractEditCMPT::loadEditOP()
 {
 	m_editPanel->setEditOP(m_editOP);
-	m_editPanel->Refresh();
+}
+
+void AbstractEditCMPT::loadEditOP(AbstractEditOP* op)
+{
+	if (m_editOP == op) {
+		return;
+	}
+
+	if (op) {
+		op->retain();
+	}
+	if (m_editOP) {
+		m_editOP->clear();
+		m_editOP->release();
+	}
+	m_editOP = op;
+
+	m_editPanel->setEditOP(m_editOP);
 }
 
 void AbstractEditCMPT::loadEditOP(AbstractEditCMPT* cmpt)
 {
+	if (cmpt->m_editOP == m_editOP) {
+		return;
+	}
+
+	if (m_editOP) {
+		m_editOP->retain();
+	}
 	if (cmpt->m_editOP)
 	{
 		cmpt->m_editOP->clear();
 		cmpt->m_editOP->release();
 	}
-	m_editOP->retain();
 	cmpt->m_editOP = m_editOP;
 
 	m_editPanel->setEditOP(m_editOP);
-	m_editPanel->Refresh();
 }
 
 void AbstractEditCMPT::onChangeEditType(wxCommandEvent& event)

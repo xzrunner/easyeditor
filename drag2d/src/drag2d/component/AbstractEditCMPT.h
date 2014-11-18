@@ -28,6 +28,8 @@ namespace d2d
 
 		void setChoice(size_t index);
 
+		void loadEditOP(AbstractEditOP* op);
+
 	private:
 		void loadEditOP();
 		void loadEditOP(AbstractEditCMPT* cmpt);

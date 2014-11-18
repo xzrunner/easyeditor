@@ -75,15 +75,23 @@ void EditPanel::drawEditTemp() const
 
 void EditPanel::setEditOP(AbstractEditOP* editOP)
 {
+	if (m_editOP == editOP) {
+		return;
+	}
+
+	if (editOP) {
+		editOP->retain();
+	}
 	if (m_editOP)
 	{
 		m_editOP->clear();
 		m_editOP->release();
 	}
-
-	editOP->onActive();
-	editOP->retain();
 	m_editOP = editOP;
+	if (m_editOP) {
+		m_editOP->onActive();
+	}
+	Refresh();
 }
 
 void EditPanel::onMouse(wxMouseEvent& event)
