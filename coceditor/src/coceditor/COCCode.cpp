@@ -812,22 +812,104 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 	// tex
 	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
 
-	int frame = std::fabs(std::floor(1.0f / sprite->GetSpeed().y));
+	int frame = 1;
+	if (sprite->GetSpeed().y != 0) {
+		frame = std::fabs(std::floor(1.0f / sprite->GetSpeed().y));
+	}
 	std::vector<int> frame_size;
 	d2d::Vector speed = sprite->GetSpeed();
 	emesh::Shape* shape = const_cast<emesh::Shape*>(sprite->getSymbol().getShape());
-	for (int i = 0; i < frame; ++i)
+	// 打包emesh::Strip做的流水
+	if (dynamic_cast<emesh::Strip*>(shape))
 	{
-		int quad_size = sprite->getSymbol().GetQuadSize();
-		frame_size.push_back(quad_size);
-
-		// todo 只是具体strip的情况，不支持mesh的旋转
-		const std::vector<emesh::Triangle*>& tris = shape->GetTriangles();
-		assert(tris.size() / 2 == quad_size);
-		for (int j = 0; j < quad_size; ++j)
+		for (int i = 0; i < frame; ++i)
 		{
-			emesh::Triangle* right_down = tris[j*2];
-			emesh::Triangle* left_up = tris[j*2+1];
+			int quad_size = sprite->getSymbol().GetQuadSize();
+			frame_size.push_back(quad_size);
+
+			// todo 只是具体strip的情况，不支持mesh的旋转
+			const std::vector<emesh::Triangle*>& tris = shape->GetTriangles();
+			assert(tris.size() / 2 == quad_size);
+			for (int j = 0; j < quad_size; ++j)
+			{
+				emesh::Triangle* right_down = tris[j*2];
+				emesh::Triangle* left_up = tris[j*2+1];
+
+				// id
+				lua::TableAssign ta(m_gen, "picture", false, false);
+				m_gen.line(lua::assign("id", wxString::FromDouble(curr_id++).ToStdString()) + ",");
+
+				// src
+				d2d::Vector src[4];
+				src[0] = left_up->nodes[2]->uv;
+				src[1] = left_up->nodes[0]->uv;
+				src[2] = right_down->nodes[1]->uv;
+				src[3] = right_down->nodes[2]->uv;
+				if (picture->entry->rotated)
+				{
+					float w = fabs(picture->scr[1].y - picture->scr[2].y);
+					float h = fabs(picture->scr[0].x - picture->scr[1].x);
+					for (int i = 0; i < 4; ++i)
+					{
+						float u = src[i].x, v = src[i].y;
+						src[i].x = picture->scr[1].x + v * h;
+						src[i].y = picture->scr[1].y + (1-u) * w;
+					}
+				}
+				else
+				{
+					float w = fabs(picture->scr[1].x - picture->scr[2].x);
+					float h = fabs(picture->scr[0].y - picture->scr[1].y);
+					for (int i = 0; i < 4; ++i)
+					{
+						float u = src[i].x, v = src[i].y;
+						src[i].x = picture->scr[0].x + u * w;
+						src[i].y = picture->scr[0].y + v * h;
+					}
+				}
+				std::string sx0 = wxString::FromDouble(src[0].x), sy0 = wxString::FromDouble(src[0].y);
+				std::string sx1 = wxString::FromDouble(src[1].x), sy1 = wxString::FromDouble(src[1].y);
+				std::string sx2 = wxString::FromDouble(src[2].x), sy2 = wxString::FromDouble(src[2].y);
+				std::string sx3 = wxString::FromDouble(src[3].x), sy3 = wxString::FromDouble(src[3].y);
+				std::string assign_src = lua::assign("src", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
+					sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));		
+
+				// screen
+				d2d::Vector screen[4];
+				screen[0] = left_up->nodes[2]->xy;
+				screen[1] = left_up->nodes[0]->xy;
+				screen[2] = right_down->nodes[1]->xy;
+				screen[3] = right_down->nodes[2]->xy;
+				// 			// translate
+				// 			for (size_t i = 0; i < 4; ++i)
+				// 				screen[i] += sprite->getPosition();
+				// flip y
+				for (size_t i = 0; i < 4; ++i)
+					screen[i].y = -screen[i].y;
+				// scale 16
+				const float SCALE = 16;
+				for (size_t i = 0; i < 4; ++i)
+					screen[i] *= SCALE; 
+				std::string dx0 = wxString::FromDouble(screen[0].x); std::string dy0 = wxString::FromDouble(screen[0].y);
+				std::string dx1 = wxString::FromDouble(screen[1].x); std::string dy1 = wxString::FromDouble(screen[1].y);
+				std::string dx2 = wxString::FromDouble(screen[2].x); std::string dy2 = wxString::FromDouble(screen[2].y);
+				std::string dx3 = wxString::FromDouble(screen[3].x); std::string dy3 = wxString::FromDouble(screen[3].y);
+				std::string assign_screen = lua::assign("screen", lua::tableassign("", 8, dx0.c_str(), dy0.c_str(), 
+					dx1.c_str(), dy1.c_str(), dx2.c_str(), dy2.c_str(), dx3.c_str(), dy3.c_str()));
+
+				lua::tableassign(m_gen, "", 3, assign_tex.c_str(), assign_src.c_str(), assign_screen.c_str());
+			}
+			shape->OffsetUV(speed.x, speed.y);
+		}
+	}
+	// 打包普通emesh::Mesh
+	else if (dynamic_cast<emesh::Mesh*>(shape))
+	{
+		const std::vector<emesh::Triangle*>& tris = shape->GetTriangles();
+		frame_size.push_back(tris.size());
+		for (int i = 0, n = tris.size(); i < n; ++i)
+		{
+			emesh::Triangle* tri = tris[i];
 
 			// id
 			lua::TableAssign ta(m_gen, "picture", false, false);
@@ -835,12 +917,12 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 
 			// src
 			d2d::Vector src[4];
- 			src[0] = left_up->nodes[2]->uv;
- 			src[1] = left_up->nodes[0]->uv;
- 			src[2] = right_down->nodes[1]->uv;
- 			src[3] = right_down->nodes[2]->uv;
- 			if (picture->entry->rotated)
- 			{
+			src[0] = tri->nodes[0]->uv;
+			src[1] = tri->nodes[1]->uv;
+			src[2] = tri->nodes[2]->uv;
+			src[3] = tri->nodes[2]->uv;
+			if (picture->entry->rotated)
+			{
 				float w = fabs(picture->scr[1].y - picture->scr[2].y);
 				float h = fabs(picture->scr[0].x - picture->scr[1].x);
 				for (int i = 0; i < 4; ++i)
@@ -849,9 +931,9 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 					src[i].x = picture->scr[1].x + v * h;
 					src[i].y = picture->scr[1].y + (1-u) * w;
 				}
- 			}
- 			else
- 			{
+			}
+			else
+			{
 				float w = fabs(picture->scr[1].x - picture->scr[2].x);
 				float h = fabs(picture->scr[0].y - picture->scr[1].y);
 				for (int i = 0; i < 4; ++i)
@@ -860,7 +942,7 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 					src[i].x = picture->scr[0].x + u * w;
 					src[i].y = picture->scr[0].y + v * h;
 				}
- 			}
+			}
 			std::string sx0 = wxString::FromDouble(src[0].x), sy0 = wxString::FromDouble(src[0].y);
 			std::string sx1 = wxString::FromDouble(src[1].x), sy1 = wxString::FromDouble(src[1].y);
 			std::string sx2 = wxString::FromDouble(src[2].x), sy2 = wxString::FromDouble(src[2].y);
@@ -870,13 +952,13 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 
 			// screen
 			d2d::Vector screen[4];
-			screen[0] = left_up->nodes[2]->xy;
-			screen[1] = left_up->nodes[0]->xy;
-			screen[2] = right_down->nodes[1]->xy;
-			screen[3] = right_down->nodes[2]->xy;
-// 			// translate
-// 			for (size_t i = 0; i < 4; ++i)
-// 				screen[i] += sprite->getPosition();
+			screen[0] = tri->nodes[0]->xy;
+			screen[1] = tri->nodes[1]->xy;
+			screen[2] = tri->nodes[2]->xy;
+			screen[3] = tri->nodes[2]->xy;
+			// 			// translate
+			// 			for (size_t i = 0; i < 4; ++i)
+			// 				screen[i] += sprite->getPosition();
 			// flip y
 			for (size_t i = 0; i < 4; ++i)
 				screen[i].y = -screen[i].y;
@@ -893,7 +975,6 @@ int COCCode::ParserMesh(const emesh::Sprite* sprite, const COCParser& parser)
 
 			lua::tableassign(m_gen, "", 3, assign_tex.c_str(), assign_src.c_str(), assign_screen.c_str());
 		}
-		shape->OffsetUV(speed.x, speed.y);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
