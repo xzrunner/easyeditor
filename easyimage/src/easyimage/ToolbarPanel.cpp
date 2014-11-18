@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "RectCutCMPT.h"
 #include "PixelDiffCMPT.h"
+#include "AutoCutCMPT.h"
 
 namespace eimage
 {
@@ -12,6 +13,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 {
 	addChild(new RectCutCMPT(this, wxT("Rect Cut"), stage));
 	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
+	addChild(new AutoCutCMPT(this, wxT("Pixel Diff"), stage));
 
 	SetSizer(initLayout());	
 }

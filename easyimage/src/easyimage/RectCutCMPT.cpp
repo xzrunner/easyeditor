@@ -11,7 +11,7 @@ namespace eimage
 static const std::string FILTER = "rectcut";
 
 RectCutCMPT::RectCutCMPT(wxWindow* parent, const wxString& name,
-						   StagePanel* stage)
+						 StagePanel* stage)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_stage(stage)
 {

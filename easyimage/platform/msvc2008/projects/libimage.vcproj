@@ -146,6 +146,18 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\libimage\BoundaryExtraction.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libimage\BoundaryExtraction.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyimage.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libimage\ImageProcessor.cpp"
 			>
 		</File>

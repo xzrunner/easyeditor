@@ -293,6 +293,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="autocut"
+				>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoCutCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoCutCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoCutOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoCutOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
