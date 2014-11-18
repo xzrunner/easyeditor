@@ -20,6 +20,9 @@ struct SettingData
 	bool visible_label_text;
 	bool visible_node_name;
 
+	// image filter
+	bool linear_filter;
+
 	SettingData();
 
 	void LoadFromFile(const Json::Value& value);

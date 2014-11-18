@@ -3,6 +3,8 @@
 #include "common/Config.h"
 #include "common/SettingData.h"
 
+#include <gl/gl.h>
+
 namespace d2d
 {
 
@@ -62,6 +64,14 @@ wxSizer* SettingsDialog::initImagePanel()
 			wxCommandEventHandler(SettingsDialog::onChangeVisibleImageEdge));
 		sizer->Add(check, 0);
 	}
+	sizer->AddSpacer(10);
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("LINEAR FILTER"));
+		check->SetValue(m_settings.linear_filter);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(SettingsDialog::onChangeImageFilterType));
+		sizer->Add(check, 0);
+	}
 	return sizer;
 }
 
@@ -108,6 +118,18 @@ void SettingsDialog::onChangeImageEdgeClip(wxCommandEvent& event)
 void SettingsDialog::onChangeVisibleImageEdge(wxCommandEvent& event)
 {
 	m_settings.visible_image_edge = event.IsChecked();
+}
+
+void SettingsDialog::onChangeImageFilterType(wxCommandEvent& event)
+{
+	m_settings.linear_filter = event.IsChecked();
+	if (m_settings.linear_filter) {
+	 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	} else {
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+	}
 }
 
 void SettingsDialog::onChangeFontBackground(wxCommandEvent& event)

@@ -13,6 +13,8 @@ SettingData::SettingData()
 	visible_label_bg = true;
 	visible_label_text = true;
 	visible_node_name = false;
+
+	linear_filter = true;
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)
@@ -25,6 +27,8 @@ void SettingData::LoadFromFile(const Json::Value& value)
 	visible_label_bg = value["visible_label_bg"].asBool();
 	visible_label_text = value["visible_label_text"].asBool();
 	visible_node_name = value["visible_node_name"].asBool();
+
+	linear_filter = value["linear_filter"].asBool();
 }
 
 }
