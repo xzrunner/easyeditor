@@ -14,6 +14,18 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	: d2d::Frame(title, filetag)
 {
 	m_setting_menu->Append(ID_SET_BG, wxT("Background"), wxT("Background"));
+
+#ifdef _DEBUG
+	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
+	m_log_chain = new wxLogChain(new wxLogStderr);
+#endif
+}
+
+Frame::~Frame()
+{
+#ifdef _DEBUG
+	delete m_log_chain;
+#endif
 }
 
 void Frame::onSaveAs(wxCommandEvent& event)
