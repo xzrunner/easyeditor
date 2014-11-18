@@ -29,6 +29,7 @@ void LibraryPanel::clear()
 {
 	for (size_t i = 0, n = m_pages.size(); i < n; ++i)
 		m_pages[i]->clear();
+	LoadFromConfig();
 }
 
 void LibraryPanel::reloadTexture() const
