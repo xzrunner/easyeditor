@@ -229,6 +229,9 @@ void PrimitiveDraw::drawDotDashLine(const Vector& p0, const Vector& p1,
 void PrimitiveDraw::drawLines(const std::vector<Vector>& vertices, 
 							  const Colorf& color, float size /*= 2*/)
 {
+	if (vertices.empty()) {
+		return;
+	}
 	PrimitiveDrawNew::SetLineWidth(size);
 	PrimitiveDrawNew::Draw(GL10::GL_LINES, &vertices[0].x, vertices.size());
 }
@@ -236,6 +239,9 @@ void PrimitiveDraw::drawLines(const std::vector<Vector>& vertices,
 void PrimitiveDraw::drawPolyline(const std::vector<Vector>& vertices, 
 								 const Colorf& color, bool isClose, float size /*= 2*/)
 {
+	if (vertices.empty()) {
+		return;
+	}
 	int type = isClose ? GL10::GL_LINE_LOOP : GL10::GL_LINE_STRIP;
 	PrimitiveDrawNew::SetLineWidth(size);
 	PrimitiveDrawNew::SetColor(color);
@@ -244,6 +250,9 @@ void PrimitiveDraw::drawPolyline(const std::vector<Vector>& vertices,
  
 void PrimitiveDraw::drawPolygon(const std::vector<Vector>& vertices, const Colorf& color)
 {
+	if (vertices.empty()) {
+		return;
+	}
 	PrimitiveDrawNew::SetColor(color);
 	PrimitiveDrawNew::Draw(GL10::GL_POLYGON, &vertices[0].x, vertices.size());
 }
