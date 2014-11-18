@@ -11,3 +11,7 @@
 #include "libmesh/Mesh.h"
 #include "libmesh/Triangle.h"
 #include "libmesh/FileIO.h"
+
+// todo
+#include "libmesh/Strip.h"
+#include "libmesh/Mesh.h"

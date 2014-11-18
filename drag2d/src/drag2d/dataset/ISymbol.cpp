@@ -32,4 +32,15 @@ bool ISymbol::loadFromFile(const wxString& filepath)
 	return true;
 }
 
+const std::vector<std::string>& ISymbol::GetFilepaths() const 
+{
+	return m_filepaths;
+}
+
+void ISymbol::SetFilepaths(const std::vector<std::string>& filepaths) 
+{
+	m_filepaths = filepaths;
+}
+
+
 } // d2d

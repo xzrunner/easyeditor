@@ -42,6 +42,9 @@ namespace d2d
 			m_filepath = filepath;
 		}
 
+		const std::vector<std::string>& GetFilepaths() const;
+		void SetFilepaths(const std::vector<std::string>& filepaths);
+
 	public:
 		std::string name;
 
@@ -50,6 +53,9 @@ namespace d2d
 
 	protected:
 		wxString m_filepath;
+
+	private:
+		std::vector<std::string> m_filepaths;
 
 	}; // ISymbol
 

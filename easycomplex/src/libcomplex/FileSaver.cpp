@@ -78,9 +78,19 @@ void FileSaver::centerSymbol(Symbol* symbol)
 Json::Value FileSaver::store(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
+	const d2d::ISymbol& symbol = sprite->getSymbol();
+
+	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-		sprite->getSymbol().getFilepath()).ToStdString();
+		symbol.getFilepath()).ToStdString();
+	// filepaths
+	const std::vector<std::string>& filepaths = symbol.GetFilepaths();
+	for (int i = 0, n = filepaths.size(); i < n; ++i) {
+		value["filepaths"][i] = filepaths[i];
+	}
+	// other
 	sprite->store(value);
+
 	return value;
 }
 
