@@ -39,6 +39,10 @@ public:
 	virtual bool OnMouseLeftDownBase(int x, int y);
 	virtual bool OnMouseRightDownBase(int x, int y);
 
+protected:
+	bool IsDirty() const;
+	void ResetDirty();
+
 private:
 	class NodeCapture : public INodeCapture
 	{

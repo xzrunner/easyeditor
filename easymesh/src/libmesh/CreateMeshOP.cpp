@@ -24,7 +24,10 @@ bool CreateMeshOP::onKeyDown(int keyCode)
 	case 'd': case 'D':
 	case 's': case 'S':
 	case 'w': case 'W':
-		m_stage->UpdateSymbol();
+		if (IsDirty()) {
+			m_stage->UpdateSymbol();
+			ResetDirty();
+		}
 		break;
 	}
 
@@ -36,7 +39,10 @@ bool CreateMeshOP::onMouseLeftDown(int x, int y)
 	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseLeftDown(x, y))
 		return true;
 
-	m_stage->UpdateSymbol();
+	if (IsDirty()) {
+		m_stage->UpdateSymbol();
+		ResetDirty();
+	}
 
 	return false;
 }
@@ -46,7 +52,10 @@ bool CreateMeshOP::onMouseLeftUp(int x, int y)
 	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseLeftUp(x, y))
 		return true;
 
-	m_stage->UpdateSymbol();
+	if (IsDirty()) {
+		m_stage->UpdateSymbol();
+		ResetDirty();
+	}
 
 	return false;
 }
@@ -56,7 +65,10 @@ bool CreateMeshOP::onMouseRightDown(int x, int y)
 	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseRightDown(x, y))
 		return true;
 
-	m_stage->UpdateSymbol();
+	if (IsDirty()) {
+		m_stage->UpdateSymbol();
+		ResetDirty();
+	}
 
 	return false;
 }
@@ -66,7 +78,10 @@ bool CreateMeshOP::onMouseRightUp(int x, int y)
 	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseRightUp(x, y))
 		return true;
 
-	m_stage->UpdateSymbol();
+	if (IsDirty()) {
+		m_stage->UpdateSymbol();
+		ResetDirty();
+	}
 
 	return false;
 }

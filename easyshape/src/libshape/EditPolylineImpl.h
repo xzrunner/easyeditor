@@ -31,6 +31,9 @@ public:
 
 	void Clear();
 
+	bool IsDirty() const { return m_dirty; }
+	void ResetDirty() { m_dirty = false; }
+
 private:
 	void drawCaptured(const NodeAddr& captured) const;
 	void checkActiveShape(const NodeAddr& captured);
@@ -99,6 +102,8 @@ private:
 	bool m_bSelectOpen;
 
 	INodeCapture* m_node_capture;
+
+	bool m_dirty;
 
 }; // EditPolylineImpl
 

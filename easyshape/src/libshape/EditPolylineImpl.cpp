@@ -35,6 +35,8 @@ EditPolylineImpl::EditPolylineImpl(d2d::EditPanel* editPanel,
 	m_draw_op = draw_op;
 
 	m_base_op = base_op;
+
+	m_dirty = false;
 }
 
 bool EditPolylineImpl::OnKeyDown(int keyCode)
@@ -129,6 +131,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 				ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape);
 				chain->changeVertices(m_capturedEditable.pos, nearest.getNearestNode());
 				chain->refresh();
+				m_dirty = true;
 				m_capturedEditable.pos = nearest.getNearestNode();
 				m_editPanel->Refresh();
 			}
@@ -171,6 +174,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 					ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape);
 					chain->removeVertices(m_capturedEditable.pos);
 					chain->refresh();
+					m_dirty = true;
 				}
 				else
 				{
@@ -178,6 +182,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 					m_shapesImpl->getShapeSelection()->clear();
 					m_capturedEditable.clear();
 					m_captureSelectable.clear();
+					m_dirty = true;
 					if (m_propertyPanel) {
 						m_propertyPanel->setPropertySetting(NULL);
 					}
@@ -256,6 +261,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 			}
 
 			chain->refresh();
+			m_dirty = true;
 			m_editPanel->Refresh();
 
 			if (m_propertyPanel) {

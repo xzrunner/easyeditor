@@ -106,4 +106,18 @@ OnMouseRightDownBase(int x, int y)
 	return TBase::onMouseRightDown(x, y);
 }
 
+template <typename TBase, typename TSelected>
+bool libshape::EditPolylineOP<TBase, TSelected>::
+IsDirty() const
+{
+	return m_impl->IsDirty();
+}
+
+template <typename TBase, typename TSelected>
+void libshape::EditPolylineOP<TBase, TSelected>::
+ResetDirty()
+{
+	return m_impl->ResetDirty();
+}
+
 #endif // _LIBSHAPE_EDIT_POLYLINE_OP_CPP_
