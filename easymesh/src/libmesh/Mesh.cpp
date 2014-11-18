@@ -215,11 +215,39 @@ void Mesh::Load(const Json::Value& value)
 		m_region.loops.push_back(shape);
 		loop_val = loops_val[i++];
 	}
- 
- 	RefreshTriangles();
- 
-	if (!value["triangles"].isNull()) {
-		LoadTriangles(value["triangles"]);
+
+	RefreshTriangles();
+
+	if (!value["triangles_new"].isNull()) 
+	{
+		std::vector<d2d::Vector> transform_ori, transform_new;
+		d2d::JsonTools::load(value["triangles"], transform_ori);
+		d2d::JsonTools::load(value["triangles_new"], transform_new);
+		
+		int itr = 0;
+		for (int i = 0, n = m_tris.size(); i < n; ++i)
+		{
+			Triangle* tri = m_tris[i];
+			for (int i = 0; i < 3; ++i) 
+			{
+				Node* n = tri->nodes[i];
+				
+				for (int j = 0, m = transform_new.size(); j < m; ++j) {
+					if (n->ori_xy == transform_new[j]) {
+						n->xy = transform_ori[j];
+						break;
+					}
+				}
+			}
+
+//				tri->nodes[i]->xy = transform[itr++];
+		}
+	}
+	else
+	{
+		if (!value["triangles"].isNull()) {
+			LoadTriangles(value["triangles"]);
+		}
 	}
 }
 
@@ -232,13 +260,56 @@ void Mesh::Store(Json::Value& value) const
  	value["bound"]["ymin"] = m_region.rect.yMin;
  	value["bound"]["ymax"] = m_region.rect.yMax;
 
+	// old
+// 	Json::Value& loops_val = value["loops"];
+// 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
+// 		const libshape::ChainShape* loop = m_region.loops[i];
+// 		d2d::JsonTools::store(loop->getVertices(), loops_val[i]);
+// 	}
+// 
+//  	StoreTriangles(value["triangles"]);
+
+	//////////////////////////////////////////////////////////////////////////
+
+	// new
 	Json::Value& loops_val = value["loops"];
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
 		const libshape::ChainShape* loop = m_region.loops[i];
-		d2d::JsonTools::store(loop->getVertices(), loops_val[i]);
+		const std::vector<d2d::Vector>& src = loop->getVertices();
+		std::vector<d2d::Vector> dst;
+		for (int i = 0, n = src.size(); i < n; ++i) {
+			bool find = false;
+			for (int j = 0, m = m_tris.size(); j < m && !find; ++j) {
+				Triangle* tri = m_tris[j];
+				for (int k = 0; k < 3 && !find; ++k) {
+					Node* n = tri->nodes[k];
+					if (src[i] == n->ori_xy) {
+						dst.push_back(n->xy);
+						find = true;
+					}
+				}
+			}
+		}
+		d2d::JsonTools::store(dst, loops_val[i]);
 	}
 
- 	StoreTriangles(value["triangles"]);
+	std::vector<d2d::Vector> transform;
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int i = 0; i < 3; ++i)
+			transform.push_back(tri->nodes[i]->ori_xy);
+	}
+	d2d::JsonTools::store(transform, value["triangles"]);
+
+	std::vector<d2d::Vector> transform_new;
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		for (int i = 0; i < 3; ++i)
+			transform_new.push_back(tri->nodes[i]->xy);
+	}
+	d2d::JsonTools::store(transform_new, value["triangles_new"]);
 }
 
 void Mesh::Refresh()
