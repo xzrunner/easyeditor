@@ -201,10 +201,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libmesh\config.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libmesh\Sprite.cpp"
 				>
 			</File>
@@ -377,6 +373,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\libmesh\config.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

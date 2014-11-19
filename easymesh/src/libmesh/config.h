@@ -4,6 +4,8 @@
 namespace emesh
 {
 
+#define OPEN_MESH_INV 1
+
 static const char* FILE_TAG = "mesh";
 
 enum ShapeType
