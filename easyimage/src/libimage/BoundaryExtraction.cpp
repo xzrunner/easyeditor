@@ -90,7 +90,8 @@ void BoundaryExtraction::GetBoundaryLine(std::vector<d2d::Vector>& border) const
 		d2d::Vector pos = buf.front(); buf.pop();
 		// the first will not set flag, for final connect
 		if (!border.empty()) {
-			flag[int(pos.y*m_width+pos.x)] = false;
+//			// no need
+//			flag[int(pos.y*m_width+pos.x)] = false;
 			// finish
 			if (pos == first) {
 				border.push_back(pos + d2d::Vector(0.5f, 0.5f));
