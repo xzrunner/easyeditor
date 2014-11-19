@@ -62,7 +62,7 @@ BoundaryExtraction::BoundaryExtraction(const d2d::Image& image)
 {
 }
 
-void BoundaryExtraction::GetBoundaryLine(std::vector<d2d::Vector>& border) const
+void BoundaryExtraction::GetRawBoundaryLine(std::vector<d2d::Vector>& border) const
 {
 	border.clear();
 
@@ -126,7 +126,7 @@ void BoundaryExtraction::GetBoundaryLine(std::vector<d2d::Vector>& border) const
 	delete[] flag;
 }
 
-void BoundaryExtraction::GetBoundaryPoints(std::vector<d2d::Vector>& border) const
+void BoundaryExtraction::GetRawBoundaryPoints(std::vector<d2d::Vector>& border) const
 {
 	border.clear();
 
@@ -138,6 +138,36 @@ void BoundaryExtraction::GetBoundaryPoints(std::vector<d2d::Vector>& border) con
 			}
 		}
 	}
+}
+
+void BoundaryExtraction::GetFineBoundaryLine(const std::vector<d2d::Vector>& raw_border, 
+											 std::vector<d2d::Vector>& fine_border, 
+											 float tolerance) const
+{
+	d2d::Rect r;
+	for (int i = 0, n = raw_border.size(); i < n; ++i) {
+		r.combine(raw_border[i]);
+	}
+
+	fine_border.push_back(d2d::Vector(r.xMin, r.yMin));
+	fine_border.push_back(d2d::Vector(r.xMin, r.yMax));
+	fine_border.push_back(d2d::Vector(r.xMax, r.yMax));
+	fine_border.push_back(d2d::Vector(r.xMax, r.yMin));
+
+	bool success = false;
+	do {
+		success = false;
+
+//		float area = d2d::Math::isPointInArea();
+
+		// remove one node
+		for (int i = 0, n = fine_border.size(); i < n; ++i) {
+
+		}
+
+		// add one node
+
+	} while (success);
 }
 
 bool BoundaryExtraction::IsPixelBorder(int x, int y) const
@@ -166,7 +196,6 @@ bool BoundaryExtraction::IsPixelTransparente(int x, int y) const
 		return true;
 	}
 	
-// 	byte alpha = m_pixels[((m_height-1-y)*m_width+x)*4+3];
 	byte alpha = m_pixels[(y*m_width+x)*4+3];
 	return alpha == 0;
 }

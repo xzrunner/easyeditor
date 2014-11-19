@@ -37,8 +37,8 @@ void AutoCutCMPT::CreateSymbolEdge(wxCommandEvent& event)
 
 	AutoCutOP* op = static_cast<AutoCutOP*>(m_editOP);
 	BoundaryExtraction be(*img);
-	be.GetBoundaryLine(op->m_bound);
-	be.GetBoundaryPoints(op->m_bound_points);
+	be.GetRawBoundaryLine(op->m_bound);
+	be.GetRawBoundaryPoints(op->m_bound_points);
 
 	m_editPanel->Refresh();
 }
