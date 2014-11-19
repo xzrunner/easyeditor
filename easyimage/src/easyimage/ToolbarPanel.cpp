@@ -12,8 +12,8 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	: d2d::ToolbarPanel(parent, stage)
 {
 	addChild(new RectCutCMPT(this, wxT("Rect Cut"), stage));
+	addChild(new AutoCutCMPT(this, wxT("Auto Cut"), stage));
 	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
-	addChild(new AutoCutCMPT(this, wxT("Pixel Diff"), stage));
 
 	SetSizer(initLayout());	
 }

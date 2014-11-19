@@ -11,10 +11,13 @@ class AutoCutOP : public d2d::ZoomViewOP
 public:
 	AutoCutOP(d2d::EditPanel* stage);
 
+	virtual bool onActive();
+
 	virtual bool onDraw() const;
 
 private:
 	std::vector<d2d::Vector> m_bound;
+	std::vector<d2d::Vector> m_bound_points;
 
 	friend class AutoCutCMPT;
 
