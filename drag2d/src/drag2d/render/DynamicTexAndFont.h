@@ -164,11 +164,11 @@ private:
 	class ReloadTextureVisitor : public IVisitor
 	{
 	public:
-		ReloadTextureVisitor(int tex, int padding) : m_tex(tex), m_padding(padding) {}
+		ReloadTextureVisitor(int tex, int extend) : m_tex(tex), m_extend(extend) {}
 		virtual void visit(Object* object, bool& bFetchNext);
 	private:
 		int m_tex;
-		int m_padding;
+		int m_extend;
 	}; // ReloadTextureVisitor
 
 private:
@@ -177,9 +177,6 @@ private:
 	static const int FONT_SIZE_COUNT = 256;
 
 private:
-	// for image
-	int m_extrude;
-
 	int m_preload_idx;
 	std::vector<const Image*> m_preload_list;
 

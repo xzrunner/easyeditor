@@ -136,7 +136,7 @@ void LabelNew::DrawLines(const Vector& pos,
 	const float tex_width = dfont->GetWidth(),
 		tex_height = dfont->GetHeight();
 	const int tex_id = dfont->GetTextureID();
-	const int padding = dfont->GetPadding();
+	const int extend = dfont->GetExtend();
 
 	int y = pos.y + style.height*0.5f;
 	if (style.align_vert == VAT_TOP) {
@@ -170,11 +170,11 @@ void LabelNew::DrawLines(const Vector& pos,
 			xmin = x + g->bearing_x;
 			ymax = y + g->bearing_y - g->metrics_height;
 			if (r->IsRotated()) {
-				xmax = xmin + (r->GetHeight()-padding*2);
-				ymin = ymax - (r->GetWidth()-padding*2);
+				xmax = xmin + (r->GetHeight()-extend*2);
+				ymin = ymax - (r->GetWidth()-extend*2);
 			} else {
-				xmax = xmin + (r->GetWidth()-padding*2);
-				ymin = ymax - (r->GetHeight()-padding*2);
+				xmax = xmin + (r->GetWidth()-extend*2);
+				ymin = ymax - (r->GetHeight()-extend*2);
 			}
 
 			glyph.vertices[0].set(xmin, ymin);
@@ -182,10 +182,10 @@ void LabelNew::DrawLines(const Vector& pos,
 			glyph.vertices[2].set(xmax, ymax);
 			glyph.vertices[3].set(xmin, ymax);
 
-			txmin = (r->GetMinX()+padding+0.5f) / tex_width;
-			txmax = (r->GetMaxX()-padding-0.5f) / tex_width;
-			tymin = (r->GetMinY()+padding+0.5f) / tex_height;
-			tymax = (r->GetMaxY()-padding-0.5f) / tex_height;
+			txmin = (r->GetMinX()+extend) / tex_width;
+			txmax = (r->GetMaxX()-extend) / tex_width;
+			tymin = (r->GetMinY()+extend) / tex_height;
+			tymax = (r->GetMaxY()-extend) / tex_height;
 
 			if (r->IsRotated())
 			{

@@ -203,15 +203,15 @@ void Image::draw(const Matrix& mt, const Rect& r) const
 	}
  	if (n)
  	{
- 		float padding = dt->GetPadding();
+ 		float extend = dt->GetExtend();
  		int width = dt->GetWidth();
  		int height = dt->GetHeight();
  		texid = dt->GetTextureID();
- 		txmin = (n->GetMinX()+padding+0.5f) / width;
- 		txmax = (n->GetMaxX()-padding-0.5f) / width;
- 		tymin = (n->GetMinY()+padding+0.5f) / height;
- 		tymax = (n->GetMaxY()-padding-0.5f) / height;
- 
+		txmin = (n->GetMinX()+extend) / width;
+		txmax = (n->GetMaxX()-extend) / width;
+		tymin = (n->GetMinY()+extend) / height;
+		tymax = (n->GetMaxY()-extend) / height;
+
 		if (texid != 1) {
 			wxLogDebug(_T("img dt's tex = %d"), texid);
 		}

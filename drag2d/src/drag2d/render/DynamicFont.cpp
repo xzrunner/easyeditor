@@ -23,7 +23,7 @@ DynamicFont* DynamicFont::Instance()
 }
 
 DynamicFont::DynamicFont()
-	: DynamicPacker(WIDTH, HEIGHT, PADDING)
+	: DynamicPacker(WIDTH, HEIGHT, PADDING, 0)
 {
 }
 

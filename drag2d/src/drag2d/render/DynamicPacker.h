@@ -11,13 +11,13 @@ class TPNode;
 class DynamicPacker
 {
 public:
-	DynamicPacker(int width, int height, int padding);
+	DynamicPacker(int width, int height, int padding, int extrude);
 	virtual ~DynamicPacker();
 
 	int GetTextureID() const { return m_tex; }
 	int GetWidth() const { return m_width; }
 	int GetHeight() const { return m_height; }
-	int GetPadding() const { return m_padding; }
+	int GetExtend() const { return m_padding + m_extrude; }
 
 	void ReloadTexture();
 
@@ -36,6 +36,7 @@ protected:
 protected:
 	int m_width, m_height;
 	int m_padding;
+	int m_extrude;
 
 	GLuint m_tex;
 	GLuint m_fbo;

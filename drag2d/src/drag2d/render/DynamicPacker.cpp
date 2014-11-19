@@ -17,10 +17,11 @@
 namespace d2d
 {
 
-DynamicPacker::DynamicPacker(int width, int height, int padding)
+DynamicPacker::DynamicPacker(int width, int height, int padding, int extrude)
 	: m_width(width)
 	, m_height(height)
 	, m_padding(padding)
+	, m_extrude(extrude)
 {
 	initOpenGLExtensions();
 

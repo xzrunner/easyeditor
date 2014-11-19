@@ -82,14 +82,14 @@ void Symbol::draw(const d2d::Matrix& mt,
 
 		d2d::Vector texcoords[4];
 		float txmin, txmax, tymin, tymax;
-		float padding = dtex->GetPadding();
+		float extend = dtex->GetExtend();
 		int width = dtex->GetWidth();
 		int height = dtex->GetHeight();
 		int texid = dtex->GetTextureID();
-		txmin = (n->GetMinX()+padding+0.5f) / width;
-		txmax = (n->GetMaxX()-padding-0.5f) / width;
-		tymin = (n->GetMinY()+padding+0.5f) / height;
-		tymax = (n->GetMaxY()-padding-0.5f) / height;
+		txmin = (n->GetMinX()+extend) / width;
+		txmax = (n->GetMaxX()-extend) / width;
+		tymin = (n->GetMinY()+extend) / height;
+		tymax = (n->GetMaxY()-extend) / height;
 
 		if (texid != 1) {
 			wxLogDebug(_T("img dt's tex = %d"), texid);

@@ -24,7 +24,7 @@ DynamicTexture* DynamicTexture::Instance()
 }
 
 DynamicTexture::DynamicTexture()
-	: DynamicPacker(WIDTH, HEIGHT, PADDING)
+	: DynamicPacker(WIDTH, HEIGHT, PADDING, 0)
 	, m_preload_idx(0)
 {
 	m_extrude = EXTRUDE;

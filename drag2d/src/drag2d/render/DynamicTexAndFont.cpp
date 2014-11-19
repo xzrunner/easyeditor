@@ -15,7 +15,7 @@ namespace d2d
 const int DynamicTexAndFont::WIDTH = 4096;
 const int DynamicTexAndFont::HEIGHT = 4096;
 const int DynamicTexAndFont::PADDING = 0;
-const int DynamicTexAndFont::EXTRUDE = 0;
+const int DynamicTexAndFont::EXTRUDE = 1;
 
 DynamicTexAndFont* DynamicTexAndFont::m_instance = NULL;
 DynamicTexAndFont* DynamicTexAndFont::Instance()
@@ -31,10 +31,9 @@ DynamicTexAndFont* DynamicTexAndFont::Instance()
 }
 
 DynamicTexAndFont::DynamicTexAndFont()
-	: DynamicPacker(WIDTH, HEIGHT, PADDING)
+	: DynamicPacker(WIDTH, HEIGHT, PADDING, EXTRUDE)
 	, m_preload_idx(0)
 {
-	m_extrude = EXTRUDE;
 }
 
 void DynamicTexAndFont::BeginImage()
@@ -93,7 +92,8 @@ void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 	Rect r = symbol.getSize();
 	int w = r.xLength();
 	int h = r.yLength();
-	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+	int extend = GetExtend() * 2;
+	TPNode* n = m_root->Insert(w+extend, h+extend);
 	if (!n) {
 		return;
 	}
@@ -180,13 +180,15 @@ const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, const wxString
 	}
 	int w = layout.sizer.width;
 	int h = layout.sizer.height;
-	TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+	int extend = GetExtend() * 2;
+	TPNode* n = m_root->Insert(w+extend, h+extend);
 	if (!n) {
 		Clear();
-		n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+		n = m_root->Insert(w+extend, h+extend);
 	}
 
 	if (n) {
+		int extend = GetExtend();
 		glBindTexture(GL_TEXTURE_2D, m_tex);
 		if (n->IsRotated()) {
 			uint32_t* rotated = new uint32_t[w*h];
@@ -197,11 +199,11 @@ const Glyph* DynamicTexAndFont::QueryAndInsertFont(int character, const wxString
 					rotated[ptr_dst] = buffer[ptr_src++];
 				}
 			}
-			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, h, w, GL_RGBA, GL_UNSIGNED_BYTE, rotated);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+extend, n->GetMinY()+extend, h, w, GL_RGBA, GL_UNSIGNED_BYTE, rotated);
 			glyph->buffer = rotated;
 			delete[] buffer;
 		} else {
-			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+			glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+extend, n->GetMinY()+extend, w, h, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
 			glyph->buffer = buffer;
 		}
 
@@ -252,7 +254,7 @@ void DynamicTexAndFont::ReloadPixels()
 		DrawNode(n, img);
 	}
 
-	m_hash.Traverse(ReloadTextureVisitor(m_tex, m_padding));
+	m_hash.Traverse(ReloadTextureVisitor(m_tex, GetExtend()));
 
 	EndDraw();
 }
@@ -267,7 +269,8 @@ void DynamicTexAndFont::InsertImage(const Image* img)
 	d2d::Rect r = img->getRegion();
 	int w = r.xLength();
 	int h = r.yLength();
-	d2d::TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
+	int extend = GetExtend() * 2;
+	d2d::TPNode* n = m_root->Insert(w+extend, h+extend);
 	if (!n) {
 		return;
 	}
@@ -282,10 +285,12 @@ void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
 	d2d::Rect r = img->getRegion();
 
 	Rect r_vertex, r_texcoords;
- 	r_vertex.xMin = n->GetMinX() + m_padding;
- 	r_vertex.xMax = n->GetMaxX() - m_padding;
- 	r_vertex.yMin = n->GetMinY() + m_padding;
- 	r_vertex.yMax = n->GetMaxY() - m_padding;
+
+	int extend = GetExtend();
+ 	r_vertex.xMin = n->GetMinX() + extend;
+ 	r_vertex.xMax = n->GetMaxX() - extend;
+ 	r_vertex.yMin = n->GetMinY() + extend;
+ 	r_vertex.yMax = n->GetMaxY() - extend;
 	r_vertex.translate(Vector(-m_width*0.5f, -m_height*0.5f));
 
 	int ori_width = img->originWidth(),
@@ -345,169 +350,137 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 		ori_height = img->originHeight();
 	Rect r_vertex, r_texcoords;
 
+	d2d::Rect rv, rt;
+	rv.xMin = n->GetMinX() - m_width * 0.5f;
+	rv.xMax = n->GetMaxX() - m_width * 0.5f;
+	rv.yMin = n->GetMinY() - m_height * 0.5f;
+	rv.yMax = n->GetMaxY() - m_height * 0.5f;
+	rt.xMin = r.xMin + ori_width * 0.5f;
+	rt.xMax = r.xMax + ori_width * 0.5f;
+	rt.yMin = r.yMin + ori_height * 0.5f;
+	rt.yMax = r.yMax + ori_height * 0.5f;
+	float extend = GetExtend();
 	if (n->IsRotated())
 	{
 		// up
-		r_texcoords.xMin = (r.xMax - 1 + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
-		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-		r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-		r_vertex.xMax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.yMin = ((float)(n->GetMaxY()+i-m_padding) / m_height) * 2 - 1;
-			r_vertex.yMax = ((float)(n->GetMaxY()+1+i-m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
-		}
+		r_texcoords.xMin = r_texcoords.xMax = (rt.xMax - 0.5f) / ori_width;
+		r_texcoords.yMin = rt.yMin / ori_height;
+		r_texcoords.yMax = rt.yMax / ori_height;
+		r_vertex.xMin = rv.xMin+extend;
+		r_vertex.xMax = rv.xMax-extend;
+		r_vertex.yMin = rv.yMax-extend;
+		r_vertex.yMax = rv.yMax-m_padding;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
 
 		// down
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMin + 1 + ori_width * 0.5f) / ori_width;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.yMin = ((float)(n->GetMinY()-1-i+m_padding) / m_height) * 2 - 1;
-			r_vertex.yMax = ((float)(n->GetMinY()-i+m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
-		}
+		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
+		r_vertex.yMin = rv.yMin+m_padding;
+		r_vertex.yMax = rv.yMin+extend;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
 
 		// left
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
-		r_texcoords.yMin = (r.yMax - 1 + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-		r_vertex.yMin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
-		r_vertex.yMax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.xMin = ((float)(n->GetMinX()-1-i+m_padding) / m_width) * 2 - 1;
-			r_vertex.xMax = ((float)(n->GetMinX()-i+m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
-		}
+		r_texcoords.xMin = rt.xMin / ori_width;
+		r_texcoords.xMax = rt.xMax / ori_width;
+		r_texcoords.yMin = r_texcoords.yMax = (rt.yMax - 0.5f) / ori_height;
+		r_vertex.yMin = rv.yMin+extend;
+		r_vertex.yMax = rv.yMax-extend;
+		r_vertex.xMin = rv.xMin+m_padding;
+		r_vertex.xMax = rv.xMin+extend;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
 
 		// right
-		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMin + 1 + ori_height * 0.5f) / ori_height;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.xMin = ((float)(n->GetMaxX()+i-m_padding) / m_width) * 2 - 1;
-			r_vertex.xMax = ((float)(n->GetMaxX()+1+i-m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
-		}		
+		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
+		r_vertex.xMin = rv.xMax-extend;
+		r_vertex.xMax = rv.xMax-m_padding;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
 
-		// up-left
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMin + ori_width * 0.5f + 1) / ori_width;
-		r_texcoords.yMin = (r.yMax + ori_height * 0.5f - 1) / ori_height;
-		r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-		r_vertex.xMin = ((float)(n->GetMinX()+m_padding-1) / m_width) * 2 - 1;
-		r_vertex.xMax = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;		
-		r_vertex.yMin = ((float)(n->GetMinY()+m_padding-1) / m_height) * 2 - 1;
-		r_vertex.yMax = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;		
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-
-		// up-right
-		r_texcoords.xMin = (r.xMax + ori_width * 0.5f - 1) / ori_width;
-		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
-		r_vertex.yMin = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
-		r_vertex.yMax = ((float)(n->GetMaxY()-m_padding+1) / m_height) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-
-		// down-right
-		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMin + ori_height * 0.5f + 1) / ori_height;
-		r_vertex.xMin = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
-		r_vertex.xMax = ((float)(n->GetMaxX()-m_padding+1) / m_width) * 2 - 1;		
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-
-		// down-left
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMin + ori_width * 0.5f + 1) / ori_width;
-		r_vertex.yMin = ((float)(n->GetMinY()+m_padding-1) / m_height) * 2 - 1;
-		r_vertex.yMax = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;		
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		// up-left
+ 		r_texcoords.xMin = r_texcoords.xMax = rt.xMin / ori_width;
+ 		r_texcoords.yMin = r_texcoords.yMax = rt.yMax / ori_height;
+ 		r_vertex.xMin = rv.xMin+m_padding;
+ 		r_vertex.xMax = rv.xMin+extend;
+ 		r_vertex.yMin = rv.yMin+m_padding;
+ 		r_vertex.yMax = rv.yMin+extend;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 
+ 		// up-right
+ 		r_texcoords.xMin = r_texcoords.xMax = (rt.xMax - 0.5f) / ori_width;
+ 		r_vertex.yMin = rv.yMax-extend;
+ 		r_vertex.yMax = rv.yMax-m_padding;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 
+ 		// down-right
+ 		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
+ 		r_vertex.xMin = rv.xMax-extend;
+ 		r_vertex.xMax = rv.xMax-m_padding;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 
+ 		// down-left
+ 		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
+ 		r_vertex.yMin = rv.yMin+m_padding;
+ 		r_vertex.yMax = rv.yMin+extend;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
 	}
 	else
 	{
 		// up
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
-		r_texcoords.yMin = (r.yMax - 1 + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-		r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-		r_vertex.xMax = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.yMin = ((float)(n->GetMaxY()+i-m_padding) / m_height) * 2 - 1;
-			r_vertex.yMax = ((float)(n->GetMaxY()+1+i-m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-		}
+		r_texcoords.xMin = rt.xMin / ori_width;
+		r_texcoords.xMax = rt.xMax / ori_width;
+		r_texcoords.yMin = r_texcoords.yMax = (rt.yMax - 0.5f) / ori_height;
+		r_vertex.xMin = rv.xMin+extend;
+		r_vertex.xMax = rv.xMax-extend;
+		r_vertex.yMin = rv.yMax-extend;
+		r_vertex.yMax = rv.yMax-m_padding;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
 
 		// down
-		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMin + 1 + ori_height * 0.5f) / ori_height;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.yMin = ((float)(n->GetMinY()-1-i+m_padding) / m_height) * 2 - 1;
-			r_vertex.yMax = ((float)(n->GetMinY()-i+m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-		}
+		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
+		r_vertex.yMin = rv.yMin+m_padding;
+		r_vertex.yMax = rv.yMin+extend;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
 
 		// left
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMin + 1 + ori_width * 0.5f) / ori_width;
-		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-		r_vertex.yMin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
-		r_vertex.yMax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.xMin = ((float)(n->GetMinX()-1-i+m_padding) / m_width) * 2 - 1;
-			r_vertex.xMax = ((float)(n->GetMinX()-i+m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-		}
+		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
+		r_texcoords.yMin = rt.yMin / ori_height;
+		r_texcoords.yMax = rt.yMax / ori_height;
+		r_vertex.yMin = rv.yMin+extend;
+		r_vertex.yMax = rv.yMax-extend;
+		r_vertex.xMin = rv.xMin+m_padding;
+		r_vertex.xMax = rv.xMin+extend;
+		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
 
 		// right
-		r_texcoords.xMin = (r.xMax - 1 + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
-		for (int i = 0; i < m_extrude; ++i)
-		{
-			r_vertex.xMin = ((float)(n->GetMaxX()+i-m_padding) / m_width) * 2 - 1;
-			r_vertex.xMax = ((float)(n->GetMaxX()+1+i-m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-		}
-
-		// up-left
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMin + ori_width * 0.5f + 1) / ori_width;
-		r_texcoords.yMin = (r.yMax + ori_height * 0.5f - 1) / ori_height;
-		r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-		r_vertex.xMin = ((float)(n->GetMinX()+m_padding-1) / m_width) * 2 - 1;
-		r_vertex.xMax = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-		r_vertex.yMin = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
-		r_vertex.yMax = ((float)(n->GetMaxY()-m_padding+1) / m_height) * 2 - 1;
+		r_texcoords.xMin = r_texcoords.xMax = (rt.xMax - 0.5f) / ori_width;
+		r_vertex.xMin = rv.xMax-extend;
+		r_vertex.xMax = rv.xMax-m_padding;
 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
 
-		// up-right
-		r_texcoords.xMin = (r.xMax + ori_width * 0.5f - 1) / ori_width;
-		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
-		r_vertex.xMin = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
-		r_vertex.xMax = ((float)(n->GetMaxX()-m_padding+1) / m_width) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-
-		// down-right
-		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
-		r_texcoords.yMax = (r.yMin + ori_height * 0.5f + 1) / ori_height;
-		r_vertex.yMin = ((float)(n->GetMinY()+m_padding-1) / m_height) * 2 - 1;
-		r_vertex.yMax = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
-
-		// down-left
-		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
-		r_texcoords.xMax = (r.xMin + ori_width * 0.5f + 1) / ori_width;
-		r_vertex.xMin = ((float)(n->GetMinX()+m_padding-1) / m_width) * 2 - 1;
-		r_vertex.xMax = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		// up-left
+ 		r_texcoords.xMin = r_texcoords.xMax = rt.xMin / ori_width;
+ 		r_texcoords.yMin = r_texcoords.yMax = rt.yMax / ori_height;
+ 		r_vertex.xMin = rv.xMin+m_padding;
+ 		r_vertex.xMax = rv.xMin+extend;
+ 		r_vertex.yMin = rv.yMax-extend;
+ 		r_vertex.yMax = rv.yMax-m_padding;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 
+ 		// up-right
+ 		r_texcoords.xMin = r_texcoords.xMax = (rt.xMax - 0.5f) / ori_width;
+ 		r_vertex.xMin = rv.xMax-extend;
+ 		r_vertex.xMax = rv.xMax-m_padding;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 
+ 		// down-right
+ 		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
+ 		r_vertex.yMin = rv.yMin+m_padding;
+ 		r_vertex.yMax = rv.yMin+extend;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 
+ 		// down-left
+ 		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
+ 		r_vertex.xMin = rv.xMin+m_padding;
+ 		r_vertex.xMax = rv.xMin+extend;
+ 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
 	}
 }
 
@@ -719,9 +692,9 @@ visit(Object* object, bool& bFetchNext)
 
 	glBindTexture(GL_TEXTURE_2D, m_tex);
 	if (n->IsRotated()) {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, g->height, g->width, GL_RGBA, GL_UNSIGNED_BYTE, g->buffer);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_extend, n->GetMinY()+m_extend, g->height, g->width, GL_RGBA, GL_UNSIGNED_BYTE, g->buffer);
 	} else {
-		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_padding, n->GetMinY()+m_padding, g->width, g->height, GL_RGBA, GL_UNSIGNED_BYTE, g->buffer);
+		glTexSubImage2D(GL_TEXTURE_2D, 0, n->GetMinX()+m_extend, n->GetMinY()+m_extend, g->width, g->height, GL_RGBA, GL_UNSIGNED_BYTE, g->buffer);
 	}
 
 	bFetchNext = true;
