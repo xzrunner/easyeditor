@@ -120,7 +120,7 @@ void LoadFromList(const std::string& list)
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(*itr);
 				std::set<std::string>::iterator itr = names.find(symbol->name);
 				if (itr == names.end()) {
-					symbol->release();
+//					symbol->release();
 				} else {
 					coceditor::Context::Instance()->symbols.push_back(symbol);
 				}
