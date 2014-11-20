@@ -1,5 +1,7 @@
 #include "SearchPathMgr.h"
 
+#include <wx/stdpaths.h>
+
 namespace ecomplex
 {
 
@@ -23,7 +25,6 @@ bool SearchPathMgr::IsExist(const wxString& filepath) const
 
 	for (int i = 0, n = m_search_path.size(); i < n; ++i) {
 		const PackedRes* res = m_search_path[i];
-
 		if (filepath.Contains(res->GetDirAbsolute())) {
 			need_search = true;
 			if (res->IsExist(filepath)) {
@@ -49,16 +50,25 @@ SearchPathMgr* SearchPathMgr::Instance()
 
 void SearchPathMgr::LoadConfig()
 {
+	wxStandardPaths std;
+	wxString exe_path = std.GetExecutablePath();
+
+ 	wxFileName filename(FILENAME);
+	filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+ 	filename.Normalize();
+
 	Json::Value value;
 
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(FILENAME);
+	std::ifstream fin(filename.GetFullPath().fn_str());
 	std::locale::global(std::locale("C"));
+
 	if (fin.fail()) {
 		fin.close();
 		return;
 	}
+
 	reader.parse(fin, value);
 	fin.close();
 
@@ -90,8 +100,10 @@ PackedRes(const std::string& res_dir,
 {
 	LoadCfgDir(dirpath);
 
+	wxStandardPaths std;
+	wxString exe_path = std.GetExecutablePath();
 	wxFileName filename(m_res_dir);
-//	filename.MakeAbsolute(dir);
+	filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
 	filename.Normalize();
 	m_res_dir_absolute = filename.GetFullPath().Lower();
 }
@@ -115,10 +127,19 @@ IsExist(const wxString& filepath) const
 void SearchPathMgr::PackedRes::
 LoadCfgDir(const std::string& dirpath)
 {
+	wxStandardPaths std;
+	wxString exe_path = std.GetExecutablePath();
+
 	size_t i = 1;
 	while (true)
 	{
 		std::string path = dirpath + wxString::FromDouble(i) + ".json";
+
+		wxFileName filename(path);
+		filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+		filename.Normalize();
+		path = filename.GetFullPath().Lower();
+
 		if (wxFileName::FileExists(path)) {
 			LoadCfgFile(path);
 		} else {
