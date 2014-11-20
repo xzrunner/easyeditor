@@ -9,6 +9,16 @@
 	"visible_label_text" : true,		// 显示文本
 	"visible_node_name" : false,		// 显示节点名称
 
+	// 打包图片的环境变量（图片查找路径）
+	"tp_path" :
+	[
+		{
+			"img_dir" : "../../../../../ejoy/coco-tools/sg_ui/data/png",
+			"tp_output" : "../../../../../ejoy/coco-tools/sg_ui/output/momo/ui2"
+			// "tp_output" : "../../../../../ejoy/coco-tools/sg_ui/output/momo_newres/ui2"
+		}
+	],
+
 	// library list default
 	"library_label" :
 	[
