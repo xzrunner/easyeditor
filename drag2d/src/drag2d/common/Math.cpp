@@ -157,6 +157,19 @@ bool Math::isPointInCircle(const Vector& pos, const Vector& center, float radius
 	return getDistance(pos, center) < radius;
 }
 
+bool Math::IsTwoLineParallel(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1)
+{
+	float denominatorX = (e1.y - s1.y) * (e0.x - s0.x) - (e0.y - s0.y) * (e1.x - s1.x),
+		  denominatorY = (e1.x - s1.x) * (e0.y - s0.y) - (e0.x - s0.x) * (e1.y - s1.y);
+	return fabs(denominatorX) < FLT_EPSILON || fabs(denominatorY) < FLT_EPSILON;
+}
+
+bool Math::IsTwoLineIntersect(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1)
+{
+	return isPointAtSegmentLeft(s0, s1, e1) != isPointAtSegmentLeft(e0, s1, e1)
+		&& isPointAtSegmentLeft(s1, s0, e0) != isPointAtSegmentLeft(e1, s0, e0);
+}
+
 int Math::checkPosInTriangle(const Vector& p, const Vector& t0, const Vector& t1, const Vector& t2)
 {
 	if (isTheSamePos(p, t0) || isTheSamePos(p, t1) || isTheSamePos(p, t2))
@@ -301,6 +314,45 @@ float Math::getLineAngle(const Vector& s, const Vector& e)
 	const float ang = getAngle(s, e, other);
 	if (f2Cross(other - s, e - s) > 0) return ang;
 	else return -ang;
+}
+
+float Math::GetPolygonArea(const std::vector<Vector>& polygon)
+{
+	if(polygon.size() < 3)
+		return 0;
+
+	float s = 0;
+	for(int i = 0, n = polygon.size(); i < n; i++) {
+		int next = (i+1)%n;
+		s += (polygon[i].y + polygon[next].y) * (polygon[i].x - polygon[next].x);		
+	}
+
+	return fabs(s/2.0f);
+}
+
+float Math::GetTriangleArea(const Vector& p0, const Vector& p1, const Vector& p2)
+{
+	float s = 0;
+	s += (p1.y + p0.y) * (p1.x - p0.x);
+	s += (p2.y + p1.y) * (p2.x - p1.x);
+	s += (p0.y + p2.y) * (p0.x - p2.x);
+	return fabs(s/2.0f);
+}
+
+bool Math::GetTwoLineCross(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1, Vector* cross)
+{
+	// If they are parallel ?
+	float denominatorX = (e1.y - s1.y) * (e0.x - s0.x) - (e0.y - s0.y) * (e1.x - s1.x),
+		  denominatorY = (e1.x - s1.x) * (e0.y - s0.y) - (e0.x - s0.x) * (e1.y - s1.y);
+	if (fabs(denominatorX) < FLT_EPSILON || fabs(denominatorY) < FLT_EPSILON)
+	{
+		cross->x = cross->y = FLT_MAX;
+		return false;
+	} else {
+		cross->x = ( (e0.x * s0.y - s0.x * e0.y) * (e1.x - s1.x) - (e1.x * s1.y - s1.x * e1.y) * (e0.x - s0.x) ) / denominatorX;
+		cross->y = ( (e0.y * s0.x - s0.y * e0.x) * (e1.y - s1.y) - (e1.y * s1.x - s1.y * e1.x) * (e0.y - s0.y) ) / denominatorY;
+		return true;
+	}
 }
 
 int Math::testPointOnSection(const Vector& startPos, const Vector& endPos, const Vector& thdPos, float tolerance/* = FLT_EPSILON*/)

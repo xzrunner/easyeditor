@@ -97,6 +97,9 @@ namespace d2d
 
 		static bool isPointInCircle(const Vector& pos, const Vector& center, float radius);
 
+		static bool IsTwoLineParallel(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1);
+		static bool IsTwoLineIntersect(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1);
+
 		// To check if the point in the triangle.
 		// return: [0] p is on the edge t0-t1		[1] p is on the edge t1-t2
 		//		   [2] p is on the edge t2-t0
@@ -162,6 +165,13 @@ namespace d2d
 		static float getAngleInDirection(const Vector& center, const Vector& start, const Vector& end);
 
 		static float getLineAngle(const Vector& s, const Vector& e);
+
+		static float GetPolygonArea(const std::vector<Vector>& polygon);
+		static float GetTriangleArea(const Vector& p0, const Vector& p1, const Vector& p2);
+
+		// Get the cross point of two segment.
+		// If they are not crossed, direct return false withnot compute the cross point.
+		static bool GetTwoLineCross(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1, Vector* cross);
 
 		//////////////////////////////////////////////////////////////////////////
 		//

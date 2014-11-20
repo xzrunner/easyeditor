@@ -16,8 +16,10 @@ public:
 	virtual bool onDraw() const;
 
 private:
-	std::vector<d2d::Vector> m_bound;
-	std::vector<d2d::Vector> m_bound_points;
+	std::vector<d2d::Vector> m_raw_bound_line;
+	std::vector<d2d::Vector> m_raw_bound_points;
+
+	std::vector<d2d::Vector> m_fine_bound_line;
 
 	friend class AutoCutCMPT;
 
