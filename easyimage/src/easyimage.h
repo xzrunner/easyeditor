@@ -3,6 +3,7 @@
 
 #include "libimage/ImageProcessor.h"
 #include "libimage/PixelsTools.h"
-#include "libimage/BoundaryExtraction.h"
+#include "libimage/ExtractOutlineRaw.h"
+#include "libimage/ExtractOutlineFine.h"
 
 #endif // _EASYIMAGE_H_

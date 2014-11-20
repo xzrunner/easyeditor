@@ -145,14 +145,26 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath="..\..\..\src\libimage\BoundaryExtraction.cpp"
+		<Filter
+			Name="outline"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libimage\BoundaryExtraction.h"
-			>
-		</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ExtractOutlineFine.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ExtractOutlineFine.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ExtractOutlineRaw.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ExtractOutlineRaw.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyimage.h"
 			>

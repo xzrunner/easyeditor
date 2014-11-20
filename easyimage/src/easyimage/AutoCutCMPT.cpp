@@ -36,10 +36,15 @@ void AutoCutCMPT::CreateSymbolEdge(wxCommandEvent& event)
 	const d2d::Image* img = img_sprite->getSymbol().getImage();
 
 	AutoCutOP* op = static_cast<AutoCutOP*>(m_editOP);
-	BoundaryExtraction be(*img);
-	be.GetRawBoundaryLine(op->m_raw_bound_line);
-	be.GetRawBoundaryPoints(op->m_raw_bound_points);
-	be.GetFineBoundaryLine(op->m_raw_bound_line, op->m_fine_bound_line, 0.05f);
+	ExtractOutlineRaw raw(*img);
+	raw.Trigger();
+	op->m_raw_bound_line = raw.GetBorderLine();
+	op->m_raw_bound_points = raw.GetBorderPoints();
+	op->m_raw_bound_line_merged = raw.GetBorderLineMerged();
+
+	ExtractOutlineFine fine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
+	fine.Trigger(0.05f);
+	op->m_fine_bound_line = fine.GetResult();
 
 	m_editPanel->Refresh();
 }
