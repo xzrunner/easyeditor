@@ -52,6 +52,9 @@ wxSizer* AutoCutCMPT::initLayout()
 
 void AutoCutCMPT::Trigger(wxCommandEvent& event)
 { 
+// 	// step by step
+// 	static int max_count = 5;
+
 	const d2d::ISprite* sprite = m_stage->getImage();
  	const d2d::ImageSprite* img_sprite 
  		= dynamic_cast<const d2d::ImageSprite*>(sprite);
@@ -67,6 +70,7 @@ void AutoCutCMPT::Trigger(wxCommandEvent& event)
 
  	ExtractOutlineFine fine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
  	fine.Trigger(TOLERANCE);
+//	fine.Trigger(TOLERANCE, max_count++);
  	op->m_fine_bound_line = fine.GetResult();
  
  	m_editPanel->Refresh();

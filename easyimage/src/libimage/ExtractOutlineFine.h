@@ -13,6 +13,7 @@ public:
 		const std::vector<d2d::Vector>& raw_border_merged);
 
 	void Trigger(float tolerance);
+	void Trigger(float tolerance, int max_count);
 
 	void CreateOutline(float tolerance, int max_count);
 	void ReduceOutlineCount(float tolerance);
@@ -25,8 +26,7 @@ private:
 	void OutlineByAddNode(float tolerance, int max_count, bool reduce_count);
 
 	void RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& new1, float& decrease) const;
-	void AddOneNode(int idx, float r_decrease, d2d::Vector& new_start, d2d::Vector& new_end, 
-		d2d::Vector& new_node, float& decrease) const;
+	void AddOneNode(int idx, d2d::Vector& new_start, d2d::Vector& new_end, d2d::Vector& new_node, float& decrease) const;
 
 	bool IsCutTriLegal(const d2d::Vector& p0, const d2d::Vector& p1, const d2d::Vector& p2) const;
 	bool IsAddTriLeagal(const d2d::Vector& start, const d2d::Vector& end, const d2d::Vector& center) const;
