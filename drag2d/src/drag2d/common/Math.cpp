@@ -82,6 +82,27 @@ bool Math::isSegmentIntersectRect(float lx1, float ly1, float lx2, float ly2,
 	return false;
 }
 
+bool Math::IsSegmentIntersectPolyline(const Vector& start, const Vector& end, 
+									  const std::vector<Vector>& polyline)
+{
+	if (polyline.size() < 2) {
+		return false;
+	}
+
+	for (int i = 0, n = polyline.size() - 1; i < n; ++i) {
+		const d2d::Vector& s = polyline[i];
+		const d2d::Vector& e = polyline[i+1];
+		if (d2d::Math::IsTwoLineIntersect(s, e, start, end)) {
+			return true;
+		}
+	}
+	if (polyline.size() > 2 && 
+		d2d::Math::IsTwoLineIntersect(polyline[0], polyline[polyline.size()-1], start, end)) {
+		return true;
+	}
+	return false;
+}
+
 bool Math::isPolylineIntersectRect(const std::vector<Vector>& polyline, bool isLoop, const Rect& aabb)
 {
 	if (polyline.size() < 2) return false;

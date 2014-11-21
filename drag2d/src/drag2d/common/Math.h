@@ -72,6 +72,8 @@ namespace d2d
 		{
 			return isSegmentIntersectRect(b.x, b.y, e.x, e.y, aabb.xMin, aabb.yMin, aabb.xMax, aabb.yMax);
 		}
+		static bool IsSegmentIntersectPolyline(const Vector& start, const Vector& end, 
+			const std::vector<Vector>& polyline);
 
 		static bool isPolylineIntersectRect(const std::vector<Vector>& polyline, bool isLoop, const Rect& aabb);
 

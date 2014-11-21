@@ -4,7 +4,7 @@ namespace eimage
 {
 
 static const int STEPS_COUNT = 3;
-static const float STEPS[] = {1/8.0f, 1/16.0f, 1/32.0f};
+static const float STEPS[STEPS_COUNT] = {1/8.0f, 1/16.0f, 1/32.0f};
 
 ExtractOutlineFine::ExtractOutlineFine(const std::vector<d2d::Vector>& raw_border, 
 									   const std::vector<d2d::Vector>& raw_border_merged)
@@ -13,7 +13,7 @@ ExtractOutlineFine::ExtractOutlineFine(const std::vector<d2d::Vector>& raw_borde
 {
 }
 
-void ExtractOutlineFine::Trigger(float tolerance)
+void ExtractOutlineFine::Trigger(float tolerance, int max_count)
 {
 	m_fine_border.clear();
 
@@ -99,7 +99,9 @@ void ExtractOutlineFine::Trigger(float tolerance)
 				success = true;
 			}
 		}
-	} while (success && m_fine_border.size() < 8);
+
+		// 
+	} while (success && m_fine_border.size() < max_count);
 }
 
 void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& new1, float& decrease) const
@@ -109,6 +111,11 @@ void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& 
 	const d2d::Vector& curr = m_fine_border[idx];
 	const d2d::Vector& prev = m_fine_border[(idx-1)%m_fine_border.size()];
 	const d2d::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
+	d2d::Vector s0 = curr - prev, s1 = next - curr;
+	if (f2Cross(s0, s1) >= 0) {
+		return;
+	}
+
 	float len_prev = d2d::Math::getDistance(curr, prev),
 		len_next = d2d::Math::getDistance(curr, next);
 	float area_max = 0;
@@ -139,27 +146,34 @@ void ExtractOutlineFine::AddOneNode(int idx, float r_decrease, d2d::Vector& new_
 	decrease = 0;
 	const d2d::Vector& curr = m_fine_border[idx];
 	const d2d::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
-	float max_score = 0;
+	float best_score = 0;
 	d2d::Vector best_node;
 	// init region
-	float start_scale = 0, end_scale = 1;
+	float best_start_scale, best_end_scale;
 	assert(STEPS_COUNT > 0);
 	float step = STEPS[0];
-	for ( ; start_scale < 1; start_scale += step) {
+	for (float start_scale = 0; start_scale < 1; start_scale += step) {
 		d2d::Vector start_pos = curr + (next-curr)*start_scale;
-		for ( ; end_scale > start_scale; end_scale -= step) {
+		for (float end_scale = 1; end_scale > start_scale; end_scale -= step) {
 			d2d::Vector end_pos = curr + (next-curr)*end_scale;
 			d2d::Vector mid_pos;
 			float score;
 			MidPosExplore(start_pos, end_pos, mid_pos, score);
-			if (score > max_score) {
-				max_score = score;
+			if (score > best_score) {
+				best_score = score;
 				best_node = mid_pos;
+				best_start_scale = start_scale;
+				best_end_scale = end_scale;
 			}
 		}
 	}
 	// refine region
-
+	StartPosExplore(curr, next, best_start_scale, best_end_scale, best_node, best_score);
+	
+	new_start = curr + (next-curr)*best_start_scale;
+	new_end = curr + (next-curr)*best_end_scale;
+	new_node = best_node;
+	decrease = best_score;
 }
 
 //void ExtractOutlineFine::AddOneNode(int idx, float r_decrease, d2d::Vector& new_start,
@@ -214,75 +228,75 @@ bool ExtractOutlineFine::IsSegmentLegal(const d2d::Vector& p0, const d2d::Vector
 	return true;
 }
 
-bool ExtractOutlineFine::IsSegmentLegalNew(const d2d::Vector& s0, const d2d::Vector& e0, 
-										   const d2d::Vector& s1, const d2d::Vector& e1) const
+bool ExtractOutlineFine::IsSegmentLegalNew(const d2d::Vector& start, const d2d::Vector& end, 
+										   const d2d::Vector& center) const
 {
 	for (int i = 0, n = m_raw_border_merged.size(); i < n; ++i) {
-		const d2d::Vector& s = m_raw_border_merged[i];
-		const d2d::Vector& e = m_raw_border_merged[(i+1)%m_raw_border_merged.size()];
-		if (d2d::Math::IsTwoLineIntersect(s, e, s0, e0) || d2d::Math::IsTwoLineIntersect(s, e, s1, e1)) {
+		if (d2d::Math::isPointInTriangle(m_raw_border_merged[i], start, end, center)) {
 			return false;
 		}
+	}
+	if (d2d::Math::IsSegmentIntersectPolyline(start, center, m_raw_border_merged) ||
+		d2d::Math::IsSegmentIntersectPolyline(end, center, m_raw_border_merged)) {
+		return false;
+	}
+	if (d2d::Math::IsSegmentIntersectPolyline(start, center, m_fine_border) ||
+		d2d::Math::IsSegmentIntersectPolyline(end, center, m_fine_border)) {
+		return false;
 	}
 	return true;
 }
 
-void ExtractOutlineFine::EndPosExplore(const d2d::Vector& p0, const d2d::Vector& p1, float start_scale, 
-									   float& end_scale, d2d::Vector& mid, float& score) const
+// 已经是算出来的
+void ExtractOutlineFine::StartPosExplore(const d2d::Vector& p0, const d2d::Vector& p1, 
+										 float& start_scale, float& end_scale, 
+										 d2d::Vector& mid, float& score) const
 {
-	d2d::Vector start_pos = p0 + (p1-p0)*start_scale,
-		end_pos = p0 + (p1-p0)*end_scale;
-	float best_end_scale = end_scale;
-	float best_score;
-	d2d::Vector best_mid;
-	MidPosExplore(start_pos, end_pos, best_mid, best_score);
-
-	for (int i = 1; i < STEPS_COUNT; ++i)
+	for (int s = 1; s < STEPS_COUNT; ++s)
 	{
-		float step = STEPS[i];
+		float step = STEPS[s];
+
 		// sub
-		float sub_end_scale = end_scale - step;
+		float sub_start_scale = start_scale - step;
+		float sub_end_scale = end_scale;
 		float sub_score = 0;
 		d2d::Vector sub_mid;
-		if (sub_end_scale <= 1 && sub_end_scale > start_scale) {
-			d2d::Vector e = p0 + (p1-p0)*sub_end_scale;
-			MidPosExplore(start_pos, e, sub_mid, sub_score);
+		if (sub_start_scale <= 1 && sub_start_scale < end_scale) {
+			EndPosExplore(step, p0, p1, sub_start_scale, sub_end_scale, sub_mid, sub_score);
 		}
 		// add
-		float add_end_scale = end_scale + step;
+		float add_start_scale = start_scale + step;
+		float add_end_scale = end_scale;
 		float add_score = 0;
 		d2d::Vector add_mid;
-		if (add_end_scale <= 1 && add_end_scale > start_scale) {
-			d2d::Vector e = p0 + (p1-p0)*add_end_scale;
-			MidPosExplore(start_pos, e, add_mid, add_score);
+		if (add_start_scale <= 1 && add_start_scale < end_scale) {
+			EndPosExplore(step, p0, p1, add_start_scale, add_end_scale, add_mid, add_score);
 		}
-		// final
-		if (sub_score <= best_score && add_score <= best_score) {
-			continue;
-		} else if (sub_score > best_score) {
-			step = -STEPS[i];
-			best_end_scale = sub_end_scale;
-			best_score = sub_score;
-			best_mid = sub_mid;
+		// decide direction
+		if (sub_score <= score && add_score <= score) {
+			return;
+		} else if (sub_score > score) {
+			step = -STEPS[s];
+			start_scale = sub_start_scale;
+			end_scale = sub_end_scale;
+			score = sub_score;
+			mid = sub_mid;
 		} else {
-			step = STEPS[i];
-			best_end_scale = add_end_scale;
-			best_score = add_score;
-			best_mid = add_mid;
+			step = STEPS[s];
+			start_scale = add_start_scale;
+			end_scale = add_end_scale;
+			score = add_score;
+			mid = add_mid;
 		}
-
-		float curr_end_scale = best_end_scale + step;
-		while (curr_end_scale <= 1 && curr_end_scale > start_scale)
+		// go on
+		float curr_start_scale = end_scale + step;
+		while (curr_start_scale <= 1 && curr_start_scale < end_scale)
 		{
-			float curr_score = 0;
-			d2d::Vector curr_mid;
-			d2d::Vector e = p0 + (p1-p0)*curr_end_scale;
-			MidPosExplore(start_pos, e, curr_mid, curr_score);
-			if (curr_score > best_score) {
-				best_end_scale = curr_end_scale;
-				best_score = curr_score;
-				best_mid = curr_mid;
-				curr_end_scale += step;
+			float old_score = score;
+			EndPosExplore(step, p0, p1, curr_start_scale, end_scale, mid, score);
+			if (score > old_score) {
+				start_scale = curr_start_scale;
+				curr_start_scale += step;
 			} else {
 				break;
 			}
@@ -290,10 +304,114 @@ void ExtractOutlineFine::EndPosExplore(const d2d::Vector& p0, const d2d::Vector&
 	}
 }
 
+// 参数的score没算出
+void ExtractOutlineFine::EndPosExplore(float step, const d2d::Vector& p0, const d2d::Vector& p1, float start_scale, 
+									   float& end_scale, d2d::Vector& mid, float& score) const
+{
+ 	d2d::Vector start_pos = p0 + (p1-p0)*start_scale,
+ 		end_pos = p0 + (p1-p0)*end_scale;
+	float curr_score;
+	MidPosExplore(start_pos, end_pos, mid, curr_score);
+	if (curr_score <= score) {
+		return;
+	} else {
+		score = curr_score;
+	}
+
+	float curr_step = step;
+	// sub
+	float sub_end_scale = end_scale - curr_step;
+	float sub_score = 0;
+	d2d::Vector sub_mid;
+	if (sub_end_scale <= 1 && sub_end_scale > start_scale) {
+		d2d::Vector e = p0 + (p1-p0)*sub_end_scale;
+		MidPosExplore(start_pos, e, sub_mid, sub_score);
+	}
+	// add
+	float add_end_scale = end_scale + curr_step;
+	float add_score = 0;
+	d2d::Vector add_mid;
+	if (add_end_scale <= 1 && add_end_scale > start_scale) {
+		d2d::Vector e = p0 + (p1-p0)*add_end_scale;
+		MidPosExplore(start_pos, e, add_mid, add_score);
+	}
+	// decide direction
+	if (sub_score <= score && add_score <= score) {
+		return;
+	} else if (sub_score > score) {
+		curr_step = -step;
+		end_scale = sub_end_scale;
+		score = sub_score;
+		mid = sub_mid;
+	} else {
+		curr_step = step;
+		end_scale = add_end_scale;
+		score = add_score;
+		mid = add_mid;
+	}
+	// go on
+	float curr_end_scale = end_scale + curr_step;
+	while (curr_end_scale <= 1 && curr_end_scale > start_scale)
+	{
+		float curr_score;
+		d2d::Vector e = p0 + (p1-p0)*curr_end_scale;
+		MidPosExplore(start_pos, e, mid, curr_score);
+		if (curr_score > score) {
+			score = curr_score;
+			end_scale = curr_end_scale;
+			curr_end_scale += curr_step;
+		} else {
+			break;
+		}
+	}
+}
+
 void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vector& end, 
 									   d2d::Vector& mid, float& score) const
 {
-	
+	// order
+	// 3 4 5
+	// 2   6
+	// 1 0 7
+	static const int DIR_COUNT = 8;
+	static const d2d::Vector DIRS[DIR_COUNT] = {
+		d2d::Vector( 0, -1),
+		d2d::Vector(-1, -1),
+		d2d::Vector(-1,  0),
+		d2d::Vector(-1,  1),
+		d2d::Vector( 0,  1),
+		d2d::Vector( 1,  1),
+		d2d::Vector( 1,  0),
+		d2d::Vector( 1, -1),
+	};
+
+	static const int STEPS_COUNT = 6;
+	static const float STEPS[STEPS_COUNT] = {128, 64, 32, 16, 8, 4};
+
+	mid = (start + end) * 0.5f;
+	score = 0;
+	for (int i = 0; i < STEPS_COUNT; ++i) {
+		float step = STEPS[i];
+
+		while (true)
+		{
+			float old_score = score;
+			for (int j = 0; j < DIR_COUNT; ++j) {
+				d2d::Vector offset = DIRS[j] * step;
+				d2d::Vector curr_mid = mid + offset;
+				if (d2d::Math::isPointInArea(curr_mid, m_fine_border)) {
+					float area = d2d::Math::GetTriangleArea(start, curr_mid, end);
+					if (area > score && IsSegmentLegalNew(start, end, curr_mid)) {
+						score = area;
+						mid = curr_mid;
+					}
+				}
+			}
+			if (score <= old_score) {
+				break;
+			}
+		}
+	}
 }
 
 }
