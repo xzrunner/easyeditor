@@ -8,6 +8,9 @@ namespace eimage
 
 class StagePanel;
 
+class ExtractOutlineRaw;
+class ExtractOutlineFine;
+
 class AutoCutCMPT : public d2d::AbstractEditCMPT
 {
 public:
@@ -18,10 +21,16 @@ protected:
 	virtual wxSizer* initLayout();
 
 private:
-	void CreateSymbolEdge(wxCommandEvent& event);
+	void Trigger(wxCommandEvent& event);
+
+	void CreateOutline(wxCommandEvent& event);
+	void ReduceOutlineCount(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;
+
+	ExtractOutlineRaw* m_raw;
+	ExtractOutlineFine* m_fine;
 
 }; // AutoCutCMPT
 

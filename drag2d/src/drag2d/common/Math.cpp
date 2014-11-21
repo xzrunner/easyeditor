@@ -92,12 +92,17 @@ bool Math::IsSegmentIntersectPolyline(const Vector& start, const Vector& end,
 	for (int i = 0, n = polyline.size() - 1; i < n; ++i) {
 		const d2d::Vector& s = polyline[i];
 		const d2d::Vector& e = polyline[i+1];
-		if (d2d::Math::IsTwoLineIntersect(s, e, start, end)) {
+		if (d2d::Math::IsTwoLineIntersect(s, e, start, end) &&
+			s != start && s != end && e != start && e != end) {
 			return true;
 		}
 	}
+
+	const d2d::Vector& s = polyline[0];
+	const d2d::Vector& e = polyline[polyline.size()-1];
 	if (polyline.size() > 2 && 
-		d2d::Math::IsTwoLineIntersect(polyline[0], polyline[polyline.size()-1], start, end)) {
+		d2d::Math::IsTwoLineIntersect(s, e, start, end) &&
+		s != start && s != end && e != start && e != end) {
 		return true;
 	}
 	return false;
