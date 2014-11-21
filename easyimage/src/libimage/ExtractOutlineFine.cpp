@@ -3,6 +3,9 @@
 namespace eimage
 {
 
+static const int STEPS_COUNT = 3;
+static const float STEPS[] = {1/8.0f, 1/16.0f, 1/32.0f};
+
 ExtractOutlineFine::ExtractOutlineFine(const std::vector<d2d::Vector>& raw_border, 
 									   const std::vector<d2d::Vector>& raw_border_merged)
 	: m_raw_border(raw_border)
@@ -129,40 +132,70 @@ void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& 
 	}
 }
 
+// todo Ì«Ð¡±ßµÄÌ½Ë÷¾¡¿ìÖÕÖ¹µô
 void ExtractOutlineFine::AddOneNode(int idx, float r_decrease, d2d::Vector& new_start,
 									d2d::Vector& new_end, d2d::Vector& new_node, float& decrease) const
 {
 	decrease = 0;
 	const d2d::Vector& curr = m_fine_border[idx];
 	const d2d::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
-	float len = d2d::Math::getDistance(curr, next);
-	for (float idx_s = 0; idx_s < len; idx_s+=5) {
-		d2d::Vector s = curr + (next-curr)*(idx_s/len);
-		for (float idx_e = 0; idx_e < len-idx_s; idx_e+=5) {
-			d2d::Vector e = next + (curr-next)*(idx_e/len);
-			// todo new_node not need to traverse all raw_border
-			for (int i = 0, n = m_raw_border.size(); i < n; ++i) {
-				const d2d::Vector& _new = m_raw_border[i];
-				float a = d2d::Math::GetTriangleArea(s, _new, e);
-				if (a > decrease && a > r_decrease) {
-					//					if (IsSegmentLegal(m_raw_border, s, _new, e)) {
-
-					d2d::Vector c = d2d::Math::getTriGravityCenter(s, e, _new);
-					if (!d2d::Math::isPointInArea(c, m_fine_border)) {
-						continue;
-					}
-
-					if (IsSegmentLegalNew(s, _new, e, _new)) {
-						decrease = a;
-						new_start = s;
-						new_end = e;
-						new_node = _new;
-					}
-				}
+	float max_score = 0;
+	d2d::Vector best_node;
+	// init region
+	float start_scale = 0, end_scale = 1;
+	assert(STEPS_COUNT > 0);
+	float step = STEPS[0];
+	for ( ; start_scale < 1; start_scale += step) {
+		d2d::Vector start_pos = curr + (next-curr)*start_scale;
+		for ( ; end_scale > start_scale; end_scale -= step) {
+			d2d::Vector end_pos = curr + (next-curr)*end_scale;
+			d2d::Vector mid_pos;
+			float score;
+			MidPosExplore(start_pos, end_pos, mid_pos, score);
+			if (score > max_score) {
+				max_score = score;
+				best_node = mid_pos;
 			}
 		}
 	}
+	// refine region
+
 }
+
+//void ExtractOutlineFine::AddOneNode(int idx, float r_decrease, d2d::Vector& new_start,
+//									d2d::Vector& new_end, d2d::Vector& new_node, float& decrease) const
+//{
+//	decrease = 0;
+//	const d2d::Vector& curr = m_fine_border[idx];
+//	const d2d::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
+//	float len = d2d::Math::getDistance(curr, next);
+//	for (float idx_s = 0; idx_s < len; idx_s+=5) {
+//		d2d::Vector s = curr + (next-curr)*(idx_s/len);
+//		for (float idx_e = 0; idx_e < len-idx_s; idx_e+=5) {
+//			d2d::Vector e = next + (curr-next)*(idx_e/len);
+//			// todo new_node not need to traverse all raw_border
+//			for (int i = 0, n = m_raw_border.size(); i < n; ++i) {
+//				const d2d::Vector& _new = m_raw_border[i];
+//				float a = d2d::Math::GetTriangleArea(s, _new, e);
+//				if (a > decrease && a > r_decrease) {
+//					//					if (IsSegmentLegal(m_raw_border, s, _new, e)) {
+//
+//					d2d::Vector c = d2d::Math::getTriGravityCenter(s, e, _new);
+//					if (!d2d::Math::isPointInArea(c, m_fine_border)) {
+//						continue;
+//					}
+//
+//					if (IsSegmentLegalNew(s, _new, e, _new)) {
+//						decrease = a;
+//						new_start = s;
+//						new_end = e;
+//						new_node = _new;
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
 
 bool ExtractOutlineFine::IsSegmentLegal(const d2d::Vector& p0, const d2d::Vector& p1, 
 										const d2d::Vector& p2) const
@@ -192,6 +225,75 @@ bool ExtractOutlineFine::IsSegmentLegalNew(const d2d::Vector& s0, const d2d::Vec
 		}
 	}
 	return true;
+}
+
+void ExtractOutlineFine::EndPosExplore(const d2d::Vector& p0, const d2d::Vector& p1, float start_scale, 
+									   float& end_scale, d2d::Vector& mid, float& score) const
+{
+	d2d::Vector start_pos = p0 + (p1-p0)*start_scale,
+		end_pos = p0 + (p1-p0)*end_scale;
+	float best_end_scale = end_scale;
+	float best_score;
+	d2d::Vector best_mid;
+	MidPosExplore(start_pos, end_pos, best_mid, best_score);
+
+	for (int i = 1; i < STEPS_COUNT; ++i)
+	{
+		float step = STEPS[i];
+		// sub
+		float sub_end_scale = end_scale - step;
+		float sub_score = 0;
+		d2d::Vector sub_mid;
+		if (sub_end_scale <= 1 && sub_end_scale > start_scale) {
+			d2d::Vector e = p0 + (p1-p0)*sub_end_scale;
+			MidPosExplore(start_pos, e, sub_mid, sub_score);
+		}
+		// add
+		float add_end_scale = end_scale + step;
+		float add_score = 0;
+		d2d::Vector add_mid;
+		if (add_end_scale <= 1 && add_end_scale > start_scale) {
+			d2d::Vector e = p0 + (p1-p0)*add_end_scale;
+			MidPosExplore(start_pos, e, add_mid, add_score);
+		}
+		// final
+		if (sub_score <= best_score && add_score <= best_score) {
+			continue;
+		} else if (sub_score > best_score) {
+			step = -STEPS[i];
+			best_end_scale = sub_end_scale;
+			best_score = sub_score;
+			best_mid = sub_mid;
+		} else {
+			step = STEPS[i];
+			best_end_scale = add_end_scale;
+			best_score = add_score;
+			best_mid = add_mid;
+		}
+
+		float curr_end_scale = best_end_scale + step;
+		while (curr_end_scale <= 1 && curr_end_scale > start_scale)
+		{
+			float curr_score = 0;
+			d2d::Vector curr_mid;
+			d2d::Vector e = p0 + (p1-p0)*curr_end_scale;
+			MidPosExplore(start_pos, e, curr_mid, curr_score);
+			if (curr_score > best_score) {
+				best_end_scale = curr_end_scale;
+				best_score = curr_score;
+				best_mid = curr_mid;
+				curr_end_scale += step;
+			} else {
+				break;
+			}
+		}
+	}
+}
+
+void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vector& end, 
+									   d2d::Vector& mid, float& score) const
+{
+	
 }
 
 }

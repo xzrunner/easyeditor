@@ -22,9 +22,16 @@ private:
 	void RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& new1, float& decrease) const;
 	void AddOneNode(int idx, float r_decrease, d2d::Vector& new_start, d2d::Vector& new_end, 
 		d2d::Vector& new_node, float& decrease) const;
+
 	bool IsSegmentLegal(const d2d::Vector& p0, const d2d::Vector& p1, const d2d::Vector& p2) const;
 	bool IsSegmentLegalNew(const d2d::Vector& s0, const d2d::Vector& e0, 
 		const d2d::Vector& s1, const d2d::Vector& e1) const;
+
+	void StartPosExplore(const d2d::Vector& p0, const d2d::Vector& p1);
+	void EndPosExplore(const d2d::Vector& p0, const d2d::Vector& p1, float start_scale, 
+		float& end_scale, d2d::Vector& mid, float& score) const;
+	void MidPosExplore(const d2d::Vector& start, const d2d::Vector& end, 
+		d2d::Vector& mid, float& score) const;
 
 private:
 	const std::vector<d2d::Vector>& m_raw_border;
