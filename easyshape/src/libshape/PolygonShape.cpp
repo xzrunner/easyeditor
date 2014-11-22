@@ -35,6 +35,17 @@ PolygonShape* PolygonShape::clone() const
 	return new PolygonShape(*this);
 }
 
+void PolygonShape::Translate(const d2d::Vector& offset)
+{
+	ChainShape::Translate(offset);
+	for (int i = 0, n = m_fillingVertices.size(); i < n; ++i) {
+		m_fillingVertices[i] += offset;
+	}
+	for (int i = 0, n = m_fillingTexCoords.size(); i < n; ++i) {
+		m_fillingTexCoords[i] += offset;
+	}
+}
+
 void PolygonShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_fillingType == e_Color) {

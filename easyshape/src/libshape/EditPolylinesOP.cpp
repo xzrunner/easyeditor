@@ -67,7 +67,7 @@ bool EditPolylinesOP::onDraw() const
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
 		itr->second->draw(d2d::Colorf(0.8f, 0.8f, 0.2f));
-		d2d::PrimitiveDraw::drawCircles(itr->second->getVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
+		d2d::PrimitiveDraw::drawCircles(itr->second->GetVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 
 	return false;
@@ -88,8 +88,8 @@ void EditPolylinesOP::simplify()
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
 		std::vector<d2d::Vector> simplified;
-		d2d::DouglasPeucker::implement(itr->first->getVertices(), m_cmpt->getSimplifyThreshold(), simplified);
-		itr->second->setVertices(simplified);
+		d2d::DouglasPeucker::implement(itr->first->GetVertices(), m_cmpt->getSimplifyThreshold(), simplified);
+		itr->second->Load(simplified);
 	}
 
 	m_editPanel->Refresh();
@@ -99,7 +99,7 @@ void EditPolylinesOP::updateFromSimplified()
 {
 	std::map<ChainShape*, ChainShape*>::iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
-		itr->first->setVertices(itr->second->getVertices());
+		itr->first->Load(itr->second->GetVertices());
 
 	m_editPanel->Refresh();
 }
@@ -162,12 +162,7 @@ void EditPolylinesOP::OffsetVisitor::
 visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
-
-	std::vector<d2d::Vector> to(chain->getVertices());
-	for (size_t i = 0, n = to.size(); i < n; ++i)
-		to[i] += m_offset;
-	chain->setVertices(to);
-
+	chain->Translate(m_offset);
 	bFetchNext = true;
 }
 

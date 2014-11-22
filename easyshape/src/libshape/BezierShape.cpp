@@ -6,27 +6,25 @@ namespace libshape
 
 BezierShape::BezierShape(const BezierShape& bezier)
 {
-	for (size_t i = 0; i < 4; ++i)
-		points[i] = bezier.points[i];
+	CopyCtrlNodes(bezier.m_control_nodes);
 	createCurve();
 }
 
 BezierShape::BezierShape(const d2d::Vector points[4])
 {
-	for (size_t i = 0; i < 4; ++i)
-		this->points[i] = points[i];
+	CopyCtrlNodes(points);
 	createCurve();
 }
 
 BezierShape::BezierShape(const d2d::Vector& start, const d2d::Vector& end)
 {
-	points[0] = start;
-	points[3] = end;
+	m_control_nodes[0] = start;
+	m_control_nodes[3] = end;
 
 	d2d::Vector mid = (start + end) * 0.5f;
 	d2d::Vector offset = (end - start) * 0.5f;
-	points[1] = mid + d2d::Math::rotateVectorRightAngle(offset, true);
-	points[2] = mid + d2d::Math::rotateVectorRightAngle(offset, false);
+	m_control_nodes[1] = mid + d2d::Math::rotateVectorRightAngle(offset, true);
+	m_control_nodes[2] = mid + d2d::Math::rotateVectorRightAngle(offset, false);
 
 	createCurve();
 }
@@ -44,10 +42,8 @@ BezierShape* BezierShape::clone() const
 bool BezierShape::isContain(const d2d::Vector& pos) const
 {
 	bool ret = false;
-	for (size_t i = 0; i < 4; ++i)
-	{
-		if (d2d::Math::getDistance(pos, points[i]) < RADIUS)
-		{
+	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
+		if (d2d::Math::getDistance(pos, m_control_nodes[i]) < RADIUS) {
 			ret = true;
 			break;
 		}
@@ -55,12 +51,20 @@ bool BezierShape::isContain(const d2d::Vector& pos) const
 	return ret;
 }
 
+void BezierShape::Translate(const d2d::Vector& offset)
+{
+	ChainShape::Translate(offset);
+	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
+		m_control_nodes[i] += offset;
+	}
+}
+
 void BezierShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	ChainShape::draw(color);
 
-	for (size_t i = 0; i < 4; ++i) {
-		d2d::PrimitiveDraw::rect(points[i], (float)RADIUS, (float)RADIUS, m_style);
+	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
+		d2d::PrimitiveDraw::rect(m_control_nodes[i], (float)RADIUS, (float)RADIUS, m_style);
 	}
 }
 
@@ -71,12 +75,43 @@ d2d::IPropertySetting* BezierShape::createPropertySetting(d2d::EditPanel* editPa
 
 void BezierShape::createCurve()
 {
-	const size_t num = std::max(20, (int)(d2d::Math::getDistance(points[0], points[3]) / 10));
+	const size_t num = std::max(20, (int)(d2d::Math::getDistance(m_control_nodes[0], m_control_nodes[3]) / 10));
 	float dt = 1.0f / (num - 1);
 	std::vector<d2d::Vector> vertices(num);
 	for (size_t i = 0; i < num; ++i)
 		vertices[i] = pointOnCubicBezier(i * dt);
-	setVertices(vertices);
+	Load(vertices);
+}
+
+void BezierShape::Mirror(bool x, bool y)
+{
+	float cx = getRect().xCenter();
+	float cy = getRect().yCenter();
+	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
+		if (x) {
+			m_control_nodes[i].x = cx * 2 - m_control_nodes[i].x;
+		}
+		if (y) {
+			m_control_nodes[i].y = cy * 2 - m_control_nodes[i].y;			
+		}
+	}
+}
+
+void BezierShape::MoveCtrlNode(const d2d::Vector& from, const d2d::Vector& to)
+{
+	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
+		if (m_control_nodes[i] == from) {
+			m_control_nodes[i] = to;
+			createCurve();
+		}
+	}
+}
+
+void BezierShape::CopyCtrlNodes(const d2d::Vector ctrl_points[])
+{
+	for (int i = 0; i < CTRL_NODE_COUNT; ++i) {
+		m_control_nodes[i] = ctrl_points[i];
+	}
 }
 
 d2d::Vector BezierShape::pointOnCubicBezier(float t)
@@ -86,19 +121,19 @@ d2d::Vector BezierShape::pointOnCubicBezier(float t)
 	float tSquared, tCubed;
 	d2d::Vector result;
 
-	cx = 3.0f * (points[1].x - points[0].x);
-	bx = 3.0f * (points[2].x - points[1].x) - cx;
-	ax = points[3].x - points[0].x - cx - bx;
+	cx = 3.0f * (m_control_nodes[1].x - m_control_nodes[0].x);
+	bx = 3.0f * (m_control_nodes[2].x - m_control_nodes[1].x) - cx;
+	ax = m_control_nodes[3].x - m_control_nodes[0].x - cx - bx;
 
-	cy = 3.0f * (points[1].y - points[0].y);
-	by = 3.0f * (points[2].y - points[1].y) - cy;
-	ay = points[3].y - points[0].y - cy - by;
+	cy = 3.0f * (m_control_nodes[1].y - m_control_nodes[0].y);
+	by = 3.0f * (m_control_nodes[2].y - m_control_nodes[1].y) - cy;
+	ay = m_control_nodes[3].y - m_control_nodes[0].y - cy - by;
 
 	tSquared = t * t;
 	tCubed = tSquared * t;
 
-	result.x = (ax * tCubed) + (bx * tSquared) + (cx * t) + points[0].x;
-	result.y = (ay * tCubed) + (by * tSquared) + (cy * t) + points[0].y;
+	result.x = (ax * tCubed) + (bx * tSquared) + (cx * t) + m_control_nodes[0].x;
+	result.y = (ay * tCubed) + (by * tSquared) + (cy * t) + m_control_nodes[0].y;
 
 	return result;
 }

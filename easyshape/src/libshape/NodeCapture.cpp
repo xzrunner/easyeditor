@@ -67,12 +67,11 @@ visit(BezierShape* bezier)
 	}
 
 	// capture control points
-	for (size_t i = 0; i < 4; ++i)
-	{
-		if (d2d::Math::getDistance(bezier->points[i], m_pos) < m_tolerance)
-		{
+	const d2d::Vector* ctrl_nodes = bezier->GetCtrlNode();
+	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
+		if (d2d::Math::getDistance(ctrl_nodes[i], m_pos) < m_tolerance) {
 			m_result.shape = bezier;
-			m_result.pos = bezier->points[i];
+			m_result.pos = ctrl_nodes[i];
 			return true;
 		}
 	}
@@ -99,7 +98,7 @@ visit(ChainShape* chain)
 	if (!chain->isIntersect(m_rect)) 
 		return false;
 
-	const std::vector<d2d::Vector>& vertices = chain->getVertices();
+	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		if (d2d::Math::getDistance(vertices[i], m_pos) < m_tolerance)

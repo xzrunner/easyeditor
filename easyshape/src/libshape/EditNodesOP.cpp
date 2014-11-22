@@ -19,7 +19,7 @@ bool EditNodesOP::onKeyDown(int keyCode)
 		{
 			SelectNodesOP::ChainSelectedNodes* selected = m_nodeSelection[i];
 			for (size_t j = 0, m = selected->selectedNodes.size(); j < m; ++j)
-				selected->chain->removeVertices(selected->selectedNodes[j]);
+				selected->chain->Remove(selected->selectedNodes[j]);
 		}
 	}
 
@@ -59,7 +59,7 @@ bool EditNodesOP::onMouseDrag(int x, int y)
 			{
 				const d2d::Vector& from = selected->selectedNodes[j];
 				d2d::Vector to = from + offset;
-				selected->chain->changeVertices(from, to);
+				selected->chain->Change(from, to);
 				selected->selectedNodes[j] = to;
 			}
 			selected->chain->refresh();
@@ -127,7 +127,7 @@ void EditNodesOP::updateModified()
 
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
 	{
-		const std::vector<d2d::Vector>& chain = m_buffer[i].src->chain->getVertices();
+		const std::vector<d2d::Vector>& chain = m_buffer[i].src->chain->GetVertices();
 		const std::vector<d2d::Vector>& src = m_buffer[i].src->selectedNodes;
 		const std::vector<d2d::Vector>& dst = m_buffer[i].dst;
 
@@ -155,7 +155,7 @@ void EditNodesOP::updateModified()
 		copy(dst.begin(), dst.end(), back_inserter(result));
 		copy(chain.begin() + end + 1, chain.end(), back_inserter(result));
 
-		m_buffer[i].src->chain->setVertices(result);
+		m_buffer[i].src->chain->Load(result);
 
 		chains.push_back(m_buffer[i].src->chain);
 		chainsDst.push_back(result);

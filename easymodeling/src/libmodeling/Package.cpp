@@ -61,7 +61,7 @@ void Paskage::packBody(const Body& data, std::ofstream& fout)
 			int type = dynamic_cast<libshape::PolygonShape*>(chain) ? e_polygon : e_chain;
 			fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-			const std::vector<d2d::Vector>& vertices = chain->getVertices();
+			const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 			size_t vSize = vertices.size();
 			fout.write(reinterpret_cast<const char*>(&vSize), sizeof(size_t));
 			for (size_t j = 0; j < vSize; ++j)

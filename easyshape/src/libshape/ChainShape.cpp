@@ -20,7 +20,7 @@ ChainShape::ChainShape(const std::vector<d2d::Vector>& vertices, bool isLoop)
 	: m_vertices(vertices)
 {
 	m_isLoop = isLoop;
-	initBounding();
+	InitBounding();
 }
 
 ChainShape* ChainShape::clone() const
@@ -77,6 +77,14 @@ bool ChainShape::isIntersect(const d2d::Rect& rect) const
 	return false;
 }
 
+void ChainShape::Translate(const d2d::Vector& offset)
+{
+	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
+		m_vertices[i] += offset;
+	}
+	m_rect.translate(offset);
+}
+
 void ChainShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
@@ -92,13 +100,13 @@ d2d::IPropertySetting* ChainShape::createPropertySetting(d2d::EditPanel* editPan
 	return new ChainPropertySetting(editPanel, this);
 }
 
-void ChainShape::insertVertices(size_t index, const d2d::Vector& pos)
+void ChainShape::Add(size_t index, const d2d::Vector& pos)
 {
 	if (index <= m_vertices.size())
 		m_vertices.insert(m_vertices.begin() + index, pos);
 }
 
-void ChainShape::removeVertices(const d2d::Vector& pos)
+void ChainShape::Remove(const d2d::Vector& pos)
 {
 	std::vector<d2d::Vector>::iterator itr = m_vertices.begin();
 	for ( ; itr != m_vertices.end(); ++itr) {
@@ -109,7 +117,7 @@ void ChainShape::removeVertices(const d2d::Vector& pos)
 	}
 }
 
-void ChainShape::changeVertices(const d2d::Vector& from, const d2d::Vector& to)
+void ChainShape::Change(const d2d::Vector& from, const d2d::Vector& to)
 {
 	size_t index = 0;
 	for (size_t n = m_vertices.size(); index < n; ++index)
@@ -123,19 +131,19 @@ void ChainShape::changeVertices(const d2d::Vector& from, const d2d::Vector& to)
 	m_vertices[index] = to;
 	if (from.x == m_rect.xMin || from.x == m_rect.xMax || 
 		from.y == m_rect.yMin || from.y == m_rect.yMax) {
-		initBounding();
+		InitBounding();
 	} else {
 		m_rect.combine(to);
 	}
 }
 
-void ChainShape::setVertices(const std::vector<d2d::Vector>& vertices)
+void ChainShape::Load(const std::vector<d2d::Vector>& vertices)
 {
 	m_vertices = vertices;
-	initBounding();
+	InitBounding();
 }
 
-void ChainShape::initBounding()
+void ChainShape::InitBounding()
 {
 	m_rect.makeInfinite();
 	for (size_t i = 0, n = m_vertices.size(); i < n; ++i)

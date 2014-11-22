@@ -247,7 +247,7 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
 			// love.physics.newPolygonShape(size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
-			const std::vector<d2d::Vector>& vertices = polygon->getVertices();
+			const std::vector<d2d::Vector>& vertices = polygon->GetVertices();
 			std::string strParams;
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 			{
@@ -263,8 +263,8 @@ void Love2dCode::resolveLoadFixtures(libmodeling::Body* body)
 		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
 			// love.physics.newChainShape(loop, size, x0, y0, x1, y1, x2, y2, ... , xn, yn)
-			std::string strParams = chain->isClosed() ? "true" : "false";
-			const std::vector<d2d::Vector>& vertices = chain->getVertices();
+			std::string strParams = chain->IsClosed() ? "true" : "false";
+			const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 			std::string size = wxString::FromDouble(vertices.size() * 2, 1);
 			strParams += ", "+size;
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)

@@ -29,6 +29,14 @@ CosineShape* CosineShape::clone() const
 	return new CosineShape(*this);	
 }
 
+void CosineShape::Translate(const d2d::Vector& offset)
+{
+	ChainShape::Translate(offset);
+	for (int i = 0, n = m_midPoints.size(); i < n; ++i) {
+		m_midPoints[i] += offset;
+	}
+}
+
 void CosineShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
@@ -49,19 +57,19 @@ d2d::IPropertySetting* CosineShape::createPropertySetting(d2d::EditPanel* editPa
 
 void CosineShape::insertVertices(size_t index, const d2d::Vector& pos)
 {
-	ChainShape::insertVertices(index, pos);
+	ChainShape::Add(index, pos);
 	setMidPoints();
 }
 
 void CosineShape::removeVertices(const d2d::Vector& pos)
 {
-	ChainShape::removeVertices(pos);
+	ChainShape::Remove(pos);
 	setMidPoints();
 }
 
 void CosineShape::changeVertices(const d2d::Vector& from, const d2d::Vector& to)
 {
-	ChainShape::changeVertices(from, to);
+	ChainShape::Change(from, to);
 	setMidPoints();
 }
 

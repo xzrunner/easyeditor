@@ -57,20 +57,14 @@ void PolygonPropertySetting::onPropertyGridChange(const wxString& name, const wx
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_poly->getRect().xCenter();
-		std::vector<d2d::Vector> vertices = m_poly->getVertices();
-		for (size_t i = 0, n = vertices.size(); i < n; ++i)
-			vertices[i].x += dx;
-		m_poly->setVertices(vertices);
+		m_poly->Translate(d2d::Vector(dx, 0.0f));
 		m_poly->refresh();
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_poly->getRect().yCenter();
-		std::vector<d2d::Vector> vertices = m_poly->getVertices();
-		for (size_t i = 0, n = vertices.size(); i < n; ++i)
-			vertices[i].y += dy;
-		m_poly->setVertices(vertices);
+		m_poly->Translate(d2d::Vector(0.0f, dy));
 		m_poly->refresh();
 	}
 	else if (name == wxT("Mirror"))
@@ -79,19 +73,19 @@ void PolygonPropertySetting::onPropertyGridChange(const wxString& name, const wx
 		if (type == 1)
 		{
 			float x = m_poly->getRect().xCenter();
-			std::vector<d2d::Vector> vertices = m_poly->getVertices();
+			std::vector<d2d::Vector> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
-			m_poly->setVertices(vertices);
+			m_poly->Load(vertices);
 			m_poly->refresh();
 		}
 		else if (type == 2)
 		{
 			float y = m_poly->getRect().yCenter();
-			std::vector<d2d::Vector> vertices = m_poly->getVertices();
+			std::vector<d2d::Vector> vertices = m_poly->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
-			m_poly->setVertices(vertices);
+			m_poly->Load(vertices);
 			m_poly->refresh();
 		}
 	}

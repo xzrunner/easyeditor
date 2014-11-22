@@ -7,8 +7,8 @@ namespace libshape
 void Math::mergeTwoChains(const ChainShape& src0, const ChainShape& src1,
 						  std::vector<d2d::Vector>& dst)
 {
-	const std::vector<d2d::Vector>& s0 = src0.getVertices();
-	const std::vector<d2d::Vector>& s1 = src1.getVertices();
+	const std::vector<d2d::Vector>& s0 = src0.GetVertices();
+	const std::vector<d2d::Vector>& s1 = src1.GetVertices();
 
 	dst.clear();
 	dst.reserve(s0.size() + s1.size());
@@ -53,7 +53,7 @@ void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<d2d
 	}
 	else if (src.size() == 1)
 	{
-		copy(src[0]->getVertices().begin(), src[0]->getVertices().end(), back_inserter(dst));
+		copy(src[0]->GetVertices().begin(), src[0]->GetVertices().end(), back_inserter(dst));
 		return;
 	}
 	else if (src.size() == 2)
@@ -134,8 +134,8 @@ void Math::findNearestPair(const std::vector<ChainShape*>& chains, int& index0, 
 
 float Math::getDistanceOfChains(const ChainShape& chain0, const ChainShape& chain1)
 {
-	const std::vector<d2d::Vector>& s0 = chain0.getVertices();
-	const std::vector<d2d::Vector>& s1 = chain1.getVertices();
+	const std::vector<d2d::Vector>& s0 = chain0.GetVertices();
+	const std::vector<d2d::Vector>& s1 = chain1.GetVertices();
 
 	float d[4];
 	d[0] = d2d::Math::getDistanceSquare(s0.back(), s1.front());

@@ -57,35 +57,22 @@ void BezierPropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_bezier->getRect().xCenter();
-		std::vector<d2d::Vector> vertices = m_bezier->getVertices();
-		for (size_t i = 0, n = vertices.size(); i < n; ++i)
-			vertices[i].x += dx;
-		m_bezier->setVertices(vertices);
+		m_bezier->Translate(d2d::Vector(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_bezier->getRect().yCenter();
-		std::vector<d2d::Vector> vertices = m_bezier->getVertices();
-		for (size_t i = 0, n = vertices.size(); i < n; ++i)
-			vertices[i].y += dy;
-		m_bezier->setVertices(vertices);
+		m_bezier->Translate(d2d::Vector(0.0f, dy));
 	}
 	else if (name == wxT("Mirror"))
 	{
 		int type = wxANY_AS(value, int);
-		if (type == 1)
-		{
-			float x = m_bezier->getRect().xCenter();
-			for (size_t i = 0; i < 4; ++i)
-				m_bezier->points[i].x = x * 2 - m_bezier->points[i].x;
+		if (type == 1) {
+			m_bezier->Mirror(true, false);
 			m_bezier->createCurve();
-		}
-		else if (type == 2)
-		{
-			float y = m_bezier->getRect().yCenter();
-			for (size_t i = 0; i < 4; ++i)
-				m_bezier->points[i].y = y * 2 - m_bezier->points[i].y;
+		} else if (type == 2) {
+			m_bezier->Mirror(false, true);
 			m_bezier->createCurve();
 		}
 	}

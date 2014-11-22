@@ -221,7 +221,7 @@ void SelectNodesOP::OnDirectionKeyDown(d2d::DirectionType type)
 		for (int j = 0, m = nodes->selectedNodes.size(); j < m; ++j) {
 			const d2d::Vector& from = nodes->selectedNodes[j];
 			d2d::Vector to = from + offset;
-			nodes->chain->changeVertices(from, to);
+			nodes->chain->Change(from, to);
 			nodes->selectedNodes[j] = to;
 		}
 	}
@@ -246,7 +246,7 @@ visit(Object* object, bool& bFetchNext)
 
 	if (d2d::Math::isRectIntersectRect(chain->getRect(), m_rect))
 	{
-		const std::vector<d2d::Vector>& vertices = chain->getVertices();
+		const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (d2d::Math::getDistance(m_pos, vertices[i]) < SelectNodesOP::getThreshold())
@@ -286,7 +286,7 @@ visit(Object* object, bool& bFetchNext)
 		ChainSelectedNodes* result = new ChainSelectedNodes;
 		result->chain = chain;
 
-		const std::vector<d2d::Vector>& vertices = chain->getVertices();
+		const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)
 		{
 			if (d2d::Math::isPointInRect(vertices[i], m_rect))

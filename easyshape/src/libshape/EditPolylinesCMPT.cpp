@@ -106,7 +106,7 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 		std::vector<d2d::Vector> merged;
 		Math::mergeTwoChains(*chain0, *chain1, merged);
 
-		chain0->setVertices(merged);
+		chain0->Load(merged);
 		chain0->refresh();
 		m_shapesImpl->removeShape(chain1);
 		m_shapesImpl->getShapeSelection()->Clear();
@@ -138,12 +138,8 @@ void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 	}
 
 	const d2d::Vector offset(-leftmost, 0.0f);
-	for (size_t i = 0, n = chains.size(); i < n; ++i)
-	{
-		std::vector<d2d::Vector> vertices = chains[i]->getVertices();
-		for (size_t j = 0, m = vertices.size(); j < m; ++j)
-			vertices[j] += offset;
-		chains[i]->setVertices(vertices);
+	for (size_t i = 0, n = chains.size(); i < n; ++i) {
+		chains[i]->Translate(offset);
 	}
 
 	m_editPanel->Refresh();

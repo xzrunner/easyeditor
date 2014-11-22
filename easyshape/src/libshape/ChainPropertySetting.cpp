@@ -20,7 +20,7 @@ void ChainPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 		pg->GetProperty(wxT("Name"))->SetValue(m_chain->name);
 		pg->GetProperty(wxT("X"))->SetValue(m_chain->getRect().xCenter());
 		pg->GetProperty(wxT("Y"))->SetValue(m_chain->getRect().yCenter());
-		pg->GetProperty(wxT("Closed"))->SetValue(m_chain->isClosed());
+		pg->GetProperty(wxT("Closed"))->SetValue(m_chain->IsClosed());
 		pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
 	}
 	else
@@ -39,7 +39,7 @@ void ChainPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->isClosed()));
+		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->IsClosed()));
 
 		static const wxChar* mirror_labels[] = { wxT("none"),
 			wxT("horizontal"), wxT("vertical"), NULL };
@@ -60,23 +60,17 @@ void ChainPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	{
 		const float x = wxANY_AS(value, float);
 		const float dx = x - m_chain->getRect().xCenter();
-		std::vector<d2d::Vector> vertices = m_chain->getVertices();
-		for (size_t i = 0, n = vertices.size(); i < n; ++i)
-			vertices[i].x += dx;
-		m_chain->setVertices(vertices);
+		m_chain->Translate(d2d::Vector(dx, 0.0f));
 	}
 	else if (name == wxT("Y"))
 	{
 		const float y = wxANY_AS(value, float);
 		const float dy = y - m_chain->getRect().yCenter();
-		std::vector<d2d::Vector> vertices = m_chain->getVertices();
-		for (size_t i = 0, n = vertices.size(); i < n; ++i)
-			vertices[i].y += dy;
-		m_chain->setVertices(vertices);
+		m_chain->Translate(d2d::Vector(0.0f, dy));
 	}
 	else if (name == wxT("Closed"))
 	{
-		m_chain->setClosed(wxANY_AS(value, bool));
+		m_chain->SetClosed(wxANY_AS(value, bool));
 	}
 	else if (name == wxT("Mirror"))
 	{
@@ -84,18 +78,18 @@ void ChainPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 		if (type == 1)
 		{
 			float x = m_chain->getRect().xCenter();
-			std::vector<d2d::Vector> vertices = m_chain->getVertices();
+			std::vector<d2d::Vector> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].x = x * 2 - vertices[i].x;
-			m_chain->setVertices(vertices);
+			m_chain->Load(vertices);
 		}
 		else if (type == 2)
 		{
 			float y = m_chain->getRect().yCenter();
-			std::vector<d2d::Vector> vertices = m_chain->getVertices();
+			std::vector<d2d::Vector> vertices = m_chain->GetVertices();
 			for (size_t i = 0, n = vertices.size(); i < n; ++i)
 				vertices[i].y = y * 2 - vertices[i].y;
-			m_chain->setVertices(vertices);
+			m_chain->Load(vertices);
 		}
 	}
 
@@ -127,7 +121,7 @@ void ChainPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, 
 		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->isClosed()));
+		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->IsClosed()));
 
 		static const wxChar* mirror_labels[] = { wxT("none"),
 			wxT("horizontal"), wxT("vertical"), NULL };

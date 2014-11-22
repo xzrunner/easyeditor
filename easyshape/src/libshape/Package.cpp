@@ -17,7 +17,7 @@ void Paskage::packShape(d2d::IShape* shape, std::ofstream& fout)
 		int type = e_polygon;
 		fout.write(reinterpret_cast<const char*>(&type), sizeof(int));
 
-		const std::vector<d2d::Vector>& vertices = poly->getVertices();
+		const std::vector<d2d::Vector>& vertices = poly->GetVertices();
 		int size = vertices.size();
 		fout.write(reinterpret_cast<const char*>(&size), sizeof(int));
 		for (size_t i = 0, n = vertices.size(); i < n; ++i)

@@ -169,10 +169,10 @@ Json::Value FileAdapter::store(const BezierShape* bezier)
 
 	value["name"] = bezier->name;
 
-	for (size_t i = 0; i < 4; ++i)
-	{
-		value["points"]["x"][i] = bezier->points[i].x;
-		value["points"]["y"][i] = bezier->points[i].y;
+	const d2d::Vector* ctrl_nodes = bezier->GetCtrlNode();
+	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
+		value["points"]["x"][i] = ctrl_nodes[i].x;
+		value["points"]["y"][i] = ctrl_nodes[i].y;
 	}
 
 	return value;
@@ -184,7 +184,7 @@ Json::Value FileAdapter::store(const PolygonShape* poly)
 
 	value["name"] = poly->name;
 
-	const std::vector<d2d::Vector>& vertices = poly->getVertices();
+	const std::vector<d2d::Vector>& vertices = poly->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		value["vertices"]["x"][i] = vertices[i].x;
@@ -200,13 +200,13 @@ Json::Value FileAdapter::store(const ChainShape* chain)
 
 	value["name"] = chain->name;
 
-	const std::vector<d2d::Vector>& vertices = chain->getVertices();
+	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		value["vertices"]["x"][i] = vertices[i].x;
 		value["vertices"]["y"][i] = vertices[i].y;
 	}
-	value["closed"] = chain->isClosed();
+	value["closed"] = chain->IsClosed();
 
 	return value;
 }

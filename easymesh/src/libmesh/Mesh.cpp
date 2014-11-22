@@ -266,7 +266,7 @@ void Mesh::Store(Json::Value& value) const
  	Json::Value& loops_val = value["loops"];
  	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
  		const libshape::ChainShape* loop = m_region.loops[i];
- 		d2d::JsonTools::store(loop->getVertices(), loops_val[i]);
+ 		d2d::JsonTools::store(loop->GetVertices(), loops_val[i]);
  	}
  
   	StoreTriangles(value["triangles"]);
@@ -274,7 +274,7 @@ void Mesh::Store(Json::Value& value) const
 	Json::Value& loops_val = value["loops"];
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
 		const libshape::ChainShape* loop = m_region.loops[i];
-		const std::vector<d2d::Vector>& src = loop->getVertices();
+		const std::vector<d2d::Vector>& src = loop->GetVertices();
 		std::vector<d2d::Vector> dst;
 		for (int i = 0, n = src.size(); i < n; ++i) {
 			bool find = false;
@@ -387,7 +387,7 @@ void Mesh::GetTriangulation(std::vector<d2d::Vector>& tris)
 		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
 		{
 			const libshape::ChainShape* chain = m_region.loops[i];
-			const std::vector<d2d::Vector>& loop = chain->getVertices();
+			const std::vector<d2d::Vector>& loop = chain->GetVertices();
 			std::copy(loop.begin(), loop.end(), back_inserter(points));
 		}
 		d2d::Triangulation::points(bound, points, tris);
@@ -397,7 +397,7 @@ void Mesh::GetTriangulation(std::vector<d2d::Vector>& tris)
  		for (int i = 0, n = m_region.loops.size(); i < n; ++i)
  		{
  			const libshape::ChainShape* chain = m_region.loops[i];
- 			const std::vector<d2d::Vector>& loop = chain->getVertices();
+ 			const std::vector<d2d::Vector>& loop = chain->GetVertices();
  			d2d::Triangulation::normal(loop, tris);
  		}
 

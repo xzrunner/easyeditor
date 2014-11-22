@@ -32,6 +32,9 @@ public:
 	virtual bool isContain(const Vector& pos) const = 0;
 	virtual bool isIntersect(const Rect& rect) const = 0;
 
+	virtual void Translate(const Vector& offset) = 0;
+//	virtual void Rotate(float delta) = 0;
+
 	virtual const Rect& getRect() const = 0;
 
 	virtual void draw(const Colorf& color = Colorf(0, 0, 0)) const = 0;

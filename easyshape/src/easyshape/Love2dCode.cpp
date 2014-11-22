@@ -66,10 +66,11 @@ void Love2dCode::resolve(const libshape::BezierShape* bezier)
 
 	std::string points = lua::assign("points", "");
 	points += "{ ";
-	for (size_t i = 0; i < 4; ++i)
+	const d2d::Vector* ctrl_nodes = bezier->GetCtrlNode();
+	for (int i = 0; i < libshape::BezierShape::CTRL_NODE_COUNT; ++i)
 	{
-		points += wxString::FromDouble(bezier->points[i].x, 1)+",";
-		points += wxString::FromDouble(bezier->points[i].y, 1)+",";
+		points += wxString::FromDouble(ctrl_nodes[i].x, 1)+",";
+		points += wxString::FromDouble(ctrl_nodes[i].y, 1)+",";
 	}
 	points += "} ";
 
@@ -83,7 +84,7 @@ void Love2dCode::resolve(const libshape::PolygonShape* poly)
 	std::string name = lua::assign("name", "\""+poly->name+"\"");
 
 	std::string points = lua::assign("points", "");
-	const std::vector<d2d::Vector>& vertices = poly->getVertices();
+	const std::vector<d2d::Vector>& vertices = poly->GetVertices();
 	points += "{ ";
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
@@ -102,7 +103,7 @@ void Love2dCode::resolve(const libshape::ChainShape* chain)
 	std::string name = lua::assign("name", "\""+chain->name+"\"");
 
 	std::string points = lua::assign("points", "");
-	const std::vector<d2d::Vector>& vertices = chain->getVertices();
+	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 	points += "{ ";
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
@@ -111,7 +112,7 @@ void Love2dCode::resolve(const libshape::ChainShape* chain)
 	}
 	points += "} ";
 
-	std::string closed = chain->isClosed() ? lua::assign("closed", "true") : lua::assign("closed", "false");
+	std::string closed = chain->IsClosed() ? lua::assign("closed", "true") : lua::assign("closed", "false");
 
 	lua::tableassign(m_gen, "", 4, type.c_str(), name.c_str(), points.c_str(), closed.c_str());
 }

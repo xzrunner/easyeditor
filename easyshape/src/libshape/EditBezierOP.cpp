@@ -155,24 +155,10 @@ bool EditBezierOP::onMouseDrag(int x, int y)
 		{
 			d2d::Vector center(bezier->getRect().xCenter(), bezier->getRect().yCenter());
 
-			// move
-			if (!m_captured.pos.isValid())
-			{
-				d2d::Vector offset = m_currPos - center;
-				for (size_t i = 0; i < 4; ++i)
-					bezier->points[i] += offset;
-				bezier->createCurve();
-			}
-			// change control point
-			else
-			{
-				int i = 0;
-				for ( ; i < 4 && bezier->points[i] != m_captured.pos; ++i)
-					;
-				assert(i != 4);
-				bezier->points[i] = m_currPos;
-				bezier->createCurve();
-
+			if (!m_captured.pos.isValid()) {
+				bezier->Translate(m_currPos - center);
+			} else {
+				bezier->MoveCtrlNode(m_captured.pos, m_currPos);
 				m_captured.pos = m_currPos;
 			}
 

@@ -129,7 +129,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 			if (m_capturedEditable.shape)
 			{
 				ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape);
-				chain->changeVertices(m_capturedEditable.pos, nearest.getNearestNode());
+				chain->Change(m_capturedEditable.pos, nearest.getNearestNode());
 				chain->refresh();
 				m_dirty = true;
 				m_capturedEditable.pos = nearest.getNearestNode();
@@ -172,7 +172,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 				if (m_capturedEditable.pos.isValid())
 				{
 					ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape);
-					chain->removeVertices(m_capturedEditable.pos);
+					chain->Remove(m_capturedEditable.pos);
 					chain->refresh();
 					m_dirty = true;
 				}
@@ -244,7 +244,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		{
 			if (m_capturedEditable.pos.isValid())
 			{
-				chain->changeVertices(m_capturedEditable.pos, pos);
+				chain->Change(m_capturedEditable.pos, pos);
 				m_capturedEditable.pos = pos;
 			}
 			else
@@ -252,12 +252,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 				d2d::Vector old;
 				old.x = chain->getRect().xCenter();
 				old.y = chain->getRect().yCenter();
-				d2d::Vector offset = pos - old;
-
-				std::vector<d2d::Vector> ctlpos = chain->getVertices();
-				for (size_t i = 0, n = ctlpos.size(); i < n; ++i)
-					ctlpos[i] += offset;
-				chain->setVertices(ctlpos);
+				chain->Translate(pos - old);
 			}
 
 			chain->refresh();
@@ -357,21 +352,21 @@ visit(d2d::Object* object, bool& bFetchNext)
 	}
 
 	size_t iPos;
-	const std::vector<d2d::Vector>& vertices = chain->getVertices();
+	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 	float dis = d2d::Math::getDisPointToPolyline(m_pos, vertices, &iPos);
 	if (dis < m_tol)
 	{
-		chain->insertVertices(iPos + 1, m_pos);
+		chain->Add(iPos + 1, m_pos);
 		m_chain = chain;
 		bFetchNext = false;
 		return;
 	}
-	else if (chain->isClosed() && vertices.size() > 1)
+	else if (chain->IsClosed() && vertices.size() > 1)
 	{
 		float dis = d2d::Math::getDisPointToSegment(m_pos, vertices.front(), vertices.back());
 		if (dis < m_tol)
 		{
-			chain->insertVertices(vertices.size(), m_pos);
+			chain->Add(vertices.size(), m_pos);
 			m_chain = chain;
 			bFetchNext = false;
 			return;
@@ -412,7 +407,7 @@ visit(d2d::Object* object, bool& bFetchNext)
 		return;
 	}
 
-	const std::vector<d2d::Vector>& vertices = chain->getVertices();
+	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
 	for (size_t i = 0, n = vertices.size(); i < n; ++i)
 	{
 		float dis = d2d::Math::getDistance(m_pos, vertices[i]);

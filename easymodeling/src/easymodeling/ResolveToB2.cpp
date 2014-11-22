@@ -74,7 +74,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		}
 		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
-			const std::vector<d2d::Vector>& src = polygon->getVertices();
+			const std::vector<d2d::Vector>& src = polygon->GetVertices();
 			const size_t size = src.size();
 			std::vector<b2Vec2> dst(size);
 			for (size_t j = 0; j < size; ++j)
@@ -91,7 +91,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		}
 		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
-			const std::vector<d2d::Vector>& src = chain->getVertices();
+			const std::vector<d2d::Vector>& src = chain->GetVertices();
 			const size_t size = src.size();
 			std::vector<b2Vec2> dst(size);
 			for (size_t j = 0; j < size; ++j)
@@ -101,7 +101,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 			}
 
 			b2ChainShape shape;
-			if (chain->isClosed())
+			if (chain->IsClosed())
 				shape.CreateLoop(&dst[0], size);
 			else
 				shape.CreateChain(&dst[0], size);
