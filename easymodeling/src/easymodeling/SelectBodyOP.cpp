@@ -64,7 +64,7 @@ bool SelectBodyOP::onDraw() const
 {
 	if (d2d::DrawRectangleOP::onDraw()) return true;
 
-	m_selection->traverse(DrawSelectedVisitor());
+	m_selection->Traverse(DrawSelectedVisitor());
 
 	if (m_mouseOn)
 		DrawUtils::drawBody(m_mouseOn, DrawUtils::e_mouseOn);

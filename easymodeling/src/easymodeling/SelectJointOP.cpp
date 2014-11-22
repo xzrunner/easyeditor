@@ -42,17 +42,17 @@ bool SelectJointOP::onMouseLeftDown(int x, int y)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
 		{
-			if (jointSelection.isExist(selected))
-				jointSelection.erase(selected);
+			if (jointSelection.IsExist(selected))
+				jointSelection.Remove(selected);
 			else
-				jointSelection.insert(selected);
+				jointSelection.Add(selected);
 		}
 		else
 		{
-			if (!jointSelection.isExist(selected))
+			if (!jointSelection.IsExist(selected))
 			{
-				jointSelection.clear();
-				jointSelection.insert(selected);
+				jointSelection.Clear();
+				jointSelection.Add(selected);
 			}
 		}
 
@@ -61,7 +61,7 @@ bool SelectJointOP::onMouseLeftDown(int x, int y)
 	}
 	else
 	{
-		m_selection->clear();
+		m_selection->Clear();
 	}
 
 	m_selected = selected;
@@ -242,7 +242,7 @@ bool SelectJointOP::onDraw() const
 	if (SelectBodyOP::onDraw()) 
 		return true;
 
-	m_selection->traverse(DrawSelectedVisitor());
+	m_selection->Traverse(DrawSelectedVisitor());
 
 	if (m_mouseOn)
 		m_mouseOn->draw(libmodeling::Joint::e_mouseOn);

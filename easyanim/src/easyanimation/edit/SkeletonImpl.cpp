@@ -47,10 +47,10 @@ void SkeletonImpl::onMouseLeftUp(int x, int y)
 	{
 		d2d::ArrangeSpriteImpl::onMouseLeftUp(x, y);
 
-		if (m_selection->size() == 1)
+		if (m_selection->Size() == 1)
 		{
 			std::vector<d2d::ISprite*> sprites;
-			m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+			m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 			m_stage->getSkeletonData().absorb(sprites[0]);				
 		}
 	}

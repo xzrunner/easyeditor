@@ -41,7 +41,7 @@ bool ArrangeSpriteFixOP::onMouseRightUp(int x, int y)
 void ArrangeSpriteFixOP::FixSpritesLocation()
 {
 	std::vector<ISprite*> sprites;
-	m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	fixSpritesLocation(sprites);
 }
 

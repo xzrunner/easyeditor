@@ -161,10 +161,10 @@ PasteSpriteOP::SpriteBatch::
 void PasteSpriteOP::SpriteBatch::
 loadFromSelection(const SpriteSelection& selection)
 {
-	if (!selection.empty())
+	if (!selection.IsEmpty())
 	{	
 		clear();
-		selection.traverse(FetchAllVisitor<ISprite>(m_selected));
+		selection.Traverse(FetchAllVisitor<ISprite>(m_selected));
 		computeCenter();
 	}
 }

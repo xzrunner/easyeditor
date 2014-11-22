@@ -1,6 +1,5 @@
 #include "UniversalArrangeCMPT.h"
 
-#include "dataset/SelectionSet.h"
 #include "dataset/IBody.h"
 #include "operator/UniversalArrangeOP.h"
 #include "view/MultiSpritesImpl.h"
@@ -20,10 +19,10 @@ UniversalArrangeCMPT::UniversalArrangeCMPT(wxWindow* parent, const wxString& nam
 void UniversalArrangeCMPT::updateControlValue()
 {
 	SpriteSelection* selection = m_spritesImpl->getSpriteSelection();
-	if (!selection->empty())
+	if (!selection->IsEmpty())
 	{
 		GetPhysicsStaticVisitor visitor;
-		selection->traverse(visitor);
+		selection->Traverse(visitor);
 		switch (visitor.getType())
 		{
 		case GetPhysicsStaticVisitor::e_checked:
@@ -64,8 +63,8 @@ wxSizer* UniversalArrangeCMPT::initLayout()
 void UniversalArrangeCMPT::onChangeStaticType(wxCommandEvent& event)
 {
 	SpriteSelection* selection = m_spritesImpl->getSpriteSelection();
-	if (!selection->empty())
-		selection->traverse(SetPhysicsStaticVisitor(event.IsChecked()));
+	if (!selection->IsEmpty())
+		selection->Traverse(SetPhysicsStaticVisitor(event.IsChecked()));
 	m_editPanel->Refresh();
 }
 

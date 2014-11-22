@@ -4,7 +4,7 @@
 
 #include "DrawRectangleOP.h"
 
-#include "dataset/SelectionSet.h"
+#include "dataset/ObjSelectionSet.h"
 #include "render/ShapeStyle.h"
 
 namespace d2d

@@ -8,11 +8,12 @@
 #include "SpriteCtrlNode.h"
 
 #include "common/typedef.h"
-#include "dataset/SelectionSet.h"
+#include "dataset/ObjSelectionSet.h"
 
 namespace d2d
 {
 
+class EditPanel;
 class MultiSpritesImpl;
 class PropertySettingPanel;
 class IArrangeSpriteState;

@@ -20,7 +20,7 @@ EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const wxString& name,
 void EditPolylinesCMPT::updateControlValue()
 {
 	bool valid;
-	m_shapesImpl->getShapeSelection()->traverse(d2d::CountVerifyVisitor(valid, 2));
+	m_shapesImpl->getShapeSelection()->Traverse(d2d::CountVerifyVisitor(valid, 2));
 	m_btnMerge->Enable(valid);
 }
 
@@ -97,7 +97,7 @@ void EditPolylinesCMPT::onUpdateFromSimplified(wxCommandEvent& event)
 void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 {
 	std::vector<d2d::IShape*> shapes;
-	m_shapesImpl->getShapeSelection()->traverse(d2d::FetchAllVisitor<d2d::IShape>(shapes));
+	m_shapesImpl->getShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::IShape>(shapes));
 	if (shapes.size() == 2)
 	{
 		ChainShape *chain0 = static_cast<ChainShape*>(shapes[0]),
@@ -109,9 +109,9 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 		chain0->setVertices(merged);
 		chain0->refresh();
 		m_shapesImpl->removeShape(chain1);
-		m_shapesImpl->getShapeSelection()->clear();
+		m_shapesImpl->getShapeSelection()->Clear();
 
-		m_shapesImpl->getShapeSelection()->clear();
+		m_shapesImpl->getShapeSelection()->Clear();
 
 		m_btnMerge->Enable(false);
 
@@ -122,7 +122,7 @@ void EditPolylinesCMPT::onMergeTwoChain(wxCommandEvent& event)
 void EditPolylinesCMPT::onTranslate(wxCommandEvent& event)
 {
 	std::vector<d2d::IShape*> shapes;
-	m_shapesImpl->getShapeSelection()->traverse(d2d::FetchAllVisitor<d2d::IShape>(shapes));
+	m_shapesImpl->getShapeSelection()->Traverse(d2d::FetchAllVisitor<d2d::IShape>(shapes));
 
 	float leftmost = FLT_MAX;
 	std::vector<ChainShape*> chains;

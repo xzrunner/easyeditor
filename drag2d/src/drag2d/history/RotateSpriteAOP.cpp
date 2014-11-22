@@ -21,7 +21,7 @@ RotateSpriteAOP::RotateSpriteAOP(const std::vector<ISprite*>& sprites, float ang
 RotateSpriteAOP::RotateSpriteAOP(const SpriteSelection& selection, const Vector& start, const Vector& end)
 {
 	std::vector<ISprite*> sprites;
-	selection.traverse(FetchAllVisitor<ISprite>(sprites));
+	selection.Traverse(FetchAllVisitor<ISprite>(sprites));
 	Init(sprites, start, end);
 }
 

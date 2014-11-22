@@ -3,7 +3,7 @@
 
 #include <common/runtime.h>
 
-#include "SelectionSet.h"
+#include "ObjSelectionSet.h"
 
 namespace d2d
 {

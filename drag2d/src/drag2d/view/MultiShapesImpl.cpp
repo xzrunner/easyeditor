@@ -28,10 +28,10 @@ void MultiShapesImpl::queryShapesByRect(const Rect& rect, std::vector<IShape*>& 
 
 void MultiShapesImpl::removeShapeSelection()
 {
-	if (!m_shapeSelection->empty())
+	if (!m_shapeSelection->IsEmpty())
 	{
-		m_shapeSelection->traverse(RemoveSelectionVisitor(this));
-		m_shapeSelection->clear();
+		m_shapeSelection->Traverse(RemoveSelectionVisitor(this));
+		m_shapeSelection->Clear();
 		refresh();
 	}
 }

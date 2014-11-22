@@ -50,6 +50,7 @@ wxSizer* ToolbarPanel::initLayout()
 void ToolbarPanel::onClearShapes(wxCommandEvent& event)
 {
 	static_cast<StagePanel*>(m_editPanel)->clearShapes();
+	m_editPanel->clear();
 	m_editPanel->Refresh();
 }
 

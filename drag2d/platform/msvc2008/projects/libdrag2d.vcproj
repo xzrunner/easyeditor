@@ -769,10 +769,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\dataset\SelectionSet.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\dataset\TPNode.cpp"
 					>
 				</File>
@@ -780,14 +776,34 @@
 					RelativePath="..\..\..\src\drag2d\dataset\TPNode.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.cpp"
+				<Filter
+					Name="selection"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ObjSelectionSet.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\ObjSelectionSet.inl"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SelectionSet.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SelectionSet.inl"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\wrap_SelectionSet.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="scene"

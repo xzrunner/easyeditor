@@ -32,7 +32,7 @@ AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
 
 bool TranslateSpriteState::OnMouseMove(const Vector& pos)
 {
-	if (m_selection->empty() || !m_last_pos.isValid()) {
+	if (m_selection->IsEmpty() || !m_last_pos.isValid()) {
 		return false;
 	}
 
@@ -44,7 +44,7 @@ bool TranslateSpriteState::OnMouseMove(const Vector& pos)
 
 bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
 {
-	if (m_selection->empty()) return false;
+	if (m_selection->IsEmpty()) return false;
 
 	switch (type)
 	{
@@ -67,7 +67,7 @@ bool TranslateSpriteState::OnDirectionKeyDown(DirectionType type)
 
 void TranslateSpriteState::Translate(const Vector& offset)
 {
-	m_selection->traverse(Visitor(offset));
+	m_selection->Traverse(Visitor(offset));
 }
 
 //////////////////////////////////////////////////////////////////////////

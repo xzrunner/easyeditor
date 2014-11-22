@@ -23,17 +23,17 @@ void JointEditCmpt::updateControlValue()
 {
 	d2d::SpriteSelection* selection = static_cast<StagePanel*>(m_editPanel)->getSpriteSelection();
 
-	if (selection->size() != 2)
+	if (selection->Size() != 2)
 		m_btnOK->Enable(false);
 	else
 	{
 		if (m_typeChoice->GetString(m_typeChoice->GetSelection()) == wxT("Gear"))
 		{
 			SelectJointOP* op = static_cast<SelectJointOP*>(m_editOP);
-			if (op->jointSelection.size() == 2)
+			if (op->jointSelection.Size() == 2)
 			{
 				std::vector<libmodeling::Joint*> joints;
-				op->jointSelection.traverse(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
+				op->jointSelection.Traverse(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
 				const libmodeling::Joint *j0 = joints[0], *j1 = joints[1];
 				if ((j0->type == libmodeling::Joint::e_revoluteJoint || j0->type == libmodeling::Joint::e_prismaticJoint) &&
 					(j1->type == libmodeling::Joint::e_revoluteJoint || j1->type == libmodeling::Joint::e_prismaticJoint))
@@ -95,7 +95,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 
 	std::vector<d2d::ISprite*> sprites;
 	d2d::SpriteSelection* selection = editPanel->getSpriteSelection();
-	selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	assert(sprites.size() == 2);
 	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->getUserData()),
 		*body1 = static_cast<libmodeling::Body*>(sprites[1]->getUserData());
@@ -113,9 +113,9 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	else if (type == wxT("Gear"))
 	{
 		SelectJointOP* op = static_cast<SelectJointOP*>(m_editOP);
-		assert(op->jointSelection.size() == 2);
+		assert(op->jointSelection.Size() == 2);
 		std::vector<libmodeling::Joint*> joints;
-		op->jointSelection.traverse(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
+		op->jointSelection.Traverse(d2d::FetchAllVisitor<libmodeling::Joint>(joints));
 		editPanel->insertJoint(new libmodeling::GearJoint(body0, body1, joints[0], joints[1]));
 	}	
 	else if (type == wxT("Wheel"))

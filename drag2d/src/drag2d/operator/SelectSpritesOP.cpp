@@ -39,7 +39,7 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 
 SelectSpritesOP::~SelectSpritesOP()
 {
-	m_selection->clear();
+	m_selection->Clear();
 	m_selection->release();
 }
 
@@ -77,19 +77,19 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
 		{
-			if (m_selection->isExist(selected))
-				m_selection->erase(selected);
+			if (m_selection->IsExist(selected))
+				m_selection->Remove(selected);
 			else
 			{
-				m_selection->insert(selected);
+				m_selection->Add(selected);
 				if (m_propertyPanel)
 				{
-					if (m_selection->size() == 1)
+					if (m_selection->Size() == 1)
 						m_propertyPanel->setPropertySetting(createPropertySetting(selected));
-					else if (m_selection->size() > 1)
+					else if (m_selection->Size() > 1)
 					{
 						std::vector<ISprite*> sprites;
-						m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+						m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 						m_propertyPanel->setPropertySetting(createPropertySetting(sprites));
 					}
 					else
@@ -99,10 +99,10 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 		}
 		else
 		{
-			if (!m_selection->isExist(selected))
+			if (!m_selection->IsExist(selected))
 			{
-				m_selection->clear();
-				m_selection->insert(selected);
+				m_selection->Clear();
+				m_selection->Add(selected);
 				if (m_propertyPanel)
 					m_propertyPanel->setPropertySetting(createPropertySetting(selected));
 			}
@@ -119,7 +119,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 		if (wxGetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
 		else
-			m_selection->clear();
+			m_selection->Clear();
 		m_editPanel->Refresh();
 	}
 
@@ -143,25 +143,25 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 			for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 			{
 				d2d::ISprite* sprite = sprites[i];
-				if (m_selection->isExist(sprite)) {
-					m_selection->erase(sprites[i]);
+				if (m_selection->IsExist(sprite)) {
+					m_selection->Remove(sprites[i]);
 				} else {
-					m_selection->insert(sprites[i]);
+					m_selection->Add(sprites[i]);
 				}
 			}
 		}
 		else
 		{
 			for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-				m_selection->insert(sprites[i]);
+				m_selection->Add(sprites[i]);
 			}
 		}
 
 		if (m_propertyPanel)
 		{
-			if (m_selection->size() == 1)
+			if (m_selection->Size() == 1)
 				m_propertyPanel->setPropertySetting(createPropertySetting(sprites[0]));
-			else if (m_selection->size() > 1)
+			else if (m_selection->Size() > 1)
 				m_propertyPanel->setPropertySetting(createPropertySetting(sprites));
 			else
 				m_propertyPanel->setPropertySetting(createPropertySetting(NULL));
@@ -182,7 +182,7 @@ bool SelectSpritesOP::onMouseRightDown(int x, int y)
 {
 	m_rightFirstScrPos.set(x, y);
 
-	enableRightTap(m_selection->empty());
+	enableRightTap(m_selection->IsEmpty());
 
 	if (DrawRectangleOP::onMouseRightDown(x, y)) return true;
 
@@ -198,9 +198,9 @@ bool SelectSpritesOP::onMouseRightUp(int x, int y)
 		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
 		if (sprite)
 		{
-			m_selection->clear();
-			m_selection->insert(sprite);
-			enableRightTap(m_selection->empty());
+			m_selection->Clear();
+			m_selection->Add(sprite);
+			enableRightTap(m_selection->IsEmpty());
 			m_editPanel->Refresh();
 		}
 	}
@@ -219,7 +219,7 @@ bool SelectSpritesOP::onMouseDrag(int x, int y)
 
 bool SelectSpritesOP::onDraw() const
 {
-	m_selection->traverse(DrawSelectedSpriteVisitor(Colorf(1, 0, 0)));
+	m_selection->Traverse(DrawSelectedSpriteVisitor(Colorf(1, 0, 0)));
 
 	if (m_firstPos.isValid() && m_currPos.isValid())
 	{
@@ -244,7 +244,7 @@ bool SelectSpritesOP::clear()
 {
 	if (DrawRectangleOP::clear()) return true;
 
-	m_selection->clear();
+	m_selection->Clear();
 	m_firstPos.setInvalid();
 
 	return false;
@@ -271,7 +271,7 @@ ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;
 	std::vector<ISprite*> sprites;
-	m_spritesImpl->getSpriteSelection()->traverse(FetchAllVisitor<ISprite>(sprites));
+	m_spritesImpl->getSpriteSelection()->Traverse(FetchAllVisitor<ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		if (sprites[i]->isContain(pos)) {
@@ -288,7 +288,7 @@ ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
 void SelectSpritesOP::pasteToSelection() const
 {
 	std::vector<ISprite*> sprites;
-	m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	Json::Value value;
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
@@ -322,7 +322,7 @@ void SelectSpritesOP::copyFromSelection()
 			std::string test = data.GetText().ToStdString();
 			reader.parse(data.GetText().ToStdString(), value);
 
-			m_selection->clear();
+			m_selection->Clear();
 
 			int i = 0;
 			Json::Value sval = value["sprite"][i++];
@@ -336,7 +336,7 @@ void SelectSpritesOP::copyFromSelection()
 				symbol->release();
 				sprite->load(sval);
 				m_spritesImpl->insertSprite(sprite);
-				m_selection->insert(sprite);
+				m_selection->Add(sprite);
 
 				sval = value["sprite"][i++];
 			}

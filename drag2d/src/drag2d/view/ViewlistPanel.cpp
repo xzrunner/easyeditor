@@ -3,7 +3,6 @@
 
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
-#include "dataset/SelectionSet.h"
 #include "widgets/VerticalImageList.h"
 #include "view/EditPanel.h"
 #include "view/SpritePropertySetting.h"
@@ -85,8 +84,8 @@ void ViewlistPanel::onSelected(int index)
 	if (m_stage)
 	{
 		d2d::SpriteSelection* selection = m_stage->getSpriteSelection();
-		selection->clear();
-		selection->insert(m_sprites[index]);
+		selection->Clear();
+		selection->Add(m_sprites[index]);
 		m_editPanel->Refresh();
 	}
 }

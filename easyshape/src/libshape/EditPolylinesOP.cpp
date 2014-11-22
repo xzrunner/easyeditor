@@ -33,10 +33,10 @@ bool EditPolylinesOP::onMouseLeftUp(int x, int y)
 	if (d2d::SelectShapesOP::onMouseLeftUp(x, y)) return true;
 
 	if (m_bDirty)
-		m_selection->traverse(UpdateChainVisitor());
+		m_selection->Traverse(UpdateChainVisitor());
 
 	clearBuffer();
-	m_selection->traverse(UpdateBufferVisitor(m_simplifyBuffer));
+	m_selection->Traverse(UpdateBufferVisitor(m_simplifyBuffer));
 
 	return false;
 }
@@ -49,7 +49,7 @@ bool EditPolylinesOP::onMouseDrag(int x, int y)
 	{
 		d2d::Vector currPos = m_editPanel->transPosScreenToProject(x, y);
 		d2d::Vector offset = currPos - m_lastPos;
-		m_selection->traverse(OffsetVisitor(offset));
+		m_selection->Traverse(OffsetVisitor(offset));
 		m_lastPos = currPos;
 
 		m_bDirty = true;

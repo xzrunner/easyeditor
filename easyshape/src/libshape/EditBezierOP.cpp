@@ -40,7 +40,7 @@ bool EditBezierOP::onMouseLeftDown(int x, int y)
 
 	m_firstPress = m_currPos = m_editPanel->transPosScreenToProject(x, y);
 
-	m_shapesImpl->getShapeSelection()->clear();
+	m_shapesImpl->getShapeSelection()->Clear();
 
 	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
 	if (tolerance != 0)
@@ -51,7 +51,7 @@ bool EditBezierOP::onMouseLeftDown(int x, int y)
  		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
  			m_propertyPanel->setPropertySetting(new BezierPropertySetting(m_editPanel, bezier));
-			m_shapesImpl->getShapeSelection()->insert(bezier);
+			m_shapesImpl->getShapeSelection()->Add(bezier);
 		}
 	}
 	else
@@ -77,7 +77,7 @@ bool EditBezierOP::onMouseLeftUp(int x, int y)
 			{
 				BezierShape* bezier = new BezierShape(m_firstPress, m_currPos);
 				m_propertyPanel->setPropertySetting(new BezierPropertySetting(m_editPanel, bezier));
-				m_shapesImpl->getShapeSelection()->insert(bezier);
+				m_shapesImpl->getShapeSelection()->Add(bezier);
 				m_shapesImpl->insertShape(bezier);
 			}
 		}
@@ -110,7 +110,7 @@ bool EditBezierOP::onMouseRightDown(int x, int y)
 		if (m_captured.shape)
 		{
 			m_shapesImpl->removeShape(m_captured.shape);
-			m_shapesImpl->getShapeSelection()->clear();
+			m_shapesImpl->getShapeSelection()->Clear();
 			m_captured.clear();
 			m_editPanel->Refresh();
 

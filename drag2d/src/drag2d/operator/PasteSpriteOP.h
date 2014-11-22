@@ -4,7 +4,7 @@
 
 #include "SelectSpritesOP.h"
 
-#include "dataset/SelectionSet.h"
+#include "dataset/ObjSelectionSet.h"
 
 namespace d2d
 {

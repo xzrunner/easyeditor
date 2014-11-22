@@ -10,7 +10,7 @@ namespace d2d
 TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const Vector& offset)
 	: m_offset(offset)
 {
-	selection.traverse(FetchAllVisitor<ISprite>(m_sprites));
+	selection.Traverse(FetchAllVisitor<ISprite>(m_sprites));
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->retain();
 	}

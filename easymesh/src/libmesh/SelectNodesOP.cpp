@@ -17,7 +17,7 @@ SelectNodesOP::SelectNodesOP(StagePanel* stage)
 
 SelectNodesOP::~SelectNodesOP()
 {
-	m_selection.clear();
+	m_selection.Clear();
 }
 
 bool SelectNodesOP::onMouseLeftDown(int x, int y)
@@ -33,18 +33,18 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	shape->QueryNode(pos, nodes);
 	if (!nodes.empty())
 	{
-		m_selection.clear();
+		m_selection.Clear();
 		for (int i = 0, n = nodes.size(); i < n; ++i)
 		{
 			Node* node = nodes[i];
 			if (wxGetKeyState(WXK_CONTROL)) {
-				if (m_selection.isExist(node))
-					m_selection.erase(node);
+				if (m_selection.IsExist(node))
+					m_selection.Remove(node);
 				else
-					m_selection.insert(node);
+					m_selection.Add(node);
 			} else {
-				if (!m_selection.isExist(node)) {
-					m_selection.insert(node);
+				if (!m_selection.IsExist(node)) {
+					m_selection.Add(node);
 				}
 			}
 			m_firstPos.setInvalid();
@@ -57,7 +57,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 		if (wxGetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
 		else
-			m_selection.clear();
+			m_selection.Clear();
 		m_editPanel->Refresh();
 	}
 
@@ -78,7 +78,7 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 		std::vector<Node*> nodes;
 		shape->QueryNode(rect, nodes);
 		for (size_t i = 0, n = nodes.size(); i < n; ++i)
-			m_selection.insert(nodes[i]);
+			m_selection.Add(nodes[i]);
 
 		m_firstPos.setInvalid();
 	}
@@ -104,7 +104,7 @@ bool SelectNodesOP::onDraw() const
 	}
 
 	std::vector<Node*> nodes;
-	m_selection.traverse(d2d::FetchAllVisitor<Node>(nodes));
+	m_selection.Traverse(d2d::FetchAllVisitor<Node>(nodes));
 	std::vector<d2d::Vector> points;
 	points.reserve(nodes.size());
 	for (int i = 0, n = nodes.size(); i < n; ++i)
@@ -122,7 +122,7 @@ bool SelectNodesOP::clear()
 {
 	if (d2d::DrawRectangleOP::clear()) return true;
 
-	m_selection.clear();
+	m_selection.Clear();
 	m_firstPos.setInvalid();
 
 	return false;

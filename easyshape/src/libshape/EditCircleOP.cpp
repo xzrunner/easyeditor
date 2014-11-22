@@ -40,7 +40,7 @@ bool EditCircleOP::onMouseLeftDown(int x, int y)
 
 	m_firstPress = m_currPos = m_editPanel->transPosScreenToProject(x, y);
 
-	m_shapesImpl->getShapeSelection()->clear();
+	m_shapesImpl->getShapeSelection()->Clear();
 
 	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
 	if (tolerance != 0)
@@ -51,7 +51,7 @@ bool EditCircleOP::onMouseLeftDown(int x, int y)
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
 			m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
-			m_shapesImpl->getShapeSelection()->insert(circle);
+			m_shapesImpl->getShapeSelection()->Add(circle);
 		}
 	}
 	else
@@ -77,7 +77,7 @@ bool EditCircleOP::onMouseLeftUp(int x, int y)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
 				m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
-				m_shapesImpl->getShapeSelection()->insert(circle);
+				m_shapesImpl->getShapeSelection()->Add(circle);
 				m_shapesImpl->insertShape(circle);
 			}
 		}
@@ -110,7 +110,7 @@ bool EditCircleOP::onMouseRightDown(int x, int y)
 		if (m_captured.shape)
 		{
 			m_shapesImpl->removeShape(m_captured.shape);
-			m_shapesImpl->getShapeSelection()->clear();
+			m_shapesImpl->getShapeSelection()->Clear();
 			m_captured.clear();
 			m_editPanel->Refresh();
 

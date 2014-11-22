@@ -2,8 +2,6 @@
 
 #include "dataset/wrap_ISprite.h"
 #include "dataset/wrap_SelectionSet.h"
-
-#include "dataset/SelectionSet.h"
 #include "view/MultiSpritesImpl.h"
 
 d2d::StageModule MODULE_STAGE;

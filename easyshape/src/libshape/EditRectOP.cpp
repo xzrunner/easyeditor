@@ -40,7 +40,7 @@ bool EditRectOP::onMouseLeftDown(int x, int y)
 
 	m_firstPress = m_currPos = m_editPanel->transPosScreenToProject(x, y);
 
-	m_shapesImpl->getShapeSelection()->clear();
+	m_shapesImpl->getShapeSelection()->Clear();
 
 	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
 	if (tolerance != 0)
@@ -51,7 +51,7 @@ bool EditRectOP::onMouseLeftDown(int x, int y)
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
 			m_propertyPanel->setPropertySetting(new RectPropertySetting(m_editPanel, rect));
-			m_shapesImpl->getShapeSelection()->insert(rect);
+			m_shapesImpl->getShapeSelection()->Add(rect);
 		}
 	}
 	else
@@ -77,7 +77,7 @@ bool EditRectOP::onMouseLeftUp(int x, int y)
 			{
 				RectShape* rect = new RectShape(m_firstPress, m_currPos);
 				m_propertyPanel->setPropertySetting(new RectPropertySetting(m_editPanel, rect));
-				m_shapesImpl->getShapeSelection()->insert(rect);
+				m_shapesImpl->getShapeSelection()->Add(rect);
 				m_shapesImpl->insertShape(rect);
 			}
 		}
@@ -110,7 +110,7 @@ bool EditRectOP::onMouseRightDown(int x, int y)
 		if (m_captured.shape)
 		{
 			m_shapesImpl->removeShape(m_captured.shape);
-			m_shapesImpl->getShapeSelection()->clear();
+			m_shapesImpl->getShapeSelection()->Clear();
 			m_captured.clear();
 			m_editPanel->Refresh();
 

@@ -6,7 +6,7 @@
 #include "interfaces.h"
 #include "EditPanelDefs.h"
 
-#include "dataset/SelectionSet.h"
+#include "dataset/ObjSelectionSet.h"
 
 namespace d2d
 {

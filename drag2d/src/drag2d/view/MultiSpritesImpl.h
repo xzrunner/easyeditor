@@ -5,7 +5,7 @@
 #include "EditPanelDefs.h"
 
 #include "common/visitors.h"
-#include "dataset/SelectionSet.h"
+#include "dataset/ObjSelectionSet.h"
 
 namespace d2d
 {

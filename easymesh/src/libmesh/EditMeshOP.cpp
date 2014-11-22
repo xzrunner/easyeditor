@@ -74,7 +74,7 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 	Shape* shape = m_stage->GetShape();
 	if (!shape) return false;
 
-	if (!m_selection.empty())
+	if (!m_selection.IsEmpty())
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		if (m_bRightPress)
@@ -108,7 +108,7 @@ bool EditMeshOP::onDraw() const
 void EditMeshOP::translasteNode(const d2d::Vector& offset)
 {
 	std::vector<Node*> nodes;
-	m_selection.traverse(d2d::FetchAllVisitor<Node>(nodes));
+	m_selection.Traverse(d2d::FetchAllVisitor<Node>(nodes));
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		nodes[i]->xy += offset;
@@ -119,7 +119,7 @@ void EditMeshOP::rotateNode(const d2d::Vector& dst)
 {
 	float angle = d2d::Math::getAngleInDirection(m_center, m_lastPos, dst);
 	std::vector<Node*> nodes;
-	m_selection.traverse(d2d::FetchAllVisitor<Node>(nodes));
+	m_selection.Traverse(d2d::FetchAllVisitor<Node>(nodes));
 	for (int i = 0, n = nodes.size(); i < n; ++i)
 	{
 		Node* node = nodes[i];

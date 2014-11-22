@@ -179,7 +179,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 				else
 				{
 					m_shapesImpl->removeShape(m_capturedEditable.shape);
-					m_shapesImpl->getShapeSelection()->clear();
+					m_shapesImpl->getShapeSelection()->Clear();
 					m_capturedEditable.clear();
 					m_captureSelectable.clear();
 					m_dirty = true;
@@ -324,14 +324,14 @@ void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 		if (m_propertyPanel) {
 			m_propertyPanel->setPropertySetting(new PolygonPropertySetting(m_editPanel, poly));
 		}
-		m_shapesImpl->getShapeSelection()->insert(poly);
+		m_shapesImpl->getShapeSelection()->Add(poly);
 	}
 	else if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
 		if (m_propertyPanel) {
 			m_propertyPanel->setPropertySetting(new ChainPropertySetting(m_editPanel, chain));
 		}
-		m_shapesImpl->getShapeSelection()->insert(chain);
+		m_shapesImpl->getShapeSelection()->Add(chain);
 	}	
 }
 

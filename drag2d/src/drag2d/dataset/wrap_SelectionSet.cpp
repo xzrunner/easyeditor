@@ -16,7 +16,7 @@ namespace d2d
 		float y = (float)luaL_checknumber(L, 3);
 		if (!t) return 0;
 		std::vector<ISprite*> sprites;
-		t->traverse(FetchAllVisitor<ISprite>(sprites));
+		t->Traverse(FetchAllVisitor<ISprite>(sprites));
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			ISprite* s = sprites[i];
@@ -31,7 +31,7 @@ namespace d2d
 		SpriteSelection* t = luax_checkSpriteSelection(L, 1);
 		if (!t) return 0;
 		std::vector<ISprite*> sprites;
-		t->traverse(FetchAllVisitor<ISprite>(sprites));
+		t->Traverse(FetchAllVisitor<ISprite>(sprites));
 		if (sprites.empty())
 			return 0;
 		luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)sprites[0]);

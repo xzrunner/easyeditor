@@ -63,7 +63,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		// add history
 		{
 			std::vector<ISprite*> sprites;
-			m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 
 			std::vector<ISprite*> noPhysicsSprites;
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
@@ -76,7 +76,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 	case WXK_SPACE:
 		{
 			std::vector<ISprite*> sprites;
-			m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
 				ISprite* sprite = sprites[i];
 				sprite->setTransform(Vector(0, 0), 0);
@@ -142,10 +142,10 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 	m_align.SetInvisible();
 
 	ISprite* selected = NULL;
-	if (m_selection->size() == 1)
+	if (m_selection->Size() == 1)
 	{
 		std::vector<ISprite*> sprites;
-		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 		selected = sprites[0];
 	}
 	if (!selected) {
@@ -205,7 +205,7 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 		m_op_state = NULL;
 	}
 
-	if (!m_selection->empty()) {
+	if (!m_selection->IsEmpty()) {
 		Vector p;
 		p.setInvalid();
 		m_op_state = CreateTransalteState(m_selection, p);
@@ -213,11 +213,11 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 
 	if (Config::Instance()->GetSettings().open_sprite_capture
 		&& m_align.IsOpen() 
-		&& !m_selection->empty()
+		&& !m_selection->IsEmpty()
 		&& m_left_down_pos != pos)
 	{
 		std::vector<ISprite*> sprites;
-		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 		m_align.Align(sprites);
 	}
 
@@ -234,10 +234,10 @@ void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 	m_right_down_pos = pos;
 
 	ISprite* selected = NULL;
-	if (m_selection->size() == 1)
+	if (m_selection->Size() == 1)
 	{
 		std::vector<ISprite*> sprites;
-		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 		selected = sprites[0];
 	}
 	if (!selected) return;
@@ -269,7 +269,7 @@ void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 
 void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 {
-	if (m_right_down_pos.isValid() && !m_selection->empty())
+	if (m_right_down_pos.isValid() && !m_selection->IsEmpty())
 	{
 		Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
@@ -324,7 +324,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 		{
 			if (Config::Instance()->IsUseDTex()) {
 				std::vector<d2d::ISprite*> selected;
-				m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+				m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 
 				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 				for (size_t i = 0, n = selected.size(); i < n; ++i) {
@@ -340,7 +340,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 		{
 			if (Config::Instance()->IsUseDTex()) {
 				std::vector<d2d::ISprite*> selected;
-				m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+				m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 				//DynamicTexture* dtex = DynamicTexture::Instance();
 				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 				for (size_t i = 0, n = selected.size(); i < n; ++i) {
@@ -357,11 +357,11 @@ void ArrangeSpriteImpl::onDraw(const Camera& cam) const
 {
 	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
 
-	if (m_cfg.is_deform_open && m_selection->size() == 1)
+	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
 		ISprite* selected = NULL;
 		std::vector<ISprite*> sprites;
-		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 		selected = sprites[0];
 
 		Vector ctrlNodes[8];
@@ -388,10 +388,10 @@ void ArrangeSpriteImpl::clear()
 ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 {
 	ISprite* selected = NULL;
-	if (m_cfg.is_deform_open && m_selection->size() == 1)
+	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{
 		std::vector<ISprite*> sprites;
-		m_selection->traverse(FetchAllVisitor<ISprite>(sprites));
+		m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 		selected = sprites[0];
 	}
 	if (!selected) return NULL;
@@ -431,7 +431,7 @@ void ArrangeSpriteImpl::onDirectionKeyDown(DirectionType type)
 void ArrangeSpriteImpl::onSpaceKeyDown()
 {
 	std::vector<ISprite*> selected;
-	m_selection->traverse(FetchAllVisitor<ISprite>(selected));
+	m_selection->Traverse(FetchAllVisitor<ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i)
 	{
 		selected[i]->setTransform(Vector(0, 0), 0);
@@ -479,7 +479,7 @@ IArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(ISprite* sprite) const
 void ArrangeSpriteImpl::UpOneLayer()
 {
 	std::vector<d2d::ISprite*> selected;
-	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i)
 		m_spritesImpl->resetSpriteOrder(selected[i], true);
 }
@@ -487,7 +487,7 @@ void ArrangeSpriteImpl::UpOneLayer()
 void ArrangeSpriteImpl::DownOneLayer()
 {
 	std::vector<d2d::ISprite*> selected;
-	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i)
 		m_spritesImpl->resetSpriteOrder(selected[i], false);
 }

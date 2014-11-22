@@ -30,10 +30,10 @@ void MultiSpritesImpl::querySpritesByRect(const Rect& rect, bool contain, std::v
 
 void MultiSpritesImpl::removeSpriteSelection()
 {
-	if (!m_spriteSelection->empty())
+	if (!m_spriteSelection->IsEmpty())
 	{
-		m_spriteSelection->traverse(RemoveSelectionVisitor(this));
-		m_spriteSelection->clear();
+		m_spriteSelection->Traverse(RemoveSelectionVisitor(this));
+		m_spriteSelection->Clear();
 		refresh();
 	}
 }

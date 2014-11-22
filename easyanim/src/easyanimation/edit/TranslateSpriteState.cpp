@@ -19,10 +19,10 @@ void TranslateSpriteState::Translate(const d2d::Vector& offset)
 	d2d::TranslateSpriteState::Translate(offset);
 
 	d2d::SpriteSelection* selection = GetSelection();
-	if (!selection->empty())
+	if (!selection->IsEmpty())
 	{
 		std::vector<d2d::ISprite*> sprites;
-		selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 		m_stage->getSkeletonData().updateJoint(sprites[0]);
 	}
 }

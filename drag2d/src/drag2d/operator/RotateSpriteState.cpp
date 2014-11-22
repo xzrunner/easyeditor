@@ -30,7 +30,7 @@ AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)
 
 bool RotateSpriteState::OnMouseMove(const Vector& pos)
 {
-	if (m_selection->size() != 1) return false;
+	if (m_selection->Size() != 1) return false;
 
 	Rotate(pos);
 	m_last_pos = pos;
@@ -40,7 +40,7 @@ bool RotateSpriteState::OnMouseMove(const Vector& pos)
 
 void RotateSpriteState::Rotate(const Vector& dst)
 {
-	m_selection->traverse(Visitor(m_last_pos, dst));
+	m_selection->Traverse(Visitor(m_last_pos, dst));
 }
 
 //////////////////////////////////////////////////////////////////////////
