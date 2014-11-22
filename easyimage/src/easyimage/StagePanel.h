@@ -39,7 +39,7 @@ private:
 	}; // DragSymbolTarget
 
 private:
-	const d2d::ISprite* m_image;
+	d2d::ISprite* m_image;
 
 	// todo 根据OP的不同来组织数据
 	const d2d::ISprite *m_left, *m_right;

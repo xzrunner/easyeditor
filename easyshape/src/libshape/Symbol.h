@@ -41,7 +41,11 @@ protected:
 	virtual void loadResources();
 
 private:
+	void LoadBGOutline(d2d::ISymbol* bg);
+
+private:
 	d2d::ISymbol* m_bg;
+	std::vector<d2d::IShape*> m_bg_outline;
 
 	std::vector<d2d::IShape*> m_shapes;
 

@@ -166,6 +166,10 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="..\..\..\src\libimage\config.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easyimage.h"
 			>
 		</File>

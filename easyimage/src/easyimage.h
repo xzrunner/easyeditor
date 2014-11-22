@@ -5,5 +5,6 @@
 #include "libimage/PixelsTools.h"
 #include "libimage/ExtractOutlineRaw.h"
 #include "libimage/ExtractOutlineFine.h"
+#include "libimage/config.h"
 
 #endif // _EASYIMAGE_H_

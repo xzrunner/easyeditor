@@ -11,8 +11,6 @@ static const float TOLERANCE = 0.04f;
 
 //#define TRIGGER_STEP		// step by step
 
-static const char* FILE_TAG = "outline";
-
 AutoCutCMPT::AutoCutCMPT(wxWindow* parent, const wxString& name, 
 						 StagePanel* stage)
 	: d2d::AbstractEditCMPT(parent, name, stage)
@@ -78,10 +76,16 @@ void AutoCutCMPT::OutputOutline(wxCommandEvent& event)
 
 	Json::Value value;
 	AutoCutOP* op = static_cast<AutoCutOP*>(m_editOP);
-	d2d::JsonTools::store(op->m_fine_bound_line, value["normal"]);
+
+	d2d::Vector offset(-0.5f*img->originWidth(), -0.5f*img->originHeight());
+	std::vector<d2d::Vector> vertices(op->m_fine_bound_line);
+	for (int i = 0, n = vertices.size(); i < n; ++i) {
+		vertices[i] += offset;
+	}
+	d2d::JsonTools::store(vertices, value["normal"]);
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(img->filepath(), 
-		FILE_TAG, "json");
+		OUTLINE_FILE_TAG, "json");
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filepath.fn_str());

@@ -1,5 +1,8 @@
 #include "Symbol.h"
 #include "FileAdapter.h"
+#include "ChainShape.h"
+
+#include <easyimage.h>
 
 namespace libshape
 {
@@ -17,7 +20,11 @@ Symbol::Symbol(const Symbol& symbol)
 	if (m_bg) {
 		m_bg->Retain();
 	}
-
+	m_bg_outline.reserve(symbol.m_bg_outline.size());
+	for (size_t i = 0, n = symbol.m_bg_outline.size(); i < n; ++i) {
+		m_bg_outline.push_back(symbol.m_bg_outline[i]->clone());
+	}
+	
 	m_shapes.reserve(symbol.m_shapes.size());
 	for (size_t i = 0, n = symbol.m_shapes.size(); i < n; ++i) {
 		m_shapes.push_back(symbol.m_shapes[i]->clone());
@@ -46,6 +53,10 @@ void Symbol::draw(const d2d::Matrix& mt,
 	if (m_bg) {
 		m_bg->draw(mt, mul, add, sprite);
 	}
+	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
+		m_bg_outline[i]->draw();
+	}
+
 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
 		m_shapes[i]->draw();
 	}
@@ -54,17 +65,26 @@ void Symbol::draw(const d2d::Matrix& mt,
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
 	d2d::Rect rect;
-	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
+	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
+		rect.combine(m_bg_outline[i]->getRect());
+	}
+	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
 		rect.combine(m_shapes[i]->getRect());
+	}
 	return rect;
 }
 
 void Symbol::Traverse(d2d::IVisitor& visitor) const
 {
+	for (int i = 0, n = m_bg_outline.size(); i < n; ++i) {
+		bool hasNext;
+		visitor.visit(m_bg_outline[i], hasNext);
+		if (!hasNext) return;
+	}
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
 		bool hasNext;
 		visitor.visit(m_shapes[i], hasNext);
-		if (!hasNext) break;
+		if (!hasNext) return;
 	}
 }
 
@@ -98,6 +118,11 @@ void Symbol::Clear()
 		m_bg = NULL;
 	}
 
+	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
+		m_bg_outline[i]->Release();
+	}
+	m_bg_outline.clear();
+
 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
 		m_shapes[i]->Release();
 	}
@@ -106,6 +131,9 @@ void Symbol::Clear()
 
 void Symbol::SetBG(d2d::ISymbol* bg)
 {
+	if (m_bg != bg) {
+		LoadBGOutline(bg);
+	}
 	d2d::obj_assign((d2d::Object*&)m_bg, bg);
 }
 
@@ -115,6 +143,39 @@ void Symbol::loadResources()
 
 	FileAdapter adpater(m_shapes);
 	adpater.load(m_filepath.c_str());
+}
+
+void Symbol::LoadBGOutline(d2d::ISymbol* bg)
+{
+	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
+		m_bg_outline[i]->Release();
+	}
+	m_bg_outline.clear();
+
+	if (!bg) {
+		return;
+	}
+
+	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
+		bg->getFilepath(), eimage::OUTLINE_FILE_TAG, "json");
+	if (!d2d::FilenameTools::isExist(filepath)) {
+		return;
+	}
+
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.fn_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	std::vector<d2d::Vector> vertices;
+	d2d::JsonTools::load(value["normal"], vertices);
+	if (!vertices.empty()) {
+		d2d::IShape* shape = new ChainShape(vertices, true);
+		m_bg_outline.push_back(shape);
+	}
 }
 
 }
