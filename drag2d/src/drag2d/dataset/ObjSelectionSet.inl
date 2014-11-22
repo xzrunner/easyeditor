@@ -7,7 +7,7 @@ namespace d2d
 template<class T>
 inline ObjSelectionSet<T>::~ObjSelectionSet()
 {
-	Clear();	
+	Clear();
 }
 
 template<class T>
@@ -23,15 +23,19 @@ inline void ObjSelectionSet<T>::Clear()
 template<class T>
 inline void ObjSelectionSet<T>::Add(T* item)
 {
-	item->retain();
-	SelectionSet<T>::Add(item);
+	if (item) {
+		item->retain();
+		SelectionSet<T>::Add(item);
+	}
 }
 
 template<class T>
 inline void ObjSelectionSet<T>::Remove(T* item)
 {
-	item->release();
-	SelectionSet<T>::Remove(item);
+	if (item) {
+		item->release();
+		SelectionSet<T>::Remove(item);
+	}
 }
 
 }

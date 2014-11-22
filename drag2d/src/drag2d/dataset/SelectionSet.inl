@@ -13,13 +13,17 @@ inline void SelectionSet<T>::Clear()
 template<class T>
 inline void SelectionSet<T>::Add(T* sprite)
 {
-	m_items.insert(sprite);
+	if (sprite) {
+		m_items.insert(sprite);
+	}
 }
 
 template<class T>
 inline void SelectionSet<T>::Remove(T* sprite)
 {
-	m_items.erase(sprite);
+	if (sprite) {
+		m_items.erase(sprite);
+	}
 }
 
 template<class T>
