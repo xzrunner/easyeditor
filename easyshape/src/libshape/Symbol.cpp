@@ -1,5 +1,5 @@
 #include "Symbol.h"
-#include "FileAdapter.h"
+#include "FileIO.h"
 #include "ChainShape.h"
 
 #include <easyimage.h>
@@ -137,12 +137,17 @@ void Symbol::SetBG(d2d::ISymbol* bg)
 	d2d::obj_assign((d2d::Object*&)m_bg, bg);
 }
 
+void Symbol::StoreToFile(const char* filename) const
+{
+	std::vector<d2d::IShape*> shapes(m_shapes);
+	std::copy(m_bg_outline.begin(), m_bg_outline.end(), back_inserter(shapes));
+	FileIO::StoreToFile(filename, shapes, m_bg);
+}
+
 void Symbol::loadResources()
 {
 	Clear();
-
-	FileAdapter adpater(m_shapes);
-	adpater.load(m_filepath.c_str());
+	FileIO::LoadFromFile(m_filepath, m_shapes, m_bg);
 }
 
 void Symbol::LoadBGOutline(d2d::ISymbol* bg)

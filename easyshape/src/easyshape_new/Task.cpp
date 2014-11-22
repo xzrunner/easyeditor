@@ -19,12 +19,12 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-
+	m_stage->LoadFromFile(filepath);
 }
 
 void Task::store(const char* filepath) const
 {
-
+	m_stage->StoreToFile(filepath);
 }
 
 bool Task::isDirty() const
@@ -60,14 +60,14 @@ void Task::InitLayout(wxFrame* parent)
 	library->addPage(new d2d::LibraryImagePage(library->getNotebook()));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(left_hori);
-	libshape::StagePanel* stage = new libshape::StagePanel(left_vert, parent, library);
-	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, stage);
+	m_stage = new libshape::StagePanel(left_vert, parent, library);
+	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, m_stage);
 
 	left_hori->SetSashGravity(0.8f);
 	left_hori->SplitHorizontally(library, property);
 
 	left_vert->SetSashGravity(0.15f);
-	left_vert->SplitVertically(left_hori, stage);
+	left_vert->SplitVertically(left_hori, m_stage);
 
 	right_vert->SetSashGravity(0.85f);
 	right_vert->SplitVertically(left_vert, toolbar);

@@ -31,6 +31,9 @@ public:
 	virtual void insertShape(d2d::IShape* shape);
 	virtual void clearShapes();
 
+	void LoadFromFile(const char* filename);
+	void StoreToFile(const char* filename) const;
+
 	//virtual void loadShapes();
 	//virtual void storeShapes() const;
 

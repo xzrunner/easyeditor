@@ -35,6 +35,8 @@ public:
 
 	void SetBG(d2d::ISymbol* bg);
 
+	void StoreToFile(const char* filename) const;
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:

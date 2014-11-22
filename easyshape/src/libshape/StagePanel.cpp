@@ -77,10 +77,25 @@ const d2d::ISymbol& StagePanel::GetSymbol() const
 	return *m_symbol;
 }
 
+void StagePanel::LoadFromFile(const char* filename)
+{
+	if (m_symbol) {
+		m_symbol->loadFromFile(filename);
+	}
+}
+
+void StagePanel::StoreToFile(const char* filename) const
+{
+	if (m_symbol) {
+		m_symbol->StoreToFile(filename);
+	}
+}
+
 void StagePanel::SetSymbolBG(d2d::ISymbol* symbol)
 {
 	if (m_symbol) {
 		m_symbol->SetBG(symbol);
+		m_canvas->Refresh();
 	}
 }
 

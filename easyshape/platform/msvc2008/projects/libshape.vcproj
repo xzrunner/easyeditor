@@ -153,11 +153,11 @@
 			Name="fileio"
 			>
 			<File
-				RelativePath="..\..\..\src\libshape\FileAdapter.cpp"
+				RelativePath="..\..\..\src\libshape\FileIO.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libshape\FileAdapter.h"
+				RelativePath="..\..\..\src\libshape\FileIO.h"
 				>
 			</File>
 			<File

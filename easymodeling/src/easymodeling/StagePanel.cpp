@@ -146,7 +146,7 @@ namespace emodeling
 	void StagePanel::loadBody(const wxString& filepath, libmodeling::Body& body)
 	{
 		std::vector<d2d::IShape*> shapes;
-		libshape::FileAdapter adapter(shapes);
+		libshape::FileIO adapter(shapes);
 		adapter.load(filepath.c_str());
 
 		for (size_t i = 0, n = shapes.size();  i< n; ++i)

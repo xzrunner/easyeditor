@@ -27,6 +27,9 @@ public:
 private:
 	void InitLayout(wxFrame* parent);
 
+private:
+	libshape::StagePanel* m_stage;
+
 }; // Task
 
 }

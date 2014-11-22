@@ -183,7 +183,7 @@ Json::Value FileIO::b2j(const libmodeling::Fixture* fixture)
 	value["categoryBits"] = fixture->categoryBits;
 	value["maskBits"] = fixture->maskBits;
 	value["groupIndex"] = fixture->groupIndex;
-	value["shape"] = libshape::FileAdapter::store(fixture->shape);
+	value["shape"] = libshape::FileIO::store(fixture->shape);
 
 	return value;
 }
