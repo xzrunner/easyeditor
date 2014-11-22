@@ -22,9 +22,13 @@ protected:
 
 private:
 	void Trigger(wxCommandEvent& event);
+	void OutputOutline(wxCommandEvent& event);
 
 	void CreateOutline(wxCommandEvent& event);
 	void ReduceOutlineCount(wxCommandEvent& event);
+
+private:
+	void Trigger();
 
 private:
 	StagePanel* m_stage;
