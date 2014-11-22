@@ -319,20 +319,17 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 
 void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 {
-	if (PolygonShape* poly = dynamic_cast<PolygonShape*>(captured.shape))
-	{
-		if (m_propertyPanel) {
+	if (m_propertyPanel) {
+		if (PolygonShape* poly = dynamic_cast<PolygonShape*>(captured.shape)) {
 			m_propertyPanel->setPropertySetting(new PolygonPropertySetting(m_editPanel, poly));
-		}
-		m_shapesImpl->getShapeSelection()->Add(poly);
-	}
-	else if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
-	{
-		if (m_propertyPanel) {
+		} else if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape)) {
 			m_propertyPanel->setPropertySetting(new ChainPropertySetting(m_editPanel, chain));
 		}
-		m_shapesImpl->getShapeSelection()->Add(chain);
-	}	
+	}
+
+	d2d::ShapeSelection* selection = m_shapesImpl->getShapeSelection();
+	selection->Clear();
+	selection->Add(captured.shape);
 }
 
 //////////////////////////////////////////////////////////////////////////
