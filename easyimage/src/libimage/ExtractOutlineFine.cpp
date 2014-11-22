@@ -55,15 +55,13 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 	do {
 		success = false;
 
-		int sz = m_fine_border.size();
-
 		float area = d2d::Math::GetPolygonArea(m_fine_border);
 
 		// remove one node
 		d2d::Vector r_new0, r_new1;
 		int r_idx = 0;
 		float r_area_decrease = 0;
-		for (int i = 0; i < sz; ++i) {
+		for (int i = 0, n = m_fine_border.size(); i < n; ++i) {
 			d2d::Vector _new0, _new1;
 			float _area_decrease = 0;
 			RemoveOneNode(i, _new0, _new1, _area_decrease);
@@ -79,7 +77,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 		d2d::Vector a_new_start, a_new_end, a_new_node;
 		int a_idx = 0;
 		float a_area_decrease = 0;
-		for (int i = 0; i < sz; ++i) {
+		for (int i = 0, n = m_fine_border.size(); i < n; ++i) {
 			d2d::Vector _new_start, _new_end, _new_node;
 			float _area_decrease = 0;
 			AddOneNode(i, _new_start, _new_end, _new_node, _area_decrease);
@@ -98,37 +96,37 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 			if (r_area_decrease / area > tolerance) {
 				m_fine_border.erase(m_fine_border.begin()+r_idx);
 				m_fine_border.insert(m_fine_border.begin()+r_idx, r_new0);
-				m_fine_border.insert(m_fine_border.begin()+((r_idx+1)%sz), r_new1);
+				m_fine_border.insert(m_fine_border.begin()+((r_idx+1)%m_fine_border.size()), r_new1);
 				success = true;
 			}
 		} else {
 			if (a_area_decrease / area > tolerance) {
 				const d2d::Vector& start = m_fine_border[a_idx];
-				const d2d::Vector& start_prev = m_fine_border[(a_idx+sz-1)%sz];
+				const d2d::Vector& start_prev = m_fine_border[(a_idx+m_fine_border.size()-1)%m_fine_border.size()];
 				d2d::Vector s0 = a_new_start - a_new_node, 
 					s1 = start - start_prev;
 				d2d::Vector new_start;
 				int new_node_pos;
 				if (f2Cross(s0, s1) < 0 &&
 					d2d::Math::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &new_start)) {
+					new_node_pos = (a_idx+1)%m_fine_border.size();
 					m_fine_border[a_idx] = new_start;
-					new_node_pos = (a_idx+1)%sz;
 				} else {
-					m_fine_border.insert(m_fine_border.begin()+((a_idx+1)%sz), a_new_start);
-					new_node_pos = (a_idx+2)%sz;
+					new_node_pos = (a_idx+2)%m_fine_border.size();
+					m_fine_border.insert(m_fine_border.begin()+((a_idx+1)%m_fine_border.size()), a_new_start);
 				}
 				m_fine_border.insert(m_fine_border.begin()+new_node_pos, a_new_node);
 
-				const d2d::Vector& end = m_fine_border[(new_node_pos+1)%sz];
-				const d2d::Vector& end_next = m_fine_border[(new_node_pos+2)%sz];
+				const d2d::Vector& end = m_fine_border[(new_node_pos+1)%m_fine_border.size()];
+				const d2d::Vector& end_next = m_fine_border[(new_node_pos+2)%m_fine_border.size()];
 				d2d::Vector e0 = a_new_end - a_new_node,
 					e1 = end - end_next;
 				d2d::Vector new_end;
 				if (f2Cross(e0, e1) > 0 &&
 					d2d::Math::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &new_end)) {
-					m_fine_border[(new_node_pos+1)%sz] = new_end;
+					m_fine_border[(new_node_pos+1)%m_fine_border.size()] = new_end;
 				} else {
-					m_fine_border.insert(m_fine_border.begin()+((new_node_pos+1)%sz), a_new_end);
+					m_fine_border.insert(m_fine_border.begin()+((new_node_pos+1)%m_fine_border.size()), a_new_end);
 				}
 
 				success = true;
@@ -162,10 +160,9 @@ void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& 
 {
 	decrease = 0;
 
-	int sz = m_fine_border.size();
 	const d2d::Vector& curr = m_fine_border[idx];
-	const d2d::Vector& prev = m_fine_border[(idx+sz-1)%sz];
-	const d2d::Vector& next = m_fine_border[(idx+1)%sz];
+	const d2d::Vector& prev = m_fine_border[(idx+m_fine_border.size()-1)%m_fine_border.size()];
+	const d2d::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
 	d2d::Vector s0 = curr - prev, s1 = next - curr;
 	if (f2Cross(s0, s1) >= 0) {
 		return;
@@ -199,9 +196,8 @@ void ExtractOutlineFine::AddOneNode(int idx, d2d::Vector& new_start, d2d::Vector
 									d2d::Vector& new_node, float& decrease) const
 {
 	decrease = 0;
-	int sz = m_fine_border.size();
 	const d2d::Vector& curr = m_fine_border[idx];
-	const d2d::Vector& next = m_fine_border[(idx+1)%sz];
+	const d2d::Vector& next = m_fine_border[(idx+1)%m_fine_border.size()];
 	float best_score = 0;
 	d2d::Vector best_node;
 	// init region
@@ -450,12 +446,11 @@ void ExtractOutlineFine::ReduceNode(float tolerance)
 	bool success = false;
 	do {
 		success = false;
-		int sz = m_fine_border.size();
-		for (int i = 0; i < sz; ++i)
+		for (int i = 0, n = m_fine_border.size(); i < n; ++i)
 		{
 			const d2d::Vector& curr = m_fine_border[i];
-			const d2d::Vector& prev = m_fine_border[(i+sz-1)%sz];
-			const d2d::Vector& next = m_fine_border[(i+1)%sz];
+			const d2d::Vector& prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
+			const d2d::Vector& next = m_fine_border[(i+1)%m_fine_border.size()];
 			d2d::Vector s0 = curr - prev, s1 = next - curr;
 			if (f2Cross(s0, s1) >= 0) {
 				float a = d2d::Math::GetTriangleArea(curr, prev, next);
@@ -487,13 +482,12 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 	bool success = false;
 	do {
 		success = false;
-		int sz = m_fine_border.size();
-		for (int i = 0; i < sz; ++i)
+		for (int i = 0, n = m_fine_border.size(); i < n; ++i)
 		{
 			const d2d::Vector& start = m_fine_border[i];
-			const d2d::Vector& start_prev = m_fine_border[(i+sz-1)%sz];
-			const d2d::Vector& end = m_fine_border[(i+1)%sz];
-			const d2d::Vector& end_next = m_fine_border[(i+2)%sz];
+			const d2d::Vector& start_prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
+			const d2d::Vector& end = m_fine_border[(i+1)%m_fine_border.size()];
+			const d2d::Vector& end_next = m_fine_border[(i+2)%m_fine_border.size()];
 			
 			d2d::Vector intersect;
 			bool cross = d2d::Math::GetTwoLineCross(start_prev, start, end, end_next, &intersect);
@@ -513,7 +507,7 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 					!d2d::Math::IsSegmentIntersectPolyline(intersect, end, m_fine_border)) 
 				{
 					m_fine_border[i] = intersect;
-					m_fine_border.erase(m_fine_border.begin()+((i+1)%sz));
+					m_fine_border.erase(m_fine_border.begin()+((i+1)%m_fine_border.size()));
 					success = true;
 					break;
 				}
@@ -524,9 +518,9 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 				if (IsCutTriLegal(intersect, start, end)) {
 					if (inside_s) {
 						m_fine_border[i] = intersect;
-						m_fine_border.erase(m_fine_border.begin()+((i+1)%sz));
+						m_fine_border.erase(m_fine_border.begin()+((i+1)%m_fine_border.size()));
 					} else {
-						m_fine_border[(i+1)%sz] = intersect;
+						m_fine_border[(i+1)%m_fine_border.size()] = intersect;
 						m_fine_border.erase(m_fine_border.begin()+i);
 					}
 					success = true;
