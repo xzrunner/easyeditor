@@ -14,7 +14,7 @@ public:
 	ShaderMgrBase();
 	~ShaderMgrBase();
 
-	void release();
+	void Release();
 	void reload();
 
 	// todo

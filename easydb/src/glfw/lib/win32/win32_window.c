@@ -757,7 +757,7 @@ static LRESULT CALLBACK windowProc( HWND hWnd, UINT uMsg,
         case WM_KEYUP:
         case WM_SYSKEYUP:
         {
-            // Special trick: release both shift keys on SHIFT up event
+            // Special trick: Release both shift keys on SHIFT up event
             if( wParam == VK_SHIFT )
             {
                 _glfwInputKey( GLFW_KEY_LSHIFT, GLFW_RELEASE );

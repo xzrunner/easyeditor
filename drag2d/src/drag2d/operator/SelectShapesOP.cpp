@@ -20,7 +20,7 @@ SelectShapesOP::SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl
 	, m_bDraggable(true)
 {
 	m_selection = shapesImpl->getShapeSelection();
-	m_selection->retain();
+	m_selection->Retain();
 
 	m_firstPos.setInvalid();
 }
@@ -30,7 +30,7 @@ SelectShapesOP::~SelectShapesOP()
 	clearClipboard();
 
  	m_selection->Clear();
- 	m_selection->release();
+ 	m_selection->Release();
 }
 
 bool SelectShapesOP::onKeyDown(int keyCode)
@@ -47,7 +47,7 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 		clearClipboard();
 		m_selection->Traverse(FetchAllVisitor<IShape>(m_clipboard));
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
-			m_clipboard[i]->retain();
+			m_clipboard[i]->Retain();
 		m_shapeImpl->removeShapeSelection();
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
@@ -187,7 +187,7 @@ IPropertySetting* SelectShapesOP::createPropertySetting(IShape* shape) const
 void SelectShapesOP::clearClipboard()
 {
  	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
- 		m_clipboard[i]->release();
+ 		m_clipboard[i]->Release();
  	m_clipboard.clear();
 }
 

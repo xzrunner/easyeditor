@@ -123,9 +123,9 @@ void LibJpeg::write_JPEG_file(const char* filename, int quality, const ImageData
 	/* After finish_compress, we can close the output file. */
 	fclose(outfile);
 
-	/* Step 7: release JPEG compression object */
+	/* Step 7: Release JPEG compression object */
 
-	/* This is an important step since it will release a good deal of memory. */
+	/* This is an important step since it will Release a good deal of memory. */
 	jpeg_destroy_compress(&cinfo);
 
 	/* And we're done! */
@@ -268,7 +268,7 @@ int LibJpeg::read_JPEG_file(const char* filename, ImageData& data)
  
    /* Step 8: Release JPEG decompression object */
  
-   /* This is an important step since it will release a good deal of memory. */
+   /* This is an important step since it will Release a good deal of memory. */
    jpeg_destroy_decompress(&cinfo);
  
    /* After finish_decompress, we can close the input file.

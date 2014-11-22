@@ -44,7 +44,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 				d2d::Snapshoot ss;
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(m_currFilename);
 				ss.outputToImageFile(symbol, filename.ToStdString());
-				symbol->release();
+				symbol->Release();
 			}
 			else
 			{
@@ -72,8 +72,8 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
 		stage->SetBackground(sprite);
-		sprite->release();
-		symbol->release();
+		sprite->Release();
+		symbol->Release();
 		stage->Refresh();
 	}
 }

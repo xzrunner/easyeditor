@@ -134,7 +134,7 @@ void _glfwInputKey( int key, int action )
         return;
     }
 
-    // Are we trying to release an already released key?
+    // Are we trying to Release an already released key?
     if( action == GLFW_RELEASE && _glfwInput.Key[ key ] != GLFW_PRESS )
     {
         return;
@@ -192,7 +192,7 @@ void _glfwInputChar( int character, int action )
 
     if( action != GLFW_PRESS )
     {
-        // This intentionally breaks release notifications for Unicode
+        // This intentionally breaks Release notifications for Unicode
         // characters, partly to see if anyone cares but mostly because it's
         // a nonsensical concept to begin with
         //

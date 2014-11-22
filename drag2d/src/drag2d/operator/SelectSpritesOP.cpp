@@ -32,7 +32,7 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 	, m_bDraggable(true)
 {
 	m_selection = spritesImpl->getSpriteSelection();
-	m_selection->retain();
+	m_selection->Retain();
 
 	m_firstPos.setInvalid();
 }
@@ -40,7 +40,7 @@ SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* sprites
 SelectSpritesOP::~SelectSpritesOP()
 {
 	m_selection->Clear();
-	m_selection->release();
+	m_selection->Release();
 }
 
 bool SelectSpritesOP::onKeyDown(int keyCode)
@@ -333,7 +333,7 @@ void SelectSpritesOP::copyFromSelection()
 				symbol->RefreshThumbnail(filepath);
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 				sprite->name = sval["name"].asString();
-				symbol->release();
+				symbol->Release();
 				sprite->load(sval);
 				m_spritesImpl->insertSprite(sprite);
 				m_selection->Add(sprite);

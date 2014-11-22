@@ -15,7 +15,7 @@ inline void ObjSelectionSet<T>::Clear()
 {
 	std::set<T*>::iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr) {
-		(*itr)->release();
+		(*itr)->Release();
 	}
 	SelectionSet<T>::Clear();	
 }
@@ -24,7 +24,7 @@ template<class T>
 inline void ObjSelectionSet<T>::Add(T* item)
 {
 	if (item) {
-		item->retain();
+		item->Retain();
 		SelectionSet<T>::Add(item);
 	}
 }
@@ -33,7 +33,7 @@ template<class T>
 inline void ObjSelectionSet<T>::Remove(T* item)
 {
 	if (item) {
-		item->release();
+		item->Release();
 		SelectionSet<T>::Remove(item);
 	}
 }

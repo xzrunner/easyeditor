@@ -43,7 +43,7 @@ EditPanel::~EditPanel()
 	delete m_camera;
 	delete m_canvas;
 	if (m_editOP) {
-		m_editOP->release();
+		m_editOP->Release();
 	}
 }
 
@@ -80,12 +80,12 @@ void EditPanel::setEditOP(AbstractEditOP* editOP)
 	}
 
 	if (editOP) {
-		editOP->retain();
+		editOP->Retain();
 	}
 	if (m_editOP)
 	{
 		m_editOP->clear();
-		m_editOP->release();
+		m_editOP->Release();
 	}
 	m_editOP = editOP;
 	if (m_editOP) {

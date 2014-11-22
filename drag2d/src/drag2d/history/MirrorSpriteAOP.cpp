@@ -16,12 +16,12 @@ MirrorSpriteAOP::MirrorSpriteAOP(ISprite* sprite,
 	, m_new_mirror_x(new_mirror_x)
 	, m_new_mirror_y(new_mirror_y)
 {
-	m_sprite->retain();
+	m_sprite->Retain();
 }
 
 MirrorSpriteAOP::~MirrorSpriteAOP()
 {
-	m_sprite->release();
+	m_sprite->Release();
 }
 
 void MirrorSpriteAOP::undo()

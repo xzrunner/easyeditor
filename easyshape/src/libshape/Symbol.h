@@ -28,16 +28,22 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
+	void Traverse(d2d::IVisitor& visitor) const;
+	void Add(d2d::IShape* shape);
+	void Remove(d2d::IShape* shape);
+	void Clear();
+
+	void SetBG(d2d::ISymbol* bg);
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void loadResources();
 
 private:
-	void clear();
+	d2d::ISymbol* m_bg;
 
-public:
-	std::vector<d2d::IShape*> shapes;
+	std::vector<d2d::IShape*> m_shapes;
 
 }; // Symbol
 

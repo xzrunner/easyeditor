@@ -34,7 +34,7 @@ void EJPreviewCanvas::initGL()
 {
 	OrthoCanvas::initGL();
 //	static_cast<LibraryPanel*>(Context::Instance()->library)->reloadTexture();
-	Shader::Instance()->release();
+	Shader::Instance()->Release();
 }
 
 void EJPreviewCanvas::onDraw()

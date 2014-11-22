@@ -16,7 +16,7 @@ bool LibraryDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filename);
 		symbol->RefreshThumbnail(filename);
 		m_library->AddSymbol(symbol);
-		symbol->release();
+		symbol->Release();
 	}
 	return true;
 }

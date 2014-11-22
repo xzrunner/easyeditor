@@ -84,7 +84,7 @@ void ScaleOverall::ScaleImage(const wxString& filepath, float scale, d2d::Snapsh
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
 	ss.outputToImageFile(symbol, filepath.ToStdString(), scale);
-	symbol->release();
+	symbol->Release();
 }
 
 void ScaleOverall::ScaleComplex(const wxString& path, float scale,

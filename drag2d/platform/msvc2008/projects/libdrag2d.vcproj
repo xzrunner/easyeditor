@@ -1402,11 +1402,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\Object.cpp"
+				RelativePath="..\..\..\src\drag2d\common\Object.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\Object.h"
+				RelativePath="..\..\..\src\drag2d\common\Object.inl"
 				>
 			</File>
 			<File

@@ -23,7 +23,7 @@ Symbol::~Symbol()
 {
 	if (m_ps)
 	{
-		m_ps->release();
+		m_ps->Release();
 		m_ps = NULL;
 	}
 }
@@ -104,7 +104,7 @@ void Symbol::loadResources()
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["symbol_path"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	m_ps->SetSymbol(symbol);
-	symbol->release();
+	symbol->Release();
 }
 
 void Symbol::DrawPS(const d2d::Matrix& mt) const

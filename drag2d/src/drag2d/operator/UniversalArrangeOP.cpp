@@ -16,11 +16,11 @@ UniversalArrangeOP::UniversalArrangeOP(EditPanel* editPanel, MultiSpritesImpl* s
 
 UniversalArrangeOP::~UniversalArrangeOP()
 {
-	m_noPhysics->release();
+	m_noPhysics->Release();
 	m_noPhysics = NULL;
 
 	for (size_t i = 0, n = m_physics.size(); i < n; ++i)
-		m_physics[i].editOP->release();
+		m_physics[i].editOP->Release();
 	m_physics.clear();
 
 	m_editOP = NULL;

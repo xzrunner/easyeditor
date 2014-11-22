@@ -17,14 +17,14 @@ PasteSpriteOP::PasteSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl
 	, m_cmpt(cmpt)
 {
 	m_selection = spritesImpl->getSpriteSelection();
-	m_selection->retain();
+	m_selection->Retain();
 
 	m_pos.setInvalid();
 }
 
 PasteSpriteOP::~PasteSpriteOP()
 {
-	m_selection->release();
+	m_selection->Release();
 }
 
 bool PasteSpriteOP::onKeyDown(int keyCode)
@@ -187,7 +187,7 @@ insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 		ISprite* newOne = sprite->clone();
 		newOne->setTransform(fixed + pos, newOne->getAngle());
 		spritesImpl->insertSprite(newOne);
-		newOne->release();
+		newOne->Release();
 	}
 }
 

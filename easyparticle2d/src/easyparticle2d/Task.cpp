@@ -122,7 +122,7 @@ void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	sd->ChangePSSymbol(symbol);
-	symbol->release();
+	symbol->Release();
 
 	m_ps_name = val["name"].asString();
 }

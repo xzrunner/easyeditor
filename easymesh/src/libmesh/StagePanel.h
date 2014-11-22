@@ -41,7 +41,7 @@ public:
 
 	// for background
 	void SetBackground(d2d::ISprite* bg) { 
-		bg->retain();
+		bg->Retain();
 		m_background = bg; 
 	}
 	const d2d::ISprite* GetBackground() const { return m_background; }

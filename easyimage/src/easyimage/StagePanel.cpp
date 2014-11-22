@@ -19,20 +19,20 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::~StagePanel()
 {
 	if (m_image) {
-		m_image->release();
+		m_image->Release();
 	}
 }
 
 void StagePanel::setImage(const std::string& filepath)
 {
 	if (m_image) {
-		m_image->release();
+		m_image->Release();
 	}
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	if (symbol) {
 		setImage(symbol);
-		symbol->release();
+		symbol->Release();
 	}
 }
 

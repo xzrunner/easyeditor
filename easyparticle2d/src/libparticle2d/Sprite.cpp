@@ -12,13 +12,13 @@ Sprite::Sprite(const Sprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 }
 
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	buildBounding();
 
 	m_symbol->ResetPS();
@@ -27,7 +27,7 @@ Sprite::Sprite(Symbol* symbol)
 Sprite::~Sprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -48,8 +48,8 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 	Symbol* particle3d = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != symbol && particle3d)
 	{
-		m_symbol->release();
-		symbol->retain();
+		m_symbol->Release();
+		symbol->Retain();
 
 		m_symbol = particle3d;
 	}

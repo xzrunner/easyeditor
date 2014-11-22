@@ -28,7 +28,7 @@ namespace ecomplex
 	{
 		if (m_background)
 		{
-			m_background->release();
+			m_background->Release();
 		}
 	}
 

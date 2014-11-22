@@ -122,7 +122,7 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 		else
 		{
 			poly->m_fillingType = PolygonShape::e_Texture;
-			// todo release symbol
+			// todo Release symbol
 			poly->m_fillingTexture = static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->fetchSymbol(m_filePath));
 		}
 		poly->buildFillingTris();

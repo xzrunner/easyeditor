@@ -40,7 +40,7 @@ FontBlankSymbol::FontBlankSymbol()
 
 FontBlankSymbol::~FontBlankSymbol()
 {
-//	m_font->release();
+//	m_font->Release();
 }
 
 void FontBlankSymbol::reloadTexture() const

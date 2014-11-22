@@ -47,7 +47,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 				sprite->translate(pos);
 				m_sprites_impl->insertSprite(sprite);
 			} else {
-				sprite->release();
+				sprite->Release();
 			}
 		}
 	}

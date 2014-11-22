@@ -26,7 +26,7 @@ void LibraryFontPage::onAddPress(wxCommandEvent& event)
 	{
 		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(dlg.GetPath());
 		m_list->insert(symbol);
-		symbol->release();
+		symbol->Release();
 	}
 }
 } // d2d

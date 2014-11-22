@@ -23,14 +23,14 @@ Sprite::Sprite(Symbol* symbol)
 {
 //	m_speed.set(0, -0.01f);
 
-	m_symbol->retain();
+	m_symbol->Retain();
 	buildBounding();
 }
 
 Sprite::~Sprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -50,9 +50,9 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 	if (m_symbol != mesh)
 	{
 		if (m_symbol) {
-			m_symbol->release();
+			m_symbol->Release();
 		}
-		symbol->retain();
+		symbol->Retain();
 
 		m_symbol = mesh;
 		buildBounding();

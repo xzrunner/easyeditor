@@ -17,7 +17,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = const_cast<d2d::ISprite*>(sprites[i]);
-		sprite->retain();
+		sprite->Retain();
 		root.m_sprites.push_back(sprite);
 	}
 

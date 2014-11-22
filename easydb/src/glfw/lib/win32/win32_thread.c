@@ -410,7 +410,7 @@ void _glfwPlatformWaitCond( GLFWcond cond, GLFWmutex mutex,
     cv->waiters_count ++;
     LeaveCriticalSection( &cv->waiters_count_lock );
 
-    // It's ok to release the mutex here since Win32 manual-reset events
+    // It's ok to Release the mutex here since Win32 manual-reset events
     // maintain state when used with SetEvent()
     LeaveCriticalSection( (CRITICAL_SECTION *) mutex );
 

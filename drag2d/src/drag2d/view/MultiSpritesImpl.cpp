@@ -13,7 +13,7 @@ MultiSpritesImpl::MultiSpritesImpl(wxWindow* wnd)
 
 MultiSpritesImpl::~MultiSpritesImpl()
 {
-	m_spriteSelection->release();
+	m_spriteSelection->Release();
 }
 
 ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const

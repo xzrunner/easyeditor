@@ -17,7 +17,7 @@ Symbol::Symbol()
 Symbol::Symbol(const Symbol& s)
 	: d2d::ISymbol(s)
 {
-	s.m_image->retain();
+	s.m_image->Retain();
 	m_image = s.m_image;
 
 	m_shape = s.m_shape->clone();
@@ -25,7 +25,7 @@ Symbol::Symbol(const Symbol& s)
 
 Symbol::Symbol(d2d::Image* image)
 {
-	image->retain();
+	image->Retain();
 	m_image = image;
 
 	m_shape = ShapeFactory::Instance()->CreateShape(*m_image);
@@ -35,12 +35,12 @@ Symbol::~Symbol()
 {
 	if (m_image)
 	{
-		m_image->release();
+		m_image->Release();
 		m_image = NULL;
 	}
 	if (m_shape)
 	{
-		m_shape->release();
+		m_shape->Release();
 		m_shape = NULL;
 	}
 }
@@ -87,9 +87,9 @@ void Symbol::draw(const d2d::Matrix& mt,
 void Symbol::SetShape(Shape* shape)
 {
 	if (m_shape) {
-		m_shape->release();
+		m_shape->Release();
 	}
-	shape->retain();
+	shape->Retain();
 	m_shape = shape;
 }
 
@@ -112,7 +112,7 @@ int Symbol::GetQuadSize() const
 void Symbol::CreateShape()
 {
 	if (m_shape) {
-		m_shape->release();
+		m_shape->Release();
 	}
 	m_shape = ShapeFactory::Instance()->CreateShape(*m_image);
 }

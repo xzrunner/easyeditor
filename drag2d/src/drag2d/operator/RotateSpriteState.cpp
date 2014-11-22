@@ -10,14 +10,14 @@ RotateSpriteState::RotateSpriteState(SpriteSelection* selection,
 									 const Vector& first_pos)
 {
 	m_selection = selection;
-	m_selection->retain();
+	m_selection->Retain();
 
 	m_first_pos = m_last_pos = first_pos;
 }
 
 RotateSpriteState::~RotateSpriteState()
 {
-	m_selection->release();
+	m_selection->Release();
 }
 
 AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)

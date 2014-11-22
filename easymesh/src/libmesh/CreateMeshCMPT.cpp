@@ -21,8 +21,8 @@ CreateMeshCMPT::CreateMeshCMPT(wxWindow* parent, const wxString& name,
 
 CreateMeshCMPT::~CreateMeshCMPT()
 {
-	m_mesh_op->release();
-	m_strip_op->release();
+	m_mesh_op->Release();
+	m_strip_op->Release();
 }
 
 wxSizer* CreateMeshCMPT::initLayout()

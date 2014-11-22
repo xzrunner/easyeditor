@@ -10,14 +10,14 @@ namespace d2d
 OffsetSpriteState::OffsetSpriteState(ISprite* sprite)
 {
 	m_sprite = sprite;
-	m_sprite->retain();
+	m_sprite->Retain();
 
 	m_old_offset = m_sprite->getOffset();
 }
 
 OffsetSpriteState::~OffsetSpriteState()
 {
-	m_sprite->release();
+	m_sprite->Release();
 }
 
 AbstractAtomicOP* OffsetSpriteState::OnMouseRelease(const Vector& pos)

@@ -44,10 +44,10 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 	{
 		wxString dir = d2d::FilenameTools::getFileDir(filepath);
 		wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
-		// todo release symbol
+		// todo Release symbol
 		//symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 		symbol->LoadImage(path);
-// 		symbol->release();
+// 		symbol->Release();
 	}
 	else
 	{
@@ -65,7 +65,7 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 	{
 		shape->Load(value);
 		symbol->SetShape(shape);
-		shape->release();
+		shape->Release();
 	}
 }
 

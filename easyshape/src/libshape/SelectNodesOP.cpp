@@ -179,7 +179,7 @@ void SelectNodesOP::fetchSelectedNode(std::vector<d2d::Vector>& nodes) const
 	Math::mergeMultiChains(src, nodes);
 
 	for (size_t i = 0, n = src.size(); i < n; ++i)
-		src[i]->release();
+		src[i]->Release();
 }
 
 int SelectNodesOP::getThreshold()

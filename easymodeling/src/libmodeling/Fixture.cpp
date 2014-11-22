@@ -23,7 +23,7 @@ Fixture::Fixture()
 
 Fixture::~Fixture()
 {
-	shape->release();
+	shape->Release();
 }
 
 bool Fixture::isContain(const d2d::Vector& pos) const

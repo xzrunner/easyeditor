@@ -23,7 +23,7 @@ Symbol::~Symbol()
 		for (size_t j = 0; j < 3; ++j)
 		{
 			if (!m_sprites[i][j]) continue;
-			m_sprites[i][j]->release();
+			m_sprites[i][j]->Release();
 		}
 	memset(m_sprites, 0, sizeof(int) * 9);
 }
@@ -112,7 +112,7 @@ void Symbol::composeFromSprites(d2d::ISprite* sprites[3][3],
 		for (size_t i = 0; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
 			{
-				if (m_sprites[i][j]) m_sprites[i][j]->release();
+				if (m_sprites[i][j]) m_sprites[i][j]->Release();
 				m_sprites[i][j] = sprites[i][j]->clone();
 			}
 		break;
@@ -121,14 +121,14 @@ void Symbol::composeFromSprites(d2d::ISprite* sprites[3][3],
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (i == 1 && j == 1) continue;
-				if (m_sprites[i][j]) m_sprites[i][j]->release();
+				if (m_sprites[i][j]) m_sprites[i][j]->Release();
 				m_sprites[i][j] = sprites[i][j]->clone();
 			}
 			break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
 		{
-			if (m_sprites[1][i]) m_sprites[1][i]->release();
+			if (m_sprites[1][i]) m_sprites[1][i]->Release();
 			m_sprites[1][i] = sprites[1][i]->clone();
 		}
 		m_height = m_sprites[1][0]->getSymbol().getSize().yLength();
@@ -136,7 +136,7 @@ void Symbol::composeFromSprites(d2d::ISprite* sprites[3][3],
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
 		{
-			if (m_sprites[i][1]) m_sprites[i][1]->release();
+			if (m_sprites[i][1]) m_sprites[i][1]->Release();
 			m_sprites[i][1] = sprites[i][1]->clone();
 		}
 		m_width = m_sprites[0][1]->getSymbol().getSize().xLength();
@@ -145,7 +145,7 @@ void Symbol::composeFromSprites(d2d::ISprite* sprites[3][3],
 		for (size_t i = 1; i < 3; ++i)
 			for (size_t j = 0; j < 3; ++j)
 			{
-				if (m_sprites[i][j]) m_sprites[i][j]->release();
+				if (m_sprites[i][j]) m_sprites[i][j]->Release();
 				m_sprites[i][j] = sprites[i][j]->clone();
 			} 
 		break;
@@ -242,7 +242,7 @@ void Symbol::loadResources()
 
 				ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-				symbol->release();
+				symbol->Release();
 				sprite->load(val);
 
 				m_sprites[i][j] = sprite;
@@ -400,7 +400,7 @@ void Symbol::initSprite(const FileLoader::Entry& entry, d2d::ISprite** pSprite,
 
 	ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-	symbol->release();
+	symbol->Release();
 
 	sprite->name = entry.name;
 

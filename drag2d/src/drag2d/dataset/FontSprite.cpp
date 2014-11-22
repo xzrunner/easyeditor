@@ -26,7 +26,7 @@ FontSprite::FontSprite(const FontSprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	font = sprite.font;
 	has_edge = sprite.has_edge;
 	color = sprite.color;
@@ -41,7 +41,7 @@ FontSprite::FontSprite(const FontSprite& sprite)
 FontSprite::FontSprite(FontBlankSymbol* symbol)
 	: m_symbol(symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	font = m_symbol->font;
 	color = transColor(m_symbol->color, PT_ARGB);
 
@@ -76,7 +76,7 @@ FontSprite::FontSprite(FontBlankSymbol* symbol)
 FontSprite::~FontSprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -97,8 +97,8 @@ void FontSprite::setSymbol(ISymbol* symbol)
 	FontBlankSymbol* font = dynamic_cast<FontBlankSymbol*>(symbol);
 	if (m_symbol != symbol && font)
 	{
-		m_symbol->release();
-		symbol->retain();
+		m_symbol->Release();
+		symbol->Retain();
 
 		m_symbol = font;
 	}

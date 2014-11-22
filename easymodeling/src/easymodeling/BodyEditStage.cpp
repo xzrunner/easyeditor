@@ -45,7 +45,7 @@ void BodyEditStage::insertShape(d2d::IShape* shape)
 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->getUserData());
 		libmodeling::Fixture* fixture = new libmodeling::Fixture;
 		fixture->body = bd;
-		shape->retain();
+		shape->Retain();
 		fixture->shape = shape;
 		bd->fixtures.push_back(fixture);
 	}
@@ -62,7 +62,7 @@ void BodyEditStage::loadShapes()
 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 		{
 			d2d::IShape* shape = bd->fixtures[i]->shape;
-			shape->retain();
+			shape->Retain();
 			m_shapes.push_back(shape);
 		}
 	}

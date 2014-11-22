@@ -33,7 +33,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 // 	, d2d::MultiShapesImpl(parent)
 // 	, m_background(NULL)
 // {
-// 	sprite->retain();
+// 	sprite->Retain();
 // 	m_sprite = sprite;
 // 
 // 	init(library);
@@ -41,15 +41,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {
-	m_symbol->release();
+	m_symbol->Release();
 	if (m_background) {
-		m_background->release();
+		m_background->Release();
 	}
 }
 
 void StagePanel::clear()
 {
-	m_symbol->release();
+	m_symbol->Release();
 	m_symbol = new Symbol;
 }
 
@@ -89,9 +89,9 @@ void StagePanel::clearShapes()
 void StagePanel::SetSymbol(Symbol* symbol)
 {
 	if (m_symbol != symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 		m_symbol = symbol;
-		m_symbol->retain();
+		m_symbol->Retain();
 	}
 }
 
@@ -154,7 +154,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
 		Symbol* symbol = new Symbol(image->getImage());
-		m_stage->m_symbol->release();
+		m_stage->m_symbol->Release();
 		m_stage->m_symbol = symbol;
 		m_stage->Refresh();
 

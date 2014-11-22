@@ -65,7 +65,7 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 	}
 	else
 	{
-		itr->second->retain();
+		itr->second->Retain();
 		return itr->second;
 	}
 }

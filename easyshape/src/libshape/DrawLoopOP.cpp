@@ -17,7 +17,7 @@ bool DrawLoopOP::onMouseLeftDClick(int x, int y)
 
 	d2d::IShape* shape = new ChainShape(m_polyline, true);
 	m_shapesImpl->insertShape(shape);
-	shape->release();
+	shape->Release();
 
 	m_polyline.clear();
 	m_currPos.setInvalid();

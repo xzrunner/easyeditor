@@ -36,16 +36,12 @@ void StageCanvas::initGL()
 
 void StageCanvas::onDraw()
 {
- 	const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_editPanel)->getSymbol();
-
-	if (symbol.getFilepath().empty() || 
-		d2d::FileNameParser::isType(symbol.getFilepath(), d2d::FileNameParser::e_shape)) {
-		libshape::StageCanvas::drawGuideLines();
-	} else {
-		symbol.draw(d2d::Matrix());
-	}
-
 	d2d::ShapeStageCanvas::onDraw();
+
+	libshape::StageCanvas::drawGuideLines();
+
+ 	const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_editPanel)->GetSymbol();
+	symbol.draw(d2d::Matrix());
 }
 
 void StageCanvas::onMouse(wxMouseEvent& event)

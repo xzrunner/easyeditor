@@ -27,9 +27,6 @@ public:
 private:
 	void InitLayout(wxFrame* parent);
 
-private:
-	libshape::Symbol m_symbol;
-
 }; // Task
 
 }

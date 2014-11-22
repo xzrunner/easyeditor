@@ -12,7 +12,7 @@ public:
 	Triangle() {}
 // 	Triangle(const Triangle& tri) {
 // 		for (int i = 0; i < 3; ++i) {
-// 			tri.nodes[0]->retain();
+// 			tri.nodes[0]->Retain();
 // 			nodes[0] = tri.nodes[0];
 // 		}
 // 	}

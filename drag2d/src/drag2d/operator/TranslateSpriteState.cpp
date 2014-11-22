@@ -9,14 +9,14 @@ TranslateSpriteState::TranslateSpriteState(SpriteSelection* selection,
 										   const Vector& first_pos)
 {
 	m_selection = selection;
-	m_selection->retain();
+	m_selection->Retain();
 
 	m_first_pos = m_last_pos = first_pos;
 }
 
 TranslateSpriteState::~TranslateSpriteState()
 {
-	m_selection->release();
+	m_selection->Release();
 }
 
 void TranslateSpriteState::OnMousePress(const Vector& pos)

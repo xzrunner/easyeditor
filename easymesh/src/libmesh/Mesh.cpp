@@ -338,7 +338,7 @@ void Mesh::RemoveShapes(d2d::IShape* shape)
 	{
 		const d2d::IShape* loop = m_region.loops[i];
 		if (loop == shape) {
-			loop->release();
+			loop->Release();
 			m_region.loops.erase(m_region.loops.begin() + i);
 			break;
 		}
@@ -349,7 +349,7 @@ void Mesh::InsertShapes(d2d::IShape* shape)
 {
 	libshape::ChainShape* loop = dynamic_cast<libshape::ChainShape*>(shape);
 	if (loop) {
-		loop->retain();
+		loop->Retain();
 		m_region.loops.push_back(loop);
 	}
 }
@@ -357,7 +357,7 @@ void Mesh::InsertShapes(d2d::IShape* shape)
 void Mesh::ClearShapes()
 {
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
-		m_region.loops[i]->release();
+		m_region.loops[i]->Release();
 	}
 	m_region.loops.clear();
 }

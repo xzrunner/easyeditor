@@ -32,7 +32,7 @@ bool PasteSymbolOP::onMouseLeftDown(int x, int y)
 		if (m_pScale)
 			sprite->setScale(*m_pScale, *m_pScale);
 		m_panelImpl->insertSprite(sprite);
-		sprite->release();
+		sprite->Release();
 	}
 
 	return false;

@@ -12,14 +12,14 @@ TranslateSpriteAOP::TranslateSpriteAOP(const SpriteSelection& selection, const V
 {
 	selection.Traverse(FetchAllVisitor<ISprite>(m_sprites));
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->retain();
+		m_sprites[i]->Retain();
 	}
 }
 
 TranslateSpriteAOP::TranslateSpriteAOP(ISprite* sprite, const Vector& offset)
 	: m_offset(offset)
 {
-	sprite->retain();
+	sprite->Retain();
 	m_sprites.push_back(sprite);
 }
 
@@ -28,7 +28,7 @@ TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<ISprite*>& sprites, con
 {
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		sprites[i]->retain();
+		sprites[i]->Retain();
 		m_sprites.push_back(sprites[i]);
 	}
 }
@@ -36,7 +36,7 @@ TranslateSpriteAOP::TranslateSpriteAOP(const std::vector<ISprite*>& sprites, con
 TranslateSpriteAOP::~TranslateSpriteAOP()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->release();
+		m_sprites[i]->Release();
 	}
 }
 

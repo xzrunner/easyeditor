@@ -33,7 +33,7 @@ namespace d2d
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 			sprite->translate(pos);
 			m_panelImpl->insertSprite(sprite);
-			sprite->release();
+			sprite->Release();
 		}
 
 		return true;

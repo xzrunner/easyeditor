@@ -178,7 +178,7 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 	anim->setFrameIndex(0);
 	saver.Save(dst.c_str());
 
-	symbol->release();
+	symbol->Release();
 }
 
 void FileIO::storeAsPng(const wxString& src, const wxString& dst)
@@ -190,7 +190,7 @@ void FileIO::storeAsPng(const wxString& src, const wxString& dst)
 	d2d::Snapshoot ss;
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
 	ss.outputToImageFile(symbol, dst.ToStdString());
-	symbol->release();
+	symbol->Release();
 }
 
 void FileIO::loadResource(const Json::Value& resValue)
@@ -267,7 +267,7 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir)
 	while (!actorValue.isNull()) {
 		d2d::ISprite* actor = loadActor(actorValue, dir);
 		frame->insertWithClone(actor);
-		actor->release();
+		actor->Release();
 		actorValue = frameValue["actor"][i++];
 	}
 
@@ -309,7 +309,7 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 //	symbol->refresh();
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	sprite->load(actorValue);
-	symbol->release();
+	symbol->Release();
 
 	return sprite;
 }
@@ -440,7 +440,7 @@ d2d::ISprite* FileIO::loadActor(rapidxml::xml_node<>* actorNode,
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 //	symbol->refresh();
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-	symbol->release();
+	symbol->Release();
 
 	rapidxml::xml_node<>* matrixNode = actorNode->first_node("matrix")->first_node("Matrix");
 	std::string stx = matrixNode->first_attribute("tx")->value();

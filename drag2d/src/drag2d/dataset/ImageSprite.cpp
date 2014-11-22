@@ -23,20 +23,20 @@ ImageSprite::ImageSprite(const ImageSprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 }
 
 ImageSprite::ImageSprite(ImageSymbol* symbol)
 	: m_symbol(symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	buildBounding();
 }
 
 ImageSprite::~ImageSprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -57,8 +57,8 @@ void ImageSprite::setSymbol(ISymbol* symbol)
 	ImageSymbol* image = dynamic_cast<ImageSymbol*>(symbol);
 	if (m_symbol != symbol && image)
 	{
-		m_symbol->release();
-		symbol->retain();
+		m_symbol->Release();
+		symbol->Retain();
 
 		m_symbol = image;
 	}

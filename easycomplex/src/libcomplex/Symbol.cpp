@@ -207,7 +207,7 @@ bool Symbol::isOneLayer() const
 //		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 //		sprite->load(spriteValue);
 //
-//		symbol->release();
+//		symbol->Release();
 //
 //		m_sprites.push_back(sprite);
 //		spriteValue = value["sprite"][i++];
@@ -351,7 +351,7 @@ void Symbol::loadResources()
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spriteValue);
 
-		symbol->release();
+		symbol->Release();
 
 		m_sprites.push_back(sprite);
 		spriteValue = value["sprite"][i++];
@@ -370,7 +370,7 @@ void Symbol::loadResources()
 void Symbol::clear()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		m_sprites[i]->release();
+		m_sprites[i]->Release();
 	m_sprites.clear();
 }
 

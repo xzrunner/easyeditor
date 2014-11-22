@@ -176,7 +176,7 @@ namespace emodeling
 			// 		}
 			body.fixtures.push_back(fixture);
 
-			//		shapes[i]->release();
+			//		shapes[i]->Release();
 		}
 	}
 

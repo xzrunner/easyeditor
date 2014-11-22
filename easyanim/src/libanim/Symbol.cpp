@@ -111,7 +111,7 @@ void Symbol::loadResources()
  				wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
  				ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-				symbol->release();
+				symbol->Release();
 				sprite->load(spriteValue);
 				dstFrame->sprites.push_back(sprite);
 				spriteValue = frameValue["actor"][k++];
@@ -135,7 +135,7 @@ void Symbol::clear()
 		{
 			Frame* frame = layer->frames[j];
 			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-				frame->sprites[k]->release();
+				frame->sprites[k]->Release();
 			delete frame;
 		}
 		delete layer;

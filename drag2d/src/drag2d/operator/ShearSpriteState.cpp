@@ -13,14 +13,14 @@ ShearSpriteState::ShearSpriteState(ISprite* sprite,
 	: m_ctrl_node(ctrl_node)
 {
 	m_sprite = sprite;
-	m_sprite->retain();
+	m_sprite->Retain();
 
 	m_first_shear = m_sprite->getShear();
 }
 
 ShearSpriteState::~ShearSpriteState()
 {
-	m_sprite->release();
+	m_sprite->Release();
 }
 
 AbstractAtomicOP* ShearSpriteState::OnMouseRelease(const Vector& pos)

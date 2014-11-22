@@ -114,7 +114,7 @@ void CocoPacker::pack(const Json::Value& val, ebuilder::CodeGenerator& gen, cons
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	float width = symbol->getSize().xLength();
-	symbol->release();
+	symbol->Release();
 	float size_start = width * val[ITEM_SCALE][ITEM_ATTR_START].asInt() * 0.01f;
 	float size_finish = width * val[ITEM_SCALE][ITEM_ATTR_END].asInt() * 0.01f;
 	lua::assign_with_end(gen, "size", width);

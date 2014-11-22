@@ -31,7 +31,7 @@ bool PasteSymbolTileOP::onMouseLeftDown(int x, int y)
 		sprite->translate(m_pos);
 		sprite->rotate(m_rotate);
 		m_panelImpl->insertSprite(sprite);
-		sprite->release();
+		sprite->Release();
 	}
 
 	return false;

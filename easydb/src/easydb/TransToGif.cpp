@@ -87,7 +87,7 @@ void TransToGif::Trigger(const std::string& srcdir, const std::string& dstdir) c
 			std::string filename = dstdir + "//" + name + ".gif";
 			saver.Save(filename.c_str());
 
-			symbol->release();
+			symbol->Release();
 		}
 	}
 }

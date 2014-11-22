@@ -13,7 +13,7 @@ Sprite::Sprite(const Sprite& sprite)
 	: d2d::ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	width = m_symbol->getSize().xLength();
 	height = m_symbol->getSize().yLength();
 }
@@ -21,7 +21,7 @@ Sprite::Sprite(const Sprite& sprite)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	width = m_symbol->getSize().xLength();
 	height = m_symbol->getSize().yLength();
 	buildBounding();
@@ -30,7 +30,7 @@ Sprite::Sprite(Symbol* symbol)
 Sprite::~Sprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -51,8 +51,8 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 	Symbol* scale9 = dynamic_cast<Symbol*>(symbol);
 	if (m_symbol != symbol && scale9)
 	{
-		m_symbol->release();
-		symbol->retain();
+		m_symbol->Release();
+		symbol->Retain();
 
 		m_symbol = scale9;
 	}

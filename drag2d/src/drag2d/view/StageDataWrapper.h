@@ -38,7 +38,7 @@
 //		: m_objs(objs) 
 //	{
 //// 		for (size_t i = 0, n = m_objs.size(); i < n; ++i)
-//// 			m_objs[i]->retain();
+//// 			m_objs[i]->Retain();
 //	}
 //
 //	template<class T>
@@ -79,7 +79,7 @@
 //		{
 //			if (m_objs[i] == obj)
 //			{
-//				obj->release();
+//				obj->Release();
 //				m_objs.erase(m_objs.begin() + i);
 //				break;
 //			}
@@ -89,7 +89,7 @@
 //	template<class T>
 //	inline void StageDataWrapper<T>::insert(T* obj)
 //	{
-//		obj->retain();
+//		obj->Retain();
 //		m_objs.push_back(obj);
 //	}
 //
@@ -97,7 +97,7 @@
 //	inline void StageDataWrapper<T>::clear()
 //	{
 //		for (size_t i = 0, n = m_objs.size(); i < n; ++i)
-//			m_objs[i]->release();
+//			m_objs[i]->Release();
 //		m_objs.clear();
 //	}
 //

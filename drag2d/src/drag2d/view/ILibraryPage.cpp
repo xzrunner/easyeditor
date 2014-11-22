@@ -103,7 +103,7 @@ void ILibraryPage::LoadFromConfig(const std::string& key)
 		std::string filename = filenames[i];
 		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filename);
 		m_list->insert(symbol);
-		symbol->release();
+		symbol->Release();
 	}
 }
 

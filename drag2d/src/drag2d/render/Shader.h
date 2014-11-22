@@ -17,7 +17,7 @@ public:
 	void shape();
 	void null();
 
-	void release();
+	void Release();
 
 	void reload();
 

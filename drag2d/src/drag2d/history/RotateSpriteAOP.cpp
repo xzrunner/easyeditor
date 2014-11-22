@@ -35,7 +35,7 @@ RotateSpriteAOP::RotateSpriteAOP(ISprite* sprite, float angle)
 RotateSpriteAOP::~RotateSpriteAOP()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->release();
+		m_sprites[i]->Release();
 	}
 }
 
@@ -103,7 +103,7 @@ void RotateSpriteAOP::Init(const std::vector<ISprite*>& sprites,
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		sprites[i]->retain();
+		sprites[i]->Retain();
 		m_sprites.push_back(sprites[i]);
 	}
 }
@@ -116,7 +116,7 @@ void RotateSpriteAOP::Init(const std::vector<ISprite*>& sprites, float angle)
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		sprites[i]->retain();
+		sprites[i]->Retain();
 		m_sprites.push_back(sprites[i]);
 	}
 }

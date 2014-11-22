@@ -9,7 +9,7 @@ void ListItem::RefreshThumbnail(const wxString& filepath, bool force)
 {
 	if (m_bitmap) {
 		if (force) {
-			m_bitmap->release();
+			m_bitmap->Release();
 		} else {
 			return;
 		}

@@ -13,7 +13,7 @@ ShaderMgrBase::~ShaderMgrBase()
 {
 }
 
-void ShaderMgrBase::release()
+void ShaderMgrBase::Release()
 {
 	for (int i = 0, n = m_shaders.size(); i < n; ++i) {
 		m_shaders[i]->Unload();

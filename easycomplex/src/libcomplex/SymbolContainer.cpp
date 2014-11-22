@@ -6,12 +6,12 @@ namespace ecomplex
 	SymbolContainer::SymbolContainer(Symbol* symbol)
 	{
 		m_symbol = symbol;
-		m_symbol->retain();
+		m_symbol->Retain();
 	}
 
 	SymbolContainer::~SymbolContainer()
 	{
-		m_symbol->release();
+		m_symbol->Release();
 	}
 
 	void SymbolContainer::traverse(d2d::IVisitor& visitor, bool order/* = true*/) const
@@ -33,7 +33,7 @@ namespace ecomplex
 
 	void SymbolContainer::clear()
 	{
-		m_symbol->release();
+		m_symbol->Release();
 
 //		d2d::VectorUtils::clear(m_symbol->m_sprites);
 	}

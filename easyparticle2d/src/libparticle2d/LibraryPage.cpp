@@ -33,7 +33,7 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			symbol->RefreshThumbnail(filepath);
 			m_list->insert(symbol);
-			symbol->release();
+			symbol->Release();
 		}
 
 		if (!filenames.empty() && m_canvas) {

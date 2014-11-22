@@ -51,7 +51,7 @@ GLFWAPI int GLFWAPIENTRY glfwGetKey( int key )
 
     if( _glfwInput.Key[ key ] == GLFW_STICK )
     {
-        // Sticky mode: release key now
+        // Sticky mode: Release key now
         _glfwInput.Key[ key ] = GLFW_RELEASE;
         return GLFW_PRESS;
     }
@@ -80,7 +80,7 @@ GLFWAPI int GLFWAPIENTRY glfwGetMouseButton( int button )
 
     if( _glfwInput.MouseButton[ button ] == GLFW_STICK )
     {
-        // Sticky mode: release mouse button now
+        // Sticky mode: Release mouse button now
         _glfwInput.MouseButton[ button ] = GLFW_RELEASE;
         return GLFW_PRESS;
     }

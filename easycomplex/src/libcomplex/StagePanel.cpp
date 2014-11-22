@@ -45,7 +45,7 @@ void StagePanel::clear()
 
 	Symbol* symbol = getSymbol();
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		symbol->m_sprites[i]->release();
+		symbol->m_sprites[i]->Release();
 	symbol->m_sprites.clear();
 
 	symbol->m_clipbox = d2d::Rect(0, 0);

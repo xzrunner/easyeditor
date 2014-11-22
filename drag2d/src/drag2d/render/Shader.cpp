@@ -90,7 +90,7 @@ void Shader::null()
 	m_prog_curr = 0;
 }
 
-void Shader::release()
+void Shader::Release()
 {
 	unload();
 }

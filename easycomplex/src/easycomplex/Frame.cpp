@@ -58,7 +58,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 				d2d::Snapshoot ss;
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(m_currFilename);
 				ss.outputToImageFile(symbol, filename.ToStdString());
-				symbol->release();
+				symbol->Release();
 			}
 			else
 			{
@@ -133,7 +133,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
  		d2d::GLCanvas* canvas = stage->getCanvas();
  		static_cast<StageCanvas*>(canvas)->setBackground(img);
-		img->release();
+		img->Release();
 	}
 }
 

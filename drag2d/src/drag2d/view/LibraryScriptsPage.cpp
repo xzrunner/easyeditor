@@ -36,7 +36,7 @@ namespace d2d
 				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
 				symbol->RefreshThumbnail(filepath);
 				m_list->insert(symbol);
-				symbol->release();
+				symbol->Release();
 			}
 
 			if (m_canvas) {

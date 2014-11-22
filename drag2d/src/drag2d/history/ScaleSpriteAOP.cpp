@@ -13,14 +13,14 @@ ScaleSpriteAOP::ScaleSpriteAOP(ISprite* sprite,
 	: m_new_scale(new_scale)
 	, m_old_scale(old_scale)
 {
-	sprite->retain();
+	sprite->Retain();
 	m_sprites.push_back(sprite);
 }
 
 ScaleSpriteAOP::~ScaleSpriteAOP()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->release();
+		m_sprites[i]->Release();
 	}
 }
 

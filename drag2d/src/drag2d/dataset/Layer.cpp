@@ -105,11 +105,11 @@ void Layer::remove(IShape* shape)
 void Layer::clear()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		m_sprites[i]->release();
+		m_sprites[i]->Release();
 	m_sprites.clear();
 
 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i)
-		m_shapes[i]->release();
+		m_shapes[i]->Release();
 	m_shapes.clear();
 }
 

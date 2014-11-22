@@ -75,7 +75,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 		}
 		m_bitmap = getBitmap(image);
 		delete[] rgb;
-		symbol->release();
+		symbol->Release();
 	}
 #endif
 
@@ -103,7 +103,7 @@ void Bitmap::getImage(const wxString& filepath, wxImage& image)
 	Image* pImage = ImageMgr::Instance()->getItem(filepath);
 	Rect rect = pImage->getRegion();
 	// not cache
-	pImage->release();
+	pImage->Release();
 
 	float w = totimg.GetWidth();
 	float h = totimg.GetHeight();

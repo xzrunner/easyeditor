@@ -30,7 +30,7 @@ ParticleSystem::~ParticleSystem()
 	delete[] m_start;
 
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -290,11 +290,11 @@ void ParticleSystem::SetSymbol(d2d::ISymbol* symbol)
 	if (m_symbol != symbol)
 	{
 		if (m_symbol) {
-			m_symbol->release();
+			m_symbol->Release();
 		}
 		m_symbol = symbol;
 		if (m_symbol) {
-			m_symbol->retain();
+			m_symbol->Retain();
 		}
 	}
 }

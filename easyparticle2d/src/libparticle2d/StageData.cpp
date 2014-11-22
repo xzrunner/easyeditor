@@ -15,10 +15,10 @@ StageData::StageData()
 StageData::~StageData()
 {
 	if (m_ps) {
-		m_ps->release();
+		m_ps->Release();
 	}
 	if (m_selected) {
-		m_selected->release();
+		m_selected->Release();
 	}
 }
 
@@ -51,11 +51,11 @@ void StageData::SetSelected(Symbol* selected)
 {
 	if (m_selected != selected) {
 		if (m_selected) {
-			m_selected->release();
+			m_selected->Release();
 		}
 		m_selected = selected;
 		if (m_selected) {
-			m_selected->retain();
+			m_selected->Retain();
 		}
 		m_toolbar->ResetUIFromPS();
 	}

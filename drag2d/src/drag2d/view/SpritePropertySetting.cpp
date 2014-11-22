@@ -24,14 +24,14 @@ SpritePropertySetting::SpritePropertySetting(EditPanel* editPanel, ISprite* spri
 {
 	m_sprite = sprite;
 	if (m_sprite) {
-		m_sprite->retain();
+		m_sprite->Retain();
 	}
 }
 
 SpritePropertySetting::~SpritePropertySetting()
 {
 	if (m_sprite) {
-		m_sprite->release();
+		m_sprite->Release();
 	}	
 }
 

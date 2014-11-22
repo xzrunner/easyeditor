@@ -158,7 +158,7 @@ void BodyData::loadFromShapeFile(const wxString& filename)
 // 			m_fixtures.push_back(fd);
 // 		}
 // 
-// 		shapes[i]->release();
+// 		shapes[i]->Release();
 // 	}
 }
 

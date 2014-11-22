@@ -60,7 +60,7 @@ void Task::InitLayout(wxFrame* parent)
 	library->addPage(new d2d::LibraryImagePage(library->getNotebook()));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(left_hori);
-	libshape::StagePanel* stage = new libshape::StagePanel(left_vert, parent, &m_symbol);
+	libshape::StagePanel* stage = new libshape::StagePanel(left_vert, parent, library);
 	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, stage);
 
 	left_hori->SetSashGravity(0.8f);
@@ -71,10 +71,6 @@ void Task::InitLayout(wxFrame* parent)
 
 	right_vert->SetSashGravity(0.85f);
 	right_vert->SplitVertically(left_vert, toolbar);
-
-// 	wxSize size = m_parent->GetSize();
-// 	size.SetWidth(size.GetWidth() + 1);
-// 	m_parent->SetSize(size);
 }
 
 }

@@ -178,7 +178,7 @@ private:
 
 private:
 	int m_preload_idx;
-	std::vector<const Image*> m_preload_list;
+	std::vector<Image*> m_preload_list;
 
 	std::map<wxString, TPNode*> m_path2node;
 	

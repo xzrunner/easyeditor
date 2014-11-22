@@ -15,7 +15,7 @@ ScaleSpriteState::ScaleSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& 
 	: m_ctrl_node(ctrl_node)
 {
 	m_sprite = sprite;
-	m_sprite->retain();
+	m_sprite->Retain();
 
 	m_first_pos = m_sprite->getPosition();
 	m_first_scale = m_sprite->getScale();
@@ -23,7 +23,7 @@ ScaleSpriteState::ScaleSpriteState(ISprite* sprite, const SpriteCtrlNode::Node& 
 
 ScaleSpriteState::~ScaleSpriteState()
 {
-	m_sprite->release();
+	m_sprite->Release();
 }
 
 AbstractAtomicOP* ScaleSpriteState::OnMouseRelease(const Vector& pos)

@@ -164,8 +164,8 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 //			symbol->refresh();
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			frame->insertWithClone(sprite);
-			sprite->release();
-			symbol->release();
+			sprite->Release();
+			symbol->Release();
 		}
 		layer->insertKeyFrame(frame);
 	}

@@ -66,7 +66,7 @@ void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<d2d
 	buffer.reserve(src.size());
 	for (size_t i = 0, n = src.size(); i < n; ++i)
 	{
-		src[i]->retain();
+		src[i]->Retain();
 		buffer.push_back(src[i]);
 	}
 
@@ -78,8 +78,8 @@ void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<d2d
 		std::vector<d2d::Vector> merged;
 		mergeTwoChains(*buffer[i0], *buffer[i1], merged);
 		
-		buffer[i0]->release();
-		buffer[i1]->release();
+		buffer[i0]->Release();
+		buffer[i1]->Release();
 
 		buffer.erase(buffer.begin() + i0);
 		if (i1 < i0)
@@ -93,8 +93,8 @@ void Math::mergeMultiChains(const std::vector<ChainShape*>& src, std::vector<d2d
 	assert(buffer.size() == 2);
 
 	mergeTwoChains(*buffer[0], *buffer[1], dst);
-	buffer[0]->release();
-	buffer[1]->release();
+	buffer[0]->Release();
+	buffer[1]->Release();
 }
 
 void Math::findNearestPair(const std::vector<ChainShape*>& chains, int& index0, int& index1)

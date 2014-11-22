@@ -17,20 +17,20 @@ FontBlankSprite::FontBlankSprite(const FontBlankSprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 }
 
 FontBlankSprite::FontBlankSprite(FontBlankSymbol* symbol)
 	: m_symbol(symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	buildBounding();
 }
 
 FontBlankSprite::~FontBlankSprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -51,8 +51,8 @@ void FontBlankSprite::setSymbol(ISymbol* symbol)
 	FontBlankSymbol* font = dynamic_cast<FontBlankSymbol*>(symbol);
 	if (m_symbol != symbol && font)
 	{
-		m_symbol->release();
-		symbol->retain();
+		m_symbol->Release();
+		symbol->Retain();
 
 		m_symbol = font;
 	}

@@ -11,7 +11,7 @@ MultiShapesImpl::MultiShapesImpl(wxWindow* wnd)
 
 MultiShapesImpl::~MultiShapesImpl()
 {
-	m_shapeSelection->release();
+	m_shapeSelection->Release();
 }
 
 IShape* MultiShapesImpl::queryShapeByPos(const Vector& pos) const

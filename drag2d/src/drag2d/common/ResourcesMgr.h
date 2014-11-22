@@ -71,7 +71,7 @@ namespace d2d
 		}
 		else
 		{
-			itr->second->retain();
+			itr->second->Retain();
 			return itr->second;
 		}
 	}
@@ -82,9 +82,9 @@ namespace d2d
 	{
 		T* _new = getItem(filename);
 		// todo: ×ªÒÆµ½getItemÖÐ
-//		_new->retain();
+//		_new->Retain();
 		if (_new != *old && *old != NULL)
-			(*old)->release();
+			(*old)->Release();
 		*old = _new;
 	}
 

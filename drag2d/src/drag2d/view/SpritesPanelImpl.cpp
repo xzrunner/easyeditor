@@ -10,7 +10,7 @@ namespace d2d
 		: MultiSpritesImpl(parent)
 	{
 		m_container = container;
-		m_container->retain();
+		m_container->Retain();
 	}
 
 	SpritesPanelImpl::SpritesPanelImpl(EditPanel* editPanel, LibraryPanel* libraryPanel)
@@ -23,7 +23,7 @@ namespace d2d
 
 	SpritesPanelImpl::~SpritesPanelImpl()
 	{
-		m_container->release();
+		m_container->Release();
 	}
 
 	void SpritesPanelImpl::traverseSprites(IVisitor& visitor, TraverseType type/* = e_allExisting*/,

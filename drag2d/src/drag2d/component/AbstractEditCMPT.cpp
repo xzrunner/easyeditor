@@ -22,7 +22,7 @@ AbstractEditCMPT::AbstractEditCMPT(wxWindow* parent, const wxString& name, EditP
 AbstractEditCMPT::~AbstractEditCMPT()
 {
 	if (m_editOP)
-		m_editOP->release();
+		m_editOP->Release();
  
  	for_each(m_children.begin(), m_children.end(), DeletePointerFunctor<AbstractEditCMPT>());
 }
@@ -90,11 +90,11 @@ void AbstractEditCMPT::loadEditOP(AbstractEditOP* op)
 	}
 
 	if (op) {
-		op->retain();
+		op->Retain();
 	}
 	if (m_editOP) {
 		m_editOP->clear();
-		m_editOP->release();
+		m_editOP->Release();
 	}
 	m_editOP = op;
 
@@ -108,12 +108,12 @@ void AbstractEditCMPT::loadEditOP(AbstractEditCMPT* cmpt)
 	}
 
 	if (m_editOP) {
-		m_editOP->retain();
+		m_editOP->Retain();
 	}
 	if (cmpt->m_editOP)
 	{
 		cmpt->m_editOP->clear();
-		cmpt->m_editOP->release();
+		cmpt->m_editOP->Release();
 	}
 	cmpt->m_editOP = m_editOP;
 

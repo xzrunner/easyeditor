@@ -41,7 +41,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 	m_align.SetOpen(cfg.is_auto_align_open);
 
 	m_selection = spritesImpl->getSpriteSelection();
-	m_selection->retain();
+	m_selection->Retain();
 
 	m_left_down_pos.setInvalid();
 	m_right_down_pos.setInvalid();
@@ -51,7 +51,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 
 ArrangeSpriteImpl::~ArrangeSpriteImpl()
 {
-	m_selection->release();
+	m_selection->Release();
 	delete m_op_state;
 }
 

@@ -70,7 +70,7 @@
 //			if (type == PolygonShape::e_Color)
 //				poly->m_fillingColor = color;
 //			else if (type == PolygonShape::e_Texture)
-//				// todo release symbol
+//				// todo Release symbol
 //				poly->m_fillingTexture = static_cast<ImageSymbol*>(SymbolMgr::Instance()->fetchSymbol(texPath));
 //			else
 //				continue;
@@ -91,7 +91,7 @@
 //ShapeFileAdapter::Layer::~Layer()
 //{
 //	for (size_t i = 0, n = polys.size(); i < n; ++i)
-//		polys[i]->release();
+//		polys[i]->Release();
 //	polys.clear();
 //}
 //

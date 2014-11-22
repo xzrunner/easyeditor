@@ -60,7 +60,7 @@ namespace d2d
 		{
 			if (objs[i] == obj)
 			{
-				obj->release();
+				obj->Release();
 				objs.erase(objs.begin() + i);
 				break;
 			}
@@ -70,7 +70,7 @@ namespace d2d
 	template<class T>
 	inline void VectorUtils::insert(std::vector<T*>& objs, T* obj)
 	{
-		obj->retain();
+		obj->Retain();
 		objs.push_back(obj);
 	}
 
@@ -78,7 +78,7 @@ namespace d2d
 	inline void VectorUtils::clear(std::vector<T*>& objs)
 	{
 		for (size_t i = 0, n = objs.size(); i < n; ++i)
-			objs[i]->release();
+			objs[i]->Release();
 		objs.clear();
 	}
 

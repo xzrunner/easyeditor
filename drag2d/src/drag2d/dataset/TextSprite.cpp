@@ -22,7 +22,7 @@ TextSprite::TextSprite(const TextSprite& sprite)
 	, m_text("text")
 	, m_size(Font::DEFAULT_SIZE)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 }
 
 TextSprite::TextSprite(FontSymbol* symbol)
@@ -30,14 +30,14 @@ TextSprite::TextSprite(FontSymbol* symbol)
 	, m_text("text")
 	, m_size(Font::DEFAULT_SIZE)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	buildBounding();
 }
 
 TextSprite::~TextSprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -58,8 +58,8 @@ void TextSprite::setSymbol(ISymbol* symbol)
 	FontSymbol* font = dynamic_cast<FontSymbol*>(symbol);
 	if (m_symbol != symbol && font)
 	{
-		m_symbol->release();
-		symbol->retain();
+		m_symbol->Release();
+		symbol->Retain();
 
 		m_symbol = font;
 	}

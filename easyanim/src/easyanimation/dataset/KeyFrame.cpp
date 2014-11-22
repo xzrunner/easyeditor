@@ -82,7 +82,7 @@ bool KeyFrame::remove(d2d::ISprite* sprite)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		if (m_sprites[i] == sprite) {
-			m_sprites[i]->release();
+			m_sprites[i]->Release();
 			m_sprites.erase(m_sprites.begin() + i);
 
 			// viewlist
@@ -132,7 +132,7 @@ void KeyFrame::clear()
 	}
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 	//	delete m_sprites[i];
-		m_sprites[i]->release();
+		m_sprites[i]->Release();
 	}
 	m_sprites.clear();
 }

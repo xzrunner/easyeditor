@@ -20,7 +20,7 @@ Symbol::~Symbol()
 {
 	if (m_ps)
 	{
-		m_ps->release();
+		m_ps->Release();
 		m_ps = NULL;
 	}
 }
@@ -90,7 +90,7 @@ void Symbol::loadResources()
 
 		ParticleChild* pc = new ParticleChild;
 
-		// todo release symbol
+		// todo Release symbol
 		pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
 
 		pc->start_scale = child.start_scale * 0.01f;

@@ -14,14 +14,14 @@ ScriptsSprite::ScriptsSprite()
 ScriptsSprite::ScriptsSprite(ScriptsSymbol* symbol)
 	: m_symbol(symbol)
 {
-	m_symbol->retain();
+	m_symbol->Retain();
 	scripts_do_string(symbol->getContent().c_str());
 }
 
 ScriptsSprite::~ScriptsSprite()
 {
 	if (m_symbol) {
-		m_symbol->release();
+		m_symbol->Release();
 	}
 }
 
@@ -42,8 +42,8 @@ void ScriptsSprite::setSymbol(ISymbol* symbol)
 	ScriptsSymbol* scripts = dynamic_cast<ScriptsSymbol*>(symbol);
 	if (m_symbol != symbol && scripts)
 	{
-		m_symbol->release();
-		symbol->retain();
+		m_symbol->Release();
+		symbol->Retain();
 
 		m_symbol = scripts;
 	}

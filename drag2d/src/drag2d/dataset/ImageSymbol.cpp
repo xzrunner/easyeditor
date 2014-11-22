@@ -19,7 +19,7 @@ ImageSymbol::ImageSymbol()
 ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 	: m_image(image)
 {
-	m_image->retain();
+	m_image->Retain();
 
 	m_filepath = filename;
 	m_region = image->getRegion();
@@ -27,8 +27,8 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 
 ImageSymbol::~ImageSymbol()
 {
-	m_bitmap->release();
-	m_image->release();
+	m_bitmap->Release();
+	m_image->Release();
 }
 
 ImageSymbol* ImageSymbol::clone() const

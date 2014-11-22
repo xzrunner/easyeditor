@@ -45,7 +45,7 @@ void DynamicTexture::Insert(Image* img)
 
 	// todo need insert directly
 	if (m_preload_idx != 0) {
-		img->retain();
+		img->Retain();
 		m_preload_list.push_back(img);
 	} else {
 		ShaderMgr* shader = ShaderMgr::Instance();
@@ -72,11 +72,11 @@ void DynamicTexture::End()
 
 	glViewport(0, 0, m_width, m_height);
 	std::sort(m_preload_list.begin(), m_preload_list.end(), ImageSizeCmp());
-	std::vector<const Image*>::iterator itr = m_preload_list.begin();
+	std::vector<Image*>::iterator itr = m_preload_list.begin();
 	for ( ; itr != m_preload_list.end(); ++itr) {
-		const Image* img = *itr;
+		Image* img = *itr;
 		InsertImage(img);
-		img->release();
+		img->Release();
 	}
 	m_preload_list.clear();
 
