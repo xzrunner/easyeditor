@@ -31,7 +31,7 @@ bool AutoCutOP::onDraw() const
 //	d2d::PrimitiveDraw::drawPoints(m_raw_bound_points, d2d::LIGHT_RED, 5);
 
 	d2d::PrimitiveDraw::drawPolyline(m_raw_bound_line_merged, d2d::LIGHT_RED, false);
-	d2d::PrimitiveDraw::drawPolyline(m_fine_bound_line, d2d::LIGHT_BLUE, false);
+	d2d::PrimitiveDraw::drawPolyline(m_fine_bound_line, d2d::LIGHT_BLUE, true);
 
 	return false;
 }
