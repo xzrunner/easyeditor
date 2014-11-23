@@ -67,7 +67,7 @@ private:
 	struct Region
 	{
 		d2d::Rect rect;
-		std::vector<const libshape::ChainShape*> loops;
+		std::vector<libshape::ChainShape*> loops;
 	};
 
 private:

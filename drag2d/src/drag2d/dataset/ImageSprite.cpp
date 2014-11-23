@@ -1,6 +1,4 @@
 #include "ImageSprite.h"
-#include "IBody.h"
-#include "BodyFactory.h"
 #include "SpriteFactory.h"
 
 #include "common/FileNameParser.h"
@@ -8,8 +6,6 @@
 #include "common/Math.h"
 #include "dataset/BVFactory.h"
 #include "dataset/AbstractBV.h"
-
-#include <Box2D/Box2D.h>
 
 namespace d2d
 {
@@ -62,30 +58,6 @@ void ImageSprite::setSymbol(ISymbol* symbol)
 
 		m_symbol = image;
 	}
-}
-
-void ImageSprite::loadBodyFromFile()
-{
-	wxString path = FilenameTools::getFilePathExceptExtension(m_symbol->getFilepath());
-	wxString polygonPath = path + "_" + FileNameParser::getFileTag(FileNameParser::e_polyline) + ".txt";
-	wxString circlePath = path + "_" + FileNameParser::getFileTag(FileNameParser::e_circle) + ".txt";
-	wxString shapePath = path + "_" + FileNameParser::getFileTag(FileNameParser::e_shape) + ".json";
-	if (FilenameTools::isExist(polygonPath))
-	{
-		if (m_body) delete m_body;
-		m_body = BodyFactory::createBody(polygonPath, m_scale.x);
-	}
-	else if (FilenameTools::isExist(circlePath))
-	{
-		if (m_body) delete m_body;
-		m_body = BodyFactory::createBody(circlePath, m_scale.x);
-	}
-	else if (FilenameTools::isExist(shapePath))
-	{
-		if (m_body) delete m_body;
-		m_body = BodyFactory::createBody(shapePath, m_scale.x);
-	}
-	m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
 }
 
 void ImageSprite::buildBoundingFromTexCoords(float* texCoords)

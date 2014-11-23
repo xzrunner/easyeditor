@@ -27,7 +27,6 @@ namespace d2d
 		//
 		virtual const ISymbol& getSymbol() const { return *m_symbol; }
 		virtual void setSymbol(ISymbol* symbol) { m_symbol = symbol; }
-		virtual void loadBodyFromFile() {}
 
 	private:
 		ISymbol* m_symbol;

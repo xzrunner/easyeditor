@@ -1,4 +1,3 @@
-
 #include "PreviewPanel.h"
 #include "PreviewCanvas.h"
 #include "StagePanel.h"
@@ -16,7 +15,7 @@ PreviewPanel::PreviewPanel(wxWindow* parent,
 	createGround();
 
 	m_canvas = new PreviewCanvas(this);
-	m_editOP = new d2d::DragPhysicsOP(this, m_world, m_ground);
+	m_editOP = new ephysics::DragPhysicsOP(this, m_world, m_ground);
 
 	std::map<libmodeling::Body*, b2Body*> mapBody;
 	Context::Instance()->stage->traverseBodies(LoadBodyVisitor(m_world, mapBody));

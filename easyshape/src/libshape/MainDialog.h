@@ -1,38 +1,36 @@
+#ifndef _LIBSHAPE_MAIN_DIALOG_H_
+#define _LIBSHAPE_MAIN_DIALOG_H_
 
-#ifndef LIBSHAPE_MAIN_DIALOG_H
-#define LIBSHAPE_MAIN_DIALOG_H
-
-#include <drag2d.h>
+#include <wx/wx.h>
 
 namespace libshape
 {
-	class ToolbarPanel;
 
-	template <typename TStage>
-	class MainDialog : public wxDialog
-	{
-	public:
-		MainDialog(wxWindow* parent, d2d::ISymbol* symbol);
-		MainDialog(wxWindow* parent, d2d::ISprite* sprite);
-		virtual ~MainDialog();
+class ToolbarPanel;
+class Symbol;
 
-	private:
-		void onSize(wxSizeEvent& event);
+template <typename TStage>
+class MainDialog : public wxDialog
+{
+public:
+	MainDialog(wxWindow* parent, Symbol* symbol);
+	virtual ~MainDialog();
 
-		void initLayout();
+private:
+	void onSize(wxSizeEvent& event);
 
-	private:
-		d2d::ISymbol* m_symbol;
-		d2d::ISprite* m_sprite;
+	void InitLayout(Symbol* symbol);
 
-		wxWindow* m_root;
+private:
+	wxWindow* m_root;
 
-		TStage* m_stage;
-		ToolbarPanel* m_toolbar;
+	TStage* m_stage;
+	ToolbarPanel* m_toolbar;
 
-	}; // MainDialog
+}; // MainDialog
+
 }
 
-#include "MainDialog.cpp"
+#include "MainDialog.inl"
 
-#endif // LIBSHAPE_MAIN_DIALOG_H
+#endif // _LIBSHAPE_MAIN_DIALOG_H_

@@ -58,8 +58,4 @@ void FontBlankSprite::setSymbol(ISymbol* symbol)
 	}
 }
 
-void FontBlankSprite::loadBodyFromFile()
-{
-}
-
 } // d2d

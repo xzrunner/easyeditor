@@ -16,7 +16,6 @@ namespace d2d
 	static const float LARGE_EPSILON = 0.001f;
 	static const float TRANS_DEG_TO_RAD = PI / 180.0f;
 	static const float TRANS_RAD_TO_DEG = 180.0f / PI;
-	static const float BOX2D_SCALE_FACTOR = 20.0f;
 
 	class Math
 	{

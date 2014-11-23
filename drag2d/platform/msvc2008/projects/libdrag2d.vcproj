@@ -196,22 +196,6 @@
 					RelativePath="..\..\..\src\drag2d\operator\AutoAlign.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\DragPhysicsOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\DragPhysicsOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\UniversalArrangeOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\UniversalArrangeOP.h"
-					>
-				</File>
 				<Filter
 					Name="sprite"
 					>
@@ -330,22 +314,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\operator\PasteSymbolOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\PasteSymbolPhysicsOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\PasteSymbolPhysicsOP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\PasteSymbolPhysicsRandomOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\operator\PasteSymbolPhysicsRandomOP.h"
 					>
 				</File>
 				<File
@@ -522,18 +490,6 @@
 				>
 			</File>
 			<Filter
-				Name="arrange"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\UniversalArrangeCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\UniversalArrangeCMPT.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="other"
 				>
 				<File
@@ -562,14 +518,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\component\PasteSymbolOffsetCMPT.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\PasteSymbolPhysicsCMPT.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\component\PasteSymbolPhysicsCMPT.h"
 					>
 				</File>
 				<File
@@ -613,102 +561,6 @@
 				RelativePath="..\..\..\src\drag2d\dataset\Snapshoot.h"
 				>
 			</File>
-			<Filter
-				Name="body"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ChainBody.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ChainBody.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CircleBody.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\CircleBody.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ComplexBody.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ComplexBody.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\PolygonBody.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\PolygonBody.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ShapesBody.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\ShapesBody.h"
-					>
-				</File>
-				<Filter
-					Name="base"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\BodyData.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\BodyData.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\BodyFactory.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\BodyFactory.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\FixtureData.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\FixtureData.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\IBody.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\IBody.h"
-						>
-					</File>
-				</Filter>
-			</Filter>
-			<Filter
-				Name="joint"
-				>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Joint.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\Joint.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\dataset\JointDef.h"
-					>
-				</File>
-			</Filter>
 			<Filter
 				Name="primitive"
 				>
@@ -1141,14 +993,6 @@
 				Name="shape"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\render\b2Render.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\render\b2Render.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\render\DrawSelectedShapeVisitor.h"
 					>
 				</File>
@@ -1410,14 +1254,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\drag2d\common\PhysicsQuery.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\common\PhysicsQuery.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\drag2d\common\PointerPool.h"
 				>
 			</File>
@@ -1453,31 +1289,7 @@
 				Name="fileadapter"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\common\CircleFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\CircleFileAdapter.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\common\IFileAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\PolylineFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\PolylineFileAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\ShapeFileAdapter.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\ShapeFileAdapter.h"
 					>
 				</File>
 				<File
@@ -1486,10 +1298,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\common\TexPackerAdapter.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\common\TexturePackerFileAdapter.h"
 					>
 				</File>
 			</Filter>
@@ -1888,18 +1696,6 @@
 					RelativePath="..\..\..\src\drag2d\view\wrap_StagePanel.h"
 					>
 				</File>
-				<Filter
-					Name="physics"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\PhysicsPanelImpl.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\PhysicsPanelImpl.h"
-						>
-					</File>
-				</Filter>
 				<Filter
 					Name="shape"
 					>

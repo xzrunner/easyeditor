@@ -2,7 +2,9 @@
 #ifndef EMODELING_PREVIEW_PANEL_H
 #define EMODELING_PREVIEW_PANEL_H
 
+#include <Box2D/Box2D.h>
 #include <drag2d.h>
+#include <easyphysics.h>
 
 namespace libmodeling
 {
@@ -12,8 +14,7 @@ namespace libmodeling
 
 namespace emodeling
 {
-	class PreviewPanel : public d2d::EditPanel, 
-		public d2d::PhysicsPanelImpl
+	class PreviewPanel : public d2d::EditPanel, public ephysics::PhysicsPanelImpl
 	{
 	public:
 		PreviewPanel(wxWindow* parent, wxTopLevelWindow* frame);

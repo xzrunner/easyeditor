@@ -5,6 +5,7 @@
 #include "dataset/FontBlankSymbol.h"
 
 #include <json/json.h>
+#include <fstream>
 
 namespace d2d
 {

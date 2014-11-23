@@ -55,8 +55,4 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 	}
 }
 
-void Sprite::loadBodyFromFile()
-{
-}
-
 }

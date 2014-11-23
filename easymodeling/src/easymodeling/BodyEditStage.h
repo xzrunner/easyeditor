@@ -11,9 +11,7 @@ namespace emodeling
 	{
 	public:
 		BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
-			d2d::ISymbol* symbol);
-		BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame,
-			d2d::ISprite* sprite);
+			libshape::Symbol* symbol);
 
 		//
 		// d2d::MultiShapesImpl interface

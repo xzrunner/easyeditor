@@ -336,7 +336,7 @@ void Mesh::RemoveShapes(d2d::IShape* shape)
 {
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i)
 	{
-		const d2d::IShape* loop = m_region.loops[i];
+		d2d::IShape* loop = m_region.loops[i];
 		if (loop == shape) {
 			loop->Release();
 			m_region.loops.erase(m_region.loops.begin() + i);

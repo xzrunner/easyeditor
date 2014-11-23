@@ -64,12 +64,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		{
 			std::vector<ISprite*> sprites;
 			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-
-			std::vector<ISprite*> noPhysicsSprites;
-			for (size_t i = 0, n = sprites.size(); i < n; ++i)
-				if (!sprites[i]->getBody()) 
-					noPhysicsSprites.push_back(sprites[i]);
-			m_editPanel->addHistoryOP(new DeleteSpriteAOP(noPhysicsSprites, m_spritesImpl));
+			m_editPanel->addHistoryOP(new DeleteSpriteAOP(sprites, m_spritesImpl));
 		}
 		m_spritesImpl->removeSpriteSelection();
 		break;

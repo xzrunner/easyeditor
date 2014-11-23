@@ -26,7 +26,6 @@ namespace d2d
 		//
 		virtual const ImageSymbol& getSymbol() const;
 		virtual void setSymbol(ISymbol* symbol);
-		virtual void loadBodyFromFile();
 
 		// todo: should auto resize through its symbol and shapes
 		void buildBoundingFromTexCoords(float* texCoords);

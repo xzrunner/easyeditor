@@ -3,6 +3,7 @@
 
 #include <easymodeling.h>
 #include <easyshape.h>
+#include <easyphysics.h>
 
 using namespace emodeling;
 
@@ -32,8 +33,8 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 	mapBody.insert(std::make_pair(const_cast<libmodeling::Body*>(&data), body));
 
 	b2Vec2 pos;
-	pos.x = data.sprite->getPosition().x / d2d::BOX2D_SCALE_FACTOR;
-	pos.y = data.sprite->getPosition().y / d2d::BOX2D_SCALE_FACTOR;
+	pos.x = data.sprite->getPosition().x / ephysics::BOX2D_SCALE_FACTOR;
+	pos.y = data.sprite->getPosition().y / ephysics::BOX2D_SCALE_FACTOR;
 	body->SetTransform(pos, data.sprite->getAngle());
 
 	for (size_t i = 0, n = data.fixtures.size(); i < n; ++i)
@@ -52,19 +53,19 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		if (libshape::CircleShape* circle = dynamic_cast<libshape::CircleShape*>(fData->shape))
 		{
 			b2CircleShape shape;
-			shape.m_radius = circle->radius / d2d::BOX2D_SCALE_FACTOR;
-			shape.m_p.x = circle->center.x / d2d::BOX2D_SCALE_FACTOR;
-			shape.m_p.y = circle->center.y / d2d::BOX2D_SCALE_FACTOR;
+			shape.m_radius = circle->radius / ephysics::BOX2D_SCALE_FACTOR;
+			shape.m_p.x = circle->center.x / ephysics::BOX2D_SCALE_FACTOR;
+			shape.m_p.y = circle->center.y / ephysics::BOX2D_SCALE_FACTOR;
 
 			fd.shape = &shape;
 			body->CreateFixture(&fd);
 		}
 		else if (libshape::RectShape* rect = dynamic_cast<libshape::RectShape*>(fData->shape))
 		{
-			const float hx = (rect->m_rect.xMax - rect->m_rect.xMin) * 0.5f / d2d::BOX2D_SCALE_FACTOR,
-				hy = (rect->m_rect.yMax - rect->m_rect.yMin) * 0.5f / d2d::BOX2D_SCALE_FACTOR;
-			const float cx = (rect->m_rect.xMax + rect->m_rect.xMin) * 0.5f / d2d::BOX2D_SCALE_FACTOR,
-				cy = (rect->m_rect.yMax + rect->m_rect.yMin) * 0.5f / d2d::BOX2D_SCALE_FACTOR;
+			const float hx = (rect->m_rect.xMax - rect->m_rect.xMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR,
+				hy = (rect->m_rect.yMax - rect->m_rect.yMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR;
+			const float cx = (rect->m_rect.xMax + rect->m_rect.xMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR,
+				cy = (rect->m_rect.yMax + rect->m_rect.yMin) * 0.5f / ephysics::BOX2D_SCALE_FACTOR;
 
 			b2PolygonShape shape;
 			shape.SetAsBox(hx, hy, b2Vec2(cx, cy), 0);
@@ -79,8 +80,8 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 			std::vector<b2Vec2> dst(size);
 			for (size_t j = 0; j < size; ++j)
 			{
-				dst[j].x = src[j].x / d2d::BOX2D_SCALE_FACTOR;
-				dst[j].y = src[j].y / d2d::BOX2D_SCALE_FACTOR;
+				dst[j].x = src[j].x / ephysics::BOX2D_SCALE_FACTOR;
+				dst[j].y = src[j].y / ephysics::BOX2D_SCALE_FACTOR;
 			}
 
 			b2PolygonShape shape;
@@ -96,8 +97,8 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 			std::vector<b2Vec2> dst(size);
 			for (size_t j = 0; j < size; ++j)
 			{
-				dst[j].x = src[j].x / d2d::BOX2D_SCALE_FACTOR;
-				dst[j].y = src[j].y / d2d::BOX2D_SCALE_FACTOR;
+				dst[j].x = src[j].x / ephysics::BOX2D_SCALE_FACTOR;
+				dst[j].y = src[j].y / ephysics::BOX2D_SCALE_FACTOR;
 			}
 
 			b2ChainShape shape;
@@ -135,8 +136,8 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			b2Body* bodyB = itrB->second;
 			jd.Initialize(bodyA, bodyB, b2Vec2(0, 0));
 			jd.collideConnected = joint->collideConnected;
-			jd.localAnchorA.Set(joint->localAnchorA.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / d2d::BOX2D_SCALE_FACTOR);
-			jd.localAnchorB.Set(joint->localAnchorB.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / d2d::BOX2D_SCALE_FACTOR);
+			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
+			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
 			jd.referenceAngle = joint->referenceAngle;
 			jd.enableLimit = joint->enableLimit;
 			jd.lowerAngle = joint->lowerAngle;
@@ -165,8 +166,8 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			axis.Normalize();
 			jd.Initialize(bodyA, bodyB, b2Vec2(0, 0), axis);
 			jd.collideConnected = joint->collideConnected;
-			jd.localAnchorA.Set(joint->localAnchorA.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / d2d::BOX2D_SCALE_FACTOR);
-			jd.localAnchorB.Set(joint->localAnchorB.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / d2d::BOX2D_SCALE_FACTOR);
+			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
+			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
 			jd.referenceAngle = joint->referenceAngle;
 			jd.enableLimit = joint->enableLimit;
 			jd.lowerTranslation = joint->lowerTranslation;
@@ -191,9 +192,9 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			jd.bodyA = itrA->second;
 			jd.bodyB = itrB->second;
 			jd.collideConnected = joint->collideConnected;
-			jd.localAnchorA.Set(joint->localAnchorA.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / d2d::BOX2D_SCALE_FACTOR);
-			jd.localAnchorB.Set(joint->localAnchorB.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / d2d::BOX2D_SCALE_FACTOR);
-			jd.length = d2d::Math::getDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB()) / d2d::BOX2D_SCALE_FACTOR;
+			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
+			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
+			jd.length = d2d::Math::getDistance(joint->getWorldAnchorA(), joint->getWorldAnchorB()) / ephysics::BOX2D_SCALE_FACTOR;
 			jd.frequencyHz = joint->frequencyHz;
 			jd.dampingRatio = joint->dampingRatio;
 
@@ -213,12 +214,12 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			b2Body* bodyA = itrA->second;
 			b2Body* bodyB = itrB->second;
 
-			b2Vec2 groundAnchorA(joint->groundAnchorA.x / d2d::BOX2D_SCALE_FACTOR, joint->groundAnchorA.y / d2d::BOX2D_SCALE_FACTOR),
-				groundAnchorB(joint->groundAnchorB.x / d2d::BOX2D_SCALE_FACTOR, joint->groundAnchorB.y / d2d::BOX2D_SCALE_FACTOR);
+			b2Vec2 groundAnchorA(joint->groundAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->groundAnchorA.y / ephysics::BOX2D_SCALE_FACTOR),
+				groundAnchorB(joint->groundAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->groundAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
 			d2d::Vector anchorA_ = joint->getWorldAnchorA(),
 				anchorB_ = joint->getWorldAnchorB();
-			b2Vec2 anchorA(anchorA_.x / d2d::BOX2D_SCALE_FACTOR, anchorA_.y / d2d::BOX2D_SCALE_FACTOR),
-				anchorB(anchorB_.x / d2d::BOX2D_SCALE_FACTOR, anchorB_.y / d2d::BOX2D_SCALE_FACTOR);
+			b2Vec2 anchorA(anchorA_.x / ephysics::BOX2D_SCALE_FACTOR, anchorA_.y / ephysics::BOX2D_SCALE_FACTOR),
+				anchorB(anchorB_.x / ephysics::BOX2D_SCALE_FACTOR, anchorB_.y / ephysics::BOX2D_SCALE_FACTOR);
 
 			jd.Initialize(bodyA, bodyB, groundAnchorA, groundAnchorB, anchorA, anchorB, joint->ratio);
 			jd.collideConnected = joint->collideConnected;
@@ -243,7 +244,7 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			b2Body* bodyA = itrA->second;
 			b2Body* bodyB = itrB->second;
 
-			d2d::Vector pos = joint->getWorldAnchorB() / d2d::BOX2D_SCALE_FACTOR;
+			d2d::Vector pos = joint->getWorldAnchorB() / ephysics::BOX2D_SCALE_FACTOR;
 			b2Vec2 axis(joint->localAxisA.x, joint->localAxisA.y);
 			axis.Normalize();
 			jd.Initialize(bodyA, bodyB, b2Vec2(pos.x, pos.y), axis);
@@ -269,8 +270,8 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			jd.bodyA = itrA->second;
 			jd.bodyB = itrB->second;
 			jd.collideConnected = joint->collideConnected;
-			jd.localAnchorA.Set(joint->localAnchorA.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / d2d::BOX2D_SCALE_FACTOR);
-			jd.localAnchorB.Set(joint->localAnchorB.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / d2d::BOX2D_SCALE_FACTOR);
+			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
+			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
 			jd.referenceAngle = joint->referenceAngle;
 			jd.frequencyHz = joint->frequencyHz;
 			jd.dampingRatio = joint->dampingRatio;
@@ -291,8 +292,8 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			jd.bodyA = itrA->second;
 			jd.bodyB = itrB->second;
 			jd.collideConnected = joint->collideConnected;
-			jd.localAnchorA.Set(joint->localAnchorA.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / d2d::BOX2D_SCALE_FACTOR);
-			jd.localAnchorB.Set(joint->localAnchorB.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / d2d::BOX2D_SCALE_FACTOR);
+			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
+			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
 			jd.maxForce = joint->maxForce;
 			jd.maxTorque = joint->maxTorque;
 
@@ -312,8 +313,8 @@ b2Joint* ResolveToB2::createJoint(const libmodeling::Joint& data, b2World* world
 			jd.bodyA = itrA->second;
 			jd.bodyB = itrB->second;
 			jd.collideConnected = joint->collideConnected;
-			jd.localAnchorA.Set(joint->localAnchorA.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / d2d::BOX2D_SCALE_FACTOR);
-			jd.localAnchorB.Set(joint->localAnchorB.x / d2d::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / d2d::BOX2D_SCALE_FACTOR);
+			jd.localAnchorA.Set(joint->localAnchorA.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorA.y / ephysics::BOX2D_SCALE_FACTOR);
+			jd.localAnchorB.Set(joint->localAnchorB.x / ephysics::BOX2D_SCALE_FACTOR, joint->localAnchorB.y / ephysics::BOX2D_SCALE_FACTOR);
 			jd.maxLength = joint->maxLength;
 
 			bJoint = world->CreateJoint(&jd);

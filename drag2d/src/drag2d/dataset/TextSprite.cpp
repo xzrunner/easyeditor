@@ -65,10 +65,6 @@ void TextSprite::setSymbol(ISymbol* symbol)
 	}
 }
 
-void TextSprite::loadBodyFromFile()
-{
-}
-
 void TextSprite::setTransform(const Vector& position, float angle)
 {
 	Vector fixed(position);

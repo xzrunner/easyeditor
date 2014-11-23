@@ -13,7 +13,9 @@ LibraryList::LibraryList(wxWindow* parent)
 
 void LibraryList::onListDoubleClicked(wxCommandEvent& event)
 {
-	libshape::MainDialog<BodyEditStage> dlg(this, getSymbol(event.GetInt()));
+	libshape::Symbol symbol;
+	symbol.SetBG(getSymbol(event.GetInt()));
+	libshape::MainDialog<BodyEditStage> dlg(this, &symbol);
 	dlg.ShowModal();
 	Context::Instance()->stage->resetCanvas();
 }

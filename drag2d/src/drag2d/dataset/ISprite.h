@@ -13,7 +13,6 @@ namespace d2d
 	class Vector;
 	class Rect;
 	class ISymbol;
-	class IBody;
 	class AbstractBV;
 
 	class ISprite : public ICloneable, public UserDataImpl, public Object
@@ -35,7 +34,6 @@ namespace d2d
 
 		virtual const ISymbol& getSymbol() const = 0;
 		virtual void setSymbol(ISymbol* symbol) = 0;
-		virtual void loadBodyFromFile() = 0;
 
 		virtual void load(const Json::Value& val);
 		virtual void store(Json::Value& val) const;
@@ -70,15 +68,9 @@ namespace d2d
 			return m_bounding;
 		}
 
-		void updateEachFrame();
-		IBody* getBody() const;
-
 		void setObserver(ISpriteObserver* observer) {
 			m_observer = observer;
 		}
-
-	private:
-		void onSizeChanged();
 
 	public:
 		// info
@@ -101,8 +93,6 @@ namespace d2d
 		bool m_xMirror, m_yMirror;
 
 		AbstractBV* m_bounding;
-
-		IBody* m_body;
 
 		ISpriteObserver* m_observer;
 

@@ -32,11 +32,11 @@ void PreviewCanvas::onDraw()
 {
 	static_cast<PreviewPanel*>(m_editPanel)->drawPhysics();
 
-	d2d::DragPhysicsOP* op = static_cast<d2d::DragPhysicsOP*>(m_editPanel->getEditOP());
+	ephysics::DragPhysicsOP* op = static_cast<ephysics::DragPhysicsOP*>(m_editPanel->getEditOP());
 	if (op->m_mouseJoint)
 	{
 		b2Vec2 target = op->m_mouseJoint->GetAnchorB();
-		d2d::Vector first(target.x * d2d::BOX2D_SCALE_FACTOR, target.y * d2d::BOX2D_SCALE_FACTOR);
+		d2d::Vector first(target.x * ephysics::BOX2D_SCALE_FACTOR, target.y * ephysics::BOX2D_SCALE_FACTOR);
 
 		if (op->currPos.isValid())
 		{

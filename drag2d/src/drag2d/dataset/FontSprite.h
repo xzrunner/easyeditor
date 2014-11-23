@@ -28,7 +28,6 @@ public:
 	//
 	virtual const FontBlankSymbol& getSymbol() const;
 	virtual void setSymbol(ISymbol* symbol);
-	virtual void loadBodyFromFile();
 
 	virtual void load(const Json::Value& val);
 	virtual void store(Json::Value& val) const;

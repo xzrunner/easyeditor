@@ -6,6 +6,8 @@
 #include "view/GLCanvas.h"
 #include "view/Frame.h"
 
+#include <fstream>
+
 namespace d2d
 {
 

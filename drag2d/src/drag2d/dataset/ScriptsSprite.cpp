@@ -49,8 +49,4 @@ void ScriptsSprite::setSymbol(ISymbol* symbol)
 	}
 }
 
-void ScriptsSprite::loadBodyFromFile()
-{
-}
-
 }

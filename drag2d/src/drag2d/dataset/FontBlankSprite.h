@@ -24,7 +24,6 @@ namespace d2d
 		//
 		virtual const FontBlankSymbol& getSymbol() const;
 		virtual void setSymbol(ISymbol* symbol);
-		virtual void loadBodyFromFile();
 
 	protected:
 		FontBlankSymbol* m_symbol;

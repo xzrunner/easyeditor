@@ -1,5 +1,7 @@
 #include "ScriptsSymbol.h"
 
+#include <fstream>
+
 namespace d2d
 {
 

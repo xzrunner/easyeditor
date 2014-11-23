@@ -104,10 +104,6 @@ void FontSprite::setSymbol(ISymbol* symbol)
 	}
 }
 
-void FontSprite::loadBodyFromFile()
-{
-}
-
 void FontSprite::load(const Json::Value& val)
 {
 	ISprite::load(val);

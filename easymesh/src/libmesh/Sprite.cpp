@@ -59,10 +59,6 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 	}
 }
 
-void Sprite::loadBodyFromFile()
-{
-}
-
 void Sprite::load(const Json::Value& val)
 {
 	ISprite::load(val);

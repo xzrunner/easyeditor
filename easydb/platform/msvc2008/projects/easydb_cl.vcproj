@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib jsond.lib Box2D.lib SOIL.lib freetype250_D.lib md5.lib opengl32.lib GLee.lib lua.lib libgifd.lib"
+				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib md5.lib opengl32.lib GLee.lib lua.lib libgifd.lib"
 				OutputFile="..\easydb_cl\x86\Debug\easydb_cl.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
@@ -145,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib json.lib Box2D.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib lua.lib libgif.lib"
+				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib json.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib lua.lib libgif.lib"
 				OutputFile="..\easydb_cl\x86\Release\easydb_cl.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"

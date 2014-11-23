@@ -1,8 +1,5 @@
 #include "ISprite.h"
 #include "ISymbol.h"
-#include "IBody.h"
-
-#include <Box2D/Box2D.h>
 
 #include "common/Math.h"
 #include "common/color_trans.h"
@@ -14,8 +11,7 @@ namespace d2d
 {
 
 ISprite::ISprite()
-	: m_body(NULL)
-	, m_observer(NULL)
+	: m_observer(NULL)
 {
 	multiCol.set(1, 1, 1, 1);
 	addCol.set(0, 0, 0, 0);
@@ -50,14 +46,11 @@ ISprite::ISprite(const ISprite& sprite)
 	m_xMirror = sprite.m_xMirror;
 	m_yMirror = sprite.m_yMirror;
 	m_bounding = sprite.m_bounding->clone();
-	m_body = sprite.m_body ? sprite.m_body->clone() : NULL;
 }
 
 ISprite::~ISprite()
 {
 	delete m_bounding;
-	delete m_body;
-
 	SpriteFactory::Instance()->remove(this);
 }
 
@@ -184,14 +177,10 @@ void ISprite::buildBounding()
 	m_bounding->setTransform(m_pos, m_offset, m_angle);
 }
 
-// todo: translate() and rotate() has no opt to m_body
 void ISprite::setTransform(const Vector& position, float angle)
 {
 	if (m_pos != position) translate(position - m_pos);
 	if (m_angle != angle) rotate(angle - m_angle);
-
-	if (m_body)
-		m_body->getBody()->SetTransform(b2Vec2(position.x / BOX2D_SCALE_FACTOR, position.y / BOX2D_SCALE_FACTOR), angle);
 }
 
 void ISprite::setScale(float xScale, float yScale)
@@ -208,13 +197,13 @@ void ISprite::setScale(float xScale, float yScale)
 
 	m_scale.set(xScale, yScale);
 
-	onSizeChanged();
+	buildBounding();
  }
 
 void ISprite::setShear(float xShear, float yShear)
 {
 	m_shear.set(xShear, yShear);
-	onSizeChanged();
+	buildBounding();
 }
 
 bool ISprite::isContain(const Vector& pos) const
@@ -268,45 +257,6 @@ Vector ISprite::getCenter() const
 	d2d::Vector center_offset = Math::rotateVector(-m_offset, m_angle) + m_offset;
 	d2d::Vector center = m_pos + center_offset;
 	return center;
-}
-
-void ISprite::updateEachFrame()
-{
-	if (!m_body) return;
-
-	b2Body* body = m_body->getBody();
-	if (!body) return;
-
-	if (m_body->isAlive() && m_body->getBody()->GetType() != b2_staticBody)
-	{
-		const b2Vec2& pos = body->GetPosition();
-		setTransform(Vector(pos.x * BOX2D_SCALE_FACTOR, pos.y * BOX2D_SCALE_FACTOR), body->GetAngle());
-	}
-	else
-	{
-		body->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
-	}
-}
-
-IBody* ISprite::getBody() const
-{
-	return m_body;
-}
-
-void ISprite::onSizeChanged()
-{
-	buildBounding();
-
-	if (m_body)
-	{
-		b2BodyType type = m_body->getBody()->GetType();
-		loadBodyFromFile();
-		if (m_body)
-		{
-			m_body->getBody()->SetTransform(b2Vec2(m_pos.x / BOX2D_SCALE_FACTOR, m_pos.y / BOX2D_SCALE_FACTOR), m_angle);
-			m_body->getBody()->SetType(type);
-		}
-	}
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -19,6 +19,7 @@
 #include <GL/gl.h>
 
 #include <json/json.h>
+#include <fstream>
 
 namespace d2d
 {

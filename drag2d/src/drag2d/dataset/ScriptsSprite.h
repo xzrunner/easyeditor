@@ -24,7 +24,6 @@ public:
 	//
 	virtual const ScriptsSymbol& getSymbol() const;
 	virtual void setSymbol(ISymbol* symbol);
-	virtual void loadBodyFromFile();
 
 private:
 	ScriptsSymbol* m_symbol;

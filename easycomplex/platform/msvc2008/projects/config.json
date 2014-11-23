@@ -1,6 +1,6 @@
 {
 	// settings
-	"font_filepath" : "D:\\projects\\ejoy\\coco-tools\\editor_bin\\korean.ttf",
+	// "font_filepath" : "../../../../../ejoy/coco-tools/editor_bin/korean.ttf",
 	"sprite_capture" : false,			// 编辑对象捕捉
 	"image_edge_clip" : true,			// 图片边缘裁剪
 	"visible_image_edge" : false,		// 显示图片原始边框
@@ -20,10 +20,10 @@
 	],
 
 	// library list default
-	"library_label" :
-	[
-		"D:/projects/ejoy/coco-tools/sg_ui/data/json/center_write_14_fontblank.json"
-	],
+	// "library_label" :
+	// [
+	// 	"../../../../../ejoy/coco-tools/sg_ui/data/json/center_write_14_fontblank.json"
+	// ],
 	// "library_complex" :
 	// [
 	// 	"D:/projects/ejoy/coco-tools/sg_ui/data/json/313_complex.json"
