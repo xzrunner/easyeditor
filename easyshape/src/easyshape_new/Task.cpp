@@ -34,10 +34,10 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-// 	m_library->clear();
-// 	m_stage->clear();
-// 	m_library->Refresh();
-// 	m_stage->Refresh();
+ 	m_library->clear();
+ 	m_stage->clear();
+ 	m_library->Refresh();
+ 	m_stage->Refresh();
 }
 
 void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
@@ -56,15 +56,15 @@ void Task::InitLayout(wxFrame* parent)
 	wxSplitterWindow* left_vert = new wxSplitterWindow(right_vert);
 	wxSplitterWindow* left_hori = new wxSplitterWindow(left_vert);
 
-	d2d::LibraryPanel* library = new d2d::LibraryPanel(left_hori);
-	library->addPage(new d2d::LibraryImagePage(library->getNotebook()));
+	m_library = new d2d::LibraryPanel(left_hori);
+	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(left_hori);
-	m_stage = new libshape::StagePanel(left_vert, parent, library);
+	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
 	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, m_stage);
 
 	left_hori->SetSashGravity(0.8f);
-	left_hori->SplitHorizontally(library, property);
+	left_hori->SplitHorizontally(m_library, property);
 
 	left_vert->SetSashGravity(0.15f);
 	left_vert->SplitVertically(left_hori, m_stage);

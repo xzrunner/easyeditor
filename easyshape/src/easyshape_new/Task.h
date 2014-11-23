@@ -28,6 +28,8 @@ private:
 	void InitLayout(wxFrame* parent);
 
 private:
+	d2d::LibraryPanel* m_library;
+
 	libshape::StagePanel* m_stage;
 
 }; // Task
