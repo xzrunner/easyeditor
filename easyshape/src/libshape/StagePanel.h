@@ -7,6 +7,7 @@ namespace libshape
 {
 
 class Symbol;
+class ToolbarPanel;
 
 class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
 {
@@ -39,6 +40,10 @@ public:
 
 	const d2d::ISymbol& GetSymbol() const;
 
+	void SetToolbarPanel(ToolbarPanel* toolbar) {
+		m_toolbar = toolbar;
+	}
+
 private:
 	void SetSymbolBG(d2d::ISymbol* symbol);
 
@@ -58,6 +63,8 @@ private:
 
 private:
 	libshape::Symbol* m_symbol;
+
+	ToolbarPanel* m_toolbar;
 
 }; // StagePanel
 

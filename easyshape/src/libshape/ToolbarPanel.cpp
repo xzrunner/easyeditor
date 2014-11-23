@@ -22,6 +22,8 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 						   StagePanel* stage)
 	: d2d::ToolbarPanel(parent, stage)
 {
+	stage->SetToolbarPanel(this);
+
 	addChild(new NodeCaptureCMPT<EditRectOP>(this, wxT("rect"), stage, stage, property));
 	addChild(new NodeCaptureCMPT<EditCircleOP>(this, wxT("circle"), stage, stage, property));
 	addChild(new DrawLineCMPT(this, wxT("chain"), stage, stage, property));

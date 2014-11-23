@@ -1,7 +1,8 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "FileAdapter.h"
+#include "FileIO.h"
 #include "Symbol.h"
+#include "ToolBarPanel.h"
 
 namespace libshape
 {
@@ -10,6 +11,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl(parent)
+	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this);
 	m_symbol = new Symbol;
@@ -21,6 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   Symbol* symbol, d2d::LibraryPanel* library)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl(parent)
+	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this);
 	m_symbol = symbol;
@@ -95,6 +98,9 @@ void StagePanel::SetSymbolBG(d2d::ISymbol* symbol)
 {
 	if (m_symbol) {
 		m_symbol->SetBG(symbol);
+		if (m_toolbar) {
+			m_toolbar->selectSuitableEditOP();
+		}
 		m_canvas->Refresh();
 	}
 }
