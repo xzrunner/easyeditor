@@ -113,11 +113,6 @@ void Symbol::Remove(d2d::IShape* shape)
 
 void Symbol::Clear()
 {
-	if (m_bg) {
-		m_bg->Release();
-		m_bg = NULL;
-	}
-
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		m_bg_outline[i]->Release();
 	}
