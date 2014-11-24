@@ -75,20 +75,37 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 		}
 		else if (libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(fData->shape))
 		{
-			const std::vector<d2d::Vector>& src = polygon->GetVertices();
-			const size_t size = src.size();
-			std::vector<b2Vec2> dst(size);
-			for (size_t j = 0; j < size; ++j)
-			{
-				dst[j].x = src[j].x / ephysics::BOX2D_SCALE_FACTOR;
-				dst[j].y = src[j].y / ephysics::BOX2D_SCALE_FACTOR;
+// 			const std::vector<d2d::Vector>& src = polygon->GetVertices();
+// 			const size_t size = src.size();
+// 			std::vector<b2Vec2> dst(size);
+// 			for (size_t j = 0; j < size; ++j)
+// 			{
+// 				dst[j].x = src[j].x / ephysics::BOX2D_SCALE_FACTOR;
+// 				dst[j].y = src[j].y / ephysics::BOX2D_SCALE_FACTOR;
+// 			}
+// 
+// 			b2PolygonShape shape;
+// 			shape.Set(&dst[0], size);
+// 			fd.shape = &shape;
+// 
+// 			body->CreateFixture(&fd);
+
+			//////////////////////////////////////////////////////////////////////////
+
+			const std::vector<d2d::Vector>& src = polygon->m_fillingVertices;
+			for (int i = 0, n = src.size(); i < n; i += 3) {
+ 				b2Vec2 dst[3];
+				for (int j = 0; j < 3; ++j) {
+					dst[j].x = src[i+j].x / ephysics::BOX2D_SCALE_FACTOR;
+					dst[j].y = src[i+j].y / ephysics::BOX2D_SCALE_FACTOR;
+				}
+
+				b2PolygonShape shape;
+				shape.Set(&dst[0], 3);
+				fd.shape = &shape;
+
+				body->CreateFixture(&fd);
 			}
-
-			b2PolygonShape shape;
-			shape.Set(&dst[0], size);
-			fd.shape = &shape;
-
-			body->CreateFixture(&fd);
 		}
 		else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(fData->shape))
 		{
