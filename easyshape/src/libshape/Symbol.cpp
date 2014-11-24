@@ -1,6 +1,6 @@
 #include "Symbol.h"
 #include "FileIO.h"
-#include "ChainShape.h"
+#include "PolygonShape.h"
 
 #include <easyimage.h>
 
@@ -173,7 +173,7 @@ void Symbol::LoadBGOutline(d2d::ISymbol* bg)
 	std::vector<d2d::Vector> vertices;
 	d2d::JsonTools::load(value["normal"], vertices);
 	if (!vertices.empty()) {
-		d2d::IShape* shape = new ChainShape(vertices, true);
+		d2d::IShape* shape = new PolygonShape(vertices);
 		m_bg_outline.push_back(shape);
 	}
 }
