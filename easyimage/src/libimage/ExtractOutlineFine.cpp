@@ -51,6 +51,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 
 	std::vector<d2d::Vector> last_fine_border = m_fine_border;
 
+	int count = 0;
 	bool success = false;
 	do {
 		success = false;
@@ -153,7 +154,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 		}
 		last_fine_border = m_fine_border;
 
-	} while (success && m_fine_border.size() < max_count);
+	} while (success && m_fine_border.size() < max_count && ++count < 100);
 }
 
 void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& new1, float& decrease) const
@@ -514,7 +515,12 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 			} 
 			else 
 			{
-				assert(!inside_s || !inside_e);
+//				assert(!inside_s || !inside_e);
+
+				if (inside_s && inside_e) {
+					break;
+				}
+
 				if (IsCutTriLegal(intersect, start, end)) {
 					if (inside_s) {
 						m_fine_border[i] = intersect;
