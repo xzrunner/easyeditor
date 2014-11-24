@@ -1,56 +1,35 @@
-#ifndef EPACKER_TOOLBAR_PANEL_H
-#define EPACKER_TOOLBAR_PANEL_H
+#ifndef _EPACKER_TOOLBAR_PANEL_H_
+#define _EPACKER_TOOLBAR_PANEL_H_
 
 #include <drag2d.h>
 
+#include "const.h"
+
 namespace epacker
 {
-	class ToolbarPanel : public d2d::ToolbarPanel
-	{
-	public:
-		enum IMG_TYPE
-		{
-			e_unknow = 0,
-			e_bmp,
-			e_jpg,
-			e_png
-		};
 
-	public:
-		ToolbarPanel(wxWindow* parent);
+class StagePanel;
+class ImageToolbarPage;
 
-		IMG_TYPE getImgType() const;
+class ToolbarPanel : public d2d::ToolbarPanel
+{
+public:
+	ToolbarPanel(wxWindow* parent, StagePanel* stage);
 
-		void setSize(int width, int height);
+	IMG_TYPE getImgType() const;
 
-	protected:
-		virtual wxSizer* initLayout();
+	void setSize(int width, int height);
 
-	private:
-		void initSizeSettingPanel(wxSizer* topSizer);
-		void initSettingsPanel(wxSizer* topSizer);
-		void initFormatChoicePanel(wxSizer* topSizer);
+protected:
+	virtual wxSizer* initLayout();
 
-		void onChangeOutputImageSize(wxCommandEvent& event);
-		void onChangePadding(wxSpinEvent& event);
-		void onChangeScale(wxSpinEvent& event);
-		void onChangeExtrude(wxSpinEvent& event);
-		void onRearrange(wxCommandEvent& event);
-		void onLoadLibraryList(wxCommandEvent& event);
-		void onChangeAutoArrange(wxCommandEvent& event);
-		void onChangePremultipliedAlpha(wxCommandEvent& event);
+private:
+	StagePanel* m_stage;
 
-	private:
-		static const int BASE_EDGE = 32;
-		static const int TOTLE_EDGE_TYPES = 7;
+	ImageToolbarPage* m_image_page;
 
-	private:
-		wxChoice *m_widthChoice, *m_heightChoice;
-		wxRadioBox* m_formatChoice;
+}; // ToolbarPanel
 
-		wxCheckBox* m_auto_arrage;
-
-	}; // ToolbarPanel
 }
 
-#endif // EPACKER_TOOLBAR_PANEL_H
+#endif // _EPACKER_TOOLBAR_PANEL_H_

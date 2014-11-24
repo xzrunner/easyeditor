@@ -49,7 +49,7 @@ void FileIO::loadFromEasypackerFile(const char* filename)
 		d2d::TexPackerAdapter::Texture tex = adapter.textures[i];
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(tex.filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		symbol->release();
+		symbol->Release();
 
 		d2d::Vector pos;
 		pos.x = tex.region.left + tex.region.width * 0.5f;
@@ -93,7 +93,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		symbol->release();
+		symbol->Release();
 
 		int width = frame_val["sourceSize"]["w"].asInt();
 		int height = frame_val["sourceSize"]["h"].asInt();
@@ -153,8 +153,8 @@ void FileIO::storeImage(const char* filename)
 	const int width = Context::Instance()->width,
 		height = Context::Instance()->height;
 	int channel = 4;
-	ToolbarPanel::IMG_TYPE type = Context::Instance()->toolbar->getImgType();
-	if (type == ToolbarPanel::e_bmp || type == ToolbarPanel::e_jpg) 
+	IMG_TYPE type = Context::Instance()->toolbar->getImgType();
+	if (type == e_bmp || type == e_jpg) 
 		channel = 3;
 
 	unsigned char* dst_data = (unsigned char*) malloc(channel * width * height);
@@ -255,10 +255,10 @@ void FileIO::storeImage(const char* filename)
 
 	switch (type)
 	{
-	case ToolbarPanel::e_bmp:
+	case e_bmp:
 //		stbi_write_bmp((imgFile + ".bmp").c_str(), width, height, channel, dst_data);
 		break;
-	case ToolbarPanel::e_jpg:
+	case e_jpg:
 		{
 			d2d::LibJpeg::ImageData data;
 			data.width = width;
@@ -268,7 +268,7 @@ void FileIO::storeImage(const char* filename)
 			d2d::LibJpeg::write_JPEG_file((imgFile + ".jpg").c_str(), 80, data);
 		}
 		break;
-	case ToolbarPanel::e_png:
+	case e_png:
 //		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
 		d2d::ImageSaver::storeToFile(dst_data, width, height, imgFile.ToStdString(), 
 			d2d::ImageSaver::e_png);

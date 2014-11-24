@@ -16,7 +16,20 @@ namespace epacker
 		virtual void onDraw();
 
 	private:
+		void onTimer(wxTimerEvent& event);
+
 		void drawRegion();
+
+	private:
+		enum
+		{
+			TIMER_ID = 1000
+		};
+
+	private:
+		wxTimer m_timer;
+
+		DECLARE_EVENT_TABLE()
 
 	}; // StageCanvas
 }

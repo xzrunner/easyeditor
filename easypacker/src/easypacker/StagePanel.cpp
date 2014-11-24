@@ -13,7 +13,10 @@ StagePanel::StagePanel(wxWindow* parent,
 	: EditPanel(parent, frame)
 	, SpritesPanelImpl(this, Context::Instance()->library)
 {
-	m_editOP = new ArrangeSpriteOP(this, Context::Instance()->property);
+//	m_editOP = new ArrangeSpriteOP(this, Context::Instance()->property);
+	b2Body* ground = CreateGround();
+	m_editOP = new ephysics::DragPhysicsOP(this, m_world, ground);
+
 	m_canvas = new StageCanvas(this);
 
 //	m_strategy = new BinaryTreeArrange();
@@ -54,7 +57,9 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 		return;
 	}
 
-	if (bClearSelection) m_spriteSelection->clear();
+	if (bClearSelection) {
+		m_spriteSelection->Clear();
+	}
 
 	std::vector<d2d::ImageSprite*> sprites;
 	traverseSprites(d2d::FetchAllVisitor<d2d::ImageSprite>(sprites), d2d::e_editable);
@@ -120,4 +125,29 @@ void StagePanel::fixCoords(d2d::ISprite* sprite)
 
 		sprite->setTransform(fixedCenter, sprite->getAngle());
 	}
+}
+
+b2Body* StagePanel::CreateGround()
+{
+	const float halfEdge = 12.8f;
+
+	b2Vec2 vertices[4];
+	vertices[0].Set(-halfEdge, -halfEdge);
+	vertices[1].Set( halfEdge, -halfEdge);
+	vertices[2].Set( halfEdge,  halfEdge);
+	vertices[3].Set(-halfEdge,  halfEdge);
+
+	b2BodyDef bd;
+	bd.type = b2_staticBody;
+	b2Body* ground = m_world->CreateBody(&bd);
+
+	b2ChainShape shape;
+	shape.CreateLoop(&vertices[0], 4);
+
+	b2FixtureDef fd;
+	fd.shape = &shape;
+
+	ground->CreateFixture(&fd);
+
+	return ground;
 }

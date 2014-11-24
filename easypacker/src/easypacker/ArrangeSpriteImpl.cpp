@@ -7,7 +7,8 @@ namespace epacker
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel, 
 									 d2d::PropertySettingPanel* propertyPanel)
-	: d2d::ArrangeSpriteImpl(editPanel, editPanel, propertyPanel)
+	: d2d::ArrangeSpriteImpl(editPanel, editPanel, propertyPanel, 
+	d2d::ArrangeSpriteConfig(false, false, false, false))
 	, m_stage(editPanel)
 {
 }
@@ -15,7 +16,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel,
 void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 {
 	d2d::ArrangeSpriteImpl::onMouseLeftUp(x, y);
-	m_selection->traverse(FixCoordsVisitor());
+	m_selection->Traverse(FixCoordsVisitor());
 }
 
 void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
@@ -26,10 +27,10 @@ void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 
 void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 {
-	if (m_selection->size() == 1)
+	if (m_selection->Size() == 1)
 	{
 		std::vector<d2d::ISprite*> sprites;
-		m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+		m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 		const d2d::Vector& pos = sprites[0]->getPosition();
 		float angle = sprites[0]->getAngle();
@@ -45,7 +46,7 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 
 void ArrangeSpriteImpl::onDraw() const
 {
-	d2d::ArrangeSpriteImpl::onDraw();
+	d2d::ArrangeSpriteImpl::onDraw(*m_stage->getCamera());
 	m_stage->traverseSprites(
 		d2d::DrawSelectedSpriteVisitor(d2d::Colorf(1.0f, 1.0f, 0.0f)),
 		d2d::e_visible

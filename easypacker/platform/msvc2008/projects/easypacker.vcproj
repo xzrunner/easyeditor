@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib GLee.lib jsond.lib SOIL.lib freetype250_D.lib lua.lib"
+				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib GLee.lib jsond.lib SOIL.lib freetype250_D.lib lua.lib box2d.lib"
 				OutputFile="..\easypacker\x86\Debug\easypacker.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
+				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\easyphysics\external\box2d\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easypacker\x86\Debug\easypacker.pdb"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -143,10 +143,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib GLee.lib json.lib SOIL.lib freetype250.lib lua.lib"
+				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib GLee.lib json.lib SOIL.lib freetype250.lib lua.lib box2d.lib"
 				OutputFile="..\easypacker\x86\Release\easypacker.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
+				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\easyphysics\external\box2d\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easypacker\x86\Release\easypacker.pdb"
@@ -271,38 +271,10 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="stage"
+			Name="tool"
 			>
 			<File
-				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easypacker\StageCanvas.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easypacker\StageCanvas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easypacker\StagePanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easypacker\StagePanel.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="toolbar"
-			>
-			<File
-				RelativePath="..\..\..\src\easypacker\ToolbarPanel.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easypacker\ToolBarPanel.h"
+				RelativePath="..\..\..\src\easypacker\const.h"
 				>
 			</File>
 		</Filter>
@@ -397,6 +369,62 @@
 				RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="view"
+			>
+			<Filter
+				Name="stage"
+				>
+				<File
+					RelativePath="..\..\..\src\easypacker\ArrangeSpriteOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\StageCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\StageCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\StagePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\StagePanel.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="toolbar"
+				>
+				<File
+					RelativePath="..\..\..\src\easypacker\ImageToolbarPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\ImageToolbarPage.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\MeshToolbarPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\MeshToolbarPage.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\ToolbarPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\ToolBarPanel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"

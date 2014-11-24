@@ -13,6 +13,7 @@ class SpecialSettingPage : public SettingPageBase
 public:
 	SpecialSettingPage(wxWindow* parent, StageData* stage_data);
 
+private:
 	void InitLayout();
 
 private:

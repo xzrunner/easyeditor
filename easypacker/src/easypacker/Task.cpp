@@ -58,7 +58,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 
 	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
 
-	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter);
+	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage);
 }
 
 void Task::initLayout()

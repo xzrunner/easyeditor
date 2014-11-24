@@ -14,6 +14,7 @@ class EmitterSettingPage : public SettingPageBase
 public:
 	EmitterSettingPage(wxWindow* parent, StageData* stage_data);
 
+private:
 	void InitLayout();
 
 private:

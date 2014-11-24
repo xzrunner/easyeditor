@@ -5,9 +5,15 @@
 
 using namespace epacker;
 
+BEGIN_EVENT_TABLE(StageCanvas, d2d::PerspectCanvas)
+	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
+END_EVENT_TABLE()
+
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::SpriteStageCanvas(stage, stage)
+	, m_timer(this, TIMER_ID)
 {
+	m_timer.Start(100);
 }
 
 void StageCanvas::onDraw()
@@ -16,10 +22,17 @@ void StageCanvas::onDraw()
 	drawRegion();
 }
 
+void StageCanvas::onTimer(wxTimerEvent& event)
+{
+	Refresh();
+}
+
 void StageCanvas::drawRegion()
 {
 	const float width = Context::Instance()->width,
 		height = Context::Instance()->height;
+
+	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
 
 	// bg
 	d2d::PrimitiveDraw::rect(
@@ -28,7 +41,7 @@ void StageCanvas::drawRegion()
 		d2d::LIGHT_RED_LINE);
 
 	int x = 0, y = 0;
-	int count = static_cast<StagePanel*>(m_editPanel)->GetTextureAccount();
+	int count = stage->GetTextureAccount();
 	for (int i = 0; i < count; ++i)
 	{
 		d2d::PrimitiveDraw::rect(d2d::Vector(x, y), 
@@ -36,4 +49,7 @@ void StageCanvas::drawRegion()
 			d2d::LIGHT_GREY_LINE);
 		x += Context::Instance()->width * TEXTURE_X_OFFSET_FACTOR;
 	}
+
+	// physics
+	stage->drawPhysics();
 }
