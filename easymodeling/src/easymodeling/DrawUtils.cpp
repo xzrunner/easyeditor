@@ -8,8 +8,9 @@ void DrawUtils::drawBody(libmodeling::Body* body, DrawType dType)
 	d2d::Colorf cFace, cEdge;
 	getBodyColor(body->type, dType, cFace, cEdge);
 
-	d2d::SpriteDraw::drawSprite(body->sprite);
-	body->draw(cFace, cEdge);
+	d2d::Matrix mt;
+	body->sprite->GetTransMatrix(mt);
+	body->draw(mt, cFace, cEdge);
 }
 
 void DrawUtils::drawFixture(libmodeling::Fixture* fixture, 
@@ -21,8 +22,9 @@ void DrawUtils::drawFixture(libmodeling::Fixture* fixture,
 	else
 		getBodyColor(fixture->body->type, dType, cFace, cEdge);
 
-	d2d::SpriteDraw::drawSprite(fixture->body->sprite);
-	fixture->draw(cFace, cEdge);
+	d2d::Matrix mt;
+	fixture->body->sprite->GetTransMatrix(mt);
+	fixture->draw(mt, cFace, cEdge);
 }
 
 void DrawUtils::getBodyColor(libmodeling::Body::Type type, DrawType dType,

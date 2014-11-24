@@ -2,6 +2,7 @@
 #include "ISymbol.h"
 
 #include "common/Math.h"
+#include "common/Matrix.h"
 #include "common/color_trans.h"
 #include "dataset/BVFactory.h"
 #include "dataset/AbstractBV.h"
@@ -257,6 +258,16 @@ Vector ISprite::getCenter() const
 	d2d::Vector center_offset = Math::rotateVector(-m_offset, m_angle) + m_offset;
 	d2d::Vector center = m_pos + center_offset;
 	return center;
+}
+
+void ISprite::GetTransMatrix(Matrix& mt) const
+{
+	const float xScale = m_xMirror ? -m_scale.x : m_scale.x,
+		yScale = m_yMirror ? -m_scale.y : m_scale.y;
+
+	d2d::Vector center = getCenter();
+	mt.setTransformation(center.x, center.y, m_angle, 
+		xScale, yScale, 0, 0, m_shear.x, m_shear.y);
 }
 
 //////////////////////////////////////////////////////////////////////////

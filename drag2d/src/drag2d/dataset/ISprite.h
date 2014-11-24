@@ -14,6 +14,7 @@ namespace d2d
 	class Rect;
 	class ISymbol;
 	class AbstractBV;
+	class Matrix;
 
 	class ISprite : public ICloneable, public UserDataImpl, public Object
 	{
@@ -71,6 +72,8 @@ namespace d2d
 		void setObserver(ISpriteObserver* observer) {
 			m_observer = observer;
 		}
+
+		void GetTransMatrix(Matrix& mt) const;
 
 	public:
 		// info

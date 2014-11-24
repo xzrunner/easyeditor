@@ -10,19 +10,12 @@ void SpriteDraw::drawSprite(const ISprite* sprite, const d2d::Matrix& mt,
 	if (!sprite->visiable)
 		return;
 
-	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
-	const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
-		yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
-
-	d2d::Vector center = sprite->getCenter();
 	Matrix t;
-	t.setTransformation(center.x, center.y, sprite->getAngle(), 
-		xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
+	sprite->GetTransMatrix(t);
+	t = mt * t;
+
 	Colorf _mul = cMul(sprite->multiCol, mul),
 		_add = cAdd(sprite->addCol, add);
-
-	t = mt * t;
 
 	sprite->getSymbol().draw(t, _mul, _add, sprite);
 }

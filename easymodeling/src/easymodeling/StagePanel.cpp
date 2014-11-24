@@ -45,48 +45,30 @@ namespace emodeling
 
 	void StagePanel::insertSprite(d2d::ISprite* sprite)
 	{
+		d2d::SpritesPanelImpl::insertSprite(sprite);
+
 		wxString filepath = d2d::FilenameTools::getFilenameAddTag(
 			sprite->getSymbol().getFilepath(), libshape::FILE_TAG, "json");
-		d2d::ISymbol* shape_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-		d2d::ISprite* shape_sprite = d2d::SpriteFactory::Instance()->create(shape_symbol);
-		shape_sprite->setTransform(sprite->getPosition(), sprite->getAngle());
-		static_cast<libshape::Symbol*>(shape_symbol)->SetBG(&const_cast<d2d::ISymbol&>(sprite->getSymbol()));
-		shape_symbol->Release();
-
-		d2d::SpritesPanelImpl::insertSprite(shape_sprite);
-
-		ephysics::IBody* body = ephysics::BodyManager::Instance()->LoadBody(sprite);
-		if (body) {
-			body->sprite = shape_sprite;
-			shape_sprite->setUserData(body);
-			m_bodies.push_back(body);
+		if (!d2d::FilenameTools::isExist(filepath)) {
+			return;
 		}
 
-		//////////////////////////////////////////////////////////////////////////
+		d2d::ISymbol* bg = NULL;
+		std::vector<d2d::IShape*> shapes;
+		libshape::FileIO::LoadFromFile(filepath.mb_str(), shapes, bg);
+		libmodeling::Body* body = new libmodeling::Body;
+		for (int i = 0, n = shapes.size(); i< n; ++i)
+		{
+			libmodeling::Fixture* fixture = new libmodeling::Fixture;
+			fixture->body = body;
 
-// 		d2d::SpritesPanelImpl::insertSprite(sprite);
-// 
-// 		if (sprite->getUserData())
-// 		{
-// 			libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->getUserData());
-// 			m_bodies.push_back(body);
-// 		}
-// 		else
-// 		{
-// 			libmodeling::Body* body = new libmodeling::Body;
-// 
-// 			wxString path = d2d::FilenameTools::getFilePathExceptExtension(sprite->getSymbol().getFilepath())
-// 				+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape) + ".json";
-// 
-// 			if (d2d::FilenameTools::isExist(path))
-// 				loadBody(path, *body);
-// 			else
-// 				loadBody(sprite, *body);
-// 
-// 			body->sprite = sprite;
-// 			sprite->setUserData(body);
-// 			m_bodies.push_back(body);
-// 		}
+			fixture->shape = shapes[i];
+			body->fixtures.push_back(fixture);
+		}
+
+		body->sprite = sprite;
+		sprite->setUserData(body);
+		m_bodies.push_back(body);
 	}
 
 	void StagePanel::clearSprites()

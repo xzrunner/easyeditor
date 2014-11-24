@@ -17,7 +17,8 @@ namespace libmodeling
 		bool isContain(const d2d::Vector& pos) const;
 		bool isIntersect(const d2d::Rect& rect) const;
 
-		void draw(const d2d::Colorf& cFace, const d2d::Colorf& cEdge) const;
+		void draw(const d2d::Matrix& mt, const d2d::Colorf& cFace, 
+			const d2d::Colorf& cEdge) const;
 
 	private:
 		void transLocalToWorld(const std::vector<d2d::Vector>& local, std::vector<d2d::Vector>& world) const;

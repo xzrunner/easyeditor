@@ -178,6 +178,53 @@ void PrimitiveDraw::drawCircles(const std::vector<Vector>& circles, float radius
 	}
 }
 
+void PrimitiveDraw::drawCircle(const Matrix& mt, const Vector& center, float radius, bool isFill/* = false*/, 
+							   float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/, size_t kSegments/* = 16*/)
+{
+	PrimitiveDrawNew::SetColor(color);
+	const float k_increment = 2.0f * PI / kSegments;
+	float theta = 0.0f;
+	if (!isFill)
+	{
+		PrimitiveDrawNew::SetLineWidth(size);
+		int idx = 0;
+		for (size_t i = 0; i < kSegments; ++i)
+		{
+			Vector v = center + Vector(cosf(theta), sinf(theta)) * radius;
+			Vector v_trans = Math::transVector(v, mt);
+			VERTICES[idx++] = v_trans.x;
+			VERTICES[idx++] = v_trans.y;
+			theta += k_increment;
+		}
+		PrimitiveDrawNew::Draw(GL10::GL_LINE_LOOP, VERTICES, kSegments);
+	}
+	else
+	{
+		int idx = 0;
+		Vector center_trans = Math::transVector(center, mt);
+		VERTICES[idx++] = center_trans.x;
+		VERTICES[idx++] = center_trans.y;
+		for (size_t i = 0; i < kSegments; ++i)
+		{
+			Vector v = center + Vector(cosf(theta), sinf(theta)) * radius;
+			Vector v_trans = Math::transVector(v, mt);
+			VERTICES[idx++] = v_trans.x;
+			VERTICES[idx++] = v_trans.y;
+			theta += k_increment;
+		}
+		VERTICES[idx++] = VERTICES[2];
+		VERTICES[idx++] = VERTICES[3];
+		PrimitiveDrawNew::Draw(GL10::GL_TRIANGLE_FAN, VERTICES, kSegments + 2);
+	}
+}
+
+void PrimitiveDraw::drawPoint(const Vector& vertex, const Colorf& color, float size /*= 2*/)
+{
+	PrimitiveDrawNew::SetPointSize(size);
+	PrimitiveDrawNew::SetColor(color);
+	PrimitiveDrawNew::Draw(GL10::GL_POINTS, &vertex.x, 1);	
+}
+
 void PrimitiveDraw::drawPoints(const std::vector<Vector>& vertices, const Colorf& color, float size/* = 2*/)
 {
 	if (vertices.empty()) {

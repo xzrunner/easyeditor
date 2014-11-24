@@ -33,17 +33,9 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 		{
 			GL10::PushMatrix();
 
-			Matrix t;
-
-			bool xMirror, yMirror;
-			sprite->getMirror(xMirror, yMirror);
-			const float xScale = xMirror ? -sprite->getScale().x : sprite->getScale().x,
-				yScale = yMirror ? -sprite->getScale().y : sprite->getScale().y;
-
-			d2d::Vector center = sprite->getCenter();
-			t.setTransformation(center.x, center.y, sprite->getAngle(), 
-				xScale, yScale, 0, 0, sprite->getShear().x, sprite->getShear().y);
-			GL10::MultMatrixf((const float*)t.getElements( ));
+			Matrix mt;
+			s->GetTransMatrix(mt);
+			GL10::MultMatrixf((const float*)mt.getElements( ));
 
 			Image* img = s->getSymbol().getImage();
 			PrimitiveDraw::rect(Vector(0, 0), img->originWidth() * 0.5f, 
