@@ -6,6 +6,8 @@
 #include <JSON/json.h>
 #include <deque>
 
+#include "common/SpecialConfig.h"
+
 namespace d2d
 {
 
@@ -59,6 +61,9 @@ private:
 	wxString getFileFilter() const;
 
 	void setCurrFilename();
+
+	void LoadWindowConfig();
+	void StoreWindowConfig();
 
 protected:
 	wxMenu* m_view_menu;
@@ -120,6 +125,9 @@ protected:
 private:
 	RecentFiles m_recent;
 
+	SpecialConfig m_config;
+
+private:
 	DECLARE_EVENT_TABLE()
 
 }; // Frame 

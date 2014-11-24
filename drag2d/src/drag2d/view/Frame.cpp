@@ -31,13 +31,16 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	, m_task(NULL)
 	, m_filetag(filetag)
 	, m_recent(this)
+	, m_config(filetag.ToStdString())
 {
+	LoadWindowConfig();
 	loadTmpInfo();
 	initMenuBar();
 }
 
 Frame::~Frame()
 {
+	StoreWindowConfig();
 	saveTmpInfo();
 }
 
@@ -314,6 +317,32 @@ void Frame::setCurrFilename()
 			m_currFilename = str;
 			break;
 		}
+	}
+}
+
+void Frame::LoadWindowConfig()
+{
+	if (m_config.IsExist()) {
+		const SpecialConfig::Window& wnd = m_config.GetWnd();
+		SetSize(wxSize(wnd.width, wnd.height));
+		SetPosition(wxPoint(wnd.left, wnd.top));
+	}
+}
+
+void Frame::StoreWindowConfig()
+{
+	if (m_config.IsExist()) {
+		SpecialConfig::Window wnd;
+
+		wxSize size = GetSize();
+		wnd.width = size.GetWidth();
+		wnd.height = size.GetHeight();
+
+		wxPoint pos = GetPosition();
+		wnd.left = pos.x;
+		wnd.top = pos.y;
+
+		m_config.SetWnd(wnd);
 	}
 }
 
