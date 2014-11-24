@@ -17,6 +17,8 @@
 #include "ScaleJson.h"
 #include "AddFrameSprite.h"
 #include "FormatTIDString.h"
+#include "OutlineImage.h"
+#include "OutlineToPolygon.h"
 
 namespace edb
 {
@@ -40,6 +42,8 @@ void CommandLoader::Init()
 	fc->Register(ScaleJson::Create());
 	fc->Register(AddFrameSprite::Create());
 	fc->Register(FormatTIDString::Create());
+	fc->Register(OutlineImage::Create());
+	fc->Register(OutlineToPolygon::Create());
 }
 
 }
