@@ -208,6 +208,8 @@ namespace d2d
 		static Vector rotateVectorRightAngle(const Vector& v, bool isTurnLeft);
 
 		static Vector transVector(const Vector& v, const Matrix& m);
+		static void TransVertices(const Matrix& mt, const std::vector<d2d::Vector>& src,
+			std::vector<d2d::Vector>& dst);
 
 		static Vector transCoordsLocalToWorld(const Vector& origin, const Vector& xDir, const Vector& local);
 

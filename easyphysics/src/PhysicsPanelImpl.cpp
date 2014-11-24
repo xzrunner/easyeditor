@@ -6,7 +6,7 @@ namespace ephysics
 {
 
 PhysicsPanelImpl::PhysicsPanelImpl()
-	: m_debugDraw(BOX2D_SCALE_FACTOR)
+	: m_debug_draw(BOX2D_SCALE_FACTOR)
 	, m_velocityIterations(8)
 	, m_positionIterations(3)
 {
@@ -17,7 +17,7 @@ PhysicsPanelImpl::PhysicsPanelImpl()
 	uint32 flags = 0;
 	flags += b2Draw::e_shapeBit;
 	flags += b2Draw::e_jointBit;
-	m_debugDraw.SetFlags(flags);
+	m_debug_draw.SetFlags(flags);
 
 	m_timer = new wxTimer(this, 1);
 	m_timer->Start(1.0f / 60);
@@ -51,7 +51,7 @@ b2World* PhysicsPanelImpl::createWorld(const d2d::Vector& gravity)
 	world = new b2World(b2gravity);
 
 	world->SetContactListener(this);
-	world->SetDebugDraw(&m_debugDraw);
+	world->SetDebugDraw(&m_debug_draw);
 
 	return world;
 }

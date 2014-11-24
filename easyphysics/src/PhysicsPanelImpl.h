@@ -4,8 +4,8 @@
 #include <Box2D/Box2D.h>
 #include <wx/wx.h>
 #include <drag2d.h>
- 
-#include "b2Render.h"
+
+#include "Box2DRender.h"
 
 namespace ephysics
 {
@@ -33,7 +33,7 @@ protected:
 	int m_positionIterations;
 
 private:
-	b2GLRender m_debugDraw;
+	Box2DRender m_debug_draw;
 
 	wxTimer* m_timer;
 	bool m_isPaused;

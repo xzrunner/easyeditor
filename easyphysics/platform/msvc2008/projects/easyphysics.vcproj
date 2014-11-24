@@ -321,6 +321,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\Box2DRender.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\Box2DRender.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\PhysicsPanelImpl.cpp"
 				>
 			</File>

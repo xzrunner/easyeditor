@@ -545,6 +545,15 @@ Vector Math::transVector(const Vector& v, const Matrix& m)
 	return ret;
 }
 
+void Math::TransVertices(const Matrix& mt, const std::vector<d2d::Vector>& src, std::vector<d2d::Vector>& dst)
+{
+	dst.clear();
+	dst.reserve(src.size());
+	for (int i = 0, n = src.size(); i < n; ++i) {
+		dst.push_back(transVector(src[i], mt));
+	}
+}
+
 Vector Math::transCoordsLocalToWorld(const Vector& origin, const Vector& xDir, const Vector& local)
 {
 	Vector nx(xDir);
