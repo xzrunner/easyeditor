@@ -16,6 +16,11 @@
 #include "view/GLCanvas.h"
 #include "view/Camera.h"
 #include "history/DeleteSpriteAOP.h"
+#include "history/CombineAOP.h"
+#include "history/TranslateSpriteAOP.h"
+#include "history/ScaleSpriteAOP.h"
+#include "history/ShearSpriteAOP.h"
+#include "history/OffsetSpriteAOP.h"
 #include "render/PrimitiveDraw.h"
 #include "render/DynamicTexAndFont.h"
 
@@ -72,13 +77,21 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		{
 			std::vector<ISprite*> sprites;
 			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+			CombineAOP* comb = new CombineAOP();
 			for (int i = 0, n = sprites.size(); i < n; ++i) {
 				ISprite* sprite = sprites[i];
+
+				comb->Insert(new TranslateSpriteAOP(sprite, -sprite->getPosition()));
+				comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->getScale()));
+				comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->getShear()));
+//				comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
+
 				sprite->setTransform(Vector(0, 0), 0);
 				sprite->setScale(1, 1);
 				sprite->setShear(0, 0);
 //				sprite->setOffset(Vector(0, 0));
 			}
+			m_editPanel->addHistoryOP(comb);
 		}
 		break;
 	case 'a': case 'A':
