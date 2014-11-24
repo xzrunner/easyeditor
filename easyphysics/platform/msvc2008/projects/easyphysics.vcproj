@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\easy3d\x86\Debug"
-			IntermediateDirectory="..\easy3d\x86\Debug\obj"
+			OutputDirectory="..\easyphysics\x86\Debug"
+			IntermediateDirectory="..\easyphysics\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -80,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\easy3d\x86\Release"
-			IntermediateDirectory="..\easy3d\x86\Release\obj"
+			OutputDirectory="..\easyphysics\x86\Release"
+			IntermediateDirectory="..\easyphysics\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -312,14 +312,6 @@
 		<Filter
 			Name="view"
 			>
-			<File
-				RelativePath="..\..\..\src\b2Render.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\b2Render.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\..\src\Box2DRender.cpp"
 				>

@@ -129,6 +129,7 @@ raiden/platform/msvc2008/raiden
 shootbubble/platform/msvc2008/shootbubble
 
 easy3d/platform/msvc2008/easy3d
+easyphysics/platform/msvc2008/easyphysics
 easysketch/platform/msvc2008/easysketch
 easysketch/platform/msvc2008/libsketch
 easyterrain/platform/msvc2008/easyterrain
