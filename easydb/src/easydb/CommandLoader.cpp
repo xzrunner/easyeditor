@@ -19,6 +19,7 @@
 #include "FormatTIDString.h"
 #include "OutlineImage.h"
 #include "OutlineToPolygon.h"
+#include "FixSpriteColor.h"
 
 namespace edb
 {
@@ -44,6 +45,7 @@ void CommandLoader::Init()
 	fc->Register(FormatTIDString::Create());
 	fc->Register(OutlineImage::Create());
 	fc->Register(OutlineToPolygon::Create());
+	fc->Register(FixSpriteColor::Create());
 }
 
 }

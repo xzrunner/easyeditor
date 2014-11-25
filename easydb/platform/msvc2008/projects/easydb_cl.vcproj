@@ -346,6 +346,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\FixSpriteColor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\FixSpriteColor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\FormatJsonFile.cpp"
 					>
 				</File>
