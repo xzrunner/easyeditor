@@ -60,7 +60,7 @@ void SpecialConfig::Load()
 
 void SpecialConfig::Store() const
 {
-	if (!m_auto_set_wnd) {
+	if (!m_exist || !m_auto_set_wnd) {
 		return;
 	}
 
