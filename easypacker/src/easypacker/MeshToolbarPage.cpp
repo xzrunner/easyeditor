@@ -36,8 +36,15 @@ void MeshToolbarPage::InitLayout()
 	sizer->AddSpacer(10);
 	// save
 	{
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("save..."));
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("save physics"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MeshToolbarPage::OnSaveToFile));
+		sizer->Add(btn);		
+	}
+	sizer->AddSpacer(10);
+	// output image
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("save image ..."));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MeshToolbarPage::OnSaveImage));
 		sizer->Add(btn);		
 	}
 	SetSizer(sizer);
@@ -84,6 +91,51 @@ void MeshToolbarPage::OnSaveToFile(wxCommandEvent& event)
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
+}
+
+void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
+{
+	wxFileDialog dlg(this, wxT("Open Physics Result"), wxEmptyString, wxEmptyString, "*.json", wxFD_OPEN);
+	if (dlg.ShowModal() == wxID_OK) {
+		wxString physics_filepath = dlg.GetPath();
+
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(physics_filepath.fn_str());
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		const int width = 1024,
+			height = 2048;
+		d2d::Snapshoot ss(width, height);
+		int i = 0;
+		Json::Value item_val = value[i++];
+
+		while (!item_val.isNull()) {
+			std::string filepath = item_val["filepath"].asString();
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+
+			d2d::Vector pos;
+			pos.x = item_val["pos"]["x"].asDouble() - width * 0.5f;
+			pos.y = item_val["pos"]["y"].asDouble() - height * 0.5f;
+			float angle = item_val["angle"].asDouble();
+			sprite->setTransform(pos, angle);
+			ss.DrawSprite(sprite);
+
+			sprite->Release();
+			symbol->Release();
+
+			item_val = value[i++];
+		}
+
+		wxString outpath = d2d::FilenameTools::getFileDir(physics_filepath) + "\\image.png";
+		ss.SaveToFile(outpath.ToStdString());
+
+		m_stage->getCanvas()->resetViewport();
+	}
 }
 
 void MeshToolbarPage::LoadBodies(const wxString& dir)

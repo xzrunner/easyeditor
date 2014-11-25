@@ -18,6 +18,7 @@ private:
 
 	void OnSetSrcDir(wxCommandEvent& event);
 	void OnSaveToFile(wxCommandEvent& event);
+	void OnSaveImage(wxCommandEvent& event);
 
 	void LoadBodies(const wxString& dir);
 
