@@ -9,6 +9,7 @@ namespace d2d
 {
 
 class ISymbol;
+class ISprite;
 
 class Snapshoot
 {
@@ -23,20 +24,22 @@ public:
 	void outputToImageFile(const ISymbol* symbol, const std::string& filename, 
 		float scale = 1.0f) const;
 
+	void DrawSprite(const ISprite* sprite) const;
+	void SaveToFile(const std::string& filename) const;
+
 private:
-	void createFBO(int width, int height);
+	void createFBO();
 	void releaseFBO();
 
 	void drawFBO(const ISymbol* symbol, bool whitebg = false,
 		float scale = 1.0f) const;
+	void drawFBO(const ISprite* sprite) const;
 
 	int checkFramebufferStatus() const;
 
 private:
-	static const int DEFAULT_WIDTH = 800;
-	static const int DEFAULT_HEIGHT = 600;
+	int m_width, m_height;
 
-private:
 	int m_tex;
 	int m_fbo;
 

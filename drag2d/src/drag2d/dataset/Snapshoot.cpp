@@ -16,18 +16,27 @@
 namespace d2d
 {
 
+static const int DEFAULT_WIDTH = 800;
+static const int DEFAULT_HEIGHT = 600;
+
 Snapshoot::Snapshoot()
 	: m_tex(0)
 	, m_fbo(0)
 {
-	createFBO(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	m_width = DEFAULT_WIDTH;
+	m_height = DEFAULT_HEIGHT;
+
+	createFBO();
 }
 
 Snapshoot::Snapshoot(int width, int height)
 	: m_tex(0)
 	, m_fbo(0)
 {
-	createFBO(width, height);
+	m_width = width;
+	m_height = height;
+
+	createFBO();
 }
 
 Snapshoot::~Snapshoot()
@@ -64,7 +73,28 @@ void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& file
 	delete[] pixels;
 }
 
-void Snapshoot::createFBO(int width, int height)
+void Snapshoot::DrawSprite(const ISprite* sprite) const
+{
+	drawFBO(sprite);
+}
+
+void Snapshoot::SaveToFile(const std::string& filename) const
+{
+	size_t size = m_width * m_height * 4;
+	unsigned char* pixels = new unsigned char[size];
+	if(!pixels) return;
+	memset(&pixels[0], 0, size);	
+
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
+
+	ImageSaver::storeToFile(pixels, m_width, m_height, filename, ImageSaver::e_png);
+
+	delete[] pixels;
+}
+
+void Snapshoot::createFBO()
 {
 	initOpenGLExtensions();
 
@@ -82,11 +112,11 @@ void Snapshoot::createFBO(int width, int height)
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)width, (GLsizei)height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	unsigned char* empty_data = new unsigned char[width*height*4];
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)m_width, (GLsizei)m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+	unsigned char* empty_data = new unsigned char[m_width*m_height*4];
 	if(!empty_data) return;
-	memset(empty_data, 0, width*height*4);
-	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)width, (GLsizei)height, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
+	memset(empty_data, 0, m_width*m_height*4);
+	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)m_width, (GLsizei)m_height, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
 	delete[] empty_data;
 
 	// init fbo
@@ -146,6 +176,28 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
  	shader->SetFBO(0);
  	shader->SetTexture(0);
+}
+
+void Snapshoot::drawFBO(const ISprite* sprite) const
+{
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->SetFBO(m_fbo);
+	shader->sprite();
+
+// 	glClearColor(0, 0, 0, 1);
+// 	glClear(GL_COLOR_BUFFER_BIT);
+
+	shader->SetModelView(Vector(0, 0), 1);
+	shader->SetProjection(m_width, m_height);
+	glViewport(0, 0, m_width, m_height);
+
+	Matrix mt;
+// 	Rect r = sprite->getSymbol().getSize();
+// 	mt.translate(-r.xCenter(), r.yCenter());
+	SpriteDraw::drawSprite(sprite, mt);
+
+	shader->SetFBO(0);
+	shader->SetTexture(0);
 }
 
 int Snapshoot::checkFramebufferStatus() const
