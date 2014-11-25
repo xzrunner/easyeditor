@@ -7,7 +7,7 @@ SettingData::SettingData()
 {
 	open_sprite_capture = true;
 
-	open_image_edge_clip = true;
+	open_image_edge_clip = false;
 	visible_image_edge = false;
 
 	visible_label_bg = true;
