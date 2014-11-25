@@ -9,7 +9,7 @@ namespace eimage
 
 static const float TOLERANCE = 0.04f;
 
-//#define TRIGGER_STEP		// step by step
+#define TRIGGER_STEP		// step by step
 
 AutoCutCMPT::AutoCutCMPT(wxWindow* parent, const wxString& name, 
 						 StagePanel* stage)
@@ -97,7 +97,7 @@ void AutoCutCMPT::OutputOutline(wxCommandEvent& event)
 void AutoCutCMPT::CreateOutline(wxCommandEvent& event)
 {
 	// step by step
-	static int max_count = 5;
+	static int max_step = 5;
 
 	const d2d::ISprite* sprite = m_stage->getImage();
 	const d2d::ImageSprite* img_sprite 
@@ -113,7 +113,7 @@ void AutoCutCMPT::CreateOutline(wxCommandEvent& event)
 	op->m_raw_bound_line_merged = m_raw->GetBorderLineMerged();
 
 	m_fine = new ExtractOutlineFine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
-	m_fine->CreateOutline(TOLERANCE, max_count++);
+	m_fine->CreateOutline(TOLERANCE, max_step++);
 	op->m_fine_bound_line = m_fine->GetResult();
 
 	m_editPanel->Refresh();
@@ -133,7 +133,7 @@ void AutoCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
 void AutoCutCMPT::Trigger()
 {
 #ifdef TRIGGER_STEP
-	static int max_count = 5;
+	static int max_step = 1;
 #endif
 	const d2d::ISprite* sprite = m_stage->getImage();
 	const d2d::ImageSprite* img_sprite 
@@ -150,7 +150,7 @@ void AutoCutCMPT::Trigger()
 
 	ExtractOutlineFine fine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
 #ifdef TRIGGER_STEP
-	fine.Trigger(TOLERANCE, max_count++);
+	fine.Trigger(TOLERANCE, max_step++);
 #else
 	fine.Trigger(TOLERANCE);
 #endif

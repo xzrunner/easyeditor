@@ -13,9 +13,9 @@ public:
 		const std::vector<d2d::Vector>& raw_border_merged);
 
 	void Trigger(float tolerance);
-	void Trigger(float tolerance, int max_count);
+	void Trigger(float tolerance, int max_step);
 
-	void CreateOutline(float tolerance, int max_count);
+	void CreateOutline(float tolerance, int max_step);
 	void ReduceOutlineCount(float tolerance);
 
 	const std::vector<d2d::Vector>& GetResult() const {
@@ -23,7 +23,7 @@ public:
 	}
 
 private:
-	void OutlineByAddNode(float tolerance, int max_count, bool reduce_count);
+	void OutlineByAddNode(float tolerance, int max_step, bool reduce_count);
 
 	void RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& new1, float& decrease) const;
 	void AddOneNode(int idx, d2d::Vector& new_start, d2d::Vector& new_end, d2d::Vector& new_node, float& decrease) const;

@@ -18,14 +18,14 @@ void ExtractOutlineFine::Trigger(float tolerance)
 	OutlineByAddNode(tolerance, INT_MAX, true);	
 }
 
-void ExtractOutlineFine::Trigger(float tolerance, int max_count)
+void ExtractOutlineFine::Trigger(float tolerance, int max_step)
 {
-	OutlineByAddNode(tolerance, max_count, true);		
+	OutlineByAddNode(tolerance, max_step, true);		
 }
 
-void ExtractOutlineFine::CreateOutline(float tolerance, int max_count)
+void ExtractOutlineFine::CreateOutline(float tolerance, int max_step)
 {
-	OutlineByAddNode(tolerance, max_count, false);
+	OutlineByAddNode(tolerance, max_step, false);
 }
 
 void ExtractOutlineFine::ReduceOutlineCount(float tolerance)
@@ -34,7 +34,7 @@ void ExtractOutlineFine::ReduceOutlineCount(float tolerance)
 	ReduceEdge(tolerance);
 }
 
-void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
+void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 										  bool reduce_count)
 {
 	m_fine_border.clear();
@@ -104,14 +104,13 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 			if (a_area_decrease / area > tolerance) {
 				const d2d::Vector& start = m_fine_border[a_idx];
 				const d2d::Vector& start_prev = m_fine_border[(a_idx+m_fine_border.size()-1)%m_fine_border.size()];
-				d2d::Vector s0 = a_new_start - a_new_node, 
-					s1 = start - start_prev;
-				d2d::Vector new_start;
+				d2d::Vector cross_start;
 				int new_node_pos;
-				if (f2Cross(s0, s1) < 0 &&
-					d2d::Math::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &new_start)) {
+				d2d::Math::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &cross_start);
+				if (d2d::Math::getDistanceSquare(cross_start, a_new_start) < d2d::Math::getDistanceSquare(cross_start, a_new_node) &&
+					d2d::Math::getDistanceSquare(cross_start, a_new_node) > d2d::Math::getDistanceSquare(a_new_start, a_new_node)) {
 					new_node_pos = (a_idx+1)%m_fine_border.size();
-					m_fine_border[a_idx] = new_start;
+					m_fine_border[a_idx] = cross_start;
 				} else {
 					new_node_pos = (a_idx+2)%m_fine_border.size();
 					m_fine_border.insert(m_fine_border.begin()+((a_idx+1)%m_fine_border.size()), a_new_start);
@@ -120,12 +119,11 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 
 				const d2d::Vector& end = m_fine_border[(new_node_pos+1)%m_fine_border.size()];
 				const d2d::Vector& end_next = m_fine_border[(new_node_pos+2)%m_fine_border.size()];
-				d2d::Vector e0 = a_new_end - a_new_node,
-					e1 = end - end_next;
-				d2d::Vector new_end;
-				if (f2Cross(e0, e1) > 0 &&
-					d2d::Math::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &new_end)) {
-					m_fine_border[(new_node_pos+1)%m_fine_border.size()] = new_end;
+				d2d::Vector cross_end;
+				d2d::Math::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &cross_end);
+				if (d2d::Math::getDistanceSquare(cross_end, a_new_end) < d2d::Math::getDistanceSquare(cross_end, a_new_node) &&
+					d2d::Math::getDistanceSquare(cross_end, a_new_node) > d2d::Math::getDistanceSquare(a_new_end, a_new_node)) {
+					m_fine_border[(new_node_pos+1)%m_fine_border.size()] = cross_end;
 				} else {
 					m_fine_border.insert(m_fine_border.begin()+((new_node_pos+1)%m_fine_border.size()), a_new_end);
 				}
@@ -154,7 +152,9 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_count,
 		}
 		last_fine_border = m_fine_border;
 
-	} while (success && m_fine_border.size() < max_count && ++count < 100);
+//	} while (success && m_fine_border.size() < max_step && ++count < 100);
+//	} while (success && m_fine_border.size() < max_step);
+	} while (++count < max_step);
 }
 
 void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& new1, float& decrease) const
@@ -515,11 +515,11 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 			} 
 			else 
 			{
-//				assert(!inside_s || !inside_e);
+				assert(!inside_s || !inside_e);
 
-				if (inside_s && inside_e) {
-					break;
-				}
+// 				if (inside_s && inside_e) {
+// 					break;
+// 				}
 
 				if (IsCutTriLegal(intersect, start, end)) {
 					if (inside_s) {
