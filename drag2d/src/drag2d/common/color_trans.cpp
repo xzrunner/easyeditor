@@ -32,6 +32,8 @@ Colorf transColor(const std::string& str, PixelType type)
 			ret.a = transColor(snum[2], snum[3]);
 		else if (type == PT_ARGB)
 			ret.b = transColor(snum[2], snum[3]);
+		else if (type == PT_ABGR)
+			ret.r = transColor(snum[2], snum[3]);
 	}
 	else if (len == 10)
 	{
@@ -45,7 +47,12 @@ Colorf transColor(const std::string& str, PixelType type)
 			ret.r = transColor(snum[4], snum[5]);
 			ret.g = transColor(snum[6], snum[7]);
 			ret.b = transColor(snum[8], snum[9]);
-		} else if (type == PT_BGRA) {
+		} else if (type == PT_ABGR) {
+			ret.a = transColor(snum[2], snum[3]);
+			ret.b = transColor(snum[4], snum[5]);
+			ret.g = transColor(snum[6], snum[7]);
+			ret.r = transColor(snum[8], snum[9]);
+		}  else if (type == PT_BGRA) {
 			ret.b = transColor(snum[2], snum[3]);
 			ret.g = transColor(snum[4], snum[5]);
 			ret.r = transColor(snum[6], snum[7]);
@@ -72,6 +79,13 @@ Colorf transColor(int color, PixelType type)
 		ret.r = (color >> 16 & 0xff) / 255.0f;
 		ret.g = (color >> 8 & 0xff) / 255.0f;
 		ret.b = (color & 0xff) / 255.0f;
+	}
+	else if (type == PT_ABGR)
+	{
+		ret.a = (color >> 24 & 0xff) / 255.0f;
+		ret.b = (color >> 16 & 0xff) / 255.0f;
+		ret.g = (color >> 8 & 0xff) / 255.0f;
+		ret.r = (color & 0xff) / 255.0f;
 	}
 	else if (type == PT_BGRA)
 	{
@@ -117,6 +131,11 @@ std::string transColor(const Colorf& col, PixelType type)
 		ret += transColor(col.r);
 		ret += transColor(col.g);
 		ret += transColor(col.b);
+	} else if (type == PT_ABGR) {
+		ret += transColor(col.a);
+		ret += transColor(col.b);
+		ret += transColor(col.g);
+		ret += transColor(col.r);
 	} else if (type == PT_BGRA) {
 		ret += transColor(col.b);
 		ret += transColor(col.g);
@@ -166,6 +185,11 @@ int trans_color2int(const Colorf& col, PixelType type)
 		ret = (trans_color2int(col.b)) << 24 
 			| (trans_color2int(col.g)) << 16
 			| (trans_color2int(col.r)) << 8
+			| (trans_color2int(col.a));
+	} else if (type == PT_ABGR) {
+		ret = (trans_color2int(col.r)) << 24 
+			| (trans_color2int(col.g)) << 16
+			| (trans_color2int(col.b)) << 8
 			| (trans_color2int(col.a));
 	} else if (type == PT_BGRA) {
 		ret = (trans_color2int(col.a)) << 24 

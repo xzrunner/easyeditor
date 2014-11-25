@@ -776,7 +776,7 @@ void ParserLuaFile::Animation::Item::transform(d2d::ISprite* sprite) const
 	if (is_full && valid)
 	{
 		sprite->multiCol = d2d::transColor(color, d2d::PT_BGRA);
-		sprite->addCol = d2d::transColor(add, d2d::PT_ARGB);
+		sprite->addCol = d2d::transColor(add, d2d::PT_ABGR);
 
 		float x = mat[4] / 16.0f,
 			y = mat[5] / 16.0f;

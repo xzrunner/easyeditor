@@ -5,13 +5,16 @@
 
 namespace d2d
 {
-	// text		RGBA
-	// add		ARGB
+	// text		RGBA	old
+
+	// text		ARGB
+	// add		ABGR
 	// multi	BGRA
 	enum PixelType
 	{
 		PT_RGBA = 0,
 		PT_ARGB,
+		PT_ABGR,
 		PT_BGRA
 	};
 

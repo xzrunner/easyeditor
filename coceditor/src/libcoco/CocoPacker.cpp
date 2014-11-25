@@ -731,7 +731,7 @@ void CocoPacker::resolveSpriteForFrame(const d2d::ISprite* sprite, int id, bool 
 	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
 	{
 		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ARGB));
+		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
 		lua::tableassign(m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
 	}
 	else
@@ -755,7 +755,7 @@ void CocoPacker::resolveSpriteForFrameImage(const d2d::ISprite* sprite, int id)
 	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
 	{
 		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ARGB));
+		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
 		if (sprite->clip)
 			lua::tableassign(m_gen, "", 5, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str(), "clip=true");
 		else

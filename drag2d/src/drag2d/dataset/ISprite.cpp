@@ -82,7 +82,7 @@ void ISprite::load(const Json::Value& val)
 	if (str.empty())
 		addCol = Colorf(0, 0, 0, 0);
 	else
-		addCol = transColor(str, PT_ARGB);
+		addCol = transColor(str, PT_ABGR);
 
 	// scale
 	float sx, sy;
@@ -143,7 +143,7 @@ void ISprite::store(Json::Value& val) const
 	val["clip"] = clip;
 
 	val["multi color"] = transColor(multiCol, PT_BGRA);
-	val["add color"] = transColor(addCol, PT_ARGB);
+	val["add color"] = transColor(addCol, PT_ABGR);
 
 	val["position"]["x"] = m_pos.x;
 	val["position"]["y"] = m_pos.y;
