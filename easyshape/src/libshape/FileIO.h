@@ -16,6 +16,8 @@ class FileIO
 {
 public:
 	static void LoadFromFile(const char* filename, std::vector<d2d::IShape*>& shapes, 
+		std::string& bg_filepath);
+	static void LoadFromFile(const char* filename, std::vector<d2d::IShape*>& shapes, 
 		d2d::ISymbol*& bg);
 	static void StoreToFile(const char* filename, const std::vector<d2d::IShape*>& shapes, 
 		const d2d::ISymbol* bg);

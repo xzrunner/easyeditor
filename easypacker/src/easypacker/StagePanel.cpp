@@ -5,6 +5,7 @@
 #include "BinaryTreeNewArrange.h"
 #include "RectBinArrange.h"
 #include "Context.h"
+#include "const.h"
 
 using namespace epacker;
 
@@ -129,20 +130,20 @@ void StagePanel::fixCoords(d2d::ISprite* sprite)
 
 b2Body* StagePanel::CreateGround()
 {
-	const float halfEdge = 12.8f;
-
-	b2Vec2 vertices[4];
-	vertices[0].Set(-halfEdge, -halfEdge);
-	vertices[1].Set( halfEdge, -halfEdge);
-	vertices[2].Set( halfEdge,  halfEdge);
-	vertices[3].Set(-halfEdge,  halfEdge);
+	b2Vec2 vertices[6];
+	vertices[0].Set(-HALF_WIDTH * 5,  HALF_WIDTH * 5);
+	vertices[1].Set(-HALF_WIDTH,  HALF_HEIGHT);
+	vertices[2].Set(-HALF_WIDTH, -HALF_HEIGHT);
+	vertices[3].Set( HALF_WIDTH, -HALF_HEIGHT);
+	vertices[4].Set( HALF_WIDTH,  HALF_HEIGHT);
+	vertices[5].Set( HALF_WIDTH * 5,  HALF_WIDTH * 5);
 
 	b2BodyDef bd;
 	bd.type = b2_staticBody;
 	b2Body* ground = m_world->CreateBody(&bd);
 
 	b2ChainShape shape;
-	shape.CreateLoop(&vertices[0], 4);
+	shape.CreateChain(&vertices[0], 6);
 
 	b2FixtureDef fd;
 	fd.shape = &shape;

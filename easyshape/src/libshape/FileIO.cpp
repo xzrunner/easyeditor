@@ -12,6 +12,30 @@ namespace libshape
 
 void FileIO::LoadFromFile(const char* filename, 
 						  std::vector<d2d::IShape*>& shapes, 
+						  std::string& bg_filepath)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	int i = 0;
+	Json::Value shapeValue = value["shapes"][i++];
+	while (!shapeValue.isNull()) {
+		d2d::IShape* shape = LoadShape(shapeValue);
+		shapes.push_back(shape);
+		shapeValue = value["shapes"][i++];
+	}
+
+	wxString dir = d2d::FilenameTools::getFileDir(filename);
+	bg_filepath = dir + "\\" + value["bg_symbol"].asString();
+}
+
+void FileIO::LoadFromFile(const char* filename, 
+						  std::vector<d2d::IShape*>& shapes, 
 						  d2d::ISymbol*& bg)
 {
 	Json::Value value;

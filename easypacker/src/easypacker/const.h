@@ -14,6 +14,9 @@ enum IMG_TYPE
 	e_png
 };
 
+static const float HALF_WIDTH = 25.6f;
+static const float HALF_HEIGHT = 51.2f;
+
 }
 
 #endif // _EPACKER_CONST_H_

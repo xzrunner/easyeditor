@@ -17,6 +17,7 @@ private:
 	void InitLayout();
 
 	void OnSetSrcDir(wxCommandEvent& event);
+	void OnSaveToFile(wxCommandEvent& event);
 
 	void LoadBodies(const wxString& dir);
 

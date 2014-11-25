@@ -1,5 +1,6 @@
 #include "MeshToolbarPage.h"
 #include "StagePanel.h"
+#include "const.h"
 
 #include <easyshape.h>
 
@@ -32,6 +33,13 @@ void MeshToolbarPage::InitLayout()
 
 		sizer->Add(sz);
 	}
+	sizer->AddSpacer(10);
+	// save
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("save..."));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(MeshToolbarPage::OnSaveToFile));
+		sizer->Add(btn);		
+	}
 	SetSizer(sizer);
 }
 
@@ -48,6 +56,34 @@ void MeshToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 	}
 
 	op->setMouseMoveFocus(true);
+}
+
+void MeshToolbarPage::OnSaveToFile(wxCommandEvent& event)
+{
+	Json::Value value;
+
+	b2Body* b = m_stage->getWorld()->GetBodyList();
+	int idx = 0;
+	while (b != NULL) {
+		char* filepath = static_cast<char*>(b->GetUserData());
+		if (filepath) {
+			Json::Value item_val;
+			item_val["filepath"] = filepath;
+			item_val["pos"]["x"] = (b->GetPosition().x + HALF_WIDTH) * ephysics::BOX2D_SCALE_FACTOR;
+			item_val["pos"]["y"] = (b->GetPosition().y + HALF_HEIGHT) * ephysics::BOX2D_SCALE_FACTOR;
+			item_val["angle"] = b->GetAngle();
+			value[idx++] = item_val;
+		}
+		b = b->GetNext();
+	}
+
+	wxString filepath = m_src_dir->GetValue() + "//position.json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.fn_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 }
 
 void MeshToolbarPage::LoadBodies(const wxString& dir)
@@ -82,8 +118,8 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
 		}
 
 		std::vector<d2d::IShape*> shapes;
-		d2d::ISymbol* bg = NULL;
-		libshape::FileIO::LoadFromFile(filepath, shapes, bg);
+		std::string bg_filepath;
+		libshape::FileIO::LoadFromFile(filepath, shapes, bg_filepath);
 		for (int i = 0, n = shapes.size(); i < n; ++i)
 		{
 			libshape::PolygonShape* polygon = dynamic_cast<libshape::PolygonShape*>(shapes[i]);
@@ -93,7 +129,7 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
 
 			b2Body* body = m_stage->getWorld()->CreateBody(&bd);
 
-			b2Vec2 pos(d2d::Random::getNum(-10, 10), d2d::Random::getNum(-10, 10));
+			b2Vec2 pos(d2d::Random::getNum(-HALF_WIDTH*4, HALF_WIDTH*4), d2d::Random::getNum(HALF_WIDTH*5, HALF_WIDTH*100));
 			body->SetTransform(pos, 0);
 
 			const std::vector<d2d::Vector>& src = polygon->m_fillingVertices;
@@ -110,6 +146,11 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
 
 				body->CreateFixture(&fd);
 			}
+
+			char* buf = new char[bg_filepath.size() + 1];
+			int len = bg_filepath.copy(buf, bg_filepath.size(), 0);
+			buf[len] = '\0';
+			body->SetUserData(buf);
 		}
 	}
 }
