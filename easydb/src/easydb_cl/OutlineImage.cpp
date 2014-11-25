@@ -45,6 +45,8 @@ void OutlineImage::Trigger(const std::string& dir) const
 			continue;
 		}
 
+		std::cout << i << " / " << n << " : " << filepath << "\n";
+
 		d2d::Image* image = d2d::ImageMgr::Instance()->getItem(filepath);
 
 		eimage::ExtractOutlineRaw raw(*image);
