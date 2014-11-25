@@ -2,10 +2,10 @@
 {
 	"window" : 
 	{
-		"width" : 800,
 		"height" : 600,
 		"left" : 100,
-		"top" : 100
+		"top" : 100,
+		"width" : 800
 	},
-	"window_auto_set" : true
+	"window_auto_set" : false
 }
