@@ -30,7 +30,6 @@ void ExtractOutlineFine::CreateOutline(float tolerance, int max_step)
 
 void ExtractOutlineFine::ReduceOutlineCount(float tolerance)
 {
-	ReduceNode(tolerance);
 	ReduceEdge(tolerance);
 }
 
@@ -108,7 +107,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 				int new_node_pos;
 				d2d::Math::GetTwoLineCross(a_new_node, a_new_start, start_prev, start, &cross_start);
 				if (d2d::Math::getDistanceSquare(cross_start, a_new_start) < d2d::Math::getDistanceSquare(cross_start, a_new_node) &&
-					d2d::Math::getDistanceSquare(cross_start, a_new_node) > d2d::Math::getDistanceSquare(a_new_start, a_new_node)) {
+					d2d::Math::getDistanceSquare(cross_start, a_new_node) >= d2d::Math::getDistanceSquare(a_new_start, a_new_node)) {
 					new_node_pos = (a_idx+1)%m_fine_border.size();
 					m_fine_border[a_idx] = cross_start;
 				} else {
@@ -122,7 +121,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 				d2d::Vector cross_end;
 				d2d::Math::GetTwoLineCross(a_new_node, a_new_end, end_next, end, &cross_end);
 				if (d2d::Math::getDistanceSquare(cross_end, a_new_end) < d2d::Math::getDistanceSquare(cross_end, a_new_node) &&
-					d2d::Math::getDistanceSquare(cross_end, a_new_node) > d2d::Math::getDistanceSquare(a_new_end, a_new_node)) {
+					d2d::Math::getDistanceSquare(cross_end, a_new_node) >= d2d::Math::getDistanceSquare(a_new_end, a_new_node)) {
 					m_fine_border[(new_node_pos+1)%m_fine_border.size()] = cross_end;
 				} else {
 					m_fine_border.insert(m_fine_border.begin()+((new_node_pos+1)%m_fine_border.size()), a_new_end);
@@ -152,8 +151,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 		}
 		last_fine_border = m_fine_border;
 
-//	} while (success && m_fine_border.size() < max_step && ++count < 100);
-//	} while (success && m_fine_border.size() < max_step);
+//	} while (++count < max_step && success);
 	} while (++count < max_step);
 }
 
@@ -482,6 +480,8 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 	float area_limit = d2d::Math::GetPolygonArea(m_fine_border) * tolerance;
 	bool success = false;
 	do {
+		ReduceNode(tolerance);
+
 		success = false;
 		for (int i = 0, n = m_fine_border.size(); i < n; ++i)
 		{
@@ -521,7 +521,8 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 // 					break;
 // 				}
 
-				if (IsCutTriLegal(intersect, start, end)) {
+				float a = d2d::Math::GetTriangleArea(intersect, start, end);
+				if (a < area_limit && IsCutTriLegal(intersect, start, end)) {
 					if (inside_s) {
 						m_fine_border[i] = intersect;
 						m_fine_border.erase(m_fine_border.begin()+((i+1)%m_fine_border.size()));
