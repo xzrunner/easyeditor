@@ -491,6 +491,9 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 	bool success = false;
 	do {
 		ReduceNode(tolerance);
+		if (m_fine_border.size() <= 3) {
+			break;
+		}
 
 		success = false;
 		for (int i = 0, n = m_fine_border.size(); i < n; ++i)
@@ -499,6 +502,11 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 			const d2d::Vector& start_prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
 			const d2d::Vector& end = m_fine_border[(i+1)%m_fine_border.size()];
 			const d2d::Vector& end_next = m_fine_border[(i+2)%m_fine_border.size()];
+
+			assert(start != end);
+			if (start_prev == end_next) {
+				continue;
+			}
 			
 			d2d::Vector intersect;
 			bool cross = d2d::Math::GetTwoLineCross(start_prev, start, end, end_next, &intersect);
