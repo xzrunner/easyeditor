@@ -91,7 +91,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 		}
 
 		// final
-		static const float REMOVE_WEIGHT = 1.05f;
+		static const float REMOVE_WEIGHT = 1.15f;
 		if (r_area_decrease * REMOVE_WEIGHT > a_area_decrease) {
 			if (r_area_decrease / area > tolerance) {
 				m_fine_border.erase(m_fine_border.begin()+r_idx);
