@@ -6,6 +6,7 @@
 #include "algorithms/Triangulation.h"
 #include "algorithms/DouglasPeucker.h"
 #include "algorithms/CosineSmooth.h"
+#include "algorithms/MinBoundingBox.h"
 
 #include "dataset/Bitmap.h"
 #include "dataset/Image.h"

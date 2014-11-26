@@ -1,5 +1,7 @@
 #include "ExtractOutlineFine.h"
 
+#include "algorithms/MinBoundingBox.h"
+
 namespace eimage
 {
 
@@ -38,15 +40,9 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 {
 	m_fine_border.clear();
 
-	d2d::Rect r;
-	for (int i = 0, n = m_raw_border.size(); i < n; ++i) {
-		r.combine(m_raw_border[i]);
-	}
-
-	m_fine_border.push_back(d2d::Vector(r.xMin, r.yMin));
-	m_fine_border.push_back(d2d::Vector(r.xMin, r.yMax));
-	m_fine_border.push_back(d2d::Vector(r.xMax, r.yMax));
-	m_fine_border.push_back(d2d::Vector(r.xMax, r.yMin));
+	d2d::Vector bound[4];
+	d2d::MinBoundingBox::Implement(m_raw_border, bound);
+	m_fine_border.assign(bound, bound+4);
 
 	std::vector<d2d::Vector> last_fine_border = m_fine_border;
 
@@ -155,12 +151,13 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 			}
 		}
 
-		// test legal
-		if (!IsOutlineLegal()) {
-			m_fine_border = last_fine_border;
-			std::cout << "!!!!!!!!!!!!!!!!!!!!! Error \n";
-			break;
-		}
+// 		// test legal
+// 		if (!IsOutlineLegal()) {
+// 			m_fine_border = last_fine_border;
+// 			std::cout << "!!!!!!!!!!!!!!!!!!!!! Error \n";
+// 			break;
+// 		}
+
 		last_fine_border = m_fine_border;
 //	} while (++count < max_step && success);
 	} while (++count < max_step);

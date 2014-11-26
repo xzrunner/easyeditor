@@ -107,6 +107,10 @@ namespace d2d
 		//		   [4] p is in the triangle			[-1] p is outside
 		static int checkPosInTriangle(const Vector& p, const Vector& t0, const Vector& t1, const Vector& t2);
 
+		// To check angle a-center-b turn left or right.
+		static bool IsTurnLeft(const Vector& a, const Vector& center, const Vector& b);
+		static bool IsTurnRight(const Vector& a, const Vector& center, const Vector& b);
+
 		//////////////////////////////////////////////////////////////////////////
 		//
 		// Compute some geographic value, return type is float.

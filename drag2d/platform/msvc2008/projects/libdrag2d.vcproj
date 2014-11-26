@@ -2022,6 +2022,14 @@
 			Name="algorithms"
 			>
 			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\ConvexHull.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\ConvexHull.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\algorithms\CosineSmooth.cpp"
 				>
 			</File>
@@ -2043,6 +2051,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\algorithms\DouglasPeucker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\MinBoundingBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\MinBoundingBox.h"
 				>
 			</File>
 			<File

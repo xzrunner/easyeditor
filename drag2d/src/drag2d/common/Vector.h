@@ -161,7 +161,8 @@ namespace d2d
 	{
 	public:
 		bool operator () (const Vector& p0, const Vector& p1) const {
-			return p0.x < p1.x;
+			return p0.x < p1.x 
+				|| p0.x == p1.x && p0.y < p1.y;
 		}
 	}; // VectorCmp
 
@@ -169,7 +170,8 @@ namespace d2d
 	{
 	public:
 		bool operator () (const Vector& p0, const Vector& p1) const {
-			return p0.y < p1.y;
+			return p0.y < p1.y
+				|| p0.y == p1.y && p0.x < p1.x;
 		}
 	}; // VectorCmp
 }

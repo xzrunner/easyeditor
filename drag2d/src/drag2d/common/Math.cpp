@@ -215,6 +215,16 @@ int Math::checkPosInTriangle(const Vector& p, const Vector& t0, const Vector& t1
 		return -1;
 }
 
+bool Math::IsTurnLeft(const Vector& a, const Vector& center, const Vector& b)
+{
+	return (center.x - a.x) * (b.y - center.y) - (b.x - center.x) * (center.y - a.y) > 0;
+}
+
+bool Math::IsTurnRight(const Vector& a, const Vector& center, const Vector& b)
+{
+	return (center.x - a.x) * (b.y - center.y) - (b.x - center.x) * (center.y - a.y) < 0;
+}
+
 float Math::getDisPointToStraightLine(const Vector& p, const Vector& s, const Vector& e)
 {
 	float divider = getDistance(s, e);
