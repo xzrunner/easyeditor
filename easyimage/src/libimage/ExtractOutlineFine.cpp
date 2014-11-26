@@ -154,8 +154,14 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 				break;
 			}
 		}
-		last_fine_border = m_fine_border;
 
+		// test legal
+		if (!IsOutlineLegal()) {
+			m_fine_border = last_fine_border;
+			std::cout << "!!!!!!!!!!!!!!!!!!!!! Error \n";
+			break;
+		}
+		last_fine_border = m_fine_border;
 //	} while (++count < max_step && success);
 	} while (++count < max_step);
 }
@@ -556,6 +562,22 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 			}
 		}
 	} while (success && m_fine_border.size() > 3);
+}
+
+bool ExtractOutlineFine::IsOutlineLegal() const
+{
+	if (m_fine_border.size() < 3) {
+		return false;
+	}
+	for (int i = 0, n = m_fine_border.size()-1; i < n; ++i) {
+		if (d2d::Math::IsSegmentIntersectPolyline(m_fine_border[i], m_fine_border[i+1], m_raw_border_merged)) {
+			return false;
+		}
+	}
+	if (d2d::Math::IsSegmentIntersectPolyline(m_fine_border[0], m_fine_border[m_fine_border.size()-1], m_raw_border_merged)) {
+		return false;
+	}
+	return true;
 }
 
 }

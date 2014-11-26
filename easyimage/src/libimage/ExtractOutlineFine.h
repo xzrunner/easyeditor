@@ -45,6 +45,9 @@ private:
 	void ReduceNode(float tolerance);
 	void ReduceEdge(float tolerance);
 
+	// check if current legal
+	bool IsOutlineLegal() const;
+
 private:
 	const std::vector<d2d::Vector>& m_raw_border;
 	const std::vector<d2d::Vector>& m_raw_border_merged;
