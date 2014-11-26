@@ -8,10 +8,10 @@
 namespace d2d
 {
 
-// result:
+// bounding:
 // 1  2
 // 0  3
-void MinBoundingBox::Implement(const std::vector<Vector>& points, 
+bool MinBoundingBox::Implement(const std::vector<Vector>& points, 
 							   Vector bounding[4])
 {
 	// convex hull
@@ -36,15 +36,24 @@ void MinBoundingBox::Implement(const std::vector<Vector>& points,
 	bounding[3].set(xmax, ymin);
 
 	// other dir
+	bool is_other_dir = false;
 	for (int i = 0, n = convex_hull.size()-1; i < n; ++i) {
-		TextOtherDir(convex_hull, convex_hull[i], convex_hull[i+1], area_min, bounding);
+		bool b = TextOtherDir(convex_hull, convex_hull[i], convex_hull[i+1], area_min, bounding);
+		if (b) {
+			is_other_dir = b;
+		}
 	}
-	TextOtherDir(convex_hull, convex_hull[0], convex_hull[convex_hull.size()-1], area_min, bounding);
+	bool b = TextOtherDir(convex_hull, convex_hull[0], convex_hull[convex_hull.size()-1], area_min, bounding);
+	if (b) {
+		is_other_dir = b;
+	}
 
 	assert(Math::IsTurnRight(bounding[0], bounding[1], bounding[2]));
+
+	return b;
 }
 
-void MinBoundingBox::TextOtherDir(const std::vector<Vector>& points, 
+bool MinBoundingBox::TextOtherDir(const std::vector<Vector>& points, 
 								  const Vector& start, const Vector& end,
 								  float& min_area, Vector bounding[4])
 {
@@ -52,7 +61,7 @@ void MinBoundingBox::TextOtherDir(const std::vector<Vector>& points,
 		  dy = start.y - end.y;
 	if (fabs(dx) < FLT_EPSILON ||
 		fabs(dy) < FLT_EPSILON) {
-		return;
+		return false;
 	}
 
 	float k0 = dy / dx;
@@ -84,6 +93,8 @@ void MinBoundingBox::TextOtherDir(const std::vector<Vector>& points,
 		bounding[2].y = k0 * bounding[2].x + b0_max;
 		bounding[3].y = k0 * bounding[3].x + b0_min;
 	}
+
+	return true;
 }
 
 void MinBoundingBox::CalculateB(const std::vector<Vector>& points, float k,
