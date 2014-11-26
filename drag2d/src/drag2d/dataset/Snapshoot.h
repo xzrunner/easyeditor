@@ -24,8 +24,11 @@ public:
 	void outputToImageFile(const ISymbol* symbol, const std::string& filename, 
 		float scale = 1.0f) const;
 
-	void DrawSprite(const ISprite* sprite) const;
+	void DrawSprite(const ISprite* sprite, bool clear = false) const;
 	void SaveToFile(const std::string& filename) const;
+
+	void DrawSprite(const ISprite* sprite, bool clear, int width, int height) const;
+	void SaveToFile(const std::string& filename, int width, int height) const;
 
 private:
 	void createFBO();
@@ -33,7 +36,7 @@ private:
 
 	void drawFBO(const ISymbol* symbol, bool whitebg = false,
 		float scale = 1.0f) const;
-	void drawFBO(const ISprite* sprite) const;
+	void drawFBO(const ISprite* sprite, bool clear, int width, int height) const;
 
 	int checkFramebufferStatus() const;
 

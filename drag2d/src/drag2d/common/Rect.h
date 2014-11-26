@@ -54,6 +54,7 @@ namespace d2d
 
 		float xCenter() const { return (xMin + xMax) * 0.5f; }
 		float yCenter() const { return (yMin + yMax) * 0.5f; }
+		Vector Center() const { return Vector(xCenter(), yCenter()); }
 
 		void translate(const Vector& offset)
 		{

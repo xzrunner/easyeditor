@@ -73,23 +73,33 @@ void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& file
 	delete[] pixels;
 }
 
-void Snapshoot::DrawSprite(const ISprite* sprite) const
+void Snapshoot::DrawSprite(const ISprite* sprite, bool clear) const
 {
-	drawFBO(sprite);
+	drawFBO(sprite, clear, m_width, m_height);
+}
+
+void Snapshoot::DrawSprite(const ISprite* sprite, bool clear, int width, int height) const
+{
+	drawFBO(sprite, clear, width, height);
 }
 
 void Snapshoot::SaveToFile(const std::string& filename) const
 {
-	size_t size = m_width * m_height * 4;
+	SaveToFile(filename, m_width, m_height);
+}
+
+void Snapshoot::SaveToFile(const std::string& filename, int width, int height) const
+{
+	size_t size = width * height * 4;
 	unsigned char* pixels = new unsigned char[size];
 	if(!pixels) return;
 	memset(&pixels[0], 0, size);	
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-	glReadPixels(0, 0, m_width, m_height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+	glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
 
-	ImageSaver::storeToFile(pixels, m_width, m_height, filename, ImageSaver::e_png);
+	ImageSaver::storeToFile(pixels, width, height, filename, ImageSaver::e_png);
 
 	delete[] pixels;
 }
@@ -178,18 +188,20 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
  	shader->SetTexture(0);
 }
 
-void Snapshoot::drawFBO(const ISprite* sprite) const
+void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height) const
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 
-// 	glClearColor(0, 0, 0, 1);
-// 	glClear(GL_COLOR_BUFFER_BIT);
+	if (clear) {
+	 	glClearColor(0, 0, 0, 0);
+	 	glClear(GL_COLOR_BUFFER_BIT);
+	}
 
 	shader->SetModelView(Vector(0, 0), 1);
-	shader->SetProjection(m_width, m_height);
-	glViewport(0, 0, m_width, m_height);
+	shader->SetProjection(width, height);
+	glViewport(0, 0, width, height);
 
 	Matrix mt;
 // 	Rect r = sprite->getSymbol().getSize();
