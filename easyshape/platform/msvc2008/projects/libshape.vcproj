@@ -467,6 +467,14 @@
 					Name="tools"
 					>
 					<File
+						RelativePath="..\..\..\src\libshape\MousePositionOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\MousePositionOP.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libshape\NodeCapture.cpp"
 						>
 					</File>
@@ -572,6 +580,18 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\NodeCaptureCMPT.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="tools"
+					>
+					<File
+						RelativePath="..\..\..\src\libshape\MousePositionCMPT.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\MousePositionCMPT.h"
 						>
 					</File>
 				</Filter>

@@ -4,6 +4,8 @@
 #include "PixelDiffCMPT.h"
 #include "AutoCutCMPT.h"
 
+#include <easyshape.h>
+
 namespace eimage
 {
 
@@ -15,7 +17,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	addChild(new AutoCutCMPT(this, wxT("Auto Cut"), stage));
 	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
 
-	addChild(new d2d::MousePositionCMPT(this, wxT("Debug"), stage));
+	addChild(new libshape::MousePositionCMPT(this, wxT("Debug"), stage));
 
 	SetSizer(initLayout());	
 }

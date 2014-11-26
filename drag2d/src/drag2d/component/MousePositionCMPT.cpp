@@ -5,10 +5,13 @@
 namespace d2d
 {
 
-MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel)
+MousePositionCMPT::MousePositionCMPT(wxWindow* parent, const wxString& name, 
+									 EditPanel* editPanel, bool create_op)
 	: AbstractEditCMPT(parent, name, editPanel)
 {
-	m_editOP = new MousePositionOP(editPanel, this);
+	if (create_op) {
+		m_editOP = new MousePositionOP(editPanel, this);
+	}
 }
 
 void MousePositionCMPT::updatePosition(const Vector& pos)

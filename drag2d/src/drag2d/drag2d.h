@@ -85,6 +85,7 @@
 #include "operator/TranslateSpriteState.h"
 #include "operator/RotateSpriteState.h"
 #include "operator/ScaleSpriteState.h"
+#include "operator/MousePositionOP.h"
 
 #include "history/AbstractAtomicOP.h"
 

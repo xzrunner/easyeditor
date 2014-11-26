@@ -9,7 +9,8 @@ namespace d2d
 	class MousePositionCMPT : public AbstractEditCMPT
 	{
 	public:
-		MousePositionCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel);
+		MousePositionCMPT(wxWindow* parent, const wxString& name, 
+			EditPanel* editPanel, bool create_op = true);
 
 		void updatePosition(const Vector& pos);
 
