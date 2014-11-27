@@ -71,7 +71,6 @@ void RotateTrimImage::Trigger(const std::string& dir)
 			}
 
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-//			sprite->setMirror(false, true);
 			sprite->setTransform(center, angle);
 			ss.DrawSprite(sprite, true, width, height);
 
@@ -118,19 +117,6 @@ void RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 		d2d::Vector right = s;
 		right.x += 1;
 		angle = -d2d::Math::getAngle(s, e, right);
-// 		if (s.y < e.y) {
-// 			angle = -angle;
-// 		}
-
-// 		if (fabs(s.y - e.y) > fabs(s.x - e.x)) {
-// 			float tmp = center.x;
-// 			center.x = center.y;
-// 			center.y = -tmp;
-// 		} else {
-// 			center.x = -center.x;
-// // 			center.y = -center.y;
-// 		}
-
 		center = d2d::Math::rotateVector(center, angle);
 
 		width = std::ceil(d2d::Math::getDistance(s, e));
