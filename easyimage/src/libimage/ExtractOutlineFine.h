@@ -12,24 +12,24 @@ public:
 	ExtractOutlineFine(const std::vector<d2d::Vector>& raw_border,
 		const std::vector<d2d::Vector>& raw_border_merged);
 
-	void Trigger(float tolerance);
-	void Trigger(float tolerance, int max_step);
+	void Trigger(float area_tol, float perimeter_tol);
+	void Trigger(float area_tol, float perimeter_tol, int max_step);
 
-	void CreateOutline(float tolerance, int max_step);
-	void ReduceOutlineCount(float tolerance);
+	void CreateOutline(float area_tol, float perimeter_tol, int max_step);
+	void ReduceOutlineCount(float area_tol, float perimeter_tol);
 
 	const std::vector<d2d::Vector>& GetResult() const {
 		return m_fine_border;
 	}
 
 private:
-	void OutlineByAddNode(float tolerance, int max_step, bool reduce_count);
+	void OutlineByAddNode(float area_tol, float perimeter_tol, int max_step, bool reduce_count);
 
 	void RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& new1, float& decrease) const;
 	void AddOneNode(int idx, d2d::Vector& new_start, d2d::Vector& new_end, d2d::Vector& new_node, float& decrease) const;
 
-	bool IsCutTriLegal(const d2d::Vector& p0, const d2d::Vector& p1, const d2d::Vector& p2) const;
-	bool IsAddTriLeagal(const d2d::Vector& start, const d2d::Vector& end, const d2d::Vector& center) const;
+	bool IsCutTriLegal(const d2d::Vector& center, const d2d::Vector& p0, const d2d::Vector& p1) const;
+	bool IsAddTriLeagal(const d2d::Vector& p0, const d2d::Vector& p1, const d2d::Vector& p2) const;
 
 	// start_scale [in & out], end_scale [in & out], mid [out], score [in & out]
 	void StartPosExplore(const d2d::Vector& p0, const d2d::Vector& p1,
@@ -43,10 +43,7 @@ private:
 
 	// decrease the size of m_fine_border
 	void ReduceNode(float tolerance);
-	void ReduceEdge(float tolerance);
-
-	// check if current legal
-	bool IsOutlineLegal() const;
+	void ReduceEdge(float area_tol, float perimeter_tol);
 
 private:
 	const std::vector<d2d::Vector>& m_raw_border;

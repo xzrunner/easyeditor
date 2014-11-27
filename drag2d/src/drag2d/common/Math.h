@@ -71,8 +71,11 @@ namespace d2d
 		{
 			return isSegmentIntersectRect(b.x, b.y, e.x, e.y, aabb.xMin, aabb.yMin, aabb.xMax, aabb.yMax);
 		}
-		static bool IsSegmentIntersectPolyline(const Vector& start, const Vector& end, 
-			const std::vector<Vector>& polyline);
+
+		static bool IsPolygonIntersectPolygon(const std::vector<Vector>& poly0, const std::vector<Vector>& poly1);
+		static bool IsPolygonInPolygon(const std::vector<Vector>& in, const std::vector<Vector>& out);
+
+		static bool IsSegmentIntersectPolyline(const Vector& s, const Vector& e, const std::vector<Vector>& poly);
 
 		static bool isPolylineIntersectRect(const std::vector<Vector>& polyline, bool isLoop, const Rect& aabb);
 
@@ -93,13 +96,14 @@ namespace d2d
  		}
 
 		static bool isPointInArea(const Vector& pos, const std::vector<Vector>& area);
+		static bool isPointOnPolyline(const Vector& pos, const std::vector<Vector>& poly);
 
 		static bool isPointInConvexHull(const Vector& pos, const std::vector<Vector>& hull);
 
 		static bool isPointInCircle(const Vector& pos, const Vector& center, float radius);
 
 		static bool IsTwoLineParallel(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1);
-		static bool IsTwoLineIntersect(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1);
+		static bool IsTwoSegmentIntersect(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1);
 
 		// To check if the point in the triangle.
 		// return: [0] p is on the edge t0-t1		[1] p is on the edge t1-t2
@@ -174,9 +178,13 @@ namespace d2d
 		static float GetPolygonArea(const std::vector<Vector>& polygon);
 		static float GetTriangleArea(const Vector& p0, const Vector& p1, const Vector& p2);
 
+		static float GetPolygonPerimeter(const std::vector<Vector>& poly);
+
 		// Get the cross point of two segment.
 		// If they are not crossed, direct return false withnot compute the cross point.
 		static bool GetTwoLineCross(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1, Vector* cross);
+
+		static bool GetTwoSegmentCross(const Vector& s0, const Vector& e0, const Vector& s1, const Vector& e1, Vector* cross);
 
 		//////////////////////////////////////////////////////////////////////////
 		//
@@ -234,6 +242,19 @@ namespace d2d
 		// 0 3
 		static void computeQuadNodes(const Vector& center, float angle, 
 			float xScale, float yScale, float width, float height, Vector quad[4]);
+
+	private:
+		// if clockwise return true
+		static bool IsPolygonColckwise(const std::vector<Vector>& poly);
+
+		static int GetNextIdxInRing(int sz, int curr, int step) {
+			return (curr+sz+step)%sz;
+		}
+
+		static bool IsTwoPointsSame(const Vector& p0, const Vector& p1) {
+			return fabs(p0.x - p1.x) < LARGE_EPSILON
+				&& fabs(p0.y - p1.y) < LARGE_EPSILON;
+		}
 
 	}; // Math
 }

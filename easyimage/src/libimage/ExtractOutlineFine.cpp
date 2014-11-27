@@ -15,28 +15,28 @@ ExtractOutlineFine::ExtractOutlineFine(const std::vector<d2d::Vector>& raw_borde
 {
 }
 
-void ExtractOutlineFine::Trigger(float tolerance)
+void ExtractOutlineFine::Trigger(float area_tol, float perimeter_tol)
 {
-	OutlineByAddNode(tolerance, INT_MAX, true);	
+	OutlineByAddNode(area_tol, perimeter_tol, INT_MAX, true);	
 }
 
-void ExtractOutlineFine::Trigger(float tolerance, int max_step)
+void ExtractOutlineFine::Trigger(float area_tol, float perimeter_tol, int max_step)
 {
-	OutlineByAddNode(tolerance, max_step, true);		
+	OutlineByAddNode(area_tol, perimeter_tol, max_step, true);		
 }
 
-void ExtractOutlineFine::CreateOutline(float tolerance, int max_step)
+void ExtractOutlineFine::CreateOutline(float area_tol, float perimeter_tol, int max_step)
 {
-	OutlineByAddNode(tolerance, max_step, false);
+	OutlineByAddNode(area_tol, perimeter_tol, max_step, false);
 }
 
-void ExtractOutlineFine::ReduceOutlineCount(float tolerance)
+void ExtractOutlineFine::ReduceOutlineCount(float area_tol, float perimeter_tol)
 {
-	ReduceEdge(tolerance);
+	ReduceEdge(area_tol, perimeter_tol);
 }
 
-void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
-										  bool reduce_count)
+void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol, 
+										  int max_step, bool reduce_count)
 {
 	m_fine_border.clear();
 
@@ -52,6 +52,11 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 		success = false;
 
 		float area = d2d::Math::GetPolygonArea(m_fine_border);
+
+		// debug
+		if (count == 5) {
+			int zz = 0;
+		}
 
 		// remove one node
 		d2d::Vector r_new0, r_new1;
@@ -89,14 +94,14 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 		// final
 		static const float REMOVE_WEIGHT = 1.15f;
 		if (r_area_decrease * REMOVE_WEIGHT > a_area_decrease) {
-			if (r_area_decrease / area > tolerance) {
+			if (r_area_decrease / area > area_tol) {
 				m_fine_border.erase(m_fine_border.begin()+r_idx);
 				m_fine_border.insert(m_fine_border.begin()+r_idx, r_new0);
 				m_fine_border.insert(m_fine_border.begin()+((r_idx+1)%m_fine_border.size()), r_new1);
 				success = true;
 			}
 		} else {
-			if (a_area_decrease / area > tolerance) {
+			if (a_area_decrease / area > area_tol) {
 				const d2d::Vector& start = m_fine_border[a_idx];
 				const d2d::Vector& start_prev = m_fine_border[(a_idx+m_fine_border.size()-1)%m_fine_border.size()];
 				d2d::Vector cross_start;
@@ -134,7 +139,7 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 
 		// reduce count
 		if (reduce_count) {
-			ReduceOutlineCount(tolerance);
+			ReduceOutlineCount(area_tol, perimeter_tol);
 		}
 
 		// test stop
@@ -150,6 +155,8 @@ void ExtractOutlineFine::OutlineByAddNode(float tolerance, int max_step,
 				break;
 			}
 		}
+
+		assert(d2d::Math::IsPolygonInPolygon(m_raw_border_merged, m_fine_border));
 
 // 		// test legal
 // 		if (!IsOutlineLegal()) {
@@ -183,7 +190,7 @@ void ExtractOutlineFine::RemoveOneNode(int idx, d2d::Vector& new0, d2d::Vector& 
 		d2d::Vector s = prev + (curr-prev)*(i/len_prev);
 		for (float j = idx_e; j < len_next; j+=1) {
 			d2d::Vector e = curr + (next-curr)*(j/len_next);
-			if (IsCutTriLegal(s, curr, e)) {
+			if (IsCutTriLegal(curr, s, e)) {
 				float a = d2d::Math::GetTriangleArea(s, curr, e);
 				if (a > decrease) {
 					decrease = a;
@@ -235,43 +242,31 @@ void ExtractOutlineFine::AddOneNode(int idx, d2d::Vector& new_start, d2d::Vector
 	decrease = best_score;
 }
 
-bool ExtractOutlineFine::IsCutTriLegal(const d2d::Vector& p0, const d2d::Vector& p1, 
-										const d2d::Vector& p2) const
+bool ExtractOutlineFine::IsCutTriLegal(const d2d::Vector& center, 
+									   const d2d::Vector& p0, 
+									   const d2d::Vector& p1) const
 {
-	if (d2d::Math::IsTwoLineParallel(p0, p1, p1, p2)) {
-		return true;
+	if (d2d::Math::IsSegmentIntersectPolyline(p0, p1, m_fine_border)) {
+		return false;
 	}
 
-	static int last_idx = 0;
-	for (int i = 0, n = m_raw_border.size(); i < n; i+=1) {
-		if (d2d::Math::isPointInTriangle(m_raw_border[(last_idx+i)%n], p0 ,p1, p2)) {
-			last_idx = i;
-			return false;
-		}
+	d2d::Vector tri_v[3] = {center, p0, p1};
+	std::vector<d2d::Vector> tri;
+	tri.assign(tri_v, tri_v+3);
+	if (d2d::Math::IsPolygonIntersectPolygon(m_raw_border_merged, tri)) {
+		return false;
 	}
+
 	return true;
 }
 
-bool ExtractOutlineFine::IsAddTriLeagal(const d2d::Vector& start, const d2d::Vector& end, 
-										const d2d::Vector& center) const
+bool ExtractOutlineFine::IsAddTriLeagal(const d2d::Vector& p0, const d2d::Vector& p1, const d2d::Vector& p2) const
 {
-	if (d2d::Math::isPointInArea(center, m_raw_border_merged)) {
-		return false;
-	}
-	for (int i = 0, n = m_raw_border_merged.size(); i < n; ++i) {
-		if (d2d::Math::isPointInTriangle(m_raw_border_merged[i], start, end, center)) {
-			return false;
-		}
-	}
-	if (d2d::Math::IsSegmentIntersectPolyline(start, center, m_raw_border_merged) ||
-		d2d::Math::IsSegmentIntersectPolyline(end, center, m_raw_border_merged)) {
-		return false;
-	}
-	if (d2d::Math::IsSegmentIntersectPolyline(start, center, m_fine_border) ||
-		d2d::Math::IsSegmentIntersectPolyline(end, center, m_fine_border)) {
-		return false;
-	}
-	return true;
+	d2d::Vector tri_v[3] = {p0, p1, p2};
+	std::vector<d2d::Vector> tri;
+	tri.assign(tri_v, tri_v+3);
+	return !d2d::Math::IsPolygonIntersectPolygon(m_raw_border_merged, tri)
+		&& !d2d::Math::IsPolygonIntersectPolygon(m_fine_border, tri);
 }
 
 // 已经是算出来的
@@ -283,6 +278,11 @@ void ExtractOutlineFine::StartPosExplore(const d2d::Vector& p0, const d2d::Vecto
 	{
 		float step = STEPS[s];
 
+		// ori
+		float ori_end_scale = end_scale;
+		float ori_score = 0;
+		d2d::Vector ori_mid;
+		EndPosExplore(step, p0, p1, start_scale, end_scale, ori_mid, ori_score);
 		// sub
 		float sub_start_scale = start_scale - step;
 		float sub_end_scale = end_scale;
@@ -300,8 +300,16 @@ void ExtractOutlineFine::StartPosExplore(const d2d::Vector& p0, const d2d::Vecto
 			EndPosExplore(step, p0, p1, add_start_scale, add_end_scale, add_mid, add_score);
 		}
 		// decide direction
+		if (ori_score > sub_score && ori_score > add_score) {
+			if (ori_score > score) {
+				score = ori_score;
+				mid = ori_mid;
+			}
+			continue;
+		}
+
 		if (sub_score <= score && add_score <= score) {
-			return;
+			continue;
 		} else if (sub_score > score) {
 			step = -STEPS[s];
 			start_scale = sub_start_scale;
@@ -430,12 +438,22 @@ void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vect
 			for (int j = 0; j < DIR_COUNT; ++j) {
 				d2d::Vector offset = DIRS[j] * step;
 				d2d::Vector curr_mid = mid + offset;
-				if (d2d::Math::isPointInArea(curr_mid, m_fine_border)) {
-					float area = d2d::Math::GetTriangleArea(start, curr_mid, end);
-					if (area > score && IsAddTriLeagal(start, end, curr_mid)) {
+				float area = d2d::Math::GetTriangleArea(start, curr_mid, end);
+				if (area > score &&
+					d2d::Math::isPointInArea(curr_mid, m_fine_border)) {
+
+						// !d2d::Math::isPointInArea(curr_mid, m_raw_border_merged)
+
+					if ((int)start.x == 193 && (int)start.y == 355 && area > 510 &&
+						(int)end.x == 219 && (int)end.y == 361) {
+
+						bool test = d2d::Math::isPointInArea(curr_mid, m_raw_border_merged);
+
+						int zz = 0;
+					}
+					if (IsAddTriLeagal(start, end, curr_mid)) {
 						score = area;
 						mid = curr_mid;
-
 					}
 				}
 			}
@@ -463,17 +481,20 @@ void ExtractOutlineFine::ReduceNode(float tolerance)
 			const d2d::Vector& prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
 			const d2d::Vector& next = m_fine_border[(i+1)%m_fine_border.size()];
 			d2d::Vector s0 = curr - prev, s1 = next - curr;
-			if (f2Cross(s0, s1) >= 0) {
+			// area increase & perimeter decrease
+			if (f2Cross(s0, s1) >= 0) 
+			{
 				float a = d2d::Math::GetTriangleArea(curr, prev, next);
-				if (a < area_limit && 
-					!d2d::Math::IsSegmentIntersectPolyline(prev, next, m_fine_border) &&
-					!d2d::Math::IsSegmentIntersectPolyline(prev, next, m_raw_border_merged)) 
+				if (a < area_limit && IsAddTriLeagal(prev, next, curr))
 				{
 					m_fine_border.erase(m_fine_border.begin()+i);
 					success = true;
 					break;
 				}
-			} else {
+			} 
+			// area decrease & perimeter decrease
+			else 
+			{
 				if (IsCutTriLegal(curr, prev, next)) {
 					m_fine_border.erase(m_fine_border.begin()+i);
 					success = true;
@@ -484,16 +505,17 @@ void ExtractOutlineFine::ReduceNode(float tolerance)
 	} while (success && m_fine_border.size() > 3);
 }
 
-void ExtractOutlineFine::ReduceEdge(float tolerance)
+void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 {
 	if (m_fine_border.size() <= 3) {
 		return;
 	}
 
-	float area_limit = d2d::Math::GetPolygonArea(m_fine_border) * tolerance;
+	float area_limit = d2d::Math::GetPolygonArea(m_fine_border) * area_tol;
+	float perimeter_limit = d2d::Math::GetPolygonPerimeter(m_fine_border) * perimeter_tol;
 	bool success = false;
 	do {
-		ReduceNode(tolerance);
+		ReduceNode(area_tol);
 		if (m_fine_border.size() <= 3) {
 			break;
 		}
@@ -505,7 +527,6 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 			const d2d::Vector& start_prev = m_fine_border[(i+m_fine_border.size()-1)%m_fine_border.size()];
 			const d2d::Vector& end = m_fine_border[(i+1)%m_fine_border.size()];
 			const d2d::Vector& end_next = m_fine_border[(i+2)%m_fine_border.size()];
-
 			assert(start != end);
 			if (start_prev == end_next) {
 				continue;
@@ -521,14 +542,15 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 				&& d2d::Math::isBetween(start_prev.y, start.y, intersect.y);
 			bool inside_e = d2d::Math::isBetween(end.x, end_next.x, intersect.x) 
 				&& d2d::Math::isBetween(end.y, end_next.y, intersect.y);
+			// add new triangle, area increase & perimeter increase
 			if (!inside_s && !inside_e) 
 			{
 				float a = d2d::Math::GetTriangleArea(intersect, start, end);
-				if (a < area_limit && 
-					!d2d::Math::IsSegmentIntersectPolyline(intersect, start, m_fine_border) &&
-					!d2d::Math::IsSegmentIntersectPolyline(intersect, end, m_fine_border) &&
-					!d2d::Math::IsSegmentIntersectPolyline(intersect, start, m_raw_border_merged) &&
-					!d2d::Math::IsSegmentIntersectPolyline(intersect, end, m_raw_border_merged)) 
+				float len = d2d::Math::getDistance(intersect, start) 
+					+ d2d::Math::getDistance(intersect, end)
+					- d2d::Math::getDistance(start, end);
+				if (a < area_limit && len < perimeter_limit && 
+					IsAddTriLeagal(start, end, intersect))
 				{
 					m_fine_border[i] = intersect;
 					m_fine_border.erase(m_fine_border.begin()+((i+1)%m_fine_border.size()));
@@ -536,45 +558,36 @@ void ExtractOutlineFine::ReduceEdge(float tolerance)
 					break;
 				}
 			} 
+			// cut triangle, perimeter decrease
 			else 
 			{
 				assert(!inside_s || !inside_e);
-
 // 				if (inside_s && inside_e) {
 // 					break;
 // 				}
 
-  				float a = d2d::Math::GetTriangleArea(intersect, start, end);
-  				if (a < area_limit && IsCutTriLegal(intersect, start, end)) {
-					if (inside_s) {
-						m_fine_border[i] = intersect;
-						m_fine_border.erase(m_fine_border.begin()+((i+1)%m_fine_border.size()));
-					} else {
-						m_fine_border[(i+1)%m_fine_border.size()] = intersect;
-						m_fine_border.erase(m_fine_border.begin()+i);
+				bool is_inside;
+				if (inside_s) {
+					is_inside = d2d::Math::IsTurnRight(start, intersect, end_next);
+				} else {
+					is_inside = d2d::Math::IsTurnLeft(end, intersect, start_prev);
+				}
+				if (is_inside || d2d::Math::GetTriangleArea(intersect, start, end) < area_limit) {
+					if (IsCutTriLegal(intersect, start, end)) {
+						if (inside_s) {
+							m_fine_border[i] = intersect;
+							m_fine_border.erase(m_fine_border.begin()+((i+1)%m_fine_border.size()));
+						} else {
+							m_fine_border[(i+1)%m_fine_border.size()] = intersect;
+							m_fine_border.erase(m_fine_border.begin()+i);
+						}
+						success = true;
+						break;
 					}
-					success = true;
-					break;
 				}
 			}
 		}
 	} while (success && m_fine_border.size() > 3);
-}
-
-bool ExtractOutlineFine::IsOutlineLegal() const
-{
-	if (m_fine_border.size() < 3) {
-		return false;
-	}
-	for (int i = 0, n = m_fine_border.size()-1; i < n; ++i) {
-		if (d2d::Math::IsSegmentIntersectPolyline(m_fine_border[i], m_fine_border[i+1], m_raw_border_merged)) {
-			return false;
-		}
-	}
-	if (d2d::Math::IsSegmentIntersectPolyline(m_fine_border[0], m_fine_border[m_fine_border.size()-1], m_raw_border_merged)) {
-		return false;
-	}
-	return true;
 }
 
 }

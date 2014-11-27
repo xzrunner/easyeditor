@@ -52,7 +52,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 		eimage::ExtractOutlineRaw raw(*image);
 		raw.Trigger();
 		eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
-		fine.Trigger(0.04f);
+		fine.Trigger(0.04f, 0.2f);
 
 		Json::Value value;
 		d2d::Vector offset(-0.5f*image->originWidth(), -0.5f*image->originHeight());
