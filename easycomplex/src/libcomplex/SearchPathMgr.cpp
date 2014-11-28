@@ -128,7 +128,8 @@ PackedRes(const std::string& res_dir,
 SearchPathMgr::PackedRes::
 PackedRes(const std::string& dirpath)
 {
-	LoadCfgDir(dirpath);
+	// from command line, no need trans
+	LoadCfgDir(dirpath, false);
 }
 
 bool SearchPathMgr::PackedRes::
@@ -146,7 +147,7 @@ IsExist(const wxString& filepath) const
 bool SearchPathMgr::PackedRes::
 CanHandleFilepath(const wxString& filepath) const
 {
-	if (m_res_dir_absolute.empty()) {
+	if (m_res_dir_absolute.IsEmpty()) {
 		return true;
 	} else {
 		return filepath.Contains(m_res_dir_absolute);
@@ -154,8 +155,10 @@ CanHandleFilepath(const wxString& filepath) const
 }
 
 void SearchPathMgr::PackedRes::
-LoadCfgDir(const std::string& dirpath)
+LoadCfgDir(const std::string& dirpath, bool need_trans)
 {
+	m_res_dir_absolute = wxEmptyString;
+
 #ifndef _DEBUG
 	wxStandardPaths std;
 	wxString exe_path = std.GetExecutablePath();
@@ -168,11 +171,12 @@ LoadCfgDir(const std::string& dirpath)
 
 		wxFileName filename(path);
 #ifndef _DEBUG
-		filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+		if (need_trans) {
+			filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+		}
 #endif
 		filename.Normalize();
 		path = filename.GetFullPath().Lower();
-
 		if (wxFileName::FileExists(path)) {
 			LoadCfgFile(path);
 		} else {

@@ -38,7 +38,7 @@ private:
 		bool CanHandleFilepath(const wxString& filepath) const;
 
 	private:
-		void LoadCfgDir(const std::string& dirpath);
+		void LoadCfgDir(const std::string& dirpath, bool need_trans = false);
 		void LoadCfgFile(const std::string& filepath);
 
 	private:

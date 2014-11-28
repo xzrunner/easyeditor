@@ -208,6 +208,9 @@ int main(int argc, char *argv[])
 		LoadIgnoreList(ignore_file);
 	}
 
+	std::string texpackerpath = argv[2];
+	ecomplex::SearchPathMgr::Instance()->ResetPackRes(texpackerpath);
+
 	std::string path = argv[1];
 	bool is_dir = false;
 	int pos_dot = path.find_last_of('.');
@@ -221,10 +224,7 @@ int main(int argc, char *argv[])
 		LoadFromList(path);
 	}
 
-	std::string texpackerpath = argv[2];
 	LoadTexturePacker(texpackerpath);
-
-	ecomplex::SearchPathMgr::Instance()->ResetPackRes(texpackerpath);
 
 	try {
 		ebuilder::CodeGenerator gen;
