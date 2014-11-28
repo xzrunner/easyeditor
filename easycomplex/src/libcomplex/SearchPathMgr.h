@@ -14,9 +14,14 @@ public:
 	// absolute path
 	bool IsExist(const wxString& filepath) const;
 
+	// only one packed res for cocpack
+	void ResetPackRes(const std::string& dirpath);
+
 private:
 	SearchPathMgr();
 	~SearchPathMgr();
+
+	void Clear();
 
 	void LoadConfig();
 
@@ -26,12 +31,11 @@ private:
 	public:
 		PackedRes(const std::string& res_dir,
 			const std::string& dirpath);
+		PackedRes(const std::string& dirpath);
 
 		bool IsExist(const wxString& filepath) const;
 
-		const wxString& GetDirAbsolute() const {
-			return m_res_dir_absolute;
-		}
+		bool CanHandleFilepath(const wxString& filepath) const;
 
 	private:
 		void LoadCfgDir(const std::string& dirpath);

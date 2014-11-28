@@ -224,6 +224,8 @@ int main(int argc, char *argv[])
 	std::string texpackerpath = argv[2];
 	LoadTexturePacker(texpackerpath);
 
+	ecomplex::SearchPathMgr::Instance()->ResetPackRes(texpackerpath);
+
 	try {
 		ebuilder::CodeGenerator gen;
 		coceditor::COCCode code(gen, gscale);

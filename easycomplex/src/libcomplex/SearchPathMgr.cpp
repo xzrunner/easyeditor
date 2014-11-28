@@ -15,8 +15,7 @@ SearchPathMgr::SearchPathMgr()
 
 SearchPathMgr::~SearchPathMgr()
 {
-	for_each(m_search_path.begin(), m_search_path.end(), 
-		DeletePointerFunctor<PackedRes>());
+	Clear();
 }
 
 bool SearchPathMgr::IsExist(const wxString& filepath) const
@@ -25,7 +24,7 @@ bool SearchPathMgr::IsExist(const wxString& filepath) const
 
 	for (int i = 0, n = m_search_path.size(); i < n; ++i) {
 		const PackedRes* res = m_search_path[i];
-		if (filepath.Contains(res->GetDirAbsolute())) {
+		if (res->CanHandleFilepath(filepath)) {
 			need_search = true;
 			if (res->IsExist(filepath)) {
 				return true;
@@ -39,6 +38,14 @@ bool SearchPathMgr::IsExist(const wxString& filepath) const
 	return !need_search;
 }
 
+void SearchPathMgr::ResetPackRes(const std::string& dirpath)
+{
+	Clear();
+
+	PackedRes* res = new PackedRes(dirpath);
+	m_search_path.push_back(res);
+}
+
 SearchPathMgr* SearchPathMgr::Instance()
 {
 	if (!m_instance) {
@@ -48,13 +55,21 @@ SearchPathMgr* SearchPathMgr::Instance()
 	return m_instance;
 }
 
+void SearchPathMgr::Clear()
+{
+	for_each(m_search_path.begin(), m_search_path.end(), 
+		DeletePointerFunctor<PackedRes>());
+	m_search_path.clear();
+}
+
 void SearchPathMgr::LoadConfig()
 {
+ 	wxFileName filename(FILENAME);
+#ifndef _DEBUG
 	wxStandardPaths std;
 	wxString exe_path = std.GetExecutablePath();
-
- 	wxFileName filename(FILENAME);
 	filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+#endif
  	filename.Normalize();
 
 	Json::Value value;
@@ -100,21 +115,25 @@ PackedRes(const std::string& res_dir,
 {
 	LoadCfgDir(dirpath);
 
+	wxFileName filename(m_res_dir);
+#ifndef _DEBUG
 	wxStandardPaths std;
 	wxString exe_path = std.GetExecutablePath();
-	wxFileName filename(m_res_dir);
 	filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+#endif
 	filename.Normalize();
 	m_res_dir_absolute = filename.GetFullPath().Lower();
+}
+
+SearchPathMgr::PackedRes::
+PackedRes(const std::string& dirpath)
+{
+	LoadCfgDir(dirpath);
 }
 
 bool SearchPathMgr::PackedRes::
 IsExist(const wxString& filepath) const
 {
-// 	if (!filepath.Contains(m_res_dir_absolute)) {
-// 		return false;
-// 	}
-
 	for (int i = 0, n = m_packed_files.size(); i < n; ++i) {
 		if (filepath.Contains(m_packed_files[i])) {
 			return true;
@@ -124,11 +143,23 @@ IsExist(const wxString& filepath) const
 	return false;
 }
 
+bool SearchPathMgr::PackedRes::
+CanHandleFilepath(const wxString& filepath) const
+{
+	if (m_res_dir_absolute.empty()) {
+		return true;
+	} else {
+		return filepath.Contains(m_res_dir_absolute);
+	}
+}
+
 void SearchPathMgr::PackedRes::
 LoadCfgDir(const std::string& dirpath)
 {
+#ifndef _DEBUG
 	wxStandardPaths std;
 	wxString exe_path = std.GetExecutablePath();
+#endif
 
 	size_t i = 1;
 	while (true)
@@ -136,7 +167,9 @@ LoadCfgDir(const std::string& dirpath)
 		std::string path = dirpath + wxString::FromDouble(i) + ".json";
 
 		wxFileName filename(path);
+#ifndef _DEBUG
 		filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+#endif
 		filename.Normalize();
 		path = filename.GetFullPath().Lower();
 
