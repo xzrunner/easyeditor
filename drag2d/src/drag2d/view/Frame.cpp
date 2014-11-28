@@ -88,6 +88,7 @@ void Frame::openFile(const wxString& filename)
 
 void Frame::RefreshWithCurrFile()
 {
+//	m_task->clear();
 	openFile(m_currFilename);
 }
 

@@ -1,14 +1,18 @@
 #include "AutoRectCutCMPT.h"
 #include "AutoRectCutOP.h"
+#include "StagePanel.h"
+
+#include <easyimage.h>
 
 namespace eimage
 {
 
 AutoRectCutCMPT::AutoRectCutCMPT(wxWindow* parent, const wxString& name, 
-								 d2d::EditPanel* editpanel)
-	: d2d::AbstractEditCMPT(parent, name, editpanel)
+								 StagePanel* stage)
+	: d2d::AbstractEditCMPT(parent, name, stage)
+	, m_stage(stage)
 {
-	m_editOP = new AutoRectCutOP(editpanel);
+	m_editOP = new AutoRectCutOP(stage);
 }
 
 wxSizer* AutoRectCutCMPT::initLayout()
@@ -38,11 +42,18 @@ wxSizer* AutoRectCutCMPT::initLayout()
 
 		sizer->Add(input_sizer);
 	}
-	sizer->AddSpacer(5);
+	sizer->AddSpacer(10);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Add"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
 			wxCommandEventHandler(AutoRectCutCMPT::OnAddRect));
+		sizer->Add(btn);
+	}
+	sizer->AddSpacer(20);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Auto"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(AutoRectCutCMPT::OnCreateRects));
 		sizer->Add(btn);
 	}
 	top_sizer->Add(sizer);
@@ -59,6 +70,19 @@ void AutoRectCutCMPT::OnAddRect(wxCommandEvent& event)
 	op->getRectMgr().insert(d2d::Rect(d2d::Vector(0, 0), d2d::Vector((float)width, (float)height)));
 
 	m_editPanel->Refresh();
+}
+
+void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
+{
+	const d2d::ISprite* sprite = m_stage->getImage();
+	const d2d::ImageSprite* img_sprite 
+		= dynamic_cast<const d2d::ImageSprite*>(sprite);
+	assert(img_sprite);
+	const d2d::Image* img = img_sprite->getSymbol().getImage();
+
+	RegularRectCut cut(*img);
+	cut.AutoCut();
+	int zz = 0;
 }
 
 }

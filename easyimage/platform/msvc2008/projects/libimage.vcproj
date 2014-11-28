@@ -165,6 +165,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="rectcut"
+			>
+			<File
+				RelativePath="..\..\..\src\libimage\RegularRectCut.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\RegularRectCut.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
 			>

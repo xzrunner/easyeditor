@@ -6,18 +6,23 @@
 namespace eimage
 {
 
+class StagePanel;
+
 class AutoRectCutCMPT : public d2d::AbstractEditCMPT
 {
 public:
 	AutoRectCutCMPT(wxWindow* parent, const wxString& name,
-		d2d::EditPanel* editpanel);
+		StagePanel* stage);
 
 protected:
 	virtual wxSizer* initLayout();
 
 	void OnAddRect(wxCommandEvent& event);
+	void OnCreateRects(wxCommandEvent& event);
 
 private:
+	StagePanel* m_stage;
+
 	wxChoice *m_width_choice, *m_height_choice;
 
 }; // AutoRectCutCMPT
