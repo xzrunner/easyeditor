@@ -2,7 +2,8 @@
 #include "StagePanel.h"
 #include "RectCutCMPT.h"
 #include "PixelDiffCMPT.h"
-#include "AutoCutCMPT.h"
+#include "AutoTriCutCMPT.h"
+#include "AutoRectCutCMPT.h"
 
 #include <easyshape.h>
 
@@ -14,7 +15,8 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	: d2d::ToolbarPanel(parent, stage)
 {
 	addChild(new RectCutCMPT(this, wxT("Rect Cut"), stage));
-	addChild(new AutoCutCMPT(this, wxT("Auto Cut"), stage));
+	addChild(new AutoTriCutCMPT(this, wxT("Auto Tri Cut"), stage));
+	addChild(new AutoRectCutCMPT(this, wxT("Auto Rect Cut"), stage));
 	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
 
 	addChild(new libshape::MousePositionCMPT(this, wxT("Debug"), stage));

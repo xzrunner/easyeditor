@@ -1,15 +1,15 @@
-#ifndef _EASYIMAGE_AUTO_CUT_OP_H_
-#define _EASYIMAGE_AUTO_CUT_OP_H_
+#ifndef _EASYIMAGE_AUTO_TRI_CUT_OP_H_
+#define _EASYIMAGE_AUTO_TRI_CUT_OP_H_
 
 #include <drag2d.h>
 
 namespace eimage
 {
 
-class AutoCutOP : public d2d::ZoomViewOP
+class AutoTriCutOP : public d2d::ZoomViewOP
 {
 public:
-	AutoCutOP(d2d::EditPanel* stage);
+	AutoTriCutOP(d2d::EditPanel* stage);
 
 	virtual bool onActive();
 
@@ -22,10 +22,10 @@ private:
 
 	std::vector<d2d::Vector> m_fine_bound_line;
 
-	friend class AutoCutCMPT;
+	friend class AutoTriCutCMPT;
 
-}; // AutoCutOP
+}; // AutoTriCutOP
 
 }
 
-#endif // _EASYIMAGE_AUTO_CUT_OP_H_
+#endif // _EASYIMAGE_AUTO_TRI_CUT_OP_H_

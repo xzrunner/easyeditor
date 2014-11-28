@@ -49,13 +49,13 @@ void RectMgr::draw() const
 	}
 }
 
-void RectMgr::insert(const d2d::Rect& rect)
+void RectMgr::insert(const d2d::Rect& rect, bool force)
 {
-	for (int i = 0, n = m_rects.size(); i < n; ++i)
-	{
-		if (d2d::Math::isRectIntersectRect(*m_rects[i], rect)) 
-		{
-			return;
+	if (!force) {
+		for (int i = 0, n = m_rects.size(); i < n; ++i) {
+			if (d2d::Math::isRectIntersectRect(*m_rects[i], rect)) {
+				return;
+			}
 		}
 	}
 

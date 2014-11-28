@@ -1,14 +1,14 @@
-#include "AutoCutOP.h"
+#include "AutoTriCutOP.h"
 
 namespace eimage
 {
 
-AutoCutOP::AutoCutOP(d2d::EditPanel* stage)
+AutoTriCutOP::AutoTriCutOP(d2d::EditPanel* stage)
 	: d2d::ZoomViewOP(stage, true)
 {
 }
 
-bool AutoCutOP::onActive()
+bool AutoTriCutOP::onActive()
 {
 	if (d2d::ZoomViewOP::onActive()) {
 		return true;
@@ -21,7 +21,7 @@ bool AutoCutOP::onActive()
 	return false;
 }
 
-bool AutoCutOP::onDraw() const
+bool AutoTriCutOP::onDraw() const
 {
 	if (d2d::ZoomViewOP::onDraw()) {
 		return true;

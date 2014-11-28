@@ -1,5 +1,5 @@
-#include "AutoCutCMPT.h"
-#include "AutoCutOP.h"
+#include "AutoTriCutCMPT.h"
+#include "AutoTriCutOP.h"
 #include "StagePanel.h"
 
 #include <easyimage.h>
@@ -12,30 +12,30 @@ static const float PERIMETER_TOLERANCE = 0.2f;
 
 #define TRIGGER_STEP		// step by step
 
-AutoCutCMPT::AutoCutCMPT(wxWindow* parent, const wxString& name, 
+AutoTriCutCMPT::AutoTriCutCMPT(wxWindow* parent, const wxString& name, 
 						 StagePanel* stage)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_stage(stage)
 	, m_raw(NULL)
 	, m_fine(NULL)
 {
-	m_editOP = new AutoCutOP(stage);
+	m_editOP = new AutoTriCutOP(stage);
 }
 
-wxSizer* AutoCutCMPT::initLayout()
+wxSizer* AutoTriCutCMPT::initLayout()
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Trigger"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-			wxCommandEventHandler(AutoCutCMPT::Trigger));
+			wxCommandEventHandler(AutoTriCutCMPT::Trigger));
 		top_sizer->Add(btn);
 	}
 	top_sizer->AddSpacer(10);
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Output Outline"));
 		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-			wxCommandEventHandler(AutoCutCMPT::OutputOutline));
+			wxCommandEventHandler(AutoTriCutCMPT::OutputOutline));
 		top_sizer->Add(btn);
 	}
 	top_sizer->AddSpacer(20);
@@ -45,14 +45,14 @@ wxSizer* AutoCutCMPT::initLayout()
 		{
 			wxButton* btn = new wxButton(this, wxID_ANY, wxT("Create Outline"));
 			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-				wxCommandEventHandler(AutoCutCMPT::CreateOutline));
+				wxCommandEventHandler(AutoTriCutCMPT::CreateOutline));
 			sizer->Add(btn);
 		}
 		sizer->AddSpacer(5);
 		{
 			wxButton* btn = new wxButton(this, wxID_ANY, wxT("Reduce Count"));
 			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-				wxCommandEventHandler(AutoCutCMPT::ReduceOutlineCount));
+				wxCommandEventHandler(AutoTriCutCMPT::ReduceOutlineCount));
 			sizer->Add(btn);
 		}
 		top_sizer->Add(sizer);
@@ -60,12 +60,12 @@ wxSizer* AutoCutCMPT::initLayout()
 	return top_sizer;
 }
 
-void AutoCutCMPT::Trigger(wxCommandEvent& event)
+void AutoTriCutCMPT::Trigger(wxCommandEvent& event)
 {
 	Trigger();
 }
 
-void AutoCutCMPT::OutputOutline(wxCommandEvent& event)
+void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 {
 	Trigger();
 
@@ -76,7 +76,7 @@ void AutoCutCMPT::OutputOutline(wxCommandEvent& event)
 	const d2d::Image* img = img_sprite->getSymbol().getImage();
 
 	Json::Value value;
-	AutoCutOP* op = static_cast<AutoCutOP*>(m_editOP);
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 
 	d2d::Vector offset(-0.5f*img->originWidth(), -0.5f*img->originHeight());
 	std::vector<d2d::Vector> vertices(op->m_fine_bound_line);
@@ -95,7 +95,7 @@ void AutoCutCMPT::OutputOutline(wxCommandEvent& event)
 	fout.close();
 }
 
-void AutoCutCMPT::CreateOutline(wxCommandEvent& event)
+void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 {
 	// step by step
 	static int max_step = 5;
@@ -106,7 +106,7 @@ void AutoCutCMPT::CreateOutline(wxCommandEvent& event)
 	assert(img_sprite);
 	const d2d::Image* img = img_sprite->getSymbol().getImage();
 
-	AutoCutOP* op = static_cast<AutoCutOP*>(m_editOP);
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 	m_raw = new ExtractOutlineRaw(*img);
 	m_raw->Trigger();
 	op->m_raw_bound_line = m_raw->GetBorderLine();
@@ -120,18 +120,18 @@ void AutoCutCMPT::CreateOutline(wxCommandEvent& event)
 	m_editPanel->Refresh();
 }
 
-void AutoCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
+void AutoTriCutCMPT::ReduceOutlineCount(wxCommandEvent& event)
 {
 	if (m_fine)
 	{
 		m_fine->ReduceOutlineCount(AREA_TOLERANCE, PERIMETER_TOLERANCE);
-		AutoCutOP* op = static_cast<AutoCutOP*>(m_editOP);
+		AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 		op->m_fine_bound_line = m_fine->GetResult();
 		m_editPanel->Refresh();
 	}
 }
 
-void AutoCutCMPT::Trigger()
+void AutoTriCutCMPT::Trigger()
 {
 #ifdef TRIGGER_STEP
 	static int max_step = 5;
@@ -142,7 +142,7 @@ void AutoCutCMPT::Trigger()
 	assert(img_sprite);
 	const d2d::Image* img = img_sprite->getSymbol().getImage();
 
-	AutoCutOP* op = static_cast<AutoCutOP*>(m_editOP);
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 	ExtractOutlineRaw raw(*img);
 	raw.Trigger();
 	op->m_raw_bound_line = raw.GetBorderLine();

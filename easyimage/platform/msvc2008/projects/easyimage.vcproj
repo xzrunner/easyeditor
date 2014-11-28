@@ -294,22 +294,42 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="autocut"
+				Name="auto_tri_cut"
 				>
 				<File
-					RelativePath="..\..\..\src\easyimage\AutoCutCMPT.cpp"
+					RelativePath="..\..\..\src\easyimage\AutoTriCutCMPT.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyimage\AutoCutCMPT.h"
+					RelativePath="..\..\..\src\easyimage\AutoTriCutCMPT.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyimage\AutoCutOP.cpp"
+					RelativePath="..\..\..\src\easyimage\AutoTriCutOP.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyimage\AutoCutOP.h"
+					RelativePath="..\..\..\src\easyimage\AutoTriCutOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="auto_rect_cut"
+				>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoRectCutCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoRectCutCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoRectCutOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyimage\AutoRectCutOP.h"
 					>
 				</File>
 			</Filter>

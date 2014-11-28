@@ -1,5 +1,5 @@
-#ifndef _EASYIMAGE_AUTO_CUT_CMPT_H_
-#define _EASYIMAGE_AUTO_CUT_CMPT_H_
+#ifndef _EASYIMAGE_AUTO_TRI_CUT_CMPT_H_
+#define _EASYIMAGE_AUTO_TRI_CUT_CMPT_H_
 
 #include <drag2d.h>
 
@@ -11,10 +11,10 @@ class StagePanel;
 class ExtractOutlineRaw;
 class ExtractOutlineFine;
 
-class AutoCutCMPT : public d2d::AbstractEditCMPT
+class AutoTriCutCMPT : public d2d::AbstractEditCMPT
 {
 public:
-	AutoCutCMPT(wxWindow* parent, const wxString& name,
+	AutoTriCutCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
 
 protected:
@@ -36,8 +36,8 @@ private:
 	ExtractOutlineRaw* m_raw;
 	ExtractOutlineFine* m_fine;
 
-}; // AutoCutCMPT
+}; // AutoTriCutCMPT
 
 }
 
-#endif // _EASYIMAGE_AUTO_CUT_CMPT_H_
+#endif // _EASYIMAGE_AUTO_TRI_CUT_CMPT_H_

@@ -27,7 +27,7 @@ public:
 
 	void draw() const;
 
-	void insert(const d2d::Rect& rect);
+	void insert(const d2d::Rect& rect, bool force = false);
 	bool remove(const d2d::Vector& pos);
 
 	d2d::Vector queryNearestAxis(const d2d::Vector& pos, const d2d::Rect* except = NULL) const;
