@@ -36,6 +36,9 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	LoadWindowConfig();
 	loadTmpInfo();
 	initMenuBar();
+#ifdef _DEBUG
+	initStatueBar();
+#endif
 }
 
 Frame::~Frame()
@@ -254,6 +257,12 @@ void Frame::initMenuBar()
 	menuBar->Append(m_setting_menu = initSettingsBar(), "&Settings");
 	menuBar->Append(m_code_menu = InitCodeBar(), "&Code");
 	SetMenuBar(menuBar);
+}
+
+void Frame::initStatueBar()
+{
+	CreateStatusBar();
+	SetStatusText( "Welcome to wxWidgets!" );
 }
 
 wxMenu* Frame::initFileBar()

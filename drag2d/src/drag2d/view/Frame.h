@@ -51,6 +51,7 @@ private:
 	void onClose(wxCloseEvent& event);
 
 	void initMenuBar();
+	void initStatueBar();
 
 	wxMenu* initFileBar();
 	wxMenu* initViewBar();

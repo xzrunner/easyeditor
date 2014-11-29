@@ -98,6 +98,13 @@ void EditPanel::setEditOP(AbstractEditOP* editOP)
 
 void EditPanel::onMouse(wxMouseEvent& event)
 {
+#ifdef _DEBUG
+	Vector pos = transPosScreenToProject(event.GetX(), event.GetY());
+	wxString msg;
+	msg.Printf("Mouse: %.1f, %.1f", pos.x, pos.y);
+	static_cast<wxFrame*>(m_frame)->SetStatusText(msg);
+#endif
+
 	if (!m_editOP) return;
 
 	if (event.LeftDown())

@@ -18,9 +18,6 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	addChild(new AutoTriCutCMPT(this, wxT("Auto Tri Cut"), stage));
 	addChild(new AutoRectCutCMPT(this, wxT("Auto Rect Cut"), stage));
 	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
-
-	addChild(new libshape::MousePositionCMPT(this, wxT("Debug"), stage));
-
 	SetSizer(initLayout());	
 }
 
