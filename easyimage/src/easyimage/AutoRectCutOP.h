@@ -21,6 +21,7 @@ public:
 	virtual bool onMouseLeftDClick(int x, int y);
 
 	virtual bool onDraw() const;
+	virtual bool clear();
 
 	const RectMgr& getRectMgr() const { return m_rects; }
 	RectMgr& getRectMgr() { return m_rects; }

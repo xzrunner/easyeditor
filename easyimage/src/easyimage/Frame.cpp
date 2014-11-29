@@ -14,11 +14,8 @@ Frame::Frame(const wxString& title)
 void Frame::onNew(wxCommandEvent& event)
 {
 	d2d::AbstractEditOP* editop = m_task->getEditPanel()->getEditOP();
-	if (RectCutOP* op = dynamic_cast<RectCutOP*>(editop))
-	{
-		op->clear();
-		Refresh();
-	}
+	editop->clear();
+	Refresh();
 }
 
 void Frame::onOpen(wxCommandEvent& event)

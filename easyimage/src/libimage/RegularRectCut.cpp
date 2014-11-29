@@ -27,9 +27,9 @@ void RegularRectCut::AutoCut()
 		bool success = false;
 		do {
 			int edge = EDGE_LIST[i];
-			int limit = (int)(edge*edge*AREA_LIMIT);
 			int x, y;
-			success = AutoCut(edge, limit, x, y);
+			int area = AutoCut(edge, x, y);
+			success = area > (int)(edge*edge*AREA_LIMIT);
 			if (success) {
 				m_hor_table->CutByRect(x, y, edge, m_left_area);
 				m_result.push_back(Rect(x, y, edge));
@@ -63,19 +63,28 @@ void RegularRectCut::BuildEdgeTable()
 	m_hor_table = new EdgeTable(m_pixels, m_width, m_height);
 }
 
-bool RegularRectCut::AutoCut(int edge, int limit, int& ret_x, int& ret_y)
+int RegularRectCut::AutoCut(int edge, int& ret_x, int& ret_y)
 {
-	for (int y = 0, up = m_height - edge; y < up; ++y) {
-		for (int x = 0, right = m_width - edge; x < right; ++x) {
-			int area = m_hor_table->GetRectArea(x, y, edge);
-			if (area > limit) {
-				ret_x = x;
-				ret_y = y;
-				return true;
+	int max_area = -1;
+	int max_x, max_y;
+	for (int y = 0, up = m_height - edge; y <= up; y+=1) {
+		for (int x = 0, right = m_width - edge; x <= right; x+=1) {
+			int area = m_hor_table->GetRectArea(x, y, edge, max_area);
+			if (area > max_area) {
+				max_area = area;
+				max_x = x;
+				max_y = y;
 			}
 		}
 	}
-	return false;
+
+	if (max_area < 0) {
+		return 0;	
+	} else {
+		ret_x = max_x;
+		ret_y = max_y;
+		return max_area;
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -89,18 +98,27 @@ EdgeTable(const bool* pixels, int width, int height)
 }
 
 int RegularRectCut::EdgeTable::
-GetRectArea(int x, int y, int edge) const
+GetRectArea(int x, int y, int edge, int limit) const
 {
 	int area = 0;
-	std::map<int, std::map<int, int> >::const_iterator 
+	std::map<int, Line>::const_iterator 
 		itr_y_start = m_lines.lower_bound(y),
-		itr_y_end = m_lines.upper_bound(y+edge),
+		itr_y_end = m_lines.lower_bound(y+edge),
 		itr;
+
+	int raw_area = 0;
+	for (itr = itr_y_start; itr != itr_y_end; ++itr) {
+		raw_area += itr->second.area;
+	}
+	if (raw_area <= limit) {
+		return 0;
+	}
+
 	for (itr = itr_y_start; itr != itr_y_end; ++itr)
 	{
-		const std::map<int, int>& line = itr->second;
-		std::map<int, int>::const_iterator itr_world = line.begin();
-		for ( ; itr_world != line.end(); ++itr_world) {
+		const Line& line = itr->second;
+		std::map<int, int>::const_iterator itr_world = line.worlds.begin();
+		for ( ; itr_world != line.worlds.end(); ++itr_world) {
 			int start = itr_world->first,
 				len = itr_world->second;
 			int end = start + len - 1;
@@ -117,7 +135,7 @@ GetRectArea(int x, int y, int edge) const
 				if (end < x+edge) {
 					area += end-start+1;
 				} else {
-					area += x+edge-start+1;
+					area += x+edge-start;
 					break;
 				}
 			} else {
@@ -131,15 +149,15 @@ GetRectArea(int x, int y, int edge) const
 void RegularRectCut::EdgeTable::
 CutByRect(int x, int y, int edge, int& left_area)
 {
- 	std::map<int, std::map<int, int> >::iterator 
+ 	std::map<int, Line>::iterator 
  		itr_y_start = m_lines.lower_bound(y),
  		itr_y_end = m_lines.upper_bound(y+edge),
  		itr;
- 	for (itr = itr_y_start; itr != itr_y_end; ++itr)
+ 	for (itr = itr_y_start; itr != itr_y_end; )
  	{
- 		std::map<int, int>& line = itr->second;
- 		std::map<int, int>::iterator itr_world = line.begin();
- 		for ( ; itr_world != line.end();) {
+ 		Line& line = itr->second;
+ 		std::map<int, int>::iterator itr_world = line.worlds.begin();
+ 		for ( ; itr_world != line.worlds.end();) {
 			bool erase = false;
  			int start = itr_world->first,
  				len = itr_world->second;
@@ -149,45 +167,74 @@ CutByRect(int x, int y, int edge, int& left_area)
 					++itr_world;
  					continue;
  				} else if (end >= x && end < x+edge) {
- 					itr_world->second -= end-x+1;
+					int area = end-x+1;
+ 					itr_world->second -= area;
+					line.area -= area;
+					left_area -= area;
 					if (itr_world->second == 0) {
-						itr_world = line.erase(itr_world);
+						itr_world = line.worlds.erase(itr_world);
 					} else {
 						++itr_world;
 					}
-					left_area -= end-x+1;
  				} else {
- 					itr_world->second -= end-x+1;
-					if (itr_world->second == 0) {
-						itr_world = line.erase(itr_world);
-					} else {
-						++itr_world;
-					}
- 					line.insert(std::make_pair(end+1, len-itr_world->second-edge));
 					left_area -= edge;
- 					break;
+					line.area -= edge;
+					itr_world->second -= end-x+1;
+					line.worlds.insert(std::make_pair(x+edge, end-(x+edge)+1));
+					break;
  				}
  			} else if (start >= x && start < x + edge) {
  				if (end < x+edge) {
- 					itr_world = line.erase(itr_world);
-					left_area -= end-start+1;
+					int area = end-start+1;
+					line.area -= area;
+					left_area -= area;
+ 					itr_world = line.worlds.erase(itr_world);
  				} else {
-					itr_world = line.erase(itr_world);
-					line.insert(std::make_pair(end+1, x+edge-start+1));
-					left_area -= x+edge-start+1;
+					int area = x+edge-start;
+					line.area -= area;
+					left_area -= area;
+
+					line.worlds.erase(itr_world);
+					line.worlds.insert(std::make_pair(x+edge, end-(x+edge)+1));
+
+					break;
  				}
  			} else {
  				break;
  			}
  		}
+
+		// debug
+		if (line.area != 0) {
+			int a = 0;
+			std::map<int, int>::iterator itr_world = line.worlds.begin();
+			for ( ; itr_world != line.worlds.end(); ++itr_world) {
+				a += itr_world->second;
+			}
+			assert(a == line.area);
+		}
+
+		if (line.area == 0) {
+			itr = m_lines.erase(itr);
+		} else {
+			++itr;
+		}
  	}
+
+	// debug
+	int a = 0;
+	std::map<int, Line>::const_iterator itr_d = m_lines.begin();
+	for ( ; itr_d != m_lines.end(); ++itr_d) {
+		a += itr_d->second.area;
+	}
+	assert(a == left_area);
 }
 
 void RegularRectCut::EdgeTable::
 Load(const bool* pixels, int width, int height)
 {
 	for (int y = 0; y < height; ++y) {
-		std::map<int, int> line;
+		Line line;
 
 		int id, len = 0;
 		for (int x = 0; x < width; ++x) {
@@ -195,16 +242,19 @@ Load(const bool* pixels, int width, int height)
 				if (len == 0) {
 					id = x;
 				}
+				++line.area;
 				++len;
-			} else {
+			}
+
+			if (!pixels[width*y+x] || x == width-1) {
 				if (len != 0) {
-					line.insert(std::make_pair(id, len));
+					line.worlds.insert(std::make_pair(id, len));
 					len = 0;
 				}
 			}
 		}
 
-		if (!line.empty()) {
+		if (!line.worlds.empty()) {
 			m_lines.insert(std::make_pair(y, line));
 		}
 	}

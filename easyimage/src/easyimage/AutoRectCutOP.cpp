@@ -95,4 +95,13 @@ bool AutoRectCutOP::onDraw() const
 	return false;
 }
 
+bool AutoRectCutOP::clear()
+{
+	if (d2d::ZoomViewOP::clear()) return true;
+
+	m_rects.clear();
+
+	return false;
+}
+
 }

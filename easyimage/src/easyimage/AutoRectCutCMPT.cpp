@@ -82,7 +82,16 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
-	int zz = 0;
+	const std::vector<RegularRectCut::Rect>& result = cut.GetResult();
+	RectMgr& rects = static_cast<AutoRectCutOP*>(m_editOP)->getRectMgr();
+	for (int i = 0, n = result.size(); i < n; ++i) {
+		int x = result[i].x,
+			y = result[i].y,
+			e = result[i].edge;
+		rects.insert(d2d::Rect(d2d::Vector(x, y), d2d::Vector(x+e, y+e)), true);
+	}
+
+	m_editPanel->Refresh();
 }
 
 }

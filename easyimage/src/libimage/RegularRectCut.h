@@ -9,34 +9,6 @@ namespace eimage
 class RegularRectCut
 {
 public:
-	RegularRectCut(const d2d::Image& image);
-	~RegularRectCut();
-
-	void AutoCut();
-
-private:
-	void LoadPixels(const d2d::Image& image);
-	void BuildEdgeTable();
-
-	bool AutoCut(int edge, int limit, int& ret_x, int& ret_y);
-
-private:
-	class EdgeTable
-	{
-	public:
-		EdgeTable(const bool* pixels, int width, int height);
-
-		int GetRectArea(int x, int y, int edge) const;
-		void CutByRect(int x, int y, int edge, int& left_area);
-
-	private:
-		void Load(const bool* pixels, int width, int height);
-
-	private:
-		std::map<int, std::map<int, int> > m_lines;		
-
-	}; // EdgeTable
-
 	struct Rect
 	{
 		Rect(int x, int y, int e) : x(x), y(y), edge(e) {}
@@ -44,6 +16,46 @@ private:
 		int x, y;
 		int edge;
 	};
+
+public:
+	RegularRectCut(const d2d::Image& image);
+	~RegularRectCut();
+
+	void AutoCut();
+
+	const std::vector<Rect>& GetResult() { return m_result; }
+
+private:
+	void LoadPixels(const d2d::Image& image);
+	void BuildEdgeTable();
+
+	int AutoCut(int edge, int& ret_x, int& ret_y);
+
+private:
+	class EdgeTable
+	{
+	public:
+		EdgeTable(const bool* pixels, int width, int height);
+
+		int GetRectArea(int x, int y, int edge, int limit) const;
+		void CutByRect(int x, int y, int edge, int& left_area);
+
+	private:
+		void Load(const bool* pixels, int width, int height);
+
+	private:
+		struct Line
+		{
+			Line() : area(0) {}
+
+			int area;
+			std::map<int, int> worlds;
+		};
+
+	private:
+		std::map<int, Line> m_lines;		
+
+	}; // EdgeTable
 
 private:
 	bool* m_pixels;
