@@ -22,19 +22,21 @@ RegularRectCut::~RegularRectCut()
 
 void RegularRectCut::AutoCut()
 {
-	for (int i = 0; i < EDGE_COUNT && m_left_area > 0; ++i)
-	{
-		bool success = false;
-		do {
-			int edge = EDGE_LIST[i];
-			int x, y;
-			int area = AutoCut(edge, x, y);
-			success = area > (int)(edge*edge*AREA_LIMIT);
-			if (success) {
-				m_hor_table->CutByRect(x, y, edge, m_left_area);
-				m_result.push_back(Rect(x, y, edge));
-			}
-		} while(success && m_left_area > 0);
+	AutoCut(AREA_LIMIT);
+	if (m_left_area > 0) {
+		AutoCut(AREA_LIMIT * 0.8f);
+	}
+	if (m_left_area > 0) {
+		AutoCut(AREA_LIMIT * 0.6f);
+	}
+
+	// cut others by the smaller one
+	int edge = 4;
+	while (m_left_area > 0) {
+		int x, y;
+		int area = AutoCut(edge, x, y);
+		m_hor_table->CutByRect(x, y, edge, m_left_area);
+		m_result.push_back(Rect(x, y, edge));
 	}
 }
 
@@ -65,11 +67,31 @@ void RegularRectCut::LoadPixels(const d2d::Image& image)
 		}
 		ptr += 4;
 	}
+
+	m_density = (float)m_left_area / (m_width*m_height);
 }
 
 void RegularRectCut::BuildEdgeTable()
 {
 	m_hor_table = new EdgeTable(m_pixels, m_width, m_height);
+}
+
+void RegularRectCut::AutoCut(float limit)
+{
+	for (int i = 0; i < EDGE_COUNT && m_left_area > 0; ++i)
+	{
+		bool success = false;
+		do {
+			int edge = EDGE_LIST[i];
+			int x, y;
+			int area = AutoCut(edge, x, y);
+			success = area > (int)(edge*edge*limit);
+			if (success) {
+				m_hor_table->CutByRect(x, y, edge, m_left_area);
+				m_result.push_back(Rect(x, y, edge));
+			}
+		} while(success && m_left_area > 0);
+	}
 }
 
 int RegularRectCut::AutoCut(int edge, int& ret_x, int& ret_y)

@@ -33,6 +33,7 @@ private:
 	void LoadPixels(const d2d::Image& image);
 	void BuildEdgeTable();
 
+	void AutoCut(float limit);
 	int AutoCut(int edge, int& ret_x, int& ret_y);
 
 private:
@@ -65,6 +66,8 @@ private:
 	bool* m_pixels;
 	int m_width, m_height;
 	int m_left_area;
+
+	float m_density;
 
 	EdgeTable* m_hor_table;
 
