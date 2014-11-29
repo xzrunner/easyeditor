@@ -49,6 +49,7 @@ void TrimImage::Trigger(const std::string& dir)
 			const unsigned char* pixels = proc.clip(r.xMin, r.xMax, r.yMin, r.yMax);
 			d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), 
 				filepath.ToStdString(), d2d::ImageSaver::e_png);
+			delete[] pixels;
 		}
 	}
 }

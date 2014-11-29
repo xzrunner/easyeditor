@@ -286,27 +286,11 @@
 				Name="image"
 				>
 				<File
-					RelativePath="..\..\..\src\easydb_cl\OutlineImage.cpp"
+					RelativePath="..\..\..\src\easydb_cl\RegularRectCut.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb_cl\OutlineImage.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\OutlineToPolygon.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\OutlineToPolygon.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\RotateTrimImage.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\RotateTrimImage.h"
+					RelativePath="..\..\..\src\easydb_cl\RegularRectCut.h"
 					>
 				</File>
 				<File
@@ -325,14 +309,46 @@
 					RelativePath="..\..\..\src\easydb\TransToGif.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\easydb\TrimImage.cpp"
+				<Filter
+					Name="trim"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb\TrimImage.h"
+					<File
+						RelativePath="..\..\..\src\easydb_cl\RotateTrimImage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\RotateTrimImage.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\TrimImage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\TrimImage.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="outline"
 					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\OutlineImage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\OutlineImage.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\OutlineToPolygon.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\OutlineToPolygon.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="json"

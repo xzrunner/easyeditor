@@ -21,6 +21,7 @@
 #include "OutlineToPolygon.h"
 #include "FixSpriteColor.h"
 #include "RotateTrimImage.h"
+#include "RegularRectCut.h"
 
 namespace edb
 {
@@ -48,6 +49,7 @@ void CommandLoader::Init()
 	fc->Register(OutlineToPolygon::Create());
 	fc->Register(FixSpriteColor::Create());
 	fc->Register(RotateTrimImage::Create());
+	fc->Register(RegularRectCut::Create());
 }
 
 }
