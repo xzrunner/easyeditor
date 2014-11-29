@@ -92,6 +92,11 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 	}
 
 	m_editPanel->Refresh();
+
+	wxString msg;
+	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
+	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
+
 }
 
 }

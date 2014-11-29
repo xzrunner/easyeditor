@@ -25,6 +25,10 @@ public:
 
 	const std::vector<Rect>& GetResult() { return m_result; }
 
+	// statics
+	int GetLeftArea() const { return m_left_area; }
+	int GetUseArea() const;
+
 private:
 	void LoadPixels(const d2d::Image& image);
 	void BuildEdgeTable();

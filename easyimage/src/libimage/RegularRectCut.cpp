@@ -38,6 +38,15 @@ void RegularRectCut::AutoCut()
 	}
 }
 
+int RegularRectCut::GetUseArea() const
+{
+	int area = 0;
+	for (int i = 0, n = m_result.size(); i < n; ++i) {
+		area += m_result[i].edge * m_result[i].edge;
+	}
+	return area;
+}
+
 void RegularRectCut::LoadPixels(const d2d::Image& image)
 {
 	m_width = image.originWidth();
