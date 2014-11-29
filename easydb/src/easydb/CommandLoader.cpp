@@ -22,6 +22,7 @@
 #include "FixSpriteColor.h"
 #include "RotateTrimImage.h"
 #include "RegularRectCut.h"
+#include "RotateImage.h"
 
 namespace edb
 {
@@ -50,6 +51,7 @@ void CommandLoader::Init()
 	fc->Register(FixSpriteColor::Create());
 	fc->Register(RotateTrimImage::Create());
 	fc->Register(RegularRectCut::Create());
+	fc->Register(RotateImage::Create());
 }
 
 }

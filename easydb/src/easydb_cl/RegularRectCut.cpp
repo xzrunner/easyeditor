@@ -35,6 +35,8 @@ void RegularRectCut::Run(int argc, char *argv[])
 
 void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_dir)
 {
+// 	d2d::ShaderMgr::Instance()->reload();
+
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
 	int idx = 0;
@@ -53,6 +55,10 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
 			eimage::RegularRectCut cut(*image);
 			cut.AutoCut();
+
+			wxString msg;
+			msg.Printf("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea());
+			std::cout << msg << std::endl;
 
 			const std::vector<eimage::RegularRectCut::Rect>& result = cut.GetResult();
 			eimage::ImageProcessor img_cut(image);

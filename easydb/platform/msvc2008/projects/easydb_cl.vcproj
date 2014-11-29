@@ -294,6 +294,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\RotateImage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\RotateImage.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\Snapshoot.cpp"
 					>
 				</File>
