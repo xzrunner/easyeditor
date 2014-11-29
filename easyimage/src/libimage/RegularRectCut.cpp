@@ -182,7 +182,7 @@ CutByRect(int x, int y, int edge, int& left_area)
 {
  	std::map<int, Line>::iterator 
  		itr_y_start = m_lines.lower_bound(y),
- 		itr_y_end = m_lines.upper_bound(y+edge),
+ 		itr_y_end = m_lines.upper_bound(y+edge-1),
  		itr;
  	for (itr = itr_y_start; itr != itr_y_end; )
  	{
