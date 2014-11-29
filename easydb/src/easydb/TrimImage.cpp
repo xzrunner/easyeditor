@@ -9,7 +9,7 @@ namespace edb
 
 std::string TrimImage::Command() const
 {
-	return "trim";
+	return "trim-image";
 }
 
 std::string TrimImage::Description() const
