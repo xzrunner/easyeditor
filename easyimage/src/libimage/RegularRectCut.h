@@ -11,10 +11,11 @@ class RegularRectCut
 public:
 	struct Rect
 	{
-		Rect(int x, int y, int e) : x(x), y(y), edge(e) {}
+		Rect(int x, int y, int w, int h) 
+			: x(x), y(y), w(w), h(h) {}
 
 		int x, y;
-		int edge;
+		int w, h;
 	};
 
 public:
@@ -34,7 +35,7 @@ private:
 	void BuildEdgeTable();
 
 	void AutoCut(float limit);
-	int AutoCut(int edge, int& ret_x, int& ret_y);
+	int AutoCut(int w, int h, int& ret_x, int& ret_y);
 
 private:
 	class EdgeTable
@@ -42,8 +43,8 @@ private:
 	public:
 		EdgeTable(const bool* pixels, int width, int height);
 
-		int GetRectArea(int x, int y, int edge, int limit) const;
-		void CutByRect(int x, int y, int edge, int& left_area);
+		int GetRectArea(int x, int y, int w, int h, int limit) const;
+		void CutByRect(int x, int y, int w, int h, int& left_area);
 
 	private:
 		void Load(const bool* pixels, int width, int height);

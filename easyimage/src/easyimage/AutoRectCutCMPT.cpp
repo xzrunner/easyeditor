@@ -87,8 +87,9 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 	for (int i = 0, n = result.size(); i < n; ++i) {
 		int x = result[i].x,
 			y = result[i].y,
-			e = result[i].edge;
-		rects.insert(d2d::Rect(d2d::Vector(x, y), d2d::Vector(x+e, y+e)), true);
+			w = result[i].w,
+			h = result[i].h;
+		rects.insert(d2d::Rect(d2d::Vector(x, y), d2d::Vector(x+w, y+h)), true);
 	}
 
 	m_editPanel->Refresh();

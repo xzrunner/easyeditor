@@ -3,10 +3,10 @@
 namespace eimage
 {
 
-static const int EDGE_LIST[] = {128, 64, 32, 16, 8};
-static const int EDGE_COUNT = 5;
+static const int EDGE_LIST[] = {512, 256, 128, 64, 32, 16, 8};
+static const int EDGE_COUNT = 7;
 
-static const float AREA_LIMIT_TIMES = 1.5f;
+static const float AREA_LIMIT_TIMES = 1.7f;
 
 static const float TRY_MAX_COUNT = 3;
 static const float TRY_FACTOR = 0.8f;
@@ -27,7 +27,8 @@ RegularRectCut::~RegularRectCut()
 
 void RegularRectCut::AutoCut()
 {
-	float limit = m_density * AREA_LIMIT_TIMES;
+//	float limit = m_density * AREA_LIMIT_TIMES;
+	float limit = m_density;
 	int count = 0;
 	while (m_left_area > 0 && count < TRY_MAX_COUNT) {
 		AutoCut(limit);
@@ -38,12 +39,12 @@ void RegularRectCut::AutoCut()
 	// cut others by the smaller one
 	while (m_left_area > 0) {
 		int x, y;
-		int area = AutoCut(TRY_MIN_EDGE, x, y);
+		int area = AutoCut(TRY_MIN_EDGE, TRY_MIN_EDGE, x, y);
 		if (area <= TRY_MIN_LIMIT) {
 			break;
 		}
-		m_hor_table->CutByRect(x, y, TRY_MIN_EDGE, m_left_area);
-		m_result.push_back(Rect(x, y, TRY_MIN_EDGE));
+		m_hor_table->CutByRect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE, m_left_area);
+		m_result.push_back(Rect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE));
 	}
 }
 
@@ -51,7 +52,7 @@ int RegularRectCut::GetUseArea() const
 {
 	int area = 0;
 	for (int i = 0, n = m_result.size(); i < n; ++i) {
-		area += m_result[i].edge * m_result[i].edge;
+		area += m_result[i].w * m_result[i].h;
 	}
 	return area;
 }
@@ -87,27 +88,46 @@ void RegularRectCut::AutoCut(float limit)
 {
 	for (int i = 0; i < EDGE_COUNT && m_left_area > 0; ++i)
 	{
-		bool success = false;
-		do {
-			int edge = EDGE_LIST[i];
-			int x, y;
-			int area = AutoCut(edge, x, y);
-			success = area > (int)(edge*edge*limit);
-			if (success) {
-				m_hor_table->CutByRect(x, y, edge, m_left_area);
-				m_result.push_back(Rect(x, y, edge));
+		int edge = EDGE_LIST[i];
+		if (edge > m_width && edge > m_height ||
+			(edge >> 1) > m_width ||
+			(edge >> 1) > m_height) {
+				continue;
+		}
+		for (int j = 0; j < 3; ++j)
+		{
+			int w, h;
+			if (j == 0) {
+				w = h = edge;
+			} else if (j == 1) {
+				w = edge;
+				h = (edge >> 1);
+			} else {
+				w = (edge >> 1);
+				h = edge;
 			}
-		} while(success && m_left_area > 0);
+
+			bool success = false;
+			do {
+				int x, y;
+				int area = AutoCut(w, h, x, y);
+				success = area > (int)(w*h*limit);
+				if (success) {
+					m_hor_table->CutByRect(x, y, w, h, m_left_area);
+					m_result.push_back(Rect(x, y, w, h));
+				}
+			} while(success && m_left_area > 0);	
+		}
 	}
 }
 
-int RegularRectCut::AutoCut(int edge, int& ret_x, int& ret_y)
+int RegularRectCut::AutoCut(int w, int h, int& ret_x, int& ret_y)
 {
 	int max_area = -1;
 	int max_x, max_y;
-	for (int y = 0, up = m_height - edge; y <= up; y+=1) {
-		for (int x = 0, right = m_width - edge; x <= right; x+=1) {
-			int area = m_hor_table->GetRectArea(x, y, edge, max_area);
+	for (int y = 0, up = m_height - h; y <= up; y+=1) {
+		for (int x = 0, right = m_width - w; x <= right; x+=1) {
+			int area = m_hor_table->GetRectArea(x, y, w, h, max_area);
 			if (area > max_area) {
 				max_area = area;
 				max_x = x;
@@ -136,12 +156,12 @@ EdgeTable(const bool* pixels, int width, int height)
 }
 
 int RegularRectCut::EdgeTable::
-GetRectArea(int x, int y, int edge, int limit) const
+GetRectArea(int x, int y, int w, int h, int limit) const
 {
 	int area = 0;
 	std::map<int, Line>::const_iterator 
 		itr_y_start = m_lines.lower_bound(y),
-		itr_y_end = m_lines.lower_bound(y+edge),
+		itr_y_end = m_lines.lower_bound(y+h),
 		itr;
 
 	int raw_area = 0;
@@ -163,17 +183,17 @@ GetRectArea(int x, int y, int edge, int limit) const
 			if (start < x) {
 				if (end < x) {
 					continue;
-				} else if (end >= x && end < x+edge) {
+				} else if (end >= x && end < x + w) {
 					area += end-x+1;
 				} else {
-					area += edge;
+					area += w;
 					break;
 				}
-			} else if (start >= x && start < x + edge) {
-				if (end < x+edge) {
+			} else if (start >= x && start < x + w) {
+				if (end < x + w) {
 					area += end-start+1;
 				} else {
-					area += x+edge-start;
+					area += x+w-start;
 					break;
 				}
 			} else {
@@ -185,11 +205,11 @@ GetRectArea(int x, int y, int edge, int limit) const
 }
 
 void RegularRectCut::EdgeTable::
-CutByRect(int x, int y, int edge, int& left_area)
+CutByRect(int x, int y, int w, int h, int& left_area)
 {
  	std::map<int, Line>::iterator 
  		itr_y_start = m_lines.lower_bound(y),
- 		itr_y_end = m_lines.upper_bound(y+edge-1),
+ 		itr_y_end = m_lines.upper_bound(y+h-1),
  		itr;
  	for (itr = itr_y_start; itr != itr_y_end; )
  	{
@@ -204,7 +224,7 @@ CutByRect(int x, int y, int edge, int& left_area)
  				if (end < x) {
 					++itr_world;
  					continue;
- 				} else if (end >= x && end < x+edge) {
+ 				} else if (end >= x && end < x+w) {
 					int area = end-x+1;
  					itr_world->second -= area;
 					line.area -= area;
@@ -215,25 +235,25 @@ CutByRect(int x, int y, int edge, int& left_area)
 						++itr_world;
 					}
  				} else {
-					left_area -= edge;
-					line.area -= edge;
+					left_area -= w;
+					line.area -= w;
 					itr_world->second -= end-x+1;
-					line.worlds.insert(std::make_pair(x+edge, end-(x+edge)+1));
+					line.worlds.insert(std::make_pair(x+w, end-(x+w)+1));
 					break;
  				}
- 			} else if (start >= x && start < x + edge) {
- 				if (end < x+edge) {
+ 			} else if (start >= x && start < x + w) {
+ 				if (end < x+w) {
 					int area = end-start+1;
 					line.area -= area;
 					left_area -= area;
  					itr_world = line.worlds.erase(itr_world);
  				} else {
-					int area = x+edge-start;
+					int area = x+w-start;
 					line.area -= area;
 					left_area -= area;
 
 					line.worlds.erase(itr_world);
-					line.worlds.insert(std::make_pair(x+edge, end-(x+edge)+1));
+					line.worlds.insert(std::make_pair(x+w, end-(x+w)+1));
 
 					break;
  				}

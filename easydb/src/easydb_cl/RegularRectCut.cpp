@@ -65,9 +65,9 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
 				const eimage::RegularRectCut::Rect& r = result[i];
-				const unsigned char* pixels = img_cut.clip(r.x, r.x+r.edge, r.y, r.y+r.edge);
+				const unsigned char* pixels = img_cut.clip(r.x, r.x+r.w, r.y, r.y+r.h);
 				std::string out_path = dst_dir + "\\" + wxString::FromDouble(idx++);
-				d2d::ImageSaver::storeToFile(pixels, r.edge, r.edge, out_path, d2d::ImageSaver::e_png);
+				d2d::ImageSaver::storeToFile(pixels, r.w, r.h, out_path, d2d::ImageSaver::e_png);
 				delete[] pixels;
 			}
 
