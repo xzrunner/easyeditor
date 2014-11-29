@@ -6,7 +6,12 @@ namespace eimage
 static const int EDGE_LIST[] = {128, 64, 32, 16, 8};
 static const int EDGE_COUNT = 5;
 
-static const float AREA_LIMIT = 0.5f;
+static const float AREA_LIMIT_TIMES = 1.5f;
+
+static const float TRY_MAX_COUNT = 3;
+static const float TRY_FACTOR = 0.8f;
+static const int TRY_MIN_EDGE = 4;
+static const int TRY_MIN_LIMIT = 2;
 
 RegularRectCut::RegularRectCut(const d2d::Image& image)
 {
@@ -22,21 +27,23 @@ RegularRectCut::~RegularRectCut()
 
 void RegularRectCut::AutoCut()
 {
-	AutoCut(AREA_LIMIT);
-	if (m_left_area > 0) {
-		AutoCut(AREA_LIMIT * 0.8f);
-	}
-	if (m_left_area > 0) {
-		AutoCut(AREA_LIMIT * 0.6f);
+	float limit = m_density * AREA_LIMIT_TIMES;
+	int count = 0;
+	while (m_left_area > 0 && count < TRY_MAX_COUNT) {
+		AutoCut(limit);
+		limit *= TRY_FACTOR;
+		++count;
 	}
 
 	// cut others by the smaller one
-	int edge = 4;
 	while (m_left_area > 0) {
 		int x, y;
-		int area = AutoCut(edge, x, y);
-		m_hor_table->CutByRect(x, y, edge, m_left_area);
-		m_result.push_back(Rect(x, y, edge));
+		int area = AutoCut(TRY_MIN_EDGE, x, y);
+		if (area <= TRY_MIN_LIMIT) {
+			break;
+		}
+		m_hor_table->CutByRect(x, y, TRY_MIN_EDGE, m_left_area);
+		m_result.push_back(Rect(x, y, TRY_MIN_EDGE));
 	}
 }
 
