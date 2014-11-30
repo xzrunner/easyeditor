@@ -173,7 +173,7 @@ int RegularRectCut::CalBestRectPos(int w, int h, int& ret_x, int& ret_y)
 
 void RegularRectCut::PoseProcessResult()
 {
- 	RectPostProcessor processor(m_result, m_width, m_height);
+ 	RectPostProcessor processor(m_result, m_width, m_height, m_pixels);
  	processor.MoveToNoCover();
  	std::vector<Rect> result;
  	processor.LoadResult(result);

@@ -11,7 +11,8 @@ namespace eimage
 class RectPostProcessor
 {
 public:
-	RectPostProcessor(const std::vector<Rect>& rects, int width, int height);
+	RectPostProcessor(const std::vector<Rect>& rects, 
+		int width, int height, bool* ori_pixels);
 	~RectPostProcessor();
 
 	void MoveToNoCover();
@@ -23,7 +24,9 @@ public:
 private:
 	struct Item;
 
-	void LoadPixels(const std::vector<Rect>& rects);
+	void LoadPixels(const std::vector<Rect>& rects, bool* ori_pixels);
+
+	void SetFreedom(Item* item);
 
 	enum Direction
 	{
@@ -32,15 +35,19 @@ private:
 		e_down,
 		e_up
 	};
-	void MoveRect(Item* item, Direction dir);
+	bool MoveItem(Item* item, Direction dir);
 
 private:
 	struct Item
 	{
-		Item(const Rect& r) : r(r), is_static(false) {}
+		Item(const Rect& r) : r(r) {
+			to_left = to_right = to_down = to_up = true;
+		}
 
 		Rect r;
-		bool is_static;
+
+		bool to_left, to_right, to_down, to_up;
+
 	}; // Item
 
 	class ItemCmp
@@ -51,28 +58,36 @@ private:
 		}
 	}; // ItemCmp
 
-	struct Pixel
+	class Pixel
 	{
+	public:
+		Pixel(bool has_data) : m_has_data(has_data) {}
+
 		void Add(Item* item) {
-			items.insert(item);
+			m_items.insert(item);
 		}
 		void Remove(Item* item) {
-			items.erase(item);
+			m_items.erase(item);
 		}
 		bool Find(Item* item) const {
-			return items.find(item) != items.end();
+			return m_items.find(item) != m_items.end();
 		}
 		bool IsCoverd() const {
-			return items.size() > 1;
+			return m_items.size() > 1;
 		}
 		bool IsEmpty() const {
-			return items.empty();
-		}
-		bool IsOnlyOneStatic() const {
-			return items.size() == 1 && (*items.begin())->is_static;
+			return m_items.empty();
 		}
 
-		std::set<Item*> items;
+		bool HasData() const {
+			return m_has_data;
+		}
+
+	private:
+		std::set<Item*> m_items;
+
+		bool m_has_data;
+
 	}; // Pixel
 
 private:
