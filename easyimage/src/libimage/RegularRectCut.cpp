@@ -7,7 +7,8 @@ namespace eimage
 static const int EDGE_LIST[] = {512, 256, 128, 64, 32, 16, 8};
 static const int EDGE_COUNT = 7;
 
-static const float AREA_LIMIT_TIMES = 1.7f;
+//static const float AREA_LIMIT_TIMES = 1.7f;
+static const float AREA_LIMIT_TIMES = 1.4f;
 
 static const float TRY_MAX_COUNT = 3;
 static const float TRY_FACTOR = 0.8f;
@@ -18,14 +19,12 @@ RegularRectCut::RegularRectCut(const d2d::Image& image)
 {
 	LoadPixels(image);
 
-//	m_hor_table = new PixelEdgeTable(m_pixels, m_width, m_height);
 	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height);
 }
 
 RegularRectCut::~RegularRectCut()
 {
 	delete[] m_pixels;
-//	delete m_hor_table;
 	delete m_area_array;
 }
 
@@ -47,7 +46,6 @@ void RegularRectCut::AutoCut()
 		if (area <= TRY_MIN_LIMIT) {
 			break;
 		}
-//		m_hor_table->CutByRect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE, m_left_area);
 		m_area_array->CutByRect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE, m_left_area);
 
 		m_result.push_back(Rect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE));
@@ -114,7 +112,6 @@ void RegularRectCut::AutoCut(float limit)
 				int area = AutoCut(w, h, x, y);
 				success = area > (int)(w*h*limit);
 				if (success) {
-					//m_hor_table->CutByRect(x, y, w, h, m_left_area);
 					m_area_array->CutByRect(x, y, w, h, m_left_area);
 					m_result.push_back(Rect(x, y, w, h));
 				}
@@ -129,7 +126,6 @@ int RegularRectCut::AutoCut(int w, int h, int& ret_x, int& ret_y)
 	int max_x, max_y;
 	for (int y = 0, up = m_height - h; y <= up; y+=1) {
 		for (int x = 0, right = m_width - w; x <= right; x+=1) {
-			//int area = m_hor_table->GetRectArea(x, y, w, h, max_area);
 			int area = m_area_array->GetRectArea(x, y, w, h);
 			if (area > max_area) {
 				max_area = area;
