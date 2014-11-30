@@ -185,6 +185,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libimage\Rect.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\RectPostProcessor.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\RectPostProcessor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libimage\RegularRectCut.cpp"
 				>
 			</File>

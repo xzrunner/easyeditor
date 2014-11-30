@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "Rect.h"
+
 namespace eimage
 {
 
@@ -10,16 +12,6 @@ class PixelAreaArray;
 
 class RegularRectCut
 {
-public:
-	struct Rect
-	{
-		Rect(int x, int y, int w, int h) 
-			: x(x), y(y), w(w), h(h) {}
-
-		int x, y;
-		int w, h;
-	};
-
 public:
 	RegularRectCut(const d2d::Image& image);
 	~RegularRectCut();
@@ -37,6 +29,8 @@ private:
 
 	void AutoCutWithLimit(float limit);
 	int CalBestRectPos(int w, int h, int& ret_x, int& ret_y);
+
+	void PoseProcessResult();
 
 private:
 	bool* m_pixels;

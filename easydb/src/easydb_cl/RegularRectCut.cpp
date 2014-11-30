@@ -60,11 +60,11 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			msg.Printf("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea());
 			std::cout << msg << std::endl;
 
-			const std::vector<eimage::RegularRectCut::Rect>& result = cut.GetResult();
+			const std::vector<eimage::Rect>& result = cut.GetResult();
 			eimage::ImageProcessor img_cut(image);
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
-				const eimage::RegularRectCut::Rect& r = result[i];
+				const eimage::Rect& r = result[i];
 				const unsigned char* pixels = img_cut.clip(r.x, r.x+r.w, r.y, r.y+r.h);
 				std::string out_path = dst_dir + "\\" + wxString::FromDouble(idx++);
 				d2d::ImageSaver::storeToFile(pixels, r.w, r.h, out_path, d2d::ImageSaver::e_png);

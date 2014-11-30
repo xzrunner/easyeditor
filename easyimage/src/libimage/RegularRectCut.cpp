@@ -1,5 +1,6 @@
 #include "RegularRectCut.h"
 #include "PixelAreaArray.h"
+#include "RectPostProcessor.h"
 
 namespace eimage
 {
@@ -49,6 +50,8 @@ void RegularRectCut::AutoCut()
 
 		m_result.push_back(Rect(x, y, TRY_MIN_EDGE, TRY_MIN_EDGE));
 	}
+
+	PoseProcessResult();
 }
 
 int RegularRectCut::GetUseArea() const
@@ -166,6 +169,15 @@ int RegularRectCut::CalBestRectPos(int w, int h, int& ret_x, int& ret_y)
 		ret_y = max_y;
 		return max_area;
 	}
+}
+
+void RegularRectCut::PoseProcessResult()
+{
+ 	RectPostProcessor processor(m_result, m_width, m_height);
+ 	processor.MoveToNoCover();
+ 	std::vector<Rect> result;
+ 	processor.LoadResult(result);
+	m_result = result;
 }
 
 }

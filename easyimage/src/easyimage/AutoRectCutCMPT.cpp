@@ -82,7 +82,8 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 
 	RegularRectCut cut(*img);
 	cut.AutoCut();
-	const std::vector<RegularRectCut::Rect>& result = cut.GetResult();
+
+	const std::vector<Rect>& result = cut.GetResult();
 	RectMgr& rects = static_cast<AutoRectCutOP*>(m_editOP)->getRectMgr();
 	for (int i = 0, n = result.size(); i < n; ++i) {
 		int x = result[i].x,
