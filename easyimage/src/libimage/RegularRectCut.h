@@ -35,8 +35,8 @@ public:
 private:
 	void LoadPixels(const d2d::Image& image);
 
-	void AutoCut(float limit);
-	int AutoCut(int w, int h, int& ret_x, int& ret_y);
+	void AutoCutWithLimit(float limit);
+	int CalBestRectPos(int w, int h, int& ret_x, int& ret_y);
 
 private:
 	bool* m_pixels;
