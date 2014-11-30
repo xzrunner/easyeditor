@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "PixelEdgeTable.h"
+
 namespace eimage
 {
 
@@ -32,36 +34,9 @@ public:
 
 private:
 	void LoadPixels(const d2d::Image& image);
-	void BuildEdgeTable();
 
 	void AutoCut(float limit);
 	int AutoCut(int w, int h, int& ret_x, int& ret_y);
-
-private:
-	class EdgeTable
-	{
-	public:
-		EdgeTable(const bool* pixels, int width, int height);
-
-		int GetRectArea(int x, int y, int w, int h, int limit) const;
-		void CutByRect(int x, int y, int w, int h, int& left_area);
-
-	private:
-		void Load(const bool* pixels, int width, int height);
-
-	private:
-		struct Line
-		{
-			Line() : area(0) {}
-
-			int area;
-			std::map<int, int> worlds;
-		};
-
-	private:
-		std::map<int, Line> m_lines;		
-
-	}; // EdgeTable
 
 private:
 	bool* m_pixels;
@@ -70,7 +45,7 @@ private:
 
 	float m_density;
 
-	EdgeTable* m_hor_table;
+	PixelEdgeTable* m_hor_table;
 
 	std::vector<Rect> m_result;
 
