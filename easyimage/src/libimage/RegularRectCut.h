@@ -3,10 +3,10 @@
 
 #include <drag2d.h>
 
-#include "PixelEdgeTable.h"
-
 namespace eimage
 {
+
+class PixelAreaArray;
 
 class RegularRectCut
 {
@@ -45,7 +45,8 @@ private:
 
 	float m_density;
 
-	PixelEdgeTable* m_hor_table;
+//	PixelEdgeTable* m_hor_table;
+	PixelAreaArray* m_area_array;
 
 	std::vector<Rect> m_result;
 

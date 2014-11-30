@@ -169,6 +169,14 @@
 			Name="rectcut"
 			>
 			<File
+				RelativePath="..\..\..\src\libimage\PixelAreaArray.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\PixelAreaArray.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libimage\PixelEdgeTable.cpp"
 				>
 			</File>
