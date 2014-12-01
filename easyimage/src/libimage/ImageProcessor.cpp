@@ -7,7 +7,7 @@
 namespace eimage
 {
 
-ImageProcessor::ImageProcessor(d2d::Image* image)
+ImageProcessor::ImageProcessor(const d2d::Image* image)
 	: m_image(image)
 {	
 }

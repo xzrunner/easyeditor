@@ -13,7 +13,7 @@ namespace eimage
 class ImageProcessor
 {
 public:
-	ImageProcessor(d2d::Image* image);
+	ImageProcessor(const d2d::Image* image);
 
 	const unsigned char* clip(int xmin, int xmax, int ymin, int ymax) const;
 

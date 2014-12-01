@@ -17,13 +17,15 @@ public:
 protected:
 	virtual wxSizer* initLayout();
 
-	void OnAddRect(wxCommandEvent& event);
+	//void OnAddRect(wxCommandEvent& event);
 	void OnCreateRects(wxCommandEvent& event);
+
+	void OnOutputRects(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;
 
-	wxChoice *m_width_choice, *m_height_choice;
+	//wxChoice *m_width_choice, *m_height_choice;
 
 }; // AutoRectCutCMPT
 
