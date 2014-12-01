@@ -104,7 +104,66 @@ void RectPostProcessor::RemoveUnnecessary()
 
 void RectPostProcessor::Merge()
 {
-	
+	bool merge = true;
+	do
+	{
+		merge = false;
+
+		std::multiset<Item*, ItemCmp>::const_iterator itr;
+		for (itr = m_items.begin(); itr != m_items.end(); ) {
+			Item* item = *itr;
+			const Rect& r = item->r;
+			// left
+			if (r.x > 0) {
+				bool find = false;
+				for (int y = r.y, up = r.y + r.h; y < up; ++y) {
+					if (y < 0 || y >= m_height) {
+						continue;
+					}
+					Pixel* p = m_pixels[y*m_width+r.x-1];
+					Item* new_item = p->FindSpecialRect(-1, r.y, -1, r.h);
+					if (new_item) {
+						find = true;
+						MergeRect(item, new_item);
+						itr = m_items.erase(itr);
+					}
+					break;
+				}
+				if (find) {
+					merge = true;
+					continue;
+				}
+			}
+			// down
+			if (r.y > 0) {
+				bool find = false;
+				for (int x = r.x, right = r.x + r.w; x < right; ++x) {
+					if (x < 0 || x >= m_width) {
+						continue;
+					}
+					Pixel* p = m_pixels[(r.y-1)*m_width+x];
+					Item* new_item = p->FindSpecialRect(r.x, -1, r.w, -1);
+					if (new_item) {
+						if (r.w == 64) {
+							int zz = 0;
+						}
+
+						find = true;
+						MergeRect(item, new_item);
+						itr = m_items.erase(itr);
+					}
+					break;
+				}
+				if (find) {
+					merge = true;
+					continue;
+				}
+			}
+
+			++itr;
+		}
+
+	} while (merge);
 }
 
 void RectPostProcessor::LoadResult(std::vector<Rect>& rects) const
@@ -346,6 +405,51 @@ bool RectPostProcessor::MoveItem(Item* item, Direction dir)
 	} else {
 		return true;
 	}
+}
+
+void RectPostProcessor::MergeRect(Item* remove, Item* newone)
+{
+	const Rect& r = remove->r;
+	for (int y = r.y, up = r.y+r.h; y < up; ++y) {
+		for (int x = r.x, right = r.x+r.w; x < right; ++x) {
+			if (x >= 0 && x < m_width &&
+				y >= 0 && y < m_height)
+			{
+				Pixel* p = m_pixels[y*m_width+x];
+				p->Remove(remove);
+				p->Add(newone);
+			}
+		}
+	}
+	Rect& newr = newone->r;
+	if (r.y == newr.y && r.h == newr.h) {
+		int x = std::min(r.x, newr.x);
+		newr.w = std::max(r.x+r.w, newr.x+newr.w) - x;
+		newr.x = x;
+	} else {
+		assert(r.x == newr.x && r.w == newr.w);
+		int y = std::min(r.y, newr.y);
+		newr.h = std::max(r.y+r.h, newr.y+newr.h) - y;
+		newr.y = y;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class RectPostProcessor::Pixel
+//////////////////////////////////////////////////////////////////////////
+
+RectPostProcessor::Item* RectPostProcessor::Pixel::
+FindSpecialRect(int x, int y, int w, int h) const
+{
+	std::set<Item*>::const_iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr) {
+		const Rect& r = (*itr)->r;
+		if (r.y == y && r.h == h ||
+			r.x == x && r.w == w) {
+			return (*itr);
+		}
+	}
+	return NULL;
 }
 
 }

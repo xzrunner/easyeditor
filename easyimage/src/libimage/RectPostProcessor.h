@@ -39,6 +39,8 @@ private:
 	};
 	bool MoveItem(Item* item, Direction dir);
 
+	void MergeRect(Item* remove, Item* newone);
+
 private:
 	struct Item
 	{
@@ -84,6 +86,8 @@ private:
 		bool HasData() const {
 			return m_has_data;
 		}
+
+		Item* FindSpecialRect(int x, int y, int w, int h) const;
 
 	private:
 		std::set<Item*> m_items;
