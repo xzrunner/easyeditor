@@ -53,11 +53,6 @@ void ExtractOutlineFine::OutlineByAddNode(float area_tol, float perimeter_tol,
 
 		float area = d2d::Math::GetPolygonArea(m_fine_border);
 
-		// debug
-		if (count == 5) {
-			int zz = 0;
-		}
-
 		// remove one node
 		d2d::Vector r_new0, r_new1;
 		int r_idx = 0;
@@ -444,13 +439,6 @@ void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vect
 
 						// !d2d::Math::isPointInArea(curr_mid, m_raw_border_merged)
 
-					if ((int)start.x == 193 && (int)start.y == 355 && area > 510 &&
-						(int)end.x == 219 && (int)end.y == 361) {
-
-						bool test = d2d::Math::isPointInArea(curr_mid, m_raw_border_merged);
-
-						int zz = 0;
-					}
 					if (IsAddTriLeagal(start, end, curr_mid)) {
 						score = area;
 						mid = curr_mid;
