@@ -23,6 +23,7 @@
 #include "RotateTrimImage.h"
 #include "RegularRectCut.h"
 #include "RotateImage.h"
+#include "PackRegularRect.h"
 
 namespace edb
 {
@@ -52,6 +53,7 @@ void CommandLoader::Init()
 	fc->Register(RotateTrimImage::Create());
 	fc->Register(RegularRectCut::Create());
 	fc->Register(RotateImage::Create());
+	fc->Register(PackRegularRect::Create());
 }
 
 }

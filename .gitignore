@@ -122,6 +122,7 @@ easydb/platform/msvc2008/glfw
 easymesh/platform/msvc2008/easymesh
 easymesh/platform/msvc2008/libmesh
 easypacker/platform/msvc2008/easypacker
+easypacker/platform/msvc2008/libpacker
 easyimage/platform/msvc2008/easyimage
 easyimage/platform/msvc2008/libimage
 formation/platform/msvc2008/formation

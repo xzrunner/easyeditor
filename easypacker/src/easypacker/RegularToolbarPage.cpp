@@ -1,6 +1,7 @@
 #include "RegularToolbarPage.h"
 #include "StagePanel.h"
-#include "RegularRectPack.h"
+
+#include <easypacker.h>
 
 namespace epacker
 {
@@ -46,7 +47,7 @@ void RegularToolbarPage::OnSetSrcDir(wxCommandEvent& event)
 
 		wxArrayString files;
 		d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
-		RegularRectPack rrp(files);
+		libpacker::RegularRectPack rrp(files);
 
 		m_src_dir->SetValue(dir);
 	}

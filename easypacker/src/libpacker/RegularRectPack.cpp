@@ -1,8 +1,9 @@
 #include "RegularRectPack.h"
 
 #include <wx/tokenzr.h>
+#include <iostream>
 
-namespace epacker
+namespace libpacker
 {
 
 RegularRectPack::RegularRectPack(const wxArrayString& files)
@@ -10,11 +11,12 @@ RegularRectPack::RegularRectPack(const wxArrayString& files)
 	LoadData(files);
 
 	int count_ori = GetCombineCount();
-	Pack();
-	wxString msg;
-	msg.Printf("before: %d, after: %d", count_ori, GetCombineCount());
 
-	int zz = 0;
+	Pack();
+
+	wxString msg;
+	msg.Printf("before: %d, after: %d \n", count_ori, GetCombineCount());
+	std::cout << msg;
 }
 
 RegularRectPack::~RegularRectPack()

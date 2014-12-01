@@ -1,12 +1,12 @@
-#ifndef _EPACKER_REGULAR_RECT_PACK_H_
-#define _EPACKER_REGULAR_RECT_PACK_H_
+#ifndef _LIBPACKER_REGULAR_RECT_PACK_H_
+#define _LIBPACKER_REGULAR_RECT_PACK_H_
 
 #include <queue>
 #include <set>
 
 #include <wx/arrstr.h>
 
-namespace epacker
+namespace libpacker
 {
 
 class RegularRectPack
@@ -90,4 +90,4 @@ private:
 
 }
 
-#endif // _EPACKER_REGULAR_RECT_PACK_H_
+#endif // _LIBPACKER_REGULAR_RECT_PACK_H_
