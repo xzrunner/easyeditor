@@ -43,6 +43,8 @@ void TrimImage::Trigger(const std::string& dir)
 		wxString filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
+			std::cout << i << " / " << n << " : " << filepath << "\n";
+
 			d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filepath);		
 			eimage::ImageProcessor proc(img);
 			d2d::Rect r = proc.trim();
