@@ -73,9 +73,38 @@ void RectPostProcessor::MoveToNoCover()
 	}
 }
 
+void RectPostProcessor::RemoveUnnecessary()
+{
+	std::multiset<Item*, ItemCmp>::const_iterator itr;
+	for (itr = m_items.begin(); itr != m_items.end(); ) {
+		Item* item = *itr;
+		const Rect& r = item->r;
+
+		bool remove = true;
+		if (r.x < m_width && r.x+r.w > 0 &&
+			r.y < m_height && r.y+r.h > 0) {
+			for (int y = r.y, up = r.y + r.h; y < up && remove; ++y) {
+				for (int x = r.x, right = r.x + r.w; x < right && remove; ++x) {
+					Pixel* pixel = m_pixels[y*m_width+x];
+					if (x >= 0 && x < m_width && y >= 0 && y < m_height &&
+						pixel->HasData() && !pixel->IsCoverd()) {
+						remove = false;
+					}
+				}
+			}
+		}
+
+		if (remove) {
+			itr = m_items.erase(itr);
+		} else {
+			++itr;
+		}
+	}
+}
+
 void RectPostProcessor::Merge()
 {
-
+	
 }
 
 void RectPostProcessor::LoadResult(std::vector<Rect>& rects) const

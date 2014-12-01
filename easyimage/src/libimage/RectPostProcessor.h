@@ -16,7 +16,9 @@ public:
 	~RectPostProcessor();
 
 	void MoveToNoCover();
-	
+
+	void RemoveUnnecessary();
+
 	void Merge();
 
 	void LoadResult(std::vector<Rect>& rects) const;

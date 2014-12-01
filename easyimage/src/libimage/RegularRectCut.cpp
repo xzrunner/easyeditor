@@ -175,6 +175,7 @@ void RegularRectCut::PoseProcessResult()
 {
  	RectPostProcessor processor(m_result, m_width, m_height, m_pixels);
  	processor.MoveToNoCover();
+	processor.RemoveUnnecessary();
  	std::vector<Rect> result;
  	processor.LoadResult(result);
 	m_result = result;
