@@ -85,9 +85,8 @@ void RectPostProcessor::RemoveUnnecessary()
 			r.y < m_height && r.y+r.h > 0) {
 			for (int y = r.y, up = r.y + r.h; y < up && remove; ++y) {
 				for (int x = r.x, right = r.x + r.w; x < right && remove; ++x) {
-					Pixel* pixel = m_pixels[y*m_width+x];
 					if (x >= 0 && x < m_width && y >= 0 && y < m_height &&
-						pixel->HasData() && !pixel->IsCoverd()) {
+						m_pixels[y*m_width+x]->HasData() && !m_pixels[y*m_width+x]->IsCoverd()) {
 						remove = false;
 					}
 				}
@@ -114,6 +113,7 @@ void RectPostProcessor::Merge()
 			Item* item = *itr;
 			const Rect& r = item->r;
 			// left
+			assert(r.x < m_width);
 			if (r.x > 0) {
 				bool find = false;
 				for (int y = r.y, up = r.y + r.h; y < up; ++y) {
@@ -135,6 +135,7 @@ void RectPostProcessor::Merge()
 				}
 			}
 			// down
+			assert(r.y < m_height);
 			if (r.y > 0) {
 				bool find = false;
 				for (int x = r.x, right = r.x + r.w; x < right; ++x) {
@@ -144,10 +145,6 @@ void RectPostProcessor::Merge()
 					Pixel* p = m_pixels[(r.y-1)*m_width+x];
 					Item* new_item = p->FindSpecialRect(r.x, -1, r.w, -1);
 					if (new_item) {
-						if (r.w == 64) {
-							int zz = 0;
-						}
-
 						find = true;
 						MergeRect(item, new_item);
 						itr = m_items.erase(itr);
@@ -215,8 +212,8 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_left = false;
 	} else if (right < m_width) {
 		for (int y = down; y <= up; ++y) {
-			const Pixel* pixel = m_pixels[y*m_width+right];
-			if (y >= 0 && y < m_height && pixel->HasData() && !pixel->IsCoverd()) {
+			if (y >= 0 && y < m_height && 
+				m_pixels[y*m_width+right]->HasData() && !m_pixels[y*m_width+right]->IsCoverd()) {
 				item->to_left = false;
 				break;
 			}
@@ -228,8 +225,8 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_right = false;
 	} else if (left >= 0) {
 		for (int y = down; y <= up; ++y) {
-			const Pixel* pixel = m_pixels[y*m_width+left];
-			if (y >= 0 && y < m_height && pixel->HasData() && !pixel->IsCoverd()) {
+			if (y >= 0 && y < m_height && 
+				m_pixels[y*m_width+left]->HasData() && !m_pixels[y*m_width+left]->IsCoverd()) {
 				item->to_right = false;
 				break;
 			}
@@ -241,8 +238,8 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_down = false;
 	} else if (up < m_height) {
 		for (int x = left; x <= right; ++x) {
-			const Pixel* pixel = m_pixels[up*m_width+x];
-			if (x >= 0 && x < m_width && pixel->HasData() && !pixel->IsCoverd()) {
+			if (x >= 0 && x < m_width && 
+				m_pixels[up*m_width+x]->HasData() && !m_pixels[up*m_width+x]->IsCoverd()) {
 				item->to_down = false;
 				break;
 			}
@@ -254,8 +251,8 @@ void RectPostProcessor::SetFreedom(Item* item)
 		item->to_up = false;
 	} else if (down >= 0) {
 		for (int x = left; x <= right; ++x) {
-			const Pixel* pixel = m_pixels[down*m_width+x];
-			if (x >= 0 && x < m_width && pixel->HasData() && !pixel->IsCoverd()) {
+			if (x >= 0 && x < m_width && 
+				m_pixels[down*m_width+x]->HasData() && !m_pixels[down*m_width+x]->IsCoverd()) {
 				item->to_up = false;
 				break;
 			}
@@ -316,8 +313,9 @@ bool RectPostProcessor::MoveItem(Item* item, Direction dir)
 		int offset = (dir == e_right ? right_next : left_next);
 		bool all_full = true;
 		for (int y = down; y <= up; ++y) {
-			const Pixel* pixel = m_pixels[y*m_width+offset];
-			if (y >= 0 && y < m_height && pixel->IsEmpty()) {
+			if (y >= 0 && y < m_height && 
+				offset >= 0 && offset < m_width &&
+				m_pixels[y*m_width+offset]->IsEmpty()) {
 				all_full = false;
 				break;
 			}
@@ -332,8 +330,9 @@ bool RectPostProcessor::MoveItem(Item* item, Direction dir)
 		int offset = (dir == e_up ? up_next : down_next);
 		bool all_full = true;
 		for (int x = r.x; x <= right; ++x) {
-			const Pixel* pixel = m_pixels[offset*m_width+x];
-			if (x >= 0 && x < m_width && pixel->IsEmpty()) {
+			if (x >= 0 && x < m_width && 
+				offset >= 0 && offset < m_height &&
+				m_pixels[offset*m_width+x]->IsEmpty()) {
 				all_full = false;
 				break;
 			}
@@ -352,7 +351,7 @@ bool RectPostProcessor::MoveItem(Item* item, Direction dir)
 	{
 		int offset = (dir == e_right ? left : right);
 		for (int y = down; y <= up; ++y) {
-			if (y >= 0 && y < m_height) {
+			if (y >= 0 && y < m_height && offset >= 0 && offset < m_width) {
 				Pixel* p = m_pixels[y*m_width+offset];
 				assert(p->Find(item));
 				p->Remove(item);
@@ -364,7 +363,7 @@ bool RectPostProcessor::MoveItem(Item* item, Direction dir)
 	{
 		int offset = (dir == e_up ? down : up);
 		for (int x = left; x <= right; ++x) {
-			if (x >= 0 && x < m_width) {
+			if (x >= 0 && x < m_width && offset >= 0 && offset < m_height) {
 				Pixel* p = m_pixels[offset*m_width+x];
 				assert(p->Find(item));
 				p->Remove(item);
@@ -377,7 +376,7 @@ bool RectPostProcessor::MoveItem(Item* item, Direction dir)
 	{
 		int offset = (dir == e_right ? right_next : left_next);
 		for (int y = down; y <= up; ++y) {
-			if (y >= 0 && y < m_height) {
+			if (y >= 0 && y < m_height && offset >= 0 && offset < m_width) {
 				Pixel* p = m_pixels[y*m_width+offset];
 				p->Add(item);
 			}
@@ -388,7 +387,7 @@ bool RectPostProcessor::MoveItem(Item* item, Direction dir)
 	{
 		int offset = (dir == e_up ? up_next : down_next);
 		for (int x = left; x <= right; ++x) {
-			if (x >= 0 && x < m_width) {
+			if (x >= 0 && x < m_width && offset >= 0 && offset < m_height) {
 				Pixel* p = m_pixels[offset*m_width+x];
 				p->Add(item);
 			}
