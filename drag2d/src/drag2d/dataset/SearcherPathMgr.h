@@ -1,15 +1,16 @@
-#ifndef _EASYCOMPLEX_SEARCH_PATH_MGR_H_
-#define _EASYCOMPLEX_SEARCH_PATH_MGR_H_
+#ifndef _D2D_SEARCHER_PATH_MGR_H_
+#define _D2D_SEARCHER_PATH_MGR_H_
 
-#include <drag2d.h>
+#include <wx/string.h>
+#include <vector>
 
-namespace ecomplex
+namespace d2d
 {
 
-class SearchPathMgr
+class SearcherPathMgr
 {	
 public:
-	static SearchPathMgr* Instance();
+	static SearcherPathMgr* Instance();
 
 	// absolute path
 	bool IsExist(const wxString& filepath) const;
@@ -18,8 +19,8 @@ public:
 	void ResetPackRes(const std::string& dirpath);
 
 private:
-	SearchPathMgr();
-	~SearchPathMgr();
+	SearcherPathMgr();
+	~SearcherPathMgr();
 
 	void Clear();
 
@@ -53,10 +54,10 @@ private:
 	std::vector<PackedRes*> m_search_path;
 
 private:
-	static SearchPathMgr* m_instance;
+	static SearcherPathMgr* m_instance;
 
-}; // SearchPathMgr
+}; // SearcherPathMgr
 
 }
 
-#endif // _EASYCOMPLEX_SEARCH_PATH_MGR_H_
+#endif // _D2D_SEARCHER_PATH_MGR_H_

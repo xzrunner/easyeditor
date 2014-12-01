@@ -15,6 +15,8 @@
 #include "dataset/NullSymbol.h"
 #include "dataset/SymbolFactory.h"
 #include "dataset/SymbolMgr.h"
+#include "dataset/SymbolSearcher.h"
+#include "dataset/SearcherPathMgr.h"
 #include "dataset/ImageSymbol.h"
 #include "dataset/FontBlankSymbol.h"
 #include "dataset/ScriptsSymbol.h"

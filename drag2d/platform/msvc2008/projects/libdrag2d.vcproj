@@ -832,6 +832,26 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="searcher"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SearcherPathMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SearcherPathMgr.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SymbolSearcher.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\dataset\SymbolSearcher.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="bv"

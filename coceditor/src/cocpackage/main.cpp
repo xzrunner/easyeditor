@@ -209,7 +209,7 @@ int main(int argc, char *argv[])
 	}
 
 	std::string texpackerpath = argv[2];
-	ecomplex::SearchPathMgr::Instance()->ResetPackRes(texpackerpath);
+	d2d::SearcherPathMgr::Instance()->ResetPackRes(texpackerpath);
 
 	std::string path = argv[1];
 	bool is_dir = false;
@@ -218,11 +218,15 @@ int main(int argc, char *argv[])
 	if (pos_dot == std::string::npos || pos_dot < pos_divide) {
 		is_dir = true;
 	}
+
+	std::cout << "Load json data \n";
 	if (is_dir) {
 		LoadFromDir(path);
 	} else {
 		LoadFromList(path);
 	}
+
+	std::cout << "Load tp data \n";
 
 	LoadTexturePacker(texpackerpath);
 

@@ -108,8 +108,16 @@ void Symbol::loadResources()
 			int k = 0;
 			Json::Value spriteValue = frameValue["actor"][k++];
 			while (!spriteValue.isNull()) {
- 				wxString path = d2d::FilenameTools::getAbsolutePath(dir, spriteValue["filepath"].asString());
- 				ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+				wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spriteValue);
+				d2d::ISymbol* symbol = NULL;
+				try {
+					symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				} catch (d2d::Exception& e) {
+					std::cout << "Symbol::loadResources error! File:" << filepath << std::endl;
+					std::cout << e.what();
+				}
+				d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spriteValue);
+
 				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 				symbol->Release();
 				sprite->load(spriteValue);

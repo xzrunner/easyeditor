@@ -201,14 +201,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libcomplex\SearchPathMgr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libcomplex\SearchPathMgr.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libcomplex\Sprite.cpp"
 				>
 			</File>

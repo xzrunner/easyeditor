@@ -14,6 +14,5 @@
 #include "libcomplex/LibraryPanel.h"
 #include "libcomplex/LibraryPage.h"
 #include "libcomplex/PreviewDialog.h"
-#include "libcomplex/SearchPathMgr.h"
 
 #endif // _EASYCOMPLEX_H_

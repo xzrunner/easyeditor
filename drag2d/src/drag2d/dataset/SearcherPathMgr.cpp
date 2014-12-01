@@ -1,24 +1,29 @@
-#include "SearchPathMgr.h"
+#include "SearcherPathMgr.h"
+
+#include "common/tools.h"
+#include "common/FileNameTools.h"
 
 #include <wx/stdpaths.h>
+#include <wx/filename.h>
+#include <JSON/json.h>
 
-namespace ecomplex
+namespace d2d
 {
 
-SearchPathMgr* SearchPathMgr::m_instance = NULL;
+SearcherPathMgr* SearcherPathMgr::m_instance = NULL;
 
-const char* FILENAME = "config.json";
+static const char* FILENAME = "config.json";
 
-SearchPathMgr::SearchPathMgr()
+SearcherPathMgr::SearcherPathMgr()
 {
 }
 
-SearchPathMgr::~SearchPathMgr()
+SearcherPathMgr::~SearcherPathMgr()
 {
 	Clear();
 }
 
-bool SearchPathMgr::IsExist(const wxString& filepath) const
+bool SearcherPathMgr::IsExist(const wxString& filepath) const
 {
 	bool need_search = false;
 
@@ -38,7 +43,7 @@ bool SearchPathMgr::IsExist(const wxString& filepath) const
 	return !need_search;
 }
 
-void SearchPathMgr::ResetPackRes(const std::string& dirpath)
+void SearcherPathMgr::ResetPackRes(const std::string& dirpath)
 {
 	Clear();
 
@@ -46,29 +51,29 @@ void SearchPathMgr::ResetPackRes(const std::string& dirpath)
 	m_search_path.push_back(res);
 }
 
-SearchPathMgr* SearchPathMgr::Instance()
+SearcherPathMgr* SearcherPathMgr::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SearchPathMgr();
+		m_instance = new SearcherPathMgr();
 		m_instance->LoadConfig();
 	}
 	return m_instance;
 }
 
-void SearchPathMgr::Clear()
+void SearcherPathMgr::Clear()
 {
 	for_each(m_search_path.begin(), m_search_path.end(), 
 		DeletePointerFunctor<PackedRes>());
 	m_search_path.clear();
 }
 
-void SearchPathMgr::LoadConfig()
+void SearcherPathMgr::LoadConfig()
 {
  	wxFileName filename(FILENAME);
 #ifndef _DEBUG
 	wxStandardPaths std;
 	wxString exe_path = std.GetExecutablePath();
-	filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+	filename.MakeAbsolute(FilenameTools::getFileDir(exe_path));
 #endif
  	filename.Normalize();
 
@@ -105,10 +110,10 @@ void SearchPathMgr::LoadConfig()
 }
 
 //////////////////////////////////////////////////////////////////////////
-// class SearchPathMgr::PackedRes
+// class SearcherPathMgr::PackedRes
 //////////////////////////////////////////////////////////////////////////
 
-SearchPathMgr::PackedRes::
+SearcherPathMgr::PackedRes::
 PackedRes(const std::string& res_dir,
 		  const std::string& dirpath)
 	: m_res_dir(res_dir)
@@ -119,20 +124,20 @@ PackedRes(const std::string& res_dir,
 #ifndef _DEBUG
 	wxStandardPaths std;
 	wxString exe_path = std.GetExecutablePath();
-	filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+	filename.MakeAbsolute(FilenameTools::getFileDir(exe_path));
 #endif
 	filename.Normalize();
 	m_res_dir_absolute = filename.GetFullPath().Lower();
 }
 
-SearchPathMgr::PackedRes::
+SearcherPathMgr::PackedRes::
 PackedRes(const std::string& dirpath)
 {
 	// from command line, no need trans
 	LoadCfgDir(dirpath, false);
 }
 
-bool SearchPathMgr::PackedRes::
+bool SearcherPathMgr::PackedRes::
 IsExist(const wxString& filepath) const
 {
 	for (int i = 0, n = m_packed_files.size(); i < n; ++i) {
@@ -144,7 +149,7 @@ IsExist(const wxString& filepath) const
 	return false;
 }
 
-bool SearchPathMgr::PackedRes::
+bool SearcherPathMgr::PackedRes::
 CanHandleFilepath(const wxString& filepath) const
 {
 	if (m_res_dir_absolute.IsEmpty()) {
@@ -154,7 +159,7 @@ CanHandleFilepath(const wxString& filepath) const
 	}
 }
 
-void SearchPathMgr::PackedRes::
+void SearcherPathMgr::PackedRes::
 LoadCfgDir(const std::string& dirpath, bool need_trans)
 {
 	m_res_dir_absolute = wxEmptyString;
@@ -172,7 +177,7 @@ LoadCfgDir(const std::string& dirpath, bool need_trans)
 		wxFileName filename(path);
 #ifndef _DEBUG
 		if (need_trans) {
-			filename.MakeAbsolute(d2d::FilenameTools::getFileDir(exe_path));
+			filename.MakeAbsolute(FilenameTools::getFileDir(exe_path));
 		}
 #endif
 		filename.Normalize();
@@ -186,7 +191,7 @@ LoadCfgDir(const std::string& dirpath, bool need_trans)
 	}
 }
 
-void SearchPathMgr::PackedRes::
+void SearcherPathMgr::PackedRes::
 LoadCfgFile(const std::string& filepath)
 {
 	Json::Value value;
