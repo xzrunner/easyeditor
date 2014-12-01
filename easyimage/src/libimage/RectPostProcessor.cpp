@@ -424,11 +424,19 @@ void RectPostProcessor::MergeRect(Item* remove, Item* newone)
 	if (r.y == newr.y && r.h == newr.h) {
 		int x = std::min(r.x, newr.x);
 		newr.w = std::max(r.x+r.w, newr.x+newr.w) - x;
+		// fix to times of 4
+		if (newr.w % 4 != 0) {
+			newr.w = 4 * std::ceil(newr.w / 4.0f);
+		}
 		newr.x = x;
 	} else {
 		assert(r.x == newr.x && r.w == newr.w);
 		int y = std::min(r.y, newr.y);
 		newr.h = std::max(r.y+r.h, newr.y+newr.h) - y;
+		// fix to times of 4
+		if (newr.h % 4 != 0) {
+			newr.h = 4 * std::ceil(newr.h / 4.0f);
+		}
 		newr.y = y;
 	}
 }
