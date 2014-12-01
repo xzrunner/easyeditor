@@ -129,7 +129,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 		const unsigned char* pixels = img_cut.clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
 		wxString out_path;
-		out_path.Printf("%s_%d_%d_%d_%d", ori_path, r.x, r.y, r.w, r.h);
+		out_path.Printf("%s#%d#%d#%d#%d#", ori_path, r.x, r.y, r.w, r.h);
 		d2d::ImageSaver::storeToFile(pixels, r.w, r.h, out_path.ToStdString(), d2d::ImageSaver::e_png);
 		delete[] pixels;
 	}

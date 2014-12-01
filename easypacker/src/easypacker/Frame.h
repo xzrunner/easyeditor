@@ -24,6 +24,7 @@ namespace epacker
 		void onCodeLove2d(wxCommandEvent& event);
 
 		void initMenuBar();
+		void initStatueBar();
 
 		wxMenu* initFileBar();
 		wxMenu* initCodesBar();

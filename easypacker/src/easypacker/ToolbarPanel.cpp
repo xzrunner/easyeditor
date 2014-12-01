@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "ImageToolbarPage.h"
 #include "MeshToolbarPage.h"
+#include "RegularToolbarPage.h"
 
 namespace epacker
 {
@@ -34,6 +35,9 @@ wxSizer* ToolbarPanel::initLayout()
 
 	wxPanel* mesh_page = new MeshToolbarPage(notebook, m_stage);
 	notebook->AddPage(mesh_page, "Mesh");
+
+	wxPanel* regular_page = new RegularToolbarPage(notebook, m_stage);
+	notebook->AddPage(regular_page, "Regular");
 
 	return sizer;
 }

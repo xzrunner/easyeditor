@@ -225,6 +225,14 @@
 				RelativePath="..\..\..\src\easypacker\RectBinArrange.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\easypacker\RegularRectPack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easypacker\RegularRectPack.h"
+				>
+			</File>
 			<Filter
 				Name="RectangleBinPack"
 				>
@@ -414,6 +422,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\easypacker\MeshToolbarPage.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\RegularToolbarPage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easypacker\RegularToolbarPage.h"
 					>
 				</File>
 				<File

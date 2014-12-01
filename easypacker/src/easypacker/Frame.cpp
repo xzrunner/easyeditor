@@ -30,6 +30,9 @@ Frame::Frame(const wxString& title)
 {
 	m_task = Task::create(this);
 	initMenuBar();
+#ifdef _DEBUG
+	initStatueBar();
+#endif
 }
 
 void Frame::onNew(wxCommandEvent& event)
@@ -118,6 +121,12 @@ void Frame::initMenuBar()
 	menuBar->Append(initCodesBar(), "&Codes");
 	//	menuBar->Append(initHelpBar(), "&Help");	
 	SetMenuBar(menuBar);
+}
+
+void Frame::initStatueBar()
+{
+	CreateStatusBar();
+	SetStatusText( "Welcome to wxWidgets!" );
 }
 
 wxMenu* Frame::initFileBar()
