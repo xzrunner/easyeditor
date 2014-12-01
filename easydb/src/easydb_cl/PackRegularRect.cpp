@@ -38,6 +38,11 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
 	libpacker::RegularRectPack rrp(files);
+<<<<<<< HEAD
+=======
+	rrp.Pack();
+	rrp.PrintStatics();
+>>>>>>> [ADDED] regular rect pack to easydb
 }
 
 }

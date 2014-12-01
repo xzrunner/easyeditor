@@ -46,7 +46,6 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		wxString filepath = filename.GetFullPath();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
-
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
@@ -59,7 +58,9 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			msg.Printf("File: %s, Left: %d, Used: %d", filepath, cut.GetLeftArea(), cut.GetUseArea());
 			std::cout << msg << std::endl;
 
-			wxString filename = d2d::FilenameTools::getFilename(image->filepath());
+			wxString filename = d2d::FilenameTools::getRelativePath(src_dir, filepath);
+			filename = filename.substr(0, filename.find_last_of('.'));
+			filename.Replace("\\", "_");
 
 			const std::vector<eimage::Rect>& result = cut.GetResult();
 			eimage::ImageProcessor img_cut(image);

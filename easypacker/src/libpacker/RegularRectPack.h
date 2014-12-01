@@ -15,10 +15,12 @@ public:
 	RegularRectPack(const wxArrayString& files);
 	~RegularRectPack();
 
+	void Pack();
+
+	void PrintStatics() const;
+
 private:
 	void LoadData(const wxArrayString& files);
-
-	void Pack();
 
 private:
 	struct Rect
@@ -85,6 +87,8 @@ private:
 
 private:
 	std::set<CombineArray*, CombineArrayCmp> m_data;
+
+	int m_ori_count;
 
 }; // RegularRectPack
 

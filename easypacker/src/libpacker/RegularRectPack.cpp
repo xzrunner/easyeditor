@@ -10,13 +10,7 @@ RegularRectPack::RegularRectPack(const wxArrayString& files)
 {
 	LoadData(files);
 
-	int count_ori = GetCombineCount();
-
-	Pack();
-
-	wxString msg;
-	msg.Printf("before: %d, after: %d \n", count_ori, GetCombineCount());
-	std::cout << msg;
+	m_ori_count = GetCombineCount();
 }
 
 RegularRectPack::~RegularRectPack()
@@ -24,36 +18,6 @@ RegularRectPack::~RegularRectPack()
 	std::set<CombineArray*, CombineArrayCmp>::iterator itr = m_data.begin();
 	for ( ; itr != m_data.end(); ++itr) {
 		delete (*itr);
-	}
-}
-
-void RegularRectPack::LoadData(const wxArrayString& files)
-{
-	for (int i = 0, n = files.size(); i < n; ++i)
-	{
-		const wxString& filepath = files[i];
-
-		Rect r;
-		r.file = filepath;
-
-		wxStringTokenizer tkz(filepath, wxT("#"));
-		int idx = 0;
-		while (tkz.HasMoreTokens())
-		{
-			wxString token = tkz.GetNextToken();
-			if (idx == 1) {
-				r.x = wxAtoi(token);
-			} else if (idx == 2) {
-				r.y = wxAtoi(token);
-			} else if (idx == 3) {
-				r.w = wxAtoi(token);
-			} else if (idx == 4) {
-				r.h = wxAtoi(token);
-			}
-			++idx;
-		}
-
-		InsertToCombineArray(Combine(r));
 	}
 }
 
@@ -114,6 +78,51 @@ void RegularRectPack::Pack()
 		} else {
 			itr = ++itr;
 		}
+	}
+}
+
+void RegularRectPack::PrintStatics() const
+{
+	wxString msg;
+	msg.Printf("before: %d, after: %d \n", m_ori_count, GetCombineCount());
+	std::cout << msg;
+
+	std::set<CombineArray*, CombineArrayCmp>::const_iterator itr;
+	for (itr = m_data.begin(); itr != m_data.end(); ++itr) {
+		const CombineArray* ca = *itr;
+		wxString msg;
+		msg.Printf("w: %d, h: %d, count: %d\n", ca->w, ca->h, ca->Size());
+		std::cout << msg;
+	}
+}
+
+void RegularRectPack::LoadData(const wxArrayString& files)
+{
+	for (int i = 0, n = files.size(); i < n; ++i)
+	{
+		const wxString& filepath = files[i];
+
+		Rect r;
+		r.file = filepath;
+
+		wxStringTokenizer tkz(filepath, wxT("#"));
+		int idx = 0;
+		while (tkz.HasMoreTokens())
+		{
+			wxString token = tkz.GetNextToken();
+			if (idx == 1) {
+				r.x = wxAtoi(token);
+			} else if (idx == 2) {
+				r.y = wxAtoi(token);
+			} else if (idx == 3) {
+				r.w = wxAtoi(token);
+			} else if (idx == 4) {
+				r.h = wxAtoi(token);
+			}
+			++idx;
+		}
+
+		InsertToCombineArray(Combine(r));
 	}
 }
 
