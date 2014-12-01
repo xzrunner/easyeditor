@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src"
+				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\external\RectangleBinPack;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -122,7 +122,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src"
+				AdditionalIncludeDirectories="..\..\..\src\easypacker;..\..\..\external\RectangleBinPack;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -225,50 +225,6 @@
 				RelativePath="..\..\..\src\easypacker\RectBinArrange.h"
 				>
 			</File>
-			<Filter
-				Name="RectangleBinPack"
-				>
-				<File
-					RelativePath="..\..\..\src\easypacker\GuillotineBinPack.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\GuillotineBinPack.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\MaxRectsBinPack.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\MaxRectsBinPack.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\Rect.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\Rect.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\ShelfBinPack.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\ShelfBinPack.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\SkylineBinPack.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easypacker\SkylineBinPack.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="tool"

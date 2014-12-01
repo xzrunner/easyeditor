@@ -1,13 +1,13 @@
 #include "RectBinArrange.h"
 #include "config.h"
+#include "Context.h""
 
 // Rectangle Bin
-#include "Rect.h"
-#include "GuillotineBinPack.h"
-#include "MaxRectsBinPack.h"
-#include "ShelfBinPack.h"
-#include "SkylineBinPack.h"
-#include "Context.h"
+#include <Rect.h>
+#include <GuillotineBinPack.h>
+#include <MaxRectsBinPack.h>
+#include <ShelfBinPack.h>
+#include <SkylineBinPack.h>
 
 using namespace epacker;
 

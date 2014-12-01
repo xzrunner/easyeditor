@@ -3,7 +3,7 @@
 
 #include "BaseStrategy.h"
 
-#include "Rect.h"
+#include <Rect.h>
 
 namespace epacker
 {

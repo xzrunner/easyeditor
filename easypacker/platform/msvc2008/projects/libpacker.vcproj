@@ -149,6 +149,50 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="RectangleBinPack"
+			>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\GuillotineBinPack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\GuillotineBinPack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\MaxRectsBinPack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\MaxRectsBinPack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\Rect.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\Rect.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\ShelfBinPack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\ShelfBinPack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\SkylineBinPack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\RectangleBinPack\SkylineBinPack.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libpacker\RegularRectPack.cpp"
 			>
