@@ -36,15 +36,24 @@ private:
 	struct Combine
 	{
 		Combine(const Rect& r) 
-			: w(r.w), h(r.h), r(r) {}
-		Combine(int w, int h) : w(w), h(h) {}
+			: w(r.w), h(r.h), r(r), x(0), y(0) {}
+		Combine(int w, int h) : w(w), h(h), x(0), y(0) {}
 
 		void Add(const Combine& c) {
 			children.push_back(c);
 		}
 
+		Combine& SetPos(int x, int y) {
+			this->x = x;
+			this->y = y;
+			return *this;
+		}
+
 		int w, h;
 		std::vector<Combine> children;
+
+		// pos in its father
+		int x, y;
 
 		Rect r;
 

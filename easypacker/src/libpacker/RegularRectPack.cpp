@@ -39,9 +39,10 @@ void RegularRectPack::Pack()
 			// compose 4 to a larger one
 			while (ca->Size() >= 4) {
 				Combine cb(next_sz, next_sz);
-				for (int i = 0; i < 4; ++i) {
-					cb.Add(ca->Pop());
-				}
+				cb.Add(ca->Pop().SetPos(0, 0));
+				cb.Add(ca->Pop().SetPos(0, ca->h));
+				cb.Add(ca->Pop().SetPos(ca->w, ca->h));
+				cb.Add(ca->Pop().SetPos(ca->w, 0));
 				InsertToCombineArray(cb);
 			}		
 		}
@@ -52,9 +53,8 @@ void RegularRectPack::Pack()
 			// compose 2 to a larger one
 			while (ca->Size() >= 2) {
 				Combine cb(next_sz, next_sz);
-				for (int i = 0; i < 2; ++i) {
-					cb.Add(ca->Pop());
-				}
+				cb.Add(ca->Pop().SetPos(0, 0));
+				cb.Add(ca->Pop().SetPos(0, ca->h));
 				InsertToCombineArray(cb);
 			}
 		}
@@ -65,9 +65,8 @@ void RegularRectPack::Pack()
 			// compose 2 to a larger one
 			while (ca->Size() >= 2) {
 				Combine cb(next_sz, next_sz);
-				for (int i = 0; i < 2; ++i) {
-					cb.Add(ca->Pop());
-				}
+				cb.Add(ca->Pop().SetPos(0, 0));
+				cb.Add(ca->Pop().SetPos(ca->w, 0));
 				InsertToCombineArray(cb);
 			}
 		}
