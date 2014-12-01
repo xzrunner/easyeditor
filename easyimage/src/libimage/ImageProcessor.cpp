@@ -23,11 +23,7 @@ const unsigned char* ImageProcessor::clip(int xmin, int xmax, int ymin, int ymax
 	int channels = m_image->channels();
 	const unsigned char* pixels = m_image->getPixelData();
 
-	if (xmin < 0 || xmin > width ||
-		xmax < 0 || xmax > width ||
-		ymin < 0 || ymin > height ||
-		ymax < 0 || ymax > height ||
-		xmin >= xmax || ymin >= ymax) {
+	if (xmin >= xmax || ymin >= ymax) {
 		return NULL;
 	}
 
@@ -39,17 +35,33 @@ const unsigned char* ImageProcessor::clip(int xmin, int xmax, int ymin, int ymax
 
 	int w = xmax - xmin,
 		h = ymax - ymin;
-	unsigned char* sub = new unsigned char[w * h * channels];
+	int sz = w * h * channels;
+	unsigned char* sub = new unsigned char[sz];
 	if (!sub) {
 		return NULL;
 	}
-	int line_size = channels * w;
-	for (int i = 0; i < h; ++i)
-	{
-		int from = (width * (ymin + i) + xmin) * channels,
-			to = (h - 1 - i) * w * channels;
-		memcpy(&sub[to], &pixels[from], line_size);
+
+	memset(sub, 0, sz);
+	for (int y = ymin; y < ymax; ++y) {
+		for (int x = xmin; x < xmax; ++x) {
+			if (x >= 0 && x < width &&
+				y >= 0 && y < height) {
+				int from = (y * width + x) * channels,
+					to = ((h - (y - ymin) - 1) * w + x-xmin) * channels;
+				memcpy(&sub[to], &pixels[from], channels);
+			}
+		}
 	}
+
+//	// todo cp line
+// 	int line_size = channels * w;
+// 	for (int i = 0; i < h; ++i)
+// 	{
+// 		int from = (width * (ymin + i) + xmin) * channels,
+// 			to = (h - 1 - i) * w * channels;
+// 		memcpy(&sub[to], &pixels[from], line_size);
+// 	}
+
 	return sub;
 }
 
