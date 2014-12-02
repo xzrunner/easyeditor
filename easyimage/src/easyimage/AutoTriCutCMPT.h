@@ -27,6 +27,8 @@ private:
 	void CreateOutline(wxCommandEvent& event);
 	void ReduceOutlineCount(wxCommandEvent& event);
 
+	void OnDebug(wxCommandEvent& event);
+
 private:
 	void Trigger();
 

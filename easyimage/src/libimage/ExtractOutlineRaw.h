@@ -11,7 +11,11 @@ class ExtractOutlineRaw
 public:
 	ExtractOutlineRaw(const d2d::Image& image);
 
-	void Trigger();
+	void CreateBorderPoints();
+
+	void CreateBorderLineAndMerge();
+
+	void CreateBorderConvexHull();
 
 	const std::vector<d2d::Vector>& GetBorderLine() const {
 		return m_border_line;
@@ -20,12 +24,14 @@ public:
 		return m_border_points;
 	}
 	const std::vector<d2d::Vector>& GetBorderLineMerged() const {
-		return m_border_merged;
+		return m_border_line_merged;
+	}
+	const std::vector<d2d::Vector>& GetConvexHull() const {
+		return m_convex_hull;
 	}
 
 private:
 	void CreateBorderLine();
-	void CreateBorderPoints();
 	void MergeBorderLine();
 
 	bool IsPixelBorder(int x, int y) const;
@@ -42,8 +48,12 @@ private:
 	int m_width, m_height;
 
 	std::vector<d2d::Vector> m_border_points;
+	std::vector<d2d::Vector> m_border_axis_line;
+
 	std::vector<d2d::Vector> m_border_line;
-	std::vector<d2d::Vector> m_border_merged;
+	std::vector<d2d::Vector> m_border_line_merged;
+
+	std::vector<d2d::Vector> m_convex_hull;
 
 }; // ExtractOutlineRaw
 

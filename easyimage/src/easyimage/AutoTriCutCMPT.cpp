@@ -57,6 +57,16 @@ wxSizer* AutoTriCutCMPT::initLayout()
 		}
 		top_sizer->Add(sizer);
 	}
+	top_sizer->AddSpacer(20);
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("debug"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Trigger"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(AutoTriCutCMPT::OnDebug));
+		sizer->Add(btn);
+		top_sizer->Add(sizer);
+	}
 	return top_sizer;
 }
 
@@ -108,7 +118,7 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 	m_raw = new ExtractOutlineRaw(*img);
-	m_raw->Trigger();
+	m_raw->CreateBorderLineAndMerge();
 	op->m_raw_bound_line = m_raw->GetBorderLine();
 	op->m_raw_bound_points = m_raw->GetBorderPoints();
 	op->m_raw_bound_line_merged = m_raw->GetBorderLineMerged();
@@ -144,7 +154,7 @@ void AutoTriCutCMPT::Trigger()
 
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 	ExtractOutlineRaw raw(*img);
-	raw.Trigger();
+	raw.CreateBorderLineAndMerge();
 	op->m_raw_bound_line = raw.GetBorderLine();
 	op->m_raw_bound_points = raw.GetBorderPoints();
 	op->m_raw_bound_line_merged = raw.GetBorderLineMerged();
@@ -158,6 +168,23 @@ void AutoTriCutCMPT::Trigger()
 	op->m_fine_bound_line = fine.GetResult();
 
 	m_editPanel->Refresh();
+}
+
+void AutoTriCutCMPT::OnDebug(wxCommandEvent& event)
+{
+	const d2d::ISprite* sprite = m_stage->getImage();
+	const d2d::ImageSprite* img_sprite 
+		= dynamic_cast<const d2d::ImageSprite*>(sprite);
+	assert(img_sprite);
+	const d2d::Image* img = img_sprite->getSymbol().getImage();
+
+	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
+	ExtractOutlineRaw raw(*img);
+	raw.CreateBorderLineAndMerge();
+	raw.CreateBorderConvexHull();
+	op->m_raw_bound_line = raw.GetConvexHull();
+	op->m_raw_bound_points = raw.GetBorderPoints();
+	op->m_raw_bound_line_merged = raw.GetBorderLineMerged();
 }
 
 }

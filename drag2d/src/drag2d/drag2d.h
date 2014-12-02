@@ -7,6 +7,7 @@
 #include "algorithms/DouglasPeucker.h"
 #include "algorithms/CosineSmooth.h"
 #include "algorithms/MinBoundingBox.h"
+#include "algorithms/ConvexHull.h"
 
 #include "dataset/Bitmap.h"
 #include "dataset/Image.h"
