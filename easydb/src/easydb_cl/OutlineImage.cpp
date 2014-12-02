@@ -50,7 +50,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 		d2d::Image* image = d2d::ImageMgr::Instance()->getItem(filepath);
 
 		eimage::ExtractOutlineRaw raw(*image);
-		raw.Trigger();
+		raw.CreateBorderLineAndMerge();
 		eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
 		fine.Trigger(0.04f, 0.2f);
 

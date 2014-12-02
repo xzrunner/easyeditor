@@ -91,10 +91,11 @@ void RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 										d2d::Vector& center, float& angle) const
 {
 	eimage::ExtractOutlineRaw raw(*image);
-	raw.Trigger();
+	raw.CreateBorderLineAndMerge();
+	raw.CreateBorderConvexHull();
 
 	d2d::Vector bound[4];
-	bool is_rotate = d2d::MinBoundingBox::Implement(raw.GetBorderLineMerged(), bound);
+	bool is_rotate = d2d::MinBoundingBox::Implement(raw.GetConvexHull(), bound);
 
 	center = (bound[0] + bound[2]) * 0.5f;
 	center.x -= image->originWidth() * 0.5f;
