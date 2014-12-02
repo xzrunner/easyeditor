@@ -115,6 +115,7 @@
 #include "common/TexPackerAdapter.h"
 #include "common/Settings.h"
 #include "common/Math.h"
+#include "common/math_common.h"
 #include "common/visitors.h"
 #include "common/tools.h"
 #include "common/Random.h"

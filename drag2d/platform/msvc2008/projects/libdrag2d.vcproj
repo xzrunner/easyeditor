@@ -1429,6 +1429,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\math_common.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\Matrix.cpp"
 					>
 				</File>

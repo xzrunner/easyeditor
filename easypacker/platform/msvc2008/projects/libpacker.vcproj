@@ -150,57 +150,105 @@
 	</References>
 	<Files>
 		<Filter
-			Name="RectangleBinPack"
+			Name="extend"
 			>
 			<File
-				RelativePath="..\..\..\external\RectangleBinPack\GuillotineBinPack.cpp"
+				RelativePath="..\..\..\src\libpacker\RegularRectPack.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\external\RectangleBinPack\GuillotineBinPack.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\MaxRectsBinPack.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\MaxRectsBinPack.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\Rect.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\Rect.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\ShelfBinPack.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\ShelfBinPack.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\SkylineBinPack.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\external\RectangleBinPack\SkylineBinPack.h"
+				RelativePath="..\..\..\src\libpacker\RegularRectPack.h"
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\libpacker\RegularRectPack.cpp"
+		<Filter
+			Name="dataset"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libpacker\RegularRectPack.h"
+			<File
+				RelativePath="..\..\..\src\libpacker\Rect.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpacker\Sprite.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="external"
 			>
-		</File>
+			<Filter
+				Name="RectangleBinPack"
+				>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\GuillotineBinPack.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\GuillotineBinPack.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\MaxRectsBinPack.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\MaxRectsBinPack.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\Rect.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\Rect.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\ShelfBinPack.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\ShelfBinPack.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\SkylineBinPack.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\external\RectangleBinPack\SkylineBinPack.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="primitive"
+			>
+			<File
+				RelativePath="..\..\..\src\libpacker\MaxRectsBinaryPack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpacker\MaxRectsBinaryPack.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpacker\MaxRectsBinaryPack2.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpacker\MaxRectsBinaryPack2.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="tools"
+			>
+			<File
+				RelativePath="..\..\..\src\libpacker\math.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
