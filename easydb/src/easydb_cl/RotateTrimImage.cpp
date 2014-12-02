@@ -77,12 +77,12 @@ void RotateTrimImage::Trigger(const std::string& dir)
 			sprite->Release();
 			symbol->Release();
 
-			wxString dir = d2d::FilenameTools::getFileDir(filepath);
-			wxString name = d2d::FilenameTools::getFilename(filepath);
- 			wxString outpath = dir + "\\test_" + name + ".png";
- 			ss.SaveToFile(outpath.ToStdString(), width, height);
+			//wxString dir = d2d::FilenameTools::getFileDir(filepath);
+			//wxString name = d2d::FilenameTools::getFilename(filepath);
+ 		//	wxString outpath = dir + "\\test_" + name + ".png";
+ 		//	ss.SaveToFile(outpath.ToStdString(), width, height);
 
-//			ss.SaveToFile(filepath.ToStdString(), width, height);
+			ss.SaveToFile(filepath.ToStdString(), width, height);
 		}
 	}
 }
