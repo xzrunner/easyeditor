@@ -168,42 +168,50 @@
 		<Filter
 			Name="rectcut"
 			>
-			<File
-				RelativePath="..\..\..\src\libimage\PixelAreaArray.cpp"
+			<Filter
+				Name="dataset"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\PixelAreaArray.h"
+				<File
+					RelativePath="..\..\..\src\libimage\PixelAreaArray.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\PixelAreaArray.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\PixelEdgeTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\PixelEdgeTable.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\Rect.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="op"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\PixelEdgeTable.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\PixelEdgeTable.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\Rect.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\RectPostProcessor.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\RectPostProcessor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\RegularRectCut.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\RegularRectCut.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RectPostProcessor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RectPostProcessor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RegularRectCut.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\RegularRectCut.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
