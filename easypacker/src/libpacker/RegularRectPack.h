@@ -6,6 +6,8 @@
 
 #include <wx/arrstr.h>
 
+#include "Rect.h"
+
 namespace libpacker
 {
 
@@ -17,18 +19,26 @@ public:
 
 	void Pack();
 
-	void PrintStatics() const;
+	void OutputToText(const wxString& filepath) const;
 
 private:
+	void PrintStatics() const;
+
 	void LoadData(const wxArrayString& files);
 
+	// special pack
 	void PackPowerOfTwo();
 	void PackNotPowerOfTwo();
+
+	// normal pack
+	void PackWithMaxRectAlg();
 
 private:
 	struct Rect
 	{
 		Rect() : w(-1), h(-1) {}
+
+		bool HasFilepath() const { return !file.IsEmpty(); }
 
 		int x, y;
 		int w, h;
@@ -52,12 +62,17 @@ private:
 			return *this;
 		}
 
+		bool IsLeaf() const {
+			return r.HasFilepath();
+		}
+
 		int w, h;
 		std::vector<Combine> children;
 
 		// pos in its father
 		int x, y;
 
+		// leaf data
 		Rect r;
 
 	}; // Combine
@@ -99,10 +114,16 @@ private:
 
 	bool ComposeTwo(CombineArray* ca, int width, int height, bool is_right_side);
 
+	void ParserPackResult(const Combine& cb, const libpacker::Rect& r);
+
 private:
 	std::set<CombineArray*, CombineArrayCmp> m_data;
 
 	int m_ori_count;
+
+	std::vector<std::pair<Rect, libpacker::Rect> > m_result;
+
+	libpacker::RectSize m_size;
 
 }; // RegularRectPack
 

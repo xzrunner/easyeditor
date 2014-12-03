@@ -152,14 +152,26 @@
 		<Filter
 			Name="extend"
 			>
-			<File
-				RelativePath="..\..\..\src\libpacker\RegularRectPack.cpp"
+			<Filter
+				Name="regular_rect"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libpacker\RegularRectPack.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libpacker\GenRegularRectImage.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpacker\GenRegularRectImage.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpacker\RegularRectPack.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpacker\RegularRectPack.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"

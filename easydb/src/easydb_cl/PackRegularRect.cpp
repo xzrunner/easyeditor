@@ -39,7 +39,7 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
 	libpacker::RegularRectPack rrp(files);
 	rrp.Pack();
-	rrp.PrintStatics();
+	rrp.OutputToText("test.json");
 }
 
 }

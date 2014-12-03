@@ -15,6 +15,8 @@ public:
 	MaxRectsBinaryPack2();
 	~MaxRectsBinaryPack2();
 
+	RectSize GetSize() const;
+
 	void Pack(const std::vector<RectSize>& rects, std::vector<Rect>& output);
 
 private:

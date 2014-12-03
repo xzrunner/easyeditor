@@ -1,4 +1,5 @@
 #include "RegularRectPack.h"
+#include "MaxRectsBinaryPack2.h"
 #include "math.h"
 
 #include <wx/tokenzr.h>
@@ -26,6 +27,45 @@ void RegularRectPack::Pack()
 {
 	PackNotPowerOfTwo();
 	PackPowerOfTwo();
+
+	PrintStatics();
+
+	PackWithMaxRectAlg();
+}
+
+void RegularRectPack::OutputToText(const wxString& filepath) const
+{
+	Json::Value value;
+
+	value["width"] = m_size.width;
+	value["height"] = m_size.height;
+
+	std::vector<std::pair<Rect, libpacker::Rect> >::const_iterator itr;
+	int idx = 0;
+	for (itr = m_result.begin(); itr != m_result.end(); ++itr)
+	{
+		Json::Value rect_val;
+		const Rect& src = itr->first;
+		const libpacker::Rect& dst = itr->second;
+
+		rect_val["filepath"] = src.file.ToStdString();
+		rect_val["src"]["w"] = src.w;
+		rect_val["src"]["h"] = src.h;
+		rect_val["src"]["x"] = src.x;
+		rect_val["src"]["y"] = src.y;
+		rect_val["dst"]["w"] = dst.width;
+		rect_val["dst"]["h"] = dst.height;
+		rect_val["dst"]["x"] = dst.x;
+		rect_val["dst"]["y"] = dst.y;
+
+		value[idx++] = rect_val;
+	}
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.fn_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
 }
 
 void RegularRectPack::PackPowerOfTwo()
@@ -166,6 +206,40 @@ void RegularRectPack::PackNotPowerOfTwo()
 	} while (success);
 }
 
+void RegularRectPack::PackWithMaxRectAlg()
+{
+	// prepare data
+	std::vector<RectSize> rects;
+	std::set<CombineArray*, CombineArrayCmp>::iterator itr;
+	for (itr = m_data.begin(); itr != m_data.end(); ++itr)
+	{
+		CombineArray* ca = *itr;
+		for (int i = 0; i < ca->Size(); ++i) {
+			RectSize size(ca->w, ca->h);
+			rects.push_back(size);
+		}
+	}
+
+	std::vector<libpacker::Rect> output;
+
+	// pack
+	MaxRectsBinaryPack2 packer;
+	packer.Pack(rects, output);
+	m_size = packer.GetSize();
+
+	// parser result
+	int idx = 0;
+	for (itr = m_data.begin(); itr != m_data.end(); ++itr)
+	{
+		CombineArray* ca = *itr;
+		while (!ca->combines.empty()) {
+			Combine cb = ca->combines.front(); ca->combines.pop();
+			const libpacker::Rect& r = output[idx++];
+			ParserPackResult(cb, r);
+		}
+	}
+}
+
 void RegularRectPack::PrintStatics() const
 {
 	wxString msg;
@@ -265,6 +339,36 @@ bool RegularRectPack::ComposeTwo(CombineArray* ca, int width, int height, bool i
 		InsertToCombineArray(cb);
 	}
 	return true;
+}
+
+void RegularRectPack::ParserPackResult(const Combine& cb, const libpacker::Rect& r)
+{
+	assert(cb.w == r.width && cb.h == r.height
+		|| cb.h == r.width && cb.w == r.height);
+
+	if (cb.IsLeaf()) {
+		m_result.push_back(std::make_pair(cb.r, r));
+	} else {
+		for (int i = 0, n = cb.children.size(); i < n; ++i) {
+			const Combine& child = cb.children[i];
+			
+			libpacker::Rect cr;
+			if (cb.w == r.width && cb.h == r.height) {
+				cr.x = r.x + child.x;
+				cr.y = r.y + child.y;
+				cr.width = child.w;
+				cr.height = child.h;	
+			} else {
+				// clockwise rotate
+				cr.x = r.x + child.y;
+				cr.y = r.y + (child.w - child.x);
+				cr.width = child.h;
+				cr.height = child.w;
+			}
+
+			ParserPackResult(child, cr);
+		}
+	}
 }
 
 }
