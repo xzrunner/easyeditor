@@ -2,5 +2,7 @@
 #define _EASYPACKER_H_
 
 #include "libpacker/RegularRectPack.h"
+#include "libpacker/MaxRectsBinaryPack.h"
+#include "libpacker/MaxRectsBinaryPack2.h"
 
 #endif // _EASYPACKER_H_

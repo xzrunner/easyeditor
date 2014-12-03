@@ -3,6 +3,7 @@
 #include "StageCanvas.h"
 #include "BinaryTreeArrange.h"
 #include "BinaryTreeNewArrange.h"
+#include "MaxRectsBinaryArrange.h"
 #include "RectBinArrange.h"
 #include "Context.h"
 #include "const.h"
@@ -21,7 +22,9 @@ StagePanel::StagePanel(wxWindow* parent,
 	m_canvas = new StageCanvas(this);
 
 //	m_strategy = new BinaryTreeArrange();
-	m_strategy = new BinaryTreeNewArrange();
+//	m_strategy = new BinaryTreeNewArrange();
+
+	m_strategy = new MaxRectsBinaryArrange();
 
 //	m_strategy = new RectBinArrange();
 }

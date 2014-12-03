@@ -24,6 +24,10 @@ MaxRectsBinaryPack::~MaxRectsBinaryPack()
 
 void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Rect>& output)
 {
+	if (rects.empty()) {
+		return;
+	}
+
 	// prepare data
 	int sz = rects.size();
 	output.clear();
@@ -34,7 +38,7 @@ void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Re
 	for (int i = 0; i < sz; ++i) {
 		sprites.push_back(Sprite(&rects[i], &output[i]));
 	}
-	std::sort(sprites.begin(), sprites.end(), SpriteCmp());
+	std::sort(sprites.begin(), sprites.end(), SpriteCmp(e_area));
 
 	// compute base size
 	float area = 0;
@@ -70,7 +74,9 @@ void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Re
 				max_arranged = i;
 				max_flag = flag - 1;
 			}
-		}	
+		}
+
+		edge *= 2;
 	}
 }
 
@@ -180,7 +186,7 @@ insert(Sprite* sprite, int flag)
 
 			m_child[0]->m_child[0]->m_rc = m_child[0]->m_child[1]->m_rc = m_child[0]->m_rc;
 			m_child[0]->m_child[0]->m_rc.height = height;
-			m_child[0]->m_child[1]->m_rc.x = m_child[0]->m_rc.y + height;
+			m_child[0]->m_child[1]->m_rc.y = m_child[0]->m_rc.y + height;
 			m_child[0]->m_child[1]->m_rc.height -= height;
 
 			m_child[0]->m_child[0]->m_sprite = sprite;

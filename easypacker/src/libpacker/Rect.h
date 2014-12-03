@@ -8,6 +8,9 @@ struct RectSize
 {
 	int width;
 	int height;
+
+	RectSize(int w, int h) 
+		: width(w), height(h) {}
 };
 
 struct Rect

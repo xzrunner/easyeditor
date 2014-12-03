@@ -218,6 +218,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easypacker\MaxRectsBinaryArrange.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easypacker\MaxRectsBinaryArrange.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easypacker\RectBinArrange.cpp"
 				>
 			</File>
