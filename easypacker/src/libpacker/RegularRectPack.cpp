@@ -92,35 +92,28 @@ void RegularRectPack::PackNotPowerOfTwo()
 		for ( ; itr != m_data.end(); )
 		{
 			CombineArray* ca = *itr;
+
+			// before
+			if (ca->Size() == 0) {
+				delete ca;
+				itr = m_data.erase(itr);
+				continue;
+			}
+
 			if (!is_power_of_two(ca->h)) 
 			{
 				while (ca->Size() >= 1) {
-					int next = next_p2(ca->h);
-					int sub = ca->h - next;
-					CombineArray array(ca->w, sub);
-					std::set<CombineArray*, CombineArrayCmp>::iterator itr = m_data.find(&array);
-					if (itr != m_data.end()) {
-						Combine cb(ca->w, next);
-						cb.Add(ca->Pop().SetPos(0, 0));
-						cb.Add((*itr)->Pop().SetPos(ca->w, 0));
-						InsertToCombineArray(cb);
+					int sub_h = next_p2(ca->h) - ca->h;
+					if (ComposeTwo(ca, ca->w, sub_h, false) ||
+						ComposeTwo(ca, ca->w, 4, false)) {
 						success = true;
 					} else {
-						CombineArray array(ca->w, 4);
-						std::set<CombineArray*, CombineArrayCmp>::iterator itr = m_data.find(&array);
-						if (itr != m_data.end()) {
-							Combine cb(ca->w, next);
-							cb.Add(ca->Pop().SetPos(0, 0));
-							cb.Add((*itr)->Pop().SetPos(ca->w, 0));
-							InsertToCombineArray(cb);
-							success = true;
-						} else {
-							break;
-						}
+						break;
 					}
 				}
 			}
 
+			// after
 			if (ca->Size() == 0) {
 				delete ca;
 				itr = m_data.erase(itr);
@@ -137,36 +130,33 @@ void RegularRectPack::PackNotPowerOfTwo()
 		for ( ; itr != m_data.end(); )
 		{
 			CombineArray* ca = *itr;
+
+			// before
+			if (ca->Size() == 0) {
+				delete ca;
+				itr = m_data.erase(itr);
+				continue;
+			}
+
 			if (is_power_of_two(ca->h) && ca->w < ca->h)
 			{
 				while (ca->Size() >= 1) {
- 					int sub = ca->h - ca->w;
-					CombineArray array(sub, ca->h);
-					std::set<CombineArray*, CombineArrayCmp>::iterator itr = m_data.find(&array);
-					if (itr != m_data.end()) {
-						Combine cb(ca->h, ca->h);
-						cb.Add(ca->Pop().SetPos(0, 0));
-						cb.Add((*itr)->Pop().SetPos(ca->w, 0));
-						InsertToCombineArray(cb);
-						success = true;
-					} else {
-						// todo
-
-// 						CombineArray array(ca->w, 4);
-// 						std::set<CombineArray*, CombineArrayCmp>::iterator itr = m_data.find(&array);
-// 						if (itr != m_data.end()) {
-// 							Combine cb(ca->w, next);
-// 							cb.Add(ca->Pop().SetPos(0, 0));
-// 							cb.Add((*itr)->Pop().SetPos(ca->w, 0));
-// 							InsertToCombineArray(cb);
-// 							success = true;
-// 						} else {
-// 							break;
-// 						}
+					int sub_w = ca->h - ca->w;
+					bool curr_success = false;
+					for (int w = sub_w; w >= 4; w -= 4) {
+						if (ComposeTwo(ca, w, ca->h, true)) {
+							success = true;
+							curr_success = true;
+							break;
+						}
+					}
+					if (!curr_success) {
+						break;
 					}
 				}
 			}
 
+			// after
 			if (ca->Size() == 0) {
 				delete ca;
 				itr = m_data.erase(itr);
@@ -247,28 +237,31 @@ int RegularRectPack::GetCombineCount() const
 	return count;
 }
 
-bool RegularRectPack::ComposeTwo(CombineArray* ca, int width, int height, bool right)
+bool RegularRectPack::ComposeTwo(CombineArray* ca, int width, int height, bool is_right_side)
 {
 	CombineArray array(width, height);
 	std::set<CombineArray*, CombineArrayCmp>::iterator itr = m_data.find(&array);
-	if (itr != m_data.end()) {
-		if (right) {
-			assert(ca->h == height);
-			Combine cb(ca->w+width, ca->h);
-			cb.Add(ca->Pop().SetPos(0, 0));
-			cb.Add((*itr)->Pop().SetPos(ca->w, 0));
-			InsertToCombineArray(cb);
-		} else {
-			assert(ca->w == width);
-			Combine cb(ca->w, ca->h+height);
-			cb.Add(ca->Pop().SetPos(0, 0));
-			cb.Add((*itr)->Pop().SetPos(0, ca->h));
-			InsertToCombineArray(cb);
-		}
-		return true;
-	} else {
+	if (itr == m_data.end()) {
 		return false;
 	}
+	if (*itr == ca && ca->Size() < 2 || (*itr)->Size() < 1) {
+		return false;
+	}
+
+	if (is_right_side) {
+		assert(ca->h == height);
+		Combine cb(ca->w+width, ca->h);
+		cb.Add(ca->Pop().SetPos(0, 0));
+		cb.Add((*itr)->Pop().SetPos(ca->w, 0));
+		InsertToCombineArray(cb);
+	} else {
+		assert(ca->w == width);
+		Combine cb(ca->w, ca->h+height);
+		cb.Add(ca->Pop().SetPos(0, 0));
+		cb.Add((*itr)->Pop().SetPos(0, ca->h));
+		InsertToCombineArray(cb);
+	}
+	return true;
 }
 
 }

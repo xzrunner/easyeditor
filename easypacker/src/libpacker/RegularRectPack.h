@@ -97,7 +97,7 @@ private:
 
 	int GetCombineCount() const;
 
-	bool ComposeTwo(CombineArray* ca, int width, int height, bool right);
+	bool ComposeTwo(CombineArray* ca, int width, int height, bool is_right_side);
 
 private:
 	std::set<CombineArray*, CombineArrayCmp> m_data;
