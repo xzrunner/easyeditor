@@ -92,7 +92,6 @@ void RegularRectPack::PackNotPowerOfTwo()
 		for ( ; itr != m_data.end(); )
 		{
 			CombineArray* ca = *itr;
-
 			// before
 			if (ca->Size() == 0) {
 				delete ca;
@@ -206,6 +205,10 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 				r.h = wxAtoi(token);
 			}
 			++idx;
+		}
+
+		if (r.w > r.h) {
+			std::swap(r.w, r.h);
 		}
 
 		InsertToCombineArray(Combine(r));
