@@ -22,6 +22,9 @@ public:
 private:
 	void LoadData(const wxArrayString& files);
 
+	void PackPowerOfTwo();
+	void PackNotPowerOfTwo();
+
 private:
 	struct Rect
 	{
@@ -93,6 +96,8 @@ private:
 	void InsertToCombineArray(const Combine& c);
 
 	int GetCombineCount() const;
+
+	bool ComposeTwo(CombineArray* ca, int width, int height, bool right);
 
 private:
 	std::set<CombineArray*, CombineArrayCmp> m_data;
