@@ -203,9 +203,11 @@ void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height
 	shader->SetProjection(width, height);
 	glViewport(0, 0, width, height);
 
-	Matrix mt;
 // 	Rect r = sprite->getSymbol().getSize();
 // 	mt.translate(-r.xCenter(), r.yCenter());
+
+	Matrix mt;
+	mt.setScale(1, -1);
 	SpriteDraw::drawSprite(sprite, mt);
 
 	shader->SetFBO(0);
