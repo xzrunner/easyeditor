@@ -7,6 +7,8 @@
 namespace edb
 {
 
+static const char* OUTPUT_FILE = "rotate-trim";
+
 std::string RotateTrimImage::Command() const
 {
 	return "rotate-trim";
@@ -32,6 +34,11 @@ void RotateTrimImage::Run(int argc, char *argv[])
 	Trigger(argv[2]);
 }
 
+const char* RotateTrimImage::GetOutputFileName()
+{
+	return OUTPUT_FILE;
+}
+
 void RotateTrimImage::Trigger(const std::string& dir)
 {
 	glfwInit();
@@ -44,6 +51,13 @@ void RotateTrimImage::Trigger(const std::string& dir)
 	d2d::ShaderMgr::Instance()->reload();
 
 	d2d::Snapshoot ss;
+
+	std::string output_file = dir + "\\" + OUTPUT_FILE;
+	std::ofstream fout(output_file.c_str(), std::ios::binary);
+	if (fout.fail()) {
+		std::cout << "Can't open output file. \n";
+		return;
+	}
 
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);
@@ -82,8 +96,14 @@ void RotateTrimImage::Trigger(const std::string& dir)
  		//	ss.SaveToFile(outpath.ToStdString(), width, height);
 
 			ss.SaveToFile(filepath.ToStdString(), width, height);
+
+			// output info
+			wxString path = d2d::FilenameTools::getRelativePath(dir, filepath);
+			fout << path << " " << center.x << " " << center.y << " " << angle << "\n";
 		}
 	}
+
+	fout.close();
 }
 
 bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int& height,

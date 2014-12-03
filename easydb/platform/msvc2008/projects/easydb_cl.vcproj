@@ -386,6 +386,22 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\FixJsonBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\FixJsonBase.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\FixRotateTrimJson.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\FixRotateTrimJson.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\FixSpriteColor.cpp"
 					>
 				</File>

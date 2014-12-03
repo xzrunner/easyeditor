@@ -23,6 +23,8 @@ public:
 
 	static ICommand* Create() { return new RotateTrimImage(); }
 
+	static const char* GetOutputFileName();
+
 private:
 	void Trigger(const std::string& dir);	
 

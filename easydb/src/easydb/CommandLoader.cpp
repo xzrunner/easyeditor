@@ -24,6 +24,7 @@
 #include "RegularRectCut.h"
 #include "RotateImage.h"
 #include "PackRegularRect.h"
+#include "FixRotateTrimJson.h"
 
 namespace edb
 {
@@ -54,6 +55,7 @@ void CommandLoader::Init()
 	fc->Register(RegularRectCut::Create());
 	fc->Register(RotateImage::Create());
 	fc->Register(PackRegularRect::Create());
+	fc->Register(FixRotateTrimJson::Create());
 }
 
 }

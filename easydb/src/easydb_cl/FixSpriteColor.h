@@ -2,6 +2,7 @@
 #define _EASYDB_FIX_SPRITE_COLOR_H_
 
 #include "ICommand.h"
+#include "FixJsonBase.h"
 
 #include <wx/wx.h>
 #include <JSON/json.h>
@@ -9,7 +10,7 @@
 namespace edb
 {
 
-class FixSpriteColor : public ICommand
+class FixSpriteColor : public ICommand, private FixJsonBase
 {
 public:
 	FixSpriteColor() {}
@@ -24,13 +25,11 @@ public:
 
 	static ICommand* Create() { return new FixSpriteColor(); }
 
+protected:
+	virtual bool FixSprite(const wxString& filepath, Json::Value& sprite_val) const;
+
 private:
 	void Trigger(const std::string& dir) const;
-
-	void FixComplex(const wxString& filepath) const;
-	void FixAnim(const wxString& filepath) const;
-
-	bool FixSprite(Json::Value& sprite_val) const;
 
 }; // FixSpriteColor 
 
