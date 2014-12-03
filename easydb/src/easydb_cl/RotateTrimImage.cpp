@@ -63,9 +63,8 @@ void RotateTrimImage::Trigger(const std::string& dir)
 			int width, height;
 			d2d::Vector center;
 			float angle;
-			GetRotateTrimInfo(image, width, height, center, angle);
-
-			if (angle == 0) {
+			bool success = GetRotateTrimInfo(image, width, height, center, angle);
+			if (!success || angle == 0) {
 				image->Release();
 				continue;
 			}
@@ -87,11 +86,14 @@ void RotateTrimImage::Trigger(const std::string& dir)
 	}
 }
 
-void RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int& height,
+bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int& height,
 										d2d::Vector& center, float& angle) const
 {
 	eimage::ExtractOutlineRaw raw(*image);
 	raw.CreateBorderLineAndMerge();
+	if (raw.GetBorderLine().empty()) {
+		return false;
+	}
 	raw.CreateBorderConvexHull();
 
 	d2d::Vector bound[4];
@@ -125,6 +127,8 @@ void RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 	} else {
 		angle = 0;
 	}
+
+	return true;
 }
 
 }

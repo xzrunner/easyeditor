@@ -26,7 +26,7 @@ public:
 private:
 	void Trigger(const std::string& dir);	
 
-	void GetRotateTrimInfo(const d2d::Image* image, 
+	bool GetRotateTrimInfo(const d2d::Image* image, 
 		int& width, int& height,
 		d2d::Vector& center, float& angle) const;
 
