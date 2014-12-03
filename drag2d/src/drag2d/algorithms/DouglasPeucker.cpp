@@ -7,6 +7,10 @@ namespace d2d
 
 void DouglasPeucker::implement(const std::vector<Vector>& line, float precision, std::vector<Vector>& dst)
 {
+	if (line.empty()) {
+		return;
+	}
+
 	dst.clear();
 
 	std::vector<bool> flag(line.size(), false);
