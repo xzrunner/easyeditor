@@ -7,5 +7,6 @@
 #include "libimage/ExtractOutlineFine.h"
 #include "libimage/RegularRectCut.h"
 #include "libimage/config.h"
+#include "libimage/ImageWriter.h"
 
 #endif // _EASYIMAGE_H_

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
+				AdditionalIncludeDirectories="..\..\..\external\libpng\include;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -212,6 +212,18 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="io"
+			>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageWriter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageWriter.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
