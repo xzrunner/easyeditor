@@ -309,6 +309,18 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="test"
+			>
+			<File
+				RelativePath="..\..\..\src\libcomplex\MyThread.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\MyThread.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

@@ -9,6 +9,8 @@
 #include <easyscale9.h>
 #include <easyanim.h>
 
+//#include "MyThread.h"
+
 namespace ecomplex
 {
 
@@ -17,6 +19,22 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
 {
 }
+
+// bool SelectSpritesOP::onKeyDown(int keyCode)
+// {
+// 	if (d2d::SelectSpritesOP::onKeyDown(keyCode)) {
+// 		return true;
+// 	}
+// 
+// 	if (keyCode == WXK_ESCAPE)
+// 	{
+// 		MyThread* t = new MyThread();
+// 		t->Create();
+// 		t->Run();
+// 	}
+// 
+// 	return false;
+// }
 
 bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 {
