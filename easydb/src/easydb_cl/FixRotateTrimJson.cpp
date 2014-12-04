@@ -70,10 +70,27 @@ bool FixRotateTrimJson::FixSprite(const wxString& filepath, Json::Value& sprite_
 
 	TrimInfo trim = itr->second;
 
-	d2d::Vector offset = d2d::Math::rotateVector(d2d::Vector(trim.x, trim.y), -trim.angle);
-	sprite_val["position"]["x"] = -offset.x;
-	sprite_val["position"]["y"] = -offset.y;
-	sprite_val["angle"] = sprite_val["angle"].asDouble() - trim.angle;
+	d2d::Vector old_pos, old_offset;
+	old_pos.x = sprite_val["position"]["x"].asDouble();
+	old_pos.y = sprite_val["position"]["y"].asDouble();
+	old_offset.x = sprite_val["x offset"].asDouble();
+	old_offset.y = sprite_val["y offset"].asDouble();
+	float old_angle = sprite_val["angle"].asDouble();
+
+	d2d::Vector new_offset = d2d::Math::rotateVector(old_offset, old_angle);
+
+	d2d::Vector trim_offset = d2d::Math::rotateVector(d2d::Vector(trim.x, trim.y), -trim.angle);
+
+	float new_angle = old_angle - trim.angle;
+
+	d2d::Vector new_pos = d2d::Math::rotateVector(-old_offset, old_angle) + old_offset + old_pos 
+		- d2d::Math::rotateVector(-new_offset, new_angle) - new_offset - trim_offset;
+
+	sprite_val["position"]["x"] = new_pos.x;
+	sprite_val["position"]["y"] = new_pos.y;
+	sprite_val["angle"] = new_angle;
+	sprite_val["x offset"] = new_offset.x;
+	sprite_val["y offset"] = new_offset.y;
 
 	return true;
 }
