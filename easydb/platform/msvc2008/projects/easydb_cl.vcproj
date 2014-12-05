@@ -302,14 +302,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb_cl\RotateImage.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\RotateImage.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easydb\Snapshoot.cpp"
 					>
 				</File>
@@ -362,6 +354,26 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\OutlineToPolygon.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="transform"
+					>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\RotateImage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\RotateImage.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\ScaleImage.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\ScaleImage.h"
 						>
 					</File>
 				</Filter>
