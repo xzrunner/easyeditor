@@ -40,11 +40,14 @@ private:
 
 	int checkFramebufferStatus() const;
 
+	void ReadPixels(unsigned char* pixels, int width, int height) const;
+
 private:
 	int m_width, m_height;
 
-	int m_tex;
-	int m_fbo;
+	typedef unsigned int GLuint;
+	GLuint m_tex;
+	GLuint m_fbo, m_color_fbo, m_depth_fbo;
 
 }; // Snapshoot
 
