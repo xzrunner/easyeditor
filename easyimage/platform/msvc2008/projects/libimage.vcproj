@@ -229,22 +229,6 @@
 			Name="render"
 			>
 			<File
-				RelativePath="..\..\..\src\libimage\LanczosResamplingShader.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\LanczosResamplingShader.frag"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\LanczosResamplingShader.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libimage\LanczosResamplingShader.vert"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libimage\NormalSpriteShader.frag"
 				>
 			</File>
@@ -252,6 +236,34 @@
 				RelativePath="..\..\..\src\libimage\NormalSpriteShader.vert"
 				>
 			</File>
+			<Filter
+				Name="resampling"
+				>
+				<File
+					RelativePath="..\..\..\src\libimage\AverageDownSamplingShader.frag"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\AverageDownSamplingShader.vert"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\LanczosResamplingShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\LanczosResamplingShader.frag"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\LanczosResamplingShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\LanczosResamplingShader.vert"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
