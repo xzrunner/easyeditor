@@ -45,6 +45,8 @@ public:
 	void SetModelView(const Vector& offset, float scale);
 	void GetModelView(Vector& offset, float& scale);
 
+	void SetSpriteShader(d2d::SpriteShader* shader, bool delete_old = true);
+
 private:
 	ShaderMgr();
 	~ShaderMgr();

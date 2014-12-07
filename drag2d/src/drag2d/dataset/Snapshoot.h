@@ -11,6 +11,8 @@ namespace d2d
 class ISymbol;
 class ISprite;
 
+class SpriteShader;
+
 class Snapshoot
 {
 public:
@@ -48,6 +50,8 @@ private:
 	typedef unsigned int GLuint;
 	GLuint m_tex;
 	GLuint m_fbo, m_color_fbo, m_depth_fbo;
+
+	SpriteShader *m_old_shader, *m_new_shader;
 
 }; // Snapshoot
 

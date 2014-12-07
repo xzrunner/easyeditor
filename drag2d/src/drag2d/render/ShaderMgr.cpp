@@ -37,6 +37,9 @@ ShaderMgr::ShaderMgr()
 
 ShaderMgr::~ShaderMgr()
 {
+	delete m_shape_shader;
+	delete m_sprite_shader;
+	delete m_font_shader;
 }
 
 void ShaderMgr::SetSpriteColor(const Colorf& multi, const Colorf& add)
@@ -58,7 +61,7 @@ void ShaderMgr::sprite()
 void ShaderMgr::shape()
 {
 	Switch(m_shape_shader);
- }
+}
 
 void ShaderMgr::null()
 {
@@ -131,6 +134,29 @@ void ShaderMgr::GetModelView(Vector& offset, float& scale)
 {
 	offset = m_offset;
 	scale = m_scale;
+}
+
+void ShaderMgr::SetSpriteShader(d2d::SpriteShader* shader, bool delete_old)
+{
+	if (m_sprite_shader == shader) {
+		return;
+	}
+
+	std::vector<IShader*>::iterator itr;
+	for (itr = m_shaders.begin(); itr != m_shaders.end(); ++itr) {
+		if (*itr == m_sprite_shader) {
+			m_shaders.erase(itr);
+			break;
+		}
+	}	
+
+	if (delete_old) {
+		m_sprite_shader->Unload();
+		delete m_sprite_shader;
+	}
+	m_sprite_shader = shader;
+
+	m_shaders.push_back(m_sprite_shader);
 }
 
 }

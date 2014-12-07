@@ -149,3 +149,4 @@
 #include "render/RenderContext.h"
 #include "render/IShader.h"
 #include "render/LabelNew.h"
+#include "render/SpriteShader.h"

@@ -39,52 +39,7 @@ SpriteShader::~SpriteShader()
 
 void SpriteShader::Load()
 {
-	static const char* vs =
-		FLOAT_PRECISION
-		"attribute vec4 position;  \n"
-		"attribute vec2 texcoord;  \n"
-		"attribute vec4 color;     \n"
-		"attribute vec4 additive;  \n"
-		"\n"
-		"varying vec2 v_texcoord;  \n"
-		"varying vec4 v_fragmentColor;  \n"
-		"varying vec4 v_fragmentAddi; \n"
-		"\n"
-		"uniform mat4 u_projection; \n"
-		"uniform mat4 u_modelview; \n"
-		"\n"
-		"void main()  \n"
-		"{  \n"
-		"  gl_Position = u_projection * u_modelview * position; "
-		"  v_fragmentColor = color / 255.0; \n"
-		"  v_fragmentAddi = additive / 255.0; \n"
-		"  v_texcoord = texcoord;  \n"
-		"}  \n"
-		;
-
-	static const char* fs =
-		FLOAT_PRECISION
-		"varying vec4 v_fragmentColor; \n"
-		"varying vec4 v_fragmentAddi; \n"
-		"varying vec2 v_texcoord;  \n"
-		"uniform sampler2D texture0;  \n"
-		"\n"
-		"void main()  \n"
-		"{  \n"  
-   		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-   		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-   		"  gl_FragColor.w = tmp.w;    \n"
-   		"  gl_FragColor *= v_fragmentColor.w;  \n"
-   		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-		"}  \n"
-		;
-
-	// 	glEnable(GL_BLEND);
-	// 	// todo 源混合因子ejoy2d用的GL_ONE
-	// 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-	// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	InitShader(fs, vs);
+	LoadShader();
 
 	m_projection = glGetUniformLocation(m_prog, "u_projection");
 	m_model_view = glGetUniformLocation(m_prog, "u_modelview");
@@ -282,6 +237,56 @@ void SpriteShader::BindAttrib(GLuint prog)
   	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
   	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
   	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
+}
+
+void SpriteShader::LoadShader()
+{
+	static const char* vs =
+		FLOAT_PRECISION
+		"attribute vec4 position;  \n"
+		"attribute vec2 texcoord;  \n"
+		"attribute vec4 color;     \n"
+		"attribute vec4 additive;  \n"
+		"\n"
+		"varying vec2 v_texcoord;  \n"
+		"varying vec4 v_fragmentColor;  \n"
+		"varying vec4 v_fragmentAddi; \n"
+		"\n"
+		"uniform mat4 u_projection; \n"
+		"uniform mat4 u_modelview; \n"
+		"\n"
+		"void main()  \n"
+		"{  \n"
+		"  gl_Position = u_projection * u_modelview * position; "
+		"  v_fragmentColor = color / 255.0; \n"
+		"  v_fragmentAddi = additive / 255.0; \n"
+		"  v_texcoord = texcoord;  \n"
+		"}  \n"
+		;
+
+	static const char* fs =
+		FLOAT_PRECISION
+		"varying vec4 v_fragmentColor; \n"
+		"varying vec4 v_fragmentAddi; \n"
+		"varying vec2 v_texcoord;  \n"
+		"uniform sampler2D texture0;  \n"
+		"\n"
+		"void main()  \n"
+		"{  \n"  
+		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
+		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
+		"  gl_FragColor.w = tmp.w;    \n"
+		"  gl_FragColor *= v_fragmentColor.w;  \n"
+		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
+		"}  \n"
+		;
+
+	// 	glEnable(GL_BLEND);
+	// 	// todo 源混合因子ejoy2d用的GL_ONE
+	// 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+	// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	InitShader(vs, fs);
 }
 
 void SpriteShader::InitBuffers()

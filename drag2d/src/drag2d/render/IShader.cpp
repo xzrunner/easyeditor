@@ -12,22 +12,27 @@ IShader::IShader()
 	m_prog = 0;
 }
 
-void IShader::InitShader(const char* FS, const char* VS)
+IShader::~IShader()
+{
+	DeleteShader();
+}
+
+void IShader::InitShader(const char* VS, const char* FS)
 {
 	GLuint prog = glCreateProgram();
-
-	GLuint fs = CompileShader(FS, GL_FRAGMENT_SHADER);
-	if (fs == 0) {
-		return;
-	} else {
-		glAttachShader(prog, fs);
-	}
 
 	GLuint vs = CompileShader(VS, GL_VERTEX_SHADER);
 	if (vs == 0) {
 		return;
 	} else {
 		glAttachShader(prog, vs);
+	}
+
+	GLuint fs = CompileShader(FS, GL_FRAGMENT_SHADER);
+	if (fs == 0) {
+		return;
+	} else {
+		glAttachShader(prog, fs);
 	}
 
 	BindAttrib(prog);
@@ -51,6 +56,12 @@ void IShader::InitShader(const char* FS, const char* VS)
 	glDeleteShader(vs);
 
 	m_prog = prog;
+}
+
+void IShader::DeleteShader()
+{
+	glUseProgram(0);
+	glDeleteProgram(m_prog);
 }
 
 GLuint IShader::CompileShader(const char* source, GLuint type)

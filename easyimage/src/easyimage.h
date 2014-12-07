@@ -9,4 +9,6 @@
 #include "libimage/config.h"
 #include "libimage/ImageWriter.h"
 
+#include "libimage/LanczosResamplingShader.h"
+
 #endif // _EASYIMAGE_H_

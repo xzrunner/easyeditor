@@ -12,6 +12,7 @@
 #include <gl/glu.h>
 
 #include <easyanim.h>
+#include <easyimage.h>
 
 namespace d2d
 {
@@ -27,6 +28,11 @@ Snapshoot::Snapshoot()
 	m_height = DEFAULT_HEIGHT;
 
 	createFBO();
+
+	m_old_shader = new d2d::SpriteShader;
+	m_old_shader->Load();
+	m_new_shader = new eimage::LanczosResamplingShader;
+	m_new_shader->Load();
 }
 
 Snapshoot::Snapshoot(int width, int height)
@@ -221,6 +227,8 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height) const
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
+ 	shader->null();
+ 	shader->SetSpriteShader(m_new_shader, false);
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 
@@ -242,6 +250,8 @@ void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height
 
 	shader->SetFBO(0);
 	shader->SetTexture(0);
+
+	d2d::ShaderMgr::Instance()->SetSpriteShader(m_old_shader, false);
 }
 
 int Snapshoot::checkFramebufferStatus() const

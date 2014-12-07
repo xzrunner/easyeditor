@@ -51,4 +51,20 @@ bool PixelDiffOP::clear()
 	return false;
 }
 
+bool PixelDiffOP::onActive()
+{
+	if (d2d::ZoomViewOP::onActive()) {
+		return true;
+	}
+
+	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	d2d::SpriteShader* shader = new d2d::SpriteShader;
+	shader->Load();
+	shader_mgr->SetSpriteShader(shader);
+
+	m_stage->getCanvas()->resetViewport();
+
+	return false;
+}
+
 }

@@ -12,7 +12,7 @@ class IShader
 {
 public:
 	IShader();
-	virtual ~IShader() {}
+	virtual ~IShader();
 	
 	virtual void Load() = 0;
 	virtual void Unload() = 0;
@@ -29,7 +29,8 @@ public:
 protected:
 	virtual void BindAttrib(GLuint prog) = 0;
 
-	void InitShader(const char* FS, const char* VS);
+	void InitShader(const char* VS, const char* FS);
+	void DeleteShader();
 
 private:
 	static GLuint CompileShader(const char* source, GLuint type);

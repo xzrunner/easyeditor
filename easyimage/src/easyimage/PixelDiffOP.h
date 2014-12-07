@@ -18,6 +18,8 @@ public:
 	virtual bool onDraw() const;
 	virtual bool clear();
 
+	virtual bool onActive();
+
 private:
 	StagePanel* m_stage;
 

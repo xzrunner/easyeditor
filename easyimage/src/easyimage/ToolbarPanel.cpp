@@ -4,6 +4,7 @@
 #include "PixelDiffCMPT.h"
 #include "AutoTriCutCMPT.h"
 #include "AutoRectCutCMPT.h"
+#include "ImageProcessCMPT.h"
 
 #include <easyshape.h>
 
@@ -18,6 +19,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	addChild(new AutoTriCutCMPT(this, wxT("Auto Tri Cut"), stage));
 	addChild(new AutoRectCutCMPT(this, wxT("Auto Rect Cut"), stage));
 	addChild(new PixelDiffCMPT(this, wxT("Pixel Diff"), stage));
+	addChild(new ImageProcessCMPT(this, wxT("Image Process"), stage));
 	SetSizer(initLayout());	
 }
 

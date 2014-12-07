@@ -48,7 +48,7 @@ void ShapeShader::Load()
 // 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 // 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	InitShader(fs, vs);
+	InitShader(vs, fs);
 
 	m_projection = glGetUniformLocation(m_prog, "u_projection");
 	m_model_view = glGetUniformLocation(m_prog, "u_modelview");

@@ -47,6 +47,8 @@ public:
 protected:
 	virtual void BindAttrib(GLuint prog);
 
+	virtual void LoadShader();
+
 private:
 	void InitBuffers();
 
