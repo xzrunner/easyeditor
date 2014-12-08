@@ -29,10 +29,12 @@ Snapshoot::Snapshoot()
 
 	createFBO();
 
+#ifdef TEST_RESAMPLING
 	m_old_shader = new d2d::SpriteShader;
 	m_old_shader->Load();
 	m_new_shader = new eimage::LanczosResamplingShader;
 	m_new_shader->Load();
+#endif
 }
 
 Snapshoot::Snapshoot(int width, int height)
@@ -131,43 +133,10 @@ void Snapshoot::createFBO()
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)m_width, (GLsizei)m_height, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
 	delete[] empty_data;
 
-	//----------------------
-	// init fbo
 	glGenFramebuffersEXT(1, &m_fbo);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-
-	assert(checkFramebufferStatus());
-	//----------------------
-	//Now make a multisample color buffer
-	glGenRenderbuffersEXT(1, &m_color_fbo);
-	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, m_color_fbo);
-	//samples=4, format=GL_RGBA8
-	glRenderbufferStorageMultisampleEXT(GL_RENDERBUFFER_EXT, 4, GL_RGBA8, m_width, m_height);
-
-	assert(checkFramebufferStatus());
-	//----------------------
-	//Make a depth multisample depth buffer
-	//You must give it the same samples as the color RB, same width and height as well
-	//else you will either get a GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT or some other error
-	glGenRenderbuffersEXT(1, &m_depth_fbo);
-	glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, m_depth_fbo);
-	//samples=4, format=GL_DEPTH_COMPONENT24
-	glRenderbufferStorageMultisampleEXT(GL_RENDERBUFFER_EXT, 4, GL_DEPTH_COMPONENT24, m_width, m_height);
-
-	assert(checkFramebufferStatus());
-	//----------------------
-	//It's time to attach the RBs to the FBO
-	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, m_color_fbo);
-	glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, m_depth_fbo);
-	
-
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0);
-
 	assert(checkFramebufferStatus());
-	//----------------------
-	//Make sure FBO status is good
-	int status = checkFramebufferStatus();
-	assert(status);
 
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -182,12 +151,7 @@ void Snapshoot::releaseFBO()
 	}
 	if (m_fbo != 0)
 	{
-// 		//Bind 0, which means render to back buffer, as a result, fb is unbound
-// 		glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
-
 		glDeleteFramebuffersEXT(1, &m_fbo);
-		glDeleteRenderbuffersEXT(1, &m_color_fbo);
-		glDeleteRenderbuffersEXT(1, &m_depth_fbo);
 		m_fbo = 0;
 	}
 }
@@ -227,8 +191,10 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height) const
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
+#ifdef TEST_RESAMPLING
  	shader->null();
  	shader->SetSpriteShader(m_new_shader, false);
+#endif
 	shader->SetFBO(m_fbo);
 	shader->sprite();
 
@@ -251,7 +217,9 @@ void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height
 	shader->SetFBO(0);
 	shader->SetTexture(0);
 
+#ifdef TEST_RESAMPLING
 	d2d::ShaderMgr::Instance()->SetSpriteShader(m_old_shader, false);
+#endif
 }
 
 int Snapshoot::checkFramebufferStatus() const
@@ -295,19 +263,8 @@ int Snapshoot::checkFramebufferStatus() const
 
 void Snapshoot::ReadPixels(unsigned char* pixels, int width, int height) const
 {
-	//Bind the MS FBO
-//	glBindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, multisample_fboID);
-	//Bind the standard FBO
-	glBindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, m_fbo);
-	//Let's say I want to copy the entire surface
-	//Let's say I only want to copy the color buffer only
-	//Let's say I don't need the GPU to do filtering since both surfaces have the same dimension
-	glBlitFramebufferEXT(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
-	//--------------------
-	//Bind the standard FBO for reading
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-	glReadPixels(0, 0, width, height, GL_BGRA, GL_UNSIGNED_BYTE, pixels);
-
+	glReadPixels(0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
 }
 

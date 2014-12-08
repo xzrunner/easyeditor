@@ -5,6 +5,8 @@
 
 namespace anim { class Symbol; }
 
+//#define TEST_RESAMPLING
+
 namespace d2d
 {
 
@@ -49,9 +51,11 @@ private:
 
 	typedef unsigned int GLuint;
 	GLuint m_tex;
-	GLuint m_fbo, m_color_fbo, m_depth_fbo;
+	GLuint m_fbo;
 
+#ifdef TEST_RESAMPLING
 	SpriteShader *m_old_shader, *m_new_shader;
+#endif
 
 }; // Snapshoot
 
