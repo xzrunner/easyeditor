@@ -136,6 +136,8 @@ easysketch/platform/msvc2008/easysketch
 easysketch/platform/msvc2008/libsketch
 easyterrain/platform/msvc2008/easyterrain
 easyterrain/platform/msvc2008/libterrain
+raytracer/platform/msvc2008/raytracer
+raytracer/platform/msvc2008/libraytracer
 
 drag2d/src/common/libpng/contrib
 libraries/lua-5.2.3/doc

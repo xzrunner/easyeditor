@@ -30,6 +30,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyterrain", "..\easyterra
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libterrain", "..\easyterrain\platform\msvc2008\projects\libterrain.vcproj", "{716758A5-F6CF-4294-88B2-29C9950304AF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libraytracer", "..\raytracer\platform\msvc2008\projects\libraytracer.vcproj", "{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raytracer", "..\raytracer\platform\msvc2008\projects\raytracer.vcproj", "{628FF30E-A33F-47E4-9000-AB659C802BFF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6} = {126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}
+		{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5} = {CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -64,6 +72,14 @@ Global
 		{716758A5-F6CF-4294-88B2-29C9950304AF}.Debug|Win32.Build.0 = Debug|Win32
 		{716758A5-F6CF-4294-88B2-29C9950304AF}.Release|Win32.ActiveCfg = Release|Win32
 		{716758A5-F6CF-4294-88B2-29C9950304AF}.Release|Win32.Build.0 = Release|Win32
+		{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}.Debug|Win32.Build.0 = Debug|Win32
+		{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}.Release|Win32.ActiveCfg = Release|Win32
+		{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}.Release|Win32.Build.0 = Release|Win32
+		{628FF30E-A33F-47E4-9000-AB659C802BFF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{628FF30E-A33F-47E4-9000-AB659C802BFF}.Debug|Win32.Build.0 = Debug|Win32
+		{628FF30E-A33F-47E4-9000-AB659C802BFF}.Release|Win32.ActiveCfg = Release|Win32
+		{628FF30E-A33F-47E4-9000-AB659C802BFF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

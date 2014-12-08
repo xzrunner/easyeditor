@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easysketch", "projects\easysketch.vcproj", "{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C} = {D41C0B3E-F0A0-4A1F-A568-0100C839406C}
+		{584F5852-C8C5-4381-8FE5-D0E76FB81B51} = {584F5852-C8C5-4381-8FE5-D0E76FB81B51}
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6} = {126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdrag2d", "..\..\..\drag2d\platform\msvc2008\projects\libdrag2d.vcproj", "{E69A7CDE-521A-45B5-B776-AD16F72F6A07}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libsketch", "projects\libsketch.vcproj", "{584F5852-C8C5-4381-8FE5-D0E76FB81B51}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libeasy3d", "..\..\..\easy3d\platform\msvc2008\projects\easy3d.vcproj", "{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libimage", "..\..\..\easyimage\platform\msvc2008\projects\libimage.vcproj", "{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}.Debug|Win32.Build.0 = Debug|Win32
+		{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}.Release|Win32.ActiveCfg = Release|Win32
+		{FF2D4A3A-86BA-47C0-AF4E-3264619B2F46}.Release|Win32.Build.0 = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.Build.0 = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.ActiveCfg = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.Build.0 = Release|Win32
+		{584F5852-C8C5-4381-8FE5-D0E76FB81B51}.Debug|Win32.ActiveCfg = Debug|Win32
+		{584F5852-C8C5-4381-8FE5-D0E76FB81B51}.Debug|Win32.Build.0 = Debug|Win32
+		{584F5852-C8C5-4381-8FE5-D0E76FB81B51}.Release|Win32.ActiveCfg = Release|Win32
+		{584F5852-C8C5-4381-8FE5-D0E76FB81B51}.Release|Win32.Build.0 = Release|Win32
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}.Debug|Win32.Build.0 = Debug|Win32
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}.Release|Win32.ActiveCfg = Release|Win32
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}.Release|Win32.Build.0 = Release|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.Build.0 = Debug|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.ActiveCfg = Release|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
