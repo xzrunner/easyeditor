@@ -2,11 +2,10 @@
 
 #include "maths/Ray.h"
 #include "utilities/ShadeRec.h"
+#include "utilities/Constants.h"
 
 namespace rt
 {
-
-static const double kEpsilon = 0.001;
 
 Plane::Plane()
 	: m_pos(0, 0, 0)
@@ -24,7 +23,7 @@ bool Plane::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 {
 	float t = (m_pos - ray.ori) * m_normal / (ray.dir * m_normal);
 
-	if (t > kEpsilon) {
+	if (t > EPSILON) {
 		tmin = t;
 		sr.normal = m_normal;
 		sr.local_hit_point = ray.ori + t * ray.dir;
@@ -33,6 +32,18 @@ bool Plane::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	}
 
 	return false;
+}
+
+bool Plane::ShadowHit(const Ray& ray, float& tmin) const
+{
+	float t = (m_pos - ray.ori) * m_normal / (ray.dir * m_normal);
+
+	if (t > EPSILON) {
+		tmin = t;
+		return (true);
+	} else {
+		return (false);
+	}
 }
 
 }

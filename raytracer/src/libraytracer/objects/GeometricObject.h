@@ -18,6 +18,8 @@ public:
 
 	virtual bool Hit(const Ray& ray, double& t, ShadeRec& s) const = 0;	
 
+	virtual bool ShadowHit(const Ray& ray, float& t) const = 0;
+
 	const Material* GetMaterial() const;
 	void SetMaterial(const Material* m);
 

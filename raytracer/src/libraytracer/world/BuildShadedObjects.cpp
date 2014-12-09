@@ -2,6 +2,7 @@
 
 #include "lights/Ambient.h"
 #include "lights/Directional.h"
+#include "lights/PointLight.h"
 #include "tracer/RayCast.h"
 #include "cameras/Pinhole.h"
 #include "materials/Matte.h"
@@ -46,10 +47,15 @@ void World::Build()
 
 	// light
 
-	Directional* light = new Directional;
-	light->SetDirection(Vector3D(100, 100, 200));
-	light->ScaleRadiance(3.0); 	
-	AddLight(light);
+//  	Directional* light = new Directional;
+//  	light->SetDirection(Vector3D(100, 100, 200));
+//  	light->ScaleRadiance(3.0); 	
+//  	AddLight(light);
+
+ 	PointLight* light = new PointLight();
+ 	light->SetLocation(Point3D(-100, -100, 200));
+ 	light->ScaleRadiance(5.0); 
+ 	AddLight(light);
 
 	// 	Directional* light2 = new Directional;
 	// 	light1->set_direction(-100, -100, -200);

@@ -31,8 +31,8 @@ void Pinhole::RenderScene(const World& world) const
 
 	int w = vp.GetWidth(),
 		h = vp.GetHeight();
-	for (int y = 0; y < h; y++)			// up
-		for (int x = 0; x < w; x++) {		// across
+	for (int y = 0; y < h; y++) {
+		for (int x = 0; x < w; x++) {
 			L = BLACK;
 			for (int j = 0; j < vp.GetSamplesNum(); j++) {
 				sp = vp.GetSampler()->SampleUnitSquare();
@@ -44,8 +44,10 @@ void Pinhole::RenderScene(const World& world) const
 
 			L /= vp.GetSamplesNum();
 			L *= m_exposure_time;
-			world.DisplayPixel(y, x, L);
+
+			world.DisplayPixel(y, x, MaxToOneColor(L));
 		}
+	}
 }
 
 Vector3D Pinhole::GetDirection(const Point2D& p) const

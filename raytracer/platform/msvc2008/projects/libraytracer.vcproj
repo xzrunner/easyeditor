@@ -228,6 +228,14 @@
 				RelativePath="..\..\..\src\libraytracer\lights\Light.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\lights\PointLight.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\lights\PointLight.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="utilities"

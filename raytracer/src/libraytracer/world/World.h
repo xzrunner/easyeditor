@@ -45,6 +45,8 @@ public:
 
 	void DisplayPixel(const int row, const int column, const RGBColor& pixel_color) const;
 
+	const std::vector<GeometricObject*>& GetObjects() const { return m_objects; }
+
 private:
 	void AddObject(GeometricObject* obj);
 

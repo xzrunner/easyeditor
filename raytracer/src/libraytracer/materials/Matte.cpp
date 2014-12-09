@@ -32,14 +32,14 @@ RGBColor Matte::Shade(const ShadeRec& sr) const
 		float ndotwi = float(sr.normal * wi);
 
 		if (ndotwi > 0.0f) {
-// 			bool in_shadow = false;
-// 			if (lights[i]->CastsShadows()) {
-// 				Ray shadowRay(sr.hit_point, wi);
-// 				in_shadow = lights[i]->InShadow(shadowRay, sr);
-// 			}
-// 			if (!in_shadow) {
+ 			bool in_shadow = false;
+ 			if (lights[i]->CastsShadows()) {
+ 				Ray shadowRay(sr.hit_point, wi);
+ 				in_shadow = lights[i]->InShadow(shadowRay, sr);
+ 			}
+ 			if (!in_shadow) {
 				L += m_diffuse_brdf->f(sr, wo, wi) * lights[i]->L(sr) * ndotwi;
-//			}
+			}
 		}
 	}
 
