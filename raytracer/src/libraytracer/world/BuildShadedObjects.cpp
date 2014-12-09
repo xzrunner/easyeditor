@@ -15,7 +15,7 @@ namespace rt
 
 void World::Build()
 {
-	int num_samples = 1; 
+	int num_samples = 5; 
 
 	// view plane  
 

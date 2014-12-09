@@ -297,6 +297,14 @@
 			Name="samplers"
 			>
 			<File
+				RelativePath="..\..\..\src\libraytracer\samplers\Jittered.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\samplers\Jittered.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\samplers\MultiJittered.cpp"
 				>
 			</File>

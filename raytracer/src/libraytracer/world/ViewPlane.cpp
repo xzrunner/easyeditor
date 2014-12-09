@@ -2,6 +2,7 @@
 
 #include "samplers/Regular.h"
 #include "samplers/MultiJittered.h"
+#include "samplers/Jittered.h"
 
 #include <stdio.h>
 
@@ -35,7 +36,8 @@ void ViewPlane::SetSamples(int n)
 	}
 
   	if (m_num_samples > 1) {
-  		m_sampler = new MultiJittered(m_num_samples);
+//  		m_sampler = new MultiJittered(m_num_samples);
+		m_sampler = new Jittered(m_num_samples);
   	} else {
   		m_sampler = new Regular(1);
   	}
