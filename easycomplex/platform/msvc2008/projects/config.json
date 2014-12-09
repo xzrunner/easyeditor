@@ -1,6 +1,7 @@
 {
 	// settings
 	// "font_filepath" : "../../../../../ejoy/coco-tools/editor_bin/korean.ttf",
+	"auto_get_focus" : false,			// 主界面自动获得焦点
 	"sprite_capture" : false,			// 编辑对象捕捉
 	"image_edge_clip" : true,			// 图片边缘裁剪
 	"visible_image_edge" : false,		// 显示图片原始边框

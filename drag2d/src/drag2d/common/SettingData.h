@@ -10,6 +10,7 @@ struct SettingData
 {
 	// edit
 	bool open_sprite_capture;
+	bool auto_get_focus;
 
 	// picture
 	bool open_image_edge_clip;

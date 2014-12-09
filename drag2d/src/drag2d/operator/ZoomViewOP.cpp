@@ -1,6 +1,8 @@
 #include "ZoomViewOP.h"
 
 #include "view/Camera.h"
+#include "common/config.h"
+#include "common/SettingData.h"
 
 namespace d2d
 {
@@ -13,6 +15,9 @@ ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
 	, m_openLeftTap(bOpenLeftTap)
 	, m_onRightBtnPan(false)
 {
+	const SettingData& setting = Config::Instance()->GetSettings();
+	m_bMouseMoveFocus = setting.auto_get_focus;
+
 	m_lastPos.setInvalid();
 }
 
