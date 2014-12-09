@@ -150,6 +150,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\dtex.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easyrender.h"
 			>
 		</File>

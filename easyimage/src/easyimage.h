@@ -8,6 +8,7 @@
 #include "libimage/RegularRectCut.h"
 #include "libimage/config.h"
 #include "libimage/ImageWriter.h"
+#include "libimage/ImageClip.h"
 
 #include "libimage/LanczosResamplingShader.h"
 

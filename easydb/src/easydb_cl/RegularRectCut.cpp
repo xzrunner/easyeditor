@@ -63,11 +63,11 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			filename.Replace("\\", "_");
 
 			const std::vector<eimage::Rect>& result = cut.GetResult();
-			eimage::ImageProcessor img_cut(image);
+			eimage::ImageClip img_cut(image, true);
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
 				const eimage::Rect& r = result[i];
-				const unsigned char* pixels = img_cut.clip(r.x, r.x+r.w, r.y, r.y+r.h);
+				const byte* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
 				wxString out_path;
 				out_path.Printf("%s\\%s#%d#%d#%d#%d#", dst_dir, filename, r.x, r.y, r.w, r.h);

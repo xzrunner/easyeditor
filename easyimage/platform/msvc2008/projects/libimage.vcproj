@@ -265,6 +265,18 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="process"
+			>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageClip.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageClip.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
 			>
