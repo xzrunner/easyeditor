@@ -1,5 +1,4 @@
-#include "World.h"
-
+#include "world/World.h"
 #include "samplers/Jittered.h"
 #include "lights/Ambient.h"
 #include "lights/Directional.h"
@@ -15,7 +14,7 @@ namespace rt
 
 void World::Build()
 {
-	int num_samples = 1;  // use 1 for 4.8(a), 64 for 4.8(b)
+	int num_samples = 64;  // use 1 for 4.8(a), 64 for 4.8(b)
 
 	Jittered* sampler_ptr = new Jittered(num_samples);
 
