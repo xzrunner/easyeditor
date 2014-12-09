@@ -52,10 +52,6 @@ private:
 
 	void AddLight(Light* light);
 
-	void SetTracer(Tracer* tracer);
-
-	void SetCamera(Camera* camera);
-
 private:
 	ViewPlane m_vp;
 

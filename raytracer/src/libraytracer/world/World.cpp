@@ -103,22 +103,6 @@ void World::AddLight(Light* light)
 	m_lights.push_back(light);
 }
 
-void World::SetTracer(Tracer* tracer)
-{
-	if (m_tracer != tracer) {
-		delete m_tracer;
-		m_tracer = tracer;
-	}
-}
-
-void World::SetCamera(Camera* camera)
-{
-	if (m_camera != camera) {
-		delete m_camera;
-		m_camera = camera;
-	}
-}
-
 void World::SetRenderOutput(RenderOutput* output)
 {
 	if (m_output != output) {

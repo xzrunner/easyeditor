@@ -12,7 +12,7 @@ namespace rt
 Matte::Matte()
 	: m_ambient_brdf(new Lambertian)
 	, m_diffuse_brdf(new Lambertian)
-{	
+{
 }
 
 Matte::~Matte()
@@ -27,7 +27,8 @@ RGBColor Matte::Shade(const ShadeRec& sr) const
 	RGBColor 	L 			= m_ambient_brdf->rho(sr, wo) * sr.w.GetAmbient()->L(sr);
 	const std::vector<Light*>& lights = sr.w.GetLights();
 
-	for (int i = 0, n = lights.size(); i < n; i++) {
+	for (int i = 0, n = lights.size(); i < n; i++) 
+	{
 		Vector3D wi = lights[i]->GetDirection(sr);
 		float ndotwi = float(sr.normal * wi);
 

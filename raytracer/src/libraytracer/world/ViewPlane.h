@@ -29,6 +29,8 @@ public:
 	float GetGamma() const { return m_gamma; }
 	float GetInvGamma() const { return m_inv_gamma; }
 
+	void SetMaxDepth(int depth) { m_max_depth = depth; }
+
 private:
 	// resolution
 	int m_hori_res, m_vert_res;
@@ -38,6 +40,9 @@ private:
 
 	// number of samples per pixel
 	int	m_num_samples;
+
+	// max number of reflected bounce rays
+	int	m_max_depth;
 
 	Sampler* m_sampler;
 

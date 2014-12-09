@@ -149,7 +149,7 @@
 			Name="world"
 			>
 			<File
-				RelativePath="..\..\..\src\libraytracer\world\BuildShadedObjects.cpp"
+				RelativePath="..\..\..\src\demo\BuildShadedObjects_04.cpp"
 				>
 			</File>
 			<File
@@ -376,6 +376,14 @@
 				RelativePath="..\..\..\src\libraytracer\materials\Matte.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\materials\SV_Matte.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\materials\SV_Matte.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="brdfs"
@@ -414,6 +422,26 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\cameras\Pinhole.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="texture"
+			>
+			<File
+				RelativePath="..\..\..\src\libraytracer\texture\Checker3D.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\texture\Checker3D.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\texture\Texture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\texture\Texture.h"
 				>
 			</File>
 		</Filter>

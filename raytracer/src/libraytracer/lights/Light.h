@@ -23,6 +23,8 @@ public:
 
 	virtual bool InShadow(const Ray& ray, const ShadeRec& sr) const = 0;
 
+	void SetShadows(bool shadows) { m_shadows = shadows; }
+
 private:
 	// does the light cast shadows or not
 	bool m_shadows;

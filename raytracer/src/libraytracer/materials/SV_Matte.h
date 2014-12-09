@@ -1,5 +1,5 @@
-#ifndef _RT_MATTE_H_
-#define _RT_MATTE_H_
+#ifndef _RT_SV_MATTE_H_
+#define _RT_SV_MATTE_H_
 
 #include "Material.h"
 
@@ -8,13 +8,13 @@ namespace rt
 
 class Lambertian;
 class ShadeRec;
-class Vector3D;
+class Texture;
 
-class Matte : public Material
+class SV_Matte : public Material
 {
 public:
-	Matte();
-	virtual ~Matte();
+	SV_Matte();
+	virtual ~SV_Matte();
 
 	virtual RGBColor Shade(const ShadeRec& sr) const;
 
@@ -22,15 +22,15 @@ public:
 
 	void SetKd(const float k);
 
-	void SetCd(const RGBColor c);
+	void SetCd(const Texture* tex);
 
 private:
 	Lambertian*	m_ambient_brdf;
 
 	Lambertian*	m_diffuse_brdf;
 
-}; // Matte
+}; // SV_Matte
 
 }
 
-#endif // _RT_MATTE_H_
+#endif // _RT_SV_MATTE_H_
