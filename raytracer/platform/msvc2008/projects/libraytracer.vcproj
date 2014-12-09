@@ -153,6 +153,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\world\RenderOutput.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\world\ViewPlane.cpp"
 				>
 			</File>
@@ -181,6 +185,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Plane.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Plane.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\objects\Sphere.cpp"
 				>
 			</File>
@@ -201,6 +213,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\lights\Directional.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\lights\Directional.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\lights\Light.cpp"
 				>
 			</File>
@@ -214,6 +234,10 @@
 			>
 			<File
 				RelativePath="..\..\..\src\libraytracer\utilities\Constants.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\utilities\RGBColor.cpp"
 				>
 			</File>
 			<File
@@ -265,6 +289,22 @@
 			Name="samplers"
 			>
 			<File
+				RelativePath="..\..\..\src\libraytracer\samplers\MultiJittered.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\samplers\MultiJittered.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\samplers\Regular.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\samplers\Regular.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\samplers\Sampler.cpp"
 				>
 			</File>
@@ -282,6 +322,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\tracer\MultipleObjects.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\tracer\RayCast.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\tracer\RayCast.h"
 				>
 			</File>
 			<File
@@ -333,6 +381,30 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="cameras"
+			>
+			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\Camera.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\Camera.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\Pinhole.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\Pinhole.h"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath="..\..\..\src\libraytracer\raytracer.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

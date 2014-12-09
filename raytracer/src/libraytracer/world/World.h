@@ -14,16 +14,14 @@ class GeometricObject;
 class Light;
 class Tracer;
 class Ray;
+class Camera;
+class RenderOutput;
 
 class World
 {
 public:
 	World();
 	~World();
-
-	void AddObject(GeometricObject* obj);
-
-	void AddLight(Light* light);
 
 	void Build();
 
@@ -37,6 +35,25 @@ public:
 
 	const Light* GetAmbient() const { return m_ambient; }
 
+	const Camera* GetCamera() const { return m_camera; }
+
+	const ViewPlane& GetViewPlane() const { return m_vp; }
+
+	Tracer* GetTracer() const { return m_tracer; }
+
+	void SetRenderOutput(RenderOutput* output);
+
+	void DisplayPixel(const int row, const int column, const RGBColor& pixel_color) const;
+
+private:
+	void AddObject(GeometricObject* obj);
+
+	void AddLight(Light* light);
+
+	void SetTracer(Tracer* tracer);
+
+	void SetCamera(Camera* camera);
+
 private:
 	ViewPlane m_vp;
 
@@ -49,6 +66,10 @@ private:
 	Light* m_ambient;
 
 	Tracer* m_tracer;
+
+	Camera* m_camera;
+
+	RenderOutput* m_output;
 
 }; // World
 

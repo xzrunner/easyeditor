@@ -11,7 +11,7 @@ namespace rt
 class Sphere : public GeometricObject
 {
 public:
-	Sphere();
+	Sphere(const Point3D& center, float r);
 
 	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
 

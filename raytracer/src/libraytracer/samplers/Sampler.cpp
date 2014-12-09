@@ -8,8 +8,23 @@ namespace rt
 {
 
 Sampler::Sampler()
+	: m_num_samples(1)
+	, m_num_sets(83)
+	, m_count(0)
+	, m_jump(0)
 {
-	
+	m_samples.reserve(m_num_samples * m_num_sets);
+	SetupShuffledIndices();
+}
+
+Sampler::Sampler(int num)
+	: m_num_samples(num)
+	, m_num_sets(83)
+	, m_count(0)
+	, m_jump(0)
+{
+	m_samples.reserve(m_num_samples * m_num_sets);
+	SetupShuffledIndices();
 }
 
 const Point2D& Sampler::SampleUnitSquare() const

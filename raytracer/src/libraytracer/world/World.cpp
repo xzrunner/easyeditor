@@ -1,10 +1,12 @@
 #include "World.h"
+#include "RenderOutput.h"
 
 #include "objects/GeometricObject.h"
 #include "lights/Light.h"
 #include "lights/Ambient.h"
 #include "samplers/Sampler.h"
 #include "tracer/Tracer.h"
+#include "cameras/Camera.h"
 #include "maths/Point2D.h"
 #include "maths/Point3D.h"
 #include "maths/Ray.h"
@@ -21,6 +23,8 @@ namespace rt
 World::World()
 	: m_ambient(new Ambient)
 	, m_tracer(NULL)
+	, m_camera(NULL)
+	, m_output(NULL)
 	, m_background_color(BLACK)
 {
 }
@@ -32,16 +36,7 @@ World::~World()
 
 	delete m_ambient;
 	delete m_tracer;
-}
-
-void World::AddObject(GeometricObject* obj)
-{
-	m_objects.push_back(obj);
-}
-
-void World::AddLight(Light* light)
-{
-	m_lights.push_back(light);
+	delete m_camera;
 }
 
 void World::RenderScene()
@@ -96,6 +91,62 @@ ShadeRec World::HitObjects(const Ray& ray) const
 	}
 
 	return(sr);
+}
+
+void World::AddObject(GeometricObject* obj)
+{
+	m_objects.push_back(obj);
+}
+
+void World::AddLight(Light* light)
+{
+	m_lights.push_back(light);
+}
+
+void World::SetTracer(Tracer* tracer)
+{
+	if (m_tracer != tracer) {
+		delete m_tracer;
+		m_tracer = tracer;
+	}
+}
+
+void World::SetCamera(Camera* camera)
+{
+	if (m_camera != camera) {
+		delete m_camera;
+		m_camera = camera;
+	}
+}
+
+void World::SetRenderOutput(RenderOutput* output)
+{
+	if (m_output != output) {
+		delete m_output;
+		m_output = output;
+	}	
+}
+
+void World::DisplayPixel(const int row, const int column, const RGBColor& raw_color) const
+{
+	RGBColor mapped_color;
+
+	if (m_vp.ShowOutOfGamut()) {
+		mapped_color = MaxToOneColor(raw_color);
+	} else {
+		mapped_color = ClampToColor(raw_color);
+	}
+
+	if (m_vp.GetGamma() != 1.0)
+		mapped_color = mapped_color.Powc(m_vp.GetInvGamma());
+
+	//have to start from max y coordinate to convert to screen coordinates
+	int x = column;
+	int y = m_vp.GetHeight() - row - 1;
+
+	m_output->SetPixel(x, y, (int)(mapped_color.r * 255),
+		(int)(mapped_color.g * 255),
+		(int)(mapped_color.b * 255));
 }
 
 }

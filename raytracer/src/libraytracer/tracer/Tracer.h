@@ -14,6 +14,8 @@ public:
 	
 	virtual RGBColor TraceRay(const Ray& ray) const;
 
+	virtual RGBColor TraceRay(const Ray& ray, int depth) const;
+
 }; // Tracer
 
 }

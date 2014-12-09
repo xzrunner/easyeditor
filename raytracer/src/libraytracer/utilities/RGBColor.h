@@ -1,6 +1,8 @@
 #ifndef _RT_RGB_COLOR_H_
 #define _RT_RGB_COLOR_H_
 
+#include <algorithm>
+
 namespace rt
 {
 
@@ -18,8 +20,14 @@ public:
 
 	RGBColor& operator += (const RGBColor& col);
 
+	RGBColor& operator *= (const float s);
+	RGBColor& operator /= (const float s);
+
 	RGBColor operator * (const RGBColor& c) const;
 	RGBColor operator * (const float a) const;
+	RGBColor operator / (const float a) const;
+
+	RGBColor Powc(float p) const;
 
 }; // RGBColor
 
@@ -33,10 +41,22 @@ operator = (const RGBColor& col)
 inline RGBColor& RGBColor::
 operator += (const RGBColor& col) 
 {
-	r += col.r;
-	g += col.g;
-	b += col.b;
-	return (*this);		
+	r += col.r; g += col.g; b += col.b;
+	return *this;
+}
+
+inline RGBColor& RGBColor::
+operator *= (const float s)
+{
+	r *= s; g *= s; b *= s;
+	return *this;
+}
+
+inline RGBColor& RGBColor::
+operator /= (const float s)
+{
+	r /= s; g /= s; b /= s;
+	return *this;
 }
 
 inline RGBColor RGBColor::
@@ -51,10 +71,39 @@ operator * (const float a) const
 	return RGBColor(r * a, g * a, b * a);
 }
 
+inline RGBColor RGBColor::
+operator / (const float a) const
+{
+	return RGBColor(r / a, g / a, b / a);
+}
+
+//////////////////////////////////////////////////////////////////////////
+
 inline RGBColor 
 operator * (const float a, const RGBColor& c) 
 {
 	return RGBColor(a * c.r, a * c.g, a * c.b);
+}
+
+inline RGBColor ClampToColor(const RGBColor& raw_color)
+{
+	RGBColor c(raw_color);
+
+	if (raw_color.r > 1.0 || raw_color.g > 1.0 || raw_color.b > 1.0) {
+		c.r = 1.0; c.g = 0.0; c.b = 0.0;
+	}
+
+	return c;
+}
+
+inline RGBColor MaxToOneColor(const RGBColor& c)
+{
+	float max_value = std::max(c.r, std::max(c.g, c.b));
+
+	if (max_value > 1.0)
+		return c / max_value;
+	else
+		return c;
 }
 
 }

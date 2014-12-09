@@ -34,7 +34,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libraytracer", "..\raytrace
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raytracer", "..\raytracer\platform\msvc2008\projects\raytracer.vcproj", "{628FF30E-A33F-47E4-9000-AB659C802BFF}"
 	ProjectSection(ProjectDependencies) = postProject
-		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6} = {126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}
 		{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5} = {CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}
 	EndProjectSection
 EndProject

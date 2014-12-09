@@ -10,6 +10,7 @@ class ViewPlane
 {
 public:
 	ViewPlane();
+	~ViewPlane();
 
 	int GetWidth() const { return m_hori_res; }
 	int GetHeight() const { return m_vert_res; }
@@ -20,9 +21,13 @@ public:
 	void SetPixelSize(float sz) { m_pixel_size = sz; }
 
 	int GetSamplesNum() const { return m_num_samples; }
-	void SetSamplesNum(int n) { m_num_samples = n; }
-	
 	const Sampler* GetSampler() const { return m_sampler; }
+	void SetSamples(int n);
+
+	bool ShowOutOfGamut() const { return m_show_out_of_gamut; }
+
+	float GetGamma() const { return m_gamma; }
+	float GetInvGamma() const { return m_inv_gamma; }
 
 private:
 	// resolution
@@ -35,6 +40,14 @@ private:
 	int	m_num_samples;
 
 	Sampler* m_sampler;
+
+	// display red if RGBColor out of gamut
+	bool m_show_out_of_gamut;
+
+	// gamma correction factor
+	float m_gamma;
+	// the inverse of the gamma correction factor
+	float m_inv_gamma;
 
 }; // ViewPlane
 

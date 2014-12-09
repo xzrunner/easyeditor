@@ -9,6 +9,18 @@
 namespace rt
 {
 
+Matte::Matte()
+	: m_ambient_brdf(new Lambertian)
+	, m_diffuse_brdf(new Lambertian)
+{	
+}
+
+Matte::~Matte()
+{
+	delete m_ambient_brdf;
+	delete m_diffuse_brdf;
+}
+
 RGBColor Matte::Shade(const ShadeRec& sr) const
 {
 	Vector3D 	wo 			= -sr.ray.dir;
@@ -20,18 +32,34 @@ RGBColor Matte::Shade(const ShadeRec& sr) const
 		float ndotwi = float(sr.normal * wi);
 
 		if (ndotwi > 0.0f) {
-			bool in_shadow = false;
-			if (lights[i]->CastsShadows()) {
-				Ray shadowRay(sr.hit_point, wi);
-				in_shadow = lights[i]->InShadow(shadowRay, sr);
-			}
-			if (!in_shadow) {
+// 			bool in_shadow = false;
+// 			if (lights[i]->CastsShadows()) {
+// 				Ray shadowRay(sr.hit_point, wi);
+// 				in_shadow = lights[i]->InShadow(shadowRay, sr);
+// 			}
+// 			if (!in_shadow) {
 				L += m_diffuse_brdf->f(sr, wo, wi) * lights[i]->L(sr) * ndotwi;
-			}
+//			}
 		}
 	}
 
 	return L;
+}
+
+void Matte::SetKa(const float k)
+{
+	m_ambient_brdf->SetKa(k);
+}
+
+void Matte::SetKd(const float k)
+{
+	m_diffuse_brdf->SetKd(k);
+}
+
+void Matte::SetCd(const RGBColor c)
+{
+	m_ambient_brdf->SetCd(c);
+	m_diffuse_brdf->SetCd(c);
 }
 
 }

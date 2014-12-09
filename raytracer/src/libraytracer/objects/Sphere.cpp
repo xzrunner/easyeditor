@@ -10,6 +10,12 @@ namespace rt
 
 static const double kEpsilon = 0.001;
 
+Sphere::Sphere(const Point3D& center, float r)
+	: m_center(center)
+	, m_radius(r)
+{
+}
+
 bool Sphere::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 {
 	double 		t;

@@ -1,10 +1,13 @@
 #ifndef _RT_VECTOR3D_H_
 #define _RT_VECTOR3D_H_
 
+#include <math.h>
+
 namespace rt
 {
 
 class Point3D;
+class Normal;
 
 class Vector3D
 {
@@ -16,6 +19,7 @@ public:
 	Vector3D(double x, double y, double z)
 		: x(x), y(y), z(z) {}
 	Vector3D(const Point3D& p);
+	Vector3D(const Normal& n);
 
 	// unary minus
 	Vector3D operator - () const;
@@ -37,6 +41,8 @@ public:
 
 	// cross product
 	Vector3D operator ^ (const Vector3D& v) const;
+
+	void Normalize();
 
 }; // Vector3D
 
@@ -73,6 +79,13 @@ Vector3D::operator * (const Vector3D& v) const {
 inline Vector3D 
 Vector3D::operator ^ (const Vector3D& v) const {
 	return (Vector3D(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x));
+}
+
+inline void Vector3D::
+Normalize()
+{
+	double length = sqrt(x * x + y * y + z * z);
+	x /= length; y /= length; z /= length;
 }
 
 inline Vector3D
