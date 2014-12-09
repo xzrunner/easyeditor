@@ -9,7 +9,9 @@
 #include <easyscale9.h>
 #include <easyanim.h>
 
+// for debug
 //#include "MyThread.h"
+//#include "RectCutLoader.h"
 
 namespace ecomplex
 {
@@ -20,21 +22,27 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 {
 }
 
-// bool SelectSpritesOP::onKeyDown(int keyCode)
-// {
-// 	if (d2d::SelectSpritesOP::onKeyDown(keyCode)) {
-// 		return true;
-// 	}
+//  bool SelectSpritesOP::onKeyDown(int keyCode)
+//  {
+//  	if (d2d::SelectSpritesOP::onKeyDown(keyCode)) {
+//  		return true;
+//  	}
+//  
+// //  	if (keyCode == WXK_ESCAPE)
+// //  	{
+// //  		MyThread* t = new MyThread();
+// //  		t->Create();
+// //  		t->Run();
+// //  	}
 // 
-// 	if (keyCode == WXK_ESCAPE)
+// 	if (keyCode == WXK_SPACE)
 // 	{
-// 		MyThread* t = new MyThread();
-// 		t->Create();
-// 		t->Run();
+// 		RectCutLoader loader((StagePanel*)(m_editPanel));
+// 		loader.Load("character\\debug_pack\\pack.json", "2013baji1_attack1_2_1_011");
 // 	}
 // 
-// 	return false;
-// }
+//  	return false;
+//  }
 
 bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 {

@@ -36,13 +36,15 @@ private:
 private:
 	struct Rect
 	{
-		Rect() : w(-1), h(-1) {}
+		Rect() : w(-1), h(-1), rot(false) {}
 
 		bool HasFilepath() const { return !file.IsEmpty(); }
 
 		int x, y;
 		int w, h;
 		wxString file;
+
+		bool rot;
 
 	}; // Rect
 

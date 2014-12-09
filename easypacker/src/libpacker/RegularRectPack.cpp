@@ -37,8 +37,8 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 {
 	Json::Value value;
 
-	value["width"] = m_size.width;
-	value["height"] = m_size.height;
+ 	value["width"] = m_size.width;
+ 	value["height"] = m_size.height;
 
 	std::vector<std::pair<Rect, libpacker::Rect> >::const_iterator itr;
 	int idx = 0;
@@ -49,8 +49,13 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 		const libpacker::Rect& dst = itr->second;
 
 		rect_val["filepath"] = src.file.ToStdString();
-		rect_val["src"]["w"] = src.w;
-		rect_val["src"]["h"] = src.h;
+		if (src.rot) {
+			rect_val["src"]["w"] = src.h;
+			rect_val["src"]["h"] = src.w;
+		} else {
+			rect_val["src"]["w"] = src.w;
+			rect_val["src"]["h"] = src.h;
+		}
 		rect_val["src"]["x"] = src.x;
 		rect_val["src"]["y"] = src.y;
 		rect_val["dst"]["w"] = dst.width;
@@ -58,7 +63,7 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 		rect_val["dst"]["x"] = dst.x;
 		rect_val["dst"]["y"] = dst.y;
 
-		value[idx++] = rect_val;
+		value["sprites"][idx++] = rect_val;
 	}
 
 	Json::StyledStreamWriter writer;
@@ -261,6 +266,10 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 	{
 		const wxString& filepath = files[i];
 
+		if (filepath.Contains("2013baji1_attack1_2_1_011#4#39#8#4#.png")) {
+			int zz = 0;
+		}
+
 		Rect r;
 		r.file = filepath;
 
@@ -283,6 +292,7 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 
 		if (r.w > r.h) {
 			std::swap(r.w, r.h);
+			r.rot = true;
 		}
 
 		InsertToCombineArray(Combine(r));
