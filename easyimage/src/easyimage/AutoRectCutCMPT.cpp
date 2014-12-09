@@ -122,11 +122,11 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
 	wxString ori_path = d2d::FilenameTools::getFilePathExceptExtension(img->filepath());
-	eimage::ImageProcessor img_cut(img);
+	eimage::ImageClip img_cut(img);
 	const std::vector<Rect>& result = cut.GetResult();
 	for (int i = 0, n = result.size(); i < n; ++i) {
 		const eimage::Rect& r = result[i];
-		const unsigned char* pixels = img_cut.clip(r.x, r.x+r.w, r.y, r.y+r.h);
+		const byte* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
 		wxString out_path;
 		out_path.Printf("%s#%d#%d#%d#%d#", ori_path, r.x, r.y, r.w, r.h);

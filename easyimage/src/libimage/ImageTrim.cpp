@@ -1,71 +1,16 @@
-#include "ImageProcessor.h"
-
-#include <drag2d.h>
+#include "ImageTrim.h"
 
 //#define USE_SOIL
 
 namespace eimage
 {
 
-ImageProcessor::ImageProcessor(const d2d::Image* image)
+ImageTrim::ImageTrim(const d2d::Image* image)
 	: m_image(image)
-{	
-}
-
-const unsigned char* ImageProcessor::clip(int xmin, int xmax, int ymin, int ymax) const
 {
-	if (!m_image) {
-		return NULL;
-	}
-
-	int width = m_image->originWidth(),
-		height = m_image->originHeight();
-	int channels = m_image->channels();
-	const unsigned char* pixels = m_image->getPixelData();
-
-	if (xmin >= xmax || ymin >= ymax) {
-		return NULL;
-	}
-
-// 	// todo y方向反转
-// 	int _ymin = height - ymax;
-// 	int _ymax = height - ymin;
-// 	ymin = _ymin;
-// 	ymax = _ymax;
-
-	int w = xmax - xmin,
-		h = ymax - ymin;
-	int sz = w * h * channels;
-	unsigned char* sub = new unsigned char[sz];
-	if (!sub) {
-		return NULL;
-	}
-
-	memset(sub, 0, sz);
-	for (int y = ymin; y < ymax; ++y) {
-		for (int x = xmin; x < xmax; ++x) {
-			if (x >= 0 && x < width &&
-				y >= 0 && y < height) {
-				int from = (y * width + x) * channels,
-					to = ((h - (y - ymin) - 1) * w + x-xmin) * channels;
-				memcpy(&sub[to], &pixels[from], channels);
-			}
-		}
-	}
-
-//	// todo cp line
-// 	int line_size = channels * w;
-// 	for (int i = 0; i < h; ++i)
-// 	{
-// 		int from = (width * (ymin + i) + xmin) * channels,
-// 			to = (h - 1 - i) * w * channels;
-// 		memcpy(&sub[to], &pixels[from], line_size);
-// 	}
-
-	return sub;
 }
 
-d2d::Rect ImageProcessor::trim() const
+d2d::Rect ImageTrim::Trim() const
 {
 	d2d::Rect sub;
 	sub.makeInfinite();
@@ -89,7 +34,7 @@ d2d::Rect ImageProcessor::trim() const
 	{
 		int j = 0;
 		for ( ; j < width; ++j) {
-			if (!isTransparent(j, i)) {
+			if (!IsTransparent(j, i)) {
 				break;
 			}
 		}
@@ -105,7 +50,7 @@ d2d::Rect ImageProcessor::trim() const
 	{
 		int j = 0;
 		for ( ; j < width; ++j) {
-			if (!isTransparent(j, i)) {
+			if (!IsTransparent(j, i)) {
 				break;
 			}
 		}
@@ -121,7 +66,7 @@ d2d::Rect ImageProcessor::trim() const
 	{
 		int j = 0;
 		for ( ; j < height; ++j) {
-			if (!isTransparent(i, j)) {
+			if (!IsTransparent(i, j)) {
 				break;
 			}
 		}
@@ -137,7 +82,7 @@ d2d::Rect ImageProcessor::trim() const
 	{
 		int j = 0;
 		for ( ; j < height; ++j) {
-			if (!isTransparent(i, j)) {
+			if (!IsTransparent(i, j)) {
 				break;
 			}
 		}
@@ -160,7 +105,7 @@ d2d::Rect ImageProcessor::trim() const
 	}
 }
 
-bool ImageProcessor::isTransparent(int x, int y) const
+bool ImageTrim::IsTransparent(int x, int y) const
 {
 	if (!m_image) {
 		return false;

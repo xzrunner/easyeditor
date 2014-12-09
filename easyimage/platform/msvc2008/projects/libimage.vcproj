@@ -276,6 +276,14 @@
 				RelativePath="..\..\..\src\libimage\ImageClip.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageTrim.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageTrim.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
@@ -283,14 +291,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\easyimage.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libimage\ImageProcessor.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libimage\ImageProcessor.h"
 			>
 		</File>
 		<File

@@ -46,9 +46,12 @@ void TrimImage::Trigger(const std::string& dir)
 			std::cout << i << " / " << n << " : " << filepath << "\n";
 
 			d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filepath);		
-			eimage::ImageProcessor proc(img);
-			d2d::Rect r = proc.trim();
-			const unsigned char* pixels = proc.clip(r.xMin, r.xMax, r.yMin, r.yMax);
+
+			eimage::ImageTrim trim(img);
+			d2d::Rect r = trim.Trim();
+
+			eimage::ImageClip clip(img);
+			const byte* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
 			d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), 
 				filepath.ToStdString(), d2d::ImageSaver::e_png);
 			delete[] pixels;

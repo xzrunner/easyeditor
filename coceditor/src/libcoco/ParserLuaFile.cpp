@@ -310,9 +310,9 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			Picture::Part* part = pic->parts[i];
 
 			d2d::Image* image = images[part->tex];
-			eimage::ImageProcessor processor(image);
+			eimage::ImageClip clip(image);
 
-			const unsigned char* pixels = processor.clip(part->xmin, part->xmax, part->ymin, part->ymax);
+			const byte* pixels = clip.Clip(part->xmin, part->xmax, part->ymin, part->ymax);
 			if (pixels) 
 			{
 				int width = part->xmax-part->xmin,
