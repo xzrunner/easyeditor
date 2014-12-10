@@ -2,6 +2,7 @@
 #define _ECOMPLEX_RECT_CUT_LOADER_H_
 
 #include <wx/wx.h>
+#include <vector>
 
 namespace ecomplex
 {
@@ -13,7 +14,9 @@ class RectCutLoader
 public:
 	RectCutLoader(StagePanel* stage);
 	
-	void Load(const wxString& pack_file, const wxString& img_name);
+	void LoadOnlyJson(const wxString& pack_file, const wxString& img_name);
+
+	void LoadJsonAndImg(const wxString& pack_file, const wxString& img_name);
 
 private:
 	struct Rect
@@ -27,6 +30,10 @@ private:
 		Rect src, dst;
 		wxString filepath;
 	};
+
+private:
+	void LoadJsonFile(const wxString& pack_file, const wxString& img_name,
+		std::vector<Sprite>& sprites);
 
 private:
 	StagePanel* m_stage;

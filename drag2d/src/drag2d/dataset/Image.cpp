@@ -32,6 +32,21 @@ Image::Image()
 	m_width = m_height = 0;
 }
 
+Image::Image(const byte* pixel, int width, int height)
+	: m_width(width)
+	, m_height(height)
+	, m_pixels(pixel)
+{
+	m_textureID = 0;
+	m_channels = 4;
+	ImageLoader::loadTexture(m_textureID, m_pixels, m_width, m_height, m_channels, GL_RGBA);
+
+	m_region.xMin = - m_width * 0.5f;
+	m_region.xMax =   m_width * 0.5f;
+	m_region.yMin = - m_height * 0.5f;
+	m_region.yMax =   m_height * 0.5f;
+}
+
 Image::~Image()
 {
 	ImageMgr::Instance()->removeItem(m_filepath);
@@ -230,7 +245,6 @@ void Image::draw(const Matrix& mt, const Rect& r) const
 		wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
 
 		texid = m_textureID;
-	 	d2d::Vector texcoords[4];
 	 	float tot_hw = m_width * 0.5f,
 	 		tot_hh = m_height * 0.5f;
 	 	txmin = (r.xMin + tot_hw) / m_width;
