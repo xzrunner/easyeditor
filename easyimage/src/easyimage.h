@@ -9,6 +9,7 @@
 #include "libimage/ImageWriter.h"
 #include "libimage/ImageClip.h"
 #include "libimage/ImageTrim.h"
+#include "libimage/ImagePack.h"
 
 #include "libimage/LanczosResamplingShader.h"
 
