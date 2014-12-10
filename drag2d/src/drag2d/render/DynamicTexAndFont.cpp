@@ -82,6 +82,66 @@ void DynamicTexAndFont::EndImage()
 	EndDraw();
 }
 
+void DynamicTexAndFont::AddImageWithRegion(Image* img, const Rect& r_src, const Rect& r_dst, bool rot)
+{
+	m_rect_preload_list.push_back(ImageWithRegion(img, r_src, r_dst, rot));
+}
+
+void DynamicTexAndFont::EndImageWithRegion()
+{
+	if (m_rect_preload_list.empty()) {
+		return;
+	}
+
+	// find size of image
+	Rect region;
+	for (int i = 0, n = m_rect_preload_list.size(); i < n; ++i) {
+		region.combine(m_rect_preload_list[i].r_src);
+	}
+
+	// insert
+	int w = region.xLength();
+	int h = region.yLength();
+	int extend = GetExtend() * 2;
+	d2d::TPNode* node = m_root->Insert(w+extend, h+extend);
+	if (!node) {
+		m_rect_preload_list.clear();
+		return;
+	}
+
+	// draw
+	BeginDraw();
+	for (int i = 0, n = m_rect_preload_list.size(); i < n; ++i) 
+	{
+		const ImageWithRegion& ir = m_rect_preload_list[i];
+		Rect r_vertex, r_texcoords;
+		// src
+		int ori_width = ir.img->originWidth(),
+			ori_height = ir.img->originHeight();
+		r_texcoords.xMin = ir.r_dst.xMin / ori_width;
+		r_texcoords.xMax = ir.r_dst.xMax / ori_width;
+		r_texcoords.yMin = (ori_height - ir.r_dst.yMax) / ori_height;
+		r_texcoords.yMax = (ori_height - ir.r_dst.yMin) / ori_height;
+		// dst
+		int extend = GetExtend();
+		r_vertex.xMin = node->GetMinX() + extend + ir.r_src.xMin;
+		r_vertex.xMax = node->GetMinX() + extend + ir.r_src.xMax;
+		r_vertex.yMin = node->GetMinY() + extend + ir.r_src.yMax;
+		r_vertex.yMax = node->GetMinY() + extend + ir.r_src.yMin;
+		r_vertex.translate(Vector(-m_width*0.5f, -m_height*0.5f));
+
+		bool rot = node->IsRotated() && !ir.rot 
+			|| !node->IsRotated() && ir.rot;
+		DrawRegion(r_vertex, r_texcoords, ir.img->textureID(), rot);
+	}
+	EndDraw();
+
+	// set key
+//	m_path2node.insert(std::make_pair(filepath, n));
+
+	m_rect_preload_list.clear();
+}
+
 void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 {
 	const wxString& filepath = symbol.getFilepath();

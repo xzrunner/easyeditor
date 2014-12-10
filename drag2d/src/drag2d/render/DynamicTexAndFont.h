@@ -59,6 +59,9 @@ public:
 	void AddImage(Image* img);
 	void EndImage();
 
+	void AddImageWithRegion(Image* img, const Rect& r_src, const Rect& r_dst, bool rot);
+	void EndImageWithRegion();
+
 	void InsertSymbol(const ISymbol& symbol);
 	void RefreshSymbol(const ISymbol& symbol, const TPNode& node);
 
@@ -119,7 +122,7 @@ private:
 				max = r.xLength();
 			}
 		}
-	}; // NodeCmp
+	}; // ImageSizeCmp
 
 	class Hash
 	{
@@ -177,8 +180,29 @@ private:
 	static const int FONT_SIZE_COUNT = 256;
 
 private:
+	struct ImageWithRegion
+	{
+		Image* img;
+		Rect r_src, r_dst;
+		bool rot;
+
+		ImageWithRegion(Image* img, const Rect& r_src, const Rect& r_dst, bool rot) 
+			: img(img), r_src(r_src), r_dst(r_dst), rot(rot) {}
+	}; // ImageWithRegion
+
+// 	class ImageWithRegionCmp
+// 	{
+// 	public:
+// 		bool operator () (const ImageWithRegion* lhs, const ImageWithRegion* rhs) const {
+// 			return lhs->img->filepath().compare(lhs->img->filepath());
+// 		}
+// 	}; // ImageWithRegionCmp
+
+private:
 	int m_preload_idx;
 	std::vector<Image*> m_preload_list;
+
+	std::vector<ImageWithRegion> m_rect_preload_list;
 
 	std::map<wxString, TPNode*> m_path2node;
 	

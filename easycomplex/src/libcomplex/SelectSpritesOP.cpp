@@ -39,7 +39,8 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 	{
 		RectCutLoader loader((StagePanel*)(m_editPanel));
 //		loader.LoadOnlyJson("E:\\debug\\character\\debug_pack\\pack.json", "2013baji1_attack1_2_1_011");
-		loader.LoadJsonAndImg("E:\\debug\\character\\debug_pack\\pack.json", "2013baji1_attack1_2_1_011");
+//		loader.LoadJsonAndImg("E:\\debug\\character\\debug_pack\\pack.json", "2013baji1_attack1_2_1_011");
+		loader.LoadToDtex("E:\\debug\\character\\debug_pack\\pack.json", "2013baji1_attack1_2_1_011");
 	}
 
 	return false;

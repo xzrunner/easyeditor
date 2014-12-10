@@ -80,6 +80,31 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	img->Release();
 }
 
+void RectCutLoader::LoadToDtex(const wxString& pack_file, const wxString& img_name)
+{
+	std::vector<Sprite> sprites;
+	LoadJsonFile(pack_file, img_name, sprites);
+
+	wxString dir = d2d::FilenameTools::getFileDir(pack_file);
+	d2d::Image* img = d2d::ImageMgr::Instance()->getItem(dir + "\\pack.png");
+
+	eimage::ImageClip clip(img);
+	d2d::DynamicTexAndFont* dtex = d2d::DynamicTexAndFont::Instance();
+	for (int i = 0, n = sprites.size(); i < n; ++i)
+	{
+		const Sprite& spr = sprites[i];
+		d2d::Rect r_src, r_dst;
+		r_src.combine(d2d::Vector(spr.src.x, spr.src.y));
+		r_src.combine(d2d::Vector(spr.src.x+spr.src.w, spr.src.y+spr.src.h));
+		r_dst.combine(d2d::Vector(spr.dst.x, spr.dst.y));
+		r_dst.combine(d2d::Vector(spr.dst.x+spr.dst.w, spr.dst.y+spr.dst.h));
+		dtex->AddImageWithRegion(img, r_src, r_dst, spr.src.h != spr.dst.h);
+	}
+	dtex->EndImageWithRegion();
+
+	img->Release();
+}
+
 void RectCutLoader::LoadJsonFile(const wxString& pack_file, const wxString& img_name,
 								 std::vector<Sprite>& sprites)
 {
