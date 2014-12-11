@@ -156,6 +156,14 @@
 				Name="regular_rect"
 				>
 				<File
+					RelativePath="..\..\..\src\libpacker\GenRegularRectBinary.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpacker\GenRegularRectBinary.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libpacker\GenRegularRectImage.cpp"
 					>
 				</File>

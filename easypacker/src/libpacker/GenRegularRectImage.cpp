@@ -20,7 +20,7 @@ void GenRegularRectImage::Create(const wxString& filepath)
 	eimage::ImagePack pack(width, height);
 
 	int i = 0;
-	Json::Value spr_val = value["sprites"][i++];
+	Json::Value spr_val = value["parts"][i++];
 	while (!spr_val.isNull()) {
 		int x = spr_val["dst"]["x"].asInt(),
 			y = spr_val["dst"]["y"].asInt();
@@ -31,7 +31,7 @@ void GenRegularRectImage::Create(const wxString& filepath)
 		pack.AddImage(img, x ,y, w, h);
 		img->Release();
 
-		spr_val = value["sprites"][i++];
+		spr_val = value["parts"][i++];
 	}
 
 	wxString dir = d2d::FilenameTools::getFileDir(filepath);

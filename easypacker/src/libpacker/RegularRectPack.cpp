@@ -63,7 +63,7 @@ void RegularRectPack::OutputToText(const wxString& filepath) const
 		rect_val["dst"]["x"] = dst.x;
 		rect_val["dst"]["y"] = dst.y;
 
-		value["sprites"][idx++] = rect_val;
+		value["parts"][idx++] = rect_val;
 	}
 
 	Json::StyledStreamWriter writer;

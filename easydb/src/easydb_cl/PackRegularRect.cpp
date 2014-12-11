@@ -37,12 +37,20 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
-	libpacker::RegularRectPack rrp(files);
-//	rrp.Pack();
-	wxString filepath = dst_dir + "\\pack.json";
-//	rrp.OutputToText(filepath);
 
-	libpacker::GenRegularRectImage::Create(filepath);
+	wxString filepath = dst_dir + "\\pack.json";
+
+// 	// pack
+// 	libpacker::RegularRectPack rrp(files);
+// 	rrp.Pack();
+// 	rrp.OutputToText(filepath);
+// 
+// 	// gen image
+// 	libpacker::GenRegularRectImage::Create(filepath);
+
+	// gen binary
+	libpacker::GenRegularRectBinary pack(filepath);
+	pack.PackToBinary();
 }
 
 }

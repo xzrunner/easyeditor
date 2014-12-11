@@ -25,9 +25,10 @@ private:
 	{
 		int w, h;
 		int x, y;
+		Rect() : w(0), h(0), x(0), y(0) {}
 	};
 
-	struct Sprite
+	struct Picture
 	{
 		Rect src, dst;
 		wxString filepath;
@@ -35,7 +36,10 @@ private:
 
 private:
 	void LoadJsonFile(const wxString& pack_file, const wxString& img_name,
-		std::vector<Sprite>& sprites);
+		std::vector<Picture>& pictures);
+
+	void LoadRRPFile(const wxString& pack_file, int img_id,
+		std::vector<Picture>& pictures);
 
 private:
 	StagePanel* m_stage;
