@@ -23,6 +23,9 @@ public:
 
 	virtual bool InShadow(const Ray& ray, const ShadeRec& sr) const = 0;
 
+	virtual float G(const ShadeRec& sr) const = 0;
+	virtual float Pdf(const ShadeRec& sr) const = 0;
+
 	void SetShadows(bool shadows) { m_shadows = shadows; }
 
 private:
@@ -30,18 +33,6 @@ private:
 	bool m_shadows;
 
 }; // Light
-
-inline Light::
-Light()
-	: m_shadows(true)
-{
-}
-
-inline bool Light::
-CastsShadows() const
-{
-	return m_shadows;
-}
 
 }
 

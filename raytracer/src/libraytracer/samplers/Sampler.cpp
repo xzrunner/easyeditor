@@ -1,6 +1,7 @@
 #include "Sampler.h"
 
 #include "maths/maths.h"
+#include "utilities/Constants.h"
 
 #include <algorithm>
 
@@ -27,15 +28,46 @@ Sampler::Sampler(int num)
 	SetupShuffledIndices();
 }
 
+// ------------------------------------------------------------------- map_samples_to_hemisphere
+// Maps the 2D sample points to 3D points on a unit hemisphere with a cosine power
+// density distribution in the polar angle
+// explained on page 129
+void Sampler::MapSamplesToHemisphere(const float exp)
+{
+	int size = m_samples.size();
+	m_hemisphere_samples.reserve(m_num_samples * m_num_sets);
+
+	for (int j = 0; j < size; j++) {
+		float cos_phi = (float)cos(2.0 * PI * m_samples[j].x);
+		float sin_phi = (float)sin(2.0 * PI * m_samples[j].x);	
+		float cos_theta = pow(1.0f - m_samples[j].y, 1.0f / (exp + 1.0f));
+		float sin_theta = sqrt (1.0f - cos_theta * cos_theta);
+		float pu = sin_theta * cos_phi;
+		float pv = sin_theta * sin_phi;
+		float pw = cos_theta;
+		m_hemisphere_samples.push_back(Point3D(pu, pv, pw)); 
+	}
+}
+
 const Point2D& Sampler::SampleUnitSquare() const
 {
 	// start of a new pixel
 	if (m_count % m_num_samples == 0) {
-		// random index jump initialised to zero in constructor
+		// random index m_jump initialised to zero in constructor
 		m_jump = (rand_int() % m_num_sets) * m_num_samples;
 	}
 
 	return m_samples[m_jump + m_shuffled_indices[m_jump + m_count++ % m_num_samples]];
+}
+
+const Point3D& Sampler::SampleHemisphere()
+{
+	// start of a new pixel
+	if (m_count % m_num_samples == 0) {
+		m_jump = (rand_int() % m_num_sets) * m_num_samples;
+	}
+
+	return (m_hemisphere_samples[m_jump + m_shuffled_indices[m_jump + m_count++ % m_num_samples]]);
 }
 
 void Sampler::SetupShuffledIndices()

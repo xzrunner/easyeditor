@@ -1,22 +1,20 @@
-#ifndef _RT_RAY_CAST_H_
-#define _RT_RAY_CAST_H_
+#ifndef _RT_AREA_LIGHTING_H_
+#define _RT_AREA_LIGHTING_H_
 
 #include "Tracer.h"
 
 namespace rt
 {
 
-class World;
-
-class RayCast : public Tracer
+class AreaLighting : public Tracer
 {
 public:
 	virtual RGBColor TraceRay(const Ray& ray) const;
 
 	virtual RGBColor TraceRay(const Ray& ray, int depth) const;
 
-}; // RayCast
+}; // AreaLighting
 
 }
 
-#endif // _RT_RAY_CAST_H_
+#endif // _RT_AREA_LIGHTING_H_

@@ -153,6 +153,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\demo\BuildShadedObjects_05.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\world\RenderOutput.h"
 				>
 			</File>
@@ -193,6 +197,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Rectangle.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Rectangle.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\objects\Sphere.cpp"
 				>
 			</File>
@@ -210,6 +222,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\lights\Ambient.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\lights\AreaLight.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\lights\AreaLight.h"
 				>
 			</File>
 			<File
@@ -333,6 +353,14 @@
 			Name="tracer"
 			>
 			<File
+				RelativePath="..\..\..\src\libraytracer\tracer\AreaLighting.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\tracer\AreaLighting.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\tracer\MultipleObjects.cpp"
 				>
 			</File>
@@ -361,6 +389,14 @@
 			Name="materials"
 			>
 			<File
+				RelativePath="..\..\..\src\libraytracer\materials\Emissive.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\materials\Emissive.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\materials\Material.cpp"
 				>
 			</File>
@@ -374,6 +410,22 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\materials\Matte.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\materials\Phong.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\materials\Phong.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\materials\Reflective.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\materials\Reflective.h"
 				>
 			</File>
 			<File
@@ -397,11 +449,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\brdfs\GlossySpecular.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\brdfs\GlossySpecular.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\brdfs\Lambertian.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\brdfs\Lambertian.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\brdfs\PerfectSpecular.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\brdfs\PerfectSpecular.h"
 				>
 			</File>
 		</Filter>

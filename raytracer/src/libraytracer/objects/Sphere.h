@@ -14,7 +14,6 @@ public:
 	Sphere(const Point3D& center, float r);
 
 	virtual bool Hit(const Ray& ray, double& tmin, ShadeRec& sr) const;
-
 	virtual bool ShadowHit(const Ray& ray, float& tmin) const;
 
 private:

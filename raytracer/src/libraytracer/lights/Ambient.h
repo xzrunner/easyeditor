@@ -19,6 +19,9 @@ public:
 
 	virtual bool InShadow(const Ray& ray, const ShadeRec& sr) const;
 
+	virtual float G(const ShadeRec& sr) const;
+	virtual float Pdf(const ShadeRec& sr) const;
+
 	void ScaleRadiance(const float b);
 
 private:
@@ -26,37 +29,6 @@ private:
 	RGBColor m_color;
 
 }; // Ambient
-
-inline Ambient::Ambient()
-	: m_ls(1)
-	, m_color(1, 1, 1)
-{
-}
-
-inline RGBColor Ambient::
-L(const ShadeRec& sr) const
-{
-	return m_ls * m_color;
-}
-
-inline Vector3D Ambient::
-GetDirection(const ShadeRec& sr) const
-{
-	return Vector3D(0, 0, 0);
-}
-
-inline bool Ambient::
-InShadow(const Ray& ray, const ShadeRec& sr) const
-{
-	// not implented yet
-	return true;
-}
-
-inline void Ambient::
-ScaleRadiance(const float b)
-{
-	m_ls = b;
-}
 
 }
 

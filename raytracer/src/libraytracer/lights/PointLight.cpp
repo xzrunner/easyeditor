@@ -41,6 +41,16 @@ bool PointLight::InShadow(const Ray& ray, const ShadeRec& sr) const
 	return false;
 }
 
+float PointLight::G(const ShadeRec& sr) const
+{
+	return 5.5f;
+}
+
+float PointLight::Pdf(const ShadeRec& sr) const
+{
+	return 5.5f;
+}
+
 void PointLight::SetLocation(const Point3D& location)
 {
 	m_location = location;

@@ -19,6 +19,9 @@ public:
 
 	virtual bool InShadow(const Ray& ray, const ShadeRec& sr) const;
 
+	virtual float G(const ShadeRec& sr) const;
+	virtual float Pdf(const ShadeRec& sr) const;
+
 	void SetLocation(const Point3D& location);
 
 	void ScaleRadiance(const float b);

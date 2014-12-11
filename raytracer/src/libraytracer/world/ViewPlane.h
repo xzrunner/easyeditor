@@ -22,6 +22,7 @@ public:
 
 	int GetSamplesNum() const { return m_num_samples; }
 	const Sampler* GetSampler() const { return m_sampler; }
+	void SetSampler(Sampler* sampler);
 	void SetSamples(int n);
 
 	bool ShowOutOfGamut() const { return m_show_out_of_gamut; }

@@ -44,6 +44,9 @@ public:
 
 	void Normalize();
 
+	double Length() const;
+	double LenSquared() const;
+
 }; // Vector3D
 
 inline
@@ -86,6 +89,18 @@ Normalize()
 {
 	double length = sqrt(x * x + y * y + z * z);
 	x /= length; y /= length; z /= length;
+}
+
+inline double Vector3D::
+LenSquared() const
+{
+	return x * x + y * y + z * z;
+}
+
+inline double Vector3D::
+Length() const
+{
+	return sqrt(LenSquared());
 }
 
 inline Vector3D

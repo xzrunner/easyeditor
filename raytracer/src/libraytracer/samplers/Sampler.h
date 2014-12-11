@@ -2,6 +2,7 @@
 #define _RT_SAMPLE_H_
 
 #include "maths/Point2D.h"
+#include "maths/Point3D.h"
 
 #include <vector>
 
@@ -18,8 +19,15 @@ public:
 	// generate sample patterns in a unit square
 	virtual void GenerateSamples() = 0;
 
+	void MapSamplesToHemisphere(const float p);
+
 	// get next sample on unit square
 	const Point2D& SampleUnitSquare() const;
+
+	// get next sample on unit hemisphere
+	const Point3D& SampleHemisphere();
+
+	int GetNumSamples() const { return m_num_samples; }
 
 private:
 	void SetupShuffledIndices();
@@ -31,7 +39,10 @@ protected:
 	int m_num_sets;
 
 	// sample points on a unit square
-	std::vector<Point2D> m_samples;				
+	std::vector<Point2D> m_samples;
+
+	// sample points on a unit hemisphere
+	std::vector<Point3D> m_hemisphere_samples;
 
 	// shuffled samples array indices
 	std::vector<int> m_shuffled_indices;		

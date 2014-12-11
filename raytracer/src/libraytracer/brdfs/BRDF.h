@@ -13,18 +13,16 @@ class Vector3D;
 class BRDF
 {
 public:
+	virtual ~BRDF() {}
 	
 	virtual RGBColor f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const;
 
 	virtual RGBColor rho(const ShadeRec& sr, const Vector3D& wo) const = 0;
 
-}; // BRDF
+	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi) const;
+	virtual RGBColor sample_f(const ShadeRec& sr, const Vector3D& wo, Vector3D& wi, float& pdf) const;
 
-inline RGBColor BRDF::
-f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const
-{
-	return BLACK;
-}
+}; // BRDF
 
 }
 
