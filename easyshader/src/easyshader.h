@@ -6,6 +6,7 @@
 #include "libshader/LibraryPanel.h"
 #include "libshader/StagePanel.h"
 #include "libshader/ToolbarPanel.h"
+#include "libshader/FileIO.h"
 
 #include "libshader/Shader.h"
 

@@ -22,25 +22,7 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath);
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-	shader_mgr->null();
-
- 	wxString dir = d2d::FilenameTools::getFileDir(filepath);
- 	std::string vert_path = dir + "\\" + value["vert_path"].asString(),
- 		frag_path = dir + "\\" + value["frag_path"].asString();
- 	Shader* shader = new Shader(vert_path, frag_path);
- 	shader->Load();
- 	shader_mgr->SetSpriteShader(shader->GetShaderImpl());
-	shader_mgr->sprite();
- 	m_stage->getCanvas()->resetViewport();
+	FileIO::LoadShader(filepath, m_stage);
 }
 
 void Task::store(const char* filepath) const

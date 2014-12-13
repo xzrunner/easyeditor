@@ -33,6 +33,7 @@ enum UniformType
 class Uniform
 {
 public:
+	Uniform(const std::string& name, UniformType type);
 
 	void Load();
 
@@ -48,11 +49,10 @@ public:
 	void Set(int i, int j, int k, int h);
 
 private:
-	UniformValue m_value;
-
 	std::string m_name;
-
 	UniformType m_type;
+
+	UniformValue m_value;
 
 	int m_location;
 

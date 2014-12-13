@@ -16,6 +16,7 @@ public:
 	~Shader();
 
 	bool Load();
+	void LoadUniforms();
 
 	void AddUniform(Uniform* uniform);
 

@@ -217,6 +217,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="fileio"
+			>
+			<File
+				RelativePath="..\..\..\src\libshader\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshader\FileIO.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libshader\config.h"
 			>

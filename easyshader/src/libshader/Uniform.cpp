@@ -1,9 +1,16 @@
 #include "Uniform.h"
 
-#include <gl/glew.h>
+#include <gl/gLee.h>
 
 namespace eshader
 {
+
+Uniform::Uniform(const std::string& name, UniformType type)
+	: m_name(name)
+	, m_type(type)
+	, m_location(0)
+{
+}
 
 void Uniform::Load()
 {

@@ -22,6 +22,13 @@ bool Shader::Load()
 	return true;
 }
 
+void Shader::LoadUniforms()
+{
+	for (int i = 0, n = m_uniforms.size(); i < n; ++i) {
+		m_uniforms[i]->Load();
+	}
+}
+
 void Shader::AddUniform(Uniform* uniform)
 {
 	m_uniforms.push_back(uniform);
