@@ -53,6 +53,7 @@ private:
 	UniformType m_type;
 
 	UniformValue m_value;
+	UniformValue m_val_min, m_val_max;
 
 	int m_location;
 

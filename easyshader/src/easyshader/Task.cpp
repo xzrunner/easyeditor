@@ -22,7 +22,7 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	FileIO::LoadShader(filepath, m_stage);
+	FileIO::LoadShader(filepath, m_stage, m_toolbar);
 }
 
 void Task::store(const char* filepath) const

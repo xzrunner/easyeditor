@@ -1,5 +1,7 @@
 #include "FileIO.h"
 #include "Shader.h"
+#include "SliderItem.h"
+#include "ToolBarPanel.h"
 
 namespace eshader
 {
@@ -16,7 +18,8 @@ static const std::string STR_MAT2	= "mat2";
 static const std::string STR_MAT3	= "mat3";
 static const std::string STR_MAT4	= "mat4";
 
-void FileIO::LoadShader(const wxString& filepath, d2d::EditPanel* stage)
+void FileIO::LoadShader(const wxString& filepath, d2d::EditPanel* stage,
+						ToolbarPanel* toolbar)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -29,14 +32,15 @@ void FileIO::LoadShader(const wxString& filepath, d2d::EditPanel* stage)
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 	shader_mgr->null();
 	wxString dir = d2d::FilenameTools::getFileDir(filepath);
-	Shader* shader = LoadShader(dir, value);
+	Shader* shader = LoadShader(dir, value, toolbar);
 	shader_mgr->SetSpriteShader(shader->GetShaderImpl());
 	shader_mgr->sprite();
 	shader->LoadUniforms();
 	stage->getCanvas()->resetViewport();
 }
 
-Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value)
+Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value,
+						   ToolbarPanel* toolbar)
 {
 	std::string vert_path = dir + "\\" + value["vert_path"].asString(),
 		frag_path = dir + "\\" + value["frag_path"].asString();
@@ -47,7 +51,7 @@ Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value)
 	int i = 0;
 	Json::Value uniform_val = value["uniforms"][i++];
 	while (!uniform_val.isNull()) {
-		Uniform* uniform = LoadUniform(uniform_val);
+		Uniform* uniform = LoadUniform(uniform_val, toolbar);
 		uniform->SetLocation(shader->GetShaderImpl()->GetProgram());
 		shader->AddUniform(uniform);
 		uniform_val = value["uniforms"][i++];
@@ -56,11 +60,14 @@ Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value)
 	return shader;
 }
 
-Uniform* FileIO::LoadUniform(const Json::Value& value)
+Uniform* FileIO::LoadUniform(const Json::Value& value, ToolbarPanel* toolbar)
 {
 	std::string name = value["name"].asString();
 	UniformType type = TransStrToUType(value["type"].asString());
 	Uniform* uniform = new Uniform(name, type);
+
+	std::vector<SliderItemFloat> items;
+
 	switch (type)
 	{
 	case UT_INT:
@@ -68,9 +75,19 @@ Uniform* FileIO::LoadUniform(const Json::Value& value)
 	case UT_BOOL:
 		break;
 	case UT_FLOAT:
-		uniform->Set((float)(value["value"].asDouble()));
+		{
+			float default = (float)(value["value"].asDouble());
+			float min = (float)(value["region"]["begin"].asDouble()),
+				  max = (float)(value["region"]["end"].asDouble());
+			uniform->Set(default);
+			items.push_back(SliderItemFloat("", default, min, max));
+		}
 		break;
 	}
+
+	std::string title = value["title"].asString();
+	toolbar->AddUniform(title, name, uniform, items);
+
 	return uniform;
 }
 

@@ -195,6 +195,22 @@
 					RelativePath="..\..\..\src\libshader\ToolbarPanel.h"
 					>
 				</File>
+				<Filter
+					Name="slider"
+					>
+					<File
+						RelativePath="..\..\..\src\libshader\SliderCtrl.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\SliderCtrl.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\SliderItem.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
