@@ -125,6 +125,8 @@ easypacker/platform/msvc2008/easypacker
 easypacker/platform/msvc2008/libpacker
 easyimage/platform/msvc2008/easyimage
 easyimage/platform/msvc2008/libimage
+easyshader/platform/msvc2008/easyshader
+easyshader/platform/msvc2008/libshader
 formation/platform/msvc2008/formation
 raiden/platform/msvc2008/raiden
 shootbubble/platform/msvc2008/shootbubble
