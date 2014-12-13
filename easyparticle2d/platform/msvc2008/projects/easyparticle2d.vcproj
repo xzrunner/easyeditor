@@ -186,14 +186,6 @@
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\easyparticle2d\Frame.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easyparticle2d\Frame.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\easyparticle2d\main.cpp"
 			>
 		</File>

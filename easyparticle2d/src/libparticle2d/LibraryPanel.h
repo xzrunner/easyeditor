@@ -3,10 +3,6 @@
 
 #include <drag2d.h>
 
-namespace anim { class LibraryPage; }
-namespace ecomplex { class LibraryPage; }
-namespace escale9 { class LibraryPage; }
-
 namespace eparticle2d
 {
 

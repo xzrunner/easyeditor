@@ -197,10 +197,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libcomplex\config.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libcomplex\Sprite.cpp"
 				>
 			</File>
@@ -329,6 +325,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\..\..\src\libcomplex\config.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

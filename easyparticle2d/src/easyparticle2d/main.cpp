@@ -1,6 +1,4 @@
 #include "main.h"
-
-#include "Frame.h"
 #include "Task.h"
 
 #include <easycomplex.h>
@@ -31,7 +29,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	d2d::Frame* frame = new eparticle2d::Frame("EasyParticle2D", eparticle2d::FILE_TAG);
+	d2d::Frame* frame = new d2d::Frame("EasyParticle2D", eparticle2d::FILE_TAG);
 	eparticle2d::Task* task = new eparticle2d::Task(frame);
 	frame->setTask(task);
 	frame->Show(true);

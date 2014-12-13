@@ -2,7 +2,6 @@
 #define _EASYPARTICLE2D_TASK_H_
 
 #include <drag2d.h>
-#include <wx/splitter.h>
 
 namespace eparticle2d
 {

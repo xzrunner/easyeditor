@@ -1,6 +1,7 @@
 #include "Task.h"
 
 #include <easyparticle2d.h>
+#include <wx/splitter.h>
 
 namespace eparticle2d
 {
