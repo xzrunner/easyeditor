@@ -2,7 +2,7 @@
 #define _ESHADER_SLIDER_CTRL_H_
 
 #include <wx/wx.h>
-#include <vector>
+#include <drag2d.h>
 
 #include "SliderItem.h"
 
@@ -15,15 +15,18 @@ class SliderCtrl : public wxPanel
 {
 public:
 	SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name,
-		Uniform* uniform, const std::vector<SliderItemFloat>& items, float scale_slider2text = 1);
+		Uniform* uniform, const std::vector<SliderItemFloat>& items, float slider_accuracy,
+		d2d::GLCanvas* canvas);
 
-//	void Update();
+	void GetValue(double values[16]) const;
 
 private:
 	void InitLayout(const std::string& title, const std::vector<SliderItemFloat>& items);
 
 	void OnSetValue(wxScrollEvent& event);
 	void OnSetValue(wxCommandEvent& event);
+
+	void UpdateUniformValue();
 
 private:
 	struct Item
@@ -36,11 +39,13 @@ private:
 private:
 	std::string m_name;
 
-	float m_scale_slider2text;
+	float m_slider_accuracy;
 
 	std::vector<Item> m_items;
 
 	Uniform* m_uniform;
+
+	d2d::GLCanvas* m_canvas;
 
 }; // SliderCtrl
 

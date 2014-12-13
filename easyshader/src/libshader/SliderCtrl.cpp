@@ -5,20 +5,23 @@ namespace eshader
 {
 
 SliderCtrl::SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name, 
-					   Uniform* uniform, const std::vector<SliderItemFloat>& items, float scale_slider2text)
+					   Uniform* uniform, const std::vector<SliderItemFloat>& items, float slider_accuracy,
+					   d2d::GLCanvas* canvas)
 	: wxPanel(parent, wxID_ANY)
 	, m_name(name)
-	, m_scale_slider2text(scale_slider2text)
+	, m_slider_accuracy(slider_accuracy)
 	, m_uniform(uniform)
+	, m_canvas(canvas)
 {
 	InitLayout(title, items);
 }
 
-// template<class T>
-// void SliderCtrl<T>::Update()
-// {
-// 	
-// }
+void SliderCtrl::GetValue(double values[16]) const
+{
+	for (int i = 0, n = m_items.size(); i < n; ++i) {
+		m_items[i].text->GetValue().ToDouble(&values[i]);
+	}
+}
 
 void SliderCtrl::InitLayout(const std::string& title, 
 							const std::vector<SliderItemFloat>& items)
@@ -33,8 +36,8 @@ void SliderCtrl::InitLayout(const std::string& title,
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, src.title, wxDefaultPosition, wxSize(40, -1)));
 
-		dst.slider = new wxSlider(this, wxID_ANY, src.default / m_scale_slider2text, src.min / m_scale_slider2text, 
-			src.max / m_scale_slider2text, wxDefaultPosition, wxSize(160, -1));
+		dst.slider = new wxSlider(this, wxID_ANY, src.default / m_slider_accuracy, src.min / m_slider_accuracy, 
+			src.max / m_slider_accuracy, wxDefaultPosition, wxSize(160, -1));
 		Connect(dst.slider->GetId(), wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler(SliderCtrl::OnSetValue));
 		sizer->Add(dst.slider);
 
@@ -55,14 +58,11 @@ void SliderCtrl::OnSetValue(wxScrollEvent& event)
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
 		const Item& item = m_items[i];
 		int ival = item.slider->GetValue();
-		float fval = ival * m_scale_slider2text;
+		float fval = ival * m_slider_accuracy;
 		item.text->SetValue(wxString::FromDouble(fval));
-
-		// todo temp
-		m_uniform->Set(fval);
 	}
 
-	m_uniform->Load();
+	UpdateUniformValue();
 }
 
 void SliderCtrl::OnSetValue(wxCommandEvent& event)
@@ -71,14 +71,31 @@ void SliderCtrl::OnSetValue(wxCommandEvent& event)
 		const Item& item = m_items[i];
 		double fval;
 		item.text->GetValue().ToDouble(&fval);
-		int ival = (int)(fval / m_scale_slider2text);
+		int ival = (int)(fval / m_slider_accuracy);
 		item.slider->SetValue(ival);
+	}
 
-		// todo temp
-		m_uniform->Set((float)fval);
+	UpdateUniformValue();
+}
+
+void SliderCtrl::UpdateUniformValue()
+{
+	double values[16];
+	GetValue(values);
+
+	switch (m_uniform->GetType())
+	{
+	case UT_INT: case UT_BOOL:
+		m_uniform->Set((int)values[0]);
+		break;
+	case UT_FLOAT:
+		m_uniform->Set((float)values[0]);
+		break;
 	}
 
 	m_uniform->Load();
+
+	m_canvas->Refresh();
 }
 
 }

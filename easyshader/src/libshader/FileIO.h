@@ -17,14 +17,18 @@ class FileIO
 public:
 	static void LoadShader(const wxString& filepath, d2d::EditPanel* stage,
 		ToolbarPanel* toolbar);
+	static void StoreShader(const wxString& filepath, const ToolbarPanel* toolbar);
 
 private:
 	static Shader* LoadShader(const wxString& dir, const Json::Value& value,
 		ToolbarPanel* toolbar);
 	static Uniform* LoadUniform(const Json::Value& value, ToolbarPanel* toolbar);
 
+	static void StoreShader(const ToolbarPanel* toolbar, Json::Value& value);
+	static void StoreUniform(const double val[16], Json::Value& value);
+
 	static UniformType TransStrToUType(const std::string& str);
-	static std::string TransUTypeToStr(UniformType type);
+//	static std::string TransUTypeToStr(UniformType type);
 
 }; // FileIO
 

@@ -27,6 +27,7 @@ void Task::load(const char* filepath)
 
 void Task::store(const char* filepath) const
 {
+	FileIO::StoreShader(filepath, m_toolbar);
 }
 
 bool Task::isDirty() const

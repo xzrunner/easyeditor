@@ -2,6 +2,7 @@
 #include "Shader.h"
 #include "SliderItem.h"
 #include "ToolBarPanel.h"
+#include "SliderCtrl.h"
 
 namespace eshader
 {
@@ -21,6 +22,8 @@ static const std::string STR_MAT4	= "mat4";
 void FileIO::LoadShader(const wxString& filepath, d2d::EditPanel* stage,
 						ToolbarPanel* toolbar)
 {
+	toolbar->Clear();
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -37,6 +40,26 @@ void FileIO::LoadShader(const wxString& filepath, d2d::EditPanel* stage,
 	shader_mgr->sprite();
 	shader->LoadUniforms();
 	stage->getCanvas()->resetViewport();
+}
+
+void FileIO::StoreShader(const wxString& filepath, const ToolbarPanel* toolbar)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath.mb_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	StoreShader(toolbar, value);
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.mb_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 }
 
 Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value,
@@ -91,6 +114,30 @@ Uniform* FileIO::LoadUniform(const Json::Value& value, ToolbarPanel* toolbar)
 	return uniform;
 }
 
+void FileIO::StoreShader(const ToolbarPanel* toolbar, Json::Value& value)
+{
+	const std::vector<SliderCtrl*>& sliders = toolbar->GetSliders();
+	for (int i = 0, n = sliders.size(); i < n; ++i) {
+		double val[16];
+		sliders[i]->GetValue(val);
+		StoreUniform(val, value["uniforms"][i]);
+	}
+}
+
+void FileIO::StoreUniform(const double val[16], Json::Value& value)
+{
+	UniformType type = TransStrToUType(value["type"].asString());
+	switch (type)
+	{
+	case UT_INT: case UT_BOOL:
+		value["value"] = (int)val[0];
+		break;
+	case UT_FLOAT:
+		value["value"] = (float)val[0];
+		break;
+	}
+}
+
 UniformType FileIO::TransStrToUType(const std::string& str)
 {
 	UniformType type;
@@ -123,35 +170,35 @@ UniformType FileIO::TransStrToUType(const std::string& str)
 	return type;
 }
 
-std::string FileIO::TransUTypeToStr(UniformType type)
-{
-	if (type == UT_INT) {
-		return STR_INT;
-	} else if (type == UT_BOOL) {
-		return STR_BOOL;
-	} else if (type == UT_FLOAT) {
-		return STR_FLOAT;
-	} else if (type == UT_IVEC2) {
-		return STR_IVEC2;
-	} else if (type == UT_IVEC3) {
-		return STR_IVEC3;
-	} else if (type == UT_IVEC4) {
-		return STR_IVEC4;
-	} else if (type == UT_VEC2) {
-		return STR_VEC2;
-	} else if (type == UT_VEC3) {
-		return STR_VEC3;
-	} else if (type == UT_VEC4) {
-		return STR_IVEC4;
-	} else if (type == UT_MAT2) {
-		return STR_MAT2;
-	} else if (type == UT_MAT3) {
-		return STR_MAT3;
-	} else if (type == UT_MAT4) {
-		return STR_MAT4;
-	} else {
-		throw d2d::Exception("uniform type: %d, error!\n", type);
-	}
-}
+// std::string FileIO::TransUTypeToStr(UniformType type)
+// {
+// 	if (type == UT_INT) {
+// 		return STR_INT;
+// 	} else if (type == UT_BOOL) {
+// 		return STR_BOOL;
+// 	} else if (type == UT_FLOAT) {
+// 		return STR_FLOAT;
+// 	} else if (type == UT_IVEC2) {
+// 		return STR_IVEC2;
+// 	} else if (type == UT_IVEC3) {
+// 		return STR_IVEC3;
+// 	} else if (type == UT_IVEC4) {
+// 		return STR_IVEC4;
+// 	} else if (type == UT_VEC2) {
+// 		return STR_VEC2;
+// 	} else if (type == UT_VEC3) {
+// 		return STR_VEC3;
+// 	} else if (type == UT_VEC4) {
+// 		return STR_IVEC4;
+// 	} else if (type == UT_MAT2) {
+// 		return STR_MAT2;
+// 	} else if (type == UT_MAT3) {
+// 		return STR_MAT3;
+// 	} else if (type == UT_MAT4) {
+// 		return STR_MAT4;
+// 	} else {
+// 		throw d2d::Exception("uniform type: %d, error!\n", type);
+// 	}
+// }
 
 }

@@ -48,6 +48,8 @@ public:
 	void Set(int i, int j, int k);
 	void Set(int i, int j, int k, int h);
 
+	UniformType GetType() const { return m_type; }
+
 private:
 	std::string m_name;
 	UniformType m_type;
