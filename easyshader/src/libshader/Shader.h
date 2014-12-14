@@ -18,10 +18,12 @@ public:
 	void Load();
 
 	void LoadUniforms();
-	void UpdateTimeUniform(float time);
+	void SetTimeUniform(float time);
+	void SetInputUniform(float x, float y);
 
 	void AddUniform(Uniform* uniform);
-	void SetTimeUniform(Uniform* uniform);
+	void AddTimeUniform(Uniform* uniform);
+	void AddInputUniform(Uniform* uniform);
 
 	d2d::SpriteShader* GetShaderImpl() { return m_shader_impl; }
 
@@ -50,7 +52,7 @@ private:
 
 	// special
 	Uniform* m_time_uniform;
-//	Uniform* m_position;
+	Uniform* m_input_uniform;
 
 }; // Shader
 

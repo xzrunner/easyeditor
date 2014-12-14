@@ -27,9 +27,21 @@ StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::ResetTime()
+void StageCanvas::OnMousePressed(const d2d::Vector& pos)
 {
 	m_start_time = clock();
+
+	Shader* shader = m_stage->GetShader();
+	d2d::ISprite* sprite = m_stage->querySpriteByPos(pos);
+	if (shader && sprite) {
+		d2d::ShaderMgr::Instance()->sprite();
+
+		d2d::Vector center = sprite->getCenter();
+		d2d::Rect r = sprite->getSymbol().getSize();
+		float x = (pos.x - center.x) / r.xLength() + 0.5f,
+			  y = (pos.y - center.y) / r.xLength() + 0.5f;
+		shader->SetInputUniform(x, y);
+	}
 }
 
 void StageCanvas::onDraw()
@@ -69,7 +81,7 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 	Shader* shader = m_stage->GetShader();
 	if (shader) {
 		d2d::ShaderMgr::Instance()->sprite();
-		shader->UpdateTimeUniform(time);
+		shader->SetTimeUniform(time);
 		Refresh();
 	}
 }

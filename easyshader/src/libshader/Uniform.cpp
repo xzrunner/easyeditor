@@ -32,10 +32,10 @@ void Uniform::Load()
 		case UT_IVEC4: 
 			glUniform4iv(m_location, 1, (int*) m_value.i); 
 			break;
-		case UT_VEC2: 
+		case UT_VEC2: case UT_INPUT:
 			glUniform2fv(m_location, 1, (float*) m_value.f); 
 			break;
-		case UT_VEC3: 
+		case UT_VEC3:
 			glUniform3fv(m_location, 1, (float*) m_value.f); 
 			break;
 		case UT_VEC4: 

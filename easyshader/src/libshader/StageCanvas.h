@@ -14,7 +14,7 @@ public:
 	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
-	void ResetTime();
+	void OnMousePressed(const d2d::Vector& pos);
 
 protected:
 	virtual void onDraw();

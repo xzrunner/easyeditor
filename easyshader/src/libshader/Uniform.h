@@ -29,7 +29,8 @@ enum UniformType
 	UT_MAT3,
 	UT_MAT4,
 
-	UT_TIME
+	UT_TIME,
+	UT_INPUT
 };
 
 class Uniform

@@ -16,7 +16,8 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 		return true;
 	}
 
-	static_cast<StageCanvas*>(m_editPanel->getCanvas())->ResetTime();
+	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	static_cast<StageCanvas*>(m_editPanel->getCanvas())->OnMousePressed(pos);
 
 	return false;
 }

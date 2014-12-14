@@ -1,6 +1,3 @@
-#define NOMINMAX
-#include <gl/gLee.h>
-
 #include "Shader.h"
 #include "Uniform.h"
 
@@ -10,8 +7,8 @@ namespace eshader
 Shader::Shader(const std::string& vert_filepath, const std::string& frag_filepath)
 	: m_shader_impl(new ShaderImpl(vert_filepath, frag_filepath))
 	, m_time_uniform(NULL)
+	, m_input_uniform(NULL)
 {
-	
 }
 
 Shader::~Shader()
@@ -20,6 +17,7 @@ Shader::~Shader()
 
 	for_each(m_uniforms.begin(), m_uniforms.end(), DeletePointerFunctor<Uniform>());
 	delete m_time_uniform;
+	delete m_input_uniform;
 }
 
 void Shader::Load()
@@ -33,18 +31,21 @@ void Shader::LoadUniforms()
 	for (int i = 0, n = m_uniforms.size(); i < n; ++i) {
 		m_uniforms[i]->Load();
 	}
-
-	int loc_center = glGetUniformLocation(m_shader_impl->GetProgram(), "u_center");	
-	float val[3];
-	val[0] = val[1] = 0.5f;
-	glUniform2fv(loc_center, 1, (float*) &val[0]); 
 }
 
-void Shader::UpdateTimeUniform(float time)
+void Shader::SetTimeUniform(float time)
 {
 	if (m_time_uniform) {
 		m_time_uniform->Set(time);
 		m_time_uniform->Load();
+	}
+}
+
+void Shader::SetInputUniform(float x, float y)
+{
+	if (m_input_uniform) {
+		m_input_uniform->Set(x, y);
+		m_input_uniform->Load();
 	}
 }
 
@@ -53,9 +54,14 @@ void Shader::AddUniform(Uniform* uniform)
 	m_uniforms.push_back(uniform);
 }
 
-void Shader::SetTimeUniform(Uniform* uniform)
+void Shader::AddTimeUniform(Uniform* uniform)
 {
 	m_time_uniform = uniform;
+}
+
+void Shader::AddInputUniform(Uniform* uniform)
+{
+	m_input_uniform = uniform;
 }
 
 //////////////////////////////////////////////////////////////////////////

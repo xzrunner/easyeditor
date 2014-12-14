@@ -19,6 +19,7 @@ static const std::string STR_MAT2	= "mat2";
 static const std::string STR_MAT3	= "mat3";
 static const std::string STR_MAT4	= "mat4";
 static const std::string STR_TIME	= "time";
+static const std::string STR_INPUT	= "input";
 
 void FileIO::LoadShader(const wxString& filepath, StagePanel* stage,
 						ToolbarPanel* toolbar)
@@ -80,7 +81,9 @@ Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value,
 		Uniform* uniform = LoadUniform(uniform_val, toolbar, shader);
 		uniform->SetLocation(shader->GetShaderImpl()->GetProgram());
 		if (uniform->GetType() == UT_TIME) {
-			shader->SetTimeUniform(uniform);
+			shader->AddTimeUniform(uniform);
+		} else if (uniform->GetType() == UT_INPUT) {
+			shader->AddInputUniform(uniform);
 		} else {
 			shader->AddUniform(uniform);
 		}
@@ -228,6 +231,8 @@ UniformType FileIO::TransStrToUType(const std::string& str)
 		type = UT_MAT4;
 	} else if (str == STR_TIME) {
 		type = UT_TIME;
+	} else if (str == STR_INPUT) {
+		type = UT_INPUT;
 	} else {
 		throw d2d::Exception("uniform known type [%s]\n", str);
 	}
@@ -263,6 +268,8 @@ std::string FileIO::TransUTypeToStr(UniformType type)
 		return STR_MAT4;
 	} else if (type == UT_TIME) {
 		return STR_TIME;
+	} else if (type == UT_INPUT) {
+		return STR_INPUT;
 	} else {
 		throw d2d::Exception("uniform known type [%d]\n", type);
 	}
