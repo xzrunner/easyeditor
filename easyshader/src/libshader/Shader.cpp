@@ -1,3 +1,8 @@
+#ifndef IS_2D
+#define NOMINMAX 
+#include <gl/gLee.h>
+#endif
+
 #include "Shader.h"
 #include "Uniform.h"
 
@@ -83,7 +88,19 @@ void Shader::ShaderImpl::
 LoadShader()
 {
 	InitShader(m_vert.c_str(), m_frag.c_str());
+
+#ifndef IS_2D
+	m_normal_matrix = glGetUniformLocation(m_prog, "u_normal_matrix");
+#endif
 }
+
+#ifndef IS_2D
+void Shader::ShaderImpl::
+SetNormalMatrix(const mat3& noraml_mat)
+{
+	glUniformMatrix3fv(m_normal_matrix, 1, 0, noraml_mat.Pointer());
+}
+#endif
 
 void Shader::ShaderImpl::
 ReadFromFile(const std::string& filepath, std::string& output)

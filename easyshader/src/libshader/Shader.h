@@ -49,11 +49,19 @@ private:
 	protected:
 		virtual void LoadShader();
 
+#ifndef IS_2D
+		virtual void SetNormalMatrix(const mat3& noraml_mat);
+#endif
+
 	private:
 		static void ReadFromFile(const std::string& filepath, std::string& output);
 
 	private:
 		std::string m_vert, m_frag;
+
+#ifndef IS_2D
+		GLuint m_normal_matrix;
+#endif
 
 	}; // ShaderImpl
 
