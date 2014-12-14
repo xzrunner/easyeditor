@@ -109,8 +109,23 @@ void SliderCtrl::UpdateUniformValue()
 	case UT_FLOAT:
 		m_uniform->Set((float)values[0]);
 		break;
+	case UT_IVEC2:
+		m_uniform->Set((int)values[0], (int)values[1]);
+		break;
+	case UT_IVEC3:
+		m_uniform->Set((int)values[0], (int)values[1], (int)values[2]);
+		break;
+	case UT_IVEC4:
+		m_uniform->Set((int)values[0], (int)values[1], (int)values[2], (int)values[3]);
+		break;
 	case UT_VEC2:
 		m_uniform->Set((float)values[0], (float)values[1]);
+		break;
+	case UT_VEC3:
+		m_uniform->Set((float)values[0], (float)values[1], (float)values[2]);
+		break;
+	case UT_VEC4:
+		m_uniform->Set((float)values[0], (float)values[1], (float)values[2], (float)values[3]);
 		break;
 	}
 
