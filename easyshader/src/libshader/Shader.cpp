@@ -22,10 +22,9 @@ Shader::~Shader()
 	delete m_time_uniform;
 }
 
-bool Shader::Load()
+void Shader::Load()
 {
 	m_shader_impl->Load();
-	return true;
 }
 
 void Shader::LoadUniforms()

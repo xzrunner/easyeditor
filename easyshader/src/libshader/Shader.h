@@ -15,7 +15,7 @@ public:
 	Shader(const std::string& vert_filepath, const std::string& frag_filepath);
 	~Shader();
 
-	bool Load();
+	void Load();
 
 	void LoadUniforms();
 	void UpdateTimeUniform(float time);
