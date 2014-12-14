@@ -255,7 +255,7 @@ void Frame::initMenuBar()
 	menuBar->Append(initFileBar(), "&File");
 	menuBar->Append(m_view_menu = initViewBar(), "&View");
 	menuBar->Append(m_setting_menu = initSettingsBar(), "&Settings");
-//	menuBar->Append(m_code_menu = InitCodeBar(), "&Code");
+	menuBar->Append(m_code_menu = InitCodeBar(), "&Code");
 	SetMenuBar(menuBar);
 }
 
