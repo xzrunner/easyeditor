@@ -68,6 +68,7 @@ void StageCanvas::OnTimer(wxTimerEvent& event)
 
 	Shader* shader = m_stage->GetShader();
 	if (shader) {
+		d2d::ShaderMgr::Instance()->sprite();
 		shader->UpdateTimeUniform(time);
 		Refresh();
 	}
