@@ -30,6 +30,8 @@ void TranslateSpriteState::OnMouseMove(const ivec2& pos)
 
 	Translate(m_last_pos, pos);
 	m_last_pos = pos;
+
+	m_stage->Refresh();
 }
 
 void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)

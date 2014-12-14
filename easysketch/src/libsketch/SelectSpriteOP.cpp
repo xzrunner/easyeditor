@@ -44,6 +44,8 @@ bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 		m_selection->Clear();
 	}
 
+	m_editPanel->Refresh();
+
 	return false;
 }
 
@@ -55,12 +57,8 @@ bool SelectSpriteOP::onDraw() const
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
-
-		e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
-
 		mat4 mat = mat4(s->GetOri3().ToMatrix()) * 
 			mat4::Translate(s->GetPos3().x, s->GetPos3().y, s->GetPos3().z);
-
 		e3d::DrawCube(mat, s->getSymbol().GetAABB(), d2d::MID_RED);
 	}
 

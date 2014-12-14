@@ -26,8 +26,6 @@ void RotateCameraState::OnMouseMove(const ivec2& pos)
 	float dx = (pos.x - m_last_pos.x) * MOUSE_SENSITIVITY,
 		  dy = (m_last_pos.y - pos.y) * MOUSE_SENSITIVITY;
 	cam.Rotate(dx, dy);
-	m_canvas->Refresh();
-
 	m_last_pos = pos;
 
 	m_canvas->Refresh();
