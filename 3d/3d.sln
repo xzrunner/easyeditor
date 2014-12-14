@@ -38,6 +38,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "raytracer", "..\raytracer\p
 		{CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5} = {CF1838C8-7EA3-48FB-B73B-5E341DFE4CD5}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyshader", "..\easyshader\platform\msvc2008\projects\easyshader.vcproj", "{908B8FCC-3F78-4F8B-9663-0A45623442F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{584F5852-C8C5-4381-8FE5-D0E76FB81B51} = {584F5852-C8C5-4381-8FE5-D0E76FB81B51}
+		{3156C188-65B6-4785-943C-03CDDE86B53A} = {3156C188-65B6-4785-943C-03CDDE86B53A}
+		{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6} = {126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libshader", "..\easyshader\platform\msvc2008\projects\libshader.vcproj", "{3156C188-65B6-4785-943C-03CDDE86B53A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -80,6 +90,14 @@ Global
 		{628FF30E-A33F-47E4-9000-AB659C802BFF}.Debug|Win32.Build.0 = Debug|Win32
 		{628FF30E-A33F-47E4-9000-AB659C802BFF}.Release|Win32.ActiveCfg = Release|Win32
 		{628FF30E-A33F-47E4-9000-AB659C802BFF}.Release|Win32.Build.0 = Release|Win32
+		{908B8FCC-3F78-4F8B-9663-0A45623442F4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{908B8FCC-3F78-4F8B-9663-0A45623442F4}.Debug|Win32.Build.0 = Debug|Win32
+		{908B8FCC-3F78-4F8B-9663-0A45623442F4}.Release|Win32.ActiveCfg = Release|Win32
+		{908B8FCC-3F78-4F8B-9663-0A45623442F4}.Release|Win32.Build.0 = Release|Win32
+		{3156C188-65B6-4785-943C-03CDDE86B53A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3156C188-65B6-4785-943C-03CDDE86B53A}.Debug|Win32.Build.0 = Debug|Win32
+		{3156C188-65B6-4785-943C-03CDDE86B53A}.Release|Win32.ActiveCfg = Release|Win32
+		{3156C188-65B6-4785-943C-03CDDE86B53A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

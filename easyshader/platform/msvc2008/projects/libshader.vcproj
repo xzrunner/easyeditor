@@ -155,30 +155,54 @@
 			<Filter
 				Name="stage"
 				>
-				<File
-					RelativePath="..\..\..\src\libshader\SelectSpritesOP.cpp"
+				<Filter
+					Name="2d"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshader\SelectSpritesOP.h"
+					<File
+						RelativePath="..\..\..\src\libshader\SelectSpritesOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\SelectSpritesOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StageCanvas2D.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StageCanvas2D.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StagePanel2D.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StagePanel2D.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="3d"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshader\StageCanvas.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshader\StageCanvas.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshader\StagePanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libshader\StagePanel.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StageCanvas3D.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StageCanvas3D.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StagePanel3D.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshader\StagePanel3D.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="library"

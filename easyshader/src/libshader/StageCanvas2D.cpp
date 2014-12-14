@@ -1,5 +1,5 @@
-#include "StageCanvas.h"
-#include "StagePanel.h"
+#include "StageCanvas2D.h"
+#include "StagePanel2D.h"
 
 #include "Shader.h"
 
@@ -9,11 +9,11 @@ namespace eshader
 static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)
+BEGIN_EVENT_TABLE(StageCanvas2D, d2d::OrthoCanvas)
+	EVT_TIMER(TIMER_ID, StageCanvas2D::OnTimer)
 END_EVENT_TABLE()
 
-StageCanvas::StageCanvas(StagePanel* stage)
+StageCanvas2D::StageCanvas2D(StagePanel2D* stage)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
 	, m_stage(stage)
@@ -23,11 +23,11 @@ StageCanvas::StageCanvas(StagePanel* stage)
 	m_timer.Start(100);
 }
 
-StageCanvas::~StageCanvas()
+StageCanvas2D::~StageCanvas2D()
 {
 }
 
-void StageCanvas::OnMousePressed(const d2d::Vector& pos)
+void StageCanvas2D::OnMousePressed(const d2d::Vector& pos)
 {
 	m_start_time = clock();
 
@@ -44,23 +44,23 @@ void StageCanvas::OnMousePressed(const d2d::Vector& pos)
 	}
 }
 
-void StageCanvas::onDraw()
+void StageCanvas2D::onDraw()
 {
 	DrawBackground();
 	DrawSprites();
 	m_editPanel->drawEditTemp();
 }
 
-void StageCanvas::DrawBackground() const
+void StageCanvas2D::DrawBackground() const
 {
 	d2d::PrimitiveDraw::rect(d2d::Matrix(), SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, 
 		d2d::LIGHT_RED_LINE);
 }
 
-void StageCanvas::DrawSprites() const
+void StageCanvas2D::DrawSprites() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	static_cast<StagePanel2D*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
@@ -70,7 +70,7 @@ void StageCanvas::DrawSprites() const
 	}
 }
 
-void StageCanvas::OnTimer(wxTimerEvent& event)
+void StageCanvas2D::OnTimer(wxTimerEvent& event)
 {
 	clock_t curr = clock();
 	if (m_start_time == 0) {

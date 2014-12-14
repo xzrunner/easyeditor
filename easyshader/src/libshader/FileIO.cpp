@@ -2,7 +2,6 @@
 #include "Shader.h"
 #include "ToolBarPanel.h"
 #include "SliderCtrl.h"
-#include "StagePanel.h"
 
 namespace eshader
 {
@@ -21,8 +20,8 @@ static const std::string STR_MAT4	= "mat4";
 static const std::string STR_TIME	= "time";
 static const std::string STR_INPUT	= "input";
 
-void FileIO::LoadShader(const wxString& filepath, StagePanel* stage,
-						ToolbarPanel* toolbar)
+Shader* FileIO::LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
+						   ToolbarPanel* toolbar)
 {
 	toolbar->Clear();
 
@@ -41,9 +40,9 @@ void FileIO::LoadShader(const wxString& filepath, StagePanel* stage,
 	shader_mgr->SetSpriteShader(shader->GetShaderImpl());
 	shader_mgr->sprite();
 	shader->LoadUniforms();
-	stage->getCanvas()->resetViewport();
+	canvas->resetViewport();
 
-	stage->SetShader(shader);
+	return shader;
 }
 
 void FileIO::StoreShader(const wxString& filepath, const ToolbarPanel* toolbar)

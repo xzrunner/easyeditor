@@ -1,5 +1,5 @@
 #include "SelectSpritesOP.h"
-#include "StageCanvas.h"
+#include "StageCanvas2D.h"
 
 namespace eshader
 {
@@ -17,7 +17,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 	}
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	static_cast<StageCanvas*>(m_editPanel->getCanvas())->OnMousePressed(pos);
+	static_cast<StageCanvas2D*>(m_editPanel->getCanvas())->OnMousePressed(pos);
 
 	return false;
 }

@@ -1,18 +1,18 @@
-#ifndef _ESHADER_STAGE_CANVAS_H_
-#define _ESHADER_STAGE_CANVAS_H_
+#ifndef _ESHADER_STAGE_CANVAS2D_H_
+#define _ESHADER_STAGE_CANVAS2D_H_
 
 #include <drag2d.h>
 
 namespace eshader
 {
 
-class StagePanel;
+class StagePanel2D;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas2D : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* stage);
-	virtual ~StageCanvas();
+	StageCanvas2D(StagePanel2D* stage);
+	virtual ~StageCanvas2D();
 
 	void OnMousePressed(const d2d::Vector& pos);
 
@@ -34,14 +34,14 @@ private:
 private:
 	wxTimer m_timer;
 
-	StagePanel* m_stage;
+	StagePanel2D* m_stage;
 
 	clock_t m_start_time;
 
 	DECLARE_EVENT_TABLE()
 
-}; // StageCanvas
+}; // StageCanvas2D
 
 }
 
-#endif // _ESHADER_STAGE_CANVAS_H_
+#endif // _ESHADER_STAGE_CANVAS2D_H_

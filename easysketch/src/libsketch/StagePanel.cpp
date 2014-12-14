@@ -11,7 +11,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::MultiSpritesImpl(parent)
 {
 	m_canvas = new StageCanvas(this, this, library);
-
 	library->setCanvas(m_canvas);
 
 	m_editOP = new ArrangeSpriteOP(this);

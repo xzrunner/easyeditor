@@ -10,14 +10,13 @@
 namespace eshader
 {
 
-class StagePanel;
 class ToolbarPanel;
 class Shader;
 
 class FileIO
 {
 public:
-	static void LoadShader(const wxString& filepath, StagePanel* stage,
+	static Shader* LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
 		ToolbarPanel* toolbar);
 	static void StoreShader(const wxString& filepath, const ToolbarPanel* toolbar);
 

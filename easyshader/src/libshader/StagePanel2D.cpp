@@ -1,5 +1,5 @@
-#include "StagePanel.h"
-#include "StageCanvas.h"
+#include "StagePanel2D.h"
+#include "StageCanvas2D.h"
 #include "SelectSpritesOP.h"
 
 #include <easysketch.h>
@@ -7,16 +7,13 @@
 namespace eshader
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library)
+StagePanel2D::StagePanel2D(wxWindow* parent, wxTopLevelWindow* frame, 
+						   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(this, library)
 	, m_shader(NULL)
 {
-	d2d::GLCanvas* canvas2d = new StageCanvas(this);
-//	d2d::GLCanvas* canvas3d = new libsketch::StageCanvas(this, this, library);
-
-	m_canvas = canvas2d;
+	m_canvas = new StageCanvas2D(this);
 
 	d2d::ArrangeSpriteConfig cfg;
 	cfg.is_auto_align_open = false;

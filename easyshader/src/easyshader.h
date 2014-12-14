@@ -4,7 +4,8 @@
 #include "libshader/config.h"
 
 #include "libshader/LibraryPanel.h"
-#include "libshader/StagePanel.h"
+#include "libshader/StagePanel2D.h"
+#include "libshader/StagePanel3D.h"
 #include "libshader/ToolbarPanel.h"
 #include "libshader/FileIO.h"
 
