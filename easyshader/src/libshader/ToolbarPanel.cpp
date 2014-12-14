@@ -16,20 +16,19 @@ ToolbarPanel::~ToolbarPanel()
 }
 
 void ToolbarPanel::AddUniform(const std::string& title, const std::string& name, 
-							  Uniform* uniform, 
+							  Shader* shader, Uniform* uniform, 
+							  const std::vector<SliderItemInt>& items)
+{
+	AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
+		items, 1, m_editPanel->getCanvas()));
+}
+
+void ToolbarPanel::AddUniform(const std::string& title, const std::string& name, 
+							  Shader* shader, Uniform* uniform, 
 							  const std::vector<SliderItemFloat>& items)
 {
- 	wxSizer* sizer = GetSizer();
- 	SliderCtrl* slider = new SliderCtrl(this, title, name, uniform, items, 0.01f, 
-		m_editPanel->getCanvas());
- 	sizer->Add(slider);
-	SetSizer(sizer);
-
-	m_sliders.push_back(slider);
-
-	SetSizer(sizer);
-
-	Layout();
+	AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
+		items, 0.01f, m_editPanel->getCanvas()));
 }
 
 wxSizer* ToolbarPanel::initLayout()
@@ -43,6 +42,19 @@ void ToolbarPanel::Clear()
 	m_sliders.clear();
 
 	GetSizer()->Clear();
+}
+
+void ToolbarPanel::AddSlider(SliderCtrl* slider)
+{
+	wxSizer* sizer = GetSizer();
+	sizer->Add(slider);
+	SetSizer(sizer);
+
+	m_sliders.push_back(slider);
+
+	SetSizer(sizer);
+
+	Layout();
 }
 
 }

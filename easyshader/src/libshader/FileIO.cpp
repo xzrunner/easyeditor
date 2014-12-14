@@ -1,8 +1,8 @@
 #include "FileIO.h"
 #include "Shader.h"
-#include "SliderItem.h"
 #include "ToolBarPanel.h"
 #include "SliderCtrl.h"
+#include "StagePanel.h"
 
 namespace eshader
 {
@@ -18,8 +18,9 @@ static const std::string STR_VEC3	= "vec3";
 static const std::string STR_MAT2	= "mat2";
 static const std::string STR_MAT3	= "mat3";
 static const std::string STR_MAT4	= "mat4";
+static const std::string STR_TIME	= "time";
 
-void FileIO::LoadShader(const wxString& filepath, d2d::EditPanel* stage,
+void FileIO::LoadShader(const wxString& filepath, StagePanel* stage,
 						ToolbarPanel* toolbar)
 {
 	toolbar->Clear();
@@ -40,6 +41,8 @@ void FileIO::LoadShader(const wxString& filepath, d2d::EditPanel* stage,
 	shader_mgr->sprite();
 	shader->LoadUniforms();
 	stage->getCanvas()->resetViewport();
+
+	stage->SetShader(shader);
 }
 
 void FileIO::StoreShader(const wxString& filepath, const ToolbarPanel* toolbar)
@@ -74,43 +77,85 @@ Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value,
 	int i = 0;
 	Json::Value uniform_val = value["uniforms"][i++];
 	while (!uniform_val.isNull()) {
-		Uniform* uniform = LoadUniform(uniform_val, toolbar);
+		Uniform* uniform = LoadUniform(uniform_val, toolbar, shader);
 		uniform->SetLocation(shader->GetShaderImpl()->GetProgram());
-		shader->AddUniform(uniform);
+		if (uniform->GetType() == UT_TIME) {
+			shader->SetTimeUniform(uniform);
+		} else {
+			shader->AddUniform(uniform);
+		}
 		uniform_val = value["uniforms"][i++];
 	}
 
 	return shader;
 }
 
-Uniform* FileIO::LoadUniform(const Json::Value& value, ToolbarPanel* toolbar)
+Uniform* FileIO::LoadUniform(const Json::Value& value, ToolbarPanel* toolbar, Shader* shader)
 {
 	std::string name = value["name"].asString();
 	UniformType type = TransStrToUType(value["type"].asString());
 	Uniform* uniform = new Uniform(name, type);
-
-	std::vector<SliderItemFloat> items;
-
+	std::string title = value["title"].asString();
+	
 	switch (type)
 	{
-	case UT_INT:
-		break;
-	case UT_BOOL:
+	case UT_INT: case UT_BOOL:
+		{
+			std::vector<SliderItemInt> items;
+			LoadValue(value, 1, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);
+		}
 		break;
 	case UT_FLOAT:
 		{
-			float default = (float)(value["value"].asDouble());
-			float min = (float)(value["region"]["begin"].asDouble()),
-				  max = (float)(value["region"]["end"].asDouble());
-			uniform->Set(default);
-			items.push_back(SliderItemFloat("", default, min, max));
+			std::vector<SliderItemFloat> items;
+			LoadValue(value, 1, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);
+		}
+		break;
+	case UT_IVEC2:
+		{
+			std::vector<SliderItemInt> items;
+			LoadValue(value, 2, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);
+		}
+		break;
+	case UT_IVEC3:
+		{
+			std::vector<SliderItemInt> items;
+			LoadValue(value, 3, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);
+		}
+		break;
+	case UT_IVEC4:
+		{
+			std::vector<SliderItemInt> items;
+			LoadValue(value, 4, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);
+		}
+		break;
+	case UT_VEC2:
+		{
+			std::vector<SliderItemFloat> items;
+			LoadValue(value, 2, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);		
+		}
+		break;
+	case UT_VEC3:
+		{
+			std::vector<SliderItemFloat> items;
+			LoadValue(value, 3, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);		
+		}
+		break;
+	case UT_VEC4:
+		{
+			std::vector<SliderItemFloat> items;
+			LoadValue(value, 4, items, uniform);
+			toolbar->AddUniform(title, name, shader, uniform, items);		
 		}
 		break;
 	}
-
-	std::string title = value["title"].asString();
-	toolbar->AddUniform(title, name, uniform, items);
-
 	return uniform;
 }
 
@@ -130,10 +175,28 @@ void FileIO::StoreUniform(const double val[16], Json::Value& value)
 	switch (type)
 	{
 	case UT_INT: case UT_BOOL:
-		value["value"] = (int)val[0];
+		StoreValue(val, value["value"], false, 1);
 		break;
 	case UT_FLOAT:
-		value["value"] = (float)val[0];
+		StoreValue(val, value["value"], true, 1);
+		break;
+	case UT_IVEC2:
+		StoreValue(val, value["value"], false, 2);
+		break;
+	case UT_IVEC3:
+		StoreValue(val, value["value"], false, 3);
+		break;
+	case UT_IVEC4:
+		StoreValue(val, value["value"], false, 4);
+		break;
+	case UT_VEC2:
+		StoreValue(val, value["value"], true, 2);
+		break;
+	case UT_VEC3:
+		StoreValue(val, value["value"], true, 3);
+		break;
+	case UT_VEC4:
+		StoreValue(val, value["value"], true, 4);
 		break;
 	}
 }
@@ -163,6 +226,8 @@ UniformType FileIO::TransStrToUType(const std::string& str)
 		type = UT_MAT3;
 	} else if (str == STR_MAT4) {
 		type = UT_MAT4;
+	} else if (str == STR_TIME) {
+		type = UT_TIME;
 	} else {
 		throw d2d::Exception("uniform type: %s, error!\n", str);
 	}
@@ -200,5 +265,50 @@ UniformType FileIO::TransStrToUType(const std::string& str)
 // 		throw d2d::Exception("uniform type: %d, error!\n", type);
 // 	}
 // }
+
+template <typename T>
+void FileIO::LoadValue(const Json::Value& value, int count,
+					   std::vector<SliderItem<T> >& items,
+					   Uniform* uniform)
+{
+	for (int i = 0; i < count; ++i) {
+		std::string name;
+		if (count > 1) {
+			if (i == 0) name = "x";
+			else if (i == 1) name = "y";
+			else if (i == 2) name = "z";
+			else if (i == 3) name = "w";
+		}
+
+		T val = (T)(value["value"][i].asDouble());
+		T min = (T)(value["region"]["begin"][i].asDouble()),
+		  max = (T)(value["region"]["end"][i].asDouble());
+		items.push_back(SliderItem<T>(name, val, min, max));
+	}
+
+	if (count == 1) {
+		uniform->Set(items[0].default);
+	} else if (count == 2) {
+		uniform->Set(items[0].default, items[1].default);
+	} else if (count == 3) {
+		uniform->Set(items[0].default, items[1].default, items[2].default);
+	} else {
+		assert(count == 4);
+		uniform->Set(items[0].default, items[1].default, items[2].default, items[3].default);
+	}
+}
+
+void FileIO::StoreValue(const double val[16], Json::Value& value, bool is_float, int count)
+{
+	if (is_float) {
+		for (int i = 0; i < count; ++i) {
+			value[i] = (float)val[i];
+		}
+	} else {
+		for (int i = 0; i < count; ++i) {
+			value[i] = (int)val[i];
+		}
+	}
+}
 
 }

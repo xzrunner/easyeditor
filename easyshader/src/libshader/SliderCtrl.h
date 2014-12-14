@@ -9,19 +9,24 @@
 namespace eshader 
 {
 
+class Shader;
 class Uniform;
 
 class SliderCtrl : public wxPanel
 {
 public:
 	SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name,
-		Uniform* uniform, const std::vector<SliderItemFloat>& items, float slider_accuracy,
-		d2d::GLCanvas* canvas);
+		Shader* shader, Uniform* uniform, const std::vector<SliderItemInt>& items, 
+		float slider_accuracy, d2d::GLCanvas* canvas);
+	SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name,
+		Shader* shader, Uniform* uniform, const std::vector<SliderItemFloat>& items, 
+		float slider_accuracy, d2d::GLCanvas* canvas);
 
 	void GetValue(double values[16]) const;
 
 private:
-	void InitLayout(const std::string& title, const std::vector<SliderItemFloat>& items);
+	template <typename T>
+	void InitLayout(const std::string& title, const std::vector<SliderItem<T> >& items);
 
 	void OnSetValue(wxScrollEvent& event);
 	void OnSetValue(wxCommandEvent& event);
@@ -43,6 +48,7 @@ private:
 
 	std::vector<Item> m_items;
 
+	Shader* m_shader;
 	Uniform* m_uniform;
 
 	d2d::GLCanvas* m_canvas;

@@ -14,6 +14,8 @@ public:
 	StageCanvas(StagePanel* stage);
 	virtual ~StageCanvas();
 
+	void ResetTime();
+
 protected:
 	virtual void onDraw();
 
@@ -21,8 +23,22 @@ private:
 	void DrawBackground() const;
 	void DrawSprites() const;
 
+	void OnTimer(wxTimerEvent& event);
+
 private:
+	enum
+	{
+		TIMER_ID = 1000
+	};
+
+private:
+	wxTimer m_timer;
+
 	StagePanel* m_stage;
+
+	clock_t m_start_time;
+
+	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

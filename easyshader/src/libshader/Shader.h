@@ -16,9 +16,12 @@ public:
 	~Shader();
 
 	bool Load();
+
 	void LoadUniforms();
+	void UpdateTimeUniform(float time);
 
 	void AddUniform(Uniform* uniform);
+	void SetTimeUniform(Uniform* uniform);
 
 	d2d::SpriteShader* GetShaderImpl() { return m_shader_impl; }
 
@@ -42,7 +45,12 @@ private:
 private:
 	d2d::SpriteShader* m_shader_impl;
 
+	// normal
 	std::vector<Uniform*> m_uniforms;
+
+	// special
+	Uniform* m_time_uniform;
+//	Uniform* m_position;
 
 }; // Shader
 

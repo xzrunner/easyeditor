@@ -19,7 +19,7 @@ void Uniform::Load()
 		case UT_INT: case UT_BOOL: 
 			glUniform1i(m_location, m_value.i[0]); 
 			break;
-		case UT_FLOAT: 
+		case UT_FLOAT: case UT_TIME:
 			glUniform1f(m_location, m_value.f[0]); 
 			break;
 

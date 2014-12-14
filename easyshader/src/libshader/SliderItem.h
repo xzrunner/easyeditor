@@ -12,12 +12,13 @@ struct SliderItem
 	T default;
 	T min, max;
 
-	SliderItem(const char* title, T default, T min, T max)
+	SliderItem(const std::string& title, T default, T min, T max)
 		: title(title), default(default), min(min), max(max) {}
 
 }; // SliderItem
 
 typedef SliderItem<float> SliderItemFloat;
+typedef SliderItem<int> SliderItemInt;
 
 }
 

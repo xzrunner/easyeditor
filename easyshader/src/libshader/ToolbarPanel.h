@@ -8,6 +8,7 @@
 namespace eshader
 {
 
+class Shader;
 class Uniform;
 class SliderCtrl;
 
@@ -18,7 +19,9 @@ public:
 	virtual ~ToolbarPanel();
 
 	void AddUniform(const std::string& title, const std::string& name, 
-		Uniform* uniform, const std::vector<SliderItemFloat>& items);
+		Shader* shader, Uniform* uniform, const std::vector<SliderItemInt>& items);
+	void AddUniform(const std::string& title, const std::string& name, 
+		Shader* shader, Uniform* uniform, const std::vector<SliderItemFloat>& items);
 
 	const std::vector<SliderCtrl*>& GetSliders() const { return m_sliders; }
 
@@ -26,6 +29,9 @@ public:
 
 protected:
 	virtual wxSizer* initLayout();
+
+private:
+	void AddSlider(SliderCtrl* slider);
 
 private:
 	std::vector<SliderCtrl*> m_sliders;

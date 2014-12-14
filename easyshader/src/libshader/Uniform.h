@@ -27,7 +27,9 @@ enum UniformType
 	UT_VEC4,
 	UT_MAT2,
 	UT_MAT3,
-	UT_MAT4	
+	UT_MAT4,
+
+	UT_TIME
 };
 
 class Uniform

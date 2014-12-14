@@ -156,6 +156,14 @@
 				Name="stage"
 				>
 				<File
+					RelativePath="..\..\..\src\libshader\SelectSpritesOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshader\SelectSpritesOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libshader\StageCanvas.cpp"
 					>
 				</File>

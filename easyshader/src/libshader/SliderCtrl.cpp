@@ -1,15 +1,32 @@
 #include "SliderCtrl.h"
 #include "Uniform.h"
+#include "Shader.h"
 
 namespace eshader
 {
 
 SliderCtrl::SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name, 
-					   Uniform* uniform, const std::vector<SliderItemFloat>& items, float slider_accuracy,
+					   Shader* shader, Uniform* uniform, 
+					   const std::vector<SliderItemInt>& items, float slider_accuracy,
 					   d2d::GLCanvas* canvas)
 	: wxPanel(parent, wxID_ANY)
 	, m_name(name)
 	, m_slider_accuracy(slider_accuracy)
+	, m_shader(shader)
+	, m_uniform(uniform)
+	, m_canvas(canvas)
+{
+	InitLayout(title, items);
+}
+
+SliderCtrl::SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name, 
+					   Shader* shader, Uniform* uniform, 
+					   const std::vector<SliderItemFloat>& items, float slider_accuracy,
+					   d2d::GLCanvas* canvas)
+	: wxPanel(parent, wxID_ANY)
+	, m_name(name)
+	, m_slider_accuracy(slider_accuracy)
+	, m_shader(shader)
 	, m_uniform(uniform)
 	, m_canvas(canvas)
 {
@@ -23,14 +40,15 @@ void SliderCtrl::GetValue(double values[16]) const
 	}
 }
 
+template <typename T>
 void SliderCtrl::InitLayout(const std::string& title, 
-							const std::vector<SliderItemFloat>& items)
+							const std::vector<SliderItem<T> >& items)
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, title);
 	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 	for (int i = 0, n = items.size(); i < n; ++i)
 	{
-		const SliderItemFloat& src = items[i];
+		const SliderItem<T>& src = items[i];
 		Item dst;
 
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -91,8 +109,12 @@ void SliderCtrl::UpdateUniformValue()
 	case UT_FLOAT:
 		m_uniform->Set((float)values[0]);
 		break;
+	case UT_VEC2:
+		m_uniform->Set((float)values[0], (float)values[1]);
+		break;
 	}
 
+	d2d::ShaderMgr::Instance()->sprite();
 	m_uniform->Load();
 
 	m_canvas->Refresh();
