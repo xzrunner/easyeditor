@@ -18,6 +18,7 @@ class ShaderMgr : public d2d::ShaderMgrBase
 public:
 	static ShaderMgr* Instance();
 
+	void Null();
 	void Model();
 	void Shape();
 	void Sprite();
@@ -34,7 +35,7 @@ public:
 
 	void SetModelView(const mat4& mat);
 
-	void SetModelShader(d2d::SpriteShader* shader, bool delete_old = true);
+	void SetModelShader(ModelShader* shader, bool delete_old = true);
 
 private:
 	ShaderMgr();

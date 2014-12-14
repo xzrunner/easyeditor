@@ -23,7 +23,11 @@ Task::~Task()
 void Task::load(const char* filepath)
 {
 	Shader* shader = FileIO::LoadShader(filepath, m_stage->getCanvas(), m_toolbar);
+#ifdef IS_2D
+	static_cast<StagePanel2D*>(m_stage)->SetShader(shader);
+#else
 	static_cast<StagePanel3D*>(m_stage)->SetShader(shader);
+#endif
 }
 
 void Task::store(const char* filepath) const
@@ -57,7 +61,11 @@ void Task::initLayout()
 	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
 
 	m_library = new LibraryPanel(left_splitter);
+#ifdef IS_2D
+	m_stage = new StagePanel2D(left_splitter, m_parent, m_library);
+#else
 	m_stage = new StagePanel3D(left_splitter, m_parent, m_library);
+#endif
 	m_library->setCanvas(m_stage->getCanvas());
 
 	m_toolbar = new ToolbarPanel(right_splitter, m_stage);

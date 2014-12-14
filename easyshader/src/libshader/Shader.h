@@ -1,8 +1,13 @@
 #ifndef _ESHADER_SHADER_H_
 #define _ESHADER_SHADER_H_
 
+//#define IS_2D
+
 #include <string>
 #include <drag2d.h>
+#ifndef IS_2D
+#include <easy3d.h>
+#endif
 
 namespace eshader 
 {
@@ -25,10 +30,18 @@ public:
 	void AddTimeUniform(Uniform* uniform);
 	void AddInputUniform(Uniform* uniform);
 
+#ifdef IS_2D
 	d2d::SpriteShader* GetShaderImpl() { return m_shader_impl; }
+#else
+	e3d::ModelShader* GetShaderImpl() { return m_shader_impl; }
+#endif
 
 private:
+#ifdef IS_2D
 	class ShaderImpl : public d2d::SpriteShader
+#else
+	class ShaderImpl : public e3d::ModelShader
+#endif
 	{
 	public:
 		ShaderImpl(const std::string& vert_filepath, const std::string& frag_filepath);
@@ -45,7 +58,11 @@ private:
 	}; // ShaderImpl
 
 private:
+#ifdef IS_2D
 	d2d::SpriteShader* m_shader_impl;
+#else
+	e3d::ModelShader* m_shader_impl;
+#endif
 
 	// normal
 	std::vector<Uniform*> m_uniforms;

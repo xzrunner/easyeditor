@@ -33,12 +33,19 @@ Shader* FileIO::LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
 	reader.parse(fin, value);
 	fin.close();
 
-	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
-	shader_mgr->null();
 	wxString dir = d2d::FilenameTools::getFileDir(filepath);
 	Shader* shader = LoadShader(dir, value, toolbar);
-	shader_mgr->SetSpriteShader(shader->GetShaderImpl());
-	shader_mgr->sprite();
+#ifdef IS_2D
+ 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+ 	shader_mgr->null();
+ 	shader_mgr->SetSpriteShader(shader->GetShaderImpl());
+ 	shader_mgr->sprite();
+#else
+	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
+	shader_mgr->Null();
+	shader_mgr->SetModelShader(shader->GetShaderImpl());
+	shader_mgr->Model();
+#endif
 	shader->LoadUniforms();
 	canvas->resetViewport();
 

@@ -14,6 +14,7 @@
 #include "ShaderMgr.h"
 #include "StageCanvas.h"
 #include "primitive_draw.h"
+#include "ModelShader.h"
 
 #include "ViewFrustum.h"
 

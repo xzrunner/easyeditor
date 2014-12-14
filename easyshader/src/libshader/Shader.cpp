@@ -27,7 +27,11 @@ void Shader::Load()
 
 void Shader::LoadUniforms()
 {
+#ifdef IS_2D
 	d2d::ShaderMgr::Instance()->sprite();
+#else
+	e3d::ShaderMgr::Instance()->Model();
+#endif
 	for (int i = 0, n = m_uniforms.size(); i < n; ++i) {
 		m_uniforms[i]->Load();
 	}

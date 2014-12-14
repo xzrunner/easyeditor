@@ -32,6 +32,14 @@ ShaderMgr::ShaderMgr()
 
 ShaderMgr::~ShaderMgr()
 {
+	delete m_model_shader;
+	delete m_shape_shader;
+	delete m_sprite_shader;
+}
+
+void ShaderMgr::Null()
+{
+	Switch(NULL);
 }
 
 void ShaderMgr::Model()
@@ -86,6 +94,29 @@ void ShaderMgr::SetModelView(const mat4& mat)
 	m_model_shader->SetModelView(mat);
 	m_shape_shader->SetModelView(mat);
 	m_sprite_shader->SetModelView(mat);
+}
+
+void ShaderMgr::SetModelShader(ModelShader* shader, bool delete_old)
+{
+	if (m_model_shader == shader) {
+		return;
+	}
+
+	std::vector<d2d::IShader*>::iterator itr;
+	for (itr = m_shaders.begin(); itr != m_shaders.end(); ++itr) {
+		if (*itr == m_model_shader) {
+			m_shaders.erase(itr);
+			break;
+		}
+	}
+
+	if (delete_old) {
+		m_model_shader->Unload();
+		delete m_model_shader;
+	}
+	m_model_shader = shader;
+
+	m_shaders.push_back(m_model_shader);
 }
 
 }
