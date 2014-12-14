@@ -19,16 +19,20 @@ void ToolbarPanel::AddUniform(const std::string& title, const std::string& name,
 							  Shader* shader, Uniform* uniform, 
 							  const std::vector<SliderItemInt>& items)
 {
-	AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
-		items, 1, m_editPanel->getCanvas()));
+	if (!items.empty()) {
+		AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
+			items, 1, m_editPanel->getCanvas()));
+	}
 }
 
 void ToolbarPanel::AddUniform(const std::string& title, const std::string& name, 
 							  Shader* shader, Uniform* uniform, 
 							  const std::vector<SliderItemFloat>& items)
 {
-	AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
-		items, 0.01f, m_editPanel->getCanvas()));
+	if (!items.empty()) {
+		AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
+			items, 0.01f, m_editPanel->getCanvas()));
+	}
 }
 
 wxSizer* ToolbarPanel::initLayout()

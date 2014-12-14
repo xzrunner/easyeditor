@@ -280,6 +280,29 @@ void FileIO::LoadValue(const Json::Value& value, int count,
 		throw d2d::Exception(msg);
 	}
 
+	// no need sliders
+	if (value["region"]["begin"].size() != count || 
+		value["region"]["end"].size() != count) {
+		int i0 = 0, i1 = 1, i2 = 2, i3 = 3;
+		if (count == 1) {
+			uniform->Set((T)(value["value"][i0].asDouble()));
+		} else if (count == 2) {
+			uniform->Set((T)(value["value"][i0].asDouble()),
+				(T)(value["value"][i1].asDouble()));
+		} else if (count == 3) {
+			uniform->Set((T)(value["value"][i0].asDouble()),
+				(T)(value["value"][i1].asDouble()),
+				(T)(value["value"][i2].asDouble()));
+		} else {
+			assert(count == 4);
+			uniform->Set((T)(value["value"][i0].asDouble()),
+				(T)(value["value"][i1].asDouble()),
+				(T)(value["value"][i2].asDouble()),
+				(T)(value["value"][i3].asDouble()));
+		}
+		return;
+	}
+
 	for (int i = 0; i < count; ++i) {
 		std::string name;
 		if (count > 1) {
