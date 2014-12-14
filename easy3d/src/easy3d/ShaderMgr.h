@@ -9,7 +9,7 @@ namespace e3d
 {
 
 class IModel;
-class LightingShader;
+class ModelShader;
 class ShapeShader;
 class SpriteShader;
 
@@ -18,7 +18,7 @@ class ShaderMgr : public d2d::ShaderMgrBase
 public:
 	static ShaderMgr* Instance();
 
-	void Lighting();
+	void Model();
 	void Shape();
 	void Sprite();
 
@@ -34,6 +34,8 @@ public:
 
 	void SetModelView(const mat4& mat);
 
+	void SetModelShader(d2d::SpriteShader* shader, bool delete_old = true);
+
 private:
 	ShaderMgr();
 	~ShaderMgr();
@@ -42,7 +44,7 @@ private:
 	static ShaderMgr* m_instance;
 
 private:
-	LightingShader* m_light_shader;
+	ModelShader* m_model_shader;
 	ShapeShader* m_shape_shader;
 	SpriteShader* m_sprite_shader;
 

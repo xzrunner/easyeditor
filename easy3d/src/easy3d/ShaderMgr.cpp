@@ -20,8 +20,8 @@ ShaderMgr* ShaderMgr::Instance()
 
 ShaderMgr::ShaderMgr()
 {
-	m_light_shader = new LightingShader;
-	m_shaders.push_back(m_light_shader);
+	m_model_shader = new LightingShader;
+	m_shaders.push_back(m_model_shader);
 
 	m_shape_shader = new ShapeShader;
 	m_shaders.push_back(m_shape_shader);
@@ -34,9 +34,9 @@ ShaderMgr::~ShaderMgr()
 {
 }
 
-void ShaderMgr::Lighting()
+void ShaderMgr::Model()
 {
-	Switch(m_light_shader);
+	Switch(m_model_shader);
 }
 
 void ShaderMgr::Shape()
@@ -51,7 +51,7 @@ void ShaderMgr::Sprite()
 
 void ShaderMgr::DrawModel(const IModel* model, const mat4& m)
 {
-	m_light_shader->Draw(model, m);
+	m_model_shader->Draw(model, m);
 }
 
 void ShaderMgr::DrawShape(int type, float* vertices, int count, const d2d::Colorf& col, 
@@ -83,7 +83,7 @@ void ShaderMgr::DrawTriStrip(float* vertices, float* texcoords, int count, int t
 
 void ShaderMgr::SetModelView(const mat4& mat)
 {
-	m_light_shader->SetModelView(mat);
+	m_model_shader->SetModelView(mat);
 	m_shape_shader->SetModelView(mat);
 	m_sprite_shader->SetModelView(mat);
 }

@@ -1,57 +1,32 @@
 #ifndef _E3D_LIGHTING_SHADER_H_
 #define _E3D_LIGHTING_SHADER_H_
 
-#include "Matrix.h"
-
-#include <drag2d.h>
+#include "ModelShader.h"
 
 namespace e3d
 {
 class IModel;
 
-class LightingShader : public d2d::IShader
+class LightingShader : public ModelShader
 {
 public:
 	LightingShader();
-	virtual ~LightingShader();
-
-	virtual void Load();
-	virtual void Unload();	
 
 	virtual void Bind();
-	virtual void Unbind();
-
-	virtual void Commit();
-
-	virtual void SetProjection(int width, int height);
-
-	void SetModelView(const mat4& mat);
-
-	void Draw(const IModel* model, const mat4& m);
 
 protected:
-	virtual void BindAttrib(GLuint prog);
+	virtual void LoadShader();
+
+	virtual void SetNormalMatrix(const mat3& noraml_mat);
+	virtual void SetMaterial(const Material& material);
 
 private:
-	struct Node
-	{
-		const IModel* model;
-		mat4 mat;
-	};
-
-private:
-	GLuint m_model_view, m_projection;
-
 	GLuint m_diffuse_material;
 	GLuint m_normal_matrix;
 	GLuint m_light_position;
 	GLuint m_ambient_material;
 	GLuint m_specular_material;
 	GLuint m_shininess;
-
-	mat4 m_mat_modelview, m_mat_projection;
-
-	std::vector<Node> m_render_list;
 
 }; // LightingShader
 

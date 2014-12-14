@@ -41,7 +41,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 
 // 	e3d::DrawCube(mat, m_aabb, d2d::BLACK);
 
-	shader->Lighting();
+	shader->Model();
 	shader->DrawModel(m_model, mat);
 }
 

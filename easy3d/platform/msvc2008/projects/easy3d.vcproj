@@ -215,6 +215,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\easy3d\ModelShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\ModelShader.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easy3d\ShapeShader.cpp"
 						>
 					</File>
