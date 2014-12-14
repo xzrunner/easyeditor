@@ -12,7 +12,7 @@ SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
 	, m_stage(stage)
 {
 	m_selection = stage->getSpriteSelection();
-	m_selection->retain();
+	m_selection->Retain();
 }
 
 bool SelectSpriteOP::onMouseLeftDown(int x, int y)
@@ -24,24 +24,24 @@ bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 	{
 		if (wxGetKeyState(WXK_CONTROL)) 
 		{
-			if (m_selection->isExist(selected)) {
-				m_selection->erase(selected);
+			if (m_selection->IsExist(selected)) {
+				m_selection->Remove(selected);
 			} else {
-				m_selection->insert(selected);
+				m_selection->Add(selected);
 			}
 		}
 		else
 		{
-			if (!m_selection->isExist(selected))
+			if (!m_selection->IsExist(selected))
 			{
-				m_selection->clear();
-				m_selection->insert(selected);
+				m_selection->Clear();
+				m_selection->Add(selected);
 			}
 		}
 	}
 	else
 	{
-		m_selection->clear();
+		m_selection->Clear();
 	}
 
 	return false;
@@ -52,7 +52,7 @@ bool SelectSpriteOP::onDraw() const
 	if (d2d::AbstractEditOP::onDraw()) return true;
 
 	std::vector<d2d::ISprite*> sprites;
-	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		const Sprite* s = static_cast<const Sprite*>(sprites[i]);
 

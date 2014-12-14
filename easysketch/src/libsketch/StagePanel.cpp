@@ -10,7 +10,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(parent)
 {
-	m_canvas = new StageCanvas(this, library);
+	m_canvas = new StageCanvas(this, this, library);
+
 	library->setCanvas(m_canvas);
 
 	m_editOP = new ArrangeSpriteOP(this);
@@ -43,7 +44,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		if (m_sprites[i] == sprite) {
-			sprite->release();
+			sprite->Release();
 			m_sprites.erase(m_sprites.begin() + i);
 		}
 	}
@@ -51,7 +52,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	sprite->retain();
+	sprite->Retain();
 	m_sprites.push_back(sprite);
 
 	m_canvas->Refresh();
@@ -60,7 +61,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 void StagePanel::clearSprites()
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->release();
+		m_sprites[i]->Release();
 	}
 	m_sprites.clear();
 }

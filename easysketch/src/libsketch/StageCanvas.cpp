@@ -2,7 +2,6 @@
 #include <gl/GLee.h>
 
 #include "StageCanvas.h"
-#include "StagePanel.h"
 
 #include "Symbol.h"
 #include "config.h"
@@ -10,8 +9,9 @@
 namespace libsketch
 {
 
-StageCanvas::StageCanvas(StagePanel* stage, d2d::LibraryPanel* library)
-	: e3d::StageCanvas(stage)
+StageCanvas::StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* stage, 
+						 d2d::LibraryPanel* library)
+	: e3d::StageCanvas(edit_panel)
 	, m_stage(stage)
 	, m_library(library)
 {

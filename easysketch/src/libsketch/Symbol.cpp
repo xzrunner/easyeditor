@@ -55,10 +55,10 @@ void Symbol::SetModel(e3d::IModel* model)
 	if (m_model != model)
 	{
 		if (m_model) {
-			m_model->release();
+			m_model->Release();
 		}
 		m_model = model;
-		m_model->retain();
+		m_model->Retain();
 	}
 }
 

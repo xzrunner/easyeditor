@@ -2,7 +2,6 @@
 #include <gl/GLee.h>
 
 #include "ModelObj.h"
-
 #include "ISurface.h"
 
 namespace e3d 
@@ -249,7 +248,7 @@ void ModelObj::HandleFace(const std::vector<std::string>& tokens)
 	if (tokens.size() > 4)
 	{
 		size_t size = tokens.size()-1;
-		std::vector<uint16> nodes;
+		std::vector<uint16_t> nodes;
 		nodes.resize(size);
 		for (size_t i = 0; i < size; ++i)
 		{
@@ -282,7 +281,7 @@ void ModelObj::HandleFace(const std::vector<std::string>& tokens)
 	}
 	else
 	{
-		uint16 nodes[3];
+		uint16_t nodes[3];
 		for (size_t i = 0; i < 3; ++i)
 		{
 			std::vector<std::string> elems;

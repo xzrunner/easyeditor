@@ -35,7 +35,7 @@ void RotateSpriteState::OnMouseMove(const ivec2& pos)
 
 void RotateSpriteState::Rotate(const e3d::Camera& cam, const ivec2& start, const ivec2& end)
 {
-	m_selection.traverse(Visitor(m_stage, cam, start, end));
+	m_selection.Traverse(Visitor(m_stage, cam, start, end));
 }
 
 //////////////////////////////////////////////////////////////////////////

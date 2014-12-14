@@ -60,7 +60,7 @@ void ShapeShader::Load()
 		"}  \n"
 		;
 
-	InitShader(fs, vs);
+	InitShader(vs, fs);
 
 	m_projection = glGetUniformLocation(m_prog, "u_projection");
 	m_model_view = glGetUniformLocation(m_prog, "u_modelview");

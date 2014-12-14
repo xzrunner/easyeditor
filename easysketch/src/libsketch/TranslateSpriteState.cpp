@@ -24,7 +24,7 @@ void TranslateSpriteState::OnMouseRelease(const ivec2& pos)
 
 void TranslateSpriteState::OnMouseMove(const ivec2& pos)
 {
-	if (m_selection.empty()) {
+	if (m_selection.IsEmpty()) {
 		return;
 	}
 
@@ -34,7 +34,7 @@ void TranslateSpriteState::OnMouseMove(const ivec2& pos)
 
 void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)
 {
-	m_selection.traverse(Visitor(m_stage, first, curr));
+	m_selection.Traverse(Visitor(m_stage, first, curr));
 }
 
 //////////////////////////////////////////////////////////////////////////
