@@ -64,8 +64,6 @@ bool SelectSpriteOP::onDraw() const
 		e3d::DrawCube(mat, s->getSymbol().GetAABB(), d2d::MID_RED);
 	}
 
-	m_stage->Refresh();
-
 	return false;
 }
 
