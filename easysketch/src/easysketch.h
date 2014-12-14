@@ -8,6 +8,7 @@
 
 #include "libsketch/LibraryPage.h"
 #include "libsketch/StagePanel.h"
+#include "libsketch/StageCanvas.h"
 #include "libsketch/ToolBarPanel.h"
 
 #endif // _EASYSKETCH_H_
