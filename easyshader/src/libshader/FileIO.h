@@ -31,7 +31,7 @@ private:
 	static void StoreUniform(const double val[16], Json::Value& value);
 
 	static UniformType TransStrToUType(const std::string& str);
-//	static std::string TransUTypeToStr(UniformType type);
+	static std::string TransUTypeToStr(UniformType type);
 
 	template <typename T>
 	static void LoadValue(const Json::Value& value, int count,

@@ -15,7 +15,7 @@ namespace d2d
 		wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
 		wxTextCtrl* text = new wxTextCtrl(this, wxID_ANY, msg, 
-			wxDefaultPosition, wxSize(300, 200), wxTE_READONLY);
+			wxDefaultPosition, wxSize(300, 200), wxTE_READONLY | wxTE_MULTILINE);
 		sizer->Add(text, 0, wxALIGN_CENTRE | wxALL, 5);
 
 		sizer->Add(new wxButton(this, wxID_OK), wxALL, 5);

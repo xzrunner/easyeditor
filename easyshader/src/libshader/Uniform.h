@@ -50,6 +50,7 @@ public:
 	void Set(int i, int j, int k);
 	void Set(int i, int j, int k, int h);
 
+	const std::string& GetName() const { return m_name; }
 	UniformType GetType() const { return m_type; }
 
 private:

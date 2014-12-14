@@ -229,48 +229,57 @@ UniformType FileIO::TransStrToUType(const std::string& str)
 	} else if (str == STR_TIME) {
 		type = UT_TIME;
 	} else {
-		throw d2d::Exception("uniform type: %s, error!\n", str);
+		throw d2d::Exception("uniform known type [%s]\n", str);
 	}
 
 	return type;
 }
 
-// std::string FileIO::TransUTypeToStr(UniformType type)
-// {
-// 	if (type == UT_INT) {
-// 		return STR_INT;
-// 	} else if (type == UT_BOOL) {
-// 		return STR_BOOL;
-// 	} else if (type == UT_FLOAT) {
-// 		return STR_FLOAT;
-// 	} else if (type == UT_IVEC2) {
-// 		return STR_IVEC2;
-// 	} else if (type == UT_IVEC3) {
-// 		return STR_IVEC3;
-// 	} else if (type == UT_IVEC4) {
-// 		return STR_IVEC4;
-// 	} else if (type == UT_VEC2) {
-// 		return STR_VEC2;
-// 	} else if (type == UT_VEC3) {
-// 		return STR_VEC3;
-// 	} else if (type == UT_VEC4) {
-// 		return STR_IVEC4;
-// 	} else if (type == UT_MAT2) {
-// 		return STR_MAT2;
-// 	} else if (type == UT_MAT3) {
-// 		return STR_MAT3;
-// 	} else if (type == UT_MAT4) {
-// 		return STR_MAT4;
-// 	} else {
-// 		throw d2d::Exception("uniform type: %d, error!\n", type);
-// 	}
-// }
+std::string FileIO::TransUTypeToStr(UniformType type)
+{
+	if (type == UT_INT) {
+		return STR_INT;
+	} else if (type == UT_BOOL) {
+		return STR_BOOL;
+	} else if (type == UT_FLOAT) {
+		return STR_FLOAT;
+	} else if (type == UT_IVEC2) {
+		return STR_IVEC2;
+	} else if (type == UT_IVEC3) {
+		return STR_IVEC3;
+	} else if (type == UT_IVEC4) {
+		return STR_IVEC4;
+	} else if (type == UT_VEC2) {
+		return STR_VEC2;
+	} else if (type == UT_VEC3) {
+		return STR_VEC3;
+	} else if (type == UT_VEC4) {
+		return STR_IVEC4;
+	} else if (type == UT_MAT2) {
+		return STR_MAT2;
+	} else if (type == UT_MAT3) {
+		return STR_MAT3;
+	} else if (type == UT_MAT4) {
+		return STR_MAT4;
+	} else if (type == UT_TIME) {
+		return STR_TIME;
+	} else {
+		throw d2d::Exception("uniform known type [%d]\n", type);
+	}
+}
 
 template <typename T>
 void FileIO::LoadValue(const Json::Value& value, int count,
 					   std::vector<SliderItem<T> >& items,
 					   Uniform* uniform)
 {
+	if (value["value"].size() != count) {
+		wxString msg;
+		msg.Printf("uniform [%s] value not fit type [%s]\n", 
+			uniform->GetName(), TransUTypeToStr(uniform->GetType()));
+		throw d2d::Exception(msg);
+	}
+
 	for (int i = 0; i < count; ++i) {
 		std::string name;
 		if (count > 1) {

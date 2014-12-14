@@ -1,5 +1,7 @@
 #include "IShader.h"
 
+#include "common/Exception.h"
+
 #include <gl/GLee.h>
 #include <stdio.h>
 #include <assert.h>
@@ -43,10 +45,9 @@ void IShader::InitShader(const char* VS, const char* FS)
 
 	glGetProgramiv(prog, GL_LINK_STATUS, &status);
 	if (status == GL_FALSE) {
-		GLchar errorLog[1024] = {0};
-		glGetProgramInfoLog(prog, 1024, NULL, errorLog);
-		assert(0);
-		return;
+		char buf[1024];
+		glGetProgramInfoLog(prog, 1024, NULL, buf);
+		throw d2d::Exception("link failed:%s\n", buf);
 	}
 
 	// detatch
@@ -76,14 +77,9 @@ GLuint IShader::CompileShader(const char* source, GLuint type)
 
 	if (status == GL_FALSE) {
 		char buf[1024];
-		GLint len;
-		glGetShaderInfoLog(shader, 1024, &len, buf);
-
-		printf("compile failed:%s\n"
-			"source:\n %s\n",
-			buf, source);
+		glGetShaderInfoLog(shader, 1024, NULL, buf);
 		glDeleteShader(shader);
-		return 0;
+		throw d2d::Exception("compile failed:%s\n, source:\n %s\n", buf, source);
 	}
 
 	return shader;	
