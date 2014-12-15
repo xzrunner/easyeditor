@@ -61,7 +61,7 @@ void Task::initLayout()
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
 
-	m_library = new LibraryPanel(left_splitter);
+	m_library = new LibraryPanel(left_splitter, m_is_2d);
 	if (m_is_2d) {
 		m_stage = new StagePanel2D(left_splitter, m_parent, m_library);
 	} else {

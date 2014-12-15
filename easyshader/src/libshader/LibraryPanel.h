@@ -9,7 +9,7 @@ namespace eshader
 class LibraryPanel : public d2d::LibraryPanel
 {
 public:
-	LibraryPanel(wxWindow* parent);
+	LibraryPanel(wxWindow* parent, bool is_2d);
 
 }; // LibraryPanel
 
