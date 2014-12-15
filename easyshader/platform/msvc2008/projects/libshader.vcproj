@@ -257,6 +257,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libshader\Shader2D.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshader\Shader2D.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshader\Shader3D.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshader\Shader3D.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libshader\Uniform.cpp"
 				>
 			</File>

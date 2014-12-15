@@ -1,7 +1,10 @@
 #include "FileIO.h"
-#include "Shader.h"
+#include "Shader2D.h"
+#include "Shader3D.h"
 #include "ToolBarPanel.h"
 #include "SliderCtrl.h"
+
+#include <easy3d.h>
 
 namespace eshader
 {
@@ -21,7 +24,7 @@ static const std::string STR_TIME	= "time";
 static const std::string STR_INPUT	= "input";
 
 Shader* FileIO::LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
-						   ToolbarPanel* toolbar)
+						   ToolbarPanel* toolbar, bool is_2d)
 {
 	toolbar->Clear();
 
@@ -34,18 +37,18 @@ Shader* FileIO::LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
 	fin.close();
 
 	wxString dir = d2d::FilenameTools::getFileDir(filepath);
-	Shader* shader = LoadShader(dir, value, toolbar);
-#ifdef IS_2D
- 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
- 	shader_mgr->null();
- 	shader_mgr->SetSpriteShader(shader->GetShaderImpl());
- 	shader_mgr->sprite();
-#else
-	e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
-	shader_mgr->Null();
-	shader_mgr->SetModelShader(shader->GetShaderImpl());
-	shader_mgr->Model();
-#endif
+	Shader* shader = LoadShader(dir, value, toolbar, is_2d);
+	if (is_2d) {
+		d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+		shader_mgr->null();
+		shader_mgr->SetSpriteShader(static_cast<d2d::SpriteShader*>(shader->GetShaderImpl()));
+		shader_mgr->sprite();
+	} else {
+		e3d::ShaderMgr* shader_mgr = e3d::ShaderMgr::Instance();
+		shader_mgr->Null();
+		shader_mgr->SetModelShader(static_cast<e3d::ModelShader*>(shader->GetShaderImpl()));
+		shader_mgr->Model();
+	}
 	shader->LoadUniforms();
 	canvas->resetViewport();
 
@@ -73,12 +76,17 @@ void FileIO::StoreShader(const wxString& filepath, const ToolbarPanel* toolbar)
 }
 
 Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value,
-						   ToolbarPanel* toolbar)
+						   ToolbarPanel* toolbar, bool is_2d)
 {
 	std::string vert_path = dir + "\\" + value["vert_path"].asString(),
 		frag_path = dir + "\\" + value["frag_path"].asString();
-	Shader* shader = new Shader(vert_path, frag_path);
-	shader->Load();
+	Shader* shader;
+	if (is_2d) {
+		shader = new Shader2D(vert_path, frag_path);
+	} else {
+		shader = new Shader3D(vert_path, frag_path);
+	}
+	shader->LoadShader();
 
 	// uniforms
 	int i = 0;
@@ -86,13 +94,19 @@ Shader* FileIO::LoadShader(const wxString& dir, const Json::Value& value,
 	while (!uniform_val.isNull()) {
 		Uniform* uniform = LoadUniform(uniform_val, toolbar, shader);
 		uniform->SetLocation(shader->GetShaderImpl()->GetProgram());
-		if (uniform->GetType() == UT_TIME) {
-			shader->AddTimeUniform(uniform);
-		} else if (uniform->GetType() == UT_INPUT) {
-			shader->AddInputUniform(uniform);
+		if (is_2d) {
+			Shader2D* shader2d = static_cast<Shader2D*>(shader);
+			if (uniform->GetType() == UT_TIME) {
+				shader2d->AddTimeUniform(uniform);
+			} else if (uniform->GetType() == UT_INPUT) {
+				shader2d->AddInputUniform(uniform);
+			} else {
+				shader->AddUniform(uniform);
+			}
 		} else {
 			shader->AddUniform(uniform);
 		}
+
 		uniform_val = value["uniforms"][i++];
 	}
 

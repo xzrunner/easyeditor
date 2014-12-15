@@ -17,12 +17,12 @@ class FileIO
 {
 public:
 	static Shader* LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
-		ToolbarPanel* toolbar);
+		ToolbarPanel* toolbar, bool is_2d);
 	static void StoreShader(const wxString& filepath, const ToolbarPanel* toolbar);
 
 private:
 	static Shader* LoadShader(const wxString& dir, const Json::Value& value,
-		ToolbarPanel* toolbar);
+		ToolbarPanel* toolbar, bool is_2d);
 	static Uniform* LoadUniform(const Json::Value& value, ToolbarPanel* toolbar,
 		Shader* shader);
 

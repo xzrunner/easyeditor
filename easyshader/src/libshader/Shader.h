@@ -1,13 +1,7 @@
 #ifndef _ESHADER_SHADER_H_
 #define _ESHADER_SHADER_H_
 
-//#define IS_2D
-
-#include <string>
 #include <drag2d.h>
-#ifndef IS_2D
-#include <easy3d.h>
-#endif
 
 namespace eshader 
 {
@@ -17,67 +11,38 @@ class Uniform;
 class Shader
 {
 public:
-	Shader(const std::string& vert_filepath, const std::string& frag_filepath);
-	~Shader();
+	Shader();
+	virtual ~Shader();
 
-	void Load();
+	virtual void BindShader() = 0;
+
+	void LoadShader();
 
 	void LoadUniforms();
-	void SetTimeUniform(float time);
-	void SetInputUniform(float x, float y);
 
 	void AddUniform(Uniform* uniform);
-	void AddTimeUniform(Uniform* uniform);
-	void AddInputUniform(Uniform* uniform);
 
-#ifdef IS_2D
-	d2d::SpriteShader* GetShaderImpl() { return m_shader_impl; }
-#else
-	e3d::ModelShader* GetShaderImpl() { return m_shader_impl; }
-#endif
+	d2d::IShader* GetShaderImpl() { return m_shader_impl; }
 
-private:
-#ifdef IS_2D
-	class ShaderImpl : public d2d::SpriteShader
-#else
-	class ShaderImpl : public e3d::ModelShader
-#endif
+protected:
+	class ShaderImpl
 	{
 	public:
 		ShaderImpl(const std::string& vert_filepath, const std::string& frag_filepath);
 
-	protected:
-		virtual void LoadShader();
-
-#ifndef IS_2D
-		virtual void SetNormalMatrix(const mat3& noraml_mat);
-#endif
-
 	private:
 		static void ReadFromFile(const std::string& filepath, std::string& output);
 
-	private:
+	protected:
 		std::string m_vert, m_frag;
-
-#ifndef IS_2D
-		GLuint m_normal_matrix;
-#endif
 
 	}; // ShaderImpl
 
+protected:
+	d2d::IShader* m_shader_impl;
+
 private:
-#ifdef IS_2D
-	d2d::SpriteShader* m_shader_impl;
-#else
-	e3d::ModelShader* m_shader_impl;
-#endif
-
-	// normal
 	std::vector<Uniform*> m_uniforms;
-
-	// special
-	Uniform* m_time_uniform;
-	Uniform* m_input_uniform;
 
 }; // Shader
 

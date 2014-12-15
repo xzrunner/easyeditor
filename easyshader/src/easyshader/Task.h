@@ -34,6 +34,8 @@ private:
 
 	wxFrame* m_parent;
 
+	bool m_is_2d;
+
 	LibraryPanel* m_library;
 	d2d::EditPanel* m_stage;
 	ToolbarPanel* m_toolbar;
