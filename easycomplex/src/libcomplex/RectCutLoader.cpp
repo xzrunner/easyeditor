@@ -147,7 +147,7 @@ void RectCutLoader::LoadRRPFile(const wxString& pack_file, int img_id,
 {
 	pictures.clear();
 
-	std::ifstream fin(pack_file.mb_str());
+	std::ifstream fin(pack_file.mb_str(), std::ios::binary);
 
 	int pic_sz = 0;
 	fin.read(reinterpret_cast<char*>(&pic_sz), sizeof(int32_t));
@@ -191,7 +191,7 @@ void RectCutLoader::LoadRRPFile(const wxString& pack_file, int img_id,
 				pictures.push_back(pic);
 			}
 		} else {
-			fin.seekg(8 * sz, fin.cur);
+			fin.seekg(sizeof(int16_t) * 6 * sz, fin.cur);
 		}
 	}
 
