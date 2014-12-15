@@ -12,6 +12,20 @@ public:
 	StageCanvas3D(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* stage, 
 		d2d::LibraryPanel* library);
 
+private:
+	void OnTimer(wxTimerEvent& event);
+
+private:
+	enum
+	{
+		TIMER_ID = 1000
+	};
+
+private:
+	wxTimer m_timer;
+
+	DECLARE_EVENT_TABLE()
+
 }; // StageCanvas3D
 
 }

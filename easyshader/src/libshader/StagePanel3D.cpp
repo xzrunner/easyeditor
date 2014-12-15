@@ -1,4 +1,5 @@
 #include "StagePanel3D.h"
+#include "StageCanvas3D.h"
 
 namespace eshader
 {
