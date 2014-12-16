@@ -146,7 +146,7 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file,
 	std::map<std::string, int> image_map;
 	std::ifstream fin_id_file(img_id_file.mb_str());
 	std::string line;
-	int id = 0;
+	int id = 1;
 	while (std::getline(fin_id_file, line)) {
 		wxString key = line.substr(0, line.find_last_of('.'));
 		key.Replace("\\", "_");
