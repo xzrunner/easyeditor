@@ -26,6 +26,7 @@
 #include "PackRegularRect.h"
 #include "FixRotateTrimJson.h"
 #include "ScaleImage.h"
+#include "BinRRP.h"
 
 namespace edb
 {
@@ -58,6 +59,7 @@ void CommandLoader::Init()
 	fc->Register(PackRegularRect::Create());
 	fc->Register(FixRotateTrimJson::Create());
 	fc->Register(ScaleImage::Create());
+	fc->Register(BinRRP::Create());
 }
 
 }

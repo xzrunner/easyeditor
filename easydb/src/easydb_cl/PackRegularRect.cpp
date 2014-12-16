@@ -40,17 +40,13 @@ void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst
 
 	wxString filepath = dst_dir + "\\pack.json";
 
- 	// pack
- 	libpacker::RegularRectPack rrp(files);
- 	rrp.Pack();
- 	rrp.OutputToText(filepath);
- 
- 	// gen image
- 	libpacker::GenRegularRectImage::Create(filepath);
-
-// 	// gen binary
-// 	libpacker::GenRegularRectBinary pack(filepath);
-// 	pack.PackToBinary();
+  	// pack
+  	libpacker::RegularRectPack rrp(files);
+  	rrp.Pack();
+  	rrp.OutputToText(filepath);
+  
+  	// gen image
+  	libpacker::GenRegularRectImage::Create(filepath);
 }
 
 }
