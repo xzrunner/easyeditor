@@ -20,7 +20,7 @@ std::string NumberImages::Description() const
 
 std::string NumberImages::Usage() const
 {
-	return Command() + " [dir]";
+	return Command() + " [dir src] [dst file]";
 }
 
 void NumberImages::Run(int argc, char *argv[])

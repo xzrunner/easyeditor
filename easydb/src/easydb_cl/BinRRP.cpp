@@ -23,7 +23,7 @@ std::string BinRRP::Usage() const
 
 void BinRRP::Run(int argc, char *argv[])
 {
-	// rrpbin E:\debug\character\pack.json
+	// rrpbin E:\debug\character\pack.json E:\debug\character\id_images.txt
 
 	if (!check_number(this, argc, 4)) return;
 	if (!check_file(argv[2])) return;
