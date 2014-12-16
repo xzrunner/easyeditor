@@ -27,6 +27,7 @@
 #include "FixRotateTrimJson.h"
 #include "ScaleImage.h"
 #include "BinRRP.h"
+#include "NumberImages.h"
 
 namespace edb
 {
@@ -60,6 +61,7 @@ void CommandLoader::Init()
 	fc->Register(FixRotateTrimJson::Create());
 	fc->Register(ScaleImage::Create());
 	fc->Register(BinRRP::Create());
+	fc->Register(NumberImages::Create());
 }
 
 }

@@ -274,6 +274,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\NumberImages.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\NumberImages.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\PackParticle2D.cpp"
 					>
 				</File>
@@ -301,14 +309,6 @@
 			<Filter
 				Name="image"
 				>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\RegularRectCut.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\RegularRectCut.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\src\easydb\Snapshoot.cpp"
 					>
@@ -382,6 +382,18 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\ScaleImage.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="pack"
+					>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\RegularRectCut.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\RegularRectCut.h"
 						>
 					</File>
 				</Filter>
