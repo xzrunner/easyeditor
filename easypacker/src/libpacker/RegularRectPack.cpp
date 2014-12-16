@@ -265,9 +265,8 @@ void RegularRectPack::LoadData(const wxArrayString& files)
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		const wxString& filepath = files[i];
-
-		if (filepath.Contains("2013baji1_attack1_2_1_011#4#39#8#4#.png")) {
-			int zz = 0;
+		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
+			continue;
 		}
 
 		Rect r;
