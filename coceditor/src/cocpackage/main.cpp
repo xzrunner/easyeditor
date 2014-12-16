@@ -232,7 +232,7 @@ int main(int argc, char *argv[])
 
 	try {
 		ebuilder::CodeGenerator gen;
-		coceditor::COCCode code(gen, gscale);
+		coceditor::COCCode code(gen, path, gscale);
 		code.Parser();
 		std::locale::global(std::locale(""));
 		std::ofstream fout(argv[3]);

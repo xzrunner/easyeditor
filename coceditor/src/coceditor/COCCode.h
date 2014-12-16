@@ -1,6 +1,8 @@
 #ifndef _COCPACKAGE_COCCODE_H_
 #define _COCPACKAGE_COCCODE_H_
 
+#define USE_PACKED_RRP
+
 #include <drag2d.h>
 
 #include "COCParser.h"
@@ -17,7 +19,8 @@ namespace coceditor
 	class COCCode
 	{
 	public:
-		COCCode(ebuilder::CodeGenerator& gen, float scale = 1.0f);
+		COCCode(ebuilder::CodeGenerator& gen, const std::string& src_path,
+			float scale = 1.0f);
 
 		void Parser();
 
@@ -57,8 +60,15 @@ namespace coceditor
 
 		void TransToMat(const d2d::ISprite* sprite, float mat[6], bool force = false) const;
 
+#ifdef USE_PACKED_RRP
+		void LoadImageMapFile(const std::string& filepath);
+		int FindImageID(const wxString& filepath) const;
+#endif
+
 	private:
 		ebuilder::CodeGenerator& m_gen;
+
+		const std::string m_src_path;
 
 		float m_scale;
 
@@ -75,6 +85,10 @@ namespace coceditor
 			int id;
 		};
 		std::map<const emesh::Symbol*, std::vector<MeshID> > m_map_mesh2ids;
+
+#ifdef USE_PACKED_RRP
+		std::map<std::string, int> m_rrp_image_id_map;
+#endif
 
 	}; // COCCode
 

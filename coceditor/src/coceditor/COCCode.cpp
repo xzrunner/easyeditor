@@ -16,11 +16,17 @@ namespace coceditor
 
 namespace lua = ebuilder::lua;
 
-COCCode::COCCode(ebuilder::CodeGenerator& gen, float scale)
+COCCode::COCCode(ebuilder::CodeGenerator& gen, 
+				 const std::string& src_path,
+				 float scale)
 	: m_gen(gen)
+	, m_src_path(src_path)
 	, m_scale(scale)
 	, m_id(0)
 {
+#ifdef USE_PACKED_RRP
+	LoadImageMapFile("e:/debug/character/pack/id_images.txt");
+#endif
 }
 
 void COCCode::Parser()
@@ -369,6 +375,12 @@ void COCCode::ParserPicture(const d2d::ImageSprite* sprite, const COCParser& par
 		}
 	}
 
+#ifdef USE_PACKED_RRP
+	int id = FindImageID(picture->filename);
+	x0 = x1 = x2 = x3 = -id;
+	y0 = y1 = y2 = y3 = -id;
+#endif
+
 	std::string sx0 = wxString::FromDouble(x0), sy0 = wxString::FromDouble(y0);
 	std::string sx1 = wxString::FromDouble(x1), sy1 = wxString::FromDouble(y1);
 	std::string sx2 = wxString::FromDouble(x2), sy2 = wxString::FromDouble(y2);
@@ -532,6 +544,12 @@ void COCCode::ParserPicture(const d2d::ImageSymbol* symbol, const COCParser& par
 			}
 		}
 	}
+
+#ifdef USE_PACKED_RRP
+	int id = FindImageID(picture->filename);
+	x0 = x1 = x2 = x3 = -id;
+	y0 = y1 = y2 = y3 = -id;
+#endif
 
 	std::string sx0 = wxString::FromDouble(x0), sy0 = wxString::FromDouble(y0);
 	std::string sx1 = wxString::FromDouble(x1), sy1 = wxString::FromDouble(y1);
@@ -1375,5 +1393,36 @@ void COCCode::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force /*
 	// flip y
 	mat[5] = -mat[5];
 }
+
+#ifdef USE_PACKED_RRP
+
+int COCCode::FindImageID(const wxString& filepath) const
+{
+//	wxString path = d2d::FilenameTools::getRelativePath(m_src_path, filepath);
+
+	wxString path = filepath;
+	path.Replace("/", "\\");
+
+	std::map<std::string, int>::const_iterator itr
+		= m_rrp_image_id_map.find(path.Lower().ToStdString());
+	if (itr == m_rrp_image_id_map.end()) {
+		throw d2d::Exception("Cannot find image %s in image id file\n", filepath); 
+	}
+	return itr->second;
+}
+
+void COCCode::LoadImageMapFile(const std::string& filepath)
+{
+	std::ifstream fin(filepath.c_str());
+	std::string line;
+	int id = 1;
+	while (std::getline(fin, line)) {
+//		wxString key = line.substr(0, line.find_last_of('.'));
+		wxString key = line;
+		m_rrp_image_id_map.insert(std::make_pair(key, id++));
+	}
+	fin.close();
+}
+#endif
 
 } // coceditor

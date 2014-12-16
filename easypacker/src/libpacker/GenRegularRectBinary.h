@@ -10,13 +10,15 @@ namespace libpacker
 class GenRegularRectBinary
 {
 public:
-	GenRegularRectBinary(const wxString& filepath);
+	GenRegularRectBinary(const wxString& json_file, 
+		const wxString& img_id_file);
 	~GenRegularRectBinary();
 
 	void PackToBinary() const;
 
 private:
-	void LoadRegularRectPackFile(const wxString& filepath);
+	void LoadRegularRectPackFile(const wxString& json_file, 
+		const wxString& img_id_file);
 
 private:
 	struct Rect

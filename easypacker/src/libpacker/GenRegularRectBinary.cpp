@@ -9,10 +9,11 @@
 namespace libpacker
 {
 
-GenRegularRectBinary::GenRegularRectBinary(const wxString& filepath)
-	: m_filepath(filepath)
+GenRegularRectBinary::GenRegularRectBinary(const wxString& json_file, 
+										   const wxString& img_id_file)
+	: m_filepath(json_file)
 {
-	LoadRegularRectPackFile(filepath);
+	LoadRegularRectPackFile(json_file, img_id_file);
 }
 
 GenRegularRectBinary::~GenRegularRectBinary()
@@ -66,13 +67,14 @@ void GenRegularRectBinary::PackToBinary() const
 	fout.close();
 }
 
-void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& filepath)
+void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& json_file, 
+												   const wxString& img_id_file)
 {
 	// load file
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.mb_str());
+	std::ifstream fin(json_file.mb_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -141,8 +143,26 @@ void GenRegularRectBinary::LoadRegularRectPackFile(const wxString& filepath)
 	}
 
 	// set picture id
+	std::map<std::string, int> image_map;
+	std::ifstream fin_id_file(img_id_file.mb_str());
+	std::string line;
+	int id = 0;
+	while (std::getline(fin_id_file, line)) {
+		wxString key = line.substr(0, line.find_last_of('.'));
+		key.Replace("\\", "_");
+		image_map.insert(std::make_pair(key, id++));
+	}
+	fin_id_file.close();
+
 	for (int i = 0, n = m_pics.size(); i < n; ++i) {
-		m_pics[i]->id = i;
+		Picture* pic = m_pics[i];
+		std::map<std::string, int>::iterator itr 
+			= image_map.find(pic->path.Lower().ToStdString());
+		if (itr == image_map.end()) {
+			throw d2d::Exception("Cannot find image %s in %s\n", 
+				pic->path, img_id_file);
+		}
+		pic->id = itr->second;
 	}
 }
 

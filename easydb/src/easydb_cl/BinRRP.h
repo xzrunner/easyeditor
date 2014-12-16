@@ -22,7 +22,7 @@ public:
 	static ICommand* Create() { return new BinRRP(); }
 
 private:
-	void Trigger(const std::string& filepath);
+	void Trigger(const std::string& json_file, const std::string& image_id_file);
 
 }; // PackRRPBin
 
