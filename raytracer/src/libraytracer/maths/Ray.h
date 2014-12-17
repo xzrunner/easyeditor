@@ -13,6 +13,9 @@ public:
 	Point3D ori;
 	Vector3D dir;
 
+	// ray depth, for reflections
+	int	depth;
+
 public:
 	Ray();
 	Ray(const Point3D& ori, const Vector3D& dir);

@@ -13,6 +13,8 @@ class Texture;
 class Lambertian : public BRDF
 {
 public:
+	Lambertian();
+	virtual ~Lambertian();
 
 	virtual RGBColor f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const;
 
@@ -44,10 +46,6 @@ inline void Lambertian::SetKd(const float k) {
 
 inline void Lambertian::SetCd(const RGBColor c) {
 	m_cd = c;
-}
-
-inline void Lambertian::SetCd(const Texture* tex) {
-	m_cd_tex = tex;
 }
 
 }

@@ -13,7 +13,7 @@ GeometricObject::GeometricObject()
 
 GeometricObject::~GeometricObject()
 {
-	delete m_material;
+	m_material->Release();
 }
 
 Point3D GeometricObject::Sample() const
@@ -38,10 +38,7 @@ Normal GeometricObject::GetNormal(const Point3D& p) const
 
 void GeometricObject::SetMaterial(const Material* m) 
 {
-	if (m_material != m) {
-		delete m_material;
-		m_material = m;
-	}
+	obj_assign((const Object*&)m_material, m);
 }
 
 }

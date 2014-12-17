@@ -13,6 +13,13 @@ GlossySpecular::GlossySpecular()
 {	
 }
 
+GlossySpecular::~GlossySpecular()
+{
+	if (m_sampler) {
+		m_sampler->Release();
+	}
+}
+
 // ----------------------------------------------------------------------------------- f
 // no sampling here: just use the Phong formula
 // this is used for direct illumination only
@@ -55,6 +62,21 @@ RGBColor GlossySpecular::sample_f(const ShadeRec& sr, const Vector3D& wo, Vector
 	pdf = phong_lobe * (sr.normal * wi);
 
 	return (m_ks * m_cs * phong_lobe);
+}
+
+void GlossySpecular::SetKs(const float ks)
+{
+	m_ks = ks;
+}
+
+void GlossySpecular::SetExp(const float e)
+{
+	m_exp = e;
+}
+
+void GlossySpecular::SetCs(const RGBColor& c)
+{
+	m_cs = c;
 }
 
 }

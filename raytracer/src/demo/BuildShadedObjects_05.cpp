@@ -3,14 +3,19 @@
 #include "tracer/AreaLighting.h"
 #include "cameras/Pinhole.h"
 #include "materials/Emissive.h"
+#include "materials/Reflective.h"
+#include "materials/SV_Matte.h"
 #include "objects/Rectangle.h"
+#include "objects/Sphere.h"
+#include "objects/Plane.h"
+#include "texture/Checker3D.h"
 #include "lights/AreaLight.h"
 #include "utilities/Constants.h"
 
 namespace rt
 {
 
-void World::build(void) 
+void World::Build(void) 
 {
 	int num_samples = 16;
 	Sampler* sampler = new MultiJittered(num_samples);
@@ -36,7 +41,7 @@ void World::build(void)
 	emissive->SetColor(WHITE);
 
 	Rectangle* rectangle = new Rectangle(Point3D(-1, -0.5, -1), Vector3D(2, 0, 0), Vector3D(0, 0, 2), Normal(0, -1, 0));
-//	rectangle->set_material(emissive);
+	rectangle->SetMaterial(emissive);
 	rectangle->SetSampler(sampler);
 	AddObject(rectangle);
 
@@ -46,33 +51,33 @@ void World::build(void)
 	AddLight(rect_light);
 
 
-	Reflective* reflective_ptr1 = new Reflective;
-	reflective_ptr1->set_ka(0.2); 
-	reflective_ptr1->set_kd(0.1); 
-	reflective_ptr1->set_cd(0, 1, 0.2);  // green
-	reflective_ptr1->set_ks(0.0);     
-	reflective_ptr1->set_exp(1);
-	reflective_ptr1->set_kr(0.85); 
-	reflective_ptr1->set_cr(0.75, 0.75, 1);  // blue 
+	Reflective* reflective = new Reflective;
+	reflective->SetKa(0.2); 
+	reflective->SetKd(0.1); 
+	reflective->SetCd(RGBColor(0, 1, 0.2));  // green
+	reflective->SetKs(0.0);     
+	reflective->SetExp(1);
+// 	reflective_ptr1->set_kr(0.85); 
+// 	reflective_ptr1->set_cr(0.75, 0.75, 1);  // blue 
 
-	Sphere* sphere_ptr1 = new Sphere(Point3D(0, -2, 0), 0.5); 	
-	sphere_ptr1->set_material(reflective_ptr1);
-	add_object(sphere_ptr1);
+	Sphere* sphere = new Sphere(Point3D(0, -2, 0), 0.5); 	
+	sphere->SetMaterial(reflective);
+	AddObject(sphere);
 
 
-	Checker3D* checker_ptr = new Checker3D;
-	checker_ptr->set_size(1);		
-	checker_ptr->set_color1(1.0);  
-	checker_ptr->set_color2(0.9);
+	Checker3D* checker = new Checker3D;
+	checker->SetSize(1);		
+	checker->SetColor1(RGBColor(1, 1, 1));  
+	checker->SetColor2(RGBColor(0.9, 0.9, 0.9));
 
-	SV_Matte* sv_matte_ptr = new SV_Matte;		
-	sv_matte_ptr->set_ka(0.25);
-	sv_matte_ptr->set_kd(0.75);
-	sv_matte_ptr->set_cd(checker_ptr);
+	SV_Matte* sv_matte = new SV_Matte;		
+	sv_matte->SetKa(0.25);
+	sv_matte->SetKd(0.75);
+	sv_matte->SetCd(checker);
 
-	Plane* plane_ptr = new Plane(Point3D(0, -2.75, 0), Normal(0, 1, 0));  
-	plane_ptr->set_material(sv_matte_ptr);
-	add_object(plane_ptr);	
+	Plane* plane = new Plane(Point3D(0, -2.75, 0), Normal(0, 1, 0));  
+	plane->SetMaterial(sv_matte);
+	AddObject(plane);	
 }
 
 }

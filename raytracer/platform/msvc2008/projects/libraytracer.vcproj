@@ -265,6 +265,18 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\utilities\interfaces.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\utilities\Object.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\utilities\Object.inl"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\utilities\RGBColor.cpp"
 				>
 			</File>

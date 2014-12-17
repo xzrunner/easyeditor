@@ -10,7 +10,9 @@ class World;
 
 class MultipleObjects : public Tracer
 {
-public:	
+public:
+	MultipleObjects(const World* world);
+
 	virtual RGBColor TraceRay(const Ray& ray) const;
 
 }; // MultipleObjects

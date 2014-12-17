@@ -17,14 +17,18 @@ AreaLight::AreaLight()
 
 AreaLight::~AreaLight()
 {
-	delete m_object;
-	delete m_material;
+	if (m_object) {
+		m_object->Release();
+	}
+	if (m_material) {
+		m_material->Release();
+	}
 }
 
 RGBColor AreaLight::L(const ShadeRec& sr) const
 {
 	float ndotd = -m_light_normal * m_wi;
-	if (ndotd > 0.0f) {
+	if (ndotd > 0.0f && m_material) {
 		return m_material->GetLe(sr);
 	} else {
 		return BLACK;
@@ -70,10 +74,12 @@ float AreaLight::Pdf(const ShadeRec& sr) const
 
 void AreaLight::SetObject(GeometricObject* obj)
 {
-	if (m_object != obj) {
-		delete m_object;
-		m_object = obj;
-	}
+	obj_assign((const Object*&)m_object, obj);
+}
+
+void AreaLight::SetMaterial(Material* material)
+{
+	obj_assign((const Object*&)m_material, material);
 }
 
 }

@@ -1,7 +1,16 @@
 #include "AreaLighting.h"
 
+#include "utilities/ShadeRec.h"
+#include "world/World.h"
+#include "materials/Material.h"
+
 namespace rt
 {
+
+AreaLighting::AreaLighting(const World* world)
+	: Tracer(world)
+{
+}
 
 RGBColor AreaLighting::TraceRay(const Ray& ray) const
 {
@@ -9,7 +18,7 @@ RGBColor AreaLighting::TraceRay(const Ray& ray) const
 
 	if (sr.hit_an_object) {
 		sr.ray = ray;
-		return sr.material->area_light_shade(sr);
+		return sr.material->AreaLightShade(sr);
 	} else {
 		return m_world->GetBackgroundColor();
 	}
@@ -18,7 +27,7 @@ RGBColor AreaLighting::TraceRay(const Ray& ray) const
 // this ignores the depth argument
 RGBColor AreaLighting::TraceRay(const Ray& ray, int depth) const
 {
-	TraceRay(ray);
+	return TraceRay(ray);
 }
 
 }

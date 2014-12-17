@@ -7,6 +7,10 @@
 namespace rt
 {
 
+RayCast::RayCast(const World* world)
+	: Tracer(world)
+{}
+
 RGBColor RayCast::TraceRay(const Ray& ray) const
 {
 	ShadeRec sr(m_world->HitObjects(ray));

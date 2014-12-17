@@ -29,6 +29,7 @@ public:
 	virtual float Pdf(const ShadeRec& sr) const;
 
 	void SetObject(GeometricObject* obj);
+	void SetMaterial(Material* material);
 
 private:
 	GeometricObject* m_object;

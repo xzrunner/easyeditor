@@ -3,17 +3,17 @@
 
 #include "maths/Point2D.h"
 #include "maths/Point3D.h"
+#include "utilities/Object.h"
 
 #include <vector>
 
 namespace rt
 {
 
-class Sampler
+class Sampler : public Object
 {
 public:
 	Sampler();
-
 	Sampler(int num);
 
 	// generate sample patterns in a unit square

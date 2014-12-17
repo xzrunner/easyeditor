@@ -3,6 +3,7 @@
 
 #include "utilities/RGBColor.h"
 #include "utilities/Constants.h"
+#include "utilities/Object.h"
 
 namespace rt
 {
@@ -10,7 +11,7 @@ namespace rt
 class ShadeRec;
 class Vector3D;
 
-class BRDF
+class BRDF : public Object
 {
 public:
 	virtual ~BRDF() {}

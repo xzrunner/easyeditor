@@ -2,13 +2,14 @@
 #define _RT_TEXTURE_H_
 
 #include "utilities/RGBColor.h"
+#include "utilities/Object.h"
 
 namespace rt
 {
 
 class ShadeRec;
 
-class Texture
+class Texture : public Object
 {
 public:
 	virtual ~Texture() {}

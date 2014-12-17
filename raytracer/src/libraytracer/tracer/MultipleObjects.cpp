@@ -6,6 +6,11 @@
 namespace rt
 {
 
+MultipleObjects::MultipleObjects(const World* world)
+	: Tracer(world)
+{	
+}
+
 RGBColor MultipleObjects::TraceRay(const Ray& ray) const
 {
 	ShadeRec sr(m_world->HitObjects(ray));

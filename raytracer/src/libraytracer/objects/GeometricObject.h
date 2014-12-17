@@ -2,6 +2,7 @@
 #define _RT_GEOMETRIC_OBJECT_H_
 
 #include "maths/Point3D.h"
+#include "utilities/Object.h"
 
 #include <stdio.h>
 
@@ -12,7 +13,7 @@ class Ray;
 class ShadeRec;
 class Material;
 
-class GeometricObject
+class GeometricObject : public Object
 {
 public:
 	GeometricObject();
