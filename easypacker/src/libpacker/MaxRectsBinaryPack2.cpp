@@ -84,9 +84,11 @@ bool MaxRectsBinaryPack2::Insert(const libpacker::Sprite* sprite) const
 	int w = sprite->size->width * SCALE + PADDING * 2,
 		h = sprite->size->height * SCALE + PADDING * 2;
 	float scale = 1.0f;
+	bool rot = false;
 	if (m_root->IsRoomEnough(w, h)) {
 		n = m_root->Insert(w, h);		
 	} else {
+		rot = true;
 		n = m_root->Insert(h, w);
 	}
 
@@ -95,12 +97,12 @@ bool MaxRectsBinaryPack2::Insert(const libpacker::Sprite* sprite) const
 	} else {
 		sprite->pos->x = n->GetMinX() + PADDING;
 		sprite->pos->y = n->GetMinY() + PADDING;
-		if (n->IsRotated()) {
-			sprite->pos->width = n->GetHeight() - PADDING * 2;
-			sprite->pos->height = n->GetWidth() - PADDING * 2;
+		if (n->IsRotated() && !rot || !n->IsRotated() && rot) {
+			sprite->pos->width = h - PADDING * 2;
+			sprite->pos->height = w - PADDING * 2;
 		} else {
-			sprite->pos->width = n->GetWidth() - PADDING * 2;
-			sprite->pos->height = n->GetHeight() - PADDING * 2;
+			sprite->pos->width = w - PADDING * 2;
+			sprite->pos->height = h - PADDING * 2;
 		}
 		return true;
 	}
