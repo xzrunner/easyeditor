@@ -84,7 +84,7 @@ void RectCutLoader::LoadToDtex(const wxString& pack_file, const wxString& img_na
 {
 	std::vector<Picture> pictures;
 //	LoadJsonFile(pack_file, img_name, pictures);
-	LoadRRPFile(pack_file, 0, pictures);
+	LoadRRPFile(pack_file, 5837, pictures);
 
 	wxString dir = d2d::FilenameTools::getFileDir(pack_file);
 	d2d::Image* img = d2d::ImageMgr::Instance()->getItem(dir + "\\pack.png");
