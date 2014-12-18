@@ -265,46 +265,70 @@
 			<Filter
 				Name="pack"
 				>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\BinRRP.cpp"
+				<Filter
+					Name="particle"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\BinRRP.h"
+					<File
+						RelativePath="..\..\..\src\easydb\PackParticle2D.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\PackParticle2D.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\PackParticle3D.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\PackParticle3D.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="bin"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\NumberImages.cpp"
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinRRP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinRRP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\NumberImages.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\NumberImages.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="rrp"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\NumberImages.h"
+					<File
+						RelativePath="..\..\..\src\easydb_cl\PackRegularRect.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\PackRegularRect.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="ejoy2d"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb\PackParticle2D.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb\PackParticle2D.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb\PackParticle3D.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb\PackParticle3D.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\PackRegularRect.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\PackRegularRect.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinEP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinEP.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="image"

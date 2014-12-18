@@ -150,11 +150,27 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\libcoco\BinEPD.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\BinEPD.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\libcoco\CocoPacker.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\src\libcoco\CocoPacker.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\LuaDataHelper.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\LuaDataHelper.h"
 			>
 		</File>
 		<File
@@ -187,6 +203,10 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\libcoco\TexturePacker.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\trans_old_ejoy2d_data.lua"
 			>
 		</File>
 	</Files>
