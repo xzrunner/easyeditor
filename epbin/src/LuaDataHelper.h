@@ -1,11 +1,11 @@
-#ifndef _LIB_COCO_LUA_DATA_HELPER_H_
-#define _LIB_COCO_LUA_DATA_HELPER_H_
+#ifndef _EPBIN_LUA_DATA_HELPER_H_
+#define _EPBIN_LUA_DATA_HELPER_H_
 
 #include <string>
 
 struct lua_State;
 
-namespace libcoco
+namespace epbin
 {
 
 class LuaDataHelper
@@ -18,4 +18,4 @@ public:
 
 }
 
-#endif // _LIB_COCO_LUA_DATA_HELPER_H_
+#endif // _EPBIN_LUA_DATA_HELPER_H_

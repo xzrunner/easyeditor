@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libcoco"
-	ProjectGUID="{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
-	RootNamespace="libcoco"
+	Name="epbin"
+	ProjectGUID="{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}"
+	RootNamespace="epbin"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\libcoco\x86\Debug"
-			IntermediateDirectory="..\libcoco\x86\Debug\obj"
+			OutputDirectory="..\epbin\x86\Debug"
+			IntermediateDirectory="..\epbin\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -41,14 +41,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\cocextract;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyimage\src"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="../../../external/png/include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				AssemblerListingLocation="..\libcoco\x86\Debug"
-				ProgramDataBaseFileName="..\libcoco\x86\Debug\cocextract.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -82,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\libcoco\x86\Release"
-			IntermediateDirectory="..\libcoco\x86\Release\obj"
+			OutputDirectory="..\epbin\x86\Release"
+			IntermediateDirectory="..\epbin\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -107,13 +105,11 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\cocextract;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easybuilder\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easycomplex\src;..\..\..\..\easymesh\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyimage\src"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
+				AdditionalIncludeDirectories="../../../external/png/include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				AssemblerListingLocation="..\libcoco\x86\Release"
-				ProgramDataBaseFileName="..\libcoco\x86\Release\cocextract.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -149,52 +145,60 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="tex_loader"
+			>
+			<File
+				RelativePath="..\..\..\src\image_type.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\PngLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\PngLoader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\TexLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\TexLoader.h"
+				>
+			</File>
+		</Filter>
 		<File
-			RelativePath="..\..\..\src\libcoco\CocoPacker.cpp"
+			RelativePath="..\..\..\src\BinaryEPD.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libcoco\CocoPacker.h"
+			RelativePath="..\..\..\src\BinaryEPD.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libcoco\LuaDataHelper.cpp"
+			RelativePath="..\..\..\src\BinaryEPP.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libcoco\LuaDataHelper.h"
+			RelativePath="..\..\..\src\BinaryEPP.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libcoco\PackLuaFile.cpp"
+			RelativePath="..\..\..\src\LuaDataHelper.cpp"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libcoco\PackLuaFile.h"
+			RelativePath="..\..\..\src\LuaDataHelper.h"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libcoco\ParserLuaFile.cpp"
+			RelativePath="..\..\..\src\trans_old_ejoy2d_data.lua"
 			>
 		</File>
 		<File
-			RelativePath="..\..\..\src\libcoco\ParserLuaFile.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libcoco\SymbolsPrepare.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libcoco\SymbolsPrepare.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libcoco\TexturePacker.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libcoco\TexturePacker.h"
+			RelativePath="..\..\..\src\typedef.h"
 			>
 		</File>
 	</Files>

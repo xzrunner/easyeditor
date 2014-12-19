@@ -1,18 +1,18 @@
-#ifndef _LIB_COCO_BIN_EPD_H_
-#define _LIB_COCO_BIN_EPD_H_
+#ifndef _EPBIN_BINARY_EPD_H_
+#define _EPBIN_BINARY_EPD_H_
 
 #include <fstream>
 
 struct lua_State;
 
-namespace libcoco
+namespace epbin
 {
 
-class BinEPD
+class BinaryEPD
 {
 public:
-	BinEPD(const std::string& src, const std::string& dst);
-	~BinEPD();
+	BinaryEPD(const std::string& src, const std::string& dst);
+	~BinaryEPD();
 
 	void Pack();
 
@@ -34,4 +34,4 @@ private:
 
 }
 
-#endif // _LIB_COCO_BIN_EPD_H_
+#endif // _EPBIN_BINARY_EPD_H_

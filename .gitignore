@@ -79,6 +79,7 @@ coceditor/platform/msvc2008/cocextrude
 coceditor/platform/msvc2008/cocpackage
 coceditor/platform/msvc2008/imagebool
 coceditor/platform/msvc2008/libcoco
+epbin/platform/msvc2008/epbin
 ejoy2d
 all/Debug
 all/Release

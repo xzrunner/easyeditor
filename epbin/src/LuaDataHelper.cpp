@@ -6,7 +6,7 @@ extern "C" {
 #include <lauxlib.h>
 };
 
-namespace libcoco
+namespace epbin
 {
 
 LuaDataHelper::LuaDataHelper(lua_State* L)

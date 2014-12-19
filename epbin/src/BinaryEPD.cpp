@@ -1,5 +1,6 @@
-#include "BinEPD.h"
+#include "BinaryEPD.h"
 #include "LuaDataHelper.h"
+#include "typedef.h"
 
 #define STRINGIFY(A)  #A
 #include "trans_old_ejoy2d_data.lua"
@@ -13,19 +14,14 @@ extern "C" {
 #include <iostream>
 #include <string>
 
-namespace libcoco
+namespace epbin
 {
-
-typedef __int8 int8_t;
-typedef __int16 int16_t;
-typedef __int32 int32_t;
-typedef __int64 int64_t;
 
 static const int ANIMATION	= 0;
 static const int PICTURE	= 1;
 static const int CLIPUI		= 2;
 
-BinEPD::BinEPD(const std::string& src, 
+BinaryEPD::BinaryEPD(const std::string& src, 
 			   const std::string& dst)
 	: m_src_filepath(src)
 	, m_max_id(0)
@@ -34,12 +30,12 @@ BinEPD::BinEPD(const std::string& src,
 {
 }
 
-BinEPD::~BinEPD()
+BinaryEPD::~BinaryEPD()
 {
 	m_fout.close();	
 }
 
-void BinEPD::Pack()
+void BinaryEPD::Pack()
 {
 	lua_State* L = luaL_newstate();
 	luaL_openlibs(L);
@@ -89,14 +85,14 @@ void BinEPD::Pack()
 	}
 }
 
-void BinEPD::CheckID(int id)
+void BinaryEPD::CheckID(int id)
 {
 	if (id > m_max_id) {
 		m_max_id = id;
 	}
 }
 
-void BinEPD::BinPic(lua_State* L, int id)
+void BinaryEPD::BinPic(lua_State* L, int id)
 {
 	m_fout.write(reinterpret_cast<const char*>(&PICTURE), sizeof(int8_t));
 	m_fout.write(reinterpret_cast<const char*>(&id), sizeof(int16_t));
@@ -141,7 +137,7 @@ void BinEPD::BinPic(lua_State* L, int id)
 	}
 }
 
-void BinEPD::BinAni(lua_State* L, int id)
+void BinaryEPD::BinAni(lua_State* L, int id)
 {
 	
 }
