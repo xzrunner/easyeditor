@@ -1,4 +1,5 @@
 #include "PNGLoader.h"
+#include "Lzma.h"
 #include "image_type.h"
 
 #include <png.h>
@@ -55,10 +56,37 @@ void PNGLoader::Load(const std::string& filepath)
 
 void PNGLoader::Store(std::ofstream& fout) const
 {
-	fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
-	fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
-	fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
-	fout.write(reinterpret_cast<const char*>(m_buffer), m_buf_sz);
+	if (m_compress)
+	{
+		size_t sz = sizeof(int8_t) + sizeof(int16_t) * 2 + m_buf_sz;
+		uint8_t* buf = new uint8_t[sz];
+		uint8_t* ptr = buf;
+
+		memcpy(ptr, &m_type, sizeof(int8_t));
+		ptr += sizeof(int8_t);
+		memcpy(ptr, &m_width, sizeof(int16_t));
+		ptr += sizeof(int16_t);
+		memcpy(ptr, &m_height, sizeof(int16_t));
+		ptr += sizeof(int16_t);
+		memcpy(ptr, m_buffer, m_buf_sz);
+		ptr += m_buf_sz;
+
+		uint8_t* dst = NULL;
+		size_t dst_sz;
+		Lzma::Compress(&dst, &dst_sz, buf, sz);
+		delete[] buf;
+
+		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
+		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+		delete[] dst;
+	}
+	else
+	{
+		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
+		fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(m_buffer), m_buf_sz);
+	}
 }
 
 static inline int

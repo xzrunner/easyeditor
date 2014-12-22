@@ -3,6 +3,8 @@
 #include <LzmaEnc.h>
 #include <LzmaDec.h>
 #include <Alloc.h>
+#include <string>
+#include <assert.h>
 
 namespace epbin
 {
@@ -11,30 +13,18 @@ static void *SzAlloc(void *p, size_t size) { p = p; return MyAlloc(size); }
 static void SzFree(void *p, void *address) { p = p; MyFree(address); }
 static ISzAlloc g_Alloc = { SzAlloc, SzFree };
 
-int Lzma::Compress(Block& block, const unsigned char* buf, size_t len)
-{
-	block = new uint8_t[len + sizeof(struct Block)];
+static const unsigned PropHeaderSize = 5;
+static const unsigned HeaderSize = 9;
 
-	size_t dst_len = len + sizeof(block->data);
-	size_t prop_len = LZMA_PROPS_SIZE;
-	int r = Compress(block->data, &dst_len, buf, len, block->prop, &prop_len);
-	if (r != SZ_OK) {
-		delete[] block;
-		return 0;
-	}
+// struct Block 
+// {
+// 	uint8_t size[4];
+// 	uint8_t prop[LZMA_PROPS_SIZE];
+// 	uint8_t data[119];
+// };
 
-	block->size[0] = (len >> 24) & 0xff;
-	block->size[1] = (len >> 16) & 0xff;
-	block->size[2] = (len >> 8) & 0xff;
-	block->size[3] = (len) & 0xff;
-
-	delete[] block;
-	return 1;
-}
-
-int Lzma::Compress(unsigned char* dst, size_t* dst_len, 
-				   const unsigned char* src, size_t src_len, 
-				   unsigned char* out_props, size_t* out_props_sz)
+void Lzma::Compress(unsigned char** dst, size_t* dst_len, 
+					const unsigned char* src, size_t src_len)
 {
 	CLzmaEncProps props;
 	LzmaEncProps_Init(&props);
@@ -46,8 +36,28 @@ int Lzma::Compress(unsigned char* dst, size_t* dst_len,
 	props.fb = -1;
 	props.numThreads = -1;
 
-	return LzmaEncode(dst, dst_len, src, src_len, &props, out_props, out_props_sz, 0,
-		NULL, &g_Alloc, &g_Alloc);
+	size_t buf_sz = src_len * 2;
+	uint8_t* buf = new uint8_t[buf_sz];
+
+	memcpy(buf + PropHeaderSize, &src_len, 4);
+
+	size_t out_sz = buf_sz;
+	size_t prop_sz = PropHeaderSize;
+	int result = LzmaEncode(buf + HeaderSize, &out_sz, src, src_len, &props, buf + 4, &prop_sz, 
+		0, NULL, &g_Alloc, &g_Alloc);
+	assert(result == SZ_OK);
+
+	*dst_len = out_sz + HeaderSize;
+
+	*dst = new uint8_t[*dst_len];
+	memcpy(*dst, buf, *dst_len);
+
+	(*dst)[0] = (src_len >> 24) & 0xff;
+	(*dst)[1] = (src_len >> 16) & 0xff;
+	(*dst)[2] = (src_len >> 8) & 0xff;
+	(*dst)[3] = (src_len) & 0xff;
+
+	delete[] buf;
 }
 
 int Lzma::Uncompress(unsigned char* dst, size_t* dst_len, 

@@ -9,7 +9,7 @@ namespace epbin
 class TexLoader
 {
 public:
-	TexLoader() {}
+	TexLoader() : m_compress(true) {}
 	virtual ~TexLoader() {}
 
 	virtual void Load(const std::string& filepath) = 0;
@@ -17,6 +17,8 @@ public:
 
 protected:
 	int m_type;
+
+	bool m_compress;
 
 }; // TexLoader
 

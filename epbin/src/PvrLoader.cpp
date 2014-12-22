@@ -1,4 +1,5 @@
 #include "PVRLoader.h"
+#include "Lzma.h"
 #include "image_type.h"
 
 #include <assert.h>
@@ -126,6 +127,7 @@ void PVRLoader::Load(const std::string& filepath)
 	uint32_t formatFlags;
 	uint32_t type;
 	fin.read(reinterpret_cast<char*>(&type), sizeof(uint32_t));
+	fin.seekg(0, fin.beg);
 	if (type != PVRTEX3_IDENT)
 	{
 		// read head
@@ -246,14 +248,53 @@ void PVRLoader::Load(const std::string& filepath)
 
 void PVRLoader::Store(std::ofstream& fout) const
 {
-	fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
-	fout.write(reinterpret_cast<const char*>(&m_tex.internal_format), sizeof(int8_t));
-	fout.write(reinterpret_cast<const char*>(&m_tex.width), sizeof(int16_t));
-	fout.write(reinterpret_cast<const char*>(&m_tex.height), sizeof(int16_t));
-	for (int i = 0; i < m_tex.image_data_count; ++i) {
-		const Slice& s = m_tex.image_data[i];
-		fout.write(reinterpret_cast<const char*>(&s.size), sizeof(uint32_t));
-		fout.write(reinterpret_cast<const char*>(&s.data[0]), s.size);
+	if (m_compress)
+	{
+		size_t sz = sizeof(int8_t) + sizeof(int8_t) + sizeof(int16_t) * 2;
+		for (int i = 0; i < m_tex.image_data_count; ++i) {
+			const Slice& s = m_tex.image_data[i];
+			sz += sizeof(uint32_t);
+			sz += s.size;
+		}
+		uint8_t* buf = new uint8_t[sz];
+		uint8_t* ptr = buf;
+
+		memcpy(ptr, &m_type, sizeof(int8_t));
+		ptr += sizeof(int8_t);
+		memcpy(ptr, &m_tex.internal_format, sizeof(int8_t));
+		ptr += sizeof(int8_t);
+		memcpy(ptr, &m_tex.width, sizeof(int16_t));
+		ptr += sizeof(int16_t);
+		memcpy(ptr, &m_tex.height, sizeof(int16_t));
+		ptr += sizeof(int16_t);
+		for (int i = 0; i < m_tex.image_data_count; ++i) {
+			const Slice& s = m_tex.image_data[i];
+			memcpy(ptr, &s.size, sizeof(uint32_t));
+			ptr += sizeof(uint32_t);
+			memcpy(ptr, &s.data[0], s.size);
+			ptr += s.size;
+		}
+
+		uint8_t* dst = NULL;
+		size_t dst_sz;
+		Lzma::Compress(&dst, &dst_sz, buf, sz);
+		delete[] buf;
+
+		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
+		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+		delete[] dst;
+	}
+	else
+	{
+		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
+		fout.write(reinterpret_cast<const char*>(&m_tex.internal_format), sizeof(int8_t));
+		fout.write(reinterpret_cast<const char*>(&m_tex.width), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(&m_tex.height), sizeof(int16_t));
+		for (int i = 0; i < m_tex.image_data_count; ++i) {
+			const Slice& s = m_tex.image_data[i];
+			fout.write(reinterpret_cast<const char*>(&s.size), sizeof(uint32_t));
+			fout.write(reinterpret_cast<const char*>(&s.data[0]), s.size);
+		}		
 	}
 }
 

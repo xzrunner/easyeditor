@@ -185,14 +185,6 @@
 			Name="tools"
 			>
 			<File
-				RelativePath="..\..\..\src\compress.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\compress.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\Exception.cpp"
 				>
 			</File>

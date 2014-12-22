@@ -1,5 +1,6 @@
 #include "PKMLoader.h"
 #include "Exception.h"
+#include "Lzma.h"
 #include "image_type.h"
 
 #include <assert.h>
@@ -36,22 +37,55 @@ PKMLoader::~PKMLoader()
 
 void PKMLoader::Load(const std::string& filepath)
 {
-	LoadCompressed(filepath+".pkm", m_rgb_buf, m_width, m_height);
+	std::string filename = filepath.substr(0, filepath.find_last_of("."));
+
+	LoadCompressed(filename+".pkm", m_rgb_buf, m_width, m_height);
 
 	int w, h;
-	LoadCompressed(filepath+"_alpha.pkm", m_alpha_buf, w, h);	
+	LoadCompressed(filename+"_alpha.pkm", m_alpha_buf, w, h);	
 	assert(w == m_width && h == m_height);
 }
 
 void PKMLoader::Store(std::ofstream& fout) const
 {
-	fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
-	fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
-	fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
+	if (m_compress)
+	{
+		size_t tex_sz = (m_width * m_height) >> 1;
+		size_t sz = sizeof(int8_t) + sizeof(int16_t) * 2 + tex_sz * 2;
+		uint8_t* buf = new uint8_t[sz];
+		uint8_t* ptr = buf;
 
-	int sz = (m_width * m_height) >> 1;
-	fout.write(reinterpret_cast<const char*>(m_rgb_buf), sz);
-	fout.write(reinterpret_cast<const char*>(m_alpha_buf), sz);
+		memcpy(ptr, &m_type, sizeof(int8_t));
+		ptr += sizeof(int8_t);
+		memcpy(ptr, &m_width, sizeof(int16_t));
+		ptr += sizeof(int16_t);
+		memcpy(ptr, &m_height, sizeof(int16_t));
+		ptr += sizeof(int16_t);
+		memcpy(ptr, m_rgb_buf, tex_sz);
+		ptr += tex_sz;
+		memcpy(ptr, m_alpha_buf, tex_sz);
+		ptr += tex_sz;
+
+		uint8_t* dst = NULL;
+		size_t dst_sz;
+		Lzma::Compress(&dst, &dst_sz, buf, sz);
+
+		delete[] buf;
+
+		fout.write(reinterpret_cast<const char*>(&dst_sz), sizeof(uint32_t));
+		fout.write(reinterpret_cast<const char*>(dst), dst_sz);
+		delete[] dst;
+	}
+	else
+	{
+		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
+		fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
+		fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
+
+		int sz = (m_width * m_height) >> 1;
+		fout.write(reinterpret_cast<const char*>(m_rgb_buf), sz);
+		fout.write(reinterpret_cast<const char*>(m_alpha_buf), sz);		
+	}
 }
 
 void PKMLoader::LoadCompressed(const std::string& filename, uint8_t*& buf, 

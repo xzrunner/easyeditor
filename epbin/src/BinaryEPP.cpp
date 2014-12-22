@@ -33,6 +33,7 @@ void BinaryEPP::Pack() const
 		ext = ".pvr";
 		break;
 	case TT_PKM:
+		ext = ".pkm";
 		break;
 	}
 
