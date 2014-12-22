@@ -1,0 +1,161 @@
+#include "PvrLoader.h"
+
+namespace epbin
+{
+
+#define PVR_TEXTURE_FLAG_TYPE_MASK  0xff
+
+#define COMPRESSED_RGBA_PVRTC_4BPPV1_IMG 4
+#define COMPRESSED_RGBA_PVRTC_2BPPV1_IMG 2
+static char prv_texture_identifier[5] = "PVR!";
+
+#define PVRTEX3_HEADERSIZE 52
+
+typedef unsigned int    PVRTuint32;
+// V3 Header Identifiers.
+const PVRTuint32 PVRTEX3_IDENT      = 0x03525650; // 'P''V''R'3
+const PVRTuint32 PVRTEX3_IDENT_REV  = 0x50565203;   
+
+enum
+{
+	kPVRTextureFlagTypePVRTC_2 = 24,
+	kPVRTextureFlagTypePVRTC_4
+};
+
+struct PVRTexHeader
+{
+	uint32_t headerLength;
+	uint32_t height;
+	uint32_t width;
+	uint32_t numMipmaps;
+	uint32_t flags;
+	uint32_t dataLength;
+	uint32_t bpp;
+	uint32_t bitmaskRed;
+	uint32_t bitmaskGreen;
+	uint32_t bitmaskBlue;
+	uint32_t bitmaskAlpha;
+	uint32_t pvrTag;
+	uint32_t numSurfs;
+};
+
+struct PVRTexHeaderV3 
+{
+	uint32_t  u32Version;     ///< Version of the file header, used to identify it.
+	uint32_t  u32Flags;     ///< Various format flags.
+	uint64_t  u64PixelFormat;   ///< The pixel format, 8cc value storing the 4 channel identifiers and their respective sizes.
+	uint32_t  u32ColourSpace;   ///< The Colour Space of the texture, currently either linear RGB or sRGB.
+	uint32_t  u32ChannelType;   ///< Variable type that the channel is stored in. Supports signed/unsigned int/short/byte or float for now.
+	uint32_t  u32Height;      ///< Height of the texture.
+	uint32_t  u32Width;     ///< Width of the texture.
+	uint32_t  u32Depth;     ///< Depth of the texture. (Z-slices)
+	uint32_t  u32NumSurfaces;   ///< Number of members in a Texture Array.
+	uint32_t  u32NumFaces;    ///< Number of faces in a Cube Map. Maybe be a value other than 6.
+	uint32_t  u32MIPMapCount;   ///< Number of MIP Maps in the texture - NB: Includes top level.
+	uint32_t  u32MetaDataSize;  ///< Size of the accompanying meta data.  
+};
+
+//Compressed pixel formats
+enum EPVRTPixelFormat
+{
+	ePVRTPF_PVRTCI_2bpp_RGB,
+	ePVRTPF_PVRTCI_2bpp_RGBA,
+	ePVRTPF_PVRTCI_4bpp_RGB,
+	ePVRTPF_PVRTCI_4bpp_RGBA,
+	ePVRTPF_PVRTCII_2bpp,
+	ePVRTPF_PVRTCII_4bpp,
+	ePVRTPF_ETC1,
+	ePVRTPF_DXT1,
+	ePVRTPF_DXT2,
+	ePVRTPF_DXT3,
+	ePVRTPF_DXT4,
+	ePVRTPF_DXT5,
+
+	//These formats are identical to some DXT formats.
+	ePVRTPF_BC1 = ePVRTPF_DXT1,
+	ePVRTPF_BC2 = ePVRTPF_DXT3,
+	ePVRTPF_BC3 = ePVRTPF_DXT5,
+
+	//These are currently unsupported:
+	ePVRTPF_BC4,
+	ePVRTPF_BC5,
+	ePVRTPF_BC6,
+	ePVRTPF_BC7,
+
+	//These are supported
+	ePVRTPF_UYVY,
+	ePVRTPF_YUY2,
+	ePVRTPF_BW1bpp,
+	ePVRTPF_SharedExponentR9G9B9E5,
+	ePVRTPF_RGBG8888,
+	ePVRTPF_GRGB8888,
+	ePVRTPF_ETC2_RGB,
+	ePVRTPF_ETC2_RGBA,
+	ePVRTPF_ETC2_RGB_A1,
+	ePVRTPF_EAC_R11,
+	ePVRTPF_EAC_RG11,
+
+	//Invalid value
+	ePVRTPF_NumCompressedPFs
+};
+
+PvrLoader::PvrLoader()
+{
+	m_tex.width = m_tex.height = 0;
+	m_tex.internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+	m_tex.has_alpha = 0;
+	ClearImageData();
+}
+
+void PvrLoader::Load(const std::string& filepath)
+{
+	std::ifstream fin(filepath.c_str(), std::ios::binary);
+	
+	PVRTexHeader header;
+	uint8_t* bytes = NULL;
+	uint32_t formatFlags;
+	uint32_t type;
+	fin.read(reinterpret_cast<char*>(&type), sizeof(uint32_t));
+	if (type != PVRTEX3_IDENT)
+	{
+		// read head
+		fin.read(reinterpret_cast<char*>(&header.headerLength), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.height), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.width), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.numMipmaps), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.flags), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.dataLength), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.bpp), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.bitmaskRed), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.bitmaskGreen), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.bitmaskBlue), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.bitmaskAlpha), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.pvrTag), sizeof(uint32_t));
+		fin.read(reinterpret_cast<char*>(&header.numSurfs), sizeof(uint32_t));
+
+		uint32_t pvr_tag = header.pvrTag;
+		if (prv_texture_identifier[0] != ((pvr_tag >>  0) & 0xff) ||
+			prv_texture_identifier[1] != ((pvr_tag >>  8) & 0xff) ||
+			prv_texture_identifier[2] != ((pvr_tag >> 16) & 0xff) ||
+			prv_texture_identifier[3] != ((pvr_tag >> 24) & 0xff))
+		{
+			return;
+		}
+//		bytes = data + sizeof(header);
+
+		uint32_t flags = header.flags;
+		formatFlags = flags & PVR_TEXTURE_FLAG_TYPE_MASK;
+	}
+	else
+	{
+		
+	}
+	fin.close();
+}
+
+void PvrLoader::ClearImageData()
+{
+	m_tex.image_data_count = 0;
+}
+
+}

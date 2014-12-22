@@ -161,6 +161,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\PvrLoader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\PvrLoader.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\TexLoader.cpp"
 				>
 			</File>
