@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,10 +63,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib md5.lib opengl32.lib GLee.lib lua.lib libgifd.lib"
+				AdditionalDependencies="wxmsw29ud_gl.lib wxmsw29ud_propgrid.lib wxmsw29ud_adv.lib wxmsw29ud_stc.lib wxmsw29ud_core.lib wxbase29ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib md5.lib opengl32.lib GLee.lib lua.lib libgifd.lib libpngd.lib zlibd.lib"
 				OutputFile="..\easydb_cl\x86\Debug\easydb_cl.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
+				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\epbin\external\png\lib;..\..\..\..\epbin\external\lua\lib;..\..\..\..\epbin\external\zlib\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
@@ -145,10 +145,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib json.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib lua.lib libgif.lib"
+				AdditionalDependencies="wxmsw29u_gl.lib wxmsw29u_propgrid.lib wxmsw29u_adv.lib wxmsw29u_stc.lib wxmsw29u_core.lib wxbase29u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib comctl32.lib rpcrt4.lib json.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib lua.lib libgif.lib libpng.lib zlib.lib"
 				OutputFile="..\easydb_cl\x86\Release\easydb_cl.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx"
+				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\epbin\external\png\lib;..\..\..\..\epbin\external\lua\lib;..\..\..\..\epbin\external\zlib\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easydb_cl\x86\Release\easydb_cl.pdb"
@@ -289,6 +289,14 @@
 					Name="bin"
 					>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\BinEP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinEP.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\BinRRP.cpp"
 						>
 					</File>
@@ -314,18 +322,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\PackRegularRect.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="ejoy2d"
-					>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinEP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinEP.h"
 						>
 					</File>
 				</Filter>

@@ -7,12 +7,14 @@
 namespace epbin
 {
 
-class PvrLoader : public TexLoader
+class PVRLoader : public TexLoader
 {
 public:
-	PvrLoader();
+	PVRLoader();
+	virtual ~PVRLoader();
 
 	virtual void Load(const std::string& filepath);
+	virtual void Store(std::ofstream& fout) const;
 
 private:
 	void ClearImageData();

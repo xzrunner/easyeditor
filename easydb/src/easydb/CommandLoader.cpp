@@ -28,6 +28,7 @@
 #include "ScaleImage.h"
 #include "BinRRP.h"
 #include "NumberImages.h"
+#include "BinEP.h"
 
 namespace edb
 {
@@ -62,6 +63,7 @@ void CommandLoader::Init()
 	fc->Register(ScaleImage::Create());
 	fc->Register(BinRRP::Create());
 	fc->Register(NumberImages::Create());
+	fc->Register(BinEP::Create());
 }
 
 }

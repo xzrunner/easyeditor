@@ -1,4 +1,7 @@
-#include "PvrLoader.h"
+#include "PVRLoader.h"
+#include "image_type.h"
+
+#include <assert.h>
 
 namespace epbin
 {
@@ -99,15 +102,22 @@ enum EPVRTPixelFormat
 	ePVRTPF_NumCompressedPFs
 };
 
-PvrLoader::PvrLoader()
+PVRLoader::PVRLoader()
 {
+	m_type = TYPE_PVRTC;
+
 	m_tex.width = m_tex.height = 0;
 	m_tex.internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
 	m_tex.has_alpha = 0;
 	ClearImageData();
 }
 
-void PvrLoader::Load(const std::string& filepath)
+PVRLoader::~PVRLoader()
+{
+	
+}
+
+void PVRLoader::Load(const std::string& filepath)
 {
 	std::ifstream fin(filepath.c_str(), std::ios::binary);
 	
@@ -148,12 +158,106 @@ void PvrLoader::Load(const std::string& filepath)
 	}
 	else
 	{
-		
+		// read head
+		PVRTexHeaderV3 headerv3;
+		fin.read(reinterpret_cast<char*>(&headerv3.u32Version), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32Flags), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u64PixelFormat), sizeof(uint64_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32ColourSpace), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32ChannelType), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32Height), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32Width), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32Depth), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32NumSurfaces), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32NumFaces), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32MIPMapCount), sizeof(uint32_t));		
+		fin.read(reinterpret_cast<char*>(&headerv3.u32MetaDataSize), sizeof(uint32_t));		
+
+		header.flags = headerv3.u32Flags;
+		header.width = headerv3.u32Width;
+		header.height = headerv3.u32Height;
+		header.bitmaskAlpha = 1;
+
+		fin.seekg(headerv3.u32MetaDataSize, fin.cur);
+
+		if (headerv3.u64PixelFormat == ePVRTPF_PVRTCI_4bpp_RGB || headerv3.u64PixelFormat == ePVRTPF_PVRTCI_4bpp_RGBA) {
+			formatFlags = kPVRTextureFlagTypePVRTC_4;
+		} else if (headerv3.u64PixelFormat == ePVRTPF_PVRTCI_2bpp_RGB || headerv3.u64PixelFormat == ePVRTPF_PVRTCI_2bpp_RGBA) {
+			formatFlags = kPVRTextureFlagTypePVRTC_2;
+		}
 	}
+
+	uint32_t width = 0, height = 0, bpp = 4;
+	uint32_t blockSize = 0, widthBlocks = 0, heightBlocks = 0;
+	if (formatFlags == kPVRTextureFlagTypePVRTC_4 || formatFlags == kPVRTextureFlagTypePVRTC_2)
+	{
+		ClearImageData();
+		if (formatFlags == kPVRTextureFlagTypePVRTC_4) {
+			m_tex.internal_format = COMPRESSED_RGBA_PVRTC_4BPPV1_IMG;
+		} else if (formatFlags == kPVRTextureFlagTypePVRTC_2) {
+			m_tex.internal_format = COMPRESSED_RGBA_PVRTC_2BPPV1_IMG;
+		}
+		m_tex.width = width = header.width;
+		m_tex.height = height = header.height;
+		if (header.bitmaskAlpha) {
+			m_tex.has_alpha = 1;
+		} else {
+			m_tex.has_alpha = 0;
+		}
+
+		// no mipmap
+		// Calculate the data size for each texture level and respect the minimum number of blocks
+		// while (dataOffset < dataLength){
+		if (formatFlags == kPVRTextureFlagTypePVRTC_4) {
+			blockSize = 4 * 4;
+			widthBlocks = width / 4;
+			heightBlocks = height / 4;
+			bpp = 4;
+		} else {
+			blockSize = 8 * 4;
+			widthBlocks = width / 8;
+			heightBlocks = height / 4;
+			bpp = 2;						
+		}
+
+		// Clamp to minimum number of blocks
+		if (widthBlocks < 2) {
+			widthBlocks = 2;
+		}
+		if (heightBlocks < 2) {
+			heightBlocks = 2;
+		}
+
+		uint32_t dataSize = widthBlocks * heightBlocks * ((blockSize * bpp) / 8);
+		assert(m_tex.image_data_count < 10);
+		assert(dataSize < sizeof(m_tex.image_data[0].data));
+		m_tex.image_data[m_tex.image_data_count].size = dataSize;
+		fin.read(reinterpret_cast<char*>(&m_tex.image_data[m_tex.image_data_count].data), dataSize);		
+		++m_tex.image_data_count;
+
+		width = std::max((int)(width >> 1), 1);
+		height = std::max((int)(height >> 1), 1);
+
+		// }
+	}
+
 	fin.close();
 }
 
-void PvrLoader::ClearImageData()
+void PVRLoader::Store(std::ofstream& fout) const
+{
+	fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
+	fout.write(reinterpret_cast<const char*>(&m_tex.internal_format), sizeof(int8_t));
+	fout.write(reinterpret_cast<const char*>(&m_tex.width), sizeof(int16_t));
+	fout.write(reinterpret_cast<const char*>(&m_tex.height), sizeof(int16_t));
+	for (int i = 0; i < m_tex.image_data_count; ++i) {
+		const Slice& s = m_tex.image_data[i];
+		fout.write(reinterpret_cast<const char*>(&s.size), sizeof(uint32_t));
+		fout.write(reinterpret_cast<const char*>(&s.data[0]), s.size);
+	}
+}
+
+void PVRLoader::ClearImageData()
 {
 	m_tex.image_data_count = 0;
 }

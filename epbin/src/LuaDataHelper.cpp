@@ -9,12 +9,7 @@ extern "C" {
 namespace epbin
 {
 
-LuaDataHelper::LuaDataHelper(lua_State* L)
-	: L(L)
-{
-}
-
-std::string LuaDataHelper::GetStringField(const char* name)
+std::string LuaDataHelper::GetStringField(lua_State* L, const char* name)
 {
 	lua_getfield(L, -1, "type");
 	std::string type = lua_tostring(L, -1);
@@ -22,7 +17,7 @@ std::string LuaDataHelper::GetStringField(const char* name)
 	return type;
 }
 
-int LuaDataHelper::GetIntField(const char* name)
+int LuaDataHelper::GetIntField(lua_State* L, const char* name)
 {
 	lua_getfield(L, -1, "id");
 	int id = lua_tointeger(L, -1);

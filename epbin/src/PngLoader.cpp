@@ -1,4 +1,4 @@
-#include "PngLoader.h"
+#include "PNGLoader.h"
 #include "image_type.h"
 
 #include <png.h>
@@ -6,12 +6,19 @@
 namespace epbin
 {
 
-PngLoader::PngLoader(bool png8)
+PNGLoader::PNGLoader(bool png8)
+	: m_buffer(NULL)
+	, m_buf_sz(0)
 {
 	m_type = png8 ? TYPE_TEXTURE8 : TYPE_TEXTURE4;
 }
 
-void PngLoader::Load(const std::string& filepath)
+PNGLoader::~PNGLoader()
+{
+	delete[] m_buffer;
+}
+
+void PNGLoader::Load(const std::string& filepath)
 {
 	png_image image;
 
@@ -33,6 +40,10 @@ void PngLoader::Load(const std::string& filepath)
 		if (buffer != NULL && 
 			png_image_finish_read(&image, NULL, buffer, 0, NULL) != 0)
 		{
+			m_width = image.width;
+			m_height = image.height;
+
+			m_buffer = new uint8_t[sz];
 			memcpy(m_buffer, buffer, sz);
 			m_buf_sz = sz;
 			if (m_type == TYPE_TEXTURE4) {
@@ -42,13 +53,21 @@ void PngLoader::Load(const std::string& filepath)
 	}
 }
 
+void PNGLoader::Store(std::ofstream& fout) const
+{
+	fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
+	fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
+	fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
+	fout.write(reinterpret_cast<const char*>(m_buffer), m_buf_sz);
+}
+
 static inline int
 _round(int c) {
 	c = (c + 7 > 0xff) ? (0xff) : (c + 7); 
 	return c >> 4;
 }
 
-void PngLoader::GenPng4()
+void PNGLoader::GenPng4()
 {
 	for (int i = 0; i < m_buf_sz; i += 4)
 	{

@@ -9,19 +9,14 @@ namespace epbin
 class TexLoader
 {
 public:
-	TexLoader();
-	virtual ~TexLoader();
+	TexLoader() {}
+	virtual ~TexLoader() {}
 
 	virtual void Load(const std::string& filepath) = 0;
-
-	void Store(std::ofstream& fout) const;
+	virtual void Store(std::ofstream& fout) const = 0;
 
 protected:
 	int m_type;
-	int m_width, m_height;
-
-	unsigned char* m_buffer;
-	int m_buf_sz;
 
 }; // TexLoader
 

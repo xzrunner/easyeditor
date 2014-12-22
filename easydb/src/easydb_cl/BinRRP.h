@@ -24,7 +24,7 @@ public:
 private:
 	void Trigger(const std::string& json_file, const std::string& image_id_file);
 
-}; // PackRRPBin
+}; // BinRRP
 
 }
 
