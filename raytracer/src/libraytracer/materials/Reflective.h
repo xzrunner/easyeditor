@@ -17,8 +17,11 @@ public:
 	virtual RGBColor Shade(const ShadeRec& sr) const;
 	virtual RGBColor AreaLightShade(const ShadeRec& sr) const;
 
+	void SetKr(const float k);
+	void SetCr(const RGBColor& c);
+
 private:
-	PerfectSpecular* reflective_brdf;
+	PerfectSpecular* m_reflective_brdf;
 
 }; // Reflective
 

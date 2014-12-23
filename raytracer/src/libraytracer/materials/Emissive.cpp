@@ -26,4 +26,9 @@ RGBColor Emissive::AreaLightShade(const ShadeRec& sr) const
 	return Shade(sr);
 }
 
+RGBColor Emissive::GetLe(const ShadeRec& sr) const
+{
+	return m_radiance_scale_factor * m_color;
+}
+
 }

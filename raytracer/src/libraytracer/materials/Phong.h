@@ -20,8 +20,8 @@ public:
 	void SetKa(const float k);
 	void SetKd(const float k);
 	void SetKs(const float ks);
-	void SetCd(const RGBColor c);
-	void SetCs(const RGBColor c);
+	void SetCd(const RGBColor& c);
+	void SetCs(const RGBColor& c);
 	void SetExp(const float e);
 
 private:

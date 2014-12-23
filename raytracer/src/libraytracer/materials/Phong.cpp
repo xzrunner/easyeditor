@@ -43,14 +43,14 @@ void Phong::SetKs(const float ks)
 	m_specular_brdf->SetKs(ks);
 }
 
-void Phong::SetCd(const RGBColor c)
+void Phong::SetCd(const RGBColor& c)
 {
 	m_ambient_brdf->SetCd(c);
 	m_diffuse_brdf->SetCd(c);
 	m_specular_brdf->SetCs(c);
 }
 
-void Phong::SetCs(const RGBColor c)
+void Phong::SetCs(const RGBColor& c)
 {
 	m_specular_brdf->SetCs(c);
 }

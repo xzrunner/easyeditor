@@ -13,12 +13,14 @@ PerfectSpecular::PerfectSpecular()
 
 RGBColor PerfectSpecular::f(const ShadeRec& sr, const Vector3D& wo, const Vector3D& wi) const
 {
-	return BLACK;	
+	//return (kr * cr * invPI);
+	return BRDF::f(sr, wi, wo);
 }
 
 RGBColor PerfectSpecular::rho(const ShadeRec& sr, const Vector3D& wo) const
 {
-	return BLACK;
+	//return (kr * cr);
+	return BRDF::rho(sr, wo);
 }
 
 // ---------------------------------------------------------- sample_f
@@ -43,6 +45,16 @@ RGBColor PerfectSpecular::sample_f(const ShadeRec& sr, const Vector3D& wo, Vecto
 	wi = -wo + 2.0 * sr.normal * ndotwo;
 	pdf = fabs(sr.normal * wi);
 	return (m_kr * m_cr);
+}
+
+void PerfectSpecular::SetKr(const float k)
+{
+	m_kr = k;
+}
+
+void PerfectSpecular::SetCr(const RGBColor& c)
+{
+	m_cr = c;
 }
 
 }

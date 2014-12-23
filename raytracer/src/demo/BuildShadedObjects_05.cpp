@@ -45,11 +45,10 @@ void World::Build(void)
 	rectangle->SetSampler(sampler);
 	AddObject(rectangle);
 
-	AreaLight* rect_light = new AreaLight;
-	rect_light->SetObject(rectangle);
-	rect_light->SetShadows(true);
-	AddLight(rect_light);
-
+ 	AreaLight* rect_light = new AreaLight;
+ 	rect_light->SetObject(rectangle);
+ 	rect_light->SetShadows(true);
+ 	AddLight(rect_light);
 
 	Reflective* reflective = new Reflective;
 	reflective->SetKa(0.2); 
@@ -57,12 +56,16 @@ void World::Build(void)
 	reflective->SetCd(RGBColor(0, 1, 0.2));  // green
 	reflective->SetKs(0.0);     
 	reflective->SetExp(1);
-// 	reflective_ptr1->set_kr(0.85); 
-// 	reflective_ptr1->set_cr(0.75, 0.75, 1);  // blue 
+	reflective->SetKr(0.85); 
+	reflective->SetCr(RGBColor(0.75, 0.75, 1));  // blue 
 
 	Sphere* sphere = new Sphere(Point3D(0, -2, 0), 0.5); 	
 	sphere->SetMaterial(reflective);
 	AddObject(sphere);
+
+	Sphere* sphere2 = new Sphere(Point3D(1, -2, 0), 0.3); 	
+	sphere2->SetMaterial(reflective);
+	AddObject(sphere2);
 
 
 	Checker3D* checker = new Checker3D;

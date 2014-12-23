@@ -12,12 +12,12 @@ namespace rt
 
 Reflective::Reflective()
 {
-	reflective_brdf = new PerfectSpecular();
+	m_reflective_brdf = new PerfectSpecular();
 }
 
 Reflective::~Reflective()
 {
-	delete reflective_brdf;
+	delete m_reflective_brdf;
 }
 
 RGBColor Reflective::Shade(const ShadeRec& sr) const
@@ -26,7 +26,7 @@ RGBColor Reflective::Shade(const ShadeRec& sr) const
 
 	Vector3D wo = -sr.ray.dir;
 	Vector3D wi;	
-	RGBColor fr = reflective_brdf->sample_f(sr, wo, wi); 
+	RGBColor fr = m_reflective_brdf->sample_f(sr, wo, wi); 
 	Ray reflected_ray(sr.hit_point, wi); 
 	reflected_ray.depth = sr.depth + 1;
 
@@ -38,6 +38,16 @@ RGBColor Reflective::Shade(const ShadeRec& sr) const
 RGBColor Reflective::AreaLightShade(const ShadeRec& sr) const
 {
 	return Shade(sr);
+}
+
+void Reflective::SetKr(const float k)
+{
+	m_reflective_brdf->SetKr(k);
+}
+
+void Reflective::SetCr(const RGBColor& c)
+{
+	m_reflective_brdf->SetCr(c);
 }
 
 }

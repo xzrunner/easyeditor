@@ -75,11 +75,7 @@ float AreaLight::Pdf(const ShadeRec& sr) const
 void AreaLight::SetObject(GeometricObject* obj)
 {
 	obj_assign((const Object*&)m_object, obj);
-}
-
-void AreaLight::SetMaterial(Material* material)
-{
-	obj_assign((const Object*&)m_material, material);
+	obj_assign((const Object*&)m_material, obj->GetMaterial());
 }
 
 }
