@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="epbin"
+	ProjectGUID="{81E07233-90F6-43F7-A9BC-0B054D8985CD}"
+	VCNestedProjectGUID="{75D71727-132D-4BA3-A770-30F6EF459C76}"
+	VCNestedProjectFileName="epbin.vcproj">
+	<Configurations/>
+	<Files/>
+</VisualStudioProject>

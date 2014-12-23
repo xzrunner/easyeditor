@@ -81,6 +81,7 @@ coceditor/platform/msvc2008/imagebool
 coceditor/platform/msvc2008/libcoco
 epbin/platform/msvc2008/epbin
 epbin/platform/msvc2008/libepbin
+ejoy2d/platform/msvc2008/ejoy2d
 ejoy2d
 all/Debug
 all/Release

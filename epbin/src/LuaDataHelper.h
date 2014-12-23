@@ -13,6 +13,9 @@ class LuaDataHelper
 public:
 	static std::string GetStringField(lua_State* L, const char* name);
 	static int GetIntField(lua_State* L, const char* name);
+	static double GetDoubleField(lua_State* L, const char* name);
+
+	static bool HasField(lua_State* L, const char* field);
 
 }; // LuaDataHelper
 

@@ -169,6 +169,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "epbin", "..\epbin\platform\
 		{AAD82BAC-510C-4571-A420-5AE5EE7E29D6} = {AAD82BAC-510C-4571-A420-5AE5EE7E29D6}
 	EndProjectSection
 EndProject
+Project("{EAF909A5-FA59-4C3D-9431-0FCC20D5BCF9}") = "ejoy2d", "..\ejoy2d\platform\msvc2008\projects\ejoy2d.icproj", "{D5A1565C-C421-46E9-853D-B9BE4C56F708}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -287,10 +289,6 @@ Global
 		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Debug|Win32.Build.0 = Debug|Win32
 		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Release|Win32.ActiveCfg = Release|Win32
 		{FCA6AAA8-4181-44CB-8AEE-9121EF2C35D3}.Release|Win32.Build.0 = Release|Win32
-		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Debug|Win32.ActiveCfg = Debug|Win32
-		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Debug|Win32.Build.0 = Debug|Win32
-		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Release|Win32.ActiveCfg = Release|Win32
-		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Release|Win32.Build.0 = Release|Win32
 		{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}.Debug|Win32.ActiveCfg = Debug|Win32
 		{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}.Debug|Win32.Build.0 = Debug|Win32
 		{AAD82BAC-510C-4571-A420-5AE5EE7E29D6}.Release|Win32.ActiveCfg = Release|Win32
@@ -299,6 +297,18 @@ Global
 		{75D71727-132D-4BA3-A770-30F6EF459C76}.Debug|Win32.Build.0 = Debug|Win32
 		{75D71727-132D-4BA3-A770-30F6EF459C76}.Release|Win32.ActiveCfg = Release|Win32
 		{75D71727-132D-4BA3-A770-30F6EF459C76}.Release|Win32.Build.0 = Release|Win32
+		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Debug|Win32.Build.0 = Debug|Win32
+		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Release|Win32.ActiveCfg = Release|Win32
+		{D5A1565C-C421-46E9-853D-B9BE4C56F708}.Release|Win32.Build.0 = Release|Win32
+		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Debug|Win32.Build.0 = Debug|Win32
+		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Release|Win32.ActiveCfg = Release|Win32
+		{6F87D73F-537F-4929-85FE-A75BC6F4C38E}.Release|Win32.Build.0 = Release|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.Build.0 = Debug|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.ActiveCfg = Release|Win32
+		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

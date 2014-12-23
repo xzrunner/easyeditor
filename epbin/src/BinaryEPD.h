@@ -1,6 +1,8 @@
 #ifndef _EPBIN_BINARY_EPD_H_
 #define _EPBIN_BINARY_EPD_H_
 
+#include "typedef.h"
+
 #include <fstream>
 #include <vector>
 
@@ -18,21 +20,20 @@ public:
 	BinaryEPD(const std::string& src, const std::string& dst);
 	~BinaryEPD();
 
-	void Pack();
+	void Pack(bool compress);
 
 private:
-	void CheckID(int id);
+	void Load();
 
-	void BinPic(lua_State* L, int id);
-	void BinAni(lua_State* L, int id);
+	void CheckID(int id);
 
 private:
 	std::string m_src_filepath;
 
-	int m_max_id;
-	int m_export;
-
 	std::ofstream m_fout;
+
+	uint16_t m_max_id;
+	uint16_t m_export;
 
 	std::vector<Picture*> m_pictures;
 	std::vector<Animation*> m_animations;

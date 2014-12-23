@@ -61,8 +61,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libpngd.lib lua.lib zlibd.lib lzmad.lib"
-				AdditionalLibraryDirectories="..\..\..\external\lua\lib;..\..\..\external\png\lib;..\..\..\external\zlib\lib;..\..\..\external\lzma\lib"
+				AdditionalDependencies="libpngd.lib lua.lib zlibd.lib lzmad.lib ejoy2dd.lib"
+				AdditionalLibraryDirectories="..\..\..\external\lua\lib;..\..\..\external\png\lib;..\..\..\external\zlib\lib;..\..\..\external\lzma\lib;..\..\..\external\ejoy2d\lib;..\..\..\external\intel_compiler"
 				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
 			/>
@@ -134,8 +134,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libpng.lib lua.lib zlib.lib lzma.lib"
-				AdditionalLibraryDirectories="..\..\..\external\lua\lib;..\..\..\external\png\lib;..\..\..\external\zlib\lib;..\..\..\external\lzma\lib"
+				AdditionalDependencies="libpng.lib lua.lib zlib.lib lzma.lib ejoy2d.lib"
+				AdditionalLibraryDirectories="..\..\..\external\lua\lib;..\..\..\external\png\lib;..\..\..\external\zlib\lib;..\..\..\external\lzma\lib;..\..\..\external\ejoy2d\lib;..\..\..\external\intel_compiler"
 			/>
 			<Tool
 				Name="VCALinkTool"

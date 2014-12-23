@@ -4,6 +4,9 @@
 #include "typedef.h"
 
 #include <vector>
+#include <set>
+
+struct lua_State;
 
 namespace epbin
 {
@@ -11,9 +14,14 @@ namespace epbin
 class String
 {
 public:
-	String(const std::string& str, bool is_empty = false);
+	String();
+	String(const std::string& str);
+
+	void SetString(const std::string& str);
 
 	size_t Size() const;
+
+	void Store(uint8_t** ptr);
 
 private:
 	bool m_is_empty;
@@ -25,17 +33,25 @@ private:
 class Picture
 {
 public:
+	Picture(lua_State* L, int id);
+
 	size_t Size() const;
 
-public:
+	void Store(uint8_t** ptr);
+
+private:
 	struct Part
 	{
 		uint8_t tex;
 		uint16_t src[8];
 		int32_t screen[8];
+
+		size_t Size() const;
+
+		void Store(uint8_t** ptr);
 	};
 
-public:
+private:
 	uint16_t m_id;
 
 	std::vector<Part> m_parts;
@@ -47,7 +63,9 @@ class IComponent
 public:
 	IComponent(uint8_t type) : m_type(type) {}
 
-	virtual size_t Size() const = 0;
+	virtual size_t Size() const;
+
+	virtual void Store(uint8_t** ptr);
 
 protected:
 	uint8_t m_type;
@@ -57,9 +75,11 @@ protected:
 class Component : public IComponent
 {
 public:
-	Component();
+	Component(lua_State* L);
 
 	virtual size_t Size() const;
+
+	virtual void Store(uint8_t** ptr);
 
 private:
 	uint16_t m_id;
@@ -69,9 +89,11 @@ private:
 class Switch : public IComponent
 {
 public:
-	Switch(const std::string& name);
+	Switch(lua_State* L);
 
 	virtual size_t Size() const;
+
+	virtual void Store(uint8_t** ptr);
 
 private:
 	uint16_t m_id;
@@ -82,9 +104,11 @@ private:
 class Label : public IComponent
 {
 public:
-	Label(const std::string& name, const std::string& font);
+	Label(lua_State* L);
 
 	virtual size_t Size() const;
+
+	virtual void Store(uint8_t** ptr);
 
 private:
 	String m_name;
@@ -99,27 +123,34 @@ private:
 class Mount : public IComponent
 {
 public:
-	Mount(const std::string& name);
+	Mount(lua_State* L);
 
 	virtual size_t Size() const;
+
+	virtual void Store(uint8_t** ptr);
 
 private:
 	String m_name;
 
 }; // Mount
 
-struct Matrix
-{
-	int32_t m[6];
-};
-
-class Frame
+class Sprite
 {
 public:
-	Frame();
-	~Frame();
+	Sprite(lua_State* L, int max_idx);
+	~Sprite();
 
 	virtual size_t Size() const;
+
+	void Store(uint8_t** ptr);
+
+private:
+	struct Matrix
+	{
+		int32_t m[6];
+
+		Matrix();
+	};
 
 private:
 	uint8_t m_type;
@@ -130,25 +161,69 @@ private:
 
 	Matrix* m_mat;
 
+}; // Sprite
+
+class Frame
+{
+public:
+	~Frame();
+
+	size_t Size() const;
+
+	void Store(uint8_t** ptr);
+
+public:
+	std::vector<Sprite*> sprites;
+
 }; // Frame
+
+class Action
+{
+public:
+	~Action();
+
+	size_t Size() const;
+
+	void Store(uint8_t** ptr);
+
+public:
+	String action;
+	std::vector<Frame*> frames;
+
+}; // Action
 
 class Animation
 {
 public:
-	Animation();
+	Animation(lua_State* L, int id);
 	~Animation();
+
+	size_t Size() const;
+
+	void Store(uint8_t** ptr);
+
+private:
+	struct Clipbox
+	{
+		int32_t cb[4];
+
+		size_t Size() const { return sizeof(cb); }
+	};
 
 private:
 	uint8_t m_type;
 	uint16_t m_id;
 
-	int32_t m_clipbox[4];
+	Clipbox* m_clipbox;
 
 	String m_export_name;
 
 	std::vector<IComponent*> m_components;
 
-	std::vector<Frame*> m_frames;
+	std::vector<Action*> m_actions;
+
+private:
+	static std::set<std::string> m_set_export;
 
 }; // Animation
 
