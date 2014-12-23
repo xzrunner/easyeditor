@@ -209,6 +209,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\tools.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\trans_old_ejoy2d_data.lua"
 				>
 			</File>
@@ -235,6 +239,14 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\epbin.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\epd_dataset.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\epd_dataset.h"
 			>
 		</File>
 	</Files>

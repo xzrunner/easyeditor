@@ -2,11 +2,15 @@
 #define _EPBIN_BINARY_EPD_H_
 
 #include <fstream>
+#include <vector>
 
 struct lua_State;
 
 namespace epbin
 {
+
+class Picture;
+class Animation;
 
 class BinaryEPD
 {
@@ -29,6 +33,9 @@ private:
 	int m_export;
 
 	std::ofstream m_fout;
+
+	std::vector<Picture*> m_pictures;
+	std::vector<Animation*> m_animations;
 
 }; // BinEP
 

@@ -1,6 +1,6 @@
 #include "BinaryEPD.h"
 #include "LuaDataHelper.h"
-#include "typedef.h"
+#include "epd_dataset.h"
 
 #define STRINGIFY(A)  #A
 #include "trans_old_ejoy2d_data.lua"
@@ -13,6 +13,7 @@ extern "C" {
 
 #include <iostream>
 #include <string>
+#include <assert.h>
 
 namespace epbin
 {
@@ -94,47 +95,54 @@ void BinaryEPD::CheckID(int id)
 
 void BinaryEPD::BinPic(lua_State* L, int id)
 {
-	m_fout.write(reinterpret_cast<const char*>(&PICTURE), sizeof(int8_t));
-	m_fout.write(reinterpret_cast<const char*>(&id), sizeof(int16_t));
+	Picture* pic = new Picture;
+	pic->m_id = id;
 	int len = lua_rawlen(L, -1);
-	m_fout.write(reinterpret_cast<const char*>(&len), sizeof(int16_t));	
+	pic->m_parts.reserve(len);
 	for (int i = 1; i <= len; ++i)
 	{
+		lua_pushinteger(L, i);
+		lua_gettable(L, -2);
+		assert(lua_istable(L, -1));
+
+		Picture::Part part;
 		// tex
 		lua_getfield(L, -1, "tex");
 		const char* type = lua_typename(L, lua_type(L, -1));
-		int tex = lua_tointeger(L, -1);
+		part.tex = (uint8_t)lua_tointeger(L, -1);
 		lua_pop(L, 1);
-		m_fout.write(reinterpret_cast<const char*>(&tex), sizeof(int8_t));		
-
 		// src
 		lua_getfield(L, -1, "src");
 		int len = lua_rawlen(L, -1);
+		assert(len == 8);
+		uint16_t* src = &part.src[0];
 		for (int i = 1; i <= len; ++i)
 		{
 			lua_pushinteger(L, i);
 			lua_gettable(L, -2);
-			int src = lua_tointeger(L, -1);
+			src[i-1] = (uint16_t)lua_tonumber(L, -1);
 			lua_pop(L, 1);
-			m_fout.write(reinterpret_cast<const char*>(&src), sizeof(int16_t));	
 		}
 		lua_pop(L, 1);
-
 		// screen
 		lua_getfield(L, -1, "screen");
 		len = lua_rawlen(L, -1);
+		assert(len == 8);
+		int32_t* dst = &part.screen[0];
 		for (int i = 1; i <= len; ++i)
 		{
 			lua_pushinteger(L, i);
 			lua_gettable(L, -2);
-			int screen = lua_tointeger(L, -1);
+			dst[i-1] = (int32_t)lua_tonumber(L, -1);
 			lua_pop(L, 1);
-			m_fout.write(reinterpret_cast<const char*>(&screen), sizeof(int32_t));	
 		}
 		lua_pop(L, 1);
 
+		pic->m_parts.push_back(part);
+
 		lua_pop(L, 1);
 	}
+	m_pictures.push_back(pic);
 }
 
 void BinaryEPD::BinAni(lua_State* L, int id)
