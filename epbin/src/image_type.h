@@ -6,7 +6,7 @@ namespace epbin
 
 static const int TYPE_TEXTURE4	= 0;
 static const int TYPE_TEXTURE8	= 1;
-static const int TYPE_PVRTC		= 2;
+static const int TYPE_PVRTC		= 3;
 static const int TYPE_PKMC		= 6;
 
 }
