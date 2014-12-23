@@ -286,6 +286,18 @@ void PVRLoader::Store(std::ofstream& fout) const
 	}
 	else
 	{
+		int sz = 0;
+		sz += sizeof(int8_t);	// type
+		sz += sizeof(int8_t);	// internal_format
+		sz += sizeof(int16_t);	// width
+		sz += sizeof(int16_t);	// height
+		for (int i = 0; i < m_tex.image_data_count; ++i) {
+			const Slice& s = m_tex.image_data[i];
+			sz += sizeof(uint32_t) + s.size;
+		}
+		sz = -sz;
+		fout.write(reinterpret_cast<const char*>(&sz), sizeof(int32_t));
+
 		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
 		fout.write(reinterpret_cast<const char*>(&m_tex.internal_format), sizeof(int8_t));
 		fout.write(reinterpret_cast<const char*>(&m_tex.width), sizeof(int16_t));

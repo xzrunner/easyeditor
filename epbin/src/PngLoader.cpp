@@ -82,6 +82,14 @@ void PNGLoader::Store(std::ofstream& fout) const
 	}
 	else
 	{
+		int sz = 0;
+		sz += sizeof(int8_t);	// type
+		sz += sizeof(int16_t);	// width
+		sz += sizeof(int16_t);	// height
+		sz += m_buf_sz;			// buf
+		sz = -sz;
+		fout.write(reinterpret_cast<const char*>(&sz), sizeof(int32_t));
+
 		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
 		fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
 		fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));

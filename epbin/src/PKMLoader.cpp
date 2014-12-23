@@ -78,13 +78,22 @@ void PKMLoader::Store(std::ofstream& fout) const
 	}
 	else
 	{
+		int img_sz = (m_width * m_height) >> 1;
+
+		int sz = 0;
+		sz += sizeof(int8_t);	// type
+		sz += sizeof(int16_t);	// width
+		sz += sizeof(int16_t);	// height
+		sz += img_sz * 2;
+		sz = -sz;
+		fout.write(reinterpret_cast<const char*>(&sz), sizeof(int32_t));
+
 		fout.write(reinterpret_cast<const char*>(&m_type), sizeof(int8_t));
 		fout.write(reinterpret_cast<const char*>(&m_width), sizeof(int16_t));
 		fout.write(reinterpret_cast<const char*>(&m_height), sizeof(int16_t));
 
-		int sz = (m_width * m_height) >> 1;
-		fout.write(reinterpret_cast<const char*>(m_rgb_buf), sz);
-		fout.write(reinterpret_cast<const char*>(m_alpha_buf), sz);		
+		fout.write(reinterpret_cast<const char*>(m_rgb_buf), img_sz);
+		fout.write(reinterpret_cast<const char*>(m_alpha_buf), img_sz);		
 	}
 }
 
