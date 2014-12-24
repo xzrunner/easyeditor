@@ -385,6 +385,11 @@ Sprite::Sprite(lua_State* L, int max_idx)
 		} else if (LuaDataHelper::HasField(L, "scale") || LuaDataHelper::HasField(L, "trans")) {
 			m_mat = new Matrix;
 			if (LuaDataHelper::HasField(L, "scale")) {
+				lua_getfield(L, -1, "scale");
+				assert(lua_type(L, -1) != LUA_TNIL);
+				int len = lua_rawlen(L, -1);
+				assert(len == 2);
+
 				lua_pushinteger(L, 1);
 				lua_gettable(L, -2);
 				double sx = lua_tonumber(L, -1);
@@ -401,8 +406,15 @@ Sprite::Sprite(lua_State* L, int max_idx)
 				m_mat->m[3] *= sy;
 				m_mat->m[4] *= sx;
 				m_mat->m[5] *= sy;
+
+				lua_pop(L, 1);
 			}
 			if (LuaDataHelper::HasField(L, "trans")) {
+				lua_getfield(L, -1, "trans");
+				assert(lua_type(L, -1) != LUA_TNIL);
+				int len = lua_rawlen(L, -1);
+				assert(len == 2);
+
 				lua_pushinteger(L, 1);
 				lua_gettable(L, -2);
 				int tx = lua_tointeger(L, -1);
@@ -415,6 +427,8 @@ Sprite::Sprite(lua_State* L, int max_idx)
 
 				m_mat->m[4] += tx;
 				m_mat->m[5] += ty;
+
+				lua_pop(L, 1);
 			}
 		}
 
