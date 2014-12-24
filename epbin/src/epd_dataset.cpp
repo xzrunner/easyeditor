@@ -122,7 +122,7 @@ Picture::Picture(lua_State* L, int id)
 		{
 			lua_pushinteger(L, i);
 			lua_gettable(L, -2);
-			dst[i-1] = (int32_t)lua_tonumber(L, -1);
+			dst[i-1] = lua_tointeger(L, -1);
 			lua_pop(L, 1);
 		}
 		lua_pop(L, 1);
