@@ -141,6 +141,7 @@ void BinaryEPD::Load()
 			std::string type = LuaDataHelper::GetStringField(L, "type");
 			int id = LuaDataHelper::GetIntField(L, "id");
 			CheckID(id);
+			CheckExport(L);
 			if (type == "picture") {
 				m_pictures.push_back(new Picture(L, id));
 			} else if (type == "animation") {
@@ -157,6 +158,13 @@ void BinaryEPD::CheckID(int id)
 {
 	if (id > m_max_id) {
 		m_max_id = id;
+	}
+}
+
+void BinaryEPD::CheckExport(lua_State* L)
+{
+	if (LuaDataHelper::HasField(L, "export")) {
+		++m_export;
 	}
 }
 

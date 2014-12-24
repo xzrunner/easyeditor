@@ -26,6 +26,7 @@ private:
 	void Load();
 
 	void CheckID(int id);
+	void CheckExport(lua_State* L);
 
 private:
 	std::string m_src_filepath;
