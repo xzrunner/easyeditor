@@ -53,11 +53,12 @@ void MaxRectsBinaryPack2::Pack(const std::vector<RectSize>& rects,
 	}
 	int edge = next_p2((int)ceil(sqrt(area)));
 
+	int w = edge, h = edge;
 	// insert
 	bool success = false;
 	while (!success)
 	{
-		InitRoot(edge, edge);
+		InitRoot(w, h);
 		for (int i = 0; i < sz; ++i) {
 			success = Insert(&sprites[i]);
 			if (!success) {
@@ -65,7 +66,15 @@ void MaxRectsBinaryPack2::Pack(const std::vector<RectSize>& rects,
 			}
 		}
 
-		edge *= 2;
+		if (w == h) {
+			w *= 2;
+		} else if (w == h * 2) {
+			w /= 2;
+			h *= 2;
+		} else {
+			assert(h == w * 2);
+			w *= 2;
+		}
 	}
 }
 
