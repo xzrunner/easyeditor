@@ -28,7 +28,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h)
 	if (img->originWidth() == w && img->originHeight() == h) {
 		for (int iy = 0; iy < h; ++iy) {
 			for (int ix = 0; ix < w; ++ix) {
-				int ptr_src = (iy * w + ix) * BYTES_PER_PIXEL,
+				int ptr_src = ((h - 1 - iy) * w + ix) * BYTES_PER_PIXEL,
 					ptr_dst = ((y + iy) * m_width + (x + ix)) * BYTES_PER_PIXEL;
 				for (int i = 0; i < BYTES_PER_PIXEL; ++i) {
 					assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
@@ -41,7 +41,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h)
  		assert(img->originWidth() == h && img->originHeight() == w);
  		for (int iy = 0; iy < w; ++iy) {
  			for (int ix = 0; ix < h; ++ix) {
- 				int ptr_src = (iy * h + ix) * BYTES_PER_PIXEL,
+ 				int ptr_src = ((w - 1 - iy) * h + ix) * BYTES_PER_PIXEL,
  					ptr_dst = ((y + ix) * m_width + (x + w - 1 - iy)) * BYTES_PER_PIXEL;
  				for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
  					assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
