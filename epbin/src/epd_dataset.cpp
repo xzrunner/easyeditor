@@ -5,6 +5,7 @@
 
 #include <algorithm>
 #include <assert.h>
+//#include <math.h>
 
 extern "C" {
 #include <lua.h>
@@ -122,7 +123,13 @@ Picture::Picture(lua_State* L, int id)
 		{
 			lua_pushinteger(L, i);
 			lua_gettable(L, -2);
+
+// 			double v = lua_tonumber(L, -1);
+// 			v -= 0.00025;
+// 			dst[i-1] = floor(v + 0.5);
+
 			dst[i-1] = lua_tointeger(L, -1);
+
 			lua_pop(L, 1);
 		}
 		lua_pop(L, 1);
