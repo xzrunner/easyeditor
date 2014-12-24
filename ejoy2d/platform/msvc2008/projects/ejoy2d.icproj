@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="gb2312"?>
+<VisualStudioProject
+	ProjectType="Intel C++ Project"
+	Version="11.1"
+	Name="ejoy2d"
+	ProjectGUID="{D5A1565C-C421-46E9-853D-B9BE4C56F708}"
+	VCNestedProjectGUID="{2B614163-E3A3-4BCD-9933-EF59B8467868}"
+	VCNestedProjectFileName="ejoy2d.vcproj">
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32">
+			<Tool
+				Name="CppCmplrTool"
+				C99Support="true"/>
+		</Configuration>
+	</Configurations>
+	<Files/>
+</VisualStudioProject>
