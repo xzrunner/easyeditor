@@ -149,11 +149,15 @@
 			Name="world"
 			>
 			<File
-				RelativePath="..\..\..\src\demo\BuildShadedObjects_04.cpp"
+				RelativePath="..\..\..\src\demo\Build04.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\demo\BuildShadedObjects_05.cpp"
+				RelativePath="..\..\..\src\demo\Build05.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\demo\Build06.cpp"
 				>
 			</File>
 			<File
@@ -181,11 +185,35 @@
 			Name="objects"
 			>
 			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Box.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Box.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Compound.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Compound.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\objects\GeometricObject.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\objects\GeometricObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Grid.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Grid.h"
 				>
 			</File>
 			<File
@@ -269,6 +297,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\utilities\Mesh.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\utilities\Object.h"
 				>
 			</File>
@@ -296,6 +328,14 @@
 		<Filter
 			Name="maths"
 			>
+			<File
+				RelativePath="..\..\..\src\libraytracer\maths\AABB.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\maths\AABB.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\maths\maths.h"
 				>
@@ -502,6 +542,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\cameras\Pinhole.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\ThinLens.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\ThinLens.h"
 				>
 			</File>
 		</Filter>

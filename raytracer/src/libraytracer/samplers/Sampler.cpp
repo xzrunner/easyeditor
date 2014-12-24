@@ -28,6 +28,59 @@ Sampler::Sampler(int num)
 	SetupShuffledIndices();
 }
 
+// ------------------------------------------------------------------- map_samples_to_unit_disk
+// Maps the 2D sample points in the square [-1,1] X [-1,1] to a unit disk, using Peter Shirley's
+// concentric map function
+// explained on page 122
+void Sampler::MapSamplesToUnitDisk()
+{
+	int size = m_samples.size();
+	float r, phi;		// polar coordinates
+	Point2D sp; 		// sample point on unit disk
+
+	m_disk_samples.reserve(size);
+
+	for (int j = 0; j < size; j++) {
+		// map sample point to [-1, 1] X [-1,1]
+
+		sp.x = 2.0 * m_samples[j].x - 1.0;
+		sp.y = 2.0 * m_samples[j].y - 1.0;
+
+		if (sp.x > -sp.y) {			// sectors 1 and 2
+			if (sp.x > sp.y) {		// sector 1
+				r = sp.x;
+				phi = sp.y / sp.x;
+			}
+			else {					// sector 2
+				r = sp.y;
+				phi = 2.0 - sp.x / sp.y;
+			}
+		}
+		else {						// sectors 3 and 4
+			if (sp.x < sp.y) {		// sector 3
+				r = -sp.x;
+				phi = 4.0 + sp.y / sp.x;
+			}
+			else {					// sector 4
+				r = -sp.y;
+				if (sp.y != 0.0)	// avoid division by zero at origin
+					phi = 6.0 - sp.x / sp.y;
+				else
+					phi  = 0.0;
+			}
+		}
+
+		phi *= PI / 4.0;
+
+		float px = r * cos(phi);
+		float py = r * sin(phi);
+
+		m_disk_samples.push_back(Point2D(px, py));
+	}
+
+	m_samples.clear();
+}
+
 // ------------------------------------------------------------------- map_samples_to_hemisphere
 // Maps the 2D sample points to 3D points on a unit hemisphere with a cosine power
 // density distribution in the polar angle
@@ -58,6 +111,16 @@ const Point2D& Sampler::SampleUnitSquare() const
 	}
 
 	return m_samples[m_jump + m_shuffled_indices[m_jump + m_count++ % m_num_samples]];
+}
+
+const Point2D& Sampler::SampleUnitDisk() const
+{
+	// start of a new pixel
+	if (m_count % m_num_samples == 0) {
+		m_jump = (rand_int() % m_num_sets) * m_num_samples;
+	}
+
+	return (m_disk_samples[m_jump + m_shuffled_indices[m_jump + m_count++ % m_num_samples]]);
 }
 
 const Point3D& Sampler::SampleHemisphere()

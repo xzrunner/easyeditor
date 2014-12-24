@@ -29,16 +29,7 @@ ViewPlane::~ViewPlane()
 
 void ViewPlane::SetSampler(Sampler* sampler)
 {
-	if (m_sampler == sampler) {
-		return;
-	}
-
-	if (m_sampler) {
-		delete m_sampler;
-		m_sampler = NULL;
-	}
-
-	m_sampler = sampler;
+	obj_assign((const Object*&)m_sampler, sampler);
 	m_num_samples = sampler->GetNumSamples();
 }
 

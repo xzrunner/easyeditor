@@ -19,10 +19,15 @@ public:
 	// generate sample patterns in a unit square
 	virtual void GenerateSamples() = 0;
 
+	void MapSamplesToUnitDisk();
+
 	void MapSamplesToHemisphere(const float p);
 
 	// get next sample on unit square
 	const Point2D& SampleUnitSquare() const;
+
+	// get next sample on unit disk
+	const Point2D& SampleUnitDisk() const;
 
 	// get next sample on unit hemisphere
 	const Point3D& SampleHemisphere();
@@ -40,6 +45,9 @@ protected:
 
 	// sample points on a unit square
 	std::vector<Point2D> m_samples;
+
+	// sample points on a unit disk
+	std::vector<Point2D> m_disk_samples;
 
 	// sample points on a unit hemisphere
 	std::vector<Point3D> m_hemisphere_samples;

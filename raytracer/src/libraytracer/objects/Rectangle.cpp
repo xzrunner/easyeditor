@@ -91,7 +91,7 @@ Normal Rectangle::GetNormal(const Point3D& p) const
 
 void Rectangle::SetSampler(Sampler* sampler)
 {
-	m_sampler = sampler;
+	obj_assign((const Object*&)m_sampler, sampler);
 }
 
 }

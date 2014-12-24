@@ -36,7 +36,12 @@ Normal GeometricObject::GetNormal(const Point3D& p) const
 	return Normal();
 }
 
-void GeometricObject::SetMaterial(const Material* m) 
+AABB GeometricObject::GetBoundingBox() const
+{
+	return AABB();
+}
+
+void GeometricObject::SetMaterial(const Material* m) const
 {
 	obj_assign((const Object*&)m_material, m);
 }

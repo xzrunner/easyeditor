@@ -2,6 +2,7 @@
 #define _RT_GEOMETRIC_OBJECT_H_
 
 #include "maths/Point3D.h"
+#include "maths/AABB.h"
 #include "utilities/Object.h"
 
 #include <stdio.h>
@@ -30,11 +31,16 @@ public:
 	virtual Normal GetNormal(void) const; 
 	virtual Normal GetNormal(const Point3D& p) const;
 
+	virtual AABB GetBoundingBox() const;
+
+	// required for compound objects
+	virtual void AddObject(GeometricObject* obj) {}
+
 	const Material* GetMaterial() const;
-	void SetMaterial(const Material* m);
+	void SetMaterial(const Material* m) const;
 
 private:
-	const Material* m_material;
+	mutable const Material* m_material;
 
 }; // GeometricObject
 

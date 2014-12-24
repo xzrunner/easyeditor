@@ -25,6 +25,16 @@ rand_int(int l, int h) {
 	return (int) (rand_float(0.0f, h - l + 1.0f) + l);
 }
 
+inline void
+set_rand_seed(int seed) {
+	srand(seed);
+}
+
+inline double
+clamp(const double x, const double min, const double max) {
+	return x < min ? min : (x > max ? max : x);
+}
+
 }
 
 #endif // _RT_MATHS_H_
