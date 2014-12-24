@@ -17,7 +17,7 @@ uint8_t* ImageIO::Read(const char* filepath, int& width, int& height, int& chann
 
 void ImageIO::ReadHeader(const char* filepath, int& width, int& height)
 {
-	
+	return LibpngAdapter::ReadHeader(filepath, width, height);
 }
 
 }

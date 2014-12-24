@@ -180,6 +180,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="normal"
+				>
+				<File
+					RelativePath="..\..\..\src\libpacker\NormalPack.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpacker\NormalPack.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
