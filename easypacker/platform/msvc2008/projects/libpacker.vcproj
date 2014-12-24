@@ -208,6 +208,14 @@
 		<Filter
 			Name="external"
 			>
+			<File
+				RelativePath="..\..\..\src\libpacker\RectangleBinPack.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpacker\RectangleBinPack.h"
+				>
+			</File>
 			<Filter
 				Name="RectangleBinPack"
 				>
