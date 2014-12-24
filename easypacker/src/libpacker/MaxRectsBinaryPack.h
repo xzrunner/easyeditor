@@ -15,6 +15,8 @@ public:
 	MaxRectsBinaryPack();
 	~MaxRectsBinaryPack();
 
+	RectSize GetSize() const;
+
 	void Pack(const std::vector<RectSize>& rects, std::vector<Rect>& output);
 
 private:
@@ -29,6 +31,9 @@ private:
 		~Node();
 
 		Node* insert(Sprite* sprite, int flag);
+
+		int Width() const { return m_rc.width; }
+		int Height() const { return m_rc.height; }
 
 	private:
 		Node* m_child[2];

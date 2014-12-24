@@ -22,6 +22,16 @@ MaxRectsBinaryPack::~MaxRectsBinaryPack()
 	delete m_root;
 }
 
+RectSize MaxRectsBinaryPack::GetSize() const
+{
+	RectSize sz;
+	if (m_root) {
+		sz.width = m_root->Width();
+		sz.height = m_root->Height();
+	}
+	return sz;
+}
+
 void MaxRectsBinaryPack::Pack(const std::vector<RectSize>& rects, std::vector<Rect>& output)
 {
 	if (rects.empty()) {
