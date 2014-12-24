@@ -217,11 +217,19 @@
 			Name="io"
 			>
 			<File
-				RelativePath="..\..\..\src\libimage\ImageWriter.cpp"
+				RelativePath="..\..\..\src\libimage\ImageIO.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libimage\ImageWriter.h"
+				RelativePath="..\..\..\src\libimage\ImageIO.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\LibpngAdapter.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\LibpngAdapter.h"
 				>
 			</File>
 		</Filter>

@@ -1,5 +1,5 @@
 #include "ImagePack.h"
-#include "ImageWriter.h"
+#include "ImageIO.h"
 
 namespace eimage
 {
@@ -54,7 +54,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h)
 
 void ImagePack::OutputToFile(const wxString& filepath) const
 {
-	ImageWriter::Write(m_pixels, m_width, m_height, filepath.mb_str());
+	ImageIO::Write(m_pixels, m_width, m_height, filepath.mb_str());
 }
 
 }

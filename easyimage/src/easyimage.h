@@ -6,7 +6,7 @@
 #include "libimage/ExtractOutlineFine.h"
 #include "libimage/RegularRectCut.h"
 #include "libimage/config.h"
-#include "libimage/ImageWriter.h"
+#include "libimage/ImageIO.h"
 #include "libimage/ImageClip.h"
 #include "libimage/ImageTrim.h"
 #include "libimage/ImagePack.h"
