@@ -3,8 +3,7 @@
 #include "maths/Ray.h"
 #include "maths/Normal.h"
 #include "utilities/ShadeRec.h"
-
-#include <float.h>
+#include "utilities/Constants.h"
 
 namespace rt
 {
@@ -89,8 +88,8 @@ bool Box::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 		face_out = (c >= 0.0) ? 5 : 2;
 	}
 
-	if (t0 < t1 && t1 > FLT_EPSILON) {  // condition for a hit
-		if (t0 > FLT_EPSILON) {
+	if (t0 < t1 && t1 > EPSILON) {  // condition for a hit
+		if (t0 > EPSILON) {
 			tmin = t0;  			// ray hits outside surface
 			sr.normal = GetNormal(face_in);
 		}
@@ -175,8 +174,8 @@ bool Box::ShadowHit(const Ray& ray, float& tmin) const
 		face_out = (c >= 0.0) ? 5 : 2;
 	}
 
-	if (t0 < t1 && t1 > FLT_EPSILON) {  // condition for a hit
-		if (t0 > FLT_EPSILON)
+	if (t0 < t1 && t1 > EPSILON) {  // condition for a hit
+		if (t0 > EPSILON)
 			tmin = t0;  			// ray hits outside surface
 		else 
 			tmin = t1;				// ray hits inside surface

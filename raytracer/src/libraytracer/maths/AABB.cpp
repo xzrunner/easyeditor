@@ -2,6 +2,8 @@
 #include "Ray.h"
 #include "Point3D.h"
 
+#include "utilities/Constants.h"
+
 #include <float.h>
 
 namespace rt
@@ -83,7 +85,7 @@ bool AABB::Hit(const Ray& ray) const
 	if (tz_max < t1)
 		t1 = tz_max;
 
-	return t0 < t1 && t1 > FLT_EPSILON;
+	return t0 < t1 && t1 > EPSILON;
 }
 
 bool AABB::Inside(const Point3D& p) const

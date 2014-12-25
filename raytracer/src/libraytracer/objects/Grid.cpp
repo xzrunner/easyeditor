@@ -2,6 +2,7 @@
 
 #include "maths/Ray.h"
 #include "maths/maths.h"
+#include "utilities/Constants.h"
 
 #include <float.h>
 #include <iostream>
@@ -367,7 +368,7 @@ Point3D Grid::FindMinBounds() const
 			p0.z = object_box.z0;
 	}
 
-	p0.x -= FLT_EPSILON; p0.y -= FLT_EPSILON; p0.z -= FLT_EPSILON;
+	p0.x -= EPSILON; p0.y -= EPSILON; p0.z -= EPSILON;
 
 	return p0;
 }
@@ -389,7 +390,7 @@ Point3D Grid::FindMaxBounds() const
 			p1.z = object_box.z1;
 	}
 
-	p1.x += FLT_EPSILON; p1.y += FLT_EPSILON; p1.z += FLT_EPSILON;	
+	p1.x += EPSILON; p1.y += EPSILON; p1.z += EPSILON;	
 
 	return p1;
 }

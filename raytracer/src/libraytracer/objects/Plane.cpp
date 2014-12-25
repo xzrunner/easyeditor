@@ -23,7 +23,7 @@ bool Plane::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 {
 	float t = (m_pos - ray.ori) * m_normal / (ray.dir * m_normal);
 
-	if (t > EPSILON) {
+	if (t > EPSILON * 10) {
 		tmin = t;
 		sr.normal = m_normal;
 		sr.local_hit_point = ray.ori + t * ray.dir;
@@ -38,7 +38,7 @@ bool Plane::ShadowHit(const Ray& ray, float& tmin) const
 {
 	float t = (m_pos - ray.ori) * m_normal / (ray.dir * m_normal);
 
-	if (t > EPSILON) {
+	if (t > EPSILON * 10) {
 		tmin = t;
 		return (true);
 	} else {

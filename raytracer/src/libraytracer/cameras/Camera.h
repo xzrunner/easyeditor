@@ -19,6 +19,10 @@ public:
 
 	void SetLookat(const Point3D& p);
 
+	void SetUpVector(const Vector3D& up);
+
+	void SetRollAngle(float ra);		
+
 	void ComputeUVW();
 
 protected:

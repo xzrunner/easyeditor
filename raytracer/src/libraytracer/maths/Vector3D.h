@@ -8,6 +8,7 @@ namespace rt
 
 class Point3D;
 class Normal;
+class Matrix;
 
 class Vector3D
 {
@@ -107,6 +108,9 @@ inline Vector3D
 operator * (const double a, const Vector3D& v) {
 	return Vector3D(a * v.x, a * v.y, a * v.z);
 }
+
+Vector3D 
+operator * (const Matrix& mat, const Vector3D& v);
 
 }
 

@@ -149,7 +149,15 @@
 			Name="world"
 			>
 			<File
-				RelativePath="..\..\..\src\demo\Build08_19.cpp"
+				RelativePath="..\..\..\src\demo\Build09_09.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\demo\Build09_10.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\demo\Build09_11.cpp"
 				>
 			</File>
 			<File
@@ -338,6 +346,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\maths\maths.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\maths\Matrix.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\maths\Matrix.h"
 				>
 			</File>
 			<File
