@@ -71,8 +71,8 @@ void SearcherPathMgr::LoadConfig()
 {
  	wxFileName filename(FILENAME);
 #ifndef _DEBUG
-	wxStandardPaths std;
-	wxString exe_path = std.GetExecutablePath();
+	wxStandardPathsBase& stdp = wxStandardPaths::Get();
+	wxString exe_path = stdp.GetExecutablePath();
 	filename.MakeAbsolute(FilenameTools::getFileDir(exe_path));
 #endif
  	filename.Normalize();
@@ -122,8 +122,8 @@ PackedRes(const std::string& res_dir,
 
 	wxFileName filename(m_res_dir);
 #ifndef _DEBUG
-	wxStandardPaths std;
-	wxString exe_path = std.GetExecutablePath();
+	wxStandardPathsBase& stdp = wxStandardPaths::Get();
+	wxString exe_path = stdp.GetExecutablePath();
 	filename.MakeAbsolute(FilenameTools::getFileDir(exe_path));
 #endif
 	filename.Normalize();
@@ -165,8 +165,8 @@ LoadCfgDir(const std::string& dirpath, bool need_trans)
 	m_res_dir_absolute = wxEmptyString;
 
 #ifndef _DEBUG
-	wxStandardPaths std;
-	wxString exe_path = std.GetExecutablePath();
+	wxStandardPathsBase& stdp = wxStandardPaths::Get();
+	wxString exe_path = stdp.GetExecutablePath();
 #endif
 
 	size_t i = 1;
