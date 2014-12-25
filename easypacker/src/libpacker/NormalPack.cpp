@@ -47,7 +47,11 @@ void NormalPack::OutputInfo(const wxString& src_folder, const wxString& dst_file
 
 		assert(src_sz.width == pos.width && src_sz.height == pos.height
 			|| src_sz.width == pos.height && src_sz.height == pos.width);
-		frame_val["rotated"] = src_sz.width == pos.width && src_sz.height == pos.height;
+		if (src_sz.width == pos.width && src_sz.height == pos.height) {
+			frame_val["rotated"] = false;
+		} else {
+			frame_val["rotated"] = true;
+		}
 
 		frame_val["trimmed"] = false;
 		frame_val["spriteSourceSize"]["x"] = 0;
