@@ -22,9 +22,25 @@ ViewPlane::ViewPlane()
 {
 }
 
+ViewPlane::ViewPlane(const ViewPlane& vp)
+	: m_hori_res(vp.m_hori_res)
+	, m_vert_res(vp.m_vert_res)
+	, m_pixel_size(vp.m_pixel_size)
+	, m_num_samples(vp.m_num_samples)
+	, m_max_depth(vp.m_max_depth)
+	, m_sampler(NULL)
+	, m_show_out_of_gamut(vp.m_show_out_of_gamut)
+	, m_gamma(vp.m_gamma)
+	, m_inv_gamma(vp.m_inv_gamma)
+{
+	SetSampler(vp.m_sampler);
+}
+
 ViewPlane::~ViewPlane()
 {
-	delete m_sampler;
+	if (m_sampler) {
+		m_sampler->Release();
+	}
 }
 
 void ViewPlane::SetSampler(Sampler* sampler)

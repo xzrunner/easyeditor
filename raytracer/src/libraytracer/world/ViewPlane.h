@@ -10,6 +10,7 @@ class ViewPlane
 {
 public:
 	ViewPlane();
+	ViewPlane(const ViewPlane& vp);
 	~ViewPlane();
 
 	int GetWidth() const { return m_hori_res; }

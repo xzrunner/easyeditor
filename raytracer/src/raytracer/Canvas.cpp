@@ -25,6 +25,8 @@ Canvas::Canvas(Frame* frame)
 
 Canvas::~Canvas(void)
 {
+	renderPause();
+
 	if(m_image != NULL)
 		delete m_image;
 
