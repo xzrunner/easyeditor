@@ -4,6 +4,7 @@
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
+#include <easymesh.h>
 
 static void InitSymbolCreators() 
 {
@@ -15,6 +16,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(escale9::FILE_TAG, &escale9::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(escale9::FILE_TAG, &escale9::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(emesh::FILE_TAG, &emesh::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(emesh::FILE_TAG, &emesh::Sprite::Create);
 }
 
 static void Help()

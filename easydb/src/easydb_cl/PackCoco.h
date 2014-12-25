@@ -1,0 +1,45 @@
+#ifndef _EASYDB_PACK_COCO_H_
+#define _EASYDB_PACK_COCO_H_
+
+#include "ICommand.h"
+
+#include <JSON/json.h>
+#include <wx/string.h>
+
+namespace edb
+{
+
+class PackCoco : public ICommand
+{
+public:
+	PackCoco() {}
+
+	//
+	// interface ITask
+	//
+	virtual std::string Command() const;
+	virtual std::string Description() const;
+	virtual std::string Usage() const;
+	virtual void Run(int argc, char *argv[]);
+
+	static ICommand* Create() { return new PackCoco(); }
+
+private:
+	void Trigger(const std::string& config_path);
+
+private:
+	void PackTexture(const Json::Value& pkg_val, const wxString& config_dir) const;
+	void GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
+		const wxString& src_folder, std::vector<wxString>& images) const;
+
+	void PackLuaFile(const Json::Value& pkg_val, const wxString& config_dir) const;
+	void GetAllDataFiles(const wxString& src_folder, const wxString& filter, 
+		std::vector<wxString>& files) const;
+
+	void PackEp(const Json::Value& pkg_val, const wxString& config_dir) const;
+
+}; // PackCoco
+
+}
+
+#endif // _EASYDB_PACK_COCO_H_

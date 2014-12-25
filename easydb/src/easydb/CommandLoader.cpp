@@ -29,7 +29,7 @@
 #include "BinRRP.h"
 #include "NumberImages.h"
 #include "BinEP.h"
-#include "PackTexture.h"
+#include "PackCoco.h"
 
 namespace edb
 {
@@ -65,7 +65,7 @@ void CommandLoader::Init()
 	fc->Register(BinRRP::Create());
 	fc->Register(NumberImages::Create());
 	fc->Register(BinEP::Create());
-	fc->Register(PackTexture::Create());
+	fc->Register(PackCoco::Create());
 }
 
 }
