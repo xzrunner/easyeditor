@@ -2,7 +2,7 @@
 
 //#include <stdio.h>
 
-namespace coceditor
+namespace libcoco
 {
 
 Context* Context::m_instance = NULL;

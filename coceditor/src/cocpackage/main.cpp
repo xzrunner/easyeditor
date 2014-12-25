@@ -1,15 +1,18 @@
-#include "../coceditor/Context.h"
-#include "../coceditor/COCCode.h"
-
 #include <iostream>
 
-#include <easybuilder.h>
+#include <easycoco.h>
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
 #include <easymesh.h>
 
 #define CHARACTER
+
+std::vector<const d2d::ISymbol*> SYMBOLS;
+
+libcoco::TextureMgr TEX_MGR;
+
+std::set<std::string> IGNORE_LIST;
 
 static void InitSymbolCreators() 
 {
@@ -54,7 +57,7 @@ void LoadFromDir(const std::string& dir)
 			{
 				// todo release symbol
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(*itr);
-				coceditor::Context::Instance()->symbols.push_back(symbol);
+				SYMBOLS.push_back(symbol);
 			}
 		}
 	} catch (d2d::Exception& e) {
@@ -122,7 +125,7 @@ void LoadFromList(const std::string& list)
 				if (itr == names.end()) {
 //					symbol->release();
 				} else {
-					coceditor::Context::Instance()->symbols.push_back(symbol);
+					SYMBOLS.push_back(symbol);
 				}
 			}
 		}
@@ -138,7 +141,7 @@ void LoadTexturePacker(std::string texpackerpath)
 	{
 		std::string path = texpackerpath + wxString::FromDouble(i) + ".json";
 		if (wxFileName::FileExists(path))
-			coceditor::Context::Instance()->texMgr.initTexture(path, i-1);
+			TEX_MGR.Add(path, i-1);
 		else
 			break;
 		++i;
@@ -187,7 +190,7 @@ void LoadIgnoreList(const std::string& filename)
 
 	fin.close();
 
-	coceditor::Context::Instance()->ignore_list = list;
+	IGNORE_LIST = list;
 }
 
 int main(int argc, char *argv[])
@@ -231,14 +234,9 @@ int main(int argc, char *argv[])
 	LoadTexturePacker(texpackerpath);
 
 	try {
-		ebuilder::CodeGenerator gen;
-		coceditor::COCCode code(gen, path, gscale);
-		code.Parser();
-		std::locale::global(std::locale(""));
-		std::ofstream fout(argv[3]);
-		std::locale::global(std::locale("C"));
-		fout << gen.toText() << std::endl;
-		fout.close();
+		libcoco::CocoPacker packer(SYMBOLS, TEX_MGR, path, gscale);
+		packer.Parser();
+		packer.Output(argv[3]);
 	} catch (d2d::Exception& e) {
 		std::cerr << e.what() << std::endl;
 	}

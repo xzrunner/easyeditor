@@ -1,7 +1,7 @@
 #include "PackLuaFile.h"
 #include "TexturePacker.h"
-#include "CocoPacker.h"
-#include "SymbolsPrepare.h"
+#include "CocoPackerNew.h"
+#include "SymbolDependanceSorter.h"
 
 #include <easycomplex.h>
 
@@ -22,7 +22,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	}
 
 	// get all symbols
-	SymbolsPrepare preprocess;
+	SymbolDependanceSorter preprocess;
 	preprocess.prepare(sprites);
 	std::vector<const d2d::ISymbol*> symbols = preprocess.GetAllSymbols();
 	symbols.push_back(&root);
@@ -41,7 +41,7 @@ void PackLuaFile::pack(const std::vector<const d2d::ISprite*>& sprites,
 	textures.storeToFile(outfloder, "tmp.1", d2d::ImageSaver::e_ppm);
 
 	// pack lua file
-	CocoPacker code(textures);
+	CocoPackerNew code(textures);
 	code.pack(symbols);
 	code.storeToFile(outfloder + "\\tmp.lua");
 }

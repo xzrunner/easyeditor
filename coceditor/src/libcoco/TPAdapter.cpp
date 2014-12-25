@@ -1,13 +1,13 @@
-#include "TexPackerAdapter.h"
+#include "TPAdapter.h"
 
 #include <fstream>
 
 #include <drag2d.h>
 
-namespace coceditor
+namespace libcoco
 {
 
-void TexPackerAdapter::load(const char* filename)
+void TPAdapter::Load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -17,37 +17,35 @@ void TexPackerAdapter::load(const char* filename)
 	reader.parse(fin, value);
 	fin.close();
 
-	width = value["meta"]["size"]["w"].asInt();
-	height = value["meta"]["size"]["h"].asInt();
+	m_width = value["meta"]["size"]["w"].asInt();
+	m_height = value["meta"]["size"]["h"].asInt();
 
-	wxString str = value["meta"]["scale"].asString();
-	double dscale;
-	str.ToDouble(&dscale);
-	invscale = dscale;
+	std::string str = value["meta"]["scale"].asString();
+	m_invscale = atof(str.c_str());
 
 	int i = 0;
 	Json::Value frameValue = value["frames"][i++];
 	while (!frameValue.isNull()) {
 		Entry entry;
-		load(frameValue, entry);
-		frames.push_back(entry);
+		Load(frameValue, entry);
+		m_frames.push_back(entry);
 		frameValue = value["frames"][i++];
 	}
 }
 
-void TexPackerAdapter::load(const Json::Value& value, Entry& entry)
+void TPAdapter::Load(const Json::Value& value, Entry& entry)
 {
 	entry.filename = value["filename"].asString();
 	StringTools::toLower(entry.filename);
-	load(value["frame"], entry.frame);
+	Load(value["frame"], entry.frame);
 	entry.rotated = value["rotated"].asBool();
 	entry.trimmed = value["trimmed"].asBool();
-	load(value["spriteSourceSize"], entry.spriteSourceSize);
-	entry.srcWidth = value["sourceSize"]["w"].asInt();
-	entry.srcHeight = value["sourceSize"]["h"].asInt();
+	Load(value["spriteSourceSize"], entry.sprite_source_size);
+	entry.src_width = value["sourceSize"]["w"].asInt();
+	entry.src_height = value["sourceSize"]["h"].asInt();
 }
 
-void TexPackerAdapter::load(const Json::Value& value, Region& region)
+void TPAdapter::Load(const Json::Value& value, Region& region)
 {
 	region.x = value["x"].asInt();
 	region.y = value["y"].asInt();

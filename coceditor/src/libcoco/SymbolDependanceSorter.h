@@ -5,7 +5,7 @@
 namespace libcoco
 {
 
-class SymbolsPrepare
+class SymbolDependanceSorter
 {
 public:
 

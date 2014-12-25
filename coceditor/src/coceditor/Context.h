@@ -2,14 +2,14 @@
 
 #include <drag2d.h>
 
-#include "TexturesMgr.h"
+#include "TextureMgr.h"
 
-namespace coceditor
+namespace libcoco
 {
 	class LibraryPanel;
 	class StagePanel;
 	class ToolbarPanel;
-	class TexturesMgr;
+	class TextureMgr;
 
 	class Context
 	{
@@ -21,7 +21,7 @@ namespace coceditor
 
 		int id;
 
-		TexturesMgr texMgr;
+		TextureMgr texMgr;
 		std::vector<const d2d::ISymbol*> symbols;
 		wxString dlgPath;
 

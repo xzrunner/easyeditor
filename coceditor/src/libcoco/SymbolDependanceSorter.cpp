@@ -1,4 +1,4 @@
-#include "SymbolsPrepare.h"
+#include "SymbolDependanceSorter.h"
 
 #include <queue>
 
@@ -10,13 +10,13 @@
 namespace libcoco
 {
 
-void SymbolsPrepare::prepare(const std::vector<const d2d::ISymbol*>& symbols)
+void SymbolDependanceSorter::prepare(const std::vector<const d2d::ISymbol*>& symbols)
 {
 	fetch(symbols);
 	sort();
 }
 
-void SymbolsPrepare::prepare(const std::vector<const d2d::ISprite*>& sprites)
+void SymbolDependanceSorter::prepare(const std::vector<const d2d::ISprite*>& sprites)
 {
 	std::vector<const d2d::ISymbol*> symbols;
 	symbols.reserve(sprites.size());
@@ -25,7 +25,7 @@ void SymbolsPrepare::prepare(const std::vector<const d2d::ISprite*>& sprites)
 	prepare(symbols);
 }
 
-void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
+void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 {
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 		m_unique.insert(symbols[i]);
@@ -172,7 +172,7 @@ void SymbolsPrepare::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 	}
 }
 
-void SymbolsPrepare::sort()
+void SymbolDependanceSorter::sort()
 {
 	while (!m_unique.empty())
 	{
@@ -290,7 +290,7 @@ void SymbolsPrepare::sort()
 	}
 }
 
-bool SymbolsPrepare::isSymbolPrepared(const d2d::ISprite* sprite) const
+bool SymbolDependanceSorter::isSymbolPrepared(const d2d::ISprite* sprite) const
 {
 	for (size_t i = 0, n = m_result.size(); i < n; ++i)
 		if (&sprite->getSymbol() == m_result[i])
