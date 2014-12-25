@@ -563,14 +563,6 @@
 			RelativePath="..\..\..\src\easydb_cl\main.cpp"
 			>
 		</File>
-		<File
-			RelativePath="..\..\..\src\easydb_cl\main.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easydb_cl\main_old.cpp"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
