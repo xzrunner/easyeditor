@@ -53,7 +53,7 @@ void MaxRectsBinaryPack2::Pack(const std::vector<RectSize>& rects,
 	}
 	int edge = next_p2((int)ceil(sqrt(area)));
 
-	int w = edge, h = edge;
+	int w = edge, h = (edge >> 1);
 	// insert
 	bool success = false;
 	while (!success)
