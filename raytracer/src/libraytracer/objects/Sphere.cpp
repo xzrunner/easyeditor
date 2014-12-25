@@ -9,6 +9,11 @@
 namespace rt
 {
 
+Sphere::Sphere()
+	: m_radius(0)
+{
+}
+
 Sphere::Sphere(const Point3D& m_center, float r)
 	: m_center(m_center)
 	, m_radius(r)
@@ -78,6 +83,16 @@ bool Sphere::ShadowHit(const Ray& ray, float& tmin) const
 	}
 
 	return (false);
+}
+
+void Sphere::SetCenter(const Point3D& center)
+{
+	m_center = center;
+}
+
+void Sphere::SetRadius(float r)
+{
+	m_radius = r;
 }
 
 }

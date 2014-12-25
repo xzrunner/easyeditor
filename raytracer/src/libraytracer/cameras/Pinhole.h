@@ -29,12 +29,6 @@ private:
 
 }; // Pinhole
 
-inline void Pinhole::
-SetViewDistance(const float vpd)
-{
-	m_d = vpd;
-}
-
 }
 
 #endif // _RT_PINHOLE_H_

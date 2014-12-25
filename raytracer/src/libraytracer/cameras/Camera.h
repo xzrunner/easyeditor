@@ -36,30 +36,6 @@ protected:
 
 }; // Camera
 
-inline Camera::
-Camera()
-	: m_eye(0, 0, 500)
-	, m_lookat(0, 0, 0)
-	, m_up(0, 1, 0)
-	, m_u(1, 0, 0)
-	, m_v(0, 1, 0)
-	, m_w(0, 0, 1)
-	, m_exposure_time(1)
-{
-}
-
-inline void Camera::
-SetEye(const Point3D& p)
-{
-	m_eye = p;
-}
-
-inline void Camera::
-SetLookat(const Point3D& p)
-{
-	m_lookat = p;
-}
-
 }
 
 #endif // _RT_CAMERA_H_

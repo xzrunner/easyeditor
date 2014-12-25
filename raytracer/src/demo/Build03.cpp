@@ -1,5 +1,4 @@
-#include "World.h"
-
+#include "world/World.h"
 #include "lights/Ambient.h"
 #include "lights/Directional.h"
 #include "lights/PointLight.h"

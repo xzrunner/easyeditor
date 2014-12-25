@@ -1,4 +1,9 @@
 #include "Directional.h"
+#include "objects/GeometricObject.h"
+#include "utilities/ShadeRec.h"
+#include "world/World.h"
+
+#include <vector>
 
 namespace rt
 {
@@ -22,8 +27,15 @@ Vector3D Directional::GetDirection(const ShadeRec& sr) const
 
 bool Directional::InShadow(const Ray& ray, const ShadeRec& sr) const
 {
-	// not implented yet
-	return true;
+	float t;
+	const std::vector<GeometricObject*>& objs = sr.w.GetObjects();
+	for (int i = 0, n = objs.size(); i < n; ++i) {
+		if (objs[i]->ShadowHit(ray, t)) {
+			return true;
+		}
+	}
+
+	return false;
 }
 
 float Directional::G(const ShadeRec& sr) const

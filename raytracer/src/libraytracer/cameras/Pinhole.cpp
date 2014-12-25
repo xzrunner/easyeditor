@@ -50,6 +50,11 @@ void Pinhole::RenderScene(const World& world) const
 	}
 }
 
+void Pinhole::SetViewDistance(const float vpd)
+{
+	m_d = vpd;
+}
+
 Vector3D Pinhole::GetDirection(const Point2D& p) const
 {
 	Vector3D dir = p.x * m_u + p.y * m_v - m_d * m_w;
