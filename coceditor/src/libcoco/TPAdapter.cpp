@@ -37,6 +37,8 @@ void TPAdapter::Load(const Json::Value& value, Entry& entry)
 {
 	entry.filename = value["filename"].asString();
 	StringTools::toLower(entry.filename);
+	d2d::FilenameTools::formatSeparators(entry.filename);
+
 	Load(value["frame"], entry.frame);
 	entry.rotated = value["rotated"].asBool();
 	entry.trimmed = value["trimmed"].asBool();
