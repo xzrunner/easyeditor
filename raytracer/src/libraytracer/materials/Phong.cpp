@@ -77,9 +77,17 @@ RGBColor Phong::Shade(const ShadeRec& sr) const
 				in_shadow = lights[i]->InShadow(shadowRay, sr);
 			}
 
-			if (!in_shadow)
+			if (!in_shadow) {
+
+				RGBColor z2 = m_diffuse_brdf->f(sr, wo, wi);
+				RGBColor z3 = m_specular_brdf->f(sr, wo, wi);
+
+				RGBColor z0 = m_diffuse_brdf->f(sr, wo, wi) + m_specular_brdf->f(sr, wo, wi);
+				RGBColor z1 = lights[i]->L(sr);
+
 				L += (m_diffuse_brdf->f(sr, wo, wi)
-				    + m_specular_brdf->f(sr, wo, wi)) * lights[i]->L(sr) * ndotwi;
+					+ m_specular_brdf->f(sr, wo, wi)) * lights[i]->L(sr) * ndotwi;
+			}
 		}
 	}
 

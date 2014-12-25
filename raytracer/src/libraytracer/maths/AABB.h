@@ -11,6 +11,7 @@ class AABB
 {
 public:
 	AABB();
+	AABB(float x0, float x1, float y0, float y1, float z0, float z1);
 
 	bool Hit(const Ray& ray) const;
 

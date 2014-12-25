@@ -88,7 +88,7 @@ operator * (const float a, const RGBColor& c)
 inline RGBColor 
 operator + (const RGBColor& a, const RGBColor& b) 
 {
-	return RGBColor(a.r * b.r, a.g * b.g, a.b * b.b);
+	return RGBColor(a.r + b.r, a.g + b.g, a.b + b.b);
 }
 
 inline RGBColor ClampToColor(const RGBColor& raw_color)

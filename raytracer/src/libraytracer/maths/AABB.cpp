@@ -13,6 +13,16 @@ AABB::AABB()
 	x1 = y1 = z1 = -FLT_MAX;
 }
 
+AABB::AABB(float x0, float x1, float y0, float y1, float z0, float z1)
+	: x0(x0)
+	, x1(x1)
+	, y0(y0)
+	, y1(y1)
+	, z0(z0)
+	, z1(z1)
+{
+}
+
 bool AABB::Hit(const Ray& ray) const
 {
 	double ox = ray.ori.x; double oy = ray.ori.y; double oz = ray.ori.z;

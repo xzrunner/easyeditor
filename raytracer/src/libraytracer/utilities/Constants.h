@@ -12,7 +12,7 @@ const double 	PI_ON_180 	= 0.0174532925199432957;
 const double 	INV_PI 		= 0.3183098861837906715;
 const double 	INV_TWO_PI 	= 0.1591549430918953358;
 
-const double	EPSILON		= 0.001;
+const double	EPSILON		= 0.0001;
 
 const RGBColor BLACK(0, 0, 0);
 const RGBColor WHITE(1, 1, 1);

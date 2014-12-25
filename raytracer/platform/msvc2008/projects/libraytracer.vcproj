@@ -149,7 +149,7 @@
 			Name="world"
 			>
 			<File
-				RelativePath="..\..\..\src\demo\Build08.21.cpp"
+				RelativePath="..\..\..\src\demo\Build08_19.cpp"
 				>
 			</File>
 			<File
@@ -230,6 +230,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\objects\Sphere.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Triangle.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\objects\Triangle.h"
 				>
 			</File>
 		</Filter>

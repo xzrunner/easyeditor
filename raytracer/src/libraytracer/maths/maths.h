@@ -1,6 +1,8 @@
 #ifndef _RT_MATHS_H_
 #define _RT_MATHS_H_
 
+#include <stdlib.h>
+
 namespace rt
 {
 
