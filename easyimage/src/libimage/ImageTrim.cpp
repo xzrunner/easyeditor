@@ -96,11 +96,16 @@ d2d::Rect ImageTrim::Trim() const
 	if (sub.isValid()) {
 		return sub;
 	} else {
-		const d2d::Rect& r = m_image->getRegion();
 		d2d::Rect ret;
+
+// 		const d2d::Rect& r = m_image->getRegion();
+// 		ret.xMin = ret.yMin = 0;
+// 		ret.xMax = r.xLength();
+// 		ret.yMax = r.yLength();
+
 		ret.xMin = ret.yMin = 0;
-		ret.xMax = r.xLength();
-		ret.yMax = r.yLength();
+		ret.xMax = ret.yMax = 1;
+
 		return ret;
 	}
 }
