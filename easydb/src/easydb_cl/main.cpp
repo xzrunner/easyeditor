@@ -35,6 +35,13 @@ static void Help()
 
 int main(int argc, char *argv[])
 {
+	wxInitializer initializer;
+	if ( !initializer )
+	{
+		fprintf(stderr, "Failed to initialize the wxWidgets library, aborting.");
+		return -1;
+	}
+
 	edb::CommandLoader::Init();
 
 	if (argc < 2) {
