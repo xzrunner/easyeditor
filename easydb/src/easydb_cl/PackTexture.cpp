@@ -3,6 +3,7 @@
 
 #include <drag2d.h>
 #include <easypacker.h>
+#include <epbin.h>
 
 namespace edb
 {
@@ -44,6 +45,8 @@ void PackTexture::Trigger(const std::string& config_path)
 
 	wxString config_dir = d2d::FilenameTools::getFileDir(config_path);
 
+	wxString cocpackage_path = value["cocpackage.exe"].asString();
+
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
@@ -55,11 +58,28 @@ void PackTexture::Trigger(const std::string& config_path)
 
 		GetSrcTexFile(pkg_val, config_dir, src_folder, filepaths);
 
-		libpacker::NormalPack packer(filepaths);
-		packer.Pack();
-		packer.OutputInfo(config_dir + "\\" + src_folder,
-			config_dir + "\\" + dst_folder + "\\" + name + "_pack.json");
-		packer.OutputImage(config_dir + "\\" + dst_folder + "\\" + name + "_pack.png");
+ 		// pack texture
+ 		libpacker::NormalPack packer(filepaths);
+ 		packer.Pack();
+ 		std::string json_path = config_dir + "\\" + dst_folder + "\\" + name + "1.json";
+ 		std::string src_folder_path = config_dir + "\\" + src_folder;
+ 		packer.OutputInfo(src_folder_path, json_path);
+ 		std::string img_path = config_dir + "\\" + dst_folder + "\\" + name + "1.png";
+ 		packer.OutputImage(img_path);
+
+		// pack to lua file
+		wxString json_name = config_dir + "\\" + dst_folder + "\\" + name;
+		wxString lua_file = config_dir + "\\" + dst_folder + "\\" + name + ".lua";
+		wxString cmd;
+		cmd.Printf("%s %s %s %s", cocpackage_path, src_folder_path, json_name, lua_file);
+ 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
+
+// 		// pack epd and epp
+// 		std::string epd_path = config_dir + "\\" + dst_folder + "\\" + name + ".epd";
+// 		epbin::BinaryEPD epd(json_path, epd_path);
+// 		epd.Pack(true);
+// 		std::string epp_path = config_dir + "\\" + dst_folder + "\\" + name + ".epp";
+// 		epbin::BinaryEPP epp(src_folder_path, name, epbin::TT_PNG8, epp_path);
 
 		pkg_val = value["packages"][i++];
 	}
