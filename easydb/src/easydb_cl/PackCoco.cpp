@@ -51,8 +51,8 @@ void PackCoco::Trigger(const std::string& config_path)
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
-//		PackTexture(pkg_val, config_dir);
-//		PackLuaFile(pkg_val, config_dir);
+		PackTexture(pkg_val, config_dir);
+		PackLuaFile(pkg_val, config_dir);
 		PackEp(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
