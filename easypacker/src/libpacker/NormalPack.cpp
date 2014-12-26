@@ -1,5 +1,6 @@
 #include "NormalPack.h"
 #include "MaxRectsBinaryPack2.h"
+#include "ImageTrimData.h"
 
 #include <easyimage.h>
 
@@ -25,7 +26,8 @@ void NormalPack::Pack()
 	m_size = packer.GetSize();
 }
 
-void NormalPack::OutputInfo(const wxString& src_folder, const wxString& dst_file) const
+void NormalPack::OutputInfo(const wxString& src_folder, const ImageTrimData& trim,
+							const wxString& dst_file) const
 {
 	assert(m_files.size() == m_src_sizes.size() && m_files.size() == m_output.size());
 
@@ -35,11 +37,13 @@ void NormalPack::OutputInfo(const wxString& src_folder, const wxString& dst_file
 		Json::Value frame_val;
 
 		wxString filename = d2d::FilenameTools::getRelativePath(src_folder, m_files[i]);
-		frame_val["filename"] = filename.ToStdString();
 
-		if (filename.Contains("shadow")) {
-			int zz = 0;
+		const ImageTrimData::Trim* t = trim.Query(filename.ToStdString());
+		if (!t) {
+			throw d2d::Exception("NormalPack::OutputInfo didn't find trim info: %s\n", filename);
 		}
+
+		frame_val["filename"] = filename.ToStdString();
 
 		const RectSize& src_sz = m_src_sizes[i];
 
@@ -58,13 +62,13 @@ void NormalPack::OutputInfo(const wxString& src_folder, const wxString& dst_file
 		}
 
 		frame_val["trimmed"] = false;
-		frame_val["spriteSourceSize"]["x"] = 0;
-		frame_val["spriteSourceSize"]["y"] = 0;
-		frame_val["spriteSourceSize"]["w"] = src_sz.width;
-		frame_val["spriteSourceSize"]["h"] = src_sz.height;
+		frame_val["spriteSourceSize"]["x"] = t->x;
+		frame_val["spriteSourceSize"]["y"] = t->y;
+		frame_val["spriteSourceSize"]["w"] = t->w;
+		frame_val["spriteSourceSize"]["h"] = t->h;
 
-		frame_val["sourceSize"]["w"] = src_sz.width;
-		frame_val["sourceSize"]["h"] = src_sz.height;
+		frame_val["sourceSize"]["w"] = t->ori_w;
+		frame_val["sourceSize"]["h"] = t->ori_h;
 
 		value["frames"][i] = frame_val;
 	}

@@ -46,12 +46,13 @@ void PackCoco::Trigger(const std::string& config_path)
 
 	wxString config_dir = d2d::FilenameTools::getFileDir(config_path);
 
-	wxString cocpackage_path = value["cocpackage.exe"].asString();
+	std::string trim_file = config_dir + "\\" + value["trim file"].asString();
+	libpacker::ImageTrimData trim(trim_file);
 
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
-		PackTexture(pkg_val, config_dir);
+		PackTexture(pkg_val, config_dir, trim);
 		PackLuaFile(pkg_val, config_dir);
 		PackEp(pkg_val, config_dir);
 
@@ -59,12 +60,14 @@ void PackCoco::Trigger(const std::string& config_path)
 	}
 }
 
-void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_dir) const
+void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_dir,
+						   const libpacker::ImageTrimData& trim) const
 {
 	std::string name = pkg_val["name"].asString();
 	std::string src_folder = pkg_val["src folder"].asString();
 	std::string dst_folder = pkg_val["dst folder"].asString();
 	std::string dst_name = config_dir + "\\" + dst_folder + "\\" + name;
+	std::string trim_path = config_dir + "\\" + pkg_val["trim file"].asString();
 
 	std::vector<wxString> images;
 	GetAllImageFiles(pkg_val, config_dir, src_folder, images);
@@ -73,7 +76,7 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	tex_packer.Pack();
 	std::string json_path = dst_name + "1.json";
 	std::string src_folder_path = config_dir + "\\" + src_folder;
-	tex_packer.OutputInfo(src_folder_path, json_path);
+	tex_packer.OutputInfo(src_folder_path, trim, json_path);
 	std::string img_path = dst_name + "1.png";
 	tex_packer.OutputImage(img_path);
 }

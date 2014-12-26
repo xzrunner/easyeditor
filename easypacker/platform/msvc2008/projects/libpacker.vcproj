@@ -184,6 +184,14 @@
 				Name="normal"
 				>
 				<File
+					RelativePath="..\..\..\src\libpacker\ImageTrimData.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpacker\ImageTrimData.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libpacker\NormalPack.cpp"
 					>
 				</File>

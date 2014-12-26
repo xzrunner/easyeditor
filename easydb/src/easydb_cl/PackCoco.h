@@ -6,6 +6,8 @@
 #include <JSON/json.h>
 #include <wx/string.h>
 
+namespace libpacker { class ImageTrimData; }
+
 namespace edb
 {
 
@@ -28,7 +30,8 @@ private:
 	void Trigger(const std::string& config_path);
 
 private:
-	void PackTexture(const Json::Value& pkg_val, const wxString& config_dir) const;
+	void PackTexture(const Json::Value& pkg_val, const wxString& config_dir,
+		const libpacker::ImageTrimData& trim) const;
 	void GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
 		const wxString& src_folder, std::vector<wxString>& images) const;
 

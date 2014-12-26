@@ -2,12 +2,15 @@
 #define _LIBPACKER_NORMAL_PACK_H_
 
 #include <vector>
+#include <map>
 #include <wx/string.h>
 
 #include "Rect.h"
 
 namespace libpacker
 {
+
+class ImageTrimData;
 
 class NormalPack
 {
@@ -16,7 +19,8 @@ public:
 
 	void Pack();
 
-	void OutputInfo(const wxString& src_folder, const wxString& dst_file) const;
+	void OutputInfo(const wxString& src_folder, const ImageTrimData& trim,
+		const wxString& dst_file) const;
 	void OutputImage(const wxString& filepath) const;
 
 private:

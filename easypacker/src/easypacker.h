@@ -3,6 +3,7 @@
 
 #include "libpacker/RegularRectPack.h"
 #include "libpacker/NormalPack.h"
+#include "libpacker/ImageTrimData.h"
 #include "libpacker/GenRegularRectImage.h"
 #include "libpacker/GenRegularRectBinary.h"
 #include "libpacker/MaxRectsBinaryPack.h"
