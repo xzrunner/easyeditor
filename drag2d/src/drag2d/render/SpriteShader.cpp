@@ -389,10 +389,6 @@ void SpriteShader::CopyVertex(const float vb[16])
 		ptr += 1;
 		memcpy(ptr, &m_additive, sizeof(int));
 		ptr += 1;
-		//m_r_trans = 0xff0000ff;
-		if (m_r_trans != 0xff0000ff) {
-			int zz = 0;
-		}
 		memcpy(ptr, &m_r_trans, sizeof(int));
 		ptr += 1;
 		memcpy(ptr, &m_g_trans, sizeof(int));
