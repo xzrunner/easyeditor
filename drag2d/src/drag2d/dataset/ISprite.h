@@ -79,6 +79,7 @@ namespace d2d
 		// info
 		std::string name;		
 		Colorf multiCol, addCol;
+		Colorf r_trans, g_trans, b_trans;
 		std::string tag;
 		bool clip;
 

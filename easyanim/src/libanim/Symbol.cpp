@@ -36,20 +36,23 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
+				  const d2d::Colorf& r_trans,
+				  const d2d::Colorf& g_trans,
+				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	if (m_index != 0) {
-		Tools::drawAnimSymbol(this, mt, m_index, mul, add);
+		Tools::drawAnimSymbol(this, mt, m_index, mul, add, r_trans, g_trans, b_trans);
 	} else {
 		static clock_t init = 0;
 		if (init == 0) {
 			init = clock();
-			Tools::drawAnimSymbol(this, mt, 1, mul, add);
+			Tools::drawAnimSymbol(this, mt, 1, mul, add, r_trans, g_trans, b_trans);
 		} else {
 			clock_t curr = clock();
 			float during = (float)(curr - init) / CLOCKS_PER_SEC;
 			int index = during / (1.0f / m_fps);
-			Tools::drawAnimSymbol(this, mt, index % getMaxFrameIndex() + 1, mul, add);
+			Tools::drawAnimSymbol(this, mt, index % getMaxFrameIndex() + 1, mul, add, r_trans, g_trans, b_trans);
 		}
 	}
 

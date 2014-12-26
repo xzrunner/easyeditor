@@ -68,13 +68,27 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	{
 		wxColour col = wxANY_AS(value, wxColour);
 		m_sprite->addCol.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
-
 	}
 	else if (name == "Color.Alpha")
 	{
 		int alpha = wxANY_AS(value, int);
 		alpha = std::max(0, std::min(255, alpha));
 		m_sprite->multiCol.a = alpha / 255.0f;
+	}
+	else if (name == "Color.R")
+	{
+		wxColour col = wxANY_AS(value, wxColour);
+		m_sprite->r_trans.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+	}
+	else if (name == "Color.G")
+	{
+		wxColour col = wxANY_AS(value, wxColour);
+		m_sprite->g_trans.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
+	}
+	else if (name == "Color.B")
+	{
+		wxColour col = wxANY_AS(value, wxColour);
+		m_sprite->b_trans.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -170,6 +184,9 @@ void SpritePropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool
 	pg->GetProperty(wxT("Color.Multi"))->Enable(bEnable);
 	pg->GetProperty(wxT("Color.Add"))->Enable(bEnable);
 	pg->GetProperty(wxT("Color.Alpha"))->Enable(bEnable);
+	pg->GetProperty(wxT("Color.R"))->Enable(bEnable);
+	pg->GetProperty(wxT("Color.G"))->Enable(bEnable);
+	pg->GetProperty(wxT("Color.B"))->Enable(bEnable);
 	pg->GetProperty(wxT("Clip"))->Enable(bEnable);
 	pg->GetProperty(wxT("Pos"))->Enable(bEnable);
 	pg->GetProperty(wxT("Pos.X"))->Enable(bEnable);
@@ -205,6 +222,14 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->SetPropertyValueString(wxT("Color.Multi"), mul_col.GetAsString());
 	pg->SetPropertyValueString(wxT("Color.Add"), add_col.GetAsString());
 	pg->GetProperty(wxT("Color.Alpha"))->SetValue((int)(m_sprite->multiCol.a*255));
+
+	wxColour r_trans = wxColour(m_sprite->r_trans.r*255, m_sprite->r_trans.g*255, m_sprite->r_trans.b*255, m_sprite->r_trans.a*255);
+	wxColour g_trans = wxColour(m_sprite->g_trans.r*255, m_sprite->g_trans.g*255, m_sprite->g_trans.b*255, m_sprite->g_trans.a*255);
+	wxColour b_trans = wxColour(m_sprite->b_trans.r*255, m_sprite->b_trans.g*255, m_sprite->b_trans.b*255, m_sprite->b_trans.a*255);
+	pg->SetPropertyValueString(wxT("Color.R"), r_trans.GetAsString());
+	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
+	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
+
 	pg->GetProperty(wxT("Clip"))->SetValue(m_sprite->clip);
 
 	pg->GetProperty(wxT("Pos.X"))->SetValue(m_sprite->getPosition().x);
@@ -253,6 +278,13 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->AppendIn(colProp, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, m_sprite->multiCol.a*255));
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Min", 0);
 	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Max", 255);
+
+	wxColour r_trans = wxColour(m_sprite->r_trans.r*255, m_sprite->r_trans.g*255, m_sprite->r_trans.b*255, m_sprite->r_trans.a*255);
+	wxColour g_trans = wxColour(m_sprite->g_trans.r*255, m_sprite->g_trans.g*255, m_sprite->g_trans.b*255, m_sprite->g_trans.a*255);
+	wxColour b_trans = wxColour(m_sprite->b_trans.r*255, m_sprite->b_trans.g*255, m_sprite->b_trans.b*255, m_sprite->b_trans.a*255);
+	pg->AppendIn(colProp, new wxColourProperty(wxT("R"), wxPG_LABEL, r_trans));
+	pg->AppendIn(colProp, new wxColourProperty(wxT("G"), wxPG_LABEL, g_trans));
+	pg->AppendIn(colProp, new wxColourProperty(wxT("B"), wxPG_LABEL, b_trans));
 
 	pg->Append(new wxPropertyCategory("GEOMETRY", wxPG_LABEL));
 

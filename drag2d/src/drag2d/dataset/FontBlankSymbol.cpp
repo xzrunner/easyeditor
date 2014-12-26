@@ -51,6 +51,9 @@ void FontBlankSymbol::reloadTexture() const
 void FontBlankSymbol::draw(const Matrix& mt,
 						   const Colorf& mul, 
 						   const Colorf& add,
+						   const Colorf& r_trans,
+						   const Colorf& g_trans,
+						   const Colorf& b_trans,
 						   const ISprite* sprite/* = NULL*/) const
 {
 	const SettingData& setting = Config::Instance()->GetSettings();

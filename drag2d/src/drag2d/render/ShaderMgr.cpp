@@ -48,6 +48,12 @@ void ShaderMgr::SetSpriteColor(const Colorf& multi, const Colorf& add)
 	shader->SetColor(multi, add);
 }
 
+void ShaderMgr::SetSpriteColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans)
+{
+	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
+	shader->SetColorTrans(r_trans, g_trans, b_trans);
+}
+
 void ShaderMgr::SetShapeColor(const Colorf& col)
 {
 	 m_shape_shader->SetColor(col);

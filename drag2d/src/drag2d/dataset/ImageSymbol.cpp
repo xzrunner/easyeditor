@@ -44,10 +44,14 @@ void ImageSymbol::reloadTexture() const
 void ImageSymbol::draw(const Matrix& mt,
 					   const Colorf& mul, 
 					   const Colorf& add,
+					   const Colorf& r_trans,
+					   const Colorf& g_trans,
+					   const Colorf& b_trans,
 					   const ISprite* sprite/* = NULL*/) const
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetSpriteColor(mul, add);
+	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
 	m_image->draw(mt, m_region);
 
 	SpriteTools::DrawName(sprite, mt);

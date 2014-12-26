@@ -16,9 +16,14 @@ static const int ATTRIB_VERTEX    = 0;
 static const int ATTRIB_TEXTCOORD = 1;
 static const int ATTRIB_COLOR     = 2;
 static const int ATTRIB_ADDITIVE  = 3;
+static const int ATTRIB_R_TRANS   = 4;
+static const int ATTRIB_G_TRANS   = 5;
+static const int ATTRIB_B_TRANS   = 6;
 
-int SpriteShader::MAX_COMMBINE = 20000;
-//int SpriteShader::MAX_COMMBINE = 4096;
+static const int VERTEX_SIZE = 4 * 4 + 4 * 2 + 4 * 3;
+
+static const int MAX_COMMBINE = 20000;
+//static const int MAX_COMMBINE = 4096;
 
 SpriteShader::SpriteShader()
 {
@@ -27,6 +32,9 @@ SpriteShader::SpriteShader()
 	m_vb = NULL;
 	m_color = 0xffffffff;
 	m_additive = 0;
+	m_r_trans = 0xff0000ff;
+	m_g_trans = 0xff00ff00;
+	m_b_trans = 0xffff0000;
 	m_tex = m_fbo = 0;
 	m_open_buffer_data = true;
 	m_is_mat_dirty = false;
@@ -46,7 +54,7 @@ void SpriteShader::Load()
 
 	InitBuffers();
 
-	m_vb = new float[SPRITE_FLOAT_NUM * MAX_COMMBINE];
+	m_vb = new float[VERTEX_SIZE * MAX_COMMBINE];
 }
 
 void SpriteShader::Unload()
@@ -72,16 +80,25 @@ void SpriteShader::Bind()
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertex_buffer);
 
 	glEnableVertexAttribArray(ATTRIB_VERTEX);
-	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
+	glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(0));
 
 	glEnableVertexAttribArray(ATTRIB_TEXTCOORD);
-	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(8));
+	glVertexAttribPointer(ATTRIB_TEXTCOORD, 2, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(8));
 
 	glEnableVertexAttribArray(ATTRIB_COLOR);
-	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(16));
+	glVertexAttribPointer(ATTRIB_COLOR, 4, GL_UNSIGNED_BYTE, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(16));
 
 	glEnableVertexAttribArray(ATTRIB_ADDITIVE);
-	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(20));  
+	glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(20));  
+
+	glEnableVertexAttribArray(ATTRIB_R_TRANS);
+	glVertexAttribPointer(ATTRIB_R_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(24));  
+
+	glEnableVertexAttribArray(ATTRIB_G_TRANS);
+	glVertexAttribPointer(ATTRIB_G_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(28));  
+
+	glEnableVertexAttribArray(ATTRIB_B_TRANS);
+	glVertexAttribPointer(ATTRIB_B_TRANS, 4, GL_UNSIGNED_BYTE, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(32));  
 }
 
 void SpriteShader::Unbind()
@@ -92,6 +109,9 @@ void SpriteShader::Unbind()
 	glDisableVertexAttribArray(ATTRIB_TEXTCOORD);
 	glDisableVertexAttribArray(ATTRIB_COLOR);
 	glDisableVertexAttribArray(ATTRIB_ADDITIVE);
+	glDisableVertexAttribArray(ATTRIB_R_TRANS);
+	glDisableVertexAttribArray(ATTRIB_G_TRANS);
+	glDisableVertexAttribArray(ATTRIB_B_TRANS);
 }
 
 void SpriteShader::SetModelView(const Vector& offset, float scale)
@@ -128,7 +148,7 @@ void SpriteShader::Commit()
 	static int last_count = 0;
 	if (m_open_buffer_data) {
 		last_count = m_count;
-		glBufferData(GL_ARRAY_BUFFER, m_count * SPRITE_FLOAT_NUM * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, m_count * VERTEX_SIZE * sizeof(float), &m_vb[0], GL_DYNAMIC_DRAW);
 	}
 
 	if (!m_open_buffer_data) {
@@ -191,14 +211,38 @@ bool SpriteShader::IsOpenBufferData() const
 
 void SpriteShader::SetColor(const Colorf& multi, const Colorf& add)
 {
-	m_color = ((int)(multi.a * 255 + 0.5f) << 24) | 
+	m_color = 
+		((int)(multi.a * 255 + 0.5f) << 24) | 
 		((int)(multi.b * 255 + 0.5f) << 16) | 
 		((int)(multi.g * 255 + 0.5f) << 8) | 
 		((int)(multi.r * 255 + 0.5f));
-	m_additive = ((int)(add.a * 255 + 0.5f) << 24) | 
+
+	m_additive = 
+		((int)(add.a * 255 + 0.5f) << 24) | 
 		((int)(add.b * 255 + 0.5f) << 16) | 
 		((int)(add.g * 255 + 0.5f) << 8) | 
 		((int)(add.r * 255 + 0.5f));
+}
+
+void SpriteShader::SetColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans)
+{
+	m_r_trans = 
+		((int)(r_trans.a * 255 + 0.5f) << 24) | 
+		((int)(r_trans.b * 255 + 0.5f) << 16) | 
+		((int)(r_trans.g * 255 + 0.5f) << 8) | 
+		((int)(r_trans.r * 255 + 0.5f));
+
+	m_g_trans = 
+		((int)(g_trans.a * 255 + 0.5f) << 24) | 
+		((int)(g_trans.b * 255 + 0.5f) << 16) | 
+		((int)(g_trans.g * 255 + 0.5f) << 8) | 
+		((int)(g_trans.r * 255 + 0.5f));
+
+	m_b_trans = 
+		((int)(b_trans.a * 255 + 0.5f) << 24) | 
+		((int)(b_trans.b * 255 + 0.5f) << 16) | 
+		((int)(b_trans.g * 255 + 0.5f) << 8) | 
+		((int)(b_trans.r * 255 + 0.5f));
 }
 
 void SpriteShader::Draw(const float vb[16], int texid)
@@ -237,6 +281,9 @@ void SpriteShader::BindAttrib(GLuint prog)
   	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
   	glBindAttribLocation(prog, ATTRIB_COLOR, "color");
   	glBindAttribLocation(prog, ATTRIB_ADDITIVE, "additive");
+	glBindAttribLocation(prog, ATTRIB_R_TRANS, "r_trans");
+	glBindAttribLocation(prog, ATTRIB_G_TRANS, "g_trans");
+	glBindAttribLocation(prog, ATTRIB_B_TRANS, "b_trans");
 }
 
 void SpriteShader::LoadShader()
@@ -247,10 +294,16 @@ void SpriteShader::LoadShader()
 		"attribute vec2 texcoord;  \n"
 		"attribute vec4 color;     \n"
 		"attribute vec4 additive;  \n"
+		"attribute vec4 r_trans;  \n"
+		"attribute vec4 g_trans;  \n"
+		"attribute vec4 b_trans;  \n"
 		"\n"
 		"varying vec2 v_texcoord;  \n"
 		"varying vec4 v_fragmentColor;  \n"
 		"varying vec4 v_fragmentAddi; \n"
+		"varying vec4 v_r_trans; \n"
+		"varying vec4 v_g_trans; \n"
+		"varying vec4 v_b_trans; \n"
 		"\n"
 		"uniform mat4 u_projection; \n"
 		"uniform mat4 u_modelview; \n"
@@ -260,6 +313,9 @@ void SpriteShader::LoadShader()
 		"  gl_Position = u_projection * u_modelview * position; "
 		"  v_fragmentColor = color / 255.0; \n"
 		"  v_fragmentAddi = additive / 255.0; \n"
+		"  v_r_trans = r_trans / 255.0; \n"
+		"  v_g_trans = g_trans / 255.0; \n"
+		"  v_b_trans = b_trans / 255.0; \n"
 		"  v_texcoord = texcoord;  \n"
 		"}  \n"
 		;
@@ -268,12 +324,21 @@ void SpriteShader::LoadShader()
 		FLOAT_PRECISION
 		"varying vec4 v_fragmentColor; \n"
 		"varying vec4 v_fragmentAddi; \n"
+		"varying vec4 v_r_trans; \n"
+		"varying vec4 v_g_trans; \n"
+		"varying vec4 v_b_trans; \n"
 		"varying vec2 v_texcoord;  \n"
 		"uniform sampler2D texture0;  \n"
 		"\n"
 		"void main()  \n"
 		"{  \n"  
 		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
+
+ 		"  vec3 r = tmp.r * v_r_trans; \n"
+ 		"  vec3 g = tmp.g * v_g_trans; \n"
+ 		"  vec3 b = tmp.b * v_b_trans; \n"
+		"  tmp.xyz = r + g + b; \n"
+
 		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
 		"  gl_FragColor.w = tmp.w;    \n"
 		"  gl_FragColor *= v_fragmentColor.w;  \n"
@@ -315,30 +380,26 @@ void SpriteShader::InitBuffers()
 
 void SpriteShader::CopyVertex(const float vb[16])
 {
-	float* ptr = m_vb + SPRITE_FLOAT_NUM * m_count;
-	memcpy(ptr, vb, 4 * sizeof(float));
-	ptr += 4;
-	memcpy(ptr, &m_color, sizeof(int));
-	ptr += 1;
-	memcpy(ptr, &m_additive, sizeof(int));
-	ptr += 1;  
-	memcpy(ptr, &vb[4], 4 * sizeof(float));
-	ptr += 4;
-	memcpy(ptr, &m_color, sizeof(int));
-	ptr += 1;
-	memcpy(ptr, &m_additive, sizeof(int));
-	ptr += 1;    
-	memcpy(ptr, &vb[8], 4 * sizeof(float));
-	ptr += 4;
-	memcpy(ptr, &m_color, sizeof(int));
-	ptr += 1;
-	memcpy(ptr, &m_additive, sizeof(int));
-	ptr += 1;    
-	memcpy(ptr, &vb[12], 4 * sizeof(float));
-	ptr += 4;
-	memcpy(ptr, &m_color, sizeof(int));
-	ptr += 1; 
-	memcpy(ptr, &m_additive, sizeof(int));		
+	float* ptr = m_vb + VERTEX_SIZE * m_count;
+	for (int i = 0; i < 4; ++i)
+	{
+		memcpy(ptr, &vb[i*4], 4 * sizeof(float));
+		ptr += 4;
+		memcpy(ptr, &m_color, sizeof(int));
+		ptr += 1;
+		memcpy(ptr, &m_additive, sizeof(int));
+		ptr += 1;
+		//m_r_trans = 0xff0000ff;
+		if (m_r_trans != 0xff0000ff) {
+			int zz = 0;
+		}
+		memcpy(ptr, &m_r_trans, sizeof(int));
+		ptr += 1;
+		memcpy(ptr, &m_g_trans, sizeof(int));
+		ptr += 1;
+		memcpy(ptr, &m_b_trans, sizeof(int));
+		ptr += 1;
+	}	
 }
 
 }

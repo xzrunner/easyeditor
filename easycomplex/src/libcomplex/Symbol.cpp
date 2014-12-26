@@ -39,6 +39,9 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
+				  const d2d::Colorf& r_trans,
+				  const d2d::Colorf& g_trans,
+				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
  	const d2d::TPNode* n = NULL;
@@ -103,7 +106,7 @@ void Symbol::draw(const d2d::Matrix& mt,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			d2d::SpriteDraw::drawSprite(m_sprites[i], mt, mul, add);
+			d2d::SpriteDraw::drawSprite(m_sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
 
 		d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
 

@@ -60,13 +60,17 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
+				  const d2d::Colorf& r_trans,
+				  const d2d::Colorf& g_trans,
+				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite) const
 {
  	if (m_shape) {
  		d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
  		shader->sprite();
 		shader->SetSpriteColor(mul, add);
- 
+		shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
+
  		m_shape->DrawTexture(mt);
   		if (!m_pause && sprite) 
 		{

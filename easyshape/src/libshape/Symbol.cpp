@@ -48,10 +48,13 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
+				  const d2d::Colorf& r_trans,
+				  const d2d::Colorf& g_trans,
+				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	if (m_bg) {
-		m_bg->draw(mt, mul, add, sprite);
+		m_bg->draw(mt, mul, add, r_trans, g_trans, b_trans, sprite);
 	}
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		m_bg_outline[i]->draw();

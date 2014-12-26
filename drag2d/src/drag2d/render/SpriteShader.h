@@ -40,6 +40,7 @@ public:
 	bool IsOpenBufferData() const;
 
 	void SetColor(const Colorf& multi, const Colorf& add);
+	void SetColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans);
 
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
@@ -55,10 +56,6 @@ private:
 	void CopyVertex(const float vb[16]);
 
 private:
-	static int MAX_COMMBINE;
-	static const int SPRITE_FLOAT_NUM = 24;
-
-private:
 	GLuint m_model_view, m_projection;
 
 	GLuint m_vertex_buffer;
@@ -68,6 +65,7 @@ private:
 	float* m_vb;
 
 	uint32_t m_color, m_additive;
+	uint32_t m_r_trans, m_g_trans, m_b_trans;
 
 	GLuint m_tex;
 	GLuint m_fbo;

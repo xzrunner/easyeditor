@@ -41,6 +41,9 @@ void Symbol::reloadTexture() const
 void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
+				  const d2d::Colorf& r_trans,
+				  const d2d::Colorf& g_trans,
+				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	const Sprite* scale9 = dynamic_cast<const Sprite*>(sprite);
@@ -55,7 +58,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mt, mul, add);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
 			}
 		break;
 	case e_9GridHollow:
@@ -64,21 +67,21 @@ void Symbol::draw(const d2d::Matrix& mt,
 			{
 				if (i == 1 && j == 1) continue;
 				if (!m_sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mt, mul, add);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
 			}
 			break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[1][i]) continue;
-			d2d::SpriteDraw::drawSprite(m_sprites[1][i], mt, mul, add);
+			d2d::SpriteDraw::drawSprite(m_sprites[1][i], mt, mul, add, r_trans, g_trans, b_trans);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i)
 		{
 			if (!m_sprites[i][1]) continue;
-			d2d::SpriteDraw::drawSprite(m_sprites[i][1], mt, mul, add);
+			d2d::SpriteDraw::drawSprite(m_sprites[i][1], mt, mul, add, r_trans, g_trans, b_trans);
 		}
 		break;
 	case e_6GridUpper:
@@ -86,7 +89,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 			for (size_t j = 0; j < 3; ++j)
 			{
 				if (!m_sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mt, mul, add);
+				d2d::SpriteDraw::drawSprite(m_sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
 			}
 	}
 

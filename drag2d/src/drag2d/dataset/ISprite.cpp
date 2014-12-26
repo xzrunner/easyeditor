@@ -16,6 +16,10 @@ ISprite::ISprite()
 {
 	multiCol.set(1, 1, 1, 1);
 	addCol.set(0, 0, 0, 0);
+	r_trans.set(1, 0, 0, 1);
+	g_trans.set(0, 1, 0, 1);
+	b_trans.set(0, 0, 1, 1);
+
 	clip = false;
 
 	visiable = editable = true;
@@ -34,6 +38,9 @@ ISprite::ISprite(const ISprite& sprite)
 	multiCol = sprite.multiCol;
 	addCol = sprite.addCol;
 	clip = sprite.clip;
+	r_trans = sprite.r_trans;
+	g_trans = sprite.g_trans;
+	b_trans = sprite.b_trans;
 
 	visiable = sprite.visiable;
 	editable = sprite.editable;
@@ -83,6 +90,22 @@ void ISprite::load(const Json::Value& val)
 		addCol = Colorf(0, 0, 0, 0);
 	else
 		addCol = transColor(str, PT_ABGR);
+
+	str = val["r trans"].asString();
+	if (str.empty())
+		r_trans = Colorf(1, 0, 0, 1);
+	else
+		r_trans = transColor(str, PT_RGBA);
+	str = val["g trans"].asString();
+	if (str.empty())
+		g_trans = Colorf(0, 1, 0, 1);
+	else
+		g_trans = transColor(str, PT_RGBA);
+	str = val["b trans"].asString();
+	if (str.empty())
+		b_trans = Colorf(0, 0, 1, 1);
+	else
+		b_trans = transColor(str, PT_RGBA);
 
 	// scale
 	float sx, sy;
@@ -144,6 +167,9 @@ void ISprite::store(Json::Value& val) const
 
 	val["multi color"] = transColor(multiCol, PT_BGRA);
 	val["add color"] = transColor(addCol, PT_ABGR);
+	val["r trans"] = transColor(r_trans, PT_RGBA);
+	val["g trans"] = transColor(g_trans, PT_RGBA);
+	val["b trans"] = transColor(b_trans, PT_RGBA);
 
 	val["position"]["x"] = m_pos.x;
 	val["position"]["y"] = m_pos.y;

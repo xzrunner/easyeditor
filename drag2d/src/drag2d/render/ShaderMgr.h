@@ -22,6 +22,7 @@ public:
 	static ShaderMgr* Instance();
 
 	void SetSpriteColor(const Colorf& multi, const Colorf& add);
+	void SetSpriteColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans);
 	void SetShapeColor(const Colorf& col);
 
 	void sprite();

@@ -37,6 +37,9 @@ void FontSymbol::reloadTexture() const
 void FontSymbol::draw(const Matrix& mt,
 					  const Colorf& mul, 
 					  const Colorf& add,
+					  const Colorf& r_trans,
+					  const Colorf& g_trans,
+					  const Colorf& b_trans,
 					  const ISprite* sprite/* = NULL*/) const
 {
 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));
