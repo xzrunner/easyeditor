@@ -7,6 +7,8 @@
 namespace edb
 {
 
+static const char* OUTPUT_FILE = "trim";
+
 std::string TrimImage::Command() const
 {
 	return "trim-image";
@@ -34,6 +36,9 @@ void TrimImage::Run(int argc, char *argv[])
 
 void TrimImage::Trigger(const std::string& dir)
 {
+	Json::Value value;
+	int idx = 0;
+
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);
 	for (int i = 0, n = files.size(); i < n; ++i)
@@ -50,6 +55,17 @@ void TrimImage::Trigger(const std::string& dir)
 			eimage::ImageTrim trim(img);
 			d2d::Rect r = trim.Trim();
 
+			// save info
+			Json::Value spr_val;
+			spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
+			spr_val["source size"]["w"] = img->originWidth();
+			spr_val["source size"]["h"] = img->originHeight();
+			spr_val["position"]["x"] = r.xMin;
+			spr_val["position"]["y"] = img->originHeight() - r.yMax;
+			spr_val["position"]["w"] = r.xLength();
+			spr_val["position"]["h"] = r.yLength();
+			value[idx++] = spr_val;
+
 			eimage::ImageClip clip(img);
 			const byte* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
 			d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), 
@@ -59,6 +75,14 @@ void TrimImage::Trigger(const std::string& dir)
 			img->Release();
 		}
 	}
+
+	wxString output_file = dir + "\\" + OUTPUT_FILE + ".json";
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(output_file.mb_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 }
 
 }
