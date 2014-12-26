@@ -5,6 +5,7 @@
 #include "common/TodoConfig.h"
 
 #include <fstream>
+#include <wx/stdpaths.h>
 
 namespace d2d
 {
@@ -25,8 +26,12 @@ Config* Config::Instance()
 	if (!m_instance)
 	{
 		m_instance = new Config();
-		if (FilenameTools::isExist(FILENAME)) {
-			m_instance->LoadFromFile(FILENAME);
+
+		wxStandardPathsBase& stdp = wxStandardPaths::Get();
+		wxString exe_path = stdp.GetExecutablePath();
+		wxString cfg_path = FilenameTools::getFileDir(exe_path) + "\\" + FILENAME;
+		if (FilenameTools::isExist(cfg_path)) {
+			m_instance->LoadFromFile(cfg_path);
 		}
 	}
 	return m_instance;
