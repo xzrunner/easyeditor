@@ -524,8 +524,10 @@ float Math::getAngle(const Vector& center, const Vector& pa, const Vector& pb)
 	float cosVal = (a * a + b * b - c * c) / (2 * a * b);
 	cosVal = std::max(std::min(cosVal, 1.0f), -1.0f);
 
-	float angle = acos(cosVal);
-	return IsTurnRight(pa, center, pb) ? angle : angle + PI;
+	return acos(cosVal);
+
+// 	float angle = acos(cosVal);
+// 	return IsTurnRight(pa, center, pb) ? angle : -angle;
 }
 
 float Math::getAngleInDirection(const Vector& center, const Vector& start, const Vector& end)
