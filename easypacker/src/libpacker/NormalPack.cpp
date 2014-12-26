@@ -37,13 +37,17 @@ void NormalPack::OutputInfo(const wxString& src_folder, const wxString& dst_file
 		wxString filename = d2d::FilenameTools::getRelativePath(src_folder, m_files[i]);
 		frame_val["filename"] = filename.ToStdString();
 
+		if (filename.Contains("shadow")) {
+			int zz = 0;
+		}
+
 		const RectSize& src_sz = m_src_sizes[i];
 
 		const Rect& pos = m_output[i];
 		frame_val["frame"]["x"] = pos.x;
 		frame_val["frame"]["y"] = pos.y;
-		frame_val["frame"]["w"] = pos.width;
-		frame_val["frame"]["h"] = pos.height;
+		frame_val["frame"]["w"] = src_sz.width;
+		frame_val["frame"]["h"] = src_sz.height;
 
 		assert(src_sz.width == pos.width && src_sz.height == pos.height
 			|| src_sz.width == pos.height && src_sz.height == pos.width);
@@ -56,11 +60,11 @@ void NormalPack::OutputInfo(const wxString& src_folder, const wxString& dst_file
 		frame_val["trimmed"] = false;
 		frame_val["spriteSourceSize"]["x"] = 0;
 		frame_val["spriteSourceSize"]["y"] = 0;
-		frame_val["spriteSourceSize"]["w"] = pos.width;
-		frame_val["spriteSourceSize"]["h"] = pos.height;
+		frame_val["spriteSourceSize"]["w"] = src_sz.width;
+		frame_val["spriteSourceSize"]["h"] = src_sz.height;
 
-		frame_val["sourceSize"]["w"] = pos.width;
-		frame_val["sourceSize"]["h"] = pos.height;
+		frame_val["sourceSize"]["w"] = src_sz.width;
+		frame_val["sourceSize"]["h"] = src_sz.height;
 
 		value["frames"][i] = frame_val;
 	}
