@@ -12,6 +12,7 @@ public:
 public:
 	Normal();
 	Normal(double x, double y, double z);
+	Normal(const Vector3D& v);
 
 	Normal operator - () const;
 
@@ -35,6 +36,11 @@ Normal(double x, double y, double z)
 	: x(x), y(y), z(z)
 {
 }
+
+inline Normal::
+Normal(const Vector3D& v)
+	: x(v.x), y(v.y), z(v.z)
+{}
 
 inline
 Normal Normal::operator - () const {

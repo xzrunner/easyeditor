@@ -149,11 +149,7 @@
 			Name="world"
 			>
 			<File
-				RelativePath="..\..\..\src\demo\Build08_21.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\demo\Build08_22.cpp"
+				RelativePath="..\..\..\src\demo\Build10_13.cpp"
 				>
 			</File>
 			<File
