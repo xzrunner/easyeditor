@@ -50,6 +50,9 @@ inline float Point3D::DistanceSquared(const Point3D& p) const
 		+  (z - p.z) * (z - p.z);
 }
 
+Point3D 
+operator * (const Matrix& mat, const Point3D& p);
+
 }
 
 #endif // _RT_POINT3D_H_

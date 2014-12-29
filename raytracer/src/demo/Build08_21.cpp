@@ -25,14 +25,14 @@ void World::Build(void)
 	
 	Pinhole* pinhole = new Pinhole;
 	
-// 	pinhole->SetEye(Point3D(0, 15, 0)); 		// for Figure 8.21(a)
-// 	pinhole->SetViewDistance(755);
+	pinhole->SetEye(Point3D(0, 15, 0)); 		// for Figure 8.21(a)
+	pinhole->SetViewDistance(755);
 		
 // 	pinhole->SetEye(Point3D(0, 5, 0)); 			// for Figure 8.21(b)
 // 	pinhole->SetViewDistance(235);
 		
-	pinhole->SetEye(Point3D(0, 2, 0)); 			// for Figure 8.21(c)
-	pinhole->SetViewDistance(73.0);
+// 	pinhole->SetEye(Point3D(0, 2, 0)); 			// for Figure 8.21(c)
+// 	pinhole->SetViewDistance(73.0);
 	
 	pinhole->SetLookat(Point3D(0, 0, 0));
 	pinhole->ComputeUVW(); 

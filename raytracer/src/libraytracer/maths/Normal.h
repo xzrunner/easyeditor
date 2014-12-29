@@ -20,6 +20,8 @@ public:
 	// dot product with a vector on the right
 	double operator * (const Vector3D& v) const;
 
+	void Normalize();
+
 }; // Normal
 
 inline Normal::
@@ -49,6 +51,13 @@ inline double Normal::
 operator * (const Vector3D& v) const
 {
 	return x * v.x + y * v.y + z * v.z;
+}
+
+inline void Normal::
+Normalize()
+{
+	double length = sqrt(x * x + y * y + z * z);
+	x /= length; y /= length; z /= length;
 }
 
 }

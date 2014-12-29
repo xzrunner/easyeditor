@@ -5,20 +5,20 @@ namespace rt
 {
 
 class Matrix {
-	public:
-		double	m[4][4];
+public:
+	double	m[4][4];
 
-		Matrix();
+	Matrix();
 
-		Matrix(const Matrix& mat);
+	Matrix(const Matrix& mat);
 
-		Matrix& operator = (const Matrix& rhs); 	
+	Matrix& operator = (const Matrix& rhs); 	
 
-		Matrix operator * (const Matrix& mat) const;
+	Matrix operator * (const Matrix& mat) const;
 
-		Matrix operator / (const double d);
+	Matrix operator / (const double d);
 
-		void SetIdentity(void);	
+	void SetIdentity(void);	
 
 }; // Matrix
 

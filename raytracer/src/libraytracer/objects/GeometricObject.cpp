@@ -11,9 +11,21 @@ GeometricObject::GeometricObject()
 {
 }
 
+GeometricObject::GeometricObject(const GeometricObject& obj)
+{
+	if (obj.m_material) {
+		
+	}
+}
+
 GeometricObject::~GeometricObject()
 {
 	m_material->Release();
+}
+
+GeometricObject* GeometricObject::Clone() const
+{
+	return NULL;
 }
 
 Point3D GeometricObject::Sample() const

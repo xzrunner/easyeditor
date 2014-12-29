@@ -18,7 +18,10 @@ class GeometricObject : public Object
 {
 public:
 	GeometricObject();
+	GeometricObject(const GeometricObject& obj);
 	virtual ~GeometricObject();
+
+	virtual GeometricObject* Clone() const;
 
 	virtual bool Hit(const Ray& ray, double& t, ShadeRec& s) const = 0;	
 	virtual bool ShadowHit(const Ray& ray, float& t) const = 0;
@@ -37,7 +40,7 @@ public:
 	virtual void AddObject(GeometricObject* obj) {}
 
 	const Material* GetMaterial() const;
-	void SetMaterial(const Material* m) const;
+	virtual void SetMaterial(const Material* m) const;
 
 private:
 	mutable const Material* m_material;

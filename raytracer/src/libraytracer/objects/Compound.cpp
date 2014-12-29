@@ -20,12 +20,12 @@ bool Compound::Hit(const Ray& ray, double& tmin, ShadeRec& sr) const
 	Point3D local_hit_point;
 	bool hit = false;
 	tmin = FLT_MAX;
-	int num_objects	= m_objects.size();
+	int num_objects	= m_parts.size();
 	for (int j = 0; j < num_objects; j++) {
-		if (m_objects[j]->Hit(ray, t, sr) && (t < tmin)) {
+		if (m_parts[j]->Hit(ray, t, sr) && (t < tmin)) {
 			hit				= true;
 			tmin 			= t;
-			SetMaterial(m_objects[j]->GetMaterial());
+			SetMaterial(m_parts[j]->GetMaterial());
 			normal			= sr.normal;
 			local_hit_point	= sr.local_hit_point;  
 		}
@@ -47,12 +47,12 @@ bool Compound::ShadowHit(const Ray& ray, float& tmin) const
 	Point3D	local_hit_point;
 	bool hit = false;
 	tmin = FLT_MAX;
-	int num_objects	= m_objects.size();
+	int num_objects	= m_parts.size();
 	for (int j = 0; j < num_objects; j++) {
-		if (m_objects[j]->ShadowHit(ray, t) && (t < tmin)) {
+		if (m_parts[j]->ShadowHit(ray, t) && (t < tmin)) {
 			hit				= true;
 			tmin 			= t;
-			SetMaterial(m_objects[j]->GetMaterial());
+			SetMaterial(m_parts[j]->GetMaterial());
 		}
 	}
 
@@ -62,15 +62,23 @@ bool Compound::ShadowHit(const Ray& ray, float& tmin) const
 void Compound::AddObject(GeometricObject* obj)
 {
 	obj->Retain();
-	m_objects.push_back(obj);
+	m_parts.push_back(obj);
+}
+
+void Compound::SetMaterial(const Material* m) const
+{
+	GeometricObject::SetMaterial(m);
+	for (int i = 0, n = m_parts.size(); i < n; ++i) {
+		m_parts[i]->SetMaterial(m);
+	}
 }
 
 void Compound::ClearObjects()
 {
-	for (int i = 0, n = m_objects.size(); i < n; ++i) {
-		m_objects[i]->Release();
+	for (int i = 0, n = m_parts.size(); i < n; ++i) {
+		m_parts[i]->Release();
 	}
-	m_objects.clear();
+	m_parts.clear();
 }
 
 }

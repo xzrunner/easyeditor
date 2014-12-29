@@ -18,11 +18,13 @@ public:
 
 	virtual void AddObject(GeometricObject* obj);
 
+	virtual void SetMaterial(const Material* m) const;
+
 protected:
 	void ClearObjects();
 
 protected:
-	std::vector<GeometricObject*> m_objects;
+	std::vector<GeometricObject*> m_parts;
 
 }; // Compound
 

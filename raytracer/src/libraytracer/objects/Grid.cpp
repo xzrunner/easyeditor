@@ -238,7 +238,7 @@ void Grid::SetupCells(void)
 
 	// compute the number of grid cells in the x, y, and z directions
 
-	int num_objects = m_objects.size();
+	int num_objects = m_parts.size();
 
 	// dimensions of the grid in the x, y, and z directions
 
@@ -276,7 +276,7 @@ void Grid::SetupCells(void)
 	int index;  	// cell's array index
 
 	for (int j = 0; j < num_objects; j++) {
-		obj_bBox =  m_objects[j]->GetBoundingBox();
+		obj_bBox =  m_parts[j]->GetBoundingBox();
 
 		// compute the cell indices at the corners of the bounding box of the object
 
@@ -295,20 +295,20 @@ void Grid::SetupCells(void)
 					index = ix + nx * iy + nx * ny * iz;
 
 					if (counts[index] == 0) {
-						cells[index] = m_objects[j];
+						cells[index] = m_parts[j];
 						counts[index] += 1;  						// now = 1
 					}
 					else {
 						if (counts[index] == 1) {
 							Compound* compound_ptr = new Compound;	// construct a compound object
 							compound_ptr->AddObject(cells[index]); // add object already in cell
-							compound_ptr->AddObject(m_objects[j]);  	// add the new object
+							compound_ptr->AddObject(m_parts[j]);  	// add the new object
 							cells[index] = compound_ptr;			// store compound in current cell
 							counts[index] += 1;  					// now = 2
 						}
 						else {	
 							// counts[index] > 1
-							cells[index]->AddObject(m_objects[j]);	// just add current object
+							cells[index]->AddObject(m_parts[j]);	// just add current object
 							counts[index] += 1;						// for statistics only
 						}
 					}
@@ -356,9 +356,9 @@ Point3D Grid::FindMinBounds() const
 	AABB object_box;
 	Point3D p0(FLT_MAX, FLT_MAX, FLT_MAX);
 
-	int num_objects = m_objects.size();
+	int num_objects = m_parts.size();
 	for (int j = 0; j < num_objects; j++) {
-		object_box = m_objects[j]->GetBoundingBox();
+		object_box = m_parts[j]->GetBoundingBox();
 
 		if (object_box.x0 < p0.x)
 			p0.x = object_box.x0;
@@ -378,9 +378,9 @@ Point3D Grid::FindMaxBounds() const
 	AABB object_box;
 	Point3D p1(-FLT_MAX, -FLT_MAX, -FLT_MAX);
 
-	int num_objects = m_objects.size();
+	int num_objects = m_parts.size();
 	for (int j = 0; j < num_objects; j++) {
-		object_box = m_objects[j]->GetBoundingBox();
+		object_box = m_parts[j]->GetBoundingBox();
 
 		if (object_box.x1 > p1.x)
 			p1.x = object_box.x1;

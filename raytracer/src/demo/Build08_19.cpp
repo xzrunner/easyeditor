@@ -24,17 +24,17 @@ void World::Build(void)
 	m_tracer = new RayCast(this);
 
 	Pinhole* camera = new Pinhole;
-// 	// Figure 8.19
-// 	//camera->SetEye(Point3D(0, 0, 200));     // for Figure 8.19(a)
-// 	//camera->SetEye(Point3D(0, 0, 135));     // for Figure 8.19(b)
-// 	camera->SetEye(Point3D(0, 0, 75));      // for Figure 8.19(c)
-// 	camera->SetViewDistance(100);
+	// Figure 8.19
+	camera->SetEye(Point3D(0, 0, 200));     // for Figure 8.19(a)
+	//camera->SetEye(Point3D(0, 0, 135));     // for Figure 8.19(b)
+	//camera->SetEye(Point3D(0, 0, 75));      // for Figure 8.19(c)
+	camera->SetViewDistance(100);
 
-	// Figure 8.16
-	camera->SetEye(Point3D(0, 0, 250));
-	//camera->SetViewDistance(200);  	// for Figure 8.16(a)	
-	camera->SetViewDistance(450);  	// for Figure 8.16(b)		
-	//	camera->SetViewDistance(1000);  	// for Figure 8.16(c)
+// 	// Figure 8.16
+// 	camera->SetEye(Point3D(0, 0, 250));
+// 	//camera->SetViewDistance(200);  	// for Figure 8.16(a)	
+// 	//camera->SetViewDistance(450);  	// for Figure 8.16(b)		
+// 	camera->SetViewDistance(1000);  	// for Figure 8.16(c)
 
 	camera->ComputeUVW();		  
 	m_camera = camera;

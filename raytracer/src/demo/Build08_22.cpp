@@ -3,6 +3,7 @@
 #include "cameras/Pinhole.h"
 #include "lights/PointLight.h"
 #include "materials/Phong.h"
+#include "objects/WireframeBox.h"
 #include "utilities/Constants.h"
 
 namespace rt
@@ -20,14 +21,14 @@ void World::Build(void)
 
 	Pinhole* pinhole = new Pinhole;	
 		
-//	pinhole->SetEye(Point3D(0, 0, 10));       	// for Figure 8.22(a)
-//	pinhole->SetViewDistance(1687);
+	pinhole->SetEye(Point3D(0, 0, 10));       	// for Figure 8.22(a)
+	pinhole->SetViewDistance(1687);
 	
-//	pinhole->SetEye(Point3D(0, 0, 5));       	// for Figure 8.22(b)
-//	pinhole->SetViewDistance(750);
+// 	pinhole->SetEye(Point3D(0, 0, 5));       	// for Figure 8.22(b)
+// 	pinhole->SetViewDistance(750);
 	
-	pinhole->SetEye(Point3D(0, 0, 2.5));       	// for Figure 8.22(c)
-	pinhole->SetViewDistance(280);
+// 	pinhole->SetEye(Point3D(0, 0, 2.5));       	// for Figure 8.22(c)
+// 	pinhole->SetViewDistance(280);
 	
 	pinhole->SetLookat(Point3D(0, 0, 0));
 	pinhole->ComputeUVW(); 
@@ -49,9 +50,8 @@ void World::Build(void)
 	Point3D p0(-1.0, -1.0, -1.0);
 	Point3D p1(1.0, 1.0, 1.0);
 	float bevel_radius = 0.02;
-	
 	WireframeBox* box = new WireframeBox(p0, p1, bevel_radius);
-	box->set_material(phong);
+	box->SetMaterial(phong);
 	AddObject(box);	
 }
 
