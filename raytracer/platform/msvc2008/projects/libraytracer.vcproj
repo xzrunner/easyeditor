@@ -153,6 +153,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\demo\Build11_07.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\world\RenderOutput.h"
 				>
 			</File>
@@ -573,6 +577,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\FishEye.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\cameras\FishEye.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\cameras\Pinhole.cpp"
 				>
 			</File>
@@ -601,11 +613,43 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libraytracer\texture\Image.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\texture\Image.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\texture\ImageTexture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\texture\ImageTexture.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libraytracer\texture\Texture.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libraytracer\texture\Texture.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="mapping"
+			>
+			<File
+				RelativePath="..\..\..\src\libraytracer\mapping\Mapping.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\mapping\SphericalMap.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libraytracer\mapping\SphericalMap.h"
 				>
 			</File>
 		</Filter>

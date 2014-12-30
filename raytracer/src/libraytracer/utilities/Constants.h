@@ -17,6 +17,7 @@ const double	EPSILON		= 0.001;
 
 const RGBColor BLACK(0, 0, 0);
 const RGBColor WHITE(1, 1, 1);
+const RGBColor RED(1, 0, 0);
 
 }
 

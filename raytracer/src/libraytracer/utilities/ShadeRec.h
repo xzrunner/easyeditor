@@ -27,9 +27,12 @@ public:
 	const World&		w;					// World reference
 	RGBColor			color;
 
+	float u;
+	float v;
+
 public:
 	ShadeRec(const World& world)
-		: hit_an_object(false), material(0), depth(0), t(0), w(world) {}
+		: hit_an_object(false), material(0), depth(0), t(0), w(world), u(0), v(0) {}
 
 }; // ShadeRec
 
