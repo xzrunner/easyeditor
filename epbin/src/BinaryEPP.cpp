@@ -11,17 +11,16 @@ namespace epbin
 {
 
 BinaryEPP::BinaryEPP(const std::string& dir, const std::string& filename, 
-					 TextureType type, const std::string& output)
+					 TextureType type)
 	: m_dir(dir)
 	, m_filename(filename)
 	, m_type(type)
-	, m_output(output)
 {
 }
 
-void BinaryEPP::Pack() const
+void BinaryEPP::Pack(const std::string& outfile) const
 {
-	std::ofstream fout(m_output.c_str(), std::ios::binary);
+	std::ofstream fout(outfile.c_str(), std::ios::binary);
 
 	std::string ext;
 	switch (m_type) 

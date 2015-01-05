@@ -39,7 +39,7 @@ private:
 	void GetAllDataFiles(const wxString& src_folder, const wxString& filter, 
 		std::vector<wxString>& files) const;
 
-	void PackEp(const Json::Value& pkg_val, const wxString& config_dir) const;
+	void PackEP(const Json::Value& pkg_val, const wxString& config_dir) const;
 
 }; // PackCoco
 

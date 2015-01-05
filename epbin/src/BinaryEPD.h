@@ -3,7 +3,6 @@
 
 #include "typedef.h"
 
-#include <fstream>
 #include <vector>
 
 struct lua_State;
@@ -17,29 +16,25 @@ class Animation;
 class BinaryEPD
 {
 public:
-	BinaryEPD(const std::string& src, const std::string& dst);
+	BinaryEPD(const std::string& infile);
 	~BinaryEPD();
 
-	void Pack(bool compress);
+	void Pack(const std::string& outfile, bool compress);
 
 private:
-	void Load();
+	void Load(const std::string& infile);
 
 	void CheckID(int id);
 	void CheckExport(lua_State* L);
 
 private:
-	std::string m_src_filepath;
-
-	std::ofstream m_fout;
-
 	uint16_t m_max_id;
 	uint16_t m_export;
 
 	std::vector<Picture*> m_pictures;
 	std::vector<Animation*> m_animations;
 
-}; // BinEP
+}; // BinaryEPD
 
 }
 

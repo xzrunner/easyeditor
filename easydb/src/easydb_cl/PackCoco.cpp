@@ -54,7 +54,7 @@ void PackCoco::Trigger(const std::string& config_path)
 	while (!pkg_val.isNull()) {
 		PackTexture(pkg_val, config_dir, trim);
 		PackLuaFile(pkg_val, config_dir);
-		PackEp(pkg_val, config_dir);
+		PackEP(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
 	}
@@ -158,7 +158,7 @@ void PackCoco::GetAllDataFiles(const wxString& src_folder, const wxString& filte
 	std::copy(unique_files.begin(), unique_files.end(), back_inserter(files));
 }
 
-void PackCoco::PackEp(const Json::Value& pkg_val, const wxString& config_dir) const
+void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) const
 {
 	std::string name = pkg_val["name"].asString();
 	std::string src_folder = pkg_val["src folder"].asString();
@@ -168,11 +168,16 @@ void PackCoco::PackEp(const Json::Value& pkg_val, const wxString& config_dir) co
 	std::string dst_folder_path = config_dir + "\\" + dst_folder;
 
 	std::string epd_path = dst_name + ".epd";
-	epbin::BinaryEPD epd(lua_file, epd_path);
-	epd.Pack(true);
+	epbin::BinaryEPD epd(lua_file);
+	epd.Pack(epd_path, true);
+
 	std::string epp_path = dst_name + ".epp";
-	epbin::BinaryEPP epp(dst_folder_path, name, epbin::TT_PNG8, epp_path);
-	epp.Pack();
+	epbin::BinaryEPP epp(dst_folder_path, name, epbin::TT_PNG8);
+	epp.Pack(epp_path);
+
+	std::string rrp_path = dst_name + ".rrp";
+	epbin::BinaryRRP rrp("", "");
+	rrp.Pack(rrp_path, true);
 }
 
 }

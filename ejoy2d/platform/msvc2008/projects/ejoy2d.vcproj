@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../external/png/include;../../../external/lua/include"
+				AdditionalIncludeDirectories="../../../external/c99"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../external/png/include;../../../external/lua/include"
+				AdditionalIncludeDirectories="../../../external/c99"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -147,6 +147,14 @@
 	<References>
 	</References>
 	<Files>
+		<File
+			RelativePath="..\..\..\src\dtex_rrp.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_rrp.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\..\src\eploader.c"
 			>
