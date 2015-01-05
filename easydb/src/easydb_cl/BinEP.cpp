@@ -48,8 +48,8 @@ void BinEP::Trigger(const std::string& dir, const std::string& filename,
 		throw d2d::Exception("BinEP::Trigger unknown type: %s\n", type);
 	}
 
-	epbin::BinaryEPP epp(dir, filename, t, output);
-	epp.Pack();
+	epbin::BinaryEPP epp(dir, filename, t);
+	epp.Pack(output);
 }
 
 }

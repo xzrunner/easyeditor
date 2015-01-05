@@ -38,7 +38,7 @@ void BinaryRRP::Pack(const std::string& outfile, bool compress) const
 
 	// data sz
 	size_t data_sz = 0;
-	data_sz += sizeof(uint8_t);
+	data_sz += sizeof(int32_t);
 	for (int i = 0; i < pic_sz; ++i) {
 		data_sz += m_pics[i]->Size();
 	}

@@ -112,7 +112,7 @@ _decode_picture(struct dtex_rrp* rrp, struct dr_picture* pic, uint8_t** buf) {
 	memcpy(&pic->part_sz, ptr, sizeof(pic->part_sz));
 	ptr += sizeof(pic->part_sz);
 
-	pic->part = _alloc(rrp->alloc, pic->part_sz * sizeof(struct dr_rect));
+	pic->part = _alloc(rrp->alloc, pic->part_sz * sizeof(struct dr_part));
 	for (int i = 0; i < pic->part_sz; ++i) {
 		_decode_part(rrp, &pic->part[i], &ptr);
 	}

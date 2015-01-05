@@ -175,9 +175,13 @@ void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) co
 	epbin::BinaryEPP epp(dst_folder_path, name, epbin::TT_PNG8);
 	epp.Pack(epp_path);
 
-	std::string rrp_path = dst_name + ".rrp";
-	epbin::BinaryRRP rrp("", "");
-	rrp.Pack(rrp_path, true);
+	Json::Value rrp_val = pkg_val["rrp"];
+	if (!rrp_val.isNull()) {
+		std::string pack_filepath = config_dir + "\\" + rrp_val["pack file"].asString();
+		std::string id_filepath = config_dir + "\\" + rrp_val["id file"].asString();
+		epbin::BinaryRRP rrp(pack_filepath, id_filepath);
+		rrp.Pack(dst_name + ".rrp", true);
+	}
 }
 
 }
