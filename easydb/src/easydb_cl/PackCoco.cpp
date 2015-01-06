@@ -46,14 +46,14 @@ void PackCoco::Trigger(const std::string& config_path)
 
 	wxString config_dir = d2d::FilenameTools::getFileDir(config_path);
 
-	std::string trim_file = config_dir + "\\" + value["trim file"].asString();
-	libpacker::ImageTrimData trim(trim_file);
+ 	std::string trim_file = config_dir + "\\" + value["trim file"].asString();
+ 	libpacker::ImageTrimData trim(trim_file);
 
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
-		PackTexture(pkg_val, config_dir, trim);
-		PackLuaFile(pkg_val, config_dir);
+ 		PackTexture(pkg_val, config_dir, trim);
+ 		PackLuaFile(pkg_val, config_dir);
 		PackEP(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
@@ -77,8 +77,11 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	std::string json_path = dst_name + "1.json";
 	std::string src_folder_path = config_dir + "\\" + src_folder;
 	tex_packer.OutputInfo(src_folder_path, trim, json_path);
-	std::string img_path = dst_name + "1.png";
-	tex_packer.OutputImage(img_path);
+
+	if (pkg_val["rrp"].isNull()) {
+		std::string img_path = dst_name + "1.png";
+		tex_packer.OutputImage(img_path);
+	}
 }
 
 void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
@@ -126,11 +129,20 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const wxString& config_di
 	libcoco::TextureMgr tex_mgr;
 	tex_mgr.Add(json_path, 0);
 
-	libcoco::CocoPacker data_packer(symbols, tex_mgr);
-	data_packer.Parser();
+	libcoco::CocoPacker* data_packer = NULL;
+	if (!pkg_val["rrp"].isNull()) {
+		std::string id_filepath = config_dir + "\\" + pkg_val["rrp"]["id file"].asString();
+		data_packer = new libcoco::CocoPacker(symbols, tex_mgr, id_filepath);
+	} else {
+		data_packer = new libcoco::CocoPacker(symbols, tex_mgr);
+	}
+
+	data_packer->Parser();
 
 	std::string lua_file = dst_name + ".lua";
-	data_packer.Output(lua_file.c_str());
+	data_packer->Output(lua_file.c_str());
+
+	delete data_packer;
 }
 
 void PackCoco::GetAllDataFiles(const wxString& src_folder, const wxString& filter, 
@@ -167,20 +179,62 @@ void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) co
 	std::string lua_file = dst_name + ".lua";
 	std::string dst_folder_path = config_dir + "\\" + dst_folder;
 
-	std::string epd_path = dst_name + ".epd";
-	epbin::BinaryEPD epd(lua_file);
-	epd.Pack(epd_path, true);
+ 	std::string epd_path = dst_name + ".epd";
+ 	epbin::BinaryEPD epd(lua_file);
+ 	epd.Pack(epd_path, true);
+ 
+ 	std::string epp_path = dst_name + ".epp";
+ 	epbin::BinaryEPP epp(dst_folder_path, name, epbin::TT_PNG8);
+ 	epp.Pack(epp_path);
+ 
+ 	Json::Value rrp_val = pkg_val["rrp"];
+ 	if (!rrp_val.isNull()) {
+ 		std::string pack_filepath = config_dir + "\\" + rrp_val["pack file"].asString();
+ 		std::string id_filepath = config_dir + "\\" + rrp_val["id file"].asString();
+ 		epbin::BinaryRRP rrp(pack_filepath, id_filepath);
+ 		rrp.Pack(dst_name + ".rrp", true);
+ 	}
 
-	std::string epp_path = dst_name + ".epp";
-	epbin::BinaryEPP epp(dst_folder_path, name, epbin::TT_PNG8);
-	epp.Pack(epp_path);
+	Json::Value pts_val = pkg_val["pts"];
+	if (!pts_val.isNull()) {
+		std::vector<std::string> pts_files;
+		GetAllPTSFiles(pkg_val, config_dir, src_folder, pts_files);
 
-	Json::Value rrp_val = pkg_val["rrp"];
-	if (!rrp_val.isNull()) {
-		std::string pack_filepath = config_dir + "\\" + rrp_val["pack file"].asString();
-		std::string id_filepath = config_dir + "\\" + rrp_val["id file"].asString();
-		epbin::BinaryRRP rrp(pack_filepath, id_filepath);
-		rrp.Pack(dst_name + ".rrp", true);
+		std::string id_filepath = config_dir + "\\" + pts_val["id file"].asString();
+		std::string source_folder = config_dir + "\\" + src_folder;
+		epbin::BinaryPTS pts(source_folder, pts_files, id_filepath);
+		pts.Pack(dst_name + ".pts", true);
+	}
+}
+
+void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const wxString& config_dir, 
+							  const wxString& src_folder, std::vector<std::string>& pts_files) const
+{
+	int i = 0;
+	Json::Value src_val = pkg_val["src image list"][i++];
+	while (!src_val.isNull()) {
+		std::string path = src_val.asString();
+		std::string path_full = config_dir + "\\" + src_folder + "\\" + path;
+		if (wxFileName::DirExists(path_full)) {
+			wxArrayString files;
+			d2d::FilenameTools::fetchAllFiles(path_full, files);
+			for (int i = 0, n = files.size(); i < n; ++i) {
+				if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
+					std::string pts_path = files[i].substr(0, files[i].find(".png")) + "_strip.json";
+					if (d2d::FilenameTools::isExist(pts_path)) {
+						pts_files.push_back(pts_path);
+					}
+				}
+			}
+		} else if (wxFileName::FileExists(path_full)) {
+			if (d2d::FileNameParser::isType(path_full, d2d::FileNameParser::e_image)) {
+				std::string pts_path = path_full.substr(0, path_full.find(".png")) + "_strip.json";
+				if (d2d::FilenameTools::isExist(pts_path)) {
+					pts_files.push_back(pts_path);
+				}
+			}
+		}
+		src_val = pkg_val["src image list"][i++];
 	}
 }
 

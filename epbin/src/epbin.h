@@ -4,6 +4,8 @@
 #include "BinaryEPD.h"
 #include "BinaryEPP.h"
 #include "BinaryRRP.h"
+#include "BinaryPTS.h"
+#include "ImageIDer.h"
 #include "Exception.h"
 
 #endif // _EPBIN_H_

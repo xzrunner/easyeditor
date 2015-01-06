@@ -30,6 +30,7 @@
 #include "NumberImages.h"
 #include "BinEP.h"
 #include "PackCoco.h"
+#include "OutlineToTriStrip.h"
 
 namespace edb
 {
@@ -66,6 +67,7 @@ void CommandLoader::Init()
 	fc->Register(NumberImages::Create());
 	fc->Register(BinEP::Create());
 	fc->Register(PackCoco::Create());
+	fc->Register(OutlineToTriStrip::Create());
 }
 
 }

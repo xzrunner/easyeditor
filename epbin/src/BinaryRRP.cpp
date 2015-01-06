@@ -3,6 +3,7 @@
 #include "typedef.h"
 #include "tools.h"
 #include "Lzma.h"
+#include "ImageIDer.h"
 
 #include <json.h>
 #include <assert.h>
@@ -165,24 +166,9 @@ void BinaryRRP::Load(const std::string& json_file, const std::string& img_id_fil
 	}
 
 	// set picture id
-	std::map<std::string, int> image_map;
-	std::ifstream fin_id_file(img_id_file.c_str());
-	std::string line;
-	int id = 1;
-	while (std::getline(fin_id_file, line)) {
-		std::string key = line.substr(0, line.find_last_of('.'));
-		str_replace(key, "\\", "_");
-		image_map.insert(std::make_pair(key, id++));
-	}
-	fin_id_file.close();
-
+	ImageIDer ider(img_id_file);
 	for (int i = 0, n = m_pics.size(); i < n; ++i) {
-		Picture* pic = m_pics[i];
-		std::map<std::string, int>::iterator itr = image_map.find(pic->path);
-		if (itr == image_map.end()) {
-			throw Exception("Cannot find image %s in %s\n", pic->path, img_id_file);
-		}
-		pic->id = itr->second;
+		m_pics[i]->id = ider.Query(pic->path);
 	}
 }
 

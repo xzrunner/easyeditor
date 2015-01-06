@@ -238,6 +238,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\BinaryPTS.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\BinaryPTS.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\BinaryRRP.cpp"
 			>
 		</File>
@@ -255,6 +263,14 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\epd_dataset.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\ImageIDer.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\ImageIDer.h"
 			>
 		</File>
 	</Files>

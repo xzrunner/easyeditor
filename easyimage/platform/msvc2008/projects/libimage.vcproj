@@ -164,6 +164,14 @@
 				RelativePath="..\..\..\src\libimage\ExtractOutlineRaw.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\OutlineToTriStrip.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\OutlineToTriStrip.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="rectcut"

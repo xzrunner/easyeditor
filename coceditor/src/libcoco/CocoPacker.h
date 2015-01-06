@@ -1,8 +1,6 @@
 #ifndef _LIBCOCO_COCO_PACKER_H_
 #define _LIBCOCO_COCO_PACKER_H_
 
-//#define USE_PACKED_RRP
-
 #include <drag2d.h>
 
 #include "TPParser.h"
@@ -12,6 +10,7 @@ namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
 namespace escale9 { class Symbol; }
 namespace emesh { class Symbol; class Sprite; }
+namespace epbin { class ImageIDer; }
 
 namespace libcoco
 {
@@ -22,7 +21,7 @@ public:
 	CocoPacker(const std::vector<const d2d::ISymbol*>& symbols, 
 		const TextureMgr& tex_mgr);
 	CocoPacker(const std::vector<const d2d::ISymbol*>& symbols, 
-		const TextureMgr& tex_mgr, const std::string& src_path, 
+		const TextureMgr& tex_mgr, const std::string& img_id_file, 
 		float scale = 1.0f);
 	~CocoPacker();
 
@@ -64,15 +63,8 @@ private:
 
 	void TransToMat(const d2d::ISprite* sprite, float mat[6], bool force = false) const;
 
-#ifdef USE_PACKED_RRP
-	void LoadImageMapFile(const std::string& filepath);
-	int FindImageID(const wxString& filepath) const;
-#endif
-
 private:
 	ebuilder::CodeGenerator* m_gen;
-
-	const std::string m_src_path;
 
 	float m_scale;
 
@@ -90,9 +82,7 @@ private:
 	};
 	std::map<const emesh::Symbol*, std::vector<MeshID> > m_map_mesh2ids;
 
-#ifdef USE_PACKED_RRP
-	std::map<std::string, int> m_rrp_image_id_map;
-#endif
+	epbin::ImageIDer* m_img_ider;
 
 }; // COCCode
 

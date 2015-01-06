@@ -12,14 +12,14 @@ struct alloc {
 	int sz;
 };
 
-static struct alloc*
+static inline struct alloc*
 _init_alloc(int sz) {
 	struct alloc* a = malloc(sizeof(*a));
 	a->sz = 0;
 	return a;
 }
 
-static void*
+static inline void*
 _alloc(struct alloc* a, int sz) {
 	if (sz & 3) {
 		sz = (sz + 3) & ~3;
@@ -35,7 +35,7 @@ struct alloc {
 	char* free;
 };
 
-struct alloc*
+static inline struct alloc*
 _init_alloc(int sz) {
 	struct alloc* a = malloc(sizeof(*a) + sz); 
 	a->sz = sz;
@@ -43,7 +43,7 @@ _init_alloc(int sz) {
 	return a;
 }
 
-void*
+static inline void*
 _alloc(struct alloc* a, int sz) {
 	if (sz & 3) {
 		sz = (sz + 3) & ~3;
@@ -87,8 +87,10 @@ _decode_part(struct dtex_rrp* rrp, struct dr_part* part, uint8_t** buf) {
 	ptr += sizeof(h);
 	if (w < 0 && h < 0) {
 		part->is_rotated = true;
-		part->src.w = part->dst.w = -w;
-		part->src.h = part->dst.h = -h;
+		part->src.w = -w; part->src.h = -h;
+		part->dst.w = -h; part->dst.h = -w;
+		// part->src.w = part->dst.w = -w;
+		// part->src.h = part->dst.h = -h;
 	} else {
 		assert(w > 0 && h > 0);
 		part->is_rotated = false;
@@ -123,6 +125,7 @@ _decode_picture(struct dtex_rrp* rrp, struct dr_picture* pic, uint8_t** buf) {
 struct dtex_rrp* 
 dtex_rrp_create(void* data, int sz, int cap) {
 	uint8_t* ptr = data;
+
 	int32_t pic_sz;
 	memcpy(&pic_sz, ptr, sizeof(pic_sz));
 	ptr += sizeof(pic_sz);
@@ -135,6 +138,7 @@ dtex_rrp_create(void* data, int sz, int cap) {
 	for (int i = 0; i < pic_sz; ++i) {
 		_decode_picture(rrp, &rrp->pictures[i], &ptr);
 	}
+	
 	return rrp;
 }
 
@@ -149,8 +153,8 @@ dtex_rrp_release(struct dtex_rrp* rrp) {
 // id also is index
 struct dr_picture* 
 dtex_rrp_get_pic(struct dtex_rrp* rrp, int id) {
-	assert(id >= 0 && id < rrp->pic_size);
-	return &rrp->pictures[id];
+	assert(id > 0 && id <= rrp->pic_size);
+	return &rrp->pictures[id - 1];
 }
 
 #ifdef EXPORT_RRP

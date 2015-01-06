@@ -47,10 +47,12 @@ protected:
 
 private:
 	void LoadBGOutline(d2d::ISymbol* bg);
+	void LoadBGTriStrip(d2d::ISymbol* bg);
 
 private:
 	d2d::ISymbol* m_bg;
 	std::vector<d2d::IShape*> m_bg_outline;
+	std::vector<std::vector<d2d::Vector> > m_bg_tri_strips;
 
 	std::vector<d2d::IShape*> m_shapes;
 

@@ -396,6 +396,14 @@
 						RelativePath="..\..\..\src\easydb_cl\OutlineToPolygon.h"
 						>
 					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\OutlineToTriStrip.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\OutlineToTriStrip.h"
+						>
+					</File>
 				</Filter>
 				<Filter
 					Name="transform"

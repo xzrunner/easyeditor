@@ -148,6 +148,14 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\dtex_pts.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_pts.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\dtex_rrp.c"
 			>
 		</File>

@@ -40,6 +40,8 @@ private:
 		std::vector<wxString>& files) const;
 
 	void PackEP(const Json::Value& pkg_val, const wxString& config_dir) const;
+	void GetAllPTSFiles(const Json::Value& pkg_val, const wxString& config_dir,
+		const wxString& src_folder, std::vector<std::string>& pts_files) const;
 
 }; // PackCoco
 
