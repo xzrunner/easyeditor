@@ -156,6 +156,14 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\dtex_pvr.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_pvr.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\dtex_rrp.c"
 			>
 		</File>
