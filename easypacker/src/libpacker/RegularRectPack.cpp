@@ -360,9 +360,9 @@ void RegularRectPack::ParserPackResult(const Combine& cb, const libpacker::Rect&
 	} else {
 		for (int i = 0, n = cb.children.size(); i < n; ++i) {
 			const Combine& child = cb.children[i];
-			
+
 			libpacker::Rect cr;
-			if (cb.w == r.width && cb.h == r.height) {
+			if (cb.w <= r.width && cb.h <= r.height) {
 				cr.x = r.x + child.x;
 				cr.y = r.y + child.y;
 				cr.width = child.w;
@@ -370,7 +370,7 @@ void RegularRectPack::ParserPackResult(const Combine& cb, const libpacker::Rect&
 			} else {
 				// clockwise rotate
 				cr.x = r.x + child.y;
-				cr.y = r.y + (child.w - child.x);
+				cr.y = r.y + child.x;
 				cr.width = child.h;
 				cr.height = child.w;
 			}
