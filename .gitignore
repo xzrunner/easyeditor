@@ -138,10 +138,15 @@ easyphysics/platform/msvc2008/easyphysics
 easyrender/platform/msvc2008/easyrender
 easysketch/platform/msvc2008/easysketch
 easysketch/platform/msvc2008/libsketch
-easyterrain/platform/msvc2008/easyterrain
-easyterrain/platform/msvc2008/libterrain
+easyterrain3d/platform/msvc2008/easyterrain3d
+easyterrain3d/platform/msvc2008/libterrain3d
+easyterrain2d/platform/msvc2008/easyterrain2d
+easyterrain2d/platform/msvc2008/libterrain2d
 raytracer/platform/msvc2008/raytracer
 raytracer/platform/msvc2008/libraytracer
+
+template/platform/msvc2008/easytemplate
+template/platform/msvc2008/libtemplate
 
 drag2d/src/common/libpng/contrib
 libraries/lua-5.2.3/doc
