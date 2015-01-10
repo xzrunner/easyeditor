@@ -8,7 +8,7 @@ namespace libshape
 
 class StagePanel;
 
-class StageCanvas : public d2d::ShapeStageCanvas
+class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
@@ -22,6 +22,9 @@ protected:
 
 	void onMouse(wxMouseEvent& event);
 	void onKeyDown(wxKeyEvent& event);
+
+private:
+	d2d::MultiShapesImpl* m_stage_impl;
 
 private:
 	DECLARE_EVENT_TABLE()

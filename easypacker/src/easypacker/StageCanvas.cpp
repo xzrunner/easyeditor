@@ -10,7 +10,8 @@ BEGIN_EVENT_TABLE(StageCanvas, d2d::PerspectCanvas)
 END_EVENT_TABLE()
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::SpriteStageCanvas(stage, stage)
+	: d2d::OrthoCanvas(stage)
+	, m_stage_impl(stage)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);
@@ -18,7 +19,8 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::onDraw()
 {
-	d2d::SpriteStageCanvas::onDraw();
+	m_stage_impl->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
+
 	drawRegion();
 }
 

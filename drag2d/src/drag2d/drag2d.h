@@ -55,8 +55,6 @@
 #include "view/TextPropertySetting.h"
 #include "view/SymbolPropertySetting.h"
 #include "view/DialogStageCanvas.h"
-#include "view/SpriteStageCanvas.h"
-#include "view/ShapeStageCanvas.h"
 #include "view/ShapesPanelImpl.h"
 #include "view/SpritesPanelImpl.h"
 #include "view/MultiShapesImpl.h"

@@ -4,19 +4,13 @@
 
 namespace d2d
 {
-	class SpriteBatch;
 
-	class DrawSpritesVisitor : public IVisitor
-	{
-	public:
-		DrawSpritesVisitor(SpriteBatch& batch);
-		virtual ~DrawSpritesVisitor();
+class DrawSpritesVisitor : public IVisitor
+{
+public:
+	virtual void visit(Object* object, bool& bFetchNext);
 
-		virtual void visit(Object* object, bool& bFetchNext);
+}; // DrawSpritesVisitor
 
-	private:
-		SpriteBatch& m_batch;
-
-	}; // DrawSpritesVisitor
 }
 

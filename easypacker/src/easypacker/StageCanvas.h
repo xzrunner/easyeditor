@@ -7,7 +7,7 @@ namespace epacker
 {
 	class StagePanel;
 
-	class StageCanvas : public d2d::SpriteStageCanvas
+	class StageCanvas : public d2d::OrthoCanvas
 	{
 	public:
 		StageCanvas(StagePanel* stage);
@@ -27,6 +27,8 @@ namespace epacker
 		};
 
 	private:
+		d2d::MultiSpritesImpl* m_stage_impl;
+
 		wxTimer m_timer;
 
 		DECLARE_EVENT_TABLE()

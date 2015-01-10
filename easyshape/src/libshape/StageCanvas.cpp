@@ -10,7 +10,8 @@ BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 END_EVENT_TABLE()
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::ShapeStageCanvas(stage, stage)
+	: d2d::OrthoCanvas(stage)
+	, m_stage_impl(stage)
 {
 }
 
@@ -24,19 +25,18 @@ void StageCanvas::drawGuideLines()
 
 void StageCanvas::initGL()
 {
-	OrthoCanvas::initGL();
+	d2d::OrthoCanvas::initGL();
 
 	std::vector<d2d::ISymbol*> symbols;
 	d2d::SymbolMgr::Instance()->traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
-	for (size_t i = 0, n = symbols.size(); i < n; ++i)
-	{
+	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
 		symbols[i]->reloadTexture();
 	}
 }
 
 void StageCanvas::onDraw()
 {
-	d2d::ShapeStageCanvas::onDraw();
+	m_stage_impl->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
 
 	libshape::StageCanvas::drawGuideLines();
 

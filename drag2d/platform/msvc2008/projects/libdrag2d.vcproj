@@ -1747,14 +1747,6 @@
 						RelativePath="..\..\..\src\drag2d\view\ShapesPanelImpl.h"
 						>
 					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\ShapeStageCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\ShapeStageCanvas.h"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="sprite"
@@ -1781,14 +1773,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\SpritesPanelImpl.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\SpriteStageCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\SpriteStageCanvas.h"
 						>
 					</File>
 				</Filter>
