@@ -39,6 +39,7 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 #ifdef _DEBUG
 	initStatueBar();
 #endif
+	wxLog::SetLogLevel(0);
 }
 
 Frame::~Frame()
