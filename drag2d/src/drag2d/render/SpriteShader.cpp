@@ -332,12 +332,12 @@ void SpriteShader::LoadShader()
 		"\n"
 		"void main()  \n"
 		"{  \n"  
-		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
+		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"		
 
- 		"  vec3 r = tmp.r * v_r_trans; \n"
- 		"  vec3 g = tmp.g * v_g_trans; \n"
- 		"  vec3 b = tmp.b * v_b_trans; \n"
-		"  tmp.xyz = r + g + b; \n"
+		"  vec4 r = tmp.r * v_r_trans; \n"
+		"  vec4 g = tmp.g * v_g_trans; \n"
+		"  vec4 b = tmp.b * v_b_trans; \n"
+		"  tmp.xyz = (r + g + b).xyz; \n"
 
 		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
 		"  gl_FragColor.w = tmp.w;    \n"
