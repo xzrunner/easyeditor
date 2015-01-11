@@ -17,6 +17,15 @@ wxSizer* WaveVerticesCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
+	// switch
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("¿ª¹Ø"));
+		check->SetValue(true);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(WaveVerticesCMPT::OnOpenWaveChanged));
+		sizer->Add(check, 0);
+	}
+	sizer->AddSpacer(20);
 	// reflush
 	{
 		wxButton* btn = new wxButton(this, wxID_ANY, "Ë¢ÐÂ");
@@ -79,6 +88,14 @@ wxSizer* WaveVerticesCMPT::initLayout()
 		sizer->Add(tris_edge);
 	}
 	return sizer;
+}
+
+void WaveVerticesCMPT::OnOpenWaveChanged(wxCommandEvent& event)
+{
+	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_editPanel)->GetOceans();
+	for (int i = 0, n = oceans.size(); i < n; ++i) {
+		oceans[i]->OpenWave(event.IsChecked());
+	}
 }
 
 void WaveVerticesCMPT::OnReflushPress(wxCommandEvent& event)

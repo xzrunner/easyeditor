@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "CreateRegionCMPT.h"
 #include "WaveVerticesCMPT.h"
+#include "MoveTexcoordsCMPT.h"
 
 namespace eterrain2d
 {
@@ -11,6 +12,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 {
 	addChild(new CreateRegionCMPT(this, wxT("创建区域"), stage));
 	addChild(new WaveVerticesCMPT(this, wxT("顶点波动"), stage));
+	addChild(new MoveTexcoordsCMPT(this, wxT("纹理移动"), stage));
 	SetSizer(initLayout());
 }
 

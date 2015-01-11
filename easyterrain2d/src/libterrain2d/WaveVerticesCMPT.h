@@ -18,6 +18,7 @@ protected:
 	virtual wxSizer* initLayout();
 
 private:
+	void OnOpenWaveChanged(wxCommandEvent& event);
 	void OnReflushPress(wxCommandEvent& event);
 	void OnChangeGridSize(wxSpinEvent& event);
 	void OnChangeWaveParams(wxSpinEvent& event);

@@ -13,8 +13,13 @@ OceanMesh::OceanMesh(const libshape::PolygonShape* shape,
 	m_row = MESH_ROW;
 	m_col = MESH_COL;
 
+	m_wave_open = true;
 	m_wave_speed = WAVE_SPEED * 0.1f;
 	m_wave_height = WAVE_HEIGHT;
+
+	m_uv_move_open = true;
+	m_texcoords_spd.set(0, 0);
+	m_texcoords_base.set(0, 0);
 
 	Build();
 }
@@ -71,20 +76,13 @@ void OceanMesh::SetTexcoordsSpeed(const d2d::Vector& speed)
 void OceanMesh::Update(float dt)
 {
 	static float during = 0;
-
-	for (int i = 0, n = m_grids.size(); i < n; ++i) {
-		MeshShape* grid = m_grids[i];
-		const std::vector<emesh::Triangle*>& tris = grid->GetTriangles();
-		for (int j = 0, m = tris.size(); j < m; ++j) {
-			emesh::Triangle* tri = tris[j];
-			for (int k = 0; k < 3; ++k) {
-				emesh::Node* n = tri->nodes[k];
-				float dis = n->ori_xy.y - m_wave_speed * during;
-				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-			}
-		}
+	if (m_uv_move_open) {
+		UpdateUVMove(dt);
+		Build();
 	}
-
+	if (m_wave_open) {
+		UpdateWave(during);
+	}
 	during += dt;
 }
 
@@ -118,8 +116,10 @@ d2d::Rect OceanMesh::CalBoundRegion(const std::vector<d2d::Vector>& bound)
 
 void OceanMesh::CalSegments(const d2d::Rect& r, std::vector<d2d::Vector>& segs)
 {
-	int dw = m_image->getSize().xLength() / m_col,
-		dh = m_image->getSize().yLength() / m_row;
+	int img_w = m_image->getSize().xLength(),
+		img_h = m_image->getSize().yLength();
+	float dw = img_w / m_col,
+		  dh = img_h / m_row;
 	for (float x = r.xMin; x < r.xMax; x += dw) {
 		segs.push_back(d2d::Vector(x, r.yMin - 1));
 		segs.push_back(d2d::Vector(x, r.yMax + 1));
@@ -127,6 +127,21 @@ void OceanMesh::CalSegments(const d2d::Rect& r, std::vector<d2d::Vector>& segs)
 	for (float y = r.yMin; y < r.yMax; y += dh) {
 		segs.push_back(d2d::Vector(r.xMin - 1, y));
 		segs.push_back(d2d::Vector(r.xMax + 1, y));
+	}
+
+	if (m_texcoords_base.x != 0) {
+		float offset = m_texcoords_base.x * img_w;
+		for (float x = r.xMin + offset; x < r.xMax; x += img_w) {
+			segs.push_back(d2d::Vector(x, r.yMin - 1));
+			segs.push_back(d2d::Vector(x, r.yMax + 1));
+		}
+	}
+	if (m_texcoords_base.y != 0) {
+		float offset = m_texcoords_base.y * img_h;
+		for (float y = r.yMin + offset; y < r.yMax; y += img_h) {
+			segs.push_back(d2d::Vector(r.xMin - 1, y));
+			segs.push_back(d2d::Vector(r.xMax + 1, y));
+		}
 	}
 }
 
@@ -137,6 +152,9 @@ void OceanMesh::CalTrisTexcords(const d2d::Rect& r,
 	float img_w = m_image->getSize().xLength(),
 		  img_h = m_image->getSize().yLength();
 
+	d2d::Vector left_low;
+	left_low.x = r.xMin - (1 - m_texcoords_base.x) * img_w;
+	left_low.y = r.yMin - (1 - m_texcoords_base.y) * img_h;
 	assert(tris_vertices.size() % 3 == 0);
 	for (int i = 0, n = tris_vertices.size(); i < n; i += 3)
 	{
@@ -144,10 +162,10 @@ void OceanMesh::CalTrisTexcords(const d2d::Rect& r,
 		center /= 3;
 
 		d2d::Vector base;
-		int ix = (center.x - r.xMin) / img_w,
-			iy = (center.y - r.yMin) / img_h;
-		base.x = r.xMin + img_w * ix;
-		base.y = r.yMin + img_h * iy;
+		int ix = (center.x - left_low.x) / img_w,
+			iy = (center.y - left_low.y) / img_h;
+		base.x = left_low.x + img_w * ix;
+		base.y = left_low.y + img_h * iy;
 
 		for (int j = 0; j < 3; ++j) {
 			float tx = (tris_vertices[i+j].x - base.x) / img_w,
@@ -186,6 +204,31 @@ void OceanMesh::BuildGrids(const d2d::Rect& region,
 			m_grids.push_back(grids[i]);
 		}
 	}
+}
+
+void OceanMesh::UpdateWave(float during)
+{
+	for (int i = 0, n = m_grids.size(); i < n; ++i) {
+		MeshShape* grid = m_grids[i];
+		const std::vector<emesh::Triangle*>& tris = grid->GetTriangles();
+		for (int j = 0, m = tris.size(); j < m; ++j) {
+			emesh::Triangle* tri = tris[j];
+			for (int k = 0; k < 3; ++k) {
+				emesh::Node* n = tri->nodes[k];
+				float dis = n->ori_xy.y - m_wave_speed * during;
+				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+			}
+		}
+	}
+}
+
+void OceanMesh::UpdateUVMove(float dt)
+{
+	m_texcoords_base += m_texcoords_spd * dt;
+	if (m_texcoords_base.x >= 1) m_texcoords_base.x -= 1;
+	if (m_texcoords_base.x < 0) m_texcoords_base.x += 1;
+	if (m_texcoords_base.y >= 1) m_texcoords_base.y -= 1;
+	if (m_texcoords_base.y < 0) m_texcoords_base.y += 1;
 }
 
 }
