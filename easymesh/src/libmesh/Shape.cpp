@@ -101,6 +101,11 @@ void Shape::DrawInfoXY() const
 
 void Shape::DrawTexture(const d2d::Matrix& mt) const
 {
+	DrawTexture(mt, m_texid);
+}
+
+void Shape::DrawTexture(const d2d::Matrix& mt, unsigned int texid) const
+{
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->sprite();
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -114,7 +119,7 @@ void Shape::DrawTexture(const d2d::Matrix& mt) const
 		}
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
-		shader->Draw(vertices, texcoords, m_texid);
+		shader->Draw(vertices, texcoords, texid);
 	}
 }
 

@@ -8,7 +8,8 @@ namespace eterrain2d
 OceanMesh::OceanMesh(const libshape::PolygonShape* shape, 
 					 const d2d::ImageSymbol* image)
 	 : m_shape(shape)
-	 , m_image(image)
+	 , m_image0(image)
+	 , m_image1(NULL)
 {
 	m_row = MESH_ROW;
 	m_col = MESH_COL;
@@ -18,8 +19,12 @@ OceanMesh::OceanMesh(const libshape::PolygonShape* shape,
 	m_wave_height = WAVE_HEIGHT;
 
 	m_uv_move_open = true;
-	m_texcoords_spd.set(0, 0);
+	m_texcoords_spd.set(UV_SPEED_X * 0.01f, UV_SPEED_Y * 0.01f);
 	m_texcoords_base.set(0, 0);
+
+	m_blend_open = true;
+	m_blend_base = 0;
+	m_blend_speed = BLEND_SPEED * 0.01f;
 
 	Build();
 }
@@ -73,6 +78,11 @@ void OceanMesh::SetTexcoordsSpeed(const d2d::Vector& speed)
 	m_texcoords_spd = speed;
 }
 
+void OceanMesh::SetBlendSpeed(float spd)
+{
+	m_blend_speed = spd;
+}
+
 void OceanMesh::Update(float dt)
 {
 	static float during = 0;
@@ -83,18 +93,68 @@ void OceanMesh::Update(float dt)
 	if (m_wave_open) {
 		UpdateWave(during);
 	}
+	if (m_blend_open) {
+		UpdateBlend(dt);
+	}
 	during += dt;
 }
 
 void OceanMesh::Draw(bool draw_tris) const
 {
-	for (int i = 0, n = m_grids.size(); i < n; ++i) {
-		MeshShape* grid = m_grids[i];
-		grid->DrawTexture(d2d::Matrix());
-		if (draw_tris) {
-			grid->DrawInfoXY();
+	d2d::Matrix mt;
+	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	if (m_blend_open && m_image1) {
+		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, m_blend_base), d2d::Colorf(0, 0, 0, 0));
+		for (int i = 0, n = m_grids.size(); i < n; ++i) {
+			m_grids[i]->DrawTexture(mt, m_image0->getTextureID());
+		}
+		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, 1 - m_blend_base), d2d::Colorf(0, 0, 0, 0));
+		for (int i = 0, n = m_grids.size(); i < n; ++i) {
+			m_grids[i]->DrawTexture(mt, m_image1->getTextureID());
+		}
+	} else {
+		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0));
+		for (int i = 0, n = m_grids.size(); i < n; ++i) {
+			m_grids[i]->DrawTexture(mt);
 		}
 	}
+
+	if (draw_tris) {
+		for (int i = 0, n = m_grids.size(); i < n; ++i) {
+			m_grids[i]->DrawInfoXY();
+		}
+	}
+}
+
+void OceanMesh::OpenWave(bool open) 
+{ 
+	m_wave_open = open; 
+}
+
+void OceanMesh::OpenUVMove(bool open) 
+{ 
+	if (!open) {
+		m_texcoords_base.set(0, 0);
+	}
+	m_uv_move_open = open; 
+}
+
+void OceanMesh::OpenBlend(bool open) 
+{ 
+	if (!open) {
+		m_blend_base = 0;
+	}
+	m_blend_open = open; 
+}
+
+void OceanMesh::SetImage1(const d2d::ImageSymbol* image)
+{
+	if (m_image0->getSize().xLength() != image->getSize().xLength() ||
+		m_image0->getSize().yLength() != image->getSize().yLength()) {
+		return;
+	}
+
+	m_image1 = image;
 }
 
 void OceanMesh::Clear()
@@ -116,8 +176,8 @@ d2d::Rect OceanMesh::CalBoundRegion(const std::vector<d2d::Vector>& bound)
 
 void OceanMesh::CalSegments(const d2d::Rect& r, std::vector<d2d::Vector>& segs)
 {
-	int img_w = m_image->getSize().xLength(),
-		img_h = m_image->getSize().yLength();
+	int img_w = m_image0->getSize().xLength(),
+		img_h = m_image0->getSize().yLength();
 	float dw = img_w / m_col,
 		  dh = img_h / m_row;
 	for (float x = r.xMin; x < r.xMax; x += dw) {
@@ -149,8 +209,8 @@ void OceanMesh::CalTrisTexcords(const d2d::Rect& r,
 								const std::vector<d2d::Vector>& tris_vertices,
 								std::vector<d2d::Vector>& texcoords)
 {
-	float img_w = m_image->getSize().xLength(),
-		  img_h = m_image->getSize().yLength();
+	float img_w = m_image0->getSize().xLength(),
+		  img_h = m_image0->getSize().yLength();
 
 	d2d::Vector left_low;
 	left_low.x = r.xMin - (1 - m_texcoords_base.x) * img_w;
@@ -179,8 +239,8 @@ void OceanMesh::BuildGrids(const d2d::Rect& region,
 						   const std::vector<d2d::Vector>& vertices, 
 						   const std::vector<d2d::Vector>& texcoords)
 {
-	float img_w = m_image->getSize().xLength(),
-		  img_h = m_image->getSize().yLength();
+	float img_w = m_image0->getSize().xLength(),
+		  img_h = m_image0->getSize().yLength();
 	int cx = std::ceil(region.xLength() / img_w),
 		cy = std::ceil(region.yLength() / img_h);
 	std::vector<MeshShape*> grids;
@@ -194,7 +254,7 @@ void OceanMesh::BuildGrids(const d2d::Rect& region,
 			iy = (center.y - region.yMin) / img_h;
 		MeshShape** grid = &grids[iy * cx + ix];
 		if (!*grid) {
-			*grid = new MeshShape(*m_image->getImage());
+			*grid = new MeshShape(*m_image0->getImage());
 		}
 		(*grid)->InsertTriangle(&vertices[i], &texcoords[i]);
 	}
@@ -229,6 +289,19 @@ void OceanMesh::UpdateUVMove(float dt)
 	if (m_texcoords_base.x < 0) m_texcoords_base.x += 1;
 	if (m_texcoords_base.y >= 1) m_texcoords_base.y -= 1;
 	if (m_texcoords_base.y < 0) m_texcoords_base.y += 1;
+}
+
+void OceanMesh::UpdateBlend(float dt)
+{
+	m_blend_base += m_blend_speed * dt;
+	if (m_blend_base > 1) {
+		m_blend_speed = -m_blend_speed;
+		m_blend_base = 1;
+	}
+	if (m_blend_base < 0) {
+		m_blend_speed = -m_blend_speed;
+		m_blend_base = 0;
+	}
 }
 
 }

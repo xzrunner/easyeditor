@@ -35,6 +35,7 @@ public:
 	void DrawInfoUV() const;
 	void DrawInfoXY() const;
 	void DrawTexture(const d2d::Matrix& mt) const;
+	void DrawTexture(const d2d::Matrix& mt, unsigned int texid) const;
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 

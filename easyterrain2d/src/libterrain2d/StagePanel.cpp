@@ -32,17 +32,27 @@ void StagePanel::clear()
 
 void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageSymbol* image)
 {
+	bool is_new = true;
 	std::vector<OceanMesh*>::iterator itr = m_oceans.begin();
 	for ( ; itr != m_oceans.end(); ) {
 		OceanMesh* mesh = *itr;
 		if (mesh->GetShape() == shape) {
-			delete mesh;
-			itr = m_oceans.erase(itr);
+			if (mesh->IsBlendOpen()) {
+				is_new = false;
+				mesh->SetImage1(image);
+				++itr;
+			} else {
+				delete mesh;
+				itr = m_oceans.erase(itr);
+			}
 		} else {
 			++itr;
 		}
 	}
-	m_oceans.push_back(new OceanMesh(shape, image));
+
+	if (is_new) {
+		m_oceans.push_back(new OceanMesh(shape, image));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

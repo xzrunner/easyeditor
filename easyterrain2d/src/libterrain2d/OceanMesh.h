@@ -19,6 +19,7 @@ public:
 	void SetSmallGridSize(int row, int col);
 	void SetWaveInfo(float speed, float height);
 	void SetTexcoordsSpeed(const d2d::Vector& speed);
+	void SetBlendSpeed(float spd);
 
 	void Update(float dt);
 	void Draw(bool draw_tris) const;
@@ -27,8 +28,12 @@ public:
 		return m_shape;
 	}
 
-	void OpenWave(bool open) { m_wave_open = open; }
-	void OpenUVMove(bool open) { m_uv_move_open = open; }
+	void OpenWave(bool open);
+	void OpenUVMove(bool open);
+	void OpenBlend(bool open);
+
+	bool IsBlendOpen() const { return m_blend_open; }
+	void SetImage1(const d2d::ImageSymbol* image);
 
 private:
 	void Clear();
@@ -42,10 +47,11 @@ private:
 
 	void UpdateWave(float during);
 	void UpdateUVMove(float dt);
+	void UpdateBlend(float dt);
 
 private:
 	const libshape::PolygonShape* m_shape;
-	const d2d::ImageSymbol* m_image;
+	const d2d::ImageSymbol *m_image0, *m_image1;
 
 	std::vector<MeshShape*> m_grids;
  
@@ -55,8 +61,10 @@ private:
 	float m_wave_speed, m_wave_height;
 
 	bool m_uv_move_open;
-	d2d::Vector m_texcoords_spd;
-	d2d::Vector m_texcoords_base;
+	d2d::Vector m_texcoords_base, m_texcoords_spd;
+
+	bool m_blend_open;
+	float m_blend_base, m_blend_speed;
 
 }; // OceanMesh
 

@@ -12,6 +12,7 @@ static const float WAVE_SPEED = 10;
 static const float WAVE_HEIGHT = 5;
 static const float UV_SPEED_X = 0;
 static const float UV_SPEED_Y = 0;
+static const float BLEND_SPEED = 10;
 
 }
 
