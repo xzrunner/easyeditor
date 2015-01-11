@@ -78,26 +78,30 @@ wxSizer* DrawPolygonCMPT::initPreviewButtonPanel()
 
 void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 {
-	if (m_fillingTypeChoice->GetSelection() == 0)
+	switch (m_fillingTypeChoice->GetSelection()) 
 	{
-		wxColourDialog dialog(this, &m_colorData);
-		dialog.SetTitle(wxT("选择颜色"));
-		if (dialog.ShowModal() == wxID_OK)
+	case 0:
 		{
-			m_color = dialog.GetColourData().GetColour();
-			m_colorData = dialog.GetColourData();
+			wxColourDialog dialog(this, &m_colorData);
+			dialog.SetTitle(wxT("选择颜色"));
+			if (dialog.ShowModal() == wxID_OK)
+			{
+				m_color = dialog.GetColourData().GetColour();
+				m_colorData = dialog.GetColourData();
+			}
 		}
-	}
-	else
-	{
-		wxFileDialog dlg(this, wxT("选择纹理"), wxEmptyString, wxEmptyString, wxT("*.png;*.jpg"), wxFD_OPEN);
-		if (dlg.ShowModal() == wxID_OK)
+		break;
+	case 1:
 		{
-			m_filePath = dlg.GetPath();
-			m_bitmap.loadFromFile(m_filePath);
+			wxFileDialog dlg(this, wxT("选择纹理"), wxEmptyString, wxEmptyString, wxT("*.png;*.jpg"), wxFD_OPEN);
+			if (dlg.ShowModal() == wxID_OK)
+			{
+				m_filePath = dlg.GetPath();
+				m_bitmap.loadFromFile(m_filePath);
+			}
 		}
+		break;
 	}
-
 	fillingButton();
 }
 
@@ -114,36 +118,36 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 	for (size_t i = 0, n = polys.size(); i < n; ++i)
 	{
 		PolygonShape* poly = polys[i];
-		if (m_fillingTypeChoice->GetSelection() == 0)
+		switch (m_fillingTypeChoice->GetSelection()) 
 		{
-			poly->m_fillingType = PolygonShape::e_Color;
-			poly->m_fillingColor = d2d::Colorf(m_color.Red() / 255.0f, m_color.Green() / 255.0f, m_color.Blue() / 255.0f);
+		case 0:
+			poly->SetMaterialColor(d2d::Colorf(m_color.Red() / 255.0f, m_color.Green() / 255.0f, m_color.Blue() / 255.0f));
+			break;
+		case 1:
+			poly->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->fetchSymbol(m_filePath)));
+			break;
 		}
-		else
-		{
-			poly->m_fillingType = PolygonShape::e_Texture;
-			// todo Release symbol
-			poly->m_fillingTexture = static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->fetchSymbol(m_filePath));
-		}
-		poly->buildFillingTris();
-
 		m_editPanel->Refresh();
 	}
 }
 
 void DrawPolygonCMPT::fillingButton()
 {
-	if (m_fillingTypeChoice->GetSelection() == 0)
+	switch (m_fillingTypeChoice->GetSelection()) 
 	{
-		wxImage img(m_btnReview->GetSize().GetWidth(), m_btnReview->GetSize().GetHeight());
-		img.SetRGB(wxRect(m_btnReview->GetSize()), m_color.Red(), m_color.Green(), m_color.Blue());
-		wxBitmap bitmap(img);
-		m_btnReview->SetBitmap(bitmap);
-	}
-	else
-	{
-		if (const wxBitmap* bmp = m_bitmap.getBitmap())
+	case 0:
+		{
+			wxImage img(m_btnReview->GetSize().GetWidth(), m_btnReview->GetSize().GetHeight());
+			img.SetRGB(wxRect(m_btnReview->GetSize()), m_color.Red(), m_color.Green(), m_color.Blue());
+			wxBitmap bitmap(img);
+			m_btnReview->SetBitmap(bitmap);
+		}
+		break;
+	case 1:
+		if (const wxBitmap* bmp = m_bitmap.getBitmap()) {
 			m_btnReview->SetBitmap(*bmp);
+		}
+		break;
 	}
 }
 
