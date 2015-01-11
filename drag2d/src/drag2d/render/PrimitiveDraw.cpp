@@ -15,7 +15,7 @@
 namespace d2d
 {
 
-static const int MAX_VERTICES = 4096;
+static const int MAX_VERTICES = 4096 * 10;
 static float VERTICES[MAX_VERTICES * 2];
 
 void PrimitiveDraw::rect(const Vector& center, float radius, const ShapeStyle& style)

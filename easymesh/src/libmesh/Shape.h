@@ -1,11 +1,7 @@
-#ifndef _EASYMESH_ISHAPE_H_
-#define _EASYMESH_ISHAPE_H_
+#ifndef _EASYMESH_SHAPE_H_
+#define _EASYMESH_SHAPE_H_
 
 #include <drag2d.h>
-
-#include "config.h"
-
-namespace libshape { class ChainShape; }
 
 namespace emesh
 {
@@ -26,29 +22,12 @@ public:
  	//
  	virtual Shape* clone() const { return NULL; }
 
-	virtual void Insert(const d2d::Vector& p) = 0;
-	virtual void Remove(const d2d::Vector& p) = 0;
-	virtual d2d::Vector* Find(const d2d::Vector& p) = 0;
-	virtual void Move(d2d::Vector* src, const d2d::Vector& dst) = 0;
+	virtual void Load(const Json::Value& value) {}
+	virtual void Store(Json::Value& value) const {}
 
-	virtual void Reset() = 0;
-	virtual void Clear() = 0;
-
-	virtual void OffsetUV(float dx, float dy) = 0;
-
-	virtual void Load(const Json::Value& value) = 0;
-	virtual void Store(Json::Value& value) const = 0;
-
-	virtual int GetQuadSize() const = 0;
-
-	virtual ShapeType GetShapeType() const  = 0;
-
-	virtual void Refresh() = 0;
-
-	virtual void TraverseShapes(d2d::IVisitor& visitor) const = 0;
-	virtual void RemoveShapes(d2d::IShape* shape) = 0;
-	virtual void InsertShapes(d2d::IShape* shape) = 0;
-	virtual void ClearShapes() = 0;
+	virtual void OffsetUV(float dx, float dy) {}
+	virtual void Update() {}
+	virtual void Refresh() {}
 
 	void QueryNode(const d2d::Vector& p, std::vector<Node*>& nodes);
 	void QueryNode(const d2d::Rect& r, std::vector<Node*>& nodes);
@@ -79,8 +58,8 @@ protected:
 
 	float m_node_radius;
 
-}; // IShape
+}; // Shape
 
 }
 
-#endif // _EASYMESH_ISHAPE_H_
+#endif // _EASYMESH_SHAPE_H_

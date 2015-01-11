@@ -16,8 +16,20 @@ protected:
 	virtual void initGL();
 	virtual void onDraw();
 
+	void onTimer(wxTimerEvent& event);
+
 private:
+	enum
+	{
+		TIMER_ID = 1000
+	};
+
+private:
+	wxTimer m_timer;
+
 	StagePanel* m_panel;
+
+	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

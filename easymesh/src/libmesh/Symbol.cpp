@@ -108,11 +108,6 @@ void Symbol::LoadImage(const wxString& filepath)
 	d2d::ImageMgr::Instance()->getItem(filepath, &m_image);
 }
 
-int Symbol::GetQuadSize() const 
-{ 
-	return m_shape->GetQuadSize(); 
-}
-
 void Symbol::CreateShape()
 {
 	if (m_shape) {

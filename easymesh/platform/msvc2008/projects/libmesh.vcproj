@@ -244,6 +244,14 @@
 				Name="base"
 				>
 				<File
+					RelativePath="..\..\..\src\libmesh\EditShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libmesh\EditShape.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libmesh\Node.h"
 					>
 				</File>

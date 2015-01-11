@@ -13,7 +13,7 @@ public:
 
 	virtual bool onMouseLeftDClick(int x, int y);
 
-private:
+protected:
 	d2d::MultiShapesImpl* m_shapesImpl;
 
 }; // DrawPolygonEdgeOP

@@ -1,7 +1,7 @@
 #include "EditUVCMPT.h"
 #include "StagePanel.h"
 #include "EditUVOP.h"
-#include "Shape.h"
+#include "EditShape.h"
 
 namespace emesh
 {
@@ -47,8 +47,8 @@ void EditUVCMPT::onMove(wxCommandEvent& event)
 
 void EditUVCMPT::onReset(wxCommandEvent& event)
 {
-	if (Shape* shape = m_stage->GetShape()) {
-		m_stage->GetShape()->Reset();
+	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
+		shape->Reset();
 		m_editPanel->Refresh();
 		m_editOP->clear();
 	}

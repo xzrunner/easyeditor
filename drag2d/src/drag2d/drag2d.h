@@ -106,6 +106,7 @@
 #include "widgets/SelectDrawTypeWidget.h"
 #include "widgets/LayersMgrWidget.h"
 #include "widgets/PasteSymbolRandomWidget.h"
+#include "widgets/SliderCtrl.h"
 
 #include "common/LibJpeg.h"
 #include "common/log.h"

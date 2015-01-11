@@ -1,7 +1,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "Symbol.h"
-#include "Shape.h"
+#include "EditShape.h"
 
 #include <easyshape.h>
 
@@ -58,23 +58,23 @@ void StagePanel::traverseShapes(d2d::IVisitor& visitor,
 {
 	Shape* shape = m_symbol->getShape();
 	if (shape) {
-		shape->TraverseShapes(visitor);
+		static_cast<EditShape*>(shape)->TraverseShape(visitor);
 	}
 }
 
 void StagePanel::removeShape(d2d::IShape* shape)
 {
-	Shape* mshape = m_symbol->getShape();
-	if (mshape) {
-		mshape->RemoveShapes(shape);
+	Shape* _shape = m_symbol->getShape();
+	if (_shape) {
+		static_cast<EditShape*>(_shape)->RemoveShape(shape);
 	}
 }
 
 void StagePanel::insertShape(d2d::IShape* shape)
 {
-	Shape* mshape = m_symbol->getShape();
-	if (mshape) {
-		mshape->InsertShapes(shape);
+	Shape* _shape = m_symbol->getShape();
+	if (_shape) {
+		static_cast<EditShape*>(_shape)->InsertShape(shape);
 	}
 }
 
@@ -82,7 +82,7 @@ void StagePanel::clearShapes()
 {
 	Shape* shape = m_symbol->getShape();
 	if (shape) {
-		shape->ClearShapes();
+		static_cast<EditShape*>(shape)->ClearShape();
 	}
 }
 
@@ -107,7 +107,6 @@ Shape* StagePanel::GetShape()
 
 void StagePanel::LoadFromSymbol(const d2d::ISymbol* symbol)
 {
-	
 }
 
 void StagePanel::UpdateSymbol()

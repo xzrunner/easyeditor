@@ -19,6 +19,11 @@ protected:
 	void onTimer(wxTimerEvent& event);
 
 private:
+	void DrawBG() const;
+
+	void Update();
+
+private:
 	enum
 	{
 		TIMER_ID = 1000

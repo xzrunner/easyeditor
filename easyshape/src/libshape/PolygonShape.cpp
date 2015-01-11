@@ -335,7 +335,7 @@ CalTexcoords(const d2d::Rect& rect)
 		for (size_t j = 0; j < 3; ++j)
 		{
 			float tx = (m_vertices[index + j].x - base.x) / width,
-				ty = (m_vertices[index + j].y - base.y) / height;
+				  ty = (m_vertices[index + j].y - base.y) / height;
 			m_texcoords.push_back(d2d::Vector(tx, ty));
 		}
 

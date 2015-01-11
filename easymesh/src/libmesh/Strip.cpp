@@ -10,7 +10,7 @@ Strip::Strip()
 }
 
 Strip::Strip(const Strip& strip)
-	: Shape(strip)
+	: EditShape(strip)
 	, m_left_nodes(strip.m_left_nodes)
 	, m_right_nodes(strip.m_right_nodes)
 {
@@ -19,7 +19,7 @@ Strip::Strip(const Strip& strip)
 }
 
 Strip::Strip(const d2d::Image& image)
-	: Shape(image)
+	: EditShape(image)
 {
 	InitBound();
 }
@@ -29,94 +29,49 @@ Strip* Strip::clone() const
 	return new Strip(*this);
 }
 
-void Strip::Insert(const d2d::Vector& p)
+void Strip::Load(const Json::Value& value)
 {
-	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
+	m_width = value["width"].asDouble();
+	m_height = value["height"].asDouble();
 
-	if (!m_left_nodes.IsRegionContain(p) || !m_right_nodes.IsRegionContain(p)) {
-		return;
-	}
-
-	m_left_nodes.Insert(p);
-	m_right_nodes.Insert(p);
+	m_left_nodes.m_ori.clear();
+	m_right_nodes.m_ori.clear();
+	d2d::JsonTools::load(value["left nodes"], m_left_nodes.m_ori);
+	d2d::JsonTools::load(value["right nodes"], m_right_nodes.m_ori);
+	m_left_nodes.m_ext = m_left_nodes.m_ori;
+	m_right_nodes.m_ext = m_right_nodes.m_ori;
 
 	RefreshTriangles();
+
+	LoadTriangles(value["triangles"]);
 }
 
-void Strip::Remove(const d2d::Vector& p)
+void Strip::Store(Json::Value& value) const
 {
-	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
+	value["type"] = GetType();
 
-	int idx;
-	idx = m_left_nodes.QueryIndex(p, m_node_radius);
-	if (idx != -1) 
-	{
-		m_left_nodes.Remove(idx);
-		m_right_nodes.Remove(idx);
-		RefreshTriangles();
-	} 
-	else 
-	{
-		idx = m_right_nodes.QueryIndex(p, m_node_radius);
-		if (idx != -1) 
-		{
-			m_left_nodes.Remove(idx);
-			m_right_nodes.Remove(idx);
-			RefreshTriangles();
-		}
-	}
-}
+	value["width"] = m_width;
+	value["height"] = m_height;
 
-d2d::Vector* Strip::Find(const d2d::Vector& p)
-{
-	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
+	d2d::JsonTools::store(m_left_nodes.m_ori, value["left nodes"]);
+	d2d::JsonTools::store(m_right_nodes.m_ori, value["right nodes"]);
 
-	d2d::Vector* ptr = m_left_nodes.QueryPointer(p, m_node_radius);
-	if (ptr == NULL) {
-		ptr = m_right_nodes.QueryPointer(p, m_node_radius);
-	}
-	return ptr;
-}
-
-void Strip::Move(d2d::Vector* src, const d2d::Vector& dst)
-{
-	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
-
-	if (!src) return;
-
-	src->y = dst.y;
-
-	m_left_nodes.Sort();
-	m_right_nodes.Sort();
-
-	RefreshTriangles();
-}
-
-void Strip::Reset()
-{
-	m_uv_offset = 0;
-	RefreshTriangles();
-}
-
-void Strip::Clear()
-{
-	InitBound();
-	RefreshTriangles();
+	StoreTriangles(value["triangles"]);
 }
 
 void Strip::OffsetUV(float dx, float dy)
 {
 	// update uv base
- 	m_uv_offset += dy;
- 	m_uv_offset = m_uv_offset - std::floor(m_uv_offset);
+	m_uv_offset += dy;
+	m_uv_offset = m_uv_offset - std::floor(m_uv_offset);
 
 	std::vector<std::pair<d2d::Vector, d2d::Vector> > trans_list;
 	GetTransList(trans_list);
 
 	// insert node
-  	d2d::Vector pos;
-  	pos.x = 0;
-  	pos.y = -m_height*0.5f + m_height*m_uv_offset;
+	d2d::Vector pos;
+	pos.x = 0;
+	pos.y = -m_height*0.5f + m_height*m_uv_offset;
 	int idx_left, idx_right;
 	d2d::Vector pos_left, pos_right;
 	idx_left = m_left_nodes.GetNodeInsertPos(pos, pos_left);
@@ -160,64 +115,104 @@ void Strip::OffsetUV(float dx, float dy)
 	}
 
 	// set uv between textures
- 	for (int i = 0, n = m_tris.size(); i < n; ++i)
- 	{
- 		Triangle* tri = m_tris[i];
- 		d2d::Rect r;
- 		r.makeInfinite();
- 		for (int i = 0; i < 3; ++i) {
- 			r.combine(tri->nodes[i]->uv);
- 		}
- 
- 		for (int i = 0; i < 3; ++i) 
- 		{
- 			Node* n = tri->nodes[i];
- 			float y = n->uv.y - m_uv_offset;
-  			y = y - std::floor(y);
-  			if (fabs(y - 0) < 0.0001f && n->uv.y == r.yMax) {
-  				y = 1;
-  			}
-  			if (fabs(y - 1) < 0.0001f && n->uv.y == r.yMin) {
-  				y = 0;
-  			}
- 			n->uv.y = y;
- 		}
- 	}
+	for (int i = 0, n = m_tris.size(); i < n; ++i)
+	{
+		Triangle* tri = m_tris[i];
+		d2d::Rect r;
+		r.makeInfinite();
+		for (int i = 0; i < 3; ++i) {
+			r.combine(tri->nodes[i]->uv);
+		}
+
+		for (int i = 0; i < 3; ++i) 
+		{
+			Node* n = tri->nodes[i];
+			float y = n->uv.y - m_uv_offset;
+			y = y - std::floor(y);
+			if (fabs(y - 0) < 0.0001f && n->uv.y == r.yMax) {
+				y = 1;
+			}
+			if (fabs(y - 1) < 0.0001f && n->uv.y == r.yMin) {
+				y = 0;
+			}
+			n->uv.y = y;
+		}
+	}
 }
 
-void Strip::Load(const Json::Value& value)
+void Strip::InsertNode(const d2d::Vector& p)
 {
-	m_width = value["width"].asDouble();
-	m_height = value["height"].asDouble();
+	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
-	m_left_nodes.m_ori.clear();
-	m_right_nodes.m_ori.clear();
-	d2d::JsonTools::load(value["left nodes"], m_left_nodes.m_ori);
-	d2d::JsonTools::load(value["right nodes"], m_right_nodes.m_ori);
-	m_left_nodes.m_ext = m_left_nodes.m_ori;
-	m_right_nodes.m_ext = m_right_nodes.m_ori;
+	if (!m_left_nodes.IsRegionContain(p) || !m_right_nodes.IsRegionContain(p)) {
+		return;
+	}
+
+	m_left_nodes.Insert(p);
+	m_right_nodes.Insert(p);
 
 	RefreshTriangles();
-
-	LoadTriangles(value["triangles"]);
 }
 
-void Strip::Store(Json::Value& value) const
+void Strip::RemoveNode(const d2d::Vector& p)
 {
-	value["type"] = GetType();
+	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
 
-	value["width"] = m_width;
-	value["height"] = m_height;
-
-	d2d::JsonTools::store(m_left_nodes.m_ori, value["left nodes"]);
-	d2d::JsonTools::store(m_right_nodes.m_ori, value["right nodes"]);
-
-	StoreTriangles(value["triangles"]);
+	int idx;
+	idx = m_left_nodes.QueryIndex(p, m_node_radius);
+	if (idx != -1) 
+	{
+		m_left_nodes.Remove(idx);
+		m_right_nodes.Remove(idx);
+		RefreshTriangles();
+	} 
+	else 
+	{
+		idx = m_right_nodes.QueryIndex(p, m_node_radius);
+		if (idx != -1) 
+		{
+			m_left_nodes.Remove(idx);
+			m_right_nodes.Remove(idx);
+			RefreshTriangles();
+		}
+	}
 }
 
-int Strip::GetQuadSize() const
+d2d::Vector* Strip::FindNode(const d2d::Vector& p)
 {
-	return m_tris.size() / 2;
+	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
+
+	d2d::Vector* ptr = m_left_nodes.QueryPointer(p, m_node_radius);
+	if (ptr == NULL) {
+		ptr = m_right_nodes.QueryPointer(p, m_node_radius);
+	}
+	return ptr;
+}
+
+void Strip::MoveNode(d2d::Vector* src, const d2d::Vector& dst)
+{
+	assert(m_left_nodes.Size() >= 2 && m_right_nodes.Size() >= 2);
+
+	if (!src) return;
+
+	src->y = dst.y;
+
+	m_left_nodes.Sort();
+	m_right_nodes.Sort();
+
+	RefreshTriangles();
+}
+
+void Strip::Reset()
+{
+	m_uv_offset = 0;
+	RefreshTriangles();
+}
+
+void Strip::Clear()
+{
+	InitBound();
+	RefreshTriangles();
 }
 
 void Strip::InitBound()

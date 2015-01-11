@@ -1,6 +1,6 @@
 #include "CreateStripOP.h"
 #include "StagePanel.h"
-#include "Shape.h"
+#include "EditShape.h"
 #include "Symbol.h"
 
 namespace emesh
@@ -19,10 +19,10 @@ bool CreateStripOP::onMouseLeftDown(int x, int y)
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y))
 		return true;
 
-	if (Shape* shape = m_stage->GetShape())
+	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		m_selected = shape->Find(pos);
+		m_selected = shape->FindNode(pos);
 	}
 
 	return false;
@@ -33,13 +33,14 @@ bool CreateStripOP::onMouseLeftUp(int x, int y)
 	if (d2d::ZoomViewOP::onMouseLeftUp(x, y))
 		return true;
 
-	Shape* shape = m_stage->GetShape();
-	if (!shape) return false;
+	if (m_selected) {
+		return false;
+	}
 
-	if (!m_selected)
+	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		shape->Insert(pos);
+		shape->InsertNode(pos);
 		m_editPanel->Refresh();
 	}
 
@@ -51,10 +52,10 @@ bool CreateStripOP::onMouseRightDown(int x, int y)
 	if (d2d::ZoomViewOP::onMouseRightDown(x, y))
 		return true;
 
-	if (Shape* shape = m_stage->GetShape())
+	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		shape->Remove(pos);
+		shape->RemoveNode(pos);
 		m_editPanel->Refresh();
 
 		m_last_right = pos;
@@ -89,15 +90,15 @@ bool CreateStripOP::onMouseDrag(int x, int y)
 		m_last_right = pos;
 	}
 
-	Shape* shape = m_stage->GetShape();
-	if (!shape) return false;
-
-	if (m_selected) {
-		shape->Move(m_selected, pos);
+	if (!m_selected) {
+		return false;
 	}
 
-	//m_editPanel->Refresh();
-	m_stage->Refresh();
+	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
+	{
+		shape->MoveNode(m_selected, pos);
+		m_stage->Refresh();
+	}
 
 	return false;
 }

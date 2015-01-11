@@ -1,8 +1,6 @@
 #include "Shape.h"
 #include "Triangle.h"
 
-#include <drag2d.h>
-
 namespace emesh
 {
 
@@ -25,8 +23,6 @@ Shape::Shape(const d2d::Image& image)
 {
 	m_texid = image.textureID();
 
-// 	m_width = image.getRegion().xLength();
-// 	m_height = image.getRegion().yLength();
 	m_width = image.originWidth();
 	m_height = image.originHeight();
 

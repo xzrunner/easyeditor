@@ -1,7 +1,7 @@
 #include "EditMeshCMPT.h"
 #include "EditMeshOP.h"
 #include "StagePanel.h"
-#include "Shape.h"
+#include "EditShape.h"
 
 namespace emesh
 {
@@ -27,7 +27,7 @@ wxSizer* EditMeshCMPT::initLayout()
 
 void EditMeshCMPT::onReset(wxCommandEvent& event)
 {
-	if (Shape* shape = m_stage->GetShape()) {
+	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Reset();
 	}
 	m_editPanel->Refresh();

@@ -4,7 +4,7 @@
 #include "StagePanel.h"
 #include "FileIO.h"
 #include "ShapeFactory.h"
-#include "Shape.h"
+#include "EditShape.h"
 
 namespace emesh
 {
@@ -34,7 +34,7 @@ wxSizer* CreateMeshCMPT::initLayout()
 		choices.Add(wxT("mesh"));
 		choices.Add(wxT("strip"));
 		wxRadioBox* typeChoice = new wxRadioBox(this, wxID_ANY, wxT("Type"), 
-			wxDefaultPosition, wxDefaultSize, choices, 2, wxRA_SPECIFY_COLS);
+			wxDefaultPosition, wxDefaultSize, choices, 2, wxRA_SPECIFY_ROWS);
 // 		typeChoice->SetSelection(1);
 // 		ShapeFactory::Instance()->SetShapeType(ST_STRIP);
 		typeChoice->SetSelection(0);
@@ -106,7 +106,7 @@ void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 
 void CreateMeshCMPT::onClear(wxCommandEvent& event)
 {
-	if (Shape* shape = m_stage->GetShape()) {
+	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Clear();
 	}
 	m_stage->clearShapes();

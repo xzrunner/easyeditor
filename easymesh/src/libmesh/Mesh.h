@@ -1,9 +1,7 @@
 #ifndef _EASYMESH_MESH_H_
 #define _EASYMESH_MESH_H_
 
-#include "Shape.h"
-
-#include <drag2d.h>
+#include "EditShape.h"
 
 namespace libshape { class ChainShape; }
 
@@ -12,7 +10,8 @@ namespace emesh
 
 class Node;
 class Triangle;
-class Mesh : public Shape
+
+class Mesh : public EditShape
 {
 public:
 	Mesh(bool use_region = false);
@@ -25,31 +24,29 @@ public:
 	virtual Mesh* clone() const;
 
 	//
-	// IShape interface
+	// Shape interface
 	//
-	virtual void Insert(const d2d::Vector& p) {}
-	virtual void Remove(const d2d::Vector& p) {}
-	virtual d2d::Vector* Find(const d2d::Vector& p) { return NULL; }
-	virtual void Move(d2d::Vector* src, const d2d::Vector& dst) {}
-
- 	virtual void Reset();
- 	virtual void Clear();
-
-	virtual void OffsetUV(float dx, float dy);
-
 	virtual void Load(const Json::Value& value);
 	virtual void Store(Json::Value& value) const;
 
-	virtual int GetQuadSize() const { return -1; }		
-
-	virtual ShapeType GetShapeType() const { return ST_MESH; }
-
+	virtual void OffsetUV(float dx, float dy);
 	virtual void Refresh();
 
-	virtual void TraverseShapes(d2d::IVisitor& visitor) const;
-	virtual void RemoveShapes(d2d::IShape* shape);
-	virtual void InsertShapes(d2d::IShape* shape);
-	virtual void ClearShapes();
+	//
+	// EditShape interface
+	//
+	virtual void InsertNode(const d2d::Vector& p) {}
+	virtual void RemoveNode(const d2d::Vector& p) {}
+	virtual d2d::Vector* FindNode(const d2d::Vector& p) { return NULL; }
+	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst) {}
+
+	virtual void TraverseShape(d2d::IVisitor& visitor) const;
+	virtual void RemoveShape(d2d::IShape* shape);
+	virtual void InsertShape(d2d::IShape* shape);
+	virtual void ClearShape();
+
+ 	virtual void Reset();
+ 	virtual void Clear();
 
 	static const char* GetType() { return "mesh"; }
 

@@ -851,12 +851,12 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	{
 		for (int i = 0; i < frame; ++i)
 		{
-			int quad_size = sprite->getSymbol().GetQuadSize();
-			frame_size.push_back(quad_size);
-
 			// todo 只是具体strip的情况，不支持mesh的旋转
 			const std::vector<emesh::Triangle*>& tris = shape->GetTriangles();
-			assert(tris.size() / 2 == quad_size);
+
+			int quad_size = tris.size() / 2;
+			frame_size.push_back(quad_size);
+
 			for (int j = 0; j < quad_size; ++j)
 			{
 				emesh::Triangle* right_down = tris[j*2];

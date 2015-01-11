@@ -2024,6 +2024,14 @@
 					RelativePath="..\..\..\src\drag2d\widgets\PasteSymbolRandomWidget.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SliderCtrl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SliderCtrl.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

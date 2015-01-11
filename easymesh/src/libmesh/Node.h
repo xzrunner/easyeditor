@@ -15,6 +15,10 @@ public:
  		uv.x = pos.x / width + 0.5f;
  		uv.y = pos.y / height + 0.5f;
 	}
+	Node(const d2d::Vector& _xy, const d2d::Vector& _uv) {
+		xy = ori_xy = _xy;
+		uv = _uv;
+	}
 	Node(const Node& n) {
 		uv = n.uv;
 		xy = ori_xy = n.xy;
