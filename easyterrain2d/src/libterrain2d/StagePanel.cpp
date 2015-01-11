@@ -75,6 +75,10 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
 			poly->SetMaterialTexture(image);
 			m_stage->AddOcean(poly, image);
+		} else {
+			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			sprite->translate(pos);
+			m_stage->insertSprite(sprite);
 		}
 		return true;
 	}
