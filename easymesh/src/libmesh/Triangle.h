@@ -10,6 +10,11 @@ class Triangle : public d2d::Object
 {
 public:
 	Triangle() {}
+	~Triangle() {
+		for (int i = 0; i < 3; ++i) {
+			nodes[i]->Release();
+		}
+	}
 // 	Triangle(const Triangle& tri) {
 // 		for (int i = 0; i < 3; ++i) {
 // 			tri.nodes[0]->Retain();

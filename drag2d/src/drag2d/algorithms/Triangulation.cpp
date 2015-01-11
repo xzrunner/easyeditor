@@ -8,15 +8,31 @@
 namespace d2d
 {
 
-static void init(struct triangulateio& out)
+static void init(struct triangulateio& in, struct triangulateio& out)
 {
-	out.pointlist = (REAL *) NULL;
-	out.pointattributelist = (REAL *) NULL;
-	out.pointmarkerlist = (int *) NULL;
-	out.trianglelist = (int *) NULL;
-	out.triangleattributelist = (REAL *) NULL;
-	out.segmentlist = (int *) NULL;
-	out.segmentmarkerlist = (int *) NULL;
+	in.pointlist = NULL;
+	in.pointattributelist = NULL;
+	in.pointmarkerlist = NULL;
+	in.trianglelist = NULL;
+	in.triangleattributelist = NULL;
+	in.trianglearealist = NULL;
+	in.segmentlist = NULL;
+	in.segmentmarkerlist = NULL;
+	in.holelist = NULL;
+	in.regionlist = NULL;
+
+	out.pointlist = NULL;
+	out.pointattributelist = NULL;
+	out.pointmarkerlist = NULL;
+	out.trianglelist = NULL;
+	out.triangleattributelist = NULL;
+	out.trianglearealist = NULL;
+	out.neighborlist = NULL;
+	out.segmentlist = NULL;
+	out.segmentmarkerlist = NULL;
+	out.edgelist = NULL;
+	out.edgemarkerlist = NULL;
+	out.normlist = NULL;
 }
 
 static void implement(struct triangulateio& in, struct triangulateio& out, Triangulation::Type type)
@@ -43,7 +59,8 @@ static void implement(struct triangulateio& in, struct triangulateio& out, Trian
 	}
 }
 
-static void finish(struct triangulateio& out, 
+static void finish(struct triangulateio& in, 
+				   struct triangulateio& out, 
 				   const std::vector<Vector>& bound, 
 				   std::vector<Vector>& result)
 {
@@ -65,6 +82,30 @@ static void finish(struct triangulateio& out,
 		if (Math::isPointInArea(center, bound))
 			copy(tri.begin(), tri.end(), back_inserter(result));
 	}
+
+	trifree((VOID*)in.pointlist);
+	trifree((VOID*)in.pointattributelist);
+	trifree((VOID*)in.pointmarkerlist);
+	trifree((VOID*)in.trianglelist);
+	trifree((VOID*)in.triangleattributelist);
+	trifree((VOID*)in.trianglearealist);
+	trifree((VOID*)in.segmentlist);
+	trifree((VOID*)in.segmentmarkerlist);
+	trifree((VOID*)in.holelist);
+	trifree((VOID*)in.regionlist);
+
+	trifree((VOID*)out.pointlist);
+	trifree((VOID*)out.pointattributelist);
+	trifree((VOID*)out.pointmarkerlist);
+	trifree((VOID*)out.trianglelist);
+	trifree((VOID*)out.triangleattributelist);
+	trifree((VOID*)out.trianglearealist);
+	trifree((VOID*)out.neighborlist);
+	trifree((VOID*)out.segmentlist);
+	trifree((VOID*)out.segmentmarkerlist);
+	trifree((VOID*)out.edgelist);
+	trifree((VOID*)out.edgemarkerlist);
+	trifree((VOID*)out.normlist);
 }
 
 void Triangulation::normal(const std::vector<Vector>& bound, 
@@ -72,6 +113,7 @@ void Triangulation::normal(const std::vector<Vector>& bound,
 						   Type type)
 {
 	struct triangulateio in, out;
+	init(in, out);
 
 	std::vector<Vector> bound_fixed;
 	VerifyBound(bound, bound_fixed);
@@ -103,15 +145,15 @@ void Triangulation::normal(const std::vector<Vector>& bound,
 	in.numberofholes = 0;
 	in.numberofregions = 0;
 
-	init(out);
 	implement(in, out, type);
-	finish(out, bound_fixed, result);
+	finish(in, out, bound_fixed, result);
 }
 
 void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<std::vector<Vector> >& holes, 
 						  std::vector<Vector>& result, Type type)
 {
 	struct triangulateio in, out;
+	init(in, out);
 
 	std::vector<Vector> bound_fixed;
 	VerifyBound(bound, bound_fixed);
@@ -160,15 +202,15 @@ void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<st
 
 	in.numberofregions = 0;
 
-	init(out);
 	implement(in, out, type);
-	finish(out, bound_fixed, result);
+	finish(in, out, bound_fixed, result);
 }
 
 void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector<Vector>& hole,
 							 std::vector<Vector>& result, Type type)
 {
 	struct triangulateio in, out;
+	init(in, out);
 
 	std::vector<Vector> bound_fixed, hole_fixed;
 	VerifyBound(bound, bound_fixed);
@@ -235,9 +277,8 @@ void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector
 
 	in.numberofregions = 0;
 
-	init(out);
 	implement(in, out, type);
-	finish(out, bound_fixed, result);
+	finish(in, out, bound_fixed, result);
 }
 
 void Triangulation::points(const std::vector<Vector>& bound, 
@@ -246,6 +287,7 @@ void Triangulation::points(const std::vector<Vector>& bound,
 						   Type type)
 {
 	struct triangulateio in, out;
+	init(in, out);
 
 	std::vector<Vector> bound_fixed;
 	VerifyBound(bound, bound_fixed);
@@ -283,9 +325,8 @@ void Triangulation::points(const std::vector<Vector>& bound,
 	in.numberofholes = 0;
 	in.numberofregions = 0;
 
-	init(out);
 	implement(in, out, type);
-	finish(out, bound_fixed, result);
+	finish(in, out, bound_fixed, result);
 }
 
 void Triangulation::lines(const std::vector<Vector>& bound, 
@@ -294,6 +335,7 @@ void Triangulation::lines(const std::vector<Vector>& bound,
 						  Type type)
 {
 	struct triangulateio in, out;
+	init(in, out);
 
 	std::vector<Vector> bound_fixed;
 	VerifyBound(bound, bound_fixed);
@@ -338,15 +380,15 @@ void Triangulation::lines(const std::vector<Vector>& bound,
 	in.numberofholes = 0;
 	in.numberofregions = 0;
 
-	init(out);
 	implement(in, out, type);
-	finish(out, bound_fixed, result);
+	finish(in, out, bound_fixed, result);
 }
 
 void Triangulation::pointsAndLines(const std::vector<Vector>& bound, const std::vector<Vector>& points,
 								   const std::vector<Vector>& lines, std::vector<Vector>& result, Type type /*= e_Constrained*/)
 {
 	struct triangulateio in, out;
+	init(in, out);
 
 	std::vector<Vector> bound_fixed;
 	VerifyBound(bound, bound_fixed);
@@ -396,9 +438,8 @@ void Triangulation::pointsAndLines(const std::vector<Vector>& bound, const std::
 	in.numberofholes = 0;
 	in.numberofregions = 0;
 
-	init(out);
 	implement(in, out, type);
-	finish(out, bound_fixed, result);
+	finish(in, out, bound_fixed, result);
 }
 
 void Triangulation::linesAndLoops(const std::vector<Vector>& bound, 
@@ -408,6 +449,7 @@ void Triangulation::linesAndLoops(const std::vector<Vector>& bound,
 								  Type type)
 {
 	struct triangulateio in, out;
+	init(in, out);
 
 	size_t loopSize = 0;
 	for (size_t i = 0, n = loops.size(); i < n; ++i)
@@ -479,9 +521,8 @@ void Triangulation::linesAndLoops(const std::vector<Vector>& bound,
 	in.numberofholes = 0;
 	in.numberofregions = 0;
 
-	init(out);
 	implement(in, out, type);
-	finish(out, bound_fixed, result);
+	finish(in, out, bound_fixed, result);
 }
 
 void Triangulation::strips(const std::vector<Vector>& triangulates, 
