@@ -75,6 +75,7 @@ void StagePanel::insertShape(d2d::IShape* shape)
 	Shape* _shape = m_symbol->getShape();
 	if (_shape) {
 		static_cast<EditShape*>(_shape)->InsertShape(shape);
+		_shape->Refresh();
 	}
 }
 
