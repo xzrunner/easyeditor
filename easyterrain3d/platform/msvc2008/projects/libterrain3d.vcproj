@@ -188,6 +188,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="ocean"
+				>
+				<File
+					RelativePath="..\..\..\src\libterrain3d\DemoOcean.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libterrain3d\DemoOcean.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"

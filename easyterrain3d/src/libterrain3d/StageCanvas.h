@@ -19,7 +19,19 @@ protected:
 	virtual void onDraw();
 
 private:
+	void OnTimer(wxTimerEvent& event);
+
+	enum
+	{
+		TIMER_ID = 1000
+	};
+
+private:
+	wxTimer m_timer;
+
 	IDemo* m_demo;
+
+	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 
