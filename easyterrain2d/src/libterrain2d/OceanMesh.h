@@ -66,6 +66,9 @@ private:
 	bool m_blend_open;
 	float m_blend_base, m_blend_speed;
 
+	// debug
+	d2d::Rect debug_r;
+
 }; // OceanMesh
 
 }
