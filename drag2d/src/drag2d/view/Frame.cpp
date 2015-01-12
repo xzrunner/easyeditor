@@ -38,8 +38,9 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	initMenuBar();
 #ifdef _DEBUG
 	initStatueBar();
-#endif
+#else
 	wxLog::SetLogLevel(0);
+#endif
 }
 
 Frame::~Frame()

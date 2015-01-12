@@ -47,6 +47,11 @@ Frame::Frame(const wxString& title)
 	setCurrFilename();
 	initMenuBar();
 	initWorkingFrame();
+#ifdef _DEBUG
+	InitStatueBar();
+#else
+	wxLog::SetLogLevel(0);
+#endif
 }
 
 void Frame::initWithFile(const wxString& path)
@@ -211,6 +216,12 @@ void Frame::initMenuBar()
 	menuBar->Append(initCodesBar(), "&Codes");
 //	menuBar->Append(initHelpBar(), "&Help");	
 	SetMenuBar(menuBar);
+}
+
+void Frame::InitStatueBar()
+{
+	CreateStatusBar();
+	SetStatusText( "Welcome to wxWidgets!" );
 }
 
 wxMenu* Frame::initFileBar()

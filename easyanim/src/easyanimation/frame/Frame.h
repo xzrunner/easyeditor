@@ -35,6 +35,8 @@ namespace eanim
 		void onSetBackground(wxCommandEvent& event);
 
 		void initMenuBar();
+		void InitStatueBar();
+
 		wxMenu* initFileBar();
 		wxMenu* initViewBar();
 		wxMenu* initSettingsBar();
