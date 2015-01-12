@@ -3,6 +3,7 @@
 #include "frame/Context.h"
 
 #include <easymesh.h>
+#include <easyanim.h>
 
 namespace eanim
 {
@@ -162,18 +163,7 @@ void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end,
 void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 
 							  d2d::ISprite* tween, float process) const
 {
-	d2d::Vector offset = (end->getPosition() - start->getPosition()) * process;
-	float delta = (end->getAngle() - start->getAngle()) * process;
-	float xscale = (end->getScale().x - start->getScale().x) * process + start->getScale().x,
-		yscale = (end->getScale().y - start->getScale().y) * process + start->getScale().y;
-	float xshear = (end->getShear().x - start->getShear().x) * process + start->getShear().x,
-		yshear = (end->getShear().y - start->getShear().y) * process + start->getShear().y;
-	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
-	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);
-	tween->translate(offset);
-	tween->rotate(delta);
-	tween->setScale(xscale, yscale);
-	tween->setShear(xshear, yshear);
+	anim::Tools::getTweenSprite(start, end, tween, process);
 
 	emesh::Sprite* s = dynamic_cast<emesh::Sprite*>(start),
 		*mid = dynamic_cast<emesh::Sprite*>(tween),

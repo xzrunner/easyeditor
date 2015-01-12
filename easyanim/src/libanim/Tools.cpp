@@ -112,18 +112,32 @@ bool Tools::isTweenMatched(d2d::ISprite& s0, d2d::ISprite& s1)
 
 void Tools::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process)
 {
-	d2d::Vector offset = (end->getPosition() - start->getPosition()) * process;
-	float delta = (end->getAngle() - start->getAngle()) * process;
 	float xscale = (end->getScale().x - start->getScale().x) * process + start->getScale().x,
 		yscale = (end->getScale().y - start->getScale().y) * process + start->getScale().y;
+	tween->setScale(xscale, yscale);
+
+	d2d::Vector offset = (end->getOffset() - start->getOffset()) * process + start->getOffset();
+	tween->setOffset(offset);
+
+	tween->setTransform(d2d::Vector(0, 0), 0);
+
+	d2d::Vector center_s = start->getCenter(),
+		center_e = end->getCenter();
+
+	float angle = (end->getAngle() - start->getAngle()) * process + start->getAngle();
+	d2d::Vector base_s = start->getPosition() + start->getOffset(),
+		base_e = end->getPosition() + end->getOffset();
+	d2d::Vector base_t = (base_e - base_s) * process + base_s;
+	d2d::Vector pos_t = base_t -  offset;
+	tween->setTransform(pos_t, angle);
+
 	float xshear = (end->getShear().x - start->getShear().x) * process + start->getShear().x,
 		yshear = (end->getShear().y - start->getShear().y) * process + start->getShear().y;
+	tween->setShear(xshear, yshear);
+
 	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
 	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);
-	tween->translate(offset);
-	tween->rotate(delta);
-	tween->setScale(xscale, yscale);
-	tween->setShear(xshear, yshear);
+
 }
 
 } // anim
