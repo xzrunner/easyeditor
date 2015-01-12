@@ -195,6 +195,13 @@ void LoadIgnoreList(const std::string& filename)
 
 int main(int argc, char *argv[])
 {
+	wxInitializer initializer;
+	if ( !initializer )
+	{
+		fprintf(stderr, "Failed to initialize the wxWidgets library, aborting.");
+		return -1;
+	}
+
 	if (argc < 4) {
 		std::cerr << "Need Resource Dir & Texture Packer Filepath & Output filepath !" << std::endl;
 		return 1;
@@ -234,7 +241,7 @@ int main(int argc, char *argv[])
 	LoadTexturePacker(texpackerpath);
 
 	try {
-		libcoco::CocoPacker packer(SYMBOLS, TEX_MGR, path, gscale);
+		libcoco::CocoPacker packer(SYMBOLS, TEX_MGR);
 		packer.Parser();
 		packer.Output(argv[3]);
 	} catch (d2d::Exception& e) {
