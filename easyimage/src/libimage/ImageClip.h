@@ -12,7 +12,7 @@ public:
 	ImageClip(const d2d::Image* image, bool check_duplicate = false);
 	~ImageClip();
 
-	const byte* Clip(int xmin, int xmax, int ymin, int ymax) const;
+	const uint8_t* Clip(int xmin, int xmax, int ymin, int ymax) const;
 
 private:
 	const d2d::Image* m_image;

@@ -5,7 +5,7 @@
 #include "FixJsonBase.h"
 
 #include <wx/wx.h>
-#include <json.h>
+#include <json/json.h>
 
 namespace edb
 {

@@ -3,8 +3,7 @@
 #ifndef _DRAG2D_DFONT_H_
 #define _DRAG2D_DFONT_H_
 
-#include "common/tools.h"
-
+#include <stdint.h>
 #include <list.h>
 
 namespace d2d

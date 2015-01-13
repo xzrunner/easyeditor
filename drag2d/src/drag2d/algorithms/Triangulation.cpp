@@ -2,7 +2,7 @@
 #include "SGI.h"
 #include "common/Math.h"
 
-#include <Triangle/triangle.cpp>
+#include <triangle.cpp>
 #include <assert.h>
 
 namespace d2d

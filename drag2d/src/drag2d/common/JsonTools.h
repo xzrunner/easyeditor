@@ -2,7 +2,7 @@
 #define _DRAG2D_JSON_TOOLS_H_
 
 #include <vector>
-#include <JSON/value.h>
+#include <json/value.h>
 
 #include "common/Vector.h"
 

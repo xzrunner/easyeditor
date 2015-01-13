@@ -4,7 +4,7 @@
 #include "Lzma.h"
 
 #include <math.h>
-#include <json.h>
+#include <json/json.h>
 #include <fstream>
 #include <assert.h>
 

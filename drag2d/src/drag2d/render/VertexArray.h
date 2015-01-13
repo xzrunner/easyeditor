@@ -23,7 +23,7 @@
 
 #include "VertexBuffer.h"
 
-#include "common/tools.h"
+#include <stdint.h>
 
 namespace d2d
 {
@@ -44,7 +44,7 @@ namespace d2d
 		virtual const void* getPointer(size_t offset) const ;
 
 	private:
-		byte* m_data;
+		uint8_t* m_data;
 
 	}; // VertexArray
 }

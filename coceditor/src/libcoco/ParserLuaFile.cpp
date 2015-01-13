@@ -312,7 +312,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 			d2d::Image* image = images[part->tex];
 			eimage::ImageClip clip(image);
 
-			const byte* pixels = clip.Clip(part->xmin, part->xmax, part->ymin, part->ymax);
+			const uint8_t* pixels = clip.Clip(part->xmin, part->xmax, part->ymin, part->ymax);
 			if (pixels) 
 			{
 				int width = part->xmax-part->xmin,

@@ -4,7 +4,7 @@
 #include <drag2d.h>
 #include <easyimage.h>
 
-#include <json.h>
+#include <json/json.h>
 #include <fstream>
 
 namespace ecomplex
@@ -52,7 +52,7 @@ void RectCutLoader::LoadJsonAndImg(const wxString& pack_file, const wxString& im
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{		
 		const Picture& pic = pictures[i];
-		const byte* pixels = clip.Clip(pic.dst.x, pic.dst.x + pic.dst.w, 1024 - pic.dst.y - pic.dst.h, 1024 - pic.dst.y);
+		const uint8_t* pixels = clip.Clip(pic.dst.x, pic.dst.x + pic.dst.w, 1024 - pic.dst.y - pic.dst.h, 1024 - pic.dst.y);
 		d2d::Image* spr_img = new d2d::Image(pixels, pic.dst.w, pic.dst.h);
 		d2d::ImageSymbol* spr_symbol = new d2d::ImageSymbol(spr_img, "test");
 		d2d::ImageSprite* spr_sprite = new d2d::ImageSprite(spr_symbol);

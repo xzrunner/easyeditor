@@ -11,8 +11,8 @@ ImagePack::ImagePack(int width, int height)
 	, m_height(height)
 {
 	int sz = width * height * BYTES_PER_PIXEL;
-	m_pixels = new byte[sz];
-	memset(m_pixels, 0, sizeof(byte) * sz);
+	m_pixels = new uint8_t[sz];
+	memset(m_pixels, 0, sizeof(uint8_t) * sz);
 }
 
 ImagePack::~ImagePack()
@@ -24,7 +24,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h)
 {
 	assert(x >= 0 && x + w <= m_width
 		&& y >= 0 && y + h <= m_height);
-	const byte* pixels = img->getPixelData();
+	const uint8_t* pixels = img->getPixelData();
 	if (img->originWidth() == w && img->originHeight() == h) {
 		for (int iy = 0; iy < h; ++iy) {
 			for (int ix = 0; ix < w; ++ix) {

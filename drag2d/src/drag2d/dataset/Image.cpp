@@ -16,11 +16,8 @@
 #include "common/TodoConfig.h"
 
 #include <fstream>
-#include <SOIL/SOIL.h>
 #include <easyimage.h>
 #include <wx/filename.h>
-
-//#define USE_SOIL
 
 namespace d2d
 {
@@ -32,7 +29,7 @@ Image::Image()
 	m_width = m_height = 0;
 }
 
-Image::Image(const byte* pixel, int width, int height)
+Image::Image(const uint8_t* pixel, int width, int height)
 	: m_width(width)
 	, m_height(height)
 	, m_pixels(pixel)
@@ -76,12 +73,6 @@ bool Image::loadFromFile(const wxString& filepath)
  	}
  	else
  	{
-#ifdef USE_SOIL
-  		GL10::BindTexture(GL10::GL_TEXTURE_2D, m_textureID);
-  		GL10::GetTexLevelParameteriv(GL10::GL_TEXTURE_2D, 0, GL10::GL_TEXTURE_WIDTH, &m_width);
-  		GL10::GetTexLevelParameteriv(GL10::GL_TEXTURE_2D, 0, GL10::GL_TEXTURE_HEIGHT, &m_height);
-  		GL10::BindTexture(GL10::GL_TEXTURE_2D, NULL);
-#endif
 		if (Config::Instance()->GetSettings().open_image_edge_clip) 
 		{
 			eimage::ImageTrim trim(this);
@@ -111,23 +102,12 @@ bool Image::loadFromFile(const wxString& filepath)
 
 void Image::reload()
 {
-#ifdef USE_SOIL
- 	m_textureID = SOIL_load_OGL_texture
- 		(
- 		m_filepath.c_str(),
- 		SOIL_LOAD_AUTO,
- 		m_textureID,
- 		SOIL_FLAG_INVERT_Y
- 		);
-#else
 	m_pixels = ImageLoader::loadTexture(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_channels);
 
  	m_region.xMin = - m_width * 0.5f;
  	m_region.xMax =   m_width * 0.5f;
  	m_region.yMin = - m_height * 0.5f;
  	m_region.yMax =   m_height * 0.5f;
-
-#endif
 }
 
 void Image::draw(const Matrix& mt, const Rect& r) const

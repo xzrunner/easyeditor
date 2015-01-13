@@ -126,7 +126,7 @@ void DynamicPacker::InitTexture(int tex_id)
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)m_width, (GLsizei)m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-// 	byte* empty_data = new byte[m_width*m_height*4];
+// 	uint8_t* empty_data = new uint8_t[m_width*m_height*4];
 // 	memset(empty_data, 0, m_width*m_height*4);
 // 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)m_width, (GLsizei)m_height, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
 // 	delete[] empty_data;

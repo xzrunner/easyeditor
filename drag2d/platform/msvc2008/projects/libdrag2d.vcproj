@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\external\c99;..\..\..\external\freetype\include;..\..\..\external\giflib\include;..\..\..\external\gl\include;..\..\..\external\json\include;..\..\..\external\libjpeg\include;..\..\..\external\libpng\include;..\..\..\external\lua\include;..\..\..\external\md5\include;..\..\..\external\rapidxml\include;..\..\..\external\triangle\include;..\..\..\external\wx\include;..\..\..\src\drag2d"
+				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\external;..\..\..\external\c99;..\..\..\external\freetype\include;..\..\..\external\giflib\include;..\..\..\external\gl\include;..\..\..\external\json\include;..\..\..\external\libjpeg\include;..\..\..\external\libpng\include;..\..\..\external\list;..\..\..\external\lua\include;..\..\..\external\md5\include;..\..\..\external\rapidxml\include;..\..\..\external\soil\include;..\..\..\external\triangle\include;..\..\..\external\wx\include;..\..\..\..\easyimage\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -974,14 +974,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\render\GL10.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\common\opengl\opengl.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\common\opengl\opengl.h"
 					>
 				</File>
 				<File
@@ -2083,30 +2075,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\drag2d\algorithms\SGI.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\common\Triangle\triangle.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="..\libdrag2d\x86\Debug\triangle2.obj"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						ObjectFile="..\libdrag2d\x86\Debug\triangle2.obj"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\..\..\src\common\Triangle\triangle.h"
 				>
 			</File>
 			<File

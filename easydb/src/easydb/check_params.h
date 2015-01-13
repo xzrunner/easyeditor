@@ -1,7 +1,7 @@
 #ifndef _EASYDB_CHECK_PARAMS_H_
 #define _EASYDB_CHECK_PARAMS_H_
 
-#include <json.h>
+#include <json/json.h>
 
 namespace edb
 {

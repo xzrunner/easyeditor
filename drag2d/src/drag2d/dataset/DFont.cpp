@@ -1,6 +1,7 @@
 #include "DFont.h"
 
 #include <assert.h>
+#include <string>
 
 namespace d2d
 {

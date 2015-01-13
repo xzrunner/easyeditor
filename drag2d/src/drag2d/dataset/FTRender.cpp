@@ -3,7 +3,7 @@
 #include "common/Exception.h"
 
 #include <wx/filename.h>
-
+#include <vector>
 #include <freetype/ftstroke.h>
 
 namespace d2d

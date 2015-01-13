@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_CONFIG_H_
 #define _DRAG2D_CONFIG_H_
 
-#include <json.h>
+#include <json/json.h>
 #include <set>
 #include <wx/string.h>
 

@@ -5,7 +5,7 @@
 #include "Lzma.h"
 #include "ImageIDer.h"
 
-#include <json.h>
+#include <json/json.h>
 #include <assert.h>
 #include <fstream>
 #include <algorithm>

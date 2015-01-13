@@ -138,10 +138,10 @@ void VertexBufferObject::unload(bool save)
 		GLint size;
 		glGetBufferParameteriv(getTarget(), GL_BUFFER_SIZE, &size);
 
-		const byte* src = static_cast<byte*>(map());
+		const uint8_t* src = static_cast<uint8_t*>(map());
 		if (src)
 		{
-			m_bufferCopy = new byte[size];
+			m_bufferCopy = new uint8_t[size];
 			memcpy(m_bufferCopy, src, size);
 			unmap();
 		}

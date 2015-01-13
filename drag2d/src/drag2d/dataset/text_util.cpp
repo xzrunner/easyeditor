@@ -1,8 +1,6 @@
 #include "text_util.h"
 
-#include "common/tools.h"
-
-#include <windows.h>
+#include <stdint.h>
 
 namespace d2d
 {

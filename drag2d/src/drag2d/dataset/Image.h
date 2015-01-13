@@ -6,7 +6,7 @@
 
 #include <wx/wx.h>
 
-typedef unsigned char byte;
+typedef unsigned char uint8_t;
 
 namespace d2d
 {
@@ -19,7 +19,7 @@ namespace d2d
 	{
 	public:
 		Image();
-		Image(const byte* pixel, int width, int height);
+		Image(const uint8_t* pixel, int width, int height);
 		~Image();
 		
 		bool loadFromFile(const wxString& filepath);
@@ -50,7 +50,7 @@ namespace d2d
 		int m_width, m_height;
 		Rect m_region;
 
-		const byte* m_pixels;
+		const uint8_t* m_pixels;
 
 	}; // Image
 }

@@ -2,6 +2,7 @@
 #include "common/Exception.h"
 
 #include <SOIL/stb_image_write.h>
+#include <fstream>
 
 namespace d2d
 {

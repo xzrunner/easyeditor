@@ -27,7 +27,7 @@ using namespace d2d;
 VertexArray::VertexArray(size_t size, int target, int usage)
 	: VertexBuffer(size, target, usage)
 {
-	m_data = new byte[size];
+	m_data = new uint8_t[size];
 }
 
 VertexArray::~VertexArray()

@@ -44,7 +44,7 @@ private:
 	static void MergeLine(const std::vector<d2d::Vector>& src, std::vector<d2d::Vector>& dst);
 
 private:
-	const byte* m_pixels;
+	const uint8_t* m_pixels;
 	int m_width, m_height;
 
 	std::vector<d2d::Vector> m_border_points;

@@ -8,10 +8,10 @@
 #include <string.h>
 
 #include <opengl/opengl.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+// #include <gl/gl.h>
+// #include <gl/glu.h>
 
-#include <easyanim.h>
+//#include <easyanim.h>
 #include <easyimage.h>
 
 namespace d2d

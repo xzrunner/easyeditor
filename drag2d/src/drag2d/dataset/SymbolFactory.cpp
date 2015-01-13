@@ -7,11 +7,6 @@
 #include "common/FileNameTools.h"
 #include "common/FileNameParser.h"
 
-#include <easycomplex.h>
-#include <easyanim.h>
-#include <easymesh.h>
-#include <easyscale9.h>
-
 namespace d2d
 {
 

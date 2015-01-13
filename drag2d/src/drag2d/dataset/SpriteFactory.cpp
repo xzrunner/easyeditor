@@ -9,11 +9,6 @@
 #include "FontSprite.h"
 #include "ScriptsSprite.h"
 
-#include <easycomplex.h>
-#include <easyanim.h>
-#include <easymesh.h>
-#include <easyscale9.h>
-
 namespace d2d
 {
 

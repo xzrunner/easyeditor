@@ -19,7 +19,7 @@ ImageClip::~ImageClip()
 	delete[] m_check;
 }
 
-const byte* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
+const uint8_t* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 {
 	if (!m_image) {
 		return NULL;
@@ -37,7 +37,7 @@ const byte* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 	int w = xmax - xmin,
 		h = ymax - ymin;
 	int sz = w * h * channels;
-	byte* sub = new byte[sz];
+	uint8_t* sub = new uint8_t[sz];
 	if (!sub) {
 		return NULL;
 	}
@@ -50,7 +50,7 @@ const byte* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 					y >= 0 && y < height) {
 					int to = ((h - (y - ymin) - 1) * w + x-xmin) * channels;
 					if (m_check[width * y + x]) {
-						memset(&sub[to], 0, sizeof(byte) * 4);
+						memset(&sub[to], 0, sizeof(uint8_t) * 4);
 					} else {
 						m_check[width * y + x] = true;
 						int from = (y * width + x) * channels;

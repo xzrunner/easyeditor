@@ -1,6 +1,6 @@
 #include <vector>
 
-#include <giflib-5.0.6/lib/gif_lib.h>
+#include <gif_lib.h>
 #include <stdio.h>
 
 using namespace std;

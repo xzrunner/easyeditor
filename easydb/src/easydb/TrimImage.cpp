@@ -67,7 +67,7 @@ void TrimImage::Trigger(const std::string& dir)
 			value[idx++] = spr_val;
 
 			eimage::ImageClip clip(img);
-			const byte* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
+			const uint8_t* pixels = clip.Clip(r.xMin, r.xMax, r.yMin, r.yMax);
 			d2d::ImageSaver::storeToFile(pixels, r.xLength(), r.yLength(), 
 				filepath.ToStdString(), d2d::ImageSaver::e_png);
 			delete[] pixels;

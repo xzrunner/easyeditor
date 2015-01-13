@@ -67,7 +67,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 			for (int i = 0, n = result.size(); i < n; ++i)
 			{
 				const eimage::Rect& r = result[i];
-				const byte* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
+				const uint8_t* pixels = img_cut.Clip(r.x, r.x+r.w, r.y, r.y+r.h);
 
 				wxString out_path;
 				out_path.Printf("%s\\%s#%d#%d#%d#%d#", dst_dir, filename, r.x, r.y, r.w, r.h);

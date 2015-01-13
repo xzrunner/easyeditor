@@ -186,7 +186,7 @@ void FileIO::storeImage(const char* filename)
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
 		int w, h, c, f;
-		byte* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().getFilepath().ToStdString(), w, h, c, f);
+		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().getFilepath().ToStdString(), w, h, c, f);
 
 		if (sprite->getAngle() != 0)
 		{

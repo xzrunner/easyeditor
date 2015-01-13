@@ -2,7 +2,7 @@
 #define _D2D_SYMBOL_SEARCHER_H_
 
 #include <wx/string.h>
-#include <json.h>
+#include <json/json.h>
 
 namespace d2d
 {

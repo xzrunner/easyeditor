@@ -1,7 +1,7 @@
 #include "FileAdapter.h"
 
 #include <fstream>
-#include <json.h>
+#include <json/json.h>
 #include <drag2d.h>
 
 namespace eparticle3d

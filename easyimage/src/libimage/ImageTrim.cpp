@@ -1,7 +1,5 @@
 #include "ImageTrim.h"
 
-//#define USE_SOIL
-
 namespace eimage
 {
 
@@ -125,12 +123,7 @@ bool ImageTrim::IsTransparent(int x, int y) const
 		height = m_image->originHeight();
 	int channels = m_image->channels();
 
-#ifdef USE_SOIL
-	// image data from top to bottom
-	return pixels[(width * (height - y - 1) + x) * channels + channels - 1] == 0;
-#else
 	return pixels[(width * y + x) * channels + channels - 1] == 0;
-#endif
 }
 
 }

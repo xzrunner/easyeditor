@@ -1,6 +1,7 @@
 #pragma once
 
-#include "common/tools.h"
+#include <stdint.h>
+#include <string>
 
 namespace d2d
 {

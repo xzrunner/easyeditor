@@ -206,7 +206,7 @@ bool ExtractOutlineRaw::IsPixelTransparente(int x, int y) const
 		return true;
 	}
 	
-	byte alpha = m_pixels[(y*m_width+x)*4+3];
+	uint8_t alpha = m_pixels[(y*m_width+x)*4+3];
 	return alpha == 0;
 }
 

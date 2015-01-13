@@ -17,7 +17,7 @@ public:
 	void OutputToFile(const wxString& filepath) const;
 
 private:
-	byte* m_pixels;
+	uint8_t* m_pixels;
 
 	int m_width, m_height;
 

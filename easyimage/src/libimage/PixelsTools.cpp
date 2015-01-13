@@ -3,10 +3,10 @@
 namespace eimage
 {
 
-byte* RGBA2RGB(const byte* rgba, int width, int height, bool invert_y)
+uint8_t* RGBA2RGB(const uint8_t* rgba, int width, int height, bool invert_y)
 {
 	int size = width * height;
-	byte* rgb = new byte[size * 3];
+	uint8_t* rgb = new uint8_t[size * 3];
 	if (invert_y)
 	{
 		int ptr = 0;

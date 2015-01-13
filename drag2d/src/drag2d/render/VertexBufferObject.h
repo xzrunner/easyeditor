@@ -23,7 +23,7 @@
 
 #include "VertexBuffer.h"
 
-#include "common/tools.h"
+#include <stdint.h>
 
 namespace d2d
 {
@@ -55,7 +55,7 @@ namespace d2d
 
 		void* m_mapped;
 
-		byte* m_bufferCopy;
+		uint8_t* m_bufferCopy;
 
 	}; // VertexBufferObject
 }

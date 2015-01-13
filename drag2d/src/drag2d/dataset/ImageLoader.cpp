@@ -16,18 +16,18 @@
 namespace d2d
 {
 
-byte* ImageLoader::loadTexture(const std::string& filepath, int& width, int& height, unsigned int& texture, int& channels)
+uint8_t* ImageLoader::loadTexture(const std::string& filepath, int& width, int& height, unsigned int& texture, int& channels)
 {
 	int format;
-	byte* pixel_data = loadData(filepath, width, height, channels, format);
+	uint8_t* pixel_data = loadData(filepath, width, height, channels, format);
 	assert(pixel_data);
 	loadTexture(texture, pixel_data, width, height, channels, format);
 	return pixel_data;
 }
 
-byte* ImageLoader::loadData(const std::string& filepath, int& width, int& height, int& channels, int& format)
+uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& height, int& channels, int& format)
 {
-	byte* data = NULL;
+	uint8_t* data = NULL;
 
 	format = 0;
 
@@ -74,7 +74,7 @@ byte* ImageLoader::loadData(const std::string& filepath, int& width, int& height
 	return data;
 }
 
-void ImageLoader::checkPixelsDataAlpha(byte* pixels, int width, int height)
+void ImageLoader::checkPixelsDataAlpha(uint8_t* pixels, int width, int height)
 {
 	int ptr = 0;
 	for (int i = 0; i < height; ++i)
@@ -95,7 +95,7 @@ void ImageLoader::checkPixelsDataAlpha(byte* pixels, int width, int height)
 	}
 }
 
-void ImageLoader::loadTexture(unsigned int& texture, const byte* pixel, int width, int height, int channels, int format)
+void ImageLoader::loadTexture(unsigned int& texture, const uint8_t* pixel, int width, int height, int channels, int format)
 {
 	//// todo: 当数据用SOIL导入时，再这个方法导入的纹理时是黑的
 #ifdef USE_SOIL
@@ -127,7 +127,7 @@ void ImageLoader::loadTexture(unsigned int& texture, const byte* pixel, int widt
  	if (format == GL_RGB) {
  		format = GL_RGBA;
  		
- 		byte* fixed = new uint8_t[width * height * 4];
+ 		uint8_t* fixed = new uint8_t[width * height * 4];
  		int size = width * height;
  		int ptr_src = 0, ptr_dst = 0;
  		for (int i = 0; i < size; ++i) {
@@ -172,7 +172,7 @@ void callback_read(png_structp png, png_bytep data, png_size_t size)
 	offset += size;
 }
 
-byte* ImageLoader::loadImageByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format)
+uint8_t* ImageLoader::loadImageByLibpng(const std::string& filename, int& width, int& height, int& channels, int& format)
 {
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
@@ -300,13 +300,13 @@ byte* ImageLoader::loadImageByLibpng(const std::string& filename, int& width, in
 	return NULL;
 }
 
-byte* ImageLoader::loadImageBySOIL(const std::string& filename, int& width, int& height, int& channels)
+uint8_t* ImageLoader::loadImageBySOIL(const std::string& filename, int& width, int& height, int& channels)
 {
-	byte* pixels = SOIL_load_image(filename.c_str(), &width, &height, &channels, 0);
+	uint8_t* pixels = SOIL_load_image(filename.c_str(), &width, &height, &channels, 0);
 
 	// invert y
 	int size = width*height*channels;
-	byte* inverted = new uint8_t[size];
+	uint8_t* inverted = new uint8_t[size];
 	int line_size = width * channels;
 	int ptr = size - line_size;
 	while (ptr > 0)
@@ -319,20 +319,20 @@ byte* ImageLoader::loadImageBySOIL(const std::string& filename, int& width, int&
 	return inverted;
 }
 
-byte* ImageLoader::loadPNM(const std::string& filename, int& width, int& height)
+uint8_t* ImageLoader::loadPNM(const std::string& filename, int& width, int& height)
 {
 	std::string filepath;
 	int w0, h0, w1, h1;
 	filepath = filename + ".ppm";
-	byte* ppm = loadPPM(filepath, w0, h0); 
+	uint8_t* ppm = loadPPM(filepath, w0, h0); 
 	filepath = filename + ".pgm";
-	byte* pgm = loadPGM(filepath, w1, h1);
+	uint8_t* pgm = loadPGM(filepath, w1, h1);
 	assert(w0 == w1 && h0 == h1);
 
 	width = w0;
 	height = h0;
 	int size = width * height * 4;
-	byte* pixels = new uint8_t[size];
+	uint8_t* pixels = new uint8_t[size];
 
 	int ptr_ppm = 0, ptr_pgm = 0, ptr_dst = 0;
 	while (ptr_dst != size)
@@ -356,7 +356,7 @@ byte* ImageLoader::loadPNM(const std::string& filename, int& width, int& height)
 	return pixels;
 }
 
-byte* ImageLoader::loadPPM(const std::string& filename, int& width, int& height)
+uint8_t* ImageLoader::loadPPM(const std::string& filename, int& width, int& height)
 {
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
@@ -393,7 +393,7 @@ byte* ImageLoader::loadPPM(const std::string& filename, int& width, int& height)
 		fin.read(reinterpret_cast<char*>(&skip), sizeof(uint8_t));
 
 	int size = width * height * 3;
-	byte* pixels = new uint8_t[size];
+	uint8_t* pixels = new uint8_t[size];
 	fin.read(reinterpret_cast<char*>(pixels), size);
 
 	fin.close();
@@ -401,7 +401,7 @@ byte* ImageLoader::loadPPM(const std::string& filename, int& width, int& height)
 	return pixels;
 }
 
-byte* ImageLoader::loadPGM(const std::string& filename, int& width, int& height)
+uint8_t* ImageLoader::loadPGM(const std::string& filename, int& width, int& height)
 {
 	std::locale::global(std::locale(""));
 	std::ifstream fin(filename.c_str(), std::ios::binary);
@@ -438,7 +438,7 @@ byte* ImageLoader::loadPGM(const std::string& filename, int& width, int& height)
 		fin.read(reinterpret_cast<char*>(&skip), sizeof(uint8_t));
 
 	int size = width * height;
-	byte* pixels = new uint8_t[size];
+	uint8_t* pixels = new uint8_t[size];
 	fin.read(reinterpret_cast<char*>(pixels), size);
 
 	fin.close();

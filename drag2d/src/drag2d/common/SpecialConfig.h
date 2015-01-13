@@ -2,7 +2,7 @@
 #define _D2D_SPECIAL_CONFIG_H_
 
 #include <string>
-#include <json.h>
+#include <json/json.h>
 
 namespace d2d
 {

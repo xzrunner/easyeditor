@@ -3,7 +3,7 @@
 
 #include "ICommand.h"
 
-#include <json.h>
+#include <json/json.h>
 #include <wx/string.h>
 
 namespace libpacker { class ImageTrimData; }

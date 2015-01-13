@@ -1,12 +1,12 @@
 #ifndef _EASYIMAGE_PIXELS_TOOLS_H_
 #define _EASYIMAGE_PIXELS_TOOLS_H_
 
-typedef unsigned char byte;
+typedef unsigned char uint8_t;
 
 namespace eimage
 {
 
-byte* RGBA2RGB(const byte* rgba, int width, int height, bool invert_y = false);
+uint8_t* RGBA2RGB(const uint8_t* rgba, int width, int height, bool invert_y = false);
 
 }
 
