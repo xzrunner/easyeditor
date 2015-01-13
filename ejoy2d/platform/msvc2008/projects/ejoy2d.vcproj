@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../external/c99"
+				AdditionalIncludeDirectories="../../../external/c99;../../../external/tools;../../../external/cjson;../../../external/lzma/include;../../../external/pthread/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -50,6 +50,7 @@
 				WarningLevel="3"
 				DebugInformationFormat="4"
 				CompileAs="0"
+				DisableSpecificWarnings="94"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -106,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../external/c99"
+				AdditionalIncludeDirectories="../../../external/c99;../../../external/tools;../../../external/cjson;../../../external/lzma/include;../../../external/pthread/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -114,6 +115,7 @@
 				WarningLevel="3"
 				DebugInformationFormat="3"
 				CompileAs="0"
+				DisableSpecificWarnings="94"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -147,6 +149,122 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="tools"
+			>
+			<File
+				RelativePath="..\..\..\external\tools\ejoy2d.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\tools\ejoy2d.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\tools\fault.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\tools\fault.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\tools\opengl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\tools\package.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\tools\platform.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\tools\platform.h"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath="..\..\..\src\dtex_async.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_async.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_buffer.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_buffer.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_c1.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_c1.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_c2.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_c2.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_c3.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_c3.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_draw.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_draw.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_facade.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_facade.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_fbo.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_fbo.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_loader.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_loader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_packer.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_packer.h"
+			>
+		</File>
 		<File
 			RelativePath="..\..\..\src\dtex_pts.c"
 			>
@@ -172,11 +290,51 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\dtex_texture.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_texture.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_typedef.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_typedef.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_utility.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\dtex_utility.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\eploader.c"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\src\eploader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shader.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\shader.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\sprite.c"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\sprite.h"
 			>
 		</File>
 	</Files>
