@@ -6,7 +6,7 @@
 #include "common/Vector.h"
 #include "common/Color.h"
 
-#include <JSON/json.h>
+#include <json.h>
 
 namespace d2d
 {

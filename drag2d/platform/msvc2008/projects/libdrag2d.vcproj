@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\include;..\..\..\src\drag2d;..\..\..\src\common;..\..\..\..\easyshape\src;&quot;..\..\..\src\common\lua-5.2.3\src&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..;..\include\c99;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;..\..\..\..\easyscale9\src;..\..\..\..\easyimage\src"
+				AdditionalIncludeDirectories="..\..\..\external\c99;..\..\..\external\freetype\include;..\..\..\external\giflib\include;..\..\..\external\gl\include;..\..\..\external\json\include;..\..\..\external\libjpeg\include;..\..\..\external\libpng\include;..\..\..\external\lua\include;..\..\..\external\md5\include;..\..\..\external\rapidxml\include;..\..\..\external\triangle\include;..\..\..\external\wx\include;..\..\..\src\drag2d"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"

@@ -5,7 +5,7 @@
 
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
-#include <JSON/json.h>
+#include <json.h>
 
 namespace d2d
 {

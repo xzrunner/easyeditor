@@ -2,7 +2,7 @@
 #define _EASYPARTICLE2D_SETTING_PAGE_BASE_H_
 
 #include <wx/wx.h>
-#include <JSON/json.h>
+#include <json.h>
 
 namespace eparticle2d
 {

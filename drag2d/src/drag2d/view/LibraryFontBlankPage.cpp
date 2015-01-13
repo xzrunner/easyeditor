@@ -6,7 +6,7 @@
 #include "dataset/FontBlankSymbol.h"
 #include "common/FileNameParser.h"
 
-#include <JSON/json.h>
+#include <json.h>
 
 namespace d2d
 {

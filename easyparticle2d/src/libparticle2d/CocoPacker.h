@@ -2,7 +2,7 @@
 #define _EASYPARTICLE3D_COCO_PACKER_H_
 
 #include <wx/wx.h>
-#include <JSON/json.h>
+#include <json.h>
 
 namespace ebuilder { class CodeGenerator; }
 

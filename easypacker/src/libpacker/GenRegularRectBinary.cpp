@@ -1,8 +1,8 @@
-#include "GenRegularRectBinary.h"
+"GenRegularRectBinary.h"
 
 #include <drag2d.h>
 
-#include <JSON/json.h>
+#include <json.h>
 #include <fstream>
 #include <algorithm>
 

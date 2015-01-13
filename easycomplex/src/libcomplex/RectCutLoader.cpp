@@ -4,7 +4,7 @@
 #include <drag2d.h>
 #include <easyimage.h>
 
-#include <JSON/json.h>
+#include <json.h>
 #include <fstream>
 
 namespace ecomplex

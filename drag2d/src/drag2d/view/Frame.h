@@ -3,7 +3,7 @@
 #include "interfaces.h"
 
 #include <wx/wx.h>
-#include <JSON/json.h>
+#include <json.h>
 #include <deque>
 
 #include "common/SpecialConfig.h"

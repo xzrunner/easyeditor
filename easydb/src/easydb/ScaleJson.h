@@ -4,7 +4,7 @@
 #include "ICommand.h"
 
 #include <wx/wx.h>
-#include <JSON/json.h>
+#include <json.h>
 
 namespace edb
 {

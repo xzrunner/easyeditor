@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_GLYPH_UTIL_H_
 #define _DRAG2D_GLYPH_UTIL_H_
 
-#include "common/tools.h"
+#include <stdint.h>
 
 namespace d2d
 {

@@ -1,6 +1,6 @@
 #include "ImageTrimData.h"
 
-#include <JSON/json.h>
+#include <json.h>
 #include <fstream>
 
 namespace libpacker

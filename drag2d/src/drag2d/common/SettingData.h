@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_SETTING_DATA_H_
 #define _DRAG2D_SETTING_DATA_H_
 
-#include <JSON/json.h>
+#include <json.h>
 
 namespace d2d
 {
