@@ -132,6 +132,8 @@ easyshader/platform/msvc2008/libshader
 formation/platform/msvc2008/formation
 raiden/platform/msvc2008/raiden
 shootbubble/platform/msvc2008/shootbubble
+easyejoy2d/platform/msvc2008/easyejoy2d
+easyejoy2d/platform/msvc2008/testdtex
 
 easy3d/platform/msvc2008/easy3d
 easyphysics/platform/msvc2008/easyphysics

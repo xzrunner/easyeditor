@@ -195,6 +195,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easytemplate", "..\template
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtemplate", "..\template\platform\msvc2008\projects\libtemplate.vcproj", "{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyejoy2d", "..\easyejoy2d\platform\msvc2008\projects\easyejoy2d.vcproj", "{2E48C7D2-F176-403F-879D-76046CA224CC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D5A1565C-C421-46E9-853D-B9BE4C56F708} = {D5A1565C-C421-46E9-853D-B9BE4C56F708}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testdtex", "..\easyejoy2d\platform\msvc2008\projects\testdtex.vcproj", "{59F86424-E390-47B1-959C-87FA18CA1E9B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C} = {D41C0B3E-F0A0-4A1F-A568-0100C839406C}
+		{2E48C7D2-F176-403F-879D-76046CA224CC} = {2E48C7D2-F176-403F-879D-76046CA224CC}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -348,6 +361,14 @@ Global
 		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.ActiveCfg = Release|Win32
 		{2B614163-E3A3-4BCD-9933-EF59B8467868}.Release|Win32.Build.0 = Release|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Debug|Win32.Build.0 = Debug|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Release|Win32.ActiveCfg = Release|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Release|Win32.Build.0 = Release|Win32
+		{59F86424-E390-47B1-959C-87FA18CA1E9B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{59F86424-E390-47B1-959C-87FA18CA1E9B}.Debug|Win32.Build.0 = Debug|Win32
+		{59F86424-E390-47B1-959C-87FA18CA1E9B}.Release|Win32.ActiveCfg = Release|Win32
+		{59F86424-E390-47B1-959C-87FA18CA1E9B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
