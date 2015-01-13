@@ -1,6 +1,8 @@
 #ifndef _TEST_DTEX_STAGE_PANEL_H_
 #define _TEST_DTEX_STAGE_PANEL_H_
 
+#include "ITest.h"
+
 #include <drag2d.h>
 
 namespace tdtex
@@ -18,6 +20,9 @@ public:
 	// d2d::EditPanel interface
 	//
 	virtual void clear();
+
+private:
+	ITest* m_test;
 
 }; // StagePanel
 
