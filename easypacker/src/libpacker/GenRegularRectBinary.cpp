@@ -1,4 +1,4 @@
-"GenRegularRectBinary.h"
+#include "GenRegularRectBinary.h"
 
 #include <drag2d.h>
 

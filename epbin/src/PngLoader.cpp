@@ -2,7 +2,7 @@
 #include "Lzma.h"
 #include "image_type.h"
 
-#include <png.h>
+#include <libpng/png.h>
 
 namespace epbin
 {

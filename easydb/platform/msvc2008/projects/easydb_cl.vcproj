@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src;..\..\..\..\epbin\external\png\include;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -66,7 +66,7 @@
 				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib md5d.lib opengl32.lib GLee.lib lua.lib libgifd.lib zlibd.lib lzmad.lib libpngd.lib"
 				OutputFile="..\easydb_cl\x86\Debug\easydb_cl.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\epbin\external\png\lib;..\..\..\..\epbin\external\lua\lib;..\..\..\..\epbin\external\zlib\lib;..\..\..\..\epbin\external\lzma\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\giflib\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel_compiler&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				DelayLoadDLLs=""
 				GenerateDebugInformation="true"
@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easycomplex\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src"
+				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\src\glfw;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
@@ -148,7 +148,7 @@
 				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib comctl32.lib rpcrt4.lib json.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib lua.lib libgif.lib zlib.lib lzma.lib libpng.lib"
 				OutputFile="..\easydb_cl\x86\Release\easydb_cl.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\epbin\external\png\lib;..\..\..\..\epbin\external\lua\lib;..\..\..\..\epbin\external\zlib\lib;..\..\..\..\epbin\external\lzma\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\giflib\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel_compiler&quot;"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easydb_cl\x86\Release\easydb_cl.pdb"
@@ -244,18 +244,6 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easydb\check_params.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\drag2d\src\common\opengl\opengl.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\drag2d\src\common\opengl\opengl.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\..\drag2d\src\common\opengl\platform.h"
 				>
 			</File>
 		</Filter>

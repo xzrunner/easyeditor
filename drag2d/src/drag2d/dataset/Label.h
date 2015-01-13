@@ -5,7 +5,7 @@
 #include "FTRender.h"
 #include "WXRender.h"
 
-#include <opengl/opengl.h>
+typedef unsigned int GLuint;
 
 namespace d2d
 {

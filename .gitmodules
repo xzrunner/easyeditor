@@ -1,0 +1,3 @@
+[submodule "editor-external"]
+	path = editor-external
+	url = ssh://git@oa.ejoy.com/users/zz/editor-external.git

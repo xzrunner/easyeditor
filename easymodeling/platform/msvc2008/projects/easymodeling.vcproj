@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easymodeling;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyshape\src;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easymodeling;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easyshape\src;..\..\..\..\easybuilder\src;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easyphysics\external\box2d\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -64,10 +64,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib GLee.lib jsond.lib SOIL.lib freetype250_D.lib lua.lib box2d.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib wxzlibd.lib comctl32.lib rpcrt4.lib GLee.lib jsond.lib SOIL.lib freetype250_D.lib lua.lib box2d.lib libpngd.lib"
 				OutputFile="..\easymodeling\x86\Debug\easymodeling.exe"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\easyphysics\external\box2d\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;..\..\..\..\easyphysics\external\box2d\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easymodeling\x86\Debug\easymodeling.pdb"
@@ -123,7 +123,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easymodeling;..\..\..\..\drag2d\src\common;..\..\..\..\drag2d\src\drag2d;..\..\..\..\drag2d\platform\msvc2008\include;..\..\..\..\easyshape\src;..\..\..\..\easybuilder\src;&quot;..\..\..\..\drag2d\src\common\lua-5.2.3\src&quot;;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\src\easymodeling;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easyshape\src;..\..\..\..\easybuilder\src;..\..\..\..\easyphysics\src;..\..\..\..\easyphysics\external\box2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easyphysics\external\box2d\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -145,10 +145,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib GLee.lib json.lib SOIL.lib freetype250_D.lib lua.lib box2d.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib wxzlib.lib comctl32.lib rpcrt4.lib GLee.lib json.lib SOIL.lib freetype250_D.lib lua.lib box2d.lib libpng.lib"
 				OutputFile="..\easymodeling\x86\Release\easymodeling.exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\..\drag2d\platform\msvc2008\lib;..\..\..\..\drag2d\platform\msvc2008\lib\wx;..\..\..\..\easyphysics\external\box2d\lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;..\..\..\..\easyphysics\external\box2d\lib"
 				IgnoreDefaultLibraryNames="LIBC.LIB"
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="..\easymodeling\x86\Release\easymodeling.pdb"

@@ -184,7 +184,7 @@ void MeshToolbarPage::LoadBodies(const wxString& dir)
 			b2Vec2 pos(d2d::Random::getNum(-HALF_WIDTH*4, HALF_WIDTH*4), d2d::Random::getNum(HALF_WIDTH*5, HALF_WIDTH*100));
 			body->SetTransform(pos, 0);
 
-			const std::vector<d2d::Vector>& src = polygon->m_fillingVertices;
+			const std::vector<d2d::Vector>& src = polygon->GetVertices();
 			for (int i = 0, n = src.size(); i < n; i += 3) {
 				b2Vec2 dst[3];
 				for (int j = 0; j < 3; ++j) {

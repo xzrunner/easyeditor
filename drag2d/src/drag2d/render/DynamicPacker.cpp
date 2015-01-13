@@ -9,9 +9,7 @@
 #include "render/PrimitiveDraw.h"
 #include "render/style_config.h"
 
-#include <opengl/opengl.h>
-#include <gl/gl.h>
-#include <gl/glu.h>
+#include <gl/GLee.h>
 #include <wx/wx.h>
 
 namespace d2d
@@ -23,7 +21,7 @@ DynamicPacker::DynamicPacker(int width, int height, int padding, int extrude)
 	, m_padding(padding)
 	, m_extrude(extrude)
 {
-	initOpenGLExtensions();
+	//initOpenGLExtensions();
 
 	InitTexture();
 	InitFBO();

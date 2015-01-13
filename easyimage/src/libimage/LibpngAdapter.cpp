@@ -1,6 +1,6 @@
 #include "LibpngAdapter.h"
 
-#include <png.h>
+#include <libpng/png.h>
 
 namespace eimage
 {

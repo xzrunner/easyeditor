@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../external/png/include;../../../external/lua/include"
+				AdditionalIncludeDirectories="&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,8 +61,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libpngd.lib lua.lib zlibd.lib lzmad.lib ejoy2dd.lib"
-				AdditionalLibraryDirectories="..\..\..\external\lua\lib;..\..\..\external\png\lib;..\..\..\external\zlib\lib;..\..\..\external\lzma\lib;..\..\..\external\ejoy2d\lib;..\..\..\external\intel_compiler"
+				AdditionalDependencies="libpngd.lib lua.lib zlibd.lib lzmad.lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel_compiler&quot;"
 				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
 			/>
@@ -115,7 +115,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../external/png/include;../../../external/lua/include"
+				AdditionalIncludeDirectories="&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -134,8 +134,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libpng.lib lua.lib zlib.lib lzma.lib ejoy2d.lib"
-				AdditionalLibraryDirectories="..\..\..\external\lua\lib;..\..\..\external\png\lib;..\..\..\external\zlib\lib;..\..\..\external\lzma\lib;..\..\..\external\ejoy2d\lib;..\..\..\external\intel_compiler"
+				AdditionalDependencies="libpng.lib lua.lib zlib.lib lzma.lib"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel_compiler&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"

@@ -34,9 +34,9 @@ int main(int argc, char *argv[])
 	/////////////////////
 
 	assert(argc == 4);
-	epbin::BinaryEPD epd(argv[2], argv[3]);
+	epbin::BinaryEPD epd(argv[2]);
 	try {
-		epd.Pack(true);			
+		epd.Pack(argv[3], true);
 	} catch (epbin::Exception e) {
 		std::cout << e.what() << "\n";
 		return 1;

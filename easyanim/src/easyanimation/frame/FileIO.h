@@ -3,7 +3,7 @@
 #include <wx/wx.h>
 #include <json/json.h>
 #include <drag2d.h>
-#include <rapidxml-1.13/rapidxml.hpp>
+#include <rapidxml.hpp>
 
 namespace eanim
 {

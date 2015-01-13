@@ -7,7 +7,7 @@
 #include "render/ShaderMgr.h"
 #include "render/SpriteDraw.h"
 
-#include <opengl/opengl.h>
+#include <gl/GL.h>
 
 namespace d2d
 {

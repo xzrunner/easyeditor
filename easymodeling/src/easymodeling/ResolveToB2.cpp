@@ -92,7 +92,7 @@ b2Body* ResolveToB2::createBody(const libmodeling::Body& data, b2World* world,
 
 			//////////////////////////////////////////////////////////////////////////
 
-			const std::vector<d2d::Vector>& src = polygon->m_fillingVertices;
+			const std::vector<d2d::Vector>& src = polygon->GetVertices();
 			for (int i = 0, n = src.size(); i < n; i += 3) {
  				b2Vec2 dst[3];
 				for (int j = 0; j < 3; ++j) {

@@ -3,7 +3,8 @@
 #include "dataset/TPNode.h"
 #include "render/ShaderMgr.h"
 
-#include <opengl/opengl.h>
+#include <Windows.h>
+#include <gl/GL.h>
 
 namespace d2d
 {

@@ -8,7 +8,7 @@
 #include "view/LayersPanel.h"
 #include "view/StagePanel.h"
 
-#include <rapidxml-1.13/rapidxml_utils.hpp>
+#include <rapidxml_utils.hpp>
 #include <easyanim.h>
 #include <easyimage.h>
 

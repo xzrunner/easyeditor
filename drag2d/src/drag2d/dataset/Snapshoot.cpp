@@ -6,12 +6,8 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <gl/GLee.h>
 
-#include <opengl/opengl.h>
-// #include <gl/gl.h>
-// #include <gl/glu.h>
-
-//#include <easyanim.h>
 #include <easyimage.h>
 
 namespace d2d
@@ -110,7 +106,7 @@ void Snapshoot::SaveToFile(const std::string& filename, int width, int height) c
 
 void Snapshoot::createFBO()
 {
-	initOpenGLExtensions();
+	//initOpenGLExtensions();
 
 	// init texture
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);

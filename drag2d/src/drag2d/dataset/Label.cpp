@@ -2,6 +2,8 @@
 
 #include "render/Shader.h"
 
+#include <gl/GLee.h>
+
 namespace d2d
 {
 

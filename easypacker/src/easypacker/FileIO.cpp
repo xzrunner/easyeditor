@@ -4,9 +4,6 @@
 #include "Context.h"
 #include "config.h"
 
-#include <SOIL/SOIL.h>
-//#include <SOIL/stb_image_write.h>
-
 using namespace epacker;
 
 void FileIO::load(const char* filename)
