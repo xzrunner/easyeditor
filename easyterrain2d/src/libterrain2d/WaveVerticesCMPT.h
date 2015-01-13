@@ -7,12 +7,15 @@ namespace eterrain2d
 {
 
 class StagePanel;
+class OceanMesh;
 
 class WaveVerticesCMPT : public d2d::AbstractEditCMPT
 {
 public:
 	WaveVerticesCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
+
+	void SetControlersValue(const OceanMesh* ocean);
 
 protected:
 	virtual wxSizer* initLayout();
@@ -25,6 +28,8 @@ private:
 	void OnChangeDisplayTriangles(wxCommandEvent& event);
 
 private:
+	wxCheckBox* m_switch;
+
 	wxSpinCtrl *m_row_spin, *m_col_spin;
 
 	wxSpinCtrl *m_wave_speed, *m_wave_height;

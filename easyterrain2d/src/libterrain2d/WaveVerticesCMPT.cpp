@@ -13,17 +13,27 @@ WaveVerticesCMPT::WaveVerticesCMPT(wxWindow* parent, const wxString& name, Stage
 	m_editOP = new WaveVerticesOP(stage);
 }
 
+void WaveVerticesCMPT::SetControlersValue(const OceanMesh* ocean)
+{
+	m_switch->SetValue(ocean->IsWaveOpen());
+
+	m_row_spin->SetValue(ocean->GetWaveGridRow());
+	m_col_spin->SetValue(ocean->GetWaveGridCol());
+	m_wave_speed->SetValue(ocean->GetWaveSpeed() / 0.1f);
+	m_wave_height->SetValue(ocean->GetWaveHeight());
+}
+
 wxSizer* WaveVerticesCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
 	// switch
 	{
-		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("开关"));
-		check->SetValue(true);
-		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		m_switch = new wxCheckBox(this, wxID_ANY, wxT("开关"));
+		m_switch->SetValue(true);
+		Connect(m_switch->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(WaveVerticesCMPT::OnOpenWaveChanged));
-		sizer->Add(check, 0);
+		sizer->Add(m_switch, 0);
 	}
 	sizer->AddSpacer(20);
 	// reflush

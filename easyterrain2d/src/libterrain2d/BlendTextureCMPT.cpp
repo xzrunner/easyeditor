@@ -13,17 +13,24 @@ BlendTextureCMPT::BlendTextureCMPT(wxWindow* parent, const wxString& name, Stage
 	m_editOP = new WaveVerticesOP(stage);
 }
 
+void BlendTextureCMPT::SetControlersValue(const OceanMesh* ocean)
+{
+	m_switch->SetValue(ocean->IsBlendOpen());
+
+	m_speed->SetValue(ocean->GetTexBlendSpeed() / 0.01f);
+}
+
 wxSizer* BlendTextureCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
 	// switch
 	{
-		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("开关"));
-		check->SetValue(true);
-		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		m_switch = new wxCheckBox(this, wxID_ANY, wxT("开关"));
+		m_switch->SetValue(true);
+		Connect(m_switch->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(BlendTextureCMPT::OnOpenBlendChanged));
-		sizer->Add(check, 0);
+		sizer->Add(m_switch, 0);
 	}
 	sizer->AddSpacer(20);
 	// speed

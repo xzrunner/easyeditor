@@ -16,6 +16,19 @@ public:
 
 	void Build();
 
+	const libshape::PolygonShape* GetBounding() const { return m_shape; }
+	const d2d::ImageSymbol* GetImage0() const { return m_image0; }
+	const d2d::ImageSymbol* GetImage1() const { return m_image1; }
+	bool IsWaveOpen() const { return m_wave_open; }
+	int GetWaveGridRow() const { return m_row; }
+	int GetWaveGridCol() const { return m_col; }
+	float GetWaveSpeed() const { return m_wave_speed; }
+	float GetWaveHeight() const { return m_wave_height; }
+	bool IsUVMoveOpen() const { return m_uv_move_open; }
+	const d2d::Vector& GetUVMoveSpeed() const { return m_texcoords_spd; }
+	bool IsTexBlendOpen() const { return m_blend_open; }
+	float GetTexBlendSpeed() const { return m_blend_speed; }
+
 	void SetSmallGridSize(int row, int col);
 	void SetWaveInfo(float speed, float height);
 	void SetTexcoordsSpeed(const d2d::Vector& speed);
@@ -54,10 +67,9 @@ private:
 	const d2d::ImageSymbol *m_image0, *m_image1;
 
 	std::vector<MeshShape*> m_grids;
- 
-	int m_row, m_col;
 
 	bool m_wave_open;
+	int m_row, m_col;
 	float m_wave_speed, m_wave_height;
 
 	bool m_uv_move_open;

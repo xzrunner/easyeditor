@@ -7,12 +7,15 @@ namespace eterrain2d
 {
 
 class StagePanel;
+class OceanMesh;
 
 class BlendTextureCMPT : public d2d::AbstractEditCMPT
 {
 public:
 	BlendTextureCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
+
+	void SetControlersValue(const OceanMesh* ocean);
 
 protected:
 	virtual wxSizer* initLayout();
@@ -22,6 +25,8 @@ private:
 	void OnChangeSpeed(wxSpinEvent& event);
 
 private:
+	wxCheckBox* m_switch;
+
 	wxSpinCtrl* m_speed;
 
 }; // BlendTextureCMPT

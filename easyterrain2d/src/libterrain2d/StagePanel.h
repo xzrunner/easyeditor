@@ -8,19 +8,23 @@ namespace eterrain2d
 {
 
 class OceanMesh;
+class ToolbarPanel;
 
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
 	public d2d::ShapesPanelImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//
 	// d2d::EditPanel interface
 	//
 	virtual void clear();
+
+	void Store(const std::string& dir, Json::Value& value) const;
+	void Load(const std::string& dir, const Json::Value& value, 
+		d2d::LibraryPanel* library, ToolbarPanel* toolbar);
 
 	const std::vector<OceanMesh*>& GetOceans() const {
 		return m_oceans;

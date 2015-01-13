@@ -13,17 +13,25 @@ MoveTexcoordsCMPT::MoveTexcoordsCMPT(wxWindow* parent, const wxString& name, Sta
 	m_editOP = new WaveVerticesOP(stage);
 }
 
+void MoveTexcoordsCMPT::SetControlersValue(const OceanMesh* ocean)
+{
+	m_switch->SetValue(ocean->IsUVMoveOpen());
+
+	m_speed_x->SetValue(ocean->GetUVMoveSpeed().x / 0.01f);
+	m_speed_y->SetValue(ocean->GetUVMoveSpeed().y / 0.01f);
+}
+
 wxSizer* MoveTexcoordsCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
 	// switch
 	{
-		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("开关"));
-		check->SetValue(true);
-		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		m_switch = new wxCheckBox(this, wxID_ANY, wxT("开关"));
+		m_switch->SetValue(true);
+		Connect(m_switch->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(MoveTexcoordsCMPT::OnOpenMoveChanged));
-		sizer->Add(check, 0);
+		sizer->Add(m_switch, 0);
 	}
 	sizer->AddSpacer(20);
 	// speed

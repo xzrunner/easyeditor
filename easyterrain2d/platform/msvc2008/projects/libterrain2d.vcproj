@@ -289,6 +289,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="fileio"
+			>
+			<File
+				RelativePath="..\..\..\src\libterrain2d\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain2d\FileIO.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libterrain2d\config.h"
 			>

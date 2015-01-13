@@ -1,6 +1,8 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "OceanMesh.h"
+#include "FileIO.h"
+#include "ToolBarPanel.h"
 
 #include <easyshape.h>
 
@@ -28,6 +30,57 @@ StagePanel::~StagePanel()
 
 void StagePanel::clear()
 {
+}
+
+void StagePanel::Store(const std::string& dir, Json::Value& value) const
+{
+	std::vector<d2d::ISprite*> bg_sprites;
+	traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(bg_sprites));
+	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
+		d2d::ISprite* bg = bg_sprites[i];
+		value["bg"][i]["filepath"] = d2d::FilenameTools::getRelativePath(
+			dir, bg->getSymbol().getFilepath().ToStdString()).ToStdString();
+		bg->store(value["bg"][i]);
+	}
+
+	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
+		FileIO::StoreOceanMesh(m_oceans[i], dir, value["ocean"][i]);
+	}
+}
+
+void StagePanel::Load(const std::string& dir, const Json::Value& value,
+					  d2d::LibraryPanel* library, ToolbarPanel* toolbar)
+{
+	int i = 0;
+	Json::Value bg_val = value["bg"][i++];
+	while (!bg_val.isNull()) {
+		std::string filepath = dir + "\\" + bg_val["filepath"].asString();
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::ISprite* bg = d2d::SpriteFactory::Instance()->create(symbol);
+		bg->load(bg_val);
+		insertSprite(bg);
+		symbol->Release();
+
+		bg_val = value["bg"][i++];
+	}
+
+	i = 0;
+	Json::Value ocean_val = value["ocean"][i++];
+	while (!ocean_val.isNull()) {
+		OceanMesh* ocean = FileIO::LoadOceanMesh(dir, ocean_val);
+		if (ocean) {
+			m_oceans.push_back(ocean);
+			insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+			library->AddSymbol(const_cast<d2d::ImageSymbol*>(ocean->GetImage0()));
+			if (const d2d::ISymbol* tex1 = ocean->GetImage1()) {
+				library->AddSymbol(const_cast<d2d::ISymbol*>(tex1));
+			}
+			toolbar->SetControlersValue(ocean);
+		}
+		ocean_val = value["ocean"][i++];
+	}
+
+	Refresh();
 }
 
 void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageSymbol* image)

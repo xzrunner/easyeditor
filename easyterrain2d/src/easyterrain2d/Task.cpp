@@ -1,5 +1,6 @@
 #include "Task.h"
 
+#include <drag2d.h>
 #include <easyterrain2d.h>
 
 namespace eterrain2d
@@ -21,10 +22,26 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filename);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+	m_stage->Load(d2d::FilenameTools::getFileDir(filename).ToStdString(), value, m_library, m_toolbar);
 }
 
 void Task::store(const char* filename) const
 {
+	Json::Value value;
+	m_stage->Store(d2d::FilenameTools::getFileDir(filename).ToStdString(), value);
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filename);
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 }
 
 bool Task::isDirty() const
@@ -57,9 +74,9 @@ void Task::InitLayout()
 	left_splitter->SetSashGravity(0.2f);
 	left_splitter->SplitVertically(m_library, m_stage);
 
-	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
+	m_toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
 	right_splitter->SetSashGravity(0.85f);
-	right_splitter->SplitVertically(left_splitter, toolbar);
+	right_splitter->SplitVertically(left_splitter, m_toolbar);
 
 	m_root = right_splitter;
 }
