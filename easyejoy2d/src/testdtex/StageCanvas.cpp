@@ -16,6 +16,13 @@ StageCanvas::StageCanvas(StagePanel* panel)
 	m_timer.Start(100);
 }
 
+void StageCanvas::initGL()
+{
+	d2d::OrthoCanvas::initGL();
+
+	m_panel->Load();
+}
+
 void StageCanvas::onDraw()
 {
 	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);

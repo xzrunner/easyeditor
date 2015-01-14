@@ -111,8 +111,8 @@
 #else
 
 
-  #include <stdarg.h>
-  const char * BundlePath(const char * filename, const char *type, const char *directory);
+#include <stdarg.h>
+//   const char * BundlePath(const char * filename, const char *type, const char *directory);
 
   struct FileHandle{
     FILE *fp;
@@ -131,8 +131,9 @@
 
 
   struct FileHandle* pf_bundleopen(const char* filename, const char* format){
-    const char* path = BundlePath(filename, "", NULL);
-    return (path)?(pf_fileopen(path, format)):(NULL);
+//     const char* path = BundlePath(filename, "", NULL);
+//     return (path)?(pf_fileopen(path, format)):(NULL);
+	  return NULL;
   }
 
   size_t pf_filesize(struct FileHandle* h) {

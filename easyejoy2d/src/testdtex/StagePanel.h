@@ -21,6 +21,8 @@ public:
 	//
 	virtual void clear();
 
+	void Load();
+
 private:
 	ITest* m_test;
 

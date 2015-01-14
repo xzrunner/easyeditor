@@ -11,12 +11,10 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(this, library)
 	, d2d::ShapesPanelImpl(this)
+	, m_test(NULL)
 {
 	m_editOP = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this);
-
-	m_test = new TestC3();
-	m_test.Load();
 }
 
 StagePanel::~StagePanel()
@@ -26,7 +24,12 @@ StagePanel::~StagePanel()
 
 void StagePanel::clear()
 {
+}
 
+void StagePanel::Load()
+{
+	m_test = new TestC3();
+	m_test->Load();
 }
 
 }

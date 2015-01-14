@@ -1,6 +1,8 @@
 #include "main.h"
 #include "Task.h"
 
+#include "dtex_typedef.h"
+
 IMPLEMENT_APP(MyApp)
 
 bool MyApp::OnInit()

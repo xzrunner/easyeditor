@@ -22,8 +22,10 @@ TestC3::~TestC3()
 
 void TestC3::Load()
 {
-	ej_package* pkg0 = dtexf_c3_load_pkg("2003daoke", "2003daoke", 1);
+	ej_package* pkg0 = dtexf_c3_load_pkg("2003daoke", "2003daoke.epd", 1);
 	m_ej_pkgs.push_back(pkg0);
+
+	dtexf_c3_load_pkg("2003daoke", "2003daoke.epp", 1);
 
 	dtexf_c3_load_pkg_finish();
 }
