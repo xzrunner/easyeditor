@@ -1,3 +1,8 @@
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #ifndef EJOY_GAME_2D_SHADER_H
 #define EJOY_GAME_2D_SHADER_H
 
@@ -24,4 +29,8 @@ void shader_program(int n);
 void shader_scissor(int x, int y, int width, int height, int enable);
 void shader_flush();
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

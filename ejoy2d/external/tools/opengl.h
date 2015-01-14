@@ -13,6 +13,10 @@
 #include <GLES2/gl2.h> 
 #include <GLES2/gl2ext.h>
 
+#elif defined(_MSC_VER)
+
+#include <gl/glee.h>
+
 #else
 
 #include <GL/glew.h>

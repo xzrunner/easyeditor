@@ -3,6 +3,8 @@
 
 #include "TestC3.h"
 
+#include <shader.h>
+
 namespace tdtex
 {
 
@@ -28,8 +30,15 @@ void StagePanel::clear()
 
 void StagePanel::Load()
 {
+	shader_load();
+
 	m_test = new TestC3();
 	m_test->Load();
+}
+
+void StagePanel::UnLoad()
+{
+	shader_unload();
 }
 
 }
