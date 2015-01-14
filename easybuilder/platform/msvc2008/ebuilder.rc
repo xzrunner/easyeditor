@@ -51,17 +51,17 @@ END
 // Cursor
 //
 
-WXCURSOR_BLANK             	CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\blank.cur"
-WXCURSOR_BULLSEYE           CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\bullseye.cur"
-WXCURSOR_CROSS             	CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\cross.cur"
-WXCURSOR_HAND             	CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\hand.cur"
-WXCURSOR_MAGNIFIER          CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\magnif1.cur"
-WXCURSOR_PBRUSH             CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\pbrush.cur"
-WXCURSOR_PENCIL             CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\pencil.cur"
-WXCURSOR_PLEFT             	CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\pntleft.cur"
-WXCURSOR_PRIGHT             CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\pntright.cur"
-WXCURSOR_RIGHT_ARROW        CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\rightarr.cur"
-WXCURSOR_ROLLER            	CURSOR	"..\\..\\..\\..\\drag2d\\platform\\msvc2008\\include\\wx\\msw\\roller.cur"
+WXCURSOR_BLANK             	CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\blank.cur"
+WXCURSOR_BULLSEYE           CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\bullseye.cur"
+WXCURSOR_CROSS             	CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\cross.cur"
+WXCURSOR_HAND             	CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\hand.cur"
+WXCURSOR_MAGNIFIER          CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\magnif1.cur"
+WXCURSOR_PBRUSH             CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\pbrush.cur"
+WXCURSOR_PENCIL             CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\pencil.cur"
+WXCURSOR_PLEFT             	CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\pntleft.cur"
+WXCURSOR_PRIGHT             CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\pntright.cur"
+//WXCURSOR_RIGHT_ARROW        CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\rightarr.cur"
+WXCURSOR_ROLLER            	CURSOR	"..\\..\\..\\..\\editor-external\\wx\\include\\wx\\msw\\roller.cur"
 
 #endif    // 中文(中华人民共和国) resources
 /////////////////////////////////////////////////////////////////////////////
