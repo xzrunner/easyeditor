@@ -1,3 +1,8 @@
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #ifndef ejoy2d_h
 #define ejoy2d_h
 
@@ -21,4 +26,16 @@ static inline void ejoy_get_screen(struct ej_screen* info) {
 	info->scale = screen_info.scale;
 }
 
+struct ej_extra {
+	int offx;
+	int offy;
+	float scale;
+	void * ud;
+	void * (*extra)(void *ud, int idx);
+};
+
+#endif
+
+#ifdef __cplusplus
+}
 #endif

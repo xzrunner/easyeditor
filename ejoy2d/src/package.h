@@ -1,8 +1,12 @@
 #ifndef ejoy_package_h
 #define ejoy_package_h
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #include "eploader.h"
-#include "opengl.h"
 
 #include <stdbool.h>
 
@@ -15,6 +19,8 @@
 #define PKMC 6
 #define RRP 11
 #define PTS 12
+
+typedef unsigned int GLuint;
 
 struct texture {
   GLuint id;
@@ -31,4 +37,8 @@ struct ej_package {
   struct texture tex[0];
 };
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

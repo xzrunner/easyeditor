@@ -1,5 +1,8 @@
 #include "TestC3.h"
 
+#include <easyejoy2d.h>
+#include <dtex_facade.h>
+
 namespace tdtex
 {
 
@@ -28,6 +31,13 @@ void TestC3::Load()
 	dtexf_c3_load_pkg("2003daoke", "test-dtex/2003daoke.epp", 1);
 
 	dtexf_c3_load_pkg_finish();
+
+	m_spr = new eejoy2d::EJSprite(pkg0, "2003daoke6_attack1_1");
+}
+
+void TestC3::Draw() const
+{
+	m_spr->Draw(100, 100);
 }
 
 }

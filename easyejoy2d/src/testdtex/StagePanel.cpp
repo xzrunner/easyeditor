@@ -3,7 +3,7 @@
 
 #include "TestC3.h"
 
-#include <shader.h>
+#include <easyejoy2d.h>
 
 namespace tdtex
 {
@@ -30,7 +30,7 @@ void StagePanel::clear()
 
 void StagePanel::Load()
 {
-	shader_load();
+	eejoy2d::EJScreen::Instance()->Load();
 
 	m_test = new TestC3();
 	m_test->Load();
@@ -38,7 +38,14 @@ void StagePanel::Load()
 
 void StagePanel::UnLoad()
 {
-	shader_unload();
+	eejoy2d::EJScreen::Instance()->Unload();
+}
+
+void StagePanel::Draw() const
+{
+	if (m_test) {
+		m_test->Draw();
+	}
 }
 
 }

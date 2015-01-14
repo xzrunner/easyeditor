@@ -4,7 +4,9 @@
 #include "ITest.h"
 
 #include <vector>
-#include <dtex_facade.h>
+#include <easyejoy2d.h>
+
+struct ej_package;
 
 namespace tdtex
 {
@@ -16,9 +18,13 @@ public:
 	virtual ~TestC3();
 	
 	virtual void Load();
+	virtual void Update() {}
+	virtual void Draw() const;
 
 private:
 	std::vector<ej_package*> m_ej_pkgs;
+
+	eejoy2d::EJSprite* m_spr;
 
 }; // TestC3
 

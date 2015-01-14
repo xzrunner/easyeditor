@@ -20,6 +20,9 @@ protected:
 	void onTimer(wxTimerEvent& event);
 
 private:
+	void DrawEJScreen() const;
+
+private:
 	enum
 	{
 		TIMER_ID = 1000

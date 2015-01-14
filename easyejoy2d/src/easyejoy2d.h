@@ -1,9 +1,7 @@
-#ifndef _EASYTEMPLATE_H_
-#define _EASYTEMPLATE_H_
+#ifndef _EASYEJOY2D_H_
+#define _EASYEJOY2D_H_
 
-#include "libtemplate/config.h"
-#include "libtemplate/LibraryPanel.h"
-#include "libtemplate/StagePanel.h"
-#include "libtemplate/ToolbarPanel.h"
+#include "easyejoy2d/EJScreen.h"
+#include "easyejoy2d/EJSprite.h"
 
-#endif // _EASYTEMPLATE_H_
+#endif // _EASYEJOY2D_H_

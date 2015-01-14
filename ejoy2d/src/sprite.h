@@ -1,3 +1,8 @@
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 #ifndef ejoy_sprite_h
 #define ejoy_sprite_h
 
@@ -117,4 +122,8 @@ int sprite_find(struct ej_sprite *spr, struct ej_sprite *node, char *buf, int ca
 int sprite_test(struct ej_package * pack, struct picture * pic, int x, int y, int *mat, struct ej_cursor *c, int offx, int offy, float scale, int mirror, int extend);
 void sprite_region(struct ej_package* pack, struct picture* pic, int x, int y, int *mat, int offx, int offy, float scale, int mirror, struct ej_rect* rect);
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif

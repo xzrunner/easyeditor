@@ -24,6 +24,8 @@ public:
 	void Load();
 	void UnLoad();
 
+	void Draw() const;
+
 private:
 	ITest* m_test;
 

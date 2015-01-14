@@ -9,6 +9,8 @@ class ITest
 public:
 	virtual ~ITest() {}
 	virtual void Load() = 0;
+	virtual void Update() = 0;
+	virtual void Draw() const = 0;
 
 }; // ITest
 
