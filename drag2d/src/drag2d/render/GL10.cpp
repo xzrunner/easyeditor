@@ -1,7 +1,8 @@
 #include "GL10.h"
 #include "Shader.h"
 
-#include <GL/glew.h>
+#define NOMINMAX
+#include <gl/GLee.h>
 
 namespace d2d
 {

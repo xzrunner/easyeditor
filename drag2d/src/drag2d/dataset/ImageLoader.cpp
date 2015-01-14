@@ -5,8 +5,10 @@
 #include <SOIL/SOIL.h>
 #include <libpng/png.h>
 #include <assert.h>
-#include <gl/glew.h>
 #include <fstream>
+
+#define NOMINMAX
+#include <gl/GLee.h>
 
 #include "common/tools.h"
 #include "render/ShaderMgr.h"

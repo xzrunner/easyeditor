@@ -2,7 +2,8 @@
 
 #include "dataset/ImageSprite.h"
 
-#include <gl/glew.h>
+#define NOMINMAX
+#include <gl/GLee.h>
 
 namespace d2d
 {
