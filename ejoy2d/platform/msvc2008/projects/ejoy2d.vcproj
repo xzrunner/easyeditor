@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;"
+				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;;&quot;../../../../editor-external/gl/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;"
+				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;;&quot;../../../../editor-external/gl/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
