@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="libpngd.lib lua.lib zlibd.lib lzmad.lib"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel_compiler&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;"
 				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="true"
 			/>
@@ -135,7 +135,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="libpng.lib lua.lib zlib.lib lzma.lib"
-				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel_compiler&quot;"
+				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\lua\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
