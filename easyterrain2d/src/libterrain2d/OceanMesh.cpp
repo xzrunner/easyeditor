@@ -279,21 +279,28 @@ void OceanMesh::UpdateWave(float during)
 			for (int k = 0; k < 3; ++k) {
 				emesh::Node* n = tri->nodes[k];
 
-//   				// todo
-//   				float x_times = (n->ori_xy.x - debug_r.xMin - m_texcoords_base.x * img_w) / img_w,
-//   					  y_times = (n->ori_xy.y - debug_r.yMin - m_texcoords_base.y * img_h) / img_h;
+  				// todo
+  				float x_times = (n->ori_xy.x - debug_r.xMin - m_texcoords_base.x * img_w) / img_w,
+  					  y_times = (n->ori_xy.y - debug_r.yMin - m_texcoords_base.y * img_h) / img_h;
 //   				if (fabs(x_times - (int)x_times) < 0.001f || 
 //   					fabs(y_times - (int)y_times) < 0.001f) {
+				if (fabs(y_times - (int)y_times) < 0.001f) {
 //  					float dis = n->ori_xy.y - m_wave_speed * during;
-//   					n->xy.y = n->ori_xy.y;
-//  					//n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-//   				} else {
-//   					float dis = n->ori_xy.y - m_wave_speed * during;
-//   					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
-//   				}
+//   					//n->xy.y = n->ori_xy.y;
+//  					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
 
- 				float dis = n->ori_xy.y - m_wave_speed * during;
- 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+					float dis = n->ori_xy.y - m_texcoords_base.y * img_h + m_wave_speed * during;
+					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+  				} else {
+  					float dis = n->ori_xy.y - m_wave_speed * during;
+  					n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+  				}
+
+// 				float dis = n->ori_xy.y + m_texcoords_base.y * img_h - m_wave_speed * during;
+// 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
+
+// 				float dis = n->ori_xy.y - m_wave_speed * during;
+// 				n->xy.y = n->ori_xy.y + m_wave_height * cos(dis);
 			}
 		}
 	}
