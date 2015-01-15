@@ -189,6 +189,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easyejoy2d\EJShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyejoy2d\EJShader.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easyejoy2d\EJSprite.cpp"
 				>
 			</File>

@@ -46,6 +46,7 @@ void TestC3::Update()
 void TestC3::Draw() const
 {
 	if (m_spr) {
+		eejoy2d::EJShader::Reset();
 		m_spr->Draw(100, 100);
 	}
 }

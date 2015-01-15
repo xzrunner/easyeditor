@@ -34,9 +34,13 @@ void StageCanvas::onDraw()
   
   	m_editPanel->drawEditTemp();
 
- 	d2d::ShaderMgr::Instance()->null();
-  	m_panel->Draw();
-//  	DrawEJScreen();
+	// turn to ejoy2d shader
+
+	m_panel->Draw();
+
+	// turn to easy2d shader
+
+	DrawEJScreen();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
@@ -64,9 +68,10 @@ void StageCanvas::DrawEJScreen() const
 	GLuint tex = eejoy2d::EJScreen::Instance()->GetTexID();
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
-
-	shader->sprite();
-	shader->Draw(vb, tex);
+	// reset
+	shader->null();
+ 	shader->sprite();
+ 	shader->Draw(vb, tex);
 }
 
 }
