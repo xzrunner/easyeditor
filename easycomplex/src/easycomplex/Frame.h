@@ -10,7 +10,6 @@ class Frame : public d2d::Frame
 {
 public:
 	Frame(const wxString& title, const wxString& filetag);
-	virtual ~Frame();
 
 protected:
 	virtual void onSaveAs(wxCommandEvent& event);
@@ -30,11 +29,6 @@ private:
 		ID_PREVIEW,
 		ID_EJ_PREVIEW,
 	};
-
-#ifdef _DEBUG
-private:
-	wxLogChain* m_log_chain;
-#endif
 
 private:
 	DECLARE_EVENT_TABLE()

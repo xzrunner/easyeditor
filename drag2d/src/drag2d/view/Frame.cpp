@@ -38,6 +38,9 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	initMenuBar();
 #ifdef _DEBUG
 	initStatueBar();
+
+	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
+	m_log_chain = new wxLogChain(new wxLogStderr);
 #else
 	wxLog::SetLogLevel(0);
 #endif
@@ -45,6 +48,10 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 
 Frame::~Frame()
 {
+#ifdef _DEBUG
+	delete m_log_chain;
+#endif
+
 	StoreWindowConfig();
 	saveTmpInfo();
 }

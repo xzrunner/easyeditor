@@ -128,6 +128,10 @@ private:
 
 	SpecialConfig m_config;
 
+#ifdef _DEBUG
+	wxLogChain* m_log_chain;
+#endif
+
 private:
 	DECLARE_EVENT_TABLE()
 
