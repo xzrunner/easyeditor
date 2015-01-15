@@ -55,17 +55,13 @@ void EJScreen::Unload()
 
 void EJScreen::Bind()
 {
-//	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-
-	shader_fbo(m_fbo);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
 }
 
 void EJScreen::UnBind()
 {
-// 	shader_flush();
-// 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
-
-	shader_fbo(0);
+ 	shader_flush();
+ 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
 }
 
 void EJScreen::InitRes()
@@ -83,10 +79,11 @@ void EJScreen::InitRes()
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)WIDTH, (GLsizei)HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-	// 	uint8_t* empty_data = new uint8_t[m_width*m_height*4];
-	// 	memset(empty_data, 0, m_width*m_height*4);
-	// 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)m_width, (GLsizei)m_height, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
-	// 	delete[] empty_data;
+
+ 	uint8_t* empty_data = new uint8_t[WIDTH*HEIGHT*4];
+ 	memset(empty_data, 0xaa, WIDTH*HEIGHT*4);
+ 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)WIDTH, (GLsizei)HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
+ 	delete[] empty_data;
 
 	m_tex = tex_id;
 

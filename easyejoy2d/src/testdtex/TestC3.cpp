@@ -7,6 +7,7 @@ namespace tdtex
 {
 
 TestC3::TestC3()
+	: m_spr(NULL)
 {
 	const char* cfg =
 		"{ \n"
@@ -35,9 +36,18 @@ void TestC3::Load()
 	m_spr = new eejoy2d::EJSprite(pkg0, "2003daoke6_attack1_1");
 }
 
+void TestC3::Update()
+{
+	if (m_spr) {
+		m_spr->Update();
+	}
+}
+
 void TestC3::Draw() const
 {
-	m_spr->Draw(100, 100);
+	if (m_spr) {
+		m_spr->Draw(100, 100);
+	}
 }
 
 }

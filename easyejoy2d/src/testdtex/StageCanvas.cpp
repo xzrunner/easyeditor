@@ -27,13 +27,16 @@ void StageCanvas::initGL()
 
 void StageCanvas::onDraw()
 {
+	m_panel->Update();
+
   	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
   	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
   
   	m_editPanel->drawEditTemp();
 
+	d2d::ShaderMgr::Instance()->null();
  	m_panel->Draw();
-// 	DrawEJScreen();
+ 	DrawEJScreen();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
@@ -45,24 +48,25 @@ void StageCanvas::DrawEJScreen() const
 {
 	float vb[16];
 
-	vb[0] = 0, vb[1] = 0;
 	vb[2] = 0, vb[3] = 0;
-
-	vb[4] = 0, vb[5] = 600;
 	vb[6] = 0, vb[7] = 1;
-
-	vb[8] = 800, vb[9] = 600;
 	vb[10] = 1, vb[11] = 1;
-
-	vb[12] = 800, vb[13] = 0;
 	vb[14] = 1, vb[15] = 0;
+
+	int left = -40, right = 40;
+	int down = -30, up = 30;
+
+	vb[0] = left, vb[1] = down;
+	vb[4] = left, vb[5] = up;
+	vb[8] = right, vb[9] = up;
+	vb[12] = right, vb[13] = down;
 
 	GLuint tex = eejoy2d::EJScreen::Instance()->GetTexID();
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+
 	shader->sprite();
 	shader->Draw(vb, tex);
-	shader->Flush();
 }
 
 }

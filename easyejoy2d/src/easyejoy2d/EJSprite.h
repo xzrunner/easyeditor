@@ -17,6 +17,7 @@ class EJSprite
 public:
 	EJSprite(ej_package* pkg, const char* name);
 
+	void Update();
 	void Draw(int x, int y) const;
 
 private:

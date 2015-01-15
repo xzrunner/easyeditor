@@ -19,6 +19,13 @@ EJSprite::EJSprite(ej_package* pkg, const char* name)
 	LoadSprite(pkg, name);
 }
 
+void EJSprite::Update()
+{
+	if (m_spr) {
+		++m_spr->frame;
+	}
+}
+
 void EJSprite::Draw(int x, int y) const
 {
  	if (!m_spr || m_spr->pack == NULL || m_spr->pack->texture_n == 0) {
@@ -46,12 +53,10 @@ void EJSprite::Draw(int x, int y) const
 	x *= SCALE;
 	y *= SCALE;
 
-	EJScreen* scr = EJScreen::Instance();
-	scr->Bind();
-
-	Draw(m_spr, NULL, 0, x, y, m_spr->color_trans, m_spr->color_additive, mat, extra, &screen);
-
-	scr->UnBind();
+ 	EJScreen* scr = EJScreen::Instance();
+ 	scr->Bind();
+ 	Draw(m_spr, NULL, 0, x, y, m_spr->color_trans, m_spr->color_additive, mat, extra, &screen);
+ 	scr->UnBind();
 }
 
 void EJSprite::LoadSprite(ej_package* pkg, const char* name)

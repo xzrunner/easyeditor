@@ -18,7 +18,7 @@ public:
 	virtual ~TestC3();
 	
 	virtual void Load();
-	virtual void Update() {}
+	virtual void Update();
 	virtual void Draw() const;
 
 private:

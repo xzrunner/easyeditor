@@ -41,6 +41,13 @@ void StagePanel::UnLoad()
 	eejoy2d::EJScreen::Instance()->Unload();
 }
 
+void StagePanel::Update()
+{
+	if (m_test) {
+		m_test->Update();
+	}
+}
+
 void StagePanel::Draw() const
 {
 	if (m_test) {

@@ -24,6 +24,7 @@ public:
 	void Load();
 	void UnLoad();
 
+	void Update();
 	void Draw() const;
 
 private:
