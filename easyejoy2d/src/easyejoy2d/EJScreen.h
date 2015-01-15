@@ -19,6 +19,8 @@ public:
 
 	GLuint GetTexID() const { return m_tex; }
 
+	void Clear();
+
 public:
 	static EJScreen* Instance();
 

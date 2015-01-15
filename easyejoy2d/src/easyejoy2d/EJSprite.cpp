@@ -53,10 +53,10 @@ void EJSprite::Draw(int x, int y) const
 	x *= SCALE;
 	y *= SCALE;
 
-	EJScreen* scr = EJScreen::Instance();
-	scr->Bind();
+// 	EJScreen* scr = EJScreen::Instance();
+// 	scr->Bind();
 	Draw(m_spr, NULL, 0, x, y, m_spr->color_trans, m_spr->color_additive, mat, extra, &screen);
-	scr->UnBind();
+//	scr->UnBind();
 }
 
 void EJSprite::LoadSprite(ej_package* pkg, const char* name)

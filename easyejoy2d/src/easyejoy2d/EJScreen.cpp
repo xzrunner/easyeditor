@@ -64,6 +64,13 @@ void EJScreen::UnBind()
  	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, d2d::ShaderMgr::Instance()->GetFboID());
 }
 
+void EJScreen::Clear()
+{
+//	glClearColor(0, 0, 0, 0);
+	glClearColor(0.1, 0.1, 0.1, 0.1);
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
 void EJScreen::InitRes()
 {
 	// init tex

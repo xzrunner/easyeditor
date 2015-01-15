@@ -47,7 +47,12 @@ void TestC3::Draw() const
 {
 	if (m_spr) {
 		eejoy2d::EJShader::Reset();
+
+		eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
+		scr->Bind();
+		scr->Clear();
 		m_spr->Draw(100, 100);
+		scr->UnBind();
 	}
 }
 
