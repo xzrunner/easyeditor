@@ -34,9 +34,9 @@ void StageCanvas::onDraw()
   
   	m_editPanel->drawEditTemp();
 
-	d2d::ShaderMgr::Instance()->null();
- 	m_panel->Draw();
- 	DrawEJScreen();
+ 	d2d::ShaderMgr::Instance()->null();
+  	m_panel->Draw();
+//  	DrawEJScreen();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
@@ -53,8 +53,8 @@ void StageCanvas::DrawEJScreen() const
 	vb[10] = 1, vb[11] = 1;
 	vb[14] = 1, vb[15] = 0;
 
-	int left = -40, right = 40;
-	int down = -30, up = 30;
+ 	int left = -200, right = 200;
+ 	int down = -150, up = 150;
 
 	vb[0] = left, vb[1] = down;
 	vb[4] = left, vb[5] = up;
