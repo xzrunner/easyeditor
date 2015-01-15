@@ -7,6 +7,7 @@ namespace eejoy2d
 
 void EJShader::Reset()
 {
+	shader_texture(-1);
 	shader_program(-1);
 }
 

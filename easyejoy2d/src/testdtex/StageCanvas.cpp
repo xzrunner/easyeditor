@@ -68,8 +68,11 @@ void StageCanvas::DrawEJScreen() const
 	GLuint tex = eejoy2d::EJScreen::Instance()->GetTexID();
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+
 	// reset
+	shader->SetTexture(0);
 	shader->null();
+
  	shader->sprite();
  	shader->Draw(vb, tex);
 }
