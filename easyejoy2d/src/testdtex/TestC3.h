@@ -24,7 +24,7 @@ public:
 private:
 	std::vector<ej_package*> m_ej_pkgs;
 
-	eejoy2d::EJSprite* m_spr;
+	std::vector<eejoy2d::EJSprite*> m_sprites;
 
 }; // TestC3
 
