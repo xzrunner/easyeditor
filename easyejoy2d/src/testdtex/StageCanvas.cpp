@@ -15,7 +15,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 	, m_panel(panel)
 	, m_timer(this, TIMER_ID)
 {
-	m_timer.Start(100);
+	m_timer.Start(1000 / 30);
 }
 
 void StageCanvas::initGL()
