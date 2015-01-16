@@ -12,8 +12,11 @@ struct ej_package;
 namespace eejoy2d
 {
 
-static const int TEX_W = 1024;
-static const int TEX_H = 1024;
+// static const int TEX_W = 2048;
+// static const int TEX_H = 2048;
+
+static const int TEX_W = 480 * 8;
+static const int TEX_H = 320 * 8;
 
 EJScreen* EJScreen::m_instance = NULL;
 bool EJScreen::m_loaded = false;
