@@ -135,9 +135,9 @@ void SpriteShader::Commit()
 		return;
 	}
 
-	if (m_fbo != 0 || (m_fbo != 1 && m_tex != 1)) {
-		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
-	}
+// 	if (m_fbo != 0 || (m_fbo != 1 && m_tex != 1)) {
+// 		wxLogDebug(_T("fbo = %d, tex = %d"), m_fbo, m_tex);
+// 	}
 
 	if (m_is_mat_dirty) {
 		glUniformMatrix4fv(m_model_view, 1, 0, m_mat_modelview.getElements());
