@@ -29,6 +29,7 @@ public:
 
 public:
 	static EJScreen* Instance();
+	static EJScreen* Create();
 
 private:
 	EJScreen() {}

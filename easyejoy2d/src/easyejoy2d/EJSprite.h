@@ -16,9 +16,12 @@ class EJSprite
 {
 public:
 	EJSprite(ej_package* pkg, const char* name);
+	EJSprite(ej_sprite* spr);
 
 	void Update();
 	void Draw(int x, int y) const;
+
+	void Translate(int dx, int dy);
 
 private:
 	void LoadSprite(ej_package* pkg, const char* name);

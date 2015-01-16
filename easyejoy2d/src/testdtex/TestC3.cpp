@@ -100,6 +100,7 @@ void TestC3::Draw() const
 	eejoy2d::EJShader::Reset();
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
+	assert(scr);
 	scr->Bind();
 	scr->Clear();
 

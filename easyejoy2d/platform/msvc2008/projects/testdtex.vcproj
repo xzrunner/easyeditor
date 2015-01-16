@@ -265,6 +265,14 @@
 				RelativePath="..\..\..\src\testdtex\TestC3.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\testdtex\TestDSprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\testdtex\TestDSprite.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>

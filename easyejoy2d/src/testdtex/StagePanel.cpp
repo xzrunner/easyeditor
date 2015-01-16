@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 
 #include "TestC3.h"
+#include "TestDSprite.h"
 
 #include <easyejoy2d.h>
 
@@ -30,14 +31,16 @@ void StagePanel::clear()
 
 void StagePanel::Load()
 {
-	eejoy2d::EJScreen::Instance()->Load();
+	eejoy2d::EJScreen::Create();
 
-	m_test = new TestC3();
+//	m_test = new TestC3();
+	m_test = new TestDSprite();
 	m_test->Load();
 }
 
 void StagePanel::UnLoad()
 {
+	assert(eejoy2d::EJScreen::Instance());
 	eejoy2d::EJScreen::Instance()->Unload();
 }
 

@@ -19,6 +19,11 @@ EJSprite::EJSprite(ej_package* pkg, const char* name)
 	LoadSprite(pkg, name);
 }
 
+EJSprite::EJSprite(ej_sprite* spr)
+	: m_spr(spr)
+{
+}
+
 void EJSprite::Update()
 {
 	if (m_spr) {
@@ -53,10 +58,7 @@ void EJSprite::Draw(int x, int y) const
 	x *= SCALE;
 	y *= SCALE;
 
-// 	EJScreen* scr = EJScreen::Instance();
-// 	scr->Bind();
 	Draw(m_spr, NULL, 0, x, y, m_spr->color_trans, m_spr->color_additive, mat, extra, &screen);
-//	scr->UnBind();
 }
 
 void EJSprite::LoadSprite(ej_package* pkg, const char* name)
@@ -202,6 +204,14 @@ _continue:
 		if (c->flag) {
 			screen_clip_pop(0);
 		}
+	}
+}
+
+void EJSprite::Translate(int dx, int dy)
+{
+	if (m_spr) {
+		m_spr->mat[4] += dx * 16;
+		m_spr->mat[5] += dy * 16;
 	}
 }
 

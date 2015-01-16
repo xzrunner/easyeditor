@@ -25,18 +25,25 @@ static ej_package* PKG = NULL;
 
 EJScreen* EJScreen::Instance()
 {
-	if (!m_loaded) {
-		return NULL;
-	}
+	return m_loaded ? m_instance : NULL;
+}
 
+EJScreen* EJScreen::Create()
+{
 	if (!m_instance) {
 		m_instance = new EJScreen();
+		m_instance->Load();
 	}
+
+	m_loaded = true;
+
 	return m_instance;
 }
 
 void EJScreen::Load()
 {
+	assert(!m_loaded);
+
 	m_loaded = true;
 
 	CreateRes();

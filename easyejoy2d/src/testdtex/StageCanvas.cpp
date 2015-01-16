@@ -48,6 +48,7 @@ void StageCanvas::onDraw()
 
 	m_panel->Draw();
 
+	assert(eejoy2d::EJScreen::Instance());
 	eejoy2d::EJScreen::Instance()->DebugDraw();
 
 	// turn to easy2d shader
@@ -70,6 +71,7 @@ void StageCanvas::DrawEJScreen() const
 	vb[14] = 1, vb[15] = 0;
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
+	assert(scr);
 
 	int left = 0, right = scr->GetWidth();
 	int down = 0, up = scr->GetHeight();
