@@ -17,24 +17,33 @@ public:
 	void Bind();
 	void UnBind();
 
-	GLuint GetTexID() const { return m_tex; }
+	int GetWidth() const;
+	int GetHeight() const;
+	GLuint GetTexID() const;
+
+	void OnSize(int w, int h);
 
 	void Clear();
+
+	void DebugDraw() const;
 
 public:
 	static EJScreen* Instance();
 
 private:
-	EJScreen();
-	~EJScreen();
+	EJScreen() {}
+	~EJScreen() {}
 
-	void InitRes();
+	void CreateRes();
+	void ReleaseRes();
 
 private:
 	GLuint m_tex, m_fbo;
 
 private:
 	static EJScreen* m_instance;
+
+	static bool m_loaded;
 
 }; // EJScreen
 

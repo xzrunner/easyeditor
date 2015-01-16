@@ -569,8 +569,8 @@ shader_flush() {
     pf_log("shader_flush");
 #endif
 //#ifdef DTEX_DEBUG
- // debug_draw(Dtex);
- dtexf_debug_draw();
+//  debug_draw(Dtex);
+//  dtexf_debug_draw();
 //#endif
   rs_commit();
 }

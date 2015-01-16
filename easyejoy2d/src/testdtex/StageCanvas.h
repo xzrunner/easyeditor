@@ -15,6 +15,7 @@ public:
 
 protected:
 	virtual void initGL();
+	virtual void onSize(int w, int h);
 	virtual void onDraw();
 
 	void onTimer(wxTimerEvent& event);

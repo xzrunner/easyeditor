@@ -25,6 +25,16 @@ void StageCanvas::initGL()
 	m_panel->Load();
 }
 
+void StageCanvas::onSize(int w, int h)
+{
+	d2d::OrthoCanvas::onSize(w, h);
+
+	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
+	if (scr) {
+		scr->OnSize(w, h);
+	}
+}
+
 void StageCanvas::onDraw()
 {
 	m_panel->Update();
@@ -37,6 +47,8 @@ void StageCanvas::onDraw()
 	// turn to ejoy2d shader
 
 	m_panel->Draw();
+
+	eejoy2d::EJScreen::Instance()->DebugDraw();
 
 	// turn to easy2d shader
 
@@ -57,15 +69,15 @@ void StageCanvas::DrawEJScreen() const
 	vb[10] = 1, vb[11] = 1;
 	vb[14] = 1, vb[15] = 0;
 
- 	int left = -200, right = 200;
- 	int down = -150, up = 150;
+	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
+
+	int left = 0, right = scr->GetWidth();
+	int down = 0, up = scr->GetHeight();
 
 	vb[0] = left, vb[1] = down;
 	vb[4] = left, vb[5] = up;
 	vb[8] = right, vb[9] = up;
 	vb[12] = right, vb[13] = down;
-
-	GLuint tex = eejoy2d::EJScreen::Instance()->GetTexID();
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 
@@ -74,7 +86,7 @@ void StageCanvas::DrawEJScreen() const
 	shader->null();
 
  	shader->sprite();
- 	shader->Draw(vb, tex);
+ 	shader->Draw(vb, scr->GetTexID());
 }
 
 }
