@@ -266,11 +266,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\testdtex\TestDSprite.cpp"
+				RelativePath="..\..\..\src\testdtex\TestSprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\testdtex\TestDSprite.h"
+				RelativePath="..\..\..\src\testdtex\TestSprite.h"
 				>
 			</File>
 		</Filter>

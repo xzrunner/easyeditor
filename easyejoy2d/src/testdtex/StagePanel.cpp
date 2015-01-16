@@ -2,7 +2,7 @@
 #include "StageCanvas.h"
 
 #include "TestC3.h"
-#include "TestDSprite.h"
+#include "TestSprite.h"
 
 #include <easyejoy2d.h>
 
@@ -34,7 +34,7 @@ void StagePanel::Load()
 	eejoy2d::EJScreen::Create();
 
 //	m_test = new TestC3();
-	m_test = new TestDSprite();
+	m_test = new TestSprite();
 	m_test->Load();
 }
 

@@ -1,4 +1,4 @@
-#include "TestDSprite.h"
+#include "TestSprite.h"
 
 #include <easyejoy2d.h>
 #include <dtex_facade.h>
@@ -6,7 +6,7 @@
 namespace tdtex
 {
 
-TestDSprite::TestDSprite()
+TestSprite::TestSprite()
 {
 	const char* cfg =
 		"{ \n"
@@ -18,12 +18,12 @@ TestDSprite::TestDSprite()
 	dtexf_create(cfg);
 }
 
-TestDSprite::~TestDSprite()
+TestSprite::~TestSprite()
 {
 	dtexf_release();
 }
 
-void TestDSprite::Load()
+void TestSprite::Load()
 {
 	{
 		ej_package* pkg = dtexf_c3_load_pkg("2002jumin", "test-dtex/2002jumin.epd", 1);
@@ -36,11 +36,11 @@ void TestDSprite::Load()
 	m_spr2->Translate(300, 0);
 }
 
-void TestDSprite::Update()
+void TestSprite::Update()
 {
 }
 
-void TestDSprite::Draw() const
+void TestSprite::Draw() const
 {
 	eejoy2d::EJShader::Reset();
 

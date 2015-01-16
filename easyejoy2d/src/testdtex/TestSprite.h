@@ -1,5 +1,5 @@
-#ifndef _TEST_DTEX_TEST_DSPRITE_H_
-#define _TEST_DTEX_TEST_DSPRITE_H_
+#ifndef _TEST_DTEX_TEST_SPRITE_H_
+#define _TEST_DTEX_TEST_SPRITE_H_
 
 #include "ITest.h"
 
@@ -8,11 +8,11 @@
 namespace tdtex
 {
 
-class TestDSprite : public ITest
+class TestSprite : public ITest
 {
 public:
-	TestDSprite();
-	virtual ~TestDSprite();
+	TestSprite();
+	virtual ~TestSprite();
 
 	virtual void Load();
 	virtual void Update();
@@ -23,8 +23,8 @@ private:
 
 	eejoy2d::EJSprite* m_spr2;
 
-}; // TestDSprite
+}; // TestSprite
 
 }
 
-#endif // _TEST_DTEX_TEST_DSPRITE_H_
+#endif // _TEST_DTEX_TEST_SPRITE_H_
