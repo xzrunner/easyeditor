@@ -23,6 +23,7 @@ void StageCanvas::initGL()
 	d2d::OrthoCanvas::initGL();
 
 	m_panel->Load();
+	resetViewport();	// todo: resize -> new -> resize
 }
 
 void StageCanvas::onSize(int w, int h)
