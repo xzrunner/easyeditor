@@ -9,14 +9,17 @@ struct screen_coord;
 
 #include <stdint.h>
 
+#include <drag2d.h>
+
 namespace eejoy2d
 {
 
-class EJSprite
+class EJSprite : public d2d::Object
 {
 public:
 	EJSprite(ej_package* pkg, const char* name);
 	EJSprite(ej_sprite* spr);
+	virtual ~EJSprite();
 
 	void Update();
 	void Draw(int x, int y) const;

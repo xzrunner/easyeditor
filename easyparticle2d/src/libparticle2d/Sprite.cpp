@@ -12,13 +12,17 @@ Sprite::Sprite(const Sprite& sprite)
 	: ISprite(sprite)
 	, m_symbol(sprite.m_symbol)
 {
-	m_symbol->Retain();
+	if (m_symbol) {
+		m_symbol->Retain();
+	}
 }
 
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
-	m_symbol->Retain();
+	if (m_symbol) {
+		m_symbol->Retain();
+	}
 	buildBounding();
 
 	m_symbol->ResetPS();

@@ -20,8 +20,15 @@ EJSprite::EJSprite(ej_package* pkg, const char* name)
 }
 
 EJSprite::EJSprite(ej_sprite* spr)
-	: m_spr(spr)
+	: m_pkg(NULL)
+	, m_spr(spr)
 {
+}
+
+EJSprite::~EJSprite()
+{
+	free(m_pkg);
+	free(m_spr);	
 }
 
 void EJSprite::Update()

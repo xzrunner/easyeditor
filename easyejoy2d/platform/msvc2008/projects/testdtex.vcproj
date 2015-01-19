@@ -266,6 +266,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\testdtex\TestPVR.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\testdtex\TestPVR.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\testdtex\TestSprite.cpp"
 				>
 			</File>

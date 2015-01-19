@@ -204,6 +204,14 @@
 				RelativePath="..\..\..\src\easyejoy2d\EJSprite.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\easyejoy2d\PackageMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyejoy2d\PackageMgr.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\easyejoy2d\config.h"

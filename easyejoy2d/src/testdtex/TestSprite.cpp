@@ -50,13 +50,7 @@ void TestSprite::Draw() const
 	scr->Clear();
 
 	m_spr->Draw(100, 100);
-
 	m_spr2->Draw(200, 200);
-
-// 	static const int COL = 9;
-// 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-// 		m_sprites[i]->Draw((i%COL+1)*100, (std::floor((float)i/COL)+1)*100);
-// 	}
 
 	scr->UnBind();
 }
