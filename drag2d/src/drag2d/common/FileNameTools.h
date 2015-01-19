@@ -49,6 +49,8 @@ namespace d2d
 
 		static void fetchAllFiles(const std::string& dirpath, wxArrayString& files);
 
+		static wxString FormatFilepath(const wxString& filepath);
+
 	}; // FilenameTools
 }
 

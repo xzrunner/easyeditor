@@ -39,16 +39,7 @@ void TestPVR::Update()
 }
 
 void TestPVR::Draw() const
-{
-	eejoy2d::EJShader::Reset();
-
-	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
-	assert(scr);
-	scr->Bind();
-	scr->Clear();
-	// todo 不画这个，DebugDraw也画不出来，状态转换有问题
-	m_spr->Draw(100, 100);
-	scr->UnBind();
+{	
 }
 
 }

@@ -42,8 +42,6 @@ void TestSprite::Update()
 
 void TestSprite::Draw() const
 {
-	eejoy2d::EJShader::Reset();
-
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
 	assert(scr);
 	scr->Bind();

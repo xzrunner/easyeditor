@@ -111,7 +111,7 @@ rs_commit() {
   glEnableVertexAttribArray(ATTRIB_ADDITIVE);
   glVertexAttribPointer(ATTRIB_ADDITIVE, 4, GL_UNSIGNED_BYTE, GL_FALSE, 24, BUFFER_OFFSET(20));  
   glDrawElements(GL_TRIANGLES, 6 * RS->object, GL_UNSIGNED_SHORT, 0);
-    
+
   RS->object = 0;
 #ifdef DRAWCALL_STAT
   drawcall++;
@@ -430,6 +430,12 @@ shader_program(int n) {
 #endif
     rs_commit();
     RS->activeprog = n;
+
+	if (n == -1) {
+		glUseProgram(0);
+		return;
+	}
+
     glUseProgram(Prog[n].prog);
 
     glActiveTexture(GL_TEXTURE0);

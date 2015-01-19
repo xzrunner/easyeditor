@@ -183,4 +183,11 @@ void FilenameTools::fetchAllFiles(const std::string& dirpath, wxArrayString& fil
 	dir.Traverse(traverser);
 }
 
+wxString FilenameTools::FormatFilepath(const wxString& filepath)
+{
+ 	wxFileName filename(filepath);
+ 	filename.Normalize();
+	return filename.GetFullPath().Lower();
+}
+
 } // d2d

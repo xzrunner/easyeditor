@@ -39,6 +39,10 @@ protected:
 	virtual void loadResources();
 
 private:
+	void DrawToEJScreen() const;
+	void DrawFromEJScreen() const;
+
+private:
 	EJSprite* m_spr;
 
 }; // Symbol
