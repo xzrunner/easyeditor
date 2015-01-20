@@ -12,7 +12,7 @@ public:
 	ImagePack(int width, int height);
 	~ImagePack();
 
-	void AddImage(const d2d::Image* img, int x, int y, int w, int h);
+	void AddImage(const d2d::Image* img, int x, int y, int w, int h, bool clockwise);
 
 	void OutputToFile(const wxString& filepath) const;
 

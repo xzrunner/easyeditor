@@ -98,7 +98,7 @@ void NormalPack::OutputImage(const wxString& filepath) const
 	{
 		const Rect& pos = m_output[i];
 		d2d::Image* img = d2d::ImageMgr::Instance()->getItem(m_files[i]);
-		pack.AddImage(img, pos.x, pos.y, pos.width, pos.height);
+		pack.AddImage(img, pos.x, pos.y, pos.width, pos.height, true);
 		img->Release();
 	}
 

@@ -28,7 +28,7 @@ void GenRegularRectImage::Create(const wxString& filepath)
 			h = spr_val["dst"]["h"].asInt();
 		wxString filepath = spr_val["filepath"].asString();
 		d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filepath);
-		pack.AddImage(img, x ,y, w, h);
+		pack.AddImage(img, x ,y, w, h, true);
 		img->Release();
 
 		spr_val = value["parts"][i++];
