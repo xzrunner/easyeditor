@@ -52,7 +52,7 @@ void TestRRP_C2C3::Draw() const
 	scr->Bind();
 	scr->Clear();
 
-	m_spr->Draw(100, 100);
+	m_spr->Draw(300, 300);
 
 	scr->UnBind();
 }

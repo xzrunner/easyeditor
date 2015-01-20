@@ -38,9 +38,13 @@ void StagePanel::Load()
 
 //	m_test = new TestC3();
 //	m_test = new TestC2();
+
 //	m_test = new TestSprite();
+
 //	m_test = new TestPVR();
+
 	m_test = new TestRRP_C2C3();
+
 	m_test->Load();
 }
 
