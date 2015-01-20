@@ -27,7 +27,6 @@ EJSprite::EJSprite(ej_sprite* spr)
 
 EJSprite::~EJSprite()
 {
-	free(m_pkg);
 	free(m_spr);	
 }
 
