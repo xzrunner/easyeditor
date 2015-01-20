@@ -3,6 +3,7 @@
 #include "image_type.h"
 
 #include <libpng/png.h>
+#include <dtex_png.h>
 
 namespace epbin
 {
@@ -21,38 +22,53 @@ PNGLoader::~PNGLoader()
 
 void PNGLoader::Load(const std::string& filepath)
 {
-	png_image image;
+	int w, h, c, f;
+	uint8_t* buf = dtex_png_read(filepath.c_str(), &w, &h, &c, &f);
 
-	memset(&image, 0, (sizeof image));
-	image.version = PNG_IMAGE_VERSION;
+	m_width = w;
+	m_height = h;
+	m_buffer = buf;
+	m_buf_sz = w * h * c;
 
-	if (png_image_begin_read_from_file(&image, filepath.c_str()) != 0)
-	{
-		png_bytep buffer;
-
-         /* Set the format in which to read the PNG file; this code chooses a
-          * simple sRGB format with a non-associated alpha channel, adequate to
-          * store most images.
-          */
-		image.format = PNG_FORMAT_RGBA;
-
-		int sz = PNG_IMAGE_SIZE(image);
-		buffer = (png_bytep)malloc(sz);
-		if (buffer != NULL && 
-			png_image_finish_read(&image, NULL, buffer, 0, NULL) != 0)
-		{
-			m_width = image.width;
-			m_height = image.height;
-
-			m_buffer = new uint8_t[sz];
-			memcpy(m_buffer, buffer, sz);
-			m_buf_sz = sz;
-			if (m_type == TYPE_TEXTURE4) {
-				GenPng4();
-			}
-		}
+	if (m_type == TYPE_TEXTURE4) {
+		GenPng4();
 	}
 }
+
+// void PNGLoader::Load(const std::string& filepath)
+// {
+// 	png_image image;
+// 
+// 	memset(&image, 0, (sizeof image));
+// 	image.version = PNG_IMAGE_VERSION;
+// 
+// 	if (png_image_begin_read_from_file(&image, filepath.c_str()) != 0)
+// 	{
+// 		png_bytep buffer;
+// 
+//          /* Set the format in which to read the PNG file; this code chooses a
+//           * simple sRGB format with a non-associated alpha channel, adequate to
+//           * store most images.
+//           */
+// 		image.format = PNG_FORMAT_RGBA;
+// 
+// 		int sz = PNG_IMAGE_SIZE(image);
+// 		buffer = (png_bytep)malloc(sz);
+// 		if (buffer != NULL && 
+// 			png_image_finish_read(&image, NULL, buffer, 0, NULL) != 0)
+// 		{
+// 			m_width = image.width;
+// 			m_height = image.height;
+// 
+// 			m_buffer = new uint8_t[sz];
+// 			memcpy(m_buffer, buffer, sz);
+// 			m_buf_sz = sz;
+// 			if (m_type == TYPE_TEXTURE4) {
+// 				GenPng4();
+// 			}
+// 		}
+// 	}
+// }
 
 void PNGLoader::Store(std::ofstream& fout) const
 {
@@ -103,6 +119,7 @@ _round(int c) {
 	return c >> 4;
 }
 
+// todo
 void PNGLoader::GenPng4()
 {
 	for (int i = 0; i < m_buf_sz; i += 4)
