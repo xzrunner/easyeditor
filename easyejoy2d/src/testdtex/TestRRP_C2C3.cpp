@@ -47,7 +47,14 @@ void TestRRP_C2C3::Update()
 
 void TestRRP_C2C3::Draw() const
 {
+	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
+	assert(scr);
+	scr->Bind();
+	scr->Clear();
+
 	m_spr->Draw(100, 100);
+
+	scr->UnBind();
 }
 
 }

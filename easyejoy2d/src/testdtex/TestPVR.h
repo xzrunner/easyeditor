@@ -18,9 +18,6 @@ public:
 	virtual void Update();
 	virtual void Draw() const;	
 
-private:
-	eejoy2d::EJSprite* m_spr;
-
 }; // TestPVR
 
 }

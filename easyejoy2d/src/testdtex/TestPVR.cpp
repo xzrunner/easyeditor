@@ -26,7 +26,6 @@ void TestPVR::Load()
 {
 	// only for c3 init tex
 	ej_package* pkg = dtexf_c3_load_pkg("2002jumin", "test-dtex/2002jumin.epd", 1);
-	m_spr = new eejoy2d::EJSprite(pkg, "2002jumin1_run_1");
 	dtexf_c3_load_pkg("2002jumin", "test-dtex/2002jumin.epp", 1);
 	dtexf_c3_load_pkg_finish();
 
