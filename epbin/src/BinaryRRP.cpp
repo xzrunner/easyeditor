@@ -99,6 +99,7 @@ void BinaryRRP::Load(const std::string& json_file, const std::string& img_id_fil
 	fin.close();
 
 	// parser json
+	int height = value["height"].asUInt();
 	std::vector<Part*> parts;
 	int i = 0;
 	Json::Value val = value["parts"][i++];
@@ -115,6 +116,8 @@ void BinaryRRP::Load(const std::string& json_file, const std::string& img_id_fil
 		p->dst.y = val["dst"]["y"].asInt();
 		p->dst.w = val["dst"]["w"].asInt();
 		p->dst.h = val["dst"]["h"].asInt();
+
+		p->dst.y = height - (p->dst.y + p->dst.h);
 
 		p->filepath = path;
 
