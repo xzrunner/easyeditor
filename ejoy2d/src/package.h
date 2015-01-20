@@ -1,10 +1,10 @@
-#ifndef ejoy_package_h
-#define ejoy_package_h
-
 #ifdef __cplusplus
 extern "C"
 {
 #endif
+
+#ifndef ejoy_package_h
+#define ejoy_package_h
 
 #include "eploader.h"
 
@@ -36,6 +36,15 @@ struct ej_package {
   struct ejoypic *ep;
   struct texture tex[0];
 };
+
+
+// 加载一个资源包
+struct ej_package * package_load(const char * name, const char * path[], int count);
+// 卸载一个资源包
+void package_unload(const char * name);
+
+// 在程序完全退出, 或者执行完热更新之后调用
+void package_unload_all();
 
 #endif
 

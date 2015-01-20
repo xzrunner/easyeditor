@@ -330,6 +330,10 @@
 			>
 		</File>
 		<File
+			RelativePath="..\..\..\src\package.c"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\package.h"
 			>
 		</File>
