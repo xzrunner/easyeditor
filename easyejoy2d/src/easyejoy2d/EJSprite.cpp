@@ -32,11 +32,9 @@ EJSprite::~EJSprite()
 
 void EJSprite::Update()
 {
-// 	if (m_spr) {
-// 		++m_spr->frame;
-// 	}
-
-	m_spr->frame = 11;
+ 	if (m_spr) {
+ 		++m_spr->frame;
+ 	}
 }
 
 void EJSprite::Draw(int x, int y) const
