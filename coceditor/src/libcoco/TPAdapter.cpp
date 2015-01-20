@@ -20,8 +20,11 @@ void TPAdapter::Load(const char* filename)
 	m_width = value["meta"]["size"]["w"].asInt();
 	m_height = value["meta"]["size"]["h"].asInt();
 
-	std::string str = value["meta"]["scale"].asString();
-	m_invscale = atof(str.c_str());
+	std::string scale = value["meta"]["scale"].asString();
+	m_invscale = atof(scale.c_str());
+
+	std::string app = value["meta"]["app"].asString();
+	m_is_easydb = app.compare("easydb") == 0;
 
 	int i = 0;
 	Json::Value frameValue = value["frames"][i++];

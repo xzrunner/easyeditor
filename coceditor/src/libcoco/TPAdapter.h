@@ -37,6 +37,10 @@ public:
 
 	float GetInvScale() const { return m_invscale; }
 
+	int GetHeight() const { return m_height; }
+
+	bool IsEasyDBData() const { return m_is_easydb; }
+
 private:
 	void Load(const Json::Value& value, Entry& entry);
 	void Load(const Json::Value& value, Region& region);
@@ -47,6 +51,8 @@ private:
 	float m_invscale;
 
 	std::vector<Entry> m_frames;
+
+	bool m_is_easydb;
 
 }; // TPAdapter
 

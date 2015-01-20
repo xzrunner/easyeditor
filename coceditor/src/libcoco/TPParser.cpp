@@ -38,6 +38,7 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 
 	const TPAdapter& adapter = tex->adapter;
 	const std::vector<TPAdapter::Entry>& frames = adapter.GetFrames();
+	bool flip_y = adapter.IsEasyDBData();
 	for (size_t i = 0, n = frames.size(); i < n; ++i)
 	{
 		const TPAdapter::Entry& entry = frames[i];
@@ -76,12 +77,18 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		picture->invscale = adapter.GetInvScale();
 		picture->tex = idx;
 
+		float left, right, up, down;
 		if (entry.rotated)
 		{
-			const float left = entry.frame.x,
-				right = entry.frame.x + entry.frame.h,
-				up = entry.frame.y,
+			left = entry.frame.x;
+			right = entry.frame.x + entry.frame.h;
+			if (flip_y) {
+				up = adapter.GetHeight() - entry.frame.y;
+				down = adapter.GetHeight() - (entry.frame.y + entry.frame.w);
+			} else {
+				up = entry.frame.y;
 				down = entry.frame.y + entry.frame.w;
+			}
 
 			picture->scr[0].set(right, up);
 			picture->scr[1].set(left, up);
@@ -90,10 +97,15 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		}
 		else
 		{
-			const float left = entry.frame.x,
-				right = entry.frame.x + entry.frame.w,
-				up = entry.frame.y,
+			left = entry.frame.x;
+			right = entry.frame.x + entry.frame.w;
+			if (flip_y) {
+				up = adapter.GetHeight() - entry.frame.y;
+				down = adapter.GetHeight() - (entry.frame.y + entry.frame.h);
+			} else {
+				up = entry.frame.y;
 				down = entry.frame.y + entry.frame.h;
+			}
 
 			picture->scr[0].set(left, up);
 			picture->scr[1].set(left, down);

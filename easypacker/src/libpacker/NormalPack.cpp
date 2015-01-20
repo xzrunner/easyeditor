@@ -77,6 +77,7 @@ void NormalPack::OutputInfo(const wxString& src_folder, const ImageTrimData& tri
 	meta_val["size"]["w"] = m_size.width;
 	meta_val["size"]["h"] = m_size.height;
 	meta_val["scale"] = "1";
+	meta_val["app"] = "easydb";
 
 	value["meta"] = meta_val;
 
