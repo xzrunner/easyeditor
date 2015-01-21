@@ -22,8 +22,8 @@ void NormalPack::Pack()
 	}
 
 	MaxRectsBinaryPack2 packer;
-	packer.Pack(m_src_sizes, m_output);
-	m_size = packer.GetSize();
+	packer.Pack(libpacker::PACK_AUTO, m_src_sizes, m_output);
+	packer.GetSize(m_sizes);
 }
 
 void NormalPack::OutputInfo(const wxString& src_folder, const ImageTrimData& trim,
@@ -74,8 +74,8 @@ void NormalPack::OutputInfo(const wxString& src_folder, const ImageTrimData& tri
 	}
 
 	Json::Value meta_val;
-	meta_val["size"]["w"] = m_size.width;
-	meta_val["size"]["h"] = m_size.height;
+	meta_val["size"]["w"] = m_sizes[0].width;
+	meta_val["size"]["h"] = m_sizes[0].height;
 	meta_val["scale"] = "1";
 	meta_val["app"] = "easydb";
 
@@ -93,7 +93,7 @@ void NormalPack::OutputImage(const wxString& filepath) const
 {
 	assert(m_files.size() == m_src_sizes.size() && m_files.size() == m_output.size());
 
-	eimage::ImagePack pack(m_size.width, m_size.height);
+	eimage::ImagePack pack(m_sizes[0].width, m_sizes[0].height);
 	for (int i = 0, n = m_files.size(); i < n; ++i) 
 	{
 		const Rect& pos = m_output[i];

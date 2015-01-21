@@ -21,6 +21,11 @@ struct Rect
 	int y;
 	int width;
 	int height;
+
+	int tex_id;
+
+	Rect()
+		: tex_id(0) {}
 };
 
 }

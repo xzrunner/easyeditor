@@ -3,6 +3,7 @@
 
 #include "Rect.h"
 #include "Sprite.h"
+#include "typedef.h"
 
 #include <drag2d.h>
 
@@ -15,17 +16,27 @@ public:
 	MaxRectsBinaryPack2();
 	~MaxRectsBinaryPack2();
 
-	RectSize GetSize() const;
+	void GetSize(std::vector<RectSize>& sizes) const;
 
-	void Pack(const std::vector<RectSize>& rects, std::vector<Rect>& output);
-
-private:
-	void InitRoot(int w, int h);
-
-	bool Insert(const libpacker::Sprite* sprite) const;
+	void Pack(PACK_STRATEGY strategy, const std::vector<RectSize>& rects, 
+		std::vector<Rect>& output);
 
 private:
-	d2d::TPNode* m_root;
+	int CalTotArea(const std::vector<Sprite>& list) const;
+
+	d2d::TPNode* NewRoot(int w, int h);
+
+	bool Insert(d2d::TPNode* root, const libpacker::Sprite* sprite, int tex_id = 0) const;
+
+	void PackAuto(const std::vector<Sprite>& sprites, int area,
+		std::vector<Rect>& output);
+	void PackSquare(const std::vector<Sprite>& sprites, int area,
+		std::vector<Rect>& output);
+	void PackSquareMulti(const std::vector<Sprite>& sprites, int area,
+		std::vector<Rect>& output);
+
+private:
+	std::vector<d2d::TPNode*> m_roots;
 
 }; // MaxRectsBinaryPack2
 

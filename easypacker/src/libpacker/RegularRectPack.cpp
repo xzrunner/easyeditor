@@ -35,42 +35,79 @@ void RegularRectPack::Pack()
 
 void RegularRectPack::OutputToText(const wxString& filepath) const
 {
-	Json::Value value;
-
- 	value["width"] = m_size.width;
- 	value["height"] = m_size.height;
-
-	std::vector<std::pair<Rect, libpacker::Rect> >::const_iterator itr;
-	int idx = 0;
-	for (itr = m_result.begin(); itr != m_result.end(); ++itr)
-	{
-		Json::Value rect_val;
-		const Rect& src = itr->first;
-		const libpacker::Rect& dst = itr->second;
-
-		rect_val["filepath"] = src.file.ToStdString();
-		if (src.rot) {
-			rect_val["src"]["w"] = src.h;
-			rect_val["src"]["h"] = src.w;
-		} else {
-			rect_val["src"]["w"] = src.w;
-			rect_val["src"]["h"] = src.h;
-		}
-		rect_val["src"]["x"] = src.x;
-		rect_val["src"]["y"] = src.y;
-		rect_val["dst"]["w"] = dst.width;
-		rect_val["dst"]["h"] = dst.height;
-		rect_val["dst"]["x"] = dst.x;
-		rect_val["dst"]["y"] = dst.y;
-
-		value["parts"][idx++] = rect_val;
+	if (m_sizes.empty()) {
+		return;
 	}
 
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
-	std::locale::global(std::locale("C"));	
-	writer.write(fout, value);
+	struct Part {
+		Rect src;
+		libpacker::Rect dst;
+	};
+
+	struct Picture {
+		std::vector<Part*> parts;
+		Json::Value value;
+	};
+
+	std::vector<Picture*> pictures;
+	for (int i = 0, n = m_sizes.size(); i < n; ++i) {
+		Picture* pic = new Picture;
+		pic->value["width"] = m_sizes[i].width;
+		pic->value["height"] = m_sizes[i].height;
+		pictures.push_back(pic);
+	}
+
+	std::vector<std::pair<Rect, libpacker::Rect> >::const_iterator itr;
+	for (itr = m_result.begin(); itr != m_result.end(); ++itr) {
+		Part* p = new Part;
+		p->src = itr->first;
+		p->dst = itr->second;
+		pictures[p->dst.tex_id]->parts.push_back(p);
+	}
+
+	for (int i = 0, n = pictures.size(); i < n; ++i)
+	{
+		Picture* pic = pictures[i];
+		for (int j = 0, m = pic->parts.size(); j < m; ++j)
+		{
+			Part* part = pic->parts[j];
+
+			Json::Value rect_val;
+
+			rect_val["filepath"] = part->src.file.ToStdString();
+			if (part->src.rot) {
+				rect_val["src"]["w"] = part->src.h;
+				rect_val["src"]["h"] = part->src.w;
+			} else {
+				rect_val["src"]["w"] = part->src.w;
+				rect_val["src"]["h"] = part->src.h;
+			}
+			rect_val["src"]["x"] = part->src.x;
+			rect_val["src"]["y"] = part->src.y;
+			rect_val["dst"]["w"] = part->dst.width;
+			rect_val["dst"]["h"] = part->dst.height;
+			rect_val["dst"]["x"] = part->dst.x;
+			rect_val["dst"]["y"] = part->dst.y;
+
+			pic->value["parts"][j] = rect_val;
+		}
+	}
+
+	for (int i = 0, n = pictures.size(); i < n; ++i)
+	{
+		wxString out_file = filepath + wxString::FromDouble(i+1) + ".json";
+ 	 	Json::StyledStreamWriter writer;
+ 	 	std::locale::global(std::locale(""));
+ 	 	std::ofstream fout(out_file.fn_str());
+ 	 	std::locale::global(std::locale("C"));	
+ 	 	writer.write(fout, pictures[i]->value);
+	}
+
+	for (int i = 0, n = pictures.size(); i < n; ++i) {
+		Picture* pic = pictures[i];
+		for_each(pic->parts.begin(), pic->parts.end(), DeletePointerFunctor<Part>());
+		delete pic;
+	}
 }
 
 void RegularRectPack::PackPowerOfTwo()
@@ -229,8 +266,8 @@ void RegularRectPack::PackWithMaxRectAlg()
 
 	// pack
 	MaxRectsBinaryPack2 packer;
-	packer.Pack(rects, output);
-	m_size = packer.GetSize();
+	packer.Pack(libpacker::PACK_SQUARE_MULTI, rects, output);
+	packer.GetSize(m_sizes);
 
 	// parser result
 	int idx = 0;
@@ -362,6 +399,7 @@ void RegularRectPack::ParserPackResult(const Combine& cb, const libpacker::Rect&
 			const Combine& child = cb.children[i];
 
 			libpacker::Rect cr;
+			cr.tex_id = r.tex_id;
 			if (cb.w <= r.width && cb.h <= r.height) {
 				cr.x = r.x + child.x;
 				cr.y = r.y + child.y;

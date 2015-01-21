@@ -30,7 +30,7 @@ private:
 
 	std::vector<Rect> m_output;
 
-	RectSize m_size;
+	std::vector<libpacker::RectSize> m_sizes;
 
 }; // NormalPack
 

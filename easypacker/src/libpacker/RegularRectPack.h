@@ -125,7 +125,7 @@ private:
 
 	std::vector<std::pair<Rect, libpacker::Rect> > m_result;
 
-	libpacker::RectSize m_size;
+	std::vector<libpacker::RectSize> m_sizes;
 
 }; // RegularRectPack
 

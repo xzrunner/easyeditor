@@ -5,7 +5,21 @@
 namespace libpacker
 {
 
-void GenRegularRectImage::Create(const wxString& filepath)
+void GenRegularRectImage::CreateMulti(const wxString& filepath)
+{
+	int i = 1;
+	while (true) {
+		wxString path = filepath + wxString::FromDouble(i) + ".json";
+		if (wxFileName::FileExists(path)) {
+			CreateSingle(path);
+		} else {
+			break;
+		}
+		++i;
+	}
+}
+
+void GenRegularRectImage::CreateSingle(const wxString& filepath)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -34,8 +48,9 @@ void GenRegularRectImage::Create(const wxString& filepath)
 		spr_val = value["parts"][i++];
 	}
 
-	wxString dir = d2d::FilenameTools::getFileDir(filepath);
-	pack.OutputToFile(dir + "\\pack.png");
+	wxString out_file = filepath;
+	out_file.Replace(".json", ".png");
+	pack.OutputToFile(out_file);
 }
 
 }

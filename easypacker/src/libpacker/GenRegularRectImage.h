@@ -9,10 +9,10 @@ namespace libpacker
 class GenRegularRectImage
 {
 public:
-	static void Create(const wxString& filepath);
+	static void CreateMulti(const wxString& filepath);
 
 private:
-
+	static void CreateSingle(const wxString& filepath);
 
 }; // GenRegularRectImage
 
