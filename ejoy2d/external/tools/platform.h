@@ -18,6 +18,7 @@ struct FileHandle* pf_bundleopen(const char* filename, const char* format);
 
 size_t pf_filesize(struct FileHandle* h);
 int pf_fileread(struct FileHandle* h, void *buffer, size_t size);
+int pf_filewrite(struct FileHandle* h, void *buffer, size_t size);
 size_t pf_fread(void *ptr, size_t size, size_t nmemb, struct FileHandle *h);
 void pf_fileseek_from_cur(struct FileHandle* h, int offset);
 void pf_fileseek_from_head(struct FileHandle* h, int offset);

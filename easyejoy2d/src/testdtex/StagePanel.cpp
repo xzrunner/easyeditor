@@ -6,6 +6,7 @@
 #include "TestSprite.h"
 #include "TestPVR.h"
 #include "TestRRP_C2C3.h"
+#include "TestRRP_C2C3_PVR.h"
 
 #include <easyejoy2d.h>
 
@@ -41,9 +42,10 @@ void StagePanel::Load()
 
 //	m_test = new TestSprite();
 
-//	m_test = new TestPVR();
+	m_test = new TestPVR();
 
-	m_test = new TestRRP_C2C3();
+//	m_test = new TestRRP_C2C3();
+//	m_test = new TestRRP_C2C3_PVR();
 
 	m_test->Load();
 }

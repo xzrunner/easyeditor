@@ -148,6 +148,10 @@
     return fread(buffer, size, 1, h->fp);
   }
 
+  int pf_filewrite(struct FileHandle* h, void *buffer, size_t size) {
+	return fwrite(buffer, size, 1, h->fp);
+  }
+
   size_t pf_fread(void *ptr, size_t size, size_t nmemb, struct FileHandle *h) {
     return fread(ptr, size, nmemb, h->fp);
   }

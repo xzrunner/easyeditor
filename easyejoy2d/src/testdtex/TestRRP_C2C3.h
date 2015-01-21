@@ -5,8 +5,6 @@
 
 #include <easyejoy2d.h>
 
-struct ej_package;
-
 namespace tdtex
 {
 

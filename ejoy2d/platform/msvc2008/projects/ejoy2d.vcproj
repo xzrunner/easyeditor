@@ -289,6 +289,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_sprite.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_texture.c"
 				>
 			</File>

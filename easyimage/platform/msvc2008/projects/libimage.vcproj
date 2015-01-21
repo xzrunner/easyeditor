@@ -309,6 +309,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="format"
+			>
+			<File
+				RelativePath="..\..\..\src\libimage\TransToPVR.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\TransToPVR.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
 			>
