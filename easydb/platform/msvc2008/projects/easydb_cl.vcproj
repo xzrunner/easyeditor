@@ -425,6 +425,18 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="format"
+					>
+					<File
+						RelativePath="..\..\..\src\easydb\PNG2PVR.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb\PNG2PVR.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="json"
