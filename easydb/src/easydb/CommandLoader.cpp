@@ -31,6 +31,7 @@
 #include "BinEP.h"
 #include "PackCoco.h"
 #include "OutlineToTriStrip.h"
+#include "TransToPVR.h"
 
 namespace edb
 {
@@ -68,6 +69,7 @@ void CommandLoader::Init()
 	fc->Register(BinEP::Create());
 	fc->Register(PackCoco::Create());
 	fc->Register(OutlineToTriStrip::Create());
+	fc->Register(TransToPVR::Create());
 }
 
 }

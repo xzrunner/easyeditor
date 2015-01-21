@@ -1,15 +1,15 @@
-#ifndef _EASYDB_PNG2PVR_H_
-#define _EASYDB_PNG2PVR_H_
+#ifndef _EASYDB_TRANS_TO_PVR_H_
+#define _EASYDB_TRANS_TO_PVR_H_
 
 #include "ICommand.h"
 
 namespace edb
 {
 
-class PNG2PVR : public ICommand
+class TransToPVR : public ICommand
 {
 public:
-	PNG2PVR() {}
+	TransToPVR() {}
 
 	//
 	// interface ITask
@@ -19,13 +19,13 @@ public:
 	virtual std::string Usage() const;
 	virtual void Run(int argc, char *argv[]);
 
-	static ICommand* Create() { return new PNG2PVR(); }
+	static ICommand* Create() { return new TransToPVR(); }
 
 private:
 	void Trigger(const std::string& dir);
 
-}; // PNG2PVR
+}; // TransToPVR
 
 }
 
-#endif // _EASYDB_PNG2PVR_H_
+#endif // _EASYDB_TRANS_TO_PVR_H_
