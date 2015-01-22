@@ -22,7 +22,7 @@ public:
 	static ICommand* Create() { return new PackRegularRect(); }
 
 private:
-	void Trigger(const std::string& src_dir, const std::string& dst_dir);
+	void Trigger(const std::string& src_dir, const std::string& dst_dir, const std::string& name);
 
 }; // PackRegularRect
 

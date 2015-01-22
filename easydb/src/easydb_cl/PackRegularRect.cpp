@@ -19,26 +19,27 @@ std::string PackRegularRect::Description() const
 
 std::string PackRegularRect::Usage() const
 {
-	return Command() + " [src dir] [dst dir]";
+	return Command() + " [src dir] [dst dir] [name]";
 }
 
 void PackRegularRect::Run(int argc, char *argv[])
 {
-	// pack-rect e:\debug\cut e:\debug\pack
+	// pack-rect e:\debug\cut e:\debug\pack 2013baji
 
-	if (!check_number(this, argc, 4)) return;
+	if (!check_number(this, argc, 5)) return;
 	if (!check_folder(argv[2])) return;
 	if (!check_folder(argv[3])) return;
 
-	Trigger(argv[2], argv[3]);
+	Trigger(argv[2], argv[3], argv[4]);
 }
 
-void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst_dir)
+void PackRegularRect::Trigger(const std::string& src_dir, const std::string& dst_dir,
+							  const std::string& name)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
 
-	wxString filepath = dst_dir + "\\pack";
+	wxString filepath = dst_dir + "\\" + name;
 
   	// pack
   	libpacker::RegularRectPack rrp(files);
