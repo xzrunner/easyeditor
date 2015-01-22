@@ -9,6 +9,7 @@
 #include <assert.h>
 #include <fstream>
 #include <algorithm>
+#include <sstream>
 
 #include <dtex_rrp.h>
 
@@ -19,7 +20,7 @@ static const uint8_t TYPE = 11;
 
 BinaryRRP::BinaryRRP(const std::string& json_file, const std::string& img_id_file)
 {
-	Load(json_file, img_id_file);
+	LoadMulti(json_file, img_id_file);
 }
 
 BinaryRRP::~BinaryRRP()
@@ -87,57 +88,35 @@ void BinaryRRP::Pack(const std::string& outfile, bool compress) const
 	fout.close();
 }
 
-void BinaryRRP::Load(const std::string& json_file, const std::string& img_id_file)
+void BinaryRRP::LoadMulti(const std::string& json_file, const std::string& img_id_file)
 {
-	// load file
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(json_file.c_str());
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
+	// load parts
+	int i = 1;
+	while (true) {
+		std::stringstream ss;
+		ss << json_file << i++ << ".json";
 
-	// parser json
-	int height = value["height"].asUInt();
-	std::vector<Part*> parts;
-	int i = 0;
-	Json::Value val = value["parts"][i++];
-	while (!val.isNull()) {
-		std::string path = val["filepath"].asString();
-		Part* p = new Part;
+		std::ifstream fin(ss.str().c_str(), std::ios::binary);
+		if (fin.fail()) {
+			break;
+		}
+		fin.close();
 
-		p->src.x = val["src"]["x"].asInt();
-		p->src.y = val["src"]["y"].asInt();
-		p->src.w = val["src"]["w"].asInt();
-		p->src.h = val["src"]["h"].asInt();
+		LoadSingleParts(ss.str(), img_id_file, i - 2);
 
-		p->dst.x = val["dst"]["x"].asInt();
-		p->dst.y = val["dst"]["y"].asInt();
-		p->dst.w = val["dst"]["w"].asInt();
-		p->dst.h = val["dst"]["h"].asInt();
-
-		p->dst.y = height - (p->dst.y + p->dst.h);
-
-		p->filepath = path;
-
-		parts.push_back(p);
-		val = value["parts"][i++];
-	}
-	if (parts.empty()) {
-		return;
+		++i;
 	}
 
-	// part to pictures
-	std::sort(parts.begin(), parts.end(), PartCmp());
+	// parts to pictures
+	std::sort(m_parts.begin(), m_parts.end(), PartCmp());
 	Picture* pic = new Picture;
-	size_t ptr_s = parts[0]->filepath.find_last_of("\\")+1,
-		ptr_e = parts[0]->filepath.find_first_of("#");
-	pic->path = parts[0]->filepath.substr(ptr_s, ptr_e - ptr_s);
-	pic->parts.push_back(parts[0]);
-	for (int i = 1, n = parts.size(); i < n; ++i)
+	size_t ptr_s = m_parts[0]->filepath.find_last_of("\\")+1,
+		ptr_e = m_parts[0]->filepath.find_first_of("#");
+	pic->path = m_parts[0]->filepath.substr(ptr_s, ptr_e - ptr_s);
+	pic->parts.push_back(m_parts[0]);
+	for (int i = 1, n = m_parts.size(); i < n; ++i)
 	{
-		Part* p = parts[i];
+		Part* p = m_parts[i];
 		if (p->filepath.find(pic->path) != std::string::npos) {
 			pic->parts.push_back(p);
 		} else {
@@ -171,7 +150,48 @@ void BinaryRRP::Load(const std::string& json_file, const std::string& img_id_fil
 	// set picture id
 	ImageIDer ider(img_id_file);
 	for (int i = 0, n = m_pics.size(); i < n; ++i) {
-		m_pics[i]->id = ider.Query(pic->path);
+		std::string path = m_pics[i]->path;
+		str_replace(path, "%", "\\");
+		m_pics[i]->id = ider.Query(path);
+	}
+}
+
+void BinaryRRP::LoadSingleParts(const std::string& json_file, const std::string& img_id_file, int pic_idx)
+{
+	// load file
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(json_file.c_str());
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	// parser json
+	int height = value["height"].asUInt();
+	int i = 0;
+	Json::Value val = value["parts"][i++];
+	while (!val.isNull()) {
+		std::string path = val["filepath"].asString();
+		Part* p = new Part;
+
+		p->src.x = val["src"]["x"].asInt();
+		p->src.y = val["src"]["y"].asInt();
+		p->src.w = val["src"]["w"].asInt();
+		p->src.h = val["src"]["h"].asInt();
+
+		p->dst.x = val["dst"]["x"].asInt();
+		p->dst.y = val["dst"]["y"].asInt();
+		p->dst.w = val["dst"]["w"].asInt();
+		p->dst.h = val["dst"]["h"].asInt();
+
+		p->dst.y = height - (p->dst.y + p->dst.h);
+
+		p->filepath = path;
+		p->idx = pic_idx;
+
+		m_parts.push_back(p);
+		val = value["parts"][i++];
 	}
 }
 
@@ -179,9 +199,10 @@ void BinaryRRP::Load(const std::string& json_file, const std::string& img_id_fil
 // struct BinaryRRP::Part
 //////////////////////////////////////////////////////////////////////////
 
+// todo: w & h can use only 3 bytes
 size_t BinaryRRP::Part::Size() const
 {
-	return sizeof(int16_t) * 6;
+	return sizeof(int16_t) * 6 + sizeof(int8_t);
 }
 
 void BinaryRRP::Part::Store(uint8_t** ptr)
@@ -205,6 +226,9 @@ void BinaryRRP::Part::Store(uint8_t** ptr)
 	*ptr += sizeof(w);
 	memcpy(*ptr, &h, sizeof(h));
 	*ptr += sizeof(h);
+
+	memcpy(*ptr, &idx, sizeof(idx));
+	*ptr += sizeof(idx);
 }
 
 //////////////////////////////////////////////////////////////////////////

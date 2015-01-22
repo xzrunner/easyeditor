@@ -17,7 +17,8 @@ public:
 	void Pack(const std::string& outfile, bool compress) const;
 
 private:
-	void Load(const std::string& json_file, const std::string& img_id_file);
+	void LoadMulti(const std::string& json_file, const std::string& img_id_file);
+	void LoadSingleParts(const std::string& json_file, const std::string& img_id_file, int pic_idx);
 
 private:
 	struct Rect
@@ -30,6 +31,7 @@ private:
 	{
 		Rect src, dst;
 		std::string filepath;
+		int8_t idx;
 
 		size_t Size() const;
 		void Store(uint8_t** ptr);
@@ -55,6 +57,7 @@ private:
 	};
 
 private:
+	std::vector<Part*> m_parts;
 	std::vector<Picture*> m_pics;
 
 }; // BinaryRRP
