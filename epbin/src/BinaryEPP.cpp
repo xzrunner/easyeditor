@@ -10,10 +10,8 @@
 namespace epbin
 {
 
-BinaryEPP::BinaryEPP(const std::string& dir, const std::string& filename, 
-					 TextureType type)
-	: m_dir(dir)
-	, m_filename(filename)
+BinaryEPP::BinaryEPP(const std::string& filename, TextureType type)
+	: m_filename(filename)
 	, m_type(type)
 {
 }
@@ -40,7 +38,7 @@ void BinaryEPP::Pack(const std::string& outfile) const
 	while (true)
 	{
 		std::stringstream ss;
-		ss << m_dir << "\\" << m_filename << i++ << ext;
+		ss << m_filename << i++ << ext;
 
 		std::ifstream fin(ss.str().c_str(), std::ios::binary);
 		if (fin.fail()) {

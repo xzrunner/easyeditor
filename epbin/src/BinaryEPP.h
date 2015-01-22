@@ -17,12 +17,11 @@ enum TextureType
 class BinaryEPP
 {
 public:
-	BinaryEPP(const std::string& dir, const std::string& filename, TextureType type);
+	BinaryEPP(const std::string& filename, TextureType type);
 
 	void Pack(const std::string& outfile) const;
 
 private:
-	std::string m_dir;
 	std::string m_filename;
 	TextureType m_type;
 
