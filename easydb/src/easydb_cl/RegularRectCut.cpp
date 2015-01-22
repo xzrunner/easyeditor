@@ -60,7 +60,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 
 			wxString filename = d2d::FilenameTools::getRelativePath(src_dir, filepath);
 			filename = filename.substr(0, filename.find_last_of('.'));
-			filename.Replace("\\", "_");
+			filename.Replace("\\", "%");
 
 			const std::vector<eimage::Rect>& result = cut.GetResult();
 			eimage::ImageClip img_cut(image, true);
