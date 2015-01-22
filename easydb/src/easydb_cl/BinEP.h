@@ -22,8 +22,8 @@ public:
 	static ICommand* Create() { return new BinEP(); }
 
 private:
-	void Trigger(const std::string& dir, const std::string& filename,
-		const std::string& type, const std::string& output);
+	void Trigger(const std::string& filename, const std::string& type, 
+		const std::string& output);
 
 }; // BinEP
 

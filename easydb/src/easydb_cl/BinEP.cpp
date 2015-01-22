@@ -19,21 +19,20 @@ std::string BinEP::Description() const
 
 std::string BinEP::Usage() const
 {
-	return Command() + " [dir] [filename] [type] [output]";
+	return Command() + " [filename] [type] [output]";
 }
 
 void BinEP::Run(int argc, char *argv[])
 {
-	// epbin E:\debug\sg_ui ui2 png E:\debug\sg_ui\ui2.epp
+	// epbin E:\debug\sg_ui\ui2 png E:\debug\sg_ui\ui2.epp
 
-	if (!check_number(this, argc, 6)) return;
-	if (!check_folder(argv[2])) return;
+	if (!check_number(this, argc, 5)) return;
 
-	Trigger(argv[2], argv[3], argv[4], argv[5]);
+	Trigger(argv[2], argv[3], argv[4]);
 }
 
-void BinEP::Trigger(const std::string& dir, const std::string& filename,
-					const std::string& type, const std::string& output)
+void BinEP::Trigger(const std::string& filename, const std::string& type, 
+					const std::string& output)
 {
 	epbin::TextureType t;
 	if (type == "png4") {
@@ -48,7 +47,7 @@ void BinEP::Trigger(const std::string& dir, const std::string& filename,
 		throw d2d::Exception("BinEP::Trigger unknown type: %s\n", type);
 	}
 
-	epbin::BinaryEPP epp(dir, filename, t);
+	epbin::BinaryEPP epp(filename, t);
 	epp.Pack(output);
 }
 
