@@ -24,13 +24,13 @@ TestRRP_C2C3_PVR::~TestRRP_C2C3_PVR()
 
 void TestRRP_C2C3_PVR::Load()
 {
+	// RRP
+	dtexf_load_pkg("2013baji", "test-dtex/2013baji.rrp");
+
 	// C3
 	ej_package* pkg = dtexf_c3_load_pkg("2013baji", "test-dtex/2013baji.epd", 1);
 	dtexf_c3_load_pkg("2013baji", "test-dtex/2013baji.epp", 1);
 	dtexf_c3_load_pkg_finish();
-
-	// RRP
-	dtexf_load_pkg("2013baji", "test-dtex/2013baji.rrp");
 
 	// C2
 	dtexf_c2_load_begin();
