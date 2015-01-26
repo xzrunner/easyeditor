@@ -11,6 +11,8 @@
 #include "libimage/ImageTrim.h"
 #include "libimage/ImagePack.h"
 
+#include "libimage/TransToPVR.h"
+
 #include "libimage/LanczosResamplingShader.h"
 
 #endif // _EASYIMAGE_H_

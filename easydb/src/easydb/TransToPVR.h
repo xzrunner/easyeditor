@@ -3,6 +3,8 @@
 
 #include "ICommand.h"
 
+#include <wx/string.h>
+
 namespace edb
 {
 
@@ -23,6 +25,9 @@ public:
 
 private:
 	void Trigger(const std::string& dir);
+
+	void EncodeByDtexPvr(const wxString& filepath) const;
+	void EncodeByPvrTexTool(const wxString& filepath) const;
 
 }; // TransToPVR
 
