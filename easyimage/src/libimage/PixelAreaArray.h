@@ -9,14 +9,16 @@ namespace eimage
 class PixelAreaArray
 {
 public:
-	PixelAreaArray(const bool* pixels, int width, int height);
+	PixelAreaArray(const bool* pixels, int width, int height, bool to_block4);
 	~PixelAreaArray();
 
 	int GetRectArea(int x, int y, int w, int h) const;
 	void CutByRect(int x, int y, int w, int h, int& left_area);
 
 private:
-	void Load();
+	void FixPixelsToBlock4();
+
+	void LoadFromPixels();
 
 private:
 	bool* m_pixels;

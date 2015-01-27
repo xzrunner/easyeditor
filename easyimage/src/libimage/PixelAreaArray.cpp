@@ -3,7 +3,7 @@
 namespace eimage
 {
 
-PixelAreaArray::PixelAreaArray(const bool* pixels, int width, int height)
+PixelAreaArray::PixelAreaArray(const bool* pixels, int width, int height, bool to_block4)
 	: m_width(width)
 	, m_height(height)
 {
@@ -11,7 +11,11 @@ PixelAreaArray::PixelAreaArray(const bool* pixels, int width, int height)
 	m_pixels = new bool[sz];
 	memcpy(m_pixels, pixels, sizeof(bool)*sz);
 
-	Load();
+	if (to_block4) {
+		FixPixelsToBlock4();
+	}
+
+	LoadFromPixels();
 }
 
 PixelAreaArray::~PixelAreaArray()
@@ -63,7 +67,42 @@ void PixelAreaArray::CutByRect(int _x, int _y, int _w, int _h, int& left_area)
 	left_area = m_area[m_width*m_height-1];
 }
 
-void PixelAreaArray::Load()
+void PixelAreaArray::FixPixelsToBlock4()
+{
+	int bw = std::ceil(m_width / 4.0f),
+		bh = std::ceil(m_height / 4.0f);
+	bool* bpixels = new bool[bw * bh];
+	memset(bpixels, 0, sizeof(bool) * bw * bh);
+	
+	for (int y = 0; y < m_height; ++y) {
+		for (int x = 0; x < m_width; ++x) {
+			if (m_pixels[y * m_width + x]) {
+				bpixels[(y / 4) * bw + (x / 4)] = true;
+			}
+		}
+	}
+
+	memset(m_pixels, 0, sizeof(bool) * m_width * m_height);
+	for (int by = 0; by < bh; ++by) {
+		for (int bx = 0; bx < bw; ++bx) {
+			if (bpixels[by * bw + bx]) {
+				for (int i = 0; i < 4; ++i) {
+					for (int j = 0; j < 4; ++j) {
+						int x = bx * 4 + i,
+							y = by * 4 + j;
+						if (x < m_width && y < m_height) {
+							m_pixels[y * m_width + x] = true;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	delete[] bpixels;
+}
+
+void PixelAreaArray::LoadFromPixels()
 {
 	int sz = m_width * m_height;
 	m_area = new int[sz];

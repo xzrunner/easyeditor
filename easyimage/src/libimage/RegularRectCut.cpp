@@ -9,7 +9,8 @@ static const int EDGE_LIST[] = {512, 256, 128, 64, 32, 16, 8};
 static const int EDGE_COUNT = 7;
 
 //static const float AREA_LIMIT_TIMES = 1.7f;
-static const float AREA_LIMIT_TIMES = 1.8f;
+// static const float AREA_LIMIT_TIMES = 1.8f;
+static const float AREA_LIMIT_TIMES = 2.1f;
 
 static const float TRY_MAX_COUNT = 3;
 static const float TRY_FACTOR = 0.8f;
@@ -20,7 +21,7 @@ RegularRectCut::RegularRectCut(const d2d::Image& image)
 {
 	LoadPixels(image);
 
-	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height);
+	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height, true);
 }
 
 RegularRectCut::~RegularRectCut()
