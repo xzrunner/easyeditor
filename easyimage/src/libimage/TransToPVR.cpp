@@ -6,11 +6,39 @@
 namespace eimage
 {
 
+struct PVRTexHeader {
+	uint32_t headerLength;
+	uint32_t height;
+	uint32_t width;
+	uint32_t numMipmaps;
+	uint32_t flags;
+	uint32_t dataLength;
+	uint32_t bpp;
+	uint32_t bitmaskRed;
+	uint32_t bitmaskGreen;
+	uint32_t bitmaskBlue;
+	uint32_t bitmaskAlpha;
+	uint32_t pvrTag;
+	uint32_t numSurfs;
+};
+
 void TransToPVR::Trans(const std::string& filepath)
 {
 	int w, h, c, f;
 	uint8_t* src_buf = ImageIO::Read(filepath.c_str(), w, h, c, f);
 	
+	PVRTexHeader raw_header;
+	memset(&raw_header, 0, sizeof(raw_header));
+	raw_header.headerLength = PVRTEX3_HEADERSIZE;
+	raw_header.width = w;
+	raw_header.height = h;
+	raw_header.flags = 32793;
+	raw_header.dataLength = w * h * 0.5f;
+	raw_header.bpp = 4;
+	raw_header.bitmaskAlpha = 1;
+	raw_header.pvrTag = 559044176;
+	raw_header.numSurfs = 1;
+
 	pvrtexture::CPVRTextureHeader header;
 	header.setWidth(w);
 	header.setHeight(h);
@@ -18,19 +46,18 @@ void TransToPVR::Trans(const std::string& filepath)
 	header.setPixelFormat(pvrtexture::PixelType('r','g','b','a',8,8,8,8));
 
 	pvrtexture::CPVRTexture texture = pvrtexture::CPVRTexture(header, src_buf);
-
-	texture.getChannelType();
-
-// 	bool suc = Transcode(texture, pvrtexture::PixelType(ePVRTPF_PVRTCI_4bpp_RGBA), texture.getChannelType(), texture.getColourSpace(), pvrtexture::ePVRTCNormal, false);
-// 	assert(suc);
+//	pvrtexture::ECompressorQuality quality = pvrtexture::ePVRTCFastest;
+	pvrtexture::ECompressorQuality quality = pvrtexture::ePVRTCBest;
+	bool suc = Transcode(texture, pvrtexture::PixelType(ePVRTPF_PVRTCI_4bpp_RGBA), texture.getChannelType(), texture.getColourSpace(), quality, false);
+	assert(suc);
 	
-//	size_t dst_sz = texture.getDataSize(PVRTEX_ALLMIPLEVELS, false, false);
-	size_t dst_sz = 0;
+	size_t dst_sz = texture.getDataSize(PVRTEX_ALLMIPLEVELS, false, false);
 	uint8_t* dst_buf = new uint8_t[dst_sz];
 	memcpy(dst_buf, texture.getDataPtr(0, 0, 0), dst_sz);
 
 	std::string dst_path = filepath.substr(0, filepath.find_last_of('.')) + ".pvr";
 	std::ofstream fout(dst_path.c_str(), std::ios::binary);
+	fout.write(reinterpret_cast<const char*>(&raw_header), sizeof(raw_header));
 	fout.write(reinterpret_cast<const char*>(dst_buf), dst_sz);
 	fout.close();
 

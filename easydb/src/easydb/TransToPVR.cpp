@@ -25,7 +25,7 @@ std::string TransToPVR::Usage() const
 
 void TransToPVR::Run(int argc, char *argv[])
 {
-	// png2pvr e:/test2/1001
+	// trans2pvr e:/test2/1001
 
 	if (!check_number(this, argc, 3)) return;
 	if (!check_folder(argv[2])) return;
@@ -45,7 +45,7 @@ void TransToPVR::Trigger(const std::string& dir)
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			std::cout << i << " / " << n << " : " << filepath << "\n";
-			EncodeByDtexPvr(filepath);
+			EncodeByPvrTexTool(filepath);
 		}
 	}
 }
