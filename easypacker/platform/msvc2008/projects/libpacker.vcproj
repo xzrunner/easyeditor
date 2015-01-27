@@ -293,10 +293,6 @@
 			Name="tools"
 			>
 			<File
-				RelativePath="..\..\..\src\libpacker\math.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libpacker\typedef.h"
 				>
 			</File>

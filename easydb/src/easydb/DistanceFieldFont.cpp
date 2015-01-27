@@ -97,15 +97,6 @@ void DistanceFieldFont::releaseFreeType()
 	FT_Done_FreeType(m_library);
 }
 
-///This function gets the first power of 2 >= the
-///int that we pass it.
-inline int next_p2 ( int a )
-{
-	int rval=1;
-	while(rval<a) rval<<=1;
-	return rval;
-}
-
 inline int alpha_index(int x, int y, int width)
 {
 	return (y*width+x)*4+3;

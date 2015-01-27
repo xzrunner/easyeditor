@@ -1,5 +1,6 @@
 #include "TransToPVR.h"
 #include "ImageIO.h"
+#include "ImagePack.h"
 
 #include <PVRTextureUtilities.h>
 
@@ -26,6 +27,24 @@ void TransToPVR::Trans(const std::string& filepath)
 {
 	int w, h, c, f;
 	uint8_t* src_buf = ImageIO::Read(filepath.c_str(), w, h, c, f);
+	if (!is_power_of_two(w) || !is_power_of_two(h) || w != h) {
+		int nw = next_p2(w),
+			nh = next_p2(h);
+		nw = nh = std::max(nw, nh);
+		ImagePack pack(nw, nh);
+		pack.AddImage(src_buf, w, h, 0, 0, ImagePack::PT_NORMAL);
+		uint8_t* pixels = pack.GetPixels();
+		
+		size_t sz = sizeof(uint8_t) * nw * nh * 4;
+		uint8_t* new_src_buf = new uint8_t[sz];
+		memcpy(new_src_buf, pack.GetPixels(), sz);
+
+		w = nw;
+		h = nh;
+
+		delete[] src_buf;
+		src_buf = new_src_buf;
+	}
 	
 	PVRTexHeader raw_header;
 	memset(&raw_header, 0, sizeof(raw_header));

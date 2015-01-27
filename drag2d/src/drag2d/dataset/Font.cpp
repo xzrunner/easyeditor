@@ -8,6 +8,7 @@
 #include <wx/filename.h>
 
 #include "common/Exception.h"
+#include "common/math_common.h"
 
 namespace d2d
 {
@@ -104,15 +105,6 @@ bool Font::loadFromFile(const wxString& filepath)
 // 
 // 	FT_Set_Char_Size( face, h << 6, h << 6, 96, 96);
 // }
-
-///This function gets the first power of 2 >= the
-///int that we pass it.
-inline int next_p2 ( int a )
-{
-	int rval=1;
-	while(rval<a) rval<<=1;
-	return rval;
-}
 
 void Font::make_dlist_freetypes(char ch)
 {
