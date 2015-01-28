@@ -19,7 +19,14 @@ static const int TRY_MIN_LIMIT = 2;
 
 RegularRectCut::RegularRectCut(const d2d::Image& image)
 {
-	LoadPixels(image);
+	LoadPixels(image.getPixelData(), image.originWidth(), image.originHeight());
+
+	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height, true);
+}
+
+RegularRectCut::RegularRectCut(const uint8_t* pixels, int width, int height)
+{
+	LoadPixels(pixels, width, height);
 
 	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height, true);
 }
@@ -64,11 +71,10 @@ int RegularRectCut::GetUseArea() const
 	return area;
 }
 
-void RegularRectCut::LoadPixels(const d2d::Image& image)
+void RegularRectCut::LoadPixels(const uint8_t* pixels, int width, int height)
 {
-	m_width = image.originWidth();
-	m_height = image.originHeight();
-	const unsigned char* data = image.getPixelData();
+	m_width = width;
+	m_height = height;
 	m_left_area = 0;
 
 	int sz = m_width * m_height;
@@ -76,7 +82,7 @@ void RegularRectCut::LoadPixels(const d2d::Image& image)
 	memset(m_pixels, 0, sz * sizeof(bool));
 	int ptr = 3;
 	for (int i = 0; i < sz; ++i) {
-		if (data[ptr]) { 
+		if (pixels[ptr]) { 
 			m_pixels[i] = true;
 			++m_left_area;
 		}

@@ -102,7 +102,7 @@ void BinaryRRP::LoadMulti(const std::string& json_file, const std::string& img_i
 		}
 		fin.close();
 
-		LoadSingleParts(ss.str(), img_id_file, i - 1);
+		LoadSingleParts(ss.str(), i - 1);
 
 		++i;
 	}
@@ -156,7 +156,7 @@ void BinaryRRP::LoadMulti(const std::string& json_file, const std::string& img_i
 	}
 }
 
-void BinaryRRP::LoadSingleParts(const std::string& json_file, const std::string& img_id_file, int pic_idx)
+void BinaryRRP::LoadSingleParts(const std::string& json_file, int pic_idx)
 {
 	// load file
 	Json::Value value;

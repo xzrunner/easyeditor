@@ -18,7 +18,7 @@ public:
 
 private:
 	void LoadMulti(const std::string& json_file, const std::string& img_id_file);
-	void LoadSingleParts(const std::string& json_file, const std::string& img_id_file, int pic_idx);
+	void LoadSingleParts(const std::string& json_file, int pic_idx);
 
 private:
 	struct Rect

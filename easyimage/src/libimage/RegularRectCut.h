@@ -14,6 +14,7 @@ class RegularRectCut
 {
 public:
 	RegularRectCut(const d2d::Image& image);
+	RegularRectCut(const uint8_t* pixels, int width, int height);
 	~RegularRectCut();
 
 	void AutoCut();
@@ -25,7 +26,7 @@ public:
 	int GetUseArea() const;
 
 private:
-	void LoadPixels(const d2d::Image& image);
+	void LoadPixels(const uint8_t* pixels, int width, int height);
 
 	void AutoCutWithLimit(float limit);
 	int CalBestRectPos(int w, int h, int& ret_x, int& ret_y);
