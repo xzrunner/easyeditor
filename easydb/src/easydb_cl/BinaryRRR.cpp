@@ -29,7 +29,6 @@ void BinaryRRR::Run(int argc, char *argv[])
 	if (!check_number(this, argc, 5)) return;
 	if (!check_folder(argv[2])) return;
 	if (!check_file(argv[3])) return;
-	if (!check_file(argv[4])) return;
 
 	Trigger(argv[2], argv[3], argv[4]);
 }

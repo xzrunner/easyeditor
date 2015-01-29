@@ -32,6 +32,7 @@
 #include "PackCoco.h"
 #include "OutlineToTriStrip.h"
 #include "TransToPVR.h"
+#include "BinaryRRR.h"
 
 namespace edb
 {
@@ -70,6 +71,7 @@ void CommandLoader::Init()
 	fc->Register(PackCoco::Create());
 	fc->Register(OutlineToTriStrip::Create());
 	fc->Register(TransToPVR::Create());
+	fc->Register(BinaryRRR::Create());
 }
 
 }

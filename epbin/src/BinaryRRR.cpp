@@ -81,6 +81,10 @@ void BinaryRRR::LoadPictures(const std::vector<std::string>& src_files,
 	ImageIDer ider(img_id_file);
 	for (int i = 0, n = src_files.size(); i < n; ++i)
 	{
+		wxString str;
+		str.Printf("BinaryRRR load pic [%d/%d]\n", i, n);
+		std::cout << str;
+
 		const std::string& filepath = src_files[i];
 
 		Picture* pic = CreatePicture(filepath);
