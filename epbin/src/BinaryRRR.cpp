@@ -4,6 +4,7 @@
 
 #include <easyimage.h>
 #include <dtex_pvr.h>
+#include <dtex_rrr.h>
 
 namespace epbin
 {
@@ -47,7 +48,7 @@ void BinaryRRR::Pack(const std::string& outfile, bool compress) const
 	uint8_t* ptr = buf;
 	memcpy(ptr, &TYPE, sizeof(uint8_t));
 	ptr += sizeof(uint8_t);
-	int cap = dtex_rrp_size(data_buf, data_sz);
+	int cap = dtex_rrr_size(data_buf, data_sz);
 	memcpy(ptr, &cap, sizeof(uint32_t));
 	ptr += sizeof(uint32_t);
 	memcpy(ptr, data_buf, data_sz);

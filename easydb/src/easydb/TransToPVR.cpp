@@ -71,7 +71,9 @@ void TransToPVR::EncodeByDtexPvr(const wxString& filepath) const
 
 void TransToPVR::EncodeByPvrTexTool(const wxString& filepath) const
 {
-	eimage::TransToPVR trans(filepath.ToStdString());
+	int w, h, c, f;
+	uint8_t* pixels = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
+	eimage::TransToPVR trans(pixels, w, h, c);
 
 	std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pvr";
 	trans.OutputFile(out_file);
