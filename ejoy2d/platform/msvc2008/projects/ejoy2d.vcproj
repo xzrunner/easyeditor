@@ -177,6 +177,14 @@
 			Name="dtex"
 			>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_alloc.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_alloc.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_async.c"
 				>
 			</File>
@@ -286,6 +294,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\external\dtex\dtex_rrp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_rrr.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_rrr.h"
 				>
 			</File>
 			<File
