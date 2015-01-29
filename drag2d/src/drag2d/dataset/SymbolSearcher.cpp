@@ -60,15 +60,16 @@ void SymbolSearcher::SetSymbolFilepaths(const wxString& dir, ISymbol* symbol,
 
 	Json::Value filepaths_val = sprite_val["filepaths"];
 	if (!filepaths_val.isNull()) {
-		std::vector<std::string> filepaths;
+		std::set<std::string> filepaths;
 		int i = 0;
 		Json::Value filepath_val = filepaths_val[i++];
 		while (!filepath_val.isNull()) {
 			std::string p = filepath_val.asString();
-			filepaths.push_back(p);
+			filepaths.insert(p);
 			filepath_val = filepaths_val[i++];
 		}
-		filepaths.push_back(sprite_val["filepath"].asString());
+		filepaths.insert(sprite_val["filepath"].asString());
+
 		symbol->SetFilepaths(filepaths);
 	}
 }

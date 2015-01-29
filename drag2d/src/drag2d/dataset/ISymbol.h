@@ -6,6 +6,8 @@
 #include "common/Color.h"
 #include "common/UserDataImpl.h"
 
+#include <set>
+
 namespace d2d
 {
 	class ISprite;
@@ -45,8 +47,8 @@ namespace d2d
 			m_filepath = filepath;
 		}
 
-		const std::vector<std::string>& GetFilepaths() const;
-		void SetFilepaths(const std::vector<std::string>& filepaths);
+		const std::set<std::string>& GetFilepaths() const;
+		void SetFilepaths(const std::set<std::string>& filepaths);
 
 	public:
 		std::string name;
@@ -58,7 +60,7 @@ namespace d2d
 		wxString m_filepath;
 
 	private:
-		std::vector<std::string> m_filepaths;
+		std::set<std::string> m_filepaths;
 
 	}; // ISymbol
 

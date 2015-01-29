@@ -306,6 +306,7 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 	}
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, actorValue);
 //	symbol->refresh();
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	sprite->load(actorValue);
@@ -501,13 +502,21 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
 
+	const d2d::ISymbol& symbol = sprite->getSymbol();
+	// filepath
 	if (Context::Instance()->resource.empty())
 		value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
-			sprite->getSymbol().getFilepath()).ToStdString();
+			symbol.getFilepath()).ToStdString();
 	else
 		value["filepath"] = d2d::FilenameTools::getFilenameWithExtension(
-			sprite->getSymbol().getFilepath()).ToStdString();
-
+			symbol.getFilepath()).ToStdString();
+	// filepaths
+	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	std::set<std::string>::const_iterator itr = filepaths.begin();
+	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
+		value["filepaths"][i] = *itr;
+	}
+	// other
 	sprite->store(value);
 
 	return value;

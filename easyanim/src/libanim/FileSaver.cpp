@@ -45,9 +45,10 @@ void FileSaver::store(Json::Value& value, d2d::ISprite* sprite, const wxString& 
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
 		symbol.getFilepath()).ToStdString();
 	// filepaths
-	const std::vector<std::string>& filepaths = symbol.GetFilepaths();
-	for (int i = 0, n = filepaths.size(); i < n; ++i) {
-		value["filepaths"][i] = filepaths[i];
+	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	std::set<std::string>::const_iterator itr = filepaths.begin();
+	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
+		value["filepaths"][i] = *itr;
 	}
 	// other
 	sprite->store(value);
