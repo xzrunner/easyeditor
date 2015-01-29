@@ -12,17 +12,27 @@ namespace epbin
 class BinaryRRR
 {
 public:
-	BinaryRRR(const std::vector<std::string>& src_files, const std::string& img_id_file);
+	BinaryRRR(const std::vector<std::string>& src_files, 
+		const std::string& img_id_file);
 	~BinaryRRR();
 
 	void Pack(const std::string& outfile, bool compress) const;
 
 private:
+	struct Picture;
+
 	struct Part
 	{
 		// block position
 		int16_t x, y;
 		int16_t w, h;
+
+		Picture* pic;
+
+		Part(Picture* pic) : pic(pic) {}
+
+		size_t Size() const;
+		void Store(uint8_t** ptr);
 
 	}; // Part
 
@@ -36,10 +46,14 @@ private:
 
 		uint8_t* pixels;
 
+		size_t Size() const;
+		void Store(uint8_t** ptr);
+
 	}; // Picture
 
 private:
-	void LoadPictures(const std::vector<std::string>& src_files);
+	void LoadPictures(const std::vector<std::string>& src_files,
+		const std::string& img_id_file);
 
 	Picture* CreatePicture(const std::string& filepath) const;
 
