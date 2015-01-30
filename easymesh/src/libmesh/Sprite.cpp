@@ -65,10 +65,10 @@ void Sprite::load(const Json::Value& val)
 	m_speed.x = val["speed"]["x"].asDouble();
 	m_speed.y = val["speed"]["y"].asDouble();
 
-	// 兼容老数据
-	if (!val["left nodes"].isNull()) {
-		m_symbol->getShape()->Load(val);
-	}
+// 	// 兼容老数据
+// 	if (!val["left nodes"].isNull()) {
+// 		m_symbol->getShape()->Load(val);
+// 	}
 }
 
 void Sprite::store(Json::Value& val) const
@@ -77,7 +77,7 @@ void Sprite::store(Json::Value& val) const
 	val["speed"]["x"] = m_speed.x;
 	val["speed"]["y"] = m_speed.y;
 
-	m_symbol->getShape()->Store(val);
+//	m_symbol->getShape()->Store(val);
 }
 
 void Sprite::buildBounding()
