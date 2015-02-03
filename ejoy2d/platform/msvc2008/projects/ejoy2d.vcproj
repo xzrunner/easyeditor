@@ -257,6 +257,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_math.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_packer.c"
 				>
 			</File>
