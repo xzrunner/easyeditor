@@ -19,6 +19,8 @@ extern "C"
 #define PKMC 6
 #define RRP 11
 #define PTS 12
+#define RRR 13
+#define B4R 14
 
 typedef unsigned int GLuint;
 
