@@ -1352,8 +1352,8 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 	}
 	else
 	{
-		// | 1  kx    | | sx       | |  c  s    | | 1       |
-		// | ky  1    | |    sy    | | -s  c    | |    1    |
+		// | 1  ky    | | sx       | |  c  s    | | 1       |
+		// | kx  1    | |    sy    | | -s  c    | |    1    |
 		// |        1 | |        1 | |        1 | | x  y  1 |
 		//     skew        scale        rotate        move
 		d2d::Vector center = sprite->getCenter();
@@ -1371,7 +1371,7 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 			center += d2d::Math::rotateVector(offset, sprite->getAngle());
 		}
 		float sx = sprite->getScale().x,
-			sy = sprite->getScale().y;
+			  sy = sprite->getScale().y;
 		bool xMirror, yMirror;
 		sprite->getMirror(xMirror, yMirror);
 		if (xMirror) sx = -sx;
@@ -1379,12 +1379,12 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 
 		float c = cos(-sprite->getAngle()),
 			s = sin(-sprite->getAngle());
-		float kx = sprite->getShear().x,
-			ky = sprite->getShear().y;
-		mat[0] = sx*c - kx*sy*s;
-		mat[1] = sx*s + kx*sy*c;
-		mat[2] = ky*sx*c - sy*s;
-		mat[3] = ky*sx*s + sy*c;
+		float kx = -sprite->getShear().x,
+			  ky = -sprite->getShear().y;
+		mat[0] = sx*c - ky*sy*s;
+		mat[1] = sx*s + ky*sy*c;
+		mat[2] = kx*sx*c - sy*s;
+		mat[3] = kx*sx*s + sy*c;
 		mat[4] = center.x * m_scale;
 		mat[5] = center.y * m_scale;
 	}
