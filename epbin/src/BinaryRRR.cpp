@@ -125,7 +125,8 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 
 		Part part(pic);
 		part.x = rect.x / 4;
-		part.y = rect.y / 4;
+		part.y = (sh - rect.y - rect.h) / 4;
+		assert(part.y >= 0);
 		part.w = rect.w / 4;
 		part.h = rect.h / 4;
 		pic->parts.push_back(part);
