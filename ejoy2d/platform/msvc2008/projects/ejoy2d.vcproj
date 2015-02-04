@@ -193,6 +193,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_b4r.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_b4r.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_buffer.c"
 				>
 			</File>
