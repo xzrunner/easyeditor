@@ -110,13 +110,17 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 	// create pic
 	Picture* pic = new Picture;
 
+	pic->bmp_w = sw;
+	pic->bmp_h = sh;
+	pic->bmp_pixels = src_pixels;
+
 	pic->path = filepath;
 
 	pic->w = w;
 	pic->h = h;
 	size_t sz = w * h * 0.5f;
-	pic->pixels = new uint8_t[sz];
-	memcpy(pic->pixels, pixels, sz);
+	pic->pvr_pixels = new uint8_t[sz];
+	memcpy(pic->pvr_pixels, pixels, sz);
 
 	// flag data
 	assert(w == h && w % 4 == 0);
@@ -130,9 +134,7 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 	int i = 0;
 	for (int y = 0; y < block; ++y) {
 		for (int x = 0; x < block; ++x) {
-			int idx = dtex_pvr_get_morton_number(x, y);
-			int64_t* ptr = (int64_t*)pic->pixels + idx;
-			if (*((int32_t*)ptr) != 0xaaaaaaaa) {
+			if (!pic->IsBlockTransparent(x, y)) {
 				pic->flag[i / 8] |= (1 << (i % 8));
 				++pic->block_used;
 			}
@@ -140,14 +142,20 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 		}
 	}
 
-	delete[] src_pixels;
-
 	return pic;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // class BinaryB4R::Picture
 //////////////////////////////////////////////////////////////////////////
+
+BinaryB4R::Picture::
+~Picture()
+{
+	delete[] bmp_pixels;
+	delete[] pvr_pixels;
+	delete[] flag;
+}
 
 size_t BinaryB4R::Picture::
 Size() const
@@ -180,16 +188,49 @@ Store(uint8_t** ptr)
 	int i = 0;
 	for (int y = 0; y < block; ++y) {
 		for (int x = 0; x < block; ++x) {
-			int idx = dtex_pvr_get_morton_number(x, y);
-			int64_t* ptr_src = (int64_t*)pixels + idx;
-			if (*((int32_t*)ptr_src) != 0xaaaaaaaa) {
+			if (!IsBlockTransparent(x, y)) {
 				assert(flag[i / 8] & (1 << (i % 8)));
+				int idx = dtex_pvr_get_morton_number(x, y);
+				int64_t* ptr_src = (int64_t*)pvr_pixels + idx;
 				memcpy(*ptr, ptr_src, sizeof(int64_t));
 				*ptr += sizeof(int64_t);
 			}
 			++i;
 		}
 	}
+}
+
+bool BinaryB4R::Picture::
+IsBlockTransparent(int x, int y) const
+{
+	return IsBMPBlockTransparent(x, y);
+}
+
+bool BinaryB4R::Picture::
+IsPVRBlockTransparent(int x, int y) const
+{
+	int idx = dtex_pvr_get_morton_number(x, y);
+	int64_t* ptr = (int64_t*)pvr_pixels + idx;
+	return *((int32_t*)ptr) == 0xaaaaaaaa;
+}
+
+bool BinaryB4R::Picture::
+IsBMPBlockTransparent(int x, int y) const
+{
+	for (int px = x * 4; px < x * 4 + 4; ++px) {
+		for (int py = y * 4; py < y * 4 + 4; ++py) {
+			if (px >= bmp_w || py >= bmp_h) {
+				continue;
+			}
+
+			int _py = bmp_h - 1 - py;
+			if (bmp_pixels[(bmp_w * _py + px) * 4 + 4 - 1] != 0) {
+				return false;
+			}
+		}
+	}
+
+	return true;
 }
 
 }

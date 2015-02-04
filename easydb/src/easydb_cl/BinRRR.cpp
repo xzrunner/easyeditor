@@ -47,7 +47,7 @@ void BinRRR::Trigger(const std::string& src_dir, const std::string& img_id_file,
 	}
 
 	epbin::BinaryRRR bin(img_files, img_id_file);
-	bin.Pack(dst_file, false);
+	bin.Pack(dst_file, true);
 }
 
 }

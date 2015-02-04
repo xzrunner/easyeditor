@@ -21,13 +21,16 @@ public:
 private:
 	struct Picture
 	{
+		int bmp_w, bmp_h;
+		uint8_t* bmp_pixels;
+
 		int16_t w, h;
 		int16_t x, y;
 
 		std::string path;
 		int16_t id;
 
-		uint8_t* pixels;
+		uint8_t* pvr_pixels;
 
 		size_t flag_sz;
 		uint8_t* flag;
@@ -35,6 +38,13 @@ private:
 
 		size_t Size() const;
 		void Store(uint8_t** ptr);
+
+		bool IsBlockTransparent(int x, int y) const;
+
+		bool IsPVRBlockTransparent(int x, int y) const;
+		bool IsBMPBlockTransparent(int x, int y) const;
+
+		~Picture();
 
 	}; // Picture
 
