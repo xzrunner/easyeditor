@@ -21,7 +21,7 @@ public:
 private:
 	struct Picture
 	{
-		int bmp_w, bmp_h;
+		int16_t bmp_w, bmp_h;
 		uint8_t* bmp_pixels;
 
 		int16_t w, h;

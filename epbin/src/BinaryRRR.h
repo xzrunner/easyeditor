@@ -38,6 +38,8 @@ private:
 
 	struct Picture
 	{
+		int16_t bmp_w, bmp_h;
+
 		std::vector<Part> parts;
 		int16_t w, h;
 		int16_t x, y;

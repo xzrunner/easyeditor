@@ -176,10 +176,10 @@ Store(uint8_t** ptr)
 	memcpy(*ptr, &id, sizeof(id));
 	*ptr += sizeof(id);
 
-	memcpy(*ptr, &w, sizeof(w));
-	*ptr += sizeof(w);
-	memcpy(*ptr, &h, sizeof(h));
-	*ptr += sizeof(h);
+	memcpy(*ptr, &bmp_w, sizeof(bmp_w));
+	*ptr += sizeof(bmp_w);
+	memcpy(*ptr, &bmp_h, sizeof(bmp_h));
+	*ptr += sizeof(bmp_h);
 
 	memcpy(*ptr, flag, flag_sz);
 	*ptr += flag_sz;
