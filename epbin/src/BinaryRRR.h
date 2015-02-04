@@ -58,8 +58,6 @@ private:
 
 	Picture* CreatePicture(const std::string& filepath) const;
 
-	void PackPicture(const Picture* pic) const;
-
 private:
 	std::vector<Picture*> m_pics;
 

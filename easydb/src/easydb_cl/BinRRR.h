@@ -1,15 +1,15 @@
-#ifndef _EASYDB_BINARY_RRR_H_
-#define _EASYDB_BINARY_RRR_H_
+#ifndef _EASYDB_BIN_RRR_H_
+#define _EASYDB_BIN_RRR_H_
 
 #include "ICommand.h"
 
 namespace edb
 {
 
-class BinaryRRR : public ICommand
+class BinRRR : public ICommand
 {
 public:
-	BinaryRRR() {}
+	BinRRR() {}
 
 	//
 	// interface ITask
@@ -19,14 +19,14 @@ public:
 	virtual std::string Usage() const;
 	virtual void Run(int argc, char *argv[]);
 
-	static ICommand* Create() { return new BinaryRRR(); }
+	static ICommand* Create() { return new BinRRR(); }
 
 private:
 	void Trigger(const std::string& src_dir, const std::string& img_id_file,
 		const std::string& dst_file);
 
-}; // BinaryRRR
+}; // BinRRR
 
 }
 
-#endif // _EASYDB_BINARY_RRR_H_
+#endif // _EASYDB_BIN_RRR_H_

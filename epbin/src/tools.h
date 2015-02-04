@@ -26,6 +26,10 @@ inline void str_replace(std::string& str, const std::string& old_value, const st
 	}   
 }
 
+inline int ceil4(int x) {
+	return (x + 3) & ~3;
+}
+
 }
 
 #endif // _EPBIN_TOOLS_H_

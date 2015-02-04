@@ -181,10 +181,14 @@ Store(uint8_t** ptr)
 size_t BinaryRRR::Picture::
 Size() const
 {
+	int block_count = 0;
+	
 	size_t sz = 0;
 	sz += sizeof(int16_t) * 4;
 	for (int i = 0, n = parts.size(); i < n; ++i) {
 		sz += parts[i].Size();
+
+		block_count += parts[i].h * parts[i].w;
 	}
 	return sz;
 }

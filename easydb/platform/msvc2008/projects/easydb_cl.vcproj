@@ -277,6 +277,14 @@
 					Name="bin"
 					>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\BinB4R.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinB4R.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\BinEP.cpp"
 						>
 					</File>
@@ -290,6 +298,14 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\BinRRP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinRRR.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\BinRRR.h"
 						>
 					</File>
 					<File
@@ -322,18 +338,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\PackCoco.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="rrr"
-					>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinaryRRR.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinaryRRR.h"
 						>
 					</File>
 				</Filter>

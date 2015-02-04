@@ -6,6 +6,7 @@
 #include "BinaryRRP.h"
 #include "BinaryPTS.h"
 #include "BinaryRRR.h"
+#include "BinaryB4R.h"
 #include "ImageIDer.h"
 #include "Exception.h"
 
