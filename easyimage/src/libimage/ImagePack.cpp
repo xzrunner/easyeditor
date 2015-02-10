@@ -24,7 +24,7 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 {
 	assert(dst_x >= 0 && dst_y >= 0);
 	if (type == PT_NORMAL) {
-		assert(dst_x + src_w < m_width && dst_y + src_h < m_height);
+		assert(dst_x + src_w <= m_width && dst_y + src_h <= m_height);
 		for (int iy = 0; iy < src_h; ++iy) {
 			for (int ix = 0; ix < src_w; ++ix) {
 				int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BYTES_PER_PIXEL,
@@ -36,7 +36,7 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 			}
 		}
 	} else {
-		assert(dst_x + src_h < m_width && dst_y + src_w < m_height);
+		assert(dst_x + src_h <= m_width && dst_y + src_w <= m_height);
 		if (type == PT_CLOCKWISE) {
 			for (int iy = 0; iy < src_w; ++iy) {
 				for (int ix = 0; ix < src_h; ++ix) {

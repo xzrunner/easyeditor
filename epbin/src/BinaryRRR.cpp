@@ -129,7 +129,7 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 		Part part(pic);
 		part.x = rect.x / 4;
 		part.y = (sh - rect.y - rect.h) / 4;
-		assert(part.y >= 0);
+//		assert(part.y >= 0);
 		part.w = rect.w / 4;
 		part.h = rect.h / 4;
 		pic->parts.push_back(part);
@@ -169,6 +169,9 @@ Store(uint8_t** ptr)
 
 	for (int iy = y; iy < y + h; ++iy) {
 		for (int ix = x; ix < x + w; ++ix) {
+			if (ix < 0 || iy < 0) {
+				continue;
+			}
 			int idx = dtex_pvr_get_morton_number(ix, iy);
 			int64_t* data = (int64_t*)pic->pixels + idx;
 			memcpy(*ptr, data, sizeof(int64_t));
