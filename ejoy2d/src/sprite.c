@@ -30,7 +30,7 @@ struct clipbox {
 
 // todo
 struct dtex_texture;
-struct dp_position;
+struct dp_pos;
 
 static struct clipbox G_CLIP[MAX_CLIPBOX];
 static int G_CLIP_COUNT = 0;
@@ -519,7 +519,7 @@ draw(struct ej_package *pack, int x, int y, int m[6], struct picture_part *rect,
     // pts
     if (rect->src[0] < 0) {
       struct dtex_texture* tex = NULL;
-      struct dp_position* pos = NULL;
+      struct dp_pos* pos = NULL;
       dtexf_c2_lookup_node(t, vb, &tex, &pos);
       if (tex != NULL && pos != NULL) {
         struct draw_params params;
