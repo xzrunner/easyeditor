@@ -277,6 +277,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_packer_ext.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_packer_ext.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_png.c"
 				>
 			</File>
@@ -346,6 +354,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\external\dtex\dtex_utility.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_vector.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_vector.h"
 				>
 			</File>
 		</Filter>
