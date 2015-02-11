@@ -1,6 +1,6 @@
 #include "MaxRectsBinaryPack.h"
-#include "math.h"
 
+#include <drag2d.h>
 #include <algorithm>
 #include <math.h>
 

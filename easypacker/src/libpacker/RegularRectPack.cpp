@@ -1,6 +1,5 @@
 #include "RegularRectPack.h"
 #include "MaxRectsBinaryPack2.h"
-#include "math.h"
 
 #include <wx/tokenzr.h>
 #include <iostream>

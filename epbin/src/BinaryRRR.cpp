@@ -149,7 +149,18 @@ static const int BLOCK_SIZE = sizeof(int64_t);
 size_t BinaryRRR::Part::
 Size() const
 {
-	return sizeof(int16_t) * 4 + w * h * BLOCK_SIZE;
+//	return sizeof(int16_t) * 4 + w * h * BLOCK_SIZE;
+
+	int _w = w, _h = h;
+	if (x < 0) {
+		_w = w + x;
+		assert(_w > 0);
+	}
+	if (y < 0) {
+		_h = h + y;
+		assert(_h > 0);
+	}
+	return sizeof(int16_t) * 4 + _w * _h * BLOCK_SIZE;
 }
 
 void BinaryRRR::Part::
@@ -172,8 +183,9 @@ Store(uint8_t** ptr)
 			if (ix < 0 || iy < 0) {
 				continue;
 			}
+
 			int idx = dtex_pvr_get_morton_number(ix, iy);
-			int64_t* data = (int64_t*)pic->pixels + idx;
+			int64_t* data = (int64_t*)pic->pixels + idx;				
 			memcpy(*ptr, data, sizeof(int64_t));
 			*ptr += sizeof(int64_t);
 		}
