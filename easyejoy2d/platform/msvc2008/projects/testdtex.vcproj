@@ -258,6 +258,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\testdtex\TestB4R_C3.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\testdtex\TestB4R_C3.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\testdtex\TestC2.cpp"
 				>
 			</File>
