@@ -257,6 +257,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_gl.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_gl.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_loader.c"
 				>
 			</File>
