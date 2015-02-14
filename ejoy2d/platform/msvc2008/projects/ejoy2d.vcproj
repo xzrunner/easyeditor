@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;;&quot;../../../../editor-external/gl/include&quot;;../../../../editor-external/libpng/include"
+				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/rg_etc1;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;;&quot;../../../../editor-external/gl/include&quot;;../../../../editor-external/libpng/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;;&quot;../../../../editor-external/gl/include&quot;;../../../../editor-external/libpng/include"
+				AdditionalIncludeDirectories="../../../src;../../../external/tools;../../../external/rg_etc1;../../../external/dtex;&quot;../../../../editor-external/cjson/include&quot;;&quot;../../../../editor-external/lzma/include&quot;;&quot;../../../../editor-external/pthread/include&quot;;&quot;../../../../editor-external/c99&quot;;&quot;../../../../editor-external/gl/include&quot;;../../../../editor-external/libpng/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -241,6 +241,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\external\dtex\dtex_etc.c"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\dtex\dtex_etc.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\external\dtex\dtex_facade.c"
 				>
 			</File>
@@ -370,6 +378,26 @@
 			</File>
 			<File
 				RelativePath="..\..\..\external\dtex\dtex_vector.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="rg_etc1"
+			>
+			<File
+				RelativePath="..\..\..\external\rg_etc1\rg_etc1.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\rg_etc1\rg_etc1.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\rg_etc1\rg_etc1_for_c.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\external\rg_etc1\rg_etc1_for_c.h"
 				>
 			</File>
 		</Filter>
