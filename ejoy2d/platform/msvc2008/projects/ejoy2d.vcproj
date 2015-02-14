@@ -241,11 +241,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\external\dtex\dtex_etc.c"
+				RelativePath="..\..\..\external\dtex\dtex_etc1.c"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\external\dtex\dtex_etc.h"
+				RelativePath="..\..\..\external\dtex\dtex_etc1.h"
 				>
 			</File>
 			<File

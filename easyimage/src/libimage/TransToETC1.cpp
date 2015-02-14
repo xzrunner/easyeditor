@@ -99,7 +99,7 @@ void TransToETC1::InitSrcImageAlpha()
 
 void TransToETC1::InitETC1Header()
 {
-	static const uint64_t pkm_identifier = 0x00003031204d4b50;
+	static const uint64_t pkm_identifier = 0x00003031204d4b50;	// "PKM 10"
 
 	memcpy(m_header.identifier, &pkm_identifier, sizeof(uint8_t) * 8);
 	m_header.widthLSB = m_header.paddedWidthLSB = (m_width & 0xff);
