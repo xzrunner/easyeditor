@@ -445,6 +445,14 @@
 					Name="format"
 					>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\TransToETC1.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\TransToETC1.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb\TransToPVR.cpp"
 						>
 					</File>

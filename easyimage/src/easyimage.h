@@ -12,6 +12,7 @@
 #include "libimage/ImagePack.h"
 
 #include "libimage/TransToPVR.h"
+#include "libimage/TransToETC1.h"
 
 #include "libimage/LanczosResamplingShader.h"
 

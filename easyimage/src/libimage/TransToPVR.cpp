@@ -15,7 +15,7 @@ TransToPVR::TransToPVR(const uint8_t* pixels, int width, int height, int channel
 	, m_pvr_pixels(NULL)
 {
 	InitSrcImage(pixels, width, height, channels);
-	InitDstHeader();
+	InitPVRHeader();
 	TransPVR();
 }
 
@@ -71,7 +71,7 @@ void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int 
 	}
 }
 
-void TransToPVR::InitDstHeader()
+void TransToPVR::InitPVRHeader()
 {
 	memset(&m_header, 0, sizeof(m_header));
 	m_header.headerLength = PVRTEX3_HEADERSIZE;

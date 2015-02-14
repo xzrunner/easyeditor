@@ -36,7 +36,7 @@ private:
 private:
 	void InitSrcImage(const uint8_t* pixels, int width, int height, int channels);
 
-	void InitDstHeader();
+	void InitPVRHeader();
 
 	void TransPVR();
 

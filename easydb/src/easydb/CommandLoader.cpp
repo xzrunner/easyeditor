@@ -32,6 +32,7 @@
 #include "PackCoco.h"
 #include "OutlineToTriStrip.h"
 #include "TransToPVR.h"
+#include "TransToETC1.h"
 #include "BinRRR.h"
 #include "BinB4R.h"
 
@@ -72,6 +73,7 @@ void CommandLoader::Init()
 	fc->Register(PackCoco::Create());
 	fc->Register(OutlineToTriStrip::Create());
 	fc->Register(TransToPVR::Create());
+	fc->Register(TransToETC1::Create());
 	fc->Register(BinRRR::Create());
 	fc->Register(BinB4R::Create());
 }
