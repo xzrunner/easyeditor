@@ -60,7 +60,7 @@ void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int 
 			nh = next_p2(height);
 		nw = nh = std::max(nw, nh);
 		ImagePack pack(nw, nh);
-		pack.AddImage(pixels, width, height, 0, 0, ImagePack::PT_NORMAL);
+		pack.AddImage(pixels, width, height, 0, nh - height, ImagePack::PT_NORMAL);
 
 		size_t sz = sizeof(uint8_t) * nw * nh * channels;
 		m_pixels = new uint8_t[sz];
@@ -94,7 +94,7 @@ void TransToPVR::TransPVR()
 	header.setPixelFormat(pvrtexture::PixelType('r','g','b','a',8,8,8,8));
 
 	pvrtexture::CPVRTexture texture = pvrtexture::CPVRTexture(header, m_pixels);
-	//	pvrtexture::ECompressorQuality quality = pvrtexture::ePVRTCFastest;
+//	pvrtexture::ECompressorQuality quality = pvrtexture::ePVRTCFastest;
 	pvrtexture::ECompressorQuality quality = pvrtexture::ePVRTCBest;
 	bool suc = Transcode(texture, pvrtexture::PixelType(ePVRTPF_PVRTCI_4bpp_RGBA), texture.getChannelType(), texture.getColourSpace(), quality, false);
 	assert(suc);
