@@ -68,6 +68,7 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	std::string dst_folder = pkg_val["dst folder"].asString();
 	std::string dst_name = config_dir + "\\" + dst_folder + "\\" + name;
 	std::string trim_path = config_dir + "\\" + pkg_val["trim file"].asString();
+	std::string epp_type = pkg_val["epp type"].asString();
 
 	std::vector<wxString> images;
 	GetAllImageFiles(pkg_val, config_dir, src_folder, images);
@@ -81,6 +82,17 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	if (pkg_val["rrp"].isNull()) {
 		std::string img_path = dst_name + "1.png";
 		tex_packer.OutputImage(img_path);
+
+		
+	}
+}
+
+void PackCoco::CompressTexture(const std::string& filepath, const std::string& type) const
+{
+	if (type == "pvr") {
+
+	} else if (type == "etc1") {
+
 	}
 }
 
@@ -189,7 +201,7 @@ void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) co
 		img_folder_path = config_dir + "\\" + rrp_val["pack file"].asString();
 	}
  	std::string epp_path = dst_name + ".epp";
- 	epbin::BinaryEPP epp(img_folder_path, epbin::TT_PNG8);
+ 	epbin::BinaryEPP epp(dst_name, epbin::TT_PNG8);
  	epp.Pack(epp_path);
  
  	if (!rrp_val.isNull()) {

@@ -36,12 +36,39 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 			}
 		}
 	} else {
+// 		assert(dst_x + src_h <= m_width && dst_y + src_w <= m_height);
+// 		if (type == PT_CLOCKWISE) {
+// 			for (int iy = 0; iy < src_w; ++iy) {
+// 				for (int ix = 0; ix < src_h; ++ix) {
+// 					int ptr_src = ((src_w - 1 - iy) * src_h + ix) * BYTES_PER_PIXEL,
+// 						ptr_dst = ((dst_y + ix) * m_width + (dst_x + src_w - 1 - iy)) * BYTES_PER_PIXEL;
+// 					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
+// 						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
+// 						m_pixels[ptr_dst++] = src_buf[ptr_src++];
+// 					}
+// 				}
+// 			}
+// 		} else if (type == PT_ANTICLOCKWISE) {
+// 			for (int iy = 0; iy < src_w; ++iy) {
+// 				for (int ix = 0; ix < src_h; ++ix) {
+// 					int ptr_src = ((src_w - 1 - iy) * src_h + ix) * BYTES_PER_PIXEL,
+// 						ptr_dst = ((dst_y + src_h - 1 - ix) * m_width + (dst_x + iy)) * BYTES_PER_PIXEL;
+// 					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
+// 						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
+// 						m_pixels[ptr_dst++] = src_buf[ptr_src++];
+// 					}
+// 				}
+// 			}
+// 		}
+
+		//////////////////////////////////////////////////////////////////////////
+
 		assert(dst_x + src_h <= m_width && dst_y + src_w <= m_height);
 		if (type == PT_CLOCKWISE) {
-			for (int iy = 0; iy < src_w; ++iy) {
-				for (int ix = 0; ix < src_h; ++ix) {
-					int ptr_src = ((src_w - 1 - iy) * src_h + ix) * BYTES_PER_PIXEL,
-						ptr_dst = ((dst_y + ix) * m_width + (dst_x + src_w - 1 - iy)) * BYTES_PER_PIXEL;
+			for (int iy = 0; iy < src_h; ++iy) {
+				for (int ix = 0; ix < src_w; ++ix) {
+					int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BYTES_PER_PIXEL,
+						ptr_dst = ((dst_y + ix) * m_width + (dst_x + src_h - 1 - iy)) * BYTES_PER_PIXEL;
 					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
 						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
 						m_pixels[ptr_dst++] = src_buf[ptr_src++];
@@ -49,10 +76,10 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 				}
 			}
 		} else if (type == PT_ANTICLOCKWISE) {
-			for (int iy = 0; iy < src_w; ++iy) {
-				for (int ix = 0; ix < src_h; ++ix) {
-					int ptr_src = ((src_w - 1 - iy) * src_h + ix) * BYTES_PER_PIXEL,
-						ptr_dst = ((dst_y + src_h - 1 - ix) * m_width + (dst_x + iy)) * BYTES_PER_PIXEL;
+			for (int iy = 0; iy < src_h; ++iy) {
+				for (int ix = 0; ix < src_w; ++ix) {
+					int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BYTES_PER_PIXEL,
+						ptr_dst = ((dst_y + src_w - 1 - ix) * m_width + (dst_x + iy)) * BYTES_PER_PIXEL;
 					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
 						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
 						m_pixels[ptr_dst++] = src_buf[ptr_src++];
@@ -76,7 +103,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool
 		assert(0);
 	}
 	
-	AddImage(img->getPixelData(), img->originWidth(), img->originHeight(), x, y, type);
+	AddImage(img->getPixelData(), sw, sh, x, y, type);
 }
 
 void ImagePack::OutputToFile(const wxString& filepath) const

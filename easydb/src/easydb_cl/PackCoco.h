@@ -32,6 +32,7 @@ private:
 private:
 	void PackTexture(const Json::Value& pkg_val, const wxString& config_dir,
 		const libpacker::ImageTrimData& trim) const;
+	void CompressTexture(const std::string& filepath, const std::string& type) const;
 	void GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
 		const wxString& src_folder, std::vector<wxString>& images) const;
 

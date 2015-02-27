@@ -10,6 +10,7 @@
 #include "TestRRR_C3.h"
 #include "TestB4R_C3.h"
 #include "TestETC1.h"
+#include "TestEPP.h"
 
 #include <easyejoy2d.h>
 
@@ -53,7 +54,9 @@ void StagePanel::Load()
 //	m_test = new TestRRR_C3();
 //	m_test = new TestB4R_C3();
 
-	m_test = new TestETC1();
+//	m_test = new TestETC1();
+
+	m_test = new TestEPP();
 
 	m_test->Load();
 }

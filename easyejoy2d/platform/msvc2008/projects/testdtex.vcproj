@@ -282,6 +282,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\testdtex\TestEPP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\testdtex\TestEPP.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\testdtex\TestETC1.cpp"
 				>
 			</File>
