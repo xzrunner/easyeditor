@@ -215,8 +215,6 @@ shader_load() {
   // "  gl_FragColor = vec4(1, 1, 1, 1);  \n"  
 
   "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-  "  if (tmp.a == 0.0) \n"
-  "    discard;        \n"
   "  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
   "  gl_FragColor.w = tmp.w;    \n"
   "  gl_FragColor *= v_fragmentColor.w;  \n"
@@ -253,6 +251,10 @@ shader_load() {
   "\n"
   "void main()  \n"
   "{  \n"  
+
+  // todo
+  "  v_texcoord.y = 1 - v_texcoord.y;  \n"
+
   "  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
   "  tmp.w = texture2D(texture1, v_texcoord).r;  \n"
   "  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"

@@ -5,6 +5,9 @@
 #include <easypacker.h>
 #include <epbin.h>
 #include <easycoco.h>
+#include <easyimage.h>
+
+#include <wx/dir.h>
 
 namespace edb
 {
@@ -52,12 +55,19 @@ void PackCoco::Trigger(const std::string& config_path)
 	int i = 0;
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
+		Prepare(pkg_val, config_dir);
  		PackTexture(pkg_val, config_dir, trim);
  		PackLuaFile(pkg_val, config_dir);
 		PackEP(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
 	}
+}
+
+void PackCoco::Prepare(const Json::Value& pkg_val, const wxString& config_dir) 
+{
+	std::string dst_folder = config_dir + "\\" + pkg_val["dst folder"].asString();
+ 	d2d::MkDirRF(dst_folder);
 }
 
 void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_dir,
@@ -82,18 +92,29 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	if (pkg_val["rrp"].isNull()) {
 		std::string img_path = dst_name + "1.png";
 		tex_packer.OutputImage(img_path);
-
-		
+		CompressTexture(img_path, epp_type);
+//		wxRemoveFile(img_path);
 	}
 }
 
 void PackCoco::CompressTexture(const std::string& filepath, const std::string& type) const
 {
-	if (type == "pvr") {
-
-	} else if (type == "etc1") {
-
+	if (type == "png") {
+		return;
 	}
+
+	int w, h, c, f;
+	uint8_t* pixels = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
+	if (type == "pvr") {
+		std::string out_file = filepath.substr(0, filepath.find_last_of('.')) + ".pvr";
+		eimage::TransToPVR trans(pixels, w, h, c);
+		trans.OutputFile(out_file);	
+	} else if (type == "etc1") {
+		std::string out_file = filepath.substr(0, filepath.find_last_of('.'));
+		eimage::TransToETC1 trans(pixels, w, h, c);
+		trans.OutputFile(out_file);					
+	}
+	delete[] pixels;
 }
 
 void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
@@ -201,7 +222,17 @@ void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) co
 		img_folder_path = config_dir + "\\" + rrp_val["pack file"].asString();
 	}
  	std::string epp_path = dst_name + ".epp";
- 	epbin::BinaryEPP epp(dst_name, epbin::TT_PNG8);
+	
+	std::string epp_type = pkg_val["epp type"].asString();
+	epbin::TextureType tex_type;
+	if (epp_type == "png") {
+		tex_type = epbin::TT_PNG8;
+	} else if (epp_type == "pvr") {
+		tex_type = epbin::TT_PVR;
+	} else if (epp_type == "etc1") {
+		tex_type = epbin::TT_PKM;
+	}
+ 	epbin::BinaryEPP epp(dst_name, tex_type);
  	epp.Pack(epp_path);
  
  	if (!rrp_val.isNull()) {

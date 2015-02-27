@@ -30,6 +30,8 @@ private:
 	void Trigger(const std::string& config_path);
 
 private:
+	void Prepare(const Json::Value& pkg_val, const wxString& config_dir);
+
 	void PackTexture(const Json::Value& pkg_val, const wxString& config_dir,
 		const libpacker::ImageTrimData& trim) const;
 	void CompressTexture(const std::string& filepath, const std::string& type) const;
