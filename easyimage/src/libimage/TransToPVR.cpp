@@ -7,14 +7,15 @@
 namespace eimage
 {
 
-TransToPVR::TransToPVR(const uint8_t* pixels, int width, int height, int channels)
+TransToPVR::TransToPVR(const uint8_t* pixels, int width, int height, int channels,
+					   bool align_bottom)
 	: m_pixels(NULL)
 	, m_width(0)
 	, m_height(0)
 	, m_pvr_size(0)
 	, m_pvr_pixels(NULL)
 {
-	InitSrcImage(pixels, width, height, channels);
+	InitSrcImage(pixels, width, height, channels, align_bottom);
 	InitPVRHeader();
 	TransPVR();
 }
@@ -40,7 +41,7 @@ uint8_t* TransToPVR::GetPVRData(int& width, int& height) const
 	return m_pvr_pixels;
 }
 
-void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int channels)
+void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int channels, bool align_bottom)
 {
 	assert(channels == 4);
 	if (is_power_of_two(width) &&
@@ -60,8 +61,11 @@ void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int 
 			nh = next_p2(height);
 		nw = nh = std::max(nw, nh);
 		ImagePack pack(nw, nh);
+		int h = align_bottom ? nh - height : 0;
+		pack.AddImage(pixels, width, height, 0, h, ImagePack::PT_NORMAL);
+
 //		pack.AddImage(pixels, width, height, 0, nh - height, ImagePack::PT_NORMAL);
-		pack.AddImage(pixels, width, height, 0, 0, ImagePack::PT_NORMAL);
+//		pack.AddImage(pixels, width, height, 0, 0, ImagePack::PT_NORMAL);
 
 		size_t sz = sizeof(uint8_t) * nw * nh * channels;
 		m_pixels = new uint8_t[sz];

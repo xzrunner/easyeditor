@@ -9,7 +9,8 @@ namespace eimage
 class TransToPVR
 {
 public:
-	TransToPVR(const uint8_t* pixels, int width, int height, int channels);
+	TransToPVR(const uint8_t* pixels, int width, int height, int channels,
+		bool align_bottom = false);
 	~TransToPVR();
 
 	void OutputFile(const std::string& filepath) const;
@@ -34,7 +35,8 @@ private:
 	};
 
 private:
-	void InitSrcImage(const uint8_t* pixels, int width, int height, int channels);
+	void InitSrcImage(const uint8_t* pixels, int width, int height, int channels,
+		bool align_bottom);
 
 	void InitPVRHeader();
 
