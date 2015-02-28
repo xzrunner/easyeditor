@@ -51,12 +51,12 @@ void StagePanel::Load()
 //	m_test = new TestRRP_C2C3();
 //	m_test = new TestRRP_C2C3_PVR();
 
-//	m_test = new TestRRR_C3();
+	m_test = new TestRRR_C3();
 //	m_test = new TestB4R_C3();
 
 //	m_test = new TestETC1();
 
-	m_test = new TestEPP();
+//	m_test = new TestEPP();
 
 	m_test->Load();
 }

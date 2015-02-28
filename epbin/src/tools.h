@@ -26,6 +26,11 @@ inline void str_replace(std::string& str, const std::string& old_value, const st
 	}   
 }
 
+inline std::string get_file_dir(const std::string& filepath) {
+	int pos_divide = std::max((int)filepath.find_last_of('/'), (int)filepath.find_last_of('\\'));
+	return filepath.substr(0, pos_divide);
+}
+
 inline int ceil4(int x) {
 	return (x + 3) & ~3;
 }

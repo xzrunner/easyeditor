@@ -28,7 +28,7 @@ void TestRRR_C3::Load()
 	dtexf_c3_load_pkg("2013baji", "test-dtex/2013baji.rrr", 1);
 	dtexf_c3_load_pkg_finish();
 
-	m_spr = new eejoy2d::EJSprite(pkg, "2013baji1_attack1_1");
+	m_spr = new eejoy2d::EJSprite(pkg, "2013baji1_sleep_1");
 }
 
 void TestRRR_C3::Update()

@@ -15,7 +15,7 @@ class ImageTrimData;
 class NormalPack
 {
 public:
-	NormalPack(const std::vector<wxString>& files);
+	NormalPack(const std::vector<std::string>& files);
 
 	void Pack();
 
@@ -24,7 +24,7 @@ public:
 	void OutputImage(const wxString& filepath) const;
 
 private:
-	const std::vector<wxString>& m_files;
+	const std::vector<std::string>& m_files;
 
 	std::vector<RectSize> m_src_sizes;
 

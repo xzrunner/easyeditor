@@ -7,7 +7,7 @@
 namespace libpacker
 {
 
-NormalPack::NormalPack(const std::vector<wxString>& files)
+NormalPack::NormalPack(const std::vector<std::string>& files)
 	: m_files(files)
 {
 }

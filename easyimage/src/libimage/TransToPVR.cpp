@@ -60,7 +60,8 @@ void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int 
 			nh = next_p2(height);
 		nw = nh = std::max(nw, nh);
 		ImagePack pack(nw, nh);
-		pack.AddImage(pixels, width, height, 0, nh - height, ImagePack::PT_NORMAL);
+//		pack.AddImage(pixels, width, height, 0, nh - height, ImagePack::PT_NORMAL);
+		pack.AddImage(pixels, width, height, 0, 0, ImagePack::PT_NORMAL);
 
 		size_t sz = sizeof(uint8_t) * nw * nh * channels;
 		m_pixels = new uint8_t[sz];

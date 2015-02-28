@@ -58,7 +58,7 @@ void PackCoco::Trigger(const std::string& config_path)
 		Prepare(pkg_val, config_dir);
  		PackTexture(pkg_val, config_dir, trim);
  		PackLuaFile(pkg_val, config_dir);
-		PackEP(pkg_val, config_dir);
+		PackBinFiles(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
 	}
@@ -78,9 +78,9 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	std::string dst_folder = pkg_val["dst folder"].asString();
 	std::string dst_name = config_dir + "\\" + dst_folder + "\\" + name;
 	std::string trim_path = config_dir + "\\" + pkg_val["trim file"].asString();
-	std::string epp_type = pkg_val["epp type"].asString();
+	std::string tex_type = pkg_val["texture type"].asString();
 
-	std::vector<wxString> images;
+	std::vector<std::string> images;
 	GetAllImageFiles(pkg_val, config_dir, src_folder, images);
 
 	libpacker::NormalPack tex_packer(images);
@@ -92,7 +92,7 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	if (pkg_val["rrp"].isNull()) {
 		std::string img_path = dst_name + "1.png";
 		tex_packer.OutputImage(img_path);
-		CompressTexture(img_path, epp_type);
+		CompressTexture(img_path, tex_type);
 //		wxRemoveFile(img_path);
 	}
 }
@@ -118,7 +118,7 @@ void PackCoco::CompressTexture(const std::string& filepath, const std::string& t
 }
 
 void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
-								const wxString& src_folder, std::vector<wxString>& images) const
+								const wxString& src_folder, std::vector<std::string>& images) const
 {
 	int i = 0;
 	Json::Value src_val = pkg_val["src image list"][i++];
@@ -130,7 +130,7 @@ void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const wxString& conf
 			d2d::FilenameTools::fetchAllFiles(path_full, files);
 			for (int i = 0, n = files.size(); i < n; ++i) {
 				if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
-					images.push_back(files[i]);
+					images.push_back(files[i].ToStdString());
 				}
 			}
 		} else if (wxFileName::FileExists(path_full)) {
@@ -165,6 +165,9 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const wxString& config_di
 	libcoco::CocoPacker* data_packer = NULL;
 	if (!pkg_val["rrp"].isNull()) {
 		std::string id_filepath = config_dir + "\\" + pkg_val["rrp"]["id file"].asString();
+		data_packer = new libcoco::CocoPacker(symbols, tex_mgr, id_filepath);
+	} else if (!pkg_val["rrr"].isNull()) {
+		std::string id_filepath = config_dir + "\\" + pkg_val["rrr"]["id file"].asString();
 		data_packer = new libcoco::CocoPacker(symbols, tex_mgr, id_filepath);
 	} else {
 		data_packer = new libcoco::CocoPacker(symbols, tex_mgr);
@@ -203,7 +206,7 @@ void PackCoco::GetAllDataFiles(const wxString& src_folder, const wxString& filte
 	std::copy(unique_files.begin(), unique_files.end(), back_inserter(files));
 }
 
-void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) const
+void PackCoco::PackBinFiles(const Json::Value& pkg_val, const wxString& config_dir) const
 {
 	std::string name = pkg_val["name"].asString();
 	std::string src_folder = pkg_val["src folder"].asString();
@@ -223,13 +226,11 @@ void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) co
 	}
  	std::string epp_path = dst_name + ".epp";
 	
-	std::string epp_type = pkg_val["epp type"].asString();
-	epbin::TextureType tex_type;
-	if (epp_type == "png") {
-		tex_type = epbin::TT_PNG8;
-	} else if (epp_type == "pvr") {
+	std::string type = pkg_val["texture type"].asString();
+	epbin::TextureType tex_type = epbin::TT_PNG8;
+	if (type == "pvr") {
 		tex_type = epbin::TT_PVR;
-	} else if (epp_type == "etc1") {
+	} else if (type == "etc1") {
 		tex_type = epbin::TT_PKM;
 	}
  	epbin::BinaryEPP epp(dst_name, tex_type);
@@ -251,6 +252,16 @@ void PackCoco::PackEP(const Json::Value& pkg_val, const wxString& config_dir) co
 		std::string source_folder = config_dir + "\\" + src_folder;
 		epbin::BinaryPTS pts(source_folder, pts_files, id_filepath);
 		pts.Pack(dst_name + ".pts", true);
+	}
+
+	Json::Value rrr_val = pkg_val["rrr"];
+	if (!rrr_val.isNull()) {
+		std::string id_filepath = config_dir + "\\" + rrr_val["id file"].asString();
+		std::vector<std::string> img_files;
+		GetAllImageFiles(pkg_val, config_dir, src_folder, img_files);
+		
+		epbin::BinaryRRR bin(img_files, id_filepath);
+		bin.Pack(dst_name + ".rrr", true);
 	}
 }
 

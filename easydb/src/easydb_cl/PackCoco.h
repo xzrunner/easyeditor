@@ -36,13 +36,13 @@ private:
 		const libpacker::ImageTrimData& trim) const;
 	void CompressTexture(const std::string& filepath, const std::string& type) const;
 	void GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
-		const wxString& src_folder, std::vector<wxString>& images) const;
+		const wxString& src_folder, std::vector<std::string>& images) const;
 
 	void PackLuaFile(const Json::Value& pkg_val, const wxString& config_dir) const;
 	void GetAllDataFiles(const wxString& src_folder, const wxString& filter, 
 		std::vector<wxString>& files) const;
 
-	void PackEP(const Json::Value& pkg_val, const wxString& config_dir) const;
+	void PackBinFiles(const Json::Value& pkg_val, const wxString& config_dir) const;
 	void GetAllPTSFiles(const Json::Value& pkg_val, const wxString& config_dir,
 		const wxString& src_folder, std::vector<std::string>& pts_files) const;
 
