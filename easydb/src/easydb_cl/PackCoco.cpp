@@ -163,12 +163,9 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const wxString& config_di
 	tex_mgr.Add(json_path, 0);
 
 	libcoco::CocoPacker* data_packer = NULL;
-	if (!pkg_val["rrp"].isNull()) {
-		std::string id_filepath = config_dir + "\\" + pkg_val["rrp"]["id file"].asString();
-		data_packer = new libcoco::CocoPacker(symbols, tex_mgr, id_filepath);
-	} else if (!pkg_val["rrr"].isNull()) {
-		std::string id_filepath = config_dir + "\\" + pkg_val["rrr"]["id file"].asString();
-		data_packer = new libcoco::CocoPacker(symbols, tex_mgr, id_filepath);
+	if (!pkg_val["rrp"].isNull() || !pkg_val["rrr"].isNull() || !pkg_val["b4r"].isNull()) {
+		std::string id_filepath = config_dir + "\\" + pkg_val["id file"].asString();
+		data_packer = new libcoco::CocoPacker(symbols, tex_mgr, id_filepath);	
 	} else {
 		data_packer = new libcoco::CocoPacker(symbols, tex_mgr);
 	}
@@ -238,7 +235,7 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const wxString& config_d
  
  	if (!rrp_val.isNull()) {
  		std::string pack_filepath = config_dir + "\\" + rrp_val["pack file"].asString();
- 		std::string id_filepath = config_dir + "\\" + rrp_val["id file"].asString();
+ 		std::string id_filepath = config_dir + "\\" + pkg_val["id file"].asString();
  		epbin::BinaryRRP rrp(pack_filepath, id_filepath);
  		rrp.Pack(dst_name + ".rrp", true);
  	}
@@ -248,7 +245,7 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const wxString& config_d
 		std::vector<std::string> pts_files;
 		GetAllPTSFiles(pkg_val, config_dir, src_folder, pts_files);
 
-		std::string id_filepath = config_dir + "\\" + pts_val["id file"].asString();
+		std::string id_filepath = config_dir + "\\" + pkg_val["id file"].asString();
 		std::string source_folder = config_dir + "\\" + src_folder;
 		epbin::BinaryPTS pts(source_folder, pts_files, id_filepath);
 		pts.Pack(dst_name + ".pts", true);
@@ -256,12 +253,22 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const wxString& config_d
 
 	Json::Value rrr_val = pkg_val["rrr"];
 	if (!rrr_val.isNull()) {
-		std::string id_filepath = config_dir + "\\" + rrr_val["id file"].asString();
+		std::string id_filepath = config_dir + "\\" + pkg_val["id file"].asString();
 		std::vector<std::string> img_files;
 		GetAllImageFiles(pkg_val, config_dir, src_folder, img_files);
 		
 		epbin::BinaryRRR bin(img_files, id_filepath);
 		bin.Pack(dst_name + ".rrr", true);
+	}
+
+	Json::Value b4r_val = pkg_val["b4r"];
+	if (!b4r_val.isNull()) {
+		std::string id_filepath = config_dir + "\\" + pkg_val["id file"].asString();
+		std::vector<std::string> img_files;
+		GetAllImageFiles(pkg_val, config_dir, src_folder, img_files);
+
+		epbin::BinaryB4R bin(img_files, id_filepath);
+		bin.Pack(dst_name + ".b4r", true);
 	}
 }
 
