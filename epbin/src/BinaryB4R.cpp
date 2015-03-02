@@ -12,7 +12,13 @@ namespace epbin
 
 static const uint8_t TYPE = 14;
 
-BinaryB4R::BinaryB4R(const std::vector<std::string>& src_files, const std::string& img_id_file)
+static const uint16_t TEX_PVR = 1;
+static const uint16_t TEX_ETC1 = 2;
+
+BinaryB4R::BinaryB4R(const std::vector<std::string>& src_files, 
+					 const std::string& img_id_file,
+					 bool is_pvr)
+	: m_is_pvr(is_pvr)
 {
 	LoadPictures(src_files, img_id_file);
 }
@@ -24,22 +30,28 @@ BinaryB4R::~BinaryB4R()
 
 void BinaryB4R::Pack(const std::string& outfile, bool compress) const
 {
-	int32_t pic_sz = m_pics.size();
+	uint16_t pic_sz = m_pics.size();
 
 	// data sz
 	size_t data_sz = 0;
 	data_sz += sizeof(int32_t);
 	for (int i = 0; i < pic_sz; ++i) {
-		data_sz += m_pics[i]->Size();
+		data_sz += m_pics[i]->Size(m_is_pvr);
 	}
 
 	// fill buffer
 	uint8_t* data_buf = new uint8_t[data_sz];
 	uint8_t* ptr_data = data_buf;
+	// store pic_sz
 	memcpy(ptr_data, &pic_sz, sizeof(pic_sz));
 	ptr_data += sizeof(pic_sz);
+	// store tex type
+	uint16_t type = m_is_pvr ? TEX_PVR : TEX_ETC1;
+	memcpy(ptr_data, &type, sizeof(type));
+	ptr_data += sizeof(type);
+	// store pictures
 	for (int i = 0; i < pic_sz; ++i) {
-		m_pics[i]->Store(&ptr_data);
+		m_pics[i]->Store(m_is_pvr, &ptr_data);
 	}
 	assert(ptr_data - data_buf == data_sz);
 
@@ -102,10 +114,16 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 	eimage::RegularRectCut cut(src_pixels, sw, sh);
 	cut.AutoCut();
 
-	// to pvr
-	eimage::TransToPVR trans(src_pixels, sw, sh, sc);
+	// compress texture
+	uint8_t* pixels;
 	int w, h;
-	uint8_t* pixels = trans.GetPixelsData(w, h);
+	if (m_is_pvr) {
+		eimage::TransToPVR trans(src_pixels, sw, sh, sc);
+		pixels = trans.GetPixelsData(w, h);
+	} else {
+		eimage::TransToETC1 trans(src_pixels, sw, sh, sc);
+		pixels = trans.GetPixelsData(w, h);
+	}
 
 	// create pic
 	Picture* pic = new Picture;
@@ -118,27 +136,48 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 
 	pic->w = w;
 	pic->h = h;
-	size_t sz = w * h * 0.5f;
-	pic->pvr_pixels = new uint8_t[sz];
-	memcpy(pic->pvr_pixels, pixels, sz);
+	size_t sz = m_is_pvr ? w * h * 0.5f : w * h;
+	pic->compressed_pixels = new uint8_t[sz];
+	memcpy(pic->compressed_pixels, pixels, sz);
 
 	// flag data
-	assert(w == h && w % 4 == 0);
-	int block = w >> 2;
-	int block_sz = block * block;
+	if (m_is_pvr) {
+		assert(w == h && w % 4 == 0);
+		int block = w >> 2;
+		int block_sz = block * block;
 
-	pic->flag_sz = std::ceil(block_sz / 8.0f);
-	pic->flag = new uint8_t[pic->flag_sz];
-	pic->block_used = 0;
-	memset(pic->flag, 0, pic->flag_sz);
-	int i = 0;
-	for (int y = 0; y < block; ++y) {
-		for (int x = 0; x < block; ++x) {
-			if (!pic->IsBlockTransparent(x, y)) {
-				pic->flag[i / 8] |= (1 << (i % 8));
-				++pic->block_used;
+		pic->flag_sz = std::ceil(block_sz / 8.0f);
+		pic->flag = new uint8_t[pic->flag_sz];
+		pic->block_used = 0;
+		memset(pic->flag, 0, pic->flag_sz);
+		int i = 0;
+		for (int y = 0; y < block; ++y) {
+			for (int x = 0; x < block; ++x) {
+				if (!pic->IsBlockTransparent(x, y)) {
+					pic->flag[i / 8] |= (1 << (i % 8));
+					++pic->block_used;
+				}
+				++i;
 			}
-			++i;
+		}
+	} else {
+		assert(w % 4 == 0 && h % 4 == 0);
+		int bw = w >> 2,
+			bh = h >> 2;
+		int block_sz = bw * bh;
+		pic->flag_sz = std::ceil(block_sz / 8.0f);
+		pic->flag = new uint8_t[pic->flag_sz];
+		pic->block_used = 0;
+		memset(pic->flag, 0, pic->flag_sz);
+		int i = 0;
+		for (int y = 0; y < bh; ++y) {
+			for (int x = 0; x < bw; ++x) {
+				if (!pic->IsBlockTransparent(x, y)) {
+					pic->flag[i / 8] |= (1 << (i % 8));
+					++pic->block_used;
+				}
+				++i;
+			}
 		}
 	}
 
@@ -149,29 +188,35 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 // class BinaryB4R::Picture
 //////////////////////////////////////////////////////////////////////////
 
+size_t BinaryB4R::Picture::
+BlockSize(bool is_pvr)
+{
+	return is_pvr ? sizeof(int64_t) : sizeof(int64_t) * 2;
+}
+
 BinaryB4R::Picture::
 ~Picture()
 {
 	delete[] bmp_pixels;
-	delete[] pvr_pixels;
+	delete[] compressed_pixels;
 	delete[] flag;
 }
 
 size_t BinaryB4R::Picture::
-Size() const
+Size(bool is_pvr) const
 {
 	size_t sz = 0;
 
 	sz += sizeof(int16_t) * 3;
 
 	sz += flag_sz;
-	sz += block_used * sizeof(int64_t);
+	sz += block_used * BlockSize(is_pvr);
 
 	return sz;
 }
 
 void BinaryB4R::Picture::
-Store(uint8_t** ptr)
+Store(bool is_pvr, uint8_t** ptr)
 {
 	memcpy(*ptr, &id, sizeof(id));
 	*ptr += sizeof(id);
@@ -184,18 +229,42 @@ Store(uint8_t** ptr)
 	memcpy(*ptr, flag, flag_sz);
 	*ptr += flag_sz;
 
-	int block = w >> 2;
-	int i = 0;
-	for (int y = 0; y < block; ++y) {
-		for (int x = 0; x < block; ++x) {
-			if (!IsBlockTransparent(x, y)) {
-				assert(flag[i / 8] & (1 << (i % 8)));
-				int idx = dtex_pvr_get_morton_number(x, y);
-				int64_t* ptr_src = (int64_t*)pvr_pixels + idx;
-				memcpy(*ptr, ptr_src, sizeof(int64_t));
-				*ptr += sizeof(int64_t);
+	if (is_pvr) {
+		int block = w >> 2;
+		int i = 0;
+		for (int y = 0; y < block; ++y) {
+			for (int x = 0; x < block; ++x) {
+				if (!IsBlockTransparent(x, y)) {
+					assert(flag[i / 8] & (1 << (i % 8)));
+					int idx = dtex_pvr_get_morton_number(x, y);
+					int64_t* ptr_src = (int64_t*)compressed_pixels + idx;
+					memcpy(*ptr, ptr_src, sizeof(int64_t));
+					*ptr += sizeof(int64_t);
+				}
+				++i;
 			}
-			++i;
+		}
+	} else {
+		int bw = w >> 2,
+			bh = h >> 2;
+		int block_count = bw * bh;
+		int i = 0;
+		for (int y = 0; y < bh; ++y) {
+			for (int x = 0; x < bw; ++x) {
+				if (!IsBlockTransparent(x, y)) {
+					assert(flag[i / 8] & (1 << (i % 8)));
+					int idx = y * bw + x;
+
+					int64_t* rgb_data = (int64_t*)compressed_pixels + idx;
+					memcpy(*ptr, rgb_data, sizeof(int64_t));
+					*ptr += sizeof(int64_t);
+
+					int64_t* alpha_data = (int64_t*)compressed_pixels + block_count + idx;
+					memcpy(*ptr, alpha_data, sizeof(int64_t));
+					*ptr += sizeof(int64_t);
+				}
+				++i;
+			}
 		}
 	}
 }
@@ -210,7 +279,7 @@ bool BinaryB4R::Picture::
 IsPVRBlockTransparent(int x, int y) const
 {
 	int idx = dtex_pvr_get_morton_number(x, y);
-	int64_t* ptr = (int64_t*)pvr_pixels + idx;
+	int64_t* ptr = (int64_t*)compressed_pixels + idx;
 	return *((int32_t*)ptr) == 0xaaaaaaaa;
 }
 

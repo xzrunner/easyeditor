@@ -267,7 +267,7 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const wxString& config_d
 		std::vector<std::string> img_files;
 		GetAllImageFiles(pkg_val, config_dir, src_folder, img_files);
 
-		epbin::BinaryB4R bin(img_files, id_filepath);
+		epbin::BinaryB4R bin(img_files, id_filepath, tex_type == epbin::TT_PVR);
 		bin.Pack(dst_name + ".b4r", true);
 	}
 }

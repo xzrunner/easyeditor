@@ -48,7 +48,7 @@ void BinaryRRR::Pack(const std::string& outfile, bool compress) const
 	uint16_t type = m_is_pvr ? TEX_PVR : TEX_ETC1;
 	memcpy(ptr_data, &type, sizeof(type));
 	ptr_data += sizeof(type);	
-	// store other
+	// store pictures
 	for (int i = 0; i < pic_sz; ++i) {
 		m_pics[i]->Store(m_is_pvr, &ptr_data);
 	}
@@ -114,7 +114,7 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 	eimage::RegularRectCut cut(src_pixels, sw, sh);
 	cut.AutoCut();
 
-	// to pvr
+	// compress texture
 	uint8_t* pixels;
 	int w, h;
 	if (m_is_pvr) {
@@ -199,6 +199,9 @@ Store(bool is_pvr, uint8_t** ptr)
 	*ptr += sizeof(h);
 
 	size_t block_sz = BlockSize(is_pvr);
+	int bw = pic->w >> 2,
+		bh = pic->h >> 2;
+	int block_count = bw * bh;
 	for (int iy = y; iy < y + h; ++iy) {
 		for (int ix = x; ix < x + w; ++ix) {
 			if (ix < 0 || iy < 0) {
@@ -211,8 +214,7 @@ Store(bool is_pvr, uint8_t** ptr)
 				memcpy(*ptr, data, block_sz);
 				*ptr += block_sz;
 			} else {
-				int idx = iy * (pic->w / 4) + ix;
-				int block_count = (pic->w / 4) * (pic->h / 4);
+				int idx = iy * bw + ix;
 
 				int64_t* rgb_data = (int64_t*)pic->pixels + idx;
 				memcpy(*ptr, rgb_data, sizeof(int64_t));

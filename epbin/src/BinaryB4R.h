@@ -13,7 +13,7 @@ class BinaryB4R
 {
 public:
 	BinaryB4R(const std::vector<std::string>& src_files, 
-		const std::string& img_id_file);
+		const std::string& img_id_file, bool is_pvr);
 	~BinaryB4R();
 
 	void Pack(const std::string& outfile, bool compress) const;
@@ -30,19 +30,21 @@ private:
 		std::string path;
 		int16_t id;
 
-		uint8_t* pvr_pixels;
+		uint8_t* compressed_pixels;
 
 		size_t flag_sz;
 		uint8_t* flag;
 		size_t block_used;
 
-		size_t Size() const;
-		void Store(uint8_t** ptr);
+		size_t Size(bool is_pvr) const;
+		void Store(bool is_pvr, uint8_t** ptr);
 
 		bool IsBlockTransparent(int x, int y) const;
 
 		bool IsPVRBlockTransparent(int x, int y) const;
 		bool IsBMPBlockTransparent(int x, int y) const;
+
+		static size_t BlockSize(bool is_pvr);
 
 		~Picture();
 
@@ -56,6 +58,8 @@ private:
 
 private:
 	std::vector<Picture*> m_pics;
+
+	bool m_is_pvr;
 
 }; // BinaryB4R
 
