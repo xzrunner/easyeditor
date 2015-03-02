@@ -14,6 +14,8 @@ public:
 
 	void OutputFile(const std::string& filepath) const;
 
+	uint8_t* GetPixelsData(int& width, int& height) const;
+
 private:
 	void InitSrcImage(const uint8_t* pixels, int width, int height, int channels);
 	void InitSrcImageAlpha();

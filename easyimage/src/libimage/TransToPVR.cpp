@@ -34,11 +34,14 @@ void TransToPVR::OutputFile(const std::string& filepath) const
 	fout.close();
 }
 
-uint8_t* TransToPVR::GetPVRData(int& width, int& height) const
+uint8_t* TransToPVR::GetPixelsData(int& width, int& height) const
 {
 	width = m_width;
 	height = m_height;
-	return m_pvr_pixels;
+
+	uint8_t* pixels = new uint8_t[m_pvr_size];
+	memcpy(pixels, m_pvr_pixels, m_pvr_size);
+	return pixels;
 }
 
 void TransToPVR::InitSrcImage(const uint8_t* pixels, int width, int height, int channels, bool align_bottom)

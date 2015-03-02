@@ -277,22 +277,6 @@
 					Name="bin"
 					>
 					<File
-						RelativePath="..\..\..\src\easydb_cl\BinB4R.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinB4R.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinEP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinEP.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\easydb_cl\BinRRP.cpp"
 						>
 					</File>
@@ -300,22 +284,46 @@
 						RelativePath="..\..\..\src\easydb_cl\BinRRP.h"
 						>
 					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinRRR.cpp"
+					<Filter
+						Name="normal"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\BinRRR.h"
+						<File
+							RelativePath="..\..\..\src\easydb_cl\BinEP.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\BinEP.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\NumberImages.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\NumberImages.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="extend"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\NumberImages.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\NumberImages.h"
-						>
-					</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\BinB4R.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\BinB4R.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\BinRRR.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\BinRRR.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="rrp"

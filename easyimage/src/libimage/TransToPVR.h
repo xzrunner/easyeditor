@@ -15,7 +15,7 @@ public:
 
 	void OutputFile(const std::string& filepath) const;
 
-	uint8_t* GetPVRData(int& width, int& height) const;
+	uint8_t* GetPixelsData(int& width, int& height) const;
 
 private:
 	struct PVRTexHeader {

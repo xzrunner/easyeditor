@@ -23,7 +23,7 @@ public:
 
 private:
 	void Trigger(const std::string& src_dir, const std::string& img_id_file,
-		const std::string& dst_file);
+		const std::string& dst_file, const std::string& tex_format);
 
 }; // BinRRR
 

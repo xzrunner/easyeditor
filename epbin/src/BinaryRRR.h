@@ -13,7 +13,7 @@ class BinaryRRR
 {
 public:
 	BinaryRRR(const std::vector<std::string>& src_files, 
-		const std::string& img_id_file);
+		const std::string& img_id_file, bool is_pvr);
 	~BinaryRRR();
 
 	void Pack(const std::string& outfile, bool compress) const;
@@ -31,8 +31,10 @@ private:
 
 		Part(Picture* pic) : pic(pic) {}
 
-		size_t Size() const;
-		void Store(uint8_t** ptr);
+		size_t Size(bool is_pvr) const;
+		void Store(bool is_pvr, uint8_t** ptr);
+
+		static size_t BlockSize(bool is_pvr);
 
 	}; // Part
 
@@ -49,8 +51,8 @@ private:
 
 		uint8_t* pixels;
 
-		size_t Size() const;
-		void Store(uint8_t** ptr);
+		size_t Size(bool is_pvr) const;
+		void Store(bool is_pvr, uint8_t** ptr);
 
 	}; // Picture
 
@@ -62,6 +64,8 @@ private:
 
 private:
 	std::vector<Picture*> m_pics;
+
+	bool m_is_pvr;
 
 }; // BinaryRRR
 

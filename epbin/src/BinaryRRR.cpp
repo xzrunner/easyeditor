@@ -11,7 +11,13 @@ namespace epbin
 
 static const uint8_t TYPE = 13;
 
-BinaryRRR::BinaryRRR(const std::vector<std::string>& src_files, const std::string& img_id_file)
+static const uint16_t TEX_PVR = 1;
+static const uint16_t TEX_ETC1 = 2;
+
+BinaryRRR::BinaryRRR(const std::vector<std::string>& src_files, 
+					 const std::string& img_id_file,
+					 bool is_pvr)
+	: m_is_pvr(is_pvr)
 {
 	LoadPictures(src_files, img_id_file);
 }
@@ -23,22 +29,28 @@ BinaryRRR::~BinaryRRR()
 
 void BinaryRRR::Pack(const std::string& outfile, bool compress) const
 {
-	int32_t pic_sz = m_pics.size();
+	uint16_t pic_sz = m_pics.size();
 
 	// data sz
 	size_t data_sz = 0;
 	data_sz += sizeof(int32_t);
 	for (int i = 0; i < pic_sz; ++i) {
-		data_sz += m_pics[i]->Size();
+		data_sz += m_pics[i]->Size(m_is_pvr);
 	}
 
 	// fill buffer
 	uint8_t* data_buf = new uint8_t[data_sz];
 	uint8_t* ptr_data = data_buf;
+	// store pic_sz
 	memcpy(ptr_data, &pic_sz, sizeof(pic_sz));
 	ptr_data += sizeof(pic_sz);
+	// store tex type
+	uint16_t type = m_is_pvr ? TEX_PVR : TEX_ETC1;
+	memcpy(ptr_data, &type, sizeof(type));
+	ptr_data += sizeof(type);	
+	// store other
 	for (int i = 0; i < pic_sz; ++i) {
-		m_pics[i]->Store(&ptr_data);
+		m_pics[i]->Store(m_is_pvr, &ptr_data);
 	}
 	assert(ptr_data - data_buf == data_sz);
 
@@ -103,9 +115,15 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 	cut.AutoCut();
 
 	// to pvr
-	eimage::TransToPVR trans(src_pixels, sw, sh, sc);
+	uint8_t* pixels;
 	int w, h;
-	uint8_t* pixels = trans.GetPVRData(w, h);
+	if (m_is_pvr) {
+		eimage::TransToPVR trans(src_pixels, sw, sh, sc);
+		pixels = trans.GetPixelsData(w, h);
+	} else {
+		eimage::TransToETC1 trans(src_pixels, sw, sh, sc);
+		pixels = trans.GetPixelsData(w, h);
+	}
 
 	// create pic
 	Picture* pic = new Picture;
@@ -118,8 +136,7 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 	pic->w = w;
 	pic->h = h;
 	size_t sz = w * h * 0.5f;
-	pic->pixels = new uint8_t[sz];
-	memcpy(pic->pixels, pixels, sz);
+	pic->pixels = pixels;
 
 	const std::vector<eimage::Rect>& rects = cut.GetResult();
 	for (int i = 0, n = rects.size(); i < n; ++i)
@@ -144,12 +161,15 @@ BinaryRRR::Picture* BinaryRRR::CreatePicture(const std::string& filepath) const
 // class BinaryRRR::Part
 //////////////////////////////////////////////////////////////////////////
 
-static const int BLOCK_SIZE = sizeof(int64_t);
+size_t BinaryRRR::Part::BlockSize(bool is_pvr)
+{
+	return is_pvr ? sizeof(int64_t) : sizeof(int64_t) * 2;
+}
 
 size_t BinaryRRR::Part::
-Size() const
+Size(bool is_pvr) const
 {
-//	return sizeof(int16_t) * 4 + w * h * BLOCK_SIZE;
+//	return sizeof(int16_t) * 4 + w * h * BlockSize(is_pvr);
 
 	int _w = w, _h = h;
 	if (x < 0) {
@@ -160,11 +180,11 @@ Size() const
 		_h = h + y;
 		assert(_h > 0);
 	}
-	return sizeof(int16_t) * 4 + _w * _h * BLOCK_SIZE;
+	return sizeof(int16_t) * 4 + _w * _h * BlockSize(is_pvr);
 }
 
 void BinaryRRR::Part::
-Store(uint8_t** ptr)
+Store(bool is_pvr, uint8_t** ptr)
 {
 	memcpy(*ptr, &x, sizeof(x));
 	*ptr += sizeof(x);
@@ -178,16 +198,30 @@ Store(uint8_t** ptr)
 	memcpy(*ptr, &h, sizeof(h));
 	*ptr += sizeof(h);
 
+	size_t block_sz = BlockSize(is_pvr);
 	for (int iy = y; iy < y + h; ++iy) {
 		for (int ix = x; ix < x + w; ++ix) {
 			if (ix < 0 || iy < 0) {
 				continue;
 			}
 
-			int idx = dtex_pvr_get_morton_number(ix, iy);
-			int64_t* data = (int64_t*)pic->pixels + idx;				
-			memcpy(*ptr, data, sizeof(int64_t));
-			*ptr += sizeof(int64_t);
+			if (is_pvr) {
+				int idx = dtex_pvr_get_morton_number(ix, iy);
+				int64_t* data = (int64_t*)pic->pixels + idx;
+				memcpy(*ptr, data, block_sz);
+				*ptr += block_sz;
+			} else {
+				int idx = iy * (pic->w / 4) + ix;
+				int block_count = (pic->w / 4) * (pic->h / 4);
+
+				int64_t* rgb_data = (int64_t*)pic->pixels + idx;
+				memcpy(*ptr, rgb_data, sizeof(int64_t));
+				*ptr += sizeof(int64_t);
+
+				int64_t* alpha_data = (int64_t*)pic->pixels + (block_count + idx);
+				memcpy(*ptr, alpha_data, sizeof(int64_t));
+				*ptr += sizeof(int64_t);
+			}
 		}
 	}
 }
@@ -197,14 +231,14 @@ Store(uint8_t** ptr)
 //////////////////////////////////////////////////////////////////////////
 
 size_t BinaryRRR::Picture::
-Size() const
+Size(bool is_pvr) const
 {
 	int block_count = 0;
 	
 	size_t sz = 0;
 	sz += sizeof(int16_t) * 4;
 	for (int i = 0, n = parts.size(); i < n; ++i) {
-		sz += parts[i].Size();
+		sz += parts[i].Size(is_pvr);
 
 		block_count += parts[i].h * parts[i].w;
 	}
@@ -212,7 +246,7 @@ Size() const
 }
 
 void BinaryRRR::Picture::
-Store(uint8_t** ptr)
+Store(bool is_pvr, uint8_t** ptr)
 {
 	memcpy(*ptr, &id, sizeof(id));
 	*ptr += sizeof(id);
@@ -226,7 +260,7 @@ Store(uint8_t** ptr)
 	memcpy(*ptr, &sz, sizeof(sz));
 	*ptr += sizeof(sz);
 	for (int i = 0; i < sz; ++i) {
-		parts[i].Store(ptr);
+		parts[i].Store(is_pvr, ptr);
 	}
 }
 

@@ -105,7 +105,7 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 	// to pvr
 	eimage::TransToPVR trans(src_pixels, sw, sh, sc);
 	int w, h;
-	uint8_t* pixels = trans.GetPVRData(w, h);
+	uint8_t* pixels = trans.GetPixelsData(w, h);
 
 	// create pic
 	Picture* pic = new Picture;

@@ -48,6 +48,17 @@ void TransToETC1::OutputFile(const std::string& filepath) const
 	}
 }
 
+uint8_t* TransToETC1::GetPixelsData(int& width, int& height) const
+{
+	width = m_width;
+	height = m_height;
+
+	uint8_t* pixels = new uint8_t[m_etc1_size * 2];
+	memcpy(pixels, m_etc1_pixels, m_etc1_size);
+	memcpy(pixels + m_etc1_size, m_etc1_alpha_pixels, m_etc1_size);
+	return pixels;
+}
+
 void TransToETC1::InitSrcImage(const uint8_t* pixels, int width, int height, int channels)
 {
 	assert(channels == 4);

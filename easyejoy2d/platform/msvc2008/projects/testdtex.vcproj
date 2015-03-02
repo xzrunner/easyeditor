@@ -257,97 +257,97 @@
 				RelativePath="..\..\..\src\testdtex\ITest.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestB4R_C3.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestB4R_C3.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestC2.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestC2.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestC3.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestC3.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestEPP.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestEPP.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestETC1.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestETC1.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestPVR.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestPVR.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestRRP_C2C3.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestRRP_C2C3.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestRRP_C2C3_PVR.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestRRP_C2C3_PVR.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestRRR_C3.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestRRR_C3.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestSprite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\testdtex\TestSprite.h"
-				>
-			</File>
 			<Filter
 				Name="normal"
 				>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC2.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC2.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC3.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestC3.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestEPP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestEPP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestSprite.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="format"
 				>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestETC1.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestETC1.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestPVR.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestPVR.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="regular rect"
 				>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestB4R_C3.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestB4R_C3.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3_PVR.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestRRP_C2C3_PVR.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestRRR_C3.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\testdtex\TestRRR_C3.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 	</Files>

@@ -193,6 +193,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\ImageIDer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\ImageIDer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\LuaDataHelper.cpp"
 				>
 			</File>
@@ -221,72 +229,72 @@
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath="..\..\..\src\BinaryB4R.cpp"
+		<Filter
+			Name="normal"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryB4R.h"
+			<File
+				RelativePath="..\..\..\src\BinaryEPD.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryEPD.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryEPP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryEPP.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\epd_dataset.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\epd_dataset.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="extend"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryEPD.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryEPD.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryEPP.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryEPP.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryPTS.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryPTS.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryRRP.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryRRP.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryRRR.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\BinaryRRR.h"
-			>
-		</File>
+			<File
+				RelativePath="..\..\..\src\BinaryB4R.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryB4R.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryPTS.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryPTS.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryRRP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryRRP.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryRRR.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\BinaryRRR.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\epbin.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\epd_dataset.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\epd_dataset.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ImageIDer.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\ImageIDer.h"
 			>
 		</File>
 	</Files>

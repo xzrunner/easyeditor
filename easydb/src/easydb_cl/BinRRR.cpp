@@ -19,22 +19,22 @@ std::string BinRRR::Description() const
 
 std::string BinRRR::Usage() const
 {
-	return Command() + " [src dir] [img id file] [dst file]";
+	return Command() + " [src dir] [img id file] [dst file] [tex format]";
 }
 
 void BinRRR::Run(int argc, char *argv[])
 {
-	// bin-rrr e:\debug\cut e:\debug\cut\imgid.txt e:\debug\pack\2013baji.rrr
+	// bin-rrr e:\debug\cut e:\debug\cut\imgid.txt e:\debug\pack\2013baji.rrr pvr
 
-	if (!check_number(this, argc, 5)) return;
+	if (!check_number(this, argc, 6)) return;
 	if (!check_folder(argv[2])) return;
 	if (!check_file(argv[3])) return;
 
-	Trigger(argv[2], argv[3], argv[4]);
+	Trigger(argv[2], argv[3], argv[4], argv[5]);
 }
 
 void BinRRR::Trigger(const std::string& src_dir, const std::string& img_id_file, 
-					 const std::string& dst_file)
+					 const std::string& dst_file, const std::string& tex_format)
 {
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
@@ -46,7 +46,8 @@ void BinRRR::Trigger(const std::string& src_dir, const std::string& img_id_file,
 		}
 	}
 
-	epbin::BinaryRRR bin(img_files, img_id_file);
+	bool is_pvr = tex_format == "pvr";
+	epbin::BinaryRRR bin(img_files, img_id_file, is_pvr);
 	bin.Pack(dst_file, true);
 }
 
