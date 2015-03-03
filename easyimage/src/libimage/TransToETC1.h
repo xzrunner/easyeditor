@@ -23,6 +23,8 @@ private:
 	void InitETC1Header();
 
 	void EncodeETC1();
+	void EncodeETC1ByRgEtc1();
+	void EncodeETC1ByEtcPack();
 
 private:
 	struct PKMHeader {

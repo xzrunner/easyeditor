@@ -2,6 +2,7 @@
 #include "ImagePack.h"
 
 #include <rg_etc1.h>
+#include <etcpack_lib.h>
 
 namespace eimage
 {
@@ -121,12 +122,18 @@ void TransToETC1::InitETC1Header()
 
 void TransToETC1::EncodeETC1()
 {
+	EncodeETC1ByRgEtc1();
+//	EncodeETC1ByEtcPack();
+}
+
+void TransToETC1::EncodeETC1ByRgEtc1()
+{
 	assert(m_width % 4 == 0 && m_height % 4 == 0);
 
 	rg_etc1::pack_etc1_block_init();
 	int bw = m_width / 4;
 	int bh = m_height / 4;
-	
+
 	m_etc1_size = bw * bh * 8;
 	m_etc1_pixels = new uint8_t[m_etc1_size];
 	m_etc1_alpha_pixels = new uint8_t[m_etc1_size];
@@ -154,6 +161,68 @@ void TransToETC1::EncodeETC1()
 			rg_etc1::pack_etc1_block(m_etc1_alpha_pixels + (bw * y + x) * 8, (const unsigned int*)block, params);
 		}
 	}
+}
+
+void TransToETC1::EncodeETC1ByEtcPack()
+{
+	assert(m_width % 4 == 0 && m_height % 4 == 0);
+
+	// prepare alpha
+	size_t sz = m_width * m_height;
+	uint8_t* rgb_rgb = new uint8_t[sz * 3];
+	uint8_t* rgb_dec = new uint8_t[sz * 3];
+	for (int i = 0; i < sz; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			rgb_rgb[i*3+j] = m_pixels[i*4+j];
+		}
+	}
+	uint8_t* alpha_rgb = new uint8_t[sz * 3];
+	uint8_t* alpha_dec = new uint8_t[sz * 3];
+	for (int i = 0; i < sz; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			alpha_rgb[i*3+j] = m_alpha_pixels[i*4+j];
+		}
+	}
+
+	int bw = m_width / 4;
+	int bh = m_height / 4;
+
+	m_etc1_size = bw * bh * 8;
+	m_etc1_pixels = new uint8_t[m_etc1_size];
+	m_etc1_alpha_pixels = new uint8_t[m_etc1_size];
+
+	uint8_t* ptr_rgb = m_etc1_pixels;
+	uint8_t* ptr_alpha = m_etc1_alpha_pixels;
+	for (int y = 0; y < bh; ++y) {
+		for (int x = 0; x < bw; ++x) {
+			unsigned int block1, block2;
+			// rgb
+			compressBlockETC1Exhaustive(rgb_rgb, rgb_dec, m_width, m_height, x * 4, y * 4, block1, block2);
+			ptr_rgb[0] = (block1 >> 24) & 0xFF;
+			ptr_rgb[1] = (block1 >> 16) & 0xFF;
+			ptr_rgb[2] = (block1 >> 8) & 0xFF;
+			ptr_rgb[3] =  block1 & 0xFF;
+			ptr_rgb[4] = (block2 >> 24) & 0xFF;
+			ptr_rgb[5] = (block2 >> 16) & 0xFF;
+			ptr_rgb[6] = (block2 >> 8) & 0xFF;
+			ptr_rgb[7] =  block2 & 0xFF;
+			ptr_rgb += 8;			
+			// alpha
+			compressBlockETC1Exhaustive(alpha_rgb, alpha_dec, m_width, m_height, x * 4, y * 4, block1, block2);
+			ptr_alpha[0] = (block1 >> 24) & 0xFF;
+			ptr_alpha[1] = (block1 >> 16) & 0xFF;
+			ptr_alpha[2] = (block1 >> 8) & 0xFF;
+			ptr_alpha[3] =  block1 & 0xFF;
+			ptr_alpha[4] = (block2 >> 24) & 0xFF;
+			ptr_alpha[5] = (block2 >> 16) & 0xFF;
+			ptr_alpha[6] = (block2 >> 8) & 0xFF;
+			ptr_alpha[7] =  block2 & 0xFF;
+			ptr_alpha += 8;
+		}
+	}
+
+	delete[] rgb_rgb;
+	delete[] alpha_rgb;
 }
 
 }
