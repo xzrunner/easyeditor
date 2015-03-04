@@ -48,7 +48,9 @@ void ILibraryPage::reloadTexture() const
 void ILibraryPage::AddItem(ListItem* item)
 {
 	m_list->insert(item);
-	m_canvas->resetViewport();
+	if (m_canvas) {
+		m_canvas->resetViewport();
+	}
 }
 
 void ILibraryPage::initLayout(bool draggable/* = true*/)
