@@ -45,11 +45,15 @@ private:
 	void ReduceNode(float tolerance);
 	void ReduceEdge(float area_tol, float perimeter_tol);
 
+	void InitRotateLUT();
+
 private:
 	const std::vector<d2d::Vector>& m_raw_border;
 	const std::vector<d2d::Vector>& m_raw_border_merged;
 
 	std::vector<d2d::Vector> m_fine_border;
+
+	std::vector<d2d::Vector> m_rotate_lut;
 
 }; // ExtractOutlineFine
 

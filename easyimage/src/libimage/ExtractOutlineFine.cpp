@@ -13,6 +13,7 @@ ExtractOutlineFine::ExtractOutlineFine(const std::vector<d2d::Vector>& raw_borde
 	: m_raw_border(raw_border)
 	, m_raw_border_merged(raw_border_merged)
 {
+	InitRotateLUT();
 }
 
 void ExtractOutlineFine::Trigger(float area_tol, float perimeter_tol)
@@ -403,21 +404,21 @@ void ExtractOutlineFine::EndPosExplore(float step, const d2d::Vector& p0, const 
 void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vector& end, 
 									   d2d::Vector& mid, float& score) const
 {
-	// order
-	// 3 4 5
-	// 2   6
-	// 1 0 7
-	static const int DIR_COUNT = 8;
-	static const d2d::Vector DIRS[DIR_COUNT] = {
-		d2d::Vector( 0, -1),
-		d2d::Vector(-1, -1),
-		d2d::Vector(-1,  0),
-		d2d::Vector(-1,  1),
-		d2d::Vector( 0,  1),
-		d2d::Vector( 1,  1),
-		d2d::Vector( 1,  0),
-		d2d::Vector( 1, -1),
-	};
+	//// order
+	//// 3 4 5
+	//// 2   6
+	//// 1 0 7
+	//static const int DIR_COUNT = 8;
+	//static const d2d::Vector DIRS[DIR_COUNT] = {
+	//	d2d::Vector( 0, -1),
+	//	d2d::Vector(-1, -1),
+	//	d2d::Vector(-1,  0),
+	//	d2d::Vector(-1,  1),
+	//	d2d::Vector( 0,  1),
+	//	d2d::Vector( 1,  1),
+	//	d2d::Vector( 1,  0),
+	//	d2d::Vector( 1, -1),
+	//};
 
 	static const int STEPS_COUNT = 6;
 	static const float STEPS[STEPS_COUNT] = {128, 64, 32, 16, 8, 4};
@@ -430,8 +431,9 @@ void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vect
 		while (true)
 		{
 			float old_score = score;
-			for (int j = 0; j < DIR_COUNT; ++j) {
-				d2d::Vector offset = DIRS[j] * step;
+			for (int j = 0, m = m_rotate_lut.size(); j < m; ++j)
+			{
+				d2d::Vector offset = m_rotate_lut[j] * step;
 				d2d::Vector curr_mid = mid + offset;
 				float area = d2d::Math::GetTriangleArea(start, curr_mid, end);
 				if (area > score &&
@@ -439,10 +441,10 @@ void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vect
 
 						// !d2d::Math::isPointInArea(curr_mid, m_raw_border_merged)
 
-					if (IsAddTriLeagal(start, end, curr_mid)) {
-						score = area;
-						mid = curr_mid;
-					}
+						if (IsAddTriLeagal(start, end, curr_mid)) {
+							score = area;
+							mid = curr_mid;
+						}
 				}
 			}
 			if (score <= old_score) {
@@ -576,6 +578,20 @@ void ExtractOutlineFine::ReduceEdge(float area_tol, float perimeter_tol)
 			}
 		}
 	} while (success && m_fine_border.size() > 3);
+}
+
+void ExtractOutlineFine::InitRotateLUT()
+{
+	static const int DIR_COUNT = 32;
+
+	m_rotate_lut.clear();
+	m_rotate_lut.reserve(DIR_COUNT);
+	for (int i = 0; i < DIR_COUNT; ++i) 
+	{
+		float angle = 2 * d2d::PI * i / DIR_COUNT;
+		d2d::Vector dir(cos(angle), sin(angle));
+		m_rotate_lut.push_back(dir);
+	}
 }
 
 }
