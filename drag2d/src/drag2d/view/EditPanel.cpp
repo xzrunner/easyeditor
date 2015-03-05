@@ -126,6 +126,8 @@ void EditPanel::onMouse(wxMouseEvent& event)
 		m_editOP->onMouseLeftDClick(event.GetX(), event.GetY());
 	else if (event.GetWheelRotation())
 		m_editOP->onMouseWheelRotation(event.GetX(), event.GetY(), event.GetWheelRotation());
+
+	OnMouseHook(event);
 }
 
 void EditPanel::onKeyDown(wxKeyEvent& event)

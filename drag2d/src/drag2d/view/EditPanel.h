@@ -86,6 +86,8 @@ namespace d2d
 	protected:
 		void onSize(wxSizeEvent& event);
 
+		virtual void OnMouseHook(wxMouseEvent& event) {}
+
 	protected:
 		AbstractEditOP* m_editOP;
 

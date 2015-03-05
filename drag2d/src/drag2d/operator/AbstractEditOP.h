@@ -32,6 +32,8 @@ namespace d2d
 		virtual bool onDraw() const { return false; }
 		virtual bool clear() { return false; }
 
+		virtual bool IsEmpty() const { return true; }
+
 	protected:
 		EditPanel* m_editPanel;
 

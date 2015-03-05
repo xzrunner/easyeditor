@@ -422,6 +422,11 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 	return NULL;
 }
 
+bool ArrangeSpriteImpl::IsSelectionEmpty() const
+{
+	return m_selection->IsEmpty();
+}
+
 void ArrangeSpriteImpl::onDirectionKeyDown(DirectionType type)
 {
 	if (!m_op_state) return;

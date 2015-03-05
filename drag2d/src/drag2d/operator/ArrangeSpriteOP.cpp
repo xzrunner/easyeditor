@@ -121,6 +121,12 @@ bool ArrangeSpriteOP<TBase>::clear()
 }
 
 template <typename TBase>
+bool ArrangeSpriteOP<TBase>::IsEmpty() const
+{
+	return m_impl->IsSelectionEmpty();
+}
+
+template <typename TBase>
 ISprite* ArrangeSpriteOP<TBase>::selectByPos(const Vector& pos) const
 {
 	ISprite* sprite = NULL;

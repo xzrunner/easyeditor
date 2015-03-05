@@ -1,0 +1,106 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easymap", "projects\easymap.vcproj", "{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA} = {B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C} = {02A5FE18-62B6-4471-953C-1650CBD6C34C}
+		{E5B2631F-C25D-4253-A9CB-A57EF357B004} = {E5B2631F-C25D-4253-A9CB-A57EF357B004}
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C} = {D41C0B3E-F0A0-4A1F-A568-0100C839406C}
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909} = {5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38} = {1C3B5344-2217-44F5-B5F0-A551B7B5AB38}
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7} = {C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038} = {E1CFC0B9-F8A8-4F14-930A-E88A436FC038}
+		{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2} = {9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}
+		{2E48C7D2-F176-403F-879D-76046CA224CC} = {2E48C7D2-F176-403F-879D-76046CA224CC}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+		{54C54BE5-7708-41F3-9375-8BA4B9AA983C} = {54C54BE5-7708-41F3-9375-8BA4B9AA983C}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdrag2d", "..\..\..\drag2d\platform\msvc2008\projects\libdrag2d.vcproj", "{E69A7CDE-521A-45B5-B776-AD16F72F6A07}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmap", "projects\libmap.vcproj", "{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libimage", "..\..\..\easyimage\platform\msvc2008\projects\libimage.vcproj", "{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libmesh", "..\..\..\easymesh\platform\msvc2008\projects\libmesh.vcproj", "{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libscale9", "..\..\..\easyscale9\platform\msvc2008\projects\libscale9.vcproj", "{E5B2631F-C25D-4253-A9CB-A57EF357B004}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libanim", "..\..\..\easyanim\platform\msvc2008\projects\libanim.vcproj", "{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libparticle2d", "..\..\..\easyparticle2d\platform\msvc2008\projects\libparticle2d.vcproj", "{54C54BE5-7708-41F3-9375-8BA4B9AA983C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libparticle3d", "..\..\..\easyparticle3d\platform\msvc2008\projects\libparticle3d.vcproj", "{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libshape", "..\..\..\easyshape\platform\msvc2008\projects\libshape.vcproj", "{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcoco", "..\..\..\coceditor\platform\msvc2008\projects\libcoco.vcproj", "{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyejoy2d", "..\..\..\easyejoy2d\platform\msvc2008\projects\easyejoy2d.vcproj", "{2E48C7D2-F176-403F-879D-76046CA224CC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcomplex", "..\..\..\easycomplex\platform\msvc2008\projects\libcomplex.vcproj", "{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Debug|Win32.Build.0 = Debug|Win32
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Release|Win32.ActiveCfg = Release|Win32
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Release|Win32.Build.0 = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.Build.0 = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.ActiveCfg = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.Build.0 = Release|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Debug|Win32.Build.0 = Debug|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Release|Win32.ActiveCfg = Release|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Release|Win32.Build.0 = Release|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.Build.0 = Debug|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.ActiveCfg = Release|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.Build.0 = Release|Win32
+		{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}.Debug|Win32.Build.0 = Debug|Win32
+		{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}.Release|Win32.ActiveCfg = Release|Win32
+		{9DC03BCC-3C8C-4BB8-8811-336F295DF7E2}.Release|Win32.Build.0 = Release|Win32
+		{E5B2631F-C25D-4253-A9CB-A57EF357B004}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E5B2631F-C25D-4253-A9CB-A57EF357B004}.Debug|Win32.Build.0 = Debug|Win32
+		{E5B2631F-C25D-4253-A9CB-A57EF357B004}.Release|Win32.ActiveCfg = Release|Win32
+		{E5B2631F-C25D-4253-A9CB-A57EF357B004}.Release|Win32.Build.0 = Release|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Debug|Win32.Build.0 = Debug|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Release|Win32.ActiveCfg = Release|Win32
+		{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}.Release|Win32.Build.0 = Release|Win32
+		{54C54BE5-7708-41F3-9375-8BA4B9AA983C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{54C54BE5-7708-41F3-9375-8BA4B9AA983C}.Debug|Win32.Build.0 = Debug|Win32
+		{54C54BE5-7708-41F3-9375-8BA4B9AA983C}.Release|Win32.ActiveCfg = Release|Win32
+		{54C54BE5-7708-41F3-9375-8BA4B9AA983C}.Release|Win32.Build.0 = Release|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Debug|Win32.Build.0 = Debug|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Release|Win32.ActiveCfg = Release|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Release|Win32.Build.0 = Release|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Debug|Win32.Build.0 = Debug|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Release|Win32.ActiveCfg = Release|Win32
+		{C1A2E85C-CF62-46A9-B46C-DFA12EC725E7}.Release|Win32.Build.0 = Release|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Debug|Win32.Build.0 = Debug|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Release|Win32.ActiveCfg = Release|Win32
+		{1C3B5344-2217-44F5-B5F0-A551B7B5AB38}.Release|Win32.Build.0 = Release|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Debug|Win32.Build.0 = Debug|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Release|Win32.ActiveCfg = Release|Win32
+		{2E48C7D2-F176-403F-879D-76046CA224CC}.Release|Win32.Build.0 = Release|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Debug|Win32.Build.0 = Debug|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.ActiveCfg = Release|Win32
+		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

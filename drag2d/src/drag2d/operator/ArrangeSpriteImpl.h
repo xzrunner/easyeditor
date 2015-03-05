@@ -42,6 +42,8 @@ public:
 	// query edited sprite, include its extra edit region
 	ISprite* QueryEditedSprite(const Vector& pos) const;
 
+	bool IsSelectionEmpty() const;
+
 protected:
 	virtual void onDirectionKeyDown(DirectionType type);
 	virtual void onSpaceKeyDown();

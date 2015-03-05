@@ -34,6 +34,8 @@ public:
 	virtual bool onDraw() const;
 	virtual bool clear();
 
+	virtual bool IsEmpty() const;
+
 protected:
 	virtual ISprite* selectByPos(const Vector& pos) const;
 
