@@ -22,18 +22,18 @@ public:
 	static void StoreToFile(const char* filename, const std::vector<d2d::IShape*>& shapes, 
 		const d2d::ISymbol* bg);
 
-	static d2d::IShape* LoadShape(const Json::Value& value);
-	static Json::Value StoreShape(d2d::IShape* shape);
+	static d2d::IShape* LoadShape(const std::string& dir, const Json::Value& value);
+	static Json::Value StoreShape(const std::string& dir, d2d::IShape* shape);
 
 private:
 	static d2d::IShape* LoadBezier(const Json::Value& value);
-	static d2d::IShape* LoadPolygon(const Json::Value& value);
+	static d2d::IShape* LoadPolygon(const std::string& dir, const Json::Value& value);
 	static d2d::IShape* LoadChain(const Json::Value& value);
 	static d2d::IShape* LoadRect(const Json::Value& value);
 	static d2d::IShape* LoadCircle(const Json::Value& value);
 
 	static Json::Value StoreBezier(const BezierShape* bezier);
-	static Json::Value StorePolygon(const PolygonShape* poly);
+	static Json::Value StorePolygon(const std::string& dir, const PolygonShape* poly);
 	static Json::Value StoreChain(const ChainShape* chain);
 	static Json::Value StoreRect(const RectShape* rect);
 	static Json::Value StoreCircle(const CircleShape* circle);

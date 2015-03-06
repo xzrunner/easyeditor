@@ -36,6 +36,9 @@ public:
 	void SetMaterialColor(const d2d::Colorf& color);
 	void SetMaterialTexture(d2d::ImageSymbol* image);
 
+	Json::Value StoreMaterial(const std::string& dirpath) const;
+	void LoadMaterial(const std::string& dirpath, const Json::Value& val);
+
 private:
 	class Material : public ICloneable
 	{
@@ -45,6 +48,8 @@ private:
 		virtual ~Material() {}
 
 		virtual Material* clone() const = 0;
+
+		virtual Json::Value StoreMaterial(const std::string& dirpath) const = 0;
 
 		virtual void Translate(const d2d::Vector& offset);
 		virtual void Draw() const = 0;
@@ -73,6 +78,8 @@ private:
 
 		virtual Color* clone() const;
 
+		virtual Json::Value StoreMaterial(const std::string& dirpath) const;
+
 		virtual void Draw() const;
 
 	protected:
@@ -94,6 +101,8 @@ private:
 		virtual ~Texture();
 
 		virtual Texture* clone() const;
+
+		virtual Json::Value StoreMaterial(const std::string& dirpath) const;
 
 		virtual void Translate(const d2d::Vector& offset);
 		virtual void Draw() const;

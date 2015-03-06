@@ -42,6 +42,8 @@ void StageCanvas::onDraw()
 
  	const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_editPanel)->GetSymbol();
 	symbol.draw(d2d::Matrix());
+
+	m_editPanel->drawEditTemp();
 }
 
 void StageCanvas::onMouse(wxMouseEvent& event)

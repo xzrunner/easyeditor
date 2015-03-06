@@ -136,6 +136,8 @@ easyejoy2d/platform/msvc2008/easyejoy2d
 easyejoy2d/platform/msvc2008/testdtex
 easymap/platform/msvc2008/easymap
 easymap/platform/msvc2008/libmap
+easytexture/platform/msvc2008/easytexture
+easytexture/platform/msvc2008/libtexture
 
 easy3d/platform/msvc2008/easy3d
 easyphysics/platform/msvc2008/easyphysics

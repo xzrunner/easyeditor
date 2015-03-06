@@ -45,14 +45,18 @@ bool PolygonShape::isContain(const d2d::Vector& pos) const
 void PolygonShape::Translate(const d2d::Vector& offset)
 {
 	ChainShape::Translate(offset);
-	m_material->Translate(offset);
+	if (m_material) {
+		m_material->Translate(offset);
+	}
 }
 
 void PolygonShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
-	m_material->Draw();
+	if (m_material) {
+		m_material->Draw();
+	}
 
-	if (d2d::Settings::bDisplayTrisEdge) {
+	if (d2d::Settings::bDisplayTrisEdge && m_material) {
 		m_material->DrawTrisEdge();
 	}
 
@@ -68,7 +72,9 @@ d2d::IPropertySetting* PolygonShape::createPropertySetting(d2d::EditPanel* editP
 
 void PolygonShape::refresh()
 {
-	m_material->Refresh(m_vertices);
+	if (m_material) {
+		m_material->Refresh(m_vertices);
+	}
 }
 
 void PolygonShape::SetMaterialColor(const d2d::Colorf& color)
@@ -85,6 +91,40 @@ void PolygonShape::SetMaterialTexture(d2d::ImageSymbol* image)
 		delete m_material;
 	}
 	m_material = new Texture(m_vertices, image);
+}
+
+Json::Value PolygonShape::StoreMaterial(const std::string& dirpath) const
+{
+	if (m_material) {
+		return m_material->StoreMaterial(dirpath);
+	} else {
+		return NULL;
+	}
+}
+
+void PolygonShape::LoadMaterial(const std::string& dirpath, const Json::Value& val)
+{
+	if (m_material) {
+		delete m_material;
+		m_material = NULL;
+	}
+
+	if (val["type"].isNull()) {
+		return;
+	}
+
+	std::string type = val["type"].asString();
+	if (type == "color") {
+		d2d::Colorf col;
+		col.unpack(val["color"].asUInt());
+		m_material = new Color(m_vertices, col);
+	} else if (type == "texture") {
+		std::string path = val["texture path"].asString();
+		d2d::ImageSymbol* symbol = static_cast<d2d::ImageSymbol*>(
+			d2d::SymbolMgr::Instance()->fetchSymbol(dirpath + "/" + path));
+		m_material = new Texture(m_vertices, symbol);
+		symbol->Release();
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -150,6 +190,15 @@ clone() const
 	return new Color(*this);
 }
 
+Json::Value PolygonShape::Color::
+StoreMaterial(const std::string& dirpath) const
+{
+	Json::Value val;
+	val["type"] = "color";
+	val["color"] = m_color.pack();
+	return val;
+}
+
 void PolygonShape::Color::
 Draw() const
 {
@@ -211,6 +260,15 @@ PolygonShape::Texture* PolygonShape::Texture::
 clone() const
 {
 	return new Texture(*this);
+}
+
+Json::Value PolygonShape::Texture::
+StoreMaterial(const std::string& dirpath) const
+{
+	Json::Value val;
+	val["type"] = "texture";
+	val["texture path"] = d2d::FilenameTools::getRelativePath(dirpath, m_image->getFilepath()).ToStdString();
+	return val;
 }
 
 void PolygonShape::Texture::

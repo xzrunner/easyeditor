@@ -22,16 +22,16 @@ void FileIO::LoadFromFile(const char* filename,
 	reader.parse(fin, value);
 	fin.close();
 
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	bg_filepath = dir + "\\" + value["bg_symbol"].asString();
+
 	int i = 0;
 	Json::Value shapeValue = value["shapes"][i++];
 	while (!shapeValue.isNull()) {
-		d2d::IShape* shape = LoadShape(shapeValue);
+		d2d::IShape* shape = LoadShape(dir, shapeValue);
 		shapes.push_back(shape);
 		shapeValue = value["shapes"][i++];
 	}
-
-	wxString dir = d2d::FilenameTools::getFileDir(filename);
-	bg_filepath = dir + "\\" + value["bg_symbol"].asString();
 }
 
 void FileIO::LoadFromFile(const char* filename, 
@@ -46,15 +46,16 @@ void FileIO::LoadFromFile(const char* filename,
 	reader.parse(fin, value);
 	fin.close();
 
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
+
 	int i = 0;
 	Json::Value shapeValue = value["shapes"][i++];
 	while (!shapeValue.isNull()) {
-		d2d::IShape* shape = LoadShape(shapeValue);
+		d2d::IShape* shape = LoadShape(dir, shapeValue);
 		shapes.push_back(shape);
 		shapeValue = value["shapes"][i++];
 	}
 
-	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["bg_symbol"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 	d2d::obj_assign((d2d::Object*&)bg, symbol);
@@ -65,10 +66,10 @@ void FileIO::StoreToFile(const char* filename,
 						 const std::vector<d2d::IShape*>& shapes, 
 						 const d2d::ISymbol* bg)
 {
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	Json::Value value;
-
 	for (size_t i = 0, n = shapes.size(); i < n; ++i) {
-		value["shapes"][i] = StoreShape(shapes[i]);
+		value["shapes"][i] = StoreShape(dir, shapes[i]);
 	}
 
 	if (bg) {
@@ -85,7 +86,7 @@ void FileIO::StoreToFile(const char* filename,
 	fout.close();
 }
 
-d2d::IShape* FileIO::LoadShape(const Json::Value& value)
+d2d::IShape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 {
 	d2d::IShape* shape = NULL;
 
@@ -94,7 +95,7 @@ d2d::IShape* FileIO::LoadShape(const Json::Value& value)
 	else if (!value["bezier"].isNull())
 		shape = LoadBezier(value["bezier"]);
 	else if (!value["polygon"].isNull())
-		shape = LoadPolygon(value["polygon"]);
+		shape = LoadPolygon(dir, value["polygon"]);
 	else if (!value["chain"].isNull())
 		shape = LoadChain(value["chain"]);
 	else if (!value["rect"].isNull())
@@ -105,14 +106,14 @@ d2d::IShape* FileIO::LoadShape(const Json::Value& value)
 	return shape;
 }
 
-Json::Value FileIO::StoreShape(d2d::IShape* shape)
+Json::Value FileIO::StoreShape(const std::string& dir, d2d::IShape* shape)
 {
 	Json::Value value;
 
 	if (BezierShape* bezier = dynamic_cast<BezierShape*>(shape)) {
 		value["bezier"] = StoreBezier(bezier);
 	} else if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape)) {
-		value["polygon"] = StorePolygon(poly);
+		value["polygon"] = StorePolygon(dir, poly);
 	} else if (ChainShape* chain = dynamic_cast<ChainShape*>(shape)) {
 		value["chain"] = StoreChain(chain);
 	} else if (RectShape* rect = dynamic_cast<RectShape*>(shape)) {
@@ -139,7 +140,7 @@ d2d::IShape* FileIO::LoadBezier(const Json::Value& value)
 	return bezier;
 }
 
-d2d::IShape* FileIO::LoadPolygon(const Json::Value& value)
+d2d::IShape* FileIO::LoadPolygon(const std::string& dir, const Json::Value& value)
 {
 	std::vector<d2d::Vector> vertices;
 	size_t num = value["vertices"]["x"].size();
@@ -152,6 +153,7 @@ d2d::IShape* FileIO::LoadPolygon(const Json::Value& value)
 
 	PolygonShape* poly = new PolygonShape(vertices);
 	poly->name = value["name"].asString();
+	poly->LoadMaterial(dir, value["material"]);
 
 	return poly;
 }
@@ -215,7 +217,7 @@ Json::Value FileIO::StoreBezier(const BezierShape* bezier)
 	return value;
 }
 
-Json::Value FileIO::StorePolygon(const PolygonShape* poly)
+Json::Value FileIO::StorePolygon(const std::string& dir, const PolygonShape* poly)
 {
 	Json::Value value;
 
@@ -227,6 +229,8 @@ Json::Value FileIO::StorePolygon(const PolygonShape* poly)
 		value["vertices"]["x"][i] = vertices[i].x;
 		value["vertices"]["y"][i] = vertices[i].y;
 	}
+
+	value["material"] = poly->StoreMaterial(dir);
 
 	return value;
 }

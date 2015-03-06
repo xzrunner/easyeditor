@@ -9,12 +9,11 @@ namespace libshape
 
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 								 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-								 d2d::PropertySettingPanel* propertyPanel,
-								 wxColourData& colorData)
+								 d2d::PropertySettingPanel* propertyPanel/*, wxColourData& colorData*/)
 								 : NodeCaptureCMPT<EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP> >(parent, name, editPanel, shapesImpl, propertyPanel)
 	, m_shapesImpl(shapesImpl)
 	, m_color(*wxBLACK)
-	, m_colorData(colorData)
+//	, m_colorData(colorData)
 {
 	m_editOP = NULL;
 
@@ -82,12 +81,12 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 	{
 	case 0:
 		{
-			wxColourDialog dialog(this, &m_colorData);
+			wxColourDialog dialog(this/*, &m_colorData*/);
 			dialog.SetTitle(wxT("Ñ¡ÔñÑÕÉ«"));
 			if (dialog.ShowModal() == wxID_OK)
 			{
 				m_color = dialog.GetColourData().GetColour();
-				m_colorData = dialog.GetColourData();
+//				m_colorData = dialog.GetColourData();
 			}
 		}
 		break;

@@ -10,13 +10,12 @@
 namespace libshape
 {
 
-	class DrawPolygonCMPT : public NodeCaptureCMPT<EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP> >
+class DrawPolygonCMPT : public NodeCaptureCMPT<EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP> >
 {
 public:
 	DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel,
-		wxColourData& colorData);
+		d2d::PropertySettingPanel* propertyPanel/*, wxColourData& colorData*/);
 
 	virtual void updateControlValue();
 
@@ -36,7 +35,7 @@ private:
 	d2d::MultiShapesImpl* m_shapesImpl;
 
 	wxColour m_color;
-	wxColourData& m_colorData;
+//	wxColourData& m_colorData;
 
 	d2d::Bitmap m_bitmap;
 	wxString m_filePath;
