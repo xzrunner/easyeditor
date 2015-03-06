@@ -37,7 +37,7 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			const wxString filename = filenames[i];
+			const wxString& filename = filenames[i];
 			std::string type = filename.substr(filename.find_last_of(".") + 1);
 			StringTools::toLower(type);
 			if (type == "json") {

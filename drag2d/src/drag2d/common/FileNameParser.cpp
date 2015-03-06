@@ -15,6 +15,7 @@ static const wxString TAG_SCRIPTS = "scripts";
 static const wxString TAG_PARTICLE2D = "particle2d";
 static const wxString TAG_PARTICLE3D = "particle";
 static const wxString TAG_EJOY2D = "ejoy2d";
+static const wxString TAG_TEXTURE = "texture";
 
 FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 {
@@ -29,17 +30,18 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		const wxString jsonName = filename.substr(0, filename.find_last_of('.'));
 		if (jsonName.find('_') == -1) return e_unknown;
 
-		const wxString jsonExtension = jsonName.substr(jsonName.find_last_of('_') + 1);
+		const wxString ext = jsonName.substr(jsonName.find_last_of('_') + 1);
 
-		if (jsonExtension == TAG_SHAPE) return e_shape;
-		else if (jsonExtension == TAG_COMPLEX) return e_complex;
-		else if (jsonExtension == TAG_ANIM) return e_anim;
-		else if (jsonExtension == TAG_PATCH) return e_scale9;
-		else if (jsonExtension == TAG_FONTBLANK) return e_fontblank;
-		else if (jsonExtension == TAG_MESH) return e_mesh;
-		else if (jsonExtension == TAG_PARTICLE3D) return e_particle3d;
-		else if (jsonExtension == TAG_PARTICLE2D) return e_particle2d;
-		else if (jsonExtension == TAG_EJOY2D) return e_ejoy2d;
+		if (ext == TAG_SHAPE) return e_shape;
+		else if (ext == TAG_COMPLEX) return e_complex;
+		else if (ext == TAG_ANIM) return e_anim;
+		else if (ext == TAG_PATCH) return e_scale9;
+		else if (ext == TAG_FONTBLANK) return e_fontblank;
+		else if (ext == TAG_MESH) return e_mesh;
+		else if (ext == TAG_PARTICLE3D) return e_particle3d;
+		else if (ext == TAG_PARTICLE2D) return e_particle2d;
+		else if (ext == TAG_EJOY2D) return e_ejoy2d;
+		else if (ext == TAG_TEXTURE) return e_texture;
 		else return e_unknown;
 	}
 	else if (extension == ".lua")
@@ -65,41 +67,44 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 
 wxString FileNameParser::getFileTag(Type type)
 {
-	wxString extension;
+	wxString ext;
 	switch (type)
 	{
 	case e_shape:
-		extension = TAG_SHAPE;
+		ext = TAG_SHAPE;
 		break;
 	case e_mesh:
-		extension = TAG_MESH;
+		ext = TAG_MESH;
 		break;
 	case e_complex:
-		extension = TAG_COMPLEX;
+		ext = TAG_COMPLEX;
 		break;
 	case e_anim:
-		extension = TAG_ANIM;
+		ext = TAG_ANIM;
 		break;
 	case e_scale9:
-		extension = TAG_PATCH;
+		ext = TAG_PATCH;
 		break;
 	case e_fontblank:
-		extension = TAG_FONTBLANK;
+		ext = TAG_FONTBLANK;
 		break;
 	case e_scripts:
-		extension = TAG_SCRIPTS;
+		ext = TAG_SCRIPTS;
 		break;
 	case e_particle2d:
-		extension = TAG_PARTICLE2D;
+		ext = TAG_PARTICLE2D;
 		break;
 	case e_particle3d:
-		extension = TAG_PARTICLE3D;
+		ext = TAG_PARTICLE3D;
 		break;
 	case e_ejoy2d:
-		extension = TAG_EJOY2D;
+		ext = TAG_EJOY2D;
+		break;
+	case e_texture:
+		ext = TAG_TEXTURE;
 		break;
 	}
-	return extension;
+	return ext;
 }
 
 bool FileNameParser::isType(const wxString& filename, Type type)

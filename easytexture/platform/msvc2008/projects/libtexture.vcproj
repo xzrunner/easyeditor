@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="libtexture"
-	ProjectGUID="{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
+	ProjectGUID="{4937E011-9C27-4E8E-87F8-1924F41E0649}"
 	RootNamespace="libtexture"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

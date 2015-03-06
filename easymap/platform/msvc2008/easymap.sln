@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easymap", "projects\easymap.vcproj", "{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA} = {B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}
+		{4937E011-9C27-4E8E-87F8-1924F41E0649} = {4937E011-9C27-4E8E-87F8-1924F41E0649}
 		{02A5FE18-62B6-4471-953C-1650CBD6C34C} = {02A5FE18-62B6-4471-953C-1650CBD6C34C}
 		{E5B2631F-C25D-4253-A9CB-A57EF357B004} = {E5B2631F-C25D-4253-A9CB-A57EF357B004}
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C} = {D41C0B3E-F0A0-4A1F-A568-0100C839406C}
@@ -40,6 +41,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyejoy2d", "..\..\..\easyejoy2d\platform\msvc2008\projects\easyejoy2d.vcproj", "{2E48C7D2-F176-403F-879D-76046CA224CC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcomplex", "..\..\..\easycomplex\platform\msvc2008\projects\libcomplex.vcproj", "{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libtexture", "..\..\..\easytexture\platform\msvc2008\projects\libtexture.vcproj", "{4937E011-9C27-4E8E-87F8-1924F41E0649}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +102,10 @@ Global
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Debug|Win32.Build.0 = Debug|Win32
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.ActiveCfg = Release|Win32
 		{5F4CBA3E-B2B5-46D5-A1D2-77AB16DFD909}.Release|Win32.Build.0 = Release|Win32
+		{4937E011-9C27-4E8E-87F8-1924F41E0649}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4937E011-9C27-4E8E-87F8-1924F41E0649}.Debug|Win32.Build.0 = Debug|Win32
+		{4937E011-9C27-4E8E-87F8-1924F41E0649}.Release|Win32.ActiveCfg = Release|Win32
+		{4937E011-9C27-4E8E-87F8-1924F41E0649}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
