@@ -1,17 +1,17 @@
-#ifndef _DRAG2D_SPRITES_CONTAINER_H_
-#define _DRAG2D_SPRITES_CONTAINER_H_
+#ifndef _DRAG2D_SHAPES_CONTAINER_H_
+#define _DRAG2D_SHAPES_CONTAINER_H_
 
 #include "IDataContainer.h"
 
 namespace d2d
 {
 
-class ISprite;
+class IShape;
 
-class SpritesContainer : public IDataContainer
+class ShapesContainer : public IDataContainer
 {
 public:
-	virtual ~SpritesContainer();
+	virtual ~ShapesContainer();
 
 	//
 	// IDataContainer interface
@@ -23,10 +23,10 @@ public:
 	virtual void resetOrder(const Object* obj, bool up);
 
 private:
-	std::vector<ISprite*> m_sprites;
+	std::vector<IShape*> m_shapes;
 
-}; // SpritesContainer
+}; // ShapesContainer
 
 }
 
-#endif // _DRAG2D_SPRITES_CONTAINER_H_
+#endif // _DRAG2D_SHAPES_CONTAINER_H_

@@ -1,7 +1,6 @@
 #include "Task.h"
 
 #include <easytexture.h>
-#include <easyshape.h>
 
 namespace etexture
 {
@@ -26,47 +25,12 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filename);
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
-
-	int i = 0;
-	Json::Value shape_val = value["shapes"][i++];
-	while (!shape_val.isNull()) {
-		d2d::IShape* shape = libshape::FileIO::LoadShape(dir, shape_val);
-		m_stage->insertShape(shape);
-		shape_val = value["shapes"][i++];
-	}
+	m_stage->GetSymbol()->loadFromFile(filename);
 }
 
 void Task::store(const char* filename) const
 {
-	std::vector<d2d::IShape*> shapes;
-	m_stage->traverseShapes(d2d::FetchAllVisitor<d2d::IShape>(shapes));
-
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
-
-	Json::Value value;
-	for (size_t i = 0; i < shapes.size(); ++i) {
-		d2d::IShape* shape = shapes[i];
-		value["shapes"][i] = libshape::FileIO::StoreShape(dir, shape);
-	}
-
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(filename);
-	std::locale::global(std::locale("C"));
-	if (fout.fail()) {
-		throw d2d::Exception("Can't save file: %s !", filename);
-	}
-	writer.write(fout, value);
-	fout.close();
+	FileSaver::Store(filename, m_stage->GetSymbol());
 }
 
 bool Task::isDirty() const

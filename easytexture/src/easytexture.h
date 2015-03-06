@@ -2,6 +2,8 @@
 #define _EASYTEXTURE_H_
 
 #include "libtexture/config.h"
+#include "libtexture/Symbol.h"
+#include "libtexture/FileSaver.h"
 #include "libtexture/LibraryPanel.h"
 #include "libtexture/StagePanel.h"
 #include "libtexture/ToolbarPanel.h"

@@ -183,14 +183,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\src\easymap\FileIO.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\FileIO.h"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\easymap\main.cpp"
 			>
 		</File>

@@ -8,8 +8,7 @@
 namespace tdtex
 {
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
-	public d2d::ShapesPanelImpl
+class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 

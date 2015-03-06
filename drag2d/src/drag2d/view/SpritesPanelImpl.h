@@ -1,13 +1,13 @@
 #pragma once
 
 #include "MultiSpritesImpl.h"
-#include "IDataContainer.h"
 
 namespace d2d
 {
 	class EditPanel;
 	class LibraryPanel;
 	class ISprite;
+	class IDataContainer;
 
 	class SpritesPanelImpl : public MultiSpritesImpl
 	{

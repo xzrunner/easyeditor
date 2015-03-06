@@ -1812,6 +1812,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\view\ShapesContainer.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\ShapesContainer.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\view\SpritesContainer.cpp"
 						>
 					</File>

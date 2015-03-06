@@ -1,4 +1,5 @@
 #include "SpritesPanelImpl.h"
+#include "IDataContainer.h"
 
 #include "EditPanel.h"
 #include "SpriteDropTarget.h"

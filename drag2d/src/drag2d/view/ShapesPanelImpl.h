@@ -1,26 +1,35 @@
-#pragma once
+#ifndef _DRAG2D_SHAPES_PANEL_IMPL_H_
+#define _DRAG2D_SHAPES_PANEL_IMPL_H_
 
 #include "MultiShapesImpl.h"
 
 namespace d2d
 {
-	class IShape;
 
-	class ShapesPanelImpl : public MultiShapesImpl
-	{
-	public:
-		ShapesPanelImpl(wxWindow* wnd);
-		virtual ~ShapesPanelImpl();
+class IShape;
+class IDataContainer;
 
-		virtual void traverseShapes(IVisitor& visitor, 
-			TraverseType type = e_allExisting) const;
-		virtual void removeShape(IShape* shape);
-		virtual void insertShape(IShape* shape);
-		virtual void clearShapes();
+class ShapesPanelImpl : public MultiShapesImpl
+{
+public:
+	ShapesPanelImpl(wxWindow* parent);
+	ShapesPanelImpl(wxWindow* parent, IDataContainer* container);
+	virtual ~ShapesPanelImpl();
 
-	private:
-		std::vector<IShape*> m_shapes;
+	//
+	// MultiShapesImpl interface
+	//
+	virtual void traverseShapes(IVisitor& visitor, 
+		TraverseType type = e_allExisting) const;
+	virtual void removeShape(IShape* shape);
+	virtual void insertShape(IShape* shape);
+	virtual void clearShapes();
 
-	}; // ShapesPanelImpl
+private:
+	IDataContainer* m_container;
+
+}; // ShapesPanelImpl
+
 }
 
+#endif // _DRAG2D_SHAPES_PANEL_IMPL_H_

@@ -204,10 +204,46 @@
 		<Filter
 			Name="dataset"
 			>
+			<File
+				RelativePath="..\..\..\src\libtexture\Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtexture\Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtexture\Symbol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtexture\Symbol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtexture\SymbolContainer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtexture\SymbolContainer.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="editop"
 			>
+		</Filter>
+		<Filter
+			Name="fileio"
+			>
+			<File
+				RelativePath="..\..\..\src\libtexture\FileSaver.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtexture\FileSaver.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libtexture\config.h"

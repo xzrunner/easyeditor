@@ -92,13 +92,13 @@ namespace d2d
 			{
 				if (up && i != n - 1)
 				{
-					ISprite* tmp = objs[i];
+					T* tmp = objs[i];
 					objs[i] = objs[i+1];
 					objs[i+1] = tmp;
 				}
 				else if (!up && i != 0)
 				{
-					ISprite* tmp = objs[i];
+					T* tmp = objs[i];
 					objs[i] = objs[i-1];
 					objs[i-1] = tmp;
 				}
