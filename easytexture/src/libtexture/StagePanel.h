@@ -14,6 +14,8 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl,
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+		Symbol* symbol, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//
@@ -21,8 +23,8 @@ public:
 	//
 	virtual void clear();
 
-	Symbol* GetSymbol() { return m_symbol; }
-
+// 	Symbol* GetSymbol() { return m_symbol; }
+// 
 private:
 	Symbol* m_symbol;
 

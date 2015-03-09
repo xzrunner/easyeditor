@@ -33,6 +33,10 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			m_list->insert(symbol);
 			symbol->Release();
 		}
+
+		if (m_canvas) {
+			m_canvas->resetViewport();
+		}
 	}
 }
 

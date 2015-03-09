@@ -4,6 +4,7 @@
 #include <easymesh.h>
 #include <easyanim.h>
 #include <easycomplex.h>
+#include <easytexture.h>
 
 namespace emap
 {
@@ -63,6 +64,14 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	{
 		d2d::TextDialog dlg(m_editPanel, font);
 		dlg.ShowModal();
+	}
+	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
+	{
+		etexture::Symbol& symbol = const_cast<etexture::Symbol&>(tex->getSymbol());
+		etexture::EditDialog dlg(m_editPanel, &symbol);
+		dlg.ShowModal();
+
+		m_editPanel->ResetViewport();
 	}
 
 	return false;

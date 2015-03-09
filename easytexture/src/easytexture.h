@@ -9,5 +9,6 @@
 #include "libtexture/LibraryPage.h"
 #include "libtexture/StagePanel.h"
 #include "libtexture/ToolbarPanel.h"
+#include "libtexture/EditDialog.h"
 
 #endif // _EASYTEXTURE_H_
