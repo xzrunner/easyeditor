@@ -23,8 +23,8 @@ public:
 	//
 	virtual void clear();
 
-// 	Symbol* GetSymbol() { return m_symbol; }
-// 
+	Symbol* GetSymbol() { return m_symbol; }
+
 private:
 	Symbol* m_symbol;
 
