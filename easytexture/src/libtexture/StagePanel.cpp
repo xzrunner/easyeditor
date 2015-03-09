@@ -3,6 +3,8 @@
 #include "Symbol.h"
 #include "SymbolContainer.h"
 
+#include <easyshape.h>
+
 namespace etexture
 {
 
@@ -27,7 +29,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		symbol->Retain();
 	}
 
-	m_editOP = new d2d::ZoomViewOP(this, true);
+	m_editOP = new libshape::EditPolylineOP<libshape::DrawPolygonEdgeOP, 
+		d2d::SelectShapesOP>(this, this, NULL, NULL, 5);
 	m_canvas = new StageCanvas(this);
 }
 

@@ -48,6 +48,8 @@ void Task::load(const char* filename)
 	}
 
 	m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+
+	m_stage->resetCanvas();
 }
 
 void Task::store(const char* filename) const
