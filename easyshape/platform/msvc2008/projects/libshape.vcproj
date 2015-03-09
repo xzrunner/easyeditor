@@ -244,6 +244,34 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="material"
+				>
+				<File
+					RelativePath="..\..\..\src\libshape\ColorMaterial.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\ColorMaterial.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\Material.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\Material.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\TextureMaterial.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\TextureMaterial.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"
