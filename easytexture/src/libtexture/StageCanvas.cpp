@@ -18,6 +18,9 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 void StageCanvas::onDraw()
 {
+	// todo easymap里双击打开绘制有问题，怀疑GL状态不对
+	d2d::ShaderMgr::Instance()->sprite();
+
 	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
 	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
 
