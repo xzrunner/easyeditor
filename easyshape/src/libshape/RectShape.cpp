@@ -44,7 +44,8 @@ void RectShape::Translate(const d2d::Vector& offset)
 	m_rect.translate(offset);
 }
 
-void RectShape::draw(const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
+void RectShape::draw(const d2d::Matrix& mt, 
+					 const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
 {
 	d2d::PrimitiveDraw::rect(m_rect, m_style);
 }

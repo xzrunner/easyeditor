@@ -57,7 +57,7 @@ void Symbol::draw(const d2d::Matrix& mt,
  		m_bg->draw(mt, mul, add, r_trans, g_trans, b_trans, sprite);
  	}
   	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-  		m_bg_outline[i]->draw();
+  		m_bg_outline[i]->draw(mt);
   	}
 
 // 	for (int i = 0; i < m_bg_tri_strips.size(); ++i) {
@@ -80,7 +80,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	//}
 
  	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
- 		m_shapes[i]->draw();
+ 		m_shapes[i]->draw(mt);
  	}
 }
 

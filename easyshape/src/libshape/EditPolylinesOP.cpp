@@ -66,7 +66,7 @@ bool EditPolylinesOP::onDraw() const
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 	{
-		itr->second->draw(d2d::Colorf(0.8f, 0.8f, 0.2f));
+		itr->second->draw(d2d::Matrix(), d2d::Colorf(0.8f, 0.8f, 0.2f));
 		d2d::PrimitiveDraw::drawCircles(itr->second->GetVertices(), d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.2f, 0.2f, 0.8f));
 	}
 

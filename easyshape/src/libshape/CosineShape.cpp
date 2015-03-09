@@ -37,7 +37,8 @@ void CosineShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void CosineShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void CosineShape::draw(const d2d::Matrix& mt,
+					   const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
 

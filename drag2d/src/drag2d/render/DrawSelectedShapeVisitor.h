@@ -1,5 +1,7 @@
 #pragma once
 
+#include <drag2d.h>
+
 namespace d2d
 {
 	class DrawSelectedShapeVisitor : public IVisitor

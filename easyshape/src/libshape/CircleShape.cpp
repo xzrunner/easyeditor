@@ -74,7 +74,8 @@ void CircleShape::Translate(const d2d::Vector& offset)
 	center += offset;
 }
 
-void CircleShape::draw(const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
+void CircleShape::draw(const d2d::Matrix& mt,
+					   const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
 {
 	d2d::PrimitiveDraw::drawCircle(center, radius, false, 3, color, 32);
 }

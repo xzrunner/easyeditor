@@ -59,44 +59,6 @@ void PrimitiveDraw::rect(const Vector& p0, const Vector& p1, const ShapeStyle& s
 	PrimitiveDrawNew::LineStypeEnd(style.lineStyle);
 }
 
-void PrimitiveDraw::rect(const Matrix& mt, float hWidth,
-						  float hHeight, const ShapeStyle& style)
-{
-	rect(mt, -Vector(hWidth, hHeight), Vector(hWidth, hHeight), style);
-}
-
-void PrimitiveDraw::rect(const Matrix & mt, const Rect& r,
-						 const ShapeStyle& style)
-{
-	rect(mt, Vector(r.xMin, r.yMin), Vector(r.xMax, r. yMax), style);
-}
-
-void PrimitiveDraw::rect(const Matrix& mt, const Vector& p0,
-						 const Vector& p1, const ShapeStyle& style)
-{
-	int type = style.fill ? GL10::GL_TRIANGLE_FAN : GL10::GL_LINE_LOOP;
-	if (!style.fill) {
-		PrimitiveDrawNew::SetLineWidth(style.size);
-	}
-
-	int idx = 0;
-	Vector p = Math::transVector(p0, mt);
-	VERTICES[idx++] = p.x;
-	VERTICES[idx++] = p.y;
-	p = Math::transVector(Vector(p0.x, p1.y), mt);
-	VERTICES[idx++] = p.x;
-	VERTICES[idx++] = p.y;
-	p = Math::transVector(p1, mt);
-	VERTICES[idx++] = p.x;
-	VERTICES[idx++] = p.y;
-	p = Math::transVector(Vector(p1.x, p0.y), mt);
-	VERTICES[idx++] = p.x;
-	VERTICES[idx++] = p.y;
-
-	PrimitiveDrawNew::SetColor(style.color);
-	PrimitiveDrawNew::Draw(type, &VERTICES[0], 4);
-}
-
 void PrimitiveDraw::drawCircle(const Vector& center, float radius, bool isFill/* = false*/, 
 							   float size/* = 2*/, const Colorf& color/* = Colorf(0, 0, 0)*/, size_t kSegments/* = 16*/)
 {
@@ -339,6 +301,82 @@ void PrimitiveDraw::text(const char* text)
 		ShaderMgr::Instance()->null();
 		FontSymbol* fs = static_cast<FontSymbol*>(s);
 		fs->print(0, 0, text);
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// todo: with Matrix
+//////////////////////////////////////////////////////////////////////////
+
+void PrimitiveDraw::rect(const Matrix& mt, float hWidth,
+						 float hHeight, const ShapeStyle& style)
+{
+	rect(mt, -Vector(hWidth, hHeight), Vector(hWidth, hHeight), style);
+}
+
+void PrimitiveDraw::rect(const Matrix & mt, const Rect& r,
+						 const ShapeStyle& style)
+{
+	rect(mt, Vector(r.xMin, r.yMin), Vector(r.xMax, r. yMax), style);
+}
+
+void PrimitiveDraw::rect(const Matrix& mt, const Vector& p0,
+						 const Vector& p1, const ShapeStyle& style)
+{
+	int type = style.fill ? GL10::GL_TRIANGLE_FAN : GL10::GL_LINE_LOOP;
+	if (!style.fill) {
+		PrimitiveDrawNew::SetLineWidth(style.size);
+	}
+
+	int idx = 0;
+	Vector p = Math::transVector(p0, mt);
+	VERTICES[idx++] = p.x;
+	VERTICES[idx++] = p.y;
+	p = Math::transVector(Vector(p0.x, p1.y), mt);
+	VERTICES[idx++] = p.x;
+	VERTICES[idx++] = p.y;
+	p = Math::transVector(p1, mt);
+	VERTICES[idx++] = p.x;
+	VERTICES[idx++] = p.y;
+	p = Math::transVector(Vector(p1.x, p0.y), mt);
+	VERTICES[idx++] = p.x;
+	VERTICES[idx++] = p.y;
+
+	PrimitiveDrawNew::SetColor(style.color);
+	PrimitiveDrawNew::Draw(type, &VERTICES[0], 4);
+}
+
+void PrimitiveDraw::drawPolyline(const Matrix& mt, const std::vector<Vector>& vertices, 
+								 const Colorf& color, bool isClose, float size) 
+{
+	std::vector<Vector> trans;
+	MatrixTrans(mt, vertices, trans);
+	drawPolyline(trans, color, isClose, size);
+}
+
+void PrimitiveDraw::drawTriangles(const Matrix& mt, const std::vector<Vector>& triangles, const Colorf& color)
+{
+	if (triangles.empty()) {
+		return;
+	}
+
+	std::vector<Vector> trans;
+	MatrixTrans(mt, triangles, trans);	
+
+	PrimitiveDrawNew::SetColor(color);
+	PrimitiveDrawNew::Draw(GL10::GL_TRIANGLES, &trans[0].x, triangles.size());
+}
+
+void PrimitiveDraw::MatrixTrans(const Matrix& mt, const std::vector<Vector>& src, std::vector<Vector>& dst)
+{
+	if (src.empty()) {
+		return;
+	}
+
+	dst.clear();
+	dst.reserve(src.size());
+	for (int i = 0, n = src.size(); i < n; ++i) {
+		dst.push_back(Math::transVector(src[i], mt));
 	}
 }
 

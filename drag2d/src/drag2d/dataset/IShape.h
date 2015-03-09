@@ -12,6 +12,7 @@ namespace d2d
 class Vector;
 class Rect;
 class IPropertySetting;
+class Matrix;
 
 class IShape : public ICloneable, public UserDataImpl, public Object
 {
@@ -37,7 +38,7 @@ public:
 
 	virtual const Rect& getRect() const = 0;
 
-	virtual void draw(const d2d::Matrix& mt, 
+	virtual void draw(const Matrix& mt, 
 		const Colorf& color = Colorf(0, 0, 0)) const = 0;
 
 	virtual IPropertySetting* createPropertySetting(EditPanel* editPanel) = 0;

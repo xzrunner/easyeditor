@@ -85,11 +85,12 @@ void ChainShape::Translate(const d2d::Vector& offset)
 	m_rect.translate(offset);
 }
 
-void ChainShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void ChainShape::draw(const d2d::Matrix& mt,
+					  const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	if (m_vertices.empty()) return;
 
-	d2d::PrimitiveDraw::drawPolyline(m_vertices, color, m_isLoop);
+	d2d::PrimitiveDraw::drawPolyline(mt, m_vertices, color, m_isLoop);
 	if (d2d::Settings::ctlPosSize != 0) {
 		d2d::PrimitiveDraw::drawCircles(m_vertices, d2d::Settings::ctlPosSize, true, 2, d2d::Colorf(0.4f, 0.8f, 0.4f));
 	}

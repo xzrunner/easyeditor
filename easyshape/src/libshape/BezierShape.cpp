@@ -62,7 +62,7 @@ void BezierShape::Translate(const d2d::Vector& offset)
 void BezierShape::draw(const d2d::Matrix& mt,
 					   const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
-	ChainShape::draw(color);
+	ChainShape::draw(mt, color);
 
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
 		d2d::Vector pos = d2d::Math::transVector(m_control_nodes[i], mt);

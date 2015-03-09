@@ -195,7 +195,7 @@ bool EditBezierOP::onDraw() const
 		if (m_firstPress.isValid() && m_currPos.isValid())
 		{
 			BezierShape bezier(m_firstPress, m_currPos);
-			bezier.draw();
+			bezier.draw(d2d::Matrix());
 		}
 //			PrimitiveDraw::drawRect(m_firstPress, m_currPos);
 	}
