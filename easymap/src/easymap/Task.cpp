@@ -42,12 +42,8 @@ void Task::load(const char* filename)
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spr_val);
-
 		symbol->Release();
-
 		m_stage->insertSprite(sprite);
-		m_viewlist->insert(sprite);
-
 		spr_val = value["sprites"][i++];
 	}
 

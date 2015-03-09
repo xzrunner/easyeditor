@@ -53,7 +53,11 @@ void Symbol::draw(const d2d::Matrix& mt,
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 {
-	return d2d::Rect(200, 200);
+	d2d::Rect rect;
+	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
+		rect.combine(m_shapes[i]->getRect());
+	}
+	return rect;
 }
 
 void Symbol::loadResources()
