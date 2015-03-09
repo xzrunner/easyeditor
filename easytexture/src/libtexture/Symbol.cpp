@@ -47,7 +47,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::ISprite* sprite) const
 {
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->draw();
+		m_shapes[i]->draw(mt);
 	}
 }
 

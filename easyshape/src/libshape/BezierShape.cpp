@@ -1,4 +1,4 @@
-#include "BezierShape.h"
+ #include "BezierShape.h"
 #include "BezierPropertySetting.h"
 
 namespace libshape
@@ -59,12 +59,14 @@ void BezierShape::Translate(const d2d::Vector& offset)
 	}
 }
 
-void BezierShape::draw(const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
+void BezierShape::draw(const d2d::Matrix& mt,
+					   const d2d::Colorf& color/* = Colorf(0, 0, 0)*/) const
 {
 	ChainShape::draw(color);
 
 	for (size_t i = 0; i < CTRL_NODE_COUNT; ++i) {
-		d2d::PrimitiveDraw::rect(m_control_nodes[i], (float)RADIUS, (float)RADIUS, m_style);
+		d2d::Vector pos = d2d::Math::transVector(m_control_nodes[i], mt);
+		d2d::PrimitiveDraw::rect(pos, (float)RADIUS, (float)RADIUS, m_style);
 	}
 }
 

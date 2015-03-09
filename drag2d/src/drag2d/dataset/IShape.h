@@ -37,7 +37,8 @@ public:
 
 	virtual const Rect& getRect() const = 0;
 
-	virtual void draw(const Colorf& color = Colorf(0, 0, 0)) const = 0;
+	virtual void draw(const d2d::Matrix& mt, 
+		const Colorf& color = Colorf(0, 0, 0)) const = 0;
 
 	virtual IPropertySetting* createPropertySetting(EditPanel* editPanel) = 0;
 
