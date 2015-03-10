@@ -1345,6 +1345,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\color_convert.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\color_convert.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\color_trans.cpp"
 					>
 				</File>
@@ -1998,6 +2006,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\widgets\SetValueDialog.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SimpleGLCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SimpleGLCanvas.h"
 					>
 				</File>
 			</Filter>

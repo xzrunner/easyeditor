@@ -1,7 +1,11 @@
 #ifndef _DRAG2D_GRADUATED_COLOR_PANEL_H_
 #define _DRAG2D_GRADUATED_COLOR_PANEL_H_
 
-#include <drag2d.h>
+#include "SimpleGLCanvas.h"
+
+#include "common/Color.h"
+
+#include <wx/wx.h>
 
 namespace d2d
 {
@@ -18,26 +22,18 @@ private:
 	void OnSize(wxSizeEvent& event);
 
 private:
-	class Canvas : public wxGLCanvas
+	class Canvas : public SimpleGLCanvas
 	{
 	public:
 		Canvas(wxWindow* parent);
-		virtual ~Canvas();
 
 		void SetColor(const d2d::Colorf& begin, const d2d::Colorf& end);
 
-	private:
-		void OnSize(wxSizeEvent& event);
-		void OnPaint(wxPaintEvent& event);
-
-		void DrawColor() const;
+	protected:
+		virtual void OnDraw() const;
 
 	private:
-		wxGLContext* m_context;
-
 		d2d::Colorf m_col_begin, m_col_end;
-
-		DECLARE_EVENT_TABLE()
 
 	}; // Canvas
 

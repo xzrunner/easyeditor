@@ -1,7 +1,5 @@
 #include "GraduatedColorPanel.h"
 
-#include <wx/dcbuffer.h>
-
 namespace d2d
 {
 
@@ -34,24 +32,10 @@ void GraduatedColorPanel::OnSize(wxSizeEvent& event)
 // class GraduatedColorPanel::Canvas
 //////////////////////////////////////////////////////////////////////////
 
-BEGIN_EVENT_TABLE(GraduatedColorPanel::Canvas, wxGLCanvas)
-	EVT_SIZE(GraduatedColorPanel::Canvas::OnSize)
-	EVT_PAINT(GraduatedColorPanel::Canvas::OnPaint)
-END_EVENT_TABLE()
-
-static int gl_attrib[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN, 1, WX_GL_MIN_BLUE, 1, WX_GL_DEPTH_SIZE, 1, WX_GL_DOUBLEBUFFER,WX_GL_STENCIL_SIZE, 8, 0};
-
 GraduatedColorPanel::Canvas::
 Canvas(wxWindow* parent)
-	: wxGLCanvas(parent, wxID_ANY, NULL)
-	, m_context(new wxGLContext(this))
+	: SimpleGLCanvas(parent)
 {
-}
-
-GraduatedColorPanel::Canvas::
-~Canvas()
-{
-	delete m_context;
 }
 
 void GraduatedColorPanel::Canvas::
@@ -63,42 +47,7 @@ SetColor(const d2d::Colorf& begin, const d2d::Colorf& end)
 }
 
 void GraduatedColorPanel::Canvas::
-OnSize(wxSizeEvent& event)
-{
-	wxSize size = event.GetSize();
-	int w = size.x, h = size.y;
-	
-	glViewport(0, 0, w, h);
-
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->SetModelView(d2d::Vector(0, 0), 1);
-	shader->SetProjection(w, h);
-}
-
-void GraduatedColorPanel::Canvas::
-OnPaint(wxPaintEvent& event)
-{
-	wxPaintDC dc(this);
-
-	SetCurrent(*m_context);
-
-// 	bool inited = false;
-// 	if (!inited) {
-// 		OnSize(wxSizeEvent(m_parent->GetSize()));
-// 		inited = true;
-// 	}
-
-	glClearColor(1, 1, 0, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	DrawColor();
-
-	glFlush();
-	SwapBuffers();
-}
-
-void GraduatedColorPanel::Canvas::
-DrawColor() const
+OnDraw() const
 {
 	glBegin(GL_QUADS);
 		glColor3f(m_col_begin.r, m_col_begin.g, m_col_begin.b);
