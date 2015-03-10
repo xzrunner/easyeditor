@@ -81,12 +81,24 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 	{
 	case 0:
 		{
-			wxColourDialog dialog(this/*, &m_colorData*/);
-			dialog.SetTitle(wxT("选择颜色"));
-			if (dialog.ShowModal() == wxID_OK)
-			{
-				m_color = dialog.GetColourData().GetColour();
-//				m_colorData = dialog.GetColourData();
+//			wxColourDialog dialog(this/*, &m_colorData*/);
+//			dialog.SetTitle(wxT("选择颜色"));
+//			if (dialog.ShowModal() == wxID_OK)
+//			{
+//				m_color = dialog.GetColourData().GetColour();
+////				m_colorData = dialog.GetColourData();
+//			}
+
+			// todo trans between wxColor and d2d::Colorf
+			d2d::Colorf col;
+			col.r = m_color.Red() / 255.0f;
+			col.g = m_color.Green() / 255.0f;
+			col.b = m_color.Blue() / 255.0f;
+			d2d::RGBColorSettingDlg dlg(this, col);
+			if (dlg.ShowModal()) {
+				col = dlg.GetColor();
+				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
+				m_editPanel->ResetViewport();
 			}
 		}
 		break;

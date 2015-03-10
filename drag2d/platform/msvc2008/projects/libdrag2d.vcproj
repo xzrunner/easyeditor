@@ -1957,6 +1957,42 @@
 				Name="dialog"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ColorSlider.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ColorSlider.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\GraduatedColorPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\GraduatedColorPanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\HSLColorSettingDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\HSLColorSettingDlg.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\IColorMonitor.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\RGBColorSettingDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\RGBColorSettingDlg.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\widgets\SetValueDialog.cpp"
 					>
 				</File>
