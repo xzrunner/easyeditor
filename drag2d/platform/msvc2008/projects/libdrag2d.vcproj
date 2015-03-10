@@ -1973,14 +1973,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\widgets\GraduatedColorPanel.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\widgets\GraduatedColorPanel.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\widgets\HSLColorSettingDlg.cpp"
 					>
 				</File>
@@ -2016,6 +2008,30 @@
 					RelativePath="..\..\..\src\drag2d\widgets\SimpleGLCanvas.h"
 					>
 				</File>
+				<Filter
+					Name="color panel"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\HSLColorPanel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\HSLColorPanel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\ITweenColorPanel.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\RGBColorPanel.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\widgets\RGBColorPanel.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="list"

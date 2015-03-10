@@ -10,9 +10,7 @@ namespace d2d
 
 		Colorf() 
 			: r(0), g(0), b(0), a(1) {}
-		Colorf(float _r, float _g, float _b) 
-			: r(_r), g(_g), b(_b), a(1) {}
-		Colorf(float _r, float _g, float _b, float _a) 
+		Colorf(float _r, float _g, float _b, float _a = 1) 
 			: r(_r), g(_g), b(_b), a(_a) {}
 
 		const Colorf& operator = (const Colorf& color)
@@ -113,7 +111,7 @@ namespace d2d
 
 		Colori()
 			: r(0), g(0), b(0), a(255) {}
-		Colori(int _r, int _g, int _b, int _a) 
+		Colori(int _r, int _g, int _b, int _a = 255) 
 			: r(_r), g(_g), b(_b), a(_a) {}
 
 		void set(int pr, int pg, int pb, int pa) {

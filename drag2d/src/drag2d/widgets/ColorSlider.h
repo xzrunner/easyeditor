@@ -8,14 +8,15 @@
 namespace d2d
 {
 
-class GraduatedColorPanel;
+class RGBColorPanel;
 class IColorMonitor;
+class ITweenColorPanel;
 
 class ColorSlider : public wxPanel
 {
 public:
 	ColorSlider(wxWindow* parent, IColorMonitor* color_monitor, 
-		const wxString& title);
+		const wxString& title, bool is_rgb);
 
 	int GetColorValue() const;
 	void SetColorValue(int col);
@@ -23,7 +24,7 @@ public:
 	void SetColorRegion(const Colorf& begin, const Colorf& end);
 
 private:
-	void InitLayout(const wxString& title);
+	void InitLayout(const wxString& title, bool is_rgb);
 
 	void OnSetValue(wxScrollEvent& event);
 	void OnSetValue(wxSpinEvent& event);
@@ -33,7 +34,7 @@ private:
 
 	wxStaticText* m_title;
 
-	GraduatedColorPanel* m_color_bg;
+	ITweenColorPanel* m_color_bg;
 	
 	wxSlider* m_slider;
 	wxSpinCtrl* m_spin;

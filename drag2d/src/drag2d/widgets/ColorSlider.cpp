@@ -1,16 +1,21 @@
 #include "ColorSlider.h"
-#include "GraduatedColorPanel.h"
+#include "IColorMonitor.h"
+#include "RGBColorPanel.h"
+#include "HSLColorPanel.h"
+
+#include <wx/spinctrl.h>
 
 namespace d2d
 {
 
 ColorSlider::ColorSlider(wxWindow* parent, 
 						 IColorMonitor* color_monitor,
-						 const wxString& title)
+						 const wxString& title,
+						 bool is_rgb)
 	: wxPanel(parent, wxID_ANY)
 	, m_color_monitor(color_monitor)
 {
-	InitLayout(title);
+	InitLayout(title, is_rgb);
 }
 
 int ColorSlider::GetColorValue() const
@@ -29,7 +34,7 @@ void ColorSlider::SetColorRegion(const Colorf& begin, const Colorf& end)
 	m_color_bg->SetColor(begin, end);
 }
 
-void ColorSlider::InitLayout(const wxString& title)
+void ColorSlider::InitLayout(const wxString& title, bool is_rgb)
 {
 	wxSizer* top_sizer = new wxBoxSizer(wxVERTICAL);
 	// color
@@ -39,8 +44,17 @@ void ColorSlider::InitLayout(const wxString& title)
 		m_title = new wxStaticText(this, wxID_ANY, title, wxDefaultPosition, wxSize(70, 20));
 		sizer->Add(m_title);
 
-		m_color_bg = new GraduatedColorPanel(this, wxSize(350, 20));
-		sizer->Add(m_color_bg);
+		wxPanel* panel;
+		if (is_rgb) {
+			RGBColorPanel* cp = new RGBColorPanel(this, wxSize(350, 20));
+			panel = cp;
+			m_color_bg = cp;
+		} else {
+			HSLColorPanel* cp = new HSLColorPanel(this, wxSize(350, 20));
+			panel = cp;
+			m_color_bg = cp;
+		}
+		sizer->Add(panel);
 
 		top_sizer->Add(sizer);
 	}

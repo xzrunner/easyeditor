@@ -16,13 +16,12 @@ RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, const Colorf& col)
 
 void RGBColorSettingDlg::OnColorChanged()
 {
-	Colorf col;
-	col.r = m_r->GetColorValue() / 255.0f;
-	col.g = m_g->GetColorValue() / 255.0f;
-	col.b = m_b->GetColorValue() / 255.0f;
-	m_r->SetColorRegion(Colorf(0, col.g, col.b), Colorf(1, col.g, col.b));
-	m_g->SetColorRegion(Colorf(col.r, 0, col.b), Colorf(col.r, 1, col.b));
-	m_b->SetColorRegion(Colorf(col.r, col.g, 0), Colorf(col.r, col.g, 1));
+	float r = m_r->GetColorValue() / 255.0f;
+	float g = m_g->GetColorValue() / 255.0f;
+	float b = m_b->GetColorValue() / 255.0f;
+	m_r->SetColorRegion(Colorf(0, g, b), Colorf(1, g, b));
+	m_g->SetColorRegion(Colorf(r, 0, b), Colorf(r, 1, b));
+	m_b->SetColorRegion(Colorf(r, g, 0), Colorf(r, g, 1));
 
 	m_color_bg->SetBackgroundColour(wxColour(m_r->GetColorValue(), 
 		m_g->GetColorValue(), m_b->GetColorValue()));
@@ -54,13 +53,13 @@ void RGBColorSettingDlg::InitLayout()
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "setting");
 		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_r = new ColorSlider(this, this, "R");
+		m_r = new ColorSlider(this, this, "R", true);
 		sizer->Add(m_r);
 		sizer->AddSpacer(10);
-		m_g = new ColorSlider(this, this, "G");
+		m_g = new ColorSlider(this, this, "G", true);
 		sizer->Add(m_g);
 		sizer->AddSpacer(10);
-		m_b = new ColorSlider(this, this, "B");
+		m_b = new ColorSlider(this, this, "B", true);
 		sizer->Add(m_b);
 
 		top_sizer->Add(sizer);

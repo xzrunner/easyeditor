@@ -25,6 +25,7 @@ public:
 
 private:
 	void InitLayout();
+
 	void SetColor(const Colorf& col);
 
 private:

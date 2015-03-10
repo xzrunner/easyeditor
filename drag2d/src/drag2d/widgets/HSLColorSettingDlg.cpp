@@ -1,20 +1,40 @@
 #include "HSLColorSettingDlg.h"
 #include "ColorSlider.h"
 
+#include "common/color_convert.h"
+
 namespace d2d
 {
 
-HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent)
+HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, const Colorf& col)
 	: wxDialog(parent, wxID_ANY, "HSL Color Setting", wxDefaultPosition, wxSize(450, 300))
-	, m_hue(NULL)
-	, m_saturation(NULL)
-	, m_lightness(NULL)
+	, m_h(NULL)
+	, m_s(NULL)
+	, m_l(NULL)
 {
 	InitLayout();
+	SetColor(col);
 }
 
 void HSLColorSettingDlg::OnColorChanged()
 {
+	float h = m_h->GetColorValue() / 255.0f;
+	float s = m_s->GetColorValue() / 255.0f;
+	float l = m_l->GetColorValue() / 255.0f;
+	m_h->SetColorRegion(Colorf(0, s, l), Colorf(1, s, l));
+	m_s->SetColorRegion(Colorf(h, 0, l), Colorf(h, 1, l));
+	m_l->SetColorRegion(Colorf(h, s, 0), Colorf(h, s, 1));
+
+	Colori rgb = hsl2rgb(m_h->GetColorValue(), 
+		m_s->GetColorValue(), m_l->GetColorValue());
+	m_color_bg->SetBackgroundColour(wxColour(rgb.r, rgb.g, rgb.b));
+	m_color_bg->Refresh();
+}
+
+Colorf HSLColorSettingDlg::GetColor() const
+{
+	Colori rgb = hsl2rgb(m_h->GetColorValue(), m_s->GetColorValue(), m_l->GetColorValue());
+	return Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f);
 }
 
 void HSLColorSettingDlg::InitLayout()
@@ -33,19 +53,28 @@ void HSLColorSettingDlg::InitLayout()
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "setting");
 		wxBoxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_hue = new ColorSlider(this, this, "色相");
-		sizer->Add(m_hue);
+		m_h = new ColorSlider(this, this, "色相", false);
+		sizer->Add(m_h);
 		sizer->AddSpacer(10);
-		m_saturation = new ColorSlider(this, this, "饱和度");
-		sizer->Add(m_saturation);
+		m_s = new ColorSlider(this, this, "饱和度", false);
+		sizer->Add(m_s);
 		sizer->AddSpacer(10);
-		m_lightness = new ColorSlider(this, this, "亮度");
-		sizer->Add(m_lightness);
+		m_l = new ColorSlider(this, this, "亮度", false);
+		sizer->Add(m_l);
 
 		top_sizer->Add(sizer);
 	}	
 	SetSizer(top_sizer);
 	top_sizer->Fit(this);
+}
+
+void HSLColorSettingDlg::SetColor(const Colorf& col)
+{
+	Colori hsl = rgb2hsl(col.r*255, col.g*255, col.b*255);
+	m_h->SetColorValue(hsl.r);
+	m_s->SetColorValue(hsl.g);
+	m_l->SetColorValue(hsl.b);
+	OnColorChanged();
 }
 
 }
