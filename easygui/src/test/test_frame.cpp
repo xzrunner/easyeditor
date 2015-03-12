@@ -2,12 +2,12 @@
 
 void main()
 {
-	egui::Frame* frame = egui::create_frame("test1");
- 	frame->Show();
- 
- 	frame = egui::create_frame("test2");
- 	frame->Show();
+	egui::Frame* frame1 = new egui::Frame("test1");
+	frame1->Show();
 
-	egui::Dialog* dlg = egui::create_dialog(frame, "dlg2");
+	egui::Frame* frame2 = new egui::Frame("test2");
+	frame2->Show();
+
+	egui::Dialog* dlg = new egui::Dialog(frame2, "dlg");
 	dlg->ShowModal();
-}
+} 

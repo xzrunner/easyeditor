@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\wx\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easy2d\src;&quot;..\..\..\..\editor-external\wx\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;EGUI_WX"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\editor-external\wx\include"
+				AdditionalIncludeDirectories="..\..\..\src;..\..\..\..\easy2d\src;&quot;..\..\..\..\editor-external\wx\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;EGUI_WX"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -149,31 +149,27 @@
 			Name="wx"
 			>
 			<File
-				RelativePath="..\..\..\src\wx\AppWX.cpp"
+				RelativePath="..\..\..\src\wx\App.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\wx\DialogWX.cpp"
+				RelativePath="..\..\..\src\wx\Dialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\wx\DialogWX.h"
+				RelativePath="..\..\..\src\wx\Frame.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\wx\FrameWX.cpp"
+				RelativePath="..\..\..\src\wx\GLCanvas.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\wx\FrameWX.h"
+				RelativePath="..\..\..\src\wx\log.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\wx\WindowWX.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\wx\WindowWX.h"
+				RelativePath="..\..\..\src\wx\Panel.cpp"
 				>
 			</File>
 		</Filter>
@@ -189,20 +185,28 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\interface\GLCanvas.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\interface\Panel.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\interface\Window.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="util"
+			>
+			<File
+				RelativePath="..\..\..\src\util\log.h"
 				>
 			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\easygui.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gui_factory.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\gui_factory.h"
 			>
 		</File>
 	</Files>

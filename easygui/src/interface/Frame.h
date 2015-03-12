@@ -3,14 +3,28 @@
 
 #include "Window.h"
 
+#include <string>
+
 namespace egui
 {
+
+class FrameImpl;
 
 class Frame : public Window
 {
 public:
-	virtual ~Frame() {}
-	virtual void Show() = 0;
+	Frame(const std::string& title);
+	virtual ~Frame();
+
+	//
+	// interface Window
+	//
+	virtual void* GetRawPtr();
+
+	virtual void Show();
+
+private:
+	FrameImpl* m_impl;
 
 }; // Frame
 
