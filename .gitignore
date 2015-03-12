@@ -140,6 +140,8 @@ easytexture/platform/msvc2008/easytexture
 easytexture/platform/msvc2008/libtexture
 easygui/platform/msvc2008/libeasygui
 easygui/platform/msvc2008/testeasygui
+easywidget/platform/msvc2008/libeasywidget
+easy2d/platform/msvc2008/easy2d
 
 easy3d/platform/msvc2008/easy3d
 easyphysics/platform/msvc2008/easyphysics
