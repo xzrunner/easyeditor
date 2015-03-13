@@ -1,4 +1,5 @@
 #include "LibraryPanel.h"
+#include "LibraryPage.h"
 
 #include <wx/notebook.h>
 
@@ -17,6 +18,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(new ecomplex::LibraryPage(nb));
 	addPage(new anim::LibraryPage(nb));
 	addPage(new escale9::LibraryPage(nb));
+	addPage(new LibraryPage(nb));
 }
 
 }

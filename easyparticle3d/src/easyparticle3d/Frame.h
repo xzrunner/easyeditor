@@ -27,6 +27,7 @@ private:
 	void onCodeCOC(wxCommandEvent& event);
 
 	void initMenuBar();
+	void initStatueBar();
 
 	wxMenu* initFileBar();
 	wxMenu* initHelpBar();
