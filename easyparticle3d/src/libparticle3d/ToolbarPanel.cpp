@@ -1,6 +1,7 @@
 #include "ToolBarPanel.h"
 #include "StagePanel.h"
 #include "ParticleSystem.h"
+#include "FileIO.h"
 
 #include <easyanim.h>
 
@@ -53,6 +54,9 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 
 	// todo Release symbol
 	pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
+	if (!child.bind_filepath.empty()) {
+		pc->m_bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
+	}
 	cp->onSetScale(wxScrollEvent());
 	cp->onSetRotate(wxScrollEvent());
 
@@ -553,6 +557,12 @@ initLayout()
 		topSizer->Add(sizer);
 	}
 	topSizer->AddSpacer(10);
+	// Bind PS
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Bind PS"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::ChildPanel::OnBindPS));
+		topSizer->Add(btn);
+	}
 	//
 	SetSizer(topSizer);
 }
@@ -571,10 +581,20 @@ onSetRotate(wxScrollEvent& event)
 	m_pc->max_rotate = m_max_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
 }
 
-const wxString& ToolbarPanel::ChildPanel::
-getFilepath() const
+void ToolbarPanel::ChildPanel::
+OnBindPS(wxCommandEvent& event)
 {
-	return m_pc->symbol->getFilepath();
+	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
+	filter = wxT("*_") + filter + wxT(".json");
+	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		m_pc->m_bind_ps = FileIO::LoadPS(dlg.GetPath());
+
+// 		if (m_canvas) {
+// 			m_canvas->resetViewport();
+// 		}
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

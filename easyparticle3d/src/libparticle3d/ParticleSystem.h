@@ -15,15 +15,22 @@ struct vertex
 	float s, t;
 };
 
+class ParticleSystem;
+
 struct ParticleChild
 {
 	d2d::ISymbol* symbol;
+
+	ParticleSystem* m_bind_ps;
+	float m_bind_time;
 
 	float start_scale, end_scale;
 
 	float min_rotate, max_rotate;
 
-	ParticleChild() : symbol(NULL) {}
+	ParticleChild() 
+		: symbol(NULL), m_bind_ps(NULL), m_bind_time(0) 
+	{}
 };
 
 struct Particle
@@ -52,6 +59,9 @@ public:
 	d2d::Vector origin;
 
 private:
+	// todo
+	std::string filepath;
+
 	std::vector<ParticleChild*> children;
 
 	Particle *pStart, *pLast, *pEnd;
@@ -148,8 +158,12 @@ protected:
 private:
 	void transCoords(float r, float hori, float vert, float result[3]);
 
+	static d2d::Vector TransCoords3To2(float position[3]);
+
 private:
 	Recorder m_recorder;
+
+	friend class FileIO;
 
 }; // ParticleSystem
 

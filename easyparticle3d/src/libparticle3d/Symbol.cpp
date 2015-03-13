@@ -1,6 +1,6 @@
 #include "Symbol.h"
 #include "ParticleSystem.h"
-#include "FileAdapter.h"
+#include "FileIO.h"
 
 namespace eparticle3d
 {
@@ -70,42 +70,7 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 
 void Symbol::loadResources()
 {
-	FileAdapter adapter;
-	adapter.load(m_filepath);
-
-	if (!m_ps) {
-		m_ps = new ParticleSystem(1000);
-	}
-
-	m_ps->setCount(adapter.count);
-	m_ps->setEmissionTime(adapter.emission_time);
-	m_ps->setLife(adapter.min_life, adapter.max_life);
-	m_ps->setHori(adapter.min_hori, adapter.max_hori);
-	m_ps->setVert(adapter.min_vert, adapter.max_vert);
-	m_ps->setSpeed(adapter.min_spd, adapter.max_spd);
-	m_ps->setGravity(adapter.gravity);
-	m_ps->setFadeoutTime(adapter.fadeout_time);
-	m_ps->setBounce(adapter.bounce);
-	m_ps->setStartRadius(adapter.start_radius);
-	for (size_t i = 0, n = adapter.children.size(); i < n; ++i)
-	{
-		const FileAdapter::Child& child = adapter.children[i];
-
-		ParticleChild* pc = new ParticleChild;
-
-		// todo Release symbol
-		pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
-
-		pc->start_scale = child.start_scale * 0.01f;
-		pc->end_scale = child.end_scale * 0.01f;
-
-		pc->min_rotate = child.min_rotate * d2d::TRANS_DEG_TO_RAD;
-		pc->max_rotate = child.max_rotate * d2d::TRANS_DEG_TO_RAD;
-
-		m_ps->addChild(pc);
-	}
-
-	
+	m_ps = FileIO::LoadPS(m_filepath);	
 }
 
 }

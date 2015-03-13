@@ -44,15 +44,22 @@ void FileAdapter::load(const char* filename)
 	Json::Value childValue = value["components"][i++];
 	while (!childValue.isNull()) {
 		Child child;
+
 		child.filepath = childValue["filepath"].asString();
 		child.filepath = d2d::FilenameTools::getAbsolutePath(dir, child.filepath);
+
+		child.bind_filepath = childValue["bind ps filepath"].asString();
+		child.bind_filepath = d2d::FilenameTools::getAbsolutePath(dir, child.bind_filepath);
+
 		child.name = childValue["name"].asString();
 		child.start_scale = childValue["start_scale"].asInt();
 		child.end_scale = childValue["end_scale"].asInt();
 		child.min_rotate = childValue["min_rotate"].asInt();
 		child.max_rotate = childValue["max_rotate"].asInt();
 		child.start_z = childValue["start_z"].asInt();
+
 		children.push_back(child);
+
 		childValue = value["components"][i++];
 	}
 }

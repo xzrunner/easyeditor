@@ -1,4 +1,5 @@
 #include "ParticleSystem.h"
+#include "Symbol.h"
 
 namespace eparticle3d
 {
@@ -68,18 +69,20 @@ void ParticleSystem::draw(const d2d::Matrix& mt)
 			multi.set(1, 1, 1, a/255.0f);
 		}
 
-		float gx = p->position[0] * 0.01f,
-			gy = p->position[1] * 0.01f;
-		float x = (gx - gy) * 36,
-			y = (gx + gy) * 26 + p->position[2] * 0.5f;
-
+		d2d::Vector pos = TransCoords3To2(p->position);
 		float s = (p->life / p->lifetime) * (p->pc->start_scale - p->pc->end_scale) + p->pc->end_scale;
 
 		d2d::Matrix _mt(mt);
 		_mt.translate(p->pos.x, p->pos.y);
-		d2d::SpriteDraw::drawSprite(p->pc->symbol, _mt, d2d::Vector(x, y), p->angle, s, s, 0, 0, multi);
+		d2d::SpriteDraw::drawSprite(p->pc->symbol, _mt, pos, p->angle, s, s, 0, 0, multi);
 
-		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), x, y, p->angle, s, multi);
+		if (p->pc->m_bind_ps) {
+			d2d::Matrix _mt;
+			_mt.translate(p->pos.x, p->pos.y);
+			p->pc->m_bind_ps->draw(_mt);
+		}
+
+		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), pos.x, pos.y, p->angle, s, multi);
 
 		//glPopAttrib();
 
@@ -100,13 +103,25 @@ void ParticleSystem::update(float dt)
 		}
 
 		life -= dt;
-		if (lifetime != -1 && life < 0)
+		if (lifetime != -1 && life < 0) {
 			stop();
+		}
 	}
 
 	Particle* p = pStart;
 	while (p != pLast)
 	{
+		if (p->pc->m_bind_ps) {
+			p->pc->m_bind_time += dt;
+			ParticleSystem* cps = p->pc->m_bind_ps;
+			if (p->pc->m_bind_time > 0.05f) {
+				p->pc->m_bind_time = 0;
+				cps->origin = TransCoords3To2(p->position);
+				cps->start();
+			}
+			cps->update(dt);
+		}
+
 		p->life -= dt;
 
 		if (p->life > 0)
@@ -141,6 +156,12 @@ void ParticleSystem::update(float dt)
 		}
 		else
 		{
+// 			// todo clear child's ps
+// 			if (p->pc->m_bind_ps) {
+// //				p->pc->m_bind_ps->reset();
+// 				p->pc->m_bind_ps->stop();
+// 			}
+
 			remove(p);
 
 			if (p >= pLast)
@@ -163,6 +184,17 @@ void ParticleSystem::stop()
 
 void ParticleSystem::reset()
 {
+//  	// todo clear child's ps
+//  	Particle* p = pStart;
+//  	while (p != pLast)
+//  	{
+//  		if (p->pc->m_bind_ps) {
+//  			p->pc->m_bind_ps->reset();
+// 			p->pc->m_bind_ps->stop();
+//  		}
+//  		++p;
+//  	}
+
 	pLast = pStart;
 	life = lifetime = emission_time;
 	emitCounter = 0;
@@ -257,6 +289,15 @@ void ParticleSystem::transCoords(float r, float hori, float vert, float result[3
 	result[0] = dxy * cos(hori);
 	result[1] = dxy * sin(hori);
 	result[2] = dz;
+}
+
+d2d::Vector ParticleSystem::TransCoords3To2(float position[3])
+{
+	float gx = position[0] * 0.01f,
+		  gy = position[1] * 0.01f;
+	float x = (gx - gy) * 36,
+		  y = (gx + gy) * 26 + position[2] * 0.5f;
+	return d2d::Vector(x, y);
 }
 
 }

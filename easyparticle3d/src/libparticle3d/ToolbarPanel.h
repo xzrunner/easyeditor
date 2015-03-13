@@ -77,7 +77,7 @@ private:
 		void onSetScale(wxScrollEvent& event);
 		void onSetRotate(wxScrollEvent& event); 
 
-		const wxString& getFilepath() const;
+		void OnBindPS(wxCommandEvent& event);
 
 	private:
 		ParticleChild* m_pc;

@@ -36,8 +36,13 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 	for (size_t i = 0, n = toolbar->m_children.size(); i < n; ++i)
 	{
 		ToolbarPanel::ChildPanel* cp = toolbar->m_children[i];
-		std::string filepath = d2d::FilenameTools::getRelativePath(dir, cp->getFilepath());
-		value["components"][i]["filepath"] = filepath;
+		ParticleChild* pc = cp->m_pc;
+		value["components"][i]["filepath"] = 
+			d2d::FilenameTools::getRelativePath(dir, pc->symbol->getFilepath()).ToStdString();
+		if (pc->m_bind_ps) {
+			value["components"][i]["bind ps filepath"] = 
+				d2d::FilenameTools::getRelativePath(dir, pc->m_bind_ps->filepath).ToStdString();
+		}
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
 		value["components"][i]["start_scale"] = cp->m_start_scale->GetValue();
 		value["components"][i]["end_scale"] = cp->m_end_scale->GetValue();
@@ -91,8 +96,48 @@ void FileIO::load(const char* filepath, ParticleSystem* ps,
 	ps->setStartRadius(adapter.start_radius);
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
 	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
-	for (size_t i = 0, n = adapter.children.size(); i < n; ++i)
+	for (size_t i = 0, n = adapter.children.size(); i < n; ++i) {
 		toolbar->add(adapter.children[i]);
+	}
+}
+
+ParticleSystem* FileIO::LoadPS(const char* filepath)
+{
+	FileAdapter adapter;
+	adapter.load(filepath);
+
+	ParticleSystem* ps = new ParticleSystem(1000);
+
+	ps->filepath = filepath;
+	ps->setCount(adapter.count);
+	ps->setEmissionTime(adapter.emission_time);
+	ps->setLife(adapter.min_life, adapter.max_life);
+	ps->setHori(adapter.min_hori, adapter.max_hori);
+	ps->setVert(adapter.min_vert, adapter.max_vert);
+	ps->setSpeed(adapter.min_spd, adapter.max_spd);
+	ps->setGravity(adapter.gravity);
+	ps->setFadeoutTime(adapter.fadeout_time);
+	ps->setBounce(adapter.bounce);
+	ps->setStartRadius(adapter.start_radius);
+	for (size_t i = 0, n = adapter.children.size(); i < n; ++i)
+	{
+		const FileAdapter::Child& child = adapter.children[i];
+
+		ParticleChild* pc = new ParticleChild;
+
+		// todo Release symbol
+		pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
+
+		pc->start_scale = child.start_scale * 0.01f;
+		pc->end_scale = child.end_scale * 0.01f;
+
+		pc->min_rotate = child.min_rotate * d2d::TRANS_DEG_TO_RAD;
+		pc->max_rotate = child.max_rotate * d2d::TRANS_DEG_TO_RAD;
+
+		ps->addChild(pc);
+	}
+
+	return ps;
 }
 
 }

@@ -14,6 +14,8 @@ public:
 	static void load(const char* filepath, ParticleSystem* ps,
 		ToolbarPanel* toolbar);
 
+	static ParticleSystem* LoadPS(const char* filepath);
+
 }; // FileIO
 
 }

@@ -16,6 +16,7 @@ public:
 	struct Child
 	{
 		std::string filepath;
+		std::string bind_filepath;
 
 		std::string name;
 
