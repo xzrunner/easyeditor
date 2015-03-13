@@ -35,6 +35,8 @@ Frame::Frame(const wxString& title)
 	initMenuBar();
 #ifdef _DEBUG
 	initStatueBar();
+#else
+	wxLog::SetLogLevel(0);
 #endif
 }
 
