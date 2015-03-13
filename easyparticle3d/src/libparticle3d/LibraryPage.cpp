@@ -34,6 +34,9 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			symbol->RefreshThumbnail(filepath);
 			m_list->insert(symbol);
 			symbol->Release();
+		}
+
+		if (m_canvas) {
 			m_canvas->resetViewport();
 		}
 	}

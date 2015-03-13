@@ -55,9 +55,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 				m_ps->origin = sprite->getPosition();
 			}
 			m_ps->start();
-			m_ps->reset();		
 		}
-
 		m_ps->update((float)(curr - time) / CLOCKS_PER_SEC);
 		m_ps->draw(mt);
 	}

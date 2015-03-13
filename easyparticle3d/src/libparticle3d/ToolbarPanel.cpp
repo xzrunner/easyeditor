@@ -607,6 +607,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 		ToolbarPanel::ChildPanel* child = m_toolbar->m_children.back();
 		child->m_pc->symbol = m_library->getSymbol(index);
 		m_stage->m_ps->start();
+		m_stage->ResetViewport();
 	}
 
 	return true;
