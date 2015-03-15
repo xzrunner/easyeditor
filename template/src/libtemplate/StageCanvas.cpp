@@ -19,7 +19,6 @@ StageCanvas::StageCanvas(StagePanel* panel)
 void StageCanvas::onDraw()
 {
 	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
-	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
 
 	m_editPanel->drawEditTemp();
 }
