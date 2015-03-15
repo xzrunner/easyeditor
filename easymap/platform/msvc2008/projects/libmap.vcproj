@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="libmap"
-	ProjectGUID="{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
+	ProjectGUID="{B33FADEF-8178-492F-AEFE-DE1388565419}"
 	RootNamespace="libmap"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

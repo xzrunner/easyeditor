@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easymap"
-	ProjectGUID="{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
+	ProjectGUID="{09D68CDC-6B05-43F7-9F22-C84FB06C4C98}"
 	RootNamespace="easymap"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

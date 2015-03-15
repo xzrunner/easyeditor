@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easytexture"
-	ProjectGUID="{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
+	ProjectGUID="{9AB30F49-3193-41E3-90AA-FF2B66B70B5F}"
 	RootNamespace="easytexture"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
