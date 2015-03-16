@@ -273,21 +273,41 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libterrain2d\MeshShape.cpp"
+				RelativePath="..\..\..\src\libterrain2d\Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libterrain2d\MeshShape.h"
+				RelativePath="..\..\..\src\libterrain2d\Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libterrain2d\OceanMesh.cpp"
+				RelativePath="..\..\..\src\libterrain2d\Symbol.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libterrain2d\OceanMesh.h"
+				RelativePath="..\..\..\src\libterrain2d\Symbol.h"
 				>
 			</File>
+			<Filter
+				Name="mesh"
+				>
+				<File
+					RelativePath="..\..\..\src\libterrain2d\MeshShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libterrain2d\MeshShape.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libterrain2d\OceanMesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libterrain2d\OceanMesh.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="fileio"
@@ -303,6 +323,10 @@
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libterrain2d\config.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyterrain2d.h"
 			>
 		</File>
 	</Files>

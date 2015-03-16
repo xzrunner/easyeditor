@@ -99,9 +99,8 @@ void OceanMesh::Update(float dt)
 	during += dt;
 }
 
-void OceanMesh::Draw(bool draw_tris) const
+void OceanMesh::Draw(const d2d::Matrix& mt, bool draw_tris) const
 {
-	d2d::Matrix mt;
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	if (m_blend_open && m_image1) {
 		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, m_blend_base), d2d::Colorf(0, 0, 0, 0));
@@ -155,6 +154,16 @@ void OceanMesh::SetImage1(const d2d::ImageSymbol* image)
 	}
 
 	m_image1 = image;
+}
+
+d2d::Rect OceanMesh::GetRegion() const
+{
+	d2d::Rect ret;
+	for (int i = 0, n = m_grids.size(); i < n; ++i) {
+		emesh::Shape* shape = m_grids[i];
+		ret.combine(shape->GetRegion());
+	}
+	return ret;
 }
 
 void OceanMesh::Clear()

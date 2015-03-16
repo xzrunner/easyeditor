@@ -20,7 +20,7 @@ bool WaveVerticesOP::onDraw() const
 
 	const std::vector<OceanMesh*>& oceans = m_stage->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
-		oceans[i]->Draw(m_draw_tris);
+		oceans[i]->Draw(d2d::Matrix(), m_draw_tris);
 	}
 
 	return false;

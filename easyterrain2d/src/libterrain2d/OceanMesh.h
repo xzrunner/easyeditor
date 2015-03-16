@@ -35,7 +35,7 @@ public:
 	void SetBlendSpeed(float spd);
 
 	void Update(float dt);
-	void Draw(bool draw_tris) const;
+	void Draw(const d2d::Matrix& mt, bool draw_tris) const;
 
 	const libshape::PolygonShape* GetShape() const {
 		return m_shape;
@@ -47,6 +47,8 @@ public:
 
 	bool IsBlendOpen() const { return m_blend_open; }
 	void SetImage1(const d2d::ImageSymbol* image);
+
+	d2d::Rect GetRegion() const;
 
 private:
 	void Clear();

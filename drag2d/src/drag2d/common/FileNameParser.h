@@ -26,6 +26,7 @@ namespace d2d
 			e_particle3d,
 			e_ejoy2d,
 			e_texture,
+			e_terrain2d,
 		};
 
 		static Type getFileType(const wxString& filename);
