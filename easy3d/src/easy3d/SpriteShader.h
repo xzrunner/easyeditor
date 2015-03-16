@@ -30,7 +30,7 @@ public:
 	void SetTexID(int tex);
 
 	void DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int texid);
-	void DrawTri(float* vertices, float* texcoords, int count, int texid);
+	void DrawTri(const float* vertices, const float* texcoords, int count, int texid);
 	void DrawTriStrip(float* vertices, float* texcoords, int count, int texid);
 
 protected:
@@ -40,7 +40,7 @@ private:
 	void InitBuffers();
 
 	void CopyVertex(const vec3 vertices[3], const vec2 texcoords[3]);
-	void CopyVertex(float* vertices, float* texcoords, int count);
+	void CopyVertex(const float* vertices, const float* texcoords, int count);
 
 private:
 	GLuint m_model_view, m_projection;

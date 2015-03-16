@@ -14,8 +14,10 @@ class StageCanvas : public e3d::StageCanvas
 public:
 	StageCanvas(d2d::EditPanel* stage);
 
-	void StoreScene() const;
-	void LoadScene();
+	void StoreScene(const char* filename) const;
+	void LoadScene(const char* filename);
+
+	void GetScreenSize(int* width, int* height) const;
 
 protected:
 	virtual void initGL();

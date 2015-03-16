@@ -84,7 +84,7 @@ void ShaderMgr::DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int tex
 	m_sprite_shader->DrawTri(vertices, texcoords, texid);
 }
 
-void ShaderMgr::DrawTri(float* vertices, float* texcoords, int count, int texid)
+void ShaderMgr::DrawTri(const float* vertices, const float* texcoords, int count, int texid)
 {
 	m_sprite_shader->DrawTri(vertices, texcoords, count, texid);
 }

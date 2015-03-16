@@ -8,7 +8,8 @@ class IScene
 {
 public:
 	virtual ~IScene() {}
-	virtual void Load() = 0;
+	virtual void Store(const char* filename) const = 0;
+	virtual void Load(const char* filename) = 0;
 	virtual void Draw() const = 0;
 	virtual void DebugDraw() const = 0;
 

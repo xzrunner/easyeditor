@@ -301,6 +301,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libimage\ImageRevertY.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\ImageRevertY.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libimage\ImageTrim.cpp"
 				>
 			</File>

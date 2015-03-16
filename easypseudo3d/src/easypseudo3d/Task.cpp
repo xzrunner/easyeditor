@@ -21,12 +21,14 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
+	epseudo3d::StageCanvas* canvas = static_cast<epseudo3d::StageCanvas*>(m_stage->getCanvas());
+	canvas->LoadScene(filename);
 }
 
 void Task::store(const char* filename) const
 {
 	epseudo3d::StageCanvas* canvas = static_cast<epseudo3d::StageCanvas*>(m_stage->getCanvas());
-	canvas->StoreScene();
+	canvas->StoreScene(filename);
 }
 
 bool Task::isDirty() const
@@ -36,10 +38,10 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
-	m_stage->clear();
-	m_library->Refresh();
-	m_stage->Refresh();
+// 	m_library->clear();
+// 	m_stage->clear();
+// 	m_library->Refresh();
+// 	m_stage->Refresh();
 }
 
 const d2d::EditPanel* Task::getEditPanel() const

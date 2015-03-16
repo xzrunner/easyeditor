@@ -172,7 +172,7 @@ void SpriteShader::DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int 
 	CopyVertex(vertices, texcoords);
 }
 
-void SpriteShader::DrawTri(float* vertices, float* texcoords, int count, int texid)
+void SpriteShader::DrawTri(const float* vertices, const float* texcoords, int count, int texid)
 {
 	if (count >= MAX_VERTEX) {
 		return;
@@ -242,7 +242,7 @@ void SpriteShader::CopyVertex(const vec3 vertices[3], const vec2 texcoords[3])
 	m_count += 3;
 }
 
-void SpriteShader::CopyVertex(float* vertices, float* texcoords, int count)
+void SpriteShader::CopyVertex(const float* vertices, const float* texcoords, int count)
 {
 	float* ptr = m_vb + VERTEX_FLOAT_SIZE * m_count;
 	for (int i = 0; i < count; ++i)

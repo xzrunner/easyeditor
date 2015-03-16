@@ -21,20 +21,27 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage)
 	m_scene = new QuadScene(this);
 }
 
-void StageCanvas::StoreScene() const
+void StageCanvas::StoreScene(const char* filename) const
 {
+	m_scene->Store(filename);
 }
 
-void StageCanvas::LoadScene()
+void StageCanvas::LoadScene(const char* filename)
 {
+	m_scene->Load(filename);
+}
 
+void StageCanvas::GetScreenSize(int* width, int* height) const
+{
+	*width = m_screen_width;
+	*height = m_screen_height;
 }
 
 void StageCanvas::initGL()
 {
 	e3d::StageCanvas::initGL();
 
-	m_scene->Load();
+	m_scene->Load(NULL);
 	InitCamera();
 
 	// for Camera reset when init

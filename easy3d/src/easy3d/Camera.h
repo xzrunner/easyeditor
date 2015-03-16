@@ -30,6 +30,9 @@ public:
 
 	vec3 MapToSphere(ivec2 touchpoint) const;
 
+	void GetPositionInfo(vec3* pos, float* rot_heading, float* rot_elevation) const;
+	void SetPositionInfo(const vec3& pos, float rot_heading, float rot_elevation);
+
 	void Reset();
 
 public:
