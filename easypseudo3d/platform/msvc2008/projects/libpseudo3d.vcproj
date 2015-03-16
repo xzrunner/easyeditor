@@ -193,11 +193,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libpseudo3d\QuadScene.cpp"
+				RelativePath="..\..\..\src\libpseudo3d\Mapping3DScene.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libpseudo3d\QuadScene.h"
+				RelativePath="..\..\..\src\libpseudo3d\Mapping3DScene.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpseudo3d\Projection2DScene.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpseudo3d\Projection2DScene.h"
 				>
 			</File>
 		</Filter>

@@ -1,5 +1,7 @@
 #include "StageCanvas.h"
-#include "QuadScene.h"
+
+//#include "Mapping3DScene.h"
+#include "Projection2DScene.h"
 
 #include <wx/dcbuffer.h>
 
@@ -18,7 +20,8 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage)
 
 	setBgColor(d2d::BLACK);
 
-	m_scene = new QuadScene(this);
+//	m_scene = new Mapping3DScene(this);
+	m_scene = new Projection2DScene(this);
 }
 
 void StageCanvas::StoreScene(const char* filename) const

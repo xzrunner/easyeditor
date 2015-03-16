@@ -1,4 +1,4 @@
-#include "QuadScene.h"
+#include "Mapping3DScene.h"
 #include "StageCanvas.h"
 
 #include <easy3d.h>
@@ -9,18 +9,18 @@
 namespace epseudo3d
 {
 
-QuadScene::QuadScene(StageCanvas* canvas)
+Mapping3DScene::Mapping3DScene(StageCanvas* canvas)
 	: m_canvas(canvas)
 	, m_img(NULL)
 {
 }
 
-QuadScene::~QuadScene()
+Mapping3DScene::~Mapping3DScene()
 {
 	delete m_img;
 }
 
-void QuadScene::Store(const char* filename) const
+void Mapping3DScene::Store(const char* filename) const
 {
 	Json::Value value;
 
@@ -86,7 +86,7 @@ void QuadScene::Store(const char* filename) const
 	fout.close();
 }
 
-void QuadScene::Load(const char* filename)
+void Mapping3DScene::Load(const char* filename)
 {
 	m_vertices.push_back(vec3(5, 5, 5));
 	m_vertices.push_back(vec3(5, 5, -5));
@@ -150,7 +150,7 @@ void QuadScene::Load(const char* filename)
 	cam.SetPositionInfo(pos, rot_heading, rot_elevation);
 }
 
-void QuadScene::Draw() const
+void Mapping3DScene::Draw() const
 {
 	if (!m_img) {
 		return;
@@ -262,7 +262,7 @@ void QuadScene::Draw() const
 	shader->DrawTri(&vertices[0].x, &texcoords[0].x, 2 * 6 * 3, m_img->textureID());
 }
 
-void QuadScene::DebugDraw() const
+void Mapping3DScene::DebugDraw() const
 {
 // 	wxPaintDC dc((wxWindow*)m_canvas);
 // 
