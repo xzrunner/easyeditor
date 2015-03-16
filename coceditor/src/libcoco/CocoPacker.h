@@ -10,6 +10,7 @@ namespace ecomplex { class Symbol; }
 namespace anim { class Symbol; }
 namespace escale9 { class Symbol; }
 namespace emesh { class Symbol; class Sprite; }
+namespace eterrain2d { class Symbol; class Sprite; }
 namespace epbin { class ImageIDer; }
 
 namespace libcoco
@@ -47,6 +48,7 @@ private:
 	void ParserAnimation(const anim::Symbol* symbol);
 	void ParserScale9(const escale9::Symbol* symbol);
 	int ParserMesh(const emesh::Sprite* sprite);
+	int ParserTerrain2D(const eterrain2d::Sprite* sprite);
 
 	void ParserSymbolBase(const d2d::ISymbol* symbol);
 

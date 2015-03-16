@@ -33,6 +33,8 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
+	const std::vector<OceanMesh*> GetOceans() const { return m_oceans; }
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:

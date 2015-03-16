@@ -7,6 +7,7 @@
 #include <easyanim.h>
 #include <easyscale9.h>
 #include <easymesh.h>
+#include <easyterrain2d.h>
 #include <epbin.h>
 
 namespace libcoco
@@ -1050,6 +1051,44 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 	}
 
 	return id;
+}
+
+int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
+{
+// 	// only use one texture in the sprite
+// 
+// 	const std::vector<OceanMesh*> oceans = sprite->getSymbol().GetOceans();
+// 	assert(oceans.size() == 1);
+// 
+// 	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(oceans[0]->GetImage0()->filepath());
+// 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
+// 	if (!picture) {
+// 		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the texpacker file!";
+// 		throw d2d::Exception(str.c_str());
+// 	}
+// 
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// pictures
+// 	//////////////////////////////////////////////////////////////////////////
+// 	// id
+// 	std::map<const d2d::ISprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
+// 	if (itr_sprite == m_mapSpriteID.end()) {
+// 		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the m_mapSpriteID!";
+// 		throw d2d::Exception(str.c_str());
+// 	}
+// 	int curr_id = itr_sprite->second;
+// 	// tex
+// 	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
+// 
+// 	int frame = 1;
+// 	if (sprite->GetSpeed().y != 0) {
+// 		frame = std::fabs(std::floor(1.0f / sprite->GetSpeed().y));
+// 	}
+// 	std::vector<int> frame_size;
+// 	d2d::Vector speed = sprite->GetSpeed();
+// 	emesh::Shape* shape = const_cast<emesh::Shape*>(sprite->getSymbol().getShape());
+
+	return 0;
 }
 
 void CocoPacker::ParserSymbolBase(const d2d::ISymbol* symbol)
