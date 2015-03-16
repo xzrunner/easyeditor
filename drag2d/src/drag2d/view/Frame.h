@@ -14,7 +14,7 @@ namespace d2d
 class Frame : public wxFrame
 {
 public:
-	Frame(const wxString& title, const wxString& filetag);
+	Frame(const wxString& title, const wxString& filetag, const wxSize& size = wxSize(800, 600));
 	virtual ~Frame();
 
 	void setTask(ITask* task);

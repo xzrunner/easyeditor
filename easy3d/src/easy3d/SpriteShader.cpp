@@ -172,6 +172,29 @@ void SpriteShader::DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int 
 	CopyVertex(vertices, texcoords);
 }
 
+void SpriteShader::DrawTri(float* vertices, float* texcoords, int count, int texid)
+{
+	if (count >= MAX_VERTEX) {
+		return;
+	}
+
+	SetTexID(texid);
+
+	if (m_count + count >= MAX_VERTEX) {
+		wxLogDebug(_T("SpriteShader Commit count to max"));
+		Commit();
+	} else if (m_type != GL_TRIANGLES) {
+		wxLogDebug(_T("SpriteShader Commit change type"));
+		Commit();
+		m_type = GL_TRIANGLES;
+	}
+
+	CopyVertex(vertices, texcoords, count);
+
+	// force flush
+	Commit();
+}
+
 void SpriteShader::DrawTriStrip(float* vertices, float* texcoords, int count, int texid)
 {
 	if (count >= MAX_VERTEX) {

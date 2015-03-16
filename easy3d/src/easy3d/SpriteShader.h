@@ -30,6 +30,7 @@ public:
 	void SetTexID(int tex);
 
 	void DrawTri(const vec3 vertices[3], const vec2 texcoords[3], int texid);
+	void DrawTri(float* vertices, float* texcoords, int count, int texid);
 	void DrawTriStrip(float* vertices, float* texcoords, int count, int texid);
 
 protected:

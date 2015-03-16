@@ -87,8 +87,6 @@ void GLCanvas::onSize(wxSizeEvent& event)
 
 void GLCanvas::onPaint(wxPaintEvent& event)
 {
-	wxPaintDC dc(this);
-
 	// Makes the OpenGL state that is represented by the OpenGL rendering 
 	// context context current
 	SetCurrentCanvas();
@@ -110,7 +108,10 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 
 	glFlush();
 	SwapBuffers();
- }
+
+	//wxPaintDC dc(this);
+	OnDrawDC();
+}
 
 void GLCanvas::onEraseBackground(wxEraseEvent& event)
 {	

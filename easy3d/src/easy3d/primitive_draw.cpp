@@ -149,6 +149,110 @@ void DrawCube(const vec3& min, const vec3& max, d2d::Colorf color)
 	shader->DrawShape(GL_LINES, vertices, 8, color, indices, 24);
 }
 
+void DrawCube(const vec3& min, const vec3& max, int texid)
+{
+	float vertices[2 * 6 * 3 * 3];
+	int idx_vert = 0;
+
+	float texcoords[2 * 6 * 3 * 2];
+	int idx_tex = 0;
+
+	// front
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 1;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	// back
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 1;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	// left
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 1;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	// right
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 1;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	// bottom
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 1;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = min.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	// top
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 1;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;
+
+	vertices[idx_vert++] = min.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 0; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = min.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 0;
+	vertices[idx_vert++] = max.x; vertices[idx_vert++] = max.y; vertices[idx_vert++] = max.z;
+	texcoords[idx_tex++] = 1; texcoords[idx_tex++] = 1;	
+
+	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
+	shader->Sprite();
+
+	shader->DrawTri(vertices, texcoords, 2 * 6 * 3, texid);
+}
+
 void DrawCross(const vec3& center, const vec3& size, d2d::Colorf color)
 {
 	float vertices[18];

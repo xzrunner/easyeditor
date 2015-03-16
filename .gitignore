@@ -154,6 +154,8 @@ easyterrain2d/platform/msvc2008/easyterrain2d
 easyterrain2d/platform/msvc2008/libterrain2d
 raytracer/platform/msvc2008/raytracer
 raytracer/platform/msvc2008/libraytracer
+easypseudo3d/platform/msvc2008/easypseudo3d
+easypseudo3d/platform/msvc2008/libpseudo3d
 
 template/platform/msvc2008/easytemplate
 template/platform/msvc2008/libtemplate

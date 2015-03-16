@@ -32,6 +32,7 @@ namespace d2d
 		virtual void initGL();
 		virtual void onSize(int w, int h) = 0;
 		virtual void onDraw() = 0;
+		virtual void OnDrawDC() const {}
 
 		void onSize(wxSizeEvent& event);
 		void onPaint(wxPaintEvent& event);

@@ -27,6 +27,7 @@ public:
 	vec3 GetToward() const;		// N
 
 	void SetScreenSize(int width, int height);
+	void GetScreenSize(int* width, int* height) const;
 
 	vec3 MapToSphere(ivec2 touchpoint) const;
 
