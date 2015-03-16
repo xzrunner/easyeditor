@@ -109,7 +109,7 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 	glFlush();
 	SwapBuffers();
 
-	//wxPaintDC dc(this);
+//	wxPaintDC dc(this);
 	OnDrawDC();
 }
 

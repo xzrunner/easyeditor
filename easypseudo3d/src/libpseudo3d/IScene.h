@@ -10,6 +10,7 @@ public:
 	virtual ~IScene() {}
 	virtual void Load() = 0;
 	virtual void Draw() const = 0;
+	virtual void DebugDraw() const = 0;
 
 }; // IScene
 

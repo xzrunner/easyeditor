@@ -106,12 +106,6 @@ void Camera::SetScreenSize(int width, int height)
 	m_height = height;
 }
 
-void Camera::GetScreenSize(int* width, int* height) const
-{
-	*width = m_width;
-	*height = m_height;
-}
-
 vec3 Camera::MapToSphere(ivec2 touchpoint) const
 {
 // 	int viewport[4];

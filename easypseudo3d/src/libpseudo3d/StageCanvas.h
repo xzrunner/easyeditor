@@ -19,7 +19,6 @@ public:
 
 protected:
 	virtual void initGL();
-	virtual void onSize(int w, int h);
 	virtual void onDraw();
 	virtual void OnDrawDC() const;
 
@@ -38,8 +37,6 @@ private:
 	wxTimer m_timer;
 
 	IScene* m_scene;
-
-	mat4 m_mat_projection;
 
 	DECLARE_EVENT_TABLE()
 

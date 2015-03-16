@@ -8,16 +8,21 @@
 namespace epseudo3d
 {
 
+class StageCanvas;
+
 class QuadScene : public IScene
 {
 public:
-	QuadScene();
+	QuadScene(StageCanvas* canvas);
 	virtual ~QuadScene();
 
 	virtual void Load();
 	virtual void Draw() const;
+	virtual void DebugDraw() const;
 
 private:
+	StageCanvas* m_canvas;
+
 	d2d::Image* m_img;
 
 }; // QuadScene

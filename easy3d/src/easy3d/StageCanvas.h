@@ -19,12 +19,16 @@ public:
 	Camera& GetCamera3() { return m_camera3; }
 	const Camera& GetCamera3() const { return m_camera3; }
 
+	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
+
 protected:
 	virtual void initGL();
 	virtual void onSize(int w, int h);
 
 private:
 	Camera m_camera3;
+
+	mat4 m_mat_projection;
 
 }; // StageCanvas
 
