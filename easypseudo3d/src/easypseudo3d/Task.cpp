@@ -21,13 +21,13 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
-	epseudo3d::StageCanvas* canvas = static_cast<epseudo3d::StageCanvas*>(m_stage->getCanvas());
+	epseudo3d::StageCanvas3D* canvas = static_cast<epseudo3d::StageCanvas3D*>(m_stage->getCanvas());
 	canvas->LoadScene(filename);
 }
 
 void Task::store(const char* filename) const
 {
-	epseudo3d::StageCanvas* canvas = static_cast<epseudo3d::StageCanvas*>(m_stage->getCanvas());
+	epseudo3d::StageCanvas3D* canvas = static_cast<epseudo3d::StageCanvas3D*>(m_stage->getCanvas());
 	canvas->StoreScene(filename);
 }
 
@@ -71,8 +71,12 @@ const d2d::EditPanel* Task::getEditPanel() const
 void Task::InitLayout()
 {
 	m_stage = new d2d::EditPanel(m_parent, m_parent);
-	m_stage->setCanvas(new epseudo3d::StageCanvas(m_stage));
-	m_stage->setEditOP(new e3d::ControlCameraOP(m_stage));
+
+//	m_stage->setCanvas(new epseudo3d::StageCanvas3D(m_stage));
+//	m_stage->setEditOP(new e3d::ControlCameraOP(m_stage));
+
+	m_stage->setCanvas(new epseudo3d::StageCanvas2D(m_stage));
+	m_stage->setEditOP(new d2d::ZoomViewOP(m_stage, false));
 }
 
 }

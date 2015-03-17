@@ -1,5 +1,5 @@
 #include "Mapping3DScene.h"
-#include "StageCanvas.h"
+#include "StageCanvas3D.h"
 
 #include <easy3d.h>
 #include <easyimage.h>
@@ -9,7 +9,7 @@
 namespace epseudo3d
 {
 
-Mapping3DScene::Mapping3DScene(StageCanvas* canvas)
+Mapping3DScene::Mapping3DScene(StageCanvas3D* canvas)
 	: m_canvas(canvas)
 	, m_img(NULL)
 {

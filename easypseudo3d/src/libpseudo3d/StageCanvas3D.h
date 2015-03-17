@@ -1,5 +1,5 @@
-#ifndef _EASYPSEUDO3D_STAGE_CANVAS_H_
-#define _EASYPSEUDO3D_STAGE_CANVAS_H_
+#ifndef _EASYPSEUDO3D_STAGE_CANVAS_3D_H_
+#define _EASYPSEUDO3D_STAGE_CANVAS_3D_H_
 
 #include <drag2d.h>
 #include <easy3d.h>
@@ -9,10 +9,10 @@ namespace epseudo3d
 
 class IScene;
 
-class StageCanvas : public e3d::StageCanvas
+class StageCanvas3D : public e3d::StageCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* stage);
+	StageCanvas3D(d2d::EditPanel* stage);
 
 	void StoreScene(const char* filename) const;
 	void LoadScene(const char* filename);
@@ -27,9 +27,6 @@ protected:
 	void onTimer(wxTimerEvent& event);
 
 private:
-	void InitCamera();
-
-private:
 	enum
 	{
 		TIMER_ID = 1000
@@ -42,8 +39,8 @@ private:
 
 	DECLARE_EVENT_TABLE()
 
-}; // StageCanvas
+}; // StageCanvas3D
 
 }
 
-#endif // _EASYPSEUDO3D_STAGE_CANVAS_H_
+#endif // _EASYPSEUDO3D_STAGE_CANVAS_3D_H_

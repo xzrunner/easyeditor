@@ -172,11 +172,19 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\libpseudo3d\StageCanvas.cpp"
+					RelativePath="..\..\..\src\libpseudo3d\StageCanvas2D.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libpseudo3d\StageCanvas.h"
+					RelativePath="..\..\..\src\libpseudo3d\StageCanvas2D.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpseudo3d\StageCanvas3D.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libpseudo3d\StageCanvas3D.h"
 					>
 				</File>
 			</Filter>
@@ -206,6 +214,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libpseudo3d\Projection2DScene.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpseudo3d\Projection3DScene.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpseudo3d\Projection3DScene.h"
 				>
 			</File>
 		</Filter>

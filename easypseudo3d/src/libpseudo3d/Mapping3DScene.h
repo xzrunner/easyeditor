@@ -9,12 +9,12 @@
 namespace epseudo3d
 {
 
-class StageCanvas;
+class StageCanvas3D;
 
 class Mapping3DScene : public IScene
 {
 public:
-	Mapping3DScene(StageCanvas* canvas);
+	Mapping3DScene(StageCanvas3D* canvas);
 	virtual ~Mapping3DScene();
 
 	virtual void Store(const char* filename) const;
@@ -24,7 +24,7 @@ public:
 	virtual void DebugDraw() const;
 
 private:
-	StageCanvas* m_canvas;
+	StageCanvas3D* m_canvas;
 
 	d2d::Image* m_img;
 

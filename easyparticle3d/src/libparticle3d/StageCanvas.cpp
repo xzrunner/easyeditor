@@ -7,7 +7,7 @@
 namespace eparticle3d
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::PerspectCanvas)
+BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
 END_EVENT_TABLE()
 

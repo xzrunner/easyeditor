@@ -4,33 +4,24 @@
 #include "IScene.h"
 
 #include <drag2d.h>
-#include <easy3d.h>
 
 namespace epseudo3d
 {
 
-class StageCanvas;
-
 class Projection2DScene : public IScene
 {
 public:
-	Projection2DScene(StageCanvas* canvas);
+	Projection2DScene();
 	virtual ~Projection2DScene();
 
-	virtual void Store(const char* filename) const;
+	virtual void Store(const char* filename) const {}
 	virtual void Load(const char* filename);
 
 	virtual void Draw() const;
-	virtual void DebugDraw() const;
+	virtual void DebugDraw() const {}
 
 private:
-	void DrawSprite(d2d::Image* img, int x, int y) const;
-
-private:
-	StageCanvas* m_canvas;
-
-	std::vector<d2d::Image*> m_images;
-	std::vector<vec2> m_positions;
+	std::vector<d2d::ISprite*> m_sprites;
 
 }; // Projection2DScene
 
