@@ -10,6 +10,7 @@ OceanMesh::OceanMesh(const libshape::PolygonShape* shape,
 	 : m_shape(shape)
 	 , m_image0(image)
 	 , m_image1(NULL)
+	 , m_lock_bound(false)
 {
 	m_row = MESH_ROW;
 	m_col = MESH_COL;
@@ -55,7 +56,7 @@ void OceanMesh::Build()
 	std::vector<d2d::Vector> tris_texcoords;
 	CalTrisTexcords(r, tris_vertices, tris_texcoords);
 
-	BuildGrids(r, tris_vertices, tris_texcoords);
+	BuildGrids(r, tris_vertices, tris_texcoords, bound);
 }
 
 void OceanMesh::SetSmallGridSize(int row, int col)
@@ -247,7 +248,8 @@ void OceanMesh::CalTrisTexcords(const d2d::Rect& r,
 
 void OceanMesh::BuildGrids(const d2d::Rect& region, 
 						   const std::vector<d2d::Vector>& vertices, 
-						   const std::vector<d2d::Vector>& texcoords)
+						   const std::vector<d2d::Vector>& texcoords,
+						   const std::vector<d2d::Vector>& bound)
 {
 	float img_w = m_image0->getSize().xLength(),
 		  img_h = m_image0->getSize().yLength();
@@ -266,7 +268,7 @@ void OceanMesh::BuildGrids(const d2d::Rect& region,
 		if (!*grid) {
 			*grid = new MeshShape(*m_image0->getImage());
 		}
-		(*grid)->InsertTriangle(&vertices[i], &texcoords[i]);
+		(*grid)->InsertTriangle(&vertices[i], &texcoords[i], bound);
 	}
 
 	for (int i = 0, n = grids.size(); i < n; ++i) {
@@ -287,6 +289,10 @@ void OceanMesh::UpdateWave(float during)
 			emesh::Triangle* tri = tris[j];
 			for (int k = 0; k < 3; ++k) {
 				emesh::Node* n = tri->nodes[k];
+				
+				if (m_lock_bound && *((bool*)n->ud)) {
+					continue;
+				}
 
   				// todo
   				float x_times = (n->ori_xy.x - debug_r.xMin - m_texcoords_base.x * img_w) / img_w,

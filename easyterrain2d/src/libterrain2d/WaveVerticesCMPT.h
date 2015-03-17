@@ -26,6 +26,7 @@ private:
 	void OnChangeGridSize(wxSpinEvent& event);
 	void OnChangeWaveParams(wxSpinEvent& event);
 	void OnChangeDisplayTriangles(wxCommandEvent& event);
+	void OnChangeBoundLock(wxCommandEvent& event);
 
 private:
 	wxCheckBox* m_switch;
@@ -33,6 +34,8 @@ private:
 	wxSpinCtrl *m_row_spin, *m_col_spin;
 
 	wxSpinCtrl *m_wave_speed, *m_wave_height;
+
+	wxCheckBox* m_bound_lock;
 
 }; // WaveVerticesCMPT
 

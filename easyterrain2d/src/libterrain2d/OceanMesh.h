@@ -50,6 +50,9 @@ public:
 
 	d2d::Rect GetRegion() const;
 
+	void SetBoundLock(bool lock) { m_lock_bound = lock; }
+	bool IsBoundLockOpen() const { return m_lock_bound; }
+
 private:
 	void Clear();
 
@@ -58,7 +61,7 @@ private:
 	void CalTrisTexcords(const d2d::Rect& region, const std::vector<d2d::Vector>& vertices,
 		std::vector<d2d::Vector>& texcoords);
 	void BuildGrids(const d2d::Rect& region, const std::vector<d2d::Vector>& vertices, 
-		const std::vector<d2d::Vector>& texcoords);
+		const std::vector<d2d::Vector>& texcoords, const std::vector<d2d::Vector>& bound);
 
 	void UpdateWave(float during);
 	void UpdateUVMove(float dt);
@@ -79,6 +82,8 @@ private:
 
 	bool m_blend_open;
 	float m_blend_base, m_blend_speed;
+
+	bool m_lock_bound;
 
 	// debug
 	d2d::Rect debug_r;

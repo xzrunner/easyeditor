@@ -30,6 +30,8 @@ void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json
 
 	value["tex_blend"]["open"] = ocean->IsTexBlendOpen();
 	value["tex_blend"]["speed"] = ocean->GetTexBlendSpeed() / 0.01f;
+
+	value["bound_lock"] = ocean->IsBoundLockOpen();
 }
 
 OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& value)
@@ -65,6 +67,8 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 
 	ocean->OpenBlend(value["tex_blend"]["open"].asBool());
 	ocean->SetBlendSpeed(value["tex_blend"]["speed"].asDouble() * 0.01f);
+
+	ocean->SetBoundLock(value["bound_lock"].asBool());
 
 	return ocean;
 }

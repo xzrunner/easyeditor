@@ -21,6 +21,7 @@ void WaveVerticesCMPT::SetControlersValue(const OceanMesh* ocean)
 	m_col_spin->SetValue(ocean->GetWaveGridCol());
 	m_wave_speed->SetValue(ocean->GetWaveSpeed() / 0.1f);
 	m_wave_height->SetValue(ocean->GetWaveHeight());
+	m_bound_lock->SetValue(ocean->IsBoundLockOpen());
 }
 
 wxSizer* WaveVerticesCMPT::initLayout()
@@ -89,6 +90,14 @@ wxSizer* WaveVerticesCMPT::initLayout()
 		}
 	}
 	sizer->AddSpacer(20);
+ 	// edge lock
+ 	{
+ 		m_bound_lock = new wxCheckBox(this, wxID_ANY, wxT("bound lock"));
+ 		Connect(m_bound_lock->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+ 			wxCommandEventHandler(WaveVerticesCMPT::OnChangeBoundLock));
+ 		sizer->Add(m_bound_lock);
+ 	}
+ 	sizer->AddSpacer(20);
 	// display
 	{
 		wxCheckBox* tris_edge = new wxCheckBox(this, wxID_ANY, wxT("triangle edge"));
@@ -136,6 +145,15 @@ void WaveVerticesCMPT::OnChangeDisplayTriangles(wxCommandEvent& event)
 {
 	static_cast<WaveVerticesOP*>(m_editOP)->m_draw_tris = event.IsChecked();
 	m_editPanel->Refresh();
+}
+
+void WaveVerticesCMPT::OnChangeBoundLock(wxCommandEvent& event)
+{
+	bool lock = event.IsChecked();
+	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_editPanel)->GetOceans();
+	for (int i = 0, n = oceans.size(); i < n; ++i) {
+		oceans[i]->SetBoundLock(lock);
+	}
 }
 
 }
