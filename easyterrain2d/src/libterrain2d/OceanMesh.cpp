@@ -98,6 +98,10 @@ void OceanMesh::Update(float dt)
 		UpdateBlend(dt);
 	}
 	during += dt;
+
+	if (m_wave_speed * during > d2d::PI * 2) {
+		during = 0;
+	}
 }
 
 void OceanMesh::Draw(const d2d::Matrix& mt, bool draw_tris) const
@@ -289,7 +293,6 @@ void OceanMesh::UpdateWave(float during)
 			emesh::Triangle* tri = tris[j];
 			for (int k = 0; k < 3; ++k) {
 				emesh::Node* n = tri->nodes[k];
-				
 				if (m_lock_bound && *((bool*)n->ud)) {
 					continue;
 				}
