@@ -10,7 +10,7 @@ StageCanvas2D::StageCanvas2D(d2d::EditPanel* stage)
 {
 	setBgColor(d2d::BLACK);
 
-	m_scene = new Projection2DScene();
+	m_scene = new Projection2DScene(stage);
 }
 
 void StageCanvas2D::initGL()
@@ -26,6 +26,8 @@ void StageCanvas2D::initGL()
 void StageCanvas2D::onDraw()
 {
 	m_scene->Draw();
+
+	m_editPanel->getEditOP()->onDraw();
 }
 
 }

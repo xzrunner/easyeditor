@@ -28,6 +28,8 @@ namespace d2d
 
 		void SetCurrentCanvas();
 
+		Camera* GetCamera() { return m_camera; }
+
 	protected:
 		virtual void initGL();
 		virtual void onSize(int w, int h) = 0;

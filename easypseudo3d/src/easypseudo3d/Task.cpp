@@ -76,7 +76,7 @@ void Task::InitLayout()
 //	m_stage->setEditOP(new e3d::ControlCameraOP(m_stage));
 
 	m_stage->setCanvas(new epseudo3d::StageCanvas2D(m_stage));
-	m_stage->setEditOP(new d2d::ZoomViewOP(m_stage, false));
+	m_stage->setEditOP(new epseudo3d::Proj2DEditOP(m_stage));
 }
 
 }

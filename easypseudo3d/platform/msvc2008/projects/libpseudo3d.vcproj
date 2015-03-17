@@ -209,6 +209,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libpseudo3d\Proj2DEditOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libpseudo3d\Proj2DEditOP.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libpseudo3d\Projection2DScene.cpp"
 				>
 			</File>
