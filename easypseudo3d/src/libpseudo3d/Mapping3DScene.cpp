@@ -67,15 +67,13 @@ void Mapping3DScene::Store(const char* filename) const
 	value["texture filepath"] = img_path + ".png";
 
 	// store camera
-	vec3 pos;
-	float rot_heading, rot_elevation;
 	const e3d::Camera& cam = m_canvas->GetCamera3();
-	cam.GetPositionInfo(&pos, &rot_heading, &rot_elevation);
+	const vec3& pos = cam.GetPosition();
 	value["cam"]["x"] = pos.x;
 	value["cam"]["y"] = pos.y;
 	value["cam"]["z"] = pos.z;
-	value["cam"]["rot_heading"] = rot_heading;
-	value["cam"]["rot_elevation"] = rot_elevation;
+	value["cam"]["rot_heading"] = cam.GetRotHeading();
+	value["cam"]["rot_elevation"] = cam.GetRotElevation();
 	
 	// store to file
 	Json::StyledStreamWriter writer;
@@ -137,17 +135,14 @@ void Mapping3DScene::Load(const char* filename)
 		vertex_val = value["vertices"][i++];
 	}
 
+	e3d::Camera& cam = m_canvas->GetCamera3();
 	vec3 pos;
 	pos.x = value["cam"]["x"].asDouble();
 	pos.y = value["cam"]["y"].asDouble();
 	pos.z = value["cam"]["z"].asDouble();
-
-	float rot_heading, rot_elevation;
-	rot_heading = value["cam"]["rot_heading"].asDouble();
-	rot_elevation = value["cam"]["rot_elevation"].asDouble();
-
-	e3d::Camera& cam = m_canvas->GetCamera3();
-	cam.SetPositionInfo(pos, rot_heading, rot_elevation);
+	cam.SetPosition(pos);
+	cam.SetRotHeading(value["cam"]["rot_heading"].asDouble());
+	cam.SetRotElevation(value["cam"]["rot_elevation"].asDouble());
 }
 
 void Mapping3DScene::Draw() const

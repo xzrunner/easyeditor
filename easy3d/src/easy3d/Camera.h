@@ -20,6 +20,11 @@ public:
 	const vec3& GetPosition() const { return m_pos; }
 	void SetPosition(const vec3& pos) { m_pos = pos; }
 
+	float GetRotHeading() const { return m_rot_heading; }
+	void SetRotHeading(float rot_heading) { m_rot_heading = rot_heading; }
+	float GetRotElevation() const { return m_rot_elevation; }
+	void SetRotElevation(float rot_elevation) { m_rot_elevation = rot_elevation; }
+
 	void Rotate(float dheading, float delevation);
 
 	vec3 GetLeft() const;		// U
@@ -29,9 +34,6 @@ public:
 	void SetScreenSize(int width, int height);
 
 	vec3 MapToSphere(ivec2 touchpoint) const;
-
-	void GetPositionInfo(vec3* pos, float* rot_heading, float* rot_elevation) const;
-	void SetPositionInfo(const vec3& pos, float rot_heading, float rot_elevation);
 
 	void Reset();
 

@@ -1,4 +1,5 @@
 #include "Projection2DScene.h"
+#include "StageCanvas.h"
 
 namespace epseudo3d
 {
@@ -6,13 +7,12 @@ namespace epseudo3d
 static const float SCALE = 0.1f;
 
 Projection2DScene::Projection2DScene(StageCanvas* canvas)
+	: m_canvas(canvas)
 {
-
 }
 
 Projection2DScene::~Projection2DScene()
 {
-	
 }
 
 void Projection2DScene::Store(const char* filename) const
@@ -27,6 +27,11 @@ void Projection2DScene::Load(const char* filename)
 
 	m_images.push_back(d2d::ImageMgr::Instance()->getItem("mmzb/1005_3_lv12.png"));
 	m_positions.push_back(vec2(0, 200));
+
+	e3d::Camera& cam = m_canvas->GetCamera3();
+	cam.SetPosition(vec3(3.7414827, 47.854599, 70.245010));
+	cam.SetRotHeading(6.9000001);
+	cam.SetRotElevation(-128.39999);
 }
 
 void Projection2DScene::Draw() const

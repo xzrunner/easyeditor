@@ -135,20 +135,6 @@ vec3 Camera::MapToSphere(ivec2 touchpoint) const
 	return mapped / radius;
 }
 
-void Camera::GetPositionInfo(vec3* pos, float* rot_heading, float* rot_elevation) const
-{
-	*pos = m_pos;
-	*rot_heading = m_rot_heading;
-	*rot_elevation = m_rot_elevation;
-}
-
-void Camera::SetPositionInfo(const vec3& pos, float rot_heading, float rot_elevation)
-{
-	m_pos = pos;
-	m_rot_heading = rot_heading;
-	m_rot_elevation = rot_elevation;
-}
-
 void Camera::Reset()
 {
 	m_pos.x = m_pos.y = 0;

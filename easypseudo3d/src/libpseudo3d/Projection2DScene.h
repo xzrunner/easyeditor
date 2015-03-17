@@ -27,6 +27,8 @@ private:
 	void DrawSprite(d2d::Image* img, int x, int y) const;
 
 private:
+	StageCanvas* m_canvas;
+
 	std::vector<d2d::Image*> m_images;
 	std::vector<vec2> m_positions;
 
