@@ -53,6 +53,8 @@ public:
 	void SetBoundLock(bool lock) { m_lock_bound = lock; }
 	bool IsBoundLockOpen() const { return m_lock_bound; }
 
+	const std::vector<MeshShape*>& GetMeshes() const { return m_grids; }
+
 private:
 	void Clear();
 

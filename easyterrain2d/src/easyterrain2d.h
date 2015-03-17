@@ -8,5 +8,7 @@
 #include "libterrain2d/ToolbarPanel.h"
 #include "libterrain2d/Sprite.h"
 #include "libterrain2d/Symbol.h"
+#include "libterrain2d/OceanMesh.h"
+#include "libterrain2d/MeshShape.h"
 
 #endif // _EASYTERRAIN_H_

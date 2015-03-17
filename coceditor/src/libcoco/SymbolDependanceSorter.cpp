@@ -6,6 +6,7 @@
 #include <easyanim.h>
 #include <easyscale9.h>
 #include <easymesh.h>
+#include <easyterrain2d.h>
 
 namespace libcoco
 {
@@ -169,6 +170,10 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 		{
 			m_unique.insert(&mesh->getSymbol());
 		}
+		else if (const eterrain2d::Sprite* ocean = dynamic_cast<const eterrain2d::Sprite*>(sprite))
+		{
+			m_unique.insert(&ocean->getSymbol());
+		}
 	}
 }
 
@@ -283,6 +288,24 @@ void SymbolDependanceSorter::sort()
 					m_result.push_back(image);
 				}
 				m_result.push_back(mesh);
+				m_unique.erase(itr);
+				break;
+			}
+			else if (eterrain2d::Symbol* ocean_symbol = dynamic_cast<eterrain2d::Symbol*>(symbol))
+			{
+				const std::vector<eterrain2d::OceanMesh*> oceans = ocean_symbol->GetOceans();
+				assert(oceans.size() == 1);
+				eterrain2d::OceanMesh* ocean = oceans[0];
+				const d2d::ImageSymbol* img = ocean->GetImage0();
+				std::string path = img->getFilepath();
+
+				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+				std::vector<const d2d::ISymbol*>::iterator itr_find 
+					= std::find(m_result.begin(), m_result.end(), image);
+				if (itr_find == m_result.end()) {
+					m_result.push_back(image);
+				}
+				m_result.push_back(ocean_symbol);
 				m_unique.erase(itr);
 				break;
 			}

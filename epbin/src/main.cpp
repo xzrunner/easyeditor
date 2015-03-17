@@ -34,9 +34,22 @@ int main(int argc, char *argv[])
 	/////////////////////
 
 	assert(argc == 4);
-	epbin::BinaryEPD epd(argv[2]);
+
+	epbin::BinaryEPD epd(argv[1]);
 	try {
-		epd.Pack(argv[3], true);
+		std::string epd_path = argv[3];
+		epd_path += ".epd";
+		epd.Pack(epd_path, true);
+	} catch (epbin::Exception e) {
+		std::cout << e.what() << "\n";
+		return 1;
+	}
+
+	epbin::BinaryEPP epp(argv[2], epbin::TT_PNG8);
+	try {
+		std::string epp_path = argv[3];
+		epp_path += ".epp";
+		epp.Pack(epp_path);
 	} catch (epbin::Exception e) {
 		std::cout << e.what() << "\n";
 		return 1;

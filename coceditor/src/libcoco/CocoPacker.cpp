@@ -143,6 +143,12 @@ void CocoPacker::ResolveSymbols()
 						int size = ParserMesh(mesh);
 						m_id += size;
 					}
+				} 
+				else if (eterrain2d::Sprite* ocean = dynamic_cast<eterrain2d::Sprite*>(sprite)) 
+				{
+					m_mapSpriteID.insert(std::make_pair(ocean, m_id));
+					int size = ParserTerrain2D(ocean);
+					m_id += size;
 				}
 			}
 
@@ -322,6 +328,10 @@ void CocoPacker::ResolveSymbols()
 		{
 			// mesh's id
 			m_mapSymbolID.insert(std::make_pair(mesh, m_id++));
+		}
+		else if (const eterrain2d::Symbol* ocean = dynamic_cast<const eterrain2d::Symbol*>(symbol))
+		{
+			m_mapSymbolID.insert(std::make_pair(ocean, m_id++));
 		}
 	}
 }
@@ -818,6 +828,34 @@ void CocoPacker::ParserScale9(const escale9::Symbol* symbol)
 	}
 }
 
+void CocoPacker::CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture)
+{
+	if (picture->entry->rotated)
+	{
+		float w = fabs(picture->scr[1].y - picture->scr[2].y);
+		float h = fabs(picture->scr[0].x - picture->scr[1].x);
+		for (int i = 0; i < 4; ++i)
+		{
+			float u = src[i].x, v = src[i].y;
+			src[i].x = picture->scr[1].x + v * h;
+//			src[i].y = picture->scr[1].y + (1-u) * w;
+			src[i].y = w - (picture->scr[1].y + (1-u) * w);
+		}
+	}
+	else
+	{
+		float w = fabs(picture->scr[1].x - picture->scr[2].x);
+		float h = fabs(picture->scr[0].y - picture->scr[1].y);
+		for (int i = 0; i < 4; ++i)
+		{
+			float u = src[i].x, v = src[i].y;
+			src[i].x = picture->scr[0].x + u * w;
+//			src[i].y = picture->scr[0].y + v * h;
+			src[i].y = h - (picture->scr[0].y + v * h);
+		}
+	}
+}
+
 int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 {
 	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(sprite->getSymbol().getImage()->filepath());
@@ -873,28 +911,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 				src[1] = left_up->nodes[0]->uv;
 				src[2] = right_down->nodes[1]->uv;
 				src[3] = right_down->nodes[2]->uv;
-				if (picture->entry->rotated)
-				{
-					float w = fabs(picture->scr[1].y - picture->scr[2].y);
-					float h = fabs(picture->scr[0].x - picture->scr[1].x);
-					for (int i = 0; i < 4; ++i)
-					{
-						float u = src[i].x, v = src[i].y;
-						src[i].x = picture->scr[1].x + v * h;
-						src[i].y = picture->scr[1].y + (1-u) * w;
-					}
-				}
-				else
-				{
-					float w = fabs(picture->scr[1].x - picture->scr[2].x);
-					float h = fabs(picture->scr[0].y - picture->scr[1].y);
-					for (int i = 0; i < 4; ++i)
-					{
-						float u = src[i].x, v = src[i].y;
-						src[i].x = picture->scr[0].x + u * w;
-						src[i].y = picture->scr[0].y + v * h;
-					}
-				}
+				CalSrcFromUV(src, picture);
 				std::string sx0 = wxString::FromDouble(src[0].x), sy0 = wxString::FromDouble(src[0].y);
 				std::string sx1 = wxString::FromDouble(src[1].x), sy1 = wxString::FromDouble(src[1].y);
 				std::string sx2 = wxString::FromDouble(src[2].x), sy2 = wxString::FromDouble(src[2].y);
@@ -949,28 +966,7 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 			src[1] = tri->nodes[1]->uv;
 			src[2] = tri->nodes[2]->uv;
 			src[3] = tri->nodes[2]->uv;
-			if (picture->entry->rotated)
-			{
-				float w = fabs(picture->scr[1].y - picture->scr[2].y);
-				float h = fabs(picture->scr[0].x - picture->scr[1].x);
-				for (int i = 0; i < 4; ++i)
-				{
-					float u = src[i].x, v = src[i].y;
-					src[i].x = picture->scr[1].x + v * h;
-					src[i].y = picture->scr[1].y + (1-u) * w;
-				}
-			}
-			else
-			{
-				float w = fabs(picture->scr[1].x - picture->scr[2].x);
-				float h = fabs(picture->scr[0].y - picture->scr[1].y);
-				for (int i = 0; i < 4; ++i)
-				{
-					float u = src[i].x, v = src[i].y;
-					src[i].x = picture->scr[0].x + u * w;
-					src[i].y = picture->scr[0].y + v * h;
-				}
-			}
+			CalSrcFromUV(src, picture);
 			std::string sx0 = wxString::FromDouble(src[0].x), sy0 = wxString::FromDouble(src[0].y);
 			std::string sx1 = wxString::FromDouble(src[1].x), sy1 = wxString::FromDouble(src[1].y);
 			std::string sx2 = wxString::FromDouble(src[2].x), sy2 = wxString::FromDouble(src[2].y);
@@ -1055,40 +1051,153 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 
 int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 {
-// 	// only use one texture in the sprite
-// 
-// 	const std::vector<OceanMesh*> oceans = sprite->getSymbol().GetOceans();
-// 	assert(oceans.size() == 1);
-// 
-// 	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(oceans[0]->GetImage0()->filepath());
-// 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
-// 	if (!picture) {
-// 		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the texpacker file!";
-// 		throw d2d::Exception(str.c_str());
-// 	}
-// 
-// 	//////////////////////////////////////////////////////////////////////////
-// 	// pictures
-// 	//////////////////////////////////////////////////////////////////////////
-// 	// id
-// 	std::map<const d2d::ISprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
-// 	if (itr_sprite == m_mapSpriteID.end()) {
-// 		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the m_mapSpriteID!";
-// 		throw d2d::Exception(str.c_str());
-// 	}
-// 	int curr_id = itr_sprite->second;
-// 	// tex
-// 	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
-// 
-// 	int frame = 1;
-// 	if (sprite->GetSpeed().y != 0) {
-// 		frame = std::fabs(std::floor(1.0f / sprite->GetSpeed().y));
-// 	}
-// 	std::vector<int> frame_size;
-// 	d2d::Vector speed = sprite->GetSpeed();
-// 	emesh::Shape* shape = const_cast<emesh::Shape*>(sprite->getSymbol().getShape());
+	// only use one texture in the sprite
 
-	return 0;
+	const std::vector<eterrain2d::OceanMesh*> oceans = sprite->getSymbol().GetOceans();
+	assert(oceans.size() == 1);
+	eterrain2d::OceanMesh* ocean = oceans[0];
+	const d2d::ImageSymbol* img = ocean->GetImage0();
+	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(img->getFilepath());
+	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
+	if (!picture) {
+		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the texpacker file!";
+		throw d2d::Exception(str.c_str());
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// pictures
+	//////////////////////////////////////////////////////////////////////////
+	// id
+	std::map<const d2d::ISprite*, int>::iterator itr_sprite = m_mapSpriteID.find(sprite);
+	if (itr_sprite == m_mapSpriteID.end()) {
+		std::string str = "\""+sprite->getSymbol().getFilepath()+"\""+" not in the m_mapSpriteID!";
+		throw d2d::Exception(str.c_str());
+	}
+	int curr_id = itr_sprite->second;
+	// tex
+	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
+
+	int frame = 1;
+	if (ocean->GetWaveSpeed() != 0) {
+		frame = std::floor(d2d::PI * 2 / ocean->GetWaveSpeed() * 30);
+	}
+
+	std::vector<int> frames_count;
+	for (int i = 0; i < frame; ++i)
+	{
+		int tri_count = 0;
+		for (int i = 0; i < oceans.size(); ++i) {
+			eterrain2d::OceanMesh* ocean = oceans[i];
+			const std::vector<eterrain2d::MeshShape*>& meshes = ocean->GetMeshes();
+			for (int j = 0; j < meshes.size(); ++j) {
+				const eterrain2d::MeshShape* mesh = meshes[j];
+				const std::vector<emesh::Triangle*>& tris = mesh->GetTriangles();
+				tri_count += tris.size();
+				for (int k = 0; k < tris.size(); ++k) {
+					// same with ´ò°üÆÕÍ¨emesh::Mesh
+
+					emesh::Triangle* tri = tris[k];
+
+					// id
+					lua::TableAssign ta(*m_gen, "picture", false, false);
+					m_gen->line(lua::assign("id", wxString::FromDouble(curr_id++).ToStdString()) + ",");
+
+					// src
+					d2d::Vector src[4];
+					src[0] = tri->nodes[0]->uv;
+					src[1] = tri->nodes[1]->uv;
+					src[2] = tri->nodes[2]->uv;
+					src[3] = tri->nodes[2]->uv;
+					CalSrcFromUV(src, picture);
+					std::string sx0 = wxString::FromDouble(src[0].x), sy0 = wxString::FromDouble(src[0].y);
+					std::string sx1 = wxString::FromDouble(src[1].x), sy1 = wxString::FromDouble(src[1].y);
+					std::string sx2 = wxString::FromDouble(src[2].x), sy2 = wxString::FromDouble(src[2].y);
+					std::string sx3 = wxString::FromDouble(src[3].x), sy3 = wxString::FromDouble(src[3].y);
+					std::string assign_src = lua::assign("src", lua::tableassign("", 8, sx0.c_str(), sy0.c_str(), 
+						sx1.c_str(), sy1.c_str(), sx2.c_str(), sy2.c_str(), sx3.c_str(), sy3.c_str()));		
+
+					// screen
+					d2d::Vector screen[4];
+					screen[0] = tri->nodes[0]->xy;
+					screen[1] = tri->nodes[1]->xy;
+					screen[2] = tri->nodes[2]->xy;
+					screen[3] = tri->nodes[2]->xy;
+					// 			// translate
+					// 			for (size_t i = 0; i < 4; ++i)
+					// 				screen[i] += sprite->getPosition();
+					// flip y
+					for (size_t i = 0; i < 4; ++i)
+						screen[i].y = -screen[i].y;
+					// scale 16
+					const float SCALE = 16;
+					for (size_t i = 0; i < 4; ++i)
+						screen[i] *= SCALE; 
+					std::string dx0 = wxString::FromDouble(screen[0].x); std::string dy0 = wxString::FromDouble(screen[0].y);
+					std::string dx1 = wxString::FromDouble(screen[1].x); std::string dy1 = wxString::FromDouble(screen[1].y);
+					std::string dx2 = wxString::FromDouble(screen[2].x); std::string dy2 = wxString::FromDouble(screen[2].y);
+					std::string dx3 = wxString::FromDouble(screen[3].x); std::string dy3 = wxString::FromDouble(screen[3].y);
+					std::string assign_screen = lua::assign("screen", lua::tableassign("", 8, dx0.c_str(), dy0.c_str(), 
+						dx1.c_str(), dy1.c_str(), dx2.c_str(), dy2.c_str(), dx3.c_str(), dy3.c_str()));
+
+					lua::tableassign(*m_gen, "", 3, assign_tex.c_str(), assign_src.c_str(), assign_screen.c_str());
+				}
+			}
+
+			ocean->Update(0.033f);
+		}
+
+ 		frames_count.push_back(tri_count);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// animation
+	//////////////////////////////////////////////////////////////////////////
+
+	// copy from ParserMesh
+
+	lua::TableAssign ta(*m_gen, "animation", false, false);
+	// export
+	const d2d::ISymbol* symbol = &sprite->getSymbol();
+	if (!symbol->name.empty())
+		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
+	// id
+	std::map<const d2d::ISymbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
+	if (itr_mesh_symbol == m_mapSymbolID.end()) {
+		std::string str = "\""+symbol->getFilepath()+"\""+" not in m_mapSymbolID!";
+		throw d2d::Exception(str.c_str());
+	}
+	std::string sid = wxString::FromDouble(itr_mesh_symbol->second);
+	m_gen->line(lua::assign("id", sid.c_str()) + ",");
+	// component
+	{
+		lua::TableAssign ta(*m_gen, "component", true);
+		for (int id = itr_sprite->second; id < curr_id; ++id)
+		{
+			std::string assign_id = lua::assign("id", wxString::FromDouble(id).ToStdString());
+			lua::tableassign(*m_gen, "", 1, assign_id.c_str());
+		}
+	}
+	// frames
+	int id = 0;
+	{
+		lua::TableAssign ta(*m_gen, "", true);
+
+		for (int i = 0; i < frame; ++i)
+		{
+			lua::TableAssign ta(*m_gen, "", true);
+			for (int j = 0; j < frames_count[i]; ++j)
+			{
+				std::string assign_index = lua::assign("index", wxString::FromDouble(id++).ToStdString());
+				//				lua::tableassign(*m_gen, "", 1, assign_index.c_str());
+
+				std::string assign_color = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
+				std::string assign_add = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
+				lua::tableassign(*m_gen, "", 3, assign_index.c_str(), assign_color.c_str(), assign_add.c_str());
+			}
+		}
+	}
+
+	return id;
 }
 
 void CocoPacker::ParserSymbolBase(const d2d::ISymbol* symbol)

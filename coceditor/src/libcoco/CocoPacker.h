@@ -47,6 +47,8 @@ private:
 	void ParserComplex(const ecomplex::Symbol* symbol);
 	void ParserAnimation(const anim::Symbol* symbol);
 	void ParserScale9(const escale9::Symbol* symbol);
+
+	void CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture);
 	int ParserMesh(const emesh::Sprite* sprite);
 	int ParserTerrain2D(const eterrain2d::Sprite* sprite);
 
