@@ -110,9 +110,9 @@ BinaryB4R::Picture* BinaryB4R::CreatePicture(const std::string& filepath) const
 	int sw, sh, sc, sf;
 	uint8_t* src_pixels = eimage::ImageIO::Read(filepath.c_str(), sw, sh, sc, sf);
 
-	// cut
-	eimage::RegularRectCut cut(src_pixels, sw, sh);
-	cut.AutoCut();
+// 	// cut
+// 	eimage::RegularRectCut cut(src_pixels, sw, sh);
+// 	cut.AutoCut();
 
 	// compress texture
 	uint8_t* pixels;
