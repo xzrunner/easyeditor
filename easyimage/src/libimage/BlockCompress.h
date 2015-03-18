@@ -17,6 +17,8 @@ public:
 	void Compress();
 	void Uncompress(const std::string& dir) const;
 
+	void PrintStatistics() const;
+
 private:
 	struct Picture;
 
@@ -60,6 +62,10 @@ private:
 	std::vector<Block*> m_blocks;
 
 	std::vector<Picture*> m_debug_pic;	
+
+	// statistics
+	int m_tot_area;
+	int m_tot_block, m_used_block, m_saved_block;
 
 }; // BlockCompress
 

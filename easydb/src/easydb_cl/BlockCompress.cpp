@@ -38,7 +38,9 @@ void BlockCompress::Trigger(const std::string& src_dir, const std::string& dst_d
 	d2d::FilenameTools::fetchAllFiles(src_dir, files);
 	std::vector<std::string> filepaths;
 	for (int i = 0, n = files.size(); i < n; ++i) {
-		filepaths.push_back(files[i].ToStdString());
+		if (d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_image)) {
+			filepaths.push_back(files[i].ToStdString());
+		}
 	}
 
 	eimage::BlockCompress compress(filepaths);

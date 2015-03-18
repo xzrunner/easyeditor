@@ -4,11 +4,13 @@
 namespace eimage
 {
 
-const int BlockCompress::TOLERANCE = 0;
+const int BlockCompress::TOLERANCE = 500;
 
 BlockCompress::BlockCompress(const std::vector<std::string>& image_files)
 	: m_image_files(image_files)
 {
+	m_tot_area = 0;
+	m_tot_block = m_used_block = m_saved_block = 0;
 }
 
 BlockCompress::~BlockCompress()
@@ -21,7 +23,9 @@ void BlockCompress::Compress()
 {
 	for (int i = 0; i < m_image_files.size(); ++i) {
 		Compress(m_image_files[i]);
-	}	
+	}
+
+	PrintStatistics();
 }
 
 void BlockCompress::Uncompress(const std::string& dir) const
@@ -33,10 +37,9 @@ void BlockCompress::Uncompress(const std::string& dir) const
 
 void BlockCompress::Compress(const std::string& filepath)
 {
-	int tot = 0, dup = 0;
-
 	int w, h, c, f;
 	uint8_t* pixels = ImageIO::Read(filepath.c_str(), w, h, c, f);
+	m_tot_area += w * h;
 
 	Picture* pic = new Picture;
 	pic->w = w;
@@ -50,6 +53,8 @@ void BlockCompress::Compress(const std::string& filepath)
 				continue;
 			}
 
+			++m_tot_block;
+
 			Block* b = new Block(pixels, w, h, x, y);
 			Block* same = NULL;
 			for (int i = 0; i < m_blocks.size(); ++i) {
@@ -59,11 +64,11 @@ void BlockCompress::Compress(const std::string& filepath)
 				}
 			}
 			if (same) {
-				++dup;
+				++m_saved_block;
 				delete b;
 				pic->blocks.push_back(same);
 			} else {
-				++tot;
+				++m_used_block;
 				m_blocks.push_back(b);
 				pic->blocks.push_back(b);
 			}
@@ -71,8 +76,6 @@ void BlockCompress::Compress(const std::string& filepath)
 	}
 
 	m_debug_pic.push_back(pic);
-
-	std::cout << "used:" << tot << ", dup:" << dup << std::endl;
 }
 
 void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
@@ -92,10 +95,21 @@ void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
 		}
 	}
 
-	std::string filepath = dir + "//" + d2d::FilenameTools::getFilenameWithExtension(pic.filepath);
+//	std::string filepath = dir + "//" + d2d::FilenameTools::getFilenameWithExtension(pic.filepath);
+	std::string filepath = pic.filepath;
 	ImageIO::Write(pixels, pic.w, pic.h, filepath.c_str());
 
 	delete[] pixels;
+}
+
+void BlockCompress::PrintStatistics() const
+{
+	printf("tolerance:%d\n", TOLERANCE);
+	printf("tot_area:%d\n", m_tot_area);
+	printf("tot_block:%d, used:%d, saved:%d\n", m_tot_block, m_used_block, m_saved_block);
+
+	float used = m_used_block * 16;
+	printf("after percent:%0.2f %0.2f\n", used / m_tot_area, used / (m_tot_block * 16));
 }
 
 bool BlockCompress::IsBlockTransparent(uint8_t* pixels, int w, int h, int x, int y)
@@ -105,8 +119,7 @@ bool BlockCompress::IsBlockTransparent(uint8_t* pixels, int w, int h, int x, int
 			if (px >= w || py >= h) {
 				continue;
 			}
-			int _py = h - 1 - py;
-			if (pixels[(w * _py + px) * 4 + 4 - 1] != 0) {
+			if (pixels[(w * py + px) * 4 + 4 - 1] != 0) {
 				return false;
 			}
 		}
