@@ -57,19 +57,25 @@ void OutlineImage::Trigger(const std::string& dir) const
 		Json::Value value;
 		d2d::Vector offset(-0.5f*image->originWidth(), -0.5f*image->originHeight());
 		std::vector<d2d::Vector> vertices(fine.GetResult());
-		for (int i = 0, n = vertices.size(); i < n; ++i) {
-			vertices[i] += offset;
-		}
-		d2d::JsonTools::store(vertices, value["normal"]);
 
-		wxString out_file = d2d::FilenameTools::getFilenameAddTag(filepath, 
-			eimage::OUTLINE_FILE_TAG, "json");
-		Json::StyledStreamWriter writer;
-		std::locale::global(std::locale(""));
-		std::ofstream fout(out_file.fn_str());
-		std::locale::global(std::locale("C"));	
-		writer.write(fout, value);
-		fout.close();	
+		float src_area = image->clipWidth() * image->clipHeight();
+		float dst_area = d2d::Math::GetPolygonArea(vertices);
+		if (dst_area < src_area * 0.95f)
+		{
+			for (int i = 0, n = vertices.size(); i < n; ++i) {
+				vertices[i] += offset;
+			}
+			d2d::JsonTools::store(vertices, value["normal"]);
+
+			wxString out_file = d2d::FilenameTools::getFilenameAddTag(filepath, 
+				eimage::OUTLINE_FILE_TAG, "json");
+			Json::StyledStreamWriter writer;
+			std::locale::global(std::locale(""));
+			std::ofstream fout(out_file.fn_str());
+			std::locale::global(std::locale("C"));	
+			writer.write(fout, value);
+			fout.close();	
+		}
 
 		image->Release();
 	}
