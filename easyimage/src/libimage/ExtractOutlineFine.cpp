@@ -447,7 +447,7 @@ void ExtractOutlineFine::MidPosExplore(const d2d::Vector& start, const d2d::Vect
 						}
 				}
 			}
-			if (score <= old_score) {
+			if (score <= old_score + 1) {
 				break;
 			}
 		}
