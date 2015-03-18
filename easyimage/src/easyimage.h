@@ -17,4 +17,6 @@
 
 #include "libimage/LanczosResamplingShader.h"
 
+#include "libimage/BlockCompress.h"
+
 #endif // _EASYIMAGE_H_

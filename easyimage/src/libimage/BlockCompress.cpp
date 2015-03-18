@@ -1,0 +1,187 @@
+#include "BlockCompress.h"
+#include "ImageIO.h"
+
+namespace eimage
+{
+
+const int BlockCompress::TOLERANCE = 0;
+
+BlockCompress::BlockCompress(const std::vector<std::string>& image_files)
+	: m_image_files(image_files)
+{
+}
+
+BlockCompress::~BlockCompress()
+{
+	for_each(m_blocks.begin(), m_blocks.end(), DeletePointerFunctor<Block>());
+	for_each(m_debug_pic.begin(), m_debug_pic.end(), DeletePointerFunctor<Picture>());
+}
+
+void BlockCompress::Compress()
+{
+	for (int i = 0; i < m_image_files.size(); ++i) {
+		Compress(m_image_files[i]);
+	}	
+}
+
+void BlockCompress::Uncompress(const std::string& dir) const
+{
+	for (int i = 0; i < m_debug_pic.size(); ++i) {
+		Uncompress(dir, *m_debug_pic[i]);
+	}
+}
+
+void BlockCompress::Compress(const std::string& filepath)
+{
+	int tot = 0, dup = 0;
+
+	int w, h, c, f;
+	uint8_t* pixels = ImageIO::Read(filepath.c_str(), w, h, c, f);
+
+	Picture* pic = new Picture;
+	pic->w = w;
+	pic->h = h;
+	pic->filepath = filepath;
+
+	for (int y = 0; y * 4 < h; ++y) {
+		for (int x = 0; x * 4 < w; ++x) {
+			if (IsBlockTransparent(pixels, w, h, x, y)) {
+				pic->blocks.push_back(NULL);
+				continue;
+			}
+
+			Block* b = new Block(pixels, w, h, x, y);
+			Block* same = NULL;
+			for (int i = 0; i < m_blocks.size(); ++i) {
+				if (b->IsSame(m_blocks[i])) {
+					same = m_blocks[i];
+					break;
+				}
+			}
+			if (same) {
+				++dup;
+				delete b;
+				pic->blocks.push_back(same);
+			} else {
+				++tot;
+				m_blocks.push_back(b);
+				pic->blocks.push_back(b);
+			}
+		}
+	}
+
+	m_debug_pic.push_back(pic);
+
+	std::cout << "used:" << tot << ", dup:" << dup << std::endl;
+}
+
+void BlockCompress::Uncompress(const std::string& dir, const Picture& pic) const
+{
+	int sz = pic.w * pic.h * 4;
+	uint8_t* pixels = new uint8_t[sz];
+	memset(pixels, 0, sz);
+
+	int idx = 0;
+	for (int y = 0; y * 4 < pic.h; ++y) {
+		for (int x = 0; x * 4 < pic.w; ++x) {
+			Block* b = pic.blocks[idx];
+			if (b) {
+				b->CopyToPicture(pic, x, y, pixels);
+			}
+			++idx;
+		}
+	}
+
+	std::string filepath = dir + "//" + d2d::FilenameTools::getFilenameWithExtension(pic.filepath);
+	ImageIO::Write(pixels, pic.w, pic.h, filepath.c_str());
+
+	delete[] pixels;
+}
+
+bool BlockCompress::IsBlockTransparent(uint8_t* pixels, int w, int h, int x, int y)
+{
+	for (int px = x * 4; px < x * 4 + 4; ++px) {
+		for (int py = y * 4; py < y * 4 + 4; ++py) {
+			if (px >= w || py >= h) {
+				continue;
+			}
+			int _py = h - 1 - py;
+			if (pixels[(w * _py + px) * 4 + 4 - 1] != 0) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class BlockCompress::Block
+//////////////////////////////////////////////////////////////////////////
+
+BlockCompress::Block::
+Block(uint8_t* pixels, int w, int h, int x, int y)
+{
+	m_pixels = new uint8_t[4 * 4 * 4];
+	uint8_t* ptr = m_pixels;
+	for (int py = y * 4; py < y * 4 + 4; ++py) {
+		for (int px = x * 4; px < x * 4 + 4; ++px) {
+			if (px >= w || py >= h) {
+				memset(ptr, 0, 4);				
+			} else {
+				int src_idx = (w * py + px) * 4;
+				memcpy(ptr, &pixels[src_idx], sizeof(uint8_t) * 4);
+			}
+			ptr += 4;
+		}
+	}
+}
+
+BlockCompress::Block::
+~Block()
+{
+	delete m_pixels;
+}
+
+bool BlockCompress::Block::
+IsSame(const Block* b) const
+{
+	for (int y = 0; y < 4; ++y) {
+		for (int x = 0; x < 4; ++x) {
+			int dis_sqr = PixelDistanceSquare(b, x, y);
+			if (dis_sqr > TOLERANCE) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+void BlockCompress::Block::
+CopyToPicture(const Picture& pic, int x, int y, uint8_t* pixels) const
+{
+	for (int py = y * 4; py < y * 4 + 4; ++py) {
+		for (int px = x * 4; px < x * 4 + 4; ++px) {
+			if (px >= pic.w || py >= pic.h) {
+				continue;
+			}
+			int src_ptr = ((py - y * 4) * 4 + (px - x * 4)) * 4;
+			int dst_ptr = ((pic.h - 1 - py) * pic.w + px) * 4;
+			memcpy(&pixels[dst_ptr], &m_pixels[src_ptr], sizeof(uint8_t) * 4);
+		}
+	}
+}
+
+int BlockCompress::Block::
+PixelDistanceSquare(const Block* b, int x, int y) const
+{
+	assert(x >= 0 && x < 4 && y >= 0 && y < 4);
+	int dis = 0;
+	int idx = (4 * y + x) * 4;
+	for (int i = idx; i < idx + 4; ++i) {
+		int len = m_pixels[i] - b->m_pixels[i];
+		dis += len * len;
+	}
+	return dis;
+}
+
+}

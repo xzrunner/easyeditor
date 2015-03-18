@@ -365,6 +365,18 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="compress"
+			>
+			<File
+				RelativePath="..\..\..\src\libimage\BlockCompress.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libimage\BlockCompress.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libimage\config.h"
 			>

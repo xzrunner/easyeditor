@@ -35,6 +35,7 @@
 #include "TransToETC1.h"
 #include "BinRRR.h"
 #include "BinB4R.h"
+#include "BlockCompress.h"
 
 namespace edb
 {
@@ -76,6 +77,7 @@ void CommandLoader::Init()
 	fc->Register(TransToETC1::Create());
 	fc->Register(BinRRR::Create());
 	fc->Register(BinB4R::Create());
+	fc->Register(BlockCompress::Create());
 }
 
 }
