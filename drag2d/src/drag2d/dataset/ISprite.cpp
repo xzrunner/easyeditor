@@ -222,13 +222,34 @@ void ISprite::setScale(float xScale, float yScale)
 
 	translate(old_offset - new_offset);
 
-	m_scale.set(xScale, yScale);
+	//////////////////////////////////////////////////////////////////////////
 
+// 	Matrix mat_old, mat_new;
+// 	mat_old.scale(m_scale.x, m_scale.y);
+// 	mat_new.scale(xScale, yScale);
+// 
+// 	Vector offset = Math::transVector(m_offset, mat_new) - Math::transVector(m_offset, mat_old);
+// 
+// 	m_offset += offset;
+// 	translate(-offset);
+
+	//////////////////////////////////////////////////////////////////////////
+
+	m_scale.set(xScale, yScale);
 	buildBounding();
  }
 
 void ISprite::setShear(float xShear, float yShear)
 {
+	Matrix mat_old, mat_new;
+	mat_old.shear(m_shear.x, m_shear.y);
+	mat_new.shear(xShear, yShear);
+
+	Vector offset = Math::transVector(m_offset, mat_new) - Math::transVector(m_offset, mat_old);
+
+	m_offset += offset;
+	translate(-offset);
+
 	m_shear.set(xShear, yShear);
 	buildBounding();
 }

@@ -78,9 +78,10 @@ void ShearSpriteState::Shear(const Vector& curr)
 	float hw = m_sprite->getSymbol().getSize().xLength() * 0.5f,
 		hh = m_sprite->getSymbol().getSize().yLength() * 0.5f;
 
+	const d2d::Vector& offset = m_sprite->getOffset();
 	if (m_ctrl_node.type == SpriteCtrlNode::UP)
 	{
-		x = 0; y = hh;
+		x = 0; y = hh - offset.y;
 		if (c != 0)
 			kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
 		else
@@ -88,7 +89,7 @@ void ShearSpriteState::Shear(const Vector& curr)
 	}
 	else if (m_ctrl_node.type == SpriteCtrlNode::DOWN)
 	{
-		x = 0; y = -hh;
+		x = 0; y = -hh - offset.y;
 		if (c != 0)
 			kx = (pos.x - c*sx*x + ky*s*sy*x + s*sy*y - px) / (c*sx*y);
 		else
@@ -96,7 +97,7 @@ void ShearSpriteState::Shear(const Vector& curr)
 	}
 	else if (m_ctrl_node.type == SpriteCtrlNode::LEFT)
 	{
-		x = -hw; y = 0;
+		x = -hw - offset.x; y = 0;
 		if (s != 0)
 			ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x);
 		else
@@ -104,7 +105,7 @@ void ShearSpriteState::Shear(const Vector& curr)
 	}
 	else if (m_ctrl_node.type == SpriteCtrlNode::RIGHT)
 	{
-		x = hw; y = 0;
+		x = hw - offset.x; y = 0;
 		if (s != 0)
 			ky = (pos.x - c*sx*x - kx*c*sx*y + s*sy*y - px) / (-s*sy*x);
 		else
