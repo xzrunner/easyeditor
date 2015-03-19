@@ -4,7 +4,7 @@
 namespace eimage
 {
 
-const int BlockCompress::TOLERANCE = 500;
+const int BlockCompress::TOLERANCE = 50;
 
 BlockCompress::BlockCompress(const std::vector<std::string>& image_files)
 	: m_image_files(image_files)
@@ -22,10 +22,20 @@ BlockCompress::~BlockCompress()
 void BlockCompress::Compress()
 {
 	for (int i = 0; i < m_image_files.size(); ++i) {
+		printf("Compress [%d/%d]\n", i, m_image_files.size());
 		Compress(m_image_files[i]);
+
+		PrintStatistics();
 	}
 
 	PrintStatistics();
+
+
+
+	std::ofstream fout("block_compress.txt");
+	float used = m_used_block * 16;
+	fout << used / m_tot_area << " " << used / (m_tot_block * 16) << std::endl;
+	fout.close();
 }
 
 void BlockCompress::Uncompress(const std::string& dir) const
