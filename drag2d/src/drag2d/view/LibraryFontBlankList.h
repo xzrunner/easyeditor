@@ -7,7 +7,7 @@ namespace d2d
 	class LibraryFontBlankList : public LibraryList
 	{
 	public:
-		LibraryFontBlankList(wxWindow* parent);
+		LibraryFontBlankList(ILibraryPage* page);
 
 		virtual void onListDoubleClicked(wxCommandEvent& event);
 

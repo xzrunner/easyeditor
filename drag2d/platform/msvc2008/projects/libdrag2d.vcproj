@@ -1533,14 +1533,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\view\LibraryDropTarget.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\LibraryDropTarget.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\view\LibraryList.cpp"
 					>
 				</File>
@@ -1617,6 +1609,26 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\LibraryScriptsPage.h"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="drop"
+					>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\LibraryPageDropTarget.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\LibraryPageDropTarget.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\LibraryPanelDropTarget.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\LibraryPanelDropTarget.h"
 						>
 					</File>
 				</Filter>

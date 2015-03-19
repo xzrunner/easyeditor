@@ -65,8 +65,9 @@ void ILibraryPage::initLayout(bool draggable/* = true*/)
 		initButtons(sizer);
 	}
 
-	if (!m_list)
+	if (!m_list) {
 		m_list = new LibraryList(this);
+	}
 	sizer->Add(m_list, 1, wxEXPAND);
 
 	SetSizer(sizer);

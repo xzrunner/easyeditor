@@ -2,7 +2,7 @@
 #include "ILibraryPage.h"
 #include "LibraryList.h"
 #include "LibraryImagePage.h"
-#include "LibraryDropTarget.h"
+#include "LibraryPanelDropTarget.h"
 
 #include "common/visitors.h"
 #include "dataset/SymbolMgr.h"
@@ -17,7 +17,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 	initLayout();
 
-	SetDropTarget(new LibraryDropTarget(this));
+	SetDropTarget(new LibraryPanelDropTarget(this));
 }
 
 void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)

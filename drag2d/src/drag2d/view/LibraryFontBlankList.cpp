@@ -6,8 +6,8 @@
 namespace d2d
 {
 
-LibraryFontBlankList::LibraryFontBlankList(wxWindow* parent)
-	: LibraryList(parent, wxT("fontblank"))
+LibraryFontBlankList::LibraryFontBlankList(ILibraryPage* page)
+	: LibraryList(page, wxT("fontblank"))
 {
 }
 

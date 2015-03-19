@@ -1,13 +1,13 @@
-#include "LibraryDropTarget.h"
+#include "LibraryPanelDropTarget.h"
+#include "LibraryPanel.h"
 
 #include "dataset/ISymbol.h"
 #include "dataset/SymbolMgr.h"
-#include "view/LibraryPanel.h"
 
 namespace d2d
 {
 
-bool LibraryDropTarget::OnDropFiles(wxCoord x, wxCoord y, 
+bool LibraryPanelDropTarget::OnDropFiles(wxCoord x, wxCoord y, 
 									const wxArrayString& filenames)
 {
 	for (int i = 0, n = filenames.size(); i < n; ++i)
@@ -15,7 +15,7 @@ bool LibraryDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 		wxString filename = filenames[i];
 		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filename);
 		symbol->RefreshThumbnail(filename);
-		m_library->AddSymbol(symbol);
+		m_panel->AddSymbol(symbol);
 		symbol->Release();
 	}
 	return true;

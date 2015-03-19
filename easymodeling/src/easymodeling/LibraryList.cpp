@@ -6,8 +6,8 @@
 
 using namespace emodeling;
 
-LibraryList::LibraryList(wxWindow* parent)
-	: d2d::LibraryList(parent)
+LibraryList::LibraryList(d2d::ILibraryPage* page)
+	: d2d::LibraryList(page)
 {
 }
 

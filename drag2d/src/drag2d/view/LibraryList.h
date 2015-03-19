@@ -1,23 +1,30 @@
-#pragma once
+#ifndef _DRAG2D_LIBRARY_LIST_H_
+#define _DRAG2D_LIBRARY_LIST_H_
 
 #include "widgets/VerticalImageList.h"
-#include "interfaces.h"
 
 namespace d2d
 {
-	class ISymbol;
 
-	class LibraryList : public VerticalImageList
-	{
-	public:
-		LibraryList(wxWindow* parent, const wxString& filter = wxT("symbol"),
-			bool draggable = true);
+class ISymbol;
+class ILibraryPage;
 
-		ListItem* getItem(int index = -1) const;
-		ISymbol* getSymbol(int index = -1) const;
+class LibraryList : public VerticalImageList
+{
+public:
+	LibraryList(ILibraryPage* page, const wxString& filter = wxT("symbol"),
+		bool draggable = true);
 
-		void reloadTexture() const;
+	ListItem* getItem(int index = -1) const;
+	ISymbol* getSymbol(int index = -1) const;
 
-	}; // LibraryList
+	void reloadTexture() const;
+
+private:
+	ILibraryPage* m_page;
+
+}; // LibraryList
+
 }
 
+#endif // _DRAG2D_LIBRARY_LIST_H_

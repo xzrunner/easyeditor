@@ -1,15 +1,18 @@
 #include "LibraryList.h"
+#include "ILibraryPage.h"
+#include "LibraryPageDropTarget.h"
 
 #include "dataset/ISymbol.h"
 
 namespace d2d
 {
 
-LibraryList::LibraryList(wxWindow* parent,
+LibraryList::LibraryList(ILibraryPage* page,
 						 const wxString& filter/* = wxT("symbol")*/,
 						 bool draggable /*= true*/)
-	: VerticalImageList(parent, filter, draggable)
+	: VerticalImageList(page, filter, draggable)
 {
+	SetDropTarget(new LibraryPageDropTarget(page));
 }
 
 ListItem* LibraryList::getItem(int index/* = -1*/) const

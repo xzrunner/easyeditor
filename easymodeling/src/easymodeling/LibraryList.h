@@ -9,7 +9,7 @@ namespace emodeling
 	class LibraryList : public d2d::LibraryList
 	{
 	public:
-		LibraryList(wxWindow* parent);
+		LibraryList(d2d::ILibraryPage* page);
 
 		virtual void onListDoubleClicked(wxCommandEvent& event);
 
