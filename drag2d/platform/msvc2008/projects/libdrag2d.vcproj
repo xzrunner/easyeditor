@@ -1612,26 +1612,6 @@
 						>
 					</File>
 				</Filter>
-				<Filter
-					Name="drop"
-					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryPageDropTarget.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryPageDropTarget.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryPanelDropTarget.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\LibraryPanelDropTarget.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="property"
@@ -1722,14 +1702,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\HistoryList.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\StageDropTarget.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\drag2d\view\StageDropTarget.h"
 					>
 				</File>
 				<File
@@ -1966,6 +1938,42 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\SettingsDialog.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="drop"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\FrameDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\FrameDropTarget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LibraryPageDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LibraryPageDropTarget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LibraryPanelDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\LibraryPanelDropTarget.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\StageDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\StageDropTarget.h"
 					>
 				</File>
 			</Filter>

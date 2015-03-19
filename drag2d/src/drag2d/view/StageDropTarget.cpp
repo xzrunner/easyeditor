@@ -1,18 +1,18 @@
 #include "StageDropTarget.h"
-#include "Frame.h"
 #include "EditPanel.h"
 #include "MultiSpritesImpl.h"
 #include "LibraryPanel.h"
 
 #include "dataset/SpriteFactory.h"
+#include "dataset/SymbolMgr.h"
 
 namespace d2d
 {
 
-StageDropTarget::StageDropTarget(Frame* frame, EditPanel* edit_panel,
-								 MultiSpritesImpl* sprites_impl, LibraryPanel* library)
-	: m_frame(frame)
-	, m_edit_panel(edit_panel)
+StageDropTarget::StageDropTarget(EditPanel* edit_panel, 
+								 MultiSpritesImpl* sprites_impl, 
+								 LibraryPanel* library)
+	: m_edit_panel(edit_panel)
 	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {
@@ -55,12 +55,21 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 
 void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 {
- 	if (filenames.size() != 1) {
- 		return;
- 	}
- 
- 	wxString filename = filenames[0];
- 	m_frame->openFile(filename);
+	for (int i = 0, n = filenames.size(); i < n; ++i)
+	{
+		wxString filename = filenames[i];
+		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filename);
+		symbol->RefreshThumbnail(filename);
+		bool success = m_library->AddSymbol(symbol);
+		if (success) {
+			Vector pos = m_edit_panel->transPosScreenToProject(x, y);
+			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
+			sprite->translate(pos);
+			m_sprites_impl->insertSprite(sprite);
+			sprite->Release();
+		}
+		symbol->Release();
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -92,17 +92,17 @@ void LibraryPanel::setCanvas(GLCanvas* canvas)
 	}
 }
 
-void LibraryPanel::AddSymbol(ISymbol* symbol)
+bool LibraryPanel::AddSymbol(ISymbol* symbol)
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i) 
 	{
 		ILibraryPage* page = m_pages[i];
-		if (page->isHandleSymbol(symbol)) 
-		{
+		if (page->isHandleSymbol(symbol)) {
 			page->AddItem(symbol);
-			break;
+			return true;
 		}
 	}
+	return false;
 }
 
 void LibraryPanel::LoadFromConfig()

@@ -18,8 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_editOP = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this);
 
- 	d2d::Frame* _frame = static_cast<d2d::Frame*>(m_frame);
- 	SetDropTarget(new StageDropTarget(_frame, this, library));
+ 	SetDropTarget(new StageDropTarget(this, library));
 }
 
 StagePanel::~StagePanel()
@@ -113,8 +112,8 @@ void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageS
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::StageDropTarget::
-StageDropTarget(d2d::Frame* frame, StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(frame, stage, NULL, library)
+StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
+	: d2d::StageDropTarget(stage, NULL, library)
 	, m_stage(stage)
 {
 }

@@ -41,7 +41,7 @@ namespace d2d
 
 		void setCanvas(GLCanvas* canvas);
 
-		void AddSymbol(ISymbol* symbol);
+		bool AddSymbol(ISymbol* symbol);
 
 		void LoadFromConfig();
 

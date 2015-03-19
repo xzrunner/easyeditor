@@ -6,6 +6,7 @@
 #include "common/config.h"
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
+#include "view/FrameDropTarget.h"
 #include "render/DynamicTexAndFont.h"
 
 #include <wx/filename.h>
@@ -44,6 +45,8 @@ Frame::Frame(const wxString& title, const wxString& filetag, const wxSize& size)
 #else
 	wxLog::SetLogLevel(0);
 #endif
+
+	SetDropTarget(new FrameDropTarget(this));
 }
 
 Frame::~Frame()

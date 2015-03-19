@@ -40,8 +40,7 @@ private:
  	class StageDropTarget : public d2d::StageDropTarget
  	{
  	public:
- 		StageDropTarget(d2d::Frame* frame, StagePanel* stage, 
- 			d2d::LibraryPanel* library);
+ 		StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library);
  
  		virtual bool OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos);
  

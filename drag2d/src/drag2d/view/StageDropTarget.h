@@ -6,7 +6,6 @@
 namespace d2d
 {
 
-class Frame;
 class EditPanel;
 class MultiSpritesImpl;
 class LibraryPanel;
@@ -16,8 +15,8 @@ class Vector;
 class StageDropTarget : public wxDropTarget
 {
 public:
-	StageDropTarget(Frame* frame, EditPanel* edit_panel, 
-		MultiSpritesImpl* sprites_impl, LibraryPanel* library);
+	StageDropTarget(EditPanel* edit_panel, MultiSpritesImpl* sprites_impl, 
+		LibraryPanel* library);
 
 	//
 	//	interface wxDropTarget
@@ -49,8 +48,6 @@ private:
 	}; // Data 
 
 private:
-	Frame* m_frame;
-
 	EditPanel* m_edit_panel;
 	MultiSpritesImpl* m_sprites_impl;
 	LibraryPanel* m_library;

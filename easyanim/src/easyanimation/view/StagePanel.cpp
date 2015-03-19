@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_canvas = new StageCanvas(this);
 
 	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(Context::Instance()->library);
-	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, this, library));
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuDelJointNode, this, Menu_DelJointNode);

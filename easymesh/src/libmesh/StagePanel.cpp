@@ -132,8 +132,7 @@ void StagePanel::init(d2d::LibraryPanel* library)
 	m_canvas = new StageCanvas(this);
 
 	if (library) {
-		d2d::Frame* frame = static_cast<d2d::Frame*>(m_frame);
-		SetDropTarget(new StageDropTarget(frame, this, library));
+		SetDropTarget(new StageDropTarget(this, library));
 	}
 }
 
@@ -142,8 +141,8 @@ void StagePanel::init(d2d::LibraryPanel* library)
 //////////////////////////////////////////////////////////////////////////
 
 StagePanel::StageDropTarget::
-StageDropTarget(d2d::Frame* frame, StagePanel* stage, d2d::LibraryPanel* library)
-	: d2d::StageDropTarget(frame, stage, NULL, library)
+StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
+	: d2d::StageDropTarget(stage, NULL, library)
 	, m_stage(stage)
 {
 }
