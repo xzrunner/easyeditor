@@ -16,16 +16,6 @@ StageDropTarget::StageDropTarget(EditPanel* edit_panel,
 	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {
-	SetDataObject(new Data(*this));
-}
-
-wxDragResult StageDropTarget::OnData(wxCoord x, wxCoord y, wxDragResult def)
-{
-	if ( !GetData() )
-		return wxDragNone;
-
-	Data* dobj = (Data*)m_dataObject;
-	return dobj->OnData(x, y) ? def : wxDragNone;
 }
 
 void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
@@ -70,54 +60,6 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 		}
 		symbol->Release();
 	}
-}
-
-//////////////////////////////////////////////////////////////////////////
-// class StageDropTarget::Data
-//////////////////////////////////////////////////////////////////////////
-
-static const wxChar* FORMAT_ID = wxT("StageDropData");
-
-StageDropTarget::Data::
-Data(StageDropTarget& drop)
-	: m_drop(drop)
-	, m_data_object_last(NULL)
-{
-	Add(new wxTextDataObject);
-	Add(new wxFileDataObject);
-}
-
-bool StageDropTarget::Data::
-SetData(const wxDataFormat& format, size_t len, const void *buf)
-{
-	m_data_object_last = GetObject(format);
-
-	wxCHECK_MSG(m_data_object_last, FALSE,
-		wxT("unsupported format in wxURLDataObject"));
-
-	return m_data_object_last->SetData(len, buf);
-}
-
-bool StageDropTarget::Data::
-OnData(wxCoord x, wxCoord y)
-{
-	bool ret = false;
-
-	wxDataFormat format = m_data_object_last->GetPreferredFormat();
-	if (format == wxDF_UNICODETEXT)
-	{
-		wxTextDataObject* obj = static_cast<wxTextDataObject*>(m_data_object_last);
-		m_drop.OnDropText(x, y, obj->GetText());
-		ret = true;
-	}
-	else if (format == wxDF_FILENAME)
-	{
-		wxFileDataObject* obj = static_cast<wxFileDataObject*>(m_data_object_last);
-		m_drop.OnDropFiles(x, y, obj->GetFilenames());
-		ret = true;
-	}
-
-	return ret;
 }
 
 }

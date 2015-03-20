@@ -1945,6 +1945,22 @@
 				Name="drop"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\CombinedDropData.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\CombinedDropData.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\CombinedDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\CombinedDropTarget.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\FrameDropTarget.cpp"
 					>
 				</File>
