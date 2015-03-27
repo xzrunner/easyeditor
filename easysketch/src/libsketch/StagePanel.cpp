@@ -15,7 +15,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	m_editOP = new ArrangeSpriteOP(this);
 
-	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, this, library));
 }
 
 StagePanel::~StagePanel()
