@@ -93,6 +93,7 @@ void ExtractOutlineRaw::CreateBorderLine()
 
 	// find start, downmost and leftmost
 	bool* flag = new bool[m_width * m_height];
+	int bound_count = 0;
 	d2d::Vector first;
 	first.setInvalid();
 	for (int y = 0; y < m_height; ++y) {
@@ -100,6 +101,7 @@ void ExtractOutlineRaw::CreateBorderLine()
 			bool is_border = IsPixelBorder(x, y);
 			flag[m_width*y+x] = is_border;
 			if (is_border) {
+				++bound_count;
 				if (first.isValid()) {
 					if (y < first.y || y == first.y && x < first.x) {
 						first.set(x, y);
@@ -111,63 +113,73 @@ void ExtractOutlineRaw::CreateBorderLine()
 		}
 	}
 
-	d2d::Vector curr_pos = first;
-	int curr_dir = -1;
-	while (curr_pos.isValid()) 
+	while (bound_count > 0) 
 	{
-		// finish
-		if (!m_border_line.empty() &&
-			curr_pos == first) {
-			m_border_axis_line.push_back(curr_pos + d2d::Vector(0.5f, 0.5f));
-			break;
-		}
-		m_border_axis_line.push_back(curr_pos + d2d::Vector(0.5f, 0.5f));
+		std::vector<d2d::Vector> border_axis_line;
+		std::vector<d2d::Vector> border_line;
 
-		int next_dir;
-		if (curr_dir == -1) {
-			// the first, start from [0]
-			next_dir = 0;
-		} else {
-			// curr dir is next of inverse last dir
-			next_dir = (curr_dir + (QUERY_COUNT >> 1)) + 1;
-		}
-		// search in certain order
-		for (int i = 0; i < QUERY_COUNT; ++i) {
-			int dir = (i+next_dir)%QUERY_COUNT;
-			d2d::Vector nearby = curr_pos + QUERY_OFFSET[dir];
-			// connect
-			if (!IsPixelTransparente(flag, nearby.x, nearby.y)) {
-				curr_dir = dir;
-				curr_pos = nearby;
-				break;
-			} else {
-				d2d::Vector new_pos = curr_pos;
-				if (dir == 0) {
-					new_pos.x += 0.5f;
-				} else if (dir == 1) {
-					;
-				} else if (dir == 2) {
-					new_pos.y += 0.5f;
-				} else if (dir == 3) {
-					new_pos.y += 1;
-				} else if (dir == 4) {
-					new_pos.x += 0.5f;
-					new_pos.y += 1;
-				} else if (dir == 5) {
-					new_pos.x += 1;
-					new_pos.y += 1;
-				} else if (dir == 6) {
-					new_pos.x += 1;
-					new_pos.y += 0.5f;
-				} else {
-					assert(dir == 7);
-					new_pos.x += 1;
-				}
-				if (m_border_line.empty() || m_border_line.back() != new_pos) {
-					m_border_line.push_back(new_pos);
-				}
+		d2d::Vector curr_pos = first;
+		int curr_dir = -1;
+		while (curr_pos.isValid()) 
+		{
+			--bound_count;
+
+			// finish
+			if (!border_line.empty() &&
+				curr_pos == first) {
+					border_axis_line.push_back(curr_pos + d2d::Vector(0.5f, 0.5f));
+					break;
 			}
-		}	
+			border_axis_line.push_back(curr_pos + d2d::Vector(0.5f, 0.5f));
+
+			int next_dir;
+			if (curr_dir == -1) {
+				// the first, start from [0]
+				next_dir = 0;
+			} else {
+				// curr dir is next of inverse last dir
+				next_dir = (curr_dir + (QUERY_COUNT >> 1)) + 1;
+			}
+			// search in certain order
+			for (int i = 0; i < QUERY_COUNT; ++i) {
+				int dir = (i+next_dir)%QUERY_COUNT;
+				d2d::Vector nearby = curr_pos + QUERY_OFFSET[dir];
+				// connect
+				if (!IsPixelTransparente(flag, nearby.x, nearby.y)) {
+					curr_dir = dir;
+					curr_pos = nearby;
+					break;
+				} else {
+					d2d::Vector new_pos = curr_pos;
+					if (dir == 0) {
+						new_pos.x += 0.5f;
+					} else if (dir == 1) {
+						;
+					} else if (dir == 2) {
+						new_pos.y += 0.5f;
+					} else if (dir == 3) {
+						new_pos.y += 1;
+					} else if (dir == 4) {
+						new_pos.x += 0.5f;
+						new_pos.y += 1;
+					} else if (dir == 5) {
+						new_pos.x += 1;
+						new_pos.y += 1;
+					} else if (dir == 6) {
+						new_pos.x += 1;
+						new_pos.y += 0.5f;
+					} else {
+						assert(dir == 7);
+						new_pos.x += 1;
+					}
+					if (border_line.empty() || border_line.back() != new_pos) {
+						border_line.push_back(new_pos);
+					}
+				}
+			}	
+		}
+
+		m_border_axis_line.push_back(border_axis_line);
 	}
 
 	delete[] flag;
@@ -175,9 +187,10 @@ void ExtractOutlineRaw::CreateBorderLine()
 
 void ExtractOutlineRaw::MergeBorderLine()
 {
-	m_border_line_merged.clear();
 	//	MergeRawBorder(border, border_merged);
-	d2d::DouglasPeucker::implement(m_border_line, 1.5f, m_border_line_merged);
+	for (int i = 0; i < m_borderline.size(); ++i) {
+		d2d::DouglasPeucker::implement(m_border_line[i], 1.5f, m_border_line_merged[i]);
+	}
 }
 
 bool ExtractOutlineRaw::IsPixelBorder(int x, int y) const

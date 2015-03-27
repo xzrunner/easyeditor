@@ -48,10 +48,10 @@ private:
 	int m_width, m_height;
 
 	std::vector<d2d::Vector> m_border_points;
-	std::vector<d2d::Vector> m_border_axis_line;
+	std::vector<std::vector<d2d::Vector> > m_border_axis_line;
 
-	std::vector<d2d::Vector> m_border_line;
-	std::vector<d2d::Vector> m_border_line_merged;
+	std::vector<std::vector<d2d::Vector> > m_border_line;
+	std::vector<std::vector<d2d::Vector> > m_border_line_merged;
 
 	std::vector<d2d::Vector> m_convex_hull;
 
