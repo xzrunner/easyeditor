@@ -217,6 +217,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libscale9\Scale9Data.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libscale9\Scale9Data.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libscale9\Sprite.cpp"
 				>
 			</File>
@@ -251,6 +259,14 @@
 			<Filter
 				Name="property"
 				>
+				<File
+					RelativePath="..\..\..\src\libscale9\SpritePropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libscale9\SpritePropertySetting.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\libscale9\SymbolPropertySetting.cpp"
 					>

@@ -43,30 +43,35 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
-	void composeFromSprites(d2d::ISprite* sprites[3][3], 
-		float width, float height);
+	static void DrawScale9(Type type,
+		d2d::ISprite* const sprites[3][3],
+		const d2d::Matrix& mt,
+		const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
+		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0),
+		const d2d::Colorf& r_trans = d2d::Colorf(1, 0, 0, 0),
+		const d2d::Colorf& g_trans = d2d::Colorf(0, 1, 0, 0),
+		const d2d::Colorf& b_trans = d2d::Colorf(0, 0, 1, 0));
 
-	void resize(float width, float height) const;
+	//void composeFromSprites(d2d::ISprite* sprites[3][3], 
+	//	float width, float height);
 
-	Type type() const { return m_type; }
+//	void resize(float width, float height) const;
+
+//	Type type() const { return m_type; }
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void loadResources();
 
+// private:
+// 	Type getType(d2d::ISprite* sprites[3][3]) const;
+
 private:
-	void composeFromSprites() const;
+ 	static void InitSprite(const FileLoader::Entry& entry,
+ 		d2d::ISprite** pSprite, const std::string& dir);	
 
-	Type getType(d2d::ISprite* sprites[3][3]) const;
-
-	static void stretch(d2d::ISprite* sprite, const d2d::Vector& center, 
-		float width, float height);
-
-	static void initSprite(const FileLoader::Entry& entry,
-		d2d::ISprite** pSprite, const std::string& dir);
-
-public:
+private:
 	Type m_type;
 
 	// 2
@@ -74,7 +79,9 @@ public:
 	// 0 1 2
 	d2d::ISprite* m_sprites[3][3];
 
-	mutable float m_width, m_height;
+	float m_width, m_height;
+
+	friend class Sprite;
 
 }; // Symbol
 

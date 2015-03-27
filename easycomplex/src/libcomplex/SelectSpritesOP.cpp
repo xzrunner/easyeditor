@@ -104,10 +104,15 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 d2d::IPropertySetting* 
 SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
 {
-	if (sprite)
-		return d2d::SelectSpritesOP::createPropertySetting(sprite);
-	else
+	if (sprite) {
+		if (escale9::Sprite* spr = dynamic_cast<escale9::Sprite*>(sprite)) {
+			return new escale9::SpritePropertySetting(m_editPanel, spr);
+		} else {
+			return d2d::SelectSpritesOP::createPropertySetting(sprite);
+		}
+	} else {
 		return new ecomplex::PropertySetting(m_editPanel, static_cast<StagePanel*>(m_editPanel)->getSymbol());
+	}
 }
 
 } // complex

@@ -7,5 +7,6 @@
 #include "libscale9/EditDialog.h"
 #include "libscale9/ResizeBaseOP.h"
 #include "libscale9/LibraryPage.h"
+#include "libscale9/SpritePropertySetting.h"
 
 #endif // _EASYSCALE9_H_
