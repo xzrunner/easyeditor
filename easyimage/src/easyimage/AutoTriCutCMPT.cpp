@@ -123,9 +123,9 @@ void AutoTriCutCMPT::CreateOutline(wxCommandEvent& event)
 	op->m_raw_bound_points = m_raw->GetBorderPoints();
 	op->m_raw_bound_line_merged = m_raw->GetBorderLineMerged();
 
-// 	m_fine = new ExtractOutlineFine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
-// 	m_fine->CreateOutline(AREA_TOLERANCE, PERIMETER_TOLERANCE, max_step++);
-// 	op->m_fine_bound_line = m_fine->GetResult();
+	m_fine = new ExtractOutlineFine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
+	m_fine->CreateOutline(AREA_TOLERANCE, PERIMETER_TOLERANCE, max_step++);
+	op->m_fine_bound_line = m_fine->GetResult();
 
 	m_editPanel->Refresh();
 }
@@ -159,13 +159,13 @@ void AutoTriCutCMPT::Trigger()
 	op->m_raw_bound_points = raw.GetBorderPoints();
 	op->m_raw_bound_line_merged = raw.GetBorderLineMerged();
 
-// 	ExtractOutlineFine fine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
-// #ifdef TRIGGER_STEP
-// 	fine.Trigger(AREA_TOLERANCE, PERIMETER_TOLERANCE, max_step++);
-// #else
-// 	fine.Trigger(AREA_TOLERANCE, PERIMETER_TOLERANCE);
-// #endif
-// 	op->m_fine_bound_line = fine.GetResult();
+	ExtractOutlineFine fine(op->m_raw_bound_line, op->m_raw_bound_line_merged);
+#ifdef TRIGGER_STEP
+	fine.Trigger(AREA_TOLERANCE, PERIMETER_TOLERANCE, max_step++);
+#else
+	fine.Trigger(AREA_TOLERANCE, PERIMETER_TOLERANCE);
+#endif
+	op->m_fine_bound_line = fine.GetResult();
 
 	m_editPanel->Refresh();
 }
