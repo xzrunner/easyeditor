@@ -13,7 +13,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(this)
-	, m_patch(NULL)
+	, m_symbol(NULL)
 	, m_library(library)
 	, m_toolbar(NULL)
 {
@@ -21,7 +21,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 	memset(m_sprites, 0, sizeof(int) * 9);
 
-	SetDropTarget(new d2d::StageDropTarget(static_cast<d2d::Frame*>(frame), this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, this, library));
 }
 
 StagePanel::~StagePanel()
@@ -57,7 +57,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 			if (m_sprites[i][j] == sprite)
 			{
 				m_sprites[i][j] = NULL;
-				sprite->release();
+				sprite->Release();
 				return;
 			}
 		}
@@ -79,7 +79,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	else if (pos.x > edge * 2) j = 2;
 
 	if (m_sprites[i][j] && m_sprites[i][j] != sprite)
-		m_sprites[i][j]->release();
+		m_sprites[i][j]->Release();
 	m_sprites[i][j] = sprite;
 	d2d::Vector center(edge*0.5f+edge*j, edge*0.5f+edge*i);
 	sprite->setTransform(center, sprite->getAngle());
@@ -95,11 +95,11 @@ void StagePanel::clearSprites()
 		for (size_t j = 0; j < 3; ++j)
 		{
 			if (!m_sprites[i][j]) continue;
-			m_sprites[i][j]->release();
+			m_sprites[i][j]->Release();
 		}
 	memset(m_sprites, 0, sizeof(int) * 9);
 
-	delete m_patch, m_patch = NULL;
+	delete m_symbol, m_symbol = NULL;
 }
 
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
@@ -110,20 +110,20 @@ void StagePanel::rebuildPatchSymbol()
 {
 	if (isComplete())
 	{
-		if (m_patch) delete m_patch;
-		m_patch = new Symbol;
+		if (m_symbol) delete m_symbol;
+		m_symbol = new Symbol;
 
 		float width = m_toolbar->getWidth(),
 			  height = m_toolbar->getHeight();
-		m_patch->composeFromSprites(m_sprites, width, height);
-		if (m_patch->type() == Symbol::e_3GridHor)
+		m_symbol->ResizeScale9(width, height);
+		if (m_symbol->GetType() == Symbol::e_3GridHor)
 		{
-			height = m_patch->getSize().yLength();
+			height = m_symbol->getSize().yLength();
 			m_toolbar->setSize(width, height);
 		}
-		else if (m_patch->type() == Symbol::e_3GridVer)
+		else if (m_symbol->GetType() == Symbol::e_3GridVer)
 		{
-			width = m_patch->getSize().xLength();
+			width = m_symbol->getSize().xLength();
 			m_toolbar->setSize(width, height);
 		}
 	}

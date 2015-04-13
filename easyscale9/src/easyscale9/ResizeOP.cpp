@@ -42,19 +42,19 @@ bool ResizeOP::onMouseDrag(int x, int y)
 		float width, height;
 
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-		if (symbol->type() == Symbol::e_9Grid || 
-			symbol->type() == Symbol::e_9GridHollow ||
-			symbol->type() == Symbol::e_6GridUpper)
+		if (symbol->GetType() == Symbol::e_9Grid || 
+			symbol->GetType() == Symbol::e_9GridHollow ||
+			symbol->GetType() == Symbol::e_6GridUpper)
 		{
 			width = fabs(pos.x)*2;
 			height = fabs(pos.y)*2;
 		}
-		else if (symbol->type() == Symbol::e_3GridHor)
+		else if (symbol->GetType() == Symbol::e_3GridHor)
 		{
 			width = fabs(pos.x)*2;
 			height = symbol->getSize().yLength();
 		}
-		else if (symbol->type() == Symbol::e_3GridVer)
+		else if (symbol->GetType() == Symbol::e_3GridVer)
 		{
 			width = symbol->getSize().xLength();
 			height = fabs(pos.y)*2;
@@ -65,7 +65,7 @@ bool ResizeOP::onMouseDrag(int x, int y)
 		}
 
 		m_resizeCmpt->setSize(width, height);
-		symbol->resize(width, height);
+		symbol->ResizeScale9(width, height);
 
 		m_editPanel->Refresh();
 	}

@@ -13,11 +13,11 @@ namespace escale9
 
 	void ResizeAtomicOP::undo()
 	{
-//		m_symbol->resize(m_src.x, m_src.y);
+		m_symbol->ResizeScale9(m_src.x, m_src.y);
 	}
 
 	void ResizeAtomicOP::redo()
 	{
-//		m_symbol->resize(m_dst.x, m_dst.y);
+		m_symbol->ResizeScale9(m_dst.x, m_dst.y);
 	}
 }

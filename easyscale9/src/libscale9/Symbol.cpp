@@ -66,6 +66,13 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
 	}
 }
 
+void Symbol::ResizeScale9(float width, float height)
+{
+	m_width = width;
+	m_height = height;
+	Sprite::ResizeScale9(m_type, m_sprites, m_width, m_height);	
+}
+
 void Symbol::DrawScale9(Type type,
 						 d2d::ISprite* const sprites[3][3],
 						 const d2d::Matrix& mt,

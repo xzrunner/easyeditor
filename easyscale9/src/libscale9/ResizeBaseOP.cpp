@@ -58,7 +58,7 @@ bool ResizeBaseOP::onMouseDrag(int x, int y)
 	if (m_status != e_null)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-//		m_symbol->resize(fabs(pos.x)*2, fabs(pos.y)*2);
+		m_symbol->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
 		m_editPanel->Refresh();
 	}
 

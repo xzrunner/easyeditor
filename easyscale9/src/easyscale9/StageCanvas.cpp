@@ -14,7 +14,6 @@ static const int HEIGHT = 480;
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
 	: d2d::OrthoCanvas(editPanel)
-	, m_batch(100, d2d::SpriteBatch::USAGE_STATIC)
 	, m_toolbar(NULL)
 {
 	m_bgStyle.color = LIGHT_GRAY;
@@ -36,8 +35,7 @@ void StageCanvas::onDraw()
 	if (m_toolbar->isComposeOP())
 	{
 		drawGuideLines();
-		editPanel->traverseSprites(d2d::DrawSpritesVisitor(m_batch),
-			d2d::e_visible);
+		editPanel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
 	}
 	else
 	{

@@ -24,8 +24,6 @@ namespace escale9
 		void drawGuideLines();
 
 	private:
-		d2d::SpriteBatch m_batch;
-
 		d2d::ShapeStyle m_bgStyle, m_nodeStyle;
 
 		ToolbarPanel* m_toolbar;

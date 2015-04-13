@@ -30,7 +30,7 @@ namespace escale9
 
 		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
-		Symbol* getPatchSymbol() { return m_patch; }
+		Symbol* getPatchSymbol() { return m_symbol; }
 
 		d2d::ISprite* getSprite(int row, int col) {
 			if (row < 0 || row >= 3 || col < 0 || col >= 3)
@@ -51,7 +51,7 @@ namespace escale9
 		// [0][0] [0][1] [0][2]
 		d2d::ISprite* m_sprites[3][3];
 
-		Symbol* m_patch;
+		Symbol* m_symbol;
 
 		d2d::LibraryPanel* m_library;
 

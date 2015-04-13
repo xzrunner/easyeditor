@@ -43,6 +43,8 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
+	void ResizeScale9(float width, float height);
+
 	static void DrawScale9(Type type,
 		d2d::ISprite* const sprites[3][3],
 		const d2d::Matrix& mt,
@@ -57,7 +59,7 @@ public:
 
 //	void resize(float width, float height) const;
 
-//	Type type() const { return m_type; }
+	Type GetType() const { return m_type; }
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
@@ -82,6 +84,7 @@ private:
 	float m_width, m_height;
 
 	friend class Sprite;
+	friend class FileIO;	// todo
 
 }; // Symbol
 

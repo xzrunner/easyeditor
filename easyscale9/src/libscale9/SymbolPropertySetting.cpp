@@ -42,13 +42,13 @@ void SymbolPropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	{
 		float w = wxANY_AS(value, float),
 			h = m_symbol->getSize().yLength();
-//		m_symbol->resize(w, h);
+		m_symbol->ResizeScale9(w, h);
 	}
 	else if (name == "Height")
 	{
 		float w = m_symbol->getSize().yLength(),
 			h = wxANY_AS(value, float);
-//		m_symbol->resize(w, h);
+		m_symbol->ResizeScale9(w, h);
 	}
 
 	m_editPanel->Refresh();
