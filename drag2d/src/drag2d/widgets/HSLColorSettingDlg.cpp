@@ -6,8 +6,8 @@
 namespace d2d
 {
 
-HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, const Colorf& col)
-	: wxDialog(parent, wxID_ANY, "HSL Color Setting", wxDefaultPosition, wxSize(450, 300))
+HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, const Colorf& col, const wxPoint& pos)
+	: wxDialog(parent, wxID_ANY, "HSL Color Setting", pos, wxSize(450, 300))
 	, m_h(NULL)
 	, m_s(NULL)
 	, m_l(NULL)

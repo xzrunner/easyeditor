@@ -2137,6 +2137,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ColorProperty.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ColorProperty.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="algorithms"
