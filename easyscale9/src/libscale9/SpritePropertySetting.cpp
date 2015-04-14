@@ -15,12 +15,13 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	d2d::SpritePropertySetting::onPropertyGridChange(name, value);
 
 	Sprite* spr = static_cast<Sprite*>(m_sprite);
-	if (name == wxT("Width")) {
+	Scale9Type type = spr->GetScale9Type();
+	if (name == wxT("Width") && type != e_3GridVer) {
 		float w, h;
 		spr->GetSize(w, h);
 		w = wxANY_AS(value, float);
 		spr->SetSize(w, h);
-	} else if (name == wxT("Height")) {
+	} else if (name == wxT("Height") && type != e_3GridHor) {
 		float w, h;
 		spr->GetSize(w, h);
 		h = wxANY_AS(value, float);

@@ -28,6 +28,8 @@ public:
 	virtual void load(const Json::Value& val);
 	virtual void store(Json::Value& val) const;
 
+	
+
 	void GetSize(float& w, float& h) const;
 	void SetSize(float w, float h);
 
@@ -38,28 +40,16 @@ public:
 		const d2d::Colorf& g_trans = d2d::Colorf(0, 1, 0, 0),
 		const d2d::Colorf& b_trans = d2d::Colorf(0, 0, 1, 0)) const;
 
+	Scale9Type GetScale9Type() const { return m_data.GetType(); }
+
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
-
-	static void ResizeScale9(Symbol::Type type, d2d::ISprite* const sprites[3][3],
-		float width, float height);
-	static void ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center, 
-		float width, float height);
-
-private:
-	void LoadFromSymbol(Symbol* symbol);
 	
-protected:
+private:
 	Symbol* m_symbol;
 
-private:
-	float m_width, m_height;
-
-	// 2
-	// 1
-	// 0 1 2
-	d2d::ISprite* m_sprites[3][3];
+	Scale9Data m_data;
 
 }; // Sprite
 

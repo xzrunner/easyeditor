@@ -115,13 +115,15 @@ void StagePanel::rebuildPatchSymbol()
 
 		float width = m_toolbar->getWidth(),
 			  height = m_toolbar->getHeight();
-		m_symbol->ResizeScale9(width, height);
-		if (m_symbol->GetType() == Symbol::e_3GridHor)
+		m_symbol->ComposeFromSprites(m_sprites, width, height);
+
+		Scale9Type type = m_symbol->GetScale9Data().GetType();
+		if (type == e_3GridHor)
 		{
 			height = m_symbol->getSize().yLength();
 			m_toolbar->setSize(width, height);
 		}
-		else if (m_symbol->GetType() == Symbol::e_3GridVer)
+		else if (type== e_3GridVer)
 		{
 			width = m_symbol->getSize().xLength();
 			m_toolbar->setSize(width, height);

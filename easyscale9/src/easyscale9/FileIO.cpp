@@ -41,7 +41,7 @@ void FileIO::store(const char* filename, StagePanel* stage,
 {
 	Json::Value value;
 
-	value["type"] = stage->getPatchSymbol()->GetType();
+	value["type"] = stage->getPatchSymbol()->GetScale9Data().GetType();
 
 	value["width"] = toolbar->getWidth();
 	value["height"] = toolbar->getHeight();
@@ -55,10 +55,11 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	}
 
 	Symbol* symbol = stage->getPatchSymbol();
+	const Scale9Data& s_data = symbol->GetScale9Data();
 	int idx = 0;
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			d2d::ISprite* sprite = symbol->m_sprites[i][j];
+			d2d::ISprite* sprite = s_data.m_sprites[i][j];
 			if (sprite) {
 				value["sprite new"][idx++] = StoreNew(sprite, dir);
 			} else {
