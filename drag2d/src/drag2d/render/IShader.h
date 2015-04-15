@@ -47,8 +47,11 @@ protected:
 	"#endif  \n"
 #else
 #define FLOAT_PRECISION \
+	"#version 130 \n" \
 	"precision lowp float;  \n"
+
 #endif
+
 }; // IShader
 
 }
