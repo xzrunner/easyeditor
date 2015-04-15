@@ -182,38 +182,66 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath="..\..\..\src\easymap\Frame.cpp"
+		<Filter
+			Name="frame"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\Frame.h"
+			<File
+				RelativePath="..\..\..\src\easymap\Frame.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\Frame.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\main.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\main.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\Task.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\Task.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="setting"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\main.cpp"
+			<File
+				RelativePath="..\..\..\src\easymap\SettingsDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\SettingsDialog.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="preview"
 			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\main.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\SettingsDialog.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\SettingsDialog.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\Task.cpp"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\easymap\Task.h"
-			>
-		</File>
+			<File
+				RelativePath="..\..\..\src\easymap\PreviewCanvas.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\PreviewCanvas.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\PreviewDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easymap\PreviewDialog.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

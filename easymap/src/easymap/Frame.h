@@ -12,12 +12,14 @@ public:
 	Frame(const wxString& title, const wxString& filetag);
 
 private:
+	void OnPreview(wxCommandEvent& event);
 	void OnExtendSetting(wxCommandEvent& event);
 
 private:
 	enum
 	{
-		ID_SETING_EXTEND = 1100,
+		ID_PREVIEW = 1100,
+		ID_SETING_EXTEND,
 	};
 
 	DECLARE_EVENT_TABLE()

@@ -22,7 +22,7 @@ public:
 
 	virtual void clear();
 
-	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const {}
+	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
 
 	virtual const d2d::EditPanel* getEditPanel() const;
 

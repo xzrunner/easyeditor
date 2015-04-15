@@ -1,8 +1,6 @@
 #include "PreviewCanvas.h"
 
-#include <easyanim.h>
-
-namespace ecomplex
+namespace emap
 {
 
 BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
@@ -32,8 +30,8 @@ void PreviewCanvas::onDraw()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		const d2d::ISprite* sprite = m_sprites[i];
-// 		if (!sprite->visiable)
-// 			continue;
+		// 		if (!sprite->visiable)
+		// 			continue;
 		d2d::SpriteDraw::drawSprite(sprite, d2d::Matrix(), sprite->multiCol, sprite->addCol);
 	}
 }
