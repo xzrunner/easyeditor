@@ -369,11 +369,11 @@
 			Name="frame"
 			>
 			<File
-				RelativePath="..\..\..\src\libshape\MainDialog.h"
+				RelativePath="..\..\..\src\libshape\EditDialog.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libshape\MainDialog.inl"
+				RelativePath="..\..\..\src\libshape\EditDialog.h"
 				>
 			</File>
 		</Filter>

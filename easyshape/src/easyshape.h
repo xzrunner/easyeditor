@@ -6,7 +6,7 @@
 #include "libshape/Sprite.h"
 #include "libshape/FileIO.h"
 #include "libshape/Package.h"
-#include "libshape/MainDialog.h"
+#include "libshape/EditDialog.h"
 #include "libshape/StagePanel.h"
 #include "libshape/LibraryPage.h"
 

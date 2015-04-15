@@ -20,6 +20,19 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   Symbol* symbol)
+	: EditPanel(parent, frame)
+	, MultiShapesImpl(parent)
+	, m_toolbar(NULL)
+{
+	m_canvas = new StageCanvas(this);
+	m_symbol = symbol;
+	if (m_symbol) {
+		m_symbol->Retain();
+	}
+}
+
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   Symbol* symbol, d2d::LibraryPanel* library)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl(parent)

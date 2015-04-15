@@ -15,6 +15,8 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+		Symbol* symbol);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		Symbol* symbol, d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 

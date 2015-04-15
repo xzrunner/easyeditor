@@ -13,9 +13,11 @@ LibraryList::LibraryList(d2d::ILibraryPage* page)
 
 void LibraryList::onListDoubleClicked(wxCommandEvent& event)
 {
-	libshape::Symbol symbol;
-	symbol.SetBG(getSymbol(event.GetInt()));
-	libshape::MainDialog<BodyEditStage> dlg(this, &symbol);
-	dlg.ShowModal();
-	Context::Instance()->stage->resetCanvas();
+	// todo
+
+// 	libshape::Symbol symbol;
+// 	symbol.SetBG(getSymbol(event.GetInt()));
+// 	libshape::EditDialog<BodyEditStage> dlg(this, &symbol);
+// 	dlg.ShowModal();
+// 	Context::Instance()->stage->resetCanvas();
 }

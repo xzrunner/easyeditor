@@ -48,16 +48,18 @@ bool SelectBodyOP::onMouseLeftDClick(int x, int y)
 {
 	if (d2d::SelectSpritesOP::onMouseLeftDClick(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
-	if (selected)
-	{
-		libshape::Symbol symbol;
-		symbol.SetBG(&const_cast<d2d::ISymbol&>(selected->getSymbol()));
-		libshape::MainDialog<BodyEditStage> dlg(Context::Instance()->stage, &symbol);
-		dlg.ShowModal();
-		Context::Instance()->stage->resetCanvas();
-	}
+	// todo
+
+// 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+// 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
+// 	if (selected)
+// 	{
+// 		libshape::Symbol symbol;
+// 		symbol.SetBG(&const_cast<d2d::ISymbol&>(selected->getSymbol()));
+// 		libshape::EditDialog<BodyEditStage> dlg(Context::Instance()->stage, &symbol);
+// 		dlg.ShowModal();
+// 		Context::Instance()->stage->resetCanvas();
+// 	}
 
 	return false;
 }

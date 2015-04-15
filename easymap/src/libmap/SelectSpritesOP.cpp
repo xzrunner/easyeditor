@@ -5,6 +5,7 @@
 #include <easyanim.h>
 #include <easycomplex.h>
 #include <easytexture.h>
+#include <easyshape.h>
 
 namespace emap
 {
@@ -72,6 +73,14 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		dlg.ShowModal();
 
 		m_editPanel->ResetViewport();
+	}
+	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
+	{
+		libshape::Symbol& symbol = const_cast<libshape::Symbol&>(shape->getSymbol());
+		libshape::EditDialog dlg(m_editPanel, &symbol);
+		dlg.ShowModal();
+
+		m_editPanel->ResetViewport();		
 	}
 
 	return false;
