@@ -302,7 +302,7 @@ wxMenu* Frame::initViewBar()
 wxMenu* Frame::initSettingsBar()
 {
 	wxMenu* settingsMenu = new wxMenu;
-	settingsMenu->Append(ID_SETTINGS, wxT("Settings"), wxT("Settings"));
+	settingsMenu->Append(ID_SETTINGS, wxT("Base"), wxT("Base"));
 	return settingsMenu;
 }
 

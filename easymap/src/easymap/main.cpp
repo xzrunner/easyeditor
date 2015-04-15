@@ -1,5 +1,6 @@
 #include "main.h"
 #include "Task.h"
+#include "Frame.h"
 
 #include <easymap.h>
 #include <easytexture.h>
@@ -24,7 +25,7 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	d2d::Frame* frame = new d2d::Frame("EasyMap", emap::FILE_TAG);
+	emap::Frame* frame = new emap::Frame("EasyMap", emap::FILE_TAG);
 	emap::Task* task = new emap::Task(frame);
 	frame->setTask(task);
 	frame->Show(true);

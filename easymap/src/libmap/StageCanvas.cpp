@@ -1,5 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
+#include "SettingCfg.h"
 
 namespace emap
 {
@@ -18,10 +19,10 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 void StageCanvas::onDraw()
 {
+	DrawGuideLines();
+
 	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
 	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
-
-	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	m_editPanel->drawEditTemp();
 }
@@ -29,6 +30,16 @@ void StageCanvas::onDraw()
 void StageCanvas::onTimer(wxTimerEvent& event)
 {
 	Refresh();
+}
+
+void StageCanvas::DrawGuideLines() const
+{
+	SettingCfg* cfg = SettingCfg::Instance();
+
+	d2d::PrimitiveDraw::rect(d2d::Vector(0, 0), 
+		cfg->m_view_width * 0.5f,
+		cfg->m_view_height * 0.5f,
+		d2d::LIGHT_GREY_LINE);
 }
 
 }

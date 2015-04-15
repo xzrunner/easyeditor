@@ -183,11 +183,27 @@
 	</References>
 	<Files>
 		<File
+			RelativePath="..\..\..\src\easymap\Frame.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easymap\Frame.h"
+			>
+		</File>
+		<File
 			RelativePath="..\..\..\src\easymap\main.cpp"
 			>
 		</File>
 		<File
 			RelativePath="..\..\..\src\easymap\main.h"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easymap\SettingsDialog.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easymap\SettingsDialog.h"
 			>
 		</File>
 		<File

@@ -202,8 +202,16 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="dataset"
+			Name="frame"
 			>
+			<File
+				RelativePath="..\..\..\src\libmap\SettingCfg.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libmap\SettingCfg.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="editop"
