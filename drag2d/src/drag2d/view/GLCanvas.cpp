@@ -5,6 +5,7 @@
 #include "render/RenderList.h"
 #include "render/RenderContext.h"
 #include "render/ShaderMgrBase.h"
+#include "render/ShaderMgr.h"
 
 #include <wx/wx.h>
 #include <gl/glu.h>
@@ -75,6 +76,8 @@ void GLCanvas::initGL()
 	if (RenderContext::SHADER_MGR) {
 		RenderContext::SHADER_MGR->reload();
 	}
+
+	ShaderMgr::Instance()->null();
 }
 
 void GLCanvas::onSize(wxSizeEvent& event)
