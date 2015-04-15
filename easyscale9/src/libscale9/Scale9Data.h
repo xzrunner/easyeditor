@@ -43,6 +43,8 @@ public:
 	void LoadFromFile(const std::string& filepath);
 
 	Scale9Type GetType() const { return m_type; }
+	
+	d2d::ISprite* GetSprite(int i, int j) const { return m_sprites[i][j]; }
 
 	static void DrawScale9(Scale9Type type,
 		d2d::ISprite* const sprites[3][3],
@@ -73,8 +75,6 @@ private:
 	d2d::ISprite* m_sprites[3][3];
 
 	float m_width, m_height;
-
-	friend class FileIO;
 
 }; // Scale9Data
 

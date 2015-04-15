@@ -2,6 +2,10 @@
 
 #include <drag2d.h>
 
+#include <queue>
+
+namespace escale9 { class Sprite; }
+
 namespace libcoco
 {
 
@@ -22,8 +26,11 @@ private:
 
 	bool isSymbolPrepared(const d2d::ISprite* sprite) const;
 
+	void PrepareScale9(std::queue<d2d::ISprite*>& buffer, const escale9::Sprite* scale9);
+
 private:
-	std::set<const d2d::ISymbol*, d2d::SymbolCmp> m_unique;
+//	std::set<const d2d::ISymbol*, d2d::SymbolCmp> m_unique;
+	std::set<const d2d::ISymbol*> m_unique;
 
 	std::vector<const d2d::ISymbol*> m_result;
 

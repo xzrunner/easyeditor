@@ -11,6 +11,12 @@ Symbol::Symbol()
 	m_name = FILE_TAG + wxVariant(id++);
 }
 
+Symbol::Symbol(const Symbol& symbol)
+	: d2d::ISymbol(symbol)
+	, m_data(symbol.m_data)
+{
+}
+
 void Symbol::reloadTexture() const
 {
 	m_data.ReloadTexture();

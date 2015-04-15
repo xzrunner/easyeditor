@@ -12,11 +12,12 @@ class Symbol : public d2d::ISymbol
 {
 public:
 	Symbol();
+	Symbol(const Symbol& symbol);
 
 	//
 	// ICloneable interface
 	//
-	virtual Symbol* clone() const { return NULL; }
+	virtual Symbol* clone() const { return new Symbol(*this); }
 
 	//
 	// ISymbol interfaces

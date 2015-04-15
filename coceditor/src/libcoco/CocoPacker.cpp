@@ -227,99 +227,100 @@ void CocoPacker::ResolveSymbols()
 		}
 		else if (const escale9::Symbol* patch9 = dynamic_cast<const escale9::Symbol*>(symbol))
 		{
-// 			std::vector<d2d::ISprite*> sprites;
-// 			switch (patch9->type())
-// 			{
-// 			case escale9::Symbol::e_9Grid:
-// 				for (size_t i = 0; i < 3; ++i)
-// 					for (size_t j = 0; j < 3; ++j)
-// 						sprites.push_back(patch9->m_sprites[i][j]);
-// 				break;
-// 			case escale9::Symbol::e_9GridHollow:
-// 				for (size_t i = 0; i < 3; ++i) {
-// 					for (size_t j = 0; j < 3; ++j) {
-// 						if (i == 1 && j == 1) continue;
-// 						sprites.push_back(patch9->m_sprites[i][j]);
-// 					}
-// 				}
-// 				break;
-// 			case escale9::Symbol::e_3GridHor:
-// 				for (size_t i = 0; i < 3; ++i)
-// 					sprites.push_back(patch9->m_sprites[1][i]);
-// 				break;
-// 			case escale9::Symbol::e_3GridVer:
-// 				for (size_t i = 0; i < 3; ++i)
-// 					sprites.push_back(patch9->m_sprites[i][1]);
-// 				break;
-// 			case escale9::Symbol::e_6GridUpper:
-// 				for (size_t i = 1; i < 3; ++i)
-// 					for (size_t j = 0; j < 3; ++j)
-// 						sprites.push_back(patch9->m_sprites[i][j]);
-// 				break;
-// 			}
-// 
-// 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
-// 			{
-// 				d2d::ISprite* sprite = sprites[i];
-// 				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
-// 				{
-// 					PicFixType tsrc = e_null, tscreen = e_null;
-// 					switch (patch9->type())
-// 					{
-// 						case escale9::Symbol::e_9Grid:
-// 							if (sprite == patch9->m_sprites[1][1]) 
-// 							{
-// 								tsrc = e_bothfix;
-// 								tscreen = e_bothfix;
-// 							}
-// 							else if (sprite == patch9->m_sprites[1][0]) tsrc = e_yfix;
-// 							else if (sprite == patch9->m_sprites[1][2]) tsrc = e_yfix;
-// 							else if (sprite == patch9->m_sprites[0][1]) tsrc = e_xfix;
-// 							else if (sprite == patch9->m_sprites[2][1]) tsrc = e_xfix;
-// 							break;
-// 						case escale9::Symbol::e_9GridHollow:
-// 							if (sprite == patch9->m_sprites[1][0]) tsrc = e_yfix;
-// 							else if (sprite == patch9->m_sprites[1][2]) tsrc = e_yfix;
-// 							else if (sprite == patch9->m_sprites[0][1]) tsrc = e_xfix;
-// 							else if (sprite == patch9->m_sprites[2][1]) tsrc = e_xfix;
-// 							break;
-// 						case escale9::Symbol::e_3GridHor:
-// 							if (sprite == patch9->m_sprites[1][1]) 
-// 							{
-// 								tsrc = e_xfix;
-// 								tscreen = e_xfix;
-// 							}
-// 							break;
-// 						case escale9::Symbol::e_3GridVer:
-// 							if (sprite == patch9->m_sprites[1][1]) 
-// 							{
-// 								tsrc = e_yfix;
-// 								tscreen = e_yfix;
-// 							}
-// 							break;
-// 						case escale9::Symbol::e_6GridUpper:
-// 							if (sprite == patch9->m_sprites[1][1]) 
-// 							{
-// 								tsrc = e_bothfix;
-// 								tscreen = e_bothfix;
-// 							}
-// 							else if (sprite == patch9->m_sprites[1][0]) tsrc = e_yfix;
-// 							else if (sprite == patch9->m_sprites[1][2]) tsrc = e_yfix;
-// 							else if (sprite == patch9->m_sprites[2][1]) tsrc = e_xfix;
-// 							break;
-// 					}
-// 
-// 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
-// 					ParserPicture(image, tsrc, tscreen);
-// 				}
-// 				else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
-// 				{
-// 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
-// 				}
-// 			}
-// 
-// 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
-// 			ParserScale9(patch9);
+ 			std::vector<d2d::ISprite*> sprites;
+			const escale9::Scale9Data& data = patch9->GetScale9Data();
+ 			switch (data.GetType())
+ 			{
+ 			case escale9::e_9Grid:
+ 				for (size_t i = 0; i < 3; ++i)
+ 					for (size_t j = 0; j < 3; ++j)
+ 						sprites.push_back(data.GetSprite(i, j));
+ 				break;
+ 			case escale9::e_9GridHollow:
+ 				for (size_t i = 0; i < 3; ++i) {
+ 					for (size_t j = 0; j < 3; ++j) {
+ 						if (i == 1 && j == 1) continue;
+ 						sprites.push_back(data.GetSprite(i, j));
+ 					}
+ 				}
+ 				break;
+ 			case escale9::e_3GridHor:
+ 				for (size_t i = 0; i < 3; ++i)
+ 					sprites.push_back(data.GetSprite(1, i));
+ 				break;
+ 			case escale9::e_3GridVer:
+ 				for (size_t i = 0; i < 3; ++i)
+ 					sprites.push_back(data.GetSprite(i, 1));
+ 				break;
+ 			case escale9::e_6GridUpper:
+ 				for (size_t i = 1; i < 3; ++i)
+ 					for (size_t j = 0; j < 3; ++j)
+ 						sprites.push_back(data.GetSprite(i, j));
+ 				break;
+ 			}
+ 
+ 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
+ 			{
+ 				d2d::ISprite* sprite = sprites[i];
+ 				if (d2d::ImageSprite* image = dynamic_cast<d2d::ImageSprite*>(sprite))
+ 				{
+ 					PicFixType tsrc = e_null, tscreen = e_null;
+ 					switch (data.GetType())
+ 					{
+ 						case escale9::e_9Grid:
+ 							if (sprite == data.GetSprite(1, 1)) 
+ 							{
+ 								tsrc = e_bothfix;
+ 								tscreen = e_bothfix;
+ 							}
+ 							else if (sprite == data.GetSprite(1, 0)) tsrc = e_yfix;
+ 							else if (sprite == data.GetSprite(1, 2)) tsrc = e_yfix;
+ 							else if (sprite == data.GetSprite(0, 1)) tsrc = e_xfix;
+ 							else if (sprite == data.GetSprite(2, 1)) tsrc = e_xfix;
+ 							break;
+ 						case escale9::e_9GridHollow:
+ 							if (sprite == data.GetSprite(1, 0)) tsrc = e_yfix;
+ 							else if (sprite == data.GetSprite(1, 2)) tsrc = e_yfix;
+ 							else if (sprite == data.GetSprite(0, 1)) tsrc = e_xfix;
+ 							else if (sprite == data.GetSprite(2, 1)) tsrc = e_xfix;
+ 							break;
+ 						case escale9::e_3GridHor:
+ 							if (sprite == data.GetSprite(1, 1)) 
+ 							{
+ 								tsrc = e_xfix;
+ 								tscreen = e_xfix;
+ 							}
+ 							break;
+ 						case escale9::e_3GridVer:
+ 							if (sprite == data.GetSprite(1, 1)) 
+ 							{
+ 								tsrc = e_yfix;
+ 								tscreen = e_yfix;
+ 							}
+ 							break;
+ 						case escale9::e_6GridUpper:
+ 							if (sprite == data.GetSprite(1, 1)) 
+ 							{
+ 								tsrc = e_bothfix;
+ 								tscreen = e_bothfix;
+ 							}
+ 							else if (sprite == data.GetSprite(1, 0)) tsrc = e_yfix;
+ 							else if (sprite == data.GetSprite(1, 2)) tsrc = e_yfix;
+ 							else if (sprite == data.GetSprite(2, 1)) tsrc = e_xfix;
+ 							break;
+ 					}
+ 
+ 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+ 					ParserPicture(image, tsrc, tscreen);
+ 				}
+ 				else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
+ 				{
+ 					m_mapSpriteID.insert(std::make_pair(sprite, m_id++));
+ 				}
+ 			}
+ 
+ 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
+ 			ParserScale9(patch9);
 		}
 		else if (const escale9::Symbol* patch9 = dynamic_cast<const escale9::Symbol*>(symbol))
 		{
@@ -761,71 +762,74 @@ void CocoPacker::ParserAnimation(const anim::Symbol* symbol)
 
 void CocoPacker::ParserScale9(const escale9::Symbol* symbol)
 {
-// 	lua::TableAssign ta(*m_gen, "animation", false, false);
-// 
-// 	ParserSymbolBase(symbol);
-// 
-// 	// component
-// 	std::vector<int> ids;
-// 	std::map<int, std::vector<std::string> > unique;
-// 	std::vector<std::pair<int, std::string> > order;
-// 	{
-// 		lua::TableAssign ta(*m_gen, "component", true);
-// 		if (symbol->type() == escale9::Symbol::e_9Grid)
-// 			for (size_t i = 0; i < 3; ++i)
-// 				for (size_t j = 0; j < 3; ++j)
-// 					ParserSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
-// 		else if (symbol->type() == escale9::Symbol::e_9GridHollow)
-// 			for (size_t i = 0; i < 3; ++i) {
-// 				for (size_t j = 0; j < 3; ++j) {
-// 					if (i == 1 && j == 1) continue;
-// 					ParserSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
-// 				}
-// 			}
-// 		else if (symbol->type() == escale9::Symbol::e_3GridHor)
-// 			for (size_t i = 0; i < 3; ++i)
-// 				ParserSpriteForComponent(symbol->m_sprites[1][i], ids, unique, order);
-// 		else if (symbol->type() == escale9::Symbol::e_3GridVer)
-// 			for (size_t i = 0; i < 3; ++i)
-// 				ParserSpriteForComponent(symbol->m_sprites[i][1], ids, unique, order);
-// 		else if (symbol->type() == escale9::Symbol::e_6GridUpper)
-// 			for (size_t i = 1; i < 3; ++i)
-// 				for (size_t j = 0; j < 3; ++j)
-// 					ParserSpriteForComponent(symbol->m_sprites[i][j], ids, unique, order);
-// 	}
-// 	// children
-// 	{
-// 		lua::TableAssign ta(*m_gen, "", true);
-// 		// frame 0
-// 		{
-// 			lua::TableAssign ta(*m_gen, "", true);
-// 			int index = 0;
-// 			if (symbol->type() == escale9::Symbol::e_9Grid)
-// 				for (size_t i = 0; i < 3; ++i)
-// 					for (size_t j = 0; j < 3; ++j, ++index)
-// 						ParserSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
-// 			else if (symbol->type() == escale9::Symbol::e_9GridHollow)
-// 				for (size_t i = 0; i < 3; ++i) {
-// 					for (size_t j = 0; j < 3; ++j, ++index) {
-// 						if (i == 1 && j == 1) { 
-// 							--index;
-// 							continue;
-// 						}
-// 						ParserSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
-// 					}
-// 				}
-// 			else if (symbol->type() == escale9::Symbol::e_3GridHor)
-// 				for (size_t i = 0; i < 3; ++i)
-// 					ParserSpriteForFrame(symbol->m_sprites[1][i], i, ids, order);
-// 			else if (symbol->type() == escale9::Symbol::e_3GridVer)
-// 				for (size_t i = 0; i < 3; ++i)
-// 					ParserSpriteForFrame(symbol->m_sprites[i][1], i, ids, order);
-// 			else if (symbol->type() == escale9::Symbol::e_6GridUpper)
-// 				for (size_t i = 1; i < 3; ++i)
-// 					for (size_t j = 0; j < 3; ++j, ++index)
-// 						ParserSpriteForFrame(symbol->m_sprites[i][j], index, ids, order);
-// 		}
-// 	}
+ 	lua::TableAssign ta(*m_gen, "animation", false, false);
+ 
+ 	ParserSymbolBase(symbol);
+ 
+	const escale9::Scale9Data& data = symbol->GetScale9Data();
+	escale9::Scale9Type type = data.GetType();
+
+ 	// component
+ 	std::vector<int> ids;
+ 	std::map<int, std::vector<std::string> > unique;
+ 	std::vector<std::pair<int, std::string> > order;
+ 	{
+ 		lua::TableAssign ta(*m_gen, "component", true);
+ 		if (type == escale9::e_9Grid)
+ 			for (size_t i = 0; i < 3; ++i)
+ 				for (size_t j = 0; j < 3; ++j)
+ 					ParserSpriteForComponent(data.GetSprite(i, j), ids, unique, order);
+ 		else if (type == escale9::e_9GridHollow)
+ 			for (size_t i = 0; i < 3; ++i) {
+ 				for (size_t j = 0; j < 3; ++j) {
+ 					if (i == 1 && j == 1) continue;
+ 					ParserSpriteForComponent(data.GetSprite(i, j), ids, unique, order);
+ 				}
+ 			}
+ 		else if (type == escale9::e_3GridHor)
+ 			for (size_t i = 0; i < 3; ++i)
+ 				ParserSpriteForComponent(data.GetSprite(1, i), ids, unique, order);
+ 		else if (type == escale9::e_3GridVer)
+ 			for (size_t i = 0; i < 3; ++i)
+ 				ParserSpriteForComponent(data.GetSprite(i, 1), ids, unique, order);
+ 		else if (type == escale9::e_6GridUpper)
+ 			for (size_t i = 1; i < 3; ++i)
+ 				for (size_t j = 0; j < 3; ++j)
+ 					ParserSpriteForComponent(data.GetSprite(i, j), ids, unique, order);
+ 	}
+ 	// children
+ 	{
+ 		lua::TableAssign ta(*m_gen, "", true);
+ 		// frame 0
+ 		{
+ 			lua::TableAssign ta(*m_gen, "", true);
+ 			int index = 0;
+ 			if (type == escale9::e_9Grid)
+ 				for (size_t i = 0; i < 3; ++i)
+ 					for (size_t j = 0; j < 3; ++j, ++index)
+ 						ParserSpriteForFrame(data.GetSprite(i, j), index, ids, order);
+ 			else if (type == escale9::e_9GridHollow)
+ 				for (size_t i = 0; i < 3; ++i) {
+ 					for (size_t j = 0; j < 3; ++j, ++index) {
+ 						if (i == 1 && j == 1) { 
+ 							--index;
+ 							continue;
+ 						}
+ 						ParserSpriteForFrame(data.GetSprite(i, j), index, ids, order);
+ 					}
+ 				}
+ 			else if (type == escale9::e_3GridHor)
+ 				for (size_t i = 0; i < 3; ++i)
+ 					ParserSpriteForFrame(data.GetSprite(1, i), i, ids, order);
+ 			else if (type == escale9::e_3GridVer)
+ 				for (size_t i = 0; i < 3; ++i)
+ 					ParserSpriteForFrame(data.GetSprite(i, 1), i, ids, order);
+ 			else if (type == escale9::e_6GridUpper)
+ 				for (size_t i = 1; i < 3; ++i)
+ 					for (size_t j = 0; j < 3; ++j, ++index)
+ 						ParserSpriteForFrame(data.GetSprite(i, j), index, ids, order);
+ 		}
+ 	}
 }
 
 void CocoPacker::CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture)

@@ -1,7 +1,5 @@
 #include "SymbolDependanceSorter.h"
 
-#include <queue>
-
 #include <easycomplex.h>
 #include <easyanim.h>
 #include <easyscale9.h>
@@ -55,35 +53,36 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 		}
 		else if (const escale9::Symbol* patch = dynamic_cast<const escale9::Symbol*>(symbol))
 		{
-// 			switch (patch->type())
-// 			{
-// 			case escale9::Symbol::e_9Grid:
-// 				for (size_t i = 0; i < 3; ++i)
-// 					for (size_t j = 0; j < 3; ++j)
-// 						buffer.push(patch->m_sprites[i][j]);
-// 				break;
-// 			case escale9::Symbol::e_9GridHollow:
-// 				for (size_t i = 0; i < 3; ++i) {
-// 					for (size_t j = 0; j < 3; ++j) {
-// 						if (i == 1 && j == 1) continue;
-// 						buffer.push(patch->m_sprites[i][j]);
-// 					}
-// 				}
-// 				break;
-// 			case escale9::Symbol::e_3GridHor:
-// 				for (size_t i = 0; i < 3; ++i)
-// 					buffer.push(patch->m_sprites[1][i]);
-// 				break;
-// 			case escale9::Symbol::e_3GridVer:
-// 				for (size_t i = 0; i < 3; ++i)
-// 					buffer.push(patch->m_sprites[i][1]);
-// 				break;
-// 			case escale9::Symbol::e_6GridUpper:
-// 				for (size_t i = 1; i < 3; ++i)
-// 					for (size_t j = 0; j < 3; ++j)
-// 						buffer.push(patch->m_sprites[i][j]);
-// 				break;
-// 			}
+			const escale9::Scale9Data& data = patch->GetScale9Data();
+ 			switch (data.GetType())
+ 			{
+ 			case escale9::e_9Grid:
+ 				for (size_t i = 0; i < 3; ++i)
+ 					for (size_t j = 0; j < 3; ++j)
+ 						buffer.push(data.GetSprite(i, j));
+ 				break;
+ 			case escale9::e_9GridHollow:
+ 				for (size_t i = 0; i < 3; ++i) {
+ 					for (size_t j = 0; j < 3; ++j) {
+ 						if (i == 1 && j == 1) continue;
+ 						buffer.push(data.GetSprite(i, j));
+ 					}
+ 				}
+ 				break;
+ 			case escale9::e_3GridHor:
+ 				for (size_t i = 0; i < 3; ++i)
+ 					buffer.push(data.GetSprite(1, i));
+ 				break;
+ 			case escale9::e_3GridVer:
+ 				for (size_t i = 0; i < 3; ++i)
+ 					buffer.push(data.GetSprite(i, 1));
+ 				break;
+ 			case escale9::e_6GridUpper:
+ 				for (size_t i = 1; i < 3; ++i)
+ 					for (size_t j = 0; j < 3; ++j)
+ 						buffer.push(data.GetSprite(i, j));
+ 				break;
+ 			}
 		}
 	}
 
@@ -108,6 +107,11 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 				{
 					d2d::ISprite* child = symbol.m_sprites[i];
 					buffer.push(child);
+
+					// patch for scale9
+					if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(child)) {
+						PrepareScale9(buffer, scale9);
+					}
 				}
 			}
 		}
@@ -124,47 +128,22 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 					{
 						anim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-							buffer.push(frame->sprites[k]);
+						{
+							d2d::ISprite* child = frame->sprites[k];
+							buffer.push(child);
+
+							// patch for scale9
+							if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(child)) {
+								PrepareScale9(buffer, scale9);
+							}
+						}
 					}
 				}
 			}
 		}
-		else if (const escale9::Sprite* anim = dynamic_cast<const escale9::Sprite*>(sprite))
+		else if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(sprite))
 		{
-// 			const escale9::Symbol& symbol = anim->getSymbol();
-// 			if (m_unique.find(&symbol) == m_unique.end())
-// 			{
-// 				m_unique.insert(&symbol);
-// 				switch (symbol.type())
-// 				{
-// 				case escale9::Symbol::e_9Grid:
-// 					for (size_t i = 0; i < 3; ++i)
-// 						for (size_t j = 0; j < 3; ++j)
-// 							buffer.push(symbol.m_sprites[i][j]);
-// 					break;
-// 				case escale9::Symbol::e_9GridHollow:
-// 					for (size_t i = 0; i < 3; ++i) {
-// 						for (size_t j = 0; j < 3; ++j) {
-// 							if (i == 1 && j == 1) continue;
-// 							buffer.push(symbol.m_sprites[i][j]);
-// 						}
-// 					}
-// 					break;
-// 				case escale9::Symbol::e_3GridHor:
-// 					for (size_t i = 0; i < 3; ++i)
-// 						buffer.push(symbol.m_sprites[1][i]);
-// 					break;
-// 				case escale9::Symbol::e_3GridVer:
-// 					for (size_t i = 0; i < 3; ++i)
-// 						buffer.push(symbol.m_sprites[i][1]);
-// 					break;
-// 				case escale9::Symbol::e_6GridUpper:
-// 					for (size_t i = 1; i < 3; ++i)
-// 						for (size_t j = 0; j < 3; ++j)
-// 							buffer.push(symbol.m_sprites[i][j]);
-// 					break;
-// 				}
-// 			}
+			PrepareScale9(buffer, scale9);
 		}
 		else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(sprite))
 		{
@@ -181,7 +160,7 @@ void SymbolDependanceSorter::sort()
 {
 	while (!m_unique.empty())
 	{
-		std::set<const d2d::ISymbol*, d2d::SymbolCmp>::iterator itr = m_unique.begin();
+		std::set<const d2d::ISymbol*>::iterator itr = m_unique.begin();
 		for ( ; itr != m_unique.end(); ++itr)
 		{
 			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(*itr);
@@ -236,47 +215,48 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (escale9::Symbol* patch9 = dynamic_cast<escale9::Symbol*>(symbol))
 			{
-// 				bool prepared = true;
-// 				switch (patch9->type())
-// 				{
-// 				case escale9::Symbol::e_9Grid:
-// 					for (size_t i = 0; i < 3 && prepared; ++i)
-// 						for (size_t j = 0; j < 3 && prepared; ++j)
-// 							if (!isSymbolPrepared(patch9->m_sprites[i][j]))
-// 								prepared = false;
-// 					break;
-// 				case escale9::Symbol::e_9GridHollow:
-// 					for (size_t i = 0; i < 3 && prepared; ++i) {
-// 						for (size_t j = 0; j < 3 && prepared; ++j) {
-// 							if (i == 1 && j == 1) continue;
-// 							if (!isSymbolPrepared(patch9->m_sprites[i][j]))
-// 								prepared = false;
-// 						}
-// 					}
-// 					break;
-// 				case escale9::Symbol::e_3GridHor:
-// 					for (size_t i = 0; i < 3 && prepared; ++i)
-// 						if (!isSymbolPrepared(patch9->m_sprites[1][i]))
-// 							prepared = false;
-// 					break;
-// 				case escale9::Symbol::e_3GridVer:
-// 					for (size_t i = 0; i < 3 && prepared; ++i)
-// 						if (!isSymbolPrepared(patch9->m_sprites[i][1]))
-// 							prepared = false;
-// 					break;
-// 				case escale9::Symbol::e_6GridUpper:
-// 					for (size_t i = 1; i < 3 && prepared; ++i)
-// 						for (size_t j = 0; j < 3 && prepared; ++j)
-// 							if (!isSymbolPrepared(patch9->m_sprites[i][j]))
-// 								prepared = false;
-// 					break;
-// 				}
-// 				if (prepared)
-// 				{
-// 					m_result.push_back(patch9);
-// 					m_unique.erase(itr);
-// 					break;
-// 				}
+ 				bool prepared = true;
+				const escale9::Scale9Data& data = patch9->GetScale9Data();
+ 				switch (data.GetType())
+ 				{
+ 				case escale9::e_9Grid:
+ 					for (size_t i = 0; i < 3 && prepared; ++i)
+ 						for (size_t j = 0; j < 3 && prepared; ++j)
+ 							if (!isSymbolPrepared(data.GetSprite(i, j)))
+ 								prepared = false;
+ 					break;
+ 				case escale9::e_9GridHollow:
+ 					for (size_t i = 0; i < 3 && prepared; ++i) {
+ 						for (size_t j = 0; j < 3 && prepared; ++j) {
+ 							if (i == 1 && j == 1) continue;
+ 							if (!isSymbolPrepared(data.GetSprite(i, j)))
+ 								prepared = false;
+ 						}
+ 					}
+ 					break;
+ 				case escale9::e_3GridHor:
+ 					for (size_t i = 0; i < 3 && prepared; ++i)
+ 						if (!isSymbolPrepared(data.GetSprite(1, i)))
+ 							prepared = false;
+ 					break;
+ 				case escale9::e_3GridVer:
+ 					for (size_t i = 0; i < 3 && prepared; ++i)
+ 						if (!isSymbolPrepared(data.GetSprite(i, 1)))
+ 							prepared = false;
+ 					break;
+ 				case escale9::e_6GridUpper:
+ 					for (size_t i = 1; i < 3 && prepared; ++i)
+ 						for (size_t j = 0; j < 3 && prepared; ++j)
+ 							if (!isSymbolPrepared(data.GetSprite(i, j)))
+ 								prepared = false;
+ 					break;
+ 				}
+ 				if (prepared)
+ 				{
+ 					m_result.push_back(patch9);
+ 					m_unique.erase(itr);
+ 					break;
+ 				}
 			}
 			else if (emesh::Symbol* mesh = dynamic_cast<emesh::Symbol*>(symbol))
 			{
@@ -319,6 +299,46 @@ bool SymbolDependanceSorter::isSymbolPrepared(const d2d::ISprite* sprite) const
 		if (&sprite->getSymbol() == m_result[i])
 			return true;
 	return false;
+}
+
+void SymbolDependanceSorter::PrepareScale9(std::queue<d2d::ISprite*>& buffer,
+										   const escale9::Sprite* scale9)
+{
+	const escale9::Symbol& symbol = scale9->getSymbol();
+	if (m_unique.find(&symbol) == m_unique.end())
+	{
+		m_unique.insert(&symbol);
+		const escale9::Scale9Data& data = symbol.GetScale9Data();
+		switch (data.GetType())
+		{
+		case escale9::e_9Grid:
+			for (size_t i = 0; i < 3; ++i)
+				for (size_t j = 0; j < 3; ++j)
+					buffer.push(data.GetSprite(i, j));
+			break;
+		case escale9::e_9GridHollow:
+			for (size_t i = 0; i < 3; ++i) {
+				for (size_t j = 0; j < 3; ++j) {
+					if (i == 1 && j == 1) continue;
+					buffer.push(data.GetSprite(i, j));
+				}
+			}
+			break;
+		case escale9::e_3GridHor:
+			for (size_t i = 0; i < 3; ++i)
+				buffer.push(data.GetSprite(1, i));
+			break;
+		case escale9::e_3GridVer:
+			for (size_t i = 0; i < 3; ++i)
+				buffer.push(data.GetSprite(i, 1));
+			break;
+		case escale9::e_6GridUpper:
+			for (size_t i = 1; i < 3; ++i)
+				for (size_t j = 0; j < 3; ++j)
+					buffer.push(data.GetSprite(i, j));
+			break;
+		}
+	}
 }
 
 }
