@@ -56,10 +56,12 @@ void FileIO::LoadFromFile(const char* filename,
 		shapeValue = value["shapes"][i++];
 	}
 
-	wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["bg_symbol"].asString());
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
-	d2d::obj_assign((d2d::Object*&)bg, symbol);
-	symbol->Release();
+	if (!value["bg_symbol"].isNull()) {
+		wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["bg_symbol"].asString());
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+		d2d::obj_assign((d2d::Object*&)bg, symbol);
+		symbol->Release();
+	}
 }
 
 void FileIO::StoreToFile(const char* filename, 

@@ -8,6 +8,7 @@
 #include "libshape/Package.h"
 #include "libshape/MainDialog.h"
 #include "libshape/StagePanel.h"
+#include "libshape/LibraryPage.h"
 
 #include "libshape/BezierShape.h"
 #include "libshape/ChainShape.h"
