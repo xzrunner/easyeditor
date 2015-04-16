@@ -9,6 +9,7 @@
 #include "libshape/EditDialog.h"
 #include "libshape/StagePanel.h"
 #include "libshape/LibraryPage.h"
+#include "libshape/ToolbarPanel.h"
 
 #include "libshape/BezierShape.h"
 #include "libshape/ChainShape.h"

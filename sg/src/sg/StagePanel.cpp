@@ -134,7 +134,7 @@ void StagePanel::SetPerspective(bool is_flat)
 //void StagePanel::changeSpritesLevel(bool up)
 //{
 //	std::vector<d2d::ISprite*> sprites;
-//	getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+//	getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 //	for (int i = 0, n = sprites.size(); i < n; ++i)
 //	{
 //		d2d::ISprite* sprite = sprites[i];
@@ -164,14 +164,14 @@ void StagePanel::SetPerspective(bool is_flat)
 //		if (symbol) {
 //			sprite->setSymbol(symbol);
 //		}
-//		symbol->release();
+//		symbol->Release();
 //	}
 //}
 
 void StagePanel::ChangeSelectedSpritesLevel(bool up)
 {
 	std::vector<d2d::ISprite*> sprites;
-	getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
@@ -208,7 +208,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 			}
 			sprite->setSymbol(symbol);
 		}
-		symbol->release();
+		symbol->Release();
 	}
 }
 

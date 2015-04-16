@@ -15,7 +15,7 @@ BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 END_EVENT_TABLE()
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::SpriteStageCanvas(stage, stage)
+	: d2d::OrthoCanvas(stage)
 	, m_stage(stage)
 	, m_background(NULL)
 	, m_timer(this, TIMER_ID)
@@ -28,7 +28,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 StageCanvas::~StageCanvas()
 {
 	if (m_background) {
-		m_background->release();
+		m_background->Release();
 	}
 }
 
@@ -143,7 +143,7 @@ void StageCanvas::DrawGrass() const
 void StageCanvas::DrawGrids() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* s = sprites[i];
 		bool valid = m_stage->GetCheckBoard().IsValid(s);
@@ -193,7 +193,7 @@ void StageCanvas::DrawSprites() const
 void StageCanvas::DrawArrow() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->getSpriteSelection()->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	if (sprites.size() == 1) {
 		d2d::ISprite* s = sprites[0];
 		SymbolRender::Instance()->DrawArrow(s->getSymbol(), s->getPosition());

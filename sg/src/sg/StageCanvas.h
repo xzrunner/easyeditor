@@ -8,7 +8,7 @@ namespace sg
 
 class StagePanel;
 
-class StageCanvas : public d2d::SpriteStageCanvas
+class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);

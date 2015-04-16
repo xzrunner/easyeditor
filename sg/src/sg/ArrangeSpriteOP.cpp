@@ -35,7 +35,7 @@ bool ArrangeSpriteOP::onMouseLeftDClick(int x, int y)
 	{
 		d2d::ISprite* s = sprites[i];
 		if (&s->getSymbol() == &selected->getSymbol()) {
-			stage->getSpriteSelection()->insert(s);
+			stage->getSpriteSelection()->Add(s);
 		}
 	}
 
@@ -47,7 +47,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
 
 	std::vector<d2d::ISprite*> sprites;
-	m_selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = sprites[i];

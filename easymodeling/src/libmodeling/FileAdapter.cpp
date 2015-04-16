@@ -94,7 +94,9 @@ Fixture* FileApapter::j2bFixture(const Json::Value& fixtureValue)
 	fixture->categoryBits = fixtureValue["categoryBits"].asInt();
 	fixture->maskBits = fixtureValue["maskBits"].asInt();
 	fixture->groupIndex = fixtureValue["groupIndex"].asInt();
-	fixture->shape = libshape::FileIO::LoadShape(fixtureValue["shape"]);
+
+	// todo
+//	fixture->shape = libshape::FileIO::LoadShape(fixtureValue["shape"]);
 
 	return fixture;
 }

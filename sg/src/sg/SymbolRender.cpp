@@ -19,11 +19,11 @@ SymbolRender::SymbolRender()
 
 SymbolRender::~SymbolRender()
 {
-	m_grid->release();
-	m_arrow_down->release();
-	m_arrow_right->release();
+	m_grid->Release();
+	m_arrow_down->Release();
+	m_arrow_right->Release();
 	for (int i = 0; i < GRASS_COUNT; ++i) {
-		m_grass[i]->release();
+		m_grass[i]->Release();
 	}
 }
 

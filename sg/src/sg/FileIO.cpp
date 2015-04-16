@@ -56,7 +56,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage)
 	d2d::Vector pos;
 	stage->TransGridPosToCoords(row, col, pos);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-	symbol->release();
+	symbol->Release();
 	sprite->translate(pos);
 	return sprite;
 }

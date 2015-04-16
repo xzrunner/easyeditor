@@ -1,5 +1,7 @@
 #include "Task.h"
 
+#include <easyshape.h>
+
 #include <wx/splitter.h>
 
 namespace eshape

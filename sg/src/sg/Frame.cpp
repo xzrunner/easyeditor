@@ -36,7 +36,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
 		const StagePanel* stage = static_cast<const StagePanel*>((m_task)->getEditPanel());
 		d2d::GLCanvas* canvas = stage->getCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-		symbol->release();
+		symbol->Release();
 	}
 }
 

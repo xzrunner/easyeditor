@@ -67,7 +67,7 @@ void BuildingCfg::InitBackground(const Json::Value& value)
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	d2d::GLCanvas* canvas = m_stage->getCanvas();
 	static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
-	symbol->release();
+	symbol->Release();
 	canvas->resetViewport();
 }
 
@@ -82,7 +82,7 @@ void BuildingCfg::InitGrid(const Json::Value& value)
 	sprite->setTransform(d2d::Vector(0, 0), angle * d2d::TRANS_DEG_TO_RAD);
 	sprite->setScale(scale, scale);
 	SymbolRender::Instance()->SetGrid(sprite);
-	symbol->release();
+	symbol->Release();
 	m_stage->getCanvas()->resetViewport();
 }
 
@@ -211,7 +211,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 			s->setInfo(wxString::FromDouble(info->remain));
 			s->setUserData(info);
 			library->getList()->insert(s);
-			s->release();
+			s->Release();
 		}
 	}
 }
