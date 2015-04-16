@@ -12,6 +12,11 @@ SymbolsCfg::SymbolsCfg(StagePanel* stage, d2d::LibraryPanel* library)
 {
 }
 
+SymbolsCfg::~SymbolsCfg()
+{
+	for_each(m_symbols.begin(), m_symbols.end(), DeletePointerFunctor<Symbol>());
+}
+
 void SymbolsCfg::LoadConfig()
 {
 	const char* config_filepath = "symbols_cfg.json";
@@ -34,16 +39,17 @@ void SymbolsCfg::LoadConfig()
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 {
-	InitLibrarySymbols(value["terrain"], "地形", m_symbols.terrain);
-	InitLibrarySymbols(value["unit"], "单位", m_symbols.unit);
-	InitLibrarySymbols(value["decoration"], "装饰", m_symbols.decoration);
-	InitLibrarySymbols(value["point"], "点", m_symbols.point);
-	InitLibrarySymbols(value["region"], "区域", m_symbols.region);
+	InitLibrarySymbols(value["terrain"], "地形");
+	InitLibrarySymbols(value["unit"], "单位");
+	InitLibrarySymbols(value["decoration"], "装饰");
+	InitLibrarySymbols(value["point"], "点");
+	InitLibrarySymbols(value["region"], "区域");
 }
 
-void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name, 
-									std::vector<Symbol*>& symbols)
+void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name)
 {
+	std::vector<Symbol*> symbols;
+
 	InitLibrarySymbols(value, symbols);
 
 	wxWindow* nb = m_library->getNotebook();
@@ -51,6 +57,8 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string&
 	m_library->addPage(page);
 
 	ResetLibraryList(page, symbols);
+
+	copy(symbols.begin(), symbols.end(), back_inserter(m_symbols));
 }
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& symbols)

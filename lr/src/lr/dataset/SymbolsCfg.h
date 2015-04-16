@@ -13,6 +13,7 @@ class SymbolsCfg
 {
 public:
 	SymbolsCfg(StagePanel* stage, d2d::LibraryPanel* library);
+	~SymbolsCfg();
 
 	void LoadConfig();
 
@@ -22,19 +23,9 @@ private:
 		std::string filepath;
 	}; // Symbol
 
-	struct AllSymbol
-	{
-		std::vector<Symbol*> terrain;
-		std::vector<Symbol*> unit;
-		std::vector<Symbol*> decoration;
-		std::vector<Symbol*> point;
-		std::vector<Symbol*> region;
-	}; // AllSymbol
-
 private:
 	void InitLibrarySymbols(const Json::Value& value);
-	void InitLibrarySymbols(const Json::Value& value, const std::string& name, 
-		std::vector<Symbol*>& symbols);
+	void InitLibrarySymbols(const Json::Value& value, const std::string& name);
 	void InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& symbols);
 
 	void ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& symbols);
@@ -44,7 +35,7 @@ private:
 
 	d2d::LibraryPanel* m_library;
 
-	AllSymbol m_symbols;
+	std::vector<Symbol*> m_symbols;
 
 }; // SymbolsCfg
 
