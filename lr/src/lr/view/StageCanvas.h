@@ -19,6 +19,9 @@ protected:
 	void onTimer(wxTimerEvent& event);
 
 private:
+	void DrawGuideLines() const;
+
+private:
 	enum
 	{
 		TIMER_ID = 1000

@@ -190,11 +190,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\lr\frame\Frame.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\Frame.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\frame\main.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\lr\frame\main.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\SettingCfg.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\SettingCfg.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\SettingsDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\SettingsDialog.h"
 				>
 			</File>
 			<File
@@ -258,6 +282,26 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\lr\view\SelectSpritesOP.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="preview"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\view\PreviewCanvas.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\PreviewCanvas.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\PreviewDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\PreviewDialog.h"
 					>
 				</File>
 			</Filter>

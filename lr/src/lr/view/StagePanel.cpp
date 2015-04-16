@@ -16,6 +16,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this);
 
 	m_editOP = m_paste_op;
+	m_editOP->Retain();
 
 	m_canvas = new StageCanvas(this);
 }
