@@ -44,21 +44,11 @@ protected:
 	void ResetDirty();
 
 private:
-	class NodeCapture : public INodeCapture
-	{
-	public:
-		NodeCapture(float scope) : m_scope(scope) {}
-		virtual float GetScope() const { return m_scope; }
-	private:
-		float m_scope;
-	}; // NodeCapture
-
-private:
 	EditPolylineImpl* m_impl;
 
 	TSelected* m_select_op;
 
-	NodeCapture* m_node_capture;
+	INodeCapture* m_node_capture;
 
 }; // EditPolylineOP
 

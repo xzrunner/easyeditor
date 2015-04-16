@@ -77,7 +77,8 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
 	{
 		libshape::Symbol& symbol = const_cast<libshape::Symbol&>(shape->getSymbol());
-		libshape::EditDialog dlg(m_editPanel, &symbol);
+		libshape::EditDialogSimple dlg(m_editPanel, &symbol);
+//		libshape::EditDialog dlg(m_editPanel, &symbol);
 		dlg.ShowModal();
 
 		m_editPanel->ResetViewport();		

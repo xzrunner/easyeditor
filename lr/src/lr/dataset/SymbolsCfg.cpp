@@ -37,6 +37,8 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 	InitLibrarySymbols(value["terrain"], "地形", m_symbols.terrain);
 	InitLibrarySymbols(value["unit"], "单位", m_symbols.unit);
 	InitLibrarySymbols(value["decoration"], "装饰", m_symbols.decoration);
+	InitLibrarySymbols(value["point"], "点", m_symbols.point);
+	InitLibrarySymbols(value["region"], "区域", m_symbols.region);
 }
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name, 

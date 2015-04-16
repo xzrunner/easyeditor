@@ -1,6 +1,12 @@
 #include "Symbol.h"
 #include "FileIO.h"
+
+#include "BezierShape.h"
+#include "ChainShape.h"
+#include "CircleShape.h"
+#include "CosineShape.h"
 #include "PolygonShape.h"
+#include "RectShape.h"
 
 #include <easyimage.h>
 
@@ -226,6 +232,28 @@ void Symbol::LoadBGTriStrip(d2d::ISymbol* bg)
 		d2d::JsonTools::load(strip_val, strip);
 		m_bg_tri_strips.push_back(strip);
 		strip_val = value["strip"][i++];
+	}
+}
+
+ShapeType Symbol::GetType() const
+{
+	if (m_shapes.empty()) {
+		return e_unknown;
+	}
+
+	d2d::IShape* shape = m_shapes[0];
+	if (dynamic_cast <RectShape*>(shape)) {
+		return e_rect;
+	} else if (dynamic_cast<CircleShape*>(shape)) {
+		return e_circle;
+	} else if (dynamic_cast<BezierShape*>(shape)) {
+		return e_bezier;
+	} else if (dynamic_cast<PolygonShape*>(shape)) {
+		return e_polygon;
+	} else if (dynamic_cast<ChainShape*>(shape)) {
+		return e_chain;
+	} else {
+		return e_unknown;
 	}
 }
 

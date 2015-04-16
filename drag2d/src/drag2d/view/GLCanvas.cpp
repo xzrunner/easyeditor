@@ -68,6 +68,8 @@ void GLCanvas::initGL()
 {
 	wxLogDebug(_T("GLCanvas::initGL()"));
 
+	ShaderMgr::Instance()->null();
+
 	resetViewport();
 
 	glShadeModel(GL_SMOOTH);
@@ -76,8 +78,6 @@ void GLCanvas::initGL()
 	if (RenderContext::SHADER_MGR) {
 		RenderContext::SHADER_MGR->reload();
 	}
-
-	ShaderMgr::Instance()->null();
 }
 
 void GLCanvas::onSize(wxSizeEvent& event)

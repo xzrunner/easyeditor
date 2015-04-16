@@ -7,6 +7,7 @@
 #include "libshape/FileIO.h"
 #include "libshape/Package.h"
 #include "libshape/EditDialog.h"
+#include "libshape/EditDialogSimple.h"
 #include "libshape/StagePanel.h"
 #include "libshape/LibraryPage.h"
 #include "libshape/ToolbarPanel.h"

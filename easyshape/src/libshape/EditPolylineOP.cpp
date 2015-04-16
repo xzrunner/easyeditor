@@ -3,6 +3,7 @@
 
 #include "EditPolylineOP.h"
 #include "EditPolylineImpl.h"
+#include "NodeCaptureStatic.h"
 
 template <typename TBase, typename TSelected>
 libshape::EditPolylineOP<TBase, TSelected>::
@@ -16,7 +17,7 @@ EditPolylineOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 	m_select_op = new TSelected(editPanel, shapesImpl, propertyPanel, cmpt);
 	INodeCapture* node_capture = cmpt;
 	if (!node_capture) {
-		node_capture = m_node_capture = new NodeCapture(node_capture_scope);
+		node_capture = m_node_capture = new NodeCaptureStatic(node_capture_scope);
 	}
 	m_impl = new EditPolylineImpl(editPanel, shapesImpl, propertyPanel, node_capture, this, m_select_op, this);
 }

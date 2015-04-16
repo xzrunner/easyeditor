@@ -26,7 +26,9 @@ private:
 	{
 		std::vector<Symbol*> terrain;
 		std::vector<Symbol*> unit;
-		std::vector<Symbol*> decoration;		
+		std::vector<Symbol*> decoration;
+		std::vector<Symbol*> point;
+		std::vector<Symbol*> region;
 	}; // AllSymbol
 
 private:

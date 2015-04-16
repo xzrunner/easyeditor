@@ -62,11 +62,13 @@ void StagePanel::ChangeEditOP()
 		return;
 	}
 
+	m_editOP->Release();
 	if (m_editOP == m_arrange_op) {
 		m_editOP = m_paste_op;
 	} else {
 		m_editOP = m_arrange_op;
 	}
+	m_editOP->Retain();
 }
 
 }

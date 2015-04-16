@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "ShapeType.h"
+
 namespace libshape
 {
 
@@ -39,6 +41,9 @@ public:
 	void SetBG(d2d::ISymbol* bg);
 
 	void StoreToFile(const char* filename) const;
+
+	// todo
+	ShapeType GetType() const;
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 

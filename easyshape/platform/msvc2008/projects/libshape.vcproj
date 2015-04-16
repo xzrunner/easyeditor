@@ -243,6 +243,10 @@
 					RelativePath="..\..\..\src\libshape\RectShape.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\ShapeType.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="material"
@@ -374,6 +378,14 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libshape\EditDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshape\EditDialogSimple.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshape\EditDialogSimple.h"
 				>
 			</File>
 		</Filter>
@@ -608,6 +620,10 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\NodeCaptureCMPT.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\NodeCaptureStatic.h"
 						>
 					</File>
 				</Filter>

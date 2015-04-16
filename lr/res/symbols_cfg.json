@@ -37,5 +37,20 @@
 		{
 			"filepath" : "data/buildings_snapshoot/building_1012_lv1.png"
 		}
+	],
+	"point" :
+	[
+		{
+			"filepath" : "data/other/6189-tongyong-1.png"
+		}
+	],
+	"region" : 
+	[
+		{
+			"filepath" : "data/region/rect_shape.json"
+		},
+		{
+			"filepath" : "data/region/polygon_shape.json"
+		}
 	]
 }
