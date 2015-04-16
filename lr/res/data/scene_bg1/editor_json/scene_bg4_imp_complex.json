@@ -1,0 +1,1207 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\background.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 639.253906250,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\background.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite1",
+			"position" : 
+			{
+				"x" : -636.4525756835938,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\waterfall_cover.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite2",
+			"position" : 
+			{
+				"x" : 633.4533081054688,
+				"y" : -717.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "pubu_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite7",
+			"position" : 
+			{
+				"x" : -667.9098510742188,
+				"y" : -731.8893432617188
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite10",
+			"position" : 
+			{
+				"x" : 528.05566406250,
+				"y" : 813.3555297851563
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8570073246955872,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8570073246955872,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite11",
+			"position" : 
+			{
+				"x" : 651.5608520507813,
+				"y" : 704.7574462890625
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8765330910682678,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8765330910682678,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite12",
+			"position" : 
+			{
+				"x" : 714.7982788085938,
+				"y" : 668.2403564453125
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.5618023276329041,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.5618023276329041,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite13",
+			"position" : 
+			{
+				"x" : 1029.914428710938,
+				"y" : 687.3217163085938
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.9754009842872620,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9754009842872620,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite14",
+			"position" : 
+			{
+				"x" : 898.9194946289063,
+				"y" : 509.4409484863281
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.7006542682647705,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7006542682647705,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite15",
+			"position" : 
+			{
+				"x" : 971.3199462890625,
+				"y" : 418.1372680664063
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7749610543251038,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7749610543251038,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite16",
+			"position" : 
+			{
+				"x" : 1111.0761718750,
+				"y" : 523.1597900390625
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.9706651568412781,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9706651568412781,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite17",
+			"position" : 
+			{
+				"x" : 1113.33496093750,
+				"y" : -184.5461425781250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite18",
+			"position" : 
+			{
+				"x" : 918.0720214843750,
+				"y" : -248.2585144042969
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.9043033719062805,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9043033719062805,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite19",
+			"position" : 
+			{
+				"x" : 978.6146240234375,
+				"y" : -290.4723205566406
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6523612141609192,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6523612141609192,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite20",
+			"position" : 
+			{
+				"x" : 571.6386108398438,
+				"y" : -487.0253906250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite21",
+			"position" : 
+			{
+				"x" : 642.8205566406250,
+				"y" : -528.6271362304688
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8197537064552307,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8197537064552307,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite22",
+			"position" : 
+			{
+				"x" : 544.3181762695313,
+				"y" : -556.7197875976563
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.5408326983451843,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.5408326983451843,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite23",
+			"position" : 
+			{
+				"x" : 600.3923339843750,
+				"y" : -807.5968627929688
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.8269585371017456,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8269585371017456,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite24",
+			"position" : 
+			{
+				"x" : 310.2559204101563,
+				"y" : -698.0626220703125
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.9341804385185242,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9341804385185242,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite25",
+			"position" : 
+			{
+				"x" : 189.6439971923828,
+				"y" : -872.6284790039063
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7637770771980286,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7637770771980286,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite26",
+			"position" : 
+			{
+				"x" : 77.08872985839844,
+				"y" : -890.6759033203125
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8715654015541077,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8715654015541077,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite27",
+			"position" : 
+			{
+				"x" : -21.18261909484863,
+				"y" : -939.6721191406250
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.7399733066558838,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7399733066558838,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite28",
+			"position" : 
+			{
+				"x" : -414.6705322265625,
+				"y" : 830.2559814453125
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.530284047126770,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.530284047126770,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite29",
+			"position" : 
+			{
+				"x" : -536.2170410156250,
+				"y" : 858.6726074218750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.5542445778846741,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.5542445778846741,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite30",
+			"position" : 
+			{
+				"x" : -652.1001586914063,
+				"y" : 753.0689086914063
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.8336405158042908,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8336405158042908,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite31",
+			"position" : 
+			{
+				"x" : -777.6356811523438,
+				"y" : 617.37402343750
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.8368338346481323,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8368338346481323,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite32",
+			"position" : 
+			{
+				"x" : -796.3864135742188,
+				"y" : 558.6824340820313
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6517291665077210,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6517291665077210,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite33",
+			"position" : 
+			{
+				"x" : -838.9243774414063,
+				"y" : 524.9664916992188
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.4555794298648834,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4555794298648834,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite34",
+			"position" : 
+			{
+				"x" : -806.2276611328125,
+				"y" : 904.7105102539063
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7448388338088989,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7448388338088989,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite35",
+			"position" : 
+			{
+				"x" : -922.2568969726563,
+				"y" : 846.045410156250
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.9778301119804382,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9778301119804382,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite36",
+			"position" : 
+			{
+				"x" : -897.4275512695313,
+				"y" : 743.9373168945313
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7332932949066162,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7332932949066162,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite37",
+			"position" : 
+			{
+				"x" : -1199.394409179688,
+				"y" : 944.2529907226563
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.5814260840415955,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.5814260840415955,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite38",
+			"position" : 
+			{
+				"x" : -1067.204711914063,
+				"y" : 1007.837585449219
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6231498718261719,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6231498718261719,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite39",
+			"position" : 
+			{
+				"x" : -1130.874267578125,
+				"y" : 861.7285156250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.9307258725166321,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9307258725166321,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite40",
+			"position" : 
+			{
+				"x" : -1211.7949218750,
+				"y" : 666.6226806640625
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.6058506369590759,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6058506369590759,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite41",
+			"position" : 
+			{
+				"x" : -1118.985473632813,
+				"y" : 545.9632568359375
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.5989778637886047,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.5989778637886047,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite42",
+			"position" : 
+			{
+				"x" : -1248.610717773438,
+				"y" : 425.8947143554688
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.5983185768127441,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.5983185768127441,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite43",
+			"position" : 
+			{
+				"x" : -1067.601806640625,
+				"y" : 354.0022277832031
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3617425262928009,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3617425262928009,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite44",
+			"position" : 
+			{
+				"x" : -1176.369750976563,
+				"y" : 271.5707702636719
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7911450266838074,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7911450266838074,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite45",
+			"position" : 
+			{
+				"x" : -1226.212646484375,
+				"y" : -22.45410537719727
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.9297137856483460,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9297137856483460,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite46",
+			"position" : 
+			{
+				"x" : -1083.546020507813,
+				"y" : -217.7700042724609
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6937491893768311,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6937491893768311,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite47",
+			"position" : 
+			{
+				"x" : -1116.415649414063,
+				"y" : -364.027343750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.9134742617607117,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9134742617607117,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite48",
+			"position" : 
+			{
+				"x" : -925.5313720703125,
+				"y" : -241.4161987304688
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite49",
+			"position" : 
+			{
+				"x" : -945.3070678710938,
+				"y" : -304.1731567382813
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6676349639892578,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6676349639892578,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite50",
+			"position" : 
+			{
+				"x" : -846.2883300781250,
+				"y" : -287.9449462890625
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.8946027755737305,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8946027755737305,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite51",
+			"position" : 
+			{
+				"x" : -835.8347167968750,
+				"y" : -484.1125488281250
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.9058189988136292,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.9058189988136292,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite52",
+			"position" : 
+			{
+				"x" : -353.863281250,
+				"y" : -692.3027954101563
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite53",
+			"position" : 
+			{
+				"x" : -171.5162811279297,
+				"y" : -854.8027954101563
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite54",
+			"position" : 
+			{
+				"x" : -269.3195495605469,
+				"y" : -737.2745361328125
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.6437522768974304,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6437522768974304,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_02.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite55",
+			"position" : 
+			{
+				"x" : 716.8789672851563,
+				"y" : -681.1480102539063
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6976122260093689,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6976122260093689,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\pngs\\tree_01.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite56",
+			"position" : 
+			{
+				"x" : -261.4674072265625,
+				"y" : 908.4932861328125
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7032695412635803,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7032695412635803,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "pubu2_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite67",
+			"position" : 
+			{
+				"x" : -667.9098510742188,
+				"y" : -731.8893432617188
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 1.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}
