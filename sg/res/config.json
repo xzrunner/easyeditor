@@ -1130,6 +1130,40 @@
 			"AirTrap" : 4,
 			"MegaAirTrap" : 4,
 			"Dark Elixir Barrack" : 2
+		},
+		// todo
+		{
+			"Base" : 1,
+			"Troop Housing" : 4,
+			"Elixir Storage" : 4,
+			"Gold Storage" : 4,
+			"Elixir Pump" : 6,
+			"Gold Mine" : 6,
+			"Barrack" : 4,
+			"Cannon" : 5,
+			"Wall" : 250,
+			"Archer Tower" : 6,
+			"Wizard Tower" : 4,
+			"Air Defense" : 4,
+			"Mortar" : 3,
+			"Alliance Castle" : 1,
+			"Ejector" : 6,
+			"Superbomb" : 4,
+			"Mine" : 6,
+			"Worker Building" : 5,
+			"Laboratory" : 1,
+			"Tesla Tower" : 4,
+			"Spell Forge" : 1,
+			"Bow" : 2,
+			"Hero Altar Barbarian King" : 1,
+			"Dark Elixir Pump" : 2,
+			"Dark Elixir Storage" : 1,
+			"Hero Altar Archer Queen" : 1,
+			"Hero Altar XiYu" : 1,
+			"Hero Altar YiNi" : 1,
+			"AirTrap" : 4,
+			"MegaAirTrap" : 4,
+			"Dark Elixir Barrack" : 2
 		}
 	]
 }

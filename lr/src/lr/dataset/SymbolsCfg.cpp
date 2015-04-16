@@ -34,21 +34,21 @@ void SymbolsCfg::LoadConfig()
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 {
-	InitLibrarySymbols(value["terrain"], m_symbols.terrain);
-	InitLibrarySymbols(value["unit"], m_symbols.unit);
-	InitLibrarySymbols(value["decoration"], m_symbols.decoration);
+	InitLibrarySymbols(value["terrain"], "地形", m_symbols.terrain);
+	InitLibrarySymbols(value["unit"], "单位", m_symbols.unit);
+	InitLibrarySymbols(value["decoration"], "装饰", m_symbols.decoration);
+}
+
+void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name, 
+									std::vector<Symbol*>& symbols)
+{
+	InitLibrarySymbols(value, symbols);
 
 	wxWindow* nb = m_library->getNotebook();
-	LibraryPage* defenses = new LibraryPage(nb, "Terrain");
-	m_library->addPage(defenses);
-	LibraryPage* resources = new LibraryPage(nb, "Unit");
-	m_library->addPage(resources);
-	LibraryPage* army = new LibraryPage(nb, "Decoration");
-	m_library->addPage(army);	
+	LibraryPage* page = new LibraryPage(nb, name.c_str());
+	m_library->addPage(page);
 
-	ResetLibraryList(defenses, m_symbols.terrain);
-	ResetLibraryList(resources, m_symbols.unit);
-	ResetLibraryList(army, m_symbols.decoration);
+	ResetLibraryList(page, symbols);
 }
 
 void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& symbols)

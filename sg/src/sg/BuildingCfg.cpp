@@ -51,10 +51,10 @@ int BuildingCfg::QueryAmountLimit(const std::string& name) const
 {
 	int level = m_stage->GetBaseLevel();
 
-	assert(level >= 0 && level < m_amount_limit.size());
+	assert(level > 0 && level <= m_amount_limit.size());
 	std::map<std::string, int>::const_iterator itr 
-		= m_amount_limit[level].find(name);
-	if (itr == m_amount_limit[level].end()) {
+		= m_amount_limit[level-1].find(name);
+	if (itr == m_amount_limit[level-1].end()) {
 		return -1;
 	} else {
 		return itr->second;
