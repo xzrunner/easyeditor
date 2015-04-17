@@ -21,6 +21,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 	if (symbol) {
 		symbol->Retain();
 		m_symbol = symbol;
+		m_symbol->reloadTexture();
 	}
 	SetTitle(symbol->getFilepath());
 	InitLayout();

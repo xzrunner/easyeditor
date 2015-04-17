@@ -35,7 +35,9 @@ Symbol* Symbol::clone() const
 
 void Symbol::reloadTexture() const
 {
-	// todo
+	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
+		m_shapes[i]->ReloadTexture();
+	}
 }
 
 void Symbol::draw(const d2d::Matrix& mt,

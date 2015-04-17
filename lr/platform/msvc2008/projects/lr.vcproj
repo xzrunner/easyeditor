@@ -190,6 +190,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\lr\frame\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\FileIO.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\frame\Frame.cpp"
 				>
 			</File>

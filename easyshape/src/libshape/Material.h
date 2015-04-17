@@ -17,6 +17,8 @@ public:
 	virtual void Translate(const d2d::Vector& offset);
 	virtual void Draw(const d2d::Matrix& mt) const = 0;
 
+	virtual void ReloadTexture() = 0;
+
 	void Refresh(const std::vector<d2d::Vector>& vertices);
 
 	void DebugDrawTris(const d2d::Matrix& mt) const;

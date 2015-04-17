@@ -43,6 +43,8 @@ public:
 
 	virtual IPropertySetting* createPropertySetting(EditPanel* editPanel) = 0;
 
+	virtual void ReloadTexture() {}
+
 protected:
 	static const int QUERY_ACCURACY = 5;
 

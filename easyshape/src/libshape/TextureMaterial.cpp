@@ -54,6 +54,11 @@ void TextureMaterial::Draw(const d2d::Matrix& mt) const
 	}
 }
 
+void TextureMaterial::ReloadTexture()
+{
+	m_image->reloadTexture();
+}
+
 void TextureMaterial::Build(const std::vector<d2d::Vector>& vertices)
 {
 	m_vertices.clear();

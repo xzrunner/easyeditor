@@ -17,6 +17,8 @@ public:
 	virtual void Translate(const d2d::Vector& offset);
 	virtual void Draw(const d2d::Matrix& mt) const;	
 
+	virtual void ReloadTexture();
+
 protected:
 	virtual void Build(const std::vector<d2d::Vector>& vertices);
 	virtual void Build(const std::vector<d2d::Vector>& vertices,

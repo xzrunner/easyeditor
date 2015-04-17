@@ -31,6 +31,7 @@ void SymbolsCfg::LoadConfig()
 
 	try {
 		InitLibrarySymbols(value);
+		m_library->setCanvas(m_stage->getCanvas());
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(m_stage, e);
 		dlg.ShowModal();	

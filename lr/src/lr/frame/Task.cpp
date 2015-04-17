@@ -1,4 +1,5 @@
 #include "Task.h"
+#include "FileIO.h"
 
 #include "view/StagePanel.h"
 
@@ -21,10 +22,13 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
+	FileIO::load(filename, m_stage, m_library);
+	m_stage->getCanvas()->resetViewport();
 }
 
 void Task::store(const char* filename) const
 {
+	FileIO::store(filename, m_stage);
 }
 
 bool Task::isDirty() const
@@ -34,9 +38,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
 	m_stage->clear();
-	m_library->Refresh();
 	m_stage->Refresh();
 }
 
