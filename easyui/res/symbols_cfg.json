@@ -1,0 +1,47 @@
+{
+	"button" :
+	[
+		{
+			"filepath" : "data/scene_bg1/pngs/7002_2.png"
+		},
+		{
+			"filepath" : "data/scene_bg1/pngs/7002_3.png"
+		},
+		{
+			"filepath" : "data/scene_bg1/pngs/7002_4.png"
+		},
+		{
+			"filepath" : "data/scene_bg1/pngs/waterfall_cover.png"
+		}
+	],
+	"list" : 
+	[
+		{
+			"filepath" : "data/buildings_snapshoot/building_1015_lv1.png"
+		},
+		{
+			"filepath" : "data/buildings_snapshoot/building_1016_lv1.png"
+		},
+		{
+			"filepath" : "data/buildings_snapshoot/building_1013_lv1.png"
+		}				
+	],
+	"label" :
+	[
+		{
+			"filepath" : "data/buildings_snapshoot/building_1014_lv1.png"
+		},
+		{
+			"filepath" : "data/buildings_snapshoot/building_1011_lv1.png"
+		},
+		{
+			"filepath" : "data/buildings_snapshoot/building_1012_lv1.png"
+		}
+	],
+	"other" :
+	[
+		{
+			"filepath" : "data/other/6189-tongyong-1.png"
+		}
+	]
+}

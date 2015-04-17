@@ -6,6 +6,7 @@ namespace lr
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   d2d::PropertySettingPanel* property,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(this, library)
@@ -13,7 +14,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_viewlist(NULL)
 {
 	m_paste_op = new d2d::PasteSymbolOP(this, this, library);
-	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this);
+	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 
 	m_editOP = m_paste_op;
 	m_editOP->Retain();

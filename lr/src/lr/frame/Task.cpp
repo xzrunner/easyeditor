@@ -54,13 +54,20 @@ void Task::InitLayout()
 {
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(m_parent);
 	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
+	wxSplitterWindow* left_hori_splitter = new wxSplitterWindow(left_splitter);
 
-	m_library = new d2d::LibraryPanel(left_splitter);
-	m_stage = new StagePanel(left_splitter, m_parent, m_library);
+	d2d::PropertySettingPanel* property 
+		= new d2d::PropertySettingPanel(left_hori_splitter);
+
+	m_library = new d2d::LibraryPanel(left_hori_splitter);
+	m_stage = new StagePanel(left_splitter, m_parent, property, m_library);
 	m_library->setCanvas(m_stage->getCanvas());
 
+	left_hori_splitter->SetSashGravity(0.6f);
+	left_hori_splitter->SplitHorizontally(m_library, property);	
+
 	left_splitter->SetSashGravity(0.2f);
-	left_splitter->SplitVertically(m_library, m_stage);
+	left_splitter->SplitVertically(left_hori_splitter, m_stage);
 
 	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, m_stage);
 	m_stage->SetViewlist(viewlist);
