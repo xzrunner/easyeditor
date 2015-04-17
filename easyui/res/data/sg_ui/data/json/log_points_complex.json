@@ -1,0 +1,83 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "log_point_background_bar_scale9.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "log_TID_YOU_WIN_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_YOU_WIN_LOST",
+			"position" : 
+			{
+				"x" : -76.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "log_percent_fontblank.json",
+			"multi color" : "",
+			"name" : "percent",
+			"position" : 
+			{
+				"x" : 11.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "star3_anim.json",
+			"multi color" : "",
+			"name" : "start",
+			"position" : 
+			{
+				"x" : 88.750,
+				"y" : 1.600006103515625
+			},
+			"x mirror" : false,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		}
+	]
+}

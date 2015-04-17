@@ -1,0 +1,142 @@
+
+{
+	"name" : "chat_world_info",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "chat_item_list_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : 391.50,
+				"y" : -137.2260131835938
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3000.024902343750,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "chat_window_top_bg_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 391.50,
+				"y" : -117.2260131835938
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 2.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 90.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "red_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "send",
+			"position" : 
+			{
+				"x" : 233.9984741210938,
+				"y" : -97.20948791503906
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "yellow_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "trumpet",
+			"position" : 
+			{
+				"x" : 598.4863891601563,
+				"y" : -96.99047088623047
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "yellow_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "invite",
+			"position" : 
+			{
+				"x" : 233.9984741210938,
+				"y" : -94.20948791503906
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

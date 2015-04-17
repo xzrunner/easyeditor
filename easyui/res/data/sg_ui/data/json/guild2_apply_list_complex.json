@@ -1,0 +1,38 @@
+
+{
+	"name" : "guild2_apply",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_apply_list_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : 304.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.356506347656250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -2301.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 420.0,
+	"xmin" : -420.0,
+	"ymax" : 255.0,
+	"ymin" : -300.0
+}

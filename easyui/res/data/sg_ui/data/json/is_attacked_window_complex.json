@@ -1,0 +1,204 @@
+
+{
+	"name" : "is_attacked_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_window_bg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_window_bg2_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -24.79998779296875
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff3d3a5a",
+			"filepath" : "warning_title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 28,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 23.4382324218750,
+				"y" : 94.97502136230469
+			},
+			"size" : 22,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "time_title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 35,
+			"label_width" : 300,
+			"multi color" : "0xffffffff",
+			"name" : "time_title",
+			"position" : 
+			{
+				"x" : 73.4382324218750,
+				"y" : -77.52497863769531
+			},
+			"size" : 18,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff000000",
+			"filepath" : "time_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 35,
+			"label_width" : 100,
+			"multi color" : "0xffffffff",
+			"name" : "time",
+			"position" : 
+			{
+				"x" : -25.5617675781250,
+				"y" : -127.5249786376953
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6162-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -227.7617797851563,
+				"y" : 47.00001525878906
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 3,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "is_attack_info_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 100,
+			"label_width" : 300,
+			"multi color" : "0xffffffff",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : 74.4382324218750,
+				"y" : 6.0
+			},
+			"size" : 18,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

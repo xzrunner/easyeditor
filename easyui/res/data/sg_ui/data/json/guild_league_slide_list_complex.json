@@ -1,0 +1,5212 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item1",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -93.26003265380859
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item2",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -180.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item3",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -270.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item4",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -360.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item5",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -450.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item6",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -540.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item7",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -630.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item8",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -720.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item9",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -810.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item10",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -900.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item11",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -990.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item12",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1080.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item13",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1170.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item14",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1260.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item15",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1350.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item16",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1440.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item17",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1530.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item18",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1620.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item19",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1710.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item20",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1800.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item21",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1890.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item22",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -1980.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item23",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2070.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item24",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2160.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item25",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2250.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item26",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2340.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item27",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2430.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item28",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2520.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item29",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2610.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item30",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2700.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item31",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2790.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item32",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2880.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item33",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -2970.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item34",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3060.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item35",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3150.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item36",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3240.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item37",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3330.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item38",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3420.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item39",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3510.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item40",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3600.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item41",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3690.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item42",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3780.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item43",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3870.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item44",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -3960.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item45",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4050.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item46",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4140.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item47",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4230.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item48",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4320.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item49",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4410.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item50",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4500.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item51",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4590.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item52",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4680.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item53",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4770.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item54",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4860.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item55",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4950.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item56",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5040.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item57",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5130.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item58",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5220.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item59",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5310.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item60",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5400.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item61",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5490.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item62",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5580.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item63",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5670.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item64",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5760.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item65",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5850.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item66",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -5940.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item67",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6030.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item68",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6120.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item69",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6210.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item70",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6300.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item71",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6390.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item72",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6480.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item73",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6570.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item74",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6660.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item75",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6750.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item76",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6840.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item77",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -6930.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item78",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7020.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item79",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7110.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item80",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7200.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item81",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7290.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item82",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7380.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item83",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7470.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item84",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7560.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item85",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7650.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item86",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7740.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item87",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7830.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item88",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -7920.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item89",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8010.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item90",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8100.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item91",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8190.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item92",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8280.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item93",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8370.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item94",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8460.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item95",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8550.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item96",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8640.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item97",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8730.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item98",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8820.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item99",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -8910.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item100",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9000.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item101",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9090.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item102",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9180.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item103",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9270.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item104",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9360.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item105",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9450.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item106",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9540.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item107",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9630.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item108",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9720.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item109",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9810.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item110",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9900.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item111",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -9990.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item112",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10080.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item113",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10170.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item114",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10260.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item115",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10350.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item116",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10440.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item117",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10530.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item118",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10620.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item119",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10710.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item120",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10800.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item121",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10890.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item122",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -10980.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item123",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11070.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item124",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11160.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item125",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11250.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item126",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11340.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item127",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11430.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item128",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11520.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item129",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11610.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item130",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11700.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item131",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11790.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item132",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11880.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item133",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11970.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item134",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12060.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item135",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12150.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item136",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12240.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item137",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12330.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item138",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12420.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item139",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12510.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item140",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12600.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item141",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12690.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item142",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12780.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item143",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12870.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item144",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12960.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item145",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13050.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item146",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13140.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item147",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13230.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item148",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13320.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item149",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13410.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item150",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13500.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item151",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13590.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item152",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13680.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item153",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13770.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item154",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13860.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item155",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -13950.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item156",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14040.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item157",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14130.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item158",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14220.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item159",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14310.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item160",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14400.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item161",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14490.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item162",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14580.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item163",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14670.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item164",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14760.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item165",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14850.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item166",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -14940.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item167",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15030.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item168",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15120.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item169",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15210.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item170",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15300.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item171",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15390.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item172",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15480.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item173",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15570.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item174",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15660.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item175",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15750.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item176",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15840.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item177",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -15930.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item178",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16020.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item179",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16110.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item180",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16200.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item181",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16290.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item182",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16380.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item183",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16470.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item184",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16560.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item185",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16650.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item186",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16740.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item187",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16830.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item188",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -16920.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item189",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17010.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item190",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17100.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item191",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17190.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item192",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17280.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item193",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17370.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item194",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17460.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item195",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17550.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item196",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17640.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item197",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17730.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item198",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17820.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item199",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -17910.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_rank_item_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "item200",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -18000.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.500030517578125,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

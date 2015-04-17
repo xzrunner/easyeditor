@@ -1,0 +1,602 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "rank_cwar_bg_scale9.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite48",
+			"position" : 
+			{
+				"x" : -9.0,
+				"y" : -4.634283065795898
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "rr_play_name2_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 21,
+			"label_width" : 400,
+			"multi color" : "0xffffffff",
+			"name" : "gwar_forever_info",
+			"position" : 
+			{
+				"x" : -179.9091186523438,
+				"y" : 74.90000152587891
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 18,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "guild_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 18,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "rank_guild_name1",
+			"position" : 
+			{
+				"x" : -181.9256896972656,
+				"y" : 30.67602920532227
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "guild_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 18,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "rank_guild_name2",
+			"position" : 
+			{
+				"x" : -181.9256896972656,
+				"y" : -16.07595252990723
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "guild_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 18,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "rank_guild_name3",
+			"position" : 
+			{
+				"x" : -181.9256896972656,
+				"y" : -61.97361755371094
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\league_6a.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite190",
+			"position" : 
+			{
+				"x" : -353.0,
+				"y" : 35.50
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3300000131130219,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3300000131130219,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\league_6a.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite192",
+			"position" : 
+			{
+				"x" : -334.2631225585938,
+				"y" : 35.45741271972656
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.3300000131130219,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3300000131130219,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\league_5a.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite193",
+			"position" : 
+			{
+				"x" : -350.0358886718750,
+				"y" : -15.92726135253906
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3300000131130219,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3300000131130219,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\league_5a.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite194",
+			"position" : 
+			{
+				"x" : -335.1859130859375,
+				"y" : -15.92726135253906
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.3300000131130219,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3300000131130219,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\league_4a.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite195",
+			"position" : 
+			{
+				"x" : -349.3967590332031,
+				"y" : -60.61361312866211
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.9128723144531250,
+			"x scale" : 0.3300000131130219,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 3.142799377441406,
+			"y scale" : 0.3300000131130219,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\league_4a.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite196",
+			"position" : 
+			{
+				"x" : -334.8767395019531,
+				"y" : -60.61361312866211
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : 0.0,
+			"x scale" : 0.3300000131130219,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3300000131130219,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\clan1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite197",
+			"position" : 
+			{
+				"x" : 39.09090423583984,
+				"y" : 34.33741760253906
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\clan2.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite198",
+			"position" : 
+			{
+				"x" : 38.21760177612305,
+				"y" : 34.37241744995117
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.1074245497584343,
+			"x scale" : 0.1500000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.08276818692684174,
+			"y scale" : 0.1500000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\clan1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite197",
+			"position" : 
+			{
+				"x" : 39.86199188232422,
+				"y" : -14.50595378875732
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\clan2.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite198",
+			"position" : 
+			{
+				"x" : 38.98868942260742,
+				"y" : -14.09563350677490
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.1074245497584343,
+			"x scale" : 0.1500000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.08276818692684174,
+			"y scale" : 0.1500000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\clan1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite197",
+			"position" : 
+			{
+				"x" : 40.14238357543945,
+				"y" : -61.52876663208008
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.250,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\clan2.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite198",
+			"position" : 
+			{
+				"x" : 39.26908111572266,
+				"y" : -61.11844253540039
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.1074245497584343,
+			"x scale" : 0.1500000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.08276818692684174,
+			"y scale" : 0.1500000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "guild_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 18,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "rank_guild_score1",
+			"position" : 
+			{
+				"x" : 152.6197662353516,
+				"y" : 30.67602920532227
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "guild_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 18,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "rank_guild_score2",
+			"position" : 
+			{
+				"x" : 152.6197662353516,
+				"y" : -16.07595252990723
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "guild_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 18,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "rank_guild_score3",
+			"position" : 
+			{
+				"x" : 152.6197662353516,
+				"y" : -63.61844635009766
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

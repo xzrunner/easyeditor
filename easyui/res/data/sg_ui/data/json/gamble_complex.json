@@ -1,0 +1,195 @@
+
+{
+	"name" : "gamble_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "rank_window_bg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "main_window;result_window",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "rank_window_bg2_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -27.0
+			},
+			"tag" : "main_window;result_window",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 394.2999877929688,
+				"y" : 297.0
+			},
+			"tag" : "main_window;result_window",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "wide_tab_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "tab1",
+			"position" : 
+			{
+				"x" : -169.0,
+				"y" : 276.0
+			},
+			"tag" : "main_window;result_window",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "wide_tab_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "tab2",
+			"position" : 
+			{
+				"x" : 102.0,
+				"y" : 276.0
+			},
+			"tag" : "main_window;result_window",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "gamble_main_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "main_window",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "main_window",
+			"x mirror" : false,
+			"x offset" : 6.938781738281250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -33.75720214843750,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "gamble_result_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "result_window",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "result_window",
+			"x mirror" : false,
+			"x offset" : 1.09997558593750,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -1984.855102539063,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6156-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : -385.4000244140625,
+				"y" : 291.8999938964844
+			},
+			"tag" : "main_window;result_window",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

@@ -1,0 +1,252 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar1",
+			"position" : 
+			{
+				"x" : -63.750,
+				"y" : 46.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar2",
+			"position" : 
+			{
+				"x" : 59.250,
+				"y" : 46.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar3",
+			"position" : 
+			{
+				"x" : 168.250,
+				"y" : 46.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_fight_reward_node_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "head",
+			"position" : 
+			{
+				"x" : -134.0,
+				"y" : 24.40992355346680
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 1.799999952316284,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -5.355374813079834,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_fight_reward_node_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward2",
+			"position" : 
+			{
+				"x" : 86.0,
+				"y" : 24.39999961853027
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 1.799999952316284,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -5.355374336242676,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_fight_reward_node_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward1",
+			"position" : 
+			{
+				"x" : -24.0,
+				"y" : 24.40992355346680
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 1.799999952316284,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -5.355374336242676,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xfffeffd9",
+			"content" : "",
+			"filepath" : "guild_name2_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -77.0,
+				"y" : 100.0
+			},
+			"size" : 18,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar4",
+			"position" : 
+			{
+				"x" : 272.0680541992188,
+				"y" : 48.04903793334961
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_fight_reward_node_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward3",
+			"position" : 
+			{
+				"x" : 197.0,
+				"y" : 24.40992355346680
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 1.799999952316284,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -5.355374336242676,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "guild_fight_reward_node_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward4",
+			"position" : 
+			{
+				"x" : 308.8934020996094,
+				"y" : 23.72691154479981
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 1.799999952316284,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -5.355374336242676,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

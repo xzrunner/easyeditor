@@ -1,0 +1,265 @@
+
+{
+	"name" : "exchange_reward",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar1",
+			"position" : 
+			{
+				"x" : -63.750,
+				"y" : 46.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar2",
+			"position" : 
+			{
+				"x" : 59.250,
+				"y" : 46.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar3",
+			"position" : 
+			{
+				"x" : 168.250,
+				"y" : 46.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "exchange_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward2",
+			"position" : 
+			{
+				"x" : 91.0,
+				"y" : 24.39999961853027
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 3.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 28.60000038146973,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "exchange_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward1",
+			"position" : 
+			{
+				"x" : -18.0,
+				"y" : 24.40992355346680
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 28.59007644653320,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar4",
+			"position" : 
+			{
+				"x" : 272.0680541992188,
+				"y" : 47.04903793334961
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "exchange_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward3",
+			"position" : 
+			{
+				"x" : 200.0,
+				"y" : 24.40992355346680
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 35.59007644653320,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "cwar_win_bar_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar5",
+			"position" : 
+			{
+				"x" : 393.0680541992188,
+				"y" : 48.04903793334961
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6999999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "exchange_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward4",
+			"position" : 
+			{
+				"x" : 316.8934020996094,
+				"y" : 23.72691154479981
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 7.106597900390625,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 30.27308845520020,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "exchange_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward5",
+			"position" : 
+			{
+				"x" : 437.8934020996094,
+				"y" : 21.72691154479981
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 7.106597900390625,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 30.27308845520020,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "exchange_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "head",
+			"position" : 
+			{
+				"x" : -132.0,
+				"y" : 22.40992355346680
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 28.59007644653320,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

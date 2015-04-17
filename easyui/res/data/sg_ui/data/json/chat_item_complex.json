@@ -1,0 +1,422 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6313-diban-9-5.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;RE;guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 20.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 3.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -58.79999923706055
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;RE;guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "chat_player_name_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "player_name",
+			"position" : 
+			{
+				"x" : -188.0,
+				"y" : 44.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;RE;guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "chat_time_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "time",
+			"position" : 
+			{
+				"x" : 340.0,
+				"y" : -43.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "chat_player_role_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "player_role",
+			"position" : 
+			{
+				"x" : 337.0,
+				"y" : 44.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;RE;guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "chat_content_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "chat_content",
+			"position" : 
+			{
+				"x" : 12.0,
+				"y" : -14.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;guild_join",
+			"x mirror" : false,
+			"x offset" : 1.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "sex_anim.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "sex",
+			"position" : 
+			{
+				"x" : -360.0,
+				"y" : 43.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;RE;guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "blue_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "replay_button",
+			"position" : 
+			{
+				"x" : 3.0,
+				"y" : -32.03684234619141
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "replay",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3.610525608062744,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "yellow_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "claim",
+			"position" : 
+			{
+				"x" : 339.0,
+				"y" : 0.3999938964843750
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "RE",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -2.400000095367432,
+			"y scale" : 0.8000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffff0000",
+			"content" : "",
+			"filepath" : "center_write_16_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 18,
+			"label_width" : 194,
+			"multi color" : "0xffffffff",
+			"name" : "deadline",
+			"position" : 
+			{
+				"x" : 298.0,
+				"y" : -38.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 14,
+			"tag" : "RE",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "bar_info_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "bar_info",
+			"position" : 
+			{
+				"x" : -197.0,
+				"y" : -39.50
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "RE",
+			"x mirror" : false,
+			"x offset" : -1.250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "info_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "info_button",
+			"position" : 
+			{
+				"x" : 9.0,
+				"y" : -37.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "RE",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "chat_content_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 50,
+			"label_width" : 640,
+			"multi color" : "0xffffffff",
+			"name" : "re_info",
+			"position" : 
+			{
+				"x" : -46.0,
+				"y" : 1.000003814697266
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "RE",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "blue_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "join",
+			"position" : 
+			{
+				"x" : 180.0,
+				"y" : -34.19837951660156
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7652014493942261,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3.453473806381226,
+			"y scale" : 0.7652014493942261,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "blue_top_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "is_top",
+			"position" : 
+			{
+				"x" : 5.0,
+				"y" : 44.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "chat;replay;RE;guild_join",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 1.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

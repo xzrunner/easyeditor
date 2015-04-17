@@ -1,0 +1,231 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6314-diban-9-5.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 160.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 30.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\vip_arrow.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite1",
+			"position" : 
+			{
+				"x" : -160.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "icon_from",
+			"position" : 
+			{
+				"x" : -260.0,
+				"y" : -7.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "icon_to",
+			"position" : 
+			{
+				"x" : -60.0,
+				"y" : -7.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "upgrade_button_long_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "upgrade_button",
+			"position" : 
+			{
+				"x" : 211.6783599853516,
+				"y" : -2.080171585083008
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "upgrade_walls_item_amount_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 140,
+			"multi color" : "0xffffffff",
+			"name" : "amount",
+			"position" : 
+			{
+				"x" : 34.0,
+				"y" : 0.0
+			},
+			"size" : 20,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "upgrade_walls_item_level_from_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 140,
+			"multi color" : "0xffffffff",
+			"name" : "level_from",
+			"position" : 
+			{
+				"x" : -260.0,
+				"y" : -27.0
+			},
+			"size" : 20,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "upgrade_walls_item_level_to_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 140,
+			"multi color" : "0xffffffff",
+			"name" : "level_to",
+			"position" : 
+			{
+				"x" : -60.0,
+				"y" : -27.0
+			},
+			"size" : 20,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

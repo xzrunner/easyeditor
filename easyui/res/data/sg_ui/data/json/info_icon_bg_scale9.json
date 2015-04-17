@@ -1,0 +1,309 @@
+
+{
+	"height" : 256.0,
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 1.570796251296997,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 50.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 3.141592502593994,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 50.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 3.141592502593994,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 250.0,
+				"y" : 50.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 1.570796251296997,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 4.712388992309570,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 250.0,
+				"y" : 150.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 250.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 150.0,
+				"y" : 250.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 4.712388992309570,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 250.0,
+				"y" : 250.0
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	],
+	"sprite new" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 1.570796251296997,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -78.50,
+				"y" : -112.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 3.141592502593994,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -1.736451736178424e-006,
+				"y" : -135.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 31.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 11.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 3.141592502593994,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 78.50,
+				"y" : -112.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 1.570796251296997,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -90.0,
+				"y" : -11.49999904632568
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 48.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 11.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		null,
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 4.712388992309570,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 90.0,
+				"y" : -11.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 48.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 11.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -78.50,
+				"y" : 112.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-2.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 112.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 31.250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 11.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 4.712388992309570,
+			"clip" : false,
+			"filepath" : "..\\png\\6202-biankuang-9-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 78.50,
+				"y" : 112.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"type" : 5,
+	"width" : 189.0
+}

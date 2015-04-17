@@ -1,0 +1,298 @@
+
+{
+	"name" : "collect_campaign_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "ranking_window_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "window",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff3d3a5a",
+			"content" : "",
+			"filepath" : "info_text_area_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 185,
+			"label_width" : 750,
+			"multi color" : "0xffffffff",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : 2.0,
+				"y" : 158.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite28",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -252.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect1",
+			"position" : 
+			{
+				"x" : -361.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 36.90000152587891,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect8",
+			"position" : 
+			{
+				"x" : 339.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 36.90000152587891,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect2",
+			"position" : 
+			{
+				"x" : -267.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 36.90000152587891,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect3",
+			"position" : 
+			{
+				"x" : -171.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 36.90000152587891,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect4",
+			"position" : 
+			{
+				"x" : -71.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 29.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect5",
+			"position" : 
+			{
+				"x" : 37.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 36.90000152587891,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect6",
+			"position" : 
+			{
+				"x" : 134.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 36.90000152587891,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "collect_info_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "collect7",
+			"position" : 
+			{
+				"x" : 236.0,
+				"y" : -289.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 36.90000152587891,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 7.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : true,
+			"filepath" : "collect_list_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : -8.0,
+				"y" : 105.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 13.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -951.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 400.0,
+	"xmin" : -400.0,
+	"ymax" : 60.0,
+	"ymin" : -245.0
+}

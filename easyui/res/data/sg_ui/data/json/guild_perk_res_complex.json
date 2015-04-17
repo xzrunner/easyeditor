@@ -1,0 +1,106 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_top_background_bar_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 27.0,
+				"y" : -2.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/clan1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite6",
+			"position" : 
+			{
+				"x" : -52.0,
+				"y" : 4.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -2.50,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -6.0,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/clan2.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite7",
+			"position" : 
+			{
+				"x" : -53.0,
+				"y" : 5.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -2.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -2.50,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "bar_text_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 130,
+			"multi color" : "0xffffffff",
+			"name" : "text",
+			"position" : 
+			{
+				"x" : 33.50,
+				"y" : 0.0
+			},
+			"size" : 15,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

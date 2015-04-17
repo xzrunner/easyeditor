@@ -1,0 +1,358 @@
+
+{
+	"name" : "send_red_envelopes",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "tab_window_frame_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "window",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "baji01_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite91",
+			"position" : 
+			{
+				"x" : -257.3787841796875,
+				"y" : -58.45082092285156
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 40.76761245727539,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 21.76431465148926,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "center_gray_18_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 30,
+			"label_width" : 204,
+			"multi color" : "0xffffffff",
+			"name" : "title1",
+			"position" : 
+			{
+				"x" : -113.0,
+				"y" : 174.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 25,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "center_gray_18_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 30,
+			"label_width" : 204,
+			"multi color" : "0xffffffff",
+			"name" : "title2",
+			"position" : 
+			{
+				"x" : -113.0,
+				"y" : 115.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 25,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "center_gray_18_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 30,
+			"label_width" : 204,
+			"multi color" : "0xffffffff",
+			"name" : "title3",
+			"position" : 
+			{
+				"x" : 2.0,
+				"y" : 6.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 25,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "center_write_edge_18_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 30,
+			"label_width" : 204,
+			"multi color" : "0xffffffff",
+			"name" : "info1",
+			"position" : 
+			{
+				"x" : 112.0,
+				"y" : 174.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 25,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "center_write_edge_18_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 30,
+			"label_width" : 204,
+			"multi color" : "0xffffffff",
+			"name" : "info2",
+			"position" : 
+			{
+				"x" : 112.0,
+				"y" : 115.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 25,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "input_char_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "input",
+			"position" : 
+			{
+				"x" : 42.0,
+				"y" : -77.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -15.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "red_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "send",
+			"position" : 
+			{
+				"x" : 21.99998474121094,
+				"y" : -239.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\hongbao_icon.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite73",
+			"position" : 
+			{
+				"x" : 346.50,
+				"y" : 185.1817321777344
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "center_gray_16_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 21,
+			"label_width" : 354,
+			"multi color" : "0xffffffff",
+			"name" : "tips",
+			"position" : 
+			{
+				"x" : 23.99998474121094,
+				"y" : -285.2182312011719
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

@@ -1,0 +1,214 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : -213.0,
+				"y" : 71.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -5.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -143.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite1",
+			"position" : 
+			{
+				"x" : -244.0,
+				"y" : 27.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -5.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -143.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-2.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite3",
+			"position" : 
+			{
+				"x" : -136.0,
+				"y" : 36.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -5.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -154.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-2.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite4",
+			"position" : 
+			{
+				"x" : -175.0,
+				"y" : 112.0
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : -5.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -154.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite5",
+			"position" : 
+			{
+				"x" : 59.0,
+				"y" : 21.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -5.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -143.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-3.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite6",
+			"position" : 
+			{
+				"x" : -84.0,
+				"y" : 124.0
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : -7.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -140.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite7",
+			"position" : 
+			{
+				"x" : 39.0,
+				"y" : 81.0
+			},
+			"tag" : "",
+			"x mirror" : true,
+			"x offset" : -5.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -143.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite8",
+			"position" : 
+			{
+				"x" : 1.0,
+				"y" : 127.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -5.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -143.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1000-diamonds-3.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite9",
+			"position" : 
+			{
+				"x" : -53.0,
+				"y" : 64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -7.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -140.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

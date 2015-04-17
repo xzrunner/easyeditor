@@ -1,0 +1,249 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "achievement_window_bg2_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite161",
+			"position" : 
+			{
+				"x" : -2.723907470703125,
+				"y" : -64.07217407226563
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4929333031177521,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4562436342239380,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "title_24_800x40_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 40,
+			"label_width" : 800,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -1.99987792968750,
+				"y" : 221.0
+			},
+			"size" : 24,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite164",
+			"position" : 
+			{
+				"x" : -1.99987792968750,
+				"y" : 188.2368469238281
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "girl_portrait_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item1",
+			"position" : 
+			{
+				"x" : -284.0,
+				"y" : 73.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -15.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "girl_portrait_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item2",
+			"position" : 
+			{
+				"x" : -95.0,
+				"y" : 73.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -15.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "girl_portrait_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item3",
+			"position" : 
+			{
+				"x" : 95.0,
+				"y" : 73.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -15.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "girl_portrait_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item4",
+			"position" : 
+			{
+				"x" : 278.0520629882813,
+				"y" : 73.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -15.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "girl_portrait_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item6",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : -158.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -15.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "girl_portrait_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item7",
+			"position" : 
+			{
+				"x" : 188.0,
+				"y" : -158.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -15.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "girl_portrait_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item5",
+			"position" : 
+			{
+				"x" : -191.0,
+				"y" : -158.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -15.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

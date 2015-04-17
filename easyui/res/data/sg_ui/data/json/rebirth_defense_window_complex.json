@@ -1,0 +1,394 @@
+
+{
+	"name" : "rebirth_defense_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_window_bg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_window_bg2_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -36.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "info_title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 44,
+			"label_width" : 612,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -5.0,
+				"y" : 217.250
+			},
+			"size" : 18,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 321.0,
+				"y" : 221.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6154-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -220.0,
+				"y" : 71.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "upgrade_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "upgrade_button",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -192.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff3d3a5a",
+			"content" : "",
+			"filepath" : "up_warning_title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 22,
+			"label_width" : 220,
+			"multi color" : "0xffffffff",
+			"name" : "warning_title",
+			"position" : 
+			{
+				"x" : 206.50,
+				"y" : -195.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "item_icon",
+			"position" : 
+			{
+				"x" : -219.0,
+				"y" : 66.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "ex_upgrade_time_box2_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "time_box",
+			"position" : 
+			{
+				"x" : -219.50,
+				"y" : 2.250
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xfffffddd",
+			"content" : "",
+			"filepath" : "info_item_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 22,
+			"label_width" : 207,
+			"multi color" : "0xffffffff",
+			"name" : "item_name",
+			"position" : 
+			{
+				"x" : -221.50,
+				"y" : 148.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff00ff00",
+			"content" : "",
+			"filepath" : "_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "discount",
+			"position" : 
+			{
+				"x" : -202.0,
+				"y" : -192.750
+			},
+			"size" : 20,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "rebirth_defense_window_bg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite194",
+			"position" : 
+			{
+				"x" : 95.0,
+				"y" : 50.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "rebirth_defense_desc_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 200,
+			"label_width" : 420,
+			"multi color" : "0xffffffff",
+			"name" : "desc",
+			"position" : 
+			{
+				"x" : 90.0,
+				"y" : 46.0
+			},
+			"size" : 14,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_section_4_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "defense_score",
+			"position" : 
+			{
+				"x" : -271.3875732421875,
+				"y" : -110.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 176.8187866210938,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 2.663557052612305,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

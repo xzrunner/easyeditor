@@ -1,0 +1,11 @@
+
+{
+	"align hori" : 2.0,
+	"align vert" : 0.0,
+	"color" : "0xffffff",
+	"font" : "",
+	"height" : 25.0,
+	"name" : "title_btn",
+	"size" : 18.0,
+	"width" : 200.0
+}

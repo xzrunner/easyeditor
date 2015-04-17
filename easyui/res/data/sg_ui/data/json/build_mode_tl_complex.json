@@ -1,0 +1,80 @@
+
+{
+	"name" : "panel_build_tl",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "button_build_select_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "select",
+			"position" : 
+			{
+				"x" : 140.0,
+				"y" : -50.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7619047760963440,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7619047760963440,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "button_build_removal_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "erase",
+			"position" : 
+			{
+				"x" : 230.0,
+				"y" : -50.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7619047760963440,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7619047760963440,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "button_build_move_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "move",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : -50.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.7619047760963440,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.7619047760963440,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

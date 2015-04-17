@@ -1,0 +1,45 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "blue_button_scale9.json",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6600000262260437,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.5400000214576721,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tutorial_skip_text_fontblank.json",
+			"multi color" : "",
+			"name" : "TID_BUTTON_HOME",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

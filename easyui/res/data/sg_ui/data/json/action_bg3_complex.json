@@ -1,0 +1,186 @@
+
+{
+	"name" : "action_bg3",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/841203410852043.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 100.50,
+				"y" : 54.52499389648438
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6680327653884888,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 22.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/1803124320471281.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 100.50,
+				"y" : 166.0249938964844
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6680327653884888,
+			"x shear" : 0.0,
+			"y mirror" : true,
+			"y offset" : 0.0,
+			"y scale" : 0.6578947305679321,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "../png/889399927484.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 4.0,
+				"y" : -2.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 4.710000038146973,
+			"clip" : false,
+			"filepath" : "../png/14663271495571.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 100.0,
+				"y" : -51.24000549316406
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6999999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6700000166893005,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6999999880790710,
+						"y" : 0.6600000262260437
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6999999880790710,
+				"yscale" : 0.6700000166893005
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6680327653884888,
+						"y" : 26.10555648803711
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6680327653884888,
+				"yscale" : 30.0
+			}
+		},
+		
+		{
+			"sprites" : [ 3 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -20.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6680327653884888,
+						"y" : 30.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6680327653884888,
+				"yscale" : 28.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : 8.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		null,
+		null
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

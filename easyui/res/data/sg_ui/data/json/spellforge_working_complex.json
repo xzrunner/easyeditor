@@ -1,0 +1,172 @@
+
+{
+	"name" : "spellforge_working",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_timepart_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "timepart",
+			"position" : 
+			{
+				"x" : 180.0,
+				"y" : 137.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_finishnow_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "finishnow_button",
+			"position" : 
+			{
+				"x" : 305.0,
+				"y" : 137.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "slot_5",
+			"position" : 
+			{
+				"x" : -338.0,
+				"y" : 140.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "slot_4",
+			"position" : 
+			{
+				"x" : -241.0,
+				"y" : 140.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "slot_3",
+			"position" : 
+			{
+				"x" : -144.0,
+				"y" : 140.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "slot_2",
+			"position" : 
+			{
+				"x" : -47.0,
+				"y" : 140.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_active_item_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "slot_1",
+			"position" : 
+			{
+				"x" : 50.0,
+				"y" : 140.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

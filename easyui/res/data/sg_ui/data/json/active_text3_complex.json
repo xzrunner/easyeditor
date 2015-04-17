@@ -1,0 +1,35 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : true,
+			"filepath" : "active_text_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -4.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -40.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 520.0,
+	"xmin" : -100.0,
+	"ymax" : 255.0,
+	"ymin" : -260.0
+}

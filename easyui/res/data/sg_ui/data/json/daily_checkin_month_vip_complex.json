@@ -1,0 +1,319 @@
+
+{
+	"name" : "daily_frame_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "active_bg3_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite32",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4584278166294098,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.5154316425323486,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn_buy30",
+			"position" : 
+			{
+				"x" : -196.0,
+				"y" : -216.7046203613281
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3.438595771789551,
+			"y scale" : 0.7619047760963440,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6154-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite27",
+			"position" : 
+			{
+				"x" : 219.0882568359375,
+				"y" : 174.9027099609375
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6347225904464722,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.6347225904464722,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\monthcard.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite79",
+			"position" : 
+			{
+				"x" : 217.7500762939453,
+				"y" : 179.4893188476563
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.3910249471664429,
+			"x scale" : 0.7820498943328857,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 1.564099788665772,
+			"y scale" : 0.7820498943328857,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "content_500x250_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 250,
+			"label_width" : 500,
+			"multi color" : "0xffffffff",
+			"name" : "desc",
+			"position" : 
+			{
+				"x" : -18.96453857421875,
+				"y" : 50.84820556640625
+			},
+			"size" : 18,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn_claim",
+			"position" : 
+			{
+				"x" : 100.5177307128906,
+				"y" : 138.8943481445313
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.5177307128906250,
+			"x scale" : 0.7669031023979187,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3.230163574218750,
+			"y scale" : 0.7669031023979187,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn_buy6",
+			"position" : 
+			{
+				"x" : 103.0,
+				"y" : -216.7046203613281
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3.438595533370972,
+			"y scale" : 0.7619047760963440,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite118",
+			"position" : 
+			{
+				"x" : -3.0,
+				"y" : -88.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.68750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "content_200x100_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 100,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "txt30",
+			"position" : 
+			{
+				"x" : -145.9645385742188,
+				"y" : -145.50
+			},
+			"size" : 12,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "content_200x100_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 100,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "txt6",
+			"position" : 
+			{
+				"x" : 152.0,
+				"y" : -145.50
+			},
+			"size" : 12,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 1.570796370506287,
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite28",
+			"position" : 
+			{
+				"x" : -7.629394531250000e-006,
+				"y" : -163.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.18750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "title_250x35_24_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 35,
+			"label_width" : 500,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -16.0,
+				"y" : 200.0
+			},
+			"size" : 24,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

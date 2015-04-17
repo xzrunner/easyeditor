@@ -1,0 +1,11 @@
+
+{
+	"align hori" : 0.0,
+	"align vert" : 0.0,
+	"color" : "0xffffffff",
+	"font" : "",
+	"height" : 50.0,
+	"name" : "label",
+	"size" : 14.0,
+	"width" : 100.0
+}

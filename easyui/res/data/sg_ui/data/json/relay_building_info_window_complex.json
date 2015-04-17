@@ -1,0 +1,486 @@
+
+{
+	"name" : "relay_building_info_window",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_window_bg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_window_bg2_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -36.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "info_title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 44,
+			"label_width" : 612,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -4.0,
+				"y" : 220.250
+			},
+			"size" : 18,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "close_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "close_button",
+			"position" : 
+			{
+				"x" : 318.0,
+				"y" : 222.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6154-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -220.0,
+				"y" : 71.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_window_bg3_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -133.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xfffffddd",
+			"content" : "",
+			"filepath" : "info_item_name_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 22,
+			"label_width" : 207,
+			"multi color" : "0xffffffff",
+			"name" : "item_name",
+			"position" : 
+			{
+				"x" : -221.50,
+				"y" : 148.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 3,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff3d3a5a",
+			"content" : "",
+			"filepath" : "info_text_area_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 195,
+			"label_width" : 628,
+			"multi color" : "0xffffffff",
+			"name" : "text_area",
+			"position" : 
+			{
+				"x" : 0.50,
+				"y" : -133.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff504032",
+			"content" : "",
+			"filepath" : "info_title2_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 26,
+			"label_width" : 623,
+			"multi color" : "0xffffffff",
+			"name" : "title2",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -12.50
+			},
+			"size" : 15,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 3,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff3d3a5a",
+			"content" : "",
+			"filepath" : "info_text_area2_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 70,
+			"label_width" : 608,
+			"multi color" : "0xffffffff",
+			"name" : "text_area2",
+			"position" : 
+			{
+				"x" : -2.0,
+				"y" : -190.50
+			},
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "icon",
+			"position" : 
+			{
+				"x" : -221.0,
+				"y" : 69.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_housing_bar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar2",
+			"position" : 
+			{
+				"x" : 124.6814575195313,
+				"y" : 85.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -22.250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 4.750,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "building_info_health_bar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "bar1",
+			"position" : 
+			{
+				"x" : 124.6814575195313,
+				"y" : 132.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -22.250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 4.750,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "relay_building_info_coachbar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item1",
+			"position" : 
+			{
+				"x" : -6.50,
+				"y" : -58.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.7181549072265625,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "relay_building_info_coachbar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item2",
+			"position" : 
+			{
+				"x" : -6.50,
+				"y" : -94.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.7181549072265625,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "relay_building_info_coachbar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item3",
+			"position" : 
+			{
+				"x" : -6.50,
+				"y" : -129.5709075927734
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.7181549072265625,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "relay_building_info_coachbar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item4",
+			"position" : 
+			{
+				"x" : -6.50,
+				"y" : -166.0673065185547
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.7181549072265625,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "relay_building_info_coachbar_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item5",
+			"position" : 
+			{
+				"x" : -6.50,
+				"y" : -203.6382293701172
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.50,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.7181549072265625,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

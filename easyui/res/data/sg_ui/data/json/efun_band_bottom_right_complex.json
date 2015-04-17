@@ -1,0 +1,333 @@
+
+{
+	"name" : "efun_band_ui_bottom_right",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_setting_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "button_settings",
+			"position" : 
+			{
+				"x" : -489.50,
+				"y" : 55.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_ranking_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "ranking",
+			"position" : 
+			{
+				"x" : -246.4999847412109,
+				"y" : 55.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_shop_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "shop",
+			"position" : 
+			{
+				"x" : -67.0,
+				"y" : 187.5884704589844
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_fight_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "fight",
+			"position" : 
+			{
+				"x" : -67.0,
+				"y" : 303.6615295410156
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_battle_log_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "log",
+			"position" : 
+			{
+				"x" : -165.750,
+				"y" : 54.97499847412109
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_menu_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "menu",
+			"position" : 
+			{
+				"x" : -67.0,
+				"y" : 73.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "stage_menu",
+			"position" : 
+			{
+				"x" : -63.68634033203125,
+				"y" : 143.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 1.570000052452087,
+			"clip" : false,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "stage_shop",
+			"position" : 
+			{
+				"x" : -138.6863403320313,
+				"y" : 191.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 1.570000052452087,
+			"clip" : false,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "0xffffffff",
+			"name" : "stage_fight",
+			"position" : 
+			{
+				"x" : -138.6863250732422,
+				"y" : 310.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "achievement_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "achievements",
+			"position" : 
+			{
+				"x" : -570.250,
+				"y" : 54.47499847412109
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "gift_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "gift",
+			"position" : 
+			{
+				"x" : -651.0,
+				"y" : 55.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "game_friend_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "friends",
+			"position" : 
+			{
+				"x" : -407.50,
+				"y" : 55.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "button_ps_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "ps",
+			"position" : 
+			{
+				"x" : -730.250,
+				"y" : 54.47499847412109
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "band_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "band",
+			"position" : 
+			{
+				"x" : -325.8532104492188,
+				"y" : 55.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

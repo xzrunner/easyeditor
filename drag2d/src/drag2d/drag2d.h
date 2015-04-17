@@ -72,6 +72,7 @@
 #include "view/StageDropTarget.h"
 #include "view/CombinedDropData.h"
 #include "view/IDataContainer.h"
+#include "view/FontPropertySetting.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

@@ -1,0 +1,220 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s1;s2;s3;s4;s5;s6;s7;s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 30.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s2;s3;s4;s5;s6;s7;s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 61.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s3;s4;s5;s6;s7;s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 90.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s4;s5;s6;s7;s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 120.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s5;s6;s7;s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 151.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s6;s7;s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 181.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s7;s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6101-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : 212.0,
+				"y" : 0.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "s8;",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

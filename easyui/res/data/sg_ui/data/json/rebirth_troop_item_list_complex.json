@@ -1,0 +1,932 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_1",
+			"position" : 
+			{
+				"x" : 48.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_2",
+			"position" : 
+			{
+				"x" : 48.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_3",
+			"position" : 
+			{
+				"x" : 151.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_4",
+			"position" : 
+			{
+				"x" : 151.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_5",
+			"position" : 
+			{
+				"x" : 254.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_6",
+			"position" : 
+			{
+				"x" : 254.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_7",
+			"position" : 
+			{
+				"x" : 357.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_8",
+			"position" : 
+			{
+				"x" : 357.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_9",
+			"position" : 
+			{
+				"x" : 460.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_10",
+			"position" : 
+			{
+				"x" : 460.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_11",
+			"position" : 
+			{
+				"x" : 563.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_12",
+			"position" : 
+			{
+				"x" : 563.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_13",
+			"position" : 
+			{
+				"x" : 666.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_14",
+			"position" : 
+			{
+				"x" : 666.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_15",
+			"position" : 
+			{
+				"x" : 769.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_16",
+			"position" : 
+			{
+				"x" : 769.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_17",
+			"position" : 
+			{
+				"x" : 872.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_18",
+			"position" : 
+			{
+				"x" : 872.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_19",
+			"position" : 
+			{
+				"x" : 975.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_20",
+			"position" : 
+			{
+				"x" : 975.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_21",
+			"position" : 
+			{
+				"x" : 1078.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_22",
+			"position" : 
+			{
+				"x" : 1078.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_23",
+			"position" : 
+			{
+				"x" : 1181.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_24",
+			"position" : 
+			{
+				"x" : 1181.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_25",
+			"position" : 
+			{
+				"x" : 1284.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_26",
+			"position" : 
+			{
+				"x" : 1284.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_27",
+			"position" : 
+			{
+				"x" : 1387.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_28",
+			"position" : 
+			{
+				"x" : 1387.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_29",
+			"position" : 
+			{
+				"x" : 1490.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_30",
+			"position" : 
+			{
+				"x" : 1490.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_31",
+			"position" : 
+			{
+				"x" : 1593.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_32",
+			"position" : 
+			{
+				"x" : 1593.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_33",
+			"position" : 
+			{
+				"x" : 1696.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_34",
+			"position" : 
+			{
+				"x" : 1696.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_35",
+			"position" : 
+			{
+				"x" : 1799.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_36",
+			"position" : 
+			{
+				"x" : 1799.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_37",
+			"position" : 
+			{
+				"x" : 1902.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_38",
+			"position" : 
+			{
+				"x" : 1902.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_39",
+			"position" : 
+			{
+				"x" : 2005.0,
+				"y" : -64.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "barrack_slot_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "item_40",
+			"position" : 
+			{
+				"x" : 2005.0,
+				"y" : -200.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -8.424999237060547,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

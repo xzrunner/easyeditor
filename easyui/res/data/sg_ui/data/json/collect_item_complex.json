@@ -1,0 +1,378 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6312-diban-9-5.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite33",
+			"position" : 
+			{
+				"x" : 13.0,
+				"y" : -6.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 187.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 22.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "countrywar_log_bg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite9",
+			"position" : 
+			{
+				"x" : 13.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.6250,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff42352b",
+			"content" : "",
+			"filepath" : "player_name_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"label_height" : 21,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : 137.4714050292969,
+				"y" : 0.2735676765441895
+			},
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "exchange",
+			"position" : 
+			{
+				"x" : 311.0,
+				"y" : 5.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -1.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect1",
+			"position" : 
+			{
+				"x" : -330.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect2",
+			"position" : 
+			{
+				"x" : -280.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect3",
+			"position" : 
+			{
+				"x" : -230.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect4",
+			"position" : 
+			{
+				"x" : -180.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect8",
+			"position" : 
+			{
+				"x" : 16.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect7",
+			"position" : 
+			{
+				"x" : -34.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect6",
+			"position" : 
+			{
+				"x" : -84.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0x00000000",
+			"content" : "",
+			"filepath" : "mount_icon_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 4,
+			"label_width" : 4,
+			"multi color" : "0xffffffff",
+			"name" : "collect5",
+			"position" : 
+			{
+				"x" : -134.0,
+				"y" : 0.0
+			},
+			"size" : 0,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

@@ -2,46 +2,46 @@
 	"button" :
 	[
 		{
-			"filepath" : "data/scene_bg1/pngs/7002_2.png"
+			"filepath" : "data/sg_ui/data/json/red_button_complex.json"
 		},
 		{
-			"filepath" : "data/scene_bg1/pngs/7002_3.png"
+			"filepath" : "data/sg_ui/data/json/blue_button_complex.json"
 		},
 		{
-			"filepath" : "data/scene_bg1/pngs/7002_4.png"
-		},
-		{
-			"filepath" : "data/scene_bg1/pngs/waterfall_cover.png"
+			"filepath" : "data/sg_ui/data/json/yellow_button_complex.json"
 		}
 	],
 	"list" : 
 	[
 		{
-			"filepath" : "data/buildings_snapshoot/building_1015_lv1.png"
-		},
-		{
-			"filepath" : "data/buildings_snapshoot/building_1016_lv1.png"
-		},
-		{
-			"filepath" : "data/buildings_snapshoot/building_1013_lv1.png"
+			"filepath" : "data/sg_ui/data/json/guild2_apply_list_complex.json"
 		}				
 	],
-	"label" :
+	"textbox" :
 	[
 		{
-			"filepath" : "data/buildings_snapshoot/building_1014_lv1.png"
+			"filepath" : "data/sg_ui/data/json/center_gray_14_fontblank.json"
 		},
 		{
-			"filepath" : "data/buildings_snapshoot/building_1011_lv1.png"
+			"filepath" : "data/sg_ui/data/json/center_gray_16_fontblank.json"
 		},
 		{
-			"filepath" : "data/buildings_snapshoot/building_1012_lv1.png"
+			"filepath" : "data/sg_ui/data/json/center_gray_18_fontblank.json"
+		}
+	],
+	"panel" :
+	[
+		{
+			"filepath" : "data/sg_ui/data/json/input_bg_scale9.json"
+		},
+		{
+			"filepath" : "data/sg_ui/data/json/pop_action_scale9.json"
 		}
 	],
 	"other" :
 	[
 		{
-			"filepath" : "data/other/6189-tongyong-1.png"
+			"filepath" : "data/sg_ui/data/json/313_complex.json"
 		}
 	]
 }

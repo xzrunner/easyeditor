@@ -1,0 +1,53 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\vip_shop.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite22",
+			"position" : 
+			{
+				"x" : 15.14999389648438,
+				"y" : -8.149993896484375
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.8999999761581421,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.8999999761581421,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.7853981852531433,
+			"clip" : false,
+			"filepath" : "dime_title_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "info",
+			"position" : 
+			{
+				"x" : 1.000003814697266,
+				"y" : -1.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.799987792968750,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 2.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,150 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "btn_toggle_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn1",
+			"position" : 
+			{
+				"x" : -339.0,
+				"y" : 218.0
+			},
+			"tag" : "atp_summon_player;atp_summon_input;atp_summon_reward",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "btn_toggle_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn2",
+			"position" : 
+			{
+				"x" : -339.0,
+				"y" : 157.0
+			},
+			"tag" : "atp_summon_player;atp_summon_input;atp_summon_reward",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "btn_toggle_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn3",
+			"position" : 
+			{
+				"x" : -339.0,
+				"y" : 96.0
+			},
+			"tag" : "atp_summon_player;atp_summon_input;atp_summon_reward",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "summon_player_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "player_info",
+			"position" : 
+			{
+				"x" : 79.0,
+				"y" : -28.0
+			},
+			"tag" : "atp_summon_player",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.250,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "summon_reward_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "reward_info",
+			"position" : 
+			{
+				"x" : 79.0,
+				"y" : -27.750
+			},
+			"tag" : "atp_summon_reward",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "active_input_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "input_info",
+			"position" : 
+			{
+				"x" : 84.0,
+				"y" : -27.750
+			},
+			"tag" : "atp_summon_input",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

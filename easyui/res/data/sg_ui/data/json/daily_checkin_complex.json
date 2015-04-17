@@ -1,0 +1,126 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "btn_toggle_long_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn_tab1",
+			"position" : 
+			{
+				"x" : -309.0,
+				"y" : 212.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "btn_toggle_long_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn_tab2",
+			"position" : 
+			{
+				"x" : -309.0,
+				"y" : 153.50
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "btn_toggle_long_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn_tab3",
+			"position" : 
+			{
+				"x" : -309.0,
+				"y" : 95.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "daily_checkin_month_vip_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "month",
+			"position" : 
+			{
+				"x" : 100.0,
+				"y" : -21.750
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 98.8000488281250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -29.82968139648438,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "active_login_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "everyday",
+			"position" : 
+			{
+				"x" : 99.93429565429688,
+				"y" : -22.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 2.565147161483765,
+			"x scale" : 0.9997828602790833,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

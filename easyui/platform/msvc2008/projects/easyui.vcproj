@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src"
+				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -121,7 +121,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src"
+				AdditionalIncludeDirectories="..\..\..\src\easyui;..\..\..\..\drag2d\src\drag2d;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easymesh\src;..\..\..\..\easytexture\src;..\..\..\..\easyshape\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easyterrain2d\src;..\..\..\..\easybuilder\src"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -284,6 +284,30 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\view\FontPropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\view\FontPropertySetting.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="editop"
+				>
+				<File
+					RelativePath="..\..\..\src\easyui\view\SelectSpritesOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\view\SelectSpritesOP.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
@@ -296,7 +320,31 @@
 				RelativePath="..\..\..\src\easyui\dataset\SymbolsCfg.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\dataset\TidCfg.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\dataset\TidCfg.h"
+				>
+			</File>
 		</Filter>
+		<Filter
+			Name="code"
+			>
+			<File
+				RelativePath="..\..\..\src\easyui\code\Code.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\code\Code.h"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

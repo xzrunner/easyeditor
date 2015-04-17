@@ -23,6 +23,9 @@ void PreviewCanvas::initGL()
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->getSymbol().reloadTexture();
 	}
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	}
 }
 
 void PreviewCanvas::onDraw()

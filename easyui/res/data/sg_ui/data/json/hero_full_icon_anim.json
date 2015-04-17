@@ -1,0 +1,147 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "baji01_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite17",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 45.29734802246094,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 24.18257141113281,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "yingyan01_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite26",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 41.93376922607422,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 25.848144531250,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 2,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "char_info_xiyu_nograss_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite41",
+							"position" : 
+							{
+								"x" : 3.0,
+								"y" : 171.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -35.93967437744141,
+							"x scale" : 0.8261989355087280,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -161.5218658447266,
+							"y scale" : 0.8261989355087280,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "char_info_yini_nograss_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite50",
+							"position" : 
+							{
+								"x" : -50.63801574707031,
+								"y" : 122.5209350585938
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 44.59919738769531,
+							"x scale" : 0.8035892844200134,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -110.0917510986328,
+							"y scale" : 0.8035892844200134,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 4,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : ""
+}

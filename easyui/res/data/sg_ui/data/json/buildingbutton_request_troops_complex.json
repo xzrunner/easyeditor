@@ -1,0 +1,246 @@
+
+{
+	"name" : "buildingbutton_request_troops",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "../png/6002-anniu-1.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.4499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.4499999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "../png/request_troops.png",
+			"multi color" : "",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 9.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.6000000238418579,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.6000000238418579,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "tid_button_info_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 0.5500030517578125,
+				"y" : -32.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 191.0,
+				"dy" : 353.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.4499999880790710,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.4499999880790710,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.4499999880790710,
+				"yscale" : 0.4499999880790710
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -192.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -278.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 1.0,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.50,
+				"yscale" : 1.0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.50,
+						"y" : 1.0
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.50,
+				"yscale" : 0.50
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 237.0,
+				"dy" : -269.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 1.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -3.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.50,
+						"y" : 0.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6000000238418579,
+				"yscale" : 0.50
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"old" : 
+				[
+					
+					{
+						"x" : 0.6000000238418579,
+						"y" : 0.50
+					}
+				],
+				"type" : 3,
+				"xscale" : 0.6000000238418579,
+				"yscale" : 0.6000000238418579
+			}
+		},
+		
+		{
+			"sprites" : [ 2 ],
+			"val" : 
+			{
+				"dx" : 416.0,
+				"dy" : -334.0,
+				"type" : 0
+			}
+		}
+	]
+}

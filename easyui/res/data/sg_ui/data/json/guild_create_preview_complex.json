@@ -1,0 +1,108 @@
+
+{
+	"name" : "guild_create_preview",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "select_guild_complex.json",
+			"multi color" : "",
+			"name" : "preview",
+			"position" : 
+			{
+				"x" : -3.0,
+				"y" : -166.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		null,
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -34.0,
+				"dy" : -114.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 2.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -2.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : -3.0,
+				"type" : 0
+			}
+		},
+		null,
+		null,
+		null,
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 466.0,
+				"dy" : -83.0,
+				"type" : 0
+			}
+		},
+		null,
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -466.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 83.12081909179688,
+				"type" : 0
+			}
+		}
+	]
+}

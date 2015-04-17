@@ -1,0 +1,238 @@
+
+{
+	"name" : "ui_bottom_right",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "game_setting_button_complex.json",
+			"multi color" : "",
+			"name" : "button_settings",
+			"position" : 
+			{
+				"x" : -324.50,
+				"y" : 55.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "game_ranking_button_complex.json",
+			"multi color" : "",
+			"name" : "ranking",
+			"position" : 
+			{
+				"x" : -246.50,
+				"y" : 55.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "game_shop_button_complex.json",
+			"multi color" : "",
+			"name" : "shop",
+			"position" : 
+			{
+				"x" : -67.0,
+				"y" : 187.5884704589844
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "game_fight_button_complex.json",
+			"multi color" : "",
+			"name" : "fight",
+			"position" : 
+			{
+				"x" : -67.0,
+				"y" : 303.6615295410156
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "game_battle_log_button_complex.json",
+			"multi color" : "",
+			"name" : "log",
+			"position" : 
+			{
+				"x" : -165.750,
+				"y" : 54.97499847412109
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "game_menu_button_complex.json",
+			"multi color" : "",
+			"name" : "menu",
+			"position" : 
+			{
+				"x" : -67.0,
+				"y" : 73.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage_menu",
+			"position" : 
+			{
+				"x" : -63.68634033203125,
+				"y" : 143.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 1.570000052452087,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage_shop",
+			"position" : 
+			{
+				"x" : -138.6863403320313,
+				"y" : 191.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 1.570000052452087,
+			"filepath" : "ta_arrow_anim.json",
+			"multi color" : "",
+			"name" : "stage_fight",
+			"position" : 
+			{
+				"x" : -138.6863250732422,
+				"y" : 310.0
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "achievement_complex.json",
+			"multi color" : "",
+			"name" : "achievements",
+			"position" : 
+			{
+				"x" : -405.250,
+				"y" : 54.47499847412109
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "gift_button_complex.json",
+			"multi color" : "",
+			"name" : "gift",
+			"position" : 
+			{
+				"x" : -486.0,
+				"y" : 55.750
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ -1 ],
+			"val" : 
+			{
+				"dx" : -42.0,
+				"dy" : 132.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ -1 ],
+			"val" : 
+			{
+				"type" : 2
+			}
+		}
+	]
+}

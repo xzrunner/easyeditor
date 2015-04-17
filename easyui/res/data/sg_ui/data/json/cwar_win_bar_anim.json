@@ -1,0 +1,127 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.570796370506287,
+							"clip" : false,
+							"filepath" : "..\\png\\9804041006569.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite0",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.570796370506287,
+							"clip" : false,
+							"filepath" : "..\\png\\20195152040675.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite3",
+							"position" : 
+							{
+								"x" : -79.0,
+								"y" : -0.4112547636032105
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 7.078051478259795e-010,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : true
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.570796370506287,
+							"clip" : false,
+							"filepath" : "..\\png\\9804041006569.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite0",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 1.570796370506287,
+							"clip" : false,
+							"filepath" : "..\\png\\20195152040675.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite3",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 200,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : ""
+}

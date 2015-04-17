@@ -1,0 +1,119 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6184-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite0",
+			"position" : 
+			{
+				"x" : -87.0,
+				"y" : 33.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -2.50,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -2.0,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6191-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite1",
+			"position" : 
+			{
+				"x" : 35.0,
+				"y" : 26.80000114440918
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 3.0,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 13.50,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "title_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 80,
+			"multi color" : "0xffffffff",
+			"name" : "score",
+			"position" : 
+			{
+				"x" : -28.0,
+				"y" : 27.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"filepath" : "title_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 80,
+			"multi color" : "0xffffffff",
+			"name" : "attack",
+			"position" : 
+			{
+				"x" : 94.0,
+				"y" : 27.0
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

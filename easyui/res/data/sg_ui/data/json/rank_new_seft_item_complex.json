@@ -1,0 +1,410 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "rank_item_bg_scale9.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 1.899978637695313
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4950000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4675324559211731,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6118-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : -323.0,
+				"y" : -4.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "rank_rank_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 19,
+			"label_width" : 140,
+			"multi color" : "0xffffffff",
+			"name" : "rank",
+			"position" : 
+			{
+				"x" : -321.50,
+				"y" : -3.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6459-gaoguang-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "line",
+			"position" : 
+			{
+				"x" : -233.8512268066406,
+				"y" : -0.50
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 11.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "rr_play_name2_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 21,
+			"label_width" : 300,
+			"multi color" : "0xffffffff",
+			"name" : "player_name",
+			"position" : 
+			{
+				"x" : -65.0,
+				"y" : 22.0
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 18,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xfffeffd9",
+			"content" : "",
+			"filepath" : "city_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 25,
+			"label_width" : 400,
+			"multi color" : "0xffffffff",
+			"name" : "city",
+			"position" : 
+			{
+				"x" : 188.0,
+				"y" : -18.59998321533203
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 18,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "rr_score_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 22,
+			"label_width" : 100,
+			"multi color" : "0xffffffff",
+			"name" : "defence",
+			"position" : 
+			{
+				"x" : -15.60000419616699,
+				"y" : -17.09998321533203
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "rr_score_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 22,
+			"label_width" : 100,
+			"multi color" : "0xffffffff",
+			"name" : "score",
+			"position" : 
+			{
+				"x" : -138.5999755859375,
+				"y" : -18.09998703002930
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "rr_score_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 22,
+			"label_width" : 100,
+			"multi color" : "0xffffffff",
+			"name" : "attack",
+			"position" : 
+			{
+				"x" : -129.5999450683594,
+				"y" : -17.09998321533203
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 16,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6107-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "sym_fame",
+			"position" : 
+			{
+				"x" : -206.6002502441406,
+				"y" : -17.20001983642578
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4000000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4000000059604645,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\jy-1004-shield-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "sym_defence",
+			"position" : 
+			{
+				"x" : -89.59993743896484,
+				"y" : -17.09998321533203
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -0.08950340002775192,
+			"x scale" : 0.1790068000555039,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.1790068000555039,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "..\\png\\6108-tongyong-1.png",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "sym_attack",
+			"position" : 
+			{
+				"x" : -203.6002502441406,
+				"y" : -17.09998321533203
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.2060885876417160,
+			"x scale" : 0.2060885876417160,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 2.988285064697266,
+			"y scale" : 0.2060885876417160,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite49",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 54.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.9900000095367432,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

@@ -1,0 +1,64 @@
+
+{
+	"name" : "progress_research_bar",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "info_bar_complex.json",
+			"multi color" : "",
+			"name" : "bar",
+			"position" : 
+			{
+				"x" : 12.0,
+				"y" : 3.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.1800000071525574,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.5500000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "p_bar_text_fontblank.json",
+			"multi color" : "",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : 11.20000076293945,
+				"y" : 19.20000076293945
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "troop_spell_show_icon_complex.json",
+			"multi color" : "",
+			"name" : "icon",
+			"position" : 
+			{
+				"x" : -70.17500305175781,
+				"y" : 5.0
+			},
+			"x mirror" : false,
+			"x scale" : 0.1500000059604645,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 0.1500000059604645,
+			"y shear" : 0.0
+		}
+	]
+}

@@ -1,0 +1,213 @@
+
+{
+	"name" : "button_energize",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6002-anniu-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.4499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.4499999880790710,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6103-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 40.79999923706055,
+				"y" : 40.80000305175781
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.3000000119209290,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3000000119209290,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "..\\png\\6191-tongyong-1.png",
+			"multi color" : "0xffffffff",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -4.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "buildingbutton_amount_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 14,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
+			"name" : "amount",
+			"position" : 
+			{
+				"x" : -21.27499389648438,
+				"y" : 33.27499771118164
+			},
+			"size" : 11,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "tid_button_info_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 17,
+			"label_width" : 91,
+			"multi color" : "0xffffffff",
+			"name" : "TID_BUTTON_ENERGIZE",
+			"position" : 
+			{
+				"x" : 0.2250061035156250,
+				"y" : -35.50
+			},
+			"size" : 12,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff00ff00",
+			"content" : "",
+			"filepath" : "buildingbutton_amount_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 14,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
+			"name" : "discount",
+			"position" : 
+			{
+				"x" : -22.27499389648438,
+				"y" : 32.27499389648438
+			},
+			"size" : 11,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 1,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff00ff00",
+			"content" : "",
+			"filepath" : "buildingbutton_amount_fontblank.json",
+			"font" : "E",
+			"font_filename" : "",
+			"label_height" : 14,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
+			"name" : "origin_amount",
+			"position" : 
+			{
+				"x" : -21.27499389648438,
+				"y" : 16.27499389648438
+			},
+			"size" : 11,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

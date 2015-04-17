@@ -1,0 +1,196 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "wcup_player_bg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite67",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff333333",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "info1",
+			"position" : 
+			{
+				"x" : -1.637145996093750,
+				"y" : 11.58861160278320
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff333333",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "info3",
+			"position" : 
+			{
+				"x" : -1.637145996093750,
+				"y" : -43.16300201416016
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xff333333",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 25,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "info2",
+			"position" : 
+			{
+				"x" : -1.637145996093750,
+				"y" : -15.28415679931641
+			},
+			"size" : 16,
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "national_flag_with_title_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "player",
+			"position" : 
+			{
+				"x" : 1.236099243164063,
+				"y" : 76.87715148925781
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : -1.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 10.31698608398438,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "blue_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "button",
+			"position" : 
+			{
+				"x" : 0.7492523193359375,
+				"y" : -88.08102416992188
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -4.513156890869141,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.7655400633811951,
+			"clip" : false,
+			"filepath" : "gamble_bet_text_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "have_bet",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : 4.377151489257813
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

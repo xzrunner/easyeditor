@@ -1,0 +1,139 @@
+
+{
+	"name" : "guild_dc",
+	"redo" : null,
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_mark_anim.json",
+			"multi color" : "",
+			"name" : "guild_icon",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 49.09999847412109
+			},
+			"x mirror" : false,
+			"x scale" : 1.200000047683716,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.200000047683716,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "",
+			"angle" : 0.0,
+			"filepath" : "guild_name2_fontblank.json",
+			"multi color" : "",
+			"name" : "guild_name",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : -11.30000305175781
+			},
+			"x mirror" : false,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"undo" : 
+	[
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -137.0,
+				"dy" : 102.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 38.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 9.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -12.0,
+				"dy" : -111.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 2.0,
+				"dy" : 69.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : 6.0,
+				"dy" : 58.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 1 ],
+			"val" : 
+			{
+				"dx" : -1.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : 0.0,
+				"dy" : 1.0,
+				"type" : 0
+			}
+		},
+		
+		{
+			"sprites" : [ 0 ],
+			"val" : 
+			{
+				"dx" : -3.0,
+				"dy" : 0.0,
+				"type" : 0
+			}
+		}
+	]
+}

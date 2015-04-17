@@ -1,0 +1,213 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "guild_war_icon_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite2",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -1.8750,
+							"x scale" : 0.750,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -4.50,
+							"y scale" : 0.750,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "..\\png\\6101-tongyong-1.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite3",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.049999952316284,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.049999952316284,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 2,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "..\\png\\6108-tongyong-1.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite5",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.5099999904632568,
+							"x scale" : 0.5099999904632568,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 7.394994258880615,
+							"y scale" : 0.5099999904632568,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "..\\png\\6184-tongyong-1.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite6",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -1.833880305290222,
+							"x scale" : 0.7335520982742310,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -1.467104196548462,
+							"y scale" : 0.7335520982742310,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 4,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "..\\png\\request_troops.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite7",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.50,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : -0.50,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 5,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "..\\png\\6163-tongyong-1.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite8",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 0.4359390437602997,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 0.4359390437602997,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 6,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : ""
+}

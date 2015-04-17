@@ -1,0 +1,91 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"label_height" : 50,
+			"label_width" : 300,
+			"multi color" : "0xffffffff",
+			"name" : "title",
+			"position" : 
+			{
+				"x" : -32.16604614257813,
+				"y" : 252.7820129394531
+			},
+			"size" : 26,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "band_login_textbg_scale9.json",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite35",
+			"position" : 
+			{
+				"x" : -4.644470214843750,
+				"y" : 30.17501831054688
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.50,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "checkbox_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "btn",
+			"position" : 
+			{
+				"x" : -105.6189575195313,
+				"y" : -192.7275695800781
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 109.5548934936523,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.5328655242919922,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

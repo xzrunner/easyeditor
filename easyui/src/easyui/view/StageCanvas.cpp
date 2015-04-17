@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 
 #include "frame/SettingCfg.h"
+#include "dataset/TidCfg.h"
 
 namespace eui
 {
@@ -22,7 +23,8 @@ void StageCanvas::onDraw()
 {
 	static bool inited = false;
 	if (!inited) {
-		m_statge->GetSymbolsCfg().LoadConfig();
+		m_statge->InitConfig();
+		TidCfg::Instance()->LoadConfig();
 		inited = true;
 	}
 
@@ -31,6 +33,12 @@ void StageCanvas::onDraw()
 	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
 
 	m_editPanel->drawEditTemp();
+
+#ifdef _DEBUG 
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	}
+#endif
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)

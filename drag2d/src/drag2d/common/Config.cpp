@@ -28,11 +28,15 @@ Config* Config::Instance()
 	{
 		m_instance = new Config();
 
-		wxStandardPathsBase& stdp = wxStandardPaths::Get();
-		wxString exe_path = stdp.GetExecutablePath();
-		wxString cfg_path = FilenameTools::getFileDir(exe_path) + "\\" + FILENAME;
-		if (FilenameTools::isExist(cfg_path)) {
-			m_instance->LoadFromFile(cfg_path);
+		if (FilenameTools::isExist(FILENAME)) {
+			m_instance->LoadFromFile(FILENAME);
+		} else {
+			wxStandardPathsBase& stdp = wxStandardPaths::Get();
+			wxString exe_path = stdp.GetExecutablePath();
+			wxString cfg_path = FilenameTools::getFileDir(exe_path) + "\\" + FILENAME;
+			if (FilenameTools::isExist(cfg_path)) {
+				m_instance->LoadFromFile(cfg_path);
+			}
 		}
 	}
 	return m_instance;

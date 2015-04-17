@@ -29,7 +29,7 @@ public:
 	virtual void insertSprite(d2d::ISprite* sprite);
 	virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
-	SymbolsCfg& GetSymbolsCfg() { return m_symbols_cfg; }
+	void InitConfig();
 
 	void SetViewlist(d2d::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;

@@ -1,0 +1,64 @@
+
+{
+	"name" : "m_guild_perk",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "guild_perk_head_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "head",
+			"position" : 
+			{
+				"x" : -1.0,
+				"y" : 182.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : true,
+			"filepath" : "guild_perk_new_list_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : -218.5749816894531,
+				"y" : 41.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 217.7875061035156,
+			"x scale" : 0.9499999880790710,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -883.1437377929688,
+			"y scale" : 0.9499999880790710,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 430.0,
+	"xmin" : -430.0,
+	"ymax" : 103.0,
+	"ymin" : -300.0
+}

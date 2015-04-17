@@ -1,0 +1,49 @@
+
+{
+	"name" : "buildingbutton_collect_elixir",
+	"sprite" : 
+	[
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "../png/6002-anniu-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"scale" : 0.4499999880790710,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "TID_BUTTON_INFO_fontblank.json",
+			"name" : "TID_BUTTON_COLLECT",
+			"position" : 
+			{
+				"x" : 0.2250061035156250,
+				"y" : -35.50
+			},
+			"scale" : 1.0,
+			"x mirror" : false,
+			"y mirror" : false
+		},
+		
+		{
+			"angle" : 0.0,
+			"filepath" : "../png/6105-tongyong-1.png",
+			"name" : "",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 0.0
+			},
+			"scale" : 0.6000000238418579,
+			"x mirror" : false,
+			"y mirror" : false
+		}
+	]
+}

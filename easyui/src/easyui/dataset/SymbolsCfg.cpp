@@ -31,6 +31,7 @@ void SymbolsCfg::LoadConfig()
 
 	try {
 		InitLibrarySymbols(value);
+		m_stage->resetCanvas();
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(m_stage, e);
 		dlg.ShowModal();	
@@ -41,7 +42,8 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 {
 	InitLibrarySymbols(value["button"], "按钮");
 	InitLibrarySymbols(value["list"], "列表");
-	InitLibrarySymbols(value["label"], "文本框");
+	InitLibrarySymbols(value["textbox"], "文本框");
+	InitLibrarySymbols(value["panel"], "面板");
 	InitLibrarySymbols(value["other"], "其他");
 }
 
@@ -82,6 +84,7 @@ void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol
 		const Symbol* src = symbols[i];
 
 		d2d::ISymbol* dst = d2d::SymbolMgr::Instance()->fetchSymbol(src->filepath);
+		dst->RefreshThumbnail(dst->getFilepath());
 		library->getList()->insert(dst);
 		dst->Release();
 	}

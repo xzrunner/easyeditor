@@ -1,5 +1,6 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
+#include "SelectSpritesOP.h"
 
 #include <easycomplex.h>
 
@@ -14,7 +15,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_symbols_cfg(this, library)
 	, m_viewlist(NULL)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<ecomplex::SelectSpritesOP>(this, this, property);
+	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 	m_canvas = new StageCanvas(this);
 }
 
@@ -38,6 +39,11 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
 	m_viewlist->reorder(sprite, up);
+}
+
+void StagePanel::InitConfig()
+{
+	m_symbols_cfg.LoadConfig();
 }
 
 }

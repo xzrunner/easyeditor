@@ -1,0 +1,244 @@
+
+{
+	"name" : "guild2_magic_energy_task_item",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "gamble_item_bg_scale9.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "bg",
+			"position" : 
+			{
+				"x" : 0.0,
+				"y" : 1.0
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.50,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 0.3439503908157349,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "\n",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 40,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
+			"name" : "info2",
+			"position" : 
+			{
+				"x" : -106.0,
+				"y" : 0.8000000119209290
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 14,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : -0.7110443115234375,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -0.9049761295318604,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 40,
+			"label_width" : 170,
+			"multi color" : "0xffffffff",
+			"name" : "info1",
+			"position" : 
+			{
+				"x" : -255.4496459960938,
+				"y" : 0.8157463073730469
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 14,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.06263732910156250,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.09502387046813965,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 40,
+			"label_width" : 120,
+			"multi color" : "0xffffffff",
+			"name" : "info3",
+			"position" : 
+			{
+				"x" : 19.0,
+				"y" : 0.8000000119209290
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 14,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 3.006805419921875,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.5082454681396484,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 40,
+			"label_width" : 100,
+			"multi color" : "0xffffffff",
+			"name" : "info5",
+			"position" : 
+			{
+				"x" : 295.0,
+				"y" : 0.8157463073730469
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 14,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 3.006805419921875,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.5082454681396484,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "short_yellow_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "btn",
+			"position" : 
+			{
+				"x" : 293.9421691894531,
+				"y" : 2.026899337768555
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 0.750,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -2.250,
+			"y scale" : 0.750,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 0,
+			"align vert" : 2,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xff333333",
+			"content" : "\n",
+			"filepath" : "title_fontblank.json",
+			"font" : "",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 40,
+			"label_width" : 155,
+			"multi color" : "0xffffffff",
+			"name" : "info4",
+			"position" : 
+			{
+				"x" : 162.0,
+				"y" : 0.8000000119209290
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 14,
+			"tag" : "",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 3.006805419921875,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.5082454681396484,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 0.0,
+	"xmin" : 0.0,
+	"ymax" : 0.0,
+	"ymin" : 0.0
+}

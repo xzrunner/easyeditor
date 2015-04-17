@@ -1,0 +1,627 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_housing_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "housing",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_health_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "hp",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 2,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_dps_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "dps",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 3,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_elixir_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "elixir",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 4,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_gold_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "gold",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 5,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_gold_rph_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "gold_rph",
+							"position" : 
+							{
+								"x" : 0.4240875244140625,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 6,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_elixir_rph_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "elixir_rph",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 7,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_time_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "time",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 8,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_speed_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "speed",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 9,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_spell_attack_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "spell_attack",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 10,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_spell_housing_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "spell_housing",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 11,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_housing_bar2_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "castle_housing",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 12,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_dark_elixir_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "dark_elixir",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 13,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_dark_elixir_rph_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "dark_elixir_rph",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : 0.0,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 14,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_attack_score_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "attack_score",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -21.45780944824219,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 6.635518074035645,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 15,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_defence_score_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "defence_score",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -21.46301269531250,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 5.692228317260742,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 16,
+					"tween" : false
+				},
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"b trans" : "0x0000ffff",
+							"clip" : false,
+							"filepath" : "building_info_coin_bar_complex.json",
+							"g trans" : "0x00ff00ff",
+							"multi color" : "0xffffffff",
+							"name" : "coin",
+							"position" : 
+							{
+								"x" : 0.0,
+								"y" : 0.0
+							},
+							"r trans" : "0xff0000ff",
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -21.66299438476563,
+							"x scale" : 1.0,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 5.978354454040527,
+							"y scale" : 1.0,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 17,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : ""
+}

@@ -1,0 +1,152 @@
+
+{
+	"name" : "",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : true,
+			"filepath" : "game_friend_list_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "list",
+			"position" : 
+			{
+				"x" : -12.72500801086426,
+				"y" : 305.0819702148438
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "friend",
+			"x mirror" : false,
+			"x offset" : 13.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -9051.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "rank_line_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "_sprite264",
+			"position" : 
+			{
+				"x" : -3.407993316650391,
+				"y" : -228.6490631103516
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "friend",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"align hori" : 2,
+			"align vert" : 0,
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"color" : "0xffffffff",
+			"content" : "",
+			"filepath" : "center_write_14_fontblank.json",
+			"font" : "CCBackBeat",
+			"font_filename" : "",
+			"g trans" : "0x00ff00ff",
+			"label_height" : 40,
+			"label_width" : 200,
+			"multi color" : "0xffffffff",
+			"name" : "count",
+			"position" : 
+			{
+				"x" : -300.1929931640625,
+				"y" : -269.9100341796875
+			},
+			"r trans" : "0xff0000ff",
+			"size" : 14,
+			"tag" : "friend",
+			"tid" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "input_small_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "input",
+			"position" : 
+			{
+				"x" : 40.51500701904297,
+				"y" : -269.9100646972656
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "friend",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"b trans" : "0x0000ffff",
+			"clip" : false,
+			"filepath" : "yellow_button_complex.json",
+			"g trans" : "0x00ff00ff",
+			"multi color" : "0xffffffff",
+			"name" : "apply",
+			"position" : 
+			{
+				"x" : 306.7150268554688,
+				"y" : -267.2480163574219
+			},
+			"r trans" : "0xff0000ff",
+			"tag" : "friend",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -3.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"use_render_cache" : false,
+	"xmax" : 400.0,
+	"xmin" : -400.0,
+	"ymax" : 255.0,
+	"ymin" : -215.0
+}

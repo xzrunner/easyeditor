@@ -1,0 +1,57 @@
+
+{
+	"name" : "m_guild_join_slide",
+	"sprite" : 
+	[
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : true,
+			"filepath" : "guild_apply_list_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "guild_join_list",
+			"position" : 
+			{
+				"x" : 2.0,
+				"y" : 305.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : -2301.50,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		},
+		
+		{
+			"add color" : "0x00000000",
+			"angle" : 0.0,
+			"clip" : false,
+			"filepath" : "back_button_complex.json",
+			"multi color" : "0xffffffff",
+			"name" : "back",
+			"position" : 
+			{
+				"x" : -378.50,
+				"y" : 293.0
+			},
+			"tag" : "",
+			"x mirror" : false,
+			"x offset" : 0.0,
+			"x scale" : 1.0,
+			"x shear" : 0.0,
+			"y mirror" : false,
+			"y offset" : 0.0,
+			"y scale" : 1.0,
+			"y shear" : 0.0
+		}
+	],
+	"xmax" : 430.0,
+	"xmin" : -430.0,
+	"ymax" : 255.0,
+	"ymin" : -300.0
+}

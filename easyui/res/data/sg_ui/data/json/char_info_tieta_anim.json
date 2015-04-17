@@ -1,0 +1,71 @@
+
+{
+	"fps" : 30,
+	"layer" : 
+	[
+		
+		{
+			"frame" : 
+			[
+				
+				{
+					"actor" : 
+					[
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "..\\png\\6175-tongyong-1.png",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite8",
+							"position" : 
+							{
+								"x" : 35.85000610351563,
+								"y" : -226.5700073242188
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -0.6999999880790710,
+							"x scale" : 1.399999976158142,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 0.0,
+							"y scale" : 1.399999976158142,
+							"y shear" : 0.0
+						},
+						
+						{
+							"add color" : "0x00000000",
+							"angle" : 0.0,
+							"clip" : false,
+							"filepath" : "123_complex.json",
+							"multi color" : "0xffffffff",
+							"name" : "_sprite7",
+							"position" : 
+							{
+								"x" : 27.89744567871094,
+								"y" : -130.1659851074219
+							},
+							"tag" : "",
+							"x mirror" : false,
+							"x offset" : -0.4591196775436401,
+							"x scale" : 0.5158653259277344,
+							"x shear" : 0.0,
+							"y mirror" : false,
+							"y offset" : 21.11437988281250,
+							"y scale" : 0.5158653259277344,
+							"y shear" : 0.0
+						}
+					],
+					"id" : 0,
+					"skeleton" : null,
+					"time" : 1,
+					"tween" : false
+				}
+			],
+			"name" : "Layer0"
+		}
+	],
+	"name" : ""
+}
