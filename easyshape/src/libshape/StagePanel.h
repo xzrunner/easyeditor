@@ -50,12 +50,13 @@ private:
 	void SetSymbolBG(d2d::ISymbol* symbol);
 
 private:
-	class DragSymbolTarget : public wxTextDropTarget
+	class DropTarget : public d2d::CombinedDropTarget
 	{
 	public:
-		DragSymbolTarget(StagePanel* stage, d2d::LibraryPanel* library);
+		DropTarget(StagePanel* stage, d2d::LibraryPanel* library);
 
-		virtual bool OnDropText(wxCoord x, wxCoord y, const wxString& data);
+		virtual void OnDropText(wxCoord x, wxCoord y, const wxString& data);
+		virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames);
 
 	private:
 		StagePanel* m_stage;

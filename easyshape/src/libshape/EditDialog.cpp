@@ -24,7 +24,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 		symbol->getFilepath(), libshape::FILE_TAG, "json");
 	if (d2d::FilenameTools::isExist(filepath)) {
 		m_stage->LoadFromFile(filepath.mb_str());
-		m_toolbar->selectSuitableEditOP();
+		m_toolbar->SelectSuitableEditOP();
 	}
 
 	m_stage->setTitleStatus(true);

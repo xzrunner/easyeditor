@@ -16,7 +16,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_canvas = new StageCanvas(this);
 	m_symbol = new Symbol;
 
-	SetDropTarget(new DragSymbolTarget(this, library));
+	SetDropTarget(new DropTarget(this, library));
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -44,7 +44,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		m_symbol->Retain();
 	}
 
-	SetDropTarget(new DragSymbolTarget(this, library));
+	SetDropTarget(new DropTarget(this, library));
 }
 
 StagePanel::~StagePanel()
@@ -112,7 +112,7 @@ void StagePanel::SetSymbolBG(d2d::ISymbol* symbol)
 	if (m_symbol) {
 		m_symbol->SetBG(symbol);
 		if (m_toolbar) {
-			m_toolbar->selectSuitableEditOP();
+			m_toolbar->SelectSuitableEditOP();
 		}
 		m_canvas->Refresh();
 	}
@@ -178,14 +178,14 @@ void StagePanel::SetSymbolBG(d2d::ISymbol* symbol)
 // class StagePanel::DragSymbolTarget
 //////////////////////////////////////////////////////////////////////////
 
-StagePanel::DragSymbolTarget::
-DragSymbolTarget(StagePanel* stage, d2d::LibraryPanel* library)
+StagePanel::DropTarget::
+DropTarget(StagePanel* stage, d2d::LibraryPanel* library)
 	: m_stage(stage)
 	, m_library(library)
 {
 }
 
-bool StagePanel::DragSymbolTarget::
+void StagePanel::DropTarget::
 OnDropText(wxCoord x, wxCoord y, const wxString& data)
 {
 	wxString sType = data.substr(0, data.find(","));
@@ -198,7 +198,23 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	if (symbol) {
 		m_stage->SetSymbolBG(symbol);
 	}
-	
-	return true;
 }
+
+void StagePanel::DropTarget::
+OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
+{
+	if (filenames.IsEmpty()) {
+		return;
+	}
+
+	wxString filename = filenames[0];
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+	symbol->RefreshThumbnail(filename);
+	bool success = m_library->AddSymbol(symbol);
+	if (success) {
+		m_stage->SetSymbolBG(symbol);
+	}
+	symbol->Release();
+}
+
 }

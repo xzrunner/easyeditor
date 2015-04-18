@@ -1,5 +1,6 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
+#include "Symbol.h"
 
 #include "BezierShape.h"
 #include "ChainShape.h"
@@ -14,6 +15,8 @@
 
 #include "DrawLineCMPT.h"
 #include "EditPolygonCMPT.h"
+
+#include <easyimage.h>
 
 namespace libshape
 {
@@ -40,22 +43,57 @@ wxSizer* ToolbarPanel::initLayout()
 	sizer->Add(initChildrenLayout());
 	sizer->AddSpacer(20);
 	{
-		wxButton* btnClear = new wxButton(this, wxID_ANY, wxT("Clear"));
-		Connect(btnClear->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
-			wxCommandEventHandler(ToolbarPanel::onClearShapes));
-		sizer->Add(btnClear);
-
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Clear"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::OnClearShapes));
+		sizer->Add(btn);
+	}
+	sizer->AddSpacer(10);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Bounding"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(ToolbarPanel::OnCreateBounding));
+		sizer->Add(btn);
 	}
 	return sizer;
 }
 
-void ToolbarPanel::onClearShapes(wxCommandEvent& event)
+void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 {
 	static_cast<StagePanel*>(m_editPanel)->clearShapes();
 	m_editPanel->Refresh();
 }
 
-void ToolbarPanel::selectSuitableEditOP()
+void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
+{
+	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	const d2d::ISymbol* bg = static_cast<const libshape::Symbol&>(stage->GetSymbol()).GetBG();
+	const d2d::ImageSymbol* img_symbol = dynamic_cast<const d2d::ImageSymbol*>(bg);
+	if (!img_symbol) {
+		return;
+	}
+
+	stage->clearShapes();
+
+	d2d::Image* img = img_symbol->getImage();
+	eimage::ExtractOutlineRaw raw(*img);
+	raw.CreateBorderLineAndMerge();
+	eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
+	fine.Trigger(0.04f, 0.2f);
+
+	d2d::Vector offset(-img->clipWidth()*0.5f, -img->clipHeight()*0.5f);
+	std::vector<d2d::Vector> bounding = fine.GetResult();
+	for (int i = 0, n = bounding.size(); i < n; ++i) {
+		bounding[i] += offset;
+	}
+	stage->insertShape(new libshape::PolygonShape(bounding));
+
+	setChoice(3);
+
+	stage->Refresh();
+}
+
+void ToolbarPanel::SelectSuitableEditOP()
 {
 	std::vector<d2d::IShape*> shapes;
 	static_cast<StagePanel*>(m_editPanel)->traverseShapes(

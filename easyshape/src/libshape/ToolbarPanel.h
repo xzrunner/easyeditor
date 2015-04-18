@@ -14,13 +14,14 @@ public:
 	ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
 		StagePanel* stage);
 
-	void selectSuitableEditOP();
+	void SelectSuitableEditOP();
 
 protected:
 	virtual wxSizer* initLayout();
 
 private:
-	void onClearShapes(wxCommandEvent& event);
+	void OnClearShapes(wxCommandEvent& event);
+	void OnCreateBounding(wxCommandEvent& event);
 
 }; // ToolbarPanel
 

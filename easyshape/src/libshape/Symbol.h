@@ -39,6 +39,7 @@ public:
 	void Clear();
 
 	void SetBG(d2d::ISymbol* bg);
+	const d2d::ISymbol* GetBG() const { return m_bg; }
 
 	void StoreToFile(const char* filename) const;
 
