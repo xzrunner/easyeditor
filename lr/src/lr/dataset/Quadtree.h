@@ -16,6 +16,8 @@ public:
 	
 	std::vector<const d2d::ISprite*> Query(const d2d::Rect& rect) const;
 
+	void DebugDraw() const;
+
 private:
 	class Node
 	{

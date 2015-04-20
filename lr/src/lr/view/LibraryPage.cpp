@@ -17,7 +17,7 @@ bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
 void LibraryPage::onAddPress(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("µº»Îsymbol"), wxEmptyString, 
-		wxEmptyString, "*.json", wxFD_OPEN | wxFD_MULTIPLE);
+		wxEmptyString, "*.*", wxFD_OPEN | wxFD_MULTIPLE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		wxArrayString filenames;

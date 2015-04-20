@@ -4,6 +4,7 @@
 #include <drag2d.h>
 
 #include "dataset/SymbolsCfg.h"
+#include "dataset/Quadtree.h"
 
 namespace lr
 {
@@ -36,6 +37,8 @@ public:
 		m_viewlist = viewlist;
 	}
 
+	void DebugDraw() const;
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 
@@ -49,6 +52,8 @@ private:
 
 	d2d::AbstractEditOP* m_paste_op;
 	d2d::AbstractEditOP* m_arrange_op;
+
+	Quadtree m_sindex;
 
 }; // StagePanel
 

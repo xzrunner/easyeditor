@@ -48,6 +48,26 @@ std::vector<const d2d::ISprite*> Quadtree::Query(const d2d::Rect& rect) const
 	return sprites;
 }
 
+void Quadtree::DebugDraw() const
+{
+	std::queue<Node*> buffer;
+	buffer.push(m_root);
+	while (!buffer.empty())
+	{
+		Node* node = buffer.front(); buffer.pop();
+
+		d2d::PrimitiveDraw::rect(d2d::Matrix(), node->m_rect, d2d::LIGHT_RED_THIN_LINE);
+
+		if (!node->IsLeaf()) 
+		{
+			for (int i = 0; i < 4; ++i) {
+				Node* cn = node->m_children[i];
+				buffer.push(cn);
+			}			
+		}
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class Quadtree::Node
 //////////////////////////////////////////////////////////////////////////
@@ -112,7 +132,7 @@ void Quadtree::Node::
 Split()
 {
 	for (int i = 0; i < 4; ++i) {
-		m_children[i]->m_rect = m_rect;
+		m_children[i] = new Node(m_rect);
 	}
 	m_children[0]->m_rect.xMax = m_children[2]->m_rect.xMax = 
 		m_children[1]->m_rect.xMin = m_children[3]->m_rect.xMin = m_rect.xCenter();
