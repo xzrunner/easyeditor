@@ -27,9 +27,9 @@ void StageCanvas::onDraw()
 		inited = true;
 	}
 
-	DrawGuideLines();
-
 	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
+
+	DrawGuideLines();
 
 	m_editPanel->drawEditTemp();
 }
@@ -53,7 +53,7 @@ void StageCanvas::DrawGuideLines() const
 		MAP_EDGE_LEN * 0.5f,
 		d2d::LIGHT_RED_LINE);
 
-	m_statge->DebugDraw();
+//	m_statge->DebugDraw();
 }
 
 }
