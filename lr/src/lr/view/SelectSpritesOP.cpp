@@ -72,6 +72,7 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		etexture::EditDialog dlg(m_editPanel, &symbol);
 		dlg.ShowModal();
 
+		symbol.reloadTexture();
 		m_editPanel->ResetViewport();
 	}
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
