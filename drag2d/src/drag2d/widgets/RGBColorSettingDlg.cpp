@@ -1,11 +1,15 @@
 #include "RGBColorSettingDlg.h"
 #include "ColorSlider.h"
 
+#include "view/EditPanel.h"
+
 namespace d2d
 {
 
-RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, const Colorf& col)
-	: wxDialog(parent, wxID_ANY, "RGB Color Setting", wxDefaultPosition, wxSize(450, 300))
+RGBColorSettingDlg::RGBColorSettingDlg(EditPanel* editpanel, Colorf& col)
+	: wxDialog(editpanel, wxID_ANY, "RGB Color Setting", wxDefaultPosition, wxSize(450, 300))
+	, m_editpanel(editpanel)
+	, m_color(col)
 	, m_r(NULL)
 	, m_g(NULL)
 	, m_b(NULL)
@@ -26,6 +30,9 @@ void RGBColorSettingDlg::OnColorChanged()
 	m_color_bg->SetBackgroundColour(wxColour(m_r->GetColorValue(), 
 		m_g->GetColorValue(), m_b->GetColorValue()));
 	m_color_bg->Refresh();
+
+	m_color = GetColor();
+	m_editpanel->Refresh();
 }
 
 Colorf RGBColorSettingDlg::GetColor() const

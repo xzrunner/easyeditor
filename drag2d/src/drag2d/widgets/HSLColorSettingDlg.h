@@ -9,12 +9,13 @@
 namespace d2d
 {
 
+class EditPanel;
 class ColorSlider;
 	
 class HSLColorSettingDlg : public wxDialog, public IColorMonitor
 {
 public:
-	HSLColorSettingDlg(wxWindow* parent, const Colorf& col, const wxPoint& pos = wxDefaultPosition);
+	HSLColorSettingDlg(EditPanel* editpanel, Colorf& col, const wxPoint& pos = wxDefaultPosition);
 
 	//
 	// interface IColorChanger
@@ -29,6 +30,10 @@ private:
 	void SetColor(const Colorf& col);
 
 private:
+	EditPanel* m_editpanel;
+
+	Colorf& m_color;
+
 	wxPanel* m_color_bg;
 
 	ColorSlider *m_h, *m_s, *m_l;

@@ -2,12 +2,15 @@
 #include "ColorSlider.h"
 
 #include "common/color_convert.h"
+#include "view/EditPanel.h"
 
 namespace d2d
 {
 
-HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, const Colorf& col, const wxPoint& pos)
-	: wxDialog(parent, wxID_ANY, "HSL Color Setting", pos, wxSize(450, 300))
+HSLColorSettingDlg::HSLColorSettingDlg(EditPanel* editpanel, Colorf& col, const wxPoint& pos)
+	: wxDialog(editpanel, wxID_ANY, "HSL Color Setting", pos, wxSize(450, 300))
+	, m_editpanel(editpanel)
+	, m_color(col)
 	, m_h(NULL)
 	, m_s(NULL)
 	, m_l(NULL)
@@ -29,6 +32,9 @@ void HSLColorSettingDlg::OnColorChanged()
 		m_s->GetColorValue(), m_l->GetColorValue());
 	m_color_bg->SetBackgroundColour(wxColour(rgb.r, rgb.g, rgb.b));
 	m_color_bg->Refresh();
+
+	m_color = GetColor();
+	m_editpanel->Refresh();
 }
 
 Colorf HSLColorSettingDlg::GetColor() const

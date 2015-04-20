@@ -8,13 +8,14 @@
 namespace d2d
 {
 
+class EditPanel;
 class ColorSlider;
 struct Colorf;
 
 class RGBColorSettingDlg : public wxDialog, public IColorMonitor
 {
 public:
-	RGBColorSettingDlg(wxWindow* parent, const Colorf& col);
+	RGBColorSettingDlg(EditPanel* editpanel, Colorf& col);
 
 	//
 	// interface IColorChanger
@@ -29,6 +30,10 @@ private:
 	void SetColor(const Colorf& col);
 
 private:
+	EditPanel* m_editpanel;
+
+	Colorf& m_color;
+
 	wxPanel* m_color_bg;
 
 	ColorSlider *m_r, *m_g, *m_b;

@@ -27,14 +27,14 @@ SimpleGLCanvas::~SimpleGLCanvas()
 
 void SimpleGLCanvas::OnSize(wxSizeEvent& event)
 {
-	wxSize size = event.GetSize();
-	int w = size.x, h = size.y;
-	
-	glViewport(0, 0, w, h);
-
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->SetModelView(d2d::Vector(0, 0), 1);
-	shader->SetProjection(w, h);
+// 	wxSize size = event.GetSize();
+// 	int w = size.x, h = size.y;
+// 	
+// 	glViewport(0, 0, w, h);
+// 
+// 	ShaderMgr* shader = ShaderMgr::Instance();
+// 	shader->SetModelView(d2d::Vector(0, 0), 1);
+// 	shader->SetProjection(w, h);
 }
 
 void SimpleGLCanvas::OnPaint(wxPaintEvent& event)
