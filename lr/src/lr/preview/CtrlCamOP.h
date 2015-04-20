@@ -11,9 +11,12 @@ namespace preview
 class CtrlCamOP : public d2d::AbstractEditOP
 {
 public:
-	CtrlCamOP();
+	CtrlCamOP(d2d::EditPanel* editPanel);
 
 	virtual bool onKeyDown(int keyCode);
+
+private:
+	void OffsetCamera(float dx, float dy);
 
 }; // CtrlCamOP
 

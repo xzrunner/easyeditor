@@ -1,5 +1,6 @@
 #include "MainDialog.h"
 #include "StageCanvas.h"
+#include "CtrlCamOP.h"
 
 namespace lr
 {
@@ -21,6 +22,7 @@ void MainDialog::InitLayout()
 
 	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
 	stage->setCanvas(new StageCanvas(stage, m_control, m_sprites));
+	stage->setEditOP(new CtrlCamOP(stage));
 	sizer->Add(stage, 1, wxEXPAND);	
 
 	SetSizer(sizer);
