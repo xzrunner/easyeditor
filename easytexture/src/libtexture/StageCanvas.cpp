@@ -1,5 +1,6 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
+#include "Symbol.h"
 
 namespace etexture
 {
@@ -16,12 +17,21 @@ StageCanvas::StageCanvas(StagePanel* panel)
 	m_timer.Start(100);
 }
 
+void StageCanvas::initGL()
+{
+	d2d::OrthoCanvas::initGL();
+	m_panel->GetSymbol()->reloadTexture();
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
+	}
+
+	resetViewport();
+}
+
 void StageCanvas::onDraw()
 {
-	// todo easymap里双击打开绘制有问题，怀疑GL状态不对
-	d2d::ShaderMgr::Instance()->sprite();
-
 	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
+
 	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
 
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));

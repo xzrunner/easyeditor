@@ -14,6 +14,7 @@ public:
 	StageCanvas(StagePanel* panel);
 
 protected:
+	virtual void initGL();
 	virtual void onDraw();
 
 	void onTimer(wxTimerEvent& event);

@@ -326,6 +326,14 @@
 			Name="preview"
 			>
 			<File
+				RelativePath="..\..\..\src\lr\preview\CtrlCamOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\preview\CtrlCamOP.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\preview\MainDialog.cpp"
 				>
 			</File>
@@ -341,7 +349,7 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						ObjectFile="..\lr\src\lr\preview"
+						ObjectFile="..\lr\x86\Debug\obj\preview\StageCanvas"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -349,7 +357,7 @@
 					>
 					<Tool
 						Name="VCCLCompilerTool"
-						ObjectFile="..\lr\src\lr\preview"
+						ObjectFile="..\lr\x86\Release\obj\preview\StageCanvas"
 					/>
 				</FileConfiguration>
 			</File>

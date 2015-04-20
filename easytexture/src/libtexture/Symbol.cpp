@@ -22,10 +22,7 @@ Symbol::Symbol(const Symbol& s)
 
 Symbol::~Symbol()
 {
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->Release();
-	}
-	m_shapes.clear();
+	Clear();
 }
 
 Symbol* Symbol::clone() const
@@ -64,6 +61,8 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 
 void Symbol::loadResources()
 {
+	Clear();
+
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
@@ -81,6 +80,14 @@ void Symbol::loadResources()
 		m_shapes.push_back(shape);
 		shape_val = value["shapes"][i++];
 	}
+}
+
+void Symbol::Clear()
+{
+	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
+		m_shapes[i]->Release();
+	}
+	m_shapes.clear();
 }
 
 }

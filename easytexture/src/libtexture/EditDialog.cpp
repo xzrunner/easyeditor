@@ -2,6 +2,7 @@
 #include "Symbol.h"
 #include "LibraryPanel.h"
 #include "StagePanel.h"
+#include "ToolbarPanel.h"
 #include "FileSaver.h"
 
 #include <wx/splitter.h>
@@ -25,6 +26,8 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 	}
 	SetTitle(symbol->getFilepath());
 	InitLayout();
+
+	m_stage->setTitleStatus(true);
 }
 
 EditDialog::~EditDialog()
@@ -34,16 +37,34 @@ EditDialog::~EditDialog()
 	}
 }
 
+// void EditDialog::InitLayout()
+// {
+// 	wxSplitterWindow* vert_splitter = new wxSplitterWindow(this);
+// //	wxSplitterWindow* hori_splitter = new wxSplitterWindow(vert_splitter);
+// 
+// 	LibraryPanel* library = new LibraryPanel(vert_splitter);
+// 	StagePanel* stage = new StagePanel(vert_splitter, this, m_symbol, library);
+// 	m_stage = stage;
+// 	vert_splitter->SetSashGravity(0.15f);
+// 	vert_splitter->SplitVertically(library, stage);
+// }
+
 void EditDialog::InitLayout()
 {
-	wxSplitterWindow* vert_splitter = new wxSplitterWindow(this);
-//	wxSplitterWindow* hori_splitter = new wxSplitterWindow(vert_splitter);
+	wxSplitterWindow* right_splitter = new wxSplitterWindow(this);
+	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
 
-	LibraryPanel* library = new LibraryPanel(vert_splitter);
-	StagePanel* stage = new StagePanel(vert_splitter, this, m_symbol, library);
+	LibraryPanel* library = new LibraryPanel(left_splitter);
+	StagePanel* stage = new StagePanel(left_splitter, this, m_symbol, library);
 	m_stage = stage;
-	vert_splitter->SetSashGravity(0.15f);
-	vert_splitter->SplitVertically(library, stage);
+
+	left_splitter->SetSashGravity(0.15f);
+	left_splitter->SplitVertically(library, stage);
+
+	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, stage, NULL);
+
+	right_splitter->SetSashGravity(0.85f);
+	right_splitter->SplitVertically(left_splitter, toolbar);
 }
 
 void EditDialog::OnClose(wxCloseEvent& event)

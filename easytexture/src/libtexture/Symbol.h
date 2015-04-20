@@ -38,6 +38,8 @@ public:
 protected:
 	virtual void loadResources();
 
+	void Clear();
+
 private:
 	std::vector<d2d::IShape*> m_shapes;
 
