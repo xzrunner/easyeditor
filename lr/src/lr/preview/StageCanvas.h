@@ -1,15 +1,17 @@
-#ifndef _LR_PREVIEW_CANVAS_H_
-#define _LR_PREVIEW_CANVAS_H_
+#ifndef _LR_PREVIEW_STAGE_CANVAS_H_
+#define _LR_PREVIEW_STAGE_CANVAS_H_
 
 #include <drag2d.h>
 
 namespace lr
 {
+namespace preview
+{
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
+	StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
 		const std::vector<const d2d::ISprite*>& sprites);
 
 protected:
@@ -32,8 +34,9 @@ private:
 
 	DECLARE_EVENT_TABLE()
 
-}; // PreviewCanvas
+}; // StageCanvas
 
 }
+}
 
-#endif // _LR_PREVIEW_CANVAS_H_
+#endif // _LR_PREVIEW_STAGE_CANVAS_H_

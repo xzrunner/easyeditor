@@ -10,11 +10,11 @@ public:
 	Object();
 	virtual ~Object() {}
 
-	virtual void Retain();
-	virtual void Release();
+	virtual void Retain() const;
+	virtual void Release() const;
 
 private:
-	int m_count;
+	mutable int m_count;
 
 }; // Object
 

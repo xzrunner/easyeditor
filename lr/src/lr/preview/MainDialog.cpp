@@ -1,11 +1,13 @@
-#include "PreviewDialog.h"
-#include "PreviewCanvas.h"
+#include "MainDialog.h"
+#include "StageCanvas.h"
 
 namespace lr
 {
+namespace preview
+{
 
-PreviewDialog::PreviewDialog(wxWindow* parent, int width, int height,
-							 const std::vector<const d2d::ISprite*>& sprites)
+MainDialog::MainDialog(wxWindow* parent, int width, int height,
+					   const std::vector<const d2d::ISprite*>& sprites)
 	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(width, height), wxCLOSE_BOX | wxCAPTION)
 	, m_sprites(sprites)
 	, m_control(0.033f)
@@ -13,15 +15,16 @@ PreviewDialog::PreviewDialog(wxWindow* parent, int width, int height,
 	InitLayout();
 }
 
-void PreviewDialog::InitLayout()
+void MainDialog::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
-	stage->setCanvas(new PreviewCanvas(stage, m_control, m_sprites));
+	stage->setCanvas(new StageCanvas(stage, m_control, m_sprites));
 	sizer->Add(stage, 1, wxEXPAND);	
 
 	SetSizer(sizer);
 }
 
+}
 }

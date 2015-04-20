@@ -1,14 +1,16 @@
-#include "PreviewCanvas.h"
+#include "StageCanvas.h"
 
 namespace lr
 {
+namespace preview
+{
 
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
+BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
+	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
 END_EVENT_TABLE()
 
-PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
-							 const std::vector<const d2d::ISprite*>& sprites)
+StageCanvas::StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
+						 const std::vector<const d2d::ISprite*>& sprites)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
 	, m_control(control)
@@ -17,7 +19,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
 	m_timer.Start(100);
 }
 
-void PreviewCanvas::initGL()
+void StageCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -25,7 +27,7 @@ void PreviewCanvas::initGL()
 	}
 }
 
-void PreviewCanvas::onDraw()
+void StageCanvas::onDraw()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -36,7 +38,7 @@ void PreviewCanvas::onDraw()
 	}
 }
 
-void PreviewCanvas::onTimer(wxTimerEvent& event)
+void StageCanvas::onTimer(wxTimerEvent& event)
 {
 	bool refresh = m_control.update();
 	if (refresh) {
@@ -44,4 +46,5 @@ void PreviewCanvas::onTimer(wxTimerEvent& event)
 	}
 }
 
+}
 }

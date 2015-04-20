@@ -11,13 +11,13 @@ Object::Object()
 }
 
 inline void 
-Object::Retain()
+Object::Retain() const
 {
 	++m_count;
 }
 
 inline void 
-Object::Release()
+Object::Release() const
 {
 	if (--m_count <= 0) {
 		delete this;

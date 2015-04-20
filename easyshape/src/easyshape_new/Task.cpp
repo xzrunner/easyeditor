@@ -1,6 +1,7 @@
 #include "Task.h"
 
 #include <easyshape.h>
+#include <easycomplex.h>
 
 #include <wx/splitter.h>
 
@@ -59,7 +60,9 @@ void Task::InitLayout(wxFrame* parent)
 	wxSplitterWindow* left_hori = new wxSplitterWindow(left_vert);
 
 	m_library = new d2d::LibraryPanel(left_hori);
-	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
+	wxWindow* nb = m_library->getNotebook();
+	m_library->addPage(new d2d::LibraryImagePage(nb));
+	m_library->addPage(new ecomplex::LibraryPage(nb));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(left_hori);
 	m_stage = new libshape::StagePanel(left_vert, parent, m_library);

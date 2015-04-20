@@ -49,6 +49,9 @@ Symbol* Symbol::clone() const
 
 void Symbol::reloadTexture() const
 {
+	if (m_bg) {
+		m_bg->reloadTexture();
+	}
 }
 
 void Symbol::draw(const d2d::Matrix& mt,

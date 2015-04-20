@@ -293,36 +293,68 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="preview"
-				>
-				<File
-					RelativePath="..\..\..\src\lr\view\PreviewCanvas.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\lr\view\PreviewCanvas.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\lr\view\PreviewDialog.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\lr\view\PreviewDialog.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
 			>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\Quadtree.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\Quadtree.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\SpatialIndex.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\SpatialIndex.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\src\lr\dataset\SymbolsCfg.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\lr\dataset\SymbolsCfg.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="preview"
+			>
+			<File
+				RelativePath="..\..\..\src\lr\preview\MainDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\preview\MainDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\preview\StageCanvas.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="..\lr\src\lr\preview"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="..\lr\src\lr\preview"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\preview\StageCanvas.h"
 				>
 			</File>
 		</Filter>
