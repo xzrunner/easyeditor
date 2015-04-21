@@ -40,6 +40,12 @@ void HSLColorSettingDlg::OnColorChanged()
 Colorf HSLColorSettingDlg::GetColor() const
 {
 	Colori rgb = hsl2rgb(m_h->GetColorValue(), m_s->GetColorValue(), m_l->GetColorValue());
+
+	// todo fix rgb2hsl
+	if (rgb.r == 0 && rgb.g == 254 && rgb.b == 0) {
+		rgb.g = 255;
+	}
+
 	return Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f);
 }
 
