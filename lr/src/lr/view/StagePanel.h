@@ -5,6 +5,7 @@
 
 #include "dataset/SymbolsCfg.h"
 #include "dataset/Quadtree.h"
+#include "preview/PathfindingSimple.h"
 
 namespace lr
 {
@@ -39,6 +40,8 @@ public:
 
 	void DebugDraw() const;
 
+	void Pathfinding(const d2d::Vector& start, const d2d::Vector& end);
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 
@@ -54,6 +57,8 @@ private:
 	d2d::AbstractEditOP* m_arrange_op;
 
 	Quadtree m_sindex;
+
+	preview::PathfindingSimple m_pathfinding;
 
 }; // StagePanel
 

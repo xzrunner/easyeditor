@@ -307,6 +307,17 @@ Vector ISprite::getCenter() const
 	return center;
 }
 
+d2d::Rect ISprite::GetRect() const
+{
+	std::vector<Vector> bound;
+	getBounding()->getBoundPos(bound);
+	d2d::Rect rect;
+	for (int i = 0, n = bound.size(); i < n; ++i) {
+		rect.combine(bound[i]);
+	}
+	return rect;
+}
+
 void ISprite::GetTransMatrix(Matrix& mt) const
 {
 	const float xScale = m_xMirror ? -m_scale.x : m_scale.x,

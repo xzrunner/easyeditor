@@ -376,6 +376,14 @@
 					RelativePath="..\..\..\src\lr\preview\PathfindingSimple.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathfindingUtil.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathfindingUtil.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 	</Files>

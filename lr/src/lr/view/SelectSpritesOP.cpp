@@ -1,4 +1,5 @@
 #include "SelectSpritesOP.h"
+#include "StagePanel.h"
 
 #include <easyscale9.h>
 #include <easymesh.h>
@@ -14,6 +15,23 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 								 d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
 	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
 {
+	m_first_press.setInvalid();
+}
+
+bool SelectSpritesOP::onMouseLeftDown(int x, int y)
+{
+	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) return true;
+
+	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	if (m_first_press.isValid()) {
+		StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+		stage->Pathfinding(m_first_press, pos);
+		m_first_press.setInvalid();
+	} else {
+		m_first_press = pos;
+	}
+
+	return false;
 }
 
 bool SelectSpritesOP::onMouseLeftDClick(int x, int y)

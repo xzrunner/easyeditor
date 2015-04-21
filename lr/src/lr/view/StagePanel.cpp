@@ -15,6 +15,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_symbols_cfg(this, library)
 	, m_viewlist(NULL)
 	, m_sindex(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN))
+	, m_pathfinding(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN), 256, 256)
 {
 	m_paste_op = new d2d::PasteSymbolOP(this, this, library);
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
@@ -39,6 +40,8 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	d2d::SpritesPanelImpl::removeSprite(sprite);
 	m_viewlist->remove(sprite);
+
+	m_pathfinding.DisableRegion(sprite->GetRect(), true);
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
@@ -46,6 +49,8 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	d2d::SpritesPanelImpl::insertSprite(sprite);
 	m_viewlist->insert(sprite);
 	m_sindex.Insert(sprite);
+
+	m_pathfinding.DisableRegion(sprite->GetRect(), false);
 }
 
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
@@ -57,6 +62,12 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 void StagePanel::DebugDraw() const
 {
 	m_sindex.DebugDraw();
+	m_pathfinding.DebugDraw();
+}
+
+void StagePanel::Pathfinding(const d2d::Vector& start, const d2d::Vector& end)
+{
+	m_pathfinding.QueryRoute(start, end);
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)

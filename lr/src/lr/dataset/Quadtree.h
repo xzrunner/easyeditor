@@ -34,8 +34,6 @@ private:
 
 		void Split();
 
-		static d2d::Rect GetSprRect(const d2d::ISprite* spr);
-
 	private:
 		static const int MAX_COUNT;
 

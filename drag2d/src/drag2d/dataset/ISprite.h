@@ -68,6 +68,7 @@ namespace d2d
 		AbstractBV* getBounding() const {
 			return m_bounding;
 		}
+		d2d::Rect GetRect() const;
 
 		void setObserver(ISpriteObserver* observer) {
 			m_observer = observer;

@@ -106,7 +106,7 @@ Insert(const d2d::ISprite* spr)
 	} 
 	else 
 	{
-		d2d::Rect rect = GetSprRect(spr);
+		d2d::Rect rect = spr->GetRect();
 		for (int i = 0; i < 4; ++i) {
 			Node* child = m_children[i];
 			if (child->IsIntersect(rect)) {
@@ -143,7 +143,7 @@ Split()
 		const d2d::ISprite* spr = m_sprites[i];
 		for (int j = 0; j < 4; ++j) {
 			Node* node = m_children[j];
-			d2d::Rect rect = GetSprRect(spr);
+			d2d::Rect rect = spr->GetRect();
 			if (node->IsIntersect(rect)) {
 				node->Insert(spr);
 			}
@@ -151,18 +151,6 @@ Split()
 	}
 
 	m_sprites.clear();
-}
-
-d2d::Rect Quadtree::Node::
-GetSprRect(const d2d::ISprite* spr)
-{
-	std::vector<d2d::Vector> bound;
-	spr->getBounding()->getBoundPos(bound);
-	d2d::Rect rect;
-	for (int i = 0, n = bound.size(); i < n; ++i) {
-		rect.combine(bound[i]);
-	}
-	return rect;
 }
 
 }
