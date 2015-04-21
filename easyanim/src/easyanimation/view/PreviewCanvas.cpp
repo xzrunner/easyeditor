@@ -22,7 +22,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 	, m_control(control)
 	, m_settings(settings)
 {
-	m_timer.Start(100);
+	m_timer.Start(30);
 }
 
 void PreviewCanvas::initGL()

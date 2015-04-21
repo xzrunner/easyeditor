@@ -49,6 +49,7 @@ Frame::Frame(const wxString& title)
 	initWorkingFrame();
 #ifdef _DEBUG
 	InitStatueBar();
+	wxLog::SetActiveTarget(new wxLogWindow(this, _T("Log window")));
 #else
 	wxLog::SetLogLevel(0);
 #endif

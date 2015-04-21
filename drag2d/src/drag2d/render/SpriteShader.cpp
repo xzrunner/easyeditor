@@ -170,7 +170,7 @@ void SpriteShader::SetTexID(int tex)
 	if (m_tex != tex) 
 	{
 		if (m_count != 0) {
-			wxLogDebug(_T("Shader Commit SetTexture %d to %d"), m_tex, tex);
+			//wxLogDebug(_T("Shader Commit SetTexture %d to %d"), m_tex, tex);
 		}
 
 		Commit();

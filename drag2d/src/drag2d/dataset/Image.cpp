@@ -222,7 +222,7 @@ void Image::draw(const Matrix& mt, const Rect& r) const
  	}
  	else
 	{
-		wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
+		//wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
 
 		texid = m_textureID;
 	 	float tot_hw = m_width * 0.5f,
