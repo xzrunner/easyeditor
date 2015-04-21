@@ -71,7 +71,7 @@ void Task::InitLayout()
 	left_splitter->SetSashGravity(0.2f);
 	left_splitter->SplitVertically(left_hori_splitter, m_stage);
 
-	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, m_stage);
+	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, m_stage, property);
 	m_stage->SetViewlist(viewlist);
 
 	right_splitter->SetSashGravity(0.85f);
