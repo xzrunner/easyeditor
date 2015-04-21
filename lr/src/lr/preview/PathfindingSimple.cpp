@@ -10,9 +10,9 @@ PathfindingSimple::PathfindingSimple(const d2d::Rect& region, int row, int col)
 {
 }
 
-void PathfindingSimple::DisableRegion(const d2d::Rect& r, bool disable)
+void PathfindingSimple::DisableRegion(const d2d::ISprite* spr, bool disable)
 {
-	m_nw.SetStatus(r, !disable);
+	m_nw.SetStatus(spr->GetRect(), !disable);
 }
 
 void PathfindingSimple::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)

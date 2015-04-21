@@ -5,7 +5,7 @@
 
 #include "dataset/SymbolsCfg.h"
 #include "dataset/Quadtree.h"
-#include "preview/PathfindingSimple.h"
+#include "preview/IPathfinding.h"
 
 namespace lr
 {
@@ -58,7 +58,7 @@ private:
 
 	Quadtree m_sindex;
 
-	preview::PathfindingSimple m_pathfinding;
+	preview::IPathfinding* m_pathfinding;
 
 }; // StagePanel
 

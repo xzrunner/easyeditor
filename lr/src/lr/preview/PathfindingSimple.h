@@ -1,25 +1,26 @@
 #ifndef _LR_PREVIEW_PATHFINDING_SIMPLE_H_
 #define _LR_PREVIEW_PATHFINDING_SIMPLE_H_
 
-#include <drag2d.h>
-
+#include "IPathfinding.h"
 #include "PathfindingUtil.h"
+
+#include <drag2d.h>
 
 namespace lr
 {
 namespace preview
 {
 
-class PathfindingSimple
+class PathfindingSimple : public IPathfinding
 {
 public:
 	PathfindingSimple(const d2d::Rect& region, int row, int col);
 
-	void DisableRegion(const d2d::Rect& r, bool disable);
+	virtual void DisableRegion(const d2d::ISprite* spr, bool disable);
 
-	void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
+	virtual void QueryRoute(const d2d::Vector& start, const d2d::Vector& end);
 
-	void DebugDraw() const;
+	virtual void DebugDraw() const;
 
 private:
 	struct Node

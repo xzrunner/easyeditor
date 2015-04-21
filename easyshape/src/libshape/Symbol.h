@@ -48,6 +48,9 @@ public:
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
+	// todo
+	const std::vector<d2d::IShape*>& GetShapes() const { return m_shapes; }
+
 protected:
 	virtual void loadResources();
 

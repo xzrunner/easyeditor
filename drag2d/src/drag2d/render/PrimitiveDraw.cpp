@@ -276,6 +276,19 @@ void PrimitiveDraw::drawTriangles(const std::vector<Vector>& triangles, const Co
 	PrimitiveDrawNew::Draw(GL10::GL_TRIANGLES, &triangles[0].x, triangles.size());
 }
 
+void PrimitiveDraw::drawTrianglesLine(const std::vector<Vector>& triangles, const Colorf& color, float size)
+{
+	if (triangles.empty()) {
+		return;
+	}
+
+	PrimitiveDrawNew::SetLineWidth(size);
+	PrimitiveDrawNew::SetColor(color);
+	for (int i = 0; i < triangles.size(); i += 3) {
+		PrimitiveDrawNew::Draw(GL10::GL_LINE_LOOP, &triangles[i].x, 3);	
+	}
+}
+
 void PrimitiveDraw::cross(const Vector& center, float edge, const Colorf& color, float size)
 {
 	cross(center, edge, edge, color, size);

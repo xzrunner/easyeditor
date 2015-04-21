@@ -38,6 +38,7 @@ namespace d2d
 		static void drawPolyline(const std::vector<Vector>& vertices, const Colorf& color, bool isClose, float size = 2);
 		static void drawPolygon(const std::vector<Vector>& vertices, const Colorf& color);
 		static void drawTriangles(const std::vector<Vector>& triangles, const Colorf& color);
+		static void drawTrianglesLine(const std::vector<Vector>& triangles, const Colorf& color, float size = 2);
 
 		static void cross(const Vector& center, float edge, const Colorf& color, float size = 2);
 		static void cross(const Vector& center, float xedge, float yedge, const Colorf& color, float size = 2);

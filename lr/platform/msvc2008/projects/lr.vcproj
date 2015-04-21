@@ -369,6 +369,18 @@
 				Name="pathfinding"
 				>
 				<File
+					RelativePath="..\..\..\src\lr\preview\IPathfinding.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathfindingNavMesh.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathfindingNavMesh.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\lr\preview\PathfindingSimple.cpp"
 					>
 				</File>
