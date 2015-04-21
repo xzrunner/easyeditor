@@ -486,6 +486,14 @@
 				Name="json"
 				>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\AnimToComplexWithColor.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\AnimToComplexWithColor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\ChangeJsonFile.cpp"
 					>
 				</File>
