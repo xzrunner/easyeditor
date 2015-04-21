@@ -53,7 +53,7 @@ void StageCanvas::DrawGuideLines() const
 		MAP_EDGE_LEN * 0.5f,
 		d2d::LIGHT_RED_LINE);
 
-//	m_statge->DebugDraw();
+	m_statge->DebugDraw();
 }
 
 }

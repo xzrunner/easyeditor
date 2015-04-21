@@ -365,6 +365,18 @@
 				RelativePath="..\..\..\src\lr\preview\StageCanvas.h"
 				>
 			</File>
+			<Filter
+				Name="pathfinding"
+				>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathfindingSimple.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathfindingSimple.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
