@@ -17,6 +17,8 @@ public:
 
 	void LoadConfig();
 
+	void StoreLibraryPage(const std::string& key, d2d::ILibraryPage* page);
+
 private:
 	struct Symbol
 	{
@@ -25,7 +27,8 @@ private:
 
 private:
 	void InitLibrarySymbols(const Json::Value& value);
-	void InitLibrarySymbols(const Json::Value& value, const std::string& name);
+	void InitLibrarySymbols(const Json::Value& value, const std::string& name,
+		const std::string& key);
 	void InitLibrarySymbols(const Json::Value& value, std::vector<Symbol*>& symbols);
 
 	void ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& symbols);

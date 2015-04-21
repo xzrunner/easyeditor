@@ -43,13 +43,14 @@ void FileIO::load(const char* filename, StagePanel* stage,
 		spr_val = value["sprite"][i++];
 	}
 
-//	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename, StagePanel* stage)
 {
 	Json::Value value;
 
+	// sprites
 	std::vector<d2d::ISprite*> sprites;
 	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";

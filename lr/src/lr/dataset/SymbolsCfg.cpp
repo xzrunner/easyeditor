@@ -6,6 +6,8 @@
 namespace lr
 {
 
+static const char* SYMBOL_CFG_PATH = "symbols_cfg.json";
+
 SymbolsCfg::SymbolsCfg(StagePanel* stage, d2d::LibraryPanel* library)
 	: m_stage(stage)
 	, m_library(library)
@@ -19,12 +21,10 @@ SymbolsCfg::~SymbolsCfg()
 
 void SymbolsCfg::LoadConfig()
 {
-	const char* config_filepath = "symbols_cfg.json";
-
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(config_filepath);
+	std::ifstream fin(SYMBOL_CFG_PATH);
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -38,23 +38,72 @@ void SymbolsCfg::LoadConfig()
 	}
 }
 
-void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
+void SymbolsCfg::StoreLibraryPage(const std::string& key, d2d::ILibraryPage* page)
 {
-	InitLibrarySymbols(value["terrain"], "地形");
-	InitLibrarySymbols(value["unit"], "单位");
-	InitLibrarySymbols(value["decoration"], "装饰");
-	InitLibrarySymbols(value["point"], "点");
-	InitLibrarySymbols(value["region"], "区域");
+	if (!page->getList()->getSymbol(0)) {
+		return;
+	}
+
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(SYMBOL_CFG_PATH);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+ 	Json::Value& page_val = value[key];
+
+	std::set<std::string> filepathes;
+	int idx = 0;
+	Json::Value spr_val = page_val[idx++];
+	while (!spr_val.isNull()) {
+		filepathes.insert(spr_val["filepath"].asString());
+		spr_val = page_val[idx++];
+	}
+
+	wxFileName filename(SYMBOL_CFG_PATH);
+	filename.Normalize();
+	std::string dir = d2d::FilenameTools::getFileDir(filename.GetFullPath().Lower());
+
+	idx = 0;
+	while (d2d::ISymbol* sym = page->getList()->getSymbol(idx++))
+	{
+		std::string filepath = d2d::FilenameTools::getRelativePath(dir, sym->getFilepath());
+		filepathes.insert(filepath);
+	}
+
+	std::set<std::string>::iterator itr = filepathes.begin();
+	for (int i = 0; itr != filepathes.end(); ++itr, ++i) {
+		page_val[i]["filepath"] = *itr;
+	}
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(SYMBOL_CFG_PATH);
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 }
 
-void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name)
+void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
+{
+	InitLibrarySymbols(value["terrain"], "地形", "terrain");
+	InitLibrarySymbols(value["unit"], "单位", "unit");
+	InitLibrarySymbols(value["decoration"], "装饰", "decoration");
+	InitLibrarySymbols(value["point"], "点", "point");
+	InitLibrarySymbols(value["region"], "区域", "region");
+}
+
+void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string& name,
+									const std::string& key)
 {
 	std::vector<Symbol*> symbols;
 
 	InitLibrarySymbols(value, symbols);
 
 	wxWindow* nb = m_library->getNotebook();
-	LibraryPage* page = new LibraryPage(nb, name.c_str());
+	LibraryPage* page = new LibraryPage(nb, name.c_str(), key, m_stage);
 	m_library->addPage(page);
 
 	ResetLibraryList(page, symbols);
