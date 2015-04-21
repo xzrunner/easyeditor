@@ -8,11 +8,18 @@ namespace lr
 namespace preview
 {
 
+class INetwork
+{
+public:
+	virtual d2d::Vector TransIDToPos(int id) const = 0;
+
+}; // INetwork
+
 class VisitedNode
 {
 public:
-	VisitedNode(int id, VisitedNode* prev = NULL, float from = 0)
-		: m_id(id), m_prev(prev), m_from(from), m_to(0) {}
+	VisitedNode(int id, VisitedNode* prev = NULL, float from = 0, float to = 0)
+		: m_id(id), m_prev(prev), m_from(from), m_to(to) {}
 
 	struct LengthAscending : public std::binary_function<VisitedNode*, VisitedNode*, bool>
 	{
@@ -41,13 +48,19 @@ public:
 class VisitedList
 {
 public:
+	VisitedList(INetwork* nw) : m_nw(nw) {}
+
 	void Push(VisitedNode* n) { m_data.insert(n); }
 
 	VisitedNode* Find(int id);
 
 	void Clear();
 
+	void DebugDraw() const;
+
 private:
+	INetwork* m_nw;
+
 	std::set<VisitedNode*, VisitedNode::IDAscending> m_data;
 
 }; // VisitedList

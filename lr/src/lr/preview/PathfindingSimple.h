@@ -41,11 +41,13 @@ private:
 		Node* n;
 	}; // Connection
 
-	class Network
+	class Network : public INetwork
 	{
 	public:
 		Network(const d2d::Rect& region, int row, int col);
 		~Network();
+
+		virtual d2d::Vector TransIDToPos(int id) const;
 
 		void SetStatus(const d2d::Rect& region, bool used);
 
@@ -56,7 +58,7 @@ private:
 	private:
 		Node* QueryNode(const d2d::Vector& pos) const;
 
-		void Expend(VisitedNode* node);
+		void Expend(VisitedNode* node, const d2d::Vector& end);
 
 		void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 

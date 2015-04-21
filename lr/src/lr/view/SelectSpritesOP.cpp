@@ -22,14 +22,14 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) return true;
 
-// 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-// 	if (m_first_press.isValid()) {
-// 		StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
-// 		stage->Pathfinding(m_first_press, pos);
-// 		m_first_press.setInvalid();
-// 	} else {
-// 		m_first_press = pos;
-// 	}
+	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	if (m_first_press.isValid()) {
+		StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+		stage->Pathfinding(m_first_press, pos);
+		m_first_press.setInvalid();
+	} else {
+		m_first_press = pos;
+	}
 
 	return false;
 }

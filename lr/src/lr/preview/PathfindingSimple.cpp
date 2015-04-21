@@ -35,8 +35,7 @@ void PathfindingSimple::QueryRoute(const d2d::Vector& start, const d2d::Vector& 
 
 void PathfindingSimple::DebugDraw() const
 {
-	m_nw.DebugDraw();
-	
+	m_nw.DebugDraw();	
 	d2d::PrimitiveDraw::drawPolyline(m_routes, d2d::LIGHT_RED, false);
 }
 
@@ -49,6 +48,7 @@ Network(const d2d::Rect& region, int row, int col)
 	: m_region(region)
 	, m_row(row)
 	, m_col(col)
+	, m_visited(this)
 {
 	m_width = m_region.xLength() / m_col;
 	m_height = m_region.yLength() / m_row;
@@ -64,6 +64,25 @@ PathfindingSimple::Network::
 ~Network()
 {
 	delete[] m_nodes;
+}
+
+d2d::Vector PathfindingSimple::Network::
+TransIDToPos(int id) const
+{
+	d2d::Vector ret;
+	ret.setInvalid();
+
+	int y = id / m_col;
+	int x = id - y * m_col;
+
+	if (x <= 0 || x >= m_col-1 || y <= 0 || y >= m_row-1) {
+		return ret;
+	}
+
+	ret.x = m_width * x - m_region.xLength() * 0.5f;
+	ret.y = m_height * y - m_region.yLength() * 0.5f;
+
+	return ret;
 }
 
 void PathfindingSimple::Network::
@@ -105,7 +124,7 @@ QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 		if (opt->m_id == en->id) {
 			return opt;
 		} else {
-			Expend(opt);
+			Expend(opt, end);
 		}
 	}
 
@@ -128,6 +147,8 @@ DebugDraw() const
 			d2d::PrimitiveDraw::rect(d2d::Matrix(), p0, p1, d2d::LIGHT_GREEN_FACE);
 		}
 	}
+
+	m_visited.DebugDraw();
 }
 
 PathfindingSimple::Node* PathfindingSimple::Network::
@@ -145,7 +166,7 @@ QueryNode(const d2d::Vector& pos) const
 }
 
 void PathfindingSimple::Network::
-Expend(VisitedNode* node)
+Expend(VisitedNode* node, const d2d::Vector& end)
 {
 	std::vector<Connection> connections;
 	GetConnections(node, connections);
@@ -166,7 +187,8 @@ Expend(VisitedNode* node)
 		}
 		else
 		{
-			VisitedNode* new_node = new VisitedNode(ct.n->id, node, node->m_from + ct.len);
+			float to = d2d::Math::getDistance(end, TransIDToPos(ct.n->id));
+			VisitedNode* new_node = new VisitedNode(ct.n->id, node, node->m_from + ct.len, to);
 			m_visited.Push(new_node);
 			m_candidate.Push(new_node);
 		}

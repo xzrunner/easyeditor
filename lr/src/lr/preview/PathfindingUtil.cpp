@@ -31,6 +31,16 @@ void VisitedList::Clear()
 	m_data.clear();
 }
 
+void VisitedList::DebugDraw() const
+{
+	std::set<VisitedNode*, VisitedNode::IDAscending>::const_iterator itr
+		= m_data.begin();
+	for ( ; itr != m_data.end(); ++itr) {
+		d2d::Vector pos = m_nw->TransIDToPos((*itr)->m_id);
+		d2d::PrimitiveDraw::drawPoint(pos, d2d::MID_RED, 5);
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class CandidateList
 //////////////////////////////////////////////////////////////////////////
