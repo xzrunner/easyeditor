@@ -62,6 +62,7 @@ void ILibraryPage::initLayout(bool draggable/* = true*/)
 		sizer = new wxBoxSizer(wxVERTICAL);
 
 	if (!m_isStatic) {
+//		InitLayoutExtend(sizer);
 		initButtons(sizer);
 	}
 
@@ -85,6 +86,8 @@ void ILibraryPage::onDelPress(wxCommandEvent& event)
 void ILibraryPage::initButtons(wxSizer* sizer)
 {
 	wxSizer* btnSizer = new wxBoxSizer(wxHORIZONTAL);
+
+	InitLayoutExtend(btnSizer);
 
 	m_btnAdd = new wxButton(this, wxID_ANY, "+", wxDefaultPosition, wxSize(20, 20));
 	Connect(m_btnAdd->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ILibraryPage::onAddPress));

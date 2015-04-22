@@ -21,12 +21,22 @@ public:
 	void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 protected:
+	virtual void InitLayoutExtend(wxSizer* sizer);
+
 	virtual void onAddPress(wxCommandEvent& event);
+
+private:
+	void OnChangeVisible(wxCommandEvent& event);
+
+	void VisibleAllSprites(bool visible);
 
 private:
 	std::string m_key;
 
 	StagePanel* m_stage;
+
+	wxCheckBox* m_visible_ctrl;
+	bool m_visible;
 
 }; // LibraryPage 
 

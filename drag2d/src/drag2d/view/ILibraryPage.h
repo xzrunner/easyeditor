@@ -41,6 +41,7 @@ namespace d2d
 
 	protected:
 		virtual void initLayout(bool draggable = true);
+		virtual void InitLayoutExtend(wxSizer* sizer) {}
 
 		virtual void onAddPress(wxCommandEvent& event);
 		virtual void onDelPress(wxCommandEvent& event);

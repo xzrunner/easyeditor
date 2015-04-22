@@ -9,6 +9,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 	: d2d::ILibraryPage(parent, name)
 	, m_key(key)
 	, m_stage(stage)
+	, m_visible(true)
 {
 	initLayout();
 }
@@ -38,6 +39,12 @@ void LibraryPage::LoadFromFile(const Json::Value& value, const std::string& dir)
 
 		symbol_val = layer_val["symbol"][idx++];
 	}
+
+	m_visible = layer_val["visible"].isNull() || layer_val["visible"].asBool();
+	m_visible_ctrl->SetValue(m_visible);
+	if (!m_visible) {
+		VisibleAllSprites(false);
+	}
 }
 
 void LibraryPage::StoreToFile(Json::Value& value, const std::string& dir) const
@@ -49,6 +56,17 @@ void LibraryPage::StoreToFile(Json::Value& value, const std::string& dir) const
 		layer_val["symbol"][idx] = filepath;
 		++idx;
 	}
+
+	layer_val["visible"] = m_visible;
+}
+
+void LibraryPage::InitLayoutExtend(wxSizer* sizer)
+{
+	m_visible_ctrl = new wxCheckBox(this, wxID_ANY, wxT("¿É¼û"));
+	Connect(m_visible_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		wxCommandEventHandler(LibraryPage::OnChangeVisible));
+	sizer->Add(m_visible_ctrl, 0, wxALIGN_LEFT);
+	sizer->AddSpacer(20);
 }
 
 void LibraryPage::onAddPress(wxCommandEvent& event)
@@ -72,6 +90,41 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			m_canvas->resetViewport();
 		}
 	}
+}
+
+void LibraryPage::OnChangeVisible(wxCommandEvent& event)
+{
+	bool visible = event.IsChecked();
+	if (visible == m_visible) {
+		return;
+	}
+
+	m_visible = visible;	
+	VisibleAllSprites(m_visible);
+}
+
+void LibraryPage::VisibleAllSprites(bool visible)
+{
+	std::vector<d2d::ISprite*> sprites;
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0; i < sprites.size(); ++i) {
+		d2d::ISprite* spr = sprites[i];
+
+		bool find = false;
+		int idx = 0;
+		while (d2d::ISymbol* symbol = m_list->getSymbol(idx++)) {
+			if (symbol == &spr->getSymbol()) {
+				find = true;
+				break;
+			}
+		}
+
+		if (find) {
+			spr->visiable = m_visible;
+		}
+	}
+
+	m_stage->Refresh();
 }
 
 }
