@@ -45,6 +45,10 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite) const
 {
+	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	shader->SetSpriteColor(mul, add);
+	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
+
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
 		m_shapes[i]->draw(mt);
 	}
