@@ -15,7 +15,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 
 LibraryPage::~LibraryPage()
 {
-	m_stage->GetSymbolsCfg().StoreLibraryPage(m_key, this);
+//	m_stage->GetSymbolsCfg().StoreLibraryPage(m_key, this);
 }
 
 bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
