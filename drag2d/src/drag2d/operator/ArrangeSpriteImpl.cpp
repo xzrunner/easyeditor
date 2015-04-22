@@ -73,26 +73,11 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		}
 		m_spritesImpl->removeSpriteSelection();
 		break;
-	case WXK_SPACE:
-		{
-			std::vector<ISprite*> sprites;
-			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-			CombineAOP* comb = new CombineAOP();
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				ISprite* sprite = sprites[i];
-
-				comb->Insert(new TranslateSpriteAOP(sprite, -sprite->getPosition()));
-				comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->getScale()));
-				comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->getShear()));
-//				comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
-
-				sprite->setTransform(Vector(0, 0), 0);
-				sprite->setScale(1, 1);
-				sprite->setShear(0, 0);
-//				sprite->setOffset(Vector(0, 0));
-			}
-			m_editPanel->addHistoryOP(comb);
-		}
+	case WXK_PAGEUP:
+		UpOneLayer();
+		break;
+	case WXK_PAGEDOWN:
+		DownOneLayer();
 		break;
 	case 'a': case 'A':
 		onDirectionKeyDown(e_left);
@@ -127,11 +112,26 @@ void ArrangeSpriteImpl::onKeyUp(int keyCode)
 {
 	switch (keyCode)
 	{
-	case WXK_PAGEUP:
-		UpOneLayer();
-		break;
-	case WXK_PAGEDOWN:
-		DownOneLayer();
+	case WXK_SPACE:
+		{
+			std::vector<ISprite*> sprites;
+			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+			CombineAOP* comb = new CombineAOP();
+			for (int i = 0, n = sprites.size(); i < n; ++i) {
+				ISprite* sprite = sprites[i];
+
+				comb->Insert(new TranslateSpriteAOP(sprite, -sprite->getPosition()));
+				comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->getScale()));
+				comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->getShear()));
+				//				comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
+
+				sprite->setTransform(Vector(0, 0), 0);
+				sprite->setScale(1, 1);
+				sprite->setShear(0, 0);
+				//				sprite->setOffset(Vector(0, 0));
+			}
+			m_editPanel->addHistoryOP(comb);
+		}
 		break;
 	}
 
