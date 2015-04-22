@@ -46,7 +46,6 @@ public:
 		m_toolbar = toolbar;
 	}
 
-private:
 	void SetSymbolBG(d2d::ISymbol* symbol);
 
 private:

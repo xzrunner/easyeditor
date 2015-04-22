@@ -328,6 +328,16 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 	case EditPanel::Menu_DownOneLayer:
 		DownOneLayer();
 		break;
+	case EditPanel::Menu_OpenWithShape:
+		{
+			std::vector<d2d::ISprite*> selected;
+			m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+			if (!selected.empty()) {
+				std::string cmd = "easyshape_new.exe " + selected[0]->getSymbol().getFilepath();
+				WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
+			}
+		}
+		break;
 	case EditPanel::Menu_InsertToDTex:
 		{
 			if (Config::Instance()->IsUseDTex()) {
@@ -458,7 +468,11 @@ void ArrangeSpriteImpl::setRightPopupMenu(wxMenu& menu)
 	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
 	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
 
+	menu.AppendSeparator();
+	menu.Append(EditPanel::Menu_OpenWithShape, EditPanel::menu_entries[EditPanel::Menu_OpenWithShape]);
+
 #ifdef _DEBUG
+	menu.AppendSeparator();
 	menu.Append(EditPanel::Menu_InsertToDTex, EditPanel::menu_entries[EditPanel::Menu_InsertToDTex]);
 	menu.Append(EditPanel::Menu_RemoveFromDTex, EditPanel::menu_entries[EditPanel::Menu_RemoveFromDTex]);
 #endif

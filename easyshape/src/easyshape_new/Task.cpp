@@ -22,12 +22,26 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	m_stage->LoadFromFile(filepath);
+	d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(filepath);
+	if (type == d2d::FileNameParser::e_shape) {
+		m_stage->LoadFromFile(filepath);		
+	} else if (type == d2d::FileNameParser::e_image 
+		|| type == d2d::FileNameParser::e_complex) {
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		m_stage->SetSymbolBG(symbol);
+		symbol->Release();
+	}
 }
 
 void Task::store(const char* filepath) const
 {
-	m_stage->StoreToFile(filepath);
+	std::string fixed = filepath;
+	d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(fixed);
+	if (type != d2d::FileNameParser::e_shape) {
+		wxString tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
+		fixed = d2d::FilenameTools::getFilenameAddTag(fixed, tag, "json");
+	}
+	m_stage->StoreToFile(fixed.c_str());
 }
 
 bool Task::isDirty() const

@@ -68,7 +68,7 @@ void Frame::initWithFile(const wxString& path)
 {
 	m_task->clear();
 	m_currFilename = path;
-	SetTitle(path);
+//	SetTitle(path);
 	try {
 		m_task->load(path);
 	} catch (d2d::Exception& e) {
