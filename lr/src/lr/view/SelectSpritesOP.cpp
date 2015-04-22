@@ -1,6 +1,8 @@
 #include "SelectSpritesOP.h"
 #include "StagePanel.h"
 
+#include "frame/config.h"
+
 #include <easyscale9.h>
 #include <easymesh.h>
 #include <easyanim.h>
@@ -21,6 +23,10 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) return true;
+
+	if (!PATHFINDING) {
+		return false;
+	}
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	if (m_first_press.isValid()) {
