@@ -10,6 +10,8 @@ static const int MAP_EDGE_LEN = 4096 * 2;
 
 static const bool PATHFINDING = false;
 
+static const float PREVIEW_SCALE = 0.5f;
+
 }
 
 #endif // _LR_CONFIG_H_

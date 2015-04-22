@@ -2,6 +2,8 @@
 #include "StageCanvas.h"
 #include "CtrlCamOP.h"
 
+#include "frame/config.h"
+
 namespace lr
 {
 namespace preview
@@ -21,6 +23,12 @@ void MainDialog::InitLayout()
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
+
+	d2d::Camera* cam = stage->getCamera();
+	float old_scale = cam->GetScale();
+	cam->SetScale(old_scale / PREVIEW_SCALE);
+	stage->Refresh();
+
 	stage->setCanvas(new StageCanvas(stage, m_control, m_sprites));
 	stage->setEditOP(new CtrlCamOP(stage));
 	sizer->Add(stage, 1, wxEXPAND);	

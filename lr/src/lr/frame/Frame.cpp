@@ -1,6 +1,7 @@
 #include "Frame.h"
 #include "SettingsDialog.h"
 #include "SettingCfg.h"
+#include "config.h"
 
 #include "preview/MainDialog.h"
 
@@ -26,7 +27,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 	std::vector<const d2d::ISprite*> sprites;
 	m_task->getAllSprite(sprites);
 
-	preview::MainDialog dlg(this, cfg->m_view_width, cfg->m_view_height, sprites);
+	preview::MainDialog dlg(this, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
 	dlg.ShowModal();
 
 	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->getEditPanel());
