@@ -337,6 +337,7 @@ void SelectSpritesOP::copyFromSelection()
 				sprite->load(sval);
 				m_spritesImpl->insertSprite(sprite);
 				m_selection->Add(sprite);
+				m_propertyPanel->setPropertySetting(createPropertySetting(sprite));
 
 				sval = value["sprite"][i++];
 			}
