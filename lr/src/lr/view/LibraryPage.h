@@ -17,11 +17,11 @@ public:
 
 	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
+	void LoadFromFile(const Json::Value& value, const std::string& dir);
+	void StoreToFile(Json::Value& value, const std::string& dir) const;
+
 protected:
 	virtual void onAddPress(wxCommandEvent& event);
-
-private:
-	void StoreToCfgFile();
 
 private:
 	std::string m_key;

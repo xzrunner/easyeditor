@@ -272,6 +272,14 @@
 					RelativePath="..\..\..\src\lr\view\LibraryPage.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\LibraryPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\LibraryPanel.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="editop"

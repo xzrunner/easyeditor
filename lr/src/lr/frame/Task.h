@@ -7,6 +7,7 @@
 namespace lr
 {
 
+class LibraryPanel;
 class StagePanel;
 
 class Task : public d2d::ITask
@@ -34,7 +35,7 @@ private:
 
 	wxFrame* m_parent;
 
- 	d2d::LibraryPanel* m_library;
+ 	LibraryPanel* m_library;
  	StagePanel* m_stage;
 
 }; // Task

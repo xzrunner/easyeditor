@@ -7,14 +7,22 @@
 namespace lr
 {
 
+class LibraryPanel;
 class StagePanel;
 
 class FileIO
 {
 public:
 	static void load(const char* filename, StagePanel* stage,
-		d2d::LibraryPanel* library);
-	static void store(const char* filename, StagePanel* stage);
+		LibraryPanel* library);
+	static void store(const char* filename, StagePanel* stage,
+		LibraryPanel* library);
+
+private:
+	static void LoadSprites(const Json::Value& value, StagePanel* stage, 
+		const std::string& dir);
+	static void StoreSprites(Json::Value& value, StagePanel* stage, 
+		const std::string& dir);
 
 }; // FileIO
 

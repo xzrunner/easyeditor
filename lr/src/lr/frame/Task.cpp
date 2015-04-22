@@ -1,6 +1,7 @@
 #include "Task.h"
 #include "FileIO.h"
 
+#include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
 
 namespace lr
@@ -28,7 +29,7 @@ void Task::load(const char* filename)
 
 void Task::store(const char* filename) const
 {
-	FileIO::store(filename, m_stage);
+	FileIO::store(filename, m_stage, m_library);
 }
 
 bool Task::isDirty() const
@@ -61,7 +62,7 @@ void Task::InitLayout()
 	d2d::PropertySettingPanel* property 
 		= new d2d::PropertySettingPanel(left_hori_splitter);
 
-	m_library = new d2d::LibraryPanel(left_hori_splitter);
+	m_library = new LibraryPanel(left_hori_splitter);
 	m_stage = new StagePanel(left_splitter, m_parent, property, m_library);
 	m_library->setCanvas(m_stage->getCanvas());
 
