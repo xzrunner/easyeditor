@@ -28,17 +28,17 @@ void FileIO::load(const char* filename, StagePanel* stage,
 		d2d::ISymbol* symbol = NULL;
 		try {
 			symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+
+			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+			sprite->load(spr_val);
+			stage->insertSprite(sprite);
+
+			sprite->Release();
+			symbol->Release();
 		} catch (d2d::Exception& e) {
 			std::cout << "Symbol::loadResources error! File:" << filepath << std::endl;
 			std::cout << e.what();
 		}
-
-		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(spr_val);
-		stage->insertSprite(sprite);
-
-		sprite->Release();
-		symbol->Release();
 
 		spr_val = value["sprite"][i++];
 	}
