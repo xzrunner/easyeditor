@@ -73,8 +73,9 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 
 	Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	ISprite* selected = selectByPos(pos);
-	if (selected && selected->editable)
+	if (selected)
 	{
+		assert(selected->editable);
 		if (wxGetKeyState(WXK_CONTROL))
 		{
 			if (m_selection->IsExist(selected))
@@ -280,7 +281,16 @@ ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
 		}
 	}
 	if (!selected) {
-		selected = m_spritesImpl->querySpriteByPos(pos);
+		ISprite* spr = m_spritesImpl->querySpriteByPos(pos);
+		if (!spr || !spr->editable) {
+			std::vector<ISprite*> sprites;
+			m_spritesImpl->querySpritesByRect(Rect(pos, 1, 1), false, sprites);
+			if (!sprites.empty()) {
+				selected = sprites.back();
+			}
+		} else {
+			selected = spr;
+		}
 	}
 	return selected;
 }
