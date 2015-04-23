@@ -2,6 +2,7 @@
 
 #include <easyshape.h>
 #include <easycomplex.h>
+#include <easytexture.h>
 
 #include <wx/splitter.h>
 
@@ -26,7 +27,8 @@ void Task::load(const char* filepath)
 	if (type == d2d::FileNameParser::e_shape) {
 		m_stage->LoadFromFile(filepath);		
 	} else if (type == d2d::FileNameParser::e_image 
-		|| type == d2d::FileNameParser::e_complex) {
+		|| type == d2d::FileNameParser::e_complex
+		|| type == d2d::FileNameParser::e_texture) {
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 		m_stage->SetSymbolBG(symbol);
 		symbol->Release();
@@ -46,7 +48,7 @@ void Task::store(const char* filepath) const
 
 bool Task::isDirty() const
 {
-	return false;
+	return true;
 }
 
 void Task::clear()
@@ -77,6 +79,7 @@ void Task::InitLayout(wxFrame* parent)
 	wxWindow* nb = m_library->getNotebook();
 	m_library->addPage(new d2d::LibraryImagePage(nb));
 	m_library->addPage(new ecomplex::LibraryPage(nb));
+	m_library->addPage(new etexture::LibraryPage(nb));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(left_hori);
 	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
