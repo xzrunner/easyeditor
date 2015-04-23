@@ -3,8 +3,9 @@
 #include "SelectSpritesOP.h"
 
 #include "frame/config.h"
-#include "preview/PathfindingSimple.h"
-#include "preview/PathfindingNavMesh.h"
+#include "preview/PathGrid.h"
+#include "preview/PathNavMesh.h"
+#include "preview/PathVisibleSimple.h"
 
 namespace lr
 {
@@ -20,8 +21,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_pathfinding(NULL)
 {
 	if (PATHFINDING) {
-		//	m_pathfinding = new preview::PathfindingSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN), 256, 256);
-		m_pathfinding = new preview::PathfindingNavMesh(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		//	m_pathfinding = new preview::PathGrid(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN), 256, 256);
+		//m_pathfinding = new preview::PathNavMesh(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
+		m_pathfinding = new preview::PathVisibleSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
 	m_paste_op = new d2d::PasteSymbolOP(this, this, library);

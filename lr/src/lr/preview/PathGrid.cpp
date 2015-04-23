@@ -1,21 +1,21 @@
-#include "PathfindingSimple.h"
+#include "PathGrid.h"
 
 namespace lr
 {
 namespace preview
 {
 
-PathfindingSimple::PathfindingSimple(const d2d::Rect& region, int row, int col)
+PathGrid::PathGrid(const d2d::Rect& region, int row, int col)
 	: m_nw(region, row, col)
 {
 }
 
-void PathfindingSimple::DisableRegion(const d2d::ISprite* spr, bool disable)
+void PathGrid::DisableRegion(const d2d::ISprite* spr, bool disable)
 {
 	m_nw.SetStatus(spr->GetRect(), !disable);
 }
 
-void PathfindingSimple::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
+void PathGrid::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 {
 	VisitedNode* node = m_nw.QueryRoute(start, end);
 	if (!node) {
@@ -33,17 +33,17 @@ void PathfindingSimple::QueryRoute(const d2d::Vector& start, const d2d::Vector& 
 	}
 }
 
-void PathfindingSimple::DebugDraw() const
+void PathGrid::DebugDraw() const
 {
 	m_nw.DebugDraw();	
 	d2d::PrimitiveDraw::drawPolyline(m_routes, d2d::LIGHT_RED, false);
 }
 
 //////////////////////////////////////////////////////////////////////////
-// class PathfindingSimple::Network
+// class PathGrid::Network
 //////////////////////////////////////////////////////////////////////////
 
-PathfindingSimple::Network::
+PathGrid::Network::
 Network(const d2d::Rect& region, int row, int col)
 	: m_region(region)
 	, m_row(row)
@@ -60,13 +60,13 @@ Network(const d2d::Rect& region, int row, int col)
 	}
 }
 
-PathfindingSimple::Network::
+PathGrid::Network::
 ~Network()
 {
 	delete[] m_nodes;
 }
 
-d2d::Vector PathfindingSimple::Network::
+d2d::Vector PathGrid::Network::
 TransIDToPos(int id) const
 {
 	d2d::Vector ret;
@@ -85,7 +85,7 @@ TransIDToPos(int id) const
 	return ret;
 }
 
-void PathfindingSimple::Network::
+void PathGrid::Network::
 SetStatus(const d2d::Rect& region, bool used)
 {
 	if (!d2d::Math::isRectContainRect(m_region, region)) {
@@ -103,7 +103,7 @@ SetStatus(const d2d::Rect& region, bool used)
 	}
 }
 
-VisitedNode* PathfindingSimple::Network::
+VisitedNode* PathGrid::Network::
 QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 {
 	if (!d2d::Math::isPointInRect(start, m_region) || !d2d::Math::isPointInRect(end, m_region)) {
@@ -131,7 +131,7 @@ QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 	return NULL;
 }
 
-void PathfindingSimple::Network::
+void PathGrid::Network::
 DebugDraw() const
 {
 	float dx = -m_region.xLength() * 0.5f,
@@ -151,7 +151,7 @@ DebugDraw() const
 	m_visited.DebugDraw();
 }
 
-PathfindingSimple::Node* PathfindingSimple::Network::
+PathGrid::Node* PathGrid::Network::
 QueryNode(const d2d::Vector& pos) const
 {
 	if (!d2d::Math::isPointInRect(pos, m_region)) {
@@ -165,7 +165,7 @@ QueryNode(const d2d::Vector& pos) const
 	return &m_nodes[y * m_col + x];
 }
 
-void PathfindingSimple::Network::
+void PathGrid::Network::
 Expend(VisitedNode* node, const d2d::Vector& end)
 {
 	std::vector<Connection> connections;
@@ -195,7 +195,7 @@ Expend(VisitedNode* node, const d2d::Vector& end)
 	}
 }
 
-void PathfindingSimple::Network::
+void PathGrid::Network::
 GetConnections(VisitedNode* node, std::vector<Connection>& connections) const
 {
 	int y = node->m_id / m_col;

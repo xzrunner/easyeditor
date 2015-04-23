@@ -1,8 +1,8 @@
-#ifndef _LR_PREVIEW_PATHFINDING_SIMPLE_H_
-#define _LR_PREVIEW_PATHFINDING_SIMPLE_H_
+#ifndef _LR_PREVIEW_PATH_GRID_H_
+#define _LR_PREVIEW_PATH_GRID_H_
 
 #include "IPathfinding.h"
-#include "PathfindingUtil.h"
+#include "PathUtil.h"
 
 #include <drag2d.h>
 
@@ -11,10 +11,10 @@ namespace lr
 namespace preview
 {
 
-class PathfindingSimple : public IPathfinding
+class PathGrid : public IPathfinding
 {
 public:
-	PathfindingSimple(const d2d::Rect& region, int row, int col);
+	PathGrid(const d2d::Rect& region, int row, int col);
 
 	virtual void DisableRegion(const d2d::ISprite* spr, bool disable);
 
@@ -75,7 +75,7 @@ private:
 		CandidateList m_candidate;
 
 		// todo
-		friend class PathfindingSimple;
+		friend class PathGrid;
 
 	}; // Network
 
@@ -84,9 +84,9 @@ private:
 
 	std::vector<d2d::Vector> m_routes;
 
-}; // PathfindingSimple
+}; // PathGrid
 
 }
 }
 
-#endif // _LR_PREVIEW_PATHFINDING_SIMPLE_H_
+#endif // _LR_PREVIEW_PATH_GRID_H_

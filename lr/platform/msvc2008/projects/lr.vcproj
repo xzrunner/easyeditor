@@ -381,27 +381,35 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\preview\PathfindingNavMesh.cpp"
+					RelativePath="..\..\..\src\lr\preview\PathGrid.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\preview\PathfindingNavMesh.h"
+					RelativePath="..\..\..\src\lr\preview\PathGrid.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\preview\PathfindingSimple.cpp"
+					RelativePath="..\..\..\src\lr\preview\PathNavMesh.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\preview\PathfindingSimple.h"
+					RelativePath="..\..\..\src\lr\preview\PathNavMesh.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\preview\PathfindingUtil.cpp"
+					RelativePath="..\..\..\src\lr\preview\PathUtil.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\lr\preview\PathfindingUtil.h"
+					RelativePath="..\..\..\src\lr\preview\PathUtil.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathVisibleSimple.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathVisibleSimple.h"
 					>
 				</File>
 			</Filter>

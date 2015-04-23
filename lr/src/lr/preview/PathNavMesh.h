@@ -1,8 +1,8 @@
-#ifndef _LR_PREVIEW_PATHFINDING_NAV_MASH_H_
-#define _LR_PREVIEW_PATHFINDING_NAV_MASH_H_
+#ifndef _LR_PREVIEW_PATH_NAV_MASH_H_
+#define _LR_PREVIEW_PATH_NAV_MASH_H_
 
 #include "IPathfinding.h"
-#include "PathfindingUtil.h"
+#include "PathUtil.h"
 
 #include <drag2d.h>
 
@@ -11,10 +11,10 @@ namespace lr
 namespace preview
 {
 
-class PathfindingNavMesh : public IPathfinding, public INetwork
+class PathNavMesh : public IPathfinding, public INetwork
 {
 public:
-	PathfindingNavMesh(const d2d::Rect& region);
+	PathNavMesh(const d2d::Rect& region);
 
 	//
 	// interface IPathfinding
@@ -51,9 +51,9 @@ private:
 
 	std::vector<d2d::Vector> m_tris;
 
-}; // PathfindingNavMesh
+}; // PathNavMesh
 
 }
 }
 
-#endif // _LR_PREVIEW_PATHFINDING_NAV_MASH_H_
+#endif // _LR_PREVIEW_PATH_NAV_MASH_H_

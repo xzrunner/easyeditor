@@ -1,5 +1,5 @@
-#ifndef _LR_PREVIEW_PATHFINDING_UTIL_H_
-#define _LR_PREVIEW_PATHFINDING_UTIL_H_
+#ifndef _LR_PREVIEW_PATH_UTIL_H_
+#define _LR_PREVIEW_PATH_UTIL_H_
 
 #include <drag2d.h>
 
@@ -88,4 +88,4 @@ private:
 }
 }
 
-#endif // _LR_PREVIEW_PATHFINDING_UTIL_H_
+#endif // _LR_PREVIEW_PATH_UTIL_H_

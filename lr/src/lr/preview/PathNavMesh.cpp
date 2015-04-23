@@ -1,4 +1,4 @@
-#include "PathfindingNavMesh.h"
+#include "PathNavMesh.h"
 
 #include <easyshape.h>
 
@@ -7,13 +7,13 @@ namespace lr
 namespace preview
 {
 
-PathfindingNavMesh::PathfindingNavMesh(const d2d::Rect& region)
+PathNavMesh::PathNavMesh(const d2d::Rect& region)
 	: m_region(region)
 	, m_visited(this)
 {
 }
 
-void PathfindingNavMesh::DisableRegion(const d2d::ISprite* spr, bool disable)
+void PathNavMesh::DisableRegion(const d2d::ISprite* spr, bool disable)
 {
 	m_tris.clear();
 
@@ -60,17 +60,17 @@ void PathfindingNavMesh::DisableRegion(const d2d::ISprite* spr, bool disable)
 	d2d::Triangulation::linesAndLoops(all_bound, lines, loops, m_tris);
 }
 
-void PathfindingNavMesh::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
+void PathNavMesh::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 {
 	
 }
 
-void PathfindingNavMesh::DebugDraw() const
+void PathNavMesh::DebugDraw() const
 {
 	d2d::PrimitiveDraw::drawTrianglesLine(m_tris, d2d::LIGHT_RED);
 }
 
-d2d::Vector PathfindingNavMesh::TransIDToPos(int id) const
+d2d::Vector PathNavMesh::TransIDToPos(int id) const
 {
 	d2d::Vector ret;
 	ret.setInvalid();
