@@ -1,5 +1,6 @@
 #include "EditDialog.h"
 #include "Symbol.h"
+#include "Sprite.h"
 #include "LibraryPanel.h"
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
@@ -14,18 +15,21 @@ BEGIN_EVENT_TABLE(EditDialog, wxDialog)
 	EVT_CLOSE(EditDialog::OnClose)
 END_EVENT_TABLE()
 
-EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
+EditDialog::EditDialog(wxWindow* parent, Sprite* edited, 
+					   const std::vector<d2d::ISprite*>& bg_sprites)
 	: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_symbol(NULL)
 	, m_stage(NULL)
 {
-	if (symbol) {
-		symbol->Retain();
-		m_symbol = symbol;
-		m_symbol->reloadTexture();
-	}
+	assert(edited);
+
+	Symbol* symbol = const_cast<Symbol*>(&edited->getSymbol());
+	symbol->Retain();
+	m_symbol = symbol;
+	m_symbol->reloadTexture();
 	SetTitle(symbol->getFilepath());
-	InitLayout();
+
+	InitLayout(edited, bg_sprites);
 
 	m_stage->setTitleStatus(true);
 }
@@ -49,13 +53,13 @@ EditDialog::~EditDialog()
 // 	vert_splitter->SplitVertically(library, stage);
 // }
 
-void EditDialog::InitLayout()
+void EditDialog::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
 {
 	wxSplitterWindow* right_splitter = new wxSplitterWindow(this);
 	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
 
 	LibraryPanel* library = new LibraryPanel(left_splitter);
-	StagePanel* stage = new StagePanel(left_splitter, this, m_symbol, library);
+	StagePanel* stage = new StagePanel(left_splitter, this, edited, bg_sprites, library);
 	m_stage = stage;
 
 	left_splitter->SetSashGravity(0.15f);

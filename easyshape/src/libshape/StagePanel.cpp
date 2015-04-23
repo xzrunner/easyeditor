@@ -26,7 +26,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_toolbar(NULL)
 {
 	m_canvas = new StageCanvas(this, edited, bg_sprites);
-	m_symbol = (libshape::Symbol*)(&edited->getSymbol());
+	m_symbol = (Symbol*)(&edited->getSymbol());
 	if (m_symbol) {
 		m_symbol->Retain();
 	}

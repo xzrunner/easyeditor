@@ -19,19 +19,20 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   Symbol* symbol, d2d::LibraryPanel* library)
+					   d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites, 
+					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(this, library)
-	, d2d::ShapesPanelImpl(this, new SymbolContainer(symbol))
+	, d2d::ShapesPanelImpl(this, new SymbolContainer((Symbol*)(&edited->getSymbol())))
 {	
-	if (symbol) {
-		m_symbol = symbol;
-		symbol->Retain();
-	}
-
 	m_editOP = new libshape::EditPolylineOP<libshape::DrawPolygonEdgeOP, 
 		d2d::SelectShapesOP>(this, this, NULL, NULL, 5);
-	m_canvas = new StageCanvas(this);
+	m_canvas = new StageCanvas(this, edited, bg_sprites);
+
+	m_symbol = (Symbol*)(&edited->getSymbol());
+	if (m_symbol) {
+		m_symbol->Retain();
+	}
 }
 
 StagePanel::~StagePanel()

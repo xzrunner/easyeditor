@@ -7,15 +7,17 @@ namespace etexture
 {
 
 class Symbol;
+class Sprite;
 
 class EditDialog : public wxDialog
 {
 public:
-	EditDialog(wxWindow* parent, Symbol* symbol);
+	EditDialog(wxWindow* parent, Sprite* edited, 
+		const std::vector<d2d::ISprite*>& bg_sprites);
 	virtual ~EditDialog();
 
 private:
-	void InitLayout();
+	void InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites);
 
 	void OnClose(wxCloseEvent& event);
 
