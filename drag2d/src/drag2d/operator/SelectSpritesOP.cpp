@@ -99,7 +99,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 		}
 		else
 		{
-			if (!m_selection->IsExist(selected))
+			if (!m_selection->IsExist(selected) && !wxGetKeyState(WXK_SPACE))
 			{
 				m_selection->Clear();
 				m_selection->Add(selected);
