@@ -21,7 +21,9 @@ SettingData::SettingData()
 void SettingData::LoadFromFile(const Json::Value& value)
 {
 	open_sprite_capture = value["sprite_capture"].asBool();
-	auto_get_focus = value["auto_get_focus"].asBool();
+	if (!value["auto_get_focus"].isNull()) {
+		auto_get_focus = value["auto_get_focus"].asBool();
+	}
 
 	open_image_edge_clip = value["image_edge_clip"].asBool();
 	visible_image_edge = value["visible_image_edge"].asBool();
