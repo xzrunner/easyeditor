@@ -1,5 +1,6 @@
 #include "FileIO.h"
 
+#include "frame/SettingCfg.h"
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
 
@@ -27,6 +28,13 @@ void FileIO::load(const char* filename, StagePanel* stage,
 
 	// layers
 	library->LoadFromFile(value["layer"], dir);
+
+	// size
+	if (!value["size"].isNull()) {
+		SettingCfg* cfg = SettingCfg::Instance();
+		cfg->m_view_width = value["size"]["width"].asInt();
+		cfg->m_view_height = value["size"]["height"].asInt();
+	}
 }
 
 void FileIO::store(const char* filename, StagePanel* stage,
@@ -41,6 +49,11 @@ void FileIO::store(const char* filename, StagePanel* stage,
 
 	// layers
 	library->StoreToFile(value["layer"], dir);
+
+	// size
+	SettingCfg* cfg = SettingCfg::Instance();
+	value["size"]["width"] = cfg->m_view_width;
+	value["size"]["height"] = cfg->m_view_height;
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
