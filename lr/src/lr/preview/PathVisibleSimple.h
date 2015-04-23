@@ -58,6 +58,8 @@ private:
 	void RemoveBoundary(std::map<const d2d::ISprite*, std::vector<Node*> >::iterator itr);
 
 	void BuildConnection(const std::vector<Node*>& nodes) const;
+	bool IsSegIntersectAllBound(const d2d::Vector& p0, const d2d::Vector& p1, 
+		const std::vector<Node*>& bound) const;
 	bool IsSegIntersectBound(const d2d::Vector& p0, const d2d::Vector& p1, 
 		const std::vector<Node*>& bound) const;
 

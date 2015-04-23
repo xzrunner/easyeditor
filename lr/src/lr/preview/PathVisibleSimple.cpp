@@ -32,11 +32,20 @@ void PathVisibleSimple::QueryRoute(const d2d::Vector& start, const d2d::Vector& 
 
 void PathVisibleSimple::DebugDraw() const
 {
-// 	std::map<const d2d::ISprite*, std::vector<d2d::Vector> >::const_iterator itr
-// 		= m_bounds.begin();
-// 	for ( ; itr != m_bounds.end(); ++itr) {
-// 		d2d::PrimitiveDraw::drawPolyline();
-// 	}
+	if (m_bounds.empty()) {
+		return;
+	}
+
+ 	std::map<const d2d::ISprite*, std::vector<Node*> >::const_iterator itr
+ 		= m_bounds.begin();
+	for (int i = 0, n = itr->second.size(); i < n; ++i)
+	{
+		Node* node = itr->second[i];
+		for (int i = 0, n = node->connections.size(); i < n; ++i) {
+			const Connection& conn = node->connections[i];
+			d2d::PrimitiveDraw::drawLine(node->pos, conn.n->pos, d2d::LIGHT_RED);
+		}
+	}
 }
 
 d2d::Vector PathVisibleSimple::TransIDToPos(int id) const
@@ -121,7 +130,41 @@ void PathVisibleSimple::RemoveBoundary(std::map<const d2d::ISprite*, std::vector
 
 void PathVisibleSimple::BuildConnection(const std::vector<Node*>& nodes) const
 {
-	
+	for (int i = 0, n = nodes.size(); i < n; ++i) 
+	{
+		Node* n0 = nodes[i];
+		std::map<const d2d::ISprite*, std::vector<Node*> >::const_iterator itr
+			= m_bounds.begin();
+		for ( ; itr != m_bounds.end(); ++itr) 
+		{
+			for (int i = 0, n = itr->second.size(); i < n; ++i)
+			{
+				Node* n1 = itr->second[i];
+				if (!IsSegIntersectAllBound(n0->pos, n1->pos, nodes))
+				{
+					float dis = d2d::Math::getDistance(n0->pos, n1->pos);
+					n0->connections.push_back(Connection(dis, n1));
+					n1->connections.push_back(Connection(dis, n0));
+				}
+			}
+		}
+	}
+}
+
+bool PathVisibleSimple::IsSegIntersectAllBound(const d2d::Vector& p0, const d2d::Vector& p1, 
+											   const std::vector<Node*>& bound) const
+{
+	if (IsSegIntersectBound(p0, p1, bound)) {
+		return true;
+	}
+	std::map<const d2d::ISprite*, std::vector<Node*> >::const_iterator itr
+		= m_bounds.begin();
+	for ( ; itr != m_bounds.end(); ++itr) {
+		if (IsSegIntersectBound(p0, p1, itr->second)) {
+			return true;
+		}
+	}
+	return false;
 }
 
 bool PathVisibleSimple::IsSegIntersectBound(const d2d::Vector& p0, const d2d::Vector& p1, 
@@ -129,9 +172,9 @@ bool PathVisibleSimple::IsSegIntersectBound(const d2d::Vector& p0, const d2d::Ve
 {
 	std::vector<d2d::Vector> points;
 	for (int i = 0, n = bound.size(); i < n; ++i) {
-		points.push_back(bound[i]);
-		
+		points.push_back(bound[i]->pos);
 	}
+	return d2d::Math::IsSegmentIntersectPolyline(p0, p1, points);	
 }
 
 }
