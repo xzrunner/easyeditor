@@ -38,12 +38,15 @@ void PathVisibleSimple::DebugDraw() const
 
  	std::map<const d2d::ISprite*, std::vector<Node*> >::const_iterator itr
  		= m_bounds.begin();
-	for (int i = 0, n = itr->second.size(); i < n; ++i)
+	for ( ; itr != m_bounds.end(); ++itr)
 	{
-		Node* node = itr->second[i];
-		for (int i = 0, n = node->connections.size(); i < n; ++i) {
-			const Connection& conn = node->connections[i];
-			d2d::PrimitiveDraw::drawLine(node->pos, conn.n->pos, d2d::LIGHT_RED);
+		for (int i = 0, n = itr->second.size(); i < n; ++i)
+		{
+			Node* node = itr->second[i];
+			for (int j = 0, m = node->connections.size(); j < m; ++j) {
+				const Connection& conn = node->connections[j];
+				d2d::PrimitiveDraw::drawLine(node->pos, conn.n->pos, d2d::LIGHT_RED);
+			}
 		}
 	}
 }
