@@ -1,6 +1,7 @@
 #include "EditDialogSimple.h"
 #include "StagePanel.h"
 #include "Symbol.h"
+#include "Sprite.h"
 
 #include "BezierShape.h"
 #include "ChainShape.h"
@@ -22,14 +23,15 @@ BEGIN_EVENT_TABLE(EditDialogSimple, wxDialog)
 	EVT_CLOSE(EditDialogSimple::OnClose)
 END_EVENT_TABLE()
 
-EditDialogSimple::EditDialogSimple(wxWindow* parent, Symbol* symbol)
+EditDialogSimple::EditDialogSimple(wxWindow* parent, d2d::ISprite* edited,
+								   const std::vector<d2d::ISprite*>& bg_sprites)
  	: wxDialog(parent, wxID_ANY, "Edit Shape", wxDefaultPosition, 
 	wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_stage(NULL)
 	, m_capture(5)
 {
-	InitLayout(symbol);
-	InitEditOP(symbol);
+	InitLayout(edited, bg_sprites);
+	InitEditOP(edited);
 
 	m_stage->setTitleStatus(true);
 }
@@ -38,21 +40,21 @@ EditDialogSimple::~EditDialogSimple()
 {
 }
 
-void EditDialogSimple::InitLayout(Symbol* symbol)
+void EditDialogSimple::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
-	m_stage = new StagePanel(this, this, symbol);
+	m_stage = new StagePanel(this, this, edited, bg_sprites);
 	sizer->Add(m_stage, 1, wxEXPAND);
 
 	SetSizer(sizer);
 }
 
-void EditDialogSimple::InitEditOP(Symbol* symbol)
+void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 {
 	d2d::AbstractEditOP* op = NULL;
 
-	ShapeType type = symbol->GetType();
+	ShapeType type = static_cast<Sprite*>(edited)->getSymbol().GetType();
 	switch (type)
 	{
 	case e_rect:

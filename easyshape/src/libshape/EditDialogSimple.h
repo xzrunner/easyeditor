@@ -1,7 +1,7 @@
 #ifndef _LIBSHAPE_ETID_DIALOG_SIMPLE_H_
 #define _LIBSHAPE_ETID_DIALOG_SIMPLE_H_
 
-#include <wx/wx.h>
+#include <drag2d.h>
 
 #include "NodeCaptureStatic.h"
 
@@ -14,12 +14,13 @@ class StagePanel;
 class EditDialogSimple : public wxDialog
 {
 public:
-	EditDialogSimple(wxWindow* parent, Symbol* symbol);
+	EditDialogSimple(wxWindow* parent, d2d::ISprite* edited,
+		const std::vector<d2d::ISprite*>& bg_sprites);
 	virtual ~EditDialogSimple();
 
 private:
-	void InitLayout(Symbol* symbol);
-	void InitEditOP(Symbol* symbol);
+	void InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites);
+	void InitEditOP(d2d::ISprite* edited);
 
 	void OnClose(wxCloseEvent& event);
 

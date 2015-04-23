@@ -101,8 +101,12 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	}
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
 	{
-		libshape::Symbol& symbol = const_cast<libshape::Symbol&>(shape->getSymbol());
-		libshape::EditDialogSimple dlg(m_editPanel, &symbol);
+//		libshape::Symbol& symbol = const_cast<libshape::Symbol&>(shape->getSymbol());
+
+		std::vector<d2d::ISprite*> sprites;
+		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+
+		libshape::EditDialogSimple dlg(m_editPanel, shape, sprites);
 //		libshape::EditDialog dlg(m_editPanel, &symbol);
 		dlg.ShowModal();
 

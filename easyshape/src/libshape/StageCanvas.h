@@ -12,6 +12,8 @@ class StageCanvas : public d2d::OrthoCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
+	StageCanvas(StagePanel* stage, d2d::ISprite* edited,
+		const std::vector<d2d::ISprite*>& bg_sprites);
 
 public:
 	void drawGuideLines();
@@ -24,6 +26,9 @@ protected:
 	void onKeyDown(wxKeyEvent& event);
 
 private:
+	d2d::ISprite* m_edited;
+	std::vector<d2d::ISprite*> m_bg_sprites;
+
 	d2d::MultiShapesImpl* m_stage_impl;
 
 private:

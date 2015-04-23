@@ -12,6 +12,17 @@ END_EVENT_TABLE()
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::OrthoCanvas(stage)
 	, m_stage_impl(stage)
+	, m_edited(NULL)
+{
+}
+
+StageCanvas::StageCanvas(StagePanel* stage, 
+						 d2d::ISprite* edited,
+						 const std::vector<d2d::ISprite*>& bg_sprites)
+	: d2d::OrthoCanvas(stage)
+	, m_stage_impl(stage)
+	, m_edited(edited)
+	, m_bg_sprites(bg_sprites)
 {
 }
 
@@ -36,12 +47,23 @@ void StageCanvas::initGL()
 
 void StageCanvas::onDraw()
 {
+	if (m_edited) 
+	{
+		d2d::Matrix mat;
+		mat.translate(-m_edited->getPosition().x, -m_edited->getPosition().y);
+		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
+			d2d::SpriteDraw::drawSprite(m_bg_sprites[i], mat);
+		}
+	}
+
 	m_stage_impl->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
 
 	libshape::StageCanvas::drawGuideLines();
 
- 	const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_editPanel)->GetSymbol();
-	symbol.draw(d2d::Matrix());
+	if (!m_edited) {
+		const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_editPanel)->GetSymbol();
+		symbol.draw(d2d::Matrix());
+	}
 
 	m_editPanel->drawEditTemp();
 }

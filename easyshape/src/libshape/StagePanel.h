@@ -15,9 +15,9 @@ public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::LibraryPanel* library);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		Symbol* symbol);
+		d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites);
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		Symbol* symbol, d2d::LibraryPanel* library);
+		Symbol* symbol/*, d2d::LibraryPanel* library*/);
 	virtual ~StagePanel();
 
 	//

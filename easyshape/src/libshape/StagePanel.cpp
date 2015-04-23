@@ -20,20 +20,20 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   Symbol* symbol)
+					   d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl(parent)
 	, m_toolbar(NULL)
 {
-	m_canvas = new StageCanvas(this);
-	m_symbol = symbol;
+	m_canvas = new StageCanvas(this, edited, bg_sprites);
+	m_symbol = (libshape::Symbol*)(&edited->getSymbol());
 	if (m_symbol) {
 		m_symbol->Retain();
 	}
 }
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   Symbol* symbol, d2d::LibraryPanel* library)
+					   Symbol* symbol/*, d2d::LibraryPanel* library*/)
 	: EditPanel(parent, frame)
 	, MultiShapesImpl(parent)
 	, m_toolbar(NULL)
@@ -44,7 +44,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		m_symbol->Retain();
 	}
 
-	SetDropTarget(new DropTarget(this, library));
+//	SetDropTarget(new DropTarget(this, library));
 }
 
 StagePanel::~StagePanel()
