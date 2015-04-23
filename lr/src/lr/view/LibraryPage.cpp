@@ -10,6 +10,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 	, m_key(key)
 	, m_stage(stage)
 	, m_visible(true)
+	, m_editable(true)
 {
 	initLayout();
 }
@@ -45,6 +46,12 @@ void LibraryPage::LoadFromFile(const Json::Value& value, const std::string& dir)
 	if (!m_visible) {
 		VisibleAllSprites(false);
 	}
+
+	m_editable = layer_val["editable"].isNull() || layer_val["editable"].asBool();
+	m_editable_ctrl->SetValue(m_editable);
+	if (!m_editable) {
+		EditableAllSprites(false);
+	}
 }
 
 void LibraryPage::StoreToFile(Json::Value& value, const std::string& dir) const
@@ -62,10 +69,18 @@ void LibraryPage::StoreToFile(Json::Value& value, const std::string& dir) const
 
 void LibraryPage::InitLayoutExtend(wxSizer* sizer)
 {
-	m_visible_ctrl = new wxCheckBox(this, wxID_ANY, wxT("可见"));
-	Connect(m_visible_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-		wxCommandEventHandler(LibraryPage::OnChangeVisible));
-	sizer->Add(m_visible_ctrl, 0, wxALIGN_LEFT);
+	{
+		m_visible_ctrl = new wxCheckBox(this, wxID_ANY, wxT("可见"));
+		Connect(m_visible_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(LibraryPage::OnChangeVisible));
+		sizer->Add(m_visible_ctrl, 0, wxALIGN_LEFT);
+	}
+	{
+		m_editable_ctrl = new wxCheckBox(this, wxID_ANY, wxT("编辑"));
+		Connect(m_editable_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+			wxCommandEventHandler(LibraryPage::OnChangeEditable));
+		sizer->Add(m_editable_ctrl, 0, wxALIGN_LEFT);
+	}
 	sizer->AddSpacer(20);
 }
 
@@ -103,6 +118,17 @@ void LibraryPage::OnChangeVisible(wxCommandEvent& event)
 	VisibleAllSprites(m_visible);
 }
 
+void LibraryPage::OnChangeEditable(wxCommandEvent& event)
+{
+	bool editable = event.IsChecked();
+	if (editable == m_editable) {
+		return;
+	}
+
+	m_editable = editable;	
+	EditableAllSprites(m_editable);
+}
+
 void LibraryPage::VisibleAllSprites(bool visible)
 {
 	std::vector<d2d::ISprite*> sprites;
@@ -121,6 +147,30 @@ void LibraryPage::VisibleAllSprites(bool visible)
 
 		if (find) {
 			spr->visiable = m_visible;
+		}
+	}
+
+	m_stage->Refresh();
+}
+
+void LibraryPage::EditableAllSprites(bool visible)
+{
+	std::vector<d2d::ISprite*> sprites;
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0; i < sprites.size(); ++i) {
+		d2d::ISprite* spr = sprites[i];
+
+		bool find = false;
+		int idx = 0;
+		while (d2d::ISymbol* symbol = m_list->getSymbol(idx++)) {
+			if (symbol == &spr->getSymbol()) {
+				find = true;
+				break;
+			}
+		}
+
+		if (find) {
+			spr->editable = m_editable;
 		}
 	}
 

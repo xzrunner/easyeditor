@@ -27,8 +27,10 @@ protected:
 
 private:
 	void OnChangeVisible(wxCommandEvent& event);
+	void OnChangeEditable(wxCommandEvent& event);
 
 	void VisibleAllSprites(bool visible);
+	void EditableAllSprites(bool visible);
 
 private:
 	std::string m_key;
@@ -37,6 +39,9 @@ private:
 
 	wxCheckBox* m_visible_ctrl;
 	bool m_visible;
+
+	wxCheckBox* m_editable_ctrl;
+	bool m_editable;
 
 }; // LibraryPage 
 
