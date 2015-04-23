@@ -61,19 +61,35 @@ void TextureMaterial::ReloadTexture()
 
 void TextureMaterial::Build(const std::vector<d2d::Vector>& vertices)
 {
+	std::ofstream fout("debug.txt", std::ofstream::out | std::ofstream::app);
+	if (fout.fail()) {
+		int zz = 0;
+	}
+
+	fout << "Build 0 \n";
+
 	m_vertices.clear();
 	m_texcoords.clear();
+	fout << "Build 1 \n";
 
 	std::vector<d2d::Vector> bounding;
 	d2d::Math::removeDuplicatePoints(vertices, bounding);
+	fout << "Build 2 \n";
 
 	d2d::Rect r = GetBoundingRegion(bounding);
+	fout << "Build 3 \n";
 
 	std::vector<d2d::Vector> segments;
 	GetTexBoundarySegments(r, segments);
+	fout << "Build 4 \n";
+
 	d2d::Triangulation::lines(bounding, segments, m_vertices);
+	fout << "Build 5 \n";
 
 	CalTexcoords(r);
+	fout << "Build 6 \n\n\n\n\n";
+
+	fout.close();
 }
 
 void TextureMaterial::Build(const std::vector<d2d::Vector>& vertices, const std::vector<d2d::Vector>& segments)
@@ -88,6 +104,7 @@ void TextureMaterial::Build(const std::vector<d2d::Vector>& vertices, const std:
 
 	std::vector<d2d::Vector> _segments;
 	GetTexBoundarySegments(r, _segments);
+
 	copy(segments.begin(), segments.end(), back_inserter(_segments));
 	d2d::Triangulation::lines(bounding, _segments, m_vertices);
 
