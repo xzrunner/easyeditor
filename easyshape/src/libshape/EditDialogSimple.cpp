@@ -30,6 +30,8 @@ EditDialogSimple::EditDialogSimple(wxWindow* parent, Symbol* symbol)
 {
 	InitLayout(symbol);
 	InitEditOP(symbol);
+
+	m_stage->setTitleStatus(true);
 }
 
 EditDialogSimple::~EditDialogSimple()
