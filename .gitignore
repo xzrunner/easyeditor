@@ -170,4 +170,5 @@ easydb/src/glfw/glfw.lib
 easycomplex/platform/msvc2008/projects/_tmp_ejoy2d_preview/
 sg/platform/msvc2008/sg
 lr/platform/msvc2008/lr
+lr/res
 easyui/platform/msvc2008/easyui
