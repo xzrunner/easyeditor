@@ -34,7 +34,7 @@ void Task::store(const char* filename) const
 
 bool Task::isDirty() const
 {
-	return false;
+	return true;
 }
 
 void Task::clear()
