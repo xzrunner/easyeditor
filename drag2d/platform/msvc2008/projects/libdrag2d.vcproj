@@ -2206,6 +2206,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\TrapezoidalDec.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\drag2d\algorithms\TrapezoidalDec.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\algorithms\Triangulation.cpp"
 				>
 				<FileConfiguration
