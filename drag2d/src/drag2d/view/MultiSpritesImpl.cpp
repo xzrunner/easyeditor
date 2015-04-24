@@ -1,6 +1,7 @@
 #include "MultiSpritesImpl.h"
 
 #include "dataset/AbstractBV.h"
+#include "common/Rect.h"
 
 namespace d2d
 {
@@ -18,9 +19,16 @@ MultiSpritesImpl::~MultiSpritesImpl()
 
 ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 {
-	ISprite* result = NULL;
-	traverseSprites(PointQueryVisitor(pos, &result), e_editable, false);
-	return result;
+	ISprite* selected = NULL;
+	traverseSprites(PointQueryVisitor(pos, &selected), e_editable, false);
+	if (selected && !selected->editable) {
+		std::vector<ISprite*> sprites;
+		querySpritesByRect(Rect(pos, 1, 1), false, sprites);
+		if (!sprites.empty()) {
+			selected = sprites.back();
+		}
+	}
+	return selected;
 }
 
 void MultiSpritesImpl::querySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const

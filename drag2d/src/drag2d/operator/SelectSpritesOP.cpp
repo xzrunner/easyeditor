@@ -282,13 +282,7 @@ ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
 	}
 	if (!selected) {
 		ISprite* spr = m_spritesImpl->querySpriteByPos(pos);
-		if (!spr || !spr->editable) {
-			std::vector<ISprite*> sprites;
-			m_spritesImpl->querySpritesByRect(Rect(pos, 1, 1), false, sprites);
-			if (!sprites.empty()) {
-				selected = sprites.back();
-			}
-		} else {
+		if (spr) {
 			selected = spr;
 		}
 	}
