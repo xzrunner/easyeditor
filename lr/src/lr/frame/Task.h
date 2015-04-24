@@ -37,6 +37,7 @@ private:
 
  	LibraryPanel* m_library;
  	StagePanel* m_stage;
+	d2d::ViewlistPanel* m_viewlist;
 
 }; // Task
 

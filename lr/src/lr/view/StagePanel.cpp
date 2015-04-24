@@ -46,6 +46,8 @@ StagePanel::~StagePanel()
 
 void StagePanel::clear()
 {
+	d2d::EditPanel::clear();
+	d2d::SpritesPanelImpl::clearSprites();
 }
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)

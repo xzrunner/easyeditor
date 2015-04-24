@@ -39,7 +39,11 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
+	m_viewlist->clear();
+
+	m_library->clear();
 	m_stage->clear();
+	m_library->Refresh();
 	m_stage->Refresh();
 }
 
@@ -72,11 +76,11 @@ void Task::InitLayout()
 	left_splitter->SetSashGravity(0.2f);
 	left_splitter->SplitVertically(left_hori_splitter, m_stage);
 
-	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, m_stage, property);
-	m_stage->SetViewlist(viewlist);
+	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, m_stage, property);
+	m_stage->SetViewlist(m_viewlist);
 
 	right_splitter->SetSashGravity(0.85f);
-	right_splitter->SplitVertically(left_splitter, viewlist);
+	right_splitter->SplitVertically(left_splitter, m_viewlist);
 
 	m_root = right_splitter;
 }
