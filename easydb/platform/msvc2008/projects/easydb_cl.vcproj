@@ -542,6 +542,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\RemoveDuplicateSprite.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\RemoveDuplicateSprite.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb\ScaleJson.cpp"
 					>
 				</File>

@@ -37,6 +37,7 @@
 #include "BinB4R.h"
 #include "BlockCompress.h"
 #include "AnimToComplexWithColor.h"
+#include "RemoveDuplicateSprite.h"
 
 namespace edb
 {
@@ -80,6 +81,7 @@ void CommandLoader::Init()
 	fc->Register(BinB4R::Create());
 	fc->Register(BlockCompress::Create());
 	fc->Register(AnimToComplexWithColor::Create());
+	fc->Register(RemoveDuplicateSprite::Create());
 }
 
 }
