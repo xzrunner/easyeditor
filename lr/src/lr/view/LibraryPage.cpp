@@ -65,6 +65,7 @@ void LibraryPage::StoreToFile(Json::Value& value, const std::string& dir) const
 	}
 
 	layer_val["visible"] = m_visible;
+	layer_val["editable"] = m_editable;
 }
 
 void LibraryPage::InitLayoutExtend(wxSizer* sizer)
