@@ -44,8 +44,7 @@ void StageCanvas::onDraw()
 {
 	if (m_edited) 
 	{
-		d2d::Matrix mat;
-		mat.translate(-m_edited->getPosition().x, -m_edited->getPosition().y);
+		d2d::Matrix mat(m_edited->GetTransInvMatrix());
 		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
 			d2d::SpriteDraw::drawSprite(m_bg_sprites[i], mat);
 		}

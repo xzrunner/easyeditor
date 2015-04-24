@@ -328,6 +328,16 @@ void ISprite::GetTransMatrix(Matrix& mt) const
 		xScale, yScale, 0, 0, m_shear.x, m_shear.y);
 }
 
+Matrix ISprite::GetTransInvMatrix() const
+{
+	d2d::Matrix mat;
+	mat.rotate(-m_angle);
+	mat.shear(-m_shear.x, -m_shear.y);
+	mat.translate(-m_pos.x/m_scale.x, -m_pos.y/m_scale.y);
+	mat.scale(1/m_scale.x, 1/m_scale.y);
+	return mat;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // class SpriteCmp
 //////////////////////////////////////////////////////////////////////////

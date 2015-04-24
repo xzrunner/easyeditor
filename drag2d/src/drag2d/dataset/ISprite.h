@@ -75,6 +75,7 @@ namespace d2d
 		}
 
 		void GetTransMatrix(Matrix& mt) const;
+		Matrix GetTransInvMatrix() const;
 
 	public:
 		// info
