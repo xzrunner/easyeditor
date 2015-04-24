@@ -25,6 +25,7 @@ namespace d2d
 		void SetScale(float s) { m_scale = s; }
 
 		const Vector& GetPosition() const { return m_center; }
+		void SetPosition(const Vector& pos) { m_center = pos; } 
 
 	private:
 		Vector m_center;

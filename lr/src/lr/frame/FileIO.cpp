@@ -35,6 +35,16 @@ void FileIO::load(const char* filename, StagePanel* stage,
 		cfg->m_view_width = value["size"]["width"].asInt();
 		cfg->m_view_height = value["size"]["height"].asInt();
 	}
+
+	// camera
+	if (!value["camera"].isNull()) {
+		float s = value["camera"]["scale"].asDouble();
+		float x = value["camera"]["x"].asDouble(),
+			y = value["camera"]["y"].asDouble();
+		d2d::Camera* cam = stage->getCamera();
+		cam->SetScale(s);
+		cam->SetPosition(d2d::Vector(x, y));
+	}
 }
 
 void FileIO::store(const char* filename, StagePanel* stage,
@@ -54,6 +64,12 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	SettingCfg* cfg = SettingCfg::Instance();
 	value["size"]["width"] = cfg->m_view_width;
 	value["size"]["height"] = cfg->m_view_height;
+
+	// camera
+	d2d::Camera* cam = stage->getCamera();
+	value["camera"]["scale"] = cam->GetScale();
+	value["camera"]["x"] = cam->GetPosition().x;
+	value["camera"]["y"] = cam->GetPosition().y;
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
