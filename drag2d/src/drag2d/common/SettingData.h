@@ -20,6 +20,7 @@ struct SettingData
 	bool visible_label_bg;
 	bool visible_label_text;
 	bool visible_node_name;
+	bool visible_shape;
 
 	// image filter
 	bool linear_filter;

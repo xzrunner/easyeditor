@@ -65,32 +65,15 @@ void Symbol::draw(const d2d::Matrix& mt,
  	if (m_bg) {
  		m_bg->draw(mt, mul, add, r_trans, g_trans, b_trans, sprite);
  	}
-  	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
-  		m_bg_outline[i]->draw(mt);
-  	}
-
-// 	for (int i = 0; i < m_bg_tri_strips.size(); ++i) {
-// 		const std::vector<d2d::Vector>& strip = m_bg_tri_strips[i];
-// 		assert(strip.size() >= 3);
-// 		for (int i = 0; i < strip.size() - 2; ++i) {
-// 			d2d::PrimitiveDraw::drawLine(strip[i], strip[i+1], d2d::LIGHT_RED);
-// 			d2d::PrimitiveDraw::drawLine(strip[i+1], strip[i+2], d2d::LIGHT_RED);
-// 			d2d::PrimitiveDraw::drawLine(strip[i+2], strip[i], d2d::LIGHT_RED);
-// 		}
-// 	}
-	//for (int i = 0; i < m_bg_tri_strips.size(); ++i) {
-	//	const std::vector<d2d::Vector>& strip = m_bg_tri_strips[i];
-	//	assert(strip.size() >= 3);
-	//	for (int i = 0; i < strip.size() - 2; i += 3) {
-	//		d2d::PrimitiveDraw::drawLine(strip[i], strip[i+1], d2d::LIGHT_RED);
-	//		d2d::PrimitiveDraw::drawLine(strip[i+1], strip[i+2], d2d::LIGHT_RED);
-	//		d2d::PrimitiveDraw::drawLine(strip[i+2], strip[i], d2d::LIGHT_RED);
-	//	}
-	//}
-
- 	for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
- 		m_shapes[i]->draw(mt);
- 	}
+	if (d2d::Config::Instance()->GetSettings().visible_shape)
+	{
+		for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
+			m_bg_outline[i]->draw(mt);
+		}
+		for (size_t i = 0, n = m_shapes.size(); i < n; ++i) {
+			m_shapes[i]->draw(mt);
+		}
+	}
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

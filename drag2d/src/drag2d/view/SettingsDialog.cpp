@@ -101,6 +101,13 @@ wxSizer* SettingsDialog::initViewPanel()
 				wxCommandEventHandler(SettingsDialog::onChangeNodeName));
 			sizer->Add(check, 0);
 		}
+		{
+			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("shape"));
+			check->SetValue(m_settings.visible_shape);
+			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+				wxCommandEventHandler(SettingsDialog::onChangeShape));
+			sizer->Add(check, 0);
+		}
 	}
 	return sizer;
 }
@@ -145,6 +152,11 @@ void SettingsDialog::onChangeFontText(wxCommandEvent& event)
 void SettingsDialog::onChangeNodeName(wxCommandEvent& event)
 {
 	m_settings.visible_node_name = event.IsChecked();
+}
+
+void SettingsDialog::onChangeShape(wxCommandEvent& event)
+{
+	m_settings.visible_shape = event.IsChecked();
 }
 
 }

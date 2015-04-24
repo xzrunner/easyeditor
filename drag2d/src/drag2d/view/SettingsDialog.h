@@ -27,6 +27,7 @@ private:
 	void onChangeFontBackground(wxCommandEvent& event);
 	void onChangeFontText(wxCommandEvent& event);
 	void onChangeNodeName(wxCommandEvent& event);
+	void onChangeShape(wxCommandEvent& event);
 
 private:
 	SettingData& m_settings;
