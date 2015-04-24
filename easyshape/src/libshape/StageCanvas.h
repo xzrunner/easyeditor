@@ -22,17 +22,11 @@ protected:
 	virtual void initGL();
 	virtual void onDraw();
 
-	void onMouse(wxMouseEvent& event);
-	void onKeyDown(wxKeyEvent& event);
-
 private:
 	d2d::ISprite* m_edited;
 	std::vector<d2d::ISprite*> m_bg_sprites;
 
 	d2d::MultiShapesImpl* m_stage_impl;
-
-private:
-	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

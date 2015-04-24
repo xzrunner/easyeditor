@@ -4,11 +4,6 @@
 namespace libshape
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_MOUSE_EVENTS(StageCanvas::onMouse)
-	EVT_KEY_DOWN(StageCanvas::onKeyDown)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* stage)
 	: d2d::OrthoCanvas(stage)
 	, m_stage_impl(stage)
@@ -66,16 +61,6 @@ void StageCanvas::onDraw()
 	}
 
 	m_editPanel->drawEditTemp();
-}
-
-void StageCanvas::onMouse(wxMouseEvent& event)
-{
-	m_editPanel->onMouse(event);
-}
-
-void StageCanvas::onKeyDown(wxKeyEvent& event)
-{
-	m_editPanel->onKeyDown(event);
 }
 
 }
