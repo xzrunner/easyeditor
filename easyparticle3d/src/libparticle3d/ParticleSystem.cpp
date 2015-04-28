@@ -1,17 +1,19 @@
 #include "ParticleSystem.h"
 #include "Symbol.h"
+#include "config.h"
+#include "Recorder.h"
 
 namespace eparticle3d
 {
 
 // ParticleSystem::ParticleSystem(/*const ParticleSystem& ps*/)
-// 	: m_recorder(1000)
+// 	: m_recorder(PARTICLE_CAP)
 // {
 // 	// todo
 // }
 
 ParticleSystem::ParticleSystem(unsigned int buffer)
-	: m_recorder(buffer)
+	: m_recorder(new Recorder(buffer))
 {
 //	delete[] pStart;
 	pLast = pStart = new Particle[buffer];
@@ -44,15 +46,67 @@ ParticleSystem::ParticleSystem(unsigned int buffer)
 	orient_to_movement = false;
 }
 
+ParticleSystem::ParticleSystem(const ParticleSystem& ps)
+	: m_recorder(NULL)
+{
+	//	delete[] pStart;
+	pLast = pStart = new Particle[PARTICLE_CAP];
+	pEnd = pStart + PARTICLE_CAP;
+
+	origin = ps.origin;
+
+	filepath = ps.filepath;
+
+	children = ps.children;
+
+	active = ps.active;
+	lifetime = ps.lifetime;
+	life = ps.life;
+
+	emitCounter = ps.emitCounter;
+
+	emission_time = ps.emission_time;
+	count = ps.count;
+
+	min_life = ps.min_life;
+	max_life = ps.max_life;
+
+	min_hori = ps.min_hori;
+	max_hori = ps.max_hori;
+	min_vert = ps.min_vert;
+	max_vert = ps.max_vert;
+
+	min_spd = ps.min_spd;
+	max_spd = ps.max_spd;
+
+	gravity = ps.gravity;
+
+	inertia = ps.inertia;
+
+	fadeout_time = ps.fadeout_time;
+
+	bounce = ps.bounce;
+
+	additive_blend = ps.additive_blend;
+
+	start_radius = ps.start_radius;
+
+	orient_to_movement = ps.orient_to_movement;
+}
+
 ParticleSystem::~ParticleSystem()
 {
+	delete m_recorder;
+
 	if (pStart != NULL)
 		delete[] pStart;
 }
 
 void ParticleSystem::draw(const d2d::Matrix& mt)
 {
-	m_recorder.FinishFrame();
+	if (m_recorder) {
+		m_recorder->FinishFrame();
+	}
 
 	vertex vertices[4];
 
@@ -76,13 +130,15 @@ void ParticleSystem::draw(const d2d::Matrix& mt)
 		_mt.translate(p->pos.x, p->pos.y);
 		d2d::SpriteDraw::drawSprite(p->pc->symbol, _mt, pos, p->angle, s, s, 0, 0, multi);
 
-		if (p->pc->m_bind_ps) {
+		if (p->m_bind_ps) {
 			d2d::Matrix _mt;
 			_mt.translate(p->pos.x, p->pos.y);
-			p->pc->m_bind_ps->draw(_mt);
+			p->m_bind_ps->draw(_mt);
 		}
 
-		m_recorder.AddItem(p->pc->symbol->getFilepath().ToStdString(), pos.x, pos.y, p->angle, s, multi);
+		if (m_recorder) {
+			m_recorder->AddItem(p->pc->symbol->getFilepath().ToStdString(), pos.x, pos.y, p->angle, s, multi);
+		}
 
 		//glPopAttrib();
 
@@ -111,11 +167,24 @@ void ParticleSystem::update(float dt)
 	Particle* p = pStart;
 	while (p != pLast)
 	{
-		if (p->pc->m_bind_ps) {
-			p->pc->m_bind_time += dt;
-			ParticleSystem* cps = p->pc->m_bind_ps;
-			if (p->pc->m_bind_time > 0.05f) {
-				p->pc->m_bind_time = 0;
+// 		if (p->pc->m_bind_ps) {
+// 			p->pc->m_bind_time += dt;
+// 			ParticleSystem* cps = p->pc->m_bind_ps;
+// 			if (p->pc->m_bind_time > 0.05f) {
+// 				p->pc->m_bind_time = 0;
+// 				cps->origin = TransCoords3To2(p->position);
+// 				cps->start();
+// 			}
+// 			cps->update(dt);
+// 		}
+
+		if (p->m_bind_ps) {
+			ParticleSystem* cps = p->m_bind_ps;
+			cps->update(dt);
+
+			p->m_bind_time += dt;
+			if (p->m_bind_time > 0.05f) {
+				p->m_bind_time = 0;
 				cps->origin = TransCoords3To2(p->position);
 				cps->start();
 			}
@@ -199,7 +268,9 @@ void ParticleSystem::reset()
 	life = lifetime = emission_time;
 	emitCounter = 0;
 
-	m_recorder.Clear();
+	if (m_recorder) {
+		m_recorder->Clear();
+	}
 }
 
 void ParticleSystem::pause()
@@ -223,7 +294,9 @@ void ParticleSystem::reloadTexture() const
 
 void ParticleSystem::StoreRecordAsAnimFile(const std::string& filepath) const
 {
-	m_recorder.StoreToAnimFile(filepath);
+	if (m_recorder) {
+		m_recorder->StoreToAnimFile(filepath);
+	}
 }
 
 void ParticleSystem::add()
@@ -272,6 +345,16 @@ void ParticleSystem::add()
 
 	pLast->rotate = 0;
 	//////////////////////////////////////////////////////////////////////////
+
+	pLast->m_bind_time = 0;
+	if (pLast->pc->bind_ps) {
+//			// todo memory leak
+//			delete pLast->m_bind_ps;
+		pLast->m_bind_ps = pLast->pc->bind_ps->clone();
+	} else {
+		delete pLast->m_bind_ps;
+		pLast->m_bind_ps = NULL;
+	}
 
 	pLast++;
 }

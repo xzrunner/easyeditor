@@ -1,8 +1,6 @@
 #ifndef _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 #define _EASYPARTICLE3D_PARTICLE_SYSTEM_H_
 
-#include "Recorder.h"
-
 #include <drag2d.h>
 
 namespace eparticle3d
@@ -21,20 +19,23 @@ struct ParticleChild
 {
 	d2d::ISymbol* symbol;
 
-	ParticleSystem* m_bind_ps;
-	float m_bind_time;
+	ParticleSystem* bind_ps;
 
 	float start_scale, end_scale;
 
 	float min_rotate, max_rotate;
 
 	ParticleChild() 
-		: symbol(NULL), m_bind_ps(NULL), m_bind_time(0) 
+		: symbol(NULL), bind_ps(NULL)
 	{}
 };
 
+class Recorder;
+
 struct Particle
 {
+	Particle() : pc(NULL), m_bind_ps(NULL) {}
+
 	d2d::Vector pos;
 
 	float lifetime;
@@ -51,9 +52,12 @@ struct Particle
 	float scale;
 
 	ParticleChild* pc;
+
+	ParticleSystem* m_bind_ps;
+	float m_bind_time;
 };
 
-class ParticleSystem : public d2d::Object
+class ParticleSystem : public d2d::Object, public d2d::ICloneable
 {
 public:
 	d2d::Vector origin;
@@ -102,8 +106,14 @@ private:
 public:
 //	ParticleSystem(/*const ParticleSystem& ps*/);
 	ParticleSystem(unsigned int buffer);
+	ParticleSystem(const ParticleSystem& ps);
 
 	virtual ~ParticleSystem();
+
+	//
+	// ICloneable interface
+	//
+	virtual ParticleSystem* clone() const { return new ParticleSystem(*this); }
 
 	virtual void draw(const d2d::Matrix& mt);
 
@@ -161,7 +171,7 @@ private:
 	static d2d::Vector TransCoords3To2(float position[3]);
 
 private:
-	Recorder m_recorder;
+	Recorder* m_recorder;
 
 	friend class FileIO;
 

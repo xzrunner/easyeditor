@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 #include "ParticleSystem.h"
+#include "config.h"
 
 namespace eparticle3d
 {
@@ -39,9 +40,9 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 		ParticleChild* pc = cp->m_pc;
 		value["components"][i]["filepath"] = 
 			d2d::FilenameTools::getRelativePath(dir, pc->symbol->getFilepath()).ToStdString();
-		if (pc->m_bind_ps) {
+		if (pc->bind_ps) {
 			value["components"][i]["bind ps filepath"] = 
-				d2d::FilenameTools::getRelativePath(dir, pc->m_bind_ps->filepath).ToStdString();
+				d2d::FilenameTools::getRelativePath(dir, pc->bind_ps->filepath).ToStdString();
 		}
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
 		value["components"][i]["start_scale"] = cp->m_start_scale->GetValue();
@@ -106,7 +107,7 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 	FileAdapter adapter;
 	adapter.load(filepath);
 
-	ParticleSystem* ps = new ParticleSystem(1000);
+	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP);
 
 	ps->filepath = filepath;
 	ps->setCount(adapter.count);

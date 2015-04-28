@@ -6,6 +6,8 @@ namespace eparticle3d
 
 static const char* FILE_TAG = "particle";
 
+static const int PARTICLE_CAP = 1000;
+
 }
 
 #endif // _EASYPARTICLE3D_CONFIG_H_

@@ -2,6 +2,7 @@
 #include "StagePanel.h"
 #include "ParticleSystem.h"
 #include "FileIO.h"
+#include "config.h"
 
 #include <easyanim.h>
 
@@ -55,7 +56,7 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	// todo Release symbol
 	pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
 	if (!child.bind_filepath.empty()) {
-		pc->m_bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
+		pc->bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
 	}
 	cp->onSetScale(wxScrollEvent());
 	cp->onSetRotate(wxScrollEvent());
@@ -340,7 +341,7 @@ void ToolbarPanel::initParticle()
 {
 	clear();
 
-	ParticleSystem* ps = new ParticleSystem(1000);
+	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP);
 	ps->start();
 	m_stage->m_ps = ps;
 
@@ -589,7 +590,7 @@ OnBindPS(wxCommandEvent& event)
 	wxFileDialog dlg(this, wxT("导入Particle3D文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		m_pc->m_bind_ps = FileIO::LoadPS(dlg.GetPath());
+		m_pc->bind_ps = FileIO::LoadPS(dlg.GetPath());
 
 // 		if (m_canvas) {
 // 			m_canvas->resetViewport();
