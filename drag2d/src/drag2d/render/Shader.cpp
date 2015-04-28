@@ -1,6 +1,6 @@
 #include "Shader.h"
 
-#include <GL/GLee.h>
+#include <gl/glew.h>
 #include <stdio.h>
 
 namespace d2d

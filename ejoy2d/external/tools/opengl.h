@@ -15,7 +15,8 @@
 
 #elif defined(_MSC_VER)
 
-#include <gl/glee.h>
+//#include <gl/glee.h>
+#include <GL/glew.h>
 
 #else
 

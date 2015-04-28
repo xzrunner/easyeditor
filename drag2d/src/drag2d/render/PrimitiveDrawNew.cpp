@@ -1,7 +1,7 @@
 #include "PrimitiveDrawNew.h"
 #include "ShaderMgr.h"
 
-#include <GL/GLee.h>
+#include <gl/glew.h>
 
 namespace d2d
 {

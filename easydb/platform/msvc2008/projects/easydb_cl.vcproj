@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;..\..\..\..\ejoy2d\external\dtex;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\glfw\include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -63,7 +63,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib md5d.lib opengl32.lib GLee.lib lua.lib libgifd.lib zlibd.lib lzmad.lib libpngd.lib glfwd.lib PVRTexLib.lib"
+				AdditionalDependencies="wxmsw30ud_gl.lib wxmsw30ud_propgrid.lib wxmsw30ud_adv.lib wxmsw30ud_stc.lib wxmsw30ud_core.lib wxbase30ud.lib wxscintillad.lib wxtiffd.lib wxjpegd.lib wxpngd.lib comctl32.lib rpcrt4.lib jsond.lib SOIL.lib freetype250_D.lib md5d.lib opengl32.lib glew32s.lib lua.lib libgifd.lib zlibd.lib lzmad.lib libpngd.lib glfwd.lib PVRTexLib.lib"
 				OutputFile="..\easydb_cl\x86\Debug\easydb_cl.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\giflib\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\glfw\lib&quot;;&quot;..\..\..\..\editor-external\pvrtextool\lib&quot;"
@@ -124,7 +124,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="..\..\..\src\easydb;..\..\..\src\easydb_cl;..\..\..\..\drag2d\src\drag2d;..\..\..\..\easycomplex\src;..\..\..\..\easyanim\src;..\..\..\..\easyscale9\src;..\..\..\..\easyparticle3d\src;..\..\..\..\easybuilder\src;..\..\..\..\easyimage\src;..\..\..\..\easyparticle2d\src;..\..\..\..\easyshape\src;..\..\..\..\easypacker\src;..\..\..\..\epbin\src;..\..\..\..\coceditor\src;..\..\..\..\easymesh\src;..\..\..\..\ejoy2d\external\dtex;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\glfw\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				BasicRuntimeChecks="0"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -145,7 +145,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib comctl32.lib rpcrt4.lib json.lib SOIL.lib freetype250.lib md5.lib opengl32.lib GLee.lib lua.lib libgif.lib zlib.lib lzma.lib libpng.lib glfw.lib PVRTexLib.lib"
+				AdditionalDependencies="wxmsw30u_gl.lib wxmsw30u_propgrid.lib wxmsw30u_adv.lib wxmsw30u_stc.lib wxmsw30u_core.lib wxbase30u.lib wxscintilla.lib wxtiff.lib wxjpeg.lib wxpng.lib comctl32.lib rpcrt4.lib json.lib SOIL.lib freetype250.lib md5.lib opengl32.lib glew32s.lib lua.lib libgif.lib zlib.lib lzma.lib libpng.lib glfw.lib PVRTexLib.lib"
 				OutputFile="..\easydb_cl\x86\Release\easydb_cl.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;..\..\..\..\editor-external\wx\lib&quot;;&quot;..\..\..\..\editor-external\gl\lib&quot;;&quot;..\..\..\..\editor-external\json\lib&quot;;&quot;..\..\..\..\editor-external\soil\lib&quot;;&quot;..\..\..\..\editor-external\freetype\lib&quot;;&quot;..\..\..\..\editor-external\libpng\lib&quot;;&quot;..\..\..\..\editor-external\md5\lib&quot;;&quot;..\..\..\..\editor-external\giflib\lib&quot;;&quot;..\..\..\..\editor-external\zlib\lib&quot;;&quot;..\..\..\..\editor-external\lzma\lib&quot;;&quot;..\..\..\..\editor-external\intel&quot;;&quot;..\..\..\..\editor-external\glfw\lib&quot;;&quot;..\..\..\..\editor-external\pvrtextool\lib&quot;"

@@ -8,7 +8,7 @@
 #include <fstream>
 
 #define NOMINMAX
-#include <gl/GLee.h>
+#include <gl/glew.h>
 
 #include "common/tools.h"
 #include "render/ShaderMgr.h"

@@ -9,7 +9,7 @@
 #include "render/PrimitiveDraw.h"
 #include "render/style_config.h"
 
-#include <gl/GLee.h>
+#include <gl/glew.h>
 #include <wx/wx.h>
 
 namespace d2d

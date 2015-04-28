@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <gl/GLee.h>
+#include <gl/glew.h>
 
 #include <easyimage.h>
 

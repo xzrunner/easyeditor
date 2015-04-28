@@ -1,3 +1,5 @@
+#include <gl/glew.h>
+
 #include "GLCanvas.h"
 #include "Camera.h"
 
@@ -8,7 +10,6 @@
 #include "render/ShaderMgr.h"
 
 #include <wx/wx.h>
-#include <gl/glu.h>
 
 namespace d2d
 {
@@ -67,6 +68,10 @@ void GLCanvas::SetCurrentCanvas()
 void GLCanvas::initGL()
 {
 	wxLogDebug(_T("GLCanvas::initGL()"));
+
+	if (glewInit() != GLEW_OK) {
+		exit(1);
+	}
 
 	ShaderMgr::Instance()->null();
 

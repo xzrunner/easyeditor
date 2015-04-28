@@ -2,7 +2,7 @@
 
 #include "common/Exception.h"
 
-#include <gl/GLee.h>
+#include <gl/glew.h>
 #include <stdio.h>
 #include <assert.h>
 

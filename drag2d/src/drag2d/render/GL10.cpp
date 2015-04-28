@@ -2,7 +2,7 @@
 #include "Shader.h"
 
 #define NOMINMAX
-#include <gl/GLee.h>
+#include <gl/glew.h>
 
 namespace d2d
 {

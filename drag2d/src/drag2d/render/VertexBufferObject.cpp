@@ -24,7 +24,7 @@
 
 #include <stdlib.h>
 
-#include <gl/GLee.h>
+#include <gl/glew.h>
 
 using namespace d2d;
 

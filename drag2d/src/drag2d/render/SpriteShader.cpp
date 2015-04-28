@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <gl/GLee.h>
+#include <gl/glew.h>
 #include <wx/log.h>
 
 namespace d2d

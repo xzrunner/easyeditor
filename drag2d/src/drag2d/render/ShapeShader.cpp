@@ -2,7 +2,7 @@
 
 #include "common/Color.h"
 
-#include <gl/GLee.h>
+#include <gl/glew.h>
 
 namespace d2d
 {
