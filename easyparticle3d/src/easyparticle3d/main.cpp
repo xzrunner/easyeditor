@@ -1,6 +1,7 @@
 #include "main.h"
 
 #include "Frame.h"
+#include "Task.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -30,7 +31,9 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	eparticle3d::Frame* frame = new eparticle3d::Frame(wxT("EasyParticle3D"));
+	eparticle3d::Frame* frame = new eparticle3d::Frame(wxT("EasyParticle3D"), eparticle3d::FILE_TAG);
+	eparticle3d::Task* task = new eparticle3d::Task(frame);
+	frame->setTask(task);
 	frame->Show(true);
 
 	return true;

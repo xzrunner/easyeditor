@@ -14,87 +14,15 @@ enum MenuID
 	ID_COC = 700,
 };
 
-BEGIN_EVENT_TABLE(Frame, wxFrame)
-	EVT_MENU(wxID_NEW, Frame::onNew)
-	EVT_MENU(wxID_OPEN, Frame::onOpen)
-	EVT_MENU(wxID_SAVE, Frame::onSave)
-	EVT_MENU(wxID_SAVEAS, Frame::onSaveAs)
-
-	EVT_MENU(wxID_EXIT, Frame::onQuit)
-//	EVT_MENU(wxID_HELP, Frame::onAbout)
-
+BEGIN_EVENT_TABLE(Frame, d2d::Frame)
 	EVT_MENU(ID_COC, Frame::onCodeCOC)
 END_EVENT_TABLE()
 
-//static const wxString VERSION = wxT("0.13.0514");
-
-Frame::Frame(const wxString& title)
-	: wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(800, 600))
+Frame::Frame(const wxString& title, const wxString& filetag)
+	: d2d::Frame(title, filetag)
 {
-	m_task = Task::create(this);
-	initMenuBar();
-#ifdef _DEBUG
-	initStatueBar();
-#else
-	wxLog::SetLogLevel(0);
-#endif
+	m_code_menu->Append(ID_COC, wxT("Info\tCtrl+C"), wxT("code"));
 }
-
-void Frame::onNew(wxCommandEvent& event)
-{
-	setCurrFilename();
-	m_task->clear();
-}
-
-void Frame::onOpen(wxCommandEvent& event)
-{
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
-	filter = wxT("*_") + filter + wxT(".json");
-	wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
-		filter, wxFD_OPEN);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		m_task->clear();
-		m_currFilename = dlg.GetPath();
-		SetTitle(d2d::FilenameTools::getFilename(dlg.GetPath()));
-		m_task->loadFromFile(dlg.GetPath());
-	}
-}
-
-void Frame::onSave(wxCommandEvent& event)
-{
-	if (!m_currFilename.empty())
-	{
-		SetTitle(d2d::FilenameTools::getFilename(m_currFilename));
-		m_task->storeToFile(m_currFilename);
-	}
-}
-
-void Frame::onSaveAs(wxCommandEvent& event)
-{
-	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_particle3d);
-	filter = wxT("*_") + filter + wxT(".json");
-	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
-		filter, wxFD_SAVE);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), eparticle3d::FILE_TAG, "json");
-		m_currFilename = fixed;
-		m_task->storeToFile(fixed);
-	}
-}
-
-void Frame::onQuit(wxCommandEvent& event)
-{
-	Close(true);
-}
-
-// void Frame::onAbout(wxCommandEvent& event)
-// {
-// 	wxString msg;
-// 	msg.Printf(wxT("Version: ") + VERSION);
-// 	wxMessageBox(msg, wxT("About"), wxOK | wxICON_INFORMATION, this);
-// }
 
 void Frame::onCodeCOC(wxCommandEvent& event)
 {
@@ -103,7 +31,7 @@ void Frame::onCodeCOC(wxCommandEvent& event)
 	ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("particle.lua"));
 
 	ebuilder::CodeGenerator gen;
-	Code code(gen, m_task->getToolbar());
+	Code code(gen, static_cast<Task*>(m_task)->getToolbar());
 	code.resolve();
 	page->SetReadOnly(false);
 	page->SetText(gen.toText());
@@ -112,66 +40,6 @@ void Frame::onCodeCOC(wxCommandEvent& event)
 	dlg.notebook->AddPage(page, page->getName());
 
 	dlg.ShowModal();
-}
-
-void Frame::initMenuBar()
-{
-	wxMenuBar* menuBar = new wxMenuBar;
-	menuBar->Append(initFileBar(), "&File");
-//	menuBar->Append(initHelpBar(), "&Help");	
-	menuBar->Append(initCodesBar(), "&Codes");
-	SetMenuBar(menuBar);
-}
-
-void Frame::initStatueBar()
-{
-	CreateStatusBar();
-	SetStatusText( "Welcome to wxWidgets!" );
-}
-
-wxMenu* Frame::initFileBar()
-{
-	wxMenu* fileMenu = new wxMenu;
-	fileMenu->Append(wxID_NEW, wxT("&New\tCtrl+N"), wxT("Create a project"));
-	fileMenu->Append(wxID_OPEN, wxT("&Open...\tCtrl+O"), wxT("Open a project"));
-	fileMenu->AppendSeparator();
-	fileMenu->Append(wxID_SAVE, wxT("&Save\tCtrl+S"), wxT("Save the project"));
-	fileMenu->Append(wxID_SAVEAS, wxT("&Save as...\tF11"), wxT("Save to a new file"));
-	fileMenu->AppendSeparator();
-	fileMenu->Append(wxID_EXIT, wxT("E&xit\tAlt+X"), wxT("Quit GameFruits"));
-	return fileMenu;
-}
-
-wxMenu* Frame::initHelpBar()
-{
-	wxMenu* helpMenu = new wxMenu;
-	helpMenu->Append(wxID_HELP, wxT("&About...\tF1"), wxT("Show about dialog"));
-	return helpMenu;
-}
-
-wxMenu* Frame::initCodesBar()
-{
-	wxMenu* menu = new wxMenu;
-	menu->Append(ID_COC, wxT("coc"), wxEmptyString);
-	return menu;
-}
-
-void Frame::setCurrFilename()
-{
-	int id = 0;
-	while (true)
-	{
-		wxString str = 
-			wxT("new") + 
-			wxString::FromDouble(id++) + 
-			wxT(".json");
-
-		if (!d2d::FilenameTools::isExist(str))
-		{
-			m_currFilename = str;
-			break;
-		}
-	}
 }
 
 }

@@ -24,10 +24,10 @@ bool PlayControl::update()
 		clock_t curr = clock();
 		int dt = curr - m_last;
 
-		wxLogDebug(_T("update dt = %d"), dt);
+//		wxLogDebug(_T("update dt = %d"), dt);
 
 		while (dt > m_dt) {
-			wxLogDebug(_T("++ frame"));
+//			wxLogDebug(_T("++ frame"));
 
 			dt -= m_dt;
 			++m_curr_frame;
