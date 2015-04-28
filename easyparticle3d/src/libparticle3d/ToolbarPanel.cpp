@@ -250,7 +250,7 @@ wxSizer* ToolbarPanel::initLayout()
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Gravity (pixel)"));
 		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
-		m_gravity = new wxSlider(this, wxID_ANY, GRAVITY, -1000, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+		m_gravity = new wxSlider(this, wxID_ANY, GRAVITY, -1000, 9999, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
 		Connect(m_gravity->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetGravity));
 		sizer->Add(m_gravity);
 
