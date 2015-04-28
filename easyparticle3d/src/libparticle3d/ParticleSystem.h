@@ -115,7 +115,7 @@ public:
 	//
 	virtual ParticleSystem* clone() const { return new ParticleSystem(*this); }
 
-	virtual void draw(const d2d::Matrix& mt);
+	virtual void draw(const d2d::Matrix& mt, Recorder* recorder = NULL);
 
 	void update(float dt);
 

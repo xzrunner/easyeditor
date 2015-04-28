@@ -102,7 +102,7 @@ ParticleSystem::~ParticleSystem()
 		delete[] pStart;
 }
 
-void ParticleSystem::draw(const d2d::Matrix& mt)
+void ParticleSystem::draw(const d2d::Matrix& mt, Recorder* recorder)
 {
 	if (m_recorder) {
 		m_recorder->FinishFrame();
@@ -133,11 +133,13 @@ void ParticleSystem::draw(const d2d::Matrix& mt)
 		if (p->m_bind_ps) {
 			d2d::Matrix _mt;
 			_mt.translate(p->pos.x, p->pos.y);
-			p->m_bind_ps->draw(_mt);
+			p->m_bind_ps->draw(_mt, m_recorder);
 		}
 
-		if (m_recorder) {
-			m_recorder->AddItem(p->pc->symbol->getFilepath().ToStdString(), pos.x, pos.y, p->angle, s, multi);
+		Recorder* curr_record = m_recorder ? m_recorder : recorder;
+		if (curr_record) {
+			d2d::Vector fixed = d2d::Math::transVector(pos, _mt);
+			curr_record->AddItem(p->pc->symbol->getFilepath().ToStdString(), fixed.x, fixed.y, p->angle, s, multi);
 		}
 
 		//glPopAttrib();
