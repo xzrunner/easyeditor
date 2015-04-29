@@ -67,6 +67,8 @@ private:
 
 	void TransToMat(const d2d::ISprite* sprite, float mat[6], bool force = false) const;
 
+	void GetColorAssignParams(const d2d::ISprite* sprite, std::vector<std::string>& params) const;
+
 private:
 	ebuilder::CodeGenerator* m_gen;
 

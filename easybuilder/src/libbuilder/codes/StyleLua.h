@@ -82,6 +82,33 @@ namespace lua
 		return str;
 	}
 
+	static std::string tableassign(const std::string& name, const std::vector<std::string>& params)
+	{
+		std::string str;
+
+		if (!name.empty())
+		{
+			str += name;
+			str += " = ";
+		}
+
+		str += "{";
+		for (int i = 0, n = params.size(); i < n; ++i) {
+			str += params[i];
+			if (i != params.size() - 1) {
+				str += ", ";
+			}
+		}
+		str += "},";
+
+		return str;
+	}
+
+	static void tableassign(CodeGenerator& gen, const std::string& name, const std::vector<std::string>& params)
+	{
+		gen.line(tableassign(name, params));
+	}
+
 	static void call(CodeGenerator& gen, const std::string& caller,
 		const std::string func, size_t n, ...)
 	{

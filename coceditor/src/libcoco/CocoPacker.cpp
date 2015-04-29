@@ -1040,12 +1040,11 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 			lua::TableAssign ta(*m_gen, "", true);
 			for (int j = 0; j < frame_size[i]; ++j)
 			{
+				std::vector<std::string> params;
 				std::string assign_index = lua::assign("index", wxString::FromDouble(id++).ToStdString());
-//				lua::tableassign(*m_gen, "", 1, assign_index.c_str());
-
-				std::string assign_color = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-				std::string assign_add = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
-				lua::tableassign(*m_gen, "", 3, assign_index.c_str(), assign_color.c_str(), assign_add.c_str());
+				params.push_back(assign_index);
+				GetColorAssignParams(sprite, params);
+				lua::tableassign(*m_gen, "", params);
 			}
 		}
 	}
@@ -1191,12 +1190,11 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 			lua::TableAssign ta(*m_gen, "", true);
 			for (int j = 0; j < frames_count[i]; ++j)
 			{
+				std::vector<std::string> params;
 				std::string assign_index = lua::assign("index", wxString::FromDouble(id++).ToStdString());
-				//				lua::tableassign(*m_gen, "", 1, assign_index.c_str());
-
-				std::string assign_color = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-				std::string assign_add = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
-				lua::tableassign(*m_gen, "", 3, assign_index.c_str(), assign_color.c_str(), assign_add.c_str());
+				params.push_back(assign_index);
+				GetColorAssignParams(sprite, params);
+				lua::tableassign(*m_gen, "", params);
 			}
 		}
 	}
@@ -1410,7 +1408,10 @@ void CocoPacker::ParserSpriteForFrame(const d2d::ISprite* sprite, const std::vec
 
 void CocoPacker::ParserSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat)
 {
+	std::vector<std::string> params;
+
 	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
+	params.push_back(assignIndex);
 
 	float mat[6];
 	TransToMat(sprite, mat, forceMat);
@@ -1421,20 +1422,19 @@ void CocoPacker::ParserSpriteForFrame(const d2d::ISprite* sprite, int id, bool f
 	std::string smat = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
 		m[3].c_str(), m[4].c_str(), m[5].c_str());
 	std::string assignMat = lua::assign("mat", smat);
+	params.push_back(assignMat);
 
-	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
-	{
-		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
-		lua::tableassign(*m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
-	}
-	else
-		lua::tableassign(*m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
+	GetColorAssignParams(sprite, params);
+
+	lua::tableassign(*m_gen, "", params);
 }
 
 void CocoPacker::ParserImageForFrame(const d2d::ISprite* sprite, int id)
 {
+	std::vector<std::string> params;
+
 	std::string assignIndex = lua::assign("index", wxString::FromDouble(id).ToStdString());
+	params.push_back(assignIndex);
 
 	float mat[6];
 	TransToMat(sprite, mat, false);
@@ -1445,23 +1445,15 @@ void CocoPacker::ParserImageForFrame(const d2d::ISprite* sprite, int id)
 	std::string smat = lua::tableassign("", 6, m[0].c_str(), m[1].c_str(), m[2].c_str(), 
 		m[3].c_str(), m[4].c_str(), m[5].c_str());
 	std::string assignMat = lua::assign("mat", smat);
+	params.push_back(assignMat);
 
-	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0))
-	{
-		std::string assignColor = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
-		std::string assignAdd = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
-		if (sprite->clip)
-			lua::tableassign(*m_gen, "", 5, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str(), "clip=true");
-		else
-			lua::tableassign(*m_gen, "", 4, assignIndex.c_str(), assignColor.c_str(), assignAdd.c_str(), assignMat.c_str());
+	if (sprite->clip) {
+		params.push_back("clip=true");
 	}
-	else
-	{
-		if (sprite->clip)
-			lua::tableassign(*m_gen, "", 3, assignIndex.c_str(), assignMat.c_str(), "clip=true");
-		else
-			lua::tableassign(*m_gen, "", 2, assignIndex.c_str(), assignMat.c_str());
-	}
+
+	GetColorAssignParams(sprite, params);
+
+	lua::tableassign(*m_gen, "", params);
 }
 
 void CocoPacker::ParserFontForFrame(const d2d::FontSprite* sprite, int id)
@@ -1547,6 +1539,29 @@ void CocoPacker::TransToMat(const d2d::ISprite* sprite, float mat[6], bool force
 		mat[i] = (int)(mat[i] * 16 + 0.5f);
 	// flip y
 	mat[5] = -mat[5];
+}
+
+void CocoPacker::GetColorAssignParams(const d2d::ISprite* sprite, std::vector<std::string>& params) const
+{
+	if (sprite->multiCol != d2d::Colorf(1,1,1,1) || sprite->addCol != d2d::Colorf(0,0,0,0)) 
+	{
+		std::string str_multi = lua::assign("color", d2d::transColor(sprite->multiCol, d2d::PT_BGRA));
+		params.push_back(str_multi);
+		std::string str_add = lua::assign("add", d2d::transColor(sprite->addCol, d2d::PT_ABGR));
+		params.push_back(str_add);
+	}
+
+	if (sprite->r_trans != d2d::Colorf(1, 0, 0, 1) || sprite->g_trans != d2d::Colorf(0, 1, 0, 1) || sprite->b_trans != d2d::Colorf(0, 0, 1, 1))
+	{
+		std::string str_r = lua::assign("r_map", d2d::transColor(sprite->r_trans, d2d::PT_BGRA));
+		params.push_back(str_r);
+
+		std::string str_g = lua::assign("g_map", d2d::transColor(sprite->g_trans, d2d::PT_BGRA));
+		params.push_back(str_g);
+
+		std::string str_b = lua::assign("b_map", d2d::transColor(sprite->b_trans, d2d::PT_BGRA));
+		params.push_back(str_b);
+	}
 }
 
 } // coceditor
