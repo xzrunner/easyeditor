@@ -29,36 +29,17 @@ void PathVisibleSimple::DisableRegion(const d2d::ISprite* spr, bool disable)
 
 void PathVisibleSimple::QueryRoute(const d2d::Vector& start, const d2d::Vector& end)
 {
-	if (!d2d::Math::isPointInRect(start, m_region) || !d2d::Math::isPointInRect(end, m_region)) {
+	VisitedNode* node = QueryRouteImpl(start, end);
+	if (!node) {
 		return;
 	}
 
-	if (m_last_start) {
-		RemoveNode(m_last_start);
-	}
-	if (m_last_end) {
-		RemoveNode(m_last_end);
-	}
-
-	m_visited.Clear();
-	m_candidate.Clear();
-
-	Node *sn = CreateNode(start),
-		*en = CreateNode(end);
-	m_last_start = sn;
-	m_last_end = en;
-
-	VisitedNode* sv = new VisitedNode(sn->id);
-	m_visited.Push(sv);
-	m_candidate.Push(sv);
-	while (!m_candidate.IsEmpty()) 
-	{
-		VisitedNode* opt = m_candidate.Top(); m_candidate.Pop();
-		if (opt->m_id == en->id) {
-			return opt;
-		} else {
-			Expend(opt, end);
-		}
+// 	float dx = -m_region.xLength() * 0.5f,
+// 		dy = -m_region.yLength() * 0.5f;
+	m_routes.clear();
+	while (node) {		
+		m_routes.push_back(TransIDToPos(node->m_id));
+		node = node->m_prev;
 	}
 }
 
@@ -77,15 +58,17 @@ void PathVisibleSimple::DebugDraw() const
 			Node* node = itr->second[i];
 			for (int j = 0, m = node->connections.size(); j < m; ++j) {
 				const Connection& conn = node->connections[j];
-				d2d::PrimitiveDraw::drawLine(node->pos, conn.n->pos, d2d::LIGHT_RED);
+				d2d::PrimitiveDraw::drawLine(node->pos, conn.n->pos, d2d::BLACK);
 			}
 		}
 	}
+
+	d2d::PrimitiveDraw::drawPolyline(m_routes, d2d::SELECT_RED, false);
 }
 
 d2d::Vector PathVisibleSimple::TransIDToPos(int id) const
 {
-	std::map<int, Node*>::iterator itr = m_nodes.find(id);
+	std::map<int, Node*>::const_iterator itr = m_nodes.find(id);
 	if (itr != m_nodes.end()) {
 		return itr->second->pos;
 	} else {
@@ -238,9 +221,41 @@ void PathVisibleSimple::RemoveNode(const Node* node)
 	delete node;
 }
 
-void PathVisibleSimple::QueryRouteImpl(const d2d::Vector& start, const d2d::Vector& end)
+VisitedNode* PathVisibleSimple::QueryRouteImpl(const d2d::Vector& start, const d2d::Vector& end)
 {
-	
+	if (!d2d::Math::isPointInRect(start, m_region) || !d2d::Math::isPointInRect(end, m_region)) {
+		return NULL;
+	}
+
+	if (m_last_start) {
+		RemoveNode(m_last_start);
+	}
+	if (m_last_end) {
+		RemoveNode(m_last_end);
+	}
+
+	m_visited.Clear();
+	m_candidate.Clear();
+
+	Node *sn = CreateNode(start),
+		*en = CreateNode(end);
+	m_last_start = sn;
+	m_last_end = en;
+
+	VisitedNode* sv = new VisitedNode(sn->id);
+	m_visited.Push(sv);
+	m_candidate.Push(sv);
+	while (!m_candidate.IsEmpty()) 
+	{
+		VisitedNode* opt = m_candidate.Top(); m_candidate.Pop();
+		if (opt->m_id == en->id) {
+			return opt;
+		} else {
+			Expend(opt, end);
+		}
+	}
+
+	return NULL;
 }
 
 void PathVisibleSimple::Expend(VisitedNode* node, const d2d::Vector& end)
@@ -271,7 +286,11 @@ void PathVisibleSimple::Expend(VisitedNode* node, const d2d::Vector& end)
 
 void PathVisibleSimple::GetConnections(VisitedNode* node, std::vector<Connection>& connections) const
 {
-	
+	std::map<int, Node*>::const_iterator itr = m_nodes.find(node->m_id);
+	assert(itr != m_nodes.end());
+
+	Node* n = itr->second;
+	connections = n->connections;
 }
 
 }

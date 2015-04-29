@@ -67,7 +67,7 @@ private:
 	void RemoveNode(const Node* node);
 
 	// route
-	void QueryRouteImpl(const d2d::Vector& start, const d2d::Vector& end);
+	VisitedNode* QueryRouteImpl(const d2d::Vector& start, const d2d::Vector& end);
 	void Expend(VisitedNode* node, const d2d::Vector& end);
 	void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
@@ -83,6 +83,8 @@ private:
 	std::map<int, Node*> m_nodes;
 
 	Node *m_last_start, *m_last_end;
+
+	std::vector<d2d::Vector> m_routes;
 
 }; // PathVisibleSimple
 
