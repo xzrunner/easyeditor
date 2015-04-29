@@ -54,14 +54,22 @@ private:
 	}; // Node
 
 private:
+	// data struct
 	void InsertBoundary(const d2d::ISprite* spr);
 	void RemoveBoundary(std::map<const d2d::ISprite*, std::vector<Node*> >::iterator itr);
 
 	void BuildConnection(const std::vector<Node*>& nodes) const;
-	bool IsSegIntersectAllBound(const d2d::Vector& p0, const d2d::Vector& p1, 
-		const std::vector<Node*>& bound) const;
+	bool IsSegIntersectAllBound(const d2d::Vector& p0, const d2d::Vector& p1) const;
 	bool IsSegIntersectBound(const d2d::Vector& p0, const d2d::Vector& p1, 
 		const std::vector<Node*>& bound) const;
+
+	Node* CreateNode(const d2d::Vector& pos);
+	void RemoveNode(const Node* node);
+
+	// route
+	void QueryRouteImpl(const d2d::Vector& start, const d2d::Vector& end);
+	void Expend(VisitedNode* node, const d2d::Vector& end);
+	void GetConnections(VisitedNode* node, std::vector<Connection>& connections) const;
 
 private:
 	d2d::Rect m_region;
@@ -73,6 +81,8 @@ private:
 	
 	int m_node_id;
 	std::map<int, Node*> m_nodes;
+
+	Node *m_last_start, *m_last_end;
 
 }; // PathVisibleSimple
 
