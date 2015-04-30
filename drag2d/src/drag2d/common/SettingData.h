@@ -3,6 +3,8 @@
 
 #include <json/json.h>
 
+#include "common/Color.h"
+
 namespace d2d
 {
 
@@ -21,6 +23,7 @@ struct SettingData
 	bool visible_label_text;
 	bool visible_node_name;
 	bool visible_shape;
+	Colorf bg_color;
 
 	// image filter
 	bool linear_filter;

@@ -1,6 +1,8 @@
 #ifndef _DRAG2D_HSL_COLOR_SETTING_DLG_H_
 #define _DRAG2D_HSL_COLOR_SETTING_DLG_H_
 
+#include "common/color_config.h"
+
 #include "IColorMonitor.h"
 #include "common/Color.h"
 
@@ -15,7 +17,8 @@ class ColorSlider;
 class HSLColorSettingDlg : public wxDialog, public IColorMonitor
 {
 public:
-	HSLColorSettingDlg(EditPanel* editpanel, Colorf& col, const wxPoint& pos = wxDefaultPosition);
+	HSLColorSettingDlg(EditPanel* editpanel = NULL, Colorf& col = WHITE, 
+		const wxPoint& pos = wxDefaultPosition);
 
 	//
 	// interface IColorChanger

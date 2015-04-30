@@ -32,7 +32,10 @@ void RGBColorSettingDlg::OnColorChanged()
 	m_color_bg->Refresh();
 
 	m_color = GetColor();
-	m_editpanel->Refresh();
+
+	if (m_editpanel) {
+		m_editpanel->Refresh();
+	}
 }
 
 Colorf RGBColorSettingDlg::GetColor() const

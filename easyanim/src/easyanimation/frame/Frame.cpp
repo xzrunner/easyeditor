@@ -192,6 +192,9 @@ void Frame::onSettings(wxCommandEvent& event)
 {
 	d2d::SettingsDialog dlg(this);
 	dlg.ShowModal();
+
+	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
+	static_cast<StagePanel*>(Context::Instance()->stage)->getCanvas()->setBgColor(col);
 }
 
 void Frame::onSetBackground(wxCommandEvent& event)

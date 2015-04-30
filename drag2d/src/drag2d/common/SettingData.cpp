@@ -17,6 +17,8 @@ SettingData::SettingData()
 	visible_shape = true;
 
 	linear_filter = true;
+
+	bg_color.set(1, 1, 1);
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)

@@ -1,6 +1,8 @@
 #ifndef _DRAG2D_RGB_COLOR_SETTING_DLG_H_
 #define _DRAG2D_RGB_COLOR_SETTING_DLG_H_
 
+#include "common/color_config.h"
+
 #include "IColorMonitor.h"
 
 #include <wx/wx.h>
@@ -15,7 +17,7 @@ struct Colorf;
 class RGBColorSettingDlg : public wxDialog, public IColorMonitor
 {
 public:
-	RGBColorSettingDlg(EditPanel* editpanel, Colorf& col);
+	RGBColorSettingDlg(EditPanel* editpanel = NULL, Colorf& col = WHITE);
 
 	//
 	// interface IColorChanger

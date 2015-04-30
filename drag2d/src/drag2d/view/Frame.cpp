@@ -4,9 +4,13 @@
 #include "common/FileNameTools.h"
 #include "common/Exception.h"
 #include "common/config.h"
+#include "common/Color.h"
+#include "common/SettingData.h"
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
 #include "view/FrameDropTarget.h"
+#include "view/EditPanel.h"
+#include "view/GLCanvas.h"
 #include "render/DynamicTexAndFont.h"
 
 #include <wx/filename.h>
@@ -208,6 +212,9 @@ void Frame::onSettings(wxCommandEvent& event)
 {
 	SettingsDialog dlg(this);
 	dlg.ShowModal();
+
+	const Colorf& col = Config::Instance()->GetSettings().bg_color;
+	m_task->getEditPanel()->getCanvas()->setBgColor(col);
 }
 
 void Frame::onOpenRecent1(wxCommandEvent& event)

@@ -2,6 +2,7 @@
 
 #include "common/Config.h"
 #include "common/SettingData.h"
+#include "widgets/RGBColorSettingDlg.h"
 
 #include <gl/gl.h>
 
@@ -108,6 +109,12 @@ wxSizer* SettingsDialog::initViewPanel()
 				wxCommandEventHandler(SettingsDialog::onChangeShape));
 			sizer->Add(check, 0);
 		}
+		{
+			wxButton* btn = new wxButton(this, wxID_ANY, "±³¾°ÑÕÉ«");
+			Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+				wxCommandEventHandler(SettingsDialog::onSetBGColor));
+			sizer->Add(btn);
+		}
 	}
 	return sizer;
 }
@@ -157,6 +164,14 @@ void SettingsDialog::onChangeNodeName(wxCommandEvent& event)
 void SettingsDialog::onChangeShape(wxCommandEvent& event)
 {
 	m_settings.visible_shape = event.IsChecked();
+}
+
+void SettingsDialog::onSetBGColor(wxCommandEvent& event)
+{
+	d2d::RGBColorSettingDlg dlg;
+	if (dlg.ShowModal()) {
+		m_settings.bg_color = dlg.GetColor();
+	}
 }
 
 }

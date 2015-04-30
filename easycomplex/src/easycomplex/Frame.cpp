@@ -65,6 +65,9 @@ void Frame::onSettings(wxCommandEvent& event)
 {
 	SettingsDialog dlg(this);
 	dlg.ShowModal();
+
+	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
+	m_task->getEditPanel()->getCanvas()->setBgColor(col);
 }
 
 void Frame::onPreview(wxCommandEvent& event)
