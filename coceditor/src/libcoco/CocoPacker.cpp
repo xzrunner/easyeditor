@@ -1553,13 +1553,13 @@ void CocoPacker::GetColorAssignParams(const d2d::ISprite* sprite, std::vector<st
 
 	if (sprite->r_trans != d2d::Colorf(1, 0, 0, 1) || sprite->g_trans != d2d::Colorf(0, 1, 0, 1) || sprite->b_trans != d2d::Colorf(0, 0, 1, 1))
 	{
-		std::string str_r = lua::assign("r_map", d2d::transColor(sprite->r_trans, d2d::PT_BGRA));
+		std::string str_r = lua::assign("r_map", d2d::transColor(sprite->r_trans, d2d::PT_RGBA));
 		params.push_back(str_r);
 
-		std::string str_g = lua::assign("g_map", d2d::transColor(sprite->g_trans, d2d::PT_BGRA));
+		std::string str_g = lua::assign("g_map", d2d::transColor(sprite->g_trans, d2d::PT_RGBA));
 		params.push_back(str_g);
 
-		std::string str_b = lua::assign("b_map", d2d::transColor(sprite->b_trans, d2d::PT_BGRA));
+		std::string str_b = lua::assign("b_map", d2d::transColor(sprite->b_trans, d2d::PT_RGBA));
 		params.push_back(str_b);
 	}
 }
