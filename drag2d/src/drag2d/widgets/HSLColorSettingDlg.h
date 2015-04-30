@@ -11,21 +11,21 @@
 namespace d2d
 {
 
-class EditPanel;
+class IColorMonitor;
 class ColorSlider;
 	
 class HSLColorSettingDlg : public wxDialog, public IColorMonitor
 {
 public:
-	HSLColorSettingDlg(EditPanel* editpanel = NULL, Colorf& col = WHITE, 
-		const wxPoint& pos = wxDefaultPosition);
+	HSLColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, 
+		const Colorf& col = WHITE, const wxPoint& pos = wxDefaultPosition);
 
 	//
-	// interface IColorChanger
+	// interface IColorMonitor
 	//
+	virtual Colorf GetColor() const;
 	virtual void OnColorChanged();
-
-	Colorf GetColor() const;
+	virtual void OnColorChanged(const Colorf& col);
 
 private:
 	void InitLayout();
@@ -33,9 +33,7 @@ private:
 	void SetColor(const Colorf& col);
 
 private:
-	EditPanel* m_editpanel;
-
-	Colorf& m_color;
+	IColorMonitor* m_lsn;
 
 	wxPanel* m_color_bg;
 

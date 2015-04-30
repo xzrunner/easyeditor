@@ -23,7 +23,7 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 {
 	SpritePropertySetting::onPropertyGridChange(name, value);
 
-	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
+	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
 	if (name == wxT("Font")) {
 		sprite->font = wxANY_AS(value, wxString);
 	} else if (name == wxT("Edge")) {
@@ -88,7 +88,7 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 {
 	SpritePropertySetting::updateProperties(pg);
 
-	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
+	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
 	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
 
 	pg->GetProperty(wxT("Edge"))->SetValue(sprite->has_edge);
@@ -112,7 +112,7 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("FONT", wxPG_LABEL));
 
-	FontSprite* sprite = static_cast<FontSprite*>(m_sprite);
+	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
 
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, sprite->has_edge));

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_MULTI_SPRITES_PROPERTY_SETTING_H_
+#define _DRAG2D_MULTI_SPRITES_PROPERTY_SETTING_H_
 
 #include "IPropertySetting.h"
 
@@ -6,34 +7,32 @@
 
 namespace d2d
 {
-	class ISprite;
-	class Vector;
 
-	class MultiSpritesPropertySetting : public IPropertySetting
-	{
-	public:
-		MultiSpritesPropertySetting(EditPanel* editPanel, 
-			const std::vector<ISprite*>& sprites);
+class ISprite;
+class MultiSpritesPropertyImpl;
 
-		virtual void updatePanel(PropertySettingPanel* panel);
+class MultiSpritesPropertySetting : public IPropertySetting
+{
+public:
+	MultiSpritesPropertySetting(EditPanel* editPanel, 
+		const std::vector<ISprite*>& sprites);
+	virtual ~MultiSpritesPropertySetting();
 
-		virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-		virtual void updatePropertyGrid(PropertySettingPanel* panel);
-		virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
+	virtual void updatePanel(PropertySettingPanel* panel);
 
-	protected:
-		virtual void updateProperties(wxPropertyGrid* pg);
-		virtual void initProperties(wxPropertyGrid* pg);
+	virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
+	virtual void updatePropertyGrid(PropertySettingPanel* panel);
+	virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
 
-	private:
-		void align(const wxAny& value);
-		void center(const wxAny& value);
+protected:
+	virtual void updateProperties(wxPropertyGrid* pg);
+	virtual void initProperties(wxPropertyGrid* pg);
 
-		Vector getSamePosition() const;
+protected:
+	MultiSpritesPropertyImpl* m_impl;
 
-	protected:
-		std::vector<ISprite*> m_sprites;
+}; // MultiSpritesPropertySetting
 
-	}; // MultiSpritesPropertySetting
 }
 
+#endif // _DRAG2D_MULTI_SPRITES_PROPERTY_SETTING_H_

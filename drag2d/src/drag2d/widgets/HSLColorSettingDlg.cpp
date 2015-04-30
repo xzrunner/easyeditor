@@ -2,21 +2,31 @@
 #include "ColorSlider.h"
 
 #include "common/color_convert.h"
-#include "view/EditPanel.h"
 
 namespace d2d
 {
 
-HSLColorSettingDlg::HSLColorSettingDlg(EditPanel* editpanel, Colorf& col, const wxPoint& pos)
-	: wxDialog(editpanel, wxID_ANY, "HSL Color Setting", pos, wxSize(450, 300))
-	, m_editpanel(editpanel)
-	, m_color(col)
+HSLColorSettingDlg::HSLColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, const Colorf& col, const wxPoint& pos)
+	: wxDialog(parent, wxID_ANY, "HSL Color Setting", pos, wxSize(450, 300))
+	, m_lsn(lsn)
 	, m_h(NULL)
 	, m_s(NULL)
 	, m_l(NULL)
 {
 	InitLayout();
 	SetColor(col);
+}
+
+Colorf HSLColorSettingDlg::GetColor() const
+{
+	Colori rgb = hsl2rgb(m_h->GetColorValue(), m_s->GetColorValue(), m_l->GetColorValue());
+
+	// todo fix rgb2hsl
+	if (rgb.r == 0 && rgb.g == 254 && rgb.b == 0) {
+		rgb.g = 255;
+	}
+
+	return Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f);
 }
 
 void HSLColorSettingDlg::OnColorChanged()
@@ -33,23 +43,14 @@ void HSLColorSettingDlg::OnColorChanged()
 	m_color_bg->SetBackgroundColour(wxColour(rgb.r, rgb.g, rgb.b));
 	m_color_bg->Refresh();
 
-	m_color = GetColor();
-
-	if (m_editpanel) {
-		m_editpanel->Refresh();
+	if (m_lsn) {
+		m_lsn->OnColorChanged(GetColor());
 	}
 }
 
-Colorf HSLColorSettingDlg::GetColor() const
+void HSLColorSettingDlg::OnColorChanged(const Colorf& col)
 {
-	Colori rgb = hsl2rgb(m_h->GetColorValue(), m_s->GetColorValue(), m_l->GetColorValue());
-
-	// todo fix rgb2hsl
-	if (rgb.r == 0 && rgb.g == 254 && rgb.b == 0) {
-		rgb.g = 255;
-	}
-
-	return Colorf(rgb.r / 255.0f, rgb.g / 255.0f, rgb.b / 255.0f);
+	OnColorChanged();
 }
 
 void HSLColorSettingDlg::InitLayout()
@@ -89,7 +90,7 @@ void HSLColorSettingDlg::SetColor(const Colorf& col)
 	m_h->SetColorValue(hsl.r);
 	m_s->SetColorValue(hsl.g);
 	m_l->SetColorValue(hsl.b);
-	OnColorChanged();
+	OnColorChanged(col);
 }
 
 }

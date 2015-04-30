@@ -6,7 +6,7 @@
 namespace d2d
 {
 
-class EditPanel;
+class IColorMonitor;
 struct Colorf;
 
 class ColorProperty : public wxLongStringProperty
@@ -14,7 +14,8 @@ class ColorProperty : public wxLongStringProperty
 	WX_PG_DECLARE_PROPERTY_CLASS(wxTriangleProperty)
 
 public:
-	ColorProperty(const wxString& label = wxPG_LABEL, const wxString& name = wxPG_LABEL);
+	ColorProperty(const wxString& label = wxPG_LABEL, 
+		const wxString& name = wxPG_LABEL);
 	virtual ~ColorProperty();
 
 	virtual wxVariant ChildChanged( wxVariant& thisValue,
@@ -24,13 +25,13 @@ public:
 
 	virtual bool OnButtonClick( wxPropertyGrid* propgrid, wxString& value );
 
-	void SetStage(EditPanel* stage) { m_stage = stage; }
-	void SetColor(Colorf* color) { m_color = color; }
+	void SetParent(wxWindow* parent) { m_parent = parent; }
+	void SetListener(IColorMonitor* lsn);
 
 private:
-	EditPanel* m_stage;
+	wxWindow* m_parent;
 
-	Colorf* m_color;
+	IColorMonitor* m_lsn;
 
 }; // ColorProperty
 

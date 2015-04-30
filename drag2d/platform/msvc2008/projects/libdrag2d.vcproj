@@ -1648,22 +1648,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\view\MultiSpritesPropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\MultiSpritesPropertySetting.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\SpritePropertySetting.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\SpritePropertySetting.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\drag2d\view\TextPropertySetting.cpp"
 						>
 					</File>
@@ -1671,6 +1655,58 @@
 						RelativePath="..\..\..\src\drag2d\view\TextPropertySetting.h"
 						>
 					</File>
+					<Filter
+						Name="multi sprites"
+						>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\MultiSpritesPropertyImpl.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\MultiSpritesPropertyImpl.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\MultiSpritesPropertySetting.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\MultiSpritesPropertySetting.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="single sprite"
+						>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\SpritePropertyImpl.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\SpritePropertyImpl.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\SpritePropertySetting.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\SpritePropertySetting.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="util"
+						>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\PropertyColorMonitor.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\PropertyColorMonitor.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="symbol"

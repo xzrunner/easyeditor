@@ -6,16 +6,24 @@
 namespace d2d
 {
 
-RGBColorSettingDlg::RGBColorSettingDlg(EditPanel* editpanel, Colorf& col)
-	: wxDialog(editpanel, wxID_ANY, "RGB Color Setting", wxDefaultPosition, wxSize(450, 300))
-	, m_editpanel(editpanel)
-	, m_color(col)
+RGBColorSettingDlg::RGBColorSettingDlg(wxWindow* parent, IColorMonitor* lsn, const Colorf& col)
+	: wxDialog(parent, wxID_ANY, "RGB Color Setting", wxDefaultPosition, wxSize(450, 300))
+	, m_lsn(lsn)
 	, m_r(NULL)
 	, m_g(NULL)
 	, m_b(NULL)
 {
 	InitLayout();
 	SetColor(col);
+}
+
+Colorf RGBColorSettingDlg::GetColor() const
+{
+	Colorf col;
+	col.r = m_r->GetColorValue() / 255.0f;
+	col.g = m_g->GetColorValue() / 255.0f;
+	col.b = m_b->GetColorValue() / 255.0f;
+	return col;
 }
 
 void RGBColorSettingDlg::OnColorChanged()
@@ -31,20 +39,14 @@ void RGBColorSettingDlg::OnColorChanged()
 		m_g->GetColorValue(), m_b->GetColorValue()));
 	m_color_bg->Refresh();
 
-	m_color = GetColor();
-
-	if (m_editpanel) {
-		m_editpanel->Refresh();
+	if (m_lsn) {
+		m_lsn->OnColorChanged(GetColor());
 	}
 }
 
-Colorf RGBColorSettingDlg::GetColor() const
+void RGBColorSettingDlg::OnColorChanged(const Colorf& col)
 {
-	Colorf col;
-	col.r = m_r->GetColorValue() / 255.0f;
-	col.g = m_g->GetColorValue() / 255.0f;
-	col.b = m_b->GetColorValue() / 255.0f;
-	return col;
+	OnColorChanged();
 }
 
 void RGBColorSettingDlg::InitLayout()
@@ -83,7 +85,7 @@ void RGBColorSettingDlg::SetColor(const Colorf& col)
 	m_r->SetColorValue(col.r * 255);
 	m_g->SetColorValue(col.g * 255);
 	m_b->SetColorValue(col.b * 255);
-	OnColorChanged();
+	OnColorChanged(col);
 }
 
 }

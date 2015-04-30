@@ -1,21 +1,24 @@
 #include "MultiSpritesPropertySetting.h"
 #include "PropertySettingPanel.h"
+#include "MultiSpritesPropertyImpl.h"
 
-#include <algorithm>
-
-#include "dataset/AbstractBV.h"
-#include "dataset/ISprite.h"
-#include "dataset/ISymbol.h"
-#include "view/EditPanel.h"
 #include "common/Math.h"
+#include "view/EditPanel.h"
+
+#include <wx/propgrid/advprops.h>
 
 namespace d2d
 {
 
 MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanel* editPanel, const std::vector<ISprite*>& sprites)
 	: IPropertySetting(editPanel, wxT("MultiSprites"))
-	, m_sprites(sprites)
+	, m_impl(new MultiSpritesPropertyImpl(sprites))
 {
+}
+
+MultiSpritesPropertySetting::~MultiSpritesPropertySetting()
+{
+	delete m_impl;
 }
 
 void MultiSpritesPropertySetting::updatePanel(PropertySettingPanel* panel)
@@ -33,66 +36,71 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 	if (value.IsNull())
 		return;
 
-	if (name == wxT("Align"))
+	// info
+	if (name == wxT("Tag"))
 	{
-		align(value);
+		m_impl->SetTag(wxANY_AS(value, wxString));
+	}
+	else if (name == wxT("Clip"))
+	{
+		m_impl->SetClip(wxANY_AS(value, int));
+	}
+	else if (name == "Color.Multi")
+	{
+		wxColour col = wxANY_AS(value, wxColour);
+		m_impl->SetColorMul(Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f));
+	}
+	else if (name == "Color.Add")
+	{
+		wxColour col = wxANY_AS(value, wxColour);
+		m_impl->SetColorAdd(Colorf(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f));
+	}
+	else if (name == "Color.Alpha")
+	{
+		int alpha = wxANY_AS(value, int);
+		alpha = std::max(0, std::min(255, alpha));
+		m_impl->SetColorAlpha(alpha / 255.0f);
+	}
+	else if (name == "Color Conversion.R")
+	{
+		
+	}
+
+
+	// position
+	else if (name == wxT("Align"))
+	{
+		m_impl->OnAlign(wxANY_AS(value, int));
 	}
 	else if (name == wxT("Center"))
 	{
-		center(value);
+		m_impl->OnCenter(wxANY_AS(value, int));
 	}
 	else if (name == wxT("All Pos.X"))
 	{
-		float x = wxANY_AS(value, float);
-		for (int i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* s = m_sprites[i];
-			s->setTransform(Vector(x, s->getPosition().y), s->getAngle());
-		}
+		m_impl->SetPosX(wxANY_AS(value, float));
 	}
 	else if (name == wxT("All Pos.Y"))
 	{
-		float y = wxANY_AS(value, float);
-		for (int i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* s = m_sprites[i];
-			s->setTransform(Vector(s->getPosition().x, y), s->getAngle());
-		}
+		m_impl->SetPosY(wxANY_AS(value, float));
 	}
+	// change
 	else if (name == wxT("Pos"))
 	{
 		double dx, dy;
 		splitString(value, &dx, &dy);
-		for (int i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* s = m_sprites[i];
-			d2d::Vector pos = s->getPosition();
-			pos.x += dx;
-			pos.y += dy;
-			s->setTransform(pos, s->getAngle());
-		}
+		m_impl->OnPosChange(dx, dy);
 	}
 	else if (name == wxT("Angle"))
 	{
 		float angle = wxANY_AS(value, float) * TRANS_DEG_TO_RAD;
-		for (int i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* s = m_sprites[i];
-			s->setTransform(s->getPosition(), s->getAngle() + angle);
-		}
+		m_impl->OnAngleChange(angle);
 	}
 	else if (name == wxT("Scale"))
 	{
 		double dx, dy;
 		splitString(value, &dx, &dy);
-		for (int i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* s = m_sprites[i];
-			d2d::Vector scale = s->getScale();
-			scale.x *= dx;
-			scale.y *= dy;
-			s->setScale(scale.x, scale.y);
-		}
+		m_impl->OnScaleChange(dx, dy);
 	}
 
 	m_editPanel->Refresh();
@@ -110,11 +118,19 @@ void MultiSpritesPropertySetting::enablePropertyGrid(PropertySettingPanel* panel
 	if (getPGType(pg) != m_type)
 		initProperties(pg);
 
+	pg->GetProperty(wxT("Tag"))->Enable(bEnable);
+	pg->GetProperty(wxT("Clip"))->Enable(bEnable);
+	pg->GetProperty(wxT("Color"))->Enable(bEnable);
+	pg->GetProperty(wxT("Color.Multi"))->Enable(bEnable);
+	pg->GetProperty(wxT("Color.Add"))->Enable(bEnable);
+	pg->GetProperty(wxT("Color.Alpha"))->Enable(bEnable);
+
 	pg->GetProperty(wxT("Align"))->Enable(bEnable);
 	pg->GetProperty(wxT("Center"))->Enable(bEnable);
 	pg->GetProperty(wxT("All Pos"))->Enable(bEnable);
 	pg->GetProperty(wxT("All Pos.X"))->Enable(bEnable);
 	pg->GetProperty(wxT("All Pos.Y"))->Enable(bEnable);
+
 	pg->GetProperty(wxT("Pos"))->Enable(bEnable);
 	pg->GetProperty(wxT("Pos.dx"))->Enable(bEnable);
 	pg->GetProperty(wxT("Pos.dy"))->Enable(bEnable);
@@ -126,9 +142,20 @@ void MultiSpritesPropertySetting::enablePropertyGrid(PropertySettingPanel* panel
 
 void MultiSpritesPropertySetting::updateProperties(wxPropertyGrid* pg)
 {
+	pg->GetProperty(wxT("Tag"))->SetValue(m_impl->GetTag());
+	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
+
+	Colorf mul_col = m_impl->GetMultiColor();
+	Colorf add_col = m_impl->GetAddColor();
+	wxColour wx_mul_col = wxColour(mul_col.r*255, mul_col.g*255, mul_col.b*255, mul_col.a*255);
+	wxColour wx_add_col = wxColour(add_col.r*255, add_col.g*255, add_col.b*255, add_col.a*255);
+	pg->SetPropertyValueString(wxT("Color.Multi"), wx_mul_col.GetAsString());
+	pg->SetPropertyValueString(wxT("Color.Add"), wx_add_col.GetAsString());
+	pg->GetProperty(wxT("Color.Alpha"))->SetValue((int)(mul_col.a*255));
+
 	pg->GetProperty(wxT("Align"))->SetValue(wxT("none"));
 	pg->GetProperty(wxT("Center"))->SetValue(wxT("none"));
-	Vector pos = getSamePosition();
+	Vector pos = m_impl->GetPosition();
 	pg->GetProperty(wxT("All Pos.X"))->SetValue(pos.x);
 	pg->GetProperty(wxT("All Pos.Y"))->SetValue(pos.y);
 
@@ -141,20 +168,55 @@ void MultiSpritesPropertySetting::updateProperties(wxPropertyGrid* pg)
 
 void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
 {
-	Vector pos = getSamePosition();
-
 	pg->Clear();
+
+	// info
+
+	pg->Append(new wxPropertyCategory("INFO", wxPG_LABEL));
+
+	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, m_impl->GetTag()));
+
+	pg->Append(new wxEnumProperty(wxT("Clip"), wxPG_LABEL, MultiSpritesPropertyImpl::BOOL_3TYPE_LABELS));
+	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
+
+	wxPGProperty* col_prop = pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, wxT("<composed>")));
+	Colorf mul_col = m_impl->GetMultiColor();
+	Colorf add_col = m_impl->GetAddColor();
+	wxColour wx_mul_col = wxColour(mul_col.r*255, mul_col.g*255, mul_col.b*255, mul_col.a*255);
+	wxColour wx_add_col = wxColour(add_col.r*255, add_col.g*255, add_col.b*255, add_col.a*255);
+	col_prop->SetExpanded(false);
+	pg->AppendIn(col_prop, new wxColourProperty(wxT("Multi"), wxPG_LABEL, wx_mul_col));
+	pg->SetPropertyAttribute(wxT("Color.Multi"), "HasAlpha", true);
+	pg->AppendIn(col_prop, new wxColourProperty(wxT("Add"), wxPG_LABEL, wx_add_col));
+	pg->SetPropertyAttribute(wxT("Color.Add"), "HasAlpha", true);
+	pg->AppendIn(col_prop, new wxIntProperty(wxT("Alpha"), wxPG_LABEL, add_col.a * 255));
+	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Min", 0);
+	pg->SetPropertyAttribute(wxT("Color.Alpha"), "Max", 255);
+
+	wxPGProperty* col_conv_prop = pg->Append(new wxStringProperty(wxT("Color Conversion"), wxPG_LABEL, wxT("<composed>")));
+	col_conv_prop->SetExpanded(false);
+
+// 	ColorProperty* col_r_prop = new ColorProperty("R");
+// 	col_r_prop->SetColor(m_impl->GetTransColorR());
+// 	pg->AppendIn(col_conv_prop, col_r_prop);
+// 
+// 	ColorProperty* col_g_prop = new ColorProperty("G");
+// 	col_g_prop->SetColor(m_impl->GetTransColorG());
+// 	pg->AppendIn(col_conv_prop, col_g_prop);
+// 
+// 	ColorProperty* col_b_prop = new ColorProperty("B");
+// 	col_b_prop->SetColor(m_impl->GetTransColorB());
+// 	pg->AppendIn(col_conv_prop, col_b_prop);
+
+	// position
 
 	pg->Append(new wxPropertyCategory("POSITION", wxPG_LABEL));
 
-	static const wxChar* align_labels[] = { wxT("none"),
-		wxT("left"), wxT("right"), wxT("up"), wxT("down"), wxT("center x"), wxT("center y"), NULL };
-	pg->Append(new wxEnumProperty(wxT("Align"), wxPG_LABEL, align_labels));
+	pg->Append(new wxEnumProperty(wxT("Align"), wxPG_LABEL, MultiSpritesPropertyImpl::ALIGN_LABELS));
 
-	static const wxChar* center_labels[] = { wxT("none"), 
-		wxT("horizontal"), wxT("vertical"), wxT("relative"), NULL };
-	pg->Append(new wxEnumProperty(wxT("Center"), wxPG_LABEL, center_labels));
+	pg->Append(new wxEnumProperty(wxT("Center"), wxPG_LABEL, MultiSpritesPropertyImpl::CENTER_LABELS));
 
+	Vector pos = m_impl->GetPosition();
 	wxPGProperty* allPosProp = pg->Append(new wxStringProperty(wxT("All Pos"), wxPG_LABEL, wxT("<composed>")));
 	allPosProp->SetExpanded(false);
 	pg->AppendIn(allPosProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, pos.x));
@@ -163,6 +225,8 @@ void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->AppendIn(allPosProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, pos.y));
 	pg->SetPropertyAttribute(wxT("All Pos.Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("All Pos.Y"), "Precision", 1);
+
+	// change
 
 	pg->Append(new wxPropertyCategory("CHANGE", wxPG_LABEL));
 
@@ -189,192 +253,4 @@ void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute(wxT("Scale.dy"), "Precision", 2);
 }
 
-void MultiSpritesPropertySetting::align(const wxAny& value)
-{
-	int type = wxANY_AS(value, int);
-	if (type == 1)
-	{
-		float left = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float l = sprite->getPosition().x - sprite->getSymbol().getSize().xLength()*0.5f;
-			if (l < left)
-				left = l;
-		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float x = left + sprite->getSymbol().getSize().xLength()*0.5f;
-			m_sprites[i]->setTransform(Vector(x, sprite->getPosition().y), sprite->getAngle());
-		}
-	}
-	else if (type == 2)
-	{
-		float right = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float r = sprite->getPosition().x + sprite->getSymbol().getSize().xLength()*0.5f;
-			if (r > right)
-				right = r;
-		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float x = right - sprite->getSymbol().getSize().xLength()*0.5f;
-			m_sprites[i]->setTransform(Vector(x, sprite->getPosition().y), sprite->getAngle());
-		}
-	}
-	else if (type == 3)
-	{
-		float up = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float u = sprite->getPosition().y + sprite->getSymbol().getSize().yLength()*0.5f;
-			if (u > up)
-				up = u;
-		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float y = up - sprite->getSymbol().getSize().yLength()*0.5f;
-			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, y), sprite->getAngle());
-		}
-	}
-	else if (type == 4)
-	{
-		float down = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float d = sprite->getPosition().y - sprite->getSymbol().getSize().yLength()*0.5f;
-			if (d < down)
-				down = d;
-		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float y = down + sprite->getSymbol().getSize().yLength()*0.5f;
-			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, y), sprite->getAngle());
-		}
-	}
-	else if (type == 5)
-	{
-		float down = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			float y = m_sprites[i]->getPosition().y;
-			if (y < down)
-				down = y;
-		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, down), sprite->getAngle());
-		}
-	}
-	else if (type == 6)
-	{
-		float left = FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			float x = m_sprites[i]->getPosition().x;
-			if (x < left)
-				left = x;
-		}
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			m_sprites[i]->setTransform(Vector(left, sprite->getPosition().y), sprite->getAngle());
-		}
-	}
-}
-
-void MultiSpritesPropertySetting::center(const wxAny& value)
-{
-	int type = wxANY_AS(value, int);
-	if (type == 1)
-	{
-		float left = FLT_MAX, right = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float x = sprite->getPosition().x;
-			if (x < left) left = x;
-			if (x > right) right = x;
-		}
-
-		std::vector<ISprite*> sorted(m_sprites);
-		std::sort(sorted.begin(), sorted.end(), SpriteCmp(SpriteCmp::e_x));
-		const float space = (right - left) / (sorted.size() - 1);
-		for (size_t i = 0, n = sorted.size(); i < n; ++i)
-		{
-			ISprite* sprite = sorted[i];
-			sprite->setTransform(Vector(left + space * i, sprite->getPosition().y), sprite->getAngle());
-		}
-	}
-	else if (type == 2)
-	{
-		float down = FLT_MAX, up = -FLT_MAX;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			float y = sprite->getPosition().y;
-			if (y < down) down = y;
-			if (y > up) up = y;
-		}
-
-		std::vector<ISprite*> sorted(m_sprites);
-		std::sort(sorted.begin(), sorted.end(), SpriteCmp(SpriteCmp::e_y));
-		const float space = (up - down) / (sorted.size() - 1);
-		for (size_t i = 0, n = sorted.size(); i < n; ++i)
-		{
-			ISprite* sprite = sorted[i];
-			sprite->setTransform(Vector(sprite->getPosition().x, down + space * i), sprite->getAngle());
-		}
-	}
-	else if (type == 3)
-	{
-		ISprite* base = NULL;
-		float maxArea = 0;
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			float area = m_sprites[i]->getBounding()->area();
-			if (area > maxArea)
-			{
-				maxArea = area;
-				base = m_sprites[i];
-			}
-		}
-
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-		{
-			ISprite* sprite = m_sprites[i];
-			if (sprite != base)
-				sprite->setTransform(base->getPosition(), sprite->getAngle());
-		}
-	}
-}
-
-Vector MultiSpritesPropertySetting::getSamePosition() const
-{
-	if (m_sprites.empty()) {
-		Vector p;
-		p.setInvalid();
-		return p;
-	}
-
-	Vector p = m_sprites[0]->getPosition();
-	for (size_t i = 1, n = m_sprites.size(); i < n; ++i)
-	{
-		if (p != m_sprites[i]->getPosition())
-		{
-			p.setInvalid();
-			break;
-		}
-	}
-	return p;
-}
 } // d2d

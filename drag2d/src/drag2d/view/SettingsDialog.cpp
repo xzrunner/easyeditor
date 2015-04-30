@@ -168,7 +168,7 @@ void SettingsDialog::onChangeShape(wxCommandEvent& event)
 
 void SettingsDialog::onSetBGColor(wxCommandEvent& event)
 {
-	d2d::RGBColorSettingDlg dlg;
+	d2d::RGBColorSettingDlg dlg(this, NULL, m_settings.bg_color);
 	if (dlg.ShowModal()) {
 		m_settings.bg_color = dlg.GetColor();
 	}

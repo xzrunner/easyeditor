@@ -14,7 +14,7 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 {
 	d2d::SpritePropertySetting::onPropertyGridChange(name, value);
 
-	Sprite* spr = static_cast<Sprite*>(m_sprite);
+	Sprite* spr = static_cast<Sprite*>(GetSprite());
 	Scale9Type type = spr->GetScale9Type();
 	if (name == wxT("Width") && type != e_3GridVer) {
 		float w, h;
@@ -42,7 +42,7 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 {
 	d2d::SpritePropertySetting::updateProperties(pg);
 
-	Sprite* spr = static_cast<Sprite*>(m_sprite);
+	Sprite* spr = static_cast<Sprite*>(GetSprite());
 	float w, h;
 	spr->GetSize(w, h);
 
@@ -56,7 +56,7 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("SCALE9", wxPG_LABEL));
 
-	Sprite* spr = static_cast<Sprite*>(m_sprite);
+	Sprite* spr = static_cast<Sprite*>(GetSprite());
 	float w, h;
 	spr->GetSize(w, h);
 

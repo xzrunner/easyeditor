@@ -94,7 +94,7 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			col.r = m_color.Red() / 255.0f;
 			col.g = m_color.Green() / 255.0f;
 			col.b = m_color.Blue() / 255.0f;
-			d2d::HSLColorSettingDlg dlg(m_editPanel, col);
+			d2d::HSLColorSettingDlg dlg(m_editPanel, NULL, col);
 			if (dlg.ShowModal()) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
