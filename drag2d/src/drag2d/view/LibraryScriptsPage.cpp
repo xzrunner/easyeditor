@@ -1,9 +1,11 @@
 #include "LibraryScriptsPage.h"
 #include "LibraryList.h"
+#include "ExceptionDlg.h"
 
 #include "dataset/ScriptsSymbol.h"
 #include "dataset/SymbolMgr.h"
 #include "common/FileNameParser.h"
+#include "common/Exception.h"
 #include "view/GLCanvas.h"
 
 namespace d2d
@@ -32,11 +34,16 @@ namespace d2d
 			dlg.GetPaths(filenames);
 			for (size_t i = 0, n = filenames.size(); i < n; ++i)
 			{
-				const wxString& filepath = filenames[i];
-				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
-				symbol->RefreshThumbnail(filepath);
-				m_list->insert(symbol);
-				symbol->Release();
+				try {
+					const wxString& filepath = filenames[i];
+					ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
+					symbol->RefreshThumbnail(filepath);
+					m_list->insert(symbol);
+					symbol->Release();
+				} catch (Exception& e) {
+					ExceptionDlg dlg(m_parent, e);
+					dlg.ShowModal();
+				}
 			}
 
 			if (m_canvas) {

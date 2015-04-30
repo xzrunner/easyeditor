@@ -28,10 +28,15 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			const wxString& filename = filenames[i];
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
-			symbol->RefreshThumbnail(filename);
-			m_list->insert(symbol);
-			symbol->Release();
+			try {
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+				symbol->RefreshThumbnail(filename);
+				m_list->insert(symbol);
+				symbol->Release();
+			} catch (d2d::Exception& e) {
+				d2d::ExceptionDlg dlg(m_parent, e);
+				dlg.ShowModal();
+			}
 		}
 
 		if (m_canvas) {

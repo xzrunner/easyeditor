@@ -12,9 +12,9 @@ class Vector;
 class CombinedDropTarget : public wxDropTarget
 {
 public:
-	CombinedDropTarget();
+	CombinedDropTarget(wxWindow* parent);
 	virtual ~CombinedDropTarget() {}
-
+ 
 	//
 	//	interface wxDropTarget
 	//
@@ -23,6 +23,9 @@ public:
 	virtual bool OnDropSymbol(ISymbol* symbol, const Vector& pos) { return false; }
 	virtual void OnDropText(wxCoord x, wxCoord y, const wxString& text) = 0;
 	virtual void OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) = 0;
+
+private:
+	wxWindow* m_parent;
 
 }; // CombinedDropTarget 
 

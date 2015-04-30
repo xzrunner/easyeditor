@@ -12,7 +12,8 @@ namespace d2d
 StageDropTarget::StageDropTarget(EditPanel* edit_panel, 
 								 MultiSpritesImpl* sprites_impl, 
 								 LibraryPanel* library)
-	: m_edit_panel(edit_panel)
+	: CombinedDropTarget(edit_panel)
+	, m_edit_panel(edit_panel)
 	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {

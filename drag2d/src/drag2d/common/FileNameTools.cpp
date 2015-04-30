@@ -127,8 +127,7 @@ wxString FilenameTools::getExistFilepath(const wxString& filepath, const wxStrin
 					return filepathFixed;
 			}
 // 			throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
-// 			return wxEmptyString;
-			return filepath;
+			return wxEmptyString;
 		}
 		else
 		{

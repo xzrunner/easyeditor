@@ -40,10 +40,15 @@ void LibraryPage::onAddPress(wxCommandEvent& event)
 			const wxString& filename = filenames[i];
 			std::string type = filename.substr(filename.find_last_of(".") + 1);
 			StringTools::toLower(type);
-			if (type == "json") {
-				loadFromJsonFile(filename);
-			} else if (type == "lua") {
-				loadFromLuaFile(filename);
+			try {
+				if (type == "json") {
+					loadFromJsonFile(filename);
+				} else if (type == "lua") {
+					loadFromLuaFile(filename);
+				}
+			} catch (d2d::Exception& e) {
+				d2d::ExceptionDlg dlg(m_parent, e);
+				dlg.ShowModal();
 			}
 		}
 

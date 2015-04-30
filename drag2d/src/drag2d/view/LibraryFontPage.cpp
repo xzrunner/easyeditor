@@ -1,8 +1,10 @@
 #include "LibraryFontPage.h"
 #include "LibraryList.h"
+#include "ExceptionDlg.h"
 
 #include "dataset/SymbolMgr.h"
 #include "dataset/FontSymbol.h"
+#include "common/Exception.h"
 
 namespace d2d
 {
@@ -24,9 +26,14 @@ void LibraryFontPage::onAddPress(wxCommandEvent& event)
 		wxEmptyString, wxT("*.ttf"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(dlg.GetPath());
-		m_list->insert(symbol);
-		symbol->Release();
+		try {
+			ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(dlg.GetPath());
+			m_list->insert(symbol);
+			symbol->Release();
+		} catch (Exception& e) {
+			ExceptionDlg dlg(m_parent, e);
+			dlg.ShowModal();
+		}
 	}
 }
 } // d2d

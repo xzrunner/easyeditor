@@ -1,10 +1,12 @@
 #include "LibraryFontBlankPage.h"
 #include "LibraryFontBlankList.h"
 #include "FontBlankDialog.h"
+#include "ExceptionDlg.h"
 
 #include "dataset/SymbolMgr.h"
 #include "dataset/FontBlankSymbol.h"
 #include "common/FileNameParser.h"
+#include "common/Exception.h"
 
 #include <json/json.h>
 
@@ -60,9 +62,14 @@ void LibraryFontBlankPage::onAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
-			m_list->insert(symbol);
-			symbol->Release();
+			try {
+				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+				m_list->insert(symbol);
+				symbol->Release();
+			} catch (Exception& e) {
+				ExceptionDlg dlg(m_parent, e);
+				dlg.ShowModal();
+			}
 		}
 	}
 }
