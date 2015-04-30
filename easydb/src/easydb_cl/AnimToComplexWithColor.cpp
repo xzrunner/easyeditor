@@ -41,17 +41,24 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 
 	std::string line;
 	d2d::Colori last_col;
+	std::string last_ext;
 	while (std::getline(fin, line)) 
 	{
 		std::stringstream ss(line);
 
 		std::string filepath;
 		d2d::Colori col;
-		ss >> filepath >> col.r >> col.g >> col.b;
+		std::string ext;
+		ss >> filepath >> col.r >> col.g >> col.b >> ext;
 		if (col.r == 0 && col.g == 0 && col.b == 0) {
 			col = last_col;
 		} else {
 			last_col = col;
+		}
+		if (ext.empty()) {
+			ext = last_ext;
+		} else {
+			last_ext = ext;
 		}
 		//////////////////////////////////////////////////////////////////////////
 		ecomplex::Symbol* symbol = new ecomplex::Symbol;
@@ -62,7 +69,7 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		symbol->m_sprites.push_back(sprite);
 
 		std::string output = filepath.substr(0, filepath.find_last_of('_'));
-		output = dir + "\\" + output + "_blue_complex.json";
+		output = dir + "\\" + output + "_" + ext + "_complex.json";
 		ecomplex::FileSaver::store(output.c_str(), symbol);
 
 		delete symbol;
