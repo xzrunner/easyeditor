@@ -41,6 +41,7 @@ public:
 	void DebugDraw() const;
 
 	void Pathfinding(const d2d::Vector& start, const d2d::Vector& end);
+	void PointQuery(const d2d::Vector& pos);
 
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);

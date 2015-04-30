@@ -18,6 +18,8 @@ public:
 
 	void DebugDraw() const;
 
+	void SelectNode(const d2d::Vector& pos);
+
 private:
 	class Node
 	{
@@ -31,11 +33,16 @@ private:
 
 	private:
 		bool IsIntersect(const d2d::Rect& rect) const;
+		bool IsContain(const d2d::Vector& pos) const;
+		bool IsContain(const d2d::ISprite* spr) const;
 
+		bool NeedSplit() const;
 		void Split();
 
 	private:
 		static const int MAX_COUNT;
+		static const float MAX_AREA;
+		static const int MIN_GRID;
 
 	private:
 		d2d::Rect m_rect;
@@ -52,6 +59,8 @@ private:
 
 private:
 	Node* m_root;
+
+	Node* m_selected;
 
 }; // Quadtree
 

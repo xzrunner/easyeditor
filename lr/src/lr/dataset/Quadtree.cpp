@@ -6,6 +6,7 @@ namespace lr
 {
 
 Quadtree::Quadtree(const d2d::Rect& rect)
+	: m_selected(NULL)
 {
 	m_root = new Node(rect);
 }
@@ -56,13 +57,40 @@ void Quadtree::DebugDraw() const
 	{
 		Node* node = buffer.front(); buffer.pop();
 
-		d2d::PrimitiveDraw::rect(d2d::Matrix(), node->m_rect, d2d::LIGHT_RED_THIN_LINE);
+		d2d::PrimitiveDraw::rect(d2d::Matrix(), node->m_rect, d2d::LIGHT_GREY_THIN_LINE);
 
 		if (!node->IsLeaf()) 
 		{
 			for (int i = 0; i < 4; ++i) {
 				Node* cn = node->m_children[i];
 				buffer.push(cn);
+			}			
+		}
+	}
+
+	if (m_selected) {
+		d2d::PrimitiveDraw::rect(d2d::Matrix(), m_selected->m_rect, d2d::LIGHT_RED_THIN_LINE);
+		for (int i = 0, n = m_selected->m_sprites.size(); i < n; ++i) {
+			d2d::SpriteDraw::drawSprite(m_selected->m_sprites[i], d2d::Matrix(), d2d::LIGHT_BLUE);
+		}
+	}
+}
+
+void Quadtree::SelectNode(const d2d::Vector& pos)
+{
+	std::queue<Node*> buffer;
+	buffer.push(m_root);
+	while (!buffer.empty())
+	{
+		Node* node = buffer.front(); buffer.pop();
+		if (node->IsLeaf()) {
+			m_selected = node;
+		} else {
+			for (int i = 0; i < 4; ++i) {
+				Node* cn = node->m_children[i];
+				if (cn->IsContain(pos)) {
+					buffer.push(cn);
+				}
 			}			
 		}
 	}
@@ -73,6 +101,8 @@ void Quadtree::DebugDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 const int Quadtree::Node::MAX_COUNT = 5;
+const float Quadtree::Node::MAX_AREA = 0.5f;
+const int Quadtree::Node::MIN_GRID = 8;
 
 Quadtree::Node::
 Node(const d2d::Rect& rect)
@@ -99,8 +129,9 @@ Insert(const d2d::ISprite* spr)
 
 	if (IsLeaf()) 
 	{
+
 	 	m_sprites.push_back(spr);
-	 	if (m_sprites.size() > MAX_COUNT) {
+	 	if (NeedSplit()) {
 	 		Split();
 	 	}
 	} 
@@ -126,6 +157,24 @@ bool Quadtree::Node::
 IsIntersect(const d2d::Rect& rect) const
 {
 	return d2d::Math::isRectIntersectRect(m_rect, rect);
+}
+
+bool Quadtree::Node::
+IsContain(const d2d::Vector& pos) const
+{
+	return d2d::Math::isPointInRect(pos, m_rect);
+}
+
+bool Quadtree::Node::
+IsContain(const d2d::ISprite* spr) const
+{
+	
+}
+
+bool Quadtree::Node::
+NeedSplit() const
+{
+	return m_sprites.size() > MAX_COUNT;
 }
 
 void Quadtree::Node::

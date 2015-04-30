@@ -65,8 +65,8 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	d2d::SpritesPanelImpl::insertSprite(sprite);
 	m_viewlist->insert(sprite);
 
+	m_sindex.Insert(sprite);
 	if (m_pathfinding) {
-		m_sindex.Insert(sprite);
 		m_pathfinding->DisableRegion(sprite, false);
 	}
 }
@@ -79,9 +79,8 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 
 void StagePanel::DebugDraw() const
 {
-	 if (m_pathfinding)
-	{
-		m_sindex.DebugDraw();
+	m_sindex.DebugDraw();
+	if (m_pathfinding) {
 		m_pathfinding->DebugDraw();
 	}
 }
@@ -91,6 +90,11 @@ void StagePanel::Pathfinding(const d2d::Vector& start, const d2d::Vector& end)
 	if (m_pathfinding) {
 		m_pathfinding->QueryRoute(start, end);
 	}
+}
+
+void StagePanel::PointQuery(const d2d::Vector& pos)
+{
+	m_sindex.SelectNode(pos);
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)

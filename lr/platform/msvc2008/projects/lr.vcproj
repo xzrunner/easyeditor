@@ -397,6 +397,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\lr\preview\PathQuadtree.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\preview\PathQuadtree.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\lr\preview\PathUtil.cpp"
 					>
 				</File>

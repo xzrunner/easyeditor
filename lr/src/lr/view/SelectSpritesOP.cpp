@@ -24,13 +24,12 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) return true;
 
-	if (!PATHFINDING) {
-		return false;
-	}
-
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+
+	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	stage->PointQuery(pos);
+
 	if (m_first_press.isValid()) {
-		StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
 		stage->Pathfinding(m_first_press, pos);
 		m_first_press.setInvalid();
 	} else {
