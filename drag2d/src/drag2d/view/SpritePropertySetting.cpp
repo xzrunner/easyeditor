@@ -231,6 +231,15 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
+	ColorProperty* rp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.R"));
+	rp->SetColor(&m_sprite->r_trans);
+
+	ColorProperty* gp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.G"));
+	gp->SetColor(&m_sprite->g_trans);
+
+	ColorProperty* bp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.B"));
+	bp->SetColor(&m_sprite->b_trans);
+
 	pg->GetProperty(wxT("Clip"))->SetValue(m_sprite->clip);
 
 	pg->GetProperty(wxT("Pos.X"))->SetValue(m_sprite->getPosition().x);
