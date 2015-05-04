@@ -77,7 +77,7 @@ void CircleShape::Translate(const d2d::Vector& offset)
 void CircleShape::draw(const d2d::Matrix& mt,
 					   const d2d::Colorf& color/* = d2d::Colorf(0, 0, 0)*/) const
 {
-	d2d::PrimitiveDraw::drawCircle(center, radius, false, 3, color, 32);
+	d2d::PrimitiveDraw::drawCircle(mt, center, radius, false, 3, color, 32);
 }
 
 d2d::IPropertySetting* CircleShape::createPropertySetting(d2d::EditPanel* editPanel)
