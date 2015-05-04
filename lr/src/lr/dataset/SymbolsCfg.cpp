@@ -93,6 +93,7 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value)
 	InitLibrarySymbols(value["decoration"], "装饰", "decoration");
 	InitLibrarySymbols(value["collision region"], "碰撞区", "collision region");
 	InitLibrarySymbols(value["point"], "点", "point");
+	InitLibrarySymbols(value["path"], "路径", "path");
 	InitLibrarySymbols(value["region"], "区域", "region");
 }
 
