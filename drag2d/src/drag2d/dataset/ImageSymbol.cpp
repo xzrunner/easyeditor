@@ -53,8 +53,6 @@ void ImageSymbol::draw(const Matrix& mt,
 	shader->SetSpriteColor(mul, add);
 	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
 	m_image->draw(mt, m_region);
-
-	SpriteTools::DrawName(sprite, mt);
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const

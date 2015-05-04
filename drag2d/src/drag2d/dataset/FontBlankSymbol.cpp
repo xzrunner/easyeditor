@@ -63,8 +63,6 @@ void FontBlankSymbol::draw(const Matrix& mt,
 	if (setting.visible_label_text) {
 		DrawText(sprite, mt);
 	}
-
-	SpriteTools::DrawName(sprite, mt);
 }
 
 Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const

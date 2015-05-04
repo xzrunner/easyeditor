@@ -109,8 +109,6 @@ void Symbol::draw(const d2d::Matrix& mt,
 			d2d::SpriteDraw::drawSprite(m_sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
 
 		d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
-
-		d2d::SpriteTools::DrawName(sprite, mt);
 	}
 }
 

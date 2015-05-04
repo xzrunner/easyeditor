@@ -55,8 +55,6 @@ void Symbol::draw(const d2d::Matrix& mt,
 			Tools::drawAnimSymbol(this, mt, index % getMaxFrameIndex() + 1, mul, add, r_trans, g_trans, b_trans);
 		}
 	}
-
-	d2d::SpriteTools::DrawName(sprite, mt);
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const

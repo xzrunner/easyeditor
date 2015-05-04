@@ -1,6 +1,7 @@
 #include "SpriteDraw.h"
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
+#include "dataset/SpriteTools.h"
 
 namespace d2d
 {
@@ -37,6 +38,8 @@ void SpriteDraw::drawSprite(const ISprite* sprite,
 	_b_trans.b = sprite->b_trans.r * r_trans.b + sprite->b_trans.g * g_trans.b + sprite->b_trans.b * b_trans.b;
 
 	sprite->getSymbol().draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
+
+	SpriteTools::DrawName(sprite, t);
 }
 
 void SpriteDraw::drawSprite(const ISymbol* symbol, 
