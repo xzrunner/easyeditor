@@ -4,13 +4,13 @@
 #include <drag2d.h>
 
 #include "dataset/SymbolsCfg.h"
-#include "dataset/Quadtree.h"
 #include "preview/IPathfinding.h"
 
 namespace lr
 {
 
 class SymbolsCfg;
+class Quadtree;
 
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
@@ -57,7 +57,7 @@ private:
 	d2d::AbstractEditOP* m_paste_op;
 	d2d::AbstractEditOP* m_arrange_op;
 
-	Quadtree m_sindex;
+	Quadtree* m_sindex;
 
 	preview::IPathfinding* m_pathfinding;
 
