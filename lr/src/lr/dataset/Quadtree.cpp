@@ -189,16 +189,23 @@ IsContain(const d2d::ISprite* spr) const
 bool Quadtree::Node::
 NeedSplit() const
 {
-//	return m_sprites.size() > MAX_COUNT;
-
 	if (m_sprites.empty()) {
 		return false;
 	}
-	float area = 0;
+	float a_shape = 0;
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		area += GetContainArea(m_sprites[i]);
+		a_shape += GetContainArea(m_sprites[i]);
 	}
-	return (area / (m_rect.xLength() * m_rect.yLength())) > 0.5f;
+
+	float a_rect = m_rect.xLength() * m_rect.yLength();
+	float p = a_shape / a_rect;
+
+	if (fabs(a_rect - 0) < 0.001f) {
+		int zz = 0;
+	}
+	wxLogDebug("NeedSplit area %f, a %f, p %f", a_shape, a_rect, p);
+
+	return p < 0.5f && a_shape > 100;
 }
 
 void Quadtree::Node::
@@ -242,20 +249,19 @@ GetContainArea(const d2d::ISprite* spr) const
 	std::vector<d2d::Vector> bound;
 	d2d::Math::TransVertices(mt, poly->GetVertices(), bound);
 
-	std::vector<d2d::Vector> lines;
-	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMin));
-	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMax));
-	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMax));
-	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMax));
-	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMax));
-	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMin));
-	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMin));
-	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMin));
+	std::vector<d2d::Vector> loop;
+	loop.push_back(d2d::Vector(m_rect.xMin, m_rect.yMin));
+	loop.push_back(d2d::Vector(m_rect.xMin, m_rect.yMax));
+	loop.push_back(d2d::Vector(m_rect.xMax, m_rect.yMax));
+	loop.push_back(d2d::Vector(m_rect.xMax, m_rect.yMin));
+	std::vector<std::vector<d2d::Vector> > loops;
+	loops.push_back(loop);
 
 	float area = 0.0f;
 
+	std::vector<d2d::Vector> lines;
 	std::vector<d2d::Vector> tris;
-	d2d::Triangulation::lines(bound, lines, tris);
+	d2d::Triangulation::linesAndLoops(bound, lines, loops, tris);
 	for (int i = 0, n = tris.size() / 3; i < n; ++i)
 	{
 		d2d::Vector center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;
