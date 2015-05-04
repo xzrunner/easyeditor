@@ -26,6 +26,8 @@ ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 		querySpritesByRect(Rect(pos, 1, 1), false, sprites);
 		if (!sprites.empty()) {
 			selected = sprites.back();
+		} else {
+			selected = NULL;
 		}
 	}
 	return selected;
