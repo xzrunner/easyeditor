@@ -39,6 +39,8 @@ private:
 		bool NeedSplit() const;
 		void Split();
 
+		float GetContainArea(const d2d::ISprite* spr) const;
+
 	private:
 		static const int MAX_COUNT;
 		static const float MAX_AREA;

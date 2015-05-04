@@ -1,6 +1,7 @@
 #include "Quadtree.h"
 
 #include <queue>
+#include <easyshape.h>
 
 namespace lr
 {
@@ -129,8 +130,9 @@ Insert(const d2d::ISprite* spr)
 
 	if (IsLeaf()) 
 	{
-
-	 	m_sprites.push_back(spr);
+		if (IsContain(spr)) {
+			m_sprites.push_back(spr);
+		}
 	 	if (NeedSplit()) {
 	 		Split();
 	 	}
@@ -168,13 +170,35 @@ IsContain(const d2d::Vector& pos) const
 bool Quadtree::Node::
 IsContain(const d2d::ISprite* spr) const
 {
-	
+	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->getSymbol();
+	assert(shape.GetType() == libshape::e_polygon);
+
+	const std::vector<d2d::IShape*>& shapes = shape.GetShapes();
+	assert(!shapes.empty());
+
+	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shapes[0]);
+
+	d2d::Matrix mt;
+	spr->GetTransMatrix(mt);
+	std::vector<d2d::Vector> bound;
+	d2d::Math::TransVertices(mt, poly->GetVertices(), bound);
+
+	return d2d::Math::isPolylineIntersectRect(bound, true, m_rect);
 }
 
 bool Quadtree::Node::
 NeedSplit() const
 {
-	return m_sprites.size() > MAX_COUNT;
+//	return m_sprites.size() > MAX_COUNT;
+
+	if (m_sprites.empty()) {
+		return false;
+	}
+	float area = 0;
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		area += GetContainArea(m_sprites[i]);
+	}
+	return (area / (m_rect.xLength() * m_rect.yLength())) > 0.5f;
 }
 
 void Quadtree::Node::
@@ -200,6 +224,47 @@ Split()
 	}
 
 	m_sprites.clear();
+}
+
+float Quadtree::Node::
+GetContainArea(const d2d::ISprite* spr) const
+{
+	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->getSymbol();
+	assert(shape.GetType() == libshape::e_polygon);
+
+	const std::vector<d2d::IShape*>& shapes = shape.GetShapes();
+	assert(!shapes.empty());
+
+	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shapes[0]);
+
+	d2d::Matrix mt;
+	spr->GetTransMatrix(mt);
+	std::vector<d2d::Vector> bound;
+	d2d::Math::TransVertices(mt, poly->GetVertices(), bound);
+
+	std::vector<d2d::Vector> lines;
+	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMin));
+	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMax));
+	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMax));
+	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMax));
+	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMax));
+	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMin));
+	lines.push_back(d2d::Vector(m_rect.xMax, m_rect.yMin));
+	lines.push_back(d2d::Vector(m_rect.xMin, m_rect.yMin));
+
+	float area = 0.0f;
+
+	std::vector<d2d::Vector> tris;
+	d2d::Triangulation::lines(bound, lines, tris);
+	for (int i = 0, n = tris.size() / 3; i < n; ++i)
+	{
+		d2d::Vector center = (tris[i*3] + tris[i*3+1] + tris[i*3+2]) / 3;
+		if (d2d::Math::isPointInRect(center, m_rect)) {
+			area += d2d::Math::GetTriangleArea(tris[i*3], tris[i*3+1], tris[i*3+2]);
+		}
+	}
+
+	return area;
 }
 
 }
