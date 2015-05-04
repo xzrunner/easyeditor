@@ -2,7 +2,7 @@
 #include "Utility.h"
 #include "KeysPanel.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 #include "dataset/Layer.h"
 
 namespace eanim
@@ -19,8 +19,9 @@ static const int FLAG_RADIUS = 8;
 static const int FLAG_EDITABLE_X = 80;
 static const int FLAG_VISIBLE_X = 120;
 
-LayersContentWidget::LayersContentWidget(wxWindow* parent)
+LayersContentWidget::LayersContentWidget(wxWindow* parent, Controller* ctrl)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
+	, m_ctrl(ctrl)
 {
 	m_dragFlagLine = -1;
 }
@@ -49,7 +50,7 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 {
 	wxPaintDC dc(this);
 
-	const size_t size = Context::Instance()->layers.size();
+	const size_t size = m_ctrl->GetLayers().size();
 	const float width = GetSize().x;
 
 	// background
@@ -71,10 +72,9 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 	}
 
 	// selected
-	if (Context::Instance()->layer() != -1)
+	if (m_ctrl->layer() != -1)
 	{
-		int screenIndex = Context::Instance()->layers.size() 
-			- Context::Instance()->layer() - 1;
+		int screenIndex = m_ctrl->GetLayers().size() - m_ctrl->layer() - 1;
 		dc.SetPen(wxPen(MEDIUM_BLUE));
 		dc.SetBrush(wxBrush(MEDIUM_BLUE));
 		dc.DrawRectangle(0, FRAME_GRID_HEIGHT * screenIndex, width, FRAME_GRID_HEIGHT);
@@ -95,7 +95,7 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 	for (size_t i = 0; i < size; ++i)
 	{
 		size_t storeIndex = size - i - 1;
-		Layer* layer = Context::Instance()->layers.getLayer(storeIndex);
+		Layer* layer = m_ctrl->GetLayers().getLayer(storeIndex);
 		dc.DrawText(layer->name, 5, FRAME_GRID_HEIGHT * i);
 
 		dc.SetPen(*wxBLACK_PEN);
@@ -125,17 +125,16 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 	static bool isDragOpen = false;
 	static int xpress = 0, ypress = 0;
 
-	const unsigned int size = Context::Instance()->layers.size();
+	const unsigned int size = m_ctrl->GetLayers().size();
 
 	if (event.LeftDown())
 	{
 		xpress = event.GetX();
 		ypress = event.GetY();
 
-		Context* context = Context::Instance();
 		unsigned int screenIndex = event.GetY() / FRAME_GRID_HEIGHT;
 		int layer = size - screenIndex - 1;
-		context->setCurrFrame(layer, context->frame());
+		m_ctrl->setCurrFrame(layer, m_ctrl->frame());
 		if (screenIndex < size) 
 			isDragOpen = true;
 	}
@@ -147,30 +146,30 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			int layerIndex = size - screenIndex - 1;
 	
 			int x = event.GetX();
-			Layer* layer = Context::Instance()->layers.getLayer(layerIndex);
+			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
 			if (x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
 				layer->editable = !layer->editable;
 				Refresh();
-				Context::Instance()->stage->Refresh();
+				m_ctrl->Refresh();
 			} else if (x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
 				layer->visible = !layer->visible;
 				Refresh();
-				Context::Instance()->stage->Refresh();
+				m_ctrl->Refresh();
 			}
 		}
 
 		isDragOpen = false;
 		if (m_dragFlagLine != -1) 
 		{
-			int from = Context::Instance()->layer(),
+			int from = m_ctrl->layer(),
 				to = size - m_dragFlagLine;
 			if (to == from || to == from + 1)
 				;
 			else
 			{
 				if (to > from) --to;
-				Context::Instance()->layers.changeLayerOrder(from, to);
-				Context::Instance()->keysPanel->Refresh();
+				m_ctrl->GetLayers().changeLayerOrder(from, to);
+				m_ctrl->Refresh();
 			}
 			Refresh();
 		}
@@ -198,7 +197,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 		int layerIndex = size - screenIndex - 1;
 		if (layerIndex < size)
 		{
-			Layer* layer = Context::Instance()->layers.getLayer(layerIndex);
+			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
 			
 			wxPoint pos(GetScreenPosition() + wxPoint(event.GetX(), event.GetY()));
 			d2d::SetValueDialog dlg(this, wxT("Set layer's name"), layer->name, pos);

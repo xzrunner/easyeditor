@@ -6,12 +6,13 @@
 
 namespace eanim
 {
+	class Controller;
 	class KeyFrame;
 
 	class Layer
 	{
 	public:
-		Layer();
+		Layer(Controller* ctrl);
 		~Layer();
 
 		bool isKeyFrame(int time) const;
@@ -48,6 +49,8 @@ namespace eanim
 			insert(int index, KeyFrame* frame);
 
 	private:
+		Controller* m_ctrl;
+
 		std::map<int, KeyFrame*> m_frames;
 
 		SpriteObserver m_spriteObserver;

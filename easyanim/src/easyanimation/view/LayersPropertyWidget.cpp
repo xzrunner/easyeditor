@@ -2,13 +2,14 @@
 #include "LayersPanel.h"
 #include "Utility.h"
 
-#include "frame/Context.h"
+#include "../frame/Controller.h"
 
 namespace eanim
 {
 
-LayersPropertyWidget::LayersPropertyWidget(wxWindow* parent)
+LayersPropertyWidget::LayersPropertyWidget(wxWindow* parent, Controller* ctrl)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(-1, FRAME_GRID_HEIGHT), wxBORDER_NONE)
+	, m_ctrl(ctrl)
 {
 	initLayout();
 }
@@ -47,12 +48,12 @@ void LayersPropertyWidget::initLayout()
 
 void LayersPropertyWidget::onAddLayer(wxCommandEvent& event)
 {
-	static_cast<LayersPanel*>(Context::Instance()->layersPanel)->insertLayer();
+	m_ctrl->GetLayersPanel()->insertLayer();
 }
 
 void LayersPropertyWidget::onDelLayer(wxCommandEvent& event)
 {
-	static_cast<LayersPanel*>(Context::Instance()->layersPanel)->removeLayer();
+	m_ctrl->GetLayersPanel()->removeLayer();
 }
 
 //void LayersPropertyWidget::onPlay(wxCommandEvent& event)
@@ -62,6 +63,6 @@ void LayersPropertyWidget::onDelLayer(wxCommandEvent& event)
 
 void LayersPropertyWidget::onChangeFps(wxSpinEvent& event)
 {
-	Context::Instance()->fps = event.GetValue();
+	m_ctrl->fps = event.GetValue();
 }
 } // eanim

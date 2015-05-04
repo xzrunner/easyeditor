@@ -4,13 +4,14 @@
 #include "KeysPanel.h"
 #include "StagePanel.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 
 namespace eanim
 {
 
-LayersPanel::LayersPanel(wxWindow* parent)
+LayersPanel::LayersPanel(wxWindow* parent, Controller* ctrl)
 	: wxPanel(parent)
+	, m_ctrl(ctrl)
 {
 	initLayout();
 	insertLayer();
@@ -18,28 +19,30 @@ LayersPanel::LayersPanel(wxWindow* parent)
 
 void LayersPanel::insertLayer()
 {
-	Context* context = Context::Instance();
-	int layer = context->layers.size();
-	context->setCurrFrame(layer, context->frame());
-	context->layers.newLayer();
+	LayersMgr& layers = m_ctrl->GetLayers();
+
+	m_ctrl->setCurrFrame(layers.size(), m_ctrl->frame());
+	layers.newLayer();
+
 	m_parent->Refresh();
 }
 
 void LayersPanel::removeLayer()
 {
-	Context* context = Context::Instance();
+	LayersMgr& layers = m_ctrl->GetLayers();
 
-	static_cast<StagePanel*>(context->stage)->removeSpriteSelection();
-	context->layers.removeLayer(context->layer());
-	if (context->layers.size() == 0) 
+	m_ctrl->GetStagePanel()->removeSpriteSelection();
+
+	layers.removeLayer(m_ctrl->layer());
+	if (layers.size() == 0) 
 	{
-		context->setCurrFrame(-1, context->frame());
+		m_ctrl->setCurrFrame(-1, m_ctrl->frame());
 	}
-	else if (context->layer() > 0) 
+	else if (m_ctrl->layer() > 0) 
 	{
-		context->setCurrFrame(context->layer() - 1, context->frame());
+		m_ctrl->setCurrFrame(m_ctrl->layer() - 1, m_ctrl->frame());
 	}
-	static_cast<KeysPanel*>(context->keysPanel)->setCurrPos(context->frame());
+	m_ctrl->GetKeysPanel()->setCurrPos(m_ctrl->frame());
 }
 
 //void LayersPanel::onPlay()
@@ -61,8 +64,8 @@ void LayersPanel::setFPS(int fps)
 void LayersPanel::initLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(m_layersProperty = new LayersPropertyWidget(this), 0, wxALIGN_LEFT);
-	sizer->Add(m_contentPanel = new LayersContentWidget(this), 1, wxEXPAND);
+	sizer->Add(m_layersProperty = new LayersPropertyWidget(this, m_ctrl), 0, wxALIGN_LEFT);
+	sizer->Add(m_contentPanel = new LayersContentWidget(this, m_ctrl), 1, wxEXPAND);
 	SetSizer(sizer);
 }
 

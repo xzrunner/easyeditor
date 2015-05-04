@@ -265,6 +265,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easyanimation\frame\Controller.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\frame\Controller.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easyanimation\frame\FileIO.cpp"
 				>
 			</File>
@@ -286,6 +294,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\easyanimation\frame\main.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\frame\Task.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\frame\Task.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\frame\Widgets.cpp"
 				>
 			</File>
 			<Filter
@@ -551,6 +571,10 @@
 		</Filter>
 		<File
 			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\easyanimation\frame\Widgets.h"
 			>
 		</File>
 	</Files>

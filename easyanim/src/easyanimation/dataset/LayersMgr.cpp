@@ -1,10 +1,15 @@
 #include "LayersMgr.h"
 #include "Layer.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 
 namespace eanim
 {
+
+LayersMgr::LayersMgr(Controller* ctrl)
+	: m_ctrl(ctrl)
+{
+}
 
 LayersMgr::~LayersMgr()
 {
@@ -13,12 +18,12 @@ LayersMgr::~LayersMgr()
 
 void LayersMgr::newLayer()
 {
-	m_layers.push_back(new Layer);
+	m_layers.push_back(new Layer(m_ctrl));
 }
 
 void LayersMgr::insertLayer(Layer* layer)
 {
-	Context::Instance()->setCurrFrame(m_layers.size(), 1);
+	m_ctrl->setCurrFrame(m_layers.size(), 1);
 	m_layers.push_back(layer);
 }
 

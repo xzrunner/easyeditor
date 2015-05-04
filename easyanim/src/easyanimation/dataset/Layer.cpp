@@ -1,14 +1,15 @@
 #include "Layer.h"
 #include "KeyFrame.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 #include "view/KeysPanel.h"
 
 namespace eanim
 {
 
-Layer::Layer()
-	: m_spriteObserver(*this)
+Layer::Layer(Controller* ctrl)
+	: m_ctrl(ctrl)
+	, m_spriteObserver(*this)
 {
 	static int count = 0;
 	name = "Layer" + StringTools::intToString(count++);
@@ -79,52 +80,50 @@ void Layer::removeFrame(int time)
 
 void Layer::insertKeyFrame(KeyFrame* frame)
 {
-	Context* context = Context::Instance();
-
 	std::pair<std::map<int, KeyFrame*>::iterator, bool> status 
 		= insert(frame->getTime(), frame);
 	if (!status.second)
 	{
 		if (frame != status.first->second)
 		{
-			if (status.first->second->getTime() == context->maxFrame)
-				static_cast<KeysPanel*>(context->keysPanel)->setCurrPos(INT_MAX);
-
+			if (status.first->second->getTime() == m_ctrl->GetMaxFrame()) {
+				m_ctrl->SetKeysPanelPos(INT_MAX);
+			}
 			delete status.first->second;
 			status.first->second = frame;
 		}
 	}
 
-	if (frame->getTime() > context->maxFrame)
-		context->maxFrame = frame->getTime();
+	if (frame->getTime() > m_ctrl->GetMaxFrame()) {
+		m_ctrl->SetMaxFrame(frame->getTime());
+	}
 
-	context->setCurrFrame(context->layer(), frame->getTime());
+	m_ctrl->setCurrFrame(m_ctrl->layer(), frame->getTime());
 }
 
 void Layer::insertKeyFrame(int time)
 {
-	Context* context = Context::Instance();
-
 	if (!m_frames.empty())
 	{
 		std::map<int, KeyFrame*>::iterator itr = m_frames.end();
 		--itr;
 		if (itr->first < time)
 		{
-			KeyFrame* frame = new KeyFrame(time);
+			KeyFrame* frame = new KeyFrame(m_ctrl, time);
 			insert(time, frame);
 			frame->copyKeyFrame(itr->second);
 
-			if (time > context->maxFrame)
-				context->maxFrame = time;
+			if (time > m_ctrl->GetMaxFrame()) {
+				m_ctrl->SetMaxFrame(time);
+			}
 
-			context->setCurrFrame(context->layer(), time);
+			m_ctrl->setCurrFrame(m_ctrl->layer(), time);
 		}
 		else
-			insert(time, new KeyFrame(time));
+			insert(time, new KeyFrame(m_ctrl, time));
 	}
 	else
-		insert(1, new KeyFrame(1));
+		insert(1, new KeyFrame(m_ctrl, 1));
 }
 
 void Layer::removeKeyFrame(int time)
@@ -137,9 +136,8 @@ void Layer::removeKeyFrame(int time)
 		delete itr->second;
 		m_frames.erase(itr);
 
-		Context* context = Context::Instance();
-		static_cast<KeysPanel*>(context->keysPanel)->setCurrPos(INT_MAX);
-		context->maxFrame = context->frame();
+		m_ctrl->SetKeysPanelPos(INT_MAX);
+		m_ctrl->SetMaxFrame(m_ctrl->frame());
 	}
 }
 

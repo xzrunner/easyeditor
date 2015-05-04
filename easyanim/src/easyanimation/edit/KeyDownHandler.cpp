@@ -1,12 +1,14 @@
 #include "KeyDownHandler.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 
 namespace eanim
 {
 
-KeyDownHandler::KeyDownHandler(d2d::AbstractEditOP* editop)
+KeyDownHandler::KeyDownHandler(d2d::AbstractEditOP* editop,
+							   Controller* ctrl)
 	: m_editop(editop)
+	, m_ctrl(ctrl)
 {
 }
 
@@ -19,11 +21,11 @@ void KeyDownHandler::process(int keyCode) const
 	switch (keyCode)
 	{
 	case 'z': case 'Z':
-		Context::Instance()->setPrevKeyFrame();
+		m_ctrl->setPrevKeyFrame();
 		m_editop->clear();
 		break;
 	case 'x': case 'X':
-		Context::Instance()->setNextKeyFrame();
+		m_ctrl->setNextKeyFrame();
 		m_editop->clear();
 		break;
 	}

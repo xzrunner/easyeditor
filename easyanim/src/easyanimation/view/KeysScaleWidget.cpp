@@ -2,7 +2,7 @@
 #include "KeysPanel.h"
 #include "Utility.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 
 #include <wx/dcbuffer.h>
 
@@ -16,8 +16,9 @@ BEGIN_EVENT_TABLE(KeysScaleWidget, wxPanel)
 	EVT_MOUSE_EVENTS(KeysScaleWidget::onMouse)
 END_EVENT_TABLE()
 
-KeysScaleWidget::KeysScaleWidget(wxWindow* parent)
+KeysScaleWidget::KeysScaleWidget(wxWindow* parent, Controller* ctrl)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(-1, FRAME_GRID_HEIGHT), wxBORDER_NONE)
+	, m_ctrl(ctrl)
 {
 //	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 //	// same with "EVT_ERASE_BACKGROUND(KeysScaleWidget::onEraseBackground)"
@@ -38,7 +39,7 @@ void KeysScaleWidget::onPaint(wxPaintEvent& event)
 	dc.DrawRectangle(GetSize());
 
 	// curr pos
-	const int currPos = Context::Instance()->frame();
+	const int currPos = m_ctrl->frame();
 	dc.SetPen(wxPen(DARK_RED));
 	dc.SetBrush(wxBrush(MEDIUM_RED));
 	dc.DrawRectangle(FRAME_GRID_WIDTH * (currPos - 1), 2, FRAME_GRID_WIDTH + 1, FRAME_GRID_HEIGHT - 2);
@@ -73,17 +74,15 @@ void KeysScaleWidget::onMouse(wxMouseEvent& event)
 {
 	if (event.LeftDown() || event.Dragging())
 	{
-		Context* context = Context::Instance();
 		int frame = queryGridByPos(event.GetX());
-		context->setCurrFrame(context->layer(), frame);
-		context->stage->Refresh();
-		context->keysPanel->Refresh();
+		m_ctrl->setCurrFrame(m_ctrl->layer(), frame);
+		m_ctrl->Refresh();
 	}
 }
 
 int KeysScaleWidget::queryGridByPos(float x) const
 {
-	return std::min(Context::Instance()->maxFrame, (int)(x / FRAME_GRID_WIDTH) + 1);
+	return std::min(m_ctrl->GetMaxFrame(), (int)(x / FRAME_GRID_WIDTH) + 1);
 }
 
 } // eanim

@@ -4,10 +4,13 @@
 
 namespace eanim
 {
+
+	class Controller;
+
 	class LayersPropertyWidget : public wxPanel
 	{
 	public:
-		LayersPropertyWidget(wxWindow* parent);
+		LayersPropertyWidget(wxWindow* parent, Controller* ctrl);
 
 		void setFPS(int fps);
 
@@ -20,6 +23,8 @@ namespace eanim
 		void onChangeFps(wxSpinEvent& event);
 
 	private:
+		Controller* m_ctrl;
+
 		wxSpinCtrl* m_fps;
 
 	}; // LayersPropertyWidget

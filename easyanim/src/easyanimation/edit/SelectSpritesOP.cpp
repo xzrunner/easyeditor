@@ -1,6 +1,7 @@
 #include "SelectSpritesOP.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
+#include "view/StagePanel.h"
 
 #include <easymesh.h>
 
@@ -33,10 +34,12 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 
 d2d::IPropertySetting* SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
 {
-	if (sprite)
+	if (sprite) {
 		return d2d::SelectSpritesOP::createPropertySetting(sprite);
-	else
-		return new d2d::SymbolPropertySetting(m_editPanel, &Context::Instance()->name);
+	} else {
+		Controller* ctrl = ((StagePanel*)m_editPanel)->GetController();
+		return new d2d::SymbolPropertySetting(m_editPanel, &ctrl->name);
+	}
 }
 
 }

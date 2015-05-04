@@ -14,7 +14,7 @@ SkeletonImpl::SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* propert
 						   d2d::AbstractEditOP* editop)
 						   : d2d::ArrangeSpriteImpl(stage, stage, property, d2d::ArrangeSpriteConfig())
 	, m_stage(stage)
-	, m_key_handler(editop)
+	, m_key_handler(editop, stage->GetController())
 	, m_selected_joint(NULL)
 {
 }

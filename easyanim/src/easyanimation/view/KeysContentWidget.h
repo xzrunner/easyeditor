@@ -11,11 +11,12 @@ namespace eanim
 	class KeysPanel;
 	class LayersMgr;
 	class KeyFrame;
+	class Controller;
 
 	class KeysContentWidget : public wxPanel
 	{
 	public:
-		KeysContentWidget(wxWindow* parent);
+		KeysContentWidget(wxWindow* parent, Controller* ctrl);
 
 		void onSize(wxSizeEvent& event);
 		void onPaint(wxPaintEvent& event);
@@ -74,6 +75,9 @@ namespace eanim
 		static const int KEY_FRAME_RECT_Y_OFFSET = KEY_FRAME_CIRCLE_Y_OFFSET + 1;
 		static const int FRAME_END_RECT_WIDTH = KEY_FRAME_CIRCLE_RADIUS * 2;
 		static const int FRAME_END_RECT_HEIGHT = KEY_FRAME_CIRCLE_RADIUS * 3;
+
+	private:
+		Controller* m_ctrl;
 
 		DECLARE_EVENT_TABLE()
 

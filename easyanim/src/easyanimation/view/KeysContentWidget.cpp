@@ -2,9 +2,10 @@
 #include "KeysPanel.h"
 #include "FramePropertySetting.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
+#include "view/StagePanel.h"
 
 #include <wx/dcbuffer.h>
 
@@ -45,8 +46,9 @@ LanguageEntry KeysContentWidget::entries[] =
 	{ "É¾³ý¹Ø¼üÖ¡", "Delete Key Frame" }
 };
 
-KeysContentWidget::KeysContentWidget(wxWindow* parent)
+KeysContentWidget::KeysContentWidget(wxWindow* parent, Controller* ctrl)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
+	, m_ctrl(ctrl)
 {
 //  	RegisterHotKey(Hot_InsertFrame, 0, VK_ADD);
 //  	RegisterHotKey(Hot_DeleteFrame, 0, VK_SUBTRACT);
@@ -80,17 +82,17 @@ void KeysContentWidget::onMouse(wxMouseEvent& event)
 {
 	if (event.LeftDown() || event.RightDown())
 	{
+		LayersMgr& layers = m_ctrl->GetLayers();
 		int row = event.GetY() / FRAME_GRID_HEIGHT,
 			col = event.GetX() / FRAME_GRID_WIDTH;
-		KeysPanel* keysPanel = static_cast<KeysPanel*>(Context::Instance()->keysPanel);
-		if (row < Context::Instance()->layers.size() && col < MAX_FRAME_COUNT)
-			keysPanel->setSelectPos(row, col);
-		else
-			keysPanel->setSelectPos(-1, -1);
+		if (row < layers.size() && col < MAX_FRAME_COUNT) {
+			m_ctrl->GetKeysPanel()->setSelectPos(row, col);
+		} else {
+			m_ctrl->GetKeysPanel()->setSelectPos(-1, -1);
+		}
 
 		bool selected = false;
-		Context* context = Context::Instance();
-		Layer* layer = context->layers.getLayer(context->layers.size() - row - 1);
+		Layer* layer = layers.getLayer(layers.size() - row - 1);
 		if (layer)
 		{
 			const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
@@ -98,15 +100,14 @@ void KeysContentWidget::onMouse(wxMouseEvent& event)
 			if (itr != frames.end())
 			{
 				selected = true;
-				d2d::PropertySettingPanel* panel = 
-					static_cast<d2d::PropertySettingPanel*>(context->property);
 				FramePropertySetting* property = 
-					new FramePropertySetting(static_cast<d2d::EditPanel*>(context->stage), itr->second);
-				panel->setPropertySetting(property);
+					new FramePropertySetting(m_ctrl->GetStagePanel(), itr->second);
+				m_ctrl->GetPropertyPanel()->setPropertySetting(property);
 			}
 		}
-		if (!selected)
-			static_cast<d2d::PropertySettingPanel*>(context->property)->setPropertySetting(NULL);
+		if (!selected) {
+			m_ctrl->GetPropertyPanel()->setPropertySetting(NULL);
+		}
 	}
 
 	if (event.RightDown())
@@ -128,14 +129,13 @@ void KeysContentWidget::onMouse(wxMouseEvent& event)
 
 KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
 {
-	Context* context = Context::Instance();
-
 	int row, col;
-	static_cast<KeysPanel*>(context->keysPanel)->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 	if (row == -1 || col == -1) 
 		return NULL;
 
-	Layer* layer = context->layers.getLayer(context->layers.size() - row - 1);
+	LayersMgr& layers = m_ctrl->GetLayers();
+	Layer* layer = layers.getLayer(layers.size() - row - 1);
 	if (!layer) 
 		return NULL;
 	else 
@@ -144,14 +144,13 @@ KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
 
 bool KeysContentWidget::isPosOnKeyFrame() const
 {
-	Context* context = Context::Instance();
-
 	int row, col;
-	static_cast<KeysPanel*>(context->keysPanel)->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 	if (row == -1 || col == -1) 
 		return false;
 
-	Layer* layer = context->layers.getLayer(context->layers.size() - row - 1);
+	LayersMgr& layers = m_ctrl->GetLayers();
+	Layer* layer = layers.getLayer(layers.size() - row - 1);
 	if (!layer) 
 		return false;
 	else 
@@ -168,7 +167,7 @@ void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
 	dc.SetBrush(wxBrush(LIGHT_GRAY));
 	dc.DrawRectangle(GetSize());
 
-	const size_t size = Context::Instance()->layers.size();
+	const size_t size = m_ctrl->GetLayers().size();
 	const float width = FRAME_GRID_WIDTH * MAX_FRAME_COUNT,
 		height = FRAME_GRID_HEIGHT * size;
 
@@ -205,10 +204,11 @@ void KeysContentWidget::drawBackground(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 {
-	for (size_t i = 0, n = Context::Instance()->layers.size(); i < n; ++i)
+	LayersMgr& layers = m_ctrl->GetLayers();
+	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = Context::Instance()->layers.getLayer(storeIndex)->getAllFrames();
+		const std::map<int, KeyFrame*>& frames = layers.getLayer(storeIndex)->getAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// during
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -251,10 +251,11 @@ void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 {
-	for (size_t i = 0, n = Context::Instance()->layers.size(); i < n; ++i)
+	LayersMgr& layers = m_ctrl->GetLayers();
+	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
 		size_t storeIndex = n - i - 1;
-		const std::map<int, KeyFrame*>& frames = Context::Instance()->layers.getLayer(storeIndex)->getAllFrames();
+		const std::map<int, KeyFrame*>& frames = layers.getLayer(storeIndex)->getAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		// key frame start (circle)
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
@@ -286,15 +287,15 @@ void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 
 void KeysContentWidget::drawCurrPosFlag(wxBufferedPaintDC& dc)
 {
-	const float x = FRAME_GRID_WIDTH * (Context::Instance()->frame() - 0.5f);
+	const float x = FRAME_GRID_WIDTH * (m_ctrl->frame() - 0.5f);
 	dc.SetPen(DARK_RED);
-	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * Context::Instance()->layers.size());
+	dc.DrawLine(x, 0, x, FRAME_GRID_HEIGHT * m_ctrl->GetLayers().size());
 }
 
 void KeysContentWidget::drawSelected(wxBufferedPaintDC& dc)
 {
 	int row, col;
-	static_cast<KeysPanel*>(Context::Instance()->keysPanel)->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
 		dc.SetPen(wxPen(DARK_BLUE));
@@ -330,27 +331,27 @@ void KeysContentWidget::onDeleteFrame(wxCommandEvent& event)
 void KeysContentWidget::onInsertKeyFrame(wxCommandEvent& event)
 {
 	int row, col;
-	KeysPanel* keysPanel = static_cast<KeysPanel*>(Context::Instance()->keysPanel);
-	keysPanel->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
-		size_t index = Context::Instance()->layers.size() - row - 1;
-		Layer* layer = Context::Instance()->layers.getLayer(index);
+		LayersMgr& layers = m_ctrl->GetLayers();
+		size_t index = layers.size() - row - 1;
+		Layer* layer = layers.getLayer(index);
 		layer->insertKeyFrame(col + 1);
-		keysPanel->Refresh();
+		m_ctrl->GetKeysPanel()->Refresh();
 	}
 }
 
 void KeysContentWidget::onDeleteKeyFrame(wxCommandEvent& event)
 {
 	int row, col;
-	KeysPanel* keysPanel = static_cast<KeysPanel*>(Context::Instance()->keysPanel);
-	keysPanel->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 
-	size_t index = Context::Instance()->layers.size() - row - 1;
-	Layer* layer = Context::Instance()->layers.getLayer(index);
+	LayersMgr& layers = m_ctrl->GetLayers();
+	size_t index = layers.size() - row - 1;
+	Layer* layer = layers.getLayer(index);
 	layer->removeKeyFrame(col + 1);
-	keysPanel->Refresh();
+	m_ctrl->GetKeysPanel()->Refresh();
 }
 
 void KeysContentWidget::onUpdateCreateClassicTween(wxUpdateUIEvent& event)
@@ -403,11 +404,12 @@ void KeysContentWidget::onUpdateInsertKeyFrame(wxUpdateUIEvent& event)
 void KeysContentWidget::onUpdateDeleteKeyFrame(wxUpdateUIEvent& event)
 {
 	int row, col;
-	static_cast<KeysPanel*>(Context::Instance()->keysPanel)->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 	if (row == -1 || col == -1) return;
 
-	size_t index = Context::Instance()->layers.size() - row - 1;
-	Layer* layer = Context::Instance()->layers.getLayer(index);
+	LayersMgr& layers = m_ctrl->GetLayers();
+	size_t index = layers.size() - row - 1;
+	Layer* layer = layers.getLayer(index);
 	if (layer->isKeyFrame(col + 1)) 
 		event.Enable(true);
 	else 
@@ -427,28 +429,28 @@ void KeysContentWidget::onDeleteFrame(wxKeyEvent& event)
 void KeysContentWidget::onInsertFrame()
 {
 	int row, col;
-	KeysPanel* keysPanel = static_cast<KeysPanel*>(Context::Instance()->keysPanel);
-	keysPanel->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
-		size_t index = Context::Instance()->layers.size() - row - 1;
-		Layer* layer = Context::Instance()->layers.getLayer(index);
+		LayersMgr& layers = m_ctrl->GetLayers();
+		size_t index = layers.size() - row - 1;
+		Layer* layer = layers.getLayer(index);
 		layer->insertFrame(col + 1);
-		keysPanel->Refresh();
+		m_ctrl->GetKeysPanel()->Refresh();
 	}
 }
 
 void KeysContentWidget::onDeleteFrame()
 {
 	int row, col;
-	KeysPanel* keysPanel = static_cast<KeysPanel*>(Context::Instance()->keysPanel);
-	keysPanel->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
-		size_t index = Context::Instance()->layers.size() - row - 1;
-		Layer* layer = Context::Instance()->layers.getLayer(index);
+		LayersMgr& layers = m_ctrl->GetLayers();
+		size_t index = layers.size() - row - 1;
+		Layer* layer = layers.getLayer(index);
 		layer->removeFrame(col + 1);
-		keysPanel->Refresh();
+		m_ctrl->GetKeysPanel()->Refresh();
 	}
 }
 } // eanim

@@ -1,6 +1,6 @@
 #include "FileIO.h"
-#include "Context.h"
 
+#include "frame/Controller.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Joint.h"
@@ -17,11 +17,9 @@ namespace eanim
 
 std::string FileIO::filepath;
 
-void FileIO::load(const wxString& filepath)
+void FileIO::load(const wxString& filepath, Controller* ctrl)
 {
 	FileIO::filepath = filepath;
-
-	Context* context = Context::Instance();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -33,48 +31,46 @@ void FileIO::load(const wxString& filepath)
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 
-	context->fps = value["fps"].asInt();
-	static_cast<LayersPanel*>(context->layersPanel)->setFPS(context->fps);
+	ctrl->fps = value["fps"].asInt();
+	ctrl->GetLayersPanel()->setFPS(ctrl->fps);
 
 	if (!value["resource"].isNull())
-		loadResource(value["resource"]);
+		loadResource(value["resource"], ctrl);
 	else
-		context->resource.clear();
+		ctrl->GetResource().clear();
 
-	Context::Instance()->name = value["name"].asString();
+	ctrl->name = value["name"].asString();
 
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		Layer* layer = loadLayer(layerValue, dir);
-		Context::Instance()->layers.insertLayer(layer);
+		Layer* layer = loadLayer(layerValue, dir, ctrl);
+		ctrl->InsertLayer(layer);
 		layerValue = value["layer"][i++];
 	}
 
-	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(context->library);
-	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
-	context->setCurrFrame(0, 1);
+	ctrl->setCurrFrame(0, 1);
 
- 	d2d::EditPanel* stage = static_cast<d2d::EditPanel*>(context->stage);
- 	stage->getCanvas()->resetViewport();
+ 	ctrl->GetStagePanel()->getCanvas()->resetViewport();
 }
 
-void FileIO::store(const wxString& filepath)
+void FileIO::store(const wxString& filepath, Controller* ctrl)
 {
 	Json::Value value;
 
-	storeResource(value);
+	storeResource(value, ctrl);
 
 //	value["name"] = d2d::FilenameTools::getFilename(filepath).ToStdString();
-	value["name"] = Context::Instance()->name;
+	value["name"] = ctrl->name;
 
-	value["fps"] = Context::Instance()->fps;
+	value["fps"] = ctrl->fps;
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
-	const std::vector<Layer*>& layers = Context::Instance()->layers.getAllLayers();
+	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
-		value["layer"][i] = store(layers[i], dir);
+		value["layer"][i] = store(layers[i], dir, ctrl);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -84,15 +80,11 @@ void FileIO::store(const wxString& filepath)
 	fout.close();
 }
 
-void FileIO::reload()
+void FileIO::reload(Controller* ctrl)
 {
 	if (filepath.empty()) return;
 
-	Context* context = Context::Instance();
-
-	static_cast<d2d::LibraryPanel*>(context->library)->clear();
-	static_cast<StagePanel*>(context->stage)->clear();
-	context->layers.clear();
+	ctrl->Clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -106,18 +98,17 @@ void FileIO::reload()
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		Layer* layer = loadLayer(layerValue, dir);
-		Context::Instance()->layers.insertLayer(layer);
+		Layer* layer = loadLayer(layerValue, dir, ctrl);
+		ctrl->GetLayers().insertLayer(layer);
 		layerValue = value["layer"][i++];
 	}
 
-	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(context->library);
-	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
-	context->stage->Refresh();
+	ctrl->Refresh();
 }
 
-void FileIO::loadFlash(const wxString& filepath)
+void FileIO::loadFlash(const wxString& filepath, Controller* ctrl)
 {
 	rapidxml::file<> xmlFile(filepath.c_str());
 	rapidxml::xml_document<> doc;
@@ -142,13 +133,12 @@ void FileIO::loadFlash(const wxString& filepath)
 	rapidxml::xml_node<>* layerNode = doc.first_node()->first_node("timelines")
 		->first_node("DOMTimeline")->first_node("layers")->first_node("DOMLayer");
 	while (layerNode) {
-		Layer* layer = loadLayer(layerNode, mapNamePath);
-		Context::Instance()->layers.insertLayer(layer);
+		Layer* layer = loadLayer(layerNode, mapNamePath, ctrl);
+		ctrl->InsertLayer(layer);
 		layerNode = layerNode->next_sibling();
 	}
 
-	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(Context::Instance()->library);
-	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::storeAsGif(const wxString& src, const wxString& dst)
@@ -193,10 +183,9 @@ void FileIO::storeAsPng(const wxString& src, const wxString& dst)
 	symbol->Release();
 }
 
-void FileIO::loadResource(const Json::Value& resValue)
+void FileIO::loadResource(const Json::Value& resValue, Controller* ctrl)
 {
-	ResourceMgr& res = Context::Instance()->resource;
-	res.clear();
+	ctrl->GetResource().clear();
 
 	std::vector<std::string> anims;
 
@@ -206,17 +195,17 @@ void FileIO::loadResource(const Json::Value& resValue)
 		ResourceMgr::Item item;
 		item.path = value["path"].asString();
 		item.name = value["name"].asString();
-		res.items.push_back(item);
+		ctrl->GetResource().items.push_back(item);
 		anims.push_back(item.name);
 		value = resValue[i++];
 	}
 
-	static_cast<ToolbarPanel*>(Context::Instance()->toolbar)->addAnimChoice(anims);
+	ctrl->GetToolbarPanel()->addAnimChoice(anims);
 }
 
-void FileIO::storeResource(Json::Value& value)
+void FileIO::storeResource(Json::Value& value, Controller* ctrl)
 {
-	ResourceMgr& res = Context::Instance()->resource;
+	ResourceMgr& res = ctrl->GetResource();
 	if (res.empty()) return;
 
 	for (size_t i = 0, n = res.items.size(); i < n; ++i)
@@ -228,16 +217,16 @@ void FileIO::storeResource(Json::Value& value)
 	}
 }
 
-Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir)
+Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir, Controller* ctrl)
 {
-	Layer* layer = new Layer;
+	Layer* layer = new Layer(ctrl);
 
 	layer->name = layerValue["name"].asString();
 
 	int i = 0;
 	Json::Value frameValue = layerValue["frame"][i++];
 	while (!frameValue.isNull()) {
-		KeyFrame* frame = loadFrame(frameValue, dir);
+		KeyFrame* frame = loadFrame(frameValue, dir, ctrl);
 		layer->insertKeyFrame(frame);
 		frameValue = layerValue["frame"][i++];
 	}
@@ -252,11 +241,11 @@ Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir)
 	return layer;
 }
 
-KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir)
+KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir, Controller* ctrl)
 {
 	int time = frameValue["time"].asInt();
 
-	KeyFrame* frame = new KeyFrame(time);
+	KeyFrame* frame = new KeyFrame(ctrl, time);
 
 	frame->m_id = frameValue["id"].asInt();
 
@@ -265,7 +254,7 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir)
 	int i = 0;
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
-		d2d::ISprite* actor = loadActor(actorValue, dir);
+		d2d::ISprite* actor = loadActor(actorValue, dir, ctrl);
 		frame->insertWithClone(actor);
 		actor->Release();
 		actorValue = frameValue["actor"][i++];
@@ -276,7 +265,8 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir)
 	return frame;
 }
 
-d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& dir)
+d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& dir,
+								Controller* ctrl)
 {
 	std::string filepath = actorValue["filepath"].asString();
 	while (true) 
@@ -291,8 +281,8 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 			break;
 		}
 
-		if (!Context::Instance()->resource.empty())
-			tmp = Context::Instance()->resource.dir() + "/" + filepath;
+		if (!ctrl->GetResource().empty())
+			tmp = ctrl->GetResource().dir() + "/" + filepath;
 		if (!d2d::FilenameTools::isExist(tmp))
 			tmp = d2d::FilenameTools::getAbsolutePath(dir, tmp);
 		if (!d2d::FilenameTools::isExist(tmp))
@@ -399,16 +389,17 @@ void FileIO::loadSkeleton(const Json::Value& skeletonValue, const std::vector<d2
 }
 
 Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
-						 const std::map<std::string, std::string>& mapNamePath)
+						 const std::map<std::string, std::string>& mapNamePath,
+						 Controller* ctrl)
 {
-	Layer* layer = new Layer;
+	Layer* layer = new Layer(ctrl);
 
 	layer->name = layerNode->first_attribute("name")->value();
 
 	rapidxml::xml_node<>* frameNode = layerNode->first_node("frames")
 		->first_node("DOMFrame");
 	while (frameNode) {
-		KeyFrame* frame = loadFrame(frameNode, mapNamePath);
+		KeyFrame* frame = loadFrame(frameNode, mapNamePath, ctrl);
 		layer->insertKeyFrame(frame);
 		frameNode = frameNode->next_sibling();
 	}
@@ -417,11 +408,12 @@ Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
 }
 
 KeyFrame* FileIO::loadFrame(rapidxml::xml_node<>* frameNode,
-							const std::map<std::string, std::string>& mapNamePath)
+							const std::map<std::string, std::string>& mapNamePath,
+							Controller* ctrl)
 {
 	int time = StringTools::stringToInt(frameNode->first_attribute("index")->value()) + 1;
 
-	KeyFrame* frame = new KeyFrame(time);
+	KeyFrame* frame = new KeyFrame(ctrl, time);
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
@@ -462,7 +454,7 @@ d2d::ISprite* FileIO::loadActor(rapidxml::xml_node<>* actorNode,
 	return sprite;
 }
 
-Json::Value FileIO::store(Layer* layer, const wxString& dir)
+Json::Value FileIO::store(Layer* layer, const wxString& dir, Controller* ctrl)
 {
 	Json::Value value;
 
@@ -473,14 +465,14 @@ Json::Value FileIO::store(Layer* layer, const wxString& dir)
 	all_frames.reserve(frames.size());
 	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
 	for (size_t i = 0; itr != frames.end(); ++itr, ++i) {
-		value["frame"][i] = store(itr->second, dir);
+		value["frame"][i] = store(itr->second, dir, ctrl);
 		all_frames.push_back(itr->second);
 	}
 
 	return value;
 }
 
-Json::Value FileIO::store(KeyFrame* frame, const wxString& dir)
+Json::Value FileIO::store(KeyFrame* frame, const wxString& dir, Controller* ctrl)
 {
 	Json::Value value;
 
@@ -491,20 +483,21 @@ Json::Value FileIO::store(KeyFrame* frame, const wxString& dir)
 	value["tween"] = frame->hasClassicTween();
 
 	for (size_t i = 0, n = frame->size(); i < n; ++i)
-		value["actor"][i] = store(frame->getSprite(i), dir);
+		value["actor"][i] = store(frame->getSprite(i), dir, ctrl);
 
 	value["skeleton"] = storeSkeleton(frame->getSkeletonData());
 
 	return value;
 }
 
-Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dir)
+Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dir,
+						  Controller* ctrl)
 {
 	Json::Value value;
 
 	const d2d::ISymbol& symbol = sprite->getSymbol();
 	// filepath
-	if (Context::Instance()->resource.empty())
+	if (ctrl->GetResource().empty())
 		value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
 			symbol.getFilepath()).ToStdString();
 	else

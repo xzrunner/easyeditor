@@ -3,18 +3,20 @@
 
 #include "edit/CommonCMPT.h"
 #include "edit/SkeletonCMPT.h"
-#include "frame/Context.h"
 #include "frame/FileIO.h"
+#include "frame/Controller.h"
 
 namespace eanim
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage, 
-						   d2d::PropertySettingPanel* property, bool vertical)
+						   d2d::PropertySettingPanel* property, bool vertical,
+						   Controller* ctrl)
 	: d2d::ToolbarPanel(parent, stage, vertical)
+	, m_ctrl(ctrl)
 	, m_animChoice(NULL)
 {
-	addChild(new CommonCMPT(this, wxT("Common"), stage, property, vertical));
+	addChild(new CommonCMPT(this, wxT("Common"), stage, property, vertical, ctrl));
 	addChild(new SkeletonCMPT(this, wxT("Skeleton"), stage, property, vertical));
 	SetSizer(initLayout());	
 }
@@ -46,7 +48,7 @@ wxSizer* ToolbarPanel::initLayout()
 
 void ToolbarPanel::onChangeAnim(wxCommandEvent& event)
 {
-	Context::Instance()->resource.choice = event.GetInt();
-	FileIO::reload();
+	m_ctrl->GetResource().choice = event.GetInt();
+	FileIO::reload(m_ctrl);
 }
 } // eanim

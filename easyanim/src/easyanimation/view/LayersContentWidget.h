@@ -4,10 +4,13 @@
 
 namespace eanim
 {
+
+	class Controller;
+
 	class LayersContentWidget : public wxPanel
 	{
 	public:
-		LayersContentWidget(wxWindow* parent);
+		LayersContentWidget(wxWindow* parent, Controller* ctrl);
 
 		virtual wxCoord OnGetRowHeight(size_t row) const;
 
@@ -24,6 +27,8 @@ namespace eanim
 		static const int DRAG_FLAG_RADIUS = 4;
 
 	private:
+		Controller* m_ctrl;
+
 		int m_dragFlagLine;
 
 		DECLARE_EVENT_TABLE()

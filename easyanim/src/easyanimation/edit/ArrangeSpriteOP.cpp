@@ -1,15 +1,15 @@
 #include "ArrangeSpriteOP.h"
 
 #include "view/StagePanel.h"
-#include "frame/Context.h"
 
 namespace eanim
 {
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, 
-								 d2d::PropertySettingPanel* property)
+								 d2d::PropertySettingPanel* property,
+								 Controller* ctrl)
 	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, property)
-	, m_keyDownHandler(this)
+	, m_keyDownHandler(this, ctrl)
 	, m_selected(NULL)
 {
 }

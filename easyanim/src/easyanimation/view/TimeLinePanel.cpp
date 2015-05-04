@@ -2,7 +2,7 @@
 #include "LayersPanel.h"
 #include "KeysPanel.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 
 #include <wx/splitter.h>
 
@@ -11,16 +11,17 @@ namespace eanim
 
 const float TimeLinePanel::SASH_GRAVITY_VERT = 0.1f;
 
-TimeLinePanel::TimeLinePanel(wxWindow* parent)
+TimeLinePanel::TimeLinePanel(wxWindow* parent, Controller* ctrl)
 	: wxPanel(parent)
+	, m_ctrl(ctrl)
 {
 	initLayout();
 }
 
 void TimeLinePanel::clear()
 {
-	Context::Instance()->layers.clear();
-	static_cast<KeysPanel*>(Context::Instance()->keysPanel)->setSelectPos(-1, -1);
+	m_ctrl->ClearLayers();
+	m_ctrl->GetKeysPanel()->setSelectPos(-1, -1);
 }
 
 void TimeLinePanel::initLayout()
@@ -41,14 +42,14 @@ void TimeLinePanel::initTitle(wxSizer* sizer)
 
 void TimeLinePanel::initSplitterWindow(wxSizer* sizer)
 {
-	Context* context = Context::Instance();
-
 	wxSplitterWindow* splitter = new wxSplitterWindow(this, wxID_ANY);
-	context->layersPanel = new LayersPanel(splitter);
-	context->keysPanel = new KeysPanel(splitter);
+	LayersPanel* layers_panel = new LayersPanel(splitter, m_ctrl);
+	KeysPanel* keys_panel = new KeysPanel(splitter, m_ctrl);
 	splitter->SetSashGravity(SASH_GRAVITY_VERT);
-	splitter->SplitVertically(context->layersPanel, context->keysPanel);
+	splitter->SplitVertically(layers_panel, keys_panel);
 	sizer->Add(splitter, 1, wxEXPAND);
+
+	m_ctrl->SetTimeLinePanel(layers_panel, keys_panel);
 }
 
 } // eanim

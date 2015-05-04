@@ -2,8 +2,8 @@
 #include "StageCanvas.h"
 #include "KeysPanel.h"
 
+#include "frame/Controller.h"
 #include "edit/ArrangeSpriteOP.h"
-#include "frame/Context.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 
@@ -17,16 +17,17 @@ std::string StagePanel::menu_entries[] =
 };
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::PropertySettingPanel* property)
+					   d2d::PropertySettingPanel* property,
+					   Controller* ctrl)
 	: EditPanel(parent, frame)
 	, MultiSpritesImpl(parent)
+	, m_ctrl(ctrl)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
-	m_editOP = new ArrangeSpriteOP(this, property);
+	m_editOP = new ArrangeSpriteOP(this, property, ctrl);
 	m_canvas = new StageCanvas(this);
 
-	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(Context::Instance()->library);
-	SetDropTarget(new d2d::StageDropTarget(this, this, library));
+	SetDropTarget(new d2d::StageDropTarget(this, this, m_ctrl->GetLibraryPanel()));
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuAddJointNode, this, Menu_AddJointNode);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::onMenuDelJointNode, this, Menu_DelJointNode);
@@ -47,12 +48,11 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 								 d2d::TraverseType type/* = d2d::e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	Context* context = Context::Instance();
-
-	if (context->layer() == -1 || context->frame() == -1)
+	if (m_ctrl->layer() == -1 || m_ctrl->frame() == -1) {
 		return;
+	}
 
-	const std::vector<Layer*>& layers = context->layers.getAllLayers();
+	const std::vector<Layer*>& layers = m_ctrl->GetLayers().getAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
 		Layer* layer = layers[i];
@@ -60,7 +60,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 			(type == d2d::e_visible && !layer->visible))
 			continue;
 
-		KeyFrame* frame = layer->getCurrKeyFrame(context->frame());
+		KeyFrame* frame = layer->getCurrKeyFrame(m_ctrl->frame());
 		if (!frame) continue;
 
 		if (order)
@@ -84,27 +84,25 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
-	Context* context = Context::Instance();
-	KeyFrame* frame = context->getCurrFrame();
+	KeyFrame* frame = m_ctrl->getCurrFrame();
 	bool success = frame->remove(sprite);
-	if (success)
-		context->keysPanel->Refresh();
+	if (success) {
+		m_ctrl->Refresh();
+	}
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	Context* context = Context::Instance();
-	KeyFrame* frame = context->getCurrFrame();
+	KeyFrame* frame = m_ctrl->getCurrFrame();
 	frame->insert(sprite);
 	Refresh();
-	context->keysPanel->Refresh();
+	m_ctrl->Refresh();
 }
 
 void StagePanel::clearSprites()
 {
-	Context* context = Context::Instance();
-	context->layers.clear();
-	context->setCurrFrame(-1, -1);
+	m_ctrl->ClearLayers();
+	m_ctrl->setCurrFrame(-1, -1);
 
 // 	Context* context = Context::Instance();
 // 	KeyFrame* frame = context->layers.getLayer(context->currLayer)->getCurrKeyFrame(context->currFrame);
@@ -113,13 +111,13 @@ void StagePanel::clearSprites()
 
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
-	KeyFrame* frame = Context::Instance()->getCurrFrame();
+	KeyFrame* frame = m_ctrl->getCurrFrame();
 	frame->reorder(sprite, up);
 }
 
 SkeletonData& StagePanel::getSkeletonData()
 {
-	KeyFrame* frame = Context::Instance()->getCurrFrame();
+	KeyFrame* frame = m_ctrl->getCurrFrame();
 	return frame->getSkeletonData();	
 }
 

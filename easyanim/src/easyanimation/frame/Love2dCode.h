@@ -4,10 +4,13 @@
 
 namespace eanim
 {
+	class Controller;
+
 	class Love2dCode
 	{
 	public:
-		Love2dCode(ebuilder::CodeGenerator& gen);
+		Love2dCode(ebuilder::CodeGenerator& gen,
+			Controller* ctrl);
 
 		void resolve();
 
@@ -16,6 +19,8 @@ namespace eanim
 
 	private:
 		ebuilder::CodeGenerator& m_gen;
+
+		Controller* m_ctrl;
 
 		d2d::TexPackerAdapter m_packerAdapter;
 

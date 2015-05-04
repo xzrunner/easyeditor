@@ -4,11 +4,13 @@
 
 namespace eanim
 {
+	class Controller;
 	class Layer;
 
 	class LayersMgr
 	{
 	public:
+		LayersMgr(Controller* ctrl);
 		~LayersMgr();
  
 		void newLayer();
@@ -33,6 +35,8 @@ namespace eanim
 		}
 
 	private:
+		Controller* m_ctrl;
+
 		std::vector<Layer*> m_layers;
 
 	}; // LayersMgr

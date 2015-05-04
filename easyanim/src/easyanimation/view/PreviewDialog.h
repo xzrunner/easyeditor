@@ -8,10 +8,13 @@
 
 namespace eanim
 {
+
+	class Controller;
+
 	class PreviewDialog : public wxDialog
 	{
 	public:
-		PreviewDialog(wxWindow* parent);
+		PreviewDialog(wxWindow* parent, Controller* ctrl);
 		~PreviewDialog();
 
 	private:
@@ -29,6 +32,8 @@ namespace eanim
 		PlaySettings m_settings;
 
 		d2d::PlayControl m_control;
+
+		Controller* m_ctrl;
 
 	}; // PreviewDialog
 }

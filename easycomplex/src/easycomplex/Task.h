@@ -27,8 +27,6 @@ public:
 
 	virtual const d2d::EditPanel* getEditPanel() const;
 
-	ecomplex::StagePanel* getStagePanel() { return m_stage; }
-
 private:
 	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
 		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,

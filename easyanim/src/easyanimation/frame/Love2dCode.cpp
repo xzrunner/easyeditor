@@ -1,7 +1,6 @@
 #include "Love2dCode.h"
 
-#include "Context.h"
-
+#include "frame/Controller.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 
@@ -9,19 +8,22 @@ namespace eanim
 {
 namespace lua = ebuilder::lua;
 
-Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen)
+Love2dCode::Love2dCode(ebuilder::CodeGenerator& gen,
+					   Controller* ctrl)
 	: m_gen(gen)
+	, m_ctrl(ctrl)
 {
-	m_packerAdapter.load(Context::Instance()->packer);
+	m_packerAdapter.load(m_ctrl->packer);
 }
 
 void Love2dCode::resolve()
 {
 	lua::TableAssign ta(m_gen, "frames");
 
-	if (Context::Instance()->layers.size() > 0)
+	LayersMgr& layers = m_ctrl->GetLayers();
+	if (layers.size() > 0)
 	{
-		Layer* layer = Context::Instance()->layers.getLayer(0);
+		Layer* layer = layers.getLayer(0);
 		const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
 		std::map<int, KeyFrame*>::const_iterator itr;
 		for (itr = frames.begin(); itr != frames.end(); ++itr)

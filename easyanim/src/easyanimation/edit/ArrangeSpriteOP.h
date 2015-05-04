@@ -6,11 +6,13 @@
 namespace eanim
 {
 	class StagePanel;
+	class Controller;
 
 	class ArrangeSpriteOP : public d2d::ArrangeSpriteOP<SelectSpritesOP>
 	{
 	public:
-		ArrangeSpriteOP(StagePanel* stage, d2d::PropertySettingPanel* property);
+		ArrangeSpriteOP(StagePanel* stage, d2d::PropertySettingPanel* property,
+			Controller* ctrl);
 		virtual ~ArrangeSpriteOP();
 
 		virtual bool onKeyDown(int keyCode);

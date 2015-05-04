@@ -50,8 +50,7 @@ bool MyApp::OnInit()
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
-		ecomplex::StagePanel* stage = task->getStagePanel();
-		stage->getCanvas()->SetCurrentCanvas();
+		task->getEditPanel()->getCanvas()->SetCurrentCanvas();
 
 		wxString path(wxGetApp().argv[1]);
 		frame->initWithFile(path);

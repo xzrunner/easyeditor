@@ -5,9 +5,10 @@
 namespace eanim
 {
 
-PreviewDialog::PreviewDialog(wxWindow* parent)
+PreviewDialog::PreviewDialog(wxWindow* parent, Controller* ctrl)
  	: wxDialog(parent, wxID_ANY, "Preview", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 	, m_control(0.033f)
+	, m_ctrl(ctrl)
 {
 	initLayout();
 }
@@ -46,7 +47,7 @@ void PreviewDialog::buildEditPanel(wxSizer* topSizer)
 {
 	m_stage = new d2d::EditPanel(this, this);
 	m_stage->setEditOP(new PreviewOP(m_stage, m_settings, m_control));
-	m_stage->setCanvas(new PreviewCanvas(m_stage, m_settings, m_control));
+	m_stage->setCanvas(new PreviewCanvas(m_stage, m_settings, m_control, m_ctrl));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 

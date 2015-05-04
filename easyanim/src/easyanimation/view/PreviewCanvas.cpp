@@ -1,7 +1,7 @@
 #include "PreviewCanvas.h"
 #include "PreviewSettings.h"
 
-#include "frame/Context.h"
+#include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
@@ -16,11 +16,12 @@ BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
 END_EVENT_TABLE()
 
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
-							 d2d::PlayControl& control)
+							 d2d::PlayControl& control, Controller* ctrl)
 	: d2d::OrthoCanvas(stage)
 	, m_timer(this, TIMER_ID)
 	, m_control(control)
 	, m_settings(settings)
+	, m_ctrl(ctrl)
 {
 	m_timer.Start(30);
 }
@@ -28,7 +29,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 void PreviewCanvas::initGL()
 {
 	d2d::OrthoCanvas::initGL();
-	static_cast<d2d::LibraryPanel*>(Context::Instance()->library)->reloadTexture();
+	m_ctrl->GetLibraryPanel()->reloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
@@ -58,7 +59,7 @@ void PreviewCanvas::onTimer(wxTimerEvent& event)
 		refresh = m_control.update();
 	}
 
-	if (m_control.frame() >= Context::Instance()->layers.getFrameCount())
+	if (m_control.frame() >= m_ctrl->GetLayers().getFrameCount())
 	{
 		if (m_settings.isCirculate) {
 			m_control.reset();
@@ -87,9 +88,10 @@ void PreviewCanvas::drawStageData()
 
 void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 {
-	for (size_t i = 0, n = Context::Instance()->layers.size(); i < n; ++i)
+	LayersMgr& layers = m_ctrl->GetLayers();
+	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
-		Layer* layer = Context::Instance()->layers.getLayer(i);
+		Layer* layer = layers.getLayer(i);
 
 		KeyFrame *currFrame = layer->getCurrKeyFrame(m_control.frame()),
 			*nextFrame = layer->getNextKeyFrame(m_control.frame());

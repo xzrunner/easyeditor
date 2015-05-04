@@ -1,12 +1,13 @@
 #include "CodeSettingDlg.h"
 
-#include "Context.h"
+#include "frame/Controller.h"
 
 namespace eanim
 {
 
-CodeSettingDlg::CodeSettingDlg(wxWindow* parent)
+CodeSettingDlg::CodeSettingDlg(wxWindow* parent, Controller* ctrl)
 	: wxDialog(parent, wxID_ANY, wxT("Setting"))
+	, m_ctrl(ctrl)
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	sizer->AddSpacer(20);
@@ -15,7 +16,7 @@ CodeSettingDlg::CodeSettingDlg(wxWindow* parent)
 		packerSizer->Add(new wxStaticText(this, wxID_ANY, "Texture Packer File: "), 0, wxLEFT | wxRIGHT, 5);
 		
 		m_packerPath = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(225, -1), wxTE_READONLY);
-		m_packerPath->SetValue(Context::Instance()->packer);
+		m_packerPath->SetValue(ctrl->packer);
 		packerSizer->Add(m_packerPath, 0, wxLEFT | wxRIGHT, 5);
 
 		wxButton* btn = new wxButton(this, wxID_ANY, "...", wxDefaultPosition, wxSize(25, 25));
@@ -36,8 +37,8 @@ void CodeSettingDlg::onSelectPackerFile(wxCommandEvent& event)
 		wxT("*_packer.json"), wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		Context::Instance()->packer = dlg.GetPath();
-		m_packerPath->SetValue(Context::Instance()->packer);
+		m_ctrl->packer = dlg.GetPath();
+		m_packerPath->SetValue(m_ctrl->packer);
 	}
 }
 } // eanim

@@ -1,5 +1,7 @@
 #include "main.h"
-#include "frame/Frame.h"
+
+#include "Frame.h"
+#include "Task.h"
 
 #include <easycomplex.h>
 #include <easyanim.h>
@@ -31,13 +33,13 @@ bool MyApp::OnInit()
 {
 	InitSymbolCreators();
 
-	eanim::Frame* frame = new eanim::Frame(wxT("easyanim"));
+	eanim::Frame* frame = new eanim::Frame("easyanim", eanim::FILE_TAG);
+	eanim::Task* task = new eanim::Task(frame);
+	frame->setTask(task);
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
-		d2d::GLCanvas* canvas = frame->getCanvas();
-		if (canvas)
-			canvas->SetCurrentCanvas();
+		task->getEditPanel()->getCanvas()->SetCurrentCanvas();
 
 		wxString path(wxGetApp().argv[1]);
 		frame->initWithFile(path);

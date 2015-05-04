@@ -121,8 +121,7 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	{
  		wxString filename = dlg.GetPath();
  		d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filename);
-		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
- 		d2d::GLCanvas* canvas = stage->getCanvas();
+ 		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
  		static_cast<StageCanvas*>(canvas)->setBackground(img);
 		img->Release();
 	}

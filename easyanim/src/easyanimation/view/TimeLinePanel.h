@@ -4,10 +4,12 @@
 
 namespace eanim
 {
+	class Controller;
+
 	class TimeLinePanel : public wxPanel
 	{
 	public:
-		TimeLinePanel(wxWindow* parent);
+		TimeLinePanel(wxWindow* parent, Controller* ctrl);
 
 		void clear();
 
@@ -19,6 +21,9 @@ namespace eanim
 
 	private:
 		static const float SASH_GRAVITY_VERT;
+
+	private:
+		Controller* m_ctrl;
 
 	}; // TimeLinePanel
 }

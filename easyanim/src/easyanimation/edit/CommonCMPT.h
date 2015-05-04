@@ -7,13 +7,14 @@ namespace eanim
 {
 
 class StagePanel;
+class Controller;
 
 class CommonCMPT : public d2d::AbstractEditCMPT
 {
 public:
 	CommonCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage, d2d::PropertySettingPanel* property,
-		bool vertical);
+		bool vertical, Controller* ctrl);
 
 protected:
 	virtual wxSizer* initLayout();
@@ -41,6 +42,8 @@ private:
 	bool m_vertical;
 
 	wxSpinCtrl* m_filling;
+
+	Controller* m_ctrl;
 
 }; // CommonCMPT
 

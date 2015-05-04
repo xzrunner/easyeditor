@@ -4,6 +4,7 @@
 
 namespace eanim
 {
+	class Controller;
 	class KeyFrame;
 	class SkeletonData;
 
@@ -11,7 +12,7 @@ namespace eanim
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-			d2d::PropertySettingPanel* property);
+			d2d::PropertySettingPanel* property, Controller* ctrl);
 		virtual ~StagePanel();
 
 		//
@@ -33,6 +34,8 @@ namespace eanim
 
 		SkeletonData& getSkeletonData();
 
+		Controller* GetController() { return m_ctrl; }
+
 	private:
 		void onMenuAddJointNode(wxCommandEvent& event);
 		void onMenuDelJointNode(wxCommandEvent& event);
@@ -46,6 +49,9 @@ namespace eanim
 		};
 
 		static std::string menu_entries[];
+
+	private:
+		Controller* m_ctrl;
 
 	}; // StagePanel
 }

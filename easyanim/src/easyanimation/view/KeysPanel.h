@@ -4,10 +4,12 @@
 
 namespace eanim
 {
+	class Controller;
+
 	class KeysPanel : public wxScrolledWindow
 	{
 	public:
-		KeysPanel(wxWindow* parent);
+		KeysPanel(wxWindow* parent, Controller* ctrl);
 
 		void setCurrPos(int pos);
 
@@ -18,6 +20,8 @@ namespace eanim
 		void initLayout();
 
 	private:
+		Controller* m_ctrl;
+
 		int m_selectRow, m_selectCol;
 
 	}; // KeysPanel

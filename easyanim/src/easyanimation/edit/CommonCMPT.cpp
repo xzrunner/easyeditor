@@ -3,8 +3,8 @@
 
 #include "view/StagePanel.h"
 #include "view/KeysPanel.h"
-#include "frame/Context.h"
 #include "frame/FileIO.h"
+#include "frame/Controller.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
 
@@ -12,11 +12,12 @@ namespace eanim
 {
 
 CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name, 
-	StagePanel* stage, d2d::PropertySettingPanel* property, bool vertical)
+	StagePanel* stage, d2d::PropertySettingPanel* property, 
+	bool vertical, Controller* ctrl)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_vertical(vertical)
 {
-	m_editOP = new ArrangeSpriteOP(stage, property);
+	m_editOP = new ArrangeSpriteOP(stage, property, ctrl);
 }
 
 wxSizer* CommonCMPT::initLayout()
@@ -150,14 +151,13 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		}
 	}
 
-	Context* context = Context::Instance();
-	context->layers.clear();
-	Layer* layer = new Layer;
+	m_ctrl->ClearLayers();
+	Layer* layer = new Layer(m_ctrl);
 	std::map<int, std::vector<wxString> >::iterator itr
 		= mapFrameSymbols.begin();
 	for ( ; itr != mapFrameSymbols.end(); ++itr)
 	{
-		KeyFrame* frame = new KeyFrame(itr->first);
+		KeyFrame* frame = new KeyFrame(m_ctrl, itr->first);
 		for (int i = 0, n = itr->second.size(); i < n; ++i)
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(itr->second[i]);
@@ -169,55 +169,49 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 		}
 		layer->insertKeyFrame(frame);
 	}
-	context->layers.insertLayer(layer);
+	m_ctrl->InsertLayer(layer);
 
-	context->setCurrFrame(0, 1);
+	m_ctrl->setCurrFrame(0, 1);
 
-	d2d::LibraryPanel* library = static_cast<d2d::LibraryPanel*>(context->library);
-	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	m_ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
-	context->stage->Refresh();
-	context->keysPanel->Refresh();
+	m_ctrl->Refresh();
 
- 	d2d::EditPanel* panel = static_cast<d2d::EditPanel*>(context->stage);
- 	panel->getCanvas()->resetViewport();
+ 	m_ctrl->GetStagePanel()->getCanvas()->resetViewport();
 }
 
 void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 {
-	Context* context = Context::Instance();
-
 	std::vector<d2d::ISymbol*> symbols;
-	Context::Instance()->imagePage->getList()->
+	m_ctrl->GetImagePage()->getList()->
 		traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 
-	if (!symbols.empty())
-		context->layers.clear();
-	else
+	if (!symbols.empty()) {
+		m_ctrl->ClearLayers();
+	} else {
 		return;
+	}
 
-	Layer* layer = new Layer;
+	Layer* layer = new Layer(m_ctrl);
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
-		KeyFrame* frame = new KeyFrame(i+1);
+		KeyFrame* frame = new KeyFrame(m_ctrl, i+1);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbols[i]);
 		frame->insertWithClone(sprite);
 		layer->insertKeyFrame(frame);
 	}
-	context->layers.insertLayer(layer);
+	m_ctrl->InsertLayer(layer);
 
-	context->stage->Refresh();
-	context->keysPanel->Refresh();
+	m_ctrl->Refresh();
 }
 
 void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 {
-	Context* context = Context::Instance();
-
 	int tot = m_filling->GetValue();
-	for (size_t i = 0, n = context->layers.size(); i < n; ++i)
+	LayersMgr& layers = m_ctrl->GetLayers();
+	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
-		Layer* layer = context->layers.getLayer(i);
+		Layer* layer = layers.getLayer(i);
 
 		const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
 		std::vector<KeyFrame*> fixed;
@@ -236,14 +230,13 @@ void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 			layer->insertKeyFrame(fixed[i]);
 	}
 
-	context->stage->Refresh();
-	context->keysPanel->Refresh();
+	m_ctrl->Refresh();
 }
 
 void CommonCMPT::onChangeAnim(wxCommandEvent& event)
 {
-	Context::Instance()->resource.choice = event.GetInt();
-	FileIO::reload();
+	m_ctrl->GetResource().choice = event.GetInt();
+	FileIO::reload(m_ctrl);
 }
 
 void CommonCMPT::onAddCross(wxCommandEvent& event)
@@ -259,10 +252,7 @@ void CommonCMPT::onDelCross(wxCommandEvent& event)
 
 void CommonCMPT::clear()
 {
-	Context* context = Context::Instance();
-	static_cast<d2d::LibraryPanel*>(context->library)->clear();
-	static_cast<StagePanel*>(context->stage)->clear();
-	context->layers.clear();
+	m_ctrl->Clear();
 }
 
 }

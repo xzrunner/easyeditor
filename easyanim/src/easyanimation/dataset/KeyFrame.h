@@ -6,12 +6,13 @@
 
 namespace eanim
 {
+	class Controller;
 	class Layer;
 
 	class KeyFrame
 	{
 	public:
-		KeyFrame(int time);
+		KeyFrame(Controller* ctrl, int time);
 		~KeyFrame();
 
 		void setLayer(Layer* layer) {
@@ -65,6 +66,8 @@ namespace eanim
 		bool canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& end) const;
 
 	private:
+		Controller* m_ctrl;
+
 		int m_time;
 
 		std::vector<d2d::ISprite*> m_sprites;

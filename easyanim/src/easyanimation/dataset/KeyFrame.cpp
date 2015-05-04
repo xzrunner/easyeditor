@@ -1,6 +1,7 @@
 #include "KeyFrame.h"
 #include "Layer.h"
-#include "frame/Context.h"
+
+#include "frame/Controller.h"
 
 #include <easymesh.h>
 #include <easyanim.h>
@@ -8,8 +9,9 @@
 namespace eanim
 {
 
-KeyFrame::KeyFrame(int time)
-	: m_layer(NULL)
+KeyFrame::KeyFrame(Controller* ctrl, int time)
+	: m_ctrl(ctrl)
+	, m_layer(NULL)
 {
 	m_time = time;
 	m_bClassicTween = false;
@@ -49,10 +51,9 @@ void KeyFrame::insert(d2d::ISprite* sprite)
 	}
 
 	// viewlist
-	Context* context = Context::Instance();
-	KeyFrame* curr = context->getCurrFrame();
+	KeyFrame* curr = m_ctrl->getCurrFrame();
 	if (this == curr) {
-		context->viewlist->insert(sprite);
+		m_ctrl->GetViewlist()->insert(sprite);
 	}
 }
 
@@ -67,10 +68,9 @@ void KeyFrame::insertWithClone(d2d::ISprite* sprite)
 	}
 
 	// viewlist
-	Context* context = Context::Instance();
-	KeyFrame* curr = context->getCurrFrame();
+	KeyFrame* curr = m_ctrl->getCurrFrame();
 	if (this == curr) {
-		context->viewlist->insert(clone);
+		m_ctrl->GetViewlist()->insert(clone);
 	}
 }
 
@@ -87,10 +87,9 @@ bool KeyFrame::remove(d2d::ISprite* sprite)
 			m_sprites.erase(m_sprites.begin() + i);
 
 			// viewlist
-			Context* context = Context::Instance();
-			KeyFrame* curr = context->getCurrFrame();
+			KeyFrame* curr = m_ctrl->getCurrFrame();
 			if (this == curr) {
-				context->viewlist->remove(sprite);
+				m_ctrl->GetViewlist()->remove(sprite);
 			}
 
 			return true;
@@ -118,7 +117,7 @@ void KeyFrame::reorder(const d2d::ISprite* sprite, bool up)
 				m_sprites[i-1] = tmp;
 			}
 
-			Context::Instance()->viewlist->reorder(sprite, up);
+			m_ctrl->GetViewlist()->reorder(sprite, up);
 
 			break;
 		}

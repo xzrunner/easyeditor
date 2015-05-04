@@ -4,13 +4,15 @@
 
 namespace eanim
 {
+	class Controller;
 	class StagePanel;
 
 	class ToolbarPanel : public d2d::ToolbarPanel
 	{
 	public:
 		ToolbarPanel(wxWindow* parent, StagePanel* stage, 
-			d2d::PropertySettingPanel* property, bool vertical);
+			d2d::PropertySettingPanel* property, bool vertical,
+			Controller* ctrl);
 
 		void addAnimChoice(const std::vector<std::string>& choices);
 
@@ -21,6 +23,8 @@ namespace eanim
 		void onChangeAnim(wxCommandEvent& event);
 
 	private:
+		Controller* m_ctrl;
+
 		wxRadioBox* m_animChoice;
 
 	}; // ToolbarPanel
