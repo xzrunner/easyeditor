@@ -28,7 +28,9 @@ bool EditCircleOP::onKeyDown(int keyCode)
 		m_captured.clear();
 		m_editPanel->Refresh();
 
-		m_propertyPanel->setPropertySetting(NULL);
+		if (m_propertyPanel) {
+			m_propertyPanel->setPropertySetting(NULL);
+		}
 	}
 
 	return false;
@@ -50,7 +52,9 @@ bool EditCircleOP::onMouseLeftDown(int x, int y)
 
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
-			m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+			if (m_propertyPanel) {
+				m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+			}
 			m_shapesImpl->getShapeSelection()->Add(circle);
 		}
 	}
@@ -76,7 +80,9 @@ bool EditCircleOP::onMouseLeftUp(int x, int y)
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
-				m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+				if (m_propertyPanel) {
+					m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+				}
 				m_shapesImpl->getShapeSelection()->Add(circle);
 				m_shapesImpl->insertShape(circle);
 			}
@@ -84,9 +90,11 @@ bool EditCircleOP::onMouseLeftUp(int x, int y)
 	}
 	else
 	{
-		m_propertyPanel->enablePropertyGrid(true);
-		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
-			m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+		if (m_propertyPanel) {
+			m_propertyPanel->enablePropertyGrid(true);
+			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
+				m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+		}
 	}
 
 	clear();
@@ -114,7 +122,9 @@ bool EditCircleOP::onMouseRightDown(int x, int y)
 			m_captured.clear();
 			m_editPanel->Refresh();
 
-			m_propertyPanel->setPropertySetting(NULL);
+			if (m_propertyPanel) {
+				m_propertyPanel->setPropertySetting(NULL);
+			}
 		}
 	}
 	else
@@ -160,7 +170,9 @@ bool EditCircleOP::onMouseDrag(int x, int y)
 			else
 				circle->radius = d2d::Math::getDistance(m_currPos, circle->center);
 
-			m_propertyPanel->enablePropertyGrid(false);
+			if (m_propertyPanel) {
+				m_propertyPanel->enablePropertyGrid(false);
+			}
 		}
 	}
 
