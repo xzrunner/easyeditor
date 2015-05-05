@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "NodeCaptureStatic.h"
-
 namespace libshape
 {
 
@@ -27,7 +25,7 @@ private:
 private:
 	StagePanel* m_stage;
 
-	NodeCaptureStatic m_capture;
+	d2d::OneFloatValueStatic m_capture;
 
 	DECLARE_EVENT_TABLE()
 

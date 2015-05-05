@@ -16,7 +16,6 @@
 #include "EditBezierOP.h"
 
 #include "DrawLineCMPT.h"
-#include "NodeCaptureCMPT.h"
 
 #include <easyimage.h>
 
@@ -30,14 +29,14 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	stage->SetToolbarPanel(this);
 	// rect
 	{
-		NodeCaptureCMPT* capture_cmpt = new NodeCaptureCMPT(this, "rect", stage);
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "rect", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditRectOP(stage, stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
 	// circle
 	{
-		NodeCaptureCMPT* capture_cmpt = new NodeCaptureCMPT(this, "circle", stage);
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "circle", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditCircleOP(stage, stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
@@ -46,7 +45,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	addChild(new DrawLineCMPT(this, wxT("chain"), stage, stage, property));
 	// polygon
 	{
-		NodeCaptureCMPT* capture_cmpt = new NodeCaptureCMPT(this, "polygon", stage);
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "polygon", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP>
 			(stage, stage, property, capture_cmpt, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
@@ -54,7 +53,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	}
 	// bezier
 	{
-		NodeCaptureCMPT* capture_cmpt = new NodeCaptureCMPT(this, "bezier", stage);
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "bezier", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditBezierOP(stage, stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);

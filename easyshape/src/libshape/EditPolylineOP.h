@@ -3,7 +3,6 @@
 
 #include <drag2d.h>
 
-#include "NodeCaptureCMPT.h"
 #include "IOperaterBase.h"
 
 namespace libshape
@@ -19,7 +18,7 @@ public:
 	EditPolylineOP(d2d::EditPanel* editPanel, 
 		d2d::MultiShapesImpl* shapesImpl, 
 		d2d::PropertySettingPanel* propertyPanel,
-		INodeCapture* node_capture,
+		d2d::OneFloatValue* node_capture,
 		d2d::AbstractEditCMPT* cmpt);
 	virtual ~EditPolylineOP();
 
@@ -48,7 +47,7 @@ private:
 
 	TSelected* m_select_op;
 
-	INodeCapture* m_node_capture;
+	d2d::OneFloatValue* m_node_capture;
 
 }; // EditPolylineOP
 

@@ -65,7 +65,7 @@ void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 		break;
 	case e_chain: case e_polygon:
 		op = new EditPolylineOP<DrawPolygonEdgeOP, 
-			d2d::SelectShapesOP>(m_stage, m_stage, NULL, new libshape::NodeCaptureStatic(5), NULL); 
+			d2d::SelectShapesOP>(m_stage, m_stage, NULL, new d2d::OneFloatValueStatic(5), NULL); 
 		break;
 	case e_bezier:
 		op = new EditBezierOP(m_stage, m_stage, NULL, &m_capture);

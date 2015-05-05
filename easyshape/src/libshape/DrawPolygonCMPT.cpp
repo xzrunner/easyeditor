@@ -10,7 +10,7 @@ namespace libshape
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 								 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 								 d2d::PropertySettingPanel* propertyPanel/*, wxColourData& colorData*/)
-	: NodeCaptureCMPT(parent, name, editPanel)
+	: d2d::OneFloatValueCMPT(parent, name, editPanel, "node capture", 5, 30, 10)
 	, m_shapesImpl(shapesImpl)
 	, m_color(*wxBLACK)
 //	, m_colorData(colorData)
@@ -34,7 +34,7 @@ wxSizer* DrawPolygonCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	sizer->Add(NodeCaptureCMPT::initLayout());
+	sizer->Add(d2d::OneFloatValueCMPT::initLayout());
 
 	sizer->AddSpacer(20);
 

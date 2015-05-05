@@ -8,13 +8,13 @@
 namespace libshape
 {
 
-class INodeCapture;
+class d2d::OneFloatValue;
 
 class EditCircleOP : public d2d::ZoomViewOP
 {
 public:
 	EditCircleOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel, INodeCapture* node_capture);
+		d2d::PropertySettingPanel* propertyPanel, d2d::OneFloatValue* node_capture);
 
 	virtual bool onKeyDown(int keyCode);
 	virtual bool onMouseLeftDown(int x, int y);
@@ -31,7 +31,7 @@ private:
 
 	d2d::PropertySettingPanel* m_propertyPanel;
 
-	INodeCapture* m_node_capture;
+	d2d::OneFloatValue* m_node_capture;
 
 	d2d::Vector m_firstPress;
 	d2d::Vector m_currPos;

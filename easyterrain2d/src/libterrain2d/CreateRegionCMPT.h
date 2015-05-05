@@ -8,14 +8,14 @@ namespace eterrain2d
 
 class StagePanel;
 
-class CreateRegionCMPT : public libshape::NodeCaptureCMPT
+class CreateRegionCMPT : public d2d::OneFloatValueCMPT
 {
 public:
 	CreateRegionCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
 
 	//
-	// interface INodeCapture
+	// interface OneFloatValue
 	//
 	virtual float GetScope() const;
 

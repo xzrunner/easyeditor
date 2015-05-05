@@ -26,7 +26,6 @@
 #include "libshape/DrawLoopOP.h"
 #include "libshape/SelectNodesOP.h"
 
-#include "libshape/NodeCaptureCMPT.h"
 #include "libshape/DrawLineCMPT.h"
 #include "libshape/MousePositionCMPT.h"
 #include "libshape/DrawPolygonCMPT.h"

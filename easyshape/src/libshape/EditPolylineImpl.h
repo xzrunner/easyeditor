@@ -10,14 +10,14 @@ namespace libshape
 
 class ChainShape;
 class DrawPolylineOP;
-class INodeCapture;
+class d2d::OneFloatValue;
 class IOperaterBase;
 
 class EditPolylineImpl
 {
 public:
 	EditPolylineImpl(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl, 
-		d2d::PropertySettingPanel* propertyPanel, INodeCapture* node_capture, 
+		d2d::PropertySettingPanel* propertyPanel, d2d::OneFloatValue* node_capture, 
 		DrawPolylineOP* draw_op, d2d::AbstractEditOP* select_op, IOperaterBase* base_op);
 
 	bool OnKeyDown(int keyCode);
@@ -101,7 +101,7 @@ private:
 	d2d::Vector m_lastLeftDownPos;
 	bool m_bSelectOpen;
 
-	INodeCapture* m_node_capture;
+	d2d::OneFloatValue* m_node_capture;
 
 	bool m_dirty;
 

@@ -2189,6 +2189,26 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="value"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\OneFloatValue.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\OneFloatValueCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\OneFloatValueCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\OneFloatValueStatic.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="algorithms"

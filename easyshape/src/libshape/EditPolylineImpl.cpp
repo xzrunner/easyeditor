@@ -6,7 +6,6 @@
 #include "PolygonPropertySetting.h"
 #include "ChainPropertySetting.h"
 
-#include "INodeCapture.h"
 #include "IOperaterBase.h"
 
 namespace libshape
@@ -15,7 +14,7 @@ namespace libshape
 EditPolylineImpl::EditPolylineImpl(d2d::EditPanel* editPanel,
 								   d2d::MultiShapesImpl* shapesImpl,
 								   d2d::PropertySettingPanel* propertyPanel, 
-								   INodeCapture* node_capture, 
+								   d2d::OneFloatValue* node_capture, 
 								   DrawPolylineOP* draw_op,
 								   d2d::AbstractEditOP* select_op,
 								   IOperaterBase* base_op)

@@ -1,7 +1,6 @@
 #ifndef _LIBSHAPE_DRAW_POLYGON_CMPT_H_
 #define _LIBSHAPE_DRAW_POLYGON_CMPT_H_
 
-#include "NodeCaptureCMPT.h"
 #include "EditPolylineOP.h"
 #include "DrawPolygonEdgeOP.h"
 
@@ -10,7 +9,7 @@
 namespace libshape
 {
 
-class DrawPolygonCMPT : public NodeCaptureCMPT
+class DrawPolygonCMPT : public d2d::OneFloatValueCMPT
 {
 public:
 	DrawPolygonCMPT(wxWindow* parent, const wxString& name,

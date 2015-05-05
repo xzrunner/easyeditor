@@ -2,14 +2,12 @@
 #include "BezierShape.h"
 #include "BezierPropertySetting.h"
 
-#include "INodeCapture.h"
-
 namespace libshape
 {
 
 EditBezierOP::EditBezierOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 						   d2d::PropertySettingPanel* propertyPanel, 
-						   INodeCapture* node_capture)
+						   d2d::OneFloatValue* node_capture)
 	: ZoomViewOP(editPanel, true)
 	, m_propertyPanel(propertyPanel)
 	, m_shapesImpl(shapesImpl)

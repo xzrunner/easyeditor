@@ -113,6 +113,8 @@
 #include "widgets/HSLColorSettingDlg.h"
 #include "widgets/RGBColorSettingDlg.h"
 #include "widgets/ColorProperty.h"
+#include "widgets/OneFloatValueStatic.h"
+#include "widgets/OneFloatValueCMPT.h"
 
 #include "common/LibJpeg.h"
 #include "common/log.h"

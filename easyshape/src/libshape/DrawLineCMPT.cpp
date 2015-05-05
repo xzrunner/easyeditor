@@ -1,5 +1,4 @@
 #include "DrawLineCMPT.h"
-#include "NodeCaptureCMPT.h"
 #include "DrawPenLineOP.h"
 #include "EditPolylineOP.h"
 #include "DrawPencilLineCMPT.h"
@@ -13,7 +12,7 @@ DrawLineCMPT::DrawLineCMPT(wxWindow* parent, const wxString& name, d2d::EditPane
 {
  	// draw polyline with pen, node capture
 	{
-		NodeCaptureCMPT* cmpt = new NodeCaptureCMPT(this, "pen", editPanel);
+		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", editPanel, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPenLineOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, cmpt, cmpt);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);

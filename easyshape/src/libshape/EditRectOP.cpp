@@ -2,14 +2,12 @@
 #include "RectShape.h"
 #include "RectPropertySetting.h"
 
-#include "INodeCapture.h"
-
 namespace libshape
 {
 
 EditRectOP::EditRectOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 					   d2d::PropertySettingPanel* propertyPanel,
-					   INodeCapture* node_capture)
+					   d2d::OneFloatValue* node_capture)
 	: d2d::ZoomViewOP(editPanel, true)
 	, m_propertyPanel(propertyPanel)
 	, m_shapesImpl(shapesImpl)
