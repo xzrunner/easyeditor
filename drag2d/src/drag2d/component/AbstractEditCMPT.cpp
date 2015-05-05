@@ -27,6 +27,11 @@ AbstractEditCMPT::~AbstractEditCMPT()
  	for_each(m_children.begin(), m_children.end(), DeletePointerFunctor<AbstractEditCMPT>());
 }
 
+void AbstractEditCMPT::SetEditOP(AbstractEditOP* op)
+{
+	loadEditOP(op);
+}
+
 wxSizer* AbstractEditCMPT::initChildrenLayout()
 {
 	m_childrenSizer = m_vertical ? new wxBoxSizer(wxVERTICAL) : new wxBoxSizer(wxHORIZONTAL);

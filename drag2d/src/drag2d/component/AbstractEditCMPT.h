@@ -17,6 +17,8 @@ namespace d2d
 
 		virtual void updateControlValue() {}
 
+		void SetEditOP(AbstractEditOP* op);
+
 	protected:
 		virtual wxSizer* initLayout() = 0;
 

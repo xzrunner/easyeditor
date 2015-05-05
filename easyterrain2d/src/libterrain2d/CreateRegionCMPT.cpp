@@ -1,19 +1,26 @@
 #include "CreateRegionCMPT.h"
 #include "StagePanel.h"
+#include "CreateRegionOP.h"
 
 namespace eterrain2d
 {
 
 CreateRegionCMPT::CreateRegionCMPT(wxWindow* parent, const wxString& name, StagePanel* stage)
-	: libshape::NodeCaptureCMPT<libshape::EditPolylineOP<CreateRegionOP, d2d::SelectShapesOP> >(parent, name, stage, stage, NULL)
+	: libshape::NodeCaptureCMPT(parent, name, stage)
 {
+	m_editOP = new libshape::EditPolylineOP<CreateRegionOP, d2d::SelectShapesOP>(stage, stage, NULL, this, this);
+}
+
+float CreateRegionCMPT::GetScope() const
+{
+	return 5;
 }
 
 wxSizer* CreateRegionCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
- 	wxSizer* psizer = libshape::NodeCaptureCMPT<libshape::EditPolylineOP<CreateRegionOP, d2d::SelectShapesOP> >::initLayout();
+ 	wxSizer* psizer = libshape::NodeCaptureCMPT::initLayout();
  	sizer->Add(psizer);
 	sizer->AddSpacer(20);
 	

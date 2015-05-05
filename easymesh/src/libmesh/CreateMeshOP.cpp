@@ -7,7 +7,7 @@ namespace emesh
 {
 
 CreateMeshOP::CreateMeshOP(StagePanel* stage)
-	: libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>(stage, stage, NULL, NULL, 5)
+	: libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>(stage, stage, NULL, new libshape::NodeCaptureStatic(5), NULL)
 	, m_stage(stage)
 {
 	SetLoop(true);

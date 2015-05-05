@@ -13,7 +13,7 @@ class EditPolylineWithCopyNodeOP : public EditPolylineOP<T, SelectNodesOP>
 public:
 	EditPolylineWithCopyNodeOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 		d2d::PropertySettingPanel* propertyPanel)
-		: EditPolylineOP<T, SelectNodesOP>(editPanel, shapesImpl, propertyPanel, NULL)
+		: EditPolylineOP<T, SelectNodesOP>(editPanel, shapesImpl, propertyPanel, NULL, NULL)
 	{}
 
 	virtual bool onKeyDown(int keyCode)

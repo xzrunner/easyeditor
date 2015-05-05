@@ -591,6 +591,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libshape\DrawPencilPolygonCMPT.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPencilPolygonCMPT.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libshape\DrawPolygonCMPT.cpp"
 						>
 					</File>
@@ -603,27 +611,11 @@
 					Name="edit"
 					>
 					<File
-						RelativePath="..\..\..\src\libshape\EditPolygonCMPT.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\EditPolygonCMPT.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\libshape\EditPolylinesCMPT.cpp"
 						>
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\EditPolylinesCMPT.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\NodeCaptureCMPT.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\NodeCaptureStatic.h"
 						>
 					</File>
 				</Filter>
@@ -657,10 +649,6 @@
 			Name="tools"
 			>
 			<File
-				RelativePath="..\..\..\src\libshape\INodeCapture.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libshape\IOperaterBase.h"
 				>
 			</File>
@@ -672,6 +660,26 @@
 				RelativePath="..\..\..\src\libshape\Math.h"
 				>
 			</File>
+			<Filter
+				Name="node_capture"
+				>
+				<File
+					RelativePath="..\..\..\src\libshape\INodeCapture.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\NodeCaptureCMPT.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\NodeCaptureCMPT.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\NodeCaptureStatic.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

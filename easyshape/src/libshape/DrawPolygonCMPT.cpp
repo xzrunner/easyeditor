@@ -10,7 +10,7 @@ namespace libshape
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 								 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 								 d2d::PropertySettingPanel* propertyPanel/*, wxColourData& colorData*/)
-								 : NodeCaptureCMPT<EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP> >(parent, name, editPanel, shapesImpl, propertyPanel)
+	: NodeCaptureCMPT(parent, name, editPanel)
 	, m_shapesImpl(shapesImpl)
 	, m_color(*wxBLACK)
 //	, m_colorData(colorData)
@@ -18,7 +18,7 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 	m_editOP = NULL;
 
 	addChild(new d2d::UniversalCMPT(this, wxT("直接画线"), editPanel, 
-		new EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, this)));
+		new EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, this, this)));
 	addChild(new d2d::UniversalCMPT(this, wxT("选节点画线"), editPanel, 
 		new EditPolylineWithCopyNodeOP<DrawPolygonEdgeOP>(editPanel, shapesImpl, propertyPanel)));
 }
@@ -34,7 +34,7 @@ wxSizer* DrawPolygonCMPT::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	sizer->Add(NodeCaptureCMPT<EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP> >::initLayout());
+	sizer->Add(NodeCaptureCMPT::initLayout());
 
 	sizer->AddSpacer(20);
 

@@ -19,8 +19,8 @@ public:
 	EditPolylineOP(d2d::EditPanel* editPanel, 
 		d2d::MultiShapesImpl* shapesImpl, 
 		d2d::PropertySettingPanel* propertyPanel,
-		NodeCaptureCMPT<EditPolylineOP>* cmpt,
-		float node_capture_scope = 0);
+		INodeCapture* node_capture,
+		d2d::AbstractEditCMPT* cmpt);
 	virtual ~EditPolylineOP();
 
 	virtual bool onKeyDown(int keyCode);

@@ -28,7 +28,6 @@
 
 #include "libshape/NodeCaptureCMPT.h"
 #include "libshape/DrawLineCMPT.h"
-#include "libshape/EditPolygonCMPT.h"
 #include "libshape/MousePositionCMPT.h"
 #include "libshape/DrawPolygonCMPT.h"
 

@@ -10,7 +10,7 @@
 namespace libshape
 {
 
-class DrawPolygonCMPT : public NodeCaptureCMPT<EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP> >
+class DrawPolygonCMPT : public NodeCaptureCMPT
 {
 public:
 	DrawPolygonCMPT(wxWindow* parent, const wxString& name,
