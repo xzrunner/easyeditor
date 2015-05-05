@@ -542,6 +542,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\easydb_cl\LRToComplex.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\LRToComplex.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easydb_cl\RemoveDuplicateSprite.cpp"
 					>
 				</File>

@@ -38,6 +38,8 @@
 #include "BlockCompress.h"
 #include "AnimToComplexWithColor.h"
 #include "RemoveDuplicateSprite.h"
+#include "CommandLoader.h"
+#include "LRToComplex.h"
 
 namespace edb
 {
@@ -82,6 +84,7 @@ void CommandLoader::Init()
 	fc->Register(BlockCompress::Create());
 	fc->Register(AnimToComplexWithColor::Create());
 	fc->Register(RemoveDuplicateSprite::Create());
+	fc->Register(LRToComplex::Create());
 }
 
 }
