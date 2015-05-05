@@ -137,7 +137,7 @@ bool SelectShapesOP::onMouseLeftUp(int x, int y)
 
 		if (m_propertyPanel)
 		{
-			if (m_selection->Size() == 1)
+			if (m_selection->Size() == 1 && !shapes.empty())
 				m_propertyPanel->setPropertySetting(createPropertySetting(shapes[0]));
 			else
 				m_propertyPanel->setPropertySetting(createPropertySetting(NULL));
