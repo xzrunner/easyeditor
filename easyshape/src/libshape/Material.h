@@ -19,6 +19,8 @@ public:
 
 	virtual void ReloadTexture() = 0;
 
+	const std::vector<d2d::Vector>& GetVertices() const { return m_vertices; }
+
 	void Refresh(const std::vector<d2d::Vector>& vertices);
 
 	void DebugDrawTris(const d2d::Matrix& mt) const;

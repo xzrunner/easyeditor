@@ -19,6 +19,10 @@ public:
 
 	virtual void ReloadTexture();
 
+	const std::vector<d2d::Vector>& GetTexcoords() const { return m_texcoords; }
+
+	const d2d::ImageSymbol* GetImage() const { return m_image; }
+
 protected:
 	virtual void Build(const std::vector<d2d::Vector>& vertices);
 	virtual void Build(const std::vector<d2d::Vector>& vertices,

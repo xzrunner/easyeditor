@@ -11,6 +11,7 @@ namespace anim { class Symbol; }
 namespace escale9 { class Symbol; }
 namespace emesh { class Symbol; class Sprite; }
 namespace eterrain2d { class Symbol; class Sprite; }
+namespace etexture { class Symbol; class Sprite; }
 namespace epbin { class ImageIDer; }
 
 namespace libcoco
@@ -49,8 +50,10 @@ private:
 	void ParserScale9(const escale9::Symbol* symbol);
 
 	void CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture);
+	void CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* picture);
 	int ParserMesh(const emesh::Sprite* sprite);
 	int ParserTerrain2D(const eterrain2d::Sprite* sprite);
+	int ParserTexture(const etexture::Sprite* sprite);
 
 	void ParserSymbolBase(const d2d::ISymbol* symbol);
 
@@ -81,12 +84,12 @@ private:
 	std::map<const d2d::ISymbol*, int> m_mapSymbolID;
 
 	// patch for multi mesh symbol
-	struct MeshID
+	struct SpriteID
 	{
-		emesh::Sprite* sprite;
+		d2d::ISprite* sprite;
 		int id;
 	};
-	std::map<const emesh::Symbol*, std::vector<MeshID> > m_map_mesh2ids;
+	std::map<const d2d::ISymbol*, std::vector<SpriteID> > m_map_symbol2ids;
 
 	epbin::ImageIDer* m_img_ider;
 

@@ -32,4 +32,6 @@
 #include "libshape/MousePositionCMPT.h"
 #include "libshape/DrawPolygonCMPT.h"
 
+#include "libshape/TextureMaterial.h"
+
 #endif // EASY_SHAPE_H

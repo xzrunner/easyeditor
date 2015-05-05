@@ -43,6 +43,8 @@ public:
 	Json::Value StoreMaterial(const std::string& dirpath) const;
 	void LoadMaterial(const std::string& dirpath, const Json::Value& val);
 
+	const Material* GetMaterial() const { return m_material; }
+
 private:
 	Material* m_material;
 

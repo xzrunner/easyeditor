@@ -5,6 +5,7 @@
 #include <easyscale9.h>
 #include <easymesh.h>
 #include <easyterrain2d.h>
+#include <easytexture.h>
 
 namespace libcoco
 {
@@ -153,6 +154,10 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 		{
 			m_unique.insert(&ocean->getSymbol());
 		}
+		else if (const etexture::Sprite* tex = dynamic_cast<const etexture::Sprite*>(sprite))
+		{
+			m_unique.insert(&tex->getSymbol());
+		}
 	}
 }
 
@@ -286,6 +291,28 @@ void SymbolDependanceSorter::sort()
 					m_result.push_back(image);
 				}
 				m_result.push_back(ocean_symbol);
+				m_unique.erase(itr);
+				break;
+			}
+			else if (etexture::Symbol* tex = dynamic_cast<etexture::Symbol*>(symbol))
+			{
+				const std::vector<d2d::IShape*>& shapes = tex->GetAllShapes();
+				assert(shapes.size() == 1);
+				for (int i = 0, n = shapes.size(); i < n; ++i)
+				{
+					d2d::IShape* shape = shapes[i];
+					libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape);
+					assert(poly);
+					const libshape::TextureMaterial* material = dynamic_cast<const libshape::TextureMaterial*>(poly->GetMaterial());
+					assert(material);
+					const d2d::ImageSymbol* image = material->GetImage();
+					std::vector<const d2d::ISymbol*>::iterator itr_find 
+						= std::find(m_result.begin(), m_result.end(), image);
+					if (itr_find == m_result.end()) {
+						m_result.push_back(image);
+					}
+				}
+				m_result.push_back(tex);
 				m_unique.erase(itr);
 				break;
 			}
