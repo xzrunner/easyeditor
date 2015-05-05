@@ -12,10 +12,10 @@
 #include "EditRectOP.h"
 #include "EditCircleOP.h"
 #include "EditPolylineOP.h"
-#include "DrawPolygonEdgeOP.h"
 #include "EditBezierOP.h"
 
 #include "DrawLineCMPT.h"
+#include "DrawPolygon2CMPT.h"
 
 #include <easyimage.h>
 
@@ -44,13 +44,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	// chain
 	addChild(new DrawLineCMPT(this, wxT("chain"), stage, stage, property));
 	// polygon
-	{
-		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "polygon", stage, "node capture", 5, 30, 10);
-		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP>
-			(stage, stage, property, capture_cmpt, capture_cmpt);
-		capture_cmpt->SetEditOP(op);
-		addChild(capture_cmpt);
-	}
+	addChild(new DrawPolygon2CMPT(this, "polygon", stage, stage, property));
 	// bezier
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "bezier", stage, "node capture", 5, 30, 10);

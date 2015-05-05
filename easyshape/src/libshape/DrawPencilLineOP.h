@@ -6,8 +6,6 @@
 namespace libshape
 {
 
-class DrawPencilLineCMPT;
-
 class DrawPencilLineOP : public DrawCurveOP
 {
 public:

@@ -551,6 +551,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libshape\DrawPencilPolygonOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPencilPolygonOP.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libshape\DrawPenLineOP.cpp"
 						>
 					</File>
@@ -596,6 +604,14 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\DrawPencilPolygonCMPT.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPolygon2CMPT.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawPolygon2CMPT.h"
 						>
 					</File>
 					<File
