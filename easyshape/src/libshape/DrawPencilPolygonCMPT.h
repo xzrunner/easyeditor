@@ -12,6 +12,14 @@ public:
 	DrawPencilPolygonCMPT(wxWindow* parent, const wxString& name,
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
+	int GetSelected() const;
+
+protected:
+	virtual wxSizer* initLayout();
+
+private:
+	wxChoice* m_choice;
+
 }; // DrawPencilPolygonCMPT
 	
 }

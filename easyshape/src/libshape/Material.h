@@ -19,6 +19,7 @@ public:
 
 	virtual void ReloadTexture() = 0;
 
+	// triangulation
 	const std::vector<d2d::Vector>& GetVertices() const { return m_vertices; }
 
 	void Refresh(const std::vector<d2d::Vector>& vertices);

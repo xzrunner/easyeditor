@@ -8,6 +8,7 @@
 #include "algorithms/CosineSmooth.h"
 #include "algorithms/MinBoundingBox.h"
 #include "algorithms/ConvexHull.h"
+#include "algorithms/PolygonClipper.h"
 
 #include "dataset/Bitmap.h"
 #include "dataset/Image.h"
