@@ -10,6 +10,8 @@
 #include <easyparticle2d.h>
 #include <easyejoy2d.h>
 #include <easyterrain2d.h>
+#include <easytexture.h>
+#include <easyshape.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -38,6 +40,12 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(libshape::FILE_TAG, &libshape::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(libshape::FILE_TAG, &libshape::Sprite::Create);
 }
 
 bool MyApp::OnInit()
