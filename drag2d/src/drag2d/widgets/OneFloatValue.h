@@ -8,7 +8,7 @@ class OneFloatValue
 {
 public:
 	virtual ~OneFloatValue() {}
-	virtual float GetScope() const = 0;
+	virtual float GetValue() const = 0;
 }; // OneFloatValue
 
 }

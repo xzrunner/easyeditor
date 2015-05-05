@@ -16,7 +16,7 @@ OneFloatValueCMPT::OneFloatValueCMPT(wxWindow* parent, const wxString& name,
 {
 }
 
-float OneFloatValueCMPT::GetScope() const
+float OneFloatValueCMPT::GetValue() const
 {
 	return m_slider->GetValue() * m_scale;
 }

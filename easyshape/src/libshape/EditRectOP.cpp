@@ -40,7 +40,7 @@ bool EditRectOP::onMouseLeftDown(int x, int y)
 
 	m_shapesImpl->getShapeSelection()->Clear();
 
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
@@ -98,7 +98,7 @@ bool EditRectOP::onMouseRightDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseRightDown(x, y)) return true;
 
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
 		m_currPos = m_editPanel->transPosScreenToProject(x, y);
@@ -128,7 +128,7 @@ bool EditRectOP::onMouseMove(int x, int y)
 	if (d2d::ZoomViewOP::onMouseMove(x, y)) return true;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
@@ -190,7 +190,7 @@ bool EditRectOP::onDraw() const
 	{
 		if (m_node_capture)
 		{
-			int tolerance = m_node_capture->GetScope();
+			int tolerance = m_node_capture->GetValue();
 			if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 			{
 				d2d::Vector pos(rect->m_rect.xCenter(), rect->m_rect.yCenter());

@@ -6,21 +6,11 @@
 namespace libshape
 {
 
-class DrawPencilLineCMPT : public d2d::AbstractEditCMPT
+class DrawPencilLineCMPT : public d2d::OneFloatValueCMPT
 {
 public:
 	DrawPencilLineCMPT(wxWindow* parent, const wxString& name,
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
-
-	float getSimplifyThreshold() const {
-		return m_thresholdSlider->GetValue() * 0.1f;
-	}
-
-protected:
-	virtual wxSizer* initLayout();
-
-private:
-	wxSlider* m_thresholdSlider;
 
 }; // DrawPencilLineCMPT
 	

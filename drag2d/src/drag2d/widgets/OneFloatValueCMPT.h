@@ -18,7 +18,7 @@ public:
 	//
 	// interface OneFloatValue
 	//
-	virtual float GetScope() const;
+	virtual float GetValue() const;
 
 protected:
 	virtual wxSizer* initLayout();

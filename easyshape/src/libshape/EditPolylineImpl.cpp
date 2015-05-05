@@ -54,7 +54,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		return m_base_op->OnMouseLeftDownBase(x, y);
 	else
 	{
-		int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+		int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 		if (tolerance != 0)
 		{	
 			NodeCapture capture(m_shapesImpl, tolerance);
@@ -116,7 +116,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 
 bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 {
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
@@ -161,7 +161,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 {
 	if (m_draw_op->m_polyline.empty())
 	{
-		int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+		int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 		if (tolerance != 0)
 		{
 			NodeCapture capture(m_shapesImpl, tolerance);
@@ -201,7 +201,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 
 bool EditPolylineImpl::OnMouseMove(int x, int y)
 {
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
@@ -301,13 +301,13 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 	if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape))
 	{
 		if (captured.pos.isValid()) {
-			d2d::PrimitiveDraw::drawCircle(captured.pos, m_node_capture->GetScope(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
+			d2d::PrimitiveDraw::drawCircle(captured.pos, m_node_capture->GetValue(), true, 2, d2d::Colorf(1.0f, 0.4f, 0.4f));
 		}
 
 		d2d::Vector center;
 		center.x = chain->getRect().xCenter();
 		center.y = chain->getRect().yCenter();
-		d2d::PrimitiveDraw::drawCircle(center, m_node_capture->GetScope(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
+		d2d::PrimitiveDraw::drawCircle(center, m_node_capture->GetValue(), true, 2, d2d::Colorf(0.4f, 1.0f, 0.4f));
 	}
 }
 

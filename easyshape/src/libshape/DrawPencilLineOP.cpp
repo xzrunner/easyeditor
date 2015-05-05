@@ -1,5 +1,4 @@
 #include "DrawPencilLineOP.h"
-#include "DrawPencilLineCMPT.h"
 #include "ChainShape.h"
 
 namespace libshape
@@ -7,10 +6,10 @@ namespace libshape
 
 DrawPencilLineOP::DrawPencilLineOP(d2d::EditPanel* editPanel, 
 								   d2d::MultiShapesImpl* shapesImpl,
-								   DrawPencilLineCMPT* cmpt)
+								   d2d::OneFloatValue* simplify)
 	: DrawCurveOP(editPanel)
 	, m_shapesImpl(shapesImpl)
-	, m_cmpt(cmpt)
+	, m_simplify(simplify)
 {
 }
 
@@ -21,7 +20,7 @@ bool DrawPencilLineOP::onMouseLeftUp(int x, int y)
 	if (!m_curve.empty())
 	{
 		std::vector<d2d::Vector> simplified;
-		d2d::DouglasPeucker::implement(m_curve, m_cmpt->getSimplifyThreshold(), simplified);
+		d2d::DouglasPeucker::implement(m_curve, m_simplify->GetValue(), simplified);
 		m_shapesImpl->insertShape(new ChainShape(simplified, false));
 		clear();
 	}

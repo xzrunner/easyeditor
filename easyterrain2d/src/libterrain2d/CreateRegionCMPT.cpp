@@ -11,7 +11,7 @@ CreateRegionCMPT::CreateRegionCMPT(wxWindow* parent, const wxString& name, Stage
 	m_editOP = new libshape::EditPolylineOP<CreateRegionOP, d2d::SelectShapesOP>(stage, stage, NULL, this, this);
 }
 
-float CreateRegionCMPT::GetScope() const
+float CreateRegionCMPT::GetValue() const
 {
 	return 5;
 }

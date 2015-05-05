@@ -9,12 +9,12 @@ namespace d2d
 class OneFloatValueStatic : public OneFloatValue
 {
 public:
-	OneFloatValueStatic(float scope) : m_scope(scope) {}
+	OneFloatValueStatic(float value) : m_value(value) {}
 
-	virtual float GetScope() const { return m_scope; }
+	virtual float GetValue() const { return m_value; }
 
 private:
-	float m_scope;
+	float m_value;
 
 }; // OneFloatValueStatic
 

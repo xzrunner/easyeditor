@@ -40,7 +40,7 @@ bool EditBezierOP::onMouseLeftDown(int x, int y)
 
 	m_shapesImpl->getShapeSelection()->Clear();
 
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
@@ -98,7 +98,7 @@ bool EditBezierOP::onMouseRightDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseRightDown(x, y)) return true;
 
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
 		m_currPos = m_editPanel->transPosScreenToProject(x, y);
@@ -128,7 +128,7 @@ bool EditBezierOP::onMouseMove(int x, int y)
 	if (ZoomViewOP::onMouseMove(x, y)) return true;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	int tolerance = m_node_capture ? m_node_capture->GetScope() : 0;
+	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
@@ -177,7 +177,7 @@ bool EditBezierOP::onDraw() const
 	{
 		if (m_node_capture)
 		{
-			int tolerance = m_node_capture->GetScope();
+			int tolerance = m_node_capture->GetValue();
 			if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 			{
 				d2d::PrimitiveDraw::drawCircle(d2d::Vector(bezier->getRect().xCenter(), bezier->getRect().yCenter()), 
