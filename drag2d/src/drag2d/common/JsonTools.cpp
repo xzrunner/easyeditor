@@ -14,6 +14,8 @@ void JsonTools::store(const std::vector<Vector>& points, Json::Value& value)
 
 void JsonTools::load(const Json::Value& value, std::vector<Vector>& points)
 {
+	points.reserve(value["x"].size());
+
 	int i = 0;
 	Json::Value xval = value["x"][i],
 		yval = value["y"][i];
@@ -29,5 +31,44 @@ void JsonTools::load(const Json::Value& value, std::vector<Vector>& points)
 	}
 }
 
+void JsonTools::store(const std::vector<Colorf>& colors, Json::Value& value)
+{
+	for (int i = 0, n = colors.size(); i < n; ++i)
+	{
+		value["r"][i] = colors[i].r;
+		value["g"][i] = colors[i].g;
+		value["b"][i] = colors[i].b;
+		value["a"][i] = colors[i].a;
+	}
+}
+
+void JsonTools::load(const Json::Value& value, std::vector<Colorf>& colors)
+{
+	colors.reserve(value["r"].size());
+
+	int i = 0;
+	Json::Value 
+		rval = value["r"][i],
+		gval = value["g"][i],
+		bval = value["b"][i],
+		aval = value["a"][i];
+
+	++i;
+	while (!rval.isNull() && !gval.isNull() && !bval.isNull() && !aval.isNull()) {
+		Colorf col;
+		col.r = rval.asDouble();
+		col.g = gval.asDouble();
+		col.b = bval.asDouble();
+		col.a = aval.asDouble();
+		colors.push_back(col);
+
+		rval = value["r"][i];
+		gval = value["g"][i];
+		bval = value["b"][i];
+		aval = value["a"][i];
+
+		++i;
+	}
+}
 
 }

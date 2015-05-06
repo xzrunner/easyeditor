@@ -152,6 +152,10 @@ void Triangulation::normal(const std::vector<Vector>& bound,
 void Triangulation::Holes(const std::vector<Vector>& bound, const std::vector<std::vector<Vector> >& holes, 
 						  std::vector<Vector>& result, Type type)
 {
+	if (!holes.empty()) {
+		return HolesNew(bound, holes[0], result, type);
+	}
+
 	struct triangulateio in, out;
 	init(in, out);
 
@@ -257,7 +261,8 @@ void Triangulation::HolesNew(const std::vector<Vector>& bound, const std::vector
 
 	in.segmentmarkerlist = (int *) NULL;
 
-	//in.numberofholes = 0;
+// 	in.numberofholes = 0;
+// 	in.holelist = NULL;
 
 	in.numberofholes = 1;
 	in.holelist = (REAL *) malloc(in.numberofholes * 2 * sizeof(REAL));

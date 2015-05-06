@@ -25,7 +25,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(this, library)
 	, d2d::ShapesPanelImpl(this, new SymbolContainer((Symbol*)(&edited->getSymbol())))
 {
-	m_editOP = new libshape::EditPolylineOP<libshape::DrawPolygonEdgeOP, 
+	m_editOP = new libshape::EditPolylineOP<libshape::DrawPolygonOP, 
 		d2d::SelectShapesOP>(this, this, NULL, new d2d::OneFloatValueStatic(5), NULL);
 	m_canvas = new StageCanvas(this, edited, bg_sprites);
 

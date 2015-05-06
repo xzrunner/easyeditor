@@ -2,7 +2,7 @@
 #define _LIBSHAPE_DRAW_POLYGON_CMPT_H_
 
 #include "EditPolylineOP.h"
-#include "DrawPolygonEdgeOP.h"
+#include "DrawPolygonOP.h"
 
 #include <wx/colordlg.h>
 

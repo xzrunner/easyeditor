@@ -31,10 +31,12 @@ void ColorMaterial::BuildEnd()
 	std::vector<d2d::Vector> outline;
 	d2d::Math::removeDuplicatePoints(m_outline, outline);
 
-	if (m_segments.empty()) {
-		d2d::Triangulation::normal(m_outline, m_tris);
-	} else {
+	if (!m_segments.empty()) {
 		d2d::Triangulation::lines(m_outline, m_segments, m_tris);
+	} else if (!m_holes.empty()) {
+		d2d::Triangulation::Holes(m_outline, m_holes, m_tris);
+	} else {
+		d2d::Triangulation::normal(m_outline, m_tris);
 	}
 }
 

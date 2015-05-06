@@ -45,7 +45,7 @@ public:
 
 	const Material* GetMaterial() const { return m_material; }
 
-private:
+protected:
 	Material* m_material;
 
 }; // PolygonShape

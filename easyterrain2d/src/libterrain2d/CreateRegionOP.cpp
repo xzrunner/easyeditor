@@ -5,13 +5,13 @@ namespace eterrain2d
 {
 
 CreateRegionOP::CreateRegionOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl)
-	: libshape::DrawPolygonEdgeOP(editPanel, shapesImpl)
+	: libshape::DrawPolygonOP(editPanel, shapesImpl)
 {
 }
 
 bool CreateRegionOP::onDraw() const
 {
-	if (libshape::DrawPolygonEdgeOP::onDraw()) {
+	if (libshape::DrawPolygonOP::onDraw()) {
 		return true;
 	}
 

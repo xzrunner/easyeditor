@@ -1,17 +1,17 @@
-#include "DrawPolygonEdgeOP.h"
+#include "DrawPolygonOP.h"
 #include "PolygonShape.h"
 
 namespace libshape
 {
 
-DrawPolygonEdgeOP::DrawPolygonEdgeOP(d2d::EditPanel* editPanel, 
+DrawPolygonOP::DrawPolygonOP(d2d::EditPanel* editPanel, 
 									 d2d::MultiShapesImpl* shapesImpl)
 	: DrawPolylineOP(editPanel, false)
 	, m_shapesImpl(shapesImpl)
 {
 }
 
-bool DrawPolygonEdgeOP::onMouseLeftDClick(int x, int y)
+bool DrawPolygonOP::onMouseLeftDClick(int x, int y)
 {
 	if (DrawPolylineOP::onMouseLeftDClick(x, y)) return true;
 

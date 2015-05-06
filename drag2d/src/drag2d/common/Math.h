@@ -75,9 +75,12 @@ namespace d2d
 		static bool IsPolygonIntersectPolygon(const std::vector<Vector>& poly0, const std::vector<Vector>& poly1);
 		static bool IsPolygonInPolygon(const std::vector<Vector>& in, const std::vector<Vector>& out);
 
+		static bool IsPolygonIntersectRect(const std::vector<Vector>& poly, const Rect& rect);
+
 		static bool IsSegmentIntersectPolyline(const Vector& s, const Vector& e, const std::vector<Vector>& poly);
 
 		static bool isPolylineIntersectRect(const std::vector<Vector>& polyline, bool isLoop, const Rect& aabb);
+		static bool isPolylineIntersectPolyline(const std::vector<Vector>& polyline0, const std::vector<Vector>& polyline1);
 
 		static bool isCircleIntersectRect(const Vector& center, float radius, const Rect& aabb);
 

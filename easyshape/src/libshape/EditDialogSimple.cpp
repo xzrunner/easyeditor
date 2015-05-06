@@ -13,7 +13,7 @@
 #include "EditRectOP.h"
 #include "EditCircleOP.h"
 #include "EditPolylineOP.h"
-#include "DrawPolygonEdgeOP.h"
+#include "DrawPolygonOP.h"
 #include "EditBezierOP.h"
 
 namespace libshape
@@ -64,7 +64,7 @@ void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 		op = new EditCircleOP(m_stage, m_stage, NULL, &m_capture);
 		break;
 	case e_chain: case e_polygon:
-		op = new EditPolylineOP<DrawPolygonEdgeOP, 
+		op = new EditPolylineOP<DrawPolygonOP, 
 			d2d::SelectShapesOP>(m_stage, m_stage, NULL, new d2d::OneFloatValueStatic(5), NULL); 
 		break;
 	case e_bezier:

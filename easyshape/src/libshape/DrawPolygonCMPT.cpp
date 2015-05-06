@@ -18,9 +18,9 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 	m_editOP = NULL;
 
 	addChild(new d2d::UniversalCMPT(this, wxT("直接画线"), editPanel, 
-		new EditPolylineOP<DrawPolygonEdgeOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, this, this)));
+		new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, this, this)));
 	addChild(new d2d::UniversalCMPT(this, wxT("选节点画线"), editPanel, 
-		new EditPolylineWithCopyNodeOP<DrawPolygonEdgeOP>(editPanel, shapesImpl, propertyPanel)));
+		new EditPolylineWithCopyNodeOP<DrawPolygonOP>(editPanel, shapesImpl, propertyPanel)));
 }
 
 void DrawPolygonCMPT::updateControlValue()

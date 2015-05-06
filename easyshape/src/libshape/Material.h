@@ -19,17 +19,16 @@ public:
 
 	virtual void ReloadTexture() = 0;
 
+	void BuildBegin(const std::vector<d2d::Vector>& outline);
+	void BuildSetSegments(const std::vector<d2d::Vector>& segs);
+	void BuildSetHoles(const std::vector<std::vector<d2d::Vector> >& holes);
+	virtual void BuildEnd() = 0;
+
 	const std::vector<d2d::Vector>& GetTriangles() const { return m_tris; }
 
 	void Refresh(const std::vector<d2d::Vector>& vertices);
 
 	void DebugDrawTris(const d2d::Matrix& mt) const;
-
-protected:
-	void BuildBegin(const std::vector<d2d::Vector>& outline);
-	void BuildSetSegments(const std::vector<d2d::Vector>& segs);
-	void BuildSetHoles(const std::vector<std::vector<d2d::Vector> >& holes);
-	virtual void BuildEnd() = 0;
 
 protected:
 	std::vector<d2d::Vector> m_tris;

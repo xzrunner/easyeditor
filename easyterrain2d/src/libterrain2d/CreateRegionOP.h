@@ -8,7 +8,7 @@ namespace eterrain2d
 
 class StagePanel;
 
-class CreateRegionOP : public libshape::DrawPolygonEdgeOP
+class CreateRegionOP : public libshape::DrawPolygonOP
 {
 public:
 	CreateRegionOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);

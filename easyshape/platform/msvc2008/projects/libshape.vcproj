@@ -220,6 +220,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libshape\ComplexPolygonShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\ComplexPolygonShape.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libshape\CosineShape.cpp"
 					>
 				</File>
@@ -265,6 +273,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libshape\Material.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\MultiColorMaterial.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\MultiColorMaterial.h"
 					>
 				</File>
 				<File
@@ -398,30 +414,102 @@
 				<Filter
 					Name="draw"
 					>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawCurveOP.cpp"
+					<Filter
+						Name="base"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawCurveOP.h"
+						<File
+							RelativePath="..\..\..\src\libshape\DrawCurveOP.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\DrawCurveOP.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\DrawPolylineOP.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\DrawPolylineOP.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\DrawRectangleOP.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\libshape\DrawRectangleOP.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="extend"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPolylineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPolylineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawRectangleOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawRectangleOP.h"
-						>
-					</File>
+						<Filter
+							Name="line"
+							>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawLoopOP.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawLoopOP.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPencilLineOP.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPencilLineOP.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPenLineOP.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPenLineOP.h"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="area"
+							>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawComplexPolygonOP.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawComplexPolygonOP.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPencilPolygonOP.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPencilPolygonOP.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPolygonOP.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\libshape\DrawPolygonOP.h"
+								>
+							</File>
+						</Filter>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="edit"
@@ -520,58 +608,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\NodeCapture.h"
-						>
-					</File>
-				</Filter>
-				<Filter
-					Name="insert"
-					>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawCosineCurveOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawLoopOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawLoopOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPencilLineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPencilLineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPencilPolygonOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPencilPolygonOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPenLineOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPenLineOP.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPolygonEdgeOP.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libshape\DrawPolygonEdgeOP.h"
 						>
 					</File>
 				</Filter>

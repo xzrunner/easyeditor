@@ -12,6 +12,7 @@
 #include "EditRectOP.h"
 #include "EditCircleOP.h"
 #include "EditPolylineOP.h"
+#include "DrawComplexPolygonOP.h"
 #include "EditBezierOP.h"
 
 #include "DrawLineCMPT.h"
@@ -29,25 +30,36 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	stage->SetToolbarPanel(this);
 	// rect
 	{
-		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "rect", stage, "node capture", 5, 30, 10);
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "矩形", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditRectOP(stage, stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
 	// circle
 	{
-		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "circle", stage, "node capture", 5, 30, 10);
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "圆形", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditCircleOP(stage, stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);
 	}
 	// chain
-	addChild(new DrawLineCMPT(this, wxT("chain"), stage, stage, property));
+	addChild(new DrawLineCMPT(this, wxT("折线"), stage, stage, property));
 	// polygon
-	addChild(new DrawPolygon2CMPT(this, "polygon", stage, stage, property));
+	addChild(new DrawPolygon2CMPT(this, "多边形", stage, stage, property));
+	// complex polygon
+	{
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "复杂多边形", stage, "node capture", 5, 30, 10);
+//		d2d::AbstractEditOP* op = new DrawComplexPolygonOP(stage, stage, property, capture_cmpt);
+
+		d2d::AbstractEditOP* op = new EditPolylineOP<DrawComplexPolygonOP, d2d::SelectShapesOP>
+			(stage, stage, property, capture_cmpt, capture_cmpt);
+
+		capture_cmpt->SetEditOP(op);
+		addChild(capture_cmpt);
+	}
 	// bezier
 	{
-		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "bezier", stage, "node capture", 5, 30, 10);
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "贝塞尔曲线", stage, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditBezierOP(stage, stage, property, capture_cmpt);
 		capture_cmpt->SetEditOP(op);
 		addChild(capture_cmpt);

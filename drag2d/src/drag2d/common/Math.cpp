@@ -242,6 +242,17 @@ bool Math::IsPolygonInPolygon(const std::vector<Vector>& in, const std::vector<V
 	return true;	
 }
 
+bool Math::IsPolygonIntersectRect(const std::vector<Vector>& poly, const Rect& rect)
+{
+	std::vector<Vector> poly2;
+	poly2.push_back(d2d::Vector(rect.xMin, rect.yMin));
+	poly2.push_back(d2d::Vector(rect.xMax, rect.yMin));
+	poly2.push_back(d2d::Vector(rect.xMax, rect.yMax));
+	poly2.push_back(d2d::Vector(rect.xMin, rect.yMax));
+
+	return IsPolygonIntersectPolygon(poly, poly2);
+}
+
 bool Math::IsSegmentIntersectPolyline(const Vector& s, const Vector& e, const std::vector<Vector>& poly)
 {
 	if (poly.size() < 2) {
@@ -307,6 +318,89 @@ bool Math::isPolylineIntersectRect(const std::vector<Vector>& polyline, bool isL
 		return true;
 
 	return false;
+}
+
+bool Math::isPolylineIntersectPolyline(const std::vector<Vector>& poly0, const std::vector<Vector>& poly1)
+{
+	if (poly0.size() < 3 || poly1.size() < 3) {
+		return false;
+	}
+
+	int sz0 = poly0.size(),
+		sz1 = poly1.size();
+
+	int step0 = IsPolygonColckwise(poly0) ? 1 : -1,
+		step1 = IsPolygonColckwise(poly1) ? 1 : -1;
+	int idx0 = 0;
+	for (int i = 0; i < sz0; ++i) {
+		int idx1 = 0;
+		const Vector& start0 = poly0[idx0];
+		int next_idx0 = GetNextIdxInRing(sz0, idx0, step0);
+		const Vector& end0 = poly0[next_idx0];
+		for (int i = 0; i < sz1; ++i) {
+			const Vector& start1 = poly1[idx1];
+			int next_idx1 = GetNextIdxInRing(sz1, idx1, step1);
+			const Vector& end1 = poly1[next_idx1];
+
+			Vector cross;
+			if (GetTwoSegmentCross(start0, end0, start1, end1, &cross)) {
+				// test if cross is end
+				bool is_cross0 = IsTwoPointsSame(cross, end0),
+					is_cross1 = IsTwoPointsSame(cross, end1);
+				if (is_cross0 && is_cross1) {
+					const Vector& end_next0 = poly0[GetNextIdxInRing(sz0, next_idx0, step0)];
+					const Vector& end_next1 = poly1[GetNextIdxInRing(sz1, next_idx1, step1)];
+					float angle0 = getAngle(end0, end_next0, start0);
+					if (angle0 > getAngle(end0, end_next0, start1) ||
+						angle0 > getAngle(end0, end_next0, end_next1)) {
+							return true;
+					}
+					float angle1 = getAngle(end1, end_next1, start1);
+					if (angle1 > getAngle(end1, end_next1, start0) ||
+						angle1 > getAngle(end1, end_next1, end_next0)) {
+							return true;
+					}
+
+					//////////////////////////////////////////////////////////////////////////
+
+					// 					Vector seg00 = start0 - end0;
+					// 					seg00.normalize();
+					// 					const Vector& end_next0 = poly0[GetNextIdxInRing(sz0, next_idx0, step0)];
+					// 					Vector seg01 = end_next0 - end0;
+					// 					seg01.normalize();
+					// 
+					// 					Vector seg10 = start1 - end1;
+					// 					seg10.normalize();
+					// 					const Vector& end_next1 = poly0[GetNextIdxInRing(sz1, next_idx1, step1)];
+					// 					Vector seg11 = end_next1 - end1;
+					// 					seg11.normalize();
+					// 
+					// 					if (IsTwoSegmentIntersect(seg00, seg01, seg10, seg11) &&
+					// 						!IsTwoPointsSame(seg00, seg10) && !IsTwoPointsSame(seg00, seg11) && 
+					// 						!IsTwoPointsSame(seg01, seg10) && !IsTwoPointsSame(seg01, seg11)) {
+					// 							return true;
+					// 					}
+				} else if (is_cross0) {
+					const Vector& end_next0 = poly0[GetNextIdxInRing(sz0, next_idx0, step0)];
+					if (IsTurnLeft(end_next0, end0, end1)) { 
+						return true; 
+					}
+				} else if (is_cross1) {
+					const Vector& end_next1 = poly0[GetNextIdxInRing(sz1, next_idx1, step1)];
+					if (IsTurnLeft(end_next1, end1, end0)) { 
+						return true; 
+					}
+				} else if (!IsTwoPointsSame(cross, start0) 
+					&& !IsTwoPointsSame(cross, start1)) {
+						return true;
+				}
+			}
+			idx1 = next_idx1;
+		}
+		idx0 = next_idx0;
+	}
+
+	return false;	
 }
 
 bool Math::isCircleIntersectRect(const Vector& center, float radius, const Rect& aabb)
