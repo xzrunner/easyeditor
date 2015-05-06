@@ -23,12 +23,15 @@ wxSizer* DrawPencilPolygonCMPT::initLayout()
 
 	sizer->AddSpacer(10);
 
-	wxString choices[3];
+	static const int SIZE = 5;
+	wxString choices[SIZE];
 	choices[0] = "normal";
-	choices[1] = "add";
-	choices[2] = "del";
+	choices[1] = "union";
+	choices[2] = "difference";
+	choices[3] = "intersection";
+	choices[4] = "xor";
 
-	m_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 3, choices);
+	m_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, SIZE, choices);
 	m_choice->SetSelection(0);
 	sizer->Add(m_choice);
 

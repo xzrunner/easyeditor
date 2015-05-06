@@ -21,13 +21,20 @@ private:
 
 	void UnionPolygon(const std::vector<d2d::Vector>& poly);
 	void DifferencePolygon(const std::vector<d2d::Vector>& poly);
+	void IntersectionPolygon(const std::vector<d2d::Vector>& poly);
+	void XorPolygon(const std::vector<d2d::Vector>& poly);
+
+	void PrepareSubjectPaths(std::vector<std::vector<d2d::Vector> >& paths) const;
+	void ReplacePolygons(const std::vector<std::vector<d2d::Vector> >& paths);
 
 private:
 	enum Type
 	{
 		e_normal = 0,
-		e_add,
-		e_del
+		e_union,
+		e_difference,
+		e_intersection,
+		e_xor
 	};
 
 private:
