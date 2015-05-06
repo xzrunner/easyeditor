@@ -14,10 +14,10 @@ public:
 	CreateRegionCMPT(wxWindow* parent, const wxString& name,
 		StagePanel* stage);
 
-	//
-	// interface OneFloatValue
-	//
-	virtual float GetValue() const;
+// 	//
+// 	// interface OneFloatValue
+// 	//
+// 	virtual float GetValue() const;
 
 protected:
 	virtual wxSizer* initLayout();
