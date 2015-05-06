@@ -1,7 +1,5 @@
 #include "ShapeShader.h"
 
-#include "common/Color.h"
-
 #include <gl/glew.h>
 
 namespace d2d
@@ -10,7 +8,7 @@ namespace d2d
 ShapeShader::ShapeShader()
 {
 	m_model_view = m_projection = 0;
-	m_color = 0;
+	m_color_loc = 0;
 	m_is_mat_dirty = false;
 }
 
@@ -29,6 +27,7 @@ void ShapeShader::Load()
 		"void main()  \n"
 		"{  \n"
 		"  gl_Position = u_projection * u_modelview * gl_Vertex; "
+		" gl_FrontColor = gl_Color; \n"
 		"  v_fragmentColor = color; \n"
 		"}  \n"
 		;
@@ -39,7 +38,7 @@ void ShapeShader::Load()
 		"\n"
 		"void main()  \n"
 		"{  \n"  
-		"  gl_FragColor = v_fragmentColor;"
+		"  gl_FragColor = gl_Color;"
 		"}  \n"
 		;
 
@@ -53,7 +52,7 @@ void ShapeShader::Load()
 	m_projection = glGetUniformLocation(m_prog, "u_projection");
 	m_model_view = glGetUniformLocation(m_prog, "u_modelview");
 
-	m_color = glGetUniformLocation(m_prog, "color");
+	m_color_loc = glGetUniformLocation(m_prog, "color");
 }
 
 void ShapeShader::Unload()
@@ -98,7 +97,8 @@ void ShapeShader::Commit()
 
 void ShapeShader::SetColor(const Colorf& col)
 {
-	glUniform4fv(m_color, 1, (GLfloat*)(&col.r));
+	m_color = col;
+	glUniform4fv(m_color_loc, 1, (GLfloat*)(&col.r));
 }
 
 }

@@ -1,10 +1,14 @@
 #include "PrimitiveDrawNew.h"
 #include "ShaderMgr.h"
+#include "ShapeShader.h"
 
 #include <gl/glew.h>
 
 namespace d2d
 {
+
+static const int MAX_COLORS = 4096 * 10;
+static float COLORS[MAX_COLORS * 4];
 
 void PrimitiveDrawNew::Draw(int type, const float *coords, size_t count)
 {
@@ -12,9 +16,21 @@ void PrimitiveDrawNew::Draw(int type, const float *coords, size_t count)
 	shader->shape();
 	shader->Commit();
 
+	// prepare colors
+	const Colorf& col = ShaderMgr::Instance()->GetShapeShader()->GetColor();
+	for (int i = 0; i < count * 4; i += 4) {
+		memcpy(&COLORS[i], &col.r, sizeof(float) * 4);
+	}
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(2, GL_FLOAT, 0, (const GLvoid*)coords);
+
+	glEnableClientState(GL_COLOR_ARRAY);
+	glColorPointer(4, GL_FLOAT, 0, (const GLvoid*)COLORS);
+
 	glDrawArrays(type, 0, count);
+
+	glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 

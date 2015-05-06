@@ -4,6 +4,7 @@
 #include "IShader.h"
 
 #include "common/Matrix.h"
+#include "common/Color.h"
 
 namespace d2d
 {
@@ -28,6 +29,7 @@ public:
 	void SetModelView(const Vector& offset, float scale);
 
 	void SetColor(const Colorf& col);
+	const Colorf& GetColor() const { return m_color; }
 
 protected:
 	virtual void BindAttrib(GLuint prog) {}
@@ -35,10 +37,12 @@ protected:
 private:
 	GLuint m_model_view, m_projection;
 
-	GLuint m_color;
+	GLuint m_color_loc;
 
 	Matrix m_mat_modelview, m_mat_projection;
 	bool m_is_mat_dirty;
+
+	Colorf m_color;
 
 }; // ShapeShader
 
