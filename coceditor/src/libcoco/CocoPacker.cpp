@@ -1301,7 +1301,7 @@ int CocoPacker::ParserTexture(const etexture::Sprite* sprite)
 	// tex
 	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
 
-	const std::vector<d2d::Vector>& vertices = material->GetVertices();
+	const std::vector<d2d::Vector>& vertices = material->GetTriangles();
 	const std::vector<d2d::Vector>& texcoords = material->GetTexcoords();
 	assert(vertices.size() == texcoords.size() && vertices.size() % 3 == 0);
 	for (int i = 0, n = vertices.size(); i < n; i += 3)

@@ -38,7 +38,8 @@ PolygonShape* PolygonShape::clone() const
 
 bool PolygonShape::isContain(const d2d::Vector& pos) const
 {
-	return d2d::Math::isPointInArea(pos, m_vertices);
+	return d2d::Math::isPointInRect(pos, m_rect) 
+		&& d2d::Math::isPointInArea(pos, m_vertices);
 }
 
 // bool PolygonShape::isIntersect(const d2d::Rect& rect) const
@@ -58,10 +59,9 @@ void PolygonShape::draw(const d2d::Matrix& mt,
 {
 	if (m_material) {
 		m_material->Draw(mt);
-	}
-
-	if (d2d::Settings::bDisplayTrisEdge && m_material) {
-		m_material->DebugDrawTris(mt);
+		if (d2d::Settings::bDisplayTrisEdge) {
+			m_material->DebugDrawTris(mt);
+		}
 	}
 
 	if (d2d::Settings::bDisplayPolyBound) {

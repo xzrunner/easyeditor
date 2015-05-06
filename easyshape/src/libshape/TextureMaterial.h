@@ -19,14 +19,12 @@ public:
 
 	virtual void ReloadTexture();
 
-	const std::vector<d2d::Vector>& GetTexcoords() const { return m_texcoords; }
+	const std::vector<d2d::Vector>& GetTexcoords() const { return m_tris_texcoord; }
 
 	const d2d::ImageSymbol* GetImage() const { return m_image; }
 
 protected:
-	virtual void Build(const std::vector<d2d::Vector>& vertices);
-	virtual void Build(const std::vector<d2d::Vector>& vertices,
-		const std::vector<d2d::Vector>& segments);
+	virtual void BuildEnd();
 
 private:
 	d2d::Rect GetBoundingRegion(const std::vector<d2d::Vector>& bounding) const;
@@ -38,7 +36,7 @@ private:
 private:
 	d2d::ImageSymbol* m_image;
 
-	std::vector<d2d::Vector> m_texcoords;
+	std::vector<d2d::Vector> m_tris_texcoord;
 
 }; // TextureMaterial
 

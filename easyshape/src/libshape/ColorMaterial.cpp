@@ -7,7 +7,8 @@ ColorMaterial::ColorMaterial(const std::vector<d2d::Vector>& vertices,
 							 const d2d::Colorf& color)
 	: m_color(color)
 {
-	Build(vertices);
+	BuildBegin(vertices);
+	BuildEnd();
 }
 
 Json::Value ColorMaterial::Store(const std::string& dirpath) const
@@ -20,28 +21,21 @@ Json::Value ColorMaterial::Store(const std::string& dirpath) const
 
 void ColorMaterial::Draw(const d2d::Matrix& mt) const
 {
-	d2d::PrimitiveDraw::drawTriangles(mt, m_vertices, m_color);
+	d2d::PrimitiveDraw::drawTriangles(mt, m_tris, m_color);
 }
 
-void ColorMaterial::Build(const std::vector<d2d::Vector>& vertices)
+void ColorMaterial::BuildEnd()
 {
-	m_vertices.clear();
+	m_tris.clear();
 
-	std::vector<d2d::Vector> bounding;
-	d2d::Math::removeDuplicatePoints(vertices, bounding);
+	std::vector<d2d::Vector> outline;
+	d2d::Math::removeDuplicatePoints(m_outline, outline);
 
-	d2d::Triangulation::normal(bounding, m_vertices);
-}
-
-void ColorMaterial::Build(const std::vector<d2d::Vector>& vertices, 
-						  const std::vector<d2d::Vector>& segments)
-{
-	m_vertices.clear();
-
-	std::vector<d2d::Vector> bounding;
-	d2d::Math::removeDuplicatePoints(vertices, bounding);
-
-	d2d::Triangulation::lines(bounding, segments, m_vertices);
+	if (m_segments.empty()) {
+		d2d::Triangulation::normal(m_outline, m_tris);
+	} else {
+		d2d::Triangulation::lines(m_outline, m_segments, m_tris);
+	}
 }
 
 }

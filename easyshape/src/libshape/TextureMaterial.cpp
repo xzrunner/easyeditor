@@ -8,7 +8,8 @@ TextureMaterial::TextureMaterial(const std::vector<d2d::Vector>& vertices, d2d::
 	image->Retain();
 	m_image = image;
 
-	Build(vertices);
+	BuildBegin(vertices);
+	BuildEnd();
 }
 
 TextureMaterial::~TextureMaterial()
@@ -27,26 +28,26 @@ Json::Value TextureMaterial::Store(const std::string& dirpath) const
 void TextureMaterial::Translate(const d2d::Vector& offset)
 {
 	Material::Translate(offset);
-	for (int i = 0, n = m_texcoords.size(); i < n; ++i) {
-		m_texcoords[i] += offset;
+	for (int i = 0, n = m_tris_texcoord.size(); i < n; ++i) {
+		m_tris_texcoord[i] += offset;
 	}
 }
 
 void TextureMaterial::Draw(const d2d::Matrix& mt) const
 {
-	if (m_vertices.empty()) {
+	if (m_tris.empty()) {
 		return;
 	}
-	assert(m_vertices.size() == m_texcoords.size()
-		&& m_vertices.size() % 3 == 0);
+	assert(m_tris.size() == m_tris_texcoord.size()
+		&& m_tris.size() % 3 == 0);
 
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->sprite();
-	for (int i = 0, n = m_vertices.size(); i < n; i += 3) {
+	for (int i = 0, n = m_tris.size(); i < n; i += 3) {
 		d2d::Vector vertices[4], texcoords[4];
 		for (int j = 0; j < 3; ++j) {
-			vertices[j] = d2d::Math::transVector(m_vertices[i+j], mt);
-			texcoords[j] = m_texcoords[i+j];
+			vertices[j] = d2d::Math::transVector(m_tris[i+j], mt);
+			texcoords[j] = m_tris_texcoord[i+j];
 		}
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
@@ -59,54 +60,23 @@ void TextureMaterial::ReloadTexture()
 	m_image->reloadTexture();
 }
 
-void TextureMaterial::Build(const std::vector<d2d::Vector>& vertices)
+void TextureMaterial::BuildEnd()
 {
-	std::ofstream fout("debug.txt", std::ofstream::out | std::ofstream::app);
-	if (fout.fail()) {
-		int zz = 0;
-	}
+	m_tris.clear();
+	m_tris_texcoord.clear();
 
-	fout << "Build 0 \n";
+	std::vector<d2d::Vector> outline;
+	d2d::Math::removeDuplicatePoints(m_outline, outline);
 
-	m_vertices.clear();
-	m_texcoords.clear();
-	fout << "Build 1 \n";
-
-	std::vector<d2d::Vector> bounding;
-	d2d::Math::removeDuplicatePoints(vertices, bounding);
-	fout << "Build 2 \n";
-
-	d2d::Rect r = GetBoundingRegion(bounding);
-	fout << "Build 3 \n";
+	d2d::Rect r = GetBoundingRegion(outline);
 
 	std::vector<d2d::Vector> segments;
 	GetTexBoundarySegments(r, segments);
-	fout << "Build 4 \n";
+	if (!m_segments.empty()) {
+		copy(m_segments.begin(), m_segments.end(), back_inserter(segments));
+	}
 
-	d2d::Triangulation::lines(bounding, segments, m_vertices);
-	fout << "Build 5 \n";
-
-	CalTexcoords(r);
-	fout << "Build 6 \n\n\n\n\n";
-
-	fout.close();
-}
-
-void TextureMaterial::Build(const std::vector<d2d::Vector>& vertices, const std::vector<d2d::Vector>& segments)
-{
-	m_vertices.clear();
-	m_texcoords.clear();
-
-	std::vector<d2d::Vector> bounding;
-	d2d::Math::removeDuplicatePoints(vertices, bounding);
-
-	d2d::Rect r = GetBoundingRegion(bounding);
-
-	std::vector<d2d::Vector> _segments;
-	GetTexBoundarySegments(r, _segments);
-
-	copy(segments.begin(), segments.end(), back_inserter(_segments));
-	d2d::Triangulation::lines(bounding, _segments, m_vertices);
+	d2d::Triangulation::lines(outline, segments, m_tris);
 
 	CalTexcoords(r);
 }
@@ -141,13 +111,13 @@ void TextureMaterial::CalTexcoords(const d2d::Rect& rect)
 	int width = m_image->getSize().xLength(),
 		height = m_image->getSize().yLength();
 	int index = 0;
-	for (size_t i = 0, n = m_vertices.size() / 3; i < n; ++i)
+	for (size_t i = 0, n = m_tris.size() / 3; i < n; ++i)
 	{
 		float cx = 0, cy = 0;
 		for (size_t j = 0; j < 3; ++j)
 		{
-			cx += m_vertices[index + j].x;
-			cy += m_vertices[index + j].y;
+			cx += m_tris[index + j].x;
+			cy += m_tris[index + j].y;
 		}
 		cx /= 3;
 		cy /= 3;
@@ -160,9 +130,9 @@ void TextureMaterial::CalTexcoords(const d2d::Rect& rect)
 
 		for (size_t j = 0; j < 3; ++j)
 		{
-			float tx = (m_vertices[index + j].x - base.x) / width,
-				  ty = (m_vertices[index + j].y - base.y) / height;
-			m_texcoords.push_back(d2d::Vector(tx, ty));
+			float tx = (m_tris[index + j].x - base.x) / width,
+				  ty = (m_tris[index + j].y - base.y) / height;
+			m_tris_texcoord.push_back(d2d::Vector(tx, ty));
 		}
 
 		index +=  3;

@@ -19,9 +19,7 @@ public:
 	virtual void ReloadTexture() {}
 
 protected:
-	virtual void Build(const std::vector<d2d::Vector>& vertices);
-	virtual void Build(const std::vector<d2d::Vector>& vertices,
-		const std::vector<d2d::Vector>& segments);
+	virtual void BuildEnd();
 
 private:
 	d2d::Colorf m_color;

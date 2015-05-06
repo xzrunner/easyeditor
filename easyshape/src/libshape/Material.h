@@ -19,20 +19,25 @@ public:
 
 	virtual void ReloadTexture() = 0;
 
-	// triangulation
-	const std::vector<d2d::Vector>& GetVertices() const { return m_vertices; }
+	const std::vector<d2d::Vector>& GetTriangles() const { return m_tris; }
 
 	void Refresh(const std::vector<d2d::Vector>& vertices);
 
 	void DebugDrawTris(const d2d::Matrix& mt) const;
 
 protected:
-	virtual void Build(const std::vector<d2d::Vector>& vertices) = 0;
-	virtual void Build(const std::vector<d2d::Vector>& vertices,
-		const std::vector<d2d::Vector>& segments) = 0;
+	void BuildBegin(const std::vector<d2d::Vector>& outline);
+	void BuildSetSegments(const std::vector<d2d::Vector>& segs);
+	void BuildSetHoles(const std::vector<std::vector<d2d::Vector> >& holes);
+	virtual void BuildEnd() = 0;
 
 protected:
-	std::vector<d2d::Vector> m_vertices;
+	std::vector<d2d::Vector> m_tris;
+
+	// shape
+	std::vector<d2d::Vector> m_outline;
+	std::vector<d2d::Vector> m_segments;
+	std::vector<std::vector<d2d::Vector> > m_holes;
 
 }; // Material
 
