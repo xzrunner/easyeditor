@@ -10,6 +10,7 @@
 #include <easyparticle2d.h>
 #include <easyejoy2d.h>
 #include <easyterrain2d.h>
+#include <easytexture.h>
 
 namespace ecomplex
 {
@@ -30,6 +31,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(new eparticle2d::LibraryPage(nb));
 	addPage(new eejoy2d::LibraryPage(nb));
 	addPage(new eterrain2d::LibraryPage(nb));
+	addPage(new etexture::LibraryPage(nb));
 }
 
 } // ecomplex
