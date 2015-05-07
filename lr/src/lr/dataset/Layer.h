@@ -6,21 +6,23 @@
 namespace lr
 {
 
-class Layer : public d2d::IDataContainer
+class Layer : public d2d::Object
 {
 public:
 	Layer();
 	virtual ~Layer();
 	
-	//
-	// IDataContainer interface
-	//
-	virtual void Traverse(d2d::IVisitor& visitor, bool order = true) const;
-	virtual void Traverse(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
-	virtual bool Remove(Object* obj);
-	virtual void Insert(Object* obj);
-	virtual void Clear();
-	virtual bool ResetOrder(const Object* obj, bool up);
+	virtual void TraverseSprite(d2d::IVisitor& visitor, bool order = true) const;
+	virtual void TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual bool RemoveSprite(Object* obj);
+	virtual void InsertSprite(Object* obj);
+	virtual void ClearSprite();
+	virtual bool ResetOrderSprite(const Object* obj, bool up);
+
+	virtual void TraverseShape(d2d::IVisitor& visitor, bool order = true) const;
+	virtual bool RemoveShape(Object* obj);
+	virtual void InsertShape(Object* obj);
+	virtual void ClearShape();
 
 	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetName() const { return m_name; }
@@ -34,14 +36,13 @@ public:
 	void LoadFromFile(const Json::Value& val, const std::string& dir);
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
 
-	void RefreshViewList(d2d::ViewlistList* list) const;
-
 private:
 	std::string m_name;
 
 	bool m_editable, m_visible;
 
-	std::vector<d2d::ISprite*> m_sprs;
+	std::vector<d2d::ISprite*> m_sprites;
+	std::vector<d2d::IShape*> m_shapes;
 
 }; // Layer
 

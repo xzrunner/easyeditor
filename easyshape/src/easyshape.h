@@ -24,6 +24,7 @@
 #include "libshape/EditBezierOP.h"
 #include "libshape/DrawPenLineOP.h"
 #include "libshape/DrawLoopOP.h"
+#include "libshape/DrawComplexPolygonOP.h"
 #include "libshape/SelectNodesOP.h"
 
 #include "libshape/DrawLineCMPT.h"

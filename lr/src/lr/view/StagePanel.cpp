@@ -18,6 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(this)
+	, d2d::MultiShapesImpl(this)
 	, m_library(library)
 	, m_viewlist(NULL)
 	, m_sindex(NULL)
@@ -32,10 +33,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		m_pathfinding = new preview::PathVisibleSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
-	m_paste_op = new d2d::PasteSymbolOP(this, this, library);
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 
-	m_editOP = m_paste_op;
+	m_editOP = m_arrange_op;
 	m_editOP->Retain();
 
 	m_canvas = new StageCanvas(this);
@@ -46,7 +46,6 @@ StagePanel::~StagePanel()
 	if (m_pathfinding) {
 		delete m_pathfinding;
 	}
-	m_paste_op->Release();
 	m_arrange_op->Release();
 
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
@@ -56,6 +55,7 @@ void StagePanel::clear()
 {
 	d2d::EditPanel::clear();
 	clearSprites();
+	clearShapes();
 
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		m_layers[i]->Release();
@@ -73,7 +73,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 			type == d2d::DT_EDITABLE && layer->IsEditable() ||
 			type == d2d::DT_VISIBLE && layer->IsVisible())
 		{
-			layer->Traverse(visitor, order);
+			layer->TraverseSprite(visitor, order);
 		}
 	}
 }
@@ -83,7 +83,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
-		if (layer->Remove(sprite)) {
+		if (layer->RemoveSprite(sprite)) {
 			break;
 		}
 	}
@@ -98,7 +98,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	static_cast<LibraryPage*>(curr_page)->GetLayer()->Insert(sprite);
+	static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertSprite(sprite);
 
 	m_viewlist->insert(sprite);
 
@@ -113,7 +113,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 void StagePanel::clearSprites()
 {
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		m_layers[i]->Clear();
+		m_layers[i]->ClearSprite();
 	}
 }
 
@@ -122,11 +122,50 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
-		if (layer->ResetOrder(sprite, up)) {
+		if (layer->ResetOrderSprite(sprite, up)) {
 			break;
 		}
 	}
 	m_viewlist->reorder(sprite, up);
+}
+
+void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) 
+	{
+		Layer* layer = m_layers[i];
+		if (type == d2d::DT_ALL || 
+			type == d2d::DT_SELECTABLE ||
+			type == d2d::DT_EDITABLE && layer->IsEditable() ||
+			type == d2d::DT_VISIBLE && layer->IsVisible())
+		{
+			layer->TraverseShape(visitor);
+		}
+	}
+}
+
+void StagePanel::removeShape(d2d::IShape* shape)
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->RemoveShape(shape)) {
+			break;
+		}
+	}
+}
+
+void StagePanel::insertShape(d2d::IShape* shape)
+{
+	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
+}
+
+void StagePanel::clearShapes()
+{
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		m_layers[i]->ClearShape();
+	}
 }
 
 void StagePanel::DebugDraw() const
@@ -155,10 +194,13 @@ void StagePanel::PointQuery(const d2d::Vector& pos)
 
 void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 {
-	m_layers = layers;
 	for (int i = 0, n = layers.size(); i < n; ++i) {
-		m_layers[i]->Retain();
+		layers[i]->Retain();
 	}
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		m_layers[i]->Release();
+	}
+	m_layers = layers;
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)
@@ -176,7 +218,8 @@ void StagePanel::ChangeEditOP()
 
 	m_editOP->Release();
 	if (m_editOP == m_arrange_op) {
-		m_editOP = m_paste_op;
+		d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+		m_editOP = static_cast<LibraryPage*>(curr_page)->GetEditOP();
 	} else {
 		m_editOP = m_arrange_op;
 	}

@@ -22,6 +22,7 @@ StageCanvas::StageCanvas(StagePanel* statge)
 void StageCanvas::onDraw()
 {
 	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
+	m_statge->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);
 
 	DrawGuideLines();
 

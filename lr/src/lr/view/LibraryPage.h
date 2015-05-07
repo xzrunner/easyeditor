@@ -12,13 +12,16 @@ class Layer;
 class LibraryPage : public d2d::ILibraryPage
 {
 public:
-	LibraryPage(wxWindow* parent, const std::string& name);
+	LibraryPage(wxWindow* parent, const std::string& name, 
+		d2d::AbstractEditOP* editop);
 	virtual ~LibraryPage();
 
 	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
 	Layer* GetLayer() { return m_layer; }
 	void SetLayer(Layer* layer);
+
+	d2d::AbstractEditOP* GetEditOP() { return m_editop; }
 
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
@@ -34,6 +37,8 @@ private:
 
 private:
 	Layer* m_layer;
+
+	d2d::AbstractEditOP* m_editop;
 
 }; // LibraryPage 
 

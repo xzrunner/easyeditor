@@ -68,6 +68,7 @@ void Task::InitLayout()
 
 	m_library = new LibraryPanel(left_hori_splitter);
 	m_stage = new StagePanel(left_splitter, m_parent, property, m_library);
+	m_library->InitPages(m_stage, property);
 	m_library->setCanvas(m_stage->getCanvas());
 
 	left_hori_splitter->SetSashGravity(0.6f);

@@ -11,8 +11,7 @@ namespace lr
 class Quadtree;
 class Layer;
 
-class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
-//	, public d2d::MultiShapesImpl
+class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl, public d2d::MultiShapesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -34,6 +33,15 @@ public:
 	virtual void insertSprite(d2d::ISprite* sprite);
 	virtual void clearSprites();
 	virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
+
+	//
+	// d2d::MultiShapesImpl interface
+	//
+	virtual void traverseShapes(d2d::IVisitor& visitor, 
+		d2d::DataTraverseType type = d2d::DT_ALL) const;
+	virtual void removeShape(d2d::IShape* shape);
+	virtual void insertShape(d2d::IShape* shape);
+	virtual void clearShapes();
 
 	void SetViewlist(d2d::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;
@@ -57,7 +65,6 @@ private:
 	d2d::LibraryPanel* m_library;
 	d2d::ViewlistPanel* m_viewlist;
 
-	d2d::AbstractEditOP* m_paste_op;
 	d2d::AbstractEditOP* m_arrange_op;
 
 	Quadtree* m_sindex;
