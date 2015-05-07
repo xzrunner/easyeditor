@@ -4,6 +4,8 @@
 
 #include "frame/config.h"
 #include "dataset/Quadtree.h"
+#include "dataset/Layer.h"
+#include "view/LibraryPage.h"
 #include "preview/PathGrid.h"
 #include "preview/PathNavMesh.h"
 #include "preview/PathVisibleSimple.h"
@@ -15,8 +17,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
+	, d2d::MultiSpritesImpl(this)
 	, m_symbols_cfg(this, library)
+	, m_library(library)
 	, m_viewlist(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
@@ -51,12 +54,18 @@ StagePanel::~StagePanel()
 void StagePanel::clear()
 {
 	d2d::EditPanel::clear();
-	d2d::SpritesPanelImpl::clearSprites();
+	clearSprites();
+}
+
+void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::TraverseType type/* = e_allExisting*/,
+								 bool order/* = true*/) const
+{
+	GetCurrLayer()->traverse(visitor, type, order);
 }
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
-	d2d::SpritesPanelImpl::removeSprite(sprite);
+	GetCurrLayer()->remove(sprite);
 	m_viewlist->remove(sprite);
 
 	if (m_pathfinding) {
@@ -66,7 +75,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	d2d::SpritesPanelImpl::insertSprite(sprite);
+	GetCurrLayer()->insert(sprite);
 	m_viewlist->insert(sprite);
 
 	if (m_sindex) {
@@ -77,9 +86,14 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	}
 }
 
+void StagePanel::clearSprites()
+{
+	GetCurrLayer()->clear();
+}
+
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
-	d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
+	GetCurrLayer()->resetOrder(sprite, up);
 	m_viewlist->reorder(sprite, up);
 }
 
@@ -127,6 +141,12 @@ void StagePanel::ChangeEditOP()
 		m_editOP = m_arrange_op;
 	}
 	m_editOP->Retain();
+}
+
+Layer* StagePanel::GetCurrLayer() const
+{
+	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	return static_cast<LibraryPage*>(curr_page)->GetLayer();
 }
 
 }

@@ -11,8 +11,10 @@ namespace lr
 
 class SymbolsCfg;
 class Quadtree;
+class Layer;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl
+//	, public d2d::MultiShapesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -28,8 +30,11 @@ public:
 	//
 	// d2d::MultiSpritesImpl interface
 	//
+	virtual void traverseSprites(d2d::IVisitor& visitor, 
+		d2d::TraverseType type = d2d::e_allExisting, bool order = true) const;
 	virtual void removeSprite(d2d::ISprite* sprite);
 	virtual void insertSprite(d2d::ISprite* sprite);
+	virtual void clearSprites();
 	virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
 	SymbolsCfg& GetSymbolsCfg() { return m_symbols_cfg; }
@@ -49,9 +54,12 @@ protected:
 private:
 	void ChangeEditOP();
 
+	Layer* GetCurrLayer() const;
+
 private:
 	SymbolsCfg m_symbols_cfg;
 
+	d2d::LibraryPanel* m_library;
 	d2d::ViewlistPanel* m_viewlist;
 
 	d2d::AbstractEditOP* m_paste_op;

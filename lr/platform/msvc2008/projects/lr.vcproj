@@ -306,6 +306,14 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\lr\dataset\Layer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\Layer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\dataset\Quadtree.cpp"
 				>
 			</File>

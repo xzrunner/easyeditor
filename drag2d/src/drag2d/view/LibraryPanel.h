@@ -45,6 +45,8 @@ namespace d2d
 
 		void LoadFromConfig();
 
+		ILibraryPage* GetCurrPage() { return m_selected; }
+
 	private:
 		void initLayout();
 
