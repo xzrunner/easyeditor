@@ -569,6 +569,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\LRToShapeTable.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRToShapeTable.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.cpp"
 						>
 					</File>
