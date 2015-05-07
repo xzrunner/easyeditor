@@ -565,6 +565,14 @@
 					RelativePath="..\..\..\src\easydb\ScaleJson.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="preprocess"

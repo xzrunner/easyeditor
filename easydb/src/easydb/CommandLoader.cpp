@@ -40,6 +40,7 @@
 #include "RemoveDuplicateSprite.h"
 #include "CommandLoader.h"
 #include "LRToComplex.h"
+#include "TransOldLRFile.h"
 
 namespace edb
 {
@@ -85,6 +86,7 @@ void CommandLoader::Init()
 	fc->Register(AnimToComplexWithColor::Create());
 	fc->Register(RemoveDuplicateSprite::Create());
 	fc->Register(LRToComplex::Create());
+	fc->Register(TransOldLRFile::Create());
 }
 
 }
