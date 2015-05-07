@@ -306,6 +306,14 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\lr\dataset\Grids.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\Grids.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\dataset\Layer.cpp"
 				>
 			</File>

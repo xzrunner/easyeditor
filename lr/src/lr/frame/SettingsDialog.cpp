@@ -1,11 +1,14 @@
 #include "SettingsDialog.h"
 #include "SettingCfg.h"
 
+#include "view/StagePanel.h"
+
 namespace lr
 {
 
-SettingDialog::SettingDialog(wxWindow* parent)
+SettingDialog::SettingDialog(wxWindow* parent, StagePanel* stage)
 	: wxDialog(parent, wxID_ANY, wxT("Settings"))
+	, m_stage(stage)
 {
 	InitLayout();
 }
@@ -59,6 +62,7 @@ void SettingDialog::OnViewSizeChanged(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_view_width = width;
 	cfg->m_view_height = height;
+	m_stage->BuildGrids(cfg->m_view_width, cfg->m_view_height);
 }
 
 }

@@ -36,7 +36,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 
 void Frame::OnExtendSetting(wxCommandEvent& event)
 {
-	SettingDialog dlg(this);
+	SettingDialog dlg(this, (StagePanel*)(m_task->getEditPanel()));
 	dlg.ShowModal();
 }
 

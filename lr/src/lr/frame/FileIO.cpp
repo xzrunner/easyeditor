@@ -26,6 +26,7 @@ void FileIO::Load(const char* filename, StagePanel* stage,
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_view_width = value["size"]["width"].asInt();
 	cfg->m_view_height = value["size"]["height"].asInt();
+	stage->BuildGrids(cfg->m_view_width, cfg->m_view_height);
 
 	// camera
 	float s = value["camera"]["scale"].asDouble();

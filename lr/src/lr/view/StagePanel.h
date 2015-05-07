@@ -55,6 +55,8 @@ public:
 	void SetLayers(const std::vector<Layer*>& layers);
 	const std::vector<Layer*>& GetLayers() const { return m_layers; }
 
+	void BuildGrids(int w, int h);
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 

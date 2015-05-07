@@ -1,7 +1,9 @@
 #ifndef _LR_STAGE_CANVAS_H_
 #define _LR_STAGE_CANVAS_H_
 
-#include "drag2d.h"
+#include <drag2d.h>
+
+#include "dataset/Grids.h"
 
 namespace lr
 {
@@ -13,6 +15,8 @@ class StageCanvas : public d2d::OrthoCanvas
 public:
 	StageCanvas(StagePanel* statge);
 
+	void BuildGrids(int w, int h);
+
 protected:
 	virtual void onDraw();
 
@@ -20,10 +24,7 @@ protected:
 
 private:
 	void DrawRegion() const;
-	void DrawGuideLines() const;
-
-	static d2d::Vector TransToBirdView(const d2d::Vector& pos);
-	static d2d::Vector TransToFlatView(const d2d::Vector& pos);
+	void DrawGrids() const;
 
 private:
 	enum
@@ -35,6 +36,8 @@ private:
 	wxTimer m_timer;
 
 	StagePanel* m_statge;
+
+	Grids m_grids;
 
 	DECLARE_EVENT_TABLE()
 

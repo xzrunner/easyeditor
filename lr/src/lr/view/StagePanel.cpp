@@ -206,6 +206,11 @@ void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 	m_layers = layers;
 }
 
+void StagePanel::BuildGrids(int w, int h)
+{
+	static_cast<StageCanvas*>(m_canvas)->BuildGrids(w, h);
+}
+
 void StagePanel::OnMouseHook(wxMouseEvent& event)
 {
 	if (event.RightDown()) {

@@ -6,10 +6,12 @@
 namespace lr
 {
 
+class StagePanel;
+
 class SettingDialog : public wxDialog
 {
 public:
-	SettingDialog(wxWindow* parent);
+	SettingDialog(wxWindow* parent, StagePanel* stage);
 
 private:
 	void InitLayout();
@@ -17,6 +19,8 @@ private:
 	void OnViewSizeChanged(wxCommandEvent& event);
 
 private:
+	StagePanel* m_stage;
+
 	wxTextCtrl *m_width_ctrl, *m_height_ctrl;
 
 }; // SettingDialog
