@@ -26,11 +26,7 @@ public:
 private:
 	void Run(const std::string& filepath);
 
-	void InitInvisibleSet(const Json::Value& layer_val, 
-		std::set<std::string>& invisible) const;
-
-	Json::Value FilterSprites(const Json::Value& sprite_val, 
-		const std::set<std::string>& invisible) const;
+	void LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_val);
 
 }; // LRToComplex
 

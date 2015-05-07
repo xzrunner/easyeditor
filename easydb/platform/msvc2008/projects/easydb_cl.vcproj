@@ -542,14 +542,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easydb_cl\LRToComplex.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\LRToComplex.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easydb_cl\RemoveDuplicateSprite.cpp"
 					>
 				</File>
@@ -565,14 +557,26 @@
 					RelativePath="..\..\..\src\easydb\ScaleJson.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.cpp"
+				<Filter
+					Name="lr"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRToComplex.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRToComplex.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="preprocess"

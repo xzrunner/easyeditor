@@ -39,14 +39,10 @@ void LRToComplex::Run(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
-	std::set<std::string> invisible;
-	InitInvisibleSet(lr_val["layer"]["collision region"], invisible);
-	InitInvisibleSet(lr_val["layer"]["point"], invisible);
-	InitInvisibleSet(lr_val["layer"]["path"], invisible);
-	InitInvisibleSet(lr_val["layer"]["region"], invisible);
-
 	Json::Value complex_val;
-	complex_val["sprite"] = FilterSprites(lr_val["sprite"], invisible);
+	for (int i = 0; i < 3; ++i) {
+		LoadSpriteValue(lr_val["layer"][i]["sprite"], complex_val["sprite"]);
+	}
 	complex_val["name"] = "";
 	complex_val["use_render_cache"] = false;
 	complex_val["xmax"] = 0;
@@ -66,47 +62,27 @@ void LRToComplex::Run(const std::string& filepath)
 	fout.close();
 }
 
-void LRToComplex::InitInvisibleSet(const Json::Value& layer_val, 
-								   std::set<std::string>& invisible) const
+void LRToComplex::LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_val)
 {
-	const Json::Value& symbols_val = layer_val["symbol"];
-
 	int idx = 0;
-	Json::Value symbol_val = symbols_val[idx++];
-	while (!symbol_val.isNull()) {
-		invisible.insert(symbol_val.asString());
-		symbol_val = symbols_val[idx++];
-	}
-}
-
-Json::Value LRToComplex::FilterSprites(const Json::Value& sprite_val, 
-									   const std::set<std::string>& invisible) const
-{
-	Json::Value result;
-	int r_idx = 0;
-
-	int idx = 0;
-	Json::Value spr_val = sprite_val[idx++];
+	Json::Value spr_val = src_val[idx++];
 	while (!spr_val.isNull()) {
 		std::string filepath = spr_val["filepath"].asString();
-		if (invisible.find(filepath) == invisible.end()) {
-			Json::Value spr_val_fix = spr_val;
+		Json::Value spr_val_fix = spr_val;
 
-			std::string suffix = "_shape.json";
-			int pos = filepath.find(suffix);
- 			if (pos!= std::string::npos) {
-				std::string fix_filepath = filepath.substr(0, pos) + ".png";
-				if (d2d::FilenameTools::isExist(fix_filepath)) {
-					spr_val_fix["filepath"] = fix_filepath;
-				}
- 			}
-
-			result[r_idx++] = spr_val_fix;
+		std::string suffix = "_shape.json";
+		int pos = filepath.find(suffix);
+		if (pos!= std::string::npos) {
+			std::string fix_filepath = filepath.substr(0, pos) + ".png";
+			if (d2d::FilenameTools::isExist(fix_filepath)) {
+				spr_val_fix["filepath"] = fix_filepath;
+			}
 		}
-		spr_val = sprite_val[idx++];
-	}
 
-	return result;
+		dst_val[dst_val.size()] = spr_val_fix;
+
+		spr_val = src_val[idx++];
+	}
 }
 
 }
