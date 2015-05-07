@@ -81,7 +81,9 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 
 	std::vector<Layer*> layers;
 	for (int i = 0, n = m_pages.size(); i < n; ++i) {
-		layers.push_back(static_cast<LibraryPage*>(m_pages[i])->GetLayer());
+		Layer* layer = static_cast<LibraryPage*>(m_pages[i])->GetLayer();
+		layer->Retain();
+		layers.push_back(layer);
 	}
 	stage->SetLayers(layers);
 }

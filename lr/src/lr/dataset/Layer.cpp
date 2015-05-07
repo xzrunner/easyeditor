@@ -120,6 +120,10 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 		val["sprite"][i] = spr_val;
 	}
+
+	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
+		m_shapes[i]->StoreToFile(val["shape"][i], dir);
+	}
 }
 
 }

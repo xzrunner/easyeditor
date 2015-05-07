@@ -6,6 +6,11 @@
 namespace libshape
 {
 
+PolygonShape::PolygonShape()
+	: m_material(NULL)
+{
+}
+
 PolygonShape::PolygonShape(const PolygonShape& polygon)
 	: ChainShape(polygon)
 	, m_material(NULL)
@@ -72,6 +77,36 @@ void PolygonShape::draw(const d2d::Matrix& mt,
 d2d::IPropertySetting* PolygonShape::createPropertySetting(d2d::EditPanel* editPanel)
 {
 	return new PolygonPropertySetting(editPanel, this);
+}
+
+void PolygonShape::LoadFromFile(const Json::Value& value, const std::string& dir)
+{
+	d2d::IShape::LoadFromFile(value, dir);
+
+	size_t num = value["vertices"]["x"].size();
+	m_vertices.resize(num);
+	for (size_t i = 0; i < num; ++i) {
+		m_vertices[i].x = value["vertices"]["x"][i].asDouble();
+		m_vertices[i].y = value["vertices"]["y"][i].asDouble();
+	}
+
+	m_isLoop = true;
+
+	ChainShape::InitBounding();
+
+	LoadMaterial(dir, value["material"]);
+}
+
+void PolygonShape::StoreToFile(Json::Value& value, const std::string& dir) const
+{
+	d2d::IShape::StoreToFile(value, dir);
+
+	for (int i = 0, n = m_vertices.size(); i < n; ++i) {
+		value["vertices"]["x"][i] = m_vertices[i].x;
+		value["vertices"]["y"][i] = m_vertices[i].y;
+	}
+
+	value["material"] = StoreMaterial(dir);
 }
 
 void PolygonShape::ReloadTexture()

@@ -85,4 +85,24 @@ d2d::IPropertySetting* CircleShape::createPropertySetting(d2d::EditPanel* editPa
 	return new CirclePropertySetting(editPanel, this);
 }
 
+void CircleShape::LoadFromFile(const Json::Value& value, const std::string& dir)
+{
+	d2d::IShape::LoadFromFile(value, dir);
+
+	center.x = value["x"].asDouble();
+	center.y = value["y"].asDouble();
+	radius = value["radius"].asDouble();
+
+	m_rect = d2d::Rect(center, radius, radius);
+}
+
+void CircleShape::StoreToFile(Json::Value& value, const std::string& dir) const
+{
+	d2d::IShape::StoreToFile(value, dir);
+
+	value["x"] = center.x;
+	value["y"] = center.y;
+	value["radius"] = radius;
+}
+
 }

@@ -129,155 +129,71 @@ Json::Value FileIO::StoreShape(const std::string& dir, d2d::IShape* shape)
 
 d2d::IShape* FileIO::LoadBezier(const Json::Value& value)
 {
-	d2d::Vector points[4];
-	for (size_t i = 0; i < 4; ++i)
-	{
-		points[i].x = value["points"]["x"][i].asDouble();
-		points[i].y = value["points"]["y"][i].asDouble();
-	}
-
-	BezierShape* bezier = new BezierShape(points);
-	bezier->name = value["name"].asString();
-
+	BezierShape* bezier = new BezierShape();
+	bezier->LoadFromFile(value, "");
 	return bezier;
 }
 
 d2d::IShape* FileIO::LoadPolygon(const std::string& dir, const Json::Value& value)
 {
-	std::vector<d2d::Vector> vertices;
-	size_t num = value["vertices"]["x"].size();
-	vertices.resize(num);
-	for (size_t i = 0; i < num; ++i)
-	{
-		vertices[i].x = value["vertices"]["x"][i].asDouble();
-		vertices[i].y = value["vertices"]["y"][i].asDouble();
-	}
-
-	PolygonShape* poly = new PolygonShape(vertices);
-	poly->name = value["name"].asString();
-	poly->LoadMaterial(dir, value["material"]);
-
+	PolygonShape* poly = new PolygonShape;
+	poly->LoadFromFile(value, dir);
 	return poly;
 }
 
 d2d::IShape* FileIO::LoadChain(const Json::Value& value)
 {
-	std::vector<d2d::Vector> vertices;
-	size_t num = value["vertices"]["x"].size();
-	vertices.resize(num);
-	for (size_t i = 0; i < num; ++i)
-	{
-		vertices[i].x = value["vertices"]["x"][i].asDouble();
-		vertices[i].y = value["vertices"]["y"][i].asDouble();
-	}
-
-	bool isLoop = value["closed"].asBool();
-
-	ChainShape* chain = new ChainShape(vertices, isLoop);
-	chain->name = value["name"].asString();
-
+	ChainShape* chain = new ChainShape();
+	chain->LoadFromFile(value, "");
 	return chain;
 }
 
 d2d::IShape* FileIO::LoadRect(const Json::Value& value)
 {
-	const float xmin = value["xmin"].asDouble(),
-		xmax = value["xmax"].asDouble(),
-		ymin = value["ymin"].asDouble(),
-		ymax = value["ymax"].asDouble();
-
-	RectShape* rect = new RectShape(d2d::Vector(xmin, ymin), d2d::Vector(xmax, ymax));
-	rect->name = value["name"].asString();
-
+	RectShape* rect = new RectShape();
+	rect->LoadFromFile(value, "");
 	return rect;
 }
 
 d2d::IShape* FileIO::LoadCircle(const Json::Value& value)
 {
-	const float x = value["x"].asDouble(),
-		y = value["y"].asDouble(),
-		radius = value["radius"].asDouble();
-
-	CircleShape* circle = new CircleShape(d2d::Vector(x, y), radius);
-	circle->name = value["name"].asString();
-
+	CircleShape* circle = new CircleShape();
+	circle->LoadFromFile(value, "");
 	return circle;
 }
 
 Json::Value FileIO::StoreBezier(const BezierShape* bezier)
 {
 	Json::Value value;
-
-	value["name"] = bezier->name;
-
-	const d2d::Vector* ctrl_nodes = bezier->GetCtrlNode();
-	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
-		value["points"]["x"][i] = ctrl_nodes[i].x;
-		value["points"]["y"][i] = ctrl_nodes[i].y;
-	}
-
+	bezier->StoreToFile(value, "");
 	return value;
 }
 
 Json::Value FileIO::StorePolygon(const std::string& dir, const PolygonShape* poly)
 {
-	Json::Value value;
-
-	value["name"] = poly->name;
-
-	const std::vector<d2d::Vector>& vertices = poly->GetVertices();
-	for (size_t i = 0, n = vertices.size(); i < n; ++i)
-	{
-		value["vertices"]["x"][i] = vertices[i].x;
-		value["vertices"]["y"][i] = vertices[i].y;
-	}
-
-	value["material"] = poly->StoreMaterial(dir);
-
+ 	Json::Value value;
+	poly->StoreToFile(value, dir);
 	return value;
 }
 
 Json::Value FileIO::StoreChain(const ChainShape* chain)
 {
 	Json::Value value;
-
-	value["name"] = chain->name;
-
-	const std::vector<d2d::Vector>& vertices = chain->GetVertices();
-	for (size_t i = 0, n = vertices.size(); i < n; ++i)
-	{
-		value["vertices"]["x"][i] = vertices[i].x;
-		value["vertices"]["y"][i] = vertices[i].y;
-	}
-	value["closed"] = chain->IsClosed();
-
+	chain->StoreToFile(value, "");
 	return value;
 }
 
 Json::Value FileIO::StoreRect(const RectShape* rect)
 {
 	Json::Value value;
-
-	value["name"] = rect->name;
-
-	value["xmin"] = rect->m_rect.xMin;
-	value["xmax"] = rect->m_rect.xMax;
-	value["ymin"] = rect->m_rect.yMin;
-	value["ymax"] = rect->m_rect.yMax;
-
+	rect->StoreToFile(value, "");
 	return value;
 }
 
 Json::Value FileIO::StoreCircle(const CircleShape* circle)
 {
 	Json::Value value;
-
-	value["name"] = circle->name;
-
-	value["x"] = circle->center.x;
-	value["y"] = circle->center.y;
-	value["radius"] = circle->radius;
-
+	circle->StoreToFile(value, "");
 	return value;
 }
 

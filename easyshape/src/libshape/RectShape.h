@@ -28,6 +28,8 @@ public:
 	virtual const d2d::Rect& getRect() const { return m_rect; }
 	virtual void draw(const d2d::Matrix& mt, const d2d::Colorf& color = d2d::Colorf(0, 0, 0)) const;
 	virtual d2d::IPropertySetting* createPropertySetting(d2d::EditPanel* editPanel);
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 public:
 	d2d::Rect m_rect;

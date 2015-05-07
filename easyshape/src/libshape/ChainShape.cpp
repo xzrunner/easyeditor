@@ -101,6 +101,33 @@ d2d::IPropertySetting* ChainShape::createPropertySetting(d2d::EditPanel* editPan
 	return new ChainPropertySetting(editPanel, this);
 }
 
+void ChainShape::LoadFromFile(const Json::Value& value, const std::string& dir)
+{
+	d2d::IShape::LoadFromFile(value, dir);
+
+	size_t num = value["vertices"]["x"].size();
+	m_vertices.resize(num);
+	for (size_t i = 0; i < num; ++i) {
+		m_vertices[i].x = value["vertices"]["x"][i].asDouble();
+		m_vertices[i].y = value["vertices"]["y"][i].asDouble();
+	}
+
+	m_isLoop = value["closed"].asBool();
+
+	InitBounding();
+}
+
+void ChainShape::StoreToFile(Json::Value& value, const std::string& dir) const
+{
+	d2d::IShape::StoreToFile(value, dir);
+
+	for (size_t i = 0, n = m_vertices.size(); i < n; ++i) {
+		value["vertices"]["x"][i] = m_vertices[i].x;
+		value["vertices"]["y"][i] = m_vertices[i].y;
+	}
+	value["closed"] = IsClosed();
+}
+
 void ChainShape::Add(size_t index, const d2d::Vector& pos)
 {
 	if (index <= m_vertices.size())

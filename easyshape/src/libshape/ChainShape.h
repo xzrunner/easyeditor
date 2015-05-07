@@ -28,6 +28,8 @@ public:
 	virtual void draw(const d2d::Matrix& mt,
 		const d2d::Colorf& color = d2d::Colorf(0, 0, 0)) const;
 	virtual d2d::IPropertySetting* createPropertySetting(d2d::EditPanel* editPanel);
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 	virtual void Add(size_t index, const d2d::Vector& pos);
 	// todo: too slow! 
@@ -43,7 +45,7 @@ public:
 
 	const std::vector<d2d::Vector>& GetVertices() const { return m_vertices; }
 
-private:
+protected:
 	void InitBounding();
 
 protected:

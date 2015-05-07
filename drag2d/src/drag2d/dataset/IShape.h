@@ -6,6 +6,8 @@
 #include "common/Object.h"
 #include "common/Color.h"
 
+#include <json/json.h>
+
 namespace d2d
 {
 
@@ -42,6 +44,9 @@ public:
 		const Colorf& color = Colorf(0, 0, 0)) const = 0;
 
 	virtual IPropertySetting* createPropertySetting(EditPanel* editPanel) = 0;
+
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 	virtual void ReloadTexture() {}
 

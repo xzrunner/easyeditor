@@ -11,6 +11,7 @@ namespace libshape
 class BezierShape : public ChainShape
 {
 public:
+	BezierShape();
 	BezierShape(const BezierShape& bezier);
 	BezierShape(const d2d::Vector points[4]);
 	BezierShape(const d2d::Vector& start, const d2d::Vector& end);
@@ -29,6 +30,8 @@ public:
 	virtual void draw(const d2d::Matrix& mt,
 		const d2d::Colorf& color = d2d::Colorf(0, 0, 0)) const;
 	virtual d2d::IPropertySetting* createPropertySetting(d2d::EditPanel* editPanel);
+	virtual void LoadFromFile(const Json::Value& value, const std::string& dir);
+	virtual void StoreToFile(Json::Value& value, const std::string& dir) const;
 
 	void createCurve();
 

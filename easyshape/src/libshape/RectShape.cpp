@@ -55,4 +55,24 @@ d2d::IPropertySetting* RectShape::createPropertySetting(d2d::EditPanel* editPane
 	return new RectPropertySetting(editPanel, this);
 }
 
+void RectShape::LoadFromFile(const Json::Value& value, const std::string& dir)
+{
+	d2d::IShape::LoadFromFile(value, dir);
+
+	m_rect.xMin = value["xmin"].asDouble();
+	m_rect.xMax = value["xmax"].asDouble();
+	m_rect.yMin = value["ymin"].asDouble();
+	m_rect.yMax = value["ymax"].asDouble();
+}
+
+void RectShape::StoreToFile(Json::Value& value, const std::string& dir) const
+{
+	d2d::IShape::StoreToFile(value, dir);
+
+	value["xmin"] = m_rect.xMin;
+	value["xmax"] = m_rect.xMax;
+	value["ymin"] = m_rect.yMin;
+	value["ymax"] = m_rect.yMax;
+}
+
 }

@@ -4,6 +4,10 @@
 namespace libshape
 {
 
+BezierShape::BezierShape()
+{
+}
+
 BezierShape::BezierShape(const BezierShape& bezier)
 {
 	CopyCtrlNodes(bezier.m_control_nodes);
@@ -73,6 +77,31 @@ void BezierShape::draw(const d2d::Matrix& mt,
 d2d::IPropertySetting* BezierShape::createPropertySetting(d2d::EditPanel* editPanel)
 {
 	return new BezierPropertySetting(editPanel, this);
+}
+
+void BezierShape::LoadFromFile(const Json::Value& value, const std::string& dir)
+{
+	d2d::IShape::LoadFromFile(value, dir);
+
+	d2d::Vector points[4];
+	for (size_t i = 0; i < 4; ++i)
+	{
+		points[i].x = value["points"]["x"][i].asDouble();
+		points[i].y = value["points"]["y"][i].asDouble();
+	}
+
+	CopyCtrlNodes(points);
+	createCurve();
+}
+
+void BezierShape::StoreToFile(Json::Value& value, const std::string& dir) const
+{
+	d2d::IShape::StoreToFile(value, dir);
+
+	for (int i = 0; i < BezierShape::CTRL_NODE_COUNT; ++i) {
+		value["points"]["x"][i] = m_control_nodes[i].x;
+		value["points"]["y"][i] = m_control_nodes[i].y;
+	}
 }
 
 void BezierShape::createCurve()
