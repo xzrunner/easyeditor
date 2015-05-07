@@ -61,6 +61,8 @@ protected:
 private:
 	void ChangeEditOP();
 
+	Layer* GetCurrLayer() const;
+
 private:
 	d2d::LibraryPanel* m_library;
 	d2d::ViewlistPanel* m_viewlist;

@@ -65,15 +65,19 @@ void StagePanel::clear()
 void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	for (int i = 0, n = m_layers.size(); i < n; ++i) 
-	{
-		Layer* layer = m_layers[i];
-		if (type == d2d::DT_ALL || 
-			type == d2d::DT_SELECTABLE ||
-			type == d2d::DT_EDITABLE && layer->IsEditable() ||
-			type == d2d::DT_VISIBLE && layer->IsVisible())
+	if (type == d2d::DT_EDITABLE) {
+		GetCurrLayer()->TraverseSprite(visitor, order);
+	} else {
+		for (int i = 0, n = m_layers.size(); i < n; ++i) 
 		{
-			layer->TraverseSprite(visitor, order);
+			Layer* layer = m_layers[i];
+			if (type == d2d::DT_ALL || 
+				type == d2d::DT_SELECTABLE ||
+				type == d2d::DT_EDITABLE && layer->IsEditable() ||
+				type == d2d::DT_VISIBLE && layer->IsVisible())
+			{
+				layer->TraverseSprite(visitor, order);
+			}
 		}
 	}
 }
@@ -97,8 +101,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertSprite(sprite);
+	GetCurrLayer()->InsertSprite(sprite);
 
 	m_viewlist->insert(sprite);
 
@@ -224,6 +227,12 @@ void StagePanel::ChangeEditOP()
 		m_editOP = m_arrange_op;
 	}
 	m_editOP->Retain();
+}
+
+Layer* StagePanel::GetCurrLayer() const
+{
+	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	return static_cast<LibraryPage*>(curr_page)->GetLayer();
 }
 
 }
