@@ -16,6 +16,11 @@ void SpritesContainer::traverse(IVisitor& visitor, bool order/* = true*/) const
 	VectorUtils::traverse(m_sprites, visitor, order);
 }
 
+void SpritesContainer::traverse(IVisitor& visitor, TraverseType type, bool order) const
+{
+	VectorUtils::traverse(m_sprites, visitor, type, order);
+}
+
 void SpritesContainer::remove(Object* obj)
 {
 	VectorUtils::remove(m_sprites, static_cast<ISprite*>(obj));

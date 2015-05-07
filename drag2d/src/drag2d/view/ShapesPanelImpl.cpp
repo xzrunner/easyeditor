@@ -27,7 +27,7 @@ ShapesPanelImpl::~ShapesPanelImpl()
 
 void ShapesPanelImpl::traverseShapes(IVisitor& visitor, TraverseType type/* = e_allExisting*/) const
 {
-	m_container->traverse(visitor);
+	m_container->traverse(visitor, true);
 }
 
 void ShapesPanelImpl::removeShape(IShape* shape)

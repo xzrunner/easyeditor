@@ -19,6 +19,11 @@ namespace ecomplex
 		d2d::VectorUtils::traverse(m_symbol->m_sprites, visitor, order);
 	}
 
+	void SymbolContainer::traverse(d2d::IVisitor& visitor, d2d::TraverseType type, bool order) const
+	{
+		d2d::VectorUtils::traverse(m_symbol->m_sprites, visitor, type, order);
+	}
+
 	void SymbolContainer::remove(Object* obj)
 	{
 		d2d::VectorUtils::remove(m_symbol->m_sprites, 

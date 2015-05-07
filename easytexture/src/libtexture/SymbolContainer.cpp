@@ -20,6 +20,11 @@ void SymbolContainer::traverse(d2d::IVisitor& visitor, bool order/* = true*/) co
 	d2d::VectorUtils::traverse(m_symbol->m_shapes, visitor, order);
 }
 
+void SymbolContainer::traverse(d2d::IVisitor& visitor, d2d::TraverseType type, bool order) const
+{
+	traverse(visitor, order);
+}
+
 void SymbolContainer::remove(Object* obj)
 {
 	d2d::VectorUtils::remove(m_symbol->m_shapes, static_cast<d2d::IShape*>(obj));

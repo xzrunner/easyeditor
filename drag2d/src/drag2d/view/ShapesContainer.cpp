@@ -16,6 +16,11 @@ void ShapesContainer::traverse(IVisitor& visitor, bool order/* = true*/) const
 	VectorUtils::traverse(m_shapes, visitor, order);
 }
 
+void ShapesContainer::traverse(IVisitor& visitor, TraverseType type, bool order) const
+{
+	traverse(visitor, order);
+}
+
 void ShapesContainer::remove(Object* obj)
 {
 	VectorUtils::remove(m_shapes, static_cast<IShape*>(obj));

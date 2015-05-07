@@ -17,6 +17,7 @@ public:
 	// IDataContainer interface
 	//
 	virtual void traverse(IVisitor& visitor, bool order = true) const;
+	virtual void traverse(IVisitor& visitor, TraverseType type = e_allExisting, bool order = true) const;
 	virtual void remove(Object* obj);
 	virtual void insert(Object* obj);
 	virtual void clear();

@@ -4,6 +4,8 @@
 
 #include "interfaces.h"
 
+#include "view/EditPanelDefs.h"
+
 namespace d2d
 {
 	class VectorUtils
@@ -12,6 +14,9 @@ namespace d2d
 		template<class T>
 		static void traverse(const std::vector<T*>& objs, IVisitor& visitor, 
 			bool order = true);
+		template<class T>
+		static void traverse(const std::vector<T*>& objs, IVisitor& visitor, 
+			TraverseType type = e_allExisting, bool order = true);
 
 		template<class T>
 		static void remove(std::vector<T*>& objs, T* obj);
@@ -39,6 +44,37 @@ namespace d2d
 				bool hasNext;
 				visitor.visit(*itr, hasNext);
 				if (!hasNext) break;
+			}
+		}
+		else
+		{
+			std::vector<T*>::const_reverse_iterator itr = objs.rbegin();
+			for ( ; itr != objs.rend(); ++itr)
+			{
+				bool hasNext;
+				visitor.visit(*itr, hasNext);
+				if (!hasNext) break;
+			}
+		}
+	}
+
+	template<class T>
+	inline void VectorUtils::traverse(const std::vector<T*>& objs,
+		IVisitor& visitor, TraverseType type, bool order)
+	{
+		if (order)
+		{
+			std::vector<T*>::const_iterator itr = objs.begin();
+			for ( ; itr != objs.end(); ++itr)
+			{
+				if (type == e_editable && (*itr)->editable ||
+					type == e_visible && (*itr)->visiable ||
+					type == e_allExisting || type == e_selectable)
+				{
+					bool hasNext;
+					visitor.visit(*itr, hasNext);
+					if (!hasNext) break;
+				}
 			}
 		}
 		else

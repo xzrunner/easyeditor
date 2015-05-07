@@ -30,7 +30,7 @@ namespace d2d
 	void SpritesPanelImpl::traverseSprites(IVisitor& visitor, TraverseType type/* = e_allExisting*/,
 		bool order/* = true*/) const
 	{
-		m_container->traverse(visitor, order);
+		m_container->traverse(visitor, type, order);
 	}
 
 	void SpritesPanelImpl::removeSprite(ISprite* sprite)
