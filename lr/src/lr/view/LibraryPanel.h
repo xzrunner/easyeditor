@@ -13,7 +13,6 @@ class LibraryPanel : public d2d::LibraryPanel
 {
 public:
 	LibraryPanel(wxWindow* parent);
-	virtual ~LibraryPanel();
 
 	virtual void onPageChanged(wxBookCtrlEvent& event);
 
@@ -28,10 +27,6 @@ public:
 
 private:
 	d2d::ViewlistPanel* m_viewlist;
-
-	d2d::AbstractEditOP* m_paste_op;
-	d2d::AbstractEditOP* m_draw_line_op;
-	d2d::AbstractEditOP* m_draw_poly_op;
 
 }; // LibraryPanel
 

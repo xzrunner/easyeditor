@@ -11,16 +11,7 @@ namespace lr
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
-	, m_viewlist(NULL)
-	, m_paste_op(NULL)
-	, m_draw_line_op(NULL)
 {
-}
-
-LibraryPanel::~LibraryPanel()
-{
-	m_paste_op->Release();
-	m_draw_line_op->Release();
 }
 
 void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
@@ -61,23 +52,23 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 
 void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* property) 
 {
-	m_paste_op = new d2d::PasteSymbolOP(stage, stage, this);
+	d2d::AbstractEditOP* paste_op = new d2d::PasteSymbolOP(stage, stage, this);
 
 	d2d::OneFloatValue* capture_val = new d2d::OneFloatValueStatic(10);
+	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
+	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawComplexPolygonOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
 
-	m_draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
-	m_draw_poly_op = new libshape::EditPolylineOP<libshape::DrawComplexPolygonOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
+	addPage(new LibraryPage(m_notebook, "地形", paste_op));
+	addPage(new LibraryPage(m_notebook, "装饰", paste_op));
+	addPage(new LibraryPage(m_notebook, "单位", paste_op));
+	addPage(new LibraryPage(m_notebook, "点", paste_op));
+	addPage(new LibraryPage(m_notebook, "路径", draw_line_op));
+	addPage(new LibraryPage(m_notebook, "区域", draw_poly_op));
+	addPage(new LibraryPage(m_notebook, "碰撞区域", draw_poly_op));
 
-	addPage(new LibraryPage(m_notebook, "地形", m_paste_op));
-	addPage(new LibraryPage(m_notebook, "装饰", m_paste_op));
-	addPage(new LibraryPage(m_notebook, "单位", m_paste_op));
-	addPage(new LibraryPage(m_notebook, "点", m_paste_op));
-	addPage(new LibraryPage(m_notebook, "路径", m_draw_line_op));
-	addPage(new LibraryPage(m_notebook, "区域", m_draw_poly_op));
-	addPage(new LibraryPage(m_notebook, "碰撞区域", m_draw_poly_op));
-
-	m_paste_op->Release();
-	m_draw_line_op->Release();
+	paste_op->Release();
+	draw_line_op->Release();
+	draw_poly_op->Release();
 
 	std::vector<Layer*> layers;
 	for (int i = 0, n = m_pages.size(); i < n; ++i) {
