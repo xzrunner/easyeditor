@@ -156,7 +156,7 @@ void StageCanvas::DrawSprites() const
 	std::vector<d2d::ISprite*> walls;
 
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::e_visible);
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];

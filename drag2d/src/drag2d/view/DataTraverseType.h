@@ -1,0 +1,17 @@
+#ifndef _DRAG2D_DATA_TRAVERSE_TYPE_H_
+#define _DRAG2D_DATA_TRAVERSE_TYPE_H_
+
+namespace d2d
+{
+
+enum DataTraverseType
+{
+	DT_EDITABLE,
+	DT_VISIBLE,
+	DT_SELECTABLE,
+	DT_ALL
+};
+
+}
+
+#endif // _DRAG2D_DATA_TRAVERSE_TYPE_H_

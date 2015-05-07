@@ -17,13 +17,13 @@ MultiShapesImpl::~MultiShapesImpl()
 IShape* MultiShapesImpl::queryShapeByPos(const Vector& pos) const
 {
 	IShape* result = NULL;
-	traverseShapes(PointQueryVisitor(pos, &result), e_editable);
+	traverseShapes(PointQueryVisitor(pos, &result), DT_EDITABLE);
 	return result;
 }
 
 void MultiShapesImpl::queryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const
 {
-	traverseShapes(RectQueryVisitor(rect, result), e_editable);
+	traverseShapes(RectQueryVisitor(rect, result), DT_EDITABLE);
 }
 
 void MultiShapesImpl::removeShapeSelection()

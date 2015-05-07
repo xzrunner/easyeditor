@@ -20,7 +20,7 @@ namespace d2d
 		// MultiSpritesImpl interface
 		//
 		virtual void traverseSprites(IVisitor& visitor, 
-			TraverseType type = e_allExisting, bool order = true) const;
+			DataTraverseType type = DT_ALL, bool order = true) const;
 		virtual void removeSprite(ISprite* sprite);
 		virtual void insertSprite(ISprite* sprite);
 		virtual void clearSprites();

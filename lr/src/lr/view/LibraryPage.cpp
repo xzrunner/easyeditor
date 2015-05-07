@@ -11,6 +11,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const char* name,
 	, m_stage(stage)
 	, m_visible(true)
 	, m_editable(true)
+	, m_layer(NULL)
 {
 	initLayout();
 }

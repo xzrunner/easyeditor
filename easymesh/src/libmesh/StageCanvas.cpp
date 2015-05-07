@@ -36,7 +36,7 @@ void StageCanvas::onDraw()
 
 	m_editPanel->drawEditTemp();
 
-	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
+	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {

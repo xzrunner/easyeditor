@@ -1,29 +1,34 @@
-#pragma once
+#ifndef _ECOMPLEX_SYMBOL_CONTAINER_H_
+#define _ECOMPLEX_SYMBOL_CONTAINER_H_
 
 #include <drag2d.h>
 
 namespace ecomplex
 {
-	class Symbol;
 
-	class SymbolContainer : public d2d::IDataContainer
-	{
-	public:
-		SymbolContainer(Symbol* symbol);
-		virtual ~SymbolContainer();
+class Symbol;
 
-		//
-		// IDataContainer interface
-		//
-		virtual void traverse(d2d::IVisitor& visitor, bool order = true) const;
-		virtual void traverse(d2d::IVisitor& visitor, d2d::TraverseType type = d2d::e_allExisting, bool order = true) const;
-		virtual void remove(Object* obj);
-		virtual void insert(Object* obj);
-		virtual void clear();
-		virtual void resetOrder(const Object* obj, bool up);
+class SymbolContainer : public d2d::IDataContainer
+{
+public:
+	SymbolContainer(Symbol* symbol);
+	virtual ~SymbolContainer();
 
-	private:
-		Symbol* m_symbol;
+	//
+	// IDataContainer interface
+	//
+	virtual void Traverse(d2d::IVisitor& visitor, bool order = true) const;
+	virtual void Traverse(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual bool Remove(Object* obj);
+	virtual void Insert(Object* obj);
+	virtual void Clear();
+	virtual bool ResetOrder(const Object* obj, bool up);
 
-	}; // SymbolContainer
+private:
+	Symbol* m_symbol;
+
+}; // SymbolContainer
+
 }
+
+#endif // _ECOMPLEX_SYMBOL_CONTAINER_H_

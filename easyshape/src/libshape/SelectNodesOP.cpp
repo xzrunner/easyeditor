@@ -54,7 +54,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 	ChainSelectedNodes* selected = NULL;
-	m_shapeImpl->traverseShapes(PosQueryVisitor(pos, &selected), d2d::e_visible);
+	m_shapeImpl->traverseShapes(PosQueryVisitor(pos, &selected), d2d::DT_VISIBLE);
 	if (selected)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
@@ -126,7 +126,7 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 	{
 		d2d::Rect rect(m_firstPos, m_editPanel->transPosScreenToProject(x, y));
 		m_shapeImpl->traverseShapes(RectQueryVisitor(rect, m_nodeSelection), 
-			d2d::e_selectable);
+			d2d::DT_SELECTABLE);
 
 		m_firstPos.setInvalid();
 	}

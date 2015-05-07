@@ -56,7 +56,7 @@ bool PasteSymbolTileOP::onMouseMove(int x, int y)
 	Vector offset = m_cmpt->getOffset();
 	const float dis = offset.length() * 0.5f;
 	ISprite* sprite = NULL;
-	m_panelImpl->traverseSprites(NearestQueryVisitor(m_pos, &sprite), e_editable);
+	m_panelImpl->traverseSprites(NearestQueryVisitor(m_pos, &sprite), DT_EDITABLE);
 	if (!sprite) return false;
 
 	const d2d::Vector& capture = sprite->getPosition();

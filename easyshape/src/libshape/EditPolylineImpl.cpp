@@ -90,7 +90,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 			{
 				d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 				InterruptChainVisitor interrupt(pos, tolerance);
-				m_shapesImpl->traverseShapes(interrupt, d2d::e_editable);
+				m_shapesImpl->traverseShapes(interrupt, d2d::DT_EDITABLE);
 				if (interrupt.getInterruptedChain())
 				{
 					m_capturedEditable.shape = interrupt.getInterruptedChain();
@@ -121,7 +121,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 	{	
 		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
-		m_shapesImpl->traverseShapes(nearest, d2d::e_visible);
+		m_shapesImpl->traverseShapes(nearest, d2d::DT_VISIBLE);
 		float dis = d2d::Math::getDistance(nearest.getNearestNode(), pos);
 		if (dis < tolerance)
 		{

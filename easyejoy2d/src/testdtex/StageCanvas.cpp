@@ -40,8 +40,8 @@ void StageCanvas::onDraw()
 {
 	m_panel->Update();
 
-  	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
-//  	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::e_visible);
+  	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
+//  	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);
   
   	m_editPanel->drawEditTemp();
 

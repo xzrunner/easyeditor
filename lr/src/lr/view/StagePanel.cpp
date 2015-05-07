@@ -49,6 +49,8 @@ StagePanel::~StagePanel()
 	}
 	m_paste_op->Release();
 	m_arrange_op->Release();
+
+	for_each(m_all_layers.begin(), m_all_layers.end(), DeletePointerFunctor<Layer>());
 }
 
 void StagePanel::clear()
@@ -57,15 +59,32 @@ void StagePanel::clear()
 	clearSprites();
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::TraverseType type/* = e_allExisting*/,
+void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	GetCurrLayer()->traverse(visitor, type, order);
+	for (int i = 0, n = m_all_layers.size(); i < n; ++i) 
+	{
+		Layer* layer = m_all_layers[i];
+		if (type == d2d::DT_ALL || 
+			type == d2d::DT_SELECTABLE ||
+			type == d2d::DT_EDITABLE && layer->IsEditable() ||
+			type == d2d::DT_VISIBLE && layer->IsVisible())
+		{
+			layer->Traverse(visitor, order);
+		}
+	}
 }
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
-	GetCurrLayer()->remove(sprite);
+	for (int i = 0, n = m_all_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_all_layers[i];
+		if (layer->Remove(sprite)) {
+			break;
+		}
+	}
+
 	m_viewlist->remove(sprite);
 
 	if (m_pathfinding) {
@@ -75,7 +94,9 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	GetCurrLayer()->insert(sprite);
+	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	static_cast<LibraryPage*>(curr_page)->GetLayer()->Insert(sprite);
+
 	m_viewlist->insert(sprite);
 
 	if (m_sindex) {
@@ -88,12 +109,20 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 
 void StagePanel::clearSprites()
 {
-	GetCurrLayer()->clear();
+	for (int i = 0, n = m_all_layers.size(); i < n; ++i) {
+		m_all_layers[i]->Clear();
+	}
 }
 
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
-	GetCurrLayer()->resetOrder(sprite, up);
+	for (int i = 0, n = m_all_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_all_layers[i];
+		if (layer->ResetOrder(sprite, up)) {
+			break;
+		}
+	}
 	m_viewlist->reorder(sprite, up);
 }
 
@@ -141,12 +170,6 @@ void StagePanel::ChangeEditOP()
 		m_editOP = m_arrange_op;
 	}
 	m_editOP->Retain();
-}
-
-Layer* StagePanel::GetCurrLayer() const
-{
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	return static_cast<LibraryPage*>(curr_page)->GetLayer();
 }
 
 }

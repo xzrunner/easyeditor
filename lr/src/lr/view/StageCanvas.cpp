@@ -27,7 +27,7 @@ void StageCanvas::onDraw()
 		inited = true;
 	}
 
-	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
+	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 
 	DrawGuideLines();
 

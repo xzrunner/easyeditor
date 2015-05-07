@@ -65,7 +65,7 @@
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
 #include "view/Frame.h"
-#include "view/VectorUtils.h"
+#include "view/VectorContainer.h"
 #include "view/SettingsDialog.h"
 #include "view/FinishDialog.h"
 #include "view/LibraryFontPage.h"

@@ -3,12 +3,11 @@
 
 #include <drag2d.h>
 
-#include "dataset/Layer.h"
-
 namespace lr
 {
 
 class StagePanel;
+class Layer;
 
 class LibraryPage : public d2d::ILibraryPage
 {
@@ -22,7 +21,7 @@ public:
 	void LoadFromFile(const Json::Value& value, const std::string& dir);
 	void StoreToFile(Json::Value& value, const std::string& dir) const;
 
-	Layer* GetLayer() { return &m_layer; }
+	Layer* GetLayer() { return m_layer; }
 
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
@@ -47,7 +46,7 @@ private:
 	wxCheckBox* m_editable_ctrl;
 	bool m_editable;
 
-	Layer m_layer;
+	Layer* m_layer;
 
 }; // LibraryPage 
 

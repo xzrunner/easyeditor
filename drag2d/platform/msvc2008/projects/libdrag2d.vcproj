@@ -1733,10 +1733,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\drag2d\view\EditPanelDefs.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\drag2d\view\HistoryList.cpp"
 					>
 				</File>
@@ -1840,6 +1836,10 @@
 					Name="data"
 					>
 					<File
+						RelativePath="..\..\..\src\drag2d\view\DataTraverseType.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\view\IDataContainer.h"
 						>
 					</File>
@@ -1864,7 +1864,11 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\view\VectorUtils.h"
+						RelativePath="..\..\..\src\drag2d\view\VectorContainer.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\VectorContainer.inl"
 						>
 					</File>
 				</Filter>

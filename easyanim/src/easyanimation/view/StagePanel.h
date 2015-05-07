@@ -24,7 +24,7 @@ namespace eanim
 		// d2d::MultiSpritesImpl interface
 		//
 		virtual void traverseSprites(d2d::IVisitor& visitor, 
-			d2d::TraverseType type = d2d::e_allExisting,
+			d2d::DataTraverseType type = d2d::DT_ALL,
 			bool order = true) const;
 		virtual void removeSprite(d2d::ISprite* sprite);
 		virtual void insertSprite(d2d::ISprite* sprite);

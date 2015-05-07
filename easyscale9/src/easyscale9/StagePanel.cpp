@@ -35,7 +35,7 @@ void StagePanel::clear()
 	clearSprites();
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::TraverseType type/* = d2d::e_allExisting*/, 
+void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::e_allExisting*/, 
 								 bool order/* = true*/) const
 {
 	for (size_t i = 0; i < 3; ++i)

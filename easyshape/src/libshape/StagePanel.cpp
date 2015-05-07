@@ -60,7 +60,7 @@ void StagePanel::clear()
 	clearShapes();
 }
 
-void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::TraverseType type/* = d2d::e_allExisting*/) const
+void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
 {
 	if (m_symbol) {
 		m_symbol->Traverse(visitor);

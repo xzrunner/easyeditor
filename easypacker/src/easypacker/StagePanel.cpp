@@ -66,7 +66,7 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 	}
 
 	std::vector<d2d::ImageSprite*> sprites;
-	traverseSprites(d2d::FetchAllVisitor<d2d::ImageSprite>(sprites), d2d::e_editable);
+	traverseSprites(d2d::FetchAllVisitor<d2d::ImageSprite>(sprites), d2d::DT_EDITABLE);
 	m_strategy->arrange(sprites);
 }
 

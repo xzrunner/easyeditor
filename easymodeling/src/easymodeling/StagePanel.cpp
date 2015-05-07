@@ -84,13 +84,13 @@ namespace emodeling
 	d2d::ISprite* StagePanel::querySpriteByPos(const d2d::Vector& pos) const
 	{
 		d2d::ISprite* result = NULL;
-		traverseSprites(PointQueryVisitor(pos, &result), d2d::e_editable, false);
+		traverseSprites(PointQueryVisitor(pos, &result), d2d::DT_EDITABLE, false);
 		return result;
 	}
 
 	void StagePanel::querySpritesByRect(const d2d::Rect& rect, std::vector<d2d::ISprite*>& result) const
 	{
-		traverseSprites(RectQueryVisitor(rect, result), d2d::e_editable);
+		traverseSprites(RectQueryVisitor(rect, result), d2d::DT_EDITABLE);
 	}
 
 	libmodeling::Joint* StagePanel::queryJointByPos(const d2d::Vector& pos) const

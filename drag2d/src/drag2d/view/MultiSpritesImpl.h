@@ -2,7 +2,7 @@
 
 #include <wx/wx.h>
 
-#include "EditPanelDefs.h"
+#include "DataTraverseType.h"
 
 #include "common/visitors.h"
 #include "dataset/ObjSelectionSet.h"
@@ -16,7 +16,7 @@ namespace d2d
 		virtual ~MultiSpritesImpl();
 
 		virtual void traverseSprites(IVisitor& visitor, 
-			TraverseType type = e_allExisting, bool order = true) const = 0;
+			DataTraverseType type = DT_ALL, bool order = true) const = 0;
 		virtual void removeSprite(ISprite* sprite) = 0;
 		virtual void insertSprite(ISprite* sprite) = 0;
 		virtual void clearSprites() = 0;

@@ -4,7 +4,7 @@
 #include <wx/wx.h>
 
 #include "interfaces.h"
-#include "EditPanelDefs.h"
+#include "DataTraverseType.h"
 
 #include "dataset/ObjSelectionSet.h"
 
@@ -17,7 +17,7 @@ namespace d2d
 		virtual ~MultiShapesImpl();
 
 		virtual void traverseShapes(IVisitor& visitor, 
-			TraverseType type = e_allExisting) const = 0;
+			DataTraverseType type = DT_ALL) const = 0;
 		virtual void removeShape(IShape* shape) = 0;
 		virtual void insertShape(IShape* shape) = 0;
 		virtual void clearShapes() = 0;

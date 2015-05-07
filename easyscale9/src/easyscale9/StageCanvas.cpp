@@ -35,7 +35,7 @@ void StageCanvas::onDraw()
 	if (m_toolbar->isComposeOP())
 	{
 		drawGuideLines();
-		editPanel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
+		editPanel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 	}
 	else
 	{

@@ -27,30 +27,30 @@ namespace d2d
 		m_container->Release();
 	}
 
-	void SpritesPanelImpl::traverseSprites(IVisitor& visitor, TraverseType type/* = e_allExisting*/,
+	void SpritesPanelImpl::traverseSprites(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/,
 		bool order/* = true*/) const
 	{
-		m_container->traverse(visitor, type, order);
+		m_container->Traverse(visitor, type, order);
 	}
 
 	void SpritesPanelImpl::removeSprite(ISprite* sprite)
 	{
-		m_container->remove(sprite);
+		m_container->Remove(sprite);
 	}
 
 	void SpritesPanelImpl::insertSprite(ISprite* sprite)
 	{
-		m_container->insert(sprite);
+		m_container->Insert(sprite);
 		refresh();
 	}
 
 	void SpritesPanelImpl::clearSprites()
 	{
-		m_container->clear();
+		m_container->Clear();
 	}
 
 	void SpritesPanelImpl::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 	{
-		m_container->resetOrder(sprite, up);
+		m_container->ResetOrder(sprite, up);
 	}
 }

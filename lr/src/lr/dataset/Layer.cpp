@@ -4,38 +4,39 @@ namespace lr
 {
 
 Layer::Layer()
-{
-	
+	: m_editable(true)
+	, m_visible(true)
+{	
 }
 
-void Layer::traverse(d2d::IVisitor& visitor, bool order/* = true*/) const
+void Layer::Traverse(d2d::IVisitor& visitor, bool order/* = true*/) const
 {
-	d2d::VectorUtils::traverse(m_sprs, visitor, order);
+	d2d::VectorContainer::Traverse(m_sprs, visitor, order);
 }
 
-void Layer::traverse(d2d::IVisitor& visitor, d2d::TraverseType type, bool order) const
+void Layer::Traverse(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
 {
-	d2d::VectorUtils::traverse(m_sprs, visitor, type, order);
+	d2d::VectorContainer::Traverse(m_sprs, visitor, type, order);
 }
 
-void Layer::remove(Object* obj)
+bool Layer::Remove(Object* obj)
 {
-	d2d::VectorUtils::remove(m_sprs, static_cast<d2d::ISprite*>(obj));
+	return d2d::VectorContainer::Remove(m_sprs, static_cast<d2d::ISprite*>(obj));
 }
 
-void Layer::insert(Object* obj)
+void Layer::Insert(Object* obj)
 {
-	d2d::VectorUtils::insert(m_sprs, static_cast<d2d::ISprite*>(obj));
+	d2d::VectorContainer::Insert(m_sprs, static_cast<d2d::ISprite*>(obj));
 }
 
-void Layer::clear()
+void Layer::Clear()
 {
-	d2d::VectorUtils::clear(m_sprs);
+	d2d::VectorContainer::Clear(m_sprs);
 }
 
-void Layer::resetOrder(const Object* obj, bool up)
+bool Layer::ResetOrder(const Object* obj, bool up)
 {
-	d2d::VectorUtils::resetOrder(m_sprs, static_cast<const d2d::ISprite*>(obj), up);
+	return d2d::VectorContainer::ResetOrder(m_sprs, static_cast<const d2d::ISprite*>(obj), up);
 }
 
 

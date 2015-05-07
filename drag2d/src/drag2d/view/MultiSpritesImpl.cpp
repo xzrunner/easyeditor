@@ -20,7 +20,7 @@ MultiSpritesImpl::~MultiSpritesImpl()
 ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;
-	traverseSprites(PointQueryVisitor(pos, &selected), e_editable, false);
+	traverseSprites(PointQueryVisitor(pos, &selected), DT_EDITABLE, false);
 	if (selected && !selected->editable) {
 		std::vector<ISprite*> sprites;
 		querySpritesByRect(Rect(pos, 1, 1), false, sprites);
@@ -35,7 +35,7 @@ ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 
 void MultiSpritesImpl::querySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const
 {
-	traverseSprites(RectQueryVisitor(rect, contain, result), e_editable);
+	traverseSprites(RectQueryVisitor(rect, contain, result), DT_EDITABLE);
 }
 
 void MultiSpritesImpl::removeSpriteSelection()

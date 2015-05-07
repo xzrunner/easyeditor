@@ -19,7 +19,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::onDraw()
 {
-	m_stage_impl->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
+	m_stage_impl->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 
 	drawRegion();
 }

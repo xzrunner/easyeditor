@@ -49,7 +49,7 @@ void ArrangeSpriteImpl::onDraw() const
 	d2d::ArrangeSpriteImpl::onDraw(*m_stage->getCamera());
 	m_stage->traverseSprites(
 		d2d::DrawSelectedSpriteVisitor(d2d::Colorf(1.0f, 1.0f, 0.0f)),
-		d2d::e_visible
+		d2d::DT_VISIBLE
 		);
 }
 

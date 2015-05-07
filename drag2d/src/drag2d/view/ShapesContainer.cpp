@@ -1,5 +1,5 @@
 #include "ShapesContainer.h"
-#include "VectorUtils.h"
+#include "VectorContainer.h"
 
 #include "dataset/IShape.h"
 
@@ -8,37 +8,37 @@ namespace d2d
 
 ShapesContainer::~ShapesContainer()
 {
-	clear();
+	Clear();
 }
 
-void ShapesContainer::traverse(IVisitor& visitor, bool order/* = true*/) const
+void ShapesContainer::Traverse(IVisitor& visitor, bool order/* = true*/) const
 {
-	VectorUtils::traverse(m_shapes, visitor, order);
+	VectorContainer::Traverse(m_shapes, visitor, order);
 }
 
-void ShapesContainer::traverse(IVisitor& visitor, TraverseType type, bool order) const
+void ShapesContainer::Traverse(IVisitor& visitor, DataTraverseType type, bool order) const
 {
-	traverse(visitor, order);
+	Traverse(visitor, order);
 }
 
-void ShapesContainer::remove(Object* obj)
+bool ShapesContainer::Remove(Object* obj)
 {
-	VectorUtils::remove(m_shapes, static_cast<IShape*>(obj));
+	return VectorContainer::Remove(m_shapes, static_cast<IShape*>(obj));
 }
 
-void ShapesContainer::insert(Object* obj)
+void ShapesContainer::Insert(Object* obj)
 {
-	VectorUtils::insert(m_shapes, static_cast<IShape*>(obj));
+	VectorContainer::Insert(m_shapes, static_cast<IShape*>(obj));
 }
 
-void ShapesContainer::clear()
+void ShapesContainer::Clear()
 {
-	VectorUtils::clear(m_shapes);
+	VectorContainer::Clear(m_shapes);
 }
 
-void ShapesContainer::resetOrder(const Object* obj, bool up)
+bool ShapesContainer::ResetOrder(const Object* obj, bool up)
 {
-	VectorUtils::resetOrder(m_shapes, static_cast<const IShape*>(obj), up);
+	return VectorContainer::ResetOrder(m_shapes, static_cast<const IShape*>(obj), up);
 }
 
 }

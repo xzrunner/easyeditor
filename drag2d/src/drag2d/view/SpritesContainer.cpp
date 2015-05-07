@@ -1,5 +1,5 @@
 #include "SpritesContainer.h"
-#include "VectorUtils.h"
+#include "VectorContainer.h"
 
 #include "dataset/ISprite.h"
 
@@ -8,37 +8,37 @@ namespace d2d
 
 SpritesContainer::~SpritesContainer()
 {
-	clear();
+	Clear();
 }
 
-void SpritesContainer::traverse(IVisitor& visitor, bool order/* = true*/) const
+void SpritesContainer::Traverse(IVisitor& visitor, bool order/* = true*/) const
 {
-	VectorUtils::traverse(m_sprites, visitor, order);
+	VectorContainer::Traverse(m_sprites, visitor, order);
 }
 
-void SpritesContainer::traverse(IVisitor& visitor, TraverseType type, bool order) const
+void SpritesContainer::Traverse(IVisitor& visitor, DataTraverseType type, bool order) const
 {
-	VectorUtils::traverse(m_sprites, visitor, type, order);
+	VectorContainer::Traverse(m_sprites, visitor, type, order);
 }
 
-void SpritesContainer::remove(Object* obj)
+bool SpritesContainer::Remove(Object* obj)
 {
-	VectorUtils::remove(m_sprites, static_cast<ISprite*>(obj));
+	return VectorContainer::Remove(m_sprites, static_cast<ISprite*>(obj));
 }
 
-void SpritesContainer::insert(Object* obj)
+void SpritesContainer::Insert(Object* obj)
 {
-	VectorUtils::insert(m_sprites, static_cast<ISprite*>(obj));
+	VectorContainer::Insert(m_sprites, static_cast<ISprite*>(obj));
 }
 
-void SpritesContainer::clear()
+void SpritesContainer::Clear()
 {
-	VectorUtils::clear(m_sprites);
+	VectorContainer::Clear(m_sprites);
 }
 
-void SpritesContainer::resetOrder(const Object* obj, bool up)
+bool SpritesContainer::ResetOrder(const Object* obj, bool up)
 {
-	VectorUtils::resetOrder(m_sprites, static_cast<const ISprite*>(obj), up);
+	return VectorContainer::ResetOrder(m_sprites, static_cast<const ISprite*>(obj), up);
 }
 
 }

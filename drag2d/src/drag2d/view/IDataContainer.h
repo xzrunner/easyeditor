@@ -1,21 +1,26 @@
-#pragma once
+#ifndef _DRAG2D_I_DATA_CONTAINER_H_
+#define _DRAG2D_I_DATA_CONTAINER_H_
 
 #include "interfaces.h"
 
 #include "common/Object.h"
-#include "view/EditPanelDefs.h"
+#include "view/DataTraverseType.h"
 
 namespace d2d
 {
-	class IDataContainer : public Object
-	{
-	public:
-		virtual void traverse(IVisitor& visitor, bool order = true) const = 0;
-		virtual void traverse(IVisitor& visitor, TraverseType type = e_allExisting, bool order = true) const = 0;
-		virtual void remove(Object* obj) = 0;
-		virtual void insert(Object* obj) = 0;
-		virtual void clear() = 0;
-		virtual void resetOrder(const Object* obj, bool up) = 0;
-		virtual ~IDataContainer() {}
-	};
+
+class IDataContainer : public Object
+{
+public:
+	virtual void Traverse(IVisitor& visitor, bool order = true) const = 0;
+	virtual void Traverse(IVisitor& visitor, DataTraverseType type = DT_ALL, bool order = true) const = 0;
+	virtual bool Remove(Object* obj) = 0;
+	virtual void Insert(Object* obj) = 0;
+	virtual void Clear() = 0;
+	virtual bool ResetOrder(const Object* obj, bool up) = 0;
+	virtual ~IDataContainer() {}
+};
+
 }
+
+#endif // _DRAG2D_I_DATA_CONTAINER_H_

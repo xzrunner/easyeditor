@@ -14,15 +14,23 @@ public:
 	//
 	// IDataContainer interface
 	//
-	virtual void traverse(d2d::IVisitor& visitor, bool order = true) const;
-	virtual void traverse(d2d::IVisitor& visitor, d2d::TraverseType type = d2d::e_allExisting, bool order = true) const;
-	virtual void remove(Object* obj);
-	virtual void insert(Object* obj);
-	virtual void clear();
-	virtual void resetOrder(const Object* obj, bool up);
-	
+	virtual void Traverse(d2d::IVisitor& visitor, bool order = true) const;
+	virtual void Traverse(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
+	virtual bool Remove(Object* obj);
+	virtual void Insert(Object* obj);
+	virtual void Clear();
+	virtual bool ResetOrder(const Object* obj, bool up);
+
+	bool IsEditable() const { return m_editable; }
+	bool IsVisible() const { return m_visible; }
+
+	void SetEditable(bool editable) { m_editable = editable; }
+	void SetVisible(bool visible) { m_visible = visible; }
+
 private:
 	std::vector<d2d::ISprite*> m_sprs;
+
+	bool m_editable, m_visible;
 
 }; // Layer
 

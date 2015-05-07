@@ -20,7 +20,7 @@ public:
 	// MultiShapesImpl interface
 	//
 	virtual void traverseShapes(IVisitor& visitor, 
-		TraverseType type = e_allExisting) const;
+		DataTraverseType type = DT_ALL) const;
 	virtual void removeShape(IShape* shape);
 	virtual void insertShape(IShape* shape);
 	virtual void clearShapes();

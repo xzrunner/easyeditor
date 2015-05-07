@@ -45,7 +45,7 @@ void StagePanel::clear()
 }
 
 void StagePanel::traverseSprites(d2d::IVisitor& visitor, 
-								 d2d::TraverseType type/* = d2d::e_allExisting*/,
+								 d2d::DataTraverseType type/* = d2d::e_allExisting*/,
 								 bool order/* = true*/) const
 {
 	if (m_ctrl->layer() == -1 || m_ctrl->frame() == -1) {
@@ -56,8 +56,8 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
 		Layer* layer = layers[i];
-		if ((type == d2d::e_editable && !layer->editable) ||
-			(type == d2d::e_visible && !layer->visible))
+		if ((type == d2d::DT_EDITABLE && !layer->editable) ||
+			(type == d2d::DT_VISIBLE && !layer->visible))
 			continue;
 
 		KeyFrame* frame = layer->getCurrKeyFrame(m_ctrl->frame());
