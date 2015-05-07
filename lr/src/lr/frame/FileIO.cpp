@@ -1,5 +1,6 @@
 #include "FileIO.h"
 
+#include "dataset/Layer.h"
 #include "frame/SettingCfg.h"
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
@@ -7,7 +8,7 @@
 namespace lr
 {
 
-void FileIO::load(const char* filename, StagePanel* stage,
+void FileIO::Load(const char* filename, StagePanel* stage,
 				  LibraryPanel* library)
 {
 // 	d2d::SymbolMgr::Instance()->clear();
@@ -21,44 +22,28 @@ void FileIO::load(const char* filename, StagePanel* stage,
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filename);
-
-	// sprites
-	LoadSprites(value["sprite"], stage, dir);
-
-	// layers
-	library->LoadFromFile(value["layer"], dir);
-
 	// size
-	if (!value["size"].isNull()) {
-		SettingCfg* cfg = SettingCfg::Instance();
-		cfg->m_view_width = value["size"]["width"].asInt();
-		cfg->m_view_height = value["size"]["height"].asInt();
-	}
+	SettingCfg* cfg = SettingCfg::Instance();
+	cfg->m_view_width = value["size"]["width"].asInt();
+	cfg->m_view_height = value["size"]["height"].asInt();
 
 	// camera
-	if (!value["camera"].isNull()) {
-		float s = value["camera"]["scale"].asDouble();
-		float x = value["camera"]["x"].asDouble(),
-			y = value["camera"]["y"].asDouble();
-		d2d::Camera* cam = stage->getCamera();
-		cam->SetScale(s);
-		cam->SetPosition(d2d::Vector(x, y));
-	}
-}
-
-void FileIO::store(const char* filename, StagePanel* stage,
-				   LibraryPanel* library)
-{
-	Json::Value value;
-
-	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
-
-	// sprites
-	StoreSprites(value["sprite"], stage, dir);
+	float s = value["camera"]["scale"].asDouble();
+	float x = value["camera"]["x"].asDouble(),
+		y = value["camera"]["y"].asDouble();
+	d2d::Camera* cam = stage->getCamera();
+	cam->SetScale(s);
+	cam->SetPosition(d2d::Vector(x, y));
 
 	// layers
-	library->StoreToFile(value["layer"], dir);
+	std::string dir = d2d::FilenameTools::getFileDir(filename);
+	LoadLayers(value["layer"], stage, library, dir);
+	library->RefreshViewList();
+}
+
+void FileIO::Store(const char* filename, StagePanel* stage)
+{
+	Json::Value value;
 
 	// size
 	SettingCfg* cfg = SettingCfg::Instance();
@@ -71,6 +56,10 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	value["camera"]["x"] = cam->GetPosition().x;
 	value["camera"]["y"] = cam->GetPosition().y;
 
+	// layers
+	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+	StoreLayers(value["layer"], stage->GetLayers(), dir);
+
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(filename);
@@ -79,52 +68,29 @@ void FileIO::store(const char* filename, StagePanel* stage,
 	fout.close();
 }
 
-void FileIO::LoadSprites(const Json::Value& value, StagePanel* stage, 
-						 const std::string& dir)
+void FileIO::LoadLayers(const Json::Value& value, StagePanel* stage, 
+						LibraryPanel* library, const std::string& dir)
 {
-	int i = 0;
-	Json::Value spr_val = value[i++];
-	while (!spr_val.isNull()) {
-		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		d2d::ISymbol* symbol = NULL;
-		try {
-			wxString shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
-			wxString shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
-			if (d2d::FilenameTools::isExist(shape_filepath)) {
-				symbol = d2d::SymbolMgr::Instance()->fetchSymbol(shape_filepath);
-			} else {
-				symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-			}
+	std::vector<Layer*> layers;
 
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			sprite->load(spr_val);
-			stage->insertSprite(sprite);
+	int idx = 0;
+	Json::Value layer_val = value[idx++];
+	while (!layer_val.isNull()) {
+		Layer* layer = new Layer;
+		layer->LoadFromFile(layer_val, dir);
+		layers.push_back(layer);
 
-			sprite->Release();
-			symbol->Release();
-		} catch (d2d::Exception& e) {
-			std::cout << "Symbol::loadResources error! File:" << filepath << std::endl;
-			std::cout << e.what();
-		}
-
-		spr_val = value[i++];
+		layer_val = value[idx++];
 	}
+
+	stage->SetLayers(layers);
+	library->InitFromLayers(layers);
 }
 
-void FileIO::StoreSprites(Json::Value& value, StagePanel* stage,
-						  const std::string& dir)
+void FileIO::StoreLayers(Json::Value& value, const std::vector<Layer*>& layers, const std::string& dir)
 {
-	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		d2d::ISprite* spr = sprites[i];
-
-		Json::Value spr_val;
-		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->getSymbol().getFilepath()).ToStdString();
-		spr->store(spr_val);
-
-		value[i] = spr_val;
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		layers[i]->StoreToFile(value[i], dir);
 	}
 }
 

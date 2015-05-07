@@ -9,19 +9,19 @@ namespace lr
 
 class LibraryPanel;
 class StagePanel;
+class Layer;
 
 class FileIO
 {
 public:
-	static void load(const char* filename, StagePanel* stage,
+	static void Load(const char* filename, StagePanel* stage,
 		LibraryPanel* library);
-	static void store(const char* filename, StagePanel* stage,
-		LibraryPanel* library);
+	static void Store(const char* filename, StagePanel* stage);
 
 private:
-	static void LoadSprites(const Json::Value& value, StagePanel* stage, 
-		const std::string& dir);
-	static void StoreSprites(Json::Value& value, StagePanel* stage, 
+	static void LoadLayers(const Json::Value& value, StagePanel* stage,
+		LibraryPanel* library, const std::string& dir);
+	static void StoreLayers(Json::Value& value, const std::vector<Layer*>& layers, 
 		const std::string& dir);
 
 }; // FileIO

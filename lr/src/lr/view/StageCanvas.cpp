@@ -21,12 +21,6 @@ StageCanvas::StageCanvas(StagePanel* statge)
 
 void StageCanvas::onDraw()
 {
-	static bool inited = false;
-	if (!inited) {
-		m_statge->GetSymbolsCfg().LoadConfig();
-		inited = true;
-	}
-
 	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 
 	DrawGuideLines();

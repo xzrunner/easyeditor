@@ -10,6 +10,7 @@ class Layer : public d2d::IDataContainer
 {
 public:
 	Layer();
+	virtual ~Layer();
 	
 	//
 	// IDataContainer interface
@@ -21,16 +22,26 @@ public:
 	virtual void Clear();
 	virtual bool ResetOrder(const Object* obj, bool up);
 
+	void SetName(const std::string& name) { m_name = name; }
+	const std::string& GetName() const { return m_name; }
+
 	bool IsEditable() const { return m_editable; }
 	bool IsVisible() const { return m_visible; }
 
 	void SetEditable(bool editable) { m_editable = editable; }
 	void SetVisible(bool visible) { m_visible = visible; }
 
+	void LoadFromFile(const Json::Value& val, const std::string& dir);
+	void StoreToFile(Json::Value& val, const std::string& dir) const;
+
+	void RefreshViewList(d2d::ViewlistList* list) const;
+
 private:
-	std::vector<d2d::ISprite*> m_sprs;
+	std::string m_name;
 
 	bool m_editable, m_visible;
+
+	std::vector<d2d::ISprite*> m_sprs;
 
 }; // Layer
 

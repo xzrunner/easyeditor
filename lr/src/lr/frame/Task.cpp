@@ -23,13 +23,13 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
-	FileIO::load(filename, m_stage, m_library);
+	FileIO::Load(filename, m_stage, m_library);
 	m_stage->getCanvas()->resetViewport();
 }
 
 void Task::store(const char* filename) const
 {
-	FileIO::store(filename, m_stage, m_library);
+	FileIO::Store(filename, m_stage);
 }
 
 bool Task::isDirty() const
@@ -77,6 +77,7 @@ void Task::InitLayout()
 	left_splitter->SplitVertically(left_hori_splitter, m_stage);
 
 	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, m_stage, property);
+	m_library->SetViewlist(m_viewlist);
 	m_stage->SetViewlist(m_viewlist);
 
 	right_splitter->SetSashGravity(0.85f);

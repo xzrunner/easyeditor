@@ -6,13 +6,25 @@
 namespace lr
 {
 
+class Layer;
+
 class LibraryPanel : public d2d::LibraryPanel
 {
 public:
 	LibraryPanel(wxWindow* parent);
 
-	void LoadFromFile(const Json::Value& value, const std::string& dir);
-	void StoreToFile(Json::Value& value, const std::string& dir) const;
+	virtual void onPageChanged(wxBookCtrlEvent& event);
+
+	void InitFromLayers(const std::vector<Layer*>& layers);
+
+	void SetViewlist(d2d::ViewlistPanel* viewlist) {
+		m_viewlist = viewlist;
+	}
+
+	void RefreshViewList();
+
+private:
+	d2d::ViewlistPanel* m_viewlist;
 
 }; // LibraryPanel
 

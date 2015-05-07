@@ -329,14 +329,6 @@
 				RelativePath="..\..\..\src\lr\dataset\SpatialIndex.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\lr\dataset\SymbolsCfg.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\lr\dataset\SymbolsCfg.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="preview"

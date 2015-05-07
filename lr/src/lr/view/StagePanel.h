@@ -3,13 +3,11 @@
 
 #include <drag2d.h>
 
-#include "dataset/SymbolsCfg.h"
 #include "preview/IPathfinding.h"
 
 namespace lr
 {
 
-class SymbolsCfg;
 class Quadtree;
 class Layer;
 
@@ -37,8 +35,6 @@ public:
 	virtual void clearSprites();
 	virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
-	SymbolsCfg& GetSymbolsCfg() { return m_symbols_cfg; }
-
 	void SetViewlist(d2d::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;
 	}
@@ -48,6 +44,9 @@ public:
 	void Pathfinding(const d2d::Vector& start, const d2d::Vector& end);
 	void PointQuery(const d2d::Vector& pos);
 
+	void SetLayers(const std::vector<Layer*>& layers);
+	const std::vector<Layer*>& GetLayers() const { return m_layers; }
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 
@@ -55,8 +54,6 @@ private:
 	void ChangeEditOP();
 
 private:
-	SymbolsCfg m_symbols_cfg;
-
 	d2d::LibraryPanel* m_library;
 	d2d::ViewlistPanel* m_viewlist;
 
@@ -67,7 +64,7 @@ private:
 
 	preview::IPathfinding* m_pathfinding;
 
-	std::vector<Layer*> m_all_layers;
+	std::vector<Layer*> m_layers;
 
 }; // StagePanel
 

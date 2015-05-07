@@ -18,7 +18,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::LibraryPanel* library)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(this)
-	, m_symbols_cfg(this, library)
 	, m_library(library)
 	, m_viewlist(NULL)
 	, m_sindex(NULL)
@@ -50,21 +49,25 @@ StagePanel::~StagePanel()
 	m_paste_op->Release();
 	m_arrange_op->Release();
 
-	for_each(m_all_layers.begin(), m_all_layers.end(), DeletePointerFunctor<Layer>());
+	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
 }
 
 void StagePanel::clear()
 {
 	d2d::EditPanel::clear();
 	clearSprites();
+
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		m_layers[i]->Release();
+	}
 }
 
 void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	for (int i = 0, n = m_all_layers.size(); i < n; ++i) 
+	for (int i = 0, n = m_layers.size(); i < n; ++i) 
 	{
-		Layer* layer = m_all_layers[i];
+		Layer* layer = m_layers[i];
 		if (type == d2d::DT_ALL || 
 			type == d2d::DT_SELECTABLE ||
 			type == d2d::DT_EDITABLE && layer->IsEditable() ||
@@ -77,9 +80,9 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
-	for (int i = 0, n = m_all_layers.size(); i < n; ++i)
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
-		Layer* layer = m_all_layers[i];
+		Layer* layer = m_layers[i];
 		if (layer->Remove(sprite)) {
 			break;
 		}
@@ -109,16 +112,16 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 
 void StagePanel::clearSprites()
 {
-	for (int i = 0, n = m_all_layers.size(); i < n; ++i) {
-		m_all_layers[i]->Clear();
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		m_layers[i]->Clear();
 	}
 }
 
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
-	for (int i = 0, n = m_all_layers.size(); i < n; ++i)
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
-		Layer* layer = m_all_layers[i];
+		Layer* layer = m_layers[i];
 		if (layer->ResetOrder(sprite, up)) {
 			break;
 		}
@@ -147,6 +150,14 @@ void StagePanel::PointQuery(const d2d::Vector& pos)
 {
 	if (m_sindex) {
 		m_sindex->SelectNode(pos);
+	}
+}
+
+void StagePanel::SetLayers(const std::vector<Layer*>& layers)
+{
+	m_layers = layers;
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		m_layers[i]->Retain();
 	}
 }
 
