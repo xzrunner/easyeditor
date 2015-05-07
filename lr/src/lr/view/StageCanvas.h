@@ -19,7 +19,11 @@ protected:
 	void onTimer(wxTimerEvent& event);
 
 private:
+	void DrawRegion() const;
 	void DrawGuideLines() const;
+
+	static d2d::Vector TransToBirdView(const d2d::Vector& pos);
+	static d2d::Vector TransToFlatView(const d2d::Vector& pos);
 
 private:
 	enum

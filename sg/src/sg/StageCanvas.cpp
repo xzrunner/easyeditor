@@ -5,8 +5,6 @@
 #include "SymbolRender.h"
 #include "tools.h"
 
-static const d2d::Colorf LIGHT_GRAY = d2d::Colorf(0.8f, 0.8f, 0.8f);
-
 namespace sg
 {
 
@@ -109,10 +107,10 @@ void StageCanvas::DrawGuideLines() const
 	if (is_flat)
 	{
 		for (int i = 0; i <= row; ++i) {
-			d2d::PrimitiveDraw::drawLine(d2d::Vector(0, i*edge), d2d::Vector(width, i*edge), LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(d2d::Vector(0, i*edge), d2d::Vector(width, i*edge), d2d::LIGHT_GREY);
 		}
 		for (int i = 0; i <= col; ++i) {
-			d2d::PrimitiveDraw::drawLine(d2d::Vector(i*edge, 0), d2d::Vector(i*edge, height), LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(d2d::Vector(i*edge, 0), d2d::Vector(i*edge, height), d2d::LIGHT_GREY);
 		}
 	}
 	else
@@ -120,12 +118,12 @@ void StageCanvas::DrawGuideLines() const
 		for (int i = 0; i <= row; ++i) {
 			d2d::Vector s = TransToBirdView(d2d::Vector(0, i*edge));
 			d2d::Vector e = TransToBirdView(d2d::Vector(width, i*edge));
-			d2d::PrimitiveDraw::drawLine(s, e, LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(s, e, d2d::LIGHT_GREY);
 		}
 		for (int i = 0; i <= col; ++i) {
 			d2d::Vector s = TransToBirdView(d2d::Vector(i*edge, 0));
 			d2d::Vector e = TransToBirdView(d2d::Vector(i*edge, height));
-			d2d::PrimitiveDraw::drawLine(s, e, LIGHT_GRAY);
+			d2d::PrimitiveDraw::drawLine(s, e, d2d::LIGHT_GREY);
 		}
 	}
 }
