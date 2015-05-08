@@ -6,6 +6,7 @@
 #include <easytexture.h>
 #include <easycomplex.h>
 #include <easyshape.h>
+#include <easyanim.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -19,6 +20,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(libshape::FILE_TAG, &libshape::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(libshape::FILE_TAG, &libshape::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
 }
 
 bool MyApp::OnInit()

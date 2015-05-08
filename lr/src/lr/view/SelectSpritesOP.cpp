@@ -59,9 +59,9 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 // 		std::string cmd = "easycomplex.exe " + complex->getSymbol().getFilepath();
 // 		WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);
 	}
-	else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(selected))
+	else if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(selected))
 	{
- 		anim::PreviewDialog dlg(m_editPanel, &anim->getSymbol());
+ 		eanim::PreviewDialog dlg(m_editPanel, &anim->getSymbol());
  		dlg.ShowModal();
 
 // 		m_editPanel->resetCanvas();

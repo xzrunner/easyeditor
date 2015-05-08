@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-namespace anim
+namespace eanim
 {
 
 class Symbol : public d2d::ISymbol

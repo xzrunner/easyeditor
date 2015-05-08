@@ -84,8 +84,8 @@ void StageCanvas::UpdateParticle2d()
 
 void StageCanvas::UpdateAnimation()
 {
-	std::vector<anim::Sprite*> sprites;
-	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<anim::Sprite>(sprites));
+	std::vector<eanim::Sprite*> sprites;
+	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<eanim::Sprite>(sprites));
 	size_t max = 0;
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());

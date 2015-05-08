@@ -1,6 +1,6 @@
 #include "Tools.h"
 
-namespace anim
+namespace eanim
 {
 
 void Tools::drawAnimSymbol(const Symbol* symbol, 

@@ -2,7 +2,7 @@
 #include "PreviewCanvas.h"
 #include "Symbol.h"
 
-namespace anim
+namespace eanim
 {
 
 PreviewDialog::PreviewDialog(wxWindow* parent, const Symbol* symbol)

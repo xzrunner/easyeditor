@@ -31,8 +31,8 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 		// todo
 // 		if (ecomplex::Symbol* s = dynamic_cast<ecomplex::Symbol*>(symbol))
 // 			sprite = new ecomplex::Sprite(s);
-// 		else if (anim::Symbol* s = dynamic_cast<anim::Symbol*>(symbol))
-// 			sprite = new anim::Sprite(s);
+// 		else if (eanim::Symbol* s = dynamic_cast<eanim::Symbol*>(symbol))
+// 			sprite = new eanim::Sprite(s);
 	}
 	else
 	{

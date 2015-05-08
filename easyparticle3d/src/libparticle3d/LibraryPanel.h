@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-namespace anim { class LibraryPage; }
+namespace eanim { class LibraryPage; }
 namespace ecomplex { class LibraryPage; }
 namespace escale9 { class LibraryPage; }
 

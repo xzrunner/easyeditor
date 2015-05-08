@@ -3,7 +3,7 @@
 
 #include <drag2d.h>
 
-namespace anim
+namespace eanim
 {
 
 class LibraryPage : public d2d::ILibraryPage

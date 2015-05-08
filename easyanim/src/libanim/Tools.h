@@ -4,7 +4,7 @@
 
 #include "Symbol.h"
 
-namespace anim
+namespace eanim
 {
 
 class Tools

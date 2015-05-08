@@ -198,7 +198,7 @@ void CocoPacker::ResolveSymbols()
 			m_mapSymbolID.insert(std::make_pair(symbol, m_id++));
 			ParserComplex(complex);
 		}
-		else if (const anim::Symbol* anim = dynamic_cast<const anim::Symbol*>(symbol))
+		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
 			////////////////////////////////////////////////////////////////////////////
 			//// version 1: parser all sprites to picture
@@ -206,10 +206,10 @@ void CocoPacker::ResolveSymbols()
 
 			//for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			//{
-			//	anim::Symbol::Layer* layer = anim->m_layers[i];
+			//	eanim::Symbol::Layer* layer = anim->m_layers[i];
 			//	for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 			//	{
-			//		anim::Symbol::Frame* frame = layer->frames[j];
+			//		eanim::Symbol::Frame* frame = layer->frames[j];
 			//		for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 			//		{
 			//			d2d::ISprite* sprite = frame->sprites[k];
@@ -236,10 +236,10 @@ void CocoPacker::ResolveSymbols()
 			std::set<const d2d::ImageSymbol*, d2d::SymbolCmp> unique;
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
-				anim::Symbol::Layer* layer = anim->m_layers[i];
+				eanim::Symbol::Layer* layer = anim->m_layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					anim::Symbol::Frame* frame = layer->frames[j];
+					eanim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 					{
 						d2d::ISprite* sprite = frame->sprites[k];
@@ -764,7 +764,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 	}
 }
 
-void CocoPacker::ParserAnimation(const anim::Symbol* symbol)
+void CocoPacker::ParserAnimation(const eanim::Symbol* symbol)
 {
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 
@@ -780,10 +780,10 @@ void CocoPacker::ParserAnimation(const anim::Symbol* symbol)
 		{
 			for (size_t j = 0, m = symbol->m_layers.size(); j < m; ++j)
 			{
-				anim::Symbol::Layer* layer = symbol->m_layers[j];
+				eanim::Symbol::Layer* layer = symbol->m_layers[j];
 				if (i < layer->frames.size())
 				{
-					anim::Symbol::Frame* frame = layer->frames[i];
+					eanim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						ParserSpriteForComponent(frame->sprites[k], ids, unique, order);
 				}
@@ -800,7 +800,7 @@ void CocoPacker::ParserAnimation(const anim::Symbol* symbol)
  			lua::TableAssign ta(*m_gen, "", true);
 
 			std::vector<d2d::ISprite*> sprites;
-			anim::Tools::getCurrSprites(symbol, i, sprites);
+			eanim::Tools::getCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				ParserSpriteForFrame(sprites[j], order);
  		}
@@ -1424,7 +1424,7 @@ void CocoPacker::ParserSpriteForComponent(const d2d::ISprite* sprite, std::vecto
 		}
 		else
 		{
-			// anim::Symbol's sprites store unique
+			// eanim::Symbol's sprites store unique
 
 			std::map<const d2d::ISymbol*, int>::iterator itr = m_mapSymbolID.find(&sprite->getSymbol());
 			if (itr == m_mapSymbolID.end()) {

@@ -5,7 +5,7 @@
 #include <easycomplex.h>
 #include <easycoco.h>
 
-namespace anim
+namespace eanim
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)

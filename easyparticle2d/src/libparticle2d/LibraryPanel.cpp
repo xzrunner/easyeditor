@@ -16,7 +16,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	wxWindow* nb = getNotebook();
 	addPage(new d2d::LibraryImagePage(nb));
 	addPage(new ecomplex::LibraryPage(nb));
-	addPage(new anim::LibraryPage(nb));
+	addPage(new eanim::LibraryPage(nb));
 	addPage(new escale9::LibraryPage(nb));
 	addPage(new LibraryPage(nb));
 }

@@ -5,7 +5,7 @@
 
 #include "Symbol.h"
 
-namespace anim
+namespace eanim
 {
 
 class Sprite : public d2d::ISprite

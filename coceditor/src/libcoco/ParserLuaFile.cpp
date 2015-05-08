@@ -365,15 +365,15 @@ void ParserLuaFile::transAniToFiles(const std::string& outfloder)
 
 void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id, Animation* ani)
 {
-	anim::Symbol* symbol = new anim::Symbol;
-	anim::Symbol::Layer* layer = new anim::Symbol::Layer;
+	eanim::Symbol* symbol = new eanim::Symbol;
+	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
 	symbol->name = ani->export_name;
 	symbol->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		//				std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		anim::Symbol::Frame* frame = new anim::Symbol::Frame;
+		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
 		frame->index = i+1;
 		frame->bClassicTween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)
@@ -410,7 +410,7 @@ void ParserLuaFile::transAniToAnimationFile(const std::string& outfloder, int id
 	}
 	std::string filename = outfloder + "\\" + ss.str() 
 		+ "_" + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim) + ".json";
-	anim::FileSaver::store(filename.c_str(), *symbol);
+	eanim::FileSaver::store(filename.c_str(), *symbol);
 
 	ani->filename = filename;
 
@@ -517,15 +517,15 @@ void ParserLuaFile::transAniToMemory()
 
 void ParserLuaFile::transAniToAnimationMemory(int id, Animation* ani)
 {
-	anim::Symbol* symbol = new anim::Symbol;
-	anim::Symbol::Layer* layer = new anim::Symbol::Layer;
+	eanim::Symbol* symbol = new eanim::Symbol;
+	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
 	symbol->name = ani->export_name;
 	symbol->setFPS(30);
 	for (int i = 0, n = ani->frames.size(); i < n; ++i)
 	{
 		// std::cout << "frame: [" << i << "/" << ani->frames.size() << "]" << std::endl;
 
-		anim::Symbol::Frame* frame = new anim::Symbol::Frame;
+		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
 		frame->index = i + 1;
 		frame->bClassicTween = false;
 		for (int j = 0, m = ani->frames[i].size(); j < m; ++j)

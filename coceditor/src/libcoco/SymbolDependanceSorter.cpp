@@ -39,14 +39,14 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
 				buffer.push(complex->m_sprites[j]);
 		}
-		else if (const anim::Symbol* anim = dynamic_cast<const anim::Symbol*>(symbol))
+		else if (const eanim::Symbol* anim = dynamic_cast<const eanim::Symbol*>(symbol))
 		{
 			for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 			{
-				anim::Symbol::Layer* layer = anim->m_layers[i];
+				eanim::Symbol::Layer* layer = anim->m_layers[i];
 				for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 				{
-					anim::Symbol::Frame* frame = layer->frames[j];
+					eanim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						buffer.push(frame->sprites[k]);
 				}
@@ -116,18 +116,18 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 				}
 			}
 		}
-		else if (const anim::Sprite* anim = dynamic_cast<const anim::Sprite*>(sprite))
+		else if (const eanim::Sprite* anim = dynamic_cast<const eanim::Sprite*>(sprite))
 		{
-			const anim::Symbol& symbol = anim->getSymbol();
+			const eanim::Symbol& symbol = anim->getSymbol();
 			if (m_unique.find(&symbol) == m_unique.end())
 			{
 				m_unique.insert(&symbol);
 				for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 				{
-					anim::Symbol::Layer* layer = symbol.m_layers[i];
+					eanim::Symbol::Layer* layer = symbol.m_layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 					{
-						anim::Symbol::Frame* frame = layer->frames[j];
+						eanim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						{
 							d2d::ISprite* child = frame->sprites[k];
@@ -197,15 +197,15 @@ void SymbolDependanceSorter::sort()
 					break;
 				}
 			}
-			else if (anim::Symbol* anim = dynamic_cast<anim::Symbol*>(symbol))
+			else if (eanim::Symbol* anim = dynamic_cast<eanim::Symbol*>(symbol))
 			{
 				bool prepared = true;
 				for (size_t i = 0, n = anim->m_layers.size(); i < n && prepared; ++i)
 				{
-					anim::Symbol::Layer* layer = anim->m_layers[i];
+					eanim::Symbol::Layer* layer = anim->m_layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m && prepared; ++j)
 					{
-						anim::Symbol::Frame* frame = layer->frames[j];
+						eanim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l && prepared; ++k)
 							if (!isSymbolPrepared(frame->sprites[k]))
 								prepared = false;

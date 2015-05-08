@@ -5,7 +5,7 @@
 
 #include "Symbol.h"
 
-namespace anim
+namespace eanim
 {
 
 class PreviewCanvas : public d2d::OrthoCanvas

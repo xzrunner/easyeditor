@@ -4,7 +4,7 @@
 
 #include <easycomplex.h>
 
-namespace anim
+namespace eanim
 {
 
 Symbol::Symbol()

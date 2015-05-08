@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-namespace anim
+namespace eanim
 {
 
 Sprite::Sprite()

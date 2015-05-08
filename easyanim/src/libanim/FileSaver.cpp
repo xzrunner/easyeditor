@@ -1,6 +1,6 @@
 #include "FileSaver.h"
 
-namespace anim
+namespace eanim
 {
 
 void FileSaver::store(const std::string& filepath, const Symbol& symbol)
