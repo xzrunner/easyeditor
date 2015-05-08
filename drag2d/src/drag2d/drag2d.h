@@ -74,6 +74,7 @@
 #include "view/CombinedDropData.h"
 #include "view/IDataContainer.h"
 #include "view/FontPropertySetting.h"
+#include "view/SpriteDropTarget.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"
