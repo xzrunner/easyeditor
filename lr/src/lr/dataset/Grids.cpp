@@ -20,9 +20,11 @@ void Grids::Draw() const
 
 void Grids::Build(int width, int height)
 {
+	m_width = width;
+	m_height = height;
+
 	m_grids.clear();
 	m_flat_bound.clear();
-
 
 	m_col = std::ceil((width + BIRD_HW) / (BIRD_HW*2));
 	m_row = std::ceil((height + BIRD_HH) / BIRD_HH);
@@ -48,6 +50,24 @@ void Grids::Build(int width, int height)
 	m_flat_bound.push_back(TransToFlatView(-width*0.5f, -height*0.5f));
 }
 
+std::vector<int> Grids::IntersectPolygon(const std::vector<d2d::Vector>& poly) const
+{
+	d2d::Rect r = GetRegion(poly);
+
+//	float left = 
+	float top = m_height * 0.5f + BIRD_HH;
+
+	std::vector<d2d::Vector> poly_flat;
+	TransVerticesToFlat(poly, poly_flat);
+
+	
+}
+
+std::vector<int> Grids::IntersectPolyline(const std::vector<d2d::Vector>& line) const
+{
+
+}
+
 d2d::Vector Grids::TransToBirdView(float x, float y)
 {
 	d2d::Vector ret = d2d::Math::rotateVector(d2d::Vector(x, y), d2d::PI / 4);
@@ -61,6 +81,23 @@ d2d::Vector Grids::TransToFlatView(float x, float y)
 	ret.y /= PROJ_TRANS;
 	ret = d2d::Math::rotateVector(ret, - d2d::PI / 4);
 	return ret;
+}
+
+d2d::Rect Grids::GetRegion(const std::vector<d2d::Vector>& vertices)
+{
+	d2d::Rect r;
+	for (int i = 0, n = vertices.size(); i < n; ++i) {
+		r.combine(vertices[i]);
+	}
+	return r;
+}
+
+void Grids::TransVerticesToFlat(const std::vector<d2d::Vector>& src, std::vector<d2d::Vector>& dst)
+{
+	dst.resize(src.size());
+	for (int i = 0, n = src.size(); i < n; ++i) {
+		dst[i] = TransToFlatView(src[i]);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////

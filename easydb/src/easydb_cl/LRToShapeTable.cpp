@@ -1,6 +1,10 @@
 #include "LRToShapeTable.h"
 #include "check_params.h"
 
+#include <lr/dataset/Grids.h>
+
+#include <easyshape.h>
+
 namespace edb
 {
 
@@ -39,27 +43,57 @@ void LRToShapeTable::Run(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
-	Json::Value complex_val;
-	for (int i = 0; i < 3; ++i) {
-		LoadSpriteValue(lr_val["layer"][i]["sprite"], complex_val["sprite"]);
+	std::string dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+
+	Json::Value out_val;
+
+	out_val["width"] = lr_val["size"]["width"];
+	out_val["height"] = lr_val["size"]["height"];
+	out_val["grid edge"] = lr::Grids::EDGE;
+
+	lr::Grids grids;
+	int w = lr_val["size"]["width"].asUInt(),
+		h = lr_val["size"]["height"].asUInt();
+	grids.Build(w, h);
+
+//	out_val["collision region"]
+
+	// collision region
+	int idx = 0;
+	Json::Value spr_val = lr_val["layer"][(int)6]["sprite"][idx++];
+	while (!spr_val.isNull()) {
+		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
+		assert(symbol);
+
+		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		sprite->load(spr_val);
+
+		libshape::Sprite* shape_spr = dynamic_cast<libshape::Sprite*>(sprite);
+		assert(shape_spr);
+		const std::vector<d2d::IShape*>& shapes = shape_spr->getSymbol().GetShapes();
+		for (int i = 0, n = shapes.size(); i < n; ++i)
+		{
+			d2d::IShape* shape = shapes[i];
+			libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape);
+			if (!poly) {
+				continue;
+			}
+			const std::vector<d2d::Vector>& bound = poly->GetVertices();
+			std::vector<d2d::Vector> bound_flat;
+			bound_flat.resize(bound.size());
+			for (int i = 0, n = bound.size(); i < n; ++i) {
+				bound_flat[i] = lr::Grids::TransToFlatView(bound[i]);
+			}
+
+			
+		}
+
+		sprite->Release();
+		symbol->Release();
+
+		spr_val = lr_val["layer"][(int)6]["sprite"][idx++];
 	}
-	complex_val["name"] = "";
-	complex_val["use_render_cache"] = false;
-	complex_val["xmax"] = 0;
-	complex_val["xmin"] = 0;
-	complex_val["ymax"] = 0;
-	complex_val["ymin"] = 0;
-
-	std::string outfile = filepath.substr(0, filepath.find_last_of("_"));
-	wxString tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
-	outfile = d2d::FilenameTools::getFilenameAddTag(outfile, tag, "json");
-
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(outfile.c_str());
-	std::locale::global(std::locale("C"));
-	writer.write(fout, complex_val);
-	fout.close();
 }
 
 }
