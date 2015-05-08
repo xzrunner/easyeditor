@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "RightPopupMenu.h"
+
 #include "preview/IPathfinding.h"
 
 namespace lr
@@ -59,13 +61,15 @@ public:
 	void BuildGrids(int w, int h);
 	const Grids* GetGrids() const { return m_grids; }
 
+	void OnRightPopupMenu(wxCommandEvent& event);
+
+	Layer* GetCurrLayer() const;
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 
 private:
 	void ChangeEditOP();
-
-	Layer* GetCurrLayer() const;
 
 private:
 	d2d::LibraryPanel* m_library;
@@ -80,6 +84,8 @@ private:
 	preview::IPathfinding* m_pathfinding;
 
 	std::vector<Layer*> m_layers;
+
+	RightPopupMenu m_popup;
 
 }; // StagePanel
 

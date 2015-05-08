@@ -23,7 +23,7 @@ class ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel, const ArrangeSpriteConfig& cfg);
+		PropertySettingPanel* propertyPanel, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 	~ArrangeSpriteImpl();
 
 	virtual void onKeyDown(int keyCode);
@@ -48,7 +48,7 @@ protected:
 	virtual void onDirectionKeyDown(DirectionType type);
 	virtual void onSpaceKeyDown();
 
-	virtual void setRightPopupMenu(wxMenu& menu);
+	virtual void SetRightPopupMenu(wxMenu& menu, ISprite* spr);
 
 	virtual IArrangeSpriteState* CreateTransalteState(SpriteSelection* selection, const Vector& first_pos) const;
 	virtual IArrangeSpriteState* CreateRotateState(SpriteSelection* selection, const Vector& first_pos) const;

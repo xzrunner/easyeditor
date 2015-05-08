@@ -1,6 +1,7 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
 #include "SelectSpritesOP.h"
+#include "ArrangeSpriteImpl.h"
 
 #include "frame/config.h"
 #include "frame/SettingCfg.h"
@@ -28,6 +29,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_viewlist(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
+	, m_popup(this)
 {
 	SetDropTarget(new d2d::SpriteDropTarget(this, this, library));
 
@@ -46,7 +48,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		m_pathfinding = new preview::PathVisibleSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
-	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
+	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_popup);
+	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, NULL, 
+		d2d::ArrangeSpriteConfig(), arrange_impl);
 
 	m_editOP = m_arrange_op;
 	m_editOP->Retain();
@@ -237,6 +241,17 @@ void StagePanel::BuildGrids(int w, int h)
 	}
 }
 
+void StagePanel::OnRightPopupMenu(wxCommandEvent& event)
+{
+	m_popup.OnRightPopupMenu(event.GetId());
+}
+
+Layer* StagePanel::GetCurrLayer() const
+{
+	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	return static_cast<LibraryPage*>(curr_page)->GetLayer();
+}
+
 void StagePanel::OnMouseHook(wxMouseEvent& event)
 {
 	if (event.RightDown()) {
@@ -258,12 +273,6 @@ void StagePanel::ChangeEditOP()
 		m_editOP = m_arrange_op;
 	}
 	m_editOP->Retain();
-}
-
-Layer* StagePanel::GetCurrLayer() const
-{
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	return static_cast<LibraryPage*>(curr_page)->GetLayer();
 }
 
 }

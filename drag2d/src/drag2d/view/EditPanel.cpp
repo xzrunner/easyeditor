@@ -14,11 +14,11 @@ namespace d2d
 BEGIN_EVENT_TABLE(EditPanel, wxPanel)
  	EVT_SIZE(EditPanel::onSize)
 
-	EVT_MENU(Menu_UpOneLayer, EditPanel::onMenuUpOneLayer)
-	EVT_MENU(Menu_DownOneLayer, EditPanel::onMenuDownOneLayer)
-	EVT_MENU(Menu_OpenWithShape, EditPanel::onMenuOpenWithEasyShape)
-	EVT_MENU(Menu_InsertToDTex, EditPanel::onMenuInsertToDTex)
-	EVT_MENU(Menu_RemoveFromDTex, EditPanel::onMenuRemoveFromDTex)
+//	EVT_MENU(Menu_UpOneLayer, EditPanel::onMenuUpOneLayer)
+// 	EVT_MENU(Menu_DownOneLayer, EditPanel::onMenuDownOneLayer)
+// 	EVT_MENU(Menu_OpenWithShape, EditPanel::onMenuOpenWithEasyShape)
+// 	EVT_MENU(Menu_InsertToDTex, EditPanel::onMenuInsertToDTex)
+// 	EVT_MENU(Menu_RemoveFromDTex, EditPanel::onMenuRemoveFromDTex)
 END_EVENT_TABLE()
 
 std::string EditPanel::menu_entries[] = 
@@ -38,6 +38,12 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	m_canvas = NULL;
 	m_camera = new Camera;
 	SetFocus();		// For onMouseWheelRotation
+
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuUpOneLayer, this, Menu_UpOneLayer);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuDownOneLayer, this, Menu_DownOneLayer);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuOpenWithEasyShape, this, Menu_OpenWithShape);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuInsertToDTex, this, Menu_InsertToDTex);
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuRemoveFromDTex, this, Menu_RemoveFromDTex);
 }
 
 EditPanel::~EditPanel()

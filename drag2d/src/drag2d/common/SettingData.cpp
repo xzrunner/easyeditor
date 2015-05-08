@@ -8,7 +8,7 @@ SettingData::SettingData()
 	open_sprite_capture = true;
 	auto_get_focus = true;
 
-	open_image_edge_clip = false;
+	open_image_edge_clip = true;
 	visible_image_edge = false;
 
 	visible_label_bg = true;

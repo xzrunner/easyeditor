@@ -284,7 +284,7 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 		if (pos == m_right_down_pos && sprite)
 		{
 			wxMenu menu;
-			setRightPopupMenu(menu);
+			SetRightPopupMenu(menu, sprite);
 			m_editPanel->PopupMenu(&menu, x, y);
 		}
 		else if (m_op_state)
@@ -463,7 +463,7 @@ void ArrangeSpriteImpl::onSpaceKeyDown()
 	m_editPanel->Refresh();
 }
 
-void ArrangeSpriteImpl::setRightPopupMenu(wxMenu& menu)
+void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
 {
 	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
 	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);

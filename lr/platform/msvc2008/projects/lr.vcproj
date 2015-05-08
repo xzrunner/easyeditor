@@ -245,6 +245,14 @@
 				Name="stage"
 				>
 				<File
+					RelativePath="..\..\..\src\lr\view\RightPopupMenu.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\RightPopupMenu.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\lr\view\StageCanvas.cpp"
 					>
 				</File>
@@ -284,6 +292,14 @@
 			<Filter
 				Name="editop"
 				>
+				<File
+					RelativePath="..\..\..\src\lr\view\ArrangeSpriteImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\ArrangeSpriteImpl.h"
+					>
+				</File>
 				<File
 					RelativePath="..\..\..\src\lr\view\PasteSymbolOP.cpp"
 					>
