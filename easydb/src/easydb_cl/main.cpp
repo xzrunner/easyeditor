@@ -6,6 +6,7 @@
 #include <easyscale9.h>
 #include <easymesh.h>
 #include <easyshape.h>
+#include <easytexture.h>
 
 static void InitSymbolCreators() 
 {
@@ -23,6 +24,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(libshape::FILE_TAG, &libshape::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(libshape::FILE_TAG, &libshape::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
 }
 
 static void Help()

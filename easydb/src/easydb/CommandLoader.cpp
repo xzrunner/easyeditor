@@ -42,6 +42,7 @@
 #include "LRToComplex.h"
 #include "TransOldLRFile.h"
 #include "LRToShapeTable.h"
+#include "TransOldShapeFile.h"
 
 namespace edb
 {
@@ -89,6 +90,7 @@ void CommandLoader::Init()
 	fc->Register(LRToComplex::Create());
 	fc->Register(TransOldLRFile::Create());
 	fc->Register(LRToShapeTable::Create());
+	fc->Register(TransOldShapeFile::Create());
 }
 
 }

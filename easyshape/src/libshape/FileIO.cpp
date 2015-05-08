@@ -1,5 +1,6 @@
 #include "FileIO.h"
 #include "ShapeType.h"
+#include "ShapeFactory.h"
 
 #include "BezierShape.h"
 #include "ChainShape.h"
@@ -93,22 +94,22 @@ d2d::IShape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 {
 	d2d::IShape* shape = NULL;
 
-	// old
-	if (value.isNull())
-		;
-	else if (!value["bezier"].isNull())
-		shape = LoadBezier(value["bezier"]);
-	else if (!value["polygon"].isNull())
-		shape = LoadPolygon(dir, value["polygon"]);
-	else if (!value["chain"].isNull())
-		shape = LoadChain(value["chain"]);
-	else if (!value["rect"].isNull())
-		shape = LoadRect(value["rect"]);
-	else if (!value["circle"].isNull())
-		shape = LoadCircle(value["circle"]);
+// 	// old
+// 	if (value.isNull())
+// 		;
+// 	else if (!value["bezier"].isNull())
+// 		shape = LoadBezier(value["bezier"]);
+// 	else if (!value["polygon"].isNull())
+// 		shape = LoadPolygon(dir, value["polygon"]);
+// 	else if (!value["chain"].isNull())
+// 		shape = LoadChain(value["chain"]);
+// 	else if (!value["rect"].isNull())
+// 		shape = LoadRect(value["rect"]);
+// 	else if (!value["circle"].isNull())
+// 		shape = LoadCircle(value["circle"]);
 
-// 	// new
-// 	shape = ShapeFactory::CreateShapeFromFile(value, dir);
+	// new
+	shape = ShapeFactory::CreateShapeFromFile(value, dir);
 
 	return shape;
 }
