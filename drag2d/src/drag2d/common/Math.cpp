@@ -244,13 +244,22 @@ bool Math::IsPolygonInPolygon(const std::vector<Vector>& in, const std::vector<V
 
 bool Math::IsPolygonIntersectRect(const std::vector<Vector>& poly, const Rect& rect)
 {
-	std::vector<Vector> poly2;
-	poly2.push_back(d2d::Vector(rect.xMin, rect.yMin));
-	poly2.push_back(d2d::Vector(rect.xMax, rect.yMin));
-	poly2.push_back(d2d::Vector(rect.xMax, rect.yMax));
-	poly2.push_back(d2d::Vector(rect.xMin, rect.yMax));
+	if (poly.size() < 3) {
+		return false;
+	}
 
-	return IsPolygonIntersectPolygon(poly, poly2);
+	if (isPointInArea(Vector(rect.xCenter(), rect.yCenter()), poly) ||
+		isPointInRect(poly[0], rect)) {
+			return true;
+	}
+
+ 	std::vector<Vector> poly2;
+ 	poly2.push_back(d2d::Vector(rect.xMin, rect.yMin));
+ 	poly2.push_back(d2d::Vector(rect.xMax, rect.yMin));
+ 	poly2.push_back(d2d::Vector(rect.xMax, rect.yMax));
+ 	poly2.push_back(d2d::Vector(rect.xMin, rect.yMax));
+ 
+ 	return IsPolygonIntersectPolygon(poly, poly2);
 }
 
 bool Math::IsSegmentIntersectPolyline(const Vector& s, const Vector& e, const std::vector<Vector>& poly)
