@@ -102,7 +102,10 @@ void LRToShapeTable::ParserLayer(const Json::Value& src_val, const std::string& 
 			if (!poly) {
 				continue;
 			}
-			const std::vector<d2d::Vector>& bound = poly->GetVertices();
+			std::vector<d2d::Vector> bound = poly->GetVertices();
+			for (int i = 0, n = bound.size(); i < n; ++i) {
+				bound[i] += sprite->getPosition();
+			}
 			std::vector<int> grid_idx = grids.IntersectPolygon(bound);
 			for (int i = 0, n = grid_idx.size(); i < n; ++i) {
 				int sz = shape_val["grid"].size();
