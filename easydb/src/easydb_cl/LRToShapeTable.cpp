@@ -49,14 +49,16 @@ void LRToShapeTable::Run(const std::string& filepath)
 
 	out_val["width"] = lr_val["size"]["width"];
 	out_val["height"] = lr_val["size"]["height"];
-	out_val["grid edge"] = lr::Grids::EDGE;
 
 	lr::Grids grids;
 	int w = lr_val["size"]["width"].asUInt(),
 		h = lr_val["size"]["height"].asUInt();
 	grids.Build(w, h);
 
-//	out_val["collision region"]
+	int col, row;
+	grids.GetGridSize(col, row);
+	out_val["col"] = col;
+	out_val["row"] = row;
 
 	// collision region
 	int idx = 0;
@@ -65,6 +67,9 @@ void LRToShapeTable::Run(const std::string& filepath)
 		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
 		assert(symbol);
+
+		Json::Value shape_val;
+		shape_val["name"] = spr_val["name"];
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spr_val);
@@ -80,20 +85,30 @@ void LRToShapeTable::Run(const std::string& filepath)
 				continue;
 			}
 			const std::vector<d2d::Vector>& bound = poly->GetVertices();
-			std::vector<d2d::Vector> bound_flat;
-			bound_flat.resize(bound.size());
-			for (int i = 0, n = bound.size(); i < n; ++i) {
-				bound_flat[i] = lr::Grids::TransToFlatView(bound[i]);
+			std::vector<int> grid_idx = grids.IntersectPolygon(bound);
+			for (int i = 0, n = grid_idx.size(); i < n; ++i) {
+				int sz = shape_val["grid"].size();
+				shape_val["grid"][sz] = grid_idx[i];
 			}
-
-			
 		}
+
+		int sz = out_val["collision region"].size();
+		out_val["collision region"][sz] = shape_val;
 
 		sprite->Release();
 		symbol->Release();
 
 		spr_val = lr_val["layer"][(int)6]["sprite"][idx++];
 	}
+
+	std::string outfile = filepath.substr(0, filepath.find_last_of(".")) + "_shape.json";
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(outfile.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, out_val);
+	fout.close();
 }
 
 }

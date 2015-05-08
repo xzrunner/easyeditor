@@ -3,12 +3,16 @@
 #include "SelectSpritesOP.h"
 
 #include "frame/config.h"
+#include "frame/SettingCfg.h"
+#include "dataset/Grids.h"
 #include "dataset/Quadtree.h"
 #include "dataset/Layer.h"
 #include "view/LibraryPage.h"
 #include "preview/PathGrid.h"
 #include "preview/PathNavMesh.h"
 #include "preview/PathVisibleSimple.h"
+
+#include <easyshape.h>
 
 namespace lr
 {
@@ -20,10 +24,19 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::MultiSpritesImpl(this)
 	, d2d::MultiShapesImpl(this)
 	, m_library(library)
+	, m_grids(NULL)
 	, m_viewlist(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
 {
+	SetDropTarget(new d2d::SpriteDropTarget(this, this, library));
+
+	if (OPEN_GRIDS) {
+		m_grids = new Grids;
+		SettingCfg* cfg = SettingCfg::Instance();
+		m_grids->Build(cfg->m_view_width, cfg->m_view_height);
+	}
+
 	if (TEST_QUADTREE) {
 		m_sindex = new Quadtree(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
@@ -43,6 +56,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {
+	if (m_grids) {
+		delete m_grids;
+	}
 	if (m_pathfinding) {
 		delete m_pathfinding;
 	}
@@ -162,6 +178,14 @@ void StagePanel::insertShape(d2d::IShape* shape)
 {
 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
 	static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
+
+	if (m_grids) {
+		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
+			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolygon(poly->GetVertices()));
+		} else if (libshape::ChainShape* path = dynamic_cast<libshape::ChainShape*>(shape)) {
+			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolyline(path->GetVertices()));		
+		}
+	}
 }
 
 void StagePanel::clearShapes()
@@ -208,7 +232,9 @@ void StagePanel::SetLayers(const std::vector<Layer*>& layers)
 
 void StagePanel::BuildGrids(int w, int h)
 {
-	static_cast<StageCanvas*>(m_canvas)->BuildGrids(w, h);
+	if (m_grids) {
+		m_grids->Build(w, h);
+	}
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)

@@ -1,8 +1,9 @@
 #include "StageCanvas.h"
 #include "StagePanel.h"
 
-#include "frame/SettingCfg.h"
+#include "dataset/Grids.h"
 #include "frame/config.h"
+#include "frame/SettingCfg.h"
 
 namespace lr
 {
@@ -16,15 +17,7 @@ StageCanvas::StageCanvas(StagePanel* statge)
 	, m_statge(statge)
 	, m_timer(this, TIMER_ID)
 {
-	SettingCfg* cfg = SettingCfg::Instance();
-	m_grids.Build(cfg->m_view_width, cfg->m_view_height);
-
 	m_timer.Start(100);
-}
-
-void StageCanvas::BuildGrids(int w, int h)
-{
-	m_grids.Build(w, h);
 }
 
 void StageCanvas::onDraw()
@@ -33,7 +26,10 @@ void StageCanvas::onDraw()
 	m_statge->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);
 
 	DrawRegion();
-	m_grids.Draw();
+
+	if (const Grids* grids = m_statge->GetGrids()) {
+		grids->Draw();
+	}
 
 	m_editPanel->drawEditTemp();
 }

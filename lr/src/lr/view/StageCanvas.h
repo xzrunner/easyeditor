@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "dataset/Grids.h"
-
 namespace lr
 {
 
@@ -36,8 +34,6 @@ private:
 	wxTimer m_timer;
 
 	StagePanel* m_statge;
-
-	Grids m_grids;
 
 	DECLARE_EVENT_TABLE()
 

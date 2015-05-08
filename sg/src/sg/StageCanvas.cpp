@@ -8,6 +8,9 @@
 namespace sg
 {
 
+//static const float VIEW_TRANS = 0.75f;
+static const float VIEW_TRANS = 1/sqrt(3.0f);
+
 BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)
 END_EVENT_TABLE()
@@ -39,14 +42,14 @@ void StageCanvas::SetBackground(d2d::ISymbol* background)
 d2d::Vector StageCanvas::TransToBirdView(const d2d::Vector& pos)
 {
 	d2d::Vector ret = d2d::Math::rotateVector(pos, d2d::PI / 4);
-	ret.y *= 0.75f;
+	ret.y *= VIEW_TRANS;
 	return ret;
 }
 
 d2d::Vector StageCanvas::TransToFlatView(const d2d::Vector& pos)
 {
 	d2d::Vector ret = pos;
-	ret.y /= 0.75f;
+	ret.y /= VIEW_TRANS;
 	ret = d2d::Math::rotateVector(ret, - d2d::PI / 4);
 	return ret;
 }

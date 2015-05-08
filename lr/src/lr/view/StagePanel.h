@@ -8,6 +8,7 @@
 namespace lr
 {
 
+class Grids;
 class Quadtree;
 class Layer;
 
@@ -56,6 +57,7 @@ public:
 	const std::vector<Layer*>& GetLayers() const { return m_layers; }
 
 	void BuildGrids(int w, int h);
+	const Grids* GetGrids() const { return m_grids; }
 
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
@@ -70,6 +72,8 @@ private:
 	d2d::ViewlistPanel* m_viewlist;
 
 	d2d::AbstractEditOP* m_arrange_op;
+
+	Grids* m_grids;
 
 	Quadtree* m_sindex;
 
