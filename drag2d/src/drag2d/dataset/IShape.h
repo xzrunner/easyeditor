@@ -32,6 +32,8 @@ public:
 	//
 	virtual IShape* clone() const { return NULL; }
 
+	virtual const char* GetShapeDesc() const = 0;
+
 	virtual bool isContain(const Vector& pos) const = 0;
 	virtual bool isIntersect(const Rect& rect) const = 0;
 

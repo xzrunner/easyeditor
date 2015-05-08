@@ -21,6 +21,7 @@ void IShape::StoreToFile(Json::Value& value,
 						 const std::string& dir) const
 {
 	value["name"] = name;
+	value["type"] = GetShapeDesc();
 }
 
 } // d2d

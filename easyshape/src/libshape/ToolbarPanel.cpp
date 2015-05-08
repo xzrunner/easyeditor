@@ -1,13 +1,8 @@
 #include "ToolbarPanel.h"
 #include "StagePanel.h"
 #include "Symbol.h"
-
-#include "BezierShape.h"
-#include "ChainShape.h"
-#include "CircleShape.h"
-#include "CosineShape.h"
+#include "ShapeType.h"
 #include "PolygonShape.h"
-#include "RectShape.h"
 
 #include "EditRectOP.h"
 #include "EditCircleOP.h"
@@ -131,16 +126,25 @@ void ToolbarPanel::SelectSuitableEditOP()
 		d2d::FetchAllVisitor<d2d::IShape>(shapes));
 	if (shapes.empty()) return;
 
-	if (dynamic_cast<CircleShape*>(shapes[0]))
+	ShapeType type = get_shape_type(shapes[0]->GetShapeDesc());
+	switch (type)
+	{
+	case ST_CIRCLE:
 		setChoice(1);
-	else if (dynamic_cast<RectShape*>(shapes[0]))
+		break;
+	case ST_RECT:
 		setChoice(0); 
-	else if (dynamic_cast<BezierShape*>(shapes[0]))
+		break;
+	case ST_BEZIER:
 		setChoice(4);
-	else if (dynamic_cast<PolygonShape*>(shapes[0]))
+		break;
+	case ST_POLYGON:
 		setChoice(3); 
-	else if (dynamic_cast<ChainShape*>(shapes[0]))
+		break;
+	case ST_CHAIN:
 		setChoice(2); 
+		break;
+	}
 }
 
 }

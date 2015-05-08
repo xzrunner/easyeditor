@@ -20,7 +20,7 @@ void PathNavMesh::DisableRegion(const d2d::ISprite* spr, bool disable)
 	// get bound
 	std::vector<d2d::Vector> bound;
 	const libshape::Sprite* shape = dynamic_cast<const libshape::Sprite*>(spr);
-	if (shape && shape->getSymbol().GetType() == libshape::e_polygon)
+	if (shape && shape->getSymbol().GetShapeType() == libshape::ST_POLYGON)
 	{
 		const std::vector<d2d::IShape*>& shapes = shape->getSymbol().GetShapes();
 		const libshape::PolygonShape* poly = static_cast<const libshape::PolygonShape*>(shapes[0]);

@@ -251,10 +251,26 @@
 					RelativePath="..\..\..\src\libshape\RectShape.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libshape\ShapeType.h"
+				<Filter
+					Name="tools"
 					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\libshape\ShapeFactory.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\ShapeFactory.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\ShapeType.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\ShapeType.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="material"

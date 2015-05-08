@@ -25,6 +25,7 @@ public:
 	//
 	// IShape interface
 	//
+	virtual const char* GetShapeDesc() const { return "bezier"; }
 	virtual bool isContain(const d2d::Vector& pos) const;
 	virtual void Translate(const d2d::Vector& offset);
 	virtual void draw(const d2d::Matrix& mt,

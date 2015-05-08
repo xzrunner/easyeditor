@@ -171,7 +171,7 @@ bool Quadtree::Node::
 IsContain(const d2d::ISprite* spr) const
 {
 	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->getSymbol();
-	assert(shape.GetType() == libshape::e_polygon);
+	assert(shape.GetShapeType() == libshape::ST_POLYGON);
 
 	const std::vector<d2d::IShape*>& shapes = shape.GetShapes();
 	assert(!shapes.empty());
@@ -237,7 +237,7 @@ float Quadtree::Node::
 GetContainArea(const d2d::ISprite* spr) const
 {
 	const libshape::Symbol& shape = static_cast<const libshape::Sprite*>(spr)->getSymbol();
-	assert(shape.GetType() == libshape::e_polygon);
+	assert(shape.GetShapeType() == libshape::ST_POLYGON);
 
 	const std::vector<d2d::IShape*>& shapes = shape.GetShapes();
 	assert(!shapes.empty());

@@ -32,12 +32,6 @@ private:
 	static d2d::IShape* LoadRect(const Json::Value& value);
 	static d2d::IShape* LoadCircle(const Json::Value& value);
 
-	static Json::Value StoreBezier(const BezierShape* bezier);
-	static Json::Value StorePolygon(const std::string& dir, const PolygonShape* poly);
-	static Json::Value StoreChain(const ChainShape* chain);
-	static Json::Value StoreRect(const RectShape* rect);
-	static Json::Value StoreCircle(const CircleShape* circle);
-
 }; // FileIO
 
 }

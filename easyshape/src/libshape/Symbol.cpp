@@ -1,12 +1,7 @@
 #include "Symbol.h"
 #include "FileIO.h"
 
-#include "BezierShape.h"
-#include "ChainShape.h"
-#include "CircleShape.h"
-#include "CosineShape.h"
 #include "PolygonShape.h"
-#include "RectShape.h"
 
 #include <easyimage.h>
 
@@ -221,26 +216,14 @@ void Symbol::LoadBGTriStrip(d2d::ISymbol* bg)
 	}
 }
 
-ShapeType Symbol::GetType() const
+ShapeType Symbol::GetShapeType() const
 {
 	if (m_shapes.empty()) {
-		return e_unknown;
+		return ST_UNKNOWN;
 	}
 
 	d2d::IShape* shape = m_shapes[0];
-	if (dynamic_cast <RectShape*>(shape)) {
-		return e_rect;
-	} else if (dynamic_cast<CircleShape*>(shape)) {
-		return e_circle;
-	} else if (dynamic_cast<BezierShape*>(shape)) {
-		return e_bezier;
-	} else if (dynamic_cast<PolygonShape*>(shape)) {
-		return e_polygon;
-	} else if (dynamic_cast<ChainShape*>(shape)) {
-		return e_chain;
-	} else {
-		return e_unknown;
-	}
+	return get_shape_type(shape->GetShapeDesc());
 }
 
 }

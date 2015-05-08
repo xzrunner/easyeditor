@@ -1,4 +1,5 @@
 #include "NodeCapture.h"
+#include "ShapeType.h"
 
 #include "BezierShape.h"
 #include "ChainShape.h"
@@ -44,14 +45,28 @@ void NodeCapture::RectQueryVisitor::
 visit(d2d::Object* object, bool& bFetchNext)
 {
 	bFetchNext = true;
-	if (BezierShape* bezier = dynamic_cast<BezierShape*>(object))
-		bFetchNext = !visit(bezier);
-	else if (ChainShape* chain = dynamic_cast<ChainShape*>(object))
-		bFetchNext = !visit(chain);
-	else if (CircleShape* circle = dynamic_cast<CircleShape*>(object))
-		bFetchNext = !visit(circle);
-	else if (RectShape* rect = dynamic_cast<RectShape*>(object))
-		bFetchNext = !visit(rect);
+
+	d2d::IShape* shape = dynamic_cast<d2d::IShape*>(object);
+	if (!shape) {
+		return;
+	}
+
+	ShapeType type = get_shape_type(shape->GetShapeDesc());
+	switch (type)
+	{
+	case ST_BEZIER:
+		bFetchNext = !visit(static_cast<BezierShape*>(shape));
+		break;
+	case ST_CHAIN: case ST_POLYGON: case ST_COMPLEX_POLYGON: case ST_COSINE_CURVE:
+		bFetchNext = !visit(static_cast<ChainShape*>(shape));
+		break;
+	case ST_CIRCLE:
+		bFetchNext = !visit(static_cast<CircleShape*>(shape));
+		break;
+	case ST_RECT:
+		bFetchNext = !visit(static_cast<RectShape*>(shape));
+		break;
+	}
 }
 
 bool NodeCapture::RectQueryVisitor::

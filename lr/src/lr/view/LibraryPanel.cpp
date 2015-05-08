@@ -56,7 +56,7 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 
 	d2d::OneFloatValue* capture_val = new d2d::OneFloatValueStatic(10);
 	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
-	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawComplexPolygonOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
+	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
 
 	addPage(new LibraryPage(m_notebook, "µØÐÎ", paste_op));
 	addPage(new LibraryPage(m_notebook, "×°ÊÎ", paste_op));

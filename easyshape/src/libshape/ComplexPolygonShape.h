@@ -11,6 +11,7 @@ class Material;
 class ComplexPolygonShape : public PolygonShape
 {
 public:
+	ComplexPolygonShape();
 	ComplexPolygonShape(const ComplexPolygonShape& poly);
 	ComplexPolygonShape(const std::vector<d2d::Vector>& outline,
 		const std::vector<std::vector<d2d::Vector> >& holes);
@@ -23,6 +24,7 @@ public:
 	//
 	// IShape interface
 	//
+	virtual const char* GetShapeDesc() const { return "complex-polygon"; }
 	virtual bool isContain(const d2d::Vector& pos) const;
 	virtual bool isIntersect(const d2d::Rect& rect) const;
 	virtual void Translate(const d2d::Vector& offset);

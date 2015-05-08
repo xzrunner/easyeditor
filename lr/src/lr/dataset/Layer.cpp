@@ -1,5 +1,7 @@
 #include "Layer.h"
 
+#include <easyshape.h>
+
 namespace lr
 {
 
@@ -72,9 +74,10 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 	m_editable = val["editable"].asBool();
 	m_visible = val["visible"].asBool();
 
-	int i = 0;
-	Json::Value spr_val = val["sprite"][i++];
-	while (!spr_val.isNull()) {
+	int idx = 0;
+	Json::Value spr_val = val["sprite"][idx++];
+	while (!spr_val.isNull()) 
+	{
 		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = NULL;
 		try {
@@ -99,7 +102,16 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 			std::cout << e.what();
 		}
 
-		spr_val = val["sprite"][i++];
+		spr_val = val["sprite"][idx++];
+	}
+
+	idx = 0;
+	Json::Value shape_val = val["shape"][idx++];
+	while (!shape_val.isNull()) 
+	{
+		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
+		m_shapes.push_back(shape);
+		shape_val = val["shape"][idx++];
 	}
 }
 

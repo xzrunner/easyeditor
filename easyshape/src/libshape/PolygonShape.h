@@ -24,6 +24,7 @@ public:
 	//
 	// IShape interface
 	//
+	virtual const char* GetShapeDesc() const { return "polygon"; }
 	virtual bool isContain(const d2d::Vector& pos) const;
 	// todo
 	//virtual bool isIntersect(const d2d::Rect& rect) const;

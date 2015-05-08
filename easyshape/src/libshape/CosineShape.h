@@ -9,6 +9,7 @@ namespace libshape
 class CosineShape : public ChainShape
 {
 public:
+	CosineShape();
 	CosineShape(const CosineShape& curve);
 	CosineShape(const std::vector<d2d::Vector>& vertices);
 	virtual ~CosineShape();
@@ -21,6 +22,7 @@ public:
 	//
 	// IShape interface
 	//
+	virtual const char* GetShapeDesc() const { return "cosine-curve"; }
 	virtual void Translate(const d2d::Vector& offset);
 	virtual void draw(const d2d::Matrix& mt,
 		const d2d::Colorf& color = d2d::Colorf(0, 0, 0)) const;

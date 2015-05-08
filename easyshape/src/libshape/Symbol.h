@@ -43,8 +43,7 @@ public:
 
 	void StoreToFile(const char* filename) const;
 
-	// todo
-	ShapeType GetType() const;
+	ShapeType GetShapeType() const;
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 

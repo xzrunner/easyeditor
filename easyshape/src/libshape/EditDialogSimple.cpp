@@ -3,13 +3,6 @@
 #include "Symbol.h"
 #include "Sprite.h"
 
-#include "BezierShape.h"
-#include "ChainShape.h"
-#include "CircleShape.h"
-#include "CosineShape.h"
-#include "PolygonShape.h"
-#include "RectShape.h"
-
 #include "EditRectOP.h"
 #include "EditCircleOP.h"
 #include "EditPolylineOP.h"
@@ -54,20 +47,20 @@ void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 {
 	d2d::AbstractEditOP* op = NULL;
 
-	ShapeType type = static_cast<Sprite*>(edited)->getSymbol().GetType();
+	ShapeType type = static_cast<Sprite*>(edited)->getSymbol().GetShapeType();
 	switch (type)
 	{
-	case e_rect:
+	case ST_RECT:
 		op = new EditRectOP(m_stage, m_stage, NULL, &m_capture);
 		break;
-	case e_circle:
+	case ST_CIRCLE:
 		op = new EditCircleOP(m_stage, m_stage, NULL, &m_capture);
 		break;
-	case e_chain: case e_polygon:
+	case ST_CHAIN: case ST_POLYGON:
 		op = new EditPolylineOP<DrawPolygonOP, 
 			d2d::SelectShapesOP>(m_stage, m_stage, NULL, new d2d::OneFloatValueStatic(5), NULL); 
 		break;
-	case e_bezier:
+	case ST_BEZIER:
 		op = new EditBezierOP(m_stage, m_stage, NULL, &m_capture);
 		break;
 	}

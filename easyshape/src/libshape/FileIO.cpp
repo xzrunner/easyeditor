@@ -1,4 +1,5 @@
 #include "FileIO.h"
+#include "ShapeType.h"
 
 #include "BezierShape.h"
 #include "ChainShape.h"
@@ -92,6 +93,7 @@ d2d::IShape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 {
 	d2d::IShape* shape = NULL;
 
+	// old
 	if (value.isNull())
 		;
 	else if (!value["bezier"].isNull())
@@ -105,6 +107,9 @@ d2d::IShape* FileIO::LoadShape(const std::string& dir, const Json::Value& value)
 	else if (!value["circle"].isNull())
 		shape = LoadCircle(value["circle"]);
 
+// 	// new
+// 	shape = ShapeFactory::CreateShapeFromFile(value, dir);
+
 	return shape;
 }
 
@@ -112,17 +117,33 @@ Json::Value FileIO::StoreShape(const std::string& dir, d2d::IShape* shape)
 {
 	Json::Value value;
 
-	if (BezierShape* bezier = dynamic_cast<BezierShape*>(shape)) {
-		value["bezier"] = StoreBezier(bezier);
-	} else if (PolygonShape* poly = dynamic_cast<PolygonShape*>(shape)) {
-		value["polygon"] = StorePolygon(dir, poly);
-	} else if (ChainShape* chain = dynamic_cast<ChainShape*>(shape)) {
-		value["chain"] = StoreChain(chain);
-	} else if (RectShape* rect = dynamic_cast<RectShape*>(shape)) {
-		value["rect"] = StoreRect(rect);
-	} else if (CircleShape* circle = dynamic_cast<CircleShape*>(shape)) {
-		value["circle"] = StoreCircle(circle);
-	}
+// 	// old
+// 	std::string title;
+// 
+// 	ShapeType type = get_shape_type(shape->GetShapeDesc());
+// 	switch (type)
+// 	{
+// 	case ST_BEZIER:
+// 		title = "bezier";
+// 		break;
+// 	case ST_POLYGON:
+// 		title = "polygon";
+// 		break;
+// 	case ST_CHAIN:
+// 		title = "chain";
+// 		break;
+// 	case ST_RECT:
+// 		title = "rect";
+// 		break;
+// 	case ST_CIRCLE:
+// 		title = "circle";
+// 		break;
+// 	}
+// 
+// 	shape->StoreToFile(value[title], dir);
+
+	// new
+	shape->StoreToFile(value, dir);
 
 	return value;
 }
@@ -160,41 +181,6 @@ d2d::IShape* FileIO::LoadCircle(const Json::Value& value)
 	CircleShape* circle = new CircleShape();
 	circle->LoadFromFile(value, "");
 	return circle;
-}
-
-Json::Value FileIO::StoreBezier(const BezierShape* bezier)
-{
-	Json::Value value;
-	bezier->StoreToFile(value, "");
-	return value;
-}
-
-Json::Value FileIO::StorePolygon(const std::string& dir, const PolygonShape* poly)
-{
- 	Json::Value value;
-	poly->StoreToFile(value, dir);
-	return value;
-}
-
-Json::Value FileIO::StoreChain(const ChainShape* chain)
-{
-	Json::Value value;
-	chain->StoreToFile(value, "");
-	return value;
-}
-
-Json::Value FileIO::StoreRect(const RectShape* rect)
-{
-	Json::Value value;
-	rect->StoreToFile(value, "");
-	return value;
-}
-
-Json::Value FileIO::StoreCircle(const CircleShape* circle)
-{
-	Json::Value value;
-	circle->StoreToFile(value, "");
-	return value;
 }
 
 }

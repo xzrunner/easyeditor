@@ -1,18 +1,24 @@
 #ifndef _LIBSHAPE_SHAPE_TYPE_H_
 #define _LIBSHAPE_SHAPE_TYPE_H_
 
+#include <string>
+
 namespace libshape
 {
 
 enum ShapeType
 {
-	e_unknown = 0,
-	e_rect,
-	e_circle,
-	e_chain,
-	e_polygon,
-	e_bezier
+	ST_UNKNOWN = 0,
+	ST_RECT,
+	ST_CIRCLE,
+	ST_CHAIN,
+	ST_COSINE_CURVE,
+	ST_POLYGON,
+	ST_COMPLEX_POLYGON,
+	ST_BEZIER
 }; // ShapeType
+
+ShapeType get_shape_type(const std::string& desc);
 
 }
 

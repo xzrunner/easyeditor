@@ -7,6 +7,10 @@ namespace libshape
 
 const float CosineShape::SAMPLING_WIDTH = 10.0f;
 
+CosineShape::CosineShape()
+{
+}
+
 CosineShape::CosineShape(const CosineShape& curve)
 	: ChainShape(curve)
 {

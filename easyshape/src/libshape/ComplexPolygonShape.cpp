@@ -4,6 +4,10 @@
 namespace libshape
 {
 
+ComplexPolygonShape::ComplexPolygonShape()
+{
+}
+
 ComplexPolygonShape::ComplexPolygonShape(const ComplexPolygonShape& poly)
 	: PolygonShape(poly)
 {
