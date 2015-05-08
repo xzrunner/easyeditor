@@ -5,6 +5,8 @@
 
 #include <drag2d.h>
 
+namespace lr { class Grids; }
+
 namespace edb
 {
 
@@ -25,6 +27,11 @@ public:
 
 private:
 	void Run(const std::string& filepath);
+
+	void ParserLayer(const Json::Value& src_val, const std::string& dir,
+		const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val);
+	void ParserPointLayer(const Json::Value& src_val, const std::string& dir,
+		int layer_idx, const char* name, Json::Value& out_val);
 
 }; // LRToShapeTable
 

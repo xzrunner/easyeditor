@@ -60,10 +60,28 @@ void LRToShapeTable::Run(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
-	// collision region
+	ParserPointLayer(lr_val, dir, 3, "point", out_val);
+	ParserLayer(lr_val, dir, grids, 4, "path", out_val);
+	ParserLayer(lr_val, dir, grids, 5, "region", out_val);
+	ParserLayer(lr_val, dir, grids, 6, "collision region", out_val);
+
+	std::string outfile = filepath.substr(0, filepath.find_last_of(".")) + "_shapes.json";
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(outfile.c_str());
+	std::locale::global(std::locale("C"));
+	writer.write(fout, out_val);
+	fout.close();
+}
+
+void LRToShapeTable::ParserLayer(const Json::Value& src_val, const std::string& dir,
+								 const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val)
+{
 	int idx = 0;
-	Json::Value spr_val = lr_val["layer"][(int)6]["sprite"][idx++];
-	while (!spr_val.isNull()) {
+	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	while (!spr_val.isNull()) 
+	{
 		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
 		assert(symbol);
@@ -92,23 +110,44 @@ void LRToShapeTable::Run(const std::string& filepath)
 			}
 		}
 
-		int sz = out_val["collision region"].size();
-		out_val["collision region"][sz] = shape_val;
+		int sz = out_val[name].size();
+		out_val[name][sz] = shape_val;
 
 		sprite->Release();
 		symbol->Release();
 
-		spr_val = lr_val["layer"][(int)6]["sprite"][idx++];
+		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	}
+}
 
-	std::string outfile = filepath.substr(0, filepath.find_last_of(".")) + "_shape.json";
+void LRToShapeTable::ParserPointLayer(const Json::Value& src_val, const std::string& dir,
+									  int layer_idx, const char* name, Json::Value& out_val)
+{
+	int idx = 0;
+	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	while (!spr_val.isNull()) 
+	{
+		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
+		assert(symbol);
 
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(outfile.c_str());
-	std::locale::global(std::locale("C"));
-	writer.write(fout, out_val);
-	fout.close();
+		Json::Value shape_val;
+		shape_val["name"] = spr_val["name"];
+
+		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		sprite->load(spr_val);
+
+		shape_val["x"] = sprite->getPosition().x;
+		shape_val["y"] = sprite->getPosition().y;
+
+		int sz = out_val[name].size();
+		out_val[name][sz] = shape_val;
+
+		sprite->Release();
+		symbol->Release();
+
+		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	}
 }
 
 }
