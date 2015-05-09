@@ -73,22 +73,34 @@ void RightPopupMenu::FetchCandidateAnimFiles(const std::string& filepath)
 		return;
 	}
 
-	AnimFileName name(filepath);
-	if (!name.IsValid()) {
+	std::string filename = d2d::FilenameTools::getFilename(filepath);
+	if (!AnimFileName::CanAccept(filename)) {
 		return;
 	}
 
+	AnimFileName name(filepath);
+
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	wxArrayString files;
-	d2d::FilenameTools::fetchAllFiles(dir, files);
+	d2d::FilenameTools::fetchAllFiles(dir, files, d2d::FileNameParser::e_complex);
+
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
+// 		if (!d2d::FileNameParser::isType(files[i], d2d::FileNameParser::e_complex) ||
+// 			!AnimFileName::CanAccept(d2d::FilenameTools::getFilename(files[i]).ToStdString())) {
+// 			continue;
+// 		}
+
+		if (!AnimFileName::CanAccept(d2d::FilenameTools::getFilename(files[i]).ToStdString())) {
+			continue;
+		}
+
 		wxFileName filename(files[i]);
 		filename.Normalize();
 		std::string filepath = filename.GetFullPath().ToStdString();
 
 		AnimFileName name_other(filepath);
-		if (name_other.IsValid() && name.SameExceptColor(name_other)) {
+		if (name.SameExceptColor(name_other)) {
 			m_anim_files.push_back(name_other);
 		}
 	}
@@ -104,32 +116,36 @@ AnimFileName(const std::string& filepath)
 {
 	std::string filename = d2d::FilenameTools::getFilename(filepath);
 
-	while (true)
-	{
-		std::string str = filename;
-		int pos = str.find_first_of("_");
-		if (pos == std::string::npos) { break; }
-		character = str.substr(0, pos);
+	int last_pos = 0;
 
-		str = str.substr(pos+1);
-		pos = str.find_first_of("_");
-		if (pos == std::string::npos) { break; }
-		action = str.substr(0, pos);
+	int pos = filename.find_first_of("_", last_pos);
+	character = filename.substr(last_pos, pos);
+	last_pos = pos + 1;
 
-		str = str.substr(pos+1);
-		pos = str.find_first_of("_");
-		if (pos == std::string::npos) { break; }
-		direction = str.substr(0, pos);
+	pos = filename.find_first_of("_", last_pos);
+	action = filename.substr(last_pos, pos - last_pos);
+	last_pos = pos + 1;
 
-		str = str.substr(pos+1);
-		pos = str.find_first_of("_");
-		if (pos == std::string::npos) { break; }
-		color = str.substr(0, pos);
+	pos = filename.find_first_of("_", last_pos);
+	direction = filename.substr(last_pos, pos - last_pos);
+	last_pos = pos + 1;
 
-		postfix = str.substr(pos+1);
+	pos = filename.find_first_of("_", last_pos);
+	color = filename.substr(last_pos, pos - last_pos);
+	last_pos = pos + 1;
 
-		break;
+	postfix = filename.substr(pos+1);
+}
+
+bool RightPopupMenu::AnimFileName::CanAccept(const std::string& filepath)
+{
+	int count = 0;
+	for (int i = 0, n = filepath.size(); i < n; ++i) {
+		if (filepath[i] == '_') {
+			++count;
+		}
 	}
+	return count == 4;
 }
 
 bool RightPopupMenu::AnimFileName::

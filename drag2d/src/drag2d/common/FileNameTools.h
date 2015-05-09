@@ -2,6 +2,8 @@
 
 #include <wx/wx.h>
 
+#include "FileNameParser.h"
+
 namespace d2d
 {
 	class FilenameTools
@@ -48,6 +50,7 @@ namespace d2d
 		static void formatSeparators(std::string& filepath);
 
 		static void fetchAllFiles(const std::string& dirpath, wxArrayString& files);
+		static void fetchAllFiles(const std::string& dirpath, wxArrayString& files, FileNameParser::Type type);
 
 		static wxString FormatFilepath(const wxString& filepath);
 

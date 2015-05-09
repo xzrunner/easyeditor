@@ -24,7 +24,7 @@ private:
 	{
 		AnimFileName(const std::string& filepath);
 
-		bool IsValid() const { return !postfix.empty(); }
+		static bool CanAccept(const std::string& filepath);
 
 		bool SameExceptColor(const AnimFileName& name) const;
 
