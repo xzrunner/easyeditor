@@ -61,9 +61,7 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		const AnimFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(item.filepath);
-		static_cast<ecomplex::Sprite*>(m_sprite)->ChangeSymbol(static_cast<ecomplex::Symbol*>(symbol));
-
-		//	int zz = 0;
+		static_cast<ecomplex::Sprite*>(m_sprite)->setSymbol(symbol);
 	}
 }
 

@@ -25,11 +25,6 @@ public:
 	virtual const Symbol& getSymbol() const;
 	virtual void setSymbol(d2d::ISymbol* symbol);
 
-	// todo
-	void ChangeSymbol(Symbol* symbol) {
-		m_symbol = symbol;
-	}
-
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));
 	}
