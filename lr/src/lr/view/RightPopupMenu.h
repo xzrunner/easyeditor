@@ -17,7 +17,7 @@ public:
 	void OnRightPopupMenu(int id);
 
 private:
-	void FetchCandidateItems(const std::string& filepath);
+	void FetchCandidateAnimFiles(const std::string& filepath);
 
 private:
 	struct AnimFileName
@@ -37,14 +37,15 @@ private:
 		std::string postfix;
 	};
 
-	static const int MENU_START_ID = 200;
+	static const int MENU_OPEN_WITH_SHAPE_ID = 200;
+	static const int MENU_COLOR_START_ID = 201;
 
 private:
 	StagePanel* m_stage;
 
 	d2d::ISprite* m_sprite;
 
-	std::vector<AnimFileName> m_items;
+	std::vector<AnimFileName> m_anim_files;
 
 }; // RightPopupMenu
 

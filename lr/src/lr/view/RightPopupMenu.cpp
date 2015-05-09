@@ -16,14 +16,21 @@ RightPopupMenu::RightPopupMenu(StagePanel* stage)
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 {
+	// open with shape
+	menu.AppendSeparator();
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_OPEN_WITH_SHAPE_ID);
+	menu.Append(MENU_OPEN_WITH_SHAPE_ID, "Open With EasyShape");
+
+	// color
+
 // 	Layer* layer = m_stage->GetCurrLayer();
 // 	if (layer->GetName() != "µ¥Î»") {
 // 		return;
 // 	}
 
 	std::string filepath = spr->getSymbol().getFilepath();
-	FetchCandidateItems(filepath);
-	if (m_items.empty()) {
+	FetchCandidateAnimFiles(filepath);
+	if (m_anim_files.empty()) {
 		return;
 	}
 
@@ -31,26 +38,38 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 
 	menu.AppendSeparator();
 
-	for (int i = 0, n = m_items.size(); i < n; ++i) {
-		int id = MENU_START_ID+i;
+	for (int i = 0, n = m_anim_files.size(); i < n; ++i) {
+		int id = MENU_COLOR_START_ID+i;
 		m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, id);
-		menu.Append(id, m_items[i].color);
+		menu.Append(id, m_anim_files[i].color);
 	}
 }
 
 void RightPopupMenu::OnRightPopupMenu(int id)
 {
-	const AnimFileName& item = m_items[id - MENU_START_ID];
+	if (id == MENU_OPEN_WITH_SHAPE_ID)
+	{
+		std::vector<d2d::ISprite*> selected;
+		m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+		if (!selected.empty()) {
+			std::string cmd = "easyshape_new.exe " + selected[0]->getSymbol().getFilepath();
+			WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
+		}
+	}
+	else
+	{
+		const AnimFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(item.filepath);
-	static_cast<ecomplex::Sprite*>(m_sprite)->ChangeSymbol(static_cast<ecomplex::Symbol*>(symbol));
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(item.filepath);
+		static_cast<ecomplex::Sprite*>(m_sprite)->ChangeSymbol(static_cast<ecomplex::Symbol*>(symbol));
 
-//	int zz = 0;
+		//	int zz = 0;
+	}
 }
 
-void RightPopupMenu::FetchCandidateItems(const std::string& filepath)
+void RightPopupMenu::FetchCandidateAnimFiles(const std::string& filepath)
 {
-	m_items.clear();
+	m_anim_files.clear();
 
 	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 		return;
@@ -72,7 +91,7 @@ void RightPopupMenu::FetchCandidateItems(const std::string& filepath)
 
 		AnimFileName name_other(filepath);
 		if (name_other.IsValid() && name.SameExceptColor(name_other)) {
-			m_items.push_back(name_other);
+			m_anim_files.push_back(name_other);
 		}
 	}
 }

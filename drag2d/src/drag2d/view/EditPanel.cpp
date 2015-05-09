@@ -16,7 +16,6 @@ BEGIN_EVENT_TABLE(EditPanel, wxPanel)
 
 //	EVT_MENU(Menu_UpOneLayer, EditPanel::onMenuUpOneLayer)
 // 	EVT_MENU(Menu_DownOneLayer, EditPanel::onMenuDownOneLayer)
-// 	EVT_MENU(Menu_OpenWithShape, EditPanel::onMenuOpenWithEasyShape)
 // 	EVT_MENU(Menu_InsertToDTex, EditPanel::onMenuInsertToDTex)
 // 	EVT_MENU(Menu_RemoveFromDTex, EditPanel::onMenuRemoveFromDTex)
 END_EVENT_TABLE()
@@ -25,7 +24,6 @@ std::string EditPanel::menu_entries[] =
 {
 	"Up One Layer",
 	"Down One Layer",
-	"Open With EasyShape",
 	"Insert To DTex",
 	"Remove From DTex",
 };
@@ -41,7 +39,6 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuUpOneLayer, this, Menu_UpOneLayer);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuDownOneLayer, this, Menu_DownOneLayer);
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuOpenWithEasyShape, this, Menu_OpenWithShape);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuInsertToDTex, this, Menu_InsertToDTex);
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuRemoveFromDTex, this, Menu_RemoveFromDTex);
 }
@@ -308,14 +305,6 @@ void EditPanel::onMenuDownOneLayer(wxCommandEvent& event)
 {
 	if (m_editOP) {
 		m_editOP->onPopMenuSelected(Menu_DownOneLayer);
-		Refresh();
-	}
-}
-
-void EditPanel::onMenuOpenWithEasyShape(wxCommandEvent& event)
-{
-	if (m_editOP) {
-		m_editOP->onPopMenuSelected(Menu_OpenWithShape);
 		Refresh();
 	}
 }
