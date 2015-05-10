@@ -1,7 +1,7 @@
 #ifndef _LR_RIGHT_POPUP_MENU_H_
 #define _LR_RIGHT_POPUP_MENU_H_
 
-#include <drag2d.h>
+#include "dataset/CharacterFileName.h"
 
 namespace lr
 {
@@ -20,23 +20,6 @@ private:
 	void FetchCandidateAnimFiles(const std::string& filepath);
 
 private:
-	struct AnimFileName
-	{
-		AnimFileName(const std::string& filepath);
-
-		static bool CanAccept(const std::string& filepath);
-
-		bool SameExceptColor(const AnimFileName& name) const;
-
-		std::string filepath;
-
-		std::string character;
-		std::string action;
-		std::string direction;
-		std::string color;
-		std::string postfix;
-	};
-
 	static const int MENU_OPEN_WITH_SHAPE_ID = 200;
 	static const int MENU_COLOR_START_ID = 201;
 
@@ -45,7 +28,7 @@ private:
 
 	d2d::ISprite* m_sprite;
 
-	std::vector<AnimFileName> m_anim_files;
+	std::vector<CharacterFileName> m_anim_files;
 
 }; // RightPopupMenu
 

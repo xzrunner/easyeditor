@@ -322,6 +322,22 @@
 			Name="dataset"
 			>
 			<File
+				RelativePath="..\..\..\src\lr\dataset\CharacterAllDirections.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\CharacterAllDirections.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\CharacterFileName.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\dataset\CharacterFileName.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\lr\dataset\Grids.cpp"
 				>
 			</File>
