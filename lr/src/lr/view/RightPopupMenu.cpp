@@ -16,10 +16,28 @@ RightPopupMenu::RightPopupMenu(StagePanel* stage)
 
 void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 {
+	wxLogDebug("SetRightPopupMenu 0");
+
 	// open with shape
 	menu.AppendSeparator();
 	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_OPEN_WITH_SHAPE_ID);
 	menu.Append(MENU_OPEN_WITH_SHAPE_ID, "Open With EasyShape");
+
+	// for anim file
+	m_sprite = spr;
+	std::string filepath = spr->getSymbol().getFilepath();
+	if (!CharacterFileName::IsValidFilepath(filepath)) {
+		return;
+	}
+
+	wxLogDebug("SetRightPopupMenu 1");
+
+	// rotate
+	menu.AppendSeparator();
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_ROTATE_LEFT_ID);
+	menu.Append(MENU_ROTATE_LEFT_ID, "Rotate Left");
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &StagePanel::OnRightPopupMenu, m_stage, MENU_ROTATE_RIGHT_ID);
+	menu.Append(MENU_ROTATE_RIGHT_ID, "Rotate Right");
 
 	// color
 
@@ -28,13 +46,14 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 // 		return;
 // 	}
 
-	std::string filepath = spr->getSymbol().getFilepath();
+	wxLogDebug("SetRightPopupMenu 2");
+
 	FetchCandidateAnimFiles(filepath);
 	if (m_anim_files.empty()) {
 		return;
 	}
 
-	m_sprite = spr;
+	wxLogDebug("SetRightPopupMenu 3");
 
 	menu.AppendSeparator();
 
@@ -56,6 +75,32 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 			WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
 		}
 	}
+	else if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
+	{
+		std::string filepath = m_sprite->getSymbol().getFilepath();
+		assert(CharacterFileName::IsValidFilepath(filepath));
+		CharacterFileName name(filepath);
+		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');
+		if (m_sprite->getMirrorX()) {
+			dir = 10 - dir;
+		}
+
+		bool rot_left = id == MENU_ROTATE_LEFT_ID;
+		if (rot_left) { --dir; }
+		else { ++dir; }
+		if (dir == 0) { dir = 8; }
+		else if (dir == 9) { dir = 1; }
+
+		d2d::ISymbol* symbol = m_stage->GetCharaDirs()->GetSymbolByDir(filepath, dir);
+		static_cast<ecomplex::Sprite*>(m_sprite)->setSymbol(symbol);
+
+		
+		if (dir >= 1 && dir <= 5) {
+			m_sprite->setMirror(false, false);
+		} else {
+			m_sprite->setMirror(true, false);
+		}
+	}
 	else
 	{
 		const CharacterFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
@@ -68,10 +113,6 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 void RightPopupMenu::FetchCandidateAnimFiles(const std::string& filepath)
 {
 	m_anim_files.clear();
-
-	if (!CharacterFileName::IsValidFilepath(filepath)) {
-		return;
-	}
 
 	CharacterFileName name(filepath);
 

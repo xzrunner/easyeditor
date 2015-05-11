@@ -66,6 +66,8 @@ public:
 
 	Layer* GetCurrLayer() const;
 
+	const CharacterAllDirections* GetCharaDirs() const { return &m_chara_dirs; }
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 

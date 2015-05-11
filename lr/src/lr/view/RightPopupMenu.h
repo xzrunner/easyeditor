@@ -21,7 +21,10 @@ private:
 
 private:
 	static const int MENU_OPEN_WITH_SHAPE_ID = 200;
-	static const int MENU_COLOR_START_ID = 201;
+	static const int MENU_ROTATE_LEFT_ID = 201;
+	static const int MENU_ROTATE_RIGHT_ID = 202;
+
+	static const int MENU_COLOR_START_ID = 210;
 
 private:
 	StagePanel* m_stage;

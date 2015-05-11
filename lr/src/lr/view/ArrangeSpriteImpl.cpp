@@ -53,26 +53,10 @@ Rotate(const d2d::Vector& dst)
 		d2d::ISprite* spr = sprs[i];
 		std::string filepath = spr->getSymbol().getFilepath();
 		if (!CharacterFileName::IsValidFilepath(filepath)) {
-			continue;
+			d2d::Vector center = spr->getPosition() + spr->getOffset();
+			float angle = d2d::Math::getAngleInDirection(center, m_last_pos, dst);
+			spr->rotate(angle);
 		}
-
-		d2d::Vector center = spr->getPosition() + spr->getOffset();
-		float angle = d2d::Math::getAngleInDirection(center, m_last_pos, dst);
-
-		int old_pos = GetAnglePos(spr->getAngle()),
-			new_pos = GetAnglePos(spr->getAngle() + angle);
-		if (old_pos != new_pos) 
-		{
-			d2d::ISymbol* symbol = m_dirs->GetSymbolByDir(filepath, new_pos);
-			static_cast<ecomplex::Sprite*>(spr)->setSymbol(symbol);
-			if (new_pos >= 1 && new_pos <= 5) {
-				spr->setMirror(false, false);
-			} else {
-				spr->setMirror(true, false);
-			}
-		}
-
-		spr->rotate(angle);
 	}
 }
 

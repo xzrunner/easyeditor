@@ -12,7 +12,7 @@ public:
 
 	void BuildSymbolDirections(const CharacterFileName& name);
 
-	d2d::ISymbol* GetSymbolByDir(const std::string& filepath, int dir_pos);
+	d2d::ISymbol* GetSymbolByDir(const std::string& filepath, int dir_pos) const;
 
 private:
 	static const int DIR_COUNT = 5;
