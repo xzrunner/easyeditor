@@ -65,6 +65,7 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 	addPage(new LibraryPage(m_notebook, "Â·¾¶", draw_line_op));
 	addPage(new LibraryPage(m_notebook, "ÇøÓò", draw_poly_op));
 	addPage(new LibraryPage(m_notebook, "Åö×²ÇøÓò", draw_poly_op));
+	addPage(new LibraryPage(m_notebook, "ÉãÏñ»ú", paste_op));
 
 	paste_op->Release();
 	draw_line_op->Release();
