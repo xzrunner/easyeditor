@@ -197,11 +197,34 @@ void ParticleSystem::update(float dt)
 
 		if (p->life > 0)
 		{
+			// up acc
 			p->speed[2] -= gravity * dt;
+
+			// up angle
+			if (orient_to_movement) 
+			{
+				d2d::Vector pos_old = TransCoords3To2(p->position);
+
+				float _pos[3];
+				_pos[0] = p->position[0] + p->speed[0] * dt;
+				_pos[1] = p->position[1] + p->speed[1] * dt;
+				_pos[2] = p->position[2] + p->speed[2] * dt;
+				d2d::Vector pos_new = TransCoords3To2(_pos);
+
+				p->angle = d2d::Math::getLineAngle(pos_old, pos_new);
+			} 
+			else 
+			{
+				p->rotate -= inertia * dt;
+				if (p->rotate < 0) p->rotate = 0;
+				if (p->position[2] > 0.1f)
+					p->angle += p->rotate * dt;
+			}
+
+			// up position
 			p->position[0] += p->speed[0] * dt;
 			p->position[1] += p->speed[1] * dt;
 			p->position[2] += p->speed[2] * dt;
-
 			if (p->position[2] < 0)
 			{
 				if (bounce)
@@ -217,11 +240,6 @@ void ParticleSystem::update(float dt)
 					p->speed[0] = p->speed[1] = p->speed[2] = 0;
 				}
 			}
-
-			p->rotate -= inertia * dt;
-			if (p->rotate < 0) p->rotate = 0;
-			if (p->position[2] > 0.1f)
-				p->angle += p->rotate * dt;
 
 			p++;
 		}

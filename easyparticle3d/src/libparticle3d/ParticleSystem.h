@@ -146,6 +146,7 @@ public:
 	void setBounce(bool open) { bounce = open; }
 	void setAdditiveBlend(bool open) { additive_blend = open; }
 	void setStartRadius(int val) { start_radius = val; }
+	void SetOrientToMovement(bool open) { orient_to_movement = open; }
 
 	void addChild(ParticleChild* child) { 
 		children.push_back(child); 

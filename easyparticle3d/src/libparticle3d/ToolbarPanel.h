@@ -44,6 +44,7 @@ private:
 	void onSetBounce(wxCommandEvent& event);
 	void onSetAdditiveBlend(wxCommandEvent& event);
 	void onSetStartRadius(wxScrollEvent& event);
+	void OnSetOrientToMovement(wxCommandEvent& event);
 
 private:
 	static const float COUNT;

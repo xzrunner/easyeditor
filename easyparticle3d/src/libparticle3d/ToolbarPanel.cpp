@@ -310,6 +310,7 @@ wxSizer* ToolbarPanel::initLayout()
 	// orient_to_movement
 	{
 		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, wxT("Orient to Movement"));	
+		Connect(m_orient_to_movement->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetOrientToMovement));
 		leftSizer->Add(m_orient_to_movement);
 	}
 	leftSizer->AddSpacer(10);
@@ -464,6 +465,11 @@ void ToolbarPanel::onSetAdditiveBlend(wxCommandEvent& event)
 void ToolbarPanel::onSetStartRadius(wxScrollEvent& event)
 {
 	m_stage->m_ps->setStartRadius(m_start_radius->GetValue());
+}
+
+void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)
+{
+	m_stage->m_ps->SetOrientToMovement(event.IsChecked());
 }
 
 //////////////////////////////////////////////////////////////////////////
