@@ -62,15 +62,15 @@ void Recorder::Clear()
 
 void Recorder::StoreToAnimFile(const std::string& filepath) const
 {
-	eanim::Symbol* symbol = new eanim::Symbol;
-	eanim::Symbol::Layer* layer = new eanim::Symbol::Layer;
+	libanim::Symbol* symbol = new libanim::Symbol;
+	libanim::Symbol::Layer* layer = new libanim::Symbol::Layer;
 	// symbol->name = ani->export_name;
 	symbol->setFPS(30);
 	// particle 60fps, while anim 30fps
 	for (int i = 0, n = m_frames.size(); i*2 < n; ++i)
 //	for (int i = 0, n = m_frames.size(); i < n; ++i)
 	{
-		eanim::Symbol::Frame* frame = new eanim::Symbol::Frame;
+		libanim::Symbol::Frame* frame = new libanim::Symbol::Frame;
 		frame->index = i + 1;
 		frame->bClassicTween = false;
 		Frame* record_frame = m_frames[i*2];
@@ -91,7 +91,7 @@ void Recorder::StoreToAnimFile(const std::string& filepath) const
 	}
 	symbol->m_layers.push_back(layer);
 
-	eanim::FileSaver::store(filepath.c_str(), *symbol);
+	libanim::FileSaver::store(filepath.c_str(), *symbol);
 	delete symbol;
 }
 

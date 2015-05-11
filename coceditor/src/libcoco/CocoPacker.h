@@ -7,7 +7,7 @@
 
 namespace ebuilder { class CodeGenerator; }
 namespace ecomplex { class Symbol; }
-namespace eanim { class Symbol; }
+namespace libanim { class Symbol; }
 namespace escale9 { class Symbol; }
 namespace emesh { class Symbol; class Sprite; }
 namespace eterrain2d { class Symbol; class Sprite; }
@@ -46,7 +46,7 @@ private:
 	void ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc = e_null, PicFixType tscreen = e_null);
 	void ParserPicture(const d2d::ImageSymbol* symbol, PicFixType tsrc = e_null);
 	void ParserComplex(const ecomplex::Symbol* symbol);
-	void ParserAnimation(const eanim::Symbol* symbol);
+	void ParserAnimation(const libanim::Symbol* symbol);
 	void ParserScale9(const escale9::Symbol* symbol);
 
 	void CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture);

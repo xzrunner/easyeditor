@@ -1,9 +1,9 @@
-#ifndef _ANIMATION_SYMBOL_H_
-#define _ANIMATION_SYMBOL_H_
+#ifndef _LIBANIMATION_SYMBOL_H_
+#define _LIBANIMATION_SYMBOL_H_
 
 #include <drag2d.h>
 
-namespace eanim
+namespace libanim
 {
 
 class Symbol : public d2d::ISymbol
@@ -81,4 +81,4 @@ private:
 
 }
 
-#endif // _ANIMATION_SYMBOL_H_
+#endif // _LIBANIMATION_SYMBOL_H_

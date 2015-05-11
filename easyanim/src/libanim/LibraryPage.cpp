@@ -5,14 +5,14 @@
 #include <easycomplex.h>
 #include <easycoco.h>
 
-namespace eanim
+namespace libanim
 {
 
 LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Anim"))
 {
 	initLayout();
-	m_list->setFileter(eanim::FILE_TAG);
+	m_list->setFileter(libanim::FILE_TAG);
 }
 
 bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const

@@ -108,7 +108,7 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 		{
 			assert(m_control.frame() >= currFrame->getTime() && m_control.frame() < nextFrame->getTime());
 			float process = (float) (m_control.frame() - currFrame->getTime()) / (nextFrame->getTime() - currFrame->getTime());
-//			eanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
+//			libanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
 
 			currFrame->getTweenSprites(currFrame, nextFrame, sprites, process);
 		}

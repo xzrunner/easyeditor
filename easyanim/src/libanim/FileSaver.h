@@ -4,7 +4,7 @@
 
 #include "Symbol.h"
 
-namespace eanim
+namespace libanim
 {
 
 class FileSaver

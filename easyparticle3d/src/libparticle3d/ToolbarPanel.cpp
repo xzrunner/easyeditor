@@ -371,10 +371,10 @@ void ToolbarPanel::clear()
 void ToolbarPanel::onStoreRecord(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString,
-		wxT("*_") + wxString(eanim::FILE_TAG) + wxT(".json"), wxFD_SAVE);
+		wxT("*_") + wxString(libanim::FILE_TAG) + wxT(".json"), wxFD_SAVE);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString filepath = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), eanim::FILE_TAG, "json");
+		wxString filepath = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), libanim::FILE_TAG, "json");
 		m_stage->m_ps->StoreRecordAsAnimFile(filepath.ToStdString());
 	}
 }

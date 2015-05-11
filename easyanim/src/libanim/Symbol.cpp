@@ -4,14 +4,14 @@
 
 #include <easycomplex.h>
 
-namespace eanim
+namespace libanim
 {
 
 Symbol::Symbol()
 	: m_index(0)
 {
 	static int id = 0;
-	m_name = eanim::FILE_TAG + wxVariant(id++);
+	m_name = libanim::FILE_TAG + wxVariant(id++);
 }
 
 Symbol::~Symbol()

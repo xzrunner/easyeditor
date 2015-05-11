@@ -1,11 +1,11 @@
-#ifndef _ANIMATION_CONFIG_H_
-#define _ANIMATION_CONFIG_H_
+#ifndef _LIBANIMATION_CONFIG_H_
+#define _LIBANIMATION_CONFIG_H_
 
-namespace eanim
+namespace libanim
 {
 
 static const char* FILE_TAG = "anim";
 
 }
 
-#endif // _ANIMATION_CONFIG_H_
+#endif // _LIBANIMATION_CONFIG_H_

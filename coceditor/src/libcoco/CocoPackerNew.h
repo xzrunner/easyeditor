@@ -4,7 +4,7 @@
 #include <easybuilder.h>
 
 namespace ecomplex { class Symbol; }
-namespace eanim { class Symbol; }
+namespace libanim { class Symbol; }
 namespace escale9 { class Symbol; }
 
 namespace libcoco
@@ -27,7 +27,7 @@ private:
 	void resolveFont(const d2d::FontSprite* sprite);
 
 	void resolveAnimation(const ecomplex::Symbol* symbol);
-	void resolveAnimation(const eanim::Symbol* symbol);
+	void resolveAnimation(const libanim::Symbol* symbol);
 	void resolveAnimation(const escale9::Symbol* symbol);
 
 	void resolveSpriteForComponent(const d2d::ISprite* sprite, 

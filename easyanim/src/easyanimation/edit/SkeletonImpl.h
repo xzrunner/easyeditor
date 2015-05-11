@@ -28,7 +28,7 @@ public:
 	virtual void onDraw() const;
 
 protected:
-	virtual void setRightPopupMenu(wxMenu& menu);
+	virtual void SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr);
 
 	virtual d2d::IArrangeSpriteState* CreateTransalteState(d2d::SpriteSelection* selection, 
 		const d2d::Vector& first_pos) const;

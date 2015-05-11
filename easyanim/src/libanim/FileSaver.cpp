@@ -1,6 +1,6 @@
 #include "FileSaver.h"
 
-namespace eanim
+namespace libanim
 {
 
 void FileSaver::store(const std::string& filepath, const Symbol& symbol)

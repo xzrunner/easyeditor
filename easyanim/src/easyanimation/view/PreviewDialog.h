@@ -36,5 +36,5 @@ namespace eanim
 		Controller* m_ctrl;
 
 	}; // PreviewDialog
-}
 
+}

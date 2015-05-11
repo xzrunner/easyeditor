@@ -1,7 +1,7 @@
 #include "PreviewCanvas.h"
 #include "tools.h"
 
-namespace eanim
+namespace libanim
 {
 
 BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)

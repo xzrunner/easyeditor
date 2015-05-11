@@ -1,11 +1,11 @@
-#ifndef _ANIMATION_SPRITE_H_
-#define _ANIMATION_SPRITE_H_
+#ifndef _LIBANIMATION_SPRITE_H_
+#define _LIBANIMATION_SPRITE_H_
 
 #include <drag2d.h>
 
 #include "Symbol.h"
 
-namespace eanim
+namespace libanim
 {
 
 class Sprite : public d2d::ISprite
@@ -38,4 +38,4 @@ protected:
 
 }
 
-#endif // _ANIMATION_SPRITE_H_
+#endif // _LIBANIMATION_SPRITE_H_

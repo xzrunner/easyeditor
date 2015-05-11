@@ -3,7 +3,7 @@
 #include <wx/wx.h>
 #include <drag2d.h>
 
-namespace eanim
+namespace libanim
 {
 
 class Symbol;

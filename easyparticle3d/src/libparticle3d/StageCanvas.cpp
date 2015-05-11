@@ -37,10 +37,10 @@ void StageCanvas::onDraw()
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-// 		if (eanim::Sprite* anim = dynamic_cast<eanim::Sprite*>(sprite))
+// 		if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(sprite))
 // 		{
 // 			d2d::SpriteDraw::begin(sprite);
-// 			eanim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
+// 			libanim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
 // 			d2d::SpriteDraw::end(sprite);
 // 		}
 // 		else
@@ -67,8 +67,8 @@ void StageCanvas::onTimer(wxTimerEvent& event)
 		}
 	}
 
-	std::vector<eanim::Sprite*> sprites;
-	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<eanim::Sprite>(sprites));
+	std::vector<libanim::Sprite*> sprites;
+	static_cast<StagePanel*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<libanim::Sprite>(sprites));
 	size_t max = 0;
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		max = std::max(max, sprites[i]->getSymbol().getMaxFrameIndex());

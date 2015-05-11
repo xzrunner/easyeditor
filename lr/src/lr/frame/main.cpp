@@ -21,8 +21,8 @@ static void InitSymbolCreators()
 	d2d::SymbolFactory::RegisterCreator(libshape::FILE_TAG, &libshape::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(libshape::FILE_TAG, &libshape::Sprite::Create);
 
-	d2d::SymbolFactory::RegisterCreator(eanim::FILE_TAG, &eanim::Symbol::Create);
-	d2d::SpriteFactory::Instance()->RegisterCreator(eanim::FILE_TAG, &eanim::Sprite::Create);
+	d2d::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
 }
 
 bool MyApp::OnInit()

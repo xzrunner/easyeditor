@@ -67,7 +67,7 @@ void TransToGif::Trigger(const std::string& srcdir, const std::string& dstdir) c
 				continue;
 			}
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-			eanim::Symbol* anim = static_cast<eanim::Symbol*>(symbol);
+			libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
 
 			int max_frame = anim->getMaxFrameIndex();
 			int width = symbol->getSize().xLength();

@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace eanim { class Symbol; }
+namespace libanim { class Symbol; }
 
 //#define TEST_RESAMPLING
 

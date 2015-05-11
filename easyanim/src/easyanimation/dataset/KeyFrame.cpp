@@ -162,7 +162,7 @@ void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end,
 void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 
 							  d2d::ISprite* tween, float process) const
 {
-	eanim::Tools::getTweenSprite(start, end, tween, process);
+	libanim::Tools::getTweenSprite(start, end, tween, process);
 
 	emesh::Sprite* s = dynamic_cast<emesh::Sprite*>(start),
 		*mid = dynamic_cast<emesh::Sprite*>(tween),

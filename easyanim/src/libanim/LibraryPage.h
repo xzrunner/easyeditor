@@ -1,9 +1,9 @@
-#ifndef _ANIMATION_LIBRARY_PAGE_H_
-#define _ANIMATION_LIBRARY_PAGE_H_
+#ifndef _LIBANIMATION_LIBRARY_PAGE_H_
+#define _LIBANIMATION_LIBRARY_PAGE_H_
 
 #include <drag2d.h>
 
-namespace eanim
+namespace libanim
 {
 
 class LibraryPage : public d2d::ILibraryPage
@@ -24,4 +24,4 @@ private:
 
 }
 
-#endif // _ANIMATION_LIBRARY_PAGE_H_
+#endif // _LIBANIMATION_LIBRARY_PAGE_H_

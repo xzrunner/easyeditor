@@ -100,9 +100,9 @@ void SkeletonImpl::onDraw() const
 	m_stage->getSkeletonData().draw();
 }
 
-void SkeletonImpl::setRightPopupMenu(wxMenu& menu)
+void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 {
-	d2d::ArrangeSpriteImpl::setRightPopupMenu(menu);
+	d2d::ArrangeSpriteImpl::SetRightPopupMenu(menu, spr);
 	Joint* joint = m_stage->getSkeletonData().queryJointByPos(m_first_pos);
 	if (joint)
 		menu.Append(StagePanel::Menu_DelJointNode, StagePanel::menu_entries[StagePanel::Menu_DelJointNode - d2d::EditPanel::Menu_End]);

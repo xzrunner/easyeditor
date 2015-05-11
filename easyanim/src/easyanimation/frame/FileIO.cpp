@@ -149,7 +149,7 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 
 	d2d::Snapshoot ss;
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
-	eanim::Symbol* anim = static_cast<eanim::Symbol*>(symbol);
+	libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
 
 	int max_frame = anim->getMaxFrameIndex();
 	int width = symbol->getSize().xLength();
