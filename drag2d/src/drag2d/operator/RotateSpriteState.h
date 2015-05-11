@@ -34,7 +34,7 @@ private:
 		Vector m_start, m_end;
 	}; // Visitor
 
-private:
+protected:
 	SpriteSelection* m_selection;
 
 	Vector m_first_pos, m_last_pos;

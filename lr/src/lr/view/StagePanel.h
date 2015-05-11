@@ -5,6 +5,7 @@
 
 #include "RightPopupMenu.h"
 
+#include "dataset/CharacterAllDirections.h"
 #include "preview/IPathfinding.h"
 
 namespace lr
@@ -86,6 +87,8 @@ private:
 	std::vector<Layer*> m_layers;
 
 	RightPopupMenu m_popup;
+
+	CharacterAllDirections m_chara_dirs;
 
 }; // StagePanel
 

@@ -28,9 +28,14 @@ public:
 	const std::string& GetField(FieldType field) const {
 		return m_fields[field];
 	}
+	std::string ConnectFieldExcept(FieldType field) const;
 
-	bool FieldSame(const CharacterFileName& name, FieldType field) const;
+	bool FieldSame(const CharacterFileName& name, FieldType field) const {
+		m_fields[field] == name.m_filepath[field];
+	}
 	bool FieldSameExcept(const CharacterFileName& name, FieldType field) const;
+
+	std::string GetFilepathSwitchField(FieldType key, const std::string& val) const;
 
 	static bool IsValidFilepath(const std::string& filepath);
 
@@ -38,6 +43,7 @@ private:
 	static const int FIELD_COUNT = 5;
 
 private:
+	std::string m_dir;
 	std::string m_filepath;
 
 	std::string m_fields[FIELD_COUNT];

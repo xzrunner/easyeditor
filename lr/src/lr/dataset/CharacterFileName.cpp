@@ -6,6 +6,7 @@ namespace lr
 CharacterFileName::CharacterFileName(const std::string& filepath)
 	: m_filepath(filepath)
 {
+	m_dir = d2d::FilenameTools::getFileDir(m_filepath);
 	std::string filename = d2d::FilenameTools::getFilename(m_filepath);
 
 	int pos = 0, last_pos = 0;
@@ -18,9 +19,15 @@ CharacterFileName::CharacterFileName(const std::string& filepath)
 	m_fields[FT_POSTFIX] = filename.substr(pos+1);
 }
 
-bool CharacterFileName::FieldSame(const CharacterFileName& name, FieldType field) const
+std::string CharacterFileName::ConnectFieldExcept(FieldType field) const
 {
-	return m_fields[field] == name.m_filepath[field];
+	std::string ret;
+	for (int i = 0; i < FIELD_COUNT; ++i) {
+		if ((FieldType)i != field) {
+			ret += m_fields[i];			
+		}
+	}
+	return ret;
 }
 
 bool CharacterFileName::FieldSameExcept(const CharacterFileName& name, FieldType field) const
@@ -37,6 +44,23 @@ bool CharacterFileName::FieldSameExcept(const CharacterFileName& name, FieldType
 		}
 	}
 	return true;
+}
+
+std::string CharacterFileName::GetFilepathSwitchField(FieldType key, const std::string& val) const
+{
+	std::string ret = m_dir + "\\";
+	for (int i = 0; i < FIELD_COUNT; ++i) {
+		if ((int)key != i) {
+			ret += m_fields[i];
+		} else {
+			ret += val;
+		}
+		if (i != FIELD_COUNT - 1) {
+			ret += "_";
+		}
+	}
+	ret += ".json";
+	return ret;
 }
 
 bool CharacterFileName::IsValidFilepath(const std::string& filepath)
