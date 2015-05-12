@@ -31,10 +31,14 @@ void Tools::getCurrSprites(const Symbol* symbol, int index, std::vector<d2d::ISp
 		if (!currFrame)
 			continue;
 
-		if (!currFrame->bClassicTween || !nextFrame)
+		if (!nextFrame)
 		{
-			for (size_t i = 0, n = currFrame->sprites.size(); i < n; ++i)
-				sprites.push_back(currFrame->sprites[i]->clone());	
+			;
+		}
+		else if (!currFrame->bClassicTween)
+		{
+ 			for (size_t i = 0, n = currFrame->sprites.size(); i < n; ++i)
+ 				sprites.push_back(currFrame->sprites[i]->clone());	
 		}
 		else
 		{
