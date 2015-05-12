@@ -67,6 +67,13 @@ void LRToComplex::LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_v
 	int idx = 0;
 	Json::Value spr_val = src_val[idx++];
 	while (!spr_val.isNull()) {
+		// test character
+		std::string tag = spr_val["tag"].asString();
+		if (!tag.empty()) {
+			spr_val = src_val[idx++];
+			continue;
+		}
+
 		std::string filepath = spr_val["filepath"].asString();
 		Json::Value spr_val_fix = spr_val;
 
