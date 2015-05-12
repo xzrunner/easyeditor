@@ -76,22 +76,9 @@ void TextureMaterial::BuildEnd()
 		copy(m_segments.begin(), m_segments.end(), back_inserter(segments));
 	}
 
-	Json::Value value;
-	d2d::JsonTools::store(outline, value["outline"]);
-	d2d::JsonTools::store(segments, value["segments"]);
-
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout("debug_poly.json");
-	std::locale::global(std::locale("C"));	
-	writer.write(fout, value);
-	fout.close();
-
 	d2d::Triangulation::lines(outline, segments, m_tris);
 
 	CalTexcoords(r);
-
-	fout.close();
 }
 
 d2d::Rect TextureMaterial::GetBoundingRegion(const std::vector<d2d::Vector>& bounding) const
@@ -105,17 +92,18 @@ d2d::Rect TextureMaterial::GetBoundingRegion(const std::vector<d2d::Vector>& bou
 
 void TextureMaterial::GetTexBoundarySegments(const d2d::Rect& rect, std::vector<d2d::Vector>& segments)
 {
+	static const int EXTEND = 10;
 	int width = m_image->getSize().xLength(),
 		height = m_image->getSize().yLength();
 	for (float x = rect.xMin; x < rect.xMax; x += width)
 	{
-		segments.push_back(d2d::Vector(x, rect.yMin - 1));
-		segments.push_back(d2d::Vector(x, rect.yMax + 1));
+ 		segments.push_back(d2d::Vector(x, rect.yMin - EXTEND));
+ 		segments.push_back(d2d::Vector(x, rect.yMax + EXTEND));
 	}
 	for (float y = rect.yMin; y < rect.yMax; y += height)
 	{
-		segments.push_back(d2d::Vector(rect.xMin - 1, y));
-		segments.push_back(d2d::Vector(rect.xMax + 1, y));
+ 		segments.push_back(d2d::Vector(rect.xMin - EXTEND, y));
+ 		segments.push_back(d2d::Vector(rect.xMax + EXTEND, y));
 	}
 }
 
