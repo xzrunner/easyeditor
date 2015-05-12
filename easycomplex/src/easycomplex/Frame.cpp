@@ -159,6 +159,25 @@ void Frame::onCode(wxCommandEvent& event)
 		dlg.notebook->AddPage(page, page->getName());
 	}
 	dlg.ShowModal();
+
+	//////////////////////////////////////////////////////////////////////////
+
+// 	Json::Value value;
+// 	Json::Reader reader;
+// 	std::locale::global(std::locale(""));
+// 	std::ifstream fin("E:\\debug\\polygon\\debug.json");
+// 	std::locale::global(std::locale("C"));
+// 	reader.parse(fin, value);
+// 	fin.close();
+// 
+// 	std::vector<d2d::Vector> outline, segments;
+// 	d2d::JsonTools::load(value["outline"], outline);
+// 	d2d::JsonTools::load(value["segments"], segments);
+// 
+// 	std::vector<d2d::Vector> tris;
+// 	d2d::Triangulation::lines(outline, segments, tris);
+// 	
+// 	int zz = 0;
 }
 
 }
