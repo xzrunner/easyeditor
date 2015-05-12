@@ -257,14 +257,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\easyanimation\frame\Context.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\easyanimation\frame\Context.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\easyanimation\frame\Controller.cpp"
 				>
 			</File>
