@@ -8,7 +8,7 @@ namespace eterrain2d
 
 class MeshShape;
 
-class OceanMesh
+class OceanMesh : public d2d::Object
 {
 public:
 	OceanMesh(const libshape::PolygonShape* shape, const d2d::ImageSymbol* image);

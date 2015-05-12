@@ -35,6 +35,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_oceans = static_cast<Sprite*>(edited)->getSymbol().GetOceans();
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
+		ocean->Retain();
 		insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 	}
 
@@ -43,8 +44,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {	
-	for_each(m_oceans.begin(), m_oceans.end(), DeletePointerFunctor<OceanMesh>());
-	m_oceans.clear();
+	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
+		m_oceans[i]->Release();
+	}
 }
 
 void StagePanel::clear()
