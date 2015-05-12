@@ -49,18 +49,18 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 
 	if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
-		pasteToSelection();
+		PasteToSelection();
 		m_spritesImpl->removeSpriteSelection();
 		return true;
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
-		pasteToSelection();
+		PasteToSelection();
 		return true;
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
-		copyFromSelection();
+		CopyFromSelection();
 		return true;
 	}
 
@@ -289,7 +289,18 @@ ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
 	return selected;
 }
 
-void SelectSpritesOP::pasteToSelection() const
+void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
+{
+	value["filename"] = spr->getSymbol().getFilepath().ToStdString();
+	spr->store(value);	
+}
+
+void SelectSpritesOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
+{
+	spr->load(value);
+}
+
+void SelectSpritesOP::PasteToSelection() const
 {
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
@@ -298,11 +309,8 @@ void SelectSpritesOP::pasteToSelection() const
 	{
 		Json::Value& sval = value["sprite"][i];
 		d2d::ISprite* s = sprites[i];
-		if (wxTheClipboard->Open())
-		{
-			sval["filename"] = s->getSymbol().getFilepath().ToStdString();
-			s->store(sval);
-			sval["name"] = s->name;
+		if (wxTheClipboard->Open()) {
+			PasteSprToClipboard(s, sval);
 		}
 	}
 	Json::StyledStreamWriter writer;
@@ -312,7 +320,7 @@ void SelectSpritesOP::pasteToSelection() const
 	wxTheClipboard->Close();
 }
 
-void SelectSpritesOP::copyFromSelection()
+void SelectSpritesOP::CopyFromSelection()
 {
 	if (wxTheClipboard->Open())
 	{
@@ -336,9 +344,8 @@ void SelectSpritesOP::copyFromSelection()
 				// for snapshoot
 				symbol->RefreshThumbnail(filepath);
 				ISprite* sprite = SpriteFactory::Instance()->create(symbol);
-				sprite->name = sval["name"].asString();
 				symbol->Release();
-				sprite->load(sval);
+				CopySprFromClipboard(sprite, sval);
 				m_spritesImpl->insertSprite(sprite);
 				m_selection->Add(sprite);
 				m_propertyPanel->setPropertySetting(createPropertySetting(sprite));

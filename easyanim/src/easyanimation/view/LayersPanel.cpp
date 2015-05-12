@@ -4,6 +4,7 @@
 #include "KeysPanel.h"
 #include "StagePanel.h"
 
+#include "dataset/Layer.h"
 #include "frame/Controller.h"
 
 namespace eanim
@@ -21,8 +22,9 @@ void LayersPanel::insertLayer()
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
 	int curr_idx = layers.size();
-	layers.newLayer();
+	Layer* layer = layers.newLayer();
 	m_ctrl->setCurrFrame(curr_idx, m_ctrl->frame());
+	layer->insertKeyFrame(1);
 
 	m_parent->Refresh();
 }

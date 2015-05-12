@@ -244,6 +244,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="utility"
+				>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\SpriteUserData.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\dataset\SpriteUserData.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"

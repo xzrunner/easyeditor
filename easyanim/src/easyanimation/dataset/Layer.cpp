@@ -15,8 +15,6 @@ Layer::Layer(Controller* ctrl)
 	name = "Layer" + StringTools::intToString(count++);
 
 	editable = visible = true;
-
-	insertKeyFrame(1);
 }
 
 Layer::~Layer()

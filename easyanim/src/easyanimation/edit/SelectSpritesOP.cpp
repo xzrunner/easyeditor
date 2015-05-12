@@ -1,5 +1,6 @@
 #include "SelectSpritesOP.h"
 
+#include "dataset/SpriteUserData.h"
 #include "frame/Controller.h"
 #include "view/StagePanel.h"
 
@@ -40,6 +41,22 @@ d2d::IPropertySetting* SelectSpritesOP::createPropertySetting(d2d::ISprite* spri
 		Controller* ctrl = ((StagePanel*)m_editPanel)->GetController();
 		return new d2d::SymbolPropertySetting(m_editPanel, &ctrl->name);
 	}
+}
+
+void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
+{
+	d2d::SelectSpritesOP::PasteSprToClipboard(spr, value);
+
+	SpriteUserData* ud = (SpriteUserData*)spr->getUserData();
+	value["layer"] = ud->layer;
+	value["frame"] = ud->frame;
+}
+
+void SelectSpritesOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
+{
+	d2d::SelectSpritesOP::CopySprFromClipboard(spr, value);
+
+	set_sprite_user_data(spr, value["layer"].asInt(), value["frame"].asInt());
 }
 
 }

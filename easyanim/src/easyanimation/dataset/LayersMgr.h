@@ -13,7 +13,7 @@ namespace eanim
 		LayersMgr(Controller* ctrl);
 		~LayersMgr();
  
-		void newLayer();
+		Layer* newLayer();
 		void insertLayer(Layer* layer);
 		void removeLayer(int index);
 		void changeLayerOrder(int from, int to);

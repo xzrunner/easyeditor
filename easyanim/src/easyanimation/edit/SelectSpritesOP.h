@@ -15,6 +15,10 @@ public:
 
 	virtual d2d::IPropertySetting* createPropertySetting(d2d::ISprite* sprite) const;
 
+protected:
+	virtual void PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const;
+
 }; // SelectSpritesOP
 
 }

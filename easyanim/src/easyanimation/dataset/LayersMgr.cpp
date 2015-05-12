@@ -16,9 +16,11 @@ LayersMgr::~LayersMgr()
 	clear();
 }
 
-void LayersMgr::newLayer()
+Layer* LayersMgr::newLayer()
 {
-	m_layers.push_back(new Layer(m_ctrl));
+	Layer* layer = new Layer(m_ctrl);
+	m_layers.push_back(layer);
+	return layer;
 }
 
 void LayersMgr::insertLayer(Layer* layer)

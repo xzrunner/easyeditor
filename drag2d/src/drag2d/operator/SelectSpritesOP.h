@@ -37,9 +37,12 @@ namespace d2d
 	protected:
 		virtual ISprite* selectByPos(const Vector& pos) const;
 
+		virtual void PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const;
+		virtual void CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const;
+
 	private:
-		void pasteToSelection() const;
-		void copyFromSelection();
+		void PasteToSelection() const;
+		void CopyFromSelection();
 
 	protected:
 		SpriteSelection* m_selection;

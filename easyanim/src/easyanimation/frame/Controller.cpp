@@ -24,44 +24,44 @@ Controller::Controller(Widgets* widgets)
 
 void Controller::setCurrFrame(int layer, int frame)
 {
+	if (m_curr_layer == layer &&
+		m_curr_frame == frame) {
+		return;
+	}
+
+	m_last_keyframe = NULL;
+
 	m_curr_layer = layer;
 	m_curr_frame = frame;
 
-	Layer* pLayer = layers.getLayer(layer);
-	if (!pLayer) 
+	if (m_widgets->m_keysPanel) 
 	{
-		m_last_keyframe = NULL;
-		return;
+		int row, col;
+		m_widgets->m_keysPanel->getSelectPos(row, col);
+		col = m_curr_frame - 1;
+		m_widgets->m_keysPanel->setSelectPos(row, col);
 	}
 
-	KeyFrame* pFrame = pLayer->getCurrKeyFrame(frame);
-	if (!pFrame) 
-	{
-		m_last_keyframe = NULL;
-		return;
+	m_widgets->m_stage->Refresh();
+	if (m_widgets->m_keysPanel) {
+		m_widgets->m_keysPanel->Refresh();
 	}
+	if (m_widgets->m_layersPanel) {
+		m_widgets->m_layersPanel->Refresh();
+	}
+}
 
-	if (pFrame != m_last_keyframe) 
+KeyFrame* Controller::getCurrFrame() 
+{
+	if (!m_last_keyframe)
 	{
-		reloadViewList(*pFrame);
-		m_last_keyframe = pFrame;
-
-		if (m_widgets->m_keysPanel) 
-		{
-			int row, col;
-			m_widgets->m_keysPanel->getSelectPos(row, col);
-			col = m_curr_frame - 1;
-			m_widgets->m_keysPanel->setSelectPos(row, col);
-		}
-
-		m_widgets->m_stage->Refresh();
-		if (m_widgets->m_keysPanel) {
-			m_widgets->m_keysPanel->Refresh();
-		}
-		if (m_widgets->m_layersPanel) {
-			m_widgets->m_layersPanel->Refresh();
+		Layer* layer = layers.getLayer(m_curr_layer);
+		if (layer) {
+			m_last_keyframe = layer->getCurrKeyFrame(m_curr_frame);
+			reloadViewList(*m_last_keyframe);
 		}
 	}
+	return m_last_keyframe; 
 }
 
 void Controller::setPrevKeyFrame()

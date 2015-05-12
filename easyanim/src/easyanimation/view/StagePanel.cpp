@@ -6,6 +6,7 @@
 #include "edit/ArrangeSpriteOP.h"
 #include "dataset/Layer.h"
 #include "dataset/KeyFrame.h"
+#include "dataset/SpriteUserData.h"
 
 namespace eanim
 {
@@ -93,9 +94,21 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
+	SpriteUserData* ud = (SpriteUserData*)sprite->getUserData();
+ 	int old_layer = m_ctrl->layer(),
+ 		old_frame = m_ctrl->frame();
+	if (ud) {
+		m_ctrl->setCurrFrame(ud->layer, old_frame);
+	}
+
 	KeyFrame* frame = m_ctrl->getCurrFrame();
 	frame->insert(sprite);
 	Refresh();
+
+	if (ud) {
+		m_ctrl->setCurrFrame(old_layer, old_frame);
+	}
+
 	m_ctrl->Refresh();
 }
 

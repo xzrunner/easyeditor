@@ -1,5 +1,6 @@
 #include "KeyFrame.h"
 #include "Layer.h"
+#include "SpriteUserData.h"
 
 #include "frame/Controller.h"
 
@@ -13,6 +14,9 @@ KeyFrame::KeyFrame(Controller* ctrl, int time)
 	: m_ctrl(ctrl)
 	, m_layer(NULL)
 {
+	m_layer_idx = m_ctrl->layer();
+	m_frame_idx = m_ctrl->frame();
+
 	m_time = time;
 	m_bClassicTween = false;
 	m_id = 0;
@@ -31,7 +35,9 @@ void KeyFrame::copyKeyFrame(const KeyFrame* src)
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* s = src->m_sprites[i]->clone();
+		set_sprite_user_data(s, m_layer_idx, m_frame_idx);
 		m_sprites.push_back(s);
+
 		if (m_layer) {
 			s->setObserver(&m_layer->m_spriteObserver);
 			m_layer->m_spriteObserver.insert(s, m_time);
@@ -40,10 +46,12 @@ void KeyFrame::copyKeyFrame(const KeyFrame* src)
 
 	// skeleton
 	m_skeletonData.copyFrom(m_sprites, src->m_skeletonData);
+	// todo spr's ud
 }
 
 void KeyFrame::insert(d2d::ISprite* sprite)
 {
+	set_sprite_user_data(sprite, m_layer_idx, m_frame_idx);
 	m_sprites.push_back(sprite);
 	if (m_layer) {
 		sprite->setObserver(&m_layer->m_spriteObserver);
@@ -60,7 +68,7 @@ void KeyFrame::insert(d2d::ISprite* sprite)
 void KeyFrame::insertWithClone(d2d::ISprite* sprite) 
 {
 	d2d::ISprite* clone = sprite->clone();
-
+	set_sprite_user_data(clone, m_layer_idx, m_frame_idx);
 	m_sprites.push_back(clone);
 	if (m_layer) {
 		clone->setObserver(&m_layer->m_spriteObserver);
@@ -181,10 +189,9 @@ bool KeyFrame::canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& en
 
 	if (autoNamed && begin.name == end.name && !m_skeletonData.isContainSprite(const_cast<d2d::ISprite*>(&begin))) {
 		return true;
-	} else {
-		//if (begin.getSymbol().getFilepath() == end.getSymbol().getFilepath()) {
-		//	return true;
-		//}
+	} else if (begin.name.empty() && end.name.empty()) {
+//		return begin.getSymbol().getFilepath() == end.getSymbol().getFilepath();
+		return false;
 	}
 	return false;
 }

@@ -68,6 +68,8 @@ namespace eanim
 	private:
 		Controller* m_ctrl;
 
+		int m_layer_idx, m_frame_idx;
+
 		int m_time;
 
 		std::vector<d2d::ISprite*> m_sprites;

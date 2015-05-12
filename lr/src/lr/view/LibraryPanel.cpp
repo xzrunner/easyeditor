@@ -31,7 +31,9 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 				layer = layers[i];
 			}
 		}
-		assert(layer);
+		if (!layer) {
+			throw d2d::Exception("layer error: %s", page->getName());
+		}
 
 		static_cast<LibraryPage*>(page)->SetLayer(layer);
 

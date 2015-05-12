@@ -20,7 +20,7 @@ public:
 	Controller(Widgets* widgets);
 
 	void setCurrFrame(int layer, int frame);
-	KeyFrame* getCurrFrame() { return m_last_keyframe; }
+	KeyFrame* getCurrFrame();
 	void setPrevKeyFrame();
 	void setNextKeyFrame();
 
