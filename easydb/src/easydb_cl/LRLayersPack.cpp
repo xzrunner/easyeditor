@@ -2,6 +2,7 @@
 #include "check_params.h"
 
 #include <lr/dataset/Grids.h>
+#include <lr/dataset/CharacterFileName.h>
 
 #include <easyshape.h>
 
@@ -10,7 +11,7 @@ namespace edb
 
 std::string LRLayersPack::Command() const
 {
-	return "lr2shape";
+	return "lr-pack";
 }
 
 std::string LRLayersPack::Description() const
@@ -20,7 +21,7 @@ std::string LRLayersPack::Description() const
 
 std::string LRLayersPack::Usage() const
 {
-	// lr2shape e:/test2/test_lr.json
+	// lr-pack e:/test2/test_lr.json
 	std::string usage = Command() + " [filepath]";
 	return usage;
 }
@@ -60,12 +61,14 @@ void LRLayersPack::Run(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
-	ParserPointLayer(lr_val, dir, 3, "point", out_val);
-	ParserPolyLayer(lr_val, dir, grids, 4, "path", out_val);
-	ParserPolyLayer(lr_val, dir, grids, 5, "region", out_val);
-	ParserPolyLayer(lr_val, dir, grids, 6, "collision region", out_val);
+	ParserCharacter(lr_val, 2, "character", out_val);
+	ParserPoint(lr_val, dir, 3, "point", out_val);
+	ParserPolygon(lr_val, dir, grids, 4, "path", out_val);
+	ParserPolygon(lr_val, dir, grids, 5, "region", out_val);
+	ParserPolygon(lr_val, dir, grids, 6, "collision region", out_val);
+	ParserCamera(lr_val, 7, "camera", out_val);
 
-	std::string outfile = filepath.substr(0, filepath.find_last_of(".")) + "_shapes.json";
+	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -75,7 +78,7 @@ void LRLayersPack::Run(const std::string& filepath)
 	fout.close();
 }
 
-void LRLayersPack::ParserPolyLayer(const Json::Value& src_val, const std::string& dir,
+void LRLayersPack::ParserPolygon(const Json::Value& src_val, const std::string& dir,
 								   const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
@@ -137,8 +140,8 @@ void LRLayersPack::ParserPolyLayer(const Json::Value& src_val, const std::string
 	}
 }
 
-void LRLayersPack::ParserPointLayer(const Json::Value& src_val, const std::string& dir,
-									  int layer_idx, const char* name, Json::Value& out_val)
+void LRLayersPack::ParserPoint(const Json::Value& src_val, const std::string& dir,
+									int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
@@ -162,6 +165,77 @@ void LRLayersPack::ParserPointLayer(const Json::Value& src_val, const std::strin
 
 		sprite->Release();
 		symbol->Release();
+
+		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	}
+}
+
+void LRLayersPack::ParserCamera(const Json::Value& src_val, int layer_idx, 
+									 const char* name, Json::Value& out_val)
+{
+	int idx = 0;
+	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	while (!spr_val.isNull()) 
+	{
+		Json::Value cam_val;
+		cam_val["name"] = spr_val["name"];
+		cam_val["x"] = spr_val["position"]["x"];
+		cam_val["y"] = spr_val["position"]["y"];
+		cam_val["scale"] = spr_val["x scale"];
+
+		int sz = out_val[name].size();
+		out_val[name][sz] = cam_val;
+
+		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	}
+}
+
+void LRLayersPack::ParserCharacter(const Json::Value& src_val, int layer_idx, 
+								   const char* name, Json::Value& out_val)
+{
+	int idx = 0;
+	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	while (!spr_val.isNull()) 
+	{
+		Json::Value char_val;
+		char_val["name"] = spr_val["name"];
+		char_val["x"] = spr_val["position"]["x"];
+		char_val["y"] = spr_val["position"]["y"];
+
+		// tags
+		std::string tag = spr_val["tag"].asString();
+		std::vector<std::string> tags;
+		int pos = tag.find_first_of(';');
+		tags.push_back(tag.substr(0, pos));
+		do 
+		{
+			int next_pos = tag.find_first_of(';', pos + 1);
+			tags.push_back(tag.substr(pos + 1, next_pos - pos - 1));
+			pos = next_pos;
+		} while (pos != std::string::npos);
+		for (int i = 0, n = tags.size(); i < n; ++i) {
+			const std::string& str = tags[i];
+			int pos = str.find_first_of('=');
+			std::string key = str.substr(0, pos);
+			std::string val = str.substr(pos+1);
+			char_val["tag"][key] = val;
+		}
+
+		// filename
+		std::string filename = d2d::FilenameTools::getFilename(spr_val["filepath"].asString());
+		lr::CharacterFileName out_name(filename);
+		char_val["filename"] = out_name.GetOutputName();
+
+		// angle
+		int dir = 1 + (out_name.GetField(lr::CharacterFileName::FT_DIRECTION)[0] - '1');
+		if (spr_val["x mirror"].asBool()) {
+			dir = 10 - dir;
+		}
+		dir = (dir + 7) % 8;
+		char_val["angle"] = dir + 1;
+
+		int sz = out_val[name].size();
+		out_val[name][sz] = char_val;
 
 		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	}

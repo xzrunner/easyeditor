@@ -24,10 +24,18 @@ std::string CharacterFileName::ConnectFieldExcept(FieldType field) const
 	std::string ret;
 	for (int i = 0; i < FIELD_COUNT; ++i) {
 		if ((FieldType)i != field) {
-			ret += m_fields[i];			
+			ret += m_fields[i];
+			if (i != FIELD_COUNT - 1) {
+				ret += "_";
+			}
 		}
 	}
 	return ret;
+}
+
+std::string CharacterFileName::GetOutputName() const
+{
+	return m_fields[FT_CHARACTER] + "_" + m_fields[FT_ACTION] + "_" + m_fields[FT_COLOR];
 }
 
 bool CharacterFileName::FieldSameExcept(const CharacterFileName& name, FieldType field) const

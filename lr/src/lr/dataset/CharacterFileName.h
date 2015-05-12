@@ -30,6 +30,8 @@ public:
 	}
 	std::string ConnectFieldExcept(FieldType field) const;
 
+	std::string GetOutputName() const;
+
 	bool FieldSame(const CharacterFileName& name, FieldType field) const {
 		m_fields[field] == name.m_filepath[field];
 	}

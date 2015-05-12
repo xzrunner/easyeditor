@@ -569,14 +569,6 @@
 					Name="lr"
 					>
 					<File
-						RelativePath="..\..\..\..\lr\src\lr\dataset\Grids.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\..\lr\src\lr\dataset\Grids.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\easydb_cl\LRLayersPack.cpp"
 						>
 					</File>
@@ -600,6 +592,26 @@
 						RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.h"
 						>
 					</File>
+					<Filter
+						Name="extern"
+						>
+						<File
+							RelativePath="..\..\..\..\lr\src\lr\dataset\CharacterFileName.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\..\lr\src\lr\dataset\CharacterFileName.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\..\lr\src\lr\dataset\Grids.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\..\lr\src\lr\dataset\Grids.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter
