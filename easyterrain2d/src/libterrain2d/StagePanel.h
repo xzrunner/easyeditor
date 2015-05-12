@@ -7,14 +7,18 @@
 namespace eterrain2d
 {
 
+class Symbol;
 class OceanMesh;
 class ToolbarPanel;
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
-	, public d2d::ShapesPanelImpl
+class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl, 
+	public d2d::ShapesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, d2d::LibraryPanel* library);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+		d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites, 
+		d2d::LibraryPanel* library);
 	virtual ~StagePanel();
 
 	//
@@ -51,6 +55,8 @@ private:
 
 private:
 	std::vector<OceanMesh*> m_oceans;
+
+//	Symbol* m_symbol;
 
 }; // StagePanel
 

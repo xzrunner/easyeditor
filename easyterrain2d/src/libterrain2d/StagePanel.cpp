@@ -3,6 +3,7 @@
 #include "OceanMesh.h"
 #include "FileIO.h"
 #include "ToolBarPanel.h"
+#include "Sprite.h"
 
 #include <easyshape.h>
 
@@ -19,6 +20,25 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_canvas = new StageCanvas(this);
 
  	SetDropTarget(new StageDropTarget(this, library));
+}
+
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites, 
+					   d2d::LibraryPanel* library)
+	: d2d::EditPanel(parent, frame)
+	, d2d::SpritesPanelImpl(this, library)
+	, d2d::ShapesPanelImpl(this)
+{
+	m_editOP = new d2d::ZoomViewOP(this, true);
+	m_canvas = new StageCanvas(this, edited, bg_sprites);
+
+	m_oceans = static_cast<Sprite*>(edited)->getSymbol().GetOceans();
+	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
+		OceanMesh* ocean = m_oceans[i];
+		insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+	}
+
+	SetDropTarget(new StageDropTarget(this, library));
 }
 
 StagePanel::~StagePanel()
@@ -81,6 +101,16 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 
 	Refresh();
 }
+
+// const std::vector<OceanMesh*>& StagePanel::GetOceans() const 
+// {
+// 	return m_symbol->GetOceans();
+// }
+// 
+// std::vector<OceanMesh*>& StagePanel::GetOceans() 
+// {
+// 	return m_symbol->GetOceans();
+// }
 
 void StagePanel::AddOcean(const libshape::PolygonShape* shape, const d2d::ImageSymbol* image)
 {

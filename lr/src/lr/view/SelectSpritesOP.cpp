@@ -9,6 +9,7 @@
 #include <easycomplex.h>
 #include <easytexture.h>
 #include <easyshape.h>
+#include <easyterrain2d.h>
 
 namespace lr
 {
@@ -111,6 +112,16 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		dlg.ShowModal();
 
 		m_editPanel->ResetViewport();		
+	}
+	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
+	{
+		std::vector<d2d::ISprite*> sprites;
+		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+
+		eterrain2d::EditDialog dlg(m_editPanel, terr, sprites);
+		dlg.ShowModal();
+
+		m_editPanel->ResetViewport();
 	}
 
 	return false;

@@ -321,6 +321,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="frame"
+			>
+			<File
+				RelativePath="..\..\..\src\libterrain2d\EditDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libterrain2d\EditDialog.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libterrain2d\config.h"
 			>

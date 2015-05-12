@@ -13,12 +13,43 @@ StageCanvas::StageCanvas(StagePanel* panel)
 	: d2d::OrthoCanvas(panel)
 	, m_panel(panel)
 	, m_timer(this, TIMER_ID)
+	, m_edited(NULL)
 {
 	m_timer.Start(100);
 }
 
+StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
+						 const std::vector<d2d::ISprite*>& bg_sprites)
+	: d2d::OrthoCanvas(panel)
+	, m_panel(panel)
+	, m_timer(this, TIMER_ID)
+	, m_edited(edited)
+	, m_bg_sprites(bg_sprites)
+{
+	m_timer.Start(100);
+}
+
+void StageCanvas::initGL()
+{
+	d2d::OrthoCanvas::initGL();
+
+	std::vector<d2d::ISymbol*> symbols;
+	d2d::SymbolMgr::Instance()->traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
+	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
+		symbols[i]->reloadTexture();
+	}
+}
+
 void StageCanvas::onDraw()
 {
+	if (m_edited) 
+	{
+		d2d::Matrix mat(m_edited->GetTransInvMatrix());
+		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
+			d2d::SpriteDraw::drawSprite(m_bg_sprites[i], mat);
+		}
+	}
+
 	DrawBG();
 
 	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);

@@ -6,6 +6,7 @@
 #include "libterrain2d/LibraryPage.h"
 #include "libterrain2d/StagePanel.h"
 #include "libterrain2d/ToolbarPanel.h"
+#include "libterrain2d/EditDialog.h"
 #include "libterrain2d/Sprite.h"
 #include "libterrain2d/Symbol.h"
 #include "libterrain2d/OceanMesh.h"

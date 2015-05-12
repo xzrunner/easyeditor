@@ -7,6 +7,7 @@
 #include <easycomplex.h>
 #include <easyshape.h>
 #include <easyanim.h>
+#include <easyterrain2d.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -23,6 +24,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(libanim::FILE_TAG, &libanim::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(libanim::FILE_TAG, &libanim::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
 }
 
 bool MyApp::OnInit()
