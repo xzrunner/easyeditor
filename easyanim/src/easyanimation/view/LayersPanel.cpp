@@ -20,9 +20,9 @@ LayersPanel::LayersPanel(wxWindow* parent, Controller* ctrl)
 void LayersPanel::insertLayer()
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
-
-	m_ctrl->setCurrFrame(layers.size(), m_ctrl->frame());
+	int curr_idx = layers.size();
 	layers.newLayer();
+	m_ctrl->setCurrFrame(curr_idx, m_ctrl->frame());
 
 	m_parent->Refresh();
 }
