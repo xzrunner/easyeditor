@@ -1,4 +1,4 @@
-#include "LRToShapeTable.h"
+#include "LRLayersPack.h"
 #include "check_params.h"
 
 #include <lr/dataset/Grids.h>
@@ -8,24 +8,24 @@
 namespace edb
 {
 
-std::string LRToShapeTable::Command() const
+std::string LRLayersPack::Command() const
 {
 	return "lr2shape";
 }
 
-std::string LRToShapeTable::Description() const
+std::string LRLayersPack::Description() const
 {
 	return "create shape table from lr file";
 }
 
-std::string LRToShapeTable::Usage() const
+std::string LRLayersPack::Usage() const
 {
 	// lr2shape e:/test2/test_lr.json
 	std::string usage = Command() + " [filepath]";
 	return usage;
 }
 
-void LRToShapeTable::Run(int argc, char *argv[])
+void LRLayersPack::Run(int argc, char *argv[])
 {
 	if (!check_number(this, argc, 3)) return;
 	if (!check_file(argv[2])) return;
@@ -33,7 +33,7 @@ void LRToShapeTable::Run(int argc, char *argv[])
 	Run(argv[2]);
 }
 
-void LRToShapeTable::Run(const std::string& filepath)
+void LRLayersPack::Run(const std::string& filepath)
 {
 	Json::Value lr_val;
 	Json::Reader reader;
@@ -61,9 +61,9 @@ void LRToShapeTable::Run(const std::string& filepath)
 	out_val["row"] = row;
 
 	ParserPointLayer(lr_val, dir, 3, "point", out_val);
-	ParserLayer(lr_val, dir, grids, 4, "path", out_val);
-	ParserLayer(lr_val, dir, grids, 5, "region", out_val);
-	ParserLayer(lr_val, dir, grids, 6, "collision region", out_val);
+	ParserPolyLayer(lr_val, dir, grids, 4, "path", out_val);
+	ParserPolyLayer(lr_val, dir, grids, 5, "region", out_val);
+	ParserPolyLayer(lr_val, dir, grids, 6, "collision region", out_val);
 
 	std::string outfile = filepath.substr(0, filepath.find_last_of(".")) + "_shapes.json";
 
@@ -75,8 +75,8 @@ void LRToShapeTable::Run(const std::string& filepath)
 	fout.close();
 }
 
-void LRToShapeTable::ParserLayer(const Json::Value& src_val, const std::string& dir,
-								 const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val)
+void LRLayersPack::ParserPolyLayer(const Json::Value& src_val, const std::string& dir,
+								   const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
@@ -98,15 +98,29 @@ void LRToShapeTable::ParserLayer(const Json::Value& src_val, const std::string& 
 		for (int i = 0, n = shapes.size(); i < n; ++i)
 		{
 			d2d::IShape* shape = shapes[i];
-			libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape);
-			if (!poly) {
-				continue;
+			
+			std::vector<int> grid_idx;
+			if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
+			{
+				std::vector<d2d::Vector> bound = poly->GetVertices();
+				for (int i = 0, n = bound.size(); i < n; ++i) {
+					bound[i] += sprite->getPosition();
+				}
+				grid_idx = grids.IntersectPolygon(bound);
 			}
-			std::vector<d2d::Vector> bound = poly->GetVertices();
-			for (int i = 0, n = bound.size(); i < n; ++i) {
-				bound[i] += sprite->getPosition();
+			else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
+			{
+				std::vector<d2d::Vector> bound = chain->GetVertices();
+				for (int i = 0, n = bound.size(); i < n; ++i) {
+					bound[i] += sprite->getPosition();
+				}
+				grid_idx = grids.IntersectPolyline(bound);
 			}
-			std::vector<int> grid_idx = grids.IntersectPolygon(bound);
+			else
+			{
+				throw d2d::Exception("LRLayersPack::ParserPolyLayer error shape type");
+			}
+
 			for (int i = 0, n = grid_idx.size(); i < n; ++i) {
 				int sz = shape_val["grid"].size();
 				shape_val["grid"][sz] = grid_idx[i];
@@ -123,7 +137,7 @@ void LRToShapeTable::ParserLayer(const Json::Value& src_val, const std::string& 
 	}
 }
 
-void LRToShapeTable::ParserPointLayer(const Json::Value& src_val, const std::string& dir,
+void LRLayersPack::ParserPointLayer(const Json::Value& src_val, const std::string& dir,
 									  int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;

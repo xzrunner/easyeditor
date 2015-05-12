@@ -577,19 +577,19 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\easydb_cl\LRLayersPack.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easydb_cl\LRLayersPack.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easydb_cl\LRToComplex.cpp"
 						>
 					</File>
 					<File
 						RelativePath="..\..\..\src\easydb_cl\LRToComplex.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\LRToShapeTable.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\LRToShapeTable.h"
 						>
 					</File>
 					<File
