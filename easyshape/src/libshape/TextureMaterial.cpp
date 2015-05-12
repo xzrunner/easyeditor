@@ -62,10 +62,6 @@ void TextureMaterial::ReloadTexture()
 
 void TextureMaterial::BuildEnd()
 {
-	std::ofstream fout("debug_poly.txt", std::ios::app);
-
-	fout << "TextureMaterial::BuildEnd 0 \n";
-
 	m_tris.clear();
 	m_tris_texcoord.clear();
 
@@ -74,23 +70,26 @@ void TextureMaterial::BuildEnd()
 
 	d2d::Rect r = GetBoundingRegion(outline);
 
-	fout << "TextureMaterial::BuildEnd 1 \n";
-
 	std::vector<d2d::Vector> segments;
 	GetTexBoundarySegments(r, segments);
 	if (!m_segments.empty()) {
 		copy(m_segments.begin(), m_segments.end(), back_inserter(segments));
 	}
 
-	fout << "TextureMaterial::BuildEnd 2 \n";
+	Json::Value value;
+	d2d::JsonTools::store(outline, value["outline"]);
+	d2d::JsonTools::store(segments, value["segments"]);
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout("debug_poly.json");
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
 
 	d2d::Triangulation::lines(outline, segments, m_tris);
 
-	fout << "TextureMaterial::BuildEnd 3 \n";
-
 	CalTexcoords(r);
-
-	fout << "TextureMaterial::BuildEnd 4 \n";
 
 	fout.close();
 }
