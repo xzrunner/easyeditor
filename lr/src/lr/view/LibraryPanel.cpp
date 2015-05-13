@@ -25,15 +25,18 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 	for (int i = 0, n = m_pages.size(); i < n; ++i)
 	{
 		d2d::ILibraryPage* page = m_pages[i];
-		Layer* layer = NULL;
-		for (int i = 0, n = layers.size(); i < n; ++i) {
-			if (page->getName() == layers[i]->GetName()) {
-				layer = layers[i];
-			}
-		}
-		if (!layer) {
-			throw d2d::Exception("layer error: %s", page->getName());
-		}
+
+		Layer* layer = layers[i];
+
+//		Layer* layer = NULL;
+// 		for (int i = 0, n = layers.size(); i < n; ++i) {
+// 			if (page->getName() == layers[i]->GetName()) {
+// 				layer = layers[i];
+// 			}
+// 		}
+// 		if (!layer) {
+// 			throw d2d::Exception("layer error: %s", page->getName());
+// 		}
 
 		static_cast<LibraryPage*>(page)->SetLayer(layer);
 
