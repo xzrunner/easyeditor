@@ -60,7 +60,7 @@ KeyFrame* Controller::getCurrFrame()
 		Layer* layer = layers.getLayer(m_curr_layer);
 		if (layer) {
 			m_last_keyframe = layer->getCurrKeyFrame(m_curr_frame);
-			reloadViewList(*m_last_keyframe);
+			reloadViewList(m_last_keyframe);
 		}
 	}
 	return m_last_keyframe; 
@@ -178,14 +178,17 @@ void Controller::Refresh()
 	m_widgets->m_keysPanel->Refresh();
 }
 
-void Controller::reloadViewList(const KeyFrame& frame)
+void Controller::reloadViewList(const KeyFrame* frame)
 {
 	if (!m_widgets->m_viewlist) return;
 
 	m_widgets->m_viewlist->clear();
-	const std::vector<d2d::ISprite*>& sprites = frame.getAllSprites();
-	for (int i = 0, n = sprites.size(); i < n; ++i)
-		m_widgets->m_viewlist->insert(sprites[i]);
+	if (frame)
+	{
+		const std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
+		for (int i = 0, n = sprites.size(); i < n; ++i)
+			m_widgets->m_viewlist->insert(sprites[i]);
+	}	
 }
 
 }

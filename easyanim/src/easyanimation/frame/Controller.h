@@ -58,7 +58,7 @@ public:
 
 	void Refresh();
 
-	void reloadViewList(const KeyFrame& frame);
+	void reloadViewList(const KeyFrame* frame);
 
 public:
 	std::string name;
