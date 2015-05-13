@@ -98,6 +98,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
  	int old_layer = m_ctrl->layer(),
  		old_frame = m_ctrl->frame();
 	if (ud) {
+		ud->frame = old_frame;
 		m_ctrl->setCurrFrame(ud->layer, old_frame);
 	}
 

@@ -45,7 +45,7 @@ void FileIO::load(const wxString& filepath, Controller* ctrl)
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
 		Layer* layer = loadLayer(layerValue, dir, ctrl);
-		ctrl->InsertLayer(layer);
+//		ctrl->InsertLayer(layer);
 		layerValue = value["layer"][i++];
 	}
 
@@ -220,6 +220,8 @@ void FileIO::storeResource(Json::Value& value, Controller* ctrl)
 Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir, Controller* ctrl)
 {
 	Layer* layer = new Layer(ctrl);
+
+	ctrl->InsertLayer(layer);
 
 	layer->name = layerValue["name"].asString();
 
