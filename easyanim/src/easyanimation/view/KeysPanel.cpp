@@ -37,6 +37,8 @@ void KeysPanel::setCurrPos(int pos)
 	if (pos != m_ctrl->frame())
 	{
 		m_ctrl->setCurrFrame(m_ctrl->layer(), pos);
+		m_ctrl->reloadViewList(*m_ctrl->getCurrFrame());
+
 //		static_cast<StagePanel*>(context->stage)->clear();
 		m_ctrl->GetStagePanel()->getEditOP()->clear();
 		Refresh();
