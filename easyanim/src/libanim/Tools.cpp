@@ -14,6 +14,7 @@ void Tools::drawAnimSymbol(const Symbol* symbol,
 {
 	std::vector<d2d::ISprite*> sprites;
 	getCurrSprites(symbol, index, sprites);
+
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteDraw::drawSprite(sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
 
@@ -69,7 +70,7 @@ Symbol::Frame* Tools::getNextFrame(Symbol::Layer* layer, int index)
 	for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 	{
 		Symbol::Frame* frame = layer->frames[i];
-		if (frame->index > index)
+		if (frame->index >= index)
 			return frame;
 	}
 	return NULL;
