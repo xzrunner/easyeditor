@@ -44,6 +44,8 @@ protected:
 private:
 	std::vector<OceanMesh*> m_oceans;
 
+	mutable clock_t m_time;
+
 }; // Symbol
 
 }

@@ -6,10 +6,12 @@ namespace eterrain2d
 {
 
 Symbol::Symbol()
+	: m_time(0)
 {	
 }
 
 Symbol::Symbol(const Symbol& s)
+	: m_time(0)
 {
 }
 
@@ -43,21 +45,20 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite) const
 {
-	static clock_t time = 0;
 	clock_t curr = clock();
-	if (time == 0) {
-		time = curr;
+	if (m_time == 0) {
+		m_time = curr;
 		return;
 	}
 
-	float dt = (float)(curr - time) / CLOCKS_PER_SEC;
+	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
 		ocean->Update(dt);
 		ocean->Draw(mt, false);
 	}
 
-	time = curr;
+	m_time = curr;
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const

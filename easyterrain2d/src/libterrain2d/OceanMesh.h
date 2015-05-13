@@ -90,6 +90,8 @@ private:
 	// debug
 	d2d::Rect debug_r;
 
+	float m_during;
+
 }; // OceanMesh
 
 }

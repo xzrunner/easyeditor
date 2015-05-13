@@ -11,6 +11,7 @@ OceanMesh::OceanMesh(const libshape::PolygonShape* shape,
 	 , m_image0(image)
 	 , m_image1(NULL)
 	 , m_lock_bound(false)
+	 , m_during(0)
 {
 	m_row = MESH_ROW;
 	m_col = MESH_COL;
@@ -86,21 +87,20 @@ void OceanMesh::SetBlendSpeed(float spd)
 
 void OceanMesh::Update(float dt)
 {
-	static float during = 0;
 	if (m_uv_move_open) {
 		UpdateUVMove(dt);
 		Build();
 	}
 	if (m_wave_open) {
-		UpdateWave(during);
+		UpdateWave(m_during);
 	}
 	if (m_blend_open) {
 		UpdateBlend(dt);
 	}
-	during += dt;
+	m_during += dt;
 
-	if (m_wave_speed * during > d2d::PI * 2) {
-		during = 0;
+	if (m_wave_speed * m_during > d2d::PI * 2) {
+		m_during = 0;
 	}
 }
 
@@ -327,6 +327,10 @@ void OceanMesh::UpdateWave(float during)
 void OceanMesh::UpdateUVMove(float dt)
 {
 	m_texcoords_base += m_texcoords_spd * dt;
+
+// 	m_texcoords_spd.set(0, 0);
+// 	m_texcoords_base += d2d::Vector(0.005f, 0.005f);
+
 	if (m_texcoords_base.x >= 1) m_texcoords_base.x -= 1;
 	if (m_texcoords_base.x < 0) m_texcoords_base.x += 1;
 	if (m_texcoords_base.y >= 1) m_texcoords_base.y -= 1;
