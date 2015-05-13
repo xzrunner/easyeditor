@@ -1,5 +1,6 @@
 #include "FileIO.h"
 #include "OceanMesh.h"
+#include "Symbol.h"
 
 namespace eterrain2d
 {
@@ -71,6 +72,32 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	ocean->SetBoundLock(value["bound_lock"].asBool());
 
 	return ocean;
+}
+
+void FileIO::StoreSymbol(const char* filepath, const Symbol* symbol)
+{
+	Json::Value src_value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, src_value);
+
+	Json::Value dst_value;
+	dst_value["bg"] = src_value["bg"];
+
+	std::string dir = d2d::FilenameTools::getFileDir(filepath).ToStdString();
+	std::vector<OceanMesh*> meshes = symbol->GetOceans();
+	for (int i = 0, n = meshes.size(); i < n; ++i) {
+		FileIO::StoreOceanMesh(meshes[i], dir, dst_value["ocean"][i]);
+	}
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath);
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, dst_value);
+	fout.close();
 }
 
 }

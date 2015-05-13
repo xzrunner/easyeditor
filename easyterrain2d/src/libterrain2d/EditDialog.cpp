@@ -4,6 +4,7 @@
 #include "LibraryPanel.h"
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
+#include "FileIO.h"
 
 #include <wx/splitter.h>
 
@@ -60,22 +61,22 @@ void EditDialog::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite
 
 void EditDialog::OnClose(wxCloseEvent& event)
 {
-// 	if (m_stage->isDirty())
-// 	{
-// 		d2d::ExitDlg dlg(this);
-// 		int val = dlg.ShowModal();
-// 		if (val == wxID_OK)
-// 		{
-// 			const wxString& filepath = m_symbol->getFilepath();
-// 			FileSaver::Store(filepath, m_symbol);
-// 			m_symbol->RefreshThumbnail(filepath);
-// 			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
-// 		}
-// 		else if (val == wxID_CANCEL)
-// 		{
-// 			m_symbol->loadFromFile(m_symbol->getFilepath());
-// 		}
-// 	}
+	if (m_stage->isDirty())
+	{
+		d2d::ExitDlg dlg(this);
+		int val = dlg.ShowModal();
+		if (val == wxID_OK)
+		{
+			const wxString& filepath = m_symbol->getFilepath();
+			FileIO::StoreSymbol(filepath, m_symbol);
+			m_symbol->RefreshThumbnail(filepath);
+			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
+		}
+		else if (val == wxID_CANCEL)
+		{
+			m_symbol->loadFromFile(m_symbol->getFilepath());
+		}
+	}
 
 	if(IsModal()) {
 		EndModal(wxID_CANCEL);
