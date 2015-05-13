@@ -35,7 +35,8 @@ public:
 	void SetBlendSpeed(float spd);
 
 	void Update(float dt);
-	void Draw(const d2d::Matrix& mt, bool draw_tris) const;
+	void Draw(const d2d::Matrix& mt, const d2d::Colorf& mul, 
+		const d2d::Colorf& add, bool draw_tris) const;
 
 	const libshape::PolygonShape* GetShape() const {
 		return m_shape;

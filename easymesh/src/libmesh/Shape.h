@@ -34,8 +34,10 @@ public:
 
 	void DrawInfoUV() const;
 	void DrawInfoXY() const;
-	void DrawTexture(const d2d::Matrix& mt) const;
-	void DrawTexture(const d2d::Matrix& mt, unsigned int texid) const;
+	void DrawTexture(const d2d::Matrix& mt, const d2d::Colorf& mul = d2d::Colorf(1, 1, 1, 1), 
+		const d2d::Colorf& add = d2d::Colorf(0, 0, 0, 0)) const;
+	void DrawTexture(const d2d::Matrix& mt, const d2d::Colorf& mul, 
+		const d2d::Colorf& add, unsigned int texid) const;
 
 	const std::vector<Triangle*>& GetTriangles() const { return m_tris; }
 

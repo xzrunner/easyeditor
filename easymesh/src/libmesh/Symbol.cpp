@@ -71,7 +71,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 		shader->SetSpriteColor(mul, add);
 		shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
 
- 		m_shape->DrawTexture(mt);
+ 		m_shape->DrawTexture(mt, mul, add);
   		if (!m_pause && sprite) 
 		{
 			const Sprite* s = static_cast<const Sprite*>(sprite);

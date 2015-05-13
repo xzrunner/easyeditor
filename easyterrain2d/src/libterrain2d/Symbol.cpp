@@ -55,7 +55,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
 		ocean->Update(dt);
-		ocean->Draw(mt, false);
+		ocean->Draw(mt, mul, add, false);
 	}
 
 	m_time = curr;

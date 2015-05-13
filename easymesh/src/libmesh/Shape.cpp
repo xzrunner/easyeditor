@@ -99,15 +99,21 @@ void Shape::DrawInfoXY() const
 	d2d::PrimitiveDraw::drawCircles(nodes, m_node_radius, true, 2, d2d::Colorf(0.4f, 0.2f, 0.8f, 0.5f));
 }
 
-void Shape::DrawTexture(const d2d::Matrix& mt) const
+void Shape::DrawTexture(const d2d::Matrix& mt,
+						const d2d::Colorf& mul, 
+						const d2d::Colorf& add) const
 {
-	DrawTexture(mt, m_texid);
+	DrawTexture(mt, mul, add, m_texid);
 }
 
-void Shape::DrawTexture(const d2d::Matrix& mt, unsigned int texid) const
+void Shape::DrawTexture(const d2d::Matrix& mt, 
+						const d2d::Colorf& mul, 
+						const d2d::Colorf& add,
+						unsigned int texid) const
 {
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->sprite();
+	shader->SetSpriteColor(mul, add);
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{
 		Triangle* tri = m_tris[i];
