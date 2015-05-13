@@ -54,7 +54,8 @@ void StagePanel::setImage(d2d::ISymbol* symbol)
 
 StagePanel::StageDropTarget::
 StageDropTarget(StagePanel* stage, d2d::LibraryPanel* library)
-	: m_stage(stage)
+	: d2d::CombinedDropTarget(stage)
+	, m_stage(stage)
 	, m_library(library)
 {
 }
