@@ -38,8 +38,10 @@ void Controller::setCurrFrame(int layer, int frame)
 	{
 		int row, col;
 		m_widgets->m_keysPanel->getSelectPos(row, col);
-		col = m_curr_frame - 1;
-		m_widgets->m_keysPanel->setSelectPos(row, col);
+		if (row >= 0 && col >= 0) {
+			col = m_curr_frame - 1;
+			m_widgets->m_keysPanel->setSelectPos(row, col);
+		}
 	}
 
 	m_widgets->m_stage->Refresh();
@@ -90,6 +92,16 @@ void Controller::setNextKeyFrame()
 	{
 		setCurrFrame(m_curr_layer, next->getTime());
 	}
+}
+
+int Controller::layer() const 
+{ 
+	return m_curr_layer; 
+}
+
+int Controller::frame() const 
+{ 
+	return m_curr_frame; 
 }
 
 d2d::ViewlistPanel* Controller::GetViewlist()

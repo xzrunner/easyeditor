@@ -26,8 +26,8 @@ public:
 
 	// layer start from 0
 	// frame start from 1
-	int layer() const { return m_curr_layer; }
-	int frame() const { return m_curr_frame; }
+	int layer() const;
+	int frame() const;
 
 	d2d::ViewlistPanel* GetViewlist();
 	d2d::LibraryPanel* GetLibraryPanel();
@@ -58,7 +58,6 @@ public:
 
 	void Refresh();
 
-private:
 	void reloadViewList(const KeyFrame& frame);
 
 public:
