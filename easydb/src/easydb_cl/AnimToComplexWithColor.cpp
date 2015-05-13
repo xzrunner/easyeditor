@@ -69,8 +69,11 @@ void AnimToComplexWithColor::Run(const std::string& cfg_filepath)
 		symbol->m_sprites.push_back(sprite);
 
 		std::string output = filepath.substr(0, filepath.find_last_of('_'));
-		output = dir + "\\" + output + "_" + ext + "_complex.json";
-		ecomplex::FileSaver::store(output.c_str(), symbol);
+		int pos = output.find_last_of('_');
+		std::string dir = output.substr(pos + 1);
+		output = output.substr(0, pos);
+
+		output = dir + "\\" + output + "_" + ext + "_" + dir + "_complex.json";
 
 		delete symbol;
 		//////////////////////////////////////////////////////////////////////////
