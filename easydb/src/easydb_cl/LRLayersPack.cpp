@@ -78,65 +78,86 @@ void LRLayersPack::Run(const std::string& filepath)
 	fout.close();
 }
 
+void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset, 
+								   const lr::Grids& grids, Json::Value& out_val)
+{
+	std::vector<int> grid_idx;
+	if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
+	{
+		std::vector<d2d::Vector> bound = poly->GetVertices();
+		for (int i = 0, n = bound.size(); i < n; ++i) {
+			bound[i] += offset;
+		}
+		grid_idx = grids.IntersectPolygon(bound);
+	}
+	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
+	{
+		std::vector<d2d::Vector> bound = chain->GetVertices();
+		for (int i = 0, n = bound.size(); i < n; ++i) {
+			bound[i] += offset;
+		}
+		grid_idx = grids.IntersectPolyline(bound);
+	}
+	else
+	{
+		throw d2d::Exception("LRLayersPack::ParserPolyLayer error shape type");
+	}
+
+	for (int i = 0, n = grid_idx.size(); i < n; ++i) {
+		int sz = out_val["grid"].size();
+		out_val["grid"][sz] = grid_idx[i];
+	}
+}
+
 void LRLayersPack::ParserPolygon(const Json::Value& src_val, const std::string& dir,
-								   const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val)
+								 const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
-	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
-	while (!spr_val.isNull()) 
+	Json::Value src_spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	while (!src_spr_val.isNull()) 
 	{
-		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, src_spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
 		assert(symbol);
 
-		Json::Value shape_val;
-		shape_val["name"] = spr_val["name"];
+		Json::Value dst_val;
+		dst_val["name"] = src_spr_val["name"];
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-		sprite->load(spr_val);
+		sprite->load(src_spr_val);
 
 		libshape::Sprite* shape_spr = dynamic_cast<libshape::Sprite*>(sprite);
 		assert(shape_spr);
 		const std::vector<d2d::IShape*>& shapes = shape_spr->getSymbol().GetShapes();
-		for (int i = 0, n = shapes.size(); i < n; ++i)
-		{
-			d2d::IShape* shape = shapes[i];
-			
-			std::vector<int> grid_idx;
-			if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
-			{
-				std::vector<d2d::Vector> bound = poly->GetVertices();
-				for (int i = 0, n = bound.size(); i < n; ++i) {
-					bound[i] += sprite->getPosition();
-				}
-				grid_idx = grids.IntersectPolygon(bound);
-			}
-			else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
-			{
-				std::vector<d2d::Vector> bound = chain->GetVertices();
-				for (int i = 0, n = bound.size(); i < n; ++i) {
-					bound[i] += sprite->getPosition();
-				}
-				grid_idx = grids.IntersectPolyline(bound);
-			}
-			else
-			{
-				throw d2d::Exception("LRLayersPack::ParserPolyLayer error shape type");
-			}
-
-			for (int i = 0, n = grid_idx.size(); i < n; ++i) {
-				int sz = shape_val["grid"].size();
-				shape_val["grid"][sz] = grid_idx[i];
-			}
+		for (int i = 0, n = shapes.size(); i < n; ++i) {
+			ParserPolyShape(shapes[i], sprite->getPosition(), grids, dst_val);
 		}
 
 		int sz = out_val[name].size();
-		out_val[name][sz] = shape_val;
+		out_val[name][sz] = dst_val;
 
 		sprite->Release();
 		symbol->Release();
 
-		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+		src_spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	}
+
+	idx = 0;
+	Json::Value src_shape_val = src_val["layer"][layer_idx]["shape"][idx++];
+	while (!src_shape_val.isNull()) 
+	{
+		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(src_shape_val, dir);
+		
+		Json::Value dst_val;
+		dst_val["name"] = src_shape_val["name"];
+		ParserPolyShape(shape, d2d::Vector(0, 0), grids, dst_val);
+
+		int sz = out_val[name].size();
+		out_val[name][sz] = dst_val;
+
+		shape->Release();
+
+		src_shape_val = src_val["layer"][layer_idx]["shape"][idx++];
 	}
 }
 
