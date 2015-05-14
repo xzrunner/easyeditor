@@ -28,17 +28,8 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 
 		Layer* layer = layers[i];
 
-//		Layer* layer = NULL;
-// 		for (int i = 0, n = layers.size(); i < n; ++i) {
-// 			if (page->getName() == layers[i]->GetName()) {
-// 				layer = layers[i];
-// 			}
-// 		}
-// 		if (!layer) {
-// 			throw d2d::Exception("layer error: %s", page->getName());
-// 		}
-
 		static_cast<LibraryPage*>(page)->SetLayer(layer);
+		layer->SetName(page->getName().ToStdString());
 
 		std::vector<d2d::ISprite*> sprites;
 		layer->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
