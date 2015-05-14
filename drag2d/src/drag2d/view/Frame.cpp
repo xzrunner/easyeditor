@@ -260,10 +260,13 @@ void Frame::onClose(wxCloseEvent& event)
 		return;
 	}
 
-	ExitDlg dlg(this);
-	int val = dlg.ShowModal();
-	if (val == wxID_OK)
-		m_task->store(m_currFilename);
+	if (!m_currFilename.empty()) {
+		ExitDlg dlg(this);
+		int val = dlg.ShowModal();
+		if (val == wxID_OK) {
+			m_task->store(m_currFilename);
+		}
+	}
 
 	Destroy();
 }
