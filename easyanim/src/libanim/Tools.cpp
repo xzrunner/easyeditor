@@ -87,7 +87,7 @@ void Tools::getTweenSprites(const std::vector<d2d::ISprite*>& start, const std::
 		d2d::ISprite *startSprite = start[i], *endSprite = NULL;
 		for (size_t j = 0, m = end.size(); j < m; ++j)
 		{
-			if (isTweenMatched(*startSprite, *end[j]))
+			if (isTweenMatched(startSprite, end[j]))
 			{
 				endSprite = end[j];
 				break;
@@ -107,15 +107,20 @@ void Tools::getTweenSprites(const std::vector<d2d::ISprite*>& start, const std::
 	}
 }
 
-bool Tools::isTweenMatched(d2d::ISprite& s0, d2d::ISprite& s1)
+bool Tools::isTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1)
 {
-	bool xMirror0, yMirror0;
-	s0.getMirror(xMirror0, yMirror0);
+	bool autoNamed = false;
+	if (!s0->name.empty() && s0->name[0] == '_' && !s1->name.empty() && s1->name[0] == '_') {
+		autoNamed = true;
+	}
 
-	bool xMirror1, yMirror1;
-	s1.getMirror(xMirror1, yMirror1);
-
-	return &s0.getSymbol() == &s1.getSymbol() && xMirror0 == xMirror1 && yMirror0 == yMirror1;
+	if (autoNamed && s0->name == s1->name) {
+		return true;
+	} else if (s0->name.empty() && s1->name.empty()) {
+		//		return s0->getSymbol().getFilepath() == s1->getSymbol().getFilepath();
+		return false;
+	}
+	return false;
 }
 
 void Tools::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process)

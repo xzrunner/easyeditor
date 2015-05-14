@@ -25,7 +25,7 @@ public:
 
 	static void getTweenSprites(const std::vector<d2d::ISprite*>& start, const std::vector<d2d::ISprite*>& end, 
 		std::vector<d2d::ISprite*>& tween, float process);
-	static bool isTweenMatched(d2d::ISprite& s0, d2d::ISprite& s1);
+	static bool isTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1);
 	static void getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process);
 
 }; // Tools
