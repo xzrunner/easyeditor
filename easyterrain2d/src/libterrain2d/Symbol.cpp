@@ -45,6 +45,10 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& b_trans,
 				  const d2d::ISprite* sprite) const
 {
+	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	shader->SetSpriteColor(mul, add);
+	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
+
 	clock_t curr = clock();
 	if (m_time == 0) {
 		m_time = curr;
