@@ -8,6 +8,7 @@
 #include <easymesh.h>
 #include <easyscale9.h>
 #include <easyanim.h>
+#include <easytexture.h>
 
 // for debug
 //#include "MyThread.h"
@@ -96,6 +97,16 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	{
 		d2d::TextDialog dlg(m_editPanel, font);
 		dlg.ShowModal();
+	}
+	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
+	{
+		std::vector<d2d::ISprite*> sprites;
+		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+
+		etexture::EditDialog dlg(m_editPanel, tex, sprites);
+		dlg.ShowModal();
+
+		m_editPanel->ResetViewport();
 	}
 
 	return false;
