@@ -10,7 +10,7 @@
 #include "libimage/ImageClip.h"
 #include "libimage/ImageTrim.h"
 #include "libimage/ImagePack.h"
-#include "libimage/ImageRevertY.h"
+#include "libimage/ImageVeritalFlip.h"
 
 #include "libimage/TransToPVR.h"
 #include "libimage/TransToETC1.h"

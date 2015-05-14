@@ -1,16 +1,16 @@
-#include "ImageRevertY.h"
+#include "ImageVeritalFlip.h"
 
 namespace eimage
 {
 
-ImageRevertY::ImageRevertY(const uint8_t* pixels, int width, int height)
+ImageVeritalFlip::ImageVeritalFlip(const uint8_t* pixels, int width, int height)
 	: m_pixels(pixels)
 	, m_width(width)
 	, m_height(height)
 {
 }
 
-uint8_t* ImageRevertY::Revert()
+uint8_t* ImageVeritalFlip::Revert()
 {
 	int sz = m_width * m_height * 4;
 	uint8_t* pixels = new uint8_t[sz];
