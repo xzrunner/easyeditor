@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	if (OPEN_GRIDS) {
 		m_grids = new Grids;
 		SettingCfg* cfg = SettingCfg::Instance();
-		m_grids->Build(cfg->m_view_width, cfg->m_view_height);
+		m_grids->Build(cfg->m_map_width, cfg->m_map_height);
 	}
 
 	if (TEST_QUADTREE) {

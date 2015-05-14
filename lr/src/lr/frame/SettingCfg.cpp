@@ -11,8 +11,11 @@ SettingCfg* SettingCfg::m_instance = NULL;
 
 SettingCfg::SettingCfg()
 {
-	m_view_width = d2d::HALF_S_WIDTH * 2;
-	m_view_height = d2d::HALF_S_HEIGHT * 2;
+	m_map_width = d2d::HALF_S_WIDTH * 2;
+	m_map_height = d2d::HALF_S_HEIGHT * 2;
+
+	m_view_width = m_map_width;
+	m_view_height = m_map_height;
 }
 
 SettingCfg* SettingCfg::Instance()

@@ -9,6 +9,7 @@ class SettingCfg
 public:
 	static SettingCfg* Instance();
 
+	int m_map_width, m_map_height;
 	int m_view_width, m_view_height;
 
 private:

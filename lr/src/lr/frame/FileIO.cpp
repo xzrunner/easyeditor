@@ -24,9 +24,16 @@ void FileIO::Load(const char* filename, StagePanel* stage,
 
 	// size
 	SettingCfg* cfg = SettingCfg::Instance();
-	cfg->m_view_width = value["size"]["width"].asInt();
-	cfg->m_view_height = value["size"]["height"].asInt();
-	stage->BuildGrids(cfg->m_view_width, cfg->m_view_height);
+	cfg->m_map_width = value["size"]["width"].asInt();
+	cfg->m_map_height = value["size"]["height"].asInt();
+	if (value["size"]["view width"].isNull()) {
+		cfg->m_view_width = cfg->m_map_width;
+		cfg->m_view_height = cfg->m_map_height;
+	} else {
+		cfg->m_view_width = value["size"]["view width"].asInt();
+		cfg->m_view_height = value["size"]["view height"].asInt();
+	}
+	stage->BuildGrids(cfg->m_map_width, cfg->m_map_height);
 
 	// camera
 	float s = value["camera"]["scale"].asDouble();
@@ -48,8 +55,10 @@ void FileIO::Store(const char* filename, StagePanel* stage)
 
 	// size
 	SettingCfg* cfg = SettingCfg::Instance();
-	value["size"]["width"] = cfg->m_view_width;
-	value["size"]["height"] = cfg->m_view_height;
+	value["size"]["width"] = cfg->m_map_width;
+	value["size"]["height"] = cfg->m_map_height;
+	value["size"]["view width"] = cfg->m_view_width;
+	value["size"]["view height"] = cfg->m_view_height;
 
 	// camera
 	d2d::Camera* cam = stage->getCamera();

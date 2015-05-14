@@ -16,12 +16,14 @@ public:
 private:
 	void InitLayout();
 
+	void OnMapSizeChanged(wxCommandEvent& event);
 	void OnViewSizeChanged(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;
 
-	wxTextCtrl *m_width_ctrl, *m_height_ctrl;
+	wxTextCtrl *m_map_width_ctrl, *m_map_height_ctrl,
+		*m_view_width_ctrl, *m_view_height_ctrl;
 
 }; // SettingDialog
 
