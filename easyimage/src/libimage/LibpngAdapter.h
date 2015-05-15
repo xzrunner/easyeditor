@@ -9,7 +9,6 @@ namespace eimage
 class LibpngAdapter
 {
 public:
-
 	static int Write(const uint8_t* pixels, int width, int height,
 		const char* filepath);
 
