@@ -43,7 +43,9 @@ void LRToComplex::Run(const std::string& filepath)
 	for (int i = 0; i < 3; ++i) {
 		LoadSpriteValue(lr_val["layer"][i]["sprite"], complex_val["sprite"]);
 	}
-	complex_val["name"] = "";
+	std::string name = d2d::FilenameTools::getFilename(filepath);
+	name = "scene_" + name.substr(0, name.find_last_of('_'));	
+	complex_val["name"] = name;
 	complex_val["use_render_cache"] = false;
 	complex_val["xmax"] = 0;
 	complex_val["xmin"] = 0;
