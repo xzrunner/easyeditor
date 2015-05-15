@@ -88,6 +88,7 @@ private:
 	float min_vert, max_vert;
 
 	float min_spd, max_spd;
+	float min_angular_spd, max_angular_spd;
 
 	float gravity;
 
@@ -140,6 +141,8 @@ public:
 	void setHori(int min, int max) { min_hori = min; max_hori = max; }
 	void setVert(int min, int max) { min_vert = min; max_vert = max; }
 	void setSpeed(int min, int max) { min_spd = min * 0.25f; max_spd = max * 0.25f; }
+	void setAngularSpeed(int min, int max) { min_angular_spd = min; max_angular_spd = max; }
+	
 	void setGravity(int val) { gravity = val * /*0.001f*//*0.25f*/0.3f; }
 	void setInertia(int val) { inertia = val * d2d::TRANS_DEG_TO_RAD; }
 	void setFadeoutTime(int val) { fadeout_time = val * 0.001f; }

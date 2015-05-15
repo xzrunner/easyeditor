@@ -38,6 +38,7 @@ private:
 	void onSetHori(wxSpinEvent& event);
 	void onSetVert(wxSpinEvent& event);
 	void onSetSpeed(wxScrollEvent& event);
+	void onSetAngularSpeed(wxScrollEvent& event);
 	void onSetGravity(wxScrollEvent& event);
 	void onSetInertia(wxSpinEvent& event);
 	void onSetFadeoutTime(wxScrollEvent& event);
@@ -57,6 +58,7 @@ private:
 	static const float MAX_VERT;
 	static const float MIN_SPD;
 	static const float MAX_SPD;
+	static const float MIN_ANGULAR_SPE, MAX_ANGULAR_SPE;
 	static const float GRAVITY;
 	static const float INERTIA;
 	static const float FADEOUT_TIME;
@@ -122,6 +124,7 @@ private:
 	wxSpinCtrl *m_min_hori, *m_max_hori;
 	wxSpinCtrl *m_min_vert, *m_max_vert;
 	wxSlider *m_min_spd, *m_max_spd;
+	wxSlider *m_min_angular_spd, *m_max_angular_spd;
 	wxSlider* m_gravity;
 	wxSpinCtrl* m_inertia;
 	wxSlider* m_fadeout_time;

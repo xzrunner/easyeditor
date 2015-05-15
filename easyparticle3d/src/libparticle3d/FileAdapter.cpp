@@ -30,6 +30,8 @@ void FileAdapter::load(const char* filename)
 	max_vert = value["max_vert"].asInt();
 	min_spd = value["min_spd"].asInt();
 	max_spd = value["max_spd"].asInt();
+	min_angular_spd = value["min_angular_spd"].asInt();
+	max_angular_spd = value["max_angular_spd"].asInt();
 	gravity = value["gravity"].asInt();
 	inertia = value["inertia"].asInt();
 	fadeout_time = value["fadeout_time"].asInt();

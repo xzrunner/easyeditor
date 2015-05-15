@@ -30,6 +30,7 @@ ParticleSystem::ParticleSystem(unsigned int buffer)
 	min_vert = min_vert = 0;
 
 	min_spd = max_spd = 0;
+	min_angular_spd = max_angular_spd = 0;
 
 	gravity = 0;
 
@@ -78,6 +79,9 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 
 	min_spd = ps.min_spd;
 	max_spd = ps.max_spd;
+
+	min_angular_spd = ps.min_angular_spd;
+	max_angular_spd = ps.max_angular_spd;
 
 	gravity = ps.gravity;
 
@@ -215,8 +219,8 @@ void ParticleSystem::update(float dt)
 			} 
 			else 
 			{
-				p->rotate -= inertia * dt;
-				if (p->rotate < 0) p->rotate = 0;
+		//		p->rotate -= inertia * dt;
+//				if (p->rotate < 0) p->rotate = 0;
 				if (p->position[2] > 0.1f)
 					p->angle += p->rotate * dt;
 			}
@@ -355,15 +359,17 @@ void ParticleSystem::add()
 
 	// 初始角度angle，每帧变换rotate
 	//////////////////////////////////////////////////////////////////////////
-// 	min = pLast->pc->min_rotate; max = pLast->pc->max_rotate;
-// 	pLast->rotate = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
-// 
+	min = min_angular_spd; max = max_angular_spd;
+	float angular_spd = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
+	angular_spd = angular_spd * d2d::TRANS_DEG_TO_RAD;
+	pLast->rotate = angular_spd;
+
 // 	pLast->angle = (rand() / (float(RAND_MAX)+1)) * d2d::PI * 2;
 	//////////////////////////////////////////////////////////////////////////
 	min = pLast->pc->min_rotate; max = pLast->pc->max_rotate;
 	pLast->angle = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 
-	pLast->rotate = 0;
+//	pLast->rotate = 0;
 	//////////////////////////////////////////////////////////////////////////
 
 	pLast->m_bind_time = 0;

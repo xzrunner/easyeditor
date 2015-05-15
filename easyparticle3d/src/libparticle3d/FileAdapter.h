@@ -41,6 +41,7 @@ public:
 	float min_vert, max_vert;
 
 	float min_spd, max_spd;
+	float min_angular_spd, max_angular_spd;
 
 	float gravity;
 

@@ -24,6 +24,8 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 	value["max_vert"] = toolbar->m_max_vert->GetValue();
 	value["min_spd"] = toolbar->m_min_spd->GetValue();
 	value["max_spd"] = toolbar->m_max_spd->GetValue();
+	value["min_angular_spd"] = toolbar->m_min_angular_spd->GetValue();
+	value["max_angular_spd"] = toolbar->m_max_angular_spd->GetValue();
 	value["gravity"] = toolbar->m_gravity->GetValue();
 	value["inertia"] = toolbar->m_inertia->GetValue();
 	value["fadeout_time"] = toolbar->m_fadeout_time->GetValue();
@@ -85,6 +87,9 @@ void FileIO::load(const char* filepath, ParticleSystem* ps,
 	toolbar->m_min_spd->SetValue(adapter.min_spd);
 	toolbar->m_max_spd->SetValue(adapter.max_spd);
 	ps->setSpeed(adapter.min_spd, adapter.max_spd);
+	toolbar->m_min_angular_spd->SetValue(adapter.min_angular_spd);
+	toolbar->m_max_angular_spd->SetValue(adapter.max_angular_spd);
+	ps->setAngularSpeed(adapter.min_angular_spd, adapter.max_angular_spd);
 	toolbar->m_gravity->SetValue(adapter.gravity);
 	ps->setGravity(adapter.gravity);
 	toolbar->m_inertia->SetValue(adapter.inertia);
@@ -116,6 +121,7 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 	ps->setHori(adapter.min_hori, adapter.max_hori);
 	ps->setVert(adapter.min_vert, adapter.max_vert);
 	ps->setSpeed(adapter.min_spd, adapter.max_spd);
+	ps->setAngularSpeed(adapter.min_angular_spd, adapter.max_angular_spd);
 	ps->setGravity(adapter.gravity);
 	ps->setFadeoutTime(adapter.fadeout_time);
 	ps->setBounce(adapter.bounce);

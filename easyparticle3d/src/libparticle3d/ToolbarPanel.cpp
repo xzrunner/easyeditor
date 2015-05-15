@@ -19,6 +19,8 @@ const float ToolbarPanel::MIN_VERT			= 60;
 const float ToolbarPanel::MAX_VERT			= 90;
 const float ToolbarPanel::MIN_SPD			= 1200;
 const float ToolbarPanel::MAX_SPD			= 2000;
+const float ToolbarPanel::MIN_ANGULAR_SPE	= 0;
+const float ToolbarPanel::MAX_ANGULAR_SPE	= 0;
 const float ToolbarPanel::GRAVITY			= 1200;
 const float ToolbarPanel::INERTIA			= 4;
 const float ToolbarPanel::FADEOUT_TIME		= 300;
@@ -245,6 +247,32 @@ wxSizer* ToolbarPanel::initLayout()
 		leftSizer->Add(spdSizer);
 	}
 	leftSizer->AddSpacer(10);
+	// Angular Speed
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Angular Speed (degree)"));
+		wxSizer* spdSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+		{
+			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
+
+			m_min_angular_spd = new wxSlider(this, wxID_ANY, MIN_ANGULAR_SPE, -3600, 3600, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_min_angular_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetAngularSpeed));
+			sizer->Add(m_min_angular_spd);
+
+			spdSizer->Add(sizer);
+		}
+		{
+			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
+
+			m_max_angular_spd = new wxSlider(this, wxID_ANY, MAX_ANGULAR_SPE, -3600, 3600, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
+			Connect(m_max_angular_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetAngularSpeed));
+			sizer->Add(m_max_angular_spd);
+
+			spdSizer->Add(sizer);
+		}
+		leftSizer->Add(spdSizer);
+	}
 	// Gravity
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Gravity (pixel)"));
@@ -435,6 +463,11 @@ void ToolbarPanel::onSetVert(wxSpinEvent& event)
 void ToolbarPanel::onSetSpeed(wxScrollEvent& event)
 {
 	m_stage->m_ps->setSpeed(m_min_spd->GetValue(), m_max_spd->GetValue());
+}
+
+void ToolbarPanel::onSetAngularSpeed(wxScrollEvent& event)
+{
+	m_stage->m_ps->setAngularSpeed(m_min_angular_spd->GetValue(), m_max_angular_spd->GetValue());
 }
 
 void ToolbarPanel::onSetGravity(wxScrollEvent& event)
