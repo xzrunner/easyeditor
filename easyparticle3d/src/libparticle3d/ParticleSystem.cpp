@@ -211,7 +211,7 @@ void ParticleSystem::update(float dt)
 				_pos[2] = p->position[2] + p->speed[2] * dt;
 				d2d::Vector pos_new = TransCoords3To2(_pos);
 
-				p->angle = d2d::Math::getLineAngle(pos_old, pos_new);
+				p->angle = d2d::Math::getLineAngle(pos_old, pos_new) - d2d::PI * 0.5f;
 			} 
 			else 
 			{
