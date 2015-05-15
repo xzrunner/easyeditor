@@ -7,6 +7,7 @@
 #include <easymesh.h>
 #include <easyshape.h>
 #include <easytexture.h>
+#include <easyterrain2d.h>
 
 static void InitSymbolCreators() 
 {
@@ -27,6 +28,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
 }
 
 static void Help()
