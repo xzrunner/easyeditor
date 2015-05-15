@@ -21,6 +21,9 @@ d2d::Rect ImageTrim::Trim() const
 		height = m_image->originHeight();
 	int channels = m_image->channels();
 	if (channels != 4 || width == 0 || height == 0) {
+		sub.xMin = sub.yMin = 0;
+		sub.xMax = width;
+		sub.yMax = height;
 		return sub;
 	}
 
