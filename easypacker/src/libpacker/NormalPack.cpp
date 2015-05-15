@@ -35,15 +35,13 @@ void NormalPack::OutputInfo(const wxString& src_folder, const ImageTrimData& tri
 	for (int i = 0, n = m_files.size(); i < n; ++i) 
 	{
 		Json::Value frame_val;
-
-		wxString filename = d2d::FilenameTools::getRelativePath(src_folder, m_files[i]);
-
-		const ImageTrimData::Trim* t = trim.Query(filename.ToStdString());
+		std::string filepath = d2d::FilenameTools::FormatFilepath(m_files[i]);	
+		const ImageTrimData::Trim* t = trim.Query(filepath);
 		if (!t) {
-			throw d2d::Exception("NormalPack::OutputInfo didn't find trim info: %s\n", filename);
+			throw d2d::Exception("NormalPack::OutputInfo didn't find trim info: %s\n", filepath);
 		}
 
-		frame_val["filename"] = filename.ToStdString();
+		frame_val["filename"] = filepath;
 
 		const RectSize& src_sz = m_src_sizes[i];
 
@@ -98,7 +96,7 @@ void NormalPack::OutputImage(const wxString& filepath) const
 	{
 		const Rect& pos = m_output[i];
 		d2d::Image* img = d2d::ImageMgr::Instance()->getItem(m_files[i]);
-		pack.AddImage(img, pos.x, pos.y, pos.width, pos.height, true);
+		pack.AddImage(img, pos.x, pos.y, pos.width, pos.height, true, img->channels() == 4);
 		img->Release();
 	}
 

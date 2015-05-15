@@ -71,7 +71,7 @@ void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& file
 	int w = symbol->getSize().xLength() * scale,
 		h = symbol->getSize().yLength() * scale;
 	unsigned char* pixels = outputToMemory(symbol, false, scale);
-	ImageSaver::storeToFile(pixels, w, h, filename, ImageSaver::e_png);
+	ImageSaver::storeToFile(pixels, w, h, 4, filename, ImageSaver::e_png);
 	delete[] pixels;
 }
 
@@ -99,7 +99,7 @@ void Snapshoot::SaveToFile(const std::string& filename, int width, int height) c
 
 	ReadPixels(pixels, width, height);
 
-	ImageSaver::storeToFile(pixels, width, height, filename, ImageSaver::e_png);
+	ImageSaver::storeToFile(pixels, width, height, 4, filename, ImageSaver::e_png);
 
 	delete[] pixels;
 }

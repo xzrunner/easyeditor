@@ -8,7 +8,7 @@ namespace d2d
 {
 
 void ImageSaver::storeToFile(const uint8_t* pixels, int width, int height,
-	const std::string& filename, Type type)
+							 int channels, const std::string& filename, Type type)
 {
 	if (!pixels) {
 		throw Exception("Fail to store image %s: null pixles!", filename.c_str());
@@ -17,10 +17,10 @@ void ImageSaver::storeToFile(const uint8_t* pixels, int width, int height,
 	switch (type)
 	{
 	case e_png:
-		storePNG(pixels, width, height, filename);
+		storePNG(pixels, width, height, channels, filename);
 		break;
 	case e_ppm:
-		storePPM(pixels, width, height, filename);
+		storePPM(pixels, width, height, channels, filename);
 		break;
 	case e_gif:
 		break;
@@ -28,7 +28,7 @@ void ImageSaver::storeToFile(const uint8_t* pixels, int width, int height,
 }
 
 void ImageSaver::storePNG(const uint8_t* pixels, int width, int height,
-	const std::string& filename)
+						  int channels, const std::string& filename)
 {
 	std::string filepath;
 	if (filename.rfind('.') != std::string::npos) {
@@ -36,11 +36,11 @@ void ImageSaver::storePNG(const uint8_t* pixels, int width, int height,
 	} else {
 		filepath = filename + ".png";
 	}
-	stbi_write_png(filepath.c_str(), width, height, 4, pixels, 0);
+	stbi_write_png(filepath.c_str(), width, height, channels, pixels, 0);
 }
 
 void ImageSaver::storePPM(const uint8_t* pixels, int width, int height,
-	const std::string& filename)
+						  int channels, const std::string& filename)
 {
 	// ppm
 	int ppm_size = 16 + width * height * 3;

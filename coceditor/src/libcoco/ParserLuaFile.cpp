@@ -319,7 +319,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 					height = part->ymax-part->ymin;
 				std::string outfile = outfloder + "\\" + part->filename;
 				if (!wxFileExists(outfile))
-					d2d::ImageSaver::storeToFile(pixels, width, height, outfile, d2d::ImageSaver::e_png);
+					d2d::ImageSaver::storeToFile(pixels, width, height, 4, outfile, d2d::ImageSaver::e_png);
 
 				std::string outpath = outfile + ".png";
 				d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(outpath, width, height));

@@ -17,13 +17,13 @@ public:
 	};
 
 	static void storeToFile(const uint8_t* pixels, int width, int height,
-		const std::string& filename, Type type);
+		int channels, const std::string& filename, Type type);
 
 private:
 	static void storePNG(const uint8_t* pixels, int width, int height,
-		const std::string& filename);
+		int channels, const std::string& filename);
 	static void storePPM(const uint8_t* pixels, int width, int height,
-		const std::string& filename);
+		int channels, const std::string& filename);
 
 }; // ImageSaver
 

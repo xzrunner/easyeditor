@@ -4,13 +4,14 @@
 namespace eimage
 {
 
-static const int BYTES_PER_PIXEL = 4;
+static const int BPP3 = 3;
+static const int BPP4 = 4;
 
 ImagePack::ImagePack(int width, int height)
 	: m_width(width)
 	, m_height(height)
 {
-	int sz = width * height * BYTES_PER_PIXEL;
+	int sz = width * height * BPP4;
 	m_pixels = new uint8_t[sz];
 	memset(m_pixels, 0, sizeof(uint8_t) * sz);
 }
@@ -20,18 +21,28 @@ ImagePack::~ImagePack()
 	delete[] m_pixels;
 }
 
-void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x, int dst_y, PackType type)
+void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x, int dst_y, 
+						 PackType type, bool bpp4)
 {
 	assert(dst_x >= 0 && dst_y >= 0);
 	if (type == PT_NORMAL) {
 		assert(dst_x + src_w <= m_width && dst_y + src_h <= m_height);
 		for (int iy = 0; iy < src_h; ++iy) {
 			for (int ix = 0; ix < src_w; ++ix) {
-				int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BYTES_PER_PIXEL,
-					ptr_dst = ((dst_y + iy) * m_width + (dst_x + ix)) * BYTES_PER_PIXEL;
-				for (int i = 0; i < BYTES_PER_PIXEL; ++i) {
-					assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
-					m_pixels[ptr_dst++] = src_buf[ptr_src++];
+				int ptr_dst = ((dst_y + iy) * m_width + (dst_x + ix)) * BPP4;
+				if (bpp4) {
+					int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BPP4;
+					for (int i = 0; i < BPP4; ++i) {
+						assert(ptr_dst < m_width * m_height * BPP4);
+						m_pixels[ptr_dst++] = src_buf[ptr_src++];
+					}
+				} else {
+					int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BPP3;
+					for (int i = 0; i < BPP4 - 1; ++i) {
+						assert(ptr_dst < m_width * m_height * BPP4);
+						m_pixels[ptr_dst++] = src_buf[ptr_src++];
+					}
+					m_pixels[ptr_dst++] = 255;
 				}
 			}
 		}
@@ -67,22 +78,40 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 		if (type == PT_CLOCKWISE) {
 			for (int iy = 0; iy < src_h; ++iy) {
 				for (int ix = 0; ix < src_w; ++ix) {
-					int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BYTES_PER_PIXEL,
-						ptr_dst = ((dst_y + ix) * m_width + (dst_x + src_h - 1 - iy)) * BYTES_PER_PIXEL;
-					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
-						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
-						m_pixels[ptr_dst++] = src_buf[ptr_src++];
+					int ptr_dst = ((dst_y + ix) * m_width + (dst_x + src_h - 1 - iy)) * BPP4;
+					if (bpp4) {
+						int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BPP4;
+						for (int i = 0; i < BPP4; ++i) { 
+							assert(ptr_dst < m_width * m_height * BPP4);
+							m_pixels[ptr_dst++] = src_buf[ptr_src++];
+						}
+					} else {
+						int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BPP3;
+						for (int i = 0; i < BPP4 - 1; ++i) {
+							assert(ptr_dst < m_width * m_height * BPP4);
+							m_pixels[ptr_dst++] = src_buf[ptr_src++];
+						}
+						m_pixels[ptr_dst++] = 255;
 					}
 				}
 			}
 		} else if (type == PT_ANTICLOCKWISE) {
 			for (int iy = 0; iy < src_h; ++iy) {
 				for (int ix = 0; ix < src_w; ++ix) {
-					int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BYTES_PER_PIXEL,
-						ptr_dst = ((dst_y + src_w - 1 - ix) * m_width + (dst_x + iy)) * BYTES_PER_PIXEL;
-					for (int i = 0; i < BYTES_PER_PIXEL; ++i) { 
-						assert(ptr_dst < m_width * m_height * BYTES_PER_PIXEL);
-						m_pixels[ptr_dst++] = src_buf[ptr_src++];
+					int ptr_dst = ((dst_y + src_w - 1 - ix) * m_width + (dst_x + iy)) * BPP4;
+					if (bpp4) {
+						int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BPP4;
+						for (int i = 0; i < BPP4; ++i) { 
+							assert(ptr_dst < m_width * m_height * BPP4);
+							m_pixels[ptr_dst++] = src_buf[ptr_src++];
+						}
+					} else {
+						int ptr_src = ((src_h - 1 - iy) * src_w + ix) * BPP3;
+						for (int i = 0; i < BPP4 - 1; ++i) {
+							assert(ptr_dst < m_width * m_height * BPP4);
+							m_pixels[ptr_dst++] = src_buf[ptr_src++];
+						}
+						m_pixels[ptr_dst++] = 255;
 					}
 				}
 			}
@@ -90,7 +119,7 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 	}
 }
 
-void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool clockwise)
+void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool clockwise, bool bpp4)
 {
 	int sw = img->originWidth(),
 		sh = img->originHeight();
@@ -103,7 +132,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool
 		assert(0);
 	}
 	
-	AddImage(img->getPixelData(), sw, sh, x, y, type);
+	AddImage(img->getPixelData(), sw, sh, x, y, type, bpp4);
 }
 
 void ImagePack::OutputToFile(const wxString& filepath) const
