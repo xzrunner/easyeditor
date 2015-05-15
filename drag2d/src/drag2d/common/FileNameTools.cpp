@@ -89,7 +89,11 @@ wxString FilenameTools::getExtension(const wxString& filepath)
 wxString FilenameTools::getFileDir(const wxString& filepath)
 {
 	int pos_divide = std::max((int)filepath.find_last_of('/'), (int)filepath.find_last_of('\\'));
-	return filepath.substr(0, pos_divide);
+	if (pos_divide == -1) {
+		return ".";
+	} else {
+		return filepath.substr(0, pos_divide);
+	}
 }
 
 bool FilenameTools::isExist(const wxString& filepath)
