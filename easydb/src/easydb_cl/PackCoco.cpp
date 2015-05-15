@@ -56,8 +56,8 @@ void PackCoco::Trigger(const std::string& config_path)
 	Json::Value pkg_val = value["packages"][i++];
 	while (!pkg_val.isNull()) {
 		Prepare(pkg_val, config_dir);
- 		PackTexture(pkg_val, config_dir, trim);
- 		PackLuaFile(pkg_val, config_dir);
+		PackTexture(pkg_val, config_dir, trim);
+		PackLuaFile(pkg_val, config_dir);
 		PackBinFiles(pkg_val, config_dir);
 
 		pkg_val = value["packages"][i++];
@@ -86,12 +86,12 @@ void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_di
 	libpacker::NormalPack tex_packer(images);
 	tex_packer.Pack();
 	std::string json_path = dst_name + "1.json";
-	std::string src_folder_path = config_dir + "\\" + src_folder;
-	tex_packer.OutputInfo(src_folder_path, trim, json_path);
+	tex_packer.OutputInfo(config_dir, trim, json_path);
 
 	if (pkg_val["rrp"].isNull()) {
 		std::string img_path = dst_name + "1.png";
 		tex_packer.OutputImage(img_path);
+
 		CompressTexture(img_path, tex_type);
 //		wxRemoveFile(img_path);
 	}
@@ -190,7 +190,7 @@ void PackCoco::GetAllDataFiles(const wxString& src_folder, const wxString& filte
 		wxFileName filename(all_files[i]);
 		filename.Normalize();
 		wxString filepath = filename.GetFullPath();
-		if (!filepath.Contains(filter)) {
+		if (!filter.IsEmpty() && !filepath.Contains(filter)) {
 			continue;
 		}
 
