@@ -55,8 +55,9 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 		data = loadImageBySOIL(filepath, width, height, channels);
 	}
 
-	if (channels == 4)
-		checkPixelsDataAlpha(data, width, height);
+	if (channels == 4) {
+		FormatPixelsAlpha(data, width, height, 255);
+	}
 
 	if (format == 0)
 	{
@@ -76,7 +77,7 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	return data;
 }
 
-void ImageLoader::checkPixelsDataAlpha(uint8_t* pixels, int width, int height)
+void ImageLoader::FormatPixelsAlpha(uint8_t* pixels, int width, int height, int val)
 {
 	int ptr = 0;
 	for (int i = 0; i < height; ++i)
@@ -87,8 +88,9 @@ void ImageLoader::checkPixelsDataAlpha(uint8_t* pixels, int width, int height)
 					g = pixels[ptr+1],
 					b = pixels[ptr+2],
 					a = pixels[ptr+3];
-			if (a == 0)
-				r = g = b = 0;
+			if (a == 0) {
+				r = g = b = val;
+			}
 			pixels[ptr++] = r;
 			pixels[ptr++] = g;
 			pixels[ptr++] = b;

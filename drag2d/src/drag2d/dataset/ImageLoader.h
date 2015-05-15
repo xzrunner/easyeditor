@@ -14,7 +14,8 @@ public:
 
 	// alpha为0时，把rgb也设为0
 	// 否则用shader画的时候有奇怪的透明部分；导出ppm格式时透明的部分不对
-	static void checkPixelsDataAlpha(uint8_t* pixels, int width, int height);
+	// 或设成255
+	static void FormatPixelsAlpha(uint8_t* pixels, int width, int height, int val);
 
 	static void loadTexture(unsigned int& texture, const uint8_t* pixel, int width, int height, int channels, int format);
 
