@@ -56,7 +56,7 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	}
 
 	if (channels == 4) {
-		FormatPixelsAlpha(data, width, height, 255);
+		FormatPixelsAlpha(data, width, height, 0);
 	}
 
 	if (format == 0)
