@@ -6,7 +6,7 @@ namespace emodeling
 
 BodyEditStage::BodyEditStage(wxWindow* parent, wxTopLevelWindow* frame, 
 							 libshape::Symbol* symbol)
-	: libshape::StagePanel(parent, frame, symbol, NULL)
+	: libshape::StagePanel(parent, frame, symbol)
 {
 }
 

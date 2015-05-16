@@ -38,7 +38,7 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	}
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	{
- 		eanim::PreviewDialog dlg(m_editPanel, &anim->getSymbol());
+ 		libanim::PreviewDialog dlg(m_editPanel, &anim->getSymbol());
  		dlg.ShowModal();
 
 // 		m_editPanel->resetCanvas();
@@ -68,8 +68,10 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
 	{
-		etexture::Symbol& symbol = const_cast<etexture::Symbol&>(tex->getSymbol());
-		etexture::EditDialog dlg(m_editPanel, &symbol);
+		std::vector<d2d::ISprite*> sprites;
+		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+
+		etexture::EditDialog dlg(m_editPanel, tex, sprites);
 		dlg.ShowModal();
 
 		m_editPanel->ResetViewport();

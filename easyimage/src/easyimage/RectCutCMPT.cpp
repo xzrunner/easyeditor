@@ -234,7 +234,7 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		float height = r.yLength();
 
 		wxString img_filename = imageDir + "\\" + imageName + "_" + wxString::FromDouble(i);
-		d2d::ImageSaver::storeToFile(pixels, width, height, img_filename.ToStdString(), d2d::ImageSaver::e_png);
+		d2d::ImageSaver::storeToFile(pixels, width, height, 4, img_filename.ToStdString(), d2d::ImageSaver::e_png);
 
 		wxString img_fullname = img_filename + ".png";
 		d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(img_fullname.ToStdString(), width, height));

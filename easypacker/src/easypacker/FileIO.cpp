@@ -267,7 +267,7 @@ void FileIO::storeImage(const char* filename)
 		break;
 	case e_png:
 //		stbi_write_png((imgFile + ".png").c_str(), width, height, channel, dst_data, 0);
-		d2d::ImageSaver::storeToFile(dst_data, width, height, imgFile.ToStdString(), 
+		d2d::ImageSaver::storeToFile(dst_data, width, height, 4, imgFile.ToStdString(), 
 			d2d::ImageSaver::e_png);
 		break;
 	}
