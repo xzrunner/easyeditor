@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easyui"
-	ProjectGUID="{DB004C38-2923-41EA-9ACE-A0191AB01F54}"
+	ProjectGUID="{056D3AB3-A0B2-454A-AF31-DA98BAB867BA}"
 	RootNamespace="easyui"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

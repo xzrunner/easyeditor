@@ -31,17 +31,12 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 	{
 		if (ImageSprite* s = dynamic_cast<ImageSprite*>(sprite))
 		{
-			GL10::PushMatrix();
-
 			Matrix mt;
 			s->GetTransMatrix(mt);
-			GL10::MultMatrixf((const float*)mt.getElements( ));
 
 			Image* img = s->getSymbol().getImage();
-			PrimitiveDraw::rect(Vector(0, 0), img->originWidth() * 0.5f, 
+			PrimitiveDraw::rect(mt, img->originWidth() * 0.5f, 
 				img->originHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
-
-			GL10::PopMatrix();
 		}
 	}
 
