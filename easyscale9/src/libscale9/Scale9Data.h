@@ -60,9 +60,9 @@ public:
 	static void ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center, 
 		float width, float height);
 
-private:
 	static Scale9Type CheckType(d2d::ISprite* sprites[3][3]);
 
+private:
 	static void InitSprite(const FileLoader::Entry& entry,
 		d2d::ISprite** pSprite, const std::string& dir);	
 

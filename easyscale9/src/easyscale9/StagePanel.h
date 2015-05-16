@@ -43,9 +43,6 @@ namespace escale9
 		void setToolbarPanel(ToolbarPanel* toolbar);
 
 	private:
-		bool isComplete() const;
-
-	private:
 		// [2][0]
 		// [1][0]
 		// [0][0] [0][1] [0][2]

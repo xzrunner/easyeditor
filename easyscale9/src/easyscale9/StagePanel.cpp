@@ -108,63 +108,32 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 
 void StagePanel::rebuildPatchSymbol()
 {
-	if (isComplete())
-	{
-		if (m_symbol) delete m_symbol;
-		m_symbol = new Symbol;
-
-		float width = m_toolbar->getWidth(),
-			  height = m_toolbar->getHeight();
-		m_symbol->ComposeFromSprites(m_sprites, width, height);
-
-		Scale9Type type = m_symbol->GetScale9Data().GetType();
-		if (type == e_3GridHor)
-		{
-			height = m_symbol->getSize().yLength();
-			m_toolbar->setSize(width, height);
-		}
-		else if (type== e_3GridVer)
-		{
-			width = m_symbol->getSize().xLength();
-			m_toolbar->setSize(width, height);
-		}
+	Scale9Type type = Scale9Data::CheckType(m_sprites);
+	if (type == e_null) {
+		return;
 	}
+
+	if (m_symbol) delete m_symbol;
+	m_symbol = new Symbol;
+
+	float width = m_toolbar->getWidth(),
+		  height = m_toolbar->getHeight();
+
+	if (type == e_3GridHor) {
+		height = m_sprites[1][1]->getSymbol().getSize().yLength();
+	} else if (type == e_3GridVer) {
+		width = m_sprites[1][1]->getSymbol().getSize().xLength();
+	}
+
+	m_symbol->ComposeFromSprites(m_sprites, width, height);
+
+	m_toolbar->setSize(width, height);
 }
 
 void StagePanel::setToolbarPanel(ToolbarPanel* toolbar)
 {
 	m_toolbar = toolbar;
 	static_cast<StageCanvas*>(m_canvas)->setToolbarPanel(toolbar);
-}
-
-bool StagePanel::isComplete() const
-{
-	// e_3GridHor
-	if (m_sprites[1][0] && m_sprites[1][1] && m_sprites[1][2])
-		return true;
-
-	// e_3GridVer
-	if (m_sprites[0][1] && m_sprites[1][1] && m_sprites[2][1])
-		return true;
-
-	// e_6GridUpper
-	if (m_sprites[1][0] && m_sprites[1][1] && m_sprites[1][2] &&
-		m_sprites[2][0] && m_sprites[2][1] && m_sprites[2][2])
-		return true;
-
-	// e_9Grid
-	if (m_sprites[0][0] && m_sprites[0][1] && m_sprites[0][2] &&
-		m_sprites[1][0] && m_sprites[1][1] && m_sprites[1][2] &&
-		m_sprites[2][0] && m_sprites[2][1] && m_sprites[2][2])
-		return true;
-
-	// e_9GridHollow
-	if (m_sprites[0][0] && m_sprites[0][1] && m_sprites[0][2] &&
-		m_sprites[1][0] &&					  m_sprites[1][2] &&
-		m_sprites[2][0] && m_sprites[2][1] && m_sprites[2][2])
-		return true;
-
-	return false;
 }
 
 } // escale9

@@ -397,7 +397,7 @@ Scale9Type Scale9Data::CheckType(d2d::ISprite* sprites[3][3])
 		// 3 grid ver
 		type = e_3GridVer;
 		for (int i = 0; i < 3 && type == e_3GridVer; ++i) {
-			if (!sprites[i][1]) type = e_3GridVer;
+			if (!sprites[i][1]) type = e_null;
 		}
 		if (type != e_null) break;
 	} while (false);
