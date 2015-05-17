@@ -21,7 +21,7 @@ namespace edb
 		{
 			d2d::SpriteSelection* selection = Context::Instance()->stage->getSpriteSelection();
 			std::vector<d2d::ISprite*> sprites;
-			selection->traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+			selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 			for (size_t i = 0, n = sprites.size(); i < n; ++i)
 			{
