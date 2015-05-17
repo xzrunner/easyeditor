@@ -661,6 +661,14 @@
 				Name="scene"
 				>
 				<File
+					RelativePath="..\..\..\src\drag2d\dataset\Group.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\Group.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\dataset\Layer.cpp"
 					>
 				</File>
@@ -1844,6 +1852,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\view\ObjectVector.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\view\ObjectVector.inl"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\view\ShapesContainer.cpp"
 						>
 					</File>
@@ -1861,14 +1877,6 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\drag2d\view\StageDataWrapper.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\VectorContainer.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\VectorContainer.inl"
 						>
 					</File>
 				</Filter>
@@ -2034,6 +2042,18 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\StageDropTarget.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="grouptree"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeCtrl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeCtrl.h"
 					>
 				</File>
 			</Filter>
