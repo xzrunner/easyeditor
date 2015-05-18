@@ -32,13 +32,18 @@ namespace ecomplex
 		void setViewlist(d2d::ViewlistPanel* viewlist) {
 			m_viewlist = viewlist;
 		}
+		void SetGroupPanel(d2d::GroupTreePanel* group_panel) {
+			m_group_panel = group_panel;
+		}
 
 	private:
 		Symbol* m_symbol;
 
+		LibraryPanel* m_library;
+
 		d2d::ViewlistPanel* m_viewlist;
 
-		LibraryPanel* m_library;
+		d2d::GroupTreePanel* m_group_panel;
 
 	}; // StagePanel
 }

@@ -117,6 +117,7 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 	m_stage->setViewlist(m_viewlist);
 
 	m_grouptree = new d2d::GroupTreePanel(split, m_stage);
+	m_stage->SetGroupPanel(m_grouptree);
 
 	split->SetSashGravity(0.5f);
 	split->SplitHorizontally(m_viewlist, m_grouptree);

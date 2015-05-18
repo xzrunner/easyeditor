@@ -5,6 +5,7 @@
 #include "dataset/ISprite.h"
 
 #include <sstream>
+#include <queue>
 #include <wx/menu.h>
 
 namespace d2d
@@ -17,7 +18,8 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
-	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, wxTR_EDIT_LABELS)
+	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
+	wxTR_EDIT_LABELS | wxTR_HIDE_ROOT)
 	, m_sprite_impl(sprite_impl)
 {
 	m_root = AddRoot("Root");
@@ -28,7 +30,7 @@ void GroupTreeCtrl::AddNode()
 	static int s_num = 0;
 
 	std::ostringstream ss;
-	ss << "node" << s_num++;
+	ss << "Group" << s_num++;
 	std::string text = ss.str();
 
 	ItemData* data = new ItemData;
@@ -36,8 +38,10 @@ void GroupTreeCtrl::AddNode()
 
 	wxTreeItemId id = GetFocusedItem();
 	if (id.IsOk()) {
+		data->SetId(id);
 		AddNode(id, text, data);
 	} else {
+		data->SetId(m_root);
 		AddNode(m_root, text, data);
 	}
 }
@@ -57,9 +61,31 @@ void GroupTreeCtrl::Clear()
 	}
 }
 
+void GroupTreeCtrl::Remove(ISprite* sprite)
+{
+	std::queue<wxTreeItemIdValue> buf;
+	buf.push(m_root);
+	while (!buf.empty()) {
+		wxTreeItemIdValue item = buf.front(); buf.pop();
+		
+		wxTreeItemIdValue cookie;
+		wxTreeItemId id = GetFirstChild(m_root, cookie);
+		if (id) {
+			while (id) {
+				buf.push(id);
+				id = GetNextSibling(id);
+			}
+		} else {
+			wxString text = GetItemText(item);
+			wxLogDebug(text);
+		}
+	}
+}
+
 void GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, ItemData* data)
 {
 	wxTreeItemId id = AppendItem(parent, name, -1, -1, data);
+	ExpandAll();
 }
 
 void GroupTreeCtrl::OnItemRClick(wxTreeEvent& event)
@@ -111,7 +137,12 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 		return;
 	}	
 
-	Group* group = ((ItemData*)GetItemData(m_on_menu_id))->group;
+	ItemData* data = (ItemData*)GetItemData(m_on_menu_id);
+	if (!data) {
+		return;
+	}
+
+	Group* group = data->group;
 	if (!group) {
 		return;
 	}
@@ -151,8 +182,11 @@ void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 
 	wxMenu menu;
 
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuAddSprites, this, ID_ADD_SPRITES);
-	menu.Append(ID_ADD_SPRITES, wxT("&Add Sprites"));
+	menu.Append(ID_MENU_ADD, wxT("&Add Sprites"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuAddSprites, this, ID_MENU_ADD);
+
+	menu.Append(ID_MENU_CLEAR, wxT("&Clear Sprites"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuClear, this, ID_MENU_CLEAR);
 
 	PopupMenu(&menu, pt);
 }

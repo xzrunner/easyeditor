@@ -16,6 +16,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
+	, m_viewlist(NULL)
+	, m_group_panel(NULL)
 {
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 	m_canvas = new StageCanvas(this);
@@ -32,6 +34,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	: EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
+	, m_viewlist(NULL)
+	, m_group_panel(NULL)
 {
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
 	m_canvas = new StageCanvas(this);
@@ -55,6 +59,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	d2d::SpritesPanelImpl::removeSprite(sprite);
 	m_viewlist->remove(sprite);
+	m_group_panel->Remove(sprite);
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)

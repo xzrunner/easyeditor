@@ -14,6 +14,11 @@ GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl)
 	InitLayout();
 }
 
+void GroupTreePanel::Remove(ISprite* sprite)
+{
+	m_grouptree->Remove(sprite);
+}
+
 void GroupTreePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);

@@ -20,8 +20,10 @@ public:
 
 	void Clear();
 
+	void Remove(ISprite* sprite);
+
 private:
-	struct ItemData : wxTreeItemData
+	struct ItemData : public wxTreeItemData
 	{
 		ItemData() : group(NULL), sprite(NULL) {}
 
@@ -49,7 +51,8 @@ private:
 private:
 	enum
 	{
-		ID_ADD_SPRITES = 100,
+		ID_MENU_ADD = 100,
+		ID_MENU_CLEAR,
 
 		ID_GROUP_TREE_CTRL = 1000
 	};
