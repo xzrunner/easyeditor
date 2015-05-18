@@ -28,11 +28,10 @@ public:
 	virtual const d2d::EditPanel* getEditPanel() const;
 
 private:
-	void initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-		wxSplitterWindow* leftVerticalSplitter, wxSplitterWindow* rightVerticalSplitter,
-		wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar);
-
-	void initLayout();
+	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;
@@ -43,6 +42,7 @@ private:
 	d2d::PropertySettingPanel* m_property;
 	ecomplex::StagePanel* m_stage;
 	d2d::ViewlistPanel* m_viewlist;
+	d2d::GroupTreePanel* m_grouptree;
 
 	friend class FileIO;
 

@@ -2056,6 +2056,14 @@
 					RelativePath="..\..\..\src\drag2d\view\GroupTreeCtrl.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreePanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreePanel.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

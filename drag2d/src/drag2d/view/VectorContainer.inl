@@ -5,9 +5,65 @@ namespace d2d
 {
 
 template<class T>
-inline void VectorContainer::Traverse(const std::vector<T*>& objs, 
-									  IVisitor& visitor, 
-									  bool order/* = true*/)
+inline ObjectVector<T>::ObjectVector()
+{
+}
+
+template<class T>
+inline ObjectVector<T>::~ObjectVector()
+{
+	Clear();
+}
+
+template<class T>
+void ObjectVector<T>::Traverse(IVisitor& visitor, bool order) const
+{
+	Traverse(m_objs, visitor, order);
+}
+
+template<class T>
+void ObjectVector<T>::Traverse(IVisitor& visitor, DataTraverseType type, bool order) const
+{
+	Traverse(m_objs, visitor, type, order);
+}
+
+template<class T>
+bool ObjectVector<T>::Remove(T* obj)
+{
+	return Remove(m_objs, obj);
+}
+
+template<class T>
+void ObjectVector<T>::Insert(T* obj)
+{
+	Insert(m_objs, obj);
+}
+
+template<class T>
+void ObjectVector<T>::Clear()
+{
+	Clear(m_objs);
+}
+
+template<class T>
+bool ObjectVector<T>::ResetOrder(const T* obj, bool up)
+{
+	return ResetOrder(m_objs, obj, up);
+}
+
+template<class T>
+bool ObjectVector<T>::IsExist(T* obj) const
+{
+	for (int i = 0, n = m_objs.size(); i < n; ++i) {
+		if (obj == m_objs[i]) {
+			return true;
+		}
+	}
+	return false;
+}
+
+template<class T>
+inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, IVisitor& visitor, bool order/* = true*/)
 {
 	if (order)
 	{

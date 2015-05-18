@@ -75,6 +75,9 @@
 #include "view/IDataContainer.h"
 #include "view/FontPropertySetting.h"
 #include "view/SpriteDropTarget.h"
+#include "view/ShapesContainer.h"
+#include "view/SpritesContainer.h"
+#include "view/GroupTreePanel.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

@@ -14,7 +14,7 @@ Task::Task(wxFrame* parent)
 	, m_stage(NULL)
 	, m_viewlist(NULL)
 {
-	initLayout();
+	InitLayout();
 
 	m_library->LoadFromConfig();
 }
@@ -67,56 +67,61 @@ const d2d::EditPanel* Task::getEditPanel() const
 	return m_stage;
 }
 
-void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-	wxSplitterWindow* leftVerticalSplitter, 
-	wxSplitterWindow* rightVerticalSplitter, 
-	wxWindow*& library, wxWindow*& property, 
-	wxWindow*& stage, wxWindow*& toolbar)
+void Task::InitLayout()
 {
-	library = m_library = new ecomplex::LibraryPanel(leftHorizontalSplitter);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
-	property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
 
-	stage = m_stage = new ecomplex::StagePanel(leftVerticalSplitter, m_parent, m_property, m_library);
-	m_property->setPropertySetting(new ecomplex::PropertySetting(m_stage, m_stage->getSymbol()));
+	left_split->SetSashGravity(0.12f);
+	left_split->SplitVertically(left, center);
 
-//		context->toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage, context->property);
+	right_split->SetSashGravity(0.85f);
+	right_split->SplitVertically(left_split, right);
 
-	toolbar = m_viewlist = new d2d::ViewlistPanel(rightVerticalSplitter, m_stage, m_stage, m_property);
-
-	m_stage->setViewlist(m_viewlist);
-
-	m_library->setCanvas(m_stage->getCanvas());
+	m_root = right_split;
 }
 
-void Task::initLayout()
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
-	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
-	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	wxWindow *library, *property, *stage, *toolbar;
-	initWindows(leftHorizontalSplitter, leftVerticalSplitter, rightVerticalSplitter,
-		library, property, stage, toolbar);
+	m_library = new ecomplex::LibraryPanel(split);
 
-	if (library || property)
-	{
-		if (library && property)
-		{
-			leftHorizontalSplitter->SetSashGravity(0.5f);
-			leftHorizontalSplitter->SplitHorizontally(library, property);
-		}
-		leftVerticalSplitter->SetSashGravity(0.2f);
-		leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, stage);
-	}
+	m_property = new d2d::PropertySettingPanel(split);
 
-	if (toolbar)
-	{
-		rightVerticalSplitter->SetSashGravity(0.85f);
-		rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
-	}
+	split->SetSashGravity(0.55f);
+	split->SplitHorizontally(m_library, m_property);
 
-	m_root = rightVerticalSplitter;
+	return split;
+}
+
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
+{
+	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library);
+
+	m_library->setCanvas(m_stage->getCanvas());
+	m_property->setPropertySetting(new ecomplex::PropertySetting(m_stage, m_stage->getSymbol()));
+
+	return m_stage;
+}
+
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_viewlist = new d2d::ViewlistPanel(split, m_stage, m_stage, m_property);
+	m_stage->setViewlist(m_viewlist);
+
+	m_grouptree = new d2d::GroupTreePanel(split, m_stage);
+
+	split->SetSashGravity(0.5f);
+	split->SplitHorizontally(m_viewlist, m_grouptree);
+
+	return split;
 }
 
 }
