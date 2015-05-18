@@ -37,7 +37,7 @@ void SymbolContainer::Insert(Object* obj)
 
 void SymbolContainer::Clear()
 {
-	m_symbol->Release();
+	d2d::ObjectVector<d2d::IShape>::Clear(m_symbol->m_shapes);
 }
 
 bool SymbolContainer::ResetOrder(const Object* obj, bool up)

@@ -50,8 +50,10 @@ bool EditPolylineImpl::OnKeyDown(int keyCode)
 
 bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 {
-	if (m_draw_op->shouldFixMousePos())
+	if (m_draw_op->ShouldFixPos())
+	{
 		return m_base_op->OnMouseLeftDownBase(x, y);
+	}
 	else
 	{
 		int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;

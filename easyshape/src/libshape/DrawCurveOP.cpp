@@ -1,4 +1,5 @@
 #include "DrawCurveOP.h"
+#include "DrawLineUtility.h"
 
 namespace libshape
 {
@@ -6,6 +7,7 @@ namespace libshape
 DrawCurveOP::DrawCurveOP(d2d::EditPanel* editPanel)
 	: d2d::ZoomViewOP(editPanel, true)
 	, m_startDraw(false)
+	, m_straight_mode(false)
 {
 	m_firstPos.setInvalid();
 }
@@ -34,14 +36,21 @@ bool DrawCurveOP::onMouseDrag(int x, int y)
 	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
 
 	if (!m_startDraw && m_firstPos.isValid() && 
-		(m_firstPos.x != x || m_firstPos.y != y))
+		(m_firstPos.x != x || m_firstPos.y != y)) {
 		m_startDraw = true;
-
-	if (m_startDraw)
-	{
-		m_curve.push_back(m_editPanel->transPosScreenToProject(x, y));
-		m_editPanel->Refresh();
 	}
+
+	if (!m_startDraw) {
+		return false;
+	}
+
+	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	if (DrawLineUtility::IsStraightOpen(m_curve)) {
+		pos = DrawLineUtility::FixPosTo8DirStraight(m_curve.back(), pos);
+		m_curve.pop_back();
+	}
+	m_curve.push_back(pos);
+	m_editPanel->Refresh();
 
 	return false;
 }

@@ -23,11 +23,8 @@ public:
 		m_isClosed = is_loop;
 	}
 
-protected:
-	bool shouldFixMousePos() const;
-
 private:
-	void fixPosTo45Degree(d2d::Vector& pos) const;
+	bool ShouldFixPos() const;
 
 protected:
 	mutable std::vector<d2d::Vector> m_polyline;

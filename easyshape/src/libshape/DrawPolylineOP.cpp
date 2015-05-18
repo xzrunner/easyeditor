@@ -1,4 +1,5 @@
 #include "DrawPolylineOP.h"
+#include "DrawLineUtility.h"
 
 namespace libshape
 {
@@ -15,8 +16,9 @@ bool DrawPolylineOP::onMouseLeftDown(int x, int y)
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	if (shouldFixMousePos())
-		fixPosTo45Degree(pos);
+	if (DrawLineUtility::IsStraightOpen(m_polyline)) {
+		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
+	}
 	m_polyline.push_back(pos);
 	m_editPanel->Refresh();
 
@@ -44,8 +46,9 @@ bool DrawPolylineOP::onMouseMove(int x, int y)
 	if (m_polyline.empty()) return false;
 
 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	if (shouldFixMousePos())
-		fixPosTo45Degree(pos);
+	if (DrawLineUtility::IsStraightOpen(m_polyline)) {
+		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
+	}
 	m_currPos = pos;
 	m_editPanel->Refresh();
 
@@ -94,46 +97,9 @@ bool DrawPolylineOP::clear()
 	return false;
 }
 
-bool DrawPolylineOP::shouldFixMousePos() const
+bool DrawPolylineOP::ShouldFixPos() const
 {
-	return !m_polyline.empty() && wxGetKeyState(WXK_SHIFT);
-}
-
-void DrawPolylineOP::fixPosTo45Degree(d2d::Vector& pos) const
-{
-	d2d::Vector last = m_polyline.back();
-
-	float nearest;
-	d2d::Vector fixed = pos;
-
-	const float dx = fabs(pos.x - last.x);
-	nearest = dx;
-	fixed.set(last.x, pos.y);
-
-	const float dy = fabs(pos.y - last.y);
-	if (dy < nearest)
-	{
-		nearest = dy;
-		fixed.set(pos.x, last.y);
-	}
-
-	d2d::Vector other(last.x + 1, last.y - 1);
-	const float dxyDown = d2d::Math::getDisPointToStraightLine(pos, last, other);
-	if (dxyDown < nearest)
-	{
-		nearest = dxyDown;
-		d2d::Math::getFootOfPerpendicular(last, other, pos, &fixed);
-	}
-
-	other.set(last.x + 1, last.y + 1);
-	const float dxyUp = d2d::Math::getDisPointToStraightLine(pos, last, other);
-	if (dxyUp < nearest)
-	{
-		nearest = dxyUp;
-		d2d::Math::getFootOfPerpendicular(last, other, pos, &fixed);
-	}
-
-	pos = fixed;
+	return DrawLineUtility::IsStraightOpen(m_polyline);
 }
 
 }

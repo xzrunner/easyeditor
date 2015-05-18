@@ -25,6 +25,8 @@ private:
 	d2d::Vector m_firstPos;
 	bool m_startDraw;
 
+	bool m_straight_mode;
+
 }; // DrawCurveOP
 
 }

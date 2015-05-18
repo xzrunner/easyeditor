@@ -643,6 +643,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\libshape\DrawLineUtility.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\DrawLineUtility.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\libshape\DrawPencilLineCMPT.cpp"
 						>
 					</File>
