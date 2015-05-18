@@ -88,7 +88,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, IVisitor& vis
 }
 
 template<class T>
-inline void VectorContainer::Traverse(const std::vector<T*>& objs,
+inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 									  IVisitor& visitor, 
 									  DataTraverseType type, 
 									  bool order)
@@ -121,7 +121,7 @@ inline void VectorContainer::Traverse(const std::vector<T*>& objs,
 }
 
 template<class T>
-inline bool VectorContainer::Remove(std::vector<T*>& objs, 
+inline bool ObjectVector<T>::Remove(std::vector<T*>& objs, 
 									T* obj)
 {
 	for (size_t i = 0, n = objs.size(); i < n; ++i)
@@ -137,7 +137,7 @@ inline bool VectorContainer::Remove(std::vector<T*>& objs,
 }
 
 template<class T>
-inline void VectorContainer::Insert(std::vector<T*>& objs, 
+inline void ObjectVector<T>::Insert(std::vector<T*>& objs, 
 									T* obj)
 {
 	obj->Retain();
@@ -145,7 +145,7 @@ inline void VectorContainer::Insert(std::vector<T*>& objs,
 }
 
 template<class T>
-inline void VectorContainer::Clear(std::vector<T*>& objs)
+inline void ObjectVector<T>::Clear(std::vector<T*>& objs)
 {
 	for (size_t i = 0, n = objs.size(); i < n; ++i)
 		objs[i]->Release();
@@ -153,7 +153,7 @@ inline void VectorContainer::Clear(std::vector<T*>& objs)
 }
 
 template<class T>
-inline bool VectorContainer::ResetOrder(std::vector<T*>& objs, 
+inline bool ObjectVector<T>::ResetOrder(std::vector<T*>& objs, 
 										const T* obj, 
 										bool up)
 {

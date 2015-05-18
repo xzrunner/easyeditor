@@ -41,8 +41,8 @@ private:
 
 	bool m_editable, m_visible;
 
-	std::vector<d2d::ISprite*> m_sprites;
-	std::vector<d2d::IShape*> m_shapes;
+	d2d::ObjectVector<d2d::ISprite> m_sprites;
+	d2d::ObjectVector<d2d::IShape> m_shapes;
 
 }; // Layer
 

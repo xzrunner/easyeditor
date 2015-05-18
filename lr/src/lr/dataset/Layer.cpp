@@ -13,59 +13,56 @@ Layer::Layer()
 
 Layer::~Layer()
 {
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->Release();
-	}
 }
 
 void Layer::TraverseSprite(d2d::IVisitor& visitor, bool order/* = true*/) const
 {
-	d2d::VectorContainer::Traverse(m_sprites, visitor, order);
+	m_sprites.Traverse(visitor, order);
 }
 
 void Layer::TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type, bool order) const
 {
-	d2d::VectorContainer::Traverse(m_sprites, visitor, type, order);
+	m_sprites.Traverse(visitor, type, order);
 }
 
 bool Layer::RemoveSprite(Object* obj)
 {
-	return d2d::VectorContainer::Remove(m_sprites, static_cast<d2d::ISprite*>(obj));
+	return m_sprites.Remove(static_cast<d2d::ISprite*>(obj));
 }
 
 void Layer::InsertSprite(Object* obj)
 {
-	d2d::VectorContainer::Insert(m_sprites, static_cast<d2d::ISprite*>(obj));
+	m_sprites.Insert(static_cast<d2d::ISprite*>(obj));
 }
 
 void Layer::ClearSprite()
 {
-	d2d::VectorContainer::Clear(m_sprites);
+	m_sprites.Clear();
 }
 
 bool Layer::ResetOrderSprite(const Object* obj, bool up)
 {
-	return d2d::VectorContainer::ResetOrder(m_sprites, static_cast<const d2d::ISprite*>(obj), up);
+	return m_sprites.ResetOrder(static_cast<const d2d::ISprite*>(obj), up);
 }
 
 void Layer::TraverseShape(d2d::IVisitor& visitor, bool order) const
 {
-	d2d::VectorContainer::Traverse(m_shapes, visitor, order);
+	m_shapes.Traverse(visitor, order);
 }
 
 bool Layer::RemoveShape(Object* obj)
 {
-	return d2d::VectorContainer::Remove(m_shapes, static_cast<d2d::IShape*>(obj));
+	return m_shapes.Remove(static_cast<d2d::IShape*>(obj));
 }
 
 void Layer::InsertShape(Object* obj)
 {
-	d2d::VectorContainer::Insert(m_shapes, static_cast<d2d::IShape*>(obj));
+	m_shapes.Insert(static_cast<d2d::IShape*>(obj));
 }
 
 void Layer::ClearShape()
 {
-	d2d::VectorContainer::Clear(m_shapes);
+	m_shapes.Clear();
 }
 
 void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
@@ -92,8 +89,7 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			sprite->load(spr_val);
 
-			sprite->Retain();
-			m_sprites.push_back(sprite);
+			m_sprites.Insert(sprite);
 
 			sprite->Release();
 			symbol->Release();
@@ -110,7 +106,8 @@ void Layer::LoadFromFile(const Json::Value& val, const std::string& dir)
 	while (!shape_val.isNull()) 
 	{
 		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
-		m_shapes.push_back(shape);
+		m_shapes.Insert(shape);
+		shape->Release();
 		shape_val = val["shape"][idx++];
 	}
 }
@@ -121,9 +118,11 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	val["visible"] = m_visible;
 	val["editable"] = m_editable;
 
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) 
+	std::vector<d2d::ISprite*> sprites;
+	m_sprites.Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_ALL);
+	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		d2d::ISprite* spr = m_sprites[i];
+		d2d::ISprite* spr = sprites[i];
 
 		Json::Value spr_val;
 		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
@@ -133,8 +132,10 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 		val["sprite"][i] = spr_val;
 	}
 
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		m_shapes[i]->StoreToFile(val["shape"][i], dir);
+	std::vector<d2d::IShape*> shapes;
+	m_shapes.Traverse(d2d::FetchAllVisitor<d2d::IShape>(shapes), true);
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		shapes[i]->StoreToFile(val["shape"][i], dir);
 	}
 }
 

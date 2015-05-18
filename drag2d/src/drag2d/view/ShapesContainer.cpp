@@ -1,5 +1,5 @@
 #include "ShapesContainer.h"
-#include "VectorContainer.h"
+#include "ObjectVector.h"
 
 #include "dataset/IShape.h"
 
@@ -13,7 +13,7 @@ ShapesContainer::~ShapesContainer()
 
 void ShapesContainer::Traverse(IVisitor& visitor, bool order/* = true*/) const
 {
-	VectorContainer::Traverse(m_shapes, visitor, order);
+	m_shapes.Traverse(visitor, order);
 }
 
 void ShapesContainer::Traverse(IVisitor& visitor, DataTraverseType type, bool order) const
@@ -23,22 +23,22 @@ void ShapesContainer::Traverse(IVisitor& visitor, DataTraverseType type, bool or
 
 bool ShapesContainer::Remove(Object* obj)
 {
-	return VectorContainer::Remove(m_shapes, static_cast<IShape*>(obj));
+	return m_shapes.Remove(static_cast<IShape*>(obj));
 }
 
 void ShapesContainer::Insert(Object* obj)
 {
-	VectorContainer::Insert(m_shapes, static_cast<IShape*>(obj));
+	m_shapes.Insert(static_cast<IShape*>(obj));
 }
 
 void ShapesContainer::Clear()
 {
-	VectorContainer::Clear(m_shapes);
+	m_shapes.Clear();
 }
 
 bool ShapesContainer::ResetOrder(const Object* obj, bool up)
 {
-	return VectorContainer::ResetOrder(m_shapes, static_cast<const IShape*>(obj), up);
+	return m_shapes.ResetOrder(static_cast<const IShape*>(obj), up);
 }
 
 }

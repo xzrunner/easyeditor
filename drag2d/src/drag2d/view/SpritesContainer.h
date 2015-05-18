@@ -2,6 +2,7 @@
 #define _DRAG2D_SPRITES_CONTAINER_H_
 
 #include "IDataContainer.h"
+#include "ObjectVector.h"
 
 namespace d2d
 {
@@ -24,7 +25,7 @@ public:
 	virtual bool ResetOrder(const Object* obj, bool up);
 
 private:
-	std::vector<ISprite*> m_sprites;
+	ObjectVector<ISprite> m_sprites;
 
 }; // SpritesContainer
 

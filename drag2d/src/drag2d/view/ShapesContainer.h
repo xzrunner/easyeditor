@@ -2,6 +2,7 @@
 #define _DRAG2D_SHAPES_CONTAINER_H_
 
 #include "IDataContainer.h"
+#include "ObjectVector.h"
 
 namespace d2d
 {
@@ -24,7 +25,7 @@ public:
 	virtual bool ResetOrder(const Object* obj, bool up);
 
 private:
-	std::vector<IShape*> m_shapes;
+	ObjectVector<IShape> m_shapes;
 
 }; // ShapesContainer
 
