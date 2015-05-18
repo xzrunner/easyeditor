@@ -31,6 +31,7 @@
 #include "libshape/DrawLineCMPT.h"
 #include "libshape/MousePositionCMPT.h"
 #include "libshape/DrawPolygonCMPT.h"
+#include "libshape/DrawPolygon2CMPT.h"
 
 #include "libshape/TextureMaterial.h"
 

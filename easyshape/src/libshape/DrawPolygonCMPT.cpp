@@ -1,6 +1,7 @@
 #include "DrawPolygonCMPT.h"
 #include "EditPolylineWithCopyNodeOP.h"
 #include "PolygonShape.h"
+#include "DrawPencilPolygonCMPT.h"
 
 #include <wx/colordlg.h>
 
@@ -17,10 +18,24 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 {
 	m_editOP = NULL;
 
-	addChild(new d2d::UniversalCMPT(this, wxT("直接画线"), editPanel, 
-		new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, this, this)));
-	addChild(new d2d::UniversalCMPT(this, wxT("选节点画线"), editPanel, 
-		new EditPolylineWithCopyNodeOP<DrawPolygonOP>(editPanel, shapesImpl, propertyPanel)));
+// 	// old
+// 	addChild(new d2d::UniversalCMPT(this, wxT("直接画线"), editPanel, 
+// 		new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>(editPanel, shapesImpl, propertyPanel, this, this)));
+// 	addChild(new d2d::UniversalCMPT(this, wxT("选节点画线"), editPanel, 
+// 		new EditPolylineWithCopyNodeOP<DrawPolygonOP>(editPanel, shapesImpl, propertyPanel)));
+
+	// draw polygon with pen, node capture
+	{
+		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", editPanel, "node capture", 5, 30, 10);
+		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>
+			(editPanel, shapesImpl, propertyPanel, cmpt, cmpt);
+		cmpt->SetEditOP(op);
+		addChild(cmpt);
+	}
+	// draw polygon with pencil, simplify threshold
+	{
+		addChild(new DrawPencilPolygonCMPT(this, wxT("pencil"), editPanel, shapesImpl));
+	}
 }
 
 void DrawPolygonCMPT::updateControlValue()
