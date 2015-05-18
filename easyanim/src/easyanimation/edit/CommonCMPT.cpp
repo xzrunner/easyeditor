@@ -16,6 +16,7 @@ CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name,
 	bool vertical, Controller* ctrl)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 	, m_vertical(vertical)
+	, m_ctrl(ctrl)
 {
 	m_editOP = new ArrangeSpriteOP(stage, property, ctrl);
 }
