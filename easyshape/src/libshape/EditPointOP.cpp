@@ -58,6 +58,10 @@ bool EditPointOP::onMouseLeftUp(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
 
+	if (!m_pos.isValid()) {
+		return false;
+	}
+
 	m_pos = m_editPanel->transPosScreenToProject(x, y);
 	if (!m_captured.shape) {
 		PointShape* point = new PointShape(m_pos);

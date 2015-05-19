@@ -2,6 +2,7 @@
 
 #include <easyshape.h>
 #include <easycomplex.h>
+#include <easyanim.h>
 #include <easytexture.h>
 
 #include <wx/splitter.h>
@@ -79,10 +80,12 @@ void Task::InitLayout(wxFrame* parent)
 	wxWindow* nb = m_library->getNotebook();
 	m_library->addPage(new d2d::LibraryImagePage(nb));
 	m_library->addPage(new ecomplex::LibraryPage(nb));
+	m_library->addPage(new libanim::LibraryPage(nb));
 	m_library->addPage(new etexture::LibraryPage(nb));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(left_hori);
 	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
+	m_library->setCanvas(m_stage->getCanvas());
 	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, m_stage);
 
 	left_hori->SetSashGravity(0.8f);
