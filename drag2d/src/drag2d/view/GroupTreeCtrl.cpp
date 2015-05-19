@@ -25,6 +25,30 @@ GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
 	m_root = AddRoot("Root");
 }
 
+void GroupTreeCtrl::Traverse(IVisitor& visitor)
+{
+	std::queue<wxTreeItemId> buf;
+	buf.push(m_root);
+	while (!buf.empty()) {
+		wxTreeItemId item = buf.front(); buf.pop();
+
+		wxTreeItemIdValue cookie;
+		wxTreeItemId id = GetFirstChild(item, cookie);
+		if (id.IsOk()) {
+			if (item != m_root) {
+				visitor.VisitNonleaf(item);
+			}
+
+			while (id.IsOk()) {
+				buf.push(id);
+				id = GetNextSibling(id);
+			}
+		} else {
+			visitor.VisitLeaf(item);
+		}
+	}
+}
+
 void GroupTreeCtrl::AddNode()
 {
 	static int s_num = 0;
@@ -33,8 +57,7 @@ void GroupTreeCtrl::AddNode()
 	ss << "Group" << s_num++;
 	std::string text = ss.str();
 
-	ItemData* data = new ItemData;
-	data->group = new Group(text);
+	ItemData* data = new ItemData(new Group(text));
 
 	wxTreeItemId id = GetFocusedItem();
 	if (id.IsOk()) {
@@ -63,23 +86,7 @@ void GroupTreeCtrl::Clear()
 
 void GroupTreeCtrl::Remove(ISprite* sprite)
 {
-	std::queue<wxTreeItemIdValue> buf;
-	buf.push(m_root);
-	while (!buf.empty()) {
-		wxTreeItemIdValue item = buf.front(); buf.pop();
-		
-		wxTreeItemIdValue cookie;
-		wxTreeItemId id = GetFirstChild(m_root, cookie);
-		if (id) {
-			while (id) {
-				buf.push(id);
-				id = GetNextSibling(id);
-			}
-		} else {
-			wxString text = GetItemText(item);
-			wxLogDebug(text);
-		}
-	}
+	Traverse(RemoveVisitor(this, sprite));
 }
 
 void GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, ItemData* data)
@@ -117,17 +124,17 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 
 	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
 	selection->Clear();
-	if (data->group) 
+	if (data->m_group) 
 	{
 		std::vector<ISprite*> sprites;
-		data->group->TraverseSprite(FetchAllVisitor<ISprite>(sprites));
+		data->m_group->TraverseSprite(FetchAllVisitor<ISprite>(sprites));
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			selection->Add(sprites[i]);
 		}
 	} 
-	else if (data->sprite) 
+	else if (data->m_sprite) 
 	{
-		selection->Add(data->sprite);
+		selection->Add(data->m_sprite);
 	}
 }
 
@@ -142,7 +149,7 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 		return;
 	}
 
-	Group* group = data->group;
+	Group* group = data->m_group;
 	if (!group) {
 		return;
 	}
@@ -154,8 +161,7 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 		ISprite* spr = sprites[i];
 		bool ok = group->Insert(spr);
 		if (ok) {
-			ItemData* data = new ItemData;
-			data->sprite = spr;
+			ItemData* data = new ItemData(spr);
 			AddNode(m_on_menu_id, spr->name, data);
 		}
 	}
@@ -167,7 +173,7 @@ void GroupTreeCtrl::OnMenuClear(wxCommandEvent& event)
 		return;
 	}	
 
-	Group* group = ((ItemData*)GetItemData(m_on_menu_id))->group;
+	Group* group = ((ItemData*)GetItemData(m_on_menu_id))->m_group;
 	if (!group) {
 		return;
 	}
@@ -189,6 +195,93 @@ void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuClear, this, ID_MENU_CLEAR);
 
 	PopupMenu(&menu, pt);
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class GroupTreeCtrl::ItemData
+//////////////////////////////////////////////////////////////////////////
+
+GroupTreeCtrl::ItemData::
+ItemData(Group* group)
+	: m_group(group)
+	, m_sprite(NULL)
+{
+	if (m_group) {
+		m_group->Retain();
+	}
+}
+
+GroupTreeCtrl::ItemData::
+ItemData(ISprite* sprite)
+	: m_sprite(sprite)
+	, m_group(NULL)
+{
+	if (m_sprite) {
+		m_sprite->Retain();
+	}
+}
+
+GroupTreeCtrl::ItemData::
+~ItemData()
+{
+	if (m_group) {
+		m_group->Release();
+	}
+	if (m_sprite) {
+		m_sprite->Release();
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class GroupTreeCtrl::RemoveVisitor
+//////////////////////////////////////////////////////////////////////////
+
+GroupTreeCtrl::RemoveVisitor::
+RemoveVisitor(wxTreeCtrl* treectrl, d2d::ISprite* spr)
+	: m_treectrl(treectrl)
+	, m_spr(spr)
+{
+	if (m_spr) {
+		m_spr->Retain();
+	}
+}
+
+GroupTreeCtrl::RemoveVisitor::
+~RemoveVisitor()
+{
+	if (m_spr) {
+		m_spr->Release();
+	}
+}
+
+void GroupTreeCtrl::RemoveVisitor::
+VisitNonleaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+
+	ItemData* data = (ItemData*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return;
+	}
+
+	if (data->m_group) {
+		data->m_group->Remove(m_spr);
+	}
+}
+
+void GroupTreeCtrl::RemoveVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	ItemData* data = (ItemData*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return;
+	}
+
+	if (data->m_sprite && data->m_sprite == m_spr) {
+		delete data;
+		m_treectrl->Delete(id);
+	}
 }
 
 }

@@ -13,7 +13,19 @@ class MultiSpritesImpl;
 class GroupTreeCtrl : public wxTreeCtrl
 {
 public:
+	class IVisitor
+	{
+	public:
+		virtual void VisitNonleaf(wxTreeItemId id) {};
+		virtual void VisitLeaf(wxTreeItemId id) {};
+		virtual ~IVisitor() {}
+	}; // IVisitor
+
+public:
 	GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl);
+
+	// no break
+	void Traverse(IVisitor& visitor);
 
 	void AddNode();
 	void DelNode();
@@ -23,17 +35,7 @@ public:
 	void Remove(ISprite* sprite);
 
 private:
-	struct ItemData : public wxTreeItemData
-	{
-		ItemData() : group(NULL), sprite(NULL) {}
-
-		Group* group;
-
-		ISprite* sprite;
-
-	}; // ItemData
-
-private:
+	class ItemData;
 	void AddNode(wxTreeItemId parent, const std::string& name, ItemData* data);
 
 private:
@@ -47,6 +49,36 @@ private:
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
+private:
+	class ItemData : public wxTreeItemData
+	{
+	public:
+		ItemData(Group* group);
+		ItemData(ISprite* sprite);
+		virtual ~ItemData();
+
+	public:
+		Group* m_group;
+
+		ISprite* m_sprite;
+
+	}; // ItemData
+
+	class RemoveVisitor : public IVisitor
+	{
+	public:
+		RemoveVisitor(wxTreeCtrl* treectrl, d2d::ISprite* spr);
+		virtual ~RemoveVisitor();
+
+		virtual void VisitNonleaf(wxTreeItemId id);
+		virtual void VisitLeaf(wxTreeItemId id);
+
+	private:
+		wxTreeCtrl* m_treectrl;
+
+		d2d::ISprite* m_spr;
+
+	}; // RemoveVisitor
 
 private:
 	enum
