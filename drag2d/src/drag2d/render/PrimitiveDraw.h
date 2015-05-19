@@ -51,6 +51,8 @@ namespace d2d
 		static void rect(const Matrix& mt, const Rect& r, const ShapeStyle& style);
 		static void rect(const Matrix& mt, const Vector& p0, const Vector& p1, const ShapeStyle& style);
 
+		static void drawPoint(const Matrix& mt, const Vector& vertex, const Colorf& color, float size = 2);
+
 		static void drawPolyline(const Matrix& mt, const std::vector<Vector>& vertices, const Colorf& color, bool isClose, float size = 2);
 		static void drawTriangles(const Matrix& mt, const std::vector<Vector>& triangles, const Colorf& color);
 

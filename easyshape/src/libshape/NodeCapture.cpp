@@ -1,6 +1,7 @@
 #include "NodeCapture.h"
 #include "ShapeType.h"
 
+#include "PointShape.h"
 #include "BezierShape.h"
 #include "ChainShape.h"
 #include "CircleShape.h"
@@ -54,6 +55,9 @@ visit(d2d::Object* object, bool& bFetchNext)
 	ShapeType type = get_shape_type(shape->GetShapeDesc());
 	switch (type)
 	{
+	case ST_POINT:
+		bFetchNext = !visit(static_cast<PointShape*>(shape));
+		break;
 	case ST_BEZIER:
 		bFetchNext = !visit(static_cast<BezierShape*>(shape));
 		break;
@@ -66,6 +70,18 @@ visit(d2d::Object* object, bool& bFetchNext)
 	case ST_RECT:
 		bFetchNext = !visit(static_cast<RectShape*>(shape));
 		break;
+	}
+}
+
+bool NodeCapture::RectQueryVisitor::
+visit(PointShape* point)
+{
+	if (d2d::Math::getDistance(point->GetPos(), m_pos) < m_tolerance) {
+		m_result.shape = point;
+		m_result.pos.setInvalid();
+		return true;
+	} else {
+		return false;
 	}
 }
 

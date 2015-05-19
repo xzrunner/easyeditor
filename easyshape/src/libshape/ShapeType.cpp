@@ -5,7 +5,9 @@ namespace libshape
 
 ShapeType get_shape_type(const std::string& desc)
 {
-	if (desc == "bezier") {
+	if (desc == "point") {
+		return ST_POINT;
+	} else if (desc == "bezier") {
 		return ST_BEZIER;
 	} else if (desc == "chain") {
 		return ST_CHAIN;

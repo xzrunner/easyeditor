@@ -1,6 +1,7 @@
 #include "ShapeFactory.h"
 #include "ShapeType.h"
 
+#include "PointShape.h"
 #include "BezierShape.h"
 #include "ChainShape.h"
 #include "CircleShape.h"
@@ -21,6 +22,9 @@ d2d::IShape* ShapeFactory::CreateShapeFromFile(const Json::Value& value,
 	ShapeType type = get_shape_type(desc);
 	switch (type)
 	{
+	case ST_POINT:
+		shape = new PointShape;
+		break;
 	case ST_BEZIER:
 		shape = new BezierShape;
 		break;

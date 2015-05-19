@@ -9,6 +9,7 @@ namespace libshape
 enum ShapeType
 {
 	ST_UNKNOWN = 0,
+	ST_POINT,
 	ST_RECT,
 	ST_CIRCLE,
 	ST_CHAIN,

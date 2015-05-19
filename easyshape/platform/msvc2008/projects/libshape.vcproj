@@ -236,6 +236,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libshape\PointShape.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshape\PointShape.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libshape\PolygonShape.cpp"
 					>
 				</File>
@@ -552,6 +560,14 @@
 					</File>
 					<File
 						RelativePath="..\..\..\src\libshape\EditNodesOP.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\EditPointOP.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libshape\EditPointOP.h"
 						>
 					</File>
 					<File

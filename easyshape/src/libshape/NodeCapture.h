@@ -6,6 +6,7 @@
 namespace libshape
 {
 
+class PointShape;
 class BezierShape;
 class ChainShape;
 class CircleShape;
@@ -41,6 +42,7 @@ private:
 		virtual void visit(d2d::Object* object, bool& bFetchNext);
 
 	private:
+		bool visit(PointShape* point);
 		bool visit(BezierShape* bezier);
 		bool visit(ChainShape* chain);
 		bool visit(CircleShape* circle);

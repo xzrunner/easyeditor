@@ -359,6 +359,12 @@ void PrimitiveDraw::rect(const Matrix& mt, const Vector& p0,
 	PrimitiveDrawNew::Draw(type, &VERTICES[0], 4);
 }
 
+void PrimitiveDraw::drawPoint(const Matrix& mt, const Vector& vertex, const Colorf& color, float size)
+{
+	Vector new_vertex = Math::transVector(vertex, mt);
+	drawPoint(vertex, color, size);
+}
+
 void PrimitiveDraw::drawPolyline(const Matrix& mt, const std::vector<Vector>& vertices, 
 								 const Colorf& color, bool isClose, float size) 
 {

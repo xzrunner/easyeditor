@@ -4,6 +4,7 @@
 #include "ShapeType.h"
 #include "PolygonShape.h"
 
+#include "EditPointOP.h"
 #include "EditRectOP.h"
 #include "EditCircleOP.h"
 #include "EditPolylineOP.h"
@@ -23,6 +24,13 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property
 	: d2d::ToolbarPanel(parent, stage)
 {
 	stage->SetToolbarPanel(this);
+	// point
+	{
+		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "µã", stage, "node capture", 5, 30, 10);
+		d2d::AbstractEditOP* op = new EditPointOP(stage, stage, capture_cmpt);
+		capture_cmpt->SetEditOP(op);
+		addChild(capture_cmpt);
+	}
 	// rect
 	{
 		d2d::OneFloatValueCMPT* capture_cmpt = new d2d::OneFloatValueCMPT(this, "¾ØÐÎ", stage, "node capture", 5, 30, 10);
