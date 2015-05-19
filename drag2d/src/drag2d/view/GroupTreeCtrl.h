@@ -1,9 +1,11 @@
 #ifndef _DRAG2D_GROUP_TREE_CTRL_H_
 #define _DRAG2D_GROUP_TREE_CTRL_H_
 
-#include <wx/treectrl.h>
+#include "GroupTreeVisitor.h"
+#include "GroupTreeItem.h"
 
-#include "dataset/ObjSelectionSet.h"
+#include <wx/treectrl.h>
+#include <json/json.h>
 
 namespace d2d
 {
@@ -15,19 +17,13 @@ class MultiSpritesImpl;
 class GroupTreeCtrl : public wxTreeCtrl
 {
 public:
-	class IVisitor
-	{
-	public:
-		virtual void VisitNonleaf(wxTreeItemId id) {};
-		virtual void VisitLeaf(wxTreeItemId id) {};
-		virtual ~IVisitor() {}
-	}; // IVisitor
-
-public:
 	GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl);
 
+	void StoreToFile(Json::Value& value) const;
+	void LoadFromFile(const Json::Value& value);
+
 	// no break
-	void Traverse(IVisitor& visitor);
+	void Traverse(IGroupTreeVisitor& visitor) const;
 
 	void AddNode();
 	void DelNode();
@@ -37,8 +33,7 @@ public:
 	void Remove(ISprite* sprite);
 
 private:
-	class ItemData;
-	void AddNode(wxTreeItemId parent, const std::string& name, ItemData* data);
+	void AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);
 
 private:
 	void OnItemRClick(wxTreeEvent& event);
@@ -53,73 +48,7 @@ private:
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
-	void Traverse(wxTreeItemId id, IVisitor& visitor);
-
-private:
-	class ItemData : public wxTreeItemData
-	{
-	public:
-		ItemData(Group* group);
-		ItemData(ISprite* sprite);
-		virtual ~ItemData();
-
-	public:
-		Group* m_group;
-
-		ISprite* m_sprite;
-
-	}; // ItemData
-
-	class RemoveVisitor : public IVisitor
-	{
-	public:
-		RemoveVisitor(wxTreeCtrl* treectrl, d2d::ISprite* spr);
-		virtual ~RemoveVisitor();
-
-		virtual void VisitNonleaf(wxTreeItemId id);
-		virtual void VisitLeaf(wxTreeItemId id);
-
-	private:
-		wxTreeCtrl* m_treectrl;
-
-		d2d::ISprite* m_spr;
-
-	}; // RemoveVisitor
-
-	class SelectVisitor : public IVisitor
-	{
-	public:
-		SelectVisitor(wxTreeCtrl* treectrl, SpriteSelection* selection);
-		virtual ~SelectVisitor();
-
-		virtual void VisitLeaf(wxTreeItemId id);
-
-	private:
-		wxTreeCtrl* m_treectrl;
-
-		SpriteSelection* m_selection;
-
-	}; // SelectVisitor
-
-	class VisibleVisitor : public IVisitor
-	{
-	public:
-		VisibleVisitor(wxTreeCtrl* treectrl) 
-			: m_treectrl(treectrl) {}
-		virtual void VisitLeaf(wxTreeItemId id);
-	private:
-		wxTreeCtrl* m_treectrl;
-	}; // VisibleVisitor
-
-	class EditableVisitor : public IVisitor
-	{
-	public:
-		EditableVisitor(wxTreeCtrl* treectrl) 
-			: m_treectrl(treectrl) {}
-		virtual void VisitLeaf(wxTreeItemId id);
-	private:
-		wxTreeCtrl* m_treectrl;
-	}; // EditableVisitor
+	void Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const;
 
 private:
 	enum

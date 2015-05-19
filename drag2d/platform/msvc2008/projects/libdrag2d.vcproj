@@ -2057,11 +2057,31 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeImpl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeItem.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeItem.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\GroupTreePanel.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\view\GroupTreePanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeVisitor.h"
 					>
 				</File>
 			</Filter>

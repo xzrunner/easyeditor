@@ -14,6 +14,16 @@ GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl)
 	InitLayout();
 }
 
+void GroupTreePanel::StoreToFile(Json::Value& value) const
+{
+	m_grouptree->StoreToFile(value);
+}
+
+void GroupTreePanel::LoadFromFile(const Json::Value& value)
+{
+	m_grouptree->LoadFromFile(value);
+}
+
 void GroupTreePanel::Remove(ISprite* sprite)
 {
 	m_grouptree->Remove(sprite);
