@@ -150,6 +150,16 @@ void GroupTreeCtrl::OnMenuClear(wxCommandEvent& event)
 	CollapseAndReset(m_on_menu_id);
 }
 
+void GroupTreeCtrl::OnMenuVisible(wxCommandEvent& event)
+{
+	Traverse(VisibleVisitor(this));
+}
+
+void GroupTreeCtrl::OnMenuEditable(wxCommandEvent& event)
+{
+	Traverse(EditableVisitor(this));
+}
+
 void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 {
 	m_on_menu_id = id;
@@ -161,6 +171,14 @@ void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 
 	menu.Append(ID_MENU_CLEAR, wxT("&Clear Sprites"));
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuClear, this, ID_MENU_CLEAR);
+
+	menu.AppendSeparator();
+
+	menu.AppendCheckItem(ID_MENU_VISIBLE, wxT("&Visible"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuVisible, this, ID_MENU_VISIBLE);
+
+	menu.AppendCheckItem(ID_MENU_EDITABLE, wxT("&Editable"));
+	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuEditable, this, ID_MENU_EDITABLE);
 
 	PopupMenu(&menu, pt);
 }
@@ -309,6 +327,42 @@ VisitLeaf(wxTreeItemId id)
 
 	if (data->m_sprite) {
 		m_selection->Add(data->m_sprite);
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class GroupTreeCtrl::VisibleVisitor
+//////////////////////////////////////////////////////////////////////////
+
+void GroupTreeCtrl::VisibleVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	ItemData* data = (ItemData*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return;
+	}
+
+	if (data->m_sprite) {
+		data->m_sprite->visiable = !data->m_sprite->visiable;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class GroupTreeCtrl::EditableVisitor
+//////////////////////////////////////////////////////////////////////////
+
+void GroupTreeCtrl::EditableVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	ItemData* data = (ItemData*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return;
+	}
+
+	if (data->m_sprite) {
+		data->m_sprite->editable = !data->m_sprite->editable;
 	}
 }
 

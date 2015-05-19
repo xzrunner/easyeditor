@@ -48,6 +48,8 @@ private:
 	// menu
 	void OnMenuAddSprites(wxCommandEvent& event);
 	void OnMenuClear(wxCommandEvent& event);
+	void OnMenuVisible(wxCommandEvent& event);
+	void OnMenuEditable(wxCommandEvent& event);
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
@@ -99,11 +101,33 @@ private:
 
 	}; // SelectVisitor
 
+	class VisibleVisitor : public IVisitor
+	{
+	public:
+		VisibleVisitor(wxTreeCtrl* treectrl) 
+			: m_treectrl(treectrl) {}
+		virtual void VisitLeaf(wxTreeItemId id);
+	private:
+		wxTreeCtrl* m_treectrl;
+	}; // VisibleVisitor
+
+	class EditableVisitor : public IVisitor
+	{
+	public:
+		EditableVisitor(wxTreeCtrl* treectrl) 
+			: m_treectrl(treectrl) {}
+		virtual void VisitLeaf(wxTreeItemId id);
+	private:
+		wxTreeCtrl* m_treectrl;
+	}; // EditableVisitor
+
 private:
 	enum
 	{
 		ID_MENU_ADD = 100,
 		ID_MENU_CLEAR,
+		ID_MENU_VISIBLE,
+		ID_MENU_EDITABLE,
 
 		ID_GROUP_TREE_CTRL = 1000
 	};
