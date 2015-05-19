@@ -3,6 +3,8 @@
 
 #include <wx/treectrl.h>
 
+#include "dataset/ObjSelectionSet.h"
+
 namespace d2d
 {
 
@@ -49,6 +51,8 @@ private:
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
+	void Traverse(wxTreeItemId id, IVisitor& visitor);
+
 private:
 	class ItemData : public wxTreeItemData
 	{
@@ -79,6 +83,21 @@ private:
 		d2d::ISprite* m_spr;
 
 	}; // RemoveVisitor
+
+	class SelectVisitor : public IVisitor
+	{
+	public:
+		SelectVisitor(wxTreeCtrl* treectrl, SpriteSelection* selection);
+		virtual ~SelectVisitor();
+
+		virtual void VisitLeaf(wxTreeItemId id);
+
+	private:
+		wxTreeCtrl* m_treectrl;
+
+		SpriteSelection* m_selection;
+
+	}; // SelectVisitor
 
 private:
 	enum
