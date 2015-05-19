@@ -2065,6 +2065,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeIO.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\GroupTreeIO.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\GroupTreeItem.cpp"
 					>
 				</File>

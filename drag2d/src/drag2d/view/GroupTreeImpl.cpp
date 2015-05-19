@@ -1,5 +1,6 @@
 #include "GroupTreeImpl.h"
 #include "GroupTreeItem.h"
+#include "GroupTreeCtrl.h"
 
 #include "dataset/Group.h"
 
@@ -135,7 +136,7 @@ VisitLeaf(wxTreeItemId id)
 //////////////////////////////////////////////////////////////////////////
 
 GroupTreeImpl::StoreVisitor::
-StoreVisitor(const wxTreeCtrl* treectrl, Json::Value& value)
+StoreVisitor(const GroupTreeCtrl* treectrl, Json::Value& value)
 	: m_treectrl(treectrl)
 	, m_value(value)
 {
@@ -149,8 +150,8 @@ VisitNonleaf(wxTreeItemId id)
 	Json::Value val;
 	val["leaf"] = false;
 
-	val["name"] = m_treectrl->GetItemText(id).ToStdString();
-	val["parent"] = m_treectrl->GetItemText(m_treectrl->GetItemParent(id)).ToStdString();
+	val["name"] = GetName(id);
+	val["parent"] = GetParentName(id);
 
 	int sz = m_value["node"].size();
 	m_value["node"][sz++] = val;
@@ -164,8 +165,8 @@ VisitLeaf(wxTreeItemId id)
 	Json::Value val;
 	val["leaf"] = true;
 
-	val["name"] = m_treectrl->GetItemText(id).ToStdString();
-	val["parent"] = m_treectrl->GetItemText(m_treectrl->GetItemParent(id)).ToStdString();
+	val["name"] = GetName(id);
+	val["parent"] = GetParentName(id);
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (data && data->m_sprite) {
@@ -174,6 +175,26 @@ VisitLeaf(wxTreeItemId id)
 
 	int sz = m_value["node"].size();
 	m_value["node"][sz++] = val;
+}
+
+std::string GroupTreeImpl::StoreVisitor::
+GetName(wxTreeItemId id) const
+{
+	if (m_treectrl->GetRootID() == id) {
+		return "root";
+	} else {
+		return m_treectrl->GetItemText(id).ToStdString();
+	}
+}
+
+std::string GroupTreeImpl::StoreVisitor::
+GetParentName(wxTreeItemId id) const
+{
+	if (m_treectrl->GetRootID() == id) {
+		return "null";
+	} else {
+		return GetName(m_treectrl->GetItemParent(id));
+	}
 }
 
 }

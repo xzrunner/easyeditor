@@ -1,6 +1,7 @@
 #include "GroupTreeCtrl.h"
 #include "MultiSpritesImpl.h"
 #include "GroupTreeImpl.h"
+#include "GroupTreeIO.h"
 
 #include "dataset/Group.h"
 #include "dataset/ISprite.h"
@@ -33,7 +34,8 @@ void GroupTreeCtrl::StoreToFile(Json::Value& value) const
 
 void GroupTreeCtrl::LoadFromFile(const Json::Value& value)
 {
-	
+	GroupTreeIO io(this, m_sprite_impl);
+	io.Load(value);
 }
 
 void GroupTreeCtrl::Traverse(IGroupTreeVisitor& visitor) const
@@ -41,7 +43,7 @@ void GroupTreeCtrl::Traverse(IGroupTreeVisitor& visitor) const
 	Traverse(m_root, visitor);
 }
 
-void GroupTreeCtrl::AddNode()
+wxTreeItemId GroupTreeCtrl::AddNode()
 {
 	static int s_num = 0;
 
@@ -49,16 +51,27 @@ void GroupTreeCtrl::AddNode()
 	ss << "Group" << s_num++;
 	std::string text = ss.str();
 
-	GroupTreeItem* data = new GroupTreeItem(new Group(text));
+	return AddNode(text);
+}
+
+wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name)
+{
+	GroupTreeItem* data = new GroupTreeItem(new Group(name));
 
 	wxTreeItemId id = GetFocusedItem();
 	if (id.IsOk()) {
 		data->SetId(id);
-		AddNode(id, text, data);
+		return AddNode(id, name, data);
 	} else {
 		data->SetId(m_root);
-		AddNode(m_root, text, data);
+		return AddNode(m_root, name, data);
 	}
+}
+
+wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name, wxTreeItemId parent)
+{
+	GroupTreeItem* data = new GroupTreeItem(new Group(name));
+	return AddNode(parent, name, data);
 }
 
 void GroupTreeCtrl::DelNode()
@@ -66,6 +79,31 @@ void GroupTreeCtrl::DelNode()
 	wxTreeItemId id = GetFocusedItem();
 	if (id.IsOk()) {
 		Delete(id);
+	}
+}
+
+wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
+{
+	if (!parent.IsOk()) {
+		return m_root;
+	}	
+
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(parent);
+	if (!data) {
+		return m_root;
+	}
+
+	Group* group = data->m_group;
+	if (!group) {
+		return m_root;
+	}
+
+	bool ok = group->Insert(spr);
+	if (ok) {
+		GroupTreeItem* data = new GroupTreeItem(spr);
+		return AddNode(parent, spr->name, data);
+	} else {
+		return m_root;
 	}
 }
 
@@ -81,10 +119,11 @@ void GroupTreeCtrl::Remove(ISprite* sprite)
 	Traverse(GroupTreeImpl::RemoveVisitor(this, sprite));
 }
 
-void GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
+wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
 {
 	wxTreeItemId id = AppendItem(parent, name, -1, -1, data);
 	ExpandAll();
+	return id;
 }
 
 void GroupTreeCtrl::OnItemRClick(wxTreeEvent& event)

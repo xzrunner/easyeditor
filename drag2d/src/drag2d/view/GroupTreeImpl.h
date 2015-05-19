@@ -9,6 +9,7 @@ namespace d2d
 {
 
 class ISprite;
+class GroupTreeCtrl;
 
 class GroupTreeImpl
 {
@@ -67,13 +68,17 @@ public:
 	class StoreVisitor : public IGroupTreeVisitor
 	{
 	public:
-		StoreVisitor(const wxTreeCtrl* treectrl, Json::Value& value);
+		StoreVisitor(const GroupTreeCtrl* treectrl, Json::Value& value);
 
 		virtual void VisitNonleaf(wxTreeItemId id);
 		virtual void VisitLeaf(wxTreeItemId id);
 
 	private:
-		const wxTreeCtrl* m_treectrl;
+		std::string GetName(wxTreeItemId id) const;
+		std::string GetParentName(wxTreeItemId id) const;
+
+	private:
+		const GroupTreeCtrl* m_treectrl;
 		Json::Value& m_value;
 
 	}; // StoreVisitor

@@ -30,6 +30,20 @@ void Task::load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 		FileIO::load(this, filepath);
+
+		//////////////////////////////////////////////////////////////////////////
+		// load group tree
+		Json::Value value;
+		Json::Reader reader;
+		std::locale::global(std::locale(""));
+		std::ifstream fin(filepath);
+		std::locale::global(std::locale("C"));
+		reader.parse(fin, value);
+		fin.close();
+
+		m_grouptree->LoadFromFile(value["group"]);
+		//////////////////////////////////////////////////////////////////////////
+
 		m_stage->getCanvas()->resetViewport();
 	}
 }
@@ -37,6 +51,27 @@ void Task::load(const char* filepath)
 void Task::store(const char* filepath) const
 {
 	FileIO::store(this, filepath);
+
+	//////////////////////////////////////////////////////////////////////////
+	// store group tree
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	m_grouptree->StoreToFile(value["group"]);
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath);
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();
+	//////////////////////////////////////////////////////////////////////////
+
 	m_stage->onSave();
 }
 

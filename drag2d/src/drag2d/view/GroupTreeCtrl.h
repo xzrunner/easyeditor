@@ -25,15 +25,21 @@ public:
 	// no break
 	void Traverse(IGroupTreeVisitor& visitor) const;
 
-	void AddNode();
+	wxTreeItemId AddNode();
+	wxTreeItemId AddNode(const std::string& name);
+	wxTreeItemId AddNode(const std::string& name, wxTreeItemId parent);
 	void DelNode();
+
+	wxTreeItemId AddSprite(wxTreeItemId parent, d2d::ISprite* spr);
 
 	void Clear();
 
 	void Remove(ISprite* sprite);
 
+	wxTreeItemId GetRootID() const { return m_root; }
+
 private:
-	void AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);
+	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);
 
 private:
 	void OnItemRClick(wxTreeEvent& event);
