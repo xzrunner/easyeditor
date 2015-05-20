@@ -300,6 +300,14 @@
 				Name="editop"
 				>
 				<File
+					RelativePath="..\..\..\src\easyui\view\ArrangeSpriteImpl.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\view\ArrangeSpriteImpl.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\easyui\view\SelectSpritesOP.cpp"
 					>
 				</File>
@@ -307,11 +315,27 @@
 					RelativePath="..\..\..\src\easyui\view\SelectSpritesOP.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\view\TranslateSpriteState.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyui\view\TranslateSpriteState.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"
 			>
+			<File
+				RelativePath="..\..\..\src\easyui\dataset\AnchorMgr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\dataset\AnchorMgr.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\..\src\easyui\dataset\SymbolsCfg.cpp"
 				>

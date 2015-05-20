@@ -7,6 +7,7 @@
 namespace eui
 {
 
+class AnchorMgr;
 class StagePanel;
 
 class Task : public d2d::ITask
@@ -26,8 +27,13 @@ public:
 
 	virtual const d2d::EditPanel* getEditPanel() const;
 
+	AnchorMgr* GetAnchorMgr();
+
 private:
 	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;
@@ -35,6 +41,7 @@ private:
 	wxFrame* m_parent;
 
  	d2d::LibraryPanel* m_library;
+	d2d::PropertySettingPanel* m_property;
  	StagePanel* m_stage;
 
 }; // Task

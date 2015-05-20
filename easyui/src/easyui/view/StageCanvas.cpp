@@ -30,7 +30,9 @@ void StageCanvas::onDraw()
 
 	DrawGuideLines();
 
-	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::e_visible);
+	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
+
+	m_statge->GetAnchorMgr()->Draw();
 
 	m_editPanel->drawEditTemp();
 

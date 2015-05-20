@@ -4,6 +4,7 @@
 #include <drag2d.h>
 
 #include "dataset/SymbolsCfg.h"
+#include "dataset/AnchorMgr.h"
 
 namespace eui
 {
@@ -34,11 +35,20 @@ public:
 	void SetViewlist(d2d::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;
 	}
+	void SetGroupPanel(d2d::GroupTreePanel* group_panel) {
+		m_group_panel = group_panel;
+	}
+
+	AnchorMgr* GetAnchorMgr() { return &m_anchor_mgr; }
 
 private:
 	SymbolsCfg m_symbols_cfg;
 
 	d2d::ViewlistPanel* m_viewlist;
+
+	d2d::GroupTreePanel* m_group_panel;
+
+	AnchorMgr m_anchor_mgr;
 
 }; // StagePanel
 

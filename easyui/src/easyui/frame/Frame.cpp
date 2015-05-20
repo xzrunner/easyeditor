@@ -1,6 +1,7 @@
 #include "Frame.h"
 #include "SettingsDialog.h"
 #include "SettingCfg.h"
+#include "Task.h"
 
 #include "view/PreviewDialog.h"
 #include "view/StagePanel.h"
@@ -41,7 +42,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 
 void Frame::OnExtendSetting(wxCommandEvent& event)
 {
-	SettingDialog dlg(this);
+	SettingDialog dlg(this, static_cast<Task*>(m_task)->GetAnchorMgr());
 	dlg.ShowModal();
 }
 

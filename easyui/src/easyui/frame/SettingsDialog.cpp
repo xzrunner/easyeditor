@@ -1,11 +1,14 @@
 #include "SettingsDialog.h"
 #include "SettingCfg.h"
 
+#include "dataset/AnchorMgr.h"
+
 namespace eui
 {
 
-SettingDialog::SettingDialog(wxWindow* parent)
+SettingDialog::SettingDialog(wxWindow* parent, AnchorMgr* anchor_mgr)
 	: wxDialog(parent, wxID_ANY, wxT("Settings"))
+	, m_anchor_mgr(anchor_mgr)
 {
 	InitLayout();
 }
@@ -57,8 +60,13 @@ void SettingDialog::OnViewSizeChanged(wxCommandEvent& event)
 	m_height_ctrl->GetValue().ToDouble(&height);
 
 	SettingCfg* cfg = SettingCfg::Instance();
+	if (cfg->m_view_width == width && cfg->m_view_height == height) {
+		return;
+	}
+
 	cfg->m_view_width = width;
 	cfg->m_view_height = height;
+	m_anchor_mgr->OnViewChanged(width, height);
 }
 
 }

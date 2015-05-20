@@ -20,7 +20,7 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 
 		std::string val = TidCfg::Instance()->Query(tid);
 		if (!val.empty()) {
-			d2d::FontSprite* sprite = static_cast<d2d::FontSprite*>(m_sprite);
+			d2d::FontSprite* sprite = static_cast<d2d::FontSprite*>(GetSprite());
 			sprite->SetTextContent(val);
 		}
 	}
