@@ -24,7 +24,12 @@ private:
 		TIMER_ID = 1000
 	};
 
+	static const float VIEW_WIDTH;
+	static const float VIEW_HEIGHT;
+
 private:
+	d2d::Matrix m_scale_mt;
+
 	wxTimer m_timer;
 	d2d::PlayControl& m_control;
 
