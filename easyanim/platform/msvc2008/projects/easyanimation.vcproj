@@ -431,6 +431,14 @@
 					Name="keyframes"
 					>
 					<File
+						RelativePath="..\..\..\src\easyanimation\view\KeysContentEdit.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easyanimation\view\KeysContentEdit.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\easyanimation\view\KeysContentWidget.cpp"
 						>
 					</File>

@@ -17,7 +17,6 @@ Controller::Controller(Widgets* widgets)
 {
 	m_curr_layer = 0;
 	m_curr_frame = 1;
-	maxFrame = -1;
 
 	fps = 30;
 }
@@ -37,10 +36,10 @@ void Controller::setCurrFrame(int layer, int frame)
 	if (m_widgets->m_keysPanel) 
 	{
 		int row, col;
-		m_widgets->m_keysPanel->getSelectPos(row, col);
+		m_widgets->m_keysPanel->GetSelectPos(row, col);
 		if (row >= 0 && col >= 0) {
 			col = m_curr_frame - 1;
-			m_widgets->m_keysPanel->setSelectPos(row, col);
+			m_widgets->m_keysPanel->SetSelectPos(row, col);
 		}
 	}
 
@@ -51,19 +50,21 @@ void Controller::setCurrFrame(int layer, int frame)
 	if (m_widgets->m_layersPanel) {
 		m_widgets->m_layersPanel->Refresh();
 	}
+
+	GetStagePanel()->getEditOP()->clear();
 }
 
-KeyFrame* Controller::getCurrFrame() 
+void Controller::UpdateCurrFrame()
 {
-	if (!m_last_keyframe)
-	{
-		Layer* layer = layers.getLayer(m_curr_layer);
-		if (layer) {
-			m_last_keyframe = layer->getCurrKeyFrame(m_curr_frame);
-			reloadViewList(m_last_keyframe);
-		}
+	if (m_last_keyframe) {
+		return;
 	}
-	return m_last_keyframe; 
+
+	Layer* layer = layers.getLayer(m_curr_layer);
+	if (layer) {
+		m_last_keyframe = layer->getCurrKeyFrame(m_curr_frame);
+		reloadViewList(m_last_keyframe);
+	}
 }
 
 void Controller::setPrevKeyFrame()
@@ -145,9 +146,9 @@ void Controller::SetTimeLinePanel(LayersPanel* layers_panel, KeysPanel* keys_pan
 	m_widgets->m_keysPanel = keys_panel;
 }
 
-void Controller::SetKeysPanelPos(int pos)
-{
-	m_widgets->m_keysPanel->setCurrPos(pos);
+int Controller::GetMaxFrame() const 
+{ 
+	return layers.GetMaxFrame();
 }
 
 void Controller::ClearLayers()

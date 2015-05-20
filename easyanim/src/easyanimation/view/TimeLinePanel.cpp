@@ -21,7 +21,7 @@ TimeLinePanel::TimeLinePanel(wxWindow* parent, Controller* ctrl)
 void TimeLinePanel::clear()
 {
 	m_ctrl->ClearLayers();
-	m_ctrl->GetKeysPanel()->setSelectPos(-1, -1);
+	m_ctrl->GetKeysPanel()->SetSelectPos(-1, -1);
 }
 
 void TimeLinePanel::initLayout()

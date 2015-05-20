@@ -85,15 +85,11 @@ void Layer::insertKeyFrame(KeyFrame* frame)
 		if (frame != status.first->second)
 		{
 			if (status.first->second->getTime() == m_ctrl->GetMaxFrame()) {
-				m_ctrl->SetKeysPanelPos(INT_MAX);
+				m_ctrl->setCurrFrame(m_ctrl->layer(), m_ctrl->GetMaxFrame());
 			}
 			delete status.first->second;
 			status.first->second = frame;
 		}
-	}
-
-	if (frame->getTime() > m_ctrl->GetMaxFrame()) {
-		m_ctrl->SetMaxFrame(frame->getTime());
 	}
 
 	m_ctrl->setCurrFrame(m_ctrl->layer(), frame->getTime());
@@ -110,11 +106,6 @@ void Layer::insertKeyFrame(int time)
 			KeyFrame* frame = new KeyFrame(m_ctrl, time);
 			insert(time, frame);
 			frame->copyKeyFrame(itr->second);
-
-			if (time > m_ctrl->GetMaxFrame()) {
-				m_ctrl->SetMaxFrame(time);
-			}
-
 			m_ctrl->setCurrFrame(m_ctrl->layer(), time);
 		}
 		else
@@ -134,8 +125,7 @@ void Layer::removeKeyFrame(int time)
 		delete itr->second;
 		m_frames.erase(itr);
 
-		m_ctrl->SetKeysPanelPos(INT_MAX);
-		m_ctrl->SetMaxFrame(m_ctrl->frame());
+		m_ctrl->setCurrFrame(m_ctrl->layer(), m_ctrl->GetMaxFrame());
 	}
 }
 
@@ -198,13 +188,13 @@ KeyFrame* Layer::getPrevKeyFrame(int iFrame)
 	}
 }
 
-int Layer::getFrameCount() const
+int Layer::GetMaxFrame() const
 {
-	if (m_frames.empty()) return 0; 
-
-	std::map<int, KeyFrame*>::const_iterator itr = m_frames.end();
-	--itr;
-	return itr->first;
+	if (m_frames.empty()) {
+		return 0; 
+	} else {
+		return (--m_frames.end())->first;
+	}
 }
 
 void Layer::clear()

@@ -36,15 +36,11 @@ void LayersPanel::removeLayer()
 	m_ctrl->GetStagePanel()->removeSpriteSelection();
 
 	layers.removeLayer(m_ctrl->layer());
-	if (layers.size() == 0) 
-	{
+	if (layers.size() == 0) {
 		m_ctrl->setCurrFrame(-1, m_ctrl->frame());
-	}
-	else if (m_ctrl->layer() > 0) 
-	{
+	} else if (m_ctrl->layer() > 0) {
 		m_ctrl->setCurrFrame(m_ctrl->layer() - 1, m_ctrl->frame());
 	}
-	m_ctrl->GetKeysPanel()->setCurrPos(m_ctrl->frame());
 }
 
 //void LayersPanel::onPlay()

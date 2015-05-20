@@ -3,6 +3,7 @@
 #include <wx/wx.h>
 
 #include "Utility.h"
+#include "KeysContentEdit.h"
 
 class wxBufferedPaintDC;
 
@@ -22,6 +23,7 @@ namespace eanim
 		void onPaint(wxPaintEvent& event);
 		void onEraseBackground(wxEraseEvent& event);
 		void onMouse(wxMouseEvent& event);
+		void OnKeyDown(wxKeyEvent& event);
 
 	private:
 		KeyFrame* queryKeyFrameByPos() const;
@@ -32,6 +34,8 @@ namespace eanim
 		void drawLayersDataFlag(wxBufferedPaintDC& dc);
 		void drawCurrPosFlag(wxBufferedPaintDC& dc);
 		void drawSelected(wxBufferedPaintDC& dc);
+
+		void MousePopupMenu(int x, int y);
 
 		void onCreateClassicTween(wxCommandEvent& event);
 		void onDeleteClassicTween(wxCommandEvent& event);
@@ -77,6 +81,8 @@ namespace eanim
 		static const int FRAME_END_RECT_HEIGHT = KEY_FRAME_CIRCLE_RADIUS * 3;
 
 	private:
+		KeysContentEdit m_editop;
+
 		Controller* m_ctrl;
 
 		DECLARE_EVENT_TABLE()

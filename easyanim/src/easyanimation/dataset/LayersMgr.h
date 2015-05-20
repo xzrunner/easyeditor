@@ -34,6 +34,8 @@ namespace eanim
 			return m_layers;
 		}
 
+		int GetMaxFrame() const;
+
 	private:
 		Controller* m_ctrl;
 

@@ -20,7 +20,8 @@ public:
 	Controller(Widgets* widgets);
 
 	void setCurrFrame(int layer, int frame);
-	KeyFrame* getCurrFrame();
+	void UpdateCurrFrame();
+	KeyFrame* getCurrFrame() { return m_last_keyframe; }
 	void setPrevKeyFrame();
 	void setNextKeyFrame();
 
@@ -39,10 +40,7 @@ public:
 
 	void SetTimeLinePanel(LayersPanel* layers_panel, KeysPanel* keys_panel);
 
-	int GetMaxFrame() const { return maxFrame; }
-	void SetMaxFrame(int max_frame) { maxFrame = max_frame; }
-
-	void SetKeysPanelPos(int pos);
+	int GetMaxFrame() const;
 
 	void ClearLayers();
 	void InsertLayer(Layer* layer);
@@ -71,7 +69,6 @@ private:
 	Widgets* m_widgets;
 
 	LayersMgr layers;
-	int maxFrame;
 
 	ResourceMgr resource;
 
@@ -83,6 +80,12 @@ private:
 	// frame start from 1
 	int m_curr_layer;
 	int m_curr_frame;	
+
+	struct FramePos
+	{
+		int row, col;
+	};
+	d2d::SelectionSet<FramePos> m_selected_frame;
 
 }; // Controller
 

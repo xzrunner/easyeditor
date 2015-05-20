@@ -35,7 +35,7 @@ namespace eanim
 		KeyFrame* getNextKeyFrame(int iFrame);
 		KeyFrame* getPrevKeyFrame(int iFrame);
 
-		int getFrameCount() const;
+		int GetMaxFrame() const;
 
 	public:
 		std::string name;

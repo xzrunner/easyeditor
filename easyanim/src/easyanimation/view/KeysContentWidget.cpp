@@ -1,11 +1,9 @@
 #include "KeysContentWidget.h"
 #include "KeysPanel.h"
-#include "FramePropertySetting.h"
 
 #include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
-#include "view/StagePanel.h"
 
 #include <wx/dcbuffer.h>
 
@@ -17,6 +15,7 @@ BEGIN_EVENT_TABLE(KeysContentWidget, wxPanel)
 	EVT_ERASE_BACKGROUND(KeysContentWidget::onEraseBackground)
 	EVT_SIZE(KeysContentWidget::onSize)
 	EVT_MOUSE_EVENTS(KeysContentWidget::onMouse)
+	EVT_KEY_DOWN(KeysContentWidget::OnKeyDown)
 
 	EVT_MENU(Menu_CreateClassicTween, KeysContentWidget::onCreateClassicTween)
 	EVT_MENU(Menu_DeleteClassicTween, KeysContentWidget::onDeleteClassicTween)
@@ -48,6 +47,7 @@ LanguageEntry KeysContentWidget::entries[] =
 
 KeysContentWidget::KeysContentWidget(wxWindow* parent, Controller* ctrl)
 	: wxPanel(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxBORDER_NONE)
+	, m_editop(ctrl)
 	, m_ctrl(ctrl)
 {
 //  	RegisterHotKey(Hot_InsertFrame, 0, VK_ADD);
@@ -75,62 +75,38 @@ void KeysContentWidget::onPaint(wxPaintEvent& event)
 
 void KeysContentWidget::onEraseBackground(wxEraseEvent& event)
 {
-
 }
 
 void KeysContentWidget::onMouse(wxMouseEvent& event)
 {
-	if (event.LeftDown() || event.RightDown())
-	{
-		LayersMgr& layers = m_ctrl->GetLayers();
-		int row = event.GetY() / FRAME_GRID_HEIGHT,
-			col = event.GetX() / FRAME_GRID_WIDTH;
-		if (row < layers.size() && col < MAX_FRAME_COUNT) {
-			m_ctrl->GetKeysPanel()->setSelectPos(row, col);
-		} else {
-			m_ctrl->GetKeysPanel()->setSelectPos(-1, -1);
-		}
+	int row = event.GetY() / FRAME_GRID_HEIGHT,
+		col = event.GetX() / FRAME_GRID_WIDTH;
 
-		bool selected = false;
-		Layer* layer = layers.getLayer(layers.size() - row - 1);
-		if (layer)
-		{
-			const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
-			std::map<int, KeyFrame*>::const_iterator itr = frames.find(col+1);
-			if (itr != frames.end())
-			{
-				selected = true;
-				FramePropertySetting* property = 
-					new FramePropertySetting(m_ctrl->GetStagePanel(), itr->second);
-				m_ctrl->GetPropertyPanel()->setPropertySetting(property);
-			}
-		}
-		if (!selected) {
-			m_ctrl->GetPropertyPanel()->setPropertySetting(NULL);
-		}
+	if (event.RightDown()) {
+		MousePopupMenu(event.GetX(), event.GetY());
+	} else if (event.LeftDown()) {
+		m_editop.OnMouseLeftDown(row, col);
+	} else if (event.LeftUp()) {
+		m_editop.OnMouseLeftUp(row, col);
+	} else if (event.Dragging()) {
+		m_editop.OnMouseDragging(row, col);
 	}
+}
 
-	if (event.RightDown())
-	{
-		wxMenu menu;
-
-		menu.Append(Menu_CreateClassicTween, entries[Menu_CreateClassicTween].text[currLanguage]);
-		menu.Append(Menu_DeleteClassicTween, entries[Menu_DeleteClassicTween].text[currLanguage]);
-		menu.AppendSeparator();
-		menu.Append(Menu_InsertFrame, entries[Menu_InsertFrame].text[currLanguage]);
-		menu.Append(Menu_DeleteFrame, entries[Menu_DeleteFrame].text[currLanguage]);
-		menu.AppendSeparator();
-		menu.Append(Menu_InsertKeyFrame, entries[Menu_InsertKeyFrame].text[currLanguage]);
-		menu.Append(Menu_DeleteKeyFrame, entries[Menu_DeleteKeyFrame].text[currLanguage]);
-
-		PopupMenu(&menu, event.GetX(), event.GetY());
+void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
+{
+	int key_code = event.GetKeyCode();
+	if (wxGetKeyState(WXK_CONTROL) && (key_code == 'c' || key_code == 'C')) {
+		m_editop.CopySelection();
+	} else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V)) {
+		m_editop.PasteSelection();
 	}
 }
 
 KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 	if (row == -1 || col == -1) 
 		return NULL;
 
@@ -145,7 +121,7 @@ KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
 bool KeysContentWidget::isPosOnKeyFrame() const
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 	if (row == -1 || col == -1) 
 		return false;
 
@@ -295,13 +271,38 @@ void KeysContentWidget::drawCurrPosFlag(wxBufferedPaintDC& dc)
 void KeysContentWidget::drawSelected(wxBufferedPaintDC& dc)
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
 		dc.SetPen(wxPen(DARK_BLUE));
 		dc.SetBrush(wxBrush(DARK_BLUE));
 		dc.DrawRectangle(FRAME_GRID_WIDTH * col, FRAME_GRID_HEIGHT * row, FRAME_GRID_WIDTH, FRAME_GRID_HEIGHT);
 	}
+
+	int col_min, col_max;
+	m_ctrl->GetKeysPanel()->GetSelectRegion(row, col_min, col_max);
+	if (col_min != -1 && col_max != -1 && col_min != col_max)
+	{
+		dc.SetPen(wxPen(DARK_BLUE));
+		dc.SetBrush(wxBrush(DARK_BLUE));
+		dc.DrawRectangle(FRAME_GRID_WIDTH * col_min, FRAME_GRID_HEIGHT * row, FRAME_GRID_WIDTH * (col_max - col_min + 1), FRAME_GRID_HEIGHT);
+	}
+}
+
+void KeysContentWidget::MousePopupMenu(int x, int y)
+{
+	wxMenu menu;
+
+	menu.Append(Menu_CreateClassicTween, entries[Menu_CreateClassicTween].text[currLanguage]);
+	menu.Append(Menu_DeleteClassicTween, entries[Menu_DeleteClassicTween].text[currLanguage]);
+	menu.AppendSeparator();
+	menu.Append(Menu_InsertFrame, entries[Menu_InsertFrame].text[currLanguage]);
+	menu.Append(Menu_DeleteFrame, entries[Menu_DeleteFrame].text[currLanguage]);
+	menu.AppendSeparator();
+	menu.Append(Menu_InsertKeyFrame, entries[Menu_InsertKeyFrame].text[currLanguage]);
+	menu.Append(Menu_DeleteKeyFrame, entries[Menu_DeleteKeyFrame].text[currLanguage]);
+
+	PopupMenu(&menu, x, y);	
 }
 
 void KeysContentWidget::onCreateClassicTween(wxCommandEvent& event)
@@ -331,7 +332,7 @@ void KeysContentWidget::onDeleteFrame(wxCommandEvent& event)
 void KeysContentWidget::onInsertKeyFrame(wxCommandEvent& event)
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
 		LayersMgr& layers = m_ctrl->GetLayers();
@@ -345,7 +346,7 @@ void KeysContentWidget::onInsertKeyFrame(wxCommandEvent& event)
 void KeysContentWidget::onDeleteKeyFrame(wxCommandEvent& event)
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 
 	LayersMgr& layers = m_ctrl->GetLayers();
 	size_t index = layers.size() - row - 1;
@@ -404,7 +405,7 @@ void KeysContentWidget::onUpdateInsertKeyFrame(wxUpdateUIEvent& event)
 void KeysContentWidget::onUpdateDeleteKeyFrame(wxUpdateUIEvent& event)
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 	if (row == -1 || col == -1) return;
 
 	LayersMgr& layers = m_ctrl->GetLayers();
@@ -429,7 +430,7 @@ void KeysContentWidget::onDeleteFrame(wxKeyEvent& event)
 void KeysContentWidget::onInsertFrame()
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
 		LayersMgr& layers = m_ctrl->GetLayers();
@@ -443,7 +444,7 @@ void KeysContentWidget::onInsertFrame()
 void KeysContentWidget::onDeleteFrame()
 {
 	int row, col;
-	m_ctrl->GetKeysPanel()->getSelectPos(row, col);
+	m_ctrl->GetKeysPanel()->GetSelectPos(row, col);
 	if (row != -1 && col != -1)
 	{
 		LayersMgr& layers = m_ctrl->GetLayers();
