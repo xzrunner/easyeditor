@@ -19,6 +19,10 @@ public:
 
 	void Draw() const;
 
+	void LoadFromFile(const Json::Value& value, 
+		const std::vector<d2d::ISprite*>& sprites);
+	void StoreToFile(Json::Value& value) const;
+
 	static int GetAnchorRadius() { return RADIUS; }
 
 private:

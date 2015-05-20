@@ -189,6 +189,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\easyui\frame\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyui\frame\FileIO.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\easyui\frame\Frame.cpp"
 				>
 			</File>

@@ -74,6 +74,39 @@ void AnchorMgr::Draw() const
 	}
 }
 
+void AnchorMgr::LoadFromFile(const Json::Value& value,
+							 const std::vector<d2d::ISprite*>& sprites)
+{
+	for (int i = 0; i < 6; ++i) {
+		int idx = 0;
+		Json::Value val = value["anchor"][i][idx++];
+		while (!val.isNull()) {
+			std::string name = val.asString();
+			d2d::ISprite* spr = NULL;
+			for (int j = 0, m = sprites.size(); j < m; ++j) {
+				if (sprites[j]->name == name) {
+					spr = sprites[j];
+					break;
+				}
+			}
+			if (spr) {
+				m_anchors[i].sprites.push_back(spr);
+				spr->setTransform(m_anchors[i].pos, 0);
+			}
+			val = value["anchor"][i][idx++];
+		}
+	}
+}
+
+void AnchorMgr::StoreToFile(Json::Value& value) const
+{
+	for (int i = 0; i < 6; ++i) {
+		for (int j = 0; j < m_anchors[i].sprites.size(); ++i) {
+			value["anchor"][i][j] = m_anchors[i].sprites[j]->name;
+		}
+	}
+}
+
 void AnchorMgr::ChangeAnchorPos(Anchor& anchor, const d2d::Vector& pos)
 {
 	anchor.pos = pos;

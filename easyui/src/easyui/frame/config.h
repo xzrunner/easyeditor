@@ -4,7 +4,7 @@
 namespace eui
 {
 
-static const char* FILE_TAG = "lr";
+static const char* FILE_TAG = "ui";
 
 }
 

@@ -1,4 +1,5 @@
 #include "Task.h"
+#include "FileIO.h"
 
 #include "view/StagePanel.h"
 
@@ -21,10 +22,12 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
+	FileIO::Load(filename, m_stage, m_library);
 }
 
 void Task::store(const char* filename) const
 {
+	FileIO::Store(filename, m_stage);
 }
 
 bool Task::isDirty() const
