@@ -36,12 +36,16 @@ public:
 	std::vector<OceanMesh*>& GetOceans() { return m_oceans; }
 	const std::vector<OceanMesh*>& GetOceans() const { return m_oceans; }
 
+	void SetUpdateOpen(bool open) { m_update = open; }
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void loadResources();
 
 private:
+	bool m_update;
+
 	std::vector<OceanMesh*> m_oceans;
 
 	mutable clock_t m_time;

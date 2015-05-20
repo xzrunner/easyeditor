@@ -16,6 +16,8 @@ SettingCfg::SettingCfg()
 
 	m_view_width = m_map_width;
 	m_view_height = m_map_height;
+
+	m_terrain2d_anim = false;
 }
 
 SettingCfg* SettingCfg::Instance()

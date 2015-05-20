@@ -22,8 +22,14 @@ void FileIO::Load(const char* filename, StagePanel* stage,
 	reader.parse(fin, value);
 	fin.close();
 
-	// size
 	SettingCfg* cfg = SettingCfg::Instance();
+
+	// settings
+	if (!value["settings"].isNull()) {
+		cfg->m_terrain2d_anim = value["settings"]["terrain2d"].asBool();
+	}
+
+	// size
 	cfg->m_map_width = value["size"]["width"].asInt();
 	cfg->m_map_height = value["size"]["height"].asInt();
 	if (value["size"]["view width"].isNull()) {
@@ -53,8 +59,12 @@ void FileIO::Store(const char* filename, StagePanel* stage)
 {
 	Json::Value value;
 
-	// size
 	SettingCfg* cfg = SettingCfg::Instance();
+
+	// settings
+	value["settings"]["terrain2d"] = cfg->m_terrain2d_anim;
+
+	// size
 	value["size"]["width"] = cfg->m_map_width;
 	value["size"]["height"] = cfg->m_map_height;
 	value["size"]["view width"] = cfg->m_view_width;

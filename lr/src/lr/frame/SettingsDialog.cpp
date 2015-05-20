@@ -3,6 +3,8 @@
 
 #include "view/StagePanel.h"
 
+#include <easyterrain2d.h>
+
 namespace lr
 {
 
@@ -45,6 +47,7 @@ void SettingDialog::InitLayout()
 		}
 		top_sizer->Add(sizer);
 	}
+	top_sizer->AddSpacer(10);
 	// View
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("View"));
@@ -71,6 +74,14 @@ void SettingDialog::InitLayout()
 			sizer->Add(sz);
 		}
 		top_sizer->Add(sizer);
+	}
+	top_sizer->AddSpacer(10);
+	// Open River Animation
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("terrain2d¶¯»­"));
+		check->SetValue(cfg->m_terrain2d_anim);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeTerrain2DAnim));
+		top_sizer->Add(check);
 	}
 
 	SetSizer(top_sizer);
@@ -100,6 +111,20 @@ void SettingDialog::OnViewSizeChanged(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 	cfg->m_view_width = width;
 	cfg->m_view_height = height;
+}
+
+void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
+{
+	SettingCfg* cfg = SettingCfg::Instance();
+	cfg->m_terrain2d_anim = event.IsChecked();
+
+	std::vector<d2d::ISprite*> sprites;
+	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(sprites[i])) {
+			const_cast<eterrain2d::Symbol&>(terr->getSymbol()).SetUpdateOpen(cfg->m_terrain2d_anim);
+		}
+	}
 }
 
 }
