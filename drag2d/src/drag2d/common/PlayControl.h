@@ -20,6 +20,8 @@ public:
 
 	int frame() const;
 
+	void SetDt(float dt);
+
 private:
 	int m_curr_frame;
 

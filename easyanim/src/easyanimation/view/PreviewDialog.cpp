@@ -2,6 +2,8 @@
 #include "PreviewCanvas.h"
 #include "PreviewOP.h"
 
+#include "frame/Controller.h"
+
 namespace eanim
 {
 
@@ -10,6 +12,7 @@ PreviewDialog::PreviewDialog(wxWindow* parent, Controller* ctrl)
 	, m_control(0.033f)
 	, m_ctrl(ctrl)
 {
+	m_control.SetDt(1.0f / ctrl->fps);
 	initLayout();
 }
 

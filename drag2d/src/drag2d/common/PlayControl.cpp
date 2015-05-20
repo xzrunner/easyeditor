@@ -8,7 +8,7 @@ namespace d2d
 PlayControl::PlayControl(float dt) 
 	: m_curr_frame(1), m_last(-1)
 {
-	m_dt = dt * CLOCKS_PER_SEC;
+	SetDt(dt);
 }
 
 PlayControl::~PlayControl() 
@@ -67,6 +67,11 @@ void PlayControl::decrease()
 int PlayControl::frame() const 
 {
 	return m_curr_frame;
+}
+
+void PlayControl::SetDt(float dt) 
+{ 
+	m_dt = dt * CLOCKS_PER_SEC; 
 }
 
 }

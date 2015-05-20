@@ -88,17 +88,9 @@ void PreviewCanvas::drawStageData()
 
 void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 {
-	if (m_control.frame() == 6) {
-		int zz = 0;
-	}
-
 	LayersMgr& layers = m_ctrl->GetLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
-// 		if (i == 1) {
-// 			continue;
-// 		}
-
 		Layer* layer = layers.getLayer(i);
 
 		KeyFrame *currFrame = layer->getCurrKeyFrame(m_control.frame()),
@@ -126,10 +118,6 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 
 			currFrame->getTweenSprites(currFrame, nextFrame, sprites, process);
 		}
-	}
-
-	if (sprites.size() > 2) {
-		int zz = 0;
 	}
 }
 
