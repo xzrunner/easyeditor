@@ -36,6 +36,10 @@ void CheckerBoard::AddSprite(d2d::ISprite* sprite)
 
 void CheckerBoard::RemoveSprite(d2d::ISprite* sprite)
 {
+	if (!sprite->getSymbol().getUserData()) {
+		return;
+	}
+
 	std::map<d2d::ISprite*, d2d::Vector>::iterator itr 
 		= m_mapSprite2Pos.find(sprite);
 	assert(itr != m_mapSprite2Pos.end());
