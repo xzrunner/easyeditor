@@ -76,6 +76,10 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 							 bool valid,
 							 bool is_flat) const
 {
+	if (!symbol.getUserData()) {
+		return;
+	}
+
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 

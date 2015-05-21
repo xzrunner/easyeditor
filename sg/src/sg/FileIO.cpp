@@ -7,8 +7,8 @@ namespace sg
 void FileIO::load(const char* filename, StagePanel* stage,
 				  d2d::LibraryPanel* library)
 {
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+// 	d2d::SymbolMgr::Instance()->clear();
+// 	d2d::BitmapMgr::Instance()->clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -26,7 +26,7 @@ void FileIO::load(const char* filename, StagePanel* stage,
 		imgValue = value["image"][i++];
 	}
 
-	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+//	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename, StagePanel* stage)

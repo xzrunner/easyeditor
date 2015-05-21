@@ -44,21 +44,29 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	sprite->setTransform(FixSpriteLocation(sprite->getPosition()), sprite->getAngle());
-	if (sprite->getPosition().isValid()) {
-		if (!m_checkboard.IsValid(sprite)) {
-			bool fixed = m_checkboard.SetCachedPos(sprite);
-			if (!fixed) {
-				return;
-			}
-		}
 
+	if (!sprite->getSymbol().getUserData()) {
 		d2d::SpritesPanelImpl::insertSprite(sprite);
-		ChangeSymbolRemain(sprite, false);
-		m_checkboard.AddSprite(sprite);
+		return;
+	}
 
-		if (IsSymbolWall(*sprite)) {
-			m_checkboard.ResetWall();
+	if (!sprite->getPosition().isValid()) {
+		return;
+	}
+
+	if (!m_checkboard.IsValid(sprite)) {
+		bool fixed = m_checkboard.SetCachedPos(sprite);
+		if (!fixed) {
+			return;
 		}
+	}
+
+	d2d::SpritesPanelImpl::insertSprite(sprite);
+	ChangeSymbolRemain(sprite, false);
+	m_checkboard.AddSprite(sprite);
+
+	if (IsSymbolWall(*sprite)) {
+		m_checkboard.ResetWall();
 	}
 }
 

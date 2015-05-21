@@ -8,8 +8,7 @@
 namespace sg
 {
 
-//static const float VIEW_TRANS = 0.75f;
-static const float VIEW_TRANS = 1/sqrt(3.0f);
+static const float VIEW_TRANS = 0.75f;
 
 BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)

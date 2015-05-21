@@ -147,6 +147,8 @@ void BuildingCfg::InitBuildings(const Json::Value& value)
 	m_library->addPage(m_resources);
 	m_army = new LibraryPage(nb, "Army");
 	m_library->addPage(m_army);	
+	d2d::ILibraryPage* other = new d2d::LibraryImagePage(nb);
+	m_library->addPage(other);
 
 	ResetLibraryList();
 }
