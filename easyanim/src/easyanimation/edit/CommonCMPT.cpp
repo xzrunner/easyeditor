@@ -65,7 +65,7 @@ wxSizer* CommonCMPT::initFillingPanel()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Filling"));
 	int orient = m_vertical ? wxVERTICAL : wxHORIZONTAL;
-	wxSizer* sizer = new wxStaticBoxSizer(bounding, orient);
+	wxSizer* filling_sizer = new wxStaticBoxSizer(bounding, orient);
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 		sizer->Add(new wxStaticText(this, wxID_ANY, wxT("tot frames: ")));
@@ -74,15 +74,16 @@ wxSizer* CommonCMPT::initFillingPanel()
 			wxSP_ARROW_KEYS, 10, 1000, 0);
 		sizer->Add(m_filling);
 
-		sizer->Add(sizer);
+		filling_sizer->Add(sizer);
 	}
+	filling_sizer->AddSpacer(5);
 	{
-		wxButton* btnFill = new wxButton(this, wxID_ANY, wxT("Filling"));
-		Connect(btnFill->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Filling"));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED,
 			wxCommandEventHandler(CommonCMPT::onFillingFrames));
-		sizer->Add(btnFill);
+		filling_sizer->Add(btn);
 	}
-	return sizer;
+	return filling_sizer;
 }
 
 wxSizer* CommonCMPT::initSettingsPanel()
