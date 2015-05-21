@@ -29,8 +29,17 @@ void KeysPanel::GetSelectPos(int& row, int& col) const
 
 void KeysPanel::SetSelectPos(int row, int col)
 {
-	int max_frame = m_ctrl->GetLayers().GetMaxFrame();
-	if (col + 1 > max_frame) {
+	int max_frame = -1;
+
+	LayersMgr& layers = m_ctrl->GetLayers();
+	Layer* curr_layer = layers.getLayer(layers.size() - row - 1);
+	if (curr_layer) {
+		max_frame = curr_layer->GetMaxFrame();
+	} else {
+		return;
+	}
+
+ 	if (col + 1 > max_frame || m_selected_col > max_frame) {
 		m_selected_col_min = m_selected_col_max = -1;
 	} else {
 		m_selected_col_min = m_selected_col_max = col;
@@ -98,7 +107,8 @@ void KeysPanel::SetSelectRegion(int row, int col)
 
 void KeysPanel::UpdateSelectRegion(int col_min, int col_max)
 {
-	if (m_selected_col_min == col_min && m_selected_col_max == col_max) {
+	if (m_selected_col_min == -1 || m_selected_col_max == -1 || 
+		m_selected_col_min == col_min && m_selected_col_max == col_max) {
 		return;
 	}
 
