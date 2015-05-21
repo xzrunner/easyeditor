@@ -96,17 +96,17 @@ void LayersContentWidget::onPaint(wxPaintEvent& event)
 	{
 		size_t storeIndex = size - i - 1;
 		Layer* layer = m_ctrl->GetLayers().getLayer(storeIndex);
-		dc.DrawText(layer->name, 5, FRAME_GRID_HEIGHT * i);
+		dc.DrawText(layer->GetName(), 5, FRAME_GRID_HEIGHT * i);
 
 		dc.SetPen(*wxBLACK_PEN);
-		if (layer->editable) {
+		if (layer->IsEditable()) {
 			dc.SetBrush(*wxBLACK_BRUSH);
 		} else {
 			dc.SetBrush(*wxWHITE_BRUSH);
 		}
 		dc.DrawRectangle(FLAG_EDITABLE_X, FRAME_GRID_HEIGHT * i + (FRAME_GRID_HEIGHT - FLAG_RADIUS*2) * 0.5, FLAG_RADIUS*2, FLAG_RADIUS*2);
 
-		if (layer->visible) {
+		if (layer->IsVisible()) {
 			dc.SetBrush(*wxBLACK_BRUSH);
 		} else {
 			dc.SetBrush(*wxWHITE_BRUSH);
@@ -148,11 +148,11 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			int x = event.GetX();
 			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
 			if (x > FLAG_EDITABLE_X && x < FLAG_EDITABLE_X + FLAG_RADIUS * 2) {
-				layer->editable = !layer->editable;
+				layer->SetEditable(!layer->IsEditable());
 				Refresh();
 				m_ctrl->Refresh();
 			} else if (x > FLAG_VISIBLE_X - FLAG_RADIUS && x < FLAG_VISIBLE_X + FLAG_RADIUS) {
-				layer->visible = !layer->visible;
+				layer->SetVisible(!layer->IsVisible());
 				Refresh();
 				m_ctrl->Refresh();
 			}
@@ -200,10 +200,10 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 			Layer* layer = m_ctrl->GetLayers().getLayer(layerIndex);
 			
 			wxPoint pos(GetScreenPosition() + wxPoint(event.GetX(), event.GetY()));
-			d2d::SetValueDialog dlg(this, wxT("Set layer's name"), layer->name, pos);
+			d2d::SetValueDialog dlg(this, wxT("Set layer's name"), layer->GetName(), pos);
 			if (dlg.ShowModal() == wxID_OK)
 			{
-				layer->name = dlg.getText().ToStdString();
+				layer->SetName(dlg.getText().ToStdString());
 				Refresh();
 			}
 		}

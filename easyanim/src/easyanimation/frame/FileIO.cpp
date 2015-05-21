@@ -223,13 +223,14 @@ Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir, Con
 
 	ctrl->InsertLayer(layer);
 
-	layer->name = layerValue["name"].asString();
+	layer->SetName(layerValue["name"].asString());
 
 	int i = 0;
 	Json::Value frameValue = layerValue["frame"][i++];
 	while (!frameValue.isNull()) {
 		KeyFrame* frame = loadFrame(frameValue, dir, ctrl);
-		layer->insertKeyFrame(frame);
+		layer->InsertKeyFrame(frame);
+		frame->Release();
 		frameValue = layerValue["frame"][i++];
 	}
 
@@ -257,7 +258,7 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir, 
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
 		d2d::ISprite* actor = loadActor(actorValue, dir, ctrl);
-		frame->insertWithClone(actor);
+		frame->Insert(actor);
 		actor->Release();
 		actorValue = frameValue["actor"][i++];
 	}
@@ -396,13 +397,14 @@ Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
 {
 	Layer* layer = new Layer(ctrl);
 
-	layer->name = layerNode->first_attribute("name")->value();
+	layer->SetName(layerNode->first_attribute("name")->value());
 
 	rapidxml::xml_node<>* frameNode = layerNode->first_node("frames")
 		->first_node("DOMFrame");
 	while (frameNode) {
 		KeyFrame* frame = loadFrame(frameNode, mapNamePath, ctrl);
-		layer->insertKeyFrame(frame);
+		layer->InsertKeyFrame(frame);
+		frame->Release();
 		frameNode = frameNode->next_sibling();
 	}
 
@@ -420,7 +422,8 @@ KeyFrame* FileIO::loadFrame(rapidxml::xml_node<>* frameNode,
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
 		d2d::ISprite* actor = loadActor(actorNode, mapNamePath);
-		frame->insertWithClone(actor);
+		frame->Insert(actor);
+		actor->Release();
 		actorNode = actorNode->next_sibling();
 	}
 
@@ -460,7 +463,7 @@ Json::Value FileIO::store(Layer* layer, const wxString& dir, Controller* ctrl)
 {
 	Json::Value value;
 
-	value["name"] = layer->name;
+	value["name"] = layer->GetName();
 
 	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
 	std::vector<KeyFrame*> all_frames;
@@ -484,7 +487,7 @@ Json::Value FileIO::store(KeyFrame* frame, const wxString& dir, Controller* ctrl
 
 	value["tween"] = frame->hasClassicTween();
 
-	for (size_t i = 0, n = frame->size(); i < n; ++i)
+	for (size_t i = 0, n = frame->Size(); i < n; ++i)
 		value["actor"][i] = store(frame->getSprite(i), dir, ctrl);
 
 	value["skeleton"] = storeSkeleton(frame->getSkeletonData());

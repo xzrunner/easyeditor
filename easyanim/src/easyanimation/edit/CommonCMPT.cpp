@@ -164,11 +164,12 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(itr->second[i]);
 //			symbol->refresh();
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			frame->insertWithClone(sprite);
+			frame->Insert(sprite);
 			sprite->Release();
 			symbol->Release();
 		}
-		layer->insertKeyFrame(frame);
+		layer->InsertKeyFrame(frame);
+		frame->Release();
 	}
 	m_ctrl->InsertLayer(layer);
 
@@ -198,8 +199,12 @@ void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 	{
 		KeyFrame* frame = new KeyFrame(m_ctrl, i+1);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbols[i]);
-		frame->insertWithClone(sprite);
-		layer->insertKeyFrame(frame);
+
+		frame->Insert(sprite);
+		layer->InsertKeyFrame(frame);
+
+		sprite->Release();
+		frame->Release();
 	}
 	m_ctrl->InsertLayer(layer);
 
@@ -217,18 +222,21 @@ void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 		const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
 		std::vector<KeyFrame*> fixed;
 		fixed.reserve(frames.size());
-		int dis = tot / frames.size();
 
+		int dis = tot / frames.size();
 		std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
 		for (size_t i = 0; itr != frames.end(); ++itr, ++i)
 		{
 			itr->second->setTime(1+dis*i);
+			itr->second->Retain();
 			fixed.push_back(itr->second);
 		}
 
-		const_cast<std::map<int, KeyFrame*>&>(frames).clear();
-		for (size_t i = 0, n = fixed.size(); i < n; ++i)
-			layer->insertKeyFrame(fixed[i]);
+		layer->Clear();
+		for (size_t i = 0, n = fixed.size(); i < n; ++i) {
+			layer->InsertKeyFrame(fixed[i]);
+			fixed[i]->Release();
+		}
 	}
 
 	m_ctrl->Refresh();

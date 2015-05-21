@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _EASYANIM_LAYER_H_
+#define _EASYANIM_LAYER_H_
 
 #include <drag2d.h>
 
@@ -6,59 +7,67 @@
 
 namespace eanim
 {
-	class Controller;
-	class KeyFrame;
 
-	class Layer
-	{
-	public:
-		Layer(Controller* ctrl);
-		~Layer();
+class Controller;
+class KeyFrame;
 
-		bool isKeyFrame(int time) const;
+class Layer
+{
+public:
+	Layer(Controller* ctrl);
+	~Layer();
 
-		void RemoveFrameRegion(int begin, int end);
+	bool IsKeyFrame(int time) const;
 
-		void insertFrame(int time);
-		void removeFrame(int time);
+	void RemoveFrameRegion(int begin, int end);
 
-		void insertKeyFrame(KeyFrame* frame);
-		void insertKeyFrame(int time);
-		void removeKeyFrame(int time);
+	void InsertNullFrame(int time);
+	void RemoveNullFrame(int time);
 
- 		const std::map<int, KeyFrame*>& getAllFrames() const {
- 			return m_frames;
- 		}
+	void InsertKeyFrame(KeyFrame* frame);
+	void InsertKeyFrame(int time);
+	void RemoveKeyFrame(int time);
 
-// 		void insertSprite(d2d::ISprite* sprite, int iFrame);
-// 		void removeSprite(d2d::ISprite* sprite, int iFrame);
+	const std::map<int, KeyFrame*>& getAllFrames() const {
+		return m_frames;
+	}
 
-		KeyFrame* getCurrKeyFrame(int iFrame);
-		KeyFrame* getNextKeyFrame(int iFrame);
-		KeyFrame* getPrevKeyFrame(int iFrame);
+	KeyFrame* GetCurrKeyFrame(int time);
+	KeyFrame* GetNextKeyFrame(int time);
+	KeyFrame* GetPrevKeyFrame(int time);
 
-		int GetMaxFrame() const;
+	int GetMaxFrame() const;
 
-	public:
-		std::string name;
+	void SetName(const std::string& name) { m_name = name; }
+	const std::string& GetName() const { return m_name; }
 
-		bool editable, visible;
+	void SetEditable(bool editable) { m_editable = editable; }
+	bool IsEditable() const { return m_editable; }
 
-	private:
-		void clear();
+	void SetVisible(bool visible) { m_visible = visible; }
+	bool IsVisible() const { return m_visible; }
 
-		std::pair<std::map<int, KeyFrame*>::iterator, bool> 
-			insert(int index, KeyFrame* frame);
+	SpriteObserver& GetSpriteObserver() { return m_sprite_observer; }
 
-	private:
-		Controller* m_ctrl;
+	void Clear();
 
-		std::map<int, KeyFrame*> m_frames;
+private:
+	std::pair<std::map<int, KeyFrame*>::iterator, bool> 
+		InsertKeyFrame(int index, KeyFrame* frame);
 
-		SpriteObserver m_spriteObserver;
+private:
+	Controller* m_ctrl;
 
-		friend class KeyFrame;
+	std::string m_name;
 
-	}; // Layer
+	bool m_editable, m_visible;
+
+	std::map<int, KeyFrame*> m_frames;
+
+	SpriteObserver m_sprite_observer;
+
+}; // Layer
+
 }
 
+#endif // _EASYANIM_LAYER_H_

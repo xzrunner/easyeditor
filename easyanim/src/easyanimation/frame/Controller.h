@@ -21,7 +21,7 @@ public:
 
 	void setCurrFrame(int layer, int frame);
 	void UpdateCurrFrame();
-	KeyFrame* getCurrFrame() { return m_last_keyframe; }
+	KeyFrame* getCurrFrame();
 	void setPrevKeyFrame();
 	void setNextKeyFrame();
 

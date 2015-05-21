@@ -9,20 +9,20 @@ namespace eanim
 
 Layer::Layer(Controller* ctrl)
 	: m_ctrl(ctrl)
-	, m_spriteObserver(*this)
+	, m_sprite_observer(*this)
 {
 	static int count = 0;
-	name = "Layer" + StringTools::intToString(count++);
+	m_name = "Layer" + StringTools::intToString(count++);
 
-	editable = visible = true;
+	m_editable = m_visible = true;
 }
 
 Layer::~Layer()
 {
-	clear();
+	Clear();
 }
 
-bool Layer::isKeyFrame(int time) const
+bool Layer::IsKeyFrame(int time) const
 {
 	return m_frames.find(time) != m_frames.end();
 }
@@ -47,7 +47,7 @@ void Layer::RemoveFrameRegion(int begin, int end)
 			++itr;
 			continue;
 		} else if (itr->first >= begin && itr->first <= end) {
-			delete itr->second;
+			itr->second->Release();
 			itr = m_frames.erase(itr);
 		} else {
 			assert(itr->first > end);
@@ -60,159 +60,157 @@ void Layer::RemoveFrameRegion(int begin, int end)
 	for (int i = 0, n = frames.size(); i < n; ++i) {
 		KeyFrame* frame = frames[i];
 		frame->setTime(frame->getTime() - cut_len);
-		insert(frame->getTime(), frame);
+		InsertKeyFrame(frame->getTime(), frame);
+		frame->Release();
 	}
 
 	int after_len = GetMaxFrame();
 	if (after_len < before_len - cut_len) {
-		insertKeyFrame(before_len - cut_len);
+		InsertKeyFrame(before_len - cut_len);
 	}
 
 	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrame());
 }
 
-void Layer::insertFrame(int time)
+void Layer::InsertNullFrame(int time)
 {
 	std::vector<KeyFrame*> frames;
 	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
 	for ( ; itr != m_frames.end(); )
 	{
-		if (itr->first >= time)
-		{
+		if (itr->first >= time) {
 			frames.push_back(itr->second);
 			itr = m_frames.erase(itr);
-		}
-		else
+		} else {
 			++itr;
+		}
 	}
 
 	for (size_t i = 0, n = frames.size(); i < n; ++i)
 	{
 		KeyFrame* frame = frames[i];
 		frame->setTime(frame->getTime() + 1);
-		insert(frame->getTime(), frame);
+		InsertKeyFrame(frame->getTime(), frame);
+		frame->Release();
 	}
 }
 
-void Layer::removeFrame(int time)
+void Layer::RemoveNullFrame(int time)
 {
-	if (m_frames.find(time) != m_frames.end())
+	if (IsKeyFrame(time)) {
 		return;
+	}
 
 	std::vector<KeyFrame*> frames;
 	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
 	for ( ; itr != m_frames.end(); )
 	{
-		if (itr->first >= time)
-		{
+		if (itr->first >= time) {
 			frames.push_back(itr->second);
 			itr = m_frames.erase(itr);
-		}
-		else
+		} else {
 			++itr;
+		}
 	}
 
 	for (size_t i = 0, n = frames.size(); i < n; ++i)
 	{
 		KeyFrame* frame = frames[i];
 		frame->setTime(frame->getTime() - 1);
-		insert(frame->getTime(), frame);
+		InsertKeyFrame(frame->getTime(), frame);
+		frame->Release();
 	}
 }
 
-void Layer::insertKeyFrame(KeyFrame* frame)
+void Layer::InsertKeyFrame(KeyFrame* frame)
 {
 	std::pair<std::map<int, KeyFrame*>::iterator, bool> status 
-		= insert(frame->getTime(), frame);
-	if (!status.second)
+		= InsertKeyFrame(frame->getTime(), frame);
+	// replace
+	if (!status.second && frame != status.first->second)
 	{
-		if (frame != status.first->second)
-		{
-			if (status.first->second->getTime() == m_ctrl->GetMaxFrame()) {
-				m_ctrl->setCurrFrame(m_ctrl->layer(), m_ctrl->GetMaxFrame());
-			}
-			delete status.first->second;
-			status.first->second = frame;
+		KeyFrame* old_frame = status.first->second;
+		bool refresh = m_ctrl->getCurrFrame() == old_frame;
+
+		old_frame->Release();
+		status.first->second = frame;
+
+		if (refresh) {
+			m_ctrl->UpdateCurrFrame();
 		}
 	}
 
 	m_ctrl->setCurrFrame(m_ctrl->layer(), frame->getTime());
 }
 
-void Layer::insertKeyFrame(int time)
+void Layer::InsertKeyFrame(int time)
 {
 	if (!m_frames.empty())
 	{
-		std::map<int, KeyFrame*>::iterator itr = m_frames.end();
-		--itr;
-		if (itr->first < time)
+		if (GetMaxFrame() < time)
 		{
 			KeyFrame* frame = new KeyFrame(m_ctrl, time);
-			insert(time, frame);
-			frame->copyKeyFrame(itr->second);
+			InsertKeyFrame(time, frame);
+			frame->Release();
+			frame->CopyFromOther((--m_frames.end())->second);
 			m_ctrl->setCurrFrame(m_ctrl->layer(), time);
 		}
 		else
-			insert(time, new KeyFrame(m_ctrl, time));
+		{
+			InsertKeyFrame(time, new KeyFrame(m_ctrl, time));
+		}
 	}
 	else
-		insert(1, new KeyFrame(m_ctrl, 1));
+	{
+		InsertKeyFrame(1, new KeyFrame(m_ctrl, 1));
+	}
 }
 
-void Layer::removeKeyFrame(int time)
+void Layer::RemoveKeyFrame(int time)
 {
 	if (time == 1) return;
 
-	std::map<int, KeyFrame*>::iterator itr = m_frames.find(time);
-	if (itr != m_frames.end())
-	{
-		delete itr->second;
-		m_frames.erase(itr);
-
-		m_ctrl->setCurrFrame(m_ctrl->layer(), m_ctrl->GetMaxFrame());
+	if (!IsKeyFrame(time)) {
+		return;
 	}
+
+	std::map<int, KeyFrame*>::iterator itr = m_frames.find(time);
+	assert(itr != m_frames.end());
+
+	itr->second->Release();
+	m_frames.erase(itr);
+
+	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrame());
 }
 
-// void Layer::insertSprite(d2d::ISprite* sprite, int iFrame)
-// {
-// 	KeyFrame* frame = getCurrKeyFrame(iFrame);
-// 	if (frame)
-// 		frame->insertSprite(sprite);
-// }
-// 
-// void Layer::removeSprite(d2d::ISprite* sprite, int iFrame)
-// {
-// 	KeyFrame* frame = getCurrKeyFrame(iFrame);
-// 	if (frame)
-// 		frame->removeSprite(sprite);
-// }
-
-KeyFrame* Layer::getCurrKeyFrame(int iFrame)
+KeyFrame* Layer::GetCurrKeyFrame(int time)
 {
 	if (m_frames.empty()) return NULL;
 
-	std::map<int, KeyFrame*>::iterator itr = m_frames.lower_bound(iFrame);
+	std::map<int, KeyFrame*>::iterator itr = m_frames.lower_bound(time);
 	if (itr == m_frames.end()) return NULL;
 
-	if (itr->first == iFrame) 
+	if (itr->first == time) 
+	{
 		return itr->second;
+	}
 	else
 	{
 		if (itr == m_frames.begin()) return NULL;
 
 		--itr;
-		assert(itr->first <= iFrame);
-		if (itr->first > iFrame) return NULL;
+		assert(itr->first <= time);
+		if (itr->first > time) return NULL;
 
 		return itr->second;
 	}
 }
 
-KeyFrame* Layer::getNextKeyFrame(int iFrame)
+KeyFrame* Layer::GetNextKeyFrame(int time)
 {
 	if (m_frames.empty()) return NULL;
 
-	std::map<int, KeyFrame*>::iterator itr = m_frames.upper_bound(iFrame);
+	std::map<int, KeyFrame*>::iterator itr = m_frames.upper_bound(time);
 	if (itr == m_frames.end()) {
 		return NULL;
 	} else {
@@ -220,11 +218,11 @@ KeyFrame* Layer::getNextKeyFrame(int iFrame)
 	}
 }
 
-KeyFrame* Layer::getPrevKeyFrame(int iFrame)
+KeyFrame* Layer::GetPrevKeyFrame(int time)
 {
 	if (m_frames.empty()) return NULL;
 
-	std::map<int, KeyFrame*>::iterator itr = m_frames.lower_bound(iFrame);
+	std::map<int, KeyFrame*>::iterator itr = m_frames.lower_bound(time);
 	if (itr == m_frames.end() || itr == m_frames.begin()) {
 		return NULL;
 	} else {
@@ -241,18 +239,26 @@ int Layer::GetMaxFrame() const
 	}
 }
 
-void Layer::clear()
+void Layer::Clear()
 {
 	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
-	for ( ; itr != m_frames.end(); ++itr) delete itr->second;
+	for ( ; itr != m_frames.end(); ++itr) {
+		itr->second->Release();
+	}
 	m_frames.clear();
 }
 
 std::pair<std::map<int, KeyFrame*>::iterator, bool> 
-Layer::insert(int index, KeyFrame* frame)
+Layer::InsertKeyFrame(int index, KeyFrame* frame)
 {
-	frame->setLayer(this);
-	return m_frames.insert(std::make_pair(index, frame));
+	frame->SetLayer(this);
+
+	std::pair<std::map<int, KeyFrame*>::iterator, bool> itr
+		= m_frames.insert(std::make_pair(index, frame));
+	if (itr.second) {
+		frame->Retain();
+	}
+	return itr;
 }
 
 } // eanim

@@ -119,7 +119,7 @@ KeyFrame* KeysContentWidget::queryKeyFrameByPos() const
 	if (!layer) 
 		return NULL;
 	else 
-		return layer->getCurrKeyFrame(col + 1);
+		return layer->GetCurrKeyFrame(col + 1);
 }
 
 bool KeysContentWidget::isPosOnKeyFrame() const
@@ -243,7 +243,7 @@ void KeysContentWidget::drawLayersDataFlag(wxBufferedPaintDC& dc)
 			float x = FRAME_GRID_WIDTH * (itr->first - 0.5f),
 				y = FRAME_GRID_HEIGHT * (i + 1) - KEY_FRAME_CIRCLE_Y_OFFSET;
 			dc.SetPen(*wxBLACK_PEN);
-			if (itr->second->isEmpty()) dc.SetBrush(*wxWHITE_BRUSH);
+			if (itr->second->IsEmpty()) dc.SetBrush(*wxWHITE_BRUSH);
 			else dc.SetBrush(*wxBLACK_BRUSH);
 			dc.DrawCircle(x, y, KEY_FRAME_CIRCLE_RADIUS);
 		}
@@ -342,7 +342,7 @@ void KeysContentWidget::onInsertKeyFrame(wxCommandEvent& event)
 		LayersMgr& layers = m_ctrl->GetLayers();
 		size_t index = layers.size() - row - 1;
 		Layer* layer = layers.getLayer(index);
-		layer->insertKeyFrame(col + 1);
+		layer->InsertKeyFrame(col + 1);
 		m_ctrl->GetKeysPanel()->Refresh();
 	}
 }
@@ -355,7 +355,7 @@ void KeysContentWidget::onDeleteKeyFrame(wxCommandEvent& event)
 	LayersMgr& layers = m_ctrl->GetLayers();
 	size_t index = layers.size() - row - 1;
 	Layer* layer = layers.getLayer(index);
-	layer->removeKeyFrame(col + 1);
+	layer->RemoveKeyFrame(col + 1);
 	m_ctrl->GetKeysPanel()->Refresh();
 }
 
@@ -415,7 +415,7 @@ void KeysContentWidget::onUpdateDeleteKeyFrame(wxUpdateUIEvent& event)
 	LayersMgr& layers = m_ctrl->GetLayers();
 	size_t index = layers.size() - row - 1;
 	Layer* layer = layers.getLayer(index);
-	if (layer->isKeyFrame(col + 1)) 
+	if (layer->IsKeyFrame(col + 1)) 
 		event.Enable(true);
 	else 
 		event.Enable(false);
@@ -440,7 +440,7 @@ void KeysContentWidget::onInsertFrame()
 		LayersMgr& layers = m_ctrl->GetLayers();
 		size_t index = layers.size() - row - 1;
 		Layer* layer = layers.getLayer(index);
-		layer->insertFrame(col + 1);
+		layer->InsertNullFrame(col + 1);
 		m_ctrl->GetKeysPanel()->Refresh();
 	}
 }
@@ -454,7 +454,7 @@ void KeysContentWidget::onDeleteFrame()
 		LayersMgr& layers = m_ctrl->GetLayers();
 		size_t index = layers.size() - row - 1;
 		Layer* layer = layers.getLayer(index);
-		layer->removeFrame(col + 1);
+		layer->RemoveNullFrame(col + 1);
 		m_ctrl->GetKeysPanel()->Refresh();
 	}
 }

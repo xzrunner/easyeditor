@@ -29,7 +29,7 @@ void Love2dCode::resolve()
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
 		{
 			KeyFrame* frame = itr->second;			
-			if (frame->size() != 0)
+			if (frame->Size() != 0)
 			{
 				const d2d::ISprite* sprite = frame->getSprite(0);
 				int index = query(sprite->getSymbol().getFilepath().ToStdString());

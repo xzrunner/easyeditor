@@ -462,6 +462,18 @@
 						RelativePath="..\..\..\src\easyanimation\view\KeysScaleWidget.h"
 						>
 					</File>
+					<Filter
+						Name="editaop"
+						>
+						<File
+							RelativePath="..\..\..\src\easyanimation\view\EditKeyFramesAOP.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easyanimation\view\EditKeyFramesAOP.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter

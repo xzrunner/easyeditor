@@ -62,9 +62,17 @@ void Controller::UpdateCurrFrame()
 
 	Layer* layer = layers.getLayer(m_curr_layer);
 	if (layer) {
-		m_last_keyframe = layer->getCurrKeyFrame(m_curr_frame);
+		m_last_keyframe = layer->GetCurrKeyFrame(m_curr_frame);
 		reloadViewList(m_last_keyframe);
 	}
+}
+
+KeyFrame* Controller::getCurrFrame() 
+{ 
+	if (!m_last_keyframe) {
+		UpdateCurrFrame();
+	}
+	return m_last_keyframe; 
 }
 
 void Controller::setPrevKeyFrame()
@@ -74,7 +82,7 @@ void Controller::setPrevKeyFrame()
 		return;
 	}
 
-	KeyFrame* prev = pLayer->getPrevKeyFrame(m_curr_frame);
+	KeyFrame* prev = pLayer->GetPrevKeyFrame(m_curr_frame);
 	if (prev) 
 	{
 		setCurrFrame(m_curr_layer, prev->getTime());
@@ -88,7 +96,7 @@ void Controller::setNextKeyFrame()
 		return;
 	}
 
-	KeyFrame* next = pLayer->getNextKeyFrame(m_curr_frame);
+	KeyFrame* next = pLayer->GetNextKeyFrame(m_curr_frame);
 	if (next) 
 	{
 		setCurrFrame(m_curr_layer, next->getTime());

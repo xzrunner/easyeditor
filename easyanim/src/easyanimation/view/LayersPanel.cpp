@@ -24,7 +24,7 @@ void LayersPanel::insertLayer()
 	int curr_idx = layers.size();
 	Layer* layer = layers.newLayer();
 	m_ctrl->setCurrFrame(curr_idx, m_ctrl->frame());
-	layer->insertKeyFrame(1);
+	layer->InsertKeyFrame(1);
 
 	m_parent->Refresh();
 }

@@ -24,12 +24,14 @@ KeyFrame::KeyFrame(Controller* ctrl, int time)
 
 KeyFrame::~KeyFrame()
 {
-	clear();
+	Clear();
 }
 
-void KeyFrame::copyKeyFrame(const KeyFrame* src)
+void KeyFrame::CopyFromOther(const KeyFrame* src)
 {
-//	clear();
+	if (this == src) {
+		return;
+	}
 
 	// sprites
 	for (size_t i = 0, n = src->m_sprites.size(); i < n; ++i)
@@ -39,8 +41,8 @@ void KeyFrame::copyKeyFrame(const KeyFrame* src)
 		m_sprites.push_back(s);
 
 		if (m_layer) {
-			s->setObserver(&m_layer->m_spriteObserver);
-			m_layer->m_spriteObserver.insert(s, m_time);
+			s->setObserver(&m_layer->GetSpriteObserver());
+			m_layer->GetSpriteObserver().insert(s, m_time);
 		}
 	}
 
@@ -49,109 +51,90 @@ void KeyFrame::copyKeyFrame(const KeyFrame* src)
 	// todo spr's ud
 }
 
-void KeyFrame::insert(d2d::ISprite* sprite)
+void KeyFrame::Insert(d2d::ISprite* sprite)
 {
+	sprite->Retain();
+
 	set_sprite_user_data(sprite, m_layer_idx, m_frame_idx);
 	m_sprites.push_back(sprite);
 	if (m_layer) {
-		sprite->setObserver(&m_layer->m_spriteObserver);
-		m_layer->m_spriteObserver.insert(sprite, m_time);
+		sprite->setObserver(&m_layer->GetSpriteObserver());
+		m_layer->GetSpriteObserver().insert(sprite, m_time);
 	}
 
-	// viewlist
+	// view list
 	KeyFrame* curr = m_ctrl->getCurrFrame();
 	if (this == curr) {
 		m_ctrl->GetViewlist()->insert(sprite);
 	}
 }
 
-void KeyFrame::insertWithClone(d2d::ISprite* sprite) 
-{
-	d2d::ISprite* clone = sprite->clone();
-	set_sprite_user_data(clone, m_layer_idx, m_frame_idx);
-	m_sprites.push_back(clone);
-	if (m_layer) {
-		clone->setObserver(&m_layer->m_spriteObserver);
-		m_layer->m_spriteObserver.insert(clone, m_time);
-	}
-
-	// viewlist
-	KeyFrame* curr = m_ctrl->getCurrFrame();
-	if (this == curr) {
-		m_ctrl->GetViewlist()->insert(clone);
-	}
-}
-
-bool KeyFrame::remove(d2d::ISprite* sprite) 
+bool KeyFrame::Remove(d2d::ISprite* sprite) 
 {
 	m_skeletonData.removeSprite(sprite);
 	if (m_layer) {
-		m_layer->m_spriteObserver.remove(sprite);
+		m_layer->GetSpriteObserver().remove(sprite);
 	}
-	for (int i = 0, n = m_sprites.size(); i < n; ++i)
+
+	std::vector<d2d::ISprite*>::iterator itr = m_sprites.begin();
+	for ( ; itr != m_sprites.end(); ++itr) 
 	{
-		if (m_sprites[i] == sprite) {
-			m_sprites[i]->Release();
-			m_sprites.erase(m_sprites.begin() + i);
-
-			// viewlist
-			KeyFrame* curr = m_ctrl->getCurrFrame();
-			if (this == curr) {
-				m_ctrl->GetViewlist()->remove(sprite);
-			}
-
-			return true;
+		if (*itr != sprite) {
+			continue;
 		}
+
+		(*itr)->Release();
+		m_sprites.erase(itr);
+
+		// viewlist
+		KeyFrame* curr = m_ctrl->getCurrFrame();
+		if (this == curr) {
+			m_ctrl->GetViewlist()->remove(sprite);
+		}
+
+		return true;
 	}
+
 	return false;
 }
 
-void KeyFrame::reorder(const d2d::ISprite* sprite, bool up)
+void KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
-		if (m_sprites[i] == sprite)
-		{
-			if (up && i != n - 1)
-			{
-				d2d::ISprite* tmp = m_sprites[i];
-				m_sprites[i] = m_sprites[i+1];
-				m_sprites[i+1] = tmp;
-			}
-			else if (!up && i != 0)
-			{
-				d2d::ISprite* tmp = m_sprites[i];
-				m_sprites[i] = m_sprites[i-1];
-				m_sprites[i-1] = tmp;
-			}
-
-			m_ctrl->GetViewlist()->reorder(sprite, up);
-
-			break;
+		if (m_sprites[i] != sprite) {
+			continue;
 		}
+
+		if (up && i != n - 1) {
+			std::swap(m_sprites[i], m_sprites[i+1]);
+		} else if (!up && i != 0) {
+			std::swap(m_sprites[i], m_sprites[i-1]);
+		}
+
+		m_ctrl->GetViewlist()->reorder(sprite, up);
+
+		break;
 	}
 }
 
-void KeyFrame::clear()
+void KeyFrame::Clear()
 {
 	if (m_layer) {
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			m_layer->m_spriteObserver.remove(m_sprites[i]);
+			m_layer->GetSpriteObserver().remove(m_sprites[i]);
 	}
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
-	//	delete m_sprites[i];
-		m_sprites[i]->Release();
-	}
+	for_each(m_sprites.begin(), m_sprites.end(), d2d::ReleaseObjectFunctor<d2d::ISprite>());
 	m_sprites.clear();
 }
 
 void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end, 
 							   std::vector<d2d::ISprite*>& tween, float process) const
 {
-	for (int i = 0, n = start->size(); i < n; ++i)
+	for (int i = 0, n = start->Size(); i < n; ++i)
 	{
 		d2d::ISprite* s = start->m_sprites[i];
-		for (int j = 0, m = end->size(); j < m; ++j) {
+		for (int j = 0, m = end->Size(); j < m; ++j) {
 			d2d::ISprite* e = end->m_sprites[j];
 			if (canSpritesTween(*s, *e))
 			{

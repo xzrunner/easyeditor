@@ -57,16 +57,16 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 	for (size_t i = 0, n = layers.size(); i < n; ++i)
 	{
 		Layer* layer = layers[i];
-		if ((type == d2d::DT_EDITABLE && !layer->editable) ||
-			(type == d2d::DT_VISIBLE && !layer->visible))
+		if ((type == d2d::DT_EDITABLE && !layer->IsEditable()) ||
+			(type == d2d::DT_VISIBLE && !layer->IsVisible()))
 			continue;
 
-		KeyFrame* frame = layer->getCurrKeyFrame(m_ctrl->frame());
+		KeyFrame* frame = layer->GetCurrKeyFrame(m_ctrl->frame());
 		if (!frame) continue;
 
 		if (order)
 		{
-			for (int i = 0, n = frame->size(); i < n; ++i) {
+			for (int i = 0, n = frame->Size(); i < n; ++i) {
 				bool hasNext;
 				visitor.visit(const_cast<d2d::ISprite*>(frame->getSprite(i)), hasNext);
 				if (!hasNext) break;
@@ -74,7 +74,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 		}
 		else
 		{
-			for (int i = frame->size() - 1; i >= 0; --i) {
+			for (int i = frame->Size() - 1; i >= 0; --i) {
 				bool hasNext;
 				visitor.visit(const_cast<d2d::ISprite*>(frame->getSprite(i)), hasNext);
 				if (!hasNext) break;
@@ -86,7 +86,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	KeyFrame* frame = m_ctrl->getCurrFrame();
-	bool success = frame->remove(sprite);
+	bool success = frame->Remove(sprite);
 	if (success) {
 		m_ctrl->Refresh();
 	}
@@ -103,7 +103,8 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	}
 
 	KeyFrame* frame = m_ctrl->getCurrFrame();
-	frame->insert(sprite);
+	assert(frame);
+	frame->Insert(sprite);
 	Refresh();
 
 	if (ud) {
@@ -126,7 +127,7 @@ void StagePanel::clearSprites()
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	KeyFrame* frame = m_ctrl->getCurrFrame();
-	frame->reorder(sprite, up);
+	frame->Reorder(sprite, up);
 }
 
 SkeletonData& StagePanel::getSkeletonData()

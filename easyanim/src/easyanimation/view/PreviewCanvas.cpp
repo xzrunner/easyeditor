@@ -79,6 +79,7 @@ void PreviewCanvas::drawStageData()
 {
 	std::vector<d2d::ISprite*> sprites;
 	getCurrSprites(sprites);
+
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteDraw::drawSprite(sprites[i]);
 
@@ -93,20 +94,20 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 	{
 		Layer* layer = layers.getLayer(i);
 
-		KeyFrame *currFrame = layer->getCurrKeyFrame(m_control.frame()),
-			*nextFrame = layer->getNextKeyFrame(m_control.frame());
+		KeyFrame *currFrame = layer->GetCurrKeyFrame(m_control.frame()),
+			*nextFrame = layer->GetNextKeyFrame(m_control.frame());
 		if (!currFrame)
 			continue;
 
 		if (!currFrame) 
 		{
-			for (int i = 0, n = currFrame->size(); i < n; ++i) {
+			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
 				sprites.push_back(currFrame->getSprite(i)->clone());
 			}
 		}
 		else if (!currFrame->hasClassicTween())
 		{
-			for (int i = 0, n = currFrame->size(); i < n; ++i) {
+			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
 				sprites.push_back(currFrame->getSprite(i)->clone());
 			}
 		}

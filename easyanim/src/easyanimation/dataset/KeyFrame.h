@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _EASYANIM_KEY_FRAME_H_
+#define _EASYANIM_KEY_FRAME_H_
 
 #include <drag2d.h>
 
@@ -6,83 +7,85 @@
 
 namespace eanim
 {
-	class Controller;
-	class Layer;
 
-	class KeyFrame
-	{
-	public:
-		KeyFrame(Controller* ctrl, int time);
-		~KeyFrame();
+class Controller;
+class Layer;
 
-		void setLayer(Layer* layer) {
-			m_layer = layer;
-		}
+class KeyFrame : public d2d::Object
+{
+public:
+	KeyFrame(Controller* ctrl, int time);
+	~KeyFrame();
 
-		void copyKeyFrame(const KeyFrame* src);
+	void SetLayer(Layer* layer) {
+		m_layer = layer;
+	}
 
-		bool isEmpty() const {
-			return m_sprites.empty();
-		}
+	void CopyFromOther(const KeyFrame* src);
 
-		void insert(d2d::ISprite* sprite);
-		void insertWithClone(d2d::ISprite* sprite);
-		bool remove(d2d::ISprite* sprite);
-		void reorder(const d2d::ISprite* sprite, bool up);
+	bool IsEmpty() const {
+		return m_sprites.empty();
+	}
 
-		size_t size() const { return m_sprites.size(); }
-		const d2d::ISprite* getSprite(int index) {
-			if (index >= 0 && index < m_sprites.size())
-				return m_sprites[index];
-			else
-				return NULL;
-		}
+	void Insert(d2d::ISprite* sprite);
+	bool Remove(d2d::ISprite* sprite);
+	void Reorder(const d2d::ISprite* sprite, bool up);
 
-		const std::vector<d2d::ISprite*>& getAllSprites() const {
-			return m_sprites;
-		}
+	int Size() const { return m_sprites.size(); }
+	const d2d::ISprite* getSprite(int index) {
+		if (index >= 0 && index < m_sprites.size())
+			return m_sprites[index];
+		else
+			return NULL;
+	}
 
-		bool hasClassicTween() const {
-			return m_bClassicTween;
-		}
-		void setClassicTween(bool tween = true) {
-			m_bClassicTween = tween;
-		}
+	const std::vector<d2d::ISprite*>& getAllSprites() const {
+		return m_sprites;
+	}
 
-		int getTime() const {
-			return m_time;
-		}
-		void setTime(int time) { m_time = time; }
+	bool hasClassicTween() const {
+		return m_bClassicTween;
+	}
+	void setClassicTween(bool tween = true) {
+		m_bClassicTween = tween;
+	}
 
-		void clear();
+	int getTime() const {
+		return m_time;
+	}
+	void setTime(int time) { m_time = time; }
 
-		SkeletonData& getSkeletonData() { return m_skeletonData; }
+	void Clear();
 
-		void getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process) const;
+	SkeletonData& getSkeletonData() { return m_skeletonData; }
 
-	private:
-		void getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
+	void getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process) const;
 
-		bool canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& end) const;
+private:
+	void getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
 
-	private:
-		Controller* m_ctrl;
+	bool canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& end) const;
 
-		int m_layer_idx, m_frame_idx;
+private:
+	Controller* m_ctrl;
 
-		int m_time;
+	int m_layer_idx, m_frame_idx;
 
-		std::vector<d2d::ISprite*> m_sprites;
+	int m_time;
 
-		bool m_bClassicTween;
+	std::vector<d2d::ISprite*> m_sprites;
 
-		Layer* m_layer;
+	bool m_bClassicTween;
 
-		SkeletonData m_skeletonData;
+	Layer* m_layer;
 
-	public:
-		int m_id;
+	SkeletonData m_skeletonData;
 
-	}; // KeyFrame
+public:
+	int m_id;
+
+}; // KeyFrame
+
 }
 
+#endif // _EASYANIM_KEY_FRAME_H_

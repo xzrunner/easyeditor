@@ -20,6 +20,22 @@ private:
 
 inline void obj_assign(Object*& left, Object* right);
 
+template<class T>
+struct ReleaseObjectFunctor
+{
+	void operator()(const T* pt) const {
+		pt->Release(), pt = NULL;
+	}
+}; // ReleaseObjectFunctor
+
+template<class T>
+struct RetainbjectFunctor
+{
+	void operator()(const T* pt) const {
+		pt->Retain();
+	}
+}; // RetainbjectFunctor
+
 }
 
 #include "Object.inl"
