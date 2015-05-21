@@ -37,9 +37,8 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 			if (sprite->getSymbol().getSize().isValid()) {
 				sprite->translate(pos);
 				m_sprites_impl->insertSprite(sprite);
-			} else {
-				sprite->Release();
 			}
+			sprite->Release();
 		}
 	}
 }

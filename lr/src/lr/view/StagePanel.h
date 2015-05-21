@@ -70,6 +70,7 @@ public:
 
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
+	virtual void OnKeyHook(int key_code);
 
 private:
 	void ChangeEditOP();

@@ -158,6 +158,8 @@ void EditPanel::onKeyDown(wxKeyEvent& event)
 	if (m_editOP) {
 		m_editOP->onKeyDown(key_code);
 	}
+
+	OnKeyHook(key_code);
 }
 
 void EditPanel::onKeyUp(wxKeyEvent& event)

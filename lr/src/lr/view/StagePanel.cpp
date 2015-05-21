@@ -267,6 +267,26 @@ void StagePanel::OnMouseHook(wxMouseEvent& event)
 
 void StagePanel::ChangeEditOP()
 {
+// 	if (!m_editOP->IsEmpty()) {
+// 		return;
+// 	}
+// 
+// 	m_editOP->Release();
+// 	if (m_editOP == m_arrange_op) {
+// 		d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+// 		m_editOP = static_cast<LibraryPage*>(curr_page)->GetEditOP();
+// 	} else {
+// 		m_editOP = m_arrange_op;
+// 	}
+// 	m_editOP->Retain();
+}
+
+void StagePanel::OnKeyHook(int key_code)
+{
+	if (key_code != 'r' && key_code != 'R') {
+		return;
+	}
+
 	if (!m_editOP->IsEmpty()) {
 		return;
 	}
@@ -278,7 +298,7 @@ void StagePanel::ChangeEditOP()
 	} else {
 		m_editOP = m_arrange_op;
 	}
-	m_editOP->Retain();
+	m_editOP->Retain();	
 }
 
 }
