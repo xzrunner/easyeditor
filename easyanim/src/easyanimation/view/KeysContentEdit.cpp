@@ -70,31 +70,40 @@ void KeysContentEdit::OnMouseDragging(int row, int col)
 
 void KeysContentEdit::CopySelection()
 {
-	m_selection.clear();
-
 	int row, col_min, col_max;
 	m_ctrl->GetKeysPanel()->GetSelectRegion(row, col_min, col_max);
 
-	LayersMgr& layers = m_ctrl->GetLayers();
-	int index = layers.size() - row - 1;
-	Layer* layer = layers.getLayer(index);
-	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
-	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(col_min + 1),
-		itr_end = frames.upper_bound(col_max + 1);
-	for (std::map<int, KeyFrame*>::const_iterator itr = itr_begin; itr != itr_end; ++itr) {
-		m_selection.push_back(itr->second);
-	}
+
+// 	LayersMgr& layers = m_ctrl->GetLayers();
+// 	int index = layers.size() - row - 1;
+// 	Layer* layer = layers.getLayer(index);
+// 	const std::map<int, KeyFrame*>& frames = layer->getAllFrames();
+// 	std::map<int, KeyFrame*>::const_iterator itr_begin = frames.lower_bound(col_min + 1),
+// 		itr_end = frames.upper_bound(col_max + 1);
+// 	for (std::map<int, KeyFrame*>::const_iterator itr = itr_begin; itr != itr_end; ++itr) {
+// 		m_selection.push_back(itr->second);
+// 	}
 }
 
 void KeysContentEdit::PasteSelection()
 {
-	if (m_selection.empty()) {
+}
+
+void KeysContentEdit::DeleteSelection()
+{
+	int row, col_min, col_max;
+	m_ctrl->GetKeysPanel()->GetSelectRegion(row, col_min, col_max);
+
+	if (row == -1) {
 		return;
 	}
 
-	LayersMgr& layers = m_ctrl->GetLayers();
-	Layer* layer = layers.getLayer(m_ctrl->layer());
-	
+ 	LayersMgr& layers = m_ctrl->GetLayers();
+ 	int index = layers.size() - row - 1;
+ 	Layer* layer = layers.getLayer(index);
+	if (layer) {
+		layer->RemoveFrameRegion(col_min + 1, col_max + 1);
+	}
 }
 
 }

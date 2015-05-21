@@ -17,6 +17,8 @@ namespace eanim
 
 		bool isKeyFrame(int time) const;
 
+		void RemoveFrameRegion(int begin, int end);
+
 		void insertFrame(int time);
 		void removeFrame(int time);
 

@@ -90,6 +90,8 @@ void KeysContentWidget::onMouse(wxMouseEvent& event)
 		m_editop.OnMouseLeftUp(row, col);
 	} else if (event.Dragging()) {
 		m_editop.OnMouseDragging(row, col);
+	} else if (event.Moving()) {
+		SetFocus();
 	}
 }
 
@@ -100,6 +102,8 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 		m_editop.CopySelection();
 	} else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V)) {
 		m_editop.PasteSelection();
+	} else if (key_code == WXK_DELETE) {
+		m_editop.DeleteSelection();
 	}
 }
 

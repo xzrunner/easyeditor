@@ -59,11 +59,14 @@ void KeysPanel::SetSelectPos(int row, int col)
 
 	if (col + 1 > max_frame) {
 		m_ctrl->setCurrFrame(layer, max_frame);
+		m_selected_col = col;
 	} else {
 		m_ctrl->setCurrFrame(layer, frame);
 	}
 
 	m_ctrl->UpdateCurrFrame();
+
+	Refresh();
 }
 
 void KeysPanel::GetSelectRegion(int& row, int& col_min, int& col_max)

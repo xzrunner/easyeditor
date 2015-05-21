@@ -20,13 +20,12 @@ public:
 
 	void CopySelection();
 	void PasteSelection();
+	void DeleteSelection();
 
 private:
 	Controller* m_ctrl;
 
 	int m_last_row, m_last_col;
-
-	std::vector<KeyFrame*> m_selection;
 
 }; // KeysContentEdit
 

@@ -27,6 +27,50 @@ bool Layer::isKeyFrame(int time) const
 	return m_frames.find(time) != m_frames.end();
 }
 
+void Layer::RemoveFrameRegion(int begin, int end)
+{
+	if (begin > end || begin < 1 || end < 1) {
+		return;
+	}
+
+	int before_len = GetMaxFrame();
+	if (before_len == 0) {
+		return;
+	}
+
+	std::vector<KeyFrame*> frames;
+
+	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
+	for ( ; itr != m_frames.end(); )
+	{
+		if (itr->first < begin) {
+			++itr;
+			continue;
+		} else if (itr->first >= begin && itr->first <= end) {
+			delete itr->second;
+			itr = m_frames.erase(itr);
+		} else {
+			assert(itr->first > end);
+			frames.push_back(itr->second);
+			itr = m_frames.erase(itr);
+		}
+	}
+
+	int cut_len = end - begin + 1;
+	for (int i = 0, n = frames.size(); i < n; ++i) {
+		KeyFrame* frame = frames[i];
+		frame->setTime(frame->getTime() - cut_len);
+		insert(frame->getTime(), frame);
+	}
+
+	int after_len = GetMaxFrame();
+	if (after_len < before_len - cut_len) {
+		insertKeyFrame(before_len - cut_len);
+	}
+
+	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrame());
+}
+
 void Layer::insertFrame(int time)
 {
 	std::vector<KeyFrame*> frames;
