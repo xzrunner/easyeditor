@@ -150,9 +150,9 @@ void Layer::InsertKeyFrame(int time)
 		if (GetMaxFrame() < time)
 		{
 			KeyFrame* frame = new KeyFrame(m_ctrl, time);
+			frame->CopyFromOther((--m_frames.end())->second);
 			InsertKeyFrame(time, frame);
 			frame->Release();
-			frame->CopyFromOther((--m_frames.end())->second);
 			m_ctrl->setCurrFrame(m_ctrl->layer(), time);
 		}
 		else

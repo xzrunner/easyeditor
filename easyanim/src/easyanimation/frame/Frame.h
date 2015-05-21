@@ -20,7 +20,7 @@ private:
 private:
 	enum
 	{
-		ID_PREVIEW = 1000,
+		ID_PREVIEW = 2000,
 		ID_BACKGROUND,
 		ID_CODESETTING,
 		ID_LOVE2D
