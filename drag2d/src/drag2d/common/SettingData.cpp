@@ -23,20 +23,36 @@ SettingData::SettingData()
 
 void SettingData::LoadFromFile(const Json::Value& value)
 {
-	open_sprite_capture = value["sprite_capture"].asBool();
+	if (!value["sprite_capture"].isNull()) {
+		open_sprite_capture = value["sprite_capture"].asBool();
+	}
 	if (!value["auto_get_focus"].isNull()) {
 		auto_get_focus = value["auto_get_focus"].asBool();
 	}
 
-	open_image_edge_clip = value["image_edge_clip"].asBool();
-	visible_image_edge = value["visible_image_edge"].asBool();
+	if (!value["image_edge_clip"].isNull()) {
+		open_image_edge_clip = value["image_edge_clip"].asBool();
+	}
+	if (!value["visible_image_edge"].isNull()) {
+		visible_image_edge = value["visible_image_edge"].asBool();
+	}
 
-	visible_label_bg = value["visible_label_bg"].asBool();
-	visible_label_text = value["visible_label_text"].asBool();
-	visible_node_name = value["visible_node_name"].asBool();
-	visible_shape = value["visible_shape"].asBool();
+	if (!value["visible_label_bg"].isNull()) {
+		visible_label_bg = value["visible_label_bg"].asBool();
+	}
+	if (!value["visible_label_text"].isNull()) {
+		visible_label_text = value["visible_label_text"].asBool();
+	}
+	if (!value["visible_node_name"].isNull()) {
+		visible_node_name = value["visible_node_name"].asBool();
+	}
+	if (!value["visible_shape"].isNull()) {
+		visible_shape = value["visible_shape"].asBool();
+	}
 
-	linear_filter = value["linear_filter"].asBool();
+	if (!value["linear_filter"].isNull()) {
+		linear_filter = value["linear_filter"].asBool();
+	}
 }
 
 }
