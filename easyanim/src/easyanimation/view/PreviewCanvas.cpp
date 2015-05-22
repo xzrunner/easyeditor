@@ -6,7 +6,7 @@
 #include "dataset/Layer.h"
 #include "dataset/LayersMgr.h"
 
-#include "../libanim/Tools.h"
+#include <easyanim.h>
 
 namespace eanim
 {
@@ -102,22 +102,22 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 		if (!currFrame) 
 		{
 			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
-				sprites.push_back(currFrame->getSprite(i)->clone());
+				sprites.push_back(currFrame->GetSprite(i)->clone());
 			}
 		}
-		else if (!currFrame->hasClassicTween())
+		else if (!currFrame->HasClassicTween())
 		{
 			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
-				sprites.push_back(currFrame->getSprite(i)->clone());
+				sprites.push_back(currFrame->GetSprite(i)->clone());
 			}
 		}
 		else
 		{
-			assert(m_control.frame() >= currFrame->getTime() && m_control.frame() < nextFrame->getTime());
-			float process = (float) (m_control.frame() - currFrame->getTime()) / (nextFrame->getTime() - currFrame->getTime());
+			assert(m_control.frame() >= currFrame->GetTime() && m_control.frame() < nextFrame->GetTime());
+			float process = (float) (m_control.frame() - currFrame->GetTime()) / (nextFrame->GetTime() - currFrame->GetTime());
 //			libanim::Tools::getTweenSprites(currFrame->getAllSprites(), nextFrame->getAllSprites(), sprites, process);
 
-			currFrame->getTweenSprites(currFrame, nextFrame, sprites, process);
+			currFrame->GetTweenSprite(currFrame, nextFrame, sprites, process);
 		}
 	}
 }

@@ -1,12 +1,15 @@
 #include "EditKeyFramesAOP.h"
 
+#include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
+#include "dataset/Layer.h"
 
 namespace eanim
 {
 
-EditKeyFramesAOP::EditKeyFramesAOP(Layer* layer)
-	: m_layer(layer)
+EditKeyFramesAOP::EditKeyFramesAOP(Controller* ctrl, Layer* layer)
+	: m_ctrl(ctrl)
+	, m_layer(layer)
 {
 }
 
@@ -21,12 +24,34 @@ EditKeyFramesAOP::~EditKeyFramesAOP()
 
 void EditKeyFramesAOP::undo()
 {
-	
+	for (int i = 0, n = m_inserted.size(); i < n; ++i) {
+		m_layer->RemoveKeyFrame(m_inserted[i]->GetTime());
+	}
+	for (int i = 0, n = m_removed.size(); i < n; ++i) {
+		m_layer->InsertKeyFrame(m_removed[i]);
+	}
+	for (int i = 0, n = m_changed.size(); i < n; ++i) {
+		const ChangeFrame& change = m_changed[i];
+		m_layer->ChangeKeyFrame(change.frame, change.from);
+	}
+
+	m_ctrl->Refresh();
 }
 
 void EditKeyFramesAOP::redo()
 {
-	
+	for (int i = 0, n = m_removed.size(); i < n; ++i) {
+		m_layer->RemoveKeyFrame(m_removed[i]->GetTime());
+	}
+	for (int i = 0, n = m_inserted.size(); i < n; ++i) {
+		m_layer->InsertKeyFrame(m_inserted[i]);
+	}
+	for (int i = 0, n = m_changed.size(); i < n; ++i) {
+		const ChangeFrame& change = m_changed[i];
+		m_layer->ChangeKeyFrame(change.frame, change.to);
+	}
+
+	m_ctrl->Refresh();
 }
 
 void EditKeyFramesAOP::AddRemoved(KeyFrame* kf) 
@@ -55,7 +80,7 @@ void EditKeyFramesAOP::AddChanged(KeyFrame* kf, int to)
 
 	ChangeFrame cf;
 	cf.frame = kf;
-	cf.from = kf->getTime();
+	cf.from = kf->GetTime();
 	cf.to = to;
 	m_changed.push_back(cf);
 }

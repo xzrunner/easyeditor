@@ -228,7 +228,7 @@ void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 		std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
 		for (size_t i = 0; itr != frames.end(); ++itr, ++i)
 		{
-			itr->second->setTime(1+dis*i);
+			itr->second->SetTime(1+dis*i);
 			itr->second->Retain();
 			fixed.push_back(itr->second);
 		}

@@ -3,6 +3,7 @@
 
 #include "frame/Controller.h"
 #include "view/KeysPanel.h"
+#include "view/EditKeyFramesAOP.h"
 
 namespace eanim
 {
@@ -27,16 +28,18 @@ bool Layer::IsKeyFrame(int time) const
 	return m_frames.find(time) != m_frames.end();
 }
 
-void Layer::RemoveFrameRegion(int begin, int end)
+d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 {
 	if (begin > end || begin < 1 || end < 1) {
-		return;
+		return NULL;
 	}
 
-	int before_len = GetMaxFrame();
+	int before_len = GetMaxFrameTime();
 	if (before_len == 0) {
-		return;
+		return NULL;
 	}
+
+	EditKeyFramesAOP* aop = new EditKeyFramesAOP(m_ctrl, this);
 
 	std::vector<KeyFrame*> frames;
 
@@ -47,6 +50,7 @@ void Layer::RemoveFrameRegion(int begin, int end)
 			++itr;
 			continue;
 		} else if (itr->first >= begin && itr->first <= end) {
+			aop->AddRemoved(itr->second);
 			itr->second->Release();
 			itr = m_frames.erase(itr);
 		} else {
@@ -59,17 +63,22 @@ void Layer::RemoveFrameRegion(int begin, int end)
 	int cut_len = end - begin + 1;
 	for (int i = 0, n = frames.size(); i < n; ++i) {
 		KeyFrame* frame = frames[i];
-		frame->setTime(frame->getTime() - cut_len);
-		InsertKeyFrame(frame->getTime(), frame);
+		int new_time = frame->GetTime() - cut_len;
+		aop->AddChanged(frame, new_time);
+		frame->SetTime(new_time);
+		InsertKeyFrame(frame->GetTime(), frame);
 		frame->Release();
 	}
 
-	int after_len = GetMaxFrame();
+	int after_len = GetMaxFrameTime();
 	if (after_len < before_len - cut_len) {
 		InsertKeyFrame(before_len - cut_len);
+		aop->AddInserted(GetEndFrame());
 	}
 
-	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrame());
+	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrameTime());
+
+	return aop;
 }
 
 void Layer::InsertNullFrame(int time)
@@ -89,8 +98,8 @@ void Layer::InsertNullFrame(int time)
 	for (size_t i = 0, n = frames.size(); i < n; ++i)
 	{
 		KeyFrame* frame = frames[i];
-		frame->setTime(frame->getTime() + 1);
-		InsertKeyFrame(frame->getTime(), frame);
+		frame->SetTime(frame->GetTime() + 1);
+		InsertKeyFrame(frame->GetTime(), frame);
 		frame->Release();
 	}
 }
@@ -116,8 +125,8 @@ void Layer::RemoveNullFrame(int time)
 	for (size_t i = 0, n = frames.size(); i < n; ++i)
 	{
 		KeyFrame* frame = frames[i];
-		frame->setTime(frame->getTime() - 1);
-		InsertKeyFrame(frame->getTime(), frame);
+		frame->SetTime(frame->GetTime() - 1);
+		InsertKeyFrame(frame->GetTime(), frame);
 		frame->Release();
 	}
 }
@@ -125,7 +134,7 @@ void Layer::RemoveNullFrame(int time)
 void Layer::InsertKeyFrame(KeyFrame* frame)
 {
 	std::pair<std::map<int, KeyFrame*>::iterator, bool> status 
-		= InsertKeyFrame(frame->getTime(), frame);
+		= InsertKeyFrame(frame->GetTime(), frame);
 	// replace
 	if (!status.second && frame != status.first->second)
 	{
@@ -140,17 +149,17 @@ void Layer::InsertKeyFrame(KeyFrame* frame)
 		}
 	}
 
-	m_ctrl->setCurrFrame(m_ctrl->layer(), frame->getTime());
+	m_ctrl->setCurrFrame(m_ctrl->layer(), frame->GetTime());
 }
 
 void Layer::InsertKeyFrame(int time)
 {
 	if (!m_frames.empty())
 	{
-		if (GetMaxFrame() < time)
+		if (GetMaxFrameTime() < time)
 		{
 			KeyFrame* frame = new KeyFrame(m_ctrl, time);
-			frame->CopyFromOther((--m_frames.end())->second);
+			frame->CopyFromOther(GetEndFrame());
 			InsertKeyFrame(time, frame);
 			frame->Release();
 			m_ctrl->setCurrFrame(m_ctrl->layer(), time);
@@ -180,7 +189,27 @@ void Layer::RemoveKeyFrame(int time)
 	itr->second->Release();
 	m_frames.erase(itr);
 
-	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrame());
+	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrameTime());
+}
+
+void Layer::ChangeKeyFrame(KeyFrame* frame, int to)
+{
+	if (!frame || to < 1) {
+		return;
+	}
+	if (frame->GetTime() == to) {
+		return;
+	}
+
+	std::map<int, KeyFrame*>::iterator itr = m_frames.find(frame->GetTime());
+	if (itr == m_frames.end() || itr->second != frame) {
+		return;
+	}
+	m_frames.erase(itr);
+
+	frame->SetTime(to);
+	InsertKeyFrame(frame->GetTime(), frame);
+	frame->Release();
 }
 
 KeyFrame* Layer::GetCurrKeyFrame(int time)
@@ -230,12 +259,21 @@ KeyFrame* Layer::GetPrevKeyFrame(int time)
 	}
 }
 
-int Layer::GetMaxFrame() const
+int Layer::GetMaxFrameTime() const
 {
 	if (m_frames.empty()) {
 		return 0; 
 	} else {
 		return (--m_frames.end())->first;
+	}
+}
+
+KeyFrame* Layer::GetEndFrame() const
+{
+	if (m_frames.empty()) {
+		return NULL;
+	} else {
+		return (--m_frames.end())->second;
 	}
 }
 

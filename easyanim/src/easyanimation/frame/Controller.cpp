@@ -85,7 +85,7 @@ void Controller::setPrevKeyFrame()
 	KeyFrame* prev = pLayer->GetPrevKeyFrame(m_curr_frame);
 	if (prev) 
 	{
-		setCurrFrame(m_curr_layer, prev->getTime());
+		setCurrFrame(m_curr_layer, prev->GetTime());
 	}
 }
 
@@ -99,7 +99,7 @@ void Controller::setNextKeyFrame()
 	KeyFrame* next = pLayer->GetNextKeyFrame(m_curr_frame);
 	if (next) 
 	{
-		setCurrFrame(m_curr_layer, next->getTime());
+		setCurrFrame(m_curr_layer, next->GetTime());
 	}
 }
 
@@ -194,7 +194,7 @@ void Controller::reloadViewList(const KeyFrame* frame)
 	m_widgets->m_viewlist->clear();
 	if (frame)
 	{
-		const std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
+		const std::vector<d2d::ISprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 			m_widgets->m_viewlist->insert(sprites[i]);
 	}	

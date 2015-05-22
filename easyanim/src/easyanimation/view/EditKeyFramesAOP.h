@@ -6,17 +6,19 @@
 namespace eanim
 {
 
+class Controller;
 class Layer;
 class KeyFrame;
 
 class EditKeyFramesAOP : public d2d::AbstractAtomicOP
 {
 public:
-	EditKeyFramesAOP(Layer* layer);
+	EditKeyFramesAOP(Controller* ctrl, Layer* layer);
 	virtual ~EditKeyFramesAOP();
 
 	virtual void undo();
 	virtual void redo();
+	virtual Json::Value store(const std::vector<d2d::ISprite*>& sprites) { return Json::Value(); }
 
 	void AddRemoved(KeyFrame* kf);
 	void AddInserted(KeyFrame* kf);
@@ -30,6 +32,7 @@ private:
 	};
 
 private:
+	Controller* m_ctrl;
 	Layer* m_layer;
 
 	std::vector<KeyFrame*> m_removed, m_inserted;

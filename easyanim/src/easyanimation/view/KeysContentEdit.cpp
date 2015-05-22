@@ -102,7 +102,8 @@ void KeysContentEdit::DeleteSelection()
  	int index = layers.size() - row - 1;
  	Layer* layer = layers.getLayer(index);
 	if (layer) {
-		layer->RemoveFrameRegion(col_min + 1, col_max + 1);
+		d2d::AbstractAtomicOP* aop = layer->RemoveFrameRegion(col_min + 1, col_max + 1);
+		m_ctrl->GetStagePanel()->addHistoryOP(aop);
 	}
 }
 

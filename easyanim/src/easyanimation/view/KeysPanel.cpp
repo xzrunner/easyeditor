@@ -34,7 +34,7 @@ void KeysPanel::SetSelectPos(int row, int col)
 	LayersMgr& layers = m_ctrl->GetLayers();
 	Layer* curr_layer = layers.getLayer(layers.size() - row - 1);
 	if (curr_layer) {
-		max_frame = curr_layer->GetMaxFrame();
+		max_frame = curr_layer->GetMaxFrameTime();
 	} else {
 		return;
 	}
@@ -100,7 +100,7 @@ void KeysPanel::SetSelectRegion(int row, int col)
 	}
 
 	m_selected_col_max = std::min(m_selected_col_max, 
-		m_ctrl->GetLayers().getLayer(m_ctrl->layer())->GetMaxFrame() - 1);
+		m_ctrl->GetLayers().getLayer(m_ctrl->layer())->GetMaxFrameTime() - 1);
 
 	Refresh();
 }
@@ -115,7 +115,7 @@ void KeysPanel::UpdateSelectRegion(int col_min, int col_max)
 	m_selected_col_min = col_min;
 	m_selected_col_max = col_max;
 	m_selected_col_max = std::min(m_selected_col_max, 
-		m_ctrl->GetLayers().getLayer(m_ctrl->layer())->GetMaxFrame() - 1);
+		m_ctrl->GetLayers().getLayer(m_ctrl->layer())->GetMaxFrameTime() - 1);
 
 	Refresh();
 }

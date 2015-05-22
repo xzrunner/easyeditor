@@ -19,7 +19,7 @@ public:
 
 	bool IsKeyFrame(int time) const;
 
-	void RemoveFrameRegion(int begin, int end);
+	d2d::AbstractAtomicOP* RemoveFrameRegion(int begin, int end);
 
 	void InsertNullFrame(int time);
 	void RemoveNullFrame(int time);
@@ -27,6 +27,8 @@ public:
 	void InsertKeyFrame(KeyFrame* frame);
 	void InsertKeyFrame(int time);
 	void RemoveKeyFrame(int time);
+
+	void ChangeKeyFrame(KeyFrame* frame, int to);
 
 	const std::map<int, KeyFrame*>& getAllFrames() const {
 		return m_frames;
@@ -36,7 +38,8 @@ public:
 	KeyFrame* GetNextKeyFrame(int time);
 	KeyFrame* GetPrevKeyFrame(int time);
 
-	int GetMaxFrame() const;
+	int GetMaxFrameTime() const;
+	KeyFrame* GetEndFrame() const;
 
 	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetName() const { return m_name; }

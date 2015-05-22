@@ -4,6 +4,7 @@
 #include "frame/Controller.h"
 #include "dataset/KeyFrame.h"
 #include "dataset/Layer.h"
+#include "view/StagePanel.h"
 
 #include <wx/dcbuffer.h>
 
@@ -104,6 +105,10 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 		m_editop.PasteSelection();
 	} else if (key_code == WXK_DELETE) {
 		m_editop.DeleteSelection();
+	} else 	if (wxGetKeyState(WXK_CONTROL_Z) && wxGetKeyState(WXK_CONTROL)) {
+		m_ctrl->GetStagePanel()->undo();
+	} else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL)) {
+		m_ctrl->GetStagePanel()->redo();
 	}
 }
 
@@ -209,7 +214,7 @@ void KeysContentWidget::drawLayersDataBg(wxBufferedPaintDC& dc)
 		// Classic Tween
 		for (itr = frames.begin(); itr != frames.end(); ++itr)
 		{
-			if (itr->second->hasClassicTween())
+			if (itr->second->HasClassicTween())
 			{
 				std::map<int, KeyFrame*>::const_iterator next = itr;
 				++next;
@@ -312,14 +317,14 @@ void KeysContentWidget::MousePopupMenu(int x, int y)
 void KeysContentWidget::onCreateClassicTween(wxCommandEvent& event)
 {
 	KeyFrame* keyFrame = queryKeyFrameByPos();
-	keyFrame->setClassicTween(true);
+	keyFrame->SetClassicTween(true);
 	Refresh();
 }
 
 void KeysContentWidget::onDeleteClassicTween(wxCommandEvent& event)
 {
 	KeyFrame* keyFrame = queryKeyFrameByPos();
-	keyFrame->setClassicTween(false);
+	keyFrame->SetClassicTween(false);
 	Refresh();
 }
 
@@ -364,7 +369,7 @@ void KeysContentWidget::onUpdateCreateClassicTween(wxUpdateUIEvent& event)
 	KeyFrame* keyFrame = queryKeyFrameByPos();
 	if (keyFrame)
 	{
-		if (keyFrame->hasClassicTween())
+		if (keyFrame->HasClassicTween())
 			event.Enable(false);
 		else
 			event.Enable(true);
@@ -380,7 +385,7 @@ void KeysContentWidget::onUpdateDeleteClassicTween(wxUpdateUIEvent& event)
 	KeyFrame* keyFrame = queryKeyFrameByPos();
 	if (keyFrame)
 	{
-		if (keyFrame->hasClassicTween())
+		if (keyFrame->HasClassicTween())
 			event.Enable(true);
 		else
 			event.Enable(false);
@@ -458,4 +463,5 @@ void KeysContentWidget::onDeleteFrame()
 		m_ctrl->GetKeysPanel()->Refresh();
 	}
 }
+
 } // eanim

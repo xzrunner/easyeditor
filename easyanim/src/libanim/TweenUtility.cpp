@@ -33,12 +33,12 @@ void TweenUtility::GetTweenSprites(const std::vector<d2d::ISprite*>& start, cons
 
 bool TweenUtility::IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1)
 {
-	bool autoNamed = false;
+	bool auto_named = false;
 	if (!s0->name.empty() && s0->name[0] == '_' && !s1->name.empty() && s1->name[0] == '_') {
-		autoNamed = true;
+		auto_named = true;
 	}
 
-	if (autoNamed && s0->name == s1->name) {
+	if (auto_named && s0->name == s1->name) {
 		return true;
 	} else if (s0->name.empty() && s1->name.empty()) {
 		//		return s0->getSymbol().getFilepath() == s1->getSymbol().getFilepath();

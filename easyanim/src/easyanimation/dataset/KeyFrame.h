@@ -32,39 +32,31 @@ public:
 	void Reorder(const d2d::ISprite* sprite, bool up);
 
 	int Size() const { return m_sprites.size(); }
-	const d2d::ISprite* getSprite(int index) {
-		if (index >= 0 && index < m_sprites.size())
-			return m_sprites[index];
-		else
-			return NULL;
+	const d2d::ISprite* GetSprite(int index) {
+		return index >= 0 && index < m_sprites.size() ? m_sprites[index] : NULL;
 	}
 
-	const std::vector<d2d::ISprite*>& getAllSprites() const {
-		return m_sprites;
-	}
+	const std::vector<d2d::ISprite*>& GetAllSprites() const { return m_sprites; }
 
-	bool hasClassicTween() const {
-		return m_bClassicTween;
-	}
-	void setClassicTween(bool tween = true) {
-		m_bClassicTween = tween;
-	}
+	bool HasClassicTween() const { return m_classic_tween; }
+	void SetClassicTween(bool tween = true) { m_classic_tween = tween; }
 
-	int getTime() const {
-		return m_time;
-	}
-	void setTime(int time) { m_time = time; }
+	int GetTime() const { return m_time; }
+	void SetTime(int time) { m_time = time; }
 
 	void Clear();
 
-	SkeletonData& getSkeletonData() { return m_skeletonData; }
+	SkeletonData& GetSkeletonData() { return m_skeletonData; }
 
-	void getTweenSprites(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process) const;
+	void GetTweenSprite(const KeyFrame* start, const KeyFrame* end, std::vector<d2d::ISprite*>& tween, float process) const;
+
+	int GetID() const { return m_id; }
+	void SetID(int id) { m_id = id; }
 
 private:
-	void getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
+	void GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process) const;
 
-	bool canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& end) const;
+	bool IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1) const;
 
 private:
 	Controller* m_ctrl;
@@ -75,13 +67,12 @@ private:
 
 	std::vector<d2d::ISprite*> m_sprites;
 
-	bool m_bClassicTween;
+	bool m_classic_tween;
 
 	Layer* m_layer;
 
 	SkeletonData m_skeletonData;
 
-public:
 	int m_id;
 
 }; // KeyFrame

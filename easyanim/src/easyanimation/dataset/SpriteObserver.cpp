@@ -28,7 +28,7 @@ void SpriteObserver::translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
 		KeyFrame* frame = itr_frame->second;
-		const std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
+		const std::vector<d2d::ISprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == sprite->name)
@@ -56,7 +56,7 @@ void SpriteObserver::rotate(d2d::ISprite* sprite, float delta)
 	for ( ; itr_frame != frames.end(); ++itr_frame)
 	{
 		KeyFrame* frame = itr_frame->second;
-		const std::vector<d2d::ISprite*>& sprites = frame->getAllSprites();
+		const std::vector<d2d::ISprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
 		{
 			if (sprites[i]->name == sprite->name)

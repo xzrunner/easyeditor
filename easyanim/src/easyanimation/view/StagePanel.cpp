@@ -68,7 +68,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 		{
 			for (int i = 0, n = frame->Size(); i < n; ++i) {
 				bool hasNext;
-				visitor.visit(const_cast<d2d::ISprite*>(frame->getSprite(i)), hasNext);
+				visitor.visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
 				if (!hasNext) break;
 			}
 		}
@@ -76,7 +76,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 		{
 			for (int i = frame->Size() - 1; i >= 0; --i) {
 				bool hasNext;
-				visitor.visit(const_cast<d2d::ISprite*>(frame->getSprite(i)), hasNext);
+				visitor.visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
 				if (!hasNext) break;
 			}
 		}
@@ -133,7 +133,7 @@ void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 SkeletonData& StagePanel::getSkeletonData()
 {
 	KeyFrame* frame = m_ctrl->getCurrFrame();
-	return frame->getSkeletonData();	
+	return frame->GetSkeletonData();	
 }
 
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)

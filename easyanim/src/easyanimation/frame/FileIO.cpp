@@ -250,9 +250,9 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir, 
 
 	KeyFrame* frame = new KeyFrame(ctrl, time);
 
-	frame->m_id = frameValue["id"].asInt();
+	frame->SetID(frameValue["id"].asInt());
 
-	frame->setClassicTween(frameValue["tween"].asBool());
+	frame->SetClassicTween(frameValue["tween"].asBool());
 
 	int i = 0;
 	Json::Value actorValue = frameValue["actor"][i++];
@@ -263,7 +263,7 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir, 
 		actorValue = frameValue["actor"][i++];
 	}
 
-	loadSkeleton(frameValue["skeleton"], frame->getAllSprites(), frame->getSkeletonData());
+	loadSkeleton(frameValue["skeleton"], frame->GetAllSprites(), frame->GetSkeletonData());
 
 	return frame;
 }
@@ -481,16 +481,16 @@ Json::Value FileIO::store(KeyFrame* frame, const wxString& dir, Controller* ctrl
 {
 	Json::Value value;
 
-	value["id"] = frame->m_id;
+	value["id"] = frame->GetID();
 
-	value["time"] = frame->getTime();
+	value["time"] = frame->GetTime();
 
-	value["tween"] = frame->hasClassicTween();
+	value["tween"] = frame->HasClassicTween();
 
 	for (size_t i = 0, n = frame->Size(); i < n; ++i)
-		value["actor"][i] = store(frame->getSprite(i), dir, ctrl);
+		value["actor"][i] = store(frame->GetSprite(i), dir, ctrl);
 
-	value["skeleton"] = storeSkeleton(frame->getSkeletonData());
+	value["skeleton"] = storeSkeleton(frame->GetSkeletonData());
 
 	return value;
 }

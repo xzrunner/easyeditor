@@ -18,7 +18,7 @@ KeyFrame::KeyFrame(Controller* ctrl, int time)
 	m_frame_idx = m_ctrl->frame();
 
 	m_time = time;
-	m_bClassicTween = false;
+	m_classic_tween = false;
 	m_id = 0;
 }
 
@@ -128,29 +128,33 @@ void KeyFrame::Clear()
 	m_sprites.clear();
 }
 
-void KeyFrame::getTweenSprites(const KeyFrame* start, const KeyFrame* end, 
+void KeyFrame::GetTweenSprite(const KeyFrame* start, const KeyFrame* end, 
 							   std::vector<d2d::ISprite*>& tween, float process) const
 {
-	for (int i = 0, n = start->Size(); i < n; ++i)
-	{
-		d2d::ISprite* s = start->m_sprites[i];
-		for (int j = 0, m = end->Size(); j < m; ++j) {
-			d2d::ISprite* e = end->m_sprites[j];
-			if (canSpritesTween(*s, *e))
-			{
-				d2d::ISprite* mid = s->clone();
-				getTweenSprite(s, e, mid, process);
-				tween.push_back(mid);
-			}
-		}
-	}
+// 	// old
+// 	for (int i = 0, n = start->Size(); i < n; ++i)
+// 	{
+// 		d2d::ISprite* s = start->m_sprites[i];
+// 		for (int j = 0, m = end->Size(); j < m; ++j) {
+// 			d2d::ISprite* e = end->m_sprites[j];
+// 			if (IsTweenMatched(s, e))
+// 			{
+// 				d2d::ISprite* mid = s->clone();
+// 				GetTweenSprite(s, e, mid, process);
+// 				tween.push_back(mid);
+// 			}
+// 		}
+// 	}
 
-  	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->getSkeletonData(),
-  		&e_skeleton = const_cast<KeyFrame*>(end)->getSkeletonData();
+	// new
+	libanim::TweenUtility::GetTweenSprites(start->m_sprites, end->m_sprites, tween, process);
+
+  	SkeletonData &s_skeleton = const_cast<KeyFrame*>(start)->GetSkeletonData(),
+  		&e_skeleton = const_cast<KeyFrame*>(end)->GetSkeletonData();
 	SkeletonData::getTweenSprites(s_skeleton, e_skeleton, tween, process);
 }
 
-void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 
+void KeyFrame::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, 
 							  d2d::ISprite* tween, float process) const
 {
 	libanim::TweenUtility::GetTweenSprite(start, end, tween, process);
@@ -163,20 +167,14 @@ void KeyFrame::getTweenSprite(d2d::ISprite* start, d2d::ISprite* end,
 	}
 }
 
-bool KeyFrame::canSpritesTween(const d2d::ISprite& begin, const d2d::ISprite& end) const
+bool KeyFrame::IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1) const
 {
-	bool autoNamed = false;
-	if (!begin.name.empty() && begin.name[0] == '_' && !end.name.empty() && end.name[0] == '_') {
-		autoNamed = true;
-	}
-
-	if (autoNamed && begin.name == end.name && !m_skeletonData.isContainSprite(const_cast<d2d::ISprite*>(&begin))) {
+	if (libanim::TweenUtility::IsTweenMatched(s0, s1) &&
+		!m_skeletonData.isContainSprite(const_cast<d2d::ISprite*>(s0))) {
 		return true;
-	} else if (begin.name.empty() && end.name.empty()) {
-//		return begin.getSymbol().getFilepath() == end.getSymbol().getFilepath();
+	} else {
 		return false;
 	}
-	return false;
 }
 
 } // eanim

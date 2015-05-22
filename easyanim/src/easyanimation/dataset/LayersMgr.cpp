@@ -59,7 +59,7 @@ int LayersMgr::getFrameCount() const
 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
-		int tmp = layer->GetMaxFrame();
+		int tmp = layer->GetMaxFrameTime();
 		if (tmp > count) count = tmp;
 	}
 	return count;
@@ -84,7 +84,7 @@ int LayersMgr::GetMaxFrame() const
 {
 	int max_frame = -1;
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		max_frame = std::max(max_frame, m_layers[i]->GetMaxFrame());
+		max_frame = std::max(max_frame, m_layers[i]->GetMaxFrameTime());
 	}
 	return max_frame;
 }

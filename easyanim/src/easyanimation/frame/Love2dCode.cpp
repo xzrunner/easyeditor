@@ -31,11 +31,11 @@ void Love2dCode::resolve()
 			KeyFrame* frame = itr->second;			
 			if (frame->Size() != 0)
 			{
-				const d2d::ISprite* sprite = frame->getSprite(0);
+				const d2d::ISprite* sprite = frame->GetSprite(0);
 				int index = query(sprite->getSymbol().getFilepath().ToStdString());
 				if (index != -1)
 				{
-					std::string time = wxString::FromDouble(frame->getTime(), 0);
+					std::string time = wxString::FromDouble(frame->GetTime(), 0);
 
 					std::string x = wxString::FromDouble(sprite->getPosition().x, 1),
 						y = wxString::FromDouble(sprite->getPosition().y, 1);

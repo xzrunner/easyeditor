@@ -16,7 +16,7 @@ void FramePropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 	wxPropertyGrid* pg = panel->getPG();
 	if (getPGType(pg) == m_type)
 	{
-		pg->GetProperty(wxT("ID"))->SetValue(m_frame->m_id);
+		pg->GetProperty(wxT("ID"))->SetValue(m_frame->GetID());
 	}
 	else
 	{
@@ -24,7 +24,7 @@ void FramePropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 
 		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
 
-		pg->Append(new wxFloatProperty(wxT("ID"), wxPG_LABEL, m_frame->m_id));
+		pg->Append(new wxFloatProperty(wxT("ID"), wxPG_LABEL, m_frame->GetID()));
 	}
 }
 
@@ -34,7 +34,7 @@ void FramePropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 		return;
 
 	if (name == wxT("ID"))
-		m_frame->m_id = wxANY_AS(value, float);
+		m_frame->SetID(wxANY_AS(value, float));
 }
 
 void FramePropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
@@ -52,7 +52,7 @@ void FramePropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, 
 
 		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
 
-		pg->Append(new wxFloatProperty(wxT("ID"), wxPG_LABEL, m_frame->m_id));
+		pg->Append(new wxFloatProperty(wxT("ID"), wxPG_LABEL, m_frame->GetID()));
 	}
 
 	pg->GetProperty(wxT("Type"))->Enable(bEnable);
