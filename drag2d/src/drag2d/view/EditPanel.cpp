@@ -13,20 +13,7 @@ namespace d2d
 
 BEGIN_EVENT_TABLE(EditPanel, wxPanel)
  	EVT_SIZE(EditPanel::onSize)
-
-//	EVT_MENU(Menu_UpOneLayer, EditPanel::onMenuUpOneLayer)
-// 	EVT_MENU(Menu_DownOneLayer, EditPanel::onMenuDownOneLayer)
-// 	EVT_MENU(Menu_InsertToDTex, EditPanel::onMenuInsertToDTex)
-// 	EVT_MENU(Menu_RemoveFromDTex, EditPanel::onMenuRemoveFromDTex)
 END_EVENT_TABLE()
-
-std::string EditPanel::menu_entries[] = 
-{
-	"Up One Layer",
-	"Down One Layer",
-	"Insert To DTex",
-	"Remove From DTex",
-};
 
 EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
@@ -36,11 +23,6 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	m_canvas = NULL;
 	m_camera = new Camera;
 	SetFocus();		// For onMouseWheelRotation
-
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuUpOneLayer, this, Menu_UpOneLayer);
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuDownOneLayer, this, Menu_DownOneLayer);
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuInsertToDTex, this, Menu_InsertToDTex);
-	Bind(wxEVT_COMMAND_MENU_SELECTED, &EditPanel::onMenuRemoveFromDTex, this, Menu_RemoveFromDTex);
 }
 
 EditPanel::~EditPanel()
@@ -295,66 +277,20 @@ void EditPanel::setTitleStatus(bool dirty)
 	}
 }
 
-void EditPanel::onMenuUpOneLayer(wxCommandEvent& event)
-{
-	if (m_editOP) {
-		m_editOP->onPopMenuSelected(Menu_UpOneLayer);
-		Refresh();
-	}
-}
-
-void EditPanel::onMenuDownOneLayer(wxCommandEvent& event)
-{
-	if (m_editOP) {
-		m_editOP->onPopMenuSelected(Menu_DownOneLayer);
-		Refresh();
-	}
-}
-
-void EditPanel::onMenuInsertToDTex(wxCommandEvent& event)
-{
-	if (m_editOP) {
-		m_editOP->onPopMenuSelected(Menu_InsertToDTex);
-		Refresh();
-	}
-}
-
-void EditPanel::onMenuRemoveFromDTex(wxCommandEvent& event)
-{
-	if (m_editOP) {
-		m_editOP->onPopMenuSelected(Menu_RemoveFromDTex);
-		Refresh();
-	}
-}
-
-void EditPanel::onKeyUpOneLayer(wxKeyEvent& event)
-{
-	if (m_editOP) {
-		m_editOP->onPopMenuSelected(Menu_UpOneLayer);
-		Refresh();
-	}
-}
-
-void EditPanel::onKeyDownOneLayer(wxKeyEvent& event)
-{
-	if (m_editOP) {
-		m_editOP->onPopMenuSelected(Menu_DownOneLayer);
-		Refresh();
-	}
-}
-
-// void EditPanel::onKeyDelete(wxKeyEvent& event)
-// {
-// 	if (!this->HasFocus())
-// 		m_editOP->onKeyDown(event.GetKeyCode());
-// }
-
 void EditPanel::onSize(wxSizeEvent& event)
 {
 	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
 	}
 	Refresh();	// no refresh when change window size
+}
+
+void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
+{
+	if (m_editOP) {
+		m_editOP->onPopMenuSelected(event.GetId());
+		Refresh();
+	}
 }
 
 } // d2d

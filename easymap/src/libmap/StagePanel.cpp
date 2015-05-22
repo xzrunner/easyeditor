@@ -42,8 +42,9 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 
 void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
-	d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
+	bool ret = d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
 	m_viewlist->reorder(sprite, up);
+	return ret;
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)

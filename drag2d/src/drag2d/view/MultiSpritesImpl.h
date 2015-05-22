@@ -21,7 +21,7 @@ namespace d2d
 		virtual void insertSprite(ISprite* sprite) = 0;
 		virtual void clearSprites() = 0;
 
-		virtual void resetSpriteOrder(ISprite* sprite, bool up) = 0;
+		virtual bool resetSpriteOrder(ISprite* sprite, bool up) = 0;
 
 		virtual ISprite* querySpriteByPos(const Vector& pos) const;
 		virtual void querySpritesByRect(const Rect& rect, bool contain, std::vector<ISprite*>& result) const;		

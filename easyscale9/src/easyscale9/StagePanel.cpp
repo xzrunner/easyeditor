@@ -102,10 +102,6 @@ void StagePanel::clearSprites()
 	delete m_symbol, m_symbol = NULL;
 }
 
-void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
-{
-}
-
 void StagePanel::rebuildPatchSymbol()
 {
 	Scale9Type type = Scale9Data::CheckType(m_sprites);

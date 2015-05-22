@@ -28,8 +28,6 @@ namespace escale9
 		virtual void insertSprite(d2d::ISprite* sprite);
 		virtual void clearSprites();
 
-		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
-
 		Symbol* getPatchSymbol() { return m_symbol; }
 
 		d2d::ISprite* getSprite(int row, int col) {

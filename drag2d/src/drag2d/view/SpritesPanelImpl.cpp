@@ -49,8 +49,8 @@ namespace d2d
 		m_container->Clear();
 	}
 
-	void SpritesPanelImpl::resetSpriteOrder(d2d::ISprite* sprite, bool up)
+	bool SpritesPanelImpl::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 	{
-		m_container->ResetOrder(sprite, up);
+		return m_container->ResetOrder(sprite, up);
 	}
 }

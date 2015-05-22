@@ -1,5 +1,4 @@
 #include "PreviewCanvas.h"
-#include "tools.h"
 
 namespace libanim
 {

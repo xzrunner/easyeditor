@@ -36,7 +36,7 @@ public:
 	virtual void removeSprite(d2d::ISprite* sprite);
 	virtual void insertSprite(d2d::ISprite* sprite);
 	virtual void clearSprites();
-	virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
+	virtual bool resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
 	//
 	// d2d::MultiShapesImpl interface
@@ -62,13 +62,13 @@ public:
 	void BuildGrids(int w, int h);
 	const Grids* GetGrids() const { return m_grids; }
 
-	void OnRightPopupMenu(wxCommandEvent& event);
-
 	Layer* GetCurrLayer() const;
 
 	const CharacterAllDirections* GetCharaDirs() const { return &m_chara_dirs; }
 
 protected:
+	virtual void OnRightPopupMenu(int menu_id);
+
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);
 

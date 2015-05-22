@@ -322,13 +322,25 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 {
 	switch (type)
 	{
-	case EditPanel::Menu_UpOneLayer:
+	case MENU_UP_ONE_LAYER:
 		UpOneLayer();
 		break;
-	case EditPanel::Menu_DownOneLayer:
+	case MENU_DOWN_ONE_LAYER:
 		DownOneLayer();
 		break;
-	case EditPanel::Menu_InsertToDTex:
+	case MENU_UP_MOST:
+		UpLayerMost();
+		break;
+	case MENU_DOWN_MOST:
+		DownLayerMost();
+		break;
+	case MENU_HORI_MIRROR:
+		HoriMirror();
+		break;
+	case MENU_VERT_MIRROR:
+		VertMirror();
+		break;
+	case MENU_INSERT_TO_DTEX:
 		{
 			if (Config::Instance()->IsUseDTex()) {
 				std::vector<d2d::ISprite*> selected;
@@ -344,7 +356,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 			}
 		}
 		break;
-	case EditPanel::Menu_RemoveFromDTex:
+	case MENU_REMOVE_FROM_DTEX:
 		{
 			if (Config::Instance()->IsUseDTex()) {
 				std::vector<d2d::ISprite*> selected;
@@ -455,13 +467,31 @@ void ArrangeSpriteImpl::onSpaceKeyDown()
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
 {
-	menu.Append(EditPanel::Menu_UpOneLayer, EditPanel::menu_entries[EditPanel::Menu_UpOneLayer]);
-	menu.Append(EditPanel::Menu_DownOneLayer, EditPanel::menu_entries[EditPanel::Menu_DownOneLayer]);
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_UP_ONE_LAYER);
+	menu.Append(MENU_UP_ONE_LAYER, "上移一层");
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_DOWN_ONE_LAYER);
+	menu.Append(MENU_DOWN_ONE_LAYER, "下移一层");
+
+	menu.AppendSeparator();
+
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_UP_MOST);
+	menu.Append(MENU_UP_MOST, "移到顶");
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_DOWN_MOST);
+	menu.Append(MENU_DOWN_MOST, "移到底");
+
+	menu.AppendSeparator();
+
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_HORI_MIRROR);
+	menu.Append(MENU_HORI_MIRROR, "水平镜像");
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_VERT_MIRROR);
+	menu.Append(MENU_VERT_MIRROR, "竖直镜像");	
 
 #ifdef _DEBUG
 	menu.AppendSeparator();
-	menu.Append(EditPanel::Menu_InsertToDTex, EditPanel::menu_entries[EditPanel::Menu_InsertToDTex]);
-	menu.Append(EditPanel::Menu_RemoveFromDTex, EditPanel::menu_entries[EditPanel::Menu_RemoveFromDTex]);
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_INSERT_TO_DTEX);
+	menu.Append(MENU_INSERT_TO_DTEX, "Insert To DTex");
+	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_REMOVE_FROM_DTEX);
+	menu.Append(MENU_REMOVE_FROM_DTEX, "Remove From DTex");
 #endif
 }
 
@@ -494,16 +524,58 @@ void ArrangeSpriteImpl::UpOneLayer()
 {
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-	for (size_t i = 0, n = selected.size(); i < n; ++i)
+	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		m_spritesImpl->resetSpriteOrder(selected[i], true);
+	}
 }
 
 void ArrangeSpriteImpl::DownOneLayer()
 {
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
-	for (size_t i = 0, n = selected.size(); i < n; ++i)
+	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		m_spritesImpl->resetSpriteOrder(selected[i], false);
+	}
+}
+
+void ArrangeSpriteImpl::UpLayerMost()
+{
+	std::vector<d2d::ISprite*> selected;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	for (size_t i = 0, n = selected.size(); i < n; ++i) {
+		do {
+		} while (m_spritesImpl->resetSpriteOrder(selected[i], true));
+	}
+}
+
+void ArrangeSpriteImpl::DownLayerMost()
+{
+	std::vector<d2d::ISprite*> selected;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	for (size_t i = 0, n = selected.size(); i < n; ++i) {
+		do {
+		} while (m_spritesImpl->resetSpriteOrder(selected[i], false));
+	}
+}
+
+void ArrangeSpriteImpl::HoriMirror()
+{
+	std::vector<d2d::ISprite*> selected;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	for (size_t i = 0, n = selected.size(); i < n; ++i) {
+		d2d::ISprite* spr = selected[i];
+		spr->setMirror(!spr->getMirrorX(), spr->getMirrorY());
+	}
+}
+
+void ArrangeSpriteImpl::VertMirror()
+{
+	std::vector<d2d::ISprite*> selected;
+	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
+	for (size_t i = 0, n = selected.size(); i < n; ++i) {
+		d2d::ISprite* spr = selected[i];
+		spr->setMirror(spr->getMirrorX(), !spr->getMirrorY());
+	}
 }
 
 }

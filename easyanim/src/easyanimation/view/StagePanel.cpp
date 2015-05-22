@@ -124,10 +124,10 @@ void StagePanel::clearSprites()
 // 	frame->clear();
 }
 
-void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
+bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	KeyFrame* frame = m_ctrl->getCurrFrame();
-	frame->Reorder(sprite, up);
+	return frame->Reorder(sprite, up);
 }
 
 SkeletonData& StagePanel::getSkeletonData()

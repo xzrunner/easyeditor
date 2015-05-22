@@ -146,16 +146,19 @@ void StagePanel::clearSprites()
 	}
 }
 
-void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
+bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
+	bool ret = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
 	{
 		Layer* layer = m_layers[i];
 		if (layer->ResetOrderSprite(sprite, up)) {
+			ret = true;
 			break;
 		}
 	}
 	m_viewlist->reorder(sprite, up);
+	return ret;
 }
 
 void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
@@ -247,15 +250,15 @@ void StagePanel::BuildGrids(int w, int h)
 	}
 }
 
-void StagePanel::OnRightPopupMenu(wxCommandEvent& event)
-{
-	m_popup.OnRightPopupMenu(event.GetId());
-}
-
 Layer* StagePanel::GetCurrLayer() const
 {
 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
 	return static_cast<LibraryPage*>(curr_page)->GetLayer();
+}
+
+void StagePanel::OnRightPopupMenu(int menu_id)
+{
+	m_popup.OnRightPopupMenu(menu_id);
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)

@@ -25,7 +25,7 @@ namespace d2d
 		virtual void insertSprite(ISprite* sprite);
 		virtual void clearSprites();
 
-		virtual void resetSpriteOrder(d2d::ISprite* sprite, bool up);
+		virtual bool resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
 	private:
 		IDataContainer* m_container;

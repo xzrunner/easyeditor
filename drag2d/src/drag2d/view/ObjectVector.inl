@@ -166,15 +166,16 @@ inline bool ObjectVector<T>::ResetOrder(std::vector<T*>& objs,
 				T* tmp = objs[i];
 				objs[i] = objs[i+1];
 				objs[i+1] = tmp;
+				return true;
 			}
 			else if (!up && i != 0)
 			{
 				T* tmp = objs[i];
 				objs[i] = objs[i-1];
 				objs[i-1] = tmp;
+				return true;
 			}
-
-			return true;
+			return false;
 		}
 	}
 	return false;

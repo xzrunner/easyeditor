@@ -98,7 +98,7 @@ bool KeyFrame::Remove(d2d::ISprite* sprite)
 	return false;
 }
 
-void KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
+bool KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{
@@ -114,8 +114,10 @@ void KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
 
 		m_ctrl->GetViewlist()->reorder(sprite, up);
 
-		break;
+		return true;
 	}
+
+	return false;
 }
 
 void KeyFrame::Clear()
