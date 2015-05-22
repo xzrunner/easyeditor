@@ -1,0 +1,4 @@
+platform/msvc2008/easydb
+platform/msvc2008/easydb_cl
+platform/msvc2008/glfw
+src/glfw/glfw.lib
