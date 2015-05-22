@@ -47,10 +47,8 @@ void BuildingCfg::ResetLibraryList()
 	ResetLibraryList(m_army, m_buildings.army);
 }
 
-int BuildingCfg::QueryAmountLimit(const std::string& name) const
+int BuildingCfg::QueryAmountLimit(const std::string& name, int level) const
 {
-	int level = m_stage->GetBaseLevel();
-
 	assert(level > 0 && level <= m_amount_limit.size());
 	std::map<std::string, int>::const_iterator itr 
 		= m_amount_limit[level-1].find(name);
@@ -140,6 +138,8 @@ void BuildingCfg::InitBuildings(const Json::Value& value)
 	InitBuildings(value["buildings"]["resources"], m_buildings.resources);
 	InitBuildings(value["buildings"]["army"], m_buildings.army);
 
+	LoadSymbolUserData();
+
 	wxWindow* nb = m_library->getNotebook();
 	m_defenses = new LibraryPage(nb, "Defenses");
 	m_library->addPage(m_defenses);
@@ -184,6 +184,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 	library->getList()->clear();
 
 	int lv = m_stage->GetBaseLevel();
+
 	for (int i = 0, n = buildings.size(); i < n; ++i)
 	{
 		const Building* b = buildings[i];
@@ -200,20 +201,51 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 
 		if (!filepath.empty()) 
 		{
+			d2d::ISymbol* s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			assert(s->getUserData());
+			SymbolExt* info = static_cast<SymbolExt*>(s->getUserData());
+			info->remain = QueryAmountLimit(pItem->building->name, m_stage->GetBaseLevel());
+			s->RefreshThumbnail(filepath);
+ 			s->setInfo(wxString::FromDouble(info->remain));
+			library->getList()->insert(s);
+			s->Release();
+		}
+	}
+}
+
+void BuildingCfg::LoadSymbolUserData()
+{
+	LoadSymbolUserData(m_buildings.defenses);
+	LoadSymbolUserData(m_buildings.resources);
+	LoadSymbolUserData(m_buildings.army);
+}
+
+void BuildingCfg::LoadSymbolUserData(const std::vector<Building*>& buildings)
+{
+	for (int i = 0, n = buildings.size(); i < n; ++i)
+	{
+		const Building* b = buildings[i];
+		for (int j = 0, m = b->levels.size(); j < m; ++j) 
+		{
+			const Item& item = b->levels[j];
+
 			SymbolExt* info = new SymbolExt;
 			info->size = b->size;
-			info->remain = QueryAmountLimit(pItem->building->name);
+			info->remain = QueryAmountLimit(item.building->name, item.town_hall_level);
 			info->wall_type = (b->name == "Wall" ? 0 : -1);
 			assert(info->remain != -1);
 
-			info->level = pItem->level;
-			info->building = pItem->building;
+			info->level = item.level;
+			info->building = item.building;
 
-			d2d::ISymbol* s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-			s->setInfo(wxString::FromDouble(info->remain));
-			s->setUserData(info);
-			library->getList()->insert(s);
-			s->Release();
+			try {
+				d2d::ISymbol* s = d2d::SymbolMgr::Instance()->fetchSymbol(item.res_snapshoot_path);
+				s->RefreshThumbnail(item.res_snapshoot_path);
+				s->setInfo(wxString::FromDouble(info->remain));
+				s->setUserData(info);
+			} catch (d2d::Exception& e) {
+				std::cerr << e.what() << std::endl;
+			}
 		}
 	}
 }

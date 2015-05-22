@@ -20,6 +20,8 @@ private:
 	static d2d::ISprite* load(const Json::Value& value, StagePanel* stage);
 	static Json::Value store(const d2d::ISprite* sprite, StagePanel* stage);
 
+	static void SetSymbolUserData(d2d::ISymbol* symbol);
+
 }; // FileIO
 
 }

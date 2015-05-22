@@ -1,5 +1,6 @@
 #include "FileIO.h"
 #include "StagePanel.h"
+#include "SymbolExt.h"
 
 namespace sg
 {
@@ -53,6 +54,8 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage)
 		col = value["col"].asInt();
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	SetSymbolUserData(symbol);
+
 	d2d::Vector pos;
 	stage->TransGridPosToCoords(row, col, pos);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
@@ -73,6 +76,38 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage)
 	value["col"] = col;
 
 	return value;
+}
+
+void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
+{
+	if (symbol->getUserData()) {
+		return;
+	}
+
+	wxString filepath = symbol->getFilepath();
+	if (!filepath.Contains("wall")) {
+		return;
+	}
+
+	int pos = filepath.find_last_of('_');
+	wxString wall_type = filepath.substr(pos + 1, 1);
+	wxString wall_path = filepath.substr(0, pos) + ".png";
+
+	d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(wall_path);
+	if (!wall_symbol || !wall_symbol->getUserData()) {
+		return;
+	}
+
+	SymbolExt* info = static_cast<SymbolExt*>(wall_symbol->getUserData());
+
+	SymbolExt* new_info = new SymbolExt;
+	new_info->size = info->size;
+	new_info->remain = info->remain;
+	new_info->wall_type = (wall_type[0] - '0');
+	new_info->level = info->level;
+	new_info->building = info->building;
+
+	symbol->setUserData(new_info);
 }
 
 }

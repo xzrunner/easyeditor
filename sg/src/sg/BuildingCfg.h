@@ -19,7 +19,7 @@ public:
 
 	void ResetLibraryList();
 
-	int QueryAmountLimit(const std::string& name) const;
+	int QueryAmountLimit(const std::string& name, int level) const;
 
 public:
 	struct Building;
@@ -59,6 +59,9 @@ private:
 
 	void ResetLibraryList(LibraryPage* library, 
 		const std::vector<Building*>& buildings);
+
+	void LoadSymbolUserData();
+	void LoadSymbolUserData(const std::vector<Building*>& buildings);
 
 private:
 	StagePanel* m_stage;
