@@ -182,14 +182,22 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="tools"
+			Name="utility"
 			>
 			<File
-				RelativePath="..\..\..\src\libanim\Tools.cpp"
+				RelativePath="..\..\..\src\libanim\TweenUtility.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\Tools.h"
+				RelativePath="..\..\..\src\libanim\TweenUtility.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libanim\Utility.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libanim\Utility.h"
 				>
 			</File>
 		</Filter>

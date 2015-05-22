@@ -800,7 +800,7 @@ void CocoPacker::ParserAnimation(const libanim::Symbol* symbol)
  			lua::TableAssign ta(*m_gen, "", true);
 
 			std::vector<d2d::ISprite*> sprites;
-			libanim::Tools::getCurrSprites(symbol, i, sprites);
+			libanim::Utility::GetCurrSprites(symbol, i, sprites);
 			for (size_t j = 0, m = sprites.size(); j < m; ++j)
 				ParserSpriteForFrame(sprites[j], order);
  		}
