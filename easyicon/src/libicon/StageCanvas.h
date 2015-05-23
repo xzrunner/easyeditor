@@ -11,7 +11,7 @@ class StagePanel;
 class StageCanvas : public d2d::OrthoCanvas
 {
 public:
-	StageCanvas(StagePanel* panel);
+	StageCanvas(StagePanel* stage);
 
 protected:
 	virtual void onDraw();
@@ -27,7 +27,7 @@ private:
 private:
 	wxTimer m_timer;
 
-	StagePanel* m_panel;
+	StagePanel* m_stage;
 
 	DECLARE_EVENT_TABLE()
 

@@ -204,6 +204,70 @@
 		<Filter
 			Name="dataset"
 			>
+			<File
+				RelativePath="..\..\..\src\libicon\Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libicon\Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libicon\Symbol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libicon\Symbol.h"
+				>
+			</File>
+			<Filter
+				Name="icon"
+				>
+				<File
+					RelativePath="..\..\..\src\libicon\Icon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\Icon.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\PentagonIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\PentagonIcon.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\RectIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\RectIcon.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\SectorIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\SectorIcon.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="editop"
+			>
+			<File
+				RelativePath="..\..\..\src\libicon\EditRectOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libicon\EditRectOP.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libicon\config.h"

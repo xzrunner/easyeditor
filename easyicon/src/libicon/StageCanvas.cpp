@@ -8,9 +8,9 @@ BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
 	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
 END_EVENT_TABLE()
 
-StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel)
-	, m_panel(panel)
+StageCanvas::StageCanvas(StagePanel* stage)
+	: d2d::OrthoCanvas(stage)
+	, m_stage(stage)
 	, m_timer(this, TIMER_ID)
 {
 	m_timer.Start(100);
@@ -18,8 +18,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 
 void StageCanvas::onDraw()
 {
-	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
-
+	m_stage->GetSymbol().draw(d2d::Matrix());
 	m_editPanel->drawEditTemp();
 }
 
