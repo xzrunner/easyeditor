@@ -245,14 +245,6 @@
 				Name="stage"
 				>
 				<File
-					RelativePath="..\..\..\src\lr\view\RightPopupMenu.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\lr\view\RightPopupMenu.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\lr\view\StageCanvas.cpp"
 					>
 				</File>
@@ -306,6 +298,14 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\lr\view\PasteSymbolOP.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\RightPopupMenu.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\lr\view\RightPopupMenu.h"
 					>
 				</File>
 				<File

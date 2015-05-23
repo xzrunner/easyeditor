@@ -29,7 +29,6 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_viewlist(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
-	, m_popup(this)
 {
 	SetDropTarget(new d2d::SpriteDropTarget(this, this, library));
 
@@ -48,7 +47,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 		m_pathfinding = new preview::PathVisibleSimple(d2d::Rect(MAP_EDGE_LEN, MAP_EDGE_LEN));
 	}
 
-	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_popup, &m_chara_dirs);
+	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_chara_dirs);
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, NULL, 
 		d2d::ArrangeSpriteConfig(), arrange_impl);
 
@@ -254,11 +253,6 @@ Layer* StagePanel::GetCurrLayer() const
 {
 	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
 	return static_cast<LibraryPage*>(curr_page)->GetLayer();
-}
-
-void StagePanel::OnRightPopupMenu(int menu_id)
-{
-	m_popup.OnRightPopupMenu(menu_id);
 }
 
 void StagePanel::OnMouseHook(wxMouseEvent& event)

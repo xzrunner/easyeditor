@@ -11,18 +11,23 @@ namespace lr
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage, 
 									 d2d::PropertySettingPanel* property,
-									 RightPopupMenu* popup,
 									 CharacterAllDirections* dirs)
 	: d2d::ArrangeSpriteImpl(stage, stage, property)
-	, m_popup(popup)
+	, m_popup(stage)
 	, m_dirs(dirs)
 {
+}
+
+void ArrangeSpriteImpl::onPopMenuSelected(int type)
+{
+	d2d::ArrangeSpriteImpl::onPopMenuSelected(type);
+	m_popup.OnRightPopupMenu(type);
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 {
 	d2d::ArrangeSpriteImpl::SetRightPopupMenu(menu, spr);
-	m_popup->SetRightPopupMenu(menu, spr);
+	m_popup.SetRightPopupMenu(menu, spr);
 }
 
 d2d::IArrangeSpriteState* ArrangeSpriteImpl::

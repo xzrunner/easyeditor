@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "RightPopupMenu.h"
-
 #include "dataset/CharacterAllDirections.h"
 #include "preview/IPathfinding.h"
 
@@ -67,8 +65,6 @@ public:
 	const CharacterAllDirections* GetCharaDirs() const { return &m_chara_dirs; }
 
 protected:
-	virtual void OnRightPopupMenu(int menu_id);
-
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);
 
@@ -88,8 +84,6 @@ private:
 	preview::IPathfinding* m_pathfinding;
 
 	std::vector<Layer*> m_layers;
-
-	RightPopupMenu m_popup;
 
 	CharacterAllDirections m_chara_dirs;
 

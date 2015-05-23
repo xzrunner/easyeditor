@@ -3,6 +3,8 @@
 
 #include <drag2d.h>
 
+#include "RightPopupMenu.h"
+
 namespace lr
 {
 
@@ -14,7 +16,9 @@ class ArrangeSpriteImpl : public d2d::ArrangeSpriteImpl
 {
 public:
 	ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
-		RightPopupMenu* popup, CharacterAllDirections* dirs);
+		CharacterAllDirections* dirs);
+
+	virtual void onPopMenuSelected(int type);
 
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr);
@@ -41,7 +45,7 @@ private:
 	}; // RotateSpriteState
 
 private:
-	RightPopupMenu* m_popup;
+	RightPopupMenu m_popup;
 
 	CharacterAllDirections* m_dirs;
 
