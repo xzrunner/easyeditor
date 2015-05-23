@@ -37,6 +37,9 @@ public:
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
 
 private:
+	static bool IsValidFloat(float f);
+
+private:
 	std::string m_name;
 
 	bool m_editable, m_visible;

@@ -124,6 +124,11 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	{
 		d2d::ISprite* spr = sprites[i];
 
+		if (!IsValidFloat(spr->getPosition().x) || 
+			!IsValidFloat(spr->getPosition().y)) {
+			continue;
+		}
+
 		Json::Value spr_val;
 		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
 			spr->getSymbol().getFilepath()).ToStdString();
@@ -137,6 +142,11 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		shapes[i]->StoreToFile(val["shape"][i], dir);
 	}
+}
+
+bool Layer::IsValidFloat(float f)
+{
+	return (f == f) && (f <= FLT_MAX && f >= -FLT_MAX);
 }
 
 }
