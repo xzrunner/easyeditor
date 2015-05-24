@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="libicon"
-	ProjectGUID="{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
+	ProjectGUID="{BF76851E-B6B9-4CC0-8C4B-D7FB383B2642}"
 	RootNamespace="libicon"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -224,6 +224,14 @@
 				Name="icon"
 				>
 				<File
+					RelativePath="..\..\..\src\libicon\ChangedRectIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\ChangedRectIcon.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libicon\Icon.cpp"
 					>
 				</File>
@@ -255,17 +263,57 @@
 					RelativePath="..\..\..\src\libicon\SectorIcon.h"
 					>
 				</File>
+				<Filter
+					Name="tools"
+					>
+					<File
+						RelativePath="..\..\..\src\libicon\IconFactory.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libicon\IconFactory.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libicon\IconType.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\libicon\IconType.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
 			Name="editop"
 			>
 			<File
+				RelativePath="..\..\..\src\libicon\EditChangedRectOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libicon\EditChangedRectOP.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libicon\EditRectOP.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\..\src\libicon\EditRectOP.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="frame"
+			>
+			<File
+				RelativePath="..\..\..\src\libicon\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libicon\FileIO.h"
 				>
 			</File>
 		</Filter>

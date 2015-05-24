@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easyicon"
-	ProjectGUID="{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
+	ProjectGUID="{9A0DFD2A-E637-4D0E-9A60-79E4EBEE51AC}"
 	RootNamespace="easyicon"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

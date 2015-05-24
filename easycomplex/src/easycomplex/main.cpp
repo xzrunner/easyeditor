@@ -12,6 +12,7 @@
 #include <easyterrain2d.h>
 #include <easytexture.h>
 #include <easyshape.h>
+#include <easyicon.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -46,6 +47,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(libshape::FILE_TAG, &libshape::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(libshape::FILE_TAG, &libshape::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
 }
 
 bool MyApp::OnInit()

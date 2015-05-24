@@ -20,6 +20,7 @@ bool EditRectOP::onActive()
 	RectIcon* icon = new RectIcon;
 	icon->SetVertRegion(0, 0.5f);
 	m_stage->SetIcon(icon);
+	icon->Release();
 
 	return false;
 }

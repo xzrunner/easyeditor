@@ -11,7 +11,12 @@ class RectIcon : public Icon
 public:
 	RectIcon();
 
+	virtual const char* GetIconDesc() const { return "rect"; }
+
 	virtual void Draw(const d2d::Matrix& mt) const;
+
+	virtual void LoadFromFile(const Json::Value& value);
+	virtual void StoreToFile(Json::Value& value) const;
 
 	void SetHoriRegion(float xmin, float xmax);
 	void SetVertRegion(float ymin, float ymax);

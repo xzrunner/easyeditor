@@ -6,6 +6,7 @@
 
 #include "common/Vector.h"
 #include "common/Color.h"
+#include "common/Rect.h"
 
 namespace d2d
 {
@@ -18,6 +19,9 @@ public:
 
 	static void store(const std::vector<Colorf>& colors, Json::Value& value);
 	static void load(const Json::Value& value, std::vector<Colorf>& colors);
+
+	static void Store(const d2d::Rect& r, Json::Value& value);
+	static void Load(const Json::Value& value, d2d::Rect& r);
 
 }; // JsonTools
 

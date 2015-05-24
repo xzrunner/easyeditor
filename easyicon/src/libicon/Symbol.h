@@ -35,6 +35,8 @@ public:
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 	void SetIcon(Icon* icon);
+	const Icon* GetIcon() const { return m_icon; }
+
 	void SetImage(d2d::Image* img);
 
 protected:

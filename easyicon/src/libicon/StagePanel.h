@@ -24,6 +24,7 @@ public:
 	void SetImage(d2d::Image* img);
 
 	const Symbol& GetSymbol() const { return m_symbol; }
+	Symbol& GetSymbol() { return m_symbol; }
 
 private:
 	class StageDropTarget : public d2d::StageDropTarget

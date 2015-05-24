@@ -21,10 +21,14 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
+	Icon* icon = FileIO::LoadFromFile(filename);
+	m_stage->GetSymbol().SetIcon(icon);
 }
 
 void Task::store(const char* filename) const
 {
+	const Icon* icon = m_stage->GetSymbol().GetIcon();
+	FileIO::StoreToFile(filename, icon);
 }
 
 bool Task::isDirty() const

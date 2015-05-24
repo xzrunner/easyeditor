@@ -4,7 +4,7 @@
 namespace eicon
 {
 
-static const char* FILE_TAG = "template";
+static const char* FILE_TAG = "icon";
 
 }
 

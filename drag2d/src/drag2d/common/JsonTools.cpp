@@ -71,4 +71,20 @@ void JsonTools::load(const Json::Value& value, std::vector<Colorf>& colors)
 	}
 }
 
+void JsonTools::Store(const d2d::Rect& r, Json::Value& value)
+{
+	value["xmin"] = r.xMin;
+	value["xmax"] = r.xMax;
+	value["ymin"] = r.yMin;
+	value["ymax"] = r.yMax;
+}
+
+void JsonTools::Load(const Json::Value& value, d2d::Rect& r)
+{
+	r.xMin = value["xmin"].asDouble();
+	r.xMax = value["xmax"].asDouble();
+	r.yMin = value["ymin"].asDouble();
+	r.yMax = value["ymax"].asDouble();
+}
+
 }

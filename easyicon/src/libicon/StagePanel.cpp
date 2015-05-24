@@ -48,7 +48,6 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
 		m_stage->SetImage(image->getImage());
-		symbol->Release();
 		m_stage->getCanvas()->resetViewport();
 		return true;
 	}
