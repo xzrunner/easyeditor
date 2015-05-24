@@ -49,13 +49,11 @@ void ChangedRectIcon::OnImageChanged()
 		return;
 	}
 
-	float xlen = m_img->originWidth();
-	m_region.xMin = xlen * (m_curr.xMin - 0.5f);
-	m_region.xMax = xlen * (m_curr.xMax - 0.5f);
-
-	float ylen = m_img->originHeight();
-	m_region.yMin = ylen * (m_curr.yMin - 0.5f);
-	m_region.yMax = ylen * (m_curr.yMax - 0.5f);	
+	d2d::Rect clip_r = m_img->getRegion();
+	m_region.xMin = clip_r.xMin + m_curr.xMin * clip_r.xLength();
+	m_region.xMax = clip_r.xMin + m_curr.xMax * clip_r.xLength();
+	m_region.yMin = clip_r.yMin + m_curr.yMin * clip_r.yLength();
+	m_region.yMax = clip_r.yMin + m_curr.yMax * clip_r.yLength();
 }
 
 }
