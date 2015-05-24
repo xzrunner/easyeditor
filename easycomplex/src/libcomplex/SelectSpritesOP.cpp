@@ -9,6 +9,7 @@
 #include <easyscale9.h>
 #include <easyanim.h>
 #include <easytexture.h>
+#include <easyicon.h>
 
 // for debug
 //#include "MyThread.h"
@@ -115,14 +116,16 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 d2d::IPropertySetting* 
 SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
 {
-	if (sprite) {
-		if (escale9::Sprite* spr = dynamic_cast<escale9::Sprite*>(sprite)) {
-			return new escale9::SpritePropertySetting(m_editPanel, spr);
-		} else {
-			return d2d::SelectSpritesOP::createPropertySetting(sprite);
-		}
-	} else {
+	if (!sprite) {
 		return new ecomplex::PropertySetting(m_editPanel, static_cast<StagePanel*>(m_editPanel)->getSymbol());
+	}
+
+	if (escale9::Sprite* spr = dynamic_cast<escale9::Sprite*>(sprite)) {
+		return new escale9::SpritePropertySetting(m_editPanel, spr);
+	} else if (eicon::Sprite* spr = dynamic_cast<eicon::Sprite*>(sprite)) {
+		return new eicon::SpritePropertySetting(m_editPanel, spr);
+	} else {
+		return d2d::SelectSpritesOP::createPropertySetting(sprite);
 	}
 }
 

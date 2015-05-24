@@ -200,6 +200,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="property"
+				>
+				<File
+					RelativePath="..\..\..\src\libicon\SpritePropertySetting.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\SpritePropertySetting.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="dataset"

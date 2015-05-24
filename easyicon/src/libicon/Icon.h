@@ -15,13 +15,12 @@ public:
 
 	virtual const char* GetIconDesc() const = 0;
 
-	virtual void Draw(const d2d::Matrix& mt) const = 0;
-	virtual void SetProcess(float proc) {}
+	virtual void Draw(const d2d::Matrix& mt, float process) const = 0;
 
 	virtual void LoadFromFile(const Json::Value& value) = 0;
 	virtual void StoreToFile(Json::Value& value) const = 0;
 
-	const d2d::Rect& GetRegion() const { return m_region; }
+	virtual void GetRegion(float process, d2d::Rect& region) const = 0;
 
 	void ReloadTexture() const;
 
@@ -29,14 +28,10 @@ public:
 	const d2d::Image* GetImage() const { return m_img; }
 
 protected:
-	virtual void OnImageChanged() = 0;
-
 	void Draw(const d2d::Matrix& mt, const d2d::Rect& r) const;
 
 protected:
 	d2d::Image* m_img;
-
-	d2d::Rect m_region;
 
 }; // Icon
 

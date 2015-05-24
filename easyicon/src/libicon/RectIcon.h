@@ -13,16 +13,15 @@ public:
 
 	virtual const char* GetIconDesc() const { return "rect"; }
 
-	virtual void Draw(const d2d::Matrix& mt) const;
+	virtual void Draw(const d2d::Matrix& mt, float process) const;
 
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
 
+	virtual void GetRegion(float process, d2d::Rect& region) const;
+
 	void SetHoriRegion(float xmin, float xmax);
 	void SetVertRegion(float ymin, float ymax);
-
-protected:
-	virtual void OnImageChanged();
 
 private:
 	d2d::Vector m_min, m_max;

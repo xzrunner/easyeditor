@@ -4,56 +4,54 @@ namespace eicon
 {
 
 ChangedRectIcon::ChangedRectIcon()
-	: m_proc(1)
 {
 	m_begin.xMin = m_end.xMin = 0;
 	m_begin.xMax = m_end.xMax = 1;
 	m_begin.yMin = m_begin.yMax = 0;
 	m_end.yMin = 0;
 	m_end.yMax = 1;
-
-	m_curr = m_begin;
 }
 
-void ChangedRectIcon::Draw(const d2d::Matrix& mt) const
+void ChangedRectIcon::Draw(const d2d::Matrix& mt, float process) const
 {
-	Icon::Draw(mt, m_curr);
-}
+	d2d::Rect curr;
+	curr.xMin = m_begin.xMin + (m_end.xMin - m_begin.xMin) * process;
+	curr.xMax = m_begin.xMax + (m_end.xMax - m_begin.xMax) * process;
+	curr.yMin = m_begin.yMin + (m_end.yMin - m_begin.yMin) * process;
+	curr.yMax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * process;
 
-void ChangedRectIcon::SetProcess(float proc)
-{
-	m_proc = proc;
-	m_curr.xMin = m_begin.xMin + (m_end.xMin - m_begin.xMin) * proc;
-	m_curr.xMax = m_begin.xMax + (m_end.xMax - m_begin.xMax) * proc;
-	m_curr.yMin = m_begin.yMin + (m_end.yMin - m_begin.yMin) * proc;
-	m_curr.yMax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * proc;
+	Icon::Draw(mt, curr);
 }
 
 void ChangedRectIcon::LoadFromFile(const Json::Value& value)
 {
 	d2d::JsonTools::Load(value["begin"], m_begin);
 	d2d::JsonTools::Load(value["end"], m_end);
-	SetProcess(value["process"].asDouble());
 }
 
 void ChangedRectIcon::StoreToFile(Json::Value& value) const
 {
 	d2d::JsonTools::Store(m_begin, value["begin"]);
 	d2d::JsonTools::Store(m_end, value["end"]);
-	value["process"] = m_proc;
 }
 
-void ChangedRectIcon::OnImageChanged()
+void ChangedRectIcon::GetRegion(float process, d2d::Rect& region) const
 {
 	if (!m_img) {
 		return;
 	}
 
+	d2d::Rect curr;
+	curr.xMin = m_begin.xMin + (m_end.xMin - m_begin.xMin) * process;
+	curr.xMax = m_begin.xMax + (m_end.xMax - m_begin.xMax) * process;
+	curr.yMin = m_begin.yMin + (m_end.yMin - m_begin.yMin) * process;
+	curr.yMax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * process;
+
 	d2d::Rect clip_r = m_img->getRegion();
-	m_region.xMin = clip_r.xMin + m_curr.xMin * clip_r.xLength();
-	m_region.xMax = clip_r.xMin + m_curr.xMax * clip_r.xLength();
-	m_region.yMin = clip_r.yMin + m_curr.yMin * clip_r.yLength();
-	m_region.yMax = clip_r.yMin + m_curr.yMax * clip_r.yLength();
+	region.xMin = clip_r.xMin + curr.xMin * clip_r.xLength();
+	region.xMax = clip_r.xMin + curr.xMax * clip_r.xLength();
+	region.yMin = clip_r.yMin + curr.yMin * clip_r.yLength();
+	region.yMax = clip_r.yMin + curr.yMax * clip_r.yLength();
 }
 
 }

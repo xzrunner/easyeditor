@@ -32,11 +32,11 @@ void Icon::ReloadTexture() const
 
 void Icon::SetImage(d2d::Image* img)
 {
-	bool changed = m_img != img;
+//	bool changed = m_img != img;
 	d2d::obj_assign((d2d::Object*&)m_img, img);
-	if (changed) {
-		OnImageChanged();
-	}
+// 	if (changed) {
+// 		OnImageChanged();
+// 	}
 }
 
 void Icon::Draw(const d2d::Matrix& mt, const d2d::Rect& r) const

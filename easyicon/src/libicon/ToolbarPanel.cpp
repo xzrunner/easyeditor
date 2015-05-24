@@ -16,12 +16,12 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 		addChild(new d2d::UniversalCMPT(this, "矩形", stage, op));
 		stage->setEditOP(op);
 	}
-	// Changed Rect
-	{
-		d2d::AbstractEditOP* op = new EditChangedRectOP(stage);
-		addChild(new d2d::UniversalCMPT(this, "可变的矩形", stage, op));
-		stage->setEditOP(op);
-	}
+ 	// Changed Rect
+ 	{
+ 		d2d::AbstractEditOP* op = new EditChangedRectOP(stage);
+ 		addChild(new d2d::UniversalCMPT(this, "可变的矩形", stage, op));
+ 		stage->setEditOP(op);
+ 	}
 
 	SetSizer(initLayout());	
 }

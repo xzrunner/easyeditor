@@ -1,4 +1,5 @@
 #include "Symbol.h"
+#include "Sprite.h"
 #include "Icon.h"
 #include "FileIO.h"
 
@@ -39,14 +40,23 @@ void Symbol::draw(const d2d::Matrix& mt,
 	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
 	shader->SetSpriteColor(mul, add);
 	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
-	m_icon->Draw(mt);
+
+	float process = 1;
+	if (sprite) {
+		process = static_cast<const Sprite*>(sprite)->GetProcess();
+	}
+	m_icon->Draw(mt, process);
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 {
 	d2d::Rect r;
 	if (m_icon) {
-		r = m_icon->GetRegion();
+		float process = 1;
+		if (sprite) {
+			process = static_cast<const Sprite*>(sprite)->GetProcess();
+		}
+		m_icon->GetRegion(process, r);
 	}
 	return r;
 }
@@ -67,6 +77,7 @@ void Symbol::loadResources()
 {
 	Icon* icon = FileIO::LoadFromFile(m_filepath);
 	SetIcon(icon);
+	icon->Release();
 }
 
 }

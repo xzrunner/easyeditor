@@ -212,6 +212,14 @@
 				RelativePath="..\..\..\src\libcomplex\Symbol.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\SymbolContainer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\SymbolContainer.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="view"
@@ -219,14 +227,6 @@
 			<Filter
 				Name="stage"
 				>
-				<File
-					RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.h"
-					>
-				</File>
 				<File
 					RelativePath="..\..\..\src\libcomplex\StageCanvas.cpp"
 					>
@@ -241,14 +241,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libcomplex\StagePanel.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcomplex\SymbolContainer.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcomplex\SymbolContainer.h"
 					>
 				</File>
 			</Filter>
@@ -322,6 +314,18 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcomplex\RectCutLoader.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="editop"
+			>
+			<File
+				RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.h"
 				>
 			</File>
 		</Filter>

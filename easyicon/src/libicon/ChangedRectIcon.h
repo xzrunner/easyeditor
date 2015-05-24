@@ -13,20 +13,15 @@ public:
 
 	virtual const char* GetIconDesc() const { return "changed-rect"; }
 
-	virtual void Draw(const d2d::Matrix& mt) const;
-	virtual void SetProcess(float proc);
+	virtual void Draw(const d2d::Matrix& mt, float process) const;
 
 	virtual void LoadFromFile(const Json::Value& value);
 	virtual void StoreToFile(Json::Value& value) const;
 
-protected:
-	virtual void OnImageChanged();
+	virtual void GetRegion(float process, d2d::Rect& region) const;
 
 private:
 	d2d::Rect m_begin, m_end;
-	float m_proc;
-
-	d2d::Rect m_curr;
 
 }; // ChangedRectIcon
 

@@ -18,7 +18,6 @@ bool EditChangedRectOP::onActive()
 	}
 
 	ChangedRectIcon* icon = new ChangedRectIcon;
-	icon->SetProcess(0.15f);
 	m_stage->SetIcon(icon);
 	icon->Release();
 
