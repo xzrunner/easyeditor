@@ -20,7 +20,13 @@ void ChangedRectIcon::Draw(const d2d::Matrix& mt, float process) const
 	curr.yMin = m_begin.yMin + (m_end.yMin - m_begin.yMin) * process;
 	curr.yMax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * process;
 
-	Icon::Draw(mt, curr);
+	d2d::Vector region[4];
+	region[0].set(curr.xMin, curr.yMin);
+	region[1].set(curr.xMin, curr.yMax);
+	region[2].set(curr.xMax, curr.yMax);
+	region[3].set(curr.xMax, curr.yMin);
+
+	Icon::Draw(mt, region);
 }
 
 void ChangedRectIcon::LoadFromFile(const Json::Value& value)

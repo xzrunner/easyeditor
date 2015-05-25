@@ -28,7 +28,7 @@ public:
 	const d2d::Image* GetImage() const { return m_img; }
 
 protected:
-	void Draw(const d2d::Matrix& mt, const d2d::Rect& r) const;
+	void Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const;
 
 protected:
 	d2d::Image* m_img;

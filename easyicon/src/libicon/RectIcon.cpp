@@ -11,7 +11,7 @@ RectIcon::RectIcon()
 
 void RectIcon::Draw(const d2d::Matrix& mt, float process) const
 {
-	Icon::Draw(mt, d2d::Rect(m_min, m_max));
+//	Icon::Draw(mt, d2d::Rect(m_min, m_max));
 }
 
 void RectIcon::LoadFromFile(const Json::Value& value)

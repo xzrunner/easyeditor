@@ -244,6 +244,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\libicon\ChangedSectorIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libicon\ChangedSectorIcon.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libicon\Icon.cpp"
 					>
 				</File>
@@ -265,14 +273,6 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\libicon\RectIcon.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libicon\SectorIcon.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libicon\SectorIcon.h"
 					>
 				</File>
 				<Filter
