@@ -18,8 +18,6 @@ void ChangedSectorIcon::Draw(const d2d::Matrix& mt, float process) const
 // 	curr.yMax = m_begin.yMax + (m_end.yMax - m_begin.yMax) * process;
 
 		
-
-	Icon::Draw(mt, curr);
 }
 
 void ChangedSectorIcon::LoadFromFile(const Json::Value& value)
