@@ -1,7 +1,0 @@
-efun_ui_bottom_right
-band_list_window
-efun_band_ui_bottom_right
-band_login_window
-efun_bottom_left
-band_button
-setting_window_efun
