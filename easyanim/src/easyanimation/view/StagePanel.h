@@ -43,12 +43,9 @@ namespace eanim
 	public:
 		enum
 		{
-			Menu_AddJointNode = EditPanel::Menu_End,
-			Menu_DelJointNode,
-			Menu_End
+			Menu_AddJointNode = 1000,
+			Menu_DelJointNode
 		};
-
-		static std::string menu_entries[];
 
 	private:
 		Controller* m_ctrl;

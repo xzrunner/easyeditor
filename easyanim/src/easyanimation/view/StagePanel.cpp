@@ -11,12 +11,6 @@
 namespace eanim
 {
 
-std::string StagePanel::menu_entries[] = 
-{
-	"Add Joint",
-	"Del Joint",
-};
-
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
 					   Controller* ctrl)

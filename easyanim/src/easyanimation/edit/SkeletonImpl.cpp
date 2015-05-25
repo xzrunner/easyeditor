@@ -105,9 +105,9 @@ void SkeletonImpl::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 	d2d::ArrangeSpriteImpl::SetRightPopupMenu(menu, spr);
 	Joint* joint = m_stage->getSkeletonData().queryJointByPos(m_first_pos);
 	if (joint)
-		menu.Append(StagePanel::Menu_DelJointNode, StagePanel::menu_entries[StagePanel::Menu_DelJointNode - d2d::EditPanel::Menu_End]);
+		menu.Append(StagePanel::Menu_DelJointNode, "Add Joint");
 	else
-		menu.Append(StagePanel::Menu_AddJointNode, StagePanel::menu_entries[StagePanel::Menu_AddJointNode - d2d::EditPanel::Menu_End]);
+		menu.Append(StagePanel::Menu_AddJointNode, "Del Joint");
 }
 
 d2d::IArrangeSpriteState* 
