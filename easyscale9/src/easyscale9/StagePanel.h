@@ -27,6 +27,7 @@ namespace escale9
 		virtual void removeSprite(d2d::ISprite* sprite);
 		virtual void insertSprite(d2d::ISprite* sprite);
 		virtual void clearSprites();
+		virtual bool resetSpriteOrder(d2d::ISprite* sprite, bool up) { return false; }
 
 		Symbol* getPatchSymbol() { return m_symbol; }
 

@@ -36,14 +36,14 @@ wxSizer* ResizeCMPT::initLayout()
 
 	wxBoxSizer* wSizer = new wxBoxSizer(wxHORIZONTAL);
 	wSizer->Add(new wxStaticText(this, wxID_ANY, wxT("width: ")));
-	m_wSpin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 10, 10000, 300);
+	m_wSpin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 2, 10000, 300);
 	Connect(m_wSpin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ResizeCMPT::onChangeSize));
 	wSizer->Add(m_wSpin);
 	sizer->Add(wSizer);
 
 	wxBoxSizer* hSizer = new wxBoxSizer(wxHORIZONTAL);
 	hSizer->Add(new wxStaticText(this, wxID_ANY, wxT("height: ")));
-	m_hSpin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 10, 10000, 200);
+	m_hSpin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS | wxALIGN_RIGHT, 2, 10000, 200);
 	Connect(m_hSpin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ResizeCMPT::onChangeSize));
 	hSizer->Add(m_hSpin);
 	sizer->Add(hSizer);
