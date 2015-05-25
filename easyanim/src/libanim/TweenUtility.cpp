@@ -1,5 +1,7 @@
 #include "TweenUtility.h"
 
+#include <easyicon.h>
+
 namespace libanim
 {
 
@@ -75,6 +77,14 @@ void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::I
 	tween->addCol = cInterpolate(start->addCol, end->addCol, process);
 	tween->multiCol = cInterpolate(start->multiCol, end->multiCol, process);
 
+	if (eicon::Sprite* icon_s = dynamic_cast<eicon::Sprite*>(start))
+	{
+		eicon::Sprite* icon_e = dynamic_cast<eicon::Sprite*>(end);
+		eicon::Sprite* icon_t = dynamic_cast<eicon::Sprite*>(tween);
+		assert(icon_e && icon_t);
+		float proc = (icon_e->GetProcess() - icon_s->GetProcess()) * process + icon_s->GetProcess();
+		icon_t->SetProcess(proc);
+	}
 }
 
 }
