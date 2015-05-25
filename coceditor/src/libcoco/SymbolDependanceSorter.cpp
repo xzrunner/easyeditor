@@ -6,6 +6,7 @@
 #include <easymesh.h>
 #include <easyterrain2d.h>
 #include <easytexture.h>
+#include <easyicon.h>
 
 namespace libcoco
 {
@@ -85,6 +86,14 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
  				break;
  			}
 		}
+		else if (const eicon::Symbol* icon = dynamic_cast<const const eicon::Symbol*>(symbol))
+		{
+			wxString filepath = icon->GetIcon()->GetImage()->filepath();
+//			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+
+			// todo
+//			buffer.push(symbol);
+		}
 	}
 
 	while (!buffer.empty())
@@ -158,6 +167,14 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 		{
 			m_unique.insert(&tex->getSymbol());
 		}
+		else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(sprite))
+		{
+			//todo
+
+//			wxString filepath = icon->GetImage()->filepath();
+//			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);			
+//			m_unique.insert(symbol);
+		}
 	}
 }
 
@@ -186,7 +203,7 @@ void SymbolDependanceSorter::sort()
 			{
 				bool prepared = true;
 				for (size_t i = 0, n = complex->m_sprites.size(); i < n && prepared; ++i) {
-					if (!isSymbolPrepared(complex->m_sprites[i])) {
+					if (!IsSymbolPrepared(complex->m_sprites[i])) {
 						prepared = false;
 					}
 				}
@@ -207,7 +224,7 @@ void SymbolDependanceSorter::sort()
 					{
 						libanim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l && prepared; ++k)
-							if (!isSymbolPrepared(frame->sprites[k]))
+							if (!IsSymbolPrepared(frame->sprites[k]))
 								prepared = false;
 					}
 				}
@@ -227,32 +244,32 @@ void SymbolDependanceSorter::sort()
  				case escale9::e_9Grid:
  					for (size_t i = 0; i < 3 && prepared; ++i)
  						for (size_t j = 0; j < 3 && prepared; ++j)
- 							if (!isSymbolPrepared(data.GetSprite(i, j)))
+ 							if (!IsSymbolPrepared(data.GetSprite(i, j)))
  								prepared = false;
  					break;
  				case escale9::e_9GridHollow:
  					for (size_t i = 0; i < 3 && prepared; ++i) {
  						for (size_t j = 0; j < 3 && prepared; ++j) {
  							if (i == 1 && j == 1) continue;
- 							if (!isSymbolPrepared(data.GetSprite(i, j)))
+ 							if (!IsSymbolPrepared(data.GetSprite(i, j)))
  								prepared = false;
  						}
  					}
  					break;
  				case escale9::e_3GridHor:
  					for (size_t i = 0; i < 3 && prepared; ++i)
- 						if (!isSymbolPrepared(data.GetSprite(1, i)))
+ 						if (!IsSymbolPrepared(data.GetSprite(1, i)))
  							prepared = false;
  					break;
  				case escale9::e_3GridVer:
  					for (size_t i = 0; i < 3 && prepared; ++i)
- 						if (!isSymbolPrepared(data.GetSprite(i, 1)))
+ 						if (!IsSymbolPrepared(data.GetSprite(i, 1)))
  							prepared = false;
  					break;
  				case escale9::e_6GridUpper:
  					for (size_t i = 1; i < 3 && prepared; ++i)
  						for (size_t j = 0; j < 3 && prepared; ++j)
- 							if (!isSymbolPrepared(data.GetSprite(i, j)))
+ 							if (!IsSymbolPrepared(data.GetSprite(i, j)))
  								prepared = false;
  					break;
  				}
@@ -316,16 +333,33 @@ void SymbolDependanceSorter::sort()
 				m_unique.erase(itr);
 				break;
 			}
+			else if (eicon::Symbol* icon = dynamic_cast<eicon::Symbol*>(symbol)) 
+			{
+				wxString filepath = icon->GetIcon()->GetImage()->filepath();
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				if (IsSymbolPrepared(symbol)) {
+ 					m_result.push_back(icon);
+ 					m_unique.erase(itr);
+ 					break;
+				}
+			}
 		}
 	}
 }
 
-bool SymbolDependanceSorter::isSymbolPrepared(const d2d::ISprite* sprite) const
+bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::ISprite* sprite) const
 {
-	for (size_t i = 0, n = m_result.size(); i < n; ++i)
-		if (&sprite->getSymbol() == m_result[i])
+	return IsSymbolPrepared(&sprite->getSymbol());
+}
+
+bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::ISymbol* symbol) const
+{
+	for (size_t i = 0, n = m_result.size(); i < n; ++i) {
+		if (symbol == m_result[i]) {
 			return true;
-	return false;
+		}
+	}
+	return false;	
 }
 
 void SymbolDependanceSorter::PrepareScale9(std::queue<d2d::ISprite*>& buffer,

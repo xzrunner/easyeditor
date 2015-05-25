@@ -24,7 +24,8 @@ private:
 	void fetch(const std::vector<const d2d::ISymbol*>& symbols);
 	void sort();
 
-	bool isSymbolPrepared(const d2d::ISprite* sprite) const;
+	bool IsSymbolPrepared(const d2d::ISprite* sprite) const;
+	bool IsSymbolPrepared(const d2d::ISymbol* symbol) const;
 
 	void PrepareScale9(std::queue<d2d::ISprite*>& buffer, const escale9::Sprite* scale9);
 
