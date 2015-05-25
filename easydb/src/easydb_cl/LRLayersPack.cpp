@@ -81,14 +81,20 @@ void LRLayersPack::Run(const std::string& filepath)
 void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset, 
 								   const lr::Grids& grids, Json::Value& out_val)
 {
-	std::vector<int> grid_idx;
 	if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape))
 	{
+		std::vector<int> grid_idx;
+
 		std::vector<d2d::Vector> bound = poly->GetVertices();
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] += offset;
 		}
 		grid_idx = grids.IntersectPolygon(bound);
+
+		for (int i = 0, n = grid_idx.size(); i < n; ++i) {
+			int sz = out_val["grid"].size();
+			out_val["grid"][sz] = grid_idx[i];
+		}
 	}
 	else if (libshape::ChainShape* chain = dynamic_cast<libshape::ChainShape*>(shape))
 	{
@@ -96,16 +102,11 @@ void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] += offset;
 		}
-		grid_idx = grids.IntersectPolyline(bound);
+		d2d::JsonTools::store(bound, out_val["pos"]);
 	}
 	else
 	{
 		throw d2d::Exception("LRLayersPack::ParserPolyLayer error shape type");
-	}
-
-	for (int i = 0, n = grid_idx.size(); i < n; ++i) {
-		int sz = out_val["grid"].size();
-		out_val["grid"][sz] = grid_idx[i];
 	}
 }
 
