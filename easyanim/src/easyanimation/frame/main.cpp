@@ -8,6 +8,7 @@
 #include <easyscale9.h>
 #include <easymesh.h>
 #include <easyparticle3d.h>
+#include <easyicon.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -27,6 +28,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eparticle3d::FILE_TAG, &eparticle3d::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
 }
 
 bool MyApp::OnInit()

@@ -5,6 +5,7 @@
 #include "view/StagePanel.h"
 
 #include <easymesh.h>
+#include <easyicon.h>
 
 namespace eanim
 {
@@ -36,7 +37,11 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 d2d::IPropertySetting* SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
 {
 	if (sprite) {
-		return d2d::SelectSpritesOP::createPropertySetting(sprite);
+		if (eicon::Sprite* spr = dynamic_cast<eicon::Sprite*>(sprite)) {
+			return new eicon::SpritePropertySetting(m_editPanel, spr);
+		} else {
+			return d2d::SelectSpritesOP::createPropertySetting(sprite);
+		}
 	} else {
 		Controller* ctrl = ((StagePanel*)m_editPanel)->GetController();
 		return new d2d::SymbolPropertySetting(m_editPanel, &ctrl->name);

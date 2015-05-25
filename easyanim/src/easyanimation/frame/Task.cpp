@@ -8,6 +8,7 @@
 #include <easycomplex.h>
 #include <easymesh.h>
 #include <easyscale9.h>
+#include <easyicon.h>
 
 #include <wx/splitter.h>
 
@@ -106,6 +107,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_widgets.m_library->addPage(new ecomplex::LibraryPage(nb));
 	m_widgets.m_library->addPage(new emesh::LibraryPage(nb));
 	m_widgets.m_library->addPage(new escale9::LibraryPage(nb));
+	m_widgets.m_library->addPage(new eicon::LibraryPage(nb));
 
 	// property
 	m_widgets.m_property = new d2d::PropertySettingPanel(split);
