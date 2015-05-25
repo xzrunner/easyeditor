@@ -64,6 +64,7 @@ void JointPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
 		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_joint->m_name));
 		pg->Append(new wxBoolProperty(wxT("collideConnected"), wxPG_LABEL, m_joint->collideConnected));
+		pg->SetPropertyAttribute("collideConnected", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	}
 
 	switch (m_joint->type)
@@ -207,6 +208,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::RevoluteJoint* joint
 	pg->SetPropertyAttribute(wxT("referenceAngle"), "Precision", 2);
 
 	pg->Append(new wxBoolProperty(wxT("enableLimit"), wxPG_LABEL, joint->enableLimit));
+	pg->SetPropertyAttribute("enableLimit", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxFloatProperty(wxT("lowerAngle"), wxPG_LABEL, joint->lowerAngle));
 	pg->SetPropertyAttribute(wxT("lowerAngle"), "Precision", 2);
@@ -215,6 +217,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::RevoluteJoint* joint
 	pg->SetPropertyAttribute(wxT("upperAngle"), "Precision", 2);
 
 	pg->Append(new wxBoolProperty(wxT("enableMotor"), wxPG_LABEL, joint->enableMotor));
+	pg->SetPropertyAttribute("enableMotor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxFloatProperty(wxT("maxMotorTorque"), wxPG_LABEL, joint->maxMotorTorque));
 	pg->SetPropertyAttribute(wxT("maxMotorTorque"), "Precision", 2);
@@ -300,6 +303,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::PrismaticJoint* join
 	pg->SetPropertyAttribute(wxT("referenceAngle"), "Precision", 2);
 
 	pg->Append(new wxBoolProperty(wxT("enableLimit"), wxPG_LABEL, joint->enableLimit));
+	pg->SetPropertyAttribute("enableLimit", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxFloatProperty(wxT("lowerTranslation"), wxPG_LABEL, joint->lowerTranslation));
 	pg->SetPropertyAttribute(wxT("lowerTranslation"), "Precision", 2);
@@ -308,6 +312,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::PrismaticJoint* join
 	pg->SetPropertyAttribute(wxT("upperTranslation"), "Precision", 2);
 
 	pg->Append(new wxBoolProperty(wxT("enableMotor"), wxPG_LABEL, joint->enableMotor));
+	pg->SetPropertyAttribute("enableMotor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxFloatProperty(wxT("maxMotorForce"), wxPG_LABEL, joint->maxMotorForce));
 	pg->SetPropertyAttribute(wxT("maxMotorForce"), "Precision", 2);
@@ -543,6 +548,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::WheelJoint* joint, w
 	pg->SetPropertyAttribute(wxT("localAxisA.y"), "Precision", 2);
 
 	pg->Append(new wxBoolProperty(wxT("enableMotor"), wxPG_LABEL, joint->enableMotor));
+	pg->SetPropertyAttribute("enableMotor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxFloatProperty(wxT("maxMotorTorque"), wxPG_LABEL, joint->maxMotorTorque));
 	pg->SetPropertyAttribute(wxT("maxMotorTorque"), "Precision", 2);

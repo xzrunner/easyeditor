@@ -116,6 +116,7 @@ void FontPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxStringProperty(wxT("Font"), wxPG_LABEL, sprite->font));
 
 	pg->Append(new wxBoolProperty(wxT("Edge"), wxPG_LABEL, sprite->has_edge));
+	pg->SetPropertyAttribute("Edge", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	wxColour col = wxColour(sprite->addCol.r*255, sprite->addCol.g*255, sprite->addCol.b*255, sprite->addCol.a*255);
 	pg->Append(new wxColourProperty(wxT("FontColor"), wxPG_LABEL, col));

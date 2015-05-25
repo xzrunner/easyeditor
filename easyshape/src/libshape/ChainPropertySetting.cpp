@@ -40,6 +40,7 @@ void ChainPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
 		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->IsClosed()));
+		pg->SetPropertyAttribute("Closed", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 		static const wxChar* mirror_labels[] = { wxT("none"),
 			wxT("horizontal"), wxT("vertical"), NULL };
@@ -122,6 +123,7 @@ void ChainPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, 
 		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
 		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->IsClosed()));
+		pg->SetPropertyAttribute("Closed", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 		static const wxChar* mirror_labels[] = { wxT("none"),
 			wxT("horizontal"), wxT("vertical"), NULL };

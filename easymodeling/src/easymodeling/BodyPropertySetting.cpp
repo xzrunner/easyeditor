@@ -55,10 +55,13 @@ void BodyPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 		pg->Append(new wxFloatProperty(wxT("AngularDamping"), wxPG_LABEL, m_body->angularDamping));
 
 		pg->Append(new wxBoolProperty(wxT("AllowSleep"), wxPG_LABEL, m_body->allowSleep));
+		pg->SetPropertyAttribute("AllowSleep", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 		pg->Append(new wxBoolProperty(wxT("Bullet"), wxPG_LABEL, m_body->bullet));
+		pg->SetPropertyAttribute("Bullet", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 		pg->Append(new wxBoolProperty(wxT("Active"), wxPG_LABEL, m_body->active));
+		pg->SetPropertyAttribute("Active", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 		pg->Append(new wxFloatProperty(wxT("GravityScale"), wxPG_LABEL, m_body->gravityScale));
 	}

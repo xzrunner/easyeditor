@@ -44,6 +44,7 @@ void FixturePropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 		pg->SetPropertyAttribute(wxT("restitution"), "Precision", 2);
 
 		pg->Append(new wxBoolProperty(wxT("isSensor"), wxPG_LABEL, m_fixture->isSensor));
+		pg->SetPropertyAttribute("isSensor", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 		pg->Append(new wxIntProperty(wxT("categoryBits"), wxPG_LABEL, m_fixture->categoryBits));
 		pg->SetPropertyAttribute(wxT("categoryBits"), wxPG_ATTR_MIN, 0);

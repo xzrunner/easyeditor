@@ -4,6 +4,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "common/color_config.h"
+#include "common/Math.h"
 
 #include <algorithm>
 
@@ -84,7 +85,7 @@ Vector MultiSpritesPropertyImpl::GetPosition() const
 	return p;
 }
 
-d2d::Colorf MultiSpritesPropertyImpl::GetMultiColor() const
+Colorf MultiSpritesPropertyImpl::GetMultiColor() const
 {
 	if (m_sprites.empty()) {
 		return WHITE;
@@ -99,7 +100,7 @@ d2d::Colorf MultiSpritesPropertyImpl::GetMultiColor() const
 	return col;
 }
 
-d2d::Colorf MultiSpritesPropertyImpl::GetAddColor() const
+Colorf MultiSpritesPropertyImpl::GetAddColor() const
 {
 	if (m_sprites.empty()) {
 		return BLACK;
@@ -159,6 +160,96 @@ Colorf MultiSpritesPropertyImpl::GetTransColorB() const
 	return col;
 }
 
+float MultiSpritesPropertyImpl::GetAngle() const
+{
+	if (m_sprites.empty()) {
+		return 0;
+	}
+
+	float angle = m_sprites[0]->getAngle();
+	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
+		if (angle != m_sprites[i]->getAngle()) {
+			return 0;
+		}
+	}
+	return angle;
+}
+
+Vector MultiSpritesPropertyImpl::GetScale() const
+{
+	if (m_sprites.empty()) {
+		return Vector(1, 1);
+	}
+
+	Vector scale = m_sprites[0]->getScale();
+	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
+		if (scale != m_sprites[i]->getScale()) {
+			return Vector(1, 1);
+		}
+	}
+	return scale;
+}
+
+bool MultiSpritesPropertyImpl::GetMirrorX() const
+{
+	if (m_sprites.empty()) {
+		return false;
+	}
+
+	bool mirror = m_sprites[0]->getMirrorX();
+	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
+		if (mirror != m_sprites[i]->getMirrorX()) {
+			return false;
+		}
+	}
+	return mirror;
+}
+
+bool MultiSpritesPropertyImpl::GetMirrorY() const
+{
+	if (m_sprites.empty()) {
+		return false;
+	}
+
+	bool mirror = m_sprites[0]->getMirrorY();
+	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
+		if (mirror != m_sprites[i]->getMirrorY()) {
+			return false;
+		}
+	}
+	return mirror;
+}
+
+bool MultiSpritesPropertyImpl::GetVisible() const
+{
+	if (m_sprites.empty()) {
+		return true;
+	}
+
+	bool ret = m_sprites[0]->visiable;
+	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
+		if (ret != m_sprites[i]->visiable) {
+			return true;
+		}
+	}
+	return ret;
+}
+
+bool MultiSpritesPropertyImpl::GetEditable() const
+{
+	if (m_sprites.empty()) {
+		return true;
+	}
+
+	bool ret = m_sprites[0]->editable;
+	for (int i = 1, n = m_sprites.size(); i < n; ++i) {
+		if (ret != m_sprites[i]->editable) {
+			return true;
+		}
+	}
+	return ret;
+}
+
 void MultiSpritesPropertyImpl::SetTag(const wxString& tag)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -214,6 +305,116 @@ void MultiSpritesPropertyImpl::SetColorAlpha(float alpha)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->multiCol.a = alpha;
+	}
+}
+
+void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
+{
+	if (overall) 
+	{
+		Vector center = GetOverallCenter();
+		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+			ISprite* spr = m_sprites[i];
+			Vector pos = Math::rotateVector(spr->getPosition() - center, angle);
+			spr->setTransform(pos, angle);
+		}
+	} 
+	else 
+	{
+		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+			ISprite* spr = m_sprites[i];
+			spr->setTransform(spr->getPosition(), angle);
+		}
+	}
+}
+
+void MultiSpritesPropertyImpl::SetScaleX(bool overall, float s)
+{
+	if (overall)
+	{
+		Vector center = GetOverallCenter();
+		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+			ISprite* spr = m_sprites[i];
+			Vector pos = spr->getPosition() - center;
+			pos.x *= s;
+			spr->setTransform(pos + center, spr->getAngle());
+		}
+	}
+
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		ISprite* spr = m_sprites[i];
+		spr->setScale(s, spr->getScale().y);
+	}
+}
+
+void MultiSpritesPropertyImpl::SetScaleY(bool overall, float s)
+{
+	if (overall)
+	{
+		Vector center = GetOverallCenter();
+		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+			ISprite* spr = m_sprites[i];
+			Vector pos = spr->getPosition() - center;
+			pos.y *= s;
+			spr->setTransform(pos + center, spr->getAngle());
+		}
+	}
+
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		ISprite* spr = m_sprites[i];
+		spr->setScale(spr->getScale().x, s);
+	}
+}
+
+void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
+{
+	if (overall)
+	{
+		Vector center = GetOverallCenter();
+		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+			ISprite* spr = m_sprites[i];
+			Vector pos = spr->getPosition() - center;
+			pos.x = -pos.x;
+			spr->setTransform(pos + center, spr->getAngle());
+		}
+	}
+
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		ISprite* spr = m_sprites[i];
+		spr->setMirror(mirror, spr->getMirrorY());
+	}
+}
+
+void MultiSpritesPropertyImpl::SetMirrorY(bool overall, bool mirror)
+{
+	if (overall)
+	{
+		Vector center = GetOverallCenter();
+		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+			ISprite* spr = m_sprites[i];
+			Vector pos = spr->getPosition() - center;
+			pos.y = -pos.y;
+			spr->setTransform(pos + center, spr->getAngle());
+		}
+	}
+
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		ISprite* spr = m_sprites[i];
+		spr->setMirror(spr->getMirrorX(), mirror);
+	}
+}
+
+void MultiSpritesPropertyImpl::SetVisible(bool visible)
+{
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		m_sprites[i]->visiable = visible;
+	}
+}
+
+void MultiSpritesPropertyImpl::SetEditable(bool editable)
+{
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		m_sprites[i]->editable = editable;
 	}
 }
 
@@ -393,7 +594,7 @@ void MultiSpritesPropertyImpl::OnPosChange(float dx, float dy)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* spr = m_sprites[i];
-		d2d::Vector pos = spr->getPosition();
+		Vector pos = spr->getPosition();
 		pos.x += dx;
 		pos.y += dy;
 		spr->setTransform(pos, spr->getAngle());
@@ -414,11 +615,25 @@ void MultiSpritesPropertyImpl::OnScaleChange(float dx, float dy)
 	for (int i = 0, n = m_sprites.size(); i < n; ++i)
 	{
 		ISprite* s = m_sprites[i];
-		d2d::Vector scale = s->getScale();
+		Vector scale = s->getScale();
 		scale.x *= dx;
 		scale.y *= dy;
 		s->setScale(scale.x, scale.y);
 	}
+}
+
+Vector MultiSpritesPropertyImpl::GetOverallCenter() const
+{
+	if (m_sprites.empty()) {
+		return Vector(0, 0);
+	}
+
+	Vector center(0, 0);
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		center += m_sprites[i]->getPosition();
+	}
+	center /= m_sprites.size();
+	return center;
 }
 
 }

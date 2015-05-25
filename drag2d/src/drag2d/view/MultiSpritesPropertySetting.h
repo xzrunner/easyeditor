@@ -31,6 +31,9 @@ protected:
 protected:
 	MultiSpritesPropertyImpl* m_impl;
 
+private:
+	bool m_overall;
+
 }; // MultiSpritesPropertySetting
 
 }

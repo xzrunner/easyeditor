@@ -13,6 +13,7 @@ namespace d2d
 MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanel* editPanel, const std::vector<ISprite*>& sprites)
 	: IPropertySetting(editPanel, wxT("MultiSprites"))
 	, m_impl(new MultiSpritesPropertyImpl(sprites))
+	, m_overall(false)
 {
 }
 
@@ -65,8 +66,6 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 	{
 		
 	}
-
-
 	// position
 	else if (name == wxT("Align"))
 	{
@@ -85,22 +84,57 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 		m_impl->SetPosY(wxANY_AS(value, float));
 	}
 	// change
-	else if (name == wxT("Pos"))
+	else if (name == wxT("dPos"))
 	{
 		double dx, dy;
 		splitString(value, &dx, &dy);
 		m_impl->OnPosChange(dx, dy);
 	}
-	else if (name == wxT("Angle"))
+	else if (name == wxT("dAngle"))
 	{
 		float angle = wxANY_AS(value, float) * TRANS_DEG_TO_RAD;
 		m_impl->OnAngleChange(angle);
 	}
-	else if (name == wxT("Scale"))
+	else if (name == wxT("dScale"))
 	{
 		double dx, dy;
 		splitString(value, &dx, &dy);
 		m_impl->OnScaleChange(dx, dy);
+	}
+	// geometry
+	else if (name == wxT("Overall"))
+	{
+		m_overall = wxANY_AS(value, bool);
+	}
+	else if (name == "Angle")
+	{
+		float angle = wxANY_AS(value, float) * TRANS_DEG_TO_RAD;
+		m_impl->SetAngle(m_overall, angle);
+	}
+	else if (name == "Scale.X")
+	{
+		m_impl->SetScaleX(m_overall, wxANY_AS(value, float));
+	}
+	else if (name == "Scale.Y")
+	{
+		m_impl->SetScaleY(m_overall, wxANY_AS(value, float));
+	}
+	else if (name == "Mirror.Horizontal")
+	{
+		m_impl->SetMirrorX(m_overall, wxANY_AS(value, bool));
+	}
+	else if (name == "Mirror.Vertical")
+	{
+		m_impl->SetMirrorY(m_overall, wxANY_AS(value, bool));
+	}
+	// edit
+	else if (name == "Visible")
+	{
+		m_impl->SetVisible(wxANY_AS(value, bool));
+	}
+	else if (name == "Editable")
+	{
+		m_impl->SetEditable(wxANY_AS(value, bool));
 	}
 
 	m_editPanel->Refresh();
@@ -131,13 +165,22 @@ void MultiSpritesPropertySetting::enablePropertyGrid(PropertySettingPanel* panel
 	pg->GetProperty(wxT("All Pos.X"))->Enable(bEnable);
 	pg->GetProperty(wxT("All Pos.Y"))->Enable(bEnable);
 
-	pg->GetProperty(wxT("Pos"))->Enable(bEnable);
-	pg->GetProperty(wxT("Pos.dx"))->Enable(bEnable);
-	pg->GetProperty(wxT("Pos.dy"))->Enable(bEnable);
+	pg->GetProperty(wxT("dPos"))->Enable(bEnable);
+	pg->GetProperty(wxT("dPos.dx"))->Enable(bEnable);
+	pg->GetProperty(wxT("dPos.dy"))->Enable(bEnable);
+	pg->GetProperty(wxT("dAngle"))->Enable(bEnable);
+	pg->GetProperty(wxT("dScale"))->Enable(bEnable);
+	pg->GetProperty(wxT("dScale.dx"))->Enable(bEnable);
+	pg->GetProperty(wxT("dScale.dy"))->Enable(bEnable);
+
 	pg->GetProperty(wxT("Angle"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale.dx"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale.dy"))->Enable(bEnable);
+	pg->GetProperty(wxT("Scale.X"))->Enable(bEnable);
+	pg->GetProperty(wxT("Scale.Y"))->Enable(bEnable);
+	pg->GetProperty(wxT("Mirror.Horizontal"))->Enable(bEnable);
+	pg->GetProperty(wxT("Mirror.Vertical"))->Enable(bEnable);
+
+	pg->GetProperty(wxT("Visible"))->Enable(bEnable);
+	pg->GetProperty(wxT("Editable"))->Enable(bEnable);
 }
 
 void MultiSpritesPropertySetting::updateProperties(wxPropertyGrid* pg)
@@ -159,11 +202,21 @@ void MultiSpritesPropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("All Pos.X"))->SetValue(pos.x);
 	pg->GetProperty(wxT("All Pos.Y"))->SetValue(pos.y);
 
-	pg->GetProperty(wxT("Pos.dx"))->SetValue(0);
-	pg->GetProperty(wxT("Pos.dy"))->SetValue(0);
-	pg->GetProperty(wxT("Angle"))->SetValue(0);
-	pg->GetProperty(wxT("Scale.dx"))->SetValue(1);
-	pg->GetProperty(wxT("Scale.dy"))->SetValue(1);
+	pg->GetProperty(wxT("dPos.dx"))->SetValue(0);
+	pg->GetProperty(wxT("dPos.dy"))->SetValue(0);
+	pg->GetProperty(wxT("dAngle"))->SetValue(0);
+	pg->GetProperty(wxT("dScale.dx"))->SetValue(1);
+	pg->GetProperty(wxT("dScale.dy"))->SetValue(1);
+
+	pg->GetProperty(wxT("Angle"))->SetValue(m_impl->GetAngle());
+	Vector scale = m_impl->GetScale();
+	pg->GetProperty(wxT("Scale.X"))->SetValue(scale.x);
+	pg->GetProperty(wxT("Scale.Y"))->SetValue(scale.y);
+	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(m_impl->GetMirrorX());
+	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(m_impl->GetMirrorY());
+
+	pg->GetProperty(wxT("Visible"))->SetValue(m_impl->GetVisible());
+	pg->GetProperty(wxT("Editable"))->SetValue(m_impl->GetEditable());
 }
 
 void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
@@ -217,12 +270,12 @@ void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxEnumProperty(wxT("Center"), wxPG_LABEL, MultiSpritesPropertyImpl::CENTER_LABELS));
 
 	Vector pos = m_impl->GetPosition();
-	wxPGProperty* allPosProp = pg->Append(new wxStringProperty(wxT("All Pos"), wxPG_LABEL, wxT("<composed>")));
-	allPosProp->SetExpanded(false);
-	pg->AppendIn(allPosProp, new wxFloatProperty(wxT("X"), wxPG_LABEL, pos.x));
+	wxPGProperty* all_pos_prop = pg->Append(new wxStringProperty(wxT("All Pos"), wxPG_LABEL, wxT("<composed>")));
+	all_pos_prop->SetExpanded(false);
+	pg->AppendIn(all_pos_prop, new wxFloatProperty(wxT("X"), wxPG_LABEL, pos.x));
 	pg->SetPropertyAttribute(wxT("All Pos.X"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("All Pos.X"), "Precision", 1);
-	pg->AppendIn(allPosProp, new wxFloatProperty(wxT("Y"), wxPG_LABEL, pos.y));
+	pg->AppendIn(all_pos_prop, new wxFloatProperty(wxT("Y"), wxPG_LABEL, pos.y));
 	pg->SetPropertyAttribute(wxT("All Pos.Y"), wxPG_ATTR_UNITS, wxT("pixels"));
 	pg->SetPropertyAttribute(wxT("All Pos.Y"), "Precision", 1);
 
@@ -230,27 +283,64 @@ void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxPropertyCategory("CHANGE", wxPG_LABEL));
 
-	wxPGProperty* posProp = pg->Append(new wxStringProperty(wxT("Pos"), wxPG_LABEL, wxT("<composed>")));
-	posProp->SetExpanded(false);
-	pg->AppendIn(posProp, new wxFloatProperty(wxT("dx"), wxPG_LABEL, 0));
-	pg->SetPropertyAttribute(wxT("Pos.dx"), wxPG_ATTR_UNITS, wxT("pixels"));
-	pg->SetPropertyAttribute(wxT("Pos.dx"), "Precision", 1);
-	pg->AppendIn(posProp, new wxFloatProperty(wxT("dy"), wxPG_LABEL, 0));
-	pg->SetPropertyAttribute(wxT("Pos.dy"), wxPG_ATTR_UNITS, wxT("pixels"));
-	pg->SetPropertyAttribute(wxT("Pos.dy"), "Precision", 1);
+	wxPGProperty* dpos_prop = pg->Append(new wxStringProperty(wxT("dPos"), wxPG_LABEL, wxT("<composed>")));
+	dpos_prop->SetExpanded(false);
+	pg->AppendIn(dpos_prop, new wxFloatProperty(wxT("dx"), wxPG_LABEL, 0));
+	pg->SetPropertyAttribute(wxT("dPos.dx"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("dPos.dx"), "Precision", 1);
+	pg->AppendIn(dpos_prop, new wxFloatProperty(wxT("dy"), wxPG_LABEL, 0));
+	pg->SetPropertyAttribute(wxT("dPos.dy"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("dPos.dy"), "Precision", 1);
 
-	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, 0));
+	pg->Append(new wxFloatProperty(wxT("dAngle"), wxPG_LABEL, 0));
+	pg->SetPropertyAttribute(wxT("dAngle"), wxPG_ATTR_UNITS, wxT("deg"));
+	pg->SetPropertyAttribute(wxT("dAngle"), "Precision", 1);
+
+	wxPGProperty* dscale_prop = pg->Append(new wxStringProperty(wxT("dScale"), wxPG_LABEL, wxT("<composed>")));
+	dscale_prop->SetExpanded(false);
+	pg->AppendIn(dscale_prop, new wxFloatProperty(wxT("dx"), wxPG_LABEL, 1));
+	pg->SetPropertyAttribute(wxT("dScale.dx"), wxPG_ATTR_UNITS, wxT("multiple"));
+	pg->SetPropertyAttribute(wxT("dScale.dx"), "Precision", 2);
+	pg->AppendIn(dscale_prop, new wxFloatProperty(wxT("dy"), wxPG_LABEL, 1));
+	pg->SetPropertyAttribute(wxT("dScale.dy"), wxPG_ATTR_UNITS, wxT("multiple"));
+	pg->SetPropertyAttribute(wxT("dScale.dy"), "Precision", 2);
+
+	// geometry
+
+	pg->Append(new wxPropertyCategory("GEOMETRY", wxPG_LABEL));
+
+	pg->Append(new wxBoolProperty("Overall", wxPG_LABEL, false));
+	pg->SetPropertyAttribute("Overall", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+	pg->SetPropertyAttribute("Overall", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxFloatProperty(wxT("Angle"), wxPG_LABEL, m_impl->GetAngle() * TRANS_RAD_TO_DEG));
 	pg->SetPropertyAttribute(wxT("Angle"), wxPG_ATTR_UNITS, wxT("deg"));
 	pg->SetPropertyAttribute(wxT("Angle"), "Precision", 1);
 
-	wxPGProperty* scaleProp = pg->Append(new wxStringProperty(wxT("Scale"), wxPG_LABEL, wxT("<composed>")));
-	scaleProp->SetExpanded(false);
-	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("dx"), wxPG_LABEL, 1));
-	pg->SetPropertyAttribute(wxT("Scale.dx"), wxPG_ATTR_UNITS, wxT("multiple"));
-	pg->SetPropertyAttribute(wxT("Scale.dx"), "Precision", 2);
-	pg->AppendIn(scaleProp, new wxFloatProperty(wxT("dy"), wxPG_LABEL, 1));
-	pg->SetPropertyAttribute(wxT("Scale.dy"), wxPG_ATTR_UNITS, wxT("multiple"));
-	pg->SetPropertyAttribute(wxT("Scale.dy"), "Precision", 2);
+	wxPGProperty* scale_prop = pg->Append(new wxStringProperty(wxT("Scale"), wxPG_LABEL, wxT("<composed>")));
+	scale_prop->SetExpanded(false);
+	pg->AppendIn(scale_prop, new wxFloatProperty(wxT("X"), wxPG_LABEL, m_impl->GetScale().x));
+	pg->SetPropertyAttribute(wxT("Scale.X"), wxPG_ATTR_UNITS, wxT("multiple"));
+	pg->SetPropertyAttribute(wxT("Scale.X"), "Precision", 2);
+	pg->AppendIn(scale_prop, new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_impl->GetScale().y));
+	pg->SetPropertyAttribute(wxT("Scale.Y"), wxPG_ATTR_UNITS, wxT("multiple"));
+	pg->SetPropertyAttribute(wxT("Scale.Y"), "Precision", 2);
+
+	wxPGProperty* mirror_prop = pg->Append(new wxStringProperty(wxT("Mirror"), wxPG_LABEL, wxT("<composed>")));
+	mirror_prop->SetExpanded(false);
+	pg->AppendIn(mirror_prop, new wxBoolProperty(wxT("Horizontal"), wxPG_LABEL, m_impl->GetMirrorX()));
+	pg->SetPropertyAttribute("Mirror.Horizontal", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+	pg->AppendIn(mirror_prop, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, m_impl->GetMirrorY()));
+	pg->SetPropertyAttribute("Mirror.Vertical", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	// edit
+
+	pg->Append(new wxPropertyCategory("EDIT", wxPG_LABEL));
+
+	pg->Append(new wxBoolProperty("Visible", wxPG_LABEL, m_impl->GetVisible()));
+	pg->SetPropertyAttribute("Visible", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+	pg->Append(new wxBoolProperty("Editable", wxPG_LABEL, m_impl->GetEditable()));
+	pg->SetPropertyAttribute("Editable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 
 } // d2d

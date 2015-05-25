@@ -32,6 +32,12 @@ public:
 	Colorf GetTransColorR() const;
 	Colorf GetTransColorG() const;
 	Colorf GetTransColorB() const;
+	float GetAngle() const;
+	Vector GetScale() const;
+	bool GetMirrorX() const;
+	bool GetMirrorY() const;
+	bool GetVisible() const;
+	bool GetEditable() const;
 
 	void SetTag(const wxString& tag);
 	void SetClip(int clip);
@@ -40,6 +46,13 @@ public:
 	void SetColorMul(const Colorf& col);
 	void SetColorAdd(const Colorf& col);
 	void SetColorAlpha(float alpha);
+	void SetAngle(bool overall, float angle);
+	void SetScaleX(bool overall, float s);
+	void SetScaleY(bool overall, float s);
+	void SetMirrorX(bool overall, bool mirror);
+	void SetMirrorY(bool overall, bool mirror);
+	void SetVisible(bool visible);
+	void SetEditable(bool editable);
 
 	void OnAlign(int align);
 	void OnCenter(int center);
@@ -47,6 +60,8 @@ public:
 	void OnPosChange(float dx, float dy);
 	void OnAngleChange(float angle);
 	void OnScaleChange(float dx, float dy);
+
+	Vector GetOverallCenter() const;
 
 private:
 	enum Bool3Type

@@ -272,6 +272,7 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	pg->Append(new wxStringProperty("Tag", wxPG_LABEL, spr->tag));
 
 	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->clip));
+	pg->SetPropertyAttribute("Clip", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	wxPGProperty* colProp = pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, wxT("<composed>")));
 	wxColour mul_col = wxColour(spr->multiCol.r*255, spr->multiCol.g*255, spr->multiCol.b*255, spr->multiCol.a*255);
@@ -363,11 +364,15 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	bool xMirror, yMirror;
 	spr->getMirror(xMirror, yMirror);
 	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Horizontal"), wxPG_LABEL, xMirror));
+	pg->SetPropertyAttribute("Mirror.Horizontal", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, yMirror));
+	pg->SetPropertyAttribute("Mirror.Vertical", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 	pg->Append(new wxPropertyCategory("EDIT", wxPG_LABEL));
 	pg->Append(new wxBoolProperty("Visiable", wxPG_LABEL, spr->visiable));
+	pg->SetPropertyAttribute("Visiable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->Append(new wxBoolProperty("Editable", wxPG_LABEL, spr->editable));
+	pg->SetPropertyAttribute("Editable", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 }
 
 ISprite* SpritePropertySetting::GetSprite()

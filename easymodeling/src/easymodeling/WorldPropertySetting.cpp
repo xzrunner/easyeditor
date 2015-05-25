@@ -40,9 +40,16 @@ void WorldPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
 		pg->Append(new wxFloatProperty(wxT("Gravity Y"), wxPG_LABEL, world->gravity.y));
 
 		pg->Append(new wxBoolProperty(wxT("AllowSleep"), wxPG_LABEL, world->allowSleep));
+		pg->SetPropertyAttribute("AllowSleep", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
 		pg->Append(new wxBoolProperty(wxT("WarmStarting"), wxPG_LABEL, world->warmStarting));
+		pg->SetPropertyAttribute("WarmStarting", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
 		pg->Append(new wxBoolProperty(wxT("ContinuousPhysics"), wxPG_LABEL, world->continuousPhysics));
+		pg->SetPropertyAttribute("ContinuousPhysics", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
 		pg->Append(new wxBoolProperty(wxT("SubStepping"), wxPG_LABEL, world->subStepping));
+		pg->SetPropertyAttribute("SubStepping", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
 		pg->Append(new wxIntProperty(wxT("VelocityIterations"), wxPG_LABEL, world->velocityIterations));
 		pg->Append(new wxIntProperty(wxT("PositionIterations"), wxPG_LABEL, world->positionIterations));

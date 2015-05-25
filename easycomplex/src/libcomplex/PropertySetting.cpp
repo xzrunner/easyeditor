@@ -174,8 +174,8 @@ namespace ecomplex
 		pg->AppendIn(cbProp, new wxIntProperty(wxT("ymin"), wxPG_LABEL, 0));
 		pg->AppendIn(cbProp, new wxIntProperty(wxT("ymax"), wxPG_LABEL, 0));
 
-		
 		pg->Append(new wxBoolProperty(wxT("Cache"), wxPG_LABEL, false));
+		pg->SetPropertyAttribute("Cache", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	}
 
 	void PropertySetting::initEachGroup(wxPropertyGrid* pg)
