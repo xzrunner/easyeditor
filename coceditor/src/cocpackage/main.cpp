@@ -7,6 +7,7 @@
 #include <easymesh.h>
 #include <easyterrain2d.h>
 #include <easytexture.h>
+#include <easyicon.h>
 
 #define CHARACTER
 
@@ -35,6 +36,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(etexture::FILE_TAG, &etexture::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(etexture::FILE_TAG, &etexture::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eicon::FILE_TAG, &eicon::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eicon::FILE_TAG, &eicon::Sprite::Create);
 }
 
 void LoadAllFilesSorted(const std::string& dir, std::set<std::string>& files_sorted)

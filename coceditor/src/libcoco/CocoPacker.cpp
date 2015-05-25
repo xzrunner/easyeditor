@@ -1152,9 +1152,9 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
 
 	int frame = 1;
-	if (ocean->GetWaveSpeed() != 0) {
-		frame = std::floor(d2d::PI * 2 / ocean->GetWaveSpeed() * 30);
-	}
+// 	if (ocean->GetWaveSpeed() != 0) {
+// 		frame = std::floor(d2d::PI * 2 / ocean->GetWaveSpeed() * 30);
+// 	}
 
 	std::vector<int> frames_count;
 	for (int i = 0; i < frame; ++i)
