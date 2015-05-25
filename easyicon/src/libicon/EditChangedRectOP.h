@@ -18,7 +18,6 @@ public:
 private:
 	StagePanel* m_stage;
 
-
 }; // EditChangedRectOP
 
 }

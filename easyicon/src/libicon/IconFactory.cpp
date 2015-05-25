@@ -3,6 +3,7 @@
 
 #include "RectIcon.h"
 #include "ChangedRectIcon.h"
+#include "ChangedSectorIcon.h"
 
 namespace eicon
 {
@@ -20,6 +21,9 @@ Icon* IconFactory::CreateIconFromFile(const Json::Value& value)
 		break;
 	case IT_CHANGED_RECT:
 		icon = new ChangedRectIcon;
+		break;
+	case IT_CHANGED_SECTOR:
+		icon = new ChangedSectorIcon;
 		break;
 	}
 

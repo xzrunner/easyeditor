@@ -10,7 +10,8 @@ enum IconType
 {
 	IT_UNKNOWN = 0,
 	IT_RECT,
-	IT_CHANGED_RECT
+	IT_CHANGED_RECT,
+	IT_CHANGED_SECTOR,
 
 }; // IconType
 

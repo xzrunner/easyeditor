@@ -46,14 +46,7 @@ const Symbol& Sprite::getSymbol() const
 
 void Sprite::setSymbol(d2d::ISymbol* symbol)
 {
-	Symbol* complex = dynamic_cast<Symbol*>(symbol);
-	if (m_symbol != symbol && complex)
-	{
-		m_symbol->Release();
-		symbol->Retain();
-
-		m_symbol = complex;
-	}
+	d2d::obj_assign((d2d::Object*&)m_symbol, symbol);
 }
 
 void Sprite::load(const Json::Value& val)

@@ -20,6 +20,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 void StageCanvas::onDraw()
 {
 	Sprite sprite;
+	sprite.setSymbol(&m_stage->GetSymbol());
 	sprite.SetProcess(0.5f);
 
 	m_stage->GetSymbol().draw(d2d::Matrix(), d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0),

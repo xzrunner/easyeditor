@@ -309,6 +309,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\libicon\EditChangedSectorOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libicon\EditChangedSectorOP.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libicon\EditRectOP.cpp"
 				>
 			</File>

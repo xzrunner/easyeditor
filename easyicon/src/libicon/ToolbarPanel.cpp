@@ -3,6 +3,7 @@
 
 #include "EditRectOP.h"
 #include "EditChangedRectOP.h"
+#include "EditChangedSectorOP.h"
 
 namespace eicon
 {
@@ -22,6 +23,12 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
  		addChild(new d2d::UniversalCMPT(this, "可变的矩形", stage, op));
  		stage->setEditOP(op);
  	}
+	// Changed Sector
+	{
+		d2d::AbstractEditOP* op = new EditChangedSectorOP(stage);
+		addChild(new d2d::UniversalCMPT(this, "可变的扇形", stage, op));
+		stage->setEditOP(op);
+	}
 
 	SetSizer(initLayout());	
 }
