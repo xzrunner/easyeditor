@@ -4,7 +4,7 @@
 
 #include <queue>
 
-namespace escale9 { class Sprite; }
+namespace escale9 { class Symbol; }
 
 namespace libcoco
 {
@@ -27,7 +27,7 @@ private:
 	bool IsSymbolPrepared(const d2d::ISprite* sprite) const;
 	bool IsSymbolPrepared(const d2d::ISymbol* symbol) const;
 
-	void PrepareScale9(std::queue<d2d::ISprite*>& buffer, const escale9::Sprite* scale9);
+	void PrepareScale9(std::queue<const d2d::ISymbol*>& buffer, const escale9::Symbol* scale9);
 
 private:
 //	std::set<const d2d::ISymbol*, d2d::SymbolCmp> m_unique;

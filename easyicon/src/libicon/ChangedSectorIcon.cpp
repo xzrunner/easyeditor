@@ -15,25 +15,8 @@ void ChangedSectorIcon::Draw(const d2d::Matrix& mt, float process) const
 		return;
 	}
 
-	d2d::Vector region[4];
-	region[0].set(0, 0);
-	region[1].set(0, 1);
-	
-	float angle = m_min + (m_max - m_min) * process;
-	float tan_val = std::tan(angle);
-
-	float w = m_img->clipWidth(),
-		h = m_img->clipHeight();
-	float x = h / tan_val;
-	if (x < w) {
-		region[2].set(x / w, 1.0f);
-		region[3] = region[2];
-	} else {
-		float y = w * tan_val;
-		assert(y <= h);
-		region[2].set(1, 1);
-		region[3].set(1, y / h);
-	}
+ 	d2d::Vector region[4];
+	GetTexcoords4(region, process);
 
 	Icon::Draw(mt, region);
 }
@@ -55,9 +38,30 @@ void ChangedSectorIcon::GetRegion(float process, d2d::Rect& region) const
 	region = m_img->getRegion();
 }
 
-void ChangedSectorIcon::SetRegion(float angle_min, float angle_max)
+void ChangedSectorIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
 {
-	
+	tex4[0].set(0, 0);
+	tex4[1].set(0, 1);
+
+	float angle = m_min + (m_max - m_min) * process;
+	float tan_val = std::tan(angle);
+
+	float w = m_img->clipWidth(),
+		h = m_img->clipHeight();
+	float x = h / tan_val;
+	if (x < w) {
+		tex4[2].set(x / w, 1.0f);
+		tex4[3] = tex4[2];
+	} else {
+		float y = w * tan_val;
+		assert(y <= h);
+		tex4[2].set(1, 1);
+		tex4[3].set(1, y / h);
+	}
+}
+
+void ChangedSectorIcon::SetRegion(float angle_min, float angle_max)
+{	
 }
 
 }

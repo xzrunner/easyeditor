@@ -12,6 +12,7 @@ namespace escale9 { class Symbol; }
 namespace emesh { class Symbol; class Sprite; }
 namespace eterrain2d { class Symbol; class Sprite; }
 namespace etexture { class Symbol; class Sprite; }
+namespace eicon { class Symbol; class Sprite; }
 namespace epbin { class ImageIDer; }
 
 namespace libcoco
@@ -45,6 +46,8 @@ private:
 
 	void ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc = e_null, PicFixType tscreen = e_null);
 	void ParserPicture(const d2d::ImageSymbol* symbol, PicFixType tsrc = e_null);
+	int ParserIcon(const eicon::Sprite* sprite);
+	void ParserIcon(const eicon::Symbol* symbol, float process, int id);
 	void ParserComplex(const ecomplex::Symbol* symbol);
 	void ParserAnimation(const libanim::Symbol* symbol);
 	void ParserScale9(const escale9::Symbol* symbol);
@@ -62,8 +65,8 @@ private:
 		std::vector<std::pair<int, std::string> >& order);
 	void ParserSpriteForFrame(const d2d::ISprite* sprite, int index,
 		const std::vector<int>& ids, const std::vector<std::pair<int, std::string> >& order);
-	void ParserSpriteForFrame(const d2d::ISprite* sprite, 
-		const std::vector<std::pair<int, std::string> >& order);
+	void ParserSpriteForFrame(const d2d::ISprite* sprite, const std::vector<std::pair<int, std::string> >& order,
+		const std::map<int, int>& map_id2idx);
 	void ParserSpriteForFrame(const d2d::ISprite* sprite, int id, bool forceMat);
 	void ParserImageForFrame(const d2d::ISprite* sprite, int id);
 	void ParserFontForFrame(const d2d::FontSprite* font, int id);
@@ -71,6 +74,8 @@ private:
 	void TransToMat(const d2d::ISprite* sprite, float mat[6], bool force = false) const;
 
 	void GetColorAssignParams(const d2d::ISprite* sprite, std::vector<std::string>& params) const;
+
+	int QueryIconID(const eicon::Sprite* icon) const;
 
 private:
 	ebuilder::CodeGenerator* m_gen;
@@ -90,6 +95,8 @@ private:
 		int id;
 	};
 	std::map<const d2d::ISymbol*, std::vector<SpriteID> > m_map_symbol2ids;
+
+	std::map<const eicon::Symbol*, std::map<float, int> > m_map_icon2ids;
 
 	epbin::ImageIDer* m_img_ider;
 

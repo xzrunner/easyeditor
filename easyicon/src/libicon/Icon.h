@@ -21,6 +21,7 @@ public:
 	virtual void StoreToFile(Json::Value& value) const = 0;
 
 	virtual void GetRegion(float process, d2d::Rect& region) const = 0;
+	virtual void GetTexcoords4(d2d::Vector tex4[4], float process) const = 0;
 
 	void ReloadTexture() const;
 

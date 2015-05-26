@@ -27,6 +27,25 @@ void RectIcon::StoreToFile(Json::Value& value) const
 	value["ymax"] = m_max.y;
 }
 
+void RectIcon::GetRegion(float process, d2d::Rect& region) const
+{
+	if (!m_img) {
+		return;
+	}
+
+	float xlen = m_img->originWidth();
+	region.xMin = xlen * (m_min.x - 0.5f);
+	region.xMax = xlen * (m_max.x - 0.5f);
+
+	float ylen = m_img->originHeight();
+	region.yMin = ylen * (m_min.y - 0.5f);
+	region.yMax = ylen * (m_max.y - 0.5f);	
+}
+
+void RectIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
+{
+}
+
 void RectIcon::SetHoriRegion(float xmin, float xmax)
 {
 	m_min.x = xmin;
@@ -49,21 +68,6 @@ void RectIcon::SetVertRegion(float ymin, float ymax)
 // 		m_region.yMin = ylen * (m_min.y - 0.5f);
 // 		m_region.yMax = ylen * (m_max.y - 0.5f);	
 // 	}
-}
-
-void RectIcon::GetRegion(float process, d2d::Rect& region) const
-{
-	if (!m_img) {
-		return;
-	}
-
-	float xlen = m_img->originWidth();
-	region.xMin = xlen * (m_min.x - 0.5f);
-	region.xMax = xlen * (m_max.x - 0.5f);
-
-	float ylen = m_img->originHeight();
-	region.yMin = ylen * (m_min.y - 0.5f);
-	region.yMax = ylen * (m_max.y - 0.5f);	
 }
 
 }

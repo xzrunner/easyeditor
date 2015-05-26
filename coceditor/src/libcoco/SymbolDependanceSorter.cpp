@@ -28,17 +28,18 @@ void SymbolDependanceSorter::prepare(const std::vector<const d2d::ISprite*>& spr
 
 void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbols)
 {
-	for (size_t i = 0, n = symbols.size(); i < n; ++i)
+	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
 		m_unique.insert(symbols[i]);
+	}
 
-	std::queue<d2d::ISprite*> buffer;
+	std::queue<const d2d::ISymbol*> buffer;
 	for (size_t i = 0, n = symbols.size(); i < n; ++i)
 	{
 		const d2d::ISymbol* symbol = symbols[i];
 		if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
 			for (size_t j = 0, n = complex->m_sprites.size(); j < n; ++j)
-				buffer.push(complex->m_sprites[j]);
+				buffer.push(&complex->m_sprites[j]->getSymbol());
 		}
 		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol))
 		{
@@ -49,7 +50,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 				{
 					libanim::Symbol::Frame* frame = layer->frames[j];
 					for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-						buffer.push(frame->sprites[k]);
+						buffer.push(&frame->sprites[k]->getSymbol());
 				}
 			}
 		}
@@ -61,89 +62,79 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
  			case escale9::e_9Grid:
  				for (size_t i = 0; i < 3; ++i)
  					for (size_t j = 0; j < 3; ++j)
- 						buffer.push(data.GetSprite(i, j));
+ 						buffer.push(&data.GetSprite(i, j)->getSymbol());
  				break;
  			case escale9::e_9GridHollow:
  				for (size_t i = 0; i < 3; ++i) {
  					for (size_t j = 0; j < 3; ++j) {
  						if (i == 1 && j == 1) continue;
- 						buffer.push(data.GetSprite(i, j));
+ 						buffer.push(&data.GetSprite(i, j)->getSymbol());
  					}
  				}
  				break;
  			case escale9::e_3GridHor:
  				for (size_t i = 0; i < 3; ++i)
- 					buffer.push(data.GetSprite(1, i));
+ 					buffer.push(&data.GetSprite(1, i)->getSymbol());
  				break;
  			case escale9::e_3GridVer:
  				for (size_t i = 0; i < 3; ++i)
- 					buffer.push(data.GetSprite(i, 1));
+ 					buffer.push(&data.GetSprite(i, 1)->getSymbol());
  				break;
  			case escale9::e_6GridUpper:
  				for (size_t i = 1; i < 3; ++i)
  					for (size_t j = 0; j < 3; ++j)
- 						buffer.push(data.GetSprite(i, j));
+ 						buffer.push(&data.GetSprite(i, j)->getSymbol());
  				break;
  			}
-		}
-		else if (const eicon::Symbol* icon = dynamic_cast<const const eicon::Symbol*>(symbol))
-		{
-			wxString filepath = icon->GetIcon()->GetImage()->filepath();
-//			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-
-			// todo
-//			buffer.push(symbol);
 		}
 	}
 
 	while (!buffer.empty())
 	{
-		d2d::ISprite* sprite = buffer.front(); buffer.pop();
-		if (const d2d::ImageSprite* image = dynamic_cast<const d2d::ImageSprite*>(sprite))
+		const d2d::ISymbol* symbol = buffer.front(); buffer.pop();
+		if (const d2d::ImageSymbol* image = dynamic_cast<const d2d::ImageSymbol*>(symbol))
 		{
-			m_unique.insert(&sprite->getSymbol());
+			m_unique.insert(image);
 		}
-		else if (const d2d::FontSprite* font = dynamic_cast<const d2d::FontSprite*>(sprite))
+		else if (const d2d::FontBlankSymbol* font = dynamic_cast<const d2d::FontBlankSymbol*>(symbol))
 		{
-			m_unique.insert(&sprite->getSymbol());
+			m_unique.insert(font);
 		}
-		else if (const ecomplex::Sprite* complex = dynamic_cast<const ecomplex::Sprite*>(sprite))
+		else if (const ecomplex::Symbol* complex = dynamic_cast<const ecomplex::Symbol*>(symbol))
 		{
-			const ecomplex::Symbol& symbol = complex->getSymbol();
-			if (m_unique.find(&symbol) == m_unique.end())
+			if (m_unique.find(complex) == m_unique.end())
 			{
-				m_unique.insert(&symbol);
-				for (size_t i = 0, n = symbol.m_sprites.size(); i < n; ++i)
+				m_unique.insert(complex);
+				for (size_t i = 0, n = complex->m_sprites.size(); i < n; ++i)
 				{
-					d2d::ISprite* child = symbol.m_sprites[i];
-					buffer.push(child);
+					d2d::ISprite* child = complex->m_sprites[i];
+					buffer.push(&child->getSymbol());
 
 					// patch for scale9
-					if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(child)) {
+					if (const escale9::Symbol* scale9 = dynamic_cast<const escale9::Symbol*>(child)) {
 						PrepareScale9(buffer, scale9);
 					}
 				}
 			}
 		}
-		else if (const libanim::Sprite* anim = dynamic_cast<const libanim::Sprite*>(sprite))
+		else if (const libanim::Symbol* anim = dynamic_cast<const libanim::Symbol*>(symbol))
 		{
-			const libanim::Symbol& symbol = anim->getSymbol();
-			if (m_unique.find(&symbol) == m_unique.end())
+			if (m_unique.find(anim) == m_unique.end())
 			{
-				m_unique.insert(&symbol);
-				for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
+				m_unique.insert(anim);
+				for (size_t i = 0, n = anim->m_layers.size(); i < n; ++i)
 				{
-					libanim::Symbol::Layer* layer = symbol.m_layers[i];
+					libanim::Symbol::Layer* layer = anim->m_layers[i];
 					for (size_t j = 0, m = layer->frames.size(); j < m; ++j)
 					{
 						libanim::Symbol::Frame* frame = layer->frames[j];
 						for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
 						{
 							d2d::ISprite* child = frame->sprites[k];
-							buffer.push(child);
+							buffer.push(&child->getSymbol());
 
 							// patch for scale9
-							if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(child)) {
+							if (const escale9::Symbol* scale9 = dynamic_cast<const escale9::Symbol*>(&child->getSymbol())) {
 								PrepareScale9(buffer, scale9);
 							}
 						}
@@ -151,29 +142,28 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 				}
 			}
 		}
-		else if (const escale9::Sprite* scale9 = dynamic_cast<const escale9::Sprite*>(sprite))
+		else if (const escale9::Symbol* scale9 = dynamic_cast<const escale9::Symbol*>(symbol))
 		{
 			PrepareScale9(buffer, scale9);
 		}
-		else if (const emesh::Sprite* mesh = dynamic_cast<const emesh::Sprite*>(sprite))
+		else if (const emesh::Symbol* mesh = dynamic_cast<const emesh::Symbol*>(symbol))
 		{
-			m_unique.insert(&mesh->getSymbol());
+			m_unique.insert(mesh);
 		}
-		else if (const eterrain2d::Sprite* ocean = dynamic_cast<const eterrain2d::Sprite*>(sprite))
+		else if (const eterrain2d::Symbol* ocean = dynamic_cast<const eterrain2d::Symbol*>(symbol))
 		{
-			m_unique.insert(&ocean->getSymbol());
+			m_unique.insert(ocean);
 		}
-		else if (const etexture::Sprite* tex = dynamic_cast<const etexture::Sprite*>(sprite))
+		else if (const etexture::Symbol* tex = dynamic_cast<const etexture::Symbol*>(symbol))
 		{
-			m_unique.insert(&tex->getSymbol());
+			m_unique.insert(tex);
 		}
-		else if (const eicon::Sprite* icon = dynamic_cast<const eicon::Sprite*>(sprite))
+		else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(symbol))
 		{
-			//todo
-
-//			wxString filepath = icon->GetImage()->filepath();
-//			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);			
-//			m_unique.insert(symbol);
+			wxString filepath = icon->GetIcon()->GetImage()->filepath();
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			m_unique.insert(symbol);
+			m_unique.insert(icon);
 		}
 	}
 }
@@ -342,6 +332,10 @@ void SymbolDependanceSorter::sort()
  					m_unique.erase(itr);
  					break;
 				}
+
+// 				m_result.push_back(icon);
+// 				m_unique.erase(itr);
+// 				break;
 			}
 		}
 	}
@@ -362,41 +356,40 @@ bool SymbolDependanceSorter::IsSymbolPrepared(const d2d::ISymbol* symbol) const
 	return false;	
 }
 
-void SymbolDependanceSorter::PrepareScale9(std::queue<d2d::ISprite*>& buffer,
-										   const escale9::Sprite* scale9)
+void SymbolDependanceSorter::PrepareScale9(std::queue<const d2d::ISymbol*>& buffer,
+										   const escale9::Symbol* scale9)
 {
-	const escale9::Symbol& symbol = scale9->getSymbol();
-	if (m_unique.find(&symbol) == m_unique.end())
+	if (m_unique.find(scale9) == m_unique.end())
 	{
-		m_unique.insert(&symbol);
-		const escale9::Scale9Data& data = symbol.GetScale9Data();
+		m_unique.insert(scale9);
+		const escale9::Scale9Data& data = scale9->GetScale9Data();
 		switch (data.GetType())
 		{
 		case escale9::e_9Grid:
 			for (size_t i = 0; i < 3; ++i)
 				for (size_t j = 0; j < 3; ++j)
-					buffer.push(data.GetSprite(i, j));
+					buffer.push(&data.GetSprite(i, j)->getSymbol());
 			break;
 		case escale9::e_9GridHollow:
 			for (size_t i = 0; i < 3; ++i) {
 				for (size_t j = 0; j < 3; ++j) {
 					if (i == 1 && j == 1) continue;
-					buffer.push(data.GetSprite(i, j));
+					buffer.push(&data.GetSprite(i, j)->getSymbol());
 				}
 			}
 			break;
 		case escale9::e_3GridHor:
 			for (size_t i = 0; i < 3; ++i)
-				buffer.push(data.GetSprite(1, i));
+				buffer.push(&data.GetSprite(1, i)->getSymbol());
 			break;
 		case escale9::e_3GridVer:
 			for (size_t i = 0; i < 3; ++i)
-				buffer.push(data.GetSprite(i, 1));
+				buffer.push(&data.GetSprite(i, 1)->getSymbol());
 			break;
 		case escale9::e_6GridUpper:
 			for (size_t i = 1; i < 3; ++i)
 				for (size_t j = 0; j < 3; ++j)
-					buffer.push(data.GetSprite(i, j));
+					buffer.push(&data.GetSprite(i, j)->getSymbol());
 			break;
 		}
 	}
