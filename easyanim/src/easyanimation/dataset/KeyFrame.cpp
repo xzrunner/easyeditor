@@ -108,13 +108,15 @@ bool KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
 
 		if (up && i != n - 1) {
 			std::swap(m_sprites[i], m_sprites[i+1]);
+			m_ctrl->GetViewlist()->reorder(sprite, up);
+			return true;
 		} else if (!up && i != 0) {
 			std::swap(m_sprites[i], m_sprites[i-1]);
+			m_ctrl->GetViewlist()->reorder(sprite, up);
+			return true;
 		}
 
-		m_ctrl->GetViewlist()->reorder(sprite, up);
-
-		return true;
+		return false;
 	}
 
 	return false;
