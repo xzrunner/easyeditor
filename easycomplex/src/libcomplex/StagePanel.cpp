@@ -59,7 +59,9 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	d2d::SpritesPanelImpl::removeSprite(sprite);
 	m_viewlist->remove(sprite);
-	m_group_panel->Remove(sprite);
+	if (m_group_panel) {
+		m_group_panel->Remove(sprite);
+	}
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
