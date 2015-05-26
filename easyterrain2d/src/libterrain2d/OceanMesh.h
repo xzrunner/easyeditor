@@ -56,6 +56,9 @@ public:
 
 	const std::vector<MeshShape*>& GetMeshes() const { return m_grids; }
 
+	float GetTexcoordSpdAngle() const;
+	void Rotate(float angle);
+
 private:
 	void Clear();
 
@@ -71,7 +74,7 @@ private:
 	void UpdateBlend(float dt);
 
 private:
-	const libshape::PolygonShape* m_shape;
+	libshape::PolygonShape* m_shape;
 	const d2d::ImageSymbol *m_image0, *m_image1;
 
 	std::vector<MeshShape*> m_grids;

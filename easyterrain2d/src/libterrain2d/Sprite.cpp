@@ -17,6 +17,7 @@ Sprite::Sprite(const Sprite& s)
 Sprite::Sprite(Symbol* symbol)
 	: m_symbol(symbol)
 {
+	rotate(-m_symbol->GetOceanAngle());
 	m_symbol->Retain();
 	buildBounding();
 }
@@ -51,6 +52,12 @@ void Sprite::setSymbol(d2d::ISymbol* symbol)
 		m_symbol = mesh;
 		buildBounding();
 	}
+}
+
+void Sprite::load(const Json::Value& val)
+{
+	d2d::ISprite::load(val);
+	rotate(-m_symbol->GetOceanAngle());
 }
 
 void Sprite::buildBounding()

@@ -7,7 +7,7 @@ namespace eterrain2d
 
 OceanMesh::OceanMesh(const libshape::PolygonShape* shape, 
 					 const d2d::ImageSymbol* image)
-	 : m_shape(shape)
+	 : m_shape(shape->clone())
 	 , m_image0(image)
 	 , m_image1(NULL)
 	 , m_lock_bound(false)
@@ -34,6 +34,8 @@ OceanMesh::OceanMesh(const libshape::PolygonShape* shape,
 OceanMesh::~OceanMesh()
 {
 	Clear();
+
+	delete m_shape;
 }
 
 void OceanMesh::Build()
@@ -170,6 +172,28 @@ d2d::Rect OceanMesh::GetRegion() const
 		ret.combine(shape->GetRegion());
 	}
 	return ret;
+}
+
+float OceanMesh::GetTexcoordSpdAngle() const
+{
+	if (m_texcoords_spd.y == 0) {
+		return 0;
+	} else {
+		return atan(m_texcoords_spd.x / m_texcoords_spd.y);
+	}
+}
+
+void OceanMesh::Rotate(float angle)
+{
+	std::vector<d2d::Vector> vertices = m_shape->GetVertices();
+	for (int i = 0, n = vertices.size(); i < n; ++i) {
+		vertices[i] = d2d::Math::rotateVector(vertices[i], angle);
+	}
+	m_shape->Load(vertices);
+
+	m_texcoords_spd.y = sqrt(m_texcoords_spd.x * m_texcoords_spd.x 
+		+ m_texcoords_spd.y * m_texcoords_spd.y);
+	m_texcoords_spd.x = 0;
 }
 
 void OceanMesh::Clear()

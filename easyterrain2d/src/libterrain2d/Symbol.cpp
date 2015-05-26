@@ -8,12 +8,14 @@ namespace eterrain2d
 Symbol::Symbol()
 	: m_time(0)
 	, m_update(true)
+	, m_angle(0)
 {	
 }
 
 Symbol::Symbol(const Symbol& s)
 	: m_time(s.m_time)
 	, m_update(s.m_update)
+	, m_angle(0)
 {
 }
 
@@ -94,6 +96,9 @@ void Symbol::loadResources()
 	while (!ocean_val.isNull()) {
 		OceanMesh* ocean = FileIO::LoadOceanMesh(dir, ocean_val);
 		if (ocean) {
+			m_angle = ocean->GetTexcoordSpdAngle();
+			ocean->Rotate(m_angle);
+
 			m_oceans.push_back(ocean);
 // 			insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 // 			library->AddSymbol(const_cast<d2d::ImageSymbol*>(ocean->GetImage0()));

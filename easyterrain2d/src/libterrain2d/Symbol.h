@@ -38,6 +38,8 @@ public:
 
 	void SetUpdateOpen(bool open) { m_update = open; }
 
+	float GetOceanAngle() const { return m_angle; }
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
@@ -47,6 +49,8 @@ private:
 	bool m_update;
 
 	std::vector<OceanMesh*> m_oceans;
+
+	float m_angle;
 
 	mutable clock_t m_time;
 
