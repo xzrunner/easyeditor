@@ -1,7 +1,7 @@
 #ifndef _D2D_SELECTION_SET_H_
 #define _D2D_SELECTION_SET_H_
 
-#include <set>
+#include <vector>
 
 #include "common/Vector.h"
 #include "common/Object.h"
@@ -29,7 +29,7 @@ public:
 	void Traverse(IVisitor& visitor) const;
 
 protected:
-	std::set<T*> m_items;
+	std::vector<T*> m_items;
 
 }; // SelectionSet
 

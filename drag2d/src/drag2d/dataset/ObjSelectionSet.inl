@@ -13,7 +13,7 @@ inline ObjSelectionSet<T>::~ObjSelectionSet()
 template<class T>
 inline void ObjSelectionSet<T>::Clear()
 {
-	std::set<T*>::iterator itr = m_items.begin();
+	std::vector<T*>::iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr) {
 		(*itr)->Release();
 	}

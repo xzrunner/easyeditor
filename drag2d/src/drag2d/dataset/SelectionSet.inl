@@ -14,15 +14,19 @@ template<class T>
 inline void SelectionSet<T>::Add(T* sprite)
 {
 	if (sprite) {
-		m_items.insert(sprite);
+		m_items.push_back(sprite);
 	}
 }
 
 template<class T>
 inline void SelectionSet<T>::Remove(T* sprite)
 {
-	if (sprite) {
-		m_items.erase(sprite);
+	std::vector<T*>::iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr) {
+		if (*itr == sprite) {
+			m_items.erase(itr);
+			return;
+		}
 	}
 }
 
@@ -41,13 +45,18 @@ inline bool SelectionSet<T>::IsEmpty() const
 template<class T>
 inline bool SelectionSet<T>::IsExist(T* sprite) const
 {
-	return m_items.find(sprite) != m_items.end();
+	for (int i = 0, n = m_items.size(); i < n; ++i) {
+		if (m_items[i] == sprite) {
+			return true;
+		}
+	}
+	return false;
 }
 
 template<class T>
 inline void SelectionSet<T>::Traverse(IVisitor& visitor) const
 {
-	std::set<T*>::const_iterator itr = m_items.begin();
+	std::vector<T*>::const_iterator itr = m_items.begin();
 	for ( ; itr != m_items.end(); ++itr)
 	{
 		bool hasNext;
