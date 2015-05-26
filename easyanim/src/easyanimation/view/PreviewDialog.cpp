@@ -14,6 +14,9 @@ PreviewDialog::PreviewDialog(wxWindow* parent, Controller* ctrl)
 {
 	m_control.SetDt(1.0f / ctrl->fps);
 	initLayout();
+
+	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
+	m_stage->getCanvas()->setBgColor(col);
 }
 
 PreviewDialog::~PreviewDialog()
