@@ -2,6 +2,7 @@
 #include "FileIO.h"
 
 #include <easycomplex.h>
+#include <easycoco.h>
 
 namespace ecomplex
 {
@@ -30,20 +31,7 @@ void Task::load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 		FileIO::load(this, filepath);
-
-		//////////////////////////////////////////////////////////////////////////
-		// load group tree
-		Json::Value value;
-		Json::Reader reader;
-		std::locale::global(std::locale(""));
-		std::ifstream fin(filepath);
-		std::locale::global(std::locale("C"));
-		reader.parse(fin, value);
-		fin.close();
-
-		m_grouptree->LoadFromFile(value["group"]);
-		//////////////////////////////////////////////////////////////////////////
-
+		LoadGroupTree(filepath);
 		m_stage->getCanvas()->resetViewport();
 	}
 }
@@ -51,27 +39,7 @@ void Task::load(const char* filepath)
 void Task::store(const char* filepath) const
 {
 	FileIO::store(this, filepath);
-
-	//////////////////////////////////////////////////////////////////////////
-	// store group tree
-	Json::Value value;
-	Json::Reader reader;
-	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath);
-	std::locale::global(std::locale("C"));
-	reader.parse(fin, value);
-	fin.close();
-
-	m_grouptree->StoreToFile(value["group"]);
-
-	Json::StyledStreamWriter writer;
-	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath);
-	std::locale::global(std::locale("C"));
-	writer.write(fout, value);
-	fout.close();
-	//////////////////////////////////////////////////////////////////////////
-
+	StoreGroupTree(filepath);
 	m_stage->onSave();
 }
 
@@ -158,6 +126,44 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 	split->SplitHorizontally(m_viewlist, m_grouptree);
 
 	return split;
+}
+
+void Task::LoadGroupTree(const char* filepath)
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	m_grouptree->LoadFromFile(value["group"]);
+
+	std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
+	std::vector<d2d::ISprite*> others;
+	libcoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
+	m_grouptree->InitGroups(map_actions);
+}
+
+void Task::StoreGroupTree(const char* filepath) const
+{
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	m_grouptree->StoreToFile(value["group"]);
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath);
+	std::locale::global(std::locale("C"));
+	writer.write(fout, value);
+	fout.close();
 }
 
 }

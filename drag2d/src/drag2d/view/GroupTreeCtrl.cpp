@@ -119,6 +119,16 @@ void GroupTreeCtrl::Remove(ISprite* sprite)
 	Traverse(GroupTreeImpl::RemoveVisitor(this, sprite));
 }
 
+void GroupTreeCtrl::Visible(wxTreeItemId id, bool visible)
+{
+	Traverse(id, GroupTreeImpl::SetVisibleVisitor(this, visible));
+}
+
+void GroupTreeCtrl::Editable(wxTreeItemId id, bool editable)
+{
+	Traverse(id, GroupTreeImpl::SetEditableVisitor(this, editable));
+}
+
 wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
 {
 	wxTreeItemId id = AppendItem(parent, name, -1, -1, data);
@@ -202,12 +212,12 @@ void GroupTreeCtrl::OnMenuClear(wxCommandEvent& event)
 
 void GroupTreeCtrl::OnMenuVisible(wxCommandEvent& event)
 {
-	Traverse(GroupTreeImpl::VisibleVisitor(this));
+	Traverse(m_on_menu_id, GroupTreeImpl::VisibleVisitor(this));
 }
 
 void GroupTreeCtrl::OnMenuEditable(wxCommandEvent& event)
 {
-	Traverse(GroupTreeImpl::EditableVisitor(this));
+	Traverse(m_on_menu_id, GroupTreeImpl::EditableVisitor(this));
 }
 
 void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)

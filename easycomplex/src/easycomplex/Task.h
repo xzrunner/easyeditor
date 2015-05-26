@@ -33,6 +33,9 @@ private:
 	wxWindow* InitLayoutCenter(wxWindow* parent);
 	wxWindow* InitLayoutRight(wxWindow* parent);
 
+	void LoadGroupTree(const char* filepath);
+	void StoreGroupTree(const char* filepath) const;
+
 private:
 	wxWindow* m_root;
 

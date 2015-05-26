@@ -6,3 +6,5 @@
 
 #include "libcoco/CocoPacker.h"
 #include "libcoco/TextureMgr.h"
+
+#include "libcoco/Utility.h"

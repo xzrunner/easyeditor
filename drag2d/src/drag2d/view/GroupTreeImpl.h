@@ -65,6 +65,28 @@ public:
 		wxTreeCtrl* m_treectrl;
 	}; // EditableVisitor	
 
+	class SetVisibleVisitor : public IGroupTreeVisitor
+	{
+	public:
+		SetVisibleVisitor(wxTreeCtrl* treectrl, bool visible) 
+			: m_treectrl(treectrl), m_visible(visible) {}
+		virtual void VisitLeaf(wxTreeItemId id);
+	private:
+		wxTreeCtrl* m_treectrl;
+		bool m_visible;
+	}; // SetVisibleVisitor
+
+	class SetEditableVisitor : public IGroupTreeVisitor
+	{
+	public:
+		SetEditableVisitor(wxTreeCtrl* treectrl, bool editable) 
+			: m_treectrl(treectrl), m_editable(editable) {}
+		virtual void VisitLeaf(wxTreeItemId id);
+	private:
+		wxTreeCtrl* m_treectrl;
+		bool m_editable;
+	}; // SetEditableVisitor	
+
 	class StoreVisitor : public IGroupTreeVisitor
 	{
 	public:

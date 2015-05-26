@@ -147,6 +147,7 @@
 #include "common/SettingData.h"
 #include "common/const.h"
 #include "common/color_convert.h"
+#include "common/StringTools.h"
 
 #include "render/PrimitiveDraw.h"
 #include "render/DrawSelectedShapeVisitor.h"

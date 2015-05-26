@@ -38,6 +38,9 @@ public:
 
 	wxTreeItemId GetRootID() const { return m_root; }
 
+	void Visible(wxTreeItemId id, bool visible);
+	void Editable(wxTreeItemId id, bool editable);
+
 private:
 	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);
 

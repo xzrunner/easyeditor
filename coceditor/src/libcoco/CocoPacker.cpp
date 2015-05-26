@@ -1,4 +1,5 @@
 #include "CocoPacker.h"
+#include "Utility.h"
 
 #include <queue>
 
@@ -687,44 +688,7 @@ void CocoPacker::ParserComplex(const ecomplex::Symbol* symbol)
 	// children
 	std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
 	std::vector<d2d::ISprite*> others;
-	for (int i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-	{
-		d2d::ISprite* sprite = symbol->m_sprites[i];
-		if (sprite->tag.empty())
-			others.push_back(sprite);
-		else
-		{
-			std::vector<std::string> tags;
-
-			// split
-			char * cstr = new char [sprite->tag.length()+1];
-			std::strcpy(cstr, sprite->tag.c_str());
-			char * p = std::strtok(cstr,";");
-			while (p!=0)
-			{
-				tags.push_back(std::string(p));
-				p = strtok(NULL,";");
-			}
-			delete[] cstr;
-
-			for (int i = 0, n = tags.size(); i < n; ++i)
-			{
-				std::map<std::string, std::vector<d2d::ISprite*> >::iterator itr = 
-					map_actions.find(tags[i]);
-				if (itr == map_actions.end())
-				{
-					std::vector<d2d::ISprite*> sprites;
-					sprites.push_back(sprite);
-					map_actions.insert(std::make_pair(tags[i], sprites));
-				}
-				else
-				{
-					itr->second.push_back(sprite);
-				}
-			}
-		}
-	}
-
+	Utility::GroupSpritesFromTag(symbol->m_sprites, map_actions, others);
 	if (!map_actions.empty())
 	{
 		std::map<std::string, std::vector<d2d::ISprite*> >::iterator itr;

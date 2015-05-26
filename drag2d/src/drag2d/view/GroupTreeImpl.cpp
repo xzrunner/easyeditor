@@ -132,6 +132,42 @@ VisitLeaf(wxTreeItemId id)
 }
 
 //////////////////////////////////////////////////////////////////////////
+// class SetVisibleVisitor
+//////////////////////////////////////////////////////////////////////////
+
+void GroupTreeImpl::SetVisibleVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return;
+	}
+
+	if (data->m_sprite) {
+		data->m_sprite->visiable = m_visible;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class SetEditableVisitor
+//////////////////////////////////////////////////////////////////////////
+
+void GroupTreeImpl::SetEditableVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return;
+	}
+
+	if (data->m_sprite) {
+		data->m_sprite->editable = m_editable;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
 // class StoreVisitor
 //////////////////////////////////////////////////////////////////////////
 

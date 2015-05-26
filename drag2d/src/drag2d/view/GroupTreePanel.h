@@ -21,6 +21,8 @@ public:
 
 	void Remove(ISprite* sprite);
 
+	void InitGroups(const std::map<std::string, std::vector<d2d::ISprite*> >& groups);
+
 private:
 	void InitLayout();
 	

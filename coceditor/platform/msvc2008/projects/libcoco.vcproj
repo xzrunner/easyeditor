@@ -229,6 +229,14 @@
 			RelativePath="..\..\..\src\libcoco\SymbolDependanceSorter.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\Utility.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\src\libcoco\Utility.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -1425,6 +1425,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\StringTools.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\StringTools.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\tools.h"
 					>
 				</File>
