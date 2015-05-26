@@ -63,18 +63,21 @@ void LibraryPanel::loadFromSymbolMgr(const SymbolMgr& mgr)
 {
 	std::vector<ISymbol*> symbols;
 	mgr.traverse(FetchAllVisitor<ISymbol>(symbols));
-	for (size_t i = 0, n = symbols.size(); i < n; ++i)
+	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
+		LoadSymbol(symbols[i]);
+	}
+}
+
+void LibraryPanel::LoadSymbol(d2d::ISymbol* symbol)
+{
+	for (size_t j = 0, m = m_pages.size(); j < m; ++j)
 	{
-		ISymbol* symbol = symbols[i];
-		for (size_t j = 0, m = m_pages.size(); j < m; ++j)
+		ILibraryPage* page = m_pages[j];
+		if (page->isHandleSymbol(symbol))
 		{
-			ILibraryPage* page = m_pages[j];
-			if (page->isHandleSymbol(symbol))
-			{
-				symbol->RefreshThumbnail(symbol->getFilepath());
-				page->getList()->insert(symbol);
-				break;
-			}
+			symbol->RefreshThumbnail(symbol->getFilepath());
+			page->getList()->insert(symbol);
+			break;
 		}
 	}
 }

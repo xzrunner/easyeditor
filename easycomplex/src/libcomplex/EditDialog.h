@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_EDIT_DIALOG_H_
+#define _DRAG2D_EDIT_DIALOG_H_
 
 #include <drag2d.h>
 
@@ -6,6 +7,7 @@ namespace ecomplex
 {
 
 class Symbol;
+class StagePanel;
 
 class EditDialog : public wxDialog
 {
@@ -13,15 +15,20 @@ public:
 	EditDialog(wxWindow* parent, Symbol* symbol);
 
 private:
-	void initLayout();
+	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
-	void onCloseEvent(wxCloseEvent& event);
-	void onClose(bool force, int returncode);
+	void OnCloseEvent(wxCloseEvent& event);
+	void OnClose(bool force, int returncode);
 
-	void loadSymbolInfo();
+	void LoadSymbolInfo();
 
 private:
-	d2d::EditPanel* m_stage;
+	d2d::LibraryPanel* m_library;
+	d2d::PropertySettingPanel* m_property;
+	StagePanel* m_stage;
 	d2d::ViewlistPanel* m_viewlist;
 
 	Symbol* m_symbol;
@@ -32,3 +39,4 @@ private:
 
 }
 
+#endif // _DRAG2D_EDIT_DIALOG_H_

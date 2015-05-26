@@ -34,6 +34,7 @@ namespace d2d
 		ISymbol* getSymbol(int index = -1) const;
 
 		void loadFromSymbolMgr(const SymbolMgr& mgr);
+		void LoadSymbol(d2d::ISymbol* symbol);
 
 		void traverse(IVisitor& visitor) const;
 
