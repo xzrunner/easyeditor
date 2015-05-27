@@ -46,6 +46,7 @@ Image::Image(const uint8_t* pixel, int width, int height)
 
 Image::~Image()
 {
+	glDeleteTextures(1, &m_textureID);
 	ImageMgr::Instance()->removeItem(m_filepath);
 	delete m_pixels;
 }
