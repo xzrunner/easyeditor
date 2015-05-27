@@ -45,8 +45,9 @@ bool TweenUtility::IsTweenMatched(const d2d::ISprite* s0, const d2d::ISprite* s1
 	} else if (s0->name.empty() && s1->name.empty()) {
 		//		return s0->getSymbol().getFilepath() == s1->getSymbol().getFilepath();
 		return false;
+	} else {
+		return s0->name == s1->name;
 	}
-	return false;
 }
 
 void TweenUtility::GetTweenSprite(d2d::ISprite* start, d2d::ISprite* end, d2d::ISprite* tween, float process)
