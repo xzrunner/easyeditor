@@ -25,14 +25,19 @@ ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanel* editPanel,
 
 void ViewlistPanel::remove(ISprite* sprite)
 {
-	size_t i = 0;
-	for (size_t n = m_sprites.size(); i < n; ++i)
-		if (m_sprites[i] == sprite)
+	std::vector<ISprite*>::iterator itr = m_sprites.begin();
+	int idx = 0;
+	for (; itr != m_sprites.end(); ++itr, ++idx) {
+		if (*itr == sprite) {
 			break;
-	assert(i != m_sprites.size());
+		}
+	}
+	if (itr == m_sprites.end()) {
+		return;
+	}
 
-	m_list->remove(i);
-	m_sprites.erase(m_sprites.begin() + i);
+	m_list->remove(idx);
+	m_sprites.erase(itr);
 }
 
 void ViewlistPanel::insert(ISprite* sprite)
