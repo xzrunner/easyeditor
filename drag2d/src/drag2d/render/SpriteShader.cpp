@@ -365,6 +365,38 @@ void SpriteShader::LoadShader()
 		"}  \n"
 		;
 
+// 	static const char* fs =
+// 		FLOAT_PRECISION
+// 		"varying vec4 v_fragmentColor; \n"
+// 		"varying vec4 v_fragmentAddi; \n"
+// 		"varying vec4 v_r_trans; \n"
+// 		"varying vec4 v_g_trans; \n"
+// 		"varying vec4 v_b_trans; \n"
+// 		"varying vec2 v_texcoord;  \n"
+// 		"uniform sampler2D texture0;  \n"
+// 		"\n"
+// 		"void main()  \n"
+// 		"{  \n"  
+// 		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
+// 
+// 		"  float s = 1.5; \n"
+// 
+// 		"  vec3 test_v_g_trans = vec3(2, 0.3, 1);  \n"
+// 		//"  vec3 test_v_g_trans = vec3(1, 1, 1);  \n"
+// 		"  float cmp_r = tmp.g - tmp.r * s;  \n"
+// 		"  float test_r = clamp(cmp_r, 0, 1) / cmp_r;  \n"
+// 		"  float cmp_b = tmp.g - tmp.b * s;  \n"
+// 		"  float test_b = clamp(cmp_b, 0, 1) / cmp_b;  \n"
+// 		"  vec3 trans = (test_v_g_trans - vec3(1, 1, 1)) * test_r * test_b + vec3(1, 1, 1);  \n"
+// 		"  tmp.xyz = vec3(tmp.r * trans.r, tmp.g * trans.g, tmp.b * trans.b);  \n"
+// 
+// 		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
+// 		"  gl_FragColor.w = tmp.w;    \n"
+// 		"  gl_FragColor *= v_fragmentColor.w;  \n"
+// 		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
+// 		"}  \n"
+// 		;
+
 	// 	glEnable(GL_BLEND);
 	// 	// todo 源混合因子ejoy2d用的GL_ONE
 	// 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
