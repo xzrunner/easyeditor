@@ -11,11 +11,17 @@ class Frame : public d2d::Frame
 public:
 	Frame(const wxString& title, const wxString& filetag);
 
+protected:
+	virtual void onSaveAs(wxCommandEvent& event);
+
 private:
 	void OnPreview(wxCommandEvent& event);
 	void OnSetBackground(wxCommandEvent& event);
 	void OnCodeSetting(wxCommandEvent& event);
 	void OnCodeLove2d(wxCommandEvent& event);
+
+	void SaveAsPNG(const std::string& filepath) const;
+	void SaveAsJson(const std::string& filepath) const;
 
 private:
 	enum

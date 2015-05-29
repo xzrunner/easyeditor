@@ -34,6 +34,8 @@ protected:
 
 	virtual void onSettings(wxCommandEvent& event);
 
+	wxString GetFileFilter() const;
+
 private:
 	void saveTmpInfo();
 	void loadTmpInfo();
@@ -58,8 +60,6 @@ private:
 	wxMenu* initSettingsBar();
 	wxMenu* InitCodeBar();
 	wxMenu* initHelpBar();
-
-	wxString getFileFilter() const;
 
 	void setCurrFilename();
 

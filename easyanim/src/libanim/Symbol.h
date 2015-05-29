@@ -57,6 +57,8 @@ public:
 	int getFPS() const { return m_fps; }
 	void setFPS(int fps) { m_fps = fps; }
 
+	void InitBounding();
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
@@ -64,8 +66,6 @@ protected:
 
 private:
 	void clear();
-
-	void initBounding();
 
 public:
 	std::vector<Layer*> m_layers;

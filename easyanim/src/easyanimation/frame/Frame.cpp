@@ -28,6 +28,29 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_code_menu->Append(ID_LOVE2D, wxT("love2d"), wxEmptyString);
 }
 
+void Frame::onSaveAs(wxCommandEvent& event)
+{
+ 	if (!m_task) return;
+ 
+ 	try {
+		wxString filter = GetFileFilter() + "|PNG files (*.png)|*.png";
+ 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
+ 		if (dlg.ShowModal() == wxID_OK)
+ 		{
+ 			wxString filename = dlg.GetPath();
+ 			wxString ext = d2d::FilenameTools::getExtension(filename);
+ 			if (ext == "png") {
+ 				SaveAsPNG(filename.ToStdString());
+ 			} else {
+ 				SaveAsJson(filename.ToStdString());
+ 			}
+ 		}
+ 	} catch (d2d::Exception& e) {
+ 		d2d::ExceptionDlg dlg(this, e);
+ 		dlg.ShowModal();
+ 	}
+}
+
 void Frame::OnPreview(wxCommandEvent& event)
 {
 	PreviewDialog dlg(this, static_cast<Task*>(m_task)->GetController());
@@ -72,6 +95,22 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 	dlg.notebook->AddPage(page, page->getName());
 
 	dlg.ShowModal();
+}
+
+void Frame::SaveAsPNG(const std::string& filepath) const
+{
+	d2d::Snapshoot ss;
+	libanim::Symbol* symbol = ((StagePanel*)(m_task->getEditPanel()))->getSymbol();
+	symbol->InitBounding();
+	ss.outputToImageFile(symbol, filepath);
+	m_task->getEditPanel()->getCanvas()->resetInitState();
+}
+
+void Frame::SaveAsJson(const std::string& filepath) const
+{
+	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
+	m_currFilename = fixed;
+	m_task->store(fixed);
 }
 
 }

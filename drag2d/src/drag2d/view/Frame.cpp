@@ -159,7 +159,7 @@ void Frame::onOpen(wxCommandEvent& event)
 
 	try {
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, 
-			getFileFilter(), wxFD_OPEN);
+			GetFileFilter(), wxFD_OPEN);
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			openFile(dlg.GetPath());
@@ -195,7 +195,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 
 	try {
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, 
-			getFileFilter(), wxFD_SAVE);
+			GetFileFilter(), wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
@@ -215,6 +215,13 @@ void Frame::onSettings(wxCommandEvent& event)
 
 	const Colorf& col = Config::Instance()->GetSettings().bg_color;
 	m_task->getEditPanel()->getCanvas()->setBgColor(col);
+}
+
+wxString Frame::GetFileFilter() const
+{
+	wxString fliter;
+	fliter.Printf("JSON files (*_%s.json)|*_%s.json", m_filetag, m_filetag);
+	return fliter;
 }
 
 void Frame::onOpenRecent1(wxCommandEvent& event)
@@ -327,11 +334,6 @@ wxMenu* Frame::initHelpBar()
 	wxMenu* helpMenu = new wxMenu;
 	helpMenu->Append(wxID_HELP, wxT("&About...\tF1"), wxT("Show about dialog"));
 	return helpMenu;
-}
-
-wxString Frame::getFileFilter() const
-{
-	return wxT("*_") + m_filetag + wxT(".json");
 }
 
 void Frame::setCurrFilename()

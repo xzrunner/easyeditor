@@ -35,7 +35,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		wxString filter = "JSON files (*.json)|*.json|PNG files (*.png)|*.png";
+		wxString filter = GetFileFilter() + "|PNG files (*.png)|*.png";
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{

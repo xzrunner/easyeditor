@@ -74,6 +74,27 @@ size_t Symbol::getMaxFrameIndex() const
 	return index;
 }
 
+void Symbol::InitBounding()
+{
+	m_rect.makeInfinite();
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		for (int i = 0, n = layer->frames.size(); i < n; ++i)
+		{
+			Frame* frame = layer->frames[i];
+			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
+			{
+				std::vector<d2d::Vector> vertices;
+				frame->sprites[i]->getBounding()->getBoundPos(vertices);
+				for (int i = 0, n = vertices.size(); i < n; ++i) {
+					m_rect.combine(vertices[i]);
+				}
+			}
+		}
+	}
+}
+
 void Symbol::loadResources()
 {
 	clear();
@@ -129,7 +150,7 @@ void Symbol::loadResources()
 		layerValue = value["layer"][i++];
 	}
 
-	initBounding();
+	InitBounding();
 }
 
 void Symbol::clear()
@@ -149,27 +170,6 @@ void Symbol::clear()
 	m_layers.clear();
 
 	m_index = 0;
-}
-
-void Symbol::initBounding()
-{
-	m_rect.makeInfinite();
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		for (int i = 0, n = layer->frames.size(); i < n; ++i)
-		{
-			Frame* frame = layer->frames[i];
-			for (int i = 0, n = frame->sprites.size(); i < n; ++i)
-			{
-				std::vector<d2d::Vector> vertices;
-				frame->sprites[i]->getBounding()->getBoundPos(vertices);
-				for (int i = 0, n = vertices.size(); i < n; ++i) {
-					m_rect.combine(vertices[i]);
-				}
-			}
-		}
-	}
 }
 
 //////////////////////////////////////////////////////////////////////////
