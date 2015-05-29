@@ -100,6 +100,8 @@ private:
 
 	epbin::ImageIDer* m_img_ider;
 
+	std::set<int> m_terrain2d_ids;
+
 }; // COCCode
 
 }

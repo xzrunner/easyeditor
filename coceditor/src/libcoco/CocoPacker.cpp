@@ -1012,7 +1012,8 @@ void CocoPacker::CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture)
 		{
 			float u = src[i].x, v = src[i].y;
 			src[i].x = picture->scr[1].x + v * h;
-			src[i].y = w - (picture->scr[1].y + (1-u) * w);
+//			src[i].y = w - (picture->scr[1].y + (1-u) * w);
+			src[i].y = picture->scr[1].y + (1-u) * w;
 		}
 	}
 	else
@@ -1023,7 +1024,8 @@ void CocoPacker::CalSrcFromUV(d2d::Vector src[4], TPParser::Picture* picture)
 		{
 			float u = src[i].x, v = src[i].y;
 			src[i].x = picture->scr[0].x + u * w;
-			src[i].y = h - (picture->scr[0].y + v * h);
+//			src[i].y = h - (picture->scr[0].y + v * h);
+			src[i].y = picture->scr[0].y + v * h;
 		}
 	}
 }
@@ -1248,6 +1250,19 @@ int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 
 int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 {
+	const d2d::ISymbol* symbol = &sprite->getSymbol();
+	std::map<const d2d::ISymbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
+	if (itr_mesh_symbol == m_mapSymbolID.end()) {
+		std::string str = "\""+symbol->getFilepath()+"\""+" not in m_mapSymbolID!";
+		throw d2d::Exception(str.c_str());
+	}
+
+	if (m_terrain2d_ids.find(itr_mesh_symbol->second) != m_terrain2d_ids.end()) {
+		return 0;
+	} else {
+		m_terrain2d_ids.insert(itr_mesh_symbol->second);
+	}
+
 	// only use one texture in the sprite
 
 	const std::vector<eterrain2d::OceanMesh*> oceans = sprite->getSymbol().GetOceans();
@@ -1274,30 +1289,41 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 	// tex
 	std::string assign_tex = lua::assign("tex", wxString::FromDouble(picture->tex).ToStdString());
 
-	int frame = 1;
-// 	if (ocean->GetWaveSpeed() != 0) {
-// 		frame = std::floor(d2d::PI * 2 / ocean->GetWaveSpeed() * 30);
-// 	}
+	static const float FPS = 30;
+
+	int frame = (int)(fabs(FPS / ocean->GetUVMoveSpeed().y));
+
+	for (int i = 0; i < oceans.size(); ++i) {
+		eterrain2d::OceanMesh* ocean = oceans[i];
+		ocean->Build();
+	}
 
 	std::vector<int> frames_count;
 	for (int i = 0; i < frame; ++i)
 	{
-		int tri_count = 0;
+		int img_count = 0;
+
 		for (int i = 0; i < oceans.size(); ++i) {
 			eterrain2d::OceanMesh* ocean = oceans[i];
+			ocean->OpenWave(false);
+			ocean->OpenBlend(false);
 			const std::vector<eterrain2d::MeshShape*>& meshes = ocean->GetMeshes();
+
+			// id
+			lua::TableAssign ta(*m_gen, "picture", false, false);
+			m_gen->line(lua::assign("id", wxString::FromDouble(curr_id++).ToStdString()) + ",");
+
+			
+
+			++img_count;
+
 			for (int j = 0; j < meshes.size(); ++j) {
 				const eterrain2d::MeshShape* mesh = meshes[j];
 				const std::vector<emesh::Triangle*>& tris = mesh->GetTriangles();
-				tri_count += tris.size();
 				for (int k = 0; k < tris.size(); ++k) {
 					// same with ´ò°üÆÕÍ¨emesh::Mesh
 
 					emesh::Triangle* tri = tris[k];
-
-					// id
-					lua::TableAssign ta(*m_gen, "picture", false, false);
-					m_gen->line(lua::assign("id", wxString::FromDouble(curr_id++).ToStdString()) + ",");
 
 					// src
 					d2d::Vector src[4];
@@ -1340,10 +1366,10 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 				}
 			}
 
-			ocean->Update(0.033f);
+			ocean->Update(1 / FPS);
 		}
 
- 		frames_count.push_back(tri_count);
+ 		frames_count.push_back(img_count);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -1354,15 +1380,9 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 
 	lua::TableAssign ta(*m_gen, "animation", false, false);
 	// export
-	const d2d::ISymbol* symbol = &sprite->getSymbol();
 	if (!symbol->name.empty())
 		m_gen->line(lua::assign("export", "\""+symbol->name+"\"")+",");
-	// id
-	std::map<const d2d::ISymbol*, int>::iterator itr_mesh_symbol = m_mapSymbolID.find(symbol);
-	if (itr_mesh_symbol == m_mapSymbolID.end()) {
-		std::string str = "\""+symbol->getFilepath()+"\""+" not in m_mapSymbolID!";
-		throw d2d::Exception(str.c_str());
-	}
+
 	std::string sid = wxString::FromDouble(itr_mesh_symbol->second);
 	m_gen->line(lua::assign("id", sid.c_str()) + ",");
 	// component
