@@ -62,10 +62,10 @@ public:
 private:
 	void Clear();
 
-	d2d::Rect CalBoundRegion(const std::vector<d2d::Vector>& bound); 
-	void CalSegments(const d2d::Rect& region, std::vector<d2d::Vector>& segs);
+	d2d::Rect CalBoundRegion(const std::vector<d2d::Vector>& bound) const; 
+	void CalSegments(const d2d::Rect& region, std::vector<d2d::Vector>& segs) const;
 	void CalTrisTexcords(const d2d::Rect& region, const std::vector<d2d::Vector>& vertices,
-		std::vector<d2d::Vector>& texcoords);
+		std::vector<d2d::Vector>& texcoords) const;
 	void BuildGrids(const d2d::Rect& region, const std::vector<d2d::Vector>& vertices, 
 		const std::vector<d2d::Vector>& texcoords, const std::vector<d2d::Vector>& bound);
 
@@ -92,7 +92,7 @@ private:
 	bool m_lock_bound;
 
 	// debug
-	d2d::Rect debug_r;
+	mutable d2d::Rect debug_r;
 
 	float m_during;
 

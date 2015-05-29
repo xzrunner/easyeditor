@@ -103,8 +103,6 @@ d2d::Rect TextureMaterial::GetBoundingRegion(const std::vector<d2d::Vector>& bou
 
 void TextureMaterial::GetTexBoundarySegments(const d2d::Rect& rect, std::vector<d2d::Vector>& segments)
 {
-//	static const int EXTEND = 100000;
-
 	static const int EXTEND = 1;
 	int width = m_image->getSize().xLength(),
 		height = m_image->getSize().yLength();
