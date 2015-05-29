@@ -173,7 +173,7 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
 	glViewport(0, 0, w, h);
 
 	Matrix mt;
-	float dx = symbol->getSize().xCenter();
+	float dx = -symbol->getSize().xCenter();
 	float dy = symbol->getSize().yCenter();
 	mt.translate(dx, dy);
 	SpriteDraw::drawSprite(symbol, mt, d2d::Vector(0, 0), 0.0f, scale, -scale);

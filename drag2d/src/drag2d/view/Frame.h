@@ -121,7 +121,7 @@ private:
 
 protected:
 	wxString m_filetag;
-	wxString m_currFilename;
+	mutable wxString m_currFilename;
 
 private:
 	RecentFiles m_recent;

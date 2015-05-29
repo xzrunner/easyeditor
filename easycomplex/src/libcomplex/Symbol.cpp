@@ -125,6 +125,26 @@ bool Symbol::isOneLayer() const
 	return true;
 }
 
+void Symbol::InitBounding()
+{
+	m_rect.makeInfinite();
+	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+	{
+		std::vector<d2d::Vector> vertices;
+		m_sprites[i]->getBounding()->getBoundPos(vertices);
+		for (size_t j = 0, m = vertices.size(); j < m; ++j)
+			m_rect.combine(vertices[j]);
+	}
+
+	// 为兼容老数据，临时去掉
+	//// to center
+	//float x = m_rect.xCenter(),
+	//	y = m_rect.yCenter();
+	//for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+	//	m_sprites[i]->translate(d2d::Vector(-x, -y));
+	//m_rect.translate(d2d::Vector(-x, -y));
+}
+
 //void Symbol::loadResources()
 //{
 //	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
@@ -272,7 +292,7 @@ void Symbol::loadResources()
 		spriteValue = value["sprite"][i++];
 	}	
 
-	initBounding();
+	InitBounding();
 
 	if (use_dtex) {
 		dtex->EndImage();
@@ -287,26 +307,6 @@ void Symbol::clear()
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		m_sprites[i]->Release();
 	m_sprites.clear();
-}
-
-void Symbol::initBounding()
-{
-	m_rect.makeInfinite();
-	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	{
-		std::vector<d2d::Vector> vertices;
-		m_sprites[i]->getBounding()->getBoundPos(vertices);
-		for (size_t j = 0, m = vertices.size(); j < m; ++j)
-			m_rect.combine(vertices[j]);
-	}
-
-	// 为兼容老数据，临时去掉
-	//// to center
-	//float x = m_rect.xCenter(),
-	//	y = m_rect.yCenter();
-	//for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-	//	m_sprites[i]->translate(d2d::Vector(-x, -y));
-	//m_rect.translate(d2d::Vector(-x, -y));
 }
 
 }

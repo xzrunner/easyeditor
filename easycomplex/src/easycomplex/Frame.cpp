@@ -41,18 +41,10 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		{
 			wxString filename = dlg.GetPath();
 			wxString ext = d2d::FilenameTools::getExtension(filename);
-			if (ext == "png")
-			{
-				d2d::Snapshoot ss;
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(m_currFilename);
-				ss.outputToImageFile(symbol, filename.ToStdString());
-				symbol->Release();
-			}
-			else
-			{
-				wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
-				m_currFilename = fixed;
-				m_task->store(fixed);
+			if (ext == "png") {
+				SaveAsPNG(filename.ToStdString());
+			} else {
+				SaveAsJson(filename.ToStdString());
 			}
 		}
 	} catch (d2d::Exception& e) {
@@ -178,6 +170,22 @@ void Frame::onCode(wxCommandEvent& event)
 // 	d2d::Triangulation::lines(outline, segments, tris);
 // 	
 // 	int zz = 0;
+}
+
+void Frame::SaveAsPNG(const std::string& filepath) const
+{
+	d2d::Snapshoot ss;
+	Symbol* symbol = ((StagePanel*)(m_task->getEditPanel()))->getSymbol();
+	symbol->InitBounding();
+	ss.outputToImageFile(symbol, filepath);
+	m_task->getEditPanel()->getCanvas()->resetInitState();
+}
+
+void Frame::SaveAsJson(const std::string& filepath) const
+{
+	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
+	m_currFilename = fixed;
+	m_task->store(fixed);
 }
 
 }

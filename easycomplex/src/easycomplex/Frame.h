@@ -22,6 +22,9 @@ private:
 	void onSetBackground(wxCommandEvent& event);
 	void onCode(wxCommandEvent& event);
 
+	void SaveAsPNG(const std::string& filepath) const;
+	void SaveAsJson(const std::string& filepath) const;
+
 private:
 	enum
 	{

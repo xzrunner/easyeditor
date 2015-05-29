@@ -32,6 +32,8 @@ public:
 
 	bool isOneLayer() const;
 
+	void InitBounding();
+
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
@@ -39,8 +41,6 @@ protected:
 
 private:
 	void clear();
-
-	void initBounding();
 
 private:
 	static const float SCALE;
