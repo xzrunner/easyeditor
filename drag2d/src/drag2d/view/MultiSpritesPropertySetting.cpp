@@ -75,13 +75,11 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 	{
 		m_impl->OnCenter(wxANY_AS(value, int));
 	}
-	else if (name == wxT("All Pos.X"))
+	else if (name == wxT("All Pos"))
 	{
-		m_impl->SetPosX(wxANY_AS(value, float));
-	}
-	else if (name == wxT("All Pos.Y"))
-	{
-		m_impl->SetPosY(wxANY_AS(value, float));
+		double dx, dy;
+		splitString(value, &dx, &dy);
+		m_impl->SetPos(dx, dy);
 	}
 	// change
 	else if (name == wxT("dPos"))
@@ -111,13 +109,11 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 		float angle = wxANY_AS(value, float) * TRANS_DEG_TO_RAD;
 		m_impl->SetAngle(m_overall, angle);
 	}
-	else if (name == "Scale.X")
+	else if (name == "Scale")
 	{
-		m_impl->SetScaleX(m_overall, wxANY_AS(value, float));
-	}
-	else if (name == "Scale.Y")
-	{
-		m_impl->SetScaleY(m_overall, wxANY_AS(value, float));
+		double dx, dy;
+		splitString(value, &dx, &dy);
+		m_impl->SetScale(m_overall, dx, dy);
 	}
 	else if (name == "Mirror.Horizontal")
 	{

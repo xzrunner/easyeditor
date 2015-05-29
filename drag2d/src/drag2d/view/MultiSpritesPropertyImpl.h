@@ -41,14 +41,12 @@ public:
 
 	void SetTag(const wxString& tag);
 	void SetClip(int clip);
-	void SetPosX(float x);
-	void SetPosY(float y);
+	void SetPos(float x, float y);
 	void SetColorMul(const Colorf& col);
 	void SetColorAdd(const Colorf& col);
 	void SetColorAlpha(float alpha);
 	void SetAngle(bool overall, float angle);
-	void SetScaleX(bool overall, float s);
-	void SetScaleY(bool overall, float s);
+	void SetScale(bool overall, float sx, float sy);
 	void SetMirrorX(bool overall, bool mirror);
 	void SetMirrorY(bool overall, bool mirror);
 	void SetVisible(bool visible);

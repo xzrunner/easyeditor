@@ -271,20 +271,12 @@ void MultiSpritesPropertyImpl::SetClip(int clip)
 	}
 }
 
-void MultiSpritesPropertyImpl::SetPosX(float x)
+void MultiSpritesPropertyImpl::SetPos(float x, float y)
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->setTransform(Vector(x, spr->getPosition().y), spr->getAngle());
-	}
-}
-
-void MultiSpritesPropertyImpl::SetPosY(float y)
-{
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* spr = m_sprites[i];
-		spr->setTransform(Vector(spr->getPosition().x, y), spr->getAngle());
-	}
+		spr->setTransform(Vector(x, y), spr->getAngle());
+	}	
 }
 
 void MultiSpritesPropertyImpl::SetColorMul(const Colorf& col)
@@ -328,7 +320,7 @@ void MultiSpritesPropertyImpl::SetAngle(bool overall, float angle)
 	}
 }
 
-void MultiSpritesPropertyImpl::SetScaleX(bool overall, float s)
+void MultiSpritesPropertyImpl::SetScale(bool overall, float sx, float sy)
 {
 	if (overall)
 	{
@@ -336,33 +328,15 @@ void MultiSpritesPropertyImpl::SetScaleX(bool overall, float s)
 		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 			ISprite* spr = m_sprites[i];
 			Vector pos = spr->getPosition() - center;
-			pos.x *= s;
+			pos.x *= sx;
+			pos.y *= sy;
 			spr->setTransform(pos + center, spr->getAngle());
 		}
 	}
 
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		ISprite* spr = m_sprites[i];
-		spr->setScale(s, spr->getScale().y);
-	}
-}
-
-void MultiSpritesPropertyImpl::SetScaleY(bool overall, float s)
-{
-	if (overall)
-	{
-		Vector center = GetOverallCenter();
-		for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-			ISprite* spr = m_sprites[i];
-			Vector pos = spr->getPosition() - center;
-			pos.y *= s;
-			spr->setTransform(pos + center, spr->getAngle());
-		}
-	}
-
-	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		ISprite* spr = m_sprites[i];
-		spr->setScale(spr->getScale().x, s);
+		spr->setScale(sx, sy);
 	}
 }
 
