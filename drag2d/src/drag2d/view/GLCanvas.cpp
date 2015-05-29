@@ -36,7 +36,7 @@ GLCanvas::GLCanvas(EditPanel* editPanel)
  	, m_isInit(false)
  	, m_context(new wxGLContext(this))
 {
-	m_bgColor.set(1.0f, 1.0f, 1.0f, 1.0f);
+	m_bgColor.set(0.5f, 0.5f, 0.5f, 1);
 }
 
 GLCanvas::~GLCanvas()
