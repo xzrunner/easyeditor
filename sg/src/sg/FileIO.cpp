@@ -19,10 +19,12 @@ void FileIO::load(const char* filename, StagePanel* stage,
 	reader.parse(fin, value);
 	fin.close();
 
+	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+
 	int i = 0;
 	Json::Value imgValue = value["image"][i++];
 	while (!imgValue.isNull()) {
-		d2d::ISprite* sprite = load(imgValue, stage);
+		d2d::ISprite* sprite = load(imgValue, stage, dir);
 		stage->insertSprite(sprite);
 		imgValue = value["image"][i++];
 	}
@@ -34,10 +36,13 @@ void FileIO::store(const char* filename, StagePanel* stage)
 {
 	Json::Value value;
 
+	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
+
 	std::vector<d2d::ISprite*> sprites;
 	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
-	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		value["image"][i] = store(sprites[i], stage);
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		value["image"][i] = store(sprites[i], stage, dir);
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -47,12 +52,12 @@ void FileIO::store(const char* filename, StagePanel* stage)
 	fout.close();
 }
 
-d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage)
+d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
 {
-	std::string filepath = value["filepath"].asString();
 	const int row = value["row"].asInt(),
 		col = value["col"].asInt();
 
+	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 	SetSymbolUserData(symbol);
 
@@ -64,11 +69,13 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage)
 	return sprite;
 }
 
-Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage)
+Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage, 
+						  const std::string& dir)
 {
 	Json::Value value;
 
-	value["filepath"] = sprite->getSymbol().getFilepath().ToStdString();
+	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
+		sprite->getSymbol().getFilepath()).ToStdString();
 
 	int row, col;
 	stage->TransCoordsToGridPos(sprite->getPosition(), row, col);

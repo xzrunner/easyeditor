@@ -17,8 +17,8 @@ public:
 	static void store(const char* filename, StagePanel* stage);
 
 private:
-	static d2d::ISprite* load(const Json::Value& value, StagePanel* stage);
-	static Json::Value store(const d2d::ISprite* sprite, StagePanel* stage);
+	static d2d::ISprite* load(const Json::Value& value, StagePanel* stage, const std::string& dir);
+	static Json::Value store(const d2d::ISprite* sprite, StagePanel* stage, const std::string& dir);
 
 	static void SetSymbolUserData(d2d::ISymbol* symbol);
 
