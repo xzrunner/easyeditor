@@ -47,11 +47,13 @@ void Symbol::draw(const d2d::Matrix& mt,
 		return;
 	}
 
+	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
+
 	static clock_t time = 0;
 	clock_t curr = clock();
 	if (time != 0) {
-		if (m_ps->IsEmpty()) {
-			m_ps->start();
+		if (m_ps->IsEmpty() && loop) {
+			Start();
 		}
 		m_ps->update((float)(curr - time) / CLOCKS_PER_SEC);
 		m_ps->draw(mt);
@@ -63,6 +65,11 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 {
 //	return m_region;
 	return d2d::Rect(200, 200);
+}
+
+void Symbol::Start() const
+{
+	m_ps->start();
 }
 
 void Symbol::loadResources()

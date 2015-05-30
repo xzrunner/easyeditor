@@ -64,8 +64,8 @@ void Frame::onSettings(wxCommandEvent& event)
 
 void Frame::onPreview(wxCommandEvent& event)
 {
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
-	symbol->reloadTexture();
+// 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
+// 	symbol->reloadTexture();
 
 	std::vector<const d2d::ISprite*> sprites;
 	m_task->getAllSprite(sprites);

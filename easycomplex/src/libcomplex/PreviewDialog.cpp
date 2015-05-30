@@ -1,5 +1,6 @@
 #include "PreviewDialog.h"
 #include "PreviewCanvas.h"
+#include "PreviewEditOP.h"
 
 namespace ecomplex
 {
@@ -11,6 +12,15 @@ PreviewDialog::PreviewDialog(wxWindow* parent,
 	, m_control(0.033f)
 {
 	InitLayout();
+
+	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	data.particle3d_loop = false;
+}
+
+PreviewDialog::~PreviewDialog()
+{
+	d2d::SettingData& data = d2d::Config::Instance()->GetSettings();
+	data.particle3d_loop = true;
 }
 
 void PreviewDialog::InitLayout()
@@ -23,7 +33,7 @@ void PreviewDialog::InitLayout()
 void PreviewDialog::BuildEditPanel(wxSizer* sizer)
 {
 	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
-//	stage->setEditOP(new d2d::ZoomViewOP(stage, false));
+	stage->setEditOP(new PreviewEditOP(stage, m_sprites));
 	stage->setCanvas(new PreviewCanvas(stage, m_control, m_sprites));
 	sizer->Add(stage, 1, wxEXPAND);
 }

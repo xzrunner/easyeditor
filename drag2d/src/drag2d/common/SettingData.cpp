@@ -15,10 +15,10 @@ SettingData::SettingData()
 	visible_label_text = true;
 	visible_node_name = false;
 	visible_shape = true;
+	particle3d_loop = true;
+	bg_color.set(0.5f, 0.5f, 0.5f);
 
 	linear_filter = true;
-
-	bg_color.set(1, 1, 1);
 }
 
 void SettingData::LoadFromFile(const Json::Value& value)
@@ -48,6 +48,9 @@ void SettingData::LoadFromFile(const Json::Value& value)
 	}
 	if (!value["visible_shape"].isNull()) {
 		visible_shape = value["visible_shape"].asBool();
+	}
+	if (!value["particle3d_loop"].isNull()) {
+		visible_shape = value["particle3d_loop"].asBool();
 	}
 
 	if (!value["linear_filter"].isNull()) {

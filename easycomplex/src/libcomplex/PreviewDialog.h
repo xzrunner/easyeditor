@@ -10,6 +10,7 @@ class PreviewDialog : public wxDialog
 {
 public:
 	PreviewDialog(wxWindow* parent, const std::vector<const d2d::ISprite*>& sprites);
+	~PreviewDialog();
 
 private:
 	void InitLayout();

@@ -276,26 +276,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="preview"
-				>
-				<File
-					RelativePath="..\..\..\src\libcomplex\PreviewCanvas.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcomplex\PreviewCanvas.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcomplex\PreviewDialog.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libcomplex\PreviewDialog.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="test"
@@ -326,6 +306,34 @@
 			</File>
 			<File
 				RelativePath="..\..\..\src\libcomplex\SelectSpritesOP.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="preview"
+			>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewCanvas.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewCanvas.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewDialog.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewEditOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libcomplex\PreviewEditOP.h"
 				>
 			</File>
 		</Filter>
