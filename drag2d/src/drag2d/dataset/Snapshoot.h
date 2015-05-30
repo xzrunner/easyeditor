@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "common/Rect.h"
+
 namespace libanim { class Symbol; }
 
 //#define TEST_RESAMPLING
@@ -28,10 +30,12 @@ public:
 	void outputToImageFile(const ISymbol* symbol, const std::string& filename, 
 		float scale = 1.0f) const;
 
-	void DrawSprite(const ISprite* sprite, bool clear = false) const;
+	void DrawSprite(const ISprite* sprite, bool clear = false,
+		float dx = 0, float dy = 0) const;
 	void SaveToFile(const std::string& filename) const;
 
-	void DrawSprite(const ISprite* sprite, bool clear, int width, int height) const;
+	void DrawSprite(const ISprite* sprite, bool clear, int width, int height,
+		float dx = 0, float dy = 0) const;
 	void SaveToFile(const std::string& filename, int width, int height) const;
 
 private:
@@ -40,7 +44,8 @@ private:
 
 	void drawFBO(const ISymbol* symbol, bool whitebg = false,
 		float scale = 1.0f) const;
-	void drawFBO(const ISprite* sprite, bool clear, int width, int height) const;
+	void drawFBO(const ISprite* sprite, bool clear, int width, int height, 
+		float dx, float dy) const;
 
 	int checkFramebufferStatus() const;
 

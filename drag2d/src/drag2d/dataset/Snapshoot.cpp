@@ -75,14 +75,16 @@ void Snapshoot::outputToImageFile(const ISymbol* symbol, const std::string& file
 	delete[] pixels;
 }
 
-void Snapshoot::DrawSprite(const ISprite* sprite, bool clear) const
+void Snapshoot::DrawSprite(const ISprite* sprite, bool clear,
+						   float dx, float dy) const
 {
-	drawFBO(sprite, clear, m_width, m_height);
+	drawFBO(sprite, clear, m_width, m_height, dx, dy);
 }
 
-void Snapshoot::DrawSprite(const ISprite* sprite, bool clear, int width, int height) const
+void Snapshoot::DrawSprite(const ISprite* sprite, bool clear, int width, int height,
+						   float dx, float dy) const
 {
-	drawFBO(sprite, clear, width, height);
+	drawFBO(sprite, clear, width, height, dx, dy);
 }
 
 void Snapshoot::SaveToFile(const std::string& filename) const
@@ -184,7 +186,8 @@ void Snapshoot::drawFBO(const ISymbol* symbol, bool whitebg, float scale) const
  	shader->SetTexture(0);
 }
 
-void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height) const
+void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height,
+						float dx, float dy) const
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
 #ifdef TEST_RESAMPLING
@@ -208,6 +211,7 @@ void Snapshoot::drawFBO(const ISprite* sprite, bool clear, int width, int height
 
 	Matrix mt;
 	mt.setScale(1, -1);
+	mt.translate(-dx, -dy);
 	SpriteDraw::drawSprite(sprite, mt);
 
 	shader->SetFBO(0);

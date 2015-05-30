@@ -6,6 +6,7 @@
 #include "frame/Task.h"
 #include "view/PreviewDialog.h"
 #include "view/StageCanvas.h"
+#include "view/StagePanel.h"
 
 #include <easybuilder.h>
 
@@ -99,10 +100,42 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	d2d::Snapshoot ss;
-	libanim::Symbol* symbol = ((StagePanel*)(m_task->getEditPanel()))->getSymbol();
-	symbol->InitBounding();
-	ss.outputToImageFile(symbol, filepath);
+	// 	d2d::Snapshoot ss;
+	// 	libanim::Symbol* symbol = ((StagePanel*)(m_task->getEditPanel()))->getSymbol();
+	// 	symbol->InitBounding();
+	// 	ss.outputToImageFile(symbol, filepath);
+	// 	m_task->getEditPanel()->getCanvas()->resetInitState();
+
+	// 	d2d::Rect r;
+	// 	std::vector<d2d::ISprite*> sprites;
+	// 	((StagePanel*)(m_task->getEditPanel()))->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	// 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+	// 		std::vector<d2d::Vector> vertices;
+	// 		sprites[i]->getBounding()->getBoundPos(vertices);
+	// 		for (size_t j = 0, m = vertices.size(); j < m; ++j)
+	// 			r.combine(vertices[j]);	
+	// 	}
+
+
+	std::vector<d2d::ISprite*> sprites;
+	((StagePanel*)(m_task->getEditPanel()))->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+
+	d2d::Rect region;
+ 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+ 		std::vector<d2d::Vector> vertices;
+ 		sprites[i]->getBounding()->getBoundPos(vertices);
+		for (size_t j = 0, m = vertices.size(); j < m; ++j) {
+ 			region.combine(vertices[j]);
+		}
+ 	}
+
+	d2d::Snapshoot ss(region.xLength(), region.yLength());
+	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
+		ss.DrawSprite(sprites[i], false, region.xCenter(), region.yCenter());
+	}
+
+	ss.SaveToFile(filepath);
+
 	m_task->getEditPanel()->getCanvas()->resetInitState();
 }
 
