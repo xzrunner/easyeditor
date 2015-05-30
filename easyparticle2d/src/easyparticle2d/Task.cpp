@@ -91,7 +91,7 @@ void Task::initLayout()
 
 	d2d::PropertySettingPanel* property 
 		= new d2d::PropertySettingPanel(left_hori_splitter);
-	property->SetPropertySetting(new PropertySetting(m_stage, &m_ps_name));
+	property->SetPropertySetting(new SymbolPropertySetting(m_stage, &m_ps_name));
 
 	m_toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage, m_stage->GetStageData());
 
