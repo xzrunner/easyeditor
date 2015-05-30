@@ -210,34 +210,6 @@
 						RelativePath="..\..\..\src\libparticle2d\CosSliderCtrl.h"
 						>
 					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\EmitterSettingPanel.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\ISliderCtrl.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\SliderCtrlOne.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\SliderCtrlOne.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\SliderCtrlTwo.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\SliderCtrlTwo.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\libparticle2d\SliderItem.h"
-						>
-					</File>
 				</Filter>
 				<Filter
 					Name="pages"
@@ -375,10 +347,6 @@
 		</File>
 		<File
 			RelativePath="..\..\..\src\libparticle2d\ps_config.h"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\src\libparticle2d\UICallback.h"
 			>
 		</File>
 	</Files>

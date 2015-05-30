@@ -2105,6 +2105,10 @@
 		<Filter
 			Name="widget"
 			>
+			<File
+				RelativePath="..\..\..\src\drag2d\widgets\UICallback.h"
+				>
+			</File>
 			<Filter
 				Name="dialog"
 				>
@@ -2274,6 +2278,34 @@
 				</File>
 				<File
 					RelativePath="..\..\..\src\drag2d\widgets\OneFloatValueStatic.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="slider"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\ISliderCtrl.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SliderCtrlOne.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SliderCtrlOne.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SliderCtrlTwo.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SliderCtrlTwo.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\widgets\SliderItem.h"
 					>
 				</File>
 			</Filter>

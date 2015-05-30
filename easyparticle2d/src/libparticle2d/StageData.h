@@ -1,8 +1,6 @@
 #ifndef _EASYPARTICLE2D_STAGE_DATA_H_
 #define _EASYPARTICLE2D_STAGE_DATA_H_
 
-#include "UICallback.h"
-
 #include <drag2d.h>
 
 namespace eparticle2d
@@ -12,14 +10,14 @@ class ParticleSystem;
 class Symbol;
 class ToolbarPanel;
 
-class StageData : public UICallback
+class StageData : public d2d::UICallback
 {
 public:
 	StageData();
 	~StageData();
 
 	//
-	// interface UICallback
+	// interface d2d::UICallback
 	//
 	virtual void SetValue(int key, const Data& data);
 	virtual void GetValue(int key, Data& data);

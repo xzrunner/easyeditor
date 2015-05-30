@@ -34,7 +34,7 @@ ParticleSystem::~ParticleSystem()
 	}
 }
 
-void ParticleSystem::SetValue(int key, const UICallback::Data& data)
+void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 {
 	switch (key)
 	{
@@ -86,7 +86,7 @@ void ParticleSystem::SetValue(int key, const UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::GetValue(int key, UICallback::Data& data)
+void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 {
 	switch (key)
 	{

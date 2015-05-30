@@ -1,7 +1,7 @@
-#ifndef _EASYPARTICLE2D_UI_CALLBACK_H_
-#define _EASYPARTICLE2D_UI_CALLBACK_H_
+#ifndef _DRAG2D_UI_CALLBACK_H_
+#define _DRAG2D_UI_CALLBACK_H_
 
-namespace eparticle2d
+namespace d2d
 {
 
 class UICallback
@@ -26,4 +26,4 @@ public:
 
 }
 
-#endif // _EASYPARTICLE2D_UI_CALLBACK_H_
+#endif // _DRAG2D_UI_CALLBACK_H_

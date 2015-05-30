@@ -1,27 +1,25 @@
 #include "CosSliderCtrl.h"
-#include "SliderItem.h"
-#include "SliderCtrlTwo.h"
 #include "item_string.h"
 #include "ps_config.h"
 
 namespace eparticle2d
 {
 
-CosSliderCtrl::CosSliderCtrl(wxPanel* parent, const char* title, UICallback* cb)
+CosSliderCtrl::CosSliderCtrl(wxPanel* parent, const char* title, d2d::UICallback* cb)
 	: wxPanel(parent, wxID_ANY)
 	, m_cb(cb)
 {
  	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, title);
  	wxBoxSizer* top_sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
 
- 	m_amplitude_ctrl = new SliderCtrlTwo(this, "Õñ·ù", ITEM_COS_AMPLITUDE, this, PS_COS_AMPLITUDE, 
-		SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 200), SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 100));
+ 	m_amplitude_ctrl = new d2d::SliderCtrlTwo(this, "Õñ·ù", ITEM_COS_AMPLITUDE, this, PS_COS_AMPLITUDE, 
+		d2d::SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 200), d2d::SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 100));
 	top_sizer->Add(m_amplitude_ctrl);
 
 	top_sizer->AddSpacer(5);
 
-	m_frequency_ctrl = new SliderCtrlTwo(this, "ÆµÂÊ", ITEM_COS_FREQUENCY, this, PS_COS_FREQUENCY, 
-		SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 500), SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 500), 0.01f);
+	m_frequency_ctrl = new d2d::SliderCtrlTwo(this, "ÆµÂÊ", ITEM_COS_FREQUENCY, this, PS_COS_FREQUENCY, 
+		d2d::SliderItem(ITEM_ATTR_CENTER, ITEM_ATTR_CENTER, 0, 0, 500), d2d::SliderItem(ITEM_ATTR_OFFSET, ITEM_ATTR_OFFSET, 0, 0, 500), 0.01f);
 	top_sizer->Add(m_frequency_ctrl);
 
  	SetSizer(top_sizer);

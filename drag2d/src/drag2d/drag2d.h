@@ -120,6 +120,9 @@
 #include "widgets/ColorProperty.h"
 #include "widgets/OneFloatValueStatic.h"
 #include "widgets/OneFloatValueCMPT.h"
+#include "widgets/UICallback.h"
+#include "widgets/SliderCtrlOne.h"
+#include "widgets/SliderCtrlTwo.h"
 
 #include "common/LibJpeg.h"
 #include "common/log.h"

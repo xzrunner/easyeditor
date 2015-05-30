@@ -1,7 +1,7 @@
-#ifndef _EASYPARTICLE2D_SLIDER_ITEM_H_
-#define _EASYPARTICLE2D_SLIDER_ITEM_H_
+#ifndef _DRAG2D_SLIDER_ITEM_H_
+#define _DRAG2D_SLIDER_ITEM_H_
 
-namespace eparticle2d
+namespace d2d
 {
 
 struct SliderItem
@@ -20,4 +20,4 @@ struct SliderItem
 
 }
 
-#endif // _EASYPARTICLE2D_SLIDER_ITEM_H_
+#endif // _DRAG2D_SLIDER_ITEM_H_

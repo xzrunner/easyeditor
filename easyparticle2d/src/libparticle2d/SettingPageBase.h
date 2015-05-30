@@ -1,13 +1,10 @@
 #ifndef _EASYPARTICLE2D_SETTING_PAGE_BASE_H_
 #define _EASYPARTICLE2D_SETTING_PAGE_BASE_H_
 
-#include <wx/wx.h>
-#include <json/json.h>
+#include <drag2d.h>
 
 namespace eparticle2d
 {
-
-class ISliderCtrl;
 
 class SettingPageBase : public wxPanel
 {
@@ -21,7 +18,7 @@ public:
 	virtual void InitPSFromUI();
 
 protected:
-	std::vector<ISliderCtrl*> m_sliders;
+	std::vector<d2d::ISliderCtrl*> m_sliders;
 
 }; // SettingPageBase
 

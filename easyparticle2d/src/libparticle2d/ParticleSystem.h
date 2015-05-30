@@ -3,7 +3,6 @@
 
 #include <drag2d.h>
 
-#include "UICallback.h"
 #include "ValueRegion.h"
 
 namespace eparticle2d
@@ -11,17 +10,17 @@ namespace eparticle2d
 
 class Particle;
 
-class ParticleSystem : public d2d::Object, public UICallback
+class ParticleSystem : public d2d::Object, public d2d::UICallback
 {
 public:
 	ParticleSystem(int buffer);
 	~ParticleSystem();
 
 	//
-	// interface UICallback
+	// interface d2d::UICallback
 	//
-	virtual void SetValue(int key, const UICallback::Data& data);
-	virtual void GetValue(int key, UICallback::Data& data);
+	virtual void SetValue(int key, const d2d::UICallback::Data& data);
+	virtual void GetValue(int key, d2d::UICallback::Data& data);
 
 	void Draw(const d2d::Matrix& mt);
 

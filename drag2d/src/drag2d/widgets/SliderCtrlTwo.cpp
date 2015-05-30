@@ -1,8 +1,7 @@
 #include "SliderCtrlTwo.h"
 #include "UICallback.h"
-#include "ParticleSystem.h"
 
-namespace eparticle2d
+namespace d2d
 {
 
 SliderCtrlTwo::SliderCtrlTwo(wxPanel* parent, const char* title, const char* name, 

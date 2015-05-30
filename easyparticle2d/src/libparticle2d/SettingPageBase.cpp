@@ -1,5 +1,4 @@
 #include "SettingPageBase.h"
-#include "ISliderCtrl.h"
 
 namespace eparticle2d
 {

@@ -1,9 +1,9 @@
-#ifndef _EASYPARTICLE2D_INTERFACE_SLIDER_CTRL_H_
-#define _EASYPARTICLE2D_INTERFACE_SLIDER_CTRL_H_
+#ifndef _DRAG2D_INTERFACE_SLIDER_CTRL_H_
+#define _DRAG2D_INTERFACE_SLIDER_CTRL_H_
 
-#include <drag2d.h>
+#include <json/json.h>
 
-namespace eparticle2d
+namespace d2d
 {
 
 class ISliderCtrl
@@ -18,4 +18,4 @@ public:
 
 }
 
-#endif // _EASYPARTICLE2D_INTERFACE_SLIDER_CTRL_H_
+#endif // _DRAG2D_INTERFACE_SLIDER_CTRL_H_

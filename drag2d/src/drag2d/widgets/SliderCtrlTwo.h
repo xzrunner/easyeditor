@@ -1,10 +1,12 @@
-#ifndef _EASYPARTICLE2D_SLIDER_CTRL_TWO_H_
-#define _EASYPARTICLE2D_SLIDER_CTRL_TWO_H_
+#ifndef _DRAG2D_SLIDER_CTRL_TWO_H_
+#define _DRAG2D_SLIDER_CTRL_TWO_H_
 
 #include "ISliderCtrl.h"
 #include "SliderItem.h"
 
-namespace eparticle2d
+#include <wx/wx.h>
+
+namespace d2d
 {
 
 class UICallback;
@@ -47,4 +49,4 @@ private:
 
 }
 
-#endif // _EASYPARTICLE2D_SLIDER_CTRL_TWO_H_
+#endif // _DRAG2D_SLIDER_CTRL_TWO_H_

@@ -24,7 +24,7 @@ StageData::~StageData()
 
 void StageData::SetValue(int key, const Data& data)
 {
-	UICallback* cb = GetCurrPS();
+	d2d::UICallback* cb = GetCurrPS();
 	if (cb) {
 		cb->SetValue(key, data);
 	}
@@ -32,7 +32,7 @@ void StageData::SetValue(int key, const Data& data)
 
 void StageData::GetValue(int key, Data& data)
 {
-	UICallback* cb = GetCurrPS();
+	d2d::UICallback* cb = GetCurrPS();
 	if (cb) {
 		cb->GetValue(key, data);
 	}	
