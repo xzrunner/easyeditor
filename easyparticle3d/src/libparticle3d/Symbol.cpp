@@ -7,11 +7,13 @@ namespace eparticle3d
 
 Symbol::Symbol()
 	: m_ps(NULL)
+	, m_time(0)
 {
 }
 
 Symbol::Symbol(const Symbol& s)
 	: d2d::ISymbol(s)
+	, m_time(s.m_time)
 {
 //	m_ps = new ParticleSystem(*s.m_ps);
 }
@@ -47,18 +49,25 @@ void Symbol::draw(const d2d::Matrix& mt,
 		return;
 	}
 
-	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
-
-	static clock_t time = 0;
 	clock_t curr = clock();
-	if (time != 0) {
-		if (m_ps->IsEmpty() && loop) {
-			Start();
-		}
-		m_ps->update((float)(curr - time) / CLOCKS_PER_SEC);
-		m_ps->draw(mt);
+	if (m_time == 0) {
+		m_time = curr;
+		return;
 	}
-	time = curr;
+
+	d2d::ShaderMgr* shader = d2d::ShaderMgr::Instance();
+	shader->SetSpriteColor(mul, add);
+	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
+
+	float dt = (float)(curr - m_time) / CLOCKS_PER_SEC;
+	bool loop = d2d::Config::Instance()->GetSettings().particle3d_loop;
+	if (m_ps->IsEmpty() && loop) {
+		Start();
+	}
+	m_ps->update(dt);
+	m_ps->draw(mt);
+
+	m_time = curr;
 }
 
 d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const

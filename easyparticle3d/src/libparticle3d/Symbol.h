@@ -45,6 +45,8 @@ private:
 
 	d2d::Rect m_region;
 
+	mutable clock_t m_time;
+
 }; // ParticleSystem
 
 }
