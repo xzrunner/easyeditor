@@ -51,9 +51,6 @@ void Symbol::draw(const d2d::Matrix& mt,
 	clock_t curr = clock();
 	if (time != 0) {
 		if (m_ps->IsEmpty()) {
-			if (sprite) {
-				m_ps->origin = sprite->getPosition();
-			}
 			m_ps->start();
 		}
 		m_ps->update((float)(curr - time) / CLOCKS_PER_SEC);
