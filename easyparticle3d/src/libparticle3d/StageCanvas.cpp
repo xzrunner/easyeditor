@@ -17,8 +17,6 @@ StageCanvas::StageCanvas(StagePanel* editPanel)
 	, m_timer(this, TIMER_ID)
 	, m_control(0.033f)
 {
-	m_bgColor.set(1, 1, 1, 1);
-
 	m_timer.Start(10);
 	m_currFrame = 1;
 	m_last = -1;
@@ -37,18 +35,12 @@ void StageCanvas::onDraw()
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-// 		if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(sprite))
-// 		{
-// 			d2d::SpriteDraw::begin(sprite);
-// 			libanim::Tools::drawAnimSymbol(&anim->getSymbol(), m_currFrame);
-// 			d2d::SpriteDraw::end(sprite);
-// 		}
-// 		else
-			d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteDraw::drawSprite(sprites[i]);
 	}
 
- 	if (m_stage->m_ps)
+	if (m_stage->m_ps) {
 		m_stage->m_ps->draw(d2d::Matrix());
+	}
 
 	m_editPanel->drawEditTemp();
 }
