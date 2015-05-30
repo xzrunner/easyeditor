@@ -107,7 +107,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library);
 
 	m_library->setCanvas(m_stage->getCanvas());
-	m_property->setPropertySetting(new ecomplex::PropertySetting(m_stage, m_stage->getSymbol()));
+	m_property->SetPropertySetting(new ecomplex::SymbolPropertySetting(m_stage, m_stage->getSymbol()));
 
 	return m_stage;
 }

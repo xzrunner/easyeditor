@@ -89,7 +89,7 @@ private:
 
 	IOperaterBase* m_base_op;
 
-	d2d::EditPanel* m_editPanel;
+	d2d::EditPanel* m_stage;
 
 protected:
 	NodeAddr m_capturedEditable, m_captureSelectable;

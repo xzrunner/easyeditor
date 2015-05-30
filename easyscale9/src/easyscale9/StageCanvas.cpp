@@ -31,7 +31,7 @@ StageCanvas::~StageCanvas()
 
 void StageCanvas::onDraw()
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 	if (m_toolbar->isComposeOP())
 	{
 		drawGuideLines();

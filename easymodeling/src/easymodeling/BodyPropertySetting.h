@@ -1,6 +1,5 @@
-
-#ifndef EMODELING_BODY_PROPERTY_SETTING_H
-#define EMODELING_BODY_PROPERTY_SETTING_H
+#ifndef _EASYMODELING_BODY_PROPERTY_SETTING_H_
+#define _EASYMODELING_BODY_PROPERTY_SETTING_H_
 
 #include <drag2d.h>
 
@@ -8,21 +7,23 @@ namespace libmodeling { class Body; }
 
 namespace emodeling
 {
-	class BodyPropertySetting : public d2d::IPropertySetting
-	{
-	public:
-		BodyPropertySetting(d2d::EditPanel* editPanel, d2d::ISprite* sprite);
 
-		virtual void updatePanel(d2d::PropertySettingPanel* panel);
+class BodyPropertySetting : public d2d::IPropertySetting
+{
+public:
+	BodyPropertySetting(d2d::EditPanel* editPanel, d2d::ISprite* sprite);
 
-		virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-		virtual void updatePropertyGrid(d2d::PropertySettingPanel* panel);
-		virtual void enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
-	private:
-		libmodeling::Body* m_body;
+protected:
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
-	}; // BodyPropertySetting
+private:
+	libmodeling::Body* m_body;
+
+}; // BodyPropertySetting
+
 }
 
-#endif // EMODELING_BODY_PROPERTY_SETTING_H
+#endif // _EASYMODELING_BODY_PROPERTY_SETTING_H_

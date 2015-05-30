@@ -11,7 +11,7 @@ namespace d2d
 {
 
 MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanel* editPanel, const std::vector<ISprite*>& sprites)
-	: IPropertySetting(editPanel, wxT("MultiSprites"))
+	: IPropertySetting(editPanel, "MultiSprites")
 	, m_impl(new MultiSpritesPropertyImpl(sprites))
 	, m_overall(false)
 {
@@ -22,17 +22,7 @@ MultiSpritesPropertySetting::~MultiSpritesPropertySetting()
 	delete m_impl;
 }
 
-void MultiSpritesPropertySetting::updatePanel(PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	if (getPGType(pg) == m_type)
-		updateProperties(pg);
-	else
-		initProperties(pg);
-}
-
-void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void MultiSpritesPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -78,14 +68,14 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 	else if (name == wxT("All Pos"))
 	{
 		double dx, dy;
-		splitString(value, &dx, &dy);
+		SplitString2Double(value, &dx, &dy);
 		m_impl->SetPos(dx, dy);
 	}
 	// change
 	else if (name == wxT("dPos"))
 	{
 		double dx, dy;
-		splitString(value, &dx, &dy);
+		SplitString2Double(value, &dx, &dy);
 		m_impl->OnPosChange(dx, dy);
 	}
 	else if (name == wxT("dAngle"))
@@ -96,7 +86,7 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 	else if (name == wxT("dScale"))
 	{
 		double dx, dy;
-		splitString(value, &dx, &dy);
+		SplitString2Double(value, &dx, &dy);
 		m_impl->OnScaleChange(dx, dy);
 	}
 	// geometry
@@ -112,7 +102,7 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 	else if (name == "Scale")
 	{
 		double dx, dy;
-		splitString(value, &dx, &dy);
+		SplitString2Double(value, &dx, &dy);
 		m_impl->SetScale(m_overall, dx, dy);
 	}
 	else if (name == "Mirror.Horizontal")
@@ -133,53 +123,10 @@ void MultiSpritesPropertySetting::onPropertyGridChange(const wxString& name, con
 		m_impl->SetEditable(wxANY_AS(value, bool));
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void MultiSpritesPropertySetting::updatePropertyGrid(PropertySettingPanel* panel)
-{
-	updatePanel(panel);
-}
-
-void MultiSpritesPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool bEnable)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	if (getPGType(pg) != m_type)
-		initProperties(pg);
-
-	pg->GetProperty(wxT("Tag"))->Enable(bEnable);
-	pg->GetProperty(wxT("Clip"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color.Multi"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color.Add"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color.Alpha"))->Enable(bEnable);
-
-	pg->GetProperty(wxT("Align"))->Enable(bEnable);
-	pg->GetProperty(wxT("Center"))->Enable(bEnable);
-	pg->GetProperty(wxT("All Pos"))->Enable(bEnable);
-	pg->GetProperty(wxT("All Pos.X"))->Enable(bEnable);
-	pg->GetProperty(wxT("All Pos.Y"))->Enable(bEnable);
-
-	pg->GetProperty(wxT("dPos"))->Enable(bEnable);
-	pg->GetProperty(wxT("dPos.dx"))->Enable(bEnable);
-	pg->GetProperty(wxT("dPos.dy"))->Enable(bEnable);
-	pg->GetProperty(wxT("dAngle"))->Enable(bEnable);
-	pg->GetProperty(wxT("dScale"))->Enable(bEnable);
-	pg->GetProperty(wxT("dScale.dx"))->Enable(bEnable);
-	pg->GetProperty(wxT("dScale.dy"))->Enable(bEnable);
-
-	pg->GetProperty(wxT("Angle"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale.X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale.Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Mirror.Horizontal"))->Enable(bEnable);
-	pg->GetProperty(wxT("Mirror.Vertical"))->Enable(bEnable);
-
-	pg->GetProperty(wxT("Visible"))->Enable(bEnable);
-	pg->GetProperty(wxT("Editable"))->Enable(bEnable);
-}
-
-void MultiSpritesPropertySetting::updateProperties(wxPropertyGrid* pg)
+void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("Tag"))->SetValue(m_impl->GetTag());
 	pg->GetProperty(wxT("Clip"))->SetValue(m_impl->GetClip());
@@ -215,7 +162,7 @@ void MultiSpritesPropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Editable"))->SetValue(m_impl->GetEditable());
 }
 
-void MultiSpritesPropertySetting::initProperties(wxPropertyGrid* pg)
+void MultiSpritesPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	pg->Clear();
 

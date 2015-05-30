@@ -14,7 +14,7 @@ namespace d2d
 SpriteDropTarget::SpriteDropTarget(MultiSpritesImpl* panelImpl, 
 	EditPanel* editPanel, LibraryPanel* libraryPanel)
 	: m_panelImpl(panelImpl)
-	, m_editPanel(editPanel)
+	, m_stage(editPanel)
 	, m_libraryPanel(libraryPanel)
 {
 }
@@ -30,7 +30,7 @@ bool SpriteDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	ISymbol* symbol = m_libraryPanel->getSymbol(index);
 	if (symbol)
 	{
-		Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		Vector pos = m_stage->transPosScreenToProject(x, y);
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->translate(pos);
 		m_panelImpl->insertSprite(sprite);

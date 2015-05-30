@@ -89,11 +89,11 @@ void ToolbarPanel::initSizeSetting(wxBoxSizer* topSizer)
 
 void ToolbarPanel::onParamsChanged(wxSpinEvent& event)
 {
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 	stage->SetLayoutInfo(m_row->GetValue(), 
 		m_col->GetValue(), m_edge->GetValue());
 	stage->UpdateAllSpritesLocation();
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
 void ToolbarPanel::onLevelChanged(wxCommandEvent& event)

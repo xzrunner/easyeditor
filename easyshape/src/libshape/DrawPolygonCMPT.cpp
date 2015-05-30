@@ -109,11 +109,11 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			col.r = m_color.Red() / 255.0f;
 			col.g = m_color.Green() / 255.0f;
 			col.b = m_color.Blue() / 255.0f;
-			d2d::HSLColorSettingDlg dlg(m_editPanel, NULL, col);
+			d2d::HSLColorSettingDlg dlg(m_stage, NULL, col);
 			if (dlg.ShowModal()) {
 				col = dlg.GetColor();
 				m_color.Set(col.r * 255, col.g * 255, col.b * 255);
-				m_editPanel->ResetViewport();
+				m_stage->ResetViewport();
 			}
 		}
 		break;
@@ -153,7 +153,7 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 			poly->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->fetchSymbol(m_filePath)));
 			break;
 		}
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 }
 

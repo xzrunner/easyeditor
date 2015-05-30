@@ -1,9 +1,9 @@
-#ifndef _EASYSCALE9_SYMBOL_PROPERTY_SETTING_H_
-#define _EASYSCALE9_SYMBOL_PROPERTY_SETTING_H_
+#ifndef _EASYCOMPLEX_PROPERTY_SETTING_H_
+#define _EASYCOMPLEX_PROPERTY_SETTING_H_
 
 #include <drag2d.h>
 
-namespace escale9
+namespace ecomplex
 {
 
 class Symbol;
@@ -20,10 +20,13 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
-	Symbol* m_symbol;
+	std::string GetGroupNames() const;
+	void SetGroupByNames(const wxString& names);
 
-}; // SymbolPropertySetting
+	void InitEachGroup(wxPropertyGrid* pg);
+
+}; // SymbolPropertySetting	
 
 }
 
-#endif // _EASYSCALE9_SYMBOL_PROPERTY_SETTING_H_
+#endif // _EASYCOMPLEX_PROPERTY_SETTING_H_

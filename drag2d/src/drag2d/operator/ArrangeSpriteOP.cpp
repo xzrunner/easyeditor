@@ -108,7 +108,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onDraw() const
 {
 	if (TBase::onDraw()) return true;
-	m_impl->onDraw(*m_editPanel->getCamera());
+	m_impl->onDraw(*m_stage->getCamera());
 	return false;
 }
 

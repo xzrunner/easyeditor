@@ -21,14 +21,14 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::onMouseLeftDClick(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
-		emesh::EditDialog dlg(m_editPanel, sprite);
+		emesh::EditDialog dlg(m_stage, sprite);
 		dlg.ShowModal();
 
-		m_editPanel->resetCanvas();
+		m_stage->resetCanvas();
 	}
 
 	return false;
@@ -38,13 +38,13 @@ d2d::IPropertySetting* SelectSpritesOP::createPropertySetting(d2d::ISprite* spri
 {
 	if (sprite) {
 		if (eicon::Sprite* spr = dynamic_cast<eicon::Sprite*>(sprite)) {
-			return new eicon::SpritePropertySetting(m_editPanel, spr);
+			return new eicon::SpritePropertySetting(m_stage, spr);
 		} else {
 			return d2d::SelectSpritesOP::createPropertySetting(sprite);
 		}
 	} else {
-		Controller* ctrl = ((StagePanel*)m_editPanel)->GetController();
-		return new d2d::SymbolPropertySetting(m_editPanel, &ctrl->name);
+		Controller* ctrl = ((StagePanel*)m_stage)->GetController();
+		return new d2d::SymbolPropertySetting(m_stage, &ctrl->name);
 	}
 }
 

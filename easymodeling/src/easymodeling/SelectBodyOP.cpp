@@ -34,12 +34,12 @@ bool SelectBodyOP::onMouseMove(int x, int y)
 
 	m_mouseOn = NULL;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (selected)
 		m_mouseOn = static_cast<libmodeling::Body*>(selected->getUserData());
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -50,7 +50,7 @@ bool SelectBodyOP::onMouseLeftDClick(int x, int y)
 
 	// todo
 
-// 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+// 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 // 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 // 	if (selected)
 // 	{
@@ -88,9 +88,9 @@ bool SelectBodyOP::clear()
 d2d::IPropertySetting* SelectBodyOP::createPropertySetting(d2d::ISprite* sprite) const
 {
 	if (sprite)
-		return new BodyPropertySetting(m_editPanel, sprite);
+		return new BodyPropertySetting(m_stage, sprite);
 	else
-		return new WorldPropertySetting(m_editPanel);
+		return new WorldPropertySetting(m_stage);
 }
 
 //////////////////////////////////////////////////////////////////////////

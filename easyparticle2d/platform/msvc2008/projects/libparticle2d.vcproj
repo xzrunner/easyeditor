@@ -312,11 +312,11 @@
 				Name="property"
 				>
 				<File
-					RelativePath="..\..\..\src\libparticle2d\PropertySetting.cpp"
+					RelativePath="..\..\..\src\libparticle2d\SymbolPropertySetting.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\libparticle2d\PropertySetting.h"
+					RelativePath="..\..\..\src\libparticle2d\SymbolPropertySetting.h"
 					>
 				</File>
 			</Filter>

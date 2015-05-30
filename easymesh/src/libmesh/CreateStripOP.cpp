@@ -21,7 +21,7 @@ bool CreateStripOP::onMouseLeftDown(int x, int y)
 
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		m_selected = shape->FindNode(pos);
 	}
 
@@ -39,9 +39,9 @@ bool CreateStripOP::onMouseLeftUp(int x, int y)
 
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		shape->InsertNode(pos);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -54,9 +54,9 @@ bool CreateStripOP::onMouseRightDown(int x, int y)
 
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		shape->RemoveNode(pos);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 
 		m_last_right = pos;
 	}
@@ -79,7 +79,7 @@ bool CreateStripOP::onMouseDrag(int x, int y)
 	if (d2d::ZoomViewOP::onMouseDrag(x, y))
 		return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 
 	// move background
 	if (m_last_right.isValid())

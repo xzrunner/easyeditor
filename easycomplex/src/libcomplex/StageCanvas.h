@@ -24,7 +24,7 @@ namespace ecomplex
 		void onTimer(wxTimerEvent& event);
 
 	protected:
-		StagePanel* m_editPanel;
+		StagePanel* m_stage;
 
 	private:
 		void drawBackground() const;

@@ -16,7 +16,7 @@ namespace d2d
 {
 
 SpritePropertySetting::SpritePropertySetting(EditPanel* editPanel, ISprite* sprite)
-	: IPropertySetting(editPanel, wxT("Sprite"))
+	: IPropertySetting(editPanel, "Sprite")
 	, m_impl(new SpritePropertyImpl(editPanel, sprite))
 {
 }
@@ -26,16 +26,7 @@ SpritePropertySetting::~SpritePropertySetting()
 	delete m_impl;
 }
 
-void SpritePropertySetting::updatePanel(PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-	if (getPGType(pg) == m_type)
-		updateProperties(pg);
-	else
-		initProperties(pg);
-}
-
-void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -91,7 +82,7 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Pos"))
 	{
  		double x, y;
- 		splitString(value, &x, &y);
+ 		SplitString2Double(value, &x, &y);
  		m_impl->Translate(x, y);
 	}
 	// angle
@@ -103,28 +94,28 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	else if (name == wxT("Scale"))
 	{
 		double x, y;
-		splitString(value, &x, &y);
+		SplitString2Double(value, &x, &y);
 		m_impl->Scale(x, y);
 	}
 	// size
 	else if (name == wxT("Size"))
 	{
 		double w, h;
-		splitString(value, &w, &h);
+		SplitString2Double(value, &w, &h);
 		m_impl->Scale(w/spr->getSymbol().getSize().xLength(), h/spr->getSymbol().getSize().yLength());
 	}
 	// shear
 	else if (name == wxT("Shear"))
 	{
 		double x, y;
-		splitString(value, &x, &y);
+		SplitString2Double(value, &x, &y);
 		m_impl->Shear(x, y);
 	}
 	// offset
 	else if (name == wxT("Offset"))
 	{
 		double x, y;
-		splitString(value, &x, &y);
+		SplitString2Double(value, &x, &y);
 		m_impl->Offset(x, y);
 	}
 	// mirror
@@ -155,57 +146,10 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		spr->editable = wxANY_AS(value, bool);
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void SpritePropertySetting::updatePropertyGrid(PropertySettingPanel* panel)
-{
-	updatePanel(panel);
-}
-
-void SpritePropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool bEnable)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	if (getPGType(pg) != m_type)
-		initProperties(pg);
-
-	pg->GetProperty(wxT("Type"))->Enable(bEnable);
-	pg->GetProperty(wxT("Name"))->Enable(bEnable);
-	pg->GetProperty(wxT("Tag"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color.Multi"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color.Add"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color.Alpha"))->Enable(bEnable);
-// 	pg->GetProperty(wxT("Color.R"))->Enable(bEnable);
-// 	pg->GetProperty(wxT("Color.G"))->Enable(bEnable);
-// 	pg->GetProperty(wxT("Color.B"))->Enable(bEnable);
-	pg->GetProperty(wxT("Clip"))->Enable(bEnable);
-	pg->GetProperty(wxT("Pos"))->Enable(bEnable);
-	pg->GetProperty(wxT("Pos.X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Pos.Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Angle"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale.X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Scale.Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Size"))->Enable(bEnable);
-	pg->GetProperty(wxT("Size.Width"))->Enable(bEnable);
-	pg->GetProperty(wxT("Size.Height"))->Enable(bEnable);
-	pg->GetProperty(wxT("Shear"))->Enable(bEnable);
-	pg->GetProperty(wxT("Shear.X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Shear.Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Offset"))->Enable(bEnable);
-	pg->GetProperty(wxT("Offset.X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Offset.Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Mirror"))->Enable(bEnable);
-	pg->GetProperty(wxT("Mirror.Horizontal"))->Enable(bEnable);
-	pg->GetProperty(wxT("Mirror.Vertical"))->Enable(bEnable);
-
-	pg->GetProperty(wxT("Visiable"))->Enable(bEnable);
-	pg->GetProperty(wxT("Editable"))->Enable(bEnable);
-}
-
-void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
+void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
 	d2d::ISprite* spr = m_impl->GetSprite();
 
@@ -226,13 +170,13 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
 	ColorProperty* rp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.R"));
-	rp->SetListener(new PropertyColorListener(m_editPanel, &spr->r_trans));
+	rp->SetListener(new PropertyColorListener(m_stage, &spr->r_trans));
 
 	ColorProperty* gp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.G"));
-	gp->SetListener(new PropertyColorListener(m_editPanel, &spr->g_trans));
+	gp->SetListener(new PropertyColorListener(m_stage, &spr->g_trans));
 
 	ColorProperty* bp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.B"));
-	bp->SetListener(new PropertyColorListener(m_editPanel, &spr->b_trans));
+	bp->SetListener(new PropertyColorListener(m_stage, &spr->b_trans));
 
 	pg->GetProperty(wxT("Clip"))->SetValue(spr->clip);
 
@@ -257,15 +201,13 @@ void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Editable"))->SetValue(spr->editable);
 }
 
-void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
+void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
 	d2d::ISprite* spr = m_impl->GetSprite();
 
 	pg->Clear();
 
 	pg->Append(new wxPropertyCategory("INFO", wxPG_LABEL));
-
-	pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->name));
 
@@ -290,15 +232,15 @@ void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
 	col_conv_prop->SetExpanded(false);
 
 	ColorProperty* col_r_prop = new ColorProperty("R");
-	col_r_prop->SetListener(new PropertyColorListener(m_editPanel, &spr->r_trans));
+	col_r_prop->SetListener(new PropertyColorListener(m_stage, &spr->r_trans));
 	pg->AppendIn(col_conv_prop, col_r_prop);
 
 	ColorProperty* col_g_prop = new ColorProperty("G");
-	col_g_prop->SetListener(new PropertyColorListener(m_editPanel, &spr->g_trans));
+	col_g_prop->SetListener(new PropertyColorListener(m_stage, &spr->g_trans));
 	pg->AppendIn(col_conv_prop, col_g_prop);
 
 	ColorProperty* col_b_prop = new ColorProperty("B");
-	col_b_prop->SetListener(new PropertyColorListener(m_editPanel, &spr->b_trans));
+	col_b_prop->SetListener(new PropertyColorListener(m_stage, &spr->b_trans));
 	pg->AppendIn(col_conv_prop, col_b_prop);
 
 // 	wxColour r_trans = wxColour(spr->r_trans.r*255, spr->r_trans.g*255, spr->r_trans.b*255, spr->r_trans.a*255);

@@ -13,11 +13,11 @@ class BezierPropertySetting : public d2d::IPropertySetting
 public:
 	BezierPropertySetting(d2d::EditPanel* editPanel, BezierShape* bezier);
 
-	virtual void updatePanel(d2d::PropertySettingPanel* panel);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
-	virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-	virtual void updatePropertyGrid(d2d::PropertySettingPanel* panel);
-	virtual void enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable);
+protected:
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
 	BezierShape* m_bezier;

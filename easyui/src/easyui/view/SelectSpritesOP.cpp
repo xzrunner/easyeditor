@@ -14,11 +14,11 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 d2d::IPropertySetting* SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
 {
 	if (d2d::TextSprite* text = dynamic_cast<d2d::TextSprite*>(sprite))
-		return new d2d::TextPropertySetting(m_editPanel, text);
+		return new d2d::TextPropertySetting(m_stage, text);
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(sprite))
-		return new FontPropertySetting(m_editPanel, font);
+		return new FontPropertySetting(m_stage, font);
 	else if (sprite)
-		return new d2d::SpritePropertySetting(m_editPanel, sprite);
+		return new d2d::SpritePropertySetting(m_stage, sprite);
 	else 
 		return NULL;	
 }

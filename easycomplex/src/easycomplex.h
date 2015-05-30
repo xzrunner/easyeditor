@@ -7,7 +7,7 @@
 #include "libcomplex/FileSaver.h"
 #include "libcomplex/EditDialog.h"
 #include "libcomplex/SettingsDialog.h"
-#include "libcomplex/PropertySetting.h"
+#include "libcomplex/SymbolPropertySetting.h"
 #include "libcomplex/SelectSpritesOP.h"
 #include "libcomplex/StageCanvas.h"
 #include "libcomplex/StagePanel.h"

@@ -52,7 +52,7 @@ void SelectSpritesOP::OnSelected()
 		}
 	}
 
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 	stage->SetSelectedSymbol(symbol);
 }
 

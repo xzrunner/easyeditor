@@ -3,7 +3,7 @@
 #include "FileSaver.h"
 #include "LibraryPanel.h"
 #include "Symbol.h"
-#include "PropertySetting.h"
+#include "SymbolPropertySetting.h"
 
 #include <wx/splitter.h>
 
@@ -58,7 +58,7 @@ wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, this, m_symbol, m_property, 
 		static_cast<ecomplex::LibraryPanel*>(m_library));
-	m_property->setPropertySetting(new ecomplex::PropertySetting(m_stage, m_symbol));
+	m_property->SetPropertySetting(new ecomplex::SymbolPropertySetting(m_stage, m_symbol));
 	return m_stage;
 }
 

@@ -14,9 +14,9 @@ bool AutoRectCutOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	m_last_pos = m_editPanel->transPosScreenToProject(x, y);
+	m_last_pos = m_stage->transPosScreenToProject(x, y);
 	m_selected = m_rects.queryRect(m_last_pos);
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -30,7 +30,7 @@ bool AutoRectCutOP::onMouseLeftUp(int x, int y)
 		m_selected->xMax = (int)(m_selected->xMax+0.5f);
 		m_selected->yMin = (int)(m_selected->yMin+0.5f);
 		m_selected->yMax = (int)(m_selected->yMax+0.5f);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -40,11 +40,11 @@ bool AutoRectCutOP::onMouseRightDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseRightDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	bool removed = m_rects.remove(pos);
 	if (removed) {
 		m_selected = NULL;
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -56,10 +56,10 @@ bool AutoRectCutOP::onMouseDrag(int x, int y)
 
 	if (m_selected)
 	{
-		d2d::Vector curr = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector curr = m_stage->transPosScreenToProject(x, y);
 		m_rects.moveRect(m_selected, m_last_pos, curr);
 		m_last_pos = curr;
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -69,7 +69,7 @@ bool AutoRectCutOP::onMouseLeftDClick(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDClick(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::Rect* r = m_rects.queryRect(pos);
 	if (r) {
 		m_rects.insert(d2d::Rect(*r), true);

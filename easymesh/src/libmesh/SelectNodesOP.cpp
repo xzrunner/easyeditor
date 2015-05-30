@@ -28,7 +28,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	Shape* shape = m_stage->GetShape();
 	if (!shape) return false;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	std::vector<Node*> nodes;
 	shape->QueryNode(pos, nodes);
 	if (!nodes.empty())
@@ -58,7 +58,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 			m_bDraggable = false;
 		else
 			m_selection.Clear();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -73,7 +73,7 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 	Shape* shape = m_stage->GetShape();
 	if (m_firstPos.isValid() && shape)
 	{
-		d2d::Vector end = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector end = m_stage->transPosScreenToProject(x, y);
 		d2d::Rect rect(m_firstPos, end);
 		std::vector<Node*> nodes;
 		shape->QueryNode(rect, nodes);

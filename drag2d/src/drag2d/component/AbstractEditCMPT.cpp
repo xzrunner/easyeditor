@@ -10,7 +10,7 @@ namespace d2d
 AbstractEditCMPT::AbstractEditCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel,
 								   const wxString& childrenName/* = wxEmptyString*/, bool vertical)
 	: wxScrolledWindow(parent)
-	, m_editPanel(editPanel)
+	, m_stage(editPanel)
 	, m_editOP(NULL)
 	, m_name(name)
 	, m_childrenName(childrenName)
@@ -85,7 +85,7 @@ void AbstractEditCMPT::setChoice(size_t index)
 
 void AbstractEditCMPT::loadEditOP()
 {
-	m_editPanel->setEditOP(m_editOP);
+	m_stage->setEditOP(m_editOP);
 }
 
 void AbstractEditCMPT::loadEditOP(AbstractEditOP* op)
@@ -103,7 +103,7 @@ void AbstractEditCMPT::loadEditOP(AbstractEditOP* op)
 	}
 	m_editOP = op;
 
-	m_editPanel->setEditOP(m_editOP);
+	m_stage->setEditOP(m_editOP);
 }
 
 void AbstractEditCMPT::loadEditOP(AbstractEditCMPT* cmpt)
@@ -122,7 +122,7 @@ void AbstractEditCMPT::loadEditOP(AbstractEditCMPT* cmpt)
 	}
 	cmpt->m_editOP = m_editOP;
 
-	m_editPanel->setEditOP(m_editOP);
+	m_stage->setEditOP(m_editOP);
 }
 
 void AbstractEditCMPT::onChangeEditType(wxCommandEvent& event)

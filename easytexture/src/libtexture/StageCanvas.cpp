@@ -58,7 +58,7 @@ void StageCanvas::onDraw()
 
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)

@@ -5,36 +5,16 @@ namespace escale9
 {
 
 SymbolPropertySetting::SymbolPropertySetting(d2d::EditPanel* editPanel, Symbol* symbol)
-	: d2d::IPropertySetting(editPanel, wxT("Scale9 Symbol"))
+	: d2d::SymbolPropertySetting(editPanel, symbol)
 	, m_symbol(symbol)
 {
+	m_type = "Scale9Symbol";
 }
 
-void SymbolPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
+void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	wxPropertyGrid* pg = panel->getPG();
+	d2d::SymbolPropertySetting::OnPropertyGridChange(name, value);
 
-	if (getPGType(pg) == m_type)
-	{
-		pg->GetProperty(wxT("Width"))->SetValue(m_symbol->getSize().xLength());
-		pg->GetProperty(wxT("Height"))->SetValue(m_symbol->getSize().yLength());
-	}
-	else
-	{
-		pg->Clear();
-
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
-
-		pg->Append(new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_symbol->getSize().xLength()));
-		pg->SetPropertyAttribute(wxT("Width"), "Precision", 0);
-
-		pg->Append(new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_symbol->getSize().yLength()));
-		pg->SetPropertyAttribute(wxT("Height"), "Precision", 0);
-	}
-}
-
-void SymbolPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
-{
 	if (value.IsNull())
 		return;
 
@@ -51,33 +31,28 @@ void SymbolPropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		m_symbol->ResizeScale9(w, h);
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void SymbolPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void SymbolPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	updatePanel(panel);
+	d2d::SymbolPropertySetting::UpdateProperties(pg);
+
+	pg->GetProperty(wxT("Width"))->SetValue(m_symbol->getSize().xLength());
+	pg->GetProperty(wxT("Height"))->SetValue(m_symbol->getSize().yLength());
 }
 
-void SymbolPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void SymbolPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	wxPropertyGrid* pg = panel->getPG();
+	d2d::SymbolPropertySetting::InitProperties(pg);
 
-	if (getPGType(pg) != m_type)
-	{
-		pg->Clear();
+	pg->Clear();
 
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
+	pg->Append(new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_symbol->getSize().xLength()));
+	pg->SetPropertyAttribute(wxT("Width"), "Precision", 0);
 
-		pg->Append(new wxFloatProperty(wxT("Width"), wxPG_LABEL, m_symbol->getSize().xLength()));
-		pg->SetPropertyAttribute(wxT("Width"), "Precision", 0);
-
-		pg->Append(new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_symbol->getSize().yLength()));
-		pg->SetPropertyAttribute(wxT("Height"), "Precision", 0);
-	}
-
-	pg->GetProperty(wxT("Width"))->Enable(bEnable);
-	pg->GetProperty(wxT("Height"))->Enable(bEnable);
+	pg->Append(new wxFloatProperty(wxT("Height"), wxPG_LABEL, m_symbol->getSize().yLength()));
+	pg->SetPropertyAttribute(wxT("Height"), "Precision", 0);
 }
 
 }

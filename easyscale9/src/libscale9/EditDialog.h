@@ -21,7 +21,7 @@ namespace escale9
 	private:
 		Symbol* m_symbol;
 
-		d2d::EditPanel* m_editPanel;
+		d2d::EditPanel* m_stage;
 
 		DECLARE_EVENT_TABLE()
 

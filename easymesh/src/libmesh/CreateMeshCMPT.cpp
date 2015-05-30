@@ -100,7 +100,7 @@ void CreateMeshCMPT::onCopy(wxCommandEvent& event)
 // 	if (dlg.ShowModal() == wxID_OK)
 // 	{
 // 		FileIO::loadStruct(dlg.GetPath(), *m_stage->getMesh());
-// 		m_editPanel->Refresh();
+// 		m_stage->Refresh();
 // 	}
 }
 
@@ -111,7 +111,7 @@ void CreateMeshCMPT::onClear(wxCommandEvent& event)
 	}
 	m_stage->clearShapes();
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 	m_editOP->clear();
 }
 

@@ -55,7 +55,7 @@ void StageCanvas::onDraw()
 	m_panel->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 //	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);
 
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)
@@ -83,7 +83,7 @@ void StageCanvas::Update()
 	last = curr;
 
 	std::vector<OceanMesh*>& oceans 
-		= static_cast<StagePanel*>(m_editPanel)->GetOceans();
+		= static_cast<StagePanel*>(m_stage)->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->Update(dt);
 	}

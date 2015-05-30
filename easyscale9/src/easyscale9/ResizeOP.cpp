@@ -41,7 +41,7 @@ bool ResizeOP::onMouseDrag(int x, int y)
 	{
 		float width, height;
 
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 
 		Scale9Type type = symbol->GetScale9Data().GetType();
 		if (type == e_9Grid || 
@@ -69,7 +69,7 @@ bool ResizeOP::onMouseDrag(int x, int y)
 		m_resizeCmpt->setSize(width, height);
 		symbol->ResizeScale9(width, height);
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;

@@ -24,7 +24,7 @@ bool DrawPencilLineOP::onMouseLeftUp(int x, int y)
 		m_shapesImpl->insertShape(new ChainShape(simplified, false));
 		clear();
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;

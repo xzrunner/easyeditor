@@ -36,7 +36,7 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 									 MultiSpritesImpl* spritesImpl,
 									 PropertySettingPanel* propertyPanel,
 									 const ArrangeSpriteConfig& cfg) 
-	: m_editPanel(editPanel)
+	: m_stage(editPanel)
 	, m_spritesImpl(spritesImpl)
 	, m_propertyPanel(propertyPanel)
 	, m_align(spritesImpl)
@@ -69,7 +69,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		{
 			std::vector<ISprite*> sprites;
 			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-			m_editPanel->addHistoryOP(new DeleteSpriteAOP(sprites, m_spritesImpl));
+			m_stage->addHistoryOP(new DeleteSpriteAOP(sprites, m_spritesImpl));
 		}
 		m_spritesImpl->removeSpriteSelection();
 		break;
@@ -130,21 +130,21 @@ void ArrangeSpriteImpl::onKeyUp(int keyCode)
 				sprite->setShear(0, 0);
 				//				sprite->setOffset(Vector(0, 0));
 			}
-			m_editPanel->addHistoryOP(comb);
+			m_stage->addHistoryOP(comb);
 		}
 		break;
 	}
 
 	if (m_propertyPanel)
 	{
-		m_propertyPanel->enablePropertyGrid(true);
-		m_propertyPanel->updatePropertyGrid();
+		m_propertyPanel->EnablePropertyGrid(true);
+		m_propertyPanel->UpdatePropertyGrid();
 	}
 }
 
 void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 {
-	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	Vector pos = m_stage->transPosScreenToProject(x, y);
 	m_left_down_pos = pos;
 
 	m_align.SetInvisible();
@@ -201,12 +201,12 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 
 void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 {
-	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (m_op_state) 
 	{
 		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
 		if (history) {
-			m_editPanel->addHistoryOP(history);
+			m_stage->addHistoryOP(history);
 		}
 
 		delete m_op_state;
@@ -231,14 +231,14 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 
 	if (m_propertyPanel)
 	{
-		m_propertyPanel->enablePropertyGrid(true);
-		m_propertyPanel->updatePropertyGrid();
+		m_propertyPanel->EnablePropertyGrid(true);
+		m_propertyPanel->UpdatePropertyGrid();
 	}
 }
 
 void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 {
-	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	Vector pos = m_stage->transPosScreenToProject(x, y);
 	m_right_down_pos = pos;
 
 	ISprite* selected = NULL;
@@ -279,19 +279,19 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 {
 	if (m_right_down_pos.isValid() && !m_selection->IsEmpty())
 	{
-		Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		Vector pos = m_stage->transPosScreenToProject(x, y);
 		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
 		if (pos == m_right_down_pos && sprite)
 		{
 			wxMenu menu;
 			SetRightPopupMenu(menu, sprite);
-			m_editPanel->PopupMenu(&menu, x, y);
+			m_stage->PopupMenu(&menu, x, y);
 		}
 		else if (m_op_state)
 		{
 			AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
 			if (history) {
-				m_editPanel->addHistoryOP(history);
+				m_stage->addHistoryOP(history);
 			}
 
 			delete m_op_state;
@@ -300,21 +300,21 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 
 		if (m_propertyPanel)
 		{
-			m_propertyPanel->enablePropertyGrid(true);
-			m_propertyPanel->updatePropertyGrid();
+			m_propertyPanel->EnablePropertyGrid(true);
+			m_propertyPanel->UpdatePropertyGrid();
 		}
 	}
 }
 
 void ArrangeSpriteImpl::onMouseDrag(int x, int y)
 {
-	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (m_op_state && m_op_state->OnMouseMove(pos))
 	{
 		if (m_propertyPanel) {
-			m_propertyPanel->enablePropertyGrid(false);
+			m_propertyPanel->EnablePropertyGrid(false);
 		}
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 }
 
@@ -352,7 +352,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 					dtex->InsertSymbol(s);
 				}
 
-				m_editPanel->getCanvas()->resetViewport();
+				m_stage->getCanvas()->resetViewport();
 			}
 		}
 		break;
@@ -447,9 +447,9 @@ void ArrangeSpriteImpl::onDirectionKeyDown(DirectionType type)
 	if (dirty)
 	{
 		if (m_propertyPanel) {
-			m_propertyPanel->enablePropertyGrid(false);
+			m_propertyPanel->EnablePropertyGrid(false);
 		}
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 }
 
@@ -462,35 +462,35 @@ void ArrangeSpriteImpl::onSpaceKeyDown()
 		selected[i]->setTransform(Vector(0, 0), 0);
 		//selected[i]->setOffset(Vector(0, 0));
 	}
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
 {
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_UP_ONE_LAYER);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_UP_ONE_LAYER);
 	menu.Append(MENU_UP_ONE_LAYER, "上移一层");
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_DOWN_ONE_LAYER);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_DOWN_ONE_LAYER);
 	menu.Append(MENU_DOWN_ONE_LAYER, "下移一层");
 
 	menu.AppendSeparator();
 
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_UP_MOST);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_UP_MOST);
 	menu.Append(MENU_UP_MOST, "移到顶");
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_DOWN_MOST);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_DOWN_MOST);
 	menu.Append(MENU_DOWN_MOST, "移到底");
 
 	menu.AppendSeparator();
 
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_HORI_MIRROR);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_HORI_MIRROR);
 	menu.Append(MENU_HORI_MIRROR, "水平镜像");
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_VERT_MIRROR);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_VERT_MIRROR);
 	menu.Append(MENU_VERT_MIRROR, "竖直镜像");	
 
 #ifdef _DEBUG
 	menu.AppendSeparator();
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_INSERT_TO_DTEX);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_INSERT_TO_DTEX);
 	menu.Append(MENU_INSERT_TO_DTEX, "Insert To DTex");
-	m_editPanel->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_editPanel, MENU_REMOVE_FROM_DTEX);
+	m_stage->Bind(wxEVT_COMMAND_MENU_SELECTED, &d2d::EditPanel::OnRightPopupMenu, m_stage, MENU_REMOVE_FROM_DTEX);
 	menu.Append(MENU_REMOVE_FROM_DTEX, "Remove From DTex");
 #endif
 }

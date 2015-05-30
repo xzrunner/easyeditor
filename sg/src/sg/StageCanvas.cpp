@@ -79,7 +79,7 @@ void StageCanvas::onDraw()
 		DrawArrow();
 	}
 
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 
 //	m_stage->getCheckBoard().DebugDraw();
 }

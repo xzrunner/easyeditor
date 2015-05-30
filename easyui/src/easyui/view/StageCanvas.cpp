@@ -34,7 +34,7 @@ void StageCanvas::onDraw()
 
 	m_statge->GetAnchorMgr()->Draw();
 
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {

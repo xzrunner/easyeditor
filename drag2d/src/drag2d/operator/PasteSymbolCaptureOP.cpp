@@ -23,7 +23,7 @@ bool PasteSymbolCaptureOP::onMouseLeftDown(int x, int y)
 	if (symbol) 
 	{
 		if (!m_bCaptured)
-			m_pos = m_editPanel->transPosScreenToProject(x, y);
+			m_pos = m_stage->transPosScreenToProject(x, y);
 		m_lastPos = m_pos;
 
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
@@ -40,7 +40,7 @@ bool PasteSymbolCaptureOP::onMouseMove(int x, int y)
 	if (ZoomViewOP::onMouseMove(x, y)) return true;
 
 	m_bCaptured = false;
-	m_pos = m_editPanel->transPosScreenToProject(x, y);
+	m_pos = m_stage->transPosScreenToProject(x, y);
 	if (m_lastPos.isValid())
 	{
 		Vector offset = m_cmpt->getOffset();
@@ -52,7 +52,7 @@ bool PasteSymbolCaptureOP::onMouseMove(int x, int y)
 			m_pos = newPos;
 		}
 	}
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }

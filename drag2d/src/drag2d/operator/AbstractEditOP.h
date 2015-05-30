@@ -10,7 +10,7 @@ namespace d2d
 	{
 	public:
 		AbstractEditOP(EditPanel* editPanel) {
-			m_editPanel = editPanel;
+			m_stage = editPanel;
 		}
 		virtual ~AbstractEditOP() {}
 
@@ -35,7 +35,7 @@ namespace d2d
 		virtual bool IsEmpty() const { return true; }
 
 	protected:
-		EditPanel* m_editPanel;
+		EditPanel* m_stage;
 
 	}; // AbstractEditOP
 }

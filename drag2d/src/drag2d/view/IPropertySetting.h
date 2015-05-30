@@ -1,38 +1,46 @@
-#pragma once
+#ifndef _DRAG2D_IPROPERTY_SETTING_H_
+#define _DRAG2D_IPROPERTY_SETTING_H_
 
 #include <wx/wx.h>
 #include <wx/propgrid/propgrid.h>
 
 namespace d2d
 {
-	class EditPanel;
-	class PropertySettingPanel;
 
-	class IPropertySetting
-	{
-	public:
-		IPropertySetting(d2d::EditPanel* editPanel, const wxString& type);
-		virtual ~IPropertySetting() {}
+class EditPanel;
+class PropertySettingPanel;
 
-		virtual void updatePanel(PropertySettingPanel* panel) = 0;
+class IPropertySetting
+{
+public:
+	IPropertySetting(d2d::EditPanel* stage, const std::string& type);
+	virtual ~IPropertySetting() {}
 
-		virtual void onPropertyGridChange(const wxString& name, const wxAny& value) = 0;
-		virtual void updatePropertyGrid(PropertySettingPanel* panel) = 0;
-		virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable) = 0;
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value) = 0;
 
-	protected:
-		wxString getPGType(wxPropertyGrid* pg) const;
+	void UpdateFromPanel(PropertySettingPanel* panel);
+	void EnablePropertyGrid(PropertySettingPanel* panel, bool enable);
 
-		static void splitString(const wxAny& value, double* x, double* y);
+	const std::string& GetType() const { return m_type; }
 
-	protected:
-		static const wxString TYPE_NAME;
+protected:
+	virtual void UpdateProperties(wxPropertyGrid* pg) = 0;
+	virtual void InitProperties(wxPropertyGrid* pg) = 0;
 
-	protected:
-		d2d::EditPanel* m_editPanel;
+	wxString GetPGType(wxPropertyGrid* pg) const;
 
-		wxString m_type;
+	static void SplitString2Double(const wxAny& value, double* x, double* y);
 
-	}; // IPropertySetting
+protected:
+	static const wxString TYPE_NAME;
+
+protected:
+	d2d::EditPanel* m_stage;
+
+	std::string m_type;
+
+}; // IPropertySetting
+
 }
 
+#endif // _DRAG2D_IPROPERTY_SETTING_H_

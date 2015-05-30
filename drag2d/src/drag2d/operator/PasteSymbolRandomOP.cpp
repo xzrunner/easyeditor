@@ -26,7 +26,7 @@ bool PasteSymbolRandomOP::onMouseLeftDown(int x, int y)
 		symbol = m_libraryPanel->getSymbol();
 	if (symbol) 
 	{
-		m_pos = m_editPanel->transPosScreenToProject(x, y);
+		m_pos = m_stage->transPosScreenToProject(x, y);
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->translate(m_pos);
 		if (m_randomValue.scale != 1.0f) 

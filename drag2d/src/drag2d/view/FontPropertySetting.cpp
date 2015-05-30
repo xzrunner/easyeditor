@@ -16,12 +16,12 @@ const wxChar* FontPropertySetting::VERT_ALIGN_LABELS[] = {
 FontPropertySetting::FontPropertySetting(EditPanel* editPanel, FontSprite* sprite)
 	: SpritePropertySetting(editPanel, sprite)
 {
-	m_type = wxT("Font");
+	m_type = "Font";
 }
 
-void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	SpritePropertySetting::onPropertyGridChange(name, value);
+	SpritePropertySetting::OnPropertyGridChange(name, value);
 
 	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
 	if (name == wxT("Font")) {
@@ -44,7 +44,7 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 		sprite->size = wxANY_AS(value, float);
 	} else if (name == "LabelSize") {
 		double w, h;
-		splitString(value, &w, &h);
+		SplitString2Double(value, &w, &h);
 		sprite->width = w;
 		sprite->height = h;
 		sprite->buildBounding();
@@ -65,28 +65,9 @@ void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 	}
 }
 
-void FontPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool bEnable)
+void FontPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	SpritePropertySetting::enablePropertyGrid(panel, bEnable);
-
-	wxPropertyGrid* pg = panel->getPG();
-	pg->GetProperty(wxT("Font"))->Enable(bEnable);
-	pg->GetProperty(wxT("Edge"))->Enable(bEnable);
-	pg->GetProperty(wxT("FontColor"))->Enable(bEnable);
-	pg->GetProperty(wxT("Align"))->Enable(bEnable);
-	pg->GetProperty(wxT("Align.Hori"))->Enable(bEnable);
-	pg->GetProperty(wxT("Align.Vert"))->Enable(bEnable);
-	pg->GetProperty(wxT("FontSize"))->Enable(bEnable);
-	pg->GetProperty(wxT("LabelSize.Width"))->Enable(bEnable);
-	pg->GetProperty(wxT("LabelSize.Height"))->Enable(bEnable);
-	pg->GetProperty(wxT("Filename"))->Enable(bEnable);
-	pg->GetProperty(wxT("TextContent"))->Enable(bEnable);
-	pg->GetProperty(wxT("TextID"))->Enable(bEnable);
-}
-
-void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
-{
-	SpritePropertySetting::updateProperties(pg);
+	SpritePropertySetting::UpdateProperties(pg);
 
 	FontSprite* sprite = static_cast<FontSprite*>(GetSprite());
 	pg->GetProperty(wxT("Font"))->SetValue(sprite->font);
@@ -106,9 +87,9 @@ void FontPropertySetting::updateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("TextID"))->SetValue(sprite->GetTextID());
 }
 
-void FontPropertySetting::initProperties(wxPropertyGrid* pg)
+void FontPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	SpritePropertySetting::initProperties(pg);
+	SpritePropertySetting::InitProperties(pg);
 
 	pg->Append(new wxPropertyCategory("FONT", wxPG_LABEL));
 

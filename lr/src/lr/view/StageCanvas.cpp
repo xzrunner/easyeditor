@@ -31,7 +31,7 @@ void StageCanvas::onDraw()
 		grids->Draw();
 	}
 
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)

@@ -1,32 +1,32 @@
-#pragma once
+#ifndef _DRAG2D_SYMBOL_PROPERTY_SETTING_H_
+#define _DRAG2D_SYMBOL_PROPERTY_SETTING_H_
 
 #include "IPropertySetting.h"
 
 namespace d2d
 {
-	class ISymbol;
 
-	class SymbolPropertySetting : public IPropertySetting
-	{
-	public:
-		SymbolPropertySetting(EditPanel* editPanel, ISymbol* symbol);
-		SymbolPropertySetting(EditPanel* editPanel, std::string* name);
+class ISymbol;
 
-		virtual void updatePanel(PropertySettingPanel* panel);
+class SymbolPropertySetting : public IPropertySetting
+{
+public:
+	SymbolPropertySetting(EditPanel* editPanel, ISymbol* symbol);
+	SymbolPropertySetting(EditPanel* editPanel, std::string* name);
 
-		virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-		virtual void updatePropertyGrid(PropertySettingPanel* panel);
-		virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
-	protected:
-		virtual void updateProperties(wxPropertyGrid* pg);
-		virtual void initProperties(wxPropertyGrid* pg);
+protected:
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
-	protected:
-		ISymbol* m_symbol;
+protected:
+	ISymbol* m_symbol;
 
-		std::string* m_name;
+	std::string* m_name;
 
-	}; // SymbolPropertySetting
+}; // SymbolPropertySetting
+
 }
 
+#endif // _DRAG2D_SYMBOL_PROPERTY_SETTING_H_

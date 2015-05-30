@@ -44,7 +44,7 @@ namespace d2d
 		void onKeyUp(wxKeyEvent& event);
 
 	protected:
-		EditPanel* m_editPanel;
+		EditPanel* m_stage;
 
 		Camera* m_camera;
 

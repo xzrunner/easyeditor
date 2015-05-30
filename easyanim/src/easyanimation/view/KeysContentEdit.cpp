@@ -40,13 +40,13 @@ void KeysContentEdit::OnMouseLeftDown(int row, int col)
 		if (itr != frames.end())
 		{
 			selected = true;
-			FramePropertySetting* property = 
-				new FramePropertySetting(m_ctrl->GetStagePanel(), itr->second);
-			m_ctrl->GetPropertyPanel()->setPropertySetting(property);
+			KeyFramePropertySetting* property = 
+				new KeyFramePropertySetting(m_ctrl->GetStagePanel(), itr->second);
+			m_ctrl->GetPropertyPanel()->SetPropertySetting(property);
 		}
 	}
 	if (!selected) {
-		m_ctrl->GetPropertyPanel()->setPropertySetting(NULL);
+		m_ctrl->GetPropertyPanel()->SetPropertySetting(NULL);
 	}
 }
 

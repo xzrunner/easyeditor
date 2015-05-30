@@ -24,9 +24,9 @@ bool SelectJointOP::onKeyDown(int keyCode)
 	if (keyCode == WXK_DELETE && m_selected)
 	{
 		if (m_mouseOn == m_selected) m_mouseOn = NULL;
-		static_cast<StagePanel*>(m_editPanel)->removeJoint(m_selected);
+		static_cast<StagePanel*>(m_stage)->removeJoint(m_selected);
 		m_selected = NULL;
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -34,10 +34,10 @@ bool SelectJointOP::onKeyDown(int keyCode)
 
 bool SelectJointOP::onMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	libmodeling::Joint* selected = static_cast<StagePanel*>(m_editPanel)->queryJointByPos(pos);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	libmodeling::Joint* selected = static_cast<StagePanel*>(m_stage)->queryJointByPos(pos);
 	if (selected && !m_selected || !selected && m_selected)
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	if (selected)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
@@ -68,12 +68,12 @@ bool SelectJointOP::onMouseLeftDown(int x, int y)
 
 	if (m_selected)
 	{
-		m_propertyPanel->setPropertySetting(new JointPropertySetting(m_editPanel, m_selected));
+		m_propertyPanel->SetPropertySetting(new JointPropertySetting(m_stage, m_selected));
 //		m_selection->clear();
 	}
 	else
 	{
-		m_propertyPanel->setPropertySetting(new WorldPropertySetting(m_editPanel));
+		m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
 		SelectBodyOP::onMouseLeftDown(x, y);
 	}
 
@@ -84,18 +84,18 @@ bool SelectJointOP::onMouseLeftDown(int x, int y)
 
 bool SelectJointOP::onMouseLeftUp(int x, int y)
 {
-	//d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	//d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	//selectedJoints.clear();
-	//static_cast<StagePanel*>(m_editPanel)->queryJointsByRect(d2d::Rect(pos, m_firstPos), selectedJoints);
+	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(d2d::Rect(pos, m_firstPos), selectedJoints);
 	//if (selectedJoints.size() == 1)
-	//	m_propertyPanel->setPropertySetting(new JointPropertySetting(m_editPanel, selectedJoints[0]));
+	//	m_propertyPanel->setPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
 
 	if (SelectBodyOP::onMouseLeftUp(x, y)) return true;
 
 	if (m_selected)
-		m_propertyPanel->setPropertySetting(new JointPropertySetting(m_editPanel, m_selected));
+		m_propertyPanel->SetPropertySetting(new JointPropertySetting(m_stage, m_selected));
 	else
-		m_propertyPanel->setPropertySetting(new WorldPropertySetting(m_editPanel));
+		m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
 
 	return false;
 }
@@ -105,10 +105,10 @@ bool SelectJointOP::onMouseMove(int x, int y)
 	if (SelectBodyOP::onMouseMove(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	libmodeling::Joint* joint = static_cast<StagePanel*>(m_editPanel)->queryJointByPos(pos);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	libmodeling::Joint* joint = static_cast<StagePanel*>(m_stage)->queryJointByPos(pos);
 	if (joint && !m_mouseOn || !joint && m_mouseOn)
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 
 	m_mouseOn = joint;
 
@@ -122,7 +122,7 @@ bool SelectJointOP::onMouseDrag(int x, int y)
 
 	if (m_selected)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		switch (m_selected->type)
 		{
 		case libmodeling::Joint::e_revoluteJoint:
@@ -231,7 +231,7 @@ bool SelectJointOP::onMouseDrag(int x, int y)
 			break;
 		}
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;

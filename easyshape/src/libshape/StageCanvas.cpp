@@ -63,11 +63,11 @@ void StageCanvas::onDraw()
 	libshape::StageCanvas::drawGuideLines();
 
 	if (!m_edited) {
-		const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_editPanel)->GetSymbol();
+		const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_stage)->GetSymbol();
 		symbol.draw(d2d::Matrix());
 	}
 
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)

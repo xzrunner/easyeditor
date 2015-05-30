@@ -1,62 +1,17 @@
-
 #include "WorldPropertySetting.h"
 #include "Context.h"
 
 #include <easymodeling.h>
 
-using namespace emodeling;
+namespace emodeling
+{
 
 WorldPropertySetting::WorldPropertySetting(d2d::EditPanel* editPanel)
-	: d2d::IPropertySetting(editPanel, wxT("World"))
+	: d2d::IPropertySetting(editPanel, "World")
 {
 }
 
-void WorldPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	const libmodeling::World* world = Context::Instance()->world;
-
-	if (getPGType(pg) == m_type)
-	{
-		pg->GetProperty(wxT("Gravity X"))->SetValue(world->gravity.x);
-		pg->GetProperty(wxT("Gravity Y"))->SetValue(world->gravity.y);
-
-		pg->GetProperty(wxT("AllowSleep"))->SetValue(world->allowSleep);
-		pg->GetProperty(wxT("WarmStarting"))->SetValue(world->warmStarting);
-		pg->GetProperty(wxT("ContinuousPhysics"))->SetValue(world->continuousPhysics);
-		pg->GetProperty(wxT("SubStepping"))->SetValue(world->subStepping);
-
-		pg->GetProperty(wxT("VelocityIterations"))->SetValue(world->velocityIterations);
-		pg->GetProperty(wxT("PositionIterations"))->SetValue(world->positionIterations);
-	}
-	else
-	{
-		pg->Clear();
-
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
-
-		pg->Append(new wxFloatProperty(wxT("Gravity X"), wxPG_LABEL, world->gravity.x));
-		pg->Append(new wxFloatProperty(wxT("Gravity Y"), wxPG_LABEL, world->gravity.y));
-
-		pg->Append(new wxBoolProperty(wxT("AllowSleep"), wxPG_LABEL, world->allowSleep));
-		pg->SetPropertyAttribute("AllowSleep", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
-		pg->Append(new wxBoolProperty(wxT("WarmStarting"), wxPG_LABEL, world->warmStarting));
-		pg->SetPropertyAttribute("WarmStarting", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
-		pg->Append(new wxBoolProperty(wxT("ContinuousPhysics"), wxPG_LABEL, world->continuousPhysics));
-		pg->SetPropertyAttribute("ContinuousPhysics", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
-		pg->Append(new wxBoolProperty(wxT("SubStepping"), wxPG_LABEL, world->subStepping));
-		pg->SetPropertyAttribute("SubStepping", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
-		pg->Append(new wxIntProperty(wxT("VelocityIterations"), wxPG_LABEL, world->velocityIterations));
-		pg->Append(new wxIntProperty(wxT("PositionIterations"), wxPG_LABEL, world->positionIterations));
-	}
-}
-
-void WorldPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void WorldPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -80,14 +35,48 @@ void WorldPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	else if (name == wxT("PositionIterations"))
 		world->positionIterations = wxANY_AS(value, float);
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void WorldPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void WorldPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	updatePanel(panel);
+	const libmodeling::World* world = Context::Instance()->world;
+
+	pg->GetProperty(wxT("Gravity X"))->SetValue(world->gravity.x);
+	pg->GetProperty(wxT("Gravity Y"))->SetValue(world->gravity.y);
+
+	pg->GetProperty(wxT("AllowSleep"))->SetValue(world->allowSleep);
+	pg->GetProperty(wxT("WarmStarting"))->SetValue(world->warmStarting);
+	pg->GetProperty(wxT("ContinuousPhysics"))->SetValue(world->continuousPhysics);
+	pg->GetProperty(wxT("SubStepping"))->SetValue(world->subStepping);
+
+	pg->GetProperty(wxT("VelocityIterations"))->SetValue(world->velocityIterations);
+	pg->GetProperty(wxT("PositionIterations"))->SetValue(world->positionIterations);
 }
 
-void WorldPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void WorldPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
+	const libmodeling::World* world = Context::Instance()->world;
+
+	pg->Clear();
+
+	pg->Append(new wxFloatProperty(wxT("Gravity X"), wxPG_LABEL, world->gravity.x));
+	pg->Append(new wxFloatProperty(wxT("Gravity Y"), wxPG_LABEL, world->gravity.y));
+
+	pg->Append(new wxBoolProperty(wxT("AllowSleep"), wxPG_LABEL, world->allowSleep));
+	pg->SetPropertyAttribute("AllowSleep", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxBoolProperty(wxT("WarmStarting"), wxPG_LABEL, world->warmStarting));
+	pg->SetPropertyAttribute("WarmStarting", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxBoolProperty(wxT("ContinuousPhysics"), wxPG_LABEL, world->continuousPhysics));
+	pg->SetPropertyAttribute("ContinuousPhysics", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxBoolProperty(wxT("SubStepping"), wxPG_LABEL, world->subStepping));
+	pg->SetPropertyAttribute("SubStepping", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxIntProperty(wxT("VelocityIterations"), wxPG_LABEL, world->velocityIterations));
+	pg->Append(new wxIntProperty(wxT("PositionIterations"), wxPG_LABEL, world->positionIterations));
+}
+
 }

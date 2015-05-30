@@ -20,8 +20,8 @@ void StageCanvas::onDraw()
 	drawGuideLines();
 
 	drawSprites();
-	static_cast<StagePanel*>(m_editPanel)->traverseJoints(DrawJointVisitor());
-	m_editPanel->drawEditTemp();
+	static_cast<StagePanel*>(m_stage)->traverseJoints(DrawJointVisitor());
+	m_stage->drawEditTemp();
 }
 
 void StageCanvas::drawGuideLines()
@@ -31,7 +31,7 @@ void StageCanvas::drawGuideLines()
 
 void StageCanvas::drawSprites()
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 	std::vector<d2d::ISprite*> sprites;
 	editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)

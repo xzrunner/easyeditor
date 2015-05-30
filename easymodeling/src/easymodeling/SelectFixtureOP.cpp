@@ -24,7 +24,7 @@ SelectFixtureOP::~SelectFixtureOP()
 
 bool SelectFixtureOP::onMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* sprite = m_stagePanel->querySpriteByPos(pos);
 
 	d2d::IPropertySetting* setting = NULL;
@@ -42,19 +42,19 @@ bool SelectFixtureOP::onMouseLeftDown(int x, int y)
 		}
 		if (m_selected)
 		{
-			setting = new FixturePropertySetting(m_editPanel, m_selected);
+			setting = new FixturePropertySetting(m_stage, m_selected);
 		}
 		else
 		{
 			d2d::DrawRectangleOP::onMouseLeftDown(x, y);
 			m_firstPos = pos;
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 		}
 	}
 
 	if (!setting)
-		setting = new WorldPropertySetting(m_editPanel);
-	m_propertyPanel->setPropertySetting(setting);
+		setting = new WorldPropertySetting(m_stage);
+	m_propertyPanel->SetPropertySetting(setting);
 
 	return false;
 }
@@ -65,7 +65,7 @@ bool SelectFixtureOP::onMouseLeftUp(int x, int y)
 
 	if (m_firstPos.isValid())
 	{
-		d2d::Rect rect(m_firstPos, m_editPanel->transPosScreenToProject(x, y));
+		d2d::Rect rect(m_firstPos, m_stage->transPosScreenToProject(x, y));
 		std::vector<d2d::ISprite*> sprites;
 		m_stagePanel->querySpritesByRect(rect, sprites);
 
@@ -84,9 +84,9 @@ bool SelectFixtureOP::onMouseLeftUp(int x, int y)
 		}
 
 		if (m_selected)
-			m_propertyPanel->setPropertySetting(new FixturePropertySetting(m_editPanel, m_selected));
+			m_propertyPanel->SetPropertySetting(new FixturePropertySetting(m_stage, m_selected));
 		else
-			m_propertyPanel->setPropertySetting(new WorldPropertySetting(m_editPanel));
+			m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
 
 		m_firstPos.setInvalid();
 	}
@@ -100,8 +100,8 @@ bool SelectFixtureOP::onMouseMove(int x, int y)
 
 	m_mouseOn = NULL;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	d2d::ISprite* sprite = static_cast<StagePanel*>(m_editPanel)->querySpriteByPos(pos);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::ISprite* sprite = static_cast<StagePanel*>(m_stage)->querySpriteByPos(pos);
 	if (sprite)
 	{
 		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->getUserData());
@@ -118,7 +118,7 @@ bool SelectFixtureOP::onMouseMove(int x, int y)
 		}
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }

@@ -43,7 +43,7 @@ namespace d2d
 		static const int CMPT_SIZER_INDEX_OFFSET = 2;
 
 	protected:
-		EditPanel* m_editPanel;
+		EditPanel* m_stage;
 
 		AbstractEditOP* m_editOP;
 

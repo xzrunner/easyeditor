@@ -25,19 +25,19 @@ namespace escale9
 	{
 		wxSplitterWindow* splitter = new wxSplitterWindow(this);
 		
-		m_editPanel = new d2d::EditPanel(splitter, this);
-		m_editPanel->setEditOP(new ResizeBaseOP(m_editPanel, m_symbol));
-		m_editPanel->setCanvas(new d2d::DialogStageCanvas(m_editPanel, m_symbol));
+		m_stage = new d2d::EditPanel(splitter, this);
+		m_stage->setEditOP(new ResizeBaseOP(m_stage, m_symbol));
+		m_stage->setCanvas(new d2d::DialogStageCanvas(m_stage, m_symbol));
 
-		ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_editPanel, m_symbol);
+		ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_stage, m_symbol);
 		
 		splitter->SetSashGravity(0.85f);
-		splitter->SplitVertically(m_editPanel, toolbar);
+		splitter->SplitVertically(m_stage, toolbar);
 	}
 
 	void EditDialog::onClose(wxCloseEvent& event)
 	{
-		if (!m_editPanel->isDirty())
+		if (!m_stage->isDirty())
 		{
 			Destroy();
 			return;

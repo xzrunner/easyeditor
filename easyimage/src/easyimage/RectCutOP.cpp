@@ -21,7 +21,7 @@ bool RectCutOP::onMouseLeftDown(int x, int y)
 
 	if (!m_stage->getImage()) return false;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	m_nodeSelected = m_rects.queryNode(pos);
 
 	return false;
@@ -41,7 +41,7 @@ bool RectCutOP::onMouseLeftUp(int x, int y)
 		if (moved)
 		{
 			m_nodeSelected.pos = m_currPos;
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 		}
 		m_nodeSelected.rect = NULL;
 	}
@@ -52,7 +52,7 @@ bool RectCutOP::onMouseLeftUp(int x, int y)
 		m_rectSelected->xMax = ceil(m_rectSelected->xMax);
 		m_rectSelected->yMin = ceil(m_rectSelected->yMin);
 		m_rectSelected->yMax = ceil(m_rectSelected->yMax);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -64,7 +64,7 @@ bool RectCutOP::onMouseRightDown(int x, int y)
 
 	if (!m_stage->getImage()) return false;
 
-	m_firstPos = m_editPanel->transPosScreenToProject(x, y);
+	m_firstPos = m_stage->transPosScreenToProject(x, y);
 	fixedPos(m_firstPos);
 
 	return false;
@@ -82,7 +82,7 @@ bool RectCutOP::onMouseRightUp(int x, int y)
 
 	const float RADIUS = 5;
 	// remove rect
-	m_currPos = m_editPanel->transPosScreenToProject(x, y);
+	m_currPos = m_stage->transPosScreenToProject(x, y);
 	if (d2d::Math::getDistance(m_currPos, m_firstPos) < RADIUS)
 	{
 		bool removed = m_rects.remove(m_currPos);
@@ -92,7 +92,7 @@ bool RectCutOP::onMouseRightUp(int x, int y)
 
 			m_firstPos.setInvalid();
 			m_currPos.setInvalid();
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 		}
 	}
 	// insert rect
@@ -105,7 +105,7 @@ bool RectCutOP::onMouseRightUp(int x, int y)
 
 			m_firstPos.setInvalid();
 			m_currPos.setInvalid();
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 		}
 	}
 
@@ -118,10 +118,10 @@ bool RectCutOP::onMouseMove(int x, int y)
 
 	if (!m_stage->getImage()) return false;
 
-	m_currPos = m_editPanel->transPosScreenToProject(x, y);
+	m_currPos = m_stage->transPosScreenToProject(x, y);
 	m_rectSelected = m_rects.queryRect(m_currPos);
 	m_captured = m_rects.queryNearestAxis(m_currPos);
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -135,31 +135,31 @@ bool RectCutOP::onMouseDrag(int x, int y)
 	// create rect
 	if (m_firstPos.isValid())
 	{
-		m_currPos = m_editPanel->transPosScreenToProject(x, y);
+		m_currPos = m_stage->transPosScreenToProject(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos);
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 	// move rect's node
 	else if (m_nodeSelected.rect)
 	{
-		m_currPos = m_editPanel->transPosScreenToProject(x, y);
+		m_currPos = m_stage->transPosScreenToProject(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos, m_nodeSelected.rect);
 
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		m_rects.moveNode(m_nodeSelected, pos);
 		m_nodeSelected.pos = pos;
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 	// move rect
 	else if (m_rectSelected)
 	{
-		d2d::Vector curr = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector curr = m_stage->transPosScreenToProject(x, y);
 		m_rects.moveRect(m_rectSelected, m_currPos, curr);
 		m_currPos = curr;
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;

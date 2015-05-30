@@ -38,8 +38,8 @@ bool CtrlCamOP::onKeyDown(int keyCode)
 void CtrlCamOP::OffsetCamera(float dx, float dy)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
-	m_editPanel->getCamera()->Translate(d2d::Vector(dx, dy));
-	m_editPanel->Refresh();
+	m_stage->getCamera()->Translate(d2d::Vector(dx, dy));
+	m_stage->Refresh();
 }
 
 }

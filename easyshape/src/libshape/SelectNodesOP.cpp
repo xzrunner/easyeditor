@@ -27,23 +27,23 @@ bool SelectNodesOP::onKeyDown(int keyCode)
 	{
 	case WXK_DELETE:
 		clearSelectedNodes();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 		break;
 	case 'a': case 'A':
 		OnDirectionKeyDown(d2d::e_left);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 		break;
 	case 'd': case 'D':
 		OnDirectionKeyDown(d2d::e_right);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 		break;
 	case 's': case 'S':
 		OnDirectionKeyDown(d2d::e_down);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 		break;
 	case 'w': case 'W':
 		OnDirectionKeyDown(d2d::e_up);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 		break;
 	}
 
@@ -52,7 +52,7 @@ bool SelectNodesOP::onKeyDown(int keyCode)
 
 bool SelectNodesOP::onMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	ChainSelectedNodes* selected = NULL;
 	m_shapeImpl->traverseShapes(PosQueryVisitor(pos, &selected), d2d::DT_VISIBLE);
 	if (selected)
@@ -112,7 +112,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 		m_firstPos = pos;
 		if (!wxGetKeyState(WXK_CONTROL))
 			clearSelectedNodes();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -124,7 +124,7 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 
 	if (m_firstPos.isValid())
 	{
-		d2d::Rect rect(m_firstPos, m_editPanel->transPosScreenToProject(x, y));
+		d2d::Rect rect(m_firstPos, m_stage->transPosScreenToProject(x, y));
 		m_shapeImpl->traverseShapes(RectQueryVisitor(rect, m_nodeSelection), 
 			d2d::DT_SELECTABLE);
 

@@ -7,12 +7,12 @@ namespace eicon
 SpritePropertySetting::SpritePropertySetting(d2d::EditPanel* editPanel, Sprite* sprite)
 	: d2d::SpritePropertySetting(editPanel, sprite)
 {
-	m_type = wxT("Icon");
+	m_type = "IconSprite";
 }
 
-void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	d2d::SpritePropertySetting::onPropertyGridChange(name, value);
+	d2d::SpritePropertySetting::OnPropertyGridChange(name, value);
 	
 	Sprite* sprite = static_cast<Sprite*>(GetSprite());
 	if (name == wxT("Process")) {
@@ -20,25 +20,17 @@ void SpritePropertySetting::onPropertyGridChange(const wxString& name, const wxA
 	}
 }
 
-void SpritePropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	d2d::SpritePropertySetting::enablePropertyGrid(panel, bEnable);
-
-	wxPropertyGrid* pg = panel->getPG();
-	pg->GetProperty(wxT("Process"))->Enable(bEnable);
-}
-
-void SpritePropertySetting::updateProperties(wxPropertyGrid* pg)
-{
-	d2d::SpritePropertySetting::updateProperties(pg);
+	d2d::SpritePropertySetting::UpdateProperties(pg);
 
 	Sprite* sprite = static_cast<Sprite*>(GetSprite());
 	pg->GetProperty(wxT("Process"))->SetValue(sprite->GetProcess());
 }
 
-void SpritePropertySetting::initProperties(wxPropertyGrid* pg)
+void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	d2d::SpritePropertySetting::initProperties(pg);
+	d2d::SpritePropertySetting::InitProperties(pg);
 
 	pg->Append(new wxPropertyCategory("ICON", wxPG_LABEL));
 

@@ -34,7 +34,7 @@ void StageCanvas::drawRegion()
 	const float width = Context::Instance()->width,
 		height = Context::Instance()->height;
 
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 
 	// bg
 	d2d::PrimitiveDraw::rect(

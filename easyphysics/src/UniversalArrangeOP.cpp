@@ -34,7 +34,7 @@ bool UniversalArrangeOP::onMouseLeftDown(int x, int y)
 {
 	m_editOP = m_noPhysics;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	for (size_t i = 0, n = m_physics.size(); i < n; ++i)
 	{
 		if (PhysicsQuery::queryOn(m_physics[i].world, pos))
@@ -81,7 +81,7 @@ void UniversalArrangeOP::addPhysicsEditOP(b2World* world, b2Body* ground)
 {
 	PhysicsOP physics;
 	physics.world = world;
-	physics.editOP = new DragPhysicsOP(m_editPanel, world, ground);
+	physics.editOP = new DragPhysicsOP(m_stage, world, ground);
 	m_physics.push_back(physics);
 }
 

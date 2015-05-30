@@ -29,7 +29,7 @@ WX_GL_DOUBLEBUFFER,WX_GL_STENCIL_SIZE, 8, 0};
 
 GLCanvas::GLCanvas(EditPanel* editPanel)
 	: wxGLCanvas(editPanel, wxID_ANY, gl_attrib)
-	, m_editPanel(editPanel)
+	, m_stage(editPanel)
  	, m_camera(editPanel->getCamera())
 	, m_screen(editPanel->getCamera())
  	, m_screen_width(0), m_screen_height(0)
@@ -127,7 +127,7 @@ void GLCanvas::onEraseBackground(wxEraseEvent& event)
 
 void GLCanvas::onMouse(wxMouseEvent& event)
 {
-	m_editPanel->onMouse(event);
+	m_stage->onMouse(event);
 
 	// The handler of this event should normally call event.Skip() to allow the default processing 
 	// to take place as otherwise the window under mouse wouldn't get the focus.
@@ -138,12 +138,12 @@ void GLCanvas::onMouse(wxMouseEvent& event)
 
 void GLCanvas::onKeyDown(wxKeyEvent& event)
 {
-	m_editPanel->onKeyDown(event);
+	m_stage->onKeyDown(event);
 }
 
 void GLCanvas::onKeyUp(wxKeyEvent& event)
 {
-	m_editPanel->onKeyUp(event);
+	m_stage->onKeyUp(event);
 }
 
 } // d2d

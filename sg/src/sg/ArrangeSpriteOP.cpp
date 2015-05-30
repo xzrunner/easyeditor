@@ -11,7 +11,7 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 
 bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
 {
-	static_cast<StagePanel*>(m_editPanel)->GetCheckBoard().ClearRemovedCache();
+	static_cast<StagePanel*>(m_stage)->GetCheckBoard().ClearRemovedCache();
 	return d2d::ArrangeSpriteFixOP::onMouseLeftUp(x, y);
 }
 
@@ -21,9 +21,9 @@ bool ArrangeSpriteOP::onMouseLeftDClick(int x, int y)
 		return true;
 	}
 
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = stage->querySpriteByPos(pos);
 	if (!selected) {
 		return false;
@@ -44,7 +44,7 @@ bool ArrangeSpriteOP::onMouseLeftDClick(int x, int y)
 
 void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 {
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 
 	std::vector<d2d::ISprite*> sprites;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
@@ -74,7 +74,7 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 		s->setTransform(pos, s->getAngle());
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
 }

@@ -75,7 +75,7 @@ wxSizer* AutoRectCutCMPT::initLayout()
 // 	AutoRectCutOP* op = static_cast<AutoRectCutOP*>(m_editOP);
 // 	op->getRectMgr().insert(d2d::Rect(d2d::Vector(0, 0), d2d::Vector((float)width, (float)height)));
 // 
-// 	m_editPanel->Refresh();
+// 	m_stage->Refresh();
 // }
 
 void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
@@ -99,7 +99,7 @@ void AutoRectCutCMPT::OnCreateRects(wxCommandEvent& event)
 		rects.insert(d2d::Rect(d2d::Vector(x, y), d2d::Vector(x+w, y+h)), true);
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	wxString msg;
 	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());

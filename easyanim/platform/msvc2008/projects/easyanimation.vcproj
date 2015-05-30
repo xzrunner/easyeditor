@@ -492,11 +492,11 @@
 				Name="property"
 				>
 				<File
-					RelativePath="..\..\..\src\easyanimation\view\FramePropertySetting.cpp"
+					RelativePath="..\..\..\src\easyanimation\view\KeyFramePropertySetting.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyanimation\view\FramePropertySetting.h"
+					RelativePath="..\..\..\src\easyanimation\view\KeyFramePropertySetting.h"
 					>
 				</File>
 			</Filter>

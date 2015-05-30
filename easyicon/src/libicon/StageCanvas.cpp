@@ -26,7 +26,7 @@ void StageCanvas::onDraw()
 	m_stage->GetSymbol().draw(d2d::Matrix(), d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0),
 		d2d::Colorf(1, 0, 0, 0), d2d::Colorf(0, 1, 0, 0), d2d::Colorf(0, 0, 1, 0), &sprite);
 
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 }
 
 void StageCanvas::onTimer(wxTimerEvent& event)

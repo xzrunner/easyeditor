@@ -13,11 +13,11 @@ class CirclePropertySetting : public d2d::IPropertySetting
 public:
 	CirclePropertySetting(d2d::EditPanel* editPanel, CircleShape* circle);
 
-	virtual void updatePanel(d2d::PropertySettingPanel* panel);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
-	virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-	virtual void updatePropertyGrid(d2d::PropertySettingPanel* panel);
-	virtual void enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable);
+protected:
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
 	CircleShape* m_circle;

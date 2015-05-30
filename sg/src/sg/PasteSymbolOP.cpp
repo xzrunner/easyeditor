@@ -41,7 +41,7 @@ bool PasteSymbolOP::onDraw() const
 	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
 
 	SymbolRender* render = SymbolRender::Instance();
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 	bool is_flat = stage->GetPerspective();
 
 	render->DrawGrass(*symbol, m_pos, is_flat);

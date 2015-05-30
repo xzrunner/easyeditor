@@ -49,14 +49,14 @@
 //	switch (m_mode)
 //	{
 //	case RectSelect:
-//		m_firstPos = m_editPanel->transPosScreenToProject(x, y);
+//		m_firstPos = m_stage->transPosScreenToProject(x, y);
 //		break;
 //	case PointSelect:
-//		m_currPos = m_editPanel->transPosScreenToProject(x, y);
+//		m_currPos = m_stage->transPosScreenToProject(x, y);
 //		pointSelect();
 //		break;
 //	case PolylineSelect:
-//		m_area.push_back(m_editPanel->transPosScreenToProject(x, y));
+//		m_area.push_back(m_stage->transPosScreenToProject(x, y));
 //		break;
 //	}
 //
@@ -69,7 +69,7 @@
 //
 //	if (m_mode == RectSelect)
 //	{
-//		m_currPos = m_editPanel->transPosScreenToProject(x, y);
+//		m_currPos = m_stage->transPosScreenToProject(x, y);
 //		rectSelect();
 //	}
 //
@@ -104,7 +104,7 @@
 //		polylineSelect();
 //		m_area.clear();
 //		m_drawOP->clear();
-//		m_editPanel->Refresh();
+//		m_stage->Refresh();
 //	}
 //
 //	return false;
@@ -178,7 +178,7 @@
 //		for (int y = yMin; y <= yMax; ++y)
 //			selectByPos(x, y);
 //
-//	m_editPanel->Refresh();
+//	m_stage->Refresh();
 //}
 //
 //void SelectPixelsOP::pointSelect()
@@ -195,7 +195,7 @@
 //			selectByMagicMarker(x, y);
 //	}
 //
-//	m_editPanel->Refresh();
+//	m_stage->Refresh();
 //}
 //
 //void SelectPixelsOP::polylineSelect()
@@ -216,7 +216,7 @@
 //		}
 //	}
 //
-//	m_editPanel->Refresh();
+//	m_stage->Refresh();
 //}
 //
 //void SelectPixelsOP::selectByPos(int x, int y)

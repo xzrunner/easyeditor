@@ -12,12 +12,12 @@
 namespace d2d
 {
 
-ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanel* editPanel,
-							 MultiSpritesImpl* stage /*= NULL*/, 
+ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanel* stage,
+							 MultiSpritesImpl* sprites_impl /*= NULL*/, 
 							 PropertySettingPanel* property /*= NULL*/)
 	: wxPanel(parent, wxID_ANY)
-	, m_editPanel(editPanel)
 	, m_stage(stage)
+	, m_sprites_impl(sprites_impl)
 	, m_property(property)
 {
 	initLayout();
@@ -63,7 +63,7 @@ void ViewlistPanel::reorder(const ISprite* sprite, bool up)
 		int pos = i - 1;
 		if (pos >= 0)
 		{
-			swap(i, pos);
+			std::swap(m_sprites[i], m_sprites[pos]);
 			m_list->swap(i, pos);
 		}
 	}
@@ -72,7 +72,7 @@ void ViewlistPanel::reorder(const ISprite* sprite, bool up)
 		int pos = i + 1;
 		if (pos < n)
 		{
-			swap(i, pos);
+			std::swap(m_sprites[i], m_sprites[pos]);
 			m_list->swap(i, pos);
 		}
 	}
@@ -82,16 +82,16 @@ void ViewlistPanel::onSelected(int index)
 {
 	if (m_property)
 	{
-		d2d::IPropertySetting* setting = new d2d::SpritePropertySetting(m_editPanel, m_sprites[index]);
-		m_property->setPropertySetting(setting);
+		d2d::IPropertySetting* setting = new d2d::SpritePropertySetting(m_stage, m_sprites[index]);
+		m_property->SetPropertySetting(setting);
 	}
 
-	if (m_stage)
+	if (m_sprites_impl)
 	{
-		d2d::SpriteSelection* selection = m_stage->getSpriteSelection();
+		d2d::SpriteSelection* selection = m_sprites_impl->getSpriteSelection();
 		selection->Clear();
 		selection->Add(m_sprites[index]);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 }
 
@@ -109,17 +109,6 @@ void ViewlistPanel::initLayout()
 	sizer->Add(m_list, 1, wxEXPAND);
 
 	SetSizer(sizer);
-}
-
-void ViewlistPanel::swap(int i0, int i1)
-{
-	if (i0 < 0 || i0 >= m_sprites.size() ||
-		i1 < 0 || i1 >= m_sprites.size())
-		return;
-
-	ISprite* tmp = m_sprites[i0];
-	m_sprites[i0] = m_sprites[i1];
-	m_sprites[i1] = tmp;
 }
 
 } // d2d

@@ -10,43 +10,12 @@ namespace d2d
 {
 
 TextPropertySetting::TextPropertySetting(EditPanel* editPanel, TextSprite* sprite)
-	: IPropertySetting(editPanel, wxT("Text Sprite"))
+	: IPropertySetting(editPanel, "TextSprite")
 	, m_sprite(sprite)
 {
 }
 
-void TextPropertySetting::updatePanel(PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	if (getPGType(pg) == m_type)
-	{
-		pg->GetProperty(wxT("Text"))->SetValue(m_sprite->getText());
-
-		pg->GetProperty(wxT("Size"))->SetValue(m_sprite->getSize());
-
-		const d2d::Colori& c = m_sprite->getColor();
-		wxString str = "("+wxString::FromDouble(c.r)+","+wxString::FromDouble(c.g)+","+wxString::FromDouble(c.b)+","+wxString::FromDouble(c.a)+")";
-		pg->SetPropertyValueString(wxT("Color"), str);
-	}
-	else
-	{
-		pg->Clear();
-
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
-
-		pg->Append(new wxStringProperty(wxT("Text"), wxPG_LABEL, m_sprite->getText()));
-
-		pg->Append(new wxFloatProperty(wxT("Size"), wxPG_LABEL, m_sprite->getSize()));
-		pg->SetPropertyAttribute(wxT("Size"), "Precision", 0);
-
-		const d2d::Colori& c = m_sprite->getColor();
-		pg->Append(new wxColourProperty("Color", wxPG_LABEL, wxColour(c.r, c.g, c.b, c.a)));
-		pg->SetPropertyAttribute("Color", "HasAlpha", false);
-	}
-}
-
-void TextPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void TextPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -66,37 +35,32 @@ void TextPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 		m_sprite->setColor(d2d::Colori(c.Red(), c.Green(), c.Blue(), c.Alpha()));
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void TextPropertySetting::updatePropertyGrid(PropertySettingPanel* panel)
+void TextPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	updatePanel(panel);
+	pg->GetProperty(wxT("Text"))->SetValue(m_sprite->getText());
+
+	pg->GetProperty(wxT("Size"))->SetValue(m_sprite->getSize());
+
+	const d2d::Colori& c = m_sprite->getColor();
+	wxString str = "("+wxString::FromDouble(c.r)+","+wxString::FromDouble(c.g)+","+wxString::FromDouble(c.b)+","+wxString::FromDouble(c.a)+")";
+	pg->SetPropertyValueString(wxT("Color"), str);
 }
 
-void TextPropertySetting::enablePropertyGrid(PropertySettingPanel* panel, bool bEnable)
+void TextPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	wxPropertyGrid* pg = panel->getPG();
+	pg->Clear();
 
-	if (getPGType(pg) != m_type)
-	{
-		pg->Clear();
+	pg->Append(new wxStringProperty(wxT("Text"), wxPG_LABEL, m_sprite->getText()));
 
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
+	pg->Append(new wxFloatProperty(wxT("Size"), wxPG_LABEL, m_sprite->getSize()));
+	pg->SetPropertyAttribute(wxT("Size"), "Precision", 0);
 
-		pg->Append(new wxStringProperty(wxT("Text"), wxPG_LABEL, m_sprite->getText()));
-
-		pg->Append(new wxFloatProperty(wxT("Size"), wxPG_LABEL, m_sprite->getSize()));
-
-		const d2d::Colori& c = m_sprite->getColor();
-		pg->Append(new wxColourProperty("Color", wxPG_LABEL, wxColour(c.r, c.g, c.b, c.a)));
-		pg->SetPropertyAttribute("Color", "HasAlpha", false);
-	}
-
-	pg->GetProperty(wxT("Type"))->Enable(bEnable);
-	pg->GetProperty(wxT("Text"))->Enable(bEnable);
-	pg->GetProperty(wxT("Size"))->Enable(bEnable);
-	pg->GetProperty(wxT("Color"))->Enable(bEnable);
+	const d2d::Colori& c = m_sprite->getColor();
+	pg->Append(new wxColourProperty("Color", wxPG_LABEL, wxColour(c.r, c.g, c.b, c.a)));
+	pg->SetPropertyAttribute("Color", "HasAlpha", false);
 }
 
 } // d2d

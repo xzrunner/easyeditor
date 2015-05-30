@@ -41,7 +41,7 @@ void EditUVCMPT::onMove(wxCommandEvent& event)
 {
 	if (Shape* shape = m_stage->GetShape()) {
 		m_stage->GetShape()->OffsetUV(0, SPEED_Y);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 }
 
@@ -49,7 +49,7 @@ void EditUVCMPT::onReset(wxCommandEvent& event)
 {
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Reset();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 		m_editOP->clear();
 	}
 }

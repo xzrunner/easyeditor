@@ -24,10 +24,10 @@ bool EditCircleOP::onKeyDown(int keyCode)
 	{
 		m_shapesImpl->removeShapeSelection();
 		m_captured.clear();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 
 		if (m_propertyPanel) {
-			m_propertyPanel->setPropertySetting(NULL);
+			m_propertyPanel->SetPropertySetting(NULL);
 		}
 	}
 
@@ -38,7 +38,7 @@ bool EditCircleOP::onMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	m_firstPress = m_currPos = m_editPanel->transPosScreenToProject(x, y);
+	m_firstPress = m_currPos = m_stage->transPosScreenToProject(x, y);
 
 	m_shapesImpl->getShapeSelection()->Clear();
 
@@ -51,7 +51,7 @@ bool EditCircleOP::onMouseLeftDown(int x, int y)
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
 			if (m_propertyPanel) {
-				m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+				m_propertyPanel->SetPropertySetting(new CirclePropertySetting(m_stage, circle));
 			}
 			m_shapesImpl->getShapeSelection()->Add(circle);
 		}
@@ -72,14 +72,14 @@ bool EditCircleOP::onMouseLeftUp(int x, int y)
 	{
 		if (m_firstPress.isValid())
 		{
-			m_currPos = m_editPanel->transPosScreenToProject(x, y);
+			m_currPos = m_stage->transPosScreenToProject(x, y);
 
 			const float radius = d2d::Math::getDistance(m_firstPress, m_currPos);
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
 				if (m_propertyPanel) {
-					m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+					m_propertyPanel->SetPropertySetting(new CirclePropertySetting(m_stage, circle));
 				}
 				m_shapesImpl->getShapeSelection()->Add(circle);
 				m_shapesImpl->insertShape(circle);
@@ -89,15 +89,15 @@ bool EditCircleOP::onMouseLeftUp(int x, int y)
 	else
 	{
 		if (m_propertyPanel) {
-			m_propertyPanel->enablePropertyGrid(true);
+			m_propertyPanel->EnablePropertyGrid(true);
 			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
-				m_propertyPanel->setPropertySetting(new CirclePropertySetting(m_editPanel, circle));
+				m_propertyPanel->SetPropertySetting(new CirclePropertySetting(m_stage, circle));
 		}
 	}
 
 	clear();
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -109,7 +109,7 @@ bool EditCircleOP::onMouseRightDown(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		m_currPos = m_editPanel->transPosScreenToProject(x, y);
+		m_currPos = m_stage->transPosScreenToProject(x, y);
 
 		NodeCapture capture(m_shapesImpl, tolerance);
 		capture.captureEditable(m_currPos, m_captured);
@@ -118,10 +118,10 @@ bool EditCircleOP::onMouseRightDown(int x, int y)
 			m_shapesImpl->removeShape(m_captured.shape);
 			m_shapesImpl->getShapeSelection()->Clear();
 			m_captured.clear();
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 
 			if (m_propertyPanel) {
-				m_propertyPanel->setPropertySetting(NULL);
+				m_propertyPanel->SetPropertySetting(NULL);
 			}
 		}
 	}
@@ -137,7 +137,7 @@ bool EditCircleOP::onMouseMove(int x, int y)
 {
 	if (ZoomViewOP::onMouseMove(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
@@ -145,7 +145,7 @@ bool EditCircleOP::onMouseMove(int x, int y)
 		d2d::IShape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape)
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 	}
 
 	return false;
@@ -155,7 +155,7 @@ bool EditCircleOP::onMouseDrag(int x, int y)
 {
 	if (ZoomViewOP::onMouseDrag(x, y)) return true;
 
-	m_currPos = m_editPanel->transPosScreenToProject(x, y);
+	m_currPos = m_stage->transPosScreenToProject(x, y);
 
 	if (m_captured.shape)
 	{
@@ -169,12 +169,12 @@ bool EditCircleOP::onMouseDrag(int x, int y)
 				circle->radius = d2d::Math::getDistance(m_currPos, circle->center);
 
 			if (m_propertyPanel) {
-				m_propertyPanel->enablePropertyGrid(false);
+				m_propertyPanel->EnablePropertyGrid(false);
 			}
 		}
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }

@@ -25,7 +25,7 @@ bool PasteSymbolTileOP::onMouseLeftDown(int x, int y)
 	if (symbol) 
 	{
 		if (!m_bCaptured)
-			m_pos = m_editPanel->transPosScreenToProject(x, y);
+			m_pos = m_stage->transPosScreenToProject(x, y);
 
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->translate(m_pos);
@@ -51,7 +51,7 @@ bool PasteSymbolTileOP::onMouseMove(int x, int y)
 	if (ZoomViewOP::onMouseMove(x, y)) return true;
 
 	m_bCaptured = false;
-	m_pos = m_editPanel->transPosScreenToProject(x, y);
+	m_pos = m_stage->transPosScreenToProject(x, y);
 
 	Vector offset = m_cmpt->getOffset();
 	const float dis = offset.length() * 0.5f;
@@ -132,7 +132,7 @@ bool PasteSymbolTileOP::onMouseMove(int x, int y)
 
 		} while (0);
 	}
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }

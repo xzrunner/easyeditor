@@ -15,12 +15,12 @@ bool DrawPolylineOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_polyline)) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
 	m_polyline.push_back(pos);
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -33,7 +33,7 @@ bool DrawPolylineOP::onMouseRightDown(int x, int y)
 	{
 		m_polyline.pop_back();
 		if (m_polyline.empty()) m_currPos.setInvalid();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -45,12 +45,12 @@ bool DrawPolylineOP::onMouseMove(int x, int y)
 
 	if (m_polyline.empty()) return false;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_polyline)) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
 	m_currPos = pos;
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -61,7 +61,7 @@ bool DrawPolylineOP::onMouseLeftDClick(int x, int y)
 
 	if (m_isClosed)
 		m_polyline.push_back(m_polyline.front());
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }

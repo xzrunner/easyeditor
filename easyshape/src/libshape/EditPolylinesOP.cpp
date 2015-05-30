@@ -21,7 +21,7 @@ bool EditPolylinesOP::onMouseLeftDown(int x, int y)
 	if (d2d::SelectShapesOP::onMouseLeftDown(x, y)) return true;
 
 	if (!m_firstPos.isValid())
-		m_lastPos = m_editPanel->transPosScreenToProject(x, y);
+		m_lastPos = m_stage->transPosScreenToProject(x, y);
 	else
 		m_lastPos.setInvalid();
 
@@ -47,13 +47,13 @@ bool EditPolylinesOP::onMouseDrag(int x, int y)
 
 	if (m_lastPos.isValid())
 	{
-		d2d::Vector currPos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector currPos = m_stage->transPosScreenToProject(x, y);
 		d2d::Vector offset = currPos - m_lastPos;
 		m_selection->Traverse(OffsetVisitor(offset));
 		m_lastPos = currPos;
 
 		m_bDirty = true;
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -92,7 +92,7 @@ void EditPolylinesOP::simplify()
 		itr->second->Load(simplified);
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
 void EditPolylinesOP::updateFromSimplified()
@@ -101,7 +101,7 @@ void EditPolylinesOP::updateFromSimplified()
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
 		itr->first->Load(itr->second->GetVertices());
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
 void EditPolylinesOP::clearBuffer()

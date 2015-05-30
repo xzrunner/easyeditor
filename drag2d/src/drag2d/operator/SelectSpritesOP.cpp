@@ -71,7 +71,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 {
  	m_bDraggable = true;
 
-	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	Vector pos = m_stage->transPosScreenToProject(x, y);
 	ISprite* selected = selectByPos(pos);
 	if (selected)
 	{
@@ -86,15 +86,15 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 				if (m_propertyPanel)
 				{
 					if (m_selection->Size() == 1)
-						m_propertyPanel->setPropertySetting(createPropertySetting(selected));
+						m_propertyPanel->SetPropertySetting(createPropertySetting(selected));
 					else if (m_selection->Size() > 1)
 					{
 						std::vector<ISprite*> sprites;
 						m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-						m_propertyPanel->setPropertySetting(createPropertySetting(sprites));
+						m_propertyPanel->SetPropertySetting(createPropertySetting(sprites));
 					}
 					else
-						m_propertyPanel->setPropertySetting(createPropertySetting(NULL));
+						m_propertyPanel->SetPropertySetting(createPropertySetting(NULL));
 				}
 			}
 		}
@@ -105,7 +105,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 				m_selection->Clear();
 				m_selection->Add(selected);
 				if (m_propertyPanel)
-					m_propertyPanel->setPropertySetting(createPropertySetting(selected));
+					m_propertyPanel->SetPropertySetting(createPropertySetting(selected));
 			}
 		}
 		m_firstPos.setInvalid();
@@ -121,7 +121,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 			m_bDraggable = false;
 		else
 			m_selection->Clear();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -135,7 +135,7 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 
 	if (m_firstPos.isValid())
 	{
-		Vector end = m_editPanel->transPosScreenToProject(x, y);
+		Vector end = m_stage->transPosScreenToProject(x, y);
 		Rect rect(m_firstPos, end);
 		std::vector<ISprite*> sprites;
 		m_spritesImpl->querySpritesByRect(rect, m_firstPos.x < end.x, sprites);
@@ -161,11 +161,11 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 		if (m_propertyPanel)
 		{
 			if (m_selection->Size() == 1)
-				m_propertyPanel->setPropertySetting(createPropertySetting(sprites[0]));
+				m_propertyPanel->SetPropertySetting(createPropertySetting(sprites[0]));
 			else if (m_selection->Size() > 1)
-				m_propertyPanel->setPropertySetting(createPropertySetting(sprites));
+				m_propertyPanel->SetPropertySetting(createPropertySetting(sprites));
 			else
-				m_propertyPanel->setPropertySetting(createPropertySetting(NULL));
+				m_propertyPanel->SetPropertySetting(createPropertySetting(NULL));
 		}
 
 		m_firstPos.setInvalid();
@@ -195,14 +195,14 @@ bool SelectSpritesOP::onMouseRightUp(int x, int y)
 	// select
 	if (m_rightFirstScrPos == Vector(x, y))
 	{
-		Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		Vector pos = m_stage->transPosScreenToProject(x, y);
 		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
 		if (sprite)
 		{
 			m_selection->Clear();
 			m_selection->Add(sprite);
 			enableRightTap(m_selection->IsEmpty());
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 		}
 	}
 
@@ -254,18 +254,18 @@ bool SelectSpritesOP::clear()
 IPropertySetting* SelectSpritesOP::createPropertySetting(ISprite* sprite) const
 {
 	if (TextSprite* text = dynamic_cast<TextSprite*>(sprite))
-		return new TextPropertySetting(m_editPanel, text);
+		return new TextPropertySetting(m_stage, text);
 	else if (FontSprite* font = dynamic_cast<FontSprite*>(sprite))
-		return new FontPropertySetting(m_editPanel, font);
+		return new FontPropertySetting(m_stage, font);
 	else if (sprite)
-		return new SpritePropertySetting(m_editPanel, sprite);
+		return new SpritePropertySetting(m_stage, sprite);
 	else 
 		return NULL;
 }
 
 IPropertySetting* SelectSpritesOP::createPropertySetting(const std::vector<ISprite*>& sprites) const
 {
-	return new MultiSpritesPropertySetting(m_editPanel, sprites);
+	return new MultiSpritesPropertySetting(m_stage, sprites);
 }
 
 ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
@@ -348,12 +348,12 @@ void SelectSpritesOP::CopyFromSelection()
 				CopySprFromClipboard(sprite, sval);
 				m_spritesImpl->insertSprite(sprite);
 				m_selection->Add(sprite);
-				m_propertyPanel->setPropertySetting(createPropertySetting(sprite));
+				m_propertyPanel->SetPropertySetting(createPropertySetting(sprite));
 
 				sval = value["sprite"][i++];
 			}
 
-			m_editPanel->getCanvas()->resetViewport();
+			m_stage->getCanvas()->resetViewport();
 		}
 		wxTheClipboard->Close();
 	}

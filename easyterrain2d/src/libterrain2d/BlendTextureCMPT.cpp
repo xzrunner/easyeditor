@@ -49,7 +49,7 @@ wxSizer* BlendTextureCMPT::initLayout()
 
 void BlendTextureCMPT::OnOpenBlendChanged(wxCommandEvent& event)
 {
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_editPanel)->GetOceans();
+	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->OpenBlend(event.IsChecked());
 	}
@@ -58,7 +58,7 @@ void BlendTextureCMPT::OnOpenBlendChanged(wxCommandEvent& event)
 void BlendTextureCMPT::OnChangeSpeed(wxSpinEvent& event)
 {
 	float speed = m_speed->GetValue() * 0.01f;
-	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_editPanel)->GetOceans();
+	std::vector<OceanMesh*>& oceans = static_cast<StagePanel*>(m_stage)->GetOceans();
 	for (int i = 0, n = oceans.size(); i < n; ++i) {
 		oceans[i]->SetBlendSpeed(speed);
 	}

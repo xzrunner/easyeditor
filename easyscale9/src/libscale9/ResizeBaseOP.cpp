@@ -16,7 +16,7 @@ bool ResizeBaseOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	m_firstPos = m_editPanel->transPosScreenToProject(x, y);
+	m_firstPos = m_stage->transPosScreenToProject(x, y);
 
 	const float hw = m_symbol->getSize().xLength() * 0.5f,
 		hh = m_symbol->getSize().yLength() * 0.5f;
@@ -38,15 +38,15 @@ bool ResizeBaseOP::onMouseLeftUp(int x, int y)
 
 	if (m_status != e_null)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		const d2d::Vector src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
 			dst(fabs(pos.x)*2, fabs(pos.y)*2);
-		m_editPanel->addHistoryOP(new ResizeAtomicOP(m_symbol, src, dst));
+		m_stage->addHistoryOP(new ResizeAtomicOP(m_symbol, src, dst));
 	}
 
 	m_status = e_null;
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -57,9 +57,9 @@ bool ResizeBaseOP::onMouseDrag(int x, int y)
 
 	if (m_status != e_null)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		m_symbol->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;

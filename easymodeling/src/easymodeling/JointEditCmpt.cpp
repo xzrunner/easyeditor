@@ -21,7 +21,7 @@ JointEditCmpt::JointEditCmpt(wxWindow* parent, const wxString& name,
 
 void JointEditCmpt::updateControlValue()
 {
-	d2d::SpriteSelection* selection = static_cast<StagePanel*>(m_editPanel)->getSpriteSelection();
+	d2d::SpriteSelection* selection = static_cast<StagePanel*>(m_stage)->getSpriteSelection();
 
 	if (selection->Size() != 2)
 		m_btnOK->Enable(false);
@@ -91,7 +91,7 @@ wxSizer* JointEditCmpt::initLayout()
 
 void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 {
-	StagePanel* editPanel = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 
 	std::vector<d2d::ISprite*> sprites;
 	d2d::SpriteSelection* selection = editPanel->getSpriteSelection();
@@ -138,7 +138,7 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	else if (type == wxT("Motor"))
 		editPanel->insertJoint(new libmodeling::MotorJoint(body0, body1));
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
 void JointEditCmpt::onTypeChanged(wxCommandEvent& event)

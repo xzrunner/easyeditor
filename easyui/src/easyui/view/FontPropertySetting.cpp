@@ -10,9 +10,9 @@ FontPropertySetting::FontPropertySetting(d2d::EditPanel* editPanel, d2d::FontSpr
 {
 }
 
-void FontPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void FontPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
-	d2d::FontPropertySetting::onPropertyGridChange(name, value);
+	d2d::FontPropertySetting::OnPropertyGridChange(name, value);
 
 	if (name == wxT("TextID")) 
 	{

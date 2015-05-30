@@ -27,7 +27,7 @@ bool DrawPencilPolygonOP::onMouseLeftUp(int x, int y)
 		NewPolygon(simplified);
 		clear();
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;

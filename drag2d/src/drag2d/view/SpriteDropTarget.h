@@ -20,7 +20,7 @@ public:
 
 private:
 	MultiSpritesImpl* m_panelImpl;
-	EditPanel* m_editPanel;
+	EditPanel* m_stage;
 	LibraryPanel* m_libraryPanel;
 
 }; // SpriteDropTarget

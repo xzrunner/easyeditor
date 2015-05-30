@@ -44,13 +44,13 @@ bool DrawCurveOP::onMouseDrag(int x, int y)
 		return false;
 	}
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_curve)) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_curve.back(), pos);
 		m_curve.pop_back();
 	}
 	m_curve.push_back(pos);
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }

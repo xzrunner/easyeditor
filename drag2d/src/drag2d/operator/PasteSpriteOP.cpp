@@ -96,7 +96,7 @@ bool PasteSpriteOP::onMouseMove(int x, int y)
 
 	setMousePos(x, y);
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -125,7 +125,7 @@ bool PasteSpriteOP::clear()
 
 void PasteSpriteOP::setMousePos(int x, int y)
 {
-	m_pos = m_editPanel->transPosScreenToProject(x, y);
+	m_pos = m_stage->transPosScreenToProject(x, y);
 	if (wxGetKeyState(WXK_SHIFT))
 		fixPosOrthogonal();
 }

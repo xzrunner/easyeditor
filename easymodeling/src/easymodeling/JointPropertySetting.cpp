@@ -1,138 +1,52 @@
-
 #include "JointPropertySetting.h"
 
-using namespace emodeling;
+namespace emodeling
+{
 
 JointPropertySetting::JointPropertySetting(d2d::EditPanel* editPanel, libmodeling::Joint* joint)
-	: d2d::IPropertySetting(editPanel, wxT("Joint"))
+	: d2d::IPropertySetting(editPanel, "Joint")
 {
 	m_joint = joint;
 
 	switch (joint->type)
 	{
 	case libmodeling::Joint::e_revoluteJoint:
-		m_type = wxT("Revolute Joint");
+		m_type = "Revolute Joint";
 		break;
 	case libmodeling::Joint::e_prismaticJoint:
-		m_type = wxT("Prismatic Joint");
+		m_type = "Prismatic Joint";
 		break;
 	case libmodeling::Joint::e_distanceJoint:
-		m_type = wxT("Distance Joint");
+		m_type = "Distance Joint";
 		break;
 	case libmodeling::Joint::e_pulleyJoint:
-		m_type = wxT("Pulley Joint");
+		m_type = "Pulley Joint";
 		break;
 	case libmodeling::Joint::e_mouseJoint:
-		m_type = wxT("Mouse Joint");
+		m_type = "Mouse Joint";
 		break;
 	case libmodeling::Joint::e_gearJoint:
-		m_type = wxT("Gear Joint");
+		m_type = "Gear Joint";
 		break;
 	case libmodeling::Joint::e_wheelJoint:
-		m_type = wxT("Wheel Joint");
+		m_type = "Wheel Joint";
 		break;
 	case libmodeling::Joint::e_weldJoint:
-		m_type = wxT("Weld Joint");
+		m_type = "Weld Joint";
 		break;
 	case libmodeling::Joint::e_frictionJoint:
-		m_type = wxT("Friction Joint");
+		m_type = "Friction Joint";
 		break;
 	case libmodeling::Joint::e_ropeJoint:
-		m_type = wxT("Rope Joint");
+		m_type = "Rope Joint";
 		break;
 	case libmodeling::Joint::e_motorJoint:
-		m_type = wxT("Motor Joint");
+		m_type = "Motor Joint";
 		break;
 	}
 }
 
-void JointPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	bool build;
-	if (getPGType(pg) == m_type)
-	{
-		build = false;
-		pg->GetProperty(wxT("Name"))->SetValue(m_joint->m_name);
-		pg->GetProperty(wxT("collideConnected"))->SetValue(m_joint->collideConnected);
-	}
-	else
-	{
-		build = true;
-		pg->Clear();
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_joint->m_name));
-		pg->Append(new wxBoolProperty(wxT("collideConnected"), wxPG_LABEL, m_joint->collideConnected));
-		pg->SetPropertyAttribute("collideConnected", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-	}
-
-	switch (m_joint->type)
-	{
-	case libmodeling::Joint::e_revoluteJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::RevoluteJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::RevoluteJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_prismaticJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::PrismaticJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::PrismaticJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_distanceJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::DistanceJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::DistanceJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_pulleyJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::PulleyJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::PulleyJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_gearJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::GearJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::GearJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_wheelJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::WheelJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::WheelJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_weldJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::WeldJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::WeldJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_frictionJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::FrictionJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::FrictionJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_ropeJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::RopeJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::RopeJoint*>(m_joint), pg);
-		break;
-	case libmodeling::Joint::e_motorJoint:
-		if (build) 
-			createPropertyPanel(static_cast<libmodeling::MotorJoint*>(m_joint), pg);
-		else
-			updatePropertyPanel(static_cast<libmodeling::MotorJoint*>(m_joint), pg);
-		break;
-	}
-}
-
-void JointPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void JointPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -144,51 +58,124 @@ void JointPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 	switch (m_joint->type)
 	{
 	case libmodeling::Joint::e_revoluteJoint:
-		onPropertyGridChange(static_cast<libmodeling::RevoluteJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::RevoluteJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_prismaticJoint:
-		onPropertyGridChange(static_cast<libmodeling::PrismaticJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::PrismaticJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_distanceJoint:
-		onPropertyGridChange(static_cast<libmodeling::DistanceJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::DistanceJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_pulleyJoint:
-		onPropertyGridChange(static_cast<libmodeling::PulleyJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::PulleyJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_gearJoint:
-		onPropertyGridChange(static_cast<libmodeling::GearJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::GearJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_wheelJoint:
-		onPropertyGridChange(static_cast<libmodeling::WheelJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::WheelJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_weldJoint:
-		onPropertyGridChange(static_cast<libmodeling::WeldJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::WeldJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_frictionJoint:
-		onPropertyGridChange(static_cast<libmodeling::FrictionJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::FrictionJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_ropeJoint:
-		onPropertyGridChange(static_cast<libmodeling::RopeJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::RopeJoint*>(m_joint), name, value);
 		break;
 	case libmodeling::Joint::e_motorJoint:
-		onPropertyGridChange(static_cast<libmodeling::MotorJoint*>(m_joint), name, value);
+		OnPropertyGridChange(static_cast<libmodeling::MotorJoint*>(m_joint), name, value);
 		break;
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void JointPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void JointPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	updatePanel(panel);
+	pg->GetProperty(wxT("Name"))->SetValue(m_joint->m_name);
+	pg->GetProperty(wxT("collideConnected"))->SetValue(m_joint->collideConnected);
+
+	switch (m_joint->type)
+	{
+	case libmodeling::Joint::e_revoluteJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::RevoluteJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_prismaticJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::PrismaticJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_distanceJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::DistanceJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_pulleyJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::PulleyJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_gearJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::GearJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_wheelJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::WheelJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_weldJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::WeldJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_frictionJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::FrictionJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_ropeJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::RopeJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_motorJoint:
+		UpdatePropertyPanel(static_cast<libmodeling::MotorJoint*>(m_joint), pg);
+		break;
+	}
 }
 
-void JointPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void JointPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	// 
+	pg->Clear();
+
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_joint->m_name));
+	pg->Append(new wxBoolProperty(wxT("collideConnected"), wxPG_LABEL, m_joint->collideConnected));
+	pg->SetPropertyAttribute("collideConnected", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	switch (m_joint->type)
+	{
+	case libmodeling::Joint::e_revoluteJoint:
+		CreatePropertyPanel(static_cast<libmodeling::RevoluteJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_prismaticJoint:
+		CreatePropertyPanel(static_cast<libmodeling::PrismaticJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_distanceJoint:
+		CreatePropertyPanel(static_cast<libmodeling::DistanceJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_pulleyJoint:
+		CreatePropertyPanel(static_cast<libmodeling::PulleyJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_gearJoint:
+		CreatePropertyPanel(static_cast<libmodeling::GearJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_wheelJoint:
+		CreatePropertyPanel(static_cast<libmodeling::WheelJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_weldJoint:
+		CreatePropertyPanel(static_cast<libmodeling::WeldJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_frictionJoint:
+		CreatePropertyPanel(static_cast<libmodeling::FrictionJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_ropeJoint:
+		CreatePropertyPanel(static_cast<libmodeling::RopeJoint*>(m_joint), pg);
+		break;
+	case libmodeling::Joint::e_motorJoint:
+		CreatePropertyPanel(static_cast<libmodeling::MotorJoint*>(m_joint), pg);
+		break;
+	}
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::RevoluteJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::RevoluteJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -226,7 +213,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::RevoluteJoint* joint
 	pg->SetPropertyAttribute(wxT("motorSpeed"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::RevoluteJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::RevoluteJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -248,7 +235,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::RevoluteJoint* joint
 	pg->GetProperty(wxT("motorSpeed"))->SetValue(joint->motorSpeed);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::RevoluteJoint* joint, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::RevoluteJoint* joint, 
 												const wxString& name, 
 												const wxAny& value)
 {
@@ -276,7 +263,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::RevoluteJoint* join
 		joint->motorSpeed = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::PrismaticJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::PrismaticJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -321,7 +308,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::PrismaticJoint* join
 	pg->SetPropertyAttribute(wxT("motorSpeed"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::PrismaticJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::PrismaticJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -346,7 +333,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::PrismaticJoint* join
 	pg->GetProperty(wxT("motorSpeed"))->SetValue(joint->motorSpeed);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::PrismaticJoint* joint, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::PrismaticJoint* joint, 
 												const wxString& name, 
 												const wxAny& value)
 {
@@ -378,7 +365,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::PrismaticJoint* joi
 		joint->motorSpeed = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::DistanceJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::DistanceJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -401,7 +388,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::DistanceJoint* joint
 	pg->SetPropertyAttribute(wxT("dampingRatio"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::DistanceJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::DistanceJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -414,7 +401,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::DistanceJoint* joint
 	pg->GetProperty(wxT("dampingRatio"))->SetValue(joint->dampingRatio);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::DistanceJoint* joint, const wxString& name, const wxAny& value)
+void JointPropertySetting::OnPropertyGridChange(libmodeling::DistanceJoint* joint, const wxString& name, const wxAny& value)
 {
 	if (name == wxT("localAnchorA.x"))
 		joint->localAnchorA.x = wxANY_AS(value, float);
@@ -430,7 +417,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::DistanceJoint* join
 		joint->dampingRatio = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::PulleyJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::PulleyJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -464,7 +451,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::PulleyJoint* joint, 
 	pg->SetPropertyAttribute(wxT("ratio"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::PulleyJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::PulleyJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -481,7 +468,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::PulleyJoint* joint, 
 	pg->GetProperty(wxT("ratio"))->SetValue(joint->ratio);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::PulleyJoint* joint, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::PulleyJoint* joint, 
 												const wxString& name, 
 												const wxAny& value)
 {
@@ -505,18 +492,18 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::PulleyJoint* joint,
 		joint->ratio = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::GearJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::GearJoint* joint, wxPropertyGrid* pg)
 {
 	pg->Append(new wxFloatProperty(wxT("ratio"), wxPG_LABEL, joint->ratio));
 	pg->SetPropertyAttribute(wxT("ratio"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::GearJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::GearJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("ratio"))->SetValue(joint->ratio);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::GearJoint* joint, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::GearJoint* joint, 
 												const wxString& name, 
 												const wxAny& value)
 {
@@ -524,7 +511,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::GearJoint* joint,
 		joint->ratio = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::WheelJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::WheelJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -563,7 +550,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::WheelJoint* joint, w
 	pg->SetPropertyAttribute(wxT("dampingRatio"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::WheelJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::WheelJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -583,7 +570,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::WheelJoint* joint, w
 	pg->GetProperty(wxT("dampingRatio"))->SetValue(joint->dampingRatio);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::WheelJoint* joint, const wxString& name, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::WheelJoint* joint, const wxString& name, 
 												const wxAny& value)
 {
 	if (name == wxT("localAnchorA.x"))
@@ -610,7 +597,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::WheelJoint* joint, 
 		joint->dampingRatio = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::WeldJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::WeldJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -636,7 +623,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::WeldJoint* joint, wx
 	pg->SetPropertyAttribute(wxT("dampingRatio"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::WeldJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::WeldJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -651,7 +638,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::WeldJoint* joint, wx
 	pg->GetProperty(wxT("dampingRatio"))->SetValue(joint->dampingRatio);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::WeldJoint* joint, const wxString& name, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::WeldJoint* joint, const wxString& name, 
 												const wxAny& value)
 {
 	if (name == wxT("localAnchorA.x"))
@@ -670,7 +657,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::WeldJoint* joint, c
 		joint->dampingRatio = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::FrictionJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::FrictionJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -693,7 +680,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::FrictionJoint* joint
 	pg->SetPropertyAttribute(wxT("maxTorque"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::FrictionJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::FrictionJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -706,7 +693,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::FrictionJoint* joint
 	pg->GetProperty(wxT("maxTorque"))->SetValue(joint->maxTorque);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::FrictionJoint* joint, const wxString& name, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::FrictionJoint* joint, const wxString& name, 
 												const wxAny& value)
 {
 	if (name == wxT("localAnchorA.x"))
@@ -723,7 +710,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::FrictionJoint* join
 		joint->maxTorque = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::RopeJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::RopeJoint* joint, wxPropertyGrid* pg)
 {
 	wxPGProperty* localAnchorAProp = pg->Append(new wxStringProperty(wxT("localAnchorA"),
 		wxPG_LABEL, wxT("<composed>")));
@@ -743,7 +730,7 @@ void JointPropertySetting::createPropertyPanel(libmodeling::RopeJoint* joint, wx
 	pg->SetPropertyAttribute(wxT("maxLength"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::RopeJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::RopeJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("localAnchorA.x"))->SetValue(joint->localAnchorA.x);
 	pg->GetProperty(wxT("localAnchorA.y"))->SetValue(joint->localAnchorA.y);
@@ -754,7 +741,7 @@ void JointPropertySetting::updatePropertyPanel(libmodeling::RopeJoint* joint, wx
 	pg->GetProperty(wxT("maxLength"))->SetValue(joint->maxLength);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::RopeJoint* joint, const wxString& name, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::RopeJoint* joint, const wxString& name, 
 												const wxAny& value)
 {
 	if (name == wxT("localAnchorA.x"))
@@ -769,7 +756,7 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::RopeJoint* joint, c
 		joint->maxLength = wxANY_AS(value, float);
 }
 
-void JointPropertySetting::createPropertyPanel(libmodeling::MotorJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::CreatePropertyPanel(libmodeling::MotorJoint* joint, wxPropertyGrid* pg)
 {
 	pg->Append(new wxFloatProperty(wxT("maxForce"), wxPG_LABEL, joint->maxForce));
 	pg->SetPropertyAttribute(wxT("maxForce"), "Precision", 2);
@@ -781,14 +768,14 @@ void JointPropertySetting::createPropertyPanel(libmodeling::MotorJoint* joint, w
 	pg->SetPropertyAttribute(wxT("correctionFactor"), "Precision", 2);
 }
 
-void JointPropertySetting::updatePropertyPanel(libmodeling::MotorJoint* joint, wxPropertyGrid* pg)
+void JointPropertySetting::UpdatePropertyPanel(libmodeling::MotorJoint* joint, wxPropertyGrid* pg)
 {
 	pg->GetProperty(wxT("maxForce"))->SetValue(joint->maxForce);
 	pg->GetProperty(wxT("maxTorque"))->SetValue(joint->maxTorque);
 	pg->GetProperty(wxT("correctionFactor"))->SetValue(joint->correctionFactor);
 }
 
-void JointPropertySetting::onPropertyGridChange(libmodeling::MotorJoint* joint, const wxString& name, 
+void JointPropertySetting::OnPropertyGridChange(libmodeling::MotorJoint* joint, const wxString& name, 
 												const wxAny& value)
 {
 	if (name == wxT("maxForce"))
@@ -797,4 +784,6 @@ void JointPropertySetting::onPropertyGridChange(libmodeling::MotorJoint* joint, 
 		joint->maxTorque = wxANY_AS(value, float);
 	else if (name == wxT("correctionFactor"))
 		joint->correctionFactor = wxANY_AS(value, float);
+}
+
 }

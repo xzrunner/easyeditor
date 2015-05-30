@@ -12,12 +12,11 @@ class FontPropertySetting : public SpritePropertySetting
 public:
 	FontPropertySetting(EditPanel* editPanel, FontSprite* sprite);
 
-	virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-	virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
 protected:
-	virtual void updateProperties(wxPropertyGrid* pg);
-	virtual void initProperties(wxPropertyGrid* pg);
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
 	static const wxChar* HORI_ALIGN_LABELS[];

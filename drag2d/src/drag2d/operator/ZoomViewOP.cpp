@@ -24,9 +24,9 @@ ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
 bool ZoomViewOP::onKeyDown(int keyCode)
 {
 	if (m_openLeftTap && keyCode == WXK_SPACE) {
-		m_editPanel->SetCursor(wxCURSOR_HAND);
+		m_stage->SetCursor(wxCURSOR_HAND);
 	} else if (keyCode == WXK_ESCAPE) {
-		Camera* cam = m_editPanel->getCamera();
+		Camera* cam = m_stage->getCamera();
 		cam->Reset();
 	}
 
@@ -36,7 +36,7 @@ bool ZoomViewOP::onKeyDown(int keyCode)
 bool ZoomViewOP::onKeyUp(int keyCode)
 {
 	if (m_openLeftTap && keyCode == WXK_SPACE)
-		m_editPanel->SetCursor(wxCURSOR_ARROW);
+		m_stage->SetCursor(wxCURSOR_ARROW);
 	return false;
 }
 
@@ -100,7 +100,7 @@ bool ZoomViewOP::onMouseRightUp(int x, int y)
 bool ZoomViewOP::onMouseMove(int x, int y) 
 {
 	if (m_bMouseMoveFocus) 
-		m_editPanel->SetFocus();
+		m_stage->SetFocus();
 
 	return false;
 }
@@ -119,11 +119,11 @@ bool ZoomViewOP::onMouseDrag(int x, int y)
 
 			Vector offset = m_lastPos - currPos;
 			offset.y = -offset.y;
-			m_editPanel->getCamera()->Translate(offset);
+			m_stage->getCamera()->Translate(offset);
 
 			m_lastPos = currPos;
 
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 		}
 		return true;
 	}
@@ -137,11 +137,11 @@ bool ZoomViewOP::onMouseDrag(int x, int y)
 bool ZoomViewOP::onMouseWheelRotation(int x, int y, int direction) 
 {
 //	if (Settings::bZoomOnlyUseMouseWheel)
-		m_editPanel->onMouseWheelRotation(x, y, direction);
+		m_stage->onMouseWheelRotation(x, y, direction);
 // 	else
-// 		m_editPanel->onMouseWheelRotation(m_editPanel->GetSize().GetWidth() * 0.5f, m_editPanel->GetSize().GetHeight() * 0.5f, direction);
+// 		m_stage->onMouseWheelRotation(m_stage->GetSize().GetWidth() * 0.5f, m_stage->GetSize().GetHeight() * 0.5f, direction);
 
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 
 	return false;
 }

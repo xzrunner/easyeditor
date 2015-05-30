@@ -18,7 +18,7 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 		wxPG_SPLITTER_AUTO_CENTER
 		| wxPG_BOLD_MODIFIED
 		);
-	Connect(m_pg->GetId(), wxEVT_PG_CHANGED, wxPropertyGridEventHandler(PropertySettingPanel::onPropertyGridChange));
+	Connect(m_pg->GetId(), wxEVT_PG_CHANGED, wxPropertyGridEventHandler(PropertySettingPanel::OnPropertyGridChange));
 
 	sizer->Add(m_pg);
 
@@ -30,33 +30,38 @@ PropertySettingPanel::~PropertySettingPanel()
 	delete m_setting;
 }
 
-void PropertySettingPanel::setPropertySetting(IPropertySetting* setting)
+void PropertySettingPanel::SetPropertySetting(IPropertySetting* setting)
 {
 	delete m_setting;
 	m_setting = setting;
 
-	if (m_setting)
-		m_setting->updatePanel(this);
-	else
+	if (m_setting) {
+		m_setting->UpdateFromPanel(this);
+		m_type = m_setting->GetType();
+	} else {
 		m_pg->Clear();
+		m_type = "";
+	}
 }
 
-void PropertySettingPanel::onPropertyGridChange(wxPropertyGridEvent& event)
+void PropertySettingPanel::OnPropertyGridChange(wxPropertyGridEvent& event)
 {
 	wxPGProperty* property = event.GetProperty();
-	m_setting->onPropertyGridChange(property->GetName(), property->GetValue());
+	m_setting->OnPropertyGridChange(property->GetName(), property->GetValue());
 }
 
-void PropertySettingPanel::updatePropertyGrid()
+void PropertySettingPanel::UpdatePropertyGrid()
 {
-	if (m_setting)
-		m_setting->updatePropertyGrid(this);
+	if (m_setting) {
+		m_setting->UpdateFromPanel(this);
+	}
 }
 
-void PropertySettingPanel::enablePropertyGrid(bool bEnable)
+void PropertySettingPanel::EnablePropertyGrid(bool enable)
 {
-	if (m_setting)
-		m_setting->enablePropertyGrid(this, bEnable);
+	if (m_setting) {
+		m_setting->EnablePropertyGrid(this, enable);
+	}
 }
 
 } // d2d

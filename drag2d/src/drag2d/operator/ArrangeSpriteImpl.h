@@ -91,7 +91,7 @@ private:
 
 	AutoAlign m_align;
 
-	EditPanel* m_editPanel;
+	EditPanel* m_stage;
 	MultiSpritesImpl* m_spritesImpl;
 	PropertySettingPanel* m_propertyPanel;
 

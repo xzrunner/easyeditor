@@ -22,7 +22,7 @@ bool PixelDiffOP::onMouseLeftDown(int x, int y)
 	const d2d::ISprite* s_right = m_stage->getRight();
 	d2d::Image* left = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_left)->getSymbol()).getImage();
 	d2d::Image* right = static_cast<const d2d::ImageSymbol&>(static_cast<const d2d::ImageSprite*>(s_right)->getSymbol()).getImage();
-	d2d::Vector p = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector p = m_stage->transPosScreenToProject(x, y);
 
 	m_stage->getLeft()->getSymbol().getSize();
 

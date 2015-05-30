@@ -14,7 +14,7 @@ namespace ecomplex
 	StageCanvas::StageCanvas(StagePanel* editPanel)
 		: d2d::OrthoCanvas(editPanel)
 		, m_timer(this, TIMER_ID)
-		, m_editPanel(editPanel)
+		, m_stage(editPanel)
 		, m_background(NULL)
 		, m_stat(1)
 	{
@@ -35,7 +35,7 @@ namespace ecomplex
 	void StageCanvas::initGL()
 	{
 		d2d::OrthoCanvas::initGL();
-		m_editPanel->getSymbol()->reloadTexture();
+		m_stage->getSymbol()->reloadTexture();
 // 		d2d::DynamicTexture::Instance()->ReloadTexture();
 // 		d2d::DynamicFont::Instance()->ReloadTexture();
 
@@ -53,7 +53,7 @@ namespace ecomplex
 		drawBackground();
 
   		std::vector<d2d::ISprite*> sprites;
-  		m_editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+  		m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
   
   		for (size_t i = 0, n = sprites.size(); i < n; ++i)
   		{
@@ -63,7 +63,7 @@ namespace ecomplex
   			d2d::SpriteDraw::drawSprite(sprite);
   		}
 
-  		d2d::PrimitiveDraw::rect(m_editPanel->getSymbol()->m_clipbox, m_clipboxStyle);
+  		d2d::PrimitiveDraw::rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
   
    		if (Settings::bVisibleBGCross)
    		{
@@ -71,7 +71,7 @@ namespace ecomplex
    			d2d::PrimitiveDraw::cross(d2d::Vector(0,0), EDGE, EDGE, d2d::LIGHT_GREY);
    		}
  
-     	m_editPanel->drawEditTemp();
+     	m_stage->drawEditTemp();
 
 		m_stat.End();
 

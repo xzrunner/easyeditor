@@ -6,45 +6,12 @@ namespace libshape
 
 BezierPropertySetting::BezierPropertySetting(d2d::EditPanel* editPanel, 
 											 BezierShape* bezier)
-	: d2d::IPropertySetting(editPanel, wxT("Bezier"))
+	: d2d::IPropertySetting(editPanel, "Bezier")
 	, m_bezier(bezier)
 {
 }
 
-void BezierPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	if (getPGType(pg) == m_type)
-	{
-		pg->GetProperty(wxT("Name"))->SetValue(m_bezier->name);
-		pg->GetProperty(wxT("X"))->SetValue(m_bezier->getRect().xCenter());
-		pg->GetProperty(wxT("Y"))->SetValue(m_bezier->getRect().yCenter());
-		pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
-	}
-	else
-	{
-		pg->Clear();
-
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
-
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_bezier->name));
-
-		pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_bezier->getRect().xCenter()));
-		pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_bezier->getRect().yCenter()));
-		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
-
-		static const wxChar* mirror_labels[] = { wxT("none"),
-			wxT("horizontal"), wxT("vertical"), NULL };
-		pg->Append(new wxEnumProperty(wxT("Mirror"), wxPG_LABEL, mirror_labels));
-	}
-}
-
-void BezierPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void BezierPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -77,44 +44,35 @@ void BezierPropertySetting::onPropertyGridChange(const wxString& name, const wxA
 		}
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void BezierPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void BezierPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	updatePanel(panel);
+	pg->GetProperty(wxT("Name"))->SetValue(m_bezier->name);
+	pg->GetProperty(wxT("X"))->SetValue(m_bezier->getRect().xCenter());
+	pg->GetProperty(wxT("Y"))->SetValue(m_bezier->getRect().yCenter());
+	pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
 }
 
-void BezierPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void BezierPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	wxPropertyGrid* pg = panel->getPG();
+	pg->Clear();
 
-	if (getPGType(pg) != m_type)
-	{
-		pg->Clear();
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_bezier->name));
 
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
+	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_bezier->getRect().xCenter()));
+	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
 
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_bezier->name));
+	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_bezier->getRect().yCenter()));
+	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-		pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_bezier->getRect().xCenter()));
-		pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_bezier->getRect().yCenter()));
-		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
-
-		static const wxChar* mirror_labels[] = { wxT("none"),
-			wxT("horizontal"), wxT("vertical"), NULL };
-		pg->Append(new wxEnumProperty(wxT("Mirror"), wxPG_LABEL, mirror_labels));
-	}
-
-	pg->GetProperty(wxT("Type"))->Enable(bEnable);
-	pg->GetProperty(wxT("Name"))->Enable(bEnable);
-	pg->GetProperty(wxT("X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Mirror"))->Enable(bEnable);
+	static const wxChar* mirror_labels[] = { wxT("none"),
+		wxT("horizontal"), wxT("vertical"), NULL };
+	pg->Append(new wxEnumProperty(wxT("Mirror"), wxPG_LABEL, mirror_labels));
 }
+
 
 }

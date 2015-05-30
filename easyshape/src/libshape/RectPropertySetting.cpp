@@ -6,50 +6,12 @@ namespace libshape
 
 RectPropertySetting::RectPropertySetting(d2d::EditPanel* editPanel, 
 										 RectShape* rect)
-	: d2d::IPropertySetting(editPanel, wxT("Rect"))
+	: d2d::IPropertySetting(editPanel, "Rect")
 	, m_rect(rect)
 {
 }
 
-void RectPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	if (getPGType(pg) == m_type)
-	{
-		pg->GetProperty(wxT("Name"))->SetValue(m_rect->name);
-		pg->GetProperty(wxT("X"))->SetValue(m_rect->m_rect.xCenter());
-		pg->GetProperty(wxT("Y"))->SetValue(m_rect->m_rect.yCenter());
-		pg->GetProperty(wxT("Half Width"))->SetValue(m_rect->m_rect.xLength()*0.5f);
-		pg->GetProperty(wxT("Half Height"))->SetValue(m_rect->m_rect.xLength()*0.5f);
-	}
-	else
-	{
-		pg->Clear();
-
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
-
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_rect->name));
-
-		pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_rect->m_rect.xCenter()));
-		pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_rect->m_rect.yCenter()));
-		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Half Width"), wxPG_LABEL, m_rect->m_rect.xLength()*0.5f));
-		pg->SetPropertyAttribute(wxT("Half Width"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Half Width"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Half Height"), wxPG_LABEL, m_rect->m_rect.yLength()*0.5f));
-		pg->SetPropertyAttribute(wxT("Half Height"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Half Height"), "Precision", 1);
-	}
-}
-
-void RectPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void RectPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -87,49 +49,39 @@ void RectPropertySetting::onPropertyGridChange(const wxString& name, const wxAny
 		m_rect->m_rect.yMax = y + hHeight;
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void RectPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void RectPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	updatePanel(panel);
+	pg->GetProperty(wxT("Name"))->SetValue(m_rect->name);
+	pg->GetProperty(wxT("X"))->SetValue(m_rect->m_rect.xCenter());
+	pg->GetProperty(wxT("Y"))->SetValue(m_rect->m_rect.yCenter());
+	pg->GetProperty(wxT("Half Width"))->SetValue(m_rect->m_rect.xLength()*0.5f);
+	pg->GetProperty(wxT("Half Height"))->SetValue(m_rect->m_rect.xLength()*0.5f);
 }
 
-void RectPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void RectPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	wxPropertyGrid* pg = panel->getPG();
+	pg->Clear();
 
-	if (getPGType(pg) != m_type)
-	{
-		pg->Clear();
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_rect->name));
 
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
+	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_rect->m_rect.xCenter()));
+	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
 
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_rect->name));
+	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_rect->m_rect.yCenter()));
+	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-		pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_rect->m_rect.xCenter()));
-		pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
+	pg->Append(new wxFloatProperty(wxT("Half Width"), wxPG_LABEL, m_rect->m_rect.xLength()*0.5f));
+	pg->SetPropertyAttribute(wxT("Half Width"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Half Width"), "Precision", 1);
 
-		pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_rect->m_rect.yCenter()));
-		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Half Width"), wxPG_LABEL, m_rect->m_rect.xLength()*0.5f));
-		pg->SetPropertyAttribute(wxT("Half Width"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Half Width"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Half Height"), wxPG_LABEL, m_rect->m_rect.yLength()*0.5f));
-		pg->SetPropertyAttribute(wxT("Half Height"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Half Height"), "Precision", 1);
-	}
-
-	pg->GetProperty(wxT("Type"))->Enable(bEnable);
-	pg->GetProperty(wxT("Name"))->Enable(bEnable);
-	pg->GetProperty(wxT("X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Half Width"))->Enable(bEnable);
-	pg->GetProperty(wxT("Half Height"))->Enable(bEnable);
+	pg->Append(new wxFloatProperty(wxT("Half Height"), wxPG_LABEL, m_rect->m_rect.yLength()*0.5f));
+	pg->SetPropertyAttribute(wxT("Half Height"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Half Height"), "Precision", 1);
 }
 
 }

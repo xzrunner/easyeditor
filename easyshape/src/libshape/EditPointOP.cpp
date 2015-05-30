@@ -23,7 +23,7 @@ bool EditPointOP::onKeyDown(int keyCode)
 	{
 		m_shapes_impl->removeShapeSelection();
 		m_captured.clear();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -33,7 +33,7 @@ bool EditPointOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	m_pos = m_editPanel->transPosScreenToProject(x, y);
+	m_pos = m_stage->transPosScreenToProject(x, y);
 
 	m_shapes_impl->getShapeSelection()->Clear();
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
@@ -62,7 +62,7 @@ bool EditPointOP::onMouseLeftUp(int x, int y)
 		return false;
 	}
 
-	m_pos = m_editPanel->transPosScreenToProject(x, y);
+	m_pos = m_stage->transPosScreenToProject(x, y);
 	if (!m_captured.shape) {
 		PointShape* point = new PointShape(m_pos);
 		m_shapes_impl->getShapeSelection()->Add(point);
@@ -71,7 +71,7 @@ bool EditPointOP::onMouseLeftUp(int x, int y)
 
 	clear();
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -85,14 +85,14 @@ bool EditPointOP::onMouseRightDown(int x, int y)
 		return false;
 	}
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	NodeCapture capture(m_shapes_impl, tolerance);
 	capture.captureEditable(pos, m_captured);
 	if (m_captured.shape) {
 		m_shapes_impl->removeShape(m_captured.shape);
 		m_shapes_impl->getShapeSelection()->Clear();
 		m_captured.clear();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -107,12 +107,12 @@ bool EditPointOP::onMouseMove(int x, int y)
 		return false;
 	}
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	NodeCapture capture(m_shapes_impl, tolerance);
 	d2d::IShape* old = m_captured.shape;
 	capture.captureEditable(pos, m_captured);
 	if (old && !m_captured.shape || !old && m_captured.shape)
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 
 	return false;
 }
@@ -121,12 +121,12 @@ bool EditPointOP::onMouseDrag(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
 
-	m_pos = m_editPanel->transPosScreenToProject(x, y);
+	m_pos = m_stage->transPosScreenToProject(x, y);
 	if (m_captured.shape && 
 		get_shape_type(m_captured.shape->GetShapeDesc()) == ST_POINT) {		
 		PointShape* point = static_cast<PointShape*>(m_captured.shape);
 		point->SetPos(m_pos);
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;

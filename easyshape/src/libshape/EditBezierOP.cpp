@@ -24,9 +24,9 @@ bool EditBezierOP::onKeyDown(int keyCode)
 	{
 		m_shapesImpl->removeShapeSelection();
 		m_captured.clear();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 
-		m_propertyPanel->setPropertySetting(NULL);
+		m_propertyPanel->SetPropertySetting(NULL);
 	}
 
 	return false;
@@ -36,7 +36,7 @@ bool EditBezierOP::onMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	m_firstPress = m_currPos = m_editPanel->transPosScreenToProject(x, y);
+	m_firstPress = m_currPos = m_stage->transPosScreenToProject(x, y);
 
 	m_shapesImpl->getShapeSelection()->Clear();
 
@@ -48,7 +48,7 @@ bool EditBezierOP::onMouseLeftDown(int x, int y)
 
  		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
- 			m_propertyPanel->setPropertySetting(new BezierPropertySetting(m_editPanel, bezier));
+ 			m_propertyPanel->SetPropertySetting(new BezierPropertySetting(m_stage, bezier));
 			m_shapesImpl->getShapeSelection()->Add(bezier);
 		}
 	}
@@ -68,13 +68,13 @@ bool EditBezierOP::onMouseLeftUp(int x, int y)
 	{
 		if (m_firstPress.isValid())
 		{
-			m_currPos = m_editPanel->transPosScreenToProject(x, y);
+			m_currPos = m_stage->transPosScreenToProject(x, y);
 
 			const float dis = d2d::Math::getDistance(m_firstPress, m_currPos);
 			if (dis > 1)
 			{
 				BezierShape* bezier = new BezierShape(m_firstPress, m_currPos);
-				m_propertyPanel->setPropertySetting(new BezierPropertySetting(m_editPanel, bezier));
+				m_propertyPanel->SetPropertySetting(new BezierPropertySetting(m_stage, bezier));
 				m_shapesImpl->getShapeSelection()->Add(bezier);
 				m_shapesImpl->insertShape(bezier);
 			}
@@ -82,14 +82,14 @@ bool EditBezierOP::onMouseLeftUp(int x, int y)
 	}
 	else
 	{
- 		m_propertyPanel->enablePropertyGrid(true);
+ 		m_propertyPanel->EnablePropertyGrid(true);
  		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
- 			m_propertyPanel->setPropertySetting(new BezierPropertySetting(m_editPanel, bezier));
+ 			m_propertyPanel->SetPropertySetting(new BezierPropertySetting(m_stage, bezier));
 	}
 
 	clear();
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -101,7 +101,7 @@ bool EditBezierOP::onMouseRightDown(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		m_currPos = m_editPanel->transPosScreenToProject(x, y);
+		m_currPos = m_stage->transPosScreenToProject(x, y);
 
 		NodeCapture capture(m_shapesImpl, tolerance);
 		capture.captureEditable(m_currPos, m_captured);
@@ -110,9 +110,9 @@ bool EditBezierOP::onMouseRightDown(int x, int y)
 			m_shapesImpl->removeShape(m_captured.shape);
 			m_shapesImpl->getShapeSelection()->Clear();
 			m_captured.clear();
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 
-			m_propertyPanel->setPropertySetting(NULL);
+			m_propertyPanel->SetPropertySetting(NULL);
 		}
 	}
 	else
@@ -127,7 +127,7 @@ bool EditBezierOP::onMouseMove(int x, int y)
 {
 	if (ZoomViewOP::onMouseMove(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
@@ -135,7 +135,7 @@ bool EditBezierOP::onMouseMove(int x, int y)
 		d2d::IShape* old = m_captured.shape;
 		capture.captureEditable(pos, m_captured);
 		if (old && !m_captured.shape || !old && m_captured.shape)
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 	}
 
 	return false;
@@ -145,7 +145,7 @@ bool EditBezierOP::onMouseDrag(int x, int y)
 {
 	if (ZoomViewOP::onMouseDrag(x, y)) return true;
 
-	m_currPos = m_editPanel->transPosScreenToProject(x, y);
+	m_currPos = m_stage->transPosScreenToProject(x, y);
 
 	if (m_captured.shape)
 	{
@@ -160,11 +160,11 @@ bool EditBezierOP::onMouseDrag(int x, int y)
 				m_captured.pos = m_currPos;
 			}
 
-			m_propertyPanel->enablePropertyGrid(false);
+			m_propertyPanel->EnablePropertyGrid(false);
 		}
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }

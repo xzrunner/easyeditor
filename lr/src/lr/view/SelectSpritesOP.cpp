@@ -25,9 +25,9 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 	stage->PointQuery(pos);
 
 	if (m_first_press.isValid()) {
@@ -44,16 +44,16 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 {
 	if (d2d::SelectSpritesOP::onMouseLeftDClick(x, y)) return true;
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
  		ecomplex::Symbol& symbol = const_cast<ecomplex::Symbol&>(complex->getSymbol());
- 		ecomplex::EditDialog dlg(m_editPanel, &symbol);
+ 		ecomplex::EditDialog dlg(m_stage, &symbol);
  		dlg.ShowModal();
  
-  		//m_editPanel->resetCanvas();
-		m_editPanel->ResetViewport();
+  		//m_stage->resetCanvas();
+		m_stage->ResetViewport();
 
 		//////////////////////////////////////////////////////////////////////////
 
@@ -62,32 +62,32 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 	}
 	else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	{
- 		libanim::PreviewDialog dlg(m_editPanel, &anim->getSymbol());
+ 		libanim::PreviewDialog dlg(m_stage, &anim->getSymbol());
  		dlg.ShowModal();
 
-// 		m_editPanel->resetCanvas();
-		m_editPanel->ResetViewport();
+// 		m_stage->resetCanvas();
+		m_stage->ResetViewport();
 	}
 	else if (escale9::Sprite* patch9 = dynamic_cast<escale9::Sprite*>(selected))
  	{
 		escale9::Symbol& symbol = const_cast<escale9::Symbol&>(patch9->getSymbol());
-  		escale9::EditDialog dlg(m_editPanel, &symbol);
+  		escale9::EditDialog dlg(m_stage, &symbol);
   		dlg.ShowModal();
   
-// 		m_editPanel->resetCanvas();
-		m_editPanel->ResetViewport();
+// 		m_stage->resetCanvas();
+		m_stage->ResetViewport();
  	}
 	else if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
-		emesh::EditDialog dlg(m_editPanel, sprite);
+		emesh::EditDialog dlg(m_stage, sprite);
 		dlg.ShowModal();
 
-//		m_editPanel->resetCanvas();
-		m_editPanel->ResetViewport();
+//		m_stage->resetCanvas();
+		m_stage->ResetViewport();
 	}
 	else if (d2d::FontSprite* font = dynamic_cast<d2d::FontSprite*>(selected))
 	{
-		d2d::TextDialog dlg(m_editPanel, font);
+		d2d::TextDialog dlg(m_stage, font);
 		dlg.ShowModal();
 	}
 	else if (etexture::Sprite* tex = dynamic_cast<etexture::Sprite*>(selected))
@@ -95,10 +95,10 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		std::vector<d2d::ISprite*> sprites;
 		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-		etexture::EditDialog dlg(m_editPanel, tex, sprites);
+		etexture::EditDialog dlg(m_stage, tex, sprites);
 		dlg.ShowModal();
 
-		m_editPanel->ResetViewport();
+		m_stage->ResetViewport();
 	}
 	else if (libshape::Sprite* shape = dynamic_cast<libshape::Sprite*>(selected))
 	{
@@ -107,21 +107,21 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		std::vector<d2d::ISprite*> sprites;
 		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-		libshape::EditDialogSimple dlg(m_editPanel, shape, sprites);
-//		libshape::EditDialog dlg(m_editPanel, &symbol);
+		libshape::EditDialogSimple dlg(m_stage, shape, sprites);
+//		libshape::EditDialog dlg(m_stage, &symbol);
 		dlg.ShowModal();
 
-		m_editPanel->ResetViewport();		
+		m_stage->ResetViewport();		
 	}
 	else if (eterrain2d::Sprite* terr = dynamic_cast<eterrain2d::Sprite*>(selected))
 	{
 		std::vector<d2d::ISprite*> sprites;
 		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-		eterrain2d::EditDialog dlg(m_editPanel, terr, sprites);
+		eterrain2d::EditDialog dlg(m_stage, terr, sprites);
 		dlg.ShowModal();
 
-		m_editPanel->ResetViewport();
+		m_stage->ResetViewport();
 	}
 
 	return false;

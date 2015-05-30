@@ -6,49 +6,12 @@ namespace libshape
 
 ChainPropertySetting::ChainPropertySetting(d2d::EditPanel* editPanel, 
 										   ChainShape* chain)
-	: d2d::IPropertySetting(editPanel, wxT("Chain"))
+	: d2d::IPropertySetting(editPanel, "Chain")
 	, m_chain(chain)
 {
 }
 
-void ChainPropertySetting::updatePanel(d2d::PropertySettingPanel* panel)
-{
-	wxPropertyGrid* pg = panel->getPG();
-
-	if (getPGType(pg) == m_type)
-	{
-		pg->GetProperty(wxT("Name"))->SetValue(m_chain->name);
-		pg->GetProperty(wxT("X"))->SetValue(m_chain->getRect().xCenter());
-		pg->GetProperty(wxT("Y"))->SetValue(m_chain->getRect().yCenter());
-		pg->GetProperty(wxT("Closed"))->SetValue(m_chain->IsClosed());
-		pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
-	}
-	else
-	{
-		pg->Clear();
-
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
-
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_chain->name));
-
-		pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_chain->getRect().xCenter()));
-		pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
-
-		pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_chain->getRect().yCenter()));
-		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
-
-		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->IsClosed()));
-		pg->SetPropertyAttribute("Closed", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
-		static const wxChar* mirror_labels[] = { wxT("none"),
-			wxT("horizontal"), wxT("vertical"), NULL };
-		pg->Append(new wxEnumProperty(wxT("Mirror"), wxPG_LABEL, mirror_labels));
-	}
-}
-
-void ChainPropertySetting::onPropertyGridChange(const wxString& name, const wxAny& value)
+void ChainPropertySetting::OnPropertyGridChange(const wxString& name, const wxAny& value)
 {
 	if (value.IsNull())
 		return;
@@ -94,48 +57,38 @@ void ChainPropertySetting::onPropertyGridChange(const wxString& name, const wxAn
 		}
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 }
 
-void ChainPropertySetting::updatePropertyGrid(d2d::PropertySettingPanel* panel)
+void ChainPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 {
-	updatePanel(panel);
+	pg->GetProperty(wxT("Name"))->SetValue(m_chain->name);
+	pg->GetProperty(wxT("X"))->SetValue(m_chain->getRect().xCenter());
+	pg->GetProperty(wxT("Y"))->SetValue(m_chain->getRect().yCenter());
+	pg->GetProperty(wxT("Closed"))->SetValue(m_chain->IsClosed());
+	pg->GetProperty(wxT("Mirror"))->SetValue(wxT("none"));
 }
 
-void ChainPropertySetting::enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable)
+void ChainPropertySetting::InitProperties(wxPropertyGrid* pg)
 {
-	wxPropertyGrid* pg = panel->getPG();
+	pg->Clear();
 
-	if (getPGType(pg) != m_type)
-	{
-		pg->Clear();
+	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_chain->name));
 
-		pg->Append(new wxStringProperty(wxT("Type"), wxPG_LABEL, m_type));
+	pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_chain->getRect().xCenter()));
+	pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
 
-		pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, m_chain->name));
+	pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_chain->getRect().yCenter()));
+	pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
 
-		pg->Append(new wxFloatProperty(wxT("X"), wxPG_LABEL, m_chain->getRect().xCenter()));
-		pg->SetPropertyAttribute(wxT("X"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("X"), "Precision", 1);
+	pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->IsClosed()));
+	pg->SetPropertyAttribute("Closed", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 
-		pg->Append(new wxFloatProperty(wxT("Y"), wxPG_LABEL, m_chain->getRect().yCenter()));
-		pg->SetPropertyAttribute(wxT("Y"), wxPG_ATTR_UNITS, wxT("pixels"));
-		pg->SetPropertyAttribute(wxT("Y"), "Precision", 1);
-
-		pg->Append(new wxBoolProperty(wxT("Closed"), wxPG_LABEL, m_chain->IsClosed()));
-		pg->SetPropertyAttribute("Closed", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
-
-		static const wxChar* mirror_labels[] = { wxT("none"),
-			wxT("horizontal"), wxT("vertical"), NULL };
-		pg->Append(new wxEnumProperty(wxT("Mirror"), wxPG_LABEL, mirror_labels));
-	}
-
-	pg->GetProperty(wxT("Type"))->Enable(bEnable);
-	pg->GetProperty(wxT("Name"))->Enable(bEnable);
-	pg->GetProperty(wxT("X"))->Enable(bEnable);
-	pg->GetProperty(wxT("Y"))->Enable(bEnable);
-	pg->GetProperty(wxT("Closed"))->Enable(bEnable);
-	pg->GetProperty(wxT("Mirror"))->Enable(bEnable);
+	static const wxChar* mirror_labels[] = { wxT("none"),
+		wxT("horizontal"), wxT("vertical"), NULL };
+	pg->Append(new wxEnumProperty(wxT("Mirror"), wxPG_LABEL, mirror_labels));
 }
 
 }

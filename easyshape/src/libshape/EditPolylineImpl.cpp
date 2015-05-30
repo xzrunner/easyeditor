@@ -19,7 +19,7 @@ EditPolylineImpl::EditPolylineImpl(d2d::EditPanel* editPanel,
 								   d2d::AbstractEditOP* select_op,
 								   IOperaterBase* base_op)
 {
-	m_editPanel = editPanel;
+	m_stage = editPanel;
 
 	m_shapesImpl = shapesImpl;
 
@@ -60,7 +60,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		if (tolerance != 0)
 		{	
 			NodeCapture capture(m_shapesImpl, tolerance);
-			d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+			d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 			capture.captureEditable(pos, m_capturedEditable);
 			if (!m_capturedEditable.shape)
 				capture.captureSelectable(pos, m_captureSelectable);
@@ -68,7 +68,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 
 		if (m_capturedEditable.shape)
 		{
-			// 			d2d::Vector screen = m_editPanel->transPosProjectToScreen(m_capturedEditable.pos);
+			// 			d2d::Vector screen = m_stage->transPosProjectToScreen(m_capturedEditable.pos);
 			// 			bNotDeliver = m_draw_op->onMouseLeftDown(screen.x, screen.y);
 
 			if (m_capturedEditable.pos.isValid())
@@ -90,14 +90,14 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 
 			if (tolerance != 0 && m_draw_op->m_polyline.empty())
 			{
-				d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+				d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 				InterruptChainVisitor interrupt(pos, tolerance);
 				m_shapesImpl->traverseShapes(interrupt, d2d::DT_EDITABLE);
 				if (interrupt.getInterruptedChain())
 				{
 					m_capturedEditable.shape = interrupt.getInterruptedChain();
 					m_capturedEditable.pos = pos;
-					m_editPanel->Refresh();
+					m_stage->Refresh();
 
 					checkActiveShape(m_capturedEditable);
 				}
@@ -121,7 +121,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
 		m_shapesImpl->traverseShapes(nearest, d2d::DT_VISIBLE);
 		float dis = d2d::Math::getDistance(nearest.getNearestNode(), pos);
@@ -134,14 +134,14 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 				chain->refresh();
 				m_dirty = true;
 				m_capturedEditable.pos = nearest.getNearestNode();
-				m_editPanel->Refresh();
+				m_stage->Refresh();
 			}
 		}
 
 		if (m_capturedEditable.shape)
 		{
 			if (m_propertyPanel) {
-				m_propertyPanel->enablePropertyGrid(true);
+				m_propertyPanel->EnablePropertyGrid(true);
 			}
 			checkActiveShape(m_capturedEditable);
 		}
@@ -154,7 +154,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 		m_lastLeftDownPos.setInvalid();
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
@@ -167,7 +167,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 		if (tolerance != 0)
 		{
 			NodeCapture capture(m_shapesImpl, tolerance);
-			capture.captureEditable(m_editPanel->transPosScreenToProject(x, y), m_capturedEditable);
+			capture.captureEditable(m_stage->transPosScreenToProject(x, y), m_capturedEditable);
 			if (m_capturedEditable.shape)
 			{
 				if (m_capturedEditable.pos.isValid())
@@ -185,11 +185,11 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 					m_captureSelectable.clear();
 					m_dirty = true;
 					if (m_propertyPanel) {
-						m_propertyPanel->setPropertySetting(NULL);
+						m_propertyPanel->SetPropertySetting(NULL);
 					}
 				}
 				m_capturedEditable.shape = NULL;
-				m_editPanel->Refresh();
+				m_stage->Refresh();
 			}
 		}
 
@@ -206,19 +206,19 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		NodeCapture capture(m_shapesImpl, tolerance);
 		{
 			d2d::IShape* old = m_capturedEditable.shape;
 			capture.captureEditable(pos, m_capturedEditable);
 			if (old && !m_capturedEditable.shape || !old && m_capturedEditable.shape)
-				m_editPanel->Refresh();
+				m_stage->Refresh();
 		}
 		{
 			d2d::IShape* old = m_captureSelectable.shape;
 			capture.captureSelectable(pos, m_captureSelectable);
 			if (old && !m_captureSelectable.shape || !old && m_captureSelectable.shape)
-				m_editPanel->Refresh();
+				m_stage->Refresh();
 		}
 	}
 
@@ -240,7 +240,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		if (m_draw_op->m_polyline.size() == 1)
 			m_draw_op->m_polyline.clear();
 
-		d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 		if (ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape))
 		{
 			if (m_capturedEditable.pos.isValid())
@@ -258,10 +258,10 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 
 			chain->refresh();
 			m_dirty = true;
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 
 			if (m_propertyPanel) {
-				m_propertyPanel->enablePropertyGrid(false);
+				m_propertyPanel->EnablePropertyGrid(false);
 			}
 		}
 	}
@@ -317,9 +317,9 @@ void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 {
 	if (m_propertyPanel) {
 		if (PolygonShape* poly = dynamic_cast<PolygonShape*>(captured.shape)) {
-			m_propertyPanel->setPropertySetting(new PolygonPropertySetting(m_editPanel, poly));
+			m_propertyPanel->SetPropertySetting(new PolygonPropertySetting(m_stage, poly));
 		} else if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape)) {
-			m_propertyPanel->setPropertySetting(new ChainPropertySetting(m_editPanel, chain));
+			m_propertyPanel->SetPropertySetting(new ChainPropertySetting(m_stage, chain));
 		}
 	}
 

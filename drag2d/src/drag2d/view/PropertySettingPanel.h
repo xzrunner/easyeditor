@@ -1,31 +1,39 @@
-#pragma once
+#ifndef _DRAG2D_PROPERTY_SETTING_PANEL_H_
+#define _DRAG2D_PROPERTY_SETTING_PANEL_H_
 
 #include <wx/wx.h>
 #include <wx/propgrid/propgrid.h>
 
 namespace d2d
 {
-	class IPropertySetting;
 
-	class PropertySettingPanel : public wxWindow
-	{
-	public:
-		PropertySettingPanel(wxWindow* parent);
-		~PropertySettingPanel();
+class IPropertySetting;
 
-		wxPropertyGrid* getPG() { return m_pg; }
+class PropertySettingPanel : public wxWindow
+{
+public:
+	PropertySettingPanel(wxWindow* parent);
+	~PropertySettingPanel();
 
-		void setPropertySetting(IPropertySetting* setting);
+	wxPropertyGrid* GetPropertyGrid() { return m_pg; }
 
-		void onPropertyGridChange(wxPropertyGridEvent& event);
-		void updatePropertyGrid();
-		void enablePropertyGrid(bool bEnable);
+	void SetPropertySetting(IPropertySetting* setting);
 
-	protected:
-		wxPropertyGrid* m_pg;
+	void OnPropertyGridChange(wxPropertyGridEvent& event);
+	void UpdatePropertyGrid();
+	void EnablePropertyGrid(bool enable);
 
-		IPropertySetting* m_setting;
+	const std::string& GetType() const { return m_type; }
 
-	}; // PropertySettingPanel
+protected:
+	std::string m_type;
+
+	wxPropertyGrid* m_pg;
+
+	IPropertySetting* m_setting;
+
+}; // PropertySettingPanel
+
 }
 
+#endif // _DRAG2D_PROPERTY_SETTING_PANEL_H_

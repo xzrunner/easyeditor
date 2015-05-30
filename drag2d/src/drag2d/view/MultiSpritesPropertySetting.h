@@ -18,15 +18,11 @@ public:
 		const std::vector<ISprite*>& sprites);
 	virtual ~MultiSpritesPropertySetting();
 
-	virtual void updatePanel(PropertySettingPanel* panel);
-
-	virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-	virtual void updatePropertyGrid(PropertySettingPanel* panel);
-	virtual void enablePropertyGrid(PropertySettingPanel* panel, bool bEnable);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
 protected:
-	virtual void updateProperties(wxPropertyGrid* pg);
-	virtual void initProperties(wxPropertyGrid* pg);
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
 protected:
 	MultiSpritesPropertyImpl* m_impl;

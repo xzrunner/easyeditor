@@ -94,13 +94,13 @@ wxSizer* ToolbarPanel::initLayout()
 
 void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 {
-	static_cast<StagePanel*>(m_editPanel)->clearShapes();
-	m_editPanel->Refresh();
+	static_cast<StagePanel*>(m_stage)->clearShapes();
+	m_stage->Refresh();
 }
 
 void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 {
-	StagePanel* stage = static_cast<StagePanel*>(m_editPanel);
+	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 	const d2d::ISymbol* bg = static_cast<const libshape::Symbol&>(stage->GetSymbol()).GetBG();
 	const d2d::ImageSymbol* img_symbol = dynamic_cast<const d2d::ImageSymbol*>(bg);
 	if (!img_symbol) {
@@ -130,7 +130,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 void ToolbarPanel::SelectSuitableEditOP()
 {
 	std::vector<d2d::IShape*> shapes;
-	static_cast<StagePanel*>(m_editPanel)->traverseShapes(
+	static_cast<StagePanel*>(m_stage)->traverseShapes(
 		d2d::FetchAllVisitor<d2d::IShape>(shapes));
 	if (shapes.empty()) return;
 

@@ -13,12 +13,11 @@ class SpritePropertySetting : public d2d::SpritePropertySetting
 public:
 	SpritePropertySetting(d2d::EditPanel* editPanel, Sprite* sprite);
 
-	virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-	virtual void enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
 protected:
-	virtual void updateProperties(wxPropertyGrid* pg);
-	virtual void initProperties(wxPropertyGrid* pg);
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
 }; // SpritePropertySetting
 

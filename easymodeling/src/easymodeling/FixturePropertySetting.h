@@ -1,6 +1,5 @@
-
-#ifndef EMODELING_FIXTURE_PROPERTY_SETTING_H
-#define EMODELING_FIXTURE_PROPERTY_SETTING_H
+#ifndef _EASYMODELING_FIXTURE_PROPERTY_SETTING_H_
+#define _EASYMODELING_FIXTURE_PROPERTY_SETTING_H_
 
 #include <drag2d.h>
 
@@ -8,21 +7,23 @@ namespace libmodeling { class Fixture; }
 
 namespace emodeling
 {
-	class FixturePropertySetting : public d2d::IPropertySetting
-	{
-	public:
-		FixturePropertySetting(d2d::EditPanel* editPanel, libmodeling::Fixture* fixture);
 
-		virtual void updatePanel(d2d::PropertySettingPanel* panel);
+class FixturePropertySetting : public d2d::IPropertySetting
+{
+public:
+	FixturePropertySetting(d2d::EditPanel* editPanel, libmodeling::Fixture* fixture);
 
-		virtual void onPropertyGridChange(const wxString& name, const wxAny& value);
-		virtual void updatePropertyGrid(d2d::PropertySettingPanel* panel);
-		virtual void enablePropertyGrid(d2d::PropertySettingPanel* panel, bool bEnable);
+	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
-	private:
-		libmodeling::Fixture* m_fixture;
+protected:
+	virtual void UpdateProperties(wxPropertyGrid* pg);
+	virtual void InitProperties(wxPropertyGrid* pg);
 
-	}; // FixturePropertySetting
+private:
+	libmodeling::Fixture* m_fixture;
+
+}; // FixturePropertySetting
+
 }
 
-#endif // EMODELING_FIXTURE_PROPERTY_SETTING_H
+#endif // _EASYMODELING_FIXTURE_PROPERTY_SETTING_H_

@@ -13,13 +13,13 @@ ComposeImpl::ComposeImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
 
 void ComposeImpl::onMouseRightDown(int x, int y)
 {
-	// 	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	// 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	// 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	// 
 	// 	if (selected)
 	// 	{
 	// 		selected->setTransform(selected->getPosition(), selected->getAngle() + d2d::PI*0.5f);
-	// 		m_editPanel->Refresh();
+	// 		m_stage->Refresh();
 	// 	}
 
 	//////////////////////////////////////////////////////////////////////////

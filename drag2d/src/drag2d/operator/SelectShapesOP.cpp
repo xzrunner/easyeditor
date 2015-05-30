@@ -64,7 +64,7 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 		{
 			m_shapeImpl->insertShape(m_clipboard[i]->clone());
-			m_editPanel->Refresh();
+			m_stage->Refresh();
 		}
 	}
 
@@ -75,7 +75,7 @@ bool SelectShapesOP::onMouseLeftDown(int x, int y)
 {
 	m_bDraggable = true;
 
-	Vector pos = m_editPanel->transPosScreenToProject(x, y);
+	Vector pos = m_stage->transPosScreenToProject(x, y);
 	IShape* selected = m_shapeImpl->queryShapeByPos(pos);
 	if (selected)
 	{
@@ -87,9 +87,9 @@ bool SelectShapesOP::onMouseLeftDown(int x, int y)
 			{
 				m_selection->Add(selected);
 				if (m_selection->Size() == 1)
-					m_propertyPanel->setPropertySetting(createPropertySetting(selected));
+					m_propertyPanel->SetPropertySetting(createPropertySetting(selected));
 				else
-					m_propertyPanel->setPropertySetting(createPropertySetting(NULL));
+					m_propertyPanel->SetPropertySetting(createPropertySetting(NULL));
 			}
 		}
 		else
@@ -99,7 +99,7 @@ bool SelectShapesOP::onMouseLeftDown(int x, int y)
 				m_selection->Clear();
 				m_selection->Add(selected);
 				if (m_propertyPanel)
-					m_propertyPanel->setPropertySetting(createPropertySetting(selected));
+					m_propertyPanel->SetPropertySetting(createPropertySetting(selected));
 			}
 		}
 		m_firstPos.setInvalid();
@@ -115,7 +115,7 @@ bool SelectShapesOP::onMouseLeftDown(int x, int y)
 			m_bDraggable = false;
 		else
 			m_selection->Clear();
-		m_editPanel->Refresh();
+		m_stage->Refresh();
 	}
 
 	return false;
@@ -129,7 +129,7 @@ bool SelectShapesOP::onMouseLeftUp(int x, int y)
 
 	if (m_firstPos.isValid())
 	{
-		Rect rect(m_firstPos, m_editPanel->transPosScreenToProject(x, y));
+		Rect rect(m_firstPos, m_stage->transPosScreenToProject(x, y));
 		std::vector<IShape*> shapes;
 		m_shapeImpl->queryShapesByRect(rect, shapes);
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
@@ -138,9 +138,9 @@ bool SelectShapesOP::onMouseLeftUp(int x, int y)
 		if (m_propertyPanel)
 		{
 			if (m_selection->Size() == 1 && !shapes.empty())
-				m_propertyPanel->setPropertySetting(createPropertySetting(shapes[0]));
+				m_propertyPanel->SetPropertySetting(createPropertySetting(shapes[0]));
 			else
-				m_propertyPanel->setPropertySetting(createPropertySetting(NULL));
+				m_propertyPanel->SetPropertySetting(createPropertySetting(NULL));
 		}
 
 		m_firstPos.setInvalid();
@@ -181,7 +181,7 @@ bool SelectShapesOP::clear()
 
 IPropertySetting* SelectShapesOP::createPropertySetting(IShape* shape) const
 {
-	return shape ? shape->createPropertySetting(m_editPanel) : NULL;
+	return shape ? shape->createPropertySetting(m_stage) : NULL;
 }
 
 void SelectShapesOP::clearClipboard()
