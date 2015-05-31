@@ -1,5 +1,6 @@
 #include "Code.h"
 #include "ToolBarPanel.h"
+#include "ps_config.h"
 
 #include <easybuilder.h>
 
@@ -16,6 +17,8 @@ Code::Code(ebuilder::CodeGenerator& gen, ToolbarPanel* toolbar)
 
 void Code::resolve()
 {
+	d2d::UICallback::Data data;
+
 	std::string s = m_toolbar->m_name->GetValue();
 	lua::TableAssign ta(m_gen, "['"+s+"']", true);
 
@@ -24,19 +27,21 @@ void Code::resolve()
 	s = m_toolbar->m_package->GetValue();
 	lua::assign(m_gen, "['package']", "'"+s+"',");
 
-	s = wxString::FromDouble(m_toolbar->m_count->GetValue());
+	m_toolbar->GetValue(PS_COUNT, data);
+	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['count']", s+",");
 
 	s = wxString::FromDouble(m_toolbar->m_layer->GetValue());
 	lua::assign(m_gen, "['layer']", s+",");
 
-	s = wxString::FromDouble(m_toolbar->m_emission_time->GetValue());
+	m_toolbar->GetValue(PS_EMISSION_TIME, data);
+	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['emission_time']", s+",");
 
-	s = wxString::FromDouble(m_toolbar->m_min_life->GetValue());
+	m_toolbar->GetValue(PS_LIFE_TIME, data);
+	s = wxString::FromDouble(data.val0 - data.val1);
 	lua::assign(m_gen, "['min_life']", s+",");
-
-	s = wxString::FromDouble(m_toolbar->m_max_life->GetValue());
+	s = wxString::FromDouble(data.val0 + data.val1);
 	lua::assign(m_gen, "['max_life']", s+",");
 
 	s = wxString::FromDouble(m_toolbar->m_min_hori->GetValue());
@@ -51,19 +56,27 @@ void Code::resolve()
 	s = wxString::FromDouble(m_toolbar->m_max_vert->GetValue());
 	lua::assign(m_gen, "['max_vert']", s+",");
 
-	s = wxString::FromDouble(m_toolbar->m_min_spd->GetValue());
+	m_toolbar->GetValue(PS_SPEED, data);
+	s = wxString::FromDouble(data.val0 - data.val1);
 	lua::assign(m_gen, "['min_spd']", s+",");
-
-	s = wxString::FromDouble(m_toolbar->m_max_spd->GetValue());
+	s = wxString::FromDouble(data.val0 + data.val1);
 	lua::assign(m_gen, "['max_spd']", s+",");
 
-	s = wxString::FromDouble(m_toolbar->m_gravity->GetValue());
+	m_toolbar->GetValue(PS_ANGULAR_SPEED, data);
+	s = wxString::FromDouble(data.val0 - data.val1);
+	lua::assign(m_gen, "['min_angular_spd']", s+",");
+	s = wxString::FromDouble(data.val0 + data.val1);
+	lua::assign(m_gen, "['max_angular_spd']", s+",");
+
+	m_toolbar->GetValue(PS_GRAVITY, data);
+	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['gravity']", s+",");
 
 	s = wxString::FromDouble(m_toolbar->m_inertia->GetValue());
 	lua::assign(m_gen, "['inertia']", s+",");
 
-	s = wxString::FromDouble(m_toolbar->m_fadeout_time->GetValue());
+	m_toolbar->GetValue(PS_FADEOUT_TIME, data);
+	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['fadeout_time']", s+",");
 
 	s = m_toolbar->m_bounce->GetValue() ? "true" : "false";
@@ -72,7 +85,8 @@ void Code::resolve()
 	s = m_toolbar->m_additiveBlend->GetValue() ? "true" : "false";
 	lua::assign(m_gen, "['additive_blend']", s+",");
 
-	s = wxString::FromDouble(m_toolbar->m_start_radius->GetValue());
+	m_toolbar->GetValue(PS_START_RADIUS, data);
+	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['start_radius']", s+",");
 
 	s = m_toolbar->m_orient_to_movement->GetValue() ? "true" : "false";

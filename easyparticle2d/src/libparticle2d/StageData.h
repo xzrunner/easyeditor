@@ -17,7 +17,7 @@ public:
 	~StageData();
 
 	//
-	// interface d2d::UICallback
+	// UICallback interface
 	//
 	virtual void SetValue(int key, const Data& data);
 	virtual void GetValue(int key, Data& data);

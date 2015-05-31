@@ -2,6 +2,7 @@
 #include "Symbol.h"
 #include "config.h"
 #include "Recorder.h"
+#include "ps_config.h"
 
 namespace eparticle3d
 {
@@ -104,6 +105,75 @@ ParticleSystem::~ParticleSystem()
 
 	if (pStart != NULL)
 		delete[] pStart;
+}
+
+void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case PS_COUNT:
+		count = data.val0;
+		break;
+	case PS_EMISSION_TIME:
+		emission_time = data.val0 * 0.001f; 
+		lifetime = emission_time;
+		break;
+	case PS_LIFE_TIME:
+		min_life = (data.val0 - data.val1) * 0.001f;
+		max_life = (data.val0 + data.val1) * 0.001f;
+		break;
+	case PS_SPEED:
+		min_spd = (data.val0 - data.val1) * 0.25f;
+		max_spd = (data.val0 + data.val1) * 0.25f;
+		break;
+	case PS_ANGULAR_SPEED:
+		min_angular_spd = (data.val0 - data.val1);
+		max_angular_spd = (data.val0 + data.val1);
+		break;
+	case PS_GRAVITY:
+		gravity = data.val0 * 0.3f;
+		break;
+	case PS_FADEOUT_TIME:
+		fadeout_time = data.val0 * 0.001f;
+		break;
+	case PS_START_RADIUS:
+		start_radius = data.val0;
+		break;
+	}
+}
+
+void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case PS_COUNT:
+		data.val0 = count;
+		break;
+	case PS_EMISSION_TIME:
+		data.val0 = emission_time * 1000;
+		break;
+	case PS_LIFE_TIME:
+		data.val0 = (min_life + max_life) * 0.5f * 1000;
+		data.val1 = (max_life - min_life) * 0.5f * 1000;
+		break;
+	case PS_SPEED:
+		data.val0 = (min_spd + max_spd) * 0.5f * 4;
+		data.val1 = (max_spd - min_spd) * 0.5f * 4;
+		break;
+	case PS_ANGULAR_SPEED:
+		data.val0 = (min_angular_spd + max_angular_spd) * 0.5f;
+		data.val1 = (max_angular_spd - min_angular_spd) * 0.5f;
+		break;
+	case PS_GRAVITY:
+		data.val0 = gravity / 0.3f;
+		break;
+	case PS_FADEOUT_TIME:
+		data.val0 = fadeout_time * 1000;
+		break;
+	case PS_START_RADIUS:
+		data.val0 = start_radius;
+		break;
+	}
 }
 
 void ParticleSystem::draw(const d2d::Matrix& mt, Recorder* recorder)

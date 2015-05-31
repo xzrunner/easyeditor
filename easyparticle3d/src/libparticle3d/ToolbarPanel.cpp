@@ -3,6 +3,8 @@
 #include "ParticleSystem.h"
 #include "FileIO.h"
 #include "config.h"
+#include "ps_config.h"
+#include "item_string.h"
 
 #include <easyanim.h>
 
@@ -11,16 +13,16 @@ namespace eparticle3d
 
 const float ToolbarPanel::COUNT				= 20;
 const float ToolbarPanel::EMISSION_TIME		= 150;
-const float ToolbarPanel::MIN_LIFE			= 300;
-const float ToolbarPanel::MAX_LIFE			= 1300;
+const float ToolbarPanel::LIFE_CENTER		= 800;
+const float ToolbarPanel::LIFE_OFFSET		= 500;
 const float ToolbarPanel::MIN_HORI			= 0;
 const float ToolbarPanel::MAX_HORI			= 360;
 const float ToolbarPanel::MIN_VERT			= 60;
 const float ToolbarPanel::MAX_VERT			= 90;
-const float ToolbarPanel::MIN_SPD			= 1200;
-const float ToolbarPanel::MAX_SPD			= 2000;
-const float ToolbarPanel::MIN_ANGULAR_SPE	= 0;
-const float ToolbarPanel::MAX_ANGULAR_SPE	= 0;
+const float ToolbarPanel::SPEED_CENTER		= 1600;
+const float ToolbarPanel::SPEED_OFFSET		= 400;
+const float ToolbarPanel::ANGULAR_SPEED_CENTER = 0;
+const float ToolbarPanel::ANGULAR_SPEED_OFFSET = 0;
 const float ToolbarPanel::GRAVITY			= 1200;
 const float ToolbarPanel::INERTIA			= 4;
 const float ToolbarPanel::FADEOUT_TIME		= 300;
@@ -41,6 +43,35 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 	initParticle();
 
 	SetDropTarget(new DropTarget(library, stage, this));
+}
+
+void ToolbarPanel::SetValue(int key, const d2d::UICallback::Data& data)
+{
+	if (m_stage->m_ps) {
+		m_stage->m_ps->SetValue(key, data);
+	}
+}
+
+void ToolbarPanel::GetValue(int key, d2d::UICallback::Data& data)
+{
+	if (m_stage->m_ps) {
+		m_stage->m_ps->GetValue(key, data);
+	}	
+}
+
+void ToolbarPanel::Load(const Json::Value& val, int version)
+{
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Load(val, version);
+		m_sliders[i]->Update();
+	}
+}
+
+void ToolbarPanel::Store(Json::Value& val) const
+{
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Store(val);
+	}
 }
 
 void ToolbarPanel::add(const FileAdapter::Child& child)
@@ -106,17 +137,11 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Count
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Count"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_count = new wxSlider(this, wxID_ANY, COUNT, 1, 100, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_count->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetCount));
-		sizer->Add(m_count);
-
-		leftSizer->Add(sizer);
-	}
+	d2d::SliderCtrlOne* s_count = new d2d::SliderCtrlOne(this, "Count", "count", 
+		this, PS_COUNT, d2d::SliderItem("", "", COUNT, 1, 100));
+	leftSizer->Add(s_count);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_count);
 	// Layer
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -126,44 +151,17 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Emission Time
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Emission Time (ms)"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_emission_time = new wxSlider(this, wxID_ANY, EMISSION_TIME, 10, 1000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_emission_time->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetEmissionTime));
-		sizer->Add(m_emission_time);
-
-		leftSizer->Add(sizer);
-	}
+	d2d::SliderCtrlOne* s_emission_time = new d2d::SliderCtrlOne(this, "Emission Time (ms)", "emission_time",
+		this, PS_EMISSION_TIME, d2d::SliderItem("", "", EMISSION_TIME, 10, 1000));
+	leftSizer->Add(s_emission_time);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_emission_time);
 	// Life
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Life (ms)"));
-		wxSizer* lifeSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
-
-			m_min_life = new wxSlider(this, wxID_ANY, MIN_LIFE, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_min_life->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetLife));
-			sizer->Add(m_min_life);
-
-			lifeSizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
-
-			m_max_life = new wxSlider(this, wxID_ANY, MAX_LIFE, 0, 5000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_max_life->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetLife));
-			sizer->Add(m_max_life);
-
-			lifeSizer->Add(sizer);
-		}
-		leftSizer->Add(lifeSizer);
-	}
+	d2d::SliderCtrlTwo* s_life = new d2d::SliderCtrlTwo(this, "Life (ms)", "life", this, PS_LIFE_TIME, 
+		d2d::SliderItem("center", ITEM_ATTR_CENTER, LIFE_CENTER, 0, 5000), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, LIFE_OFFSET, 0, 2500));
+	leftSizer->Add(s_life);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_life);
 	// Hori
 	{
 		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Horizontal (deg)"));
@@ -221,70 +219,23 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Speed
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Speed (pixel)"));
-		wxSizer* spdSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
-
-			m_min_spd = new wxSlider(this, wxID_ANY, MIN_SPD, 0, 9000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_min_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetSpeed));
-			sizer->Add(m_min_spd);
-
-			spdSizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
-
-			m_max_spd = new wxSlider(this, wxID_ANY, MAX_SPD, 0, 9000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_max_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetSpeed));
-			sizer->Add(m_max_spd);
-
-			spdSizer->Add(sizer);
-		}
-		leftSizer->Add(spdSizer);
-	}
+	d2d::SliderCtrlTwo* s_spd = new d2d::SliderCtrlTwo(this, "Speed (pixel)", "speed", this, PS_SPEED, 
+		d2d::SliderItem("center", ITEM_ATTR_CENTER, SPEED_CENTER, 0, 9000), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, SPEED_OFFSET, 0, 4000));
+	leftSizer->Add(s_spd);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_spd);
 	// Angular Speed
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Angular Speed (degree)"));
-		wxSizer* spdSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
-
-			m_min_angular_spd = new wxSlider(this, wxID_ANY, MIN_ANGULAR_SPE, -3600, 3600, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_min_angular_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetAngularSpeed));
-			sizer->Add(m_min_angular_spd);
-
-			spdSizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
-
-			m_max_angular_spd = new wxSlider(this, wxID_ANY, MAX_ANGULAR_SPE, -3600, 3600, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_max_angular_spd->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetAngularSpeed));
-			sizer->Add(m_max_angular_spd);
-
-			spdSizer->Add(sizer);
-		}
-		leftSizer->Add(spdSizer);
-	}
-	// Gravity
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Gravity (pixel)"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_gravity = new wxSlider(this, wxID_ANY, GRAVITY, -1000, 9999, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_gravity->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetGravity));
-		sizer->Add(m_gravity);
-
-		leftSizer->Add(sizer);
-	}
+	d2d::SliderCtrlTwo* as_spd = new d2d::SliderCtrlTwo(this, "Angular Speed (degree)", "angular_speed", this, PS_ANGULAR_SPEED, 
+		d2d::SliderItem("center", ITEM_ATTR_CENTER, ANGULAR_SPEED_CENTER, -3600, 3600), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, ANGULAR_SPEED_OFFSET, 0, 360));
+	leftSizer->Add(as_spd);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(as_spd);
+	// Gravity
+	d2d::SliderCtrlOne* s_gravity = new d2d::SliderCtrlOne(this, "Gravity (pixel)", "gravity", 
+		this, PS_GRAVITY, d2d::SliderItem("", "", GRAVITY, -5000, 15000));
+	leftSizer->Add(s_gravity);
+	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_gravity);
 	// Inertia
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -298,17 +249,11 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Fadeout Time
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Fadeout Time (ms)"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_fadeout_time = new wxSlider(this, wxID_ANY, FADEOUT_TIME, 10, 2500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_fadeout_time->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetFadeoutTime));
-		sizer->Add(m_fadeout_time);
-
-		leftSizer->Add(sizer);
-	}
+	d2d::SliderCtrlOne* s_fadeout = new d2d::SliderCtrlOne(this, "Fadeout Time (ms)", "fadeout_time", 
+		this, PS_FADEOUT_TIME, d2d::SliderItem("", "", FADEOUT_TIME, 10, 2500));
+	leftSizer->Add(s_fadeout);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_fadeout);
 	// Bounce
 	{
 		m_bounce = new wxCheckBox(this, wxID_ANY, wxT("Bounce"));
@@ -324,17 +269,11 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	leftSizer->AddSpacer(10);
 	// Start Radius
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Start Radius (pixel)"));
-		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-
-		m_start_radius = new wxSlider(this, wxID_ANY, START_RADIUS, 0, 1000, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-		Connect(m_start_radius->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ToolbarPanel::onSetStartRadius));
-		sizer->Add(m_start_radius);
-
-		leftSizer->Add(sizer);
-	}
+	d2d::SliderCtrlOne* s_start_radius = new d2d::SliderCtrlOne(this, "Start Radius (pixel)", "start_radius", 
+		this, PS_START_RADIUS, d2d::SliderItem("", "", START_RADIUS, 0, 1000));
+	leftSizer->Add(s_start_radius);
 	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_start_radius);
 	// orient_to_movement
 	{
 		m_orient_to_movement = new wxCheckBox(this, wxID_ANY, wxT("Orient to Movement"));	
@@ -374,15 +313,13 @@ void ToolbarPanel::initParticle()
 	ps->start();
 	m_stage->m_ps = ps;
 
-	ps->setCount(m_count->GetValue());
-	ps->setEmissionTime(m_emission_time->GetValue());
-	ps->setLife(m_min_life->GetValue(), m_max_life->GetValue());
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Update();
+	}
+
 	ps->setHori(m_min_hori->GetValue(), m_max_hori->GetValue());
 	ps->setVert(m_min_vert->GetValue(), m_max_vert->GetValue());
-	ps->setSpeed(m_min_spd->GetValue(), m_max_spd->GetValue());
-	ps->setGravity(m_gravity->GetValue());
 	ps->setInertia(m_inertia->GetValue());
-	ps->setFadeoutTime(m_fadeout_time->GetValue());
 }
 
 void ToolbarPanel::clear()
@@ -435,21 +372,6 @@ void ToolbarPanel::onDelChild(wxCommandEvent& event)
 	this->Layout();
 }
 
-void ToolbarPanel::onSetCount(wxScrollEvent& event)
-{
-	m_stage->m_ps->setCount(m_count->GetValue());
-}
-
-void ToolbarPanel::onSetEmissionTime(wxScrollEvent& event)
-{
-	m_stage->m_ps->setEmissionTime(m_emission_time->GetValue());
-}
-
-void ToolbarPanel::onSetLife(wxScrollEvent& event)
-{
-	m_stage->m_ps->setLife(m_min_life->GetValue(), m_max_life->GetValue());
-}
-
 void ToolbarPanel::onSetHori(wxSpinEvent& event)
 {
 	m_stage->m_ps->setHori(m_min_hori->GetValue(), m_max_hori->GetValue());
@@ -460,29 +382,9 @@ void ToolbarPanel::onSetVert(wxSpinEvent& event)
 	m_stage->m_ps->setVert(m_min_vert->GetValue(), m_max_vert->GetValue());
 }
 
-void ToolbarPanel::onSetSpeed(wxScrollEvent& event)
-{
-	m_stage->m_ps->setSpeed(m_min_spd->GetValue(), m_max_spd->GetValue());
-}
-
-void ToolbarPanel::onSetAngularSpeed(wxScrollEvent& event)
-{
-	m_stage->m_ps->setAngularSpeed(m_min_angular_spd->GetValue(), m_max_angular_spd->GetValue());
-}
-
-void ToolbarPanel::onSetGravity(wxScrollEvent& event)
-{
-	m_stage->m_ps->setGravity(m_gravity->GetValue());
-}
-
 void ToolbarPanel::onSetInertia(wxSpinEvent& event)
 {
 	m_stage->m_ps->setInertia(m_inertia->GetValue());
-}
-
-void ToolbarPanel::onSetFadeoutTime(wxScrollEvent& event)
-{
-	m_stage->m_ps->setFadeoutTime(m_fadeout_time->GetValue());
 }
 
 void ToolbarPanel::onSetBounce(wxCommandEvent& event)
@@ -493,11 +395,6 @@ void ToolbarPanel::onSetBounce(wxCommandEvent& event)
 void ToolbarPanel::onSetAdditiveBlend(wxCommandEvent& event)
 {
 	m_stage->m_ps->setAdditiveBlend(event.IsChecked());
-}
-
-void ToolbarPanel::onSetStartRadius(wxScrollEvent& event)
-{
-	m_stage->m_ps->setStartRadius(m_start_radius->GetValue());
 }
 
 void ToolbarPanel::OnSetOrientToMovement(wxCommandEvent& event)

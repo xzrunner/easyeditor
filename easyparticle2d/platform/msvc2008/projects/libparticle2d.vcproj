@@ -328,14 +328,6 @@
 				RelativePath="..\..\..\src\libparticle2d\CocoPacker.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle2d\FileIO.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle2d\FileIO.h"
-				>
-			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libparticle2d\config.h"

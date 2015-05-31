@@ -17,7 +17,7 @@ public:
 	~ParticleSystem();
 
 	//
-	// interface d2d::UICallback
+	// UICallback interface
 	//
 	virtual void SetValue(int key, const d2d::UICallback::Data& data);
 	virtual void GetValue(int key, d2d::UICallback::Data& data);

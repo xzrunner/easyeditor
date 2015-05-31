@@ -3,6 +3,7 @@
 #include "ToolbarPanel.h"
 #include "ParticleSystem.h"
 #include "config.h"
+#include "ps_config.h"
 
 namespace eparticle3d
 {
@@ -11,27 +12,19 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 {
 	Json::Value value;
 
+	toolbar->Store(value);
+	value["version"] = VERSION;
+
 	value["name"] = toolbar->m_name->GetValue().ToStdString();
 	value["package"] = toolbar->m_package->GetValue().ToStdString();
-	value["count"] = toolbar->m_count->GetValue();
 	value["layer"] = toolbar->m_layer->GetValue();
-	value["emission_time"] = toolbar->m_emission_time->GetValue();
-	value["min_life"] = toolbar->m_min_life->GetValue();
-	value["max_life"] = toolbar->m_max_life->GetValue();
 	value["min_hori"] = toolbar->m_min_hori->GetValue();
 	value["max_hori"] = toolbar->m_max_hori->GetValue();
 	value["min_vert"] = toolbar->m_min_vert->GetValue();
 	value["max_vert"] = toolbar->m_max_vert->GetValue();
-	value["min_spd"] = toolbar->m_min_spd->GetValue();
-	value["max_spd"] = toolbar->m_max_spd->GetValue();
-	value["min_angular_spd"] = toolbar->m_min_angular_spd->GetValue();
-	value["max_angular_spd"] = toolbar->m_max_angular_spd->GetValue();
-	value["gravity"] = toolbar->m_gravity->GetValue();
 	value["inertia"] = toolbar->m_inertia->GetValue();
-	value["fadeout_time"] = toolbar->m_fadeout_time->GetValue();
 	value["bounce"] = toolbar->m_bounce->GetValue();
 	value["additive_blend"] = toolbar->m_additiveBlend->GetValue();
-	value["start_radius"] = toolbar->m_start_radius->GetValue();
 	value["orient_to_movement"] = toolbar->m_orient_to_movement->GetValue();
 	value["orient_to_parent"] = toolbar->m_orient_to_parent->GetValue();
 
@@ -65,41 +58,48 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 void FileIO::load(const char* filepath, ParticleSystem* ps,
 				  ToolbarPanel* toolbar)
 {
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
 	FileAdapter adapter;
 	adapter.load(filepath);
 
+	int version = value["version"].asInt();
+	if (version == 0) {
+		int center = (adapter.min_life + adapter.max_life) * 0.5f;
+		int offset = (adapter.max_life - adapter.min_life) * 0.5f;
+		value["life"]["center"] = center;
+		value["life"]["offset"] = offset;
+
+		center = (adapter.min_spd + adapter.max_spd) * 0.5f;
+		offset = (adapter.max_spd - adapter.min_spd) * 0.5f;
+		value["speed"]["center"] = center;
+		value["speed"]["offset"] = offset;
+	}
+
+	toolbar->Load(value, version);
+
+	//////////////////////////////////////////////////////////////////////////
+
 	toolbar->m_name->SetValue(adapter.name);
 	toolbar->m_package->SetValue(adapter.package);
-	toolbar->m_count->SetValue(adapter.count);
-	ps->setCount(adapter.count);
+
 	toolbar->m_layer->SetValue(adapter.layer);
-	toolbar->m_emission_time->SetValue(adapter.emission_time);
-	ps->setEmissionTime(adapter.emission_time);
-	toolbar->m_min_life->SetValue(adapter.min_life);
-	toolbar->m_max_life->SetValue(adapter.max_life);
-	ps->setLife(adapter.min_life, adapter.max_life);
 	toolbar->m_min_hori->SetValue(adapter.min_hori);
 	toolbar->m_max_hori->SetValue(adapter.max_hori);
 	ps->setHori(adapter.min_hori, adapter.max_hori);
 	toolbar->m_min_vert->SetValue(adapter.min_vert);
 	toolbar->m_max_vert->SetValue(adapter.max_vert);
 	ps->setVert(adapter.min_vert, adapter.max_vert);
-	toolbar->m_min_spd->SetValue(adapter.min_spd);
-	toolbar->m_max_spd->SetValue(adapter.max_spd);
-	ps->setSpeed(adapter.min_spd, adapter.max_spd);
-	toolbar->m_min_angular_spd->SetValue(adapter.min_angular_spd);
-	toolbar->m_max_angular_spd->SetValue(adapter.max_angular_spd);
-	ps->setAngularSpeed(adapter.min_angular_spd, adapter.max_angular_spd);
-	toolbar->m_gravity->SetValue(adapter.gravity);
-	ps->setGravity(adapter.gravity);
 	toolbar->m_inertia->SetValue(adapter.inertia);
-	toolbar->m_fadeout_time->SetValue(adapter.fadeout_time);
-	ps->setFadeoutTime(adapter.fadeout_time);
 	toolbar->m_bounce->SetValue(adapter.bounce);
 	ps->setBounce(adapter.bounce);
 	toolbar->m_additiveBlend->SetValue(adapter.additive_blend);
-	toolbar->m_start_radius->SetValue(adapter.start_radius);
-	ps->setStartRadius(adapter.start_radius);
 	toolbar->m_orient_to_movement->SetValue(adapter.orient_to_movement);
 	toolbar->m_orient_to_parent->SetValue(adapter.orient_to_parent);
 	for (size_t i = 0, n = adapter.children.size(); i < n; ++i) {
@@ -115,17 +115,18 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP);
 
 	ps->filepath = filepath;
-	ps->setCount(adapter.count);
-	ps->setEmissionTime(adapter.emission_time);
-	ps->setLife(adapter.min_life, adapter.max_life);
+	ps->SetValue(PS_COUNT, d2d::UICallback::Data(adapter.count));
+	ps->SetValue(PS_EMISSION_TIME, d2d::UICallback::Data(adapter.emission_time));
+	ps->SetValue(PS_LIFE_TIME, d2d::UICallback::Data((adapter.min_life + adapter.max_life) * 0.5f, (adapter.max_life - adapter.min_life) * 0.5f));
+	ps->SetValue(PS_SPEED, d2d::UICallback::Data((adapter.min_spd + adapter.max_spd) * 0.5f, (adapter.max_spd - adapter.min_spd) * 0.5f));
+	ps->SetValue(PS_ANGULAR_SPEED, d2d::UICallback::Data((adapter.min_angular_spd + adapter.max_angular_spd) * 0.5f, (adapter.max_angular_spd - adapter.min_angular_spd) * 0.5f));
+	ps->SetValue(PS_GRAVITY, d2d::UICallback::Data(adapter.gravity));
+	ps->SetValue(PS_FADEOUT_TIME, d2d::UICallback::Data(adapter.fadeout_time));
+	ps->SetValue(PS_START_RADIUS, d2d::UICallback::Data(adapter.start_radius));
+
 	ps->setHori(adapter.min_hori, adapter.max_hori);
 	ps->setVert(adapter.min_vert, adapter.max_vert);
-	ps->setSpeed(adapter.min_spd, adapter.max_spd);
-	ps->setAngularSpeed(adapter.min_angular_spd, adapter.max_angular_spd);
-	ps->setGravity(adapter.gravity);
-	ps->setFadeoutTime(adapter.fadeout_time);
 	ps->setBounce(adapter.bounce);
-	ps->setStartRadius(adapter.start_radius);
 	for (size_t i = 0, n = adapter.children.size(); i < n; ++i)
 	{
 		const FileAdapter::Child& child = adapter.children[i];

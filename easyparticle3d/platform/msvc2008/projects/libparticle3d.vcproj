@@ -172,11 +172,19 @@
 				Name="ps"
 				>
 				<File
+					RelativePath="..\..\..\src\libparticle3d\item_string.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libparticle3d\ParticleSystem.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\..\..\src\libparticle3d\ParticleSystem.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\ps_config.h"
 					>
 				</File>
 			</Filter>

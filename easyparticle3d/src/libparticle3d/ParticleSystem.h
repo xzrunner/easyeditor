@@ -57,8 +57,76 @@ struct Particle
 	float m_bind_time;
 };
 
-class ParticleSystem : public d2d::Object, public d2d::ICloneable
+class ParticleSystem : public d2d::Object, public d2d::ICloneable, public d2d::UICallback
 {
+public:
+//	ParticleSystem(/*const ParticleSystem& ps*/);
+	ParticleSystem(unsigned int buffer);
+	ParticleSystem(const ParticleSystem& ps);
+
+	virtual ~ParticleSystem();
+
+	//
+	// ICloneable interface
+	//
+	virtual ParticleSystem* clone() const { return new ParticleSystem(*this); }
+
+	//
+	// UICallback interface
+	//
+	virtual void SetValue(int key, const d2d::UICallback::Data& data);
+	virtual void GetValue(int key, d2d::UICallback::Data& data);
+
+	virtual void draw(const d2d::Matrix& mt, Recorder* recorder = NULL);
+
+	void update(float dt);
+
+	void start();
+	void stop();
+	void reset();
+	void pause();
+
+	bool IsEmpty() const;
+
+	void reloadTexture() const;
+
+	void StoreRecordAsAnimFile(const std::string& filepath) const;
+
+public:
+	void setHori(int min, int max) { min_hori = min; max_hori = max; }
+	void setVert(int min, int max) { min_vert = min; max_vert = max; }
+	
+	void setInertia(int val) { inertia = val * d2d::TRANS_DEG_TO_RAD; }
+	void setBounce(bool open) { bounce = open; }
+	void setAdditiveBlend(bool open) { additive_blend = open; }
+	void SetOrientToMovement(bool open) { orient_to_movement = open; }
+
+	void addChild(ParticleChild* child) { 
+		children.push_back(child); 
+	}
+	void delChild() { 
+		if (!children.empty()) 
+		{
+			delete children[children.size() - 1];
+			children.pop_back(); 
+		}
+	}
+
+protected:
+	void add();
+	void remove(Particle * p);
+
+	bool isFull() const { return pLast == pEnd; }
+	bool isEmpty() const { return pStart == pLast; }
+
+private:
+	void transCoords(float r, float hori, float vert, float result[3]);
+
+	static d2d::Vector TransCoords3To2(float position[3]);
+
+private:
+	Recorder* m_recorder;
+
 public:
 	d2d::Vector origin;
 
@@ -103,79 +171,6 @@ private:
 	float start_radius;
 
 	bool orient_to_movement;
-
-public:
-//	ParticleSystem(/*const ParticleSystem& ps*/);
-	ParticleSystem(unsigned int buffer);
-	ParticleSystem(const ParticleSystem& ps);
-
-	virtual ~ParticleSystem();
-
-	//
-	// ICloneable interface
-	//
-	virtual ParticleSystem* clone() const { return new ParticleSystem(*this); }
-
-	virtual void draw(const d2d::Matrix& mt, Recorder* recorder = NULL);
-
-	void update(float dt);
-
-	void start();
-	void stop();
-	void reset();
-	void pause();
-
-	bool IsEmpty() const;
-
-	void reloadTexture() const;
-
-	void StoreRecordAsAnimFile(const std::string& filepath) const;
-
-public:
-	void setCount(int val) { count = val; }
-	void setEmissionTime(int val) { 
-		emission_time = val * 0.001f; 
-		lifetime = emission_time;
-	}
-	void setLife(int min, int max) { min_life = min * 0.001f; max_life = max * 0.001f; }
-	void setHori(int min, int max) { min_hori = min; max_hori = max; }
-	void setVert(int min, int max) { min_vert = min; max_vert = max; }
-	void setSpeed(int min, int max) { min_spd = min * 0.25f; max_spd = max * 0.25f; }
-	void setAngularSpeed(int min, int max) { min_angular_spd = min; max_angular_spd = max; }
-	
-	void setGravity(int val) { gravity = val * /*0.001f*//*0.25f*/0.3f; }
-	void setInertia(int val) { inertia = val * d2d::TRANS_DEG_TO_RAD; }
-	void setFadeoutTime(int val) { fadeout_time = val * 0.001f; }
-	void setBounce(bool open) { bounce = open; }
-	void setAdditiveBlend(bool open) { additive_blend = open; }
-	void setStartRadius(int val) { start_radius = val; }
-	void SetOrientToMovement(bool open) { orient_to_movement = open; }
-
-	void addChild(ParticleChild* child) { 
-		children.push_back(child); 
-	}
-	void delChild() { 
-		if (!children.empty()) 
-		{
-			delete children[children.size() - 1];
-			children.pop_back(); 
-		}
-	}
-
-protected:
-	void add();
-	void remove(Particle * p);
-
-	bool isFull() const { return pLast == pEnd; }
-	bool isEmpty() const { return pStart == pLast; }
-
-private:
-	void transCoords(float r, float hori, float vert, float result[3]);
-
-	static d2d::Vector TransCoords3To2(float position[3]);
-
-private:
-	Recorder* m_recorder;
 
 	friend class FileIO;
 
