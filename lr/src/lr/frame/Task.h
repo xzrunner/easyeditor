@@ -29,6 +29,9 @@ public:
 
 private:
 	void InitLayout();
+	wxWindow* InitLayoutLeft(wxWindow* parent);
+	wxWindow* InitLayoutCenter(wxWindow* parent);
+	wxWindow* InitLayoutRight(wxWindow* parent);
 
 private:
 	wxWindow* m_root;
@@ -36,6 +39,7 @@ private:
 	wxFrame* m_parent;
 
  	LibraryPanel* m_library;
+	d2d::PropertySettingPanel* m_property;
  	StagePanel* m_stage;
 	d2d::ViewlistPanel* m_viewlist;
 

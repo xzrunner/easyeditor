@@ -59,32 +59,52 @@ const d2d::EditPanel* Task::getEditPanel() const
 
 void Task::InitLayout()
 {
-	wxSplitterWindow* right_splitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* left_splitter = new wxSplitterWindow(right_splitter);
-	wxSplitterWindow* left_hori_splitter = new wxSplitterWindow(left_splitter);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
-	d2d::PropertySettingPanel* property 
-		= new d2d::PropertySettingPanel(left_hori_splitter);
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
 
-	m_library = new LibraryPanel(left_hori_splitter);
-	m_stage = new StagePanel(left_splitter, m_parent, property, m_library);
-	m_library->InitPages(m_stage, property);
+	left_split->SetSashGravity(0.12f);
+	left_split->SplitVertically(left, center);
+
+	right_split->SetSashGravity(0.85f);
+	right_split->SplitVertically(left_split, right);
+
+	m_root = right_split;
+}
+
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_library = new LibraryPanel(split);
+
+	m_property = new d2d::PropertySettingPanel(split);
+
+	split->SetSashGravity(0.75f);
+	split->SplitHorizontally(m_library, m_property);
+
+	return split;
+}
+
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
+{
+	m_stage = new StagePanel(parent, m_parent, m_property, m_library);
+	m_library->InitPages(m_stage, m_property);
 	m_library->setCanvas(m_stage->getCanvas());
 
-	left_hori_splitter->SetSashGravity(0.6f);
-	left_hori_splitter->SplitHorizontally(m_library, property);	
+	return m_stage;
+}
 
-	left_splitter->SetSashGravity(0.2f);
-	left_splitter->SplitVertically(left_hori_splitter, m_stage);
-
-	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, m_stage, property);
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	m_viewlist = new d2d::ViewlistPanel(parent, m_stage, m_stage, m_property);
 	m_library->SetViewlist(m_viewlist);
 	m_stage->SetViewlist(m_viewlist);
 
-	right_splitter->SetSashGravity(0.85f);
-	right_splitter->SplitVertically(left_splitter, m_viewlist);
-
-	m_root = right_splitter;
+	return m_viewlist;
 }
 
 }
