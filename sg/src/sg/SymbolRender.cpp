@@ -9,6 +9,8 @@ SymbolRender* SymbolRender::m_instance = NULL;
 
 SymbolRender::SymbolRender()
 	: m_stage(NULL)
+	, m_region(NULL)
+	, m_region_size(0)
 {
 	m_grid = NULL;
 	m_arrow_down = m_arrow_right = NULL;
@@ -148,6 +150,27 @@ void SymbolRender::DrawArrow(const d2d::ISymbol& symbol,
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
 		d2d::SpriteDraw::drawSprite(m_arrow_down, d2d::Matrix(), pos);
+	}
+}
+
+void SymbolRender::DrawRegion(const d2d::ISymbol& symbol, const d2d::Vector& pos)
+{
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
+	if (info == NULL) {
+		return;
+	}
+
+	int max_reg, min_reg;
+	bool find = m_stage->GetBuildingCfg().QueryAttackRegion(info->building->name, max_reg, min_reg);
+	if (!find) {
+		return;
+	}
+
+	float s = (float)(max_reg) / m_region_size;
+	d2d::SpriteDraw::drawSprite(m_region, d2d::Matrix(), pos, 0, s, s, 0, 0, d2d::Colorf(1, 0, 0));
+	if (min_reg != 0) {
+		float s = (float)(min_reg) / m_region_size;
+		d2d::SpriteDraw::drawSprite(m_region, d2d::Matrix(), pos, 0, s, s);
 	}
 }
 

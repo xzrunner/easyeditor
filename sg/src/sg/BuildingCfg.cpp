@@ -29,6 +29,7 @@ void BuildingCfg::InitAllData()
 	fin.close();
 
 	try {
+		InitRegion(value);
 		InitAmountLimit(value);
 		InitBackground(value);
 		InitGrid(value);
@@ -57,6 +58,19 @@ int BuildingCfg::QueryAmountLimit(const std::string& name, int level) const
 	} else {
 		return itr->second;
 	}
+}
+
+bool BuildingCfg::QueryAttackRegion(const std::string& name, int& max_region, int& min_region)
+{
+	std::map<std::string, std::pair<int, int> >::iterator itr 
+		= m_map_region.find(name);
+	if (itr == m_map_region.end()) {
+		return false;
+	}
+
+	max_region = itr->second.first;
+	min_region = itr->second.second;
+	return true;
 }
 
 void BuildingCfg::InitBackground(const Json::Value& value)
@@ -129,6 +143,28 @@ void BuildingCfg::InitAmountLimit(const Json::Value& value)
 		m_amount_limit.push_back(mapName2Amount);
 
 		amountVal = value["amount"][i++];
+	}
+}
+
+void BuildingCfg::InitRegion(const Json::Value& value)
+{
+	if (value["region"].isNull()) {
+		return;
+	}
+
+	std::string filepath = value["region"]["filepath"].asString();
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	
+	SymbolRender::Instance()->SetRegion(symbol, value["region"]["size"].asInt());
+
+	int idx = 0;
+	Json::Value reg_val = value["attack_region"][idx++];
+	while (!reg_val.isNull()) {
+		std::string type = reg_val["type"].asString();
+		int rmax = reg_val["max"].asInt(),
+			rmin = reg_val["min"].asInt();
+		m_map_region.insert(std::make_pair(type, std::make_pair(rmax, rmin)));
+		reg_val = value["attack_region"][idx++];
 	}
 }
 

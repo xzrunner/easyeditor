@@ -31,6 +31,7 @@ private:
 	void DrawGrids() const;
 	void DrawSprites() const;
 	void DrawArrow() const;
+	void DrawAttackRegion() const;
 
 private:
 	enum

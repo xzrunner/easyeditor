@@ -12,6 +12,11 @@
 		"scale" : 1.2,
 		"alpha" : 200
 	},
+	"region" : 
+	{
+		"filepath" : "data/region/cannon_range_marker_white_complex.json",
+		"size" : 18
+	},
 	"grass" :
 	{
 		"levels" : 
@@ -931,6 +936,54 @@
 		[
 		]
 	},
+	"attack_region" : 
+	[
+		{
+			"type" : "Cannon",
+			"max" : 18,
+			"min" : 0
+		},
+		{
+			"type" : "Archer Tower",
+			"max" : 20,
+			"min" : 0
+		},
+		{
+			"type" : "Wizard Tower",
+			"max" : 14,
+			"min" : 0
+		},
+		{
+			"type" : "Air Defense",
+			"max" : 20,
+			"min" : 0
+		},
+		{
+			"type" : "Mortar",
+			"max" : 22,
+			"min" : 8
+		},
+		{
+			"type" : "Alliance Castle",
+			"max" : 24,
+			"min" : 8
+		},
+		{
+			"type" : "Tesla Tower",
+			"max" : 14,
+			"min" : 0
+		},
+		{
+			"type" : "Bow",
+			"max" : 28,
+			"min" : 0
+		},
+		{
+			"type" : "FlameTower",
+			"max" : 18,
+			"min" : 0
+		}
+	],
 	"amount" : 
 	[
 		{

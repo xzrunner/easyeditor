@@ -21,6 +21,8 @@ public:
 
 	int QueryAmountLimit(const std::string& name, int level) const;
 
+	bool QueryAttackRegion(const std::string& name, int& max_region, int& min_region);
+
 public:
 	struct Building;
 	struct Item
@@ -52,6 +54,7 @@ private:
 	void InitArrow(const Json::Value& value);
 	void InitGrass(const Json::Value& value);
 	void InitAmountLimit(const Json::Value& value);
+	void InitRegion(const Json::Value& value);
 
 	void InitBuildings(const Json::Value& value);
 	void InitBuildings(const Json::Value& value, 
@@ -73,6 +76,8 @@ private:
 	LibraryPage *m_defenses, *m_resources, *m_army;
 
 	std::vector<std::map<std::string, int> > m_amount_limit;
+
+	std::map<std::string, std::pair<int, int> > m_map_region;
 
 }; // BuildingCfg
 

@@ -77,6 +77,7 @@ void StageCanvas::onDraw()
 		DrawGrids();
 		DrawSprites();
 		DrawArrow();
+		DrawAttackRegion();
 	}
 
 	m_stage->drawEditTemp();
@@ -197,6 +198,16 @@ void StageCanvas::DrawArrow() const
 	if (sprites.size() == 1) {
 		d2d::ISprite* s = sprites[0];
 		SymbolRender::Instance()->DrawArrow(s->getSymbol(), s->getPosition());
+	}
+}
+
+void StageCanvas::DrawAttackRegion() const
+{
+	std::vector<d2d::ISprite*> sprites;
+	m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		d2d::ISprite* s = sprites[i];
+		SymbolRender::Instance()->DrawRegion(s->getSymbol(), s->getPosition());
 	}
 }
 

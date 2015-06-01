@@ -21,10 +21,15 @@ public:
 	void SetGrass(int idx, d2d::ISprite* grass) { 
 		if (idx >= 0 && idx < GRASS_COUNT) { m_grass[idx] = grass; }
 	}
+	void SetRegion(d2d::ISymbol* region, int size) {
+		m_region = region;
+		m_region_size = size;
+	}
 
 	void DrawGrass(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool is_flat) const;
 	void DrawGrids(const d2d::ISymbol& symbol, const d2d::Vector& pos, bool valid, bool is_flat) const;
 	void DrawArrow(const d2d::ISymbol& symbol, const d2d::Vector& pos) const;
+	void DrawRegion(const d2d::ISymbol& symbol, const d2d::Vector& pos);
 
 public:
 	static SymbolRender* Instance();
@@ -41,6 +46,9 @@ private:
 
 	static const int GRASS_COUNT = 5;
 	d2d::ISprite* m_grass[GRASS_COUNT];
+
+	d2d::ISymbol* m_region;
+	int m_region_size;
 
 private:
 	static SymbolRender* m_instance;
