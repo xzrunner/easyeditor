@@ -117,6 +117,11 @@ void Frame::onSetBackground(wxCommandEvent& event)
   		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
+	else
+	{
+		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
+		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
+	}
 }
 
 void Frame::onCode(wxCommandEvent& event)
