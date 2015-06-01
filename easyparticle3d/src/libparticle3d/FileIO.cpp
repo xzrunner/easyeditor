@@ -40,11 +40,10 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 				d2d::FilenameTools::getRelativePath(dir, pc->bind_ps->filepath).ToStdString();
 		}
 		value["components"][i]["name"] = cp->m_name->GetValue().ToStdString();
-		value["components"][i]["start_scale"] = cp->m_start_scale->GetValue();
-		value["components"][i]["end_scale"] = cp->m_end_scale->GetValue();
-		value["components"][i]["min_rotate"] = cp->m_min_rotate->GetValue();
-		value["components"][i]["max_rotate"] = cp->m_max_rotate->GetValue();
 		value["components"][i]["start_z"] = cp->m_startz->GetValue();
+		for (int j = 0, m = cp->m_sliders.size(); j < m; ++j) {
+			cp->m_sliders[j]->Store(value["components"][i]);
+		}
 	}
 
 	Json::StyledStreamWriter writer;
@@ -66,10 +65,11 @@ void FileIO::load(const char* filepath, ParticleSystem* ps,
 	reader.parse(fin, value);
 	fin.close();
 
-	FileAdapter adapter;
-	adapter.load(filepath);
-
 	int version = value["version"].asInt();
+
+	FileAdapter adapter;
+	adapter.load(filepath, version);
+
 	if (version == 0) {
 		int center = (adapter.min_life + adapter.max_life) * 0.5f;
 		int offset = (adapter.max_life - adapter.min_life) * 0.5f;
@@ -109,8 +109,18 @@ void FileIO::load(const char* filepath, ParticleSystem* ps,
 
 ParticleSystem* FileIO::LoadPS(const char* filepath)
 {
+	Json::Value value;
+	Json::Reader reader;
+	std::locale::global(std::locale(""));
+	std::ifstream fin(filepath);
+	std::locale::global(std::locale("C"));
+	reader.parse(fin, value);
+	fin.close();
+
+	int version = value["version"].asInt();
+
 	FileAdapter adapter;
-	adapter.load(filepath);
+	adapter.load(filepath, version);
 
 	ParticleSystem* ps = new ParticleSystem(PARTICLE_CAP);
 
@@ -135,13 +145,8 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 
 		// todo Release symbol
 		pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
-
-		pc->start_scale = child.start_scale * 0.01f;
-		pc->end_scale = child.end_scale * 0.01f;
-
-		pc->min_rotate = child.min_rotate * d2d::TRANS_DEG_TO_RAD;
-		pc->max_rotate = child.max_rotate * d2d::TRANS_DEG_TO_RAD;
-
+		ps->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
+		ps->SetValue(PS_ROTATE, d2d::UICallback::Data(child.min_rotate, child.max_rotate));
 		ps->addChild(pc);
 	}
 

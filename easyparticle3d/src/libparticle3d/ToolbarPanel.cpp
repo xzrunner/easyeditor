@@ -27,10 +27,10 @@ const float ToolbarPanel::GRAVITY			= 1200;
 const float ToolbarPanel::INERTIA			= 4;
 const float ToolbarPanel::FADEOUT_TIME		= 300;
 const float ToolbarPanel::START_RADIUS		= 0;
-const float ToolbarPanel::START_SCALE		= 50;
-const float ToolbarPanel::END_SCALE			= 80;
-const float ToolbarPanel::MIN_ROTATE		= -180;
-const float ToolbarPanel::MAX_ROTATE		= 180;
+const float ToolbarPanel::SCALE_START		= 100;
+const float ToolbarPanel::SCALE_END			= 100;
+const float ToolbarPanel::ROTATE_CENTER		= 0;
+const float ToolbarPanel::ROTATE_OFFSET		= 0;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   StagePanel* stage)
@@ -80,10 +80,12 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	ChildPanel* cp = new ChildPanel(this, pc);
 
 	cp->m_name->SetValue(child.name);
-	cp->m_start_scale->SetValue(child.start_scale);
-	cp->m_end_scale->SetValue(child.end_scale);
-	cp->m_min_rotate->SetValue(child.min_rotate);
-	cp->m_max_rotate->SetValue(child.max_rotate);
+	cp->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
+	cp->SetValue(PS_ROTATE, d2d::UICallback::Data((child.min_rotate + child.max_rotate) * 0.5f, 
+		(child.max_rotate - child.min_rotate) * 0.5f));
+	for (int i = 0, n = cp->m_sliders.size(); i < n; ++i) {
+		cp->m_sliders[i]->Load();
+	}
 	cp->m_startz->SetValue(child.start_z);
 
 	// todo Release symbol
@@ -91,8 +93,6 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	if (!child.bind_filepath.empty()) {
 		pc->bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
 	}
-	cp->onSetScale(wxScrollEvent());
-	cp->onSetRotate(wxScrollEvent());
 
 	m_compSizer->Insert(m_children.size(), cp);
 	m_children.push_back(cp);
@@ -225,14 +225,14 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_spd);
 	// Angular Speed
-	d2d::SliderCtrlTwo* as_spd = new d2d::SliderCtrlTwo(this, "Angular Speed (degree)", "angular_speed", this, PS_ANGULAR_SPEED, 
+	d2d::SliderCtrlTwo* s_aspd = new d2d::SliderCtrlTwo(this, "Angular Speed (degree)", "angular_speed", this, PS_ANGULAR_SPEED, 
 		d2d::SliderItem("center", ITEM_ATTR_CENTER, ANGULAR_SPEED_CENTER, -3600, 3600), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, ANGULAR_SPEED_OFFSET, 0, 360));
-	leftSizer->Add(as_spd);
+	leftSizer->Add(s_aspd);
 	leftSizer->AddSpacer(10);
-	m_sliders.push_back(as_spd);
+	m_sliders.push_back(s_aspd);
 	// Gravity
 	d2d::SliderCtrlOne* s_gravity = new d2d::SliderCtrlOne(this, "Gravity (pixel)", "gravity", 
-		this, PS_GRAVITY, d2d::SliderItem("", "", GRAVITY, -5000, 15000));
+		this, PS_GRAVITY, d2d::SliderItem("", "", GRAVITY, -5000, 25000));
 	leftSizer->Add(s_gravity);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_gravity);
@@ -411,16 +411,46 @@ ChildPanel(wxWindow* parent, ParticleChild* pc)
 	: wxPanel(parent)
 	, m_pc(pc)
 {
-	initLayout();
-
-	m_pc->start_scale = m_start_scale->GetValue() * 0.01f;
-	m_pc->end_scale = m_end_scale->GetValue() * 0.01f;
-	m_pc->min_rotate = m_min_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD * 60;
-	m_pc->max_rotate = m_max_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD * 60;
+	InitLayout();
+	for (int i = 0, n = m_sliders.size(); i < n; ++i) {
+		m_sliders[i]->Update();
+	}
 }
 
 void ToolbarPanel::ChildPanel::
-initLayout()
+SetValue(int key, const d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case PS_SCALE:
+		m_pc->start_scale = data.val0 * 0.01f;
+		m_pc->end_scale = data.val1 * 0.01f;
+		break;
+	case PS_ROTATE:
+		m_pc->min_rotate = data.val0 * d2d::TRANS_DEG_TO_RAD;
+		m_pc->max_rotate = data.val1 * d2d::TRANS_DEG_TO_RAD;
+		break;
+	}
+}
+
+void ToolbarPanel::ChildPanel::
+GetValue(int key, d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case PS_SCALE:
+		data.val0 = m_pc->start_scale * 100;
+		data.val1 = m_pc->end_scale * 100;
+		break;
+	case PS_ROTATE:
+		data.val0 = m_pc->min_rotate * d2d::TRANS_RAD_TO_DEG;
+		data.val1 = m_pc->max_rotate * d2d::TRANS_RAD_TO_DEG;
+		break;
+	}
+}
+
+void ToolbarPanel::ChildPanel::
+InitLayout()
 {
 	wxSizer* topSizer = new wxBoxSizer(wxVERTICAL);
 	topSizer->AddSpacer(10);
@@ -433,59 +463,17 @@ initLayout()
 	}
 	topSizer->AddSpacer(10);
 	// Scale
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Scale (%)"));
-		wxSizer* scaleSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("start ")));
-
-			m_start_scale = new wxSlider(this, wxID_ANY, START_SCALE, 0, 500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_start_scale->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetScale));
-			sizer->Add(m_start_scale);
-
-			scaleSizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("end ")));
-
-			m_end_scale = new wxSlider(this, wxID_ANY, END_SCALE, 0, 500, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_end_scale->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetScale));
-			sizer->Add(m_end_scale);
-
-			scaleSizer->Add(sizer);
-		}
-		topSizer->Add(scaleSizer);
-	}
+	d2d::SliderCtrlTwo* s_scale = new d2d::SliderCtrlTwo(this, "Scale (%)", "scale", this, PS_SCALE, 
+		d2d::SliderItem("start", "start", SCALE_START, 0, 500), d2d::SliderItem("end", "end", SCALE_END, 0, 500));
+	topSizer->Add(s_scale);
 	topSizer->AddSpacer(10);
+	m_sliders.push_back(s_scale);
 	// Rotate
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Rotate (deg)"));
-		wxSizer* rotateSizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("min ")));
-
-			m_min_rotate = new wxSlider(this, wxID_ANY, MIN_ROTATE, -180, 180, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_min_rotate->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetRotate));
-			sizer->Add(m_min_rotate);
-
-			rotateSizer->Add(sizer);
-		}
-		{
-			wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
-			sizer->Add(new wxStaticText(this, wxID_ANY, wxT("max ")));
-
-			m_max_rotate = new wxSlider(this, wxID_ANY, MAX_ROTATE, -180, 180, wxDefaultPosition, wxSize(200, -1), wxSL_VALUE_LABEL);
-			Connect(m_max_rotate->GetId(), wxEVT_SCROLL_CHANGED, wxScrollEventHandler(ChildPanel::onSetRotate));
-			sizer->Add(m_max_rotate);
-
-			rotateSizer->Add(sizer);
-		}
-		topSizer->Add(rotateSizer);
-	}
+	d2d::SliderCtrlTwo* s_rotate = new d2d::SliderCtrlTwo(this, "Rotate (deg)", "rotate", this, PS_ROTATE, 
+		d2d::SliderItem("center", ITEM_ATTR_CENTER, ROTATE_CENTER, -180, 180), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, ROTATE_OFFSET, -180, 180));
+	topSizer->Add(s_rotate);
 	topSizer->AddSpacer(10);
+	m_sliders.push_back(s_rotate);
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -502,20 +490,6 @@ initLayout()
 	}
 	//
 	SetSizer(topSizer);
-}
-
-void ToolbarPanel::ChildPanel::
-onSetScale(wxScrollEvent& event)
-{
-	m_pc->start_scale = m_start_scale->GetValue() * 0.01f;
-	m_pc->end_scale = m_end_scale->GetValue() * 0.01f;
-}
-
-void ToolbarPanel::ChildPanel::
-onSetRotate(wxScrollEvent& event)
-{
-	m_pc->min_rotate = m_min_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
-	m_pc->max_rotate = m_max_rotate->GetValue() * d2d::TRANS_DEG_TO_RAD;
 }
 
 void ToolbarPanel::ChildPanel::

@@ -10,7 +10,7 @@ namespace eparticle3d
 class FileAdapter
 {
 public:
-	virtual void load(const char* filename);
+	virtual void load(const char* filename, int version);
 
 public:
 	struct Child

@@ -105,16 +105,16 @@ void Code::resolve()
 			s = cp->m_name->GetValue();
 			lua::assign(m_gen, "['name']", "'"+s+"',");
 
-			s = wxString::FromDouble(cp->m_start_scale->GetValue());
+			cp->GetValue(PS_SCALE, data);
+			s = wxString::FromDouble(data.val0);
 			lua::assign(m_gen, "['start_scale']", s+",");
-
-			s = wxString::FromDouble(cp->m_end_scale->GetValue());
+			s = wxString::FromDouble(data.val1);
 			lua::assign(m_gen, "['end_scale']", s+",");
 
-			s = wxString::FromDouble(cp->m_min_rotate->GetValue());
+			cp->GetValue(PS_ROTATE, data);
+			s = wxString::FromDouble(data.val0 - data.val1);
 			lua::assign(m_gen, "['min_rotate']", s+",");
-
-			s = wxString::FromDouble(cp->m_max_rotate->GetValue());
+			s = wxString::FromDouble(data.val0 + data.val1);
 			lua::assign(m_gen, "['max_rotate']", s+",");
 
 			s = wxString::FromDouble(cp->m_startz->GetValue());

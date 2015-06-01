@@ -7,7 +7,7 @@
 namespace eparticle3d
 {
 
-void FileAdapter::load(const char* filename)
+void FileAdapter::load(const char* filename, int version)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -54,10 +54,19 @@ void FileAdapter::load(const char* filename)
 		child.bind_filepath = d2d::FilenameTools::getAbsolutePath(dir, child.bind_filepath);
 
 		child.name = childValue["name"].asString();
-		child.start_scale = childValue["start_scale"].asInt();
-		child.end_scale = childValue["end_scale"].asInt();
-		child.min_rotate = childValue["min_rotate"].asInt();
-		child.max_rotate = childValue["max_rotate"].asInt();
+		if (version == 0) {
+			child.start_scale = childValue["start_scale"].asInt();
+			child.end_scale = childValue["end_scale"].asInt();
+			child.min_rotate = childValue["min_rotate"].asInt();
+			child.max_rotate = childValue["max_rotate"].asInt();
+		} else {
+			child.start_scale = childValue["scale"]["start"].asInt();
+			child.end_scale = childValue["scale"]["end"].asInt();
+			int c_rotate = childValue["rotate"]["center"].asInt(),
+				d_rotate = childValue["rotate"]["offset"].asInt();
+			child.min_rotate = c_rotate - d_rotate;
+			child.max_rotate = c_rotate + d_rotate;
+		}
 		child.start_z = childValue["start_z"].asInt();
 
 		children.push_back(child);

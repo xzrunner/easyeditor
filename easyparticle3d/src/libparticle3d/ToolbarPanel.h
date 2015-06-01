@@ -60,31 +60,32 @@ private:
 	static const float INERTIA;
 	static const float FADEOUT_TIME;
 	static const float START_RADIUS;
-	static const float START_SCALE;
-	static const float END_SCALE;
-	static const float MIN_ROTATE;
-	static const float MAX_ROTATE;
+	static const float SCALE_START, SCALE_END;
+	static const float ROTATE_CENTER, ROTATE_OFFSET;
 
 private:
-	class ChildPanel : public wxPanel
+	class ChildPanel : public wxPanel, public d2d::UICallback
 	{
 	public:
 		ChildPanel(wxWindow* parent, ParticleChild* pc);
 
-	private:
-		void initLayout();
+		//
+		// UICallback interface
+		//
+		virtual void SetValue(int key, const d2d::UICallback::Data& data);
+		virtual void GetValue(int key, d2d::UICallback::Data& data);
 
-		void onSetScale(wxScrollEvent& event);
-		void onSetRotate(wxScrollEvent& event); 
+	private:
+		void InitLayout();
 
 		void OnBindPS(wxCommandEvent& event);
 
 	private:
 		ParticleChild* m_pc;
 
+		std::vector<d2d::ISliderCtrl*> m_sliders;
+
 		wxTextCtrl* m_name;
-		wxSlider *m_start_scale, *m_end_scale;
-		wxSlider *m_min_rotate, *m_max_rotate;
 		wxSpinCtrl* m_startz;
 
 		friend class ToolbarPanel;
