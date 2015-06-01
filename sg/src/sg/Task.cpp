@@ -13,7 +13,7 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
@@ -49,25 +49,49 @@ const d2d::EditPanel* Task::getEditPanel() const
 	return m_stage;
 }
 
-void Task::initLayout()
+void Task::InitLayout()
 {
-	wxSplitterWindow* rightSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftSplitter = new wxSplitterWindow(rightSplitter);
-	
-	m_library = new d2d::LibraryPanel(leftSplitter);	
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
 
-	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
+
+	left_split->SetSashGravity(0.12f);
+	left_split->SplitVertically(left, center);
+
+	right_split->SetSashGravity(0.85f);
+	right_split->SplitVertically(left_split, right);
+
+	m_root = right_split;
+}
+
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_library = new d2d::LibraryPanel(split);
+
+	m_property = new d2d::PropertySettingPanel(split);
+
+	split->SetSashGravity(0.75f);
+	split->SplitHorizontally(m_library, m_property);
+
+	return split;
+}
+
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
+{
+	m_stage = new StagePanel(parent, m_parent, m_library);
 	m_library->setCanvas(m_stage->getCanvas());
+	return m_stage;
+}
 
-	ToolbarPanel* toolbar = new ToolbarPanel(rightSplitter, m_library, m_stage);
-
-	leftSplitter->SetSashGravity(0.15f);
-	leftSplitter->SplitVertically(m_library, m_stage);
-
-	rightSplitter->SetSashGravity(0.9f);
-	rightSplitter->SplitVertically(leftSplitter, toolbar);
-
-	m_root = leftSplitter;
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	ToolbarPanel* toolbar = new ToolbarPanel(parent, m_library, m_property, m_stage);
+	return toolbar;
 }
 
 }

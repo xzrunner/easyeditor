@@ -6,10 +6,10 @@ namespace sg
 {
 
 ArrangeSpriteCMPT::ArrangeSpriteCMPT(wxWindow* parent, const wxString& name,
-									 StagePanel* stage)
+									 d2d::PropertySettingPanel* property, StagePanel* stage)
 	: d2d::AbstractEditCMPT(parent, name, stage)
 {
-	m_editOP = new ArrangeSpriteOP(stage);
+	m_editOP = new ArrangeSpriteOP(property, stage);
 }
 
 wxSizer* ArrangeSpriteCMPT::initLayout()

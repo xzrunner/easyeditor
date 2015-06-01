@@ -11,7 +11,7 @@ class StagePanel;
 class ArrangeSpriteOP : public d2d::ArrangeSpriteFixOP
 {
 public:
-	ArrangeSpriteOP(StagePanel* stage);
+	ArrangeSpriteOP(d2d::PropertySettingPanel* property, StagePanel* stage);
 
 	virtual bool onMouseLeftUp(int x, int y);
 	virtual bool onMouseLeftDClick(int x, int y);
