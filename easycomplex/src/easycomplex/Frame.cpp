@@ -106,16 +106,16 @@ void Frame::onEJPreview(wxCommandEvent& event)
 
 void Frame::onSetBackground(wxCommandEvent& event)
 {
-	wxString formatFilter = wxT("*.png;*.jpg");
-	wxFileDialog dlg(this, wxT("Choose Background Image"), wxEmptyString, 
+	wxString formatFilter = wxT("*.png;*.jpg;*.json");
+	wxFileDialog dlg(this, wxT("Choose Background Symbol"), wxEmptyString, 
 		wxEmptyString, formatFilter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
  		wxString filename = dlg.GetPath();
- 		d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filename);
- 		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
- 		static_cast<StageCanvas*>(canvas)->setBackground(img);
-		img->Release();
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+  		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
+  		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
+		symbol->Release();
 	}
 }
 
