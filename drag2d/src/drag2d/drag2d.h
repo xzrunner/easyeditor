@@ -40,6 +40,7 @@
 #include "dataset/TPNode.h"
 #include "dataset/text_util.h"
 
+#include "view/DynamicStageCanvas.h"
 #include "view/OrthoCanvas.h"
 #include "view/PerspectCanvas.h"
 #include "view/Camera.h"

@@ -8,7 +8,7 @@ namespace libshape
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
@@ -22,23 +22,11 @@ protected:
 	virtual void initGL();
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
-
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
-
 	d2d::ISprite* m_edited;
 	std::vector<d2d::ISprite*> m_bg_sprites;
 
 	d2d::MultiShapesImpl* m_stage_impl;
-
-	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

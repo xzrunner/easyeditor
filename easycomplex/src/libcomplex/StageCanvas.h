@@ -8,7 +8,7 @@ namespace ecomplex
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	StageCanvas(StagePanel* editPanel);
@@ -20,8 +20,6 @@ protected:
 	virtual void initGL();
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
-
 protected:
 	StagePanel* m_stage;
 
@@ -32,21 +30,11 @@ private:
 	void UpdateParticle2d(float dt);
 
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
-
 	d2d::ShapeStyle m_bgStyle, m_clipboxStyle;
 
 	d2d::ISymbol* m_background;
 
 	d2d::FpsStat m_stat;
-
-	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

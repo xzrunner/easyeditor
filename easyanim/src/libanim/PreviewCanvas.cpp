@@ -3,18 +3,12 @@
 namespace libanim
 {
 
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
-END_EVENT_TABLE()
-
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage,
 							 const Symbol* symbol)
-	: d2d::OrthoCanvas(stage)
-	, m_timer(this, TIMER_ID)
+	: d2d::DynamicStageCanvas(stage)
 	, m_symbol(symbol)
 	, m_control(1.0f / symbol->getFPS())
 {
-	m_timer.Start(10);
 }
 
 PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
@@ -24,7 +18,7 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 
 void PreviewCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 	d2d::SymbolMgr::Instance()->traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
 }
 
@@ -33,25 +27,17 @@ void PreviewCanvas::onDraw()
 	d2d::SpriteDraw::drawSprite(m_symbol);
 }
 
-void PreviewCanvas::onTimer(wxTimerEvent& event)
+void PreviewCanvas::OnTimer()
 {
-	bool refresh = false;
-	if (!m_setting.isStop) {
-		refresh = m_control.update();
+	if (m_control.frame() < m_symbol->getMaxFrameIndex()) {
+		return;
 	}
 
-	if (m_control.frame() >= m_symbol->getMaxFrameIndex())
-	{
-		if (m_setting.isCirculate) {
-			m_control.reset();
-		}
-		else {
-			m_control.decrease();
-		}
+	if (m_setting.isCirculate) {
+		m_control.reset();
 	}
-
-	if (refresh) {
-		Refresh();
+	else {
+		m_control.decrease();
 	}
 }
 

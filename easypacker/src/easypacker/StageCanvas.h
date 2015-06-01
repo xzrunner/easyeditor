@@ -5,35 +5,25 @@
 
 namespace epacker
 {
-	class StagePanel;
 
-	class StageCanvas : public d2d::OrthoCanvas
-	{
-	public:
-		StageCanvas(StagePanel* stage);
+class StagePanel;
 
-	protected:
-		virtual void onDraw();
+class StageCanvas : public d2d::DynamicStageCanvas
+{
+public:
+	StageCanvas(StagePanel* stage);
 
-	private:
-		void onTimer(wxTimerEvent& event);
+protected:
+	virtual void onDraw();
 
-		void drawRegion();
+private:
+	void drawRegion();
 
-	private:
-		enum
-		{
-			TIMER_ID = 1000
-		};
+private:
+	d2d::MultiSpritesImpl* m_stage_impl;
 
-	private:
-		d2d::MultiSpritesImpl* m_stage_impl;
+}; // StageCanvas
 
-		wxTimer m_timer;
-
-		DECLARE_EVENT_TABLE()
-
-	}; // StageCanvas
 }
 
 #endif // EPACKER_STAGE_CANVAS_H

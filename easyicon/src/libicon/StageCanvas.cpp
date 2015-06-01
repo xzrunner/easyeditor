@@ -5,16 +5,10 @@
 namespace eicon
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::DynamicStageCanvas(stage)
 	, m_stage(stage)
-	, m_timer(this, TIMER_ID)
 {
-	m_timer.Start(100);
 }
 
 void StageCanvas::onDraw()
@@ -27,11 +21,6 @@ void StageCanvas::onDraw()
 		d2d::Colorf(1, 0, 0, 0), d2d::Colorf(0, 1, 0, 0), d2d::Colorf(0, 0, 1, 0), &sprite);
 
 	m_stage->drawEditTemp();
-}
-
-void StageCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 }

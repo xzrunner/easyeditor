@@ -4,22 +4,15 @@
 namespace eanim
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(d2d::EditPanel* stage)
 	: d2d::OrthoCanvas(stage)
-	, m_timer(this, TIMER_ID)
 	, m_background(NULL)
 {
-	m_timer.Start(100);
 }
 
 StageCanvas::~StageCanvas()
 {
-	if (m_background)
-	{
+	if (m_background) {
 		m_background->Release();
 	}
 }
@@ -38,11 +31,6 @@ void StageCanvas::onDraw()
 		d2d::DynamicTexAndFont::Instance()->DebugDraw();
 	}
 #endif
-}
-
-void StageCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 void StageCanvas::drawbackground() const

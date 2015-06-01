@@ -11,24 +11,18 @@
 namespace eanim
 {
 
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
-END_EVENT_TABLE()
-
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
 							 d2d::PlayControl& control, Controller* ctrl)
-	: d2d::OrthoCanvas(stage)
-	, m_timer(this, TIMER_ID)
+	: d2d::DynamicStageCanvas(stage)
 	, m_control(control)
 	, m_settings(settings)
 	, m_ctrl(ctrl)
 {
-	m_timer.Start(30);
 }
 
 void PreviewCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 	m_ctrl->GetLibraryPanel()->reloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
@@ -52,25 +46,16 @@ void PreviewCanvas::onDraw()
 #endif
 }
 
-void PreviewCanvas::onTimer(wxTimerEvent& event)
+void PreviewCanvas::OnTimer()
 {
-	bool refresh = false;
-	if (!m_settings.isStop) {
-		refresh = m_control.update();
+	if (m_control.frame() < m_ctrl->GetLayers().getFrameCount()) {
+		return;
 	}
 
-	if (m_control.frame() >= m_ctrl->GetLayers().getFrameCount())
-	{
-		if (m_settings.isCirculate) {
-			m_control.reset();
-		}
-		else {
-			m_control.decrease();
-		}
-	}
-
-	if (refresh) {
-		Refresh();
+	if (m_settings.isCirculate) {
+		m_control.reset();
+	} else {
+		m_control.decrease();
 	}
 }
 

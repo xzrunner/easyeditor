@@ -6,7 +6,7 @@
 namespace ecomplex
 {
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class PreviewCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
@@ -16,7 +16,8 @@ protected:
 	virtual void initGL();
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
+protected:
+	virtual void OnTimer();
 
 private:
 	void drawStageData();
@@ -24,18 +25,9 @@ private:
 //	void getCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
 
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
 	d2d::PlayControl& m_control;
 
 	std::vector<const d2d::ISprite*> m_sprites;
-
-	DECLARE_EVENT_TABLE()
 
 }; // PreviewCanvas
 

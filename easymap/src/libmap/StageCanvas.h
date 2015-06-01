@@ -8,7 +8,7 @@ namespace emap
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	StageCanvas(StagePanel* panel);
@@ -16,23 +16,11 @@ public:
 protected:
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
-
 private:
 	void DrawGuideLines() const;
 
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
-
 	StagePanel* m_panel;
-
-	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

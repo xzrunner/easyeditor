@@ -5,23 +5,17 @@
 namespace ecomplex
 {
 
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
-END_EVENT_TABLE()
-
 PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
 							 const std::vector<const d2d::ISprite*>& sprites)
-	: d2d::OrthoCanvas(stage)
-	, m_timer(this, TIMER_ID)
+	: d2d::DynamicStageCanvas(stage)
 	, m_control(control)
 	, m_sprites(sprites)
 {
-	m_timer.Start(100);
 }
 
 void PreviewCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->getSymbol().reloadTexture();
 	}
@@ -38,12 +32,9 @@ void PreviewCanvas::onDraw()
 	}
 }
 
-void PreviewCanvas::onTimer(wxTimerEvent& event)
+void PreviewCanvas::OnTimer()
 {
-	bool refresh = m_control.update();
-	if (refresh) {
-		Refresh();
-	}
+	m_control.update();
 }
 
 }

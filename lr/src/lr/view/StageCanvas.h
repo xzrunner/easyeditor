@@ -8,7 +8,7 @@ namespace lr
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	StageCanvas(StagePanel* statge);
@@ -18,24 +18,12 @@ public:
 protected:
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
-
 private:
 	void DrawRegion() const;
 	void DrawGrids() const;
 
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
-
 	StagePanel* m_statge;
-
-	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

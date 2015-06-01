@@ -1,45 +1,37 @@
-#pragma once
+#ifndef _EASYANIM_STAGE_CANVAS_H_
+#define _EASYANIM_STAGE_CANVAS_H_
 
 #include <drag2d.h>
 
 namespace eanim
 {
-	class StagePanel;
 
-	class StageCanvas : public d2d::OrthoCanvas
-	{
-	public:
-		StageCanvas(d2d::EditPanel* stage);
-		virtual ~StageCanvas();
+class StagePanel;
 
-		void setBackground(d2d::Image* image) {
-			m_background = image;
-		}
+class StageCanvas : public d2d::OrthoCanvas
+{
+public:
+	StageCanvas(d2d::EditPanel* stage);
+	virtual ~StageCanvas();
 
-	protected:
-		virtual void onDraw();
+	void setBackground(d2d::Image* image) {
+		m_background = image;
+	}
 
-		void onTimer(wxTimerEvent& event);
+protected:
+	virtual void onDraw();
 
-		void onMouse(wxMouseEvent& event);
-		void onKeyDown(wxKeyEvent& event);
+	void onMouse(wxMouseEvent& event);
+	void onKeyDown(wxKeyEvent& event);
 
-	private:
-		void drawbackground() const;
+private:
+	void drawbackground() const;
 
-	private:
-		enum
-		{
-			TIMER_ID = 1000
-		};
+private:
+	d2d::Image* m_background;
 
-	private:
-		wxTimer m_timer;
+}; // StageCanvas
 
-		d2d::Image* m_background;
-
-		DECLARE_EVENT_TABLE()
-
-	}; // StageCanvas
 }
 
+#endif // _EASYANIM_STAGE_CANVAS_H_

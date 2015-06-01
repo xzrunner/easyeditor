@@ -1,33 +1,37 @@
-#pragma once
+#ifndef _EASYSCALE9_STAGE_CANVAS_H_
+#define _EASYSCALE9_STAGE_CANVAS_H_
 
 #include <drag2d.h>
 
 namespace escale9
 {
-	class StagePanel;
-	class ToolbarPanel;
 
-	class StageCanvas : public d2d::OrthoCanvas
-	{
-	public:
-		StageCanvas(StagePanel* editPanel);
-		virtual ~StageCanvas();
+class StagePanel;
+class ToolbarPanel;
 
-		void setToolbarPanel(ToolbarPanel* toolbar) {
-			m_toolbar = toolbar;
-		}
+class StageCanvas : public d2d::OrthoCanvas
+{
+public:
+	StageCanvas(StagePanel* editPanel);
+	virtual ~StageCanvas();
 
-	protected:
-		virtual void onDraw();
+	void setToolbarPanel(ToolbarPanel* toolbar) {
+		m_toolbar = toolbar;
+	}
 
-	private:
-		void drawGuideLines();
+protected:
+	virtual void onDraw();
 
-	private:
-		d2d::ShapeStyle m_bgStyle, m_nodeStyle;
+private:
+	void drawGuideLines();
 
-		ToolbarPanel* m_toolbar;
+private:
+	d2d::ShapeStyle m_bgStyle, m_nodeStyle;
 
-	}; // StageCanvas
+	ToolbarPanel* m_toolbar;
+
+}; // StageCanvas
+
 }
 
+#endif // _EASYSCALE9_STAGE_CANVAS_H_

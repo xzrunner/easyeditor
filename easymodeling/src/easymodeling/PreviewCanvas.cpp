@@ -1,30 +1,23 @@
-
 #include "PreviewCanvas.h"
 #include "PreviewPanel.h"
 #include "Context.h"
 
-using namespace emodeling;
-
-BEGIN_EVENT_TABLE(PreviewCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, PreviewCanvas::onTimer)
-END_EVENT_TABLE()
+namespace emodeling
+{
 
 PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
-	, m_timer(this, TIMER_ID)
+	: d2d::DynamicStageCanvas(editPanel)
 {
 	setBgColor(d2d::Colorf(0, 0, 0));
-	m_timer.Start(1000 / FRAME_RATE);
 }
 
 PreviewCanvas::~PreviewCanvas()
 {
-	m_timer.Stop();
 }
 
 void PreviewCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 	Context::Instance()->library->reloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
@@ -51,7 +44,4 @@ void PreviewCanvas::onDraw()
  	}
 }
 
-void PreviewCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }

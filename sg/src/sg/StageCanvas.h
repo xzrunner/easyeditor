@@ -8,7 +8,7 @@ namespace sg
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
@@ -22,8 +22,6 @@ public:
 protected:
 	virtual void onDraw();
 
-	void OnTimer(wxTimerEvent& event);
-
 private:
 	void DrawBackground() const;
 	void DrawGuideLines() const;
@@ -34,19 +32,9 @@ private:
 	void DrawAttackRegion() const;
 
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
-
 	StagePanel* m_stage;
 
 	d2d::ISprite* m_background;
-
-	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 

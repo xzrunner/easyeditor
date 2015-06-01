@@ -1815,38 +1815,54 @@
 				<Filter
 					Name="canvas"
 					>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\DialogStageCanvas.cpp"
+					<Filter
+						Name="base"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\DialogStageCanvas.h"
+						<File
+							RelativePath="..\..\..\src\drag2d\view\GLCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\GLCanvas.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="extend"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\GLCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\GLCanvas.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.h"
-						>
-					</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\DialogStageCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\DialogStageCanvas.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\DynamicStageCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\DynamicStageCanvas.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 				<Filter
 					Name="data"

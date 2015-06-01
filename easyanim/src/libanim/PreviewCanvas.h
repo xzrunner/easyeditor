@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _LIBANIM_PREVIEW_CANVAS_H_
+#define _LIBANIM_PREVIEW_CANVAS_H_
 
 #include <drag2d.h>
 #include <wx/wx.h>
@@ -8,7 +9,7 @@
 namespace libanim
 {
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class PreviewCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	struct PlaySetting
@@ -32,26 +33,18 @@ protected:
 	virtual void initGL();
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
+protected:
+	virtual void OnTimer();
 
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
-
 	PlaySetting m_setting;
 
 	const Symbol* m_symbol;
 
 	d2d::PlayControl m_control;
 
-	DECLARE_EVENT_TABLE()
-
 }; // PreviewCanvas
 
 }
 
+#endif // _LIBANIM_PREVIEW_CANVAS_H_

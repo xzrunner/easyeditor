@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _EASYANIM_PREVIEW_CANVAS_H_
+#define _EASYANIM_PREVIEW_CANVAS_H_
 
 #include <drag2d.h>
 #include <wx/wx.h>
@@ -9,7 +10,7 @@ namespace eanim
 class Controller;
 struct PlaySettings;
 
-class PreviewCanvas : public d2d::OrthoCanvas
+class PreviewCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings,
@@ -19,7 +20,7 @@ protected:
 	virtual void initGL();
 	virtual void onDraw();
 
-	void onTimer(wxTimerEvent& event);
+	virtual void OnTimer();
 
 private:
 	void drawStageData();
@@ -27,22 +28,14 @@ private:
 	void getCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
 
 private:
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
-private:
-	wxTimer m_timer;
 	d2d::PlayControl& m_control;
 
 	const PlaySettings& m_settings;
 
 	Controller* m_ctrl;
 
-	DECLARE_EVENT_TABLE()
-
 }; // PreviewCanvas
 
 }
 
+#endif // _EASYANIM_PREVIEW_CANVAS_H_

@@ -5,33 +5,25 @@
 namespace eterrain2d
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel)
+	: d2d::DynamicStageCanvas(panel)
 	, m_panel(panel)
-	, m_timer(this, TIMER_ID)
 	, m_edited(NULL)
 {
-	m_timer.Start(100);
 }
 
 StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
 						 const std::vector<d2d::ISprite*>& bg_sprites)
-	: d2d::OrthoCanvas(panel)
+	: d2d::DynamicStageCanvas(panel)
 	, m_panel(panel)
-	, m_timer(this, TIMER_ID)
 	, m_edited(edited)
 	, m_bg_sprites(bg_sprites)
 {
-	m_timer.Start(100);
 }
 
 void StageCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 
 	std::vector<d2d::ISymbol*> symbols;
 	d2d::SymbolMgr::Instance()->traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
@@ -58,10 +50,9 @@ void StageCanvas::onDraw()
 	m_stage->drawEditTemp();
 }
 
-void StageCanvas::onTimer(wxTimerEvent& event)
+void StageCanvas::OnTimer()
 {
 	Update();
-	Refresh();
 }
 
 void StageCanvas::DrawBG() const

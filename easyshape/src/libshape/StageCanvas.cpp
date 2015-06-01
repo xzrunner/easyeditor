@@ -4,29 +4,21 @@
 namespace libshape
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
-	, m_timer(this, TIMER_ID)
+	: d2d::DynamicStageCanvas(stage)
 	, m_stage_impl(stage)
 	, m_edited(NULL)
 {
-	m_timer.Start(1000 / 30);
 }
 
 StageCanvas::StageCanvas(StagePanel* stage, 
 						 d2d::ISprite* edited,
 						 const std::vector<d2d::ISprite*>& bg_sprites)
-	: d2d::OrthoCanvas(stage)
-	, m_timer(this, TIMER_ID)
+	: d2d::DynamicStageCanvas(stage)
 	, m_stage_impl(stage)
 	, m_edited(edited)
 	, m_bg_sprites(bg_sprites)
 {
-	m_timer.Start(1000 / 30);
 }
 
 void StageCanvas::drawGuideLines()
@@ -39,7 +31,7 @@ void StageCanvas::drawGuideLines()
 
 void StageCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 
 	std::vector<d2d::ISymbol*> symbols;
 	d2d::SymbolMgr::Instance()->traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
@@ -68,11 +60,6 @@ void StageCanvas::onDraw()
 	}
 
 	m_stage->drawEditTemp();
-}
-
-void StageCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 }

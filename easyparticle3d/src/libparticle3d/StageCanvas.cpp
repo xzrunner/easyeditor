@@ -7,17 +7,11 @@
 namespace eparticle3d
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
+	: d2d::DynamicStageCanvas(editPanel)
 	, m_stage(editPanel)
-	, m_timer(this, TIMER_ID)
 	, m_control(0.033f)
 {
-	m_timer.Start(10);
 	m_currFrame = 1;
 	m_last = -1;
 }
@@ -45,7 +39,7 @@ void StageCanvas::onDraw()
 	m_stage->drawEditTemp();
 }
 
-void StageCanvas::onTimer(wxTimerEvent& event)
+void StageCanvas::OnTimer()
 {
 	if (m_last == -1) {
 		m_last = clock();
@@ -71,8 +65,6 @@ void StageCanvas::onTimer(wxTimerEvent& event)
 		m_currFrame = 1;
 		m_control.reset();
 	}
-
-	Refresh();
 }
 
 }

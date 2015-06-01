@@ -1,9 +1,9 @@
-
 #include "StageCanvas.h"
 #include "StagePanel.h"
 #include "DrawUtils.h"
 
-using namespace emodeling;
+namespace emodeling
+{
 
 StageCanvas::StageCanvas(StagePanel* editPanel)
 	: d2d::OrthoCanvas(editPanel)
@@ -96,4 +96,6 @@ void StageCanvas::DrawJointVisitor::visit(d2d::Object* object, bool& bFetchNext)
 	libmodeling::Joint* joint = static_cast<libmodeling::Joint*>(object);
 	joint->draw(libmodeling::Joint::e_default);
 	bFetchNext = true;
+}
+
 }

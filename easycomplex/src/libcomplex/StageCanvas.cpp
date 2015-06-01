@@ -8,19 +8,12 @@
 namespace ecomplex
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* editPanel)
-	: d2d::OrthoCanvas(editPanel)
-	, m_timer(this, TIMER_ID)
+	: d2d::DynamicStageCanvas(editPanel)
 	, m_stage(editPanel)
 	, m_background(NULL)
 	, m_stat(1)
 {
-	m_timer.Start(1000 / 30);
-
 	m_bgStyle.color.set(0.8f, 0.8f, 0.8f);
 	m_clipboxStyle.color.set(0, 0.8f, 0);
 }
@@ -39,7 +32,7 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 
 void StageCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 	m_stage->getSymbol()->reloadTexture();
 // 		d2d::DynamicTexture::Instance()->ReloadTexture();
 // 		d2d::DynamicFont::Instance()->ReloadTexture();
@@ -89,11 +82,6 @@ void StageCanvas::onDraw()
 #endif
 
 	m_stat.DrawTime(m_screen);
-}
-
-void StageCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 void StageCanvas::drawBackground() const

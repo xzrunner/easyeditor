@@ -6,21 +6,15 @@
 namespace tdtex
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel)
+	: d2d::DynamicStageCanvas(panel)
 	, m_panel(panel)
-	, m_timer(this, TIMER_ID)
 {
-	m_timer.Start(1000 / 30);
 }
 
 void StageCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 
 	m_panel->Load();
 	resetViewport();	// todo: resize -> new -> resize
@@ -28,7 +22,7 @@ void StageCanvas::initGL()
 
 void StageCanvas::onSize(int w, int h)
 {
-	d2d::OrthoCanvas::onSize(w, h);
+	d2d::DynamicStageCanvas::onSize(w, h);
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
 	if (scr) {
@@ -64,11 +58,6 @@ void StageCanvas::onDraw()
 
 		DrawEJScreen();
 	}
-}
-
-void StageCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 void StageCanvas::DrawEJScreen() const

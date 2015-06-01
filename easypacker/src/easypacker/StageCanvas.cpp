@@ -3,18 +3,13 @@
 #include "Context.h"
 #include "config.h"
 
-using namespace epacker;
-
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
+namespace epacker
+{
 
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::DynamicStageCanvas(stage)
 	, m_stage_impl(stage)
-	, m_timer(this, TIMER_ID)
 {
-	m_timer.Start(100);
 }
 
 void StageCanvas::onDraw()
@@ -22,11 +17,6 @@ void StageCanvas::onDraw()
 	m_stage_impl->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 
 	drawRegion();
-}
-
-void StageCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 void StageCanvas::drawRegion()
@@ -54,4 +44,6 @@ void StageCanvas::drawRegion()
 
 	// physics
 	stage->drawPhysics();
+}
+
 }

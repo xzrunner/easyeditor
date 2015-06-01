@@ -10,19 +10,12 @@ namespace eparticle2d
 static const int SCREEN_WIDTH = 1024;
 static const int SCREEN_HEIGHT = 768;
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::DynamicStageCanvas(stage)
 	, m_stage(stage)
-	, m_timer(this, TIMER_ID)
 	, m_control(0.033f)
 {
 	m_bgColor.set(1, 1, 1, 1);
-
-	m_timer.Start(100);
 	m_currFrame = 1;
 }
 
@@ -52,12 +45,10 @@ void StageCanvas::onDraw()
 	m_stage->drawEditTemp();
 }
 
-void StageCanvas::onTimer(wxTimerEvent& event)
+void StageCanvas::OnTimer()
 {
 	UpdateParticle2d();
 	UpdateAnimation();
-
-	Refresh();
 }
 
 void StageCanvas::DrawBackground() const

@@ -10,18 +10,11 @@ namespace sg
 
 static const float VIEW_TRANS = 0.75f;
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::OnTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* stage)
-	: d2d::OrthoCanvas(stage)
+	: d2d::DynamicStageCanvas(stage)
 	, m_stage(stage)
 	, m_background(NULL)
-	, m_timer(this, TIMER_ID)
 {
-	m_timer.Start(1000 / 30);
-
 	SymbolRender::Instance()->Init(stage);
 }
 
@@ -83,11 +76,6 @@ void StageCanvas::onDraw()
 	m_stage->drawEditTemp();
 
 //	m_stage->getCheckBoard().DebugDraw();
-}
-
-void StageCanvas::OnTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 void StageCanvas::DrawBackground() const

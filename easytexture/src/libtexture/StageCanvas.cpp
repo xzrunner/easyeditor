@@ -5,33 +5,25 @@
 namespace etexture
 {
 
-BEGIN_EVENT_TABLE(StageCanvas, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas::onTimer)
-END_EVENT_TABLE()
-
 StageCanvas::StageCanvas(StagePanel* panel)
-	: d2d::OrthoCanvas(panel)
+	: d2d::DynamicStageCanvas(panel)
 	, m_panel(panel)
-	, m_timer(this, TIMER_ID)
 	, m_edited(NULL)
 {
-	m_timer.Start(100);
 }
 
 StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited, 
 						 const std::vector<d2d::ISprite*>& bg_sprites)
-	: d2d::OrthoCanvas(panel)
+	: d2d::DynamicStageCanvas(panel)
 	, m_panel(panel)
-	, m_timer(this, TIMER_ID)
 	, m_edited(edited)
 	, m_bg_sprites(bg_sprites)
 {
-	m_timer.Start(100);
 }
 
 void StageCanvas::initGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::DynamicStageCanvas::initGL();
 	m_panel->GetSymbol()->reloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
@@ -59,11 +51,6 @@ void StageCanvas::onDraw()
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
 	m_stage->drawEditTemp();
-}
-
-void StageCanvas::onTimer(wxTimerEvent& event)
-{
-	Refresh();
 }
 
 }

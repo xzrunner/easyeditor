@@ -9,7 +9,7 @@ namespace eparticle3d
 
 class StagePanel;
 
-class StageCanvas : public d2d::OrthoCanvas
+class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	StageCanvas(StagePanel* editPanel);
@@ -18,26 +18,18 @@ public:
 protected:
 	virtual void onDraw();
 
+	virtual void OnTimer();
+
 private:
-	void onTimer(wxTimerEvent& event);
-
-	enum
-	{
-		TIMER_ID = 1000
-	};
-
 	static const int FRAME_RATE = 60;
 
 private:
 	StagePanel* m_stage;
 
-	wxTimer m_timer;
 	int m_currFrame;
 	clock_t m_last;
 
 	d2d::PlayControl m_control;
-
-	DECLARE_EVENT_TABLE()
 
 }; // StageCanvas
 
