@@ -154,39 +154,31 @@ void StageCanvas::DrawGrids() const
 
 void StageCanvas::DrawSprites() const
 {
-	std::vector<d2d::ISprite*> walls;
-
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	std::sort(sprites.begin(), sprites.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
 	for (int i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
 		if (IsSymbolWall(*sprite)) {
-			walls.push_back(sprite);
+			SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+			{
+				if (info->wall_type == 0) {
+					d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 4);
+					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+				} else if (info->wall_type == 1) {
+					d2d::Vector pos = sprite->getPosition() + d2d::Vector(-10, 8);
+					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+				} else if (info->wall_type == 2) {
+					d2d::Vector pos = sprite->getPosition() + d2d::Vector(10, 8);
+					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+				} else if (info->wall_type == 3) {
+					d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 6);
+					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+				}
+			}
 		} else {
 			d2d::SpriteDraw::drawSprite(sprite);
-		}
-	}
-
-	std::sort(walls.begin(), walls.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
-	for (int i = 0, n = walls.size(); i < n; ++i)
-	{
-		d2d::ISprite* sprite = walls[i];
-		SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
-		{
-			if (info->wall_type == 0) {
-				d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 4);
-				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
-			} else if (info->wall_type == 1) {
-				d2d::Vector pos = sprite->getPosition() + d2d::Vector(-10, 8);
-				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
-			} else if (info->wall_type == 2) {
-				d2d::Vector pos = sprite->getPosition() + d2d::Vector(10, 8);
-				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
-			} else if (info->wall_type == 3) {
-				d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 6);
-				d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
-			}
 		}
 	}
 }
