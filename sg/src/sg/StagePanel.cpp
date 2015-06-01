@@ -103,6 +103,31 @@ void StagePanel::TransGridPosToCoords(int row, int col, d2d::Vector& pos) const
 	}
 }
 
+void StagePanel::TransCoordsToGridPosNew(const d2d::Vector& pos, int& row, int& col) const
+{
+	d2d::Vector p;
+	if (m_is_flat) {
+		p = pos;
+	} else {
+		p = StageCanvas::TransToFlatView(pos);		
+	}
+
+	col = (int)(p.x / m_edge);
+	row = (int)(p.y / m_edge);
+	assert(col >= 0 && col < COL && row >= 0 && row < ROW);
+	col = COL - 1 - col;
+	row = ROW - 1 - row;
+}
+
+void StagePanel::TransGridPosToCoordsNew(int row, int col, d2d::Vector& pos) const
+{
+	pos.x = m_edge * (COL - 1 - col) + m_edge * 0.5f;
+	pos.y = m_edge * (ROW - 1 - row) + m_edge * 0.5f;
+	if (!m_is_flat) {
+		pos = StageCanvas::TransToBirdView(pos);
+	}
+}
+
 void StagePanel::UpdateAllSpritesLocation()
 {
 	std::vector<d2d::ISprite*> sprites;

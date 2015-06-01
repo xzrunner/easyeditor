@@ -25,7 +25,23 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	FileIO::load(filepath, m_stage, m_library);
+	FileIO::load(filepath, m_stage);
+
+	//wxString dir("D:/projects/ejoy/svn/sanguo/Tools/sg-editor/map/Expedition");
+
+	//wxArrayString files;
+	//d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
+	//for (int i = 0, n = files.size(); i < n; ++i) 
+	//{
+	//	wxFileName filename(files[i]);
+	//	filename.Normalize();
+	//	wxString filepath = filename.GetFullPath();
+	//	if (filepath.Contains("_sg.json")) {
+	//		int zz = 0;
+	//		FileIO::load(filepath, m_stage);
+	//		FileIO::store(filepath, m_stage);
+	//	}
+	//}
 }
 
 void Task::store(const char* filepath) const

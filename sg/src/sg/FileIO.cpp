@@ -5,8 +5,7 @@
 namespace sg
 {
 
-void FileIO::load(const char* filename, StagePanel* stage,
-				  d2d::LibraryPanel* library)
+void FileIO::load(const char* filename, StagePanel* stage)
 {
 // 	d2d::SymbolMgr::Instance()->clear();
 // 	d2d::BitmapMgr::Instance()->clear();
@@ -54,7 +53,7 @@ void FileIO::store(const char* filename, StagePanel* stage)
 
 d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const std::string& dir)
 {
-	const int row = value["row"].asInt(),
+	int row = value["row"].asInt(),
 		col = value["col"].asInt();
 
 	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
@@ -62,11 +61,29 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 	SetSymbolUserData(symbol);
 
 	d2d::Vector pos;
-	stage->TransGridPosToCoords(row, col, pos);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	sprite->tag = value["tag"].asString();
 	symbol->Release();
+
+	//// old
+	//stage->TransGridPosToCoords(row, col, pos);
+ 	// new
+ 	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+ 	int size = info->building->size;
+ 	if (size % 2) {
+ 		int offset = (size - 1) / 2;
+ 		row += offset;
+ 		col -= offset;
+ 	} else {
+ 		int offset = size / 2;
+ 		row += (offset - 1);
+ 		col -= offset;
+ 	}
+ 	stage->TransGridPosToCoordsNew(row, col, pos);
+ 	//////////////////////////////////////////////////////////////////////////
+
 	sprite->translate(pos);
+
 	return sprite;
 }
 
@@ -79,7 +96,20 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 		sprite->getSymbol().getFilepath()).ToStdString();
 
 	int row, col;
-	stage->TransCoordsToGridPos(sprite->getPosition(), row, col);
+	stage->TransCoordsToGridPosNew(sprite->getPosition(), row, col);
+
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+	int size = info->building->size;
+	if (size % 2) {
+		int offset = (size - 1) / 2;
+		row -= offset;
+		col += offset;
+	} else {
+		int offset = size / 2;
+		row -= (offset - 1);
+		col += offset;
+	}
+
 	value["row"] = row;
 	value["col"] = col;
 	value["tag"] = sprite->tag;
@@ -102,21 +132,25 @@ void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 	wxString wall_type = filepath.substr(pos + 1, 1);
 	wxString wall_path = filepath.substr(0, pos) + ".png";
 
-	d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(wall_path);
-	if (!wall_symbol || !wall_symbol->getUserData()) {
-		return;
+	try {
+		d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(wall_path);
+		if (!wall_symbol || !wall_symbol->getUserData()) {
+			return;
+		}
+
+		SymbolExt* info = static_cast<SymbolExt*>(wall_symbol->getUserData());
+
+		SymbolExt* new_info = new SymbolExt;
+		new_info->size = info->size;
+		new_info->remain = info->remain;
+		new_info->wall_type = (wall_type[0] - '0');
+		new_info->level = info->level;
+		new_info->building = info->building;
+
+		symbol->setUserData(new_info);
+	} catch (d2d::Exception& e) {
+		;
 	}
-
-	SymbolExt* info = static_cast<SymbolExt*>(wall_symbol->getUserData());
-
-	SymbolExt* new_info = new SymbolExt;
-	new_info->size = info->size;
-	new_info->remain = info->remain;
-	new_info->wall_type = (wall_type[0] - '0');
-	new_info->level = info->level;
-	new_info->building = info->building;
-
-	symbol->setUserData(new_info);
 }
 
 }

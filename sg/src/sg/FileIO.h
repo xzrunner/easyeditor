@@ -12,8 +12,7 @@ class StagePanel;
 class FileIO
 {
 public:
-	static void load(const char* filename, StagePanel* stage,
-		d2d::LibraryPanel* library);
+	static void load(const char* filename, StagePanel* stage);
 	static void store(const char* filename, StagePanel* stage);
 
 private:

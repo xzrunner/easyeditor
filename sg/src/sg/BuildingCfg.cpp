@@ -269,7 +269,6 @@ void BuildingCfg::LoadSymbolUserData(const std::vector<Building*>& buildings)
 			info->size = b->size;
 			info->remain = QueryAmountLimit(item.building->name, item.town_hall_level);
 			info->wall_type = (b->name == "Wall" ? 0 : -1);
-			assert(info->remain != -1);
 
 			info->level = item.level;
 			info->building = item.building;

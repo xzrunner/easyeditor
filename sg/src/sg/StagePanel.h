@@ -32,6 +32,9 @@ public:
 	void TransCoordsToGridPos(const d2d::Vector& pos, int& row, int& col) const;
 	void TransGridPosToCoords(int row, int col, d2d::Vector& pos) const;
 
+	void TransCoordsToGridPosNew(const d2d::Vector& pos, int& row, int& col) const;
+	void TransGridPosToCoordsNew(int row, int col, d2d::Vector& pos) const;
+
 	void UpdateAllSpritesLocation();
 
 	void GetLayoutInfo(int& row, int& col, int& edge) {
