@@ -145,8 +145,12 @@ ParticleSystem* FileIO::LoadPS(const char* filepath)
 
 		// todo Release symbol
 		pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
-		ps->SetValue(PS_SCALE, d2d::UICallback::Data(child.start_scale, child.end_scale));
-		ps->SetValue(PS_ROTATE, d2d::UICallback::Data(child.min_rotate, child.max_rotate));
+
+		pc->start_scale = child.start_scale * 0.01f;
+		pc->end_scale = child.end_scale * 0.01f;
+		pc->min_rotate = child.min_rotate * d2d::TRANS_DEG_TO_RAD;
+		pc->max_rotate = child.max_rotate * d2d::TRANS_DEG_TO_RAD;
+
 		ps->addChild(pc);
 	}
 
