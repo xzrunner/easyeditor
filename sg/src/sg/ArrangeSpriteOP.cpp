@@ -1,5 +1,6 @@
 #include "ArrangeSpriteOP.h"
 #include "StagePanel.h"
+#include "SpriteExt.h"
 
 namespace sg
 {
@@ -75,6 +76,20 @@ void ArrangeSpriteOP::onDirectionKeyDown(d2d::DirectionType type)
 	}
 
 	m_stage->Refresh();
+}
+
+void ArrangeSpriteOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
+{
+	d2d::ArrangeSpriteFixOP::PasteSprToClipboard(spr, value);
+	value["level"] = static_cast<SpriteExt*>(spr->getUserData())->level;
+}
+
+void ArrangeSpriteOP::CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const
+{
+	d2d::ArrangeSpriteFixOP::CopySprFromClipboard(spr, value);
+	SpriteExt* info = new SpriteExt;
+	info->level = value["level"].asInt();
+	spr->setUserData(info);
 }
 
 }
