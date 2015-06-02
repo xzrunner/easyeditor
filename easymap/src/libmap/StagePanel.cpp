@@ -40,7 +40,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 	m_viewlist->insert(sprite);
 }
 
-void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
+bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	bool ret = d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
 	m_viewlist->reorder(sprite, up);
