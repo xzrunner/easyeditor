@@ -55,6 +55,7 @@ namespace d2d
 
 		static void drawPolyline(const Matrix& mt, const std::vector<Vector>& vertices, const Colorf& color, bool isClose, float size = 2);
 		static void drawTriangles(const Matrix& mt, const std::vector<Vector>& triangles, const Colorf& color);
+		static void DrawTriangles(const Matrix& mt, const std::vector<Vector>& triangles, const std::vector<Colorf>& colors);
 
 		static void MatrixTrans(const Matrix& mt, const std::vector<Vector>& src, std::vector<Vector>& dst);
 

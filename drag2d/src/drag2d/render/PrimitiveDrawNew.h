@@ -12,6 +12,7 @@ class PrimitiveDrawNew
 {
 public:
 	static void Draw(int type, const float *coords, size_t count);
+	static void Draw(int type, const float *coords, const float* colors, size_t count);
 
 	static void SetColor(const Colorf& col);
 

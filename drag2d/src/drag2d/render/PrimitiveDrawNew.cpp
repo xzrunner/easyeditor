@@ -34,6 +34,26 @@ void PrimitiveDrawNew::Draw(int type, const float *coords, size_t count)
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
+void PrimitiveDrawNew::Draw(int type, const float *coords, const float* colors, size_t count)
+{
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->shape();
+	shader->Commit();
+
+	memcpy(&COLORS[0], &colors[0], count * 4 * sizeof(float));
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(2, GL_FLOAT, 0, (const GLvoid*)coords);
+
+	glEnableClientState(GL_COLOR_ARRAY);
+	glColorPointer(4, GL_FLOAT, 0, (const GLvoid*)COLORS);
+
+	glDrawArrays(type, 0, count);
+
+	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
 void PrimitiveDrawNew::SetLineWidth(float width)
 {
 	ShaderMgr::Instance()->shape();

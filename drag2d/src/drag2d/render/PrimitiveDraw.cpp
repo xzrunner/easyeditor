@@ -386,6 +386,18 @@ void PrimitiveDraw::drawTriangles(const Matrix& mt, const std::vector<Vector>& t
 	PrimitiveDrawNew::Draw(GL10::GL_TRIANGLES, &trans[0].x, triangles.size());
 }
 
+void PrimitiveDraw::DrawTriangles(const Matrix& mt, const std::vector<Vector>& triangles, const std::vector<Colorf>& colors)
+{
+	if (triangles.empty() || triangles.size() != colors.size()) {
+		return;
+	}
+
+	std::vector<Vector> trans;
+	MatrixTrans(mt, triangles, trans);	
+
+	PrimitiveDrawNew::Draw(GL10::GL_TRIANGLES, &trans[0].x, &colors[0].r, triangles.size());	
+}
+
 void PrimitiveDraw::MatrixTrans(const Matrix& mt, const std::vector<Vector>& src, std::vector<Vector>& dst)
 {
 	if (src.empty()) {
