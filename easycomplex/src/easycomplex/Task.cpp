@@ -79,7 +79,7 @@ void Task::InitLayout()
 	wxWindow* center = InitLayoutCenter(left_split);
 	wxWindow* right = InitLayoutRight(right_split);
 
-	left_split->SetSashGravity(0.12f);
+	left_split->SetSashGravity(0.2f);
 	left_split->SplitVertically(left, center);
 
 	right_split->SetSashGravity(0.85f);
