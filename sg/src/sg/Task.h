@@ -32,6 +32,8 @@ private:
 	wxWindow* InitLayoutCenter(wxWindow* parent);
 	wxWindow* InitLayoutRight(wxWindow* parent);
 
+	void FormatFiles() ;
+
 private:
 	wxWindow* m_root;
 

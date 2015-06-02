@@ -227,10 +227,12 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 		
 		std::string filepath;
 		const Item* pItem = NULL;
+		int level = 0;
 		for (int j = 0, m = b->levels.size(); j < m; ++j) {
 			const Item& item = b->levels[j];
 			if (item.town_hall_level <= lv) {
 				filepath = item.res_snapshoot_path;
+				level = j + 1;
 				pItem = &item;
 			}
 		}
@@ -241,6 +243,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 			assert(s->getUserData());
 			SymbolExt* info = static_cast<SymbolExt*>(s->getUserData());
 			info->remain = QueryAmountLimit(pItem->building->name, m_stage->GetBaseLevel());
+			info->level = level;
 			s->RefreshThumbnail(filepath);
  			s->setInfo(wxString::FromDouble(info->remain));
 			library->getList()->insert(s);

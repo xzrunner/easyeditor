@@ -30,23 +30,5 @@ bool MyApp::OnInit()
 	frame->setTask(task);
 	frame->Show(true);
 
-	if (wxGetApp().argc > 1) {
-// 		wxString dir(wxGetApp().argv[1]);
-// 
-// 		wxArrayString files;
-// 		d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
-// 		for (int i = 0, n = files.size(); i < n; ++i) 
-// 		{
-// 			wxFileName filename(files[i]);
-// 			filename.Normalize();
-// 			wxString filepath = filename.GetFullPath();
-// 			if (filepath.Contains("_sg.json")) {
-// 				int zz = 0;
-// 				task->load(filepath);
-// 				task->store(filepath);
-// 			}
-// 		}
-	}
-
 	return true;
 }

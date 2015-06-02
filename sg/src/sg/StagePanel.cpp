@@ -2,6 +2,7 @@
 #include "StageCanvas.h"
 #include "BuildingCfg.h"
 #include "SymbolExt.h"
+#include "SpriteExt.h"
 #include "tools.h"
 
 namespace sg
@@ -59,6 +60,12 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 		if (!fixed) {
 			return;
 		}
+	}
+
+	if (!sprite->getUserData()) {
+		SpriteExt* ext = new SpriteExt;
+		ext->level = ((SymbolExt*)(sprite->getSymbol().getUserData()))->level;
+		sprite->setUserData(ext);
 	}
 
 	d2d::SpritesPanelImpl::insertSprite(sprite);

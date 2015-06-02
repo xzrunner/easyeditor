@@ -26,22 +26,7 @@ Task::~Task()
 void Task::load(const char* filepath)
 {
 	FileIO::load(filepath, m_stage);
-
-	//wxString dir("D:/projects/ejoy/svn/sanguo/Tools/sg-editor/map/Expedition");
-
-	//wxArrayString files;
-	//d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
-	//for (int i = 0, n = files.size(); i < n; ++i) 
-	//{
-	//	wxFileName filename(files[i]);
-	//	filename.Normalize();
-	//	wxString filepath = filename.GetFullPath();
-	//	if (filepath.Contains("_sg.json")) {
-	//		int zz = 0;
-	//		FileIO::load(filepath, m_stage);
-	//		FileIO::store(filepath, m_stage);
-	//	}
-	//}
+//	FormatFiles();
 }
 
 void Task::store(const char* filepath) const
@@ -108,6 +93,24 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	ToolbarPanel* toolbar = new ToolbarPanel(parent, m_library, m_property, m_stage);
 	return toolbar;
+}
+
+void Task::FormatFiles()
+{
+	wxString dir("D:/projects/ejoy/svn/sanguo/Tools/sg-editor/map/Expedition");
+	wxArrayString files;
+	d2d::FilenameTools::fetchAllFiles(dir.ToStdString(), files);
+	for (int i = 0, n = files.size(); i < n; ++i) 
+	{
+		wxFileName filename(files[i]);
+		filename.Normalize();
+		wxString filepath = filename.GetFullPath();
+		if (filepath.Contains("_sg.json")) {
+			FileIO::load(filepath, m_stage);
+			FileIO::store(filepath, m_stage);
+			clear();
+		}
+	}
 }
 
 }

@@ -1,6 +1,7 @@
 #include "FileIO.h"
 #include "StagePanel.h"
 #include "SymbolExt.h"
+#include "SpriteExt.h"
 
 namespace sg
 {
@@ -68,8 +69,8 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 	//// old
 	//stage->TransGridPosToCoords(row, col, pos);
  	// new
- 	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
- 	int size = info->building->size;
+ 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+ 	int size = symbol_info->building->size;
  	if (size % 2) {
  		int offset = (size - 1) / 2;
  		row += offset;
@@ -80,6 +81,14 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
  		col -= offset;
  	}
  	stage->TransGridPosToCoordsNew(row, col, pos);
+
+	if (!value["level"].isNull()) {
+		SpriteExt* spr_info = new SpriteExt;
+		spr_info->level = value["level"].asInt();
+		sprite->setUserData(spr_info);
+	}
+	int level = value["row"].asInt();
+
  	//////////////////////////////////////////////////////////////////////////
 
 	sprite->translate(pos);
@@ -98,8 +107,8 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 	int row, col;
 	stage->TransCoordsToGridPosNew(sprite->getPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
-	int size = info->building->size;
+	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+	int size = symbol_info->building->size;
 	if (size % 2) {
 		int offset = (size - 1) / 2;
 		row -= offset;
@@ -113,6 +122,11 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 	value["row"] = row;
 	value["col"] = col;
 	value["tag"] = sprite->tag;
+
+	value["name"] = symbol_info->building->name;
+	
+	SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->getUserData());	
+	value["level"] = spr_info->level;
 
 	return value;
 }

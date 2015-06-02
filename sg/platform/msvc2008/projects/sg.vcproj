@@ -242,6 +242,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\..\src\sg\SpriteExt.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\sg\SymbolExt.h"
 				>
 			</File>
