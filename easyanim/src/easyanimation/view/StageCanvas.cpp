@@ -17,6 +17,11 @@ StageCanvas::~StageCanvas()
 	}
 }
 
+void StageCanvas::SetBackground(d2d::ISymbol* symbol)
+{
+	d2d::obj_assign((d2d::Object*&)m_background, symbol);
+}
+
 void StageCanvas::onDraw()
 {
 	drawbackground();
@@ -36,7 +41,7 @@ void StageCanvas::onDraw()
 void StageCanvas::drawbackground() const
 {
 	if (m_background) {
-		m_background->draw(d2d::Matrix(), m_background->getRegion());
+		d2d::SpriteDraw::drawSprite(m_background);
 	}
 
 	float xedge = GetSize().GetWidth() * 0.5f;

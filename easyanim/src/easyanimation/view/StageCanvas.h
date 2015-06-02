@@ -14,9 +14,7 @@ public:
 	StageCanvas(d2d::EditPanel* stage);
 	virtual ~StageCanvas();
 
-	void setBackground(d2d::Image* image) {
-		m_background = image;
-	}
+	void SetBackground(d2d::ISymbol* symbol);
 
 protected:
 	virtual void onDraw();
@@ -28,7 +26,7 @@ private:
 	void drawbackground() const;
 
 private:
-	d2d::Image* m_background;
+	d2d::ISymbol* m_background;
 
 }; // StageCanvas
 

@@ -1,5 +1,5 @@
 #include "KeysContentEdit.h"
-#include "FramePropertySetting.h"
+#include "KeyFramePropertySetting.h"
 
 #include "dataset/LayersMgr.h"
 #include "dataset/Layer.h"
