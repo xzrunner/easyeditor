@@ -31,6 +31,7 @@ namespace d2d
 {
 
 const float ArrangeSpriteImpl::CTRL_NODE_RADIUS = 10.0f;
+const float ArrangeSpriteImpl::MAX_CTRL_NODE_RADIUS = 10.0f;
 
 ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 									 MultiSpritesImpl* spritesImpl,
@@ -375,7 +376,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 
 void ArrangeSpriteImpl::onDraw(const Camera& cam) const
 {
-	m_ctrl_node_radius = CTRL_NODE_RADIUS * cam.GetScale();
+	m_ctrl_node_radius = std::min(CTRL_NODE_RADIUS * cam.GetScale(), MAX_CTRL_NODE_RADIUS);
 
 	if (m_cfg.is_deform_open && m_selection->Size() == 1)
 	{

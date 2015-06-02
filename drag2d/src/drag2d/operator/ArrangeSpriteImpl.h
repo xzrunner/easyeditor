@@ -71,6 +71,7 @@ private:
 
 private:
 	static const float CTRL_NODE_RADIUS;
+	static const float MAX_CTRL_NODE_RADIUS;
 
 private:
 	enum
