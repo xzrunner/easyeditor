@@ -1819,6 +1819,14 @@
 						Name="base"
 						>
 						<File
+							RelativePath="..\..\..\src\drag2d\view\FBOCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\FBOCanvas.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\drag2d\view\GLCanvas.cpp"
 							>
 						</File>

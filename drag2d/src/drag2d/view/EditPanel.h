@@ -62,6 +62,8 @@ namespace d2d
 	protected:
 		void onSize(wxSizeEvent& event);
 
+		virtual void OnSizeDebug(wxSizeEvent& event) {}
+
 		virtual void OnMouseHook(wxMouseEvent& event) {}
 		virtual void OnKeyHook(int key_code) {}
 

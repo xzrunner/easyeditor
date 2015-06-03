@@ -279,6 +279,8 @@ void EditPanel::setTitleStatus(bool dirty)
 
 void EditPanel::onSize(wxSizeEvent& event)
 {
+	OnSizeDebug(event);
+
 	if (m_canvas) {
 		m_canvas->SetSize(event.GetSize());
 	}

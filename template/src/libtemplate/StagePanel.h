@@ -6,6 +6,8 @@
 namespace etemplate
 {
 
+class StageCanvas;
+
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
@@ -17,6 +19,12 @@ public:
 	// d2d::EditPanel interface
 	//
 	virtual void clear();
+
+protected:
+	virtual void OnSizeDebug(wxSizeEvent& event);
+
+private:
+	StageCanvas* m_canvas;
 
 }; // StagePanel
 
