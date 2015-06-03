@@ -17,21 +17,42 @@ void FileAdapter::load(const char* filename, int version)
 	reader.parse(fin, value);
 	fin.close();
 
+	if (version == 0) {
+		min_life = value["min_life"].asInt();
+		max_life = value["max_life"].asInt();
+
+		min_spd = value["min_spd"].asInt();
+		max_spd = value["max_spd"].asInt();
+
+		min_angular_spd = value["min_angular_spd"].asInt();
+		max_angular_spd = value["max_angular_spd"].asInt();
+		
+	} else {
+		int c = value["life"]["center"].asInt();
+		int o = value["life"]["offset"].asInt();
+		min_life = c - o;
+		max_life = c + o;
+
+		c = value["speed"]["center"].asInt();
+		o = value["speed"]["offset"].asInt();
+		min_spd = c - o;
+		max_spd = c + o;
+
+		c = value["angular_speed"]["center"].asInt();
+		o = value["angular_speed"]["offset"].asInt();
+		min_angular_spd = c - o;
+		max_angular_spd = c + o;
+	}
+
 	name = value["name"].asString();
 	package = value["package"].asString();
 	count = value["count"].asInt();
 	layer = value["layer"].asInt();
 	emission_time = value["emission_time"].asInt();
-	min_life = value["min_life"].asInt();
-	max_life = value["max_life"].asInt();
 	min_hori = value["min_hori"].asInt();
 	max_hori = value["max_hori"].asInt();
 	min_vert = value["min_vert"].asInt();
 	max_vert = value["max_vert"].asInt();
-	min_spd = value["min_spd"].asInt();
-	max_spd = value["max_spd"].asInt();
-	min_angular_spd = value["min_angular_spd"].asInt();
-	max_angular_spd = value["max_angular_spd"].asInt();
 	gravity = value["gravity"].asInt();
 	inertia = value["inertia"].asInt();
 	fadeout_time = value["fadeout_time"].asInt();
