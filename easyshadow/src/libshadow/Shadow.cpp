@@ -3,20 +3,13 @@
 namespace eshadow
 {
 
-Shadow::Shadow()
-	: m_inner_loop(NULL)
-	, m_outer_loop(NULL)
+Shadow::Shadow(float radius)
+	: m_radius(radius)
 {
 }
 
 Shadow::~Shadow()
 {
-	if (m_inner_loop) {
-		m_inner_loop->Release();
-	}
-	if (m_outer_loop) {
-		m_outer_loop->Release();
-	}
 }
 
 void Shadow::Draw(const d2d::Matrix& mt) const
@@ -26,7 +19,29 @@ void Shadow::Draw(const d2d::Matrix& mt) const
 
 void Shadow::Build()
 {
+	if (m_inner_loop.empty()) {
+		return;
+	}
+
+	BuildOuterLoop();
+	assert(m_inner_loop.size() == m_outer_loop.size());
+
 	
+}
+
+void Shadow::BuildOuterLoop()
+{
+	m_outer_loop.clear();
+
+	int sz = m_inner_loop.size();
+	m_outer_loop.reserve(sz);
+	for (int i = 0; i < sz; ++i)
+	{
+		int curr = i,
+			curr_prev = (curr - 1 + sz) % sz;
+		int next = (i + 1) % sz,
+			next_next = (next + 1) % sz,
+	}
 }
 
 }
