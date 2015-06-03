@@ -975,6 +975,25 @@ void Math::computeQuadNodes(const Vector& center, float angle, float xScale, flo
 	quad[3].y = quad[2].y - (quad[1].y - quad[0].y);
 }
 
+void Math::SideOffsetSegment(const Vector& s, const Vector& e, bool toleft, float dis,
+							 Vector& ds, Vector& de)
+{
+	if (s == e) {
+		return;
+	}
+
+	float len = getDistance(s, e);
+	float t = dis / len;
+	
+	if (toleft) {
+		ds = rotateVectorRightAngle(e - s, true) * t + s;
+		de = rotateVectorRightAngle(s - e, false) * t + e;
+	} else {
+		ds = rotateVectorRightAngle(e - s, false) * t + s;
+		de = rotateVectorRightAngle(s - e, true) * t + e;
+	}
+}
+
 bool Math::IsPolygonColckwise(const std::vector<Vector>& poly)
 {
 	if (poly.size() < 3) {

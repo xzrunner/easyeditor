@@ -246,6 +246,9 @@ namespace d2d
 		static void computeQuadNodes(const Vector& center, float angle, 
 			float xScale, float yScale, float width, float height, Vector quad[4]);
 
+		static void SideOffsetSegment(const Vector& s, const Vector& e, bool toleft, float dis,
+			Vector& ds, Vector& de);
+
 	private:
 		// if clockwise return true
 		static bool IsPolygonColckwise(const std::vector<Vector>& poly);

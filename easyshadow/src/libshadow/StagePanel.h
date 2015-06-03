@@ -6,7 +6,9 @@
 namespace eshadow
 {
 
-class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
+class Symbol;
+
+class StagePanel : public d2d::EditPanel, public d2d::MultiShapesImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
@@ -17,6 +19,20 @@ public:
 	// d2d::EditPanel interface
 	//
 	virtual void clear();
+
+	//
+	// d2d::MultiShapesImpl interface
+	//
+	virtual void traverseShapes(d2d::IVisitor& visitor, 
+		d2d::DataTraverseType type = d2d::DT_ALL) const;
+	virtual void removeShape(d2d::IShape* shape);
+	virtual void insertShape(d2d::IShape* shape);
+	virtual void clearShapes();
+
+	Symbol* GetSymbol() { return m_symbol; }
+
+private:
+	Symbol* m_symbol;
 
 }; // StagePanel
 

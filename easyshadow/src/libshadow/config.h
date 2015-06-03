@@ -4,7 +4,9 @@
 namespace eshadow
 {
 
-static const char* FILE_TAG = "template";
+static const char* FILE_TAG = "shadow";
+
+static const float SOFT_SHADOW_RADIUS = 10;
 
 }
 

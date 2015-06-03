@@ -16,6 +16,15 @@ public:
 protected:
 	virtual wxSizer* initLayout();
 
+private:
+	void OnSetInnerColor(wxCommandEvent& event);
+	void OnSetOuterColor(wxCommandEvent& event);
+
+	void OnChangeRadius(wxSpinEvent& event);
+
+private:
+	StagePanel* m_stage;
+
 }; // ToolbarPanel
 
 }
