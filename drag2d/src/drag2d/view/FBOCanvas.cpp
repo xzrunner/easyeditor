@@ -5,6 +5,7 @@
 #include "common/Exception.h"
 #include "render/ShaderMgr.h"
 #include "render/RenderContext.h"
+#include "render/BlendShader.h"
 
 namespace d2d
 {
@@ -29,31 +30,34 @@ void FBOCanvas::OnSize(int w, int h)
 
 void FBOCanvas::OnDrawWhole() const
 {
+	ShaderMgr* mgr = ShaderMgr::Instance();
+
+	glClearColor(0.8, 0.8, 0.8, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
-
-	ShaderMgr::Instance()->SetFBO(m_fbo);
+	//mgr->sprite();
+ 	mgr->Blend();
+ 	mgr->GetBlendShader()->SetBaseTexID(m_tex);
+ 	mgr->GetBlendShader()->SetBlendMode("exclusion");
+	mgr->SetFBO(m_fbo);
 
 	glClearColor(0.8, 0.8, 0.8, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	OnDrawSprites();
 
-	if (RenderContext::SHADER_MGR) {
-		RenderContext::SHADER_MGR->Flush();
-	}
-
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
 
-	ShaderMgr::Instance()->SetFBO(0);
-	ShaderMgr::Instance()->SetTexture(0);
+	mgr->SetFBO(0);
+	mgr->SetTexture(0);
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->Screen();
-	shader->DrawScreen(m_tex);
+	mgr->Screen();
+	mgr->DrawScreen(m_tex);
 }
 
 void FBOCanvas::CreateFBO(int w, int h)

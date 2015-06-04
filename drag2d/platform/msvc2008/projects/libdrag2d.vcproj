@@ -1259,6 +1259,10 @@
 							>
 						</File>
 						<File
+							RelativePath="..\..\..\src\drag2d\render\BlendShader.frag"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\drag2d\render\BlendShader.h"
 							>
 						</File>

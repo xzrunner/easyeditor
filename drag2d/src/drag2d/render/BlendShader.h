@@ -1,0 +1,77 @@
+#ifndef _DRAG2D_BLEND_SHADER_H_
+#define _DRAG2D_BLEND_SHADER_H_
+
+#include "SpriteShader.h"
+
+namespace d2d
+{
+
+class BlendShader : public SpriteShader
+{
+public:
+	BlendShader();
+
+	void SetBaseTexID(int tex);
+
+	void SetBlendMode(const std::string& mode);
+	
+protected:
+	virtual void BindAttrib(GLuint prog);
+
+	virtual void LoadShader();
+
+private:
+	enum BlendMode
+	{
+		// normal
+		BM_NORMAL = 0,
+		BM_DISSOLVE,		// todo
+
+		// darken modes
+		BM_DARKEN = 10,
+		BM_MULTIPLY,
+		BM_COLOR_BURN,
+		BM_LINEAR_BURN,
+		BM_DARKER_COLOR,	// todo
+
+		// lighten modes
+		BM_LIGHTEN = 20,
+		BM_SCREEN,
+		BM_COLOR_DODGE,
+		BM_LINEAR_DODGE,
+		BM_LIGHTER_COLOR,	// todo
+
+		// saturation modes
+		BM_OVERLAY = 30,
+		BM_SOFT_LIGHT,
+		BM_HARD_LIGHT,
+		BM_VIVID_LIGHT,
+		BM_LINEAR_LIGHT,
+		BM_PIN_LIGHT,
+		BM_HARD_MIX,
+
+		// substraction modes
+		BM_DIFFERENCE = 40,
+		BM_EXCLUSION,
+
+		// color modes 
+		BM_HUE = 50,		// todo
+		BM_SATURATION,		// todo
+		BM_COLOR,			// todo
+		BM_LUMINOSITY,		// todo
+
+		// others
+		BM_UNKNOWN = 99,
+	};
+
+private:
+	BlendMode m_mode;
+
+	typedef int GLint;
+	GLint m_mode_id;
+
+}; // BlendShader
+
+}
+
+#endif // _DRAG2D_BLEND_SHADER_H_
