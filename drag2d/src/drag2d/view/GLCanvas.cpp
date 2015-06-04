@@ -3,6 +3,8 @@
 #include "GLCanvas.h"
 #include "Camera.h"
 
+#include "common/Exception.h"
+#include "view/ExceptionDlg.h"
 #include "view/EditPanel.h"
 #include "render/RenderList.h"
 #include "render/RenderContext.h"
@@ -24,8 +26,8 @@ BEGIN_EVENT_TABLE(GLCanvas, wxGLCanvas)
 END_EVENT_TABLE()
 
 int gl_attrib[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN, 1,
-WX_GL_MIN_BLUE, 1, WX_GL_DEPTH_SIZE, 1,
-WX_GL_DOUBLEBUFFER,WX_GL_STENCIL_SIZE, 8, 0};
+				WX_GL_MIN_BLUE, 1, WX_GL_DEPTH_SIZE, 1,
+				WX_GL_DOUBLEBUFFER,WX_GL_STENCIL_SIZE, 8, 0};
 
 GLCanvas::GLCanvas(EditPanel* editPanel)
 	: wxGLCanvas(editPanel, wxID_ANY, gl_attrib)
@@ -67,21 +69,26 @@ void GLCanvas::SetCurrentCanvas()
 
 void GLCanvas::initGL()
 {
-	wxLogDebug(_T("GLCanvas::initGL()"));
+	try {
+		wxLogDebug(_T("GLCanvas::initGL()"));
 
-	if (glewInit() != GLEW_OK) {
-		exit(1);
-	}
+		if (glewInit() != GLEW_OK) {
+			exit(1);
+		}
 
-	ShaderMgr::Instance()->null();
+		ShaderMgr::Instance()->null();
 
-	resetViewport();
+		resetViewport();
 
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_TEXTURE_2D);
+		glShadeModel(GL_SMOOTH);
+		glEnable(GL_TEXTURE_2D);
 
-	if (RenderContext::SHADER_MGR) {
-		RenderContext::SHADER_MGR->reload();
+		if (RenderContext::SHADER_MGR) {
+			RenderContext::SHADER_MGR->reload();
+		}	
+	} catch (Exception& e) {
+		ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();	
 	}
 }
 
