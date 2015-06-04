@@ -9,7 +9,8 @@ namespace d2d
 class BaseDialog : public wxDialog
 {
 public:
-	BaseDialog(wxWindow* parent, wxString title);
+	BaseDialog(wxWindow* parent, wxString title, const wxPoint& pos = wxDefaultPosition,
+		const wxSize& size = wxDefaultSize);
 
 private:
 	void toCenter();
