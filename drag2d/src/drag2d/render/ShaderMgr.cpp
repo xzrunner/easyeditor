@@ -65,6 +65,14 @@ void ShaderMgr::SetShapeColor(const Colorf& col)
 	 m_shape_shader->SetColor(col);
 }
 
+void ShaderMgr::SetBlendMode(BlendMode mode)
+{
+	BlendShader* blend = dynamic_cast<BlendShader*>(m_sprite_shader);
+	if (blend) {
+		blend->SetBlendMode(BlendModes::Instance()->GetNameENFromID(mode));
+	}
+}
+
 void ShaderMgr::sprite()
 {
 	Switch(m_sprite_shader);

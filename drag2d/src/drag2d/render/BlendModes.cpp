@@ -51,11 +51,22 @@ BlendMode BlendModes::GetIDFromNameEN(const std::string& name) const
 {
 	for (int i = 0, n = m_modes.size(); i < n; ++i) {
 		const Item& item = m_modes[i];
-		if (item.name_cn == name) {
+		if (item.name_en == name) {
 			return item.id;
 		}
 	}
 	return BM_UNKNOWN;
+}
+
+std::string BlendModes::GetNameENFromID(BlendMode id) const
+{
+	for (int i = 0, n = m_modes.size(); i < n; ++i) {
+		const Item& item = m_modes[i];
+		if (item.id == id) {
+			return item.name_en;
+		}
+	}
+	return "";
 }
 
 BlendMode BlendModes::GetIDFromIdx(int idx) const

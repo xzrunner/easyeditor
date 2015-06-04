@@ -54,6 +54,7 @@ class BlendModes
 {
 public:
 	BlendMode GetIDFromNameEN(const std::string& name) const;
+	std::string GetNameENFromID(BlendMode id) const;
 
 	BlendMode GetIDFromIdx(int idx) const;
 	int GetIdxFromID(BlendMode mode) const;

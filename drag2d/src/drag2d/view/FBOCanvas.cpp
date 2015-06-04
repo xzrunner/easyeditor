@@ -42,7 +42,7 @@ void FBOCanvas::OnDrawWhole() const
 	mgr->sprite();
 	BlendShader* shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
  	shader->SetBaseTexID(m_tex);
- 	shader->SetBlendMode("exclusion");
+// 	shader->SetBlendMode("exclusion");
 	mgr->SetFBO(m_fbo);
 
 	glClearColor(0.8f, 0.8f, 0.8f, 1);

@@ -2,6 +2,7 @@
 #define _D2D_SHADER_MGR_H_
 
 #include "ShaderMgrBase.h"
+#include "BlendModes.h"
 
 #include "common/Vector.h"
 
@@ -25,6 +26,7 @@ public:
 	void SetSpriteColor(const Colorf& multi, const Colorf& add);
 	void SetSpriteColorTrans(const Colorf& r_trans, const Colorf& g_trans, const Colorf& b_trans);
 	void SetShapeColor(const Colorf& col);
+	void SetBlendMode(BlendMode mode);
 
 	void sprite();
 	void shape();
