@@ -37,7 +37,7 @@ void IShader::InitShader(const char* VS, const char* FS)
 		glAttachShader(prog, fs);
 	}
 
-	BindAttrib(prog);
+//	BindAttrib(prog);
 
 	// link
 	GLint status;
@@ -57,6 +57,8 @@ void IShader::InitShader(const char* VS, const char* FS)
 	glDeleteShader(vs);
 
 	m_prog = prog;
+
+	BindAttrib(prog);
 }
 
 void IShader::DeleteShader()
