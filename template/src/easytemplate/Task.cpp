@@ -8,6 +8,9 @@ namespace etemplate
 Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
+	, m_library(NULL)
+	, m_property(NULL)
+	, m_stage(NULL)
 {
 	InitLayout();
 }
@@ -65,13 +68,21 @@ void Task::InitLayout()
 
 wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 {
-	m_library = new LibraryPanel(parent);
-	return m_library;
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_library = new LibraryPanel(split);
+
+	m_property = new d2d::PropertySettingPanel(split);
+
+	split->SetSashGravity(0.55f);
+	split->SplitHorizontally(m_library, m_property);
+
+	return split;
 }
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_stage = new StagePanel(parent, m_parent, m_library);
+	m_stage = new StagePanel(parent, m_parent, m_library, m_property);
 	m_library->setCanvas(m_stage->getCanvas());	
 	return m_stage;
 }

@@ -12,7 +12,7 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library);
+		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property);
 	virtual ~StagePanel();
 
 	//

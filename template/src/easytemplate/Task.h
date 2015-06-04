@@ -36,6 +36,7 @@ private:
 	wxFrame* m_parent;
 
  	d2d::LibraryPanel* m_library;
+	d2d::PropertySettingPanel* m_property;
  	d2d::EditPanel* m_stage;
 
 }; // Task
