@@ -15,6 +15,7 @@ class IShader;
 class ShapeShader;
 class SpriteShader;
 class FontShader;
+class ScreenShader;
 
 class ShaderMgr : public ShaderMgrBase
 {
@@ -27,6 +28,7 @@ public:
 
 	void sprite();
 	void shape();
+	void Screen();
 	void null();
 
 	int GetTexID() const;
@@ -37,6 +39,7 @@ public:
 
 	void Draw(const float vb[16], int texid);
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
+	void DrawScreen(int texid);
 
 	int GetVersion() const;
 
@@ -61,6 +64,7 @@ private:
 	ShapeShader* m_shape_shader;
 	SpriteShader* m_sprite_shader;
 	FontShader* m_font_shader;
+	ScreenShader* m_screen_shader;
 
 	int m_version;
 

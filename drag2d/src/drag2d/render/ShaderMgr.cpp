@@ -2,6 +2,7 @@
 #include "ShapeShader.h"
 #include "SpriteShader.h"
 #include "FontShader.h"
+#include "ScreenShader.h"
 
 #include "RenderContext.h"
 
@@ -33,6 +34,9 @@ ShaderMgr::ShaderMgr()
 
 	m_font_shader = new FontShader;
 	m_shaders.push_back(m_font_shader);
+
+	m_screen_shader = new ScreenShader;
+	m_shaders.push_back(m_screen_shader);
 }
 
 ShaderMgr::~ShaderMgr()
@@ -67,6 +71,11 @@ void ShaderMgr::sprite()
 void ShaderMgr::shape()
 {
 	Switch(m_shape_shader);
+}
+
+void ShaderMgr::Screen()
+{
+	Switch(m_screen_shader);
 }
 
 void ShaderMgr::null()
@@ -108,6 +117,11 @@ void ShaderMgr::Draw(const Vector vertices[4], const Vector texcoords[4], int te
 {
 	SpriteShader* shader = static_cast<SpriteShader*>(m_sprite_shader);
 	shader->Draw(vertices, texcoords, texid);
+}
+
+void ShaderMgr::DrawScreen(int texid)
+{
+	m_screen_shader->Draw(texid);
 }
 
 int ShaderMgr::GetVersion() const 

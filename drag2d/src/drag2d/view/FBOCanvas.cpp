@@ -105,25 +105,25 @@ void FBOCanvas::OnPaint(wxPaintEvent& event)
 
 	ShaderMgr::Instance()->SetFBO(0);
 
-	d2d::Vector vertices[4];
-	vertices[0].set(-400, -400);
-	vertices[1].set(-400,  400);
-	vertices[2].set( 400,  400);
-	vertices[3].set( 400, -400);
-
-	d2d::Vector texcoords[4];
-	texcoords[0].set(0, 0);
-	texcoords[1].set(0, 1);
-	texcoords[2].set(1, 1);
-	texcoords[3].set(1, 0);
+// 	d2d::Vector vertices[4];
+// 	vertices[0].set(-400, -400);
+// 	vertices[1].set(-400,  400);
+// 	vertices[2].set( 400,  400);
+// 	vertices[3].set( 400, -400);
+// 
+// 	d2d::Vector texcoords[4];
+// 	texcoords[0].set(0, 0);
+// 	texcoords[1].set(0, 1);
+// 	texcoords[2].set(1, 1);
+// 	texcoords[3].set(1, 0);
 
 	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->sprite();
-	shader->Draw(vertices, texcoords, m_tex);
+	shader->Screen();
+	shader->DrawScreen(m_tex);
 
-	if (RenderContext::SHADER_MGR) {
-		RenderContext::SHADER_MGR->Flush();
-	}
+// 	if (RenderContext::SHADER_MGR) {
+// 		RenderContext::SHADER_MGR->Flush();
+// 	}
 
 	//////////////////////////////////////////////////////////////////////////
 

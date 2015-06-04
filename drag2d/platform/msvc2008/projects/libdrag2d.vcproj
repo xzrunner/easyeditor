@@ -1200,6 +1200,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\render\ScreenShader.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\render\ScreenShader.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\render\ShapeShader.cpp"
 						>
 					</File>
