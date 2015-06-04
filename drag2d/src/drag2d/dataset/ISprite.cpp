@@ -29,6 +29,8 @@ ISprite::ISprite()
 	m_shear.set(0, 0);
 	m_xMirror = m_yMirror = false;
 	m_bounding = NULL;
+
+	m_blend_mode = BM_NORMAL;
 }
 
 ISprite::ISprite(const ISprite& sprite)
@@ -54,6 +56,8 @@ ISprite::ISprite(const ISprite& sprite)
 	m_xMirror = sprite.m_xMirror;
 	m_yMirror = sprite.m_yMirror;
 	m_bounding = sprite.m_bounding->clone();
+
+	m_blend_mode = sprite.m_blend_mode;
 }
 
 ISprite::~ISprite()

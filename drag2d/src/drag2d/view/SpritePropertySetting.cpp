@@ -8,6 +8,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
+#include "render/BlendModes.h"
 #include "widgets/ColorProperty.h"
 
 #include <wx/propgrid/advprops.h>
@@ -33,7 +34,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 
 	d2d::ISprite* spr = m_impl->GetSprite();
 
-	// info
+	// base
 	if (name == wxT("Name"))
 	{
 		spr->name = wxANY_AS(value, wxString);
@@ -42,6 +43,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		spr->tag = wxANY_AS(value, wxString);
 	}
+	// color
 	else if (name == "Color.Multi")
 	{
 		wxColour col = wxANY_AS(value, wxColour);
@@ -74,6 +76,11 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 // 		wxColour col = wxANY_AS(value, wxColour);
 // 		spr->b_trans.set(col.Red() / 255.0f, col.Green() / 255.0f, col.Blue() / 255.0f, col.Alpha() / 255.0f);
 // 	}
+	else if (name == "Blend")
+	{
+		int idx = wxANY_AS(value, int);
+		spr->SetBlendMode(BlendModes::Instance()->GetIDFromIdx(idx));
+	}
 	else if (name == wxT("Clip"))
 	{
 		spr->clip = wxANY_AS(value, bool);
@@ -169,6 +176,9 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
+	BlendMode mode = spr->GetBlendMode();
+	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(mode));
+
 	ColorProperty* rp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.R"));
 	rp->SetListener(new PropertyColorListener(m_stage, &spr->r_trans));
 
@@ -207,7 +217,7 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Clear();
 
-	pg->Append(new wxPropertyCategory("INFO", wxPG_LABEL));
+	pg->Append(new wxPropertyCategory("BASE", wxPG_LABEL));
 
 	pg->Append(new wxStringProperty(wxT("Name"), wxPG_LABEL, spr->name));
 
@@ -215,6 +225,8 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 
 	pg->Append(new wxBoolProperty("Clip", wxPG_LABEL, spr->clip));
 	pg->SetPropertyAttribute("Clip", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	pg->Append(new wxPropertyCategory("COLOR", wxPG_LABEL));
 
 	wxPGProperty* colProp = pg->Append(new wxStringProperty(wxT("Color"), wxPG_LABEL, wxT("<composed>")));
 	wxColour mul_col = wxColour(spr->multiCol.r*255, spr->multiCol.g*255, spr->multiCol.b*255, spr->multiCol.a*255);
@@ -249,6 +261,13 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("R"), wxPG_LABEL, r_trans));
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("G"), wxPG_LABEL, g_trans));
 // 	pg->AppendIn(colProp, new wxColourProperty(wxT("B"), wxPG_LABEL, b_trans));
+
+	wxArrayString names;
+	BlendModes::Instance()->GetAllNameCN(names);
+	wxEnumProperty* blend_prop = new wxEnumProperty(wxT("Blend"), wxPG_LABEL, names);
+	int idx = BlendModes::Instance()->GetIdxFromID(spr->GetBlendMode());
+	blend_prop->SetValue(idx);
+	pg->Append(blend_prop);
 
 	pg->Append(new wxPropertyCategory("GEOMETRY", wxPG_LABEL));
 

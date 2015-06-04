@@ -5,6 +5,7 @@
 #include "common/Object.h"
 #include "common/Vector.h"
 #include "common/Color.h"
+#include "render/BlendModes.h"
 
 #include <json/json.h>
 
@@ -70,6 +71,9 @@ namespace d2d
 		}
 		d2d::Rect GetRect() const;
 
+		BlendMode GetBlendMode() const { return m_blend_mode; }
+		void SetBlendMode(BlendMode mode) { m_blend_mode = mode; }
+
 		void setObserver(ISpriteObserver* observer) {
 			m_observer = observer;
 		}
@@ -97,6 +101,8 @@ namespace d2d
 		Vector m_shear;
 
 		bool m_xMirror, m_yMirror;
+
+		BlendMode m_blend_mode;
 
 		AbstractBV* m_bounding;
 

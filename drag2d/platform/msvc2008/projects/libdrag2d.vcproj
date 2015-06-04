@@ -1255,6 +1255,14 @@
 						Name="blend"
 						>
 						<File
+							RelativePath="..\..\..\src\drag2d\render\BlendModes.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\BlendModes.h"
+							>
+						</File>
+						<File
 							RelativePath="..\..\..\src\drag2d\render\BlendShader.cpp"
 							>
 						</File>
