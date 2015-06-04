@@ -1,6 +1,11 @@
 #include "ShapeShader.h"
 
+#define STRINGIFY(A)  #A
+#include "ShapeShader.vert"
+#include "ShapeShader.frag"
+
 #include <gl/glew.h>
+#include <string>
 
 namespace d2d
 {
@@ -14,40 +19,16 @@ ShapeShader::ShapeShader()
 
 void ShapeShader::Load()
 {
-	static const char* vs =
-		FLOAT_PRECISION
-		"uniform vec4 color;     \n"
-		"\n"
-		"varying vec4 v_fragmentColor;  \n"
-		"\n"
-		"\n"
-		"uniform mat4 u_projection; \n"
-		"uniform mat4 u_modelview; \n"
-		"\n"
-		"void main()  \n"
-		"{  \n"
-		"  gl_Position = u_projection * u_modelview * gl_Vertex; "
-		" gl_FrontColor = gl_Color; \n"
-		"  v_fragmentColor = color; \n"
-		"}  \n"
-		;
-
-	static const char* fs =
-		FLOAT_PRECISION
-		"varying vec4 v_fragmentColor; \n"
-		"\n"
-		"void main()  \n"
-		"{  \n"  
-		"  gl_FragColor = gl_Color;"
-		"}  \n"
-		;
+	static const std::string header(FLOAT_PRECISION);
+	static const std::string vert(header + ShapeVertShader);
+	static const std::string frag(header + ShapeFragShader);
 
 // 	glEnable(GL_BLEND);
 // 	// todo 源混合因子ejoy2d用的GL_ONE
 // 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 // 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	InitShader(vs, fs);
+	InitShader(vert.c_str(), frag.c_str());
 
 	m_projection = glGetUniformLocation(m_prog, "u_projection");
 	m_model_view = glGetUniformLocation(m_prog, "u_modelview");

@@ -6,7 +6,6 @@ namespace d2d
 {
 
 static const float VERTICES[] = { -1, -1, -1, 1, 1, 1, 1, -1 };
-//static const float VERTICES[] = { -400, -400, -400, 400, 400, 400, 400, -400 };
 static const float TEXCOORDS[] = { 0, 0, 0, 1, 1, 1, 1, 0 };
 
 ScreenShader::ScreenShader()
@@ -38,12 +37,7 @@ void ScreenShader::Load()
 		"\n"
 		"void main()  \n"
 		"{  \n"  
-
-		"  if (v_texcoord.x >= 0.5 && v_texcoord.x <= 0.6 && v_texcoord.y >= 0.5 && v_texcoord.y <= 0.6)  "
-		"	 gl_FragColor = vec4(1, 1, 0, 1);	"
-		"  else	"
 		"	 gl_FragColor = texture2D(texture0, v_texcoord);  \n"
-//		"  gl_FragColor = vec4(1, 1, 0, 1);  \n"
 		"}  \n"
 		;
 

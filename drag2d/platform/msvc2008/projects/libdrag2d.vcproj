@@ -1191,38 +1191,90 @@
 				<Filter
 					Name="shaders"
 					>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\FontShader.cpp"
+					<Filter
+						Name="sprite"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\FontShader.h"
+						<File
+							RelativePath="..\..\..\src\drag2d\render\SpriteFasterShader.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\SpriteShader.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\SpriteShader.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\SpriteShader.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\SpriteShader.vert"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="shape"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\ScreenShader.cpp"
+						<File
+							RelativePath="..\..\..\src\drag2d\render\ShapeShader.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\ShapeShader.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\ShapeShader.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\ShapeShader.vert"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="font"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\ScreenShader.h"
+						<File
+							RelativePath="..\..\..\src\drag2d\render\FontShader.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\FontShader.frag"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\FontShader.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="blend"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\ShapeShader.cpp"
+						<File
+							RelativePath="..\..\..\src\drag2d\render\BlendShader.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\BlendShader.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="screen"
 						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\ShapeShader.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\SpriteShader.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\render\SpriteShader.h"
-						>
-					</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\ScreenShader.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\ScreenShader.h"
+							>
+						</File>
+					</Filter>
 				</Filter>
 			</Filter>
 		</Filter>
@@ -1843,19 +1895,19 @@
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.cpp"
+							RelativePath="..\..\..\src\drag2d\view\IStageCanvas.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.h"
+							RelativePath="..\..\..\src\drag2d\view\IStageCanvas.h"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.cpp"
+							RelativePath="..\..\..\src\drag2d\view\SingleCanvas.cpp"
 							>
 						</File>
 						<File
-							RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.h"
+							RelativePath="..\..\..\src\drag2d\view\SingleCanvas.h"
 							>
 						</File>
 					</Filter>
@@ -1876,6 +1928,26 @@
 						</File>
 						<File
 							RelativePath="..\..\..\src\drag2d\view\DynamicStageCanvas.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="camera"
+						>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\OrthoCanvas.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\view\PerspectCanvas.h"
 							>
 						</File>
 					</Filter>

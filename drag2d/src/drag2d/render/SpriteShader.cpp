@@ -1,5 +1,10 @@
 #include "SpriteShader.h"
 
+#define STRINGIFY(A)  #A
+#include "SpriteShader.vert"
+#include "SpriteShader.frag"
+#include "SpriteFasterShader.frag"
+
 #include "common/Color.h"
 
 #include <stdio.h>
@@ -291,147 +296,16 @@ void SpriteShader::BindAttrib(GLuint prog)
 
 void SpriteShader::LoadShader()
 {
-	static const char* vs =
-		FLOAT_PRECISION
-		"attribute vec4 position;  \n"
-		"attribute vec2 texcoord;  \n"
-		"attribute vec4 color;     \n"
-		"attribute vec4 additive;  \n"
-		"attribute vec4 r_trans;  \n"
-		"attribute vec4 g_trans;  \n"
-		"attribute vec4 b_trans;  \n"
-		"\n"
-		"varying vec2 v_texcoord;  \n"
-		"varying vec4 v_fragmentColor;  \n"
-		"varying vec4 v_fragmentAddi; \n"
-		"varying vec4 v_r_trans; \n"
-		"varying vec4 v_g_trans; \n"
-		"varying vec4 v_b_trans; \n"
-		"\n"
-		"uniform mat4 u_projection; \n"
-		"uniform mat4 u_modelview; \n"
-		"\n"
-		"void main()  \n"
-		"{  \n"
-		"  gl_Position = u_projection * u_modelview * position; "
-		"  v_fragmentColor = color / 255.0; \n"
-		"  v_fragmentAddi = additive / 255.0; \n"
-		"  v_r_trans = r_trans / 255.0; \n"
-		"  v_g_trans = g_trans / 255.0; \n"
-		"  v_b_trans = b_trans / 255.0; \n"
-		"  v_texcoord = texcoord;  \n"
-		"}  \n"
-		;
-
-	static const char* fs =
-		FLOAT_PRECISION
-		"varying vec4 v_fragmentColor; \n"
-		"varying vec4 v_fragmentAddi; \n"
-		"varying vec4 v_r_trans; \n"
-		"varying vec4 v_g_trans; \n"
-		"varying vec4 v_b_trans; \n"
-		"varying vec2 v_texcoord;  \n"
-		"uniform sampler2D texture0;  \n"
-		"\n"
-		"void main()  \n"
-		"{  \n"  
-		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-
-		"  float s = 1.5; \n"
-		"  vec4 r = vec4(tmp.r, 0, 0, 1); \n"
-		"  vec4 g = vec4(0, tmp.g, 0, 1); \n"
-		"  vec4 b = vec4(0, 0, tmp.b, 1); \n"
-		"  if ((v_r_trans.r != 1 || v_r_trans.g != 0 || v_r_trans.b != 0) && tmp.r > tmp.g * s && tmp.r > tmp.b * s) { \n"
-		"  	  r = tmp.r * v_r_trans; \n"
-		"  	  g = tmp.g * v_r_trans; \n"
-		"  	  b = tmp.b * v_r_trans; \n"
-		"  } \n"
-		"  if ((v_g_trans.g != 1 || v_g_trans.r != 0 || v_g_trans.b != 0) && tmp.g > tmp.r * s && tmp.g > tmp.b * s) { \n"
-		"  	  g = tmp.g * v_g_trans; \n"
-		"  	  r = tmp.r * v_g_trans; \n"
-		"  	  b = tmp.b * v_g_trans; \n"
-		"  } \n"
-		"  if ((v_b_trans.b != 1 || v_b_trans.r != 0 || v_b_trans.g != 0) && tmp.b > tmp.r * s && tmp.b > tmp.g * s) { \n"
-		"    b = tmp.b * v_b_trans; \n"
-		"    r = tmp.r * v_b_trans; \n"
-		"    g = tmp.g * v_b_trans; \n"
-		"  } \n"
-		"  tmp.xyz = (r + g + b).xyz; \n"
-
-		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-		"  gl_FragColor.w = tmp.w;    \n"
-		"  gl_FragColor *= v_fragmentColor.w;  \n"
-		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-		"}  \n"
-		;
-
-// 	static const char* fs =
-// 		FLOAT_PRECISION
-// 		"varying vec4 v_fragmentColor; \n"
-// 		"varying vec4 v_fragmentAddi; \n"
-// 		"varying vec4 v_r_trans; \n"
-// 		"varying vec4 v_g_trans; \n"
-// 		"varying vec4 v_b_trans; \n"
-// 		"varying vec2 v_texcoord;  \n"
-// 		"uniform sampler2D texture0;  \n"
-// 		"\n"
-// 		"void main()  \n"
-// 		"{  \n"  
-// 		"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-// 
-// 		"  float s = 1.5; \n"
-// 
-// 		"  vec3 test_v_g_trans = vec3(2, 0.3, 1);  \n"
-// 		//"  vec3 test_v_g_trans = vec3(1, 1, 1);  \n"
-// 		"  float cmp_r = tmp.g - tmp.r * s;  \n"
-// 		"  float test_r = clamp(cmp_r, 0, 1) / cmp_r;  \n"
-// 		"  float cmp_b = tmp.g - tmp.b * s;  \n"
-// 		"  float test_b = clamp(cmp_b, 0, 1) / cmp_b;  \n"
-// 		"  vec3 trans = (test_v_g_trans - vec3(1, 1, 1)) * test_r * test_b + vec3(1, 1, 1);  \n"
-// 		"  tmp.xyz = vec3(tmp.r * trans.r, tmp.g * trans.g, tmp.b * trans.b);  \n"
-// 
-// 		"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-// 		"  gl_FragColor.w = tmp.w;    \n"
-// 		"  gl_FragColor *= v_fragmentColor.w;  \n"
-// 		"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-// 		"}  \n"
-// 		;
-
-// 		static const char* fs =
-// 			FLOAT_PRECISION
-// 			"varying vec4 v_fragmentColor; \n"
-// 			"varying vec4 v_fragmentAddi; \n"
-// 			"varying vec4 v_r_trans; \n"
-// 			"varying vec4 v_g_trans; \n"
-// 			"varying vec4 v_b_trans; \n"
-// 			"varying vec2 v_texcoord;  \n"
-// 			"uniform sampler2D texture0;  \n"
-// 			"\n"
-// 			"void main()  \n"
-// 			"{  \n"  
-// 			"  vec4 tmp = texture2D(texture0, v_texcoord);  \n"
-// 
-// 			"  float s = 1.5; \n"
-// 			"  vec3 test_v_g_trans = vec3(2, 0.3, 1);  \n"
-// 
-// 			"  float cmp_r = step(tmp.r * s, tmp.g);  \n"
-// 			"  float cmp_b = step(tmp.b * s, tmp.g);  \n"
-// 			"  vec3 trans = (test_v_g_trans - vec3(1, 1, 1)) * cmp_r * cmp_b + vec3(1, 1, 1);  \n"
-// 			"  tmp.xyz = vec3(tmp.r * trans.r, tmp.g * trans.g, tmp.b * trans.b);  \n"
-// 
-// 			"  gl_FragColor.xyz = tmp.xyz * v_fragmentColor.xyz;  \n"
-// 			"  gl_FragColor.w = tmp.w;    \n"
-// 			"  gl_FragColor *= v_fragmentColor.w;  \n"
-// 			"  gl_FragColor.xyz += v_fragmentAddi.xyz * tmp.w;  \n"
-// 			"}  \n"
-// 			;
+	static const std::string header(FLOAT_PRECISION);
+	static const std::string vert(header + SpriteVertShader);
+	static const std::string frag(header + SpriteFragShader);
 
 	// 	glEnable(GL_BLEND);
 	// 	// todo 源混合因子ejoy2d用的GL_ONE
 	// 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 	// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	InitShader(vs, fs);
+	InitShader(vert.c_str(), frag.c_str());
 }
 
 void SpriteShader::InitBuffers()
