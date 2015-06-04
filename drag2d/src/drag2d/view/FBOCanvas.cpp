@@ -32,19 +32,21 @@ void FBOCanvas::OnDrawWhole() const
 {
 	ShaderMgr* mgr = ShaderMgr::Instance();
 
-	glClearColor(0.8, 0.8, 0.8, 1);
+//	glClearColor(0.8f, 0.8f, 0.8f, 1);
+	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
-	//mgr->sprite();
- 	mgr->Blend();
- 	mgr->GetBlendShader()->SetBaseTexID(m_tex);
- 	mgr->GetBlendShader()->SetBlendMode("exclusion");
+	mgr->sprite();
+	BlendShader* shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
+ 	shader->SetBaseTexID(m_tex);
+ 	shader->SetBlendMode("exclusion");
 	mgr->SetFBO(m_fbo);
 
-	glClearColor(0.8, 0.8, 0.8, 1);
+	glClearColor(0.8f, 0.8f, 0.8f, 1);
+//	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	OnDrawSprites();

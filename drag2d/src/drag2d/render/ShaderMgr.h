@@ -52,6 +52,7 @@ public:
 	void SetSpriteShader(d2d::SpriteShader* shader, bool delete_old = true);
 
 	ShapeShader* GetShapeShader() { return m_shape_shader; }
+	SpriteShader* GetSpriteShader() { return m_sprite_shader; }
 
 private:
 	ShaderMgr();

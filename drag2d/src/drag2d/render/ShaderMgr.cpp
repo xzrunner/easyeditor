@@ -1,6 +1,7 @@
 #include "ShaderMgr.h"
 #include "ShapeShader.h"
 #include "SpriteShader.h"
+#include "BlendShader.h"
 #include "FontShader.h"
 #include "ScreenShader.h"
 
@@ -29,8 +30,9 @@ ShaderMgr::ShaderMgr()
 	m_shape_shader = new ShapeShader;
 	m_shaders.push_back(m_shape_shader);
 
-	m_sprite_shader = new SpriteShader;
-	m_shaders.push_back(m_sprite_shader);
+// 	m_sprite_shader = new SpriteShader;
+	m_sprite_shader = new BlendShader;
+ 	m_shaders.push_back(m_sprite_shader);
 
 	m_font_shader = new FontShader;
 	m_shaders.push_back(m_font_shader);
