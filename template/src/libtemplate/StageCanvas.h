@@ -16,8 +16,7 @@ public:
 
 protected:
 	virtual void OnSize(int w, int h);
-	virtual void OnDraw() const;
-	virtual void onDraw();
+	virtual void OnDrawSprites() const;
 
 private:
 	StagePanel* m_stage;

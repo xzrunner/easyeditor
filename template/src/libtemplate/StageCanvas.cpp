@@ -13,6 +13,10 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnSize(int w, int h)
 {
+	d2d::FBOCanvas::OnSize(w, h);
+
+	//////////////////////////////////////////////////////////////////////////
+
 	SetCurrentCanvas();
 
 	glViewport(0, 0, w, h);
@@ -25,14 +29,7 @@ void StageCanvas::OnSize(int w, int h)
 	d2d::ShaderMgr::Instance()->SetProjection(w, h);
 }
 
-void StageCanvas::OnDraw() const
-{
-	m_stage->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
-
-	m_stage->drawEditTemp();
-}
-
-void StageCanvas::onDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	m_stage->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 

@@ -3,30 +3,14 @@
 #include "FBOCanvas.h"
 
 #include "common/Exception.h"
-#include "render/RenderContext.h"
-#include "render/ShaderMgrBase.h"
 #include "render/ShaderMgr.h"
-#include "view/EditPanel.h"
+#include "render/RenderContext.h"
 
 namespace d2d
 {
 
-BEGIN_EVENT_TABLE(FBOCanvas, wxGLCanvas)
-	EVT_SIZE(FBOCanvas::OnSize)
-	EVT_PAINT(FBOCanvas::OnPaint)
-	EVT_ERASE_BACKGROUND(FBOCanvas::onEraseBackground)
-END_EVENT_TABLE()
-
-static int gl_attrib[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN, 1,
-						WX_GL_MIN_BLUE, 1, WX_GL_DEPTH_SIZE, 1,
-						WX_GL_DOUBLEBUFFER,WX_GL_STENCIL_SIZE, 8, 0};
-
 FBOCanvas::FBOCanvas(EditPanel* stage)
-	: wxGLCanvas(stage, wxID_ANY, gl_attrib)
-	, m_camera(stage->getCamera())
-	, m_screen(stage->getCamera())
- 	, m_inited(false)
- 	, m_context(new wxGLContext(this))
+	: IStageCanvas(stage)
 	, m_tex(0)
 	, m_fbo(0)
 {
@@ -34,66 +18,27 @@ FBOCanvas::FBOCanvas(EditPanel* stage)
 
 FBOCanvas::~FBOCanvas()
 {
-	delete m_context;
+	ReleaseFBO();
 }
 
-void FBOCanvas::SetCurrentCanvas()
+void FBOCanvas::OnSize(int w, int h)
 {
-	if (m_inited) {
-		SetCurrent(*m_context);
-	}
-}
-
-void FBOCanvas::InitGL()
-{
-	if (glewInit() != GLEW_OK) {
-		exit(1);
-	}
-
-	ShaderMgr::Instance()->null();
-
-	OnSize(wxSizeEvent(m_parent->GetSize()));
-
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_TEXTURE_2D);
-
-	if (RenderContext::SHADER_MGR) {
-		RenderContext::SHADER_MGR->reload();
-	}
-}
-
-void FBOCanvas::OnSize(wxSizeEvent& event)
-{
-	wxSize size = event.GetSize();
-	int w = size.GetWidth(),
-		h = size.GetHeight();
 	ReleaseFBO();
 	CreateFBO(w, h);
-
-	OnSize(w, h);
 }
 
-void FBOCanvas::OnPaint(wxPaintEvent& event)
+void FBOCanvas::OnDrawWhole() const
 {
-	// Makes the OpenGL state that is represented by the OpenGL rendering 
-	// context context current
-	SetCurrent(*m_context);
-
-	if (!m_inited) {
-		InitGL();
-		m_inited = true;
-	}
-
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
 
+	ShaderMgr::Instance()->SetFBO(m_fbo);
+
 	glClearColor(0.8, 0.8, 0.8, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	ShaderMgr::Instance()->SetFBO(m_fbo);
-
-	OnDraw();
+	OnDrawSprites();
 
 	if (RenderContext::SHADER_MGR) {
 		RenderContext::SHADER_MGR->Flush();
@@ -104,31 +49,11 @@ void FBOCanvas::OnPaint(wxPaintEvent& event)
 	//////////////////////////////////////////////////////////////////////////
 
 	ShaderMgr::Instance()->SetFBO(0);
-
-// 	d2d::Vector vertices[4];
-// 	vertices[0].set(-400, -400);
-// 	vertices[1].set(-400,  400);
-// 	vertices[2].set( 400,  400);
-// 	vertices[3].set( 400, -400);
-// 
-// 	d2d::Vector texcoords[4];
-// 	texcoords[0].set(0, 0);
-// 	texcoords[1].set(0, 1);
-// 	texcoords[2].set(1, 1);
-// 	texcoords[3].set(1, 0);
+	ShaderMgr::Instance()->SetTexture(0);
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->Screen();
 	shader->DrawScreen(m_tex);
-
-// 	if (RenderContext::SHADER_MGR) {
-// 		RenderContext::SHADER_MGR->Flush();
-// 	}
-
-	//////////////////////////////////////////////////////////////////////////
-
-	glFlush();
-	SwapBuffers();
 }
 
 void FBOCanvas::CreateFBO(int w, int h)
@@ -176,10 +101,6 @@ void FBOCanvas::ReleaseFBO()
 		glDeleteFramebuffersEXT(1, &m_fbo);
 		m_fbo = 0;
 	}
-}
-
-void FBOCanvas::onEraseBackground(wxEraseEvent& event)
-{	
 }
 
 }
