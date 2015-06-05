@@ -3,8 +3,6 @@
 
 #include "IStageCanvas.h"
 
-#include "render/FBO.h"
-
 namespace d2d
 {
 
@@ -16,9 +14,6 @@ public:
 protected:
 	virtual void OnSize(int w, int h);
 	virtual void OnDrawWhole() const;
-
-private:
-	FBO m_fbo;
 
 }; // FBOCanvas
 

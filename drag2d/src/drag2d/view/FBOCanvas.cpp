@@ -2,6 +2,7 @@
 
 #include "render/ShaderMgr.h"
 #include "render/BlendShader.h"
+#include "render/ScreenFBO.h"
 
 namespace d2d
 {
@@ -13,11 +14,13 @@ FBOCanvas::FBOCanvas(EditPanel* stage)
 
 void FBOCanvas::OnSize(int w, int h)
 {
-	m_fbo.ChangeSize(w, h);
+	ScreenFBO::Instance()->ChangeSize(w, h);
 }
 
 void FBOCanvas::OnDrawWhole() const
 {
+	ScreenFBO* fbo = ScreenFBO::Instance();
+
 	ShaderMgr* mgr = ShaderMgr::Instance();
 
 //	glClearColor(0.8f, 0.8f, 0.8f, 1);
@@ -29,9 +32,9 @@ void FBOCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	mgr->sprite();
 	BlendShader* shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
- 	shader->SetBaseTexID(m_fbo.GetTexID());
+ 	shader->SetBaseTexID(fbo->GetTexID());
 // 	shader->SetBlendMode("exclusion");
-	mgr->SetFBO(m_fbo.GetFboID());
+	mgr->SetFBO(fbo->GetFboID());
 
 	glClearColor(0.8f, 0.8f, 0.8f, 1);
 //	glClearColor(0, 0, 0, 1);
@@ -47,7 +50,7 @@ void FBOCanvas::OnDrawWhole() const
 	mgr->SetTexture(0);
 
 	mgr->Screen();
-	mgr->DrawScreen(m_fbo.GetTexID());
+	mgr->DrawScreen(fbo->GetTexID());
 }
 
 }
