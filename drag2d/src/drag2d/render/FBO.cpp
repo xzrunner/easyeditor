@@ -11,6 +11,12 @@
 namespace d2d
 {
 
+FBO::FBO()
+	: m_width(0)
+	, m_height(0)
+{
+}
+
 FBO::FBO(int width, int height)
 	: m_width(width)
 	, m_height(height)
@@ -21,6 +27,14 @@ FBO::FBO(int width, int height)
 FBO::~FBO()
 {
 	ReleaseFBO();
+}
+
+void FBO::ChangeSize(int width, int height)
+{
+	m_width = width;
+	m_height = height;
+	ReleaseFBO();
+	CreateFBO(width, height);
 }
 
 void FBO::DrawSprite(const ISprite* sprite, bool clear, float dx, float dy)
@@ -48,6 +62,10 @@ void FBO::ReadPixels(unsigned char* pixels, int width, int height) const
 
 void FBO::CreateFBO(int w, int h)
 {
+	if (w == 0 || h == 0) {
+		return;
+	}
+
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
 	GLuint tex;

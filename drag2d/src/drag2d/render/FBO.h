@@ -3,6 +3,8 @@
 
 #include <string>
 
+typedef unsigned int GLuint;
+
 namespace d2d
 {
 
@@ -12,8 +14,11 @@ class ISymbol;
 class FBO
 {
 public:
+	FBO();
 	FBO(int width, int height);
 	~FBO();
+
+	void ChangeSize(int width, int height);
 
 	void DrawSprite(const ISprite* sprite, bool clear = false,
 		float dx = 0, float dy = 0);
@@ -23,6 +28,9 @@ public:
 		float scale = 1.0f);
 
 	void ReadPixels(unsigned char* pixels, int width, int height) const;
+
+	GLuint GetTexID() const { return m_tex; }
+	GLuint GetFboID() const { return m_fbo; }
 
 private:
 	void CreateFBO(int w, int h);
@@ -38,7 +46,6 @@ private:
 private:
 	int m_width, m_height;
 
-	typedef unsigned int GLuint;
 	GLuint m_tex;
 	GLuint m_fbo;
 
