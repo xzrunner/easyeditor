@@ -65,7 +65,7 @@ bool PasteSymbolPhysicsRandomOP::onDraw() const
 		symbol = m_libraryPanel->getSymbol();
 	}
 	if (symbol && m_pos.isValid()) {
-		d2d::SpriteDraw::drawSprite(symbol, d2d::Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
+		d2d::SpriteRenderer::Instance()->Draw(symbol, d2d::Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
 	}
 
 	return false;

@@ -202,7 +202,7 @@ void ParticleSystem::draw(const d2d::Matrix& mt, Recorder* recorder)
 
 		d2d::Matrix _mt(mt);
 		_mt.translate(p->pos.x, p->pos.y);
-		d2d::SpriteDraw::drawSprite(p->pc->symbol, _mt, pos, p->angle, s, s, 0, 0, multi);
+		d2d::SpriteRenderer::Instance()->Draw(p->pc->symbol, _mt, pos, p->angle, s, s, 0, 0, multi);
 
 		if (p->m_bind_ps) {
 			d2d::Matrix _mt;

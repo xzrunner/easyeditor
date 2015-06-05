@@ -187,7 +187,7 @@ void ParticleSystem::Draw(const d2d::Matrix& mt)
 	Particle* p = m_start;
 	while (p != m_last) 
 	{
-		d2d::SpriteDraw::drawSprite(m_symbol, mt, p->position, 
+		d2d::SpriteRenderer::Instance()->Draw(m_symbol, mt, p->position, 
 			p->rotation, p->scale, p->scale, 0, 0, p->color);
 		++p;
 	}

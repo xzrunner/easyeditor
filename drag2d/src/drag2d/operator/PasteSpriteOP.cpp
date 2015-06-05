@@ -4,7 +4,7 @@
 #include "component/PasteSpriteCMPT.h"
 #include "view/MultiSpritesImpl.h"
 #include "render/GL10.h"
-#include "render/SpriteDraw.h"
+#include "render/SpriteRenderer.h"
 #include "view/GLCanvas.h"
 
 namespace d2d
@@ -211,7 +211,7 @@ draw(const Vector& pos, bool isHorMirror, bool isVerMirror) const
 
 			GL10::PushMatrix();
 			GL10::Translatef(x, y, 0.0f);
-			SpriteDraw::drawSprite(m_selected[i]);
+			SpriteRenderer::Instance()->Draw(m_selected[i]);
 			GL10::PopMatrix();
 		}
 	}

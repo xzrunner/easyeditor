@@ -106,7 +106,7 @@ void Symbol::draw(const d2d::Matrix& mt,
  	else
 	{
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
-			d2d::SpriteDraw::drawSprite(m_sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
+			d2d::SpriteRenderer::Instance()->Draw(m_sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
 
 		d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
 	}

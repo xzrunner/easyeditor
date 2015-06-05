@@ -29,7 +29,7 @@ void StageCanvas::onDraw()
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	}
 
 	if (m_stage->m_ps) {

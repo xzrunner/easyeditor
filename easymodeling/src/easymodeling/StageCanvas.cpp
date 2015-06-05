@@ -36,7 +36,7 @@ void StageCanvas::drawSprites()
 	editPanel->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
-		d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 		DrawUtils::drawBody(static_cast<libmodeling::Body*>(sprites[i]->getUserData()), DrawUtils::e_default);
 	}
 }

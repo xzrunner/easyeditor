@@ -4,7 +4,7 @@
 #include "dataset/ISymbol.h"
 #include "common/Exception.h"
 #include "common/Matrix.h"
-#include "render/SpriteDraw.h"
+#include "render/SpriteRenderer.h"
 
 #include <gl/glew.h>
 
@@ -14,12 +14,16 @@ namespace d2d
 FBO::FBO()
 	: m_width(0)
 	, m_height(0)
+	, m_tex(0)
+	, m_fbo(0)
 {
 }
 
 FBO::FBO(int width, int height)
 	: m_width(width)
 	, m_height(height)
+	, m_tex(0)
+	, m_fbo(0)
 {
 	CreateFBO(width, height);
 }
@@ -68,10 +72,11 @@ void FBO::CreateFBO(int w, int h)
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
-	GLuint tex;
+	GLuint tex = 0;
 	glGenTextures(1, &tex);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, tex);
+//	glBindTexture(GL_TEXTURE_2D, tex);
+	ShaderMgr::Instance()->SetTexture(tex);
 	m_tex = tex;
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
@@ -82,12 +87,13 @@ void FBO::CreateFBO(int w, int h)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLsizei)w, (GLsizei)h, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 	unsigned char* empty_data = new unsigned char[w*h*4];
 	if(!empty_data) return;
-	memset(empty_data, 0, w*h*4);
+	memset(empty_data, 0xaa, w*h*4);
 	glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, (GLsizei)w, (GLsizei)h, GL_RGBA, GL_UNSIGNED_BYTE, &empty_data[0]);
 	delete[] empty_data;
 
 	glGenFramebuffersEXT(1, &m_fbo);
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+//	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+	ShaderMgr::Instance()->SetFBO(m_fbo);
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0);
 
 	std::string msg;
@@ -96,8 +102,11 @@ void FBO::CreateFBO(int w, int h)
 		throw Exception(msg.c_str());
 	}
 
-	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
-	glBindTexture(GL_TEXTURE_2D, 0);
+	ShaderMgr::Instance()->SetTexture(0);
+	ShaderMgr::Instance()->SetFBO(0);
+
+// 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
+// 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void FBO::ReleaseFBO()
@@ -176,7 +185,7 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	float dx = -symbol->getSize().xCenter();
 	float dy = symbol->getSize().yCenter();
 	mt.translate(dx, dy);
-	SpriteDraw::drawSprite(symbol, mt, d2d::Vector(0, 0), 0.0f, scale, -scale);
+	SpriteRenderer::Instance()->Draw(symbol, mt, d2d::Vector(0, 0), 0.0f, scale, -scale);
 
 	// set fbo to force flush
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
@@ -202,7 +211,8 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 	Matrix mt;
 	mt.setScale(1, -1);
 	mt.translate(-dx, -dy);
-	SpriteDraw::drawSprite(sprite, mt);
+	SpriteRenderer::Instance()->Draw(sprite, mt, Colorf(1,1,1,1), Colorf(0,0,0,0), 
+		Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), false);
 
 	// set fbo to force flush
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。

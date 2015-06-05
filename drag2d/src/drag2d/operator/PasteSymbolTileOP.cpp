@@ -5,7 +5,7 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
 #include "view/GLCanvas.h"
-#include "render/SpriteDraw.h"
+#include "render/SpriteRenderer.h"
 
 namespace d2d
 {
@@ -144,10 +144,12 @@ bool PasteSymbolTileOP::onDraw() const
 	ISymbol* symbol = m_libraryPanel->getSymbol();
 	if (symbol && m_pos.isValid())
 	{
-		if (m_pScale)
-			SpriteDraw::drawSprite(symbol, Matrix(), m_pos, m_rotate, *m_pScale);
-		else
-			SpriteDraw::drawSprite(symbol, Matrix(), m_pos, m_rotate);
+		SpriteRenderer* rd = SpriteRenderer::Instance();
+		if (m_pScale) {
+			rd->Draw(symbol, Matrix(), m_pos, m_rotate, *m_pScale);
+		} else {
+			rd->Draw(symbol, Matrix(), m_pos, m_rotate);
+		}
 	}
 
 	return false;

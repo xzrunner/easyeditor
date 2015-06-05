@@ -69,7 +69,7 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 	else
 	{
 		grass->setTransform(p, 0);
-		d2d::SpriteDraw::drawSprite(grass);
+		d2d::SpriteRenderer::Instance()->Draw(grass);
 	}
 }
 
@@ -110,7 +110,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 				d2d::Vector pos;
 				m_stage->TransGridPosToCoords(row + i - center, col + j - center, pos);
 				m_grid->setTransform(pos, m_grid->getAngle());
-				d2d::SpriteDraw::drawSprite(m_grid, d2d::Matrix(), color);
+				d2d::SpriteRenderer::Instance()->Draw(m_grid, d2d::Matrix(), color);
 			}
 		}
 	}
@@ -125,31 +125,33 @@ void SymbolRender::DrawArrow(const d2d::ISymbol& symbol,
 	}
 	int r = (info->size >> 1) + 2;
 
+	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
+
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 	// left
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row, col - r, pos);
-		d2d::SpriteDraw::drawSprite(m_arrow_down, d2d::Matrix(), pos, 0, -1);
+		rd->Draw(m_arrow_down, d2d::Matrix(), pos, 0, -1);
 	}
 	// right
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row, col + r, pos);
-		d2d::SpriteDraw::drawSprite(m_arrow_right, d2d::Matrix(), pos);
+		rd->Draw(m_arrow_right, d2d::Matrix(), pos);
 	}
 	// up
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row + r, col, pos);
-		d2d::SpriteDraw::drawSprite(m_arrow_right, d2d::Matrix(), pos, 0, -1);
+		rd->Draw(m_arrow_right, d2d::Matrix(), pos, 0, -1);
 	}
 	// down
 	{
 		d2d::Vector pos;
 		m_stage->TransGridPosToCoords(row - r, col, pos);
-		d2d::SpriteDraw::drawSprite(m_arrow_down, d2d::Matrix(), pos);
+		rd->Draw(m_arrow_down, d2d::Matrix(), pos);
 	}
 }
 
@@ -167,10 +169,11 @@ void SymbolRender::DrawRegion(const d2d::ISymbol& symbol, const d2d::Vector& pos
 	}
 
 	float s = (float)(max_reg) / m_region_size;
-	d2d::SpriteDraw::drawSprite(m_region, d2d::Matrix(), pos, 0, s, s, 0, 0, d2d::Colorf(1, 0, 0));
+	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
+	rd->Draw(m_region, d2d::Matrix(), pos, 0, s, s, 0, 0, d2d::Colorf(1, 0, 0));
 	if (min_reg != 0) {
 		float s = (float)(min_reg) / m_region_size;
-		d2d::SpriteDraw::drawSprite(m_region, d2d::Matrix(), pos, 0, s, s);
+		rd->Draw(m_region, d2d::Matrix(), pos, 0, s, s);
 	}
 }
 

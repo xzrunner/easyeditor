@@ -58,7 +58,7 @@ void StageCanvas::onDraw()
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteDraw::drawSprite(sprite);
+		d2d::SpriteRenderer::Instance()->Draw(sprite);
 	}
 
 	d2d::PrimitiveDraw::rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
@@ -87,7 +87,7 @@ void StageCanvas::onDraw()
 void StageCanvas::drawBackground() const
 {
 	if (m_background) {
-		d2d::SpriteDraw::drawSprite(m_background);
+		d2d::SpriteRenderer::Instance()->Draw(m_background);
 	}
 
 	if (Settings::bVisibleBGRect) {

@@ -66,7 +66,7 @@ void PreviewCanvas::drawStageData()
 	getCurrSprites(sprites);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		sprites[i]->Release();

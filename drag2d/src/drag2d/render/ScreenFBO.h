@@ -9,10 +9,8 @@ namespace d2d
 class ScreenFBO
 {
 public:
-	void ChangeSize(int width, int height);
-
-	GLuint GetTexID() const;
-	GLuint GetFboID() const;
+	const FBO& GetFBO() const { return m_fbo; }
+	FBO& GetFBO() { return m_fbo; }
 
 	static ScreenFBO* Instance();
 

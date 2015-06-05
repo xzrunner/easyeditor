@@ -4,7 +4,7 @@
 #include "view/LibraryPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/GLCanvas.h"
-#include "render/SpriteDraw.h"
+#include "render/SpriteRenderer.h"
 
 namespace d2d
 {
@@ -60,7 +60,7 @@ bool PasteSymbolRandomOP::onDraw() const
 		symbol = m_libraryPanel->getSymbol();
 	}
 	if (symbol && m_pos.isValid()) {
-		SpriteDraw::drawSprite(symbol, Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
+		SpriteRenderer::Instance()->Draw(symbol, Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);
 	}
 
 	return false;

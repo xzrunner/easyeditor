@@ -32,6 +32,9 @@ public:
 	GLuint GetTexID() const { return m_tex; }
 	GLuint GetFboID() const { return m_fbo; }
 
+	int GetWidth() const { return m_width; }
+	int GetHeight() const { return m_height; }
+
 private:
 	void CreateFBO(int w, int h);
 	void ReleaseFBO();

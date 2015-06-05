@@ -26,6 +26,7 @@ private:
 
 	typedef int GLint;
 	GLint m_mode_id;
+	GLint m_sampler0, m_sampler1;
 
 }; // BlendShader
 

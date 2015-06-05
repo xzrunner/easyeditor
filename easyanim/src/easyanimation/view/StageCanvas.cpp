@@ -28,7 +28,7 @@ void StageCanvas::onDraw()
 	std::vector<d2d::ISprite*> sprites;
 	static_cast<StagePanel*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
-		d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	m_stage->drawEditTemp();
 
 #ifdef _DEBUG 
@@ -41,7 +41,7 @@ void StageCanvas::onDraw()
 void StageCanvas::drawbackground() const
 {
 	if (m_background) {
-		d2d::SpriteDraw::drawSprite(m_background);
+		d2d::SpriteRenderer::Instance()->Draw(m_background);
 	}
 
 	float xedge = GetSize().GetWidth() * 0.5f;

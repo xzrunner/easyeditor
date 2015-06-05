@@ -38,7 +38,7 @@ void StageCanvas::onDraw()
 	{
 		d2d::Matrix mat(m_edited->GetTransInvMatrix());
 		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
-			d2d::SpriteDraw::drawSprite(m_bg_sprites[i], mat);
+			d2d::SpriteRenderer::Instance()->Draw(m_bg_sprites[i], mat);
 		}
 	}
 

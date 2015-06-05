@@ -69,7 +69,7 @@ bool ResizeBaseOP::onDraw() const
 {
 	if (d2d::ZoomViewOP::onDraw()) return true;
 
-	d2d::SpriteDraw::drawSprite(m_symbol);
+	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
 
 	const float hw = m_symbol->getSize().xLength() * 0.5f,
 		hh = m_symbol->getSize().yLength() * 0.5f;

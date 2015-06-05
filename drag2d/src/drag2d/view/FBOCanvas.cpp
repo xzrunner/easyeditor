@@ -14,13 +14,12 @@ FBOCanvas::FBOCanvas(EditPanel* stage)
 
 void FBOCanvas::OnSize(int w, int h)
 {
-	ScreenFBO::Instance()->ChangeSize(w, h);
+	ScreenFBO::Instance()->GetFBO().ChangeSize(w, h);
 }
 
 void FBOCanvas::OnDrawWhole() const
 {
-	ScreenFBO* fbo = ScreenFBO::Instance();
-
+	const FBO& fbo = ScreenFBO::Instance()->GetFBO();
 	ShaderMgr* mgr = ShaderMgr::Instance();
 
 //	glClearColor(0.8f, 0.8f, 0.8f, 1);
@@ -30,11 +29,11 @@ void FBOCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
-	mgr->sprite();
-	BlendShader* shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
- 	shader->SetBaseTexID(fbo->GetTexID());
-// 	shader->SetBlendMode("exclusion");
-	mgr->SetFBO(fbo->GetFboID());
+ 	mgr->sprite();
+// 	BlendShader* shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
+//  	shader->SetBaseTexID(fbo->GetTexID());
+// // 	shader->SetBlendMode("exclusion");
+ 	mgr->SetFBO(fbo.GetFboID());
 
 	glClearColor(0.8f, 0.8f, 0.8f, 1);
 //	glClearColor(0, 0, 0, 1);
@@ -50,7 +49,7 @@ void FBOCanvas::OnDrawWhole() const
 	mgr->SetTexture(0);
 
 	mgr->Screen();
-	mgr->DrawScreen(fbo->GetTexID());
+	mgr->DrawScreen(fbo.GetTexID());
 }
 
 }

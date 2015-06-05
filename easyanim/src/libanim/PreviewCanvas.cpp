@@ -24,7 +24,7 @@ void PreviewCanvas::initGL()
 
 void PreviewCanvas::onDraw()
 {
-	d2d::SpriteDraw::drawSprite(m_symbol);
+	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
 }
 
 void PreviewCanvas::OnTimer()

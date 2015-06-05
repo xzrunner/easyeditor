@@ -158,7 +158,7 @@
 #include "render/DrawShapesVisitor.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/DrawSpritesVisitor.h"
-#include "render/SpriteDraw.h"
+#include "render/SpriteRenderer.h"
 #include "render/SpriteBatch.h"
 #include "render/style_config.h"
 #include "render/ShaderMgr.h"

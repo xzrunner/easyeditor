@@ -218,7 +218,7 @@ void Scale9Data::DrawScale9(Scale9Type type,
 		for (size_t i = 0; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
+				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
 			}
 		}
 		break;
@@ -227,27 +227,27 @@ void Scale9Data::DrawScale9(Scale9Type type,
 			for (size_t j = 0; j < 3; ++j) {
 				if (i == 1 && j == 1) continue;
 				if (!sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
+				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
 			}
 		}
 		break;
 	case e_3GridHor:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[1][i]) continue;
-			d2d::SpriteDraw::drawSprite(sprites[1][i], mt, mul, add, r_trans, g_trans, b_trans);
+			d2d::SpriteRenderer::Instance()->Draw(sprites[1][i], mt, mul, add, r_trans, g_trans, b_trans);
 		}
 		break;
 	case e_3GridVer:
 		for (size_t i = 0; i < 3; ++i) {
 			if (!sprites[i][1]) continue;
-			d2d::SpriteDraw::drawSprite(sprites[i][1], mt, mul, add, r_trans, g_trans, b_trans);
+			d2d::SpriteRenderer::Instance()->Draw(sprites[i][1], mt, mul, add, r_trans, g_trans, b_trans);
 		}
 		break;
 	case e_6GridUpper:
 		for (size_t i = 1; i < 3; ++i) {
 			for (size_t j = 0; j < 3; ++j) {
 				if (!sprites[i][j]) continue;
-				d2d::SpriteDraw::drawSprite(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
+				d2d::SpriteRenderer::Instance()->Draw(sprites[i][j], mt, mul, add, r_trans, g_trans, b_trans);
 			}
 		}
 		break;

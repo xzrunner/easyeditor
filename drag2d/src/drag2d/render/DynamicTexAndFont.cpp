@@ -5,7 +5,7 @@
 #include "dataset/TPNode.h"
 #include "dataset/ISymbol.h"
 #include "render/ShaderMgr.h"
-#include "render/SpriteDraw.h"
+#include "render/SpriteRenderer.h"
 
 #include <gl/GL.h>
 
@@ -183,7 +183,7 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 	float dx = -m_width*0.5f - symbol.getSize().xCenter();
 	float dy = -m_height*0.5f - symbol.getSize().yCenter();
 	mt.translate(dx, dy);
-	SpriteDraw::drawSprite(&symbol, mt, pos, angle);
+	SpriteRenderer::Instance()->Draw(&symbol, mt, pos, angle);
 
 	glDisable(GL_SCISSOR_TEST);
 

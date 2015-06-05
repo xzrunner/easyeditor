@@ -81,7 +81,7 @@ void StageCanvas::onDraw()
 void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
-		d2d::SpriteDraw::drawSprite(m_background);
+		d2d::SpriteRenderer::Instance()->Draw(m_background);
 	}
 }
 
@@ -142,6 +142,8 @@ void StageCanvas::DrawGrids() const
 
 void StageCanvas::DrawSprites() const
 {
+	d2d::SpriteRenderer* rd = d2d::SpriteRenderer::Instance();
+
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	std::sort(sprites.begin(), sprites.end(), d2d::SpriteCmp(d2d::SpriteCmp::e_y_invert));
@@ -153,20 +155,20 @@ void StageCanvas::DrawSprites() const
 			{
 				if (info->wall_type == 0) {
 					d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 4);
-					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
 				} else if (info->wall_type == 1) {
 					d2d::Vector pos = sprite->getPosition() + d2d::Vector(-10, 8);
-					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
 				} else if (info->wall_type == 2) {
 					d2d::Vector pos = sprite->getPosition() + d2d::Vector(10, 8);
-					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
 				} else if (info->wall_type == 3) {
 					d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 6);
-					d2d::SpriteDraw::drawSprite(&sprite->getSymbol(), d2d::Matrix(), pos);
+					rd->Draw(&sprite->getSymbol(), d2d::Matrix(), pos);
 				}
 			}
 		} else {
-			d2d::SpriteDraw::drawSprite(sprite);
+			rd->Draw(sprite);
 		}
 	}
 }

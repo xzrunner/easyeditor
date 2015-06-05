@@ -45,7 +45,7 @@ void PreviewCanvas::onDraw()
 		translate_mt.translate(pos.x, pos.y);
 		d2d::Matrix mt = translate_mt * (m_scale_mt * inv_mt);
 
-		d2d::SpriteDraw::drawSprite(sprite, mt, sprite->multiCol, sprite->addCol);
+		d2d::SpriteRenderer::Instance()->Draw(sprite, mt, sprite->multiCol, sprite->addCol);
 	}
 }
 

@@ -35,6 +35,9 @@ void BlendShader::SetBlendMode(const std::string& str)
 		Commit();
 		m_mode = mode;
 		glUniform1i(m_mode_id, GLint(m_mode));
+
+		glUniform1i(m_sampler0, 0);
+		glUniform1i(m_sampler1, 1);
 	}
 }
 
@@ -42,6 +45,8 @@ void BlendShader::BindAttrib(GLuint prog)
 {
 	SpriteShader::BindAttrib(prog);
 	m_mode_id = glGetUniformLocation(m_prog, "u_mode");
+	m_sampler0 = glGetUniformLocation(m_prog, "texture0");
+	m_sampler1 = glGetUniformLocation(m_prog, "texture1");
 }
 
 void BlendShader::LoadShader()
