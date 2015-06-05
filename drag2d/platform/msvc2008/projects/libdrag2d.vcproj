@@ -553,14 +553,6 @@
 		<Filter
 			Name="dataset"
 			>
-			<File
-				RelativePath="..\..\..\src\drag2d\dataset\Snapshoot.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\drag2d\dataset\Snapshoot.h"
-				>
-			</File>
 			<Filter
 				Name="primitive"
 				>
@@ -1288,6 +1280,26 @@
 						</File>
 					</Filter>
 				</Filter>
+			</Filter>
+			<Filter
+				Name="utility"
+				>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\FBO.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\FBO.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\Snapshoot.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\render\Snapshoot.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

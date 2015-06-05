@@ -68,7 +68,7 @@ void Snapshoot::Trigger(const std::string& srcdir, const std::string& dstdir) co
 			}
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			std::string filename = dstdir + "//" + name;
-			ss.outputToImageFile(symbol, filename);
+			ss.OutputToImageFile(symbol, filename);
 			symbol->Release();
 		}
 	}

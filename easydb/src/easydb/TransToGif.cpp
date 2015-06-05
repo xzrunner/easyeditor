@@ -76,7 +76,7 @@ void TransToGif::Trigger(const std::string& srcdir, const std::string& dstdir) c
 			for (int i = 0; i < max_frame; ++i)
 			{
 				anim->setFrameIndex(i + 1);
-				uint8_t* rgba = ss.outputToMemory(symbol, true);
+				uint8_t* rgba = ss.OutputToMemory(symbol, true);
 
 				uint8_t* rgb = eimage::RGBA2RGB(rgba, width, height, true);
 				saver.AddFrame(rgb, 1.0f / anim->getFPS());

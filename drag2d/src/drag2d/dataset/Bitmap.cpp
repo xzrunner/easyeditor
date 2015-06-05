@@ -2,11 +2,11 @@
 #include "Image.h"
 #include "ISymbol.h"
 #include "SymbolMgr.h"
-#include "Snapshoot.h"
 
 #include "common/FileNameParser.h"
 #include "common/Exception.h"
 #include "common/TodoConfig.h"
+#include "render/Snapshoot.h"
 
 #include <gl/gl.h>
 #include <wx/filename.h>
@@ -64,7 +64,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
  		}
 
 		d2d::Snapshoot ss(w, h);
-		unsigned char* rgba = ss.outputToMemory(symbol, true);
+		unsigned char* rgba = ss.OutputToMemory(symbol, true);
 		unsigned char* rgb = transRGBA2RGB(rgba, w, h);
 		delete[] rgba;
 

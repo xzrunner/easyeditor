@@ -31,7 +31,6 @@
 #include "dataset/BVFactory.h"
 #include "dataset/ImageLoader.h"
 #include "dataset/ImageSaver.h"
-#include "dataset/Snapshoot.h"
 #include "dataset/Font.h"
 #include "dataset/AnimatedGifSaver.h"
 #include "dataset/Layer.h"
@@ -169,3 +168,4 @@
 #include "render/IShader.h"
 #include "render/LabelNew.h"
 #include "render/SpriteShader.h"
+#include "render/Snapshoot.h"

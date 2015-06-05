@@ -158,7 +158,7 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 	for (int i = 0; i < max_frame; ++i)
 	{
 		anim->setFrameIndex(i + 1);
-		uint8_t* rgba = ss.outputToMemory(symbol, true);
+		uint8_t* rgba = ss.OutputToMemory(symbol, true);
 
 		uint8_t* rgb = eimage::RGBA2RGB(rgba, width, height, true);
 		saver.AddFrame(rgb, 1.0f / anim->getFPS());
@@ -179,7 +179,7 @@ void FileIO::storeAsPng(const wxString& src, const wxString& dst)
 
 	d2d::Snapshoot ss;
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
-	ss.outputToImageFile(symbol, dst.ToStdString());
+	ss.OutputToImageFile(symbol, dst.ToStdString());
 	symbol->Release();
 }
 

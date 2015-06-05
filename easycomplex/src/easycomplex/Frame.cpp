@@ -182,7 +182,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	d2d::Snapshoot ss;
 	Symbol* symbol = ((StagePanel*)(m_task->getEditPanel()))->getSymbol();
 	symbol->InitBounding();
-	ss.outputToImageFile(symbol, filepath);
+	ss.OutputToImageFile(symbol, filepath);
 	m_task->getEditPanel()->getCanvas()->resetInitState();
 }
 

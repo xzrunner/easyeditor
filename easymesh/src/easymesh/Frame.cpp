@@ -31,7 +31,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 			{
 				d2d::Snapshoot ss;
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(m_currFilename);
-				ss.outputToImageFile(symbol, filename.ToStdString());
+				ss.OutputToImageFile(symbol, filename.ToStdString());
 				symbol->Release();
 			}
 			else
