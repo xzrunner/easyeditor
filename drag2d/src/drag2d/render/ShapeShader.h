@@ -31,9 +31,6 @@ public:
 	void SetColor(const Colorf& col);
 	const Colorf& GetColor() const { return m_color; }
 
-protected:
-	virtual void BindAttrib(GLuint prog) {}
-
 private:
 	GLuint m_model_view, m_projection;
 

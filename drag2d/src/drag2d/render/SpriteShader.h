@@ -46,7 +46,7 @@ public:
 	void Draw(const Vector vertices[4], const Vector texcoords[4], int texid);
 
 protected:
-	virtual void BindAttrib(GLuint prog);
+	virtual void BindAttribLocation(GLuint prog);
 
 	virtual void LoadShader();
 

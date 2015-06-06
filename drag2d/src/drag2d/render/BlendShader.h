@@ -17,7 +17,7 @@ public:
 	void SetBlendMode(const std::string& mode);
 	
 protected:
-	virtual void BindAttrib(GLuint prog);
+	virtual void GetUniformLocation(GLuint prog);
 
 	virtual void LoadShader();
 

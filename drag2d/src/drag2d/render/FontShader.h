@@ -21,9 +21,6 @@ public:
 
 	virtual void Commit() {}
 
-protected:
-	virtual void BindAttrib(GLuint prog) {}
-
 }; // FontShader
 
 }

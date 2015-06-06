@@ -37,7 +37,7 @@ void IShader::InitShader(const char* VS, const char* FS)
 		glAttachShader(prog, fs);
 	}
 
-//	BindAttrib(prog);
+	BindAttribLocation(prog);
 
 	// link
 	GLint status;
@@ -58,7 +58,7 @@ void IShader::InitShader(const char* VS, const char* FS)
 
 	m_prog = prog;
 
-	BindAttrib(prog);
+	GetUniformLocation(prog);
 }
 
 void IShader::DeleteShader()

@@ -38,6 +38,8 @@ protected:
 	virtual void OnDrawSprites() const = 0;
 	//virtual void OnDrawDC() const {}
 
+	bool IsInited() const { return m_inited; }
+
 private:
 	void OnSize(wxSizeEvent& event);
 	void OnPaint(wxPaintEvent& event);

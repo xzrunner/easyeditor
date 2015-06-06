@@ -27,7 +27,8 @@ public:
 	GLuint GetProgram() const { return m_prog; }
 
 protected:
-	virtual void BindAttrib(GLuint prog) = 0;
+	virtual void BindAttribLocation(GLuint prog) {}
+	virtual void GetUniformLocation(GLuint prog) {}
 
 	void InitShader(const char* VS, const char* FS);
 	void DeleteShader();

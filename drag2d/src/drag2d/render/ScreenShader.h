@@ -24,9 +24,6 @@ public:
 
 	void Draw(int texid) const;
 
-protected:
-	virtual void BindAttrib(GLuint prog) {}
-
 private:
 	
 

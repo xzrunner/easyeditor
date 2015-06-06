@@ -283,7 +283,7 @@ void SpriteShader::Draw(const Vector vertices[4], const Vector texcoords[4], int
 	Draw(vb, texid);
 }
 
-void SpriteShader::BindAttrib(GLuint prog)
+void SpriteShader::BindAttribLocation(GLuint prog)
 {
   	glBindAttribLocation(prog, ATTRIB_VERTEX, "position");
   	glBindAttribLocation(prog, ATTRIB_TEXTCOORD, "texcoord");
