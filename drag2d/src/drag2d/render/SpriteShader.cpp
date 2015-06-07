@@ -184,6 +184,7 @@ void SpriteShader::SetTexID(int tex)
 		Commit();
 		m_tex = (GLuint)tex;
 
+		glActiveTexture(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, m_tex);
 	}
 }

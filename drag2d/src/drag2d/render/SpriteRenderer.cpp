@@ -15,7 +15,7 @@ namespace d2d
 SpriteRenderer* SpriteRenderer::m_instance = NULL;
 
 SpriteRenderer::SpriteRenderer()
-	: m_fbo(400, 400)
+	: m_fbo(600, 600)
 {
 }
 
@@ -38,10 +38,12 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		FBO& scr_fbo = ScreenFBO::Instance()->GetFBO();
  
  		// 1. draw spr to tmp
+		mgr->Commit();
+
  		mgr->sprite();
  		mgr->SetFBO(m_fbo.GetFboID());
  
- 		glClearColor(1, 1, 0, 0);
+ 		glClearColor(1, 0, 0, 1);
  		glClear(GL_COLOR_BUFFER_BIT);
  
  		Vector offset;
@@ -50,46 +52,45 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 
  		mgr->SetModelView(Vector(0, 0), 1);
 		mgr->SetProjection(m_fbo.GetWidth(), m_fbo.GetHeight());
+		glViewport(0, 0, m_fbo.GetWidth(), m_fbo.GetHeight());
 
  		static_cast<BlendShader*>(mgr->GetSpriteShader())->SetBaseTexID(scr_fbo.GetTexID());
-		DrawImpl(sprite, Matrix(), mul, add, r_trans, g_trans, b_trans);
+		Draw(&sprite->getSymbol());
+		sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
+			Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
+ 
+		mgr->Commit();
  
  		mgr->SetModelView(offset, scale);
  		mgr->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
+		glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
 
  		// 2. draw tmp to screen fbo
  		mgr->sprite();
- 		mgr->SetFBO(scr_fbo.GetFboID());
- 
- 		Vector c = Math::transVector(sprite->getPosition(), mt);
- 		const d2d::Rect& r = sprite->GetRect();
- 		float xmin = r.xMin + c.x,
- 			xmax = r.xMax + c.x;
- 		float ymin = r.yMin + c.y,
- 			ymax = r.yMax + c.y;
+//		mgr->SetFBO(0);
+		mgr->SetFBO(scr_fbo.GetFboID());
+
+ 		const d2d::Rect& r_dst = sprite->GetRect();
+		float xmin = r_dst.xMin, xmax = r_dst.xMax;
+		float ymin = r_dst.yMin, ymax = r_dst.yMax;
  		const float VERTICES[] = { xmin, ymin, xmin, ymax, xmax, ymax, xmax, ymin };
  
-		float txmin = r.xMin / m_fbo.GetWidth() + 0.5f,
-			txmax = r.xMax / m_fbo.GetWidth() + 0.5f;
-		float tymin = r.yMin / m_fbo.GetHeight() + 0.5f,
-			tymax = r.yMax / m_fbo.GetHeight() + 0.5f;
+		d2d::Rect r_src = sprite->getSymbol().getSize();
+		float txmin = r_src.xMin / m_fbo.GetWidth() + 0.5f,
+			txmax = r_src.xMax / m_fbo.GetWidth() + 0.5f;
+		float tymin = r_src.yMin / m_fbo.GetHeight() + 0.5f,
+			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
  		const float TEXCOORDS[] = { txmin, tymin, txmin, tymax, txmax, tymax, txmax, tymin };
  		
- 		//////////////////////////////////////////////////////////////////////////
- 
- 		mgr->SetTexture(m_fbo.GetTexID());
- //		glBindTexture(GL_TEXTURE_2D, m_fbo.GetTexID());
- 
- 		glEnableClientState(GL_VERTEX_ARRAY);
- 		glVertexPointer(2, GL_FLOAT, 0, (const GLvoid*)VERTICES);
- 
- 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
- 		glTexCoordPointer(2, GL_FLOAT, 0, (const GLvoid*)TEXCOORDS);
- 
- 		glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
- 
- 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
- 		glDisableClientState(GL_VERTEX_ARRAY);
+		const float vertices[] = { 
+			xmin, ymin, txmin, tymin,
+			xmin, ymax, txmin, tymax, 
+			xmax, ymax, txmax, tymax,
+			xmax, ymin, txmax, tymin };
+
+		mgr->Draw(vertices, m_fbo.GetTexID());
+
+		mgr->Commit();
 	}
 }
 
