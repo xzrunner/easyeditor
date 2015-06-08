@@ -48,6 +48,8 @@ private:
 	void OnItemRClick(wxTreeEvent& event);
 	void OnItemMenu(wxTreeEvent& event);
 	void OnItemActivated(wxTreeEvent& event);
+	void OnBeginDrag(wxTreeEvent& event);
+	void OnEndDrag(wxTreeEvent& event);
 
 	// menu
 	void OnMenuAddSprites(wxCommandEvent& event);
@@ -75,6 +77,7 @@ private:
 
 	wxTreeItemId m_root;
 	wxTreeItemId m_on_menu_id;
+	wxTreeItemId m_dragged_item;
 
 	DECLARE_EVENT_TABLE()
 

@@ -17,6 +17,8 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 	EVT_TREE_ITEM_RIGHT_CLICK(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnItemRClick)
 	EVT_TREE_ITEM_MENU(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnItemMenu)
 	EVT_TREE_ITEM_ACTIVATED(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnItemActivated)
+	EVT_TREE_BEGIN_DRAG(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnBeginDrag)
+	EVT_TREE_END_DRAG(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnEndDrag)
 END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
@@ -164,6 +166,35 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
 	selection->Clear();
 	Traverse(id, GroupTreeImpl::SelectVisitor(this, selection));
+}
+
+void GroupTreeCtrl::OnBeginDrag(wxTreeEvent& event)
+{
+	m_dragged_item = event.GetItem();
+	event.Allow();
+}
+
+void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
+{
+	wxTreeItemId item_src = m_dragged_item,
+		item_dst = event.GetItem();
+	if (!item_dst.IsOk()) {
+		return;
+	}
+
+	wxLogDebug("Drag from %s to %s", GetItemText(item_src), GetItemText(item_dst));
+
+	// new node
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(item_src);
+	std::string name = 	GetItemText(item_src);
+	// insert
+	if (ItemHasChildren(item_dst)) {
+		AppendItem(item_dst, name, -1, -1, data);
+	} else {
+		InsertItem(GetItemParent(item_dst), item_dst, name, -1, -1, data);
+	}
+	// remove
+	Delete(item_src);
 }
 
 void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
