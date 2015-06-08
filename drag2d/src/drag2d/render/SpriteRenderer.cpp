@@ -43,7 +43,7 @@ void SpriteRenderer::Draw(const ISprite* sprite,
  		mgr->sprite();
  		mgr->SetFBO(m_fbo.GetFboID());
  
- 		glClearColor(1, 0, 0, 1);
+ 		glClearColor(0, 0, 0, 1);
  		glClear(GL_COLOR_BUFFER_BIT);
  
  		Vector offset;
@@ -54,11 +54,21 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		mgr->SetProjection(m_fbo.GetWidth(), m_fbo.GetHeight());
 		glViewport(0, 0, m_fbo.GetWidth(), m_fbo.GetHeight());
 
- 		static_cast<BlendShader*>(mgr->GetSpriteShader())->SetBaseTexID(scr_fbo.GetTexID());
-		Draw(&sprite->getSymbol());
+		BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
+ 		blend_shader->SetBaseTexID(scr_fbo.GetTexID());
+
+		//float tbxmin = 0.4,
+		//	tbxmax = 0.6;
+		//float tbymin = 0.4,
+		//	tbymax = 0.6;
+		//const float TEXCOORDS_BASE[] = { tbxmin, tbymin, tbxmin, tbymax, tbxmax, tbymax, tbxmax, tbymin };
+		//blend_shader->SetBaseTexCoords(TEXCOORDS_BASE);
+//		Draw(&sprite->getSymbol());
+
+		
 		sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
 			Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
- 
+
 		mgr->Commit();
  
  		mgr->SetModelView(offset, scale);
@@ -67,28 +77,36 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 
  		// 2. draw tmp to screen fbo
  		mgr->sprite();
-//		mgr->SetFBO(0);
+		mgr->SetFBO(0);
 		mgr->SetFBO(scr_fbo.GetFboID());
 
  		const d2d::Rect& r_dst = sprite->GetRect();
 		float xmin = r_dst.xMin, xmax = r_dst.xMax;
 		float ymin = r_dst.yMin, ymax = r_dst.yMax;
+
  		const float VERTICES[] = { xmin, ymin, xmin, ymax, xmax, ymax, xmax, ymin };
  
 		d2d::Rect r_src = sprite->getSymbol().getSize();
-		float txmin = r_src.xMin / m_fbo.GetWidth() + 0.5f,
-			txmax = r_src.xMax / m_fbo.GetWidth() + 0.5f;
-		float tymin = r_src.yMin / m_fbo.GetHeight() + 0.5f,
-			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
- 		const float TEXCOORDS[] = { txmin, tymin, txmin, tymax, txmax, tymax, txmax, tymin };
- 		
-		const float vertices[] = { 
-			xmin, ymin, txmin, tymin,
-			xmin, ymax, txmin, tymax, 
-			xmax, ymax, txmax, tymax,
-			xmax, ymin, txmax, tymin };
+ 		float txmin = r_src.xMin / m_fbo.GetWidth() + 0.5f,
+ 			txmax = r_src.xMax / m_fbo.GetWidth() + 0.5f;
+ 		float tymin = r_src.yMin / m_fbo.GetHeight() + 0.5f,
+ 			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
+// 		const float TEXCOORDS[] = { txmin, tymin, txmin, tymax, txmax, tymax, txmax, tymin };
+		const float TEXCOORDS[] = { txmin, tymin, txmin, tymax, txmax, tymax, txmax, tymin };
 
-		mgr->Draw(vertices, m_fbo.GetTexID());
+//  		const float vertices[] = { 
+//  			xmin, ymin, txmin, tymin,
+//  			xmin, ymax, txmin, tymax,
+//  			xmax, ymax, txmax, tymax,
+//  			xmax, ymin, txmax, tymin };
+// 		mgr->Draw(vertices, m_fbo.GetTexID());
+
+ 		const float vertices[] = { 
+ 			xmin, ymin, txmin, tymin, txmin, tymin,
+ 			xmin, ymax, txmin, tymax, txmin, tymax,
+ 			xmax, ymax, txmax, tymax, txmax, tymax,
+ 			xmax, ymin, txmax, tymin, txmax, tymin };
+		blend_shader->DrawBlend(vertices, m_fbo.GetTexID());
 
 		mgr->Commit();
 	}

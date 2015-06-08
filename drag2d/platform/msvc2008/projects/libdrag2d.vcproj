@@ -1266,6 +1266,10 @@
 							RelativePath="..\..\..\src\drag2d\render\BlendShader.h"
 							>
 						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\BlendShader.vert"
+							>
+						</File>
 					</Filter>
 					<Filter
 						Name="screen"

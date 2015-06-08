@@ -50,22 +50,28 @@ protected:
 
 	virtual void LoadShader();
 
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
 private:
 	void InitBuffers();
 
 	void CopyVertex(const float vb[16]);
 
-private:
-	GLuint m_model_view, m_projection;
-
-	GLuint m_vertex_buffer;
-	GLuint m_index_buffer;
+protected:
+	int m_vertex_size;
+	int m_max_commbine;
 
 	int m_count;
 	float* m_vb;
 
 	uint32_t m_color, m_additive;
 	uint32_t m_r_trans, m_g_trans, m_b_trans;
+
+private:
+	GLuint m_model_view, m_projection;
+
+	GLuint m_vertex_buffer;
+	GLuint m_index_buffer;
 
 	GLuint m_tex;
 	GLuint m_fbo;

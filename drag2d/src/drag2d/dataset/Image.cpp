@@ -8,6 +8,7 @@
 //#include "render/DynamicTexture.h"
 #include "render/DynamicTexAndFont.h"
 #include "render/RenderList.h"
+#include "render/BlendShader.h"
 #include "common/tools.h"
 #include "common/Exception.h"
 #include "common/Math.h"
@@ -242,7 +243,12 @@ void Image::draw(const Matrix& mt, const Rect& r) const
 
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->sprite();
-	shader->Draw(vertices, texcoords, texid);
+
+	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(shader->GetSpriteShader())) {
+		blend_shader->DrawBlend(vertices, texcoords, texcoords, texid);
+	} else {
+		shader->Draw(vertices, texcoords, texid);
+	}
 }
 
 } // d2d

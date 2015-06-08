@@ -66,10 +66,11 @@ uniform sampler2D texture1;
 varying vec4 v_fragmentColor;
 varying vec4 v_fragmentAddi;
 varying vec2 v_texcoord;
+varying vec2 v_texcoord_base;
 
 void main()
 {
-	vec4 base = texture2D(texture1, v_texcoord);
+	vec4 base = texture2D(texture1, v_texcoord_base);
 	vec4 blend = texture2D(texture0, v_texcoord);
 	
 	vec3 result;
@@ -80,6 +81,9 @@ void main()
 	// darken modes
 	else if (u_mode == 10) {
 		result = BlendDarken(base.rgb, blend.rgb);
+		
+		result = base.rgb;
+		
 	} else if (u_mode == 11) {
 		result = BlendMultiply(base.rgb, blend.rgb);		
 	} else if (u_mode == 12) {
