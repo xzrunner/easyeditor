@@ -8,6 +8,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "dataset/SpriteTools.h"
+#include "view/Camera.h"
 
 namespace d2d
 {
@@ -105,9 +106,9 @@ int SpriteRenderer::GetScreenHeight() const
 
 void SpriteRenderer::DrawImplBlend(const ISprite* sprite) const
 {
-//	DrawUnderToTmp(sprite);
-	DrawSprToTmp(sprite);
-	DrawTmpToScreen(sprite);
+	DrawUnderToTmp(sprite);
+// 	DrawSprToTmp(sprite);
+// 	DrawTmpToScreen(sprite);
 }
 
 void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
@@ -120,17 +121,52 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 
 	mgr->SetBlendMode(BM_NORMAL);
 
-	glClearColor(0, 0, 0, 0);
+	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//		Rect src_rect = sprite->getSymbol().getSize();
+	// src 
+	Vector src[4];
+	Rect src_rect = sprite->GetRect();
+	int scr_w = scr_fbo.GetWidth(),
+		scr_h = scr_fbo.GetHeight();
+	src[0] = m_cam->transPosProjectToScreen(Vector(src_rect.xMin, src_rect.yMin), scr_w, scr_h);
+	src[1] = m_cam->transPosProjectToScreen(Vector(src_rect.xMax, src_rect.yMin), scr_w, scr_h);
+	src[2] = m_cam->transPosProjectToScreen(Vector(src_rect.xMax, src_rect.yMax), scr_w, scr_h);
+	src[3] = m_cam->transPosProjectToScreen(Vector(src_rect.xMin, src_rect.yMax), scr_w, scr_h);
+	for (int i = 0; i < 4; ++i) {
+		src[i].y = scr_h - 1 - src[i].y;
+		src[i].x /= scr_w;
+		src[i].y /= scr_h;
+		src[i].x = std::min(std::max(0.0f, src[i].x), 1.0f);
+		src[i].y = std::min(std::max(0.0f, src[i].y), 1.0f);
+	}
 
-	Rect spr_rect = sprite->GetRect();
-	Vector under_src[4];
-//	under_src[0] = 
+	// dst
+	Vector dst[4];
+	Rect dst_rect = sprite->getSymbol().getSize();
+	dst[0] = Vector(dst_rect.xMin, dst_rect.yMin);
+	dst[1] = Vector(dst_rect.xMax, dst_rect.yMin);
+	dst[2] = Vector(dst_rect.xMax, dst_rect.yMax);
+	dst[3] = Vector(dst_rect.xMin, dst_rect.yMax);
 
+	Vector offset;
+	float scale;
+	mgr->GetModelView(offset, scale);
+
+	mgr->SetModelView(Vector(0, 0), 1);
+	Rect r = sprite->getSymbol().getSize();
+	mgr->SetProjection(r.xLength(), r.yLength());
+	glViewport(0, 0, r.xLength(), r.yLength());
+
+	BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
+	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
+ 	blend_shader->DrawBlend(dst, src, src, scr_fbo.GetTexID());
 
 	mgr->Commit();
+
+	mgr->SetModelView(offset, scale);
+	mgr->SetProjection(scr_fbo.GetWidth(), scr_fbo.GetHeight());
+	glViewport(0, 0, scr_fbo.GetWidth(), scr_fbo.GetHeight());
 }
 
 void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
@@ -143,8 +179,8 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 
 	mgr->SetBlendMode(sprite->GetBlendMode());
 
-	glClearColor(0, 0, 0, 0);
-	glClear(GL_COLOR_BUFFER_BIT);
+// 	glClearColor(0, 0, 0, 0);
+// 	glClear(GL_COLOR_BUFFER_BIT);
 
 	Vector offset;
 	float scale;
