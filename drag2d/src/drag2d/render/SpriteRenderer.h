@@ -61,6 +61,12 @@ private:
   				  const Colorf& g_trans = Colorf(0, 1, 0, 0),
   				  const Colorf& b_trans = Colorf(0, 0, 1, 0)) const;
 
+	void DrawImplBlend(const ISprite* sprite) const;
+
+	void DrawUnderToTmp(const ISprite* sprite) const;
+	void DrawSprToTmp(const ISprite* sprite) const;
+	void DrawTmpToScreen(const ISprite* sprite) const;
+
 private:
 	mutable FBO m_fbo;
 
