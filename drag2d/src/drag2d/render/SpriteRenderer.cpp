@@ -41,7 +41,9 @@ void SpriteRenderer::Draw(const ISprite* sprite,
  		// 1. draw spr to tmp
  		mgr->sprite();
  		mgr->SetFBO(m_fbo.GetFboID());
- 
+
+		mgr->SetBlendMode(sprite->GetBlendMode());
+
  		glClearColor(0, 0, 0, 0);
  		glClear(GL_COLOR_BUFFER_BIT);
  
@@ -52,12 +54,14 @@ void SpriteRenderer::Draw(const ISprite* sprite,
  		mgr->SetModelView(Vector(0, 0), 1);
 // 		mgr->SetProjection(m_fbo.GetWidth(), m_fbo.GetHeight());
 // 		glViewport(0, 0, m_fbo.GetWidth(), m_fbo.GetHeight());
+
 		Rect r = sprite->getSymbol().getSize();
 		mgr->SetProjection(r.xLength(), r.yLength());
 		glViewport(0, 0, r.xLength(), r.yLength());
 
 		BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
- 		blend_shader->SetBaseTexID(scr_fbo.GetTexID());	
+ 		blend_shader->SetBaseTexID(scr_fbo.GetTexID());
+
 		sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
 			Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
 
@@ -69,8 +73,10 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 
  		// 2. draw tmp to screen fbo
  		mgr->sprite();
-//		mgr->SetFBO(0);
+		mgr->SetFBO(0);
 		mgr->SetFBO(scr_fbo.GetFboID());
+
+		mgr->SetBlendMode(BM_NORMAL);
 
  		const d2d::Rect& r_dst = sprite->GetRect();
 		float xmin = r_dst.xMin, xmax = r_dst.xMax;
@@ -84,7 +90,6 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		float txmin = 0, txmax = r_src.xLength() / m_fbo.GetWidth();
 		float tymin = 0, tymax = r_src.yLength() / m_fbo.GetHeight();
 
-		blend_shader->SetBlendMode(BlendModes::Instance()->GetNameENFromID(BM_NORMAL));
  		const float vertices[] = { 
  			xmin, ymin, txmin, tymin, txmin, tymin,
  			xmin, ymax, txmin, tymax, txmin, tymax,

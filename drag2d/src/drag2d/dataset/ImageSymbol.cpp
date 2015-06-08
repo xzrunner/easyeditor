@@ -51,11 +51,7 @@ void ImageSymbol::draw(const Matrix& mt,
 {
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetSpriteColor(mul, add);
-	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);
-	if (sprite) {
-		shader->SetBlendMode(sprite->GetBlendMode());
-	}
-	
+	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);	
 	m_image->draw(mt, m_region, sprite);
 }
 
