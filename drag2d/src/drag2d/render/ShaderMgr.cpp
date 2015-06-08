@@ -30,8 +30,8 @@ ShaderMgr::ShaderMgr()
 	m_shape_shader = new ShapeShader;
 	m_shaders.push_back(m_shape_shader);
 
-// 	m_sprite_shader = new SpriteShader;
-	m_sprite_shader = new BlendShader;
+ 	m_sprite_shader = new SpriteShader;
+//	m_sprite_shader = new BlendShader;
  	m_shaders.push_back(m_sprite_shader);
 
 	m_font_shader = new FontShader;
