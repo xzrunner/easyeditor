@@ -94,21 +94,11 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 	SpriteTools::DrawName(sprite, t);
 }
 
-int SpriteRenderer::GetScreenWidth() const
-{
-	return m_fbo.GetWidth();
-}
-
-int SpriteRenderer::GetScreenHeight() const
-{
-	return m_fbo.GetHeight();
-}
-
 void SpriteRenderer::DrawImplBlend(const ISprite* sprite) const
 {
-	DrawUnderToTmp(sprite);
-// 	DrawSprToTmp(sprite);
-// 	DrawTmpToScreen(sprite);
+//	DrawUnderToTmp(sprite);
+ 	DrawSprToTmp(sprite);
+ 	DrawTmpToScreen(sprite);
 }
 
 void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
@@ -179,23 +169,21 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 
 	mgr->SetBlendMode(sprite->GetBlendMode());
 
-// 	glClearColor(0, 0, 0, 0);
-// 	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	Vector offset;
 	float scale;
 	mgr->GetModelView(offset, scale);
 
 	mgr->SetModelView(Vector(0, 0), 1);
-	// 		mgr->SetProjection(m_fbo.GetWidth(), m_fbo.GetHeight());
-	// 		glViewport(0, 0, m_fbo.GetWidth(), m_fbo.GetHeight());
-
 	Rect r = sprite->getSymbol().getSize();
 	mgr->SetProjection(r.xLength(), r.yLength());
 	glViewport(0, 0, r.xLength(), r.yLength());
 
 	BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
 	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
+//	blend_shader->SetBaseTexID(m_fbo.GetTexID());
 
 	sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
 		Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);

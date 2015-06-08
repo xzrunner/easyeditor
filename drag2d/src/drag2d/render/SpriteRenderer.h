@@ -45,9 +45,6 @@ public:
 	void SetCamera(const Camera* cam) { m_cam = cam; }
 	const Camera* GetCamera() const { return m_cam; }
 
-	int GetScreenWidth() const;
-	int GetScreenHeight() const;
-
 	static SpriteRenderer* Instance();
 
 private:

@@ -9,6 +9,7 @@
 #include "render/DynamicTexAndFont.h"
 #include "render/RenderList.h"
 #include "render/BlendShader.h"
+#include "render/ScreenFBO.h"
 #include "common/tools.h"
 #include "common/Exception.h"
 #include "common/Math.h"
@@ -249,8 +250,10 @@ void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 		const Camera* cam = rd->GetCamera();
 		assert(cam);
 
-		int w = rd->GetScreenWidth(),
-			h = rd->GetScreenHeight();
+		int w = ScreenFBO::Instance()->GetFBO().GetWidth(),
+			h = ScreenFBO::Instance()->GetFBO().GetHeight();
+
+		//////////////////////////////////////////////////////////////////////////
 
 		assert(spr);
 		d2d::Vector vertices_scr[4];
@@ -269,6 +272,28 @@ void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
 			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
 		}
+
+		//////////////////////////////////////////////////////////////////////////
+
+//  		assert(spr);
+//  		d2d::Vector vertices_scr[4];
+//  		d2d::Rect r = spr->GetRect();
+//  		vertices_scr[0] = Math::transVector(Vector(0.0f, 0.0f), mt);
+//  		vertices_scr[1] = Math::transVector(Vector(r.xLength(), 0.0f), mt);
+//  		vertices_scr[2] = Math::transVector(Vector(r.xLength(), r.yLength()), mt);
+//  		vertices_scr[3] = Math::transVector(Vector(0.0f, r.yLength()), mt);
+//  
+//  		d2d::Vector tex_coolds_base[4];
+//  		for (int i = 0; i < 4; ++i) {
+//  			tex_coolds_base[i] = cam->transPosProjectToScreen(vertices_scr[i], w, h);
+//  			tex_coolds_base[i].x /= w;
+//  			tex_coolds_base[i].y /= h;
+//  			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
+//  			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
+//  		}
+
+		//////////////////////////////////////////////////////////////////////////
+
 		blend_shader->DrawBlend(vertices, texcoords, tex_coolds_base, texid);
 	} else {
 		shader->Draw(vertices, texcoords, texid);

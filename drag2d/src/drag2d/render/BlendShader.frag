@@ -81,7 +81,6 @@ void main()
 	// darken modes
 	else if (u_mode == 10) {
 		result = BlendDarken(base.rgb, blend.rgb);		
-		result = base.rgb;
 	} else if (u_mode == 11) {
 		result = BlendMultiply(base.rgb, blend.rgb);
 	} else if (u_mode == 12) {
