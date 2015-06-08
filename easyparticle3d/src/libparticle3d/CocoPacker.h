@@ -12,10 +12,13 @@ namespace eparticle3d
 class CocoPacker
 {
 public:
-	static void pack(const wxString& srcdir, const wxString& dstfilename);
+	static void PackDir(const wxString& srcdir, const wxString& dstfilename);
 
 private:
-	static void pack(const wxString& filepath, ebuilder::CodeGenerator& gen);
+	static void PackSingle(const wxString& filepath, ebuilder::CodeGenerator& gen);
+
+	static void PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator& gen, const std::string& dir);
+	static void PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator& gen, const std::string& dir);
 
 }; // CocoPacker
 

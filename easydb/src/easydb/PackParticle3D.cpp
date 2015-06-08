@@ -33,7 +33,7 @@ void PackParticle3D::Run(int argc, char *argv[])
 
 void PackParticle3D::Trigger(const std::string& dir, const std::string& out)
 {
-	eparticle3d::CocoPacker::pack(dir, out);
+	eparticle3d::CocoPacker::PackDir(dir, out);
 }
 
 }
