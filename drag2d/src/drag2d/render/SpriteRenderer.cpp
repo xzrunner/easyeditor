@@ -38,8 +38,6 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		FBO& scr_fbo = ScreenFBO::Instance()->GetFBO();
  
  		// 1. draw spr to tmp
-		mgr->Commit();
-
  		mgr->sprite();
  		mgr->SetFBO(m_fbo.GetFboID());
  
@@ -55,17 +53,7 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		glViewport(0, 0, m_fbo.GetWidth(), m_fbo.GetHeight());
 
 		BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
- 		blend_shader->SetBaseTexID(scr_fbo.GetTexID());
-
-		//float tbxmin = 0.4,
-		//	tbxmax = 0.6;
-		//float tbymin = 0.4,
-		//	tbymax = 0.6;
-		//const float TEXCOORDS_BASE[] = { tbxmin, tbymin, tbxmin, tbymax, tbxmax, tbymax, tbxmax, tbymin };
-		//blend_shader->SetBaseTexCoords(TEXCOORDS_BASE);
-//		Draw(&sprite->getSymbol());
-
-		
+ 		blend_shader->SetBaseTexID(scr_fbo.GetTexID());		
 		sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
 			Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
 
@@ -84,22 +72,11 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		float xmin = r_dst.xMin, xmax = r_dst.xMax;
 		float ymin = r_dst.yMin, ymax = r_dst.yMax;
 
- 		const float VERTICES[] = { xmin, ymin, xmin, ymax, xmax, ymax, xmax, ymin };
- 
 		d2d::Rect r_src = sprite->getSymbol().getSize();
  		float txmin = r_src.xMin / m_fbo.GetWidth() + 0.5f,
  			txmax = r_src.xMax / m_fbo.GetWidth() + 0.5f;
  		float tymin = r_src.yMin / m_fbo.GetHeight() + 0.5f,
  			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
-// 		const float TEXCOORDS[] = { txmin, tymin, txmin, tymax, txmax, tymax, txmax, tymin };
-		const float TEXCOORDS[] = { txmin, tymin, txmin, tymax, txmax, tymax, txmax, tymin };
-
-//  		const float vertices[] = { 
-//  			xmin, ymin, txmin, tymin,
-//  			xmin, ymax, txmin, tymax,
-//  			xmax, ymax, txmax, tymax,
-//  			xmax, ymin, txmax, tymin };
-// 		mgr->Draw(vertices, m_fbo.GetTexID());
 
  		const float vertices[] = { 
  			xmin, ymin, txmin, tymin, txmin, tymin,
