@@ -3,6 +3,7 @@
 #include "render/ShaderMgr.h"
 #include "render/BlendShader.h"
 #include "render/ScreenFBO.h"
+#include "render/SpriteRenderer.h"
 
 namespace d2d
 {
@@ -26,13 +27,12 @@ void FBOCanvas::OnDrawWhole() const
 	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	SpriteRenderer::Instance()->SetCamera(GetCamera());
+
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
  	mgr->sprite();
-// 	BlendShader* shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
-//  	shader->SetBaseTexID(fbo->GetTexID());
-// // 	shader->SetBlendMode("exclusion");
  	mgr->SetFBO(fbo.GetFboID());
 
 	glClearColor(0.8f, 0.8f, 0.8f, 1);

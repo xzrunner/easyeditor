@@ -14,6 +14,7 @@ class ISymbol;
 class SpriteBatch;
 class Vector;
 class Matrix;
+class Camera;
 
 class SpriteRenderer
 {
@@ -41,6 +42,12 @@ public:
 			  const Colorf& g_trans = Colorf(0, 1, 0, 0),
 			  const Colorf& b_trans = Colorf(0, 0, 1, 0)) const;
 
+	void SetCamera(const Camera* cam) { m_cam = cam; }
+	const Camera* GetCamera() const { return m_cam; }
+
+	int GetScreenWidth() const;
+	int GetScreenHeight() const;
+
 	static SpriteRenderer* Instance();
 
 private:
@@ -56,6 +63,10 @@ private:
 
 private:
 	mutable FBO m_fbo;
+
+	const Camera* m_cam;
+
+	Matrix m_mt;
 
 private:
 	static SpriteRenderer* m_instance;

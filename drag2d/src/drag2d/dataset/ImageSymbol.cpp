@@ -56,7 +56,7 @@ void ImageSymbol::draw(const Matrix& mt,
 		shader->SetBlendMode(sprite->GetBlendMode());
 	}
 	
-	m_image->draw(mt, m_region);
+	m_image->draw(mt, m_region, sprite);
 }
 
 Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const

@@ -30,6 +30,7 @@ public:
 	void SetCurrentCanvas();
 
 	Camera* GetCamera() { return m_camera; }
+	const Camera* GetCamera() const { return m_camera; }
 
 protected:
 	virtual void InitGL();

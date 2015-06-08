@@ -16,6 +16,7 @@ SpriteRenderer* SpriteRenderer::m_instance = NULL;
 
 SpriteRenderer::SpriteRenderer()
 	: m_fbo(600, 600)
+	, m_cam(NULL)
 {
 }
 
@@ -41,7 +42,7 @@ void SpriteRenderer::Draw(const ISprite* sprite,
  		mgr->sprite();
  		mgr->SetFBO(m_fbo.GetFboID());
  
- 		glClearColor(0, 0, 0, 1);
+ 		glClearColor(0, 0, 0, 0);
  		glClear(GL_COLOR_BUFFER_BIT);
  
  		Vector offset;
@@ -49,11 +50,14 @@ void SpriteRenderer::Draw(const ISprite* sprite,
  		mgr->GetModelView(offset, scale);
 
  		mgr->SetModelView(Vector(0, 0), 1);
-		mgr->SetProjection(m_fbo.GetWidth(), m_fbo.GetHeight());
-		glViewport(0, 0, m_fbo.GetWidth(), m_fbo.GetHeight());
+// 		mgr->SetProjection(m_fbo.GetWidth(), m_fbo.GetHeight());
+// 		glViewport(0, 0, m_fbo.GetWidth(), m_fbo.GetHeight());
+		Rect r = sprite->getSymbol().getSize();
+		mgr->SetProjection(r.xLength(), r.yLength());
+		glViewport(0, 0, r.xLength(), r.yLength());
 
 		BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
- 		blend_shader->SetBaseTexID(scr_fbo.GetTexID());		
+ 		blend_shader->SetBaseTexID(scr_fbo.GetTexID());	
 		sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
 			Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
 
@@ -65,7 +69,7 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 
  		// 2. draw tmp to screen fbo
  		mgr->sprite();
-		mgr->SetFBO(0);
+//		mgr->SetFBO(0);
 		mgr->SetFBO(scr_fbo.GetFboID());
 
  		const d2d::Rect& r_dst = sprite->GetRect();
@@ -73,11 +77,14 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 		float ymin = r_dst.yMin, ymax = r_dst.yMax;
 
 		d2d::Rect r_src = sprite->getSymbol().getSize();
- 		float txmin = r_src.xMin / m_fbo.GetWidth() + 0.5f,
- 			txmax = r_src.xMax / m_fbo.GetWidth() + 0.5f;
- 		float tymin = r_src.yMin / m_fbo.GetHeight() + 0.5f,
- 			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
+//  		float txmin = r_src.xMin / m_fbo.GetWidth() + 0.5f,
+//  			txmax = r_src.xMax / m_fbo.GetWidth() + 0.5f;
+//  		float tymin = r_src.yMin / m_fbo.GetHeight() + 0.5f,
+//  			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
+		float txmin = 0, txmax = r_src.xLength() / m_fbo.GetWidth();
+		float tymin = 0, tymax = r_src.yLength() / m_fbo.GetHeight();
 
+		blend_shader->SetBlendMode(BlendModes::Instance()->GetNameENFromID(BM_NORMAL));
  		const float vertices[] = { 
  			xmin, ymin, txmin, tymin, txmin, tymin,
  			xmin, ymax, txmin, tymax, txmin, tymax,
@@ -141,6 +148,16 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 	sprite->getSymbol().draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
 
 	SpriteTools::DrawName(sprite, t);
+}
+
+int SpriteRenderer::GetScreenWidth() const
+{
+	return m_fbo.GetWidth();
+}
+
+int SpriteRenderer::GetScreenHeight() const
+{
+	return m_fbo.GetHeight();
 }
 
 SpriteRenderer* SpriteRenderer::Instance()

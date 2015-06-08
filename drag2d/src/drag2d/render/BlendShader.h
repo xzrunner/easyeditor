@@ -24,6 +24,7 @@ public:
 		const Vector texcoords_base[4], int texid);
 
 protected:
+	virtual void BindAttribLocation(GLuint prog);
 	virtual void GetUniformLocation(GLuint prog);
 
 	virtual void LoadShader();

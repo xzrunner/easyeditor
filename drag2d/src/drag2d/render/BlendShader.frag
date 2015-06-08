@@ -72,7 +72,7 @@ void main()
 {
 	vec4 base = texture2D(texture1, v_texcoord_base);
 	vec4 blend = texture2D(texture0, v_texcoord);
-	
+		
 	vec3 result;
 	// normal
 	if (u_mode == 0) {
@@ -80,12 +80,10 @@ void main()
 	} 
 	// darken modes
 	else if (u_mode == 10) {
-		result = BlendDarken(base.rgb, blend.rgb);
-		
+		result = BlendDarken(base.rgb, blend.rgb);		
 		result = base.rgb;
-		
 	} else if (u_mode == 11) {
-		result = BlendMultiply(base.rgb, blend.rgb);		
+		result = BlendMultiply(base.rgb, blend.rgb);
 	} else if (u_mode == 12) {
 		result = BlendColorBurn(base.rgb, blend.rgb);
 	} else if (u_mode == 13) {

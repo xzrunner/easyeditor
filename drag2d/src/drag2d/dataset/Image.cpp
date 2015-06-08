@@ -112,7 +112,7 @@ void Image::reload()
  	m_region.yMax =   m_height * 0.5f;
 }
 
-void Image::draw(const Matrix& mt, const Rect& r) const
+void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 {
 	////////////////////////////////////////////////////////////////////////////
 	//// 原始 直接画
@@ -245,7 +245,31 @@ void Image::draw(const Matrix& mt, const Rect& r) const
 	shader->sprite();
 
 	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(shader->GetSpriteShader())) {
-		blend_shader->DrawBlend(vertices, texcoords, texcoords, texid);
+		SpriteRenderer* rd = SpriteRenderer::Instance();
+		const Camera* cam = rd->GetCamera();
+		assert(cam);
+
+		int w = rd->GetScreenWidth(),
+			h = rd->GetScreenHeight();
+
+		assert(spr);
+		d2d::Vector vertices_scr[4];
+		d2d::Rect r = spr->GetRect();
+		vertices_scr[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
+		vertices_scr[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
+		vertices_scr[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
+		vertices_scr[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+
+		d2d::Vector tex_coolds_base[4];
+		for (int i = 0; i < 4; ++i) {
+			tex_coolds_base[i] = cam->transPosProjectToScreen(vertices_scr[i], w, h);
+			tex_coolds_base[i].y = h - 1 - tex_coolds_base[i].y;
+			tex_coolds_base[i].x /= w;
+			tex_coolds_base[i].y /= h;
+			tex_coolds_base[i].x = std::min(std::max(0.0f, tex_coolds_base[i].x), 1.0f);
+			tex_coolds_base[i].y = std::min(std::max(0.0f, tex_coolds_base[i].y), 1.0f);
+		}
+		blend_shader->DrawBlend(vertices, texcoords, tex_coolds_base, texid);
 	} else {
 		shader->Draw(vertices, texcoords, texid);
 	}

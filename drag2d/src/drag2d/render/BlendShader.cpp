@@ -89,6 +89,12 @@ void BlendShader::DrawBlend(const Vector vertices[4], const Vector texcoords[4],
 	DrawBlend(vb, texid);
 }
 
+void BlendShader::BindAttribLocation(GLuint prog)
+{
+	SpriteShader::BindAttribLocation(prog);
+	glBindAttribLocation(prog, ATTRIB_TEXTCOORD_BASE, "texcoord_base");
+}
+
 void BlendShader::GetUniformLocation(GLuint prog)
 {
 	m_mode_id = glGetUniformLocation(m_prog, "u_mode");
