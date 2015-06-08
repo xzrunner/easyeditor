@@ -79,12 +79,12 @@ void BlendShader::DrawBlend(const Vector vertices[4], const Vector texcoords[4],
 	float vb[24];
 	for (int j = 0; j < 4; ++j)
 	{
-		vb[j*4] = vertices[j].x;
-		vb[j*4+1] = vertices[j].y;
-		vb[j*4+2] = texcoords[j].x;
-		vb[j*4+3] = texcoords[j].y;
-		vb[j*4+4] = texcoords_base[j].x;
-		vb[j*4+5] = texcoords_base[j].y;
+		vb[j*6] = vertices[j].x;
+		vb[j*6+1] = vertices[j].y;
+		vb[j*6+2] = texcoords[j].x;
+		vb[j*6+3] = texcoords[j].y;
+		vb[j*6+4] = texcoords_base[j].x;
+		vb[j*6+5] = texcoords_base[j].y;
 	}
 	DrawBlend(vb, texid);
 }
@@ -110,7 +110,7 @@ void BlendShader::CopyVertex(const float vb[24])
 	float* ptr = m_vb + m_vertex_size * m_count;
 	for (int i = 0; i < 4; ++i)
 	{
-		memcpy(ptr, &vb[i*4], 4 * sizeof(float));
+		memcpy(ptr, &vb[i*6], 4 * sizeof(float));
 		ptr += 4;
 		memcpy(ptr, &m_color, sizeof(int));
 		ptr += 1;
@@ -122,7 +122,7 @@ void BlendShader::CopyVertex(const float vb[24])
 		ptr += 1;
 		memcpy(ptr, &m_b_trans, sizeof(int));
 		ptr += 1;
-		memcpy(ptr, &vb[i*4+4], 2 * sizeof(float));
+		memcpy(ptr, &vb[i*6+4], 2 * sizeof(float));
 		ptr += 2;
 	}	
 }
