@@ -36,7 +36,7 @@ namespace d2d
 		int originWidth() const { return m_width; }
 		int originHeight() const { return m_height; }
 
-		void draw(const Matrix& mt, const Rect& r, const ISprite* spr) const;
+		void draw(const Matrix& mt, const Rect& r, const ISprite* spr = NULL) const;
 
 		Rect getRegion() const { return m_region; }
 
