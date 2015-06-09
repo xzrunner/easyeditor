@@ -36,12 +36,14 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 		std::set<d2d::ISymbol*> symbol_set;
 		for (int i = 0, n = sprites.size(); i < n; ++i) {
 			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(&sprites[i]->getSymbol());
-			symbol->RefreshThumbnail(symbol->getFilepath());
 			symbol_set.insert(symbol);
 		}
+
 		std::set<d2d::ISymbol*>::iterator itr = symbol_set.begin();
 		for ( ; itr != symbol_set.end(); ++itr) {
-			page->getList()->insert(*itr);
+			d2d::ISymbol* symbol = *itr;
+			symbol->RefreshThumbnail(symbol->getFilepath());
+			page->getList()->insert(symbol);
 		}
 	}
 }

@@ -52,6 +52,10 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 
 		m_bitmap = getBitmap(image);
 	}
+	else if (FileNameParser::isType(filepath, FileNameParser::e_terrain2d))
+	{
+		;
+	}
 	else
 	{
 		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
