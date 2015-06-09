@@ -229,10 +229,13 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 	s = wxString::FromDouble(val["gravity"].asDouble());
 	lua::assign(gen, "['gravity']", s+"*g,");
 
-	s = wxString::FromDouble(val["min_linear_acc"].asInt());
+	center = val["linear_acc"]["center"].asDouble();
+	offset = val["linear_acc"]["offset"].asDouble();
+
+	s = wxString::FromDouble(center - offset);
 	lua::assign(gen, "['min_linear_acc']", s+",");
 
-	s = wxString::FromDouble(val["max_linear_acc"].asInt());
+	s = wxString::FromDouble(center + offset);
 	lua::assign(gen, "['max_linear_acc']", s+",");
 
 	//	s = wxString::FromDouble(val["inertia"].asInt());
