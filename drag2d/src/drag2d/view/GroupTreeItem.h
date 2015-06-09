@@ -14,7 +14,10 @@ class GroupTreeItem : public wxTreeItemData
 public:
 	GroupTreeItem(Group* group);
 	GroupTreeItem(ISprite* sprite);
+	GroupTreeItem(const GroupTreeItem& item);
 	virtual ~GroupTreeItem();
+
+	GroupTreeItem* Clone() const { return new GroupTreeItem(*this); }
 
 public:
 	Group* m_group;

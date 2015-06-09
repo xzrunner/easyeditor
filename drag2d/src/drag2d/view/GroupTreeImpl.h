@@ -45,6 +45,20 @@ public:
 
 	}; // SelectVisitor
 
+	class GetSpritesVisitor : public IGroupTreeVisitor
+	{
+	public:
+		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<ISprite*>& sprites);
+
+		virtual void VisitLeaf(wxTreeItemId id);
+
+	private:
+		wxTreeCtrl* m_treectrl;
+
+		std::vector<ISprite*>& m_sprites;
+
+	}; // GetSpritesVisitor
+
 	class VisibleVisitor : public IGroupTreeVisitor
 	{
 	public:

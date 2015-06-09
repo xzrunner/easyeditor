@@ -25,6 +25,7 @@ GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
 	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
 	wxTR_EDIT_LABELS | wxTR_HIDE_ROOT)
 	, m_sprite_impl(sprite_impl)
+	, m_remove_open(true)
 {
 	m_root = AddRoot("Root");
 }
@@ -118,7 +119,9 @@ void GroupTreeCtrl::Clear()
 
 void GroupTreeCtrl::Remove(ISprite* sprite)
 {
-	Traverse(GroupTreeImpl::RemoveVisitor(this, sprite));
+	if (m_remove_open) {
+		Traverse(GroupTreeImpl::RemoveVisitor(this, sprite));
+	}
 }
 
 void GroupTreeCtrl::Visible(wxTreeItemId id, bool visible)
@@ -186,26 +189,23 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 
 	// old info
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(item_src);
-	std::string name = 	GetItemText(item_src);
+	std::string name = GetItemText(item_src);
 	// insert
-	wxTreeItemId new_item;
-	if (ItemHasChildren(item_dst)) {
-		new_item = AppendItem(item_dst, name, -1, -1, data);
-	} else {
-		new_item = InsertItem(GetItemParent(item_dst), item_dst, name, -1, -1, data);
-	}
+ 	wxTreeItemId new_item = AppendItem(item_dst, name, -1, -1, data->Clone());
+	ExpandAll();
 	// copy older's children
 	Traverse(item_src, GroupTreeImpl::CopyPasteVisitor(this, item_src, new_item));
 	// remove
 	Delete(item_src);
 	// sort
+	ReorderSprites();
 }
 
 void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 {
 	if (!m_on_menu_id.IsOk()) {
 		return;
-	}	
+	}
 
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_on_menu_id);
 	if (!data) {
@@ -253,6 +253,19 @@ void GroupTreeCtrl::OnMenuVisible(wxCommandEvent& event)
 void GroupTreeCtrl::OnMenuEditable(wxCommandEvent& event)
 {
 	Traverse(m_on_menu_id, GroupTreeImpl::EditableVisitor(this));
+}
+
+void GroupTreeCtrl::ReorderSprites()
+{
+	std::vector<ISprite*> sprites;
+	Traverse(m_root, GroupTreeImpl::GetSpritesVisitor(this, sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		ISprite* spr = sprites[i];
+		m_remove_open = false;
+		m_sprite_impl->removeSprite(spr);
+		m_remove_open = true;
+		m_sprite_impl->insertSprite(spr);
+	}
 }
 
 void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)

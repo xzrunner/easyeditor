@@ -96,6 +96,31 @@ VisitLeaf(wxTreeItemId id)
 }
 
 //////////////////////////////////////////////////////////////////////////
+// class GetSpritesVisitor
+//////////////////////////////////////////////////////////////////////////
+
+GroupTreeImpl::GetSpritesVisitor::
+GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<ISprite*>& sprites)
+	: m_treectrl(treectrl)
+	, m_sprites(sprites)
+{
+}
+
+void GroupTreeImpl::GetSpritesVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return;
+	}
+
+	if (data->m_sprite) {
+		m_sprites.push_back(data->m_sprite);
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
 // class VisibleVisitor
 //////////////////////////////////////////////////////////////////////////
 
@@ -244,6 +269,7 @@ CopyPasteVisitor(GroupTreeCtrl* treectrl, wxTreeItemId from,
 	, m_from(from)
 	, m_to(to)
 {
+	m_map_ids.insert(std::make_pair(m_treectrl->GetItemParent(m_from), m_treectrl->GetItemParent(m_to)));	
 	m_map_ids.insert(std::make_pair(m_from, m_to));
 }
 
@@ -262,19 +288,29 @@ VisitLeaf(wxTreeItemId id)
 void GroupTreeImpl::CopyPasteVisitor::
 CopyPaste(wxTreeItemId id)
 {
+	if (m_map_ids.find(id) != m_map_ids.end()) {
+		return;
+	}
+
+	wxString str = m_treectrl->GetItemText(id);
+
 	wxTreeItemId old_parent = m_treectrl->GetItemParent(id);
+	wxString str_p = m_treectrl->GetItemText(old_parent);
+
 	std::map<wxTreeItemId, wxTreeItemId>::iterator itr 
 		= m_map_ids.find(old_parent);
-	wxTreeItemId new_parent;
-	if (itr == m_map_ids.end()) {
-		int zz = 0;
-	} else {
-		new_parent = itr->second;
+	assert(itr != m_map_ids.end());
+	wxTreeItemId new_parent = itr->second;
+
+	wxString str_p_n;
+	if (new_parent != m_treectrl->GetRootID()) {
+		str_p_n = m_treectrl->GetItemText(new_parent);
 	}
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	std::string name = 	m_treectrl->GetItemText(id);
-	wxTreeItemId new_item = m_treectrl->AppendItem(new_parent, name, -1, -1, data);
+	wxTreeItemId new_item = m_treectrl->AppendItem(new_parent, name, -1, -1, data->Clone());
+	m_treectrl->ExpandAll();
 	m_map_ids.insert(std::make_pair(id, new_item));
 }
 

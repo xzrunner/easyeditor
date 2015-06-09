@@ -57,6 +57,8 @@ private:
 	void OnMenuVisible(wxCommandEvent& event);
 	void OnMenuEditable(wxCommandEvent& event);
 
+	void ReorderSprites();
+
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
 
 	void Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const;
@@ -78,6 +80,8 @@ private:
 	wxTreeItemId m_root;
 	wxTreeItemId m_on_menu_id;
 	wxTreeItemId m_dragged_item;
+
+	bool m_remove_open;
 
 	DECLARE_EVENT_TABLE()
 

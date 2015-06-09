@@ -24,6 +24,19 @@ GroupTreeItem::GroupTreeItem(ISprite* sprite)
 	}
 }
 
+GroupTreeItem::GroupTreeItem(const GroupTreeItem& item)
+{
+	m_group = item.m_group;
+	if (m_group) {
+		m_group->Retain();
+	}
+
+	m_sprite = item.m_sprite;
+	if (m_sprite) {
+		m_sprite->Retain();
+	}
+}
+
 GroupTreeItem::~GroupTreeItem()
 {
 	if (m_group) {
