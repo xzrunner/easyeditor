@@ -50,6 +50,8 @@ void LRLayersPack::Run(const std::string& filepath)
 
 	out_val["width"] = lr_val["size"]["width"];
 	out_val["height"] = lr_val["size"]["height"];
+	out_val["view width"] = lr_val["size"]["view width"];
+	out_val["view height"] = lr_val["size"]["view height"];
 
 	lr::Grids grids;
 	int w = lr_val["size"]["width"].asUInt(),
