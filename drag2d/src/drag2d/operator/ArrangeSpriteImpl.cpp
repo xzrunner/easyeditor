@@ -66,13 +66,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 	switch (keyCode)
 	{
 	case WXK_DELETE:
-		// add history
-		{
-			std::vector<ISprite*> sprites;
-			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-			m_stage->addHistoryOP(new DeleteSpriteAOP(sprites, m_spritesImpl));
-		}
-		m_spritesImpl->removeSpriteSelection();
+		OnDeleteKey();
 		break;
 	case WXK_PAGEUP:
 		UpOneLayer();
@@ -529,6 +523,16 @@ IArrangeSpriteState* ArrangeSpriteImpl::CreateShearState(ISprite* sprite, const 
 IArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(ISprite* sprite) const
 {
 	return new OffsetSpriteState(sprite);
+}
+
+void ArrangeSpriteImpl::OnDeleteKey()
+{
+	// add to history
+	std::vector<ISprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	m_stage->addHistoryOP(new DeleteSpriteAOP(sprites, m_spritesImpl));
+
+	m_spritesImpl->removeSpriteSelection();	
 }
 
 void ArrangeSpriteImpl::UpOneLayer()

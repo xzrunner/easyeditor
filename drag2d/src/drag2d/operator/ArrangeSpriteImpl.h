@@ -60,6 +60,8 @@ protected:
 	SpriteSelection* m_selection;
 
 private:
+	void OnDeleteKey();
+
 	void UpOneLayer();
 	void DownOneLayer();
 
