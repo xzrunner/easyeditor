@@ -40,9 +40,11 @@ void LRToComplex::Run(const std::string& filepath)
 	fin.close();
 
 	Json::Value complex_val;
-	for (int i = 0; i < 3; ++i) {
-		LoadSpriteValue(lr_val["layer"][i]["sprite"], complex_val["sprite"]);
-	}
+// 	for (int i = 0; i < 3; ++i) {
+// 		LoadSpriteValue(lr_val["layer"][i]["sprite"], complex_val["sprite"]);
+// 	}
+	int layer_idx = 0;
+	LoadSpriteValue(lr_val["layer"][layer_idx]["sprite"], complex_val["sprite"]);
 	std::string name = d2d::FilenameTools::getFilename(filepath);
 	name = "scene_" + name.substr(0, name.find_last_of('_'));	
 	complex_val["name"] = name;

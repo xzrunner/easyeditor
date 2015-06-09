@@ -30,14 +30,15 @@ private:
 
 	void ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset, const lr::Grids& grids, 
 		Json::Value& out_val);
-	void ParserPolygon(const Json::Value& src_val, const std::string& dir,
-		const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val);
-	void ParserPoint(const Json::Value& src_val, const std::string& dir,
+	void ParserPolygon(const Json::Value& src_val, const lr::Grids& grids, 
 		int layer_idx, const char* name, Json::Value& out_val);
-	void ParserCamera(const Json::Value& src_val, int layer_idx, 
-		const char* name, Json::Value& out_val);
-	void ParserCharacter(const Json::Value& src_val, int layer_idx, 
-		const char* name, Json::Value& out_val);
+	void ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);
+	void ParserCamera(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);
+	void ParserCharacter(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);
+	void ParserDecorate(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val);
+
+private:
+	std::string m_dir;
 
 }; // LRLayersPack
 

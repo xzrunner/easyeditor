@@ -44,7 +44,7 @@ void LRLayersPack::Run(const std::string& filepath)
 	reader.parse(fin, lr_val);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
+	m_dir = d2d::FilenameTools::getFileDir(filepath) + "\\";
 
 	Json::Value out_val;
 
@@ -63,11 +63,12 @@ void LRLayersPack::Run(const std::string& filepath)
 	out_val["col"] = col;
 	out_val["row"] = row;
 
+	ParserDecorate(lr_val, 1, "decorate", out_val);
 	ParserCharacter(lr_val, 2, "character", out_val);
-	ParserPoint(lr_val, dir, 3, "point", out_val);
-	ParserPolygon(lr_val, dir, grids, 4, "path", out_val);
-	ParserPolygon(lr_val, dir, grids, 5, "region", out_val);
-	ParserPolygon(lr_val, dir, grids, 6, "collision region", out_val);
+	ParserPoint(lr_val, 3, "point", out_val);
+	ParserPolygon(lr_val, grids, 4, "path", out_val);
+	ParserPolygon(lr_val, grids, 5, "region", out_val);
+	ParserPolygon(lr_val, grids, 6, "collision region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
 
 	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
@@ -112,14 +113,14 @@ void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset
 	}
 }
 
-void LRLayersPack::ParserPolygon(const Json::Value& src_val, const std::string& dir,
-								 const lr::Grids& grids, int layer_idx, const char* name, Json::Value& out_val)
+void LRLayersPack::ParserPolygon(const Json::Value& src_val, const lr::Grids& grids, 
+								 int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
 	Json::Value src_spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	while (!src_spr_val.isNull()) 
 	{
-		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, src_spr_val);
+		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, src_spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
 		assert(symbol);
 
@@ -149,7 +150,7 @@ void LRLayersPack::ParserPolygon(const Json::Value& src_val, const std::string& 
 	Json::Value src_shape_val = src_val["layer"][layer_idx]["shape"][idx++];
 	while (!src_shape_val.isNull()) 
 	{
-		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(src_shape_val, dir);
+		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(src_shape_val, m_dir);
 		
 		Json::Value dst_val;
 		dst_val["name"] = src_shape_val["name"];
@@ -164,14 +165,13 @@ void LRLayersPack::ParserPolygon(const Json::Value& src_val, const std::string& 
 	}
 }
 
-void LRLayersPack::ParserPoint(const Json::Value& src_val, const std::string& dir,
-									int layer_idx, const char* name, Json::Value& out_val)
+void LRLayersPack::ParserPoint(const Json::Value& src_val, int layer_idx, const char* name, Json::Value& out_val)
 {
 	int idx = 0;
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	while (!spr_val.isNull()) 
 	{
-		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
 		assert(symbol);
 
@@ -260,6 +260,40 @@ void LRLayersPack::ParserCharacter(const Json::Value& src_val, int layer_idx,
 
 		int sz = out_val[name].size();
 		out_val[name][sz] = char_val;
+
+		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	}
+}
+
+void LRLayersPack::ParserDecorate(const Json::Value& src_val, int layer_idx, 
+								  const char* name, Json::Value& out_val)
+{
+	int idx = 0;
+	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
+	while (!spr_val.isNull()) 
+	{
+		Json::Value dec_val;
+
+		dec_val["x"] = spr_val["position"]["x"];
+		dec_val["y"] = spr_val["position"]["y"];
+
+		std::string export_name = "";
+		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
+		if (spr_path.Contains(".json")) 
+		{
+			Json::Value val;
+			Json::Reader reader;
+			std::locale::global(std::locale(""));
+			std::ifstream fin(spr_path.fn_str());
+			std::locale::global(std::locale("C"));
+			reader.parse(fin, val);
+			fin.close();
+			export_name = val["name"].asString();
+		}
+		dec_val["export"] = export_name;
+		
+		int sz = out_val[name].size();
+		out_val[name][sz] = dec_val;
 
 		spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	}
