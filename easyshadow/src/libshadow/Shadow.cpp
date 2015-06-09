@@ -6,8 +6,8 @@ namespace eshadow
 Shadow::Shadow(float radius)
 	: m_radius(radius)
 {
-	m_inner_color.set(1, 1, 0);
-	m_outer_color.set(0.5, 0.5, 0);
+	m_inner_color.set(0, 0, 0);
+	m_outer_color.set(0.5f, 0.5f, 0.5f);
 }
 
 Shadow::~Shadow()
