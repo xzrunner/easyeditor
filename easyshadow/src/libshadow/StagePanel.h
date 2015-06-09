@@ -16,6 +16,11 @@ public:
 	virtual ~StagePanel();
 
 	//
+	//	wxWindows interface
+	//
+	virtual void Refresh(bool eraseBackground=true, const wxRect *rect=NULL);
+
+	//
 	// d2d::EditPanel interface
 	//
 	virtual void clear();
@@ -33,6 +38,8 @@ public:
 
 private:
 	Symbol* m_symbol;
+
+	d2d::IShape* m_loop;
 
 }; // StagePanel
 

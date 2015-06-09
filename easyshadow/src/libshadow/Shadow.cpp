@@ -94,7 +94,6 @@ void Shadow::BuildInnerLine(const std::vector<d2d::Vector>& loop)
 	}
 
 	BuildInnerLoop(loop);
-
 	BuildOutterLine();
 }
 
