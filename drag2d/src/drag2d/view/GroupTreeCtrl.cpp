@@ -184,17 +184,21 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 
 	wxLogDebug("Drag from %s to %s", GetItemText(item_src), GetItemText(item_dst));
 
-	// new node
+	// old info
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(item_src);
 	std::string name = 	GetItemText(item_src);
 	// insert
+	wxTreeItemId new_item;
 	if (ItemHasChildren(item_dst)) {
-		AppendItem(item_dst, name, -1, -1, data);
+		new_item = AppendItem(item_dst, name, -1, -1, data);
 	} else {
-		InsertItem(GetItemParent(item_dst), item_dst, name, -1, -1, data);
+		new_item = InsertItem(GetItemParent(item_dst), item_dst, name, -1, -1, data);
 	}
+	// copy older's children
+	Traverse(item_src, GroupTreeImpl::CopyPasteVisitor(this, item_src, new_item));
 	// remove
 	Delete(item_src);
+	// sort
 }
 
 void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)

@@ -233,4 +233,49 @@ GetParentName(wxTreeItemId id) const
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////
+// class CopyPasteVisitor
+//////////////////////////////////////////////////////////////////////////
+
+GroupTreeImpl::CopyPasteVisitor::
+CopyPasteVisitor(GroupTreeCtrl* treectrl, wxTreeItemId from, 
+				 wxTreeItemId to)
+	: m_treectrl(treectrl)
+	, m_from(from)
+	, m_to(to)
+{
+	m_map_ids.insert(std::make_pair(m_from, m_to));
+}
+
+void GroupTreeImpl::CopyPasteVisitor::
+VisitNonleaf(wxTreeItemId id)
+{
+	CopyPaste(id);
+}
+
+void GroupTreeImpl::CopyPasteVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	CopyPaste(id);
+}
+
+void GroupTreeImpl::CopyPasteVisitor::
+CopyPaste(wxTreeItemId id)
+{
+	wxTreeItemId old_parent = m_treectrl->GetItemParent(id);
+	std::map<wxTreeItemId, wxTreeItemId>::iterator itr 
+		= m_map_ids.find(old_parent);
+	wxTreeItemId new_parent;
+	if (itr == m_map_ids.end()) {
+		int zz = 0;
+	} else {
+		new_parent = itr->second;
+	}
+
+	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
+	std::string name = 	m_treectrl->GetItemText(id);
+	wxTreeItemId new_item = m_treectrl->AppendItem(new_parent, name, -1, -1, data);
+	m_map_ids.insert(std::make_pair(id, new_item));
+}
+
 }

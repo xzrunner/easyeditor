@@ -105,6 +105,26 @@ public:
 
 	}; // StoreVisitor
 
+	class CopyPasteVisitor : public IGroupTreeVisitor
+	{
+	public:
+		CopyPasteVisitor(GroupTreeCtrl* treectrl, wxTreeItemId from, 
+			wxTreeItemId to);
+
+		virtual void VisitNonleaf(wxTreeItemId id);
+		virtual void VisitLeaf(wxTreeItemId id);
+
+	private:
+		void CopyPaste(wxTreeItemId id);
+
+	private:
+		GroupTreeCtrl* m_treectrl;
+		wxTreeItemId m_from, m_to;
+
+		std::map<wxTreeItemId, wxTreeItemId> m_map_ids;
+
+	}; // StoreVisitor
+
 }; // GroupTreeImpl
 
 }
