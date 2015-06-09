@@ -217,15 +217,24 @@ void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const
 	//  			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
 	float txmin = 0, txmax = r_src.xLength() / m_fbo.GetWidth();
 	float tymin = 0, tymax = r_src.yLength() / m_fbo.GetHeight();
-
-	const float vertices[] = { 
-		xmin, ymin, txmin, tymin, txmin, tymin,
-		xmin, ymax, txmin, tymax, txmin, tymax,
-		xmax, ymax, txmax, tymax, txmax, tymax,
-		xmax, ymin, txmax, tymin, txmax, tymin };
-
-	BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
-	blend_shader->DrawBlend(vertices, m_fbo.GetTexID());
+	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(mgr->GetSpriteShader()))
+	{
+		const float vertices[] = { 
+			xmin, ymin, txmin, tymin, txmin, tymin,
+			xmin, ymax, txmin, tymax, txmin, tymax,
+			xmax, ymax, txmax, tymax, txmax, tymax,
+			xmax, ymin, txmax, tymin, txmax, tymin };
+		blend_shader->DrawBlend(vertices, m_fbo.GetTexID());
+	}
+	else
+	{
+		const float vertices[] = { 
+			xmin, ymin, txmin, tymin,
+			xmin, ymax, txmin, tymax,
+			xmax, ymax, txmax, tymax,
+			xmax, ymin, txmax, tymin};
+		mgr->Draw(vertices, m_fbo.GetTexID());
+	}
 
 	mgr->Commit();
 }
