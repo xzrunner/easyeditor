@@ -102,6 +102,12 @@ void CocoPacker::PackOldVersion(const Json::Value& val, ebuilder::CodeGenerator&
 	s = wxString::FromDouble(val["gravity"].asInt());
 	lua::assign(gen, "['gravity']", s+"*g,");
 
+	s = wxString::FromDouble(val["min_linear_acc"].asInt());
+	lua::assign(gen, "['min_linear_acc']", s+",");
+
+	s = wxString::FromDouble(val["max_linear_acc"].asInt());
+	lua::assign(gen, "['max_linear_acc']", s+",");
+
 	//	s = wxString::FromDouble(val["inertia"].asInt());
 	s = wxString::FromDouble(10);
 	lua::assign(gen, "['inertia']", s+",");
@@ -222,6 +228,12 @@ void CocoPacker::PackNewVersion(const Json::Value& val, ebuilder::CodeGenerator&
 
 	s = wxString::FromDouble(val["gravity"].asDouble());
 	lua::assign(gen, "['gravity']", s+"*g,");
+
+	s = wxString::FromDouble(val["min_linear_acc"].asInt());
+	lua::assign(gen, "['min_linear_acc']", s+",");
+
+	s = wxString::FromDouble(val["max_linear_acc"].asInt());
+	lua::assign(gen, "['max_linear_acc']", s+",");
 
 	//	s = wxString::FromDouble(val["inertia"].asInt());
 	s = wxString::FromDouble(10);

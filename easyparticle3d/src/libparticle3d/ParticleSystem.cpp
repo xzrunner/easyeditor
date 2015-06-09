@@ -35,6 +35,8 @@ ParticleSystem::ParticleSystem(unsigned int buffer)
 
 	gravity = 0;
 
+	min_linear_acc = max_linear_acc = 0;
+
 	inertia = 0;
 
 	fadeout_time = 0;
@@ -86,6 +88,9 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 
 	gravity = ps.gravity;
 
+	min_linear_acc = ps.min_linear_acc;
+	max_linear_acc = ps.max_linear_acc;
+
 	inertia = ps.inertia;
 
 	fadeout_time = ps.fadeout_time;
@@ -133,6 +138,10 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 	case PS_GRAVITY:
 		gravity = data.val0 * 0.3f;
 		break;
+	case PS_LINEAR_ACC:
+		min_linear_acc = (data.val0 - data.val1);
+		max_linear_acc = (data.val0 + data.val1);
+		break;
 	case PS_FADEOUT_TIME:
 		fadeout_time = data.val0 * 0.001f;
 		break;
@@ -166,6 +175,10 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 		break;
 	case PS_GRAVITY:
 		data.val0 = gravity / 0.3f;
+		break;
+	case PS_LINEAR_ACC:
+		data.val0 = (min_linear_acc + max_linear_acc) * 0.5f;
+		data.val1 = (max_linear_acc - min_linear_acc) * 0.5f;
 		break;
 	case PS_FADEOUT_TIME:
 		data.val0 = fadeout_time * 1000;
@@ -273,6 +286,10 @@ void ParticleSystem::update(float dt)
 		{
 			// up acc
 			p->speed[2] -= gravity * dt;
+			float velocity = sqrt(p->speed[0] * p->speed[0] + p->speed[1] * p->speed[1] + p->speed[2] * p->speed[2]);
+			for (int i = 0; i < 3; ++i) {
+				p->speed[i] += p->linear_acc * p->speed[i] / velocity;
+			}
 
 			// up angle
 			if (orient_to_movement) 
@@ -280,9 +297,9 @@ void ParticleSystem::update(float dt)
 				d2d::Vector pos_old = TransCoords3To2(p->position);
 
 				float _pos[3];
-				_pos[0] = p->position[0] + p->speed[0] * dt;
-				_pos[1] = p->position[1] + p->speed[1] * dt;
-				_pos[2] = p->position[2] + p->speed[2] * dt;
+				for (int i = 0; i < 3; ++i) {
+					_pos[i] = p->position[i] + p->speed[i] * dt;
+				}
 				d2d::Vector pos_new = TransCoords3To2(_pos);
 
 				p->angle = d2d::Math::getLineAngle(pos_old, pos_new) - d2d::PI * 0.5f;
@@ -296,9 +313,9 @@ void ParticleSystem::update(float dt)
 			}
 
 			// up position
-			p->position[0] += p->speed[0] * dt;
-			p->position[1] += p->speed[1] * dt;
-			p->position[2] += p->speed[2] * dt;
+			for (int i = 0; i < 3; ++i) {
+				p->position[i] += p->speed[i] * dt;
+			}
 			if (p->position[2] < 0)
 			{
 				if (bounce)
@@ -426,6 +443,10 @@ void ParticleSystem::add()
 	min = min_spd; max = max_spd;
 	float speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 	transCoords(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
+
+	min = min_linear_acc; max = max_linear_acc;
+	float linear_acc = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
+	pLast->linear_acc = linear_acc;
 
 	// 初始角度angle，每帧变换rotate
 	//////////////////////////////////////////////////////////////////////////

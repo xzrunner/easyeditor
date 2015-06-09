@@ -46,6 +46,8 @@ struct Particle
 
 	float speed[3];
 
+	float linear_acc;
+
 	float rotate;
 	float angle;
 
@@ -159,6 +161,8 @@ private:
 	float min_angular_spd, max_angular_spd;
 
 	float gravity;
+
+	float min_linear_acc, max_linear_acc;
 
 	float inertia;
 

@@ -24,6 +24,8 @@ const float ToolbarPanel::SPEED_OFFSET		= 400;
 const float ToolbarPanel::ANGULAR_SPEED_CENTER = 0;
 const float ToolbarPanel::ANGULAR_SPEED_OFFSET = 0;
 const float ToolbarPanel::GRAVITY			= 1200;
+const float ToolbarPanel::LINEAR_ACC_CENTER = 0;
+const float ToolbarPanel::LINEAR_ACC_OFFSET = 0;
 const float ToolbarPanel::INERTIA			= 4;
 const float ToolbarPanel::FADEOUT_TIME		= 300;
 const float ToolbarPanel::START_RADIUS		= 0;
@@ -236,6 +238,12 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->Add(s_gravity);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_gravity);
+	// Linear Acc
+	d2d::SliderCtrlTwo* s_lacc = new d2d::SliderCtrlTwo(this, "Linear Acc (pixel)", "linear_acc", this, PS_LINEAR_ACC, 
+		d2d::SliderItem("center", ITEM_ATTR_CENTER, LINEAR_ACC_CENTER, -200, 500), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, LINEAR_ACC_OFFSET, 0, 500));
+	leftSizer->Add(s_lacc);
+	leftSizer->AddSpacer(10);
+	m_sliders.push_back(s_lacc);	
 	// Inertia
 	{
 		wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);

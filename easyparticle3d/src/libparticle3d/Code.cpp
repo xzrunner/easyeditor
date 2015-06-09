@@ -72,6 +72,12 @@ void Code::resolve()
 	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['gravity']", s+",");
 
+	m_toolbar->GetValue(PS_LINEAR_ACC, data);
+	s = wxString::FromDouble(data.val0 - data.val1);
+	lua::assign(m_gen, "['min_linear_acc']", s+",");
+	s = wxString::FromDouble(data.val0 + data.val1);
+	lua::assign(m_gen, "['max_linear_acc']", s+",");
+
 	s = wxString::FromDouble(m_toolbar->m_inertia->GetValue());
 	lua::assign(m_gen, "['inertia']", s+",");
 

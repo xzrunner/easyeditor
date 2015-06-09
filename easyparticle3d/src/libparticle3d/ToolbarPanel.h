@@ -57,6 +57,7 @@ private:
 	static const float SPEED_CENTER, SPEED_OFFSET;
 	static const float ANGULAR_SPEED_CENTER, ANGULAR_SPEED_OFFSET;
 	static const float GRAVITY;
+	static const float LINEAR_ACC_CENTER, LINEAR_ACC_OFFSET;
 	static const float INERTIA;
 	static const float FADEOUT_TIME;
 	static const float START_RADIUS;

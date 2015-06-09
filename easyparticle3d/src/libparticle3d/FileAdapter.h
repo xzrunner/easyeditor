@@ -45,6 +45,8 @@ public:
 
 	float gravity;
 
+	float min_linear_acc, max_linear_acc;
+
 	float inertia;
 
 	float fadeout_time;

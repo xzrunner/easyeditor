@@ -44,6 +44,11 @@ void FileAdapter::load(const char* filename, int version)
 		max_angular_spd = c + o;
 	}
 
+	int c = value["linear_acc"]["center"].asInt();
+	int o = value["linear_acc"]["offset"].asInt();
+	min_linear_acc = c - o;
+	max_linear_acc = c + o;
+
 	name = value["name"].asString();
 	package = value["package"].asString();
 	count = value["count"].asInt();
