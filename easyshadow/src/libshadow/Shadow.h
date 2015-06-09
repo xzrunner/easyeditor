@@ -12,6 +12,9 @@ public:
 	Shadow(float radius);
 	~Shadow();
 
+	void StoreToFile(Json::Value& value) const;
+	void LoadFromFile(const Json::Value& value);
+
 	void Draw(const d2d::Matrix& mt) const;
 
 	void BuildFace();

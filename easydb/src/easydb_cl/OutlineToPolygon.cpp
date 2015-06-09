@@ -60,7 +60,7 @@ void OutlineToPolygon::Trigger(const std::string& dir) const
 		fin.close();
 
 		std::vector<d2d::Vector> vertices;
-		d2d::JsonTools::load(value["normal"], vertices);
+		d2d::JsonIO::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
 		}

@@ -168,8 +168,8 @@ void Frame::onCode(wxCommandEvent& event)
 // 	fin.close();
 // 
 // 	std::vector<d2d::Vector> outline, segments;
-// 	d2d::JsonTools::load(value["outline"], outline);
-// 	d2d::JsonTools::load(value["segments"], segments);
+// 	d2d::JsonIO::Load(value["outline"], outline);
+// 	d2d::JsonIO::Load(value["segments"], segments);
 // 
 // 	std::vector<d2d::Vector> tris;
 // 	d2d::Triangulation::lines(outline, segments, tris);

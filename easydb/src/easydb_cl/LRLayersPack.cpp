@@ -102,7 +102,7 @@ void LRLayersPack::ParserPolyShape(d2d::IShape* shape, const d2d::Vector& offset
 		for (int i = 0, n = bound.size(); i < n; ++i) {
 			bound[i] += offset;
 		}
-		d2d::JsonTools::store(bound, out_val["pos"]);
+		d2d::JsonIO::Store(bound, out_val["pos"]);
 	}
 	else
 	{

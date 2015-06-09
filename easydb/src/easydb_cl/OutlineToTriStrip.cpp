@@ -59,7 +59,7 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 		fin.close();
 
 		std::vector<d2d::Vector> vertices;
-		d2d::JsonTools::load(value["normal"], vertices);
+		d2d::JsonIO::Load(value["normal"], vertices);
 		if (vertices.empty()) {
 			continue;
 		}
@@ -72,7 +72,7 @@ void OutlineToTriStrip::Trigger(const std::string& dir) const
 
 		Json::Value value_out;
 		for (int i = 0, n = strips.size(); i < n; ++i) {
-			d2d::JsonTools::store(strips[i], value_out["strips"][i]);
+			d2d::JsonIO::Store(strips[i], value_out["strips"][i]);
 		}
 
 		wxString out_file = d2d::FilenameTools::getFilenameAddTag(filepath, 

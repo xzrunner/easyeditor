@@ -33,9 +33,10 @@ public:
 		const d2d::ISprite* sprite = NULL) const;
 	virtual d2d::Rect getSize(const d2d::ISprite* sprite = NULL) const;
 
-	static d2d::ISymbol* Create() { return new Symbol(); }
-
 	Shadow* GetShadow() { return m_shadow; }
+	const Shadow* GetShadow() const { return m_shadow; }
+
+	static d2d::ISymbol* Create() { return new Symbol(); }
 
 protected:
 	virtual void loadResources();

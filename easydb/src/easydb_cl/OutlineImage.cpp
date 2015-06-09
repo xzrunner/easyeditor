@@ -65,7 +65,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 			for (int i = 0, n = vertices.size(); i < n; ++i) {
 				vertices[i] += offset;
 			}
-			d2d::JsonTools::store(vertices, value["normal"]);
+			d2d::JsonIO::Store(vertices, value["normal"]);
 
 			wxString out_file = d2d::FilenameTools::getFilenameAddTag(filepath, 
 				eimage::OUTLINE_FILE_TAG, "json");

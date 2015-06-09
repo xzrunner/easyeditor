@@ -229,6 +229,18 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="frame"
+			>
+			<File
+				RelativePath="..\..\..\src\libshadow\FileIO.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshadow\FileIO.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libshadow\config.h"
 			>

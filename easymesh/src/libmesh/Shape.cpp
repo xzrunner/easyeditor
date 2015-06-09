@@ -172,13 +172,13 @@ void Shape::StoreTriangles(Json::Value& value) const
 		for (int i = 0; i < 3; ++i)
 			transform.push_back(tri->nodes[i]->xy);
 	}
-	d2d::JsonTools::store(transform, value);
+	d2d::JsonIO::Store(transform, value);
 }
 
 void Shape::LoadTriangles(const Json::Value& value)
 {
 	std::vector<d2d::Vector> transform;
-	d2d::JsonTools::load(value, transform);
+	d2d::JsonIO::Load(value, transform);
 	int itr = 0;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
 	{

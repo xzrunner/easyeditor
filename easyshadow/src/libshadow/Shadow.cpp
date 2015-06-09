@@ -14,6 +14,25 @@ Shadow::~Shadow()
 {
 }
 
+void Shadow::StoreToFile(Json::Value& value) const
+{
+	d2d::JsonIO::Store(m_inner_loop, value["inner loop"]);
+	value["radius"] = m_radius;
+	d2d::JsonIO::Store(m_inner_color, value["inner color"]);
+	d2d::JsonIO::Store(m_outer_color, value["outer color"]);
+}
+
+void Shadow::LoadFromFile(const Json::Value& value)
+{
+	d2d::JsonIO::Load(value["inner color"], m_inner_color);
+	d2d::JsonIO::Load(value["outer color"], m_outer_color);
+	m_radius = value["radius"].asDouble();
+
+	std::vector<d2d::Vector> loop;
+	d2d::JsonIO::Load(value["inner loop"], loop);
+	BuildInnerLine(loop);
+}
+
 void Shadow::Draw(const d2d::Matrix& mt) const
 {
 	d2d::PrimitiveDraw::DrawTriangles(mt, m_tris, m_colors);

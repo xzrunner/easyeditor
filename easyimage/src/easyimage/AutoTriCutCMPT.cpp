@@ -93,7 +93,7 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		vertices[i] += offset;
 	}
-	d2d::JsonTools::store(vertices, value["normal"]);
+	d2d::JsonIO::Store(vertices, value["normal"]);
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(img->filepath(), 
 		OUTLINE_FILE_TAG, "json");

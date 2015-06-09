@@ -36,8 +36,8 @@ void Strip::Load(const Json::Value& value)
 
 	m_left_nodes.m_ori.clear();
 	m_right_nodes.m_ori.clear();
-	d2d::JsonTools::load(value["left nodes"], m_left_nodes.m_ori);
-	d2d::JsonTools::load(value["right nodes"], m_right_nodes.m_ori);
+	d2d::JsonIO::Load(value["left nodes"], m_left_nodes.m_ori);
+	d2d::JsonIO::Load(value["right nodes"], m_right_nodes.m_ori);
 	m_left_nodes.m_ext = m_left_nodes.m_ori;
 	m_right_nodes.m_ext = m_right_nodes.m_ori;
 
@@ -53,8 +53,8 @@ void Strip::Store(Json::Value& value) const
 	value["width"] = m_width;
 	value["height"] = m_height;
 
-	d2d::JsonTools::store(m_left_nodes.m_ori, value["left nodes"]);
-	d2d::JsonTools::store(m_right_nodes.m_ori, value["right nodes"]);
+	d2d::JsonIO::Store(m_left_nodes.m_ori, value["left nodes"]);
+	d2d::JsonIO::Store(m_right_nodes.m_ori, value["right nodes"]);
 
 	StoreTriangles(value["triangles"]);
 }

@@ -77,8 +77,8 @@ void TextureMaterial::BuildEnd()
 	}
 
 	Json::Value value;
-	d2d::JsonTools::store(outline, value["outline"]);
-	d2d::JsonTools::store(segments, value["segments"]);
+	d2d::JsonIO::Store(outline, value["outline"]);
+	d2d::JsonIO::Store(segments, value["segments"]);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

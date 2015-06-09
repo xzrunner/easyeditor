@@ -8,7 +8,7 @@ namespace eterrain2d
 void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json::Value& value)
 {
 	if (const libshape::PolygonShape* shape = ocean->GetBounding()) {
-		d2d::JsonTools::store(shape->GetVertices(), value["bound"]);
+		d2d::JsonIO::Store(shape->GetVertices(), value["bound"]);
 	}
 	if (const d2d::ImageSymbol* img = ocean->GetImage0()) {
 		value["tex0"] = d2d::FilenameTools::getRelativePath(dir,
@@ -42,7 +42,7 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	}
 
 	std::vector<d2d::Vector> bounding;
-	d2d::JsonTools::load(value["bound"], bounding);
+	d2d::JsonIO::Load(value["bound"], bounding);
 	libshape::PolygonShape* shape = new libshape::PolygonShape(bounding);
 
 	std::string tex0_path = dir + "\\" + value["tex0"].asString();

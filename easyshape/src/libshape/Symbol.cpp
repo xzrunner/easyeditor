@@ -181,7 +181,7 @@ void Symbol::LoadBGOutline(d2d::ISymbol* bg)
 	fin.close();
 
 	std::vector<d2d::Vector> vertices;
-	d2d::JsonTools::load(value["normal"], vertices);
+	d2d::JsonIO::Load(value["normal"], vertices);
 	if (!vertices.empty()) {
 		d2d::IShape* shape = new PolygonShape(vertices);
 		m_bg_outline.push_back(shape);
@@ -210,7 +210,7 @@ void Symbol::LoadBGTriStrip(d2d::ISymbol* bg)
 	Json::Value strip_val = value["strips"][i++];
 	while (!strip_val.isNull()) {
 		std::vector<d2d::Vector> strip;
-		d2d::JsonTools::load(strip_val, strip);
+		d2d::JsonIO::Load(strip_val, strip);
 		m_bg_tri_strips.push_back(strip);
 		strip_val = value["strip"][i++];
 	}

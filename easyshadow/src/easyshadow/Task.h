@@ -7,6 +7,8 @@
 namespace eshadow
 {
 
+class StagePanel;
+
 class Task : public d2d::ITask
 {
 public:
@@ -36,7 +38,7 @@ private:
 	wxFrame* m_parent;
 
  	d2d::LibraryPanel* m_library;
- 	d2d::EditPanel* m_stage;
+ 	StagePanel* m_stage;
 
 }; // Task
 

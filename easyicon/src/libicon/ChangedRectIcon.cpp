@@ -31,14 +31,14 @@ void ChangedRectIcon::Draw(const d2d::Matrix& mt, float process) const
 
 void ChangedRectIcon::LoadFromFile(const Json::Value& value)
 {
-	d2d::JsonTools::Load(value["begin"], m_begin);
-	d2d::JsonTools::Load(value["end"], m_end);
+	d2d::JsonIO::Load(value["begin"], m_begin);
+	d2d::JsonIO::Load(value["end"], m_end);
 }
 
 void ChangedRectIcon::StoreToFile(Json::Value& value) const
 {
-	d2d::JsonTools::Store(m_begin, value["begin"]);
-	d2d::JsonTools::Store(m_end, value["end"]);
+	d2d::JsonIO::Store(m_begin, value["begin"]);
+	d2d::JsonIO::Store(m_end, value["end"]);
 }
 
 void ChangedRectIcon::GetRegion(float process, d2d::Rect& region) const

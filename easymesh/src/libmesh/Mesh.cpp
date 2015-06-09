@@ -64,7 +64,7 @@ void Mesh::Load(const Json::Value& value)
 	Json::Value loop_val = loops_val[i++];
 	while (!loop_val.isNull()) {
 		std::vector<d2d::Vector> nodes;
-		d2d::JsonTools::load(loop_val, nodes);
+		d2d::JsonIO::Load(loop_val, nodes);
 		libshape::ChainShape* shape = new libshape::ChainShape(nodes, true);
 		m_region.loops.push_back(shape);
 		loop_val = loops_val[i++];
@@ -83,8 +83,8 @@ void Mesh::Load(const Json::Value& value)
 	// load inverse mesh, need pair each node
 	else if (!value["triangles_new"].isNull()) {
 		std::vector<d2d::Vector> transform_ori, transform_new;
-		d2d::JsonTools::load(value["triangles"], transform_ori);
-		d2d::JsonTools::load(value["triangles_new"], transform_new);
+		d2d::JsonIO::Load(value["triangles"], transform_ori);
+		d2d::JsonIO::Load(value["triangles_new"], transform_new);
 
 		int itr = 0;
 		for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -119,7 +119,7 @@ void Mesh::Store(Json::Value& value) const
 	Json::Value& loops_val = value["loops"];
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
 		const libshape::ChainShape* loop = m_region.loops[i];
-		d2d::JsonTools::store(loop->GetVertices(), loops_val[i]);
+		d2d::JsonIO::Store(loop->GetVertices(), loops_val[i]);
 	}
 
 	StoreTriangles(value["triangles"]);
@@ -142,7 +142,7 @@ void Mesh::Store(Json::Value& value) const
 				}
 			}
 		}
-		d2d::JsonTools::store(dst, loops_val[i]);
+		d2d::JsonIO::Store(dst, loops_val[i]);
 	}
 
 	std::vector<d2d::Vector> transform;
@@ -152,7 +152,7 @@ void Mesh::Store(Json::Value& value) const
 		for (int i = 0; i < 3; ++i)
 			transform.push_back(tri->nodes[i]->ori_xy);
 	}
-	d2d::JsonTools::store(transform, value["triangles"]);
+	d2d::JsonIO::Store(transform, value["triangles"]);
 
 	std::vector<d2d::Vector> transform_new;
 	for (int i = 0, n = m_tris.size(); i < n; ++i)
@@ -161,7 +161,7 @@ void Mesh::Store(Json::Value& value) const
 		for (int i = 0; i < 3; ++i)
 			transform_new.push_back(tri->nodes[i]->xy);
 	}
-	d2d::JsonTools::store(transform_new, value["triangles_new"]);
+	d2d::JsonIO::Store(transform_new, value["triangles_new"]);
 #endif
 }
 

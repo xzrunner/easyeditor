@@ -1,9 +1,9 @@
-#include "JsonTools.h"
+#include "JsonIO.h"
 
 namespace d2d
 {
 
-void JsonTools::store(const std::vector<Vector>& points, Json::Value& value)
+void JsonIO::Store(const std::vector<Vector>& points, Json::Value& value)
 {
 	for (int i = 0, n = points.size(); i < n; ++i)
 	{
@@ -12,7 +12,7 @@ void JsonTools::store(const std::vector<Vector>& points, Json::Value& value)
 	}
 }
 
-void JsonTools::load(const Json::Value& value, std::vector<Vector>& points)
+void JsonIO::Load(const Json::Value& value, std::vector<Vector>& points)
 {
 	points.reserve(value["x"].size());
 
@@ -31,7 +31,7 @@ void JsonTools::load(const Json::Value& value, std::vector<Vector>& points)
 	}
 }
 
-void JsonTools::store(const std::vector<Colorf>& colors, Json::Value& value)
+void JsonIO::Store(const std::vector<Colorf>& colors, Json::Value& value)
 {
 	for (int i = 0, n = colors.size(); i < n; ++i)
 	{
@@ -42,7 +42,7 @@ void JsonTools::store(const std::vector<Colorf>& colors, Json::Value& value)
 	}
 }
 
-void JsonTools::load(const Json::Value& value, std::vector<Colorf>& colors)
+void JsonIO::Load(const Json::Value& value, std::vector<Colorf>& colors)
 {
 	colors.reserve(value["r"].size());
 
@@ -71,7 +71,7 @@ void JsonTools::load(const Json::Value& value, std::vector<Colorf>& colors)
 	}
 }
 
-void JsonTools::Store(const d2d::Rect& r, Json::Value& value)
+void JsonIO::Store(const d2d::Rect& r, Json::Value& value)
 {
 	value["xmin"] = r.xMin;
 	value["xmax"] = r.xMax;
@@ -79,12 +79,28 @@ void JsonTools::Store(const d2d::Rect& r, Json::Value& value)
 	value["ymax"] = r.yMax;
 }
 
-void JsonTools::Load(const Json::Value& value, d2d::Rect& r)
+void JsonIO::Load(const Json::Value& value, d2d::Rect& r)
 {
 	r.xMin = value["xmin"].asDouble();
 	r.xMax = value["xmax"].asDouble();
 	r.yMin = value["ymin"].asDouble();
 	r.yMax = value["ymax"].asDouble();
+}
+
+void JsonIO::Store(const Colorf& col, Json::Value& value)
+{
+	value["r"] = col.r;
+	value["g"] = col.g;
+	value["b"] = col.b;
+	value["a"] = col.a;
+}
+
+void JsonIO::Load(const Json::Value& value, Colorf& col)
+{
+	col.r = value["r"].asDouble();
+	col.g = value["g"].asDouble();
+	col.b = value["b"].asDouble();
+	col.a = value["a"].asDouble();
 }
 
 }

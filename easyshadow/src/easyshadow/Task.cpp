@@ -21,10 +21,13 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
+	FileIO::LoadFromFile(filename, m_stage->GetSymbol());
+	m_stage->Refresh();
 }
 
 void Task::store(const char* filename) const
 {
+	FileIO::StoreToFile(filename, m_stage->GetSymbol());
 }
 
 bool Task::isDirty() const
