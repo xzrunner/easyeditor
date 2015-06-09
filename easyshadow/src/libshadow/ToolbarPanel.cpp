@@ -16,6 +16,31 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	SetSizer(initLayout());
 }
 
+void ToolbarPanel::SetValue(int key, const d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case S_RADIUS:
+		{
+			Shadow* shadow = m_stage->GetSymbol()->GetShadow();
+			shadow->SetRadius(data.val0);
+			shadow->BuildOutterLine();
+			m_stage->Refresh();
+		}
+		break;
+	}
+}
+
+void ToolbarPanel::GetValue(int key, d2d::UICallback::Data& data)
+{
+	switch (key)
+	{
+	case S_RADIUS:
+		int zz = 0;
+		break;
+	}
+}
+
 wxSizer* ToolbarPanel::initLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
@@ -36,14 +61,9 @@ wxSizer* ToolbarPanel::initLayout()
 	}
 	sizer->AddSpacer(20);
 	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, "°ë¾¶");
-		wxSizer* radius_sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
-		{
-			wxSpinCtrl* spin = new wxSpinCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(120, -1), wxSP_ARROW_KEYS, 5, 50, 10);
-			Connect(spin->GetId(), wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler(ToolbarPanel::OnChangeRadius));
-			radius_sizer->Add(spin);
-		}
-		sizer->Add(radius_sizer);
+		m_slider_radius = new d2d::SliderCtrlOne(this, "°ë¾¶", "radius",
+			this, S_RADIUS, d2d::SliderItem("", "", 20, 5, 200));
+		sizer->Add(m_slider_radius);
 	}
 	return sizer;
 }
@@ -68,14 +88,6 @@ void ToolbarPanel::OnSetOuterColor(wxCommandEvent& event)
 		shadow->BuildFace();
 		m_stage->Refresh();
 	}
-}
-
-void ToolbarPanel::OnChangeRadius(wxSpinEvent& event)
-{
-	Shadow* shadow = m_stage->GetSymbol()->GetShadow();
-	shadow->SetRadius(event.GetValue());
-	shadow->BuildOutterLine();
-	m_stage->Refresh();
 }
 
 }
