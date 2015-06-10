@@ -33,11 +33,26 @@ public:
 	void SetEditable(bool editable) { m_editable = editable; }
 	void SetVisible(bool visible) { m_visible = visible; }
 
-	void LoadFromFile(const Json::Value& val, const std::string& dir);
+	void LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx);
 	void StoreToFile(Json::Value& val, const std::string& dir) const;
 
 private:
 	static bool IsValidFloat(float f);
+
+	void LoadSprites(const Json::Value& val, const std::string& dir, 
+		const std::string& base_path = "");
+	void LoadShapes(const Json::Value& val, const std::string& dir, 
+		const std::string& base_path = "");
+
+	void LoadFromBaseFile(int layer_idx, const std::string& filepath, const std::string& dir);
+
+private:
+	struct UserData
+	{
+		std::string base_path;
+
+		UserData(const std::string& path) : base_path(path) {}
+	};
 
 private:
 	std::string m_name;
@@ -46,6 +61,8 @@ private:
 
 	d2d::ObjectVector<d2d::ISprite> m_sprites;
 	d2d::ObjectVector<d2d::IShape> m_shapes;
+
+	std::string m_base_filepath;
 
 }; // Layer
 
