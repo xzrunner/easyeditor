@@ -19,11 +19,12 @@ ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanel* stage,
 	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
 	, m_property(property)
+	, m_selected_idx(0)
 {
-	initLayout();
+	InitLayout();
 }
 
-void ViewlistPanel::remove(ISprite* sprite)
+void ViewlistPanel::Remove(ISprite* sprite)
 {
 	std::vector<ISprite*>::iterator itr = m_sprites.begin();
 	int idx = 0;
@@ -40,7 +41,7 @@ void ViewlistPanel::remove(ISprite* sprite)
 	m_sprites.erase(itr);
 }
 
-void ViewlistPanel::insert(ISprite* sprite)
+void ViewlistPanel::Insert(ISprite* sprite)
 {
 //	m_list->insert(const_cast<ISymbol*>(&sprite->getSymbol()));
 //  m_sprites.push_back(sprite);
@@ -49,7 +50,7 @@ void ViewlistPanel::insert(ISprite* sprite)
 	m_sprites.insert(m_sprites.begin(), sprite);
 }
 
-void ViewlistPanel::reorder(const ISprite* sprite, bool up)
+void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 {
 	int i = 0;
 	int n = m_sprites.size();
@@ -78,8 +79,15 @@ void ViewlistPanel::reorder(const ISprite* sprite, bool up)
 	}
 }
 
-void ViewlistPanel::onSelected(int index)
+void ViewlistPanel::ReorderSelected(bool up)
 {
+	Reorder(m_sprites[m_selected_idx], up);
+}
+
+void ViewlistPanel::OnSelected(int index)
+{
+	m_selected_idx = index;
+
 	if (m_property)
 	{
 		d2d::IPropertySetting* setting = new d2d::SpritePropertySetting(m_stage, m_sprites[index]);
@@ -95,13 +103,13 @@ void ViewlistPanel::onSelected(int index)
 	}
 }
 
-void ViewlistPanel::clear()
+void ViewlistPanel::Clear()
 {
 	m_list->clear();
 	m_sprites.clear();
 }
 
-void ViewlistPanel::initLayout()
+void ViewlistPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 

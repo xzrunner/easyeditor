@@ -14,7 +14,7 @@ void FileIO::load(const Task* task, const char* filename)
 
 	task->m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
-		task->m_viewlist->insert(symbol->m_sprites[i]);
+		task->m_viewlist->Insert(symbol->m_sprites[i]);
 
 	task->m_stage->loadHistoryList(filename, symbol->m_sprites);
 

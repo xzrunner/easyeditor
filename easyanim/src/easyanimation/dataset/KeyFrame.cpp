@@ -65,7 +65,7 @@ void KeyFrame::Insert(d2d::ISprite* sprite)
 	// view list
 	KeyFrame* curr = m_ctrl->getCurrFrame();
 	if (this == curr) {
-		m_ctrl->GetViewlist()->insert(sprite);
+		m_ctrl->GetViewlist()->Insert(sprite);
 	}
 }
 
@@ -89,7 +89,7 @@ bool KeyFrame::Remove(d2d::ISprite* sprite)
 		// viewlist
 		KeyFrame* curr = m_ctrl->getCurrFrame();
 		if (this == curr) {
-			m_ctrl->GetViewlist()->remove(sprite);
+			m_ctrl->GetViewlist()->Remove(sprite);
 		}
 
 		return true;
@@ -108,11 +108,11 @@ bool KeyFrame::Reorder(const d2d::ISprite* sprite, bool up)
 
 		if (up && i != n - 1) {
 			std::swap(m_sprites[i], m_sprites[i+1]);
-			m_ctrl->GetViewlist()->reorder(sprite, up);
+			m_ctrl->GetViewlist()->Reorder(sprite, up);
 			return true;
 		} else if (!up && i != 0) {
 			std::swap(m_sprites[i], m_sprites[i-1]);
-			m_ctrl->GetViewlist()->reorder(sprite, up);
+			m_ctrl->GetViewlist()->Reorder(sprite, up);
 			return true;
 		}
 

@@ -83,9 +83,9 @@ void LibraryPanel::RefreshViewList()
 	Layer* layer = static_cast<LibraryPage*>(m_selected)->GetLayer();
 	std::vector<d2d::ISprite*> sprites;
 	layer->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
-	m_viewlist->clear();
+	m_viewlist->Clear();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		m_viewlist->insert(sprites[i]);
+		m_viewlist->Insert(sprites[i]);
 	}
 }
 

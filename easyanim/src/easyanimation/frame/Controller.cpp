@@ -191,12 +191,12 @@ void Controller::reloadViewList(const KeyFrame* frame)
 {
 	if (!m_widgets->m_viewlist) return;
 
-	m_widgets->m_viewlist->clear();
+	m_widgets->m_viewlist->Clear();
 	if (frame)
 	{
 		const std::vector<d2d::ISprite*>& sprites = frame->GetAllSprites();
 		for (int i = 0, n = sprites.size(); i < n; ++i)
-			m_widgets->m_viewlist->insert(sprites[i]);
+			m_widgets->m_viewlist->Insert(sprites[i]);
 	}	
 }
 

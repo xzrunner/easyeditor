@@ -60,7 +60,7 @@ void Task::clear()
 {
 	//	d2d::SymbolMgr::Instance()->clear();
 
-	m_widgets.m_viewlist->clear();
+	m_widgets.m_viewlist->Clear();
 
 	m_widgets.m_library->clear();
 	m_widgets.m_stage->clear();

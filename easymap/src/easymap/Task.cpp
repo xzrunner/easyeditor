@@ -84,7 +84,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_viewlist->clear();
+	m_viewlist->Clear();
 
 	m_library->clear();
 	m_stage->clear();

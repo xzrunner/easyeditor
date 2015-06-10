@@ -21,16 +21,17 @@ public:
 		MultiSpritesImpl* sprites_impl = NULL, 
 		PropertySettingPanel* property = NULL);
 
-	void remove(ISprite* sprite);
-	void insert(ISprite* sprite);
-	void reorder(const ISprite* sprite, bool up);
+	void Remove(ISprite* sprite);
+	void Insert(ISprite* sprite);
+	void Reorder(const ISprite* sprite, bool up);
+	void ReorderSelected(bool up);
 
-	void onSelected(int index);
+	void OnSelected(int index);
 
-	void clear();
+	void Clear();
 
 private:
-	void initLayout();
+	void InitLayout();
 
 private:
 	EditPanel* m_stage;
@@ -40,6 +41,8 @@ private:
 	ViewlistList* m_list;
 
 	std::vector<ISprite*> m_sprites;
+
+	int m_selected_idx;
 
 }; // ViewlistPanel
 

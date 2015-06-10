@@ -113,7 +113,7 @@ void EditDialog::LoadSymbolInfo()
 {
 	for (size_t i = 0, n = m_symbol->m_sprites.size(); i < n; ++i) {
 		m_library->AddSymbol(const_cast<d2d::ISymbol*>(&m_symbol->m_sprites[i]->getSymbol()));
-		m_viewlist->insert(m_symbol->m_sprites[i]);
+		m_viewlist->Insert(m_symbol->m_sprites[i]);
 	}
 }
 

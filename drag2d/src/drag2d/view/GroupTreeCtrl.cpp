@@ -19,6 +19,7 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 	EVT_TREE_ITEM_ACTIVATED(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnItemActivated)
 	EVT_TREE_BEGIN_DRAG(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnBeginDrag)
 	EVT_TREE_END_DRAG(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnEndDrag)
+	EVT_KEY_DOWN(GroupTreeCtrl::OnKeyDown)
 END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
@@ -199,6 +200,23 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 	Delete(item_src);
 	// sort
 	ReorderSprites();
+}
+
+void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
+{
+	switch (event.GetKeyCode())
+	{
+	case WXK_UP:
+		{
+			int zz = 0;
+		}
+		break;
+	case WXK_DOWN:
+		{
+			int zz = 0;
+		}
+		break;
+	}
 }
 
 void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)

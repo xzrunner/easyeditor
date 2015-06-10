@@ -111,7 +111,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 		}
 	}
 
-	m_viewlist->remove(sprite);
+	m_viewlist->Remove(sprite);
 
 	if (m_pathfinding) {
 		m_pathfinding->DisableRegion(sprite, true);
@@ -122,7 +122,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	GetCurrLayer()->InsertSprite(sprite);
 
-	m_viewlist->insert(sprite);
+	m_viewlist->Insert(sprite);
 
 	if (m_sindex) {
 		m_sindex->Insert(sprite);
@@ -156,7 +156,7 @@ bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 			break;
 		}
 	}
-	m_viewlist->reorder(sprite, up);
+	m_viewlist->Reorder(sprite, up);
 	return ret;
 }
 

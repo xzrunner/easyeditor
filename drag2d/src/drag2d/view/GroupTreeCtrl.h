@@ -50,6 +50,7 @@ private:
 	void OnItemActivated(wxTreeEvent& event);
 	void OnBeginDrag(wxTreeEvent& event);
 	void OnEndDrag(wxTreeEvent& event);
+	void OnKeyDown(wxKeyEvent& event);
 
 	// menu
 	void OnMenuAddSprites(wxCommandEvent& event);
