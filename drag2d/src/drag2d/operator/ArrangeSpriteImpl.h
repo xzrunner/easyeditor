@@ -45,8 +45,8 @@ public:
 	bool IsSelectionEmpty() const;
 
 protected:
-	virtual void onDirectionKeyDown(DirectionType type);
-	virtual void onSpaceKeyDown();
+	virtual void OnDirectionKeyDown(DirectionType type);
+	virtual void OnSpaceKeyUp();
 
 	virtual void SetRightPopupMenu(wxMenu& menu, ISprite* spr);
 
@@ -60,7 +60,7 @@ protected:
 	SpriteSelection* m_selection;
 
 private:
-	void OnDeleteKey();
+	void OnDeleteKeyDown();
 
 	void UpOneLayer();
 	void DownOneLayer();

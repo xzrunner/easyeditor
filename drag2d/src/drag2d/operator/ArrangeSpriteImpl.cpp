@@ -66,7 +66,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 	switch (keyCode)
 	{
 	case WXK_DELETE:
-		OnDeleteKey();
+		OnDeleteKeyDown();
 		break;
 	case WXK_PAGEUP:
 		UpOneLayer();
@@ -75,22 +75,25 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		DownOneLayer();
 		break;
 	case 'a': case 'A':
-		onDirectionKeyDown(e_left);
+		OnDirectionKeyDown(e_left);
 		break;
 	case 'd': case 'D':
-		onDirectionKeyDown(e_right);
+		OnDirectionKeyDown(e_right);
 		break;
 	case 's': case 'S':
-		onDirectionKeyDown(e_down);
+		OnDirectionKeyDown(e_down);
 		break;
 	case 'w': case 'W':
-		onDirectionKeyDown(e_up);
+		OnDirectionKeyDown(e_up);
 		break;
 	case '[':
 		DownOneLayer();
 		break;
 	case ']':
 		UpOneLayer();
+		break;
+	case 'm' : case 'M':
+		
 		break;
 
 		// for debug
@@ -108,25 +111,7 @@ void ArrangeSpriteImpl::onKeyUp(int keyCode)
 	switch (keyCode)
 	{
 	case WXK_SPACE:
-		{
-			std::vector<ISprite*> sprites;
-			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-			CombineAOP* comb = new CombineAOP();
-			for (int i = 0, n = sprites.size(); i < n; ++i) {
-				ISprite* sprite = sprites[i];
-
-				comb->Insert(new TranslateSpriteAOP(sprite, -sprite->getPosition()));
-				comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->getScale()));
-				comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->getShear()));
-				//				comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
-
-				sprite->setTransform(Vector(0, 0), 0);
-				sprite->setScale(1, 1);
-				sprite->setShear(0, 0);
-				//				sprite->setOffset(Vector(0, 0));
-			}
-			m_stage->addHistoryOP(comb);
-		}
+		OnSpaceKeyUp();
 		break;
 	}
 
@@ -444,7 +429,7 @@ bool ArrangeSpriteImpl::IsSelectionEmpty() const
 	return m_selection->IsEmpty();
 }
 
-void ArrangeSpriteImpl::onDirectionKeyDown(DirectionType type)
+void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
 {
 	if (!m_op_state) return;
 
@@ -458,16 +443,26 @@ void ArrangeSpriteImpl::onDirectionKeyDown(DirectionType type)
 	}
 }
 
-void ArrangeSpriteImpl::onSpaceKeyDown()
+void ArrangeSpriteImpl::OnSpaceKeyUp()
 {
-	std::vector<ISprite*> selected;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(selected));
-	for (size_t i = 0, n = selected.size(); i < n; ++i)
+	std::vector<ISprite*> sprites;
+	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	CombineAOP* comb = new CombineAOP();
+	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
-		selected[i]->setTransform(Vector(0, 0), 0);
-		//selected[i]->setOffset(Vector(0, 0));
+		ISprite* sprite = sprites[i];
+
+		comb->Insert(new TranslateSpriteAOP(sprite, -sprite->getPosition()));
+		comb->Insert(new ScaleSpriteAOP(sprite, Vector(1, 1), sprite->getScale()));
+		comb->Insert(new ShearSpriteAOP(sprite, Vector(0, 0), sprite->getShear()));
+		//comb->Insert(new OffsetSpriteAOP(sprite, Vector(0, 0), sprite->getOffset()));
+
+		sprite->setTransform(Vector(0, 0), 0);
+		sprite->setScale(1, 1);
+		sprite->setShear(0, 0);
+		//sprite->setOffset(Vector(0, 0));
 	}
-	m_stage->Refresh();
+	m_stage->addHistoryOP(comb);
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
@@ -525,7 +520,7 @@ IArrangeSpriteState* ArrangeSpriteImpl::CreateOffsetState(ISprite* sprite) const
 	return new OffsetSpriteState(sprite);
 }
 
-void ArrangeSpriteImpl::OnDeleteKey()
+void ArrangeSpriteImpl::OnDeleteKeyDown()
 {
 	// add to history
 	std::vector<ISprite*> sprites;
