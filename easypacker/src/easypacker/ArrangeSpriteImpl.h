@@ -14,11 +14,11 @@ public:
 	ArrangeSpriteImpl(StagePanel* editPanel, 
 		d2d::PropertySettingPanel* propertyPanel);
 
-	virtual void onMouseLeftUp(int x, int y);
-	virtual void onMouseRightDown(int x, int y);
-	virtual void onMouseRightUp(int x, int y);
+	virtual void OnMouseLeftUp(int x, int y);
+	virtual void OnMouseRightDown(int x, int y);
+	virtual void OnMouseRightUp(int x, int y);
 
-	virtual void onDraw() const;
+	virtual void OnDraw() const;
 
 private:
 	class FixCoordsVisitor : public d2d::IVisitor

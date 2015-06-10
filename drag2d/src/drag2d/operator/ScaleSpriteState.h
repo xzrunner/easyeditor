@@ -16,7 +16,7 @@ public:
 	virtual ~ScaleSpriteState();
 
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseMove(const Vector& pos);
+	virtual	bool OnMouseDrag(const Vector& pos);
 
 protected:
 	virtual void Scale(const Vector& curr);

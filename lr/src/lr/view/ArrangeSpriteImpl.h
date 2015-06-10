@@ -18,7 +18,7 @@ public:
 	ArrangeSpriteImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
 		CharacterAllDirections* dirs);
 
-	virtual void onPopMenuSelected(int type);
+	virtual void OnPopMenuSelected(int type);
 
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr);

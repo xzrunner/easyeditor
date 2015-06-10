@@ -11,7 +11,7 @@ ComposeImpl::ComposeImpl(StagePanel* stage, d2d::PropertySettingPanel* property)
 {
 }
 
-void ComposeImpl::onMouseRightDown(int x, int y)
+void ComposeImpl::OnMouseRightDown(int x, int y)
 {
 	// 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	// 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);

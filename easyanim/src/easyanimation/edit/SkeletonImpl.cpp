@@ -19,13 +19,13 @@ SkeletonImpl::SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* propert
 {
 }
 
-void SkeletonImpl::onKeyDown(int keyCode)
+void SkeletonImpl::OnKeyDown(int keyCode)
 {
-	d2d::ArrangeSpriteImpl::onKeyDown(keyCode);
+	d2d::ArrangeSpriteImpl::OnKeyDown(keyCode);
 	m_key_handler.process(keyCode);
 }
 
-void SkeletonImpl::onMouseLeftDown(int x, int y)
+void SkeletonImpl::OnMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	m_first_pos = pos;
@@ -33,11 +33,11 @@ void SkeletonImpl::onMouseLeftDown(int x, int y)
 	if (joint) {
 		m_selected_joint = joint;
 	} else {
-		d2d::ArrangeSpriteImpl::onMouseLeftDown(x, y);
+		d2d::ArrangeSpriteImpl::OnMouseLeftDown(x, y);
 	}
 }
 
-void SkeletonImpl::onMouseLeftUp(int x, int y)
+void SkeletonImpl::OnMouseLeftUp(int x, int y)
 {
 	if (m_selected_joint) 
 	{
@@ -45,7 +45,7 @@ void SkeletonImpl::onMouseLeftUp(int x, int y)
 	}
 	else
 	{
-		d2d::ArrangeSpriteImpl::onMouseLeftUp(x, y);
+		d2d::ArrangeSpriteImpl::OnMouseLeftUp(x, y);
 
 		if (m_selection->Size() == 1)
 		{
@@ -56,13 +56,13 @@ void SkeletonImpl::onMouseLeftUp(int x, int y)
 	}
 }
 
-void SkeletonImpl::onMouseRightDown(int x, int y)
+void SkeletonImpl::OnMouseRightDown(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::onMouseRightDown(x, y);
+	d2d::ArrangeSpriteImpl::OnMouseRightDown(x, y);
 	m_first_pos = m_stage->transPosScreenToProject(x, y);
 }
 
-void SkeletonImpl::onMouseDrag(int x, int y)
+void SkeletonImpl::OnMouseDrag(int x, int y)
 {
 	if (m_selected_joint)
 	{
@@ -72,13 +72,13 @@ void SkeletonImpl::onMouseDrag(int x, int y)
 	}
 	else
 	{
-		d2d::ArrangeSpriteImpl::onMouseDrag(x, y);
+		d2d::ArrangeSpriteImpl::OnMouseDrag(x, y);
 	}
 }
 
-void SkeletonImpl::onPopMenuSelected(int type)
+void SkeletonImpl::OnPopMenuSelected(int type)
 {
-	d2d::ArrangeSpriteImpl::onPopMenuSelected(type);
+	d2d::ArrangeSpriteImpl::OnPopMenuSelected(type);
 
 	switch(type)
 	{
@@ -94,9 +94,9 @@ void SkeletonImpl::onPopMenuSelected(int type)
 	}
 }
 
-void SkeletonImpl::onDraw() const
+void SkeletonImpl::OnDraw() const
 {
-	d2d::ArrangeSpriteImpl::onDraw(*m_stage->getCamera());
+	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->getCamera());
 	m_stage->getSkeletonData().draw();
 }
 

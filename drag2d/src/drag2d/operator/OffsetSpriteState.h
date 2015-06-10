@@ -17,7 +17,7 @@ public:
 	virtual ~OffsetSpriteState();
 
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseMove(const Vector& pos);
+	virtual	bool OnMouseDrag(const Vector& pos);
 
 private:
 	ISprite* m_sprite;

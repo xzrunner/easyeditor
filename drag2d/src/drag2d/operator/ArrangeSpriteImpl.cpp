@@ -5,6 +5,7 @@
 #include "ScaleSpriteState.h"
 #include "ShearSpriteState.h"
 #include "OffsetSpriteState.h"
+#include "MoveSpriteState.h"
 
 #include "common/Math.h"
 #include "common/Config.h"
@@ -38,8 +39,8 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(EditPanel* editPanel,
 									 PropertySettingPanel* propertyPanel,
 									 const ArrangeSpriteConfig& cfg) 
 	: m_stage(editPanel)
-	, m_spritesImpl(spritesImpl)
-	, m_propertyPanel(propertyPanel)
+	, m_sprites_impl(spritesImpl)
+	, m_property_panel(propertyPanel)
 	, m_align(spritesImpl)
 	, m_op_state(NULL)
 	, m_cfg(cfg)
@@ -61,7 +62,7 @@ ArrangeSpriteImpl::~ArrangeSpriteImpl()
 	delete m_op_state;
 }
 
-void ArrangeSpriteImpl::onKeyDown(int keyCode)
+void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 {
 	switch (keyCode)
 	{
@@ -93,7 +94,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 		UpOneLayer();
 		break;
 	case 'm' : case 'M':
-		
+		m_op_state = new MoveSpriteState(m_selection);
 		break;
 
 		// for debug
@@ -106,7 +107,7 @@ void ArrangeSpriteImpl::onKeyDown(int keyCode)
 	}
 }
 
-void ArrangeSpriteImpl::onKeyUp(int keyCode)
+void ArrangeSpriteImpl::OnKeyUp(int keyCode)
 {
 	switch (keyCode)
 	{
@@ -115,14 +116,14 @@ void ArrangeSpriteImpl::onKeyUp(int keyCode)
 		break;
 	}
 
-	if (m_propertyPanel)
+	if (m_property_panel)
 	{
-		m_propertyPanel->EnablePropertyGrid(true);
-		m_propertyPanel->UpdatePropertyGrid();
+		m_property_panel->EnablePropertyGrid(true);
+		m_property_panel->UpdatePropertyGrid();
 	}
 }
 
-void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
+void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
 	Vector pos = m_stage->transPosScreenToProject(x, y);
 	m_left_down_pos = pos;
@@ -179,7 +180,7 @@ void ArrangeSpriteImpl::onMouseLeftDown(int x, int y)
 	m_op_state->OnMousePress(pos);
 }
 
-void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
+void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 {
 	Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (m_op_state) 
@@ -209,14 +210,14 @@ void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
 		m_align.Align(sprites);
 	}
 
-	if (m_propertyPanel)
+	if (m_property_panel)
 	{
-		m_propertyPanel->EnablePropertyGrid(true);
-		m_propertyPanel->UpdatePropertyGrid();
+		m_property_panel->EnablePropertyGrid(true);
+		m_property_panel->UpdatePropertyGrid();
 	}
 }
 
-void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
+void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 {
 	Vector pos = m_stage->transPosScreenToProject(x, y);
 	m_right_down_pos = pos;
@@ -255,12 +256,12 @@ void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
 	}
 }
 
-void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
+void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
 	if (m_right_down_pos.isValid() && !m_selection->IsEmpty())
 	{
 		Vector pos = m_stage->transPosScreenToProject(x, y);
-		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
+		d2d::ISprite* sprite = m_sprites_impl->querySpriteByPos(pos);
 		if (pos == m_right_down_pos && sprite)
 		{
 			wxMenu menu;
@@ -278,27 +279,39 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 			m_op_state = NULL;
 		}
 
-		if (m_propertyPanel)
+		if (m_property_panel)
 		{
-			m_propertyPanel->EnablePropertyGrid(true);
-			m_propertyPanel->UpdatePropertyGrid();
+			m_property_panel->EnablePropertyGrid(true);
+			m_property_panel->UpdatePropertyGrid();
 		}
 	}
 }
 
-void ArrangeSpriteImpl::onMouseDrag(int x, int y)
+void ArrangeSpriteImpl::OnMouseMove(int x, int y)
 {
 	Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (m_op_state && m_op_state->OnMouseMove(pos))
 	{
-		if (m_propertyPanel) {
-			m_propertyPanel->EnablePropertyGrid(false);
+		if (m_property_panel) {
+			m_property_panel->EnablePropertyGrid(false);
 		}
 		m_stage->Refresh();
 	}
 }
 
-void ArrangeSpriteImpl::onPopMenuSelected(int type)
+void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
+{
+	Vector pos = m_stage->transPosScreenToProject(x, y);
+	if (m_op_state && m_op_state->OnMouseDrag(pos))
+	{
+		if (m_property_panel) {
+			m_property_panel->EnablePropertyGrid(false);
+		}
+		m_stage->Refresh();
+	}
+}
+
+void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 {
 	switch (type)
 	{
@@ -353,7 +366,7 @@ void ArrangeSpriteImpl::onPopMenuSelected(int type)
 	}
 }
 
-void ArrangeSpriteImpl::onDraw(const Camera& cam) const
+void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 {
 	m_ctrl_node_radius = std::min(CTRL_NODE_RADIUS * cam.GetScale(), MAX_CTRL_NODE_RADIUS);
 	if (m_ctrl_node_radius / cam.GetScale() < 5) {
@@ -391,7 +404,7 @@ void ArrangeSpriteImpl::onDraw(const Camera& cam) const
 	m_align.Draw();
 }
 
-void ArrangeSpriteImpl::clear()
+void ArrangeSpriteImpl::Clear()
 {
 }
 
@@ -436,8 +449,8 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
 	bool dirty = m_op_state->OnDirectionKeyDown(type);
 	if (dirty)
 	{
-		if (m_propertyPanel) {
-			m_propertyPanel->EnablePropertyGrid(false);
+		if (m_property_panel) {
+			m_property_panel->EnablePropertyGrid(false);
 		}
 		m_stage->Refresh();
 	}
@@ -525,9 +538,9 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	// add to history
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	m_stage->addHistoryOP(new DeleteSpriteAOP(sprites, m_spritesImpl));
+	m_stage->addHistoryOP(new DeleteSpriteAOP(sprites, m_sprites_impl));
 
-	m_spritesImpl->removeSpriteSelection();	
+	m_sprites_impl->removeSpriteSelection();	
 }
 
 void ArrangeSpriteImpl::UpOneLayer()
@@ -535,7 +548,7 @@ void ArrangeSpriteImpl::UpOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		m_spritesImpl->resetSpriteOrder(selected[i], true);
+		m_sprites_impl->resetSpriteOrder(selected[i], true);
 	}
 }
 
@@ -544,7 +557,7 @@ void ArrangeSpriteImpl::DownOneLayer()
 	std::vector<d2d::ISprite*> selected;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
-		m_spritesImpl->resetSpriteOrder(selected[i], false);
+		m_sprites_impl->resetSpriteOrder(selected[i], false);
 	}
 }
 
@@ -554,7 +567,7 @@ void ArrangeSpriteImpl::UpLayerMost()
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		do {
-		} while (m_spritesImpl->resetSpriteOrder(selected[i], true));
+		} while (m_sprites_impl->resetSpriteOrder(selected[i], true));
 	}
 }
 
@@ -564,7 +577,7 @@ void ArrangeSpriteImpl::DownLayerMost()
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 	for (size_t i = 0, n = selected.size(); i < n; ++i) {
 		do {
-		} while (m_spritesImpl->resetSpriteOrder(selected[i], false));
+		} while (m_sprites_impl->resetSpriteOrder(selected[i], false));
 	}
 }
 

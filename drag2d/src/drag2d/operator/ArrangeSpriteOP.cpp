@@ -44,7 +44,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onKeyDown(int keyCode)
 {
 	if (TBase::onKeyDown(keyCode)) return true;
-	m_impl->onKeyDown(keyCode);
+	m_impl->OnKeyDown(keyCode);
 	return false;
 }
 
@@ -52,7 +52,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onKeyUp(int keyCode)
 {
 	if (TBase::onKeyUp(keyCode)) return true;
-	m_impl->onKeyUp(keyCode);
+	m_impl->OnKeyUp(keyCode);
 	return false;
 }
 
@@ -60,7 +60,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onMouseLeftDown(int x, int y)
 {
 	if (TBase::onMouseLeftDown(x, y)) return true;
-	m_impl->onMouseLeftDown(x, y);
+	m_impl->OnMouseLeftDown(x, y);
 	return false;
 }
 
@@ -68,7 +68,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onMouseLeftUp(int x, int y)
 {
 	if (TBase::onMouseLeftUp(x, y)) return true;
-	m_impl->onMouseLeftUp(x, y);
+	m_impl->OnMouseLeftUp(x, y);
 	return false;
 }
 
@@ -76,7 +76,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onMouseRightDown(int x, int y)
 {
 	if (TBase::onMouseRightDown(x, y)) return true;
-	m_impl->onMouseRightDown(x, y);
+	m_impl->OnMouseRightDown(x, y);
 	return false;
 }
 
@@ -84,7 +84,15 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onMouseRightUp(int x, int y)
 {
 	if (TBase::onMouseRightUp(x, y)) return true;
-	m_impl->onMouseRightUp(x, y);
+	m_impl->OnMouseRightUp(x, y);
+	return false;
+}
+
+template <typename TBase>
+bool ArrangeSpriteOP<TBase>::onMouseMove(int x, int y)
+{
+	if (TBase::onMouseDrag(x, y)) return true;
+	m_impl->OnMouseMove(x, y);
 	return false;
 }
 
@@ -92,7 +100,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onMouseDrag(int x, int y)
 {
 	if (TBase::onMouseDrag(x, y)) return true;
-	m_impl->onMouseDrag(x, y);
+	m_impl->OnMouseDrag(x, y);
 	return false;
 }
 
@@ -100,7 +108,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
 {
 	if (TBase::onPopMenuSelected(type)) return true;
-	m_impl->onPopMenuSelected(type);
+	m_impl->OnPopMenuSelected(type);
 	return false;
 }
 
@@ -108,7 +116,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::onDraw() const
 {
 	if (TBase::onDraw()) return true;
-	m_impl->onDraw(*m_stage->getCamera());
+	m_impl->OnDraw(*m_stage->getCamera());
 	return false;
 }
 
@@ -116,7 +124,7 @@ template <typename TBase>
 bool ArrangeSpriteOP<TBase>::clear()
 {
 	if (TBase::clear()) return true;
-	m_impl->clear();
+	m_impl->Clear();
 	return false;
 }
 

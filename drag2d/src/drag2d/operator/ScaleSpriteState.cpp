@@ -36,7 +36,7 @@ AbstractAtomicOP* ScaleSpriteState::OnMouseRelease(const Vector& pos)
 	return comb;
 }
 
-bool ScaleSpriteState::OnMouseMove(const Vector& pos)
+bool ScaleSpriteState::OnMouseDrag(const Vector& pos)
 {
 	Scale(pos);
 	return true;

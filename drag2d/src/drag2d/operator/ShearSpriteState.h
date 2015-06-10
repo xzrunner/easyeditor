@@ -14,7 +14,7 @@ public:
 	virtual ~ShearSpriteState();
 
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseMove(const Vector& pos);
+	virtual	bool OnMouseDrag(const Vector& pos);
 
 private:
 	void Shear(const Vector& curr);

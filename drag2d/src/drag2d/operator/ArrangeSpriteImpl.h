@@ -26,18 +26,19 @@ public:
 		PropertySettingPanel* propertyPanel, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 	~ArrangeSpriteImpl();
 
-	virtual void onKeyDown(int keyCode);
-	virtual void onKeyUp(int keyCode);
-	virtual void onMouseLeftDown(int x, int y);
-	virtual void onMouseLeftUp(int x, int y);
-	virtual void onMouseRightDown(int x, int y);
-	virtual void onMouseRightUp(int x, int y);
-	virtual void onMouseDrag(int x, int y);
+	virtual void OnKeyDown(int keyCode);
+	virtual void OnKeyUp(int keyCode);
+	virtual void OnMouseLeftDown(int x, int y);
+	virtual void OnMouseLeftUp(int x, int y);
+	virtual void OnMouseRightDown(int x, int y);
+	virtual void OnMouseRightUp(int x, int y);
+	virtual void OnMouseMove(int x, int y);
+	virtual void OnMouseDrag(int x, int y);
 
-	virtual void onPopMenuSelected(int type);
+	virtual void OnPopMenuSelected(int type);
 
-	virtual void onDraw(const Camera& cam) const;
-	virtual void clear();
+	virtual void OnDraw(const Camera& cam) const;
+	virtual void Clear();
 
 	// query edited sprite, include its extra edit region
 	ISprite* QueryEditedSprite(const Vector& pos) const;
@@ -95,8 +96,8 @@ private:
 	AutoAlign m_align;
 
 	EditPanel* m_stage;
-	MultiSpritesImpl* m_spritesImpl;
-	PropertySettingPanel* m_propertyPanel;
+	MultiSpritesImpl* m_sprites_impl;
+	PropertySettingPanel* m_property_panel;
 
 	IArrangeSpriteState* m_op_state;
 

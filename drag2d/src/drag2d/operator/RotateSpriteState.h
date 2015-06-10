@@ -14,7 +14,7 @@ public:
 	virtual ~RotateSpriteState();
 
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseMove(const Vector& pos);
+	virtual	bool OnMouseDrag(const Vector& pos);
 
 protected:
 	virtual void Rotate(const Vector& dst);

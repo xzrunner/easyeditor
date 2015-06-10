@@ -204,6 +204,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\operator\MoveSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\MoveSpriteState.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\operator\OffsetSpriteState.cpp"
 						>
 					</File>

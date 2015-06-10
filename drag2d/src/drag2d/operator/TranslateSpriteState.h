@@ -15,7 +15,7 @@ public:
 
 	virtual	void OnMousePress(const Vector& pos);
 	virtual AbstractAtomicOP* OnMouseRelease(const Vector& pos);
-	virtual	bool OnMouseMove(const Vector& pos);
+	virtual	bool OnMouseDrag(const Vector& pos);
 
 	virtual bool OnDirectionKeyDown(DirectionType type);
 

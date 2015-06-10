@@ -30,7 +30,7 @@ AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
 	return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
 }
 
-bool TranslateSpriteState::OnMouseMove(const Vector& pos)
+bool TranslateSpriteState::OnMouseDrag(const Vector& pos)
 {
 	if (m_selection->IsEmpty() || !m_last_pos.isValid()) {
 		return false;

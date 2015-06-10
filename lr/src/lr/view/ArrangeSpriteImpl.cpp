@@ -18,9 +18,9 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* stage,
 {
 }
 
-void ArrangeSpriteImpl::onPopMenuSelected(int type)
+void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 {
-	d2d::ArrangeSpriteImpl::onPopMenuSelected(type);
+	d2d::ArrangeSpriteImpl::OnPopMenuSelected(type);
 	m_popup.OnRightPopupMenu(type);
 }
 

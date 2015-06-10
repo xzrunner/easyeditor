@@ -17,15 +17,15 @@ public:
 	SkeletonImpl(StagePanel* stage, d2d::PropertySettingPanel* property,
 		d2d::AbstractEditOP* editop);
 
-	virtual void onKeyDown(int keyCode);
-	virtual void onMouseLeftDown(int x, int y);
-	virtual void onMouseLeftUp(int x, int y);
-	virtual void onMouseRightDown(int x, int y);
-	virtual void onMouseDrag(int x, int y);
+	virtual void OnKeyDown(int keyCode);
+	virtual void OnMouseLeftDown(int x, int y);
+	virtual void OnMouseLeftUp(int x, int y);
+	virtual void OnMouseRightDown(int x, int y);
+	virtual void OnMouseDrag(int x, int y);
 
-	virtual void onPopMenuSelected(int type);
+	virtual void OnPopMenuSelected(int type);
 
-	virtual void onDraw() const;
+	virtual void OnDraw() const;
 
 protected:
 	virtual void SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr);

@@ -13,19 +13,19 @@ ArrangeSpriteImpl::ArrangeSpriteImpl(StagePanel* editPanel,
 {
 }
 
-void ArrangeSpriteImpl::onMouseLeftUp(int x, int y)
+void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::onMouseLeftUp(x, y);
+	d2d::ArrangeSpriteImpl::OnMouseLeftUp(x, y);
 	m_selection->Traverse(FixCoordsVisitor());
 }
 
-void ArrangeSpriteImpl::onMouseRightDown(int x, int y)
+void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 {
-	d2d::ArrangeSpriteImpl::onMouseRightDown(x, y);
-	onMouseLeftDown(x, y);
+	d2d::ArrangeSpriteImpl::OnMouseRightDown(x, y);
+	OnMouseLeftDown(x, y);
 }
 
-void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
+void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
 	if (m_selection->Size() == 1)
 	{
@@ -41,12 +41,12 @@ void ArrangeSpriteImpl::onMouseRightUp(int x, int y)
 		sprites[0]->setTransform(pos, angle);
 	}
 
-	return onMouseLeftUp(x, y);
+	return OnMouseLeftUp(x, y);
 }
 
-void ArrangeSpriteImpl::onDraw() const
+void ArrangeSpriteImpl::OnDraw() const
 {
-	d2d::ArrangeSpriteImpl::onDraw(*m_stage->getCamera());
+	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->getCamera());
 	m_stage->traverseSprites(
 		d2d::DrawSelectedSpriteVisitor(d2d::Colorf(1.0f, 1.0f, 0.0f)),
 		d2d::DT_VISIBLE

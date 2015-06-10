@@ -28,7 +28,7 @@ AbstractAtomicOP* RotateSpriteState::OnMouseRelease(const Vector& pos)
 	return NULL;
 }
 
-bool RotateSpriteState::OnMouseMove(const Vector& pos)
+bool RotateSpriteState::OnMouseDrag(const Vector& pos)
 {
 	if (m_selection->Size() != 1) return false;
 

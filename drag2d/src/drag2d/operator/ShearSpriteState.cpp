@@ -28,7 +28,7 @@ AbstractAtomicOP* ShearSpriteState::OnMouseRelease(const Vector& pos)
 	return new ShearSpriteAOP(m_sprite, m_sprite->getShear(), m_first_shear);
 }
 
-bool ShearSpriteState::OnMouseMove(const Vector& pos)
+bool ShearSpriteState::OnMouseDrag(const Vector& pos)
 {
 	Shear(pos);
 	return true;

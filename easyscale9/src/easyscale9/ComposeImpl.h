@@ -13,8 +13,8 @@ class ComposeImpl : public d2d::ArrangeSpriteImpl
 public:
 	ComposeImpl(StagePanel* stage, d2d::PropertySettingPanel* property);
 
-	virtual void onMouseRightDown(int x, int y);
-	virtual void onMouseDrag(int x, int y) { return; }
+	virtual void OnMouseRightDown(int x, int y);
+	virtual void OnMouseDrag(int x, int y) { return; }
 
 private:
 	StagePanel* m_stage;
