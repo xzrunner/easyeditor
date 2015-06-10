@@ -560,38 +560,6 @@
 				<Filter
 					Name="lr"
 					>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\AnimToComplexWithColor.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\AnimToComplexWithColor.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\LRLayersPack.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\LRLayersPack.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\LRToComplex.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\LRToComplex.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.h"
-						>
-					</File>
 					<Filter
 						Name="extern"
 						>
@@ -609,6 +577,58 @@
 						</File>
 						<File
 							RelativePath="..\..\..\..\lr\src\lr\dataset\Grids.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="base"
+						>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\lr_config.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\LRLayersPack.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\LRLayersPack.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\LRToComplex.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\LRToComplex.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\SeparateToComplex.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\SeparateToComplex.h"
+							>
+						</File>
+					</Filter>
+					<Filter
+						Name="other"
+						>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\AnimToComplexWithColor.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\AnimToComplexWithColor.h"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\easydb_cl\TransOldLRFile.h"
 							>
 						</File>
 					</Filter>

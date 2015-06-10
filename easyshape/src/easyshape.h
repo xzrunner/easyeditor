@@ -12,6 +12,7 @@
 #include "libshape/LibraryPage.h"
 #include "libshape/ToolbarPanel.h"
 
+#include "libshape/PointShape.h"
 #include "libshape/BezierShape.h"
 #include "libshape/ChainShape.h"
 #include "libshape/CircleShape.h"
