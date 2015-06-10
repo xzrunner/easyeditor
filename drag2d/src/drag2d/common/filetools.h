@@ -1,12 +1,15 @@
-#pragma once
+#ifndef _DRAG2D_FILETOOLS_H_
+#define _DRAG2D_FILETOOLS_H_
 
-#include <wx/wx.h>
+#include <string>
 
 namespace d2d
 {
 
-bool RemDirRF(wxString rmDir);
+bool rm_dir(const std::string& dir);
 
-bool MkDirRF(wxString mkDir);
+bool mk_dir(const std::string& dir, bool rm = true);
 
 }
+
+#endif // _DRAG2D_FILETOOLS_H_

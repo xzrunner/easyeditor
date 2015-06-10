@@ -1,5 +1,6 @@
 #include "LRLayersPack.h"
 #include "check_params.h"
+#include "lr_config.h"
 
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
@@ -71,7 +72,10 @@ void LRLayersPack::Run(const std::string& filepath)
 	ParserPolygon(lr_val, grids, 6, "collision region", out_val);
 	ParserCamera(lr_val, 7, "camera", out_val);
 
-	std::string outfile = filepath.substr(0, filepath.find_last_of('_')) + ".json";
+	std::string dst_folder = m_dir + "\\" + LR_OUTDIR;
+	d2d::mk_dir(dst_folder, false);
+	std::string outfile = d2d::FilenameTools::getFilename(filepath);
+	outfile = dst_folder + "\\" + outfile.substr(0, outfile.find_last_of("_")) + ".json";
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

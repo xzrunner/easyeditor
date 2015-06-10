@@ -20,12 +20,17 @@ wxString FilenameTools::getFilenameAddTag(const wxString& filename, const wxStri
 		wxString check = filename.substr(start + 1, filename.find_last_of('.') - start - 1);
 		if (check == tag)
 			fixed = filename;
+		else if (filename[0] == '.')
+			fixed = filename + wxT("_" + tag + "." + extension);
 		else
 			fixed = filename.substr(0, filename.find_last_of('.')) + wxT("_" + tag + "." + extension);
 	}
 	else
 	{
-		fixed = filename.substr(0, filename.find_last_of('.')) + wxT("_" + tag + "." + extension);
+		if (filename[0] == '.')
+			fixed = filename.substr(0, filename.find_last_of('.')) + wxT("_" + tag + "." + extension);
+		else
+			fixed = filename + wxT("_" + tag + "." + extension);
 	}
 	return fixed;
 }

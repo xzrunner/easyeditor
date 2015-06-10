@@ -67,7 +67,7 @@ void PackCoco::Trigger(const std::string& config_path)
 void PackCoco::Prepare(const Json::Value& pkg_val, const wxString& config_dir) 
 {
 	std::string dst_folder = config_dir + "\\" + pkg_val["dst folder"].asString();
- 	d2d::MkDirRF(dst_folder);
+ 	d2d::mk_dir(dst_folder);
 }
 
 void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_dir,

@@ -1,5 +1,6 @@
 #include "LRToComplex.h"
 #include "check_params.h"
+#include "lr_config.h"
 
 namespace edb
 {
@@ -54,7 +55,10 @@ void LRToComplex::Run(const std::string& filepath)
 	complex_val["ymax"] = 0;
 	complex_val["ymin"] = 0;
 
-	std::string outfile = filepath.substr(0, filepath.find_last_of("_"));
+	std::string dst_folder = d2d::FilenameTools::getFileDir(filepath) + "\\" + LR_OUTDIR;
+	d2d::mk_dir(dst_folder, false);
+	std::string outfile = d2d::FilenameTools::getFilename(filepath);
+	outfile = dst_folder + "\\" + outfile.substr(0, outfile.find_last_of("_"));
 	wxString tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_complex);
 	outfile = d2d::FilenameTools::getFilenameAddTag(outfile, tag, "json");
 

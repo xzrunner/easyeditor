@@ -1,13 +1,16 @@
 #include "FileTools.h"
 
+#include <wx/log.h>
 #include <wx/dir.h>
 #include <wx/filename.h>
 
 namespace d2d
 {
 
-bool RemDirRF(wxString rmDir) 
+bool rm_dir(const std::string& _dir_path) 
 {
+	wxString dir_path(_dir_path);
+
    // *************************************************************
    // COMMENT THIS BLOCK OUT IF YOU WANT TO BE ABLE TO DELETE ROOT
    // DIRECTORIES : IT IS RECOMMENDED YOU LEAVE IT AS IS
@@ -16,10 +19,10 @@ bool RemDirRF(wxString rmDir)
    // *************************************************************
    ///*
    // if it's a possible root directory
-   if (rmDir.length() <= 3) {
+   if (dir_path.length() <= 3) {
       wxLogError("You asked RemDirRF() to delete a possible root directory.\
   This is disabled by default.  If you really need to delete \"" +
-         rmDir + "\" please alter the RemDirRF() definition.");
+         dir_path + "\" please alter the RemDirRF() definition.");
 
       return false;
    }
@@ -29,19 +32,19 @@ bool RemDirRF(wxString rmDir)
    // *************************************************************
 
     // first make sure that the dir exists
-    if(!wxDir::Exists(rmDir)) {
-            wxLogError(rmDir + " does not exist.  Could not remove directory.");
+    if(!wxDir::Exists(dir_path)) {
+            wxLogError(dir_path + " does not exist.  Could not remove directory.");
             return false;
     }
        
    // append a slash if we don't have one
-   if (rmDir[rmDir.length()-1] != wxFILE_SEP_PATH) {
-      rmDir += wxFILE_SEP_PATH;       
+   if (dir_path[dir_path.length()-1] != wxFILE_SEP_PATH) {
+      dir_path += wxFILE_SEP_PATH;       
     }
 
    // define our directory object.  When we begin traversing it, the
    // os will not let go until the object goes out of scope.
-    wxDir* dir = new wxDir(rmDir);
+    wxDir* dir = new wxDir(dir_path);
 
    // check for allocation failure
    if (dir == NULL) {
@@ -58,15 +61,15 @@ bool RemDirRF(wxString rmDir)
     if (cont){
         do {
          // if the next filename is actually a directory
-            if (wxDirExists(rmDir + filename)) {
+            if (wxDirExists(dir_path + filename)) {
             // delete this directory
-                RemDirRF(rmDir + filename);
+                rm_dir((dir_path + filename).ToStdString());
             }
             else {
             // otherwise attempt to delete this file
-                if(!wxRemoveFile(rmDir + filename)) {
+                if(!wxRemoveFile(dir_path + filename)) {
                // error if we couldn't
-               wxLogError("Could not remove file \"" + rmDir + filename + "\"");
+               wxLogError("Could not remove file \"" + dir_path + filename + "\"");
             }
             }
         }
@@ -79,9 +82,9 @@ bool RemDirRF(wxString rmDir)
    delete dir;
 
    // now actually try to delete it
-   if (!wxFileName::Rmdir(rmDir)) {
+   if (!wxFileName::Rmdir(dir_path)) {
       // error if we couldn't
-      wxLogError("Could not remove directory " + rmDir);
+      wxLogError("Could not remove directory " + dir_path);
       // return accordingly
       return false;
    }
@@ -92,11 +95,18 @@ bool RemDirRF(wxString rmDir)
    }
 }
 
-bool MkDirRF(wxString mkDir)
+bool mk_dir(const std::string& dir, bool rm)
 {
-	if (wxDir::Exists(mkDir))
-		RemDirRF(mkDir);
-	return wxDir::Make(mkDir);
+	bool ret = true;
+	if (wxDir::Exists(dir)) {
+		if (rm) {
+			rm_dir(dir);
+			ret = wxDir::Make(dir);
+		}
+	} else {
+		ret = wxDir::Make(dir);
+	}
+	return ret;
 }
 
 }

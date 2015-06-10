@@ -89,7 +89,7 @@ void Frame::onEJPreview(wxCommandEvent& event)
 	//////////////////////////////////////////////////////////////////////////
 
 	const char* folder = "_tmp_ejoy2d_preview";
-	d2d::MkDirRF(folder);
+	d2d::mk_dir(folder);
 
 	libcoco::PackLuaFile pack;
 	pack.pack(sprites, folder);
