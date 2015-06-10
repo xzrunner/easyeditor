@@ -136,7 +136,7 @@ void GroupTreeCtrl::Editable(wxTreeItemId id, bool editable)
 
 wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
 {
-	wxTreeItemId id = AppendItem(parent, name, -1, -1, data);
+	wxTreeItemId id = InsertItem(parent, 0, name, -1, -1, data);
 	ExpandAll();
 	return id;
 }
@@ -191,7 +191,7 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(item_src);
 	std::string name = GetItemText(item_src);
 	// insert
- 	wxTreeItemId new_item = AppendItem(item_dst, name, -1, -1, data->Clone());
+	wxTreeItemId new_item = InsertItem(item_dst, 0, name, -1, -1, data->Clone());
 	ExpandAll();
 	// copy older's children
 	Traverse(item_src, GroupTreeImpl::CopyPasteVisitor(this, item_src, new_item));
