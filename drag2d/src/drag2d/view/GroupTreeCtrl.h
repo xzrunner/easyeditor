@@ -51,12 +51,19 @@ private:
 	void OnBeginDrag(wxTreeEvent& event);
 	void OnEndDrag(wxTreeEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
+	void OnSelChanged(wxTreeEvent& event);
 
 	// menu
 	void OnMenuAddSprites(wxCommandEvent& event);
 	void OnMenuClear(wxCommandEvent& event);
 	void OnMenuVisible(wxCommandEvent& event);
 	void OnMenuEditable(wxCommandEvent& event);
+
+	// select
+	void SelectUp();
+	void SelectDown();
+	void SelectLeft();
+	void SelectRight();
 
 	void ReorderSprites();
 
@@ -81,6 +88,7 @@ private:
 	wxTreeItemId m_root;
 	wxTreeItemId m_on_menu_id;
 	wxTreeItemId m_dragged_item;
+	wxTreeItemId m_selected_item;
 
 	bool m_remove_open;
 

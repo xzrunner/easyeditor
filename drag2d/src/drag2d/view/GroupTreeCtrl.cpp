@@ -20,6 +20,7 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 	EVT_TREE_BEGIN_DRAG(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnBeginDrag)
 	EVT_TREE_END_DRAG(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnEndDrag)
 	EVT_KEY_DOWN(GroupTreeCtrl::OnKeyDown)
+	EVT_TREE_SEL_CHANGED(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnSelChanged)
 END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
@@ -207,16 +208,24 @@ void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
 	switch (event.GetKeyCode())
 	{
 	case WXK_UP:
-		{
-			int zz = 0;
-		}
+		SelectUp();
 		break;
 	case WXK_DOWN:
-		{
-			int zz = 0;
-		}
+		SelectDown();
+		break;
+	case WXK_LEFT:
+		SelectLeft();
+		break;
+	case WXK_RIGHT:
+		SelectRight();
 		break;
 	}
+}
+
+void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
+{
+	m_selected_item = event.GetItem();
+//	wxLogDebug("OnSelChanged %s", GetItemText(m_selected_item));
 }
 
 void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
@@ -271,6 +280,65 @@ void GroupTreeCtrl::OnMenuVisible(wxCommandEvent& event)
 void GroupTreeCtrl::OnMenuEditable(wxCommandEvent& event)
 {
 	Traverse(m_on_menu_id, GroupTreeImpl::EditableVisitor(this));
+}
+
+void GroupTreeCtrl::SelectUp()
+{
+	if (!m_selected_item.IsOk()) {
+		return;
+	}
+
+	wxTreeItemId prev = GetPrevSibling(m_selected_item);
+	if (prev) {
+		SelectItem(prev); 
+	}
+}
+
+void GroupTreeCtrl::SelectDown()
+{
+	if (!m_selected_item.IsOk()) {
+		return;
+	}
+
+	wxTreeItemId next = GetNextSibling(m_selected_item);
+	if (next) {
+		SelectItem(next); 
+	}
+}
+
+void GroupTreeCtrl::SelectLeft()
+{
+	if (!m_selected_item.IsOk()) {
+		return;
+	}
+
+	if (ItemHasChildren(m_selected_item) && IsExpanded(m_selected_item)) {
+		Collapse(m_selected_item);
+	} else {
+	 	wxTreeItemId parent = GetItemParent(m_selected_item);
+	 	if (parent.IsOk() && parent != m_root) {
+	 		SelectItem(parent);
+	 	}
+	}
+}
+
+void GroupTreeCtrl::SelectRight()
+{
+	if (!m_selected_item.IsOk()) {
+		return;
+	}
+
+	if (ItemHasChildren(m_selected_item)) {
+		if (IsExpanded(m_selected_item)) {
+			wxTreeItemIdValue cookie;
+			wxTreeItemId next = GetFirstChild(m_selected_item, cookie);
+			if (next.IsOk()) {
+				SelectItem(next);
+			}
+		} else {
+			Expand(m_selected_item);
+		}
+	}
 }
 
 void GroupTreeCtrl::ReorderSprites()
