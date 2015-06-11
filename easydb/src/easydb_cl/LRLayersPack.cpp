@@ -275,8 +275,8 @@ void LRLayersPack::ParserDecorate(const Json::Value& src_val, int layer_idx,
 	{
 		Json::Value dec_val;
 
-		dec_val["x"] = spr_val["position"]["x"];
-		dec_val["y"] = spr_val["position"]["y"];
+		float px = spr_val["position"]["x"].asDouble(),
+			py = spr_val["position"]["y"].asDouble();
 
 		std::string export_name = "";
 		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
@@ -289,10 +289,21 @@ void LRLayersPack::ParserDecorate(const Json::Value& src_val, int layer_idx,
 			std::locale::global(std::locale("C"));
 			reader.parse(fin, val);
 			fin.close();
+
 			export_name = val["name"].asString();
+
+			int idx = 0;
+			const Json::Value& spr_val = val["sprite"][idx];
+			float cx = spr_val["position"]["x"].asDouble(),
+				cy = spr_val["position"]["y"].asDouble(); 
+			px += cx;
+			py += cy;
 		}
 		dec_val["export"] = export_name;
 		
+		dec_val["x"] = px;
+		dec_val["y"] = py;
+
 		int sz = out_val[name].size();
 		out_val[name][sz] = dec_val;
 

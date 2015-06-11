@@ -87,10 +87,8 @@ void SeparateToComplex::Run(const std::string& filepath)
 
 void SeparateToComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
 {
-	std::string name;
-	d2d::Vector pos;
-	CreateNewComplexFile(src, name, pos);
-	ResetOldSpriteVal(dst, name, pos);
+	std::string name = CreateNewComplexFile(src);
+	ResetOldSpriteVal(dst, name);
 }
 
 void SeparateToComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
@@ -98,9 +96,9 @@ void SeparateToComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
 	dst["filepath"] = "..\\" + dst["filepath"].asString();
 }
 
-void SeparateToComplex::CreateNewComplexFile(const Json::Value& value, std::string& name, d2d::Vector& pos) const
+std::string SeparateToComplex::CreateNewComplexFile(const Json::Value& value) const
 {
-	name = wxString::Format("lr_decorate_%d", m_count++).ToStdString();
+	std::string name = wxString::Format("lr_decorate_%d", m_count++).ToStdString();
 
 	Json::Value out_val;
 
@@ -115,12 +113,13 @@ void SeparateToComplex::CreateNewComplexFile(const Json::Value& value, std::stri
 
 	spr_val["filepath"] = "..\\" + spr_val["filepath"].asString();
 
+	d2d::Vector pos;
 	pos.x = spr_val["position"]["x"].asDouble();
 	pos.y = spr_val["position"]["y"].asDouble();
 	FixPosWithShape(pos, value["filepath"].asString());
 
-	spr_val["position"]["x"] = 0;
-	spr_val["position"]["y"] = 0;
+	spr_val["position"]["x"] = pos.x;
+	spr_val["position"]["y"] = pos.y;
 
 	int idx = 0;
 	out_val["sprite"][idx] = spr_val;
@@ -132,13 +131,15 @@ void SeparateToComplex::CreateNewComplexFile(const Json::Value& value, std::stri
 	std::locale::global(std::locale("C"));
 	writer.write(fout, out_val);
 	fout.close();
+
+	return name;
 }
 
-void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& name, const d2d::Vector& pos) const
+void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& name) const
 {
 	val["filepath"] = name + "_complex.json";
-	val["position"]["x"] = pos.x;
-	val["position"]["y"] = pos.y;
+	val["position"]["x"] = 0;
+	val["position"]["y"] = 0;
 
 	val["angle"] = 0;
 	val["x scale"] = 1;
