@@ -11,7 +11,7 @@ class IViewPanel
 public:
 	virtual ~IViewPanel() {}
 	virtual void SelectSprite(ISprite* spr) = 0;
-	
+	virtual void ReorderSprite(ISprite* spr, bool up) = 0;
 
 }; // IViewPanel
 

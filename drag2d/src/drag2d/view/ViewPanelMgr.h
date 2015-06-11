@@ -13,9 +13,11 @@ class ViewPanelMgr
 {
 public:
 
+	void AddPanel(IViewPanel* panel);
+
 	void SelectSprite(ISprite* spr, IViewPanel* self);
 
-	void AddPanel(IViewPanel* panel);
+	void ReorderSprite(ISprite* spr, bool up, IViewPanel* self);
 
 private:
 	std::vector<IViewPanel*> m_panels;

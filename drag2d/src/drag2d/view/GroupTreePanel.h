@@ -24,6 +24,7 @@ public:
 	//	interface IViewPanel
 	//
 	virtual void SelectSprite(ISprite* spr);
+	virtual void ReorderSprite(ISprite* spr, bool up);
 
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);

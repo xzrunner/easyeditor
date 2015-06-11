@@ -30,6 +30,7 @@ public:
 	//	interface IViewPanel
 	//
 	virtual void SelectSprite(ISprite* spr);
+	virtual void ReorderSprite(ISprite* spr, bool up);
 
 	void Remove(ISprite* sprite);
 	void Insert(ISprite* sprite);
