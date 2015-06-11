@@ -25,7 +25,7 @@ END_EVENT_TABLE()
 
 GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
 	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
-	wxTR_EDIT_LABELS | wxTR_HIDE_ROOT)
+	wxTR_EDIT_LABELS | wxTR_HIDE_ROOT | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
 	, m_sprite_impl(sprite_impl)
 	, m_remove_open(true)
 {
@@ -219,6 +219,12 @@ void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
 	case WXK_RIGHT:
 		SelectRight();
 		break;
+	case WXK_PAGEUP:
+		ReorderSelected(true);
+		break;
+	case WXK_PAGEDOWN:
+		ReorderSelected(false);
+		break;
 	}
 }
 
@@ -289,7 +295,7 @@ void GroupTreeCtrl::SelectUp()
 	}
 
 	wxTreeItemId prev = GetPrevSibling(m_selected_item);
-	if (prev) {
+	if (prev.IsOk()) {
 		SelectItem(prev); 
 	}
 }
@@ -301,7 +307,7 @@ void GroupTreeCtrl::SelectDown()
 	}
 
 	wxTreeItemId next = GetNextSibling(m_selected_item);
-	if (next) {
+	if (next.IsOk()) {
 		SelectItem(next); 
 	}
 }
@@ -339,6 +345,50 @@ void GroupTreeCtrl::SelectRight()
 			Expand(m_selected_item);
 		}
 	}
+}
+
+void GroupTreeCtrl::ReorderSelected(bool up)
+{
+	if (!m_selected_item.IsOk()) {
+		return;
+	}
+
+	wxTreeItemId insert_prev;
+	if (up) {
+		wxTreeItemId prev = GetPrevSibling(m_selected_item);
+		if (!prev.IsOk()) {
+			return;
+		}
+		insert_prev = GetPrevSibling(prev);
+	} else {
+		wxTreeItemId next = GetNextSibling(m_selected_item);
+		if (!next.IsOk()) {
+			return;
+		}
+		insert_prev = next;
+	}
+
+ 	// old info
+ 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
+ 	std::string name = GetItemText(m_selected_item);
+
+	// insert
+	wxTreeItemId parent = GetItemParent(m_selected_item);
+	wxTreeItemId new_item;
+	if (insert_prev.IsOk()) {
+		new_item = InsertItem(parent, insert_prev, name, -1, -1, data->Clone());
+	} else {
+		new_item = InsertItem(parent, 0, name, -1, -1, data->Clone());
+	}
+	ExpandAll();
+ 	// copy older's children
+ 	Traverse(m_selected_item, GroupTreeImpl::CopyPasteVisitor(this, m_selected_item, new_item));
+ 	// remove
+ 	Delete(m_selected_item);
+ 	// sort
+ 	ReorderSprites();
+	// set selection
+	SelectItem(new_item);
 }
 
 void GroupTreeCtrl::ReorderSprites()

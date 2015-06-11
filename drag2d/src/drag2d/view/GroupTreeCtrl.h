@@ -65,6 +65,8 @@ private:
 	void SelectLeft();
 	void SelectRight();
 
+	void ReorderSelected(bool up);
+
 	void ReorderSprites();
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
