@@ -16,7 +16,7 @@ namespace lr
 
 SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
 								 d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, callback)
+	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, NULL, callback)
 {
 	m_first_press.setInvalid();
 }

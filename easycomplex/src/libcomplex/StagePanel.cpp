@@ -12,14 +12,14 @@ namespace ecomplex
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   d2d::PropertySettingPanel* property,
-					   LibraryPanel* library)
+					   LibraryPanel* library, d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
 	, m_viewlist(NULL)
 	, m_group_panel(NULL)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
+	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, library));

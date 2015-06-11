@@ -9,6 +9,7 @@ class ArrangeSpriteImpl;
 class EditPanel;
 class MultiSpritesImpl;
 class PropertySettingPanel;
+class ViewPanelMgr;
 class AbstractEditCMPT;
 struct ArrangeSpriteConfig;
 
@@ -17,8 +18,9 @@ class ArrangeSpriteOP : public TBase
 {
 public:
 	ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL,
-		const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), ArrangeSpriteImpl* impl = NULL);
+		PropertySettingPanel* propertyPanel = NULL, ViewPanelMgr* view_panel_mgr = NULL,
+		AbstractEditCMPT* callback = NULL, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig(), 
+		ArrangeSpriteImpl* impl = NULL);
 	virtual ~ArrangeSpriteOP();
 
 	virtual bool onKeyDown(int keyCode);

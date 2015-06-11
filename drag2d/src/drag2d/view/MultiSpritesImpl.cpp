@@ -17,6 +17,12 @@ MultiSpritesImpl::~MultiSpritesImpl()
 	m_spriteSelection->Release();
 }
 
+void MultiSpritesImpl::SelectSprite(ISprite* spr)
+{
+	m_spriteSelection->Clear();
+ 	m_spriteSelection->Add(spr);
+}
+
 ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;

@@ -6,6 +6,45 @@
 
 namespace d2d
 {
+
+//////////////////////////////////////////////////////////////////////////
+// class QuerySpriteVisitor
+//////////////////////////////////////////////////////////////////////////
+
+GroupTreeImpl::QuerySpriteVisitor::
+QuerySpriteVisitor(wxTreeCtrl* treectrl, ISprite* spr)
+	: m_treectrl(treectrl)
+	, m_spr(spr)
+{
+	if (m_spr) {
+		m_spr->Retain();
+	}
+}
+
+GroupTreeImpl::QuerySpriteVisitor::
+~QuerySpriteVisitor()
+{
+	if (m_spr) {
+		m_spr->Release();
+	}
+}
+
+bool GroupTreeImpl::QuerySpriteVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
+	if (!data) {
+		return false;
+	}
+
+	if (data->m_sprite && data->m_sprite == m_spr) {
+		m_id = id;
+		return true;
+	}
+
+	return false;
+}
 	
 //////////////////////////////////////////////////////////////////////////
 // class RemoveVisitor
@@ -29,34 +68,39 @@ GroupTreeImpl::RemoveVisitor::
 	}
 }
 
-void GroupTreeImpl::RemoveVisitor::
+bool GroupTreeImpl::RemoveVisitor::
 VisitNonleaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_group) {
 		data->m_group->Remove(m_spr);
 	}
+
+	return false;
 }
 
-void GroupTreeImpl::RemoveVisitor::
+bool GroupTreeImpl::RemoveVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_sprite && data->m_sprite == m_spr) {
 		delete data;
 		m_treectrl->Delete(id);
+		return true;
 	}
+
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -81,18 +125,20 @@ GroupTreeImpl::SelectVisitor::
 	}
 }
 
-void GroupTreeImpl::SelectVisitor::
+bool GroupTreeImpl::SelectVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_sprite) {
 		m_selection->Add(data->m_sprite);
 	}
+
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -106,90 +152,100 @@ GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<ISprite*>& sprites)
 {
 }
 
-void GroupTreeImpl::GetSpritesVisitor::
+bool GroupTreeImpl::GetSpritesVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_sprite) {
 		m_sprites.push_back(data->m_sprite);
 	}
+
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // class VisibleVisitor
 //////////////////////////////////////////////////////////////////////////
 
-void GroupTreeImpl::VisibleVisitor::
+bool GroupTreeImpl::VisibleVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_sprite) {
 		data->m_sprite->visiable = !data->m_sprite->visiable;
 	}
+
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // class EditableVisitor
 //////////////////////////////////////////////////////////////////////////
 
-void GroupTreeImpl::EditableVisitor::
+bool GroupTreeImpl::EditableVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_sprite) {
 		data->m_sprite->editable = !data->m_sprite->editable;
 	}
+
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // class SetVisibleVisitor
 //////////////////////////////////////////////////////////////////////////
 
-void GroupTreeImpl::SetVisibleVisitor::
+bool GroupTreeImpl::SetVisibleVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_sprite) {
 		data->m_sprite->visiable = m_visible;
 	}
+
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
 // class SetEditableVisitor
 //////////////////////////////////////////////////////////////////////////
 
-void GroupTreeImpl::SetEditableVisitor::
+bool GroupTreeImpl::SetEditableVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
 	if (!data) {
-		return;
+		return false;
 	}
 
 	if (data->m_sprite) {
 		data->m_sprite->editable = m_editable;
 	}
+
+	return false;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -203,7 +259,7 @@ StoreVisitor(const GroupTreeCtrl* treectrl, Json::Value& value)
 {
 }
 
-void GroupTreeImpl::StoreVisitor::
+bool GroupTreeImpl::StoreVisitor::
 VisitNonleaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
@@ -216,9 +272,11 @@ VisitNonleaf(wxTreeItemId id)
 
 	int sz = m_value["node"].size();
 	m_value["node"][sz++] = val;
+
+	return false;
 }
 
-void GroupTreeImpl::StoreVisitor::
+bool GroupTreeImpl::StoreVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
@@ -236,6 +294,8 @@ VisitLeaf(wxTreeItemId id)
 
 	int sz = m_value["node"].size();
 	m_value["node"][sz++] = val;
+
+	return false;
 }
 
 std::string GroupTreeImpl::StoreVisitor::
@@ -273,16 +333,18 @@ CopyPasteVisitor(GroupTreeCtrl* treectrl, wxTreeItemId from,
 	m_map_ids.insert(std::make_pair(m_from, m_to));
 }
 
-void GroupTreeImpl::CopyPasteVisitor::
+bool GroupTreeImpl::CopyPasteVisitor::
 VisitNonleaf(wxTreeItemId id)
 {
 	CopyPaste(id);
+	return false;
 }
 
-void GroupTreeImpl::CopyPasteVisitor::
+bool GroupTreeImpl::CopyPasteVisitor::
 VisitLeaf(wxTreeItemId id)
 {
 	CopyPaste(id);
+	return false;
 }
 
 void GroupTreeImpl::CopyPasteVisitor::

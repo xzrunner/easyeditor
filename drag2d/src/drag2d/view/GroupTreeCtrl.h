@@ -10,19 +10,18 @@
 namespace d2d
 {
 
+class GroupTreePanel;
 class ISprite;
 class Group;
 class MultiSpritesImpl;
+class ViewPanelMgr;
 
 class GroupTreeCtrl : public wxTreeCtrl
 {
 public:
-	GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl);
+	GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
+		ViewPanelMgr* view_panel_mgr);
 
-	void StoreToFile(Json::Value& value) const;
-	void LoadFromFile(const Json::Value& value);
-
-	// no break
 	void Traverse(IGroupTreeVisitor& visitor) const;
 
 	wxTreeItemId AddNode();
@@ -85,7 +84,11 @@ private:
 	};
 
 private:
+	GroupTreePanel* m_parent_panel;
+
 	MultiSpritesImpl* m_sprite_impl;
+
+	ViewPanelMgr* m_view_panel_mgr;
 
 	wxTreeItemId m_root;
 	wxTreeItemId m_on_menu_id;

@@ -9,8 +9,8 @@ namespace d2d
 class IGroupTreeVisitor
 {
 public:
-	virtual void VisitNonleaf(wxTreeItemId id) {};
-	virtual void VisitLeaf(wxTreeItemId id) {};
+	virtual bool VisitNonleaf(wxTreeItemId id) { return false; };
+	virtual bool VisitLeaf(wxTreeItemId id) { return false; };
 	virtual ~IGroupTreeVisitor() {}
 }; // IGroupTreeVisitor
 

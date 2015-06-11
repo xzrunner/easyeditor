@@ -10,7 +10,7 @@ ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel,
 									   PropertySettingPanel* propertyPanel/* = NULL*/, 
 									   AbstractEditCMPT* callback/* = NULL*/, 
 									   const ArrangeSpriteConfig& cfg)
-	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, callback, cfg)
+	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, NULL, callback, cfg)
 	, m_spritesImpl(spritesImpl)
 {
 }

@@ -18,7 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	cfg.is_deform_open = false;
 	cfg.is_offset_open = false;
 	cfg.is_rotate_open = false;
-	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, NULL, NULL, cfg);
+	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, NULL, NULL, NULL, cfg);
 }
 
 void StagePanel::SetSelectedSymbol(Symbol* symbol)

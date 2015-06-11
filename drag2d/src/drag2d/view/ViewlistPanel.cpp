@@ -8,37 +8,48 @@
 #include "view/SpritePropertySetting.h"
 #include "view/PropertySettingPanel.h"
 #include "view/MultiSpritesImpl.h"
+#include "view/ViewPanelMgr.h"
 
 namespace d2d
 {
 
 ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanel* stage,
 							 MultiSpritesImpl* sprites_impl /*= NULL*/, 
-							 PropertySettingPanel* property /*= NULL*/)
+							 PropertySettingPanel* property /*= NULL*/,
+							 ViewPanelMgr* view_panel_mgr /*= NULL*/)
 	: wxPanel(parent, wxID_ANY)
 	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
 	, m_property(property)
-	, m_selected_idx(0)
+	, m_view_panel_mgr(view_panel_mgr)
+	, m_selected_spr(NULL)
 {
 	InitLayout();
 }
 
+ViewlistPanel::~ViewlistPanel()
+{
+	if (m_selected_spr) {
+		m_selected_spr->Release();
+	}
+}
+
+void ViewlistPanel::SelectSprite(ISprite* spr)
+{
+	int idx = QuerySprIdx(spr);
+	if (idx >= 0) {
+		m_list->SetSelection(idx);
+	}	
+}
+
 void ViewlistPanel::Remove(ISprite* sprite)
 {
-	std::vector<ISprite*>::iterator itr = m_sprites.begin();
-	int idx = 0;
-	for (; itr != m_sprites.end(); ++itr, ++idx) {
-		if (*itr == sprite) {
-			break;
-		}
-	}
-	if (itr == m_sprites.end()) {
+	int idx = QuerySprIdx(sprite);
+	if (idx < 0) {
 		return;
 	}
-
 	m_list->remove(idx);
-	m_sprites.erase(itr);
+	m_sprites.erase(m_sprites.begin() + idx);
 }
 
 void ViewlistPanel::Insert(ISprite* sprite)
@@ -52,13 +63,10 @@ void ViewlistPanel::Insert(ISprite* sprite)
 
 void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 {
-	int i = 0;
-	int n = m_sprites.size();
-	for ( ; i < n; ++i)
-		if (m_sprites[i] == sprite)
-			break;
-	assert(i != n);
+	int i = QuerySprIdx(sprite);
+	assert(i >= 0);
 
+	int n = m_sprites.size();
 	if (up)
 	{
 		int pos = i - 1;
@@ -83,25 +91,43 @@ void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 
 void ViewlistPanel::ReorderSelected(bool up)
 {
-	m_sprites_impl->resetSpriteOrder(m_sprites[m_selected_idx], up);
+	if (m_selected_spr) {
+		m_sprites_impl->resetSpriteOrder(m_selected_spr, up);
+	}
 }
 
 void ViewlistPanel::OnSelected(int index)
 {
-	m_selected_idx = index;
+	d2d::ISprite* spr = NULL;
+	if (index >= 0 && index < m_sprites.size()) {
+		spr = m_sprites[index];
+	}
+	if (spr) {
+		OnSelected(spr);
+	}
+}
+
+void ViewlistPanel::OnSelected(d2d::ISprite* spr)
+{
+	m_selected_spr = spr;
+	m_selected_spr->Retain();
 
 	if (m_property)
 	{
-		d2d::IPropertySetting* setting = new d2d::SpritePropertySetting(m_stage, m_sprites[index]);
+		d2d::IPropertySetting* setting = new d2d::SpritePropertySetting(m_stage, m_selected_spr);
 		m_property->SetPropertySetting(setting);
 	}
 
-	if (m_sprites_impl)
-	{
-		d2d::SpriteSelection* selection = m_sprites_impl->getSpriteSelection();
-		selection->Clear();
-		selection->Add(m_sprites[index]);
-		m_stage->Refresh();
+// 	if (m_sprites_impl)
+// 	{
+// 		d2d::SpriteSelection* selection = m_sprites_impl->getSpriteSelection();
+// 		selection->Clear();
+// 		selection->Add(m_selected_spr);
+// 		m_stage->Refresh();
+// 	}
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->SelectSprite(spr, this);
 	}
 }
 
@@ -119,6 +145,16 @@ void ViewlistPanel::InitLayout()
 	sizer->Add(m_list, 1, wxEXPAND);
 
 	SetSizer(sizer);
+}
+
+int ViewlistPanel::QuerySprIdx(const ISprite* spr) const
+{
+	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
+		if (m_sprites[i] == spr) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 } // d2d

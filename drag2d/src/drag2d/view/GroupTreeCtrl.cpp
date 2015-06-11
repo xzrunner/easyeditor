@@ -1,7 +1,8 @@
 #include "GroupTreeCtrl.h"
+#include "GroupTreePanel.h"
 #include "MultiSpritesImpl.h"
 #include "GroupTreeImpl.h"
-#include "GroupTreeIO.h"
+#include "ViewPanelMgr.h"
 
 #include "dataset/Group.h"
 #include "dataset/ISprite.h"
@@ -23,24 +24,16 @@ BEGIN_EVENT_TABLE(GroupTreeCtrl, wxTreeCtrl)
 	EVT_TREE_SEL_CHANGED(ID_GROUP_TREE_CTRL, GroupTreeCtrl::OnSelChanged)
 END_EVENT_TABLE()
 
-GroupTreeCtrl::GroupTreeCtrl(wxWindow* parent, MultiSpritesImpl* sprite_impl)
+GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
+							 ViewPanelMgr* view_panel_mgr)
 	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
 	wxTR_EDIT_LABELS | wxTR_HIDE_ROOT | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
+	, m_parent_panel(parent)
 	, m_sprite_impl(sprite_impl)
+	, m_view_panel_mgr(view_panel_mgr)
 	, m_remove_open(true)
 {
 	m_root = AddRoot("Root");
-}
-
-void GroupTreeCtrl::StoreToFile(Json::Value& value) const
-{
-	Traverse(GroupTreeImpl::StoreVisitor(this, value));
-}
-
-void GroupTreeCtrl::LoadFromFile(const Json::Value& value)
-{
-	GroupTreeIO io(this, m_sprite_impl);
-	io.Load(value);
 }
 
 void GroupTreeCtrl::Traverse(IGroupTreeVisitor& visitor) const
@@ -231,6 +224,12 @@ void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
 void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 {
 	m_selected_item = event.GetItem();
+
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
+	if (data && data->m_sprite) {
+		m_view_panel_mgr->SelectSprite(data->m_sprite, m_parent_panel);
+	}
+
 //	wxLogDebug("OnSelChanged %s", GetItemText(m_selected_item));
 }
 
@@ -438,7 +437,10 @@ void GroupTreeCtrl::Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const
 		wxTreeItemId id = GetFirstChild(item, cookie);
 		if (id.IsOk()) {
 			if (item != id) {
-				visitor.VisitNonleaf(item);
+				bool finish = visitor.VisitNonleaf(item);
+				if (finish) {
+					break;
+				}
 			}
 
 			while (id.IsOk()) {
@@ -446,7 +448,10 @@ void GroupTreeCtrl::Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const
 				id = GetNextSibling(id);
 			}
 		} else {
-			visitor.VisitLeaf(item);
+			bool finish = visitor.VisitLeaf(item);
+			if (finish) {
+				break;
+			}
 		}
 	}
 }

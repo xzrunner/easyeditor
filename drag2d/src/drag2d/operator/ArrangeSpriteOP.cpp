@@ -23,9 +23,9 @@ namespace d2d
 
 template <typename TBase>
 ArrangeSpriteOP<TBase>::ArrangeSpriteOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-	PropertySettingPanel* propertyPanel/* = NULL*/, AbstractEditCMPT* callback/* = NULL*/, 
-	const ArrangeSpriteConfig& cfg, ArrangeSpriteImpl* impl /*= NULL*/)
-	: TBase(editPanel, spritesImpl, propertyPanel, callback)
+	PropertySettingPanel* propertyPanel/* = NULL*/, ViewPanelMgr* view_panel_mgr /*= NULL*/, 
+	AbstractEditCMPT* callback/* = NULL*/, const ArrangeSpriteConfig& cfg, ArrangeSpriteImpl* impl /*= NULL*/)
+	: TBase(editPanel, spritesImpl, propertyPanel, view_panel_mgr, callback)
 {
 	if (impl) {
 		m_impl = impl;

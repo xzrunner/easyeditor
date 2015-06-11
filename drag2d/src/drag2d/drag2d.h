@@ -79,6 +79,7 @@
 #include "view/ShapesContainer.h"
 #include "view/SpritesContainer.h"
 #include "view/GroupTreePanel.h"
+#include "view/ViewPanelMgr.h"
 
 #include "operator/AbstractEditOP.h"
 #include "operator/NullEditOP.h"

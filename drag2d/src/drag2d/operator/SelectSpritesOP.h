@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_SELECT_SPRITES_OP_H_
+#define _DRAG2D_SELECT_SPRITES_OP_H_
 
 #include <vector>
 
@@ -9,60 +10,67 @@
 
 namespace d2d
 {
-	class MultiSpritesImpl;
-	class AbstractEditCMPT;
-	class PropertySettingPanel;
-	class IPropertySetting;
 
-	class SelectSpritesOP : public DrawRectangleOP
-	{
-	public:
-		SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-			PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL);
-		virtual ~SelectSpritesOP();
+class MultiSpritesImpl;
+class AbstractEditCMPT;
+class PropertySettingPanel;
+class IPropertySetting;
+class ViewPanelMgr;
 
-		virtual bool onKeyDown(int keyCode);
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseLeftUp(int x, int y);
-		virtual bool onMouseRightDown(int x, int y);
-		virtual bool onMouseRightUp(int x, int y);
-		virtual bool onMouseDrag(int x, int y);
+class SelectSpritesOP : public DrawRectangleOP
+{
+public:
+	SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
+		PropertySettingPanel* propertyPanel = NULL, ViewPanelMgr* view_panel_mgr = NULL,
+		AbstractEditCMPT* callback = NULL);
+	virtual ~SelectSpritesOP();
 
-		virtual bool onDraw() const;
-		virtual bool clear();
+	virtual bool onKeyDown(int keyCode);
+	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool onMouseLeftUp(int x, int y);
+	virtual bool onMouseRightDown(int x, int y);
+	virtual bool onMouseRightUp(int x, int y);
+	virtual bool onMouseDrag(int x, int y);
 
-		virtual IPropertySetting* createPropertySetting(ISprite* sprite) const;
-		virtual IPropertySetting* createPropertySetting(const std::vector<ISprite*>& sprites) const;
+	virtual bool onDraw() const;
+	virtual bool clear();
 
-	protected:
-		virtual ISprite* selectByPos(const Vector& pos) const;
+	virtual IPropertySetting* createPropertySetting(ISprite* sprite) const;
+	virtual IPropertySetting* createPropertySetting(const std::vector<ISprite*>& sprites) const;
 
-		virtual void PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const;
-		virtual void CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const;
+protected:
+	virtual ISprite* selectByPos(const Vector& pos) const;
 
-	private:
-		void PasteToSelection() const;
-		void CopyFromSelection();
+	virtual void PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const;
+	virtual void CopySprFromClipboard(d2d::ISprite* spr, const Json::Value& value) const;
 
-	protected:
-		SpriteSelection* m_selection;
+private:
+	void PasteToSelection() const;
+	void CopyFromSelection();
 
-		PropertySettingPanel* m_propertyPanel;
+	void OnPanelsSelected(d2d::ISprite* spr);
 
-		MultiSpritesImpl* m_spritesImpl;
+protected:
+	SpriteSelection* m_selection;
 
-		AbstractEditCMPT* m_callback;
+	PropertySettingPanel* m_propertyPanel;
 
-	private:
-		void clearClipboard();
+	MultiSpritesImpl* m_spritesImpl;
 
-	private:
-		Vector m_firstPos;
-		Vector m_rightFirstScrPos;
+	AbstractEditCMPT* m_callback;
 
-		// To disable mouse able when press ctrl and window query
-		bool m_bDraggable;
+private:
+	Vector m_firstPos;
+	Vector m_rightFirstScrPos;
 
-	}; // SelectSpritesOP
+	// To disable mouse able when press ctrl and window query
+	bool m_bDraggable;
+
+private:
+	ViewPanelMgr* m_view_panel_mgr;
+
+}; // SelectSpritesOP
+
 }
 
+#endif // _DRAG2D_SELECT_SPRITES_OP_H_

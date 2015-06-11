@@ -9,7 +9,7 @@ UniversalArrangeOP::UniversalArrangeOP(d2d::EditPanel* editPanel, d2d::MultiSpri
 									   d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
 	: d2d::ZoomViewOP(editPanel, true)
 {
-	m_noPhysics = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(editPanel, spritesImpl, propertyPanel, callback);
+	m_noPhysics = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(editPanel, spritesImpl, propertyPanel, NULL, callback);
 	m_editOP = m_noPhysics;
 }
 

@@ -1,27 +1,42 @@
 #include "GroupTreePanel.h"
 #include "GroupTreeCtrl.h"
+#include "GroupTreeImpl.h"
+#include "GroupTreeIO.h"
 
 #include <wx/wx.h>
 
 namespace d2d
 {
 
-GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl)
+GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,
+							   ViewPanelMgr* view_panel_mgr)
 	: wxPanel(parent, wxID_ANY)
+	, m_sprite_impl(sprites_impl)
 {
-	m_grouptree = new GroupTreeCtrl(this, sprites_impl);
+	m_grouptree = new GroupTreeCtrl(this, sprites_impl, view_panel_mgr);
 
 	InitLayout();
 }
 
+void GroupTreePanel::SelectSprite(ISprite* spr)
+{
+	GroupTreeImpl::QuerySpriteVisitor visitor(m_grouptree, spr);
+	m_grouptree->Traverse(visitor);
+	wxTreeItemId id = visitor.GetItemID();
+	if (id.IsOk()) {
+		m_grouptree->SelectItem(id);
+	}
+}
+
 void GroupTreePanel::StoreToFile(Json::Value& value) const
 {
-	m_grouptree->StoreToFile(value);
+	m_grouptree->Traverse(GroupTreeImpl::StoreVisitor(m_grouptree, value));
 }
 
 void GroupTreePanel::LoadFromFile(const Json::Value& value)
 {
-	m_grouptree->LoadFromFile(value);
+	GroupTreeIO io(m_grouptree, m_sprite_impl);
+	io.Load(value);
 }
 
 void GroupTreePanel::Remove(ISprite* sprite)

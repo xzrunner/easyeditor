@@ -14,14 +14,33 @@ class GroupTreeCtrl;
 class GroupTreeImpl
 {
 public:
+	class QuerySpriteVisitor : public IGroupTreeVisitor
+	{
+	public:
+		QuerySpriteVisitor(wxTreeCtrl* treectrl, ISprite* spr);
+		virtual ~QuerySpriteVisitor();
+
+		virtual bool VisitLeaf(wxTreeItemId id);
+
+		wxTreeItemId GetItemID() const { return m_id; }
+
+	private:
+		wxTreeCtrl* m_treectrl;
+
+		ISprite* m_spr;
+
+		wxTreeItemId m_id;
+
+	}; // QuerySpriteVisitor
+
 	class RemoveVisitor : public IGroupTreeVisitor
 	{
 	public:
 		RemoveVisitor(wxTreeCtrl* treectrl, ISprite* spr);
 		virtual ~RemoveVisitor();
 
-		virtual void VisitNonleaf(wxTreeItemId id);
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitNonleaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		wxTreeCtrl* m_treectrl;
@@ -36,7 +55,7 @@ public:
 		SelectVisitor(wxTreeCtrl* treectrl, SpriteSelection* selection);
 		virtual ~SelectVisitor();
 
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		wxTreeCtrl* m_treectrl;
@@ -50,7 +69,7 @@ public:
 	public:
 		GetSpritesVisitor(wxTreeCtrl* treectrl, std::vector<ISprite*>& sprites);
 
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		wxTreeCtrl* m_treectrl;
@@ -64,7 +83,7 @@ public:
 	public:
 		VisibleVisitor(wxTreeCtrl* treectrl) 
 			: m_treectrl(treectrl) {}
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 	private:
 		wxTreeCtrl* m_treectrl;
 	}; // VisibleVisitor
@@ -74,7 +93,7 @@ public:
 	public:
 		EditableVisitor(wxTreeCtrl* treectrl) 
 			: m_treectrl(treectrl) {}
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 	private:
 		wxTreeCtrl* m_treectrl;
 	}; // EditableVisitor	
@@ -84,7 +103,7 @@ public:
 	public:
 		SetVisibleVisitor(wxTreeCtrl* treectrl, bool visible) 
 			: m_treectrl(treectrl), m_visible(visible) {}
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 	private:
 		wxTreeCtrl* m_treectrl;
 		bool m_visible;
@@ -95,7 +114,7 @@ public:
 	public:
 		SetEditableVisitor(wxTreeCtrl* treectrl, bool editable) 
 			: m_treectrl(treectrl), m_editable(editable) {}
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 	private:
 		wxTreeCtrl* m_treectrl;
 		bool m_editable;
@@ -106,8 +125,8 @@ public:
 	public:
 		StoreVisitor(const GroupTreeCtrl* treectrl, Json::Value& value);
 
-		virtual void VisitNonleaf(wxTreeItemId id);
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitNonleaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		std::string GetName(wxTreeItemId id) const;
@@ -125,8 +144,8 @@ public:
 		CopyPasteVisitor(GroupTreeCtrl* treectrl, wxTreeItemId from, 
 			wxTreeItemId to);
 
-		virtual void VisitNonleaf(wxTreeItemId id);
-		virtual void VisitLeaf(wxTreeItemId id);
+		virtual bool VisitNonleaf(wxTreeItemId id);
+		virtual bool VisitLeaf(wxTreeItemId id);
 
 	private:
 		void CopyPaste(wxTreeItemId id);
