@@ -395,7 +395,7 @@ void GroupTreeCtrl::ReorderSprites()
 {
 	std::vector<ISprite*> sprites;
 	Traverse(m_root, GroupTreeImpl::GetSpritesVisitor(this, sprites));
-	for (int i = 0, n = sprites.size(); i < n; ++i) {
+	for (int i = sprites.size() - 1; i >= 0; --i) {
 		ISprite* spr = sprites[i];
 		m_remove_open = false;
 		m_sprite_impl->removeSprite(spr);
