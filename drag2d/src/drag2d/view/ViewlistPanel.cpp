@@ -66,6 +66,7 @@ void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 		{
 			std::swap(m_sprites[i], m_sprites[pos]);
 			m_list->swap(i, pos);
+			m_list->SetSelection(pos);
 		}
 	}
 	else
@@ -75,13 +76,14 @@ void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 		{
 			std::swap(m_sprites[i], m_sprites[pos]);
 			m_list->swap(i, pos);
+			m_list->SetSelection(pos);
 		}
 	}
 }
 
 void ViewlistPanel::ReorderSelected(bool up)
 {
-	Reorder(m_sprites[m_selected_idx], up);
+	m_sprites_impl->resetSpriteOrder(m_sprites[m_selected_idx], up);
 }
 
 void ViewlistPanel::OnSelected(int index)
