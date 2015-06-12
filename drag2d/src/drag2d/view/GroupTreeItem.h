@@ -12,19 +12,46 @@ class ISprite;
 class GroupTreeItem : public wxTreeItemData
 {
 public:
-	GroupTreeItem(Group* group);
-	GroupTreeItem(ISprite* sprite);
-	GroupTreeItem(const GroupTreeItem& item);
-	virtual ~GroupTreeItem();
+	virtual ~GroupTreeItem() {}
+	virtual GroupTreeItem* Clone() const  = 0;
+	virtual bool IsGroup() const = 0;
+}; // GroupTreeItem
 
-	GroupTreeItem* Clone() const { return new GroupTreeItem(*this); }
-
+class GroupTreeSpriteItem : public GroupTreeItem
+{
 public:
-	Group* m_group;
+	GroupTreeSpriteItem(ISprite* sprite);
+	GroupTreeSpriteItem(const GroupTreeSpriteItem& item);
+	virtual ~GroupTreeSpriteItem();
 
+	virtual GroupTreeItem* Clone() const { return new GroupTreeSpriteItem(*this); }
+
+	virtual bool IsGroup() const { return false; }
+
+	ISprite* GetSprite() { return m_sprite; }
+
+private:
 	ISprite* m_sprite;
 
-}; // GroupTreeItem
+}; // GroupTreeSpriteItem
+
+class GroupTreeGroupItem : public GroupTreeItem
+{
+public:
+	GroupTreeGroupItem(Group* group);
+	GroupTreeGroupItem(const GroupTreeGroupItem& item);
+	virtual ~GroupTreeGroupItem();
+
+	virtual GroupTreeItem* Clone() const { return new GroupTreeGroupItem(*this); }
+
+	virtual bool IsGroup() const { return true; }
+
+	Group* GetGroup() { return m_group; }
+
+private:
+	Group* m_group;
+
+}; // GroupTreeGroupItem
 
 }
 

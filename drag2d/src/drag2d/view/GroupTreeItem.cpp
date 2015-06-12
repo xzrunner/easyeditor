@@ -6,44 +6,57 @@
 namespace d2d
 {
 
-GroupTreeItem::GroupTreeItem(Group* group)
-	: m_group(group)
-	, m_sprite(NULL)
-{
-	if (m_group) {
-		m_group->Retain();
-	}
-}
+//////////////////////////////////////////////////////////////////////////
+// class GroupTreeSpriteItem
+//////////////////////////////////////////////////////////////////////////
 
-GroupTreeItem::GroupTreeItem(ISprite* sprite)
+GroupTreeSpriteItem::GroupTreeSpriteItem(ISprite* sprite)
 	: m_sprite(sprite)
-	, m_group(NULL)
 {
 	if (m_sprite) {
 		m_sprite->Retain();
 	}
 }
 
-GroupTreeItem::GroupTreeItem(const GroupTreeItem& item)
+GroupTreeSpriteItem::GroupTreeSpriteItem(const GroupTreeSpriteItem& item)
 {
-	m_group = item.m_group;
-	if (m_group) {
-		m_group->Retain();
-	}
-
 	m_sprite = item.m_sprite;
 	if (m_sprite) {
 		m_sprite->Retain();
 	}
 }
 
-GroupTreeItem::~GroupTreeItem()
+GroupTreeSpriteItem::~GroupTreeSpriteItem()
+{
+	if (m_sprite) {
+		m_sprite->Release();
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class GroupTreeGroupItem
+//////////////////////////////////////////////////////////////////////////
+
+GroupTreeGroupItem::GroupTreeGroupItem(Group* group)
+	: m_group(group)
+{
+	if (m_group) {
+		m_group->Retain();
+	}
+}
+
+GroupTreeGroupItem::GroupTreeGroupItem(const GroupTreeGroupItem& item)
+{
+	m_group = item.m_group;
+	if (m_group) {
+		m_group->Retain();
+	}
+}
+
+GroupTreeGroupItem::~GroupTreeGroupItem()
 {
 	if (m_group) {
 		m_group->Release();
-	}
-	if (m_sprite) {
-		m_sprite->Release();
 	}
 }
 

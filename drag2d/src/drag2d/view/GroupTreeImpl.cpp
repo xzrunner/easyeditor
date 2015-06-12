@@ -34,11 +34,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite && data->m_sprite == m_spr) {
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	if (spr == m_spr) {
 		m_id = id;
 		return true;
 	}
@@ -74,13 +75,12 @@ VisitNonleaf(wxTreeItemId id)
 	assert(id.IsOk());
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || !data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_group) {
-		data->m_group->Remove(m_spr);
-	}
+	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
+	group->Remove(m_spr);
 
 	return false;
 }
@@ -90,11 +90,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite && data->m_sprite == m_spr) {
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	if (spr == m_spr) {
 		delete data;
 		m_treectrl->Delete(id);
 		return true;
@@ -130,13 +131,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite) {
-		m_selection->Add(data->m_sprite);
-	}
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	m_selection->Add(spr);
 
 	return false;
 }
@@ -157,13 +157,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite) {
-		m_sprites.push_back(data->m_sprite);
-	}
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	m_sprites.push_back(spr);
 
 	return false;
 }
@@ -177,13 +176,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite) {
-		data->m_sprite->visiable = !data->m_sprite->visiable;
-	}
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	spr->visiable = !spr->visiable;
 
 	return false;
 }
@@ -197,13 +195,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite) {
-		data->m_sprite->editable = !data->m_sprite->editable;
-	}
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	spr->editable = !spr->editable;
 
 	return false;
 }
@@ -217,13 +214,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite) {
-		data->m_sprite->visiable = m_visible;
-	}
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	spr->visiable = m_visible;
 
 	return false;
 }
@@ -237,13 +233,12 @@ VisitLeaf(wxTreeItemId id)
 {
 	assert(id.IsOk());
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (!data) {
+	if (!data || data->IsGroup()) {
 		return false;
 	}
 
-	if (data->m_sprite) {
-		data->m_sprite->editable = m_editable;
-	}
+	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+	spr->editable = m_editable;
 
 	return false;
 }
@@ -288,8 +283,9 @@ VisitLeaf(wxTreeItemId id)
 	val["parent"] = GetParentName(id);
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	if (data && data->m_sprite) {
-		val["sprite"] = data->m_sprite->name;
+	if (data && !data->IsGroup()) {
+		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		val["sprite"] = spr->name;
 	}
 
 	int sz = m_value["node"].size();

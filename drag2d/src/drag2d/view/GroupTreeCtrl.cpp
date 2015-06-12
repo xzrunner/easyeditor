@@ -54,11 +54,11 @@ wxTreeItemId GroupTreeCtrl::AddNode()
 
 wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name)
 {
-	GroupTreeItem* data = new GroupTreeItem(new Group(name));
+	GroupTreeItem* data = new GroupTreeGroupItem(new Group(name));
 
 	wxTreeItemId ret;
 	wxTreeItemId id = GetFocusedItem();
-	if (id.IsOk()) {
+	if (id.IsOk() && ((GroupTreeItem*)GetItemData(id))->IsGroup()) {
 		data->SetId(id);
 		ret = AddNode(id, name, data);
 	} else {
@@ -72,7 +72,7 @@ wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name)
 
 wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name, wxTreeItemId parent)
 {
-	GroupTreeItem* data = new GroupTreeItem(new Group(name));
+	GroupTreeItem* data = new GroupTreeGroupItem(new Group(name));
 	wxTreeItemId ret = AddNode(parent, name, data);
 	SetItemBold(ret, true);
 	SelectItem(ret);
@@ -94,18 +94,14 @@ wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
 	}	
 
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(parent);
-	if (!data) {
+	if (!data || !data->IsGroup()) {
 		return m_root;
 	}
 
-	Group* group = data->m_group;
-	if (!group) {
-		return m_root;
-	}
-
+	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 	bool ok = group->Insert(spr);
 	if (ok) {
-		GroupTreeItem* data = new GroupTreeItem(spr);
+		GroupTreeItem* data = new GroupTreeSpriteItem(spr);
 		return AddNode(parent, spr->name, data);
 	} else {
 		return m_root;
@@ -202,7 +198,7 @@ wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name
 
 void GroupTreeCtrl::InitRoot()
 {
-	GroupTreeItem* data = new GroupTreeItem(new Group("ROOT"));
+	GroupTreeItem* data = new GroupTreeGroupItem(new Group("ROOT"));
 	m_root = AddRoot("ROOT");
 	SetItemBold(m_root, true);
 	SetItemData(m_root, data);
@@ -248,11 +244,15 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 {
 	wxTreeItemId item_src = m_dragged_item,
 		item_dst = event.GetItem();
-	if (!item_dst.IsOk()) {
+	wxLogDebug("Drag from %s to %s", GetItemText(item_src), GetItemText(item_dst));
+
+	if (!item_src.IsOk() || !item_dst.IsOk()) {
 		return;
 	}
-
-	wxLogDebug("Drag from %s to %s", GetItemText(item_src), GetItemText(item_dst));
+	GroupTreeItem* data_dst = (GroupTreeItem*)GetItemData(item_dst);
+	if (!data_dst || !data_dst->IsGroup()) {
+		return;
+	}
 
 	// old info
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(item_src);
@@ -300,8 +300,9 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	wxLogDebug("OnSelChanged %s", GetItemText(m_selected_item));
 
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
-	if (data && data->m_sprite) {
-		m_view_panel_mgr->SelectSprite(data->m_sprite, m_parent_panel);
+	if (data && !data->IsGroup()) {
+		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		m_view_panel_mgr->SelectSprite(spr, m_parent_panel);
 	}
 }
 
@@ -312,23 +313,19 @@ void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)
 	}
 
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_on_menu_id);
-	if (!data) {
-		return;
-	}
-
-	Group* group = data->m_group;
-	if (!group) {
+	if (!data || !data->IsGroup()) {
 		return;
 	}
 
 	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
 	std::vector<ISprite*> sprites;
 	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ISprite* spr = sprites[i];
 		bool ok = group->Insert(spr);
 		if (ok) {
-			GroupTreeItem* data = new GroupTreeItem(spr);
+			GroupTreeItem* data = new GroupTreeSpriteItem(spr);
 			AddNode(m_on_menu_id, spr->name, data);
 		}
 	}
@@ -340,11 +337,12 @@ void GroupTreeCtrl::OnMenuClear(wxCommandEvent& event)
 		return;
 	}	
 
-	Group* group = ((GroupTreeItem*)GetItemData(m_on_menu_id))->m_group;
-	if (!group) {
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_on_menu_id);
+	if (!data || !data->IsGroup()) {
 		return;
 	}
 
+	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
 	group->Clear();
 	CollapseAndReset(m_on_menu_id);
 }
