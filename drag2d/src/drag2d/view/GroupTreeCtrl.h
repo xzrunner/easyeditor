@@ -30,6 +30,7 @@ public:
 	void DelNode();
 
 	wxTreeItemId AddSprite(wxTreeItemId parent, d2d::ISprite* spr);
+	void AddSprite(d2d::ISprite* spr);
 
 	void Clear();
 

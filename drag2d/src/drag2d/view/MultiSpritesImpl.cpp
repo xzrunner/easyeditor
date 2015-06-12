@@ -28,6 +28,16 @@ void MultiSpritesImpl::ReorderSprite(ISprite* spr, bool up)
 	resetSpriteOrder(spr, up);
 }
 
+void MultiSpritesImpl::InsertSprite(ISprite* spr)
+{
+	insertSprite(spr);
+}
+
+void MultiSpritesImpl::RemoveSprite(ISprite* spr)
+{
+	removeSprite(spr);
+}
+
 ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;

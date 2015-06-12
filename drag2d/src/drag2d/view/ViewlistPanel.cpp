@@ -47,6 +47,16 @@ void ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
 	Reorder(spr, up);
 }
 
+void ViewlistPanel::InsertSprite(ISprite* spr)
+{
+	Insert(spr);
+}
+
+void ViewlistPanel::RemoveSprite(ISprite* spr)
+{
+	Remove(spr);
+}
+
 void ViewlistPanel::Remove(ISprite* sprite)
 {
 	int idx = QuerySprIdx(sprite);

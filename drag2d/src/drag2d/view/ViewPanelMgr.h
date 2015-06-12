@@ -15,9 +15,10 @@ public:
 
 	void AddPanel(IViewPanel* panel);
 
-	void SelectSprite(ISprite* spr, IViewPanel* self);
-
-	void ReorderSprite(ISprite* spr, bool up, IViewPanel* self);
+	void SelectSprite(ISprite* spr, IViewPanel* expect);
+	void ReorderSprite(ISprite* spr, bool up, IViewPanel* expect);
+	void InsertSprite(ISprite* spr, IViewPanel* expect);
+	void RemoveSprite(ISprite* spr, IViewPanel* expect);
 
 private:
 	std::vector<IViewPanel*> m_panels;

@@ -38,6 +38,16 @@ void GroupTreePanel::ReorderSprite(ISprite* spr, bool up)
 	}
 }
 
+void GroupTreePanel::InsertSprite(ISprite* spr)
+{
+	m_grouptree->AddSprite(spr);
+}
+
+void GroupTreePanel::RemoveSprite(ISprite* spr)
+{
+	m_grouptree->Remove(spr);
+}
+
 void GroupTreePanel::StoreToFile(Json::Value& value) const
 {
 	m_grouptree->Traverse(GroupTreeImpl::StoreVisitor(m_grouptree, value));

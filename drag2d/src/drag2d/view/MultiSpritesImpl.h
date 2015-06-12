@@ -23,6 +23,8 @@ public:
 	//
 	virtual void SelectSprite(ISprite* spr);
 	virtual void ReorderSprite(ISprite* spr, bool up);
+	virtual void InsertSprite(ISprite* spr);
+	virtual void RemoveSprite(ISprite* spr);
 
 	virtual void traverseSprites(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const = 0;

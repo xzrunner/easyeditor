@@ -31,6 +31,8 @@ public:
 	//
 	virtual void SelectSprite(ISprite* spr);
 	virtual void ReorderSprite(ISprite* spr, bool up);
+	virtual void InsertSprite(ISprite* spr);
+	virtual void RemoveSprite(ISprite* spr);
 
 	void Remove(ISprite* sprite);
 	void Insert(ISprite* sprite);

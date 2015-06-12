@@ -105,6 +105,15 @@ wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
 	}
 }
 
+void GroupTreeCtrl::AddSprite(d2d::ISprite* spr)
+{
+	if (m_selected_item.IsOk()) {
+		AddSprite(m_selected_item, spr);
+	} else if (m_root.IsOk()) {
+		AddSprite(m_root, spr);
+	}
+}
+
 void GroupTreeCtrl::Clear()
 {
 	if (!IsEmpty()) {

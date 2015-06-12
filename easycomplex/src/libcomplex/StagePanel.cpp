@@ -59,16 +59,22 @@ void StagePanel::clear()
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
 	d2d::SpritesPanelImpl::removeSprite(sprite);
-	m_viewlist->Remove(sprite);
-	if (m_group_panel) {
-		m_group_panel->Remove(sprite);
+// 	m_viewlist->Remove(sprite);
+// 	if (m_group_panel) {
+// 		m_group_panel->Remove(sprite);
+// 	}
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->RemoveSprite(sprite, this);
 	}
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	d2d::SpritesPanelImpl::insertSprite(sprite);
-	m_viewlist->Insert(sprite);
+//	m_viewlist->Insert(sprite);
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->InsertSprite(sprite, this);
+	}
 }
 
 bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
@@ -79,7 +85,6 @@ bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 		m_view_panel_mgr->ReorderSprite(sprite, up, this);
 	}
 
-//	m_viewlist->Reorder(sprite, up);
 	return ret;
 }
 
