@@ -30,7 +30,7 @@ public:
 	void DelNode();
 
 	wxTreeItemId AddSprite(wxTreeItemId parent, d2d::ISprite* spr);
-	void AddSprite(d2d::ISprite* spr);
+	wxTreeItemId AddSprite(d2d::ISprite* spr);
 
 	void Clear();
 
@@ -47,6 +47,8 @@ private:
 	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);
 
 private:
+	void InitRoot();
+
 	void OnItemRClick(wxTreeEvent& event);
 	void OnItemMenu(wxTreeEvent& event);
 	void OnItemActivated(wxTreeEvent& event);

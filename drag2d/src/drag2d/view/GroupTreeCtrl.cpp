@@ -27,13 +27,13 @@ END_EVENT_TABLE()
 GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
 							 ViewPanelMgr* view_panel_mgr)
 	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
-	wxTR_EDIT_LABELS | wxTR_HIDE_ROOT | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
+	wxTR_EDIT_LABELS | /*wxTR_HIDE_ROOT | */wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
 	, m_parent_panel(parent)
 	, m_sprite_impl(sprite_impl)
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_remove_open(true)
 {
-	m_root = AddRoot("Root");
+	InitRoot();
 }
 
 void GroupTreeCtrl::Traverse(IGroupTreeVisitor& visitor) const
@@ -105,13 +105,17 @@ wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
 	}
 }
 
-void GroupTreeCtrl::AddSprite(d2d::ISprite* spr)
+wxTreeItemId GroupTreeCtrl::AddSprite(d2d::ISprite* spr)
 {
+	wxTreeItemId ret;
 	if (m_selected_item.IsOk()) {
-		AddSprite(m_selected_item, spr);
-	} else if (m_root.IsOk()) {
-		AddSprite(m_root, spr);
+		ret = AddSprite(m_selected_item, spr);
 	}
+	if (!ret.IsOk() || ret == m_root) {
+		assert(m_root.IsOk());
+		ret = AddSprite(m_root, spr);
+	}
+	return ret;
 }
 
 void GroupTreeCtrl::Clear()
@@ -187,6 +191,13 @@ wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name
 	wxTreeItemId id = InsertItem(parent, 0, name, -1, -1, data);
 	ExpandAll();
 	return id;
+}
+
+void GroupTreeCtrl::InitRoot()
+{
+	GroupTreeItem* data = new GroupTreeItem(new Group("root"));
+	m_root = AddRoot("Root");
+	SetItemData(m_root, data);
 }
 
 void GroupTreeCtrl::OnItemRClick(wxTreeEvent& event)
@@ -278,12 +289,12 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 {
 	m_selected_item = event.GetItem();
 
+	wxLogDebug("OnSelChanged %s", GetItemText(m_selected_item));
+
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
 	if (data && data->m_sprite) {
 		m_view_panel_mgr->SelectSprite(data->m_sprite, m_parent_panel);
 	}
-
-//	wxLogDebug("OnSelChanged %s", GetItemText(m_selected_item));
 }
 
 void GroupTreeCtrl::OnMenuAddSprites(wxCommandEvent& event)

@@ -65,7 +65,6 @@ wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent)
 wxWindow* EditDialog::InitLayoutRight(wxWindow* parent)
 {
 	m_viewlist = new d2d::ViewlistPanel(parent, m_stage, m_stage, m_property);
-	m_stage->setViewlist(m_viewlist);
 	return m_viewlist;
 }
 
