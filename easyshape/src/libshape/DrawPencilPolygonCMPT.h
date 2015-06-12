@@ -13,6 +13,7 @@ public:
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
 	int GetSelected() const;
+	void SetSelection(const std::string& type);
 
 protected:
 	virtual wxSizer* initLayout();

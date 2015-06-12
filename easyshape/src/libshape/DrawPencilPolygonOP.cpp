@@ -16,6 +16,23 @@ DrawPencilPolygonOP::DrawPencilPolygonOP(d2d::EditPanel* editPanel,
 {
 }
 
+bool DrawPencilPolygonOP::onKeyDown(int keyCode)
+{
+	if (DrawCurveOP::onKeyDown(keyCode)) {
+		return true;
+	}
+
+	if (wxGetKeyState(WXK_SHIFT)) {
+		m_cmpt->SetSelection("union");
+	} else if (wxGetKeyState(WXK_ALT)) {
+		m_cmpt->SetSelection("difference");
+	} else if (wxGetKeyState(WXK_ESCAPE)) {
+		m_cmpt->SetSelection("normal");
+	}
+
+	return false;
+}
+
 bool DrawPencilPolygonOP::onMouseLeftUp(int x, int y)
 {
 	if (DrawCurveOP::onMouseLeftUp(x, y)) return true;

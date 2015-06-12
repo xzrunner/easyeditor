@@ -17,6 +17,17 @@ int DrawPencilPolygonCMPT::GetSelected() const
 	return m_choice->GetSelection();
 }
 
+void DrawPencilPolygonCMPT::SetSelection(const std::string& type)
+{
+	if (type == "normal") {
+		m_choice->SetSelection(0);
+	} else if (type == "union") {
+		m_choice->SetSelection(1);
+	} else if (type == "difference") {
+		m_choice->SetSelection(2);		
+	}
+}
+
 wxSizer* DrawPencilPolygonCMPT::initLayout()
 {
 	wxSizer* sizer = d2d::OneFloatValueCMPT::initLayout();
