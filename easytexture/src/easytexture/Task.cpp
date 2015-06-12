@@ -40,7 +40,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -65,7 +65,7 @@ void Task::InitLayout()
 
 	StagePanel* stage;
 	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library);
-	m_library->setCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->getCanvas());
 
 	left_vert_splitter->SetSashGravity(0.2f);
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);

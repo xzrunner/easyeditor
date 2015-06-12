@@ -12,11 +12,11 @@ namespace emap
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 {
-	wxWindow* nb = getNotebook();
-	addPage(new d2d::LibraryImagePage(nb));
-	addPage(new ecomplex::LibraryPage(nb));
-	addPage(new etexture::LibraryPage(nb));
-	addPage(new libshape::LibraryPage(nb));
+	wxWindow* nb = GetNotebook();
+	AddPage(new d2d::LibraryImagePage(nb));
+	AddPage(new ecomplex::LibraryPage(nb));
+	AddPage(new etexture::LibraryPage(nb));
+	AddPage(new libshape::LibraryPage(nb));
 }
 
 }

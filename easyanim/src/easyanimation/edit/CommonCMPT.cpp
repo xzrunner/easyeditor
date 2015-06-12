@@ -176,7 +176,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 
 	m_ctrl->setCurrFrame(0, 1);
 
-	m_ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	m_ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 	m_ctrl->Refresh();
 

@@ -1,63 +1,66 @@
-#pragma once
+#ifndef _DRAG2D_LIBRARY_PANEL_H_
+#define _DRAG2D_LIBRARY_PANEL_H_
 
 #include <vector>
 
 #include <wx/wx.h>
 #include <wx/notebook.h>
 
-#include "interfaces.h"
-
 namespace d2d
 {
-	class ISymbol;
-	class ILibraryPage;
-	class SymbolMgr;
-	class LibraryList;
-	class IVisitor;
-	class GLCanvas;
 
-	class LibraryPanel : public wxPanel
-	{
-	public:
-		LibraryPanel(wxWindow* parent);
+class ISymbol;
+class ILibraryPage;
+class SymbolMgr;
+class LibraryList;
+class IVisitor;
+class GLCanvas;
 
-		virtual void onPageChanged(wxBookCtrlEvent& event);
+class LibraryPanel : public wxPanel
+{
+public:
+	LibraryPanel(wxWindow* parent);
 
-		virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) { return true; }
+	virtual void onPageChanged(wxBookCtrlEvent& event);
 
-		void clear();
+	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) { return true; }
 
-		void reloadTexture() const;
+	void Clear();
 
-		void addPage(ILibraryPage* page, const char* name = NULL);
+	void ReloadTexture() const;
 
-		ISymbol* getSymbol(int index = -1) const;
+	void AddPage(ILibraryPage* page, const char* name = NULL);
 
-		void loadFromSymbolMgr(const SymbolMgr& mgr);
-		void LoadSymbol(d2d::ISymbol* symbol);
+	ISymbol* GetSymbol(int index = -1) const;
 
-		void traverse(IVisitor& visitor) const;
+	void LoadFromSymbolMgr(const SymbolMgr& mgr);
+	void LoadSymbol(d2d::ISymbol* symbol);
 
-		wxWindow* getNotebook() { return m_notebook; }
+	void Traverse(IVisitor& visitor) const;
 
-		void setCanvas(GLCanvas* canvas);
+	wxWindow* GetNotebook() { return m_notebook; }
 
-		bool AddSymbol(ISymbol* symbol);
+	void SetCanvas(GLCanvas* canvas);
 
-		void LoadFromConfig();
+	bool AddSymbol(ISymbol* symbol);
 
-		ILibraryPage* GetCurrPage() { return m_selected; }
+	void LoadFromConfig();
 
-	private:
-		void initLayout();
+	ILibraryPage* GetCurrPage() { return m_selected; }
+	void SetCurrPage(int idx);
 
-	protected:
-		wxNotebook* m_notebook;
+private:
+	void InitLayout();
 
-		std::vector<ILibraryPage*> m_pages;
+protected:
+	wxNotebook* m_notebook;
 
-		ILibraryPage* m_selected;
+	std::vector<ILibraryPage*> m_pages;
 
-	}; // LibraryPanel
+	ILibraryPage* m_selected;
+
+}; // LibraryPanel
+
 }
 
+#endif // _DRAG2D_LIBRARY_PANEL_H_

@@ -21,7 +21,7 @@ PasteSymbolTileOP::PasteSymbolTileOP(EditPanel* editPanel, MultiSpritesImpl* spr
 
 bool PasteSymbolTileOP::onMouseLeftDown(int x, int y)
 {
-	ISymbol* symbol = m_libraryPanel->getSymbol();
+	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		if (!m_bCaptured)
@@ -141,7 +141,7 @@ bool PasteSymbolTileOP::onDraw() const
 {
 	if (ZoomViewOP::onDraw()) return true;
 
-	ISymbol* symbol = m_libraryPanel->getSymbol();
+	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol && m_pos.isValid())
 	{
 		SpriteRenderer* rd = SpriteRenderer::Instance();

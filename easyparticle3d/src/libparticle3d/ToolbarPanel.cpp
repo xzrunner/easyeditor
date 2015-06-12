@@ -538,13 +538,13 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	d2d::ISymbol* symbol = m_library->getSymbol(index);
+	d2d::ISymbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
 		m_toolbar->onAddChild(wxCommandEvent());
 
 		ToolbarPanel::ChildPanel* child = m_toolbar->m_children.back();
-		child->m_pc->symbol = m_library->getSymbol(index);
+		child->m_pc->symbol = m_library->GetSymbol(index);
 		m_stage->m_ps->start();
 		m_stage->ResetViewport();
 	}

@@ -23,7 +23,7 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 void PreviewCanvas::initGL()
 {
 	d2d::DynamicStageCanvas::initGL();
-	m_ctrl->GetLibraryPanel()->reloadTexture();
+	m_ctrl->GetLibraryPanel()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}

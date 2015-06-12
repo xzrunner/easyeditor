@@ -12,7 +12,7 @@ void FileIO::load(const Task* task, const char* filename)
 	ecomplex::Symbol* symbol = task->m_stage->getSymbol();
 	symbol->loadFromFile(filename);
 
-	task->m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	task->m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		task->m_viewlist->Insert(symbol->m_sprites[i]);
 

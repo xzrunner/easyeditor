@@ -58,7 +58,7 @@ void FileIO::load(const char* filename)
 		}
 	}
 
-	context->library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	context->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 	context->stage->getCanvas()->resetViewport();
 }
 

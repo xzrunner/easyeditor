@@ -27,7 +27,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	long index;
 	sIndex.ToLong(&index);
 
-	ISymbol* symbol = m_library->getSymbol(index);
+	ISymbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
 		Vector pos = m_edit_panel->transPosScreenToProject(x, y);

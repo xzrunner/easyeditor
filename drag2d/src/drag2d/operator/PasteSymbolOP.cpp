@@ -23,7 +23,7 @@ bool PasteSymbolOP::onMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	ISymbol* symbol = m_libraryPanel->getSymbol();
+	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol)
 	{
 		m_pos = m_stage->transPosScreenToProject(x, y);
@@ -52,7 +52,7 @@ bool PasteSymbolOP::onDraw() const
 {
 	if (ZoomViewOP::onDraw()) return true;
 
-	ISymbol* symbol = m_libraryPanel->getSymbol();
+	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol && m_pos.isValid())
 	{
 		SpriteRenderer* rd = SpriteRenderer::Instance();

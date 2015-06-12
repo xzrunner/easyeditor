@@ -54,7 +54,7 @@ void Task::clear()
 
 	m_viewlist->Clear();
 
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -107,7 +107,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_stage = new ecomplex::StagePanel(parent, m_parent, m_property, m_library, &m_view_panel_mgr);
 
 	m_view_panel_mgr.AddPanel(m_stage);
-	m_library->setCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->getCanvas());
 	m_property->SetPropertySetting(new ecomplex::SymbolPropertySetting(m_stage, m_stage->getSymbol()));
 
 	return m_stage;

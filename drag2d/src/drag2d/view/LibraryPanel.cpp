@@ -15,7 +15,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY)
 	, m_selected(NULL)
 {
-	initLayout();
+	InitLayout();
 
 	SetDropTarget(new LibraryPanelDropTarget(this));
 }
@@ -25,20 +25,20 @@ void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
 	m_selected = m_pages[event.GetSelection()];
 }
 
-void LibraryPanel::clear()
+void LibraryPanel::Clear()
 {
 	for (size_t i = 0, n = m_pages.size(); i < n; ++i)
 		m_pages[i]->clear();
 	LoadFromConfig();
 }
 
-void LibraryPanel::reloadTexture() const
+void LibraryPanel::ReloadTexture() const
 {
 	for (size_t i = 0, n = m_pages.size(); i < n; ++i)
 		m_pages[i]->reloadTexture();
 }
 
-void LibraryPanel::addPage(ILibraryPage* page, const char* name)
+void LibraryPanel::AddPage(ILibraryPage* page, const char* name)
 {
 	if (m_notebook->GetPageCount() == 0)
 		m_selected = page;
@@ -51,7 +51,7 @@ void LibraryPanel::addPage(ILibraryPage* page, const char* name)
 	m_pages.push_back(page);
 }
 
-ISymbol* LibraryPanel::getSymbol(int index/* = -1*/) const
+ISymbol* LibraryPanel::GetSymbol(int index/* = -1*/) const
 {
 	if (m_selected)
 		return m_selected->getSymbol(index);
@@ -59,7 +59,7 @@ ISymbol* LibraryPanel::getSymbol(int index/* = -1*/) const
 		return NULL;
 }
 
-void LibraryPanel::loadFromSymbolMgr(const SymbolMgr& mgr)
+void LibraryPanel::LoadFromSymbolMgr(const SymbolMgr& mgr)
 {
 	std::vector<ISymbol*> symbols;
 	mgr.traverse(FetchAllVisitor<ISymbol>(symbols));
@@ -82,13 +82,13 @@ void LibraryPanel::LoadSymbol(d2d::ISymbol* symbol)
 	}
 }
 
-void LibraryPanel::traverse(IVisitor& visitor) const
+void LibraryPanel::Traverse(IVisitor& visitor) const
 {
 	if (m_selected)
 		m_selected->traverse(visitor);
 }
 
-void LibraryPanel::setCanvas(GLCanvas* canvas)
+void LibraryPanel::SetCanvas(GLCanvas* canvas)
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i) {
 		m_pages[i]->setCanvas(canvas);
@@ -115,7 +115,14 @@ void LibraryPanel::LoadFromConfig()
 	}
 }
 
-void LibraryPanel::initLayout()
+void LibraryPanel::SetCurrPage(int idx)
+{
+	if (idx >= 0 && idx < m_pages.size()) {
+		m_notebook->SetSelection(idx);
+	}
+}
+
+void LibraryPanel::InitLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 

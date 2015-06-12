@@ -34,7 +34,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -52,7 +52,7 @@ void Task::initLayout()
 	wxSplitterWindow* leftHorSplitter = new wxSplitterWindow(leftVerSplitter);
 
 	m_library = new d2d::LibraryPanel(leftHorSplitter);
-	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
+	m_library->AddPage(new d2d::LibraryImagePage(m_library->GetNotebook()));
 
 	m_property = new d2d::PropertySettingPanel(leftHorSplitter);
 

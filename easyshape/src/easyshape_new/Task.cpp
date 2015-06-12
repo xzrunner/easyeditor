@@ -54,7 +54,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
- 	m_library->clear();
+ 	m_library->Clear();
  	m_stage->clear();
  	m_library->Refresh();
  	m_stage->Refresh();
@@ -77,15 +77,15 @@ void Task::InitLayout(wxFrame* parent)
 	wxSplitterWindow* left_hori = new wxSplitterWindow(left_vert);
 
 	m_library = new d2d::LibraryPanel(left_hori);
-	wxWindow* nb = m_library->getNotebook();
-	m_library->addPage(new d2d::LibraryImagePage(nb));
-	m_library->addPage(new ecomplex::LibraryPage(nb));
-	m_library->addPage(new libanim::LibraryPage(nb));
-	m_library->addPage(new etexture::LibraryPage(nb));
+	wxWindow* nb = m_library->GetNotebook();
+	m_library->AddPage(new d2d::LibraryImagePage(nb));
+	m_library->AddPage(new ecomplex::LibraryPage(nb));
+	m_library->AddPage(new libanim::LibraryPage(nb));
+	m_library->AddPage(new etexture::LibraryPage(nb));
 
 	d2d::PropertySettingPanel* property = new d2d::PropertySettingPanel(left_hori);
 	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
-	m_library->setCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->getCanvas());
 	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, m_stage);
 
 	left_hori->SetSashGravity(0.8f);

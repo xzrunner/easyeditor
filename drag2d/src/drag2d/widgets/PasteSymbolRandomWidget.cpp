@@ -56,7 +56,7 @@ void PasteSymbolRandomWidget::initLayout()
 void PasteSymbolRandomWidget::getRandomValue(RandomValue& val) const
 {
 	std::vector<ISymbol*> symbols;
-	m_libraryPanel->traverse(FilterSymbolVisitor(m_symbolFilterCtrl->GetValue(), symbols));
+	m_libraryPanel->Traverse(FilterSymbolVisitor(m_symbolFilterCtrl->GetValue(), symbols));
 	if (symbols.empty())
 		val.symbol = NULL;
 	else

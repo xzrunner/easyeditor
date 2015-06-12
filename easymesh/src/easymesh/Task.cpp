@@ -29,7 +29,7 @@ void Task::load(const char* filepath)
 		Symbol* msymbol = static_cast<Symbol*>(symbol);
 		m_stage->SetSymbol(msymbol);
 		
-		m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+		m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 		symbol->Release();
 		m_stage->getCanvas()->resetViewport();
 	}
@@ -48,7 +48,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -64,7 +64,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	wxWindow*& library, wxWindow*& property, wxWindow*& stage, wxWindow*& toolbar)
 {
 	library = m_library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
+	m_library->AddPage(new d2d::LibraryImagePage(m_library->GetNotebook()));
 
 	property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 

@@ -20,7 +20,7 @@ bool PasteSymbolPhysicsRandomOP::onMouseLeftDown(int x, int y)
 
 	d2d::ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol) 
-		symbol = m_libraryPanel->getSymbol();
+		symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		m_pos = m_stage->transPosScreenToProject(x, y);
@@ -62,7 +62,7 @@ bool PasteSymbolPhysicsRandomOP::onDraw() const
 
 	d2d::ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol)  {
-		symbol = m_libraryPanel->getSymbol();
+		symbol = m_libraryPanel->GetSymbol();
 	}
 	if (symbol && m_pos.isValid()) {
 		d2d::SpriteRenderer::Instance()->Draw(symbol, d2d::Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);

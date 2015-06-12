@@ -20,7 +20,7 @@ bool PasteSymbolPhysicsOP::onMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
 
-	d2d::ISymbol* symbol = m_libraryPanel->getSymbol();
+	d2d::ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		m_pos = m_stage->transPosScreenToProject(x, y);

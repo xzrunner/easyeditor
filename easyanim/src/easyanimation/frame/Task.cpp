@@ -62,7 +62,7 @@ void Task::clear()
 
 	m_widgets.m_viewlist->Clear();
 
-	m_widgets.m_library->clear();
+	m_widgets.m_library->Clear();
 	m_widgets.m_stage->clear();
 	m_widgets.m_library->Refresh();
 	m_widgets.m_stage->Refresh();
@@ -102,12 +102,12 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 	// library
 	m_widgets.m_library = new d2d::LibraryPanel(split);
-	wxWindow* nb = m_widgets.m_library->getNotebook();
-	m_widgets.m_library->addPage(m_widgets.m_imagePage = new d2d::LibraryImagePage(nb));
-	m_widgets.m_library->addPage(new ecomplex::LibraryPage(nb));
-	m_widgets.m_library->addPage(new emesh::LibraryPage(nb));
-	m_widgets.m_library->addPage(new escale9::LibraryPage(nb));
-	m_widgets.m_library->addPage(new eicon::LibraryPage(nb));
+	wxWindow* nb = m_widgets.m_library->GetNotebook();
+	m_widgets.m_library->AddPage(m_widgets.m_imagePage = new d2d::LibraryImagePage(nb));
+	m_widgets.m_library->AddPage(new ecomplex::LibraryPage(nb));
+	m_widgets.m_library->AddPage(new emesh::LibraryPage(nb));
+	m_widgets.m_library->AddPage(new escale9::LibraryPage(nb));
+	m_widgets.m_library->AddPage(new eicon::LibraryPage(nb));
 
 	// property
 	m_widgets.m_property = new d2d::PropertySettingPanel(split);
@@ -125,7 +125,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 	// stage
 	m_widgets.m_stage = new StagePanel(top_split, m_parent, m_widgets.m_property, &m_controller);
-	m_widgets.m_library->setCanvas(m_widgets.m_stage->getCanvas());	// ?
+	m_widgets.m_library->SetCanvas(m_widgets.m_stage->getCanvas());	// ?
 
 	// toolbar
 	m_widgets.m_toolbar = new ToolbarPanel(top_split, m_widgets.m_stage, 

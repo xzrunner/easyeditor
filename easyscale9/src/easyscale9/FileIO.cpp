@@ -33,7 +33,7 @@ void FileIO::load(const char* filename, d2d::LibraryPanel* library,
 		  height = value["height"].asInt();
 	toolbar->setSize(width, height);
 
-	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename, StagePanel* stage, 

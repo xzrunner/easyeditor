@@ -18,7 +18,7 @@ PreviewCanvas::~PreviewCanvas()
 void PreviewCanvas::initGL()
 {
 	d2d::DynamicStageCanvas::initGL();
-	Context::Instance()->library->reloadTexture();
+	Context::Instance()->library->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}

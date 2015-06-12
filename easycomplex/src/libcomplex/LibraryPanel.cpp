@@ -20,22 +20,22 @@ namespace ecomplex
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 {
-	wxWindow* nb = getNotebook();
-	addPage(new d2d::LibraryImagePage(nb));
-	addPage(new LibraryPage(nb));
-	addPage(new libanim::LibraryPage(nb));
-	addPage(new escale9::LibraryPage(nb));
-	addPage(new d2d::LibraryFontBlankPage(nb));
-	addPage(new emesh::LibraryPage(nb));
-	addPage(new d2d::LibraryScriptsPage(nb));
-	addPage(new d2d::LibraryFontPage(nb));
-	addPage(new eparticle3d::LibraryPage(nb));
-	addPage(new eparticle2d::LibraryPage(nb));
-	addPage(new eejoy2d::LibraryPage(nb));
-	addPage(new eterrain2d::LibraryPage(nb));
-	addPage(new etexture::LibraryPage(nb));
-	addPage(new eicon::LibraryPage(nb));
-	addPage(new eshadow::LibraryPage(nb));
+	wxWindow* nb = GetNotebook();
+	AddPage(new d2d::LibraryImagePage(nb));
+	AddPage(new LibraryPage(nb));
+	AddPage(new libanim::LibraryPage(nb));
+	AddPage(new escale9::LibraryPage(nb));
+	AddPage(new d2d::LibraryFontBlankPage(nb));
+	AddPage(new emesh::LibraryPage(nb));
+	AddPage(new d2d::LibraryScriptsPage(nb));
+	AddPage(new d2d::LibraryFontPage(nb));
+	AddPage(new eparticle3d::LibraryPage(nb));
+	AddPage(new eparticle2d::LibraryPage(nb));
+	AddPage(new eejoy2d::LibraryPage(nb));
+	AddPage(new eterrain2d::LibraryPage(nb));
+	AddPage(new etexture::LibraryPage(nb));
+	AddPage(new eicon::LibraryPage(nb));
+	AddPage(new eshadow::LibraryPage(nb));
 }
 
 } // ecomplex

@@ -17,7 +17,7 @@ END_EVENT_TABLE()
 
 EditDialog::EditDialog(wxWindow* parent, Sprite* edited, 
 					   const std::vector<d2d::ISprite*>& bg_sprites)
-	: wxDialog(parent, wxID_ANY, "Edit Complex", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
+	: wxDialog(parent, wxID_ANY, "Edit Texture", wxDefaultPosition, wxSize(800, 600), wxCLOSE_BOX | wxCAPTION | wxMAXIMIZE_BOX)
 	, m_symbol(NULL)
 	, m_stage(NULL)
 {

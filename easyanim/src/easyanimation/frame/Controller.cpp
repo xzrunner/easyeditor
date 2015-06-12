@@ -176,7 +176,7 @@ d2d::ILibraryPage* Controller::GetImagePage()
 
 void Controller::Clear()
 {
-	m_widgets->m_library->clear();
+	m_widgets->m_library->Clear();
 	m_widgets->m_stage->clear();
 	ClearLayers();
 }

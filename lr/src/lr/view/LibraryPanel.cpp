@@ -104,14 +104,14 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 	d2d::AbstractEditOP* draw_line_op = new libshape::EditPolylineOP<libshape::DrawPenLineOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
 	d2d::AbstractEditOP* draw_poly_op = new libshape::EditPolylineOP<libshape::DrawPolygonOP, d2d::SelectShapesOP>(stage, stage, property, capture_val, NULL);
 
-	addPage(new LibraryPage(m_notebook, "地形", paste_op));
-	addPage(new LibraryPage(m_notebook, "装饰", paste_op));
-	addPage(new LibraryPage(m_notebook, "单位", paste_op));
-	addPage(new LibraryPage(m_notebook, "点", paste_op));
-	addPage(new LibraryPage(m_notebook, "路径", draw_line_op));
-	addPage(new LibraryPage(m_notebook, "区域", draw_poly_op));
-	addPage(new LibraryPage(m_notebook, "碰撞区域", draw_poly_op));
-	addPage(new LibraryPage(m_notebook, "摄像机", paste_op));
+	AddPage(new LibraryPage(m_notebook, "地形", paste_op));
+	AddPage(new LibraryPage(m_notebook, "装饰", paste_op));
+	AddPage(new LibraryPage(m_notebook, "单位", paste_op));
+	AddPage(new LibraryPage(m_notebook, "点", paste_op));
+	AddPage(new LibraryPage(m_notebook, "路径", draw_line_op));
+	AddPage(new LibraryPage(m_notebook, "区域", draw_poly_op));
+	AddPage(new LibraryPage(m_notebook, "碰撞区域", draw_poly_op));
+	AddPage(new LibraryPage(m_notebook, "摄像机", paste_op));
 
 	paste_op->Release();
 	draw_line_op->Release();

@@ -23,7 +23,7 @@ bool PasteSymbolRandomOP::onMouseLeftDown(int x, int y)
 
 	ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol) 
-		symbol = m_libraryPanel->getSymbol();
+		symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		m_pos = m_stage->transPosScreenToProject(x, y);
@@ -57,7 +57,7 @@ bool PasteSymbolRandomOP::onDraw() const
 
 	ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol) {
-		symbol = m_libraryPanel->getSymbol();
+		symbol = m_libraryPanel->GetSymbol();
 	}
 	if (symbol && m_pos.isValid()) {
 		SpriteRenderer::Instance()->Draw(symbol, Matrix(), m_pos, m_randomValue.angle, m_randomValue.scale);

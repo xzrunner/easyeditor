@@ -19,7 +19,7 @@ PasteSymbolCaptureOP::PasteSymbolCaptureOP(EditPanel* editPanel, MultiSpritesImp
 
 bool PasteSymbolCaptureOP::onMouseLeftDown(int x, int y)
 {
-	ISymbol* symbol = m_libraryPanel->getSymbol();
+	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
 		if (!m_bCaptured)

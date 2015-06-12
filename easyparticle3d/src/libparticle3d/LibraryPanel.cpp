@@ -13,11 +13,11 @@ namespace eparticle3d
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 {
-	wxWindow* nb = getNotebook();
-	addPage(new d2d::LibraryImagePage(nb));
-	addPage(new ecomplex::LibraryPage(nb));
-	addPage(new libanim::LibraryPage(nb));
-	addPage(new escale9::LibraryPage(nb));
+	wxWindow* nb = GetNotebook();
+	AddPage(new d2d::LibraryImagePage(nb));
+	AddPage(new ecomplex::LibraryPage(nb));
+	AddPage(new libanim::LibraryPage(nb));
+	AddPage(new escale9::LibraryPage(nb));
 }
 
 }

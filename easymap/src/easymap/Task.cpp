@@ -47,7 +47,7 @@ void Task::load(const char* filename)
 		spr_val = value["sprites"][i++];
 	}
 
-	m_library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 	m_stage->resetCanvas();
 }
@@ -86,7 +86,7 @@ void Task::clear()
 {
 	m_viewlist->Clear();
 
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -116,7 +116,7 @@ void Task::InitLayout()
 
 	StagePanel* stage;
 	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library, m_property);
-	m_library->setCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->getCanvas());
 
 	left_vert_splitter->SetSashGravity(0.2f);
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);

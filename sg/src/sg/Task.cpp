@@ -85,7 +85,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
-	m_library->setCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->getCanvas());
 	return m_stage;
 }
 

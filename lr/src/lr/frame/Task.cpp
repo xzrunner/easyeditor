@@ -41,7 +41,7 @@ void Task::clear()
 {
 	m_viewlist->Clear();
 
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -96,7 +96,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_view_panel_mgr.AddPanel(m_stage);
 	m_library->SetStagePanel(m_stage);
 	m_library->InitPages(m_stage, m_property);
-	m_library->setCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->getCanvas());
 
 	return m_stage;
 }

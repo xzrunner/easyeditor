@@ -195,7 +195,7 @@ OnDropText(wxCoord x, wxCoord y, const wxString& data)
 	long index;
 	sIndex.ToLong(&index);
 
-	d2d::ISymbol* symbol = m_library->getSymbol(index);
+	d2d::ISymbol* symbol = m_library->GetSymbol(index);
 	if (symbol) {
 		m_stage->SetSymbolBG(symbol);
 	}

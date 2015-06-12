@@ -78,7 +78,7 @@ void StagePanel::loadFromLibrary()
 	int index = 0;
 	while (true)
 	{
-		symbol = Context::Instance()->library->getSymbol(index++);
+		symbol = Context::Instance()->library->GetSymbol(index++);
 		if (!symbol) 
 			break;
 		else 

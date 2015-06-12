@@ -49,7 +49,7 @@ void FileIO::load(const wxString& filepath, Controller* ctrl)
 		layerValue = value["layer"][i++];
 	}
 
-	ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 	ctrl->setCurrFrame(0, 1);
 
@@ -103,7 +103,7 @@ void FileIO::reload(Controller* ctrl)
 		layerValue = value["layer"][i++];
 	}
 
-	ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
 	ctrl->Refresh();
 }
@@ -138,7 +138,7 @@ void FileIO::loadFlash(const wxString& filepath, Controller* ctrl)
 		layerNode = layerNode->next_sibling();
 	}
 
-	ctrl->GetLibraryPanel()->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::storeAsGif(const wxString& src, const wxString& dst)

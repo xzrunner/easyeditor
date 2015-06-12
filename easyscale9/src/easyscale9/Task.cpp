@@ -40,7 +40,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -58,13 +58,13 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 					   wxWindow*& stage, wxWindow*& toolbar)
 {
 	library = m_library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	m_library->addPage(new d2d::LibraryImagePage(m_library->getNotebook()));
+	m_library->AddPage(new d2d::LibraryImagePage(m_library->GetNotebook()));
 
 	d2d::PropertySettingPanel* _property;
 	property = _property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent, m_library);
-	m_library->setCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->getCanvas());
 
 	toolbar = m_toolbar = new ToolbarPanel(rightVerticalSplitter, m_stage, _property);
 

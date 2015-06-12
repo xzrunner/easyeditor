@@ -53,9 +53,9 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, const std::string&
 
 	InitLibrarySymbols(value, symbols);
 
-	wxWindow* nb = m_library->getNotebook();
+	wxWindow* nb = m_library->GetNotebook();
 	LibraryPage* page = new LibraryPage(nb, name.c_str());
-	m_library->addPage(page);
+	m_library->AddPage(page);
 
 	ResetLibraryList(page, symbols);
 

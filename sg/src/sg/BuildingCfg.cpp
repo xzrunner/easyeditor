@@ -176,15 +176,15 @@ void BuildingCfg::InitBuildings(const Json::Value& value)
 
 	LoadSymbolUserData();
 
-	wxWindow* nb = m_library->getNotebook();
+	wxWindow* nb = m_library->GetNotebook();
 	m_defenses = new LibraryPage(nb, "Defenses");
-	m_library->addPage(m_defenses);
+	m_library->AddPage(m_defenses);
 	m_resources = new LibraryPage(nb, "Resources");
-	m_library->addPage(m_resources);
+	m_library->AddPage(m_resources);
 	m_army = new LibraryPage(nb, "Army");
-	m_library->addPage(m_army);	
+	m_library->AddPage(m_army);	
 	d2d::ILibraryPage* other = new d2d::LibraryImagePage(nb);
-	m_library->addPage(other);
+	m_library->AddPage(other);
 
 	ResetLibraryList();
 }
