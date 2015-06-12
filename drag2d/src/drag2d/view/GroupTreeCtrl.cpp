@@ -27,7 +27,7 @@ END_EVENT_TABLE()
 GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_impl,
 							 ViewPanelMgr* view_panel_mgr)
 	: wxTreeCtrl(parent, ID_GROUP_TREE_CTRL, wxDefaultPosition, wxDefaultSize, 
-	wxTR_EDIT_LABELS | /*wxTR_HIDE_ROOT | */wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
+	wxTR_EDIT_LABELS/* | wxTR_MULTIPLE*/ | wxTR_NO_LINES | wxTR_DEFAULT_STYLE)
 	, m_parent_panel(parent)
 	, m_sprite_impl(sprite_impl)
 	, m_view_panel_mgr(view_panel_mgr)
@@ -173,7 +173,6 @@ void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 	// old info
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(id);
 	std::string name = GetItemText(id);
-
 	// insert
 	wxTreeItemId parent = GetItemParent(id);
 	wxTreeItemId new_item;
@@ -191,6 +190,10 @@ void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 	ReorderSprites();
 	// set selection
 	SelectItem(new_item);
+	// font style
+	if (data->IsGroup()) {
+		SetItemBold(new_item, true);
+	}
 }
 
 wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
@@ -236,6 +239,11 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
 	selection->Clear();
 	Traverse(id, GroupTreeImpl::SelectVisitor(this, selection));
+
+	GroupTreeImpl::GetFirstSpriteVisitor visitor(this);
+	Traverse(id, visitor);
+	ISprite* spr = visitor.GetFirstSprite();
+	m_view_panel_mgr->SelectSprite(spr, m_parent_panel);
 }
 
 void GroupTreeCtrl::OnBeginDrag(wxTreeEvent& event)
@@ -270,6 +278,13 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 	Delete(item_src);
 	// sort
 	ReorderSprites();
+	// set selection
+	SelectItem(new_item);
+	// font style
+	if (data->IsGroup()) {
+		SetItemBold(new_item, true);
+	}
+
 }
 
 void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)

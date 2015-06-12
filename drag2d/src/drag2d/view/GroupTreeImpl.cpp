@@ -168,6 +168,31 @@ VisitLeaf(wxTreeItemId id)
 }
 
 //////////////////////////////////////////////////////////////////////////
+// class GetFirstSpriteVisitor
+//////////////////////////////////////////////////////////////////////////
+
+GroupTreeImpl::GetFirstSpriteVisitor::
+GetFirstSpriteVisitor(wxTreeCtrl* treectrl)
+	: m_treectrl(treectrl)
+	, m_first(NULL)
+{
+}
+
+bool GroupTreeImpl::GetFirstSpriteVisitor::
+VisitLeaf(wxTreeItemId id)
+{
+	assert(id.IsOk());
+	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
+	if (!data || data->IsGroup()) {
+		return false;
+	}
+
+	m_first = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+
+	return true;
+}
+
+//////////////////////////////////////////////////////////////////////////
 // class VisibleVisitor
 //////////////////////////////////////////////////////////////////////////
 

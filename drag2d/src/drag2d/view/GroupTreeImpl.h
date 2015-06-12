@@ -78,6 +78,22 @@ public:
 
 	}; // GetSpritesVisitor
 
+	class GetFirstSpriteVisitor : public IGroupTreeVisitor
+	{
+	public:
+		GetFirstSpriteVisitor(wxTreeCtrl* treectrl);
+
+		virtual bool VisitLeaf(wxTreeItemId id);
+
+		ISprite* GetFirstSprite() { return m_first; }
+
+	private:
+		wxTreeCtrl* m_treectrl;
+
+		ISprite* m_first;
+
+	}; // GetFirstSpriteVisitor
+
 	class VisibleVisitor : public IGroupTreeVisitor
 	{
 	public:
