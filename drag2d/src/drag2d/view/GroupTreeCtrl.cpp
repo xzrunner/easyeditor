@@ -184,6 +184,10 @@ void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 		new_item = InsertItem(parent, 0, name, -1, -1, data->Clone());
 	}
 	ExpandAll();
+	// font style
+	if (data->IsGroup()) {
+		SetItemBold(new_item, true);
+	}
 	// copy older's children
 	Traverse(id, GroupTreeImpl::CopyPasteVisitor(this, id, new_item));
 	// remove
@@ -192,10 +196,6 @@ void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 	ReorderSprites();
 	// set selection
 	SelectItem(new_item);
-	// font style
-	if (data->IsGroup()) {
-		SetItemBold(new_item, true);
-	}
 }
 
 wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
@@ -287,7 +287,6 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 	if (data->IsGroup()) {
 		SetItemBold(new_item, true);
 	}
-
 }
 
 void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
