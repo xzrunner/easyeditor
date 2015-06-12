@@ -94,6 +94,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_stage = new StagePanel(parent, m_parent, m_property, m_library, &m_view_panel_mgr);
 
 	m_view_panel_mgr.AddPanel(m_stage);
+	m_library->SetStagePanel(m_stage);
 	m_library->InitPages(m_stage, m_property);
 	m_library->setCanvas(m_stage->getCanvas());
 

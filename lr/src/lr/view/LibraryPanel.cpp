@@ -11,6 +11,8 @@ namespace lr
 
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
+	, m_viewlist(NULL)
+	, m_stage(NULL)
 {
 }
 
@@ -81,12 +83,17 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 void LibraryPanel::RefreshViewList()
 {
 	Layer* layer = static_cast<LibraryPage*>(m_selected)->GetLayer();
+
 	std::vector<d2d::ISprite*> sprites;
 	layer->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
+
 	m_viewlist->Clear();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		m_viewlist->Insert(sprites[i]);
 	}
+
+	m_stage->getSpriteSelection()->Clear();
+	m_stage->getShapeSelection()->Clear();
 }
 
 }

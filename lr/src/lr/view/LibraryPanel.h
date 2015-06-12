@@ -21,12 +21,17 @@ public:
 	void SetViewlist(d2d::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;
 	}
+	void SetStagePanel(StagePanel* stage) {
+		m_stage = stage;
+	}
 	void InitPages(StagePanel* stage, d2d::PropertySettingPanel* property);
 
 	void RefreshViewList();
 
 private:
 	d2d::ViewlistPanel* m_viewlist;
+
+	StagePanel* m_stage;
 
 }; // LibraryPanel
 
