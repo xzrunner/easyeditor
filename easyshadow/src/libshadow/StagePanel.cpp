@@ -72,4 +72,14 @@ void StagePanel::clearShapes()
 {
 }
 
+void StagePanel::LoadFromShadow()
+{
+	const Shadow* shadow = m_symbol->GetShadow();
+	const std::vector<d2d::Vector>& loop = shadow->GetInnerLoop();
+	if (m_loop) {
+		m_loop->Release();
+	}
+	m_loop = new libshape::PolygonShape(loop);
+}
+
 }

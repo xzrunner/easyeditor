@@ -30,6 +30,8 @@ public:
 
 	void SetRadius(float r) { m_radius = r; }
 
+	const std::vector<d2d::Vector>& GetInnerLoop() const { return m_inner_loop; }
+
 private:
 	void BuildInnerLoop(const std::vector<d2d::Vector>& loop);
 	void BuildOuterLoop();

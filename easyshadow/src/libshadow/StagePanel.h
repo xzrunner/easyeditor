@@ -36,6 +36,8 @@ public:
 
 	Symbol* GetSymbol() { return m_symbol; }
 
+	void LoadFromShadow();
+
 private:
 	Symbol* m_symbol;
 

@@ -22,6 +22,7 @@ Task::~Task()
 void Task::load(const char* filename)
 {
 	FileIO::LoadFromFile(filename, m_stage->GetSymbol());
+	m_stage->LoadFromShadow();
 	m_stage->Refresh();
 }
 
