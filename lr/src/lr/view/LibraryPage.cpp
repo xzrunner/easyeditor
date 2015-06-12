@@ -27,6 +27,12 @@ bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
 	return true;
 }
 
+void LibraryPage::UpdateStatusFromLayer()
+{
+	m_visible_ctrl->SetValue(m_layer->IsVisible());	
+	m_editable_ctrl->SetValue(m_layer->IsEditable());
+}
+
 void LibraryPage::SetLayer(Layer* layer)
 {
 	if (m_layer != layer) {
@@ -39,18 +45,18 @@ void LibraryPage::SetLayer(Layer* layer)
 void LibraryPage::InitLayoutExtend(wxSizer* sizer)
 {
 	{
-		wxCheckBox* visible_ctrl = new wxCheckBox(this, wxID_ANY, wxT("可见"));
-		visible_ctrl->SetValue(m_layer->IsVisible());
-		Connect(visible_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		m_visible_ctrl = new wxCheckBox(this, wxID_ANY, wxT("可见"));
+		m_visible_ctrl->SetValue(m_layer->IsVisible());
+		Connect(m_visible_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(LibraryPage::OnChangeVisible));
-		sizer->Add(visible_ctrl, 0, wxALIGN_LEFT);
+		sizer->Add(m_visible_ctrl, 0, wxALIGN_LEFT);
 	}
 	{
-		wxCheckBox* editable_ctrl = new wxCheckBox(this, wxID_ANY, wxT("编辑"));
-		editable_ctrl->SetValue(m_layer->IsEditable());
-		Connect(editable_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		m_editable_ctrl = new wxCheckBox(this, wxID_ANY, wxT("编辑"));
+		m_editable_ctrl->SetValue(m_layer->IsEditable());
+		Connect(m_editable_ctrl->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 			wxCommandEventHandler(LibraryPage::OnChangeEditable));
-		sizer->Add(editable_ctrl, 0, wxALIGN_LEFT);
+		sizer->Add(m_editable_ctrl, 0, wxALIGN_LEFT);
 	}
 	sizer->AddSpacer(20);
 }

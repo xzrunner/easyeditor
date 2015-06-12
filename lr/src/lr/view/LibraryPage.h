@@ -18,6 +18,8 @@ public:
 
 	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
 
+	void UpdateStatusFromLayer();
+
 	Layer* GetLayer() { return m_layer; }
 	void SetLayer(Layer* layer);
 
@@ -37,6 +39,9 @@ private:
 
 private:
 	Layer* m_layer;
+
+	wxCheckBox* m_visible_ctrl;
+	wxCheckBox* m_editable_ctrl;
 
 	d2d::AbstractEditOP* m_editop;
 

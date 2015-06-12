@@ -85,9 +85,15 @@ void StagePanel::clear()
 void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	if (type == d2d::DT_EDITABLE) {
-		GetCurrLayer()->TraverseSprite(visitor, order);
-	} else {
+	if (type == d2d::DT_EDITABLE) 
+	{
+		Layer* layer = GetCurrLayer();
+		if (layer->IsEditable()) {
+			layer->TraverseSprite(visitor, order);
+		}
+	} 
+	else 
+	{
 		for (int i = 0, n = m_layers.size(); i < n; ++i) 
 		{
 			Layer* layer = m_layers[i];

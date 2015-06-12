@@ -47,6 +47,8 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 			symbol->RefreshThumbnail(symbol->getFilepath());
 			page->getList()->insert(symbol);
 		}
+
+		static_cast<LibraryPage*>(page)->UpdateStatusFromLayer();
 	}
 }
 
