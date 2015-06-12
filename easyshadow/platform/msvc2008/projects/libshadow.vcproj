@@ -233,6 +233,14 @@
 			Name="frame"
 			>
 			<File
+				RelativePath="..\..\..\src\libshadow\EditDialog.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libshadow\EditDialog.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libshadow\FileIO.cpp"
 				>
 			</File>

@@ -10,6 +10,7 @@
 #include <easyanim.h>
 #include <easytexture.h>
 #include <easyicon.h>
+#include <easyshadow.h>
 
 // for debug
 //#include "MyThread.h"
@@ -109,6 +110,10 @@ bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
 		dlg.ShowModal();
 
 		m_stage->ResetViewport();
+	}
+	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
+	{
+		
 	}
 
 	return false;
