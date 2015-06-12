@@ -98,7 +98,7 @@ private:
 	wxTreeItemId m_dragged_item;
 	wxTreeItemId m_selected_item;
 
-	bool m_remove_open;
+	bool m_add_del_open;
 
 	DECLARE_EVENT_TABLE()
 

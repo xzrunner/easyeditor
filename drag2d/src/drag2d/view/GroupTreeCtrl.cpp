@@ -31,7 +31,7 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	, m_parent_panel(parent)
 	, m_sprite_impl(sprite_impl)
 	, m_view_panel_mgr(view_panel_mgr)
-	, m_remove_open(true)
+	, m_add_del_open(true)
 {
 	InitRoot();
 }
@@ -110,6 +110,10 @@ wxTreeItemId GroupTreeCtrl::AddSprite(wxTreeItemId parent, d2d::ISprite* spr)
 
 wxTreeItemId GroupTreeCtrl::AddSprite(d2d::ISprite* spr)
 {
+	if (!m_add_del_open) {
+		return m_root;
+	}
+
 	wxTreeItemId ret;
 	if (m_selected_item.IsOk()) {
 		ret = AddSprite(m_selected_item, spr);
@@ -130,7 +134,7 @@ void GroupTreeCtrl::Clear()
 
 void GroupTreeCtrl::Remove(ISprite* sprite)
 {
-	if (m_remove_open) {
+	if (m_add_del_open) {
 		Traverse(GroupTreeImpl::RemoveVisitor(this, sprite));
 	}
 }
@@ -422,10 +426,10 @@ void GroupTreeCtrl::ReorderSprites()
 	Traverse(m_root, GroupTreeImpl::GetSpritesVisitor(this, sprites));
 	for (int i = sprites.size() - 1; i >= 0; --i) {
 		ISprite* spr = sprites[i];
-		m_remove_open = false;
+		m_add_del_open = false;
 		m_sprite_impl->removeSprite(spr);
-		m_remove_open = true;
 		m_sprite_impl->insertSprite(spr);
+		m_add_del_open = true;
 	}
 }
 
