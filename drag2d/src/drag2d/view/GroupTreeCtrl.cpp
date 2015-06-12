@@ -129,6 +129,50 @@ void GroupTreeCtrl::Editable(wxTreeItemId id, bool editable)
 	Traverse(id, GroupTreeImpl::SetEditableVisitor(this, editable));
 }
 
+void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
+{
+	if (!id.IsOk()) {
+		return;
+	}
+
+	wxTreeItemId insert_prev;
+	if (up) {
+		wxTreeItemId prev = GetPrevSibling(id);
+		if (!prev.IsOk()) {
+			return;
+		}
+		insert_prev = GetPrevSibling(prev);
+	} else {
+		wxTreeItemId next = GetNextSibling(id);
+		if (!next.IsOk()) {
+			return;
+		}
+		insert_prev = next;
+	}
+
+	// old info
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(id);
+	std::string name = GetItemText(id);
+
+	// insert
+	wxTreeItemId parent = GetItemParent(id);
+	wxTreeItemId new_item;
+	if (insert_prev.IsOk()) {
+		new_item = InsertItem(parent, insert_prev, name, -1, -1, data->Clone());
+	} else {
+		new_item = InsertItem(parent, 0, name, -1, -1, data->Clone());
+	}
+	ExpandAll();
+	// copy older's children
+	Traverse(id, GroupTreeImpl::CopyPasteVisitor(this, id, new_item));
+	// remove
+	Delete(id);
+	// sort
+	ReorderSprites();
+	// set selection
+	SelectItem(new_item);
+}
+
 wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data)
 {
 	wxTreeItemId id = InsertItem(parent, 0, name, -1, -1, data);
@@ -213,10 +257,10 @@ void GroupTreeCtrl::OnKeyDown(wxKeyEvent& event)
 		SelectRight();
 		break;
 	case WXK_PAGEUP:
-		ReorderSelected(true);
+		ReorderItem(m_selected_item, true);
 		break;
 	case WXK_PAGEDOWN:
-		ReorderSelected(false);
+		ReorderItem(m_selected_item, false);
 		break;
 	}
 }
@@ -344,50 +388,6 @@ void GroupTreeCtrl::SelectRight()
 			Expand(m_selected_item);
 		}
 	}
-}
-
-void GroupTreeCtrl::ReorderSelected(bool up)
-{
-	if (!m_selected_item.IsOk()) {
-		return;
-	}
-
-	wxTreeItemId insert_prev;
-	if (up) {
-		wxTreeItemId prev = GetPrevSibling(m_selected_item);
-		if (!prev.IsOk()) {
-			return;
-		}
-		insert_prev = GetPrevSibling(prev);
-	} else {
-		wxTreeItemId next = GetNextSibling(m_selected_item);
-		if (!next.IsOk()) {
-			return;
-		}
-		insert_prev = next;
-	}
-
- 	// old info
- 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
- 	std::string name = GetItemText(m_selected_item);
-
-	// insert
-	wxTreeItemId parent = GetItemParent(m_selected_item);
-	wxTreeItemId new_item;
-	if (insert_prev.IsOk()) {
-		new_item = InsertItem(parent, insert_prev, name, -1, -1, data->Clone());
-	} else {
-		new_item = InsertItem(parent, 0, name, -1, -1, data->Clone());
-	}
-	ExpandAll();
- 	// copy older's children
- 	Traverse(m_selected_item, GroupTreeImpl::CopyPasteVisitor(this, m_selected_item, new_item));
- 	// remove
- 	Delete(m_selected_item);
- 	// sort
- 	ReorderSprites();
-	// set selection
-	SelectItem(new_item);
 }
 
 void GroupTreeCtrl::ReorderSprites()

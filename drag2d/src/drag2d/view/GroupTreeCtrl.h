@@ -40,6 +40,8 @@ public:
 	void Visible(wxTreeItemId id, bool visible);
 	void Editable(wxTreeItemId id, bool editable);
 
+	void ReorderItem(wxTreeItemId id, bool up);
+
 private:
 	wxTreeItemId AddNode(wxTreeItemId parent, const std::string& name, GroupTreeItem* data);
 
@@ -63,8 +65,6 @@ private:
 	void SelectDown();
 	void SelectLeft();
 	void SelectRight();
-
-	void ReorderSelected(bool up);
 
 	void ReorderSprites();
 

@@ -17,6 +17,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = new Symbol))
 	, m_library(library)
 	, m_viewlist(NULL)
+	, m_view_panel_mgr(view_panel_mgr)
 	, m_group_panel(NULL)
 {
 	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
@@ -73,7 +74,12 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
 	bool ret = d2d::SpritesPanelImpl::resetSpriteOrder(sprite, up);
-	m_viewlist->Reorder(sprite, up);
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->ReorderSprite(sprite, up, this);
+	}
+
+//	m_viewlist->Reorder(sprite, up);
 	return ret;
 }
 

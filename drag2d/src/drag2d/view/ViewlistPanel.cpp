@@ -96,8 +96,13 @@ void ViewlistPanel::Reorder(const ISprite* sprite, bool up)
 
 void ViewlistPanel::ReorderSelected(bool up)
 {
-	if (m_selected_spr) {
-		m_sprites_impl->resetSpriteOrder(m_selected_spr, up);
+	if (!m_selected_spr) {
+		return;
+	}
+
+	m_sprites_impl->resetSpriteOrder(m_selected_spr, up);
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->ReorderSprite(m_selected_spr, up, this);
 	}
 }
 

@@ -20,7 +20,7 @@ void ViewPanelMgr::ReorderSprite(ISprite* spr, bool up, IViewPanel* self)
 		if (m_panels[i] == self) {
 			continue;
 		}
-		
+		m_panels[i]->ReorderSprite(spr, up);
 	}
 }
 

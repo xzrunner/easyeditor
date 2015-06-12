@@ -23,6 +23,11 @@ void MultiSpritesImpl::SelectSprite(ISprite* spr)
  	m_spriteSelection->Add(spr);
 }
 
+void MultiSpritesImpl::ReorderSprite(ISprite* spr, bool up)
+{
+	resetSpriteOrder(spr, up);
+}
+
 ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;
