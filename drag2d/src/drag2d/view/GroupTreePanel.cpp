@@ -92,24 +92,33 @@ void GroupTreePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
-	sizer->Add(InitButtonsLayout(), 0, wxALIGN_RIGHT);
-
+	sizer->Add(InitHeaderLayout(), 0, wxEXPAND);
 	sizer->Add(m_grouptree, 1, wxEXPAND);
 
 	SetSizer(sizer);
 }
 
-wxSizer* GroupTreePanel::InitButtonsLayout()
+wxSizer* GroupTreePanel::InitHeaderLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
+	// title
+	wxStaticText* title = new wxStaticText(this, wxID_ANY, wxT(" Group"));
+	title->SetForegroundColour(*wxWHITE);
+	title->SetBackgroundColour(*wxBLACK);
+	sizer->Add(title, 1, wxALIGN_LEFT);
+
+	// add
 	wxButton* btn_add = new wxButton(this, wxID_ANY, "+", wxDefaultPosition, wxSize(20, 20));
 	Connect(btn_add->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GroupTreePanel::OnAddPress));
 	sizer->Add(btn_add, 0, wxLEFT | wxRIGHT, 5);
 
+	// del
 	wxButton* btn_del = new wxButton(this, wxID_ANY, "-", wxDefaultPosition, wxSize(20, 20));
 	Connect(btn_del->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(GroupTreePanel::OnDelPress));
 	sizer->Add(btn_del, 0, wxLEFT | wxRIGHT, 5);
+
+	sizer->Fit(this);
 
 	return sizer;
 }

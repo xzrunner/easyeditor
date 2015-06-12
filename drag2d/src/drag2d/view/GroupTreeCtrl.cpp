@@ -33,6 +33,8 @@ GroupTreeCtrl::GroupTreeCtrl(GroupTreePanel* parent, MultiSpritesImpl* sprite_im
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_add_del_open(true)
 {
+	SetBackgroundColour(wxColour(229, 229, 229));
+
 	InitRoot();
 }
 
@@ -236,14 +238,15 @@ void GroupTreeCtrl::OnItemMenu(wxTreeEvent& event)
 void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 {
 	wxTreeItemId id = event.GetItem();
-	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
-	selection->Clear();
-	Traverse(id, GroupTreeImpl::SelectVisitor(this, selection));
 
 	GroupTreeImpl::GetFirstSpriteVisitor visitor(this);
 	Traverse(id, visitor);
 	ISprite* spr = visitor.GetFirstSprite();
 	m_view_panel_mgr->SelectSprite(spr, m_parent_panel);
+
+	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
+	selection->Clear();
+	Traverse(id, GroupTreeImpl::SelectVisitor(this, selection));
 }
 
 void GroupTreeCtrl::OnBeginDrag(wxTreeEvent& event)

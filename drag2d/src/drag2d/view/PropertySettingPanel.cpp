@@ -5,24 +5,12 @@ namespace d2d
 {
 
 PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
-	: wxWindow(parent, wxID_ANY)
+	: wxPanel(parent, wxID_ANY)
 	, m_setting(NULL)
 {
-	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	
-	m_pg = new wxPropertyGrid(
-		this, 
-		-1,
-		wxDefaultPosition,
-		wxSize(400, 800),
-		wxPG_SPLITTER_AUTO_CENTER
-		| wxPG_BOLD_MODIFIED
-		);
-	Connect(m_pg->GetId(), wxEVT_PG_CHANGED, wxPropertyGridEventHandler(PropertySettingPanel::OnPropertyGridChange));
+	InitLayout();
 
-	sizer->Add(m_pg);
-
-	SetSizer(sizer);	
+	SetBackgroundColour(wxColour(229, 229, 229));
 }
 
 PropertySettingPanel::~PropertySettingPanel()
@@ -62,6 +50,31 @@ void PropertySettingPanel::EnablePropertyGrid(bool enable)
 	if (m_setting) {
 		m_setting->EnablePropertyGrid(this, enable);
 	}
+}
+
+void PropertySettingPanel::InitLayout()
+{
+	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+
+	// title
+	wxStaticText* title = new wxStaticText(this, wxID_ANY, wxT(" Property"));
+	title->SetForegroundColour(*wxWHITE);
+	title->SetBackgroundColour(*wxBLACK);
+	sizer->Add(title, 0, wxEXPAND);
+
+	// pg
+	m_pg = new wxPropertyGrid(
+		this, 
+		-1,
+		wxDefaultPosition,
+		wxSize(400, 800),
+		wxPG_SPLITTER_AUTO_CENTER
+		| wxPG_BOLD_MODIFIED
+		);
+	Connect(m_pg->GetId(), wxEVT_PG_CHANGED, wxPropertyGridEventHandler(PropertySettingPanel::OnPropertyGridChange));
+	sizer->Add(m_pg);
+
+	SetSizer(sizer);
 }
 
 } // d2d

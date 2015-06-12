@@ -9,7 +9,7 @@ namespace d2d
 
 class IPropertySetting;
 
-class PropertySettingPanel : public wxWindow
+class PropertySettingPanel : public wxPanel
 {
 public:
 	PropertySettingPanel(wxWindow* parent);
@@ -24,6 +24,9 @@ public:
 	void EnablePropertyGrid(bool enable);
 
 	const std::string& GetType() const { return m_type; }
+
+private:
+	void InitLayout();
 
 protected:
 	std::string m_type;

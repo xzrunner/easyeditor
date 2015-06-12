@@ -38,7 +38,8 @@ public:
 private:
 	void InitLayout();
 	
-	wxSizer* InitButtonsLayout();
+	void InitTitleLayout(wxSizer* sizer);
+	wxSizer* InitHeaderLayout();
 
 private:
 	void OnAddPress(wxCommandEvent& event);

@@ -161,6 +161,12 @@ void ViewlistPanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 
+	// title
+	wxStaticText* title = new wxStaticText(this, wxID_ANY, wxT(" View List"));
+	title->SetForegroundColour(*wxWHITE);
+	title->SetBackgroundColour(*wxBLACK);
+	sizer->Add(title, 0, wxEXPAND);
+
 	m_list = new ViewlistList(this);
 	sizer->Add(m_list, 1, wxEXPAND);
 
