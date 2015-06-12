@@ -13,7 +13,7 @@ VerticalImageList::VerticalImageList(wxWindow* parent, const wxString& name/* = 
 	, m_name(name)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
-	SetSelectionBackground(*wxLIGHT_GREY);
+	SetSelectionBackground(wxColour(128, 128, 128));
 
 	Connect(GetId(), wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler(VerticalImageList::onListSelected));
 	Connect(GetId(), wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(VerticalImageList::onListDoubleClicked));
@@ -100,6 +100,8 @@ void VerticalImageList::swap(int i0, int i1)
 
 void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 {
+	bool is_selected = n == GetSelection();
+
 	int y = rect.y + SPACE_UP;
 
 	const Bitmap* bmp = m_items[n]->getBitmap();
@@ -126,7 +128,7 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 
 	// name
 	wxString name = m_items[n]->getName();
-	dc.SetFont(wxFont(10, wxDEFAULT, wxNORMAL, wxNORMAL));
+	dc.SetFont(wxFont(is_selected ? 12 : 10, wxDEFAULT, wxNORMAL, wxNORMAL));
 	wxSize size = dc.GetTextExtent(name);
 	dc.DrawText(name, rect.x + rect.width * 0.5f - size.GetWidth() * 0.5f, y + SPACE_UP);
 }
