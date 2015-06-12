@@ -12,6 +12,7 @@
 #include <easyterrain2d.h>
 #include <easytexture.h>
 #include <easyicon.h>
+#include <easyshadow.h>
 
 namespace ecomplex
 {
@@ -34,6 +35,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 	addPage(new eterrain2d::LibraryPage(nb));
 	addPage(new etexture::LibraryPage(nb));
 	addPage(new eicon::LibraryPage(nb));
+	addPage(new eshadow::LibraryPage(nb));
 }
 
 } // ecomplex

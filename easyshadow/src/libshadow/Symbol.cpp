@@ -1,6 +1,7 @@
 #include "Symbol.h"
 #include "Shadow.h"
 #include "config.h"
+#include "FileIO.h"
 
 namespace eshadow
 {
@@ -56,6 +57,7 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 
 void Symbol::loadResources()
 {
+	FileIO::LoadFromFile(m_filepath, this);
 }
 
 }

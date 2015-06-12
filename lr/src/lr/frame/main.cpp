@@ -8,6 +8,7 @@
 #include <easyshape.h>
 #include <easyanim.h>
 #include <easyterrain2d.h>
+#include <easyshadow.h>
 
 IMPLEMENT_APP(MyApp)
 
@@ -27,6 +28,9 @@ static void InitSymbolCreators()
 
 	d2d::SymbolFactory::RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Symbol::Create);
 	d2d::SpriteFactory::Instance()->RegisterCreator(eterrain2d::FILE_TAG, &eterrain2d::Sprite::Create);
+
+	d2d::SymbolFactory::RegisterCreator(eshadow::FILE_TAG, &eshadow::Symbol::Create);
+	d2d::SpriteFactory::Instance()->RegisterCreator(eshadow::FILE_TAG, &eshadow::Sprite::Create);
 }
 
 bool MyApp::OnInit()

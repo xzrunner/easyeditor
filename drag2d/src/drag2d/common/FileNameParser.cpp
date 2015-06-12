@@ -5,19 +5,20 @@
 namespace d2d
 {
 
-static const wxString TAG_SHAPE = "shape";
-static const wxString TAG_MESH = "mesh";
-static const wxString TAG_COMPLEX = "complex";
-static const wxString TAG_ANIM = "anim";
-static const wxString TAG_PATCH = "scale9";
+static const wxString TAG_SHAPE		= "shape";
+static const wxString TAG_MESH		= "mesh";
+static const wxString TAG_COMPLEX	= "complex";
+static const wxString TAG_ANIM		= "anim";
+static const wxString TAG_PATCH		= "scale9";
 static const wxString TAG_FONTBLANK = "fontblank";
-static const wxString TAG_SCRIPTS = "scripts";
-static const wxString TAG_PARTICLE2D = "particle2d";
-static const wxString TAG_PARTICLE3D = "particle";
-static const wxString TAG_EJOY2D = "ejoy2d";
-static const wxString TAG_TEXTURE = "texture";
+static const wxString TAG_SCRIPTS	= "scripts";
+static const wxString TAG_PARTICLE2D= "particle2d";
+static const wxString TAG_PARTICLE3D= "particle";
+static const wxString TAG_EJOY2D	= "ejoy2d";
+static const wxString TAG_TEXTURE	= "texture";
 static const wxString TAG_TERRAIN2D = "terrain2d";
-static const wxString TAG_ICON = "icon";
+static const wxString TAG_ICON		= "icon";
+static const wxString TAG_SHADOW	= "shadow";
 
 FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 {
@@ -46,6 +47,7 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		else if (ext == TAG_TEXTURE) return e_texture;
 		else if (ext == TAG_TERRAIN2D) return e_terrain2d;
 		else if (ext == TAG_ICON) return e_icon;
+		else if (ext == TAG_SHADOW) return e_shadow;
 		else return e_unknown;
 	}
 	else if (extension == ".lua")
@@ -112,6 +114,9 @@ wxString FileNameParser::getFileTag(Type type)
 		break;
 	case e_icon:
 		ext = TAG_ICON;
+		break;
+	case e_shadow:
+		ext = TAG_SHADOW;
 		break;
 	}
 	return ext;
