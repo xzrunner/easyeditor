@@ -20,13 +20,14 @@ namespace lr
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::PropertySettingPanel* property,
-					   d2d::LibraryPanel* library)
+					   d2d::LibraryPanel* library,
+					   d2d::ViewPanelMgr* view_panel_mgr)
 	: d2d::EditPanel(parent, frame)
 	, d2d::MultiSpritesImpl(this)
 	, d2d::MultiShapesImpl(this)
+	, m_view_panel_mgr(view_panel_mgr)
 	, m_library(library)
 	, m_grids(NULL)
-	, m_viewlist(NULL)
 	, m_sindex(NULL)
 	, m_pathfinding(NULL)
 {
@@ -48,8 +49,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	}
 
 	ArrangeSpriteImpl* arrange_impl = new ArrangeSpriteImpl(this, property, &m_chara_dirs);
-	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, NULL, 
-		d2d::ArrangeSpriteConfig(), arrange_impl);
+	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, 
+		m_view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), arrange_impl);
 
 	m_editOP = m_arrange_op;
 	m_editOP->Retain();
@@ -111,7 +112,9 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 		}
 	}
 
-	m_viewlist->Remove(sprite);
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->RemoveSprite(sprite, this);
+	}
 
 	if (m_pathfinding) {
 		m_pathfinding->DisableRegion(sprite, true);
@@ -122,7 +125,9 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	GetCurrLayer()->InsertSprite(sprite);
 
-	m_viewlist->Insert(sprite);
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->InsertSprite(sprite, this);
+	}
 
 	if (m_sindex) {
 		m_sindex->Insert(sprite);
@@ -156,7 +161,11 @@ bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 			break;
 		}
 	}
-	m_viewlist->Reorder(sprite, up);
+
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->ReorderSprite(sprite, up, this);
+	}
+
 	return ret;
 }
 

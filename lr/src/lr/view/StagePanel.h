@@ -18,7 +18,8 @@ class StagePanel : public d2d::EditPanel, public d2d::MultiSpritesImpl, public d
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 		d2d::PropertySettingPanel* property,
-		d2d::LibraryPanel* library);
+		d2d::LibraryPanel* library,
+		d2d::ViewPanelMgr* view_panel_mgr);
 	virtual ~StagePanel();
 
 	//
@@ -45,10 +46,6 @@ public:
 	virtual void insertShape(d2d::IShape* shape);
 	virtual void clearShapes();
 
-	void SetViewlist(d2d::ViewlistPanel* viewlist) {
-		m_viewlist = viewlist;
-	}
-
 	void DebugDraw() const;
 
 	void Pathfinding(const d2d::Vector& start, const d2d::Vector& end);
@@ -72,8 +69,9 @@ private:
 	void ChangeEditOP();
 
 private:
+	d2d::ViewPanelMgr* m_view_panel_mgr;
+
 	d2d::LibraryPanel* m_library;
-	d2d::ViewlistPanel* m_viewlist;
 
 	d2d::AbstractEditOP* m_arrange_op;
 

@@ -9,7 +9,7 @@ namespace lr
 {
 
 void FileIO::Load(const char* filename, StagePanel* stage,
-				  LibraryPanel* library)
+				  LibraryPanel* library, d2d::GroupTreePanel* grouptree)
 {
 // 	d2d::SymbolMgr::Instance()->clear();
 // 	d2d::BitmapMgr::Instance()->clear();
@@ -53,9 +53,13 @@ void FileIO::Load(const char* filename, StagePanel* stage,
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	LoadLayers(value["layer"], stage, library, dir);
 	library->RefreshViewList();
+
+	// groups
+	grouptree->LoadFromFile(value["group"]);
 }
 
-void FileIO::Store(const char* filename, StagePanel* stage)
+void FileIO::Store(const char* filename, StagePanel* stage, 
+				   d2d::GroupTreePanel* grouptree)
 {
 	Json::Value value;
 
@@ -79,6 +83,9 @@ void FileIO::Store(const char* filename, StagePanel* stage)
 	// layers
 	std::string dir = d2d::FilenameTools::getFileDir(filename) + "\\";
 	StoreLayers(value["layer"], stage->GetLayers(), dir);
+
+	// groups
+	grouptree->StoreToFile(value["group"]);
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

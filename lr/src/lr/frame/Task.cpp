@@ -23,13 +23,13 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
-	FileIO::Load(filename, m_stage, m_library);
+	FileIO::Load(filename, m_stage, m_library, m_grouptree);
 	m_stage->getCanvas()->resetViewport();
 }
 
 void Task::store(const char* filename) const
 {
-	FileIO::Store(filename, m_stage);
+	FileIO::Store(filename, m_stage, m_grouptree);
 }
 
 bool Task::isDirty() const
@@ -91,7 +91,9 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	m_stage = new StagePanel(parent, m_parent, m_property, m_library);
+	m_stage = new StagePanel(parent, m_parent, m_property, m_library, &m_view_panel_mgr);
+
+	m_view_panel_mgr.AddPanel(m_stage);
 	m_library->InitPages(m_stage, m_property);
 	m_library->setCanvas(m_stage->getCanvas());
 
@@ -100,11 +102,19 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	m_viewlist = new d2d::ViewlistPanel(parent, m_stage, m_stage, m_property);
-	m_library->SetViewlist(m_viewlist);
-	m_stage->SetViewlist(m_viewlist);
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	return m_viewlist;
+	m_viewlist = new d2d::ViewlistPanel(split, m_stage, m_stage, m_property, &m_view_panel_mgr);
+	m_library->SetViewlist(m_viewlist);
+	m_view_panel_mgr.AddPanel(m_viewlist);
+
+	m_grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr);
+	m_view_panel_mgr.AddPanel(m_grouptree);
+
+	split->SetSashGravity(0.5f);
+	split->SplitHorizontally(m_viewlist, m_grouptree);
+
+	return split;
 }
 
 }
