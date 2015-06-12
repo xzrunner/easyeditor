@@ -46,7 +46,7 @@ wxTreeItemId GroupTreeCtrl::AddNode()
 	static int s_num = 0;
 
 	std::ostringstream ss;
-	ss << "Group" << s_num++;
+	ss << "GROUP_" << s_num++;
 	std::string text = ss.str();
 
 	return AddNode(text);
@@ -56,20 +56,25 @@ wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name)
 {
 	GroupTreeItem* data = new GroupTreeItem(new Group(name));
 
+	wxTreeItemId ret;
 	wxTreeItemId id = GetFocusedItem();
 	if (id.IsOk()) {
 		data->SetId(id);
-		return AddNode(id, name, data);
+		ret = AddNode(id, name, data);
 	} else {
 		data->SetId(m_root);
-		return AddNode(m_root, name, data);
+		ret = AddNode(m_root, name, data);
 	}
+	SetItemBold(ret, true);
+	return ret;
 }
 
 wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name, wxTreeItemId parent)
 {
 	GroupTreeItem* data = new GroupTreeItem(new Group(name));
-	return AddNode(parent, name, data);
+	wxTreeItemId ret = AddNode(parent, name, data);
+	SetItemBold(ret, true);
+	return ret;
 }
 
 void GroupTreeCtrl::DelNode()
@@ -195,8 +200,9 @@ wxTreeItemId GroupTreeCtrl::AddNode(wxTreeItemId parent, const std::string& name
 
 void GroupTreeCtrl::InitRoot()
 {
-	GroupTreeItem* data = new GroupTreeItem(new Group("root"));
-	m_root = AddRoot("Root");
+	GroupTreeItem* data = new GroupTreeItem(new Group("ROOT"));
+	m_root = AddRoot("ROOT");
+	SetItemBold(m_root, true);
 	SetItemData(m_root, data);
 }
 
