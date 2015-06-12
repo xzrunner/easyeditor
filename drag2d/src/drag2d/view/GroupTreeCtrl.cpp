@@ -66,6 +66,7 @@ wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name)
 		ret = AddNode(m_root, name, data);
 	}
 	SetItemBold(ret, true);
+	SelectItem(ret);
 	return ret;
 }
 
@@ -74,6 +75,7 @@ wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name, wxTreeItemId parent
 	GroupTreeItem* data = new GroupTreeItem(new Group(name));
 	wxTreeItemId ret = AddNode(parent, name, data);
 	SetItemBold(ret, true);
+	SelectItem(ret);
 	return ret;
 }
 
