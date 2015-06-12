@@ -101,7 +101,7 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 			m_sprite->setMirror(true, false);
 		}
 	}
-	else
+	else if (id - MENU_COLOR_START_ID < m_anim_files.size())
 	{
 		const CharacterFileName& item = m_anim_files[id - MENU_COLOR_START_ID];
 

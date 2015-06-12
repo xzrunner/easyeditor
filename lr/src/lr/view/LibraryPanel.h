@@ -16,7 +16,11 @@ public:
 
 	virtual void onPageChanged(wxBookCtrlEvent& event);
 
+	void LoadFromFile(const Json::Value& value, const std::string& dir);
+	void StoreToFile(Json::Value& value, const std::string& dir) const;
+
 	void InitFromLayers(const std::vector<Layer*>& layers);
+	void LoadSymbolFromLayer();
 
 	void SetViewlist(d2d::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;

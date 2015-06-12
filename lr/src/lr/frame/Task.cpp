@@ -23,13 +23,13 @@ Task::~Task()
 
 void Task::load(const char* filename)
 {
-	FileIO::Load(filename, m_stage, m_library, m_grouptree);
+	FileIO::Load(filename, m_library, m_stage, m_grouptree);
 	m_stage->getCanvas()->resetViewport();
 }
 
 void Task::store(const char* filename) const
 {
-	FileIO::Store(filename, m_stage, m_grouptree);
+	FileIO::Store(filename, m_library, m_stage, m_grouptree);
 }
 
 bool Task::isDirty() const

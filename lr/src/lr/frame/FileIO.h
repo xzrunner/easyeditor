@@ -14,10 +14,10 @@ class Layer;
 class FileIO
 {
 public:
-	static void Load(const char* filename, StagePanel* stage,
-		LibraryPanel* library, d2d::GroupTreePanel* grouptree);
-	static void Store(const char* filename, StagePanel* stage,
-		d2d::GroupTreePanel* grouptree);
+	static void Load(const char* filename, LibraryPanel* library, 
+		StagePanel* stage, d2d::GroupTreePanel* grouptree);
+	static void Store(const char* filename, LibraryPanel* library,
+		StagePanel* stage, d2d::GroupTreePanel* grouptree);
 
 private:
 	static void LoadLayers(const Json::Value& value, StagePanel* stage,
