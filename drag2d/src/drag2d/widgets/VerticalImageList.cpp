@@ -13,6 +13,7 @@ VerticalImageList::VerticalImageList(wxWindow* parent, const wxString& name/* = 
 	, m_name(name)
 {
 	SetBackgroundColour(wxColour(229, 229, 229));
+	SetSelectionBackground(*wxLIGHT_GREY);
 
 	Connect(GetId(), wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler(VerticalImageList::onListSelected));
 	Connect(GetId(), wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler(VerticalImageList::onListDoubleClicked));
