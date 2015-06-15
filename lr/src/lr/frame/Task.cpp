@@ -1,5 +1,7 @@
 #include "Task.h"
 #include "FileIO.h"
+#include "ToolBar.h"
+#include "Frame.h"
 
 #include "view/LibraryPanel.h"
 #include "view/StagePanel.h"
@@ -12,6 +14,7 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 {
 	InitLayout();
+	static_cast<Frame*>(parent)->GetToolBar()->SetLibrary(m_library);
 }
 
 Task::~Task()

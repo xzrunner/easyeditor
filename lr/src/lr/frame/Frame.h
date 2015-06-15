@@ -6,10 +6,17 @@
 namespace lr
 {
 
+class ToolBar;
+
 class Frame : public d2d::Frame
 {
 public:
 	Frame(const wxString& title, const wxString& filetag);
+
+	ToolBar* GetToolBar() { return m_toolbar; }
+
+protected:
+	void OnToolBarClick(wxCommandEvent& event);
 
 private:
 	void OnPreview(wxCommandEvent& event);
@@ -20,7 +27,12 @@ private:
 	{
 		ID_PREVIEW = 1100,
 		ID_SETING_EXTEND,
+
+		ID_TOOLBAR = 1200,
 	};
+
+private:
+	ToolBar* m_toolbar;
 
 	DECLARE_EVENT_TABLE()
 

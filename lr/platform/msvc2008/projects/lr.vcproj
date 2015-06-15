@@ -237,6 +237,14 @@
 				RelativePath="..\..\..\src\lr\frame\Task.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\ToolBar.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\lr\frame\ToolBar.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="view"
@@ -462,6 +470,10 @@
 				</File>
 			</Filter>
 		</Filter>
+		<File
+			RelativePath=".\lr.rc"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
