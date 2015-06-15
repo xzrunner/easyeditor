@@ -35,6 +35,8 @@ public:
 
 	void InitGroups(const std::map<std::string, std::vector<d2d::ISprite*> >& groups);
 
+	void Clear();
+
 private:
 	void InitLayout();
 	

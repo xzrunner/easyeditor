@@ -52,7 +52,6 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	// layers
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	LoadLayers(value["layer"], stage, library, dir);
-	library->RefreshViewList();
 
 	// groups
 	grouptree->LoadFromFile(value["group"]);
@@ -63,6 +62,8 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	} else {
 		library->LoadFromFile(value["library"], dir);
 	}
+
+	library->Refresh();
 }
 
 void FileIO::Store(const char* filename, LibraryPanel* library,

@@ -12,6 +12,7 @@ namespace lr
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 	, m_viewlist(NULL) 
+	, m_grouptree(NULL)
 	, m_stage(NULL)
 {
 }
@@ -19,7 +20,7 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
 {
 	d2d::LibraryPanel::onPageChanged(event);
-	RefreshViewList();
+	Refresh();
 }
 
 void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir)
@@ -126,20 +127,28 @@ void LibraryPanel::InitPages(StagePanel* stage, d2d::PropertySettingPanel* prope
 	stage->SetLayers(layers);
 }
 
-void LibraryPanel::RefreshViewList()
+void LibraryPanel::Refresh()
 {
 	Layer* layer = static_cast<LibraryPage*>(m_selected)->GetLayer();
 
 	std::vector<d2d::ISprite*> sprites;
 	layer->TraverseSprite(d2d::FetchAllVisitor<d2d::ISprite>(sprites), true);
 
+	// stage
+	m_stage->getSpriteSelection()->Clear();
+	m_stage->getShapeSelection()->Clear();
+
+	// view list
 	m_viewlist->Clear();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		m_viewlist->Insert(sprites[i]);
 	}
 
-	m_stage->getSpriteSelection()->Clear();
-	m_stage->getShapeSelection()->Clear();
+	// group tree
+	m_grouptree->Clear();
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		m_grouptree->InsertSprite(sprites[i]);
+	}
 }
 
 }

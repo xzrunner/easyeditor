@@ -25,15 +25,19 @@ public:
 	void SetViewlist(d2d::ViewlistPanel* viewlist) {
 		m_viewlist = viewlist;
 	}
+	void SetGroupTree(d2d::GroupTreePanel* grouptree) {
+		m_grouptree = grouptree;
+	}
 	void SetStagePanel(StagePanel* stage) {
 		m_stage = stage;
 	}
 	void InitPages(StagePanel* stage, d2d::PropertySettingPanel* property);
 
-	void RefreshViewList();
+	void Refresh();
 
 private:
 	d2d::ViewlistPanel* m_viewlist;
+	d2d::GroupTreePanel* m_grouptree;
 
 	StagePanel* m_stage;
 

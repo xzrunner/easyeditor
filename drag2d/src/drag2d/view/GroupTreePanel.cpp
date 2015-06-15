@@ -88,6 +88,11 @@ void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<d2d::ISp
 	}
 }
 
+void GroupTreePanel::Clear()
+{
+	m_grouptree->Clear();
+}
+
 void GroupTreePanel::InitLayout()
 {
 	wxSizer* sizer = new wxBoxSizer(wxVERTICAL);

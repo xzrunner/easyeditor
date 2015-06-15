@@ -129,9 +129,17 @@ wxTreeItemId GroupTreeCtrl::AddSprite(d2d::ISprite* spr)
 
 void GroupTreeCtrl::Clear()
 {
-	if (!IsEmpty()) {
-		CollapseAndReset(m_root);
+	if (IsEmpty()) {
+		return;
 	}
+
+	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_root);
+	assert(data && data->IsGroup());
+	Group* group = static_cast<GroupTreeGroupItem*>(data)->GetGroup();
+	group->Clear();
+	this->ClearFocusedItem();
+
+	CollapseAndReset(m_root);
 }
 
 void GroupTreeCtrl::Remove(ISprite* sprite)
