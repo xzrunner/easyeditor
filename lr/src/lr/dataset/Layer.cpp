@@ -138,29 +138,25 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 	{
 		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = NULL;
-		try {
-			wxString shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
-			wxString shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
-			if (d2d::FilenameTools::isExist(shape_filepath)) {
-				symbol = d2d::SymbolMgr::Instance()->fetchSymbol(shape_filepath);
-			} else {
-				symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-			}
 
-			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			sprite->load(spr_val);
-			if (!base_path.empty()) {
-				UserData* ud = new UserData(base_path);
-				sprite->setUserData(ud);
-			}
-			m_sprites.Insert(sprite);
-
-			sprite->Release();
-			symbol->Release();
-		} catch (d2d::Exception& e) {
-			std::cout << "Symbol::loadResources error! File:" << filepath << std::endl;
-			std::cout << e.what();
+		wxString shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
+		wxString shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
+		if (d2d::FilenameTools::isExist(shape_filepath)) {
+			symbol = d2d::SymbolMgr::Instance()->fetchSymbol(shape_filepath);
+		} else {
+			symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 		}
+
+		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+		sprite->load(spr_val);
+		if (!base_path.empty()) {
+			UserData* ud = new UserData(base_path);
+			sprite->setUserData(ud);
+		}
+		m_sprites.Insert(sprite);
+
+		sprite->Release();
+		symbol->Release();
 
 		spr_val = val[idx++];
 	}

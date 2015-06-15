@@ -4,6 +4,7 @@
 #include "common/Math.h"
 #include "common/Matrix.h"
 #include "common/color_trans.h"
+#include "common/Exception.h"
 #include "dataset/BVFactory.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/SpriteFactory.h"
@@ -158,6 +159,10 @@ void ISprite::load(const Json::Value& val)
 	// translate
 	float x = val["position"]["x"].asDouble();
 	float y = val["position"]["y"].asDouble();
+	if (fabs(x) >= FLT_MAX || fabs(y) >= FLT_MAX) {
+		throw Exception("sprite pos err, filepath: %s, name: %s", val["filepath"].asString().c_str(), name.c_str());
+	}
+
 	// rotate
 	float angle = val["angle"].asDouble();
 	setTransform(Vector(x, y), angle);
