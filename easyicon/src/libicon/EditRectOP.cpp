@@ -11,9 +11,9 @@ EditRectOP::EditRectOP(StagePanel* stage)
 {
 }
 
-bool EditRectOP::onActive()
+bool EditRectOP::OnActive()
 {
-	if (d2d::ZoomViewOP::onActive()) {
+	if (d2d::ZoomViewOP::OnActive()) {
 		return true;
 	}
 

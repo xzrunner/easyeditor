@@ -17,9 +17,9 @@ SelectJointOP::SelectJointOP(d2d::EditPanel* editPanel,
 {
 }
 
-bool SelectJointOP::onKeyDown(int keyCode)
+bool SelectJointOP::OnKeyDown(int keyCode)
 {
-	if (SelectBodyOP::onKeyDown(keyCode)) return true;
+	if (SelectBodyOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE && m_selected)
 	{
@@ -32,7 +32,7 @@ bool SelectJointOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool SelectJointOP::onMouseLeftDown(int x, int y)
+bool SelectJointOP::OnMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	libmodeling::Joint* selected = static_cast<StagePanel*>(m_stage)->queryJointByPos(pos);
@@ -74,7 +74,7 @@ bool SelectJointOP::onMouseLeftDown(int x, int y)
 	else
 	{
 		m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
-		SelectBodyOP::onMouseLeftDown(x, y);
+		SelectBodyOP::OnMouseLeftDown(x, y);
 	}
 
 	m_firstPos = pos;
@@ -82,7 +82,7 @@ bool SelectJointOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectJointOP::onMouseLeftUp(int x, int y)
+bool SelectJointOP::OnMouseLeftUp(int x, int y)
 {
 	//d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	//selectedJoints.clear();
@@ -90,7 +90,7 @@ bool SelectJointOP::onMouseLeftUp(int x, int y)
 	//if (selectedJoints.size() == 1)
 	//	m_propertyPanel->setPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
 
-	if (SelectBodyOP::onMouseLeftUp(x, y)) return true;
+	if (SelectBodyOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_selected)
 		m_propertyPanel->SetPropertySetting(new JointPropertySetting(m_stage, m_selected));
@@ -100,9 +100,9 @@ bool SelectJointOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectJointOP::onMouseMove(int x, int y)
+bool SelectJointOP::OnMouseMove(int x, int y)
 {
-	if (SelectBodyOP::onMouseMove(x, y)) 
+	if (SelectBodyOP::OnMouseMove(x, y)) 
 		return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
@@ -115,9 +115,9 @@ bool SelectJointOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool SelectJointOP::onMouseDrag(int x, int y)
+bool SelectJointOP::OnMouseDrag(int x, int y)
 {
-	if (SelectBodyOP::onMouseDrag(x, y)) 
+	if (SelectBodyOP::OnMouseDrag(x, y)) 
 		return true;
 
 	if (m_selected)
@@ -237,9 +237,9 @@ bool SelectJointOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool SelectJointOP::onDraw() const
+bool SelectJointOP::OnDraw() const
 {
-	if (SelectBodyOP::onDraw()) 
+	if (SelectBodyOP::OnDraw()) 
 		return true;
 
 	m_selection->Traverse(DrawSelectedVisitor());
@@ -252,9 +252,9 @@ bool SelectJointOP::onDraw() const
 	return false;
 }
 
-bool SelectJointOP::clear()
+bool SelectJointOP::Clear()
 {
-	if (SelectBodyOP::clear()) 
+	if (SelectBodyOP::Clear()) 
 		return true;
 
 	m_selected = m_mouseOn = NULL;

@@ -11,7 +11,7 @@ namespace d2d
 	public:
 		MousePositionOP(EditPanel* editPanel, MousePositionCMPT* cmpt);
 
-		virtual bool onMouseMove(int x, int y);
+		virtual bool OnMouseMove(int x, int y);
 
 	private:
 		MousePositionCMPT* m_cmpt;

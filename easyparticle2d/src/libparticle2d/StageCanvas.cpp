@@ -23,7 +23,7 @@ StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	DrawBackground();
 

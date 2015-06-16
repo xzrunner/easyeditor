@@ -11,7 +11,7 @@ class DrawCosineCurveOP : public DrawPolylineOP
 public:
 	DrawCosineCurveOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 private:
 	d2d::MultiShapesImpl* m_shapesImpl;

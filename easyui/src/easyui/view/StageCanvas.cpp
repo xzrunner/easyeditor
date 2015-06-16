@@ -13,7 +13,7 @@ StageCanvas::StageCanvas(StagePanel* statge)
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	static bool inited = false;
 	if (!inited) {

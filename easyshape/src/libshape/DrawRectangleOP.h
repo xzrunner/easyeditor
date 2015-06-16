@@ -11,12 +11,12 @@ class DrawRectangleOP : public d2d::ZoomViewOP
 public:
 	DrawRectangleOP(d2d::EditPanel* editPanel, bool bOpenRightTap = true);
 	
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
-	virtual bool onDraw() const;
-	virtual bool clear();
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 protected:
 	d2d::Vector m_firstPos, m_currPos;

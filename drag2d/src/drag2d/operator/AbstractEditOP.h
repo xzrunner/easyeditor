@@ -1,42 +1,48 @@
-#pragma once
+#ifndef _DRAG2D_ABSTRACT_EDITOP_H_
+#define _DRAG2D_ABSTRACT_EDITOP_H_
 
 #include "common/Object.h"
 
+#include <wx/cursor.h>
+
 namespace d2d
 {
-	class EditPanel;
 
-	class AbstractEditOP : public Object
-	{
-	public:
-		AbstractEditOP(EditPanel* editPanel) {
-			m_stage = editPanel;
-		}
-		virtual ~AbstractEditOP() {}
+class EditPanel;
 
-		virtual bool onKeyDown(int keyCode) { return false; }
-		virtual bool onKeyUp(int keyCode) { return false; }
-		virtual bool onMouseLeftDown(int x, int y) { return false; }
-		virtual bool onMouseLeftUp(int x, int y) { return false; }
-		virtual bool onMouseRightDown(int x, int y) { return false; }
-		virtual bool onMouseRightUp(int x, int y) { return false; }
-		virtual bool onMouseMove(int x, int y) { return false; }
-		virtual bool onMouseDrag(int x, int y) { return false; }
-		virtual bool onMouseLeftDClick(int x, int y) { return false; }
-		virtual bool onMouseWheelRotation(int x, int y, int direction) { return false; }
+class AbstractEditOP : public Object
+{
+public:
+	AbstractEditOP(EditPanel* editPanel);
+	virtual ~AbstractEditOP() {}
 
-		virtual bool onPopMenuSelected(int type) { return false; }
+	virtual bool OnKeyDown(int keyCode) { return false; }
+	virtual bool OnKeyUp(int keyCode) { return false; }
+	virtual bool OnMouseLeftDown(int x, int y) { return false; }
+	virtual bool OnMouseLeftUp(int x, int y) { return false; }
+	virtual bool OnMouseRightDown(int x, int y) { return false; }
+	virtual bool OnMouseRightUp(int x, int y) { return false; }
+	virtual bool OnMouseMove(int x, int y) { return false; }
+	virtual bool OnMouseDrag(int x, int y) { return false; }
+	virtual bool OnMouseLeftDClick(int x, int y) { return false; }
+	virtual bool OnMouseWheelRotation(int x, int y, int direction) { return false; }
 
-		virtual bool onActive() { return false; }
+	virtual bool OnPopMenuSelected(int type) { return false; }
 
-		virtual bool onDraw() const { return false; }
-		virtual bool clear() { return false; }
+	virtual bool OnActive();
 
-		virtual bool IsEmpty() const { return true; }
+	virtual bool OnDraw() const { return false; }
+	virtual bool Clear() { return false; }
 
-	protected:
-		EditPanel* m_stage;
+	virtual bool IsEmpty() const { return true; }
 
-	}; // AbstractEditOP
+protected:
+	EditPanel* m_stage;
+
+	wxCursor m_cursor;
+
+}; // AbstractEditOP
+
 }
 
+#endif // _DRAG2D_ABSTRACT_EDITOP_H_

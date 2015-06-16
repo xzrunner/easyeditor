@@ -29,7 +29,7 @@ StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 	if (m_toolbar->isComposeOP())

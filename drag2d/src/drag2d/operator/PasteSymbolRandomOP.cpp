@@ -17,9 +17,9 @@ PasteSymbolRandomOP::PasteSymbolRandomOP(EditPanel* editPanel, MultiSpritesImpl*
 	changeRandomValue();
 }
 
-bool PasteSymbolRandomOP::onMouseLeftDown(int x, int y)
+bool PasteSymbolRandomOP::OnMouseLeftDown(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol) 
@@ -42,18 +42,18 @@ bool PasteSymbolRandomOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool PasteSymbolRandomOP::onMouseRightDown(int x, int y)
+bool PasteSymbolRandomOP::OnMouseRightDown(int x, int y)
 {
-	if (PasteSymbolOP::onMouseRightDown(x, y)) return true;
+	if (PasteSymbolOP::OnMouseRightDown(x, y)) return true;
 
 	changeRandomValue();
 
 	return false;
 }
 
-bool PasteSymbolRandomOP::onDraw() const
+bool PasteSymbolRandomOP::OnDraw() const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::OnDraw()) return true;
 
 	ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol) {

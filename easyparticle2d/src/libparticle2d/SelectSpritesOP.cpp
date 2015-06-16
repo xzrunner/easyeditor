@@ -13,27 +13,27 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 {
 }
 
-bool SelectSpritesOP::onKeyDown(int keyCode)
+bool SelectSpritesOP::OnKeyDown(int keyCode)
 {
-	if (d2d::SelectSpritesOP::onKeyDown(keyCode)) {
+	if (d2d::SelectSpritesOP::OnKeyDown(keyCode)) {
 		return true;
 	}
 	OnSelected();
 	return false;
 }
 
-bool SelectSpritesOP::onMouseLeftDown(int x, int y)
+bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) {
+	if (d2d::SelectSpritesOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 	OnSelected();
 	return false;
 }
 
-bool SelectSpritesOP::onMouseLeftUp(int x, int y)
+bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftUp(x, y)) {
+	if (d2d::SelectSpritesOP::OnMouseLeftUp(x, y)) {
 		return true;
 	}
 	OnSelected();

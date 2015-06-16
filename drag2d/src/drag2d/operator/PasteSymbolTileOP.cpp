@@ -19,7 +19,7 @@ PasteSymbolTileOP::PasteSymbolTileOP(EditPanel* editPanel, MultiSpritesImpl* spr
 {
 }
 
-bool PasteSymbolTileOP::onMouseLeftDown(int x, int y)
+bool PasteSymbolTileOP::OnMouseLeftDown(int x, int y)
 {
 	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
@@ -37,18 +37,18 @@ bool PasteSymbolTileOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool PasteSymbolTileOP::onMouseRightDown(int x, int y)
+bool PasteSymbolTileOP::OnMouseRightDown(int x, int y)
 {
-	if (PasteSymbolOP::onMouseRightDown(x, y)) return true;
+	if (PasteSymbolOP::OnMouseRightDown(x, y)) return true;
 
 	m_rotate += d2d::PI * 0.5f;
 
 	return false;
 }
 
-bool PasteSymbolTileOP::onMouseMove(int x, int y)
+bool PasteSymbolTileOP::OnMouseMove(int x, int y)
 {
-	if (ZoomViewOP::onMouseMove(x, y)) return true;
+	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	m_bCaptured = false;
 	m_pos = m_stage->transPosScreenToProject(x, y);
@@ -137,9 +137,9 @@ bool PasteSymbolTileOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSymbolTileOP::onDraw() const
+bool PasteSymbolTileOP::OnDraw() const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::OnDraw()) return true;
 
 	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol && m_pos.isValid())

@@ -19,9 +19,9 @@ PasteSymbolOP::PasteSymbolOP(EditPanel* editPanel, MultiSpritesImpl* panelImpl,
 	m_pos.setInvalid();
 }
 
-bool PasteSymbolOP::onMouseLeftDown(int x, int y)
+bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol)
@@ -38,9 +38,9 @@ bool PasteSymbolOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool PasteSymbolOP::onMouseMove(int x, int y)
+bool PasteSymbolOP::OnMouseMove(int x, int y)
 {
-	if (ZoomViewOP::onMouseMove(x, y)) return true;
+	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	m_pos = m_stage->transPosScreenToProject(x, y);
 	m_stage->Refresh();
@@ -48,9 +48,9 @@ bool PasteSymbolOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSymbolOP::onDraw() const
+bool PasteSymbolOP::OnDraw() const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::OnDraw()) return true;
 
 	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol && m_pos.isValid())
@@ -66,9 +66,9 @@ bool PasteSymbolOP::onDraw() const
 	return false;
 }
 
-bool PasteSymbolOP::clear()
+bool PasteSymbolOP::Clear()
 {
-	if (ZoomViewOP::clear()) return true;
+	if (ZoomViewOP::Clear()) return true;
 
 	m_pos.setInvalid();
 

@@ -12,7 +12,7 @@ CtrlCamOP::CtrlCamOP(d2d::EditPanel* editPanel)
 {	
 }
 
-bool CtrlCamOP::onKeyDown(int keyCode)
+bool CtrlCamOP::OnKeyDown(int keyCode)
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 

@@ -13,12 +13,14 @@ EditRectOP::EditRectOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesIm
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
 {
-	clear();
+	m_cursor = wxCursor(wxCURSOR_PENCIL);
+
+	Clear();
 }
 
-bool EditRectOP::onKeyDown(int keyCode)
+bool EditRectOP::OnKeyDown(int keyCode)
 {
-	if (d2d::ZoomViewOP::onKeyDown(keyCode)) return true;
+	if (d2d::ZoomViewOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
 	{
@@ -32,9 +34,9 @@ bool EditRectOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool EditRectOP::onMouseLeftDown(int x, int y)
+bool EditRectOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPress = m_currPos = m_stage->transPosScreenToProject(x, y);
 
@@ -60,9 +62,9 @@ bool EditRectOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditRectOP::onMouseLeftUp(int x, int y)
+bool EditRectOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_captured.shape)
 	{
@@ -87,16 +89,16 @@ bool EditRectOP::onMouseLeftUp(int x, int y)
 			m_propertyPanel->SetPropertySetting(new RectPropertySetting(m_stage, rect));
 	}
 
-	clear();
+	Clear();
 
 	m_stage->Refresh();
 
 	return false;
 }
 
-bool EditRectOP::onMouseRightDown(int x, int y)
+bool EditRectOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
@@ -123,9 +125,9 @@ bool EditRectOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditRectOP::onMouseMove(int x, int y)
+bool EditRectOP::OnMouseMove(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseMove(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
@@ -141,9 +143,9 @@ bool EditRectOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool EditRectOP::onMouseDrag(int x, int y)
+bool EditRectOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_currPos = m_stage->transPosScreenToProject(x, y);
 
@@ -182,9 +184,9 @@ bool EditRectOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditRectOP::onDraw() const
+bool EditRectOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	if (m_captured.shape)
 	{
@@ -210,9 +212,9 @@ bool EditRectOP::onDraw() const
 	return false;
 }
 
-bool EditRectOP::clear()
+bool EditRectOP::Clear()
 {
-	if (d2d::ZoomViewOP::clear()) return true;
+	if (d2d::ZoomViewOP::Clear()) return true;
 
 	m_firstPress.setInvalid();
 	m_currPos.setInvalid();

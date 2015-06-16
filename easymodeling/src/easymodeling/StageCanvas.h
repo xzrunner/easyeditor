@@ -15,7 +15,7 @@ public:
 	virtual ~StageCanvas();
 
 protected:
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	void drawGuideLines();

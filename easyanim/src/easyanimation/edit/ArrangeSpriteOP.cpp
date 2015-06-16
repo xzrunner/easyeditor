@@ -19,9 +19,9 @@ ArrangeSpriteOP::~ArrangeSpriteOP()
 	for_each(m_crosses.begin(), m_crosses.end(), DeletePointerFunctor<Cross>());
 }
 
-bool ArrangeSpriteOP::onKeyDown(int keyCode)
+bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onKeyDown(keyCode)) 
+	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnKeyDown(keyCode)) 
 		return true;
 
 	m_keyDownHandler.process(keyCode);
@@ -29,9 +29,9 @@ bool ArrangeSpriteOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
+bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onMouseLeftDown(x, y)) 
+	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftDown(x, y)) 
 		return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
@@ -44,9 +44,9 @@ bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
+bool ArrangeSpriteOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onMouseLeftUp(x, y)) 
+	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftUp(x, y)) 
 		return true;
 
 	m_selected = NULL;
@@ -54,7 +54,7 @@ bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseDrag(int x, int y)
+bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 {
 	if (m_selected)
 	{
@@ -63,16 +63,16 @@ bool ArrangeSpriteOP::onMouseDrag(int x, int y)
 	}
 	else
 	{
-		if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onMouseDrag(x, y)) 
+		if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnMouseDrag(x, y)) 
 			return true;
 	}
 
 	return false;
 }
 
-bool ArrangeSpriteOP::onDraw() const
+bool ArrangeSpriteOP::OnDraw() const
 {
-	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::onDraw()) 
+	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnDraw()) 
 		return true;
 
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {

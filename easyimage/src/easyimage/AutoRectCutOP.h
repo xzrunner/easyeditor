@@ -14,14 +14,14 @@ class AutoRectCutOP : public d2d::ZoomViewOP
 public:
 	AutoRectCutOP(d2d::EditPanel* editpanel);
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseRightDown(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
-	virtual bool onDraw() const;
-	virtual bool clear();
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 	const RectMgr& getRectMgr() const { return m_rects; }
 	RectMgr& getRectMgr() { return m_rects; }

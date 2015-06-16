@@ -14,13 +14,13 @@ namespace escale9
 		ResizeOP(StagePanel* stage, ToolbarPanel* toolbar,
 			ResizeCMPT* resizeCmpt);
 
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseLeftUp(int x, int y);
-		virtual bool onMouseDrag(int x, int y);
+		virtual bool OnMouseLeftDown(int x, int y);
+		virtual bool OnMouseLeftUp(int x, int y);
+		virtual bool OnMouseDrag(int x, int y);
 
-		virtual bool onActive();
+		virtual bool OnActive();
 
-		virtual bool onDraw() const;
+		virtual bool OnDraw() const;
 
 	private:
 		StagePanel* m_stage;

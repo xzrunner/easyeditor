@@ -17,7 +17,7 @@ public:
 
 protected:
 	virtual void initGL();
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	StagePanel* m_panel;

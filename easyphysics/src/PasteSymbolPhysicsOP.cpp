@@ -16,9 +16,9 @@ PasteSymbolPhysicsOP::PasteSymbolPhysicsOP(d2d::EditPanel* editPanel, d2d::Multi
 	m_world = physicsImpl->getWorld();	
 }
 
-bool PasteSymbolPhysicsOP::onMouseLeftDown(int x, int y)
+bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	d2d::ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 

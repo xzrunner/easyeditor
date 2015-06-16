@@ -14,7 +14,7 @@ public:
 	PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library, 
 		d2d::PropertySettingPanel* property);
 
-//	virtual bool onMouseRightDown(int x, int y);
+//	virtual bool OnMouseRightDown(int x, int y);
 
 private:
 	void ChangeCurrOP();

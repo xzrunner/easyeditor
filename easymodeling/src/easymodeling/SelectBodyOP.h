@@ -16,12 +16,12 @@ namespace emodeling
 			d2d::PropertySettingPanel* propertyPanel, 
 			d2d::AbstractEditCMPT* callback = NULL);
 
-		virtual bool onKeyDown(int keyCode);
-		virtual bool onMouseMove(int x, int y);
-		virtual bool onMouseLeftDClick(int x, int y);
+		virtual bool OnKeyDown(int keyCode);
+		virtual bool OnMouseMove(int x, int y);
+		virtual bool OnMouseLeftDClick(int x, int y);
 
-		virtual bool onDraw() const;
-		virtual bool clear();
+		virtual bool OnDraw() const;
+		virtual bool Clear();
 
 		virtual d2d::IPropertySetting* createPropertySetting(d2d::ISprite* sprite) const;
 

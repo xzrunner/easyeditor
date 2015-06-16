@@ -30,7 +30,7 @@ void StageCanvas::onSize(int w, int h)
 	}
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	m_panel->Update();
 

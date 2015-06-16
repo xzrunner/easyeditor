@@ -14,35 +14,35 @@ MousePositionOP::~MousePositionOP()
 	delete m_draw_impl;
 }
 
-bool MousePositionOP::onMouseLeftDown(int x, int y)
+bool MousePositionOP::OnMouseLeftDown(int x, int y)
 {
-	return m_draw_impl->onMouseLeftDown(x, y);
+	return m_draw_impl->OnMouseLeftDown(x, y);
 }
 
-bool MousePositionOP::onMouseRightDown(int x, int y)
+bool MousePositionOP::OnMouseRightDown(int x, int y)
 {
-	return m_draw_impl->onMouseRightDown(x, y);
+	return m_draw_impl->OnMouseRightDown(x, y);
 }
 
-bool MousePositionOP::onMouseMove(int x, int y)
+bool MousePositionOP::OnMouseMove(int x, int y)
 {
-	if (d2d::MousePositionOP::onMouseMove(x, y)) return true;
-	return m_draw_impl->onMouseMove(x, y);
+	if (d2d::MousePositionOP::OnMouseMove(x, y)) return true;
+	return m_draw_impl->OnMouseMove(x, y);
 }
 
-bool MousePositionOP::onMouseLeftDClick(int x, int y)
+bool MousePositionOP::OnMouseLeftDClick(int x, int y)
 {
-	return m_draw_impl->onMouseLeftDClick(x, y);
+	return m_draw_impl->OnMouseLeftDClick(x, y);
 }
 
-bool MousePositionOP::onDraw() const
+bool MousePositionOP::OnDraw() const
 {
-	return m_draw_impl->onDraw();
+	return m_draw_impl->OnDraw();
 }
 
-bool MousePositionOP::clear()
+bool MousePositionOP::Clear()
 {
-	return m_draw_impl->clear();
+	return m_draw_impl->Clear();
 }
 
 }

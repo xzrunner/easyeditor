@@ -7,13 +7,15 @@ namespace libshape
 DrawPolylineOP::DrawPolylineOP(d2d::EditPanel* editPanel, bool isClosed)
 	: d2d::ZoomViewOP(editPanel, true, false)
 {
+	m_cursor = wxCursor(wxCURSOR_PENCIL);
+
 	m_isClosed = isClosed;
 	m_currPos.setInvalid();
 }
 
-bool DrawPolylineOP::onMouseLeftDown(int x, int y)
+bool DrawPolylineOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_polyline)) {
@@ -25,9 +27,9 @@ bool DrawPolylineOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool DrawPolylineOP::onMouseRightDown(int x, int y)
+bool DrawPolylineOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	if (!m_polyline.empty())
 	{
@@ -39,9 +41,9 @@ bool DrawPolylineOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool DrawPolylineOP::onMouseMove(int x, int y)
+bool DrawPolylineOP::OnMouseMove(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseMove(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	if (m_polyline.empty()) return false;
 
@@ -55,9 +57,9 @@ bool DrawPolylineOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool DrawPolylineOP::onMouseLeftDClick(int x, int y)
+bool DrawPolylineOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDClick(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDClick(x, y)) return true;
 
 	if (m_isClosed)
 		m_polyline.push_back(m_polyline.front());
@@ -66,9 +68,9 @@ bool DrawPolylineOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
-bool DrawPolylineOP::onDraw() const
+bool DrawPolylineOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	if (!m_polyline.empty())
 	{
@@ -87,9 +89,9 @@ bool DrawPolylineOP::onDraw() const
 	return false;
 }
 
-bool DrawPolylineOP::clear()
+bool DrawPolylineOP::Clear()
 {
-	if (d2d::ZoomViewOP::clear()) return true;
+	if (d2d::ZoomViewOP::Clear()) return true;
 
 	m_polyline.clear();
 	m_currPos.setInvalid();

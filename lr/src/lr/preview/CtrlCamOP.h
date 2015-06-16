@@ -13,7 +13,7 @@ class CtrlCamOP : public d2d::AbstractEditOP
 public:
 	CtrlCamOP(d2d::EditPanel* editPanel);
 
-	virtual bool onKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode);
 
 private:
 	void OffsetCamera(float dx, float dy);

@@ -13,7 +13,7 @@ class EditRectOP : public d2d::ZoomViewOP
 public:
 	EditRectOP(StagePanel* stage);
 
-	virtual bool onActive();
+	virtual bool OnActive();
 
 private:
 	StagePanel* m_stage;

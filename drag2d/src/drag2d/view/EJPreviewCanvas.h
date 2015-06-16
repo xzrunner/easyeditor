@@ -21,7 +21,7 @@
 //
 //protected:
 //	virtual void initGL();
-//	virtual void onDraw();
+//	virtual void OnDraw();
 //
 //	void onTimer(wxTimerEvent& event);
 //

@@ -16,7 +16,7 @@ public:
 	virtual ~StageCanvas();
 
 protected:
-	virtual void onDraw();
+	virtual void OnDraw();
 
 	virtual void OnTimer();
 

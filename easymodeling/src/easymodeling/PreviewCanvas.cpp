@@ -25,7 +25,7 @@ void PreviewCanvas::initGL()
 	resetViewport();
 }
 
-void PreviewCanvas::onDraw()
+void PreviewCanvas::OnDraw()
 {
  	static_cast<PreviewPanel*>(m_stage)->drawPhysics();
  

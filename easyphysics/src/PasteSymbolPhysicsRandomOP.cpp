@@ -14,9 +14,9 @@ PasteSymbolPhysicsRandomOP::PasteSymbolPhysicsRandomOP(d2d::EditPanel* editPanel
 	changeRandomValue();
 }
 
-bool PasteSymbolPhysicsRandomOP::onMouseLeftDown(int x, int y)
+bool PasteSymbolPhysicsRandomOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	d2d::ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol) 
@@ -47,18 +47,18 @@ bool PasteSymbolPhysicsRandomOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool PasteSymbolPhysicsRandomOP::onMouseRightDown(int x, int y)
+bool PasteSymbolPhysicsRandomOP::OnMouseRightDown(int x, int y)
 {
-	if (PasteSymbolPhysicsOP::onMouseRightDown(x, y)) return true;
+	if (PasteSymbolPhysicsOP::OnMouseRightDown(x, y)) return true;
 
 	changeRandomValue();
 
 	return false;
 }
 
-bool PasteSymbolPhysicsRandomOP::onDraw() const
+bool PasteSymbolPhysicsRandomOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	d2d::ISymbol* symbol = m_randomValue.symbol;
 	if (!symbol)  {

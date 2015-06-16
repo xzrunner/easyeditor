@@ -12,9 +12,9 @@ PreviewEditOP::PreviewEditOP(d2d::EditPanel* stage,
 {
 }
 
-bool PreviewEditOP::onMouseLeftDown(int x, int y)
+bool PreviewEditOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) {
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 

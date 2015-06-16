@@ -30,7 +30,7 @@ void PreviewCanvas::initGL()
 	}
 }
 
-void PreviewCanvas::onDraw()
+void PreviewCanvas::OnDraw()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{

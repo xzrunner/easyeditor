@@ -13,9 +13,9 @@ CreateMeshOP::CreateMeshOP(StagePanel* stage)
 	SetLoop(true);
 }
 
-bool CreateMeshOP::onKeyDown(int keyCode)
+bool CreateMeshOP::OnKeyDown(int keyCode)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onKeyDown(keyCode))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::OnKeyDown(keyCode))
 		return true;
 
 	switch (keyCode)
@@ -34,9 +34,9 @@ bool CreateMeshOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool CreateMeshOP::onMouseLeftDown(int x, int y)
+bool CreateMeshOP::OnMouseLeftDown(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseLeftDown(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::OnMouseLeftDown(x, y))
 		return true;
 
 	if (IsDirty()) {
@@ -47,9 +47,9 @@ bool CreateMeshOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::onMouseLeftUp(int x, int y)
+bool CreateMeshOP::OnMouseLeftUp(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseLeftUp(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::OnMouseLeftUp(x, y))
 		return true;
 
 	if (IsDirty()) {
@@ -60,9 +60,9 @@ bool CreateMeshOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::onMouseRightDown(int x, int y)
+bool CreateMeshOP::OnMouseRightDown(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseRightDown(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::OnMouseRightDown(x, y))
 		return true;
 
 	if (IsDirty()) {
@@ -73,9 +73,9 @@ bool CreateMeshOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::onMouseRightUp(int x, int y)
+bool CreateMeshOP::OnMouseRightUp(int x, int y)
 {
-	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onMouseRightUp(x, y))
+	if (libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::OnMouseRightUp(x, y))
 		return true;
 
 	if (IsDirty()) {
@@ -86,9 +86,9 @@ bool CreateMeshOP::onMouseRightUp(int x, int y)
 	return false;
 }
 
-bool CreateMeshOP::onDraw() const
+bool CreateMeshOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw())
+	if (d2d::ZoomViewOP::OnDraw())
 		return true;
 
 	if (const d2d::Image* image = m_stage->GetSymbol()->getImage())
@@ -102,7 +102,7 @@ bool CreateMeshOP::onDraw() const
 		shape->DrawInfoUV();
 	}
 
-	libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::onDraw();
+	libshape::EditPolylineOP<libshape::DrawLoopOP, libshape::SelectNodesOP>::OnDraw();
 
 	return false;
 }

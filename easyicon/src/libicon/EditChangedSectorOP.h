@@ -13,7 +13,7 @@ class EditChangedSectorOP : public d2d::ZoomViewOP
 public:
 	EditChangedSectorOP(StagePanel* stage);
 
-	virtual bool onActive();
+	virtual bool OnActive();
 
 private:
 	StagePanel* m_stage;

@@ -15,9 +15,9 @@ RectCutOP::RectCutOP(RectCutCMPT* cmpt, StagePanel* stage)
 	m_captured.setInvalid();
 }
 
-bool RectCutOP::onMouseLeftDown(int x, int y)
+bool RectCutOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -27,9 +27,9 @@ bool RectCutOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onMouseLeftUp(int x, int y)
+bool RectCutOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -58,9 +58,9 @@ bool RectCutOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onMouseRightDown(int x, int y)
+bool RectCutOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -70,9 +70,9 @@ bool RectCutOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onMouseRightUp(int x, int y)
+bool RectCutOP::OnMouseRightUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -112,9 +112,9 @@ bool RectCutOP::onMouseRightUp(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onMouseMove(int x, int y)
+bool RectCutOP::OnMouseMove(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseMove(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -126,9 +126,9 @@ bool RectCutOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onMouseDrag(int x, int y)
+bool RectCutOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (!m_stage->getImage()) return false;
 
@@ -165,9 +165,9 @@ bool RectCutOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool RectCutOP::onDraw() const
+bool RectCutOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
@@ -192,9 +192,9 @@ bool RectCutOP::onDraw() const
 	return false;
 }
 
-bool RectCutOP::clear()
+bool RectCutOP::Clear()
 {
-	if (d2d::ZoomViewOP::clear()) return true;
+	if (d2d::ZoomViewOP::Clear()) return true;
 
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();

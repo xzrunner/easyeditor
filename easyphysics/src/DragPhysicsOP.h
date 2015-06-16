@@ -12,9 +12,9 @@ class DragPhysicsOP : public d2d::ZoomViewOP
 public:
 	DragPhysicsOP(d2d::EditPanel* editPanel, b2World* world, b2Body* ground);
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
 private:
 	b2World* m_world;

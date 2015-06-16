@@ -13,11 +13,11 @@ public:
 		d2d::PropertySettingPanel* propertyPanel, d2d::ViewPanelMgr* view_panel_mgr = NULL,
 		d2d::AbstractEditCMPT* callback = NULL);
 
-//	virtual bool onMouseLeftDown(int x, int y);
+//	virtual bool OnMouseLeftDown(int x, int y);
 
-	virtual bool onKeyDown(int keyCode);
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
 
 private:
 	void OnSelected();

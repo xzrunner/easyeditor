@@ -1,0 +1,8 @@
+BMP_GROUND		BITMAP	"..\\frame\\icon\\ground.bmp"
+BMP_DECORATE	BITMAP	"..\\frame\\icon\\decorate.bmp"
+BMP_UNIT		BITMAP	"..\\frame\\icon\\unit.bmp"
+BMP_POINT		BITMAP	"..\\frame\\icon\\point.bmp"
+BMP_PATH		BITMAP	"..\\frame\\icon\\path.bmp"
+BMP_AREA		BITMAP	"..\\frame\\icon\\area.bmp"
+BMP_CAREA		BITMAP	"..\\frame\\icon\\carea.bmp"
+BMP_CAMERA		BITMAP	"..\\frame\\icon\\camera.bmp"

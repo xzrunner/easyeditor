@@ -11,9 +11,9 @@ DrawPenLineOP::DrawPenLineOP(d2d::EditPanel* editPanel,
 {
 }
 
-bool DrawPenLineOP::onMouseLeftDClick(int x, int y)
+bool DrawPenLineOP::OnMouseLeftDClick(int x, int y)
 {
-	if (DrawPolylineOP::onMouseLeftDClick(x, y)) return true;
+	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
 	m_shapesImpl->insertShape(new ChainShape(m_polyline, false));
 	m_polyline.clear();

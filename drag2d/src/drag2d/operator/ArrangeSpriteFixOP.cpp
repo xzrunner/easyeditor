@@ -15,25 +15,25 @@ ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel,
 {
 }
 
-bool ArrangeSpriteFixOP::onMouseLeftUp(int x, int y)
+bool ArrangeSpriteFixOP::OnMouseLeftUp(int x, int y)
 {
-	if (ArrangeSpriteOP::onMouseLeftUp(x, y)) return true;
+	if (ArrangeSpriteOP::OnMouseLeftUp(x, y)) return true;
 	FixSpritesLocation();
 	return false;
 }
 
-// bool ArrangeSpriteFixOP::onMouseRightDown(int x, int y)
+// bool ArrangeSpriteFixOP::OnMouseRightDown(int x, int y)
 // {
-// 	if (ArrangeSpriteOP::onMouseRightDown(x, y)) return true;
+// 	if (ArrangeSpriteOP::OnMouseRightDown(x, y)) return true;
 // 
-// 	onMouseLeftDown(x, y);
+// 	OnMouseLeftDown(x, y);
 // 
 // 	return false;
 // }
 
-bool ArrangeSpriteFixOP::onMouseRightUp(int x, int y)
+bool ArrangeSpriteFixOP::OnMouseRightUp(int x, int y)
 {
-	if (ArrangeSpriteOP::onMouseRightUp(x, y)) return true;
+	if (ArrangeSpriteOP::OnMouseRightUp(x, y)) return true;
 	FixSpritesLocation();
 	return false;
 }

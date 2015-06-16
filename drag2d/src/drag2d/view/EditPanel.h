@@ -38,8 +38,8 @@ namespace d2d
 		// these two func should be called by GLCanvas.
 		// While in SymbolEdit, class SymbolEditPanel can get focus.
 		void onMouse(wxMouseEvent& event);
-		virtual void onKeyDown(wxKeyEvent& event);
-		virtual void onKeyUp(wxKeyEvent& event);
+		virtual void OnKeyDown(wxKeyEvent& event);
+		virtual void OnKeyUp(wxKeyEvent& event);
 		void onMouseWheelRotation(int x, int y, int direction);
 
 		void resetCanvas();

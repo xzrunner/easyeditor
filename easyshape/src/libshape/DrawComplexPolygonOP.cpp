@@ -11,9 +11,9 @@ DrawComplexPolygonOP::DrawComplexPolygonOP(d2d::EditPanel* editPanel,
 {
 }
 
-bool DrawComplexPolygonOP::onMouseLeftDClick(int x, int y)
+bool DrawComplexPolygonOP::OnMouseLeftDClick(int x, int y)
 {
-	if (DrawPolylineOP::onMouseLeftDClick(x, y)) return true;
+	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
 	if (m_polyline.size() < 3) {
 		return false;

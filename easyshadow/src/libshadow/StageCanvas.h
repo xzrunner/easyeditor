@@ -14,7 +14,7 @@ public:
 	StageCanvas(StagePanel* stage);
 
 protected:
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	StagePanel* m_stage;

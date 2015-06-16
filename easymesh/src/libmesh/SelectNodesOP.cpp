@@ -20,9 +20,9 @@ SelectNodesOP::~SelectNodesOP()
 	m_selection.Clear();
 }
 
-bool SelectNodesOP::onMouseLeftDown(int x, int y)
+bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::DrawRectangleOP::onMouseLeftDown(x, y)) 
+	if (d2d::DrawRectangleOP::OnMouseLeftDown(x, y)) 
 		return true;
 
 	Shape* shape = m_stage->GetShape();
@@ -52,7 +52,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	}
 	else
 	{
-		DrawRectangleOP::onMouseLeftDown(x, y);
+		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
 		if (wxGetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
@@ -64,9 +64,9 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::onMouseLeftUp(int x, int y)
+bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 {
-	if (DrawRectangleOP::onMouseLeftUp(x, y)) return true;
+	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
 	m_bDraggable = true;
 
@@ -88,18 +88,18 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::onMouseDrag(int x, int y)
+bool SelectNodesOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::DrawRectangleOP::onMouseDrag(x, y)) return true;
+	if (d2d::DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
 	return !m_bDraggable;
 }
 
-bool SelectNodesOP::onDraw() const
+bool SelectNodesOP::OnDraw() const
 {
 	if (m_firstPos.isValid())
 	{
-		if (d2d::DrawRectangleOP::onDraw())
+		if (d2d::DrawRectangleOP::OnDraw())
 			return true;
 	}
 
@@ -118,9 +118,9 @@ bool SelectNodesOP::onDraw() const
 	return false;
 }
 
-bool SelectNodesOP::clear()
+bool SelectNodesOP::Clear()
 {
-	if (d2d::DrawRectangleOP::clear()) return true;
+	if (d2d::DrawRectangleOP::Clear()) return true;
 
 	m_selection.Clear();
 	m_firstPos.setInvalid();

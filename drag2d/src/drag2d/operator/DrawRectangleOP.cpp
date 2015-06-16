@@ -12,9 +12,9 @@ DrawRectangleOP::DrawRectangleOP(EditPanel* editPanel, bool bOpenRightTap)
 	m_currPos.setInvalid();
 }
 
-bool DrawRectangleOP::onMouseLeftDown(int x, int y)
+bool DrawRectangleOP::OnMouseLeftDown(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPos = m_stage->transPosScreenToProject(x, y);
 	m_stage->Refresh();
@@ -22,9 +22,9 @@ bool DrawRectangleOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::onMouseLeftUp(int x, int y)
+bool DrawRectangleOP::OnMouseLeftUp(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();
@@ -33,9 +33,9 @@ bool DrawRectangleOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::onMouseDrag(int x, int y)
+bool DrawRectangleOP::OnMouseDrag(int x, int y)
 {
-	if (ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (m_firstPos.isValid())
 	{
@@ -46,9 +46,9 @@ bool DrawRectangleOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawRectangleOP::onDraw() const
+bool DrawRectangleOP::OnDraw() const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::OnDraw()) return true;
 
 	if (m_firstPos.isValid() && m_currPos.isValid()) {
 		PrimitiveDraw::rect(m_firstPos, m_currPos, m_style);
@@ -57,9 +57,9 @@ bool DrawRectangleOP::onDraw() const
 	return false;
 }
 
-bool DrawRectangleOP::clear()
+bool DrawRectangleOP::Clear()
 {
-	if (ZoomViewOP::clear()) return true;
+	if (ZoomViewOP::Clear()) return true;
 
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();

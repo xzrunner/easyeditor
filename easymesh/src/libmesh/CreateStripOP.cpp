@@ -14,9 +14,9 @@ CreateStripOP::CreateStripOP(StagePanel* stage)
 	m_last_right.setInvalid();
 }
 
-bool CreateStripOP::onMouseLeftDown(int x, int y)
+bool CreateStripOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y))
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y))
 		return true;
 
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
@@ -28,9 +28,9 @@ bool CreateStripOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool CreateStripOP::onMouseLeftUp(int x, int y)
+bool CreateStripOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y))
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y))
 		return true;
 
 	if (m_selected) {
@@ -47,9 +47,9 @@ bool CreateStripOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool CreateStripOP::onMouseRightDown(int x, int y)
+bool CreateStripOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightDown(x, y))
+	if (d2d::ZoomViewOP::OnMouseRightDown(x, y))
 		return true;
 
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape()))
@@ -64,9 +64,9 @@ bool CreateStripOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool CreateStripOP::onMouseRightUp(int x, int y)
+bool CreateStripOP::OnMouseRightUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightUp(x, y))
+	if (d2d::ZoomViewOP::OnMouseRightUp(x, y))
 		return true;
 
 	m_last_right.setInvalid();
@@ -74,9 +74,9 @@ bool CreateStripOP::onMouseRightUp(int x, int y)
 	return false;
 }
 
-bool CreateStripOP::onMouseDrag(int x, int y)
+bool CreateStripOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y))
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y))
 		return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
@@ -103,7 +103,7 @@ bool CreateStripOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool CreateStripOP::onDraw() const
+bool CreateStripOP::OnDraw() const
 {
  	if (const d2d::Image* image = m_stage->GetSymbol()->getImage())
   	{
@@ -116,7 +116,7 @@ bool CreateStripOP::onDraw() const
 		shape->DrawInfoUV();
 	}
 
-	d2d::ZoomViewOP::onDraw();
+	d2d::ZoomViewOP::OnDraw();
 
 	return false;
 }

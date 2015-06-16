@@ -13,11 +13,11 @@ namespace d2d
 		PasteSymbolOP(EditPanel* editPanel, MultiSpritesImpl* panelImpl, 
 			LibraryPanel* libraryPanel, float* pScale = NULL);
 
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseMove(int x, int y);
+		virtual bool OnMouseLeftDown(int x, int y);
+		virtual bool OnMouseMove(int x, int y);
 
-		virtual bool onDraw() const;
-		virtual bool clear();
+		virtual bool OnDraw() const;
+		virtual bool Clear();
 
 	protected:
 		MultiSpritesImpl* m_panelImpl;

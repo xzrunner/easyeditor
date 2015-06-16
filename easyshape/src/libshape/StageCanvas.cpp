@@ -40,7 +40,7 @@ void StageCanvas::initGL()
 	}
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	if (m_edited) 
 	{

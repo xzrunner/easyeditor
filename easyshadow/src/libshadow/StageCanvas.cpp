@@ -11,7 +11,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	m_stage->GetSymbol()->draw(d2d::Matrix());
 	m_stage->drawEditTemp();

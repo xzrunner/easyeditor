@@ -11,12 +11,12 @@ class EditNodesOP : public SelectNodesOP
 public:
 	EditNodesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
-	virtual bool onKeyDown(int keyCode);
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
-	virtual bool onDraw() const;
-	virtual bool clear();
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 	void simplify(float threshold);
 	void smooth(float samplingWidth);

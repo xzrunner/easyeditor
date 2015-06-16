@@ -22,7 +22,7 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 	d2d::obj_assign((d2d::Object*&)m_background, symbol);
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	drawbackground();
 	std::vector<d2d::ISprite*> sprites;

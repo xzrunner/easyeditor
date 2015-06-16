@@ -47,9 +47,9 @@ SelectSpritesOP::~SelectSpritesOP()
 	m_selection->Release();
 }
 
-bool SelectSpritesOP::onKeyDown(int keyCode)
+bool SelectSpritesOP::OnKeyDown(int keyCode)
 {
-	if (DrawRectangleOP::onKeyDown(keyCode)) return true;
+	if (DrawRectangleOP::OnKeyDown(keyCode)) return true;
 
 	if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
@@ -71,12 +71,12 @@ bool SelectSpritesOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool SelectSpritesOP::onMouseLeftDown(int x, int y)
+bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
  	m_bDraggable = true;
 
 	Vector pos = m_stage->transPosScreenToProject(x, y);
-	ISprite* selected = selectByPos(pos);
+	ISprite* selected = SelectByPos(pos);
 	if (selected)
 	{
 		assert(selected->editable);
@@ -106,7 +106,7 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 	}
 	else
 	{
-		DrawRectangleOP::onMouseLeftDown(x, y);
+		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
 		if (wxGetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
@@ -118,9 +118,9 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectSpritesOP::onMouseLeftUp(int x, int y)
+bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 {
-	if (DrawRectangleOP::onMouseLeftUp(x, y)) return true;
+	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
 	m_bDraggable = true;
 
@@ -165,18 +165,18 @@ bool SelectSpritesOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectSpritesOP::onMouseRightDown(int x, int y)
+bool SelectSpritesOP::OnMouseRightDown(int x, int y)
 {
 	m_rightFirstScrPos.set(x, y);
 
 	enableRightTap(m_selection->IsEmpty());
 
-	if (DrawRectangleOP::onMouseRightDown(x, y)) return true;
+	if (DrawRectangleOP::OnMouseRightDown(x, y)) return true;
 
 	return false;
 }
 
-bool SelectSpritesOP::onMouseRightUp(int x, int y)
+bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 {
 	// select
 	if (m_rightFirstScrPos == Vector(x, y))
@@ -192,19 +192,19 @@ bool SelectSpritesOP::onMouseRightUp(int x, int y)
 		}
 	}
 
-	if (DrawRectangleOP::onMouseRightUp(x, y)) return true;
+	if (DrawRectangleOP::OnMouseRightUp(x, y)) return true;
 
 	return false;
 }
 
-bool SelectSpritesOP::onMouseDrag(int x, int y)
+bool SelectSpritesOP::OnMouseDrag(int x, int y)
 {
-	if (DrawRectangleOP::onMouseDrag(x, y)) return true;
+	if (DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
 	return !m_bDraggable;
 }
 
-bool SelectSpritesOP::onDraw() const
+bool SelectSpritesOP::OnDraw() const
 {
 	m_selection->Traverse(DrawSelectedSpriteVisitor(Colorf(1, 0, 0)));
 
@@ -222,14 +222,14 @@ bool SelectSpritesOP::onDraw() const
 		}
 	}
 
-// 	if (DrawRectangleOP::onDraw()) return true;
+// 	if (DrawRectangleOP::OnDraw()) return true;
 
 	return false;
 }
 
-bool SelectSpritesOP::clear()
+bool SelectSpritesOP::Clear()
 {
-	if (DrawRectangleOP::clear()) return true;
+	if (DrawRectangleOP::Clear()) return true;
 
 	m_selection->Clear();
 	m_firstPos.setInvalid();
@@ -254,7 +254,7 @@ IPropertySetting* SelectSpritesOP::createPropertySetting(const std::vector<ISpri
 	return new MultiSpritesPropertySetting(m_stage, sprites);
 }
 
-ISprite* SelectSpritesOP::selectByPos(const Vector& pos) const
+ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;
 	std::vector<ISprite*> sprites;

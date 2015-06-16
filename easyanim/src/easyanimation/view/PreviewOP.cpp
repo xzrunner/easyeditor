@@ -14,9 +14,9 @@ PreviewOP::PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings,
 {
 }
 
-bool PreviewOP::onKeyDown(int keyCode)
+bool PreviewOP::OnKeyDown(int keyCode)
 {
-	if (d2d::ZoomViewOP::onKeyDown(keyCode))
+	if (d2d::ZoomViewOP::OnKeyDown(keyCode))
 		return true;
 
 	if (keyCode == WXK_SPACE)

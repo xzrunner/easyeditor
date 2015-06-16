@@ -12,10 +12,10 @@ public:
 	PasteSymbolPhysicsRandomOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
 		d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, d2d::PasteSymbolRandomWidget* randomWidget);
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseRightDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
 
-	virtual bool onDraw() const;
+	virtual bool OnDraw() const;
 
 private:
 	void changeRandomValue();

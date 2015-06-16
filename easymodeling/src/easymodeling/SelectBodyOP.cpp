@@ -18,9 +18,9 @@ SelectBodyOP::SelectBodyOP(d2d::EditPanel* editPanel,
 {
 }
 
-bool SelectBodyOP::onKeyDown(int keyCode)
+bool SelectBodyOP::OnKeyDown(int keyCode)
 {
-	if (d2d::SelectSpritesOP::onKeyDown(keyCode)) return true;
+	if (d2d::SelectSpritesOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE && m_mouseOn)
 		m_mouseOn = NULL;
@@ -28,9 +28,9 @@ bool SelectBodyOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool SelectBodyOP::onMouseMove(int x, int y)
+bool SelectBodyOP::OnMouseMove(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseMove(x, y)) return true;
+	if (d2d::SelectSpritesOP::OnMouseMove(x, y)) return true;
 
 	m_mouseOn = NULL;
 
@@ -44,9 +44,9 @@ bool SelectBodyOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool SelectBodyOP::onMouseLeftDClick(int x, int y)
+bool SelectBodyOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftDClick(x, y)) return true;
+	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	// todo
 
@@ -64,9 +64,9 @@ bool SelectBodyOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
-bool SelectBodyOP::onDraw() const
+bool SelectBodyOP::OnDraw() const
 {
-	if (d2d::DrawRectangleOP::onDraw()) return true;
+	if (d2d::DrawRectangleOP::OnDraw()) return true;
 
 	m_selection->Traverse(DrawSelectedVisitor());
 
@@ -76,9 +76,9 @@ bool SelectBodyOP::onDraw() const
 	return false;
 }
 
-bool SelectBodyOP::clear()
+bool SelectBodyOP::Clear()
 {
-	if (d2d::SelectSpritesOP::clear()) return true;
+	if (d2d::SelectSpritesOP::Clear()) return true;
 
 	m_mouseOn = NULL;
 

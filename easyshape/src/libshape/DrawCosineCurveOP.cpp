@@ -11,9 +11,9 @@ DrawCosineCurveOP::DrawCosineCurveOP(d2d::EditPanel* editPanel,
 {
 }
 
-bool DrawCosineCurveOP::onMouseLeftDClick(int x, int y)
+bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 {
-	if (DrawPolylineOP::onMouseLeftDClick(x, y)) return true;
+	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
 	CosineShape* curve = new CosineShape(m_polyline);
 	curve->setMidPoints();

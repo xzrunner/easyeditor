@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_ARRANGE_SPRITE_OP_H_
+#define _DRAG2D_ARRANGE_SPRITE_OP_H_
 
 #include "interfaces.h"
 
@@ -23,24 +24,24 @@ public:
 		ArrangeSpriteImpl* impl = NULL);
 	virtual ~ArrangeSpriteOP();
 
-	virtual bool onKeyDown(int keyCode);
-	virtual bool onKeyUp(int keyCode);
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseRightDown(int x, int y);
-	virtual bool onMouseRightUp(int x, int y);
-	virtual bool onMouseMove(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnKeyUp(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseRightUp(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
-	virtual bool onPopMenuSelected(int type);
+	virtual bool OnPopMenuSelected(int type);
 
-	virtual bool onDraw() const;
-	virtual bool clear();
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 	virtual bool IsEmpty() const;
 
 protected:
-	virtual ISprite* selectByPos(const Vector& pos) const;
+	virtual ISprite* SelectByPos(const Vector& pos) const;
 
 private:
 	ArrangeSpriteImpl* m_impl;
@@ -51,3 +52,4 @@ private:
 
 #include "ArrangeSpriteOP.cpp"
 
+#endif // _DRAG2D_ARRANGE_SPRITE_OP_H_

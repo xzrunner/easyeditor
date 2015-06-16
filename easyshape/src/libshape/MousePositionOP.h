@@ -14,13 +14,13 @@ public:
 	MousePositionOP(d2d::EditPanel* editPanel, d2d::MousePositionCMPT* cmpt);
 	virtual ~MousePositionOP();
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseRightDown(int x, int y);
-	virtual bool onMouseMove(int x, int y);
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
-	virtual bool onDraw() const;
-	virtual bool clear();
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 private:
 	DrawPolylineOP* m_draw_impl;

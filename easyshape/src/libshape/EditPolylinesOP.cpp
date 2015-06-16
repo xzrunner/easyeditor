@@ -16,9 +16,9 @@ EditPolylinesOP::EditPolylinesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl
 	clearBuffer();
 }
 
-bool EditPolylinesOP::onMouseLeftDown(int x, int y)
+bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::SelectShapesOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_firstPos.isValid())
 		m_lastPos = m_stage->transPosScreenToProject(x, y);
@@ -28,9 +28,9 @@ bool EditPolylinesOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditPolylinesOP::onMouseLeftUp(int x, int y)
+bool EditPolylinesOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::SelectShapesOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::SelectShapesOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_bDirty)
 		m_selection->Traverse(UpdateChainVisitor());
@@ -41,9 +41,9 @@ bool EditPolylinesOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool EditPolylinesOP::onMouseDrag(int x, int y)
+bool EditPolylinesOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::SelectShapesOP::onMouseDrag(x, y)) return true;
+	if (d2d::SelectShapesOP::OnMouseDrag(x, y)) return true;
 
 	if (m_lastPos.isValid())
 	{
@@ -59,9 +59,9 @@ bool EditPolylinesOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditPolylinesOP::onDraw() const
+bool EditPolylinesOP::OnDraw() const
 {
-	if (d2d::SelectShapesOP::onDraw()) return true;
+	if (d2d::SelectShapesOP::OnDraw()) return true;
 
 	std::map<ChainShape*, ChainShape*>::const_iterator itr = m_simplifyBuffer.begin();
 	for ( ; itr != m_simplifyBuffer.end(); ++itr)
@@ -73,9 +73,9 @@ bool EditPolylinesOP::onDraw() const
 	return false;
 }
 
-bool EditPolylinesOP::clear()
+bool EditPolylinesOP::Clear()
 {
-	if (d2d::SelectShapesOP::clear()) return true;
+	if (d2d::SelectShapesOP::Clear()) return true;
 
 	clearBuffer();
 

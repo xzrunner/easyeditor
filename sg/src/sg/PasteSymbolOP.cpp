@@ -12,25 +12,25 @@ PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library)
 {
 }
 
-bool PasteSymbolOP::onMouseLeftDown(int x, int y)
+bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 {
 	if (isCurrSymbolValid()) {
-		return d2d::PasteSymbolOP::onMouseLeftDown(x, y);
+		return d2d::PasteSymbolOP::OnMouseLeftDown(x, y);
 	} else {
 		return false;
 	}
 }
 
-bool PasteSymbolOP::onMouseDrag(int x, int y)
+bool PasteSymbolOP::OnMouseDrag(int x, int y)
 {
 	if (isCurrSymbolValid() && isCurrSymbolIsWall()) {
-		return d2d::PasteSymbolOP::onMouseLeftDown(x, y);
+		return d2d::PasteSymbolOP::OnMouseLeftDown(x, y);
 	} else {
 		return false;
 	}
 }
 
-bool PasteSymbolOP::onDraw() const
+bool PasteSymbolOP::OnDraw() const
 {
 	if (!isCurrSymbolValid()) {
 		return false;
@@ -49,7 +49,7 @@ bool PasteSymbolOP::onDraw() const
 	bool valid = stage->GetCheckBoard().IsValid(*symbol, m_pos);
 	render->DrawGrids(*symbol, m_pos, valid, is_flat);
 
-	ret = d2d::PasteSymbolOP::onDraw();
+	ret = d2d::PasteSymbolOP::OnDraw();
 
 	if (!is_flat) {
 		render->DrawArrow(*symbol, m_pos);

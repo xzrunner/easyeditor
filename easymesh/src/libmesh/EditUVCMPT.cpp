@@ -50,7 +50,7 @@ void EditUVCMPT::onReset(wxCommandEvent& event)
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Reset();
 		m_stage->Refresh();
-		m_editOP->clear();
+		m_editOP->Clear();
 	}
 }
 

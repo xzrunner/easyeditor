@@ -14,7 +14,7 @@ StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 	editPanel->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);

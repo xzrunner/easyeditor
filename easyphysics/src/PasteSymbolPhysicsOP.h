@@ -15,7 +15,7 @@ public:
 	PasteSymbolPhysicsOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
 		d2d::LibraryPanel* libraryPanel, PhysicsPanelImpl* physicsImpl, float* pScale = NULL);
 
-	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
 
 	void setStatic(bool bStatic) { m_bStatic = bStatic; }
 

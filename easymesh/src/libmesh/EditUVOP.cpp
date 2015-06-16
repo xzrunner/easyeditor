@@ -11,7 +11,7 @@ EditUVOP::EditUVOP(StagePanel* stage)
 {
 }
 
-bool EditUVOP::onDraw() const
+bool EditUVOP::OnDraw() const
 {
 	if (Shape* shape = m_stage->GetShape())
 	{

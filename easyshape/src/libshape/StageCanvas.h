@@ -20,7 +20,7 @@ public:
 
 protected:
 	virtual void initGL();
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	d2d::ISprite* m_edited;

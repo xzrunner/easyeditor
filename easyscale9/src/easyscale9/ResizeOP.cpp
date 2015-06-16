@@ -14,27 +14,27 @@ ResizeOP::ResizeOP(StagePanel* stage, ToolbarPanel* toolbar, ResizeCMPT* resizeC
 {
 }
 
-bool ResizeOP::onMouseLeftDown(int x, int y)
+bool ResizeOP::OnMouseLeftDown(int x, int y)
 {
 	Symbol* symbol = m_stage->getPatchSymbol();
 	if (!symbol) return false;
 
 	escale9::ResizeBaseOP::setSymbol(symbol);
-	return escale9::ResizeBaseOP::onMouseLeftDown(x, y);
+	return escale9::ResizeBaseOP::OnMouseLeftDown(x, y);
 }
 
-bool ResizeOP::onMouseLeftUp(int x, int y)
+bool ResizeOP::OnMouseLeftUp(int x, int y)
 {
 	Symbol* symbol = m_stage->getPatchSymbol();
 	if (!symbol) return false;
 
 	escale9::ResizeBaseOP::setSymbol(symbol);
-	return escale9::ResizeBaseOP::onMouseLeftUp(x, y);
+	return escale9::ResizeBaseOP::OnMouseLeftUp(x, y);
 }
 
-bool ResizeOP::onMouseDrag(int x, int y)
+bool ResizeOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	Symbol* symbol = dynamic_cast<Symbol*>(m_stage->getPatchSymbol());
 	if (m_status != e_null && symbol)
@@ -75,9 +75,9 @@ bool ResizeOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool ResizeOP::onActive()
+bool ResizeOP::OnActive()
 {
-	if (d2d::ZoomViewOP::onActive()) return true;
+	if (d2d::ZoomViewOP::OnActive()) return true;
 
 	m_toolbar->setComposeOP(false);
 	m_stage->rebuildPatchSymbol();
@@ -85,13 +85,13 @@ bool ResizeOP::onActive()
 	return false;
 }
 
-bool ResizeOP::onDraw() const
+bool ResizeOP::OnDraw() const
 {
 	Symbol* symbol = m_stage->getPatchSymbol();
 	if (!symbol) return false;
 
 	escale9::ResizeBaseOP::setSymbol(symbol);
-	return escale9::ResizeBaseOP::onDraw();
+	return escale9::ResizeBaseOP::OnDraw();
 }
 
 } // escale9

@@ -41,89 +41,89 @@ ArrangeSpriteOP<TBase>::~ArrangeSpriteOP()
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onKeyDown(int keyCode)
+bool ArrangeSpriteOP<TBase>::OnKeyDown(int keyCode)
 {
-	if (TBase::onKeyDown(keyCode)) return true;
+	if (TBase::OnKeyDown(keyCode)) return true;
 	m_impl->OnKeyDown(keyCode);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onKeyUp(int keyCode)
+bool ArrangeSpriteOP<TBase>::OnKeyUp(int keyCode)
 {
-	if (TBase::onKeyUp(keyCode)) return true;
+	if (TBase::OnKeyUp(keyCode)) return true;
 	m_impl->OnKeyUp(keyCode);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onMouseLeftDown(int x, int y)
+bool ArrangeSpriteOP<TBase>::OnMouseLeftDown(int x, int y)
 {
-	if (TBase::onMouseLeftDown(x, y)) return true;
+	if (TBase::OnMouseLeftDown(x, y)) return true;
 	m_impl->OnMouseLeftDown(x, y);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onMouseLeftUp(int x, int y)
+bool ArrangeSpriteOP<TBase>::OnMouseLeftUp(int x, int y)
 {
-	if (TBase::onMouseLeftUp(x, y)) return true;
+	if (TBase::OnMouseLeftUp(x, y)) return true;
 	m_impl->OnMouseLeftUp(x, y);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onMouseRightDown(int x, int y)
+bool ArrangeSpriteOP<TBase>::OnMouseRightDown(int x, int y)
 {
-	if (TBase::onMouseRightDown(x, y)) return true;
+	if (TBase::OnMouseRightDown(x, y)) return true;
 	m_impl->OnMouseRightDown(x, y);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onMouseRightUp(int x, int y)
+bool ArrangeSpriteOP<TBase>::OnMouseRightUp(int x, int y)
 {
-	if (TBase::onMouseRightUp(x, y)) return true;
+	if (TBase::OnMouseRightUp(x, y)) return true;
 	m_impl->OnMouseRightUp(x, y);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onMouseMove(int x, int y)
+bool ArrangeSpriteOP<TBase>::OnMouseMove(int x, int y)
 {
-	if (TBase::onMouseDrag(x, y)) return true;
+	if (TBase::OnMouseDrag(x, y)) return true;
 	m_impl->OnMouseMove(x, y);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onMouseDrag(int x, int y)
+bool ArrangeSpriteOP<TBase>::OnMouseDrag(int x, int y)
 {
-	if (TBase::onMouseDrag(x, y)) return true;
+	if (TBase::OnMouseDrag(x, y)) return true;
 	m_impl->OnMouseDrag(x, y);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onPopMenuSelected(int type)
+bool ArrangeSpriteOP<TBase>::OnPopMenuSelected(int type)
 {
-	if (TBase::onPopMenuSelected(type)) return true;
+	if (TBase::OnPopMenuSelected(type)) return true;
 	m_impl->OnPopMenuSelected(type);
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::onDraw() const
+bool ArrangeSpriteOP<TBase>::OnDraw() const
 {
-	if (TBase::onDraw()) return true;
+	if (TBase::OnDraw()) return true;
 	m_impl->OnDraw(*m_stage->getCamera());
 	return false;
 }
 
 template <typename TBase>
-bool ArrangeSpriteOP<TBase>::clear()
+bool ArrangeSpriteOP<TBase>::Clear()
 {
-	if (TBase::clear()) return true;
+	if (TBase::Clear()) return true;
 	m_impl->Clear();
 	return false;
 }
@@ -135,12 +135,12 @@ bool ArrangeSpriteOP<TBase>::IsEmpty() const
 }
 
 template <typename TBase>
-ISprite* ArrangeSpriteOP<TBase>::selectByPos(const Vector& pos) const
+ISprite* ArrangeSpriteOP<TBase>::SelectByPos(const Vector& pos) const
 {
 	ISprite* sprite = NULL;
 	sprite = m_impl->QueryEditedSprite(pos);
 	if (!sprite) {
-		sprite = TBase::selectByPos(pos);
+		sprite = TBase::SelectByPos(pos);
 	}
 	return sprite;
 }

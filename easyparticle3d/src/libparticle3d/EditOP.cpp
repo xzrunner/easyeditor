@@ -11,9 +11,9 @@ EditOP::EditOP(StagePanel* stage)
 {
 }
 
-bool EditOP::onMouseLeftDown(int x, int y)
+bool EditOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ParticleSystem* ps = m_stage->m_ps;
 	ps->origin = m_stage->transPosScreenToProject(x, y);
@@ -23,9 +23,9 @@ bool EditOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditOP::onMouseDrag(int x, int y)
+bool EditOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	ParticleSystem* ps = m_stage->m_ps;
 	ps->origin = m_stage->transPosScreenToProject(x, y);

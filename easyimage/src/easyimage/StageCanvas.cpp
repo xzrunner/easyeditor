@@ -10,7 +10,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	if (const d2d::ISprite* s = m_stage->getImage())
 	{

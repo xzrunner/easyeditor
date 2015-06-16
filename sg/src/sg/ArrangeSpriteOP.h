@@ -13,8 +13,8 @@ class ArrangeSpriteOP : public d2d::ArrangeSpriteFixOP
 public:
 	ArrangeSpriteOP(d2d::PropertySettingPanel* property, StagePanel* stage);
 
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 protected:
 	virtual void onDirectionKeyDown(d2d::DirectionType type);

@@ -12,7 +12,7 @@ public:
 	DrawPencilLineOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 		d2d::OneFloatValue* simplify);
 
-	virtual bool onMouseLeftUp(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
 
 private:
 	d2d::MultiShapesImpl* m_shapesImpl;

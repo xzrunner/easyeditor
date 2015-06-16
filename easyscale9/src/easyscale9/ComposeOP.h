@@ -13,7 +13,7 @@ namespace escale9
 		ComposeOP(ToolbarPanel* toolbar, StagePanel* stage, 
 			d2d::PropertySettingPanel* property);
 
-		virtual bool onActive();
+		virtual bool OnActive();
 
 	private:
 		ToolbarPanel* m_toolbar;

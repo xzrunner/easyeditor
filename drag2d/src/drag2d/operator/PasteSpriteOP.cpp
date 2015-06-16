@@ -27,9 +27,9 @@ PasteSpriteOP::~PasteSpriteOP()
 	m_selection->Release();
 }
 
-bool PasteSpriteOP::onKeyDown(int keyCode)
+bool PasteSpriteOP::OnKeyDown(int keyCode)
 {
-	if (SelectSpritesOP::onKeyDown(keyCode)) return true;
+	if (SelectSpritesOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
 		m_batch.clear();
@@ -37,16 +37,16 @@ bool PasteSpriteOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool PasteSpriteOP::onMouseLeftDown(int x, int y)
+bool PasteSpriteOP::OnMouseLeftDown(int x, int y)
 {
 	if (m_batch.empty())
 	{
-		if (SelectSpritesOP::onMouseLeftDown(x, y))
+		if (SelectSpritesOP::OnMouseLeftDown(x, y))
 			return true;
 	}
 	else
 	{
-		if (ZoomViewOP::onMouseLeftDown(x, y))
+		if (ZoomViewOP::OnMouseLeftDown(x, y))
 			return true;
 	}
 
@@ -61,16 +61,16 @@ bool PasteSpriteOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool PasteSpriteOP::onMouseLeftUp(int x, int y)
+bool PasteSpriteOP::OnMouseLeftUp(int x, int y)
 {
 	if (m_batch.empty())
 	{
-		if (SelectSpritesOP::onMouseLeftUp(x, y))
+		if (SelectSpritesOP::OnMouseLeftUp(x, y))
 			return true;
 	}
 	else
 	{
-		if (ZoomViewOP::onMouseLeftUp(x, y))
+		if (ZoomViewOP::OnMouseLeftUp(x, y))
 			return true;
 	}
 
@@ -81,18 +81,18 @@ bool PasteSpriteOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool PasteSpriteOP::onMouseRightDown(int x, int y)
+bool PasteSpriteOP::OnMouseRightDown(int x, int y)
 {
-	if (SelectSpritesOP::onMouseRightDown(x, y)) return true;
+	if (SelectSpritesOP::OnMouseRightDown(x, y)) return true;
 
-	clear();
+	Clear();
 
 	return false;
 }
 
-bool PasteSpriteOP::onMouseMove(int x, int y)
+bool PasteSpriteOP::OnMouseMove(int x, int y)
 {
-	if (SelectSpritesOP::onMouseMove(x, y)) return true;
+	if (SelectSpritesOP::OnMouseMove(x, y)) return true;
 
 	setMousePos(x, y);
 
@@ -101,9 +101,9 @@ bool PasteSpriteOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSpriteOP::onDraw() const
+bool PasteSpriteOP::OnDraw() const
 {
-	if (SelectSpritesOP::onDraw()) return true;
+	if (SelectSpritesOP::OnDraw()) return true;
 
 	if (m_cmpt)
 		m_batch.draw(m_pos, m_cmpt->isHorMirror(), m_cmpt->isVerMirror());
@@ -113,9 +113,9 @@ bool PasteSpriteOP::onDraw() const
 	return false;
 }
 
-bool PasteSpriteOP::clear()
+bool PasteSpriteOP::Clear()
 {
-	if (SelectSpritesOP::clear()) return true;
+	if (SelectSpritesOP::Clear()) return true;
 
 	m_pos.setInvalid();
 	m_batch.clear();

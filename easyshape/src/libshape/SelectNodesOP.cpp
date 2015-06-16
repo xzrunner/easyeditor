@@ -19,9 +19,9 @@ SelectNodesOP::~SelectNodesOP()
 	clearSelectedNodes();
 }
 
-bool SelectNodesOP::onKeyDown(int keyCode)
+bool SelectNodesOP::OnKeyDown(int keyCode)
 {
-	if (DrawRectangleOP::onKeyDown(keyCode)) return true;
+	if (DrawRectangleOP::OnKeyDown(keyCode)) return true;
 
 	switch (keyCode)
 	{
@@ -50,7 +50,7 @@ bool SelectNodesOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool SelectNodesOP::onMouseLeftDown(int x, int y)
+bool SelectNodesOP::OnMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	ChainSelectedNodes* selected = NULL;
@@ -108,7 +108,7 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	}
 	else
 	{
-		DrawRectangleOP::onMouseLeftDown(x, y);
+		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
 		if (!wxGetKeyState(WXK_CONTROL))
 			clearSelectedNodes();
@@ -118,9 +118,9 @@ bool SelectNodesOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::onMouseLeftUp(int x, int y)
+bool SelectNodesOP::OnMouseLeftUp(int x, int y)
 {
-	if (DrawRectangleOP::onMouseLeftUp(x, y)) return true;
+	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_firstPos.isValid())
 	{
@@ -134,9 +134,9 @@ bool SelectNodesOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectNodesOP::onDraw() const
+bool SelectNodesOP::OnDraw() const
 {
-	if (DrawRectangleOP::onDraw()) return true;
+	if (DrawRectangleOP::OnDraw()) return true;
 
 	if (m_nodeSelection.empty()) return false;
 
@@ -157,9 +157,9 @@ bool SelectNodesOP::onDraw() const
 	return false;
 }
 
-bool SelectNodesOP::clear()
+bool SelectNodesOP::Clear()
 {
-	if (DrawRectangleOP::clear()) return true;
+	if (DrawRectangleOP::Clear()) return true;
 
 	clearSelectedNodes();
 	m_firstPos.setInvalid();

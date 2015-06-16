@@ -12,12 +12,14 @@ EditPointOP::EditPointOP(d2d::EditPanel* editpanel,
 	, m_shapes_impl(shapes_impl)
 	, m_node_capture(node_capture)
 {
-	clear();
+	m_cursor = wxCursor(wxCURSOR_PENCIL);
+
+	Clear();
 }
 
-bool EditPointOP::onKeyDown(int keyCode)
+bool EditPointOP::OnKeyDown(int keyCode)
 {
-	if (d2d::ZoomViewOP::onKeyDown(keyCode)) return true;
+	if (d2d::ZoomViewOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
 	{
@@ -29,9 +31,9 @@ bool EditPointOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool EditPointOP::onMouseLeftDown(int x, int y)
+bool EditPointOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_pos = m_stage->transPosScreenToProject(x, y);
 
@@ -54,9 +56,9 @@ bool EditPointOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditPointOP::onMouseLeftUp(int x, int y)
+bool EditPointOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_pos.isValid()) {
 		return false;
@@ -69,16 +71,16 @@ bool EditPointOP::onMouseLeftUp(int x, int y)
 		m_shapes_impl->insertShape(point);
 	}
 
-	clear();
+	Clear();
 
 	m_stage->Refresh();
 
 	return false;
 }
 
-bool EditPointOP::onMouseRightDown(int x, int y)
+bool EditPointOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance == 0) {
@@ -98,9 +100,9 @@ bool EditPointOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditPointOP::onMouseMove(int x, int y)
+bool EditPointOP::OnMouseMove(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseMove(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance == 0) {
@@ -117,9 +119,9 @@ bool EditPointOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool EditPointOP::onMouseDrag(int x, int y)
+bool EditPointOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_pos = m_stage->transPosScreenToProject(x, y);
 	if (m_captured.shape && 
@@ -132,9 +134,9 @@ bool EditPointOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditPointOP::onDraw() const
+bool EditPointOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	if (m_pos.isValid()) {
 		d2d::PrimitiveDraw::drawCircle(m_pos, m_node_capture->GetValue(), true, 2, d2d::LIGHT_RED);
@@ -143,9 +145,9 @@ bool EditPointOP::onDraw() const
 	return false;
 }
 
-bool EditPointOP::clear()
+bool EditPointOP::Clear()
 {
-	if (d2d::ZoomViewOP::clear()) return true;
+	if (d2d::ZoomViewOP::Clear()) return true;
 
 	m_pos.setInvalid();
 

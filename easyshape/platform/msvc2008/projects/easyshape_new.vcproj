@@ -197,6 +197,10 @@
 			RelativePath="..\..\..\src\easyshape_new\Task.h"
 			>
 		</File>
+		<File
+			RelativePath="..\..\..\..\editor-external\wx\include\wx.rc"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -20,7 +20,7 @@ StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	std::vector<d2d::ISprite*> sprites;
 	static_cast<StagePanel*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));

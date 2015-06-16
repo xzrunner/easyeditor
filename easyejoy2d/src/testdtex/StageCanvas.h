@@ -16,7 +16,7 @@ public:
 protected:
 	virtual void initGL();
 	virtual void onSize(int w, int h);
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	void DrawEJScreen() const;

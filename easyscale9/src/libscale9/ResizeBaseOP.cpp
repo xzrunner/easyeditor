@@ -12,9 +12,9 @@ ResizeBaseOP::ResizeBaseOP(d2d::EditPanel* editPanel, Symbol* symbol)
 {
 }
 
-bool ResizeBaseOP::onMouseLeftDown(int x, int y)
+bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPos = m_stage->transPosScreenToProject(x, y);
 
@@ -32,9 +32,9 @@ bool ResizeBaseOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool ResizeBaseOP::onMouseLeftUp(int x, int y)
+bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_status != e_null)
 	{
@@ -51,9 +51,9 @@ bool ResizeBaseOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool ResizeBaseOP::onMouseDrag(int x, int y)
+bool ResizeBaseOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (m_status != e_null)
 	{
@@ -65,9 +65,9 @@ bool ResizeBaseOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool ResizeBaseOP::onDraw() const
+bool ResizeBaseOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
 

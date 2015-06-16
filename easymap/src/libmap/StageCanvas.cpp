@@ -11,7 +11,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	DrawGuideLines();
 

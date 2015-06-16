@@ -22,7 +22,7 @@ SelectFixtureOP::~SelectFixtureOP()
 	
 }
 
-bool SelectFixtureOP::onMouseLeftDown(int x, int y)
+bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 {
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* sprite = m_stagePanel->querySpriteByPos(pos);
@@ -46,7 +46,7 @@ bool SelectFixtureOP::onMouseLeftDown(int x, int y)
 		}
 		else
 		{
-			d2d::DrawRectangleOP::onMouseLeftDown(x, y);
+			d2d::DrawRectangleOP::OnMouseLeftDown(x, y);
 			m_firstPos = pos;
 			m_stage->Refresh();
 		}
@@ -59,9 +59,9 @@ bool SelectFixtureOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectFixtureOP::onMouseLeftUp(int x, int y)
+bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::DrawRectangleOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_firstPos.isValid())
 	{
@@ -94,9 +94,9 @@ bool SelectFixtureOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectFixtureOP::onMouseMove(int x, int y)
+bool SelectFixtureOP::OnMouseMove(int x, int y)
 {
-	if (d2d::DrawRectangleOP::onMouseMove(x, y)) return true;
+	if (d2d::DrawRectangleOP::OnMouseMove(x, y)) return true;
 
 	m_mouseOn = NULL;
 
@@ -123,9 +123,9 @@ bool SelectFixtureOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool SelectFixtureOP::onDraw() const
+bool SelectFixtureOP::OnDraw() const
 {
-	if (d2d::DrawRectangleOP::onDraw()) return true;
+	if (d2d::DrawRectangleOP::OnDraw()) return true;
 
 	if (m_selected)
 		DrawUtils::drawFixture(m_selected, DrawUtils::e_selected, true);
@@ -135,9 +135,9 @@ bool SelectFixtureOP::onDraw() const
 	return false;
 }
 
-bool SelectFixtureOP::clear()
+bool SelectFixtureOP::Clear()
 {
-	if (d2d::DrawRectangleOP::clear()) return true;
+	if (d2d::DrawRectangleOP::Clear()) return true;
 
 	m_firstPos.setInvalid();
 

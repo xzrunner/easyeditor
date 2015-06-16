@@ -35,7 +35,7 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 	if ((index == -1 && m_next >= m_size)
 		|| (m_next != 0 && m_textureID != symbol.getTextureID()))
 	{
-		onDraw();
+		OnDraw();
 		m_next = 0;
 	}
 
@@ -134,7 +134,7 @@ void SpriteBatch::unlock()
 	m_vertices->unbind();
 }
 
-void SpriteBatch::onDraw() const
+void SpriteBatch::OnDraw() const
 {
 	if (!m_textureID) return;
 

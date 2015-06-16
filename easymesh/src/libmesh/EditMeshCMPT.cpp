@@ -31,7 +31,7 @@ void EditMeshCMPT::onReset(wxCommandEvent& event)
 		shape->Reset();
 	}
 	m_stage->Refresh();
-	m_editOP->clear();
+	m_editOP->Clear();
 }
 
 }

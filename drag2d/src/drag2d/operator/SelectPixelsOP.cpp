@@ -42,9 +42,9 @@
 //	delete m_drawOP;
 //}
 //
-//bool SelectPixelsOP::onMouseLeftDown(int x, int y)
+//bool SelectPixelsOP::OnMouseLeftDown(int x, int y)
 //{
-//	if (m_drawOP->onMouseLeftDown(x, y)) return true;
+//	if (m_drawOP->OnMouseLeftDown(x, y)) return true;
 //
 //	switch (m_mode)
 //	{
@@ -63,9 +63,9 @@
 //	return false;
 //}
 //
-//bool SelectPixelsOP::onMouseLeftUp(int x, int y)
+//bool SelectPixelsOP::OnMouseLeftUp(int x, int y)
 //{
-//	if (m_drawOP->onMouseLeftUp(x, y)) return true;
+//	if (m_drawOP->OnMouseLeftUp(x, y)) return true;
 //
 //	if (m_mode == RectSelect)
 //	{
@@ -76,9 +76,9 @@
 //	return false;
 //}
 //
-//bool SelectPixelsOP::onMouseRightDown(int x, int y)
+//bool SelectPixelsOP::OnMouseRightDown(int x, int y)
 //{
-//	if (m_drawOP->onMouseRightDown(x, y)) return true;
+//	if (m_drawOP->OnMouseRightDown(x, y)) return true;
 //
 //	if (m_mode == PolylineSelect)
 //	{
@@ -89,9 +89,9 @@
 //	return false;
 //}
 //
-//bool SelectPixelsOP::onMouseMove(int x, int y)
+//bool SelectPixelsOP::OnMouseMove(int x, int y)
 //{
-//	return m_drawOP->onMouseMove(x, y);
+//	return m_drawOP->OnMouseMove(x, y);
 //}
 //
 //bool SelectPixelsOP::onMouseLeftDClick(int x, int y)
@@ -110,14 +110,14 @@
 //	return false;
 //}
 //
-//bool SelectPixelsOP::onMouseDrag(int x, int y)
+//bool SelectPixelsOP::OnMouseDrag(int x, int y)
 //{
-//	return m_drawOP->onMouseDrag(x, y);
+//	return m_drawOP->OnMouseDrag(x, y);
 //}
 //
-//bool SelectPixelsOP::onDraw() const
+//bool SelectPixelsOP::OnDraw() const
 //{
-//	return m_drawOP->onDraw();
+//	return m_drawOP->OnDraw();
 //}
 //
 //bool SelectPixelsOP::clear()
@@ -176,7 +176,7 @@
 //
 //	for (int x = xMin; x <= xMax; ++x)
 //		for (int y = yMin; y <= yMax; ++y)
-//			selectByPos(x, y);
+//			SelectByPos(x, y);
 //
 //	m_stage->Refresh();
 //}
@@ -190,7 +190,7 @@
 //  		int x = static_cast<int>(m_currPos.x + width * 0.5f + 0.5f),
 // 			y = static_cast<int>(m_currPos.y + height * 0.5f + 0.5f);
 //		if (m_magicMarkerDis <= 0)
-//			selectByPos(x, y);
+//			SelectByPos(x, y);
 //		else
 //			selectByMagicMarker(x, y);
 //	}
@@ -212,14 +212,14 @@
 //			pos.x = x - width * 0.5f;
 //			pos.y = y - height * 0.5f;
 //			if (Math::isPointInArea(pos, m_area))
-//				selectByPos(x, y);
+//				SelectByPos(x, y);
 //		}
 //	}
 //
 //	m_stage->Refresh();
 //}
 //
-//void SelectPixelsOP::selectByPos(int x, int y)
+//void SelectPixelsOP::SelectByPos(int x, int y)
 //{
 //	RawPixels::PixelsPos* p = new RawPixels::PixelsPos;
 //	p->x = x;
@@ -268,7 +268,7 @@
 //			dis = sqrt(dis);
 //			if (dis < m_magicMarkerDis)
 //			{
-//				selectByPos(curr.x, curr.y);
+//				SelectByPos(curr.x, curr.y);
 //				if (curr.x - 1 >= 0 && curr.x - 1 < width) buffer.push(Vector(curr.x - 1, curr.y));
 //				if (curr.x + 1 >= 0 && curr.x + 1 < width) buffer.push(Vector(curr.x + 1, curr.y));
 //				if (curr.y - 1 >= 0 && curr.y - 1 < height) buffer.push(Vector(curr.x, curr.y - 1));

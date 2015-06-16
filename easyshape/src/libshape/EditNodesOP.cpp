@@ -11,7 +11,7 @@ EditNodesOP::EditNodesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapes
 	m_lastPos.setInvalid();
 }
 
-bool EditNodesOP::onKeyDown(int keyCode)
+bool EditNodesOP::OnKeyDown(int keyCode)
 {
 	if (keyCode == WXK_DELETE)
 	{
@@ -23,14 +23,14 @@ bool EditNodesOP::onKeyDown(int keyCode)
 		}
 	}
 
-	SelectNodesOP::onKeyDown(keyCode);
+	SelectNodesOP::OnKeyDown(keyCode);
 
 	return false;
 }
 
-bool EditNodesOP::onMouseLeftDown(int x, int y)
+bool EditNodesOP::OnMouseLeftDown(int x, int y)
 {
-	if (SelectNodesOP::onMouseLeftDown(x, y)) return true;
+	if (SelectNodesOP::OnMouseLeftDown(x, y)) return true;
 
 	if (wxGetKeyState(WXK_CONTROL)) return false;
 
@@ -42,9 +42,9 @@ bool EditNodesOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditNodesOP::onMouseDrag(int x, int y)
+bool EditNodesOP::OnMouseDrag(int x, int y)
 {
-	if (SelectNodesOP::onMouseDrag(x, y)) return true;
+	if (SelectNodesOP::OnMouseDrag(x, y)) return true;
 
 	if (wxGetKeyState(WXK_CONTROL)) return false;
 
@@ -72,9 +72,9 @@ bool EditNodesOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditNodesOP::onDraw() const
+bool EditNodesOP::OnDraw() const
 {
-	if (SelectNodesOP::onDraw()) return true;
+	if (SelectNodesOP::OnDraw()) return true;
 
 	const float radius = d2d::Settings::ctlPosSize == 0 ? 3 : d2d::Settings::ctlPosSize;
 	for (size_t i = 0, n = m_buffer.size(); i < n; ++i)
@@ -86,9 +86,9 @@ bool EditNodesOP::onDraw() const
 	return false;
 }
 
-bool EditNodesOP::clear()
+bool EditNodesOP::Clear()
 {
-	if (SelectNodesOP::clear()) return true;
+	if (SelectNodesOP::Clear()) return true;
 
 	m_lastPos.setInvalid();
 	m_buffer.clear();

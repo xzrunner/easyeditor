@@ -19,12 +19,14 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 								 d2d::AbstractEditCMPT* callback/* = NULL*/)
 	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, view_panel_mgr, callback)
 {
+	editPanel->SetCursor(wxCursor(wxCURSOR_PENCIL));
+
 	m_first_press.setInvalid();
 }
 
-bool SelectSpritesOP::onMouseLeftDown(int x, int y)
+bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::SelectSpritesOP::OnMouseLeftDown(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 
@@ -41,9 +43,9 @@ bool SelectSpritesOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
+bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftDClick(x, y)) return true;
+	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);

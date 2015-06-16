@@ -14,7 +14,7 @@ Frame::Frame(const wxString& title)
 void Frame::onNew(wxCommandEvent& event)
 {
 	d2d::AbstractEditOP* editop = m_task->getEditPanel()->getEditOP();
-	editop->clear();
+	editop->Clear();
 	Refresh();
 }
 

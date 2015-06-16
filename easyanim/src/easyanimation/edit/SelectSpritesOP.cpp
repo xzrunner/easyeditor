@@ -16,9 +16,9 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 {
 }
 
-bool SelectSpritesOP::onMouseLeftDClick(int x, int y)
+bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftDClick(x, y)) 
+	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) 
 		return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);

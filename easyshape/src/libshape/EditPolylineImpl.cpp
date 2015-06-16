@@ -45,7 +45,7 @@ bool EditPolylineImpl::OnKeyDown(int keyCode)
 		m_capturedEditable.clear();
 		m_captureSelectable.clear();
 	}
-	return m_selectOP->onKeyDown(keyCode);
+	return m_selectOP->OnKeyDown(keyCode);
 }
 
 bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
@@ -69,7 +69,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		if (m_capturedEditable.shape)
 		{
 			// 			d2d::Vector screen = m_stage->transPosProjectToScreen(m_capturedEditable.pos);
-			// 			bNotDeliver = m_draw_op->onMouseLeftDown(screen.x, screen.y);
+			// 			bNotDeliver = m_draw_op->OnMouseLeftDown(screen.x, screen.y);
 
 			if (m_capturedEditable.pos.isValid())
 				m_draw_op->m_polyline.push_back(m_capturedEditable.pos);
@@ -149,7 +149,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 
 	if (m_bSelectOpen)
 	{
-		m_selectOP->onMouseLeftUp(x, y);
+		m_selectOP->OnMouseLeftUp(x, y);
 		m_bSelectOpen = false;
 		m_lastLeftDownPos.setInvalid();
 	}
@@ -228,7 +228,7 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 bool EditPolylineImpl::OnMouseDrag(int x, int y)
 {
 	if (m_bSelectOpen)
-		m_selectOP->onMouseDrag(x, y);
+		m_selectOP->OnMouseDrag(x, y);
 	else if (m_capturedEditable.shape)
 	{
 		if (m_draw_op->m_polyline.size() > 1)
@@ -272,7 +272,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		if (m_draw_op->m_polyline.size() == 1)
 			m_draw_op->m_polyline.clear();
 		m_bSelectOpen = true;
-		m_selectOP->onMouseLeftDown(x, y);
+		m_selectOP->OnMouseLeftDown(x, y);
 	}
 
 	return false;
@@ -280,7 +280,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 
 void EditPolylineImpl::OnDraw() const
 {
-	m_selectOP->onDraw();
+	m_selectOP->OnDraw();
 	if (m_node_capture)
 	{
 		if (m_capturedEditable.shape) {
@@ -293,7 +293,7 @@ void EditPolylineImpl::OnDraw() const
 
 void EditPolylineImpl::Clear()
 {
-	m_selectOP->clear();
+	m_selectOP->Clear();
 	m_capturedEditable.shape = NULL;
 	m_captureSelectable.shape = NULL;
 }

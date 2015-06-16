@@ -21,7 +21,7 @@ ZoomViewOP::ZoomViewOP(EditPanel* editPanel, bool bMouseMoveFocus,
 	m_lastPos.setInvalid();
 }
 
-bool ZoomViewOP::onKeyDown(int keyCode)
+bool ZoomViewOP::OnKeyDown(int keyCode)
 {
 	if (m_openLeftTap && keyCode == WXK_SPACE) {
 		m_stage->SetCursor(wxCURSOR_HAND);
@@ -33,14 +33,14 @@ bool ZoomViewOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool ZoomViewOP::onKeyUp(int keyCode)
+bool ZoomViewOP::OnKeyUp(int keyCode)
 {
 	if (m_openLeftTap && keyCode == WXK_SPACE)
 		m_stage->SetCursor(wxCURSOR_ARROW);
 	return false;
 }
 
-bool ZoomViewOP::onMouseLeftDown(int x, int y)
+bool ZoomViewOP::OnMouseLeftDown(int x, int y)
 {
 	if (m_openLeftTap)
 		m_lastPos.setInvalid();
@@ -56,7 +56,7 @@ bool ZoomViewOP::onMouseLeftDown(int x, int y)
 	}
 }
 
-bool ZoomViewOP::onMouseLeftUp(int x, int y)
+bool ZoomViewOP::OnMouseLeftUp(int x, int y)
 {
 	if (m_openLeftTap && wxGetKeyState(WXK_SPACE))
 	{
@@ -69,7 +69,7 @@ bool ZoomViewOP::onMouseLeftUp(int x, int y)
 	}
 }
 
-bool ZoomViewOP::onMouseRightDown(int x, int y) 
+bool ZoomViewOP::OnMouseRightDown(int x, int y) 
 { 
 	if (m_openRightTap)
 	{
@@ -83,7 +83,7 @@ bool ZoomViewOP::onMouseRightDown(int x, int y)
 	}
 }
 
-bool ZoomViewOP::onMouseRightUp(int x, int y) 
+bool ZoomViewOP::OnMouseRightUp(int x, int y) 
 { 
 	if (m_openRightTap)
 	{
@@ -97,7 +97,7 @@ bool ZoomViewOP::onMouseRightUp(int x, int y)
 	}
 }
 
-bool ZoomViewOP::onMouseMove(int x, int y) 
+bool ZoomViewOP::OnMouseMove(int x, int y) 
 {
 	if (m_bMouseMoveFocus) 
 		m_stage->SetFocus();
@@ -105,7 +105,7 @@ bool ZoomViewOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool ZoomViewOP::onMouseDrag(int x, int y)
+bool ZoomViewOP::OnMouseDrag(int x, int y)
 {
 	if (!m_openLeftTap) return false;
 
@@ -134,7 +134,7 @@ bool ZoomViewOP::onMouseDrag(int x, int y)
 	}
 }
 
-bool ZoomViewOP::onMouseWheelRotation(int x, int y, int direction) 
+bool ZoomViewOP::OnMouseWheelRotation(int x, int y, int direction) 
 {
 //	if (Settings::bZoomOnlyUseMouseWheel)
 		m_stage->onMouseWheelRotation(x, y, direction);

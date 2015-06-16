@@ -21,7 +21,7 @@ void StageCanvas::initGL()
 	}
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{

@@ -12,9 +12,9 @@ namespace d2d
 			PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL,
 			const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 
-		virtual bool onMouseLeftUp(int x, int y);
-		//virtual bool onMouseRightDown(int x, int y);
-		virtual bool onMouseRightUp(int x, int y);
+		virtual bool OnMouseLeftUp(int x, int y);
+		//virtual bool OnMouseRightDown(int x, int y);
+		virtual bool OnMouseRightUp(int x, int y);
 
 	private:
 		// todo cost!

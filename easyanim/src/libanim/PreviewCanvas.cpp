@@ -22,7 +22,7 @@ void PreviewCanvas::initGL()
 	d2d::SymbolMgr::Instance()->traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
 }
 
-void PreviewCanvas::onDraw()
+void PreviewCanvas::OnDraw()
 {
 	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
 }

@@ -13,13 +13,13 @@ class CreateStripOP : public d2d::ZoomViewOP
 public:
 	CreateStripOP(StagePanel* stage);
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseRightDown(int x, int y);
-	virtual bool onMouseRightUp(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseRightUp(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
-	virtual bool onDraw() const;
+	virtual bool OnDraw() const;
 
 private:
 	StagePanel* m_stage;

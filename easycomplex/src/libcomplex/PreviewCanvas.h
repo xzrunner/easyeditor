@@ -14,7 +14,7 @@ public:
 
 protected:
 	virtual void initGL();
-	virtual void onDraw();
+	virtual void OnDraw();
 
 protected:
 	virtual void OnTimer();

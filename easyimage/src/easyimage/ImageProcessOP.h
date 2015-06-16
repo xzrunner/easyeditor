@@ -13,7 +13,7 @@ class ImageProcessOP : public d2d::ZoomViewOP
 public:
 	ImageProcessOP(StagePanel* stage);
 
-	virtual bool onActive();
+	virtual bool OnActive();
 
 private:
 	StagePanel* m_stage;

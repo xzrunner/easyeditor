@@ -13,12 +13,14 @@ EditCircleOP::EditCircleOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shap
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
 {
-	clear();
+	m_cursor = wxCursor(wxCURSOR_PENCIL);
+
+	Clear();
 }
 
-bool EditCircleOP::onKeyDown(int keyCode)
+bool EditCircleOP::OnKeyDown(int keyCode)
 {
-	if (ZoomViewOP::onKeyDown(keyCode)) return true;
+	if (ZoomViewOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
 	{
@@ -34,9 +36,9 @@ bool EditCircleOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool EditCircleOP::onMouseLeftDown(int x, int y)
+bool EditCircleOP::OnMouseLeftDown(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPress = m_currPos = m_stage->transPosScreenToProject(x, y);
 
@@ -64,9 +66,9 @@ bool EditCircleOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditCircleOP::onMouseLeftUp(int x, int y)
+bool EditCircleOP::OnMouseLeftUp(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_captured.shape)
 	{
@@ -95,16 +97,16 @@ bool EditCircleOP::onMouseLeftUp(int x, int y)
 		}
 	}
 
-	clear();
+	Clear();
 
 	m_stage->Refresh();
 
 	return false;
 }
 
-bool EditCircleOP::onMouseRightDown(int x, int y)
+bool EditCircleOP::OnMouseRightDown(int x, int y)
 {
-	if (ZoomViewOP::onMouseRightDown(x, y)) return true;
+	if (ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
@@ -133,9 +135,9 @@ bool EditCircleOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditCircleOP::onMouseMove(int x, int y)
+bool EditCircleOP::OnMouseMove(int x, int y)
 {
-	if (ZoomViewOP::onMouseMove(x, y)) return true;
+	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
@@ -151,9 +153,9 @@ bool EditCircleOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool EditCircleOP::onMouseDrag(int x, int y)
+bool EditCircleOP::OnMouseDrag(int x, int y)
 {
-	if (ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_currPos = m_stage->transPosScreenToProject(x, y);
 
@@ -179,9 +181,9 @@ bool EditCircleOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditCircleOP::onDraw() const
+bool EditCircleOP::OnDraw() const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::OnDraw()) return true;
 
 	if (m_captured.shape)
 	{
@@ -210,9 +212,9 @@ bool EditCircleOP::onDraw() const
 	return false;
 }
 
-bool EditCircleOP::clear()
+bool EditCircleOP::Clear()
 {
-	if (ZoomViewOP::clear()) return true;
+	if (ZoomViewOP::Clear()) return true;
 
 	m_firstPress.setInvalid();
 	m_currPos.setInvalid();

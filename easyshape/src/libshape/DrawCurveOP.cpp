@@ -9,21 +9,23 @@ DrawCurveOP::DrawCurveOP(d2d::EditPanel* editPanel)
 	, m_startDraw(false)
 	, m_straight_mode(false)
 {
+	m_cursor = wxCursor(wxCURSOR_PENCIL);
+
 	m_firstPos.setInvalid();
 }
 
-bool DrawCurveOP::onMouseLeftDown(int x, int y)
+bool DrawCurveOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPos.set(x, y);
 
 	return false;
 }
 
-bool DrawCurveOP::onMouseLeftUp(int x, int y)
+bool DrawCurveOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	m_firstPos.setInvalid();
 	m_startDraw = false;
@@ -31,9 +33,9 @@ bool DrawCurveOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool DrawCurveOP::onMouseDrag(int x, int y)
+bool DrawCurveOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (!m_startDraw && m_firstPos.isValid() && 
 		(m_firstPos.x != x || m_firstPos.y != y)) {
@@ -55,9 +57,9 @@ bool DrawCurveOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool DrawCurveOP::onDraw() const
+bool DrawCurveOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	if (!m_curve.empty()) {
 		d2d::PrimitiveDraw::drawPolyline(m_curve, d2d::Colorf(0, 0, 0), false, 1);
@@ -66,9 +68,9 @@ bool DrawCurveOP::onDraw() const
 	return false;
 }
 
-bool DrawCurveOP::clear()
+bool DrawCurveOP::Clear()
 {
-	if (d2d::ZoomViewOP::clear()) return true;
+	if (d2d::ZoomViewOP::Clear()) return true;
 
 	m_curve.clear();
 	m_firstPos.setInvalid();

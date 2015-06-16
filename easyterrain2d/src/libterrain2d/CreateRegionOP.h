@@ -13,7 +13,7 @@ class CreateRegionOP : public libshape::DrawPolygonOP
 public:
 	CreateRegionOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
-	virtual bool onDraw() const;
+	virtual bool OnDraw() const;
 
 private:
 	StagePanel* m_stage;

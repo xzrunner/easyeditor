@@ -25,7 +25,7 @@ void DialogStageCanvas::initGL()
 	}
 }
 
-void DialogStageCanvas::onDraw()
+void DialogStageCanvas::OnDraw()
 {
 	m_stage->drawEditTemp();
 }

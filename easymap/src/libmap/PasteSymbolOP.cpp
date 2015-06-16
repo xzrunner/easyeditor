@@ -12,9 +12,9 @@ PasteSymbolOP::PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library,
 {
 }
 
-// bool PasteSymbolOP::onMouseRightDown(int x, int y)
+// bool PasteSymbolOP::OnMouseRightDown(int x, int y)
 // {
-// 	if (d2d::PasteSymbolOP::onMouseRightDown(x, y)) return true;
+// 	if (d2d::PasteSymbolOP::OnMouseRightDown(x, y)) return true;
 // 	ChangeCurrOP();
 // 	return false;
 // }

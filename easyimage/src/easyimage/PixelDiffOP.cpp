@@ -10,9 +10,9 @@ PixelDiffOP::PixelDiffOP(StagePanel* stage)
 {
 }
 
-bool PixelDiffOP::onMouseLeftDown(int x, int y)
+bool PixelDiffOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_stage->getLeft() || !m_stage->getRight()) {
 		return false;
@@ -36,24 +36,24 @@ bool PixelDiffOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool PixelDiffOP::onDraw() const
+bool PixelDiffOP::OnDraw() const
 {
-// 	if (d2d::ZoomViewOP::onDraw()) return true;
+// 	if (d2d::ZoomViewOP::OnDraw()) return true;
 // 
 // 	d2d::PrimitiveDraw::drawLine(d2d::Vector(0, -1024), d2d::Vector(0, 1024), d2d::LIGHT_GREY);
 
 	return false;
 }
 
-bool PixelDiffOP::clear()
+bool PixelDiffOP::Clear()
 {
-	if (d2d::ZoomViewOP::clear()) return true;
+	if (d2d::ZoomViewOP::Clear()) return true;
 	return false;
 }
 
-bool PixelDiffOP::onActive()
+bool PixelDiffOP::OnActive()
 {
-	if (d2d::ZoomViewOP::onActive()) {
+	if (d2d::ZoomViewOP::OnActive()) {
 		return true;
 	}
 

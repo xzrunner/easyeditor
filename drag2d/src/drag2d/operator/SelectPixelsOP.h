@@ -22,14 +22,14 @@
 //			RawPixels::PixelBuf& result, bool isSelect, int magicMarkerDis = 0);
 //		virtual ~SelectPixelsOP();
 //
-//		virtual bool onMouseLeftDown(int x, int y);
-//		virtual bool onMouseLeftUp(int x, int y);
-//		virtual bool onMouseRightDown(int x, int y);
-//		virtual bool onMouseMove(int x, int y);
+//		virtual bool OnMouseLeftDown(int x, int y);
+//		virtual bool OnMouseLeftUp(int x, int y);
+//		virtual bool OnMouseRightDown(int x, int y);
+//		virtual bool OnMouseMove(int x, int y);
 //		virtual bool onMouseLeftDClick(int x, int y);
-//		virtual bool onMouseDrag(int x, int y);
+//		virtual bool OnMouseDrag(int x, int y);
 //
-//		virtual bool onDraw() const;
+//		virtual bool OnDraw() const;
 //		virtual bool clear();
 //
 //		void setEditType(bool isSelect);
@@ -40,7 +40,7 @@
 //		void pointSelect();
 //		void polylineSelect();
 //
-//		void selectByPos(int x, int y);
+//		void SelectByPos(int x, int y);
 //
 //		void selectByMagicMarker(int x, int y);
 //

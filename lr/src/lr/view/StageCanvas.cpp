@@ -14,7 +14,7 @@ StageCanvas::StageCanvas(StagePanel* statge)
 {
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
 	m_statge->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);

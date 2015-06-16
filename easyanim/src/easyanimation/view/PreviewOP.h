@@ -14,7 +14,7 @@ public:
 	PreviewOP(d2d::EditPanel* editPanel, PlaySettings& settings,
 		d2d::PlayControl& control);
 
-	virtual bool onKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode);
 
 private:
 	PlaySettings& m_settings;

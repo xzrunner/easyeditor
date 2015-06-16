@@ -15,13 +15,13 @@ class CreateMeshOP : public libshape::EditPolylineOP<libshape::DrawLoopOP, libsh
 public:
 	CreateMeshOP(StagePanel* stage);
 
-	virtual bool onKeyDown(int keyCode);
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseRightDown(int x, int y);
-	virtual bool onMouseRightUp(int x, int y);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseRightUp(int x, int y);
 
-	virtual bool onDraw() const;
+	virtual bool OnDraw() const;
 
 private:
 	StagePanel* m_stage;

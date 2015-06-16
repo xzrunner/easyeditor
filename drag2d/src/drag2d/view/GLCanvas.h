@@ -33,15 +33,15 @@ namespace d2d
 	protected:
 		virtual void initGL();
 		virtual void onSize(int w, int h) = 0;
-		virtual void onDraw() = 0;
+		virtual void OnDraw() = 0;
 		virtual void OnDrawDC() const {}
 
 		void onSize(wxSizeEvent& event);
 		void onPaint(wxPaintEvent& event);
 		void onEraseBackground(wxEraseEvent& event);
  		void onMouse(wxMouseEvent& event);
- 		void onKeyDown(wxKeyEvent& event);
-		void onKeyUp(wxKeyEvent& event);
+ 		void OnKeyDown(wxKeyEvent& event);
+		void OnKeyUp(wxKeyEvent& event);
 
 	protected:
 		EditPanel* m_stage;

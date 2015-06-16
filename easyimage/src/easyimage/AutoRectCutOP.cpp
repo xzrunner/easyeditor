@@ -10,9 +10,9 @@ AutoRectCutOP::AutoRectCutOP(d2d::EditPanel* editpanel)
 {
 }
 
-bool AutoRectCutOP::onMouseLeftDown(int x, int y)
+bool AutoRectCutOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_last_pos = m_stage->transPosScreenToProject(x, y);
 	m_selected = m_rects.queryRect(m_last_pos);
@@ -21,9 +21,9 @@ bool AutoRectCutOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool AutoRectCutOP::onMouseLeftUp(int x, int y)
+bool AutoRectCutOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_selected) {
 		m_selected->xMin = (int)(m_selected->xMin+0.5f);
@@ -36,9 +36,9 @@ bool AutoRectCutOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool AutoRectCutOP::onMouseRightDown(int x, int y)
+bool AutoRectCutOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseRightDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	bool removed = m_rects.remove(pos);
@@ -50,9 +50,9 @@ bool AutoRectCutOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool AutoRectCutOP::onMouseDrag(int x, int y)
+bool AutoRectCutOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (m_selected)
 	{
@@ -65,9 +65,9 @@ bool AutoRectCutOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool AutoRectCutOP::onMouseLeftDClick(int x, int y)
+bool AutoRectCutOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDClick(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::Rect* r = m_rects.queryRect(pos);
@@ -80,9 +80,9 @@ bool AutoRectCutOP::onMouseLeftDClick(int x, int y)
 	return false;
 }
 
-bool AutoRectCutOP::onDraw() const
+bool AutoRectCutOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) return true;
+	if (d2d::ZoomViewOP::OnDraw()) return true;
 
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
 
@@ -95,9 +95,9 @@ bool AutoRectCutOP::onDraw() const
 	return false;
 }
 
-bool AutoRectCutOP::clear()
+bool AutoRectCutOP::Clear()
 {
-	if (d2d::ZoomViewOP::clear()) return true;
+	if (d2d::ZoomViewOP::Clear()) return true;
 
 	m_rects.clear();
 

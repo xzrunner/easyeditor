@@ -8,9 +8,9 @@ AutoTriCutOP::AutoTriCutOP(d2d::EditPanel* stage)
 {
 }
 
-bool AutoTriCutOP::onActive()
+bool AutoTriCutOP::OnActive()
 {
-	if (d2d::ZoomViewOP::onActive()) {
+	if (d2d::ZoomViewOP::OnActive()) {
 		return true;
 	}
 
@@ -21,9 +21,9 @@ bool AutoTriCutOP::onActive()
 	return false;
 }
 
-bool AutoTriCutOP::onDraw() const
+bool AutoTriCutOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) {
+	if (d2d::ZoomViewOP::OnDraw()) {
 		return true;
 	}
 

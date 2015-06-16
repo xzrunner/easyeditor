@@ -11,7 +11,7 @@ class DrawLoopOP : public DrawPolylineOP
 public:
 	DrawLoopOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 private:
 	d2d::MultiShapesImpl* m_shapesImpl;

@@ -11,7 +11,7 @@ class PreviewEditOP : public d2d::ZoomViewOP
 public:
 	PreviewEditOP(d2d::EditPanel* stage, const std::vector<const d2d::ISprite*>& sprites);
 
-	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
 
 private:
 	const std::vector<const d2d::ISprite*>& m_sprites;

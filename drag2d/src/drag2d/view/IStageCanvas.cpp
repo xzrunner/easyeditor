@@ -130,12 +130,12 @@ void IStageCanvas::OnMouse(wxMouseEvent& event)
 
 void IStageCanvas::OnKeyDown(wxKeyEvent& event)
 {
-	m_stage->onKeyDown(event);
+	m_stage->OnKeyDown(event);
 }
 
 void IStageCanvas::OnKeyUp(wxKeyEvent& event)
 {
-	m_stage->onKeyUp(event);
+	m_stage->OnKeyUp(event);
 }
 
 }

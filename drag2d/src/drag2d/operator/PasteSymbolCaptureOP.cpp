@@ -17,7 +17,7 @@ PasteSymbolCaptureOP::PasteSymbolCaptureOP(EditPanel* editPanel, MultiSpritesImp
 	m_lastPos.setInvalid();
 }
 
-bool PasteSymbolCaptureOP::onMouseLeftDown(int x, int y)
+bool PasteSymbolCaptureOP::OnMouseLeftDown(int x, int y)
 {
 	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
@@ -35,9 +35,9 @@ bool PasteSymbolCaptureOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool PasteSymbolCaptureOP::onMouseMove(int x, int y)
+bool PasteSymbolCaptureOP::OnMouseMove(int x, int y)
 {
-	if (ZoomViewOP::onMouseMove(x, y)) return true;
+	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	m_bCaptured = false;
 	m_pos = m_stage->transPosScreenToProject(x, y);
@@ -57,9 +57,9 @@ bool PasteSymbolCaptureOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool PasteSymbolCaptureOP::clear()
+bool PasteSymbolCaptureOP::Clear()
 {
-	if (PasteSymbolOP::clear()) return true;
+	if (PasteSymbolOP::Clear()) return true;
 
 	m_lastPos.setInvalid();
 

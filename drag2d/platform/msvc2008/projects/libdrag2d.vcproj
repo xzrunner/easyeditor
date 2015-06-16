@@ -154,6 +154,10 @@
 			Name="edit_operator"
 			>
 			<File
+				RelativePath="..\..\..\src\drag2d\operator\AbstractEditOP.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\drag2d\operator\AbstractEditOP.h"
 				>
 			</File>

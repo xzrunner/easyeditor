@@ -13,16 +13,16 @@ DrawPencilLineOP::DrawPencilLineOP(d2d::EditPanel* editPanel,
 {
 }
 
-bool DrawPencilLineOP::onMouseLeftUp(int x, int y)
+bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 {
-	if (DrawCurveOP::onMouseLeftUp(x, y)) return true;
+	if (DrawCurveOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_curve.empty())
 	{
 		std::vector<d2d::Vector> simplified;
 		d2d::DouglasPeucker::implement(m_curve, m_simplify->GetValue(), simplified);
 		m_shapesImpl->insertShape(new ChainShape(simplified, false));
-		clear();
+		Clear();
 
 		m_stage->Refresh();
 	}

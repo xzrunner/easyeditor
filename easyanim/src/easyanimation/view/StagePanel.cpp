@@ -132,13 +132,13 @@ SkeletonData& StagePanel::getSkeletonData()
 
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
-	m_editOP->onPopMenuSelected(Menu_AddJointNode);
+	m_editOP->OnPopMenuSelected(Menu_AddJointNode);
 	Refresh();
 }
 
 void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
-	m_editOP->onPopMenuSelected(Menu_DelJointNode);
+	m_editOP->OnPopMenuSelected(Menu_DelJointNode);
 	Refresh();
 }
 

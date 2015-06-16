@@ -20,7 +20,7 @@ public:
 	}
 
 protected:
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	void drawGuideLines();

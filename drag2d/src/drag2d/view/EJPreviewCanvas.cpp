@@ -37,7 +37,7 @@
 //	Shader::Instance()->Release();
 //}
 //
-//void EJPreviewCanvas::onDraw()
+//void EJPreviewCanvas::OnDraw()
 //{
 ////	drawStageData();
 //}

@@ -33,14 +33,14 @@ SelectShapesOP::~SelectShapesOP()
  	m_selection->Release();
 }
 
-bool SelectShapesOP::onKeyDown(int keyCode)
+bool SelectShapesOP::OnKeyDown(int keyCode)
 {
-	if (DrawRectangleOP::onKeyDown(keyCode)) return true;
+	if (DrawRectangleOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
 	{
 		m_shapeImpl->removeShapeSelection();
-		clear();
+		Clear();
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
 	{
@@ -71,7 +71,7 @@ bool SelectShapesOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool SelectShapesOP::onMouseLeftDown(int x, int y)
+bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 {
 	m_bDraggable = true;
 
@@ -109,7 +109,7 @@ bool SelectShapesOP::onMouseLeftDown(int x, int y)
 	}
 	else
 	{
-		DrawRectangleOP::onMouseLeftDown(x, y);
+		DrawRectangleOP::OnMouseLeftDown(x, y);
 		m_firstPos = pos;
 		if (wxGetKeyState(WXK_CONTROL))
 			m_bDraggable = false;
@@ -121,9 +121,9 @@ bool SelectShapesOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool SelectShapesOP::onMouseLeftUp(int x, int y)
+bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 {
-	if (DrawRectangleOP::onMouseLeftUp(x, y)) return true;
+	if (DrawRectangleOP::OnMouseLeftUp(x, y)) return true;
 
 	m_bDraggable = true;
 
@@ -152,25 +152,25 @@ bool SelectShapesOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool SelectShapesOP::onMouseDrag(int x, int y)
+bool SelectShapesOP::OnMouseDrag(int x, int y)
 {
-	if (DrawRectangleOP::onMouseDrag(x, y)) return true;
+	if (DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
 	return !m_bDraggable;
 }
 
-bool SelectShapesOP::onDraw() const
+bool SelectShapesOP::OnDraw() const
 {
-	if (DrawRectangleOP::onDraw()) return true;
+	if (DrawRectangleOP::OnDraw()) return true;
 
 	m_selection->Traverse(DrawSelectedShapeVisitor());
 
 	return false;
 }
 
-bool SelectShapesOP::clear()
+bool SelectShapesOP::Clear()
 {
-	if (DrawRectangleOP::clear()) return true;
+	if (DrawRectangleOP::Clear()) return true;
 
 	clearClipboard();
 	m_selection->Clear();

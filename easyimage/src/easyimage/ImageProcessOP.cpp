@@ -12,9 +12,9 @@ ImageProcessOP::ImageProcessOP(StagePanel* stage)
 {
 }
 
-bool ImageProcessOP::onActive()
+bool ImageProcessOP::OnActive()
 {
-	if (d2d::ZoomViewOP::onActive()) {
+	if (d2d::ZoomViewOP::OnActive()) {
 		return true;
 	}
 

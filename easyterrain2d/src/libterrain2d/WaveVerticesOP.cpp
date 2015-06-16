@@ -12,9 +12,9 @@ WaveVerticesOP::WaveVerticesOP(StagePanel* stage)
 {
 }
 
-bool WaveVerticesOP::onDraw() const
+bool WaveVerticesOP::OnDraw() const
 {
-	if (d2d::ZoomViewOP::onDraw()) {
+	if (d2d::ZoomViewOP::OnDraw()) {
 		return true;
 	}
 

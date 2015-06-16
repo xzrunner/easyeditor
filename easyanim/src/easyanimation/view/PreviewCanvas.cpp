@@ -31,7 +31,7 @@ void PreviewCanvas::initGL()
 	resetViewport();
 }
 
-void PreviewCanvas::onDraw()
+void PreviewCanvas::OnDraw()
 {
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;

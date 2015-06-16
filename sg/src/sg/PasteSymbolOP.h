@@ -12,10 +12,10 @@ class PasteSymbolOP : public d2d::PasteSymbolOP
 public:
 	PasteSymbolOP(StagePanel* stage, d2d::LibraryPanel* library);
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
-	virtual bool onDraw() const;
+	virtual bool OnDraw() const;
 
 private:
 	bool isCurrSymbolValid() const;

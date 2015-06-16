@@ -12,10 +12,10 @@ namespace d2d
 		PasteSymbolRandomOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 			LibraryPanel* libraryPanel, PasteSymbolRandomWidget* randomWidget);
 
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseRightDown(int x, int y);
+		virtual bool OnMouseLeftDown(int x, int y);
+		virtual bool OnMouseRightDown(int x, int y);
 
-		virtual bool onDraw() const;
+		virtual bool OnDraw() const;
 
 	private:
 		void changeRandomValue();

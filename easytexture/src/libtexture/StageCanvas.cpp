@@ -35,7 +35,7 @@ void StageCanvas::initGL()
 	resetViewport();
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	if (m_edited) 
 	{

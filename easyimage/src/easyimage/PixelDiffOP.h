@@ -13,12 +13,12 @@ class PixelDiffOP : public d2d::ZoomViewOP
 public:
 	PixelDiffOP(StagePanel* stage);
 
-	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
 
-	virtual bool onDraw() const;
-	virtual bool clear();
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
-	virtual bool onActive();
+	virtual bool OnActive();
 
 private:
 	StagePanel* m_stage;

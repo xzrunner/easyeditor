@@ -13,12 +13,14 @@ EditBezierOP::EditBezierOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shap
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
 {
-	clear();
+	m_cursor = wxCursor(wxCURSOR_PENCIL);
+
+	Clear();
 }
 
-bool EditBezierOP::onKeyDown(int keyCode)
+bool EditBezierOP::OnKeyDown(int keyCode)
 {
-	if (ZoomViewOP::onKeyDown(keyCode)) return true;
+	if (ZoomViewOP::OnKeyDown(keyCode)) return true;
 
 	if (keyCode == WXK_DELETE)
 	{
@@ -32,9 +34,9 @@ bool EditBezierOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool EditBezierOP::onMouseLeftDown(int x, int y)
+bool EditBezierOP::OnMouseLeftDown(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	m_firstPress = m_currPos = m_stage->transPosScreenToProject(x, y);
 
@@ -60,9 +62,9 @@ bool EditBezierOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditBezierOP::onMouseLeftUp(int x, int y)
+bool EditBezierOP::OnMouseLeftUp(int x, int y)
 {
-	if (ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_captured.shape)
 	{
@@ -87,16 +89,16 @@ bool EditBezierOP::onMouseLeftUp(int x, int y)
  			m_propertyPanel->SetPropertySetting(new BezierPropertySetting(m_stage, bezier));
 	}
 
-	clear();
+	Clear();
 
 	m_stage->Refresh();
 
 	return false;
 }
 
-bool EditBezierOP::onMouseRightDown(int x, int y)
+bool EditBezierOP::OnMouseRightDown(int x, int y)
 {
-	if (ZoomViewOP::onMouseRightDown(x, y)) return true;
+	if (ZoomViewOP::OnMouseRightDown(x, y)) return true;
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
@@ -123,9 +125,9 @@ bool EditBezierOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditBezierOP::onMouseMove(int x, int y)
+bool EditBezierOP::OnMouseMove(int x, int y)
 {
-	if (ZoomViewOP::onMouseMove(x, y)) return true;
+	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
@@ -141,9 +143,9 @@ bool EditBezierOP::onMouseMove(int x, int y)
 	return false;
 }
 
-bool EditBezierOP::onMouseDrag(int x, int y)
+bool EditBezierOP::OnMouseDrag(int x, int y)
 {
-	if (ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	m_currPos = m_stage->transPosScreenToProject(x, y);
 
@@ -169,9 +171,9 @@ bool EditBezierOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditBezierOP::onDraw() const
+bool EditBezierOP::OnDraw() const
 {
-	if (ZoomViewOP::onDraw()) return true;
+	if (ZoomViewOP::OnDraw()) return true;
 
 	if (m_captured.shape)
 	{
@@ -201,9 +203,9 @@ bool EditBezierOP::onDraw() const
 	return false;
 }
 
-bool EditBezierOP::clear()
+bool EditBezierOP::Clear()
 {
-	if (ZoomViewOP::clear()) return true;
+	if (ZoomViewOP::Clear()) return true;
 
 	m_firstPress.setInvalid();
 	m_currPos.setInvalid();

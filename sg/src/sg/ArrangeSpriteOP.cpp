@@ -10,15 +10,15 @@ ArrangeSpriteOP::ArrangeSpriteOP(d2d::PropertySettingPanel* property, StagePanel
 {
 }
 
-bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
+bool ArrangeSpriteOP::OnMouseLeftUp(int x, int y)
 {
 	static_cast<StagePanel*>(m_stage)->GetCheckBoard().ClearRemovedCache();
-	return d2d::ArrangeSpriteFixOP::onMouseLeftUp(x, y);
+	return d2d::ArrangeSpriteFixOP::OnMouseLeftUp(x, y);
 }
 
-bool ArrangeSpriteOP::onMouseLeftDClick(int x, int y)
+bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 {
-	if (d2d::ArrangeSpriteFixOP::onMouseLeftDClick(x, y)) {
+	if (d2d::ArrangeSpriteFixOP::OnMouseLeftDClick(x, y)) {
 		return true;
 	}
 

@@ -11,12 +11,12 @@ class DrawCurveOP : public d2d::ZoomViewOP
 public:
 	DrawCurveOP(d2d::EditPanel* editPanel);
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
-	virtual bool onDraw() const;
-	virtual bool clear();
+	virtual bool OnDraw() const;
+	virtual bool Clear();
 
 protected:
 	std::vector<d2d::Vector> m_curve;

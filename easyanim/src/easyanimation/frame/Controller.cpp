@@ -51,7 +51,7 @@ void Controller::setCurrFrame(int layer, int frame)
 		m_widgets->m_layersPanel->Refresh();
 	}
 
-	GetStagePanel()->getEditOP()->clear();
+	GetStagePanel()->getEditOP()->Clear();
 }
 
 void Controller::UpdateCurrFrame()

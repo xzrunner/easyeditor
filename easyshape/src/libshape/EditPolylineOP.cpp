@@ -27,54 +27,54 @@ libshape::EditPolylineOP<TBase, TSelected>::
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onKeyDown(int keyCode) 
+OnKeyDown(int keyCode) 
 {
 	return m_impl->OnKeyDown(keyCode);
 }
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onMouseLeftDown(int x, int y) 
+OnMouseLeftDown(int x, int y) 
 {
 	return m_impl->OnMouseLeftDown(x, y);
 }
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onMouseLeftUp(int x, int y) 
+OnMouseLeftUp(int x, int y) 
 {
-	if (TBase::onMouseLeftUp(x, y)) return true;
+	if (TBase::OnMouseLeftUp(x, y)) return true;
 	return m_impl->OnMouseLeftUp(x, y);
 }
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onMouseRightDown(int x, int y) 
+OnMouseRightDown(int x, int y) 
 {
 	return m_impl->OnMouseRightDown(x, y);
 }
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onMouseMove(int x, int y) 
+OnMouseMove(int x, int y) 
 {
-	if (TBase::onMouseMove(x, y)) return true;
+	if (TBase::OnMouseMove(x, y)) return true;
 	return m_impl->OnMouseMove(x, y);
 }
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onMouseDrag(int x, int y) 
+OnMouseDrag(int x, int y) 
 {
-	if (TBase::onMouseDrag(x, y)) return true;
+	if (TBase::OnMouseDrag(x, y)) return true;
 	return m_impl->OnMouseDrag(x, y);
 }
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
-onDraw() const 
+OnDraw() const 
 {
-	if (TBase::onDraw()) return true;
+	if (TBase::OnDraw()) return true;
 	m_impl->OnDraw();
 	return false;
 }
@@ -83,7 +83,7 @@ template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
 clear() 
 {
-	if (TBase::clear()) return true;
+	if (TBase::Clear()) return true;
 	m_impl->Clear();
 	return false;
 }
@@ -92,14 +92,14 @@ template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
 OnMouseLeftDownBase(int x, int y)
 {
-	return TBase::onMouseLeftDown(x, y);
+	return TBase::OnMouseLeftDown(x, y);
 }
 
 template <typename TBase, typename TSelected>
 bool libshape::EditPolylineOP<TBase, TSelected>::
 OnMouseRightDownBase(int x, int y)
 {
-	return TBase::onMouseRightDown(x, y);
+	return TBase::OnMouseRightDown(x, y);
 }
 
 template <typename TBase, typename TSelected>

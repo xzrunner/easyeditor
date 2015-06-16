@@ -14,8 +14,8 @@ public:
 	DrawPencilPolygonOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 		d2d::OneFloatValue* simplify, DrawPencilPolygonCMPT* cmpt);
 
-	virtual bool onKeyDown(int keyCode);
-	virtual bool onMouseLeftUp(int x, int y);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftUp(int x, int y);
 
 private:
 	void NewPolygon(const std::vector<d2d::Vector>& poly);

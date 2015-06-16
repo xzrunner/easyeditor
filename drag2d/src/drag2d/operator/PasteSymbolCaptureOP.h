@@ -16,10 +16,10 @@ namespace d2d
 		PasteSymbolCaptureOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 			LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* cmpt);
 
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseMove(int x, int y);
+		virtual bool OnMouseLeftDown(int x, int y);
+		virtual bool OnMouseMove(int x, int y);
 
-		virtual bool clear();
+		virtual bool Clear();
 
 	private:
 		PasteSymbolOffsetCMPT<PasteSymbolCaptureOP>* m_cmpt;

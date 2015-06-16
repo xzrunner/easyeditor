@@ -25,12 +25,12 @@ UniversalArrangeOP::~UniversalArrangeOP()
 	m_editOP = NULL;
 }
 
-bool UniversalArrangeOP::onKeyDown(int keyCode)
+bool UniversalArrangeOP::OnKeyDown(int keyCode)
 {
-	return m_editOP->onKeyDown(keyCode);	
+	return m_editOP->OnKeyDown(keyCode);	
 }
 
-bool UniversalArrangeOP::onMouseLeftDown(int x, int y)
+bool UniversalArrangeOP::OnMouseLeftDown(int x, int y)
 {
 	m_editOP = m_noPhysics;
 
@@ -44,37 +44,37 @@ bool UniversalArrangeOP::onMouseLeftDown(int x, int y)
 		}
 	}
 
-	return m_editOP->onMouseLeftDown(x, y);
+	return m_editOP->OnMouseLeftDown(x, y);
 }
 
-bool UniversalArrangeOP::onMouseLeftUp(int x, int y)
+bool UniversalArrangeOP::OnMouseLeftUp(int x, int y)
 {
-	return m_editOP->onMouseLeftUp(x, y);
+	return m_editOP->OnMouseLeftUp(x, y);
 }
 
-bool UniversalArrangeOP::onMouseRightDown(int x, int y)
+bool UniversalArrangeOP::OnMouseRightDown(int x, int y)
 {
-	return m_editOP->onMouseRightDown(x, y);
+	return m_editOP->OnMouseRightDown(x, y);
 }
 
-bool UniversalArrangeOP::onMouseRightUp(int x, int y)
+bool UniversalArrangeOP::OnMouseRightUp(int x, int y)
 {
-	return m_editOP->onMouseRightUp(x, y);
+	return m_editOP->OnMouseRightUp(x, y);
 }
 
-bool UniversalArrangeOP::onMouseDrag(int x, int y)
+bool UniversalArrangeOP::OnMouseDrag(int x, int y)
 {
-	return m_editOP->onMouseDrag(x, y);
+	return m_editOP->OnMouseDrag(x, y);
 }
 
-bool UniversalArrangeOP::onDraw() const
+bool UniversalArrangeOP::OnDraw() const
 {
-	return m_editOP->onDraw();
+	return m_editOP->OnDraw();
 }
 
-bool UniversalArrangeOP::clear()
+bool UniversalArrangeOP::Clear()
 {
-	return m_editOP->clear();
+	return m_editOP->Clear();
 }
 
 void UniversalArrangeOP::addPhysicsEditOP(b2World* world, b2Body* ground)

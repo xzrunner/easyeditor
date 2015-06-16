@@ -17,11 +17,11 @@ namespace d2d
 		PasteSymbolTileOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
 			LibraryPanel* libraryPanel, PasteSymbolOffsetCMPT<PasteSymbolTileOP>* cmpt);
 
-		virtual bool onMouseLeftDown(int x, int y);
-		virtual bool onMouseRightDown(int x, int y);
-		virtual bool onMouseMove(int x, int y);
+		virtual bool OnMouseLeftDown(int x, int y);
+		virtual bool OnMouseRightDown(int x, int y);
+		virtual bool OnMouseMove(int x, int y);
 
-		virtual bool onDraw() const;
+		virtual bool OnDraw() const;
 
 	private:
 		class NearestQueryVisitor : public IVisitor

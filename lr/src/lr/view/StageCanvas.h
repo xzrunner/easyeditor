@@ -16,7 +16,7 @@ public:
 	void BuildGrids(int w, int h);
 
 protected:
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	void DrawRegion() const;

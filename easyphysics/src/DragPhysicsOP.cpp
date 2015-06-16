@@ -14,9 +14,9 @@ DragPhysicsOP::DragPhysicsOP(d2d::EditPanel* editPanel, b2World* world, b2Body* 
 	currPos.setInvalid();
 }
 
-bool DragPhysicsOP::onMouseLeftDown(int x, int y)
+bool DragPhysicsOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
 	if (m_mouseJoint) return false;
 
@@ -36,9 +36,9 @@ bool DragPhysicsOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool DragPhysicsOP::onMouseLeftUp(int x, int y)
+bool DragPhysicsOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseLeftUp(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_mouseJoint)
 	{
@@ -50,9 +50,9 @@ bool DragPhysicsOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool DragPhysicsOP::onMouseDrag(int x, int y)
+bool DragPhysicsOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::ZoomViewOP::onMouseDrag(x, y)) return true;
+	if (d2d::ZoomViewOP::OnMouseDrag(x, y)) return true;
 
 	if (m_mouseJoint)
 	{

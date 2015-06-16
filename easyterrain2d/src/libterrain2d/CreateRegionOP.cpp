@@ -9,9 +9,9 @@ CreateRegionOP::CreateRegionOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* 
 {
 }
 
-bool CreateRegionOP::onDraw() const
+bool CreateRegionOP::OnDraw() const
 {
-	if (libshape::DrawPolygonOP::onDraw()) {
+	if (libshape::DrawPolygonOP::OnDraw()) {
 		return true;
 	}
 

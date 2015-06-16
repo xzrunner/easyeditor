@@ -13,7 +13,7 @@ class DrawComplexPolygonOP : public DrawPolylineOP
 public:
 	DrawComplexPolygonOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 private:
 	ComplexPolygonShape* CreateComplexPoly(const std::vector<d2d::Vector>& polyline);

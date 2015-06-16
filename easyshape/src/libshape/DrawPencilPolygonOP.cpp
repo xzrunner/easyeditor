@@ -16,9 +16,9 @@ DrawPencilPolygonOP::DrawPencilPolygonOP(d2d::EditPanel* editPanel,
 {
 }
 
-bool DrawPencilPolygonOP::onKeyDown(int keyCode)
+bool DrawPencilPolygonOP::OnKeyDown(int keyCode)
 {
-	if (DrawCurveOP::onKeyDown(keyCode)) {
+	if (DrawCurveOP::OnKeyDown(keyCode)) {
 		return true;
 	}
 
@@ -33,16 +33,16 @@ bool DrawPencilPolygonOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool DrawPencilPolygonOP::onMouseLeftUp(int x, int y)
+bool DrawPencilPolygonOP::OnMouseLeftUp(int x, int y)
 {
-	if (DrawCurveOP::onMouseLeftUp(x, y)) return true;
+	if (DrawCurveOP::OnMouseLeftUp(x, y)) return true;
 
 	if (!m_curve.empty())
 	{
 		std::vector<d2d::Vector> simplified;
 		d2d::DouglasPeucker::implement(m_curve, m_simplify->GetValue(), simplified);
 		NewPolygon(simplified);
-		clear();
+		Clear();
 
 		m_stage->Refresh();
 	}

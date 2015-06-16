@@ -98,7 +98,7 @@ void AbstractEditCMPT::loadEditOP(AbstractEditOP* op)
 		op->Retain();
 	}
 	if (m_editOP) {
-		m_editOP->clear();
+		m_editOP->Clear();
 		m_editOP->Release();
 	}
 	m_editOP = op;
@@ -117,7 +117,7 @@ void AbstractEditCMPT::loadEditOP(AbstractEditCMPT* cmpt)
 	}
 	if (cmpt->m_editOP)
 	{
-		cmpt->m_editOP->clear();
+		cmpt->m_editOP->Clear();
 		cmpt->m_editOP->Release();
 	}
 	cmpt->m_editOP = m_editOP;

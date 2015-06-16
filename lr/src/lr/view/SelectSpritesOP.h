@@ -13,8 +13,8 @@ public:
 		d2d::PropertySettingPanel* propertyPanel = NULL, d2d::ViewPanelMgr* view_panel_mgr = NULL,
 		d2d::AbstractEditCMPT* callback = NULL);
 
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 private:
 	d2d::Vector m_first_press;

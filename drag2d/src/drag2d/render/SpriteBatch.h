@@ -27,7 +27,7 @@ namespace d2d
 		void* lock();
 		void unlock();
 
-		void onDraw() const;
+		void OnDraw() const;
 
 		int getAndResetDrawTimes() {
 			int times = m_drawTimes;

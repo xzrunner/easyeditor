@@ -22,11 +22,11 @@ void KeyDownHandler::process(int keyCode) const
 	{
 	case 'z': case 'Z':
 		m_ctrl->setPrevKeyFrame();
-		m_editop->clear();
+		m_editop->Clear();
 		break;
 	case 'x': case 'X':
 		m_ctrl->setNextKeyFrame();
-		m_editop->clear();
+		m_editop->Clear();
 		break;
 	}
 }

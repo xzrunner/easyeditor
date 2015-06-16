@@ -21,7 +21,7 @@ void StageCanvas::initGL()
 	resetViewport();
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	const d2d::ISprite* bg = m_panel->GetBackground();
 	if (bg) {

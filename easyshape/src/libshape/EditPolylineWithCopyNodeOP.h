@@ -16,9 +16,9 @@ public:
 		: EditPolylineOP<T, SelectNodesOP>(editPanel, shapesImpl, propertyPanel, NULL, NULL)
 	{}
 
-	virtual bool onKeyDown(int keyCode)
+	virtual bool OnKeyDown(int keyCode)
 	{
-		if (EditPolylineOP<T, SelectNodesOP>::onKeyDown(keyCode)) 
+		if (EditPolylineOP<T, SelectNodesOP>::OnKeyDown(keyCode)) 
 			return true;
 
 		// todo EditPolylineOP 

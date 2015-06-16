@@ -11,9 +11,9 @@ class AutoTriCutOP : public d2d::ZoomViewOP
 public:
 	AutoTriCutOP(d2d::EditPanel* stage);
 
-	virtual bool onActive();
+	virtual bool OnActive();
 
-	virtual bool onDraw() const;
+	virtual bool OnDraw() const;
 
 private:
 	std::vector<d2d::Vector> m_raw_bound_line;

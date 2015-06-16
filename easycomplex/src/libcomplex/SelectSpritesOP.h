@@ -13,8 +13,8 @@ public:
 		d2d::PropertySettingPanel* propertyPanel, d2d::ViewPanelMgr* view_panel_mgr,
 		d2d::AbstractEditCMPT* callback = NULL);
 
-//		virtual bool onKeyDown(int keyCode);
-	virtual bool onMouseLeftDClick(int x, int y);
+//		virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 	virtual d2d::IPropertySetting* createPropertySetting(d2d::ISprite* sprite) const;
 

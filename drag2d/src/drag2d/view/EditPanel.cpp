@@ -39,7 +39,7 @@ EditPanel::~EditPanel()
 void EditPanel::clear()
 {
 	if (m_editOP) {
-		m_editOP->clear();
+		m_editOP->Clear();
 	}
 
 	m_historyList.clear();
@@ -58,7 +58,7 @@ Vector EditPanel::transPosProjectToScreen(const Vector& proj) const
 void EditPanel::drawEditTemp() const
 {
 	if (m_editOP) {
-		m_editOP->onDraw();
+		m_editOP->OnDraw();
 	}
 }
 
@@ -73,12 +73,12 @@ void EditPanel::setEditOP(AbstractEditOP* editOP)
 	}
 	if (m_editOP)
 	{
-		m_editOP->clear();
+		m_editOP->Clear();
 		m_editOP->Release();
 	}
 	m_editOP = editOP;
 	if (m_editOP) {
-		m_editOP->onActive();
+		m_editOP->OnActive();
 	}
 	Refresh();
 }
@@ -98,26 +98,26 @@ void EditPanel::onMouse(wxMouseEvent& event)
 	if (!m_editOP) return;
 
 	if (event.LeftDown())
-		m_editOP->onMouseLeftDown(event.GetX(), event.GetY());
+		m_editOP->OnMouseLeftDown(event.GetX(), event.GetY());
 	else if (event.LeftUp())
-		m_editOP->onMouseLeftUp(event.GetX(), event.GetY());
+		m_editOP->OnMouseLeftUp(event.GetX(), event.GetY());
 	else if (event.RightDown())
-		m_editOP->onMouseRightDown(event.GetX(), event.GetY());
+		m_editOP->OnMouseRightDown(event.GetX(), event.GetY());
 	else if (event.RightUp())
-		m_editOP->onMouseRightUp(event.GetX(), event.GetY());
+		m_editOP->OnMouseRightUp(event.GetX(), event.GetY());
 	else if (event.Moving())
-		m_editOP->onMouseMove(event.GetX(), event.GetY());
+		m_editOP->OnMouseMove(event.GetX(), event.GetY());
 	else if (event.Dragging())
-		m_editOP->onMouseDrag(event.GetX(), event.GetY());
+		m_editOP->OnMouseDrag(event.GetX(), event.GetY());
 	else if (event.LeftDClick())
-		m_editOP->onMouseLeftDClick(event.GetX(), event.GetY());
+		m_editOP->OnMouseLeftDClick(event.GetX(), event.GetY());
 	else if (event.GetWheelRotation())
-		m_editOP->onMouseWheelRotation(event.GetX(), event.GetY(), event.GetWheelRotation());
+		m_editOP->OnMouseWheelRotation(event.GetX(), event.GetY(), event.GetWheelRotation());
 
 	OnMouseHook(event);
 }
 
-void EditPanel::onKeyDown(wxKeyEvent& event)
+void EditPanel::OnKeyDown(wxKeyEvent& event)
 {
 	if (wxGetKeyState(WXK_CONTROL_Z) && wxGetKeyState(WXK_CONTROL))
 		undo();
@@ -138,16 +138,16 @@ void EditPanel::onKeyDown(wxKeyEvent& event)
 	}
 	
 	if (m_editOP) {
-		m_editOP->onKeyDown(key_code);
+		m_editOP->OnKeyDown(key_code);
 	}
 
 	OnKeyHook(key_code);
 }
 
-void EditPanel::onKeyUp(wxKeyEvent& event)
+void EditPanel::OnKeyUp(wxKeyEvent& event)
 {
 	if (m_editOP) {
-		m_editOP->onKeyUp(event.GetKeyCode());
+		m_editOP->OnKeyUp(event.GetKeyCode());
 	}
 }
 
@@ -290,7 +290,7 @@ void EditPanel::onSize(wxSizeEvent& event)
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
 	if (m_editOP) {
-		m_editOP->onPopMenuSelected(event.GetId());
+		m_editOP->OnPopMenuSelected(event.GetId());
 		Refresh();
 	}
 }

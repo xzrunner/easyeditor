@@ -44,7 +44,7 @@ void StageCanvas::initGL()
 	resetViewport();
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	m_stat.Begin();
 

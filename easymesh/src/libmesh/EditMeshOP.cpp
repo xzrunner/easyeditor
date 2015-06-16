@@ -19,7 +19,7 @@ EditMeshOP::EditMeshOP(StagePanel* stage)
 	m_center.set(0, 0);
 }
 
-bool EditMeshOP::onMouseLeftDown(int x, int y)
+bool EditMeshOP::OnMouseLeftDown(int x, int y)
 {
 	m_lastPos = m_stage->transPosScreenToProject(x, y);
 	if (d2d::Math::getDistance(m_lastPos, m_center) < CENTER_RADIUS)
@@ -28,7 +28,7 @@ bool EditMeshOP::onMouseLeftDown(int x, int y)
 		return false;
 	}
 
-	if (SelectNodesOP::onMouseLeftDown(x, y))
+	if (SelectNodesOP::OnMouseLeftDown(x, y))
 		return true;
 
 	m_bRightPress = false;
@@ -36,9 +36,9 @@ bool EditMeshOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::onMouseLeftUp(int x, int y)
+bool EditMeshOP::OnMouseLeftUp(int x, int y)
 {
-	if (SelectNodesOP::onMouseLeftUp(x, y))
+	if (SelectNodesOP::OnMouseLeftUp(x, y))
 		return true;
 
 	m_selCenter = false;
@@ -46,9 +46,9 @@ bool EditMeshOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::onMouseRightDown(int x, int y)
+bool EditMeshOP::OnMouseRightDown(int x, int y)
 {
-	if (SelectNodesOP::onMouseRightDown(x, y))
+	if (SelectNodesOP::OnMouseRightDown(x, y))
 		return true;
 
 	m_lastPos = m_stage->transPosScreenToProject(x, y);
@@ -58,7 +58,7 @@ bool EditMeshOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::onMouseDrag(int x, int y)
+bool EditMeshOP::OnMouseDrag(int x, int y)
 {
 	if (m_selCenter)
 	{
@@ -68,7 +68,7 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 		return true;
 	}
 
-	if (SelectNodesOP::onMouseDrag(x, y))
+	if (SelectNodesOP::OnMouseDrag(x, y))
 		return true;
 
 	Shape* shape = m_stage->GetShape();
@@ -88,7 +88,7 @@ bool EditMeshOP::onMouseDrag(int x, int y)
 	return false;
 }
 
-bool EditMeshOP::onDraw() const
+bool EditMeshOP::OnDraw() const
 {
 	if (Shape* shape = m_stage->GetShape())
 	{
@@ -99,7 +99,7 @@ bool EditMeshOP::onDraw() const
 	d2d::PrimitiveDraw::cross(m_center, CENTER_EDGE, d2d::Colorf(0.2f, 0.8f, 0.4f));
 	d2d::PrimitiveDraw::drawCircle(m_center, CENTER_RADIUS, true, 2, d2d::Colorf(0.2f, 0.4f, 0.8f));
 
-	if (SelectNodesOP::onDraw())
+	if (SelectNodesOP::OnDraw())
 		return true;
 
 	return false;

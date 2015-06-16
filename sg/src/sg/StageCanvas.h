@@ -20,7 +20,7 @@ public:
 	static d2d::Vector TransToFlatView(const d2d::Vector& pos);
 
 protected:
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	void DrawBackground() const;

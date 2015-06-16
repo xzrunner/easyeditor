@@ -11,7 +11,7 @@ class DrawPolygonOP : public DrawPolylineOP
 public:
 	DrawPolygonOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl);
 
-	virtual bool onMouseLeftDClick(int x, int y);
+	virtual bool OnMouseLeftDClick(int x, int y);
 
 protected:
 	d2d::MultiShapesImpl* m_shapesImpl;

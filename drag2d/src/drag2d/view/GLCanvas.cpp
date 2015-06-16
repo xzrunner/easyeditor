@@ -21,8 +21,8 @@ BEGIN_EVENT_TABLE(GLCanvas, wxGLCanvas)
 	EVT_PAINT(GLCanvas::onPaint)
 	EVT_ERASE_BACKGROUND(GLCanvas::onEraseBackground)
  	EVT_MOUSE_EVENTS(GLCanvas::onMouse)
- 	EVT_KEY_DOWN(GLCanvas::onKeyDown)
-	EVT_KEY_UP(GLCanvas::onKeyUp)
+ 	EVT_KEY_DOWN(GLCanvas::OnKeyDown)
+	EVT_KEY_UP(GLCanvas::OnKeyUp)
 END_EVENT_TABLE()
 
 int gl_attrib[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN, 1,
@@ -115,7 +115,7 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 	glClearColor(m_bgColor.r, m_bgColor.g, m_bgColor.b, m_bgColor.a);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	onDraw();
+	OnDraw();
 
 	if (RenderContext::SHADER_MGR) {
 		RenderContext::SHADER_MGR->Flush();
@@ -143,14 +143,14 @@ void GLCanvas::onMouse(wxMouseEvent& event)
 	}
 }
 
-void GLCanvas::onKeyDown(wxKeyEvent& event)
+void GLCanvas::OnKeyDown(wxKeyEvent& event)
 {
-	m_stage->onKeyDown(event);
+	m_stage->OnKeyDown(event);
 }
 
-void GLCanvas::onKeyUp(wxKeyEvent& event)
+void GLCanvas::OnKeyUp(wxKeyEvent& event)
 {
-	m_stage->onKeyUp(event);
+	m_stage->OnKeyUp(event);
 }
 
 } // d2d
