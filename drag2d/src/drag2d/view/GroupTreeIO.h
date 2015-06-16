@@ -23,6 +23,7 @@ private:
 		std::string name;
 		std::string parent;
 		std::string sprite;
+		bool visible, editable;
 	}; 
 
 private:

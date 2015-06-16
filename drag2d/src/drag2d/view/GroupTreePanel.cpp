@@ -3,6 +3,8 @@
 #include "GroupTreeImpl.h"
 #include "GroupTreeIO.h"
 
+#include "dataset/Group.h"
+
 #include <wx/wx.h>
 
 namespace d2d
@@ -66,12 +68,16 @@ void GroupTreePanel::Remove(ISprite* sprite)
 
 void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<d2d::ISprite*> >& groups)
 {
+	if (groups.empty()) {
+		return;
+	}
+
 	std::vector<wxTreeItemId> groups_id;
 	std::map<std::string, std::vector<d2d::ISprite*> >::const_iterator itr
 		= groups.begin();
 	for ( ; itr != groups.end(); ++itr)
 	{
-		wxTreeItemId id = m_grouptree->AddNode(itr->first);
+		wxTreeItemId id = m_grouptree->AddNode(itr->first, m_grouptree->GetRootID());
 		groups_id.push_back(id);
 		for (int i = 0, n = itr->second.size(); i < n; ++i) {
 			m_grouptree->AddSprite(id, itr->second[i]);
@@ -79,13 +85,11 @@ void GroupTreePanel::InitGroups(const std::map<std::string, std::vector<d2d::ISp
 	}
 
 	for (int i = 0, n = groups_id.size(); i < n; ++i) {
-		m_grouptree->Visible(groups_id[i], false);
-		m_grouptree->Editable(groups_id[i], false);
+		m_grouptree->Traverse(groups_id[i], GroupTreeImpl::SetVisibleVisitor(m_grouptree, false));
+		m_grouptree->Traverse(groups_id[i], GroupTreeImpl::SetEditableVisitor(m_grouptree, false));
 	}
-	if (!groups_id.empty()) {
-		m_grouptree->Visible(groups_id[0], true);
-		m_grouptree->Editable(groups_id[0], true);
-	}
+	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetVisibleVisitor(m_grouptree, true));
+	m_grouptree->Traverse(groups_id[0], GroupTreeImpl::SetEditableVisitor(m_grouptree, true));
 }
 
 void GroupTreePanel::Clear()

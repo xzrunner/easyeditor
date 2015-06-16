@@ -12,7 +12,7 @@ namespace d2d
 class Group : public Object
 {
 public:
-	Group(const std::string& name);
+	Group(const std::string& name, bool visible = true, bool editable = true);
 	virtual ~Group();
 
 	void SetName(const std::string& name) { m_name = name; }
@@ -25,8 +25,17 @@ public:
 
 	void Clear();
 
+	bool GetEditable() const { return m_editable; }
+	void SetEditable(bool editable) { m_editable = editable; }
+
+	bool GetVisible() const { return m_visible; }
+	void SetVisible(bool visible) { m_visible = visible; }
+
 private:
 	std::string m_name;
+
+	bool m_visible;
+	bool m_editable;
 
 	ObjectVector<ISprite> m_sprites;
 	ObjectVector<IShape> m_shapes;

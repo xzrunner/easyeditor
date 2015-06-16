@@ -23,10 +23,12 @@ public:
 		ViewPanelMgr* view_panel_mgr);
 
 	void Traverse(IGroupTreeVisitor& visitor) const;
+	void Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const;
 
 	wxTreeItemId AddNode();
 	wxTreeItemId AddNode(const std::string& name);
-	wxTreeItemId AddNode(const std::string& name, wxTreeItemId parent);
+	wxTreeItemId AddNode(const std::string& name, wxTreeItemId parent,
+		bool visible = true, bool editable = true);
 	void DelNode();
 
 	wxTreeItemId AddSprite(wxTreeItemId parent, d2d::ISprite* spr);
@@ -37,9 +39,6 @@ public:
 	void Remove(ISprite* sprite);
 
 	wxTreeItemId GetRootID() const { return m_root; }
-
-	void Visible(wxTreeItemId id, bool visible);
-	void Editable(wxTreeItemId id, bool editable);
 
 	void ReorderItem(wxTreeItemId id, bool up);
 
@@ -72,8 +71,6 @@ private:
 	void ReorderSprites();
 
 	void ShowMenu(wxTreeItemId id, const wxPoint& pt);
-
-	void Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const;
 
 private:
 	enum

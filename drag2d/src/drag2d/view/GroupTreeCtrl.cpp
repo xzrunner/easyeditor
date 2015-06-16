@@ -43,6 +43,36 @@ void GroupTreeCtrl::Traverse(IGroupTreeVisitor& visitor) const
 	Traverse(m_root, visitor);
 }
 
+void GroupTreeCtrl::Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const
+{
+	std::queue<wxTreeItemId> buf;
+	buf.push(id);
+	while (!buf.empty()) {
+		wxTreeItemId item = buf.front(); buf.pop();
+
+		wxTreeItemIdValue cookie;
+		wxTreeItemId id = GetFirstChild(item, cookie);
+		if (id.IsOk()) {
+			if (item != id) {
+				bool finish = visitor.VisitNonleaf(item);
+				if (finish) {
+					break;
+				}
+			}
+
+			while (id.IsOk()) {
+				buf.push(id);
+				id = GetNextSibling(id);
+			}
+		} else {
+			bool finish = visitor.VisitLeaf(item);
+			if (finish) {
+				break;
+			}
+		}
+	}
+}
+
 wxTreeItemId GroupTreeCtrl::AddNode()
 {
 	static int s_num = 0;
@@ -72,9 +102,10 @@ wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name)
 	return ret;
 }
 
-wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name, wxTreeItemId parent)
+wxTreeItemId GroupTreeCtrl::AddNode(const std::string& name, wxTreeItemId parent,
+									bool visible, bool editable)
 {
-	GroupTreeItem* data = new GroupTreeGroupItem(new Group(name));
+	GroupTreeItem* data = new GroupTreeGroupItem(new Group(name, visible, editable));
 	wxTreeItemId ret = AddNode(parent, name, data);
 	SetItemBold(ret, true);
 	SelectItem(ret);
@@ -147,16 +178,6 @@ void GroupTreeCtrl::Remove(ISprite* sprite)
 	if (m_add_del_open) {
 		Traverse(GroupTreeImpl::RemoveVisitor(this, sprite));
 	}
-}
-
-void GroupTreeCtrl::Visible(wxTreeItemId id, bool visible)
-{
-	Traverse(id, GroupTreeImpl::SetVisibleVisitor(this, visible));
-}
-
-void GroupTreeCtrl::Editable(wxTreeItemId id, bool editable)
-{
-	Traverse(id, GroupTreeImpl::SetEditableVisitor(this, editable));
 }
 
 void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
@@ -479,36 +500,6 @@ void GroupTreeCtrl::ShowMenu(wxTreeItemId id, const wxPoint& pt)
 	Bind(wxEVT_COMMAND_MENU_SELECTED, &GroupTreeCtrl::OnMenuEditable, this, ID_MENU_EDITABLE);
 
 	PopupMenu(&menu, pt);
-}
-
-void GroupTreeCtrl::Traverse(wxTreeItemId id, IGroupTreeVisitor& visitor) const
-{
-	std::queue<wxTreeItemId> buf;
-	buf.push(id);
-	while (!buf.empty()) {
-		wxTreeItemId item = buf.front(); buf.pop();
-
-		wxTreeItemIdValue cookie;
-		wxTreeItemId id = GetFirstChild(item, cookie);
-		if (id.IsOk()) {
-			if (item != id) {
-				bool finish = visitor.VisitNonleaf(item);
-				if (finish) {
-					break;
-				}
-			}
-
-			while (id.IsOk()) {
-				buf.push(id);
-				id = GetNextSibling(id);
-			}
-		} else {
-			bool finish = visitor.VisitLeaf(item);
-			if (finish) {
-				break;
-			}
-		}
-	}
 }
 
 }

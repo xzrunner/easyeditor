@@ -139,12 +139,14 @@ void Task::LoadGroupTree(const char* filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	m_grouptree->LoadFromFile(value["group"]);
-
-	std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
-	std::vector<d2d::ISprite*> others;
-	libcoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
-	m_grouptree->InitGroups(map_actions);
+	if (!value["group"].isNull()) {
+		m_grouptree->LoadFromFile(value["group"]);
+	} else {
+		std::map<std::string, std::vector<d2d::ISprite*> > map_actions;
+		std::vector<d2d::ISprite*> others;
+		libcoco::Utility::GroupSpritesFromTag(m_stage->getSymbol()->m_sprites, map_actions, others);
+		m_grouptree->InitGroups(map_actions);
+	}
 }
 
 void Task::StoreGroupTree(const char* filepath) const

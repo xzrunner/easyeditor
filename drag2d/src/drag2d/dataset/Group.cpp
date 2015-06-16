@@ -3,8 +3,10 @@
 namespace d2d
 {
 
-Group::Group(const std::string& name)
+Group::Group(const std::string& name, bool visible, bool editable)
 	: m_name(name)
+	, m_visible(visible)
+	, m_editable(editable)
 {
 }
 
@@ -15,7 +17,12 @@ Group::~Group()
 
 void Group::TraverseSprite(IVisitor& visitor, DataTraverseType type, bool order) const
 {
-	m_sprites.Traverse(visitor, type, order);
+	if (type == DT_EDITABLE && m_editable ||
+		type == DT_VISIBLE && m_visible ||
+		type == DT_ALL || type == DT_SELECTABLE)
+	{
+		m_sprites.Traverse(visitor, type, order);
+	}
 }
 
 bool Group::Insert(ISprite* sprite)
@@ -23,6 +30,8 @@ bool Group::Insert(ISprite* sprite)
 	if (m_sprites.IsExist(sprite)) {
 		return false;
 	} else {
+		sprite->visiable = m_visible;
+		sprite->editable = m_editable;
 		m_sprites.Insert(sprite);
 		return true;
 	}

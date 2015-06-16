@@ -55,7 +55,8 @@ void GroupTreeIO::Load(const Json::Value& value)
 						}
 					}
 				} else {
-					wxTreeItemId id = m_tree->AddNode(node.name, candidate.second);
+					wxTreeItemId id = m_tree->AddNode(node.name, candidate.second, 
+						node.visible, node.editable);
 					candidates.push(std::make_pair(node.name, id));
 				}
 				itr = nodes.erase(itr);
@@ -80,10 +81,20 @@ void GroupTreeIO::LoadToNodes(const Json::Value& value, std::vector<Node>& nodes
 		node.name = node_val["name"].asString();
 		node.parent = node_val["parent"].asString();
 		node.sprite = node_val["sprite"].asString();
+		if (!node_val["visible"].isNull()) {
+			node.visible = node_val["visible"].asBool();
+		} else {
+			node.visible = true;
+		}
+		if (!node_val["editable"].isNull()) {
+			node.editable = node_val["editable"].asBool();
+		} else {
+			node.editable = true;
+		}
+
 		if (node.name != "root") {
 			nodes.push_back(node);
 		}
-
 		node_val = value["node"][idx++];
 	}
 }
