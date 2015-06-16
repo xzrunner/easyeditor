@@ -46,6 +46,8 @@ private:
 
 	void LoadFromBaseFile(int layer_idx, const std::string& filepath, const std::string& dir);
 
+	void CheckSpriteName(d2d::ISprite* spr);
+
 private:
 	struct UserData
 	{
@@ -63,6 +65,9 @@ private:
 	d2d::ObjectVector<d2d::IShape> m_shapes;
 
 	std::string m_base_filepath;
+
+	int m_next_id;
+	std::set<std::string> m_name_set;
 
 }; // Layer
 

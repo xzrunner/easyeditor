@@ -8,6 +8,7 @@ namespace lr
 Layer::Layer()
 	: m_editable(true)
 	, m_visible(true)
+	, m_next_id(0)
 {	
 }
 
@@ -27,16 +28,23 @@ void Layer::TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type, b
 
 bool Layer::RemoveSprite(Object* obj)
 {
-	return m_sprites.Remove(static_cast<d2d::ISprite*>(obj));
+	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
+	m_name_set.erase(spr->name);
+	return m_sprites.Remove(spr);
 }
 
 void Layer::InsertSprite(Object* obj)
 {
-	m_sprites.Insert(static_cast<d2d::ISprite*>(obj));
+	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
+	CheckSpriteName(spr);
+	m_sprites.Insert(spr);
 }
 
 void Layer::ClearSprite()
 {
+	m_next_id = 0;
+	m_name_set.clear();
+
 	m_sprites.Clear();
 }
 
@@ -153,6 +161,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 			UserData* ud = new UserData(base_path);
 			sprite->setUserData(ud);
 		}
+		CheckSpriteName(sprite);
 		m_sprites.Insert(sprite);
 
 		sprite->Release();
@@ -200,6 +209,29 @@ void Layer::LoadFromBaseFile(int layer_idx, const std::string& filepath, const s
 
 	LoadSprites(layer_val["sprite"], dir, filepath);
 	LoadShapes(layer_val["shape"], dir, filepath);
+}
+
+void Layer::CheckSpriteName(d2d::ISprite* spr)
+{
+	std::set<std::string>::iterator itr 
+		= m_name_set.find(spr->name);
+	if (itr != m_name_set.end()) 
+	{
+		spr->name = "_sprite"+wxString::FromDouble(++m_next_id);
+		assert(m_name_set.find(spr->name) == m_name_set.end());
+	}
+	else
+	{
+		int pos = spr->name.find("_sprite");
+		if (pos != std::string::npos) {
+			std::string str = spr->name.substr(pos + 7);
+			int num = atoi(str.c_str());
+			if (m_next_id < num) {
+				m_next_id = num;
+			}
+		}
+	}
+	m_name_set.insert(spr->name);
 }
 
 }
