@@ -172,14 +172,6 @@
 				Name="file"
 				>
 				<File
-					RelativePath="..\..\..\src\libscale9\FileLoader.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libscale9\FileLoader.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\libscale9\FileSaver.cpp"
 					>
 				</File>

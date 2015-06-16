@@ -51,23 +51,23 @@ void FileIO::store(const char* filename, StagePanel* stage,
 
 	wxString dir = d2d::FilenameTools::getFileDir(filename);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-		value["sprite"][i] = store(sprites[i], dir);
+		value["sprite"][i] = StoreNew(sprites[i], dir);
 	}
 
-	Symbol* symbol = stage->getPatchSymbol();
-	const Scale9Data& s_data = symbol->GetScale9Data();
-	int idx = 0;
-	for (int i = 0; i < 3; ++i) {
-		for (int j = 0; j < 3; ++j) {
-			d2d::ISprite* sprite = s_data.GetSprite(i, j);
-			if (sprite) {
-				value["sprite new"][idx++] = StoreNew(sprite, dir);
-			} else {
-//				value["sprite new"][idx++] = NULL;
-				idx++;
-			}
-		}
-	}
+// 	Symbol* symbol = stage->getPatchSymbol();
+// 	const Scale9Data& s_data = symbol->GetScale9Data();
+// 	int idx = 0;
+// 	for (int i = 0; i < 3; ++i) {
+// 		for (int j = 0; j < 3; ++j) {
+// 			d2d::ISprite* sprite = s_data.GetSprite(i, j);
+// 			if (sprite) {
+// 				value["sprite new"][idx++] = StoreNew(sprite, dir);
+// 			} else {
+// //				value["sprite new"][idx++] = NULL;
+// 				idx++;
+// 			}
+// 		}
+// 	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -79,24 +79,16 @@ void FileIO::store(const char* filename, StagePanel* stage,
 
 d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 {
-	d2d::ISprite* sprite = NULL;
-	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["filepath"].asString());
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
-	sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
+	if (!d2d::FilenameTools::isExist(filepath)) {
+		throw d2d::Exception("Symbol doesn't exist: %s !", value["filepath"].asString().c_str());
+	}
+
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, value);
+	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	sprite->load(value);
 	symbol->Release();
-
-	sprite->name = value["name"].asString();
-
-	d2d::Vector pos;
-	pos.x = value["position"]["x"].asDouble();
-	pos.y = value["position"]["y"].asDouble();
-	sprite->setTransform(pos, value["angle"].asDouble());
-
-	float scale = value["scale"].asDouble();
-	sprite->setScale(scale, scale);
-
-	sprite->setMirror(value["x mirror"].asBool(), 
-		value["y mirror"].asBool());
 
 	return sprite;
 }
@@ -104,23 +96,19 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
+	const d2d::ISymbol& symbol = sprite->getSymbol();
 
+	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-		sprite->getSymbol().getFilepath()).ToStdString();
-
-	value["name"] = sprite->name;
-
-	value["position"]["x"] = sprite->getPosition().x;
-	value["position"]["y"] = sprite->getPosition().y;
-
-	value["angle"] = sprite->getAngle();
-
-	value["scale"] = sprite->getScale().x;
-
-	bool xMirror, yMirror;
-	sprite->getMirror(xMirror, yMirror);
-	value["x mirror"] = xMirror;
-	value["y mirror"] = yMirror;
+		symbol.getFilepath()).ToStdString();
+	// filepaths
+	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	std::set<std::string>::const_iterator itr = filepaths.begin();
+	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
+		value["filepaths"][i] = *itr;
+	}
+	// other
+	sprite->store(value);
 
 	return value;
 }
@@ -128,9 +116,20 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 Json::Value FileIO::StoreNew(d2d::ISprite* sprite, const wxString& dir)
 {
 	Json::Value value;
+	const d2d::ISymbol& symbol = sprite->getSymbol();
+
+	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-		sprite->getSymbol().getFilepath()).ToStdString();
+		symbol.getFilepath()).ToStdString();
+	// filepaths
+	const std::set<std::string>& filepaths = symbol.GetFilepaths();
+	std::set<std::string>::const_iterator itr = filepaths.begin();
+	for (int i = 0; itr != filepaths.end(); ++itr, ++i) {
+		value["filepaths"][i] = *itr;
+	}
+	// other
 	sprite->store(value);
+
 	return value;
 }
 

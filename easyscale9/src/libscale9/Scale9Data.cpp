@@ -119,85 +119,53 @@ void Scale9Data::LoadFromFile(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
-	if (value["sprite new"].isNull())
+	Json::Value spr_val = value["sprite"];
+
+	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+
+	m_width = value["width"].asInt();
+	m_height = value["height"].asInt();
+
+	int index = 0;
+
+	m_type = Scale9Type(value["type"].asInt());
+	switch (m_type)
 	{
-		FileLoader adapter;
-		adapter.load(filepath.c_str());
-
-		std::string dir = d2d::FilenameTools::getFileDir(filepath);
-
-		m_width = adapter.width;
-		m_height = adapter.height;
-
-		int index = 0;
-
-		m_type = Scale9Type(adapter.type);
-		switch (m_type)
-		{
-		case e_9Grid:
-			for (size_t i = 0; i < 3; ++i) {
-				for (size_t j = 0; j < 3; ++j) {
-					InitSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dir);
-				}
-			}
-			break;
-		case e_9GridHollow:
-			for (size_t i = 0; i < 3; ++i) {
-				for (size_t j = 0; j < 3; ++j) {
-					if (i == 1 && j == 1) continue;
-					if (i > 1 || i == 1 && j > 1)
-						InitSprite(adapter.m_data[i*3+j-1], &m_sprites[i][j], dir);
-					else
-						InitSprite(adapter.m_data[i*3+j], &m_sprites[i][j], dir);
-				}
-			}
-			break;
-		case e_3GridHor:
-			for (size_t i = 0; i < 3; ++i) {
-				InitSprite(adapter.m_data[i], &m_sprites[1][i], dir);
-			}
-			break;
-		case e_3GridVer:
-			for (size_t i = 0; i < 3; ++i) {
-				InitSprite(adapter.m_data[i], &m_sprites[i][1], dir);
-			}
-			break;
-		case e_6GridUpper:
-			for (size_t i = 1; i < 3; ++i) {
-				for (size_t j = 0; j < 3; ++j) {
-					InitSprite(adapter.m_data[index++], &m_sprites[i][j], dir);
-				}
-			}
-			break;
-		}
-	}
-	else
-	{
-		m_width = value["width"].asDouble();
-		m_height = value["height"].asDouble();
-		m_type = Scale9Type(value["type"].asInt());
-
-		std::string dir = d2d::FilenameTools::getFileDir(filepath);
-		int idx = 0;
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 3; ++j) {
-				Json::Value val = value["sprite new"][idx++];
-				if (val.isNull()) {
-					continue;
-				}
-
-				std::string filepath = val["filepath"].asString();
-				if (!d2d::FilenameTools::isExist(filepath))
-					filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-				symbol->Release();
-				sprite->load(val);
-
-				m_sprites[i][j] = sprite;
+	case e_9Grid:
+		for (size_t i = 0; i < 3; ++i) {
+			for (size_t j = 0; j < 3; ++j) {
+				InitSprite(spr_val[i*3+j], &m_sprites[i][j], dir);
 			}
 		}
+		break;
+	case e_9GridHollow:
+		for (size_t i = 0; i < 3; ++i) {
+			for (size_t j = 0; j < 3; ++j) {
+				if (i == 1 && j == 1) continue;
+				if (i > 1 || i == 1 && j > 1)
+					InitSprite(spr_val[i*3+j-1], &m_sprites[i][j], dir);
+				else
+					InitSprite(spr_val[i*3+j], &m_sprites[i][j], dir);
+			}
+		}
+		break;
+	case e_3GridHor:
+		for (size_t i = 0; i < 3; ++i) {
+			InitSprite(spr_val[i], &m_sprites[1][i], dir);
+		}
+		break;
+	case e_3GridVer:
+		for (size_t i = 0; i < 3; ++i) {
+			InitSprite(spr_val[i], &m_sprites[i][1], dir);
+		}
+		break;
+	case e_6GridUpper:
+		for (size_t i = 1; i < 3; ++i) {
+			for (size_t j = 0; j < 3; ++j) {
+				InitSprite(spr_val[index++], &m_sprites[i][j], dir);
+			}
+		}
+		break;
 	}
 
 	ResizeScale9(m_type, m_sprites, m_width, m_height);
@@ -405,22 +373,19 @@ Scale9Type Scale9Data::CheckType(d2d::ISprite* sprites[3][3])
 	return type;
 }
 
-void Scale9Data::InitSprite(const FileLoader::Entry& entry, d2d::ISprite** pSprite, 
+void Scale9Data::InitSprite(const Json::Value& spr_val, d2d::ISprite** pSprite, 
 							const std::string& dir)
 {
-	std::string filepath = entry.filepath;
+	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 	if (!d2d::FilenameTools::isExist(filepath)) {
-		filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+		throw d2d::Exception("Symbol doesn't exist: %s !", spr_val["filepath"].asString().c_str());
 	}
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
+	sprite->load(spr_val);
 	symbol->Release();
-
-	sprite->name = entry.name;
-
-	sprite->rotate(entry.angle);
-	sprite->setMirror(entry.xMirror, entry.yMirror);
 
 	*pSprite = sprite;
 }

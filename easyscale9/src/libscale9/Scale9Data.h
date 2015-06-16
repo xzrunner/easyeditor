@@ -3,8 +3,6 @@
 
 #include <drag2d.h>
 
-#include "FileLoader.h"
-
 namespace escale9
 {
 
@@ -63,7 +61,7 @@ public:
 	static Scale9Type CheckType(d2d::ISprite* sprites[3][3]);
 
 private:
-	static void InitSprite(const FileLoader::Entry& entry,
+	static void InitSprite(const Json::Value& spr_val,
 		d2d::ISprite** pSprite, const std::string& dir);	
 
 private:
