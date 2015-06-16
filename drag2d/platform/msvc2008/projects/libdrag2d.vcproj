@@ -200,6 +200,14 @@
 					Name="sprite"
 					>
 					<File
+						RelativePath="..\..\..\src\drag2d\operator\CopyPasteSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\CopyPasteSpriteState.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\operator\IArrangeSpriteState.h"
 						>
 					</File>

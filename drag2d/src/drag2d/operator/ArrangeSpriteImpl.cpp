@@ -6,6 +6,7 @@
 #include "ShearSpriteState.h"
 #include "OffsetSpriteState.h"
 #include "MoveSpriteState.h"
+#include "CopyPasteSpriteState.h"
 
 #include "common/Math.h"
 #include "common/Config.h"
@@ -142,6 +143,12 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 			m_op_state->OnMousePress(pos);
 		}
 		return;
+	}
+
+	// copy & paste
+	if (wxGetKeyState(WXK_ALT))
+	{
+		m_op_state = new CopyPasteSpriteState(m_sprites_impl, m_selection, selected);
 	}
 
 	// offset
