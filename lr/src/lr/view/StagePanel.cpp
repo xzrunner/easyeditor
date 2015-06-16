@@ -312,7 +312,7 @@ void StagePanel::OnKeyHook(int key_code)
 	m_editOP->Release();
 	if (m_editOP == m_arrange_op) {
 		d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-		m_editOP = static_cast<LibraryPage*>(curr_page)->GetEditOP();
+		m_editOP = static_cast<LibraryPage*>(curr_page)->GetExtenOP();
 	} else {
 		m_editOP = m_arrange_op;
 	}

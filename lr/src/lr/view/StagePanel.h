@@ -61,6 +61,8 @@ public:
 
 	const CharacterAllDirections* GetCharaDirs() const { return &m_chara_dirs; }
 
+	d2d::AbstractEditOP* GetBaseOP() { return m_arrange_op; }
+
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 	virtual void OnKeyHook(int key_code);

@@ -10,26 +10,21 @@ LibraryPage::LibraryPage(wxWindow* parent, const std::string& name,
 						 d2d::AbstractEditOP* editop)
 	: d2d::ILibraryPage(parent, name)
 	, m_layer(new Layer)
-	, m_editop(editop)
+	, m_exten_op(editop)
 {
-	m_editop->Retain();
+	m_exten_op->Retain();
 	InitLayout();
 }
 
 LibraryPage::~LibraryPage()
 {
-	m_editop->Release();
+	m_exten_op->Release();
 	m_layer->Release();
 }
 
 bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 {
 	return true;
-}
-
-void LibraryPage::OnActive()
-{
-	m_editop->OnActive();
 }
 
 void LibraryPage::UpdateStatusFromLayer()

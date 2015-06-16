@@ -14,6 +14,7 @@ Task::Task(wxFrame* parent)
 	, m_parent(parent)
 {
 	InitLayout();
+	m_stage->GetBaseOP()->OnActive();
 	static_cast<Frame*>(parent)->GetToolBar()->SetLibrary(m_library);
 }
 

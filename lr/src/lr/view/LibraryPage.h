@@ -20,14 +20,13 @@ public:
 	//	interface d2d::ILibraryPage
 	//
 	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
-	virtual void OnActive();
 
 	void UpdateStatusFromLayer();
 
 	Layer* GetLayer() { return m_layer; }
 	void SetLayer(Layer* layer);
 
-	d2d::AbstractEditOP* GetEditOP() { return m_editop; }
+	d2d::AbstractEditOP* GetExtenOP() { return m_exten_op; }
 
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
@@ -47,7 +46,7 @@ private:
 	wxCheckBox* m_visible_ctrl;
 	wxCheckBox* m_editable_ctrl;
 
-	d2d::AbstractEditOP* m_editop;
+	d2d::AbstractEditOP* m_exten_op;
 
 }; // LibraryPage 
 
