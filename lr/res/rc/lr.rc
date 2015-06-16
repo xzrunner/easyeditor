@@ -1,4 +1,4 @@
-#include <wx.rc>
+#include <wx\msw\wx.rc>
 
 BMP_GROUND		BITMAP	"..\\frame\\icon\\ground.bmp"
 BMP_DECORATE	BITMAP	"..\\frame\\icon\\decorate.bmp"

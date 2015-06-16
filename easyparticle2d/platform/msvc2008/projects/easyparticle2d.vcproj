@@ -182,10 +182,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath="..\..\..\..\easybuilder\platform\msvc2008\ebuilder.rc"
-			>
-		</File>
-		<File
 			RelativePath="..\..\..\src\easyparticle2d\main.cpp"
 			>
 		</File>
@@ -200,6 +196,26 @@
 		<File
 			RelativePath="..\..\..\src\easyparticle2d\Task.h"
 			>
+		</File>
+		<File
+			RelativePath="..\..\..\..\editor-external\wx\include\wx\msw\wx.rc"
+			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCResourceCompilerTool"
+					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCResourceCompilerTool"
+					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
+				/>
+			</FileConfiguration>			
 		</File>
 	</Files>
 	<Globals>
