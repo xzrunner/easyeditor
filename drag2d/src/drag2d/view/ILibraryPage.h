@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_I_LIBRARY_PAGE_H_
+#define _DRAG2D_I_LIBRARY_PAGE_H_
 
 #include <wx/wx.h>
 
@@ -6,62 +7,67 @@
 
 namespace d2d
 {
-	class ListItem;
-	class ISymbol;
-	class LibraryList;
-	class GLCanvas;
 
-	class ILibraryPage : public wxWindow
-	{
-	public:
-		ILibraryPage(wxWindow* parent, const wxString& name, bool isStatic = false);
+class ListItem;
+class ISymbol;
+class LibraryList;
+class GLCanvas;
 
-		virtual bool isHandleSymbol(ISymbol* symbol) const = 0;
+class ILibraryPage : public wxWindow
+{
+public:
+	ILibraryPage(wxWindow* parent, const wxString& name, bool isStatic = false);
 
-		virtual void clear();
+	virtual bool IsHandleSymbol(ISymbol* symbol) const = 0;
 
-		virtual void LoadFromConfig() {}
+	virtual void Clear();
 
-		void traverse(IVisitor& visitor) const;
+	virtual void LoadFromConfig() {}
 
-		const wxString& getName() const { return m_name; }
+	virtual void OnActive() {}
 
-		ListItem* getItem(int index = -1) const;
-		ISymbol* getSymbol(int index = -1) const;
+	void Traverse(IVisitor& visitor) const;
 
-		void reloadTexture() const;
+	const wxString& GetPageName() const { return m_name; }
 
-		LibraryList* getList() { return m_list; }
+	ListItem* GetItem(int index = -1) const;
+	ISymbol* GetSymbol(int index = -1) const;
 
-		void setCanvas(GLCanvas* canvas) {
-			m_canvas = canvas;
-		}
+	void ReloadTexture() const;
 
-		void AddItem(ListItem* item);
+	LibraryList* GetList() { return m_list; }
 
-	protected:
-		virtual void initLayout(bool draggable = true);
-		virtual void InitLayoutExtend(wxSizer* sizer) {}
+	void SetCanvas(GLCanvas* canvas) {
+		m_canvas = canvas;
+	}
 
-		virtual void onAddPress(wxCommandEvent& event);
-		virtual void onDelPress(wxCommandEvent& event);
+	void AddItem(ListItem* item);
 
-	protected:
-		void initButtons(wxSizer* sizer);
+protected:
+	virtual void InitLayout(bool draggable = true);
+	virtual void InitLayoutExtend(wxSizer* sizer) {}
 
-		void LoadFromConfig(const std::string& key);
+	virtual void OnAddPress(wxCommandEvent& event);
+	virtual void OnDelPress(wxCommandEvent& event);
 
-	protected:
-		wxString m_name;
+protected:
+	void InitButtons(wxSizer* sizer);
 
-		bool m_isStatic;
+	void LoadFromConfig(const std::string& key);
 
-		wxButton *m_btnAdd, *m_btnDel;
+protected:
+	wxString m_name;
 
-		LibraryList* m_list;
+	bool m_is_static;
 
-		GLCanvas* m_canvas;
+	wxButton *m_btn_add, *m_btn_del;
 
-	}; // ILibraryPage
+	LibraryList* m_list;
+
+	GLCanvas* m_canvas;
+
+}; // ILibraryPage
+
 }
 
+#endif // _DRAG2D_I_LIBRARY_PAGE_H_

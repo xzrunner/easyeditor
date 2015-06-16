@@ -21,7 +21,7 @@ class LibraryPanel : public wxPanel
 public:
 	LibraryPanel(wxWindow* parent);
 
-	virtual void onPageChanged(wxBookCtrlEvent& event);
+	virtual void OnPageChanged(wxBookCtrlEvent& event);
 
 	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) { return true; }
 

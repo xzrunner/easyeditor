@@ -473,6 +473,22 @@
 		<File
 			RelativePath="..\..\..\res\rc\lr.rc"
 			>
+			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCResourceCompilerTool"
+					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
+				Name="Release|Win32"
+				>
+				<Tool
+					Name="VCResourceCompilerTool"
+					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
+				/>
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>

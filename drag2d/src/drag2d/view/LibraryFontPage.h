@@ -9,10 +9,10 @@ namespace d2d
 	public:
 		LibraryFontPage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(ISymbol* symbol) const;
+		virtual bool IsHandleSymbol(ISymbol* symbol) const;
 
 	protected:
-		virtual void onAddPress(wxCommandEvent& event);
+		virtual void OnAddPress(wxCommandEvent& event);
 
 	}; // LibraryFontPage
 }

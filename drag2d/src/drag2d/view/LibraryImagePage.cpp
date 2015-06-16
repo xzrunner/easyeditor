@@ -14,15 +14,15 @@ LibraryImagePage::LibraryImagePage(wxWindow* parent, bool supportBmp/* = true*/)
 	: ILibraryPage(parent, wxT("Image"))
 	, m_supportBmp(supportBmp)
 {
-	initLayout();
+	InitLayout();
 }
 
-bool LibraryImagePage::isHandleSymbol(ISymbol* symbol) const
+bool LibraryImagePage::IsHandleSymbol(ISymbol* symbol) const
 {
 	return dynamic_cast<ImageSymbol*>(symbol) != NULL;
 }
 
-void LibraryImagePage::onAddPress(wxCommandEvent& event)
+void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 {
 	wxString formatFilter = m_supportBmp ? wxT("*.png;*.jpg;*.bmp") : wxT("*.png;*.jpg");
 	wxFileDialog dlg(this, wxT("Choose images"), wxEmptyString, 

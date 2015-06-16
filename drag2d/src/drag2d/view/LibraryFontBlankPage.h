@@ -9,15 +9,15 @@ namespace d2d
 	public:
 		LibraryFontBlankPage(wxWindow* parent);
 
-		virtual bool isHandleSymbol(ISymbol* symbol) const;
+		virtual bool IsHandleSymbol(ISymbol* symbol) const;
 
 		virtual void LoadFromConfig();
 
 	protected:
-		virtual void initLayout(bool draggable = true);
+		virtual void InitLayout(bool draggable = true);
 
 	protected:
-		virtual void onAddPress(wxCommandEvent& event);
+		virtual void OnAddPress(wxCommandEvent& event);
 
 	private:
 		void onNewBtnPress(wxCommandEvent& event);

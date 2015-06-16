@@ -16,7 +16,11 @@ public:
 		d2d::AbstractEditOP* editop);
 	virtual ~LibraryPage();
 
-	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+	//
+	//	interface d2d::ILibraryPage
+	//
+	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
+	virtual void OnActive();
 
 	void UpdateStatusFromLayer();
 
@@ -28,7 +32,7 @@ public:
 protected:
 	virtual void InitLayoutExtend(wxSizer* sizer);
 
-	virtual void onAddPress(wxCommandEvent& event);
+	virtual void OnAddPress(wxCommandEvent& event);
 
 private:
 	void OnChangeVisible(wxCommandEvent& event);

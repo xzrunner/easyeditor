@@ -11,10 +11,10 @@ class LibraryPage : public d2d::ILibraryPage
 public:
 	LibraryPage(wxWindow* parent);
 
-	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
 
 protected:
-	virtual void onAddPress(wxCommandEvent& event);
+	virtual void OnAddPress(wxCommandEvent& event);
 
 private:
 	void loadFromJsonFile(const wxString& filename);

@@ -11,16 +11,16 @@ namespace libanim
 LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Anim"))
 {
-	initLayout();
+	InitLayout();
 	m_list->setFileter(libanim::FILE_TAG);
 }
 
-bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
-void LibraryPage::onAddPress(wxCommandEvent& event)
+void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
 	wxString filter = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim);
 	filter = wxT("*_") + filter + wxT(".json");
@@ -72,7 +72,7 @@ void LibraryPage::loadFromLuaFile(const wxString& filename)
  	std::vector<d2d::ISymbol*> symbols;
  	parser.getAllSymbols(symbols);
  	for (int i = 0, n = symbols.size(); i < n; ++i)
- 		if (isHandleSymbol(symbols[i]))
+ 		if (IsHandleSymbol(symbols[i]))
  			m_list->insert(symbols[i]);
 }
 

@@ -15,7 +15,7 @@ bool LibraryPageDropTarget::OnDropFiles(wxCoord x, wxCoord y,
 		wxString filename = filenames[i];
 		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filename);
 		symbol->RefreshThumbnail(filename);
-		if (m_page->isHandleSymbol(symbol)) {
+		if (m_page->IsHandleSymbol(symbol)) {
 			m_page->AddItem(symbol);
 		}
 		symbol->Release();

@@ -13,34 +13,34 @@ ILibraryPage::ILibraryPage(wxWindow* parent, const wxString& name,
 						   bool isStatic)
 	: wxWindow(parent, wxID_ANY)
 	, m_name(name)
-	, m_isStatic(isStatic)
+	, m_is_static(isStatic)
 	, m_list(NULL)
 	, m_canvas(NULL)
 {
-	m_btnAdd = m_btnDel = NULL;
+	m_btn_add = m_btn_del = NULL;
 }
 
-void ILibraryPage::clear()
+void ILibraryPage::Clear()
 {
 	m_list->clear();
 }
 
-void ILibraryPage::traverse(IVisitor& visitor) const
+void ILibraryPage::Traverse(IVisitor& visitor) const
 {
 	m_list->traverse(visitor);
 }
 
-ListItem* ILibraryPage::getItem(int index/* = -1*/) const
+ListItem* ILibraryPage::GetItem(int index/* = -1*/) const
 {
 	return m_list->getItem(index);
 }
 
-ISymbol* ILibraryPage::getSymbol(int index/* = -1*/) const
+ISymbol* ILibraryPage::GetSymbol(int index/* = -1*/) const
 {
 	return m_list->getSymbol(index);
 }
 
-void ILibraryPage::reloadTexture() const
+void ILibraryPage::ReloadTexture() const
 {
 	m_list->reloadTexture();
 }
@@ -53,7 +53,7 @@ void ILibraryPage::AddItem(ListItem* item)
 	}
 }
 
-void ILibraryPage::initLayout(bool draggable/* = true*/)
+void ILibraryPage::InitLayout(bool draggable/* = true*/)
 {
 	wxSizer* sizer = GetSizer();
 	if (sizer)
@@ -61,9 +61,9 @@ void ILibraryPage::initLayout(bool draggable/* = true*/)
 	else
 		sizer = new wxBoxSizer(wxVERTICAL);
 
-	if (!m_isStatic) {
+	if (!m_is_static) {
 //		InitLayoutExtend(sizer);
-		initButtons(sizer);
+		InitButtons(sizer);
 	}
 
 	if (!m_list) {
@@ -74,28 +74,28 @@ void ILibraryPage::initLayout(bool draggable/* = true*/)
 	SetSizer(sizer);
 }
 
-void ILibraryPage::onAddPress(wxCommandEvent& event)
+void ILibraryPage::OnAddPress(wxCommandEvent& event)
 {
 }
 
-void ILibraryPage::onDelPress(wxCommandEvent& event)
+void ILibraryPage::OnDelPress(wxCommandEvent& event)
 {
 	m_list->remove();
 }
 
-void ILibraryPage::initButtons(wxSizer* sizer)
+void ILibraryPage::InitButtons(wxSizer* sizer)
 {
 	wxSizer* btnSizer = new wxBoxSizer(wxHORIZONTAL);
 
 	InitLayoutExtend(btnSizer);
 
-	m_btnAdd = new wxButton(this, wxID_ANY, "+", wxDefaultPosition, wxSize(20, 20));
-	Connect(m_btnAdd->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ILibraryPage::onAddPress));
-	btnSizer->Add(m_btnAdd, 0, wxLEFT | wxRIGHT, 5);
+	m_btn_add = new wxButton(this, wxID_ANY, "+", wxDefaultPosition, wxSize(20, 20));
+	Connect(m_btn_add->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ILibraryPage::OnAddPress));
+	btnSizer->Add(m_btn_add, 0, wxLEFT | wxRIGHT, 5);
 
-	m_btnDel = new wxButton(this, wxID_ANY, "-", wxDefaultPosition, wxSize(20, 20));
-	Connect(m_btnDel->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ILibraryPage::onDelPress));
-	btnSizer->Add(m_btnDel, 0, wxLEFT | wxRIGHT, 5);
+	m_btn_del = new wxButton(this, wxID_ANY, "-", wxDefaultPosition, wxSize(20, 20));
+	Connect(m_btn_del->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ILibraryPage::OnDelPress));
+	btnSizer->Add(m_btn_del, 0, wxLEFT | wxRIGHT, 5);
 
 	sizer->Add(btnSizer, 0, wxALIGN_RIGHT);
 }

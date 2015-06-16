@@ -13,16 +13,16 @@ namespace d2d
 	LibraryScriptsPage::LibraryScriptsPage(wxWindow* parent)
 		: ILibraryPage(parent, wxT("Scripts"))
 	{
-		initLayout();
+		InitLayout();
 		m_list->setFileter("scripts");
 	}
 
-	bool LibraryScriptsPage::isHandleSymbol(d2d::ISymbol* symbol) const
+	bool LibraryScriptsPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 	{
 		return dynamic_cast<ScriptsSymbol*>(symbol) != NULL;
 	}
 
-	void LibraryScriptsPage::onAddPress(wxCommandEvent& event)
+	void LibraryScriptsPage::OnAddPress(wxCommandEvent& event)
 	{
 		wxString filter = FileNameParser::getFileTag(FileNameParser::e_scripts);
 		filter = wxT("*_") + filter + wxT(".lua");

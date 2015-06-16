@@ -6,8 +6,6 @@ namespace libshape
 DrawRectangleOP::DrawRectangleOP(d2d::EditPanel* editPanel, bool bOpenRightTap)
 	: d2d::ZoomViewOP(editPanel, true, bOpenRightTap)
 {
-	m_cursor = wxCursor(wxCURSOR_PENCIL);
-
 	m_firstPos.setInvalid();
 	m_currPos.setInvalid();
 }

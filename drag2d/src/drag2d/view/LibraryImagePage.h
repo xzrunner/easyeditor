@@ -9,10 +9,10 @@ namespace d2d
 	public:
 		LibraryImagePage(wxWindow* parent, bool supportBmp = true);
 
-		virtual bool isHandleSymbol(ISymbol* symbol) const;
+		virtual bool IsHandleSymbol(ISymbol* symbol) const;
 
 	protected:
-		virtual void onAddPress(wxCommandEvent& event);
+		virtual void OnAddPress(wxCommandEvent& event);
 
 	private:
 		bool m_supportBmp;

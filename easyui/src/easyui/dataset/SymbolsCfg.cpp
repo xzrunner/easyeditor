@@ -77,7 +77,7 @@ void SymbolsCfg::InitLibrarySymbols(const Json::Value& value, std::vector<Symbol
 
 void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol*>& symbols)
 {
-	library->getList()->clear();
+	library->GetList()->clear();
 
 	for (int i = 0, n = symbols.size(); i < n; ++i)
 	{
@@ -85,7 +85,7 @@ void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol
 
 		d2d::ISymbol* dst = d2d::SymbolMgr::Instance()->fetchSymbol(src->filepath);
 		dst->RefreshThumbnail(dst->getFilepath());
-		library->getList()->insert(dst);
+		library->GetList()->insert(dst);
 		dst->Release();
 	}
 }

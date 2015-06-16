@@ -8,16 +8,16 @@ namespace etexture
 LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Texture"))
 {
-	initLayout();
+	InitLayout();
 	m_list->setFileter(FILE_TAG);
 }
 
-bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
-void LibraryPage::onAddPress(wxCommandEvent& event)
+void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
 	wxString filter = wxT("*_") + d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_texture) + wxT(".json");
 	wxFileDialog dlg(this, wxT("导入texture文件"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN | wxFD_MULTIPLE);

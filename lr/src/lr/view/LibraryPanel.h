@@ -14,7 +14,7 @@ class LibraryPanel : public d2d::LibraryPanel
 public:
 	LibraryPanel(wxWindow* parent);
 
-	virtual void onPageChanged(wxBookCtrlEvent& event);
+	virtual void OnPageChanged(wxBookCtrlEvent& event);
 
 	void LoadFromFile(const Json::Value& value, const std::string& dir);
 	void StoreToFile(Json::Value& value, const std::string& dir) const;

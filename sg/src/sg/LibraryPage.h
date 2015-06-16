@@ -11,7 +11,7 @@ class LibraryPage : public d2d::ILibraryPage
 public:
 	LibraryPage(wxWindow* parent, const char* name);
 
-	virtual bool isHandleSymbol(d2d::ISymbol* symbol) const;
+	virtual bool IsHandleSymbol(d2d::ISymbol* symbol) const;
 
 }; // LibraryPage 
 

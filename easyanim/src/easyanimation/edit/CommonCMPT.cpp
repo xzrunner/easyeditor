@@ -186,7 +186,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 void CommonCMPT::onLoadFromList(wxCommandEvent& event)
 {
 	std::vector<d2d::ISymbol*> symbols;
-	m_ctrl->GetImagePage()->getList()->
+	m_ctrl->GetImagePage()->GetList()->
 		traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 
 	if (!symbols.empty()) {

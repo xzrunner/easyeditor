@@ -13,7 +13,7 @@ LibraryPage::LibraryPage(wxWindow* parent, const std::string& name,
 	, m_editop(editop)
 {
 	m_editop->Retain();
-	initLayout();
+	InitLayout();
 }
 
 LibraryPage::~LibraryPage()
@@ -22,9 +22,14 @@ LibraryPage::~LibraryPage()
 	m_layer->Release();
 }
 
-bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 {
 	return true;
+}
+
+void LibraryPage::OnActive()
+{
+	m_editop->OnActive();
 }
 
 void LibraryPage::UpdateStatusFromLayer()
@@ -61,7 +66,7 @@ void LibraryPage::InitLayoutExtend(wxSizer* sizer)
 	sizer->AddSpacer(20);
 }
 
-void LibraryPage::onAddPress(wxCommandEvent& event)
+void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("µº»Îsymbol"), wxEmptyString, 
 		wxEmptyString, "*.*", wxFD_OPEN | wxFD_MULTIPLE);

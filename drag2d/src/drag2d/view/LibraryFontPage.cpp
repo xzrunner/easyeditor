@@ -12,15 +12,15 @@ namespace d2d
 LibraryFontPage::LibraryFontPage(wxWindow* parent)
 	: ILibraryPage(parent, wxT("Font"))
 {
-	initLayout();
+	InitLayout();
 }
 
-bool LibraryFontPage::isHandleSymbol(ISymbol* symbol) const
+bool LibraryFontPage::IsHandleSymbol(ISymbol* symbol) const
 {
 	return dynamic_cast<FontSymbol*>(symbol) != NULL;
 }
 
-void LibraryFontPage::onAddPress(wxCommandEvent& event)
+void LibraryFontPage::OnAddPress(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("Choose Font"), wxEmptyString, 
 		wxEmptyString, wxT("*.ttf"), wxFD_OPEN);

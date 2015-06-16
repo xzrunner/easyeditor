@@ -17,10 +17,10 @@ LibraryFontBlankPage::LibraryFontBlankPage(wxWindow* parent)
 	: ILibraryPage(parent, wxT("FontBlank"))
 {
 	m_list = new LibraryFontBlankList(this);
-	initLayout();
+	InitLayout();
 }
 
-bool LibraryFontBlankPage::isHandleSymbol(ISymbol* symbol) const
+bool LibraryFontBlankPage::IsHandleSymbol(ISymbol* symbol) const
 {
 	return dynamic_cast<FontBlankSymbol*>(symbol) != NULL;
 }
@@ -30,7 +30,7 @@ void LibraryFontBlankPage::LoadFromConfig()
 	ILibraryPage::LoadFromConfig("library_label");
 }
 
-void LibraryFontBlankPage::initLayout(bool draggable /*= true*/)
+void LibraryFontBlankPage::InitLayout(bool draggable /*= true*/)
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
 	{
@@ -40,7 +40,7 @@ void LibraryFontBlankPage::initLayout(bool draggable /*= true*/)
 		Connect(btnNew->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(LibraryFontBlankPage::onNewBtnPress));
 		btnSizer->Add(btnNew, 0, wxRIGHT, 10);
 
-		initButtons(btnSizer);
+		InitButtons(btnSizer);
 
 		sizer->Add(btnSizer, 0, wxALIGN_RIGHT);
 	}
@@ -50,7 +50,7 @@ void LibraryFontBlankPage::initLayout(bool draggable /*= true*/)
 	SetSizer(sizer);
 }
 
-void LibraryFontBlankPage::onAddPress(wxCommandEvent& event)
+void LibraryFontBlankPage::OnAddPress(wxCommandEvent& event)
 {
 	wxString filter = FileNameParser::getFileTag(FileNameParser::e_fontblank);
 	filter = wxT("*_") + filter + wxT(".json");

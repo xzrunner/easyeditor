@@ -8,5 +8,5 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::LibraryImagePage(parent)
 {
 	m_list = new LibraryList(this);
-	initLayout();
+	InitLayout();
 }

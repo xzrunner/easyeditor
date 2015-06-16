@@ -1,3 +1,5 @@
+#include <wx.rc>
+
 BMP_GROUND		BITMAP	"..\\frame\\icon\\ground.bmp"
 BMP_DECORATE	BITMAP	"..\\frame\\icon\\decorate.bmp"
 BMP_UNIT		BITMAP	"..\\frame\\icon\\unit.bmp"

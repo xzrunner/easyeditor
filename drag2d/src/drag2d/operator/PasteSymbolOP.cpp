@@ -16,6 +16,8 @@ PasteSymbolOP::PasteSymbolOP(EditPanel* editPanel, MultiSpritesImpl* panelImpl,
 	, m_libraryPanel(libraryPanel)
 	, m_pScale(pScale)
 {
+	m_cursor = wxCursor(wxCURSOR_PAINT_BRUSH);
+
 	m_pos.setInvalid();
 }
 

@@ -17,9 +17,9 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 {
 }
 
-void LibraryPanel::onPageChanged(wxBookCtrlEvent& event)
+void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
 {
-	d2d::LibraryPanel::onPageChanged(event);
+	d2d::LibraryPanel::OnPageChanged(event);
 	Refresh();
 }
 
@@ -28,7 +28,7 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 	int layer_idx = 0;
 	Json::Value layer_val = value[layer_idx++];
 	while (!layer_val.isNull()) {
-		d2d::LibraryList* list = m_pages[layer_idx-1]->getList();
+		d2d::LibraryList* list = m_pages[layer_idx-1]->GetList();
 		int item_idx = 0;
 		Json::Value item_val = layer_val[item_idx++];
 		while (!item_val.isNull()) {
@@ -49,7 +49,7 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i)
 	{
-		d2d::LibraryList* list = m_pages[i]->getList();
+		d2d::LibraryList* list = m_pages[i]->GetList();
 		int j = 0;
 		d2d::ISymbol* symbol = list->getSymbol(j++);
 		while (symbol) {
@@ -68,7 +68,7 @@ void LibraryPanel::InitFromLayers(const std::vector<Layer*>& layers)
 		Layer* layer = layers[i];
 
 		static_cast<LibraryPage*>(page)->SetLayer(layer);
-		layer->SetName(page->getName().ToStdString());
+		layer->SetName(page->GetPageName().ToStdString());
 
 		static_cast<LibraryPage*>(page)->UpdateStatusFromLayer();
 	}
@@ -92,7 +92,7 @@ void LibraryPanel::LoadSymbolFromLayer()
  		for ( ; itr != symbol_set.end(); ++itr) {
  			d2d::ISymbol* symbol = *itr;
  			symbol->RefreshThumbnail(symbol->getFilepath());
- 			page->getList()->insert(symbol);
+ 			page->GetList()->insert(symbol);
  		}
 	}
 }

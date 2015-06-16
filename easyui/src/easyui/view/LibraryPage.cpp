@@ -8,10 +8,10 @@ namespace eui
 LibraryPage::LibraryPage(wxWindow* parent, const char* name)
 	: d2d::ILibraryPage(parent, name)
 {
-	initLayout();
+	InitLayout();
 }
 
-bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 {
 // 	return dynamic_cast<d2d::ImageSymbol*>(symbol) != NULL
 // 		|| dynamic_cast<ecomplex::Symbol*>(symbol) != NULL;
@@ -19,7 +19,7 @@ bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
 	return true;
 }
 
-void LibraryPage::onAddPress(wxCommandEvent& event)
+void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("µº»Îsymbol"), wxEmptyString, 
 		wxEmptyString, "*.*", wxFD_OPEN | wxFD_MULTIPLE);

@@ -316,6 +316,7 @@ void StagePanel::OnKeyHook(int key_code)
 	} else {
 		m_editOP = m_arrange_op;
 	}
+	m_editOP->OnActive();
 	m_editOP->Retain();	
 }
 
