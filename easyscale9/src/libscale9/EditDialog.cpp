@@ -27,7 +27,7 @@ namespace escale9
 		
 		m_stage = new d2d::EditPanel(splitter, this);
 		m_stage->setEditOP(new ResizeBaseOP(m_stage, m_symbol));
-		m_stage->setCanvas(new d2d::DialogStageCanvas(m_stage, m_symbol));
+		m_stage->SetCanvas(new d2d::DialogStageCanvas(m_stage, m_symbol));
 
 		ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_stage, m_symbol);
 		

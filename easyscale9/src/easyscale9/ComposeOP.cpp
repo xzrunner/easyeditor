@@ -16,7 +16,7 @@ ComposeOP::ComposeOP(ToolbarPanel* toolbar, StagePanel* stage,
 
 bool ComposeOP::OnActive()
 {
-	if (d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::onActive()) return true;
+	if (d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>::OnActive()) return true;
 
 	m_toolbar->setComposeOP(true);
 

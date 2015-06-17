@@ -12,8 +12,9 @@ using namespace emodeling;
 SelectBodyOP::SelectBodyOP(d2d::EditPanel* editPanel, 
 						   d2d::MultiSpritesImpl* spritesImpl, 
 						   d2d::PropertySettingPanel* propertyPanel, 
+						   d2d::ViewPanelMgr* view_panel_mgr, 
 						   d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, NULL, callback)
+	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, view_panel_mgr, callback)
 	, m_mouseOn(NULL)
 {
 }

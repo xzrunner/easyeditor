@@ -29,7 +29,7 @@ void MainDialog::InitLayout()
 	cam->SetScale(old_scale / PREVIEW_SCALE);
 	stage->Refresh();
 
-	stage->setCanvas(new StageCanvas(stage, m_control, m_sprites));
+	stage->SetCanvas(new StageCanvas(stage, m_control, m_sprites));
 	stage->setEditOP(new CtrlCamOP(stage));
 	sizer->Add(stage, 1, wxEXPAND);	
 

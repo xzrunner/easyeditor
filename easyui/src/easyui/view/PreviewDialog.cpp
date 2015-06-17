@@ -18,7 +18,7 @@ void PreviewDialog::InitLayout()
 	wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
 
 	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
-	stage->setCanvas(new PreviewCanvas(stage, m_control, m_sprites));
+	stage->SetCanvas(new PreviewCanvas(stage, m_control, m_sprites));
 	sizer->Add(stage, 1, wxEXPAND);	
 
 	SetSizer(sizer);

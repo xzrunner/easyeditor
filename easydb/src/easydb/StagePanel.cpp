@@ -84,15 +84,15 @@ void StagePanel::initConnection()
 						m_graphics.connect(from, sprites[i]);
 			}
 		}
-		else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(from))
+		else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(from))
 		{
-			const anim::Symbol& symbol = anim->getSymbol();
+			const libanim::Symbol& symbol = anim->getSymbol();
 			for (size_t i = 0, n = symbol.m_layers.size(); i < n; ++i)
 			{
-				anim::Symbol::Layer* layer = symbol.m_layers[i];
+				libanim::Symbol::Layer* layer = symbol.m_layers[i];
 				for (size_t i = 0, n = layer->frames.size(); i < n; ++i)
 				{
-					anim::Symbol::Frame* frame = layer->frames[i];
+					libanim::Symbol::Frame* frame = layer->frames[i];
 					for (size_t i = 0, n = frame->sprites.size(); i < n; ++i)
 					{
 						d2d::ISprite* child = frame->sprites[i];

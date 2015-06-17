@@ -10,8 +10,9 @@ using namespace emodeling;
 SelectJointOP::SelectJointOP(d2d::EditPanel* editPanel, 
 							 d2d::MultiSpritesImpl* spritesImpl, 
 							 d2d::PropertySettingPanel* propertyPanel, 
+							 d2d::ViewPanelMgr* view_panel_mgr,
 							 d2d::AbstractEditCMPT* callback /*= NULL*/)
-	: SelectBodyOP(editPanel, spritesImpl, propertyPanel, callback)
+	: SelectBodyOP(editPanel, spritesImpl, propertyPanel, view_panel_mgr, callback)
 	, m_mouseOn(NULL)
 	, m_selected(NULL)
 {
@@ -88,7 +89,7 @@ bool SelectJointOP::OnMouseLeftUp(int x, int y)
 	//selectedJoints.clear();
 	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(d2d::Rect(pos, m_firstPos), selectedJoints);
 	//if (selectedJoints.size() == 1)
-	//	m_propertyPanel->setPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
+	//	m_propertyPanel->SetPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
 
 	if (SelectBodyOP::OnMouseLeftUp(x, y)) return true;
 

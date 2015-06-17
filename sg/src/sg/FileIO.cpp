@@ -29,7 +29,7 @@ void FileIO::load(const char* filename, StagePanel* stage)
 		imgValue = value["image"][i++];
 	}
 
-//	library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+//	library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename, StagePanel* stage)

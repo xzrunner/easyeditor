@@ -8,7 +8,7 @@
 namespace edb
 {
 	SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::PropertySettingPanel* propertyPanel, d2d::AbstractEditCMPT* callback/* = NULL*/)
+		d2d::PropertySettingPanel* propertyPanel, d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback/* = NULL*/)
 		: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, NULL, callback)
 	{
 	}
@@ -53,9 +53,9 @@ namespace edb
 
 			m_stage->resetCanvas();
 		}
-		//else if (anim::Sprite* anim = dynamic_cast<anim::Sprite*>(selected))
+		//else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 		//{
-		//		anim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
+		//		libanim::PreviewDialog dlg(Context::Instance()->stage, Context::Instance()->library, &anim->getSymbol());
 		//		dlg.ShowModal();
 		//		Context::Instance()->stage->resetCanvas();
 		//}

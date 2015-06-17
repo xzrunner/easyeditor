@@ -46,7 +46,7 @@ void PreviewDialog::buildEditPanel(wxSizer* topSizer)
 {
 	m_stage = new d2d::EditPanel(this, this);
 	m_stage->setEditOP(new d2d::ZoomViewOP(m_stage, false));
-	m_stage->setCanvas(new PreviewCanvas(m_stage, m_symbol));
+	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_symbol));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 

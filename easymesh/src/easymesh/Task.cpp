@@ -69,7 +69,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	property = m_property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = m_stage = new emesh::StagePanel(leftVerticalSplitter, m_parent, m_library);
-//	m_property->setPropertySetting(new complex::PropertySetting(m_stage, m_sstage->getSymbol()));
+//	m_property->SetPropertySetting(new complex::PropertySetting(m_stage, m_sstage->getSymbol()));
 
 	toolbar = new emesh::ToolbarPanel(rightVerticalSplitter, m_stage, true, NULL);
 }

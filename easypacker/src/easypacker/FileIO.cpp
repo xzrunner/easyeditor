@@ -20,7 +20,7 @@ void FileIO::load(const char* filename)
 		loadFromTexPackerFile(filename);
 	}
 
-	context->library->loadFromSymbolMgr(*d2d::SymbolMgr::Instance());
+	context->library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
 void FileIO::store(const char* filename)

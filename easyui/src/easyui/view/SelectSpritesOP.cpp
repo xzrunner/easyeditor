@@ -6,8 +6,9 @@ namespace eui
 {
 
 SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::PropertySettingPanel* property, d2d::AbstractEditCMPT* callback)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, property)
+								 d2d::PropertySettingPanel* property, d2d::ViewPanelMgr* view_panel_mgr,
+								 d2d::AbstractEditCMPT* callback)
+	: d2d::SelectSpritesOP(editPanel, spritesImpl, property, view_panel_mgr, callback)
 {
 }
 

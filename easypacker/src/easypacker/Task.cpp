@@ -37,7 +37,7 @@ void Task::clear()
 {
 	Context* context = Context::Instance();
 
-	context->library->clear();
+	context->library->Clear();
 	context->stage->clear();
 	context->library->Refresh();
 	context->stage->Refresh();
@@ -52,7 +52,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	Context* context = Context::Instance();
 
 	library = context->library = new d2d::LibraryPanel(leftHorizontalSplitter);
-	context->library->addPage(new d2d::LibraryImagePage(context->library->getNotebook()));
+	context->library->AddPage(new d2d::LibraryImagePage(context->library->GetNotebook()));
 
 	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 

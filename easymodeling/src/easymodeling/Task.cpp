@@ -42,7 +42,7 @@ void Task::storeToFile(const char* filename) const
 void Task::clear()
 {
 	Context* context = Context::Instance();
-	context->library->clear();
+	context->library->Clear();
 	context->stage->clear();
 	context->library->Refresh();
 	context->stage->Refresh();
@@ -79,7 +79,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 
 	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter);
 
-	context->property->setPropertySetting(new WorldPropertySetting(context->stage));
+	context->property->SetPropertySetting(new WorldPropertySetting(context->stage));
 }
 
 void Task::initLayout()

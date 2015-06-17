@@ -94,8 +94,8 @@ namespace edb
 		if (!sprite) return;
 		
 		d2d::SpriteSelection* selection = Context::Instance()->stage->getSpriteSelection();
-		selection->clear();
-		selection->insert(sprite);
+		selection->Clear();
+		selection->Add(sprite);
 
 		m_parent->Refresh();
 	}
@@ -141,7 +141,7 @@ namespace edb
 //  					dlg.ShowModal();
 //  					stage->resetCanvas();
 // 				}
-// 				else if (anim::Symbol* anim = dynamic_cast<anim::Symbol*>(symbol))
+// 				else if (libanim::Symbol* anim = dynamic_cast<libanim::Symbol*>(symbol))
 // 				{
 // 
 // 				}
