@@ -4,32 +4,31 @@
 #include <wx/wx.h>
 #include <vector>
 
-#include "IViewPanel.h"
+#include "ISpriteViewPanel.h"
 
 namespace d2d
 {
 
 class EditPanel;
 class MultiSpritesImpl;
-class PropertySettingPanel;
 class VerticalImageList;
 class ISprite;
 class ViewlistList;
 class ViewPanelMgr;
 
-class ViewlistPanel : public wxPanel, public IViewPanel
+class ViewlistPanel : public wxPanel, public ISpriteViewPanel
 {
 public:
 	ViewlistPanel(wxWindow* parent, EditPanel* stage,
 		MultiSpritesImpl* sprites_impl = NULL, 
-		PropertySettingPanel* property = NULL,
 		ViewPanelMgr* view_panel_mgr = NULL);
 	virtual ~ViewlistPanel();
 
 	//
-	//	interface IViewPanel
+	//	interface ISpriteViewPanel
 	//
 	virtual void SelectSprite(ISprite* spr);
+	virtual void SelectMultiSprites(SpriteSelection* selection);
 	virtual void ReorderSprite(ISprite* spr, bool up);
 	virtual void InsertSprite(ISprite* spr);
 	virtual void RemoveSprite(ISprite* spr);
@@ -52,7 +51,6 @@ private:
 private:
 	EditPanel* m_stage;
 	MultiSpritesImpl* m_sprites_impl;
-	PropertySettingPanel* m_property;
 
 	ViewPanelMgr* m_view_panel_mgr;
 

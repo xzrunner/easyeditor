@@ -10,7 +10,9 @@ namespace libshape
 
 DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 								 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-								 d2d::PropertySettingPanel* propertyPanel/*, wxColourData& colorData*/)
+								 d2d::PropertySettingPanel* property,
+								 d2d::ViewPanelMgr* view_panel_mgr
+								 /*, wxColourData& colorData*/)
 	: d2d::OneFloatValueCMPT(parent, name, editPanel, "node capture", 5, 30, 10)
 	, m_shapesImpl(shapesImpl)
 	, m_color(*wxBLACK)
@@ -28,7 +30,7 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 	{
 		d2d::OneFloatValueCMPT* cmpt = new d2d::OneFloatValueCMPT(this, "pen", editPanel, "node capture", 5, 30, 10);
 		d2d::AbstractEditOP* op = new EditPolylineOP<DrawPolygonOP, d2d::SelectShapesOP>
-			(editPanel, shapesImpl, propertyPanel, cmpt, /*cmpt*/this);
+			(editPanel, shapesImpl, property, view_panel_mgr, cmpt, /*cmpt*/this);
 		cmpt->SetEditOP(op);
 		addChild(cmpt);
 	}

@@ -4,9 +4,10 @@
 namespace libshape
 {
 
-CirclePropertySetting::CirclePropertySetting(d2d::EditPanel* editPanel, 
+CirclePropertySetting::CirclePropertySetting(d2d::EditPanel* stage, 
 											 CircleShape* circle)
-	: d2d::IPropertySetting(editPanel, "Circle")
+	: d2d::IPropertySetting("Circle")
+	, m_stage(stage)
 	, m_circle(circle)
 {
 }

@@ -66,11 +66,12 @@ void Task::InitLayout()
 	StagePanel* stage;
 	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library);
 	m_library->SetCanvas(m_stage->getCanvas());
+	m_property->SetEditPanel(m_stage);
 
 	left_vert_splitter->SetSashGravity(0.2f);
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);
 
-	m_toolbar = new ToolbarPanel(right_splitter, m_stage, m_property);
+	m_toolbar = new ToolbarPanel(right_splitter, m_stage);
 
 	right_splitter->SetSashGravity(0.85f);
 	right_splitter->SplitVertically(left_vert_splitter, m_toolbar);

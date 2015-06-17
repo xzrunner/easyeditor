@@ -6,7 +6,6 @@
 #include "widgets/VerticalImageList.h"
 #include "view/EditPanel.h"
 #include "view/SpritePropertySetting.h"
-#include "view/PropertySettingPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/ViewPanelMgr.h"
 
@@ -15,12 +14,10 @@ namespace d2d
 
 ViewlistPanel::ViewlistPanel(wxWindow* parent, EditPanel* stage,
 							 MultiSpritesImpl* sprites_impl /*= NULL*/, 
-							 PropertySettingPanel* property /*= NULL*/,
 							 ViewPanelMgr* view_panel_mgr /*= NULL*/)
 	: wxPanel(parent, wxID_ANY)
 	, m_stage(stage)
 	, m_sprites_impl(sprites_impl)
-	, m_property(property)
 	, m_view_panel_mgr(view_panel_mgr)
 	, m_selected_spr(NULL)
 {
@@ -40,6 +37,10 @@ void ViewlistPanel::SelectSprite(ISprite* spr)
 	if (idx >= 0) {
 		m_list->SetSelection(idx);
 	}	
+}
+
+void ViewlistPanel::SelectMultiSprites(SpriteSelection* selection)
+{
 }
 
 void ViewlistPanel::ReorderSprite(ISprite* spr, bool up)
@@ -131,20 +132,6 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 {
 	m_selected_spr = spr;
 	m_selected_spr->Retain();
-
-	if (m_property)
-	{
-		d2d::IPropertySetting* setting = new d2d::SpritePropertySetting(m_stage, m_selected_spr);
-		m_property->SetPropertySetting(setting);
-	}
-
-// 	if (m_sprites_impl)
-// 	{
-// 		d2d::SpriteSelection* selection = m_sprites_impl->getSpriteSelection();
-// 		selection->Clear();
-// 		selection->Add(m_selected_spr);
-// 		m_stage->Refresh();
-// 	}
 
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->SelectSprite(spr, this);

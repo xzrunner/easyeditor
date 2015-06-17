@@ -9,8 +9,8 @@ namespace d2d
 	{
 	public:
 		ArrangeSpriteFixOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-			PropertySettingPanel* propertyPanel = NULL, AbstractEditCMPT* callback = NULL,
-			const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
+			PropertySettingPanel* propertyPanel = NULL, ViewPanelMgr* view_panel_mgr = NULL,
+			AbstractEditCMPT* callback = NULL, const ArrangeSpriteConfig& cfg = ArrangeSpriteConfig());
 
 		virtual bool OnMouseLeftUp(int x, int y);
 		//virtual bool OnMouseRightDown(int x, int y);

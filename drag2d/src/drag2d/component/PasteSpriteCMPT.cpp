@@ -7,10 +7,10 @@ namespace d2d
 
 PasteSpriteCMPT::PasteSpriteCMPT(wxWindow* parent, const wxString& name, 
 								 EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-								 PropertySettingPanel* propertyPanel)
+								 ViewPanelMgr* view_panel_mgr)
 	: AbstractEditCMPT(parent, name, editPanel)
 {
-	m_editOP = new PasteSpriteOP(editPanel, spritesImpl, propertyPanel, this);
+	m_editOP = new PasteSpriteOP(editPanel, spritesImpl, view_panel_mgr, this);
 }
 
 wxSizer* PasteSpriteCMPT::initLayout()

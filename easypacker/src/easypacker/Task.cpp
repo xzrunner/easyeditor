@@ -57,6 +57,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
+	context->property->SetEditPanel(context->stage);
 
 	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter, context->stage);
 }

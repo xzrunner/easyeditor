@@ -1,9 +1,9 @@
 #include "EditDialog.h"
+#include "PropertySettingPanel.h"
 #include "StagePanel.h"
 #include "FileSaver.h"
 #include "LibraryPanel.h"
 #include "Symbol.h"
-#include "SymbolPropertySetting.h"
 
 #include <wx/splitter.h>
 
@@ -46,7 +46,8 @@ wxWindow* EditDialog::InitLayoutLeft(wxWindow* parent)
 
 	m_library = new ecomplex::LibraryPanel(split);
 
-	m_property = new d2d::PropertySettingPanel(split);
+	m_property = new PropertySettingPanel(split);
+	m_view_panel_mgr.AddSpritePanel(m_property);
 
 	split->SetSashGravity(0.65f);
 	split->SplitHorizontally(m_library, m_property);
@@ -57,14 +58,17 @@ wxWindow* EditDialog::InitLayoutLeft(wxWindow* parent)
 wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, this, m_symbol, m_property, 
-		static_cast<ecomplex::LibraryPanel*>(m_library));
-	m_property->SetPropertySetting(new ecomplex::SymbolPropertySetting(m_stage, m_symbol));
+		static_cast<ecomplex::LibraryPanel*>(m_library), &m_view_panel_mgr);
+	m_view_panel_mgr.AddSpritePanel(m_stage);
+	m_property->SetEditPanel(m_stage);
+	m_property->SelectSprite(NULL);
 	return m_stage;
 }
 
 wxWindow* EditDialog::InitLayoutRight(wxWindow* parent)
 {
-	m_viewlist = new d2d::ViewlistPanel(parent, m_stage, m_stage, m_property);
+	m_viewlist = new d2d::ViewlistPanel(parent, m_stage, m_stage, &m_view_panel_mgr);
+	m_view_panel_mgr.AddSpritePanel(m_viewlist);
 	return m_viewlist;
 }
 

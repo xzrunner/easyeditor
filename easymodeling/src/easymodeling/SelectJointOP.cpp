@@ -9,10 +9,10 @@ using namespace emodeling;
 
 SelectJointOP::SelectJointOP(d2d::EditPanel* editPanel, 
 							 d2d::MultiSpritesImpl* spritesImpl, 
-							 d2d::PropertySettingPanel* propertyPanel, 
 							 d2d::ViewPanelMgr* view_panel_mgr,
 							 d2d::AbstractEditCMPT* callback /*= NULL*/)
-	: SelectBodyOP(editPanel, spritesImpl, propertyPanel, view_panel_mgr, callback)
+	: SelectBodyOP(editPanel, spritesImpl, view_panel_mgr, callback)
+	, m_property_panel(NULL)
 	, m_mouseOn(NULL)
 	, m_selected(NULL)
 {
@@ -69,12 +69,12 @@ bool SelectJointOP::OnMouseLeftDown(int x, int y)
 
 	if (m_selected)
 	{
-		m_propertyPanel->SetPropertySetting(new JointPropertySetting(m_stage, m_selected));
+		m_property_panel->SetPropertySetting(new JointPropertySetting(m_stage, m_selected));
 //		m_selection->clear();
 	}
 	else
 	{
-		m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
+		m_property_panel->SetPropertySetting(new WorldPropertySetting(m_stage));
 		SelectBodyOP::OnMouseLeftDown(x, y);
 	}
 
@@ -89,14 +89,14 @@ bool SelectJointOP::OnMouseLeftUp(int x, int y)
 	//selectedJoints.clear();
 	//static_cast<StagePanel*>(m_stage)->queryJointsByRect(d2d::Rect(pos, m_firstPos), selectedJoints);
 	//if (selectedJoints.size() == 1)
-	//	m_propertyPanel->SetPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
+	//	m_property_panel->SetPropertySetting(new JointPropertySetting(m_stage, selectedJoints[0]));
 
 	if (SelectBodyOP::OnMouseLeftUp(x, y)) return true;
 
 	if (m_selected)
-		m_propertyPanel->SetPropertySetting(new JointPropertySetting(m_stage, m_selected));
+		m_property_panel->SetPropertySetting(new JointPropertySetting(m_stage, m_selected));
 	else
-		m_propertyPanel->SetPropertySetting(new WorldPropertySetting(m_stage));
+		m_property_panel->SetPropertySetting(new WorldPropertySetting(m_stage));
 
 	return false;
 }
@@ -261,11 +261,6 @@ bool SelectJointOP::Clear()
 	m_selected = m_mouseOn = NULL;
 
 	return false;
-}
-
-d2d::IPropertySetting* SelectJointOP::createPropertySetting(d2d::ISprite* sprite) const
-{
-	return NULL;
 }
 
 void SelectJointOP::DrawSelectedVisitor::

@@ -11,7 +11,7 @@ class ChainShape;
 class ChainPropertySetting : public d2d::IPropertySetting
 {
 public:
-	ChainPropertySetting(d2d::EditPanel* editPanel, ChainShape* chain);
+	ChainPropertySetting(d2d::EditPanel* stage, ChainShape* chain);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 
@@ -20,6 +20,8 @@ protected:
 	virtual void InitProperties(wxPropertyGrid* pg);
 
 private:
+	d2d::EditPanel* m_stage;
+
 	ChainShape* m_chain;
 
 }; // ChainPropertySetting

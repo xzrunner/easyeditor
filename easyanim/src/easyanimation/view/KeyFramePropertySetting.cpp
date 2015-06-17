@@ -5,8 +5,8 @@
 namespace eanim
 {
 
-KeyFramePropertySetting::KeyFramePropertySetting(d2d::EditPanel* editpanel, KeyFrame* frame)
-	: d2d::IPropertySetting(editpanel, "KeyFrame")
+KeyFramePropertySetting::KeyFramePropertySetting(KeyFrame* frame)
+	: d2d::IPropertySetting("KeyFrame")
 	, m_frame(frame)
 {
 }

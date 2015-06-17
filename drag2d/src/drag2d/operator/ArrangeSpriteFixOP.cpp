@@ -8,8 +8,9 @@ namespace d2d
 ArrangeSpriteFixOP::ArrangeSpriteFixOP(EditPanel* editPanel, 
 									   MultiSpritesImpl* spritesImpl,
 									   PropertySettingPanel* propertyPanel/* = NULL*/, 
+									   ViewPanelMgr* view_panel_mgr/* = NULL*/,
 									   AbstractEditCMPT* callback/* = NULL*/, 
-									   const ArrangeSpriteConfig& cfg)
+									   const ArrangeSpriteConfig& cfg/* = NULL*/)
 	: ArrangeSpriteOP(editPanel, spritesImpl, propertyPanel, NULL, callback, cfg)
 	, m_spritesImpl(spritesImpl)
 {

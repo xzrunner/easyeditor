@@ -7,8 +7,9 @@ namespace eanim
 
 ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage, 
 								 d2d::PropertySettingPanel* property,
+								 d2d::ViewPanelMgr* view_panel_mgr,
 								 Controller* ctrl)
-	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, property)
+	: d2d::ArrangeSpriteOP<SelectSpritesOP>(stage, stage, property, view_panel_mgr)
 	, m_keyDownHandler(this, ctrl)
 	, m_selected(NULL)
 {

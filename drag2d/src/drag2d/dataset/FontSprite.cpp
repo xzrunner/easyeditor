@@ -5,6 +5,7 @@
 #include "common/color_trans.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/BVFactory.h"
+#include "view/FontPropertySetting.h"
 
 namespace d2d
 {
@@ -172,6 +173,11 @@ void FontSprite::buildBounding()
 	rect.shear(m_shear.x, m_shear.y);
 	m_bounding->initFromRect(rect);
 	m_bounding->setTransform(m_pos, m_offset, m_angle);
+}
+
+IPropertySetting* FontSprite::CreatePropertySetting(EditPanel* stage)
+{
+	return new FontPropertySetting(stage, this);
 }
 
 void FontSprite::loadFont(const std::string& _filename)

@@ -12,7 +12,7 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage)
 	: d2d::ToolbarPanel(parent, stage)
 	, m_stage(stage)
 {
-	addChild(new libshape::DrawPolygon2CMPT(this, "多边形", stage, stage, NULL));
+	addChild(new libshape::DrawPolygon2CMPT(this, "多边形", stage, stage, NULL, NULL));
 	SetSizer(initLayout());
 }
 

@@ -6,11 +6,6 @@
 #include "dataset/SymbolMgr.h"
 #include "dataset/SpriteFactory.h"
 #include "component/AbstractEditCMPT.h"
-#include "view/PropertySettingPanel.h"
-#include "view/SpritePropertySetting.h"
-#include "view/MultiSpritesPropertySetting.h"
-#include "view/TextPropertySetting.h"
-#include "view/FontPropertySetting.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/GLCanvas.h"
 #include "view/ViewPanelMgr.h"
@@ -25,13 +20,10 @@ namespace d2d
 {
 
 SelectSpritesOP::SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-								 PropertySettingPanel* propertyPanel, 
-								 ViewPanelMgr* view_panel_mgr,
-								 AbstractEditCMPT* callback)
+								 ViewPanelMgr* view_panel_mgr, AbstractEditCMPT* callback)
 	: DrawRectangleOP(editPanel)
 	, m_callback(callback)
 	, m_spritesImpl(spritesImpl)
-	, m_propertyPanel(propertyPanel)
 	, m_bDraggable(true)
 	, m_view_panel_mgr(view_panel_mgr)
 {
@@ -82,12 +74,13 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 		assert(selected->editable);
 		if (wxGetKeyState(WXK_CONTROL))
 		{
-			if (m_selection->IsExist(selected))
+			if (m_selection->IsExist(selected)) {
 				m_selection->Remove(selected);
-			else
-			{
+			} else {
 				m_selection->Add(selected);
-				OnPanelsSelected(selected);
+			}
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectMultiSprites(m_selection, m_spritesImpl);
 			}
 		}
 		else
@@ -96,7 +89,9 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 			{
 				m_selection->Clear();
 				m_selection->Add(selected);
-				OnPanelsSelected(selected);
+				if (m_view_panel_mgr) {
+					m_view_panel_mgr->SelectSprite(selected, m_spritesImpl);
+				}
 			}
 		}
 		m_firstPos.setInvalid();
@@ -151,16 +146,15 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		}
 	}
 
-	if (sprites.empty()) {
-		OnPanelsSelected(NULL);
-	} else {
-		OnPanelsSelected(sprites[0]);
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->SelectMultiSprites(m_selection, m_spritesImpl);
 	}
 
 	m_firstPos.setInvalid();
 
-	if (m_callback)
+	if (m_callback) {
 		m_callback->updateControlValue();
+	}
 
 	return false;
 }
@@ -237,23 +231,6 @@ bool SelectSpritesOP::Clear()
 	return false;
 }
 
-IPropertySetting* SelectSpritesOP::createPropertySetting(ISprite* sprite) const
-{
-	if (TextSprite* text = dynamic_cast<TextSprite*>(sprite))
-		return new TextPropertySetting(m_stage, text);
-	else if (FontSprite* font = dynamic_cast<FontSprite*>(sprite))
-		return new FontPropertySetting(m_stage, font);
-	else if (sprite)
-		return new SpritePropertySetting(m_stage, sprite);
-	else 
-		return NULL;
-}
-
-IPropertySetting* SelectSpritesOP::createPropertySetting(const std::vector<ISprite*>& sprites) const
-{
-	return new MultiSpritesPropertySetting(m_stage, sprites);
-}
-
 ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 {
 	ISprite* selected = NULL;
@@ -327,6 +304,8 @@ void SelectSpritesOP::CopyFromSelection()
 
 	m_selection->Clear();
 
+	ISprite* last_spr = NULL;
+
 	int i = 0;
 	Json::Value sval = value["sprite"][i++];
 	while (!sval.isNull()) {
@@ -339,39 +318,15 @@ void SelectSpritesOP::CopyFromSelection()
 		CopySprFromClipboard(sprite, sval);
 		m_spritesImpl->insertSprite(sprite);
 		m_selection->Add(sprite);
-		m_propertyPanel->SetPropertySetting(createPropertySetting(sprite));
+		last_spr = sprite;
 
 		sval = value["sprite"][i++];
 	}
+	m_view_panel_mgr->SelectSprite(last_spr, m_spritesImpl);
 
 	m_stage->getCanvas()->resetViewport();
 
 	wxTheClipboard->Close();
-}
-
-void SelectSpritesOP::OnPanelsSelected(d2d::ISprite* spr)
-{
-	if (m_propertyPanel)
-	{
-		if (m_selection->Size() == 1) {
-			m_propertyPanel->SetPropertySetting(createPropertySetting(spr));
-		} else if (m_selection->Size() > 1) {
-			std::vector<ISprite*> sprites;
-			m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-			m_propertyPanel->SetPropertySetting(createPropertySetting(sprites));
-		} else {
-			m_propertyPanel->SetPropertySetting(createPropertySetting(NULL));
-		}
-	}
-
-	if (m_view_panel_mgr)
-	{
-		if (m_selection->IsEmpty()) {
-			m_view_panel_mgr->SelectSprite(NULL, m_spritesImpl);
-		} else if (m_selection->Size() == 1) {
-			m_view_panel_mgr->SelectSprite(spr, m_spritesImpl);
-		}
-	}
 }
 
 } // d2d

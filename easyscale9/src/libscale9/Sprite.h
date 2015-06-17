@@ -24,11 +24,9 @@ public:
 	//
 	virtual const Symbol& getSymbol() const;
 	virtual void setSymbol(d2d::ISymbol* symbol);
-
 	virtual void load(const Json::Value& val);
 	virtual void store(Json::Value& val) const;
-
-	
+	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanel* stage);	
 
 	void GetSize(float& w, float& h) const;
 	void SetSize(float w, float h);

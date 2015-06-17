@@ -12,7 +12,8 @@ namespace eanim
 	{
 	public:
 		StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-			d2d::PropertySettingPanel* property, Controller* ctrl);
+			d2d::ViewPanelMgr* view_panel_mgr,
+			Controller* ctrl);
 		virtual ~StagePanel();
 
 		//

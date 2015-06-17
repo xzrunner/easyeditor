@@ -3,25 +3,37 @@
 
 #include <vector>
 
+#include "dataset/ObjSelectionSet.h"
+
 namespace d2d
 {
 
 class ISprite;
-class IViewPanel;
+class ISpriteViewPanel;
+class IShapeViewPanel;
 
 class ViewPanelMgr
 {
 public:
+	ViewPanelMgr() : m_locked(false) {}
 
-	void AddPanel(IViewPanel* panel);
+	void AddSpritePanel(ISpriteViewPanel* panel);
+	void AddShapePanel(IShapeViewPanel* panel);
 
-	void SelectSprite(ISprite* spr, IViewPanel* expect);
-	void ReorderSprite(ISprite* spr, bool up, IViewPanel* expect);
-	void InsertSprite(ISprite* spr, IViewPanel* expect);
-	void RemoveSprite(ISprite* spr, IViewPanel* expect);
+	void SelectSprite(ISprite* spr, ISpriteViewPanel* expect);
+	void SelectMultiSprites(SpriteSelection* selection, ISpriteViewPanel* expect);
+	void ReorderSprite(ISprite* spr, bool up, ISpriteViewPanel* expect);
+	void InsertSprite(ISprite* spr, ISpriteViewPanel* expect);
+	void RemoveSprite(ISprite* spr, ISpriteViewPanel* expect);
+
+	void SelectShape(IShape* shape, IShapeViewPanel* expect);
+	void SelectMultiShapes(ShapeSelection* selection, IShapeViewPanel* expect);
 
 private:
-	std::vector<IViewPanel*> m_panels;
+	std::vector<ISpriteViewPanel*> m_spr_panels;
+	std::vector<IShapeViewPanel*> m_shape_panels;
+
+	bool m_locked;
 
 }; // ViewPanelMgr
 

@@ -8,6 +8,7 @@
 #include "dataset/BVFactory.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/SpriteFactory.h"
+#include "view/SpritePropertySetting.h"
 
 namespace d2d
 {
@@ -211,6 +212,11 @@ void ISprite::buildBounding()
 	rect.shear(m_shear.x, m_shear.y);
 	m_bounding->initFromRect(rect);
 	m_bounding->setTransform(m_pos, m_offset, m_angle);
+}
+
+IPropertySetting* ISprite::CreatePropertySetting(EditPanel* stage)
+{
+	return new SpritePropertySetting(stage, this);
 }
 
 void ISprite::setTransform(const Vector& position, float angle)

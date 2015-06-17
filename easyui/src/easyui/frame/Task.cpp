@@ -93,9 +93,10 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_property, m_library, &m_view_panel_mgr);
+	m_view_panel_mgr.AddSpritePanel(m_stage);
 
-	m_view_panel_mgr.AddPanel(m_stage);
 	m_library->SetCanvas(m_stage->getCanvas());
+	m_property->SetEditPanel(m_stage);
 
 	return m_stage;
 }
@@ -104,11 +105,11 @@ wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	wxSplitterWindow* split = new wxSplitterWindow(parent);
 
-	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(split, m_stage, m_stage, m_property, &m_view_panel_mgr);
-	m_view_panel_mgr.AddPanel(viewlist);
+	d2d::ViewlistPanel* viewlist = new d2d::ViewlistPanel(split, m_stage, m_stage, &m_view_panel_mgr);
+	m_view_panel_mgr.AddSpritePanel(viewlist);
 	
 	d2d::GroupTreePanel* grouptree = new d2d::GroupTreePanel(split, m_stage, &m_view_panel_mgr);
-	m_view_panel_mgr.AddPanel(grouptree);
+	m_view_panel_mgr.AddSpritePanel(grouptree);
 
 	split->SetSashGravity(0.5f);
 	split->SplitHorizontally(viewlist, grouptree);

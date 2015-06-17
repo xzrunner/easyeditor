@@ -11,7 +11,7 @@ class KeyFrame;
 class KeyFramePropertySetting : public d2d::IPropertySetting
 {
 public:
-	KeyFramePropertySetting(d2d::EditPanel* editpanel, KeyFrame* frame);
+	KeyFramePropertySetting(KeyFrame* frame);
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value);
 

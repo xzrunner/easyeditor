@@ -248,6 +248,14 @@
 				Name="property"
 				>
 				<File
+					RelativePath="..\..\..\src\libcomplex\PropertySettingPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libcomplex\PropertySettingPanel.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\libcomplex\SymbolPropertySetting.cpp"
 					>
 				</File>

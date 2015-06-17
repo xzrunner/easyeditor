@@ -7,7 +7,6 @@
 #include "libparticle2d/Sprite.h"
 #include "libparticle2d/LibraryPage.h"
 #include "libparticle2d/LibraryPanel.h"
-#include "libparticle2d/SymbolPropertySetting.h"
 #include "libparticle2d/StagePanel.h"
 #include "libparticle2d/ToolbarPanel.h"
 

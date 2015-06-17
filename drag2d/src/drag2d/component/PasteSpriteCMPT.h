@@ -1,28 +1,32 @@
-#pragma once
+#ifndef _DRAG2D_PASTE_SPRITE_CMPT_H_
+#define _DRAG2D_PASTE_SPRITE_CMPT_H_
 
 #include "AbstractEditCMPT.h"
 
 namespace d2d
 {
-	class MultiSpritesImpl;
-	class PropertySettingPanel;
 
-	class PasteSpriteCMPT : public AbstractEditCMPT
-	{
-	public:
-		PasteSpriteCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel, 
-			MultiSpritesImpl* spritesImpl, PropertySettingPanel* propertyPanel = NULL);
+class MultiSpritesImpl;
+class ViewPanelMgr;
 
-		bool isHorMirror() const { return m_xMirror->IsChecked(); }
-		bool isVerMirror() const { return m_yMirror->IsChecked(); }
+class PasteSpriteCMPT : public AbstractEditCMPT
+{
+public:
+	PasteSpriteCMPT(wxWindow* parent, const wxString& name, EditPanel* editPanel, 
+		MultiSpritesImpl* spritesImpl, ViewPanelMgr* view_panel_mgr = NULL);
 
-	protected:
-		virtual wxSizer* initLayout();
+	bool isHorMirror() const { return m_xMirror->IsChecked(); }
+	bool isVerMirror() const { return m_yMirror->IsChecked(); }
 
-	private:
-		wxCheckBox* m_xMirror;
-		wxCheckBox* m_yMirror;
+protected:
+	virtual wxSizer* initLayout();
 
-	}; // PasteSpriteCMPT
+private:
+	wxCheckBox* m_xMirror;
+	wxCheckBox* m_yMirror;
+
+}; // PasteSpriteCMPT
+
 }
 
+#endif // _DRAG2D_PASTE_SPRITE_CMPT_H_

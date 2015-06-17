@@ -2265,7 +2265,11 @@
 				Name="base"
 				>
 				<File
-					RelativePath="..\..\..\src\drag2d\view\IViewPanel.h"
+					RelativePath="..\..\..\src\drag2d\view\IShapeViewPanel.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\ISpriteViewPanel.h"
 					>
 				</File>
 				<File

@@ -39,6 +39,8 @@ private:
  	StagePanel* m_stage;
 	d2d::ViewlistPanel* m_viewlist;
 
+	d2d::ViewPanelMgr m_view_panel_mgr;
+
 }; // Task
 
 }

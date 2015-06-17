@@ -1,6 +1,5 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
-#include "SelectSpritesOP.h"
 #include "ArrangeSpriteImpl.h"
 
 #include <easycomplex.h>
@@ -16,7 +15,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(this, library)
 	, m_symbols_cfg(this, library)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, 
+	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, property, 
 		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
 	m_canvas = new StageCanvas(this);
 }

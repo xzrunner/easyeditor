@@ -1,4 +1,3 @@
-
 #ifndef EMODELING_SELECT_BODY_OP_H
 #define EMODELING_SELECT_BODY_OP_H
 
@@ -13,7 +12,6 @@ namespace emodeling
 	public:
 		SelectBodyOP(d2d::EditPanel* editPanel, 
 			d2d::MultiSpritesImpl* spritesImpl, 
-			d2d::PropertySettingPanel* propertyPanel, 
 			d2d::ViewPanelMgr* view_panel_mgr = NULL,
 			d2d::AbstractEditCMPT* callback = NULL);
 
@@ -23,8 +21,6 @@ namespace emodeling
 
 		virtual bool OnDraw() const;
 		virtual bool Clear();
-
-		virtual d2d::IPropertySetting* createPropertySetting(d2d::ISprite* sprite) const;
 
 	private:
 		class DrawSelectedVisitor : public d2d::IVisitor

@@ -7,9 +7,11 @@ namespace libshape
 
 EditCircleOP::EditCircleOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl, 
 						   d2d::PropertySettingPanel* propertyPanel, 
+						   d2d::ViewPanelMgr* view_panel_mgr,
 						   d2d::OneFloatValue* node_capture)
 	: ZoomViewOP(editPanel, true)
 	, m_propertyPanel(propertyPanel)
+	, m_view_panel_mgr(view_panel_mgr)
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
 {
@@ -28,8 +30,8 @@ bool EditCircleOP::OnKeyDown(int keyCode)
 		m_captured.clear();
 		m_stage->Refresh();
 
-		if (m_propertyPanel) {
-			m_propertyPanel->SetPropertySetting(NULL);
+		if (m_view_panel_mgr) {
+			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
 		}
 	}
 
@@ -52,10 +54,10 @@ bool EditCircleOP::OnMouseLeftDown(int x, int y)
 
 		if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
 		{
-			if (m_propertyPanel) {
-				m_propertyPanel->SetPropertySetting(new CirclePropertySetting(m_stage, circle));
-			}
 			m_shapesImpl->getShapeSelection()->Add(circle);
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectShape(circle, m_shapesImpl);
+			}
 		}
 	}
 	else
@@ -80,8 +82,8 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 			if (radius > 0)
 			{
 				CircleShape* circle = new CircleShape(m_firstPress, radius);
-				if (m_propertyPanel) {
-					m_propertyPanel->SetPropertySetting(new CirclePropertySetting(m_stage, circle));
+				if (m_view_panel_mgr) {
+					m_view_panel_mgr->SelectShape(circle, m_shapesImpl);
 				}
 				m_shapesImpl->getShapeSelection()->Add(circle);
 				m_shapesImpl->insertShape(circle);
@@ -92,8 +94,11 @@ bool EditCircleOP::OnMouseLeftUp(int x, int y)
 	{
 		if (m_propertyPanel) {
 			m_propertyPanel->EnablePropertyGrid(true);
-			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape))
-				m_propertyPanel->SetPropertySetting(new CirclePropertySetting(m_stage, circle));
+			if (CircleShape* circle = dynamic_cast<CircleShape*>(m_captured.shape)) {
+				if (m_view_panel_mgr) {
+					m_view_panel_mgr->SelectShape(circle, m_shapesImpl);
+				}
+			}
 		}
 	}
 
@@ -122,8 +127,8 @@ bool EditCircleOP::OnMouseRightDown(int x, int y)
 			m_captured.clear();
 			m_stage->Refresh();
 
-			if (m_propertyPanel) {
-				m_propertyPanel->SetPropertySetting(NULL);
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
 			}
 		}
 	}

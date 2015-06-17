@@ -51,17 +51,17 @@ void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 	switch (type)
 	{
 	case ST_RECT:
-		op = new EditRectOP(m_stage, m_stage, NULL, &m_capture);
+		op = new EditRectOP(m_stage, m_stage, NULL, NULL, &m_capture);
 		break;
 	case ST_CIRCLE:
-		op = new EditCircleOP(m_stage, m_stage, NULL, &m_capture);
+		op = new EditCircleOP(m_stage, m_stage, NULL, NULL, &m_capture);
 		break;
 	case ST_CHAIN: case ST_POLYGON:
 		op = new EditPolylineOP<DrawPolygonOP, 
-			d2d::SelectShapesOP>(m_stage, m_stage, NULL, new d2d::OneFloatValueStatic(5), NULL); 
+			d2d::SelectShapesOP>(m_stage, m_stage, NULL, NULL, new d2d::OneFloatValueStatic(5), NULL); 
 		break;
 	case ST_BEZIER:
-		op = new EditBezierOP(m_stage, m_stage, NULL, &m_capture);
+		op = new EditBezierOP(m_stage, m_stage, NULL, NULL, &m_capture);
 		break;
 	}
 

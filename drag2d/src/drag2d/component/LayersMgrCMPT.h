@@ -1,34 +1,38 @@
-#pragma once
+#ifndef _DRAG2D_LAYERS_MGR_CMPT_H_
+#define _DRAG2D_LAYERS_MGR_CMPT_H_
 
 #include "AbstractEditCMPT.h"
 
 namespace d2d
 {
-	class MultiShapesImpl;
-	class MultiSpritesImpl;
-	class LayersMgrWidget;
-	class PropertySettingPanel;
 
-	class LayersMgrCMPT : public AbstractEditCMPT
-	{
-	public:
-		LayersMgrCMPT(wxWindow* parent, const wxString& name,
-			EditPanel* editPanel, MultiShapesImpl* shapesImpl,
-			PropertySettingPanel* propertyPanel);
-		LayersMgrCMPT(wxWindow* parent, const wxString& name,
-			EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
-			PropertySettingPanel* propertyPanel);
+class MultiShapesImpl;
+class MultiSpritesImpl;
+class LayersMgrWidget;
+class ViewPanelMgr;
 
-		LayersMgrWidget* getLayersMgr() { return m_layersMgr; }
+class LayersMgrCMPT : public AbstractEditCMPT
+{
+public:
+	LayersMgrCMPT(wxWindow* parent, const wxString& name,
+		EditPanel* editPanel, MultiShapesImpl* shapesImpl,
+		ViewPanelMgr* view_panel_mgr);
+	LayersMgrCMPT(wxWindow* parent, const wxString& name,
+		EditPanel* editPanel, MultiSpritesImpl* spritesImpl,
+		ViewPanelMgr* view_panel_mgr);
 
-	protected:
-		virtual wxSizer* initLayout();
+	LayersMgrWidget* getLayersMgr() { return m_layersMgr; }
 
-	private:
-		LayersMgrWidget* m_layersMgr;
+protected:
+	virtual wxSizer* initLayout();
 
-		wxSizer* m_sizer;
+private:
+	LayersMgrWidget* m_layersMgr;
 
-	}; // LayersMgrCMPT
+	wxSizer* m_sizer;
+
+}; // LayersMgrCMPT
+
 }
 
+#endif // _DRAG2D_LAYERS_MGR_CMPT_H_

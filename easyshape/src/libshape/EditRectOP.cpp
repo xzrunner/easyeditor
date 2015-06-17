@@ -7,9 +7,11 @@ namespace libshape
 
 EditRectOP::EditRectOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 					   d2d::PropertySettingPanel* propertyPanel,
+					   d2d::ViewPanelMgr* view_panel_mgr,
 					   d2d::OneFloatValue* node_capture)
 	: d2d::ZoomViewOP(editPanel, true)
 	, m_propertyPanel(propertyPanel)
+	, m_view_panel_mgr(view_panel_mgr)
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
 {
@@ -28,7 +30,9 @@ bool EditRectOP::OnKeyDown(int keyCode)
 		m_captured.clear();
 		m_stage->Refresh();
 
-		m_propertyPanel->SetPropertySetting(NULL);
+		if (m_view_panel_mgr) {
+			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
+		}
 	}
 
 	return false;
@@ -50,8 +54,10 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			m_propertyPanel->SetPropertySetting(new RectPropertySetting(m_stage, rect));
 			m_shapesImpl->getShapeSelection()->Add(rect);
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
+			}
 		}
 	}
 	else
@@ -76,7 +82,9 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 			if (dis > 1)
 			{
 				RectShape* rect = new RectShape(m_firstPress, m_currPos);
-				m_propertyPanel->SetPropertySetting(new RectPropertySetting(m_stage, rect));
+				if (m_view_panel_mgr) {
+					m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
+				}
 				m_shapesImpl->getShapeSelection()->Add(rect);
 				m_shapesImpl->insertShape(rect);
 			}
@@ -85,8 +93,11 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 	else
 	{
 		m_propertyPanel->EnablePropertyGrid(true);
-		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
-			m_propertyPanel->SetPropertySetting(new RectPropertySetting(m_stage, rect));
+		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape)) {
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
+			}
+		}
 	}
 
 	Clear();
@@ -114,7 +125,9 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 			m_captured.clear();
 			m_stage->Refresh();
 
-			m_propertyPanel->SetPropertySetting(NULL);
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
+			}
 		}
 	}
 	else

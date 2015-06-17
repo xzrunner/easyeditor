@@ -1,12 +1,16 @@
 #include "PropertySettingPanel.h"
 #include "IPropertySetting.h"
 
+#include "common/visitors.h"
+#include "view/MultiSpritesPropertySetting.h"
+
 namespace d2d
 {
 
 PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY)
 	, m_setting(NULL)
+	, m_stage(NULL)
 {
 	InitLayout();
 
@@ -16,6 +20,52 @@ PropertySettingPanel::PropertySettingPanel(wxWindow* parent)
 PropertySettingPanel::~PropertySettingPanel()
 {
 	delete m_setting;
+}
+
+void PropertySettingPanel::SelectSprite(ISprite* spr)
+{
+	assert(m_stage);
+	if (spr) {
+		SetPropertySetting(spr->CreatePropertySetting(m_stage));
+	} else {
+		SetPropertySetting(CreateDefaultProperty());
+	}
+}
+
+void PropertySettingPanel::SelectMultiSprites(SpriteSelection* selection)
+{
+	std::vector<ISprite*> sprites;
+	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	if (sprites.empty()) {
+		SelectSprite(NULL);
+	} else if (sprites.size() == 1) {
+		SelectSprite(sprites[0]);
+	} else {
+		SetPropertySetting(new MultiSpritesPropertySetting(m_stage, sprites));
+	}
+}
+
+void PropertySettingPanel::SelectShape(IShape* shape)
+{
+	assert(m_stage);
+	if (shape) {
+		SetPropertySetting(shape->createPropertySetting(m_stage));
+	} else {
+		SetPropertySetting(CreateDefaultProperty());
+	}
+}
+
+void PropertySettingPanel::SelectMultiShapes(ShapeSelection* selection)
+{
+	std::vector<IShape*> shapes;
+	selection->Traverse(FetchAllVisitor<IShape>(shapes));
+	if (shapes.empty()) {
+		SelectShape(NULL);
+	} else if (shapes.size() == 1) {
+		SelectShape(shapes[0]);
+	} else {
+		SelectShape(NULL);
+	}
 }
 
 void PropertySettingPanel::SetPropertySetting(IPropertySetting* setting)

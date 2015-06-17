@@ -1,6 +1,6 @@
-
 #include "Task.h"
 #include "LibraryPanel.h"
+#include "PropertySettingPanel.h"
 #include "StagePanel.h"
 #include "ToolbarPanel.h"
 #include "PreviewDialog.h"
@@ -73,9 +73,10 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 
 	library = context->library = new LibraryPanel(leftHorizontalSplitter);
 
-	property = context->property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	property = context->property = new PropertySettingPanel(leftHorizontalSplitter);
 
 	stage = context->stage = new StagePanel(leftVerticalSplitter, m_parent);
+	context->property->SetEditPanel(context->stage);
 
 	toolbar = context->toolbar = new ToolbarPanel(rightVerticalSplitter);
 

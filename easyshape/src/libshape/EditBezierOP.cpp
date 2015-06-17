@@ -7,9 +7,11 @@ namespace libshape
 
 EditBezierOP::EditBezierOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
 						   d2d::PropertySettingPanel* propertyPanel, 
+						   d2d::ViewPanelMgr* view_panel_mgr,
 						   d2d::OneFloatValue* node_capture)
 	: ZoomViewOP(editPanel, true)
 	, m_propertyPanel(propertyPanel)
+	, m_view_panel_mgr(view_panel_mgr)
 	, m_shapesImpl(shapesImpl)
 	, m_node_capture(node_capture)
 {
@@ -28,7 +30,9 @@ bool EditBezierOP::OnKeyDown(int keyCode)
 		m_captured.clear();
 		m_stage->Refresh();
 
-		m_propertyPanel->SetPropertySetting(NULL);
+		if (m_view_panel_mgr) {
+			m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
+		}
 	}
 
 	return false;
@@ -47,11 +51,12 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
 	{	
 		NodeCapture capture(m_shapesImpl, tolerance);
 		capture.captureEditable(m_firstPress, m_captured);
-
  		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
 		{
- 			m_propertyPanel->SetPropertySetting(new BezierPropertySetting(m_stage, bezier));
 			m_shapesImpl->getShapeSelection()->Add(bezier);
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectShape(bezier, m_shapesImpl);
+			}
 		}
 	}
 	else
@@ -76,7 +81,9 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 			if (dis > 1)
 			{
 				BezierShape* bezier = new BezierShape(m_firstPress, m_currPos);
-				m_propertyPanel->SetPropertySetting(new BezierPropertySetting(m_stage, bezier));
+				if (m_view_panel_mgr) {
+					m_view_panel_mgr->SelectShape(bezier, m_shapesImpl);
+				}
 				m_shapesImpl->getShapeSelection()->Add(bezier);
 				m_shapesImpl->insertShape(bezier);
 			}
@@ -85,8 +92,9 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 	else
 	{
  		m_propertyPanel->EnablePropertyGrid(true);
- 		if (BezierShape* bezier = dynamic_cast<BezierShape*>(m_captured.shape))
- 			m_propertyPanel->SetPropertySetting(new BezierPropertySetting(m_stage, bezier));
+		if (m_view_panel_mgr) {
+			m_view_panel_mgr->SelectShape(m_captured.shape, m_shapesImpl);
+		}
 	}
 
 	Clear();
@@ -114,7 +122,9 @@ bool EditBezierOP::OnMouseRightDown(int x, int y)
 			m_captured.clear();
 			m_stage->Refresh();
 
-			m_propertyPanel->SetPropertySetting(NULL);
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
+			}
 		}
 	}
 	else

@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "SpritePropertySetting.h"
 
 namespace eicon
 {
@@ -59,6 +60,11 @@ void Sprite::store(Json::Value& val) const
 {
 	ISprite::store(val);
 	val["process"] = m_process;
+}
+
+d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanel* stage)
+{
+	return new SpritePropertySetting(stage, this);
 }
 
 void Sprite::SetProcess(float process)

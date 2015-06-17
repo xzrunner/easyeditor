@@ -7,6 +7,7 @@ namespace ecomplex
 {
 
 class Symbol;
+class PropertySettingPanel;
 class StagePanel;
 
 class EditDialog : public wxDialog
@@ -27,11 +28,13 @@ private:
 
 private:
 	d2d::LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
+	PropertySettingPanel* m_property;
 	StagePanel* m_stage;
 	d2d::ViewlistPanel* m_viewlist;
 
 	Symbol* m_symbol;
+
+	d2d::ViewPanelMgr m_view_panel_mgr;
 
 	DECLARE_EVENT_TABLE()
 

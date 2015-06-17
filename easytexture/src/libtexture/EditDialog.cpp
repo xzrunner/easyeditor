@@ -65,7 +65,7 @@ void EditDialog::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite
 	left_splitter->SetSashGravity(0.15f);
 	left_splitter->SplitVertically(library, stage);
 
-	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, stage, NULL);
+	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, stage);
 
 	right_splitter->SetSashGravity(0.85f);
 	right_splitter->SplitVertically(left_splitter, toolbar);

@@ -1,6 +1,7 @@
 #include "Task.h"
 #include "FileIO.h"
 
+#include "view/PropertySettingPanel.h"
 #include "view/StagePanel.h"
 #include "view/ToolbarPanel.h"
 #include "view/TimeLinePanel.h"
@@ -110,7 +111,8 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_widgets.m_library->AddPage(new eicon::LibraryPage(nb));
 
 	// property
-	m_widgets.m_property = new d2d::PropertySettingPanel(split);
+	m_widgets.m_property = new PropertySettingPanel(split);
+	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_property);
 
 	split->SetSashGravity(0.55f);
 	split->SplitHorizontally(m_widgets.m_library, m_widgets.m_property);
@@ -124,7 +126,10 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	wxSplitterWindow* top_split = new wxSplitterWindow(bottom_split);
 
 	// stage
-	m_widgets.m_stage = new StagePanel(top_split, m_parent, m_widgets.m_property, &m_controller);
+	m_widgets.m_stage = new StagePanel(top_split, m_parent, m_widgets.m_property, 
+		&m_widgets.m_view_panel_mgr, &m_controller);
+	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_stage);
+	m_widgets.m_property->SetEditPanel(m_widgets.m_stage);
 	m_widgets.m_library->SetCanvas(m_widgets.m_stage->getCanvas());	// ?
 
 	// toolbar
@@ -146,7 +151,8 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
 	// viewlist
-	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent, m_widgets.m_stage, m_widgets.m_stage, m_widgets.m_property);
+	m_widgets.m_viewlist = new d2d::ViewlistPanel(parent, m_widgets.m_stage, m_widgets.m_stage, &m_widgets.m_view_panel_mgr);
+	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_viewlist);
 
 	return m_widgets.m_viewlist;
 }

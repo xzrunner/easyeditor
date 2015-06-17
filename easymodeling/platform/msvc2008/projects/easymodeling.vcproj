@@ -446,37 +446,49 @@
 				Name="property"
 				>
 				<File
-					RelativePath="..\..\..\src\easymodeling\BodyPropertySetting.cpp"
+					RelativePath="..\..\..\src\easymodeling\PropertySettingPanel.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easymodeling\BodyPropertySetting.h"
+					RelativePath="..\..\..\src\easymodeling\PropertySettingPanel.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\easymodeling\FixturePropertySetting.cpp"
+				<Filter
+					Name="settings"
 					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easymodeling\FixturePropertySetting.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easymodeling\JointPropertySetting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easymodeling\JointPropertySetting.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easymodeling\WorldPropertySetting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easymodeling\WorldPropertySetting.h"
-					>
-				</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\BodyPropertySetting.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\BodyPropertySetting.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\FixturePropertySetting.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\FixturePropertySetting.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\JointPropertySetting.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\JointPropertySetting.h"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\WorldPropertySetting.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\easymodeling\WorldPropertySetting.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<File
@@ -497,7 +509,7 @@
 					Name="VCResourceCompilerTool"
 					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
 				/>
-			</FileConfiguration>			
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>

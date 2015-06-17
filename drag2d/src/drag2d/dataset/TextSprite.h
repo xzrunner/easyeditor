@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_TEXT_SPRITE_H_
+#define _DRAG2D_TEXT_SPRITE_H_
 
 #include "ISprite.h"
 
@@ -8,49 +9,53 @@
 
 namespace d2d
 {
-	class TextSprite : public ISprite
-	{
-	public:
-		TextSprite();
-		TextSprite(const TextSprite& sprite);
-		TextSprite(FontSymbol* symbol);
-		virtual ~TextSprite();
 
-		//
-		// IObject interface
-		//
-		virtual TextSprite* clone() const;
+class TextSprite : public ISprite
+{
+public:
+	TextSprite();
+	TextSprite(const TextSprite& sprite);
+	TextSprite(FontSymbol* symbol);
+	virtual ~TextSprite();
 
-		//
-		// ISprite interface
-		//
-		virtual const FontSymbol& getSymbol() const;
-		virtual void setSymbol(ISymbol* symbol);
+	//
+	// IObject interface
+	//
+	virtual TextSprite* clone() const;
 
-		virtual void setTransform(const Vector& position, float angle);
+	//
+	// ISprite interface
+	//
+	virtual const FontSymbol& getSymbol() const;
+	virtual void setSymbol(ISymbol* symbol);
 
-		void setText(const std::string& text);
-		const std::string& getText() const {
-			return m_text;
-		}
+	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
 
-		void setSize(int size);
-		int getSize() const { return m_size; }
+	virtual void setTransform(const Vector& position, float angle);
 
-		void setColor(const d2d::Colori& color) { m_color = color; }
-		const d2d::Colori& getColor() const { return m_color; }
+	void setText(const std::string& text);
+	const std::string& getText() const {
+		return m_text;
+	}
 
-	protected:
-		FontSymbol* m_symbol;
+	void setSize(int size);
+	int getSize() const { return m_size; }
 
-	private:
-		std::string m_text;
+	void setColor(const d2d::Colori& color) { m_color = color; }
+	const d2d::Colori& getColor() const { return m_color; }
 
-		int m_size;
+protected:
+	FontSymbol* m_symbol;
 
-		d2d::Colori m_color;
+private:
+	std::string m_text;
 
-	}; // TextSprite
+	int m_size;
+
+	d2d::Colori m_color;
+
+}; // TextSprite
+
 }
 
-
+#endif // _DRAG2D_TEXT_SPRITE_H_

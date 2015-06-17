@@ -34,6 +34,8 @@ public:
 
 	virtual void buildBounding();
 
+	virtual IPropertySetting* CreatePropertySetting(EditPanel* stage);
+
 	void loadFont(const std::string& filename);
 
 	void SetTextContent(const wxString& str) { m_text = str; }

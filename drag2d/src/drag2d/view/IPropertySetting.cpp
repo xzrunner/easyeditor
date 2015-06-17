@@ -6,10 +6,8 @@ namespace d2d
 
 const wxString IPropertySetting::TYPE_NAME = wxT("Type");
 
-IPropertySetting::IPropertySetting(d2d::EditPanel* stage,
-								   const std::string& type)
-	: m_stage(stage)
-	, m_type(type)
+IPropertySetting::IPropertySetting(const std::string& type)
+	: m_type(type)
 {
 }
 

@@ -316,14 +316,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\src\easyui\view\SelectSpritesOP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\easyui\view\SelectSpritesOP.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\..\src\easyui\view\TranslateSpriteState.cpp"
 					>
 				</File>
@@ -391,7 +383,7 @@
 					Name="VCResourceCompilerTool"
 					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
 				/>
-			</FileConfiguration>			
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>

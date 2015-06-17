@@ -13,7 +13,6 @@ namespace d2d
 
 class MultiSpritesImpl;
 class AbstractEditCMPT;
-class PropertySettingPanel;
 class IPropertySetting;
 class ViewPanelMgr;
 
@@ -21,8 +20,7 @@ class SelectSpritesOP : public DrawRectangleOP
 {
 public:
 	SelectSpritesOP(EditPanel* editPanel, MultiSpritesImpl* spritesImpl, 
-		PropertySettingPanel* propertyPanel = NULL, ViewPanelMgr* view_panel_mgr = NULL,
-		AbstractEditCMPT* callback = NULL);
+		ViewPanelMgr* view_panel_mgr = NULL, AbstractEditCMPT* callback = NULL);
 	virtual ~SelectSpritesOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -35,9 +33,6 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	virtual IPropertySetting* createPropertySetting(ISprite* sprite) const;
-	virtual IPropertySetting* createPropertySetting(const std::vector<ISprite*>& sprites) const;
-
 protected:
 	virtual ISprite* SelectByPos(const Vector& pos) const;
 
@@ -48,12 +43,8 @@ private:
 	void PasteToSelection() const;
 	void CopyFromSelection();
 
-	void OnPanelsSelected(d2d::ISprite* spr);
-
 protected:
 	SpriteSelection* m_selection;
-
-	PropertySettingPanel* m_propertyPanel;
 
 	MultiSpritesImpl* m_spritesImpl;
 

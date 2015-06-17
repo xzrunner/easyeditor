@@ -1,4 +1,3 @@
-
 #include "SelectBodyOP.h"
 #include "BodyPropertySetting.h"
 #include "WorldPropertySetting.h"
@@ -11,10 +10,9 @@ using namespace emodeling;
 
 SelectBodyOP::SelectBodyOP(d2d::EditPanel* editPanel, 
 						   d2d::MultiSpritesImpl* spritesImpl, 
-						   d2d::PropertySettingPanel* propertyPanel, 
 						   d2d::ViewPanelMgr* view_panel_mgr, 
 						   d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, view_panel_mgr, callback)
+	: d2d::SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr, callback)
 	, m_mouseOn(NULL)
 {
 }
@@ -84,14 +82,6 @@ bool SelectBodyOP::Clear()
 	m_mouseOn = NULL;
 
 	return false;
-}
-
-d2d::IPropertySetting* SelectBodyOP::createPropertySetting(d2d::ISprite* sprite) const
-{
-	if (sprite)
-		return new BodyPropertySetting(m_stage, sprite);
-	else
-		return new WorldPropertySetting(m_stage);
 }
 
 //////////////////////////////////////////////////////////////////////////

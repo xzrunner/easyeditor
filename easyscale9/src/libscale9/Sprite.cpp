@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "SpritePropertySetting.h"
 
 namespace escale9
 {
@@ -86,6 +87,11 @@ void Sprite::store(Json::Value& val) const
 	m_data.GetSize(w, h);
 	val["scale9"]["width"] = w;
 	val["scale9"]["height"] = h;
+}
+
+d2d::IPropertySetting* Sprite::CreatePropertySetting(d2d::EditPanel* stage)
+{
+	return new SpritePropertySetting(stage, this);
 }
 
 void Sprite::GetSize(float& w, float& h) const

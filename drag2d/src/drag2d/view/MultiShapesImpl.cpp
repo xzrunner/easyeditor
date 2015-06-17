@@ -14,6 +14,16 @@ MultiShapesImpl::~MultiShapesImpl()
 	m_shapeSelection->Release();
 }
 
+void MultiShapesImpl::SelectShape(IShape* shape)
+{
+	m_shapeSelection->Clear();
+	m_shapeSelection->Add(shape);
+}
+
+void MultiShapesImpl::SelectMultiShapes(ShapeSelection* selection)
+{
+}
+
 IShape* MultiShapesImpl::queryShapeByPos(const Vector& pos) const
 {
 	IShape* result = NULL;

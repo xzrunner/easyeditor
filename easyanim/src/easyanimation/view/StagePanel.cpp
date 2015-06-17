@@ -12,14 +12,14 @@ namespace eanim
 {
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
-					   d2d::PropertySettingPanel* property,
+					   d2d::ViewPanelMgr* view_panel_mgr,
 					   Controller* ctrl)
 	: EditPanel(parent, frame)
 	, MultiSpritesImpl(parent)
 	, m_ctrl(ctrl)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
-	m_editOP = new ArrangeSpriteOP(this, property, ctrl);
+	m_editOP = new ArrangeSpriteOP(this, view_panel_mgr, ctrl);
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, m_ctrl->GetLibraryPanel()));

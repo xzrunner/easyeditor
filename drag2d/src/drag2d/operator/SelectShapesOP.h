@@ -10,16 +10,16 @@ namespace d2d
 
 class EditPanel;
 class MultiShapesImpl;
-class PropertySettingPanel;
 class AbstractEditCMPT;
 class IPropertySetting;
 class IShape;
+class ViewPanelMgr;
 
 class SelectShapesOP : public DrawRectangleOP
 {
 public:
 	SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl, 
-		PropertySettingPanel* propertyPanel, AbstractEditCMPT* callback = NULL);
+		ViewPanelMgr* view_panel_mgr = NULL, AbstractEditCMPT* callback = NULL);
 	virtual ~SelectShapesOP();
 
 	virtual bool OnKeyDown(int keyCode);
@@ -30,8 +30,6 @@ public:
 	virtual bool OnDraw() const;
 	virtual bool Clear();
 
-	virtual IPropertySetting* createPropertySetting(IShape* shape) const;
-
 private:
 	void clearClipboard();
 
@@ -39,8 +37,6 @@ protected:
 	Vector m_firstPos;
 
 	ShapeSelection* m_selection;
-
-	PropertySettingPanel* m_propertyPanel;
 
 private:
 	AbstractEditCMPT* m_callback;
@@ -51,6 +47,8 @@ private:
 
 	// To disable mouse able when press ctrl and window query
 	bool m_bDraggable;
+
+	ViewPanelMgr* m_view_panel_mgr;
 
 }; // SelectShapesOP
 

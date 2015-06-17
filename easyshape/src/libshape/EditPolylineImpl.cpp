@@ -14,6 +14,7 @@ namespace libshape
 EditPolylineImpl::EditPolylineImpl(d2d::EditPanel* editPanel,
 								   d2d::MultiShapesImpl* shapesImpl,
 								   d2d::PropertySettingPanel* propertyPanel, 
+								   d2d::ViewPanelMgr* view_panel_mgr,
 								   d2d::OneFloatValue* node_capture, 
 								   DrawPolylineOP* draw_op,
 								   d2d::AbstractEditOP* select_op,
@@ -24,6 +25,8 @@ EditPolylineImpl::EditPolylineImpl(d2d::EditPanel* editPanel,
 	m_shapesImpl = shapesImpl;
 
 	m_propertyPanel = propertyPanel;
+
+	m_view_panel_mgr = view_panel_mgr;
 
 	m_node_capture = node_capture;
 
@@ -184,8 +187,8 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 					m_capturedEditable.clear();
 					m_captureSelectable.clear();
 					m_dirty = true;
-					if (m_propertyPanel) {
-						m_propertyPanel->SetPropertySetting(NULL);
+					if (m_view_panel_mgr) {
+						m_view_panel_mgr->SelectShape(NULL, m_shapesImpl);
 					}
 				}
 				m_capturedEditable.shape = NULL;
@@ -315,12 +318,8 @@ void EditPolylineImpl::drawCaptured(const NodeAddr& captured) const
 
 void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 {
-	if (m_propertyPanel) {
-		if (PolygonShape* poly = dynamic_cast<PolygonShape*>(captured.shape)) {
-			m_propertyPanel->SetPropertySetting(new PolygonPropertySetting(m_stage, poly));
-		} else if (ChainShape* chain = dynamic_cast<ChainShape*>(captured.shape)) {
-			m_propertyPanel->SetPropertySetting(new ChainPropertySetting(m_stage, chain));
-		}
+	if (m_view_panel_mgr) {
+		m_view_panel_mgr->SelectShape(captured.shape, m_shapesImpl);
 	}
 
 	d2d::ShapeSelection* selection = m_shapesImpl->getShapeSelection();

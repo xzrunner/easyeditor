@@ -499,6 +499,14 @@
 					RelativePath="..\..\..\src\easyanimation\view\KeyFramePropertySetting.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PropertySettingPanel.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\easyanimation\view\PropertySettingPanel.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

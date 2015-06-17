@@ -1,7 +1,7 @@
 #ifndef _DRAG2D_MULTI_SPRITES_IMPL_H_
 #define _DRAG2D_MULTI_SPRITES_IMPL_H_
 
-#include "IViewPanel.h"
+#include "ISpriteViewPanel.h"
 #include "DataTraverseType.h"
 
 #include "common/visitors.h"
@@ -12,16 +12,17 @@
 namespace d2d
 {
 
-class MultiSpritesImpl : public IViewPanel
+class MultiSpritesImpl : public ISpriteViewPanel
 {
 public:
 	MultiSpritesImpl(wxWindow* wnd);
 	virtual ~MultiSpritesImpl();
 
 	//
-	//	interface IViewPanel
+	//	interface ISpriteViewPanel
 	//
 	virtual void SelectSprite(ISprite* spr);
+	virtual void SelectMultiSprites(SpriteSelection* selection);
 	virtual void ReorderSprite(ISprite* spr, bool up);
 	virtual void InsertSprite(ISprite* spr);
 	virtual void RemoveSprite(ISprite* spr);

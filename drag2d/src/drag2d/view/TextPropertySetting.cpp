@@ -9,8 +9,9 @@
 namespace d2d
 {
 
-TextPropertySetting::TextPropertySetting(EditPanel* editPanel, TextSprite* sprite)
-	: IPropertySetting(editPanel, "TextSprite")
+TextPropertySetting::TextPropertySetting(EditPanel* stage, TextSprite* sprite)
+	: IPropertySetting("TextSprite")
+	, m_stage(stage)
 	, m_sprite(sprite)
 {
 }

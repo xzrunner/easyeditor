@@ -10,8 +10,10 @@
 namespace d2d
 {
 
-MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanel* editPanel, const std::vector<ISprite*>& sprites)
-	: IPropertySetting(editPanel, "MultiSprites")
+MultiSpritesPropertySetting::MultiSpritesPropertySetting(EditPanel* stage, 
+														 const std::vector<ISprite*>& sprites)
+	: IPropertySetting("MultiSprites")
+	, m_stage(stage)
 	, m_impl(new MultiSpritesPropertyImpl(sprites))
 	, m_overall(false)
 {

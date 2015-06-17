@@ -11,7 +11,7 @@ class DrawLineCMPT : public d2d::AbstractEditCMPT
 public:
 	DrawLineCMPT(wxWindow* parent, const wxString& name,
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel);
+		d2d::PropertySettingPanel* propertyPanel, d2d::ViewPanelMgr* view_panel_mgr);
 
 protected:
 	virtual wxSizer* initLayout();

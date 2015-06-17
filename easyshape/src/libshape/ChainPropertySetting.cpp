@@ -4,9 +4,10 @@
 namespace libshape
 {
 
-ChainPropertySetting::ChainPropertySetting(d2d::EditPanel* editPanel, 
+ChainPropertySetting::ChainPropertySetting(d2d::EditPanel* stage, 
 										   ChainShape* chain)
-	: d2d::IPropertySetting(editPanel, "Chain")
+	: d2d::IPropertySetting("Chain")
+	, m_stage(stage)
 	, m_chain(chain)
 {
 }

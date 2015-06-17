@@ -280,18 +280,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="property"
-				>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\SymbolPropertySetting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libparticle2d\SymbolPropertySetting.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="particle"

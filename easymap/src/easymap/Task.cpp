@@ -109,21 +109,27 @@ void Task::InitLayout()
 	wxSplitterWindow* left_hori_splitter = new wxSplitterWindow(left_vert_splitter);
 
 	m_library = new LibraryPanel(left_hori_splitter);
+
 	m_property = new d2d::PropertySettingPanel(left_hori_splitter);
+	m_view_panel_mgr.AddSpritePanel(m_property);
+	m_view_panel_mgr.AddShapePanel(m_property);
 
 	left_hori_splitter->SetSashGravity(0.5f);
 	left_hori_splitter->SplitHorizontally(m_library, m_property);
 
 	StagePanel* stage;
-	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library, m_property);
+	m_stage = stage = new StagePanel(left_vert_splitter, m_parent, m_library, m_property, &m_view_panel_mgr);
+	m_view_panel_mgr.AddSpritePanel(m_stage);
+	m_view_panel_mgr.AddShapePanel(m_stage);
+	m_property->SetEditPanel(m_stage);
 	m_library->SetCanvas(m_stage->getCanvas());
 
 	left_vert_splitter->SetSashGravity(0.2f);
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);
 
 //	ToolbarPanel* toolbar = new ToolbarPanel(right_splitter, static_cast<StagePanel*>(m_stage));
-	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, stage, m_property);
-	stage->SetViewlist(m_viewlist);
+	m_viewlist = new d2d::ViewlistPanel(right_splitter, m_stage, stage, &m_view_panel_mgr);
+	m_view_panel_mgr.AddSpritePanel(m_viewlist);
 
 	right_splitter->SetSashGravity(0.85f);
 	right_splitter->SplitVertically(left_vert_splitter, m_viewlist);

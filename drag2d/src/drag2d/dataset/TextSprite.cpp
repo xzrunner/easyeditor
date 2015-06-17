@@ -5,6 +5,7 @@
 #include "dataset/Font.h"
 #include "dataset/BVFactory.h"
 #include "dataset/AbstractBV.h"
+#include "view/TextPropertySetting.h"
 
 namespace d2d
 {
@@ -63,6 +64,11 @@ void TextSprite::setSymbol(ISymbol* symbol)
 
 		m_symbol = font;
 	}
+}
+
+IPropertySetting* TextSprite::CreatePropertySetting(EditPanel* stage)
+{
+	return new TextPropertySetting(stage, this);
 }
 
 void TextSprite::setTransform(const Vector& position, float angle)

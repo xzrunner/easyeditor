@@ -12,7 +12,7 @@ namespace eimage
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
-						   d2d::PropertySettingPanel* property, StagePanel* stage)
+						   StagePanel* stage)
 	: d2d::ToolbarPanel(parent, stage)
 {
 	addChild(new RectCutCMPT(this, wxT("Rect Cut"), stage));

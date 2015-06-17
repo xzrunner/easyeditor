@@ -11,6 +11,7 @@
 #include "libcomplex/SelectSpritesOP.h"
 #include "libcomplex/StageCanvas.h"
 #include "libcomplex/StagePanel.h"
+#include "libcomplex/PropertySettingPanel.h"
 #include "libcomplex/LibraryPanel.h"
 #include "libcomplex/LibraryPage.h"
 #include "libcomplex/PreviewDialog.h"

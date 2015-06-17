@@ -14,7 +14,9 @@ class DrawPolygonCMPT : public d2d::OneFloatValueCMPT
 public:
 	DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel/*, wxColourData& colorData*/);
+		d2d::PropertySettingPanel* property,
+		d2d::ViewPanelMgr* view_panel_mgr
+		/*, wxColourData& colorData*/);
 
 	virtual void updateControlValue();
 

@@ -29,12 +29,14 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 					   Symbol* symbol,
 					   d2d::PropertySettingPanel* property,
-					   LibraryPanel* library)
+					   LibraryPanel* library,
+					   d2d::ViewPanelMgr* view_panel_mgr)
 	: EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(parent, new SymbolContainer(m_symbol = symbol))
 	, m_library(library)
+	, m_view_panel_mgr(view_panel_mgr)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property);
+	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, library));

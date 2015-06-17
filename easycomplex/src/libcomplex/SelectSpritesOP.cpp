@@ -2,7 +2,6 @@
 #include "EditDialog.h"
 #include "StagePanel.h"
 #include "Sprite.h"
-#include "SymbolPropertySetting.h"
 
 #include <easyscale9.h>
 #include <easymesh.h>
@@ -20,9 +19,8 @@ namespace ecomplex
 {
 
 SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-								 d2d::PropertySettingPanel* propertyPanel, d2d::ViewPanelMgr* view_panel_mgr,
-								 d2d::AbstractEditCMPT* callback/* = NULL*/)
-	: d2d::SelectSpritesOP(editPanel, spritesImpl, propertyPanel, view_panel_mgr, callback)
+								 d2d::ViewPanelMgr* view_panel_mgr, d2d::AbstractEditCMPT* callback/* = NULL*/)
+	: d2d::SelectSpritesOP(editPanel, spritesImpl, view_panel_mgr, callback)
 {
 }
 
@@ -117,22 +115,6 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	}
 
 	return false;
-}
-
-d2d::IPropertySetting* 
-SelectSpritesOP::createPropertySetting(d2d::ISprite* sprite) const
-{
-	if (!sprite) {
-		return new ecomplex::SymbolPropertySetting(m_stage, static_cast<StagePanel*>(m_stage)->getSymbol());
-	}
-
-	if (escale9::Sprite* spr = dynamic_cast<escale9::Sprite*>(sprite)) {
-		return new escale9::SpritePropertySetting(m_stage, spr);
-	} else if (eicon::Sprite* spr = dynamic_cast<eicon::Sprite*>(sprite)) {
-		return new eicon::SpritePropertySetting(m_stage, spr);
-	} else {
-		return d2d::SelectSpritesOP::createPropertySetting(sprite);
-	}
 }
 
 } // complex

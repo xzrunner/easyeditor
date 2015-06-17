@@ -11,7 +11,8 @@ class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl,
 {
 public:
 	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property);
+		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property,
+		d2d::ViewPanelMgr* view_panel_mgr);
 	virtual ~StagePanel();
 
 	//
@@ -26,10 +27,6 @@ public:
 	virtual void insertSprite(d2d::ISprite* sprite);
 	virtual bool resetSpriteOrder(d2d::ISprite* sprite, bool up);
 
-	void SetViewlist(d2d::ViewlistPanel* viewlist) {
-		m_viewlist = viewlist;
-	}
-
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 
@@ -37,8 +34,6 @@ private:
 	void ChangeEditOP();
 
 private:
-	d2d::ViewlistPanel* m_viewlist;
-
 	d2d::AbstractEditOP* m_paste_op;
 	d2d::AbstractEditOP* m_arrange_op;
 

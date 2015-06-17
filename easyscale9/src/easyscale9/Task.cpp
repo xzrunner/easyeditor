@@ -65,6 +65,7 @@ void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter,
 
 	stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent, m_library);
 	m_library->SetCanvas(m_stage->getCanvas());
+	_property->SetEditPanel(m_stage);
 
 	toolbar = m_toolbar = new ToolbarPanel(rightVerticalSplitter, m_stage, _property);
 

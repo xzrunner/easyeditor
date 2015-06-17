@@ -8,13 +8,14 @@
 namespace d2d
 {
 
+class EditPanel;
 class ISprite;
 class MultiSpritesPropertyImpl;
 
 class MultiSpritesPropertySetting : public IPropertySetting
 {
 public:
-	MultiSpritesPropertySetting(EditPanel* editPanel, 
+	MultiSpritesPropertySetting(EditPanel* stage, 
 		const std::vector<ISprite*>& sprites);
 	virtual ~MultiSpritesPropertySetting();
 
@@ -28,6 +29,8 @@ protected:
 	MultiSpritesPropertyImpl* m_impl;
 
 private:
+	EditPanel* m_stage;
+
 	bool m_overall;
 
 }; // MultiSpritesPropertySetting

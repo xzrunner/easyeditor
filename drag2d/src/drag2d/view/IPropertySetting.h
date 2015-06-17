@@ -7,13 +7,12 @@
 namespace d2d
 {
 
-class EditPanel;
 class PropertySettingPanel;
 
 class IPropertySetting
 {
 public:
-	IPropertySetting(d2d::EditPanel* stage, const std::string& type);
+	IPropertySetting(const std::string& type);
 	virtual ~IPropertySetting() {}
 
 	virtual void OnPropertyGridChange(const wxString& name, const wxAny& value) = 0;
@@ -35,8 +34,6 @@ protected:
 	static const wxString TYPE_NAME;
 
 protected:
-	d2d::EditPanel* m_stage;
-
 	std::string m_type;
 
 }; // IPropertySetting

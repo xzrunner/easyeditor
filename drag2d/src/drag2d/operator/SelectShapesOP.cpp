@@ -3,7 +3,6 @@
 #include "common/visitors.h"
 #include "common/Rect.h"
 #include "view/MultiShapesImpl.h"
-#include "view/PropertySettingPanel.h"
 #include "component/AbstractEditCMPT.h"
 #include "render/DrawSelectedShapeVisitor.h"
 
@@ -11,13 +10,13 @@ namespace d2d
 {
 
 SelectShapesOP::SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl,
-							   PropertySettingPanel* propertyPanel, 
+							   ViewPanelMgr* view_panel_mgr /*= NULL*/,
 							   AbstractEditCMPT* callback/* = NULL*/)
 	: DrawRectangleOP(editPanel)
 	, m_callback(callback)
 	, m_shapeImpl(shapesImpl)
-	, m_propertyPanel(propertyPanel)
 	, m_bDraggable(true)
+	, m_view_panel_mgr(view_panel_mgr)
 {
 	m_selection = shapesImpl->getShapeSelection();
 	m_selection->Retain();
@@ -81,15 +80,13 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
 		{
-			if (m_selection->IsExist(selected))
+			if (m_selection->IsExist(selected)) {
 				m_selection->Remove(selected);
-			else
-			{
+			} else {
 				m_selection->Add(selected);
-				if (m_selection->Size() == 1)
-					m_propertyPanel->SetPropertySetting(createPropertySetting(selected));
-				else
-					m_propertyPanel->SetPropertySetting(createPropertySetting(NULL));
+			}
+			if (m_view_panel_mgr) {
+				m_view_panel_mgr->SelectMultiShapes(m_selection, m_shapeImpl);
 			}
 		}
 		else
@@ -98,8 +95,9 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 			{
 				m_selection->Clear();
 				m_selection->Add(selected);
-				if (m_propertyPanel)
-					m_propertyPanel->SetPropertySetting(createPropertySetting(selected));
+				if (m_view_panel_mgr) {
+					m_view_panel_mgr->SelectShape(selected, m_shapeImpl);
+				}
 			}
 		}
 		m_firstPos.setInvalid();
@@ -135,18 +133,15 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_selection->Add(shapes[i]);
 
-		if (m_propertyPanel)
-		{
-			if (m_selection->Size() == 1 && !shapes.empty())
-				m_propertyPanel->SetPropertySetting(createPropertySetting(shapes[0]));
-			else
-				m_propertyPanel->SetPropertySetting(createPropertySetting(NULL));
+		if (m_view_panel_mgr) {
+			m_view_panel_mgr->SelectMultiShapes(m_selection, m_shapeImpl);
 		}
 
 		m_firstPos.setInvalid();
 
-		if (m_callback)
+		if (m_callback) {
 			m_callback->updateControlValue();
+		}
 	}
 
 	return false;
@@ -177,11 +172,6 @@ bool SelectShapesOP::Clear()
 	m_firstPos.setInvalid();
 
 	return false;
-}
-
-IPropertySetting* SelectShapesOP::createPropertySetting(IShape* shape) const
-{
-	return shape ? shape->createPropertySetting(m_stage) : NULL;
 }
 
 void SelectShapesOP::clearClipboard()

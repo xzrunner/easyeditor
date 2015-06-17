@@ -11,7 +11,7 @@ class EditPolylinesCMPT : public d2d::AbstractEditCMPT
 public:
 	EditPolylinesCMPT(wxWindow* parent, const wxString& name,
 		d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-		d2d::PropertySettingPanel* propertyPanel);
+		d2d::ViewPanelMgr* view_panel_mgr);
 
 	virtual void updateControlValue();
 

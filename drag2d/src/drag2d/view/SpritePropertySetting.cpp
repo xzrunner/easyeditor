@@ -16,9 +16,10 @@
 namespace d2d
 {
 
-SpritePropertySetting::SpritePropertySetting(EditPanel* editPanel, ISprite* sprite)
-	: IPropertySetting(editPanel, "Sprite")
-	, m_impl(new SpritePropertyImpl(editPanel, sprite))
+SpritePropertySetting::SpritePropertySetting(EditPanel* stage, ISprite* sprite)
+	: IPropertySetting("Sprite")
+	, m_stage(stage)
+	, m_impl(new SpritePropertyImpl(stage, sprite))
 {
 }
 

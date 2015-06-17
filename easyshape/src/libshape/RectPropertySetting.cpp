@@ -4,9 +4,10 @@
 namespace libshape
 {
 
-RectPropertySetting::RectPropertySetting(d2d::EditPanel* editPanel, 
+RectPropertySetting::RectPropertySetting(d2d::EditPanel* stage, 
 										 RectShape* rect)
-	: d2d::IPropertySetting(editPanel, "Rect")
+	: d2d::IPropertySetting("Rect")
+	, m_stage(stage)
 	, m_rect(rect)
 {
 }

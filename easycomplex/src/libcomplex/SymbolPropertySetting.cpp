@@ -4,8 +4,9 @@
 namespace ecomplex
 {
 
-SymbolPropertySetting::SymbolPropertySetting(d2d::EditPanel* editPanel, Symbol* symbol)
-	: d2d::SymbolPropertySetting(editPanel, symbol)
+SymbolPropertySetting::SymbolPropertySetting(d2d::EditPanel* stage, Symbol* symbol)
+	: d2d::SymbolPropertySetting(stage, symbol)
+	, m_stage(stage)
 {
 	m_type = "ComplexSymbol";
 }

@@ -7,15 +7,17 @@
 namespace d2d
 {
 
-SymbolPropertySetting::SymbolPropertySetting(EditPanel* editPanel, ISymbol* symbol)
-	: IPropertySetting(editPanel, "Symbol")
+SymbolPropertySetting::SymbolPropertySetting(EditPanel* stage, ISymbol* symbol)
+	: IPropertySetting("Symbol")
+	, m_stage(stage)
 	, m_symbol(symbol)
 	, m_name(NULL)
 {
 }
 
-SymbolPropertySetting::SymbolPropertySetting(EditPanel* editPanel, std::string* name)
-	: IPropertySetting(editPanel, "Symbol")
+SymbolPropertySetting::SymbolPropertySetting(EditPanel* stage, std::string* name)
+	: IPropertySetting("Symbol")
+	, m_stage(stage)
 	, m_symbol(NULL)
 	, m_name(name)
 {

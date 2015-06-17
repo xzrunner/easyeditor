@@ -12,7 +12,7 @@ class ToolbarPanel : public d2d::ToolbarPanel
 {
 public:
 	ToolbarPanel(wxWindow* parent, d2d::PropertySettingPanel* property,
-		StagePanel* stage);
+		d2d::ViewPanelMgr* view_panel_mgr, StagePanel* stage);
 
 	void SelectSuitableEditOP();
 
@@ -22,6 +22,9 @@ protected:
 private:
 	void OnClearShapes(wxCommandEvent& event);
 	void OnCreateBounding(wxCommandEvent& event);
+
+private:
+	d2d::ViewPanelMgr* m_view_panel_mgr;
 
 }; // ToolbarPanel
 

@@ -26,6 +26,7 @@ public:
 	virtual void setSymbol(d2d::ISymbol* symbol);
 	virtual void load(const Json::Value& val);
 	virtual void store(Json::Value& val) const;
+	virtual d2d::IPropertySetting* CreatePropertySetting(d2d::EditPanel* stage);
 
 	static d2d::ISprite* Create(d2d::ISymbol* symbol) {
 		return new Sprite(static_cast<Symbol*>(symbol));

@@ -4,6 +4,7 @@
 #include "GroupTreeIO.h"
 
 #include "dataset/Group.h"
+#include "common/visitors.h"
 
 #include <wx/wx.h>
 
@@ -27,6 +28,15 @@ void GroupTreePanel::SelectSprite(ISprite* spr)
 	wxTreeItemId id = visitor.GetItemID();
 	if (id.IsOk()) {
 		m_grouptree->SelectItem(id);
+	}
+}
+
+void GroupTreePanel::SelectMultiSprites(SpriteSelection* selection)
+{
+	std::vector<ISprite*> sprites;
+	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		SelectSprite(sprites[i]);
 	}
 }
 

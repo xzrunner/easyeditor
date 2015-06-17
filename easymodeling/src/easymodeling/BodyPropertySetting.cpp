@@ -5,8 +5,9 @@
 namespace emodeling
 {
 
-BodyPropertySetting::BodyPropertySetting(d2d::EditPanel* editPanel, d2d::ISprite* sprite)
-	: d2d::IPropertySetting(editPanel, "Body")
+BodyPropertySetting::BodyPropertySetting(d2d::EditPanel* stage, d2d::ISprite* sprite)
+	: d2d::IPropertySetting("Body")
+	, m_stage(stage)
 {
 	m_body = static_cast<libmodeling::Body*>(sprite->getUserData());
 	assert(m_body);

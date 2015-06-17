@@ -8,13 +8,13 @@ namespace libshape
 
 EditPolylinesCMPT::EditPolylinesCMPT(wxWindow* parent, const wxString& name,
 									 d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-									 d2d::PropertySettingPanel* propertyPanel)
+									 d2d::ViewPanelMgr* view_panel_mgr)
 	: d2d::AbstractEditCMPT(parent, name, editPanel)
 	, m_shapesImpl(shapesImpl)
 	, m_simplifySpin(NULL)
 	, m_btnMerge(NULL)
 {
-	m_editOP = new EditPolylinesOP(editPanel, shapesImpl, propertyPanel, this);
+	m_editOP = new EditPolylinesOP(editPanel, shapesImpl, view_panel_mgr, this);
 }
 
 void EditPolylinesCMPT::updateControlValue()

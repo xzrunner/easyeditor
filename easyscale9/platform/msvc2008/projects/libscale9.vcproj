@@ -259,14 +259,6 @@
 					RelativePath="..\..\..\src\libscale9\SpritePropertySetting.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libscale9\SymbolPropertySetting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libscale9\SymbolPropertySetting.h"
-					>
-				</File>
 			</Filter>
 		</Filter>
 	</Files>

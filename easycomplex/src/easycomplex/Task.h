@@ -8,6 +8,7 @@ namespace ecomplex
 {
 
 class LibraryPanel; 
+class PropertySettingPanel;
 class StagePanel;
 
 class Task : public d2d::ITask
@@ -42,7 +43,7 @@ private:
 	wxFrame* m_parent;
 
 	ecomplex::LibraryPanel* m_library;
-	d2d::PropertySettingPanel* m_property;
+	PropertySettingPanel* m_property;
 	ecomplex::StagePanel* m_stage;
 	d2d::ViewlistPanel* m_viewlist;
 	d2d::GroupTreePanel* m_grouptree;

@@ -10,8 +10,7 @@ class SelectSpritesOP : public d2d::SelectSpritesOP
 {
 public:
 	SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImpl* spritesImpl, 
-		d2d::PropertySettingPanel* propertyPanel = NULL, d2d::ViewPanelMgr* view_panel_mgr = NULL,
-		d2d::AbstractEditCMPT* callback = NULL);
+		d2d::ViewPanelMgr* view_panel_mgr = NULL, d2d::AbstractEditCMPT* callback = NULL);
 
 	virtual bool OnMouseLeftDown(int x, int y);
 	virtual bool OnMouseLeftDClick(int x, int y);

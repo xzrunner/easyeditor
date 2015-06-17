@@ -6,7 +6,7 @@ namespace libshape
 {
 
 SelectNodesOP::SelectNodesOP(d2d::EditPanel* editPanel, d2d::MultiShapesImpl* shapesImpl,
-							 d2d::PropertySettingPanel* propertyPanel, 
+							 d2d::ViewPanelMgr* view_panel_mgr,
 							 d2d::AbstractEditCMPT* callback /*= NULL*/)
 	: DrawRectangleOP(editPanel)
 	, m_shapeImpl(shapesImpl)

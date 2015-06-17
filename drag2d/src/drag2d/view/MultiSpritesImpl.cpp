@@ -23,6 +23,10 @@ void MultiSpritesImpl::SelectSprite(ISprite* spr)
  	m_spriteSelection->Add(spr);
 }
 
+void MultiSpritesImpl::SelectMultiSprites(SpriteSelection* selection)
+{
+}
+
 void MultiSpritesImpl::ReorderSprite(ISprite* spr, bool up)
 {
 	resetSpriteOrder(spr, up);

@@ -6,8 +6,9 @@
 namespace emodeling
 {
 
-WorldPropertySetting::WorldPropertySetting(d2d::EditPanel* editPanel)
-	: d2d::IPropertySetting(editPanel, "World")
+WorldPropertySetting::WorldPropertySetting(d2d::EditPanel* stage)
+	: d2d::IPropertySetting("World")
+	, m_stage(stage)
 {
 }
 
