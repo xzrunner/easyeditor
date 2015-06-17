@@ -1,5 +1,4 @@
-#define NOMINMAX 
-#include <gl/GLee.h>
+#include <gl/glew.h>
 
 #include "ShapeShader.h"
 #include "Camera.h"

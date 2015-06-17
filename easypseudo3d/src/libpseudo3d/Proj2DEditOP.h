@@ -12,7 +12,7 @@ public:
 	Proj2DEditOP(d2d::EditPanel* stage);
 	virtual ~Proj2DEditOP();
 
-	virtual bool onKeyDown(int keyCode);
+	virtual bool OnKeyDown(int keyCode);
 
 	virtual bool onDraw() const;
 

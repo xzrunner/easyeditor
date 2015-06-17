@@ -1,5 +1,4 @@
-#define NOMINMAX
-#include <gl/GLee.h>
+#include <gl/glew.h>
 
 #include "ModelObj.h"
 #include "ISurface.h"

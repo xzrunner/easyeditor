@@ -21,7 +21,7 @@ void ToolbarPanel::AddUniform(const std::string& title, const std::string& name,
 {
 	if (!items.empty()) {
 		AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
-			items, 1, m_editPanel->getCanvas()));
+			items, 1, m_stage->getCanvas()));
 	}
 }
 
@@ -31,7 +31,7 @@ void ToolbarPanel::AddUniform(const std::string& title, const std::string& name,
 {
 	if (!items.empty()) {
 		AddSlider(new SliderCtrl(this, title, name, shader, uniform, 
-			items, 0.01f, m_editPanel->getCanvas()));
+			items, 0.01f, m_stage->getCanvas()));
 	}
 }
 

@@ -1,6 +1,6 @@
 #include "Uniform.h"
 
-#include <gl/gLee.h>
+#include <gl/glew.h>
 
 namespace eshader
 {

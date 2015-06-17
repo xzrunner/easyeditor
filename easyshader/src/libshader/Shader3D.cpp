@@ -1,5 +1,4 @@
-#define NOMINMAX 
-#include <gl/gLee.h>
+#include <gl/glew.h>
 
 #include "Shader3D.h"
 

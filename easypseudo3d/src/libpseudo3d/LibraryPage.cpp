@@ -11,12 +11,12 @@ LibraryPage::LibraryPage(wxWindow* parent)
 	m_list->setFileter(FILE_TAG);
 }
 
-bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 {
 	return true;
 }
 
-void LibraryPage::onAddPress(wxCommandEvent& event)
+void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
 }
 

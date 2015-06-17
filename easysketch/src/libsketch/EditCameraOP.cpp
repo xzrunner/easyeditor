@@ -25,9 +25,9 @@ EditCameraOP::~EditCameraOP()
 	delete m_zoom;
 }
 
-bool EditCameraOP::onKeyDown(int keyCode)
+bool EditCameraOP::OnKeyDown(int keyCode)
 {
-	if (d2d::AbstractEditOP::onKeyDown(keyCode)) { return true; }
+	if (d2d::AbstractEditOP::OnKeyDown(keyCode)) { return true; }
 	
 	switch (keyCode)
 	{
@@ -42,52 +42,52 @@ bool EditCameraOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool EditCameraOP::onMouseLeftDown(int x, int y)
+bool EditCameraOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::AbstractEditOP::onMouseLeftDown(x, y)) { return true; }
+	if (d2d::AbstractEditOP::OnMouseLeftDown(x, y)) { return true; }
 	m_curr = m_translate;
 	m_curr->OnMousePress(ivec2(x, y));
 	return false;
 }
 
-bool EditCameraOP::onMouseLeftUp(int x, int y)
+bool EditCameraOP::OnMouseLeftUp(int x, int y)
 {
-	if (d2d::AbstractEditOP::onMouseLeftUp(x, y)) { return true; }
+	if (d2d::AbstractEditOP::OnMouseLeftUp(x, y)) { return true; }
 	m_curr->OnMouseRelease(ivec2(x, y));
 	return false;
 }
 
-bool EditCameraOP::onMouseRightDown(int x, int y)
+bool EditCameraOP::OnMouseRightDown(int x, int y)
 {
-	if (d2d::AbstractEditOP::onMouseRightDown(x, y)) { return true; }
+	if (d2d::AbstractEditOP::OnMouseRightDown(x, y)) { return true; }
 	m_curr = m_rotate;
 	m_curr->OnMousePress(ivec2(x, y));
 	return false;
 }
 
-bool EditCameraOP::onMouseRightUp(int x, int y)
+bool EditCameraOP::OnMouseRightUp(int x, int y)
 {
-	if (d2d::AbstractEditOP::onMouseRightUp(x, y)) { return true; }
+	if (d2d::AbstractEditOP::OnMouseRightUp(x, y)) { return true; }
 	m_curr->OnMouseRelease(ivec2(x, y));
 	return false;
 }
 
-bool EditCameraOP::onMouseMove(int x, int y)
+bool EditCameraOP::OnMouseMove(int x, int y)
 {
-	m_editPanel->SetFocus();
+	m_stage->SetFocus();
 	return false;
 }
 
-bool EditCameraOP::onMouseDrag(int x, int y)
+bool EditCameraOP::OnMouseDrag(int x, int y)
 {
-	if (d2d::AbstractEditOP::onMouseDrag(x, y)) { return true; }
+	if (d2d::AbstractEditOP::OnMouseDrag(x, y)) { return true; }
 	m_curr->OnMouseMove(ivec2(x, y));
 	return false;
 }
 
-bool EditCameraOP::onMouseWheelRotation(int x, int y, int direction)
+bool EditCameraOP::OnMouseWheelRotation(int x, int y, int direction)
 {
-	if (d2d::AbstractEditOP::onMouseWheelRotation(x, y, direction)) { return true; }
+	if (d2d::AbstractEditOP::OnMouseWheelRotation(x, y, direction)) { return true; }
 	m_zoom->OnMouseWheelRotation(ivec2(x, y), direction);
 	return false;}
 

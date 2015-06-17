@@ -27,7 +27,7 @@ void StageCanvas2D::onDraw()
 {
 	m_scene->Draw();
 
-	m_editPanel->getEditOP()->onDraw();
+	m_stage->getEditOP()->OnDraw();
 }
 
 }

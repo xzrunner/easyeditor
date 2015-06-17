@@ -30,7 +30,7 @@ namespace d2d
 		void setEditOP(AbstractEditOP* editOP);
 
 		GLCanvas* getCanvas() const { return m_canvas; }
-		void setCanvas(GLCanvas* canvas) { m_canvas = canvas; }
+		void SetCanvas(GLCanvas* canvas) { m_canvas = canvas; }
 
 		Camera* getCamera() const { return m_camera; }
 
@@ -40,7 +40,7 @@ namespace d2d
 		void onMouse(wxMouseEvent& event);
 		virtual void OnKeyDown(wxKeyEvent& event);
 		virtual void OnKeyUp(wxKeyEvent& event);
-		void onMouseWheelRotation(int x, int y, int direction);
+		void OnMouseWheelRotation(int x, int y, int direction);
 
 		void resetCanvas();
 		void ResetViewport();

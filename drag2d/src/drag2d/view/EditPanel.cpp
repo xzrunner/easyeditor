@@ -22,7 +22,7 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	m_editOP = NULL;
 	m_canvas = NULL;
 	m_camera = new Camera;
-	SetFocus();		// For onMouseWheelRotation
+	SetFocus();		// For OnMouseWheelRotation
 }
 
 EditPanel::~EditPanel()
@@ -151,7 +151,7 @@ void EditPanel::OnKeyUp(wxKeyEvent& event)
 	}
 }
 
-void EditPanel::onMouseWheelRotation(int x, int y, int direction)
+void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 {
 	const float scale = direction > 0 ? 1 / 1.1f : 1.1f;
 	const float cx = static_cast<float>(x),

@@ -11,7 +11,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::MultiSpritesImpl(parent)
 {
 	m_canvas = new StageCanvas(this, this, library);
-	library->setCanvas(m_canvas);
+	library->SetCanvas(m_canvas);
 
 	m_editOP = new ArrangeSpriteOP(this);
 
@@ -27,7 +27,7 @@ void StagePanel::clear()
 	d2d::EditPanel::clear();
 }
 
-void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::TraverseType type, 
+void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, 
 								 bool order) const
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
@@ -65,9 +65,9 @@ void StagePanel::clearSprites()
 	m_sprites.clear();
 }
 
-void StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
+bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 {
-
+	return false;
 }
 
 ivec2 StagePanel::TransPos3ProjectToScreen(const vec3& proj) const

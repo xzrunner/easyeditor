@@ -53,7 +53,7 @@ void Projection2DScene::Draw() const
 		float scale;
 		CalProjInfo(m_positions[i], &pos, &scale);
 
-		d2d::SpriteDraw::drawSprite(sym, d2d::Matrix(), pos, 0, scale, scale);
+		d2d::SpriteRenderer::Instance()->Draw(sym, d2d::Matrix(), pos, 0, scale, scale);
 	}
 }
 

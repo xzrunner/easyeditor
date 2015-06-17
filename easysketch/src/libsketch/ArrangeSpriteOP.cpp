@@ -33,9 +33,9 @@ ArrangeSpriteOP::~ArrangeSpriteOP()
 	delete m_rotate_camera;
 }
 
-bool ArrangeSpriteOP::onKeyDown(int keyCode)
+bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 {
-	if (SelectSpriteOP::onKeyDown(keyCode)) {
+	if (SelectSpriteOP::OnKeyDown(keyCode)) {
 		return true;
 	}
 
@@ -61,9 +61,9 @@ bool ArrangeSpriteOP::onKeyDown(int keyCode)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
+bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 {
-	if (SelectSpriteOP::onMouseLeftDown(x, y)) {
+	if (SelectSpriteOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
@@ -80,9 +80,9 @@ bool ArrangeSpriteOP::onMouseLeftDown(int x, int y)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
+bool ArrangeSpriteOP::OnMouseLeftUp(int x, int y)
 {
-	if (SelectSpriteOP::onMouseLeftUp(x, y)) {
+	if (SelectSpriteOP::OnMouseLeftUp(x, y)) {
 		return true;
 	}
 
@@ -93,9 +93,9 @@ bool ArrangeSpriteOP::onMouseLeftUp(int x, int y)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseRightDown(int x, int y)
+bool ArrangeSpriteOP::OnMouseRightDown(int x, int y)
 {
-	if (SelectSpriteOP::onMouseRightDown(x, y)) {
+	if (SelectSpriteOP::OnMouseRightDown(x, y)) {
 		return true;
 	}
 
@@ -113,9 +113,9 @@ bool ArrangeSpriteOP::onMouseRightDown(int x, int y)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseRightUp(int x, int y)
+bool ArrangeSpriteOP::OnMouseRightUp(int x, int y)
 {
-	if (SelectSpriteOP::onMouseRightUp(x, y)) {
+	if (SelectSpriteOP::OnMouseRightUp(x, y)) {
 		return true;
 	}
 
@@ -126,20 +126,20 @@ bool ArrangeSpriteOP::onMouseRightUp(int x, int y)
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseMove(int x, int y)
+bool ArrangeSpriteOP::OnMouseMove(int x, int y)
 {
-	if (SelectSpriteOP::onMouseMove(x, y)) {
+	if (SelectSpriteOP::OnMouseMove(x, y)) {
 		return true;
 	}
 
-	m_editPanel->SetFocus();
+	m_stage->SetFocus();
 
 	return false;
 }
 
-bool ArrangeSpriteOP::onMouseDrag(int x, int y)
+bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 {
-	if (SelectSpriteOP::onMouseDrag(x, y)) {
+	if (SelectSpriteOP::OnMouseDrag(x, y)) {
 		return true;
 	}
 

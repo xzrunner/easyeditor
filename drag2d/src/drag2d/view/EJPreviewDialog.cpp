@@ -27,7 +27,7 @@
 //
 //	m_stage = new EditPanel(this, this);
 //	m_stage->setEditOP(new ZoomViewOP(m_stage, false));
-//	m_stage->setCanvas(new EJPreviewCanvas(m_stage, m_sprites));
+//	m_stage->SetCanvas(new EJPreviewCanvas(m_stage, m_sprites));
 //	sizer->Add(m_stage, 1, wxEXPAND);
 //
 //	SetSizer(sizer);

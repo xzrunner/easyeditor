@@ -24,6 +24,7 @@ public:
 protected:
 	virtual void initGL();
 	virtual void onSize(int w, int h);
+	virtual void OnDraw();
 
 private:
 	Camera m_camera3;

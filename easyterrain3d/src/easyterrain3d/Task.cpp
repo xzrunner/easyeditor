@@ -34,7 +34,7 @@ bool Task::isDirty() const
 
 void Task::clear()
 {
-	m_library->clear();
+	m_library->Clear();
 	m_stage->clear();
 	m_library->Refresh();
 	m_stage->Refresh();
@@ -48,7 +48,7 @@ const d2d::EditPanel* Task::getEditPanel() const
 void Task::initLayout()
 {
 	d2d::EditPanel* stage = new d2d::EditPanel(m_parent, m_parent);
-	stage->setCanvas(new libterrain3d::StageCanvas(stage));
+	stage->SetCanvas(new libterrain3d::StageCanvas(stage));
 	stage->setEditOP(new e3d::ControlCameraOP(stage));
 }
 

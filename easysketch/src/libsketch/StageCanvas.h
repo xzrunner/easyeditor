@@ -10,7 +10,7 @@ namespace libsketch
 class StageCanvas : public e3d::StageCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* stage, 
+	StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* sprites_impl, 
 		d2d::LibraryPanel* library);
 
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
@@ -21,7 +21,7 @@ public:
 protected:
 	virtual void initGL();
 	virtual void onSize(int w, int h);
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	void InitDefaultSymbol();
@@ -32,7 +32,7 @@ private:
 	void DrawSprites() const;
 
 private:
-	d2d::MultiSpritesImpl* m_stage;
+	d2d::MultiSpritesImpl* m_sprites_impl;
 	d2d::LibraryPanel* m_library;
 
 	int m_screen_width, m_screen_height;

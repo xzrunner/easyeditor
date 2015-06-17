@@ -137,9 +137,9 @@ bool ZoomViewOP::OnMouseDrag(int x, int y)
 bool ZoomViewOP::OnMouseWheelRotation(int x, int y, int direction) 
 {
 //	if (Settings::bZoomOnlyUseMouseWheel)
-		m_stage->onMouseWheelRotation(x, y, direction);
+		m_stage->OnMouseWheelRotation(x, y, direction);
 // 	else
-// 		m_stage->onMouseWheelRotation(m_stage->GetSize().GetWidth() * 0.5f, m_stage->GetSize().GetHeight() * 0.5f, direction);
+// 		m_stage->OnMouseWheelRotation(m_stage->GetSize().GetWidth() * 0.5f, m_stage->GetSize().GetHeight() * 0.5f, direction);
 
 		m_stage->Refresh();
 

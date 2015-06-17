@@ -15,9 +15,9 @@ SelectSpriteOP::SelectSpriteOP(StagePanel* stage)
 	m_selection->Retain();
 }
 
-bool SelectSpriteOP::onMouseLeftDown(int x, int y)
+bool SelectSpriteOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::AbstractEditOP::onMouseLeftDown(x, y)) return true;
+	if (d2d::AbstractEditOP::OnMouseLeftDown(x, y)) return true;
 
 	d2d::ISprite* selected = SelectByPos(ivec2(x, y));
 	if (selected && selected->editable)
@@ -44,14 +44,14 @@ bool SelectSpriteOP::onMouseLeftDown(int x, int y)
 		m_selection->Clear();
 	}
 
-	m_editPanel->Refresh();
+	m_stage->Refresh();
 
 	return false;
 }
 
-bool SelectSpriteOP::onDraw() const
+bool SelectSpriteOP::OnDraw() const
 {
-	if (d2d::AbstractEditOP::onDraw()) return true;
+	if (d2d::AbstractEditOP::OnDraw()) return true;
 
 	std::vector<d2d::ISprite*> sprites;
 	m_selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
@@ -74,7 +74,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-	StageCanvas* canvas = static_cast<StageCanvas*>(m_editPanel->getCanvas());
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->getCanvas());
 	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
 

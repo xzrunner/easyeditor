@@ -9,11 +9,11 @@ namespace eshader
 LibraryPanel::LibraryPanel(wxWindow* parent, bool is_2d)
 	: d2d::LibraryPanel(parent)
 {
-	wxWindow* nb = getNotebook();
+	wxWindow* nb = GetNotebook();
 	if (is_2d) {
-		addPage(new d2d::LibraryImagePage(nb));
+		AddPage(new d2d::LibraryImagePage(nb));
 	} else {
-		addPage(new libsketch::LibraryPage(nb));
+		AddPage(new libsketch::LibraryPage(nb));
 	}
 }
 

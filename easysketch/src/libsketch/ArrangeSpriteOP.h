@@ -14,13 +14,13 @@ public:
 	ArrangeSpriteOP(StagePanel* stage);
 	virtual ~ArrangeSpriteOP();
 
-	virtual bool onKeyDown(int keyCode);
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseLeftUp(int x, int y);
-	virtual bool onMouseRightDown(int x, int y);
-	virtual bool onMouseRightUp(int x, int y);
-	virtual bool onMouseMove(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftUp(int x, int y);
+	virtual bool OnMouseRightDown(int x, int y);
+	virtual bool OnMouseRightUp(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
 
 private:
 	IEditState* m_state;

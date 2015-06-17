@@ -14,9 +14,9 @@ class SelectSpriteOP : public d2d::AbstractEditOP
 public:	
 	SelectSpriteOP(StagePanel* stage);
 
-	virtual bool onMouseLeftDown(int x, int y);
+	virtual bool OnMouseLeftDown(int x, int y);
 
-	virtual bool onDraw() const;
+	virtual bool OnDraw() const;
 
 	const d2d::SpriteSelection& GetSelection() const {
 		return *m_selection;

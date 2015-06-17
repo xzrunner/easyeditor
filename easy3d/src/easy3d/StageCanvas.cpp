@@ -1,3 +1,5 @@
+#include <gl/glew.h>
+
 #include "StageCanvas.h"
 #include "ShaderMgr.h"
 #include "ViewFrustum.h"
@@ -30,7 +32,34 @@ ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 
 void StageCanvas::initGL()
 {
-	d2d::GLCanvas::initGL();
+//	d2d::GLCanvas::initGL();
+
+	//////////////////////////////////////////////////////////////////////////
+
+	try {
+		wxLogDebug(_T("GLCanvas::initGL()"));
+
+		if (glewInit() != GLEW_OK) {
+			exit(1);
+		}
+
+		ShaderMgr::Instance()->Null();
+
+		resetViewport();
+
+		glShadeModel(GL_SMOOTH);
+		glEnable(GL_TEXTURE_2D);
+
+		if (d2d::RenderContext::SHADER_MGR) {
+			d2d::RenderContext::SHADER_MGR->reload();
+		}	
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();	
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+
 	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 }
 
@@ -48,6 +77,11 @@ void StageCanvas::onSize(int w, int h)
 	float hh = 1.0f * h / w;
 	m_mat_projection = mat4::Perspective(-1, 1, -hh, hh, 
 		e3d::Camera::CAM_NEAR, e3d::Camera::CAM_FAR);
+}
+
+void StageCanvas::OnDraw()
+{
+
 }
 
 }

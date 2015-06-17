@@ -8,16 +8,16 @@ namespace libsketch
 LibraryPage::LibraryPage(wxWindow* parent)
 	: ILibraryPage(parent, wxT("3D"))
 {
-	initLayout();
+	InitLayout();
 	m_list->setFileter(FILE_TAG);
 }
 
-bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
+bool LibraryPage::IsHandleSymbol(d2d::ISymbol* symbol) const
 {
 	return dynamic_cast<Symbol*>(symbol) != NULL;
 }
 
-// void LibraryPage::onAddPress(wxCommandEvent& event)
+// void LibraryPage::OnAddPress(wxCommandEvent& event)
 // {
 // 	wxString filter = wxString(wxT("*_")) + FILE_TAG + wxT(".json");
 // 	wxFileDialog dlg(this, wxT("choose obj files"), wxEmptyString, 
@@ -36,7 +36,7 @@ bool LibraryPage::isHandleSymbol(d2d::ISymbol* symbol) const
 // }
 
 // for test assimp loader
-void LibraryPage::onAddPress(wxCommandEvent& event)
+void LibraryPage::OnAddPress(wxCommandEvent& event)
 {
 	wxFileDialog dlg(this, wxT("choose model files"));
 	if (dlg.ShowModal() == wxID_OK)

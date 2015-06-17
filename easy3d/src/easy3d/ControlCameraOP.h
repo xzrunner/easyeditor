@@ -15,10 +15,10 @@ class ControlCameraOP : public d2d::AbstractEditOP
 public:
 	ControlCameraOP(d2d::EditPanel* stage);
 
-	virtual bool onKeyDown(int keyCode);
-	virtual bool onMouseLeftDown(int x, int y);
-	virtual bool onMouseDrag(int x, int y);
-	virtual bool onMouseMove(int x, int y);
+	virtual bool OnKeyDown(int keyCode);
+	virtual bool OnMouseLeftDown(int x, int y);
+	virtual bool OnMouseDrag(int x, int y);
+	virtual bool OnMouseMove(int x, int y);
 
 private:
 	StageCanvas* m_canvas;

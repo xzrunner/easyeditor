@@ -1,6 +1,3 @@
-#define NOMINMAX 
-#include <gl/GLee.h>
-
 #include "StageCanvas.h"
 
 #include "Symbol.h"
@@ -9,10 +6,10 @@
 namespace libsketch
 {
 
-StageCanvas::StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* stage, 
+StageCanvas::StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* sprites_impl, 
 						 d2d::LibraryPanel* library)
 	: e3d::StageCanvas(edit_panel)
-	, m_stage(stage)
+	, m_sprites_impl(sprites_impl)
 	, m_library(library)
 {
 }
@@ -47,13 +44,13 @@ void StageCanvas::onSize(int w, int h)
 	m_screen_height = h;
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetModelViewMat());
 	DrawBackground();
-	DrawSprites();
-
- 	m_editPanel->drawEditTemp();
+ 	DrawSprites();
+ 
+  	m_stage->drawEditTemp();
 }
 
 void StageCanvas::InitDefaultSymbol()
@@ -106,14 +103,14 @@ void StageCanvas::DrawBackground() const
 void StageCanvas::DrawSprites() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	m_sprites_impl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteDraw::drawSprite(sprite);
+		d2d::SpriteRenderer::Instance()->Draw(sprite);
 	}
 }
 

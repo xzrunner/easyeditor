@@ -10,14 +10,14 @@ SelectSpritesOP::SelectSpritesOP(d2d::EditPanel* editPanel, d2d::MultiSpritesImp
 {
 }
 
-bool SelectSpritesOP::onMouseLeftDown(int x, int y)
+bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
-	if (d2d::SelectSpritesOP::onMouseLeftDown(x, y)) {
+	if (d2d::SelectSpritesOP::OnMouseLeftDown(x, y)) {
 		return true;
 	}
 
-	d2d::Vector pos = m_editPanel->transPosScreenToProject(x, y);
-	static_cast<StageCanvas2D*>(m_editPanel->getCanvas())->OnMousePressed(pos);
+	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	static_cast<StageCanvas2D*>(m_stage->getCanvas())->OnMousePressed(pos);
 
 	return false;
 }

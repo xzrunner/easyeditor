@@ -47,7 +47,7 @@ void StageCanvas2D::onDraw()
 {
 	DrawBackground();
 	DrawSprites();
-	m_editPanel->drawEditTemp();
+	m_stage->drawEditTemp();
 }
 
 void StageCanvas2D::DrawBackground() const
@@ -59,13 +59,13 @@ void StageCanvas2D::DrawBackground() const
 void StageCanvas2D::DrawSprites() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	static_cast<StagePanel2D*>(m_editPanel)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	static_cast<StagePanel2D*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteDraw::drawSprite(sprites[i]);
+		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
 	}
 }
 
