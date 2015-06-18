@@ -280,6 +280,46 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="edge detection"
+				>
+				<File
+					RelativePath="..\..\..\src\libimage\EdgeDetectionShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\EdgeDetectionShader.frag"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\EdgeDetectionShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\EdgeDetectionShader.vert"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="relief"
+				>
+				<File
+					RelativePath="..\..\..\src\libimage\ReliefShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\ReliefShader.frag"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\ReliefShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\ReliefShader.vert"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="process"

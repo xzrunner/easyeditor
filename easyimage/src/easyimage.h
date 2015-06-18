@@ -16,6 +16,8 @@
 #include "libimage/TransToETC1.h"
 
 #include "libimage/LanczosResamplingShader.h"
+#include "libimage/EdgeDetectionShader.h"
+#include "libimage/ReliefShader.h"
 
 #include "libimage/BlockCompress.h"
 

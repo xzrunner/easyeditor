@@ -7,6 +7,7 @@ namespace eimage
 {
 
 class StagePanel;
+class EdgeDetectionShader;
 
 class ImageProcessCMPT : public d2d::AbstractEditCMPT
 {
@@ -16,6 +17,17 @@ public:
 
 protected:
 	virtual wxSizer* initLayout();
+
+private:
+	void OnNormal(wxCommandEvent& event);
+
+	void OnEdgeDetection(wxCommandEvent& event);
+	void OnSetBlend(wxScrollEvent& event);
+
+	void OnRelief(wxCommandEvent& event);
+
+private:
+	EdgeDetectionShader* m_edge_shader;
 
 }; // ImageProcessCMPT
 
