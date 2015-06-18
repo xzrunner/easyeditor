@@ -8,6 +8,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
+#include "view/GLCanvas.h"
 #include "render/BlendModes.h"
 #include "widgets/ColorProperty.h"
 
@@ -81,6 +82,13 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		int idx = wxANY_AS(value, int);
 		spr->SetBlendMode(BlendModes::Instance()->GetIDFromIdx(idx));
+	}
+	else if (name == "Filter")
+	{
+		int idx = wxANY_AS(value, int);
+		spr->SetFilterMode(FilterModes::Instance()->GetIDFromIdx(idx));
+		m_stage->getCanvas()->resetViewport();
+//		m_stage->Refresh();
 	}
 	else if (name == wxT("Clip"))
 	{
@@ -177,8 +185,11 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 // 	pg->SetPropertyValueString(wxT("Color.G"), g_trans.GetAsString());
 // 	pg->SetPropertyValueString(wxT("Color.B"), b_trans.GetAsString());
 
-	BlendMode mode = spr->GetBlendMode();
-	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(mode));
+	BlendMode blend = spr->GetBlendMode();
+	pg->GetProperty(wxT("Blend"))->SetValue(BlendModes::Instance()->GetIdxFromID(blend));
+
+	FilterMode filter = spr->GetFilterMode();
+	pg->GetProperty(wxT("Filter"))->SetValue(FilterModes::Instance()->GetIdxFromID(filter));
 
 	ColorProperty* rp = static_cast<ColorProperty*>(pg->GetProperty("Color Conversion.R"));
 	rp->SetListener(new PropertyColorListener(m_stage, &spr->r_trans));
@@ -269,6 +280,12 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	int idx = BlendModes::Instance()->GetIdxFromID(spr->GetBlendMode());
 	blend_prop->SetValue(idx);
 	pg->Append(blend_prop);
+
+	FilterModes::Instance()->GetAllNameCN(names);
+	wxEnumProperty* filter_prop = new wxEnumProperty(wxT("Filter"), wxPG_LABEL, names);
+	idx = FilterModes::Instance()->GetIdxFromID(spr->GetFilterMode());
+	filter_prop->SetValue(idx);
+	pg->Append(filter_prop);
 
 	pg->Append(new wxPropertyCategory("GEOMETRY", wxPG_LABEL));
 

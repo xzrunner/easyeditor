@@ -1303,6 +1303,58 @@
 							>
 						</File>
 					</Filter>
+					<Filter
+						Name="filter"
+						>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\FilterModes.cpp"
+							>
+						</File>
+						<File
+							RelativePath="..\..\..\src\drag2d\render\FilterModes.h"
+							>
+						</File>
+						<Filter
+							Name="relief"
+							>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\ReliefShader.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\ReliefShader.frag"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\ReliefShader.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\ReliefShader.vert"
+								>
+							</File>
+						</Filter>
+						<Filter
+							Name="edge"
+							>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\EdgeDetectionShader.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\EdgeDetectionShader.frag"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\EdgeDetectionShader.h"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\EdgeDetectionShader.vert"
+								>
+							</File>
+						</Filter>
+					</Filter>
 				</Filter>
 			</Filter>
 			<Filter

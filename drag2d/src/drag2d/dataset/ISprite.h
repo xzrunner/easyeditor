@@ -7,6 +7,7 @@
 #include "common/Vector.h"
 #include "common/Color.h"
 #include "render/BlendModes.h"
+#include "render/FilterModes.h"
 
 #include <json/json.h>
 
@@ -79,6 +80,9 @@ public:
 	BlendMode GetBlendMode() const { return m_blend_mode; }
 	void SetBlendMode(BlendMode mode) { m_blend_mode = mode; }
 
+	FilterMode GetFilterMode() const { return m_filter_mode; } 
+	void SetFilterMode(FilterMode mode) { m_filter_mode = mode; }
+
 	void setObserver(ISpriteObserver* observer) {
 		m_observer = observer;
 	}
@@ -108,6 +112,7 @@ protected:
 	bool m_xMirror, m_yMirror;
 
 	BlendMode m_blend_mode;
+	FilterMode m_filter_mode;
 
 	AbstractBV* m_bounding;
 

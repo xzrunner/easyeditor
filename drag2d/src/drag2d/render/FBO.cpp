@@ -70,13 +70,16 @@ void FBO::CreateFBO(int w, int h)
 		return;
 	}
 
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->sprite();
+
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
 	GLuint tex = 0;
 	glGenTextures(1, &tex);
 	glActiveTexture(GL_TEXTURE0);
 //	glBindTexture(GL_TEXTURE_2D, tex);
-	ShaderMgr::Instance()->SetTexture(tex);
+	mgr->SetTexture(tex);
 	m_tex = tex;
 
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
@@ -93,7 +96,7 @@ void FBO::CreateFBO(int w, int h)
 
 	glGenFramebuffersEXT(1, &m_fbo);
 //	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
-	ShaderMgr::Instance()->SetFBO(m_fbo);
+	mgr->SetFBO(m_fbo);
 	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0);
 
 	std::string msg;
@@ -102,10 +105,10 @@ void FBO::CreateFBO(int w, int h)
 		throw Exception(msg.c_str());
 	}
 
-	ShaderMgr::Instance()->SetTexture(0);
-	ShaderMgr::Instance()->SetFBO(0);
+	mgr->SetTexture(0);
+	mgr->SetFBO(0);
 
-// 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, ShaderMgr::Instance()->GetFboID());
+// 	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, mgr->GetFboID());
 // 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

@@ -33,6 +33,7 @@ ISprite::ISprite()
 	m_bounding = NULL;
 
 	m_blend_mode = BM_NORMAL;
+	m_filter_mode = FM_NORMAL;
 }
 
 ISprite::ISprite(const ISprite& sprite)
@@ -60,6 +61,7 @@ ISprite::ISprite(const ISprite& sprite)
 	m_bounding = sprite.m_bounding->clone();
 
 	m_blend_mode = sprite.m_blend_mode;
+	m_filter_mode = sprite.m_filter_mode;
 }
 
 ISprite::~ISprite()

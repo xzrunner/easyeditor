@@ -51,6 +51,8 @@ public:
 	void SetModelView(const Vector& offset, float scale);
 	void GetModelView(Vector& offset, float& scale);
 
+	int AddSpriteShader(d2d::SpriteShader* shader);
+	void SetSpriteShader(int idx);
 	void SetSpriteShader(d2d::SpriteShader* shader, bool delete_old = true);
 
 	ShapeShader* GetShapeShader() { return m_shape_shader; }
@@ -68,6 +70,8 @@ private:
 	SpriteShader* m_sprite_shader;
 	FontShader* m_font_shader;
 	ScreenShader* m_screen_shader;
+
+	std::vector<SpriteShader*> m_all_sprite_shader;
 
 	int m_version;
 

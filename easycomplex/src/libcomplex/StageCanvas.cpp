@@ -53,13 +53,19 @@ void StageCanvas::OnDraw()
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
+	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 	{
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
+
+		int filter_mode_idx = d2d::FilterModes::Instance()->QueryShaderIdx(sprite->GetFilterMode());
+		shader_mgr->SetSpriteShader(filter_mode_idx);
+
 		d2d::SpriteRenderer::Instance()->Draw(sprite);
 	}
+	shader_mgr->SetSpriteShader(0);
 
 	d2d::PrimitiveDraw::rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
 
