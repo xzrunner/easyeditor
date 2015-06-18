@@ -326,9 +326,13 @@ VisitLeaf(wxTreeItemId id)
 	val["parent"] = GetParentName(id);
 
 	GroupTreeItem* data = (GroupTreeItem*)m_treectrl->GetItemData(id);
-	assert(data && !data->IsGroup());
-	ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-	val["sprite"] = spr->name;
+	if (m_treectrl->GetRootID() == id) {
+		;
+	} else {
+		assert(data && !data->IsGroup());
+		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
+		val["sprite"] = spr->name;
+	}
 
 	int sz = m_value["node"].size();
 	m_value["node"][sz++] = val;
