@@ -134,7 +134,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 	// toolbar
 	m_widgets.m_toolbar = new ToolbarPanel(top_split, m_widgets.m_stage, 
-		m_widgets.m_property, false, &m_controller);
+		m_widgets.m_property, &m_widgets.m_view_panel_mgr, false, &m_controller);
 
 	// timeline
 	TimeLinePanel* timeline = new TimeLinePanel(bottom_split, &m_controller);
