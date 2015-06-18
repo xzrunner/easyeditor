@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;;&quot;..\..\..\..\editor-external\stackwalker&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 				Optimization="2"
 				InlineFunctionExpansion="0"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;"
+				AdditionalIncludeDirectories="..\..\..\src\drag2d;..\..\..\..\easyimage\src;&quot;..\..\..\..\editor-external&quot;;&quot;..\..\..\..\editor-external\c99&quot;;&quot;..\..\..\..\editor-external\freetype\include&quot;;&quot;..\..\..\..\editor-external\giflib\include&quot;;&quot;..\..\..\..\editor-external\gl\include&quot;;&quot;..\..\..\..\editor-external\json\include&quot;;&quot;..\..\..\..\editor-external\libjpeg\include&quot;;&quot;..\..\..\..\editor-external\libpng\include&quot;;&quot;..\..\..\..\editor-external\list&quot;;&quot;..\..\..\..\editor-external\lua\include&quot;;&quot;..\..\..\..\editor-external\md5\include&quot;;&quot;..\..\..\..\editor-external\rapidxml\include&quot;;&quot;..\..\..\..\editor-external\soil\include&quot;;&quot;..\..\..\..\editor-external\triangle\include&quot;;&quot;..\..\..\..\editor-external\wx\include&quot;;&quot;..\..\..\..\editor-external\clipper&quot;;&quot;..\..\..\..\editor-external\stackwalker&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;GLEW_STATIC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -1541,6 +1541,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\common\StackTrace.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\common\StackTrace.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\common\StringTools.cpp"
 					>
 				</File>
@@ -2598,6 +2606,18 @@
 				</File>
 				<File
 					RelativePath="..\..\..\..\editor-external\clipper\clipper.hpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="stackwalker"
+				>
+				<File
+					RelativePath="..\..\..\..\editor-external\stackwalker\StackWalker.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\..\editor-external\stackwalker\StackWalker.h"
 					>
 				</File>
 			</Filter>

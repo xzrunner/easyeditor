@@ -6,6 +6,7 @@
 #include "common/config.h"
 #include "common/Color.h"
 #include "common/SettingData.h"
+#include "common/StackTrace.h"
 #include "view/ExceptionDlg.h"
 #include "view/ExitDlg.h"
 #include "view/FrameDropTarget.h"
@@ -49,6 +50,8 @@ Frame::Frame(const wxString& title, const wxString& filetag, const wxSize& size)
 #else
 	wxLog::SetLogLevel(0);
 #endif
+
+	StackTrace::InitUnhandledExceptionFilter();
 
 	SetDropTarget(new FrameDropTarget(this));
 }
