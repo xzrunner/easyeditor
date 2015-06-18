@@ -26,6 +26,8 @@ private:
 
 	void OnRelief(wxCommandEvent& event);
 
+	void OnOutline(wxCommandEvent& event);
+
 private:
 	EdgeDetectionShader* m_edge_shader;
 

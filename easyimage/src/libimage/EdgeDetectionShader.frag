@@ -19,6 +19,9 @@ void main()
 	vec2 stpp = vec2(1.0/ResS, 1.0/ResT);
 	vec2 stpm = vec2(1.0/ResS, -1.0/ResT);
 
+	//	im1p1	i0p1	im1m1
+	//  im10    i00		ip10
+	//	im1m1	i0m1	ip1m1
 	const vec3 w = vec3(0.2125, 0.7154, 0.0721);
 	float i00 	= dot(texture2D(texture0, v_texcoord).rgb, w);
 	float im1m1 = dot(texture2D(texture0, v_texcoord - stpp).rgb, w);

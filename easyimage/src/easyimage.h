@@ -18,6 +18,7 @@
 #include "libimage/LanczosResamplingShader.h"
 #include "libimage/EdgeDetectionShader.h"
 #include "libimage/ReliefShader.h"
+#include "libimage/OutlineShader.h"
 
 #include "libimage/BlockCompress.h"
 

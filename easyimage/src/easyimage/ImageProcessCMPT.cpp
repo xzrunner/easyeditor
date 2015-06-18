@@ -44,6 +44,13 @@ wxSizer* ImageProcessCMPT::initLayout()
 			wxCommandEventHandler(ImageProcessCMPT::OnRelief));
 		sizer->Add(btn);
 	}
+	sizer->AddSpacer(10);
+	{
+		wxButton* btn = new wxButton(this, wxID_ANY, "°üÎ§");
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, 
+			wxCommandEventHandler(ImageProcessCMPT::OnOutline));
+		sizer->Add(btn);
+	}
 	return sizer;
 }
 
@@ -51,7 +58,12 @@ void ImageProcessCMPT::OnNormal(wxCommandEvent& event)
 {
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 	d2d::SpriteShader* shader = new d2d::SpriteShader;
-	shader->Load();
+	try {
+		shader->Load();
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();
+	}
 	shader_mgr->SetSpriteShader(shader);
 	m_stage->getCanvas()->resetViewport();
 	m_stage->Refresh();
@@ -61,7 +73,12 @@ void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 {
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 	m_edge_shader = new EdgeDetectionShader;
-	m_edge_shader->Load();
+	try {
+		m_edge_shader->Load();
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();
+	}
 	shader_mgr->SetSpriteShader(m_edge_shader);
 	m_stage->getCanvas()->resetViewport();
 	m_stage->Refresh();
@@ -80,7 +97,27 @@ void ImageProcessCMPT::OnRelief(wxCommandEvent& event)
 {
 	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
 	ReliefShader* shader = new ReliefShader;
-	shader->Load();
+	try {
+		shader->Load();
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();
+	}
+	shader_mgr->SetSpriteShader(shader);
+	m_stage->getCanvas()->resetViewport();
+	m_stage->Refresh();
+}
+
+void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
+{
+	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	OutlineShader* shader = new OutlineShader;
+	try {
+		shader->Load();
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();
+	}
 	shader_mgr->SetSpriteShader(shader);
 	m_stage->getCanvas()->resetViewport();
 	m_stage->Refresh();

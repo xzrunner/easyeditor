@@ -295,10 +295,6 @@
 					RelativePath="..\..\..\src\libimage\EdgeDetectionShader.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\..\src\libimage\EdgeDetectionShader.vert"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="relief"
@@ -315,8 +311,20 @@
 					RelativePath="..\..\..\src\libimage\ReliefShader.h"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="outline"
+				>
 				<File
-					RelativePath="..\..\..\src\libimage\ReliefShader.vert"
+					RelativePath="..\..\..\src\libimage\OutlineShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\OutlineShader.frag"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libimage\OutlineShader.h"
 					>
 				</File>
 			</Filter>
