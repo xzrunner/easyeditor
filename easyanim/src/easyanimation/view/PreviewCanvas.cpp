@@ -48,6 +48,7 @@ void PreviewCanvas::OnDraw()
 
 void PreviewCanvas::OnTimer()
 {
+	m_control.update();
 	if (m_control.frame() < m_ctrl->GetLayers().getFrameCount()) {
 		return;
 	}
