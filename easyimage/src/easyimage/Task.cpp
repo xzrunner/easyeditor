@@ -59,7 +59,7 @@ void Task::initLayout()
 	m_stage = new StagePanel(leftVerSplitter, m_parent, m_library);
 	m_property->SetEditPanel(m_stage);
 
-	m_toolbar = new ToolbarPanel(rightVerSplitter, m_library, m_property, m_stage);
+	m_toolbar = new ToolbarPanel(rightVerSplitter, m_library, m_stage);
 
 	leftHorSplitter->SetSashGravity(0.8f);
 	leftHorSplitter->SplitHorizontally(m_library, m_property);

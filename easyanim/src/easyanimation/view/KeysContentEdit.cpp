@@ -41,7 +41,7 @@ void KeysContentEdit::OnMouseLeftDown(int row, int col)
 		{
 			selected = true;
 			KeyFramePropertySetting* property = 
-				new KeyFramePropertySetting(m_ctrl->GetStagePanel(), itr->second);
+				new KeyFramePropertySetting(itr->second);
 			m_ctrl->GetPropertyPanel()->SetPropertySetting(property);
 		}
 	}
