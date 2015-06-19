@@ -43,6 +43,8 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 
 	std::vector<KeyFrame*> frames;
 
+	bool del_first = false;
+
 	std::map<int, KeyFrame*>::iterator itr = m_frames.begin();
 	for ( ; itr != m_frames.end(); )
 	{
@@ -50,6 +52,9 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 			++itr;
 			continue;
 		} else if (itr->first >= begin && itr->first <= end) {
+			if (itr == m_frames.begin()) {
+				del_first = true;
+			}
 			aop->AddRemoved(itr->second);
 			itr->second->Release();
 			itr = m_frames.erase(itr);
@@ -61,6 +66,9 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 	}
 
 	int cut_len = end - begin + 1;
+	if (del_first && !frames.empty()) {
+		cut_len += frames[0]->GetTime() - 2;
+	}
 	for (int i = 0, n = frames.size(); i < n; ++i) {
 		KeyFrame* frame = frames[i];
 		int new_time = frame->GetTime() - cut_len;
@@ -77,6 +85,8 @@ d2d::AbstractAtomicOP* Layer::RemoveFrameRegion(int begin, int end)
 	}
 
 	m_ctrl->setCurrFrame(m_ctrl->layer(), GetMaxFrameTime());
+
+	m_ctrl->Refresh();
 
 	return aop;
 }
@@ -177,8 +187,6 @@ void Layer::InsertKeyFrame(int time)
 
 void Layer::RemoveKeyFrame(int time)
 {
-	if (time == 1) return;
-
 	if (!IsKeyFrame(time)) {
 		return;
 	}
