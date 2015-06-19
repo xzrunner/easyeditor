@@ -1329,10 +1329,6 @@
 								RelativePath="..\..\..\src\drag2d\render\ReliefShader.h"
 								>
 							</File>
-							<File
-								RelativePath="..\..\..\src\drag2d\render\ReliefShader.vert"
-								>
-							</File>
 						</Filter>
 						<Filter
 							Name="edge"
@@ -1349,8 +1345,20 @@
 								RelativePath="..\..\..\src\drag2d\render\EdgeDetectionShader.h"
 								>
 							</File>
+						</Filter>
+						<Filter
+							Name="outline"
+							>
 							<File
-								RelativePath="..\..\..\src\drag2d\render\EdgeDetectionShader.vert"
+								RelativePath="..\..\..\src\drag2d\render\OutlineShader.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\OutlineShader.frag"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\OutlineShader.h"
 								>
 							</File>
 						</Filter>

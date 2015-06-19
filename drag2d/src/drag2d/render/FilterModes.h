@@ -14,6 +14,7 @@ enum FilterMode
 
 	FM_EDGE_DETECTION,
 	FM_RELIEF,
+	FM_OUTLINE,
 
 	FM_UNKNOWN = 99,
 

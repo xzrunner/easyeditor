@@ -3,7 +3,7 @@
 #include "EdgeDetectionShader.h"
 
 #define STRINGIFY(A)  #A
-#include "EdgeDetectionShader.vert"
+#include "SpriteShader.vert"
 #include "EdgeDetectionShader.frag"
 
 namespace d2d
@@ -27,7 +27,7 @@ void EdgeDetectionShader::SetBlend(float blend)
 
 void EdgeDetectionShader::LoadShader()
 {
-	InitShader(EdgeDetectionVertShader, EdgeDetectionFragShader);
+	InitShader(SpriteVertShader, EdgeDetectionFragShader);
 
 	m_blend = glGetUniformLocation(m_prog, "u_blend");
 }
