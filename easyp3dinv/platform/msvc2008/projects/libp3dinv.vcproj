@@ -220,6 +220,26 @@
 				RelativePath="..\..\..\src\libp3dinv\Symbol.h"
 				>
 			</File>
+			<Filter
+				Name="ps"
+				>
+				<File
+					RelativePath="..\..\..\src\libp3dinv\Particle.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libp3dinv\Particle.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libp3dinv\ParticleSystem.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libp3dinv\ParticleSystem.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libp3dinv\config.h"

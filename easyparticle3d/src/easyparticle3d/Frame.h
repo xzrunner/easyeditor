@@ -21,6 +21,7 @@ private:
 
 	void SaveAsParticle3d(const wxString& filepath) const;
 	void SaveAsAnim(const wxString& filepath) const;
+	void SaveAsInvert(const wxString& filepath) const;
 
 private:
 	DECLARE_EVENT_TABLE()

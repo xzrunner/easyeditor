@@ -33,6 +33,7 @@ public:
 	}
 
 	void StoreAsAnim(const wxString& filepath) const;
+	void StoreAsInvert(const wxString& filepath) const;
 
 private:
 	void initLayout();

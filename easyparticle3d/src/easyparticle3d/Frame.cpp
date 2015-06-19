@@ -30,7 +30,8 @@ void Frame::onSaveAs(wxCommandEvent& event)
 
 	try {
 		wxString anim_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim));
-		wxString filter = GetFileFilter() + "|" + anim_filter;
+		wxString inv_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_p3dinv));
+		wxString filter = GetFileFilter() + "|" + anim_filter + "|" + inv_filter;
 		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
 		if (dlg.ShowModal() == wxID_OK)
 		{
@@ -39,6 +40,8 @@ void Frame::onSaveAs(wxCommandEvent& event)
 				SaveAsParticle3d(filename);
 			} else if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_anim)) {
 				SaveAsAnim(filename);
+			} else if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_p3dinv)) {
+				SaveAsInvert(filename);
 			} else {
 				throw d2d::Exception("error filepath %s", filename.ToStdString().c_str());
 			}
@@ -77,6 +80,11 @@ void Frame::SaveAsParticle3d(const wxString& filepath) const
 void Frame::SaveAsAnim(const wxString& filepath) const
 {
 	static_cast<Task*>(m_task)->StoreAsAnim(filepath);
+}
+
+void Frame::SaveAsInvert(const wxString& filepath) const
+{
+	static_cast<Task*>(m_task)->StoreAsInvert(filepath);	
 }
 
 }

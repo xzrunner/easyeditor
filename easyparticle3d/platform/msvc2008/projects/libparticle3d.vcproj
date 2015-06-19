@@ -224,14 +224,26 @@
 				RelativePath="..\..\..\src\libparticle3d\FileIO.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle3d\Recorder.cpp"
+			<Filter
+				Name="record"
 				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libparticle3d\Recorder.h"
-				>
-			</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\AnimRecorder.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\AnimRecorder.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\InvertRecord.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libparticle3d\InvertRecord.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="view"

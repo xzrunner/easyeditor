@@ -1,7 +1,8 @@
 #include "ParticleSystem.h"
 #include "Symbol.h"
 #include "config.h"
-#include "Recorder.h"
+#include "AnimRecorder.h"
+#include "InvertRecord.h"
 #include "ps_config.h"
 
 namespace eparticle3d
@@ -14,7 +15,8 @@ namespace eparticle3d
 // }
 
 ParticleSystem::ParticleSystem(unsigned int buffer)
-	: m_recorder(new Recorder(buffer))
+	: m_anim_recorder(new AnimRecorder(buffer))
+	, m_inv_record(new InvertRecord)
 {
 //	delete[] pStart;
 	pLast = pStart = new Particle[buffer];
@@ -51,7 +53,8 @@ ParticleSystem::ParticleSystem(unsigned int buffer)
 }
 
 ParticleSystem::ParticleSystem(const ParticleSystem& ps)
-	: m_recorder(NULL)
+	: m_anim_recorder(NULL)
+	, m_inv_record(NULL)
 {
 	//	delete[] pStart;
 	pLast = pStart = new Particle[PARTICLE_CAP];
@@ -106,7 +109,8 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 
 ParticleSystem::~ParticleSystem()
 {
-	delete m_recorder;
+	delete m_anim_recorder;
+	delete m_inv_record;
 
 	if (pStart != NULL)
 		delete[] pStart;
@@ -189,10 +193,10 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 	}
 }
 
-void ParticleSystem::draw(const d2d::Matrix& mt, Recorder* recorder)
+void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 {
-	if (m_recorder) {
-		m_recorder->FinishFrame();
+	if (m_anim_recorder) {
+		m_anim_recorder->FinishFrame();
 	}
 
 	vertex vertices[4];
@@ -220,10 +224,10 @@ void ParticleSystem::draw(const d2d::Matrix& mt, Recorder* recorder)
 		if (p->m_bind_ps) {
 			d2d::Matrix _mt;
 			_mt.translate(p->pos.x, p->pos.y);
-			p->m_bind_ps->draw(_mt, m_recorder);
+			p->m_bind_ps->draw(_mt, m_anim_recorder);
 		}
 
-		Recorder* curr_record = m_recorder ? m_recorder : recorder;
+		AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 		if (curr_record) {
 			d2d::Vector fixed = d2d::Math::transVector(pos, _mt);
 			curr_record->AddItem(p->pc->symbol->getFilepath().ToStdString(), fixed.x, fixed.y, p->angle, s, multi);
@@ -379,8 +383,11 @@ void ParticleSystem::reset()
 	life = lifetime = emission_time;
 	emitCounter = 0;
 
-	if (m_recorder) {
-		m_recorder->Clear();
+	if (m_anim_recorder) {
+		m_anim_recorder->Clear();
+	}
+	if (m_inv_record) {
+		m_inv_record->Clear();
 	}
 }
 
@@ -403,10 +410,17 @@ void ParticleSystem::reloadTexture() const
 	}
 }
 
-void ParticleSystem::StoreRecordAsAnimFile(const std::string& filepath) const
+void ParticleSystem::StoreAnimRecord(const std::string& filepath) const
 {
-	if (m_recorder) {
-		m_recorder->StoreToAnimFile(filepath);
+	if (m_anim_recorder) {
+		m_anim_recorder->StoreToFile(filepath);
+	}
+}
+
+void ParticleSystem::StoreInvertRecord(const std::string& filepath) const
+{
+	if (m_inv_record) {
+		m_inv_record->StoreToFile(filepath);
 	}
 }
 
@@ -478,8 +492,12 @@ void ParticleSystem::add()
 
 void ParticleSystem::remove(Particle * p)
 {
-	if (!isEmpty())
+	if (m_inv_record) {
+		m_inv_record->AddItem(p);
+	}
+	if (!isEmpty()) {
 		*p = *(--pLast);
+	}
 }
 
 void ParticleSystem::transCoords(float r, float hori, float vert, float result[3])

@@ -73,7 +73,12 @@ void Task::initLayout()
 
 void Task::StoreAsAnim(const wxString& filepath) const
 {
-	m_stage->m_ps->StoreRecordAsAnimFile(filepath.ToStdString());
+	m_stage->m_ps->StoreAnimRecord(filepath.ToStdString());
+}
+
+void Task::StoreAsInvert(const wxString& filepath) const
+{
+	m_stage->m_ps->StoreInvertRecord(filepath.ToStdString());
 }
 
 }

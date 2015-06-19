@@ -14,6 +14,7 @@ static const wxString TAG_FONTBLANK = "fontblank";
 static const wxString TAG_SCRIPTS	= "scripts";
 static const wxString TAG_PARTICLE2D= "particle2d";
 static const wxString TAG_PARTICLE3D= "particle";
+static const wxString TAG_P3DINV	= "p3dinv";
 static const wxString TAG_EJOY2D	= "ejoy2d";
 static const wxString TAG_TEXTURE	= "texture";
 static const wxString TAG_TERRAIN2D = "terrain2d";
@@ -42,6 +43,7 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		else if (ext == TAG_FONTBLANK) return e_fontblank;
 		else if (ext == TAG_MESH) return e_mesh;
 		else if (ext == TAG_PARTICLE3D) return e_particle3d;
+		else if (ext == TAG_P3DINV) return e_p3dinv;
 		else if (ext == TAG_PARTICLE2D) return e_particle2d;
 		else if (ext == TAG_EJOY2D) return e_ejoy2d;
 		else if (ext == TAG_TEXTURE) return e_texture;
@@ -102,6 +104,9 @@ wxString FileNameParser::getFileTag(Type type)
 		break;
 	case e_particle3d:
 		ext = TAG_PARTICLE3D;
+		break;
+	case e_p3dinv:
+		ext = TAG_P3DINV;
 		break;
 	case e_ejoy2d:
 		ext = TAG_EJOY2D;

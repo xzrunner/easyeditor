@@ -1,4 +1,4 @@
-#include "Recorder.h"
+#include "AnimRecorder.h"
 
 #include <easyanim.h>
 
@@ -7,19 +7,19 @@ namespace eparticle3d
 
 static const int MAX_FRAME = 1024;
 
-Recorder::Recorder(int max_per_frame)
+AnimRecorder::AnimRecorder(int max_per_frame)
 	: m_curr_frame(NULL)
 	, m_frame_pool(MAX_FRAME)
 	, m_item_pool(MAX_FRAME * max_per_frame)
 {
 }
 
-Recorder::~Recorder()
+AnimRecorder::~AnimRecorder()
 {
 	Clear();
 }
 
-void Recorder::AddItem(const std::string& filepath, float x, float y, 
+void AnimRecorder::AddItem(const std::string& filepath, float x, float y, 
 					   float angle, float scale, const d2d::Colorf& col)
 {
 	while (!m_curr_frame) {
@@ -43,7 +43,7 @@ void Recorder::AddItem(const std::string& filepath, float x, float y,
 	m_curr_frame->items.push_back(item);
 }
 
-void Recorder::FinishFrame()
+void AnimRecorder::FinishFrame()
 {
 	if (m_curr_frame && !m_curr_frame->items.empty()) {
 		m_frames.push_back(m_curr_frame);
@@ -51,7 +51,7 @@ void Recorder::FinishFrame()
 	}
 }
 
-void Recorder::Clear()
+void AnimRecorder::Clear()
 {
 	m_frames.clear();
 	m_curr_frame = NULL;
@@ -60,7 +60,7 @@ void Recorder::Clear()
 	m_item_pool.Reset();
 }
 
-void Recorder::StoreToAnimFile(const std::string& filepath) const
+void AnimRecorder::StoreToFile(const std::string& filepath) const
 {
 	libanim::Symbol* symbol = new libanim::Symbol;
 	libanim::Symbol::Layer* layer = new libanim::Symbol::Layer;
@@ -96,17 +96,17 @@ void Recorder::StoreToAnimFile(const std::string& filepath) const
 }
 
 //////////////////////////////////////////////////////////////////////////
-// Recorder::Frame
+// AnimRecorder::Frame
 //////////////////////////////////////////////////////////////////////////
 
-Recorder::Frame::~Frame()
+AnimRecorder::Frame::~Frame()
 {
 //	Clear();
 
 	items.clear();
 }
 
-// void Recorder::Frame::Clear()
+// void AnimRecorder::Frame::Clear()
 // {
 // 	items.clear();
 // }

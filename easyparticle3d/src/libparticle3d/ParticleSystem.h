@@ -30,7 +30,8 @@ struct ParticleChild
 	{}
 };
 
-class Recorder;
+class AnimRecorder;
+class InvertRecord;
 
 struct Particle
 {
@@ -79,7 +80,7 @@ public:
 	virtual void SetValue(int key, const d2d::UICallback::Data& data);
 	virtual void GetValue(int key, d2d::UICallback::Data& data);
 
-	virtual void draw(const d2d::Matrix& mt, Recorder* recorder = NULL);
+	virtual void draw(const d2d::Matrix& mt, AnimRecorder* recorder = NULL);
 
 	void update(float dt);
 
@@ -92,7 +93,8 @@ public:
 
 	void reloadTexture() const;
 
-	void StoreRecordAsAnimFile(const std::string& filepath) const;
+	void StoreAnimRecord(const std::string& filepath) const;
+	void StoreInvertRecord(const std::string& filepath) const;
 
 public:
 	void setHori(int min, int max) { min_hori = min; max_hori = max; }
@@ -127,7 +129,8 @@ private:
 	static d2d::Vector TransCoords3To2(float position[3]);
 
 private:
-	Recorder* m_recorder;
+	AnimRecorder* m_anim_recorder;
+	InvertRecord* m_inv_record;
 
 public:
 	d2d::Vector origin;
