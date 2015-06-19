@@ -1039,8 +1039,8 @@ void CocoPacker::CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* pictur
 		for (int i = 0; i < 4; ++i)
 		{
 			float u = src[i].x, v = src[i].y;
-			src[i].x = picture->scr[1].x + v * h;
-			src[i].y = picture->scr[1].y + (1-u) * w;
+			src[i].x = picture->scr[2].x + v * h;
+			src[i].y = picture->scr[2].y + (1-u) * w;
 		}
 	}
 	else
@@ -1050,8 +1050,8 @@ void CocoPacker::CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* pictur
 		for (int i = 0; i < 4; ++i)
 		{
 			float u = src[i].x, v = src[i].y;
-			src[i].x = picture->scr[0].x + u * w;
-			src[i].y = picture->scr[0].y + v * h;
+			src[i].x = picture->scr[1].x + u * w;
+			src[i].y = picture->scr[1].y + v * h;
 		}
 	}
 }
