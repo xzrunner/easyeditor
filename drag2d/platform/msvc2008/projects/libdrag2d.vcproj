@@ -2185,6 +2185,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\SpriteDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\view\SpriteDialog.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\TextDialog.cpp"
 					>
 				</File>

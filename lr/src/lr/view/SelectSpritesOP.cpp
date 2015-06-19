@@ -124,6 +124,14 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		dlg.ShowModal();
 
 		m_stage->ResetViewport();
+	} 
+	else if (selected)
+	{
+		d2d::SpriteDialog dlg(m_stage, selected);
+		if (dlg.ShowModal() == wxID_OK) {
+			selected->name = dlg.GetNameStr();
+			selected->tag = dlg.GetTagStr();
+		}
 	}
 
 	return false;
