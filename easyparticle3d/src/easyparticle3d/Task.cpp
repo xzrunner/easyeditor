@@ -71,4 +71,9 @@ void Task::initLayout()
 	m_root = rightSplitter;
 }
 
+void Task::StoreAsAnim(const wxString& filepath) const
+{
+	m_stage->m_ps->StoreRecordAsAnimFile(filepath.ToStdString());
+}
+
 }

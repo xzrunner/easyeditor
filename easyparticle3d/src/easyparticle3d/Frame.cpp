@@ -24,6 +24,31 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_code_menu->Append(ID_COC, wxT("Info\tCtrl+C"), wxT("code"));
 }
 
+void Frame::onSaveAs(wxCommandEvent& event)
+{
+	if (!m_task) return;
+
+	try {
+		wxString anim_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim));
+		wxString filter = GetFileFilter() + "|" + anim_filter;
+		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
+		if (dlg.ShowModal() == wxID_OK)
+		{
+			wxString filename = dlg.GetPath();
+			if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_particle3d)) {
+				SaveAsParticle3d(filename);
+			} else if (d2d::FileNameParser::isType(filename, d2d::FileNameParser::e_anim)) {
+				SaveAsAnim(filename);
+			} else {
+				throw d2d::Exception("error filepath %s", filename.ToStdString().c_str());
+			}
+		}
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
+	}
+}
+
 void Frame::onCodeCOC(wxCommandEvent& event)
 {
 	ebuilder::CodeDialog dlg(this);
@@ -40,6 +65,18 @@ void Frame::onCodeCOC(wxCommandEvent& event)
 	dlg.notebook->AddPage(page, page->getName());
 
 	dlg.ShowModal();
+}
+
+void Frame::SaveAsParticle3d(const wxString& filepath) const
+{
+	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
+	m_currFilename = fixed;
+	m_task->store(fixed);
+}
+
+void Frame::SaveAsAnim(const wxString& filepath) const
+{
+	static_cast<Task*>(m_task)->StoreAsAnim(filepath);
 }
 
 }

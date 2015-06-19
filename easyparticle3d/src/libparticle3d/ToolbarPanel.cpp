@@ -115,13 +115,6 @@ wxSizer* ToolbarPanel::initLayout()
 	topSizer->Add(rightSizer);
 
 	leftSizer->AddSpacer(10);
-	// Record
-	{
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("Store Record"));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::onStoreRecord));
-		leftSizer->Add(btn);
-	}
-	leftSizer->AddSpacer(20);
 	// Name
 	{
 		wxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -340,17 +333,6 @@ void ToolbarPanel::clear()
 		m_stage->m_ps->delChild();
 	}
 	this->Layout();
-}
-
-void ToolbarPanel::onStoreRecord(wxCommandEvent& event)
-{
-	wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString,
-		wxT("*_") + wxString(libanim::FILE_TAG) + wxT(".json"), wxFD_SAVE);
-	if (dlg.ShowModal() == wxID_OK)
-	{
-		wxString filepath = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), libanim::FILE_TAG, "json");
-		m_stage->m_ps->StoreRecordAsAnimFile(filepath.ToStdString());
-	}
 }
 
 void ToolbarPanel::onAddChild(wxCommandEvent& event)

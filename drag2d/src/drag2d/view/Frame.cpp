@@ -222,9 +222,14 @@ void Frame::onSettings(wxCommandEvent& event)
 
 wxString Frame::GetFileFilter() const
 {
+	return GetJsonFileFilter(m_filetag);
+}
+
+wxString Frame::GetJsonFileFilter(const wxString& file_tag)
+{
 	wxString fliter;
-	fliter.Printf("JSON files (*_%s.json)|*_%s.json", m_filetag, m_filetag);
-	return fliter;
+	fliter.Printf("JSON files (*_%s.json)|*_%s.json", file_tag, file_tag);
+	return fliter;	
 }
 
 void Frame::onOpenRecent1(wxCommandEvent& event)

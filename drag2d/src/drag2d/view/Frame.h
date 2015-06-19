@@ -35,6 +35,7 @@ protected:
 	virtual void onSettings(wxCommandEvent& event);
 
 	wxString GetFileFilter() const;
+	static wxString GetJsonFileFilter(const wxString& file_tag);
 
 private:
 	void saveTmpInfo();

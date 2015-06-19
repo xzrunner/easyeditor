@@ -32,6 +32,8 @@ public:
 		return m_toolbar;
 	}
 
+	void StoreAsAnim(const wxString& filepath) const;
+
 private:
 	void initLayout();
 
