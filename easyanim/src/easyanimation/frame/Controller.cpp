@@ -38,6 +38,7 @@ void Controller::setCurrFrame(int layer, int frame)
 		int row, col;
 		m_widgets->m_keysPanel->GetSelectPos(row, col);
 		if (row >= 0 && col >= 0) {
+			row = GetLayers().size() - 1 - layer;
 			col = m_curr_frame - 1;
 			m_widgets->m_keysPanel->SetSelectPos(row, col);
 		}

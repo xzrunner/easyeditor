@@ -21,6 +21,7 @@ void MultiSpritesImpl::SelectSprite(ISprite* spr)
 {
 	m_spriteSelection->Clear();
  	m_spriteSelection->Add(spr);
+	m_wnd->Refresh();
 }
 
 void MultiSpritesImpl::SelectMultiSprites(SpriteSelection* selection)

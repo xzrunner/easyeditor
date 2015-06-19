@@ -135,6 +135,7 @@ void LayersContentWidget::onMouse(wxMouseEvent& event)
 		unsigned int screenIndex = event.GetY() / FRAME_GRID_HEIGHT;
 		int layer = size - screenIndex - 1;
 		m_ctrl->setCurrFrame(layer, m_ctrl->frame());
+		m_ctrl->Refresh();
 		if (screenIndex < size) 
 			isDragOpen = true;
 	}

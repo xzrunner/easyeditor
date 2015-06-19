@@ -91,7 +91,7 @@ bool ArrangeSpriteOP<TBase>::OnMouseRightUp(int x, int y)
 template <typename TBase>
 bool ArrangeSpriteOP<TBase>::OnMouseMove(int x, int y)
 {
-	if (TBase::OnMouseDrag(x, y)) return true;
+	if (TBase::OnMouseMove(x, y)) return true;
 	m_impl->OnMouseMove(x, y);
 	return false;
 }
