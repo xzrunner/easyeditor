@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyp3dinv", "projects\easyp3dinv.vcproj", "{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C} = {D41C0B3E-F0A0-4A1F-A568-0100C839406C}
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C} = {02A5FE18-62B6-4471-953C-1650CBD6C34C}
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libdrag2d", "..\..\..\drag2d\platform\msvc2008\projects\libdrag2d.vcproj", "{E69A7CDE-521A-45B5-B776-AD16F72F6A07}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libp3dinv", "projects\libp3dinv.vcproj", "{02A5FE18-62B6-4471-953C-1650CBD6C34C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libimage", "..\..\..\easyimage\platform\msvc2008\projects\libimage.vcproj", "{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Debug|Win32.Build.0 = Debug|Win32
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Release|Win32.ActiveCfg = Release|Win32
+		{E487FD3F-ABE4-43FB-8A59-03768C700CFD}.Release|Win32.Build.0 = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Debug|Win32.Build.0 = Debug|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.ActiveCfg = Release|Win32
+		{E69A7CDE-521A-45B5-B776-AD16F72F6A07}.Release|Win32.Build.0 = Release|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Debug|Win32.Build.0 = Debug|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Release|Win32.ActiveCfg = Release|Win32
+		{02A5FE18-62B6-4471-953C-1650CBD6C34C}.Release|Win32.Build.0 = Release|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.Build.0 = Debug|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.ActiveCfg = Release|Win32
+		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
