@@ -97,6 +97,9 @@ void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 	case 'm' : case 'M':
 		m_op_state = new MoveSpriteState(m_selection);
 		break;
+	case WXK_SPACE:
+		OnSpaceKeyDown();
+		break;
 
 		// for debug
 	case 'O':
@@ -110,13 +113,6 @@ void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 
 void ArrangeSpriteImpl::OnKeyUp(int keyCode)
 {
-	switch (keyCode)
-	{
-	case WXK_SPACE:
-		OnSpaceKeyUp();
-		break;
-	}
-
 	if (m_property_panel)
 	{
 		m_property_panel->EnablePropertyGrid(true);
@@ -463,7 +459,7 @@ void ArrangeSpriteImpl::OnDirectionKeyDown(DirectionType type)
 	}
 }
 
-void ArrangeSpriteImpl::OnSpaceKeyUp()
+void ArrangeSpriteImpl::OnSpaceKeyDown()
 {
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));

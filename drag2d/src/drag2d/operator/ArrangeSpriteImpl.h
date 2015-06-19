@@ -47,7 +47,7 @@ public:
 
 protected:
 	virtual void OnDirectionKeyDown(DirectionType type);
-	virtual void OnSpaceKeyUp();
+	virtual void OnSpaceKeyDown();
 
 	virtual void SetRightPopupMenu(wxMenu& menu, ISprite* spr);
 
