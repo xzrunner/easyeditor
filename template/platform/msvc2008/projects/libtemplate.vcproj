@@ -204,6 +204,22 @@
 		<Filter
 			Name="dataset"
 			>
+			<File
+				RelativePath="..\..\..\src\libtemplate\Sprite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtemplate\Sprite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtemplate\Symbol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libtemplate\Symbol.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath="..\..\..\src\libtemplate\config.h"
