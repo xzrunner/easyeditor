@@ -72,7 +72,6 @@ void IStageCanvas::InitGL()
 
 		ResetViewport();
 
-		glShadeModel(GL_SMOOTH);
 		glEnable(GL_TEXTURE_2D);
 
 		if (RenderContext::SHADER_MGR) {
