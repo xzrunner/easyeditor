@@ -23,6 +23,7 @@ struct SettingData
 	bool visible_label_text;
 	bool visible_node_name;
 	bool visible_shape;
+	bool visible_tex_edge;
 	bool particle3d_loop;
 	Colorf bg_color;
 

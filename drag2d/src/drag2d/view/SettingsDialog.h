@@ -28,6 +28,7 @@ private:
 	void onChangeFontText(wxCommandEvent& event);
 	void onChangeNodeName(wxCommandEvent& event);
 	void onChangeShape(wxCommandEvent& event);
+	void onChangeTextureEdge(wxCommandEvent& event);
 	void onSetBGColor(wxCommandEvent& event);
 
 private:

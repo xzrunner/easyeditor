@@ -69,7 +69,7 @@ void PolygonShape::draw(const d2d::Matrix& mt,
 		}
 	}
 
-	if (d2d::Settings::bDisplayPolyBound) {
+	if (d2d::Config::Instance()->GetSettings().visible_tex_edge) {
 		ChainShape::draw(mt, color);
 	}
 }

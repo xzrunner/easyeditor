@@ -103,10 +103,17 @@ wxSizer* SettingsDialog::initViewPanel()
 			sizer->Add(check, 0);
 		}
 		{
-			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("shape"));
+			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Shape"));
 			check->SetValue(m_settings.visible_shape);
 			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
 				wxCommandEventHandler(SettingsDialog::onChangeShape));
+			sizer->Add(check, 0);
+		}
+		{
+			wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("Texture Edge"));
+			check->SetValue(m_settings.visible_tex_edge);
+			Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+				wxCommandEventHandler(SettingsDialog::onChangeTextureEdge));
 			sizer->Add(check, 0);
 		}
 		{
@@ -164,6 +171,11 @@ void SettingsDialog::onChangeNodeName(wxCommandEvent& event)
 void SettingsDialog::onChangeShape(wxCommandEvent& event)
 {
 	m_settings.visible_shape = event.IsChecked();
+}
+
+void SettingsDialog::onChangeTextureEdge(wxCommandEvent& event)
+{
+	m_settings.visible_tex_edge = event.IsChecked();
 }
 
 void SettingsDialog::onSetBGColor(wxCommandEvent& event)
