@@ -14,7 +14,8 @@ StageCanvas::StageCanvas(StagePanel* stage)
 
 void StageCanvas::OnDraw()
 {
-	m_stage_impl->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
+	d2d::Rect sr = m_screen.GetRegion();
+	m_stage_impl->traverseSprites(d2d::DrawSpritesVisitor(sr), d2d::DT_VISIBLE);
 
 	drawRegion();
 }

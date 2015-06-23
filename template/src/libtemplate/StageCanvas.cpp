@@ -31,7 +31,8 @@ void StageCanvas::OnSize(int w, int h)
 
 void StageCanvas::OnDrawSprites() const
 {
-	m_stage->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
+	d2d::Rect sr = m_screen.GetRegion();
+	m_stage->traverseSprites(d2d::DrawSpritesVisitor(sr), d2d::DT_VISIBLE);
 
 	m_stage->drawEditTemp();
 }

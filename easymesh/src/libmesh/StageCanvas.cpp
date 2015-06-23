@@ -30,7 +30,7 @@ void StageCanvas::OnDraw()
 
 	m_stage->drawEditTemp();
 
-	m_panel->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);
+	m_panel->traverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {

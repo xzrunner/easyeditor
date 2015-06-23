@@ -15,7 +15,7 @@ bool CreateRegionOP::OnDraw() const
 		return true;
 	}
 
-	m_shapesImpl->traverseShapes(d2d::DrawShapesVisitor(), d2d::DT_VISIBLE);
+	m_shapesImpl->traverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
 
 	return false;
 }

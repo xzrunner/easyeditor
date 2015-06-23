@@ -2,6 +2,7 @@
 #define _D2D_SCREEN_H_
 
 #include "common/Vector.h"
+#include "common/Rect.h"
 
 namespace d2d
 {
@@ -37,6 +38,8 @@ public:
 	float GetScale() const;
 
 	void UpdateModelView() const;
+
+	Rect GetRegion() const;
 
 private:
 	Vector m_size;

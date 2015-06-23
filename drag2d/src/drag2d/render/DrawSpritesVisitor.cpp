@@ -9,7 +9,12 @@ namespace d2d
 void DrawSpritesVisitor::visit(Object* object, bool& bFetchNext)
 {
 	bFetchNext = true;
-	SpriteRenderer::Instance()->Draw(static_cast<ISprite*>(object));
+
+	ISprite* spr = static_cast<ISprite*>(object);
+	if (!m_screen_region.isValid() || 
+		Math::isRectIntersectRect(spr->GetRect(), m_screen_region)) {
+		SpriteRenderer::Instance()->Draw(spr);
+	}
 }
 
 } // d2d

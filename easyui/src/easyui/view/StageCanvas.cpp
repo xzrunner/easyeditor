@@ -24,7 +24,8 @@ void StageCanvas::OnDraw()
 
 	DrawGuideLines();
 
-	m_statge->traverseSprites(d2d::DrawSpritesVisitor(), d2d::DT_VISIBLE);
+	d2d::Rect sr = m_screen.GetRegion();
+	m_statge->traverseSprites(d2d::DrawSpritesVisitor(sr), d2d::DT_VISIBLE);
 
 	m_statge->GetAnchorMgr()->Draw();
 
