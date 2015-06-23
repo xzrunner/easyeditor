@@ -6,6 +6,7 @@
 
 #include "common/tools.h"
 #include "common/Rect.h"
+#include "common/Vector.h"
 #include "dataset/Image.h"
 #include "dataset/FTRender.h"
 
@@ -71,6 +72,9 @@ public:
 
 	const Glyph* QueryAndInsertFont(int character, const wxString& uft8, 
 		int font_size, int color, int is_edge);
+
+	void Draw(Vector vertices[4], Vector texcoords[4], 
+		const std::string& tex_filepath, int tex_id) const;
 
 	void Clear();
 

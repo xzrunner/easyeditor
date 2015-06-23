@@ -105,10 +105,12 @@ void Symbol::draw(const d2d::Matrix& mt,
  	}
  	else
 	{
-		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
+		for (size_t i = 0, n = m_sprites.size(); i < n; ++i) {
 			d2d::SpriteRenderer::Instance()->Draw(m_sprites[i], mt, mul, add, r_trans, g_trans, b_trans);
-
-		d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
+		}
+		if (m_clipbox.xLength() > 0 && m_clipbox.yLength() > 0) {
+			d2d::PrimitiveDraw::rect(mt, m_clipbox, m_style);
+		}
 	}
 }
 

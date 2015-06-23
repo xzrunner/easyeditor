@@ -56,6 +56,7 @@ protected:
 protected:
 	int m_texid;
 	float m_width, m_height;
+	std::string m_tex_filepath;		// for dtex
 
 	std::vector<Triangle*> m_tris;
 

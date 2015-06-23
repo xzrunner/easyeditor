@@ -26,6 +26,12 @@ void StageCanvas::OnDraw()
 	}
 
 	m_stage->drawEditTemp();
+
+#ifdef _DEBUG 
+	if (d2d::Config::Instance()->IsUseDTex()) {
+		d2d::DynamicTexAndFont::Instance()->DebugDraw();
+	}
+#endif
 }
 
 void StageCanvas::DrawRegion() const

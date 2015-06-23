@@ -51,7 +51,13 @@ void TextureMaterial::Draw(const d2d::Matrix& mt) const
 		}
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
-		shader->Draw(vertices, texcoords, m_image->getTextureID());
+
+		if (d2d::Config::Instance()->IsUseDTex()) {
+			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
+				m_image->getFilepath().ToStdString(), m_image->getTextureID());
+		} else {
+			shader->Draw(vertices, texcoords, m_image->getTextureID());
+		}
 	}
 }
 

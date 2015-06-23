@@ -290,6 +290,41 @@ void DynamicTexAndFont::LoadFontFile(const char* filename)
 	m_ft_render.LoadFont(filename);	
 }
 
+void DynamicTexAndFont::Draw(Vector vertices[4], Vector texcoords[4], 
+							 const std::string& tex_filepath, int tex_id) const
+{
+	const TPNode* n = NULL;
+	if (Config::Instance()->IsUseDTex()) {
+		n = Query(tex_filepath);
+	}
+	int tid;
+	if (n)
+	{
+		tid = m_tex;
+
+		float extend = GetExtend();
+		int t_width = n->GetMaxX() - n->GetMinX() - extend * 2;
+		int t_height = n->GetMaxY() - n->GetMinY() - extend * 2;
+		for (int i = 0; i < 4; ++i) {
+			texcoords[i].x = ((n->GetMinX()+extend) + t_width * texcoords[i].x) / m_width;
+			texcoords[i].y = ((n->GetMinY()+extend) + t_height * texcoords[i].y) / m_height;
+		}
+		if (n->IsRotated())
+		{
+			d2d::Vector tmp = vertices[3];
+			vertices[3] = vertices[2];
+			vertices[2] = vertices[1];
+			vertices[1] = vertices[0];
+			vertices[0] = tmp;
+		}
+	}
+	else
+	{
+		tid = tex_id;
+	}
+	d2d::ShaderMgr::Instance()->Draw(vertices, texcoords, tid);
+}
+
 void DynamicTexAndFont::Clear()
 {
 	delete m_root;

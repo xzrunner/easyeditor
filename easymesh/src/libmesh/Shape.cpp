@@ -14,6 +14,7 @@ Shape::Shape()
 
 Shape::Shape(const Shape& shape)
 	: m_texid(shape.m_texid)
+	, m_tex_filepath(shape.m_tex_filepath)
 	, m_width(shape.m_width)
 	, m_height(shape.m_height)
 {
@@ -22,6 +23,7 @@ Shape::Shape(const Shape& shape)
 Shape::Shape(const d2d::Image& image)
 {
 	m_texid = image.textureID();
+	m_tex_filepath = image.filepath();
 
 	m_width = image.originWidth();
 	m_height = image.originHeight();
@@ -125,7 +127,13 @@ void Shape::DrawTexture(const d2d::Matrix& mt,
 		}
 		vertices[3] = vertices[2];
 		texcoords[3] = texcoords[2];
-		shader->Draw(vertices, texcoords, texid);
+
+		if (d2d::Config::Instance()->IsUseDTex()) {
+			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
+				m_tex_filepath, m_texid);
+		} else {
+			shader->Draw(vertices, texcoords, m_texid);
+		}
 	}
 }
 
