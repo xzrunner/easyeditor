@@ -31,7 +31,8 @@ public:
 	void SetStagePanel(StagePanel* stage) {
 		m_stage = stage;
 	}
-	void InitPages(StagePanel* stage, d2d::PropertySettingPanel* property);
+	void InitPages(StagePanel* stage, d2d::PropertySettingPanel* property,
+		d2d::ViewPanelMgr* view_panel_mgr);
 
 	void Refresh();
 

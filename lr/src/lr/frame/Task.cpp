@@ -102,7 +102,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_view_panel_mgr.AddShapePanel(m_stage);
 
 	m_library->SetStagePanel(m_stage);
-	m_library->InitPages(m_stage, m_property);
+	m_library->InitPages(m_stage, m_property, &m_view_panel_mgr);
 	m_library->SetCanvas(m_stage->getCanvas());
 	m_property->SetEditPanel(m_stage);
 
