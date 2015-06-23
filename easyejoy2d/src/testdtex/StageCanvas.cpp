@@ -35,7 +35,8 @@ void StageCanvas::OnDraw()
 	m_panel->Update();
 
 	d2d::Rect sr = m_screen.GetRegion();
-  	m_panel->traverseSprites(d2d::DrawSpritesVisitor(sr), d2d::DT_VISIBLE);
+  	m_panel->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		d2d::DT_VISIBLE);
 //  	m_panel->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
   
   	m_stage->drawEditTemp();

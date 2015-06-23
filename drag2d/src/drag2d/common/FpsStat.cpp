@@ -80,7 +80,7 @@ void FpsStat::Draw(const Screen& scr, const std::string& str) const
 // 	ShaderMgr* shader = ShaderMgr::Instance();
 // 	shader->Commit();
 //	shader->SetSpriteModelView(Vector(0, 0), 1);
-	LabelNew::Print(m_time.c_str(), pos, style);
+	LabelNew::Print(m_time.c_str(), pos, 1, style);
 //	shader->Commit();
 // 	shader->Commit();
 // 	scr.UpdateModelView();

@@ -32,6 +32,7 @@ public:
 	static void Print(
 		const char* text, 
 		const Vector& pos,
+		float scale,
 		const LabelStyle& style);
 
 private:
@@ -64,6 +65,7 @@ private:
 
 	static void DrawLines(
 		const Vector& pos,
+		float scale,
 		const LabelStyle& style,
 		const std::vector<Line>& lines,
 		int tot_line_height,

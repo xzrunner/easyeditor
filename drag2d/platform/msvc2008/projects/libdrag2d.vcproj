@@ -768,14 +768,6 @@
 						>
 					</File>
 					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SpriteTools.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\..\src\drag2d\dataset\SpriteTools.h"
-						>
-					</File>
-					<File
 						RelativePath="..\..\..\src\drag2d\dataset\wrap_ISprite.cpp"
 						>
 					</File>

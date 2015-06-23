@@ -9,7 +9,6 @@
 #include "common/Config.h"
 #include "common/SettingData.h"
 #include "common/Math.h"
-#include "dataset/SpriteTools.h"
 #include "render/PrimitiveDraw.h"
 #include "render/Shader.h"
 #include "render/LabelNew.h"
@@ -155,7 +154,7 @@ void FontBlankSymbol::DrawText(const ISprite* sprite, const Matrix& mt) const
 				style.align_hori = font->align_hori;
 				style.align_vert = font->align_vert;
 
-				LabelNew::Print(str.utf8_str(), pos, style);
+				LabelNew::Print(str.utf8_str(), pos, 1, style);
 			}
 		}
 	}

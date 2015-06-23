@@ -42,6 +42,8 @@ public:
 			  const Colorf& g_trans = Colorf(0, 1, 0, 0),
 			  const Colorf& b_trans = Colorf(0, 0, 1, 0)) const;
 
+	void DrawName(const std::string& name, float scale, const Matrix& mt) const;
+
 	void SetCamera(const Camera* cam) { m_cam = cam; }
 	const Camera* GetCamera() const { return m_cam; }
 

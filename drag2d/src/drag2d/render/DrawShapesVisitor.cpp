@@ -18,6 +18,10 @@ void DrawShapesVisitor::visit(Object* object, bool& bFetchNext)
 	bFetchNext = true;
 
 	IShape* shape = static_cast<IShape*>(object);
+	if (!shape) {
+		return;
+	}
+
 	if (!m_screen_region.isValid() || 
 		Math::isRectIntersectRect(shape->getRect(), m_screen_region)) {
 		shape->draw(d2d::Matrix(), m_color);

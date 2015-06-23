@@ -2,7 +2,6 @@
 #include "Bitmap.h"
 #include "Image.h"
 #include "ISprite.h"
-#include "SpriteTools.h"
 
 #include "render/Shader.h"
 #include "render/ShaderMgr.h"

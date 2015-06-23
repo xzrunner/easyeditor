@@ -14,7 +14,7 @@ namespace d2d
 {
 
 void LabelNew::Print(const char* text, const Vector& pos,
-					 const LabelStyle& style)
+					 float scale, const LabelStyle& style)
 {
 	if (strlen(text) == 0) {
 		return;
@@ -50,7 +50,7 @@ void LabelNew::Print(const char* text, const Vector& pos,
 	int tot_line_height = TransToLines(unicodes, utf8s, style, lines);
 
 	if (!lines.empty()) {
-		DrawLines(pos, style, lines, tot_line_height, layout);
+		DrawLines(pos, scale, style, lines, tot_line_height, layout);
 	}
 
 	Draw(&layout);
@@ -59,9 +59,10 @@ void LabelNew::Print(const char* text, const Vector& pos,
 
 void LabelNew::TransToUnicodes(const char* text, std::vector<int>& unicodes, std::vector<wxString>& utf8s)
 {
-	// 默认已经是utf8的
-//	std::string utf8 = string2utf8(text);
-	std::string utf8 = text;
+// 	// 默认已经是utf8的
+// 	std::string utf8 = text;
+
+	std::string utf8 = string2utf8(text);
 	utf8_to_unicode(utf8.c_str(), unicodes, utf8s);
 }
 
@@ -118,6 +119,7 @@ int LabelNew::TransToLines(const std::vector<int>& unicodes,
 }
 
 void LabelNew::DrawLines(const Vector& pos,
+						 float scale,
 						 const LabelStyle& style,
 						 const std::vector<Line>& lines,
 						 int tot_line_height,
@@ -149,13 +151,13 @@ void LabelNew::DrawLines(const Vector& pos,
 	for (int i = 0, n = lines.size(); i < n; ++i) {
 		// todo discard line which outof label
 		const Line& line = lines[i];
-		float x = pos.x - style.width*0.5f;
+		float x;
 		if (style.align_hori == HAT_LEFT) {
-			x = pos.x - style.width*0.5f;
+			x = pos.x - style.width*0.5f*scale;
 		} else if (style.align_hori == HAT_RIGHT) {
-			x = pos.x + style.width*0.5f - line.width;
+			x = pos.x + style.width*0.5f*scale - line.width*scale;
 		} else if (style.align_hori == HAT_CENTER) {
-			x = pos.x -line.width * 0.5f;
+			x = pos.x - line.width*0.5f*scale;
 		}
 		for (int j = 0, m = line.glyphs.size(); j < m; ++j) {
 			const Glyph* g = line.glyphs[j];
@@ -167,14 +169,16 @@ void LabelNew::DrawLines(const Vector& pos,
 
 			LabelLayout::Glyph glyph;
 
-			xmin = x + g->bearing_x;
-			ymax = y + g->bearing_y - g->metrics_height;
+			float w = r->GetWidth() * scale,
+				h = r->GetHeight() * scale;
+			xmin = x + g->bearing_x * scale;
+			ymax = y + g->bearing_y * scale - g->metrics_height * scale;
 			if (r->IsRotated()) {
-				xmax = xmin + (r->GetHeight()-extend*2);
-				ymin = ymax - (r->GetWidth()-extend*2);
+				xmax = xmin + (h - extend * 2);
+				ymin = ymax - (w - extend * 2);
 			} else {
-				xmax = xmin + (r->GetWidth()-extend*2);
-				ymin = ymax - (r->GetHeight()-extend*2);
+				xmax = xmin + (w - extend * 2);
+				ymin = ymax - (h - extend * 2);
 			}
 
 			glyph.vertices[0].set(xmin, ymin);
@@ -206,7 +210,7 @@ void LabelNew::DrawLines(const Vector& pos,
 // 			shader->Draw(vertices, texcoords, tex_id);
 			layout.glyphs.push_back(glyph);
 
-			x += g->advande;
+			x += g->advande * scale;
 		}
 		y -= line.height;
 	}

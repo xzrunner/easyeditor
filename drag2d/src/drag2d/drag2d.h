@@ -34,7 +34,6 @@
 #include "dataset/Font.h"
 #include "dataset/AnimatedGifSaver.h"
 #include "dataset/Layer.h"
-#include "dataset/SpriteTools.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/TPNode.h"
 #include "dataset/text_util.h"

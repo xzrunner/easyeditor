@@ -46,7 +46,8 @@ void StageCanvas::OnDraw()
 	}
 
 	d2d::Rect sr = m_screen.GetRegion();
-	m_panel->traverseSprites(d2d::DrawSpritesVisitor(sr), d2d::DT_VISIBLE);
+	m_panel->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+		d2d::DT_VISIBLE);
 	m_panel->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
 
 	d2d::PrimitiveDraw::cross(d2d::Vector(0, 0), 100, 100, d2d::Colorf(1, 0, 0));
