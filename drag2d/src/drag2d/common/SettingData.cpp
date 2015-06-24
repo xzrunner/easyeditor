@@ -48,7 +48,7 @@ void SettingData::LoadFromFile(const Json::Value& value)
 		visible_node_name = value["visible_node_name"].asBool();
 	}
 	if (!value["visible_tex_edge"].isNull()) {
-		visible_shape = value["visible_tex_edge"].asBool();
+		visible_tex_edge = value["visible_tex_edge"].asBool();
 	}
 	if (!value["visible_shape"].isNull()) {
 		visible_shape = value["visible_shape"].asBool();
