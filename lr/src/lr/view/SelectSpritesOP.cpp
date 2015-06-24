@@ -10,6 +10,7 @@
 #include <easytexture.h>
 #include <easyshape.h>
 #include <easyterrain2d.h>
+#include <easyshadow.h>
 
 namespace lr
 {
@@ -125,6 +126,16 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 
 		m_stage->ResetViewport();
 	} 
+	else if (eshadow::Sprite* shadow = dynamic_cast<eshadow::Sprite*>(selected))
+	{
+		std::vector<d2d::ISprite*> sprites;
+		m_spritesImpl->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+
+		eshadow::EditDialog dlg(m_stage, shadow, sprites);
+		dlg.ShowModal();
+
+		m_stage->ResetViewport();
+	}
 	else if (selected)
 	{
 		d2d::SpriteDialog dlg(m_stage, selected);

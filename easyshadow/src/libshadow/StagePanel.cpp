@@ -19,6 +19,21 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_symbol = new Symbol;
 }
 
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
+					   d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
+	: d2d::EditPanel(parent, frame)
+	, d2d::MultiShapesImpl(this)
+	, m_loop(NULL)
+{
+	m_canvas = new StageCanvas(this, edited, bg_sprites);
+
+	m_symbol = (Symbol*)(&edited->getSymbol());
+	if (m_symbol) {
+		m_symbol->Retain();
+	}
+	LoadFromShadow();
+}
+
 StagePanel::~StagePanel()
 {
 	if (m_symbol) {

@@ -12,4 +12,6 @@
 #include "libshadow/StagePanel.h"
 #include "libshadow/ToolbarPanel.h"
 
+#include "libshadow/EditDialog.h"
+
 #endif // _EASYSHADOW_H_

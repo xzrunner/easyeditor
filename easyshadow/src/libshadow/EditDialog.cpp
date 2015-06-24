@@ -1,6 +1,8 @@
 #include "EditDialog.h"
 #include "Symbol.h"
 #include "Sprite.h"
+#include "StagePanel.h"
+#include "ToolBarPanel.h"
 
 #include <wx/splitter.h>
 
@@ -39,16 +41,15 @@ EditDialog::~EditDialog()
 
 void EditDialog::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite*>& bg_sprites)
 {
-// 	wxSplitterWindow* split = new wxSplitterWindow(this);
-// 
-// 	StagePanel* stage = new StagePanel(split, this, library, edited, bg_sprites);
-// 	m_stage = stage;
-// 
-// 	ToolbarPanel* toolbar = new ToolbarPanel(this, stage);
-// 
-// 	split->SetSashGravity(0.85f);
-// 	split->SplitVertically(stage, toolbar);
+	wxSplitterWindow* split = new wxSplitterWindow(this);
 
+	StagePanel* stage = new StagePanel(split, this, edited, bg_sprites);
+	m_stage = stage;
+
+	ToolbarPanel* toolbar = new ToolbarPanel(split, stage);
+
+	split->SetSashGravity(0.85f);
+	split->SplitVertically(stage, toolbar);
 }
 
 void EditDialog::OnClose(wxCloseEvent& event)
