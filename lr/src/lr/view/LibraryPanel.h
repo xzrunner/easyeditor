@@ -37,10 +37,15 @@ public:
 	void Refresh();
 
 private:
+	void CharHook(wxKeyEvent& event);
+
+private:
 	d2d::ViewlistPanel* m_viewlist;
 	d2d::GroupTreePanel* m_grouptree;
 
 	StagePanel* m_stage;
+
+	DECLARE_EVENT_TABLE()
 
 }; // LibraryPanel
 

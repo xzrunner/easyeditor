@@ -9,6 +9,10 @@
 namespace lr
 {
 
+BEGIN_EVENT_TABLE(LibraryPanel, wxPanel)
+ 	EVT_CHAR_HOOK(LibraryPanel::CharHook)
+END_EVENT_TABLE()
+
 LibraryPanel::LibraryPanel(wxWindow* parent)
 	: d2d::LibraryPanel(parent)
 	, m_viewlist(NULL) 
@@ -153,6 +157,18 @@ void LibraryPanel::Refresh()
 	m_grouptree->Clear();
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		m_grouptree->InsertSprite(sprites[i]);
+	}
+}
+
+void LibraryPanel::CharHook(wxKeyEvent& event)
+{
+	int key_code = event.GetKeyCode();
+	if (key_code >= '1' && key_code <= '8') {
+		int idx = key_code - '1';
+		SetCurrPage(idx);
+		return;
+	} else {
+		event.Skip();
 	}
 }
 
