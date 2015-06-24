@@ -6,8 +6,8 @@ namespace eshadow
 Shadow::Shadow(float radius)
 	: m_radius(radius)
 {
-	m_inner_color.set(0, 0, 0);
-	m_outer_color.set(0.5f, 0.5f, 0.5f);
+	m_inner_color.set(0, 0, 0, 1);
+	m_outer_color.set(0.5f, 0.5f, 0.5f, 0);
 }
 
 Shadow::~Shadow()
@@ -95,6 +95,20 @@ void Shadow::BuildInnerLine(const std::vector<d2d::Vector>& loop)
 
 	BuildInnerLoop(loop);
 	BuildOutterLine();
+}
+
+void Shadow::SetInnerColer(const d2d::Colorf& col) 
+{ 
+	m_inner_color.r = col.r;
+	m_inner_color.g = col.g;
+	m_inner_color.b = col.b;
+}
+
+void Shadow::SetOuterColer(const d2d::Colorf& col) 
+{ 
+	m_outer_color.r = col.r; 
+	m_outer_color.g = col.g; 
+	m_outer_color.b = col.b; 
 }
 
 void Shadow::BuildInnerLoop(const std::vector<d2d::Vector>& loop)

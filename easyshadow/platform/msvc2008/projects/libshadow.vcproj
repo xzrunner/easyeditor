@@ -205,14 +205,6 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libshadow\Shadow.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libshadow\Shadow.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\..\src\libshadow\Sprite.cpp"
 				>
 			</File>
@@ -228,6 +220,18 @@
 				RelativePath="..\..\..\src\libshadow\Symbol.h"
 				>
 			</File>
+			<Filter
+				Name="shadow"
+				>
+				<File
+					RelativePath="..\..\..\src\libshadow\Shadow.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshadow\Shadow.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="frame"
