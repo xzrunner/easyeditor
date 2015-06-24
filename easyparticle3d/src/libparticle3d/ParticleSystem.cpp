@@ -4,6 +4,7 @@
 #include "AnimRecorder.h"
 #include "InvertRecord.h"
 #include "ps_config.h"
+#include "utility.h"
 
 namespace eparticle3d
 {
@@ -141,6 +142,7 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		break;
 	case PS_GRAVITY:
 		gravity = data.val0 * 0.3f;
+		m_inv_record->SetGravity(gravity);
 		break;
 	case PS_LINEAR_ACC:
 		min_linear_acc = (data.val0 - data.val1);
@@ -507,15 +509,6 @@ void ParticleSystem::transCoords(float r, float hori, float vert, float result[3
 	result[0] = dxy * cos(hori);
 	result[1] = dxy * sin(hori);
 	result[2] = dz;
-}
-
-d2d::Vector ParticleSystem::TransCoords3To2(float position[3])
-{
-	float gx = position[0] * 0.01f,
-		  gy = position[1] * 0.01f;
-	float x = (gx - gy) * 36,
-		  y = (gx + gy) * 26 + position[2] * 0.5f;
-	return d2d::Vector(x, y);
 }
 
 }

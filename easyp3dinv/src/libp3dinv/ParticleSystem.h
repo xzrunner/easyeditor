@@ -26,6 +26,10 @@ private:
 private:
 	std::vector<Particle*> m_particles;
 
+	float m_gravity;
+
+	float m_during;
+
 }; // ParticleSystem
 
 }

@@ -126,8 +126,6 @@ protected:
 private:
 	void transCoords(float r, float hori, float vert, float result[3]);
 
-	static d2d::Vector TransCoords3To2(float position[3]);
-
 private:
 	AnimRecorder* m_anim_recorder;
 	InvertRecord* m_inv_record;

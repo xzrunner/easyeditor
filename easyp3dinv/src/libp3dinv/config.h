@@ -4,7 +4,7 @@
 namespace ep3dinv
 {
 
-static const char* FILE_TAG = "template";
+static const char* FILE_TAG = "p3dinv";
 
 }
 

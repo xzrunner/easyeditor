@@ -11,6 +11,7 @@ struct Particle;
 class InvertRecord
 {
 public:
+	InvertRecord();
 	~InvertRecord();
 
 	void AddItem(Particle* p);
@@ -18,6 +19,8 @@ public:
 	void StoreToFile(const std::string& filepath) const;
 
 	void Clear();
+
+	void SetGravity(float gravity) { m_gravity = gravity; }
 
 private:
 	struct Item
@@ -43,6 +46,8 @@ private:
 
 private:
 	std::vector<Item*> m_items;
+
+	float m_gravity;
 
 }; // InvertRecord
 

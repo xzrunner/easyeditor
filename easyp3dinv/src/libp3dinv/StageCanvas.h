@@ -8,18 +8,23 @@ namespace ep3dinv
 
 class StagePanel;
 
-//class StageCanvas : public d2d::DynamicStageCanvas
-class StageCanvas : public d2d::FBOCanvas
+class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
 
 protected:
-	virtual void OnSize(int w, int h);
-	virtual void OnDrawSprites() const;
+	virtual void OnDraw() const;
+
+	virtual void OnTimer();
 
 private:
 	StagePanel* m_stage;
+
+	int m_currFrame;
+	clock_t m_last;
+
+	d2d::PlayControl m_control;
 
 }; // StageCanvas
 

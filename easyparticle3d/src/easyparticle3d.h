@@ -13,5 +13,6 @@
 #include "libparticle3d/FileIO.h"
 #include "libparticle3d/Code.h"
 #include "libparticle3d/CocoPacker.h"
+#include "libparticle3d/utility.h"
 
 #endif // _EASYPARTICLE3D_H_

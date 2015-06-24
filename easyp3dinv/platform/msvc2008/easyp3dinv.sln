@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "easyp3dinv", "projects\easyp3dinv.vcproj", "{842597BE-1418-44CF-91EE-819E94B96D08}"
 	ProjectSection(ProjectDependencies) = postProject
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA} = {B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C} = {D41C0B3E-F0A0-4A1F-A568-0100C839406C}
 		{B80A41C3-5168-43A8-AC9D-C110C6140C86} = {B80A41C3-5168-43A8-AC9D-C110C6140C86}
 		{E69A7CDE-521A-45B5-B776-AD16F72F6A07} = {E69A7CDE-521A-45B5-B776-AD16F72F6A07}
@@ -13,6 +14,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libp3dinv", "projects\libp3dinv.vcproj", "{B80A41C3-5168-43A8-AC9D-C110C6140C86}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libimage", "..\..\..\easyimage\platform\msvc2008\projects\libimage.vcproj", "{D41C0B3E-F0A0-4A1F-A568-0100C839406C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libparticle3d", "..\..\..\easyparticle3d\platform\msvc2008\projects\libparticle3d.vcproj", "{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +39,10 @@ Global
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Debug|Win32.Build.0 = Debug|Win32
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.ActiveCfg = Release|Win32
 		{D41C0B3E-F0A0-4A1F-A568-0100C839406C}.Release|Win32.Build.0 = Release|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Debug|Win32.Build.0 = Debug|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Release|Win32.ActiveCfg = Release|Win32
+		{B2E0DE06-ACE8-4C69-8966-C81ED5686FCA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

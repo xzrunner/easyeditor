@@ -6,7 +6,7 @@
 namespace ep3dinv
 {
 
-class Icon;
+class ParticleSystem;
 
 class Symbol : public d2d::ISymbol
 {
@@ -36,6 +36,9 @@ public:
 
 protected:
 	virtual void loadResources();
+
+private:
+	ParticleSystem* m_ps;
 
 }; // Symbol
 

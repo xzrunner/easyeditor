@@ -4,6 +4,7 @@ namespace ep3dinv
 {
 
 ParticleSystem::ParticleSystem()
+	: m_during(0)
 {
 }
 
@@ -14,12 +15,22 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::Update(float dt)
 {
-
+	for (int i = 0, n = m_particles.size(); i < n; ++i) {
+		Particle* p = m_particles[i];
+		if (m_during > p->GetStartTime()) {
+			p->Update(dt, m_gravity);
+		}
+	}
 }
 
 void ParticleSystem::Draw(const d2d::Matrix& mt) const
 {
-
+	for (int i = 0, n = m_particles.size(); i < n; ++i) {
+		Particle* p = m_particles[i];
+		if (m_during > p->GetStartTime()) {
+			p->Draw(mt);
+		}
+	}	
 }
 
 void ParticleSystem::LoadFromFile(const std::string& filepath)
@@ -34,6 +45,8 @@ void ParticleSystem::LoadFromFile(const std::string& filepath)
 	reader.parse(fin, value);
 	fin.close();
 
+	m_gravity = value["ps"]["gravity"].asDouble();
+
 	int i = 0;
 	Json::Value val = value["sprite"][i++];
 	while (!val.isNull()) {
@@ -42,6 +55,16 @@ void ParticleSystem::LoadFromFile(const std::string& filepath)
 		m_particles.push_back(p);
 
 		val = value["sprite"][i++];
+	}
+
+	float final_time = 0;
+	for (int i = 0, n = m_particles.size(); i < n; ++i) {
+		final_time = std::max(final_time, m_particles[i]->GetStartTime());
+	}
+	for (int i = 0, n = m_particles.size(); i < n; ++i) {
+		Particle* p = m_particles[i];
+		float start_time = float(final_time - p->GetStartTime()) / CLOCKS_PER_SEC;
+		p->SetStartTime(start_time);
 	}
 }
 

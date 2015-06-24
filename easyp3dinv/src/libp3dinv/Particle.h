@@ -13,11 +13,19 @@ public:
 	Particle();
 	~Particle();
 
+	void Update(float dt, float gravity);
+	void Draw(const d2d::Matrix& mt) const;
+
 	void LoadFromFile(const Json::Value& val);
+
+	float GetStartTime() const { return m_start_time; }
+	void SetStartTime(float start_time) { 
+		m_start_time = start_time; 
+	}
 
 private:
 	float m_start_time;
-	float m_life;
+	float m_life, m_during;
 
 	float m_direction[2];
 	float m_position[3];

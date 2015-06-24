@@ -4,6 +4,11 @@
 namespace eparticle3d
 {
 
+InvertRecord::InvertRecord()
+	: m_gravity(0)
+{
+}
+
 InvertRecord::~InvertRecord()
 {
 	Clear();
@@ -17,6 +22,8 @@ void InvertRecord::AddItem(Particle* p)
 void InvertRecord::StoreToFile(const std::string& filepath) const
 {
 	Json::Value value;
+
+	value["ps"]["gravity"] = m_gravity;
 
 	for (int i = 0, n = m_items.size(); i < n; ++i) {
 		m_items[i]->StoreToFile(value["sprite"][i]);
@@ -71,13 +78,13 @@ StoreToFile(Json::Value& val) const
 
 	val["life"] = life;
 	for (int i = 0; i < 2; ++i) {
-		val["direction"] = direction[i];
+		val["direction"][i] = direction[i];
 	}
 	for (int i = 0; i < 3; ++i) {
-		val["position"] = position[i];
+		val["position"][i] = position[i];
 	}
 	for (int i = 0; i < 3; ++i) {
-		val["speed"] = speed[i];
+		val["speed"][i] = speed[i];
 	}
 	val["linear_acc"] = linear_acc;
 	val["rotate"] = rotate;
