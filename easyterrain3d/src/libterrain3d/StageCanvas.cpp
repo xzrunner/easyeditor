@@ -20,10 +20,10 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage)
 
 	setBgColor(d2d::BLACK);
 
-//	m_demo = new DemoTriNetwork(GetCamera3());
+	m_demo = new DemoTriNetwork(GetCamera3());
 //	m_demo = new DemoBruteForce(GetCamera3());
 //	m_demo = new DemoBruteForceTex(GetCamera3());
-	m_demo = new DemoOcean(GetCamera3());
+//	m_demo = new DemoOcean(GetCamera3());
 }
 
 void StageCanvas::initGL()
@@ -36,13 +36,14 @@ void StageCanvas::initGL()
 	Refresh();
 }
 
-void StageCanvas::onDraw()
+void StageCanvas::OnDraw()
 {
 //	e3d::DrawCross(vec3(0, 0, 0), vec3(100, 100, 100), d2d::LIGHT_RED);
 
+	m_demo->Update();
 	m_demo->Draw();
 
-//	e3d::LogViewer::Instance()->Draw();
+	e3d::LogViewer::Instance()->Draw();
 }
 
 void StageCanvas::OnTimer(wxTimerEvent& event)

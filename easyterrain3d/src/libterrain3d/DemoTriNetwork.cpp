@@ -17,6 +17,8 @@ DemoTriNetwork::DemoTriNetwork(e3d::Camera& cam)
 
 void DemoTriNetwork::Load()
 {
+	IDemo::Load();
+
 	m_cam.SetPosition(vec3(0, -8, 8));
 	m_cam.Rotate(0, 40);
 
@@ -30,6 +32,8 @@ void DemoTriNetwork::Load()
 
 void DemoTriNetwork::Draw() const
 {
+	IDemo::Draw();
+
 	const float HALF_EDGE = EDGE * 0.5f;
 	vec3 v0(-HALF_EDGE,  HALF_EDGE, 0), 
 		 v1( HALF_EDGE,  HALF_EDGE, 0),
@@ -66,6 +70,9 @@ void DemoTriNetwork::DrawTriByLevel(const vec3& v0, const vec3& v1, const vec3& 
   		vec2(1, 1),
   	};
  	shader->DrawTri(vertices, texcoords, m_tex);
+
+	m_verts_per_frame += 3;
+	m_tris_per_frame += 1;
 }
 
 void DemoTriNetwork::GenTex()

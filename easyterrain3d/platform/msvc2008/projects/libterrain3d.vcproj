@@ -149,6 +149,10 @@
 			Name="demo"
 			>
 			<File
+				RelativePath="..\..\..\src\libterrain3d\IDemo.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\..\src\libterrain3d\IDemo.h"
 				>
 			</File>

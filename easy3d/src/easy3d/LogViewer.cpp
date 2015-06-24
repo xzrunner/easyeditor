@@ -32,7 +32,7 @@ void LogViewer::Draw() const
 	d2d::Vector pos(0, 0);
 	for (int i = 0, n = m_log.size(); i < n; ++i)
 	{
-		d2d::LabelNew::Print(m_log[i].c_str(), pos, m_style);
+		d2d::LabelNew::Print(m_log[i].c_str(), pos, 1, m_style);
 		pos.y += 20;
 	}
 
