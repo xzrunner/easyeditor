@@ -75,6 +75,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 	m_library = new d2d::LibraryPanel(split);
 
 	m_property = new d2d::PropertySettingPanel(split);
+	m_view_panel_mgr.AddSpritePanel(m_property);
 
 	split->SetSashGravity(0.75f);
 	split->SplitHorizontally(m_library, m_property);
@@ -85,6 +86,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
+	m_view_panel_mgr.AddSpritePanel(m_stage);
 	m_library->SetCanvas(m_stage->getCanvas());
 	m_property->SetEditPanel(m_stage);
 	return m_stage;
@@ -92,7 +94,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 wxWindow* Task::InitLayoutRight(wxWindow* parent)
 {
-	ToolbarPanel* toolbar = new ToolbarPanel(parent, m_library, m_property, m_stage);
+	ToolbarPanel* toolbar = new ToolbarPanel(parent, m_library, m_property, &m_view_panel_mgr, m_stage);
 	return toolbar;
 }
 

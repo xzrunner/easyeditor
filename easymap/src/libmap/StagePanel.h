@@ -20,13 +20,6 @@ public:
 	//
 	virtual void clear();
 
-	//
-	// d2d::MultiSpritesImpl interface
-	//
-	virtual void removeSprite(d2d::ISprite* sprite);
-	virtual void insertSprite(d2d::ISprite* sprite);
-	virtual bool resetSpriteOrder(d2d::ISprite* sprite, bool up);
-
 protected:
 	virtual void OnMouseHook(wxMouseEvent& event);
 

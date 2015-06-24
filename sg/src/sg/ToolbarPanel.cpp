@@ -9,14 +9,16 @@ namespace sg
 {
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library, 
-						   d2d::PropertySettingPanel* property, StagePanel* stage)
+						   d2d::PropertySettingPanel* property, 
+						   d2d::ViewPanelMgr* view_panel_mgr,
+						   StagePanel* stage)
 	: d2d::ToolbarPanel(parent, stage)
 	, m_stage(stage)
 {
 	addChild(new d2d::UniversalCMPT(this, wxT("paste"), stage, 
 		new PasteSymbolOP(stage, library)));
 	addChild(new d2d::PasteSpriteCMPT(this, wxT("batch"), stage, stage));
-	addChild(new ArrangeSpriteCMPT(this, wxT("arrange"), property, stage));
+	addChild(new ArrangeSpriteCMPT(this, wxT("arrange"), property, view_panel_mgr, stage));
 
 	SetSizer(initLayout());	
 
