@@ -6,8 +6,6 @@
 namespace etemplate
 {
 
-class Icon;
-
 class Symbol : public d2d::ISymbol
 {
 public:
