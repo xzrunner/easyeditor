@@ -331,7 +331,12 @@ VisitLeaf(wxTreeItemId id)
 	} else {
 		assert(data && !data->IsGroup());
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-		val["sprite"] = spr->name;
+		if (spr) {
+			val["sprite"] = spr->name;
+		} else {
+			// fixme
+			int zz = 0;
+		}
 	}
 
 	int sz = m_value["node"].size();
