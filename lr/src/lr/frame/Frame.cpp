@@ -80,7 +80,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	d2d::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
 	StagePanel* stage = (StagePanel*)(m_task->getEditPanel());
 	std::vector<d2d::ISprite*> sprites;
-	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ss.DrawSprite(sprites[i]);
 	}
