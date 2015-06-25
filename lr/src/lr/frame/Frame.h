@@ -16,11 +16,16 @@ public:
 	ToolBar* GetToolBar() { return m_toolbar; }
 
 protected:
+	virtual void onSaveAs(wxCommandEvent& event);
+
 	void OnToolBarClick(wxCommandEvent& event);
 
 private:
 	void OnPreview(wxCommandEvent& event);
 	void OnExtendSetting(wxCommandEvent& event);
+
+	void SaveAsPNG(const std::string& filepath) const;
+	void SaveAsJson(const std::string& filepath) const;
 
 private:
 	enum

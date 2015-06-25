@@ -5,6 +5,7 @@
 #include "ToolBar.h"
 
 #include "preview/MainDialog.h"
+#include "view/StagePanel.h"
 
 namespace lr
 {
@@ -22,6 +23,29 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_setting_menu->Append(ID_SETING_EXTEND, wxT("Extend"), wxT("Extend"));
 
 	m_toolbar = new ToolBar(this, ID_TOOLBAR);
+}
+
+void Frame::onSaveAs(wxCommandEvent& event)
+{
+	if (!m_task) return;
+
+	try {
+		wxString filter = GetFileFilter() + "|PNG files (*.png)|*.png";
+		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
+		if (dlg.ShowModal() == wxID_OK)
+		{
+			wxString filename = dlg.GetPath();
+			wxString ext = d2d::FilenameTools::getExtension(filename);
+			if (ext == "png") {
+				SaveAsPNG(filename.ToStdString());
+			} else {
+				SaveAsJson(filename.ToStdString());
+			}
+		}
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
+	}
 }
 
 void Frame::OnToolBarClick(wxCommandEvent& event)
@@ -48,6 +72,28 @@ void Frame::OnExtendSetting(wxCommandEvent& event)
 {
 	SettingDialog dlg(this, (StagePanel*)(m_task->getEditPanel()));
 	dlg.ShowModal();
+}
+
+void Frame::SaveAsPNG(const std::string& filepath) const
+{
+	SettingCfg* cfg = SettingCfg::Instance();
+	d2d::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
+	StagePanel* stage = (StagePanel*)(m_task->getEditPanel());
+	std::vector<d2d::ISprite*> sprites;
+	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
+	for (int i = 0, n = sprites.size(); i < n; ++i) {
+		ss.DrawSprite(sprites[i]);
+	}
+	ss.SaveToFile(filepath);
+
+	stage->getCanvas()->resetInitState();
+}
+
+void Frame::SaveAsJson(const std::string& filepath) const
+{
+	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
+	m_currFilename = fixed;
+	m_task->store(fixed);
 }
 
 }
