@@ -32,6 +32,8 @@ public:
 
 	const std::vector<d2d::Vector>& GetInnerLoop() const { return m_inner_loop; }
 
+	static void InitShader();
+
 private:
 	void BuildInnerLoop(const std::vector<d2d::Vector>& loop);
 	void BuildOuterLoop();
@@ -48,6 +50,8 @@ private:
 	std::vector<d2d::Colorf> m_colors;	
 
 	d2d::Rect m_region;
+
+	static int m_shader_idx;
 
 }; // Shadow
 

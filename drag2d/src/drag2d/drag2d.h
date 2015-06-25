@@ -171,4 +171,5 @@
 #include "render/IShader.h"
 #include "render/LabelNew.h"
 #include "render/SpriteShader.h"
+#include "render/ShapeShader.h"
 #include "render/Snapshoot.h"

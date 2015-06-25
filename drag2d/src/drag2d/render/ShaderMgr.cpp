@@ -29,6 +29,7 @@ ShaderMgr::ShaderMgr()
 {
 	m_shape_shader = new ShapeShader;
 	m_shaders.push_back(m_shape_shader);
+	m_all_shape_shader.push_back(m_shape_shader);
 
  	m_sprite_shader = new SpriteShader;
 //	m_sprite_shader = new BlendShader;
@@ -154,8 +155,9 @@ bool ShaderMgr::IsOpenBufferData() const
 
 void ShaderMgr::SetModelView(const Vector& offset, float scale)
 {
-	m_shape_shader->SetModelView(offset, scale);
-//	m_sprite_shader->SetModelView(offset, scale);
+	for (int i = 0, n = m_all_shape_shader.size(); i < n; ++i) {
+		m_all_shape_shader[i]->SetModelView(offset, scale);
+	}
 	for (int i = 0, n = m_all_sprite_shader.size(); i < n; ++i) {
 		m_all_sprite_shader[i]->SetModelView(offset, scale);
 	}
@@ -168,6 +170,22 @@ void ShaderMgr::GetModelView(Vector& offset, float& scale)
 {
 	offset = m_offset;
 	scale = m_scale;
+}
+
+int ShaderMgr::AddShapeShader(d2d::ShapeShader* shader)
+{
+	m_all_shape_shader.push_back(shader);
+	m_shaders.push_back(shader);
+	return m_all_shape_shader.size() - 1;
+}
+
+void ShaderMgr::SetShapeShader(int idx)
+{
+	if (idx >= 0 && idx < m_all_shape_shader.size()) {
+		if (m_shape_shader != m_all_shape_shader[idx]) {
+			m_shape_shader = m_all_shape_shader[idx];
+		}
+	}
 }
 
 int ShaderMgr::AddSpriteShader(d2d::SpriteShader* shader)

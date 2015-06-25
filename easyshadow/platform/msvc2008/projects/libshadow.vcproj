@@ -253,6 +253,30 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="render"
+			>
+			<Filter
+				Name="shadow"
+				>
+				<File
+					RelativePath="..\..\..\src\libshadow\ShadowShader.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshadow\ShadowShader.frag"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshadow\ShadowShader.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\libshadow\ShadowShader.vert"
+					>
+				</File>
+			</Filter>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libshadow\config.h"
 			>

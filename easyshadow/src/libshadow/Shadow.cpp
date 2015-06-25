@@ -1,7 +1,10 @@
 #include "Shadow.h"
+#include "ShadowShader.h"
 
 namespace eshadow
 {
+
+int Shadow::m_shader_idx = -1;
 
 Shadow::Shadow(float radius)
 	: m_radius(radius)
@@ -35,10 +38,18 @@ void Shadow::LoadFromFile(const Json::Value& value)
 
 void Shadow::Draw(const d2d::Matrix& mt) const
 {
+	if (m_shader_idx == -1) {
+		InitShader();
+	}
+
+	d2d::ShaderMgr::Instance()->SetShapeShader(m_shader_idx);
+
 	d2d::PrimitiveDraw::DrawTriangles(mt, m_tris, m_colors);
 
 // 	d2d::PrimitiveDraw::drawPolyline(mt, m_inner_loop, d2d::LIGHT_RED, true);
 // 	d2d::PrimitiveDraw::drawPolyline(mt, m_outer_loop, d2d::LIGHT_GREEN, true);
+
+	d2d::ShaderMgr::Instance()->SetShapeShader(0);
 }
 
 void Shadow::BuildFace()
@@ -109,6 +120,13 @@ void Shadow::SetOuterColer(const d2d::Colorf& col)
 	m_outer_color.r = col.r; 
 	m_outer_color.g = col.g; 
 	m_outer_color.b = col.b; 
+}
+
+void Shadow::InitShader()
+{
+	ShadowShader* shader = new ShadowShader;
+	shader->Load();
+	m_shader_idx = d2d::ShaderMgr::Instance()->AddShapeShader(shader);
 }
 
 void Shadow::BuildInnerLoop(const std::vector<d2d::Vector>& loop)
