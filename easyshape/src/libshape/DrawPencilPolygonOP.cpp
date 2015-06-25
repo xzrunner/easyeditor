@@ -124,6 +124,11 @@ void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<d2d::Vecto
 
 void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<d2d::Vector> >& paths)
 {
+	// for shadow, fixme!
+	if (paths.size() > 1) {
+		return;
+	}
+
 	m_shapesImpl->clearShapes();
 	for (int i = 0, n = paths.size(); i < n; ++i) {
 		m_shapesImpl->insertShape(new PolygonShape(paths[i]));
