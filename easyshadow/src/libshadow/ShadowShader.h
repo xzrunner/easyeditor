@@ -9,9 +9,15 @@ namespace eshadow
 class ShadowShader : public d2d::ShapeShader
 {
 public:
+	ShadowShader();
+
+	void SetAlpha(float alpha);
 
 protected:
 	virtual void LoadShader();	
+
+private:
+	GLuint m_alpha;
 
 }; // ShadowShader
 

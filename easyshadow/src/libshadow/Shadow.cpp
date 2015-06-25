@@ -36,20 +36,26 @@ void Shadow::LoadFromFile(const Json::Value& value)
 	BuildInnerLine(loop);
 }
 
-void Shadow::Draw(const d2d::Matrix& mt) const
+void Shadow::Draw(const d2d::Matrix& mt, float alpha) const
 {
 	if (m_shader_idx == -1) {
 		InitShader();
 	}
 
-	d2d::ShaderMgr::Instance()->SetShapeShader(m_shader_idx);
+	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	shader_mgr->SetShapeShader(m_shader_idx);
+
+	shader_mgr->shape();
+
+	ShadowShader* shader = static_cast<ShadowShader*>(shader_mgr->GetShapeShader());
+	shader->SetAlpha(alpha);
 
 	d2d::PrimitiveDraw::DrawTriangles(mt, m_tris, m_colors);
 
 // 	d2d::PrimitiveDraw::drawPolyline(mt, m_inner_loop, d2d::LIGHT_RED, true);
 // 	d2d::PrimitiveDraw::drawPolyline(mt, m_outer_loop, d2d::LIGHT_GREEN, true);
 
-	d2d::ShaderMgr::Instance()->SetShapeShader(0);
+	shader_mgr->SetShapeShader(0);
 }
 
 void Shadow::BuildFace()

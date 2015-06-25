@@ -15,7 +15,7 @@ public:
 	void StoreToFile(Json::Value& value) const;
 	void LoadFromFile(const Json::Value& value);
 
-	void Draw(const d2d::Matrix& mt) const;
+	void Draw(const d2d::Matrix& mt, float alpha) const;
 
 	void BuildFace();
 	void BuildOutterLine();

@@ -42,7 +42,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::ISprite* sprite) const
 {
 	if (m_shadow) {
-		m_shadow->Draw(mt);
+		m_shadow->Draw(mt, mul.a);
 	}
 }
 
