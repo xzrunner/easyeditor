@@ -66,6 +66,7 @@ void StageCanvas::OnDraw()
 		d2d::SpriteRenderer::Instance()->Draw(sprite);
 	}
 	shader_mgr->SetSpriteShader(0);
+	shader_mgr->sprite();
 
 	d2d::PrimitiveDraw::rect(m_stage->getSymbol()->m_clipbox, m_clipboxStyle);
 
