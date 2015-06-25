@@ -7,6 +7,8 @@
 #include "preview/MainDialog.h"
 #include "view/StagePanel.h"
 
+#include <easyshape.h>
+
 namespace lr
 {
 
@@ -79,11 +81,22 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	SettingCfg* cfg = SettingCfg::Instance();
 	d2d::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
 	StagePanel* stage = (StagePanel*)(m_task->getEditPanel());
+
 	std::vector<d2d::ISprite*> sprites;
 	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
 		ss.DrawSprite(sprites[i]);
 	}
+
+	std::vector<d2d::IShape*> shapes;
+	stage->traverseShapes(d2d::FetchAllVisitor<d2d::IShape>(shapes), d2d::DT_VISIBLE);
+	for (int i = 0, n = shapes.size(); i < n; ++i) {
+		ss.DrawShape(shapes[i]);		
+	}
+
+	libshape::RectShape rect(d2d::Vector(0, 0), cfg->m_view_width * 0.5f, cfg->m_view_height * 0.5f);
+	ss.DrawShape(&rect);
+
 	ss.SaveToFile(filepath);
 
 	stage->getCanvas()->resetInitState();

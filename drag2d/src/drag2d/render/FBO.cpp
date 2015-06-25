@@ -2,6 +2,7 @@
 #include "ShaderMgr.h"
 
 #include "dataset/ISymbol.h"
+#include "dataset/IShape.h"
 #include "common/Exception.h"
 #include "common/Matrix.h"
 #include "render/SpriteRenderer.h"
@@ -50,6 +51,11 @@ void FBO::DrawSprite(const ISprite* sprite, bool clear, int width, int height,
 					 float dx, float dy)
 {
 	DrawFBO(sprite, clear, width, height, dx, dy);
+}
+
+void FBO::DrawShape(const IShape* shape, bool clear, int width, int height)
+{
+	DrawFBO(shape, clear, width, height);
 }
 
 void FBO::DrawSymbol(const ISymbol* symbol, bool whitebg, float scale)
@@ -221,6 +227,27 @@ void FBO::DrawFBO(const ISprite* sprite, bool clear, int width, int height, floa
 	// todo 连续画symbol，不批量的话会慢。需要加个参数控制。
 	shader->SetFBO(0);
 	shader->SetTexture(0);
+}
+
+void FBO::DrawFBO(const IShape* shape, bool clear, int width, int height)
+{
+	ShaderMgr* shader = ShaderMgr::Instance();
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, m_fbo);
+
+	if (clear) {
+		glClearColor(0, 0, 0, 0);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
+	shader->SetModelView(Vector(0, 0), 1);
+	shader->SetProjection(width, height);
+	glViewport(0, 0, width, height);
+
+	Matrix mt;
+	mt.setScale(1, -1);
+	shape->draw(mt);
+
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
 }

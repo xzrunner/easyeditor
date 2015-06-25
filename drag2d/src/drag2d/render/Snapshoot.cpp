@@ -62,6 +62,11 @@ void Snapshoot::DrawSprite(const ISprite* sprite, bool clear, int width, int hei
 	m_fbo.DrawSprite(sprite, clear, width, height, dx, dy);
 }
 
+void Snapshoot::DrawShape(const IShape* shape, bool clear) const
+{
+	m_fbo.DrawShape(shape, clear, m_width, m_height);
+}
+
 void Snapshoot::SaveToFile(const std::string& filename) const
 {
 	SaveToFile(filename, m_width, m_height);

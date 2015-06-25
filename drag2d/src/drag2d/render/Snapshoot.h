@@ -19,10 +19,12 @@ public:
 
 	void DrawSprite(const ISprite* sprite, bool clear = false,
 		float dx = 0, float dy = 0) const;
-	void SaveToFile(const std::string& filename) const;
-
 	void DrawSprite(const ISprite* sprite, bool clear, int width, int height,
 		float dx = 0, float dy = 0) const;
+
+	void DrawShape(const IShape* shape, bool clear = false) const;
+
+	void SaveToFile(const std::string& filename) const;
 	void SaveToFile(const std::string& filename, int width, int height) const;
 
 private:

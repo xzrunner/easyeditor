@@ -9,6 +9,7 @@ namespace d2d
 {
 
 class ISprite;
+class IShape;
 class ISymbol;
 
 class FBO
@@ -24,6 +25,7 @@ public:
 		float dx = 0, float dy = 0);
 	void DrawSprite(const ISprite* sprite, bool clear, int width, int height,
 		float dx = 0, float dy = 0);
+	void DrawShape(const IShape* shape, bool clear, int width, int height);
 	void DrawSymbol(const ISymbol* symbol, bool whitebg = false,
 		float scale = 1.0f);
 
@@ -45,6 +47,7 @@ private:
 		float scale = 1.0f);
 	void DrawFBO(const ISprite* sprite, bool clear, int width, int height, 
 		float dx, float dy);
+	void DrawFBO(const IShape* shape, bool clear, int width, int height);
 
 private:
 	int m_width, m_height;
