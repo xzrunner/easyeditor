@@ -30,6 +30,7 @@ ISprite::ISprite()
 	m_scale.set(1, 1);
 	m_shear.set(0, 0);
 	m_xMirror = m_yMirror = false;
+	m_perspective.set(0, 0);
 	m_bounding = NULL;
 
 	m_blend_mode = BM_NORMAL;
@@ -58,6 +59,7 @@ ISprite::ISprite(const ISprite& sprite)
 	m_shear = sprite.m_shear;
 	m_xMirror = sprite.m_xMirror;
 	m_yMirror = sprite.m_yMirror;
+	m_perspective = sprite.m_perspective;
 	m_bounding = sprite.m_bounding->clone();
 
 	m_blend_mode = sprite.m_blend_mode;
@@ -146,6 +148,15 @@ void ISprite::load(const Json::Value& val)
 	bool my = val["y mirror"].asBool();
 	setMirror(mx, my);
 
+	// perspective
+	if (!val["x perspective"].isNull())
+	{
+		Vector persp;
+		persp.x = val["x perspective"].asDouble();
+		persp.y = val["y perspective"].asDouble();
+		SetPerspective(persp);
+	}
+
 	// offset
 	float ox, oy;
 	if (!val["x offset"].isNull())
@@ -169,6 +180,12 @@ void ISprite::load(const Json::Value& val)
 	// rotate
 	float angle = val["angle"].asDouble();
 	setTransform(Vector(x, y), angle);
+
+	// filter
+	if (!val["filter"].isNull()) {
+		std::string disc = val["filter"].asString();
+		m_filter_mode = FilterModes::Instance()->GetIDFromNameEN(disc);
+	}
 }
 
 void ISprite::store(Json::Value& val) const
@@ -199,6 +216,11 @@ void ISprite::store(Json::Value& val) const
 
 	val["x offset"] = m_offset.x;
 	val["y offset"] = m_offset.y;
+
+	val["x perspective"] = m_perspective.x;
+	val["y perspective"] = m_perspective.y;
+
+	val["filter"] = FilterModes::Instance()->GetNameENFromID(m_filter_mode);
 }
 
 void ISprite::buildBounding()
