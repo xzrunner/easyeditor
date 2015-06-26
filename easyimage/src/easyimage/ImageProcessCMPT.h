@@ -8,6 +8,7 @@ namespace eimage
 
 class StagePanel;
 class EdgeDetectionShader;
+class BlurShader;
 
 class ImageProcessCMPT : public d2d::AbstractEditCMPT
 {
@@ -22,14 +23,18 @@ private:
 	void OnNormal(wxCommandEvent& event);
 
 	void OnEdgeDetection(wxCommandEvent& event);
-	void OnSetBlend(wxScrollEvent& event);
+	void OnSetEdgeBlend(wxScrollEvent& event);
 
 	void OnRelief(wxCommandEvent& event);
 
 	void OnOutline(wxCommandEvent& event);
 
+	void OnBlur(wxCommandEvent& event);
+	void OnSetBlurRadius(wxScrollEvent& event);
+
 private:
 	EdgeDetectionShader* m_edge_shader;
+	BlurShader* m_blur_shader;
 
 }; // ImageProcessCMPT
 
