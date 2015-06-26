@@ -80,6 +80,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 
 	if (m_sprites[i][j] && m_sprites[i][j] != sprite)
 		m_sprites[i][j]->Release();
+	sprite->Retain();
 	m_sprites[i][j] = sprite;
 	d2d::Vector center(edge*0.5f+edge*j, edge*0.5f+edge*i);
 	sprite->setTransform(center, sprite->getAngle());
