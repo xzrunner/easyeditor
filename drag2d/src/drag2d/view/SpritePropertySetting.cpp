@@ -204,20 +204,26 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 
 	pg->GetProperty(wxT("Pos.X"))->SetValue(spr->getPosition().x);
 	pg->GetProperty(wxT("Pos.Y"))->SetValue(spr->getPosition().y);
+	pg->GetProperty(wxT("Pos"))->SetValue(pg->GetProperty(wxT("Pos"))->GenerateComposedValue());
 	pg->GetProperty(wxT("Angle"))->SetValue(spr->getAngle() * TRANS_RAD_TO_DEG);
 	pg->GetProperty(wxT("Scale.X"))->SetValue(spr->getScale().x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(spr->getScale().y);
+	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
 	pg->GetProperty(wxT("Size.Width"))->SetValue(spr->getSymbol().getSize().xLength() * spr->getScale().x);
 	pg->GetProperty(wxT("Size.Height"))->SetValue(spr->getSymbol().getSize().yLength() * spr->getScale().y);
+	pg->GetProperty(wxT("Size"))->SetValue(pg->GetProperty(wxT("Size"))->GenerateComposedValue());
 	pg->GetProperty(wxT("Shear.X"))->SetValue(spr->getShear().x);
 	pg->GetProperty(wxT("Shear.Y"))->SetValue(spr->getShear().y);
+	pg->GetProperty(wxT("Shear"))->SetValue(pg->GetProperty(wxT("Shear"))->GenerateComposedValue());
  	pg->GetProperty(wxT("Offset.X"))->SetValue(spr->getOffset().x);
 	pg->GetProperty(wxT("Offset.Y"))->SetValue(spr->getOffset().y);
+	pg->GetProperty(wxT("Offset"))->SetValue(pg->GetProperty(wxT("Offset"))->GenerateComposedValue());
 
 	bool xMirror, yMirror;
 	spr->getMirror(xMirror, yMirror);
 	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(xMirror);
 	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(yMirror);
+	pg->GetProperty(wxT("Mirror"))->SetValue(pg->GetProperty(wxT("Mirror"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("Visiable"))->SetValue(spr->visiable);
 	pg->GetProperty(wxT("Editable"))->SetValue(spr->editable);

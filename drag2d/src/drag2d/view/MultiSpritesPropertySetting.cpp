@@ -146,19 +146,24 @@ void MultiSpritesPropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	Vector pos = m_impl->GetPosition();
 	pg->GetProperty(wxT("All Pos.X"))->SetValue(pos.x);
 	pg->GetProperty(wxT("All Pos.Y"))->SetValue(pos.y);
+	pg->GetProperty(wxT("All Pos"))->SetValue(pg->GetProperty(wxT("All Pos"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("dPos.dx"))->SetValue(0);
 	pg->GetProperty(wxT("dPos.dy"))->SetValue(0);
+	pg->GetProperty(wxT("dPos"))->SetValue(pg->GetProperty(wxT("dPos"))->GenerateComposedValue());
 	pg->GetProperty(wxT("dAngle"))->SetValue(0);
 	pg->GetProperty(wxT("dScale.dx"))->SetValue(1);
 	pg->GetProperty(wxT("dScale.dy"))->SetValue(1);
+	pg->GetProperty(wxT("dScale"))->SetValue(pg->GetProperty(wxT("dScale"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("Angle"))->SetValue(m_impl->GetAngle());
 	Vector scale = m_impl->GetScale();
 	pg->GetProperty(wxT("Scale.X"))->SetValue(scale.x);
 	pg->GetProperty(wxT("Scale.Y"))->SetValue(scale.y);
+	pg->GetProperty(wxT("Scale"))->SetValue(pg->GetProperty(wxT("Scale"))->GenerateComposedValue());
 	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(m_impl->GetMirrorX());
 	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(m_impl->GetMirrorY());
+	pg->GetProperty(wxT("Mirror"))->SetValue(pg->GetProperty(wxT("Mirror"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("Visible"))->SetValue(m_impl->GetVisible());
 	pg->GetProperty(wxT("Editable"))->SetValue(m_impl->GetEditable());
