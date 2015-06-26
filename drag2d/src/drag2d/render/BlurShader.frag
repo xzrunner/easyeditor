@@ -41,7 +41,7 @@ void main()
     texcoords[1][11] = v_texcoord + vec2(0.0,  0.020) * u_radius;
     texcoords[1][12] = v_texcoord + vec2(0.0,  0.024) * u_radius;
     texcoords[1][13] = v_texcoord + vec2(0.0,  0.028) * u_radius;
-
+    
  	vec4 tmp;
 
     tmp += texture2D(texture0, texcoords[0][ 0])*0.0044299121055113265;

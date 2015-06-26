@@ -1354,6 +1354,22 @@
 								>
 							</File>
 						</Filter>
+						<Filter
+							Name="blur"
+							>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\BlurShader.cpp"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\BlurShader.frag"
+								>
+							</File>
+							<File
+								RelativePath="..\..\..\src\drag2d\render\BlurShader.h"
+								>
+							</File>
+						</Filter>
 					</Filter>
 				</Filter>
 			</Filter>

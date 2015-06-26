@@ -4,6 +4,7 @@
 #include "EdgeDetectionShader.h"
 #include "ReliefShader.h"
 #include "OutlineShader.h"
+#include "BlurShader.h"
 
 namespace d2d
 {
@@ -18,6 +19,7 @@ FilterModes::FilterModes()
 	m_modes.push_back(Item(FM_EDGE_DETECTION, "edge detection", "±ß½ç¼ì²â"));
 	m_modes.push_back(Item(FM_RELIEF, "relief", "¸¡µñ"));
 	m_modes.push_back(Item(FM_OUTLINE, "outline", "°üÎ§"));
+	m_modes.push_back(Item(FM_BLUR, "blur", "Ä£ºý"));
 }
 
 FilterMode FilterModes::GetIDFromNameEN(const std::string& name) const
@@ -102,6 +104,12 @@ void FilterModes::InitAllShaders()
 		shader->Load();
 		int idx = mgr->AddSpriteShader(shader);
 		m_map2idx.insert(std::make_pair(FM_OUTLINE, idx));
+	}
+	{
+		BlurShader* shader = new BlurShader;
+		shader->Load();
+		int idx = mgr->AddSpriteShader(shader);
+		m_map2idx.insert(std::make_pair(FM_BLUR, idx));
 	}
 	mgr->null();
 }
