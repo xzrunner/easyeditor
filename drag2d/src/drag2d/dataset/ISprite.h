@@ -70,6 +70,9 @@ public:
 	bool getMirrorX() const { return m_xMirror; }
 	bool getMirrorY() const { return m_yMirror; }
 
+	const Vector& GetPerspective() const { return m_perspective; }
+	void SetPerspective(const Vector& perspective) { m_perspective = perspective; }
+
 	Vector getCenter() const;
 
 	AbstractBV* getBounding() const {
@@ -110,6 +113,8 @@ protected:
 	Vector m_shear;
 
 	bool m_xMirror, m_yMirror;
+
+	Vector m_perspective;
 
 	BlendMode m_blend_mode;
 	FilterMode m_filter_mode;

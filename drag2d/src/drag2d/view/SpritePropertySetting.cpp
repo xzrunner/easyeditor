@@ -153,6 +153,14 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 //		spr->setMirror(xMirror, wxANY_AS(value, bool));
 		m_impl->Mirror(xMirror, wxANY_AS(value, bool));
 	}
+	// perspective
+	else if (name == wxT("Perspective"))
+	{
+		double x, y;
+		SplitString2Double(value, &x, &y);
+		m_impl->Perspective(x, y);
+	}
+	// other
 	else if (name == wxT("Visiable"))
 	{
 		spr->visiable = wxANY_AS(value, bool);
@@ -224,6 +232,10 @@ void SpritePropertySetting::UpdateProperties(wxPropertyGrid* pg)
 	pg->GetProperty(wxT("Mirror.Horizontal"))->SetValue(xMirror);
 	pg->GetProperty(wxT("Mirror.Vertical"))->SetValue(yMirror);
 	pg->GetProperty(wxT("Mirror"))->SetValue(pg->GetProperty(wxT("Mirror"))->GenerateComposedValue());
+
+	pg->GetProperty(wxT("Perspective.X"))->SetValue(spr->GetPerspective().x);
+	pg->GetProperty(wxT("Perspective.Y"))->SetValue(spr->GetPerspective().y);
+	pg->GetProperty(wxT("Perspective"))->SetValue(pg->GetProperty(wxT("Perspective"))->GenerateComposedValue());
 
 	pg->GetProperty(wxT("Visiable"))->SetValue(spr->visiable);
 	pg->GetProperty(wxT("Editable"))->SetValue(spr->editable);
@@ -352,6 +364,15 @@ void SpritePropertySetting::InitProperties(wxPropertyGrid* pg)
 	pg->SetPropertyAttribute("Mirror.Horizontal", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
 	pg->AppendIn(mirrorProp, new wxBoolProperty(wxT("Vertical"), wxPG_LABEL, yMirror));
 	pg->SetPropertyAttribute("Mirror.Vertical", wxPG_BOOL_USE_CHECKBOX, true, wxPG_RECURSE);
+
+	wxPGProperty* persp_prop = pg->Append(new wxStringProperty(wxT("Perspective"), wxPG_LABEL, wxT("<composed>")));
+	persp_prop->SetExpanded(false);
+	pg->AppendIn(persp_prop, new wxFloatProperty(wxT("X"), wxPG_LABEL, spr->GetPerspective().x));
+	pg->SetPropertyAttribute(wxT("Perspective.X"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Perspective.X"), "Precision", 1);
+	pg->AppendIn(persp_prop, new wxFloatProperty(wxT("Y"), wxPG_LABEL, spr->GetPerspective().y));
+	pg->SetPropertyAttribute(wxT("Perspective.Y"), wxPG_ATTR_UNITS, wxT("pixels"));
+	pg->SetPropertyAttribute(wxT("Perspective.Y"), "Precision", 1);
 
 	pg->Append(new wxPropertyCategory("EDIT", wxPG_LABEL));
 	pg->Append(new wxBoolProperty("Visiable", wxPG_LABEL, spr->visiable));

@@ -19,6 +19,7 @@ public:
 	void Shear(float kx, float ky);
 	void Offset(float ox, float oy);
 	void Mirror(bool mx, bool my);
+	void Perspective(float px, float py);
 
 	ISprite* GetSprite() { return m_sprite; }
 

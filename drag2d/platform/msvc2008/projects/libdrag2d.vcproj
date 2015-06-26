@@ -445,6 +445,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\history\PerspectiveSpriteAOP.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\history\PerspectiveSpriteAOP.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\history\RotateSpriteAOP.cpp"
 					>
 				</File>

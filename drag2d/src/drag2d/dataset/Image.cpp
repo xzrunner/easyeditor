@@ -184,11 +184,18 @@ void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 
 	//////////////////////////////////////////////////////////////////////////
 	// ÓÃdtex
+
+	float px = 0, py = 0;
+	if (spr) {
+		px = spr->GetPerspective().x;
+		py = spr->GetPerspective().y;
+	}
+
  	d2d::Vector vertices[4];
- 	vertices[0] = Math::transVector(Vector(r.xMin, r.yMin), mt);
- 	vertices[1] = Math::transVector(Vector(r.xMax, r.yMin), mt);
- 	vertices[2] = Math::transVector(Vector(r.xMax, r.yMax), mt);
- 	vertices[3] = Math::transVector(Vector(r.xMin, r.yMax), mt);
+ 	vertices[0] = Math::transVector(Vector(r.xMin - px, r.yMin - py), mt);
+ 	vertices[1] = Math::transVector(Vector(r.xMax + px, r.yMin + py), mt);
+ 	vertices[2] = Math::transVector(Vector(r.xMax - px, r.yMax - py), mt);
+ 	vertices[3] = Math::transVector(Vector(r.xMin + px, r.yMax + py), mt);
 
 	int texid;
 	d2d::Vector texcoords[4];

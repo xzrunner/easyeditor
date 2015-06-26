@@ -6,6 +6,7 @@
 #include "history/ShearSpriteAOP.h"
 #include "history/MirrorSpriteAOP.h"
 #include "history/OffsetSpriteAOP.h"
+#include "history/PerspectiveSpriteAOP.h"
 
 #include "dataset/ISprite.h"
 #include "view/EditPanel.h"
@@ -97,6 +98,17 @@ void SpritePropertyImpl::Mirror(bool mx, bool my)
 	m_editpanel->addHistoryOP(new MirrorSpriteAOP(m_sprite, 
 		m_sprite->getMirrorX(), m_sprite->getMirrorY(), mx, my));
 	m_sprite->setMirror(mx, my);
+}
+
+void SpritePropertyImpl::Perspective(float px, float py)
+{
+	if (!m_sprite) {
+		return;
+	}
+
+	m_editpanel->addHistoryOP(new PerspectiveSpriteAOP(m_sprite, 
+		Vector(px, py), m_sprite->GetPerspective()));
+	m_sprite->SetPerspective(Vector(px, py));
 }
 
 }
