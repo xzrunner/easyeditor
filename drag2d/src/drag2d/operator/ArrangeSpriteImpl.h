@@ -73,9 +73,6 @@ private:
 	void HoriMirror();
 	void VertMirror();
 
-	void SetSelectionPerspBound();
-	void SetSelectionOriginBound();
-
 private:
 	static const float CTRL_NODE_RADIUS;
 	static const float MAX_CTRL_NODE_RADIUS;

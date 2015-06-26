@@ -102,9 +102,6 @@ void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 	case WXK_SPACE:
 		OnSpaceKeyDown();
 		break;
-	case WXK_SHIFT:	// perspective
-		SetSelectionPerspBound();
-		break;
 
 		// for debug
 	case 'O':
@@ -118,13 +115,6 @@ void ArrangeSpriteImpl::OnKeyDown(int keyCode)
 
 void ArrangeSpriteImpl::OnKeyUp(int keyCode)
 {
-	switch (keyCode)
-	{
-	case WXK_SHIFT:
-		SetSelectionOriginBound();
-		break;
-	}
-
 	if (m_property_panel)
 	{
 		m_property_panel->EnablePropertyGrid(true);
@@ -469,13 +459,28 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 		}
 	}
 
-	Vector ctrlNodes[8];
-	SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrlNodes);
-	for (int i = 0; i < 8; ++i) {
-		if (Math::getDistance(ctrlNodes[i], pos) < m_ctrl_node_radius) {
-			return selected;
+	if (m_cfg.is_deform_open && !wxGetKeyState(WXK_SHIFT))
+	{
+		Vector ctrl_nodes[8];
+		SpriteCtrlNode::GetSpriteCtrlNodes(selected, ctrl_nodes);
+		for (int i = 0; i < 8; ++i) {
+			if (Math::getDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
+				return selected;
+			}
 		}
 	}
+
+	if (m_cfg.is_deform_open && wxGetKeyState(WXK_SHIFT))
+	{
+		Vector ctrl_nodes[4];
+		SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_nodes);
+		for (int i = 0; i < 4; ++i) {
+			if (Math::getDistance(ctrl_nodes[i], pos) < m_ctrl_node_radius) {
+				return selected;
+			}
+		}
+	}
+
 	return NULL;
 }
 
@@ -646,36 +651,6 @@ void ArrangeSpriteImpl::VertMirror()
 		d2d::ISprite* spr = selected[i];
 		spr->setMirror(spr->getMirrorX(), !spr->getMirrorY());
 	}
-}
-
-void ArrangeSpriteImpl::SetSelectionPerspBound()
-{
-	if (m_selection->Size() != 1) {
-		return;
-	}
-
-	std::vector<ISprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	ISprite* selected = sprites[0];
-
-	Vector ctrl_node[4];
-	SpriteCtrlNode::GetSpriteCtrlNodesExt(selected, ctrl_node);
-	AbstractBV* bv = selected->getBounding();	
-	for (int i = 0; i < 4; ++i) {
-		bv->combine(Rect(ctrl_node[i], m_ctrl_node_radius, m_ctrl_node_radius));
-	}
-}
-
-void ArrangeSpriteImpl::SetSelectionOriginBound()
-{
-	if (m_selection->Size() != 1) {
-		return;
-	}
-
-	std::vector<ISprite*> sprites;
-	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	ISprite* selected = sprites[0];
-	selected->buildBounding();
 }
 
 }
