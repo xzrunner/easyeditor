@@ -7,9 +7,9 @@
 namespace eui
 {
 
-StageCanvas::StageCanvas(StagePanel* statge)
-	: d2d::DynamicStageCanvas(statge)
-	, m_statge(statge)
+StageCanvas::StageCanvas(StagePanel* stage)
+	: d2d::DynamicStageCanvas(stage)
+	, m_stage(stage)
 {
 }
 
@@ -17,7 +17,7 @@ void StageCanvas::OnDraw()
 {
 	static bool inited = false;
 	if (!inited) {
-		m_statge->InitConfig();
+		m_stage->InitConfig();
 		TidCfg::Instance()->LoadConfig();
 		inited = true;
 	}
@@ -25,10 +25,10 @@ void StageCanvas::OnDraw()
 	DrawGuideLines();
 
 	d2d::Rect sr = m_screen.GetRegion();
-	m_statge->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+	m_stage->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
 
-	m_statge->GetAnchorMgr()->Draw();
+	m_stage->GetAnchorMgr()->Draw();
 
 	m_stage->drawEditTemp();
 

@@ -11,7 +11,7 @@ class StagePanel;
 class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
-	StageCanvas(StagePanel* statge);
+	StageCanvas(StagePanel* stage);
 
 	void BuildGrids(int w, int h);
 
@@ -23,7 +23,7 @@ private:
 	void DrawGrids() const;
 
 private:
-	StagePanel* m_statge;
+	StagePanel* m_stage;
 
 }; // StageCanvas
 

@@ -11,7 +11,7 @@ class StagePanel;
 class StageCanvas : public d2d::DynamicStageCanvas
 {
 public:
-	StageCanvas(StagePanel* statge);
+	StageCanvas(StagePanel* stage);
 
 protected:
 	virtual void OnDraw();
@@ -20,7 +20,7 @@ private:
 	void DrawGuideLines() const;
 
 private:
-	StagePanel* m_statge;
+	StagePanel* m_stage;
 
 }; // StageCanvas
 

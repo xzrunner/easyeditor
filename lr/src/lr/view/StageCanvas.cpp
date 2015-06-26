@@ -8,22 +8,27 @@
 namespace lr
 {
 
-StageCanvas::StageCanvas(StagePanel* statge)
-	: d2d::DynamicStageCanvas(statge)
-	, m_statge(statge)
+StageCanvas::StageCanvas(StagePanel* stage)
+	: d2d::DynamicStageCanvas(stage)
+	, m_stage(stage)
 {
 }
 
 void StageCanvas::OnDraw()
 {
 	d2d::Rect sr = m_screen.GetRegion();
-	m_statge->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
+
+	d2d::ShaderMgr* shader_mgr = d2d::ShaderMgr::Instance();
+	m_stage->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
-	m_statge->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
+	shader_mgr->SetSpriteShader(0);
+	shader_mgr->sprite();
+
+	m_stage->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
 
 	DrawRegion();
 
-	if (const Grids* grids = m_statge->GetGrids()) {
+	if (const Grids* grids = m_stage->GetGrids()) {
 		grids->Draw();
 	}
 
@@ -50,7 +55,7 @@ void StageCanvas::DrawRegion() const
 		cfg->m_view_height * 0.5f,
 		d2d::LIGHT_RED_LINE);
 
-	m_statge->DebugDraw();
+	m_stage->DebugDraw();
 }
 
 }
