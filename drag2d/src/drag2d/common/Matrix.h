@@ -149,6 +149,8 @@ namespace d2d
 		**/
 		void shear(float kx, float ky);
 
+		Matrix GetInvert() const;
+
 		void orthographic(float left, float right, float bottom, float top, float _near, float _far);
 
 		/**

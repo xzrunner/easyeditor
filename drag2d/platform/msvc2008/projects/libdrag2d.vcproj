@@ -232,6 +232,14 @@
 						>
 					</File>
 					<File
+						RelativePath="..\..\..\src\drag2d\operator\PerspectiveSpriteState.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\..\..\src\drag2d\operator\PerspectiveSpriteState.h"
+						>
+					</File>
+					<File
 						RelativePath="..\..\..\src\drag2d\operator\RotateSpriteState.cpp"
 						>
 					</File>

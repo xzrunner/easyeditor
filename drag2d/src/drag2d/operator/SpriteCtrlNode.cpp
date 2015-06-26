@@ -32,4 +32,28 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 	}
 }
 
+void SpriteCtrlNode::GetSpriteCtrlNodesExt(const ISprite* sprite, Vector nodes[4])
+{
+	Rect r = sprite->getSymbol().getSize(sprite);
+	Matrix t;
+	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
+		sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
+	// perspective
+	float px = 0, py = 0;
+	if (sprite) {
+		px = sprite->GetPerspective().x;
+		py = sprite->GetPerspective().y;
+	}
+	nodes[0] = Math::transVector(Vector(r.xMin+px, r.yMax+py), t);
+	nodes[1] = Math::transVector(Vector(r.xMax-px, r.yMax-py), t);
+	nodes[2] = Math::transVector(Vector(r.xMin-px, r.yMin-py), t);
+	nodes[3] = Math::transVector(Vector(r.xMax+px, r.yMin+py), t);
+	// fix for offset
+	d2d::Vector offset = sprite->getOffset();
+	d2d::Vector fix = Math::rotateVector(-offset, sprite->getAngle()) + offset;
+	for (int i = 0; i < 4; ++i) {
+		nodes[i] += fix;
+	}
+}
+
 }

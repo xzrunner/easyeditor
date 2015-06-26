@@ -56,6 +56,7 @@ protected:
 	virtual IArrangeSpriteState* CreateScaleState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 	virtual IArrangeSpriteState* CreateShearState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 	virtual IArrangeSpriteState* CreateOffsetState(ISprite* sprite) const;
+	virtual IArrangeSpriteState* CreatePerspectiveState(ISprite* sprite, const SpriteCtrlNode::Node& ctrl_node) const;
 
 protected:
 	SpriteSelection* m_selection;
@@ -71,6 +72,9 @@ private:
 
 	void HoriMirror();
 	void VertMirror();
+
+	void SetSelectionPerspBound();
+	void SetSelectionOriginBound();
 
 private:
 	static const float CTRL_NODE_RADIUS;

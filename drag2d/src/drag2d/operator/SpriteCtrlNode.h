@@ -14,6 +14,8 @@ public:
 	
 	static void GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8]);
 
+	static void GetSpriteCtrlNodesExt(const ISprite* sprite, Vector nodes[4]);
+
 public:
  	// 0 4 1
  	// 5   6
