@@ -7,6 +7,8 @@
 #include "LanczosResamplingShader.vert"
 #include "LanczosResamplingShader.frag"
 
+#include <string>
+
 namespace eimage
 {
 
@@ -23,8 +25,12 @@ void LanczosResamplingShader::SetTexelSize(float width, float height)
 
 void LanczosResamplingShader::LoadShader()
 {
- 	InitShader(LanczosVertShader, LanczosFragShader);
- 
+	static const std::string header(FLOAT_PRECISION);
+	static const std::string vert(header + LanczosVertShader);
+	static const std::string frag(header + LanczosFragShader);
+
+	InitShader(vert.c_str(), frag.c_str());
+
   	m_texel_width = glGetUniformLocation(m_prog, "u_texel_width");
   	m_texel_height = glGetUniformLocation(m_prog, "u_texel_height");
 }

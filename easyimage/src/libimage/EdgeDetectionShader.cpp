@@ -6,6 +6,8 @@
 #include "NormalSpriteShader.vert"
 #include "EdgeDetectionShader.frag"
 
+#include <string>
+
 namespace eimage
 {
 
@@ -21,7 +23,11 @@ void EdgeDetectionShader::SetBlend(float blend)
 
 void EdgeDetectionShader::LoadShader()
 {
-	InitShader(NormalVertShader, EdgeDetectionFragShader);
+	static const std::string header(FLOAT_PRECISION);
+	static const std::string vert(header + NormalVertShader);
+	static const std::string frag(header + EdgeDetectionFragShader);
+
+	InitShader(vert.c_str(), frag.c_str());
 
 	m_blend = glGetUniformLocation(m_prog, "u_blend");
 }

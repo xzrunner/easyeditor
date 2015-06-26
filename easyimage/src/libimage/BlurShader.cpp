@@ -6,6 +6,8 @@
 #include "NormalSpriteShader.vert"
 #include "BlurShader.frag"
 
+#include <string>
+
 namespace eimage
 {
 
@@ -21,7 +23,11 @@ void BlurShader::SetRadius(float r)
 
 void BlurShader::LoadShader()
 {
-	InitShader(NormalVertShader, BlurFragShader);
+	static const std::string header(FLOAT_PRECISION);
+	static const std::string vert(header + NormalVertShader);
+	static const std::string frag(header + BlurFragShader);
+
+	InitShader(vert.c_str(), frag.c_str());
 
 	m_radius = glGetUniformLocation(m_prog, "u_radius");
 }

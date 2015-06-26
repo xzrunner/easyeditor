@@ -4,6 +4,8 @@
 #include "SpriteShader.vert"
 #include "ReliefShader.frag"
 
+#include <string>
+
 namespace d2d
 {
 
@@ -14,7 +16,11 @@ ReliefShader::ReliefShader()
 
 void ReliefShader::LoadShader()
 {
-	InitShader(SpriteVertShader, ReliefFragShader);
+	static const std::string header(FLOAT_PRECISION);
+	static const std::string vert(header + SpriteVertShader);
+	static const std::string frag(header + ReliefFragShader);
+
+	InitShader(vert.c_str(), frag.c_str());
 }
 
 }
