@@ -47,6 +47,9 @@ struct Particle
 
 	float speed[3];
 
+	float disturbance_region[2];
+	float disturbance_speed;
+
 	float linear_acc;
 
 	float rotate;
@@ -160,6 +163,9 @@ private:
 
 	float min_spd, max_spd;
 	float min_angular_spd, max_angular_spd;
+
+	float min_dis_region, max_dis_region;
+	float min_dis_spd, max_dis_spd;
 
 	float gravity;
 

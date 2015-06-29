@@ -43,6 +43,9 @@ public:
 	float min_spd, max_spd;
 	float min_angular_spd, max_angular_spd;
 
+	float min_dis_region, max_dis_region;
+	float min_dis_spd, max_dis_spd;
+
 	float gravity;
 
 	float min_linear_acc, max_linear_acc;

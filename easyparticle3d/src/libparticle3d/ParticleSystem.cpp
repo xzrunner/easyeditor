@@ -36,6 +36,9 @@ ParticleSystem::ParticleSystem(unsigned int buffer)
 	min_spd = max_spd = 0;
 	min_angular_spd = max_angular_spd = 0;
 
+	min_dis_region = max_dis_region = 0;
+	min_dis_spd = max_dis_spd = 0;
+
 	gravity = 0;
 
 	min_linear_acc = max_linear_acc = 0;
@@ -90,6 +93,11 @@ ParticleSystem::ParticleSystem(const ParticleSystem& ps)
 	min_angular_spd = ps.min_angular_spd;
 	max_angular_spd = ps.max_angular_spd;
 
+	min_dis_region = ps.min_dis_region;
+	max_dis_region = ps.max_dis_region;
+	min_dis_spd = ps.min_dis_spd;
+	max_dis_spd = ps.max_dis_spd;
+
 	gravity = ps.gravity;
 
 	min_linear_acc = ps.min_linear_acc;
@@ -140,6 +148,14 @@ void ParticleSystem::SetValue(int key, const d2d::UICallback::Data& data)
 		min_angular_spd = (data.val0 - data.val1);
 		max_angular_spd = (data.val0 + data.val1);
 		break;
+	case PS_DISTURBANCE_RADIUS:
+		min_dis_region = (data.val0 - data.val1);
+		max_dis_region = (data.val0 + data.val1);
+		break;
+	case PS_DISTURBANCE_SPD:
+		min_dis_spd = (data.val0 - data.val1);
+		max_dis_spd = (data.val0 + data.val1);
+		break;
 	case PS_GRAVITY:
 		gravity = data.val0 * 0.3f;
 		m_inv_record->SetGravity(gravity);
@@ -178,6 +194,14 @@ void ParticleSystem::GetValue(int key, d2d::UICallback::Data& data)
 	case PS_ANGULAR_SPEED:
 		data.val0 = (min_angular_spd + max_angular_spd) * 0.5f;
 		data.val1 = (max_angular_spd - min_angular_spd) * 0.5f;
+		break;
+	case PS_DISTURBANCE_RADIUS:
+		data.val0 = (min_dis_region + max_dis_region) * 0.5f;
+		data.val1 = (max_dis_region - min_dis_region) * 0.5f;
+		break;
+	case PS_DISTURBANCE_SPD:
+		data.val0 = (min_dis_spd + max_dis_spd) * 0.5f;
+		data.val1 = (max_dis_spd - min_dis_spd) * 0.5f;
 		break;
 	case PS_GRAVITY:
 		data.val0 = gravity / 0.3f;
@@ -459,6 +483,10 @@ void ParticleSystem::add()
 	min = min_spd; max = max_spd;
 	float speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 	transCoords(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
+
+	min = min_dis_region; max = max_dis_region;
+	float dis_angle = rand() / (float(RAND_MAX)+1) * (d2d::PI * 2);
+	pLast->disturbance_region = ;
 
 	min = min_linear_acc; max = max_linear_acc;
 	float linear_acc = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;

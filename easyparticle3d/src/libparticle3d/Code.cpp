@@ -68,6 +68,18 @@ void Code::resolve()
 	s = wxString::FromDouble(data.val0 + data.val1);
 	lua::assign(m_gen, "['max_angular_spd']", s+",");
 
+	m_toolbar->GetValue(PS_DISTURBANCE_RADIUS, data);
+	s = wxString::FromDouble(data.val0 - data.val1);
+	lua::assign(m_gen, "['min_disturbance_radius']", s+",");
+	s = wxString::FromDouble(data.val0 + data.val1);
+	lua::assign(m_gen, "['max_disturbance_radius']", s+",");
+
+	m_toolbar->GetValue(PS_DISTURBANCE_SPD, data);
+	s = wxString::FromDouble(data.val0 - data.val1);
+	lua::assign(m_gen, "['min_disturbance_spd']", s+",");
+	s = wxString::FromDouble(data.val0 + data.val1);
+	lua::assign(m_gen, "['max_disturbance_spd']", s+",");
+
 	m_toolbar->GetValue(PS_GRAVITY, data);
 	s = wxString::FromDouble(data.val0);
 	lua::assign(m_gen, "['gravity']", s+",");

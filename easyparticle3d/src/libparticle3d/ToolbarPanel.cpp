@@ -11,28 +11,32 @@
 namespace eparticle3d
 {
 
-const float ToolbarPanel::COUNT				= 20;
-const float ToolbarPanel::EMISSION_TIME		= 150;
-const float ToolbarPanel::LIFE_CENTER		= 800;
-const float ToolbarPanel::LIFE_OFFSET		= 500;
-const float ToolbarPanel::MIN_HORI			= 0;
-const float ToolbarPanel::MAX_HORI			= 360;
-const float ToolbarPanel::MIN_VERT			= 60;
-const float ToolbarPanel::MAX_VERT			= 90;
-const float ToolbarPanel::SPEED_CENTER		= 1600;
-const float ToolbarPanel::SPEED_OFFSET		= 400;
-const float ToolbarPanel::ANGULAR_SPEED_CENTER = 0;
-const float ToolbarPanel::ANGULAR_SPEED_OFFSET = 0;
-const float ToolbarPanel::GRAVITY			= 1200;
-const float ToolbarPanel::LINEAR_ACC_CENTER = 0;
-const float ToolbarPanel::LINEAR_ACC_OFFSET = 0;
-const float ToolbarPanel::INERTIA			= 4;
-const float ToolbarPanel::FADEOUT_TIME		= 300;
-const float ToolbarPanel::START_RADIUS		= 0;
-const float ToolbarPanel::SCALE_START		= 100;
-const float ToolbarPanel::SCALE_END			= 100;
-const float ToolbarPanel::ROTATE_CENTER		= 0;
-const float ToolbarPanel::ROTATE_OFFSET		= 0;
+static const float COUNT				= 20;
+static const float EMISSION_TIME		= 150;
+static const float LIFE_CENTER			= 800;
+static const float LIFE_OFFSET			= 500;
+static const float MIN_HORI				= 0;
+static const float MAX_HORI				= 360;
+static const float MIN_VERT				= 60;
+static const float MAX_VERT				= 90;
+static const float SPEED_CENTER			= 1600;
+static const float SPEED_OFFSET			= 400;
+static const float ANGULAR_SPEED_CENTER = 0;
+static const float ANGULAR_SPEED_OFFSET = 0;
+static const float DISTURBANCE_RADIUS_CENTER = 0;
+static const float DISTURBANCE_RADIUS_OFFSET = 0;
+static const float DISTURBANCE_SPD_CENTER = 0;
+static const float DISTURBANCE_SPD_OFFSET = 0;
+static const float GRAVITY				= 1200;
+static const float LINEAR_ACC_CENTER	= 0;
+static const float LINEAR_ACC_OFFSET	= 0;
+static const float INERTIA				= 4;
+static const float FADEOUT_TIME			= 300;
+static const float START_RADIUS			= 0;
+static const float SCALE_START			= 100;
+static const float SCALE_END			= 100;
+static const float ROTATE_CENTER		= 0;
+static const float ROTATE_OFFSET		= 0;
 
 ToolbarPanel::ToolbarPanel(wxWindow* parent, d2d::LibraryPanel* library,
 						   StagePanel* stage)
@@ -225,6 +229,24 @@ wxSizer* ToolbarPanel::initLayout()
 	leftSizer->Add(s_aspd);
 	leftSizer->AddSpacer(10);
 	m_sliders.push_back(s_aspd);
+	// Disturbance 
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Disturbance"));
+		wxSizer* sizer = new wxStaticBoxSizer(bounding, wxVERTICAL);
+
+		d2d::SliderCtrlTwo* s_dis_r = new d2d::SliderCtrlTwo(this, "Radius (pixel)", "disturbance_radius", this, PS_DISTURBANCE_RADIUS, 
+			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_RADIUS_CENTER, 0, 100), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_RADIUS_OFFSET, 0, 50));
+		sizer->Add(s_dis_r);
+		m_sliders.push_back(s_dis_r);
+
+		d2d::SliderCtrlTwo* s_dis_spd = new d2d::SliderCtrlTwo(this, "Speed (pixel)", "disturbance_spd", this, PS_DISTURBANCE_SPD, 
+			d2d::SliderItem("center", ITEM_ATTR_CENTER, DISTURBANCE_SPD_CENTER, 0, 100), d2d::SliderItem("offset", ITEM_ATTR_OFFSET, DISTURBANCE_SPD_OFFSET, 0, 50));
+		sizer->Add(s_dis_spd);
+		m_sliders.push_back(s_dis_spd);
+
+		leftSizer->Add(sizer);
+		leftSizer->AddSpacer(10);
+	}
 	// Gravity
 	d2d::SliderCtrlOne* s_gravity = new d2d::SliderCtrlOne(this, "Gravity (pixel)", "gravity", 
 		this, PS_GRAVITY, d2d::SliderItem("", "", GRAVITY, -5000, 25000));
