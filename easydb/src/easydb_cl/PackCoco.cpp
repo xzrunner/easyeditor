@@ -48,6 +48,7 @@ void PackCoco::Trigger(const std::string& config_path)
 	fin.close();
 
 	d2d::Config::Instance()->EnableUseDTex(false);
+	d2d::Config::Instance()->EnableRender(false);
 
 	wxString config_dir = d2d::FilenameTools::getFileDir(config_path);
 

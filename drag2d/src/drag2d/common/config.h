@@ -18,6 +18,9 @@ public:
 	bool IsUseDTex() const;
 	void EnableUseDTex(bool enable) { m_use_dtex = enable; }
 
+	bool IsRenderOpen() const { return m_use_render; }
+	void EnableRender(bool enable) { m_use_render = enable; }
+
 	const std::string& GetFontFilepath() const { return m_font_filepath; }
 
 	const std::set<wxString>& GetResPathes() const { return m_resource_paths; }
@@ -37,6 +40,7 @@ private:
 	Json::Value m_value;
 
 	bool m_use_dtex;
+	bool m_use_render;
 
 	std::string m_font_filepath;
 

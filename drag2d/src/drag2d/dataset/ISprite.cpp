@@ -5,6 +5,7 @@
 #include "common/Matrix.h"
 #include "common/color_trans.h"
 #include "common/Exception.h"
+#include "common/config.h"
 #include "dataset/BVFactory.h"
 #include "dataset/AbstractBV.h"
 #include "dataset/SpriteFactory.h"
@@ -184,7 +185,9 @@ void ISprite::load(const Json::Value& val)
 	// filter
 	if (!val["filter"].isNull()) {
 		std::string disc = val["filter"].asString();
-		m_filter_mode = FilterModes::Instance()->GetIDFromNameEN(disc);
+		if (Config::Instance()->IsRenderOpen()) {
+			m_filter_mode = FilterModes::Instance()->GetIDFromNameEN(disc);
+		}
 	}
 }
 
