@@ -47,6 +47,8 @@ void PackCoco::Trigger(const std::string& config_path)
 	reader.parse(fin, value);
 	fin.close();
 
+	d2d::Config::Instance()->EnableUseDTex(false);
+
 	wxString config_dir = d2d::FilenameTools::getFileDir(config_path);
 
  	std::string trim_file = config_dir + "\\" + value["trim file"].asString();

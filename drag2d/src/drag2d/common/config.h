@@ -16,6 +16,7 @@ public:
 	static Config* Instance();
 
 	bool IsUseDTex() const;
+	void EnableUseDTex(bool enable) { m_use_dtex = enable; }
 
 	const std::string& GetFontFilepath() const { return m_font_filepath; }
 
