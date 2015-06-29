@@ -9,6 +9,7 @@ namespace libpacker
 
 NormalPack::NormalPack(const std::vector<std::string>& files)
 	: m_files(files)
+	, m_extrude(1)
 {
 }
 
@@ -18,6 +19,8 @@ void NormalPack::Pack()
 		const wxString& path = m_files[i];		
 		RectSize sz;
 		eimage::ImageIO::ReadHeader(path.mb_str(), sz.width, sz.height);
+		sz.width += m_extrude * 2;
+		sz.height += m_extrude * 2;
 		m_src_sizes.push_back(sz);
 	}
 
@@ -96,7 +99,9 @@ void NormalPack::OutputImage(const wxString& filepath) const
 	{
 		const Rect& pos = m_output[i];
 		d2d::Image* img = d2d::ImageMgr::Instance()->getItem(m_files[i]);
-		pack.AddImage(img, pos.x, pos.y, pos.width, pos.height, true, img->channels() == 4);
+//		pack.AddImage(img, pos.x, pos.y, pos.width, pos.height, true, img->channels() == 4);
+		pack.AddImage(img, pos.x + m_extrude, pos.y + m_extrude, 
+			pos.width - m_extrude * 2, pos.height - m_extrude * 2, true, img->channels() == 4, m_extrude);
 		img->Release();
 	}
 

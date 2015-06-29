@@ -19,15 +19,20 @@ public:
 		PT_ANTICLOCKWISE
 	};
 	void AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x, int dst_y, 
-		PackType type = PT_NORMAL, bool bpp4 = true);
+		PackType type = PT_NORMAL, bool bpp4 = true, int extrude = 0);
 
-	void AddImage(const d2d::Image* img, int x, int y, int w, int h, bool clockwise, bool bpp4 = true);
+	void AddImage(const d2d::Image* img, int x, int y, int w, int h, bool clockwise, 
+		bool bpp4 = true, int extrude = 0);
 
 	void PreMuiltiAlpha();
 
 	void OutputToFile(const wxString& filepath) const;
 
 	uint8_t* GetPixels() const { return m_pixels; }
+
+private:
+	void CopyPixel(const uint8_t* src, int sw, int sh, bool sbpp4, 
+		int sx, int sy, int dx, int dy);
 
 private:
 	uint8_t* m_pixels;

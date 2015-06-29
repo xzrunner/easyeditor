@@ -32,6 +32,8 @@ private:
 
 	std::vector<libpacker::RectSize> m_sizes;
 
+	int m_extrude;
+
 }; // NormalPack
 
 }
