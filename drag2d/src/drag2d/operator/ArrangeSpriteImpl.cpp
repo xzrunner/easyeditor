@@ -523,6 +523,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		//sprite->setOffset(Vector(0, 0));
 	}
 	m_stage->addHistoryOP(comb);
+	m_stage->Refresh();
 }
 
 void ArrangeSpriteImpl::SetRightPopupMenu(wxMenu& menu, ISprite* spr)
