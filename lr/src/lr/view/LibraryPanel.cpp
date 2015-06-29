@@ -36,12 +36,16 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 		int item_idx = 0;
 		Json::Value item_val = layer_val[item_idx++];
 		while (!item_val.isNull()) {
-			std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, item_val.asString());
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-			symbol->RefreshThumbnail(symbol->getFilepath());
-			list->insert(symbol);
-			symbol->Release();
-
+			std::string item_path = item_val.asString();
+			std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, item_path);
+			try {
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				symbol->RefreshThumbnail(symbol->getFilepath());
+				list->insert(symbol);
+				symbol->Release();
+			} catch (d2d::Exception& e) {
+				throw d2d::Exception("Create symbol %s fail!", item_path.c_str());
+			}
 			item_val = layer_val[item_idx++];
 		}
 
