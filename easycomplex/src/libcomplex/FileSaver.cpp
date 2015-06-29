@@ -59,7 +59,7 @@ void FileSaver::storeWithHistory(const char* filepath, const Symbol* symbol,
 	writer.write(fout, value);
 	fout.close();
 
-	editpanel->saveHistoryList(filepath, symbol->m_sprites);
+//	editpanel->saveHistoryList(filepath, symbol->m_sprites);
 }
 
 void FileSaver::centerSymbol(Symbol* symbol)

@@ -16,7 +16,7 @@ void FileIO::load(const Task* task, const char* filename)
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
 		task->m_viewlist->Insert(symbol->m_sprites[i]);
 
-	task->m_stage->loadHistoryList(filename, symbol->m_sprites);
+	//task->m_stage->loadHistoryList(filename, symbol->m_sprites);
 
 	//// rm resetinitstate
 	//const_cast<task*>(task)->getstagepanel()->getcanvas()->resetinitstate();
