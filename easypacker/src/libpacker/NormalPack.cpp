@@ -100,6 +100,7 @@ void NormalPack::OutputImage(const wxString& filepath) const
 		img->Release();
 	}
 
+	pack.PreMuiltiAlpha();
 	pack.OutputToFile(filepath);
 }
 
