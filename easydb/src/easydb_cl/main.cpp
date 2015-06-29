@@ -68,6 +68,9 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 
+	d2d::Config::Instance()->EnableUseDTex(false);
+	d2d::Config::Instance()->EnableRender(false);
+
 	InitSymbolCreators();
 
 	const std::vector<edb::ICommand*>& cmds 
