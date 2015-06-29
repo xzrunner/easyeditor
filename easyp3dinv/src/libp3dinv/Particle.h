@@ -23,6 +23,8 @@ public:
 		m_start_time = start_time; 
 	}
 
+	void Reset();
+
 private:
 	float m_start_time;
 	float m_life, m_during;
@@ -36,6 +38,16 @@ private:
 
 	d2d::ISymbol* m_symbol;
 	float m_start_scale, m_end_scale; 
+
+private:
+	// for reset, store old val
+
+	float m_life_old;
+
+	float m_direction_old[2];
+	float m_position_old[3];
+	float m_speed_old[3];
+	float m_angle_old;
 
 }; // Particle
 

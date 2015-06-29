@@ -1,5 +1,6 @@
 #include "Symbol.h"
 #include "Sprite.h"
+#include "ParticleSystem.h"
 
 namespace ep3dinv
 {
@@ -30,6 +31,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
 	if (m_ps) {
+		m_ps->Update(1.0f / 30);
 		m_ps->Draw(mt);
 	}
 }
@@ -44,7 +46,7 @@ void Symbol::loadResources()
 	if (!m_ps) {
 		m_ps = new ParticleSystem;
 	}
-	m_ps->LoadFromFile(m_filepath);
+	m_ps->LoadFromFile(m_filepath.ToStdString());
 }
 
 }

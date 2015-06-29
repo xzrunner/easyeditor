@@ -5,5 +5,6 @@
 #include "libp3dinv/LibraryPanel.h"
 #include "libp3dinv/StagePanel.h"
 #include "libp3dinv/ToolbarPanel.h"
+#include "libp3dinv/ParticleSystem.h"
 
 #endif // _EASYP3DINV_H_

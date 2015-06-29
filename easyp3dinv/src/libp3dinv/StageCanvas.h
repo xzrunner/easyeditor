@@ -14,17 +14,10 @@ public:
 	StageCanvas(StagePanel* stage);
 
 protected:
-	virtual void OnDraw() const;
-
-	virtual void OnTimer();
+	virtual void OnDraw();
 
 private:
 	StagePanel* m_stage;
-
-	int m_currFrame;
-	clock_t m_last;
-
-	d2d::PlayControl m_control;
 
 }; // StageCanvas
 

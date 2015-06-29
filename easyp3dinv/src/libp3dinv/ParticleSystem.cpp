@@ -15,6 +15,8 @@ ParticleSystem::~ParticleSystem()
 
 void ParticleSystem::Update(float dt)
 {
+	m_during += dt;
+
 	for (int i = 0, n = m_particles.size(); i < n; ++i) {
 		Particle* p = m_particles[i];
 		if (m_during > p->GetStartTime()) {
@@ -31,6 +33,14 @@ void ParticleSystem::Draw(const d2d::Matrix& mt) const
 			p->Draw(mt);
 		}
 	}	
+}
+
+void ParticleSystem::Reset()
+{
+	m_during = 0;
+	for (int i = 0, n = m_particles.size(); i < n; ++i) {
+		m_particles[i]->Reset();
+	}
 }
 
 void ParticleSystem::LoadFromFile(const std::string& filepath)

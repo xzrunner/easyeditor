@@ -46,9 +46,9 @@ void Particle::Update(float dt, float gravity)
 
 void Particle::Draw(const d2d::Matrix& mt) const
 {
-	if (m_during > m_life) {
-		return;
-	}
+// 	if (m_during > m_life) {
+// 		return;
+// 	}
 
 	d2d::Matrix _mt(mt);
 	_mt.translate(0, 0);
@@ -63,20 +63,40 @@ void Particle::Draw(const d2d::Matrix& mt) const
 void Particle::LoadFromFile(const Json::Value& val)
 {
 	m_start_time = val["dead time"].asInt();
-	m_life = val["life"].asDouble();
+	m_life_old = m_life = val["life"].asDouble();
 
 	for (int i = 0; i < 2; ++i) {
-		m_direction[i] = val["direction"][i].asDouble();
+		m_direction_old[i] = m_direction[i] = val["direction"][i].asDouble();
 	}
 	for (int i = 0; i < 3; ++i) {
-		m_position[i] = val["position"][i].asDouble();
+		m_position_old[i] = m_position[i] = val["position"][i].asDouble();
 	}
 	for (int i = 0; i < 3; ++i) {
-		m_speed[i] = val["speed"][i].asDouble();
+		m_speed_old[i] = m_speed[i] = val["speed"][i].asDouble();
 	}
 	m_linear_acc = val["linear_acc"].asDouble();
 	m_rotate = val["rotate"].asDouble();
-	m_angle = val["angle"].asDouble();
+	m_angle_old = m_angle = val["angle"].asDouble();
+
+	m_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(val["symbol"].asString());
+	m_start_scale = val["start_scale"].asDouble();
+	m_end_scale = val["end_scale"].asDouble();
+}
+
+void Particle::Reset()
+{
+	m_during = 0;
+	m_life = m_life_old;
+	for (int i = 0; i < 2; ++i) {
+		m_direction[i] = m_direction_old[i];
+	}
+	for (int i = 0; i < 3; ++i) {
+		m_position[i] = m_position_old[i];
+	}
+	for (int i = 0; i < 3; ++i) {
+		m_speed[i] = m_speed_old[i];
+	}
+	m_angle = m_angle_old;
 }
 
 }

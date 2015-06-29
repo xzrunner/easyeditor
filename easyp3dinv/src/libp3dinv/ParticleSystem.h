@@ -18,6 +18,8 @@ public:
 
 	void Draw(const d2d::Matrix& mt) const;
 
+	void Reset();
+
 	void LoadFromFile(const std::string& filepath);
 
 private:

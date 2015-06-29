@@ -241,6 +241,18 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="edit"
+			>
+			<File
+				RelativePath="..\..\..\src\libp3dinv\EditOP.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\libp3dinv\EditOP.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath="..\..\..\src\libp3dinv\config.h"
 			>

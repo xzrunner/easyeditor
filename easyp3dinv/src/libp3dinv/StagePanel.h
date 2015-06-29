@@ -7,12 +7,12 @@ namespace ep3dinv
 {
 
 class StageCanvas;
+class ParticleSystem;
 
 class StagePanel : public d2d::EditPanel, public d2d::SpritesPanelImpl
 {
 public:
-	StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-		d2d::LibraryPanel* library, d2d::PropertySettingPanel* property);
+	StagePanel(wxWindow* parent, wxTopLevelWindow* frame);
 	virtual ~StagePanel();
 
 	//
@@ -23,8 +23,8 @@ public:
 protected:
 	virtual void OnSizeDebug(wxSizeEvent& event);
 
-private:
-	StageCanvas* m_canvas;
+public:
+	ParticleSystem* m_ps;
 
 }; // StagePanel
 

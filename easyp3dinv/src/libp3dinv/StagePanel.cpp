@@ -1,16 +1,16 @@
 #include "StagePanel.h"
 #include "StageCanvas.h"
+#include "EditOP.h"
 
 namespace ep3dinv
 {
 
-StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
-					   d2d::LibraryPanel* library,
-					   d2d::PropertySettingPanel* property)
+StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: d2d::EditPanel(parent, frame)
-	, d2d::SpritesPanelImpl(this, library)
+	, d2d::SpritesPanelImpl(this, NULL)
+	, m_ps(NULL)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, property);
+	m_editOP = new EditOP(this);
 
 	m_canvas = new StageCanvas(this);
 }
