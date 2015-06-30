@@ -46,8 +46,9 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 		ISymbol* symbol = SymbolFactory::create(fixedPath);
 		if (!symbol) 
 		{
-			const char* path = filepath.c_str();
-			throw Exception("Create symbol %s fail!", path);
+// 			const char* path = filepath.c_str();
+// 			throw Exception("Create symbol %s fail!", path);
+			return NULL;
 		}
 		bool isLoaded = symbol->loadFromFile(fixedPath);
 		if (isLoaded)
@@ -58,8 +59,8 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 		else
 		{
 			delete symbol;
-			const char* path = filepath.c_str();
-			throw Exception("Load symbol %s fail!", path);
+// 			const char* path = filepath.c_str();
+// 			throw Exception("Load symbol %s fail!", path);
 			return NULL;
 		}
 	}

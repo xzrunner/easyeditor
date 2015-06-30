@@ -81,7 +81,9 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 {
 	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
 	if (!d2d::FilenameTools::isExist(filepath)) {
-		throw d2d::Exception("Symbol doesn't exist: %s !", value["filepath"].asString().c_str());
+		std::string filepath = value["filepath"].asString();
+		throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
+			dir.ToStdString().c_str(), filepath.c_str());
 	}
 
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);

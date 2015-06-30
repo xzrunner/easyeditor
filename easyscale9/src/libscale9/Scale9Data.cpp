@@ -377,11 +377,12 @@ void Scale9Data::InitSprite(const Json::Value& spr_val, d2d::ISprite** pSprite,
 							const std::string& dir)
 {
 	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-	if (!d2d::FilenameTools::isExist(filepath)) {
-		throw d2d::Exception("Symbol doesn't exist: %s !", spr_val["filepath"].asString().c_str());
-	}
-
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	if (!symbol) {
+		std::string filepath = spr_val["filepath"].asString();
+		throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
+			dir.c_str(), filepath.c_str());
+	}
 	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spr_val);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	sprite->load(spr_val);

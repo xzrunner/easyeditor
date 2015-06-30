@@ -1,6 +1,5 @@
 #include "LRLayersPack.h"
 #include "check_params.h"
-#include "lr_config.h"
 
 #include <lr/dataset/Grids.h>
 #include <lr/dataset/CharacterFileName.h>
@@ -174,7 +173,11 @@ void LRLayersPack::ParserPoint(const Json::Value& src_val, int layer_idx, const 
 	{
 		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(spr_path);
-		assert(symbol);
+		if (!symbol) {
+			std::string filepath = spr_val["filepath"].asString();
+			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
+				m_dir.c_str(), filepath.c_str());
+		}
 
 		Json::Value shape_val;
 		shape_val["name"] = spr_val["name"];
