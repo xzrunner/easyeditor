@@ -6,11 +6,12 @@ namespace etemplate
 
 StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame, 
 					   d2d::LibraryPanel* library,
-					   d2d::PropertySettingPanel* property)
+					   d2d::PropertySettingPanel* property,
+					   d2d::ViewPanelMgr* view_panel_mgr)
 	: d2d::EditPanel(parent, frame)
 	, d2d::SpritesPanelImpl(this, library)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, property);
+	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, property, view_panel_mgr);
 
 	m_canvas = new StageCanvas(this);
 }
