@@ -46,6 +46,8 @@ void LRToComplex::Run(const std::string& filepath)
 // 	}
 	int layer_idx = 0;
 	LoadSpriteValue(lr_val["layer"][layer_idx]["sprite"], complex_val["sprite"]);
+	layer_idx = 1;
+	LoadSpriteValue(lr_val["layer"][layer_idx]["sprite"], complex_val["sprite"]);
 	std::string name = d2d::FilenameTools::getFilename(filepath);
 	name = "scene_" + name.substr(0, name.find_last_of('_'));	
 	complex_val["name"] = name;
@@ -80,6 +82,7 @@ void LRToComplex::LoadSpriteValue(const Json::Value& src_val, Json::Value& dst_v
 		}
 
 		std::string filepath = spr_val["filepath"].asString();
+
 		Json::Value spr_val_fix = spr_val;
 
 		std::string suffix = "_shape.json";
