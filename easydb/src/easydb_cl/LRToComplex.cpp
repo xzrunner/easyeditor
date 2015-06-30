@@ -1,6 +1,5 @@
 #include "LRToComplex.h"
 #include "check_params.h"
-#include "lr_config.h"
 
 namespace edb
 {

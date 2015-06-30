@@ -584,10 +584,6 @@
 						Name="base"
 						>
 						<File
-							RelativePath="..\..\..\src\easydb_cl\lr_config.h"
-							>
-						</File>
-						<File
 							RelativePath="..\..\..\src\easydb_cl\LRLayersPack.cpp"
 							>
 						</File>
@@ -725,7 +721,7 @@
 					Name="VCResourceCompilerTool"
 					AdditionalIncludeDirectories="..\..\..\..\editor-external\wx\include"
 				/>
-			</FileConfiguration>			
+			</FileConfiguration>
 		</File>
 	</Files>
 	<Globals>

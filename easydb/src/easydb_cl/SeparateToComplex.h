@@ -45,6 +45,7 @@ private:
 	std::string m_dir;
 
 	std::string m_point_dir;
+	std::string m_tmp_dir;
 
 }; // SeparateToComplex
 
