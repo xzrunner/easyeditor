@@ -151,7 +151,7 @@ void SeparateToComplex::ResetOldSpriteVal(Json::Value& val, const std::string& n
 	val["x mirror"] = false;
 	val["y mirror"] = false;
 
-	val["name"] = "";
+	val["name"] = name;
 	val["tag"] = "";
 	val["clip"] = false;
 
