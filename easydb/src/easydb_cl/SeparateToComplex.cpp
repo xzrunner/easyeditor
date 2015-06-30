@@ -2,6 +2,7 @@
 #include "check_params.h"
 
 #include <easyshape.h>
+#include <wx/stdpaths.h>
 
 namespace edb
 {
@@ -29,7 +30,10 @@ void SeparateToComplex::Run(int argc, char *argv[])
 	if (!check_file(argv[2])) return;
 
 	m_point_dir = argv[3];
-	m_tmp_dir = argv[4];
+
+	wxStandardPathsBase& stdp = wxStandardPaths::Get();
+	wxString exe_path = stdp.GetExecutablePath();
+	m_tmp_dir = d2d::FilenameTools::getFileDir(exe_path) + "\\" + argv[4];
 
 	Run(argv[2]);
 }
@@ -48,7 +52,7 @@ void SeparateToComplex::Run(const std::string& filepath)
 
 	m_dir = d2d::FilenameTools::getFileDir(filepath);
 
-	std::string dst_folder = m_dir + "\\" + m_tmp_dir;
+	std::string dst_folder = m_tmp_dir;
 	d2d::mk_dir(dst_folder, false);
 
 	for (int layer_idx = 0; layer_idx < 8; ++layer_idx)
@@ -93,7 +97,7 @@ void SeparateToComplex::SeparateSprite(const Json::Value& src, Json::Value& dst)
 
 void SeparateToComplex::FixSpriteName(const Json::Value& src, Json::Value& dst)
 {
-	wxString relative_path = d2d::FilenameTools::getRelativePath(m_dir + "\\" + m_tmp_dir, 
+	wxString relative_path = d2d::FilenameTools::getRelativePath(m_tmp_dir, 
 		m_dir + "\\" + dst["filepath"].asString());
 	dst["filepath"] = relative_path.ToStdString();
 }
@@ -113,7 +117,7 @@ std::string SeparateToComplex::CreateNewComplexFile(const Json::Value& value) co
 
 	Json::Value spr_val = value;
 
-	wxString relative_path = d2d::FilenameTools::getRelativePath(m_dir + "\\" + m_tmp_dir, 
+	wxString relative_path = d2d::FilenameTools::getRelativePath(m_tmp_dir, 
 		m_dir + "\\" + spr_val["filepath"].asString());
 	spr_val["filepath"] = relative_path.ToStdString();
 
@@ -128,7 +132,7 @@ std::string SeparateToComplex::CreateNewComplexFile(const Json::Value& value) co
 	int idx = 0;
 	out_val["sprite"][idx] = spr_val;
 
-	std::string outpath = m_dir + "\\" + m_tmp_dir + "\\" + name + "_complex.json";
+	std::string outpath = m_tmp_dir + "\\" + name + "_complex.json";
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
 	std::ofstream fout(outpath.c_str());
