@@ -101,10 +101,10 @@ bool mk_dir(const std::string& dir, bool rm)
 	if (wxDir::Exists(dir)) {
 		if (rm) {
 			rm_dir(dir);
-			ret = wxDir::Make(dir);
+			ret = wxFileName::Mkdir(dir, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
 		}
 	} else {
-		ret = wxDir::Make(dir);
+		ret = wxFileName::Mkdir(dir, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL);
 	}
 	return ret;
 }
