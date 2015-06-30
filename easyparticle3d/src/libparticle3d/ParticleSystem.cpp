@@ -314,14 +314,17 @@ void ParticleSystem::update(float dt)
 
 		if (p->life > 0)
 		{
-			// up acc
+			// update acc
 			p->speed[2] -= gravity * dt;
 			float velocity = sqrt(p->speed[0] * p->speed[0] + p->speed[1] * p->speed[1] + p->speed[2] * p->speed[2]);
 			for (int i = 0; i < 3; ++i) {
 				p->speed[i] += p->linear_acc * p->speed[i] / velocity;
 			}
 
-			// up angle
+			// update disturbance
+			// todo
+
+			// update angle
 			if (orient_to_movement) 
 			{
 				d2d::Vector pos_old = TransCoords3To2(p->position);
@@ -342,7 +345,7 @@ void ParticleSystem::update(float dt)
 					p->angle += p->rotate * dt;
 			}
 
-			// up position
+			// update position
 			for (int i = 0; i < 3; ++i) {
 				p->position[i] += p->speed[i] * dt;
 			}
@@ -485,8 +488,13 @@ void ParticleSystem::add()
 	transCoords(speed, pLast->direction[0], pLast->direction[1], pLast->speed);
 
 	min = min_dis_region; max = max_dis_region;
+	float dis_r = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 	float dis_angle = rand() / (float(RAND_MAX)+1) * (d2d::PI * 2);
-	pLast->disturbance_region = ;
+	pLast->disturbance_region[0] = cos(dis_angle) * dis_r;
+	pLast->disturbance_region[1] = sin(dis_angle) * dis_r;
+
+	min = min_dis_spd; max = max_dis_spd;
+	pLast->disturbance_speed = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
 
 	min = min_linear_acc; max = max_linear_acc;
 	float linear_acc = (rand() / (float(RAND_MAX)+1) * (max - min)) + min;
