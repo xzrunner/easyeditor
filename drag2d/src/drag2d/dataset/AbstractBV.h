@@ -23,7 +23,8 @@ namespace d2d
 		virtual bool isValid() const = 0;
 		virtual void makeInfinite() = 0;
 
-		virtual void setTransform(const Vector& position, const Vector& offset, float angle) = 0;
+		virtual void SetTransform(const Vector& position, const Vector& offset, float angle) = 0;
+		virtual void SetMirror(bool xmirror, bool ymirror) = 0;
 
 		virtual void combine(const Vector& pos) = 0;
 		virtual void combine(const Rect& rect) = 0;

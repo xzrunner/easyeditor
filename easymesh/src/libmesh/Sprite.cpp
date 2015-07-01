@@ -92,7 +92,7 @@ void Sprite::buildBounding()
 	rect.scale(m_scale.x, m_scale.y);
 	rect.shear(m_shear.x, m_shear.y);
 	m_bounding->initFromRect(rect);
-	m_bounding->setTransform(m_pos, m_offset, m_angle);
+	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }
 
 void Sprite::SetTween(Sprite* begin, Sprite* end, float process)

@@ -22,10 +22,22 @@ OBB* OBB::clone() const
 	return new OBB(*this);
 }
 
-void OBB::setTransform(const Vector& position, const Vector& offset, float angle)
+void OBB::SetTransform(const Vector& position, const Vector& offset, float angle)
 {
 	m_position = position + (Math::rotateVector(-offset, angle) + offset);
 	m_angle = angle;
+}
+
+void OBB::SetMirror(bool xmirror, bool ymirror)
+{
+ 	if (xmirror) { 
+ 		m_rect.xMin = -m_rect.xMin;
+ 		m_rect.xMax = -m_rect.xMax;
+ 	}
+ 	if (ymirror) {
+ 		m_rect.yMin = -m_rect.yMin;
+ 		m_rect.yMax = -m_rect.yMax;
+ 	}
 }
 
 bool OBB::isContain(const Vector& pos) const

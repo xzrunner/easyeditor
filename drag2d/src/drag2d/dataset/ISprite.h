@@ -65,7 +65,7 @@ public:
 	const Vector& getScale() const { return m_scale; }
 	const Vector& getShear() const { return m_shear; }
 
-	void setMirror(bool xMirror, bool yMirror) { m_xMirror = xMirror; m_yMirror = yMirror; }
+	void setMirror(bool xMirror, bool yMirror);
 	void getMirror(bool& xMirror, bool& yMirror) const { xMirror = m_xMirror; yMirror = m_yMirror; }
 	bool getMirrorX() const { return m_xMirror; }
 	bool getMirrorY() const { return m_yMirror; }

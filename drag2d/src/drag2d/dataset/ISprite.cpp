@@ -238,7 +238,7 @@ void ISprite::buildBounding()
 	rect.scale(m_scale.x, m_scale.y);
 	rect.shear(m_shear.x, m_shear.y);
 	m_bounding->initFromRect(rect);
-	m_bounding->setTransform(m_pos, m_offset, m_angle);
+	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }
 
 IPropertySetting* ISprite::CreatePropertySetting(EditPanel* stage)
@@ -313,7 +313,7 @@ void ISprite::translate(const Vector& offset)
 
 	m_pos += offset;
 	if (m_bounding) {
-		m_bounding->setTransform(m_pos, m_offset, m_angle);
+		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
 }
 
@@ -325,7 +325,7 @@ void ISprite::rotate(float delta)
 	m_angle += delta;
 
 	if (m_bounding) {
-		m_bounding->setTransform(m_pos, m_offset, m_angle);
+		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
 }
 
@@ -338,7 +338,19 @@ void ISprite::setOffset(const Vector& offset)
 	m_pos += (old_center - new_center);
 
 	if (m_bounding) {
-		m_bounding->setTransform(m_pos, m_offset, m_angle);
+		m_bounding->SetTransform(m_pos, m_offset, m_angle);
+	}
+}
+
+void ISprite::setMirror(bool xMirror, bool yMirror) 
+{ 
+	bool x = xMirror != m_xMirror,
+		 y = yMirror != m_yMirror;
+
+	m_xMirror = xMirror; m_yMirror = yMirror; 
+	if (m_bounding) {
+		m_bounding->SetMirror(x, y);
+		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
 }
 

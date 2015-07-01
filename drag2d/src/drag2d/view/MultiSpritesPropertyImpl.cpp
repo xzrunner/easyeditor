@@ -349,7 +349,7 @@ void MultiSpritesPropertyImpl::SetMirrorX(bool overall, bool mirror)
 			ISprite* spr = m_sprites[i];
 			Vector pos = spr->getPosition() - center;
 			pos.x = -pos.x;
-			spr->setTransform(pos + center, spr->getAngle());
+			spr->setTransform(pos + center, -spr->getAngle());
 		}
 	}
 

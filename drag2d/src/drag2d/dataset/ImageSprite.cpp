@@ -87,7 +87,7 @@ void ImageSprite::buildBoundingFromTexCoords(float* texCoords)
  	Vector offset = Math::rotateVector(center, m_angle);
  	rect.translate(m_pos + offset);
  	m_bounding->initFromRect(rect);
- 	m_bounding->setTransform(m_pos, m_offset, m_angle);
+ 	m_bounding->SetTransform(m_pos, m_offset, m_angle);
 }
 
 } // d2d
