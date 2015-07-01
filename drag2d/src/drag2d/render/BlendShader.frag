@@ -137,10 +137,22 @@ void main()
 // 		gl_FragColor = vec4(result, 1.0);
 // 	}
 
-	gl_FragColor.xyz = result * v_fragmentColor.xyz; 
-	gl_FragColor.w = blend.w;   
-	gl_FragColor *= v_fragmentColor.w; 
-	gl_FragColor.xyz += v_fragmentAddi.xyz * blend.w; 
+// 	gl_FragColor.xyz = result * v_fragmentColor.xyz; 
+// 	gl_FragColor.w = blend.w;   
+// 	gl_FragColor *= v_fragmentColor.w; 
+// 	gl_FragColor.xyz += v_fragmentAddi.xyz * blend.w; 
+	
+	if (blend.a <= 0.0) {
+		gl_FragColor = vec4(0.0,0.0,0.0,0.0);
+	} else {
+		gl_FragColor.xyz = result * v_fragmentColor.xyz * blend.a; 
+		gl_FragColor.w = blend.w;   
+		gl_FragColor *= v_fragmentColor.w; 
+		gl_FragColor.xyz += v_fragmentAddi.xyz * blend.w; 
+	
+// 		result.rgb = result.rgb * blend.a;			
+// 		gl_FragColor = vec4(result, blend.a);
+	}	
 }
 
 );
