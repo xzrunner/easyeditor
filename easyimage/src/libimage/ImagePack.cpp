@@ -139,10 +139,11 @@ void ImagePack::PreMuiltiAlpha()
 	int pos = 0;
 	for (int y = 0; y < m_height; ++y) {
 		for (int x = 0; x < m_width; ++x) {
-			float alpha = (pos + 3) / 255.0f;
+			float alpha = m_pixels[pos + 3] / 255.0f;
 			for (int i = 0; i < 3; ++i) {
 				m_pixels[pos + i] = m_pixels[pos + i] * alpha;
 			}
+			pos += 4;
 		}
 	}
 }
