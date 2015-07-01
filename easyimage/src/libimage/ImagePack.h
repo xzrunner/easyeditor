@@ -33,6 +33,10 @@ public:
 private:
 	void CopyPixel(const uint8_t* src, int sw, int sh, bool sbpp4, 
 		int sx, int sy, int dx, int dy);
+	void CopyPixelClockwise(const uint8_t* src, int sw, int sh, bool sbpp4, 
+		int sx, int sy, int dx, int dy);
+	void CopyPixelAntiClockwise(const uint8_t* src, int sw, int sh, bool sbpp4, 
+		int sx, int sy, int dx, int dy);
 
 private:
 	uint8_t* m_pixels;

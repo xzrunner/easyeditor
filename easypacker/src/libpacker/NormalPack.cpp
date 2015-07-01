@@ -49,10 +49,10 @@ void NormalPack::OutputInfo(const wxString& src_folder, const ImageTrimData& tri
 		const RectSize& src_sz = m_src_sizes[i];
 
 		const Rect& pos = m_output[i];
-		frame_val["frame"]["x"] = pos.x;
-		frame_val["frame"]["y"] = pos.y;
-		frame_val["frame"]["w"] = src_sz.width;
-		frame_val["frame"]["h"] = src_sz.height;
+		frame_val["frame"]["x"] = pos.x + m_extrude;
+		frame_val["frame"]["y"] = pos.y + m_extrude;
+		frame_val["frame"]["w"] = src_sz.width - m_extrude * 2;
+		frame_val["frame"]["h"] = src_sz.height - m_extrude * 2;
 
 		assert(src_sz.width == pos.width && src_sz.height == pos.height
 			|| src_sz.width == pos.height && src_sz.height == pos.width);
