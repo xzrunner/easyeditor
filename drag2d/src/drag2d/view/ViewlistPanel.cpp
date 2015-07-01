@@ -9,6 +9,8 @@
 #include "view/MultiSpritesImpl.h"
 #include "view/ViewPanelMgr.h"
 
+#include <fstream>
+
 namespace d2d
 {
 
@@ -55,7 +57,13 @@ void ViewlistPanel::InsertSprite(ISprite* spr)
 
 void ViewlistPanel::RemoveSprite(ISprite* spr)
 {
+	std::ofstream fout("del_debug.txt", std::ios::app);
+	fout << "ViewlistPanel::RemoveSprite 0" << std::endl;
+
 	Remove(spr);
+	fout << "ViewlistPanel::RemoveSprite 1" << std::endl;
+
+	fout.close();
 }
 
 void ViewlistPanel::Remove(ISprite* sprite)

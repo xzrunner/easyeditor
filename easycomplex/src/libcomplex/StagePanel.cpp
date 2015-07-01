@@ -56,10 +56,19 @@ void StagePanel::clear()
 
 void StagePanel::removeSprite(d2d::ISprite* sprite)
 {
+	std::ofstream fout("del_debug.txt", std::ios::app);
+	fout << "StagePanel::removeSprite begin" << std::endl;
+
 	d2d::SpritesPanelImpl::removeSprite(sprite);
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->RemoveSprite(sprite, this);
 	}
+
+	fout << "StagePanel::removeSprite success\n\n\n" << std::endl;
+
+	fout.close();
+
+//	wxRemoveFile("del_debug.txt");
 }
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)

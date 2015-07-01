@@ -3,6 +3,8 @@
 #include "dataset/AbstractBV.h"
 #include "common/Rect.h"
 
+#include <fstream>
+
 namespace d2d
 {
 
@@ -40,7 +42,13 @@ void MultiSpritesImpl::InsertSprite(ISprite* spr)
 
 void MultiSpritesImpl::RemoveSprite(ISprite* spr)
 {
+	std::ofstream fout("del_debug.txt", std::ios::app);
+	fout << "MultiSpritesImpl::RemoveSprite 0" << std::endl;
+
 	removeSprite(spr);
+	fout << "MultiSpritesImpl::RemoveSprite 1" << std::endl;
+
+	fout.close();
 }
 
 ISprite* MultiSpritesImpl::querySpriteByPos(const Vector& pos) const

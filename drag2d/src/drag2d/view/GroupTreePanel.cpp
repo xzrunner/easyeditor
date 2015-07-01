@@ -8,6 +8,8 @@
 
 #include <wx/wx.h>
 
+#include <fstream>
+
 namespace d2d
 {
 
@@ -57,7 +59,13 @@ void GroupTreePanel::InsertSprite(ISprite* spr)
 
 void GroupTreePanel::RemoveSprite(ISprite* spr)
 {
+	std::ofstream fout("del_debug.txt", std::ios::app);
+	fout << "GroupTreePanel::RemoveSprite 0" << std::endl;
+
 	m_grouptree->Remove(spr);
+	fout << "GroupTreePanel::RemoveSprite 1" << std::endl;
+
+	fout.close();
 }
 
 void GroupTreePanel::StoreToFile(Json::Value& value) const
