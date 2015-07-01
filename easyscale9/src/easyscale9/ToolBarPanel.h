@@ -1,37 +1,42 @@
-#pragma once
+#ifndef _ESCALE9_TOOLBAR_PANEL_H_
+#define _ESCALE9_TOOLBAR_PANEL_H_
 
 #include <drag2d.h>
 
 namespace escale9
 {
-	class StagePanel;
-	class ResizeCMPT;
 
-	class ToolbarPanel : public d2d::ToolbarPanel
-	{
-	public:
-		ToolbarPanel(wxWindow* parent, StagePanel* stage,
-			d2d::PropertySettingPanel* property);
-		
-		void setComposeOP(bool use) {
-			m_isComposeOP = use;
-		}
-		bool isComposeOP() const {
-			return m_isComposeOP;
-		}
+class StagePanel;
+class ResizeCMPT;
 
-		void setSize(float width, float height);
-		float getWidth() const;
-		float getHeight() const;
+class ToolbarPanel : public d2d::ToolbarPanel
+{
+public:
+	ToolbarPanel(wxWindow* parent, StagePanel* stage,
+		d2d::PropertySettingPanel* property,
+		d2d::ViewPanelMgr* view_panel_mgr);
+	
+	void setComposeOP(bool use) {
+		m_isComposeOP = use;
+	}
+	bool isComposeOP() const {
+		return m_isComposeOP;
+	}
 
-	protected:
-		virtual wxSizer* initLayout();
+	void setSize(float width, float height);
+	float getWidth() const;
+	float getHeight() const;
 
-	private:
-		ResizeCMPT* m_resizeCmpt;
+protected:
+	virtual wxSizer* initLayout();
 
-		bool m_isComposeOP;
+private:
+	ResizeCMPT* m_resizeCmpt;
 
-	}; // ToolbarPanel
+	bool m_isComposeOP;
+
+}; // ToolbarPanel
+
 }
 
+#endif // _ESCALE9_TOOLBAR_PANEL_H_

@@ -10,7 +10,7 @@ Task::Task(wxFrame* parent)
 	: m_root(NULL)
 	, m_parent(parent)
 {
-	initLayout();
+	InitLayout();
 }
 
 Task::~Task()
@@ -51,54 +51,55 @@ const d2d::EditPanel* Task::getEditPanel() const
 	return m_stage;
 }
 
-void Task::initWindows(wxSplitterWindow* leftHorizontalSplitter, 
-					   wxSplitterWindow* leftVerticalSplitter, 
-					   wxSplitterWindow* rightVerticalSplitter, 
-					   wxWindow*& library, wxWindow*& property, 
-					   wxWindow*& stage, wxWindow*& toolbar)
+void Task::InitLayout()
 {
-	library = m_library = new d2d::LibraryPanel(leftHorizontalSplitter);
+	wxSplitterWindow* right_split = new wxSplitterWindow(m_parent);
+	wxSplitterWindow* left_split = new wxSplitterWindow(right_split);
+
+	wxWindow* left = InitLayoutLeft(left_split);
+	wxWindow* center = InitLayoutCenter(left_split);
+	wxWindow* right = InitLayoutRight(right_split);
+
+	left_split->SetSashGravity(0.2f);
+	left_split->SplitVertically(left, center);
+
+	right_split->SetSashGravity(0.85f);
+	right_split->SplitVertically(left_split, right);
+
+	m_root = right_split;
+}
+
+wxWindow* Task::InitLayoutLeft(wxWindow* parent)
+{
+	wxSplitterWindow* split = new wxSplitterWindow(parent);
+
+	m_library = new d2d::LibraryPanel(split);
 	m_library->AddPage(new d2d::LibraryImagePage(m_library->GetNotebook()));
 
-	d2d::PropertySettingPanel* _property;
-	property = _property = new d2d::PropertySettingPanel(leftHorizontalSplitter);
+	m_property = new d2d::PropertySettingPanel(split);
+	m_view_panel_mgr.AddSpritePanel(m_property);
 
-	stage = m_stage = new StagePanel(leftVerticalSplitter, m_parent, m_library);
-	m_library->SetCanvas(m_stage->getCanvas());
-	_property->SetEditPanel(m_stage);
+	split->SetSashGravity(0.55f);
+	split->SplitHorizontally(m_library, m_property);
 
-	toolbar = m_toolbar = new ToolbarPanel(rightVerticalSplitter, m_stage, _property);
-
-	m_stage->setToolbarPanel(m_toolbar);
+	return split;
 }
 
-void Task::initLayout()
+wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
-	wxSplitterWindow* rightVerticalSplitter = new wxSplitterWindow(m_parent);
-	wxSplitterWindow* leftVerticalSplitter = new wxSplitterWindow(rightVerticalSplitter);
-	wxSplitterWindow* leftHorizontalSplitter = new wxSplitterWindow(leftVerticalSplitter);
+	m_stage = new StagePanel(parent, m_parent, m_library);
+	m_library->SetCanvas(m_stage->getCanvas());
+	m_property->SetEditPanel(m_stage);
+	m_view_panel_mgr.AddSpritePanel(m_stage);
 
-	wxWindow *library, *property, *stage, *toolbar;
-	initWindows(leftHorizontalSplitter, leftVerticalSplitter, rightVerticalSplitter,
-		library, property, stage, toolbar);
-
-	if (library || property)
-	{
-		if (library && property)
-		{
-			leftHorizontalSplitter->SetSashGravity(0.8f);
-			leftHorizontalSplitter->SplitHorizontally(library, property);
-		}
-		leftVerticalSplitter->SetSashGravity(0.15f);
-		leftVerticalSplitter->SplitVertically(leftHorizontalSplitter, stage);
-	}
-
-	if (toolbar)
-	{
-		rightVerticalSplitter->SetSashGravity(0.85f);
-		rightVerticalSplitter->SplitVertically(leftVerticalSplitter, toolbar);
-	}
-
-	m_root = rightVerticalSplitter;
+	return m_stage;
 }
+
+wxWindow* Task::InitLayoutRight(wxWindow* parent)
+{
+	m_toolbar = new ToolbarPanel(parent, m_stage, m_property, &m_view_panel_mgr);
+	m_stage->setToolbarPanel(m_toolbar);
+	return m_toolbar;
+}
+
 } // escale9

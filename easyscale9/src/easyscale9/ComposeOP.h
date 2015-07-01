@@ -10,8 +10,8 @@ namespace escale9
 	class ComposeOP : public d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>
 	{
 	public:
-		ComposeOP(ToolbarPanel* toolbar, StagePanel* stage, 
-			d2d::PropertySettingPanel* property);
+		ComposeOP(ToolbarPanel* toolbar, StagePanel* stage, d2d::PropertySettingPanel* property, 
+			d2d::ViewPanelMgr* view_panel_mgr);
 
 		virtual bool OnActive();
 
