@@ -16,6 +16,10 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
+	if (!m_symbol) {
+		return false;
+	}
+
 	m_firstPos = m_stage->transPosScreenToProject(x, y);
 
 	const float hw = m_symbol->getSize().xLength() * 0.5f,
