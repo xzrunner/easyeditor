@@ -12,6 +12,8 @@ namespace d2d
 
 Config* Config::m_instance = NULL;
 
+bool Config::m_loaded = false;
+
 const char* FILENAME = "config.json";
 
 Config::Config()
@@ -26,10 +28,11 @@ Config::Config()
 
 Config* Config::Instance()
 {
-	if (!m_instance)
-	{
+	if (!m_instance) {
 		m_instance = new Config();
+	}
 
+	if (!m_loaded) {
 		if (FilenameTools::isExist(FILENAME)) {
 			m_instance->LoadFromFile(FILENAME);
 		} else {
@@ -41,6 +44,7 @@ Config* Config::Instance()
 			}
 		}
 	}
+
 	return m_instance;
 }
 
@@ -82,6 +86,8 @@ void Config::LoadFromFile(const char* filename)
 	m_font_filepath = m_value["font_filepath"].asString();
 
 	m_settings->LoadFromFile(m_value);
+
+	m_loaded = true;
 }
 
 }

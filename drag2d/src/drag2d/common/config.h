@@ -48,6 +48,8 @@ private:
 
 	SettingData* m_settings;
 
+	static bool m_loaded;
+
 private:
 	static Config* m_instance;
 
