@@ -23,7 +23,7 @@ GroupTreePanel::GroupTreePanel(wxWindow* parent, MultiSpritesImpl* sprites_impl,
 	InitLayout();
 }
 
-void GroupTreePanel::SelectSprite(ISprite* spr)
+void GroupTreePanel::SelectSprite(ISprite* spr, bool clear)
 {
 	GroupTreeImpl::QuerySpriteVisitor visitor(m_grouptree, spr);
 	m_grouptree->Traverse(visitor);
@@ -38,7 +38,7 @@ void GroupTreePanel::SelectMultiSprites(SpriteSelection* selection)
 	std::vector<ISprite*> sprites;
 	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	for (int i = 0, n = sprites.size(); i < n; ++i) {
-		SelectSprite(sprites[i]);
+		SelectSprite(sprites[i], false);
 	}
 }
 

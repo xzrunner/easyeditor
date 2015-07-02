@@ -15,7 +15,7 @@ void ViewPanelMgr::AddShapePanel(IShapeViewPanel* panel)
 	m_shape_panels.push_back(panel);
 }
 
-void ViewPanelMgr::SelectSprite(ISprite* spr, ISpriteViewPanel* expect)
+void ViewPanelMgr::SelectSprite(ISprite* spr, bool clear, ISpriteViewPanel* expect)
 {
 	if (m_locked) {
 		return;
@@ -27,7 +27,7 @@ void ViewPanelMgr::SelectSprite(ISprite* spr, ISpriteViewPanel* expect)
 		if (m_spr_panels[i] == expect) {
 			continue;
 		}
-		m_spr_panels[i]->SelectSprite(spr);
+		m_spr_panels[i]->SelectSprite(spr, clear);
 	}
 
 	m_locked = false;

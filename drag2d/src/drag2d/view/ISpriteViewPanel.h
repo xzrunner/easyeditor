@@ -13,7 +13,7 @@ class ISpriteViewPanel
 {
 public:
 	virtual ~ISpriteViewPanel() {}
-	virtual void SelectSprite(ISprite* spr) = 0;
+	virtual void SelectSprite(ISprite* spr, bool clear) = 0;
 	virtual void SelectMultiSprites(SpriteSelection* selection) = 0;
 	virtual void ReorderSprite(ISprite* spr, bool up) = 0;
 	virtual void InsertSprite(ISprite* spr) = 0;

@@ -90,7 +90,8 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 				m_selection->Clear();
 				m_selection->Add(selected);
 				if (m_view_panel_mgr) {
-					m_view_panel_mgr->SelectSprite(selected, m_spritesImpl);
+					bool add = wxGetKeyState(WXK_CONTROL);
+					m_view_panel_mgr->SelectSprite(selected, !add, m_spritesImpl);
 				}
 			}
 		}
@@ -322,7 +323,9 @@ void SelectSpritesOP::CopyFromSelection()
 
 		sval = value["sprite"][i++];
 	}
-	m_view_panel_mgr->SelectSprite(last_spr, m_spritesImpl);
+
+	bool add = wxGetKeyState(WXK_CONTROL);
+	m_view_panel_mgr->SelectSprite(last_spr, !add, m_spritesImpl);
 
 	m_stage->getCanvas()->resetViewport();
 

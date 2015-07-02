@@ -20,7 +20,7 @@ public:
 	void AddSpritePanel(ISpriteViewPanel* panel);
 	void AddShapePanel(IShapeViewPanel* panel);
 
-	void SelectSprite(ISprite* spr, ISpriteViewPanel* expect);
+	void SelectSprite(ISprite* spr, bool clear, ISpriteViewPanel* expect);
 	void SelectMultiSprites(SpriteSelection* selection, ISpriteViewPanel* expect);
 	void ReorderSprite(ISprite* spr, bool up, ISpriteViewPanel* expect);
 	void InsertSprite(ISprite* spr, ISpriteViewPanel* expect);

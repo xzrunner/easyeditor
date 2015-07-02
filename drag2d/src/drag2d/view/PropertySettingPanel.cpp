@@ -22,7 +22,7 @@ PropertySettingPanel::~PropertySettingPanel()
 	delete m_setting;
 }
 
-void PropertySettingPanel::SelectSprite(ISprite* spr)
+void PropertySettingPanel::SelectSprite(ISprite* spr, bool clear)
 {
 	assert(m_stage);
 	if (spr) {
@@ -37,9 +37,9 @@ void PropertySettingPanel::SelectMultiSprites(SpriteSelection* selection)
 	std::vector<ISprite*> sprites;
 	selection->Traverse(FetchAllVisitor<ISprite>(sprites));
 	if (sprites.empty()) {
-		SelectSprite(NULL);
+		SelectSprite(NULL, true);
 	} else if (sprites.size() == 1) {
-		SelectSprite(sprites[0]);
+		SelectSprite(sprites[0], true);
 	} else {
 		SetPropertySetting(new MultiSpritesPropertySetting(m_stage, sprites));
 	}

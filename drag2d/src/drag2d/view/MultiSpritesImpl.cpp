@@ -19,10 +19,19 @@ MultiSpritesImpl::~MultiSpritesImpl()
 	m_spriteSelection->Release();
 }
 
-void MultiSpritesImpl::SelectSprite(ISprite* spr)
+void MultiSpritesImpl::SelectSprite(ISprite* spr, bool clear)
 {
-	m_spriteSelection->Clear();
- 	m_spriteSelection->Add(spr);
+	if (clear) {
+		m_spriteSelection->Clear();
+		m_spriteSelection->Add(spr);
+	} else {
+		if (m_spriteSelection->IsExist(spr)) {
+			m_spriteSelection->Remove(spr);
+		} else {
+			m_spriteSelection->Add(spr);
+		}
+	}
+
 	m_wnd->Refresh();
 }
 

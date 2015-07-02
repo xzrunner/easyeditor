@@ -271,7 +271,9 @@ void GroupTreeCtrl::OnItemActivated(wxTreeEvent& event)
 	GroupTreeImpl::GetFirstSpriteVisitor visitor(this);
 	Traverse(id, visitor);
 	ISprite* spr = visitor.GetFirstSprite();
-	m_view_panel_mgr->SelectSprite(spr, m_parent_panel);
+
+	bool add = wxGetKeyState(WXK_CONTROL);
+	m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
 
 	SpriteSelection* selection = m_sprite_impl->getSpriteSelection();
 	selection->Clear();
@@ -352,7 +354,8 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
 	if (data && !data->IsGroup()) {
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
-		m_view_panel_mgr->SelectSprite(spr, m_parent_panel);
+		bool add = wxGetKeyState(WXK_CONTROL);
+		m_view_panel_mgr->SelectSprite(spr, !add, m_parent_panel);
 	}
 }
 

@@ -61,7 +61,7 @@ wxWindow* EditDialog::InitLayoutCenter(wxWindow* parent)
 		static_cast<ecomplex::LibraryPanel*>(m_library), &m_view_panel_mgr);
 	m_view_panel_mgr.AddSpritePanel(m_stage);
 	m_property->SetEditPanel(m_stage);
-	m_property->SelectSprite(NULL);
+	m_property->SelectSprite(NULL, true);
 	return m_stage;
 }
 

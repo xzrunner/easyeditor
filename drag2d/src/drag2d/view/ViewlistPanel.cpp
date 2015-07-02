@@ -33,7 +33,7 @@ ViewlistPanel::~ViewlistPanel()
 	}
 }
 
-void ViewlistPanel::SelectSprite(ISprite* spr)
+void ViewlistPanel::SelectSprite(ISprite* spr, bool clear)
 {
 	int idx = QuerySprIdx(spr);
 	if (idx >= 0) {
@@ -142,7 +142,8 @@ void ViewlistPanel::OnSelected(d2d::ISprite* spr)
 	m_selected_spr->Retain();
 
 	if (m_view_panel_mgr) {
-		m_view_panel_mgr->SelectSprite(spr, this);
+		bool add = wxGetKeyState(WXK_CONTROL);
+		m_view_panel_mgr->SelectSprite(spr, !add, this);
 	}
 }
 
