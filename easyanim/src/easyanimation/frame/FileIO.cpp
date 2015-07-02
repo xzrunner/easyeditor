@@ -34,10 +34,7 @@ void FileIO::load(const wxString& filepath, Controller* ctrl)
 	ctrl->fps = value["fps"].asInt();
 	ctrl->GetLayersPanel()->setFPS(ctrl->fps);
 
-	if (!value["resource"].isNull())
-		loadResource(value["resource"], ctrl);
-	else
-		ctrl->GetResource().clear();
+	ctrl->GetAnimTemplate().LoadFromFile(value["resource"], ctrl->GetToolbarPanel());
 
 	ctrl->name = value["name"].asString();
 
@@ -60,7 +57,7 @@ void FileIO::store(const wxString& filepath, Controller* ctrl)
 {
 	Json::Value value;
 
-	storeResource(value, ctrl);
+	ctrl->GetAnimTemplate().StoreToFile(value["resource"]);
 
 //	value["name"] = d2d::FilenameTools::getFilename(filepath).ToStdString();
 	value["name"] = ctrl->name;
@@ -99,7 +96,6 @@ void FileIO::reload(Controller* ctrl)
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
 		Layer* layer = loadLayer(layerValue, dir, ctrl);
-		ctrl->GetLayers().insertLayer(layer);
 		layerValue = value["layer"][i++];
 	}
 
@@ -183,40 +179,6 @@ void FileIO::storeAsPng(const wxString& src, const wxString& dst)
 	symbol->Release();
 }
 
-void FileIO::loadResource(const Json::Value& resValue, Controller* ctrl)
-{
-	ctrl->GetResource().clear();
-
-	std::vector<std::string> anims;
-
-	int i = 0;
-	Json::Value value = resValue[i++];
-	while (!value.isNull()) {
-		ResourceMgr::Item item;
-		item.path = value["path"].asString();
-		item.name = value["name"].asString();
-		ctrl->GetResource().items.push_back(item);
-		anims.push_back(item.name);
-		value = resValue[i++];
-	}
-
-	ctrl->GetToolbarPanel()->addAnimChoice(anims);
-}
-
-void FileIO::storeResource(Json::Value& value, Controller* ctrl)
-{
-	ResourceMgr& res = ctrl->GetResource();
-	if (res.empty()) return;
-
-	for (size_t i = 0, n = res.items.size(); i < n; ++i)
-	{
-		Json::Value itemVal;
-		itemVal["path"] = res.items[i].path;
-		itemVal["name"] = res.items[i].name;
-		value["resource"][i] = itemVal;
-	}
-}
-
 Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir, Controller* ctrl)
 {
 	Layer* layer = new Layer(ctrl);
@@ -277,24 +239,23 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 		if (d2d::FilenameTools::isExist(filepath))
 			break;
 
-		std::string tmp = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-		if (d2d::FilenameTools::isExist(tmp))
+		std::string absolute_path = d2d::FilenameTools::getAbsolutePath(dir, filepath);
+		if (d2d::FilenameTools::isExist(absolute_path))
 		{
-			filepath = tmp;
+			filepath = absolute_path;
 			break;
 		}
 
-		if (!ctrl->GetResource().empty())
-			tmp = ctrl->GetResource().dir() + "/" + filepath;
-		if (!d2d::FilenameTools::isExist(tmp))
-			tmp = d2d::FilenameTools::getAbsolutePath(dir, tmp);
-		if (!d2d::FilenameTools::isExist(tmp))
-		{
-			throw d2d::Exception("File: %s don't exist!", filepath.c_str());
-			assert(0);
+		std::string res_path = absolute_path;
+		if (!ctrl->GetAnimTemplate().Empty())
+			res_path = ctrl->GetAnimTemplate().Dir() + "/" + filepath;
+		if (!d2d::FilenameTools::isExist(res_path))
+			absolute_path = d2d::FilenameTools::getAbsolutePath(dir, res_path);
+		if (!d2d::FilenameTools::isExist(absolute_path)) {
+			throw d2d::Exception("File: %s don't exist!", res_path.c_str());
 		}
 
-		filepath = tmp;
+		filepath = absolute_path;
 		break;
 	}
 
@@ -502,12 +463,13 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dir,
 
 	const d2d::ISymbol& symbol = sprite->getSymbol();
 	// filepath
-	if (ctrl->GetResource().empty())
+	if (ctrl->GetAnimTemplate().Empty()) {
 		value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
 			symbol.getFilepath()).ToStdString();
-	else
+	} else {
 		value["filepath"] = d2d::FilenameTools::getFilenameWithExtension(
 			symbol.getFilepath()).ToStdString();
+	}
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

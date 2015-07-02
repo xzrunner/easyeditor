@@ -15,41 +15,81 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 						   bool vertical, Controller* ctrl)
 	: d2d::ToolbarPanel(parent, stage, vertical)
 	, m_ctrl(ctrl)
-	, m_animChoice(NULL)
+	, m_anim_choice(NULL)
 {
 	addChild(new CommonCMPT(this, wxT("Common"), stage, property, view_panel_mgr, vertical, ctrl));
 	addChild(new SkeletonCMPT(this, wxT("Skeleton"), stage, property, vertical));
 	SetSizer(initLayout());	
 }
 
-void ToolbarPanel::addAnimChoice(const std::vector<std::string>& choices)
+void ToolbarPanel::AddAnimChoice(const std::vector<std::string>& choices)
 {
-	wxSizer* sizer = GetSizer();
+	m_temp_open->SetValue(true);
 
-	if (m_animChoice) 
-		delete m_animChoice;
+	if (m_anim_choice) 
+		delete m_anim_choice;
 
 	wxArrayString array;
 	for (size_t i = 0, n = choices.size(); i < n; ++i)
 		array.push_back(choices[i]);
 
-	m_animChoice = new wxRadioBox(this, wxID_ANY, wxT("anims"), wxDefaultPosition, wxDefaultSize, array, 1, wxRA_SPECIFY_COLS);
-	Connect(m_animChoice->GetId(), wxEVT_COMMAND_RADIOBOX_SELECTED, wxCommandEventHandler(ToolbarPanel::onChangeAnim));
-	sizer->Add(m_animChoice);
+	m_anim_choice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, array);
+	m_anim_choice->SetSelection(0);
+	Connect(m_anim_choice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler(ToolbarPanel::OnChangeAnim));
+	m_temp_sizer->Clear(true);
+	m_temp_sizer->Add(m_anim_choice);
 
 	Layout();
 }
 
 wxSizer* ToolbarPanel::initLayout()
 {
-	wxBoxSizer* sizer = new wxBoxSizer(wxVERTICAL);
-	sizer->Add(initChildrenLayout());
+	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
+	{
+		sizer->Add(initChildrenLayout());
+	}
+	sizer->AddSpacer(10);
+	{
+		wxSizer* sz = InitTemplateLayout();
+		sizer->Add(sz);
+	}
 	return sizer;
 }
 
-void ToolbarPanel::onChangeAnim(wxCommandEvent& event)
+wxSizer* ToolbarPanel::InitTemplateLayout()
 {
-	m_ctrl->GetResource().choice = event.GetInt();
-	FileIO::reload(m_ctrl);
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("模板"));
+	m_temp_sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+
+	m_temp_open = new wxCheckBox(this, wxID_ANY, "保存模板信息");
+	m_temp_open->SetValue(false);
+	Connect(m_temp_open->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
+		wxCommandEventHandler(ToolbarPanel::OnOpenTemplate));
+	m_temp_sizer->Add(m_temp_open);
+
+	return m_temp_sizer;
 }
+
+void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
+{
+	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
+
+	try {
+		FileIO::reload(m_ctrl);
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();
+	}
+}
+
+void ToolbarPanel::OnOpenTemplate(wxCommandEvent& event)
+{
+	if (event.IsChecked()) {
+		// todo m_ctrl->GetAnimTemplate().Add()
+		//
+	} else {
+		m_ctrl->GetAnimTemplate().Clear();
+	}
+}
+
 } // eanim

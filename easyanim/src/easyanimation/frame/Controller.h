@@ -2,7 +2,7 @@
 #define _EASYANIM_CONTROLLER_H_
 
 #include "dataset/LayersMgr.h"
-#include "dataset/ResourceMgr.h"
+#include "dataset/AnimTemplate.h"
 
 namespace eanim
 {
@@ -48,7 +48,7 @@ public:
 
 	d2d::ILibraryPage* GetImagePage();
 
-	ResourceMgr& GetResource() { return resource; }
+	AnimTemplate& GetAnimTemplate() { return anim_template; }
 
 	const std::string& GetName() const { return name; }
 
@@ -70,7 +70,7 @@ private:
 
 	LayersMgr layers;
 
-	ResourceMgr resource;
+	AnimTemplate anim_template;
 
 	//
 

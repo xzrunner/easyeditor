@@ -185,7 +185,11 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\easyanimation\dataset\ResourceMgr.h"
+				RelativePath="..\..\..\src\easyanimation\dataset\AnimTemplate.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easyanimation\dataset\AnimTemplate.h"
 				>
 			</File>
 			<Filter

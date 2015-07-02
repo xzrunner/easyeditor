@@ -246,7 +246,7 @@ void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 
 void CommonCMPT::onChangeAnim(wxCommandEvent& event)
 {
-	m_ctrl->GetResource().choice = event.GetInt();
+	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
 	FileIO::reload(m_ctrl);
 }
 
