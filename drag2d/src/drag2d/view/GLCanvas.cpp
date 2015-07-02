@@ -76,7 +76,7 @@ void GLCanvas::initGL()
 			exit(1);
 		}
 
-		ShaderMgr::Instance()->null();
+		ShaderMgr::Instance()->Reset();
 
 		resetViewport();
 
@@ -101,9 +101,16 @@ void GLCanvas::onSize(wxSizeEvent& event)
 
 void GLCanvas::onPaint(wxPaintEvent& event)
 {
+	static GLCanvas* curr_canvas = NULL;
+
 	// Makes the OpenGL state that is represented by the OpenGL rendering 
 	// context context current
 	SetCurrentCanvas();
+
+	if (curr_canvas != this) {
+		ShaderMgr::Instance()->Reset();
+		curr_canvas = this;
+	}
 
 	if (!m_isInit)
 	{

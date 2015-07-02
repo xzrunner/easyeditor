@@ -28,6 +28,8 @@ public:
 
 	virtual void Commit();
 
+	virtual void Reset();
+
 	void SetModelView(const Vector& offset, float scale);
 
 	int GetTexID() const;

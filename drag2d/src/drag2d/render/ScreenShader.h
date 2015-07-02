@@ -22,6 +22,8 @@ public:
 
 	virtual void Commit();
 
+	virtual void Reset() {}
+
 	void Draw(int texid) const;
 
 private:

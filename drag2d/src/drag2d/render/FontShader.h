@@ -21,6 +21,8 @@ public:
 
 	virtual void Commit() {}
 
+	virtual void Reset() {}
+
 }; // FontShader
 
 }

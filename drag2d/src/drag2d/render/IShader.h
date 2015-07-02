@@ -24,6 +24,8 @@ public:
 
 	virtual void Commit() = 0;
 
+	virtual void Reset() = 0;
+
 	GLuint GetProgram() const { return m_prog; }
 
 protected:

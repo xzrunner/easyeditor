@@ -24,6 +24,8 @@ public:
 
 	void Flush();
 
+	void Reset();
+
 protected:
 	void Switch(IShader* shader);
 

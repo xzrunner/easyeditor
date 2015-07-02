@@ -29,6 +29,7 @@ SpriteShader::SpriteShader()
 	m_max_commbine = 20000;	// 4096
 
 	m_model_view = m_projection = 0;
+	m_vertex_buffer = m_index_buffer = 0;
 	m_count = 0;
 	m_vb = NULL;
 	m_color = 0xffffffff;
@@ -162,6 +163,12 @@ void SpriteShader::Commit()
 	}
 
 	m_count = 0;
+}
+
+void SpriteShader::Reset()
+{
+	m_tex = 0;
+	m_fbo = 0;
 }
 
 int SpriteShader::GetTexID() const 

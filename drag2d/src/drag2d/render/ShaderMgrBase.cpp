@@ -67,4 +67,12 @@ void ShaderMgrBase::Switch(IShader* shader)
 	}
 }
 
+void ShaderMgrBase::Reset()
+{
+	m_curr_shader = NULL;
+	for (int i = 0, n = m_shaders.size(); i < n; ++i) {
+		m_shaders[i]->Reset();
+	}
+}
+
 }

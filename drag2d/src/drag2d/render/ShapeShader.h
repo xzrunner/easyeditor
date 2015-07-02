@@ -26,6 +26,8 @@ public:
 
 	virtual void Commit();
 
+	virtual void Reset() {}
+
 	void SetModelView(const Vector& offset, float scale);
 
 	void SetColor(const Colorf& col);
