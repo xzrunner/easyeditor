@@ -73,6 +73,8 @@ private:
 	void HoriMirror();
 	void VertMirror();
 
+	d2d::Vector GetSprOffset(const ISprite* spr) const;
+
 private:
 	static const float CTRL_NODE_RADIUS;
 	static const float MAX_CTRL_NODE_RADIUS;

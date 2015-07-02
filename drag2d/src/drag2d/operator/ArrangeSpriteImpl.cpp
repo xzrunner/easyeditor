@@ -152,7 +152,7 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 	// offset
 	if (m_cfg.is_offset_open)
 	{
-		d2d::Vector offset = selected->getPosition() + selected->getOffset();
+		d2d::Vector offset = GetSprOffset(selected);
 		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
 			delete m_op_state;
 			m_op_state = CreateOffsetState(selected);
@@ -428,7 +428,7 @@ void ArrangeSpriteImpl::OnDraw(const Camera& cam) const
 
 		if (m_cfg.is_offset_open)
 		{
-			d2d::Vector offset = selected->getPosition() + selected->getOffset();
+			d2d::Vector offset = GetSprOffset(selected);
 			PrimitiveDraw::drawCircle(offset, m_ctrl_node_radius, true, 2, Colorf(0.8f, 0.2f, 0.2f));
 		}
 	}
@@ -453,7 +453,7 @@ ISprite* ArrangeSpriteImpl::QueryEditedSprite(const Vector& pos) const
 
 	if (m_cfg.is_offset_open)
 	{
-		d2d::Vector offset = selected->getPosition() + selected->getOffset();
+		d2d::Vector offset = GetSprOffset(selected);
 		if (Math::getDistance(offset, pos) < m_ctrl_node_radius) {
 			return selected;
 		}
@@ -652,6 +652,12 @@ void ArrangeSpriteImpl::VertMirror()
 		d2d::ISprite* spr = selected[i];
 		spr->setMirror(spr->getMirrorX(), !spr->getMirrorY());
 	}
+}
+
+d2d::Vector ArrangeSpriteImpl::GetSprOffset(const ISprite* spr) const
+{
+	d2d::Vector offset = spr->getPosition() + spr->getOffset();
+	return offset;
 }
 
 }

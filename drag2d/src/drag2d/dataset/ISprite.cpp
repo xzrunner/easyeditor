@@ -344,12 +344,19 @@ void ISprite::setOffset(const Vector& offset)
 
 void ISprite::setMirror(bool xMirror, bool yMirror) 
 { 
-	bool x = xMirror != m_xMirror,
-		 y = yMirror != m_yMirror;
+	bool x_dirty = xMirror != m_xMirror,
+		 y_dirty = yMirror != m_yMirror;
+
+	if (x_dirty) {
+		m_offset.x = -m_offset.x;
+	}
+	if (y_dirty) {
+		m_offset.y = -m_offset.y;
+	}
 
 	m_xMirror = xMirror; m_yMirror = yMirror; 
 	if (m_bounding) {
-		m_bounding->SetMirror(x, y);
+		m_bounding->SetMirror(x_dirty, y_dirty);
 		m_bounding->SetTransform(m_pos, m_offset, m_angle);
 	}
 }

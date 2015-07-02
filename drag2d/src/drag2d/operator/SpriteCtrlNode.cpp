@@ -11,6 +11,17 @@ namespace d2d
 void SpriteCtrlNode::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 {
 	Rect r = sprite->getSymbol().getSize(sprite);
+	if (sprite->getMirrorX()) { 
+		r.xMin = -r.xMin;
+		r.xMax = -r.xMax;
+		std::swap(r.xMin, r.xMax);
+	}
+	if (sprite->getMirrorY()) {
+		r.yMin = -r.yMin;
+		r.yMax = -r.yMax;
+		std::swap(r.yMin, r.yMax);
+	}
+
 	Matrix t;
 	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
 		sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);
@@ -35,6 +46,17 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 void SpriteCtrlNode::GetSpriteCtrlNodesExt(const ISprite* sprite, Vector nodes[4])
 {
 	Rect r = sprite->getSymbol().getSize(sprite);
+	if (sprite->getMirrorX()) { 
+		r.xMin = -r.xMin;
+		r.xMax = -r.xMax;
+		std::swap(r.xMin, r.xMax);
+	}
+	if (sprite->getMirrorY()) {
+		r.yMin = -r.yMin;
+		r.yMax = -r.yMax;
+		std::swap(r.yMin, r.yMax);
+	}
+
 	Matrix t;
 	t.setTransformation(sprite->getPosition().x, sprite->getPosition().y, sprite->getAngle(),
 		sprite->getScale().x, sprite->getScale().y, 0, 0, sprite->getShear().x, sprite->getShear().y);

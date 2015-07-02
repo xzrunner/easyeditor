@@ -27,13 +27,15 @@ void AABB::SetTransform(const Vector& position, const Vector& offset, float angl
 
 void AABB::SetMirror(bool xmirror, bool ymirror)
 {
-	if (xmirror) { 
+	if (xmirror) {
 		m_rect.xMin = -m_rect.xMin;
 		m_rect.xMax = -m_rect.xMax;
+		std::swap(m_rect.xMin, m_rect.xMax);
 	}
 	if (ymirror) {
 		m_rect.yMin = -m_rect.yMin;
 		m_rect.yMax = -m_rect.yMax;
+		std::swap(m_rect.yMin, m_rect.yMax);
 	}
 }
 
