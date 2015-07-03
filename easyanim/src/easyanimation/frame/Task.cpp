@@ -5,6 +5,7 @@
 #include "view/StagePanel.h"
 #include "view/ToolbarPanel.h"
 #include "view/TimeLinePanel.h"
+#include "view/LayersPanel.h"
 
 #include <easycomplex.h>
 #include <easymesh.h>
@@ -69,13 +70,13 @@ void Task::clear()
 {
 	//	d2d::SymbolMgr::Instance()->clear();
 
-	m_controller.GetAnimTemplate().Clear();
-	m_widgets.m_toolbar->Clear();
+	m_controller.Clear();
 
+	m_widgets.m_toolbar->Clear();
 	m_widgets.m_viewlist->Clear();
 
-	m_widgets.m_library->Clear();
-	m_widgets.m_stage->clear();
+	m_widgets.m_layersPanel->insertLayer();
+
 	m_widgets.m_library->Refresh();
 	m_widgets.m_stage->Refresh();
 }

@@ -179,7 +179,11 @@ void Controller::Clear()
 {
 	m_widgets->m_library->Clear();
 	m_widgets->m_stage->clear();
-	ClearLayers();
+
+	m_curr_layer = 0;
+	m_curr_frame = 1;
+
+	fps = 30;
 }
 
 void Controller::Refresh()
