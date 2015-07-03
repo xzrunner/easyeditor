@@ -26,13 +26,13 @@ private:
 	wxSizer* InitTemplateLayout();
 
 	void OnChangeAnim(wxCommandEvent& event);
-	void OnOpenTemplate(wxCommandEvent& event);
+	void OnSetTemplateDir(wxCommandEvent& event);
 
 private:
 	Controller* m_ctrl;
 
 	wxSizer* m_temp_sizer;
-	wxCheckBox* m_temp_open;
+	wxTextCtrl* m_temp_dir;
 	wxChoice* m_anim_choice;
 
 }; // ToolbarPanel

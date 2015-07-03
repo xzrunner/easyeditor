@@ -24,7 +24,9 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 
 void ToolbarPanel::AddAnimChoice(const std::vector<std::string>& choices)
 {
-	m_temp_open->SetValue(true);
+	if (choices.empty()) {
+		return;
+	}
 
 	if (m_anim_choice) 
 		delete m_anim_choice;
@@ -61,11 +63,21 @@ wxSizer* ToolbarPanel::InitTemplateLayout()
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("模板"));
 	m_temp_sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
 
-	m_temp_open = new wxCheckBox(this, wxID_ANY, "保存模板信息");
-	m_temp_open->SetValue(false);
-	Connect(m_temp_open->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, 
-		wxCommandEventHandler(ToolbarPanel::OnOpenTemplate));
-	m_temp_sizer->Add(m_temp_open);
+	{
+		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("目录"));
+		wxSizer* sz = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+
+		m_temp_dir = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(150, -1), wxTE_READONLY);
+		sz->Add(m_temp_dir);
+
+		sz->AddSpacer(5);
+
+		wxButton* btn = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(25, 25));
+		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetTemplateDir));
+		sz->Add(btn);
+
+		m_temp_sizer->Add(sz);
+	}
 
 	return m_temp_sizer;
 }
@@ -82,14 +94,19 @@ void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 	}
 }
 
-void ToolbarPanel::OnOpenTemplate(wxCommandEvent& event)
+void ToolbarPanel::OnSetTemplateDir(wxCommandEvent& event)
 {
-	if (event.IsChecked()) {
-		// todo m_ctrl->GetAnimTemplate().Add()
-		//
-	} else {
-		m_ctrl->GetAnimTemplate().Clear();
+	d2d::ZoomViewOP* op = static_cast<d2d::ZoomViewOP*>(m_stage->getEditOP());
+	op->setMouseMoveFocus(false);
+
+	wxDirDialog dlg(NULL, "Template Dir", wxEmptyString, wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+	if (dlg.ShowModal() == wxID_OK) {
+		wxString dir = dlg.GetPath();
+		m_temp_dir->SetValue(dir);
+		m_ctrl->GetAnimTemplate().SetTemplateDir(dir.ToStdString());
 	}
+
+	op->setMouseMoveFocus(true);
 }
 
 } // eanim

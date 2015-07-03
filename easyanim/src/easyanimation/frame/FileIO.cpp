@@ -34,7 +34,7 @@ void FileIO::load(const wxString& filepath, Controller* ctrl)
 	ctrl->fps = value["fps"].asInt();
 	ctrl->GetLayersPanel()->setFPS(ctrl->fps);
 
-	ctrl->GetAnimTemplate().LoadFromFile(value["resource"], ctrl->GetToolbarPanel());
+	ctrl->GetAnimTemplate().LoadFromFile(value["template"], ctrl->GetToolbarPanel());
 
 	ctrl->name = value["name"].asString();
 
@@ -57,7 +57,9 @@ void FileIO::store(const wxString& filepath, Controller* ctrl)
 {
 	Json::Value value;
 
-	ctrl->GetAnimTemplate().StoreToFile(value["resource"]);
+	AnimTemplate& temp = ctrl->GetAnimTemplate();
+	temp.PreparePaths(filepath.ToStdString());
+	temp.StoreToFile(value["template"]);
 
 //	value["name"] = d2d::FilenameTools::getFilename(filepath).ToStdString();
 	value["name"] = ctrl->name;

@@ -56,6 +56,11 @@ wxString FilenameTools::getFilenameWithExtension(const wxString& filepath)
 	return filepath.substr(pos_divide + 1);
 }
 
+wxString FilenameTools::GetDirName(const wxString& dir)
+{
+	return getFilenameWithExtension(dir);
+}
+
 wxString FilenameTools::getRelativePath(const wxString& dir, const wxString& absolute)
 {
 	wxFileName filename(absolute);
@@ -167,11 +172,11 @@ void FilenameTools::fetchAllFiles(const std::string& dirpath, wxArrayString& fil
 	{
 	public:
 		DirTraverser(wxArrayString& files) 
-			: _files(files) {}
+			: m_files(files) {}
 
 		virtual wxDirTraverseResult OnFile(const wxString& filename)
 		{
-			_files.Add(filename);
+			m_files.Add(filename);
 			return wxDIR_CONTINUE;
 		}
 
@@ -181,7 +186,7 @@ void FilenameTools::fetchAllFiles(const std::string& dirpath, wxArrayString& fil
 		}
 
 	private:
-		wxArrayString& _files;
+		wxArrayString& m_files;
 
 	}; // DirTraverser
 
@@ -219,6 +224,36 @@ void FilenameTools::fetchAllFiles(const std::string& dirpath, wxArrayString& fil
 	}; // DirTraverser
 
 	DirTraverser traverser(files, type);
+
+	wxDir dir(dirpath);
+	dir.Traverse(traverser);
+}
+
+void FilenameTools::FetchCurrDirs(const std::string& dirpath, wxArrayString& dirs)
+{
+	class DirTraverser : public wxDirTraverser
+	{
+	public:
+		DirTraverser(wxArrayString& files) 
+			: m_files(files) {}
+
+		virtual wxDirTraverseResult OnFile(const wxString& filename)
+		{
+			return wxDIR_CONTINUE;
+		}
+
+		virtual wxDirTraverseResult OnDir(const wxString& dirname)
+		{
+			m_files.Add(dirname);
+			return wxDIR_IGNORE;
+		}
+
+	private:
+		wxArrayString& m_files;
+
+	}; // DirTraverser
+
+	DirTraverser traverser(dirs);
 
 	wxDir dir(dirpath);
 	dir.Traverse(traverser);

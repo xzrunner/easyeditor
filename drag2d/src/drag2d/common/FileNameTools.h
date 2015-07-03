@@ -22,6 +22,9 @@ namespace d2d
 		// get string after the last '\'
 		static wxString getFilenameWithExtension(const wxString& filepath);
 
+		// get string after the last '\'
+		static wxString GetDirName(const wxString& dir);
+
 		// get path absolute - dir
 		static wxString getRelativePath(const wxString& dir, const wxString& absolute);
 
@@ -51,6 +54,7 @@ namespace d2d
 
 		static void fetchAllFiles(const std::string& dirpath, wxArrayString& files);
 		static void fetchAllFiles(const std::string& dirpath, wxArrayString& files, FileNameParser::Type type);
+		static void FetchCurrDirs(const std::string& dirpath, wxArrayString& dirs);
 
 		static wxString FormatFilepath(const wxString& filepath);
 
