@@ -12,7 +12,7 @@ void main()
 {   
 	vec4 tmp = texture2D(texture0, v_texcoord); 
 
-	float s = 1.5;
+	float s = 1.2;
 	vec4 r = vec4(tmp.r, 0, 0, 1);
 	vec4 g = vec4(0, tmp.g, 0, 1);
 	vec4 b = vec4(0, 0, tmp.b, 1);
