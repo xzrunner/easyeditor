@@ -19,11 +19,14 @@ public:
 
 	void AddAnimChoice(const std::vector<std::string>& choices);
 
+	void Clear();
+
 protected:
 	virtual wxSizer* initLayout();
 
 private:
 	wxSizer* InitTemplateLayout();
+	void FillTempSizer();
 
 	void OnChangeAnim(wxCommandEvent& event);
 	void OnSetTemplateDir(wxCommandEvent& event);

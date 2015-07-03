@@ -44,6 +44,13 @@ void ToolbarPanel::AddAnimChoice(const std::vector<std::string>& choices)
 	Layout();
 }
 
+void ToolbarPanel::Clear()
+{
+	m_temp_sizer->Clear(true);
+	FillTempSizer();
+	Layout();
+}
+
 wxSizer* ToolbarPanel::initLayout()
 {
 	wxBoxSizer* sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -62,24 +69,25 @@ wxSizer* ToolbarPanel::InitTemplateLayout()
 {
 	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("ģ��"));
 	m_temp_sizer = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
-
-	{
-		wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Ŀ¼"));
-		wxSizer* sz = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
-
-		m_temp_dir = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(150, -1), wxTE_READONLY);
-		sz->Add(m_temp_dir);
-
-		sz->AddSpacer(5);
-
-		wxButton* btn = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(25, 25));
-		Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetTemplateDir));
-		sz->Add(btn);
-
-		m_temp_sizer->Add(sz);
-	}
-
+	FillTempSizer();
 	return m_temp_sizer;
+}
+
+void ToolbarPanel::FillTempSizer()
+{
+	wxStaticBox* bounding = new wxStaticBox(this, wxID_ANY, wxT("Ŀ¼"));
+	wxSizer* sz = new wxStaticBoxSizer(bounding, wxHORIZONTAL);
+
+	m_temp_dir = new wxTextCtrl(this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize(150, -1), wxTE_READONLY);
+	sz->Add(m_temp_dir);
+
+	sz->AddSpacer(5);
+
+	wxButton* btn = new wxButton(this, wxID_ANY, wxT("..."), wxDefaultPosition, wxSize(25, 25));
+	Connect(btn->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(ToolbarPanel::OnSetTemplateDir));
+	sz->Add(btn);
+
+	m_temp_sizer->Add(sz);
 }
 
 void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)

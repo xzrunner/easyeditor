@@ -69,6 +69,9 @@ void Task::clear()
 {
 	//	d2d::SymbolMgr::Instance()->clear();
 
+	m_controller.GetAnimTemplate().Clear();
+	m_widgets.m_toolbar->Clear();
+
 	m_widgets.m_viewlist->Clear();
 
 	m_widgets.m_library->Clear();
