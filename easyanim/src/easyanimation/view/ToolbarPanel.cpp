@@ -46,6 +46,7 @@ void ToolbarPanel::AddAnimChoice(const std::vector<std::string>& choices)
 
 void ToolbarPanel::Clear()
 {
+	delete m_anim_choice, m_anim_choice = NULL;
 	m_temp_sizer->Clear(true);
 	FillTempSizer();
 	Layout();
