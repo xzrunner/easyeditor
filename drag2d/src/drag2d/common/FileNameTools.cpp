@@ -18,19 +18,27 @@ wxString FilenameTools::getFilenameAddTag(const wxString& filename, const wxStri
 	if (start != -1)
 	{
 		wxString check = filename.substr(start + 1, filename.find_last_of('.') - start - 1);
-		if (check == tag)
+		if (check == tag) {
 			fixed = filename;
-		else if (filename[0] == '.')
+		} else if (filename[0] == '.') {
 			fixed = filename + wxT("_" + tag + "." + extension);
-		else
+		} else {
 			fixed = filename.substr(0, filename.find_last_of('.')) + wxT("_" + tag + "." + extension);
+		}
 	}
 	else
 	{
-		if (filename[0] == '.')
+		if (filename[0] == '.') {
 			fixed = filename.substr(0, filename.find_last_of('.')) + wxT("_" + tag + "." + extension);
-		else
-			fixed = filename + wxT("_" + tag + "." + extension);
+		} else {
+			int dot_pos = filename.find_last_of('.');
+			if (dot_pos == -1) {
+				fixed = filename + wxT("_" + tag + "." + extension);
+			} else {
+				fixed = filename;
+				fixed.insert(dot_pos, "_" + tag);
+			}
+		}
 	}
 	return fixed;
 }

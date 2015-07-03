@@ -87,7 +87,7 @@ void ToolbarPanel::OnChangeAnim(wxCommandEvent& event)
 	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
 
 	try {
-		FileIO::reload(m_ctrl);
+		FileIO::Reload(m_ctrl);
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();

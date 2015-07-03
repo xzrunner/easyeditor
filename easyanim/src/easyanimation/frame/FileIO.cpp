@@ -15,11 +15,11 @@
 namespace eanim
 {
 
-std::string FileIO::filepath;
+std::string FileIO::m_filepath;
 
-void FileIO::load(const wxString& filepath, Controller* ctrl)
+void FileIO::Load(const wxString& filepath, Controller* ctrl)
 {
-	FileIO::filepath = filepath;
+	FileIO::m_filepath = filepath;
 
 	Json::Value value;
 	Json::Reader reader;
@@ -41,7 +41,7 @@ void FileIO::load(const wxString& filepath, Controller* ctrl)
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		Layer* layer = loadLayer(layerValue, dir, ctrl);
+		Layer* layer = LoadLayer(layerValue, dir, ctrl);
 //		ctrl->InsertLayer(layer);
 		layerValue = value["layer"][i++];
 	}
@@ -53,23 +53,19 @@ void FileIO::load(const wxString& filepath, Controller* ctrl)
  	ctrl->GetStagePanel()->getCanvas()->resetViewport();
 }
 
-void FileIO::store(const wxString& filepath, Controller* ctrl)
+void FileIO::StoreSingle(const wxString& filepath, Controller* ctrl)
 {
 	Json::Value value;
 
-	AnimTemplate& temp = ctrl->GetAnimTemplate();
-	temp.PreparePaths(filepath.ToStdString());
-	temp.StoreToFile(value["template"]);
-
-//	value["name"] = d2d::FilenameTools::getFilename(filepath).ToStdString();
 	value["name"] = ctrl->name;
 
 	value["fps"] = ctrl->fps;
 
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
-	for (size_t i = 0, n = layers.size(); i < n; ++i)
-		value["layer"][i] = store(layers[i], dir, ctrl);
+	for (size_t i = 0, n = layers.size(); i < n; ++i) {
+		value["layer"][i] = StoreSingle(layers[i], dir, ctrl);
+	}
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
@@ -79,25 +75,51 @@ void FileIO::store(const wxString& filepath, Controller* ctrl)
 	fout.close();
 }
 
-void FileIO::reload(Controller* ctrl)
+void FileIO::StoreTemplate(const wxString& filepath, Controller* ctrl)
 {
-	if (filepath.empty()) return;
+	Json::Value value;
+
+	AnimTemplate& temp = ctrl->GetAnimTemplate();
+	temp.PreparePaths(filepath.ToStdString());
+	temp.StoreToFile(value["template"]);
+
+	value["name"] = ctrl->name;
+
+	value["fps"] = ctrl->fps;
+
+	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
+	for (size_t i = 0, n = layers.size(); i < n; ++i) {
+		value["layer"][i] = StoreSingle(layers[i], dir, ctrl);
+	}
+
+	Json::StyledStreamWriter writer;
+	std::locale::global(std::locale(""));
+	std::ofstream fout(filepath.fn_str());
+	std::locale::global(std::locale("C"));	
+	writer.write(fout, value);
+	fout.close();
+}
+
+void FileIO::Reload(Controller* ctrl)
+{
+	if (m_filepath.empty()) return;
 
 	ctrl->Clear();
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.c_str());
+	std::ifstream fin(m_filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(filepath);
+	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
 	int i = 0;
 	Json::Value layerValue = value["layer"][i++];
 	while (!layerValue.isNull()) {
-		Layer* layer = loadLayer(layerValue, dir, ctrl);
+		Layer* layer = LoadLayer(layerValue, dir, ctrl);
 		layerValue = value["layer"][i++];
 	}
 
@@ -106,7 +128,7 @@ void FileIO::reload(Controller* ctrl)
 	ctrl->Refresh();
 }
 
-void FileIO::loadFlash(const wxString& filepath, Controller* ctrl)
+void FileIO::LoadFlash(const wxString& filepath, Controller* ctrl)
 {
 	rapidxml::file<> xmlFile(filepath.c_str());
 	rapidxml::xml_document<> doc;
@@ -131,7 +153,7 @@ void FileIO::loadFlash(const wxString& filepath, Controller* ctrl)
 	rapidxml::xml_node<>* layerNode = doc.first_node()->first_node("timelines")
 		->first_node("DOMTimeline")->first_node("layers")->first_node("DOMLayer");
 	while (layerNode) {
-		Layer* layer = loadLayer(layerNode, mapNamePath, ctrl);
+		Layer* layer = LoadLayer(layerNode, mapNamePath, ctrl);
 		ctrl->InsertLayer(layer);
 		layerNode = layerNode->next_sibling();
 	}
@@ -139,7 +161,7 @@ void FileIO::loadFlash(const wxString& filepath, Controller* ctrl)
 	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
-void FileIO::storeAsGif(const wxString& src, const wxString& dst)
+void FileIO::StoreAsGif(const wxString& src, const wxString& dst)
 {
 	if (!d2d::FileNameParser::isType(src, d2d::FileNameParser::e_anim)) {
 		return;
@@ -169,7 +191,7 @@ void FileIO::storeAsGif(const wxString& src, const wxString& dst)
 	symbol->Release();
 }
 
-void FileIO::storeAsPng(const wxString& src, const wxString& dst)
+void FileIO::StoreAsPng(const wxString& src, const wxString& dst)
 {
 	if (!d2d::FileNameParser::isType(src, d2d::FileNameParser::e_anim)) {
 		return;
@@ -181,7 +203,7 @@ void FileIO::storeAsPng(const wxString& src, const wxString& dst)
 	symbol->Release();
 }
 
-Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir, Controller* ctrl)
+Layer* FileIO::LoadLayer(const Json::Value& layerValue, const wxString& dir, Controller* ctrl)
 {
 	Layer* layer = new Layer(ctrl);
 
@@ -192,7 +214,7 @@ Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir, Con
 	int i = 0;
 	Json::Value frameValue = layerValue["frame"][i++];
 	while (!frameValue.isNull()) {
-		KeyFrame* frame = loadFrame(frameValue, dir, ctrl);
+		KeyFrame* frame = LoadFrame(frameValue, dir, ctrl);
 		layer->InsertKeyFrame(frame);
 		frame->Release();
 		frameValue = layerValue["frame"][i++];
@@ -208,7 +230,7 @@ Layer* FileIO::loadLayer(const Json::Value& layerValue, const wxString& dir, Con
 	return layer;
 }
 
-KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir, Controller* ctrl)
+KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const wxString& dir, Controller* ctrl)
 {
 	int time = frameValue["time"].asInt();
 
@@ -221,18 +243,18 @@ KeyFrame* FileIO::loadFrame(const Json::Value& frameValue, const wxString& dir, 
 	int i = 0;
 	Json::Value actorValue = frameValue["actor"][i++];
 	while (!actorValue.isNull()) {
-		d2d::ISprite* actor = loadActor(actorValue, dir, ctrl);
+		d2d::ISprite* actor = LoadActor(actorValue, dir, ctrl);
 		frame->Insert(actor);
 		actor->Release();
 		actorValue = frameValue["actor"][i++];
 	}
 
-	loadSkeleton(frameValue["skeleton"], frame->GetAllSprites(), frame->GetSkeletonData());
+	LoadSkeleton(frameValue["skeleton"], frame->GetAllSprites(), frame->GetSkeletonData());
 
 	return frame;
 }
 
-d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& dir,
+d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const wxString& dir,
 								Controller* ctrl)
 {
 	std::string filepath = actorValue["filepath"].asString();
@@ -271,7 +293,7 @@ d2d::ISprite* FileIO::loadActor(const Json::Value& actorValue, const wxString& d
 	return sprite;
 }
 
-void FileIO::loadSkeleton(const Json::Value& skeletonValue, const std::vector<d2d::ISprite*>& sprites,
+void FileIO::LoadSkeleton(const Json::Value& skeletonValue, const std::vector<d2d::ISprite*>& sprites,
 						  SkeletonData& skeleton)
 {
 	// prepare joints
@@ -354,7 +376,7 @@ void FileIO::loadSkeleton(const Json::Value& skeletonValue, const std::vector<d2
 	}
 }
 
-Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
+Layer* FileIO::LoadLayer(rapidxml::xml_node<>* layerNode,
 						 const std::map<std::string, std::string>& mapNamePath,
 						 Controller* ctrl)
 {
@@ -365,7 +387,7 @@ Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
 	rapidxml::xml_node<>* frameNode = layerNode->first_node("frames")
 		->first_node("DOMFrame");
 	while (frameNode) {
-		KeyFrame* frame = loadFrame(frameNode, mapNamePath, ctrl);
+		KeyFrame* frame = LoadFrame(frameNode, mapNamePath, ctrl);
 		layer->InsertKeyFrame(frame);
 		frame->Release();
 		frameNode = frameNode->next_sibling();
@@ -374,7 +396,7 @@ Layer* FileIO::loadLayer(rapidxml::xml_node<>* layerNode,
 	return layer;
 }
 
-KeyFrame* FileIO::loadFrame(rapidxml::xml_node<>* frameNode,
+KeyFrame* FileIO::LoadFrame(rapidxml::xml_node<>* frameNode,
 							const std::map<std::string, std::string>& mapNamePath,
 							Controller* ctrl)
 {
@@ -384,7 +406,7 @@ KeyFrame* FileIO::loadFrame(rapidxml::xml_node<>* frameNode,
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
 		->first_node("DOMSymbolInstance");
 	while (actorNode) {
-		d2d::ISprite* actor = loadActor(actorNode, mapNamePath);
+		d2d::ISprite* actor = LoadActor(actorNode, mapNamePath);
 		frame->Insert(actor);
 		actor->Release();
 		actorNode = actorNode->next_sibling();
@@ -393,7 +415,7 @@ KeyFrame* FileIO::loadFrame(rapidxml::xml_node<>* frameNode,
 	return frame;
 }
 
-d2d::ISprite* FileIO::loadActor(rapidxml::xml_node<>* actorNode,
+d2d::ISprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 								const std::map<std::string, std::string>& mapNamePath)
 {
 	std::string name = actorNode->first_attribute("libraryItemName")->value();
@@ -422,7 +444,7 @@ d2d::ISprite* FileIO::loadActor(rapidxml::xml_node<>* actorNode,
 	return sprite;
 }
 
-Json::Value FileIO::store(Layer* layer, const wxString& dir, Controller* ctrl)
+Json::Value FileIO::StoreSingle(Layer* layer, const wxString& dir, Controller* ctrl)
 {
 	Json::Value value;
 
@@ -433,14 +455,14 @@ Json::Value FileIO::store(Layer* layer, const wxString& dir, Controller* ctrl)
 	all_frames.reserve(frames.size());
 	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
 	for (size_t i = 0; itr != frames.end(); ++itr, ++i) {
-		value["frame"][i] = store(itr->second, dir, ctrl);
+		value["frame"][i] = StoreSingle(itr->second, dir, ctrl);
 		all_frames.push_back(itr->second);
 	}
 
 	return value;
 }
 
-Json::Value FileIO::store(KeyFrame* frame, const wxString& dir, Controller* ctrl)
+Json::Value FileIO::StoreSingle(KeyFrame* frame, const wxString& dir, Controller* ctrl)
 {
 	Json::Value value;
 
@@ -451,14 +473,14 @@ Json::Value FileIO::store(KeyFrame* frame, const wxString& dir, Controller* ctrl
 	value["tween"] = frame->HasClassicTween();
 
 	for (size_t i = 0, n = frame->Size(); i < n; ++i)
-		value["actor"][i] = store(frame->GetSprite(i), dir, ctrl);
+		value["actor"][i] = StoreSingle(frame->GetSprite(i), dir, ctrl);
 
-	value["skeleton"] = storeSkeleton(frame->GetSkeletonData());
+	value["skeleton"] = StoreSkeleton(frame->GetSkeletonData());
 
 	return value;
 }
 
-Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dir,
+Json::Value FileIO::StoreSingle(const d2d::ISprite* sprite, const wxString& dir,
 						  Controller* ctrl)
 {
 	Json::Value value;
@@ -484,7 +506,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, const wxString& dir,
 	return value;
 }
 
-Json::Value FileIO::storeSkeleton(const SkeletonData& skeleton)
+Json::Value FileIO::StoreSkeleton(const SkeletonData& skeleton)
 {
 	Json::Value value;
 

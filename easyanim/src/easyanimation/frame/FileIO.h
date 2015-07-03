@@ -17,39 +17,40 @@ class Controller;
 class FileIO
 {
 public:
-	static void load(const wxString& filepath, Controller* ctrl);
-	static void store(const wxString& filepath, Controller* ctrl);
-	static void reload(Controller* ctrl);
+	static void Load(const wxString& filepath, Controller* ctrl);
+	static void StoreSingle(const wxString& filepath, Controller* ctrl);
+	static void StoreTemplate(const wxString& filepath, Controller* ctrl);
+	static void Reload(Controller* ctrl);
 
-	static void loadFlash(const wxString& filepath, Controller* ctrl);
+	static void LoadFlash(const wxString& filepath, Controller* ctrl);
 
-	static void storeAsGif(const wxString& src, const wxString& dst);
-	static void storeAsPng(const wxString& src, const wxString& dst);
+	static void StoreAsGif(const wxString& src, const wxString& dst);
+	static void StoreAsPng(const wxString& src, const wxString& dst);
 
 private:
-	static Layer* loadLayer(const Json::Value& layerValue,
+	static Layer* LoadLayer(const Json::Value& layerValue,
 		const wxString& dir, Controller* ctrl);
-	static KeyFrame* loadFrame(const Json::Value& frameValue,
+	static KeyFrame* LoadFrame(const Json::Value& frameValue,
 		const wxString& dir, Controller* ctrl);
-	static d2d::ISprite* loadActor(const Json::Value& actorValue,
+	static d2d::ISprite* LoadActor(const Json::Value& actorValue,
 		const wxString& dir, Controller* ctrl);
-	static void loadSkeleton(const Json::Value& skeletonValue, 
+	static void LoadSkeleton(const Json::Value& skeletonValue, 
 		const std::vector<d2d::ISprite*>& sprites, SkeletonData& skeleton);
 
-	static Layer* loadLayer(rapidxml::xml_node<>* layerNode, 
+	static Layer* LoadLayer(rapidxml::xml_node<>* layerNode, 
 		const std::map<std::string, std::string>& mapNamePath, Controller* ctrl);
-	static KeyFrame* loadFrame(rapidxml::xml_node<>* frameNode,
+	static KeyFrame* LoadFrame(rapidxml::xml_node<>* frameNode,
 		const std::map<std::string, std::string>& mapNamePath, Controller* ctrl);
-	static d2d::ISprite* loadActor(rapidxml::xml_node<>* actorNode,
+	static d2d::ISprite* LoadActor(rapidxml::xml_node<>* actorNode,
 		const std::map<std::string, std::string>& mapNamePath);
 
-	static Json::Value store(Layer* layer, const wxString& dir, Controller* ctrl);
-	static Json::Value store(KeyFrame* frame, const wxString& dir, Controller* ctrl);
-	static Json::Value store(const d2d::ISprite* sprite, const wxString& dir, Controller* ctrl);
-	static Json::Value storeSkeleton(const SkeletonData& skeleton);
+	static Json::Value StoreSingle(Layer* layer, const wxString& dir, Controller* ctrl);
+	static Json::Value StoreSingle(KeyFrame* frame, const wxString& dir, Controller* ctrl);
+	static Json::Value StoreSingle(const d2d::ISprite* sprite, const wxString& dir, Controller* ctrl);
+	static Json::Value StoreSkeleton(const SkeletonData& skeleton);
 
 private:
-	static std::string filepath;
+	static std::string m_filepath;
 
 }; // FileIO
 

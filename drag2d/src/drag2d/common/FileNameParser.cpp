@@ -9,6 +9,7 @@ static const wxString TAG_SHAPE		= "shape";
 static const wxString TAG_MESH		= "mesh";
 static const wxString TAG_COMPLEX	= "complex";
 static const wxString TAG_ANIM		= "anim";
+static const wxString TAG_ANIS		= "anis";
 static const wxString TAG_PATCH		= "scale9";
 static const wxString TAG_FONTBLANK = "fontblank";
 static const wxString TAG_SCRIPTS	= "scripts";
@@ -39,6 +40,7 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 		if (ext == TAG_SHAPE) return e_shape;
 		else if (ext == TAG_COMPLEX) return e_complex;
 		else if (ext == TAG_ANIM) return e_anim;
+		else if (ext == TAG_ANIS) return e_anis;
 		else if (ext == TAG_PATCH) return e_scale9;
 		else if (ext == TAG_FONTBLANK) return e_fontblank;
 		else if (ext == TAG_MESH) return e_mesh;
@@ -89,6 +91,9 @@ wxString FileNameParser::getFileTag(Type type)
 		break;
 	case e_anim:
 		ext = TAG_ANIM;
+		break;
+	case e_anis:
+		ext = TAG_ANIS;
 		break;
 	case e_scale9:
 		ext = TAG_PATCH;

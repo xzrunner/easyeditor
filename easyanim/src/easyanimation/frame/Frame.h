@@ -12,6 +12,7 @@ public:
 	Frame(const wxString& title, const wxString& filetag);
 
 protected:
+	virtual void onOpen(wxCommandEvent& event);
 	virtual void onSaveAs(wxCommandEvent& event);
 
 private:
@@ -21,7 +22,8 @@ private:
 	void OnCodeLove2d(wxCommandEvent& event);
 
 	void SaveAsPNG(const std::string& filepath) const;
-	void SaveAsJson(const std::string& filepath) const;
+	void SaveAsSingle(const std::string& filepath) const;
+	void SaveAsTemplate(const std::string& filepath) const;
 
 private:
 	enum

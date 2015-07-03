@@ -20,6 +20,7 @@ public:
 		e_combination,
 		e_complex,
 		e_anim,
+		e_anis,
 		e_scale9,
 		e_fontblank,
 		e_freetype,

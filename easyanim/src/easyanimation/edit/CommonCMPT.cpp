@@ -247,7 +247,7 @@ void CommonCMPT::onFillingFrames(wxCommandEvent& event)
 void CommonCMPT::onChangeAnim(wxCommandEvent& event)
 {
 	m_ctrl->GetAnimTemplate().SetChoice(event.GetInt());
-	FileIO::reload(m_ctrl);
+	FileIO::Reload(m_ctrl);
 }
 
 void CommonCMPT::onAddCross(wxCommandEvent& event)

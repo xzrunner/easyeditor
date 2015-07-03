@@ -1,8 +1,7 @@
 #include "Frame.h"
-
 #include "CodeSettingDlg.h"
 #include "Love2dCode.h"
-
+#include "FileIO.h"
 #include "frame/Task.h"
 #include "view/PreviewDialog.h"
 #include "view/StageCanvas.h"
@@ -29,22 +28,48 @@ Frame::Frame(const wxString& title, const wxString& filetag)
 	m_code_menu->Append(ID_LOVE2D, wxT("love2d"), wxEmptyString);
 }
 
+void Frame::onOpen(wxCommandEvent& event)
+{
+	if (!m_task) return;
+
+	try {
+		wxString single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
+			template_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis)),
+			all_filter = "All | *_ani?.json";
+		wxString filter = all_filter + "|" + single_filter + "|" + template_filter;
+		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
+		if (dlg.ShowModal() == wxID_OK)
+		{
+			std::string filename = dlg.GetPath();
+			openFile(filename);
+		}
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(this, e);
+		dlg.ShowModal();
+	}
+}
+
 void Frame::onSaveAs(wxCommandEvent& event)
 {
  	if (!m_task) return;
  
  	try {
-		wxString filter = GetFileFilter() + "|PNG files (*.png)|*.png";
+		wxString single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
+			template_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis)),
+			png_filter = "PNG files (*.png)|*.png";
+		wxString filter = single_filter + "|" + template_filter + "|" + png_filter;
  		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
  		if (dlg.ShowModal() == wxID_OK)
  		{
- 			wxString filename = dlg.GetPath();
- 			wxString ext = d2d::FilenameTools::getExtension(filename);
- 			if (ext == "png") {
- 				SaveAsPNG(filename.ToStdString());
- 			} else {
- 				SaveAsJson(filename.ToStdString());
- 			}
+			std::string filename = dlg.GetPath();
+			int idx = dlg.GetFilterIndex();
+			if (idx == 0) {
+				SaveAsSingle(filename);
+			} else if (idx == 1) {
+				SaveAsTemplate(filename);
+			} else if (idx == 2) {
+				SaveAsPNG(filename);
+			}
  		}
  	} catch (d2d::Exception& e) {
  		d2d::ExceptionDlg dlg(this, e);
@@ -106,23 +131,6 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
-	// 	d2d::Snapshoot ss;
-	// 	libanim::Symbol* symbol = ((StagePanel*)(m_task->getEditPanel()))->getSymbol();
-	// 	symbol->InitBounding();
-	// 	ss.outputToImageFile(symbol, filepath);
-	// 	m_task->getEditPanel()->getCanvas()->resetInitState();
-
-	// 	d2d::Rect r;
-	// 	std::vector<d2d::ISprite*> sprites;
-	// 	((StagePanel*)(m_task->getEditPanel()))->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
-	// 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
-	// 		std::vector<d2d::Vector> vertices;
-	// 		sprites[i]->getBounding()->getBoundPos(vertices);
-	// 		for (size_t j = 0, m = vertices.size(); j < m; ++j)
-	// 			r.combine(vertices[j]);	
-	// 	}
-
-
 	std::vector<d2d::ISprite*> sprites;
 	((StagePanel*)(m_task->getEditPanel()))->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 
@@ -145,11 +153,26 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	m_task->getEditPanel()->getCanvas()->resetInitState();
 }
 
-void Frame::SaveAsJson(const std::string& filepath) const
+void Frame::SaveAsSingle(const std::string& filepath) const
 {
-	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
-	m_currFilename = fixed;
-	m_task->store(fixed);
+	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim);
+	wxString full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
+	m_currFilename = full_path;
+
+	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
+	FileIO::StoreSingle(full_path, ctrl);
+	ctrl->GetStagePanel()->onSave();
+}
+
+void Frame::SaveAsTemplate(const std::string& filepath) const
+{
+	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis);
+	wxString full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
+	m_currFilename = full_path;
+
+	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
+	FileIO::StoreTemplate(full_path, ctrl);
+	ctrl->GetStagePanel()->onSave();
 }
 
 }

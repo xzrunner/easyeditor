@@ -35,21 +35,29 @@ Task::~Task()
 
 void Task::load(const char* filepath)
 {
-	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
-		try {
-			FileIO::load(filepath, &m_controller);
-		} catch (d2d::Exception& e) {
-			d2d::ExceptionDlg dlg(m_parent, e);
-			dlg.ShowModal();
-		}
-		m_widgets.m_stage->getCanvas()->resetViewport();
+	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim) &&
+		!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anis)) {
+		return;
 	}
+
+	try {
+		FileIO::Load(filepath, &m_controller);
+	} catch (d2d::Exception& e) {
+		d2d::ExceptionDlg dlg(m_parent, e);
+		dlg.ShowModal();
+	}
+	m_widgets.m_stage->getCanvas()->resetViewport();
 }
 
 void Task::store(const char* filepath) const
 {
-	FileIO::store(filepath, const_cast<Controller*>(&m_controller));
-	m_widgets.m_stage->onSave();
+	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
+		FileIO::StoreSingle(filepath, const_cast<Controller*>(&m_controller));
+		m_widgets.m_stage->onSave();
+	} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anis)) {
+		FileIO::StoreTemplate(filepath, const_cast<Controller*>(&m_controller));
+		m_widgets.m_stage->onSave();
+	}
 }
 
 bool Task::isDirty() const
