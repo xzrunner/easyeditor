@@ -64,7 +64,7 @@ void FileIO::StoreSingle(const wxString& filepath, Controller* ctrl)
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i) {
-		value["layer"][i] = StoreSingle(layers[i], dir, ctrl);
+		value["layer"][i] = StoreLayer(layers[i], dir, ctrl, true);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -90,7 +90,7 @@ void FileIO::StoreTemplate(const wxString& filepath, Controller* ctrl)
 	std::string dir = d2d::FilenameTools::getFileDir(filepath);
 	const std::vector<Layer*>& layers = ctrl->GetLayers().getAllLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i) {
-		value["layer"][i] = StoreSingle(layers[i], dir, ctrl);
+		value["layer"][i] = StoreLayer(layers[i], dir, ctrl, false);
 	}
 
 	Json::StyledStreamWriter writer;
@@ -444,7 +444,8 @@ d2d::ISprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	return sprite;
 }
 
-Json::Value FileIO::StoreSingle(Layer* layer, const wxString& dir, Controller* ctrl)
+Json::Value FileIO::StoreLayer(Layer* layer, const wxString& dir, 
+							   Controller* ctrl, bool single)
 {
 	Json::Value value;
 
@@ -455,14 +456,15 @@ Json::Value FileIO::StoreSingle(Layer* layer, const wxString& dir, Controller* c
 	all_frames.reserve(frames.size());
 	std::map<int, KeyFrame*>::const_iterator itr = frames.begin();
 	for (size_t i = 0; itr != frames.end(); ++itr, ++i) {
-		value["frame"][i] = StoreSingle(itr->second, dir, ctrl);
+		value["frame"][i] = StoreFrame(itr->second, dir, ctrl, single);
 		all_frames.push_back(itr->second);
 	}
 
 	return value;
 }
 
-Json::Value FileIO::StoreSingle(KeyFrame* frame, const wxString& dir, Controller* ctrl)
+Json::Value FileIO::StoreFrame(KeyFrame* frame, const wxString& dir, 
+							   Controller* ctrl, bool single)
 {
 	Json::Value value;
 
@@ -473,26 +475,31 @@ Json::Value FileIO::StoreSingle(KeyFrame* frame, const wxString& dir, Controller
 	value["tween"] = frame->HasClassicTween();
 
 	for (size_t i = 0, n = frame->Size(); i < n; ++i)
-		value["actor"][i] = StoreSingle(frame->GetSprite(i), dir, ctrl);
+		value["actor"][i] = StoreActor(frame->GetSprite(i), dir, ctrl, single);
 
 	value["skeleton"] = StoreSkeleton(frame->GetSkeletonData());
 
 	return value;
 }
 
-Json::Value FileIO::StoreSingle(const d2d::ISprite* sprite, const wxString& dir,
-						  Controller* ctrl)
+Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const wxString& dir,
+							   Controller* ctrl, bool single)
 {
 	Json::Value value;
 
 	const d2d::ISymbol& symbol = sprite->getSymbol();
 	// filepath
-	if (ctrl->GetAnimTemplate().Empty()) {
-		value["filepath"] = d2d::FilenameTools::getRelativePath(dir, 
-			symbol.getFilepath()).ToStdString();
+	std::string relative_path = d2d::FilenameTools::getRelativePath(dir, 
+		symbol.getFilepath()).ToStdString();
+	if (single) {
+		value["filepath"] = relative_path;
 	} else {
-		value["filepath"] = d2d::FilenameTools::getFilenameWithExtension(
-			symbol.getFilepath()).ToStdString();
+		if (ctrl->GetAnimTemplate().ContainPath(relative_path)) {
+			value["filepath"] = d2d::FilenameTools::getFilenameWithExtension(
+				symbol.getFilepath()).ToStdString();
+		} else {
+			value["filepath"] = relative_path;
+		}
 	}
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();

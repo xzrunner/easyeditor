@@ -30,6 +30,8 @@ public:
 
 	void SetTemplateDir(const std::string& dir) { m_temp_dir = dir; }
 
+	bool ContainPath(const std::string& path) const;
+
 private:
 	struct Item
 	{

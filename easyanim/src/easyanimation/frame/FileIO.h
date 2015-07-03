@@ -44,9 +44,9 @@ private:
 	static d2d::ISprite* LoadActor(rapidxml::xml_node<>* actorNode,
 		const std::map<std::string, std::string>& mapNamePath);
 
-	static Json::Value StoreSingle(Layer* layer, const wxString& dir, Controller* ctrl);
-	static Json::Value StoreSingle(KeyFrame* frame, const wxString& dir, Controller* ctrl);
-	static Json::Value StoreSingle(const d2d::ISprite* sprite, const wxString& dir, Controller* ctrl);
+	static Json::Value StoreLayer(Layer* layer, const wxString& dir, Controller* ctrl, bool single);
+	static Json::Value StoreFrame(KeyFrame* frame, const wxString& dir, Controller* ctrl, bool single);
+	static Json::Value StoreActor(const d2d::ISprite* sprite, const wxString& dir, Controller* ctrl, bool single);
 	static Json::Value StoreSkeleton(const SkeletonData& skeleton);
 
 private:

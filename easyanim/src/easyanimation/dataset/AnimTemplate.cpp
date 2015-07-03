@@ -85,4 +85,14 @@ void AnimTemplate::LoadFromFile(const Json::Value& value,
 	toolbar->AddAnimChoice(anims);
 }
 
+bool AnimTemplate::ContainPath(const std::string& path) const
+{
+	for (int i = 0; i < m_items.size(); ++i) {
+		if (path.find(m_items[i].path) != std::string::npos) {
+			return true;
+		}
+	}	
+	return false;
+}
+
 }
