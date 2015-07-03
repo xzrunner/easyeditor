@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="libanim"
-	ProjectGUID="{E1CFC0B9-F8A8-4F14-930A-E88A436FC038}"
-	RootNamespace="libanim"
+	Name="libanis"
+	ProjectGUID="{4CD9986A-A4F8-4DD2-B9AD-FE18B70423B8}"
+	RootNamespace="libanis"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="..\libanim\x86\Debug"
-			IntermediateDirectory="..\libanim\x86\Debug\obj"
+			OutputDirectory="..\libanis\x86\Debug"
+			IntermediateDirectory="..\libanis\x86\Debug\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -47,8 +47,8 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				AssemblerListingLocation="..\libanim\x86\Debug"
-				ProgramDataBaseFileName="..\libanim\x86\Debug\libanim.pdb"
+				AssemblerListingLocation="..\libanis\x86\Debug"
+				ProgramDataBaseFileName="..\libanis\x86\Debug\libanis.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -82,8 +82,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="..\libanim\x86\Release"
-			IntermediateDirectory="..\libanim\x86\Release\obj"
+			OutputDirectory="..\libanis\x86\Release"
+			IntermediateDirectory="..\libanis\x86\Release\obj"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -112,8 +112,8 @@
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
-				AssemblerListingLocation="..\libanim\x86\Release"
-				ProgramDataBaseFileName="..\libanim\x86\Release\libanim.pdb"
+				AssemblerListingLocation="..\libanis\x86\Release"
+				ProgramDataBaseFileName="..\libanis\x86\Release\libanis.pdb"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -150,54 +150,14 @@
 	</References>
 	<Files>
 		<Filter
-			Name="preview"
+			Name="view"
 			>
 			<File
-				RelativePath="..\..\..\src\libanim\PreviewCanvas.cpp"
+				RelativePath="..\..\..\src\libanis\LibraryPage.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\PreviewCanvas.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\PreviewDialog.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\PreviewDialog.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="output"
-			>
-			<File
-				RelativePath="..\..\..\src\libanim\FileSaver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\FileSaver.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="utility"
-			>
-			<File
-				RelativePath="..\..\..\src\libanim\TweenUtility.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\TweenUtility.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\Utility.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\Utility.h"
+				RelativePath="..\..\..\src\libanis\LibraryPage.h"
 				>
 			</File>
 		</Filter>
@@ -205,61 +165,21 @@
 			Name="dataset"
 			>
 			<File
-				RelativePath="..\..\..\src\libanim\config.h"
+				RelativePath="..\..\..\src\libanis\Sprite.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\LayersLoader.cpp"
+				RelativePath="..\..\..\src\libanis\Sprite.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\LayersLoader.h"
+				RelativePath="..\..\..\src\libanis\Symbol.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\..\src\libanim\Sprite.cpp"
+				RelativePath="..\..\..\src\libanis\Symbol.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\Sprite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\Symbol.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\..\src\libanim\Symbol.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="view"
-			>
-			<Filter
-				Name="library"
-				>
-				<File
-					RelativePath="..\..\..\src\libanim\LibraryPage.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libanim\LibraryPage.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="property"
-				>
-				<File
-					RelativePath="..\..\..\src\libanim\PropertySetting.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\..\src\libanim\PropertySetting.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 	</Files>
 	<Globals>

@@ -41,6 +41,8 @@ void Task::load(const char* filepath)
 		return;
 	}
 
+	m_controller.Clear();
+
 	try {
 		FileIO::Load(filepath, &m_controller);
 	} catch (d2d::Exception& e) {

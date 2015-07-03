@@ -1,6 +1,7 @@
 #include "Symbol.h"
 #include "config.h"
 #include "Utility.h"
+#include "LayersLoader.h"
 
 #include <easycomplex.h>
 
@@ -95,7 +96,7 @@ void Symbol::InitBounding()
 	}
 }
 
-void Symbol::loadResources()
+void Symbol::LoadFromFile(const LayersLoader& loader)
 {
 	clear();
 
@@ -107,52 +108,30 @@ void Symbol::loadResources()
 	reader.parse(fin, value);
 	fin.close();
 
-	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
-
 	m_name  = name = value["name"].asString();
 	m_fps = value["fps"].asInt();
 
-	// layers
-	int i = 0;
-	Json::Value layerValue = value["layer"][i++];
-	while (!layerValue.isNull()) {
-		Layer* dstLayer = new Layer;
-		dstLayer->name = layerValue["name"].asString();
-		// frames
-		int j = 0;
-		Json::Value frameValue = layerValue["frame"][j++];
-		while (!frameValue.isNull()) {
-			Frame* dstFrame = new Frame;
-			//dstFrame->id = frameValue["id"].asInt();
-			dstFrame->index = frameValue["time"].asInt();
-			dstFrame->bClassicTween = frameValue["tween"].asBool();
-			// sprites
-			int k = 0;
-			Json::Value spriteValue = frameValue["actor"][k++];
-			while (!spriteValue.isNull()) {
-				wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spriteValue);
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-				if (!symbol) {
-					std::string filepath = spriteValue["filepath"].asString();
-					throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 
-						dir.c_str(), filepath.c_str());
-				}
-				d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, spriteValue);
+	std::string dir = d2d::FilenameTools::getFileDir(m_filepath);
 
-				d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-				symbol->Release();
-				sprite->load(spriteValue);
-				dstFrame->sprites.push_back(sprite);
-				spriteValue = frameValue["actor"][k++];
-			}
-			dstLayer->frames.push_back(dstFrame);
-			frameValue = layerValue["frame"][j++];
-		}
-		m_layers.push_back(dstLayer);
-		layerValue = value["layer"][i++];
-	}
+	loader.LoadLayers(value, dir, m_layers);
 
 	InitBounding();
+}
+
+void Symbol::loadResources()
+{
+	class Loader : public LayersLoader
+	{
+	protected:
+		virtual std::string GetSymbolPath(const std::string& dir, 
+			const Json::Value& json_val) const
+		{
+			return d2d::SymbolSearcher::GetSymbolPath(dir, json_val).ToStdString();
+		}
+	};
+
+	Loader loader;
+	LoadFromFile(loader);
 }
 
 void Symbol::clear()

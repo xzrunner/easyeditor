@@ -6,6 +6,8 @@
 namespace libanim
 {
 
+class LayersLoader;
+
 class Symbol : public d2d::ISymbol
 {
 public:
@@ -58,6 +60,8 @@ public:
 	void setFPS(int fps) { m_fps = fps; }
 
 	void InitBounding();
+
+	void LoadFromFile(const LayersLoader& loader);
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
