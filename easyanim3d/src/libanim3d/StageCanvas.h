@@ -7,17 +7,23 @@
 namespace eanim3d
 {
 
+class StagePanel;
+
 class StageCanvas : public e3d::StageCanvas
 {
 public:
-	StageCanvas(d2d::EditPanel* edit_panel);
+	StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* sprites_impl);
 
 protected:
 	virtual void onSize(int w, int h);
 	virtual void OnDraw();
 
 private:
-	StagePanel* m_stage;
+	void DrawBackground() const;
+	void DrawSprites() const;
+
+private:
+	d2d::MultiSpritesImpl* m_sprites_impl;
 
 }; // StageCanvas
 

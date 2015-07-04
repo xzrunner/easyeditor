@@ -2,6 +2,7 @@
 #define _EASYANIM3D_SYMBOL_H_
 
 #include <drag2d.h>
+#include <easy3d.h>
 
 namespace eanim3d
 {
@@ -32,8 +33,18 @@ public:
 
 	static d2d::ISymbol* Create() { return new Symbol(); }
 
+	void SetModel(e3d::IModel* model);
+
+	void SetAABB(const e3d::AABB& aabb) { m_aabb = aabb; }
+	const e3d::AABB& GetAABB() const { return m_aabb; }
+
 protected:
 	virtual void loadResources();
+
+private:
+	e3d::IModel* m_model;
+
+	e3d::AABB m_aabb;
 
 }; // Symbol
 

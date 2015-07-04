@@ -12,7 +12,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 {
 	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, property);
 
-	m_canvas = new StageCanvas(this);
+	m_canvas = new StageCanvas(this, this);
 }
 
 StagePanel::~StagePanel()
