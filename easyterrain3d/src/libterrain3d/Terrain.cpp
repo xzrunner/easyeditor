@@ -494,6 +494,16 @@ bool Terrain::LoadTile( ETILE_TYPES tileType, char* szFilename )
 	return m_tiles.textureTiles[tileType].LoadData( szFilename );
 }
 
+bool Terrain::LoadDetailMap(const char* filename)
+{
+	return m_detail_map.Load(filename, GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, true);
+}
+
+void Terrain::UnloadDetailMap()
+{
+	m_detail_map.Unload();
+}
+
 //--------------------------------------------------------------
 // Name:			Terrain::NormalizeTerrain - private
 // Description:		Scale the terrain3d height values to a range of

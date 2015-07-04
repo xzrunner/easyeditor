@@ -31,6 +31,13 @@ void DemoBruteForceTex::Load()
 	m_bf.LoadTile( Terrain::LOW_TILE,     "demo03/lowTile.tga" );
 	m_bf.LoadTile( Terrain::HIGH_TILE,    "demo03/highTile.tga" );
 	m_bf.LoadTile( Terrain::HIGHEST_TILE, "demo03/highestTile.tga" );
+	// 3. load detail map
+	//load the terrain's detail map
+	m_bf.LoadDetailMap("demo03/detailMap.tga");
+
+// 	g_bruteForce.LoadDetailMap( "../Data/detailMap.tga" );
+// 	g_bruteForce.DoDetailMapping( g_bDetail, 8 );
+
 	m_bf.GenerateTextureMap( 256 );
 }
 

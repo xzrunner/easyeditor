@@ -111,9 +111,9 @@ class CIMAGE
 
 	bool Create( unsigned int uiWidth, unsigned int uiHeight, unsigned int uiBPP );
 
-	bool LoadData( char* a_szFilename );
+	bool LoadData(const char* a_szFilename );
 
-	bool Load( char* a_szFilename, float a_fMinFilter, float a_fMaxFilter, bool a_bMipmap= false );
+	bool Load(const char* a_szFilename, float a_fMinFilter, float a_fMaxFilter, bool a_bMipmap= false );
 	void Unload( void );
 	bool Save( char* szFilename );
 

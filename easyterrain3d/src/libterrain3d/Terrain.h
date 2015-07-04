@@ -43,6 +43,14 @@ public:
 	bool LoadTexture(char* filename);
 	bool LoadTile( ETILE_TYPES tileType, char* szFilename );
 
+	bool LoadDetailMap(const char* filename);
+	void UnloadDetailMap();
+	void DoDetailMapping( bool bDo, int iRepeatNum= 0 )
+	{
+		m_bDetailMapping  = bDo;
+		m_iRepeatDetailMap= iRepeatNum;
+	}
+
 	unsigned char GetTrueHeightAtPoint(int x, int y) const;
 	float GetScaledHeightAtPoint(int x, int y) const;
 
@@ -92,6 +100,11 @@ protected:
 
 	CIMAGE m_texture;
 	TextureTiles m_tiles;
+
+	CIMAGE m_detail_map;
+
+	int	   m_iRepeatDetailMap;
+	bool   m_bDetailMapping;
 
 }; // Terrain
 

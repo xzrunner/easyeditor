@@ -72,7 +72,7 @@ bool CIMAGE::Create( unsigned int uiWidth, unsigned int uiHeight, unsigned int u
 // Return Value:	A boolean variable: -true: data was successfully loaded
 //									    -false: data was not successfully loaded
 //--------------------------------------------------------------
-bool CIMAGE::LoadData( char* szFilename )
+bool CIMAGE::LoadData(const char* szFilename )
 {
 	FILE* pFile;
 	int iStart;
@@ -192,7 +192,7 @@ bool CIMAGE::LoadData( char* szFilename )
 // Return Value:	A boolean variable: -true: texture was successfully loaded
 //									    -false: texture was not successfully loaded
 //--------------------------------------------------------------
-bool CIMAGE::Load( char* szFilename, float fMinFilter, float fMaxFilter, bool bMipmap )
+bool CIMAGE::Load(const char* szFilename, float fMinFilter, float fMaxFilter, bool bMipmap )
 {
 	int	iType;
 
