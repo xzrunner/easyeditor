@@ -24,6 +24,8 @@ void DrawCross(const vec3& center, const vec3& size, d2d::Colorf color = d2d::BL
 
 void DrawGrids(const vec3& min, const vec3& max, const vec3& size, d2d::Colorf color = d2d::BLACK);
 
+void DrawPoints(const std::vector<vec3>& points, d2d::Colorf color = d2d::BLACK);
+
 }
 
 #endif // _E3D_PRIMITIVE_DRAW_H_

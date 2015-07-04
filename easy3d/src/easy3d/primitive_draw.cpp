@@ -317,4 +317,11 @@ void DrawGrids(const vec3& min, const vec3& max, const vec3& size, d2d::Colorf c
 	shader->DrawShape(GL_LINES, &lines[0].x, lines.size(), color, true);
 }
 
+void DrawPoints(const std::vector<vec3>& points, d2d::Colorf color)
+{
+	ShaderMgr* shader = ShaderMgr::Instance();
+	shader->Shape();
+	shader->DrawShape(GL_POINTS, &points[0].x, points.size(), color, true);
+}
+
 }

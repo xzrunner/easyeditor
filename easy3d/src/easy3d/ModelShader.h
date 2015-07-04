@@ -22,9 +22,11 @@ public:
 	virtual void Bind();
 	virtual void Unbind();
 
+	virtual void SetProjection(int width, int height);
+
 	virtual void Commit();
 
-	virtual void SetProjection(int width, int height);
+	virtual void Reset() {}
 
 	void SetModelView(const mat4& mat);
 

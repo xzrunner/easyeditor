@@ -21,6 +21,7 @@ ModelParametric::ModelParametric(const ISurface* surface, AABB& aabb)
 	// Create the VBO for the vertices.
 	std::vector<float> vertices;
 	surface->GenerateVertices(vertices, flag);
+
 	glGenBuffers(1, &mesh.vertex_buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
 	glBufferData(

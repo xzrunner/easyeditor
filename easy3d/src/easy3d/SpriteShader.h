@@ -24,6 +24,8 @@ public:
 
 	virtual void Commit();
 
+	virtual void Reset() {}
+
 	void SetModelView(const mat4& mat);
 
 	int GetTexID() const;

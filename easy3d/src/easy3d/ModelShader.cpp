@@ -62,6 +62,13 @@ void ModelShader::Unbind()
 	glDisable(GL_DEPTH_TEST);
 }
 
+void ModelShader::SetProjection(int width, int height)
+{
+	float hh = 1.0f * height / width;
+	m_mat_projection = mat4::Perspective(-1, 1, -hh, hh, 
+		Camera::CAM_NEAR, Camera::CAM_FAR);
+}
+
 void ModelShader::Commit()
 {
 	if (m_render_list.empty()) {
@@ -95,8 +102,10 @@ void ModelShader::Commit()
 			SetMaterial(mesh.material);
 
 			glBindBuffer(GL_ARRAY_BUFFER, mesh.vertex_buffer);
-			glVertexAttribPointer(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(0));
-			glVertexAttribPointer(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(12));
+// 			glVertexAttribPointer(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(0));
+// 			glVertexAttribPointer(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(12));
+			glVertexAttribPointer(ATTRIB_POSITION, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(12));
+			glVertexAttribPointer(ATTRIB_NORMAL, 3, GL_FLOAT, GL_FALSE, VERTEX_SIZE, BUFFER_OFFSET(0));
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.index_buffer);
 
@@ -105,13 +114,6 @@ void ModelShader::Commit()
 	}
 
 	m_render_list.clear();
-}
-
-void ModelShader::SetProjection(int width, int height)
-{
-	float hh = 1.0f * height / width;
-	m_mat_projection = mat4::Perspective(-1, 1, -hh, hh, 
-		Camera::CAM_NEAR, Camera::CAM_FAR);
 }
 
 void ModelShader::SetModelView(const mat4& mat)

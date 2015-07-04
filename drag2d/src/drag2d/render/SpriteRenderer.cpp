@@ -4,6 +4,7 @@
 #include "ShaderMgr.h"
 #include "ScreenFBO.h"
 #include "BlendShader.h"
+#include "FBO.h"
 
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
@@ -15,10 +16,18 @@ namespace d2d
 
 SpriteRenderer* SpriteRenderer::m_instance = NULL;
 
-SpriteRenderer::SpriteRenderer()
-	: m_fbo(600, 600)
+SpriteRenderer::SpriteRenderer(bool use_fbo)
+	: m_fbo(NULL)
 	, m_cam(NULL)
 {
+	if (use_fbo) {
+		m_fbo = new FBO(600, 600);
+	}
+}
+
+SpriteRenderer::~SpriteRenderer()
+{
+	delete m_fbo;
 }
 
 void SpriteRenderer::Draw(const ISprite* sprite, 
@@ -33,7 +42,7 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 	if (!sprite->visiable)
 		return;
 
-	if (!multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
+	if (!m_fbo || !multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
 		DrawImpl(sprite, mt, mul, add, r_trans, g_trans, b_trans);
 	} else {
 		DrawImplBlend(sprite);
@@ -125,7 +134,7 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 	FBO& scr_fbo = ScreenFBO::Instance()->GetFBO();
 
 	mgr->sprite();
-	mgr->SetFBO(m_fbo.GetFboID());
+	mgr->SetFBO(m_fbo->GetFboID());
 
 	mgr->SetBlendMode(BM_NORMAL);
 
@@ -183,7 +192,7 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	FBO& scr_fbo = ScreenFBO::Instance()->GetFBO();
 
 	mgr->sprite();
-	mgr->SetFBO(m_fbo.GetFboID());
+	mgr->SetFBO(m_fbo->GetFboID());
 
 	mgr->SetBlendMode(sprite->GetBlendMode());
 
@@ -201,7 +210,7 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 
 	BlendShader* blend_shader = static_cast<BlendShader*>(mgr->GetSpriteShader());
 	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
-//	blend_shader->SetBaseTexID(m_fbo.GetTexID());
+//	blend_shader->SetBaseTexID(m_fbo->GetTexID());
 
 	sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
 		Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
@@ -229,12 +238,12 @@ void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const
 	float ymin = r_dst.yMin, ymax = r_dst.yMax;
 
 	d2d::Rect r_src = sprite->getSymbol().getSize();
-	//  		float txmin = r_src.xMin / m_fbo.GetWidth() + 0.5f,
-	//  			txmax = r_src.xMax / m_fbo.GetWidth() + 0.5f;
-	//  		float tymin = r_src.yMin / m_fbo.GetHeight() + 0.5f,
-	//  			tymax = r_src.yMax / m_fbo.GetHeight() + 0.5f;
-	float txmin = 0, txmax = r_src.xLength() / m_fbo.GetWidth();
-	float tymin = 0, tymax = r_src.yLength() / m_fbo.GetHeight();
+	//  		float txmin = r_src.xMin / m_fbo->GetWidth() + 0.5f,
+	//  			txmax = r_src.xMax / m_fbo->GetWidth() + 0.5f;
+	//  		float tymin = r_src.yMin / m_fbo->GetHeight() + 0.5f,
+	//  			tymax = r_src.yMax / m_fbo->GetHeight() + 0.5f;
+	float txmin = 0, txmax = r_src.xLength() / m_fbo->GetWidth();
+	float tymin = 0, tymax = r_src.yLength() / m_fbo->GetHeight();
 	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(mgr->GetSpriteShader()))
 	{
 		const float vertices[] = { 
@@ -242,7 +251,7 @@ void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const
 			xmin, ymax, txmin, tymax, txmin, tymax,
 			xmax, ymax, txmax, tymax, txmax, tymax,
 			xmax, ymin, txmax, tymin, txmax, tymin };
-		blend_shader->DrawBlend(vertices, m_fbo.GetTexID());
+		blend_shader->DrawBlend(vertices, m_fbo->GetTexID());
 	}
 	else
 	{
@@ -251,16 +260,16 @@ void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const
 			xmin, ymax, txmin, tymax,
 			xmax, ymax, txmax, tymax,
 			xmax, ymin, txmax, tymin};
-		mgr->Draw(vertices, m_fbo.GetTexID());
+		mgr->Draw(vertices, m_fbo->GetTexID());
 	}
 
 	mgr->Commit();
 }
 
-SpriteRenderer* SpriteRenderer::Instance()
+SpriteRenderer* SpriteRenderer::Instance(bool use_fbo)
 {
 	if (!m_instance) {
-		m_instance = new SpriteRenderer();
+		m_instance = new SpriteRenderer(use_fbo);
 	}
 	return m_instance;
 }

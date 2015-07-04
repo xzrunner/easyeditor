@@ -24,13 +24,15 @@ public:
 
 	virtual void Commit();
 
+	virtual void Reset() {}
+
 	void SetModelView(const mat4& mat);
 
-	void Draw(int type, float* vertices, int count, 
+	void Draw(int type, const float* vertices, int count, 
 		const d2d::Colorf& col, bool force = true);
-	void Draw(int type, float* vertices, int count, 
+	void Draw(int type, const float* vertices, int count, 
 		d2d::Colorf* cols, bool force = true);
-	void Draw(int type, float* vertices, int vcount, 
+	void Draw(int type, const float* vertices, int vcount, 
 		const d2d::Colorf& col, unsigned short* indices, int icount);
 
 protected:

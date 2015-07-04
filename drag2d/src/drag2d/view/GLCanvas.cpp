@@ -108,7 +108,7 @@ void GLCanvas::onPaint(wxPaintEvent& event)
 	SetCurrentCanvas();
 
 	if (curr_canvas != this) {
-		ShaderMgr::Instance()->Reset();
+		RenderContext::SHADER_MGR->Reset();
 		curr_canvas = this;
 	}
 

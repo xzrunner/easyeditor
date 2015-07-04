@@ -136,7 +136,7 @@ void ShapeShader::SetModelView(const mat4& mat)
 	m_mat_modelview = mat;
 }
 
-void ShapeShader::Draw(int type, float* vertices, int count, 
+void ShapeShader::Draw(int type, const float* vertices, int count, 
 					   const d2d::Colorf& col, bool force)
 {
 	if (m_count + count >= MAX_VERTEX) {
@@ -153,7 +153,7 @@ void ShapeShader::Draw(int type, float* vertices, int count,
 	CopyVertex(vertices, count, PackColor(col));
 }
 
-void ShapeShader::Draw(int type, float* vertices, int count, 
+void ShapeShader::Draw(int type, const float* vertices, int count, 
 					   d2d::Colorf* cols, bool force)
 {
 	if (m_count + count >= MAX_VERTEX) {
@@ -170,7 +170,8 @@ void ShapeShader::Draw(int type, float* vertices, int count,
 	CopyVertex(vertices, count, cols);
 }
 
-void ShapeShader::Draw(int type, float* vertices, int vcount, const d2d::Colorf& col, unsigned short* indices, int icount)
+void ShapeShader::Draw(int type, const float* vertices, int vcount, 
+					   const d2d::Colorf& col, unsigned short* indices, int icount)
 {
 	if (vcount >= MAX_VERTEX) {
 		return;

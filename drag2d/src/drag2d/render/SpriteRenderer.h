@@ -1,8 +1,6 @@
 #ifndef _DRAG2D_SPRITE_RENDERER_H_
 #define _DRAG2D_SPRITE_RENDERER_H_
 
-#include "FBO.h"
-
 #include "common/Matrix.h"
 #include "common/Color.h"
 
@@ -15,6 +13,7 @@ class SpriteBatch;
 class Vector;
 class Matrix;
 class Camera;
+class FBO;
 
 class SpriteRenderer
 {
@@ -47,10 +46,11 @@ public:
 	void SetCamera(const Camera* cam) { m_cam = cam; }
 	const Camera* GetCamera() const { return m_cam; }
 
-	static SpriteRenderer* Instance();
+	static SpriteRenderer* Instance(bool use_fbo = true);
 
 private:
-	SpriteRenderer();
+	SpriteRenderer(bool use_fbo = true);
+	~SpriteRenderer();
 
 	void DrawImpl(const ISprite* sprite, 
   				  const Matrix& mt = Matrix(),
@@ -67,7 +67,7 @@ private:
 	void DrawTmpToScreen(const ISprite* sprite) const;
 
 private:
-	mutable FBO m_fbo;
+	mutable FBO* m_fbo;
 
 	const Camera* m_cam;
 
