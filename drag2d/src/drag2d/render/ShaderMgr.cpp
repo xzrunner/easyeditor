@@ -32,7 +32,6 @@ ShaderMgr::ShaderMgr()
 	m_all_shape_shader.push_back(m_shape_shader);
 
  	m_sprite_shader = new SpriteShader;
-//	m_sprite_shader = new BlendShader;
  	m_shaders.push_back(m_sprite_shader);
 	m_all_sprite_shader.push_back(m_sprite_shader);
 

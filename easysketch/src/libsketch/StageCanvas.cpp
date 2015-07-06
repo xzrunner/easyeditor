@@ -110,7 +110,7 @@ void StageCanvas::DrawSprites() const
 		d2d::ISprite* sprite = sprites[i];
 		if (!sprite->visiable)
 			continue;
-		d2d::SpriteRenderer::Instance(false)->Draw(sprite);
+		d2d::SpriteRenderer::Instance()->Draw(sprite);
 	}
 }
 

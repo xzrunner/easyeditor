@@ -16,13 +16,11 @@ namespace d2d
 
 SpriteRenderer* SpriteRenderer::m_instance = NULL;
 
-SpriteRenderer::SpriteRenderer(bool use_fbo)
+SpriteRenderer::SpriteRenderer()
 	: m_fbo(NULL)
+	, m_blend_idx(0)
 	, m_cam(NULL)
 {
-	if (use_fbo) {
-		m_fbo = new FBO(600, 600);
-	}
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -42,10 +40,22 @@ void SpriteRenderer::Draw(const ISprite* sprite,
 	if (!sprite->visiable)
 		return;
 
-	if (!m_fbo || !multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
+	if (!multi_draw || sprite->GetBlendMode() == BM_NORMAL) {
 		DrawImpl(sprite, mt, mul, add, r_trans, g_trans, b_trans);
 	} else {
+		if (!m_fbo) {
+			InitBlendShader();
+		}
+
+		ShaderMgr* mgr = ShaderMgr::Instance();
+		mgr->SetSpriteShader(m_blend_idx);
+
 		DrawImplBlend(sprite);
+
+ 		mgr->SetSpriteShader(0);
+ 		mgr->sprite();
+		FBO& scr_fbo = ScreenFBO::Instance()->GetFBO();
+		mgr->SetFBO(scr_fbo.GetFboID());
 	}
 }
 
@@ -266,10 +276,19 @@ void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const
 	mgr->Commit();
 }
 
-SpriteRenderer* SpriteRenderer::Instance(bool use_fbo)
+void SpriteRenderer::InitBlendShader() const
+{
+	m_fbo = new FBO(600, 600);	
+
+	d2d::SpriteShader* blend_shader = new d2d::BlendShader;
+	blend_shader->Load();
+	m_blend_idx = ShaderMgr::Instance()->AddSpriteShader(blend_shader);
+}
+
+SpriteRenderer* SpriteRenderer::Instance()
 {
 	if (!m_instance) {
-		m_instance = new SpriteRenderer(use_fbo);
+		m_instance = new SpriteRenderer();
 	}
 	return m_instance;
 }

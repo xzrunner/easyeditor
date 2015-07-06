@@ -46,10 +46,10 @@ public:
 	void SetCamera(const Camera* cam) { m_cam = cam; }
 	const Camera* GetCamera() const { return m_cam; }
 
-	static SpriteRenderer* Instance(bool use_fbo = true);
+	static SpriteRenderer* Instance();
 
 private:
-	SpriteRenderer(bool use_fbo = true);
+	SpriteRenderer();
 	~SpriteRenderer();
 
 	void DrawImpl(const ISprite* sprite, 
@@ -66,8 +66,11 @@ private:
 	void DrawSprToTmp(const ISprite* sprite) const;
 	void DrawTmpToScreen(const ISprite* sprite) const;
 
+	void InitBlendShader() const;
+
 private:
 	mutable FBO* m_fbo;
+	mutable int m_blend_idx;
 
 	const Camera* m_cam;
 
