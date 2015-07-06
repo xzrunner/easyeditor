@@ -119,7 +119,7 @@ void ViewlistPanel::ReorderSelected(bool up)
 		return;
 	}
 
-	m_sprites_impl->resetSpriteOrder(m_selected_spr, up);
+	Reorder(m_selected_spr, up);
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->ReorderSprite(m_selected_spr, up, this);
 	}
