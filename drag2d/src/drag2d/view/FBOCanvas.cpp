@@ -5,6 +5,9 @@
 #include "render/ScreenFBO.h"
 #include "render/SpriteRenderer.h"
 
+#include "render/PrimitiveDraw.h"
+#include "render/style_config.h"
+
 namespace d2d
 {
 
@@ -23,10 +26,6 @@ void FBOCanvas::OnDrawWhole() const
 	const FBO& fbo = ScreenFBO::Instance()->GetFBO();
 	ShaderMgr* mgr = ShaderMgr::Instance();
 
-//	glClearColor(0.8f, 0.8f, 0.8f, 1);
-	glClearColor(0, 0, 0, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	SpriteRenderer::Instance()->SetCamera(GetCamera());
 
 	//////////////////////////////////////////////////////////////////////////
@@ -35,8 +34,7 @@ void FBOCanvas::OnDrawWhole() const
  	mgr->sprite();
  	mgr->SetFBO(fbo.GetFboID());
 
-	glClearColor(0.8f, 0.8f, 0.8f, 1);
-//	glClearColor(0, 0, 0, 1);
+	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	OnDrawSprites();
@@ -44,6 +42,10 @@ void FBOCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
+
+// 	mgr->SetFBO(0);
+// 	mgr->SetFBO(fbo.GetTexID());
+// 	PrimitiveDraw::rect(Vector(0, 0), 100, d2d::LIGHT_RED_LINE);
 
 	mgr->SetFBO(0);
 	mgr->SetTexture(0);

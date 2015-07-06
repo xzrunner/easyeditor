@@ -38,4 +38,9 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->drawEditTemp();
 }
 
+void StageCanvas::OnDraw()
+{
+	OnDrawSprites();
+}
+
 }
