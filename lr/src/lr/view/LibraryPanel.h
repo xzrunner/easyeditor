@@ -15,6 +15,7 @@ public:
 	LibraryPanel(wxWindow* parent);
 
 	virtual void OnPageChanged(wxBookCtrlEvent& event);
+	virtual void OnPageChanging(wxBookCtrlEvent& event);
 
 	void LoadFromFile(const Json::Value& value, const std::string& dir);
 	void StoreToFile(Json::Value& value, const std::string& dir) const;

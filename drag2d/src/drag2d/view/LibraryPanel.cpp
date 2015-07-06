@@ -26,6 +26,10 @@ void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
 	m_selected->OnActive();
 }
 
+void LibraryPanel::OnPageChanging(wxBookCtrlEvent& event)
+{
+}
+
 void LibraryPanel::Clear()
 {
 	for (size_t i = 0, n = m_pages.size(); i < n; ++i)
@@ -129,6 +133,7 @@ void LibraryPanel::InitLayout()
 
 	m_notebook = new wxNotebook(this, wxID_ANY);
 	Connect(m_notebook->GetId(), wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGED, wxBookCtrlEventHandler(LibraryPanel::OnPageChanged));
+	Connect(m_notebook->GetId(), wxEVT_COMMAND_NOTEBOOK_PAGE_CHANGING, wxBookCtrlEventHandler(LibraryPanel::OnPageChanging));
 
 	sizer->Add(m_notebook, 1, wxEXPAND);
 

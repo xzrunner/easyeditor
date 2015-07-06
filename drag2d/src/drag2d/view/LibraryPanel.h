@@ -22,6 +22,7 @@ public:
 	LibraryPanel(wxWindow* parent);
 
 	virtual void OnPageChanged(wxBookCtrlEvent& event);
+	virtual void OnPageChanging(wxBookCtrlEvent& event);
 
 	virtual bool OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames) { return true; }
 
