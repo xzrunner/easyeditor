@@ -16,15 +16,15 @@ namespace d2d
 		//
 		// IObjectStream interface
 		//
-		virtual Object* getNext() {
+		virtual Object* GetNext() {
 			if (m_next >= m_objects.size())
 				return NULL;				
 			return m_objects[m_next++];
 		}
-		virtual bool hasNext() const {
+		virtual bool HasNext() const {
 			return m_next < m_objects.size();
 		}
-		virtual void rewind() {
+		virtual void Rewind() {
 			m_next = 0;
 		}
 

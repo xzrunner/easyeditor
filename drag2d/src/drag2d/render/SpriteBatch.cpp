@@ -33,7 +33,7 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 	const ImageSymbol& symbol = sprite->getSymbol();
 
 	if ((index == -1 && m_next >= m_size)
-		|| (m_next != 0 && m_textureID != symbol.getTextureID()))
+		|| (m_next != 0 && m_textureID != symbol.GetTexID()))
 	{
 		OnDraw();
 		m_next = 0;
@@ -41,7 +41,7 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 
 	if (m_next == 0)
 	{
-		m_textureID = symbol.getTextureID();
+		m_textureID = symbol.GetTexID();
 
 // 		const float hw = symbol.getSize().xLength() * 0.5f,
 // 			hh = symbol.getSize().yLength() * 0.5f;
@@ -53,8 +53,8 @@ int SpriteBatch::add(const ImageSprite* sprite, int index/* = -1*/)
 // 		m_node[5] = hh;
 	}
 
-	const float hw = symbol.getSize().xLength() * sprite->getScale().x * 0.5f,
-		hh = symbol.getSize().yLength() * sprite->getScale().y * 0.5f;
+	const float hw = symbol.GetSize().xLength() * sprite->getScale().x * 0.5f,
+		hh = symbol.GetSize().yLength() * sprite->getScale().y * 0.5f;
 	float x0 = -hw;
 	float y0 = -hh;
 	float x1 = -hw;

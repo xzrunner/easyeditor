@@ -340,7 +340,7 @@ InterruptChainVisitor(const d2d::Vector& pos, int tol)
 }
 
 void EditPolylineImpl::InterruptChainVisitor::
-visit(d2d::Object* object, bool& bFetchNext) 
+Visit(d2d::Object* object, bool& bFetchNext) 
 {
 	d2d::Rect rect(m_pos, m_tol, m_tol);
 
@@ -390,7 +390,7 @@ NearestNodeVisitor(const d2d::Vector& pos, int tol)
 }
 
 void EditPolylineImpl::NearestNodeVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = dynamic_cast<ChainShape*>(object);
 	if (!chain) 

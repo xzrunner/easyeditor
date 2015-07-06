@@ -23,7 +23,7 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filename)
+void Task::Load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -52,7 +52,7 @@ void Task::load(const char* filename)
 	m_stage->resetCanvas();
 }
 
-void Task::store(const char* filename) const
+void Task::Store(const char* filename) const
 {
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
@@ -62,7 +62,7 @@ void Task::store(const char* filename) const
 	for (size_t i = 0; i < sprites.size(); ++i) {
 		d2d::ISprite* spr = sprites[i];
 		value["sprites"][i]["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->getSymbol().getFilepath()).ToStdString();
+			spr->getSymbol().GetFilepath()).ToStdString();
 		spr->store(value["sprites"][i]);
 	}
 
@@ -77,12 +77,12 @@ void Task::store(const char* filename) const
 	fout.close();
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return false;
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_viewlist->Clear();
 
@@ -92,12 +92,12 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 	m_stage->traverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

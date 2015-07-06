@@ -45,7 +45,7 @@ void StageCanvas::OnDraw()
 
 		d2d::ISymbol* symbol = editPanel->getPatchSymbol();
 		if (symbol)
-			symbol->draw(d2d::Matrix());
+			symbol->Draw(d2d::Matrix());
 	}
 	editPanel->drawEditTemp();
 }

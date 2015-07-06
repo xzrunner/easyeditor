@@ -24,7 +24,7 @@ d2d::AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const d2d::Vector& p
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 

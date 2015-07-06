@@ -1,133 +1,136 @@
-#pragma once
+#ifndef _DRAG2D_RESOURCES_MGR_H_
+#define _DRAG2D_RESOURCES_MGR_H_
 
-#include <wx/wx.h>
 #include <map>
 
 namespace d2d
 {
-	class IVisitor;
 
-	template<class T>
-	class ResourcesMgr
-	{
-	public:
-		static ResourcesMgr* Instance();
+class IVisitor;
 
-		T* getItem(const wxString& filename);
-		void getItem(const wxString& filename, T** old);
+template<class T>
+class ResourcesMgr
+{
+public:
+	static ResourcesMgr* Instance();
 
-		void removeItem(const wxString& filename);
+	T* GetItem(const std::string& filename);
+	void GetItem(const std::string& filename, T** old);
 
-		void clear();
+	void RemoveItem(const std::string& filename);
 
-		void traverse(IVisitor& visitor) const;
+	void Clear();
 
-		size_t size() const {
-			return m_items.size();
-		}
+	void Traverse(IVisitor& visitor) const;
 
-	protected:
-		ResourcesMgr();
-		~ResourcesMgr();
-
-	private:
-		static ResourcesMgr<T>* m_instance;
-
-		std::map<wxString, T*> m_items;
-
-	}; // ResourcesMgr
-
-	template<class T>
-	ResourcesMgr<T>* ResourcesMgr<T>::m_instance = NULL;
-
-	template<class T>
-	inline ResourcesMgr<T>* ResourcesMgr<T>::Instance()
-	{
-		if (!m_instance)
-		{
-			m_instance = new ResourcesMgr<T>;
-		}
-		return m_instance;
+	size_t Size() const {
+		return m_items.size();
 	}
 
-	template<class T>
-	inline T* ResourcesMgr<T>::getItem(const wxString& filename)
+protected:
+	ResourcesMgr();
+	~ResourcesMgr();
+
+private:
+	static ResourcesMgr<T>* m_instance;
+
+	std::map<std::string, T*> m_items;
+
+}; // ResourcesMgr
+
+template<class T>
+ResourcesMgr<T>* ResourcesMgr<T>::m_instance = NULL;
+
+template<class T>
+inline ResourcesMgr<T>* ResourcesMgr<T>::Instance()
+{
+	if (!m_instance)
 	{
-		std::map<wxString, T*>::iterator itr = m_items.find(filename);
-		if (itr == m_items.end())
+		m_instance = new ResourcesMgr<T>;
+	}
+	return m_instance;
+}
+
+template<class T>
+inline T* ResourcesMgr<T>::GetItem(const std::string& filename)
+{
+	std::map<std::string, T*>::iterator itr = m_items.find(filename);
+	if (itr == m_items.end())
+	{
+		T* item = new T;
+		bool loaded = item->LoadFromFile(filename);
+		if (loaded)
 		{
-			T* item = new T;
-			bool loaded = item->loadFromFile(filename);
-			if (loaded)
-			{
-				m_items.insert(std::make_pair(filename, item));
-				return item;
-			}
-			else
-			{
-				delete item;
-				return NULL;
-			}
+			m_items.insert(std::make_pair(filename, item));
+			return item;
 		}
 		else
 		{
-			itr->second->Retain();
-			return itr->second;
+			delete item;
+			return NULL;
 		}
 	}
-
-
-	template<class T>
-	inline void ResourcesMgr<T>::getItem(const wxString& filename, T** old)
+	else
 	{
-		T* _new = getItem(filename);
-		// todo: 转移到getItem中
-//		_new->Retain();
-		if (_new != *old && *old != NULL)
-			(*old)->Release();
-		*old = _new;
-	}
-
-	template<class T>
-	inline void ResourcesMgr<T>::removeItem(const wxString& filename)
-	{
-		std::map<wxString, T*>::iterator itr = m_items.find(filename);
-		//assert(itr != m_items.end());
-		if (itr != m_items.end()) {
-			m_items.erase(itr);
-		}
-	}
-
-	template<class T>
-	inline void ResourcesMgr<T>::clear()
-	{
-		std::map<wxString, T*>::iterator itr = m_items.begin();
-		for ( ; itr != m_items.end(); ++itr)
-			delete itr->second;
-		m_items.clear();
-	}
-
-	template<class T>
-	inline void ResourcesMgr<T>::traverse(IVisitor& visitor) const
-	{
-		std::map<wxString, T*>::const_iterator itr = m_items.begin();
-		for ( ; itr != m_items.end(); ++itr)
-		{
-			bool hasNext;
-			visitor.visit(itr->second, hasNext);
-			if (!hasNext) break;
-		}
-	}
-
-	template<class T>
-	ResourcesMgr<T>::ResourcesMgr()
-	{
-	}
-
-	template<class T>
-	ResourcesMgr<T>::~ResourcesMgr()
-	{
-		clear();
+		itr->second->Retain();
+		return itr->second;
 	}
 }
 
+
+template<class T>
+inline void ResourcesMgr<T>::GetItem(const std::string& filename, T** old)
+{
+	T* _new = GetItem(filename);
+	// todo: 转移到getItem中
+//		_new->Retain();
+	if (_new != *old && *old != NULL)
+		(*old)->Release();
+	*old = _new;
+}
+
+template<class T>
+inline void ResourcesMgr<T>::RemoveItem(const std::string& filename)
+{
+	std::map<std::string, T*>::iterator itr = m_items.find(filename);
+	//assert(itr != m_items.end());
+	if (itr != m_items.end()) {
+		m_items.erase(itr);
+	}
+}
+
+template<class T>
+inline void ResourcesMgr<T>::Clear()
+{
+	std::map<std::string, T*>::iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr)
+		delete itr->second;
+	m_items.clear();
+}
+
+template<class T>
+inline void ResourcesMgr<T>::Traverse(IVisitor& visitor) const
+{
+	std::map<std::string, T*>::const_iterator itr = m_items.begin();
+	for ( ; itr != m_items.end(); ++itr)
+	{
+		bool hasNext;
+		visitor.Visit(itr->second, hasNext);
+		if (!hasNext) break;
+	}
+}
+
+template<class T>
+ResourcesMgr<T>::ResourcesMgr()
+{
+}
+
+template<class T>
+ResourcesMgr<T>::~ResourcesMgr()
+{
+	Clear();
+}
+
+}
+
+#endif // _DRAG2D_RESOURCES_MGR_H_

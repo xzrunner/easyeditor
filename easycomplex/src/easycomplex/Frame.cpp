@@ -61,27 +61,27 @@ void Frame::onSettings(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
-	m_task->getEditPanel()->getCanvas()->setBgColor(col);
+	m_task->GetEditPanel()->getCanvas()->setBgColor(col);
 }
 
 void Frame::onPreview(wxCommandEvent& event)
 {
 // 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol("default.ttf");
-// 	symbol->reloadTexture();
+// 	symbol->ReloadTexture();
 
 	std::vector<const d2d::ISprite*> sprites;
-	m_task->getAllSprite(sprites);
+	m_task->GetAllSprite(sprites);
  	PreviewDialog dlg(this, sprites);
  	dlg.ShowModal();
 
-	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->getEditPanel());
+	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
  	stage->resetCanvas();
 }
 
 void Frame::onEJPreview(wxCommandEvent& event)
 {
 	std::vector<const d2d::ISprite*> sprites;
-	m_task->getAllSprite(sprites);
+	m_task->GetAllSprite(sprites);
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -115,13 +115,13 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	{
  		wxString filename = dlg.GetPath();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
-  		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
+  		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
   		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
 	else
 	{
-		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
+		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
 	}
 }
@@ -130,7 +130,7 @@ void Frame::onCode(wxCommandEvent& event)
 {
 	ebuilder::CodeDialog dlg(this);
 	StagePanel* stage = static_cast<StagePanel*>(
-		const_cast<d2d::EditPanel*>(m_task->getEditPanel()));
+		const_cast<d2d::EditPanel*>(m_task->GetEditPanel()));
 	// ui
 	{
 		ebuilder::love2d::Page* page = new ebuilder::love2d::Page(dlg.notebook, wxT("ui.lua"));
@@ -182,17 +182,17 @@ void Frame::onCode(wxCommandEvent& event)
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	d2d::Snapshoot ss;
-	Symbol* symbol = ((StagePanel*)(m_task->getEditPanel()))->getSymbol();
+	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->getSymbol();
 	symbol->InitBounding();
 	ss.OutputToImageFile(symbol, filepath);
-	m_task->getEditPanel()->getCanvas()->resetInitState();
+	m_task->GetEditPanel()->getCanvas()->resetInitState();
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const
 {
 	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
 	m_currFilename = fixed;
-	m_task->store(fixed);
+	m_task->Store(fixed);
 }
 
 }

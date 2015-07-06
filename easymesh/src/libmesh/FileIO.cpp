@@ -43,7 +43,7 @@ void FileIO::load(const char* filepath, Symbol* symbol)
 	if (!value["image"].isNull())
 	{
 		wxString dir = d2d::FilenameTools::getFileDir(filepath);
-		wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
+		std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
 		// todo Release symbol
 		//symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 		symbol->LoadImage(path);

@@ -11,7 +11,7 @@ namespace d2d
 	public:
 		DrawSelectedSpriteVisitor(const Colorf& color);
 
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		Colorf m_color;

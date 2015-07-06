@@ -8,6 +8,7 @@
 #include "render/SpriteRenderer.h"
 
 #include <gl/GL.h>
+#include <algorithm>
 
 namespace d2d
 {
@@ -44,7 +45,7 @@ void DynamicTexAndFont::BeginImage()
 void DynamicTexAndFont::AddImage(Image* img)
 {
 	// find
-	const wxString& filepath = img->filepath();
+	const std::string& filepath = img->GetFilepath();
 	if (m_path2node.find(filepath) != m_path2node.end()) {
 		return;
 	}
@@ -116,8 +117,8 @@ void DynamicTexAndFont::EndImageWithRegion()
 		const ImageWithRegion& ir = m_rect_preload_list[i];
 		Rect r_vertex, r_texcoords;
 		// src
-		int ori_width = ir.img->originWidth(),
-			ori_height = ir.img->originHeight();
+		int ori_width = ir.img->GetOriginWidth(),
+			ori_height = ir.img->GetOriginHeight();
 		r_texcoords.xMin = ir.r_dst.xMin / ori_width;
 		r_texcoords.xMax = ir.r_dst.xMax / ori_width;
 		r_texcoords.yMin = (ori_height - ir.r_dst.yMax) / ori_height;
@@ -132,7 +133,7 @@ void DynamicTexAndFont::EndImageWithRegion()
 
 		bool rot = node->IsRotated() && !ir.rot 
 			|| !node->IsRotated() && ir.rot;
-		DrawRegion(r_vertex, r_texcoords, ir.img->textureID(), rot);
+		DrawRegion(r_vertex, r_texcoords, ir.img->GetTexID(), rot);
 	}
 	EndDraw();
 
@@ -144,12 +145,12 @@ void DynamicTexAndFont::EndImageWithRegion()
 
 void DynamicTexAndFont::InsertSymbol(const ISymbol& symbol)
 {
-	const wxString& filepath = symbol.getFilepath();
+	const std::string& filepath = symbol.GetFilepath();
 	if (m_path2node.find(filepath) != m_path2node.end()) {
 		return;
 	}
 
-	Rect r = symbol.getSize();
+	Rect r = symbol.GetSize();
 	int w = r.xLength();
 	int h = r.yLength();
 	int extend = GetExtend() * 2;
@@ -180,8 +181,8 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 	Vector pos(node.GetCenterX(), node.GetCenterY());
 	float angle = node.IsRotated() ? PI * 0.5f : 0;
 	Matrix mt;
-	float dx = -m_width*0.5f - symbol.getSize().xCenter();
-	float dy = -m_height*0.5f - symbol.getSize().yCenter();
+	float dx = -m_width*0.5f - symbol.GetSize().xCenter();
+	float dy = -m_height*0.5f - symbol.GetSize().yCenter();
 	mt.translate(dx, dy);
 	SpriteRenderer::Instance()->Draw(&symbol, mt, pos, angle);
 
@@ -190,9 +191,9 @@ void DynamicTexAndFont::RefreshSymbol(const ISymbol& symbol, const TPNode& node)
 	EndDraw();
 }
 
-void DynamicTexAndFont::Remove(const wxString& filepath)
+void DynamicTexAndFont::Remove(const std::string& filepath)
 {
-	std::map<wxString, TPNode*>::const_iterator itr 
+	std::map<std::string, TPNode*>::const_iterator itr 
 		= m_path2node.find(filepath);
 	if (itr != m_path2node.end()) {
 		itr->second->Clear();
@@ -200,9 +201,9 @@ void DynamicTexAndFont::Remove(const wxString& filepath)
 	}
 }
 
-const TPNode* DynamicTexAndFont::Query(const wxString& filepath) const
+const TPNode* DynamicTexAndFont::Query(const std::string& filepath) const
 {
-	std::map<wxString, TPNode*>::const_iterator itr 
+	std::map<std::string, TPNode*>::const_iterator itr 
 		= m_path2node.find(filepath);
 	if (itr != m_path2node.end()) {
 		return itr->second;
@@ -339,10 +340,10 @@ void DynamicTexAndFont::ReloadPixels()
 {
 	BeginDraw();
 
-	std::map<wxString, TPNode*>::iterator itr = m_path2node.begin();
+	std::map<std::string, TPNode*>::iterator itr = m_path2node.begin();
 	for ( ; itr != m_path2node.end(); ++itr)
 	{
-		Image* img = ImageMgr::Instance()->getItem(itr->first);
+		Image* img = ImageMgr::Instance()->GetItem(itr->first);
 		assert(img);
 		TPNode* n = itr->second;
 		assert(n);
@@ -356,12 +357,12 @@ void DynamicTexAndFont::ReloadPixels()
 
 void DynamicTexAndFont::InsertImage(const Image* img)
 {
-	const wxString& filepath = img->filepath();
+	const std::string& filepath = img->GetFilepath();
 	if (m_path2node.find(filepath) != m_path2node.end()) {
 		return;
 	}
 
-	d2d::Rect r = img->getRegion();
+	d2d::Rect r = img->GetClippedRegion();
 	int w = r.xLength();
 	int h = r.yLength();
 	int extend = GetExtend() * 2;
@@ -377,7 +378,7 @@ void DynamicTexAndFont::InsertImage(const Image* img)
 
 void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
 {
-	d2d::Rect r = img->getRegion();
+	d2d::Rect r = img->GetClippedRegion();
 
 	Rect r_vertex, r_texcoords;
 
@@ -388,13 +389,13 @@ void DynamicTexAndFont::DrawNode(const TPNode* n, const Image* img) const
  	r_vertex.yMax = n->GetMaxY() - extend;
 	r_vertex.translate(Vector(-m_width*0.5f, -m_height*0.5f));
 
-	int ori_width = img->originWidth(),
-		ori_height = img->originHeight();
+	int ori_width = img->GetOriginWidth(),
+		ori_height = img->GetOriginHeight();
 	r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
 	r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
 	r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
 	r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-	DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
+	DrawRegion(r_vertex, r_texcoords, img->GetTexID(), n->IsRotated());
 
 	if (m_extrude > 0) {
 		DrawExtrude(img, n);
@@ -440,9 +441,9 @@ void DynamicTexAndFont::DrawRegion(const Rect& vertex, const Rect& texcoords, in
 
 void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 {
-	d2d::Rect r = img->getRegion();
-	int ori_width = img->originWidth(),
-		ori_height = img->originHeight();
+	d2d::Rect r = img->GetClippedRegion();
+	int ori_width = img->GetOriginWidth(),
+		ori_height = img->GetOriginHeight();
 	Rect r_vertex, r_texcoords;
 
 	d2d::Rect rv, rt;
@@ -465,13 +466,13 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 		r_vertex.xMax = rv.xMax-extend;
 		r_vertex.yMin = rv.yMax-extend;
 		r_vertex.yMax = rv.yMax-m_padding;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 
 		// down
 		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
 		r_vertex.yMin = rv.yMin+m_padding;
 		r_vertex.yMax = rv.yMin+extend;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 
 		// left
 		r_texcoords.xMin = rt.xMin / ori_width;
@@ -481,13 +482,13 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 		r_vertex.yMax = rv.yMax-extend;
 		r_vertex.xMin = rv.xMin+m_padding;
 		r_vertex.xMax = rv.xMin+extend;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 
 		// right
 		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
 		r_vertex.xMin = rv.xMax-extend;
 		r_vertex.xMax = rv.xMax-m_padding;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 
  		// up-left
  		r_texcoords.xMin = r_texcoords.xMax = rt.xMin / ori_width;
@@ -496,25 +497,25 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
  		r_vertex.xMax = rv.xMin+extend;
  		r_vertex.yMin = rv.yMin+m_padding;
  		r_vertex.yMax = rv.yMin+extend;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
  
  		// up-right
  		r_texcoords.xMin = r_texcoords.xMax = (rt.xMax - 0.5f) / ori_width;
  		r_vertex.yMin = rv.yMax-extend;
  		r_vertex.yMax = rv.yMax-m_padding;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
  
  		// down-right
  		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
  		r_vertex.xMin = rv.xMax-extend;
  		r_vertex.xMax = rv.xMax-m_padding;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
  
  		// down-left
  		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
  		r_vertex.yMin = rv.yMin+m_padding;
  		r_vertex.yMax = rv.yMin+extend;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 	}
 	else
 	{
@@ -526,13 +527,13 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 		r_vertex.xMax = rv.xMax-extend;
 		r_vertex.yMin = rv.yMax-extend;
 		r_vertex.yMax = rv.yMax-m_padding;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// down
 		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
 		r_vertex.yMin = rv.yMin+m_padding;
 		r_vertex.yMax = rv.yMin+extend;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// left
 		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
@@ -542,13 +543,13 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
 		r_vertex.yMax = rv.yMax-extend;
 		r_vertex.xMin = rv.xMin+m_padding;
 		r_vertex.xMax = rv.xMin+extend;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// right
 		r_texcoords.xMin = r_texcoords.xMax = (rt.xMax - 0.5f) / ori_width;
 		r_vertex.xMin = rv.xMax-extend;
 		r_vertex.xMax = rv.xMax-m_padding;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
  		// up-left
  		r_texcoords.xMin = r_texcoords.xMax = rt.xMin / ori_width;
@@ -557,25 +558,25 @@ void DynamicTexAndFont::DrawExtrude(const Image* img, const TPNode* n) const
  		r_vertex.xMax = rv.xMin+extend;
  		r_vertex.yMin = rv.yMax-extend;
  		r_vertex.yMax = rv.yMax-m_padding;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
  
  		// up-right
  		r_texcoords.xMin = r_texcoords.xMax = (rt.xMax - 0.5f) / ori_width;
  		r_vertex.xMin = rv.xMax-extend;
  		r_vertex.xMax = rv.xMax-m_padding;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
  
  		// down-right
  		r_texcoords.yMin = r_texcoords.yMax = (rt.yMin + 0.5f) / ori_height;
  		r_vertex.yMin = rv.yMin+m_padding;
  		r_vertex.yMax = rv.yMin+extend;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
  
  		// down-left
  		r_texcoords.xMin = r_texcoords.xMax = (rt.xMin + 0.5f) / ori_width;
  		r_vertex.xMin = rv.xMin+m_padding;
  		r_vertex.xMax = rv.xMin+extend;
- 		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+ 		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 	}
 }
 
@@ -755,7 +756,7 @@ Traverse(IVisitor& visitor) const
 		while (n) {
 			bool has_next = true;
 			if (n->glyph.is_used) {
-				visitor.visit(&n->glyph, has_next);
+				visitor.Visit(&n->glyph, has_next);
 			}
 			if (!has_next) {
 				return;
@@ -780,7 +781,7 @@ GetHashVal(int character, int font_size, int color, int is_edge)
 //////////////////////////////////////////////////////////////////////////
 
 void DynamicTexAndFont::ReloadTextureVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	Glyph* g = static_cast<Glyph*>(object);
 	TPNode* n = g->tpnode;

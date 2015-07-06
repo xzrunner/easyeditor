@@ -36,7 +36,7 @@ ImageSprite::~ImageSprite()
 	}
 }
 
-ImageSprite* ImageSprite::clone() const
+ImageSprite* ImageSprite::Clone() const
 {
 	ImageSprite* sprite = new ImageSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);
@@ -64,8 +64,8 @@ void ImageSprite::buildBoundingFromTexCoords(float* texCoords)
 {
 	if (!m_symbol) return;
 
- 	const int width = m_symbol->getSize().xLength(),
- 		height = m_symbol->getSize().yLength();
+ 	const int width = m_symbol->GetSize().xLength(),
+ 		height = m_symbol->GetSize().yLength();
  
  	delete m_bounding;
  	m_bounding = BVFactory::createBV(e_obb);

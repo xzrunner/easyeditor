@@ -21,7 +21,7 @@ Task::~Task()
 	m_parent->SetTitle("EasyParticle");
 }
 
-void Task::load(const char* filepath)
+void Task::Load(const char* filepath)
 {
 	if (!wxFileName::FileExists(filepath)) {
 		throw d2d::Exception("File: %s don't exist!", filepath);
@@ -29,24 +29,24 @@ void Task::load(const char* filepath)
 	FileIO::load(filepath, m_stage->m_ps, m_toolbar);
 }
 
-void Task::store(const char* filepath) const
+void Task::Store(const char* filepath) const
 {
 	FileIO::store(filepath, m_toolbar);
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return m_stage->isDirty();
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_toolbar->initParticle();
 	m_stage->clear();
 	m_stage->Refresh();
 }
 
-const d2d::EditPanel* Task::getEditPanel() const 
+const d2d::EditPanel* Task::GetEditPanel() const 
 { 
 	return m_stage; 
 }

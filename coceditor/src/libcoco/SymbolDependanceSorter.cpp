@@ -160,7 +160,7 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 		}
 		else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(symbol))
 		{
-			wxString filepath = icon->GetIcon()->GetImage()->filepath();
+			wxString filepath = icon->GetIcon()->GetImage()->GetFilepath();
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			m_unique.insert(symbol);
 			m_unique.insert(icon);
@@ -178,7 +178,7 @@ void SymbolDependanceSorter::sort()
 			d2d::ISymbol* symbol = const_cast<d2d::ISymbol*>(*itr);
 			if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 			{
-				std::string path = symbol->getFilepath();
+				std::string path = symbol->GetFilepath();
 				m_result.push_back(image);
 				m_unique.erase(itr);
 				break;
@@ -289,7 +289,7 @@ void SymbolDependanceSorter::sort()
 				assert(oceans.size() == 1);
 				eterrain2d::OceanMesh* ocean = oceans[0];
 				const d2d::ImageSymbol* img = ocean->GetImage0();
-				std::string path = img->getFilepath();
+				std::string path = img->GetFilepath();
 
 				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->fetchSymbol(path);
 				std::vector<const d2d::ISymbol*>::iterator itr_find 
@@ -325,7 +325,7 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (eicon::Symbol* icon = dynamic_cast<eicon::Symbol*>(symbol)) 
 			{
-				wxString filepath = icon->GetIcon()->GetImage()->filepath();
+				wxString filepath = icon->GetIcon()->GetImage()->GetFilepath();
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 				if (IsSymbolPrepared(symbol)) {
  					m_result.push_back(icon);

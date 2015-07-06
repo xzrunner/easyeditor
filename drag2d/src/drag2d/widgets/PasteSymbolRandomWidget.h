@@ -35,7 +35,7 @@ namespace d2d
 		public:
 			FilterSymbolVisitor(const wxString& filter, std::vector<ISymbol*>& result);
 
-			virtual void visit(Object* object, bool& bFetchNext);
+			virtual void Visit(Object* object, bool& bFetchNext);
 
 		private:
 			wxString m_filter;

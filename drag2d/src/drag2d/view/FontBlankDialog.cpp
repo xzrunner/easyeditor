@@ -130,7 +130,7 @@ void FontBlankDialog::storeSymbol()
 {
 	if (!m_symbol) return;
 
-	wxString filepath = m_symbol->getFilepath();
+	wxString filepath = m_symbol->GetFilepath();
 	if (filepath.empty())
 	{
 		std::string ext = FileNameParser::getFileTag(FileNameParser::e_fontblank);
@@ -142,7 +142,7 @@ void FontBlankDialog::storeSymbol()
 			name = m_symbol->getName();
 		}
 
-		wxString dir = FilenameTools::getFileDir(m_symbol->getFilepath());
+		wxString dir = FilenameTools::getFileDir(m_symbol->GetFilepath());
 		filepath = dir + "\\" + m_symbol->name + ext;
 	}
 
@@ -164,6 +164,6 @@ void FontBlankDialog::storeSymbol()
 	writer.write(fout, value);
 	fout.close();
 
-	m_symbol->loadFromFile(filepath);
+	m_symbol->LoadFromFile(filepath);
 }
 } // d2d

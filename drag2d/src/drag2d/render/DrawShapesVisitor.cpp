@@ -13,7 +13,7 @@ DrawShapesVisitor::DrawShapesVisitor(const Rect& screen_region,
 {
 }
 
-void DrawShapesVisitor::visit(Object* object, bool& bFetchNext)
+void DrawShapesVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	bFetchNext = true;
 

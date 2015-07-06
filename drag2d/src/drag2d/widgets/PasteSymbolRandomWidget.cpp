@@ -83,10 +83,10 @@ FilterSymbolVisitor(const wxString& filter, std::vector<ISymbol*>& result)
 }
 
 void PasteSymbolRandomWidget::FilterSymbolVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ISymbol* symbol = static_cast<ISymbol*>(object);
-	if (!m_filter.empty() && symbol->getFilepath().find(m_filter) != wxNOT_FOUND)
+	if (!m_filter.empty() && symbol->GetFilepath().find(m_filter) != wxNOT_FOUND)
 		m_result.push_back(symbol);
 	bFetchNext = true;
 }

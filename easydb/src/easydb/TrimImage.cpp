@@ -50,7 +50,7 @@ void TrimImage::Trigger(const std::string& dir)
 		{
 			std::cout << i << " / " << n << " : " << filepath << "\n";
 
-			d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filepath);		
+			d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);		
 
 			eimage::ImageTrim trim(img);
 			d2d::Rect r = trim.Trim();
@@ -58,10 +58,10 @@ void TrimImage::Trigger(const std::string& dir)
 			// save info
 			Json::Value spr_val;
 			spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir, filepath).ToStdString();
-			spr_val["source size"]["w"] = img->originWidth();
-			spr_val["source size"]["h"] = img->originHeight();
+			spr_val["source size"]["w"] = img->GetOriginWidth();
+			spr_val["source size"]["h"] = img->GetOriginHeight();
 			spr_val["position"]["x"] = r.xMin;
-			spr_val["position"]["y"] = img->originHeight() - r.yMax;
+			spr_val["position"]["y"] = img->GetOriginHeight() - r.yMax;
 			spr_val["position"]["w"] = r.xLength();
 			spr_val["position"]["h"] = r.yLength();
 			value[idx++] = spr_val;

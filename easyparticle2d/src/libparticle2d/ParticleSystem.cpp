@@ -281,7 +281,7 @@ void ParticleSystem::Pause()
 void ParticleSystem::ReloadTexture() const
 {
 	if (m_symbol) {
-		m_symbol->reloadTexture();
+		m_symbol->ReloadTexture();
 	}
 }
 

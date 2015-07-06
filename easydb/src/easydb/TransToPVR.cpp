@@ -52,14 +52,14 @@ void TransToPVR::Trigger(const std::string& dir)
 
 void TransToPVR::EncodeByDtexPvr(const wxString& filepath) const
 {
-	d2d::Image* img = d2d::ImageMgr::Instance()->getItem(filepath);
+	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
 
 	int w, h, c, f;
 	uint8_t* src_buf = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);
 
-	// 			const uint8_t* src_buf = img->getPixelData();
-	// 			w = img->originWidth();
-	// 			h = img->originHeight();
+	// 			const uint8_t* src_buf = img->GetPixelData();
+	// 			w = img->GetOriginWidth();
+	// 			h = img->GetOriginHeight();
 
 	uint8_t* pvr_buf = dtex_pvr_encode(src_buf, w, h);
 	delete[] src_buf;

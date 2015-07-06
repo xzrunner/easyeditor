@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="libeasy3d"
-	ProjectGUID="{126F1AA2-182E-4F85-B77E-AAB86C6E2FB6}"
+	ProjectGUID="{C4799E05-825C-4633-A3E7-8BA05B45A666}"
 	RootNamespace="easy3d"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -238,6 +238,10 @@
 						RelativePath="..\..\..\src\easy3d\SpriteShader.h"
 						>
 					</File>
+					<File
+						RelativePath="..\..\..\src\easy3d\TexLightingShader.h"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -278,6 +282,18 @@
 			>
 			<File
 				RelativePath="..\..\..\src\easy3d\IModel.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\Material.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\Material.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\..\src\easy3d\Mesh.h"
 				>
 			</File>
 			<Filter

@@ -22,7 +22,7 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filepath)
+void Task::Load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_mesh)) {
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
@@ -35,18 +35,18 @@ void Task::load(const char* filepath)
 	}
 }
 
-void Task::store(const char* filepath) const
+void Task::Store(const char* filepath) const
 {
 	FileIO::store(filepath, m_stage->GetSymbol());
 	m_stage->onSave();
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return false;
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_library->Clear();
 	m_stage->clear();
@@ -54,7 +54,7 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-const d2d::EditPanel* Task::getEditPanel() const 
+const d2d::EditPanel* Task::GetEditPanel() const 
 { 
 	return m_stage; 
 }

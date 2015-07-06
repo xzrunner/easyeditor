@@ -19,7 +19,7 @@ PointShape::PointShape(const PointShape& point)
 {	
 }
 
-PointShape* PointShape::clone() const
+PointShape* PointShape::Clone() const
 {
 	return new PointShape(*this);
 }

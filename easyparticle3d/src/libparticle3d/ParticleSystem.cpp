@@ -256,7 +256,7 @@ void ParticleSystem::draw(const d2d::Matrix& mt, AnimRecorder* recorder)
 		AnimRecorder* curr_record = m_anim_recorder ? m_anim_recorder : recorder;
 		if (curr_record) {
 			d2d::Vector fixed = d2d::Math::transVector(pos, _mt);
-			curr_record->AddItem(p->pc->symbol->getFilepath().ToStdString(), fixed.x, fixed.y, p->angle, s, multi);
+			curr_record->AddItem(p->pc->symbol->GetFilepath(), fixed.x, fixed.y, p->angle, s, multi);
 		}
 
 		//glPopAttrib();
@@ -430,12 +430,12 @@ bool ParticleSystem::IsEmpty() const
 	return pStart == pLast;
 }
 
-void ParticleSystem::reloadTexture() const
+void ParticleSystem::ReloadTexture() const
 {
 	for (int i = 0, n = children.size(); i < n; ++i)
 	{
 		ParticleChild* child = children[i];
-		child->symbol->reloadTexture();
+		child->symbol->ReloadTexture();
 	}
 }
 
@@ -519,7 +519,7 @@ void ParticleSystem::add()
 	if (pLast->pc->bind_ps) {
 //			// todo memory leak
 //			delete pLast->m_bind_ps;
-		pLast->m_bind_ps = pLast->pc->bind_ps->clone();
+		pLast->m_bind_ps = pLast->pc->bind_ps->Clone();
 	} else {
 		delete pLast->m_bind_ps;
 		pLast->m_bind_ps = NULL;

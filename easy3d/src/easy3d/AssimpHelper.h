@@ -4,12 +4,14 @@
 struct aiScene;
 struct aiNode;
 struct aiMesh;
+struct aiMaterial;
 
 namespace e3d
 {
 
 class ModelParametric;
 class AABB;
+struct Material;
 
 class AssimpHelper
 {
@@ -21,7 +23,8 @@ private:
 	void LoadNode(const aiScene* scene, const aiNode* node, ModelParametric& model,
 		e3d::AABB& aabb);
 
-	void LoadMesh(const aiMesh* mesh, ModelParametric& model, e3d::AABB& aabb);
+	void LoadMesh(const aiMesh* mesh, const aiMaterial* material, ModelParametric& model, e3d::AABB& aabb);
+	void LoadMaterial(const aiMesh* ai_mesh, const aiMaterial* ai_material, Material& material);
 
 }; // AssimpHelper
 

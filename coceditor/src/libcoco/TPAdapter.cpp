@@ -39,7 +39,7 @@ void TPAdapter::Load(const char* filename)
 void TPAdapter::Load(const Json::Value& value, Entry& entry)
 {
 	entry.filename = value["filename"].asString();
-	StringTools::toLower(entry.filename);
+	d2d::StringTools::ToLower(entry.filename);
 	d2d::FilenameTools::formatSeparators(entry.filename);
 
 	Load(value["frame"], entry.frame);

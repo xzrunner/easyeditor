@@ -11,7 +11,7 @@ SpriteObserver::SpriteObserver(const Layer& layer)
 {
 }
 
-void SpriteObserver::translate(d2d::ISprite* sprite, const d2d::Vector& offset)
+void SpriteObserver::Translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 {
 	if (!m_enable) {
 		return;
@@ -39,7 +39,7 @@ void SpriteObserver::translate(d2d::ISprite* sprite, const d2d::Vector& offset)
 	m_enable = true;
 }
 
-void SpriteObserver::rotate(d2d::ISprite* sprite, float delta)
+void SpriteObserver::Rotate(d2d::ISprite* sprite, float delta)
 {
 	if (!m_enable) {
 		return;

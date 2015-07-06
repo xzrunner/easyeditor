@@ -11,7 +11,7 @@ void MaxRectsBinaryArrange::arrange(const std::vector<d2d::ImageSprite*>& sprite
 	std::vector<libpacker::RectSize> rects;
 	rects.reserve(sz);
 	for (int i = 0; i < sz; ++i) {
-		d2d::Rect r = sprites[i]->getSymbol().getSize();
+		d2d::Rect r = sprites[i]->getSymbol().GetSize();
 		rects.push_back(libpacker::RectSize(r.xLength(), r.yLength()));
 	}
 	std::vector<libpacker::Rect> output;

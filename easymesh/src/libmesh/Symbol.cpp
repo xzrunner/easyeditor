@@ -20,7 +20,7 @@ Symbol::Symbol(const Symbol& s)
 	s.m_image->Retain();
 	m_image = s.m_image;
 
-	m_shape = s.m_shape->clone();
+	m_shape = s.m_shape->Clone();
 }
 
 Symbol::Symbol(d2d::Image* image)
@@ -45,19 +45,19 @@ Symbol::~Symbol()
 	}
 }
 
-Symbol* Symbol::clone() const 
+Symbol* Symbol::Clone() const 
 { 
 	return new Symbol(*this);
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 	if (m_image) {
-		m_image->reload();
+		m_image->Reload();
 	}
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -97,15 +97,15 @@ void Symbol::SetShape(Shape* shape)
 	m_shape = shape;
 }
 
-const wxString& Symbol::GetImagePath() const
+const std::string& Symbol::GetImagePath() const
 {
-	return m_image->filepath();
+	return m_image->GetFilepath();
 }
 
-void Symbol::LoadImage(const wxString& filepath)
+void Symbol::LoadImage(const std::string& filepath)
 {
-//	d2d::BitmapMgr::Instance()->getItem(filepath, &m_bitmap);
-	d2d::ImageMgr::Instance()->getItem(filepath, &m_image);
+//	d2d::BitmapMgr::Instance()->GetItem(filepath, &m_bitmap);
+	d2d::ImageMgr::Instance()->GetItem(filepath, &m_image);
 }
 
 void Symbol::CreateShape()
@@ -116,9 +116,9 @@ void Symbol::CreateShape()
 	m_shape = ShapeFactory::Instance()->CreateShape(*m_image);
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
-	FileIO::load(m_filepath, this);
+	FileIO::load(m_filepath.c_str(), this);
 	InitBounding();
 }
 

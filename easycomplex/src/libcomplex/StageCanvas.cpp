@@ -33,7 +33,7 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 void StageCanvas::initGL()
 {
 	d2d::DynamicStageCanvas::initGL();
-	m_stage->getSymbol()->reloadTexture();
+	m_stage->getSymbol()->ReloadTexture();
 // 		d2d::DynamicTexture::Instance()->ReloadTexture();
 // 		d2d::DynamicFont::Instance()->ReloadTexture();
 

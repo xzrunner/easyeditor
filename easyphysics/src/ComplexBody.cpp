@@ -20,7 +20,7 @@ ComplexBody::ComplexBody(b2World* world, const std::vector<FixtureDataInfo>& fix
 	{
 		const FixtureDataInfo& info = fixtures[i];
 
-		BodyData* data = BodyDataMgr::Instance()->getItem(info.filepath);
+		BodyData* data = BodyDataMgr::Instance()->GetItem(info.filepath);
 		if (data->type() == BodyData::e_polygon || data->type() == BodyData::e_mesh)
 		{
 			const float sinVal = sin(info.angle),

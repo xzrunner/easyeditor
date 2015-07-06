@@ -109,7 +109,7 @@ private:
 	{
 	public:
 		ReloadTextureVisitor(int tex, int padding) : m_tex(tex), m_padding(padding) {}
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 	private:
 		int m_tex;
 		int m_padding;

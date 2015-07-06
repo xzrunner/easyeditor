@@ -19,7 +19,7 @@ DialogStageCanvas::DialogStageCanvas(EditPanel* editPanel,
 void DialogStageCanvas::initGL()
 {
 	OrthoCanvas::initGL();
-	m_symbol->reloadTexture();
+	m_symbol->ReloadTexture();
 	if (Config::Instance()->IsUseDTex()) {
 		DynamicTexAndFont::Instance()->ReloadTexture();
 	}

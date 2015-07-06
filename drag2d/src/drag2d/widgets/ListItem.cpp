@@ -14,8 +14,8 @@ void ListItem::RefreshThumbnail(const wxString& filepath, bool force)
 			return;
 		}
 	}
-	m_bitmap = BitmapMgr::Instance()->getItem(filepath);
-	m_bitmap->loadFromFile(filepath);
+	m_bitmap = BitmapMgr::Instance()->GetItem(filepath);
+	m_bitmap->LoadFromFile(filepath);
 }
 
 }

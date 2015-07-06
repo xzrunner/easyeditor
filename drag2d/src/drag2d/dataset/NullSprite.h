@@ -20,7 +20,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual NullSprite* clone() const { return NULL; }
+		virtual NullSprite* Clone() const { return NULL; }
 
 		//
 		// ISprite interface

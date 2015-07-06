@@ -60,7 +60,7 @@ inline void SelectionSet<T>::Traverse(IVisitor& visitor) const
 	for ( ; itr != m_items.end(); ++itr)
 	{
 		bool hasNext;
-		visitor.visit(*itr, hasNext);
+		visitor.Visit(*itr, hasNext);
 		if (!hasNext) break;
 	}
 }

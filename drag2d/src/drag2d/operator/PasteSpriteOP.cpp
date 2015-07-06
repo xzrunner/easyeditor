@@ -184,7 +184,7 @@ insertToSpritesImpl(MultiSpritesImpl* spritesImpl, const Vector& pos,
 
 //		spritesImpl->insertSprite(sprite->getSymbol(), fixed + pos);
 
-		ISprite* newOne = sprite->clone();
+		ISprite* newOne = sprite->Clone();
 		newOne->setTransform(fixed + pos, newOne->getAngle());
 		spritesImpl->insertSprite(newOne);
 		newOne->Release();

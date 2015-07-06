@@ -66,7 +66,7 @@ void SpriteRenderer::Draw(const ISymbol* symbol,
 	Matrix t;
 	t.setTransformation(pos.x, pos.y, angle, xScale, yScale, 0, 0, xShear, yShear);
 	t = mt * t;
-	symbol->draw(t, mul, add, r_trans, g_trans, b_trans);
+	symbol->Draw(t, mul, add, r_trans, g_trans, b_trans);
 }
 
 void SpriteRenderer::DrawName(const std::string& name, float scale, const Matrix& mt) const
@@ -118,7 +118,7 @@ void SpriteRenderer::DrawImpl(const ISprite* sprite,
 	_b_trans.g = sprite->b_trans.r * r_trans.g + sprite->b_trans.g * g_trans.g + sprite->b_trans.b * b_trans.g;
 	_b_trans.b = sprite->b_trans.r * r_trans.b + sprite->b_trans.g * g_trans.b + sprite->b_trans.b * b_trans.b;
 
-	sprite->getSymbol().draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
+	sprite->getSymbol().Draw(t, _mul, _add, _r_trans, _g_trans, _b_trans, sprite);
 }
 
 void SpriteRenderer::DrawImplBlend(const ISprite* sprite) const
@@ -160,7 +160,7 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 
 	// dst
 	Vector dst[4];
-	Rect dst_rect = sprite->getSymbol().getSize();
+	Rect dst_rect = sprite->getSymbol().GetSize();
 	dst[0] = Vector(dst_rect.xMin, dst_rect.yMin);
 	dst[1] = Vector(dst_rect.xMax, dst_rect.yMin);
 	dst[2] = Vector(dst_rect.xMax, dst_rect.yMax);
@@ -171,7 +171,7 @@ void SpriteRenderer::DrawUnderToTmp(const ISprite* sprite) const
 	mgr->GetModelView(offset, scale);
 
 	mgr->SetModelView(Vector(0, 0), 1);
-	Rect r = sprite->getSymbol().getSize();
+	Rect r = sprite->getSymbol().GetSize();
 	mgr->SetProjection(r.xLength(), r.yLength());
 	glViewport(0, 0, r.xLength(), r.yLength());
 
@@ -204,7 +204,7 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	mgr->GetModelView(offset, scale);
 
 	mgr->SetModelView(Vector(0, 0), 1);
-	Rect r = sprite->getSymbol().getSize();
+	Rect r = sprite->getSymbol().GetSize();
 	mgr->SetProjection(r.xLength(), r.yLength());
 	glViewport(0, 0, r.xLength(), r.yLength());
 
@@ -212,7 +212,7 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
 //	blend_shader->SetBaseTexID(m_fbo->GetTexID());
 
-	sprite->getSymbol().draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
+	sprite->getSymbol().Draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
 		Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
 
 	mgr->Commit();
@@ -237,7 +237,7 @@ void SpriteRenderer::DrawTmpToScreen(const ISprite* sprite) const
 	float xmin = r_dst.xMin, xmax = r_dst.xMax;
 	float ymin = r_dst.yMin, ymax = r_dst.yMax;
 
-	d2d::Rect r_src = sprite->getSymbol().getSize();
+	d2d::Rect r_src = sprite->getSymbol().GetSize();
 	//  		float txmin = r_src.xMin / m_fbo->GetWidth() + 0.5f,
 	//  			txmax = r_src.xMax / m_fbo->GetWidth() + 0.5f;
 	//  		float tymin = r_src.yMin / m_fbo->GetHeight() + 0.5f,

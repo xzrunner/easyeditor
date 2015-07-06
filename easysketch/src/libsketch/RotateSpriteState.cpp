@@ -43,7 +43,7 @@ void RotateSpriteState::Rotate(const e3d::Camera& cam, const ivec2& start, const
 //////////////////////////////////////////////////////////////////////////
 
 void RotateSpriteState::Visitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 

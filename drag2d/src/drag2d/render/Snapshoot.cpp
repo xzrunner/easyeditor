@@ -28,8 +28,8 @@ unsigned char* Snapshoot::OutputToMemory(const ISymbol* symbol, bool whitebg,
 {
 	m_fbo.DrawSymbol(symbol, whitebg, scale);
 
-	int w = symbol->getSize().xLength() * scale,
-		h = symbol->getSize().yLength() * scale;
+	int w = symbol->GetSize().xLength() * scale,
+		h = symbol->GetSize().yLength() * scale;
 	size_t size = w*h*4;
 	unsigned char* pixels = new unsigned char[size];
 	if(!pixels) return NULL;
@@ -43,8 +43,8 @@ unsigned char* Snapshoot::OutputToMemory(const ISymbol* symbol, bool whitebg,
 void Snapshoot::OutputToImageFile(const ISymbol* symbol, const std::string& filename,
 								  float scale) const
 {
-	int w = symbol->getSize().xLength() * scale,
-		h = symbol->getSize().yLength() * scale;
+	int w = symbol->GetSize().xLength() * scale,
+		h = symbol->GetSize().yLength() * scale;
 	unsigned char* pixels = OutputToMemory(symbol, false, scale);
 	ImageSaver::storeToFile(pixels, w, h, 4, filename, ImageSaver::e_png);
 	delete[] pixels;

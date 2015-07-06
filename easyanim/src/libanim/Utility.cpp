@@ -38,12 +38,12 @@ void Utility::GetCurrSprites(const Symbol* symbol, int index, std::vector<d2d::I
 //			;
 
 			for (size_t i = 0, n = currFrame->sprites.size(); i < n; ++i)
-				sprites.push_back(currFrame->sprites[i]->clone());	
+				sprites.push_back(currFrame->sprites[i]->Clone());	
 		}
 		else if (!currFrame->bClassicTween)
 		{
 			for (size_t i = 0, n = currFrame->sprites.size(); i < n; ++i)
-				sprites.push_back(currFrame->sprites[i]->clone());	
+				sprites.push_back(currFrame->sprites[i]->Clone());	
 		}
 		else
 		{

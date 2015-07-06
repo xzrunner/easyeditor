@@ -74,7 +74,7 @@ void Frame::SaveAsParticle3d(const wxString& filepath) const
 {
 	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
 	m_currFilename = fixed;
-	m_task->store(fixed);
+	m_task->Store(fixed);
 }
 
 void Frame::SaveAsAnim(const wxString& filepath) const

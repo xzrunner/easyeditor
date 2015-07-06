@@ -67,7 +67,7 @@ LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody)
 {}
 
 void PreviewPanel::LoadBodyVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	libmodeling::Body* data = static_cast<libmodeling::Body*>(object);
 
@@ -89,7 +89,7 @@ LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& ma
 {}
 
 void PreviewPanel::LoadJointVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
 
@@ -113,7 +113,7 @@ LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>
 {}
 
 void PreviewPanel::LoadGearJointVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	libmodeling::Joint* data = static_cast<libmodeling::Joint*>(object);
 

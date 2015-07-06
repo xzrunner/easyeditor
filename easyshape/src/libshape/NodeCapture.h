@@ -39,14 +39,14 @@ private:
 	public:
 		RectQueryVisitor(const d2d::Vector& pos, float tolerance, NodeAddr& result);
 
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 	private:
-		bool visit(PointShape* point);
-		bool visit(BezierShape* bezier);
-		bool visit(ChainShape* chain);
-		bool visit(CircleShape* circle);
-		bool visit(RectShape* rect);
+		bool Visit(PointShape* point);
+		bool Visit(BezierShape* bezier);
+		bool Visit(ChainShape* chain);
+		bool Visit(CircleShape* circle);
+		bool Visit(RectShape* rect);
 
 	private:
 		const d2d::Vector& m_pos;

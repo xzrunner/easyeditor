@@ -28,9 +28,9 @@ void StageCanvas::initGL()
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	} else {
-		m_stage->GetSymbol()->reloadTexture();
+		m_stage->GetSymbol()->ReloadTexture();
 		for (int i = 0, n = m_bg_sprites.size(); i < n; ++i) {
-			m_bg_sprites[i]->getSymbol().reloadTexture();
+			m_bg_sprites[i]->getSymbol().ReloadTexture();
 		}
 	}
 
@@ -47,7 +47,7 @@ void StageCanvas::OnDraw()
 		}
 	}
 
-	m_stage->GetSymbol()->draw(d2d::Matrix());
+	m_stage->GetSymbol()->Draw(d2d::Matrix());
 	m_stage->drawEditTemp();
 }
 

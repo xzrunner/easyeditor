@@ -23,12 +23,12 @@ Symbol::Symbol(const Symbol& symbol)
 	}
 	m_bg_outline.reserve(symbol.m_bg_outline.size());
 	for (size_t i = 0, n = symbol.m_bg_outline.size(); i < n; ++i) {
-		m_bg_outline.push_back(symbol.m_bg_outline[i]->clone());
+		m_bg_outline.push_back(symbol.m_bg_outline[i]->Clone());
 	}
 	
 	m_shapes.reserve(symbol.m_shapes.size());
 	for (size_t i = 0, n = symbol.m_shapes.size(); i < n; ++i) {
-		m_shapes.push_back(symbol.m_shapes[i]->clone());
+		m_shapes.push_back(symbol.m_shapes[i]->Clone());
 	}
 }
 
@@ -37,19 +37,19 @@ Symbol::~Symbol()
 	Clear();
 }
 
-Symbol* Symbol::clone() const
+Symbol* Symbol::Clone() const
 {
 	return new Symbol(*this); 
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 	if (m_bg) {
-		m_bg->reloadTexture();
+		m_bg->ReloadTexture();
 	}
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -58,7 +58,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 				  const d2d::ISprite* sprite/* = NULL*/) const
 {
  	if (m_bg) {
- 		m_bg->draw(mt, mul, add, r_trans, g_trans, b_trans, sprite);
+ 		m_bg->Draw(mt, mul, add, r_trans, g_trans, b_trans, sprite);
  	}
 	if (d2d::Config::Instance()->GetSettings().visible_shape)
 	{
@@ -71,7 +71,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
 	d2d::Rect rect;
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
@@ -87,12 +87,12 @@ void Symbol::Traverse(d2d::IVisitor& visitor) const
 {
 	for (int i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		bool hasNext;
-		visitor.visit(m_bg_outline[i], hasNext);
+		visitor.Visit(m_bg_outline[i], hasNext);
 		if (!hasNext) return;
 	}
 	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
 		bool hasNext;
-		visitor.visit(m_shapes[i], hasNext);
+		visitor.Visit(m_shapes[i], hasNext);
 		if (!hasNext) return;
 	}
 }
@@ -149,10 +149,10 @@ void Symbol::StoreToFile(const char* filename) const
 	FileIO::StoreToFile(filename, shapes, m_bg);
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
 	Clear();
-	FileIO::LoadFromFile(m_filepath, m_shapes, m_bg);
+	FileIO::LoadFromFile(m_filepath.c_str(), m_shapes, m_bg);
 }
 
 void Symbol::LoadBGOutline(d2d::ISymbol* bg)
@@ -167,7 +167,7 @@ void Symbol::LoadBGOutline(d2d::ISymbol* bg)
 	}
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
-		bg->getFilepath(), eimage::OUTLINE_FILE_TAG, "json");
+		bg->GetFilepath(), eimage::OUTLINE_FILE_TAG, "json");
 	if (!d2d::FilenameTools::isExist(filepath)) {
 		return;
 	}
@@ -193,7 +193,7 @@ void Symbol::LoadBGTriStrip(d2d::ISymbol* bg)
 	m_bg_tri_strips.clear();
 
 	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
-		bg->getFilepath(), eimage::TRI_STRIP_FILE_TAG, "json");
+		bg->GetFilepath(), eimage::TRI_STRIP_FILE_TAG, "json");
 	if (!d2d::FilenameTools::isExist(filepath)) {
 		return;
 	}

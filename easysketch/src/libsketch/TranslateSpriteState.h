@@ -28,7 +28,7 @@ private:
 	public:
 		Visitor(StagePanel* stage, const ivec2& last, const ivec2& curr) 
 			: m_stage(stage), m_last(last), m_curr(curr) {}
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 	private:
 		StagePanel* m_stage;
 		ivec2 m_last, m_curr;

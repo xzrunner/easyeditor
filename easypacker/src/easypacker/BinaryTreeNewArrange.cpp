@@ -41,7 +41,7 @@ void BinaryTreeNewArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites
 			d2d::ImageSprite* s = sorted[i];
 			bool success = Insert(*s);
 			if (!success) {
-				d2d::Rect r = s->getSymbol().getSize();
+				d2d::Rect r = s->getSymbol().GetSize();
 				float w = r.xLength() * scale + PADDING*2;
 				float h = r.yLength() * scale + PADDING*2;
 				if ((w > tot_w || h > tot_h) &&
@@ -81,7 +81,7 @@ bool BinaryTreeNewArrange::
 Insert(d2d::ImageSprite& img) const
 {
 	std::map<std::string, d2d::TPNode*>::const_iterator itr 
-		= m_mapImages.find(img.getSymbol().getFilepath().ToStdString());
+		= m_mapImages.find(img.getSymbol().GetFilepath().ToStdString());
 	if (itr != m_mapImages.end()) {
 		return false;
 	}

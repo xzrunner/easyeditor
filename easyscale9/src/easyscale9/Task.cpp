@@ -20,7 +20,7 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filepath)
+void Task::Load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_scale9)) {
 		FileIO::load(filepath, m_library, m_stage, m_toolbar);
@@ -28,17 +28,17 @@ void Task::load(const char* filepath)
 	}
 }
 
-void Task::store(const char* filepath) const
+void Task::Store(const char* filepath) const
 {
 	FileIO::store(filepath, m_stage, m_toolbar);
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return m_stage->isDirty();
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_library->Clear();
 	m_stage->clear();
@@ -46,7 +46,7 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

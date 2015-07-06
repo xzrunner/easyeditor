@@ -35,7 +35,7 @@ Sprite::~Sprite()
 	}
 }
 
-Sprite* Sprite::clone() const
+Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
 	d2d::SpriteFactory::Instance()->insert(sprite);

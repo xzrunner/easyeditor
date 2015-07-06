@@ -33,10 +33,10 @@ PolygonShape::~PolygonShape()
 	if (m_material) {
 		m_material->Release();
 	}
-	clearUserData(true);
+	ClearUserData(true);
 }
 
-PolygonShape* PolygonShape::clone() const
+PolygonShape* PolygonShape::Clone() const
 {
 	return new PolygonShape(*this);
 }

@@ -142,7 +142,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 		m_pathfinding->DisableRegion(sprite, false);
 	}
 
-	std::string filepath = sprite->getSymbol().getFilepath();
+	std::string filepath = sprite->getSymbol().GetFilepath();
 	if (CharacterFileName::IsValidFilepath(filepath)) {
 		CharacterFileName name(filepath);
 		m_chara_dirs.BuildSymbolDirections(name);

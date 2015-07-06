@@ -19,7 +19,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual ComplexPolygonShape* clone() const { return new ComplexPolygonShape(*this); }
+	virtual ComplexPolygonShape* Clone() const { return new ComplexPolygonShape(*this); }
 
 	//
 	// IShape interface

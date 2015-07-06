@@ -44,7 +44,7 @@ void TranslateSpriteState::Translate(const ivec2& first, const ivec2& curr)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	Sprite* sprite = static_cast<Sprite*>(object);
 

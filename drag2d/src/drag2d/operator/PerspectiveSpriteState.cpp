@@ -37,7 +37,7 @@ bool PerspectiveSpriteState::OnMouseDrag(const Vector& pos)
 
 void PerspectiveSpriteState::Perspective(const Vector& curr)
 {
-	Rect r = m_sprite->getSymbol().getSize(m_sprite);
+	Rect r = m_sprite->getSymbol().GetSize(m_sprite);
 	Matrix t;
 	t.setTransformation(m_sprite->getPosition().x, m_sprite->getPosition().y, m_sprite->getAngle(),
 		m_sprite->getScale().x, m_sprite->getScale().y, 0, 0, m_sprite->getShear().x, m_sprite->getShear().y);

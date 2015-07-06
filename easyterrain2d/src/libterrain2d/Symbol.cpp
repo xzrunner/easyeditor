@@ -26,22 +26,22 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
 		const d2d::ImageSymbol* img0 = ocean->GetImage0();
 		if (img0) {
-			img0->reloadTexture();
+			img0->ReloadTexture();
 		}
 		const d2d::ImageSymbol* img1 = ocean->GetImage1();
 		if (img1) {
-			img1->reloadTexture();
+			img1->ReloadTexture();
 		}
 	}	
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -71,7 +71,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	m_time = curr;
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
 	d2d::Rect ret;
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
@@ -80,12 +80,12 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 	return ret; 
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.mb_str());
+	std::ifstream fin(m_filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();

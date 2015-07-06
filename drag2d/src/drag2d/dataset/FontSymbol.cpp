@@ -24,17 +24,17 @@ FontSymbol::~FontSymbol()
 //	m_font->Release();
 }
 
-FontSymbol* FontSymbol::clone() const
+FontSymbol* FontSymbol::Clone() const
 {
 	return NULL;
 }
 
-void FontSymbol::reloadTexture() const
+void FontSymbol::ReloadTexture() const
 {
-	m_font->loadFromFile("default.ttf");
+	m_font->LoadFromFile("default.ttf");
 }
 
-void FontSymbol::draw(const Matrix& mt,
+void FontSymbol::Draw(const Matrix& mt,
 					  const Colorf& mul, 
 					  const Colorf& add,
 					  const Colorf& r_trans,
@@ -53,7 +53,7 @@ void FontSymbol::draw(const Matrix& mt,
 	print(0, 0, text->getText().c_str());
 }
 
-Rect FontSymbol::getSize(const ISprite* sprite/* = NULL*/) const
+Rect FontSymbol::GetSize(const ISprite* sprite/* = NULL*/) const
 {
 // 	int w = 0;
 // 	TextSprite* text = static_cast<TextSprite*>(const_cast<ISprite*>(sprite));
@@ -71,9 +71,9 @@ Rect FontSymbol::getSize(const ISprite* sprite/* = NULL*/) const
 	return Rect(w, h);
 }
 
-void FontSymbol::loadResources()
+void FontSymbol::LoadResources()
 {
-	m_font = FontMgr::Instance()->getItem(m_filepath);
+	m_font = FontMgr::Instance()->GetItem(m_filepath);
 }
 
 int FontSymbol::getStrWidth(const std::string& str) const

@@ -102,7 +102,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 	Json::Value value;
 
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-		sprite->getSymbol().getFilepath()).ToStdString();
+		sprite->getSymbol().GetFilepath()).ToStdString();
 
 	int row, col;
 	stage->TransCoordsToGridPosNew(sprite->getPosition(), row, col);
@@ -137,7 +137,7 @@ void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 		return;
 	}
 
-	wxString filepath = symbol->getFilepath();
+	wxString filepath = symbol->GetFilepath();
 	if (!filepath.Contains("wall")) {
 		return;
 	}

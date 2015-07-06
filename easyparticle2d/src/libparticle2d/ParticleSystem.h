@@ -34,8 +34,8 @@ public:
 	void ReloadTexture() const;
 
 	void SetSymbol(d2d::ISymbol* symbol);
-	const wxString& GetSymbolFilePath() const {
-		return m_symbol->getFilepath();
+	const std::string& GetSymbolFilePath() const {
+		return m_symbol->GetFilepath();
 	}
 
 private:

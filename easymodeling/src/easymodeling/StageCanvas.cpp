@@ -91,7 +91,7 @@ void StageCanvas::drawLines() const
 	}
 }
 
-void StageCanvas::DrawJointVisitor::visit(d2d::Object* object, bool& bFetchNext)
+void StageCanvas::DrawJointVisitor::Visit(d2d::Object* object, bool& bFetchNext)
 {
 	libmodeling::Joint* joint = static_cast<libmodeling::Joint*>(object);
 	joint->draw(libmodeling::Joint::e_default);

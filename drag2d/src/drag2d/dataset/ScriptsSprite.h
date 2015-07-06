@@ -17,7 +17,7 @@ public:
 	//
 	// ICloneable interface
 	//
-	virtual ScriptsSprite* clone() const;
+	virtual ScriptsSprite* Clone() const;
 
 	//
 	// ISprite interface

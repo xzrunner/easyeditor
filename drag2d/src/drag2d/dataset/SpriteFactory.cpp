@@ -25,7 +25,7 @@ ISprite* SpriteFactory::create(ISymbol* symbol)
 {
 	ISprite* sprite = NULL;
 
-	wxString filepath = symbol->getFilepath();
+	wxString filepath = symbol->GetFilepath();
 	if (filepath.empty())
 	{
 		// todo

@@ -23,7 +23,7 @@ ChainShape::ChainShape(const std::vector<d2d::Vector>& vertices, bool isLoop)
 	InitBounding();
 }
 
-ChainShape* ChainShape::clone() const
+ChainShape* ChainShape::Clone() const
 {
 	return new ChainShape(*this);
 }

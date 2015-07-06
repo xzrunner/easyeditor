@@ -84,7 +84,7 @@ void SymbolsCfg::ResetLibraryList(LibraryPage* library, const std::vector<Symbol
 		const Symbol* src = symbols[i];
 
 		d2d::ISymbol* dst = d2d::SymbolMgr::Instance()->fetchSymbol(src->filepath);
-		dst->RefreshThumbnail(dst->getFilepath());
+		dst->RefreshThumbnail(dst->GetFilepath());
 		library->GetList()->insert(dst);
 		dst->Release();
 	}

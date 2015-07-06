@@ -66,7 +66,7 @@ bool MyApp::OnInit()
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
-		task->getEditPanel()->getCanvas()->SetCurrentCanvas();
+		task->GetEditPanel()->getCanvas()->SetCurrentCanvas();
 
 		wxString path(wxGetApp().argv[1]);
 		frame->initWithFile(path);

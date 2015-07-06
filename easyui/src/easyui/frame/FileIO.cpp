@@ -54,7 +54,7 @@ void FileIO::Store(const char* filename, StagePanel* stage)
 
 		Json::Value spr_val;
 		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->getSymbol().getFilepath()).ToStdString();
+			spr->getSymbol().GetFilepath()).ToStdString();
 		spr->store(spr_val);
 
 		value["sprite"][i] = spr_val;

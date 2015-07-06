@@ -13,14 +13,14 @@ Frame::Frame(const wxString& title)
 
 void Frame::onNew(wxCommandEvent& event)
 {
-	d2d::AbstractEditOP* editop = m_task->getEditPanel()->getEditOP();
+	d2d::AbstractEditOP* editop = m_task->GetEditPanel()->getEditOP();
 	editop->Clear();
 	Refresh();
 }
 
 void Frame::onOpen(wxCommandEvent& event)
 {
-	d2d::AbstractEditOP* editop = m_task->getEditPanel()->getEditOP();
+	d2d::AbstractEditOP* editop = m_task->GetEditPanel()->getEditOP();
 	if (RectCutOP* op = dynamic_cast<RectCutOP*>(editop))
 	{
 		op->getEditCMPT()->onLoadEditOP(event);
@@ -29,7 +29,7 @@ void Frame::onOpen(wxCommandEvent& event)
 
 void Frame::onSave(wxCommandEvent& event)
 {
-	d2d::AbstractEditOP* editop = m_task->getEditPanel()->getEditOP();
+	d2d::AbstractEditOP* editop = m_task->GetEditPanel()->getEditOP();
 	if (RectCutOP* op = dynamic_cast<RectCutOP*>(editop))
 	{
 		op->getEditCMPT()->onSaveEditOP(event);
@@ -38,7 +38,7 @@ void Frame::onSave(wxCommandEvent& event)
 
 void Frame::onSaveAs(wxCommandEvent& event)
 {
-	d2d::AbstractEditOP* editop = m_task->getEditPanel()->getEditOP();
+	d2d::AbstractEditOP* editop = m_task->GetEditPanel()->getEditOP();
 	if (RectCutOP* op = dynamic_cast<RectCutOP*>(editop))
 	{
 		op->getEditCMPT()->onSaveEditOP(event);

@@ -32,7 +32,7 @@ void Love2dCode::resolve()
 			if (frame->Size() != 0)
 			{
 				const d2d::ISprite* sprite = frame->GetSprite(0);
-				int index = query(sprite->getSymbol().getFilepath().ToStdString());
+				int index = query(sprite->getSymbol().GetFilepath().ToStdString());
 				if (index != -1)
 				{
 					std::string time = wxString::FromDouble(frame->GetTime(), 0);

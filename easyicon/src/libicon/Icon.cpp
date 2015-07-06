@@ -57,8 +57,8 @@ void Icon::Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const
 	int texid = m_img->textureID();
 
 	d2d::Vector texcoords[4];
-	float ori_w = m_img->originWidth(),
-		ori_h = m_img->originHeight();
+	float ori_w = m_img->GetOriginWidth(),
+		ori_h = m_img->GetOriginHeight();
 	for (int i = 0; i < 4; ++i)
 	{
 		float x = (clip_r.xMin + r[i].x * clip_r.xLength()) / ori_w + 0.5f;

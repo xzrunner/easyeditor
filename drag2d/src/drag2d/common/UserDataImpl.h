@@ -1,21 +1,25 @@
-#pragma once
+#ifndef _DRAG2D_USER_DATA_IMPL_H_
+#define _DRAG2D_USER_DATA_IMPL_H_
 
 namespace d2d
 {
-	class UserDataImpl
-	{
-	public:
-		UserDataImpl();
-		virtual ~UserDataImpl();
 
-		virtual void clearUserData(bool deletePtr) = 0;
+class UserDataImpl
+{
+public:
+	UserDataImpl();
+	virtual ~UserDataImpl();
 
-		void setUserData(void* data);
-		void* getUserData() const;
+	virtual void ClearUserData(bool deletePtr) = 0;
 
-	protected:
-		void* m_userData;
+	void SetUserData(void* data);
+	void* GetUserData() const;
 
-	}; // UserDataImpl
+protected:
+	void* m_userData;
+
+}; // UserDataImpl
+
 }
 
+#endif // _DRAG2D_USER_DATA_IMPL_H_

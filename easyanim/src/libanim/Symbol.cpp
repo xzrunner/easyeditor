@@ -20,7 +20,7 @@ Symbol::~Symbol()
 	clear();
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 	for (size_t i = 0, n = m_layers.size(); i < n; ++i)
 	{
@@ -29,12 +29,12 @@ void Symbol::reloadTexture() const
 		{
 			Frame* frame = layer->frames[j];
 			for (size_t k = 0, l = frame->sprites.size(); k < l; ++k)
-				frame->sprites[k]->getSymbol().reloadTexture();
+				frame->sprites[k]->getSymbol().ReloadTexture();
 		}
 	}
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -58,7 +58,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -103,7 +103,7 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.fn_str());
+	std::ifstream fin(m_filepath);
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -118,7 +118,7 @@ void Symbol::LoadFromFile(const LayersLoader& loader)
 	InitBounding();
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
 	class Loader : public LayersLoader
 	{

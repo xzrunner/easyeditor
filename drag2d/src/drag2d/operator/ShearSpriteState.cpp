@@ -75,8 +75,8 @@ void ShearSpriteState::Shear(const Vector& curr)
 		ky = m_sprite->getShear().y;
 
 	float x, y;
-	float hw = m_sprite->getSymbol().getSize().xLength() * 0.5f,
-		hh = m_sprite->getSymbol().getSize().yLength() * 0.5f;
+	float hw = m_sprite->getSymbol().GetSize().xLength() * 0.5f,
+		hh = m_sprite->getSymbol().GetSize().yLength() * 0.5f;
 
 	const d2d::Vector& offset = m_sprite->getOffset();
 	if (m_ctrl_node.type == SpriteCtrlNode::UP)

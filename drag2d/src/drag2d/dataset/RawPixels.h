@@ -10,10 +10,10 @@ namespace d2d
 		RawPixels();
 		~RawPixels();
 
- 		void loadFromFile(const char* filepath);
+ 		void LoadFromFile(const char* filepath);
 // 		unsigned int storeToTexture(unsigned int old) const;
 
-		const unsigned char* getPixelData() const;
+		const unsigned char* GetPixelData() const;
 		void getSize(int& width, int& height) const;
 		int getChannels() const;
 

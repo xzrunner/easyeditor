@@ -24,7 +24,7 @@ private:
 	class FixCoordsVisitor : public d2d::IVisitor
 	{
 	public:
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 	}; // FixCoordsVisitor
 
 private:

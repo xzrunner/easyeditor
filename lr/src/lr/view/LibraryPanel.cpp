@@ -40,7 +40,7 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, item_path);
 			try {
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-				symbol->RefreshThumbnail(symbol->getFilepath());
+				symbol->RefreshThumbnail(symbol->GetFilepath());
 				list->insert(symbol);
 				symbol->Release();
 			} catch (d2d::Exception& e) {
@@ -61,7 +61,7 @@ void LibraryPanel::StoreToFile(Json::Value& value, const std::string& dir) const
 		int j = 0;
 		d2d::ISymbol* symbol = list->getSymbol(j++);
 		while (symbol) {
-			value[i][j-1] = d2d::FilenameTools::getRelativePath(dir, symbol->getFilepath()).ToStdString();
+			value[i][j-1] = d2d::FilenameTools::getRelativePath(dir, symbol->GetFilepath()).ToStdString();
 			symbol = list->getSymbol(j++);
 		}
 	}
@@ -103,7 +103,7 @@ void LibraryPanel::LoadSymbolFromLayer()
  		std::set<d2d::ISymbol*>::iterator itr = symbol_set.begin();
  		for ( ; itr != symbol_set.end(); ++itr) {
  			d2d::ISymbol* symbol = *itr;
- 			symbol->RefreshThumbnail(symbol->getFilepath());
+ 			symbol->RefreshThumbnail(symbol->GetFilepath());
  			page->GetList()->insert(symbol);
  		}
 	}

@@ -16,16 +16,16 @@ public:
 	Task(wxFrame* parent);
 	~Task();
 
-	virtual void load(const char* filename);
-	virtual void store(const char* filename) const;
+	virtual void Load(const char* filename);
+	virtual void Store(const char* filename) const;
 
-	virtual bool isDirty() const;
+	virtual bool IsDirty() const;
 
-	virtual void clear();
+	virtual void Clear();
 
-	virtual void getAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
+	virtual void GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const;
 
-	virtual const d2d::EditPanel* getEditPanel() const;
+	virtual const d2d::EditPanel* GetEditPanel() const;
 
 // 	d2d::GLCanvas* getCanvas() const;
 

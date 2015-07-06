@@ -24,16 +24,16 @@ Symbol::~Symbol()
 	}
 }
 
-Symbol* Symbol::clone() const
+Symbol* Symbol::Clone() const
 {
 	return new Symbol(*this);
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -46,7 +46,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
 	if (m_shadow) {
 		return m_shadow->GetRegion();
@@ -55,7 +55,7 @@ d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
 	}
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
 	FileIO::LoadFromFile(m_filepath, this);
 }

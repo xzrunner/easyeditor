@@ -42,7 +42,7 @@ TextSprite::~TextSprite()
 	}
 }
 
-TextSprite* TextSprite::clone() const
+TextSprite* TextSprite::Clone() const
 {
 	TextSprite* sprite = new TextSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);
@@ -74,8 +74,8 @@ IPropertySetting* TextSprite::CreatePropertySetting(EditPanel* stage)
 void TextSprite::setTransform(const Vector& position, float angle)
 {
 	Vector fixed(position);
-	fixed.x -= m_symbol->getSize(this).xLength() * 0.5f;
-	fixed.y -= m_symbol->getSize(this).yLength() * 0.5f;
+	fixed.x -= m_symbol->GetSize(this).xLength() * 0.5f;
+	fixed.y -= m_symbol->GetSize(this).yLength() * 0.5f;
 
 	ISprite::setTransform(fixed, angle);
 }

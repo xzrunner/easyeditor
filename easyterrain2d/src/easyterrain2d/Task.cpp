@@ -20,7 +20,7 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filename)
+void Task::Load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -32,7 +32,7 @@ void Task::load(const char* filename)
 	m_stage->Load(d2d::FilenameTools::getFileDir(filename).ToStdString(), value, m_library, m_toolbar);
 }
 
-void Task::store(const char* filename) const
+void Task::Store(const char* filename) const
 {
 	Json::Value value;
 	m_stage->Store(d2d::FilenameTools::getFileDir(filename).ToStdString(), value);
@@ -44,12 +44,12 @@ void Task::store(const char* filename) const
 	fout.close();
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return false;
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_library->Clear();
 	m_stage->clear();
@@ -57,7 +57,7 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

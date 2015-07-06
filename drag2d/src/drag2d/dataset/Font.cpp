@@ -3,6 +3,7 @@
 //OpenGL Headers 
 #include <windows.h>		//(the GL headers need it)
 #include <GL/gl.h>
+#include <wx/wx.h>
 
 #include <freetype/ftglyph.h>
 #include <wx/filename.h>
@@ -27,7 +28,7 @@ Font::Font(bool stroke /*= false*/)
 
 Font::~Font()
 {
-	FontMgr::Instance()->removeItem(m_filename);
+	FontMgr::Instance()->RemoveItem(m_filename);
 
 	glDeleteLists(list_base,128);
 	glDeleteTextures(128,textures);
@@ -38,7 +39,7 @@ Font::~Font()
 	}
 }
 
-bool Font::loadFromFile(const wxString& filepath)
+bool Font::LoadFromFile(const std::string& filepath)
 {
 	m_filename = filepath;
 
@@ -47,7 +48,7 @@ bool Font::loadFromFile(const wxString& filepath)
 
 	this->h=h;
 
-	if (filepath.Contains(DEFAULT_FONTFILE)) 
+	if (filepath.find(DEFAULT_FONTFILE) != std::string::npos) 
 	{
 		list_base=glGenLists(128);
 		glGenTextures( 128, textures );
@@ -58,7 +59,7 @@ bool Font::loadFromFile(const wxString& filepath)
 	else 
 	{
 		if (!wxFileName::FileExists(filepath)) {
-			throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
+			throw Exception("File: %s don't exist!", filepath.c_str());
 		}
 
 		//Create and initilize a freetype font library.

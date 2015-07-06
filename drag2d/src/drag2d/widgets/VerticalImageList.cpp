@@ -36,7 +36,7 @@ void VerticalImageList::traverse(IVisitor& visitor) const
 	for ( ; itr != m_items.end(); ++itr)
 	{
 		bool hasNext;
-		visitor.visit(*itr, hasNext);
+		visitor.Visit(*itr, hasNext);
 		if (!hasNext) break;
 	}
 }
@@ -107,7 +107,7 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 	const Bitmap* bmp = m_items[n]->getBitmap();
 	if (bmp)
 	{
-		const wxBitmap* wxBmp = bmp->getBitmap();
+		const wxBitmap* wxBmp = bmp->GetBitmap();
 		if (wxBmp) 
 		{
 			// bmp
@@ -150,7 +150,7 @@ wxCoord VerticalImageList::OnMeasureItem(size_t n) const
 	int size = SPACE_UP + SPACE_DOWN;
 	const Bitmap* bmp = m_items[n]->getBitmap();
 	if (bmp) {
-		const wxBitmap* wxBmp = bmp->getBitmap();
+		const wxBitmap* wxBmp = bmp->GetBitmap();
 		if (wxBmp) {
 			size = wxBmp->GetHeight() + SPACE_UP + SPACE_DOWN;
 		}

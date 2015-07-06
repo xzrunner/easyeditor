@@ -21,7 +21,7 @@ Scale9Data::Scale9Data(const Scale9Data& data)
 		for (int j = 0; j < 3; ++j) {
 			d2d::ISprite* src = data.m_sprites[i][j];
 			if (src) {
-				m_sprites[i][j] = src->clone();
+				m_sprites[i][j] = src->Clone();
 			} else {
 				m_sprites[i][j] = NULL;
 			}
@@ -47,7 +47,7 @@ void Scale9Data::ReloadTexture() const
 	for (size_t i = 0; i < 3; ++i) {
 		for (size_t j = 0; j < 3; ++j) {
 			if (m_sprites[i][j]) {
-				m_sprites[i][j]->getSymbol().reloadTexture();
+				m_sprites[i][j]->getSymbol().ReloadTexture();
 			}
 		}
 	}
@@ -98,7 +98,7 @@ void Scale9Data::Compose(d2d::ISprite* sprites[3][3], float width, float height)
 
 			d2d::ISprite* src = sprites[i][j];
 			if (src) {
-				m_sprites[i][j] = src->clone();
+				m_sprites[i][j] = src->Clone();
 			} else {
 				m_sprites[i][j] = NULL;
 			}
@@ -227,11 +227,11 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 {
 	if (type == e_9Grid) 
 	{
-		const float w0 = sprites[0][0]->getSymbol().getSize().xLength(),
-			w2 = sprites[0][2]->getSymbol().getSize().xLength(),
+		const float w0 = sprites[0][0]->getSymbol().GetSize().xLength(),
+			w2 = sprites[0][2]->getSymbol().GetSize().xLength(),
 			w1 = width - w0 - w2;
-		const float h0 = sprites[0][0]->getSymbol().getSize().yLength(),
-			h2 = sprites[0][2]->getSymbol().getSize().yLength(),
+		const float h0 = sprites[0][0]->getSymbol().GetSize().yLength(),
+			h2 = sprites[0][2]->getSymbol().GetSize().yLength(),
 			h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][0], d2d::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -248,11 +248,11 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_9GridHollow)
 	{
-		const float w0 = sprites[0][0]->getSymbol().getSize().xLength(),
-			w2 = sprites[0][2]->getSymbol().getSize().xLength(),
+		const float w0 = sprites[0][0]->getSymbol().GetSize().xLength(),
+			w2 = sprites[0][2]->getSymbol().GetSize().xLength(),
 			w1 = width - w0 - w2;
-		const float h0 = sprites[0][0]->getSymbol().getSize().yLength(),
-			h2 = sprites[0][2]->getSymbol().getSize().yLength(),
+		const float h0 = sprites[0][0]->getSymbol().GetSize().yLength(),
+			h2 = sprites[0][2]->getSymbol().GetSize().yLength(),
 			h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][0], d2d::Vector(-w0*0.5f-w1*0.5f, -h0*0.5f-h1*0.5f), w0, h0);
@@ -268,10 +268,10 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_6GridUpper)
 	{
-		const float w0 = sprites[2][0]->getSymbol().getSize().xLength(),
-			w2 = sprites[2][2]->getSymbol().getSize().xLength(),
+		const float w0 = sprites[2][0]->getSymbol().GetSize().xLength(),
+			w2 = sprites[2][2]->getSymbol().GetSize().xLength(),
 			w1 = width - w0 - w2;
-		const float h2 = sprites[2][0]->getSymbol().getSize().yLength(),
+		const float h2 = sprites[2][0]->getSymbol().GetSize().yLength(),
 			h1 = height - h2;
 
 		ResizeSprite(sprites[1][0], d2d::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, h1);
@@ -284,8 +284,8 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_3GridHor)
 	{
-		const float w0 = sprites[1][0]->getSymbol().getSize().xLength(),
-			w2 = sprites[1][2]->getSymbol().getSize().xLength(),
+		const float w0 = sprites[1][0]->getSymbol().GetSize().xLength(),
+			w2 = sprites[1][2]->getSymbol().GetSize().xLength(),
 			w1 = width - w0 - w2; 
 
 		ResizeSprite(sprites[1][0], d2d::Vector(-w0*0.5f-w1*0.5f, 0.0f), w0, height);
@@ -294,8 +294,8 @@ void Scale9Data::ResizeScale9(Scale9Type type, d2d::ISprite* const sprites[3][3]
 	}
 	else if (type == e_3GridVer)
 	{
-		const float h0 = sprites[0][1]->getSymbol().getSize().yLength(),
-			h2 = sprites[2][1]->getSymbol().getSize().yLength(),
+		const float h0 = sprites[0][1]->getSymbol().GetSize().yLength(),
+			h2 = sprites[2][1]->getSymbol().GetSize().yLength(),
 			h1 = height - h0 - h2;
 
 		ResizeSprite(sprites[0][1], d2d::Vector(0.0f, -h0*0.5f-h1*0.5f), width, h0);
@@ -308,8 +308,8 @@ void Scale9Data::ResizeSprite(d2d::ISprite* sprite, const d2d::Vector& center,
 							  float width, float height)
 {
 	const d2d::ImageSymbol& symbol = dynamic_cast<const d2d::ImageSymbol&>(sprite->getSymbol());
-	int w = symbol.getImage()->originWidth(),
-		h = symbol.getImage()->originHeight();
+	int w = symbol.getImage()->GetOriginWidth(),
+		h = symbol.getImage()->GetOriginHeight();
 	assert(w != 0 && h != 0);
 
 	sprite->setTransform(center, sprite->getAngle());

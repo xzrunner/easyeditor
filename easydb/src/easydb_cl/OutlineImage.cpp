@@ -47,7 +47,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
-		d2d::Image* image = d2d::ImageMgr::Instance()->getItem(filepath);
+		d2d::Image* image = d2d::ImageMgr::Instance()->GetItem(filepath);
 
 		eimage::ExtractOutlineRaw raw(*image);
 		raw.CreateBorderLineAndMerge();
@@ -55,10 +55,10 @@ void OutlineImage::Trigger(const std::string& dir) const
 		fine.Trigger(0.04f, 0.2f);
 
 		Json::Value value;
-		d2d::Vector offset(-0.5f*image->originWidth(), -0.5f*image->originHeight());
+		d2d::Vector offset(-0.5f*image->GetOriginWidth(), -0.5f*image->GetOriginHeight());
 		std::vector<d2d::Vector> vertices(fine.GetResult());
 
-		float src_area = image->clipWidth() * image->clipHeight();
+		float src_area = image->GetClippedWidth() * image->GetClippedHeight();
 		float dst_area = d2d::Math::GetPolygonArea(vertices);
 		if (dst_area < src_area * 0.95f)
 		{

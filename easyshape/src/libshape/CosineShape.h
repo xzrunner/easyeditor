@@ -17,7 +17,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual CosineShape* clone() const;
+	virtual CosineShape* Clone() const;
 
 	//
 	// IShape interface

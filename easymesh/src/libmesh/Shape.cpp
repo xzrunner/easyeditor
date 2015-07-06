@@ -22,11 +22,11 @@ Shape::Shape(const Shape& shape)
 
 Shape::Shape(const d2d::Image& image)
 {
-	m_texid = image.textureID();
-	m_tex_filepath = image.filepath();
+	m_texid = image.GetTexID();
+	m_tex_filepath = image.GetFilepath();
 
-	m_width = image.originWidth();
-	m_height = image.originHeight();
+	m_width = image.GetOriginWidth();
+	m_height = image.GetOriginHeight();
 
 	m_node_radius = std::min(m_width * 0.1f, 5.0f);
 }

@@ -121,7 +121,7 @@ void AutoRectCutCMPT::OnOutputRects(wxCommandEvent& event)
 	msg.Printf("Left: %d, Used: %d", cut.GetLeftArea(), cut.GetUseArea());
 	wxMessageBox(msg, wxT("Statics"), wxOK | wxICON_INFORMATION, this);
 
-	wxString ori_path = d2d::FilenameTools::getFilePathExceptExtension(img->filepath());
+	wxString ori_path = d2d::FilenameTools::getFilePathExceptExtension(img->GetFilepath());
 	eimage::ImageClip img_cut(img);
 	const std::vector<Rect>& result = cut.GetResult();
 	for (int i = 0, n = result.size(); i < n; ++i) {

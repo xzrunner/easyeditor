@@ -20,7 +20,7 @@ public:
  	//
  	// ICloneable interface
  	//
- 	virtual Shape* clone() const { return NULL; }
+ 	virtual Shape* Clone() const { return NULL; }
 
 	virtual void Load(const Json::Value& value) {}
 	virtual void Store(Json::Value& value) const {}

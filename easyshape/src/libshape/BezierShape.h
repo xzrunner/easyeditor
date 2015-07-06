@@ -20,7 +20,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual BezierShape* clone() const;
+	virtual BezierShape* Clone() const;
 
 	//
 	// IShape interface

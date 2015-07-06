@@ -71,7 +71,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, IVisitor& vis
 		for ( ; itr != objs.end(); ++itr)
 		{
 			bool hasNext;
-			visitor.visit(*itr, hasNext);
+			visitor.Visit(*itr, hasNext);
 			if (!hasNext) break;
 		}
 	}
@@ -81,7 +81,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs, IVisitor& vis
 		for ( ; itr != objs.rend(); ++itr)
 		{
 			bool hasNext;
-			visitor.visit(*itr, hasNext);
+			visitor.Visit(*itr, hasNext);
 			if (!hasNext) break;
 		}
 	}
@@ -103,7 +103,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 				type == DT_ALL || type == DT_SELECTABLE)
 			{
 				bool hasNext;
-				visitor.visit(*itr, hasNext);
+				visitor.Visit(*itr, hasNext);
 				if (!hasNext) break;
 			}
 		}
@@ -114,7 +114,7 @@ inline void ObjectVector<T>::Traverse(const std::vector<T*>& objs,
 		for ( ; itr != objs.rend(); ++itr)
 		{
 			bool hasNext;
-			visitor.visit(*itr, hasNext);
+			visitor.Visit(*itr, hasNext);
 			if (!hasNext) break;
 		}
 	}

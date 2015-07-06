@@ -25,7 +25,7 @@ void RightPopupMenu::SetRightPopupMenu(wxMenu& menu, d2d::ISprite* spr)
 
 	// for anim file
 	m_sprite = spr;
-	std::string filepath = spr->getSymbol().getFilepath();
+	std::string filepath = spr->getSymbol().GetFilepath();
 	if (!CharacterFileName::IsValidFilepath(filepath)) {
 		return;
 	}
@@ -71,13 +71,13 @@ void RightPopupMenu::OnRightPopupMenu(int id)
 		std::vector<d2d::ISprite*> selected;
 		m_stage->getSpriteSelection()->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(selected));
 		if (!selected.empty()) {
-			std::string cmd = "easyshape_new.exe " + selected[0]->getSymbol().getFilepath();
+			std::string cmd = "easyshape_new.exe " + selected[0]->getSymbol().GetFilepath();
 			WinExec(cmd.c_str(), SW_SHOWMAXIMIZED);		
 		}
 	}
 	else if (id == MENU_ROTATE_LEFT_ID || id == MENU_ROTATE_RIGHT_ID)
 	{
-		std::string filepath = m_sprite->getSymbol().getFilepath();
+		std::string filepath = m_sprite->getSymbol().GetFilepath();
 		assert(CharacterFileName::IsValidFilepath(filepath));
 		CharacterFileName name(filepath);
 		int dir = 1 + (name.GetField(CharacterFileName::FT_DIRECTION)[0] - '1');

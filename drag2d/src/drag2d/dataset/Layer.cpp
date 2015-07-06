@@ -28,7 +28,7 @@ void Layer::traverseSprites(IVisitor& visitor) const
 	for ( ; itr != m_sprites.end(); ++itr)
 	{
 		bool hasNext;
-		visitor.visit(*itr, hasNext);
+		visitor.Visit(*itr, hasNext);
 		if (!hasNext) break;
 	}
 }
@@ -39,7 +39,7 @@ void Layer::traverseShapes(IVisitor& visitor) const
 	for ( ; itr != m_shapes.end(); ++itr)
 	{
 		bool hasNext;
-		visitor.visit(*itr, hasNext);
+		visitor.Visit(*itr, hasNext);
 		if (!hasNext) break;
 	}
 }

@@ -12,11 +12,11 @@ void FileIO::StoreOceanMesh(const OceanMesh* ocean, const std::string& dir, Json
 	}
 	if (const d2d::ImageSymbol* img = ocean->GetImage0()) {
 		value["tex0"] = d2d::FilenameTools::getRelativePath(dir,
-			img->getFilepath()).ToStdString();
+			img->GetFilepath()).ToStdString();
 	}
 	if (const d2d::ImageSymbol* img = ocean->GetImage1()) {
 		value["tex1"] = d2d::FilenameTools::getRelativePath(dir,
-			img->getFilepath()).ToStdString();
+			img->GetFilepath()).ToStdString();
 	}
 
 	value["wave"]["open"] = ocean->IsWaveOpen();

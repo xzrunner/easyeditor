@@ -73,11 +73,11 @@ void Frame::setTask(ITask* task)
 
 void Frame::initWithFile(const wxString& path)
 {
-	m_task->clear();
+	m_task->Clear();
 	m_currFilename = path;
 //	SetTitle(path);
 	try {
-		m_task->load(path);
+		m_task->Load(path);
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
@@ -94,14 +94,14 @@ void Frame::openFile(const wxString& filename)
 		DynamicTexAndFont::Instance()->Clear();
 	}
 
-	m_task->clear();
+	m_task->Clear();
 
 	m_currFilename = filename;
 	m_recent.insert(m_currFilename);
 	SetTitle(m_currFilename);
 
 	try {
-		m_task->load(m_currFilename);
+		m_task->Load(m_currFilename);
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
@@ -149,7 +149,7 @@ void Frame::onNew(wxCommandEvent& event)
 	if (!m_task) return;
 
 	setCurrFilename();
-	m_task->clear();
+	m_task->Clear();
 
 	if (Config::Instance()->IsUseDTex()) {
 		DynamicTexAndFont::Instance()->Clear();
@@ -184,7 +184,7 @@ void Frame::onSave(wxCommandEvent& event)
 		if (dlg->ShowModal() == wxID_YES)
 		{
 			SetTitle(m_currFilename);
-			m_task->store(m_currFilename);
+			m_task->Store(m_currFilename);
 		}
 	} catch (Exception& e) {
 		ExceptionDlg dlg(this, e);
@@ -203,7 +203,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		{
 			wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
 			m_currFilename = fixed;
-			m_task->store(fixed);
+			m_task->Store(fixed);
 		}
 	} catch (Exception& e) {
 		ExceptionDlg dlg(this, e);
@@ -217,7 +217,7 @@ void Frame::onSettings(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	const Colorf& col = Config::Instance()->GetSettings().bg_color;
-	m_task->getEditPanel()->getCanvas()->setBgColor(col);
+	m_task->GetEditPanel()->getCanvas()->setBgColor(col);
 }
 
 wxString Frame::GetFileFilter() const
@@ -269,7 +269,7 @@ void Frame::onQuit(wxCommandEvent& event)
 
 void Frame::onClose(wxCloseEvent& event)
 {
-	if (!m_task->isDirty())
+	if (!m_task->IsDirty())
 	{
 		Destroy();
 		return;
@@ -279,7 +279,7 @@ void Frame::onClose(wxCloseEvent& event)
 		ExitDlg dlg(this);
 		int val = dlg.ShowModal();
 		if (val == wxID_OK) {
-			m_task->store(m_currFilename);
+			m_task->Store(m_currFilename);
 		}
 	}
 

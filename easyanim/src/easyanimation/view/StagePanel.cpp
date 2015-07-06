@@ -63,7 +63,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 		{
 			for (int i = 0, n = frame->Size(); i < n; ++i) {
 				bool hasNext;
-				visitor.visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
+				visitor.Visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
 				if (!hasNext) break;
 			}
 		}
@@ -71,7 +71,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor,
 		{
 			for (int i = frame->Size() - 1; i >= 0; --i) {
 				bool hasNext;
-				visitor.visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
+				visitor.Visit(const_cast<d2d::ISprite*>(frame->GetSprite(i)), hasNext);
 				if (!hasNext) break;
 			}
 		}

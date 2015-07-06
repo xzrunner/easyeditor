@@ -107,7 +107,7 @@ MultiSpritesImpl::PointQueryVisitor::PointQueryVisitor(const Vector& pos, ISprit
 	*m_pResult = NULL;
 }
 
-void MultiSpritesImpl::PointQueryVisitor::visit(Object* object, bool& bFetchNext)
+void MultiSpritesImpl::PointQueryVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 	if (sprite->isContain(m_pos))
@@ -132,7 +132,7 @@ MultiSpritesImpl::RectQueryVisitor::RectQueryVisitor(const Rect& rect, bool cont
 {
 }
 
-void MultiSpritesImpl::RectQueryVisitor::visit(Object* object, bool& bFetchNext)
+void MultiSpritesImpl::RectQueryVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 // 	if (sprite->editable && sprite->isIntersect(m_rect))
@@ -161,7 +161,7 @@ MultiSpritesImpl::RemoveSelectionVisitor::RemoveSelectionVisitor(MultiSpritesImp
 	m_spritesImpl = spritesImpl;
 }
 
-void MultiSpritesImpl::RemoveSelectionVisitor::visit(Object* object, bool& bFetchNext)
+void MultiSpritesImpl::RemoveSelectionVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	m_spritesImpl->removeSprite(static_cast<ISprite*>(object));
 	bFetchNext = true;

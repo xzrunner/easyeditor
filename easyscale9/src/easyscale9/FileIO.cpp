@@ -102,7 +102,7 @@ Json::Value FileIO::store(d2d::ISprite* sprite, const wxString& dir)
 
 	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-		symbol.getFilepath()).ToStdString();
+		symbol.GetFilepath()).ToStdString();
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();
@@ -122,7 +122,7 @@ Json::Value FileIO::StoreNew(d2d::ISprite* sprite, const wxString& dir)
 
 	// filepath
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-		symbol.getFilepath()).ToStdString();
+		symbol.GetFilepath()).ToStdString();
 	// filepaths
 	const std::set<std::string>& filepaths = symbol.GetFilepaths();
 	std::set<std::string>::const_iterator itr = filepaths.begin();

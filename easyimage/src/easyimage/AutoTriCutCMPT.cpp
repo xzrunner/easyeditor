@@ -88,14 +88,14 @@ void AutoTriCutCMPT::OutputOutline(wxCommandEvent& event)
 	Json::Value value;
 	AutoTriCutOP* op = static_cast<AutoTriCutOP*>(m_editOP);
 
-	d2d::Vector offset(-0.5f*img->originWidth(), -0.5f*img->originHeight());
+	d2d::Vector offset(-0.5f*img->GetOriginWidth(), -0.5f*img->GetOriginHeight());
 	std::vector<d2d::Vector> vertices(op->m_fine_bound_line);
 	for (int i = 0, n = vertices.size(); i < n; ++i) {
 		vertices[i] += offset;
 	}
 	d2d::JsonIO::Store(vertices, value["normal"]);
 
-	wxString filepath = d2d::FilenameTools::getFilenameAddTag(img->filepath(), 
+	wxString filepath = d2d::FilenameTools::getFilenameAddTag(img->GetFilepath(), 
 		OUTLINE_FILE_TAG, "json");
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_SYMBOL_H_
+#define _DRAG2D_SYMBOL_H_
 
 #include "widgets/ListItem.h"
 #include "common/ResourcesMgr.h"
@@ -10,66 +11,69 @@
 
 namespace d2d
 {
-	class ISprite;
-	class Matrix;
 
-	class ISymbol : public ListItem, public UserDataImpl
-	{
-	public:
-		virtual ~ISymbol();
+class ISprite;
+class Matrix;
 
-		//
-		// IObject interface
-		//	
-		virtual ISymbol* clone() const { return NULL; }
+class ISymbol : public ListItem, public UserDataImpl
+{
+public:
+	virtual ~ISymbol();
 
-		//
-		// UserDataImpl interface
-		//	
-		virtual void clearUserData(bool deletePtr);
+	//
+	// IObject interface
+	//	
+	virtual ISymbol* Clone() const { return NULL; }
 
-		virtual void reloadTexture() const = 0;
-		virtual void draw(const Matrix& mt,
-			const Colorf& mul = Colorf(1, 1, 1, 1), 
-			const Colorf& add = Colorf(0, 0, 0, 0),
-			const Colorf& r_trans = Colorf(1, 0, 0, 0),
-			const Colorf& g_trans = Colorf(0, 1, 0, 0),
-			const Colorf& b_trans = Colorf(0, 0, 1, 0),
-			const ISprite* sprite = NULL) const = 0;
-		virtual Rect getSize(const ISprite* sprite = NULL) const = 0;
+	//
+	// UserDataImpl interface
+	//	
+	virtual void ClearUserData(bool deletePtr);
 
-		bool loadFromFile(const wxString& filepath);
+	virtual void ReloadTexture() const = 0;
+	virtual void Draw(const Matrix& mt,
+		const Colorf& mul = Colorf(1, 1, 1, 1), 
+		const Colorf& add = Colorf(0, 0, 0, 0),
+		const Colorf& r_trans = Colorf(1, 0, 0, 0),
+		const Colorf& g_trans = Colorf(0, 1, 0, 0),
+		const Colorf& b_trans = Colorf(0, 0, 1, 0),
+		const ISprite* sprite = NULL) const = 0;
+	virtual Rect GetSize(const ISprite* sprite = NULL) const = 0;
 
-		const wxString& getFilepath() const { 
-			return m_filepath; 
-		}
-		void SetFilepath(const wxString& filepath) {
-			m_filepath = filepath;
-		}
+	bool LoadFromFile(const std::string& filepath);
 
-		const std::set<std::string>& GetFilepaths() const;
-		void SetFilepaths(const std::set<std::string>& filepaths);
+	const std::string& GetFilepath() const { 
+		return m_filepath; 
+	}
+	void SetFilepath(const std::string& filepath) {
+		m_filepath = filepath;
+	}
 
-	public:
-		std::string name;
+	const std::set<std::string>& GetFilepaths() const;
+	void SetFilepaths(const std::set<std::string>& filepaths);
 
-	protected:
-		virtual void loadResources() = 0;
+public:
+	std::string name;
 
-	protected:
-		wxString m_filepath;
+protected:
+	virtual void LoadResources() = 0;
 
-	private:
-		std::set<std::string> m_filepaths;
+protected:
+	std::string m_filepath;
 
-	}; // ISymbol
+private:
+	std::set<std::string> m_filepaths;
 
-	class SymbolCmp
-	{
-	public:
-		bool operator () (const d2d::ISymbol* s0, const d2d::ISymbol* s1) const {
-			return s0->getFilepath() < s1->getFilepath();
-		}
-	}; // SymbolCmp
+}; // ISymbol
+
+class SymbolCmp
+{
+public:
+	bool operator () (const d2d::ISymbol* s0, const d2d::ISymbol* s1) const {
+		return s0->GetFilepath() < s1->GetFilepath();
+	}
+}; // SymbolCmp
+
 }
 
+#endif // _DRAG2D_SYMBOL_H_

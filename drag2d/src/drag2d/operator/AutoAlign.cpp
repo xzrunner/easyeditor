@@ -42,11 +42,11 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 		const float srcHalfHeight = src->getBounding()->height() * 0.5f;
 		const float dstHalfHeight = dst->getBounding()->height() * 0.5f;
 
-		float src_cy = src->getPosition().y + src->getSymbol().getSize().yCenter();
+		float src_cy = src->getPosition().y + src->getSymbol().GetSize().yCenter();
 		float srcDown = src_cy - srcHalfHeight;
 		float srcUp = src_cy + srcHalfHeight;
 
-		float dst_cy = dst->getPosition().y + dst->getSymbol().getSize().yCenter();
+		float dst_cy = dst->getPosition().y + dst->getSymbol().GetSize().yCenter();
 		float dstDown = dst_cy - dstHalfHeight;
 		float dstUp = dst_cy + dstHalfHeight;
 
@@ -83,11 +83,11 @@ void AutoAlign::Align(const std::vector<ISprite*>& sprites)
 		const float srcHalfWidth = src->getBounding()->width() * 0.5f;
 		const float dstHalfWidth = dst->getBounding()->width() * 0.5f;
 
-		float src_cx = src->getPosition().x + src->getSymbol().getSize().xCenter();
+		float src_cx = src->getPosition().x + src->getSymbol().GetSize().xCenter();
 		float srcLeft = src_cx - srcHalfWidth;
 		float srcRight = src_cx + srcHalfWidth;
 
-		float dst_cx = dst->getPosition().x + dst->getSymbol().getSize().xCenter();
+		float dst_cx = dst->getPosition().x + dst->getSymbol().GetSize().xCenter();
 		float dstLeft = dst_cx - dstHalfWidth;
 		float dstRight = dst_cx + dstHalfWidth;
 
@@ -139,8 +139,8 @@ void AutoAlign::Align(const ISprite* src, ISprite* dst)
 	const float DIS = 5;
 	const float LEN = 400;
 
-	Rect sr = src->getSymbol().getSize();
-	Rect dr = dst->getSymbol().getSize();
+	Rect sr = src->getSymbol().GetSize();
+	Rect dr = dst->getSymbol().GetSize();
 
 	const float srcHalfWidth = sr.xLength() * src->getScale().x * 0.5f,
 		srcHalfHeight = sr.yLength() * src->getScale().y * 0.5f;

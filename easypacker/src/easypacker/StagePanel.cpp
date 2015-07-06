@@ -105,13 +105,13 @@ void StagePanel::fixCoords(d2d::ISprite* sprite)
 	float width, height;
 	if (sprite->getAngle() == 0)
 	{
-		width = sprite->getSymbol().getSize().xLength() * s;
-		height = sprite->getSymbol().getSize().yLength() * s;
+		width = sprite->getSymbol().GetSize().xLength() * s;
+		height = sprite->getSymbol().GetSize().yLength() * s;
 	}
 	else
 	{
-		width = sprite->getSymbol().getSize().yLength() * s;
-		height = sprite->getSymbol().getSize().xLength() * s;
+		width = sprite->getSymbol().GetSize().yLength() * s;
+		height = sprite->getSymbol().GetSize().xLength() * s;
 	}
 
 	d2d::Vector leftTop;

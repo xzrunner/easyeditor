@@ -60,7 +60,7 @@ private:
 
 	private:
 		void GetEdgeLimit(const Image* img, float& max, float& min) const {
-			Rect r = img->getRegion();
+			Rect r = img->GetClippedRegion();
 			if (r.xLength() > r.yLength()) {
 				min = r.xLength();
 				max = r.yLength();
@@ -81,7 +81,7 @@ private:
 	int m_preload_idx;
 	std::vector<Image*> m_preload_list;
 
-	std::map<wxString, TPNode*> m_map_images;
+	std::map<std::string, TPNode*> m_map_images;
 	
 private:
 	static DynamicTexture* m_instance;

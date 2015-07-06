@@ -56,15 +56,15 @@ void VerifyImage::InitFiles(const std::string& dirpath)
 		wxString filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 			std::string filename = filepath.ToStdString();
-			StringTools::toLower(filename);
+			StringTools::ToLower(filename);
 			_complex_files.push_back(filename);
 		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
 			std::string filename = filepath.ToStdString();
-			StringTools::toLower(filename);
+			StringTools::ToLower(filename);
 			_anim_files.push_back(filename);
 		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
 			std::string filename = filepath.ToStdString();
-			StringTools::toLower(filename);
+			StringTools::ToLower(filename);
 			_map_images.insert(std::make_pair(filename, false));
 		}
 	}
@@ -88,7 +88,7 @@ void VerifyImage::VerifyLack()
 			std::string base = _complex_files[i];
 			std::string relative = spriteValue["filepath"].asString();
 			std::string filepath = d2d::FilenameTools::getAbsolutePathFromFile(base, relative).ToStdString();
-			StringTools::toLower(filepath);
+			StringTools::ToLower(filepath);
 			HandleSpritePath(filepath);
 
 			spriteValue = value["sprite"][j++];
@@ -117,7 +117,7 @@ void VerifyImage::VerifyLack()
 				while (!entryValue.isNull()) {
 					std::string relative = entryValue["filepath"].asString();
 					std::string filepath = d2d::FilenameTools::getAbsolutePathFromFile(anim, relative).ToStdString();
-					StringTools::toLower(filepath);
+					StringTools::ToLower(filepath);
 					HandleSpritePath(filepath);
 
 					entryValue = frameValue["actor"][j++];

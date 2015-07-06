@@ -125,7 +125,7 @@ void DrawPolygonCMPT::onSetColor(wxCommandEvent& event)
 			if (dlg.ShowModal() == wxID_OK)
 			{
 				m_filePath = dlg.GetPath();
-				m_bitmap.loadFromFile(m_filePath);
+				m_bitmap.LoadFromFile(m_filePath);
 			}
 		}
 		break;
@@ -172,7 +172,7 @@ void DrawPolygonCMPT::fillingButton()
 		}
 		break;
 	case 1:
-		if (const wxBitmap* bmp = m_bitmap.getBitmap()) {
+		if (const wxBitmap* bmp = m_bitmap.GetBitmap()) {
 			m_btnReview->SetBitmap(*bmp);
 		}
 		break;

@@ -116,7 +116,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	eimage::ExtractOutlineFine fine(raw.GetBorderLine(), raw.GetBorderLineMerged());
 	fine.Trigger(0.04f, 0.2f);
 
-	d2d::Vector offset(-img->clipWidth()*0.5f, -img->clipHeight()*0.5f);
+	d2d::Vector offset(-img->GetClippedWidth()*0.5f, -img->GetClippedHeight()*0.5f);
 	std::vector<d2d::Vector> bounding = fine.GetResult();
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;

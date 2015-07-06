@@ -13,7 +13,7 @@ void FileIO::StoreToFile(const char* filename, const Icon* icon)
 
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	value["image"] = d2d::FilenameTools::getRelativePath(dir,
-		icon->GetImage()->filepath()).ToStdString();
+		icon->GetImage()->GetFilepath()).ToStdString();
 
 	value["type"] = icon->GetIconDesc();
 
@@ -39,7 +39,7 @@ Icon* FileIO::LoadFromFile(const char* filename)
 
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
-	d2d::Image* img = d2d::ImageMgr::Instance()->getItem(path);
+	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(path);
 
 	Icon* icon = IconFactory::CreateIconFromFile(value);
 	icon->LoadFromFile(value);

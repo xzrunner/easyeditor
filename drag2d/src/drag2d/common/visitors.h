@@ -14,7 +14,7 @@ namespace d2d
 		FetchAllVisitor(std::vector<T*>& result) 
 			: m_result(result) {}
 
-		virtual void visit(Object* object, bool& bFetchNext)
+		virtual void Visit(Object* object, bool& bFetchNext)
 		{
 			T* item = dynamic_cast<T*>(object);
 			if (item)
@@ -38,7 +38,7 @@ namespace d2d
 			m_valid = m_count == m_num;
 		}
 
-		void visit(Object* object, bool& bFetchNext) {
+		void Visit(Object* object, bool& bFetchNext) {
 			++m_count;
 			bFetchNext = m_count <= m_num;
 		}
@@ -57,7 +57,7 @@ namespace d2d
 		EmptyVerifyVisitor(bool& valid) 
 			: m_valid(valid) { m_valid = true; }
 
-		void visit(Object* object, bool& bFetchNext) {
+		void Visit(Object* object, bool& bFetchNext) {
 			m_valid = false;
 			bFetchNext = false;
 		}
@@ -74,7 +74,7 @@ namespace d2d
 		GetNameVisitor(std::vector<wxString>& names)
 			: m_names(names) {}
 
-		virtual void visit(Object* object, bool& bFetchNext)
+		virtual void Visit(Object* object, bool& bFetchNext)
 		{
 			T* item = dynamic_cast<T*>(object);
 			if (item)
@@ -91,11 +91,11 @@ namespace d2d
 	class ReloadTextureVisitor : public IVisitor
 	{
 	public:
-		virtual void visit(Object* object, bool& bFetchNext)
+		virtual void Visit(Object* object, bool& bFetchNext)
 		{
 			T* item = dynamic_cast<T*>(object);
 			if (item) {
-				item->reloadTexture();
+				item->ReloadTexture();
 			}
 			bFetchNext = true;
 		}

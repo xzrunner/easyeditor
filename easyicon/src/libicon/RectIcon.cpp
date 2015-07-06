@@ -33,11 +33,11 @@ void RectIcon::GetRegion(float process, d2d::Rect& region) const
 		return;
 	}
 
-	float xlen = m_img->originWidth();
+	float xlen = m_img->GetOriginWidth();
 	region.xMin = xlen * (m_min.x - 0.5f);
 	region.xMax = xlen * (m_max.x - 0.5f);
 
-	float ylen = m_img->originHeight();
+	float ylen = m_img->GetOriginHeight();
 	region.yMin = ylen * (m_min.y - 0.5f);
 	region.yMax = ylen * (m_max.y - 0.5f);	
 }
@@ -52,7 +52,7 @@ void RectIcon::SetHoriRegion(float xmin, float xmax)
 	m_max.x = xmax;
 
 // 	if (m_img) {
-// 		float xlen = m_img->originWidth();
+// 		float xlen = m_img->GetOriginWidth();
 // 		m_region.xMin = xlen * (m_min.x - 0.5f);
 // 		m_region.xMax = xlen * (m_max.x - 0.5f);
 // 	}
@@ -64,7 +64,7 @@ void RectIcon::SetVertRegion(float ymin, float ymax)
 	m_max.y = ymax;
 
 // 	if (m_img) {
-// 		float ylen = m_img->originHeight();
+// 		float ylen = m_img->GetOriginHeight();
 // 		m_region.yMin = ylen * (m_min.y - 0.5f);
 // 		m_region.yMax = ylen * (m_max.y - 0.5f);	
 // 	}

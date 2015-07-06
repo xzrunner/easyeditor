@@ -380,7 +380,7 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 				DynamicTexAndFont* dtex = DynamicTexAndFont::Instance();
 				for (size_t i = 0, n = selected.size(); i < n; ++i) {
 					ISymbol& s = const_cast<ISymbol&>(selected[i]->getSymbol());
-					dtex->Remove(s.getFilepath());
+					dtex->Remove(s.GetFilepath());
 				}
 			}
 		}

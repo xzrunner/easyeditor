@@ -66,7 +66,7 @@ Item(Particle* p)
 	rotate = p->rotate;
 	angle = p->angle;
 
-	symbol = p->pc->symbol->getFilepath();
+	symbol = p->pc->symbol->GetFilepath();
 	start_scale = p->pc->start_scale;
 	end_scale = p->pc->end_scale;
 }

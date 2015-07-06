@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easypseudo3d"
-	ProjectGUID="{E487FD3F-ABE4-43FB-8A59-03768C700CFD}"
+	ProjectGUID="{42650DAA-2F0F-40B9-BCF8-BBA4839C712C}"
 	RootNamespace="easypseudo3d"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

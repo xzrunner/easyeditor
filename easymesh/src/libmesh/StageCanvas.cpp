@@ -14,7 +14,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 void StageCanvas::initGL()
 {
 	d2d::DynamicStageCanvas::initGL();
-	m_panel->GetSymbol()->reloadTexture();
+	m_panel->GetSymbol()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}

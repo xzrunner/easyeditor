@@ -32,7 +32,7 @@ private:
 	class UpdateChainVisitor : public d2d::IVisitor
 	{
 	public:
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 	}; // UpdateChainVisitor
 
 	class UpdateBufferVisitor : public d2d::IVisitor
@@ -40,7 +40,7 @@ private:
 	public:
 		UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer);
 
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		std::map<ChainShape*, ChainShape*>& m_simplifyBuffer;
@@ -52,7 +52,7 @@ private:
 	public:
 		OffsetVisitor(const d2d::Vector& offset);
 
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 	private:
 		const d2d::Vector& m_offset;

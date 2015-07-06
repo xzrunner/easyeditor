@@ -10,7 +10,7 @@ namespace d2d
 
 void SpriteCtrlNode::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 {
-	Rect r = sprite->getSymbol().getSize(sprite);
+	Rect r = sprite->getSymbol().GetSize(sprite);
 	if (sprite->getMirrorX()) { 
 		r.xMin = -r.xMin;
 		r.xMax = -r.xMax;
@@ -45,7 +45,7 @@ void SpriteCtrlNode::GetSpriteCtrlNodes(const ISprite* sprite, Vector nodes[8])
 
 void SpriteCtrlNode::GetSpriteCtrlNodesExt(const ISprite* sprite, Vector nodes[4])
 {
-	Rect r = sprite->getSymbol().getSize(sprite);
+	Rect r = sprite->getSymbol().GetSize(sprite);
 	if (sprite->getMirrorX()) { 
 		r.xMin = -r.xMin;
 		r.xMax = -r.xMax;

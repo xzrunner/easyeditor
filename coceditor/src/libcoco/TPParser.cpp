@@ -48,8 +48,8 @@ void TPParser::ParserTexture(const TextureMgr::Entry* tex, int idx)
 		for (size_t j = 0, m = symbols.size(); j < m; ++j)
 		{
 			const d2d::ISymbol* s = symbols[j];
-			std::string filepath = s->getFilepath();
-			StringTools::toLower(filepath);
+			std::string filepath = s->GetFilepath();
+			d2d::StringTools::ToLower(filepath);
 			d2d::FilenameTools::formatSeparators(filepath);
 
 			bool find = false;

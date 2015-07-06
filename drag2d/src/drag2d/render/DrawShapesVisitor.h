@@ -14,7 +14,7 @@ public:
 	DrawShapesVisitor(const Rect& screen_region,
 		const Colorf& color = Colorf(0, 0, 0));
 
-	virtual void visit(Object* object, bool& bFetchNext);
+	virtual void Visit(Object* object, bool& bFetchNext);
 
 private:
 	Rect m_screen_region;

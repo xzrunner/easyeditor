@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easyterrain3d"
-	ProjectGUID="{97438907-CD84-4E01-BF7F-3614A6F0C231}"
+	ProjectGUID="{619CD067-29C4-4A20-AA84-346E69BED088}"
 	RootNamespace="easyterrain3d"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

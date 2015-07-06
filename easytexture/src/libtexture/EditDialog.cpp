@@ -26,8 +26,8 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* edited,
 	Symbol* symbol = const_cast<Symbol*>(&edited->getSymbol());
 	symbol->Retain();
 	m_symbol = symbol;
-	m_symbol->reloadTexture();
-	SetTitle(symbol->getFilepath());
+	m_symbol->ReloadTexture();
+	SetTitle(symbol->GetFilepath());
 
 	InitLayout(edited, bg_sprites);
 
@@ -79,14 +79,14 @@ void EditDialog::OnClose(wxCloseEvent& event)
 		int val = dlg.ShowModal();
 		if (val == wxID_OK)
 		{
-			const wxString& filepath = m_symbol->getFilepath();
+			const wxString& filepath = m_symbol->GetFilepath();
 			FileSaver::Store(filepath, m_symbol);
 			m_symbol->RefreshThumbnail(filepath);
 			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
 		}
 		else if (val == wxID_CANCEL)
 		{
-			m_symbol->loadFromFile(m_symbol->getFilepath());
+			m_symbol->LoadFromFile(m_symbol->GetFilepath());
 		}
 	}
 

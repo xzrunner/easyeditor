@@ -18,14 +18,14 @@ Symbol::~Symbol()
 	}
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 	if (m_icon) {
 		m_icon->ReloadTexture();
 	}
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -48,7 +48,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	m_icon->Draw(mt, process);
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
 	d2d::Rect r;
 	if (m_icon) {
@@ -73,7 +73,7 @@ void Symbol::SetImage(d2d::Image* img)
 	}
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
 	Icon* icon = FileIO::LoadFromFile(m_filepath);
 	SetIcon(icon);

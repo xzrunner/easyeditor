@@ -59,7 +59,7 @@ void ScaleImage::Trigger(const std::string& dir, float scale)
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
-			d2d::Rect r = symbol->getSize();
+			d2d::Rect r = symbol->GetSize();
 
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			sprite->setScale(scale, scale);

@@ -1,58 +1,53 @@
-#pragma once
+#ifndef _DRAG2D_IMAGE_H_
+#define _DRAG2D_IMAGE_H_
+
+#include "Texture.h"
 
 #include "common/ResourcesMgr.h"
 #include "common/Rect.h"
 #include "common/Object.h"
 
-#include <wx/wx.h>
-
-typedef unsigned char uint8_t;
-
 namespace d2d
 {
-	class Image;
-	typedef ResourcesMgr<Image> ImageMgr;
 
-	class Matrix;
-	class ISprite;
+class Matrix;
+class ISprite;
 
-	class Image : public Object
-	{
-	public:
-		Image();
-		Image(const uint8_t* pixel, int width, int height);
-		~Image();
-		
-		bool loadFromFile(const wxString& filepath);
-		void reload();
+class Image : public Object
+{
+public:
+	Image() {}
+	Image(const uint8_t* pixel, int width, int height);
+	~Image();
+	
+	bool LoadFromFile(const std::string& filepath);
+	void Reload();
 
-		const wxString& filepath() const { return m_filepath; }
+	const std::string& GetFilepath() const { return m_tex.GetFilepath(); }
+	unsigned int GetTexID() const { return m_tex.GetTexID(); }
+	int GetChannels() const { return m_tex.GetChannels(); }
+	int GetOriginWidth() const { return m_tex.GetWidth(); }
+	int GetOriginHeight() const { return m_tex.GetHeight(); }
+	int GetClippedWidth() const { return m_clipped_region.xLength(); }
+	int GetClippedHeight() const { return m_clipped_region.yLength(); }
+	const uint8_t* GetPixelData() const { return m_tex.GetPixelData(); }
 
-		unsigned int textureID() const { return m_textureID; }
-		int channels() const { return m_channels; }
+	void Draw(const Matrix& mt, const Rect& r, const ISprite* spr = NULL) const;
 
-		int clipWidth() const { return m_region.xLength(); }
-		int clipHeight() const { return m_region.yLength(); }
-		int originWidth() const { return m_width; }
-		int originHeight() const { return m_height; }
+	Rect GetClippedRegion() const { return m_clipped_region; }
 
-		void draw(const Matrix& mt, const Rect& r, const ISprite* spr = NULL) const;
+private:
+	void ResetClippedRegion();
 
-		Rect getRegion() const { return m_region; }
+private:
+	Texture m_tex;
 
-		const unsigned char* getPixelData() const { return m_pixels; }
+	Rect m_clipped_region;
 
-	private:
-		wxString m_filepath;
+}; // Image
 
-		unsigned int m_textureID;
-		int m_channels;
+typedef ResourcesMgr<Image> ImageMgr;
 
-		int m_width, m_height;
-		Rect m_region;
-
-		const uint8_t* m_pixels;
-
-	}; // Image
 }
 
+#endif // _DRAG2D_IMAGE_H_

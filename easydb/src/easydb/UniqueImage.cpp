@@ -52,7 +52,7 @@ void UniqueImage::ProcessImageFiles(const std::string& imgdir)
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			std::string imgpath(filepath.c_str());
-			StringTools::toLower(imgpath);
+			StringTools::ToLower(imgpath);
 
 			char sig[32];
 			md5_file(imgpath.c_str(), sig);
@@ -135,7 +135,7 @@ void UniqueImage::FixImagePath(const std::string& animpath)
 				if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) 
 				{
 					filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
-					StringTools::toLower(filepath);
+					StringTools::ToLower(filepath);
 
 					std::map<std::string, std::string>::iterator itr_img
 						= m_map_image_2_md5.find(filepath);

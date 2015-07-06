@@ -21,7 +21,7 @@ public:
 	//
 	// ICloneable interface
 	//
-	virtual Mesh* clone() const;
+	virtual Mesh* Clone() const;
 
 	//
 	// Shape interface

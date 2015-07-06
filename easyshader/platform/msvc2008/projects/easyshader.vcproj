@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="easyshader"
-	ProjectGUID="{908B8FCC-3F78-4F8B-9663-0A45623442F4}"
+	ProjectGUID="{DA5638BA-C581-4E52-95ED-3BF6DEEF9B12}"
 	RootNamespace="easyshader"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"

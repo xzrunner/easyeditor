@@ -17,7 +17,7 @@ OBB::OBB(const OBB& obb)
 {
 }
 
-OBB* OBB::clone() const
+OBB* OBB::Clone() const
 {
 	return new OBB(*this);
 }

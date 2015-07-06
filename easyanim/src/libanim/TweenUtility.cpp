@@ -22,13 +22,13 @@ void TweenUtility::GetTweenSprites(const std::vector<d2d::ISprite*>& start, cons
 
 		if (end_spr)
 		{
-			d2d::ISprite* tween_spr = start_spr->clone();
+			d2d::ISprite* tween_spr = start_spr->Clone();
 			GetTweenSprite(start_spr, end_spr, tween_spr, process);
 			tween.push_back(tween_spr);
 		}
 		else
 		{
-			tween.push_back(start_spr->clone());
+			tween.push_back(start_spr->Clone());
 		}
 	}
 }

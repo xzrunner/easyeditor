@@ -43,7 +43,7 @@ RectQueryVisitor(const d2d::Vector& pos, float tolerance, NodeAddr& result)
 }
 
 void NodeCapture::RectQueryVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	bFetchNext = true;
 
@@ -56,25 +56,25 @@ visit(d2d::Object* object, bool& bFetchNext)
 	switch (type)
 	{
 	case ST_POINT:
-		bFetchNext = !visit(static_cast<PointShape*>(shape));
+		bFetchNext = !Visit(static_cast<PointShape*>(shape));
 		break;
 	case ST_BEZIER:
-		bFetchNext = !visit(static_cast<BezierShape*>(shape));
+		bFetchNext = !Visit(static_cast<BezierShape*>(shape));
 		break;
 	case ST_CHAIN: case ST_POLYGON: case ST_COMPLEX_POLYGON: case ST_COSINE_CURVE:
-		bFetchNext = !visit(static_cast<ChainShape*>(shape));
+		bFetchNext = !Visit(static_cast<ChainShape*>(shape));
 		break;
 	case ST_CIRCLE:
-		bFetchNext = !visit(static_cast<CircleShape*>(shape));
+		bFetchNext = !Visit(static_cast<CircleShape*>(shape));
 		break;
 	case ST_RECT:
-		bFetchNext = !visit(static_cast<RectShape*>(shape));
+		bFetchNext = !Visit(static_cast<RectShape*>(shape));
 		break;
 	}
 }
 
 bool NodeCapture::RectQueryVisitor::
-visit(PointShape* point)
+Visit(PointShape* point)
 {
 	if (d2d::Math::getDistance(point->GetPos(), m_pos) < m_tolerance) {
 		m_result.shape = point;
@@ -86,7 +86,7 @@ visit(PointShape* point)
 }
 
 bool NodeCapture::RectQueryVisitor::
-visit(BezierShape* bezier)
+Visit(BezierShape* bezier)
 {
 	// capture center
 	const d2d::Rect& rect = bezier->getRect();
@@ -111,7 +111,7 @@ visit(BezierShape* bezier)
 }
 
 bool NodeCapture::RectQueryVisitor::
-visit(ChainShape* chain)
+Visit(ChainShape* chain)
 {
 	// capture center
 	const d2d::Rect& rect = chain->getRect();
@@ -144,7 +144,7 @@ visit(ChainShape* chain)
 }
 
 bool NodeCapture::RectQueryVisitor::
-visit(CircleShape* circle)
+Visit(CircleShape* circle)
 {
 	const float dis = d2d::Math::getDistance(circle->center, m_pos);
 
@@ -168,7 +168,7 @@ visit(CircleShape* circle)
 }
 
 bool NodeCapture::RectQueryVisitor::
-visit(RectShape* rect)
+Visit(RectShape* rect)
 {
 	// capture center
 	if (d2d::Math::getDistance(m_pos, d2d::Vector(rect->m_rect.xCenter(), rect->m_rect.yCenter())) < m_tolerance)

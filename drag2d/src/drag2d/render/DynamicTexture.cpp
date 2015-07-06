@@ -38,7 +38,7 @@ void DynamicTexture::Begin()
 void DynamicTexture::Insert(Image* img)
 {
 	// find
-	const wxString& filepath = img->filepath();
+	const wxString& filepath = img->GetFilepath();
 	if (m_map_images.find(filepath) != m_map_images.end()) {
 		return;
 	}
@@ -87,7 +87,7 @@ void DynamicTexture::End()
 
 void DynamicTexture::Remove(Image* img)
 {
-	const wxString& filepath = img->filepath();
+	const wxString& filepath = img->GetFilepath();
 	std::map<wxString, TPNode*>::const_iterator itr 
 		= m_map_images.find(filepath);
 	if (itr != m_map_images.end()) {
@@ -98,7 +98,7 @@ void DynamicTexture::Remove(Image* img)
 
 const TPNode* DynamicTexture::Query(const Image& img) const
 {
-	const wxString& filepath = img.filepath();
+	const wxString& filepath = img.GetFilepath();
 	std::map<wxString, TPNode*>::const_iterator itr 
 		= m_map_images.find(filepath);
 	if (itr != m_map_images.end()) {
@@ -118,7 +118,7 @@ void DynamicTexture::ReloadPixels()
 	std::map<wxString, TPNode*>::iterator itr = m_map_images.begin();
 	for ( ; itr != m_map_images.end(); ++itr)
 	{
-		Image* img = ImageMgr::Instance()->getItem(itr->first);
+		Image* img = ImageMgr::Instance()->GetItem(itr->first);
 		assert(img);
 		TPNode* n = itr->second;
 		assert(n);
@@ -132,12 +132,12 @@ void DynamicTexture::ReloadPixels()
 
 void DynamicTexture::InsertImage(const Image* img)
 {
-	const wxString& filepath = img->filepath();
+	const wxString& filepath = img->GetFilepath();
 	if (m_map_images.find(filepath) != m_map_images.end()) {
 		return;
 	}
 
-	d2d::Rect r = img->getRegion();
+	d2d::Rect r = img->GetClippedRegion();
 	int w = r.xLength();
 	int h = r.yLength();
 	d2d::TPNode* n = m_root->Insert(w+m_padding*2, h+m_padding*2);
@@ -147,12 +147,12 @@ void DynamicTexture::InsertImage(const Image* img)
 
 	DrawNode(n, img);
 
-	m_map_images.insert(std::make_pair(img->filepath(), n));
+	m_map_images.insert(std::make_pair(img->GetFilepath(), n));
 }
 
 void DynamicTexture::DrawNode(const TPNode* n, const Image* img) const
 {
-	d2d::Rect r = img->getRegion();
+	d2d::Rect r = img->GetClippedRegion();
 
 	Rect r_vertex, r_texcoords;
 	r_vertex.xMin = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
@@ -160,13 +160,13 @@ void DynamicTexture::DrawNode(const TPNode* n, const Image* img) const
 	r_vertex.yMin = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
 	r_vertex.yMax = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
 
-	int ori_width = img->originWidth(),
-		ori_height = img->originHeight();
+	int ori_width = img->GetOriginWidth(),
+		ori_height = img->GetOriginHeight();
 	r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
 	r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
 	r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
 	r_texcoords.yMax = (r.yMax + ori_height * 0.5f) / ori_height;
-	DrawRegion(r_vertex, r_texcoords, img->textureID(), n->IsRotated());
+	DrawRegion(r_vertex, r_texcoords, img->GetTexID(), n->IsRotated());
 
 	DrawExtrude(img, n);
 }
@@ -210,9 +210,9 @@ void DynamicTexture::DrawRegion(const Rect& vertex, const Rect& texcoords, int t
 
 void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 {
-	d2d::Rect r = img->getRegion();
-	int ori_width = img->originWidth(),
-		ori_height = img->originHeight();
+	d2d::Rect r = img->GetClippedRegion();
+	int ori_width = img->GetOriginWidth(),
+		ori_height = img->GetOriginHeight();
 	Rect r_vertex, r_texcoords;
 
 	if (n->IsRotated())
@@ -228,7 +228,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.yMin = ((float)(n->GetMaxY()+i-m_padding) / m_height) * 2 - 1;
 			r_vertex.yMax = ((float)(n->GetMaxY()+1+i-m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 		}
 
 		// down
@@ -238,7 +238,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.yMin = ((float)(n->GetMinY()-1-i+m_padding) / m_height) * 2 - 1;
 			r_vertex.yMax = ((float)(n->GetMinY()-i+m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 		}
 
 		// left
@@ -252,7 +252,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.xMin = ((float)(n->GetMinX()-1-i+m_padding) / m_width) * 2 - 1;
 			r_vertex.xMax = ((float)(n->GetMinX()-i+m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 		}
 
 		// right
@@ -262,7 +262,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.xMin = ((float)(n->GetMaxX()+i-m_padding) / m_width) * 2 - 1;
 			r_vertex.xMax = ((float)(n->GetMaxX()+1+i-m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), true);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), true);
 		}		
 
 		// up-left
@@ -274,28 +274,28 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		r_vertex.xMax = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;		
 		r_vertex.yMin = ((float)(n->GetMinY()+m_padding-1) / m_height) * 2 - 1;
 		r_vertex.yMax = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;		
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// up-right
 		r_texcoords.xMin = (r.xMax + ori_width * 0.5f - 1) / ori_width;
 		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
 		r_vertex.yMin = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
 		r_vertex.yMax = ((float)(n->GetMaxY()-m_padding+1) / m_height) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// down-right
 		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
 		r_texcoords.yMax = (r.yMin + ori_height * 0.5f + 1) / ori_height;
 		r_vertex.xMin = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
 		r_vertex.xMax = ((float)(n->GetMaxX()-m_padding+1) / m_width) * 2 - 1;		
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// down-left
 		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
 		r_texcoords.xMax = (r.xMin + ori_width * 0.5f + 1) / ori_width;
 		r_vertex.yMin = ((float)(n->GetMinY()+m_padding-1) / m_height) * 2 - 1;
 		r_vertex.yMax = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;		
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 	}
 	else
 	{
@@ -310,7 +310,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.yMin = ((float)(n->GetMaxY()+i-m_padding) / m_height) * 2 - 1;
 			r_vertex.yMax = ((float)(n->GetMaxY()+1+i-m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 		}
 
 		// down
@@ -320,7 +320,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.yMin = ((float)(n->GetMinY()-1-i+m_padding) / m_height) * 2 - 1;
 			r_vertex.yMax = ((float)(n->GetMinY()-i+m_padding) / m_height) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 		}
 
 		// left
@@ -334,7 +334,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.xMin = ((float)(n->GetMinX()-1-i+m_padding) / m_width) * 2 - 1;
 			r_vertex.xMax = ((float)(n->GetMinX()-i+m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 		}
 
 		// right
@@ -344,7 +344,7 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		{
 			r_vertex.xMin = ((float)(n->GetMaxX()+i-m_padding) / m_width) * 2 - 1;
 			r_vertex.xMax = ((float)(n->GetMaxX()+1+i-m_padding) / m_width) * 2 - 1;
-			DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+			DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 		}
 
 		// up-left
@@ -356,28 +356,28 @@ void DynamicTexture::DrawExtrude(const Image* img, const TPNode* n) const
 		r_vertex.xMax = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
 		r_vertex.yMin = ((float)(n->GetMaxY()-m_padding) / m_height) * 2 - 1;
 		r_vertex.yMax = ((float)(n->GetMaxY()-m_padding+1) / m_height) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// up-right
 		r_texcoords.xMin = (r.xMax + ori_width * 0.5f - 1) / ori_width;
 		r_texcoords.xMax = (r.xMax + ori_width * 0.5f) / ori_width;
 		r_vertex.xMin = ((float)(n->GetMaxX()-m_padding) / m_width) * 2 - 1;
 		r_vertex.xMax = ((float)(n->GetMaxX()-m_padding+1) / m_width) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// down-right
 		r_texcoords.yMin = (r.yMin + ori_height * 0.5f) / ori_height;
 		r_texcoords.yMax = (r.yMin + ori_height * 0.5f + 1) / ori_height;
 		r_vertex.yMin = ((float)(n->GetMinY()+m_padding-1) / m_height) * 2 - 1;
 		r_vertex.yMax = ((float)(n->GetMinY()+m_padding) / m_height) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 
 		// down-left
 		r_texcoords.xMin = (r.xMin + ori_width * 0.5f) / ori_width;
 		r_texcoords.xMax = (r.xMin + ori_width * 0.5f + 1) / ori_width;
 		r_vertex.xMin = ((float)(n->GetMinX()+m_padding-1) / m_width) * 2 - 1;
 		r_vertex.xMax = ((float)(n->GetMinX()+m_padding) / m_width) * 2 - 1;
-		DrawRegion(r_vertex, r_texcoords, img->textureID(), false);
+		DrawRegion(r_vertex, r_texcoords, img->GetTexID(), false);
 	}
 }
 

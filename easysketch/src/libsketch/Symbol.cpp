@@ -15,16 +15,16 @@ Symbol::~Symbol()
 {
 }
 
-Symbol* Symbol::clone() const
+Symbol* Symbol::Clone() const
 {
 	return new Symbol(*this); 
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -48,7 +48,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	shader->DrawModel(m_model, mat);
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
 	return d2d::Rect(100, 100);
 }
@@ -65,7 +65,7 @@ void Symbol::SetModel(e3d::IModel* model)
 	}
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
  	if (m_model) {
  		delete m_model;

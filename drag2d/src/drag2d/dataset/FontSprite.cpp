@@ -81,7 +81,7 @@ FontSprite::~FontSprite()
 	}
 }
 
-FontSprite* FontSprite::clone() const
+FontSprite* FontSprite::Clone() const
 {
 	FontSprite* sprite = new FontSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

@@ -11,7 +11,7 @@ namespace d2d
 	int w_Sprite_clone(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		ISprite* clone = t->clone();
+		ISprite* clone = t->Clone();
 		luax_newtype(L, "Sprite", SPRITE_DATA_T, (void*)clone);
 		return 1;
 	}
@@ -46,14 +46,14 @@ namespace d2d
 	int w_Sprite_width(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		lua_pushnumber(L, t->getSymbol().getSize().xLength());
+		lua_pushnumber(L, t->getSymbol().GetSize().xLength());
 		return 1;
 	}
 
 	int w_Sprite_height(lua_State* L)
 	{
 		ISprite* t = luax_checksprite(L, 1);
-		lua_pushnumber(L, t->getSymbol().getSize().yLength());
+		lua_pushnumber(L, t->getSymbol().GetSize().yLength());
 		return 1;
 	}
 

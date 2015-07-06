@@ -12,19 +12,19 @@ UserDataImpl::UserDataImpl()
 
 UserDataImpl::~UserDataImpl() 
 { 
-//	clearUserData(true);
+//	ClearUserData(true);
 }
 
-void UserDataImpl::setUserData(void* data) 
+void UserDataImpl::SetUserData(void* data) 
 { 
 	if (m_userData != data)
 	{
-		clearUserData(true);
+		ClearUserData(true);
 		m_userData = data;
 	}
 }
 
-void* UserDataImpl::getUserData() const 
+void* UserDataImpl::GetUserData() const 
 {
 	return m_userData;
 }

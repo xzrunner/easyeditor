@@ -246,7 +246,7 @@
 //	int width, height;
 //	m_pixels->getSize(width, height);
 //
-//	const unsigned char* pixelData = m_pixels->getPixelData();
+//	const unsigned char* pixelData = m_pixels->GetPixelData();
 //	const int channels = m_pixels->getChannels();
 //	std::vector<bool> flag(width * height, false);
 //

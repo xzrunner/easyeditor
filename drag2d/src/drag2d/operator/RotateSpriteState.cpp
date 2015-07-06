@@ -48,7 +48,7 @@ void RotateSpriteState::Rotate(const Vector& dst)
 //////////////////////////////////////////////////////////////////////////
 
 void RotateSpriteState::Visitor::
-	visit(Object* object, bool& bFetchNext)
+	Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 

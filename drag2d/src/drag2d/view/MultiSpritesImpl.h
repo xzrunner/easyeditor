@@ -48,7 +48,7 @@ private:
 	{
 	public:
 		PointQueryVisitor(const Vector& pos, ISprite** pResult);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		const Vector& m_pos;
@@ -60,7 +60,7 @@ private:
 	{
 	public:
 		RectQueryVisitor(const Rect& rect, bool contain, std::vector<ISprite*>& result);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		const Rect& m_rect;
@@ -73,7 +73,7 @@ private:
 	{
 	public:
 		RemoveSelectionVisitor(MultiSpritesImpl* spritesImpl);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		MultiSpritesImpl* m_spritesImpl;

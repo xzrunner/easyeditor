@@ -88,13 +88,13 @@ void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 		if (!currFrame) 
 		{
 			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
-				sprites.push_back(currFrame->GetSprite(i)->clone());
+				sprites.push_back(currFrame->GetSprite(i)->Clone());
 			}
 		}
 		else if (!currFrame->HasClassicTween())
 		{
 			for (int i = 0, n = currFrame->Size(); i < n; ++i) {
-				sprites.push_back(currFrame->GetSprite(i)->clone());
+				sprites.push_back(currFrame->GetSprite(i)->Clone());
 			}
 		}
 		else

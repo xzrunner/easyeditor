@@ -75,7 +75,7 @@ public:
 	//
 	// ICloneable interface
 	//
-	virtual ParticleSystem* clone() const { return new ParticleSystem(*this); }
+	virtual ParticleSystem* Clone() const { return new ParticleSystem(*this); }
 
 	//
 	// UICallback interface
@@ -94,7 +94,7 @@ public:
 
 	bool IsEmpty() const;
 
-	void reloadTexture() const;
+	void ReloadTexture() const;
 
 	void StoreAnimRecord(const std::string& filepath) const;
 	void StoreInvertRecord(const std::string& filepath) const;

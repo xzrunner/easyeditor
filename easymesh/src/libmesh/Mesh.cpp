@@ -46,7 +46,7 @@ Mesh::Mesh(const d2d::Image& image, bool initBound, bool use_region)
 	}
 }
 
-Mesh* Mesh::clone() const
+Mesh* Mesh::Clone() const
 {
 	return new Mesh(*this);
 }
@@ -313,7 +313,7 @@ void Mesh::TraverseShape(d2d::IVisitor& visitor) const
 			= const_cast<libshape::ChainShape*>(m_region.loops[i]);
 
 		bool has_next;
-		visitor.visit(shape, has_next);
+		visitor.Visit(shape, has_next);
 		if (!has_next) {
 			break;
 		}

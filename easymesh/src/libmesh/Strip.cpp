@@ -24,7 +24,7 @@ Strip::Strip(const d2d::Image& image)
 	InitBound();
 }
 
-Strip* Strip::clone() const
+Strip* Strip::Clone() const
 {
 	return new Strip(*this);
 }

@@ -264,7 +264,7 @@ bool SelectJointOP::Clear()
 }
 
 void SelectJointOP::DrawSelectedVisitor::
-visit(d2d::Object* object, bool& bFetchNext) 
+Visit(d2d::Object* object, bool& bFetchNext) 
 {
 	std::vector<d2d::Vector> bound;
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);

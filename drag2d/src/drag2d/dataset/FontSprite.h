@@ -21,7 +21,7 @@ public:
 	//
 	// ICloneable interface
 	//
-	virtual FontSprite* clone() const;
+	virtual FontSprite* Clone() const;
 
 	//
 	// ISprite interface

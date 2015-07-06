@@ -62,7 +62,7 @@ void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType ty
 {
 	if (m_loop) {
 		bool hasNext;
-		visitor.visit(m_loop, hasNext);
+		visitor.Visit(m_loop, hasNext);
 	}
 }
 

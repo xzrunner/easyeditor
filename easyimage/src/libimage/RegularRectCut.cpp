@@ -19,7 +19,7 @@ static const int TRY_MIN_LIMIT = 2;
 
 RegularRectCut::RegularRectCut(const d2d::Image& image)
 {
-	LoadPixels(image.getPixelData(), image.originWidth(), image.originHeight());
+	LoadPixels(image.GetPixelData(), image.GetOriginWidth(), image.GetOriginHeight());
 
 	m_area_array = new PixelAreaArray(m_pixels, m_width, m_height, true);
 }

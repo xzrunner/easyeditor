@@ -24,12 +24,12 @@ void Frame::OnPreview(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 
 	std::vector<const d2d::ISprite*> sprites;
-	m_task->getAllSprite(sprites);
+	m_task->GetAllSprite(sprites);
 
 	PreviewDialog dlg(this, cfg->m_view_width, cfg->m_view_height, sprites);
 	dlg.ShowModal();
 
-	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->getEditPanel());
+	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
 	stage->resetCanvas();
 }
 

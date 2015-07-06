@@ -39,7 +39,7 @@ private:
 //	wxColourData& m_colorData;
 
 	d2d::Bitmap m_bitmap;
-	wxString m_filePath;
+	std::string m_filePath;
 
 	wxButton* m_btnReview;
 

@@ -13,7 +13,7 @@ CopyPasteSpriteState::CopyPasteSpriteState(MultiSpritesImpl* sprites_impl,
 	, m_spr(NULL)
 {
 	if (selected) {
-		m_spr = selected->clone();
+		m_spr = selected->Clone();
 		sprites_impl->InsertSprite(m_spr);
 		m_selection->Clear();
 		m_selection->Add(m_spr);

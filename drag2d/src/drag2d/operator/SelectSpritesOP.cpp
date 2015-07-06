@@ -255,7 +255,7 @@ ISprite* SelectSpritesOP::SelectByPos(const Vector& pos) const
 
 void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& value) const
 {
-	value["filename"] = spr->getSymbol().getFilepath().ToStdString();
+	value["filename"] = spr->getSymbol().GetFilepath();
 	spr->store(value);	
 }
 

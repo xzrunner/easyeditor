@@ -7,7 +7,7 @@ namespace eterrain2d
 
 OceanMesh::OceanMesh(const libshape::PolygonShape* shape, 
 					 const d2d::ImageSymbol* image)
-	 : m_shape(shape->clone())
+	 : m_shape(shape->Clone())
 	 , m_image0(image)
 	 , m_image1(NULL)
 	 , m_lock_bound(false)
@@ -113,11 +113,11 @@ void OceanMesh::Draw(const d2d::Matrix& mt, const d2d::Colorf& mul,
 	if (m_blend_open && m_image1) {
 		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, m_blend_base), d2d::Colorf(0, 0, 0, 0));
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			m_grids[i]->DrawTexture(mt, mul, add, m_image0->getTextureID());
+			m_grids[i]->DrawTexture(mt, mul, add, m_image0->GetTexID());
 		}
 		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, 1 - m_blend_base), d2d::Colorf(0, 0, 0, 0));
 		for (int i = 0, n = m_grids.size(); i < n; ++i) {
-			m_grids[i]->DrawTexture(mt, mul, add, m_image1->getTextureID());
+			m_grids[i]->DrawTexture(mt, mul, add, m_image1->GetTexID());
 		}
 	} else {
 		shader->SetSpriteColor(d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0));
@@ -156,8 +156,8 @@ void OceanMesh::OpenBlend(bool open)
 
 void OceanMesh::SetImage1(const d2d::ImageSymbol* image)
 {
-	if (m_image0->getSize().xLength() != image->getSize().xLength() ||
-		m_image0->getSize().yLength() != image->getSize().yLength()) {
+	if (m_image0->GetSize().xLength() != image->GetSize().xLength() ||
+		m_image0->GetSize().yLength() != image->GetSize().yLength()) {
 		return;
 	}
 
@@ -216,8 +216,8 @@ d2d::Rect OceanMesh::CalBoundRegion(const std::vector<d2d::Vector>& bound) const
 
 void OceanMesh::CalSegments(const d2d::Rect& r, std::vector<d2d::Vector>& segs) const
 {
-	int img_w = m_image0->getSize().xLength(),
-		img_h = m_image0->getSize().yLength();
+	int img_w = m_image0->GetSize().xLength(),
+		img_h = m_image0->GetSize().yLength();
 	float dw = img_w / m_col,
 		  dh = img_h / m_row;
 	for (float x = r.xMin; x < r.xMax; x += dw) {
@@ -253,8 +253,8 @@ void OceanMesh::CalTrisTexcords(const d2d::Rect& r,
 								const std::vector<d2d::Vector>& tris_vertices,
 								std::vector<d2d::Vector>& texcoords) const
 {
-	float img_w = m_image0->getSize().xLength(),
-		  img_h = m_image0->getSize().yLength();
+	float img_w = m_image0->GetSize().xLength(),
+		  img_h = m_image0->GetSize().yLength();
 
 	d2d::Vector left_low;
 	left_low.x = r.xMin - (1 - m_texcoords_base.x) * img_w;
@@ -284,8 +284,8 @@ void OceanMesh::BuildGrids(const d2d::Rect& region,
 						   const std::vector<d2d::Vector>& texcoords,
 						   const std::vector<d2d::Vector>& bound)
 {
-	float img_w = m_image0->getSize().xLength(),
-		  img_h = m_image0->getSize().yLength();
+	float img_w = m_image0->GetSize().xLength(),
+		  img_h = m_image0->GetSize().yLength();
 	int cx = std::ceil(region.xLength() / img_w),
 		cy = std::ceil(region.yLength() / img_h);
 	std::vector<MeshShape*> grids;
@@ -313,8 +313,8 @@ void OceanMesh::BuildGrids(const d2d::Rect& region,
 
 void OceanMesh::UpdateWave(float during)
 {
-	int img_w = m_image0->getSize().xLength(),
-		img_h = m_image0->getSize().yLength();
+	int img_w = m_image0->GetSize().xLength(),
+		img_h = m_image0->GetSize().yLength();
 	for (int i = 0, n = m_grids.size(); i < n; ++i) {
 		MeshShape* grid = m_grids[i];
 		const std::vector<emesh::Triangle*>& tris = grid->GetTriangles();

@@ -19,7 +19,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual PolygonShape* clone() const;
+	virtual PolygonShape* Clone() const;
 
 	//
 	// IShape interface

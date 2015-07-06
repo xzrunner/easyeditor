@@ -16,7 +16,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual CircleShape* clone() const;
+	virtual CircleShape* Clone() const;
 
 	//
 	// IShape interface

@@ -53,7 +53,7 @@ void SymbolPropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 			if (c->m_use_render_cache) {
 				dtex->InsertSymbol(*c);
 			} else {
-				dtex->Remove(c->getFilepath());
+				dtex->Remove(c->GetFilepath());
 			}
 		}
 	}

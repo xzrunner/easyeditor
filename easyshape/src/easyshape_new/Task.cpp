@@ -22,7 +22,7 @@ Task::~Task()
 //	delete m_root;
 }
 
-void Task::load(const char* filepath)
+void Task::Load(const char* filepath)
 {
 	d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(filepath);
 	if (type == d2d::FileNameParser::e_shape) {
@@ -36,7 +36,7 @@ void Task::load(const char* filepath)
 	}
 }
 
-void Task::store(const char* filepath) const
+void Task::Store(const char* filepath) const
 {
 	std::string fixed = filepath;
 	d2d::FileNameParser::Type type = d2d::FileNameParser::getFileType(fixed);
@@ -47,12 +47,12 @@ void Task::store(const char* filepath) const
 	m_stage->StoreToFile(fixed.c_str());
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return true;
 }
 
-void Task::clear()
+void Task::Clear()
 {
  	m_library->Clear();
  	m_stage->clear();
@@ -60,12 +60,12 @@ void Task::clear()
  	m_stage->Refresh();
 }
 
-void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return NULL;
 }

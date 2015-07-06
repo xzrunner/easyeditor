@@ -22,7 +22,7 @@ Task::~Task()
 	m_parent->SetTitle("EasyParticle");
 }
 
-void Task::load(const char* filename)
+void Task::Load(const char* filename)
 {
 	Json::Value value;
 	Json::Reader reader;
@@ -37,7 +37,7 @@ void Task::load(const char* filename)
 	m_toolbar->Load(value, version);
 }
 
-void Task::store(const char* filename) const
+void Task::Store(const char* filename) const
 {
 	Json::Value value;
 
@@ -53,23 +53,23 @@ void Task::store(const char* filename) const
 	fout.close();
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return m_stage->isDirty();
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_stage->clear();
 	m_stage->Refresh();
 }
 
-void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

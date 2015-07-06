@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _DRAG2D_FONT_H_
+#define _DRAG2D_FONT_H_
 
 #include "common/ResourcesMgr.h"
 #include "common/Object.h"
@@ -9,41 +10,44 @@
 
 namespace d2d
 {
-	class Font;
-	typedef ResourcesMgr<Font> FontMgr;
 
-	// from nehe's FreeType
-	class Font : public Object
-	{
-	public:
-		Font(bool stroke = false);
-		virtual ~Font();
+class Font;
+typedef ResourcesMgr<Font> FontMgr;
 
-		bool loadFromFile(const wxString& filepath);
+// from nehe's FreeType
+class Font : public Object
+{
+public:
+	Font(bool stroke = false);
+	virtual ~Font();
+
+	bool LoadFromFile(const std::string& filepath);
 
 //		void setSize(unsigned int h);
 
-	public:
-		static const int DEFAULT_SIZE = 16;
+public:
+	static const int DEFAULT_SIZE = 16;
 
-		static const char* DEFAULT_FONTFILE;
+	static const char* DEFAULT_FONTFILE;
 
-	private:
-		void make_dlist_freetypes(char ch);
-		void make_dlist_wx(char ch);
+private:
+	void make_dlist_freetypes(char ch);
+	void make_dlist_wx(char ch);
 
-	public:
-		unsigned int h;			///< Holds the height of the font.
-		unsigned int * textures;	///< Holds the texture id's 
-		unsigned int list_base;	///< Holds the first display list id
+public:
+	unsigned int h;			///< Holds the height of the font.
+	unsigned int * textures;	///< Holds the texture id's 
+	unsigned int list_base;	///< Holds the first display list id
 
-	private:
-		bool m_stroke;
+private:
+	bool m_stroke;
 
-		wxString m_filename;
+	std::string m_filename;
 
-		FT_Face m_face;
+	FT_Face m_face;
 
-	}; // Font
+}; // Font
+
 }
 
+#endif // _DRAG2D_FONT_H_

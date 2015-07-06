@@ -54,11 +54,11 @@ bool ResizeOP::OnMouseDrag(int x, int y)
 		else if (type == e_3GridHor)
 		{
 			width = fabs(pos.x)*2;
-			height = symbol->getSize().yLength();
+			height = symbol->GetSize().yLength();
 		}
 		else if (type == e_3GridVer)
 		{
-			width = symbol->getSize().xLength();
+			width = symbol->GetSize().xLength();
 			height = fabs(pos.y)*2;
 		}
 		else

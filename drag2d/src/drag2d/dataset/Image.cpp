@@ -1,5 +1,4 @@
 #include "Image.h"
-#include "ImageLoader.h"
 
 #include "dataset/TPNode.h"
 #include "render/GL10.h"
@@ -24,51 +23,32 @@
 namespace d2d
 {
 
-Image::Image()
-	: m_pixels(NULL)
-{
-	m_textureID = 0;
-	m_width = m_height = 0;
-}
-
 Image::Image(const uint8_t* pixel, int width, int height)
-	: m_width(width)
-	, m_height(height)
-	, m_pixels(pixel)
+	: m_tex(pixel, width, height)
 {
-	m_textureID = 0;
-	m_channels = 4;
-	ImageLoader::loadTexture(m_textureID, m_pixels, m_width, m_height, m_channels, GL_RGBA);
-
-	m_region.xMin = - m_width * 0.5f;
-	m_region.xMax =   m_width * 0.5f;
-	m_region.yMin = - m_height * 0.5f;
-	m_region.yMax =   m_height * 0.5f;
+	ResetClippedRegion();
 }
 
 Image::~Image()
 {
-	glDeleteTextures(1, &m_textureID);
-	ImageMgr::Instance()->removeItem(m_filepath);
-	delete m_pixels;
+	ImageMgr::Instance()->RemoveItem(m_tex.GetFilepath());
 }
 
-bool Image::loadFromFile(const wxString& filepath)
+bool Image::LoadFromFile(const std::string& filepath)
 {
 	if (!wxFileName::FileExists(filepath)) {
-		throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
+		throw Exception("Image File: %s don't exist!", filepath.c_str());
 	}
-
-	m_filepath = filepath;
 
 #ifdef NOT_LOAD_IMAGE
 	// todo
-	m_region.xMin = m_region.xMax = m_region.yMin = m_region.yMax = 0;
+	m_clipped_region.xMin = m_clipped_region.xMax = m_clipped_region.yMin = m_clipped_region.yMax = 0;
 	return true;
 #endif
 
- 	reload(); 
- 	if (m_textureID == 0)
+	m_tex.LoadFromFile(filepath);
+
+ 	if (m_tex.GetTexID() == 0)
  	{
 //		assert(0);
 //		m_width = m_height = 0;
@@ -81,16 +61,13 @@ bool Image::loadFromFile(const wxString& filepath)
 			eimage::ImageTrim trim(this);
 			d2d::Rect r = trim.Trim();
 			if (r.isValid()) {
-				r.translate(d2d::Vector(-m_width*0.5f, -m_height*0.5f));
-				m_region = r;
+				r.translate(d2d::Vector(-m_tex.GetWidth()*0.5f, -m_tex.GetHeight()*0.5f));
+				m_clipped_region = r;
 			}
 		} 
 		else 
 		{
-			m_region.xMin = - m_width * 0.5f;
-			m_region.xMax =   m_width * 0.5f;
-			m_region.yMin = - m_height * 0.5f;
-			m_region.yMax =   m_height * 0.5f;
+			ResetClippedRegion();
 		}
 
 // 		// todo
@@ -103,17 +80,13 @@ bool Image::loadFromFile(const wxString& filepath)
  	}
 }
 
-void Image::reload()
+void Image::Reload()
 {
-	m_pixels = ImageLoader::loadTexture(m_filepath.ToStdString(), m_width, m_height, m_textureID, m_channels);
-
- 	m_region.xMin = - m_width * 0.5f;
- 	m_region.xMax =   m_width * 0.5f;
- 	m_region.yMin = - m_height * 0.5f;
- 	m_region.yMax =   m_height * 0.5f;
+	m_tex.Reload();
+	ResetClippedRegion();
 }
 
-void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
+void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 {
 	////////////////////////////////////////////////////////////////////////////
 	//// 原始 直接画
@@ -204,7 +177,7 @@ void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 	const TPNode* n = NULL;
 	if (Config::Instance()->IsUseDTex()) {
 		dt = DynamicTexAndFont::Instance();
-		n = dt->Query(m_filepath);
+		n = dt->Query(m_tex.GetFilepath());
 	}
  	if (n)
  	{
@@ -234,13 +207,15 @@ void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 	{
 		//wxLogDebug("Fail to insert dtex: %s", m_filepath.c_str());
 
-		texid = m_textureID;
-	 	float tot_hw = m_width * 0.5f,
-	 		tot_hh = m_height * 0.5f;
-	 	txmin = (r.xMin + tot_hw) / m_width;
-	 	txmax = (r.xMax + tot_hw) / m_width;
-	 	tymin = (r.yMin + tot_hh) / m_height;
-	 	tymax = (r.yMax + tot_hh) / m_height;
+		texid = m_tex.GetTexID();
+		float w = m_tex.GetWidth(),
+			h = m_tex.GetHeight();
+		float hw = 0.5f * w,
+			hh = 0.5f * h;
+	 	txmin = (r.xMin + hw) / w;
+	 	txmax = (r.xMax + hw) / w;
+	 	tymin = (r.yMin + hh) / h;
+	 	tymax = (r.yMax + hh) / h;
 	}
  	texcoords[0].set(txmin, tymin);
  	texcoords[1].set(txmax, tymin);
@@ -305,6 +280,14 @@ void Image::draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 	} else {
 		shader->Draw(vertices, texcoords, texid);
 	}
+}
+
+void Image::ResetClippedRegion()
+{
+	m_clipped_region.xMax = m_tex.GetWidth() * 0.5f;
+	m_clipped_region.xMin = -m_clipped_region.xMax;
+	m_clipped_region.yMax = m_tex.GetHeight() * 0.5f;
+	m_clipped_region.yMin = -m_clipped_region.yMax;
 }
 
 } // d2d

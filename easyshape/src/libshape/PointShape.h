@@ -16,7 +16,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual PointShape* clone() const;
+	virtual PointShape* Clone() const;
 
 	//
 	// IShape interface

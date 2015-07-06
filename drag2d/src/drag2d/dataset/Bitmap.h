@@ -1,43 +1,47 @@
-#pragma once
+#ifndef _DRAG2D_BITMAP_H_
+#define _DRAG2D_BITMAP_H_
 
 #include "common/ResourcesMgr.h"
 #include "common/Object.h"
 
-#include <wx/wx.h>
+#include <wx/bitmap.h>
 
 namespace d2d
 {
-	class Bitmap;
-	typedef ResourcesMgr<Bitmap> BitmapMgr;
 
-	class Bitmap : public Object
-	{
-	public:
-		Bitmap();
-		virtual ~Bitmap();
+class Bitmap;
+typedef ResourcesMgr<Bitmap> BitmapMgr;
 
-		bool loadFromFile(const wxString& filepath);
+class Bitmap : public Object
+{
+public:
+	Bitmap();
+	virtual ~Bitmap();
 
-		const wxBitmap* getBitmap() const {
-			return m_bitmap;
-		}
+	bool LoadFromFile(const std::string& filepath);
 
-	private:
-		static unsigned char* transRGBA2RGB(unsigned char* rgba, int width, int height);
+	const wxBitmap* GetBitmap() const {
+		return m_bitmap;
+	}
 
-		static void getImage(const wxString& filepath, wxImage& image);
+private:
+	static unsigned char* TransRGBA2RGB(unsigned char* rgba, int width, int height);
 
-		static wxBitmap* getBitmap(const wxImage& image);
+	static void GetImage(const std::string& filepath, wxImage& image);
 
-		static float computeScale(float width);
+	static wxBitmap* GetBitmap(const wxImage& image);
 
-	private:
-		wxString m_filename;
+	static float ComputeScale(float width);
 
-		wxBitmap* m_bitmap;
+private:
+	std::string m_filename;
 
-		float m_scale;
+	wxBitmap* m_bitmap;
 
-	}; // Bitmap
+	float m_scale;
+
+}; // Bitmap
+
 }
 
+#endif // _DRAG2D_BITMAP_H_

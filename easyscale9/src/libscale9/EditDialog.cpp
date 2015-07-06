@@ -17,7 +17,7 @@ namespace escale9
 		wxSize(800, 600), wxCLOSE_BOX | wxCAPTION)
 		, m_symbol(symbol)
 	{
-		SetTitle(symbol->getFilepath());
+		SetTitle(symbol->GetFilepath());
 		initLayout();
 	}
 
@@ -47,14 +47,14 @@ namespace escale9
 		int val = dlg.ShowModal();
 		if (val == wxID_OK)
 		{
-			const wxString& filepath = m_symbol->getFilepath();
+			const wxString& filepath = m_symbol->GetFilepath();
 			FileSaver::store(filepath, *m_symbol);
 			m_symbol->RefreshThumbnail(filepath);
 			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
 		}
 		else if (val == wxID_CANCEL)
 		{
-			m_symbol->loadFromFile(m_symbol->getFilepath());
+			m_symbol->LoadFromFile(m_symbol->GetFilepath());
 		}
 
 		Destroy();

@@ -21,7 +21,7 @@ void DemoOcean::Load()
 	m_cam.SetPosition(vec3(0, -8, 8));
 	m_cam.Rotate(0, 40);
 
-	m_image = d2d::ImageMgr::Instance()->getItem("ocean/water2_256.png");
+	m_image = d2d::ImageMgr::Instance()->GetItem("ocean/water2_256.png");
 
 	Wave w;
 	w.len = 0.2f;
@@ -81,7 +81,7 @@ void DemoOcean::Draw() const
 					texcoords[i] = texcoords[i] - base;
 				}
 
-				shader->DrawTri(vertices, texcoords, m_image->textureID());
+				shader->DrawTri(vertices, texcoords, m_image->GetTexID());
 			}
 			{
 				vec3 vertices[] = {vec3(vx_max, vy_max, h_maxmax), vec3(vx_max, vy_min, h_maxmin), vec3(vx_min, vy_min, h_minmin)};
@@ -97,7 +97,7 @@ void DemoOcean::Draw() const
 					texcoords[i] = texcoords[i] - base;
 				}
 
-				shader->DrawTri(vertices, texcoords, m_image->textureID());
+				shader->DrawTri(vertices, texcoords, m_image->GetTexID());
 			}
 		}
 	}	

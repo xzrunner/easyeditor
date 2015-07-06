@@ -33,7 +33,7 @@
 //void EJPreviewCanvas::initGL()
 //{
 //	OrthoCanvas::initGL();
-////	static_cast<LibraryPanel*>(Context::Instance()->library)->reloadTexture();
+////	static_cast<LibraryPanel*>(Context::Instance()->library)->ReloadTexture();
 //	Shader::Instance()->Release();
 //}
 //
@@ -61,7 +61,7 @@
 //// 
 //// 	Image* img = sprite->getSymbol().getImage();
 ////  	const char * msg = texture_load(0, Texture2DPixelFormat_RGBA8888, 
-////  		img->getRegion().xLength(), img->getRegion().yLength(), (void*)img->getPixelData());
+////  		img->getRegion().xLength(), img->getRegion().yLength(), (void*)img->GetPixelData());
 //
 //	//////////////////////////////////////////////////////////////////////////
 //

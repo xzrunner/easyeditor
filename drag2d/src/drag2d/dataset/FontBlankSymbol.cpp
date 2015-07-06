@@ -43,11 +43,11 @@ FontBlankSymbol::~FontBlankSymbol()
 //	m_font->Release();
 }
 
-void FontBlankSymbol::reloadTexture() const
+void FontBlankSymbol::ReloadTexture() const
 {
 }
 
-void FontBlankSymbol::draw(const Matrix& mt,
+void FontBlankSymbol::Draw(const Matrix& mt,
 						   const Colorf& mul, 
 						   const Colorf& add,
 						   const Colorf& r_trans,
@@ -64,7 +64,7 @@ void FontBlankSymbol::draw(const Matrix& mt,
 	}
 }
 
-Rect FontBlankSymbol::getSize(const ISprite* sprite/* = NULL*/) const
+Rect FontBlankSymbol::GetSize(const ISprite* sprite/* = NULL*/) const
 {
 	float w = width, h = height;
 	if (sprite) {
@@ -88,16 +88,16 @@ bool FontBlankSymbol::loadFont(const std::string& _filename)
 		return false;
 
 	delete m_font, m_font = NULL;
-	m_font = FontMgr::Instance()->getItem(filename);
+	m_font = FontMgr::Instance()->GetItem(filename);
 	return m_font != NULL;
 }
 
-void FontBlankSymbol::loadResources()
+void FontBlankSymbol::LoadResources()
 {
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.fn_str());
+	std::ifstream fin(m_filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();

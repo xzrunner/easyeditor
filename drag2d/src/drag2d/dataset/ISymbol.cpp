@@ -11,12 +11,12 @@ ISymbol::~ISymbol()
 	SymbolMgr::Instance()->remove(this);
 }
 
-void ISymbol::clearUserData(bool deletePtr)
+void ISymbol::ClearUserData(bool deletePtr)
 {
 	delete m_userData, m_userData = NULL;
 }
 
-bool ISymbol::loadFromFile(const wxString& filepath)
+bool ISymbol::LoadFromFile(const std::string& filepath)
 {
 	m_filepath = FilenameTools::getExistFilepath(filepath);
 	if (m_filepath == wxEmptyString)
@@ -28,7 +28,7 @@ bool ISymbol::loadFromFile(const wxString& filepath)
 
 	m_name = FilenameTools::getFilename(filepath);
 //	m_bitmap = NULL;
-	loadResources();
+	LoadResources();
 	return true;
 }
 

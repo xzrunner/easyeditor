@@ -30,7 +30,7 @@ private:
 	public:
 		Visitor(StagePanel* stage, const e3d::Camera& cam, const ivec2& start, const ivec2& end) 
 			: m_stage(stage), m_cam(cam), m_start(start), m_end(end) {}
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 	private:
 		StagePanel* m_stage;

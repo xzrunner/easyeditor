@@ -649,6 +649,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\dataset\Texture.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\..\src\drag2d\dataset\Texture.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\dataset\TPNode.cpp"
 					>
 				</File>

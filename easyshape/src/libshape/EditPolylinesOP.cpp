@@ -120,7 +120,7 @@ void EditPolylinesOP::clearBuffer()
 //////////////////////////////////////////////////////////////////////////
 
 void EditPolylinesOP::UpdateChainVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
@@ -140,11 +140,11 @@ UpdateBufferVisitor(std::map<ChainShape*, ChainShape*>& simplifyBuffer)
 }
 
 void EditPolylinesOP::UpdateBufferVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
-	m_simplifyBuffer.insert(std::make_pair(chain, chain->clone()));
+	m_simplifyBuffer.insert(std::make_pair(chain, chain->Clone()));
 
 	bFetchNext = true;
 }
@@ -160,7 +160,7 @@ OffsetVisitor(const d2d::Vector& offset)
 }
 
 void EditPolylinesOP::OffsetVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 	chain->Translate(m_offset);

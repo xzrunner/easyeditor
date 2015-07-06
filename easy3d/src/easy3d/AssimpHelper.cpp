@@ -60,26 +60,40 @@ void AssimpHelper::LoadNode(const aiScene* scene, const aiNode* node,
 		if (node->mNumMeshes) {
 			for (int i = 0; i < node->mNumMeshes; ++i) {
 				const aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-				LoadMesh(mesh, model, aabb);
+				const aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+				LoadMesh(mesh, material, model, aabb);
 			}
 		}
 	}
 }
 
-void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, ModelParametric& model, e3d::AABB& aabb)
+void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, const aiMaterial* material, ModelParametric& model, e3d::AABB& aabb)
 {
 	Mesh mesh;
 
+	LoadMaterial(ai_mesh, material, mesh.material);
+
 	// Create the VBO for the vertices.
 	std::vector<vec3> vertices;
-	vertices.reserve(ai_mesh->mNumVertices * 2);
+	bool has_texcoords = ai_mesh->HasTextureCoords(0);
+	if (has_texcoords) {
+		vertices.reserve(ai_mesh->mNumVertices * 3);
+	} else {
+		vertices.reserve(ai_mesh->mNumVertices * 2);
+	}
 	for (int i = 0; i < ai_mesh->mNumVertices; ++i) {
 		const aiVector3D& p = ai_mesh->mVertices[i];
 		vec3 _p(p.x, p.y, p.z);
 		vertices.push_back(_p);
 		aabb.Combine(_p);
+
 		const aiVector3D& n = ai_mesh->mNormals[i];
-		vertices.push_back(vec3(n.x, n.y, n.z));		
+		vertices.push_back(vec3(n.x, n.y, n.z));
+
+		if (has_texcoords) {
+			const aiVector3D& t = ai_mesh->mTextureCoords[0][i];
+			vertices.push_back(vec3(t.x, t.y, t.z));
+		}
 	}
 
 	glGenBuffers(1, &mesh.vertex_buffer);
@@ -111,6 +125,43 @@ void AssimpHelper::LoadMesh(const aiMesh* ai_mesh, ModelParametric& model, e3d::
 	mesh.index_count = indices.size();
 
 	model.AddMesh(mesh);
+}
+
+void AssimpHelper::LoadMaterial(const aiMesh* ai_mesh, const aiMaterial* ai_material, Material& material)
+{
+	aiColor4D col;
+
+	if (aiGetMaterialColor(ai_material, AI_MATKEY_COLOR_DIFFUSE, &col) == AI_SUCCESS) {
+		material.diffuse.x = col.r;
+		material.diffuse.y = col.g;
+		material.diffuse.z = col.b;
+	} else {
+		material.diffuse.x = material.diffuse.y = material.diffuse.z = 1;
+	}
+
+	if (aiGetMaterialColor(ai_material, AI_MATKEY_COLOR_SPECULAR, &col) == AI_SUCCESS) {
+		material.specular.x = col.r;
+		material.specular.y = col.g;
+		material.specular.z = col.b;
+	} else {
+		material.specular.x = material.specular.y = material.specular.z = 1;
+	}
+
+	if (aiGetMaterialColor(ai_material, AI_MATKEY_COLOR_AMBIENT, &col) == AI_SUCCESS) {
+		material.ambient.x = col.r;
+		material.ambient.y = col.g;
+		material.ambient.z = col.b;
+	} else {
+		material.ambient.x = material.ambient.y = material.ambient.z = 0;
+	}
+
+	if (ai_mesh->mTextureCoords[0]) 
+	{
+		aiString path;
+		if (aiGetMaterialString(ai_material, AI_MATKEY_TEXTURE_DIFFUSE(0), &path) == AI_SUCCESS) {
+			material.m_diffuse_tex.LoadFromFile(path.data);
+		}
+	}
 }
 
 }

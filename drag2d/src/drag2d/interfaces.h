@@ -1,5 +1,5 @@
-#ifndef _D2D_INTERFACES_H_
-#define _D2D_INTERFACES_H_
+#ifndef _DRAG2D_INTERFACES_H_
+#define _DRAG2D_INTERFACES_H_
 
 #include <vector>
 
@@ -11,12 +11,12 @@ class EditPanel;
 class ITask
 {
 public:
-	virtual void load(const char* filename) = 0;
-	virtual void store(const char* filename) const = 0;
-	virtual bool isDirty() const = 0;
-	virtual void clear() = 0;
-	virtual void getAllSprite(std::vector<const ISprite*>& sprites) const = 0;
-	virtual const EditPanel* getEditPanel() const = 0;
+	virtual void Load(const char* filename) = 0;
+	virtual void Store(const char* filename) const = 0;
+	virtual bool IsDirty() const = 0;
+	virtual void Clear() = 0;
+	virtual void GetAllSprite(std::vector<const ISprite*>& sprites) const = 0;
+	virtual const EditPanel* GetEditPanel() const = 0;
 	virtual ~ITask() {}
 };
 
@@ -24,17 +24,16 @@ class Object;
 class IObjectStream
 {
 public:
-	virtual Object* getNext() = 0;
-	virtual bool hasNext() const = 0;
-//		virtual size_t size() = 0;
-	virtual void rewind() = 0;
+	virtual Object* GetNext() = 0;
+	virtual bool HasNext() const = 0;
+	virtual void Rewind() = 0;
 	virtual ~IObjectStream() {}
 };
 
 class IVisitor
 {
 public:
-	virtual void visit(Object* object, bool& bFetchNext) = 0;
+	virtual void Visit(Object* object, bool& bFetchNext) = 0;
 	virtual ~IVisitor() {}
 }; // IVisitor
 
@@ -49,7 +48,7 @@ public:
 class ICloneable 
 {
 public:
-	virtual ICloneable* clone() const = 0;
+	virtual ICloneable* Clone() const = 0;
 	virtual ~ICloneable() {}
 }; // ICloneable
 
@@ -59,11 +58,11 @@ class Vector;
 class ISpriteObserver
 {
 public:
-	virtual void translate(ISprite* sprite, const Vector& offset) = 0;
-	virtual void rotate(ISprite* sprite, float delta) = 0;
+	virtual void Translate(ISprite* sprite, const Vector& offset) = 0;
+	virtual void Rotate(ISprite* sprite, float delta) = 0;
 	virtual ~ISpriteObserver() {}
 }; // ISpriteObserver
 
 }
 
-#endif // _D2D_INTERFACES_H_
+#endif // _DRAG2D_INTERFACES_H_

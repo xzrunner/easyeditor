@@ -42,7 +42,7 @@ ISymbol* ILibraryPage::GetSymbol(int index/* = -1*/) const
 
 void ILibraryPage::ReloadTexture() const
 {
-	m_list->reloadTexture();
+	m_list->ReloadTexture();
 }
 
 void ILibraryPage::AddItem(ListItem* item)

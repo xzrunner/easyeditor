@@ -17,7 +17,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual RectShape* clone() const;
+	virtual RectShape* Clone() const;
 
 	//
 	// IShape interface

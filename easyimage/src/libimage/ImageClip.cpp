@@ -8,7 +8,7 @@ ImageClip::ImageClip(const d2d::Image* image, bool check_duplicate)
 	, m_check(NULL)
 {
 	if (check_duplicate) {
-		int sz = image->originWidth() * image->originHeight();
+		int sz = image->GetOriginWidth() * image->GetOriginHeight();
 		m_check = new bool[sz];
 		memset(m_check, 0, sizeof(bool) * sz);
 	}
@@ -25,10 +25,10 @@ const uint8_t* ImageClip::Clip(int xmin, int xmax, int ymin, int ymax) const
 		return NULL;
 	}
 
-	int width = m_image->originWidth(),
-		height = m_image->originHeight();
-	int channels = m_image->channels();
-	const unsigned char* pixels = m_image->getPixelData();
+	int width = m_image->GetOriginWidth(),
+		height = m_image->GetOriginHeight();
+	int channels = m_image->GetChannels();
+	const unsigned char* pixels = m_image->GetPixelData();
 
 	if (xmin >= xmax || ymin >= ymax) {
 		return NULL;

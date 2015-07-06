@@ -27,16 +27,16 @@ Symbol::~Symbol()
 	}
 }
 
-Symbol* Symbol::clone() const
+Symbol* Symbol::Clone() const
 {
 	return new Symbol(*this);
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -52,19 +52,19 @@ void Symbol::draw(const d2d::Matrix& mt,
 	DrawFromEJScreen();
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
 	return d2d::Rect(200, 200);
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
 	eejoy2d::EJScreen::Create();
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.fn_str());
+	std::ifstream fin(m_filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();

@@ -58,7 +58,7 @@ void ArrangeSpriteImpl::OnDraw() const
 //////////////////////////////////////////////////////////////////////////
 
 void ArrangeSpriteImpl::FixCoordsVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 
@@ -69,13 +69,13 @@ visit(d2d::Object* object, bool& bFetchNext)
 	float width, height;
 	if (sprite->getAngle() == 0)
 	{
-		width = sprite->getSymbol().getSize().xLength() * s + p;
-		height = sprite->getSymbol().getSize().yLength() * s + p;
+		width = sprite->getSymbol().GetSize().xLength() * s + p;
+		height = sprite->getSymbol().GetSize().yLength() * s + p;
 	}
 	else
 	{
-		width = sprite->getSymbol().getSize().yLength() * s + p;
-		height = sprite->getSymbol().getSize().xLength() * s + p;
+		width = sprite->getSymbol().GetSize().yLength() * s + p;
+		height = sprite->getSymbol().GetSize().xLength() * s + p;
 	}
 
 	d2d::Vector leftTop;

@@ -11,6 +11,7 @@
 #include "dataset/FTRender.h"
 
 #include <vector>
+#include <wx/string.h>
 
 namespace d2d
 {
@@ -66,9 +67,9 @@ public:
 	void InsertSymbol(const ISymbol& symbol);
 	void RefreshSymbol(const ISymbol& symbol, const TPNode& node);
 
-	void Remove(const wxString& filepath);
+	void Remove(const std::string& filepath);
 
-	const TPNode* Query(const wxString& filepath) const;
+	const TPNode* Query(const std::string& filepath) const;
 
 	const Glyph* QueryAndInsertFont(int character, const wxString& uft8, 
 		int font_size, int color, int is_edge);
@@ -117,7 +118,7 @@ private:
 
 	private:
 		void GetEdgeLimit(const Image* img, float& max, float& min) const {
-			Rect r = img->getRegion();
+			Rect r = img->GetClippedRegion();
 			if (r.xLength() > r.yLength()) {
 				min = r.xLength();
 				max = r.yLength();
@@ -172,7 +173,7 @@ private:
 	{
 	public:
 		ReloadTextureVisitor(int tex, int extend) : m_tex(tex), m_extend(extend) {}
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 	private:
 		int m_tex;
 		int m_extend;
@@ -198,7 +199,7 @@ private:
 // 	{
 // 	public:
 // 		bool operator () (const ImageWithRegion* lhs, const ImageWithRegion* rhs) const {
-// 			return lhs->img->filepath().compare(lhs->img->filepath());
+// 			return lhs->img->GetFilepath().compare(lhs->img->GetFilepath());
 // 		}
 // 	}; // ImageWithRegionCmp
 
@@ -208,7 +209,7 @@ private:
 
 	std::vector<ImageWithRegion> m_rect_preload_list;
 
-	std::map<wxString, TPNode*> m_path2node;
+	std::map<std::string, TPNode*> m_path2node;
 	
 	// for font
 	Hash m_hash;

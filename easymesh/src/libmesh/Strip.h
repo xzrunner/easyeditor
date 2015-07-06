@@ -19,7 +19,7 @@ public:
 	//
 	// ICloneable interface
 	//
-	virtual Strip* clone() const;
+	virtual Strip* Clone() const;
 
 	//
 	// Shape interface

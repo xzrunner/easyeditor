@@ -26,17 +26,17 @@ Symbol::~Symbol()
 	clear();
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 	std::set<const ISymbol*> symbols;
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		symbols.insert(&m_sprites[i]->getSymbol());
 	std::set<const ISymbol*>::iterator itr = symbols.begin();
 	for ( ; itr != symbols.end(); ++itr)
-		(*itr)->reloadTexture();
+		(*itr)->ReloadTexture();
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -114,7 +114,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	}
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
 	return m_rect;
 }
@@ -245,7 +245,7 @@ void Symbol::InitBounding()
 //	}
 //}
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
 	bool use_dtex = d2d::Config::Instance()->IsUseDTex();
 	d2d::DynamicTexAndFont* dtex = NULL;
@@ -259,7 +259,7 @@ void Symbol::loadResources()
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(m_filepath.fn_str());
+	std::ifstream fin(m_filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();

@@ -56,9 +56,9 @@ static const d2d::Vector QUERY_OFFSET[NEARBY_COUNT] = {
 };
 
 ExtractOutlineRaw::ExtractOutlineRaw(const d2d::Image& image)
-	: m_pixels(image.getPixelData())
-	, m_width(image.originWidth())
-	, m_height(image.originHeight())
+	: m_pixels(image.GetPixelData())
+	, m_width(image.GetOriginWidth())
+	, m_height(image.GetOriginHeight())
 {
 }
 

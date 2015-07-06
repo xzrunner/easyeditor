@@ -16,25 +16,25 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual FontBlankSymbol* clone() const { return NULL; }
+		virtual FontBlankSymbol* Clone() const { return NULL; }
 
 		//
 		// ISymbol interfaces
 		//
-		virtual void reloadTexture() const;
-		virtual void draw(const Matrix& mt,
+		virtual void ReloadTexture() const;
+		virtual void Draw(const Matrix& mt,
 			const Colorf& mul = Colorf(1, 1, 1, 1), 
 			const Colorf& add = Colorf(0, 0, 0, 0),
 			const Colorf& r_trans = Colorf(1, 0, 0, 0),
 			const Colorf& g_trans = Colorf(0, 1, 0, 0),
 			const Colorf& b_trans = Colorf(0, 0, 1, 0),
 			const ISprite* sprite = NULL) const;
-		virtual Rect getSize(const ISprite* sprite = NULL) const;
+		virtual Rect GetSize(const ISprite* sprite = NULL) const;
 
 		bool loadFont(const std::string& filename);
 
 	protected:
-		virtual void loadResources();
+		virtual void LoadResources();
 
 	private:
 		void DrawBackground(const ISprite* sprite, const Matrix& mt) const;

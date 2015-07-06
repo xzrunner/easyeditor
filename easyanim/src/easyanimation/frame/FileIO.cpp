@@ -172,8 +172,8 @@ void FileIO::StoreAsGif(const wxString& src, const wxString& dst)
 	libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
 
 	int max_frame = anim->getMaxFrameIndex();
-	int width = symbol->getSize().xLength();
-	int height = symbol->getSize().yLength();
+	int width = symbol->GetSize().xLength();
+	int height = symbol->GetSize().yLength();
 	AnimatedGifSaver saver(width, height);
 	for (int i = 0; i < max_frame; ++i)
 	{
@@ -400,7 +400,7 @@ KeyFrame* FileIO::LoadFrame(rapidxml::xml_node<>* frameNode,
 							const std::map<std::string, std::string>& mapNamePath,
 							Controller* ctrl)
 {
-	int time = StringTools::stringToInt(frameNode->first_attribute("index")->value()) + 1;
+	int time = StringTools::StringToInt(frameNode->first_attribute("index")->value()) + 1;
 
 	KeyFrame* frame = new KeyFrame(ctrl, time);
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
@@ -490,13 +490,13 @@ Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const wxString& dir,
 	const d2d::ISymbol& symbol = sprite->getSymbol();
 	// filepath
 	std::string relative_path = d2d::FilenameTools::getRelativePath(dir, 
-		symbol.getFilepath()).ToStdString();
+		symbol.GetFilepath()).ToStdString();
 	if (single) {
 		value["filepath"] = relative_path;
 	} else {
 		if (ctrl->GetAnimTemplate().ContainPath(relative_path)) {
 			value["filepath"] = d2d::FilenameTools::getFilenameWithExtension(
-				symbol.getFilepath()).ToStdString();
+				symbol.GetFilepath()).ToStdString();
 		} else {
 			value["filepath"] = relative_path;
 		}

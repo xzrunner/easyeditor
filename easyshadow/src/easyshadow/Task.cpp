@@ -19,24 +19,24 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filename)
+void Task::Load(const char* filename)
 {
 	FileIO::LoadFromFile(filename, m_stage->GetSymbol());
 	m_stage->LoadFromShadow();
 	m_stage->Refresh();
 }
 
-void Task::store(const char* filename) const
+void Task::Store(const char* filename) const
 {
 	FileIO::StoreToFile(filename, m_stage->GetSymbol());
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return false;
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_library->Clear();
 	m_stage->clear();
@@ -44,7 +44,7 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

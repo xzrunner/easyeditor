@@ -27,7 +27,7 @@ namespace emodeling
 		{
 		public:
 			LoadBodyVisitor(b2World* world, std::map<libmodeling::Body*, b2Body*>& mapBody);
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 		private:
 			b2World* m_world;
@@ -42,7 +42,7 @@ namespace emodeling
 			LoadJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
 				std::map<libmodeling::Joint*, b2Joint*>& mapJoint);
 
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 		private:
 			b2World* m_world;
@@ -59,7 +59,7 @@ namespace emodeling
 			LoadGearJointVisitor(b2World* world, const std::map<libmodeling::Body*, b2Body*>& mapBody,
 				const std::map<libmodeling::Joint*, b2Joint*>& mapJoint);
 
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 		private:
 			b2World* m_world;

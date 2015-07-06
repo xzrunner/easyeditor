@@ -14,8 +14,8 @@ void FileSaver::store(const char* filepath, const Symbol& symbol)
 	reader.parse(fin, value);
 	fin.close();
 
-	value["width"] = symbol.getSize().xLength();
-	value["height"] = symbol.getSize().yLength();
+	value["width"] = symbol.GetSize().xLength();
+	value["height"] = symbol.GetSize().yLength();
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));

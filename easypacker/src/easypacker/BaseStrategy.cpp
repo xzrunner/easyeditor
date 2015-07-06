@@ -50,8 +50,8 @@ bool BaseStrategy::SpriteCmp::isAreaLess(const d2d::ImageSprite* s0, const d2d::
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 
-	return (s0->getSymbol().getSize().xLength() * s + p) * (s0->getSymbol().getSize().yLength() * s + p)
-		<= (s1->getSymbol().getSize().xLength() * s + p) * (s1->getSymbol().getSize().yLength() * s + p);
+	return (s0->getSymbol().GetSize().xLength() * s + p) * (s0->getSymbol().GetSize().yLength() * s + p)
+		<= (s1->getSymbol().GetSize().xLength() * s + p) * (s1->getSymbol().GetSize().yLength() * s + p);
 }
 
 bool BaseStrategy::SpriteCmp::isEdgeLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const
@@ -59,8 +59,8 @@ bool BaseStrategy::SpriteCmp::isEdgeLess(const d2d::ImageSprite* s0, const d2d::
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 
-	return std::max((s0->getSymbol().getSize().xLength() * s + p), (s0->getSymbol().getSize().yLength() * s + p))
-		<= std::max((s1->getSymbol().getSize().xLength() * s + p), (s1->getSymbol().getSize().yLength() * s + p));
+	return std::max((s0->getSymbol().GetSize().xLength() * s + p), (s0->getSymbol().GetSize().yLength() * s + p))
+		<= std::max((s1->getSymbol().GetSize().xLength() * s + p), (s1->getSymbol().GetSize().yLength() * s + p));
 }
 
 bool BaseStrategy::SpriteCmp::isTotEdgesLess(const d2d::ImageSprite* s0, const d2d::ImageSprite* s1) const
@@ -68,6 +68,6 @@ bool BaseStrategy::SpriteCmp::isTotEdgesLess(const d2d::ImageSprite* s0, const d
 	const float s = Context::Instance()->scale,
 		p = Context::Instance()->padding;
 
-	return (s0->getSymbol().getSize().xLength() * s + p) + (s0->getSymbol().getSize().yLength() * s + p)
-		<= (s1->getSymbol().getSize().xLength() * s + p) + (s1->getSymbol().getSize().yLength() * s + p);
+	return (s0->getSymbol().GetSize().xLength() * s + p) + (s0->getSymbol().GetSize().yLength() * s + p)
+		<= (s1->getSymbol().GetSize().xLength() * s + p) + (s1->getSymbol().GetSize().yLength() * s + p);
 }

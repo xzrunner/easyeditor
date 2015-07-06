@@ -17,7 +17,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual Sprite* clone() const;
+	virtual Sprite* Clone() const;
 
 	//
 	// d2d::ISprite interface

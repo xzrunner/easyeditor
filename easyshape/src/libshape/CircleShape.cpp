@@ -25,7 +25,7 @@ CircleShape::CircleShape(const d2d::Vector& center, float radius)
 {
 }
 
-CircleShape* CircleShape::clone() const
+CircleShape* CircleShape::Clone() const
 {
 	return new CircleShape(*this);
 }

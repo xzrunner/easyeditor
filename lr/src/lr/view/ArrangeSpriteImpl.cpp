@@ -56,7 +56,7 @@ Rotate(const d2d::Vector& dst)
 	for (int i = 0, n = sprs.size(); i < n; ++i)
 	{
 		d2d::ISprite* spr = sprs[i];
-		std::string filepath = spr->getSymbol().getFilepath();
+		std::string filepath = spr->getSymbol().GetFilepath();
 		if (!CharacterFileName::IsValidFilepath(filepath)) {
 			d2d::Vector center = spr->getPosition() + spr->getOffset();
 			float angle = d2d::Math::getAngleInDirection(center, m_last_pos, dst);

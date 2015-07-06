@@ -2,10 +2,13 @@
 
 #include "common/tools.h"
 #include "common/FileNameTools.h"
+#include "common/StringTools.h"
 
 #include <wx/stdpaths.h>
 #include <wx/filename.h>
 #include <json/json.h>
+#include <algorithm>
+#include <fstream>
 
 namespace d2d
 {
@@ -206,7 +209,7 @@ LoadCfgFile(const std::string& filepath)
 	Json::Value frame_val = value["frames"][i++];
 	while (!frame_val.isNull()) {
 		std::string filename = frame_val["filename"].asString();
-		StringTools::toLower(filename);
+		StringTools::ToLower(filename);
 		m_packed_files.push_back(filename);
 		frame_val = value["frames"][i++];
 	}

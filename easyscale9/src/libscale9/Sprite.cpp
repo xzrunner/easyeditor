@@ -33,7 +33,7 @@ Sprite::~Sprite()
 	}
 }
 
-Sprite* Sprite::clone() const
+Sprite* Sprite::Clone() const
 {
 	Sprite* sprite = new Sprite(*this);
 	d2d::SpriteFactory::Instance()->insert(sprite);
@@ -72,7 +72,7 @@ void Sprite::load(const Json::Value& val)
 	m_symbol->GetScale9Data().GetSize(sw, sh);
 	if (sw != w || sh != h)
 	{
-		m_symbol = m_symbol->clone();
+		m_symbol = m_symbol->Clone();
 		m_symbol->ResizeScale9(w, h);
 	}
 

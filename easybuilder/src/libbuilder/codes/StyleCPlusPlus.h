@@ -129,7 +129,7 @@ namespace cpp
 			: m_gen(gen)
 		{
 			m_flag = project + "_" + file + "_h";
-			StringTools::toUpper(m_flag);
+			d2d::StringTools::ToUpper(m_flag);
 
 			m_gen.line("#ifndef " + m_flag);
 			m_gen.line("#define " + m_flag);

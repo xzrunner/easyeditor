@@ -28,27 +28,27 @@ void Love2dCode::resolve()
 		const d2d::ISymbol& symbol = sprite->getSymbol();
 		const d2d::Vector& pos = sprite->getPosition();
 
-		std::string name = d2d::FilenameTools::getFilename(symbol.getFilepath());
+		std::string name = d2d::FilenameTools::getFilename(symbol.GetFilepath());
 
 		std::string x, y, w, h, px, py, a;
 		if (sprite->getAngle() != 0)
 		{
-			x = wxString::FromDouble(pos.x - symbol.getSize().yLength() * 0.5f);
-			y = wxString::FromDouble(pos.y - symbol.getSize().xLength() * 0.5f);
-			w = wxString::FromDouble(symbol.getSize().yLength());
-			h = wxString::FromDouble(symbol.getSize().xLength());
+			x = wxString::FromDouble(pos.x - symbol.GetSize().yLength() * 0.5f);
+			y = wxString::FromDouble(pos.y - symbol.GetSize().xLength() * 0.5f);
+			w = wxString::FromDouble(symbol.GetSize().yLength());
+			h = wxString::FromDouble(symbol.GetSize().xLength());
 			a = "1.57";
 		}
 		else
 		{
-			x = wxString::FromDouble(pos.x - symbol.getSize().xLength() * 0.5f);
-			y = wxString::FromDouble(pos.y - symbol.getSize().yLength() * 0.5f);
-			w = wxString::FromDouble(symbol.getSize().xLength());
-			h = wxString::FromDouble(symbol.getSize().yLength());
+			x = wxString::FromDouble(pos.x - symbol.GetSize().xLength() * 0.5f);
+			y = wxString::FromDouble(pos.y - symbol.GetSize().yLength() * 0.5f);
+			w = wxString::FromDouble(symbol.GetSize().xLength());
+			h = wxString::FromDouble(symbol.GetSize().yLength());
 			a = "0";
 		}
-		px = wxString::FromDouble(symbol.getSize().xLength() * 0.5f);
-		py = wxString::FromDouble(480 - symbol.getSize().yLength() * 0.5f);
+		px = wxString::FromDouble(symbol.GetSize().xLength() * 0.5f);
+		py = wxString::FromDouble(480 - symbol.GetSize().yLength() * 0.5f);
 
 		// q = love.graphics.newQuad(x, y, w, h, sw, sh)
 		std::string aq = lua::assign("q", lua::call("", "love.graphics.newQuad", 6, x.c_str(), y.c_str(), w.c_str(), h.c_str(), sw.c_str(), sh.c_str()));

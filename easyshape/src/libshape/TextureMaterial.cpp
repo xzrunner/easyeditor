@@ -21,7 +21,7 @@ Json::Value TextureMaterial::Store(const std::string& dirpath) const
 {
 	Json::Value val;
 	val["type"] = "texture";
-	val["texture path"] = d2d::FilenameTools::getRelativePath(dirpath, m_image->getFilepath()).ToStdString();
+	val["texture path"] = d2d::FilenameTools::getRelativePath(dirpath, m_image->GetFilepath()).ToStdString();
 	return val;
 }
 
@@ -54,16 +54,16 @@ void TextureMaterial::Draw(const d2d::Matrix& mt) const
 
 		if (d2d::Config::Instance()->IsUseDTex()) {
 			d2d::DynamicTexAndFont::Instance()->Draw(vertices, texcoords, 
-				m_image->getFilepath().ToStdString(), m_image->getTextureID());
+				m_image->GetFilepath(), m_image->GetTexID());
 		} else {
-			shader->Draw(vertices, texcoords, m_image->getTextureID());
+			shader->Draw(vertices, texcoords, m_image->GetTexID());
 		}
 	}
 }
 
 void TextureMaterial::ReloadTexture()
 {
-	m_image->reloadTexture();
+	m_image->ReloadTexture();
 }
 
 void TextureMaterial::BuildEnd()
@@ -99,8 +99,8 @@ d2d::Rect TextureMaterial::GetBoundingRegion(const std::vector<d2d::Vector>& bou
 void TextureMaterial::GetTexBoundarySegments(const d2d::Rect& rect, std::vector<d2d::Vector>& segments)
 {
 	static const int EXTEND = 1;
-	int width = m_image->getSize().xLength(),
-		height = m_image->getSize().yLength();
+	int width = m_image->GetSize().xLength(),
+		height = m_image->GetSize().yLength();
 	for (float x = rect.xMin; x < rect.xMax; x += width)
 	{
  		segments.push_back(d2d::Vector(x, rect.yMin - EXTEND));
@@ -115,8 +115,8 @@ void TextureMaterial::GetTexBoundarySegments(const d2d::Rect& rect, std::vector<
 
 void TextureMaterial::CalTexcoords(const d2d::Rect& rect)
 {
-	int width = m_image->getSize().xLength(),
-		height = m_image->getSize().yLength();
+	int width = m_image->GetSize().xLength(),
+		height = m_image->GetSize().yLength();
 	int index = 0;
 	for (size_t i = 0, n = m_tris.size() / 3; i < n; ++i)
 	{

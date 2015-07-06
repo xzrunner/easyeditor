@@ -48,7 +48,7 @@ namespace emodeling
 		d2d::SpritesPanelImpl::insertSprite(sprite);
 
 		wxString filepath = d2d::FilenameTools::getFilenameAddTag(
-			sprite->getSymbol().getFilepath(), libshape::FILE_TAG, "json");
+			sprite->getSymbol().GetFilepath(), libshape::FILE_TAG, "json");
 		if (!d2d::FilenameTools::isExist(filepath)) {
 			return;
 		}
@@ -129,7 +129,7 @@ namespace emodeling
 		for ( ; itr != m_bodies.end(); ++itr)
 		{
 			bool hasNext;
-			visitor.visit(*itr, hasNext);
+			visitor.Visit(*itr, hasNext);
 			if (!hasNext) break;
 		}
 	}
@@ -140,7 +140,7 @@ namespace emodeling
 		for ( ; itr != m_joints.end(); ++itr)
 		{
 			bool hasNext;
-			visitor.visit(*itr, hasNext);
+			visitor.Visit(*itr, hasNext);
 			if (!hasNext) break;
 		}
 	}
@@ -186,8 +186,8 @@ namespace emodeling
 		libmodeling::Fixture* fixture = new libmodeling::Fixture;
 		fixture->body = &body;
 
-		const float width = sprite->getSymbol().getSize().xLength(),
-			height = sprite->getSymbol().getSize().yLength();
+		const float width = sprite->getSymbol().GetSize().xLength(),
+			height = sprite->getSymbol().GetSize().yLength();
 		fixture->shape = new libshape::RectShape(d2d::Vector(0, 0), width * 0.5f, height * 0.5f);
 
 		body.fixtures.push_back(fixture);
@@ -206,7 +206,7 @@ namespace emodeling
 	}
 
 	void StagePanel::PointQueryVisitor::
-		visit(d2d::Object* object, bool& bFetchNext)
+		Visit(d2d::Object* object, bool& bFetchNext)
 	{
 		d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 		libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->getUserData());
@@ -232,7 +232,7 @@ namespace emodeling
 	}
 
 	void StagePanel::RectQueryVisitor::
-		visit(d2d::Object* object, bool& bFetchNext)
+		Visit(d2d::Object* object, bool& bFetchNext)
 	{
 		d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 		libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->getUserData());

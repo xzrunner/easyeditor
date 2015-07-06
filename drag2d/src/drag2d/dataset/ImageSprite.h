@@ -19,7 +19,7 @@ namespace d2d
 		//
 		// ICloneable interface
 		//
-		virtual ImageSprite* clone() const;
+		virtual ImageSprite* Clone() const;
 
 		//
 		// ISprite interface

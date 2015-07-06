@@ -7,53 +7,10 @@
 #define _SCL_SECURE_NO_DEPRECATE
 #endif
 
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <fstream>
 #include <vector>
 #include <algorithm>
-#include <cctype>
 
 #define NOMINMAX
-
-class StringTools
-{
-public:
-	static std::string intToString(int i)
-	{
-		std::stringstream ss;
-		ss << i;
-		return ss.str();
-	}
-
-	static int stringToInt(const std::string& str)
-	{
-		std::stringstream ss(str);
-		int ret;
-		ss >> ret;
-		return ret;
-	}
-
-	static void toLower(std::string& str)
-	{
-		std::transform(str.begin(), str.end(), str.begin(), std::tolower);
-	}
-
-	static void toUpper(std::string& str)
-	{
-		std::transform(str.begin(), str.end(), str.begin(), std::toupper);
-	}
-
-	static std::string getLine(std::ifstream& fin)
-	{
-		std::string line;
-		while ((line.empty() || line == " ") && getline(fin, line))
-			;
-		return line;
-	}
-
-}; // StringTools
 
 class STLTools
 {

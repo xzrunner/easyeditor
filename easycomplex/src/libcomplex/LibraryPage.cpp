@@ -39,7 +39,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			const wxString& filename = filenames[i];
 			std::string type = filename.substr(filename.find_last_of(".") + 1);
-			StringTools::toLower(type);
+			d2d::StringTools::ToLower(type);
 			try {
 				if (type == "json") {
 					loadFromJsonFile(filename);

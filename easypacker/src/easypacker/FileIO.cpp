@@ -167,13 +167,13 @@ void FileIO::storeImage(const char* filename)
 		float sw, sh;
 		if (sprite->getAngle() == 0)
 		{
-			sw = sprite->getSymbol().getSize().xLength();
-			sh = sprite->getSymbol().getSize().yLength();
+			sw = sprite->getSymbol().GetSize().xLength();
+			sh = sprite->getSymbol().GetSize().yLength();
 		}
 		else
 		{
-			sw = sprite->getSymbol().getSize().yLength();
-			sh = sprite->getSymbol().getSize().xLength();
+			sw = sprite->getSymbol().GetSize().yLength();
+			sh = sprite->getSymbol().GetSize().xLength();
 		}
 
 		//if (sprite->getPosition().x - sw * 0.5f < 0 || sprite->getPosition().x + sw * 0.5f > width ||
@@ -183,7 +183,7 @@ void FileIO::storeImage(const char* filename)
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
 		int w, h, c, f;
-		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().getFilepath().ToStdString(), w, h, c, f);
+		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().GetFilepath().ToStdString(), w, h, c, f);
 
 		if (sprite->getAngle() != 0)
 		{
@@ -314,17 +314,17 @@ void FileIO::storeTexpackerPosition(const char* filename)
 		{
 			d2d::Image* img = static_cast<const d2d::ImageSymbol&>(sprite->getSymbol()).getImage();
 			Json::Value val;
-			val["filename"] = d2d::FilenameTools::getFilenameWithExtension(img->filepath()).ToStdString();
+			val["filename"] = d2d::FilenameTools::getFilenameWithExtension(img->GetFilepath()).ToStdString();
 			val["rotated"] = sprite->getAngle() == 0 ? false : true;
 			val["trimmed"] = true;
-			val["sourceSize"]["w"] = img->originWidth();
-			val["sourceSize"]["h"] = img->originHeight();
+			val["sourceSize"]["w"] = img->GetOriginWidth();
+			val["sourceSize"]["h"] = img->GetOriginHeight();
 
 			d2d::Rect r = img->getRegion();
 			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.xLength();
 			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.yLength();
-			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->originWidth();
-			val["spriteSourceSize"]["y"] = img->originHeight() - (r.yMax + 0.5f * img->originHeight());
+			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->GetOriginWidth();
+			val["spriteSourceSize"]["y"] = img->GetOriginHeight() - (r.yMax + 0.5f * img->GetOriginHeight());
 			
 			const d2d::Vector& pos = sprite->getPosition();
 			val["frame"]["x"] = pos.x + r.xMin;
@@ -347,8 +347,8 @@ Json::Value FileIO::store(const d2d::ISprite* sprite)
 	Json::Value value;
 
 	const d2d::ISymbol& symbol = sprite->getSymbol();
-	const float w = symbol.getSize().xLength(),
-		h = symbol.getSize().yLength();
+	const float w = symbol.GetSize().xLength(),
+		h = symbol.GetSize().yLength();
 	const d2d::Vector& pos = sprite->getPosition();
 
 	bool bRotate = sprite->getAngle() != 0;
@@ -368,7 +368,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite)
 		height = h;
 	}
 
-	value["filepath"] = symbol.getFilepath().ToStdString();
+	value["filepath"] = symbol.GetFilepath().ToStdString();
 	value["left"] = left;
 	value["low"] = low;
 	value["width"] = width;

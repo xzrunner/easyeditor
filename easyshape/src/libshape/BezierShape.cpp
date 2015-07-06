@@ -38,7 +38,7 @@ BezierShape::~BezierShape()
 
 }
 
-BezierShape* BezierShape::clone() const
+BezierShape* BezierShape::Clone() const
 {
 	return new BezierShape(*this);
 }

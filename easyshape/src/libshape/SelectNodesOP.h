@@ -45,7 +45,7 @@ private:
 	{
 	public:
 		PosQueryVisitor(const d2d::Vector& pos, ChainSelectedNodes** result);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		const d2d::Vector& m_pos;
@@ -58,7 +58,7 @@ private:
 	{
 	public:
 		RectQueryVisitor(const d2d::Rect& rect, std::vector<ChainSelectedNodes*>& result);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		const d2d::Rect& m_rect;

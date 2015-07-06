@@ -120,8 +120,8 @@ bool RotateTrimImage::GetRotateTrimInfo(const d2d::Image* image, int& width, int
 	bool is_rotate = d2d::MinBoundingBox::Implement(raw.GetConvexHull(), bound);
 
 	center = (bound[0] + bound[2]) * 0.5f;
-	center.x -= image->originWidth() * 0.5f;
-	center.y -= image->originHeight() * 0.5f;
+	center.x -= image->GetOriginWidth() * 0.5f;
+	center.y -= image->GetOriginHeight() * 0.5f;
 
 	center = -center;
 

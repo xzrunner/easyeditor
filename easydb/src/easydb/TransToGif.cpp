@@ -70,8 +70,8 @@ void TransToGif::Trigger(const std::string& srcdir, const std::string& dstdir) c
 			libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
 
 			int max_frame = anim->getMaxFrameIndex();
-			int width = symbol->getSize().xLength();
-			int height = symbol->getSize().yLength();
+			int width = symbol->GetSize().xLength();
+			int height = symbol->GetSize().yLength();
 			AnimatedGifSaver saver(width, height);
 			for (int i = 0; i < max_frame; ++i)
 			{

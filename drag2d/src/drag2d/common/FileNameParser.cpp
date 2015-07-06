@@ -69,7 +69,7 @@ FileNameParser::Type FileNameParser::getFileType(const wxString& filename)
 	}
 	else
 	{
-		StringTools::toLower(extension);
+		StringTools::ToLower(extension);
 		if (extension == ".jpg" || extension == ".png" || extension == ".bmp") return e_image;
 		else return e_unknown;
 	}

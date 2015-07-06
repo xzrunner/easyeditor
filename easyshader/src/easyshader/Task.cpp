@@ -17,11 +17,11 @@ Task::Task(wxFrame* parent)
 Task::~Task()
 {
 	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
-void Task::load(const char* filepath)
+void Task::Load(const char* filepath)
 {
 	Shader* shader = FileIO::LoadShader(filepath, m_stage->getCanvas(), m_toolbar, m_is_2d);
 	if (m_is_2d) {
@@ -31,27 +31,27 @@ void Task::load(const char* filepath)
 	}
 }
 
-void Task::store(const char* filepath) const
+void Task::Store(const char* filepath) const
 {
 	FileIO::StoreShader(filepath, m_toolbar);
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return m_stage->isDirty();
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_stage->clear();
 	m_stage->Refresh();
 }
 
-void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

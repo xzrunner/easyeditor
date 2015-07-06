@@ -24,8 +24,8 @@ void TexturePacker::pack(const std::set<d2d::Image*>& images)
 	{
 		d2d::Image* img = sorted[i];
 		d2d::Rect r;
-		int w = img->clipWidth() + extra_tot,
-			h = img->clipHeight() + extra_tot;
+		int w = img->GetClippedWidth() + extra_tot,
+			h = img->GetClippedHeight() + extra_tot;
 		assert(w < m_edge && h < m_edge);
 		if (m_width == 0)
 			m_width = w;
@@ -64,7 +64,7 @@ void TexturePacker::storeToMemory()
 	int size_line = m_edge * channels;
 	for ( ; itr != m_mapImg2Rect.end(); ++itr)
 	{
-		const unsigned char* pixels = itr->first->getPixelData();
+		const unsigned char* pixels = itr->first->GetPixelData();
 		const d2d::Rect& r = itr->second;
 		//////////////////////////////////////////////////////////////////////////
 		int src_line_size = r.xLength() * channels;

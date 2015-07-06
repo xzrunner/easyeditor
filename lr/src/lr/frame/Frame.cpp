@@ -61,18 +61,18 @@ void Frame::OnPreview(wxCommandEvent& event)
 	SettingCfg* cfg = SettingCfg::Instance();
 
 	std::vector<const d2d::ISprite*> sprites;
-	m_task->getAllSprite(sprites);
+	m_task->GetAllSprite(sprites);
 
 	preview::MainDialog dlg(this, cfg->m_view_width * PREVIEW_SCALE, cfg->m_view_height * PREVIEW_SCALE, sprites);
 	dlg.ShowModal();
 
-	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->getEditPanel());
+	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
 	stage->resetCanvas();
 }
 
 void Frame::OnExtendSetting(wxCommandEvent& event)
 {
-	SettingDialog dlg(this, (StagePanel*)(m_task->getEditPanel()));
+	SettingDialog dlg(this, (StagePanel*)(m_task->GetEditPanel()));
 	dlg.ShowModal();
 }
 
@@ -80,7 +80,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	SettingCfg* cfg = SettingCfg::Instance();
 	d2d::Snapshoot ss(cfg->m_map_width, cfg->m_map_height);
-	StagePanel* stage = (StagePanel*)(m_task->getEditPanel());
+	StagePanel* stage = (StagePanel*)(m_task->GetEditPanel());
 
 	std::vector<d2d::ISprite*> sprites;
 	stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
@@ -106,7 +106,7 @@ void Frame::SaveAsJson(const std::string& filepath) const
 {
 	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
 	m_currFilename = fixed;
-	m_task->store(fixed);
+	m_task->Store(fixed);
 }
 
 }

@@ -18,7 +18,7 @@ namespace eanim
 		std::map<d2d::ISprite*, std::vector<Joint*> >::const_iterator itr 
 			= skeleton.m_mapJoints.begin();
 		for ( ; itr != skeleton.m_mapJoints.end(); ++itr)
-			sprites.push_back(itr->first->clone());
+			sprites.push_back(itr->first->Clone());
 		copyFrom(sprites, skeleton);
 	}
 

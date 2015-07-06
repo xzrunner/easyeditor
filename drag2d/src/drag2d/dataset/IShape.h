@@ -20,17 +20,17 @@ class IShape : public ICloneable, public UserDataImpl, public Object
 {
 public:
 	IShape();
-	virtual ~IShape() { clearUserData(true); }
+	virtual ~IShape() { ClearUserData(true); }
 
 	//
 	// UserDataImpl interface
 	//	
-	virtual void clearUserData(bool deletePtr) {}
+	virtual void ClearUserData(bool deletePtr) {}
 
 	//
 	// ICloneable interface
 	//
-	virtual IShape* clone() const { return NULL; }
+	virtual IShape* Clone() const { return NULL; }
 
 	virtual const char* GetShapeDesc() const = 0;
 

@@ -27,17 +27,17 @@ Symbol::~Symbol()
 	}
 }
 
-Symbol* Symbol::clone() const
+Symbol* Symbol::Clone() const
 {
 	return new Symbol(*this);
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
-	m_ps->reloadTexture();
+	m_ps->ReloadTexture();
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -70,7 +70,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	m_time = curr;
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 {
 //	return m_region;
 	return d2d::Rect(200, 200);
@@ -81,9 +81,9 @@ void Symbol::Start() const
 	m_ps->start();
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
-	m_ps = FileIO::LoadPS(m_filepath);	
+	m_ps = FileIO::LoadPS(m_filepath.c_str());	
 }
 
 }

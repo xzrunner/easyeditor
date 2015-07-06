@@ -116,8 +116,8 @@ void ImagePack::AddImage(const uint8_t* src_buf, int src_w, int src_h, int dst_x
 void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool clockwise, 
 						 bool bpp4, int extrude)
 {
-	int sw = img->originWidth(),
-		sh = img->originHeight();
+	int sw = img->GetOriginWidth(),
+		sh = img->GetOriginHeight();
 	PackType type = PT_NORMAL;
 	if (sw == w && sh == h) {
 		type = PT_NORMAL;
@@ -126,7 +126,7 @@ void ImagePack::AddImage(const d2d::Image* img, int x, int y, int w, int h, bool
 	} else {
 		assert(0);
 	}
-	AddImage(img->getPixelData(), sw, sh, x, y, type, bpp4, extrude);
+	AddImage(img->GetPixelData(), sw, sh, x, y, type, bpp4, extrude);
 }
 
 void ImagePack::PreMuiltiAlpha()

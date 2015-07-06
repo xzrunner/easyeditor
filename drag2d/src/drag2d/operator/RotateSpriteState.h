@@ -29,7 +29,7 @@ private:
 	{
 	public:
 		Visitor(const Vector& start, const Vector& end) : m_start(start), m_end(end) {}
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 	private:
 		Vector m_start, m_end;
 	}; // Visitor

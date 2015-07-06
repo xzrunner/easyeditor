@@ -45,7 +45,7 @@ private:
 	public:
 		InterruptChainVisitor(const d2d::Vector& pos, int tol);
 
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 		ChainShape* getInterruptedChain() { return m_chain; }
 
@@ -61,7 +61,7 @@ private:
 	public:
 		NearestNodeVisitor(const d2d::Vector& pos, int tol);
 
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 		const d2d::Vector& getNearestNode() const {
 			return m_nearest;

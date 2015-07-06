@@ -27,7 +27,7 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filepath)
+void Task::Load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 		FileIO::load(this, filepath);
@@ -36,19 +36,19 @@ void Task::load(const char* filepath)
 	}
 }
 
-void Task::store(const char* filepath) const
+void Task::Store(const char* filepath) const
 {
 	FileIO::store(this, filepath);
 	StoreGroupTree(filepath);
 	m_stage->onSave();
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return m_stage->isDirty();
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	//	d2d::SymbolMgr::Instance()->clear();
 
@@ -61,12 +61,12 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 	m_stage->traverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

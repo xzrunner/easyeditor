@@ -9,7 +9,7 @@
 namespace d2d
 {
 
-void DrawSpritesVisitor::visit(Object* object, bool& bFetchNext)
+void DrawSpritesVisitor::Visit(Object* object, bool& bFetchNext)
 {
 	bFetchNext = true;
 

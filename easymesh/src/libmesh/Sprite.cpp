@@ -15,7 +15,7 @@ Sprite::Sprite(const Sprite& s)
 	: d2d::ISprite(s)
 	, m_speed(s.m_speed)
 {
-	m_symbol = s.m_symbol->clone();
+	m_symbol = s.m_symbol->Clone();
 }
 
 Sprite::Sprite(Symbol* symbol)
@@ -34,7 +34,7 @@ Sprite::~Sprite()
 	}
 }
 
-Sprite* Sprite::clone() const
+Sprite* Sprite::Clone() const
 {
 	return new Sprite(*this);
 }
@@ -86,7 +86,7 @@ void Sprite::buildBounding()
 		m_bounding = d2d::BVFactory::createBV(d2d::e_obb);
 	const d2d::ISymbol& symbol = getSymbol();
 
-	d2d::Rect rect = m_symbol->getSize();
+	d2d::Rect rect = m_symbol->GetSize();
 	if (m_offset.x == 0 && m_offset.y == 0)
 		m_offset.set(rect.xCenter(), rect.yCenter());
 	rect.scale(m_scale.x, m_scale.y);

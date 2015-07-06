@@ -11,6 +11,7 @@
 #include <gl/glew.h>
 
 #include "common/tools.h"
+#include "common/StringTools.h"
 #include "render/ShaderMgr.h"
 
 //#define USE_SOIL
@@ -34,7 +35,7 @@ uint8_t* ImageLoader::loadData(const std::string& filepath, int& width, int& hei
 	format = 0;
 
 	std::string type = filepath.substr(filepath.find_last_of(".") + 1);
-	StringTools::toLower(type);
+	StringTools::ToLower(type);
 	if (type == "png")
 	{
 		// todo: 用libpng读出来的数据再导出时有的会乱掉

@@ -73,7 +73,7 @@ d2d::IShape* FileIO::loadShape(const Json::Value& value)
 Json::Value FileIO::store(d2d::ISprite* sprite, const d2d::Vector& offset)
 {
 	Json::Value value;
-	value["filepath"] = sprite->getSymbol().getFilepath().ToStdString();
+	value["filepath"] = sprite->getSymbol().GetFilepath().ToStdString();
 	sprite->store(value);
 	return value;
 }

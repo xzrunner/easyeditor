@@ -15,7 +15,7 @@ namespace d2d
 		//
 		// IObject interface
 		//
-		virtual AABB* clone() const;
+		virtual AABB* Clone() const;
 
 		virtual void initFromRect(const Rect& rect);
 

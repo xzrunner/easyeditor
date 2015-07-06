@@ -60,7 +60,7 @@ void StagePanel::Store(const std::string& dir, Json::Value& value) const
 	for (int i = 0, n = bg_sprites.size(); i < n; ++i) {
 		d2d::ISprite* bg = bg_sprites[i];
 		value["bg"][i]["filepath"] = d2d::FilenameTools::getRelativePath(
-			dir, bg->getSymbol().getFilepath().ToStdString()).ToStdString();
+			dir, bg->getSymbol().GetFilepath()).ToStdString();
 		bg->store(value["bg"][i]);
 	}
 

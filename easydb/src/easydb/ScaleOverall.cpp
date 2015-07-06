@@ -79,8 +79,8 @@ void ScaleOverall::ScaleImage(const wxString& filepath, float scale, d2d::Snapsh
 	d2d::ImageSymbol* img = static_cast<d2d::ImageSymbol*>(symbol);
 
 	d2d::Vector img_offset;
-	img_offset.x = img->getSize().xCenter();
-	img_offset.y = img->getSize().yCenter();
+	img_offset.x = img->GetSize().xCenter();
+	img_offset.y = img->GetSize().yCenter();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
 	ss.OutputToImageFile(symbol, filepath.ToStdString(), scale);

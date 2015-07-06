@@ -114,7 +114,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 
 		Json::Value spr_val;
 		spr_val["filepath"] = d2d::FilenameTools::getRelativePath(dir,
-			spr->getSymbol().getFilepath()).ToStdString();
+			spr->getSymbol().GetFilepath()).ToStdString();
 		spr->store(spr_val);
 
 		val["sprite"][count++] = spr_val;

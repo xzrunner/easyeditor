@@ -22,8 +22,8 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 
 	m_firstPos = m_stage->transPosScreenToProject(x, y);
 
-	const float hw = m_symbol->getSize().xLength() * 0.5f,
-		hh = m_symbol->getSize().yLength() * 0.5f;
+	const float hw = m_symbol->GetSize().xLength() * 0.5f,
+		hh = m_symbol->GetSize().yLength() * 0.5f;
 	if (d2d::Math::isPointInRect(m_firstPos, d2d::Vector(-hw, -hh), REGION, REGION))
 		m_status = e_leftlow;
 	else if (d2d::Math::isPointInRect(m_firstPos, d2d::Vector(hw, -hh), REGION, REGION))
@@ -75,8 +75,8 @@ bool ResizeBaseOP::OnDraw() const
 
 	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
 
-	const float hw = m_symbol->getSize().xLength() * 0.5f,
-		hh = m_symbol->getSize().yLength() * 0.5f;
+	const float hw = m_symbol->GetSize().xLength() * 0.5f,
+		hh = m_symbol->GetSize().yLength() * 0.5f;
 	const float r = REGION;
 	d2d::PrimitiveDraw::rect(d2d::Vector(-hw, -hh), r, r, m_style);
 	d2d::PrimitiveDraw::rect(d2d::Vector( hw, -hh), r, r, m_style);

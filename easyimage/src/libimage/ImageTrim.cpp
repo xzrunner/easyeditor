@@ -17,9 +17,9 @@ d2d::Rect ImageTrim::Trim() const
 		return sub;
 	}
 
-	int width = m_image->originWidth(),
-		height = m_image->originHeight();
-	int channels = m_image->channels();
+	int width = m_image->GetOriginWidth(),
+		height = m_image->GetOriginHeight();
+	int channels = m_image->GetChannels();
 	if (channels != 4 || width == 0 || height == 0) {
 		sub.xMin = sub.yMin = 0;
 		sub.xMax = width;
@@ -27,7 +27,7 @@ d2d::Rect ImageTrim::Trim() const
 		return sub;
 	}
 
-	sub = m_image->getRegion();
+	sub = m_image->GetClippedRegion();
 
 	// down
 	sub.yMin = 0;
@@ -117,14 +117,14 @@ bool ImageTrim::IsTransparent(int x, int y) const
 		return false;
 	}
 
-	const unsigned char* pixels = m_image->getPixelData();
+	const unsigned char* pixels = m_image->GetPixelData();
 	if (!pixels) {
 		return false;
 	}
 
-	int width = m_image->originWidth(),
-		height = m_image->originHeight();
-	int channels = m_image->channels();
+	int width = m_image->GetOriginWidth(),
+		height = m_image->GetOriginHeight();
+	int channels = m_image->GetChannels();
 
 	return pixels[(width * y + x) * channels + channels - 1] == 0;
 }

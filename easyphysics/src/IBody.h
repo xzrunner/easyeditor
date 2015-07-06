@@ -16,7 +16,7 @@ public:
 	//
 	// ICloneable interface
 	//
-	virtual IBody* clone() const;
+	virtual IBody* Clone() const;
 
 	virtual void getRect(d2d::Rect& rect, const d2d::Vector& position, float angle) const = 0;
 

@@ -61,7 +61,7 @@ void RotateImage::Trigger(const std::string& src_dir, const std::string& dst_dir
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
-			d2d::Rect r = symbol->getSize();
+			d2d::Rect r = symbol->GetSize();
 			for (int deg = 10; deg <= 90; deg += 10) {
 				float rad = deg * d2d::TRANS_DEG_TO_RAD;
 				sprite->setTransform(sprite->getPosition(), rad);

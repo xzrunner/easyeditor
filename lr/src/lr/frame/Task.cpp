@@ -25,23 +25,23 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filename)
+void Task::Load(const char* filename)
 {
 	FileIO::Load(filename, m_library, m_stage, m_grouptree);
 	m_stage->getCanvas()->resetViewport();
 }
 
-void Task::store(const char* filename) const
+void Task::Store(const char* filename) const
 {
 	FileIO::Store(filename, m_library, m_stage, m_grouptree);
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return true;
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_viewlist->Clear();
 
@@ -51,12 +51,12 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 	m_stage->traverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

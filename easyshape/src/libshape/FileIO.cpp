@@ -79,7 +79,7 @@ void FileIO::StoreToFile(const char* filename,
 	if (bg) {
 		wxString dir = d2d::FilenameTools::getFileDir(filename) + "\\";
 		value["bg_symbol"] = d2d::FilenameTools::getRelativePath(dir,
-			bg->getFilepath()).ToStdString();
+			bg->GetFilepath()).ToStdString();
 	}
 
 	Json::StyledStreamWriter writer;

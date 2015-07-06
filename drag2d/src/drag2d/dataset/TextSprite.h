@@ -21,7 +21,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual TextSprite* clone() const;
+	virtual TextSprite* Clone() const;
 
 	//
 	// ISprite interface

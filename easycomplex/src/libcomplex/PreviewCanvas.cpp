@@ -17,7 +17,7 @@ void PreviewCanvas::initGL()
 {
 	d2d::DynamicStageCanvas::initGL();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
-		m_sprites[i]->getSymbol().reloadTexture();
+		m_sprites[i]->getSymbol().ReloadTexture();
 	}
 }
 

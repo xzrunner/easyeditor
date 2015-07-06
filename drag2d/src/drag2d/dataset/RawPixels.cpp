@@ -17,7 +17,7 @@ RawPixels::~RawPixels()
 	SOIL_free_image_data(m_pixelData);
 }
 
-void RawPixels::loadFromFile(const char* filepath)
+void RawPixels::LoadFromFile(const char* filepath)
 {
 	if (!wxFileName::FileExists(filepath)) {
 		throw Exception("File: %s don't exist!", filepath);
@@ -33,7 +33,7 @@ void RawPixels::loadFromFile(const char* filepath)
 // 		old, SOIL_FLAG_INVERT_Y, GL_TEXTURE_2D, GL_TEXTURE_2D, GL_MAX_TEXTURE_SIZE);
 // }
 
-const unsigned char* RawPixels::getPixelData() const
+const unsigned char* RawPixels::GetPixelData() const
 {
 	return m_pixelData;
 }

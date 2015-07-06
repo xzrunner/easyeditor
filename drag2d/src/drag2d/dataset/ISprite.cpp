@@ -61,7 +61,7 @@ ISprite::ISprite(const ISprite& sprite)
 	m_xMirror = sprite.m_xMirror;
 	m_yMirror = sprite.m_yMirror;
 	m_perspective = sprite.m_perspective;
-	m_bounding = sprite.m_bounding->clone();
+	m_bounding = sprite.m_bounding->Clone();
 
 	m_blend_mode = sprite.m_blend_mode;
 	m_filter_mode = sprite.m_filter_mode;
@@ -73,12 +73,12 @@ ISprite::~ISprite()
 	SpriteFactory::Instance()->remove(this);
 }
 
-ISprite* ISprite::clone() const
+ISprite* ISprite::Clone() const
 {
 	return NULL;
 }
 
-void ISprite::clearUserData(bool deletePtr)
+void ISprite::ClearUserData(bool deletePtr)
 {
 	delete m_userData, m_userData = NULL;
 }
@@ -232,7 +232,7 @@ void ISprite::buildBounding()
 		m_bounding = BVFactory::createBV(e_obb);
 	}
 	const ISymbol& symbol = getSymbol();
-	Rect rect(symbol.getSize(this));
+	Rect rect(symbol.GetSize(this));
 	if (m_offset.x == 0 && m_offset.y == 0)
 		m_offset.set(rect.xCenter(), rect.yCenter());
 	rect.scale(m_scale.x, m_scale.y);
@@ -309,7 +309,7 @@ bool ISprite::isIntersect(const Rect& rect) const
 void ISprite::translate(const Vector& offset)
 {
 	if (m_observer)
-		m_observer->translate(this, offset);
+		m_observer->Translate(this, offset);
 
 	m_pos += offset;
 	if (m_bounding) {
@@ -320,7 +320,7 @@ void ISprite::translate(const Vector& offset)
 void ISprite::rotate(float delta)
 {
 	if (m_observer)
-		m_observer->rotate(this, delta);
+		m_observer->Rotate(this, delta);
 
 	m_angle += delta;
 
@@ -413,7 +413,7 @@ bool SpriteCmp::operator() (const ISprite* s0, const ISprite* s1) const
 	switch (m_type)
 	{
 	case e_file:
-		return s0->getSymbol().getFilepath() < s1->getSymbol().getFilepath();
+		return s0->getSymbol().GetFilepath() < s1->getSymbol().GetFilepath();
 	case e_x:
 		return s0->getPosition().x < s1->getPosition().x;
 	case e_y:
@@ -423,7 +423,7 @@ bool SpriteCmp::operator() (const ISprite* s0, const ISprite* s1) const
 	case e_y_invert:
 		return s0->getPosition().y > s1->getPosition().y;
 	default:
-		return s0->getSymbol().getFilepath() < s1->getSymbol().getFilepath();
+		return s0->getSymbol().GetFilepath() < s1->getSymbol().GetFilepath();
 	}
 }
 

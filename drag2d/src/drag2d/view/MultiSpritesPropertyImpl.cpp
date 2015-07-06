@@ -402,14 +402,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float l = sprite->getPosition().x + sprite->getSymbol().getSize().xMin;
+			float l = sprite->getPosition().x + sprite->getSymbol().GetSize().xMin;
 			if (l < left)
 				left = l;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float x = left - sprite->getSymbol().getSize().xMin;
+			float x = left - sprite->getSymbol().GetSize().xMin;
 			m_sprites[i]->setTransform(Vector(x, sprite->getPosition().y), sprite->getAngle());
 		}
 	}
@@ -419,14 +419,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float r = sprite->getPosition().x + sprite->getSymbol().getSize().xMax;
+			float r = sprite->getPosition().x + sprite->getSymbol().GetSize().xMax;
 			if (r > right)
 				right = r;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float x = right - sprite->getSymbol().getSize().xMax;
+			float x = right - sprite->getSymbol().GetSize().xMax;
 			m_sprites[i]->setTransform(Vector(x, sprite->getPosition().y), sprite->getAngle());
 		}
 	}
@@ -436,14 +436,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float u = sprite->getPosition().y + sprite->getSymbol().getSize().yMax;
+			float u = sprite->getPosition().y + sprite->getSymbol().GetSize().yMax;
 			if (u > up)
 				up = u;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float y = up - sprite->getSymbol().getSize().yMax;
+			float y = up - sprite->getSymbol().GetSize().yMax;
 			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, y), sprite->getAngle());
 		}
 	}
@@ -453,14 +453,14 @@ void MultiSpritesPropertyImpl::OnAlign(int align)
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float d = sprite->getPosition().y + sprite->getSymbol().getSize().yMin;
+			float d = sprite->getPosition().y + sprite->getSymbol().GetSize().yMin;
 			if (d < down)
 				down = d;
 		}
 		for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 		{
 			ISprite* sprite = m_sprites[i];
-			float y = down - sprite->getSymbol().getSize().yMin;
+			float y = down - sprite->getSymbol().GetSize().yMin;
 			m_sprites[i]->setTransform(Vector(sprite->getPosition().x, y), sprite->getAngle());
 		}
 	}

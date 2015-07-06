@@ -82,7 +82,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 	PreviewDialog dlg(this, static_cast<Task*>(m_task)->GetController());
 	dlg.ShowModal();
 
-	const_cast<d2d::EditPanel*>(m_task->getEditPanel())->ResetViewport();
+	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->ResetViewport();
 }
 
 void Frame::OnSetBackground(wxCommandEvent& event)
@@ -94,13 +94,13 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	{
 		wxString filename = dlg.GetPath();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
-		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
+		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
 	else
 	{
-		d2d::GLCanvas* canvas = m_task->getEditPanel()->getCanvas();
+		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
 	}
 }
@@ -132,7 +132,7 @@ void Frame::OnCodeLove2d(wxCommandEvent& event)
 void Frame::SaveAsPNG(const std::string& filepath) const
 {
 	std::vector<d2d::ISprite*> sprites;
-	((StagePanel*)(m_task->getEditPanel()))->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
+	((StagePanel*)(m_task->GetEditPanel()))->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 
 	d2d::Rect region;
  	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
@@ -150,7 +150,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	ss.SaveToFile(filepath);
 
-	m_task->getEditPanel()->getCanvas()->resetInitState();
+	m_task->GetEditPanel()->getCanvas()->resetInitState();
 }
 
 void Frame::SaveAsSingle(const std::string& filepath) const

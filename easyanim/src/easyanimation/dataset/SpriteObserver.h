@@ -11,8 +11,8 @@ namespace eanim
 	public:
 		SpriteObserver(const Layer& layer);
 
-		virtual void translate(d2d::ISprite* sprite, const d2d::Vector& offset);
-		virtual void rotate(d2d::ISprite* sprite, float delta);
+		virtual void Translate(d2d::ISprite* sprite, const d2d::Vector& offset);
+		virtual void Rotate(d2d::ISprite* sprite, float delta);
 
 		void insert(const d2d::ISprite* sprite, int frame);
 		void remove(const d2d::ISprite* sprite);

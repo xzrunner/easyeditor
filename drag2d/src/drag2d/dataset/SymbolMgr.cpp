@@ -7,6 +7,7 @@
 
 #include "common/Exception.h"
 #include "common/FileNameTools.h"
+#include "common/StringTools.h"
 
 #include <wx/filename.h>
 
@@ -35,7 +36,7 @@ SymbolMgr* SymbolMgr::Instance()
 
 ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 {
-	wxString fixedPath = FilenameTools::getExistFilepath(filepath.Lower());
+	std::string fixedPath = FilenameTools::getExistFilepath(filepath.Lower());
 	wxFileName filename(fixedPath);
 	filename.Normalize();
 	fixedPath = filename.GetFullPath().Lower();
@@ -50,7 +51,7 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 // 			throw Exception("Create symbol %s fail!", path);
 			return NULL;
 		}
-		bool isLoaded = symbol->loadFromFile(fixedPath);
+		bool isLoaded = symbol->LoadFromFile(fixedPath);
 		if (isLoaded)
 		{
 			m_symbols.insert(std::make_pair(fixedPath, symbol));
@@ -73,7 +74,8 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 
 void SymbolMgr::remove(const ISymbol* symbol)
 {
-	wxString lowerpath = symbol->getFilepath().Lower();
+	std::string lowerpath = symbol->GetFilepath();
+	StringTools::ToLower(lowerpath);
 	std::map<wxString, ISymbol*>::iterator itr = m_symbols.find(lowerpath);
 	// todo: new NullSymbol()
 //	assert(itr != m_symbols.end());
@@ -96,7 +98,7 @@ void SymbolMgr::traverse(IVisitor& visitor) const
 	for ( ; itr != m_symbols.end(); ++itr)
 	{
 		bool hasNext;
-		visitor.visit(itr->second, hasNext);
+		visitor.Visit(itr->second, hasNext);
 		if (!hasNext) break;
 	}
 }

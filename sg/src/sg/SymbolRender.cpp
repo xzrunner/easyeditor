@@ -58,7 +58,7 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 	d2d::ISprite* grass = m_grass[info->size - 1];
 	if (is_flat)
 	{
-		d2d::Rect r = grass->getSymbol().getSize();
+		d2d::Rect r = grass->getSymbol().GetSize();
 
 		float half_edge = info->size * EDGE * 0.5f;
 

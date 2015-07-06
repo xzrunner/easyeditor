@@ -294,7 +294,7 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 	std::vector<d2d::Image*> images;
 	images.resize(texfilenames.size());
 	for (int i = 0, n = texfilenames.size(); i < n; ++i)
-		images[i] = d2d::ImageMgr::Instance()->getItem(texfilenames[i]);
+		images[i] = d2d::ImageMgr::Instance()->GetItem(texfilenames[i]);
 
 	// Picture to easycomplex
 	std::map<int, Picture*>::iterator itr = m_mapPictures.begin();
@@ -339,8 +339,8 @@ void ParserLuaFile::transPicToFiles(const std::vector<std::string>& texfilenames
 		ecomplex::FileSaver::store(filename.c_str(), symbol);
 
 		pic->filename = filename;
-		pic->width = symbol->getSize().xLength();
-		pic->height = symbol->getSize().yLength();
+		pic->width = symbol->GetSize().xLength();
+		pic->height = symbol->GetSize().yLength();
 
 		delete symbol;
 	}
@@ -465,7 +465,7 @@ void ParserLuaFile::transPicToMemory(const std::vector<std::string>& texfilename
 	std::vector<d2d::Image*> images;
 	images.resize(texfilenames.size());
 	for (int i = 0, n = texfilenames.size(); i < n; ++i)
-		images[i] = d2d::ImageMgr::Instance()->getItem(texfilenames[i]);
+		images[i] = d2d::ImageMgr::Instance()->GetItem(texfilenames[i]);
 
 	// Picture to easycomplex
 	std::map<int, Picture*>::iterator itr = m_mapPictures.begin();

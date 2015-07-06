@@ -36,7 +36,7 @@ void StageCanvas::initGL()
 	std::vector<d2d::ISymbol*> symbols;
 	d2d::SymbolMgr::Instance()->traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
-		symbols[i]->reloadTexture();
+		symbols[i]->ReloadTexture();
 	}
 }
 
@@ -56,7 +56,7 @@ void StageCanvas::OnDraw()
 
 	if (!m_edited) {
 		const d2d::ISymbol& symbol = static_cast<StagePanel*>(m_stage)->GetSymbol();
-		symbol.draw(d2d::Matrix());
+		symbol.Draw(d2d::Matrix());
 	}
 
 	m_stage->drawEditTemp();

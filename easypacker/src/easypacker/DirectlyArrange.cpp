@@ -15,8 +15,8 @@ void DirectlyArrange::arrange(const std::vector<d2d::ImageSprite*>& sprites)
 	for (size_t i = 0, n = sorted.size(); i < n; ++i)
 	{
 		d2d::ImageSprite* sprite = sorted[i];
-		const float width = sprite->getSymbol().getSize().xLength() * s + p,
-			height = sprite->getSymbol().getSize().yLength() * s + p;
+		const float width = sprite->getSymbol().GetSize().xLength() * s + p,
+			height = sprite->getSymbol().GetSize().yLength() * s + p;
 
 		if (sx + width <= Context::Instance()->width)
 		{

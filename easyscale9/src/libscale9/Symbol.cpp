@@ -17,12 +17,12 @@ Symbol::Symbol(const Symbol& symbol)
 {
 }
 
-void Symbol::reloadTexture() const
+void Symbol::ReloadTexture() const
 {
 	m_data.ReloadTexture();
 }
 
-void Symbol::draw(const d2d::Matrix& mt,
+void Symbol::Draw(const d2d::Matrix& mt,
 				  const d2d::Colorf& mul, 
 				  const d2d::Colorf& add,
 				  const d2d::Colorf& r_trans,
@@ -33,7 +33,7 @@ void Symbol::draw(const d2d::Matrix& mt,
 	m_data.Draw(mt, mul, add, r_trans, g_trans, b_trans, sprite);
 }
 
-d2d::Rect Symbol::getSize(const d2d::ISprite* sprite/* = NULL*/) const
+d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite/* = NULL*/) const
 {
 	float w, h;
 	if (sprite) {
@@ -55,9 +55,9 @@ void Symbol::ComposeFromSprites(d2d::ISprite* sprites[3][3], float width, float 
 	m_data.Compose(sprites, width, height);
 }
 
-void Symbol::loadResources()
+void Symbol::LoadResources()
 {
-	m_data.LoadFromFile(m_filepath.ToStdString());
+	m_data.LoadFromFile(m_filepath);
 }
 
 }

@@ -168,7 +168,7 @@ NearestQueryVisitor(const Vector& pos, ISprite** ret)
 }
 
 void PasteSymbolTileOP::NearestQueryVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 

@@ -215,7 +215,7 @@ Traverse(IVisitor& visitor) const
 		while (n) {
 			bool has_next = true;
 			if (n->glyph.is_used) {
-				visitor.visit(&n->glyph, has_next);
+				visitor.Visit(&n->glyph, has_next);
 			}
 			if (!has_next) {
 				return;
@@ -240,7 +240,7 @@ GetHashVal(int character, int font_size, int color, int is_edge)
 //////////////////////////////////////////////////////////////////////////
 
 void DynamicFont::ReloadTextureVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	Glyph* g = static_cast<Glyph*>(object);
 	TPNode* n = g->tpnode;

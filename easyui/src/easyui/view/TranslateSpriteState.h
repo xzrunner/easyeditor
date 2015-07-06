@@ -21,7 +21,7 @@ private:
 	{
 	public:
 		Visitor(AnchorMgr* anchor_mgr) : m_anchor_mgr(anchor_mgr) {}
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 	private:
 		AnchorMgr* m_anchor_mgr;
 	}; // Visitor

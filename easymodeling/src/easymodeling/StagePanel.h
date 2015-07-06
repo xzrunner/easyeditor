@@ -53,7 +53,7 @@ namespace emodeling
 		{
 		public:
 			PointQueryVisitor(const d2d::Vector& pos, d2d::ISprite** pResult);
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 		private:
 			const d2d::Vector& m_pos;
@@ -65,7 +65,7 @@ namespace emodeling
 		{
 		public:
 			RectQueryVisitor(const d2d::Rect& rect, std::vector<d2d::ISprite*>& result);
-			virtual void visit(d2d::Object* object, bool& bFetchNext);
+			virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 		private:
 			const d2d::Rect& m_rect;

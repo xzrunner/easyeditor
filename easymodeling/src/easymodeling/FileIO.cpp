@@ -133,7 +133,7 @@ Json::Value FileIO::b2j(const libmodeling::Body* body, const std::string& dlg)
 	value["name"] = body->name.ToStdString();
 
 	value["filepath"] = d2d::FilenameTools::getRelativePath(dlg, 
-		body->sprite->getSymbol().getFilepath()).ToStdString();
+		body->sprite->getSymbol().GetFilepath()).ToStdString();
 
 	value["type"] = body->type;
 	switch (body->type)

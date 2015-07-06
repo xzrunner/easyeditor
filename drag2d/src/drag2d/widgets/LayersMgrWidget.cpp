@@ -34,7 +34,7 @@ void LayersMgrWidget::traverseEditableLayers(IVisitor& visitor)
 	if (m_editedLayer)
 	{
 		bool hasNext;
-		visitor.visit(m_editedLayer, hasNext);
+		visitor.Visit(m_editedLayer, hasNext);
 	}
 }
 
@@ -46,7 +46,7 @@ void LayersMgrWidget::traverseVisibleLayers(IVisitor& visitor)
 		if ((*itr)->isVisible())
 		{
 			bool hasNext;
-			visitor.visit((*itr)->getLayer(), hasNext);
+			visitor.Visit((*itr)->getLayer(), hasNext);
 			if (!hasNext) break;
 		}
 	}
@@ -60,7 +60,7 @@ void LayersMgrWidget::traverseSelectableLayers(IVisitor& visitor)
 		if ((*itr)->isSelectable())
 		{
 			bool hasNext;
-			visitor.visit((*itr)->getLayer(), hasNext);
+			visitor.Visit((*itr)->getLayer(), hasNext);
 			if (!hasNext) break;
 		}
 	}
@@ -72,7 +72,7 @@ void LayersMgrWidget::traverseAllLayers(IVisitor& visitor)
 	for ( ; itr != m_layers.end(); ++itr)
 	{
 		bool hasNext;
-		visitor.visit((*itr)->getLayer(), hasNext);
+		visitor.Visit((*itr)->getLayer(), hasNext);
 		if (!hasNext) break;
 	}
 }

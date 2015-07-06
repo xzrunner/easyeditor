@@ -18,7 +18,7 @@ public:
 	ListItem* getItem(int index = -1) const;
 	ISymbol* getSymbol(int index = -1) const;
 
-	void reloadTexture() const;
+	void ReloadTexture() const;
 
 private:
 	ILibraryPage* m_page;

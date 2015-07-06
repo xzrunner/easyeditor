@@ -209,7 +209,7 @@ bool RectCutOP::Clear()
 std::string RectCutOP::getImageFilepath() const
 {
 	if (const d2d::ISprite* s = m_stage->getImage()) {
-		return s->getSymbol().getFilepath().ToStdString();
+		return s->getSymbol().GetFilepath().ToStdString();
 	} else {
 		return "";
 	}
@@ -262,8 +262,8 @@ void RectCutOP::fixedPos(d2d::Vector& pos) const
 	pos.y = std::ceil(pos.y);
 
 	// to image
-	float w = m_stage->getImage()->getSymbol().getSize().xLength();
-	float h = m_stage->getImage()->getSymbol().getSize().yLength();
+	float w = m_stage->getImage()->getSymbol().GetSize().xLength();
+	float h = m_stage->getImage()->getSymbol().GetSize().yLength();
 	if (pos.x < 0) {
 		pos.x = 0;
 	}

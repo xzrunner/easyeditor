@@ -34,7 +34,7 @@ void FileIO::store(const char* filepath, ToolbarPanel* toolbar)
 		ToolbarPanel::ChildPanel* cp = toolbar->m_children[i];
 		ParticleChild* pc = cp->m_pc;
 		value["components"][i]["filepath"] = 
-			d2d::FilenameTools::getRelativePath(dir, pc->symbol->getFilepath()).ToStdString();
+			d2d::FilenameTools::getRelativePath(dir, pc->symbol->GetFilepath()).ToStdString();
 		if (pc->bind_ps) {
 			value["components"][i]["bind ps filepath"] = 
 				d2d::FilenameTools::getRelativePath(dir, pc->bind_ps->filepath).ToStdString();

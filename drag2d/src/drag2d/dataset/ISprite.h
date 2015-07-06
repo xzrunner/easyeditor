@@ -31,12 +31,12 @@ public:
 	//
 	// ICloneable interface
 	//
-	virtual ISprite* clone() const;
+	virtual ISprite* Clone() const;
 
 	//
 	// UserDataImpl interface
 	//	
-	virtual void clearUserData(bool deletePtr);
+	virtual void ClearUserData(bool deletePtr);
 
 	virtual const ISymbol& getSymbol() const = 0;
 	virtual void setSymbol(ISymbol* symbol) = 0;

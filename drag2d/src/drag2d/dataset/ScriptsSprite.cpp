@@ -25,7 +25,7 @@ ScriptsSprite::~ScriptsSprite()
 	}
 }
 
-ScriptsSprite* ScriptsSprite::clone() const
+ScriptsSprite* ScriptsSprite::Clone() const
 {
 	ScriptsSprite* sprite = new ScriptsSprite(*this);
 	SpriteFactory::Instance()->insert(sprite);

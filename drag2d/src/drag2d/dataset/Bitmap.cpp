@@ -21,14 +21,14 @@ Bitmap::Bitmap()
 
 Bitmap::~Bitmap()
 {
-	BitmapMgr::Instance()->removeItem(m_filename);
+	BitmapMgr::Instance()->RemoveItem(m_filename);
 	delete m_bitmap;
 }
 
-bool Bitmap::loadFromFile(const wxString& filepath)
+bool Bitmap::LoadFromFile(const std::string& filepath)
 {
 	if (!wxFileName::FileExists(filepath)) {
-		throw Exception("File: %s don't exist!", filepath.ToStdString().c_str());
+		throw Exception("File: %s don't exist!", filepath.c_str());
 	}
 
 #ifndef NOT_LOAD_IMAGE
@@ -48,9 +48,9 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 	if (FileNameParser::isType(filepath, FileNameParser::e_image))
 	{
 		wxImage image;
-		getImage(filepath, image);
+		GetImage(filepath, image);
 
-		m_bitmap = getBitmap(image);
+		m_bitmap = GetBitmap(image);
 	}
 	else if (FileNameParser::isType(filepath, FileNameParser::e_terrain2d))
 	{
@@ -59,7 +59,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 	else
 	{
 		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
-		d2d::Rect rect = symbol->getSize();
+		d2d::Rect rect = symbol->GetSize();
 		int w = std::max(1.0f, rect.xLength()),
 			h = std::max(1.0f, rect.yLength());
 
@@ -69,7 +69,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 
 		d2d::Snapshoot ss(w, h);
 		unsigned char* rgba = ss.OutputToMemory(symbol, true);
-		unsigned char* rgb = transRGBA2RGB(rgba, w, h);
+		unsigned char* rgb = TransRGBA2RGB(rgba, w, h);
 		delete[] rgba;
 
 		wxImage image(w, h, rgb, true);
@@ -77,7 +77,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 			delete m_bitmap;
 			m_bitmap = NULL;
 		}
-		m_bitmap = getBitmap(image);
+		m_bitmap = GetBitmap(image);
 		delete[] rgb;
 		symbol->Release();
 	}
@@ -86,7 +86,7 @@ bool Bitmap::loadFromFile(const wxString& filepath)
 	return true;
 }
 
-unsigned char* Bitmap::transRGBA2RGB(unsigned char* rgba, int width, int height)
+unsigned char* Bitmap::TransRGBA2RGB(unsigned char* rgba, int width, int height)
 {
 	unsigned char* rgb = new unsigned char[width*height*3];
 	for (int i = 0; i < height; ++i) {
@@ -99,13 +99,13 @@ unsigned char* Bitmap::transRGBA2RGB(unsigned char* rgba, int width, int height)
 	return rgb;
 }
 
-void Bitmap::getImage(const wxString& filepath, wxImage& image)
+void Bitmap::GetImage(const std::string& filepath, wxImage& image)
 {
 	wxImage totimg;
 	totimg.LoadFile(filepath);
 
-	Image* pImage = ImageMgr::Instance()->getItem(filepath);
-	Rect rect = pImage->getRegion();
+	Image* pImage = ImageMgr::Instance()->GetItem(filepath);
+	Rect rect = pImage->GetClippedRegion();
 	// not cache
 	pImage->Release();
 
@@ -124,15 +124,15 @@ void Bitmap::getImage(const wxString& filepath, wxImage& image)
 	image = totimg.GetSubImage(wx_rect);
 }
 
-wxBitmap* Bitmap::getBitmap(const wxImage& image)
+wxBitmap* Bitmap::GetBitmap(const wxImage& image)
 {
-	float scale = computeScale(image.GetWidth());
+	float scale = ComputeScale(image.GetWidth());
 	int w = std::max(1.0f, image.GetWidth() * scale);
 	int h = std::max(1.0f, image.GetHeight() * scale);
 	return new wxBitmap(image.Scale(w, h));
 }
 
-float Bitmap::computeScale(float width)
+float Bitmap::ComputeScale(float width)
 {
 	return width > 300 ? 150.0f / width : 0.5f;
 }

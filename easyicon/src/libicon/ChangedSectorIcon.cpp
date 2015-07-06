@@ -46,8 +46,8 @@ void ChangedSectorIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const
 	float angle = m_min + (m_max - m_min) * process;
 	float tan_val = std::tan(angle);
 
-	float w = m_img->clipWidth(),
-		h = m_img->clipHeight();
+	float w = m_img->GetClippedWidth(),
+		h = m_img->GetClippedHeight();
 	float x = h / tan_val;
 	if (x < w) {
 		tex4[2].set(x / w, 1.0f);

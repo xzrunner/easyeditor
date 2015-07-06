@@ -32,7 +32,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 {
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		bool fetch_next;
-		visitor.visit(m_sprites[i], fetch_next);
+		visitor.Visit(m_sprites[i], fetch_next);
 		if (!fetch_next) {
 			break;
 		}

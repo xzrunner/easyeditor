@@ -83,7 +83,7 @@ namespace edb
 
 	wxString TreeCtrl::getItemName(const d2d::ISprite& sprite) const
 	{
-		wxString name = sprite.getSymbol().getFilepath();
+		wxString name = sprite.getSymbol().GetFilepath();
 		name = d2d::FilenameTools::getFilename(name);
 		return name;
 	}

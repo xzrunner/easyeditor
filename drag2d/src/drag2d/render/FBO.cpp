@@ -183,7 +183,7 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	}	
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	d2d::Rect rect = symbol->getSize();
+	d2d::Rect rect = symbol->GetSize();
 	int w = rect.xLength() * scale,
 		h = rect.yLength() * scale;
 	shader->SetModelView(Vector(0, 0), 1);
@@ -191,8 +191,8 @@ void FBO::DrawFBO(const ISymbol* symbol, bool whitebg, float scale)
 	glViewport(0, 0, w, h);
 
 	Matrix mt;
-	float dx = -symbol->getSize().xCenter();
-	float dy = symbol->getSize().yCenter();
+	float dx = -symbol->GetSize().xCenter();
+	float dy = symbol->GetSize().yCenter();
 	mt.translate(dx, dy);
 	SpriteRenderer::Instance()->Draw(symbol, mt, d2d::Vector(0, 0), 0.0f, scale, -scale);
 

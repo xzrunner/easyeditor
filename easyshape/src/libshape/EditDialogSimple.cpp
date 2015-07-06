@@ -77,19 +77,19 @@ void EditDialogSimple::OnClose(wxCloseEvent& event)
 	}
 
 	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(m_stage->GetSymbol());
-	const wxString& filepath = symbol.getFilepath();
+	const std::string& filepath = symbol.GetFilepath();
 
 	d2d::ExitDlg dlg(this);
 	int val = dlg.ShowModal();
 	if (val == wxID_OK)
 	{
-		static_cast<Symbol&>(symbol).StoreToFile(filepath);
+		static_cast<Symbol&>(symbol).StoreToFile(filepath.c_str());
 		symbol.RefreshThumbnail(filepath);
 		d2d::SpriteFactory::Instance()->updateBoundings(symbol);
 	}
 	else if (val == wxID_CANCEL)
 	{
-		symbol.loadFromFile(filepath);
+		symbol.LoadFromFile(filepath);
 	}
 
 	Destroy();

@@ -21,7 +21,7 @@ ImageSymbol::ImageSymbol(Image* image, const std::string& filename)
 	m_image->Retain();
 
 	m_filepath = filename;
-	m_region = image->getRegion();
+	m_region = image->GetClippedRegion();
 }
 
 ImageSymbol::~ImageSymbol()
@@ -30,17 +30,17 @@ ImageSymbol::~ImageSymbol()
 	m_image->Release();
 }
 
-ImageSymbol* ImageSymbol::clone() const
+ImageSymbol* ImageSymbol::Clone() const
 {
 	return NULL;
 }
 
-void ImageSymbol::reloadTexture() const
+void ImageSymbol::ReloadTexture() const
 {
-	m_image->reload();
+	m_image->Reload();
 }
 
-void ImageSymbol::draw(const Matrix& mt,
+void ImageSymbol::Draw(const Matrix& mt,
 					   const Colorf& mul, 
 					   const Colorf& add,
 					   const Colorf& r_trans,
@@ -51,25 +51,25 @@ void ImageSymbol::draw(const Matrix& mt,
 	ShaderMgr* shader = ShaderMgr::Instance();
 	shader->SetSpriteColor(mul, add);
 	shader->SetSpriteColorTrans(r_trans, g_trans, b_trans);	
-	m_image->draw(mt, m_region, sprite);
+	m_image->Draw(mt, m_region, sprite);
 }
 
-Rect ImageSymbol::getSize(const ISprite* sprite/* = NULL*/) const
+Rect ImageSymbol::GetSize(const ISprite* sprite/* = NULL*/) const
 {
 	return m_region;
 }
 
-unsigned int ImageSymbol::getTextureID() const
+unsigned int ImageSymbol::GetTexID() const
 {
-	return m_image->textureID();
+	return m_image->GetTexID();
 }
 
-void ImageSymbol::loadResources()
+void ImageSymbol::LoadResources()
 {
-	BitmapMgr::Instance()->getItem(m_filepath, &m_bitmap);
-	ImageMgr::Instance()->getItem(m_filepath, &m_image);
+	BitmapMgr::Instance()->GetItem(m_filepath, &m_bitmap);
+	ImageMgr::Instance()->GetItem(m_filepath, &m_image);
 
-	m_region = m_image->getRegion();
+	m_region = m_image->GetClippedRegion();
 }
 
 } // d2d

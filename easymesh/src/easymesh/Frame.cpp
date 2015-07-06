@@ -38,7 +38,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 			{
 				wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
 				m_currFilename = fixed;
-				m_task->store(fixed);
+				m_task->Store(fixed);
 			}
 		}
 	} catch (d2d::Exception& e) {

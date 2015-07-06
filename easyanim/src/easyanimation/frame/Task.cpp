@@ -34,7 +34,7 @@ Task::~Task()
 	delete m_root;
 }
 
-void Task::load(const char* filepath)
+void Task::Load(const char* filepath)
 {
 	if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim) &&
 		!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anis)) {
@@ -52,7 +52,7 @@ void Task::load(const char* filepath)
 	m_widgets.m_stage->getCanvas()->resetViewport();
 }
 
-void Task::store(const char* filepath) const
+void Task::Store(const char* filepath) const
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
 		FileIO::StoreSingle(filepath, const_cast<Controller*>(&m_controller));
@@ -63,12 +63,12 @@ void Task::store(const char* filepath) const
 	}
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return m_widgets.m_stage->isDirty();
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	//	d2d::SymbolMgr::Instance()->clear();
 
@@ -83,12 +83,12 @@ void Task::clear()
 	m_widgets.m_stage->Refresh();
 }
 
-void Task::getAllSprite(std::vector<const d2d::ISprite*>& sprites) const
+void Task::GetAllSprite(std::vector<const d2d::ISprite*>& sprites) const
 {
 	m_widgets.m_stage->traverseSprites(d2d::FetchAllVisitor<const d2d::ISprite>(sprites));
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_widgets.m_stage;
 }

@@ -34,7 +34,7 @@ private:
 
 	public:
 		GetPhysicsStaticVisitor();
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 		TYPE getType() const { return m_type; }
 
 	private:
@@ -46,7 +46,7 @@ private:
 	{
 	public:
 		SetPhysicsStaticVisitor(bool bChecked);
-		virtual void visit(d2d::Object* object, bool& bFetchNext);
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
 
 	private:
 		bool m_bChecked;

@@ -30,7 +30,7 @@ private:
 	{
 	public:
 		Visitor(const Vector& offset) : m_offset(offset) {}
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 	private:
 		Vector m_offset;
 	}; // Visitor

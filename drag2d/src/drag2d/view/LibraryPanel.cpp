@@ -76,7 +76,7 @@ void LibraryPanel::LoadSymbol(d2d::ISymbol* symbol)
 		ILibraryPage* page = m_pages[j];
 		if (page->IsHandleSymbol(symbol))
 		{
-			symbol->RefreshThumbnail(symbol->getFilepath());
+			symbol->RefreshThumbnail(symbol->GetFilepath());
 			page->GetList()->insert(symbol);
 			break;
 		}

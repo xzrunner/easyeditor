@@ -18,7 +18,7 @@ DrawSelectedSpriteVisitor::DrawSelectedSpriteVisitor(const Colorf& color)
 	: m_color(color)
 {}
 
-void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext) 
+void DrawSelectedSpriteVisitor::Visit(Object* object, bool& bFetchNext) 
 {
 	std::vector<Vector> bound;
 	ISprite* sprite = static_cast<ISprite*>(object);
@@ -35,8 +35,8 @@ void DrawSelectedSpriteVisitor::visit(Object* object, bool& bFetchNext)
 			s->GetTransMatrix(mt);
 
 			Image* img = s->getSymbol().getImage();
-			PrimitiveDraw::rect(mt, img->originWidth() * 0.5f, 
-				img->originHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
+			PrimitiveDraw::rect(mt, img->GetOriginWidth() * 0.5f, 
+				img->GetOriginHeight() * 0.5f, LIGHT_GREY_THIN_LINE);
 		}
 	}
 

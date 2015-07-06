@@ -56,13 +56,13 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		std::vector<IShape*> shapes;
 		m_selection->Traverse(FetchAllVisitor<IShape>(shapes));
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
-			m_clipboard.push_back(shapes[i]->clone());
+			m_clipboard.push_back(shapes[i]->Clone());
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_V))
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 		{
-			m_shapeImpl->insertShape(m_clipboard[i]->clone());
+			m_shapeImpl->insertShape(m_clipboard[i]->Clone());
 			m_stage->Refresh();
 		}
 	}

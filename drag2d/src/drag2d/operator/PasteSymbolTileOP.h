@@ -29,7 +29,7 @@ namespace d2d
 		public:
 			NearestQueryVisitor(const Vector& pos, ISprite** ret);
 
-			virtual void visit(Object* object, bool& bFetchNext);
+			virtual void Visit(Object* object, bool& bFetchNext);
 
 		private:
 			const Vector& m_pos;

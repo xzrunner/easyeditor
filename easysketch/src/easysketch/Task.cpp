@@ -15,24 +15,24 @@ Task::Task(wxFrame* parent)
 Task::~Task()
 {
 	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
-void Task::load(const char* filename)
+void Task::Load(const char* filename)
 {
 }
 
-void Task::store(const char* filename) const
+void Task::Store(const char* filename) const
 {
 }
 
-bool Task::isDirty() const
+bool Task::IsDirty() const
 {
 	return false;
 }
 
-void Task::clear()
+void Task::Clear()
 {
 	m_library->Clear();
 	m_stage->clear();
@@ -40,7 +40,7 @@ void Task::clear()
 	m_stage->Refresh();
 }
 
-const d2d::EditPanel* Task::getEditPanel() const
+const d2d::EditPanel* Task::GetEditPanel() const
 {
 	return m_stage;
 }

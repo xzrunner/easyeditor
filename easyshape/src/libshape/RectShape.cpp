@@ -24,7 +24,7 @@ RectShape::RectShape(const d2d::Vector& center, float hWidth, float hHeight)
 {
 }
 
-RectShape* RectShape::clone() const
+RectShape* RectShape::Clone() const
 {
 	return new RectShape(*this);
 }

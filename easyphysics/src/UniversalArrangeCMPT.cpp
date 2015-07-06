@@ -78,7 +78,7 @@ GetPhysicsStaticVisitor()
 }
 
 void UniversalArrangeCMPT::GetPhysicsStaticVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 	const IBody* body = BodyManager::Instance()->QueryBody(sprite);
@@ -112,7 +112,7 @@ SetPhysicsStaticVisitor(bool bChecked)
 }
 
 void UniversalArrangeCMPT::SetPhysicsStaticVisitor::
-visit(d2d::Object* object, bool& bFetchNext)
+Visit(d2d::Object* object, bool& bFetchNext)
 {
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
 	const IBody* body = BodyManager::Instance()->QueryBody(sprite);

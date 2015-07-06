@@ -19,7 +19,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual Sprite* clone() const;
+	virtual Sprite* Clone() const;
 
 	//
 	// ISprite interface

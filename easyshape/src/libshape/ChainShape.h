@@ -16,7 +16,7 @@ public:
 	//
 	// IObject interface
 	//
-	virtual ChainShape* clone() const;
+	virtual ChainShape* Clone() const;
 
 	//
 	// IShape interface

@@ -55,7 +55,7 @@ void BodyData::loadFromMeshFile(const wxString& filename)
 	//m_type = e_mesh;
 
 	//MeshSymbol symbol;
-	//symbol.loadFromFile(filename);
+	//symbol.LoadFromFile(filename);
 
 	//const std::vector<d2d::Vector>& triangles = symbol.getVertices();
 

@@ -35,10 +35,10 @@ ISymbol* LibraryList::getSymbol(int index/* = -1*/) const
 		return NULL;
 }
 
-void LibraryList::reloadTexture() const
+void LibraryList::ReloadTexture() const
 {
 	for (size_t i = 0, n = m_items.size(); i < n; ++i)
-		static_cast<ISymbol*>(m_items[i])->reloadTexture();
+		static_cast<ISymbol*>(m_items[i])->ReloadTexture();
 }
 
 } // d2d

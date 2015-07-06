@@ -13,7 +13,7 @@ b2World* BodyFactory::m_world = NULL;
 IBody* BodyFactory::createBody(const wxString& filename, float scale/* = 1.0f*/)
 {
 	IBody* body = NULL;
-	BodyData* bd = BodyDataMgr::Instance()->getItem(filename);
+	BodyData* bd = BodyDataMgr::Instance()->GetItem(filename);
 	switch (bd->type())
 	{
 	case BodyData::e_polygon:

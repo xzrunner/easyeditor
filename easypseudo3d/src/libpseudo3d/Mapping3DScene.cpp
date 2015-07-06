@@ -96,7 +96,7 @@ void Mapping3DScene::Load(const char* filename)
 	m_vertices.push_back(vec3(-5, -5, -5));
 
 #ifdef STORE_2D
- 	m_img = d2d::ImageMgr::Instance()->getItem("box/crate.jpg");
+ 	m_img = d2d::ImageMgr::Instance()->GetItem("box/crate.jpg");
  	return;
 #endif // STORE_2D
 
@@ -113,7 +113,7 @@ void Mapping3DScene::Load(const char* filename)
 	fin.close();
 
 	std::string img_path = value["texture filepath"].asString();
-	m_img = d2d::ImageMgr::Instance()->getItem(img_path);
+	m_img = d2d::ImageMgr::Instance()->GetItem(img_path);
 
 	int xmin = value["xmin"].asInt(),
 		xmax = value["xmax"].asInt(),
@@ -152,7 +152,7 @@ void Mapping3DScene::Draw() const
 	}
 
 #ifdef STORE_2D
- 	e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), m_img->textureID());
+ 	e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), m_img->GetTexID());
  	return;
 
 	//e3d::DrawCube(vec3(-5, -5, -5), vec3(5, 5, 5), d2d::WHITE);
@@ -254,7 +254,7 @@ void Mapping3DScene::Draw() const
 	e3d::ShaderMgr* shader = e3d::ShaderMgr::Instance();
 	shader->Sprite();
 
-	shader->DrawTri(&vertices[0].x, &texcoords[0].x, 2 * 6 * 3, m_img->textureID());
+	shader->DrawTri(&vertices[0].x, &texcoords[0].x, 2 * 6 * 3, m_img->GetTexID());
 }
 
 void Mapping3DScene::DebugDraw() const

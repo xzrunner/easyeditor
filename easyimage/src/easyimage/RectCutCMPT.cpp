@@ -239,8 +239,8 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 		wxString img_fullname = img_filename + ".png";
 		d2d::ISprite* sprite = new d2d::NullSprite(new d2d::NullSymbol(img_fullname.ToStdString(), width, height));
 		d2d::Vector off;
-		off.x = r.xCenter() - image->clipWidth() * 0.5f;
-		off.y = r.yCenter() - image->clipHeight() * 0.5f;
+		off.x = r.xCenter() - image->GetClippedWidth() * 0.5f;
+		off.y = r.yCenter() - image->GetClippedHeight() * 0.5f;
 		sprite->translate(off);
 		complex->m_sprites.push_back(sprite);
 	}

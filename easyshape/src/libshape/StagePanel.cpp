@@ -96,7 +96,7 @@ const d2d::ISymbol& StagePanel::GetSymbol() const
 void StagePanel::LoadFromFile(const char* filename)
 {
 	if (m_symbol) {
-		m_symbol->loadFromFile(filename);
+		m_symbol->LoadFromFile(filename);
 	}
 }
 

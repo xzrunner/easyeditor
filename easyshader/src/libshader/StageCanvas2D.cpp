@@ -36,7 +36,7 @@ void StageCanvas2D::OnMousePressed(const d2d::Vector& pos)
 		d2d::ShaderMgr::Instance()->sprite();
 
 		d2d::Vector center = sprite->getCenter();
-		d2d::Rect r = sprite->getSymbol().getSize();
+		d2d::Rect r = sprite->getSymbol().GetSize();
 		float x = (pos.x - center.x) / r.xLength() + 0.5f,
 			  y = (pos.y - center.y) / r.xLength() + 0.5f;
 		static_cast<Shader2D*>(shader)->SetInputUniform(x, y);

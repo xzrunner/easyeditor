@@ -44,7 +44,7 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 			if (!m_sprites[i][j]) continue;
 
 			bool hasNext;
-			visitor.visit(m_sprites[i][j], hasNext);
+			visitor.Visit(m_sprites[i][j], hasNext);
 			if (!hasNext) return;
 		}
 }
@@ -117,9 +117,9 @@ void StagePanel::rebuildPatchSymbol()
 		  height = m_toolbar->getHeight();
 
 	if (type == e_3GridHor) {
-		height = m_sprites[1][1]->getSymbol().getSize().yLength();
+		height = m_sprites[1][1]->getSymbol().GetSize().yLength();
 	} else if (type == e_3GridVer) {
-		width = m_sprites[1][1]->getSymbol().getSize().xLength();
+		width = m_sprites[1][1]->getSymbol().GetSize().xLength();
 	}
 
 	m_symbol->ComposeFromSprites(m_sprites, width, height);

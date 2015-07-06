@@ -75,7 +75,7 @@ void TranslateSpriteState::Translate(const Vector& offset)
 //////////////////////////////////////////////////////////////////////////
 
 void TranslateSpriteState::Visitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ISprite* sprite = static_cast<ISprite*>(object);
 	sprite->translate(m_offset);

@@ -240,7 +240,7 @@ PosQueryVisitor(const d2d::Vector& pos, ChainSelectedNodes** result)
 }
 
 void SelectNodesOP::PosQueryVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 
@@ -277,7 +277,7 @@ RectQueryVisitor(const d2d::Rect& rect, std::vector<ChainSelectedNodes*>& result
 }
 
 void SelectNodesOP::RectQueryVisitor::
-visit(Object* object, bool& bFetchNext)
+Visit(Object* object, bool& bFetchNext)
 {
 	ChainShape* chain = static_cast<ChainShape*>(object);
 

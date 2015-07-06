@@ -43,7 +43,7 @@ private:
 	{
 	public:
 		PointQueryVisitor(const Vector& pos, IShape** pResult);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		const Vector& m_pos;
@@ -55,7 +55,7 @@ private:
 	{
 	public:
 		RectQueryVisitor(const Rect& rect, std::vector<IShape*>& result);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		const Rect& m_rect;
@@ -67,7 +67,7 @@ private:
 	{
 	public:
 		RemoveSelectionVisitor(MultiShapesImpl* shapesImpl);
-		virtual void visit(Object* object, bool& bFetchNext);
+		virtual void Visit(Object* object, bool& bFetchNext);
 
 	private:
 		MultiShapesImpl* m_shapesImpl;
