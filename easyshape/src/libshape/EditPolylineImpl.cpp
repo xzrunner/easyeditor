@@ -106,6 +106,12 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 				}
 				else
 				{
+					int sz = m_shapesImpl->getShapeSelection()->Size();
+
+					d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+					d2d::IShape* shape = m_shapesImpl->queryShapeByPos(pos);
+
+
 					return m_base_op->OnMouseLeftDownBase(x, y);
 				}
 			}

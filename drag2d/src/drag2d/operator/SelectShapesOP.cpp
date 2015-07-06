@@ -74,6 +74,8 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 {
 	m_bDraggable = true;
 
+	m_move_last_pos.setInvalid();
+
 	Vector pos = m_stage->transPosScreenToProject(x, y);
 	IShape* selected = m_shapeImpl->queryShapeByPos(pos);
 	if (selected)
@@ -98,6 +100,8 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 				if (m_view_panel_mgr) {
 					m_view_panel_mgr->SelectShape(selected, m_shapeImpl);
 				}
+			} else {
+				m_move_last_pos = pos;
 			}
 		}
 		m_firstPos.setInvalid();
@@ -151,6 +155,12 @@ bool SelectShapesOP::OnMouseDrag(int x, int y)
 {
 	if (DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
+	if (!m_selection->IsEmpty() && m_move_last_pos.isValid()) {
+		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		m_selection->Traverse(TranslateVisitor(pos - m_move_last_pos));
+		m_move_last_pos = pos;
+	}
+
 	return !m_bDraggable;
 }
 
@@ -179,6 +189,18 @@ void SelectShapesOP::clearClipboard()
  	for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
  		m_clipboard[i]->Release();
  	m_clipboard.clear();
+}
+
+//////////////////////////////////////////////////////////////////////////
+// class TranslateSpriteState::TranslateVisitor
+//////////////////////////////////////////////////////////////////////////
+
+void SelectShapesOP::TranslateVisitor::
+Visit(Object* object, bool& bFetchNext)
+{
+	d2d::IShape* shape = static_cast<d2d::IShape*>(object);
+	shape->Translate(m_offset);
+	bFetchNext = true;
 }
 
 }

@@ -39,6 +39,16 @@ protected:
 	ShapeSelection* m_selection;
 
 private:
+	class TranslateVisitor : public d2d::IVisitor
+	{
+	public:
+		TranslateVisitor(const d2d::Vector& offset) : m_offset(offset) {}
+		virtual void Visit(d2d::Object* object, bool& bFetchNext);
+	private:
+		d2d::Vector m_offset;
+	}; // TranslateVisitor
+
+private:
 	AbstractEditCMPT* m_callback;
 
 	MultiShapesImpl* m_shapeImpl;
@@ -49,6 +59,8 @@ private:
 	bool m_bDraggable;
 
 	ViewPanelMgr* m_view_panel_mgr;
+
+	d2d::Vector m_move_last_pos;
 
 }; // SelectShapesOP
 
