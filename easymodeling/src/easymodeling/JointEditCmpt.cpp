@@ -98,8 +98,8 @@ void JointEditCmpt::onCreateJoint(wxCommandEvent& event)
 	d2d::SpriteSelection* selection = editPanel->getSpriteSelection();
 	selection->Traverse(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	assert(sprites.size() == 2);
-	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->getUserData()),
-		*body1 = static_cast<libmodeling::Body*>(sprites[1]->getUserData());
+	libmodeling::Body *body0 = static_cast<libmodeling::Body*>(sprites[0]->GetUserData()),
+		*body1 = static_cast<libmodeling::Body*>(sprites[1]->GetUserData());
 
 	libmodeling::Joint* joint = NULL;
 	wxString type = m_typeChoice->GetString(m_typeChoice->GetSelection());

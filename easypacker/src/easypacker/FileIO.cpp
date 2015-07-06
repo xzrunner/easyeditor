@@ -117,7 +117,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 
 		Json::Value* val = new Json::Value;
 		*val = frame_val;
-		sprite->setUserData(val);
+		sprite->SetUserData(val);
 
 		context->stage->insertSpriteNoArrange(sprite);
 
@@ -305,9 +305,9 @@ void FileIO::storeTexpackerPosition(const char* filename)
 	Context::Instance()->stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 	for (size_t i = 0, n = sprites.size(); i < n; ++i) {
 		d2d::ISprite* sprite = sprites[i];
-		if (sprite->getUserData()) 
+		if (sprite->GetUserData()) 
 		{
-			Json::Value* val = static_cast<Json::Value*>(sprite->getUserData());
+			Json::Value* val = static_cast<Json::Value*>(sprite->GetUserData());
 			value["frames"][i] = *val;
 		} 
 		else 

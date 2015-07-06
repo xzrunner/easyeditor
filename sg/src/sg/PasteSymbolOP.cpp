@@ -65,7 +65,7 @@ bool PasteSymbolOP::isCurrSymbolValid() const
 // 		return false;
 // 	}
 // 
-// 	SymbolExt* info = static_cast<SymbolExt*>(symbol->getUserData());
+// 	SymbolExt* info = static_cast<SymbolExt*>(symbol->GetUserData());
 // 	if (info == NULL) {
 // 		return false;
 // 	}

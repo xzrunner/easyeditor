@@ -38,7 +38,7 @@ void SymbolRender::DrawGrass(const d2d::ISymbol& symbol,
 							 const d2d::Vector& pos, 
 							 bool is_flat) const
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
 		return;
 	}
@@ -78,7 +78,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 							 bool valid,
 							 bool is_flat) const
 {
-	if (!symbol.getUserData()) {
+	if (!symbol.GetUserData()) {
 		return;
 	}
 
@@ -87,7 +87,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 
 	d2d::Colorf color = valid ? d2d::Colorf(0, 1.0f, 0, 0.8f) : d2d::Colorf(1, 0, 0, 0.8f);
 
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	int center = (info->size >> 1);
 	if (is_flat)
 	{
@@ -119,7 +119,7 @@ void SymbolRender::DrawGrids(const d2d::ISymbol& symbol,
 void SymbolRender::DrawArrow(const d2d::ISymbol& symbol, 
 							 const d2d::Vector& pos) const
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
 		return;
 	}
@@ -157,7 +157,7 @@ void SymbolRender::DrawArrow(const d2d::ISymbol& symbol,
 
 void SymbolRender::DrawRegion(const d2d::ISymbol& symbol, const d2d::Vector& pos)
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
 		return;
 	}

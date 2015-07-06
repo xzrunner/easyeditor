@@ -89,7 +89,7 @@ void StagePanel::removeSprite(d2d::ISprite* sprite)
 
 void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
-	SpriteUserData* ud = (SpriteUserData*)sprite->getUserData();
+	SpriteUserData* ud = (SpriteUserData*)sprite->GetUserData();
  	int old_layer = m_ctrl->layer(),
  		old_frame = m_ctrl->frame();
 	if (ud) {

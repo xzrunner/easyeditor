@@ -6,7 +6,7 @@ namespace sg
 
 static bool IsSymbolWall(const d2d::ISymbol& symbol)
 {
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (info == NULL) {
 		return false;
 	}

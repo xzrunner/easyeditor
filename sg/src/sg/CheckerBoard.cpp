@@ -19,7 +19,7 @@ void CheckerBoard::AddSprite(d2d::ISprite* sprite)
 	int row, col;
 	m_stage->TransCoordsToGridPos(sprite->getPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
 	if (!info) {
 		return;
 	}
@@ -36,7 +36,7 @@ void CheckerBoard::AddSprite(d2d::ISprite* sprite)
 
 void CheckerBoard::RemoveSprite(d2d::ISprite* sprite)
 {
-	if (!sprite->getSymbol().getUserData()) {
+	if (!sprite->getSymbol().GetUserData()) {
 		return;
 	}
 
@@ -47,7 +47,7 @@ void CheckerBoard::RemoveSprite(d2d::ISprite* sprite)
 	int row, col;
 	m_stage->TransCoordsToGridPos(itr->second, row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
 	if (!info) {
 		return;
 	}
@@ -73,7 +73,7 @@ bool CheckerBoard::IsValid(d2d::ISprite* sprite) const
 	int row, col;
 	m_stage->TransCoordsToGridPos(sprite->getPosition(), row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
 	if (!info) {
 		return false;
 	}
@@ -97,7 +97,7 @@ bool CheckerBoard::IsValid(const d2d::ISymbol& symbol, const d2d::Vector& pos) c
 	int row, col;
 	m_stage->TransCoordsToGridPos(pos, row, col);
 
-	SymbolExt* info = static_cast<SymbolExt*>(symbol.getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(symbol.GetUserData());
 	if (!info) {
 		return false;
 	}
@@ -179,13 +179,13 @@ void CheckerBoard::ResetWall()
 				continue;
 			}
 
-			SymbolExt* old = static_cast<SymbolExt*>(symbol.getUserData());
+			SymbolExt* old = static_cast<SymbolExt*>(symbol.GetUserData());
 			SymbolExt* info = new SymbolExt;
 			*info = *old;
 			info->wall_type = wall_type;
 			
 			d2d::ISymbol* new_s = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
-			new_s->setUserData(info);
+			new_s->SetUserData(info);
 			m_grid[i][j]->setSymbol(new_s);
 		}
 	}

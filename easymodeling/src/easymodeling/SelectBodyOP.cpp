@@ -36,7 +36,7 @@ bool SelectBodyOP::OnMouseMove(int x, int y)
 	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (selected)
-		m_mouseOn = static_cast<libmodeling::Body*>(selected->getUserData());
+		m_mouseOn = static_cast<libmodeling::Body*>(selected->GetUserData());
 
 	m_stage->Refresh();
 
@@ -93,7 +93,7 @@ Visit(d2d::Object* object, bool& bFetchNext)
 {
 	std::vector<d2d::Vector> bound;
 	d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
-	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->getUserData());
+	libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
 	DrawUtils::drawBody(body, DrawUtils::e_selected);
 	bFetchNext = true;
 }

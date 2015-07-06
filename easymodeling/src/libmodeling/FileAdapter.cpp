@@ -66,7 +66,7 @@ Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 	body->gravityScale = bodyValue["gravityScale"].asDouble();
 	body->sprite = sprite;
 
-	sprite->setUserData(body);
+	sprite->SetUserData(body);
 
 	int i = 0;
 	Json::Value fixtureValue = bodyValue["fixture"][i++];

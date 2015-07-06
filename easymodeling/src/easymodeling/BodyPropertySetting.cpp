@@ -9,7 +9,7 @@ BodyPropertySetting::BodyPropertySetting(d2d::EditPanel* stage, d2d::ISprite* sp
 	: d2d::IPropertySetting("Body")
 	, m_stage(stage)
 {
-	m_body = static_cast<libmodeling::Body*>(sprite->getUserData());
+	m_body = static_cast<libmodeling::Body*>(sprite->GetUserData());
 	assert(m_body);
 }
 

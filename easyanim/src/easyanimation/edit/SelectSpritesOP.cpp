@@ -38,7 +38,7 @@ void SelectSpritesOP::PasteSprToClipboard(const d2d::ISprite* spr, Json::Value& 
 {
 	d2d::SelectSpritesOP::PasteSprToClipboard(spr, value);
 
-	SpriteUserData* ud = (SpriteUserData*)spr->getUserData();
+	SpriteUserData* ud = (SpriteUserData*)spr->GetUserData();
 	value["layer"] = ud->layer;
 	value["frame"] = ud->frame;
 }

@@ -103,7 +103,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	for (int i = 0, n = sprites.size(); i < n; ++i) 
 	{
 		d2d::ISprite* spr = sprites[i];
-		if (spr->getUserData()) {
+		if (spr->GetUserData()) {
 			continue;
 		}
 
@@ -125,7 +125,7 @@ void Layer::StoreToFile(Json::Value& val, const std::string& dir) const
 	count = 0;
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		d2d::IShape* shape = shapes[i];
-		if (shape->getUserData()) {
+		if (shape->GetUserData()) {
 			continue;
 		}
 		shape->StoreToFile(val["shape"][count++], dir);
@@ -144,11 +144,11 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 	Json::Value spr_val = val[idx++];
 	while (!spr_val.isNull()) 
 	{
-		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = NULL;
 
-		wxString shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
-		wxString shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
+		std::string shape_tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_shape);
+		std::string shape_filepath = d2d::FilenameTools::getFilenameAddTag(filepath, shape_tag, "json");
 		if (d2d::FilenameTools::isExist(shape_filepath)) {
 			symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_filepath);
 		} else {
@@ -159,7 +159,7 @@ void Layer::LoadSprites(const Json::Value& val, const std::string& dir,
 		sprite->load(spr_val);
 		if (!base_path.empty()) {
 			UserData* ud = new UserData(base_path);
-			sprite->setUserData(ud);
+			sprite->SetUserData(ud);
 		}
 		CheckSpriteName(sprite);
 		m_sprites.Insert(sprite);
@@ -181,7 +181,7 @@ void Layer::LoadShapes(const Json::Value& val, const std::string& dir,
 		d2d::IShape* shape = libshape::ShapeFactory::CreateShapeFromFile(shape_val, dir);
 		if (!base_path.empty()) {
 			UserData* ud = new UserData(base_path);
-			shape->setUserData(ud);
+			shape->SetUserData(ud);
 		}
 		m_shapes.Insert(shape);
 		shape->Release();

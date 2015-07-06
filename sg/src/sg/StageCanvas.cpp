@@ -151,7 +151,7 @@ void StageCanvas::DrawSprites() const
 	{
 		d2d::ISprite* sprite = sprites[i];
 		if (IsSymbolWall(*sprite)) {
-			SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+			SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
 			{
 				if (info->wall_type == 0) {
 					d2d::Vector pos = sprite->getPosition() + d2d::Vector(0, 4);

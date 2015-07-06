@@ -46,7 +46,7 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 {
 	sprite->setTransform(FixSpriteLocation(sprite->getPosition()), sprite->getAngle());
 
-	if (!sprite->getSymbol().getUserData()) {
+	if (!sprite->getSymbol().GetUserData()) {
 		d2d::SpritesPanelImpl::insertSprite(sprite);
 		return;
 	}
@@ -62,10 +62,10 @@ void StagePanel::insertSprite(d2d::ISprite* sprite)
 		}
 	}
 
-	if (!sprite->getUserData()) {
+	if (!sprite->GetUserData()) {
 		SpriteExt* ext = new SpriteExt;
-		ext->level = ((SymbolExt*)(sprite->getSymbol().getUserData()))->level;
-		sprite->setUserData(ext);
+		ext->level = ((SymbolExt*)(sprite->getSymbol().GetUserData()))->level;
+		sprite->SetUserData(ext);
 	}
 
 	d2d::SpritesPanelImpl::insertSprite(sprite);
@@ -179,8 +179,8 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 	{
 		d2d::ISprite* sprite = sprites[i];
 
-		SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->getUserData());
-		SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+		SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->GetUserData());
+		SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
 		assert(spr_info && symbol_info);
 
 		if (spr_info->level == 1 && !up ||
@@ -192,7 +192,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 		std::string new_filepath = symbol_info->building->levels[spr_info->level - 1].res_snapshoot_path;
 		d2d::ISymbol* new_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(new_filepath);
 		if (new_symbol != &sprite->getSymbol()) {
-			SymbolExt* new_symbol_info = static_cast<SymbolExt*>(new_symbol->getUserData());
+			SymbolExt* new_symbol_info = static_cast<SymbolExt*>(new_symbol->GetUserData());
 			new_symbol_info->remain--;
 			symbol_info->remain++;
 			sprite->setSymbol(new_symbol);
@@ -215,7 +215,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 
 // 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(pItem->res_snapshoot_path);
 // 		if (symbol) {
-// 			if (symbol->getUserData() == NULL) 
+// 			if (symbol->GetUserData() == NULL) 
 // 			{
 // 				SymbolExt* new_info = new SymbolExt;
 // 				new_info->size = symbol_info->size;
@@ -223,7 +223,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 // 				new_info->wall_type = symbol_info->wall_type;
 // 				new_info->level = pItem->level;
 // 				new_info->building = pItem->building;
-// 				symbol->setUserData(new_info);
+// 				symbol->SetUserData(new_info);
 // 			}
 // 			sprite->setSymbol(symbol);
 // 		}
@@ -243,7 +243,7 @@ d2d::Vector StagePanel::FixSpriteLocation(const d2d::Vector& pos) const
 
 void StagePanel::ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const
 {
-	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+	SymbolExt* info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
 	if (!info) {
 		return;
 	}

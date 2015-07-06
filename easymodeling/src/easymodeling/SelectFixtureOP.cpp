@@ -31,7 +31,7 @@ bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 	if (sprite)
 	{
 		m_selected = NULL;
-		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->getUserData());
+		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
 		for (size_t i = 0, n = body->fixtures.size(); i < n; ++i)
 		{
 			if (body->fixtures[i]->isContain(pos))
@@ -72,7 +72,7 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 		m_selected = NULL;
 		for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		{
-			libmodeling::Body* body = static_cast<libmodeling::Body*>(sprites[i]->getUserData());
+			libmodeling::Body* body = static_cast<libmodeling::Body*>(sprites[i]->GetUserData());
 			for (size_t j = 0, m = body->fixtures.size(); j < m; ++j)
 			{
 				if (body->fixtures[j]->isIntersect(rect))
@@ -104,7 +104,7 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 	d2d::ISprite* sprite = static_cast<StagePanel*>(m_stage)->querySpriteByPos(pos);
 	if (sprite)
 	{
-		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->getUserData());
+		libmodeling::Body* body = static_cast<libmodeling::Body*>(sprite->GetUserData());
 		if (body)
 		{
 			for (size_t i = 0, n = body->fixtures.size(); i < n; ++i)

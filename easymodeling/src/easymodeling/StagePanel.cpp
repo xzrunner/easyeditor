@@ -67,7 +67,7 @@ namespace emodeling
 		}
 
 		body->sprite = sprite;
-		sprite->setUserData(body);
+		sprite->SetUserData(body);
 		m_bodies.push_back(body);
 	}
 
@@ -209,7 +209,7 @@ namespace emodeling
 		Visit(d2d::Object* object, bool& bFetchNext)
 	{
 		d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
-		libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->getUserData());
+		libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->GetUserData());
 		if (data->isContain(m_pos))
 		{
 			*m_pResult = sprite;
@@ -235,7 +235,7 @@ namespace emodeling
 		Visit(d2d::Object* object, bool& bFetchNext)
 	{
 		d2d::ISprite* sprite = static_cast<d2d::ISprite*>(object);
-		libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->getUserData());
+		libmodeling::Body* data = static_cast<libmodeling::Body*>(sprite->GetUserData());
 		if (data->isIntersect(m_rect))
 			m_result.push_back(sprite);
 		bFetchNext = true;

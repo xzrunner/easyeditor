@@ -69,7 +69,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 	//// old
 	//stage->TransGridPosToCoords(row, col, pos);
  	// new
- 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+ 	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
  	int size = symbol_info->building->size;
  	if (size % 2) {
  		int offset = (size - 1) / 2;
@@ -85,7 +85,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 	if (!value["level"].isNull()) {
 		SpriteExt* spr_info = new SpriteExt;
 		spr_info->level = value["level"].asInt();
-		sprite->setUserData(spr_info);
+		sprite->SetUserData(spr_info);
 	}
 	int level = value["row"].asInt();
 
@@ -107,7 +107,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 	int row, col;
 	stage->TransCoordsToGridPosNew(sprite->getPosition(), row, col);
 
-	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().getUserData());
+	SymbolExt* symbol_info = static_cast<SymbolExt*>(sprite->getSymbol().GetUserData());
 	int size = symbol_info->building->size;
 	if (size % 2) {
 		int offset = (size - 1) / 2;
@@ -125,7 +125,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 
 	value["name"] = symbol_info->building->name;
 	
-	SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->getUserData());	
+	SpriteExt* spr_info = static_cast<SpriteExt*>(sprite->GetUserData());	
 	value["level"] = spr_info->level;
 
 	return value;
@@ -133,7 +133,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite, StagePanel* stage,
 
 void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 {
-	if (symbol->getUserData()) {
+	if (symbol->GetUserData()) {
 		return;
 	}
 
@@ -148,11 +148,11 @@ void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 
 	try {
 		d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(wall_path);
-		if (!wall_symbol || !wall_symbol->getUserData()) {
+		if (!wall_symbol || !wall_symbol->GetUserData()) {
 			return;
 		}
 
-		SymbolExt* info = static_cast<SymbolExt*>(wall_symbol->getUserData());
+		SymbolExt* info = static_cast<SymbolExt*>(wall_symbol->GetUserData());
 
 		SymbolExt* new_info = new SymbolExt;
 		new_info->size = info->size;
@@ -161,7 +161,7 @@ void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 		new_info->level = info->level;
 		new_info->building = info->building;
 
-		symbol->setUserData(new_info);
+		symbol->SetUserData(new_info);
 	} catch (d2d::Exception& e) {
 		;
 	}

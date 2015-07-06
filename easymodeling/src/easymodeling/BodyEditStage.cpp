@@ -14,9 +14,9 @@ void BodyEditStage::removeShape(d2d::IShape* shape)
 {
 	libshape::StagePanel::removeShape(shape);
 
-// 	if (m_sprite && m_sprite->getUserData())
+// 	if (m_sprite && m_sprite->GetUserData())
 // 	{
-// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->getUserData());
+// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->GetUserData());
 // 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 // 		{
 // 			if (bd->fixtures[i]->shape == shape)
@@ -33,9 +33,9 @@ void BodyEditStage::insertShape(d2d::IShape* shape)
 {
 	libshape::StagePanel::insertShape(shape);
 
-// 	if (m_sprite && m_sprite->getUserData())
+// 	if (m_sprite && m_sprite->GetUserData())
 // 	{
-// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->getUserData());
+// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->GetUserData());
 // 		libmodeling::Fixture* fixture = new libmodeling::Fixture;
 // 		fixture->body = bd;
 // 		shape->Retain();
@@ -48,9 +48,9 @@ void BodyEditStage::loadShapes()
 {
 // 	libshape::StagePanel::loadShapes();
 // 
-// 	if (m_sprite && m_sprite->getUserData())
+// 	if (m_sprite && m_sprite->GetUserData())
 // 	{
-// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->getUserData());
+// 		libmodeling::Body* bd = static_cast<libmodeling::Body*>(m_sprite->GetUserData());
 // 		m_shapes.reserve(bd->fixtures.size());
 // 		for (size_t i = 0, n = bd->fixtures.size(); i < n; ++i)
 // 		{
