@@ -130,7 +130,7 @@ void FontBlankDialog::storeSymbol()
 {
 	if (!m_symbol) return;
 
-	wxString filepath = m_symbol->GetFilepath();
+	std::string filepath = m_symbol->GetFilepath();
 	if (filepath.empty())
 	{
 		std::string ext = FileNameParser::getFileTag(FileNameParser::e_fontblank);
@@ -139,7 +139,7 @@ void FontBlankDialog::storeSymbol()
 		std::string name = m_symbol->name;
 		if (name.empty()) 
 		{
-			name = m_symbol->getName();
+			name = m_symbol->GetName();
 		}
 
 		wxString dir = FilenameTools::getFileDir(m_symbol->GetFilepath());
@@ -159,7 +159,7 @@ void FontBlankDialog::storeSymbol()
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();

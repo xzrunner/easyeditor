@@ -10,8 +10,8 @@ void FileIO::load(const char* filename)
 {
 	Context* context = Context::Instance();
 
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	d2d::SymbolMgr::Instance()->Clear();
+	d2d::BitmapMgr::Instance()->Clear();
 
 	wxString ext = wxT("_") + wxString(FILE_TAG) + wxT(".json");
 	if (wxString(filename).Contains(ext)) {
@@ -44,7 +44,7 @@ void FileIO::loadFromEasypackerFile(const char* filename)
 	for (size_t i = 0, n = adapter.textures.size(); i < n; ++i)
 	{
 		d2d::TexPackerAdapter::Texture tex = adapter.textures[i];
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(tex.filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(tex.filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		symbol->Release();
 
@@ -88,7 +88,7 @@ void FileIO::loadFromTexPackerFile(const char* filename)
 		if (!d2d::FilenameTools::isExist(filepath))
 			filepath = d2d::FilenameTools::getAbsolutePath(dir, filepath);
 
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		symbol->Release();
 

@@ -78,7 +78,7 @@ void Particle::LoadFromFile(const Json::Value& val)
 	m_rotate = val["rotate"].asDouble();
 	m_angle_old = m_angle = val["angle"].asDouble();
 
-	m_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(val["symbol"].asString());
+	m_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(val["symbol"].asString());
 	m_start_scale = val["start_scale"].asDouble();
 	m_end_scale = val["end_scale"].asDouble();
 }

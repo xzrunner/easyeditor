@@ -27,7 +27,7 @@ void LibraryFontPage::OnAddPress(wxCommandEvent& event)
 	if (dlg.ShowModal() == wxID_OK)
 	{
 		try {
-			ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(dlg.GetPath());
+			ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(dlg.GetPath().ToStdString());
 			m_list->insert(symbol);
 			symbol->Release();
 		} catch (Exception& e) {

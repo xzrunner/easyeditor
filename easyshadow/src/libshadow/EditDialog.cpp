@@ -60,7 +60,7 @@ void EditDialog::OnClose(wxCloseEvent& event)
 		int val = dlg.ShowModal();
 		if (val == wxID_OK)
 		{
-			const wxString& filepath = m_symbol->GetFilepath();
+			const std::string& filepath = m_symbol->GetFilepath();
 //			FileSaver::Store(filepath, m_symbol);
 			m_symbol->RefreshThumbnail(filepath);
 			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);

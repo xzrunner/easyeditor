@@ -16,7 +16,7 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->clear();
+	d2d::SymbolMgr::Instance()->Clear();
 	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }

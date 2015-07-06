@@ -48,7 +48,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 
 			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
 			eimage::RegularRectCut cut(*image);

@@ -27,9 +27,9 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		dlg.GetPaths(filenames);
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
-			const wxString& filename = filenames[i];
+			std::string filename = filenames[i].ToStdString();
 			try {
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 				symbol->RefreshThumbnail(filename);
 				m_list->insert(symbol);
 				symbol->Release();

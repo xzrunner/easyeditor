@@ -46,14 +46,14 @@ OceanMesh* FileIO::LoadOceanMesh(const std::string& dir, const Json::Value& valu
 	libshape::PolygonShape* shape = new libshape::PolygonShape(bounding);
 
 	std::string tex0_path = dir + "\\" + value["tex0"].asString();
-	d2d::ISymbol* tex0 = d2d::SymbolMgr::Instance()->fetchSymbol(tex0_path);
+	d2d::ISymbol* tex0 = d2d::SymbolMgr::Instance()->FetchSymbol(tex0_path);
 	shape->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(tex0));
 
 	OceanMesh* ocean = new OceanMesh(shape, static_cast<d2d::ImageSymbol*>(tex0));
 
 	if (!value["tex1"].isNull()) {
 		std::string tex1_path = dir + "\\" + value["tex1"].asString();
-		d2d::ISymbol* tex1 = d2d::SymbolMgr::Instance()->fetchSymbol(tex1_path);
+		d2d::ISymbol* tex1 = d2d::SymbolMgr::Instance()->FetchSymbol(tex1_path);
 		ocean->SetImage1(static_cast<d2d::ImageSymbol*>(tex1));
 	}
 

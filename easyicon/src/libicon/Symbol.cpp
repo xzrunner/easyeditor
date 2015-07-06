@@ -75,7 +75,7 @@ void Symbol::SetImage(d2d::Image* img)
 
 void Symbol::LoadResources()
 {
-	Icon* icon = FileIO::LoadFromFile(m_filepath);
+	Icon* icon = FileIO::LoadFromFile(m_filepath.c_str());
 	SetIcon(icon);
 	icon->Release();
 }

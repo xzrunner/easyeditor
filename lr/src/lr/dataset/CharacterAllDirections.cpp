@@ -18,7 +18,7 @@ void CharacterAllDirections::BuildSymbolDirections(const CharacterFileName& name
 		val.push_back(char('1' + i));
 		std::string filepath = name.GetFilepathSwitchField(CharacterFileName::FT_DIRECTION, val);
 		assert(d2d::FilenameTools::isExist(filepath));
-		dirs.symbols[i] = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		dirs.symbols[i] = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	}
 	m_map2symbols.insert(std::make_pair(key, dirs));
 }

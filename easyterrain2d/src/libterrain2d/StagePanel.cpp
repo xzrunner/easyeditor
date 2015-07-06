@@ -76,7 +76,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 	Json::Value bg_val = value["bg"][i++];
 	while (!bg_val.isNull()) {
 		std::string filepath = dir + "\\" + bg_val["filepath"].asString();
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* bg = d2d::SpriteFactory::Instance()->create(symbol);
 		bg->load(bg_val);
 		insertSprite(bg);

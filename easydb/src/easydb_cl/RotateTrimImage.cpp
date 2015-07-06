@@ -71,7 +71,7 @@ void RotateTrimImage::Trigger(const std::string& dir)
 
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 
 			d2d::Image* image = static_cast<d2d::ImageSymbol*>(symbol)->getImage();
 			int width, height;

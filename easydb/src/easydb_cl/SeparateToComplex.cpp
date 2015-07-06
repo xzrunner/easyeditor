@@ -178,7 +178,7 @@ void SeparateToComplex::FixPosWithShape(d2d::Vector& pos, const std::string& fil
 		return;
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(shape_path);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(shape_path);
 	libshape::Symbol* shape_symbol = dynamic_cast<libshape::Symbol*>(symbol);
 	if (!shape_symbol) {
 		throw d2d::Exception("shape file err:%s", filepath);

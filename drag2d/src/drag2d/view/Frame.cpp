@@ -15,6 +15,7 @@
 #include "render/DynamicTexAndFont.h"
 
 #include <wx/filename.h>
+#include <fstream>
 
 namespace d2d
 {
@@ -116,12 +117,12 @@ void Frame::RefreshWithCurrFile()
 
 void Frame::saveTmpInfo()
 {
-	wxString filename = wxFileName::GetCwd() + "\\.easy";
+	std::string filename = wxFileName::GetCwd() + "\\.easy";
 	Json::Value value;
 	m_recent.save(value);
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filename.fn_str());
+	std::ofstream fout(filename.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
@@ -129,13 +130,13 @@ void Frame::saveTmpInfo()
 
 void Frame::loadTmpInfo()
 {
-	wxString filename = wxFileName::GetCwd() + "\\.easy";
+	std::string filename = wxFileName::GetCwd() + "\\.easy";
 	if (wxFileName::FileExists(filename))
 	{
 		Json::Value value;
 		Json::Reader reader;
 		std::locale::global(std::locale(""));
-		std::ifstream fin(filename.fn_str());
+		std::ifstream fin(filename.c_str());
 		std::locale::global(std::locale("C"));
 		reader.parse(fin, value);
 		fin.close();

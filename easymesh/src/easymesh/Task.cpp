@@ -17,15 +17,15 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	d2d::SymbolMgr::Instance()->Clear();
+	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
 void Task::Load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_mesh)) {
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		Symbol* msymbol = static_cast<Symbol*>(symbol);
 		m_stage->SetSymbol(msymbol);
 		

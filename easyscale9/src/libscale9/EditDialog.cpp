@@ -47,8 +47,8 @@ namespace escale9
 		int val = dlg.ShowModal();
 		if (val == wxID_OK)
 		{
-			const wxString& filepath = m_symbol->GetFilepath();
-			FileSaver::store(filepath, *m_symbol);
+			const std::string& filepath = m_symbol->GetFilepath();
+			FileSaver::store(filepath.c_str(), *m_symbol);
 			m_symbol->RefreshThumbnail(filepath);
 			d2d::SpriteFactory::Instance()->updateBoundings(*m_symbol);
 		}

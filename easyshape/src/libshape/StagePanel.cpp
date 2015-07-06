@@ -208,8 +208,8 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 		return;
 	}
 
-	wxString filename = filenames[0];
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+	std::string filename = filenames[0].ToStdString();
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 	symbol->RefreshThumbnail(filename);
 	bool success = m_library->AddSymbol(symbol);
 	if (success) {

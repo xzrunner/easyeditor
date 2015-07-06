@@ -184,7 +184,7 @@ void CheckerBoard::ResetWall()
 			*info = *old;
 			info->wall_type = wall_type;
 			
-			d2d::ISymbol* new_s = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			d2d::ISymbol* new_s = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			new_s->setUserData(info);
 			m_grid[i][j]->setSymbol(new_s);
 		}

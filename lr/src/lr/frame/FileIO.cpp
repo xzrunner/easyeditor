@@ -11,8 +11,8 @@ namespace lr
 void FileIO::Load(const char* filename, LibraryPanel* library, 
 				  StagePanel* stage, d2d::GroupTreePanel* grouptree)
 {
-// 	d2d::SymbolMgr::Instance()->clear();
-// 	d2d::BitmapMgr::Instance()->clear();
+// 	d2d::SymbolMgr::Instance()->Clear();
+// 	d2d::BitmapMgr::Instance()->Clear();
 
 	Json::Value value;
 	Json::Reader reader;

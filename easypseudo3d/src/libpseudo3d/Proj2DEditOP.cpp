@@ -52,7 +52,7 @@ bool Proj2DEditOP::onDraw() const
 
 void Proj2DEditOP::InitPlayer()
 {
-	m_player = d2d::SymbolMgr::Instance()->fetchSymbol("mmzb/1047_2.png");
+	m_player = d2d::SymbolMgr::Instance()->FetchSymbol("mmzb/1047_2.png");
 }
 
 }

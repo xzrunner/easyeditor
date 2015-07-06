@@ -23,7 +23,7 @@ void RectCutLoader::LoadOnlyJson(const wxString& pack_file, const wxString& img_
 	for (int i = 0, n = pictures.size(); i < n; ++i)
 	{
 		const Picture& s = pictures[i];
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(s.filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(s.filepath.ToStdString());
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
 		d2d::Vector pos;

@@ -35,8 +35,8 @@ namespace d2d
 			for (size_t i = 0, n = filenames.size(); i < n; ++i)
 			{
 				try {
-					const wxString& filepath = filenames[i];
-					ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
+					std::string filepath = filenames[i].ToStdString();
+					ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 					symbol->RefreshThumbnail(filepath);
 					m_list->insert(symbol);
 					symbol->Release();

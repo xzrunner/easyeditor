@@ -30,7 +30,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 			if (ext == "png")
 			{
 				d2d::Snapshoot ss;
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(m_currFilename);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(m_currFilename);
 				ss.OutputToImageFile(symbol, filename.ToStdString());
 				symbol->Release();
 			}
@@ -56,7 +56,7 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	{
 		wxString filename = dlg.GetPath();
 
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		StagePanel* stage = static_cast<Task*>(m_task)->getStagePanel();
 		stage->SetBackground(sprite);

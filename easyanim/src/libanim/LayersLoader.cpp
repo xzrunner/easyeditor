@@ -24,8 +24,8 @@ void LayersLoader::LoadLayers(const Json::Value& value,
 			int k = 0;
 			Json::Value spr_val = frame_val["actor"][k++];
 			while (!spr_val.isNull()) {
-				wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (!symbol) {
 					std::string filepath = spr_val["filepath"].asString();
 					throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 

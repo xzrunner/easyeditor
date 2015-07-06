@@ -83,7 +83,7 @@ void StageCanvas::LoadSymbolToLib(e3d::ISurface* surface, const char* name)
 
 	libsketch::Symbol* symbol = new libsketch::Symbol();
 	symbol->SetAABB(aabb);
-	symbol->setName(name);
+	symbol->SetName(name);
 	symbol->SetModel(model);
 
 	wxString filepath = FILE_TAG;

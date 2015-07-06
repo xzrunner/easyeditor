@@ -29,7 +29,7 @@ void StagePanel::setImage(const std::string& filepath)
 		m_image->Release();
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (symbol) {
 		setImage(symbol);
 		symbol->Release();
@@ -96,7 +96,7 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 	}
 
 	wxString filename = filenames[0];
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 	m_stage->setImage(symbol);
 	symbol->Release();
 }

@@ -723,7 +723,7 @@ int CocoPacker::ParserIcon(const eicon::Sprite* sprite)
 void CocoPacker::ParserIcon(const eicon::Symbol* symbol, float process, int id)
 {
 	const d2d::Image* img = symbol->GetIcon()->GetImage();
-	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(img->GetFilepath());
+	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+symbol->GetFilepath()+"\""+" not in the texpacker file!";
@@ -1058,7 +1058,7 @@ void CocoPacker::CalSrcFromUVFixed(d2d::Vector src[4], TPParser::Picture* pictur
 
 int CocoPacker::ParserMesh(const emesh::Sprite* sprite)
 {
-	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(sprite->getSymbol().getImage()->GetFilepath());
+	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(sprite->getSymbol().getImage()->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the texpacker file!";
@@ -1269,7 +1269,7 @@ int CocoPacker::ParserTerrain2D(const eterrain2d::Sprite* sprite)
 	assert(oceans.size() == 1);
 	eterrain2d::OceanMesh* ocean = oceans[0];
 	const d2d::ImageSymbol* img = ocean->GetImage0();
-	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(img->GetFilepath());
+	d2d::ISymbol* img_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(img->GetFilepath());
 	TPParser::Picture* picture = m_parser.FindPicture(img_symbol);
 	if (!picture) {
 		std::string str = "\""+sprite->getSymbol().GetFilepath()+"\""+" not in the texpacker file!";

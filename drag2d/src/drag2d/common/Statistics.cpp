@@ -5,13 +5,15 @@
 #include "dataset/Font.h"
 #include "dataset/Image.h"
 
+#include <wx/msgdlg.h>
+
 namespace d2d
 {
 
 void Statistics::PrintRes()
 {
 	wxString msg;
-	msg += "Symbol: " + wxString::FromDouble(SymbolMgr::Instance()->size()) + "\n";
+	msg += "Symbol: " + wxString::FromDouble(SymbolMgr::Instance()->Size()) + "\n";
 	msg += "Bitmap: " + wxString::FromDouble(BitmapMgr::Instance()->Size()) + "\n";
 	msg += "Font: " + wxString::FromDouble(FontMgr::Instance()->Size()) + "\n";
 	msg += "Image: " + wxString::FromDouble(ImageMgr::Instance()->Size()) + "\n";

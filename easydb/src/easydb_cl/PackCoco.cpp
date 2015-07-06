@@ -156,7 +156,7 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const wxString& config_di
 	GetAllDataFiles(src_folder_path, data_filter, files);
 	std::vector<const d2d::ISymbol*> symbols;
  	for (int i = 0, n = files.size(); i < n; ++i) {
- 		symbols.push_back(d2d::SymbolMgr::Instance()->fetchSymbol(files[i]));
+ 		symbols.push_back(d2d::SymbolMgr::Instance()->FetchSymbol(files[i]));
  	}
 
 	libcoco::TextureMgr tex_mgr;

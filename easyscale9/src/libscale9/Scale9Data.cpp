@@ -376,8 +376,8 @@ Scale9Type Scale9Data::CheckType(d2d::ISprite* sprites[3][3])
 void Scale9Data::InitSprite(const Json::Value& spr_val, d2d::ISprite** pSprite, 
 							const std::string& dir)
 {
-	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	if (!symbol) {
 		std::string filepath = spr_val["filepath"].asString();
 		throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 

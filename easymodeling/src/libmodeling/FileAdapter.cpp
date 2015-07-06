@@ -44,7 +44,7 @@ Body* FileApapter::j2bBody(const Json::Value& bodyValue, const std::string& dlg)
 	std::string filepath = bodyValue["filepath"].asString();
 	filepath = d2d::FilenameTools::getAbsolutePath(dlg, filepath);
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	symbol->Release();
 

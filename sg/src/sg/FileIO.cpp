@@ -8,8 +8,8 @@ namespace sg
 
 void FileIO::load(const char* filename, StagePanel* stage)
 {
-// 	d2d::SymbolMgr::Instance()->clear();
-// 	d2d::BitmapMgr::Instance()->clear();
+// 	d2d::SymbolMgr::Instance()->Clear();
+// 	d2d::BitmapMgr::Instance()->Clear();
 
 	Json::Value value;
 	Json::Reader reader;
@@ -58,7 +58,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 		col = value["col"].asInt();
 
 	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	SetSymbolUserData(symbol);
 
 	d2d::Vector pos;
@@ -147,7 +147,7 @@ void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 	wxString wall_path = filepath.substr(0, pos) + ".png";
 
 	try {
-		d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(wall_path);
+		d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(wall_path);
 		if (!wall_symbol || !wall_symbol->getUserData()) {
 			return;
 		}

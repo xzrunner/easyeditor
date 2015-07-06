@@ -29,8 +29,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	d2d::SymbolMgr::Instance()->Clear();
+	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -70,7 +70,7 @@ bool Task::IsDirty() const
 
 void Task::Clear()
 {
-	//	d2d::SymbolMgr::Instance()->clear();
+	//	d2d::SymbolMgr::Instance()->Clear();
 
 	m_controller.Clear();
 

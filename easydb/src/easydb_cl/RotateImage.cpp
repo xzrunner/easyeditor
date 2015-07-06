@@ -59,7 +59,7 @@ void RotateImage::Trigger(const std::string& src_dir, const std::string& dst_dir
 		wxString filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 			d2d::Rect r = symbol->GetSize();
 			for (int deg = 10; deg <= 90; deg += 10) {

@@ -21,22 +21,22 @@ void Projection2DScene::Load(const char* filename)
 	d2d::SymbolMgr* sym_mgr = d2d::SymbolMgr::Instance();
 	d2d::SpriteFactory* spr_fac = d2d::SpriteFactory::Instance();
 
-	m_buildings.push_back(sym_mgr->fetchSymbol("mmzb/1002_3_lv5.png"));
+	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/1002_3_lv5.png"));
 	m_positions.push_back(d2d::Vector(0, 0));
 
-	m_buildings.push_back(sym_mgr->fetchSymbol("mmzb/1005_3_lv12.png"));
+	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/1005_3_lv12.png"));
 	m_positions.push_back(d2d::Vector(DIS, 0));
 
-	m_buildings.push_back(sym_mgr->fetchSymbol("mmzb/b0013_base.png"));
+	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0013_base.png"));
 	m_positions.push_back(d2d::Vector(DIS * 2, 0));
 
-	m_buildings.push_back(sym_mgr->fetchSymbol("mmzb/b0016_base.png"));
+	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0016_base.png"));
 	m_positions.push_back(d2d::Vector(0, DIS));
 
-	m_buildings.push_back(sym_mgr->fetchSymbol("mmzb/b0017_base.png"));
+	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0017_base.png"));
 	m_positions.push_back(d2d::Vector(DIS, DIS));
 
-	m_buildings.push_back(sym_mgr->fetchSymbol("mmzb/b0021_base.png"));
+	m_buildings.push_back(sym_mgr->FetchSymbol("mmzb/b0021_base.png"));
 	m_positions.push_back(d2d::Vector(DIS * 2, DIS));
 
 	InitCamera();

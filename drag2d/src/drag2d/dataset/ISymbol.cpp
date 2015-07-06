@@ -8,7 +8,7 @@ namespace d2d
 
 ISymbol::~ISymbol()
 {
-	SymbolMgr::Instance()->remove(this);
+	SymbolMgr::Instance()->Remove(this);
 }
 
 void ISymbol::ClearUserData(bool deletePtr)
@@ -21,7 +21,7 @@ bool ISymbol::LoadFromFile(const std::string& filepath)
 	m_filepath = FilenameTools::getExistFilepath(filepath);
 	if (m_filepath == wxEmptyString)
 	{
-		m_name = wxT("error");
+		m_name = "error";
 		m_bitmap = NULL;
 		return false;
 	}

@@ -107,7 +107,7 @@ void ILibraryPage::LoadFromConfig(const std::string& key)
 	for (int i = 0, n = filenames.size(); i < n; ++i)
 	{
 		std::string filename = filenames[i];
-		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filename);
+		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filename);
 		m_list->insert(symbol);
 		symbol->Release();
 	}

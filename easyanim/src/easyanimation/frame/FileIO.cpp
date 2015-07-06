@@ -168,7 +168,7 @@ void FileIO::StoreAsGif(const wxString& src, const wxString& dst)
 	}
 
 	d2d::Snapshoot ss;
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(src);
 	libanim::Symbol* anim = static_cast<libanim::Symbol*>(symbol);
 
 	int max_frame = anim->getMaxFrameIndex();
@@ -198,7 +198,7 @@ void FileIO::StoreAsPng(const wxString& src, const wxString& dst)
 	}
 
 	d2d::Snapshoot ss;
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(src);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(src);
 	ss.OutputToImageFile(symbol, dst.ToStdString());
 	symbol->Release();
 }
@@ -283,7 +283,7 @@ d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const wxString& d
 		break;
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, actorValue);
 //	symbol->refresh();
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
@@ -420,7 +420,7 @@ d2d::ISprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 {
 	std::string name = actorNode->first_attribute("libraryItemName")->value();
 	std::string filepath = mapNamePath.find(name)->second;
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 //	symbol->refresh();
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	symbol->Release();

@@ -1,6 +1,5 @@
 #include "FileNameParser.h"
-
-#include "common/tools.h"
+#include "StringTools.h"
 
 namespace d2d
 {

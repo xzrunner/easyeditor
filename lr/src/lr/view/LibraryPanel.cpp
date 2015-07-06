@@ -39,7 +39,7 @@ void LibraryPanel::LoadFromFile(const Json::Value& value, const std::string& dir
 			std::string item_path = item_val.asString();
 			std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, item_path);
 			try {
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				symbol->RefreshThumbnail(symbol->GetFilepath());
 				list->insert(symbol);
 				symbol->Release();

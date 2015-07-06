@@ -26,7 +26,7 @@ Icon::~Icon()
 void Icon::ReloadTexture() const
 {
 	if (m_img) {
-		m_img->reload();
+		m_img->Reload();
 	}
 }
 
@@ -46,7 +46,7 @@ void Icon::Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const
 	}
 
 	d2d::Vector vertices[4];
-	d2d::Rect clip_r = m_img->getRegion();
+	d2d::Rect clip_r = m_img->GetClippedRegion();
 	for (int i = 0; i < 4; ++i)
 	{
 		float x = clip_r.xMin + r[i].x * clip_r.xLength();
@@ -54,7 +54,7 @@ void Icon::Draw(const d2d::Matrix& mt, const d2d::Vector r[4]) const
 		vertices[i] = d2d::Math::transVector(d2d::Vector(x, y), mt);
 	}
 
-	int texid = m_img->textureID();
+	int texid = m_img->GetTexID();
 
 	d2d::Vector texcoords[4];
 	float ori_w = m_img->GetOriginWidth(),

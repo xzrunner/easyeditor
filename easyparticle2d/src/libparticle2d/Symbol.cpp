@@ -104,8 +104,8 @@ void Symbol::LoadResources()
 	m_ps->SetValue(PS_COS_AMPLITUDE, d2d::UICallback::Data(value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_CENTER].asInt(), value[ITEM_COS][ITEM_COS_AMPLITUDE][ITEM_ATTR_OFFSET].asInt()));
 
 	wxString dir = d2d::FilenameTools::getFileDir(m_filepath) + "\\";
-	wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["symbol_path"].asString());
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["symbol_path"].asString());
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 	m_ps->SetSymbol(symbol);
 	symbol->Release();
 }

@@ -160,8 +160,8 @@ void SymbolDependanceSorter::fetch(const std::vector<const d2d::ISymbol*>& symbo
 		}
 		else if (const eicon::Symbol* icon = dynamic_cast<const eicon::Symbol*>(symbol))
 		{
-			wxString filepath = icon->GetIcon()->GetImage()->GetFilepath();
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			const std::string& filepath = icon->GetIcon()->GetImage()->GetFilepath();
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			m_unique.insert(symbol);
 			m_unique.insert(icon);
 		}
@@ -273,7 +273,7 @@ void SymbolDependanceSorter::sort()
 			else if (emesh::Symbol* mesh = dynamic_cast<emesh::Symbol*>(symbol))
 			{
  				std::string path = mesh->GetImagePath();
- 				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+ 				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 				std::vector<const d2d::ISymbol*>::iterator itr_find 
 					= std::find(m_result.begin(), m_result.end(), image);
 				if (itr_find == m_result.end()) {
@@ -291,7 +291,7 @@ void SymbolDependanceSorter::sort()
 				const d2d::ImageSymbol* img = ocean->GetImage0();
 				std::string path = img->GetFilepath();
 
-				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+				d2d::ISymbol* image = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 				std::vector<const d2d::ISymbol*>::iterator itr_find 
 					= std::find(m_result.begin(), m_result.end(), image);
 				if (itr_find == m_result.end()) {
@@ -325,8 +325,8 @@ void SymbolDependanceSorter::sort()
 			}
 			else if (eicon::Symbol* icon = dynamic_cast<eicon::Symbol*>(symbol)) 
 			{
-				wxString filepath = icon->GetIcon()->GetImage()->GetFilepath();
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+				const std::string& filepath = icon->GetIcon()->GetImage()->GetFilepath();
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 				if (IsSymbolPrepared(symbol)) {
  					m_result.push_back(icon);
  					m_unique.erase(itr);

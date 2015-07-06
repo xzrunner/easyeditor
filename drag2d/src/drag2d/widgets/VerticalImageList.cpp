@@ -104,7 +104,7 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 
 	int y = rect.y + SPACE_UP;
 
-	const Bitmap* bmp = m_items[n]->getBitmap();
+	const Bitmap* bmp = m_items[n]->GetBitmap();
 	if (bmp)
 	{
 		const wxBitmap* wxBmp = bmp->GetBitmap();
@@ -115,7 +115,7 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 			dc.DrawBitmap(*wxBmp, x, y);
 
 			// info
-			wxString info = m_items[n]->getInfo();
+			wxString info = m_items[n]->GetInfo();
 			dc.SetFont(wxFont(18, wxDEFAULT, wxNORMAL, wxNORMAL));
 			//dc.SetTextForeground(wxColour(0xFF, 0x20, 0xFF));
 			wxSize size = dc.GetTextExtent(info);
@@ -127,7 +127,7 @@ void VerticalImageList::OnDrawItem(wxDC& dc, const wxRect& rect, size_t n) const
 	}
 
 	// name
-	wxString name = m_items[n]->getName();
+	wxString name = m_items[n]->GetName();
 	dc.SetFont(wxFont(is_selected ? 12 : 10, wxDEFAULT, wxNORMAL, wxNORMAL));
 	wxSize size = dc.GetTextExtent(name);
 	dc.DrawText(name, rect.x + rect.width * 0.5f - size.GetWidth() * 0.5f, y + SPACE_UP);
@@ -148,7 +148,7 @@ void VerticalImageList::OnDrawSeparator(wxDC& dc, wxRect& rect, size_t n) const
 wxCoord VerticalImageList::OnMeasureItem(size_t n) const
 {
 	int size = SPACE_UP + SPACE_DOWN;
-	const Bitmap* bmp = m_items[n]->getBitmap();
+	const Bitmap* bmp = m_items[n]->GetBitmap();
 	if (bmp) {
 		const wxBitmap* wxBmp = bmp->GetBitmap();
 		if (wxBmp) {

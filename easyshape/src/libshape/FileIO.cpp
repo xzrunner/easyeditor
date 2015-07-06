@@ -59,8 +59,8 @@ void FileIO::LoadFromFile(const char* filename,
 	}
 
 	if (!value["bg_symbol"].isNull()) {
-		wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["bg_symbol"].asString());
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+		std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["bg_symbol"].asString());
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 		d2d::obj_assign((d2d::Object*&)bg, symbol);
 		symbol->Release();
 	}

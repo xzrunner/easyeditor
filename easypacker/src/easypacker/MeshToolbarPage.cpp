@@ -115,7 +115,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 
 		while (!item_val.isNull()) {
 			std::string filepath = item_val["filepath"].asString();
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 
 			d2d::Vector pos;

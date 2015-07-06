@@ -48,7 +48,7 @@ void ChangedRectIcon::GetRegion(float process, d2d::Rect& region) const
 	}
 
  	d2d::Rect curr = GetCurrRect(process);
-	d2d::Rect clip_r = m_img->getRegion();
+	d2d::Rect clip_r = m_img->GetClippedRegion();
 	region.xMin = clip_r.xMin + curr.xMin * clip_r.xLength();
 	region.xMax = clip_r.xMin + curr.xMax * clip_r.xLength();
 	region.yMin = clip_r.yMin + curr.yMin * clip_r.yLength();

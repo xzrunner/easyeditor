@@ -113,8 +113,8 @@ void Frame::onSetBackground(wxCommandEvent& event)
 		wxEmptyString, formatFilter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
- 		wxString filename = dlg.GetPath();
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+ 		std::string filename = dlg.GetPath().ToStdString();
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
   		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
   		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();

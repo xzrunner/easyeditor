@@ -4,7 +4,8 @@
 #include "render/ShaderMgr.h"
 
 #include <algorithm>
-#include <gl/GL.h>
+//#include <gl/GL.h>
+#include <gl/glew.h>
 
 namespace d2d
 {
@@ -38,7 +39,7 @@ void DynamicTexture::Begin()
 void DynamicTexture::Insert(Image* img)
 {
 	// find
-	const wxString& filepath = img->GetFilepath();
+	const std::string& filepath = img->GetFilepath();
 	if (m_map_images.find(filepath) != m_map_images.end()) {
 		return;
 	}
@@ -87,8 +88,8 @@ void DynamicTexture::End()
 
 void DynamicTexture::Remove(Image* img)
 {
-	const wxString& filepath = img->GetFilepath();
-	std::map<wxString, TPNode*>::const_iterator itr 
+	const std::string& filepath = img->GetFilepath();
+	std::map<std::string, TPNode*>::const_iterator itr 
 		= m_map_images.find(filepath);
 	if (itr != m_map_images.end()) {
 		itr->second->Clear();
@@ -98,8 +99,8 @@ void DynamicTexture::Remove(Image* img)
 
 const TPNode* DynamicTexture::Query(const Image& img) const
 {
-	const wxString& filepath = img.GetFilepath();
-	std::map<wxString, TPNode*>::const_iterator itr 
+	const std::string& filepath = img.GetFilepath();
+	std::map<std::string, TPNode*>::const_iterator itr 
 		= m_map_images.find(filepath);
 	if (itr != m_map_images.end()) {
 		return itr->second;
@@ -115,7 +116,7 @@ void DynamicTexture::ReloadPixels()
 	shader->sprite();
 
 	glViewport(0, 0, m_width, m_height);
-	std::map<wxString, TPNode*>::iterator itr = m_map_images.begin();
+	std::map<std::string, TPNode*>::iterator itr = m_map_images.begin();
 	for ( ; itr != m_map_images.end(); ++itr)
 	{
 		Image* img = ImageMgr::Instance()->GetItem(itr->first);
@@ -132,7 +133,7 @@ void DynamicTexture::ReloadPixels()
 
 void DynamicTexture::InsertImage(const Image* img)
 {
-	const wxString& filepath = img->GetFilepath();
+	const std::string& filepath = img->GetFilepath();
 	if (m_map_images.find(filepath) != m_map_images.end()) {
 		return;
 	}

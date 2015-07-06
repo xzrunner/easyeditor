@@ -34,7 +34,7 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filenames[i]);
+				ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filenames[i].ToStdString());
 				m_list->insert(symbol);
 				symbol->Release();
 			} catch (Exception& e) {

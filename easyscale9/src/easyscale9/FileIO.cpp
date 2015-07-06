@@ -86,7 +86,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 			dir.ToStdString().c_str(), filepath.c_str());
 	}
 
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	d2d::SymbolSearcher::SetSymbolFilepaths(dir, symbol, value);
 	d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 	sprite->load(value);

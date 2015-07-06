@@ -26,7 +26,7 @@ void StageCanvas::initGL()
 	d2d::DynamicStageCanvas::initGL();
 
 	std::vector<d2d::ISymbol*> symbols;
-	d2d::SymbolMgr::Instance()->traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
+	d2d::SymbolMgr::Instance()->Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
 	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
 		symbols[i]->ReloadTexture();
 	}

@@ -63,7 +63,7 @@ ISymbol* LibraryPanel::GetSymbol(int index/* = -1*/) const
 void LibraryPanel::LoadFromSymbolMgr(const SymbolMgr& mgr)
 {
 	std::vector<ISymbol*> symbols;
-	mgr.traverse(FetchAllVisitor<ISymbol>(symbols));
+	mgr.Traverse(FetchAllVisitor<ISymbol>(symbols));
 	for (size_t i = 0, n = symbols.size(); i < n; ++i) {
 		LoadSymbol(symbols[i]);
 	}

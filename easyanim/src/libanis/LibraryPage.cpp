@@ -29,7 +29,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		{
 			try {
 				const wxString filename = filenames[i];
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filename);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 				symbol->RefreshThumbnail(filename);
 				m_list->insert(symbol);
 				symbol->Release();

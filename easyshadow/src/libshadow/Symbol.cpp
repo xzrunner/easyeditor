@@ -57,7 +57,7 @@ d2d::Rect Symbol::GetSize(const d2d::ISprite* sprite) const
 
 void Symbol::LoadResources()
 {
-	FileIO::LoadFromFile(m_filepath, this);
+	FileIO::LoadFromFile(m_filepath.c_str(), this);
 }
 
 }

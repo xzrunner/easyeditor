@@ -95,7 +95,7 @@ void ToolbarPanel::add(const FileAdapter::Child& child)
 	cp->m_startz->SetValue(child.start_z);
 
 	// todo Release symbol
-	pc->symbol = d2d::SymbolMgr::Instance()->fetchSymbol(child.filepath);
+	pc->symbol = d2d::SymbolMgr::Instance()->FetchSymbol(child.filepath);
 	if (!child.bind_filepath.empty()) {
 		pc->bind_ps = FileIO::LoadPS(child.bind_filepath.c_str());
 	}

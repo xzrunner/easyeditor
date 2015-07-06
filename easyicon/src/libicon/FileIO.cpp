@@ -38,7 +38,7 @@ Icon* FileIO::LoadFromFile(const char* filename)
 	fin.close();
 
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
-	wxString path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
+	std::string path = d2d::FilenameTools::getAbsolutePath(dir, value["image"].asString());
 	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(path);
 
 	Icon* icon = IconFactory::CreateIconFromFile(value);

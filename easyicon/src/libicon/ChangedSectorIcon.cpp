@@ -35,7 +35,7 @@ void ChangedSectorIcon::GetRegion(float process, d2d::Rect& region) const
 		return;
 	}
 
-	region = m_img->getRegion();
+	region = m_img->GetClippedRegion();
 }
 
 void ChangedSectorIcon::GetTexcoords4(d2d::Vector tex4[4], float process) const

@@ -10,7 +10,7 @@ namespace ecomplex
 void FileIO::load(const Task* task, const char* filename)
 {
 	ecomplex::Symbol* symbol = task->m_stage->getSymbol();
-	symbol->loadFromFile(filename);
+	symbol->LoadFromFile(filename);
 
 	task->m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)
@@ -35,7 +35,7 @@ void FileIO::store(const Task* task, const char* filename)
 	while (!buffer.empty())
 	{
 		const ecomplex::Symbol* symbol = buffer.front(); buffer.pop();
-		ecomplex::FileSaver::store(symbol->GetFilepath(), symbol);
+		ecomplex::FileSaver::store(symbol->GetFilepath().c_str(), symbol);
 		for (size_t i = 0, n = symbol->m_sprites.size(); i < n ;++i)
 			if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(symbol->m_sprites[i]))
 				buffer.push(&complex->getSymbol());

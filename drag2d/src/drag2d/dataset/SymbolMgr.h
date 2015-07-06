@@ -1,42 +1,45 @@
-#pragma once
+#ifndef _DRAG2D_SYMBOL_MGR_H_
+#define _DRAG2D_SYMBOL_MGR_H_
 
-#include <wx/wx.h>
 #include <map>
 
 namespace d2d
 {
-	class ISymbol;
-	class IVisitor;
 
-	class SymbolMgr
-	{
-	public:
-		static SymbolMgr* Instance();
+class ISymbol;
+class IVisitor;
 
-		ISymbol* fetchSymbol(const wxString& filepath);
+class SymbolMgr
+{
+public:
+	static SymbolMgr* Instance();
 
-		void clear();
+	ISymbol* FetchSymbol(const std::string& filepath);
 
-		void traverse(IVisitor& visitor) const;
+	void Clear();
 
-		size_t size() const {
-			return m_symbols.size();
-		}
+	void Traverse(IVisitor& visitor) const;
 
-	protected:
-		void remove(const ISymbol* symbol);
+	int Size() const {
+		return m_symbols.size();
+	}
 
-	private:
-		SymbolMgr();
-		~SymbolMgr();
+protected:
+	void Remove(const ISymbol* symbol);
 
-	private:
-		static SymbolMgr* m_instance;
+private:
+	SymbolMgr();
+	~SymbolMgr();
 
-		std::map<wxString, ISymbol*> m_symbols;
+private:
+	static SymbolMgr* m_instance;
 
-		friend class ISymbol;
+	std::map<std::string, ISymbol*> m_symbols;
 
-	}; // SymbolMgr
+	friend class ISymbol;
+
+}; // SymbolMgr
+
 }
 
+#endif // _DRAG2D_SYMBOL_MGR_H_

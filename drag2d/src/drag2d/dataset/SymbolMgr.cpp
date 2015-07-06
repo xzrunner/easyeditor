@@ -22,7 +22,7 @@ SymbolMgr::SymbolMgr()
 
 SymbolMgr::~SymbolMgr()
 {
-	clear();
+	Clear();
 }
 
 SymbolMgr* SymbolMgr::Instance()
@@ -34,27 +34,29 @@ SymbolMgr* SymbolMgr::Instance()
 	return m_instance;
 }
 
-ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
+ISymbol* SymbolMgr::FetchSymbol(const std::string& filepath)
 {
-	std::string fixedPath = FilenameTools::getExistFilepath(filepath.Lower());
-	wxFileName filename(fixedPath);
+	std::string fixed_path = filepath;
+	StringTools::ToLower(fixed_path);
+	fixed_path = FilenameTools::getExistFilepath(fixed_path);
+	wxFileName filename(fixed_path);
 	filename.Normalize();
-	fixedPath = filename.GetFullPath().Lower();
+	fixed_path = filename.GetFullPath().Lower();
 
-	std::map<wxString, ISymbol*>::iterator itr = m_symbols.find(fixedPath);
+	std::map<std::string, ISymbol*>::iterator itr = m_symbols.find(fixed_path);
 	if (itr == m_symbols.end())
 	{
-		ISymbol* symbol = SymbolFactory::create(fixedPath);
+		ISymbol* symbol = SymbolFactory::create(fixed_path);
 		if (!symbol) 
 		{
 // 			const char* path = filepath.c_str();
 // 			throw Exception("Create symbol %s fail!", path);
 			return NULL;
 		}
-		bool isLoaded = symbol->LoadFromFile(fixedPath);
+		bool isLoaded = symbol->LoadFromFile(fixed_path);
 		if (isLoaded)
 		{
-			m_symbols.insert(std::make_pair(fixedPath, symbol));
+			m_symbols.insert(std::make_pair(fixed_path, symbol));
 			return symbol;
 		}
 		else
@@ -72,11 +74,11 @@ ISymbol* SymbolMgr::fetchSymbol(const wxString& filepath)
 	}
 }
 
-void SymbolMgr::remove(const ISymbol* symbol)
+void SymbolMgr::Remove(const ISymbol* symbol)
 {
 	std::string lowerpath = symbol->GetFilepath();
 	StringTools::ToLower(lowerpath);
-	std::map<wxString, ISymbol*>::iterator itr = m_symbols.find(lowerpath);
+	std::map<std::string, ISymbol*>::iterator itr = m_symbols.find(lowerpath);
 	// todo: new NullSymbol()
 //	assert(itr != m_symbols.end());
 	if (itr != m_symbols.end()) {
@@ -84,17 +86,17 @@ void SymbolMgr::remove(const ISymbol* symbol)
 	}
 }
 
-void SymbolMgr::clear()
+void SymbolMgr::Clear()
 {
-	std::map<wxString, ISymbol*>::iterator itr = m_symbols.begin();
+	std::map<std::string, ISymbol*>::iterator itr = m_symbols.begin();
 	for ( ; itr != m_symbols.end(); ++itr)
 		delete itr->second;
 	m_symbols.clear();
 }
 
-void SymbolMgr::traverse(IVisitor& visitor) const
+void SymbolMgr::Traverse(IVisitor& visitor) const
 {
-	std::map<wxString, ISymbol*>::const_iterator itr = m_symbols.begin();
+	std::map<std::string, ISymbol*>::const_iterator itr = m_symbols.begin();
 	for ( ; itr != m_symbols.end(); ++itr)
 	{
 		bool hasNext;

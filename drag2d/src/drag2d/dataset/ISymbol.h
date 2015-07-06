@@ -70,7 +70,7 @@ class SymbolCmp
 {
 public:
 	bool operator () (const d2d::ISymbol* s0, const d2d::ISymbol* s1) const {
-		return s0->GetFilepath() < s1->GetFilepath();
+		return s0->GetFilepath().compare(s1->GetFilepath()) < 0;
 	}
 }; // SymbolCmp
 

@@ -74,7 +74,7 @@ void ScaleOverall::Trigger(const std::string& dir, float scale) const
 void ScaleOverall::ScaleImage(const wxString& filepath, float scale, d2d::Snapshoot& ss,
 							  std::map<wxString, d2d::Vector>& mapImg2Center) const
 {
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
 	d2d::ImageSymbol* img = static_cast<d2d::ImageSymbol*>(symbol);
 

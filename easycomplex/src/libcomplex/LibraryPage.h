@@ -19,8 +19,8 @@ protected:
 	virtual void OnAddPress(wxCommandEvent& event);
 
 private:
-	void loadFromJsonFile(const wxString& filename);
-	void loadFromLuaFile(const wxString& filename);
+	void loadFromJsonFile(const std::string& filename);
+	void loadFromLuaFile(const std::string& filename);
 
 }; // LibraryPage
 

@@ -64,7 +64,7 @@ void EditDialog::onClose(wxCloseEvent& event)
 	int val = dlg.ShowModal();
 	if (val == wxID_OK)
 	{
-		const wxString& filepath = symbol.GetFilepath();
+		const std::string& filepath = symbol.GetFilepath();
 		FileIO::store(symbol.GetFilepath().c_str(), &symbol);
 		symbol.RefreshThumbnail(filepath);
 

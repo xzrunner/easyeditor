@@ -18,8 +18,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	d2d::SymbolMgr::Instance()->Clear();
+	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
 }
 
@@ -39,7 +39,7 @@ void Task::Load(const char* filename)
 	Json::Value spr_val = value["sprites"][i++];
 	while (!spr_val.isNull()) {
 		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spr_val);
 		symbol->Release();

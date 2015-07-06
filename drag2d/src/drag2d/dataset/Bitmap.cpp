@@ -58,7 +58,7 @@ bool Bitmap::LoadFromFile(const std::string& filepath)
 	}
 	else
 	{
-		ISymbol* symbol = SymbolMgr::Instance()->fetchSymbol(filepath);
+		ISymbol* symbol = SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::Rect rect = symbol->GetSize();
 		int w = std::max(1.0f, rect.xLength()),
 			h = std::max(1.0f, rect.yLength());

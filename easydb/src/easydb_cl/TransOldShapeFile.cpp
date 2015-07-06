@@ -46,7 +46,7 @@ void TransOldShapeFile::Run(const std::string& folder)
 // 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
 // 			static_cast<libshape::Symbol*>(symbol)->StoreToFile(symbol->getFilepath());
 		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_texture)) {
-			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 			etexture::FileSaver::Store(filepath, static_cast<etexture::Symbol*>(symbol));
 		}
 	}

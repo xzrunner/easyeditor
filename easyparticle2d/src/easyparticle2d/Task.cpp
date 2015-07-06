@@ -15,8 +15,8 @@ Task::Task(wxFrame* parent)
 
 Task::~Task()
 {
-	d2d::SymbolMgr::Instance()->clear();
-	d2d::BitmapMgr::Instance()->clear();
+	d2d::SymbolMgr::Instance()->Clear();
+	d2d::BitmapMgr::Instance()->Clear();
 	delete m_root;
 
 	m_parent->SetTitle("EasyParticle");
@@ -121,7 +121,7 @@ void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
 	StageData* sd = m_stage->GetStageData();
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
 	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
-	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(path);
+	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 	sd->ChangePSSymbol(symbol);
 	symbol->Release();
 

@@ -309,7 +309,7 @@ void PrimitiveDraw::cross(const Vector& center, float xedge, float yedge, const 
 
 void PrimitiveDraw::text(const char* text)
 {
-	ISymbol* s = SymbolMgr::Instance()->fetchSymbol(Font::DEFAULT_FONTFILE);
+	ISymbol* s = SymbolMgr::Instance()->FetchSymbol(Font::DEFAULT_FONTFILE);
 	if (s) {
 		ShaderMgr::Instance()->null();
 		FontSymbol* fs = static_cast<FontSymbol*>(s);

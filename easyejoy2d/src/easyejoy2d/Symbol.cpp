@@ -20,7 +20,7 @@ Symbol::Symbol(const Symbol& s)
 
 Symbol::~Symbol()
 {
-	PackageMgr::Instance()->Remove(m_filepath.ToStdString());
+	PackageMgr::Instance()->Remove(m_filepath);
 
 	if (m_spr) {
 		m_spr->Release();

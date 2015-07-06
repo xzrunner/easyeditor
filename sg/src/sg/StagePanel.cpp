@@ -190,7 +190,7 @@ void StagePanel::ChangeSelectedSpritesLevel(bool up)
 
 		spr_info->level = up ? spr_info->level + 1 : spr_info->level - 1;
 		std::string new_filepath = symbol_info->building->levels[spr_info->level - 1].res_snapshoot_path;
-		d2d::ISymbol* new_symbol = d2d::SymbolMgr::Instance()->fetchSymbol(new_filepath);
+		d2d::ISymbol* new_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(new_filepath);
 		if (new_symbol != &sprite->getSymbol()) {
 			SymbolExt* new_symbol_info = static_cast<SymbolExt*>(new_symbol->getUserData());
 			new_symbol_info->remain--;
@@ -254,7 +254,7 @@ void StagePanel::ChangeSymbolRemain(d2d::ISprite* sprite, bool increase) const
 		--info->remain;
 	}
 	d2d::ISymbol& symbol = const_cast<d2d::ISymbol&>(sprite->getSymbol());
-	symbol.setInfo(wxString::FromDouble(info->remain));
+	symbol.SetInfo(wxString::FromDouble(info->remain));
 	m_library->Refresh();
 }
 

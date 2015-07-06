@@ -68,7 +68,7 @@ void LoadFromDir(const std::string& dir)
 				|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
 			{
 				// todo release symbol
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(*itr);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
 				SYMBOLS.push_back(symbol);
 			}
 		}
@@ -132,7 +132,7 @@ void LoadFromList(const std::string& list)
 				|| d2d::FileNameParser::isType(*itr, d2d::FileNameParser::e_anim))
 			{
 				// todo release symbol
-				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(*itr);
+				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(*itr);
 				std::set<std::string>::iterator itr = names.find(symbol->name);
 				if (itr == names.end()) {
 //					symbol->release();

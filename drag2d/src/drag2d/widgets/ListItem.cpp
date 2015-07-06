@@ -5,7 +5,7 @@
 namespace d2d
 {
 
-void ListItem::RefreshThumbnail(const wxString& filepath, bool force)
+void ListItem::RefreshThumbnail(const std::string& filepath, bool force)
 {
 	if (m_bitmap) {
 		if (force) {

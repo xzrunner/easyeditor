@@ -277,8 +277,8 @@ void Symbol::LoadResources()
 	int i = 0;
 	Json::Value spriteValue = value["sprite"][i++];
 	while (!spriteValue.isNull()) {
-		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spriteValue);
-		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->fetchSymbol(filepath);
+		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spriteValue);
+		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		if (!symbol) {
 			std::string filepath = spriteValue["filepath"].asString();
 			throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", dir.ToStdString().c_str(), filepath.c_str());

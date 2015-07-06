@@ -152,7 +152,7 @@ void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 			poly->SetMaterialColor(d2d::Colorf(m_color.Red() / 255.0f, m_color.Green() / 255.0f, m_color.Blue() / 255.0f));
 			break;
 		case 1:
-			poly->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->fetchSymbol(m_filePath)));
+			poly->SetMaterialTexture(static_cast<d2d::ImageSymbol*>(d2d::SymbolMgr::Instance()->FetchSymbol(m_filePath)));
 			break;
 		}
 		m_stage->Refresh();

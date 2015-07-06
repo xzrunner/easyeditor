@@ -19,7 +19,7 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 void PreviewCanvas::initGL()
 {
 	d2d::DynamicStageCanvas::initGL();
-	d2d::SymbolMgr::Instance()->traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
+	d2d::SymbolMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
 }
 
 void PreviewCanvas::OnDraw()

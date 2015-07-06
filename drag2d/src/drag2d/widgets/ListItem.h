@@ -1,38 +1,40 @@
-#pragma once
+#ifndef _DRAG2D_LIST_ITEM_H_
+#define _DRAG2D_LIST_ITEM_H_
 
 #include "common/Object.h"
 #include "interfaces.h"
 
-#include <wx/wx.h>
-
 namespace d2d
 {
-	class Bitmap;
 
-	class ListItem : public Object, public ICloneable
-	{
-	public:
-		ListItem() {
-			m_bitmap = NULL;
-		}
-		virtual ~ListItem() {}
+class Bitmap;
 
-		void RefreshThumbnail(const wxString& filepath, bool force = false);
+class ListItem : public Object, public ICloneable
+{
+public:
+	ListItem() {
+		m_bitmap = NULL;
+	}
+	virtual ~ListItem() {}
 
-		const wxString& getName() const { return m_name; }
-		void setName(const wxString& name) { m_name = name; }
+	void RefreshThumbnail(const std::string& filepath, bool force = false);
 
-		const wxString& getInfo() const { return m_info; }
-		void setInfo(const wxString& info) { m_info = info; }
+	const std::string& GetName() const { return m_name; }
+	void SetName(const std::string& name) { m_name = name; }
 
-		const Bitmap* getBitmap() const { return m_bitmap; }
+	const std::string& GetInfo() const { return m_info; }
+	void SetInfo(const std::string& info) { m_info = info; }
 
-	protected:
-		wxString m_name;
-		wxString m_info;
+	const Bitmap* GetBitmap() const { return m_bitmap; }
 
-		Bitmap* m_bitmap;
+protected:
+	std::string m_name;
+	std::string m_info;
 
-	}; // ListItem
+	Bitmap* m_bitmap;
+
+}; // ListItem
+
 }
 
+#endif // _DRAG2D_LIST_ITEM_H_
