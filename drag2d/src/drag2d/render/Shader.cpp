@@ -57,12 +57,6 @@ void Shader::color(float r, float g, float b, float a)
 void Shader::sprite()
 {
 	if (m_prog_curr != m_prog_sprite) {
-		glEnable(GL_BLEND);
-
-		// todo 源混合因子ejoy2d用的GL_ONE
-//		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 		glUseProgram(m_prog_sprite);
 		m_prog_curr = m_prog_sprite;
 
@@ -73,9 +67,6 @@ void Shader::sprite()
 void Shader::shape()
 {
 	if (m_prog_curr != m_prog_shape) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 		glUseProgram(m_prog_shape);
 		m_prog_curr = m_prog_shape;
 	}
@@ -83,9 +74,6 @@ void Shader::shape()
 
 void Shader::null()
 {
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	glUseProgram(0);
 	m_prog_curr = 0;
 }
@@ -190,12 +178,6 @@ void Shader::load()
 		"  gl_FragColor = v_fragmentColor;"
 		"}  \n"
 		;
-
-
-	glEnable(GL_BLEND);
-	// todo 源混合因子ejoy2d用的GL_ONE
-	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	m_prog_sprite = init(sprite_fs, sprite_vs);
 	m_prog_shape = init(shape_fs, shape_vs);

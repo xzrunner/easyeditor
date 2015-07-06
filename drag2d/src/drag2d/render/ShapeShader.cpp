@@ -79,11 +79,6 @@ void ShapeShader::LoadShader()
 	static const std::string vert(header + ShapeVertShader);
 	static const std::string frag(header + ShapeFragShader);
 
-	// 	glEnable(GL_BLEND);
-	// 	// todo 源混合因子ejoy2d用的GL_ONE
-	// 	//glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-	// 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	InitShader(vert.c_str(), frag.c_str());
 }
 
