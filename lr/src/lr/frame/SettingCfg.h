@@ -14,6 +14,8 @@ public:
 
 	bool m_terrain2d_anim;
 
+	bool m_all_layers_visible_editable;
+
 private:
 	SettingCfg();
 

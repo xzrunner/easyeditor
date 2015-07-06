@@ -19,6 +19,7 @@ private:
 	void OnMapSizeChanged(wxCommandEvent& event);
 	void OnViewSizeChanged(wxCommandEvent& event);
 	void OnChangeTerrain2DAnim(wxCommandEvent& event);
+	void OnChangeAllLayersVisibleEditable(wxCommandEvent& event);
 
 private:
 	StagePanel* m_stage;

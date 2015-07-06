@@ -85,24 +85,33 @@ void StagePanel::clear()
 void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	if (type == d2d::DT_EDITABLE) 
+	if (SettingCfg::Instance()->m_all_layers_visible_editable) 
 	{
-		Layer* layer = GetCurrLayer();
-		if (layer->IsEditable()) {
-			layer->TraverseSprite(visitor, order);
+		for (int i = 0, n = m_layers.size(); i < n; ++i) {
+			m_layers[i]->TraverseSprite(visitor, order);
 		}
-	} 
-	else 
+	}
+	else
 	{
-		for (int i = 0, n = m_layers.size(); i < n; ++i) 
+		if (type == d2d::DT_EDITABLE) 
 		{
-			Layer* layer = m_layers[i];
-			if (type == d2d::DT_ALL || 
-				type == d2d::DT_SELECTABLE ||
-				type == d2d::DT_EDITABLE && layer->IsEditable() ||
-				type == d2d::DT_VISIBLE && layer->IsVisible())
-			{
+			Layer* layer = GetCurrLayer();
+			if (layer->IsEditable()) {
 				layer->TraverseSprite(visitor, order);
+			}
+		} 
+		else 
+		{
+			for (int i = 0, n = m_layers.size(); i < n; ++i) 
+			{
+				Layer* layer = m_layers[i];
+				if (type == d2d::DT_ALL || 
+					type == d2d::DT_SELECTABLE ||
+					type == d2d::DT_EDITABLE && layer->IsEditable() ||
+					type == d2d::DT_VISIBLE && layer->IsVisible())
+				{
+					layer->TraverseSprite(visitor, order);
+				}
 			}
 		}
 	}

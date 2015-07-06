@@ -18,6 +18,8 @@ SettingCfg::SettingCfg()
 	m_view_height = m_map_height;
 
 	m_terrain2d_anim = false;
+
+	m_all_layers_visible_editable = false;
 }
 
 SettingCfg* SettingCfg::Instance()

@@ -76,13 +76,23 @@ void SettingDialog::InitLayout()
 		top_sizer->Add(sizer);
 	}
 	top_sizer->AddSpacer(10);
+
+	wxSizer* right_sizer = new wxBoxSizer(wxVERTICAL);
 	// Open River Animation
 	{
 		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("terrain2d动画"));
 		check->SetValue(cfg->m_terrain2d_anim);
 		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeTerrain2DAnim));
-		top_sizer->Add(check);
+		right_sizer->Add(check);
 	}
+	// All Layers Visible&Editable
+	{
+		wxCheckBox* check = new wxCheckBox(this, wxID_ANY, wxT("所有层可视可编辑"));
+		check->SetValue(cfg->m_all_layers_visible_editable);
+		Connect(check->GetId(), wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler(SettingDialog::OnChangeAllLayersVisibleEditable));
+		right_sizer->Add(check);
+	}
+	top_sizer->Add(right_sizer);
 
 	SetSizer(top_sizer);
 
@@ -125,6 +135,12 @@ void SettingDialog::OnChangeTerrain2DAnim(wxCommandEvent& event)
 			const_cast<eterrain2d::Symbol&>(terr->getSymbol()).SetUpdateOpen(cfg->m_terrain2d_anim);
 		}
 	}
+}
+
+void SettingDialog::OnChangeAllLayersVisibleEditable(wxCommandEvent& event)
+{
+	SettingCfg* cfg = SettingCfg::Instance();
+	cfg->m_all_layers_visible_editable = event.IsChecked();
 }
 
 }
