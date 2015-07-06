@@ -222,7 +222,7 @@ void GroupTreeCtrl::ReorderItem(wxTreeItemId id, bool up)
 	// remove
 	Delete(id);
 	// sort
-	ReorderSprites();
+//	ReorderSprites();
 	// set selection
 	SelectItem(new_item);
 }
@@ -311,7 +311,7 @@ void GroupTreeCtrl::OnEndDrag(wxTreeEvent& event)
 	// remove
 	Delete(item_src);
 	// sort
-	ReorderSprites();
+//	ReorderSprites();
 	// set selection
 	SelectItem(new_item);
 	// font style
