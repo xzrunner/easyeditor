@@ -56,12 +56,12 @@ void Mapping3DScene::Store(const char* filename) const
 	m_canvas->GetScreenSize(&sw, &sh);
 	glReadPixels(min.x, sh - max.y, w, h, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-	eimage::ImageRevertY revert(pixels, w, h);
+	eimage::ImageVeritalFlip revert(pixels, w, h);
 	uint8_t* pixels_revert = revert.Revert();
 	delete[] pixels;
 
 	std::string img_path = d2d::FilenameTools::getFilePathExceptExtension(filename);
-	d2d::ImageSaver::storeToFile(pixels_revert, w, h, img_path, d2d::ImageSaver::e_png);
+	d2d::ImageSaver::storeToFile(pixels_revert, w, h, 4, img_path, d2d::ImageSaver::e_png);
 	delete[] pixels_revert;
 
 	value["texture filepath"] = img_path + ".png";

@@ -245,7 +245,7 @@ void BuildingCfg::ResetLibraryList(LibraryPage* library, const std::vector<Build
 			info->remain = QueryAmountLimit(pItem->building->name, m_stage->GetBaseLevel());
 			info->level = level;
 			s->RefreshThumbnail(filepath);
- 			s->SetInfo(wxString::FromDouble(info->remain));
+ 			s->SetInfo(wxString::FromDouble(info->remain).ToStdString());
 			library->GetList()->insert(s);
 			s->Release();
 		}
@@ -279,7 +279,7 @@ void BuildingCfg::LoadSymbolUserData(const std::vector<Building*>& buildings)
 			try {
 				d2d::ISymbol* s = d2d::SymbolMgr::Instance()->FetchSymbol(item.res_snapshoot_path);
 				s->RefreshThumbnail(item.res_snapshoot_path);
-				s->SetInfo(wxString::FromDouble(info->remain));
+				s->SetInfo(wxString::FromDouble(info->remain).ToStdString());
 				s->SetUserData(info);
 			} catch (d2d::Exception& e) {
 				std::cerr << e.what() << std::endl;

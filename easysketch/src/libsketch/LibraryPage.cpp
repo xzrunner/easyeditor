@@ -52,7 +52,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			libsketch::Symbol* symbol = new libsketch::Symbol();
 			symbol->SetModel(model);
 
-			wxString filepath = FILE_TAG;
+			std::string filepath = FILE_TAG;
 			filepath += ".json";
 			symbol->SetFilepath(filepath);
 			symbol->SetAABB(aabb);

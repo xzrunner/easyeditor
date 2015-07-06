@@ -56,7 +56,7 @@ void RotateImage::Trigger(const std::string& src_dir, const std::string& dst_dir
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath().ToStdString();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);

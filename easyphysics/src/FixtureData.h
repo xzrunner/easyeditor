@@ -9,7 +9,7 @@ namespace ephysics
 
 struct FixtureDataInfo
 {
-	wxString filepath;
+	std::string filepath;
 	d2d::Vector pos;
 	float angle;
 	float scale;

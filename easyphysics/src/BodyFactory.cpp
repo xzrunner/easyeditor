@@ -10,7 +10,7 @@ namespace ephysics
 
 b2World* BodyFactory::m_world = NULL;
 
-IBody* BodyFactory::createBody(const wxString& filename, float scale/* = 1.0f*/)
+IBody* BodyFactory::createBody(const std::string& filename, float scale/* = 1.0f*/)
 {
 	IBody* body = NULL;
 	BodyData* bd = BodyDataMgr::Instance()->GetItem(filename);

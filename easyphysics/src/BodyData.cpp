@@ -14,7 +14,7 @@ BodyData::BodyData()
 
 BodyData::~BodyData()
 {
-	BodyDataMgr::Instance()->removeItem(m_filename);
+	BodyDataMgr::Instance()->RemoveItem(m_filename);
 	clear();
 }
 
@@ -24,10 +24,10 @@ void BodyData::clear()
 	m_fixtures.clear();
 }
 
-bool BodyData::loadFromFile(const wxString& filename)
+bool BodyData::LoadFromFile(const std::string& filename)
 {
 	if (!wxFileName::FileExists(filename)) {
-		throw d2d::Exception("File: %s don't exist!", filename.ToStdString().c_str());
+		throw d2d::Exception("File: %s don't exist!", filename.c_str());
 	}
 
 	clear();
@@ -50,7 +50,7 @@ bool BodyData::loadFromFile(const wxString& filename)
 }
 
 // todo 去掉MeshSymbol，以后用easymesh的，避免不必要的对easymesh的依赖
-void BodyData::loadFromMeshFile(const wxString& filename)
+void BodyData::loadFromMeshFile(const std::string& filename)
 {
 	//m_type = e_mesh;
 
@@ -73,7 +73,7 @@ void BodyData::loadFromMeshFile(const wxString& filename)
 }
 
 // todo 移到libshape中，避免不必要的对libshape的依赖
-void BodyData::loadFromShapeFile(const wxString& filename)
+void BodyData::loadFromShapeFile(const std::string& filename)
 {
 // 	m_type = e_shapes;
 // 

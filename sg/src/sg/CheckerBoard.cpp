@@ -153,7 +153,7 @@ void CheckerBoard::ResetWall()
 
 			d2d::ISprite* sprite = m_grid[i][j];
 			const d2d::ISymbol& symbol = sprite->getSymbol();
-			wxString filepath = symbol.GetFilepath();
+			std::string filepath = symbol.GetFilepath();
 			int s = filepath.find("lv") + 2;
 			int e = filepath.find('_', s-1);
 			if (e != -1) {

@@ -43,7 +43,7 @@ void RegularRectCut::Trigger(const std::string& src_dir, const std::string& dst_
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath().ToStdString();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))

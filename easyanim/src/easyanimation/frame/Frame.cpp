@@ -33,10 +33,10 @@ void Frame::onOpen(wxCommandEvent& event)
 	if (!m_task) return;
 
 	try {
-		wxString single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
+		std::string single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
 			template_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis)),
 			all_filter = "All | *_ani?.json";
-		wxString filter = all_filter + "|" + single_filter + "|" + template_filter;
+		std::string filter = all_filter + "|" + single_filter + "|" + template_filter;
 		wxFileDialog dlg(this, wxT("Open"), wxEmptyString, wxEmptyString, filter, wxFD_OPEN);
 		if (dlg.ShowModal() == wxID_OK)
 		{
@@ -54,10 +54,10 @@ void Frame::onSaveAs(wxCommandEvent& event)
  	if (!m_task) return;
  
  	try {
-		wxString single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
+		std::string single_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim)),
 			template_filter = GetJsonFileFilter(d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis)),
 			png_filter = "PNG files (*.png)|*.png";
-		wxString filter = single_filter + "|" + template_filter + "|" + png_filter;
+		std::string filter = single_filter + "|" + template_filter + "|" + png_filter;
  		wxFileDialog dlg(this, wxT("Save"), wxEmptyString, wxEmptyString, filter, wxFD_SAVE);
  		if (dlg.ShowModal() == wxID_OK)
  		{
@@ -87,12 +87,12 @@ void Frame::OnPreview(wxCommandEvent& event)
 
 void Frame::OnSetBackground(wxCommandEvent& event)
 {
-	wxString formatFilter = wxT("*.png;*.jpg;*.json");
+	std::string formatFilter("*.png;*.jpg;*.json");
 	wxFileDialog dlg(this, wxT("Choose Background Symbol"), wxEmptyString, 
 		wxEmptyString, formatFilter, wxFD_OPEN);
 	if (dlg.ShowModal() == wxID_OK)
 	{
-		wxString filename = dlg.GetPath();
+		std::string filename = dlg.GetPath().ToStdString();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
@@ -156,8 +156,8 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 void Frame::SaveAsSingle(const std::string& filepath) const
 {
 	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anim);
-	wxString full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
-	m_currFilename = full_path;
+	std::string full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
+	m_curr_filename = full_path;
 
 	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
 	FileIO::StoreSingle(full_path, ctrl);
@@ -167,8 +167,8 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 void Frame::SaveAsTemplate(const std::string& filepath) const
 {
 	std::string tag = d2d::FileNameParser::getFileTag(d2d::FileNameParser::e_anis);
-	wxString full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
-	m_currFilename = full_path;
+	std::string full_path = d2d::FilenameTools::getFilenameAddTag(filepath, tag, "json");
+	m_curr_filename = full_path;
 
 	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
 	FileIO::StoreTemplate(full_path, ctrl);

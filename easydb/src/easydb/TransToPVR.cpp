@@ -41,7 +41,7 @@ void TransToPVR::Trigger(const std::string& dir)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			std::cout << i << " / " << n << " : " << filepath << "\n";
@@ -50,7 +50,7 @@ void TransToPVR::Trigger(const std::string& dir)
 	}
 }
 
-void TransToPVR::EncodeByDtexPvr(const wxString& filepath) const
+void TransToPVR::EncodeByDtexPvr(const std::string& filepath) const
 {
 	d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
 
@@ -69,7 +69,7 @@ void TransToPVR::EncodeByDtexPvr(const wxString& filepath) const
 	free(pvr_buf);
 }
 
-void TransToPVR::EncodeByPvrTexTool(const wxString& filepath) const
+void TransToPVR::EncodeByPvrTexTool(const std::string& filepath) const
 {
 	int w, h, c, f;
 	uint8_t* pixels = eimage::ImageIO::Read(filepath.c_str(), w, h, c, f);

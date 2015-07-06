@@ -7,7 +7,7 @@ namespace epseudo3d
 LibraryPage::LibraryPage(wxWindow* parent)
 	: d2d::ILibraryPage(parent, wxT("Template"))
 {
-	initLayout();
+	InitLayout();
 	m_list->setFileter(FILE_TAG);
 }
 

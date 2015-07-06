@@ -15,7 +15,7 @@ public:
 
 protected:
 	virtual void initGL();
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	IScene* m_scene;

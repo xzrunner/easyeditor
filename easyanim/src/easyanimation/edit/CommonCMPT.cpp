@@ -11,7 +11,7 @@
 namespace eanim
 {
 
-CommonCMPT::CommonCMPT(wxWindow* parent, const wxString& name, 
+CommonCMPT::CommonCMPT(wxWindow* parent, const std::string& name, 
 	StagePanel* stage, d2d::PropertySettingPanel* property, 
 	d2d::ViewPanelMgr* view_panel_mgr,
 	bool vertical, Controller* ctrl)
@@ -121,30 +121,25 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dlg.GetPath().ToStdString(), files);
 
-	std::map<int, std::vector<wxString> > mapFrameSymbols;
+	std::map<int, std::vector<std::string> > mapFrameSymbols;
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
-		wxString filepath = files[i];
+		std::string filepath = files[i];
 		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 			continue;
 
-		wxString name = d2d::FilenameTools::getFilename(filepath);
+		std::string name = d2d::FilenameTools::getFilename(filepath);
 		size_t mid = name.find('_');
-		if (mid == wxString::npos)
+		if (mid == std::string::npos)
 			continue;
 
-		wxString sitem = name.substr(0, mid);
-		wxString sframe = name.substr(mid+1);
-
-		long item, frame;
-		sitem.ToLong(&item);
-		sframe.ToLong(&frame);
-		
-		std::map<int, std::vector<wxString> >::iterator itr 
+		int item = d2d::StringTools::StringToInt(name.substr(0, mid)),
+			frame = d2d::StringTools::StringToInt(name.substr(mid+1));		
+		std::map<int, std::vector<std::string> >::iterator itr 
 			= mapFrameSymbols.find(frame);
 		if (itr == mapFrameSymbols.end())
 		{
-			std::vector<wxString> items;
+			std::vector<std::string> items;
 			items.push_back(filepath);
 			mapFrameSymbols.insert(std::make_pair(frame, items));
 		}
@@ -156,7 +151,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 
 	m_ctrl->ClearLayers();
 	Layer* layer = new Layer(m_ctrl);
-	std::map<int, std::vector<wxString> >::iterator itr
+	std::map<int, std::vector<std::string> >::iterator itr
 		= mapFrameSymbols.begin();
 	for ( ; itr != mapFrameSymbols.end(); ++itr)
 	{

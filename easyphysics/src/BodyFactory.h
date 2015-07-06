@@ -3,7 +3,6 @@
 
 #include "FixtureData.h"
 
-#include <wx/wx.h>
 #include <vector>
 
 class b2World;
@@ -16,7 +15,7 @@ class IBody;
 class BodyFactory
 {
 public:
-	static IBody* createBody(const wxString& filename, float scale = 1.0f);
+	static IBody* createBody(const std::string& filename, float scale = 1.0f);
 	static IBody* createBody(const std::vector<d2d::Vector>& triangles, float scale = 1.0f);
 	static IBody* createBody(const std::vector<FixtureDataInfo>& fixtures, float scale = 1.0f);
 

@@ -120,7 +120,7 @@ void LRLayersPack::ParserPolygon(const Json::Value& src_val, const lr::Grids& gr
 	Json::Value src_spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	while (!src_spr_val.isNull()) 
 	{
-		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, src_spr_val);
+		std::string spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, src_spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		assert(symbol);
 
@@ -171,7 +171,7 @@ void LRLayersPack::ParserPoint(const Json::Value& src_val, int layer_idx, const 
 	Json::Value spr_val = src_val["layer"][layer_idx]["sprite"][idx++];
 	while (!spr_val.isNull()) 
 	{
-		wxString spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
+		std::string spr_path = d2d::SymbolSearcher::GetSymbolPath(m_dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(spr_path);
 		if (!symbol) {
 			std::string filepath = spr_val["filepath"].asString();

@@ -65,7 +65,7 @@ void RotateTrimImage::Trigger(const std::string& dir)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath().ToStdString();
 
 		std::cout << i << " / " << n << " : " << filepath << "\n";
 
@@ -95,7 +95,7 @@ void RotateTrimImage::Trigger(const std::string& dir)
  		//	wxString outpath = dir + "\\test_" + name + ".png";
  		//	ss.SaveToFile(outpath.ToStdString(), width, height);
 
-			ss.SaveToFile(filepath.ToStdString(), width, height);
+			ss.SaveToFile(filepath, width, height);
 
 			// output info
 			wxString path = d2d::FilenameTools::getRelativePath(dir, filepath);

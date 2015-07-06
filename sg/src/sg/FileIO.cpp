@@ -57,7 +57,7 @@ d2d::ISprite* FileIO::load(const Json::Value& value, StagePanel* stage, const st
 	int row = value["row"].asInt(),
 		col = value["col"].asInt();
 
-	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
+	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	SetSymbolUserData(symbol);
 
@@ -143,8 +143,8 @@ void FileIO::SetSymbolUserData(d2d::ISymbol* symbol)
 	}
 
 	int pos = filepath.find_last_of('_');
-	wxString wall_type = filepath.substr(pos + 1, 1);
-	wxString wall_path = filepath.substr(0, pos) + ".png";
+	std::string wall_type = filepath.substr(pos + 1, 1);
+	std::string wall_path = filepath.substr(0, pos) + ".png";
 
 	try {
 		d2d::ISymbol* wall_symbol = d2d::SymbolMgr::Instance()->FetchSymbol(wall_path);

@@ -46,13 +46,13 @@ void ScaleOverall::Trigger(const std::string& dir, float scale) const
 	wxArrayString files;
 	d2d::FilenameTools::fetchAllFiles(dir, files);
 
-	std::map<wxString, d2d::Vector> mapImg2Center;
+	std::map<std::string, d2d::Vector> mapImg2Center;
 
 	for (int i = 0, n = files.size(); i < n; ++i)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
 			ScaleImage(filepath, scale, ss, mapImg2Center);
 		}
@@ -62,7 +62,7 @@ void ScaleOverall::Trigger(const std::string& dir, float scale) const
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 			ScaleComplex(filepath, scale, mapImg2Center);
 		} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
@@ -71,8 +71,8 @@ void ScaleOverall::Trigger(const std::string& dir, float scale) const
 	}
 }
 
-void ScaleOverall::ScaleImage(const wxString& filepath, float scale, d2d::Snapshoot& ss,
-							  std::map<wxString, d2d::Vector>& mapImg2Center) const
+void ScaleOverall::ScaleImage(const std::string& filepath, float scale, d2d::Snapshoot& ss,
+							  std::map<std::string, d2d::Vector>& mapImg2Center) const
 {
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 	
@@ -83,34 +83,34 @@ void ScaleOverall::ScaleImage(const wxString& filepath, float scale, d2d::Snapsh
 	img_offset.y = img->GetSize().yCenter();
 	mapImg2Center.insert(std::make_pair(filepath, img_offset));
 
-	ss.OutputToImageFile(symbol, filepath.ToStdString(), scale);
+	ss.OutputToImageFile(symbol, filepath, scale);
 	symbol->Release();
 }
 
-void ScaleOverall::ScaleComplex(const wxString& path, float scale,
-								const std::map<wxString, d2d::Vector>& mapImg2Center) const
+void ScaleOverall::ScaleComplex(const std::string& path, float scale,
+								const std::map<std::string, d2d::Vector>& mapImg2Center) const
 {
 	wxFileName filename(path);
 	filename.Normalize();
-	wxString filepath = filename.GetFullPath();
+	std::string filepath = filename.GetFullPath();
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(path);
+	std::string dir = d2d::FilenameTools::getFileDir(path);
 
 	int i = 0;
 	Json::Value spriteVal = value["sprite"][i++];
 	while (!spriteVal.isNull()) {
-		wxString relative = spriteVal["filepath"].asString();
-		wxString filepath = d2d::FilenameTools::getAbsolutePath(dir, relative);
+		std::string relative = spriteVal["filepath"].asString();
+		std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, relative);
 
-		std::map<wxString, d2d::Vector>::const_iterator itr 
+		std::map<std::string, d2d::Vector>::const_iterator itr 
 			= mapImg2Center.find(filepath);
 		if (itr == mapImg2Center.end()) {
 //			throw d2d::Exception("Image %s, not found in images!", filepath.c_str());
@@ -126,28 +126,28 @@ void ScaleOverall::ScaleComplex(const wxString& path, float scale,
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
 
-void ScaleOverall::ScaleAnim(const wxString& path, float scale,
-							 const std::map<wxString, d2d::Vector>& mapImg2Center) const
+void ScaleOverall::ScaleAnim(const std::string& path, float scale,
+							 const std::map<std::string, d2d::Vector>& mapImg2Center) const
 {
 	wxFileName filename(path);
 	filename.Normalize();
-	wxString filepath = filename.GetFullPath();
+	std::string filepath = filename.GetFullPath();
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString dir = d2d::FilenameTools::getFileDir(path);
+	std::string dir = d2d::FilenameTools::getFileDir(path);
 
 	int i = 0;
 	Json::Value layerVal = value["layer"][i++];
@@ -158,10 +158,10 @@ void ScaleOverall::ScaleAnim(const wxString& path, float scale,
 			int k = 0;
 			Json::Value entryVal = frameVal["actor"][k++];
 			while (!entryVal.isNull()) {
-				wxString relative = entryVal["filepath"].asString();
-				wxString filepath = d2d::FilenameTools::getAbsolutePath(dir, relative);
+				std::string relative = entryVal["filepath"].asString();
+				std::string filepath = d2d::FilenameTools::getAbsolutePath(dir, relative);
 
-				std::map<wxString, d2d::Vector>::const_iterator itr 
+				std::map<std::string, d2d::Vector>::const_iterator itr 
 					= mapImg2Center.find(filepath);
 				if (itr == mapImg2Center.end()) {
 //					throw d2d::Exception("Image %s, not found in images!", filepath.c_str());
@@ -183,7 +183,7 @@ void ScaleOverall::ScaleAnim(const wxString& path, float scale,
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();

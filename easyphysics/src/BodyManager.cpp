@@ -75,7 +75,7 @@ void BodyManager::Update()
 
 IBody* BodyManager::CreateBody(d2d::ISprite* sprite)
 {
-	wxString filepath = d2d::FilenameTools::getFilenameAddTag(
+	std::string filepath = d2d::FilenameTools::getFilenameAddTag(
 		sprite->getSymbol().GetFilepath(), libshape::FILE_TAG, "json");
 	if (d2d::FilenameTools::isExist(filepath)) {
 		IBody* body = BodyFactory::createBody(filepath, sprite->getScale().x);

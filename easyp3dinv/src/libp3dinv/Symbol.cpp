@@ -46,7 +46,7 @@ void Symbol::LoadResources()
 	if (!m_ps) {
 		m_ps = new ParticleSystem;
 	}
-	m_ps->LoadFromFile(m_filepath.ToStdString());
+	m_ps->LoadFromFile(m_filepath);
 }
 
 }

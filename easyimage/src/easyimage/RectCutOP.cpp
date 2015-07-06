@@ -209,7 +209,7 @@ bool RectCutOP::Clear()
 std::string RectCutOP::getImageFilepath() const
 {
 	if (const d2d::ISprite* s = m_stage->getImage()) {
-		return s->getSymbol().GetFilepath().ToStdString();
+		return s->getSymbol().GetFilepath();
 	} else {
 		return "";
 	}

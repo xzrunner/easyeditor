@@ -49,22 +49,22 @@ public:
 
 	const std::vector<FixtureData*>& getAllFixturesData() const;
 
-	const wxString& getFilename() const;
+	const std::string& getFilename() const;
 
 	void insertFixture(FixtureData* fixtureData) { 
 		m_fixtures.push_back(fixtureData); 
 	}
 
+	bool LoadFromFile(const std::string& filename);
+
 private:
 	void clear();
 
-	bool loadFromFile(const wxString& filename);
-
-	void loadFromMeshFile(const wxString& filename);
-	void loadFromShapeFile(const wxString& filename);
+	void loadFromMeshFile(const std::string& filename);
+	void loadFromShapeFile(const std::string& filename);
 
 private:
-	wxString m_filename;
+	std::string m_filename;
 
 	Type m_type;
 
@@ -84,7 +84,7 @@ inline const std::vector<BodyData::FixtureData*>& BodyData::getAllFixturesData()
 	return m_fixtures;
 }
 
-inline const wxString& BodyData::getFilename() const
+inline const std::string& BodyData::getFilename() const
 {
 	return m_filename;
 }

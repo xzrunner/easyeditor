@@ -51,13 +51,13 @@ void TransToGif::Trigger(const std::string& srcdir, const std::string& dstdir) c
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath().ToStdString();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
 		{
 			Json::Value value;
 			Json::Reader reader;
 			std::locale::global(std::locale(""));
-			std::ifstream fin(filepath.fn_str());
+			std::ifstream fin(filepath.c_str());
 			std::locale::global(std::locale("C"));
 			reader.parse(fin, value);
 			fin.close();

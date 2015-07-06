@@ -73,7 +73,7 @@ void Frame::onCodeCOC(wxCommandEvent& event)
 void Frame::SaveAsParticle3d(const wxString& filepath) const
 {
 	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
-	m_currFilename = fixed;
+	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }
 

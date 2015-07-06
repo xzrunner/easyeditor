@@ -17,8 +17,8 @@ ToolbarPanel::ToolbarPanel(wxWindow* parent, StagePanel* stage,
 	, m_ctrl(ctrl)
 	, m_anim_choice(NULL)
 {
-	addChild(new CommonCMPT(this, wxT("Common"), stage, property, view_panel_mgr, vertical, ctrl));
-	addChild(new SkeletonCMPT(this, wxT("Skeleton"), stage, property, vertical));
+	addChild(new CommonCMPT(this, "Common", stage, property, view_panel_mgr, vertical, ctrl));
+	addChild(new SkeletonCMPT(this, "Skeleton", stage, property, vertical));
 	SetSizer(initLayout());	
 }
 

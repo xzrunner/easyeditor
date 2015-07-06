@@ -55,7 +55,7 @@ void ScaleImage::Trigger(const std::string& dir, float scale)
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath().ToStdString();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image))
 		{
 			d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
@@ -71,7 +71,7 @@ void ScaleImage::Trigger(const std::string& dir, float scale)
 			sprite->Release();
 			symbol->Release();
 
-			ss.SaveToFile(filepath.ToStdString(), width, height);
+			ss.SaveToFile(filepath, width, height);
 		}
 	}
 

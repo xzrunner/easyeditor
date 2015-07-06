@@ -40,7 +40,7 @@ void GenRegularRectImage::CreateSingle(const wxString& filepath)
 			y = spr_val["dst"]["y"].asInt();
 		int w = spr_val["dst"]["w"].asInt(),
 			h = spr_val["dst"]["h"].asInt();
-		wxString filepath = spr_val["filepath"].asString();
+		std::string filepath = spr_val["filepath"].asString();
 		d2d::Image* img = d2d::ImageMgr::Instance()->GetItem(filepath);
 		pack.AddImage(img, x ,y, w, h, true);
 		img->Release();

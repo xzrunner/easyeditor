@@ -17,14 +17,14 @@ namespace eanim
 
 std::string FileIO::m_filepath;
 
-void FileIO::Load(const wxString& filepath, Controller* ctrl)
+void FileIO::Load(const std::string& filepath, Controller* ctrl)
 {
 	FileIO::m_filepath = filepath;
 
 	Json::Value value;
 	Json::Reader reader;
 	std::locale::global(std::locale(""));
-	std::ifstream fin(filepath.fn_str());
+	std::ifstream fin(filepath.c_str());
 	std::locale::global(std::locale("C"));
 	reader.parse(fin, value);
 	fin.close();
@@ -53,7 +53,7 @@ void FileIO::Load(const wxString& filepath, Controller* ctrl)
  	ctrl->GetStagePanel()->getCanvas()->resetViewport();
 }
 
-void FileIO::StoreSingle(const wxString& filepath, Controller* ctrl)
+void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)
 {
 	Json::Value value;
 
@@ -69,18 +69,18 @@ void FileIO::StoreSingle(const wxString& filepath, Controller* ctrl)
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
 }
 
-void FileIO::StoreTemplate(const wxString& filepath, Controller* ctrl)
+void FileIO::StoreTemplate(const std::string& filepath, Controller* ctrl)
 {
 	Json::Value value;
 
 	AnimTemplate& temp = ctrl->GetAnimTemplate();
-	temp.PreparePaths(filepath.ToStdString());
+	temp.PreparePaths(filepath);
 	temp.StoreToFile(value["template"]);
 
 	value["name"] = ctrl->name;
@@ -95,7 +95,7 @@ void FileIO::StoreTemplate(const wxString& filepath, Controller* ctrl)
 
 	Json::StyledStreamWriter writer;
 	std::locale::global(std::locale(""));
-	std::ofstream fout(filepath.fn_str());
+	std::ofstream fout(filepath.c_str());
 	std::locale::global(std::locale("C"));	
 	writer.write(fout, value);
 	fout.close();
@@ -128,7 +128,7 @@ void FileIO::Reload(Controller* ctrl)
 	ctrl->Refresh();
 }
 
-void FileIO::LoadFlash(const wxString& filepath, Controller* ctrl)
+void FileIO::LoadFlash(const std::string& filepath, Controller* ctrl)
 {
 	rapidxml::file<> xmlFile(filepath.c_str());
 	rapidxml::xml_document<> doc;
@@ -137,13 +137,13 @@ void FileIO::LoadFlash(const wxString& filepath, Controller* ctrl)
 	std::map<std::string, std::string> mapNamePath;
 	rapidxml::xml_node<>* imageNode = doc.first_node()->first_node("media")
 		->first_node("DOMBitmapItem");
-	wxString dlgpath = d2d::FilenameTools::getFileDir(filepath) + "\\";
+	std::string dlgpath = d2d::FilenameTools::getFileDir(filepath) + "\\";
 	while (imageNode) {
 		std::string name = imageNode->first_attribute("name")->value();
 		name = d2d::FilenameTools::getFilePathExceptExtension(name);
 
 		std::string path = imageNode->first_attribute("sourceExternalFilepath")->value();
-		wxString absolutePath = d2d::FilenameTools::getAbsolutePath(dlgpath, path);
+		std::string absolutePath = d2d::FilenameTools::getAbsolutePath(dlgpath, path);
 
 		mapNamePath.insert(std::make_pair(name, absolutePath));
 
@@ -161,7 +161,7 @@ void FileIO::LoadFlash(const wxString& filepath, Controller* ctrl)
 	ctrl->GetLibraryPanel()->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 }
 
-void FileIO::StoreAsGif(const wxString& src, const wxString& dst)
+void FileIO::StoreAsGif(const std::string& src, const std::string& dst)
 {
 	if (!d2d::FileNameParser::isType(src, d2d::FileNameParser::e_anim)) {
 		return;
@@ -191,7 +191,7 @@ void FileIO::StoreAsGif(const wxString& src, const wxString& dst)
 	symbol->Release();
 }
 
-void FileIO::StoreAsPng(const wxString& src, const wxString& dst)
+void FileIO::StoreAsPng(const std::string& src, const std::string& dst)
 {
 	if (!d2d::FileNameParser::isType(src, d2d::FileNameParser::e_anim)) {
 		return;
@@ -199,11 +199,11 @@ void FileIO::StoreAsPng(const wxString& src, const wxString& dst)
 
 	d2d::Snapshoot ss;
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(src);
-	ss.OutputToImageFile(symbol, dst.ToStdString());
+	ss.OutputToImageFile(symbol, dst);
 	symbol->Release();
 }
 
-Layer* FileIO::LoadLayer(const Json::Value& layerValue, const wxString& dir, Controller* ctrl)
+Layer* FileIO::LoadLayer(const Json::Value& layerValue, const std::string& dir, Controller* ctrl)
 {
 	Layer* layer = new Layer(ctrl);
 
@@ -230,7 +230,7 @@ Layer* FileIO::LoadLayer(const Json::Value& layerValue, const wxString& dir, Con
 	return layer;
 }
 
-KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const wxString& dir, Controller* ctrl)
+KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const std::string& dir, Controller* ctrl)
 {
 	int time = frameValue["time"].asInt();
 
@@ -254,7 +254,7 @@ KeyFrame* FileIO::LoadFrame(const Json::Value& frameValue, const wxString& dir, 
 	return frame;
 }
 
-d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const wxString& dir,
+d2d::ISprite* FileIO::LoadActor(const Json::Value& actorValue, const std::string& dir,
 								Controller* ctrl)
 {
 	std::string filepath = actorValue["filepath"].asString();
@@ -400,7 +400,7 @@ KeyFrame* FileIO::LoadFrame(rapidxml::xml_node<>* frameNode,
 							const std::map<std::string, std::string>& mapNamePath,
 							Controller* ctrl)
 {
-	int time = StringTools::StringToInt(frameNode->first_attribute("index")->value()) + 1;
+	int time = d2d::StringTools::StringToInt(frameNode->first_attribute("index")->value()) + 1;
 
 	KeyFrame* frame = new KeyFrame(ctrl, time);
 	rapidxml::xml_node<>* actorNode = frameNode->first_node("elements")
@@ -444,7 +444,7 @@ d2d::ISprite* FileIO::LoadActor(rapidxml::xml_node<>* actorNode,
 	return sprite;
 }
 
-Json::Value FileIO::StoreLayer(Layer* layer, const wxString& dir, 
+Json::Value FileIO::StoreLayer(Layer* layer, const std::string& dir, 
 							   Controller* ctrl, bool single)
 {
 	Json::Value value;
@@ -463,7 +463,7 @@ Json::Value FileIO::StoreLayer(Layer* layer, const wxString& dir,
 	return value;
 }
 
-Json::Value FileIO::StoreFrame(KeyFrame* frame, const wxString& dir, 
+Json::Value FileIO::StoreFrame(KeyFrame* frame, const std::string& dir, 
 							   Controller* ctrl, bool single)
 {
 	Json::Value value;
@@ -482,7 +482,7 @@ Json::Value FileIO::StoreFrame(KeyFrame* frame, const wxString& dir,
 	return value;
 }
 
-Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const wxString& dir,
+Json::Value FileIO::StoreActor(const d2d::ISprite* sprite, const std::string& dir,
 							   Controller* ctrl, bool single)
 {
 	Json::Value value;

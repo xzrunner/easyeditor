@@ -40,7 +40,7 @@ void OutlineImage::Trigger(const std::string& dir) const
 	{
 		wxFileName filename(files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
+		std::string filepath = filename.GetFullPath().ToStdString();
 		if (!d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_image)) {
 			continue;
 		}

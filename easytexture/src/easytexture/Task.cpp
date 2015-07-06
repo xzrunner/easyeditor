@@ -25,7 +25,7 @@ Task::~Task()
 
 void Task::Load(const char* filename)
 {
-	m_stage->GetSymbol()->loadFromFile(filename);
+	m_stage->GetSymbol()->LoadFromFile(filename);
 }
 
 void Task::Store(const char* filename) const

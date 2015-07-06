@@ -22,7 +22,7 @@ void FileIO::Load(const char* filename, StagePanel* stage, d2d::LibraryPanel* li
 	int idx = 0;
 	Json::Value spr_val = value["sprite"][idx++];
 	while (!spr_val.isNull()) {
-		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);

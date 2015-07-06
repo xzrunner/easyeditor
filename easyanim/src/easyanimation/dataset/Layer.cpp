@@ -13,7 +13,7 @@ Layer::Layer(Controller* ctrl)
 	, m_sprite_observer(*this)
 {
 	static int count = 0;
-	m_name = "Layer" + StringTools::IntToString(count++);
+	m_name = "Layer" + d2d::StringTools::IntToString(count++);
 
 	m_editable = m_visible = true;
 }

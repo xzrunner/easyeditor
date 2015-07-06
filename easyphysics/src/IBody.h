@@ -23,7 +23,7 @@ public:
 	b2Body* getBody() const;
 	void setBody(b2Body* body);
 
-	const wxString& getFilename() const;
+	const std::string& getFilename() const;
 
 	bool isAlive() const;
 	void setAlive(bool isAlive);
@@ -39,7 +39,7 @@ protected:
 	IBody(b2World* world, float scale = 1.0f);
 
 protected:
-	wxString m_filename;
+	std::string m_filename;
 
 	bool m_alive;
 
@@ -61,7 +61,7 @@ inline void IBody::setBody(b2Body* body)
 	m_body = body;
 }
 
-inline const wxString& IBody::getFilename() const
+inline const std::string& IBody::getFilename() const
 {
 	return m_filename;
 }

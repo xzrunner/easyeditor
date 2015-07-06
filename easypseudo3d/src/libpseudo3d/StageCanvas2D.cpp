@@ -23,7 +23,7 @@ void StageCanvas2D::initGL()
 	Refresh();
 }
 
-void StageCanvas2D::onDraw()
+void StageCanvas2D::OnDraw()
 {
 	m_scene->Draw();
 

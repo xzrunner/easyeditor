@@ -222,7 +222,7 @@ void RectCutCMPT::onOutputData(wxCommandEvent& event)
 	wxString imageDir = m_imagePath->GetValue();
 	wxString jsonDir = m_jsonPath->GetValue();
 
-	wxString imageName = d2d::FilenameTools::getFilename(image->filepath());
+	wxString imageName = d2d::FilenameTools::getFilename(image->GetFilepath());
 	ecomplex::Symbol* complex = new ecomplex::Symbol;
 	for (int i = 0, n = rects.size(); i < n; ++i)
 	{

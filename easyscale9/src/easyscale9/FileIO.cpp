@@ -79,7 +79,7 @@ void FileIO::store(const char* filename, StagePanel* stage,
 
 d2d::ISprite* FileIO::load(const Json::Value& value, const wxString& dir)
 {
-	wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
+	std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, value);
 	if (!d2d::FilenameTools::isExist(filepath)) {
 		std::string filepath = value["filepath"].asString();
 		throw d2d::Exception("Symbol doesn't exist, [dir]:%s, [file]:%s !", 

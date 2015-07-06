@@ -28,7 +28,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		for (size_t i = 0, n = filenames.size(); i < n; ++i)
 		{
 			try {
-				const wxString filename = filenames[i];
+				std::string filename = filenames[i].ToStdString();
 				d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 				symbol->RefreshThumbnail(filename);
 				m_list->insert(symbol);

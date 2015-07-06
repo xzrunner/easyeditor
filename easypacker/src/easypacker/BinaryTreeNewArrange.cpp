@@ -81,13 +81,13 @@ bool BinaryTreeNewArrange::
 Insert(d2d::ImageSprite& img) const
 {
 	std::map<std::string, d2d::TPNode*>::const_iterator itr 
-		= m_mapImages.find(img.getSymbol().GetFilepath().ToStdString());
+		= m_mapImages.find(img.getSymbol().GetFilepath());
 	if (itr != m_mapImages.end()) {
 		return false;
 	}
 
 	d2d::TPNode* n = NULL;
-	d2d::Rect r = img.getSymbol().getImage()->getRegion();
+	d2d::Rect r = img.getSymbol().getImage()->GetClippedRegion();
 	d2d::Image* image = img.getSymbol().getImage();
 	int w = r.xLength();
 	int h = r.yLength();

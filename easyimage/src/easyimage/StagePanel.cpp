@@ -95,7 +95,7 @@ OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& filenames)
 		return;
 	}
 
-	wxString filename = filenames[0];
+	std::string filename = filenames[0].ToStdString();
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
 	m_stage->setImage(symbol);
 	symbol->Release();

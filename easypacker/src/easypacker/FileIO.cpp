@@ -183,7 +183,7 @@ void FileIO::storeImage(const char* filename)
 		bool use_premultiplied_alpha = Context::Instance()->premultiplied_alpha && channel == 4;
 
 		int w, h, c, f;
-		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().GetFilepath().ToStdString(), w, h, c, f);
+		uint8_t* src_data = d2d::ImageLoader::loadData(sprite->getSymbol().GetFilepath(), w, h, c, f);
 
 		if (sprite->getAngle() != 0)
 		{
@@ -320,7 +320,7 @@ void FileIO::storeTexpackerPosition(const char* filename)
 			val["sourceSize"]["w"] = img->GetOriginWidth();
 			val["sourceSize"]["h"] = img->GetOriginHeight();
 
-			d2d::Rect r = img->getRegion();
+			d2d::Rect r = img->GetClippedRegion();
 			val["frame"]["w"] = val["spriteSourceSize"]["w"] = r.xLength();
 			val["frame"]["h"] = val["spriteSourceSize"]["h"] = r.yLength();
 			val["spriteSourceSize"]["x"] = r.xMin + 0.5f * img->GetOriginWidth();
@@ -368,7 +368,7 @@ Json::Value FileIO::store(const d2d::ISprite* sprite)
 		height = h;
 	}
 
-	value["filepath"] = symbol.GetFilepath().ToStdString();
+	value["filepath"] = symbol.GetFilepath();
 	value["left"] = left;
 	value["low"] = low;
 	value["width"] = width;

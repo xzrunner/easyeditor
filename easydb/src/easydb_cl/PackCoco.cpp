@@ -47,7 +47,7 @@ void PackCoco::Trigger(const std::string& config_path)
 	reader.parse(fin, value);
 	fin.close();
 
-	wxString config_dir = d2d::FilenameTools::getFileDir(config_path);
+	std::string config_dir = d2d::FilenameTools::getFileDir(config_path);
 
  	std::string trim_file = config_dir + "\\" + value["trim file"].asString();
  	libpacker::ImageTrimData trim(trim_file);
@@ -64,13 +64,13 @@ void PackCoco::Trigger(const std::string& config_path)
 	}
 }
 
-void PackCoco::Prepare(const Json::Value& pkg_val, const wxString& config_dir) 
+void PackCoco::Prepare(const Json::Value& pkg_val, const std::string& config_dir) 
 {
 	std::string dst_folder = config_dir + "/" + pkg_val["dst folder"].asString();
  	d2d::mk_dir(dst_folder);
 }
 
-void PackCoco::PackTexture(const Json::Value& pkg_val, const wxString& config_dir,
+void PackCoco::PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
 						   const libpacker::ImageTrimData& trim) const
 {
 	std::string name = pkg_val["name"].asString();
@@ -117,8 +117,8 @@ void PackCoco::CompressTexture(const std::string& filepath, const std::string& t
 	delete[] pixels;
 }
 
-void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
-								const wxString& src_folder, std::vector<std::string>& images) const
+void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const std::string& config_dir,
+								const std::string& src_folder, std::vector<std::string>& images) const
 {
 	int i = 0;
 	Json::Value src_val = pkg_val["src image list"][i++];
@@ -142,7 +142,7 @@ void PackCoco::GetAllImageFiles(const Json::Value& pkg_val, const wxString& conf
 	}
 }
 
-void PackCoco::PackLuaFile(const Json::Value& pkg_val, const wxString& config_dir) const
+void PackCoco::PackLuaFile(const Json::Value& pkg_val, const std::string& config_dir) const
 {
 	std::string name = pkg_val["name"].asString();
 	std::string src_folder = pkg_val["src folder"].asString();
@@ -152,7 +152,7 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const wxString& config_di
 	std::string src_folder_path = config_dir + "\\" + src_folder;
 	std::string data_filter = pkg_val["src data filter"].asString();
 
-	std::vector<wxString> files;
+	std::vector<std::string> files;
 	GetAllDataFiles(src_folder_path, data_filter, files);
 	std::vector<const d2d::ISymbol*> symbols;
  	for (int i = 0, n = files.size(); i < n; ++i) {
@@ -178,19 +178,19 @@ void PackCoco::PackLuaFile(const Json::Value& pkg_val, const wxString& config_di
 	delete data_packer;
 }
 
-void PackCoco::GetAllDataFiles(const wxString& src_folder, const wxString& filter, 
-							   std::vector<wxString>& files) const
+void PackCoco::GetAllDataFiles(const std::string& src_folder, const std::string& filter, 
+							   std::vector<std::string>& files) const
 {
-	std::set<wxString> unique_files;
+	std::set<std::string> unique_files;
 
 	wxArrayString all_files;
-	d2d::FilenameTools::fetchAllFiles(src_folder.ToStdString(), all_files);
+	d2d::FilenameTools::fetchAllFiles(src_folder, all_files);
 	for (int i = 0, n = all_files.size(); i < n; ++i) 
 	{
 		wxFileName filename(all_files[i]);
 		filename.Normalize();
-		wxString filepath = filename.GetFullPath();
-		if (!filter.IsEmpty() && !filepath.Contains(filter)) {
+		std::string filepath = filename.GetFullPath();
+		if (!filter.empty() && !filepath.find(filter) == std::string::npos) {
 			continue;
 		}
 
@@ -203,7 +203,7 @@ void PackCoco::GetAllDataFiles(const wxString& src_folder, const wxString& filte
 	std::copy(unique_files.begin(), unique_files.end(), back_inserter(files));
 }
 
-void PackCoco::PackBinFiles(const Json::Value& pkg_val, const wxString& config_dir) const
+void PackCoco::PackBinFiles(const Json::Value& pkg_val, const std::string& config_dir) const
 {
 	std::string name = pkg_val["name"].asString();
 	std::string src_folder = pkg_val["src folder"].asString();
@@ -272,8 +272,8 @@ void PackCoco::PackBinFiles(const Json::Value& pkg_val, const wxString& config_d
 	}
 }
 
-void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const wxString& config_dir, 
-							  const wxString& src_folder, std::vector<std::string>& pts_files) const
+void PackCoco::GetAllPTSFiles(const Json::Value& pkg_val, const std::string& config_dir, 
+							  const std::string& src_folder, std::vector<std::string>& pts_files) const
 {
 	int i = 0;
 	Json::Value src_val = pkg_val["src image list"][i++];

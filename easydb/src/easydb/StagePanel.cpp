@@ -39,7 +39,7 @@ void StagePanel::loadFromDir(const std::string& dirpath)
 	clearSprites();
 	for (size_t i = 0, n = files.size(); i < n; ++i)
 	{
-		wxString filepath = files[i];
+		std::string filepath = files[i].ToStdString();
 		if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)
 			|| d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim))
 		{

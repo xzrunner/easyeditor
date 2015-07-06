@@ -30,21 +30,21 @@ private:
 	void Trigger(const std::string& config_path);
 
 private:
-	void Prepare(const Json::Value& pkg_val, const wxString& config_dir);
+	void Prepare(const Json::Value& pkg_val, const std::string& config_dir);
 
-	void PackTexture(const Json::Value& pkg_val, const wxString& config_dir,
+	void PackTexture(const Json::Value& pkg_val, const std::string& config_dir,
 		const libpacker::ImageTrimData& trim) const;
 	void CompressTexture(const std::string& filepath, const std::string& type) const;
-	void GetAllImageFiles(const Json::Value& pkg_val, const wxString& config_dir,
-		const wxString& src_folder, std::vector<std::string>& images) const;
+	void GetAllImageFiles(const Json::Value& pkg_val, const std::string& config_dir,
+		const std::string& src_folder, std::vector<std::string>& images) const;
 
-	void PackLuaFile(const Json::Value& pkg_val, const wxString& config_dir) const;
-	void GetAllDataFiles(const wxString& src_folder, const wxString& filter, 
-		std::vector<wxString>& files) const;
+	void PackLuaFile(const Json::Value& pkg_val, const std::string& config_dir) const;
+	void GetAllDataFiles(const std::string& src_folder, const std::string& filter, 
+		std::vector<std::string>& files) const;
 
-	void PackBinFiles(const Json::Value& pkg_val, const wxString& config_dir) const;
-	void GetAllPTSFiles(const Json::Value& pkg_val, const wxString& config_dir,
-		const wxString& src_folder, std::vector<std::string>& pts_files) const;
+	void PackBinFiles(const Json::Value& pkg_val, const std::string& config_dir) const;
+	void GetAllPTSFiles(const Json::Value& pkg_val, const std::string& config_dir,
+		const std::string& src_folder, std::vector<std::string>& pts_files) const;
 
 }; // PackCoco
 

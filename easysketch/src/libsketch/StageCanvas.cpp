@@ -86,7 +86,7 @@ void StageCanvas::LoadSymbolToLib(e3d::ISurface* surface, const char* name)
 	symbol->SetName(name);
 	symbol->SetModel(model);
 
-	wxString filepath = FILE_TAG;
+	std::string filepath = FILE_TAG;
 	filepath += ".json";
 	symbol->SetFilepath(filepath);
 

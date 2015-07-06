@@ -17,7 +17,7 @@ public:
 	void OnMousePressed(const d2d::Vector& pos);
 
 protected:
-	virtual void onDraw();
+	virtual void OnDraw();
 
 private:
 	void DrawBackground() const;

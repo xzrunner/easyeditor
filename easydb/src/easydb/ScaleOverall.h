@@ -30,12 +30,12 @@ public:
 private:
 	void Trigger(const std::string& dir, float scale) const;
 
-	void ScaleImage(const wxString& filepath, float scale, d2d::Snapshoot& ss,
-		std::map<wxString, d2d::Vector>& mapImg2Center) const;
-	void ScaleComplex(const wxString& filepath, float scale,
-		const std::map<wxString, d2d::Vector>& mapImg2Center) const;
-	void ScaleAnim(const wxString& filepath, float scale,
-		const std::map<wxString, d2d::Vector>& mapImg2Center) const;
+	void ScaleImage(const std::string& filepath, float scale, d2d::Snapshoot& ss,
+		std::map<std::string, d2d::Vector>& mapImg2Center) const;
+	void ScaleComplex(const std::string& filepath, float scale,
+		const std::map<std::string, d2d::Vector>& mapImg2Center) const;
+	void ScaleAnim(const std::string& filepath, float scale,
+		const std::map<std::string, d2d::Vector>& mapImg2Center) const;
 
 	d2d::Vector GetScaledPos(Json::Value& sprite_val, float scale, 
 		const d2d::Vector& img_offset) const;

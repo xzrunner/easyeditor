@@ -122,7 +122,7 @@ private:
 
 protected:
 	wxString m_filetag;
-	mutable wxString m_currFilename;
+	mutable std::string m_curr_filename;
 
 private:
 	RecentFiles m_recent;

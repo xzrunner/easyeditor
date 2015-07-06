@@ -75,7 +75,7 @@ void Frame::setTask(ITask* task)
 void Frame::initWithFile(const wxString& path)
 {
 	m_task->Clear();
-	m_currFilename = path;
+	m_curr_filename = path;
 //	SetTitle(path);
 	try {
 		m_task->Load(path);
@@ -97,12 +97,12 @@ void Frame::openFile(const wxString& filename)
 
 	m_task->Clear();
 
-	m_currFilename = filename;
-	m_recent.insert(m_currFilename);
-	SetTitle(m_currFilename);
+	m_curr_filename = filename;
+	m_recent.insert(m_curr_filename);
+	SetTitle(m_curr_filename);
 
 	try {
-		m_task->Load(m_currFilename);
+		m_task->Load(m_curr_filename.c_str());
 	} catch (d2d::Exception& e) {
 		d2d::ExceptionDlg dlg(this, e);
 		dlg.ShowModal();
@@ -112,7 +112,7 @@ void Frame::openFile(const wxString& filename)
 void Frame::RefreshWithCurrFile()
 {
 //	m_task->clear();
-	openFile(m_currFilename);
+	openFile(m_curr_filename);
 }
 
 void Frame::saveTmpInfo()
@@ -176,7 +176,7 @@ void Frame::onOpen(wxCommandEvent& event)
 
 void Frame::onSave(wxCommandEvent& event)
 {
-	if (!m_task || m_currFilename.empty()) return;
+	if (!m_task || m_curr_filename.empty()) return;
 
 	try {
 		wxMessageDialog* dlg = new wxMessageDialog(NULL, 
@@ -184,8 +184,8 @@ void Frame::onSave(wxCommandEvent& event)
 			wxYES_NO | wxNO_DEFAULT | wxICON_QUESTION);
 		if (dlg->ShowModal() == wxID_YES)
 		{
-			SetTitle(m_currFilename);
-			m_task->Store(m_currFilename);
+			SetTitle(m_curr_filename);
+			m_task->Store(m_curr_filename.c_str());
 		}
 	} catch (Exception& e) {
 		ExceptionDlg dlg(this, e);
@@ -203,7 +203,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 		if (dlg.ShowModal() == wxID_OK)
 		{
 			wxString fixed = d2d::FilenameTools::getFilenameAddTag(dlg.GetPath(), m_filetag, "json");
-			m_currFilename = fixed;
+			m_curr_filename = fixed;
 			m_task->Store(fixed);
 		}
 	} catch (Exception& e) {
@@ -276,11 +276,11 @@ void Frame::onClose(wxCloseEvent& event)
 		return;
 	}
 
-	if (!m_currFilename.empty()) {
+	if (!m_curr_filename.empty()) {
 		ExitDlg dlg(this);
 		int val = dlg.ShowModal();
 		if (val == wxID_OK) {
-			m_task->Store(m_currFilename);
+			m_task->Store(m_curr_filename.c_str());
 		}
 	}
 
@@ -357,7 +357,7 @@ void Frame::setCurrFilename()
 
 		if (!d2d::FilenameTools::isExist(str))
 		{
-			m_currFilename = str;
+			m_curr_filename = str;
 			break;
 		}
 	}

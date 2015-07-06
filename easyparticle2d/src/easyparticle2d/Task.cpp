@@ -120,7 +120,7 @@ void Task::LoadPSSymbol(const char* filename, const Json::Value& val)
 {
 	StageData* sd = m_stage->GetStageData();
 	std::string dir = d2d::FilenameTools::getFileDir(filename);
-	wxString path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
+	std::string path = d2d::FilenameTools::getAbsolutePath(dir, val["symbol_path"].asString());
 	d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(path);
 	sd->ChangePSSymbol(symbol);
 	symbol->Release();

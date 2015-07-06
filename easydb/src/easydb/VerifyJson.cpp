@@ -164,7 +164,7 @@ void VerifyJson::HandleSpritePath(const std::string& parent,
 	wxFileName filename(child);
 	filename.Normalize();
 	std::string childname = d2d::FilenameTools::getFilenameWithExtension(filename.GetFullPath());
-	StringTools::ToLower(childname);
+	d2d::StringTools::ToLower(childname);
 	
 	std::map<std::string, Node*>::iterator itr = _map_name2node.find(childname);
 	if (itr == _map_name2node.end()) {

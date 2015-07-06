@@ -43,7 +43,7 @@ void StageCanvas2D::OnMousePressed(const d2d::Vector& pos)
 	}
 }
 
-void StageCanvas2D::onDraw()
+void StageCanvas2D::OnDraw()
 {
 	DrawBackground();
 	DrawSprites();

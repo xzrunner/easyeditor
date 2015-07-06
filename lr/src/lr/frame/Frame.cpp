@@ -105,7 +105,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 void Frame::SaveAsJson(const std::string& filepath) const
 {
 	wxString fixed = d2d::FilenameTools::getFilenameAddTag(filepath, m_filetag, "json");
-	m_currFilename = fixed;
+	m_curr_filename = fixed;
 	m_task->Store(fixed);
 }
 

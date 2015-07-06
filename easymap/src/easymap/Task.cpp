@@ -38,7 +38,7 @@ void Task::Load(const char* filename)
 	int i = 0;
 	Json::Value spr_val = value["sprites"][i++];
 	while (!spr_val.isNull()) {
-		wxString filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
+		std::string filepath = d2d::SymbolSearcher::GetSymbolPath(dir, spr_val);
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filepath);
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->load(spr_val);
