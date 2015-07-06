@@ -85,7 +85,9 @@ void StagePanel::clear()
 void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = e_allExisting*/,
 								 bool order/* = true*/) const
 {
-	if (SettingCfg::Instance()->m_all_layers_visible_editable) 
+	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
+		type == d2d::DT_ALL ||
+		type == d2d::DT_SELECTABLE) 
 	{
 		for (int i = 0, n = m_layers.size(); i < n; ++i) {
 			m_layers[i]->TraverseSprite(visitor, order);
@@ -93,25 +95,13 @@ void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 	}
 	else
 	{
-		if (type == d2d::DT_EDITABLE) 
+		for (int i = 0, n = m_layers.size(); i < n; ++i) 
 		{
-			Layer* layer = GetCurrLayer();
-			if (layer->IsEditable()) {
-				layer->TraverseSprite(visitor, order);
-			}
-		} 
-		else 
-		{
-			for (int i = 0, n = m_layers.size(); i < n; ++i) 
+			Layer* layer = m_layers[i];
+			if (type == d2d::DT_EDITABLE && layer->IsEditable() ||
+				type == d2d::DT_VISIBLE && layer->IsVisible())
 			{
-				Layer* layer = m_layers[i];
-				if (type == d2d::DT_ALL || 
-					type == d2d::DT_SELECTABLE ||
-					type == d2d::DT_EDITABLE && layer->IsEditable() ||
-					type == d2d::DT_VISIBLE && layer->IsVisible())
-				{
-					layer->TraverseSprite(visitor, order);
-				}
+				layer->TraverseSprite(visitor, order);
 			}
 		}
 	}
@@ -186,15 +176,24 @@ bool StagePanel::resetSpriteOrder(d2d::ISprite* sprite, bool up)
 
 void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
 {
-	for (int i = 0, n = m_layers.size(); i < n; ++i) 
+	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
+		type == d2d::DT_ALL ||
+		type == d2d::DT_SELECTABLE) 
 	{
-		Layer* layer = m_layers[i];
-		if (type == d2d::DT_ALL || 
-			type == d2d::DT_SELECTABLE ||
-			type == d2d::DT_EDITABLE && layer->IsEditable() ||
-			type == d2d::DT_VISIBLE && layer->IsVisible())
+		for (int i = 0, n = m_layers.size(); i < n; ++i) {
+			m_layers[i]->TraverseShape(visitor);
+		}
+	}
+	else
+	{
+		for (int i = 0, n = m_layers.size(); i < n; ++i) 
 		{
-			layer->TraverseShape(visitor);
+			Layer* layer = m_layers[i];
+			if (type == d2d::DT_EDITABLE && layer->IsEditable() ||
+				type == d2d::DT_VISIBLE && layer->IsVisible())
+			{
+				layer->TraverseShape(visitor);
+			}
 		}
 	}
 }

@@ -24,6 +24,19 @@ LibraryPanel::LibraryPanel(wxWindow* parent)
 void LibraryPanel::OnPageChanged(wxBookCtrlEvent& event)
 {
 	d2d::LibraryPanel::OnPageChanged(event);
+
+	const std::vector<Layer*>& layers = m_stage->GetLayers();
+	Layer* curr = m_stage->GetCurrLayer();
+	for (int i = 0, n = layers.size(); i < n; ++i) {
+		if (layers[i] == curr) {
+			layers[i]->SetEditable(true);
+			layers[i]->SetVisible(true);
+		} else {
+			layers[i]->SetEditable(false);
+			layers[i]->SetVisible(true);
+		}
+	}
+
 	Refresh();
 }
 
