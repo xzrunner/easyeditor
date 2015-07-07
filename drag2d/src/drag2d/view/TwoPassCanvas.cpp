@@ -1,18 +1,14 @@
 #include "TwoPassCanvas.h"
 
 #include "render/ShaderMgr.h"
-#include "render/BlendShader.h"
 #include "render/ScreenFBO.h"
 #include "render/SpriteRenderer.h"
-
-#include "render/PrimitiveDraw.h"
-#include "render/style_config.h"
 
 namespace d2d
 {
 
 TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
-	: IStageCanvas(stage)
+	: OnePassCanvas(stage)
 {
 }
 
@@ -31,13 +27,9 @@ void TwoPassCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
- 	mgr->sprite();
  	mgr->SetFBO(fbo.GetFboID());
 
-	glClearColor(m_bg_color.r, m_bg_color.g, m_bg_color.b, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	OnDrawSprites();
+	OnePassCanvas::OnDrawWhole();
 
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Screen

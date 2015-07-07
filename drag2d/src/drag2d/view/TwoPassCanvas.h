@@ -1,12 +1,12 @@
 #ifndef _DRAG2D_TWO_PASS_CANVAS_H_
 #define _DRAG2D_TWO_PASS_CANVAS_H_
 
-#include "IStageCanvas.h"
+#include "OnePassCanvas.h"
 
 namespace d2d
 {
 
-class TwoPassCanvas : public IStageCanvas
+class TwoPassCanvas : public OnePassCanvas
 {
 public:
 	TwoPassCanvas(EditPanel* stage);
