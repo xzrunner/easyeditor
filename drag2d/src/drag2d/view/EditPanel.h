@@ -13,6 +13,7 @@ class AbstractAtomicOP;
 class AbstractEditOP;
 class IStageCanvas;
 class Camera;
+class IEditOPMonitor;
 
 class EditPanel : public wxPanel
 {
@@ -62,6 +63,10 @@ public:
 
 	void OnRightPopupMenu(wxCommandEvent& event);
 
+	void SetEditOPMonitor(IEditOPMonitor* monitor) {
+		m_op_monitor = monitor;
+	}
+
 protected:
 	void OnSize(wxSizeEvent& event);
 
@@ -78,10 +83,10 @@ protected:
 
 	wxTopLevelWindow* m_frame;
 
-	
-
 private:
 	HistoryList m_history_list;
+
+	IEditOPMonitor* m_op_monitor;
 
 	DECLARE_EVENT_TABLE()
 

@@ -1,5 +1,6 @@
 #include "EditPanel.h"
 #include "HistoryList.h"
+#include "IEditOPMonitor.h"
 
 #include "operator/AbstractEditOP.h"
 #include "view/Camera.h"
@@ -18,6 +19,7 @@ END_EVENT_TABLE()
 EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
 	, m_frame(frame)
+	, m_op_monitor(NULL)
 {
 	m_edit_op = NULL;
 	m_canvas = NULL;
@@ -204,6 +206,10 @@ void EditPanel::Redo()
 
 void EditPanel::AddOpRecord(AbstractAtomicOP* op)
 {
+	if (m_op_monitor) {
+		m_op_monitor->AddEditOP(op);
+	}
+
 	m_history_list.insert(op);
 	SetTitleStatus(true);
 }

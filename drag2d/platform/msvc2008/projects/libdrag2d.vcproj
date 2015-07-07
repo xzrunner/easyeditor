@@ -1981,6 +1981,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\..\src\drag2d\view\IEditOPMonitor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\..\src\drag2d\view\wrap_StagePanel.cpp"
 					>
 				</File>
@@ -2042,14 +2046,6 @@
 					<Filter
 						Name="base"
 						>
-						<File
-							RelativePath="..\..\..\src\drag2d\view\GLCanvas.cpp"
-							>
-						</File>
-						<File
-							RelativePath="..\..\..\src\drag2d\view\GLCanvas.h"
-							>
-						</File>
 						<File
 							RelativePath="..\..\..\src\drag2d\view\IStageCanvas.cpp"
 							>

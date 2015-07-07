@@ -1,4 +1,5 @@
 #include "TwoPassCanvas.h"
+#include "EditPanel.h"
 
 #include "render/ShaderMgr.h"
 #include "render/ScreenFBO.h"
@@ -9,7 +10,14 @@ namespace d2d
 
 TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
 	: OnePassCanvas(stage)
+	, m_dirty(true)
 {
+	stage->SetEditOPMonitor(this);
+}
+
+void TwoPassCanvas::AddEditOP(AbstractAtomicOP* op)
+{
+	m_dirty = true;
 }
 
 void TwoPassCanvas::OnSize(int w, int h)
@@ -27,9 +35,11 @@ void TwoPassCanvas::OnDrawWhole() const
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to FBO
 	//////////////////////////////////////////////////////////////////////////
- 	mgr->SetFBO(fbo.GetFboID());
-
-	OnePassCanvas::OnDrawWhole();
+//	if (m_dirty) {
+ 		mgr->SetFBO(fbo.GetFboID());
+		OnePassCanvas::OnDrawWhole();
+// 		m_dirty = false;
+// 	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// Draw to Screen
