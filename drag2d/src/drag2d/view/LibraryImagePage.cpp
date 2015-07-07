@@ -4,7 +4,7 @@
 
 #include "dataset/SymbolMgr.h"
 #include "dataset/ImageSymbol.h"
-#include "view/GLCanvas.h"
+#include "view/IStageCanvas.h"
 #include "common/Exception.h"
 
 namespace d2d
@@ -43,7 +43,7 @@ void LibraryImagePage::OnAddPress(wxCommandEvent& event)
 			}
 		}
 		if (m_canvas) {
-			m_canvas->resetViewport();
+			m_canvas->ResetViewport();
 		}
 	}
 }

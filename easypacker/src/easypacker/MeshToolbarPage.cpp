@@ -134,7 +134,7 @@ void MeshToolbarPage::OnSaveImage(wxCommandEvent& event)
 		wxString outpath = d2d::FilenameTools::getFileDir(physics_filepath) + "\\image.png";
 		ss.SaveToFile(outpath.ToStdString());
 
-		m_stage->getCanvas()->resetViewport();
+		m_stage->getCanvas()->ResetViewport();
 	}
 }
 

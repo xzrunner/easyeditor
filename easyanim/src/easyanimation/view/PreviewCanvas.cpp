@@ -20,24 +20,24 @@ PreviewCanvas::PreviewCanvas(d2d::EditPanel* stage, const PlaySettings& settings
 {
 }
 
-void PreviewCanvas::initGL()
+void PreviewCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 	m_ctrl->GetLibraryPanel()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 
-	resetViewport();
+	ResetViewport();
 }
 
-void PreviewCanvas::OnDraw()
+void PreviewCanvas::OnDrawSprites() const
 {
 	float xedge = GetSize().GetWidth() * 0.5f;
 	float yedge = GetSize().GetHeight() * 0.5f;
 	d2d::PrimitiveDraw::cross(d2d::Vector(0,0), xedge, yedge, d2d::LIGHT_GREY);
 
-	drawStageData();
+	DrawStageData();
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {
@@ -61,10 +61,10 @@ void PreviewCanvas::OnTimer()
 }
 
 // todo: waste time!
-void PreviewCanvas::drawStageData()
+void PreviewCanvas::DrawStageData() const
 {
 	std::vector<d2d::ISprite*> sprites;
-	getCurrSprites(sprites);
+	GetCurrSprites(sprites);
 
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
@@ -73,7 +73,7 @@ void PreviewCanvas::drawStageData()
 		sprites[i]->Release();
 }
 
-void PreviewCanvas::getCurrSprites(std::vector<d2d::ISprite*>& sprites) const
+void PreviewCanvas::GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const
 {
 	LayersMgr& layers = m_ctrl->GetLayers();
 	for (size_t i = 0, n = layers.size(); i < n; ++i)

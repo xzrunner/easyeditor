@@ -61,7 +61,7 @@ void Frame::onSettings(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
-	m_task->GetEditPanel()->getCanvas()->setBgColor(col);
+	m_task->GetEditPanel()->getCanvas()->SetBgColor(col);
 }
 
 void Frame::onPreview(wxCommandEvent& event)
@@ -115,13 +115,13 @@ void Frame::onSetBackground(wxCommandEvent& event)
 	{
  		std::string filename = dlg.GetPath().ToStdString();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-  		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
+  		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->getCanvas();
   		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
 	else
 	{
-		d2d::GLCanvas* canvas = m_task->GetEditPanel()->getCanvas();
+		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->getCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
 	}
 }
@@ -185,7 +185,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	Symbol* symbol = ((StagePanel*)(m_task->GetEditPanel()))->getSymbol();
 	symbol->InitBounding();
 	ss.OutputToImageFile(symbol, filepath);
-	m_task->GetEditPanel()->getCanvas()->resetInitState();
+	m_task->GetEditPanel()->getCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

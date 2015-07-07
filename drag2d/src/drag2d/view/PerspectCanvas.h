@@ -1,19 +1,23 @@
-#pragma once
+#ifndef _DRAG2D_PERSPECT_CANVAS_H_
+#define _DRAG2D_PERSPECT_CANVAS_H_
 
-#include "GLCanvas.h"
+#include "OnePassCanvas.h"
 
 namespace d2d
 {
-	class EditPanel;
 
-	class PerspectCanvas : public GLCanvas
-	{
-	public:
-		PerspectCanvas(EditPanel* editPanel);
+class EditPanel;
 
-	private:
-		virtual void onSize(int w, int h);
+class PerspectCanvas : public OnePassCanvas
+{
+public:
+	PerspectCanvas(EditPanel* editPanel);
 
-	}; // PerspectCanvas
+private:
+	virtual void OnSize(int w, int h);
+
+}; // PerspectCanvas
+
 }
 
+#endif // _DRAG2D_PERSPECT_CANVAS_H_

@@ -99,7 +99,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	ss.SaveToFile(filepath);
 
-	stage->getCanvas()->resetInitState();
+	stage->getCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

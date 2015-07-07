@@ -1,6 +1,6 @@
 #include "ILibraryPage.h"
 #include "LibraryList.h"
-#include "GLCanvas.h"
+#include "IStageCanvas.h"
 
 #include "common/Config.h"
 #include "dataset/SymbolMgr.h"
@@ -49,7 +49,7 @@ void ILibraryPage::AddItem(ListItem* item)
 {
 	m_list->insert(item);
 	if (m_canvas) {
-		m_canvas->resetViewport();
+		m_canvas->ResetViewport();
 	}
 }
 

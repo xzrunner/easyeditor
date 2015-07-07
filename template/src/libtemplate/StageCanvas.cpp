@@ -6,14 +6,14 @@ namespace etemplate
 
 StageCanvas::StageCanvas(StagePanel* stage)
 //	: d2d::DynamicStageCanvas(stage)
-	: d2d::FBOCanvas(stage)
+	: d2d::TwoPassCanvas(stage)
 	, m_stage(stage)
 {
 }
 
 void StageCanvas::OnSize(int w, int h)
 {
-	d2d::FBOCanvas::OnSize(w, h);
+	d2d::TwoPassCanvas::OnSize(w, h);
 
 	//////////////////////////////////////////////////////////////////////////
 
@@ -36,11 +36,6 @@ void StageCanvas::OnDrawSprites() const
 		d2d::DT_VISIBLE);
 
 	m_stage->drawEditTemp();
-}
-
-void StageCanvas::OnDraw()
-{
-	OnDrawSprites();
 }
 
 }

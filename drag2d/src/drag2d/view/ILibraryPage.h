@@ -11,7 +11,7 @@ namespace d2d
 class ListItem;
 class ISymbol;
 class LibraryList;
-class GLCanvas;
+class IStageCanvas;
 
 class ILibraryPage : public wxWindow
 {
@@ -37,7 +37,7 @@ public:
 
 	LibraryList* GetList() { return m_list; }
 
-	void SetCanvas(GLCanvas* canvas) {
+	void SetCanvas(IStageCanvas* canvas) {
 		m_canvas = canvas;
 	}
 
@@ -64,7 +64,7 @@ protected:
 
 	LibraryList* m_list;
 
-	GLCanvas* m_canvas;
+	IStageCanvas* m_canvas;
 
 }; // ILibraryPage
 

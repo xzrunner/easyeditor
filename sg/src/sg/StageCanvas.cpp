@@ -46,7 +46,7 @@ d2d::Vector StageCanvas::TransToFlatView(const d2d::Vector& pos)
 	return ret;
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	static bool inited = false;
 	if (!inited) {

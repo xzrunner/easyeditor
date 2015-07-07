@@ -10,7 +10,7 @@ namespace d2d
 {
 	class AbstractAtomicOP;
 	class AbstractEditOP;
-	class GLCanvas;
+	class IStageCanvas;
 	class Camera;
 
 	class EditPanel : public wxPanel
@@ -29,13 +29,13 @@ namespace d2d
 		AbstractEditOP* getEditOP() const { return m_editOP; }
 		void setEditOP(AbstractEditOP* editOP);
 
-		GLCanvas* getCanvas() const { return m_canvas; }
-		void SetCanvas(GLCanvas* canvas) { m_canvas = canvas; }
+		IStageCanvas* getCanvas() const { return m_canvas; }
+		void SetCanvas(IStageCanvas* canvas) { m_canvas = canvas; }
 
 		Camera* getCamera() const { return m_camera; }
 
-		// In Stage, class StagePanel can't get focus, only its class GLCanvas has the focus, so 
-		// these two func should be called by GLCanvas.
+		// In Stage, class StagePanel can't get focus, only its class IStageCanvas has the focus, so 
+		// these two func should be called by IStageCanvas.
 		// While in SymbolEdit, class SymbolEditPanel can get focus.
 		void onMouse(wxMouseEvent& event);
 		virtual void OnKeyDown(wxKeyEvent& event);
@@ -70,7 +70,7 @@ namespace d2d
 	protected:
 		AbstractEditOP* m_editOP;
 
-		GLCanvas* m_canvas;
+		IStageCanvas* m_canvas;
 		Camera* m_camera;
 
 		HistoryList m_historyList;

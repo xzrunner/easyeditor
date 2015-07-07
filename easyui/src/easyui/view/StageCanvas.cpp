@@ -13,7 +13,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	static bool inited = false;
 	if (!inited) {

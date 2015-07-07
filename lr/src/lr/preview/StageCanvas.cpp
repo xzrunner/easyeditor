@@ -13,15 +13,15 @@ StageCanvas::StageCanvas(d2d::EditPanel* stage, d2d::PlayControl& control,
 {
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 	for (int i = 0, n = m_sprites.size(); i < n; ++i) {
 		m_sprites[i]->getSymbol().ReloadTexture();
 	}
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	for (size_t i = 0, n = m_sprites.size(); i < n; ++i)
 	{

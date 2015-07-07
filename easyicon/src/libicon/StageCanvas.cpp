@@ -11,7 +11,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	Sprite sprite;
 	sprite.setSymbol(&m_stage->GetSymbol());

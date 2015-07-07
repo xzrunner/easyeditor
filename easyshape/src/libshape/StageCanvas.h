@@ -16,11 +16,11 @@ public:
 		const std::vector<d2d::ISprite*>& bg_sprites);
 
 public:
-	void drawGuideLines();
+	void DrawGuideLines() const;
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 private:
 	d2d::ISprite* m_edited;

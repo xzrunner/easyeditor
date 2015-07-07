@@ -14,7 +14,7 @@ namespace edb
 		virtual ~StageCanvas();
 
 	protected:
-		virtual void OnDraw();
+		virtual void OnDrawSprites() const;
 
 	private:
 		void drawConnection() const;

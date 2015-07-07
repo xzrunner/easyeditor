@@ -15,8 +15,8 @@ public:
 	StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* sprites_impl);
 
 protected:
-	virtual void onSize(int w, int h);
-	virtual void OnDraw();
+	virtual void OnSize(int w, int h);
+	virtual void OnDrawSprites() const;
 
 private:
 	void DrawBackground() const;

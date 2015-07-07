@@ -17,13 +17,13 @@ public:
 	void SetBackground(d2d::ISymbol* symbol);
 
 protected:
-	virtual void OnDraw();
+	virtual void OnDrawSprites() const;
 
-	void onMouse(wxMouseEvent& event);
+	void OnMouse(wxMouseEvent& event);
 	void OnKeyDown(wxKeyEvent& event);
 
 private:
-	void drawbackground() const;
+	void DrawBackground() const;
 
 private:
 	d2d::ISymbol* m_background;

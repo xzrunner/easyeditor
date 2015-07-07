@@ -9,7 +9,7 @@ namespace emodeling
 	class SettingViewDlg : public wxDialog
 	{
 	public:
-		SettingViewDlg(wxWindow* parent, d2d::GLCanvas* canvas);
+		SettingViewDlg(wxWindow* parent, d2d::IStageCanvas* canvas);
 
 	private:
 		wxSizer* initDisplayTypePanel();
@@ -21,7 +21,7 @@ namespace emodeling
 		void onChangeDisplayPolygonBound(wxCommandEvent& event);
 
 	private:
-		d2d::GLCanvas* m_canvas;
+		d2d::IStageCanvas* m_canvas;
 
 		wxSpinCtrl* m_ctlPointSize;
 

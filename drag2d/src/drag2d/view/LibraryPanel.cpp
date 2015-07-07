@@ -93,7 +93,7 @@ void LibraryPanel::Traverse(IVisitor& visitor) const
 		m_selected->Traverse(visitor);
 }
 
-void LibraryPanel::SetCanvas(GLCanvas* canvas)
+void LibraryPanel::SetCanvas(IStageCanvas* canvas)
 {
 	for (int i = 0, n = m_pages.size(); i < n; ++i) {
 		m_pages[i]->SetCanvas(canvas);

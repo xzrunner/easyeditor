@@ -9,7 +9,7 @@ namespace etemplate
 class StagePanel;
 
 //class StageCanvas : public d2d::DynamicStageCanvas
-class StageCanvas : public d2d::FBOCanvas
+class StageCanvas : public d2d::TwoPassCanvas
 {
 public:
 	StageCanvas(StagePanel* stage);
@@ -17,8 +17,6 @@ public:
 protected:
 	virtual void OnSize(int w, int h);
 	virtual void OnDrawSprites() const;
-
-	virtual void OnDraw();
 
 private:
 	StagePanel* m_stage;

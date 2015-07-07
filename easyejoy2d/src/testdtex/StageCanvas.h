@@ -14,9 +14,9 @@ public:
 	StageCanvas(StagePanel* panel);
 
 protected:
-	virtual void initGL();
-	virtual void onSize(int w, int h);
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnSize(int w, int h);
+	virtual void OnDrawSprites() const;
 
 private:
 	void DrawEJScreen() const;

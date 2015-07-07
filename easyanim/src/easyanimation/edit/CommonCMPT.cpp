@@ -176,7 +176,7 @@ void CommonCMPT::onLoadFromFolder(wxCommandEvent& event)
 
 	m_ctrl->Refresh();
 
- 	m_ctrl->GetStagePanel()->getCanvas()->resetViewport();
+ 	m_ctrl->GetStagePanel()->getCanvas()->ResetViewport();
 }
 
 void CommonCMPT::onLoadFromList(wxCommandEvent& event)

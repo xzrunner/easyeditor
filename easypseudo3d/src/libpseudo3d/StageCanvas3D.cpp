@@ -9,7 +9,7 @@ namespace epseudo3d
 {
 
 BEGIN_EVENT_TABLE(StageCanvas3D, d2d::OrthoCanvas)
-	EVT_TIMER(TIMER_ID, StageCanvas3D::onTimer)
+	EVT_TIMER(TIMER_ID, StageCanvas3D::OnTimer)
 END_EVENT_TABLE()
 
 StageCanvas3D::StageCanvas3D(d2d::EditPanel* stage)
@@ -18,7 +18,7 @@ StageCanvas3D::StageCanvas3D(d2d::EditPanel* stage)
 {
 	m_timer.Start(100);
 
-	setBgColor(d2d::BLACK);
+	SetBgColor(d2d::BLACK);
 
 //	m_scene = new Mapping3DScene(this);
 	m_scene = new Projection3DScene(this);
@@ -36,13 +36,13 @@ void StageCanvas3D::LoadScene(const char* filename)
 
 void StageCanvas3D::GetScreenSize(int* width, int* height) const
 {
-	*width = m_screen_width;
-	*height = m_screen_height;
+	*width = m_width;
+	*height = m_height;
 }
 
-void StageCanvas3D::initGL()
+void StageCanvas3D::InitGL()
 {
-	e3d::StageCanvas::initGL();
+	e3d::StageCanvas::InitGL();
 
 	m_scene->Load(NULL);
 
@@ -50,17 +50,17 @@ void StageCanvas3D::initGL()
 	Refresh();
 }
 
-void StageCanvas3D::onDraw()
+void StageCanvas3D::OnDrawSprites() const
 {
 	m_scene->Draw();
 }
 
-void StageCanvas3D::OnDrawDC() const
-{
-	m_scene->DebugDraw();
-}
+//void StageCanvas3D::OnDrawDC() const
+//{
+//	m_scene->DebugDraw();
+//}
 
-void StageCanvas3D::onTimer(wxTimerEvent& event)
+void StageCanvas3D::OnTimer(wxTimerEvent& event)
 {
 	Refresh();
 }

@@ -11,7 +11,7 @@
 #include "view/ExitDlg.h"
 #include "view/FrameDropTarget.h"
 #include "view/EditPanel.h"
-#include "view/GLCanvas.h"
+#include "view/IStageCanvas.h"
 #include "render/DynamicTexAndFont.h"
 
 #include <wx/filename.h>
@@ -218,7 +218,7 @@ void Frame::onSettings(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	const Colorf& col = Config::Instance()->GetSettings().bg_color;
-	m_task->GetEditPanel()->getCanvas()->setBgColor(col);
+	m_task->GetEditPanel()->getCanvas()->SetBgColor(col);
 }
 
 wxString Frame::GetFileFilter() const

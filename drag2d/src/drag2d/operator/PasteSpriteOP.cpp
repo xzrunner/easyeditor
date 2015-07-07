@@ -2,10 +2,10 @@
 
 #include "common/visitors.h"
 #include "component/PasteSpriteCMPT.h"
-#include "view/MultiSpritesImpl.h"
 #include "render/GL10.h"
+#include "view/MultiSpritesImpl.h"
+#include "view/IStageCanvas.h"
 #include "render/SpriteRenderer.h"
-#include "view/GLCanvas.h"
 
 namespace d2d
 {

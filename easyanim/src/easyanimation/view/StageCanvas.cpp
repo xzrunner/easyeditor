@@ -22,9 +22,9 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 	d2d::obj_assign((d2d::Object*&)m_background, symbol);
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
-	drawbackground();
+	DrawBackground();
 	std::vector<d2d::ISprite*> sprites;
 	static_cast<StagePanel*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
@@ -38,7 +38,7 @@ void StageCanvas::OnDraw()
 #endif
 }
 
-void StageCanvas::drawbackground() const
+void StageCanvas::DrawBackground() const
 {
 	if (m_background) {
 		d2d::SpriteRenderer::Instance()->Draw(m_background);

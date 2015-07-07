@@ -12,16 +12,16 @@ StageCanvas::StageCanvas(StagePanel* stage)
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	d2d::Rect sr = m_screen.GetRegion();
 	m_stage_impl->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
 
-	drawRegion();
+	DrawRegion();
 }
 
-void StageCanvas::drawRegion()
+void StageCanvas::DrawRegion() const
 {
 	const float width = Context::Instance()->width,
 		height = Context::Instance()->height;

@@ -12,17 +12,17 @@ StageCanvas::StageCanvas(StagePanel* panel)
 {
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 
 	m_panel->Load();
-	resetViewport();	// todo: resize -> new -> resize
+	ResetViewport();	// todo: resize -> new -> resize
 }
 
-void StageCanvas::onSize(int w, int h)
+void StageCanvas::OnSize(int w, int h)
 {
-	d2d::DynamicStageCanvas::onSize(w, h);
+	d2d::DynamicStageCanvas::OnSize(w, h);
 
 	eejoy2d::EJScreen* scr = eejoy2d::EJScreen::Instance();
 	if (scr) {
@@ -30,7 +30,7 @@ void StageCanvas::onSize(int w, int h)
 	}
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	m_panel->Update();
 

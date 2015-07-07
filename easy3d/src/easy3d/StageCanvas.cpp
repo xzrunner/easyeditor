@@ -8,7 +8,7 @@ namespace e3d
 {
 
 StageCanvas::StageCanvas(d2d::EditPanel* editPanel)
-	: d2d::GLCanvas(editPanel)
+	: d2d::OnePassCanvas(editPanel)
 {
 }
 
@@ -16,7 +16,7 @@ void StageCanvas::Refresh()
 {
 	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 
-	d2d::GLCanvas::Refresh();
+	d2d::IStageCanvas::Refresh();
 }
 
 ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
@@ -27,17 +27,17 @@ ivec2 StageCanvas::TransPos3ProjectToScreen(const vec3& proj) const
 	vec3 v1 = m_mat_projection * v0;
 	v1.z = v0.z;
 
-	return ViewFrustum::TransPos3ProjectToScreen(v1, m_screen_width, m_screen_height);
+	return ViewFrustum::TransPos3ProjectToScreen(v1, m_width, m_height);
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-//	d2d::GLCanvas::initGL();
+//	d2d::IStageCanvas::InitGL();
 
 	//////////////////////////////////////////////////////////////////////////
 
 	try {
-		wxLogDebug(_T("GLCanvas::initGL()"));
+		wxLogDebug(_T("IStageCanvas::InitGL()"));
 
 		if (glewInit() != GLEW_OK) {
 			exit(1);
@@ -45,7 +45,7 @@ void StageCanvas::initGL()
 
 		ShaderMgr::Instance()->Null();
 
-		resetViewport();
+		ResetViewport();
 
 		glShadeModel(GL_SMOOTH);
 		glEnable(GL_TEXTURE_2D);
@@ -63,7 +63,7 @@ void StageCanvas::initGL()
 	ShaderMgr::Instance()->SetModelView(m_camera3.GetModelViewMat());
 }
 
-void StageCanvas::onSize(int w, int h)
+void StageCanvas::OnSize(int w, int h)
 {
 	glViewport(0, 0, w, h);
 	m_screen.SetSize(w, h);
@@ -77,11 +77,6 @@ void StageCanvas::onSize(int w, int h)
 	float hh = 1.0f * h / w;
 	m_mat_projection = mat4::Perspective(-1, 1, -hh, hh, 
 		e3d::Camera::CAM_NEAR, e3d::Camera::CAM_FAR);
-}
-
-void StageCanvas::OnDraw()
-{
-
 }
 
 }

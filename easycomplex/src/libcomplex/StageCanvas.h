@@ -17,8 +17,8 @@ public:
 	void SetBackground(d2d::ISymbol* symbol);
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 protected:
 	StagePanel* m_stage;
@@ -34,7 +34,7 @@ private:
 
 	d2d::ISymbol* m_background;
 
-	d2d::FpsStat m_stat;
+	mutable d2d::FpsStat m_stat;
 
 }; // StageCanvas
 

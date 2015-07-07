@@ -29,12 +29,12 @@ StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 	if (m_toolbar->isComposeOP())
 	{
-		drawGuideLines();
+		DrawGuideLines();
 		d2d::Rect sr = m_screen.GetRegion();
 		editPanel->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 			d2d::DT_VISIBLE);
@@ -50,7 +50,7 @@ void StageCanvas::OnDraw()
 	editPanel->drawEditTemp();
 }
 
-void StageCanvas::drawGuideLines()
+void StageCanvas::DrawGuideLines() const
 {
 	const float edge = EDGE;
 

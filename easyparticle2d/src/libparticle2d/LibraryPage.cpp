@@ -42,7 +42,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 		}
 
 		if (!filenames.empty() && m_canvas) {
-			m_canvas->resetViewport();
+			m_canvas->ResetViewport();
 		}
 	}
 }

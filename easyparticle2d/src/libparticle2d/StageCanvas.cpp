@@ -15,7 +15,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 	, m_stage(stage)
 	, m_control(0.033f)
 {
-	m_bgColor.set(1, 1, 1, 1);
+	m_bg_color.set(1, 1, 1, 1);
 	m_currFrame = 1;
 }
 
@@ -23,7 +23,7 @@ StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	DrawBackground();
 

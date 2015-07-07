@@ -17,8 +17,8 @@
 #include "view/EditPanel.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/PropertySettingPanel.h"
-#include "view/GLCanvas.h"
 #include "view/Camera.h"
+#include "view/IStageCanvas.h"
 #include "history/DeleteSpriteAOP.h"
 #include "history/CombineAOP.h"
 #include "history/TranslateSpriteAOP.h"
@@ -367,7 +367,7 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 					dtex->InsertSymbol(s);
 				}
 
-				m_stage->getCanvas()->resetViewport();
+				m_stage->getCanvas()->ResetViewport();
 			}
 		}
 		break;

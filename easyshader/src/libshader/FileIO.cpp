@@ -23,7 +23,7 @@ static const std::string STR_MAT4	= "mat4";
 static const std::string STR_TIME	= "time";
 static const std::string STR_INPUT	= "input";
 
-Shader* FileIO::LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
+Shader* FileIO::LoadShader(const wxString& filepath, d2d::IStageCanvas* canvas,
 						   ToolbarPanel* toolbar, bool is_2d)
 {
 	toolbar->Clear();
@@ -50,7 +50,7 @@ Shader* FileIO::LoadShader(const wxString& filepath, d2d::GLCanvas* canvas,
 		shader_mgr->Model();
 	}
 	shader->LoadUniforms();
-	canvas->resetViewport();
+	canvas->ResetViewport();
 
 	return shader;
 }

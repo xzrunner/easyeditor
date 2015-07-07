@@ -55,7 +55,7 @@ void Task::onPreview() const
 	Context::Instance()->stage->resetCanvas();
 }
 
-d2d::GLCanvas* Task::getCanvas() const
+d2d::IStageCanvas* Task::getCanvas() const
 {
 	if (d2d::EditPanel* stage = Context::Instance()->stage)
 		return stage->getCanvas();

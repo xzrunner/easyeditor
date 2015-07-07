@@ -3,7 +3,7 @@
 
 #include "operator/AbstractEditOP.h"
 #include "view/Camera.h"
-#include "view/GLCanvas.h"
+#include "view/IStageCanvas.h"
 #include "view/Frame.h"
 
 #include <fstream>
@@ -164,7 +164,7 @@ void EditPanel::resetCanvas()
 {
 	if (m_canvas)
 	{
-		m_canvas->resetInitState();
+		m_canvas->ResetInitState();
 		Refresh();
 	}
 }
@@ -173,7 +173,7 @@ void EditPanel::ResetViewport()
 {
 	if (m_canvas)
 	{
-		m_canvas->resetViewport();
+		m_canvas->ResetViewport();
 //		Refresh();
 	}
 }

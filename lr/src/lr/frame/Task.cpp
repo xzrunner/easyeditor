@@ -28,7 +28,7 @@ Task::~Task()
 void Task::Load(const char* filename)
 {
 	FileIO::Load(filename, m_library, m_stage, m_grouptree);
-	m_stage->getCanvas()->resetViewport();
+	m_stage->getCanvas()->ResetViewport();
 }
 
 void Task::Store(const char* filename) const

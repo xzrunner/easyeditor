@@ -14,10 +14,10 @@ public:
 	StageCanvas(StagePanel* stage);
 
 protected:
-	virtual void OnDraw();
+	virtual void OnDrawSprites() const;
 
 private:
-	void drawRegion();
+	void DrawRegion() const;
 
 private:
 	d2d::MultiSpritesImpl* m_stage_impl;

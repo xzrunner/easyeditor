@@ -5,7 +5,7 @@
 
 using namespace emodeling;
 
-SettingViewDlg::SettingViewDlg(wxWindow* parent, d2d::GLCanvas* canvas)
+SettingViewDlg::SettingViewDlg(wxWindow* parent, d2d::IStageCanvas* canvas)
 	: wxDialog(parent, wxID_ANY, wxT("Display Setting"))
 	, m_canvas(canvas)
 	, m_ctlPointSize(NULL)

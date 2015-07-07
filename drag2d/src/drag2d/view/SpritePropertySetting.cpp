@@ -8,7 +8,7 @@
 #include "dataset/ISprite.h"
 #include "dataset/ISymbol.h"
 #include "view/EditPanel.h"
-#include "view/GLCanvas.h"
+#include "view/IStageCanvas.h"
 #include "render/BlendModes.h"
 #include "widgets/ColorProperty.h"
 
@@ -87,7 +87,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		int idx = wxANY_AS(value, int);
 		spr->SetFilterMode(FilterModes::Instance()->GetIDFromIdx(idx));
-		m_stage->getCanvas()->resetViewport();
+		m_stage->getCanvas()->ResetViewport();
 //		m_stage->Refresh();
 	}
 	else if (name == wxT("Clip"))

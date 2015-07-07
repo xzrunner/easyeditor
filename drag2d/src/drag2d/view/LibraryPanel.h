@@ -14,7 +14,7 @@ class ILibraryPage;
 class SymbolMgr;
 class LibraryList;
 class IVisitor;
-class GLCanvas;
+class IStageCanvas;
 
 class LibraryPanel : public wxPanel
 {
@@ -41,7 +41,7 @@ public:
 
 	wxWindow* GetNotebook() { return m_notebook; }
 
-	void SetCanvas(GLCanvas* canvas);
+	void SetCanvas(IStageCanvas* canvas);
 
 	bool AddSymbol(ISymbol* symbol);
 

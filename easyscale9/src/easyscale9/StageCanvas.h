@@ -20,10 +20,10 @@ public:
 	}
 
 protected:
-	virtual void OnDraw();
+	virtual void OnDrawSprites() const;
 
 private:
-	void drawGuideLines();
+	void DrawGuideLines() const;
 
 private:
 	d2d::ShapeStyle m_bgStyle, m_nodeStyle;

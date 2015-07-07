@@ -14,8 +14,8 @@ public:
 	StageCanvas(StagePanel* panel);
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 private:
 	StagePanel* m_panel;

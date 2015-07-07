@@ -30,9 +30,9 @@
 //	prepareSprites(sprites);
 //}
 //
-//void EJPreviewCanvas::initGL()
+//void EJPreviewCanvas::InitGL()
 //{
-//	OrthoCanvas::initGL();
+//	OrthoCanvas::InitGL();
 ////	static_cast<LibraryPanel*>(Context::Instance()->library)->ReloadTexture();
 //	Shader::Instance()->Release();
 //}

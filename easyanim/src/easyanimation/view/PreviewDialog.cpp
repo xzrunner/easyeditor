@@ -16,7 +16,7 @@ PreviewDialog::PreviewDialog(wxWindow* parent, Controller* ctrl)
 	initLayout();
 
 	const d2d::Colorf& col = d2d::Config::Instance()->GetSettings().bg_color;
-	m_stage->getCanvas()->setBgColor(col);
+	m_stage->getCanvas()->SetBgColor(col);
 }
 
 PreviewDialog::~PreviewDialog()

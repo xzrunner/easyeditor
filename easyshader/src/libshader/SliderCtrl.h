@@ -17,10 +17,10 @@ class SliderCtrl : public wxPanel
 public:
 	SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name,
 		Shader* shader, Uniform* uniform, const std::vector<SliderItemInt>& items, 
-		float slider_accuracy, d2d::GLCanvas* canvas);
+		float slider_accuracy, d2d::IStageCanvas* canvas);
 	SliderCtrl(wxPanel* parent, const std::string& title, const std::string& name,
 		Shader* shader, Uniform* uniform, const std::vector<SliderItemFloat>& items, 
-		float slider_accuracy, d2d::GLCanvas* canvas);
+		float slider_accuracy, d2d::IStageCanvas* canvas);
 
 	void GetValue(double values[16]) const;
 
@@ -51,7 +51,7 @@ private:
 	Shader* m_shader;
 	Uniform* m_uniform;
 
-	d2d::GLCanvas* m_canvas;
+	d2d::IStageCanvas* m_canvas;
 
 }; // SliderCtrl
 

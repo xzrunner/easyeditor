@@ -8,28 +8,28 @@ namespace emodeling
 StageCanvas::StageCanvas(StagePanel* editPanel)
 	: d2d::OrthoCanvas(editPanel)
 {
-	m_bgColor.set(0, 0, 0, 1);
+	m_bg_color.set(0, 0, 0, 1);
 }
 
 StageCanvas::~StageCanvas()
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
-	drawGuideLines();
+	DrawGuideLines();
 
-	drawSprites();
+	DrawSprites();
 	static_cast<StagePanel*>(m_stage)->traverseJoints(DrawJointVisitor());
 	m_stage->drawEditTemp();
 }
 
-void StageCanvas::drawGuideLines()
+void StageCanvas::DrawGuideLines() const
 {
-	drawCrossLine();
+	DrawCrossLine();
 }
 
-void StageCanvas::drawSprites()
+void StageCanvas::DrawSprites() const
 {
 	StagePanel* editPanel = static_cast<StagePanel*>(m_stage);
 	std::vector<d2d::ISprite*> sprites;
@@ -41,7 +41,7 @@ void StageCanvas::drawSprites()
 	}
 }
 
-void StageCanvas::drawCrossLine() const
+void StageCanvas::DrawCrossLine() const
 {
 	const float halfEdge = 1000.0f;
 	std::vector<d2d::Vector> vertices(4);
@@ -52,7 +52,7 @@ void StageCanvas::drawCrossLine() const
 	d2d::PrimitiveDraw::drawLines(vertices, d2d::Colorf(0.7f, 0.9f, 0.7f), 1);
 }
 
-void StageCanvas::drawLines() const
+void StageCanvas::DrawLines() const
 {
  	const float halfEdge = 100.0f;
 	// green

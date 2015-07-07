@@ -14,7 +14,7 @@ public:
 	StageCanvas(StagePanel* stage);
 
 protected:
-	virtual void OnDraw();
+	virtual void OnDrawSprites() const;
 
 private:
 	StagePanel* m_stage;

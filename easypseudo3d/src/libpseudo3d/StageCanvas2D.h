@@ -14,8 +14,8 @@ public:
 	StageCanvas2D(d2d::EditPanel* stage);
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 private:
 	IScene* m_scene;

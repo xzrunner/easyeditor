@@ -7,7 +7,7 @@
 #include "dataset/SpriteFactory.h"
 #include "component/AbstractEditCMPT.h"
 #include "view/MultiSpritesImpl.h"
-#include "view/GLCanvas.h"
+#include "view/IStageCanvas.h"
 #include "view/ViewPanelMgr.h"
 #include "render/DrawSelectedSpriteVisitor.h"
 #include "render/PrimitiveDraw.h"
@@ -327,7 +327,7 @@ void SelectSpritesOP::CopyFromSelection()
 	bool add = wxGetKeyState(WXK_CONTROL);
 	m_view_panel_mgr->SelectSprite(last_spr, !add, m_spritesImpl);
 
-	m_stage->getCanvas()->resetViewport();
+	m_stage->getCanvas()->ResetViewport();
 
 	wxTheClipboard->Close();
 }

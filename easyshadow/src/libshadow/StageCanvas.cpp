@@ -21,9 +21,9 @@ StageCanvas::StageCanvas(StagePanel* stage, d2d::ISprite* edited,
 {
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
@@ -34,10 +34,10 @@ void StageCanvas::initGL()
 		}
 	}
 
-	resetViewport();
+	ResetViewport();
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited) 
 	{

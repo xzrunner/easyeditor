@@ -19,7 +19,7 @@ public:
 
 //	virtual void Clear() {}
 
-	void ResetInitState();		// Another GLCanvas closed, refresh the under one
+	void ResetInitState();		// Another IStageCanvas closed, refresh the under one
 
 	void ResetViewport();		// On Mouse Wheel
 								// onSize no use, if the size not change

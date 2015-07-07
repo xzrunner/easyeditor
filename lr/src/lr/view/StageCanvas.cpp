@@ -14,7 +14,7 @@ StageCanvas::StageCanvas(StagePanel* stage)
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	d2d::Rect sr = m_screen.GetRegion();
 

@@ -68,7 +68,7 @@ void IStageCanvas::InitGL()
 	}
 
 	try {
-		ShaderMgr::Instance()->null();
+		ShaderMgr::Instance()->Reset();
 
 		ResetViewport();
 

@@ -31,7 +31,7 @@ void Task::Load(const char* filepath)
 		
 		m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 		symbol->Release();
-		m_stage->getCanvas()->resetViewport();
+		m_stage->getCanvas()->ResetViewport();
 	}
 }
 

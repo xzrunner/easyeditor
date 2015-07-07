@@ -30,9 +30,9 @@ void StageCanvas::SetBackground(d2d::ISymbol* symbol)
 	d2d::obj_assign((d2d::Object*&)m_background, symbol);
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 	m_stage->getSymbol()->ReloadTexture();
 // 		d2d::DynamicTexture::Instance()->ReloadTexture();
 // 		d2d::DynamicFont::Instance()->ReloadTexture();
@@ -41,10 +41,10 @@ void StageCanvas::initGL()
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 
-	resetViewport();
+	ResetViewport();
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	m_stat.Begin();
 

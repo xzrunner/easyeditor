@@ -16,16 +16,16 @@ DialogStageCanvas::DialogStageCanvas(EditPanel* editPanel,
 {
 }
 
-void DialogStageCanvas::initGL()
+void DialogStageCanvas::InitGL()
 {
-	OrthoCanvas::initGL();
+	OrthoCanvas::InitGL();
 	m_symbol->ReloadTexture();
 	if (Config::Instance()->IsUseDTex()) {
 		DynamicTexAndFont::Instance()->ReloadTexture();
 	}
 }
 
-void DialogStageCanvas::OnDraw()
+void DialogStageCanvas::OnDrawSprites() const
 {
 	m_stage->drawEditTemp();
 }

@@ -6,7 +6,7 @@
 #include "dataset/SymbolMgr.h"
 #include "common/FileNameParser.h"
 #include "common/Exception.h"
-#include "view/GLCanvas.h"
+#include "view/IStageCanvas.h"
 
 namespace d2d
 {
@@ -47,7 +47,7 @@ namespace d2d
 			}
 
 			if (m_canvas) {
-				 m_canvas->resetViewport();
+				 m_canvas->ResetViewport();
 			}
 		}
 	}

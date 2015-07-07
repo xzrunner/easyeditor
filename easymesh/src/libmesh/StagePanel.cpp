@@ -157,7 +157,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		m_stage->m_symbol = symbol;
 		m_stage->Refresh();
 
-		m_stage->getCanvas()->resetViewport();
+		m_stage->getCanvas()->ResetViewport();
 
 		return true;
 	}

@@ -10,14 +10,14 @@ StageCanvas::StageCanvas(d2d::EditPanel* edit_panel, d2d::MultiSpritesImpl* spri
 {
 }
 
-void StageCanvas::onSize(int w, int h)
+void StageCanvas::OnSize(int w, int h)
 {
-	e3d::StageCanvas::onSize(w, h);
-	m_screen_width = w;
-	m_screen_height = h;
+	e3d::StageCanvas::OnSize(w, h);
+	m_width = w;
+	m_height = h;
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetModelViewMat());
 	DrawBackground();

@@ -4,7 +4,7 @@
 #include "dataset/SpriteFactory.h"
 #include "view/MultiSpritesImpl.h"
 #include "view/LibraryPanel.h"
-#include "view/GLCanvas.h"
+#include "view/IStageCanvas.h"
 #include "render/SpriteRenderer.h"
 
 namespace d2d

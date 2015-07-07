@@ -1,4 +1,4 @@
-#include "FBOCanvas.h"
+#include "TwoPassCanvas.h"
 
 #include "render/ShaderMgr.h"
 #include "render/BlendShader.h"
@@ -11,17 +11,17 @@
 namespace d2d
 {
 
-FBOCanvas::FBOCanvas(EditPanel* stage)
+TwoPassCanvas::TwoPassCanvas(EditPanel* stage)
 	: IStageCanvas(stage)
 {
 }
 
-void FBOCanvas::OnSize(int w, int h)
+void TwoPassCanvas::OnSize(int w, int h)
 {
 	ScreenFBO::Instance()->GetFBO().ChangeSize(w, h);
 }
 
-void FBOCanvas::OnDrawWhole() const
+void TwoPassCanvas::OnDrawWhole() const
 {
 	const FBO& fbo = ScreenFBO::Instance()->GetFBO();
 	ShaderMgr* mgr = ShaderMgr::Instance();

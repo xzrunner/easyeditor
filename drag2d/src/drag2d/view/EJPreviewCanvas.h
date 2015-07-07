@@ -20,7 +20,7 @@
 //		const std::vector<const ISprite*>& sprites);
 //
 //protected:
-//	virtual void initGL();
+//	virtual void InitGL();
 //	virtual void OnDraw();
 //
 //	void onTimer(wxTimerEvent& event);

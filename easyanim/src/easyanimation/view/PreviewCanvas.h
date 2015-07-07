@@ -17,15 +17,15 @@ public:
 		d2d::PlayControl& control, Controller* ctrl);
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 	virtual void OnTimer();
 
 private:
-	void drawStageData();
+	void DrawStageData() const;
 
-	void getCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
+	void GetCurrSprites(std::vector<d2d::ISprite*>& sprites) const;
 
 private:
 	d2d::PlayControl& m_control;

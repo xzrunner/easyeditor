@@ -40,7 +40,7 @@
 
 #include "view/DynamicStageCanvas.h"
 #include "view/OrthoCanvas.h"
-#include "view/FBOCanvas.h"
+#include "view/TwoPassCanvas.h"
 #include "view/PerspectCanvas.h"
 #include "view/Camera.h"
 #include "view/LibraryPanel.h"

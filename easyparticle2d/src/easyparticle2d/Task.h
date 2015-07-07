@@ -27,7 +27,7 @@ public:
 
 	virtual const d2d::EditPanel* GetEditPanel() const;
 
-// 	d2d::GLCanvas* getCanvas() const;
+// 	d2d::IStageCanvas* getCanvas() const;
 
 private:
 	void initLayout();

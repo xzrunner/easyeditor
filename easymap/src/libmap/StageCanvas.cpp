@@ -11,7 +11,7 @@ StageCanvas::StageCanvas(StagePanel* panel)
 {
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	DrawGuideLines();
 

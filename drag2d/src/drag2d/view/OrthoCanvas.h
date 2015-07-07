@@ -1,19 +1,23 @@
-#pragma once
+#ifndef _DRAG2D_ORTHO_CANVAS_H_
+#define _DRAG2D_ORTHO_CANVAS_H_
 
-#include "GLCanvas.h"
+#include "OnePassCanvas.h"
 
 namespace d2d
 {
-	class EditPanel;
 
-	class OrthoCanvas : public GLCanvas
-	{
-	public:
-		OrthoCanvas(EditPanel* editPanel);
+class EditPanel;
 
-	protected:
-		virtual void onSize(int w, int h);
+class OrthoCanvas : public OnePassCanvas
+{
+public:
+	OrthoCanvas(EditPanel* editPanel);
 
-	}; // OrthoCanvas
+protected:
+	virtual void OnSize(int w, int h);
+
+}; // OrthoCanvas
+
 }
 
+#endif // _DRAG2D_ORTHO_CANVAS_H_

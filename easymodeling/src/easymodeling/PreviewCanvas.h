@@ -14,8 +14,8 @@ public:
 	virtual ~PreviewCanvas();
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 private:
 	static const int FRAME_RATE = 60;

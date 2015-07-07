@@ -21,9 +21,9 @@ StageCanvas::StageCanvas(StagePanel* panel, d2d::ISprite* edited,
 {
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 
 	std::vector<d2d::ISymbol*> symbols;
 	d2d::SymbolMgr::Instance()->Traverse(d2d::FetchAllVisitor<d2d::ISymbol>(symbols));
@@ -32,7 +32,7 @@ void StageCanvas::initGL()
 	}
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	if (m_edited) 
 	{

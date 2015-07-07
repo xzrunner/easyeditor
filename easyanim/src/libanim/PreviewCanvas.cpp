@@ -16,13 +16,13 @@ PreviewCanvas::PlaySetting& PreviewCanvas::getPlaySetting()
 	return m_setting;
 }
 
-void PreviewCanvas::initGL()
+void PreviewCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 	d2d::SymbolMgr::Instance()->Traverse(d2d::ReloadTextureVisitor<d2d::ISymbol>());
 }
 
-void PreviewCanvas::OnDraw()
+void PreviewCanvas::OnDrawSprites() const
 {
 	d2d::SpriteRenderer::Instance()->Draw(m_symbol);
 }

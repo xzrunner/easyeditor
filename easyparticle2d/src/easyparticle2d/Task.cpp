@@ -74,7 +74,7 @@ const d2d::EditPanel* Task::GetEditPanel() const
 	return m_stage;
 }
 
-// d2d::GLCanvas* Task::getCanvas() const
+// d2d::IStageCanvas* Task::getCanvas() const
 // {
 // 	return m_stage->getCanvas();
 // }

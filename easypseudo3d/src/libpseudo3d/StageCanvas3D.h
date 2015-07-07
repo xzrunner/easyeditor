@@ -20,11 +20,11 @@ public:
 	void GetScreenSize(int* width, int* height) const;
 
 protected:
-	virtual void initGL();
-	virtual void onDraw();
-	virtual void OnDrawDC() const;
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
+	//virtual void OnDrawDC() const;
 
-	void onTimer(wxTimerEvent& event);
+	void OnTimer(wxTimerEvent& event);
 
 private:
 	enum

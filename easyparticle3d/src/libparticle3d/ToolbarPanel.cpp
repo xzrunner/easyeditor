@@ -515,7 +515,7 @@ OnBindPS(wxCommandEvent& event)
 		m_pc->bind_ps = FileIO::LoadPS(dlg.GetPath());
 
 // 		if (m_canvas) {
-// 			m_canvas->resetViewport();
+// 			m_canvas->ResetViewport();
 // 		}
 	}
 }

@@ -5,14 +5,14 @@
 namespace d2d
 {
 
-GLfloat cameraPos[] = {0, -400.0f, 400.0f, 1.0f};
+static const GLfloat CAM_POS[] = {0, -400.0f, 400.0f, 1.0f};
 
 PerspectCanvas::PerspectCanvas(EditPanel* editPanel)
-	: GLCanvas(editPanel)
+	: OnePassCanvas(editPanel)
 {
 }
 
-void PerspectCanvas::onSize(int w, int h)
+void PerspectCanvas::OnSize(int w, int h)
 {
 	glViewport(0, 0, w, h);
 
@@ -25,7 +25,8 @@ void PerspectCanvas::onSize(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(cameraPos[0], cameraPos[1], cameraPos[2], 
+	gluLookAt(CAM_POS[0], CAM_POS[1], CAM_POS[2], 
 		0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
+
 } // d2d

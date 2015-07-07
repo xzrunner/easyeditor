@@ -8,24 +8,24 @@ namespace emodeling
 PreviewCanvas::PreviewCanvas(PreviewPanel* editPanel)
 	: d2d::DynamicStageCanvas(editPanel)
 {
-	setBgColor(d2d::Colorf(0, 0, 0));
+	SetBgColor(d2d::Colorf(0, 0, 0));
 }
 
 PreviewCanvas::~PreviewCanvas()
 {
 }
 
-void PreviewCanvas::initGL()
+void PreviewCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 	Context::Instance()->library->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
-	resetViewport();
+	ResetViewport();
 }
 
-void PreviewCanvas::OnDraw()
+void PreviewCanvas::OnDrawSprites() const
 {
  	static_cast<PreviewPanel*>(m_stage)->drawPhysics();
  

@@ -13,8 +13,8 @@ public:
 		const std::vector<const d2d::ISprite*>& sprites);
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 protected:
 	virtual void OnTimer();

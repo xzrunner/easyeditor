@@ -32,7 +32,7 @@ void Task::Load(const char* filepath)
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 		FileIO::load(this, filepath);
 		LoadGroupTree(filepath);
-		m_stage->getCanvas()->resetViewport();
+		m_stage->getCanvas()->ResetViewport();
 	}
 }
 

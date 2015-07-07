@@ -15,14 +15,14 @@ public:
 	virtual ~StageCanvas();
 
 protected:
-	virtual void OnDraw();
+	virtual void OnDrawSprites() const;
 
 private:
-	void drawGuideLines();
-	void drawSprites();
+	void DrawGuideLines() const;
+	void DrawSprites() const;
 
-	void drawCrossLine() const;
-	void drawLines() const;
+	void DrawCrossLine() const;
+	void DrawLines() const;
 
 private:
 	class DrawJointVisitor : public d2d::IVisitor

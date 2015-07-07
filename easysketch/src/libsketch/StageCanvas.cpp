@@ -31,20 +31,20 @@ vec3 StageCanvas::TransPos3ScreenToDir(const ivec2& screen) const
 	return e3d::ViewFrustum::TransPos3ScreenToDir(screen, m_screen_width, m_screen_height);
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-	e3d::StageCanvas::initGL();
+	e3d::StageCanvas::InitGL();
 	InitDefaultSymbol();
 }
 
-void StageCanvas::onSize(int w, int h)
+void StageCanvas::OnSize(int w, int h)
 {
-	e3d::StageCanvas::onSize(w, h);
+	e3d::StageCanvas::OnSize(w, h);
 	m_screen_width = w;
 	m_screen_height = h;
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	e3d::ShaderMgr::Instance()->SetModelView(GetCamera3().GetModelViewMat());
 	DrawBackground();

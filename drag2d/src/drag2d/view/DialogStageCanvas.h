@@ -15,8 +15,8 @@ public:
 	DialogStageCanvas(EditPanel* editPanel, ISymbol* symbol);
 
 protected:
-	virtual void initGL();
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnDrawSprites() const;
 
 private:
 	ISymbol* m_symbol;

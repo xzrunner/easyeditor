@@ -16,7 +16,7 @@ public:
 	virtual ~StageCanvas();
 
 protected:
-	virtual void OnDraw();
+	virtual void OnDrawSprites() const;
 
 	virtual void OnTimer();
 

@@ -18,7 +18,7 @@ namespace emodeling
 
 		virtual void onPreview() const;
 
-		d2d::GLCanvas* getCanvas() const;
+		d2d::IStageCanvas* getCanvas() const;
 
 		static Task* create(wxFrame* parent)
 		{

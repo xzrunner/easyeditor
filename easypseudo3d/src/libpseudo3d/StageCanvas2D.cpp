@@ -8,14 +8,14 @@ namespace epseudo3d
 StageCanvas2D::StageCanvas2D(d2d::EditPanel* stage)
 	: d2d::OrthoCanvas(stage)
 {
-	setBgColor(d2d::BLACK);
+	SetBgColor(d2d::BLACK);
 
 	m_scene = new Projection2DScene(stage);
 }
 
-void StageCanvas2D::initGL()
+void StageCanvas2D::InitGL()
 {
-	d2d::OrthoCanvas::initGL();
+	d2d::OrthoCanvas::InitGL();
 
 	m_scene->Load(NULL);
 
@@ -23,7 +23,7 @@ void StageCanvas2D::initGL()
 	Refresh();
 }
 
-void StageCanvas2D::OnDraw()
+void StageCanvas2D::OnDrawSprites() const
 {
 	m_scene->Draw();
 

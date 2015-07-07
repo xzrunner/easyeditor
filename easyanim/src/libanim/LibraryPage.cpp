@@ -39,7 +39,7 @@ void LibraryPage::OnAddPress(wxCommandEvent& event)
 			try {
 				if (type == "json") {
 					loadFromJsonFile(filename);
-					m_canvas->resetViewport();
+					m_canvas->ResetViewport();
 				} else if (type == "lua") {
 					loadFromLuaFile(filename);
 				}

@@ -49,7 +49,7 @@ void Task::Load(const char* filepath)
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	m_widgets.m_stage->getCanvas()->resetViewport();
+	m_widgets.m_stage->getCanvas()->ResetViewport();
 }
 
 void Task::Store(const char* filepath) const

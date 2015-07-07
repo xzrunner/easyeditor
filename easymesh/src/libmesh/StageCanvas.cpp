@@ -11,17 +11,17 @@ StageCanvas::StageCanvas(StagePanel* panel)
 {
 }
 
-void StageCanvas::initGL()
+void StageCanvas::InitGL()
 {
-	d2d::DynamicStageCanvas::initGL();
+	d2d::DynamicStageCanvas::InitGL();
 	m_panel->GetSymbol()->ReloadTexture();
 	if (d2d::Config::Instance()->IsUseDTex()) {
 		d2d::DynamicTexAndFont::Instance()->ReloadTexture();
 	}
-	resetViewport();
+	ResetViewport();
 }
 
-void StageCanvas::OnDraw()
+void StageCanvas::OnDrawSprites() const
 {
 	const d2d::ISprite* bg = m_panel->GetBackground();
 	if (bg) {

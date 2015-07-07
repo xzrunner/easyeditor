@@ -9,7 +9,7 @@
 namespace e3d
 {
 
-class StageCanvas : public d2d::GLCanvas
+class StageCanvas : public d2d::OnePassCanvas
 {
 public:
 	StageCanvas(d2d::EditPanel* editPanel);
@@ -22,9 +22,8 @@ public:
 	ivec2 TransPos3ProjectToScreen(const vec3& proj) const;
 
 protected:
-	virtual void initGL();
-	virtual void onSize(int w, int h);
-	virtual void OnDraw();
+	virtual void InitGL();
+	virtual void OnSize(int w, int h);
 
 private:
 	Camera m_camera3;
