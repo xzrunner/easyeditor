@@ -349,8 +349,6 @@ void GroupTreeCtrl::OnSelChanged(wxTreeEvent& event)
 {
 	m_selected_item = event.GetItem();
 
-	wxLogDebug("OnSelChanged %s", GetItemText(m_selected_item));
-
 	GroupTreeItem* data = (GroupTreeItem*)GetItemData(m_selected_item);
 	if (data && !data->IsGroup()) {
 		ISprite* spr = static_cast<GroupTreeSpriteItem*>(data)->GetSprite();
