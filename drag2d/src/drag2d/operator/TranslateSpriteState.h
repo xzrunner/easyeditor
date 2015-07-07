@@ -39,6 +39,8 @@ private:
 	SpriteSelection* m_selection;
 
 	Vector m_first_pos, m_last_pos;
+
+	bool m_dirty;
 	
 }; // TranslateState
 

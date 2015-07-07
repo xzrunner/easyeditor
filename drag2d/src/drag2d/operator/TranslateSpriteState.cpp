@@ -7,6 +7,7 @@ namespace d2d
 
 TranslateSpriteState::TranslateSpriteState(SpriteSelection* selection, 
 										   const Vector& first_pos)
+	: m_dirty(false)
 {
 	m_selection = selection;
 	m_selection->Retain();
@@ -27,7 +28,12 @@ void TranslateSpriteState::OnMousePress(const Vector& pos)
 AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
 {
 	m_last_pos.setInvalid();
-	return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
+	if (m_dirty) {
+		m_dirty = false;
+		return new TranslateSpriteAOP(*m_selection, pos - m_first_pos);
+	} else {
+		return NULL;
+	}
 }
 
 bool TranslateSpriteState::OnMouseDrag(const Vector& pos)
@@ -36,6 +42,7 @@ bool TranslateSpriteState::OnMouseDrag(const Vector& pos)
 		return false;
 	}
 
+	m_dirty = true;
 	Translate(pos - m_last_pos);
 	m_last_pos = pos;
 
