@@ -21,7 +21,7 @@ TranslateSpriteState::~TranslateSpriteState()
 
 void TranslateSpriteState::OnMousePress(const Vector& pos)
 {
-	m_last_pos = pos;
+	m_first_pos = m_last_pos = pos;
 }
 
 AbstractAtomicOP* TranslateSpriteState::OnMouseRelease(const Vector& pos)
