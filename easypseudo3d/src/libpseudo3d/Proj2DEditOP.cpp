@@ -17,7 +17,7 @@ Proj2DEditOP::~Proj2DEditOP()
 bool Proj2DEditOP::OnKeyDown(int keyCode)
 {
 	static const int OFFSET = 10;
-	d2d::Camera* cam = m_stage->getCamera();
+	d2d::Camera* cam = m_stage->GetCamera();
 	switch (keyCode)
 	{
 	case 'a': case 'A':
@@ -43,7 +43,7 @@ bool Proj2DEditOP::OnKeyDown(int keyCode)
 bool Proj2DEditOP::onDraw() const
 {
 	if (m_player) {
-		d2d::Camera* cam = m_stage->getCamera();
+		d2d::Camera* cam = m_stage->GetCamera();
 		const d2d::Vector& center = cam->GetPosition();
 		d2d::SpriteRenderer::Instance()->Draw(m_player, d2d::Matrix(), center);
 	}

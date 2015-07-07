@@ -28,7 +28,7 @@ void StageCanvas::OnDrawSprites() const
 		d2d::SpriteRenderer::Instance()->Draw(bg);
 	}
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 
 	m_panel->traverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
 

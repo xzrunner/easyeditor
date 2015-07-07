@@ -46,7 +46,7 @@ bool DrawCurveOP::OnMouseDrag(int x, int y)
 		return false;
 	}
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_curve)) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_curve.back(), pos);
 		m_curve.pop_back();

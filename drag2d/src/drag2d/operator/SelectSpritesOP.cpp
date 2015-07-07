@@ -67,7 +67,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
  	m_bDraggable = true;
 
-	Vector pos = m_stage->transPosScreenToProject(x, y);
+	Vector pos = m_stage->TransPosScrToProj(x, y);
 	ISprite* selected = SelectByPos(pos);
 	if (selected)
 	{
@@ -124,7 +124,7 @@ bool SelectSpritesOP::OnMouseLeftUp(int x, int y)
 		return false;
 	}
 
-	Vector end = m_stage->transPosScreenToProject(x, y);
+	Vector end = m_stage->TransPosScrToProj(x, y);
 	Rect rect(m_firstPos, end);
 	std::vector<ISprite*> sprites;
 	m_spritesImpl->querySpritesByRect(rect, m_firstPos.x < end.x, sprites);
@@ -176,7 +176,7 @@ bool SelectSpritesOP::OnMouseRightUp(int x, int y)
 	// select
 	if (m_rightFirstScrPos == Vector(x, y))
 	{
-		Vector pos = m_stage->transPosScreenToProject(x, y);
+		Vector pos = m_stage->TransPosScrToProj(x, y);
 		d2d::ISprite* sprite = m_spritesImpl->querySpriteByPos(pos);
 		if (sprite)
 		{
@@ -327,7 +327,7 @@ void SelectSpritesOP::CopyFromSelection()
 	bool add = wxGetKeyState(WXK_CONTROL);
 	m_view_panel_mgr->SelectSprite(last_spr, !add, m_spritesImpl);
 
-	m_stage->getCanvas()->ResetViewport();
+	m_stage->GetCanvas()->ResetViewport();
 
 	wxTheClipboard->Close();
 }

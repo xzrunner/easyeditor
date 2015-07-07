@@ -28,7 +28,7 @@ bool SelectSpritesOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::SelectSpritesOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 
 	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 	stage->PointQuery(pos);
@@ -47,7 +47,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{

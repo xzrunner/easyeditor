@@ -17,7 +17,7 @@ StagePanel::StagePanel(wxWindow* parent,
 {
 //	m_editOP = new ArrangeSpriteOP(this, Context::Instance()->property);
 	b2Body* ground = CreateGround();
-	m_editOP = new ephysics::DragPhysicsOP(this, m_world, ground);
+	m_edit_op = new ephysics::DragPhysicsOP(this, m_world, ground);
 
 	m_canvas = new StageCanvas(this);
 
@@ -29,9 +29,9 @@ StagePanel::StagePanel(wxWindow* parent,
 //	m_strategy = new RectBinArrange();
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	EditPanel::clear();
+	EditPanel::Clear();
 	SpritesPanelImpl::clearSprites();
 }
 
@@ -72,7 +72,7 @@ void StagePanel::arrangeAllSprites(bool bClearSelection)
 
 void StagePanel::loadFromLibrary()
 {
-	clear();
+	Clear();
 
 	d2d::ISymbol* symbol = NULL;
 	int index = 0;

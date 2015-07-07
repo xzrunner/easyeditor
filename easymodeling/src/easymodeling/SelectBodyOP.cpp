@@ -33,7 +33,7 @@ bool SelectBodyOP::OnMouseMove(int x, int y)
 
 	m_mouseOn = NULL;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (selected)
 		m_mouseOn = static_cast<libmodeling::Body*>(selected->GetUserData());

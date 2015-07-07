@@ -59,7 +59,7 @@ void Projection2DScene::Draw() const
 
 void Projection2DScene::InitCamera()
 {
-	d2d::Camera* cam = m_stage->getCamera();
+	d2d::Camera* cam = m_stage->GetCamera();
 	cam->Translate(d2d::Vector(600, 0));
 	cam->SetScale(2);
 	m_stage->Refresh();
@@ -67,14 +67,14 @@ void Projection2DScene::InitCamera()
 
 void Projection2DScene::InitEditOP()
 {
-	static_cast<Proj2DEditOP*>(m_stage->getEditOP())->InitPlayer();
+	static_cast<Proj2DEditOP*>(m_stage->GetEditOP())->InitPlayer();
 }
 
 void Projection2DScene::CalProjInfo(const d2d::Vector& src_pos, d2d::Vector* dst_pos, float* dst_scale) const
 {
 	static const int VIEW_DIS = 600;
 
-	d2d::Camera* cam = m_stage->getCamera();
+	d2d::Camera* cam = m_stage->GetCamera();
 	const d2d::Vector& cam_pos = cam->GetPosition();
 
 	float x = cam_pos.x;

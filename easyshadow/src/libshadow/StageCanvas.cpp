@@ -48,7 +48,7 @@ void StageCanvas::OnDrawSprites() const
 	}
 
 	m_stage->GetSymbol()->Draw(d2d::Matrix());
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 }

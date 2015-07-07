@@ -30,7 +30,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->GetAnchorMgr()->Draw();
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {

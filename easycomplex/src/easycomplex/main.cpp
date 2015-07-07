@@ -66,7 +66,7 @@ bool MyApp::OnInit()
 	frame->Show(true);
 
 	if (wxGetApp().argc > 1) {
-		task->GetEditPanel()->getCanvas()->SetCurrentCanvas();
+		const_cast<d2d::EditPanel*>(task->GetEditPanel())->GetCanvas()->SetCurrentCanvas();
 
 		wxString path(wxGetApp().argv[1]);
 		frame->initWithFile(path);

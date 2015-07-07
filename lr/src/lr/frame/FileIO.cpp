@@ -45,7 +45,7 @@ void FileIO::Load(const char* filename, LibraryPanel* library,
 	float s = value["camera"]["scale"].asDouble();
 	float x = value["camera"]["x"].asDouble(),
 		y = value["camera"]["y"].asDouble();
-	d2d::Camera* cam = stage->getCamera();
+	d2d::Camera* cam = stage->GetCamera();
 	cam->SetScale(s);
 	cam->SetPosition(d2d::Vector(x, y));
 
@@ -83,7 +83,7 @@ void FileIO::Store(const char* filename, LibraryPanel* library,
 	value["size"]["view height"] = cfg->m_view_height;
 
 	// camera
-	d2d::Camera* cam = stage->getCamera();
+	d2d::Camera* cam = stage->GetCamera();
 	value["camera"]["scale"] = cam->GetScale();
 	value["camera"]["x"] = cam->GetPosition().x;
 	value["camera"]["y"] = cam->GetPosition().y;

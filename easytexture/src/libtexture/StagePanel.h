@@ -22,7 +22,7 @@ public:
 	//
 	// d2d::EditPanel interface
 	//
-	virtual void clear();
+	virtual void Clear();
 
 	Symbol* GetSymbol() { return m_symbol; }
 

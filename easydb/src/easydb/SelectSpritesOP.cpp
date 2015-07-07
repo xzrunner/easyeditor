@@ -32,7 +32,7 @@ bool SelectSpritesOP::OnKeyDown(int keyCode)
 			ecomplex::EditDialog dlg(m_stage, &symbol);
 			dlg.ShowModal();
 
-			m_stage->resetCanvas();
+			m_stage->ResetCanvas();
 		}
 	}
 
@@ -43,7 +43,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 {
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (ecomplex::Sprite* complex = dynamic_cast<ecomplex::Sprite*>(selected))
 	{
@@ -51,7 +51,7 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 		ecomplex::EditDialog dlg(m_stage, &symbol);
 		dlg.ShowModal();
 
-		m_stage->resetCanvas();
+		m_stage->ResetCanvas();
 	}
 	//else if (libanim::Sprite* anim = dynamic_cast<libanim::Sprite*>(selected))
 	//{

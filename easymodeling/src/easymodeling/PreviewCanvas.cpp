@@ -29,7 +29,7 @@ void PreviewCanvas::OnDrawSprites() const
 {
  	static_cast<PreviewPanel*>(m_stage)->drawPhysics();
  
- 	ephysics::DragPhysicsOP* op = static_cast<ephysics::DragPhysicsOP*>(m_stage->getEditOP());
+ 	ephysics::DragPhysicsOP* op = static_cast<ephysics::DragPhysicsOP*>(m_stage->GetEditOP());
  	if (op->m_mouseJoint)
  	{
  		b2Vec2 target = op->m_mouseJoint->GetAnchorB();

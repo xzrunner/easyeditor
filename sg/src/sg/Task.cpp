@@ -36,12 +36,12 @@ void Task::Store(const char* filepath) const
 
 bool Task::IsDirty() const
 {
-	return m_stage->isDirty();
+	return m_stage->IsEditDirty();
 }
 
 void Task::Clear()
 {
-	m_stage->clear();
+	m_stage->Clear();
 	m_stage->Refresh();
 }
 
@@ -87,7 +87,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
 	m_view_panel_mgr.AddSpritePanel(m_stage);
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage);
 	return m_stage;
 }

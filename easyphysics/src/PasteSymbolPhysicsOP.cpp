@@ -23,7 +23,7 @@ bool PasteSymbolPhysicsOP::OnMouseLeftDown(int x, int y)
 	d2d::ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol) 
 	{
-		m_pos = m_stage->transPosScreenToProject(x, y);
+		m_pos = m_stage->TransPosScrToProj(x, y);
 
 		d2d::ISprite* sprite = d2d::SpriteFactory::Instance()->create(symbol);
 		sprite->translate(m_pos);

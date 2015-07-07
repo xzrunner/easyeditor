@@ -52,7 +52,7 @@ void EditDialog::onClose(wxCloseEvent& event)
 {
 	m_sprite->buildBounding();
 
-	if (!m_stage->isDirty())
+	if (!m_stage->IsEditDirty())
 	{
 		Destroy();
 		return;

@@ -55,7 +55,7 @@ bool Task::IsDirty() const
 void Task::Clear()
 {
  	m_library->Clear();
- 	m_stage->clear();
+ 	m_stage->Clear();
  	m_library->Refresh();
  	m_stage->Refresh();
 }
@@ -89,7 +89,7 @@ void Task::InitLayout(wxFrame* parent)
 	m_stage = new libshape::StagePanel(left_vert, parent, m_library);
 	m_view_panel_mgr.AddShapePanel(m_stage);
 	property->SetEditPanel(m_stage);
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 
 	d2d::ToolbarPanel* toolbar = new libshape::ToolbarPanel(right_vert, property, &m_view_panel_mgr, m_stage);
 

@@ -33,7 +33,7 @@ void PreviewDialog::InitLayout()
 void PreviewDialog::BuildEditPanel(wxSizer* sizer)
 {
 	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
-	stage->setEditOP(new PreviewEditOP(stage, m_sprites));
+	stage->SetEditOP(new PreviewEditOP(stage, m_sprites));
 	stage->SetCanvas(new PreviewCanvas(stage, m_control, m_sprites));
 	sizer->Add(stage, 1, wxEXPAND);
 }

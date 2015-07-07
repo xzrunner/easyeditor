@@ -35,7 +35,7 @@ bool SelectJointOP::OnKeyDown(int keyCode)
 
 bool SelectJointOP::OnMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	libmodeling::Joint* selected = static_cast<StagePanel*>(m_stage)->queryJointByPos(pos);
 	if (selected && !m_selected || !selected && m_selected)
 		m_stage->Refresh();
@@ -106,7 +106,7 @@ bool SelectJointOP::OnMouseMove(int x, int y)
 	if (SelectBodyOP::OnMouseMove(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	libmodeling::Joint* joint = static_cast<StagePanel*>(m_stage)->queryJointByPos(pos);
 	if (joint && !m_mouseOn || !joint && m_mouseOn)
 		m_stage->Refresh();
@@ -123,7 +123,7 @@ bool SelectJointOP::OnMouseDrag(int x, int y)
 
 	if (m_selected)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		switch (m_selected->type)
 		{
 		case libmodeling::Joint::e_revoluteJoint:

@@ -15,18 +15,18 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame)
 	, d2d::SpritesPanelImpl(this, NULL)
 	, d2d::ShapesPanelImpl(this)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this);
+	m_edit_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this);
 	m_canvas = new StageCanvas(this);
 }
 
 StagePanel::~StagePanel()
 {
-	clear();
+	Clear();
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	d2d::EditPanel::clear();
+	d2d::EditPanel::Clear();
 	d2d::SpritesPanelImpl::clearSprites();
 	d2d::ShapesPanelImpl::clearShapes();
 }

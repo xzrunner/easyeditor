@@ -12,14 +12,14 @@ namespace d2d
 {
 
 BEGIN_EVENT_TABLE(EditPanel, wxPanel)
- 	EVT_SIZE(EditPanel::onSize)
+ 	EVT_SIZE(EditPanel::OnSize)
 END_EVENT_TABLE()
 
 EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 	: wxPanel(parent)
 	, m_frame(frame)
 {
-	m_editOP = NULL;
+	m_edit_op = NULL;
 	m_canvas = NULL;
 	m_camera = new Camera;
 	SetFocus();		// For OnMouseWheelRotation
@@ -27,92 +27,92 @@ EditPanel::EditPanel(wxWindow* parent, wxTopLevelWindow* frame)
 
 EditPanel::~EditPanel()
 {
-	clear();
+	Clear();
 
 	delete m_camera;
 	delete m_canvas;
-	if (m_editOP) {
-		m_editOP->Release();
+	if (m_edit_op) {
+		m_edit_op->Release();
 	}
 }
 
-void EditPanel::clear()
+void EditPanel::Clear()
 {
-	if (m_editOP) {
-		m_editOP->Clear();
+	if (m_edit_op) {
+		m_edit_op->Clear();
 	}
 
-	m_historyList.clear();
+	m_history_list.clear();
 }
 
-Vector EditPanel::transPosScreenToProject(int x, int y) const
+Vector EditPanel::TransPosScrToProj(int x, int y) const
 {
 	return m_camera->transPosScreenToProject(x, y, GetSize().GetWidth(), GetSize().GetHeight());
 }
 
-Vector EditPanel::transPosProjectToScreen(const Vector& proj) const
+Vector EditPanel::TransPosProjToScr(const Vector& proj) const
 {
 	return m_camera->transPosProjectToScreen(proj, GetSize().GetWidth(), GetSize().GetHeight());
 }
 
-void EditPanel::drawEditTemp() const
+void EditPanel::DrawEditOP() const
 {
-	if (m_editOP) {
-		m_editOP->OnDraw();
+	if (m_edit_op) {
+		m_edit_op->OnDraw();
 	}
 }
 
-void EditPanel::setEditOP(AbstractEditOP* editOP)
+void EditPanel::SetEditOP(AbstractEditOP* editOP)
 {
-	if (m_editOP == editOP) {
+	if (m_edit_op == editOP) {
 		return;
 	}
 
 	if (editOP) {
 		editOP->Retain();
 	}
-	if (m_editOP)
+	if (m_edit_op)
 	{
-		m_editOP->Clear();
-		m_editOP->Release();
+		m_edit_op->Clear();
+		m_edit_op->Release();
 	}
-	m_editOP = editOP;
-	if (m_editOP) {
-		m_editOP->OnActive();
+	m_edit_op = editOP;
+	if (m_edit_op) {
+		m_edit_op->OnActive();
 	}
 	Refresh();
 }
 
-void EditPanel::onMouse(wxMouseEvent& event)
+void EditPanel::OnMouse(wxMouseEvent& event)
 {
 #ifdef _DEBUG
 	if (wxFrame* frame = dynamic_cast<wxFrame*>(m_frame)) 
 	{
-		Vector pos = transPosScreenToProject(event.GetX(), event.GetY());
+		Vector pos = TransPosScrToProj(event.GetX(), event.GetY());
 		wxString msg;
 		msg.Printf("Mouse: %.1f, %.1f", pos.x, pos.y);
 		static_cast<wxFrame*>(m_frame)->SetStatusText(msg);
 	}
 #endif
 
-	if (!m_editOP) return;
+	if (!m_edit_op) return;
 
 	if (event.LeftDown())
-		m_editOP->OnMouseLeftDown(event.GetX(), event.GetY());
+		m_edit_op->OnMouseLeftDown(event.GetX(), event.GetY());
 	else if (event.LeftUp())
-		m_editOP->OnMouseLeftUp(event.GetX(), event.GetY());
+		m_edit_op->OnMouseLeftUp(event.GetX(), event.GetY());
 	else if (event.RightDown())
-		m_editOP->OnMouseRightDown(event.GetX(), event.GetY());
+		m_edit_op->OnMouseRightDown(event.GetX(), event.GetY());
 	else if (event.RightUp())
-		m_editOP->OnMouseRightUp(event.GetX(), event.GetY());
+		m_edit_op->OnMouseRightUp(event.GetX(), event.GetY());
 	else if (event.Moving())
-		m_editOP->OnMouseMove(event.GetX(), event.GetY());
+		m_edit_op->OnMouseMove(event.GetX(), event.GetY());
 	else if (event.Dragging())
-		m_editOP->OnMouseDrag(event.GetX(), event.GetY());
+		m_edit_op->OnMouseDrag(event.GetX(), event.GetY());
 	else if (event.LeftDClick())
-		m_editOP->OnMouseLeftDClick(event.GetX(), event.GetY());
+		m_edit_op->OnMouseLeftDClick(event.GetX(), event.GetY());
 	else if (event.GetWheelRotation())
-		m_editOP->OnMouseWheelRotation(event.GetX(), event.GetY(), event.GetWheelRotation());
+		m_edit_op->OnMouseWheelRotation(event.GetX(), event.GetY(), event.GetWheelRotation());
 
 	OnMouseHook(event);
 }
@@ -120,9 +120,9 @@ void EditPanel::onMouse(wxMouseEvent& event)
 void EditPanel::OnKeyDown(wxKeyEvent& event)
 {
 	if (wxGetKeyState(WXK_CONTROL_Z) && wxGetKeyState(WXK_CONTROL))
-		undo();
+		Undo();
 	else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL))
-		redo();
+		Redo();
 
 	int key_code = event.GetKeyCode();
 	switch (key_code) {
@@ -130,15 +130,15 @@ void EditPanel::OnKeyDown(wxKeyEvent& event)
 		{
 			d2d::Frame* frame = dynamic_cast<Frame*>(m_frame);
 			if (frame) {
-				clear();
+				Clear();
 				frame->RefreshWithCurrFile();
 			}
 		}
 		break;
 	}
 	
-	if (m_editOP) {
-		m_editOP->OnKeyDown(key_code);
+	if (m_edit_op) {
+		m_edit_op->OnKeyDown(key_code);
 	}
 
 	OnKeyHook(key_code);
@@ -146,8 +146,8 @@ void EditPanel::OnKeyDown(wxKeyEvent& event)
 
 void EditPanel::OnKeyUp(wxKeyEvent& event)
 {
-	if (m_editOP) {
-		m_editOP->OnKeyUp(event.GetKeyCode());
+	if (m_edit_op) {
+		m_edit_op->OnKeyUp(event.GetKeyCode());
 	}
 }
 
@@ -160,7 +160,7 @@ void EditPanel::OnMouseWheelRotation(int x, int y, int direction)
 	Refresh();
 }
 
-void EditPanel::resetCanvas()
+void EditPanel::ResetCanvas()
 {
 	if (m_canvas)
 	{
@@ -178,40 +178,40 @@ void EditPanel::ResetViewport()
 	}
 }
 
-void EditPanel::undo()
+void EditPanel::Undo()
 {
-	HistoryList::Type type = m_historyList.undo();
+	HistoryList::Type type = m_history_list.undo();
 	if (type != HistoryList::NO_CHANGE) {
 		Refresh();
 		if (type == HistoryList::DIRTY)
-			setTitleStatus(true);
+			SetTitleStatus(true);
 		else
-			setTitleStatus(false);
+			SetTitleStatus(false);
 	}
 }
 
-void EditPanel::redo()
+void EditPanel::Redo()
 {
-	HistoryList::Type type = m_historyList.redo();
+	HistoryList::Type type = m_history_list.redo();
 	if (type != HistoryList::NO_CHANGE) {
 		Refresh();
 		if (type == HistoryList::DIRTY)
-			setTitleStatus(true);
+			SetTitleStatus(true);
 		else
-			setTitleStatus(false);
+			SetTitleStatus(false);
 	}
 }
 
-void EditPanel::addHistoryOP(AbstractAtomicOP* op)
+void EditPanel::AddOpRecord(AbstractAtomicOP* op)
 {
-	m_historyList.insert(op);
-	setTitleStatus(true);
+	m_history_list.insert(op);
+	SetTitleStatus(true);
 }
 
-void EditPanel::saveHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites)
+void EditPanel::SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
 	Json::Value value;
-	m_historyList.store(value, sprites);
+	m_history_list.store(value, sprites);
 
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
 	Json::StyledStreamWriter writer;
@@ -222,7 +222,7 @@ void EditPanel::saveHistoryList(const std::string& filepath, const std::vector<I
 	fout.close();
 }
 
-void EditPanel::loadHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites)
+void EditPanel::LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites)
 {
 	std::string path = filepath.substr(0, filepath.find_last_of('.')) + "_history.json";
 
@@ -237,16 +237,16 @@ void EditPanel::loadHistoryList(const std::string& filepath, const std::vector<I
 	reader.parse(fin, value);
 	fin.close();
 
-	m_historyList.load(value, sprites);
+	m_history_list.load(value, sprites);
 }
 
-void EditPanel::onSave()
+void EditPanel::OnSave()
 {
-	m_historyList.onSave();
-	setTitleStatus(false);
+	m_history_list.onSave();
+	SetTitleStatus(false);
 }
 
-bool EditPanel::isDirty() const
+bool EditPanel::IsEditDirty() const
 {
 	if (!m_frame) {
 		return false;
@@ -259,7 +259,7 @@ bool EditPanel::isDirty() const
 	return title[title.Len()-1] == '*';
 }
 
-void EditPanel::setTitleStatus(bool dirty)
+void EditPanel::SetTitleStatus(bool dirty)
 {
 	if (!m_frame) return;
 
@@ -277,7 +277,7 @@ void EditPanel::setTitleStatus(bool dirty)
 	}
 }
 
-void EditPanel::onSize(wxSizeEvent& event)
+void EditPanel::OnSize(wxSizeEvent& event)
 {
 	OnSizeDebug(event);
 
@@ -289,8 +289,8 @@ void EditPanel::onSize(wxSizeEvent& event)
 
 void EditPanel::OnRightPopupMenu(wxCommandEvent& event)
 {
-	if (m_editOP) {
-		m_editOP->OnPopMenuSelected(event.GetId());
+	if (m_edit_op) {
+		m_edit_op->OnPopMenuSelected(event.GetId());
 		Refresh();
 	}
 }

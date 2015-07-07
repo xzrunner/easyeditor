@@ -24,7 +24,7 @@ void Task::Load(const char* filepath)
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_scale9)) {
 		FileIO::load(filepath, m_library, m_stage, m_toolbar);
-		m_stage->getCanvas()->ResetViewport();
+		m_stage->GetCanvas()->ResetViewport();
 	}
 }
 
@@ -35,13 +35,13 @@ void Task::Store(const char* filepath) const
 
 bool Task::IsDirty() const
 {
-	return m_stage->isDirty();
+	return m_stage->IsEditDirty();
 }
 
 void Task::Clear()
 {
 	m_library->Clear();
-	m_stage->clear();
+	m_stage->Clear();
 	m_library->Refresh();
 	m_stage->Refresh();
 }
@@ -88,7 +88,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage);
 	m_view_panel_mgr.AddSpritePanel(m_stage);
 

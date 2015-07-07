@@ -27,7 +27,7 @@ void StageCanvas2D::OnDrawSprites() const
 {
 	m_scene->Draw();
 
-	m_stage->getEditOP()->OnDraw();
+	m_stage->DrawEditOP();
 }
 
 }

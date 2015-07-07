@@ -76,7 +76,7 @@ void ImageProcessCMPT::OnNormal(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	m_stage->getCanvas()->ResetViewport();
+	m_stage->GetCanvas()->ResetViewport();
 	m_stage->Refresh();
 }
 
@@ -91,7 +91,7 @@ void ImageProcessCMPT::OnEdgeDetection(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(m_edge_shader);
-	m_stage->getCanvas()->ResetViewport();
+	m_stage->GetCanvas()->ResetViewport();
 	m_stage->Refresh();
 }
 
@@ -115,7 +115,7 @@ void ImageProcessCMPT::OnRelief(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	m_stage->getCanvas()->ResetViewport();
+	m_stage->GetCanvas()->ResetViewport();
 	m_stage->Refresh();
 }
 
@@ -130,7 +130,7 @@ void ImageProcessCMPT::OnOutline(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(shader);
-	m_stage->getCanvas()->ResetViewport();
+	m_stage->GetCanvas()->ResetViewport();
 	m_stage->Refresh();
 }
 
@@ -145,7 +145,7 @@ void ImageProcessCMPT::OnBlur(wxCommandEvent& event)
 		dlg.ShowModal();
 	}
 	shader_mgr->SetSpriteShader(m_blur_shader);
-	m_stage->getCanvas()->ResetViewport();
+	m_stage->GetCanvas()->ResetViewport();
 	m_stage->Refresh();
 }
 

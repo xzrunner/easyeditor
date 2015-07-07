@@ -21,7 +21,7 @@ namespace emodeling
 		//
 		// d2d::EditPanel interface
 		//
-		virtual void clear();
+		virtual void Clear();
 
 		//
 		// d2d::SpritesPanelImpl interface

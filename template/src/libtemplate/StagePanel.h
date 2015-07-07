@@ -19,7 +19,7 @@ public:
 	//
 	// d2d::EditPanel interface
 	//
-	virtual void clear();
+	virtual void Clear();
 
 protected:
 	virtual void OnSizeDebug(wxSizeEvent& event);

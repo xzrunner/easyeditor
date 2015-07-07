@@ -54,7 +54,7 @@ void StagePanel::Refresh(bool eraseBackground, const wxRect* rect)
 	}	
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
 }
 

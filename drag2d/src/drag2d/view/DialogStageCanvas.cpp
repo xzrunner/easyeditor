@@ -27,7 +27,7 @@ void DialogStageCanvas::InitGL()
 
 void DialogStageCanvas::OnDrawSprites() const
 {
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 } // d2d

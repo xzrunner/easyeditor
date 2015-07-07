@@ -23,7 +23,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(this, library)
 	, m_test(NULL)
 {
-	m_editOP = new d2d::ZoomViewOP(this, true);
+	m_edit_op = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this);
 }
 
@@ -32,7 +32,7 @@ StagePanel::~StagePanel()
 	delete m_test;
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
 }
 

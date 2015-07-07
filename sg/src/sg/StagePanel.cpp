@@ -23,9 +23,9 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_base_level = 1;
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	EditPanel::clear();
+	EditPanel::Clear();
 	clearSprites();
 }
 

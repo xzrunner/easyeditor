@@ -49,7 +49,7 @@ void Task::Load(const char* filename)
 
 	m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 
-	m_stage->resetCanvas();
+	m_stage->ResetCanvas();
 }
 
 void Task::Store(const char* filename) const
@@ -87,7 +87,7 @@ void Task::Clear()
 	m_viewlist->Clear();
 
 	m_library->Clear();
-	m_stage->clear();
+	m_stage->Clear();
 	m_library->Refresh();
 	m_stage->Refresh();
 }
@@ -122,7 +122,7 @@ void Task::InitLayout()
 	m_view_panel_mgr.AddSpritePanel(m_stage);
 	m_view_panel_mgr.AddShapePanel(m_stage);
 	m_property->SetEditPanel(m_stage);
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 
 	left_vert_splitter->SetSashGravity(0.2f);
 	left_vert_splitter->SplitVertically(left_hori_splitter, m_stage);

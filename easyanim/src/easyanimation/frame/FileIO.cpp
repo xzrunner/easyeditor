@@ -50,7 +50,7 @@ void FileIO::Load(const std::string& filepath, Controller* ctrl)
 
 	ctrl->setCurrFrame(0, 1);
 
- 	ctrl->GetStagePanel()->getCanvas()->ResetViewport();
+ 	ctrl->GetStagePanel()->GetCanvas()->ResetViewport();
 }
 
 void FileIO::StoreSingle(const std::string& filepath, Controller* ctrl)

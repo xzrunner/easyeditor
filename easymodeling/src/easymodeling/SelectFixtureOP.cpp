@@ -24,7 +24,7 @@ SelectFixtureOP::~SelectFixtureOP()
 
 bool SelectFixtureOP::OnMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* sprite = m_stagePanel->querySpriteByPos(pos);
 
 	d2d::IPropertySetting* setting = NULL;
@@ -65,7 +65,7 @@ bool SelectFixtureOP::OnMouseLeftUp(int x, int y)
 
 	if (m_firstPos.isValid())
 	{
-		d2d::Rect rect(m_firstPos, m_stage->transPosScreenToProject(x, y));
+		d2d::Rect rect(m_firstPos, m_stage->TransPosScrToProj(x, y));
 		std::vector<d2d::ISprite*> sprites;
 		m_stagePanel->querySpritesByRect(rect, sprites);
 
@@ -100,7 +100,7 @@ bool SelectFixtureOP::OnMouseMove(int x, int y)
 
 	m_mouseOn = NULL;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* sprite = static_cast<StagePanel*>(m_stage)->querySpriteByPos(pos);
 	if (sprite)
 	{

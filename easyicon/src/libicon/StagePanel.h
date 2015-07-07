@@ -18,7 +18,7 @@ public:
 	//
 	// d2d::EditPanel interface
 	//
-	virtual void clear();
+	virtual void Clear();
 
 	void SetIcon(Icon* icon);
 	void SetImage(d2d::Image* img);

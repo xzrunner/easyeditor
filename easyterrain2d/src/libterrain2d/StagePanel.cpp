@@ -16,7 +16,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(this, library)
 	, d2d::ShapesPanelImpl(this)
 {
-	m_editOP = new d2d::ZoomViewOP(this, true);
+	m_edit_op = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this);
 
  	SetDropTarget(new StageDropTarget(this, library));
@@ -29,7 +29,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(this, library)
 	, d2d::ShapesPanelImpl(this)
 {
-	m_editOP = new d2d::ZoomViewOP(this, true);
+	m_edit_op = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this, edited, bg_sprites);
 
 	m_oceans = static_cast<Sprite*>(edited)->getSymbol().GetOceans();
@@ -49,7 +49,7 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
 }
 

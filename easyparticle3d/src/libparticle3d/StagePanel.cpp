@@ -16,7 +16,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	xRot = yRot = 0;
 
 	m_canvas = new StageCanvas(this);
-	m_editOP = new EditOP(this);
+	m_edit_op = new EditOP(this);
 }
 
 StagePanel::~StagePanel()

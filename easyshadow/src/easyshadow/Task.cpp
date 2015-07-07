@@ -39,7 +39,7 @@ bool Task::IsDirty() const
 void Task::Clear()
 {
 	m_library->Clear();
-	m_stage->clear();
+	m_stage->Clear();
 	m_library->Refresh();
 	m_stage->Refresh();
 }
@@ -76,7 +76,7 @@ wxWindow* Task::InitLayoutLeft(wxWindow* parent)
 wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 {
 	m_stage = new StagePanel(parent, m_parent, m_library);
-	m_library->SetCanvas(m_stage->getCanvas());	
+	m_library->SetCanvas(m_stage->GetCanvas());	
 	return m_stage;
 }
 

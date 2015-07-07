@@ -49,23 +49,23 @@ void Task::Load(const char* filepath)
 		d2d::ExceptionDlg dlg(m_parent, e);
 		dlg.ShowModal();
 	}
-	m_widgets.m_stage->getCanvas()->ResetViewport();
+	m_widgets.m_stage->GetCanvas()->ResetViewport();
 }
 
 void Task::Store(const char* filepath) const
 {
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anim)) {
 		FileIO::StoreSingle(filepath, const_cast<Controller*>(&m_controller));
-		m_widgets.m_stage->onSave();
+		m_widgets.m_stage->OnSave();
 	} else if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_anis)) {
 		FileIO::StoreTemplate(filepath, const_cast<Controller*>(&m_controller));
-		m_widgets.m_stage->onSave();
+		m_widgets.m_stage->OnSave();
 	}
 }
 
 bool Task::IsDirty() const
 {
-	return m_widgets.m_stage->isDirty();
+	return m_widgets.m_stage->IsEditDirty();
 }
 
 void Task::Clear()
@@ -144,7 +144,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 		&m_widgets.m_view_panel_mgr, &m_controller);
 	m_widgets.m_view_panel_mgr.AddSpritePanel(m_widgets.m_stage);
 	m_widgets.m_property->SetEditPanel(m_widgets.m_stage);
-	m_widgets.m_library->SetCanvas(m_widgets.m_stage->getCanvas());	// ?
+	m_widgets.m_library->SetCanvas(m_widgets.m_stage->GetCanvas());	// ?
 
 	// toolbar
 	m_widgets.m_toolbar = new ToolbarPanel(top_split, m_widgets.m_stage, 

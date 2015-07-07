@@ -42,7 +42,7 @@ bool EditBezierOP::OnMouseLeftDown(int x, int y)
 {
 	if (ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	m_firstPress = m_currPos = m_stage->transPosScreenToProject(x, y);
+	m_firstPress = m_currPos = m_stage->TransPosScrToProj(x, y);
 
 	m_shapesImpl->getShapeSelection()->Clear();
 
@@ -75,7 +75,7 @@ bool EditBezierOP::OnMouseLeftUp(int x, int y)
 	{
 		if (m_firstPress.isValid())
 		{
-			m_currPos = m_stage->transPosScreenToProject(x, y);
+			m_currPos = m_stage->TransPosScrToProj(x, y);
 
 			const float dis = d2d::Math::getDistance(m_firstPress, m_currPos);
 			if (dis > 1)
@@ -111,7 +111,7 @@ bool EditBezierOP::OnMouseRightDown(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		m_currPos = m_stage->transPosScreenToProject(x, y);
+		m_currPos = m_stage->TransPosScrToProj(x, y);
 
 		NodeCapture capture(m_shapesImpl, tolerance);
 		capture.captureEditable(m_currPos, m_captured);
@@ -139,7 +139,7 @@ bool EditBezierOP::OnMouseMove(int x, int y)
 {
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
@@ -157,7 +157,7 @@ bool EditBezierOP::OnMouseDrag(int x, int y)
 {
 	if (ZoomViewOP::OnMouseDrag(x, y)) return true;
 
-	m_currPos = m_stage->transPosScreenToProject(x, y);
+	m_currPos = m_stage->TransPosScrToProj(x, y);
 
 	if (m_captured.shape)
 	{

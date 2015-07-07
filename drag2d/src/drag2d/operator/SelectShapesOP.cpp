@@ -76,7 +76,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 
 	m_move_last_pos.setInvalid();
 
-	Vector pos = m_stage->transPosScreenToProject(x, y);
+	Vector pos = m_stage->TransPosScrToProj(x, y);
 	IShape* selected = m_shapeImpl->queryShapeByPos(pos);
 	if (selected)
 	{
@@ -131,7 +131,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 
 	if (m_firstPos.isValid())
 	{
-		Rect rect(m_firstPos, m_stage->transPosScreenToProject(x, y));
+		Rect rect(m_firstPos, m_stage->TransPosScrToProj(x, y));
 		std::vector<IShape*> shapes;
 		m_shapeImpl->queryShapesByRect(rect, shapes);
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
@@ -156,7 +156,7 @@ bool SelectShapesOP::OnMouseDrag(int x, int y)
 	if (DrawRectangleOP::OnMouseDrag(x, y)) return true;
 
 	if (!m_selection->IsEmpty() && m_move_last_pos.isValid()) {
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_selection->Traverse(TranslateVisitor(pos - m_move_last_pos));
 		m_move_last_pos = pos;
 	}

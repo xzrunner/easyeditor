@@ -11,7 +11,7 @@ EditCameraOP::EditCameraOP(d2d::EditPanel* stage)
 	: d2d::AbstractEditOP(stage)
 	, m_curr(NULL)
 {
-	m_canvas = static_cast<e3d::StageCanvas*>(stage->getCanvas());
+	m_canvas = static_cast<e3d::StageCanvas*>(stage->GetCanvas());
 
 	m_translate = new TranslateCameraState(m_canvas);
 	m_rotate = new RotateCameraState(m_canvas);

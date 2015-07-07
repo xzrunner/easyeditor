@@ -9,7 +9,7 @@ static const float MOUSE_SENSITIVITY = 0.3f;
 ControlCameraOP::ControlCameraOP(d2d::EditPanel* stage)
 	: d2d::AbstractEditOP(stage)
 {
-	m_canvas = static_cast<e3d::StageCanvas*>(stage->getCanvas());
+	m_canvas = static_cast<e3d::StageCanvas*>(stage->GetCanvas());
 }
 
 bool ControlCameraOP::OnKeyDown(int keyCode)

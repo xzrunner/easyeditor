@@ -35,7 +35,7 @@ bool ArrangeSpriteOP::OnMouseLeftDown(int x, int y)
 	if (d2d::ArrangeSpriteOP<SelectSpritesOP>::OnMouseLeftDown(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	for (int i = 0, n = m_crosses.size(); i < n; ++i) {
 		if (m_crosses[i]->contain(pos)) {
 			m_selected = m_crosses[i];
@@ -59,7 +59,7 @@ bool ArrangeSpriteOP::OnMouseDrag(int x, int y)
 {
 	if (m_selected)
 	{
-		m_selected->pos = m_stage->transPosScreenToProject(x, y);
+		m_selected->pos = m_stage->TransPosScrToProj(x, y);
 		m_stage->Refresh();
 	}
 	else

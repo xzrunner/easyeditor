@@ -27,8 +27,8 @@ static const int GL_ATTRIB[20] = {WX_GL_RGBA, WX_GL_MIN_RED, 1, WX_GL_MIN_GREEN,
 IStageCanvas::IStageCanvas(EditPanel* stage)
 	: wxGLCanvas(stage, wxID_ANY, GL_ATTRIB)
 	, m_stage(stage)
- 	, m_camera(stage->getCamera())
-	, m_screen(stage->getCamera())
+ 	, m_camera(stage->GetCamera())
+	, m_screen(stage->GetCamera())
  	, m_width(0), m_height(0)
  	, m_inited(false)
  	, m_context(new wxGLContext(this))
@@ -118,7 +118,7 @@ void IStageCanvas::OnPaint(wxPaintEvent& event)
 
 void IStageCanvas::OnMouse(wxMouseEvent& event)
 {
-	m_stage->onMouse(event);
+	m_stage->OnMouse(event);
 
 	// The handler of this event should normally call event.Skip() to allow the default processing 
 	// to take place as otherwise the window under mouse wouldn't get the focus.

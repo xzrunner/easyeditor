@@ -26,7 +26,7 @@ EditDialogSimple::EditDialogSimple(wxWindow* parent, d2d::ISprite* edited,
 	InitLayout(edited, bg_sprites);
 	InitEditOP(edited);
 
-	m_stage->setTitleStatus(true);
+	m_stage->SetTitleStatus(true);
 }
 
 EditDialogSimple::~EditDialogSimple()
@@ -65,12 +65,12 @@ void EditDialogSimple::InitEditOP(d2d::ISprite* edited)
 		break;
 	}
 
-	m_stage->setEditOP(op);
+	m_stage->SetEditOP(op);
 }
 
 void EditDialogSimple::OnClose(wxCloseEvent& event)
 {
-	if (!m_stage->isDirty())
+	if (!m_stage->IsEditDirty())
 	{
 		Destroy();
 		return;

@@ -30,7 +30,7 @@ void StageDropTarget::OnDropText(wxCoord x, wxCoord y, const wxString& text)
 	ISymbol* symbol = m_library->GetSymbol(index);
 	if (symbol)
 	{
-		Vector pos = m_edit_panel->transPosScreenToProject(x, y);
+		Vector pos = m_edit_panel->TransPosScrToProj(x, y);
 		bool handled = OnDropSymbol(symbol, pos);
 		if (!handled) {
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
@@ -52,7 +52,7 @@ void StageDropTarget::OnDropFiles(wxCoord x, wxCoord y, const wxArrayString& fil
 		symbol->RefreshThumbnail(filename);
 		bool success = m_library->AddSymbol(symbol);
 		if (success) {
-			Vector pos = m_edit_panel->transPosScreenToProject(x, y);
+			Vector pos = m_edit_panel->TransPosScrToProj(x, y);
 			ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 			sprite->translate(pos);
 			m_sprites_impl->insertSprite(sprite);

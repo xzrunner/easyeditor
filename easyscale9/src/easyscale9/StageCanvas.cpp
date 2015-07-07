@@ -47,7 +47,7 @@ void StageCanvas::OnDrawSprites() const
 		if (symbol)
 			symbol->Draw(d2d::Matrix());
 	}
-	editPanel->drawEditTemp();
+	editPanel->DrawEditOP();
 }
 
 void StageCanvas::DrawGuideLines() const

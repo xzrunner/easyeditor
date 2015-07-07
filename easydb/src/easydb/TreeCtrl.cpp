@@ -113,7 +113,7 @@ namespace edb
 				ecomplex::EditDialog dlg(stage, &symbol);
 				dlg.ShowModal();
 
-				stage->resetCanvas();
+				stage->ResetCanvas();
 			}
 		}
 		else

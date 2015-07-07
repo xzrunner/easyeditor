@@ -43,7 +43,7 @@ void Task::clear()
 {
 	Context* context = Context::Instance();
 	context->library->Clear();
-	context->stage->clear();
+	context->stage->Clear();
 	context->library->Refresh();
 	context->stage->Refresh();
 }
@@ -52,13 +52,13 @@ void Task::onPreview() const
 {
 	PreviewDialog dlg;
 	dlg.ShowModal();
-	Context::Instance()->stage->resetCanvas();
+	Context::Instance()->stage->ResetCanvas();
 }
 
 d2d::IStageCanvas* Task::getCanvas() const
 {
 	if (d2d::EditPanel* stage = Context::Instance()->stage)
-		return stage->getCanvas();
+		return stage->GetCanvas();
 	else
 		return NULL;
 }

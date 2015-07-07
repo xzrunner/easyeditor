@@ -28,7 +28,7 @@ bool PasteSymbolOP::OnMouseLeftDown(int x, int y)
 	ISymbol* symbol = m_libraryPanel->GetSymbol();
 	if (symbol)
 	{
-		m_pos = m_stage->transPosScreenToProject(x, y);
+		m_pos = m_stage->TransPosScrToProj(x, y);
 		ISprite* sprite = SpriteFactory::Instance()->create(symbol);
 		sprite->translate(m_pos);
 		if (m_pScale)
@@ -44,7 +44,7 @@ bool PasteSymbolOP::OnMouseMove(int x, int y)
 {
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	m_pos = m_stage->transPosScreenToProject(x, y);
+	m_pos = m_stage->TransPosScrToProj(x, y);
 	m_stage->Refresh();
 
 	return false;

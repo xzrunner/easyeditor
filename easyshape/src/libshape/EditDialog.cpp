@@ -27,7 +27,7 @@ EditDialog::EditDialog(wxWindow* parent, Symbol* symbol)
 		m_toolbar->SelectSuitableEditOP();
 	}
 
-	m_stage->setTitleStatus(true);
+	m_stage->SetTitleStatus(true);
 }
 
 EditDialog::~EditDialog()
@@ -60,7 +60,7 @@ void EditDialog::InitLayout(Symbol* symbol)
 
 void EditDialog::OnClose(wxCloseEvent& event)
 {
-	if (!m_stage->isDirty())
+	if (!m_stage->IsEditDirty())
 	{
 		Destroy();
 		return;

@@ -106,9 +106,9 @@ void KeysContentWidget::OnKeyDown(wxKeyEvent& event)
 	} else if (key_code == WXK_DELETE) {
 		m_editop.DeleteSelection();
 	} else 	if (wxGetKeyState(WXK_CONTROL_Z) && wxGetKeyState(WXK_CONTROL)) {
-		m_ctrl->GetStagePanel()->undo();
+		m_ctrl->GetStagePanel()->Undo();
 	} else if (wxGetKeyState(WXK_CONTROL_Y) && wxGetKeyState(WXK_CONTROL)) {
-		m_ctrl->GetStagePanel()->redo();
+		m_ctrl->GetStagePanel()->Redo();
 	}
 }
 

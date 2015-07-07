@@ -17,7 +17,7 @@ bool DrawPolylineOP::OnMouseLeftDown(int x, int y)
 {
 	if (d2d::ZoomViewOP::OnMouseLeftDown(x, y)) return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_polyline)) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}
@@ -47,7 +47,7 @@ bool DrawPolylineOP::OnMouseMove(int x, int y)
 
 	if (m_polyline.empty()) return false;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (DrawLineUtility::IsStraightOpen(m_polyline)) {
 		pos = DrawLineUtility::FixPosTo8DirStraight(m_polyline.back(), pos);
 	}

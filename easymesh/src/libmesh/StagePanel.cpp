@@ -47,7 +47,7 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
 	m_symbol->Release();
 	m_symbol = new Symbol;
@@ -128,7 +128,7 @@ void StagePanel::CreateShape()
 
 void StagePanel::init(d2d::LibraryPanel* library)
 {
-	m_editOP = new d2d::ZoomViewOP(this, true);
+	m_edit_op = new d2d::ZoomViewOP(this, true);
 	m_canvas = new StageCanvas(this);
 
 	if (library) {
@@ -157,7 +157,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 		m_stage->m_symbol = symbol;
 		m_stage->Refresh();
 
-		m_stage->getCanvas()->ResetViewport();
+		m_stage->GetCanvas()->ResetViewport();
 
 		return true;
 	}

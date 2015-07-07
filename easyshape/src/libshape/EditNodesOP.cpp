@@ -37,7 +37,7 @@ bool EditNodesOP::OnMouseLeftDown(int x, int y)
 	if (m_nodeSelection.empty())
 		m_lastPos.setInvalid();
 	else
-		m_lastPos = m_stage->transPosScreenToProject(x, y);
+		m_lastPos = m_stage->TransPosScrToProj(x, y);
 
 	return false;
 }
@@ -50,7 +50,7 @@ bool EditNodesOP::OnMouseDrag(int x, int y)
 
 	if (m_lastPos.isValid())
 	{
-		d2d::Vector currPos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector currPos = m_stage->TransPosScrToProj(x, y);
 		d2d::Vector offset = currPos - m_lastPos;
 		for (size_t i = 0, n = m_nodeSelection.size(); i < n; ++i)
 		{
@@ -161,7 +161,7 @@ void EditNodesOP::updateModified()
 		chainsDst.push_back(result);
 	}
 
-	m_stage->addHistoryOP(new edit_nodes::ModifyNodesAOP(chains, chainsDst));
+	m_stage->AddOpRecord(new edit_nodes::ModifyNodesAOP(chains, chainsDst));
 
 	m_buffer.clear();
 	clearSelectedNodes();

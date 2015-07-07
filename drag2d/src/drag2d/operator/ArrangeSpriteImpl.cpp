@@ -124,7 +124,7 @@ void ArrangeSpriteImpl::OnKeyUp(int keyCode)
 
 void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 {
-	Vector pos = m_stage->transPosScreenToProject(x, y);
+	Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_left_down_pos = pos;
 
 	m_align.SetInvisible();
@@ -204,12 +204,12 @@ void ArrangeSpriteImpl::OnMouseLeftDown(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 {
-	Vector pos = m_stage->transPosScreenToProject(x, y);
+	Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state) 
 	{
 		AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
 		if (history) {
-			m_stage->addHistoryOP(history);
+			m_stage->AddOpRecord(history);
 		}
 
 		delete m_op_state;
@@ -241,7 +241,7 @@ void ArrangeSpriteImpl::OnMouseLeftUp(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseRightDown(int x, int y)
 {
-	Vector pos = m_stage->transPosScreenToProject(x, y);
+	Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_right_down_pos = pos;
 
 	ISprite* selected = NULL;
@@ -282,7 +282,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 {
 	if (m_right_down_pos.isValid() && !m_selection->IsEmpty())
 	{
-		Vector pos = m_stage->transPosScreenToProject(x, y);
+		Vector pos = m_stage->TransPosScrToProj(x, y);
 		d2d::ISprite* sprite = m_sprites_impl->querySpriteByPos(pos);
 		if (pos == m_right_down_pos && sprite)
 		{
@@ -294,7 +294,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 		{
 			AbstractAtomicOP* history = m_op_state->OnMouseRelease(pos);
 			if (history) {
-				m_stage->addHistoryOP(history);
+				m_stage->AddOpRecord(history);
 			}
 
 			delete m_op_state;
@@ -311,7 +311,7 @@ void ArrangeSpriteImpl::OnMouseRightUp(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseMove(int x, int y)
 {
-	Vector pos = m_stage->transPosScreenToProject(x, y);
+	Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseMove(pos))
 	{
 		if (m_property_panel) {
@@ -323,7 +323,7 @@ void ArrangeSpriteImpl::OnMouseMove(int x, int y)
 
 void ArrangeSpriteImpl::OnMouseDrag(int x, int y)
 {
-	Vector pos = m_stage->transPosScreenToProject(x, y);
+	Vector pos = m_stage->TransPosScrToProj(x, y);
 	if (m_op_state && m_op_state->OnMouseDrag(pos))
 	{
 		if (m_property_panel) {
@@ -367,7 +367,7 @@ void ArrangeSpriteImpl::OnPopMenuSelected(int type)
 					dtex->InsertSymbol(s);
 				}
 
-				m_stage->getCanvas()->ResetViewport();
+				m_stage->GetCanvas()->ResetViewport();
 			}
 		}
 		break;
@@ -522,7 +522,7 @@ void ArrangeSpriteImpl::OnSpaceKeyDown()
 		sprite->setShear(0, 0);
 		//sprite->setOffset(Vector(0, 0));
 	}
-	m_stage->addHistoryOP(comb);
+	m_stage->AddOpRecord(comb);
 	m_stage->Refresh();
 }
 
@@ -591,7 +591,7 @@ void ArrangeSpriteImpl::OnDeleteKeyDown()
 	// add to history
 	std::vector<ISprite*> sprites;
 	m_selection->Traverse(FetchAllVisitor<ISprite>(sprites));
-	m_stage->addHistoryOP(new DeleteSpriteAOP(sprites, m_sprites_impl));
+	m_stage->AddOpRecord(new DeleteSpriteAOP(sprites, m_sprites_impl));
 
 	m_sprites_impl->removeSpriteSelection();	
 }

@@ -23,7 +23,7 @@ Task::~Task()
 
 void Task::Load(const char* filepath)
 {
-	Shader* shader = FileIO::LoadShader(filepath, m_stage->getCanvas(), m_toolbar, m_is_2d);
+	Shader* shader = FileIO::LoadShader(filepath, m_stage->GetCanvas(), m_toolbar, m_is_2d);
 	if (m_is_2d) {
 		static_cast<StagePanel2D*>(m_stage)->SetShader(shader);
 	} else {
@@ -38,12 +38,12 @@ void Task::Store(const char* filepath) const
 
 bool Task::IsDirty() const
 {
-	return m_stage->isDirty();
+	return m_stage->IsEditDirty();
 }
 
 void Task::Clear()
 {
-	m_stage->clear();
+	m_stage->Clear();
 	m_stage->Refresh();
 }
 
@@ -67,7 +67,7 @@ void Task::initLayout()
 	} else {
 		m_stage = new StagePanel3D(left_splitter, m_parent, m_library);
 	}
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 
 	m_toolbar = new ToolbarPanel(right_splitter, m_stage);
 

@@ -45,14 +45,14 @@ void PreviewDialog::buildToolBar(wxSizer* topSizer)
 void PreviewDialog::buildEditPanel(wxSizer* topSizer)
 {
 	m_stage = new d2d::EditPanel(this, this);
-	m_stage->setEditOP(new d2d::ZoomViewOP(m_stage, false));
+	m_stage->SetEditOP(new d2d::ZoomViewOP(m_stage, false));
 	m_stage->SetCanvas(new PreviewCanvas(m_stage, m_symbol));
 	topSizer->Add(m_stage, 1, wxEXPAND);
 }
 
 void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 {
-	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->getCanvas());
+	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->GetCanvas());
 	assert(canvas);
 	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
 	setting.isCirculate = event.IsChecked();
@@ -63,7 +63,7 @@ void PreviewDialog::onSetCirculate(wxCommandEvent& event)
 
 void PreviewDialog::onSetStop(wxCommandEvent& event)
 {
-	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->getCanvas());
+	PreviewCanvas* canvas = static_cast<PreviewCanvas*>(m_stage->GetCanvas());
 	assert(canvas);
 	PreviewCanvas::PlaySetting& setting = canvas->getPlaySetting();
 	setting.isStop = event.IsChecked();

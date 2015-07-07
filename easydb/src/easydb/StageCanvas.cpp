@@ -23,7 +23,7 @@ void StageCanvas::OnDrawSprites() const
 //	editPanel->traverseSprites(d2d::DrawSpritesVisitor(m_batch), d2d::DT_VISIBLE);
 
 	drawConnection();
-	editPanel->drawEditTemp();
+	editPanel->DrawEditOP();
 }
 
 void StageCanvas::drawConnection() const

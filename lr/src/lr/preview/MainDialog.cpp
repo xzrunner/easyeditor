@@ -24,13 +24,13 @@ void MainDialog::InitLayout()
 
 	d2d::EditPanel* stage = new d2d::EditPanel(this, this);
 
-	d2d::Camera* cam = stage->getCamera();
+	d2d::Camera* cam = stage->GetCamera();
 	float old_scale = cam->GetScale();
 	cam->SetScale(old_scale / PREVIEW_SCALE);
 	stage->Refresh();
 
 	stage->SetCanvas(new StageCanvas(stage, m_control, m_sprites));
-	stage->setEditOP(new CtrlCamOP(stage));
+	stage->SetEditOP(new CtrlCamOP(stage));
 	sizer->Add(stage, 1, wxEXPAND);	
 
 	SetSizer(sizer);

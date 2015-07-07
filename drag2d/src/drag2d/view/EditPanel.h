@@ -1,84 +1,92 @@
-#pragma once
+#ifndef _DRAG2D_EDIT_PANEL_H_
+#define _DRAG2D_EDIT_PANEL_H_
 
-#include <wx/wx.h>
-
-#include "interfaces.h"
 #include "HistoryList.h"
 #include "common/Vector.h"
 
+#include <wx/wx.h>
+
 namespace d2d
 {
-	class AbstractAtomicOP;
-	class AbstractEditOP;
-	class IStageCanvas;
-	class Camera;
 
-	class EditPanel : public wxPanel
-	{
-	public:
-		EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
-		virtual ~EditPanel();
+class AbstractAtomicOP;
+class AbstractEditOP;
+class IStageCanvas;
+class Camera;
 
-		virtual void clear();
+class EditPanel : public wxPanel
+{
+public:
+	EditPanel(wxWindow* parent, wxTopLevelWindow* frame);
+	virtual ~EditPanel();
 
-		Vector transPosScreenToProject(int x, int y) const;
-		Vector transPosProjectToScreen(const Vector& proj) const;
+	virtual void Clear();
 
-		void drawEditTemp() const;
+	Vector TransPosScrToProj(int x, int y) const;
+	Vector TransPosProjToScr(const Vector& proj) const;
 
-		AbstractEditOP* getEditOP() const { return m_editOP; }
-		void setEditOP(AbstractEditOP* editOP);
+	void DrawEditOP() const;
 
-		IStageCanvas* getCanvas() const { return m_canvas; }
-		void SetCanvas(IStageCanvas* canvas) { m_canvas = canvas; }
+	const AbstractEditOP* GetEditOP() const { return m_edit_op; }
+	AbstractEditOP* GetEditOP() { return m_edit_op; }
+	void SetEditOP(AbstractEditOP* editOP);
 
-		Camera* getCamera() const { return m_camera; }
+	const IStageCanvas* GetCanvas() const { return m_canvas; }
+	IStageCanvas* GetCanvas() { return m_canvas; }
+	void SetCanvas(IStageCanvas* canvas) { m_canvas = canvas; }
 
-		// In Stage, class StagePanel can't get focus, only its class IStageCanvas has the focus, so 
-		// these two func should be called by IStageCanvas.
-		// While in SymbolEdit, class SymbolEditPanel can get focus.
-		void onMouse(wxMouseEvent& event);
-		virtual void OnKeyDown(wxKeyEvent& event);
-		virtual void OnKeyUp(wxKeyEvent& event);
-		void OnMouseWheelRotation(int x, int y, int direction);
+	Camera* GetCamera() const { return m_camera; }
 
-		void resetCanvas();
-		void ResetViewport();
+	// In Stage, class StagePanel can't get focus, only its class IStageCanvas has the focus, so 
+	// these two func should be called by IStageCanvas.
+	// While in SymbolEdit, class SymbolEditPanel can get focus.
+	void OnMouse(wxMouseEvent& event);
+	void OnKeyDown(wxKeyEvent& event);
+	void OnKeyUp(wxKeyEvent& event);
+	void OnMouseWheelRotation(int x, int y, int direction);
 
-		void undo();
-		void redo();
-		void addHistoryOP(AbstractAtomicOP* op);
+	void ResetCanvas();
+	void ResetViewport();
 
-		void saveHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites);
-		void loadHistoryList(const std::string& filepath, const std::vector<ISprite*>& sprites);
+	void Undo();
+	void Redo();
+	void AddOpRecord(AbstractAtomicOP* op);
 
-		void onSave();
-		bool isDirty() const;
+	void SaveOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
+	void LoadOpRecordList(const std::string& filepath, const std::vector<ISprite*>& sprites);
 
-		void setTitleStatus(bool dirty);
+	void OnSave();
+	bool IsEditDirty() const;
 
-		void OnRightPopupMenu(wxCommandEvent& event);
+	void SetTitleStatus(bool dirty);
 
-	protected:
-		void onSize(wxSizeEvent& event);
+	void OnRightPopupMenu(wxCommandEvent& event);
 
-		virtual void OnSizeDebug(wxSizeEvent& event) {}
+protected:
+	void OnSize(wxSizeEvent& event);
 
-		virtual void OnMouseHook(wxMouseEvent& event) {}
-		virtual void OnKeyHook(int key_code) {}
+	virtual void OnSizeDebug(wxSizeEvent& event) {}
 
-	protected:
-		AbstractEditOP* m_editOP;
+	virtual void OnMouseHook(wxMouseEvent& event) {}
+	virtual void OnKeyHook(int key_code) {}
 
-		IStageCanvas* m_canvas;
-		Camera* m_camera;
+protected:
+	AbstractEditOP* m_edit_op;
 
-		HistoryList m_historyList;
+	IStageCanvas* m_canvas;
+	Camera* m_camera;
 
-		wxTopLevelWindow* m_frame;
+	wxTopLevelWindow* m_frame;
 
-		DECLARE_EVENT_TABLE()
+	
 
-	}; // EditPanel
+private:
+	HistoryList m_history_list;
+
+	DECLARE_EVENT_TABLE()
+
+}; // EditPanel
+
 }
 
+#endif // _DRAG2D_EDIT_PANEL_H_

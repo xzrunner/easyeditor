@@ -26,7 +26,7 @@ bool ZoomViewOP::OnKeyDown(int keyCode)
 	if (m_openLeftTap && keyCode == WXK_SPACE) {
 		m_stage->SetCursor(wxCURSOR_HAND);
 	} else if (keyCode == WXK_ESCAPE) {
-		Camera* cam = m_stage->getCamera();
+		Camera* cam = m_stage->GetCamera();
 		cam->Reset();
 	}
 
@@ -119,7 +119,7 @@ bool ZoomViewOP::OnMouseDrag(int x, int y)
 
 			Vector offset = m_lastPos - currPos;
 			offset.y = -offset.y;
-			m_stage->getCamera()->Translate(offset);
+			m_stage->GetCamera()->Translate(offset);
 
 			m_lastPos = currPos;
 

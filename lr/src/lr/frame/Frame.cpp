@@ -67,7 +67,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
-	stage->resetCanvas();
+	stage->ResetCanvas();
 }
 
 void Frame::OnExtendSetting(wxCommandEvent& event)
@@ -99,7 +99,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	ss.SaveToFile(filepath);
 
-	stage->getCanvas()->ResetInitState();
+	stage->GetCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsJson(const std::string& filepath) const

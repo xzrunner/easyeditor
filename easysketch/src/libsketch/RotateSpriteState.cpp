@@ -24,7 +24,7 @@ void RotateSpriteState::OnMouseRelease(const ivec2& pos)
 
 void RotateSpriteState::OnMouseMove(const ivec2& pos)
 {
-	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->getCanvas());
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 
 	e3d::Camera& cam = canvas->GetCamera3();
 	Rotate(cam, m_last_pos, pos);

@@ -29,13 +29,13 @@ void Task::Store(const char* filename) const
 
 bool Task::IsDirty() const
 {
-	return m_stage->isDirty();
+	return m_stage->IsEditDirty();
 }
 
 void Task::Clear()
 {
 	m_library->Clear();
-	m_stage->clear();
+	m_stage->Clear();
 	m_library->Refresh();
 	m_stage->Refresh();
 }

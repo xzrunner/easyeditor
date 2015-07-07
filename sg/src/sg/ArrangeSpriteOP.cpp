@@ -26,7 +26,7 @@ bool ArrangeSpriteOP::OnMouseLeftDClick(int x, int y)
 
 	StagePanel* stage = static_cast<StagePanel*>(m_stage);
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = stage->querySpriteByPos(pos);
 	if (!selected) {
 		return false;

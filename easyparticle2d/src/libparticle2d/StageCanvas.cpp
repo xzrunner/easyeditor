@@ -42,7 +42,7 @@ void StageCanvas::OnDrawSprites() const
 		ps->Draw(d2d::Matrix());
 	}
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 void StageCanvas::OnTimer()

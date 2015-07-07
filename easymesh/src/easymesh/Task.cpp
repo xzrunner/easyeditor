@@ -31,14 +31,14 @@ void Task::Load(const char* filepath)
 		
 		m_library->LoadFromSymbolMgr(*d2d::SymbolMgr::Instance());
 		symbol->Release();
-		m_stage->getCanvas()->ResetViewport();
+		m_stage->GetCanvas()->ResetViewport();
 	}
 }
 
 void Task::Store(const char* filepath) const
 {
 	FileIO::store(filepath, m_stage->GetSymbol());
-	m_stage->onSave();
+	m_stage->OnSave();
 }
 
 bool Task::IsDirty() const
@@ -49,7 +49,7 @@ bool Task::IsDirty() const
 void Task::Clear()
 {
 	m_library->Clear();
-	m_stage->clear();
+	m_stage->Clear();
 	m_library->Refresh();
 	m_stage->Refresh();
 }

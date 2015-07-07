@@ -18,7 +18,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
+	m_edit_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, library));
@@ -36,15 +36,15 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_library(library)
 	, m_view_panel_mgr(view_panel_mgr)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
+	m_edit_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, view_panel_mgr);
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, library));
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	d2d::EditPanel::clear();
+	d2d::EditPanel::Clear();
 
 	Symbol* symbol = getSymbol();
 	for (size_t i = 0, n = symbol->m_sprites.size(); i < n; ++i)

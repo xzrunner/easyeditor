@@ -54,9 +54,9 @@ StagePanel::~StagePanel()
 	}
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	EditPanel::clear();
+	EditPanel::Clear();
 	clearShapes();
 }
 

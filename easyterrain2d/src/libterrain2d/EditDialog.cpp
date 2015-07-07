@@ -31,7 +31,7 @@ EditDialog::EditDialog(wxWindow* parent, Sprite* edited,
 
 	InitLayout(edited, bg_sprites);
 
-	m_stage->setTitleStatus(true);
+	m_stage->SetTitleStatus(true);
 }
 
 EditDialog::~EditDialog()
@@ -61,7 +61,7 @@ void EditDialog::InitLayout(d2d::ISprite* edited, const std::vector<d2d::ISprite
 
 void EditDialog::OnClose(wxCloseEvent& event)
 {
-	if (m_stage->isDirty())
+	if (m_stage->IsEditDirty())
 	{
 		d2d::ExitDlg dlg(this);
 		int val = dlg.ShowModal();

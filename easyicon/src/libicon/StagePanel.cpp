@@ -17,7 +17,7 @@ StagePanel::~StagePanel()
 {
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
 }
 
@@ -48,7 +48,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
 		m_stage->SetImage(image->getImage());
-		m_stage->getCanvas()->ResetViewport();
+		m_stage->GetCanvas()->ResetViewport();
 		return true;
 	}
 

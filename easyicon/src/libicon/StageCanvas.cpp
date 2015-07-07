@@ -20,7 +20,7 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->GetSymbol().Draw(d2d::Matrix(), d2d::Colorf(1, 1, 1, 1), d2d::Colorf(0, 0, 0, 0),
 		d2d::Colorf(1, 0, 0, 0), d2d::Colorf(0, 1, 0, 0), d2d::Colorf(0, 0, 1, 0), &sprite);
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 }

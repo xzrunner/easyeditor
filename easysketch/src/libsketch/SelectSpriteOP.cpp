@@ -74,7 +74,7 @@ d2d::ISprite* SelectSpriteOP::SelectByPos(const ivec2& pos) const
 	std::vector<d2d::ISprite*> sprites;
 	m_stage->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites));
 
-	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->getCanvas());
+	StageCanvas* canvas = static_cast<StageCanvas*>(m_stage->GetCanvas());
 	vec3 ray_dir = canvas->TransPos3ScreenToDir(pos);
 	e3d::Ray ray(vec3(0, 0, 0), ray_dir);
 

@@ -15,7 +15,7 @@ bool MousePositionOP::OnMouseMove(int x, int y)
 {
 	if (ZoomViewOP::OnMouseMove(x, y)) return true;
 
-	m_cmpt->updatePosition(m_stage->transPosScreenToProject(x, y));
+	m_cmpt->updatePosition(m_stage->TransPosScrToProj(x, y));
 
 	return false;
 }

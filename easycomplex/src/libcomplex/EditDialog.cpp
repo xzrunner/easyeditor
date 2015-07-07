@@ -79,7 +79,7 @@ void EditDialog::OnCloseEvent(wxCloseEvent& event)
 
 void EditDialog::OnClose(bool force, int returncode)
 {
-	if (m_stage->isDirty())
+	if (m_stage->IsEditDirty())
 	{
 	 	d2d::ExitDlg dlg(this);
 	 	int val = dlg.ShowModal();

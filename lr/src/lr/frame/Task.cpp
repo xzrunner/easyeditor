@@ -28,7 +28,7 @@ Task::~Task()
 void Task::Load(const char* filename)
 {
 	FileIO::Load(filename, m_library, m_stage, m_grouptree);
-	m_stage->getCanvas()->ResetViewport();
+	m_stage->GetCanvas()->ResetViewport();
 }
 
 void Task::Store(const char* filename) const
@@ -46,7 +46,7 @@ void Task::Clear()
 	m_viewlist->Clear();
 
 	m_library->Clear();
-	m_stage->clear();
+	m_stage->Clear();
 	m_library->Refresh();
 	m_stage->Refresh();
 }
@@ -103,7 +103,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 
 	m_library->SetStagePanel(m_stage);
 	m_library->InitPages(m_stage, m_property, &m_view_panel_mgr);
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage);
 
 	return m_stage;

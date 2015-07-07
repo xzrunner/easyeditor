@@ -32,7 +32,7 @@ void StageCanvas::OnDrawSprites() const
 		grids->Draw();
 	}
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {

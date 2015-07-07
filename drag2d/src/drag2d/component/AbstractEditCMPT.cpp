@@ -85,7 +85,7 @@ void AbstractEditCMPT::setChoice(size_t index)
 
 void AbstractEditCMPT::loadEditOP()
 {
-	m_stage->setEditOP(m_editOP);
+	m_stage->SetEditOP(m_editOP);
 }
 
 void AbstractEditCMPT::loadEditOP(AbstractEditOP* op)
@@ -103,7 +103,7 @@ void AbstractEditCMPT::loadEditOP(AbstractEditOP* op)
 	}
 	m_editOP = op;
 
-	m_stage->setEditOP(m_editOP);
+	m_stage->SetEditOP(m_editOP);
 }
 
 void AbstractEditCMPT::loadEditOP(AbstractEditCMPT* cmpt)
@@ -122,7 +122,7 @@ void AbstractEditCMPT::loadEditOP(AbstractEditCMPT* cmpt)
 	}
 	cmpt->m_editOP = m_editOP;
 
-	m_stage->setEditOP(m_editOP);
+	m_stage->SetEditOP(m_editOP);
 }
 
 void AbstractEditCMPT::onChangeEditType(wxCommandEvent& event)

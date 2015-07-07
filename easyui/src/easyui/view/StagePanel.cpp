@@ -15,12 +15,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, d2d::SpritesPanelImpl(this, library)
 	, m_symbols_cfg(this, library)
 {
-	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, property, 
+	m_edit_op = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this, property, 
 		view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), new ArrangeSpriteImpl(this, property));
 	m_canvas = new StageCanvas(this);
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
 }
 

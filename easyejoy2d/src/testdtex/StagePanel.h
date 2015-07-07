@@ -18,7 +18,7 @@ public:
 	//
 	// d2d::EditPanel interface
 	//
-	virtual void clear();
+	virtual void Clear();
 
 	void Load();
 	void UnLoad();

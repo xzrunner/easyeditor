@@ -20,7 +20,7 @@ ArrangeSpriteOP::ArrangeSpriteOP(StagePanel* stage)
 	m_rotate_sprite = new RotateSpriteState(m_stage, selection);
 
 	e3d::StageCanvas* canvas 
-		= static_cast<e3d::StageCanvas*>(m_stage->getCanvas());
+		= static_cast<e3d::StageCanvas*>(m_stage->GetCanvas());
 	m_translate_camera = new TranslateCameraState(canvas);
 	m_rotate_camera = new RotateCameraState(canvas);
 }
@@ -52,7 +52,7 @@ bool ArrangeSpriteOP::OnKeyDown(int keyCode)
 			}
 
 			e3d::StageCanvas* canvas 
-				= static_cast<e3d::StageCanvas*>(m_stage->getCanvas());
+				= static_cast<e3d::StageCanvas*>(m_stage->GetCanvas());
 			canvas->GetCamera3().Reset();
 		}
 		break;

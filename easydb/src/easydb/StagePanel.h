@@ -17,7 +17,7 @@ namespace edb
 		//
 		// d2d::EditPanel interface
 		//
-		virtual void clear();
+		virtual void Clear();
 
 		void loadFromDir(const std::string& dirpath);
 		void loadFromDirFast(const std::string& dirpath);

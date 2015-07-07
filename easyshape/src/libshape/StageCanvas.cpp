@@ -59,7 +59,7 @@ void StageCanvas::OnDrawSprites() const
 		symbol.Draw(d2d::Matrix());
 	}
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 }

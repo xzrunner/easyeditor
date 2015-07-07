@@ -29,7 +29,7 @@ void StageCanvas::OnDrawSprites() const
 	static_cast<StagePanel*>(m_stage)->traverseSprites(d2d::FetchAllVisitor<d2d::ISprite>(sprites), d2d::DT_VISIBLE);
 	for (size_t i = 0, n = sprites.size(); i < n; ++i)
 		d2d::SpriteRenderer::Instance()->Draw(sprites[i]);
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {

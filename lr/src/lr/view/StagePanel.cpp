@@ -52,8 +52,8 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_arrange_op = new d2d::ArrangeSpriteOP<SelectSpritesOP>(this, this, property, 
 		m_view_panel_mgr, NULL, d2d::ArrangeSpriteConfig(), arrange_impl);
 
-	m_editOP = m_arrange_op;
-	m_editOP->Retain();
+	m_edit_op = m_arrange_op;
+	m_edit_op->Retain();
 
 	m_canvas = new StageCanvas(this);
 }
@@ -71,9 +71,9 @@ StagePanel::~StagePanel()
 	for_each(m_layers.begin(), m_layers.end(), DeletePointerFunctor<Layer>());
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	d2d::EditPanel::clear();
+	d2d::EditPanel::Clear();
 	clearSprites();
 	clearShapes();
 
@@ -313,19 +313,19 @@ void StagePanel::OnKeyHook(int key_code)
 		return;
 	}
 
-	if (!m_editOP->IsEmpty()) {
+	if (!m_edit_op->IsEmpty()) {
 		return;
 	}
 
-	m_editOP->Release();
-	if (m_editOP == m_arrange_op) {
+	m_edit_op->Release();
+	if (m_edit_op == m_arrange_op) {
 		d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-		m_editOP = static_cast<LibraryPage*>(curr_page)->GetExtenOP();
+		m_edit_op = static_cast<LibraryPage*>(curr_page)->GetExtenOP();
 	} else {
-		m_editOP = m_arrange_op;
+		m_edit_op = m_arrange_op;
 	}
-	m_editOP->OnActive();
-	m_editOP->Retain();	
+	m_edit_op->OnActive();
+	m_edit_op->Retain();	
 }
 
 }

@@ -49,7 +49,7 @@ void StageCanvas::OnDrawSprites() const
 		d2d::DT_VISIBLE);
 //	m_panel->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 void StageCanvas::OnTimer()

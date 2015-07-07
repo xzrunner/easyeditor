@@ -41,7 +41,7 @@ void SpritePropertyImpl::Translate(float x, float y)
 
 	std::vector<ISprite*> sprites;
 	sprites.push_back(m_sprite);
-	m_editpanel->addHistoryOP(new TranslateSpriteAOP(sprites, new_pos - m_sprite->getPosition()));
+	m_editpanel->AddOpRecord(new TranslateSpriteAOP(sprites, new_pos - m_sprite->getPosition()));
 
 	m_sprite->setTransform(new_pos, m_sprite->getAngle());
 }
@@ -56,7 +56,7 @@ void SpritePropertyImpl::Rotate(float angle)
 
 	std::vector<ISprite*> sprites;
 	sprites.push_back(m_sprite);
-	m_editpanel->addHistoryOP(new RotateSpriteAOP(sprites, offset_angle));
+	m_editpanel->AddOpRecord(new RotateSpriteAOP(sprites, offset_angle));
 
 	m_sprite->setTransform(m_sprite->getPosition(), angle);	
 }
@@ -67,7 +67,7 @@ void SpritePropertyImpl::Scale(float sx, float sy)
 		return;
 	}
 
-	m_editpanel->addHistoryOP(new ScaleSpriteAOP(m_sprite, 
+	m_editpanel->AddOpRecord(new ScaleSpriteAOP(m_sprite, 
 		Vector(sx, sy), m_sprite->getScale()));
 	m_sprite->setScale(sx, sy);
 }
@@ -78,14 +78,14 @@ void SpritePropertyImpl::Shear(float kx, float ky)
 		return;
 	}
 
-	m_editpanel->addHistoryOP(new ShearSpriteAOP(m_sprite, 
+	m_editpanel->AddOpRecord(new ShearSpriteAOP(m_sprite, 
 		Vector(kx, ky), m_sprite->getShear()));
 	m_sprite->setShear(kx, ky);
 }
 
 void SpritePropertyImpl::Offset(float ox, float oy)
 {
-	m_editpanel->addHistoryOP(new OffsetSpriteAOP(m_sprite, Vector(ox, oy), m_sprite->getOffset()));
+	m_editpanel->AddOpRecord(new OffsetSpriteAOP(m_sprite, Vector(ox, oy), m_sprite->getOffset()));
 	m_sprite->setOffset(Vector(ox, oy));
 }
 
@@ -95,7 +95,7 @@ void SpritePropertyImpl::Mirror(bool mx, bool my)
 		return;
 	}
 
-	m_editpanel->addHistoryOP(new MirrorSpriteAOP(m_sprite, 
+	m_editpanel->AddOpRecord(new MirrorSpriteAOP(m_sprite, 
 		m_sprite->getMirrorX(), m_sprite->getMirrorY(), mx, my));
 	m_sprite->setMirror(mx, my);
 }
@@ -106,7 +106,7 @@ void SpritePropertyImpl::Perspective(float px, float py)
 		return;
 	}
 
-	m_editpanel->addHistoryOP(new PerspectiveSpriteAOP(m_sprite, 
+	m_editpanel->AddOpRecord(new PerspectiveSpriteAOP(m_sprite, 
 		Vector(px, py), m_sprite->GetPerspective()));
 	m_sprite->SetPerspective(Vector(px, py));
 }

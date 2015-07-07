@@ -47,7 +47,7 @@ void StageCanvas2D::OnDrawSprites() const
 {
 	DrawBackground();
 	DrawSprites();
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 void StageCanvas2D::DrawBackground() const

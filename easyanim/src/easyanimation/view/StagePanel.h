@@ -20,7 +20,7 @@ namespace eanim
 		//
 		// d2d::EditPanel interface
 		//
-		virtual void clear();
+		virtual void Clear();
 
 		//
 		// d2d::MultiSpritesImpl interface

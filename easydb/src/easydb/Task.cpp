@@ -38,7 +38,7 @@ void Task::clear()
 {
 	Context* context = Context::Instance();
 
-	context->stage->clear();
+	context->stage->Clear();
 	context->stage->Refresh();
 }
 

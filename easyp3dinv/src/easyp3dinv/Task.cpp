@@ -39,7 +39,7 @@ bool Task::IsDirty() const
 
 void Task::Clear()
 {
-	m_stage->clear();
+	m_stage->Clear();
 	m_stage->Refresh();
 }
 

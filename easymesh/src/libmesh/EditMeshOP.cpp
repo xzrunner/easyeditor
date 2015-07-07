@@ -21,7 +21,7 @@ EditMeshOP::EditMeshOP(StagePanel* stage)
 
 bool EditMeshOP::OnMouseLeftDown(int x, int y)
 {
-	m_lastPos = m_stage->transPosScreenToProject(x, y);
+	m_lastPos = m_stage->TransPosScrToProj(x, y);
 	if (d2d::Math::getDistance(m_lastPos, m_center) < CENTER_RADIUS)
 	{
 		m_selCenter = true;
@@ -51,7 +51,7 @@ bool EditMeshOP::OnMouseRightDown(int x, int y)
 	if (SelectNodesOP::OnMouseRightDown(x, y))
 		return true;
 
-	m_lastPos = m_stage->transPosScreenToProject(x, y);
+	m_lastPos = m_stage->TransPosScrToProj(x, y);
 
 	m_bRightPress = true;
 
@@ -62,7 +62,7 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 {
 	if (m_selCenter)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_center = pos;
 		m_stage->Refresh();
 		return true;
@@ -76,7 +76,7 @@ bool EditMeshOP::OnMouseDrag(int x, int y)
 
 	if (!m_selection.IsEmpty())
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		if (m_bRightPress)
 			rotateNode(pos);
 		else

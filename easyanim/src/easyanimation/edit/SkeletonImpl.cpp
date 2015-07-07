@@ -27,7 +27,7 @@ void SkeletonImpl::OnKeyDown(int keyCode)
 
 void SkeletonImpl::OnMouseLeftDown(int x, int y)
 {
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_first_pos = pos;
 	Joint* joint = m_stage->getSkeletonData().queryJointByPos(pos);
 	if (joint) {
@@ -59,14 +59,14 @@ void SkeletonImpl::OnMouseLeftUp(int x, int y)
 void SkeletonImpl::OnMouseRightDown(int x, int y)
 {
 	d2d::ArrangeSpriteImpl::OnMouseRightDown(x, y);
-	m_first_pos = m_stage->transPosScreenToProject(x, y);
+	m_first_pos = m_stage->TransPosScrToProj(x, y);
 }
 
 void SkeletonImpl::OnMouseDrag(int x, int y)
 {
 	if (m_selected_joint)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_selected_joint->setPosition(pos);
 		m_stage->Refresh();
 	}
@@ -96,7 +96,7 @@ void SkeletonImpl::OnPopMenuSelected(int type)
 
 void SkeletonImpl::OnDraw() const
 {
-	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->getCamera());
+	d2d::ArrangeSpriteImpl::OnDraw(*m_stage->GetCamera());
 	m_stage->getSkeletonData().draw();
 }
 

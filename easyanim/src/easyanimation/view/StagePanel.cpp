@@ -20,7 +20,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	, m_ctrl(ctrl)
 {
 //	m_editOP = new d2d::ArrangeSpriteOP<d2d::SelectSpritesOP>(this, this);
-	m_editOP = new ArrangeSpriteOP(this, property, view_panel_mgr, ctrl);
+	m_edit_op = new ArrangeSpriteOP(this, property, view_panel_mgr, ctrl);
 	m_canvas = new StageCanvas(this);
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, m_ctrl->GetLibraryPanel()));
@@ -31,12 +31,12 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 
 StagePanel::~StagePanel()
 {
-	clear();
+	Clear();
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	EditPanel::clear();
+	EditPanel::Clear();
 	clearSprites();
 }
 
@@ -133,13 +133,13 @@ SkeletonData& StagePanel::getSkeletonData()
 
 void StagePanel::onMenuAddJointNode(wxCommandEvent& event)
 {
-	m_editOP->OnPopMenuSelected(Menu_AddJointNode);
+	m_edit_op->OnPopMenuSelected(Menu_AddJointNode);
 	Refresh();
 }
 
 void StagePanel::onMenuDelJointNode(wxCommandEvent& event)
 {
-	m_editOP->OnPopMenuSelected(Menu_DelJointNode);
+	m_edit_op->OnPopMenuSelected(Menu_DelJointNode);
 	Refresh();
 }
 

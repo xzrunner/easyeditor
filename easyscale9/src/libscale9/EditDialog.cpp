@@ -26,7 +26,7 @@ namespace escale9
 		wxSplitterWindow* splitter = new wxSplitterWindow(this);
 		
 		m_stage = new d2d::EditPanel(splitter, this);
-		m_stage->setEditOP(new ResizeBaseOP(m_stage, m_symbol));
+		m_stage->SetEditOP(new ResizeBaseOP(m_stage, m_symbol));
 		m_stage->SetCanvas(new d2d::DialogStageCanvas(m_stage, m_symbol));
 
 		ToolbarPanel* toolbar = new ToolbarPanel(splitter, m_stage, m_symbol);
@@ -37,7 +37,7 @@ namespace escale9
 
 	void EditDialog::onClose(wxCloseEvent& event)
 	{
-		if (!m_stage->isDirty())
+		if (!m_stage->IsEditDirty())
 		{
 			Destroy();
 			return;

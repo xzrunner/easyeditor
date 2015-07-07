@@ -63,7 +63,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 		if (tolerance != 0)
 		{	
 			NodeCapture capture(m_shapesImpl, tolerance);
-			d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+			d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 			capture.captureEditable(pos, m_capturedEditable);
 			if (!m_capturedEditable.shape)
 				capture.captureSelectable(pos, m_captureSelectable);
@@ -93,7 +93,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 
 			if (tolerance != 0 && m_draw_op->m_polyline.empty())
 			{
-				d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+				d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 				InterruptChainVisitor interrupt(pos, tolerance);
 				m_shapesImpl->traverseShapes(interrupt, d2d::DT_EDITABLE);
 				if (interrupt.getInterruptedChain())
@@ -108,7 +108,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 				{
 					int sz = m_shapesImpl->getShapeSelection()->Size();
 
-					d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+					d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 					d2d::IShape* shape = m_shapesImpl->queryShapeByPos(pos);
 
 
@@ -130,7 +130,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
 		m_shapesImpl->traverseShapes(nearest, d2d::DT_VISIBLE);
 		float dis = d2d::Math::getDistance(nearest.getNearestNode(), pos);
@@ -176,7 +176,7 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 		if (tolerance != 0)
 		{
 			NodeCapture capture(m_shapesImpl, tolerance);
-			capture.captureEditable(m_stage->transPosScreenToProject(x, y), m_capturedEditable);
+			capture.captureEditable(m_stage->TransPosScrToProj(x, y), m_capturedEditable);
 			if (m_capturedEditable.shape)
 			{
 				if (m_capturedEditable.pos.isValid())
@@ -215,7 +215,7 @@ bool EditPolylineImpl::OnMouseMove(int x, int y)
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		NodeCapture capture(m_shapesImpl, tolerance);
 		{
 			d2d::IShape* old = m_capturedEditable.shape;
@@ -249,7 +249,7 @@ bool EditPolylineImpl::OnMouseDrag(int x, int y)
 		if (m_draw_op->m_polyline.size() == 1)
 			m_draw_op->m_polyline.clear();
 
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		if (ChainShape* chain = dynamic_cast<ChainShape*>(m_capturedEditable.shape))
 		{
 			if (m_capturedEditable.pos.isValid())

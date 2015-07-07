@@ -73,7 +73,7 @@ void StageCanvas::OnDrawSprites() const
 		DrawAttackRegion();
 	}
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 
 //	m_stage->getCheckBoard().DebugDraw();
 }

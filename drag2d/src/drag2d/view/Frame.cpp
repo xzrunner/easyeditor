@@ -218,7 +218,7 @@ void Frame::onSettings(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	const Colorf& col = Config::Instance()->GetSettings().bg_color;
-	m_task->GetEditPanel()->getCanvas()->SetBgColor(col);
+	const_cast<d2d::EditPanel*>(m_task->GetEditPanel())->GetCanvas()->SetBgColor(col);
 }
 
 wxString Frame::GetFileFilter() const

@@ -21,7 +21,7 @@ void StageCanvas::OnDrawSprites() const
 
 	DrawSprites();
 	static_cast<StagePanel*>(m_stage)->traverseJoints(DrawJointVisitor());
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 void StageCanvas::DrawGuideLines() const

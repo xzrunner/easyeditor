@@ -21,7 +21,7 @@ bool RectCutOP::OnMouseLeftDown(int x, int y)
 
 	if (!m_stage->getImage()) return false;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	m_nodeSelected = m_rects.queryNode(pos);
 
 	return false;
@@ -64,7 +64,7 @@ bool RectCutOP::OnMouseRightDown(int x, int y)
 
 	if (!m_stage->getImage()) return false;
 
-	m_firstPos = m_stage->transPosScreenToProject(x, y);
+	m_firstPos = m_stage->TransPosScrToProj(x, y);
 	fixedPos(m_firstPos);
 
 	return false;
@@ -82,7 +82,7 @@ bool RectCutOP::OnMouseRightUp(int x, int y)
 
 	const float RADIUS = 5;
 	// remove rect
-	m_currPos = m_stage->transPosScreenToProject(x, y);
+	m_currPos = m_stage->TransPosScrToProj(x, y);
 	if (d2d::Math::getDistance(m_currPos, m_firstPos) < RADIUS)
 	{
 		bool removed = m_rects.remove(m_currPos);
@@ -118,7 +118,7 @@ bool RectCutOP::OnMouseMove(int x, int y)
 
 	if (!m_stage->getImage()) return false;
 
-	m_currPos = m_stage->transPosScreenToProject(x, y);
+	m_currPos = m_stage->TransPosScrToProj(x, y);
 	m_rectSelected = m_rects.queryRect(m_currPos);
 	m_captured = m_rects.queryNearestAxis(m_currPos);
 	m_stage->Refresh();
@@ -135,7 +135,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	// create rect
 	if (m_firstPos.isValid())
 	{
-		m_currPos = m_stage->transPosScreenToProject(x, y);
+		m_currPos = m_stage->TransPosScrToProj(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos);
 
 		m_stage->Refresh();
@@ -143,10 +143,10 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	// move rect's node
 	else if (m_nodeSelected.rect)
 	{
-		m_currPos = m_stage->transPosScreenToProject(x, y);
+		m_currPos = m_stage->TransPosScrToProj(x, y);
 		m_captured = m_rects.queryNearestAxis(m_currPos, m_nodeSelected.rect);
 
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_rects.moveNode(m_nodeSelected, pos);
 		m_nodeSelected.pos = pos;
 
@@ -155,7 +155,7 @@ bool RectCutOP::OnMouseDrag(int x, int y)
 	// move rect
 	else if (m_rectSelected)
 	{
-		d2d::Vector curr = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector curr = m_stage->TransPosScrToProj(x, y);
 		m_rects.moveRect(m_rectSelected, m_currPos, curr);
 		m_currPos = curr;
 

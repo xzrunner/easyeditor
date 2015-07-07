@@ -22,7 +22,7 @@ bool EditPolylinesOP::OnMouseLeftDown(int x, int y)
 	if (d2d::SelectShapesOP::OnMouseLeftDown(x, y)) return true;
 
 	if (!m_firstPos.isValid())
-		m_lastPos = m_stage->transPosScreenToProject(x, y);
+		m_lastPos = m_stage->TransPosScrToProj(x, y);
 	else
 		m_lastPos.setInvalid();
 
@@ -48,7 +48,7 @@ bool EditPolylinesOP::OnMouseDrag(int x, int y)
 
 	if (m_lastPos.isValid())
 	{
-		d2d::Vector currPos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector currPos = m_stage->TransPosScrToProj(x, y);
 		d2d::Vector offset = currPos - m_lastPos;
 		m_selection->Traverse(OffsetVisitor(offset));
 		m_lastPos = currPos;

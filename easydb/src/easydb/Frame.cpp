@@ -73,7 +73,7 @@ void Frame::onSaveAs(wxCommandEvent& event)
 void Frame::onConnect(wxCommandEvent& event)
 {
 	d2d::ZoomViewOP* op = dynamic_cast<d2d::ZoomViewOP*>
-		(Context::Instance()->stage->getEditOP());
+		(Context::Instance()->stage->GetEditOP());
 	if (op) {
 		op->setMouseMoveFocus(false);
 	}

@@ -30,7 +30,7 @@ void Frame::OnPreview(wxCommandEvent& event)
 	dlg.ShowModal();
 
 	d2d::EditPanel* stage = const_cast<d2d::EditPanel*>(m_task->GetEditPanel());
-	stage->resetCanvas();
+	stage->ResetCanvas();
 }
 
 void Frame::OnExtendSetting(wxCommandEvent& event)

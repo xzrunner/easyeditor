@@ -94,13 +94,13 @@ void Frame::OnSetBackground(wxCommandEvent& event)
 	{
 		std::string filename = dlg.GetPath().ToStdString();
 		d2d::ISymbol* symbol = d2d::SymbolMgr::Instance()->FetchSymbol(filename);
-		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->getCanvas();
+		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(symbol);
 		symbol->Release();
 	}
 	else
 	{
-		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->getCanvas();
+		d2d::IStageCanvas* canvas = m_task->GetEditPanel()->GetCanvas();
 		static_cast<StageCanvas*>(canvas)->SetBackground(NULL);
 	}
 }
@@ -150,7 +150,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 
 	ss.SaveToFile(filepath);
 
-	m_task->GetEditPanel()->getCanvas()->ResetInitState();
+	m_task->GetEditPanel()->GetCanvas()->ResetInitState();
 }
 
 void Frame::SaveAsSingle(const std::string& filepath) const
@@ -161,7 +161,7 @@ void Frame::SaveAsSingle(const std::string& filepath) const
 
 	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
 	FileIO::StoreSingle(full_path, ctrl);
-	ctrl->GetStagePanel()->onSave();
+	ctrl->GetStagePanel()->OnSave();
 }
 
 void Frame::SaveAsTemplate(const std::string& filepath) const
@@ -172,7 +172,7 @@ void Frame::SaveAsTemplate(const std::string& filepath) const
 
 	Controller* ctrl = static_cast<Task*>(m_task)->GetController();
 	FileIO::StoreTemplate(full_path, ctrl);
-	ctrl->GetStagePanel()->onSave();
+	ctrl->GetStagePanel()->OnSave();
 }
 
 }

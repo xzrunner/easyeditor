@@ -20,7 +20,7 @@ bool DragPhysicsOP::OnMouseLeftDown(int x, int y)
 
 	if (m_mouseJoint) return false;
 
-	const d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	const d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	b2Body* body = PhysicsQuery::queryOn(m_world, pos);
 	if (body && body != m_ground)
 	{
@@ -56,7 +56,7 @@ bool DragPhysicsOP::OnMouseDrag(int x, int y)
 
 	if (m_mouseJoint)
 	{
-		currPos = m_stage->transPosScreenToProject(x, y);
+		currPos = m_stage->TransPosScrToProj(x, y);
 		m_mouseJoint->SetTarget(b2Vec2(currPos.x / BOX2D_SCALE_FACTOR, currPos.y / BOX2D_SCALE_FACTOR));
 	}
 

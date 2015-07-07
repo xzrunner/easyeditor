@@ -32,7 +32,7 @@ void Task::Load(const char* filepath)
 	if (d2d::FileNameParser::isType(filepath, d2d::FileNameParser::e_complex)) {
 		FileIO::load(this, filepath);
 		LoadGroupTree(filepath);
-		m_stage->getCanvas()->ResetViewport();
+		m_stage->GetCanvas()->ResetViewport();
 	}
 }
 
@@ -40,12 +40,12 @@ void Task::Store(const char* filepath) const
 {
 	FileIO::store(this, filepath);
 	StoreGroupTree(filepath);
-	m_stage->onSave();
+	m_stage->OnSave();
 }
 
 bool Task::IsDirty() const
 {
-	return m_stage->isDirty();
+	return m_stage->IsEditDirty();
 }
 
 void Task::Clear()
@@ -56,7 +56,7 @@ void Task::Clear()
 	m_grouptree->Clear();
 
 	m_library->Clear();
-	m_stage->clear();
+	m_stage->Clear();
 	m_library->Refresh();
 	m_stage->Refresh();
 }
@@ -111,7 +111,7 @@ wxWindow* Task::InitLayoutCenter(wxWindow* parent)
 	m_property->SetEditPanel(m_stage);
 	m_property->SelectShape(NULL);
 
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 	m_property->SetEditPanel(m_stage);
 
 	return m_stage;

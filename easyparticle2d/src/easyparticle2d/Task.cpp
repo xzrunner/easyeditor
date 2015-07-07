@@ -55,12 +55,12 @@ void Task::Store(const char* filename) const
 
 bool Task::IsDirty() const
 {
-	return m_stage->isDirty();
+	return m_stage->IsEditDirty();
 }
 
 void Task::Clear()
 {
-	m_stage->clear();
+	m_stage->Clear();
 	m_stage->Refresh();
 }
 
@@ -87,7 +87,7 @@ void Task::initLayout()
 
 	m_library = new LibraryPanel(left_hori_splitter);
 	m_stage = new StagePanel(leftSplitter, m_parent, m_library);
-	m_library->SetCanvas(m_stage->getCanvas());
+	m_library->SetCanvas(m_stage->GetCanvas());
 
 	d2d::PropertySettingPanel* property 
 		= new d2d::PropertySettingPanel(left_hori_splitter);

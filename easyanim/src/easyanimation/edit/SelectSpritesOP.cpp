@@ -21,14 +21,14 @@ bool SelectSpritesOP::OnMouseLeftDClick(int x, int y)
 	if (d2d::SelectSpritesOP::OnMouseLeftDClick(x, y)) 
 		return true;
 
-	d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+	d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 	d2d::ISprite* selected = m_spritesImpl->querySpriteByPos(pos);
 	if (emesh::Sprite* sprite = dynamic_cast<emesh::Sprite*>(selected))
 	{
 		emesh::EditDialog dlg(m_stage, sprite);
 		dlg.ShowModal();
 
-		m_stage->resetCanvas();
+		m_stage->ResetCanvas();
 	}
 
 	return false;

@@ -39,7 +39,7 @@ void ToolbarPanel::initLayout()
 
 void ToolbarPanel::onChangeSize(wxSpinEvent& event)
 {
-	m_stage->setTitleStatus(true);
+	m_stage->SetTitleStatus(true);
 	const float w = m_wSpin->GetValue(),
 		h = m_hSpin->GetValue();
 	m_symbol->ResizeScale9(w, h);

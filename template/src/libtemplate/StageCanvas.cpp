@@ -35,7 +35,7 @@ void StageCanvas::OnDrawSprites() const
 	m_stage->traverseSprites(d2d::DrawSpritesVisitor(sr, m_camera->GetScale()), 
 		d2d::DT_VISIBLE);
 
-	m_stage->drawEditTemp();
+	m_stage->DrawEditOP();
 }
 
 }

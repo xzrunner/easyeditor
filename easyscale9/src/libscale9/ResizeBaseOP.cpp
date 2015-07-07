@@ -20,7 +20,7 @@ bool ResizeBaseOP::OnMouseLeftDown(int x, int y)
 		return false;
 	}
 
-	m_firstPos = m_stage->transPosScreenToProject(x, y);
+	m_firstPos = m_stage->TransPosScrToProj(x, y);
 
 	const float hw = m_symbol->GetSize().xLength() * 0.5f,
 		hh = m_symbol->GetSize().yLength() * 0.5f;
@@ -42,10 +42,10 @@ bool ResizeBaseOP::OnMouseLeftUp(int x, int y)
 
 	if (m_status != e_null)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		const d2d::Vector src(fabs(m_firstPos.x)*2, fabs(m_firstPos.y)*2),
 			dst(fabs(pos.x)*2, fabs(pos.y)*2);
-		m_stage->addHistoryOP(new ResizeAtomicOP(m_symbol, src, dst));
+		m_stage->AddOpRecord(new ResizeAtomicOP(m_symbol, src, dst));
 	}
 
 	m_status = e_null;
@@ -61,7 +61,7 @@ bool ResizeBaseOP::OnMouseDrag(int x, int y)
 
 	if (m_status != e_null)
 	{
-		d2d::Vector pos = m_stage->transPosScreenToProject(x, y);
+		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		m_symbol->ResizeScale9(fabs(pos.x)*2, fabs(pos.y)*2);
 		m_stage->Refresh();
 	}

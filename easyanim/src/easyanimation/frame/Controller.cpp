@@ -52,7 +52,7 @@ void Controller::setCurrFrame(int layer, int frame)
 		m_widgets->m_layersPanel->Refresh();
 	}
 
-	GetStagePanel()->getEditOP()->Clear();
+	GetStagePanel()->GetEditOP()->Clear();
 }
 
 void Controller::UpdateCurrFrame()
@@ -178,7 +178,7 @@ d2d::ILibraryPage* Controller::GetImagePage()
 void Controller::Clear()
 {
 	m_widgets->m_library->Clear();
-	m_widgets->m_stage->clear();
+	m_widgets->m_stage->Clear();
 
 	m_curr_layer = 0;
 	m_curr_frame = 1;

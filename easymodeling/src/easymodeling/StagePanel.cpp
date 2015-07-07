@@ -19,12 +19,12 @@ namespace emodeling
 
 	StagePanel::~StagePanel()
 	{
-		clear();
+		Clear();
 	}
 
-	void StagePanel::clear()
+	void StagePanel::Clear()
 	{
-		d2d::EditPanel::clear();
+		d2d::EditPanel::Clear();
 		clearSprites();
 	}
 

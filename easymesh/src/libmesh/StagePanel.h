@@ -22,7 +22,7 @@ public:
 	//
 	// d2d::EditPanel interface
 	//
-	virtual void clear();
+	virtual void Clear();
 
 	//
 	// d2d::MultiShapesImpl interface

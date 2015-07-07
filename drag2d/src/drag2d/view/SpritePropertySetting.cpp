@@ -87,7 +87,7 @@ void SpritePropertySetting::OnPropertyGridChange(const wxString& name, const wxA
 	{
 		int idx = wxANY_AS(value, int);
 		spr->SetFilterMode(FilterModes::Instance()->GetIDFromIdx(idx));
-		m_stage->getCanvas()->ResetViewport();
+		m_stage->GetCanvas()->ResetViewport();
 //		m_stage->Refresh();
 	}
 	else if (name == wxT("Clip"))

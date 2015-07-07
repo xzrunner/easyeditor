@@ -13,7 +13,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	m_canvas = new StageCanvas(this, this, library);
 	library->SetCanvas(m_canvas);
 
-	m_editOP = new ArrangeSpriteOP(this);
+	m_edit_op = new ArrangeSpriteOP(this);
 
 	SetDropTarget(new d2d::StageDropTarget(this, this, library));
 }
@@ -22,9 +22,9 @@ StagePanel::~StagePanel()
 {
 }
 
-void StagePanel::clear()
+void StagePanel::Clear()
 {
-	d2d::EditPanel::clear();
+	d2d::EditPanel::Clear();
 }
 
 void StagePanel::traverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType type, 
