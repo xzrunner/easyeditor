@@ -102,8 +102,8 @@ void SpriteShader::Bind()
 
 void SpriteShader::Unbind()
 {
-	SetTexID(0);
-	SetFboID(0);
+// 	SetTexID(0);
+// 	SetFboID(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

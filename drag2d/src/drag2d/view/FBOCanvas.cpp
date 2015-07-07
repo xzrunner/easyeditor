@@ -43,10 +43,6 @@ void FBOCanvas::OnDrawWhole() const
 	// Draw to Screen
 	//////////////////////////////////////////////////////////////////////////
 
-// 	mgr->SetFBO(0);
-// 	mgr->SetFBO(fbo.GetTexID());
-// 	PrimitiveDraw::rect(Vector(0, 0), 100, d2d::LIGHT_RED_LINE);
-
 	mgr->SetFBO(0);
 	mgr->SetTexture(0);
 
