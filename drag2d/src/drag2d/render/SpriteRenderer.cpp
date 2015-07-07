@@ -222,8 +222,8 @@ void SpriteRenderer::DrawSprToTmp(const ISprite* sprite) const
 	blend_shader->SetBaseTexID(scr_fbo.GetTexID());
 //	blend_shader->SetBaseTexID(m_fbo->GetTexID());
 
-	sprite->getSymbol().Draw(Matrix(), Colorf(1, 1, 1, 1), Colorf(0, 0, 0, 0), 
-		Colorf(1, 0, 0, 0), Colorf(0, 1, 0, 0), Colorf(0, 0, 1, 0), sprite);
+	sprite->getSymbol().Draw(Matrix(), sprite->multiCol, sprite->addCol, 
+		sprite->r_trans, sprite->g_trans, sprite->b_trans, sprite);
 
 	mgr->Commit();
 
