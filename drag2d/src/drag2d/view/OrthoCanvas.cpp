@@ -10,7 +10,7 @@ namespace d2d
 {
 
 OrthoCanvas::OrthoCanvas(EditPanel* editPanel)
-	: OnePassCanvas(editPanel)
+	: TwoPassCanvas(editPanel)
 {
 }
 
@@ -45,6 +45,8 @@ void OrthoCanvas::OnSize(int w, int h)
 
 	//////////////////////////////////////////////////////////////////////////
 
+	d2d::TwoPassCanvas::OnSize(w, h);
+
 	// Makes the OpenGL state that is represented by the OpenGL rendering 
 	// context context current
 	if (IsInited()) {
@@ -60,4 +62,5 @@ void OrthoCanvas::OnSize(int w, int h)
 
 	ShaderMgr::Instance()->SetProjection(w, h);
 }
+
 } // d2d

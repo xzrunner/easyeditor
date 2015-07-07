@@ -224,10 +224,10 @@ void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 
 //	RenderList::Instance()->Insert(texid, vertices, texcoords);
 
-	ShaderMgr* shader = ShaderMgr::Instance();
-	shader->sprite();
+	ShaderMgr* mgr = ShaderMgr::Instance();
+	mgr->sprite();
 
-	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(shader->GetSpriteShader())) {
+	if (BlendShader* blend_shader = dynamic_cast<BlendShader*>(mgr->GetSpriteShader())) {
 		SpriteRenderer* rd = SpriteRenderer::Instance();
 		const Camera* cam = rd->GetCamera();
 		assert(cam);
@@ -278,7 +278,7 @@ void Image::Draw(const Matrix& mt, const Rect& r, const ISprite* spr) const
 
 		blend_shader->DrawBlend(vertices, texcoords, tex_coolds_base, texid);
 	} else {
-		shader->Draw(vertices, texcoords, texid);
+		mgr->Draw(vertices, texcoords, texid);
 	}
 }
 

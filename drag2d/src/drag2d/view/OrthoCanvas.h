@@ -1,14 +1,14 @@
 #ifndef _DRAG2D_ORTHO_CANVAS_H_
 #define _DRAG2D_ORTHO_CANVAS_H_
 
-#include "OnePassCanvas.h"
+#include "TwoPassCanvas.h"
 
 namespace d2d
 {
 
 class EditPanel;
 
-class OrthoCanvas : public OnePassCanvas
+class OrthoCanvas : public TwoPassCanvas
 {
 public:
 	OrthoCanvas(EditPanel* editPanel);
