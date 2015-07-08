@@ -495,6 +495,7 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 	screen[1].set(-hw, -hh);
 	screen[2].set(hw, -hh);
 	screen[3].set(hw, hh);
+	
 	// 1. mirror
 	bool xMirror, yMirror;
 	sprite->getMirror(xMirror, yMirror);
@@ -506,26 +507,36 @@ void CocoPacker::ParserPicture(const d2d::ImageSprite* sprite, PicFixType tsrc, 
 		for (size_t i = 0; i < 4; ++i)
 			screen[i].y = -screen[i].y;
 	}
-	// 2. scale
-	for (size_t i = 0; i < 4; ++i)
-		screen[i].x *= sprite->getScale().x;
-	for (size_t i = 0; i < 4; ++i)
-		screen[i].y *= sprite->getScale().y;
-	// 3. rotate
-	for (size_t i = 0; i < 4; ++i)
-	{
-		d2d::Vector rot = d2d::Math::rotateVector(screen[i], sprite->getAngle());
-		screen[i] = rot;
-	}
-	// 4. translate
-	d2d::Vector offset = picture->offset;
-	offset.x *= sprite->getScale().x / picture->invscale;
-	offset.y *= sprite->getScale().y / picture->invscale;
-	d2d::Vector center = sprite->getCenter();
-	center += d2d::Math::rotateVector(offset, sprite->getAngle());
-
-	for (size_t i = 0; i < 4; ++i)
-		screen[i] += center;
+	// 2. shear
+	float sx = sprite->getShear().x,
+		sy = sprite->getShear().y;
+	screen[0].x += sx * hh;
+	screen[3].x += sx * hh;
+	screen[1].x -= sx * hh;
+	screen[2].x -= sx * hh;
+	screen[2].x += sy * hw;
+	screen[3].x += sy * hw;
+	screen[1].x -= sy * hw;
+	screen[0].x -= sy * hw;
+ 	// 3. scale
+ 	for (size_t i = 0; i < 4; ++i)
+ 		screen[i].x *= sprite->getScale().x;
+ 	for (size_t i = 0; i < 4; ++i)
+ 		screen[i].y *= sprite->getScale().y;
+ 	// 4. rotate
+ 	for (size_t i = 0; i < 4; ++i)
+ 	{
+ 		d2d::Vector rot = d2d::Math::rotateVector(screen[i], sprite->getAngle());
+ 		screen[i] = rot;
+ 	}
+ 	// 5. translate
+ 	d2d::Vector offset = picture->offset;
+ 	offset.x *= sprite->getScale().x / picture->invscale;
+ 	offset.y *= sprite->getScale().y / picture->invscale;
+ 	d2d::Vector center = sprite->getCenter();
+ 	center += d2d::Math::rotateVector(offset, sprite->getAngle());
+ 	for (size_t i = 0; i < 4; ++i)
+ 		screen[i] += center;
 
 	// flip y
 	for (size_t i = 0; i < 4; ++i)
