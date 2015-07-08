@@ -43,7 +43,7 @@ DrawPolygonCMPT::DrawPolygonCMPT(wxWindow* parent, const wxString& name,
 void DrawPolygonCMPT::updateControlValue()
 {
 	bool empty;
-	m_shapesImpl->getShapeSelection()->Traverse(d2d::EmptyVerifyVisitor(empty));
+	m_shapesImpl->GetShapeSelection()->Traverse(d2d::EmptyVerifyVisitor(empty));
 	m_btnTrigger->Enable(!empty);
 }
 
@@ -141,7 +141,7 @@ void DrawPolygonCMPT::onChangeFillingType(wxCommandEvent& event)
 void DrawPolygonCMPT::onTriggerFillingColor(wxCommandEvent& event)
 {
 	std::vector<PolygonShape*> polys;
-	m_shapesImpl->getShapeSelection()->Traverse(d2d::FetchAllVisitor<PolygonShape>(polys));
+	m_shapesImpl->GetShapeSelection()->Traverse(d2d::FetchAllVisitor<PolygonShape>(polys));
 
 	for (size_t i = 0, n = polys.size(); i < n; ++i)
 	{

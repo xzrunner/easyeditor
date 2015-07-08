@@ -16,8 +16,8 @@ namespace emodeling
 		//
 		// d2d::MultiShapesImpl interface
 		//
-		virtual void removeShape(d2d::IShape* shape);
-		virtual void insertShape(d2d::IShape* shape);
+		virtual bool InsertShape(d2d::IShape* shape);
+		virtual bool RemoveShape(d2d::IShape* shape);
 
 		//
 		// libshape::StagePanel interface

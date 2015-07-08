@@ -6,49 +6,43 @@ namespace d2d
 MultiShapesImpl::MultiShapesImpl(wxWindow* wnd)
 {
 	m_wnd = wnd;
-	m_shapeSelection = new ShapeSelection;
+	m_shape_selection = new ShapeSelection;
 }
 
 MultiShapesImpl::~MultiShapesImpl()
 {
-	m_shapeSelection->Release();
+	m_shape_selection->Release();
 }
 
 void MultiShapesImpl::SelectShape(IShape* shape)
 {
-	m_shapeSelection->Clear();
-	m_shapeSelection->Add(shape);
+	m_shape_selection->Clear();
+	m_shape_selection->Add(shape);
 }
 
 void MultiShapesImpl::SelectMultiShapes(ShapeSelection* selection)
 {
 }
 
-IShape* MultiShapesImpl::queryShapeByPos(const Vector& pos) const
+IShape* MultiShapesImpl::QueryShapeByPos(const Vector& pos) const
 {
 	IShape* result = NULL;
-	traverseShapes(PointQueryVisitor(pos, &result), DT_EDITABLE);
+	TraverseShapes(PointQueryVisitor(pos, &result), DT_EDITABLE);
 	return result;
 }
 
-void MultiShapesImpl::queryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const
+void MultiShapesImpl::QueryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const
 {
-	traverseShapes(RectQueryVisitor(rect, result), DT_EDITABLE);
+	TraverseShapes(RectQueryVisitor(rect, result), DT_EDITABLE);
 }
 
-void MultiShapesImpl::removeShapeSelection()
+void MultiShapesImpl::ClearShapeSelection()
 {
-	if (!m_shapeSelection->IsEmpty())
+	if (!m_shape_selection->IsEmpty())
 	{
-		m_shapeSelection->Traverse(RemoveSelectionVisitor(this));
-		m_shapeSelection->Clear();
-		refresh();
+		m_shape_selection->Traverse(RemoveSelectionVisitor(this));
+		m_shape_selection->Clear();
 	}
-}
-
-void MultiShapesImpl::refresh()
-{
-	m_wnd->Refresh();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -104,7 +98,7 @@ MultiShapesImpl::RemoveSelectionVisitor::RemoveSelectionVisitor(MultiShapesImpl*
 
 void MultiShapesImpl::RemoveSelectionVisitor::Visit(Object* object, bool& bFetchNext)
 {
-	m_shapesImpl->removeShape(static_cast<IShape*>(object));
+	m_shapesImpl->RemoveShape(static_cast<IShape*>(object));
 	bFetchNext = true;
 }
 

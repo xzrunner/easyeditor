@@ -53,37 +53,43 @@ void StagePanel::Clear()
 	m_symbol = new Symbol;
 }
 
-void StagePanel::traverseShapes(d2d::IVisitor& visitor, 
+bool StagePanel::InsertShape(d2d::IShape* shape)
+{
+	bool ret = false;
+	Shape* _shape = m_symbol->getShape();
+	if (_shape) {
+		ret = static_cast<EditShape*>(_shape)->InsertShape(shape);
+		_shape->Refresh();
+	}
+	return ret;
+}
+
+bool StagePanel::RemoveShape(d2d::IShape* shape)
+{
+	bool ret = false;
+	Shape* _shape = m_symbol->getShape();
+	if (_shape) {
+		ret = static_cast<EditShape*>(_shape)->RemoveShape(shape);
+	}
+	return ret;
+}
+
+bool StagePanel::ClearAllShapes()
+{
+	bool ret = false;
+	Shape* shape = m_symbol->getShape();
+	if (shape) {
+		ret = static_cast<EditShape*>(shape)->ClearShape();
+	}
+	return ret;
+}
+
+void StagePanel::TraverseShapes(d2d::IVisitor& visitor, 
 								d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
 {
 	Shape* shape = m_symbol->getShape();
 	if (shape) {
 		static_cast<EditShape*>(shape)->TraverseShape(visitor);
-	}
-}
-
-void StagePanel::removeShape(d2d::IShape* shape)
-{
-	Shape* _shape = m_symbol->getShape();
-	if (_shape) {
-		static_cast<EditShape*>(_shape)->RemoveShape(shape);
-	}
-}
-
-void StagePanel::insertShape(d2d::IShape* shape)
-{
-	Shape* _shape = m_symbol->getShape();
-	if (_shape) {
-		static_cast<EditShape*>(_shape)->InsertShape(shape);
-		_shape->Refresh();
-	}
-}
-
-void StagePanel::clearShapes()
-{
-	Shape* shape = m_symbol->getShape();
-	if (shape) {
-		static_cast<EditShape*>(shape)->ClearShape();
 	}
 }
 
@@ -114,7 +120,7 @@ void StagePanel::UpdateSymbol()
 {
 	if (Shape* shape = m_symbol->getShape()) {
 		std::vector<const libshape::ChainShape*> polylines;
-		traverseShapes(d2d::FetchAllVisitor<const libshape::ChainShape>(polylines));
+		TraverseShapes(d2d::FetchAllVisitor<const libshape::ChainShape>(polylines));
 		shape->Refresh();
 	}
 }

@@ -320,34 +320,42 @@ void Mesh::TraverseShape(d2d::IVisitor& visitor) const
 	}
 }
 
-void Mesh::RemoveShape(d2d::IShape* shape)
+bool Mesh::RemoveShape(d2d::IShape* shape)
 {
+	bool ret = false;
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i)
 	{
 		d2d::IShape* loop = m_region.loops[i];
 		if (loop == shape) {
 			loop->Release();
 			m_region.loops.erase(m_region.loops.begin() + i);
+			ret = true;
 			break;
 		}
 	}
+	return ret;
 }
 
-void Mesh::InsertShape(d2d::IShape* shape)
+bool Mesh::InsertShape(d2d::IShape* shape)
 {
 	libshape::ChainShape* loop = dynamic_cast<libshape::ChainShape*>(shape);
 	if (loop) {
 		loop->Retain();
 		m_region.loops.push_back(loop);
+		return true;
+	} else {
+		return false;
 	}
 }
 
-void Mesh::ClearShape()
+bool Mesh::ClearShape()
 {
+	bool ret = !m_region.loops.empty();
 	for (int i = 0, n = m_region.loops.size(); i < n; ++i) {
 		m_region.loops[i]->Release();
 	}
 	m_region.loops.clear();
+	return ret;
 }
 
 void Mesh::Reset()

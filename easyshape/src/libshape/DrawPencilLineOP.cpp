@@ -21,7 +21,7 @@ bool DrawPencilLineOP::OnMouseLeftUp(int x, int y)
 	{
 		std::vector<d2d::Vector> simplified;
 		d2d::DouglasPeucker::implement(m_curve, m_simplify->GetValue(), simplified);
-		m_shapesImpl->insertShape(new ChainShape(simplified, false));
+		m_shapesImpl->InsertShape(new ChainShape(simplified, false));
 		Clear();
 
 		m_stage->Refresh();

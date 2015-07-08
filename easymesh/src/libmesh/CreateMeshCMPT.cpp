@@ -109,7 +109,7 @@ void CreateMeshCMPT::onClear(wxCommandEvent& event)
 	if (EditShape* shape = static_cast<EditShape*>(m_stage->GetShape())) {
 		shape->Clear();
 	}
-	m_stage->clearShapes();
+	m_stage->ClearAllShapes();
 
 	m_stage->Refresh();
 	m_editOP->Clear();

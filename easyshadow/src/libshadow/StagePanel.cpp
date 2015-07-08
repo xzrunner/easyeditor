@@ -58,22 +58,10 @@ void StagePanel::Clear()
 {
 }
 
-void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
-{
-	if (m_loop) {
-		bool hasNext;
-		visitor.Visit(m_loop, hasNext);
-	}
-}
-
-void StagePanel::removeShape(d2d::IShape* shape)
-{	
-}
-
-void StagePanel::insertShape(d2d::IShape* shape)
+bool StagePanel::InsertShape(d2d::IShape* shape)
 {
 	if (libshape::get_shape_type(shape->GetShapeDesc()) != libshape::ST_POLYGON) {
-		return;
+		return false;
 	}
 
 	m_loop = shape;
@@ -81,10 +69,26 @@ void StagePanel::insertShape(d2d::IShape* shape)
 
 	libshape::PolygonShape* poly = static_cast<libshape::PolygonShape*>(shape);
 	m_symbol->GetShadow()->BuildInnerLine(poly->GetVertices());
+
+	return true;
 }
 
-void StagePanel::clearShapes()
+bool StagePanel::RemoveShape(d2d::IShape* shape)
+{	
+	return false;
+}
+
+bool StagePanel::ClearAllShapes()
 {
+	return false;
+}
+
+void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
+{
+	if (m_loop) {
+		bool hasNext;
+		visitor.Visit(m_loop, hasNext);
+	}
 }
 
 void StagePanel::LoadFromShadow()

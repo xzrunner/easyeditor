@@ -50,7 +50,7 @@ void StageCanvas::OnDrawSprites() const
 		}
 	}
 
-	m_stage_impl->traverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
+	m_stage_impl->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
 
 	libshape::StageCanvas::DrawGuideLines();
 

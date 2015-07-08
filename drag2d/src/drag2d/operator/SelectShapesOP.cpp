@@ -18,7 +18,7 @@ SelectShapesOP::SelectShapesOP(EditPanel* editPanel, MultiShapesImpl* shapesImpl
 	, m_bDraggable(true)
 	, m_view_panel_mgr(view_panel_mgr)
 {
-	m_selection = shapesImpl->getShapeSelection();
+	m_selection = shapesImpl->GetShapeSelection();
 	m_selection->Retain();
 
 	m_firstPos.setInvalid();
@@ -38,7 +38,7 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapeImpl->removeShapeSelection();
+		m_shapeImpl->ClearShapeSelection();
 		Clear();
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && wxGetKeyState(WXK_CONTROL_X))
@@ -47,7 +47,7 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 		m_selection->Traverse(FetchAllVisitor<IShape>(m_clipboard));
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 			m_clipboard[i]->Retain();
-		m_shapeImpl->removeShapeSelection();
+		m_shapeImpl->ClearShapeSelection();
 	}
 	else if (wxGetKeyState(WXK_CONTROL) && (keyCode == 'c' || keyCode == 'C'))
 	{
@@ -62,7 +62,7 @@ bool SelectShapesOP::OnKeyDown(int keyCode)
 	{
 		for (size_t i = 0, n = m_clipboard.size(); i < n; ++i)
 		{
-			m_shapeImpl->insertShape(m_clipboard[i]->Clone());
+			m_shapeImpl->InsertShape(m_clipboard[i]->Clone());
 			m_stage->Refresh();
 		}
 	}
@@ -77,7 +77,7 @@ bool SelectShapesOP::OnMouseLeftDown(int x, int y)
 	m_move_last_pos.setInvalid();
 
 	Vector pos = m_stage->TransPosScrToProj(x, y);
-	IShape* selected = m_shapeImpl->queryShapeByPos(pos);
+	IShape* selected = m_shapeImpl->QueryShapeByPos(pos);
 	if (selected)
 	{
 		if (wxGetKeyState(WXK_CONTROL))
@@ -133,7 +133,7 @@ bool SelectShapesOP::OnMouseLeftUp(int x, int y)
 	{
 		Rect rect(m_firstPos, m_stage->TransPosScrToProj(x, y));
 		std::vector<IShape*> shapes;
-		m_shapeImpl->queryShapesByRect(rect, shapes);
+		m_shapeImpl->QueryShapesByRect(rect, shapes);
 		for (size_t i = 0, n = shapes.size(); i < n; ++i)
 			m_selection->Add(shapes[i]);
 

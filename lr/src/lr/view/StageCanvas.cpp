@@ -24,7 +24,7 @@ void StageCanvas::OnDrawSprites() const
 	shader_mgr->SetSpriteShader(0);
 	shader_mgr->sprite();
 
-	m_stage->traverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
+	m_stage->TraverseShapes(d2d::DrawShapesVisitor(sr), d2d::DT_VISIBLE);
 
 	DrawRegion();
 

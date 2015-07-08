@@ -15,14 +15,14 @@ public:
 	virtual void TraverseSprite(d2d::IVisitor& visitor, bool order = true) const;
 	virtual void TraverseSprite(d2d::IVisitor& visitor, d2d::DataTraverseType type = d2d::DT_ALL, bool order = true) const;
 	virtual bool RemoveSprite(Object* obj);
-	virtual void InsertSprite(Object* obj);
-	virtual void ClearSprite();
+	virtual bool InsertSprite(Object* obj);
+	virtual bool ClearSprite();
 	virtual bool ResetOrderSprite(const Object* obj, bool up);
 
 	virtual void TraverseShape(d2d::IVisitor& visitor, bool order = true) const;
 	virtual bool RemoveShape(Object* obj);
-	virtual void InsertShape(Object* obj);
-	virtual void ClearShape();
+	virtual bool InsertShape(Object* obj);
+	virtual bool ClearShape();
 
 	void SetName(const std::string& name) { m_name = name; }
 	const std::string& GetName() const { return m_name; }

@@ -30,11 +30,11 @@ public:
 	//
 	// d2d::MultiShapesImpl interface
 	//
-	virtual void traverseShapes(d2d::IVisitor& visitor, 
+	virtual bool InsertShape(d2d::IShape* shape);
+	virtual bool RemoveShape(d2d::IShape* shape);
+	virtual bool ClearAllShapes();
+	virtual void TraverseShapes(d2d::IVisitor& visitor, 
 		d2d::DataTraverseType type = d2d::DT_ALL) const;
-	virtual void removeShape(d2d::IShape* shape);
-	virtual void insertShape(d2d::IShape* shape);
-	virtual void clearShapes();
 
 	Symbol* GetSymbol() { return m_symbol; }
 

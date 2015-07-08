@@ -75,7 +75,7 @@ void StagePanel::Clear()
 {
 	d2d::EditPanel::Clear();
 	ClearAllSprite();
-	clearShapes();
+	ClearAllShapes();
 
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
 		m_layers[i]->Release();
@@ -103,7 +103,7 @@ bool StagePanel::ReorderSprite(d2d::ISprite* sprite, bool up)
 
 bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 {
-	GetCurrLayer()->InsertSprite(sprite);
+	bool ret = GetCurrLayer()->InsertSprite(sprite);
 
 	if (m_view_panel_mgr) {
 		m_view_panel_mgr->InsertSprite(sprite, this);
@@ -122,10 +122,10 @@ bool StagePanel::InsertSprite(d2d::ISprite* sprite)
 		m_chara_dirs.BuildSymbolDirections(name);
 	}
 
-	return true;
+	return ret;
 }
 
-void StagePanel::RemoveSprite(d2d::ISprite* sprite)
+bool StagePanel::RemoveSprite(d2d::ISprite* sprite)
 {
 	bool ret = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i)
@@ -150,9 +150,11 @@ void StagePanel::RemoveSprite(d2d::ISprite* sprite)
 
 bool StagePanel::ClearAllSprite()
 {
-	bool ret = !m_layers.empty();
+	bool ret = false;
 	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		m_layers[i]->ClearSprite();
+		if (m_layers[i]->ClearSprite()) {
+			ret = true;
+		}
 	}
 	return ret;
 }
@@ -182,7 +184,48 @@ void StagePanel::TraverseSprites(d2d::IVisitor& visitor, d2d::DataTraverseType t
 	}
 }
 
-void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
+bool StagePanel::InsertShape(d2d::IShape* shape)
+{
+	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
+	bool ret = static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
+
+	if (m_grids) {
+		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
+			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolygon(poly->GetVertices()));
+		} else if (libshape::ChainShape* path = dynamic_cast<libshape::ChainShape*>(shape)) {
+			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolyline(path->GetVertices()));		
+		}
+	}
+
+	return ret;
+}
+
+bool StagePanel::RemoveShape(d2d::IShape* shape)
+{
+	bool ret = false;
+	for (int i = 0, n = m_layers.size(); i < n; ++i)
+	{
+		Layer* layer = m_layers[i];
+		if (layer->RemoveShape(shape)) {
+			ret = true;
+			break;
+		}
+	}
+	return ret;
+}
+
+bool StagePanel::ClearAllShapes()
+{
+	bool ret = false;
+	for (int i = 0, n = m_layers.size(); i < n; ++i) {
+		if (m_layers[i]->ClearShape()) {
+			ret = true;
+		}
+	}
+	return ret;
+}
+
+void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type) const
 {
 	if (SettingCfg::Instance()->m_all_layers_visible_editable ||
 		type == d2d::DT_ALL ||
@@ -203,38 +246,6 @@ void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType ty
 				layer->TraverseShape(visitor);
 			}
 		}
-	}
-}
-
-void StagePanel::removeShape(d2d::IShape* shape)
-{
-	for (int i = 0, n = m_layers.size(); i < n; ++i)
-	{
-		Layer* layer = m_layers[i];
-		if (layer->RemoveShape(shape)) {
-			break;
-		}
-	}
-}
-
-void StagePanel::insertShape(d2d::IShape* shape)
-{
-	d2d::ILibraryPage* curr_page = m_library->GetCurrPage();
-	static_cast<LibraryPage*>(curr_page)->GetLayer()->InsertShape(shape);
-
-	if (m_grids) {
-		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
-			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolygon(poly->GetVertices()));
-		} else if (libshape::ChainShape* path = dynamic_cast<libshape::ChainShape*>(shape)) {
-			m_grids->SetDebbugDrawGrids(m_grids->IntersectPolyline(path->GetVertices()));		
-		}
-	}
-}
-
-void StagePanel::clearShapes()
-{
-	for (int i = 0, n = m_layers.size(); i < n; ++i) {
-		m_layers[i]->ClearShape();
 	}
 }
 

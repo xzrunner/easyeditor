@@ -89,7 +89,7 @@ void Frame::SaveAsPNG(const std::string& filepath) const
 	}
 
 	std::vector<d2d::IShape*> shapes;
-	stage->traverseShapes(d2d::FetchAllVisitor<d2d::IShape>(shapes), d2d::DT_VISIBLE);
+	stage->TraverseShapes(d2d::FetchAllVisitor<d2d::IShape>(shapes), d2d::DT_VISIBLE);
 	for (int i = 0, n = shapes.size(); i < n; ++i) {
 		ss.DrawShape(shapes[i]);		
 	}

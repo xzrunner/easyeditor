@@ -28,7 +28,7 @@ void StagePanel::Clear()
 {
 	d2d::EditPanel::Clear();
 	d2d::SpritesPanelImpl::ClearAllSprite();
-	d2d::ShapesPanelImpl::clearShapes();
+	d2d::ShapesPanelImpl::ClearAllShapes();
 }
 
 void StagePanel::loadFromDir(const std::string& dirpath)

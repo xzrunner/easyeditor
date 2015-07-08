@@ -23,7 +23,7 @@ bool EditPointOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapes_impl->removeShapeSelection();
+		m_shapes_impl->ClearShapeSelection();
 		m_captured.clear();
 		m_stage->Refresh();
 	}
@@ -37,7 +37,7 @@ bool EditPointOP::OnMouseLeftDown(int x, int y)
 
 	m_pos = m_stage->TransPosScrToProj(x, y);
 
-	m_shapes_impl->getShapeSelection()->Clear();
+	m_shapes_impl->GetShapeSelection()->Clear();
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
 	{	
@@ -45,7 +45,7 @@ bool EditPointOP::OnMouseLeftDown(int x, int y)
 		capture.captureEditable(m_pos, m_captured);
 		if (m_captured.shape &&
 			get_shape_type(m_captured.shape->GetShapeDesc()) == ST_POINT) {
-			m_shapes_impl->getShapeSelection()->Add(m_captured.shape);
+			m_shapes_impl->GetShapeSelection()->Add(m_captured.shape);
 		}
 	}
 	else
@@ -67,8 +67,8 @@ bool EditPointOP::OnMouseLeftUp(int x, int y)
 	m_pos = m_stage->TransPosScrToProj(x, y);
 	if (!m_captured.shape) {
 		PointShape* point = new PointShape(m_pos);
-		m_shapes_impl->getShapeSelection()->Add(point);
-		m_shapes_impl->insertShape(point);
+		m_shapes_impl->GetShapeSelection()->Add(point);
+		m_shapes_impl->InsertShape(point);
 	}
 
 	Clear();
@@ -91,8 +91,8 @@ bool EditPointOP::OnMouseRightDown(int x, int y)
 	NodeCapture capture(m_shapes_impl, tolerance);
 	capture.captureEditable(pos, m_captured);
 	if (m_captured.shape) {
-		m_shapes_impl->removeShape(m_captured.shape);
-		m_shapes_impl->getShapeSelection()->Clear();
+		m_shapes_impl->RemoveShape(m_captured.shape);
+		m_shapes_impl->GetShapeSelection()->Clear();
 		m_captured.clear();
 		m_stage->Refresh();
 	}

@@ -33,19 +33,19 @@ bool Layer::RemoveSprite(Object* obj)
 	return m_sprites.Remove(spr);
 }
 
-void Layer::InsertSprite(Object* obj)
+bool Layer::InsertSprite(Object* obj)
 {
 	d2d::ISprite* spr = static_cast<d2d::ISprite*>(obj);
 	CheckSpriteName(spr);
-	m_sprites.Insert(spr);
+	return m_sprites.Insert(spr);
 }
 
-void Layer::ClearSprite()
+bool Layer::ClearSprite()
 {
 	m_next_id = 0;
 	m_name_set.clear();
 
-	m_sprites.Clear();
+	return m_sprites.Clear();
 }
 
 bool Layer::ResetOrderSprite(const Object* obj, bool up)
@@ -63,14 +63,14 @@ bool Layer::RemoveShape(Object* obj)
 	return m_shapes.Remove(static_cast<d2d::IShape*>(obj));
 }
 
-void Layer::InsertShape(Object* obj)
+bool Layer::InsertShape(Object* obj)
 {
-	m_shapes.Insert(static_cast<d2d::IShape*>(obj));
+	return m_shapes.Insert(static_cast<d2d::IShape*>(obj));
 }
 
-void Layer::ClearShape()
+bool Layer::ClearShape()
 {
-	m_shapes.Clear();
+	return m_shapes.Clear();
 }
 
 void Layer::LoadFromFile(const Json::Value& val, const std::string& dir, int layer_idx)

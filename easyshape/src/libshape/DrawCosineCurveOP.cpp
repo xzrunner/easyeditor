@@ -18,7 +18,7 @@ bool DrawCosineCurveOP::OnMouseLeftDClick(int x, int y)
 	CosineShape* curve = new CosineShape(m_polyline);
 	curve->setMidPoints();
 
-	m_shapesImpl->insertShape(curve);
+	m_shapesImpl->InsertShape(curve);
 	m_polyline.clear();
 	m_currPos.setInvalid();
 

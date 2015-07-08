@@ -19,11 +19,11 @@ public:
 	//
 	// MultiShapesImpl interface
 	//
-	virtual void traverseShapes(IVisitor& visitor, 
+	virtual bool InsertShape(IShape* shape);
+	virtual bool RemoveShape(IShape* shape);
+	virtual bool ClearAllShapes();
+	virtual void TraverseShapes(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL) const;
-	virtual void removeShape(IShape* shape);
-	virtual void insertShape(IShape* shape);
-	virtual void clearShapes();
 
 private:
 	IDataContainer* m_container;

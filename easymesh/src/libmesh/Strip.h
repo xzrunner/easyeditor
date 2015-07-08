@@ -38,9 +38,9 @@ public:
 	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst);
 
 	virtual void TraverseShape(d2d::IVisitor& visitor) const {}
-	virtual void RemoveShape(d2d::IShape* shape) {}
-	virtual void InsertShape(d2d::IShape* shape) {}
-	virtual void ClearShape() {}
+	virtual bool RemoveShape(d2d::IShape* shape) { return false; }
+	virtual bool InsertShape(d2d::IShape* shape) { return false; }
+	virtual bool ClearShape() { return false; }
 
 	virtual void Reset();
 	virtual void Clear();

@@ -25,25 +25,24 @@ ShapesPanelImpl::~ShapesPanelImpl()
 	m_container->Release();
 }
 
-void ShapesPanelImpl::traverseShapes(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/) const
+bool ShapesPanelImpl::InsertShape(IShape* shape)
+{
+	return m_container->Insert(shape);
+}
+
+bool ShapesPanelImpl::RemoveShape(IShape* shape)
+{
+	return m_container->Remove(shape);
+}
+
+bool ShapesPanelImpl::ClearAllShapes()
+{
+	return m_container->Clear();
+}
+
+void ShapesPanelImpl::TraverseShapes(IVisitor& visitor, DataTraverseType type/* = e_allExisting*/) const
 {
 	m_container->Traverse(visitor, true);
-}
-
-void ShapesPanelImpl::removeShape(IShape* shape)
-{
-	m_container->Remove(shape);
-}
-
-void ShapesPanelImpl::insertShape(IShape* shape)
-{
-	m_container->Insert(shape);
-	refresh();
-}
-
-void ShapesPanelImpl::clearShapes()
-{
-	m_container->Clear();
 }
 
 } // d2d

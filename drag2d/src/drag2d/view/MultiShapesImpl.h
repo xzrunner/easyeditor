@@ -23,20 +23,18 @@ public:
 	virtual void SelectShape(IShape* shape);
 	virtual void SelectMultiShapes(ShapeSelection* selection);
 
-	virtual void traverseShapes(IVisitor& visitor, 
+	virtual bool InsertShape(IShape* shape) = 0;
+	virtual bool RemoveShape(IShape* shape) = 0;
+	virtual bool ClearAllShapes() = 0;
+
+	virtual void TraverseShapes(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL) const = 0;
-	virtual void removeShape(IShape* shape) = 0;
-	virtual void insertShape(IShape* shape) = 0;
-	virtual void clearShapes() = 0;
 
-	IShape* queryShapeByPos(const Vector& pos) const;
-	void queryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const;		
+	IShape* QueryShapeByPos(const Vector& pos) const;
+	void QueryShapesByRect(const Rect& rect, std::vector<IShape*>& result) const;		
 
-	ShapeSelection* getShapeSelection() { return m_shapeSelection; }
-	void removeShapeSelection();
-
-protected:
-	void refresh();
+	ShapeSelection* GetShapeSelection() { return m_shape_selection; }
+	void ClearShapeSelection();
 
 private:
 	class PointQueryVisitor : public IVisitor
@@ -75,7 +73,7 @@ private:
 	}; // RemoveSelectionVisitor
 
 protected:
-	ShapeSelection* m_shapeSelection;
+	ShapeSelection* m_shape_selection;
 
 private:
 	wxWindow* m_wnd;

@@ -97,31 +97,40 @@ void Symbol::Traverse(d2d::IVisitor& visitor) const
 	}
 }
 
-void Symbol::Add(d2d::IShape* shape)
-{
-	if (shape) {
-		shape->Retain();
-		m_shapes.push_back(shape);
-	}
-}
-
-void Symbol::Remove(d2d::IShape* shape)
+bool Symbol::Add(d2d::IShape* shape)
 {
 	if (!shape) {
-		return;
+		return false;
 	}
 
-	for (int i = 0, n = m_shapes.size(); i < n; ++i) {
-		if (m_shapes[i] == shape) {
-			m_shapes.erase(m_shapes.begin() + i);
-			shape->Release();
-			break;
-		}
-	}
+	shape->Retain();
+	m_shapes.push_back(shape);
+	return true;
 }
 
-void Symbol::Clear()
+bool Symbol::Remove(d2d::IShape* shape)
 {
+	if (!shape) {
+		return false;
+	}
+
+	for (int i = 0, n = m_shapes.size(); i < n; ++i) 
+	{
+		if (m_shapes[i] == shape) 
+		{
+			m_shapes.erase(m_shapes.begin() + i);
+			shape->Release();
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Symbol::Clear()
+{
+	bool ret = !m_bg_outline.empty() || !m_shapes.empty();
+
 	for (size_t i = 0, n = m_bg_outline.size(); i < n; ++i) {
 		m_bg_outline[i]->Release();
 	}
@@ -131,6 +140,8 @@ void Symbol::Clear()
 		m_shapes[i]->Release();
 	}
 	m_shapes.clear();
+
+	return ret;
 }
 
 void Symbol::SetBG(d2d::ISymbol* bg)

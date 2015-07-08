@@ -30,7 +30,7 @@ void StageCanvas::OnDrawSprites() const
 
 	m_stage->DrawEditOP();
 
-	m_panel->traverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
+	m_panel->TraverseShapes(d2d::DrawShapesVisitor(d2d::Rect()), d2d::DT_VISIBLE);
 
 #ifdef _DEBUG 
 	if (d2d::Config::Instance()->IsUseDTex()) {

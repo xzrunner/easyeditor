@@ -16,7 +16,7 @@ bool DrawLoopOP::OnMouseLeftDClick(int x, int y)
 	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
 	d2d::IShape* shape = new ChainShape(m_polyline, true);
-	m_shapesImpl->insertShape(shape);
+	m_shapesImpl->InsertShape(shape);
 	shape->Release();
 
 	m_polyline.clear();

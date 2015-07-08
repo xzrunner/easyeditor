@@ -34,9 +34,9 @@ public:
 	virtual d2d::Rect GetSize(const d2d::ISprite* sprite = NULL) const;
 
 	void Traverse(d2d::IVisitor& visitor) const;
-	void Add(d2d::IShape* shape);
-	void Remove(d2d::IShape* shape);
-	void Clear();
+	bool Add(d2d::IShape* shape);
+	bool Remove(d2d::IShape* shape);
+	bool Clear();
 
 	void SetBG(d2d::ISymbol* bg);
 	const d2d::ISymbol* GetBG() const { return m_bg; }

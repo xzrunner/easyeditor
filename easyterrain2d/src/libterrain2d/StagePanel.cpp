@@ -36,7 +36,7 @@ StagePanel::StagePanel(wxWindow* parent, wxTopLevelWindow* frame,
 	for (int i = 0, n = m_oceans.size(); i < n; ++i) {
 		OceanMesh* ocean = m_oceans[i];
 		ocean->Retain();
-		insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+		InsertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 	}
 
 	SetDropTarget(new StageDropTarget(this, library));
@@ -91,7 +91,7 @@ void StagePanel::Load(const std::string& dir, const Json::Value& value,
 		OceanMesh* ocean = FileIO::LoadOceanMesh(dir, ocean_val);
 		if (ocean) {
 			m_oceans.push_back(ocean);
-			insertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
+			InsertShape(const_cast<libshape::PolygonShape*>(ocean->GetBounding()));
 			library->AddSymbol(const_cast<d2d::ImageSymbol*>(ocean->GetImage0()));
 			if (const d2d::ISymbol* tex1 = ocean->GetImage1()) {
 				library->AddSymbol(const_cast<d2d::ISymbol*>(tex1));
@@ -155,7 +155,7 @@ OnDropSymbol(d2d::ISymbol* symbol, const d2d::Vector& pos)
 {
 	if (d2d::ImageSymbol* image = dynamic_cast<d2d::ImageSymbol*>(symbol))
 	{
-		d2d::IShape* shape = m_stage->queryShapeByPos(pos);
+		d2d::IShape* shape = m_stage->QueryShapeByPos(pos);
 		if (libshape::PolygonShape* poly = dynamic_cast<libshape::PolygonShape*>(shape)) {
 			poly->SetMaterialTexture(image);
 			m_stage->AddOcean(poly, image);

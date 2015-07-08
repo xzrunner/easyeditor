@@ -20,12 +20,12 @@ NodeCapture::NodeCapture(d2d::MultiShapesImpl* shapesImpl, int tol)
 
 void NodeCapture::captureEditable(const d2d::Vector& pos, NodeAddr& result)
 {
-	m_shapesImpl->traverseShapes(RectQueryVisitor(pos, m_tol, result), d2d::DT_EDITABLE);
+	m_shapesImpl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), d2d::DT_EDITABLE);
 }
 
 void NodeCapture::captureSelectable(const d2d::Vector& pos, NodeAddr& result)
 {
-	m_shapesImpl->traverseShapes(RectQueryVisitor(pos, m_tol, result), d2d::DT_SELECTABLE);
+	m_shapesImpl->TraverseShapes(RectQueryVisitor(pos, m_tol, result), d2d::DT_SELECTABLE);
 }
 
 //////////////////////////////////////////////////////////////////////////

@@ -22,9 +22,9 @@ public:
 	virtual void MoveNode(d2d::Vector* src, const d2d::Vector& dst) = 0;
 
 	virtual void TraverseShape(d2d::IVisitor& visitor) const = 0;
-	virtual void RemoveShape(d2d::IShape* shape) = 0;
-	virtual void InsertShape(d2d::IShape* shape) = 0;
-	virtual void ClearShape() = 0;	
+	virtual bool RemoveShape(d2d::IShape* shape) = 0;
+	virtual bool InsertShape(d2d::IShape* shape) = 0;
+	virtual bool ClearShape() = 0;	
 	
 	virtual void Reset() = 0;
 	virtual void Clear() = 0;

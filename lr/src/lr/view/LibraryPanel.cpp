@@ -163,7 +163,7 @@ void LibraryPanel::Refresh()
 
 	// stage
 	m_stage->GetSpriteSelection()->Clear();
-	m_stage->getShapeSelection()->Clear();
+	m_stage->GetShapeSelection()->Clear();
 
 	// view list
 	m_viewlist->Clear();

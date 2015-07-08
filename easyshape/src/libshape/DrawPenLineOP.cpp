@@ -15,7 +15,7 @@ bool DrawPenLineOP::OnMouseLeftDClick(int x, int y)
 {
 	if (DrawPolylineOP::OnMouseLeftDClick(x, y)) return true;
 
-	m_shapesImpl->insertShape(new ChainShape(m_polyline, false));
+	m_shapesImpl->InsertShape(new ChainShape(m_polyline, false));
 	m_polyline.clear();
 	m_currPos.setInvalid();
 

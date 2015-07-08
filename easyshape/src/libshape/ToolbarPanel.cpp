@@ -95,7 +95,7 @@ wxSizer* ToolbarPanel::initLayout()
 
 void ToolbarPanel::OnClearShapes(wxCommandEvent& event)
 {
-	static_cast<StagePanel*>(m_stage)->clearShapes();
+	static_cast<StagePanel*>(m_stage)->ClearAllShapes();
 	m_stage->Refresh();
 }
 
@@ -108,7 +108,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 		return;
 	}
 
-	stage->clearShapes();
+	stage->ClearAllShapes();
 
 	d2d::Image* img = img_symbol->getImage();
 	eimage::ExtractOutlineRaw raw(*img);
@@ -121,7 +121,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 	for (int i = 0, n = bounding.size(); i < n; ++i) {
 		bounding[i] += offset;
 	}
-	stage->insertShape(new libshape::PolygonShape(bounding));
+	stage->InsertShape(new libshape::PolygonShape(bounding));
 
 	setChoice(3);
 
@@ -131,7 +131,7 @@ void ToolbarPanel::OnCreateBounding(wxCommandEvent& event)
 void ToolbarPanel::SelectSuitableEditOP()
 {
 	std::vector<d2d::IShape*> shapes;
-	static_cast<StagePanel*>(m_stage)->traverseShapes(
+	static_cast<StagePanel*>(m_stage)->TraverseShapes(
 		d2d::FetchAllVisitor<d2d::IShape>(shapes));
 	if (shapes.empty()) return;
 

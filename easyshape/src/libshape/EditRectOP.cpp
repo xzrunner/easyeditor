@@ -26,7 +26,7 @@ bool EditRectOP::OnKeyDown(int keyCode)
 
 	if (keyCode == WXK_DELETE)
 	{
-		m_shapesImpl->removeShapeSelection();
+		m_shapesImpl->ClearShapeSelection();
 		m_captured.clear();
 		m_stage->Refresh();
 
@@ -44,7 +44,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 	m_firstPress = m_currPos = m_stage->TransPosScrToProj(x, y);
 
-	m_shapesImpl->getShapeSelection()->Clear();
+	m_shapesImpl->GetShapeSelection()->Clear();
 
 	int tolerance = m_node_capture ? m_node_capture->GetValue() : 0;
 	if (tolerance != 0)
@@ -54,7 +54,7 @@ bool EditRectOP::OnMouseLeftDown(int x, int y)
 
 		if (RectShape* rect = dynamic_cast<RectShape*>(m_captured.shape))
 		{
-			m_shapesImpl->getShapeSelection()->Add(rect);
+			m_shapesImpl->GetShapeSelection()->Add(rect);
 			if (m_view_panel_mgr) {
 				m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
 			}
@@ -85,8 +85,8 @@ bool EditRectOP::OnMouseLeftUp(int x, int y)
 				if (m_view_panel_mgr) {
 					m_view_panel_mgr->SelectShape(rect, m_shapesImpl);
 				}
-				m_shapesImpl->getShapeSelection()->Add(rect);
-				m_shapesImpl->insertShape(rect);
+				m_shapesImpl->GetShapeSelection()->Add(rect);
+				m_shapesImpl->InsertShape(rect);
 			}
 		}
 	}
@@ -120,8 +120,8 @@ bool EditRectOP::OnMouseRightDown(int x, int y)
 		capture.captureEditable(m_currPos, m_captured);
 		if (m_captured.shape)
 		{
-			m_shapesImpl->removeShape(m_captured.shape);
-			m_shapesImpl->getShapeSelection()->Clear();
+			m_shapesImpl->RemoveShape(m_captured.shape);
+			m_shapesImpl->GetShapeSelection()->Clear();
 			m_captured.clear();
 			m_stage->Refresh();
 

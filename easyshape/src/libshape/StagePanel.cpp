@@ -57,34 +57,40 @@ StagePanel::~StagePanel()
 void StagePanel::Clear()
 {
 	EditPanel::Clear();
-	clearShapes();
+	ClearAllShapes();
 }
 
-void StagePanel::traverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
+bool StagePanel::InsertShape(d2d::IShape* shape)
+{
+	if (m_symbol) {
+		return m_symbol->Add(shape);
+	} else {
+		return false;
+	}
+}
+
+bool StagePanel::RemoveShape(d2d::IShape* shape)
+{
+	if (m_symbol) {
+		return m_symbol->Remove(shape);
+	} else {
+		return false;
+	}
+}
+
+bool StagePanel::ClearAllShapes()
+{
+	if (m_symbol) {
+		return m_symbol->Clear();
+	} else {
+		return false;
+	}
+}
+
+void StagePanel::TraverseShapes(d2d::IVisitor& visitor, d2d::DataTraverseType type/* = d2d::DT_ALL*/) const
 {
 	if (m_symbol) {
 		m_symbol->Traverse(visitor);
-	}
-}
-
-void StagePanel::removeShape(d2d::IShape* shape)
-{
-	if (m_symbol) {
-		m_symbol->Remove(shape);
-	}
-}
-
-void StagePanel::insertShape(d2d::IShape* shape)
-{
-	if (m_symbol) {
-		m_symbol->Add(shape);
-	}
-}
-
-void StagePanel::clearShapes()
-{
-	if (m_symbol) {
-		m_symbol->Clear();
 	}
 }
 

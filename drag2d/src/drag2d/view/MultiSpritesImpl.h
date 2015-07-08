@@ -23,6 +23,7 @@ public:
 	//
 	virtual void SelectSprite(ISprite* spr, bool clear);
 	virtual void SelectMultiSprites(SpriteSelection* selection);
+
 	virtual void TraverseSprites(IVisitor& visitor, 
 		DataTraverseType type = DT_ALL, bool order = true) const = 0;
 

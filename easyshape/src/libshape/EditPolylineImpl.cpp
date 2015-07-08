@@ -95,7 +95,7 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 			{
 				d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 				InterruptChainVisitor interrupt(pos, tolerance);
-				m_shapesImpl->traverseShapes(interrupt, d2d::DT_EDITABLE);
+				m_shapesImpl->TraverseShapes(interrupt, d2d::DT_EDITABLE);
 				if (interrupt.getInterruptedChain())
 				{
 					m_capturedEditable.shape = interrupt.getInterruptedChain();
@@ -106,10 +106,10 @@ bool EditPolylineImpl::OnMouseLeftDown(int x, int y)
 				}
 				else
 				{
-					int sz = m_shapesImpl->getShapeSelection()->Size();
+					int sz = m_shapesImpl->GetShapeSelection()->Size();
 
 					d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
-					d2d::IShape* shape = m_shapesImpl->queryShapeByPos(pos);
+					d2d::IShape* shape = m_shapesImpl->QueryShapeByPos(pos);
 
 
 					return m_base_op->OnMouseLeftDownBase(x, y);
@@ -132,7 +132,7 @@ bool EditPolylineImpl::OnMouseLeftUp(int x, int y)
 	{	
 		d2d::Vector pos = m_stage->TransPosScrToProj(x, y);
 		NearestNodeVisitor nearest(pos, tolerance);
-		m_shapesImpl->traverseShapes(nearest, d2d::DT_VISIBLE);
+		m_shapesImpl->TraverseShapes(nearest, d2d::DT_VISIBLE);
 		float dis = d2d::Math::getDistance(nearest.getNearestNode(), pos);
 		if (dis < tolerance)
 		{
@@ -188,8 +188,8 @@ bool EditPolylineImpl::OnMouseRightDown(int x, int y)
 				}
 				else
 				{
-					m_shapesImpl->removeShape(m_capturedEditable.shape);
-					m_shapesImpl->getShapeSelection()->Clear();
+					m_shapesImpl->RemoveShape(m_capturedEditable.shape);
+					m_shapesImpl->GetShapeSelection()->Clear();
 					m_capturedEditable.clear();
 					m_captureSelectable.clear();
 					m_dirty = true;
@@ -328,7 +328,7 @@ void EditPolylineImpl::checkActiveShape(const NodeAddr& captured)
 		m_view_panel_mgr->SelectShape(captured.shape, m_shapesImpl);
 	}
 
-	d2d::ShapeSelection* selection = m_shapesImpl->getShapeSelection();
+	d2d::ShapeSelection* selection = m_shapesImpl->GetShapeSelection();
 	selection->Clear();
 	selection->Add(captured.shape);
 }

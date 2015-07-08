@@ -54,7 +54,7 @@ void DrawPencilPolygonOP::NewPolygon(const std::vector<d2d::Vector>& poly)
 {
 	Type type = (Type)m_cmpt->GetSelected();
 	if (type == e_normal) {
-		m_shapesImpl->insertShape(new PolygonShape(poly));
+		m_shapesImpl->InsertShape(new PolygonShape(poly));
 	} else if (type == e_union) {
 		UnionPolygon(poly);
 	} else if (type == e_difference) {
@@ -113,7 +113,7 @@ void DrawPencilPolygonOP::XorPolygon(const std::vector<d2d::Vector>& poly)
 void DrawPencilPolygonOP::PrepareSubjectPaths(std::vector<std::vector<d2d::Vector> >& paths) const
 {
 	std::vector<PolygonShape*> shapes;
-	m_shapesImpl->traverseShapes(d2d::FetchAllVisitor<PolygonShape>(shapes));
+	m_shapesImpl->TraverseShapes(d2d::FetchAllVisitor<PolygonShape>(shapes));
 
 	paths.clear();
 	paths.resize(shapes.size());
@@ -129,9 +129,9 @@ void DrawPencilPolygonOP::ReplacePolygons(const std::vector<std::vector<d2d::Vec
 		return;
 	}
 
-	m_shapesImpl->clearShapes();
+	m_shapesImpl->ClearAllShapes();
 	for (int i = 0, n = paths.size(); i < n; ++i) {
-		m_shapesImpl->insertShape(new PolygonShape(paths[i]));
+		m_shapesImpl->InsertShape(new PolygonShape(paths[i]));
 	}
 }
 
